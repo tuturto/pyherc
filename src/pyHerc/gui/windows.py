@@ -37,10 +37,10 @@ class MainWindow:
         self.logger = logging.getLogger('pyHerc.gui.windows.MainWindow')
         self.logger.debug('Initialising MainWindow')
         pygame.init()
-        self.width = application.config.resolution[0]
-        self.height = application.config.resolution[1]
+        self.width = application.config['resolution'][0]
+        self.height = application.config['resolution'][1]
         self.screen = pygame.display.set_mode((self.width, self.height))
-        pygame.display.set_caption(application.config.caption)
+        pygame.display.set_caption(application.config['caption'])
         self.logger.debug('Initialising MainWindow done')
 
     def MainLoop(self):

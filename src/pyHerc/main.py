@@ -60,7 +60,11 @@ class Application:
 
         For now this is just a simple object initialisation
         """
-        self.config = Configuration()
+        self.config = {}
+        self.config['resolution'] = (800, 600)
+        self.config['caption'] = 'Herculeum'
+        self.config['logging'] = {}
+        self.config['logging']['level'] = logging.DEBUG
 
     def run(self):
         """
@@ -70,7 +74,7 @@ class Application:
         self.gui.MainLoop()
 
     def startLogging(self):
-        logging.basicConfig(level=self.config.loggingConfig.level)
+        logging.basicConfig(level=self.config['logging']['level'])
         logger = logging.getLogger('pyHerc.main.Application')
         logger.info("Logging started")
 
