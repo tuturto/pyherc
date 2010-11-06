@@ -25,6 +25,7 @@ import logging
 
 from pygame.locals import *
 from gui.windows import MainWindow
+from data.model import Model
 
 if not pygame.font: print 'Warning, fonts disabled'
 if not pygame.mixer: print 'Warning, sound disabled'
@@ -70,7 +71,9 @@ class Application:
         Starts the application
         """
         self.gui = MainWindow(self)
+        self.world = Model()
         self.gui.MainLoop()
+
 
     def startLogging(self):
         logging.basicConfig(level=self.config['logging']['level'])
