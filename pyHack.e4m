@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MultiProject SYSTEM "MultiProject-4.2.dtd">
+<!-- eric4 multi project file for multi project pyHack -->
+<!-- Saved: 2010-11-06, 16:01:56 -->
+<!-- Copyright (C) 2010 -->
+<MultiProject version="4.2">
+  <Description>Herculeum</Description>
+  <Projects>
+    <Project isMaster="False">
+      <ProjectName>Main</ProjectName>
+      <ProjectFile>C:/programming/pyHack/src/pyHerc.e4p</ProjectFile>
+      <ProjectDescription>Main</ProjectDescription>
+    </Project>
+    <Project isMaster="False">
+      <ProjectName>Tests</ProjectName>
+      <ProjectFile>C:/programming/pyHack/test/pyHercTests.e4p</ProjectFile>
+      <ProjectDescription>Tests</ProjectDescription>
+    </Project>
+  </Projects>
+</MultiProject>
