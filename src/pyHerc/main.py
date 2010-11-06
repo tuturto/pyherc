@@ -24,7 +24,6 @@ import gui
 import logging
 
 from pygame.locals import *
-from configuration import Configuration
 from gui.windows import MainWindow
 
 if not pygame.font: print 'Warning, fonts disabled'
