@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHercTests -->
-<!-- Saved: 2010-11-06, 16:00:35 -->
+<!-- Saved: 2010-11-06, 17:14:08 -->
 <!-- Copyright (C) 2010 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -12,6 +12,7 @@
   <Author>Tuukka Turto</Author>
   <Email>tuukka.turto@oktaeder.net</Email>
   <Sources>
+    <Source>test_configuration.py</Source>
   </Sources>
   <Forms>
   </Forms>

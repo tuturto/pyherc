@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHerc -->
-<!-- Saved: 2010-11-06, 15:59:58 -->
+<!-- Saved: 2010-11-06, 16:58:19 -->
 <!-- Copyright (C) 2010 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -12,6 +12,10 @@
   <Author>Tuukka Turto</Author>
   <Email>tuukka.turto@oktaeder.net</Email>
   <Sources>
+    <Source>pyHerc/__init__.py</Source>
+    <Source>pyHerc/gui/__init__.py</Source>
+    <Source>pyHerc/main.py</Source>
+    <Source>pyHerc/configuration.py</Source>
   </Sources>
   <Forms>
   </Forms>
@@ -23,6 +27,7 @@
   </Interfaces>
   <Others>
   </Others>
+  <MainScript>pyHerc/main.py</MainScript>
   <Vcs>
     <VcsType>None</VcsType>
   </Vcs>

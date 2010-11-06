@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2009 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyMUD.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyMUD is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
@@ -16,6 +16,14 @@
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyMUD.  If not, see <http://www.gnu.org/licenses/>.
 
-pass
+import pyHerc
+from pyHerc.configuration import Configuration
+
+def test_configuration_Creation():
+    """
+    Just simple test to get configuration created
+    """
+    config = Configuration()
+    assert not (config is None)

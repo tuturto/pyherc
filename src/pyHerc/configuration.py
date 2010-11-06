@@ -18,4 +18,13 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-pass
+class Configuration:
+    """
+    This class is used to store configuration for pyHerc
+    """
+
+    def __init__(self):
+        """
+        Initialisation for configuration object
+        """
+        self.resolution = (800,  600)
