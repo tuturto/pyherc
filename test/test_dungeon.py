@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2009 Tuukka Turto
 #
 #   This file is part of pyHerc.
 #
@@ -18,29 +18,12 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
+import pyHerc
+from pyHerc.data.dungeon import Level
+from pyHerc.data.tiles import *
 
-class Configuration:
-    """
-    This class is used to store configuration for pyHerc
-    """
-
-    def __init__(self):
-        """
-        Initialisation for configuration object
-        """
-        self.resolution = (800,  600)
-        self.caption = 'Herculeum'
-        self.loggingConfig = LoggingConfiguration()
-
-class LoggingConfiguration:
-    """
-    Configuration for logging
-    """
-
-    def __init__(self):
-        """
-        Initialisation for config
-        """
-        self.level = logging.DEBUG
-
+def test_simple_level_creation():
+    level = Level([20, 20], floor_rock, wall_empty)
+    assert not (level is None)
+    assert (level.floor[5][5] == floor_rock)
+    assert(level.walls[0][0] == wall_empty)

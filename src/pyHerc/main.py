@@ -21,6 +21,7 @@
 import os, sys
 import pygame
 import gui
+import logging
 
 from pygame.locals import *
 from configuration import Configuration
@@ -68,7 +69,13 @@ class Application:
         self.gui = MainWindow(self)
         self.gui.MainLoop()
 
+    def startLogging(self):
+        logging.basicConfig(level=self.config.loggingConfig.level)
+        logger = logging.getLogger('pyHerc.main.Application')
+        logger.info("Logging started")
+
 if __name__ == "__main__":
     app = Application()
     app.loadConfiguration()
+    app.startLogging()
     app.run()

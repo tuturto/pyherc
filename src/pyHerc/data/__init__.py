@@ -18,29 +18,4 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-
-class Configuration:
-    """
-    This class is used to store configuration for pyHerc
-    """
-
-    def __init__(self):
-        """
-        Initialisation for configuration object
-        """
-        self.resolution = (800,  600)
-        self.caption = 'Herculeum'
-        self.loggingConfig = LoggingConfiguration()
-
-class LoggingConfiguration:
-    """
-    Configuration for logging
-    """
-
-    def __init__(self):
-        """
-        Initialisation for config
-        """
-        self.level = logging.DEBUG
-
+pass

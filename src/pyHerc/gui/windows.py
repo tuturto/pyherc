@@ -20,12 +20,13 @@
 
 import os, sys
 import pygame
+import logging
 from pygame.locals import *
 
 class MainWindow:
 
     def __init__(self):
-        pass
+        self.logger = logging.getLogger('pyHerc.gui.windows.MainWindow')
 
     def __init__(self,  application):
         """
@@ -33,17 +34,22 @@ class MainWindow:
         Params:
             application: instance of currently running application
         """
+        self.logger = logging.getLogger('pyHerc.gui.windows.MainWindow')
+        self.logger.debug('Initialising MainWindow')
         pygame.init()
         self.width = application.config.resolution[0]
         self.height = application.config.resolution[1]
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption(application.config.caption)
+        self.logger.debug('Initialising MainWindow done')
 
     def MainLoop(self):
         """
         This is the event handler for main window
         """
+        self.logger.info('Main loop starting')
         while 1:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    self.logger.info('Quit received, exiting')
                     sys.exit()
