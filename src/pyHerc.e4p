@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHerc -->
-<!-- Saved: 2010-11-06, 20:03:00 -->
+<!-- Saved: 2010-11-06, 20:58:15 -->
 <!-- Copyright (C) 2010 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -20,6 +20,7 @@
     <Source>pyHerc/data/__init__.py</Source>
     <Source>pyHerc/data/dungeon.py</Source>
     <Source>pyHerc/data/tiles.py</Source>
+    <Source>pyHerc/generators/__init__.py</Source>
   </Sources>
   <Forms>
   </Forms>

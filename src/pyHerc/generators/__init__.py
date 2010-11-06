@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2009 Tuukka Turto
+#   Copyright 2010 Tuukka Turto
 #
 #   This file is part of pyHerc.
 #
@@ -18,12 +18,4 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-import pyHerc
-from pyHerc.data.dungeon import Level
-from pyHerc.data import tiles
-
-def test_simple_level_creation():
-    level = Level([20, 20], tiles.floor_rock, tiles.wall_empty)
-    assert not (level is None)
-    assert (level.floor[5][5] == tiles.floor_rock)
-    assert(level.walls[0][0] == tiles.wall_empty)
+pass
