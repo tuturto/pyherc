@@ -18,14 +18,32 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-class Configuration:
-    """
-    This class is used to store configuration for pyHerc
-    """
+import os, sys
+import pygame
+from pygame.locals import *
+
+class MainWindow:
 
     def __init__(self):
+        pass
+
+    def __init__(self,  application):
         """
-        Initialisation for configuration object
+        Initialises the main window
+        Params:
+            application: instance of currently running application
         """
-        self.resolution = (800,  600)
-        self.caption = 'Herculeum'
+        pygame.init()
+        self.width = application.config.resolution[0]
+        self.height = application.config.resolution[1]
+        self.screen = pygame.display.set_mode((self.width, self.height))
+        pygame.display.set_caption(application.config.caption)
+
+    def MainLoop(self):
+        """
+        This is the event handler for main window
+        """
+        while 1:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
