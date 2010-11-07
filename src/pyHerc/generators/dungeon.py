@@ -20,6 +20,9 @@
 
 import os, sys
 import logging
+from data.dungeon import Level
+from data.dungeon import Dungeon
+from data import tiles
 
 class DungeonGenerator:
     """
@@ -29,20 +32,26 @@ class DungeonGenerator:
     def __init__(self):
         self.logger = logging.getLogger('pyHerc.generators.dungeon.DungeonGenerator')
 
-    def generateDungeon(self):
+    def generateDungeon(self, model):
         """
         Generates start of the dungeon
         """
-        pass
+        self.logger.info('generating the dungeon')
+        model.dungeon = Dungeon()
+        generator = TestLevelGenerator()
+        model.dungeon.levels = generator.generateLevel(None, model)
 
 class TestLevelGenerator:
     """
     Generates a simple test level
     """
+    def __init__(self):
+        self.logger = logging.getLogger('pyHerc.generators.dungeon.TestLevelGenerator')
 
     def generateLevel(self, stairs, model):
         """
         Generate level that starts from given stairs
         Will perform linking and required modifications to set up the model
         """
-        pass
+        self.logger.debug('creating a test level')
+        tempLevel = Level(model.config['level']['size'], tiles.floor_rock, tiles.wall_empty)

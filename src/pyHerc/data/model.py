@@ -33,7 +33,6 @@ class Model:
 
         self.logger.info('loading config')
         self.loadConfig()
-        self.logger.info('config loaded')
 
     def loadConfig(self):
         """

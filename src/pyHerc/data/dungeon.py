@@ -50,3 +50,12 @@ class Level:
             for y in range(0, size[1]-1):
                 temp_row.append(wallType)
             self.walls.append(temp_row)
+
+class Dungeon:
+    """
+    Represents the dungeon
+    """
+
+    def __init__(self):
+        self.levels = None
+        self.logger = logging.getLogger('pyHerc.data.dungeon.Dungeon')
