@@ -112,14 +112,6 @@ class Application:
         self.gui = MainWindow(self)
         self.gui.mainLoop()
 
-    def startNew(self):
-        """
-        Generate dungeon from scratch, start a new game
-        """
-        self.world = Model()
-        generator = DungeonGenerator()
-        self.world.dungeon = generator.generateDungeon(self.world)
-
     def startLogging(self):
         logging.basicConfig(level=self.config['logging']['level'])
         logger = logging.getLogger('pyHerc.main.Application')
@@ -129,5 +121,4 @@ if __name__ == "__main__":
     app = Application()
     app.loadConfiguration(sys.argv[1:])
     app.startLogging()
-    #app.startNew()
     app.run()
