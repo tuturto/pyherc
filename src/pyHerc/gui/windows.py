@@ -133,8 +133,9 @@ class StartMenu:
         """
         Draws this window on screen
         """
-        self.screen.blit(self.background, (0, 0))
-        self.screen.blit(self.arrow, self.arrow_location[self.selection])
+        if len(self.dirty_rectangles) > 0:
+            self.screen.blit(self.background, (0, 0))
+            self.screen.blit(self.arrow, self.arrow_location[self.selection])
 
-        pygame.display.update(self.dirty_rectangles)
-        self.dirty_rectangles = []
+            pygame.display.update(self.dirty_rectangles)
+            self.dirty_rectangles = []
