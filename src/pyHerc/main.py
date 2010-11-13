@@ -71,7 +71,7 @@ class Application:
             print('Failed to process parameters')
             self.usage()
             sys.exit()
-            pass
+
         for opt, arg in opts:
             if opt in ('-l', '--logging'):
                 if arg.lower() == 'debug':
@@ -110,7 +110,7 @@ class Application:
         Starts the application
         """
         self.gui = MainWindow(self)
-        self.gui.MainLoop()
+        self.gui.mainLoop()
 
     def startNew(self):
         """
