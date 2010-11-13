@@ -129,5 +129,5 @@ if __name__ == "__main__":
     app = Application()
     app.loadConfiguration(sys.argv[1:])
     app.startLogging()
-    app.startNew()
+    #app.startNew()
     app.run()

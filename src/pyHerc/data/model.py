@@ -41,3 +41,19 @@ class Model:
         self.config = {}
         self.config['level'] = {}
         self.config['level']['size']  = (80,  30)
+
+class Character:
+    """
+    Represents a character in playing world
+    """
+
+    def __init__(self):
+        self.str = 0
+        self.dex = 0
+        self.con = 0
+        self.int = 0
+        self.wis = 0
+        self.cha = 0
+        self.name = None
+        self.race = None
+        self.kit = None

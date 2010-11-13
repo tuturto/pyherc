@@ -23,6 +23,9 @@ import pygame
 import logging
 import surfaceManager
 import images
+import rules.character
+import data.model
+import generators.dungeon
 from pygame.locals import *
 
 class MainWindow:
@@ -68,6 +71,7 @@ class StartMenu:
         Initialises start menu
         Params:
             application: instance of currently running application
+            screen: display to draw onto
         """
         self.running = 1
         self.selection = 0
@@ -121,13 +125,22 @@ class StartMenu:
                     elif event.key == pygame.K_SPACE:
                         if self.selection == 0:
                             self.logger.debug('new game selected')
-                            #TODO: implement
+                            self.startNewGame()
                         elif self.selection == 1:
                             self.logger.debug('load game selected')
                             #TODO: implement
                         elif self.selection == 2:
                             self.logger.debug('exit selected')
                             self.running = 0
+
+        self.logger.debug('main loop finished')
+
+    def startNewGame(self):
+        newWindow = StartNewGameWindow(self.application, self.screen)
+        newWindow.mainLoop()
+        self.application.world.player = newWindow.character
+        newWindow = GameWindow(self.application, self.screen)
+        newWindow.mainLoop()
 
     def updateDisplay(self):
         """
@@ -139,3 +152,57 @@ class StartMenu:
 
             pygame.display.update(self.dirty_rectangles)
             self.dirty_rectangles = []
+
+class StartNewGameWindow:
+    """
+    Window that is displayed when player starts a new game
+    """
+    def __init__(self,  application, screen):
+        self.running = 1
+        self.application = application
+        self.screen = screen
+        self.logger = logging.getLogger('pyHerc.gui.windows.StartNewGameWindow')
+        self.logger.debug('initialising display')
+        self.logger.debug('display initialised')
+        self.character = None
+
+    def mainLoop(self):
+        self.logger.debug('main loop starting')
+        self.generateNewGame()
+        self.logger.debug('main loop finished')
+
+    def generateNewGame(self):
+        #TODO: implement properly
+        self.application.world = data.model.Model()
+        generator = generators.dungeon.DungeonGenerator()
+        generator.generateDungeon(self.application.world)
+        self.character = rules.character.createCharacter('human', 'fighter')
+
+    def updateDisplay(self):
+        """
+        Draws this window on screen
+        """
+
+class GameWindow:
+    """
+    Window that displays the playing world
+    """
+    def __init__(self,  application, screen):
+        self.running = 1
+        self.application = application
+        self.screen = screen
+        self.logger = logging.getLogger('pyHerc.gui.windows.GameWindow')
+        self.logger.debug('initialising display')
+        self.logger.debug('display initialised')
+
+    def mainLoop(self):
+        self.logger.debug('main loop starting')
+        while self.running:
+            #TODO: implement
+            self.running = 0
+        self.logger.debug('main loop finished')
+
+    def updateDisplay(self):
+        """
+        Draws this window on screen
+        """
