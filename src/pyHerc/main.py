@@ -18,7 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, sys
+import os, sys, getopt
 import pygame
 import gui
 import logging
@@ -50,22 +50,60 @@ class Application:
     """
 
     def __init__(self):
-        self.loadConfiguration()
         self.config = None
         self.gui = None
         self.world = None
 
-    def loadConfiguration(self):
+    def loadConfiguration(self, argv):
         """
-        Load configuration
+        Load configuration and process command line options
 
-        For now this is just a simple object initialisation
+        Parameters:
+            argv : command line arguments
         """
         self.config = {}
+        self.config['logging'] = {}
+
+        try:
+            opts, args = getopt.getopt(argv, "l:", ["logging="])
+        except getopt.GetoptError:
+            print('')
+            print('Failed to process parameters')
+            self.usage()
+            sys.exit()
+            pass
+        for opt, arg in opts:
+            if opt in ('-l', '--logging'):
+                if arg.lower() == 'debug':
+                    self.config['logging']['level'] = logging.DEBUG
+                elif arg.lower() == 'info':
+                    self.config['logging']['level'] = logging.INFO
+                elif arg.lower() == 'warning':
+                    self.config['logging']['level'] = logging.WARNING
+                elif arg.lower() == 'error':
+                    self.config['logging']['level'] = logging.ERROR
+                elif arg.lower() == 'critical':
+                    self.config['logging']['level'] = logging.CRITICAL
+                else:
+                    print('')
+                    print('Unknown logging level: ' + arg)
+                    self.usage()
+                    sys.exit(0)
+
         self.config['resolution'] = (800, 600)
         self.config['caption'] = 'Herculeum'
-        self.config['logging'] = {}
-        self.config['logging']['level'] = logging.DEBUG
+        if not 'level' in self.config['logging'].keys():
+            self.config['logging']['level'] = logging.ERROR
+
+    def usage(self):
+        """
+        Shows usage info
+        """
+        print('')
+        print('Usage:')
+        print('  -l --logging=')
+        print('    debug, info, warning, error, critical')
+        print('')
 
     def run(self):
         """
@@ -89,7 +127,7 @@ class Application:
 
 if __name__ == "__main__":
     app = Application()
-    app.loadConfiguration()
+    app.loadConfiguration(sys.argv[1:])
     app.startLogging()
     app.startNew()
     app.run()
