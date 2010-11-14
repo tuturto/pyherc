@@ -45,3 +45,20 @@ def test_simple_moving():
     pyHerc.rules.moving.move(model, character, 3)
     assert(character.location == (6, 5))
 
+def test_walking_to_walls():
+    """
+    Test that it is not possible to walk through walls
+    """
+    model = Model()
+    character = Character()
+    generator = TestLevelGenerator()
+
+    model.dungeon = Dungeon()
+    generator.generateLevel(None, model)
+
+    character.location = (1, 1)
+    character.level = model.dungeon.levels
+
+    assert(character.location == (1, 1))
+    pyHerc.rules.moving.move(model, character, 1)
+    assert(character.location == (1, 1))

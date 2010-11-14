@@ -21,6 +21,7 @@
 import os, sys
 import logging
 import pyHerc.data.model
+import pyHerc.data.tiles
 
 __logger = logging.getLogger('pyHerc.rules.moving')
 
@@ -73,4 +74,28 @@ def canMove(model, character, direction):
     Returns:
         1 / 0 depending if the character can move or not
     """
-    return 1
+    assert(not model == None)
+    assert(not character == None)
+    assert(direction >= 1 and direction <= 10)
+
+    if direction == 1:
+        newLocation = (character.location[0], character.location[1] - 1)
+    elif direction == 2:
+        newLocation = (character.location[0] + 1, character.location[1] - 1)
+    elif direction == 3:
+        newLocation = (character.location[0] + 1, character.location[1])
+    elif direction == 4:
+        newLocation = (character.location[0] + 1, character.location[1] + 1)
+    elif direction == 5:
+        newLocation = (character.location[0], character.location[1] + 1)
+    elif direction == 6:
+        newLocation = (character.location[0] - 1, character.location[1] + 1)
+    elif direction == 7:
+        newLocation = (character.location[0] - 1, character.location[1])
+    elif direction == 8:
+        newLocation = (character.location[0] - 1, character.location[1] - 1)
+
+    if character.level.walls[newLocation[0]][newLocation[1]] == pyHerc.data.tiles.wall_empty:
+        return 1
+    else:
+        return 0
