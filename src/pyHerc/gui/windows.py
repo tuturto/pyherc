@@ -25,6 +25,7 @@ import surfaceManager
 import images
 import rules.character
 import data.model
+import data.tiles
 import generators.dungeon
 from pygame.locals import *
 
@@ -103,7 +104,7 @@ class StartMenu:
         self.logger.debug('Main loop starting')
         while self.running:
 
-            self.updateDisplay()
+            self.__updateDisplay()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -125,7 +126,7 @@ class StartMenu:
                     elif event.key == pygame.K_SPACE:
                         if self.selection == 0:
                             self.logger.debug('new game selected')
-                            self.startNewGame()
+                            self.__startNewGame()
                         elif self.selection == 1:
                             self.logger.debug('load game selected')
                             #TODO: implement
@@ -135,14 +136,14 @@ class StartMenu:
 
         self.logger.debug('main loop finished')
 
-    def startNewGame(self):
+    def __startNewGame(self):
         newWindow = StartNewGameWindow(self.application, self.screen)
         newWindow.mainLoop()
         self.application.world.player = newWindow.character
         newWindow = GameWindow(self.application, self.screen)
         newWindow.mainLoop()
 
-    def updateDisplay(self):
+    def __updateDisplay(self):
         """
         Draws this window on screen
         """
@@ -168,17 +169,20 @@ class StartNewGameWindow:
 
     def mainLoop(self):
         self.logger.debug('main loop starting')
-        self.generateNewGame()
+        #TODO: implement menu here
+        self.__generateNewGame()
         self.logger.debug('main loop finished')
 
-    def generateNewGame(self):
+    def __generateNewGame(self):
         #TODO: implement properly
         self.application.world = data.model.Model()
         generator = generators.dungeon.DungeonGenerator()
         generator.generateDungeon(self.application.world)
         self.character = rules.character.createCharacter('human', 'fighter')
+        self.character.level = self.application.world.dungeon.levels
+        self.character.location = (10, 10)
 
-    def updateDisplay(self):
+    def __updateDisplay(self):
         """
         Draws this window on screen
         """
@@ -188,21 +192,48 @@ class GameWindow:
     Window that displays the playing world
     """
     def __init__(self,  application, screen):
+        self.logger = logging.getLogger('pyHerc.gui.windows.GameWindow')
+        self.logger.debug('initialising display')
         self.running = 1
         self.application = application
         self.screen = screen
-        self.logger = logging.getLogger('pyHerc.gui.windows.GameWindow')
-        self.logger.debug('initialising display')
+        self.fullUpdate = 1
+        self.background = surfaceManager.getImage(images.image_play_area)
         self.logger.debug('display initialised')
 
     def mainLoop(self):
         self.logger.debug('main loop starting')
         while self.running:
             #TODO: implement
-            self.running = 0
+            self.__updateDisplay()
         self.logger.debug('main loop finished')
 
-    def updateDisplay(self):
+    def __updateDisplay(self):
         """
         Draws this window on screen
         """
+        if self.fullUpdate == 1:
+            player = self.application.world.player
+            level = player.level
+            #TODO: draw screen
+            self.screen.blit(self.background, (0, 0))
+            #TODO: make more generic
+            sy = 0
+            for y in range(player.location[1] - 7, player.location[1] + 7):
+                sx = 0
+                for x in range(player.location[0] - 12, player.location[0] + 12):
+                    #draw floor and walls
+                    if x > 0 and x < len(level.floor) and y > 0 and y < len(level.floor[x]):
+                        tile = surfaceManager.getIcon(level.floor[x][y])
+                        self.screen.blit(tile, (sx * 32, sy *32))
+                        if not level.walls[x][y] == data.tiles.wall_empty:
+                            tile = surfaceManager.getIcon(level.walls[x][y])
+                            self.screen.blit(tile, (sx * 32, sy *32))
+                    else:
+                        #draw empty
+                        pass
+                    sx = sx + 1
+                sy = sy + 1
+                sx = 0
+            pygame.display.update()
+

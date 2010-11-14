@@ -20,3 +20,5 @@
 
 image_start_menu = 1
 image_start_menu_arrow = 2
+
+image_play_area = 3

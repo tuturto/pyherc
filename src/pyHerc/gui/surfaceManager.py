@@ -22,6 +22,7 @@ import os, sys
 import pygame
 import logging
 import images
+import data.tiles
 from pygame.locals import *
 
 __logger = logging.getLogger('pyHerc.gui.surfaceManager')
@@ -35,6 +36,7 @@ def loadResources():
     """
     global __resourcesLoaded
     global __images
+    global __icons
     global __logger
 
     if __resourcesLoaded == 0:
@@ -44,6 +46,15 @@ def loadResources():
         __images[images.image_start_menu] = surface
         surface = pygame.image.load('C:/programming/pyHack/resources/menu_arrow.png')
         __images[images.image_start_menu_arrow] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/play_area.png')
+        __images[images.image_play_area] = surface
+
+        surface = pygame.image.load('C:/programming/pyHack/resources/character_human_fighter.png')
+        __icons[data.tiles.human_fighter] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/floor_stone.png')
+        __icons[data.tiles.floor_rock] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/wall_stone.png')
+        __icons[data.tiles.wall_rock] = surface
 
         __resourcesLoaded = 1
         __logger.info('resources loaded')
@@ -52,3 +63,6 @@ def loadResources():
 
 def getImage(id):
     return __images[id]
+
+def getIcon(id):
+    return __icons[id]

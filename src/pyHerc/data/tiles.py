@@ -23,7 +23,9 @@ floor_rock = 1
 floor_brick = 2
 floor_wood = 3
 
-wall_empty = 1000
-wall_rock = 1001
-wall_brick = 1002
-wall_wood = 1003
+wall_empty = 100
+wall_rock = 101
+wall_brick = 102
+wall_wood = 103
+
+human_fighter = 200

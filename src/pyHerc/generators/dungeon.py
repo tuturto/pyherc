@@ -39,7 +39,7 @@ class DungeonGenerator:
         self.logger.info('generating the dungeon')
         model.dungeon = Dungeon()
         generator = TestLevelGenerator()
-        model.dungeon.levels = generator.generateLevel(None, model)
+        generator.generateLevel(None, model)
 
 class TestLevelGenerator:
     """
@@ -55,3 +55,5 @@ class TestLevelGenerator:
         """
         self.logger.debug('creating a test level')
         tempLevel = Level(model.config['level']['size'], tiles.floor_rock, tiles.wall_empty)
+        #TODO: implement properly
+        model.dungeon.levels = tempLevel

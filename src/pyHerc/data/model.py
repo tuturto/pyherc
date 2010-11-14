@@ -48,6 +48,7 @@ class Character:
     """
 
     def __init__(self):
+        # attributes
         self.str = 0
         self.dex = 0
         self.con = 0
@@ -57,3 +58,6 @@ class Character:
         self.name = None
         self.race = None
         self.kit = None
+        #location
+        self.level = None
+        self.location = ()
