@@ -38,16 +38,16 @@ class Level:
         self.logger = logging.getLogger('pyHerc.data.dungeon.Level')
 
         self.floor = []
-        for y in range(0, size[0]-1):
+        for y in range(0, size[0]):
             temp_row = []
-            for y in range(0, size[1]-1):
+            for y in range(0, size[1]):
                 temp_row.append(floorType)
             self.floor.append(temp_row)
 
         self.walls = []
-        for y in range(0, size[0]-1):
+        for y in range(0, size[0]):
             temp_row = []
-            for y in range(0, size[1]-1):
+            for y in range(0, size[1]):
                 temp_row.append(wallType)
             self.walls.append(temp_row)
 

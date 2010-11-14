@@ -49,15 +49,17 @@ class Character:
 
     def __init__(self):
         # attributes
-        self.str = 0
-        self.dex = 0
-        self.con = 0
-        self.int = 0
-        self.wis = 0
-        self.cha = 0
+        self.str = None
+        self.dex = None
+        self.con = None
+        self.int = None
+        self.wis = None
+        self.cha = None
         self.name = None
         self.race = None
         self.kit = None
         #location
         self.level = None
         self.location = ()
+        #icon
+        self.icon = None

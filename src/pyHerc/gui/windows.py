@@ -180,7 +180,7 @@ class StartNewGameWindow:
         generator.generateDungeon(self.application.world)
         self.character = rules.character.createCharacter('human', 'fighter')
         self.character.level = self.application.world.dungeon.levels
-        self.character.location = (10, 10)
+        self.character.location = (1, 1)
 
     def __updateDisplay(self):
         """
@@ -215,15 +215,15 @@ class GameWindow:
         if self.fullUpdate == 1:
             player = self.application.world.player
             level = player.level
-            #TODO: draw screen
+
             self.screen.blit(self.background, (0, 0))
             #TODO: make more generic
             sy = 0
-            for y in range(player.location[1] - 7, player.location[1] + 7):
+            for y in range(player.location[1] - 7, player.location[1] + 8):
                 sx = 0
-                for x in range(player.location[0] - 12, player.location[0] + 12):
+                for x in range(player.location[0] - 12, player.location[0] + 13):
                     #draw floor and walls
-                    if x > 0 and x < len(level.floor) and y > 0 and y < len(level.floor[x]):
+                    if x >= 0 and x <= len(level.floor) and y >= 0 and y <= len(level.floor[x]):
                         tile = surfaceManager.getIcon(level.floor[x][y])
                         self.screen.blit(tile, (sx * 32, sy *32))
                         if not level.walls[x][y] == data.tiles.wall_empty:
@@ -231,9 +231,13 @@ class GameWindow:
                             self.screen.blit(tile, (sx * 32, sy *32))
                     else:
                         #draw empty
-                        pass
+                        tile = surfaceManager.getIcon(data.tiles.floor_empty)
+                        self.screen.blit(tile, (sx * 32, sy *32))
                     sx = sx + 1
                 sy = sy + 1
                 sx = 0
+
+                tile = surfaceManager.getIcon(player.icon)
+                self.screen.blit(tile, (384, 224))
             pygame.display.update()
 

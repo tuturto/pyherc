@@ -54,6 +54,15 @@ class TestLevelGenerator:
         Will perform linking and required modifications to set up the model
         """
         self.logger.debug('creating a test level')
-        tempLevel = Level(model.config['level']['size'], tiles.floor_rock, tiles.wall_empty)
+        levelSize = model.config['level']['size']
+        tempLevel = Level(levelSize, tiles.floor_rock, tiles.wall_empty)
         #TODO: implement properly
+        for x in range(0, levelSize[0]):
+            tempLevel.walls[x][0] = tiles.wall_rock
+            tempLevel.walls[x][levelSize[1]-1] = tiles.wall_rock
+
+        for y in range(0, levelSize[1]):
+            tempLevel.walls[0][y] = tiles.wall_rock
+            tempLevel.walls[levelSize[0] - 1][y] = tiles.wall_rock
+
         model.dungeon.levels = tempLevel

@@ -84,4 +84,10 @@ def createCharacter(race, kit):
     newCharacter.int = temp_race['int'] + temp_kit['int']
     newCharacter.cha = temp_race['cha'] + temp_kit['cha']
 
+    newCharacter.icon = __getIcon(race, kit)
+
     return newCharacter
+
+def __getIcon(race, kit):
+    #TODO: implement
+    return data.tiles.human_fighter
