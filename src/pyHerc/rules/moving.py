@@ -44,23 +44,8 @@ def move(model, character, direction):
                             ' to direction: ' + direction.__str__())
 
     if canMove(model, character, direction):
-        if direction == 1:
-            character.location = (character.location[0], character.location[1] - 1)
-        elif direction == 2:
-            character.location = (character.location[0] + 1, character.location[1] - 1)
-        elif direction == 3:
-            character.location = (character.location[0] + 1, character.location[1])
-        elif direction == 4:
-            character.location = (character.location[0] + 1, character.location[1] + 1)
-        elif direction == 5:
-            character.location = (character.location[0], character.location[1] + 1)
-        elif direction == 6:
-            character.location = (character.location[0] - 1, character.location[1] + 1)
-        elif direction == 7:
-            character.location = (character.location[0] - 1, character.location[1])
-        elif direction == 8:
-            character.location = (character.location[0] - 1, character.location[1] - 1)
-    #TODO: implement walking stairs
+        character.location = __calculateNewLocation(character.location, direction)
+        #TODO: implement walking stairs
 
     __logger.debug('move finished at ' + character.location.__str__())
 
@@ -78,24 +63,39 @@ def canMove(model, character, direction):
     assert(not character == None)
     assert(direction >= 1 and direction <= 10)
 
-    if direction == 1:
-        newLocation = (character.location[0], character.location[1] - 1)
-    elif direction == 2:
-        newLocation = (character.location[0] + 1, character.location[1] - 1)
-    elif direction == 3:
-        newLocation = (character.location[0] + 1, character.location[1])
-    elif direction == 4:
-        newLocation = (character.location[0] + 1, character.location[1] + 1)
-    elif direction == 5:
-        newLocation = (character.location[0], character.location[1] + 1)
-    elif direction == 6:
-        newLocation = (character.location[0] - 1, character.location[1] + 1)
-    elif direction == 7:
-        newLocation = (character.location[0] - 1, character.location[1])
-    elif direction == 8:
-        newLocation = (character.location[0] - 1, character.location[1] - 1)
+    newLocation = __calculateNewLocation(character.location, direction)
 
     if character.level.walls[newLocation[0]][newLocation[1]] == pyHerc.data.tiles.wall_empty:
         return 1
     else:
         return 0
+
+def __calculateNewLocation(location, direction):
+    """
+    Calculate new location if moving from old to certain direction
+    Params:
+        location : starting location
+        direction : direction to move
+    """
+    assert(not location == None)
+    assert(direction >= 1 and direction <= 10)
+
+    if direction == 1:
+        newLocation = (location[0], location[1] - 1)
+    elif direction == 2:
+        newLocation = (location[0] + 1, location[1] - 1)
+    elif direction == 3:
+        newLocation = (location[0] + 1, location[1])
+    elif direction == 4:
+        newLocation = (location[0] + 1, location[1] + 1)
+    elif direction == 5:
+        newLocation = (location[0], location[1] + 1)
+    elif direction == 6:
+        newLocation = (location[0] - 1, location[1] + 1)
+    elif direction == 7:
+        newLocation = (location[0] - 1, location[1])
+    elif direction == 8:
+        newLocation = (location[0] - 1, location[1] - 1)
+    #TODO: implement walking stairs
+
+    return newLocation
