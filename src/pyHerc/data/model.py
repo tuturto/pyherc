@@ -55,7 +55,7 @@ class Character:
         self.int = None
         self.wis = None
         self.cha = None
-        self.name = None
+        self.name = 'prototype'
         self.race = None
         self.kit = None
         #location

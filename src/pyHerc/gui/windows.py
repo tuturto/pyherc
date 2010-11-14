@@ -24,6 +24,7 @@ import logging
 import surfaceManager
 import images
 import rules.character
+import rules.moving
 import data.model
 import data.tiles
 import generators.dungeon
@@ -127,6 +128,7 @@ class StartMenu:
                         if self.selection == 0:
                             self.logger.debug('new game selected')
                             self.__startNewGame()
+                            self.dirty_rectangles = [Rect(0, 0, 800, 600)]
                         elif self.selection == 1:
                             self.logger.debug('load game selected')
                             #TODO: implement
@@ -181,6 +183,7 @@ class StartNewGameWindow:
         self.character = rules.character.createCharacter('human', 'fighter')
         self.character.level = self.application.world.dungeon.levels
         self.character.location = (1, 1)
+        self.character.name = 'Adventurer'
 
     def __updateDisplay(self):
         """
@@ -205,6 +208,30 @@ class GameWindow:
         self.logger.debug('main loop starting')
         while self.running:
             #TODO: implement
+            for event in pygame.event.get():
+                model = self.application.world
+                player = model.player
+
+                if event.type == pygame.QUIT:
+                    self.logger.info('Quit received, exiting')
+                    self.running = 0
+                if event.type == pygame.KEYDOWN:
+                    if event.key == K_KP8:
+                        rules.moving.move(model, player, 1)
+                    elif event.key == K_KP9:
+                        rules.moving.move(model, player, 2)
+                    elif event.key == K_KP6:
+                        rules.moving.move(model, player, 3)
+                    elif event.key == K_KP3:
+                        rules.moving.move(model, player, 4)
+                    elif event.key == K_KP2:
+                        rules.moving.move(model, player, 5)
+                    elif event.key == K_KP1:
+                        rules.moving.move(model, player, 6)
+                    elif event.key == K_KP4:
+                        rules.moving.move(model, player, 7)
+                    elif event.key == K_KP7:
+                        rules.moving.move(model, player, 8)
             self.__updateDisplay()
         self.logger.debug('main loop finished')
 
@@ -223,7 +250,7 @@ class GameWindow:
                 sx = 0
                 for x in range(player.location[0] - 12, player.location[0] + 13):
                     #draw floor and walls
-                    if x >= 0 and x <= len(level.floor) and y >= 0 and y <= len(level.floor[x]):
+                    if x >= 0 and y >= 0 and x <= len(level.floor)-1 and y <= len(level.floor[x])-1:
                         tile = surfaceManager.getIcon(level.floor[x][y])
                         self.screen.blit(tile, (sx * 32, sy *32))
                         if not level.walls[x][y] == data.tiles.wall_empty:

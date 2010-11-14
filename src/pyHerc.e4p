@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHerc -->
-<!-- Saved: 2010-11-13, 21:19:10 -->
+<!-- Saved: 2010-11-14, 18:00:30 -->
 <!-- Copyright (C) 2010 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -26,6 +26,7 @@
     <Source>pyHerc/rules/__init__.py</Source>
     <Source>pyHerc/rules/character.py</Source>
     <Source>pyHerc/gui/images.py</Source>
+    <Source>pyHerc/rules/moving.py</Source>
   </Sources>
   <Forms>
   </Forms>

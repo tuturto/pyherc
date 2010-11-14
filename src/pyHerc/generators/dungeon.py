@@ -20,9 +20,9 @@
 
 import os, sys
 import logging
-from data.dungeon import Level
-from data.dungeon import Dungeon
-from data import tiles
+from pyHerc.data.dungeon import Level
+from pyHerc.data.dungeon import Dungeon
+from pyHerc.data import tiles
 
 class DungeonGenerator:
     """

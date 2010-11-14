@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#   Copyright 2010 Tuukka Turto
+#
+#   This file is part of pyHerc.
+#
+#   pyHerc is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   pyHerc is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+
+import os, sys
+import logging
+import pyHerc.data.model
+
+__logger = logging.getLogger('pyHerc.rules.moving')
+
+def move(model, character, direction):
+    """
+    moves character to specified direction
+    Params:
+        model : model of the world
+        character : character to move
+        direction : direction to move (1: north, 3: east, 9 up, 10 down)
+    Remarks:
+        Character does not move if it's not possible
+    """
+    assert(not model == None)
+    assert(not character == None)
+    assert(direction >= 1 and direction <= 10)
+
+    __logger.debug('character ' + character.name +
+                            ' moving from ' + character.location.__str__() +
+                            ' to direction: ' + direction.__str__())
+
+    if canMove(model, character, direction):
+        if direction == 1:
+            character.location = (character.location[0], character.location[1] - 1)
+        elif direction == 2:
+            character.location = (character.location[0] + 1, character.location[1] - 1)
+        elif direction == 3:
+            character.location = (character.location[0] + 1, character.location[1])
+        elif direction == 4:
+            character.location = (character.location[0] + 1, character.location[1] + 1)
+        elif direction == 5:
+            character.location = (character.location[0], character.location[1] + 1)
+        elif direction == 6:
+            character.location = (character.location[0] - 1, character.location[1] + 1)
+        elif direction == 7:
+            character.location = (character.location[0] - 1, character.location[1])
+        elif direction == 8:
+            character.location = (character.location[0] - 1, character.location[1] - 1)
+    #TODO: implement walking stairs
+
+    __logger.debug('move finished at ' + character.location.__str__())
+
+def canMove(model, character, direction):
+    """
+    checks if character can move to specific direction
+    Params:
+        model : model of the world
+        character : character to move
+        direction : direction to move (1: north, 3: east, 9 up, 10 down)
+    Returns:
+        1 / 0 depending if the character can move or not
+    """
+    return 1
