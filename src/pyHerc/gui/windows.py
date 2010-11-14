@@ -103,7 +103,7 @@ class StartMenu:
         This is the event handler for start menu
         """
         self.logger.debug('Main loop starting')
-        while self.running:
+        while self.running and self.application.running:
 
             self.__updateDisplay()
 
@@ -206,7 +206,7 @@ class GameWindow:
 
     def mainLoop(self):
         self.logger.debug('main loop starting')
-        while self.running:
+        while self.running and self.application.running:
             #TODO: implement
             for event in pygame.event.get():
                 model = self.application.world
@@ -214,8 +214,11 @@ class GameWindow:
 
                 if event.type == pygame.QUIT:
                     self.logger.info('Quit received, exiting')
+                    self.application.running = 0
                     self.running = 0
                 if event.type == pygame.KEYDOWN:
+                    if event.key == K_q:
+                        self.running = 0
                     if event.key == K_KP8:
                         rules.moving.move(model, player, 1)
                     elif event.key == K_KP9:

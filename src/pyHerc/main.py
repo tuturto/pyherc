@@ -53,6 +53,7 @@ class Application:
         self.config = None
         self.gui = None
         self.world = None
+        self.running = 1
 
     def loadConfiguration(self, argv):
         """
