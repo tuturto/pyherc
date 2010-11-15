@@ -1,0 +1,19 @@
+Notes:
+
+Stuff to do:
+
+1. Items
+    - generating
+2. Inventory handling
+    - pick up
+    - put down
+    - view inventory
+    - generic list window
+3. stairs
+    - generating
+    - walking up and down
+    - escaping from dungeon
+
+timer for turns
+monsters
+fighting
