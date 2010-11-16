@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHercTests -->
-<!-- Saved: 2010-11-14, 19:18:34 -->
+<!-- Saved: 2010-11-16, 18:56:44 -->
 <!-- Copyright (C) 2010 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -14,6 +14,7 @@
   <Sources>
     <Source>test_dungeon.py</Source>
     <Source>test_moving.py</Source>
+    <Source>test_item.py</Source>
   </Sources>
   <Forms>
   </Forms>

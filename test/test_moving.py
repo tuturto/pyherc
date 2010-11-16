@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2009 Tuukka Turto
+#   Copyright 2010 Tuukka Turto
 #
 #   This file is part of pyHerc.
 #

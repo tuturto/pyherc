@@ -63,3 +63,17 @@ class Character:
         self.location = ()
         #icon
         self.icon = None
+
+class Item:
+    """
+    Represents item
+    """
+
+    def __init__(self):
+        #attributes
+        self.name = 'prototype'
+        self.questItem = 0
+        #location
+        self.location = ()
+        #icon
+        self.icon = None

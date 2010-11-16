@@ -18,16 +18,19 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-floor_empty = 0
-floor_rock = 1
-floor_brick = 2
-floor_wood = 3
+import pyHerc
+import pyHerc.generators.item
+import pyHerc.data.tiles
 
-wall_empty = 100
-wall_rock = 101
-wall_brick = 102
-wall_wood = 103
+def test_crystal_skull_generation():
+    """
+    Test that generating crystal skull is possible
+    """
+    generator = pyHerc.generators.item.ItemGenerator()
 
-human_fighter = 200
+    item = generator.generateItem({'type': 'special',
+                                                'name': 'crystal skull'})
 
-item_crystal_skull = 300
+    assert(item.name == 'Crystal skull')
+    assert(item.questItem == 1)
+    assert(item.icon == pyHerc.data.tiles.item_crystal_skull)
