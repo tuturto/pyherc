@@ -24,79 +24,73 @@ import pyHerc.data.tiles
 import pyHerc.data.dungeon
 import pyHerc.rules.items
 
-def test_crystalSkullGeneration():
-    """
-    Test that generating crystal skull is possible
-    """
-    generator = pyHerc.generators.item.ItemGenerator()
+class test_Item:
 
-    item = generator.generateItem({'type': 'special',
+    def setup(self):
+        self.item = None
+        self.level = None
+        self.dungeon = None
+        self.model = None
+        self.character = None
+
+        self.item = pyHerc.data.model.Item()
+        self.item.name = 'banana'
+        self.item.location = ()
+        self.item.icon = None
+
+        self.level = pyHerc.data.dungeon.Level([20, 20], pyHerc.data.tiles.floor_rock,
+                                                    pyHerc.data.tiles.wall_empty)
+
+        self.character = pyHerc.data.model.Character()
+
+        self.character.location = (5, 5)
+        self.character.name = 'Timothy Tester'
+        self.character.level = self.level
+
+        self.level.addItem(self.item, (5, 5))
+
+        self.dungeon = pyHerc.data.dungeon.Dungeon()
+        self.dungeon.levels = self.level
+
+        self.model = pyHerc.data.model.Model()
+        self.model.dungeon = self.dungeon
+        self.model.player = self.character
+
+    def test_crystalSkullGeneration(self):
+        """
+        Test that generating crystal skull is possible
+        """
+        generator = pyHerc.generators.item.ItemGenerator()
+
+        self.item = generator.generateItem({'type': 'special',
                                                 'name': 'crystal skull'})
 
-    assert(item.name == 'Crystal skull')
-    assert(item.questItem == 1)
-    assert(item.icon == pyHerc.data.tiles.item_crystal_skull)
+        assert(self.item.name == 'Crystal skull')
+        assert(self.item.questItem == 1)
+        assert(self.item.icon == pyHerc.data.tiles.item_crystal_skull)
 
-def test_pickingUp():
-    """
-    Test that item can be picked up
-    """
-    item = pyHerc.data.model.Item()
-    item.name = 'banana'
-    item.location = ()
-    item.icon = None
+    def test_pickingUp(self):
+        """
+        Test that item can be picked up
+        """
+        assert(self.character.location == (5, 5))
+        assert(self.item.location == (5, 5))
 
-    level = pyHerc.data.dungeon.Level([20, 20], pyHerc.data.tiles.floor_rock,
-                                                    pyHerc.data.tiles.wall_empty)
+        pyHerc.rules.items.pickUp(self.model, self.character, self.item)
 
-    character = pyHerc.data.model.Character()
+        assert(self.item in self.character.inventory)
+        assert(not self.item in self.level.items)
 
-    character.location = (5, 5)
-    character.name = 'Timothy Tester'
-    character.level = level
+    def test_pickingUpNotCorrectLocation(self):
+        """
+        Test that item is not picked up from wrong location
+        """
+        self.character.location = (6, 6)
 
-    level.addItem(item, (5, 5))
+        assert(self.character.location == (6, 6))
+        assert(self.item.location == (5, 5))
 
-    dungeon = pyHerc.data.dungeon.Dungeon()
-    dungeon.levels = level
+        pyHerc.rules.items.pickUp(self.model, self.character, self.item)
 
-    model = pyHerc.data.model.Model()
-    model.dungeon = dungeon
-    model.player = character
-
-    pyHerc.rules.items.pickUp(model, character, item)
-
-    assert(item in character.inventory)
-    assert(not item in level.items)
-
-def test_pickingUpNotCorrectLocation():
-    """
-    Test that item is not picked up from wrong location
-    """
-    item = pyHerc.data.model.Item()
-    item.name = 'banana'
-    item.location = ()
-    item.icon = None
-
-    level = pyHerc.data.dungeon.Level([20, 20], pyHerc.data.tiles.floor_rock,
-                                                    pyHerc.data.tiles.wall_empty)
-
-    character = pyHerc.data.model.Character()
-
-    character.location = (6, 6)
-    character.name = 'Timothy Tester'
-    character.level = level
-
-    level.addItem(item, (5, 5))
-
-    dungeon = pyHerc.data.dungeon.Dungeon()
-    dungeon.levels = level
-
-    model = pyHerc.data.model.Model()
-    model.dungeon = dungeon
-    model.player = character
-
-    pyHerc.rules.items.pickUp(model, character, item)
-
-    assert(not item in character.inventory)
-    assert(item in level.items)
+        assert(not self.item in self.character.inventory)
+        assert(self.item in self.level.items)

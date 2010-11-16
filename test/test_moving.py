@@ -27,38 +27,33 @@ from pyHerc.generators.dungeon import TestLevelGenerator
 
 import pyHerc.rules.moving
 
-def test_simple_moving():
-    """
-    Test that taking single step is possible
-    """
-    model = Model()
-    character = Character()
-    generator = TestLevelGenerator()
+class test_moving:
 
-    model.dungeon = Dungeon()
-    generator.generateLevel(None, model)
+    def setup(self):
+        self.model = Model()
+        self.character = Character()
+        generator = TestLevelGenerator()
 
-    character.location = (5, 5)
-    character.level = model.dungeon.levels
+        self.model.dungeon = Dungeon()
+        generator.generateLevel(None, self.model)
 
-    assert(character.location == (5, 5))
-    pyHerc.rules.moving.move(model, character, 3)
-    assert(character.location == (6, 5))
+        self.character.location = (5, 5)
+        self.character.level = self.model.dungeon.levels
 
-def test_walking_to_walls():
-    """
-    Test that it is not possible to walk through walls
-    """
-    model = Model()
-    character = Character()
-    generator = TestLevelGenerator()
+    def test_simple_moving(self):
+        """
+        Test that taking single step is possible
+        """
+        assert(self.character.location == (5, 5))
+        pyHerc.rules.moving.move(self.model, self.character, 3)
+        assert(self.character.location == (6, 5))
 
-    model.dungeon = Dungeon()
-    generator.generateLevel(None, model)
+    def test_walking_to_walls(self):
+        """
+        Test that it is not possible to walk through walls
+        """
+        self.character.location = (1, 1)
 
-    character.location = (1, 1)
-    character.level = model.dungeon.levels
-
-    assert(character.location == (1, 1))
-    pyHerc.rules.moving.move(model, character, 1)
-    assert(character.location == (1, 1))
+        assert(self.character.location == (1, 1))
+        pyHerc.rules.moving.move(self.model, self.character, 1)
+        assert(self.character.location == (1, 1))
