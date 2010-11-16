@@ -4,7 +4,7 @@ Stuff to do:
 
 - Inventory handling
     + pick up
-    - put down
+    + put down
     - generic list window
     - view inventory
 - stairs
