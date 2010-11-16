@@ -65,6 +65,9 @@ class Character:
         #icon
         self.icon = None
 
+    def __str__(self):
+        return self.name
+
 class Item:
     """
     Represents item
@@ -78,3 +81,6 @@ class Item:
         self.location = ()
         #icon
         self.icon = None
+
+    def __str__(self):
+        return self.name

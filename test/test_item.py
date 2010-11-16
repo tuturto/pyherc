@@ -80,6 +80,7 @@ class test_Item:
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
+        assert(self.item.location == ())
 
     def test_pickingUpNotCorrectLocation(self):
         """
@@ -92,5 +93,21 @@ class test_Item:
 
         pyHerc.rules.items.pickUp(self.model, self.character, self.item)
 
+        assert(self.item in self.character.inventory)
+        assert(not self.item in self.level.items)
+
+    def test_droppingItem(self):
+        """
+        Test that an item can be dropped from inventory
+        """
+        pyHerc.rules.items.pickUp(self.model, self.character, self.item)
+
+        assert(self.item in self.character.inventory)
+        assert(not self.item in self.level.items)
+
+        self.character.location = (8, 8)
+        pyHerc.rules.items.drop(self.model, self.character, self.item)
+
         assert(not self.item in self.character.inventory)
         assert(self.item in self.level.items)
+        assert(self.item.location == (8, 8))

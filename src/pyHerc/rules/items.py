@@ -35,12 +35,32 @@ def pickUp(model, character, item):
     assert(not model == None)
     assert(not character == None)
     assert(not item == None)
+    assert(item in character.level.items)
 
-    if (not item.location == character.location):
-        return
-
-    if (not item in character.level.items):
-        return
+    __logger.debug(character.__str__() + ' picking up item: ' + item.__str__())
 
     character.level.items.remove(item)
     character.inventory.append(item)
+    item.location = ()
+
+    __logger.debug('item picked up')
+
+def drop(model, character, item):
+    """
+    Drop item from inventory
+    Parameters:
+        model : model to use
+        character : character who is dropping the item
+        item : item to be dropped
+    """
+    assert(not model == None)
+    assert(not character == None)
+    assert(not item == None)
+    assert(item in character.inventory)
+
+    __logger.debug(character.__str__() + ' dropping item ' + item.__str__())
+
+    character.level.addItem(item, character.location)
+    character.inventory.remove(item)
+
+    __logger.debug('item dropped')
