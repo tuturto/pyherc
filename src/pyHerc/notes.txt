@@ -3,7 +3,7 @@ Notes:
 Stuff to do:
 
 - Inventory handling
-    - pick up
+    + pick up
     - put down
     - generic list window
     - view inventory
