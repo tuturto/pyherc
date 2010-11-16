@@ -2,18 +2,21 @@ Notes:
 
 Stuff to do:
 
-1. Items
-    - generating
-2. Inventory handling
+- Inventory handling
     - pick up
     - put down
-    - view inventory
     - generic list window
-3. stairs
-    - generating
+    - view inventory
+- stairs
+    - generating and linking levels
     - walking up and down
     - escaping from dungeon
+- timer for turns
+- monsters
+    - generating
+    - AI
+- fighting
 
-timer for turns
-monsters
-fighting
+Stuff Done:
++ Items
+    + generating

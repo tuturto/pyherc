@@ -58,6 +58,7 @@ class Character:
         self.name = 'prototype'
         self.race = None
         self.kit = None
+        self.inventory = []
         #location
         self.level = None
         self.location = ()

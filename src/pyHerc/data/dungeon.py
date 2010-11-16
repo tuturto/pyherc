@@ -29,6 +29,7 @@ class Level:
     def __init__(self):
         self.floor = None
         self.walls = None
+        self.items = []
         self.logger = logging.getLogger('pyHerc.data.dungeon.Level')
 
     def __init__(self, size, floorType, wallType):
@@ -50,6 +51,21 @@ class Level:
             for y in range(0, size[1]):
                 temp_row.append(wallType)
             self.walls.append(temp_row)
+
+        self.items = []
+
+    def addItem(self, item, location):
+        """
+        Add an item to this level
+        Parameters:
+            item : item to add
+            location : location where to put the item
+        """
+        assert(not item == None)
+        assert(not location == None)
+
+        self.items.append(item)
+        item.location = location
 
 class Dungeon:
     """
