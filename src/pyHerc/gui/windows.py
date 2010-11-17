@@ -267,7 +267,15 @@ class GameWindow:
                 sy = sy + 1
                 sx = 0
 
-                tile = surfaceManager.getIcon(player.icon)
-                self.screen.blit(tile, (384, 224))
+            #draw items
+            for item in level.items:
+                x = item.location[0] - player.location[0] + 13
+                y = item.location[1] - player.location[1] + 8
+                if x >= 0 and y >= 0 and x <= 24 and y <= 14:
+                    tile = surfaceManager.getIcon(item.icon)
+                    self.screen.blit(tile, (x * 32, y *32))
+
+            tile = surfaceManager.getIcon(player.icon)
+            self.screen.blit(tile, (384, 224))
             pygame.display.update()
 

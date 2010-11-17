@@ -21,6 +21,7 @@
 import os, sys
 import logging
 import pyHerc.data.model
+import pyHerc.rules.tables
 from pyHerc.data import tiles
 
 class ItemGenerator:
@@ -30,6 +31,7 @@ class ItemGenerator:
 
     def __init__(self):
         self.logger = logging.getLogger('pyHerc.generators.item.ItemGenerator')
+        pyHerc.rules.tables.loadTables()
 
     def generateItem(self, parameters):
         """
@@ -39,13 +41,14 @@ class ItemGenerator:
         self.logger.debug(parameters)
         newItem = None
         if not parameters == None:
+            #TODO: generate named items too?
             if 'type' in parameters.keys():
                 if parameters['type'] == 'special':
                     #generate special item
                     newItem = self.generateSpecialItem(parameters)
                 elif parameters['type'] == 'food':
                     #generate food
-                    pass
+                    newItem = self.generateFood(parameters)
             else:
                 #generate completely random item?
                 pass
@@ -56,9 +59,30 @@ class ItemGenerator:
         if newItem == None:
             self.logger.warn('no item generated')
         else:
-            self.logger.debug('new item generated ok')
+            self.logger.debug('new item generated: ' + newItem.__str__())
 
         return newItem
+
+    def generateFood(self, parameters):
+        """
+        Generate a food item
+        """
+        self.logger.debug('generating a food item')
+        if parameters == None:
+            #TODO: generate random food
+            pass
+        elif not 'name' in parameters.keys():
+            #TODO: generate random food
+            pass
+        else:
+            #generate named food
+            table = pyHerc.rules.tables.food[parameters['name']]
+            newItem = self.__generateItemFromTable(table)
+
+        self.logger.debug('food item generation done')
+
+        return newItem
+
 
     def generateSpecialItem(self, parameters):
         """
@@ -69,15 +93,24 @@ class ItemGenerator:
 
         self.logger.debug('generating a special item')
 
-        newItem = None
-
-        if parameters['name'] == 'crystal skull':
-            newItem = pyHerc.data.model.Item()
-            newItem.name = 'Crystal skull'
-            newItem.questItem = 1
-            newItem.location = None
-            newItem.icon = pyHerc.data.tiles.item_crystal_skull
+        table = pyHerc.rules.tables.specialItems[parameters['name']]
+        newItem = self.__generateItemFromTable(table)
 
         self.logger.debug('special item generation done')
+
+        return newItem
+
+    def __generateItemFromTable(self, table):
+        """
+        Take table entry and generate corresponding item
+        """
+        assert(table != None)
+
+        newItem = pyHerc.data.model.Item()
+        newItem.name = table['name']
+        newItem.icon = table['icon']
+
+        if 'questItem' in table.keys():
+            newItem.questItem = table['questItem']
 
         return newItem

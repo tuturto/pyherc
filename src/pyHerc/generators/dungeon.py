@@ -20,6 +20,8 @@
 
 import os, sys
 import logging
+import random
+import pyHerc.generators.item
 from pyHerc.data.dungeon import Level
 from pyHerc.data.dungeon import Dungeon
 from pyHerc.data import tiles
@@ -47,6 +49,7 @@ class TestLevelGenerator:
     """
     def __init__(self):
         self.logger = logging.getLogger('pyHerc.generators.dungeon.TestLevelGenerator')
+        self.itemGenerator = pyHerc.generators.item.ItemGenerator()
 
     def generateLevel(self, stairs, model):
         """
@@ -64,5 +67,13 @@ class TestLevelGenerator:
         for y in range(0, levelSize[1]):
             tempLevel.walls[0][y] = tiles.wall_rock
             tempLevel.walls[levelSize[0] - 1][y] = tiles.wall_rock
+
+        #throw bunch of apples around
+        for i in range(0, 10):
+            #TODO: better placement algorithm
+            tempItem = self.itemGenerator.generateFood({'name':'apple'})
+            tempItem.location = (random.randint(2, 20), random.randint(2, 20))
+            tempLevel.items.append(tempItem)
+
 
         model.dungeon.levels = tempLevel

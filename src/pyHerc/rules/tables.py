@@ -18,17 +18,31 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-floor_empty = 0
-floor_rock = 1
-floor_brick = 2
-floor_wood = 3
+import os, sys
+import logging
+import pyHerc.data.model
+from pyHerc.data import tiles
 
-wall_empty = 100
-wall_rock = 101
-wall_brick = 102
-wall_wood = 103
+__initialised = 0
+food = {}
+specialItems = {}
+weapons = {}
+characters = {}
+kits = {}
 
-human_fighter = 200
+def loadTables():
+    """
+    Initialise tables
+    """
+    global __food
+    global __initialised
 
-item_crystal_skull = 300
-item_apple = 301
+    if __initialised:
+        return
+
+    food['apple'] = {'name' : 'apple',
+                                'icon' : pyHerc.data.tiles.item_apple}
+
+    specialItems['crystal skull'] = {'name' : 'Crystal skull',
+                                                        'questItem' : 1,
+                                                        'icon' : pyHerc.data.tiles.item_crystal_skull}
