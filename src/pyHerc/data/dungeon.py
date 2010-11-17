@@ -67,6 +67,19 @@ class Level:
         self.items.append(item)
         item.location = location
 
+    def getItemsAt(self, location):
+        """
+        Get list of items at location
+        Parameters:
+            location : location to check
+        """
+        assert(location != None)
+        items = []
+        for item in self.items:
+            if item.location == location:
+                items.append(item)
+        return items
+
 class Dungeon:
     """
     Represents the dungeon

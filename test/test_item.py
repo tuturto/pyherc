@@ -111,3 +111,29 @@ class test_Item:
         assert(not self.item in self.character.inventory)
         assert(self.item in self.level.items)
         assert(self.item.location == (8, 8))
+
+    def test_findingItems(self):
+        """
+        Test that level can be queried for items on a certain location
+        """
+
+        item = pyHerc.data.model.Item()
+        item.name = 'apple'
+        item.location = ()
+        item.icon = None
+        self.level.addItem(item, (5, 5))
+
+        item = pyHerc.data.model.Item()
+        item.name = 'kiwi'
+        item.location = ()
+        item.icon = None
+        self.level.addItem(item, (3, 3))
+
+        items = self.level.getItemsAt((5, 5))
+        assert(len(items) == 2)
+
+        items = self.level.getItemsAt((3, 3))
+        assert(len(items) == 1)
+
+        items = self.level.getItemsAt((12, 0))
+        assert(len(items) == 0)

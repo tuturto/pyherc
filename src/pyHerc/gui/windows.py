@@ -27,6 +27,7 @@ import rules.character
 import rules.moving
 import data.model
 import data.tiles
+import pyHerc.rules.items
 import generators.dungeon
 from pygame.locals import *
 
@@ -235,6 +236,11 @@ class GameWindow:
                         rules.moving.move(model, player, 7)
                     elif event.key == K_KP7:
                         rules.moving.move(model, player, 8)
+                    elif event.key == K_PERIOD:
+                        items = player.level.getItemsAt(player.location)
+                        #TODO: menu
+                        for item in items:
+                            pyHerc.rules.items.pickUp(model, player, item)
             self.__updateDisplay()
         self.logger.debug('main loop finished')
 
@@ -269,8 +275,8 @@ class GameWindow:
 
             #draw items
             for item in level.items:
-                x = item.location[0] - player.location[0] + 13
-                y = item.location[1] - player.location[1] + 8
+                x = item.location[0] - player.location[0] + 12
+                y = item.location[1] - player.location[1] + 7
                 if x >= 0 and y >= 0 and x <= 24 and y <= 14:
                     tile = surfaceManager.getIcon(item.icon)
                     self.screen.blit(tile, (x * 32, y *32))
