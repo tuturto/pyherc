@@ -48,6 +48,8 @@ def loadResources():
         __images[images.image_start_menu_arrow] = surface
         surface = pygame.image.load('C:/programming/pyHack/resources/play_area.png')
         __images[images.image_play_area] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/inventory_menu.png')
+        __images[images.image_inventory_menu] = surface
 
         surface = pygame.image.load('C:/programming/pyHack/resources/character_human_fighter.png')
         __icons[data.tiles.human_fighter] = surface

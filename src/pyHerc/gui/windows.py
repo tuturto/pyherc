@@ -23,6 +23,7 @@ import pygame
 import logging
 import surfaceManager
 import images
+import dialogs
 import rules.character
 import rules.moving
 import data.model
@@ -241,6 +242,17 @@ class GameWindow:
                         #TODO: menu
                         for item in items:
                             pyHerc.rules.items.pickUp(model, player, item)
+                    elif event.key == K_i:
+                        #display inventory
+                        dialog = dialogs.Inventory(self.application, self.screen)
+                        dialog.show(player.inventory)
+                    elif event.key == K_d:
+                        #drop items
+                        dialog = dialogs.Inventory(self.application, self.screen)
+                        dropItems = dialog.show(player.inventory)
+                        for item in dropItems:
+                            pyHerc.rules.items.drop(model, player, item)
+
             self.__updateDisplay()
         self.logger.debug('main loop finished')
 
