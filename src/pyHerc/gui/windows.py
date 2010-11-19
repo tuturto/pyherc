@@ -113,20 +113,20 @@ class StartMenu:
                 if event.type == pygame.QUIT:
                     self.logger.info('Quit received, exiting')
                     self.running = 0
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_DOWN:
+                if event.type == KEYDOWN:
+                    if event.key in (K_DOWN, K_KP2):
                         self.dirty_rectangles.append(self.arrow_rects[self.selection])
                         self.selection = self.selection + 1
                         if self.selection > 2:
                             self.selection = 0
                         self.dirty_rectangles.append(self.arrow_rects[self.selection])
-                    elif event.key == pygame.K_UP:
+                    elif event.key in (K_UP, K_KP8):
                         self.dirty_rectangles.append(self.arrow_rects[self.selection])
                         self.selection = self.selection - 1
                         if self.selection < 0:
                             self.selection = 2
                         self.dirty_rectangles.append(self.arrow_rects[self.selection])
-                    elif event.key == pygame.K_SPACE:
+                    elif event.key in (K_SPACE, K_RETURN,  K_KP5):
                         if self.selection == 0:
                             self.logger.debug('new game selected')
                             self.__startNewGame()
@@ -205,6 +205,8 @@ class GameWindow:
         self.fullUpdate = 1
         self.background = surfaceManager.getImage(images.image_play_area)
         self.logger.debug('display initialised')
+        self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
+                                    K_KP4:7, K_KP7:8}
 
     def mainLoop(self):
         self.logger.debug('main loop starting')
@@ -220,32 +222,23 @@ class GameWindow:
                     self.running = 0
                 if event.type == pygame.KEYDOWN:
                     if event.key == K_q:
+                        #quit
                         self.running = 0
-                    if event.key == K_KP8:
-                        rules.moving.move(model, player, 1)
-                    elif event.key == K_KP9:
-                        rules.moving.move(model, player, 2)
-                    elif event.key == K_KP6:
-                        rules.moving.move(model, player, 3)
-                    elif event.key == K_KP3:
-                        rules.moving.move(model, player, 4)
-                    elif event.key == K_KP2:
-                        rules.moving.move(model, player, 5)
-                    elif event.key == K_KP1:
-                        rules.moving.move(model, player, 6)
-                    elif event.key == K_KP4:
-                        rules.moving.move(model, player, 7)
-                    elif event.key == K_KP7:
-                        rules.moving.move(model, player, 8)
+                    elif event.key in self.moveKeyMap.keys():
+                        #handle moving
+                        rules.moving.move(model, player, self.moveKeyMap[event.key])
                     elif event.key == K_PERIOD:
+                        #pick up items
                         items = player.level.getItemsAt(player.location)
-                        #TODO: menu
+                        if len(items) > 1:
+                            dialog = dialogs.Inventory(self.application, self.screen)
+                            items = dialog.show(items)
                         for item in items:
                             pyHerc.rules.items.pickUp(model, player, item)
                     elif event.key == K_i:
                         #display inventory
                         dialog = dialogs.Inventory(self.application, self.screen)
-                        dialog.show(player.inventory)
+                        dialog.show(player.inventory, multipleSelections = 0)
                     elif event.key == K_d:
                         #drop items
                         dialog = dialogs.Inventory(self.application, self.screen)

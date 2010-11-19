@@ -1,11 +1,6 @@
 Notes:
 
 Stuff to do:
-- Inventory handling
-    + pick up
-    + put down
-    - generic list window
-    - view inventory
 - stairs / portals
     - generating and linking levels
     - walking up and down
@@ -18,7 +13,17 @@ Stuff to do:
 - fighting
 - items
     - better positioning on levels
+    - descriptions
+    - quotes
+- inventory handling
+    - displaying descriptions
+    - displaying item quotes
 
 Stuff Done:
 + Items
     + generating
++ Inventory handling
+    + pick up
+    + put down
+    + generic list window
+    + view inventory

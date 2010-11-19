@@ -46,28 +46,29 @@ class Inventory:
 
         self.logger = logging.getLogger('pyHerc.gui.dialogs.Inventory')
         self.inventory = [] # [{'selected': 1/0, 'item' : Item}]
+        self.selected = None
         self.application = application
         self.screen = screen
         self.page = 0
         self.running = 1
         self.letters = map(chr, range(97, 123))
+        self.keymap = {K_a:0, K_b:1, K_c:2, K_d:3, K_e:4, K_f:5, K_g:6, K_h:7, K_i:8, K_j:9,
+                                K_k:10, K_l:11, K_m:12, K_n:13, K_o:14, K_p:15, K_q:16, K_r:17,
+                                K_s:18, K_t:19, K_u:20, K_v:21, K_w:22, K_x:23, K_y:24, K_z:25}
 
         self.background = surfaceManager.getImage(images.image_inventory_menu)
 
-    def show(self, list):
+    def show(self, list, multipleSelections = 1):
         """
         Displays dialog
         Parameters:
             list : list of items to display
+            multipleSelections : is user allowed to select multiple items
         Returns:
             list of selected items
         """
         for item in list:
             self.inventory.append({'selected' : 0, 'item' : item})
-
-        #TODO: implement parameters
-        #           selectable list
-        #           multiple selections
 
         while self.running:
             for event in pygame.event.get():
@@ -82,17 +83,20 @@ class Inventory:
                         self.running = 0
                     if event.key == K_RETURN or event.key == K_SPACE:
                         self.running = 0
-                    #TODO: sensible way of handling keys?
-                    if event.key == K_a:
-                        if self.inventory[0]['selected'] == 0:
-                            self.inventory[0]['selected'] = 1
-                        else:
-                            self.inventory[0]['selected'] = 0
-                    if event.key == K_b:
-                        if self.inventory[1]['selected'] == 0:
-                            self.inventory[1]['selected'] = 1
-                        else:
-                            self.inventory[1]['selected'] = 0
+                    if event.key in self.keymap.keys():
+                        index = self.keymap[event.key] + self.page * 26
+                        if index < len(self.inventory):
+                            if self.inventory[index]['selected'] == 1:
+                                self.inventory[index]['selected'] = 0
+                                self.selected = None
+                            else:
+                                self.inventory[index]['selected'] = 1
+                                if multipleSelections == 0:
+                                    if self.selected != None:
+                                        self.inventory[self.selected]['selected'] = 0
+                                        self.selected = index
+                                    else:
+                                        self.selected = index
 
             self.__updateScreen()
 
