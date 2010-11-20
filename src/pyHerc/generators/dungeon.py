@@ -41,7 +41,9 @@ class DungeonGenerator:
         self.logger.info('generating the dungeon')
         model.dungeon = Dungeon()
         generator = TestLevelGenerator()
-        generator.generateLevel(None, model)
+        level = generator.generateLevel(None, model)
+
+        model.dungeon.levels = level
 
 class TestLevelGenerator:
     """
@@ -54,7 +56,6 @@ class TestLevelGenerator:
     def generateLevel(self, stairs, model):
         """
         Generate level that starts from given stairs
-        Will perform linking and required modifications to set up the model
         """
         self.logger.debug('creating a test level')
         levelSize = model.config['level']['size']
@@ -75,5 +76,4 @@ class TestLevelGenerator:
             tempItem.location = (random.randint(2, 20), random.randint(2, 20))
             tempLevel.items.append(tempItem)
 
-
-        model.dungeon.levels = tempLevel
+        return tempLevel

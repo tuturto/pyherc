@@ -102,6 +102,19 @@ class Level:
             portal.otherEnd = otherEnd
             otherEnd.otherEnd = portal
 
+    def getPortalAt(self, location):
+        """
+        Check if there is a portal at given location
+        Returns:
+            Portal if found
+            Otherwise None
+        """
+        for portal in self.portals:
+            if portal.location == location:
+                return portal
+
+        return None
+
 class Dungeon:
     """
     Represents the dungeon

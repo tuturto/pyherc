@@ -112,7 +112,14 @@ def __calculateNewLocation(character, direction):
         newLocation = (location[0] - 1, location[1])
     elif direction == 8:
         newLocation = (location[0] - 1, location[1] - 1)
-    #TODO: implement portals
+    elif direction == 9:
+        portal = newLevel.getPortalAt(location)
+        if portal != None:
+            newLevel = portal.otherEnd.level
+            newLocation = portal.otherEnd.location
+        else:
+            newLevel = None
+            newLocation = None
 
     return {'location':newLocation,
                 'level':newLevel}

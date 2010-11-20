@@ -21,6 +21,7 @@
 import pyHerc
 from pyHerc.data.dungeon import Level
 from pyHerc.data.dungeon import Dungeon
+from pyHerc.data.dungeon import Portal
 from pyHerc.data.model import Model
 from pyHerc.data.model import Character
 from pyHerc.generators.dungeon import TestLevelGenerator
@@ -35,12 +36,20 @@ class test_moving:
         generator = TestLevelGenerator()
 
         self.model.dungeon = Dungeon()
-        generator.generateLevel(None, self.model)
+        self.level1 = generator.generateLevel(None, self.model)
+        self.level2 = generator.generateLevel(None, self.model)
+        self.portal1 = Portal()
+        self.portal2 = Portal()
+
+        self.level1.addPortal(self.portal1, (5, 5))
+        self.level2.addPortal(self.portal2, (10, 10), self.portal1)
+
+        self.model.dungeon.levels = self.level1
 
         self.character.location = (5, 5)
         self.character.level = self.model.dungeon.levels
 
-    def test_simple_moving(self):
+    def test_simpleMoving(self):
         """
         Test that taking single step is possible
         """
@@ -48,7 +57,7 @@ class test_moving:
         pyHerc.rules.moving.move(self.model, self.character, 3)
         assert(self.character.location == (6, 5))
 
-    def test_walking_to_walls(self):
+    def test_walkingToWalls(self):
         """
         Test that it is not possible to walk through walls
         """
@@ -57,3 +66,15 @@ class test_moving:
         assert(self.character.location == (1, 1))
         pyHerc.rules.moving.move(self.model, self.character, 1)
         assert(self.character.location == (1, 1))
+
+    def test_enteringPortal(self):
+        """
+        Test that character can change level via portal
+        """
+        assert(self.character.location == (5, 5))
+        assert(self.character.level == self.level1)
+
+        pyHerc.rules.moving.move(self.model, self.character, 9)
+
+        assert(self.character.location == (10, 10))
+        assert(self.character.level == self.level2)
