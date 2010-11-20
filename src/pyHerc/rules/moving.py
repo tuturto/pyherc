@@ -31,7 +31,7 @@ def move(model, character, direction):
     Params:
         model : model of the world
         character : character to move
-        direction : direction to move (1: north, 3: east, 9 up, 10 down)
+        direction : direction to move (1: north, 3: east, 9 enter portal)
     Remarks:
         Character does not move if it's not possible
     """
@@ -43,42 +43,58 @@ def move(model, character, direction):
                             ' moving from ' + character.location.__str__() +
                             ' to direction: ' + direction.__str__())
 
-    if canMove(model, character, direction):
-        character.location = __calculateNewLocation(character.location, direction)
-        #TODO: implement walking stairs
+    moveData = checkMove(model, character, direction)
+
+    if moveData['ok'] == 1:
+        character.location = moveData['location']
+        character.level = moveData['level']
 
     __logger.debug('move finished at ' + character.location.__str__())
 
-def canMove(model, character, direction):
+def checkMove(model, character, direction):
     """
     checks if character can move to specific direction
     Params:
         model : model of the world
         character : character to move
-        direction : direction to move (1: north, 3: east, 9 up, 10 down)
+        direction : direction to move (1: north, 3: east, 9 enter portal)
     Returns:
-        1 / 0 depending if the character can move or not
+        dictionary with following keys:
+            location : new location
+            level : new level
+            ok : 1 / 0 depending if move is ok
     """
     assert(not model == None)
     assert(not character == None)
-    assert(direction >= 1 and direction <= 10)
+    assert(direction >= 1 and direction <= 9)
 
-    newLocation = __calculateNewLocation(character.location, direction)
+    locationData = __calculateNewLocation(character, direction)
+    newLocation = locationData['location']
+    newLevel = locationData['level']
 
-    if character.level.walls[newLocation[0]][newLocation[1]] == pyHerc.data.tiles.wall_empty:
-        return 1
+    if newLevel.walls[newLocation[0]][newLocation[1]] == pyHerc.data.tiles.wall_empty:
+        locationData['ok'] = 1
     else:
-        return 0
+        locationData['ok'] = 0
 
-def __calculateNewLocation(location, direction):
+    return locationData
+
+def __calculateNewLocation(character, direction):
     """
     Calculate new location if moving from old to certain direction
     Params:
-        location : starting location
+        character : character who is about to move
         direction : direction to move
+    Returns:
+        dictionary with keys:
+            level : level where move ends
+            location : location within that level
     """
-    assert(not location == None)
-    assert(direction >= 1 and direction <= 10)
+    assert(not character == None)
+    assert(direction >= 1 and direction <= 9)
+
+    location = character.location
+    newLevel = character.level
 
     if direction == 1:
         newLocation = (location[0], location[1] - 1)
@@ -96,6 +112,7 @@ def __calculateNewLocation(location, direction):
         newLocation = (location[0] - 1, location[1])
     elif direction == 8:
         newLocation = (location[0] - 1, location[1] - 1)
-    #TODO: implement walking stairs
+    #TODO: implement portals
 
-    return newLocation
+    return {'location':newLocation,
+                'level':newLevel}
