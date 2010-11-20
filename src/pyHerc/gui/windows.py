@@ -29,6 +29,7 @@ import rules.moving
 import data.model
 import data.tiles
 import pyHerc.rules.items
+import pyHerc.rules.ending
 import generators.dungeon
 from pygame.locals import *
 
@@ -141,11 +142,18 @@ class StartMenu:
         self.logger.debug('main loop finished')
 
     def __startNewGame(self):
+        self.logger.info('starting a new game')
         newWindow = StartNewGameWindow(self.application, self.screen)
         newWindow.mainLoop()
         self.application.world.player = newWindow.character
         newWindow = GameWindow(self.application, self.screen)
         newWindow.mainLoop()
+        self.logger.info('game finished')
+        if self.application.running:
+            self.logger.info('displaying end screen')
+            #TODO: display end screen here
+            self.logger.debug(pyHerc.rules.ending.checkResult(self.application.world))
+
 
     def __updateDisplay(self):
         """
@@ -199,7 +207,6 @@ class GameWindow:
     def __init__(self,  application, screen):
         self.logger = logging.getLogger('pyHerc.gui.windows.GameWindow')
         self.logger.debug('initialising display')
-        self.running = 1
         self.application = application
         self.screen = screen
         self.fullUpdate = 1
@@ -210,7 +217,7 @@ class GameWindow:
 
     def mainLoop(self):
         self.logger.debug('main loop starting')
-        while self.running and self.application.running:
+        while self.application.world.endCondition == 0 and self.application.running:
             #TODO: implement
             for event in pygame.event.get():
                 model = self.application.world
@@ -219,11 +226,10 @@ class GameWindow:
                 if event.type == pygame.QUIT:
                     self.logger.info('Quit received, exiting')
                     self.application.running = 0
-                    self.running = 0
                 if event.type == pygame.KEYDOWN:
                     if event.key == K_q:
                         #quit
-                        self.running = 0
+                        self.application.world.endCondition = 1
                     elif event.key in self.moveKeyMap.keys():
                         #handle moving
                         rules.moving.move(model, player, self.moveKeyMap[event.key])

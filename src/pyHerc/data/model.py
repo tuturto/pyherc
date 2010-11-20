@@ -30,6 +30,7 @@ class Model:
         self.dungeon = None
         self.player = None
         self.config = None
+        self.endCondition = 0
 
         self.logger.info('loading config')
         self.loadConfig()
@@ -58,6 +59,7 @@ class Character:
         self.name = 'prototype'
         self.race = None
         self.kit = None
+        self.hp = None
         self.inventory = []
         #location
         self.level = None

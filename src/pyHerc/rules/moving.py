@@ -72,8 +72,11 @@ def checkMove(model, character, direction):
     newLocation = locationData['location']
     newLevel = locationData['level']
 
-    if newLevel.walls[newLocation[0]][newLocation[1]] == pyHerc.data.tiles.wall_empty:
-        locationData['ok'] = 1
+    if newLevel != None:
+        if newLevel.walls[newLocation[0]][newLocation[1]] == pyHerc.data.tiles.wall_empty:
+            locationData['ok'] = 1
+        else:
+            locationData['ok'] = 0
     else:
         locationData['ok'] = 0
 

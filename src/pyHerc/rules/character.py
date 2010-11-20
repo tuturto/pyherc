@@ -47,6 +47,7 @@ def initialiseStatTables():
     temp_race['int'] = 10
     temp_race['wis'] = 10
     temp_race['cha'] = 10
+    temp_race['hp'] = 10
     race_stats['human'] = temp_race
 
     temp_kit = {}
@@ -56,6 +57,7 @@ def initialiseStatTables():
     temp_kit['int'] = -2
     temp_kit['wis'] = -1
     temp_kit['cha'] = -1
+    temp_kit['hp'] = 2
     kit_stats['fighter'] = temp_kit
 
     __logger.info('stat tables initialised')
@@ -83,6 +85,7 @@ def createCharacter(race, kit):
     newCharacter.wis = temp_race['wis'] + temp_kit['wis']
     newCharacter.int = temp_race['int'] + temp_kit['int']
     newCharacter.cha = temp_race['cha'] + temp_kit['cha']
+    newCharacter.hp = temp_race['hp'] + temp_kit['hp']
 
     newCharacter.icon = __getIcon(race, kit)
 
