@@ -41,7 +41,11 @@ class DungeonGenerator:
         self.logger.info('generating the dungeon')
         model.dungeon = Dungeon()
         generator = TestLevelGenerator()
-        level = generator.generateLevel(None, model)
+        level = generator.generateLevel(None, model, 2)
+
+        self.logger.debug('generating ' + len(level.portals).__str__() + ' sub levels')
+        for portal in level.portals:
+            newLevel = generator.generateLevel(portal, model)
 
         model.dungeon.levels = level
 
@@ -53,9 +57,13 @@ class TestLevelGenerator:
         self.logger = logging.getLogger('pyHerc.generators.dungeon.TestLevelGenerator')
         self.itemGenerator = pyHerc.generators.item.ItemGenerator()
 
-    def generateLevel(self, stairs, model):
+    def generateLevel(self, portal, model, newPortals = 0):
         """
         Generate level that starts from given stairs
+        Parameters:
+            stairs : link new level to this portal
+            model : model being used
+            newPortals : amount of portals to generate, default 0
         """
         self.logger.debug('creating a test level')
         levelSize = model.config['level']['size']
@@ -75,5 +83,15 @@ class TestLevelGenerator:
             tempItem = self.itemGenerator.generateFood({'name':'apple'})
             tempItem.location = (random.randint(2, 20), random.randint(2, 20))
             tempLevel.items.append(tempItem)
+
+        if portal != None:
+            newPortal = pyHerc.data.dungeon.Portal()
+            tempLevel.addPortal(newPortal, (random.randint(2, 20), random.randint(2, 20)), portal)
+
+        if newPortals > 0:
+            for i in range(0, newPortals):
+                newPortal = pyHerc.data.dungeon.Portal()
+                newPortal.icon = pyHerc.data.tiles.portal_stairs
+                tempLevel.addPortal(newPortal, (random.randint(2, 20), random.randint(2, 20)))
 
         return tempLevel

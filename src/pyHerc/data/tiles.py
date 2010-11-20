@@ -28,7 +28,9 @@ wall_rock = 101
 wall_brick = 102
 wall_wood = 103
 
-human_fighter = 200
+portal_stairs = 200
 
-item_crystal_skull = 300
-item_apple = 301
+human_fighter = 300
+
+item_crystal_skull = 400
+item_apple = 401

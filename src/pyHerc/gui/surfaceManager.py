@@ -62,6 +62,9 @@ def loadResources():
         surface = pygame.image.load('C:/programming/pyHack/resources/wall_stone.png')
         __icons[data.tiles.wall_rock] = surface
 
+        surface = pygame.image.load('C:/programming/pyHack/resources/portal_stairs.png')
+        __icons[data.tiles.portal_stairs] = surface
+
         surface = pygame.image.load('C:/programming/pyHack/resources/item_apple.png')
         __icons[data.tiles.item_apple] = surface
 

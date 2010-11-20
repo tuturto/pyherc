@@ -3,7 +3,7 @@ Notes:
 Stuff to do:
 - stairs / portals
     + generating and linking levels
-    - walking up and down
+    + walking up and down
     - escaping from dungeon
         - end conditions for victory
 - timer for turns
@@ -16,6 +16,7 @@ Stuff to do:
     - descriptions
     - quotes
 - inventory handling
+    - paging
     - displaying descriptions
     - displaying item quotes
 

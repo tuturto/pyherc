@@ -99,8 +99,14 @@ class Level:
         self.portals.append(portal)
 
         if otherEnd != None:
+            assert(otherEnd.icon != None or portal.icon != None)
+
             portal.otherEnd = otherEnd
             otherEnd.otherEnd = portal
+            if portal.icon != None:
+                otherEnd.icon = portal.icon
+            else:
+                portal.icon = otherEnd.icon
 
     def getPortalAt(self, location):
         """
@@ -132,4 +138,5 @@ class Portal:
     def __init__(self):
         self.level = None
         self.location = ()
+        self.icon = None
         self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')

@@ -206,7 +206,7 @@ class GameWindow:
         self.background = surfaceManager.getImage(images.image_play_area)
         self.logger.debug('display initialised')
         self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
-                                    K_KP4:7, K_KP7:8}
+                                    K_KP4:7, K_KP7:8, K_KP5:9}
 
     def mainLoop(self):
         self.logger.debug('main loop starting')
@@ -277,6 +277,14 @@ class GameWindow:
                     sx = sx + 1
                 sy = sy + 1
                 sx = 0
+
+            #draw portals
+            for item in level.portals:
+                x = item.location[0] - player.location[0] + 12
+                y = item.location[1] - player.location[1] + 7
+                if x >= 0 and y >= 0 and x <= 24 and y <= 14:
+                    tile = surfaceManager.getIcon(item.icon)
+                    self.screen.blit(tile, (x * 32, y *32))
 
             #draw items
             for item in level.items:
