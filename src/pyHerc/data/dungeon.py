@@ -30,6 +30,7 @@ class Level:
         self.floor = None
         self.walls = None
         self.items = []
+        self.portals = []
         self.logger = logging.getLogger('pyHerc.data.dungeon.Level')
 
     def __init__(self, size, floorType, wallType):
@@ -53,6 +54,7 @@ class Level:
             self.walls.append(temp_row)
 
         self.items = []
+        self.portals = []
 
     def addItem(self, item, location):
         """
@@ -80,6 +82,26 @@ class Level:
                 items.append(item)
         return items
 
+    def addPortal(self, portal, location, otherEnd = None):
+        """
+        Adds precreated portal on level at given location
+        If secondary portal is specified, link them together
+        Parameters:
+            portal : portal to add
+            location : location where to add portal
+            otherEnd : optional other end of the portal
+        """
+        assert(portal != None)
+        assert(location != None)
+
+        portal.level = self
+        portal.location = location
+        self.portals.append(portal)
+
+        if otherEnd != None:
+            portal.otherEnd = otherEnd
+            otherEnd.otherEnd = portal
+
 class Dungeon:
     """
     Represents the dungeon
@@ -88,3 +110,13 @@ class Dungeon:
     def __init__(self):
         self.levels = None
         self.logger = logging.getLogger('pyHerc.data.dungeon.Dungeon')
+
+class Portal:
+    """
+    Portal linking two levels together
+    """
+
+    def __init__(self):
+        self.level = None
+        self.location = ()
+        self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')

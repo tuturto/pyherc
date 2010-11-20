@@ -20,6 +20,7 @@
 
 import pyHerc
 from pyHerc.data.dungeon import Level
+from pyHerc.data.dungeon import Portal
 from pyHerc.data import tiles
 
 class test_dungeon:
@@ -29,3 +30,24 @@ class test_dungeon:
         assert not (level is None)
         assert (level.floor[5][5] == tiles.floor_rock)
         assert(level.walls[0][0] == tiles.wall_empty)
+
+    def test_StairLinking(self):
+        level1 = Level([20, 20], tiles.floor_rock, tiles.wall_empty)
+        level2 = Level([20, 20], tiles.floor_rock, tiles.wall_empty)
+
+        stairs1 = Portal()
+        level1.addPortal(stairs1, (10, 10))
+
+        stairs2 = Portal()
+        level2.addPortal(stairs2, (5, 5), stairs1)
+
+        assert(stairs1.level == level1)
+        assert(stairs1.location == (10, 10))
+        assert(stairs1.otherEnd == stairs2)
+
+        assert(stairs2.level == level2)
+        assert(stairs2.location == (5, 5))
+        assert(stairs2.otherEnd == stairs1)
+
+        assert(stairs1 in level1.portals)
+        assert(stairs2 in level2.portals)
