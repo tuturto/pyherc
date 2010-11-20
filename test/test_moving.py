@@ -39,6 +39,7 @@ class test_moving:
         self.level1 = generator.generateLevel(None, self.model)
         self.level2 = generator.generateLevel(None, self.model)
         self.portal1 = Portal()
+        self.portal1.icon = pyHerc.data.tiles.portal_stairs
         self.portal2 = Portal()
 
         self.level1.addPortal(self.portal1, (5, 5))

@@ -139,4 +139,6 @@ class Portal:
         self.level = None
         self.location = ()
         self.icon = None
+        self.otherEnd = None
+        self.questEnd = 0
         self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')

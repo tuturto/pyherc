@@ -36,6 +36,7 @@ class test_dungeon:
         level2 = Level([20, 20], tiles.floor_rock, tiles.wall_empty)
 
         stairs1 = Portal()
+        stairs1.icon = tiles.portal_stairs
         level1.addPortal(stairs1, (10, 10))
 
         stairs2 = Portal()
