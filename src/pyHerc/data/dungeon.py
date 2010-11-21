@@ -31,6 +31,7 @@ class Level:
         self.walls = None
         self.items = []
         self.portals = []
+        self.creatures = []
         self.logger = logging.getLogger('pyHerc.data.dungeon.Level')
 
     def __init__(self, size, floorType, wallType):
@@ -55,6 +56,7 @@ class Level:
 
         self.items = []
         self.portals = []
+        self.creatures = []
 
     def addItem(self, item, location):
         """
@@ -120,6 +122,14 @@ class Level:
                 return portal
 
         return None
+
+    def addCreature(self, creature, location = None):
+        assert(creature != None)
+
+        self.creatures.append(creature)
+        creature.level = self
+        if location != None:
+            creature.location = location
 
 class Dungeon:
     """

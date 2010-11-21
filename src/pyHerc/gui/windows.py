@@ -255,6 +255,13 @@ class GameWindow:
             #only update the screen when player actually is on a level (prevents problems when exiting the dungeon)
             if self.application.world.player.level != None:
                 self.__updateDisplay()
+
+                for creature in self.application.world.player.level.creatures:
+                    if hasattr(creature, 'act'):
+                        creature.act()
+                        #TODO: set dirty rectangles
+                        self.__updateDisplay()
+
         self.logger.debug('main loop finished')
 
     def __updateDisplay(self):
@@ -296,6 +303,14 @@ class GameWindow:
 
             #draw items
             for item in level.items:
+                x = item.location[0] - player.location[0] + 12
+                y = item.location[1] - player.location[1] + 7
+                if x >= 0 and y >= 0 and x <= 24 and y <= 14:
+                    tile = surfaceManager.getIcon(item.icon)
+                    self.screen.blit(tile, (x * 32, y *32))
+
+            #draw creatures
+            for item in level.creatures:
                 x = item.location[0] - player.location[0] + 12
                 y = item.location[1] - player.location[1] + 7
                 if x >= 0 and y >= 0 and x <= 24 and y <= 14:

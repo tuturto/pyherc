@@ -69,7 +69,7 @@ def createCharacter(race, kit):
     global race_stats
     global kit_stats
     global __logger
-
+    #TODO: change to use rules.tables
     __logger.debug('creating a new character: ' + race + " " + kit)
 
     if race_stats == None:

@@ -28,6 +28,7 @@ food = {}
 specialItems = {}
 weapons = {}
 characters = {}
+creatures = {}
 kits = {}
 
 def loadTables():
@@ -46,3 +47,13 @@ def loadTables():
     specialItems['crystal skull'] = {'name' : 'Crystal skull',
                                                         'questItem' : 1,
                                                         'icon' : pyHerc.data.tiles.item_crystal_skull}
+
+    creatures['rat'] = {'name' : 'rat',
+                                    'str' : 4,
+                                    'dex' : 12,
+                                    'con' : 4,
+                                    'int' : 2,
+                                    'wis' : 4,
+                                    'cha' : 4,
+                                    'hp' : 2,
+                                    'icon' : pyHerc.data.tiles.creature_rat}

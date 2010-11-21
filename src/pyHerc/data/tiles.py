@@ -32,5 +32,7 @@ portal_stairs = 200
 
 human_fighter = 300
 
-item_crystal_skull = 400
-item_apple = 401
+creature_rat = 400
+
+item_crystal_skull = 500
+item_apple = 501

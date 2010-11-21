@@ -22,6 +22,7 @@ import os, sys
 import logging
 import random
 import pyHerc.generators.item
+import pyHerc.generators.creature
 from pyHerc.data.dungeon import Level
 from pyHerc.data.dungeon import Dungeon
 from pyHerc.data.dungeon import Portal
@@ -65,6 +66,7 @@ class TestLevelGenerator:
     def __init__(self):
         self.logger = logging.getLogger('pyHerc.generators.dungeon.TestLevelGenerator')
         self.itemGenerator = pyHerc.generators.item.ItemGenerator()
+        self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator()
 
     def generateLevel(self, portal, model, newPortals = 0):
         """
@@ -93,6 +95,13 @@ class TestLevelGenerator:
             tempItem.location = (random.randint(2, 20), random.randint(2, 20))
             tempLevel.items.append(tempItem)
 
+        #enter few rats
+        for i in range(0, 5):
+            #TODO: better placement algorithm
+            tempCreature = self.creatureGenerator.generateCreature({'name':'rat'})
+            tempLevel.addCreature(tempCreature, (random.randint(2, 20), random.randint(2, 20)))
+
+        #set portals
         if portal != None:
             newPortal = pyHerc.data.dungeon.Portal()
             tempLevel.addPortal(newPortal, (random.randint(2, 20), random.randint(2, 20)), portal)

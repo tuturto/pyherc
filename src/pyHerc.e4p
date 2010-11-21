@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHerc -->
-<!-- Saved: 2010-11-20, 19:15:15 -->
+<!-- Saved: 2010-11-21, 14:53:13 -->
 <!-- Copyright (C) 2010 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -33,6 +33,7 @@
     <Source>pyHerc/gui/dialogs.py</Source>
     <Source>pyHerc/rules/tables.py</Source>
     <Source>pyHerc/rules/ending.py</Source>
+    <Source>pyHerc/generators/creature.py</Source>
   </Sources>
   <Forms>
   </Forms>
