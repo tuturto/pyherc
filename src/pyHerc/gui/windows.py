@@ -256,9 +256,10 @@ class GameWindow:
             if self.application.world.player.level != None:
                 self.__updateDisplay()
 
+                #TODO: this is running continuously, figure out better way
                 for creature in self.application.world.player.level.creatures:
                     if hasattr(creature, 'act'):
-                        creature.act()
+                        creature.act(self.application.world)
                         #TODO: set dirty rectangles
                         self.__updateDisplay()
 

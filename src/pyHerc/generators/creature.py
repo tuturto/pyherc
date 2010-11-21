@@ -18,8 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+import types
 import os, sys
 import logging
+import pyHerc.ai.simple
 import pyHerc.data.model
 import pyHerc.rules.tables
 from pyHerc.data import tiles
@@ -71,6 +73,7 @@ class CreatureGenerator:
         newCreature.wis = table['wis']
         newCreature.cha = table['cha']
         newCreature.hp = table['hp']
-        #TODO: AI
+        #TODO: AI from tables
+        newCreature.act = types.MethodType(pyHerc.ai.simple.proofOfConcept, newCreature, pyHerc.data.model.Character)
 
         return newCreature
