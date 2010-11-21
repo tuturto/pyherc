@@ -69,14 +69,25 @@ def checkMove(model, character, direction):
     assert(direction >= 1 and direction <= 9)
 
     locationData = __calculateNewLocation(character, direction)
-    newLocation = locationData['location']
-    newLevel = locationData['level']
 
-    if newLevel != None:
-        if newLevel.walls[newLocation[0]][newLocation[1]] == pyHerc.data.tiles.wall_empty:
-            locationData['ok'] = 1
+    if 'location' in locationData.keys() and 'level' in locationData.keys():
+        newLocation = locationData['location']
+        newLevel = locationData['level']
+
+        if newLevel != None:
+            if newLevel.walls[newLocation[0]][newLocation[1]] == pyHerc.data.tiles.wall_empty:
+                locationData['ok'] = 1
+            else:
+                locationData['ok'] = 0
         else:
-            locationData['ok'] = 0
+            #is this player escaping?
+            if character == model.player:
+                model.player.location = ()
+                model.player.level = None
+                model.endCondition = 1
+                locationData['ok'] = 1
+            else:
+                locationData['ok'] = 0
     else:
         locationData['ok'] = 0
 
@@ -118,11 +129,15 @@ def __calculateNewLocation(character, direction):
     elif direction == 9:
         portal = newLevel.getPortalAt(location)
         if portal != None:
-            newLevel = portal.otherEnd.level
-            newLocation = portal.otherEnd.location
+            if portal.otherEnd != None:
+                newLevel = portal.otherEnd.level
+                newLocation = portal.otherEnd.location
+            else:
+                #escaping perhaps?
+                newLevel = None
+                newLocation = None
         else:
-            newLevel = None
-            newLocation = None
+            return {}
 
     return {'location':newLocation,
                 'level':newLevel}

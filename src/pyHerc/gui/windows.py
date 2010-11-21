@@ -252,7 +252,9 @@ class GameWindow:
                         for item in dropItems:
                             pyHerc.rules.items.drop(model, player, item)
 
-            self.__updateDisplay()
+            #only update the screen when player actually is on a level (prevents problems when exiting the dungeon)
+            if self.application.world.player.level != None:
+                self.__updateDisplay()
         self.logger.debug('main loop finished')
 
     def __updateDisplay(self):

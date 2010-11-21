@@ -24,6 +24,7 @@ import random
 import pyHerc.generators.item
 from pyHerc.data.dungeon import Level
 from pyHerc.data.dungeon import Dungeon
+from pyHerc.data.dungeon import Portal
 from pyHerc.data import tiles
 
 class DungeonGenerator:
@@ -42,10 +43,18 @@ class DungeonGenerator:
         model.dungeon = Dungeon()
         generator = TestLevelGenerator()
         level = generator.generateLevel(None, model, 2)
-
-        self.logger.debug('generating ' + len(level.portals).__str__() + ' sub levels')
         for portal in level.portals:
             newLevel = generator.generateLevel(portal, model)
+
+        #add crystal skull to end level
+        itemGenerator = pyHerc.generators.item.ItemGenerator()
+        skull = itemGenerator.generateSpecialItem({'name':'crystal skull'})
+        newLevel.addItem(skull, (5, 5))
+
+        escapePortal = Portal()
+        escapePortal.icon = pyHerc.data.tiles.portal_stairs
+        escapePortal.otherEnd = None
+        level.addPortal(escapePortal, (1, 1))
 
         model.dungeon.levels = level
 

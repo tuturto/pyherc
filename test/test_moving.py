@@ -79,3 +79,15 @@ class test_moving:
 
         assert(self.character.location == (10, 10))
         assert(self.character.level == self.level2)
+
+    def test_enteringNonExistentPortal(self):
+        """
+        Test that character can change level via portal
+        """
+        self.character.location = (6, 3)
+        assert(self.character.level == self.level1)
+
+        pyHerc.rules.moving.move(self.model, self.character, 9)
+
+        assert(self.character.location == (6, 3))
+        assert(self.character.level == self.level1)

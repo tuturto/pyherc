@@ -47,7 +47,7 @@ def checkResult(model):
     elif model.player.level == None:
         #escaped or victory
         for item in model.player.inventory:
-            if item.name == 'crystal skull':
+            if item.name == 'Crystal skull':
                 #victory
                 result['reason'] = 'victory'
         if not 'reason' in result.keys():

@@ -1,11 +1,6 @@
 Notes:
 
 Stuff to do:
-- stairs / portals
-    + generating and linking levels
-    + walking up and down
-    - escaping from dungeon
-        - end conditions for victory
 - timer for turns
 - monsters
     - generating
@@ -15,10 +10,19 @@ Stuff to do:
     - better positioning on levels
     - descriptions
     - quotes
+    - value
+    - icons
+        - single / plural
+        - variations
 - inventory handling
     - paging
     - displaying descriptions
     - displaying item quotes
+- user interface
+    - end screen
+        - result
+        - score
+        - tombstone
 
 Stuff Done:
 + Items
@@ -28,3 +32,8 @@ Stuff Done:
     + put down
     + generic list window
     + view inventory
++ stairs / portals
+    + generating and linking levels
+    + walking up and down
+    + escaping from dungeon
+        + end conditions for victory
