@@ -68,6 +68,8 @@ class Level:
         assert(not item == None)
         assert(not location == None)
 
+        self.logger.debug('adding an item: ' + item.__str__() +
+                                ' to location: ' + location.__str__())
         self.items.append(item)
         item.location = location
 
@@ -95,6 +97,8 @@ class Level:
         """
         assert(portal != None)
         assert(location != None)
+
+        self.logger.debug('adding a portal to location: ' + location.__str__())
 
         portal.level = self
         portal.location = location
@@ -124,7 +128,15 @@ class Level:
         return None
 
     def addCreature(self, creature, location = None):
+        """
+        Add a creature to level
+        Parameters:
+            creature : creature to add
+            location : optional location for the creature
+        """
         assert(creature != None)
+
+        self.logger.debug('adding a creature: ' + creature.__str__())
 
         self.creatures.append(creature)
         creature.level = self

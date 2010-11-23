@@ -23,6 +23,15 @@ Stuff to do:
         - result
         - score
         - tombstone
+- line of sight
+- weapons
+- armour
+- spells
+- potions
+- catacombs level generator
+    - generate first 5 levels of the game
+- level generator proxy
+
 
 Stuff Done:
 + Items
