@@ -1,9 +1,9 @@
 Notes:
 
 Stuff to do:
-- timer for turns
++ timer for turns
 - monsters
-    - generating
+    + generating
     - AI
 - fighting
 - items

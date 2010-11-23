@@ -20,3 +20,4 @@
 
 def proofOfConcept(self, model):
     print('hello world')
+    self.tick = self.tick + 10

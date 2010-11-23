@@ -56,4 +56,4 @@ def getNewTick(character, cost):
     assert(character != None)
     assert(cost != None)
 
-    return character.speed * cost
+    return character.tick + (character.speed * cost)

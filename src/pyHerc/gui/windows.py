@@ -30,6 +30,7 @@ import data.model
 import data.tiles
 import pyHerc.rules.items
 import pyHerc.rules.ending
+import pyHerc.rules.time
 import generators.dungeon
 from pygame.locals import *
 
@@ -215,14 +216,16 @@ class GameWindow:
         self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
                                     K_KP4:7, K_KP7:8, K_KP5:9}
 
-    def mainLoop(self):
-        self.logger.debug('main loop starting')
-        while self.application.world.endCondition == 0 and self.application.running:
-            #TODO: implement
-            for event in pygame.event.get():
-                model = self.application.world
-                player = model.player
+    def __handlePlayerInput(self):
+        """
+        Handle player input
+        """
+        model = self.application.world
+        player = model.player
+        playerTick = player.tick
 
+        for event in pygame.event.get():
+            if playerTick == player.tick:
                 if event.type == pygame.QUIT:
                     self.logger.info('Quit received, exiting')
                     self.application.running = 0
@@ -251,13 +254,24 @@ class GameWindow:
                         dropItems = dialog.show(player.inventory)
                         for item in dropItems:
                             pyHerc.rules.items.drop(model, player, item)
+            else:
+                return
 
-            #only update the screen when player actually is on a level (prevents problems when exiting the dungeon)
-            if self.application.world.player.level != None:
-                self.__updateDisplay()
+    def mainLoop(self):
+        self.logger.debug('main loop starting')
+        while self.application.world.endCondition == 0 and self.application.running:
+            #TODO: implement
 
-                #TODO: this is running continuously, figure out better way
-                for creature in self.application.world.player.level.creatures:
+            model = self.application.world
+
+            creature = pyHerc.rules.time.getNextCreature(model)
+
+            if creature == model.player:
+                self.__handlePlayerInput()
+                if self.application.world.player.level != None:
+                    self.__updateDisplay()
+            else:
+                if self.application.world.player.level != None:
                     if hasattr(creature, 'act'):
                         creature.act(self.application.world)
                         #TODO: set dirty rectangles

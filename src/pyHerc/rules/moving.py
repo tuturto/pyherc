@@ -20,6 +20,7 @@
 
 import os, sys
 import logging
+import time
 import pyHerc.data.model
 import pyHerc.data.tiles
 
@@ -48,6 +49,7 @@ def move(model, character, direction):
     if moveData['ok'] == 1:
         character.location = moveData['location']
         character.level = moveData['level']
+        character.tick = time.getNewTick(character, 2)
 
     __logger.debug('move finished at ' + character.location.__str__())
 

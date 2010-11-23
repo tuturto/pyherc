@@ -21,6 +21,7 @@
 import os, sys
 import logging
 import pyHerc.data.model
+import time
 
 __logger = logging.getLogger('pyHerc.rules.items')
 
@@ -42,6 +43,7 @@ def pickUp(model, character, item):
     character.level.items.remove(item)
     character.inventory.append(item)
     item.location = ()
+    character.tick = time.getNewTick(character, 1.5)
 
     __logger.debug('item picked up')
 
@@ -62,5 +64,6 @@ def drop(model, character, item):
 
     character.level.addItem(item, character.location)
     character.inventory.remove(item)
+    character.tick = time.getNewTick(character, 1.5)
 
     __logger.debug('item dropped')
