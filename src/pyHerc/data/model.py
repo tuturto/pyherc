@@ -60,12 +60,15 @@ class Character:
         self.race = None
         self.kit = None
         self.hp = None
+        self.speed = None
         self.inventory = []
         #location
         self.level = None
         self.location = ()
         #icon
         self.icon = None
+        #internal
+        self.tick = 0
 
     def __str__(self):
         return self.name

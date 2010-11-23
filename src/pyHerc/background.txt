@@ -1,0 +1,27 @@
+Thynian lush jungle
+==============
+ - hidden ruins of the city Herculeum
+   - under the city are catacombs that continue deep inside of earth
+   - catacombs connect to vast network of caves
+   - nobody really knows how far they reach
+ - ruins of Herculeum are inhabited by several tribes
+   - each tribe has their own turf and they battle constantly with each other
+   - live sacrifices to attain favours from old gods
+
+- Inquisition
+  - hunting witches that have following in Herculeum
+  - hunting daemons that live underneath
+
+- Ruins are filled with ancient artefacts
+  - adventurers try to seek them
+  - some have been uncovered
+    - mechanical devices showing position of sun, moon and planets
+    - engraved discs containing descriptions of strange items and diagrams of planetary motions
+
+Character classes
+=============
+Inquisitor
+    - Acolyte, Inquisitor, Ordo Hereticus / Ordo Malleus Inquisitor Lord
+    - accompanied by familiar
+Fighter
+    - accompanied by dog

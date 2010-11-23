@@ -56,4 +56,5 @@ def loadTables():
                                     'wis' : 4,
                                     'cha' : 4,
                                     'hp' : 2,
+                                    'speed' : 2,
                                     'icon' : pyHerc.data.tiles.creature_rat}
