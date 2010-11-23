@@ -78,7 +78,13 @@ def checkMove(model, character, direction):
 
         if newLevel != None:
             if newLevel.walls[newLocation[0]][newLocation[1]] == pyHerc.data.tiles.wall_empty:
+                #check for other creatures and such
                 locationData['ok'] = 1
+                creatures = newLevel.creatures[:]
+                creatures.append(model.player)
+                for creature in creatures:
+                    if creature.location == newLocation:
+                        locationData['ok'] = 0
             else:
                 locationData['ok'] = 0
         else:
