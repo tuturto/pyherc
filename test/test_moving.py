@@ -49,6 +49,8 @@ class test_moving:
 
         self.character.location = (5, 5)
         self.character.level = self.model.dungeon.levels
+        self.character.speed = 1
+        self.character.tick = 1
 
     def test_simpleMoving(self):
         """

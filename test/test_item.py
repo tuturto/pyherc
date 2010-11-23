@@ -46,6 +46,8 @@ class test_Item:
         self.character.location = (5, 5)
         self.character.name = 'Timothy Tester'
         self.character.level = self.level
+        self.character.speed = 1
+        self.character.tick = 1
 
         self.level.addItem(self.item, (5, 5))
 
