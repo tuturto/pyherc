@@ -81,7 +81,8 @@ def checkMove(model, character, direction):
                 #check for other creatures and such
                 locationData['ok'] = 1
                 creatures = newLevel.creatures[:]
-                creatures.append(model.player)
+                if model.player != None:
+                    creatures.append(model.player)
                 for creature in creatures:
                     if creature.location == newLocation:
                         locationData['ok'] = 0
