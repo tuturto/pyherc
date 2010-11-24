@@ -30,12 +30,18 @@ weapons = {}
 characters = {}
 creatures = {}
 kits = {}
+sizeModifier = {}
+attributeModifier = []
 
 def loadTables():
     """
     Initialise tables
     """
-    global __food
+    global food
+    global specialItems
+    global creatures
+    global sizeModifier
+    global attributeModifier
     global __initialised
 
     if __initialised:
@@ -57,4 +63,10 @@ def loadTables():
                                     'cha' : 4,
                                     'hp' : 2,
                                     'speed' : 2,
-                                    'icon' : pyHerc.data.tiles.creature_rat}
+                                    'icon' : pyHerc.data.tiles.creature_rat,
+                                    'attack' : '1d4'}
+
+    sizeModifier = {'colossal' :  -8, 'gargantuan' : -4, 'huge' : -2, 'large' : -1,
+                            'medium' : 0, 'small' : 1, 'tiny' : 2, 'diminutive' : 4, 'fine' : 8}
+
+    attributeModifier = [-6, -5, -4, -4, -3, -3, -2, -2, -1, -1, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
