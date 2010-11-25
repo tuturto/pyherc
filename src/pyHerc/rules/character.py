@@ -91,6 +91,7 @@ def createCharacter(race, kit):
     newCharacter.speed = temp_race['speed'] + temp_kit['speed']
     #TODO: implement properly
     newCharacter.size = 'medium'
+    newCharacter.attack = '1d3'
 
     newCharacter.icon = __getIcon(race, kit)
 

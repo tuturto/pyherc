@@ -136,7 +136,11 @@ class Level:
         """
         assert(creature != None)
 
-        self.logger.debug('adding a creature: ' + creature.__str__())
+        if location == None:
+            self.logger.debug('adding ' + creature.__str__())
+        else:
+            self.logger.debug('adding ' + creature.__str__()
+                              + ' to location ' + location.__str__())
 
         self.creatures.append(creature)
         creature.level = self
@@ -156,6 +160,21 @@ class Level:
         self.creatures.remove(creature)
         creature.level = None
         creature.location = ()
+
+    def getCreatureAt(self, location):
+        """
+        Get list of creatures at given location
+        Parameters:
+            location : location to check
+        Returns:
+            creature if found
+        """
+        assert(location != None)
+        for creature in self.creatures:
+            if creature.location == location:
+                return creature
+
+        return None
 
 
 class Dungeon:

@@ -31,6 +31,7 @@ import data.tiles
 import pyHerc.rules.items
 import pyHerc.rules.ending
 import pyHerc.rules.time
+import pyHerc.rules.combat
 import generators.dungeon
 from pygame.locals import *
 
@@ -235,7 +236,17 @@ class GameWindow:
                         self.application.world.endCondition = 1
                     elif event.key in self.moveKeyMap.keys():
                         #handle moving
-                        rules.moving.move(model, player, self.moveKeyMap[event.key])
+                        direction = self.moveKeyMap[event.key]
+                        if rules.moving.checkMove(model, player, direction)['ok']:
+                            #check in case player escaped
+                            if player.level != None:
+                                rules.moving.move(model, player, direction)
+                        else:
+                            targetLocation = rules.moving.calculateNewLocation(player, direction)
+                            if 'location' in targetLocation.keys():
+                                target = player.level.getCreatureAt(targetLocation['location'])
+                                if target != None:
+                                    pyHerc.rules.combat.meleeAttack(model, player, target)
                     elif event.key == K_PERIOD:
                         #pick up items
                         items = player.level.getItemsAt(player.location)

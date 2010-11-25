@@ -48,7 +48,9 @@ def move(model, character, direction):
 
     if moveData['ok'] == 1:
         character.location = moveData['location']
+        assert(character.level != None)
         character.level = moveData['level']
+        assert(character.level != None)
         character.tick = time.getNewTick(character, 2)
 
     __logger.debug('move finished at ' + character.location.__str__())
@@ -70,7 +72,7 @@ def checkMove(model, character, direction):
     assert(not character == None)
     assert(direction >= 1 and direction <= 9)
 
-    locationData = __calculateNewLocation(character, direction)
+    locationData = calculateNewLocation(character, direction)
 
     if 'location' in locationData.keys() and 'level' in locationData.keys():
         newLocation = locationData['location']
@@ -102,7 +104,7 @@ def checkMove(model, character, direction):
 
     return locationData
 
-def __calculateNewLocation(character, direction):
+def calculateNewLocation(character, direction):
     """
     Calculate new location if moving from old to certain direction
     Params:
@@ -113,9 +115,9 @@ def __calculateNewLocation(character, direction):
             level : level where move ends
             location : location within that level
     """
-    assert(not character == None)
+    assert(character != None)
     assert(direction >= 1 and direction <= 9)
-
+    assert(character.level != None)
     location = character.location
     newLevel = character.level
 

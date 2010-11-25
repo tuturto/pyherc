@@ -90,6 +90,8 @@ class test_meleeCombat:
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
         character.attack = '1d4'
+        character.speed = 1
+        character.tick = 0
 
         model = pyHerc.data.model.Model()
         target = pyHerc.data.model.Character()
@@ -105,6 +107,8 @@ class test_meleeCombat:
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
         character.attack = '1d4'
+        character.speed = 1
+        character.tick = 0
 
         model = pyHerc.data.model.Model()
         target = pyHerc.data.model.Character()
