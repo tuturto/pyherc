@@ -20,6 +20,7 @@
 
 # def getDamageInMelee(model, attacker, target, dice = []):
 
+from pyHerc.data.dungeon import Level
 import pyHerc.rules.combat
 import pyHerc.data.model
 
@@ -83,3 +84,38 @@ class test_meleeCombat:
         target.dex = 10 # no bonus
 
         damage = pyHerc.rules.combat.getDamageInMelee(model, character, target)
+
+    def test_melee(self):
+        character = pyHerc.data.model.Character()
+        character.size = 'tiny' # +2 bonus
+        character.str = 16 # +3 bonus
+        character.attack = '1d4'
+
+        model = pyHerc.data.model.Model()
+        target = pyHerc.data.model.Character()
+        target.size = 'medium' # +0 bonus
+        target.dex = 10 # no bonus
+        target.hp = 10
+
+        pyHerc.rules.combat.meleeAttack(model, character, target, dice = [4, 19])
+        assert(target.hp == 3) # 10 - 4 - 3 (hp - damage roll - str bonus)
+
+    def test_dyingInMelee(self):
+        character = pyHerc.data.model.Character()
+        character.size = 'tiny' # +2 bonus
+        character.str = 16 # +3 bonus
+        character.attack = '1d4'
+
+        model = pyHerc.data.model.Model()
+        target = pyHerc.data.model.Character()
+        target.size = 'medium' # +0 bonus
+        target.dex = 10 # no bonus
+        target.hp = 5
+
+        level = Level([20, 20], 0, 0)
+        level.addCreature(character)
+        level.addCreature(target)
+
+        pyHerc.rules.combat.meleeAttack(model, character, target, dice = [4, 19])
+        assert(target.hp == -2) # 5 - 4 - 3 (hp - damage roll - str bonus)
+        assert(not target in level.creatures)

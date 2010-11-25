@@ -74,6 +74,8 @@ class CreatureGenerator:
         newCreature.cha = table['cha']
         newCreature.hp = table['hp']
         newCreature.speed = table['speed']
+        newCreature.size = table['size']
+        newCreature.attack = table['attack']
         #TODO: AI from tables
         newCreature.act = types.MethodType(pyHerc.ai.simple.flockingHerbivore, newCreature, pyHerc.data.model.Character)
 

@@ -89,6 +89,8 @@ def createCharacter(race, kit):
     newCharacter.cha = temp_race['cha'] + temp_kit['cha']
     newCharacter.hp = temp_race['hp'] + temp_kit['hp']
     newCharacter.speed = temp_race['speed'] + temp_kit['speed']
+    #TODO: implement properly
+    newCharacter.size = 'medium'
 
     newCharacter.icon = __getIcon(race, kit)
 

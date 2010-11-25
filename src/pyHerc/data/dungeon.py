@@ -143,6 +143,21 @@ class Level:
         if location != None:
             creature.location = location
 
+    def removeCreature(self, creature):
+        """
+        Remove creature from level
+        Parameters:
+            creature : creature to remove
+        """
+        assert(creature != None)
+        assert(creature in self.creatures)
+        self.logger.debug('removing a creature: ' + creature.__str__())
+
+        self.creatures.remove(creature)
+        creature.level = None
+        creature.location = ()
+
+
 class Dungeon:
     """
     Represents the dungeon

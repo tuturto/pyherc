@@ -21,6 +21,7 @@
 import math
 import pyHerc.ai.simple
 import pyHerc.rules.moving
+import pyHerc.rules.combat
 
 def proofOfConcept(self, model):
     print('hello world')
@@ -64,7 +65,7 @@ def flockingHerbivore(self, model):
                     self.tick = self.tick + 10
             else:
                 #attack
-                self.tick = self.tick + 10
+                pyHerc.rules.combat.meleeAttack(model, self, model.player)
         else:
             #find direction
             direction = pyHerc.ai.simple.findDirection(self.location, closestCreature.location)

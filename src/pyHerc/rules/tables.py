@@ -64,7 +64,8 @@ def loadTables():
                                     'hp' : 2,
                                     'speed' : 2,
                                     'icon' : pyHerc.data.tiles.creature_rat,
-                                    'attack' : '1d4'}
+                                    'attack' : '1d4',
+                                    'size' : 'small'}
 
     sizeModifier = {'colossal' :  -8, 'gargantuan' : -4, 'huge' : -2, 'large' : -1,
                             'medium' : 0, 'small' : 1, 'tiny' : 2, 'diminutive' : 4, 'fine' : 8}

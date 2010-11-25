@@ -39,7 +39,7 @@ def checkResult(model):
             dead reason : if player died, string explaining the reason
     """
     result = {}
-    if model.player.hp < 0:
+    if model.player.hp <= 0:
         #player has died
         result['reason'] = 'dead'
         #TODO: implement correct reason
