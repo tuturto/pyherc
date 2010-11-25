@@ -53,3 +53,33 @@ class test_meleeCombat:
 
         hit = pyHerc.rules.combat.checkHitInMelee(model, character, target, [16])
         assert(hit == 1)
+
+    def test_getDamageInMelee_simple(self):
+        #def getDamageInMelee(model, attacker, target, dice = []):
+        character = pyHerc.data.model.Character()
+        character.size = 'tiny' # +2 bonus
+        character.str = 16 # +3 bonus
+
+        model = pyHerc.data.model.Model()
+        target = pyHerc.data.model.Character()
+        target.size = 'medium' # +0 bonus
+        target.dex = 10 # no bonus
+
+        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [5])
+        assert(damage == 8)
+
+    def test_getDamageInMelee_noPrerolls(self):
+        """
+        Just simple test that damage in melee is possible without prerolled scores
+        """
+        character = pyHerc.data.model.Character()
+        character.size = 'tiny' # +2 bonus
+        character.str = 16 # +3 bonus
+        character.attack = '1d4'
+
+        model = pyHerc.data.model.Model()
+        target = pyHerc.data.model.Character()
+        target.size = 'medium' # +0 bonus
+        target.dex = 10 # no bonus
+
+        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target)

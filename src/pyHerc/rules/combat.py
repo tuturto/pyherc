@@ -20,6 +20,7 @@
 
 import logging
 import tables
+import utils
 import random
 
 def meleeAttack(model, attacker, target, dice = []):
@@ -31,13 +32,12 @@ def meleeAttack(model, attacker, target, dice = []):
         target : target of the attack
         dice : prerolled dice
     """
-    pass
     #attack roll (including bonuses)
     #if hit, deal damage
     #toHit = baseAttackBonus + modifiers - ac
     hit = checkHitInMelee(model, attacker, target, dice)
     if hit:
-        damage = getDamageInMelee(model, attacker, target, dice = [])
+        damage = getDamageInMelee(model, attacker, target, dice)
 
 def checkHitInMelee(model, attacker, target, dice = []):
     assert(model != None)
@@ -57,7 +57,17 @@ def checkHitInMelee(model, attacker, target, dice = []):
         return 0
 
 def getDamageInMelee(model, attacker, target, dice = []):
-    pass
+    assert(model != None)
+    assert(attacker != None)
+    assert(target != None)
+    assert(dice != None)
+
+    if len(dice) > 0:
+        damageRoll = dice.pop()
+    else:
+        damageRoll = utils.rollDice(attacker.attack)
+
+    return damageRoll + getAttributeModifier(attacker, 'str')
 
 def getMeleeAttackBonus(model, character):
     #Base attack bonus + Strength modifier + size modifier

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2010-11-24, 23:35:28 -->
+<!-- Saved: 2010-11-25, 20:54:53 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: take paging into account</Summary>
@@ -195,10 +195,10 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: take base attack bones into account</Summary>
     <Description></Description>
-    <Created>2010-11-24, 23:30:02</Created>
+    <Created>2010-11-25, 20:54:45</Created>
     <Resource>
       <Filename>pyHerc/rules/combat.py</Filename>
-      <Linenumber>64</Linenumber>
+      <Linenumber>74</Linenumber>
     </Resource>
   </Task>
 </Tasks>
