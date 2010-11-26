@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2010-11-25, 22:12:54 -->
+<!-- Saved: 2010-11-26, 00:47:25 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: take paging into account</Summary>
@@ -19,33 +19,6 @@
     <Resource>
       <Filename>pyHerc/gui/dialogs.py</Filename>
       <Linenumber>123</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: implement properly</Summary>
-    <Description></Description>
-    <Created>2010-11-23, 20:33:20</Created>
-    <Resource>
-      <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>82</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: better placement algorithm</Summary>
-    <Description></Description>
-    <Created>2010-11-23, 20:33:20</Created>
-    <Resource>
-      <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>93</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: better placement algorithm</Summary>
-    <Description></Description>
-    <Created>2010-11-23, 20:33:20</Created>
-    <Resource>
-      <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>100</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
@@ -73,33 +46,6 @@
     <Resource>
       <Filename>pyHerc/generators/item.py</Filename>
       <Linenumber>75</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: change to use rules.tables</Summary>
-    <Description></Description>
-    <Created>2010-11-25, 21:48:56</Created>
-    <Resource>
-      <Filename>pyHerc/rules/character.py</Filename>
-      <Linenumber>74</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: implement properly</Summary>
-    <Description></Description>
-    <Created>2010-11-25, 21:48:56</Created>
-    <Resource>
-      <Filename>pyHerc/rules/character.py</Filename>
-      <Linenumber>92</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: implement</Summary>
-    <Description></Description>
-    <Created>2010-11-25, 21:48:56</Created>
-    <Resource>
-      <Filename>pyHerc/rules/character.py</Filename>
-      <Linenumber>100</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
@@ -148,75 +94,129 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: use configuration</Summary>
+    <Summary>TODO: change to use rules.tables</Summary>
     <Description></Description>
-    <Created>2010-11-25, 22:11:09</Created>
+    <Created>2010-11-25, 22:36:05</Created>
     <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>100</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: implement</Summary>
-    <Description></Description>
-    <Created>2010-11-25, 22:11:09</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>138</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: display end screen here</Summary>
-    <Description></Description>
-    <Created>2010-11-25, 22:11:09</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>155</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: implement menu here</Summary>
-    <Description></Description>
-    <Created>2010-11-25, 22:11:09</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>185</Linenumber>
+      <Filename>pyHerc/rules/character.py</Filename>
+      <Linenumber>74</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement properly</Summary>
     <Description></Description>
-    <Created>2010-11-25, 22:11:09</Created>
+    <Created>2010-11-25, 22:36:05</Created>
     <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>190</Linenumber>
+      <Filename>pyHerc/rules/character.py</Filename>
+      <Linenumber>92</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement</Summary>
     <Description></Description>
-    <Created>2010-11-25, 22:11:09</Created>
+    <Created>2010-11-25, 22:36:05</Created>
+    <Resource>
+      <Filename>pyHerc/rules/character.py</Filename>
+      <Linenumber>101</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement properly</Summary>
+    <Description></Description>
+    <Created>2010-11-25, 22:54:06</Created>
+    <Resource>
+      <Filename>pyHerc/generators/dungeon.py</Filename>
+      <Linenumber>82</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: better placement algorithm</Summary>
+    <Description></Description>
+    <Created>2010-11-25, 22:54:06</Created>
+    <Resource>
+      <Filename>pyHerc/generators/dungeon.py</Filename>
+      <Linenumber>93</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: better placement algorithm</Summary>
+    <Description></Description>
+    <Created>2010-11-25, 22:54:06</Created>
+    <Resource>
+      <Filename>pyHerc/generators/dungeon.py</Filename>
+      <Linenumber>100</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: use configuration</Summary>
+    <Description></Description>
+    <Created>2010-11-25, 23:07:14</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>264</Linenumber>
+      <Linenumber>101</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement</Summary>
+    <Description></Description>
+    <Created>2010-11-25, 23:07:14</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>139</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: display end screen here</Summary>
+    <Description></Description>
+    <Created>2010-11-25, 23:07:14</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>156</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement menu here</Summary>
+    <Description></Description>
+    <Created>2010-11-25, 23:07:14</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>186</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement properly</Summary>
+    <Description></Description>
+    <Created>2010-11-25, 23:07:14</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>191</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement</Summary>
+    <Description></Description>
+    <Created>2010-11-25, 23:07:14</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>274</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: set dirty rectangles</Summary>
     <Description></Description>
-    <Created>2010-11-25, 22:11:09</Created>
+    <Created>2010-11-25, 23:07:14</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>278</Linenumber>
+      <Linenumber>288</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: make more generic</Summary>
     <Description></Description>
-    <Created>2010-11-25, 22:11:09</Created>
+    <Created>2010-11-25, 23:07:14</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>292</Linenumber>
+      <Linenumber>302</Linenumber>
     </Resource>
   </Task>
 </Tasks>

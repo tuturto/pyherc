@@ -14,10 +14,10 @@ Stuff to do:
     - displaying descriptions
     - displaying item quotes
 - user interface
-    - end screen
-        - result
+    + end screen
+        + result
         - score
-        - tombstone
+        + tombstone
     - character profile
     - character creation
 - line of sight

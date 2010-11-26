@@ -152,9 +152,9 @@ class StartMenu:
         newWindow.mainLoop()
         self.logger.info('game finished')
         if self.application.running:
-            self.logger.info('displaying end screen')
-            #TODO: display end screen here
-            self.logger.debug(pyHerc.rules.ending.checkResult(self.application.world))
+            endResult = pyHerc.rules.ending.checkResult(self.application.world)
+            dialog = dialogs.EndScreen(self.application, self.screen)
+            dialog.show(endResult)
 
 
     def __updateDisplay(self):

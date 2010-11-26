@@ -136,3 +136,74 @@ class Inventory:
             self.screen.blit(text, textRect)
 
         pygame.display.update()
+
+class EndScreen:
+
+    def __init__(self, application, screen):
+        assert(application != None)
+        assert(screen != None)
+        self.logger = logging.getLogger('pyHerc.gui.dialogs.EndScreen')
+        self.background = None
+        self.running = 1
+        self.application = application
+        self.screen = screen
+
+    def show(self, ending):
+        self.logger.info('showing the end screen')
+        self.logger.debug(ending)
+
+        font = pygame.font.Font(None, 18)
+        colour = (255, 255, 255)
+        model = self.application.world
+        player = model.player
+
+        if ending['reason'] == 'escaped':
+            self.background = surfaceManager.getImage(images.image_end_marble_slate)
+            self.screen.blit(self.background, (0, 0))
+            text = font.render(player.name + ' escaped from ruins', True, colour, (0, 0, 0))
+            textRect = text.get_rect()
+            textRect.center = (400, 200)
+            self.screen.blit(text, textRect)
+
+        elif ending['reason'] == 'victory':
+            self.background = surfaceManager.getImage(images.image_end_marble_slate)
+            self.screen.blit(self.background, (0, 0))
+            text = font.render(player.name + ' conquered the ruins', True, colour, (0, 0, 0))
+            textRect = text.get_rect()
+            textRect.center = (400, 200)
+            self.screen.blit(text, textRect)
+
+        elif ending['reason'] == 'dead':
+            self.background = surfaceManager.getImage(images.image_end_tombstone)
+            self.screen.blit(self.background, (0, 0))
+            text = font.render(player.name + ' died in ruins', True, colour, (0, 0, 0))
+            textRect = text.get_rect()
+            textRect.center = (400, 200)
+            self.screen.blit(text, textRect)
+            text = font.render(ending['dead reason'], True, colour, (0, 0, 0))
+            textRect = text.get_rect()
+            textRect.center = (400, 220)
+            self.screen.blit(text, textRect)
+        else:
+            #quit
+            self.background = surfaceManager.getImage(images.image_end_marble_slate)
+            self.screen.blit(self.background, (0, 0))
+            text = font.render(player.name + ' quit', True, colour, (0, 0, 0))
+            textRect = text.get_rect()
+            textRect.center = (400, 200)
+            self.screen.blit(text, textRect)
+
+        while self.running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.logger.info('Quit received, exiting')
+                    self.application.running = 0
+                    self.running = 0
+                if event.type == pygame.KEYDOWN:
+                    if event.key in (K_ESCAPE, K_RETURN, K_SPACE):
+                        self.running = 0
+
+            self.__updateScreen()
+
+    def __updateScreen(self):
+        pygame.display.update()
