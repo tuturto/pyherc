@@ -26,3 +26,4 @@ image_play_area = 4
 
 image_end_marble_slate = 5
 image_end_tombstone = 6
+image_console = 7

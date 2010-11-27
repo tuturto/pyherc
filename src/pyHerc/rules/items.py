@@ -40,6 +40,15 @@ def pickUp(model, character, item):
 
     __logger.debug(character.__str__() + ' picking up item: ' + item.__str__())
 
+    event = {}
+    event['type'] = 'item'
+    event['pick up'] = 1
+    event['character'] = character
+    event['item'] = item
+    event['location'] = character.location
+    event['level'] = character.level
+    model.raiseEvent(event)
+
     character.level.items.remove(item)
     character.inventory.append(item)
     item.location = ()
@@ -61,6 +70,15 @@ def drop(model, character, item):
     assert(item in character.inventory)
 
     __logger.debug(character.__str__() + ' dropping item ' + item.__str__())
+
+    event = {}
+    event['type'] = 'item'
+    event['drop'] = 1
+    event['character'] = character
+    event['item'] = item
+    event['location'] = character.location
+    event['level'] = character.level
+    model.raiseEvent(event)
 
     character.level.addItem(item, character.location)
     character.inventory.remove(item)

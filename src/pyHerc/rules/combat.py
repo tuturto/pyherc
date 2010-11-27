@@ -40,8 +40,17 @@ def meleeAttack(model, attacker, target, dice = []):
     assert(target != None)
     assert(dice != None)
 
+    event = {}
+    event['type'] = 'melee'
+    event['attacker'] = attacker
+    event['target'] = target
+    event['location'] = attacker.location
+    event['level'] = attacker.level
+
     __logger.debug(attacker.__str__() + ' is attacking ' + target.__str__())
     hit = checkHitInMelee(model, attacker, target, dice)
+
+    event['hit'] = hit
 
     if hit:
         __logger.debug('attack hits')
@@ -50,11 +59,19 @@ def meleeAttack(model, attacker, target, dice = []):
         if damage < 1:
             damage = 1
         __logger.debug('attack does ' + damage.__str__() + ' points of damage')
+        event['damage'] = damage
         target.hp = target.hp - damage
         __logger.debug(target.__str__() + ' has ' + target.hp.__str__() + ' hp left')
+        model.raiseEvent(event)
 
         if target.hp <= 0:
             __logger.debug(target.__str__() + ' has died')
+            event = {}
+            event['type'] = 'death'
+            event['character'] = target
+            event['location'] = target.location
+            event['level'] = target.level
+            model.raiseEvent(event)
             #TODO: implement leaving corpse
             if target != model.player:
                 target.level.removeCreature(target)
@@ -62,6 +79,7 @@ def meleeAttack(model, attacker, target, dice = []):
                 model.endCondition = 1
     else:
         __logger.debug('attack misses')
+        model.raiseEvent(event)
 
     attacker.tick = time.getNewTick(attacker, 6)
 

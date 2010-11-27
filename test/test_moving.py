@@ -36,8 +36,8 @@ class test_moving:
         generator = TestLevelGenerator()
 
         self.model.dungeon = Dungeon()
-        self.level1 = generator.generateLevel(None, self.model)
-        self.level2 = generator.generateLevel(None, self.model)
+        self.level1 = generator.generateLevel(None, self.model, monsterList = [])
+        self.level2 = generator.generateLevel(None, self.model, monsterList = [])
         self.portal1 = Portal()
         self.portal1.icon = pyHerc.data.tiles.portal_stairs
         self.portal2 = Portal()

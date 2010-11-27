@@ -36,6 +36,9 @@ def flockingHerbivore(self, model):
     shortestDistance = None
     closestCreature = None
 
+    #TODO: handle memory
+    del self.shortTermMemory[:]
+
     for creature in self.level.creatures:
         if creature != self:
             x = abs(creature.location[0] - self.location[0])

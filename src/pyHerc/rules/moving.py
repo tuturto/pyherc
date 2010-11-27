@@ -44,14 +44,21 @@ def move(model, character, direction):
                             ' moving from ' + character.location.__str__() +
                             ' to direction: ' + direction.__str__())
 
+    event = {}
+    event['type'] = 'moving'
+    event['character'] = character
+    event['location'] = character.location
+    event['level'] = character.level
+
     moveData = checkMove(model, character, direction)
 
     if moveData['ok'] == 1:
         character.location = moveData['location']
-        assert(character.level != None)
         character.level = moveData['level']
-        assert(character.level != None)
         character.tick = time.getNewTick(character, 2)
+        event['end location'] = character.location
+        event['end level'] = character.level
+        model.raiseEvent(event)
 
     __logger.debug('move finished at ' + character.location.__str__())
 

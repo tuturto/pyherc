@@ -94,10 +94,13 @@ class test_meleeCombat:
         character.tick = 0
 
         model = pyHerc.data.model.Model()
+        level = level = Level((20, 20), 0, 0)
         target = pyHerc.data.model.Character()
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
         target.hp = 10
+        level.addCreature(character, (10, 10))
+        level.addCreature(target, (11, 10))
 
         pyHerc.rules.combat.meleeAttack(model, character, target, dice = [4, 19])
         assert(target.hp == 3) # 10 - 4 - 3 (hp - damage roll - str bonus)
@@ -116,7 +119,7 @@ class test_meleeCombat:
         target.dex = 10 # no bonus
         target.hp = 5
 
-        level = Level([20, 20], 0, 0)
+        level = Level((20, 20), 0, 0)
         level.addCreature(character)
         level.addCreature(target)
 

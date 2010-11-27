@@ -1,6 +1,43 @@
 Notes:
 
+Event list by type:
+    melee
+        attacker
+        target
+        hit
+        damage
+        level
+        location
+
+    death
+        character
+        level
+        location
+
+    item
+        pick up
+            character
+            item
+            level
+            location
+        drop
+            character
+            item
+            level
+            location
+
+    move
+        character
+        level
+        location
+        end level
+        end location
+
 Stuff to do:
+- Events
+    + raising events from rules
+    + relaying events to creatures
+        - filtering events
 - items
     - better positioning on levels
     - descriptions

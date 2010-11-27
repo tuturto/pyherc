@@ -68,13 +68,14 @@ class TestLevelGenerator:
         self.itemGenerator = pyHerc.generators.item.ItemGenerator()
         self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator()
 
-    def generateLevel(self, portal, model, newPortals = 0):
+    def generateLevel(self, portal, model, newPortals = 0, monsterList = None):
         """
         Generate level that starts from given stairs
         Parameters:
             stairs : link new level to this portal
             model : model being used
             newPortals : amount of portals to generate, default 0
+            monsterList : list of monsters to use
         """
         self.logger.debug('creating a test level')
         levelSize = model.config['level']['size']
@@ -95,11 +96,15 @@ class TestLevelGenerator:
             tempItem.location = (random.randint(2, 20), random.randint(2, 20))
             tempLevel.items.append(tempItem)
 
-        #enter few rats
-        for i in range(0, 5):
-            #TODO: better placement algorithm
-            tempCreature = self.creatureGenerator.generateCreature({'name':'rat'})
-            tempLevel.addCreature(tempCreature, (random.randint(2, 20), random.randint(2, 20)))
+        if monsterList == None:
+            #enter few rats
+            for i in range(0, 5):
+                #TODO: better placement algorithm
+                tempCreature = self.creatureGenerator.generateCreature({'name':'rat'})
+                tempLevel.addCreature(tempCreature, (random.randint(2, 20), random.randint(2, 20)))
+        else:
+            #TODO: spread given monsters around
+            pass
 
         #set portals
         if portal != None:

@@ -43,6 +43,20 @@ class Model:
         self.config['level'] = {}
         self.config['level']['size']  = (80,  30)
 
+    def raiseEvent(self, event):
+        """
+        Relays event to creatures
+        Params:
+            event : event to relay
+        """
+        self.logger.debug('raising event:' + event.__str__())
+        #TODO: filter events
+        for creature in event['level'].creatures:
+            creature.receiveEvent(event)
+
+        if self.player != None:
+            self.player.receiveEvent(event)
+
 class Character:
     """
     Represents a character in playing world
@@ -69,9 +83,13 @@ class Character:
         self.icon = None
         #internal
         self.tick = 0
+        self.shortTermMemory = []
 
     def __str__(self):
         return self.name
+
+    def receiveEvent(self, event):
+        self.shortTermMemory.append(event)
 
 class Item:
     """

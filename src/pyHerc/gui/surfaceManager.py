@@ -55,6 +55,8 @@ def loadResources():
         __images[images.image_end_marble_slate] = surface
         surface = pygame.image.load('C:/programming/pyHack/resources/image_tombstone.png')
         __images[images.image_end_tombstone] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/image_console.png')
+        __images[images.image_console] = surface
 
         surface = pygame.image.load('C:/programming/pyHack/resources/character_human_fighter.png')
         __icons[pyHerc.data.tiles.human_fighter] = surface

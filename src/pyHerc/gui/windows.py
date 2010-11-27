@@ -213,9 +213,11 @@ class GameWindow:
         self.screen = screen
         self.fullUpdate = 1
         self.background = surfaceManager.getImage(images.image_play_area)
+        self.console = surfaceManager.getImage(images.image_console)
         self.logger.debug('display initialised')
         self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
                                     K_KP4:7, K_KP7:8, K_KP5:9}
+        self.eventHistory = []
 
     def __handlePlayerInput(self):
         """
@@ -279,6 +281,7 @@ class GameWindow:
 
             if creature == model.player:
                 self.__handlePlayerInput()
+                self.getNewEvents()
                 if self.application.world.player.level != None:
                     self.__updateDisplay()
             else:
@@ -286,9 +289,39 @@ class GameWindow:
                     if hasattr(creature, 'act'):
                         creature.act(self.application.world)
                         #TODO: set dirty rectangles
+                        self.getNewEvents()
                         self.__updateDisplay()
 
         self.logger.debug('main loop finished')
+
+    def getNewEvents(self):
+        #get interesting events from player memory to event history
+        for event in self.application.world.player.shortTermMemory:
+            if event['type'] == 'melee':
+                newLine = event['attacker'].name + ' attacks'
+                if event['hit'] == 0:
+                    newLine = newLine + ' but misses'
+                else:
+                    newLine = newLine + ' and hits ' + event['damage'].__str__() + ' points of damage'
+                self.eventHistory.append(newLine)
+            elif event['type'] == 'death':
+                newLine = event['character'].name + ' is now dead'
+                self.eventHistory.append(newLine)
+        #clear short term memory
+        del self.application.world.player.shortTermMemory[:]
+
+    def formatEventHistory(self):
+        pass
+        #parse recent events and make a nice text out of them
+        eventText = []
+        if len(self.eventHistory) <= 5:
+            for text in self.eventHistory:
+                eventText.append(text)
+        else:
+            for text in self.eventHistory[-6:-1]:
+                eventText.append(text)
+
+        return eventText
 
     def __updateDisplay(self):
         """
@@ -342,6 +375,18 @@ class GameWindow:
                 if x >= 0 and y >= 0 and x <= 24 and y <= 14:
                     tile = surfaceManager.getIcon(item.icon)
                     self.screen.blit(tile, (x * 32, y *32))
+
+            #draw overlay event history
+            self.screen.blit(self.console, (0, 0))
+            eventText = self.formatEventHistory()
+            font = pygame.font.Font(None, 12)
+            lineNumber = 0
+            for line in eventText:
+                text = font.render(line, True, (255, 255, 255))
+                textRect = text.get_rect()
+                textRect.topleft = (5, 5 + lineNumber * 12)
+                self.screen.blit(text, textRect)
+                lineNumber = lineNumber + 1
 
             tile = surfaceManager.getIcon(player.icon)
             self.screen.blit(tile, (384, 224))
