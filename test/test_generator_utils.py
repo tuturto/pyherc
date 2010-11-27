@@ -24,7 +24,7 @@ import pyHerc.generators.utils
 class test_generatorUtils:
 
     def test_simpleBSPSplit_horisontal(self):
-        section = pyHerc.generators.utils.BSPSection((0, 0), (20, 20))
+        section = pyHerc.generators.utils.BSPSection((0, 0), (20, 20), None)
         assert(section.node1 == None)
         assert(section.node2 == None)
 
@@ -43,7 +43,7 @@ class test_generatorUtils:
         assert(section.node2.corner2[1] == 20)
 
     def test_simpleBSPSplit_vertical(self):
-        section = pyHerc.generators.utils.BSPSection((0, 0), (20, 20))
+        section = pyHerc.generators.utils.BSPSection((0, 0), (20, 20), None)
         assert(section.node1 == None)
         assert(section.node2 == None)
 
@@ -60,3 +60,14 @@ class test_generatorUtils:
         assert(section.node1.corner2[1] == 20)
         assert(section.node2.corner2[0] == 20)
         assert(section.node2.corner2[1] == 20)
+
+    def test_simpleBSPSplit_notEnoughSpace(self):
+        section = pyHerc.generators.utils.BSPSection((0, 0), (10, 10), None)
+        assert(section.node1 == None)
+        assert(section.node2 == None)
+
+        section.split()
+
+        assert(section.node1 == None)
+        assert(section.node2 == None)
+

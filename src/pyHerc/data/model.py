@@ -41,7 +41,7 @@ class Model:
         """
         self.config = {}
         self.config['level'] = {}
-        self.config['level']['size']  = (80,  30)
+        self.config['level']['size']  = (80,  40)
 
     def raiseEvent(self, event):
         """

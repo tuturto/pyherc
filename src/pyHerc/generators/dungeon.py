@@ -23,6 +23,7 @@ import logging
 import random
 import pyHerc.generators.item
 import pyHerc.generators.creature
+import utils
 from pyHerc.data.dungeon import Level
 from pyHerc.data.dungeon import Dungeon
 from pyHerc.data.dungeon import Portal
@@ -42,15 +43,17 @@ class DungeonGenerator:
         """
         self.logger.info('generating the dungeon')
         model.dungeon = Dungeon()
-        generator = TestLevelGenerator()
+        #generator = TestLevelGenerator()
+        generator = CatacombsLevelGenerator()
         level = generator.generateLevel(None, model, 2)
-        for portal in level.portals:
-            newLevel = generator.generateLevel(portal, model)
+        #for portal in level.portals:
+        #    newLevel = generator.generateLevel(portal, model)
 
         #add crystal skull to end level
         itemGenerator = pyHerc.generators.item.ItemGenerator()
         skull = itemGenerator.generateSpecialItem({'name':'crystal skull'})
-        newLevel.addItem(skull, (5, 5))
+        #newLevel.addItem(skull, (5, 5))
+        level.addItem(skull, (5, 5))
 
         escapePortal = Portal()
         escapePortal.icon = pyHerc.data.tiles.portal_stairs
@@ -66,7 +69,7 @@ class CatacombsLevelGenerator:
         self.itemGenerator = pyHerc.generators.item.ItemGenerator()
         self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator()
 
-    def generateLevel(self, portal, model, newPortals = 0, level=1):
+    def generateLevel(self, portal, model, newPortals = 0, level=1, roomMinSize = (6, 6)):
         """
         Generate level that starts from given stairs
         Parameters:
@@ -74,7 +77,44 @@ class CatacombsLevelGenerator:
             model : model being used
             newPortals : amount of portals to generate, default 0
         """
-        pass
+        self.logger.debug('generating level')
+        levelSize = model.config['level']['size']
+        self.logger.debug('dividing level in sections')
+        BSPStack = []
+        BSP = utils.BSPSection((0, 0), (levelSize[0] - 1, levelSize[1] - 1), None)
+        BSPStack.append(BSP)
+        roomStack = []
+
+        tempLevel = Level(levelSize, tiles.floor_rock, tiles.wall_rock)
+
+        while len(BSPStack) > 0:
+            tempBSP = BSPStack.pop()
+            tempBSP.split(minSize = (roomMinSize[0] + 4, roomMinSize[1] + 4))
+            if tempBSP.node1 != None:
+                BSPStack.append(tempBSP.node1)
+            if tempBSP.node2 != None:
+                BSPStack.append(tempBSP.node2)
+            if tempBSP.node1 == None and tempBSP.node2 == None:
+                #leaf
+                roomStack.append(tempBSP)
+
+        self.logger.debug('carving rooms')
+        for room in roomStack:
+            corner1 = (random.randint(room.corner1[0] + 1, room.corner1[0] + roomMinSize[0] - 1),
+                            random.randint(room.corner1[1] + 1, room.corner1[1] + roomMinSize[1] - 1))
+            corner2 = (random.randint(room.corner2[0] - roomMinSize[0], room.corner2[0] - 1),
+                            random.randint(room.corner2[1] - roomMinSize[1], room.corner2[1] - 1))
+
+            for y in range(corner1[1], corner2[1]):
+                for x in range(corner1[0], corner2[0]):
+                    tempLevel.walls[x][y] = tiles.wall_empty
+
+        self.logger.debug('carving tunnels')
+
+
+
+
+        return tempLevel
 
 class TestLevelGenerator:
     """

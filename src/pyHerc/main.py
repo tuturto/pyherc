@@ -64,9 +64,11 @@ class Application:
         """
         self.config = {}
         self.config['logging'] = {}
+        self.config['explore'] = 0
 
         try:
-            opts, args = getopt.getopt(argv, "l:", ["logging="])
+            opts, args = getopt.getopt(argv, 'l:x', ['logging=',
+                                                                    'explore'])
         except getopt.GetoptError:
             print('')
             print('Failed to process parameters')
@@ -90,6 +92,8 @@ class Application:
                     print('Unknown logging level: ' + arg)
                     self.usage()
                     sys.exit(0)
+            if opt in ('-x', '--explore'):
+                self.config['explore'] = 1
 
         self.config['resolution'] = (800, 600)
         self.config['caption'] = 'Herculeum'

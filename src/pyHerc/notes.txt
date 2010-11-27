@@ -34,6 +34,8 @@ Event list by type:
         end location
 
 Stuff to do:
+- debug
+    - explore mode
 - Events
     + raising events from rules
     + relaying events to creatures
