@@ -59,6 +59,23 @@ class DungeonGenerator:
 
         model.dungeon.levels = level
 
+class CatacombsLevelGenerator:
+
+    def __init__(self):
+        self.logger = logging.getLogger('pyHerc.generators.dungeon.CatacombsLevelGenerator')
+        self.itemGenerator = pyHerc.generators.item.ItemGenerator()
+        self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator()
+
+    def generateLevel(self, portal, model, newPortals = 0, level=1):
+        """
+        Generate level that starts from given stairs
+        Parameters:
+            stairs : link new level to this portal
+            model : model being used
+            newPortals : amount of portals to generate, default 0
+        """
+        pass
+
 class TestLevelGenerator:
     """
     Generates a simple test level

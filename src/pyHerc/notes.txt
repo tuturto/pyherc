@@ -51,21 +51,34 @@ Stuff to do:
     - displaying descriptions
     - displaying item quotes
 - user interface
-    + end screen
-        + result
+    - end screen
         - score
-        + tombstone
     - character profile
     - character creation
 - line of sight
 - weapons
+    - socketed
+        - runes for adding effects
+    - magical enchantments
 - armour
 - spells
 - potions
+- equipment sets
+    - need specific items
+        - armour
+        - helmet
+        - gauntlets
+        - boots
+        - weapon
+        - add special properties when used together
+    - artifacts
 - catacombs level generator
     - generate first 5 levels of the game
 - level generator proxy
-
+- test switch for command line
+    - generates specific dungeon
+    - unlimited wishes
+    - resurrection
 
 Stuff Done:
 + Items
@@ -85,3 +98,7 @@ Stuff Done:
     + generating
     + AI
 + fighting
++ User Interface
+    + end screen
+        + result
+        + tombstone
