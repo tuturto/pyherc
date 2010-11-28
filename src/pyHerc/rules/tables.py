@@ -63,7 +63,10 @@ def loadTables():
                                     'cha' : 4,
                                     'hp' : 2,
                                     'speed' : 2,
-                                    'icon' : pyHerc.data.tiles.creature_rat,
+                                    'icon' : [pyHerc.data.tiles.creature_rat_1,
+                                                    pyHerc.data.tiles.creature_rat_2,
+                                                    pyHerc.data.tiles.creature_rat_3,
+                                                    pyHerc.data.tiles.creature_rat_4],
                                     'attack' : '1d4',
                                     'size' : 'small'}
 

@@ -1,3 +1,14 @@
+In this place you can view different tiles. All tiles except "Xerathul's Revenge" tiles have been drawn by David E. Gervais, and are published under the Creative Commons licence. You are free to to copy, distribute and transmit those tiles as long as you credit David Gervais as their creator.
+
+Some tiles, in Dungeon Odyssey "Xerathul's Revenge" module have been drawn by Henk Brouwer. You can have there a better view of his fantasy work.
+
+Part of (or All) the graphic tiles used in this program is the public
+domain roguelike tileset "RLTiles".
+Some of the tiles have been modified by YOURNAME.
+
+You can find the original tileset at:
+http://rltiles.sf.net
+
 Notes:
 
 Event list by type:

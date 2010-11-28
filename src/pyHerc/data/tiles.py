@@ -24,15 +24,17 @@ floor_brick = 2
 floor_wood = 3
 
 wall_empty = 100
-wall_rock = 101
-wall_brick = 102
-wall_wood = 103
+wall_ground = 101
+wall_rock = 102
 
 portal_stairs = 200
 
 human_fighter = 300
 
-creature_rat = 400
+creature_rat_1 = 400
+creature_rat_2 = 401
+creature_rat_3 = 402
+creature_rat_4 = 403
 
 item_crystal_skull = 500
 item_apple = 501

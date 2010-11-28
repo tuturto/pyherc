@@ -96,7 +96,7 @@ class CatacombsLevelGenerator:
         BSPStack.append(BSP)
         roomStack = []
 
-        tempLevel = Level(levelSize, tiles.floor_rock, tiles.wall_rock)
+        tempLevel = Level(levelSize, tiles.floor_rock, tiles.wall_ground)
         #TODO: split into smaller chuncks
         while len(BSPStack) > 0:
             tempBSP = BSPStack.pop()
@@ -157,6 +157,31 @@ class CatacombsLevelGenerator:
                                                 ':' + center1[1].__str__())
                     for x in range(center2[0], center1[0] + 1):
                         tempLevel.walls[x][center1[1]] = tiles.wall_empty
+
+        #decorate dungeon a bit
+        tempWalls = []
+        for x in range(0, levelSize[0] + 1):
+            for y in range(0, levelSize[1] + 1):
+                if tempLevel.walls[x][y] != tiles.wall_empty:
+                    if y > 1:
+                        tempWalls.append(tempLevel.walls[x][y-1])
+                        if x > 1:
+                            tempWalls.append(tempLevel.walls[x-1][y-1])
+                        if x < levelSize[0]:
+                            tempWalls.append(tempLevel.walls[x+1][y-1])
+                    if y < levelSize[1]:
+                        tempWalls.append(tempLevel.walls[x][y+1])
+                        if x > 1:
+                            tempWalls.append(tempLevel.walls[x-1][y+1])
+                        if x < levelSize[0]:
+                            tempWalls.append(tempLevel.walls[x+1][y+1])
+                    if x > 1:
+                        tempWalls.append(tempLevel.walls[x-1][y])
+                    if x < levelSize[0]:
+                        tempWalls.append(tempLevel.walls[x+1][y])
+                    if tiles.wall_empty in tempWalls:
+                        tempLevel.walls[x][y] = tiles.wall_rock
+                tempWalls = []
 
         #enter few rats
         for i in range(0, 10):

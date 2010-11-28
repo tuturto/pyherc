@@ -21,6 +21,7 @@
 import types
 import os, sys
 import logging
+import random
 import pyHerc.ai.simple
 import pyHerc.data.model
 import pyHerc.rules.tables
@@ -65,7 +66,6 @@ class CreatureGenerator:
 
         newCreature = pyHerc.data.model.Character()
         newCreature.name = table['name']
-        newCreature.icon = table['icon']
         newCreature.str = table['str']
         newCreature.dex = table['dex']
         newCreature.con = table['con']
@@ -78,5 +78,13 @@ class CreatureGenerator:
         newCreature.attack = table['attack']
         #TODO: AI from tables
         newCreature.act = types.MethodType(pyHerc.ai.simple.flockingHerbivore, newCreature, pyHerc.data.model.Character)
+
+
+        if hasattr(table['icon'], 'append'):
+            #select from list
+            newCreature.icon = random.choice(table['icon'])
+        else:
+            newCreature.icon = table['icon']
+
 
         return newCreature

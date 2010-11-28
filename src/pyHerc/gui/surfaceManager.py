@@ -61,8 +61,14 @@ def loadResources():
         surface = pygame.image.load('C:/programming/pyHack/resources/character_human_fighter.png')
         __icons[pyHerc.data.tiles.human_fighter] = surface
 
-        surface = pygame.image.load('C:/programming/pyHack/resources/creature_rat.png')
-        __icons[pyHerc.data.tiles.creature_rat] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/creature_rat_1.png')
+        __icons[pyHerc.data.tiles.creature_rat_1] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/creature_rat_2.png')
+        __icons[pyHerc.data.tiles.creature_rat_2] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/creature_rat_3.png')
+        __icons[pyHerc.data.tiles.creature_rat_3] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/creature_rat_4.png')
+        __icons[pyHerc.data.tiles.creature_rat_4] = surface
 
         surface = pygame.image.load('C:/programming/pyHack/resources/floor_stone.png')
         __icons[pyHerc.data.tiles.floor_rock] = surface
@@ -71,6 +77,8 @@ def loadResources():
 
         surface = pygame.image.load('C:/programming/pyHack/resources/wall_stone.png')
         __icons[pyHerc.data.tiles.wall_rock] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/wall_ground.png')
+        __icons[pyHerc.data.tiles.wall_ground] = surface
 
         surface = pygame.image.load('C:/programming/pyHack/resources/portal_stairs.png')
         __icons[pyHerc.data.tiles.portal_stairs] = surface
