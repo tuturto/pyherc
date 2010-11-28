@@ -77,6 +77,11 @@ def loadResources():
 
         surface = pygame.image.load('C:/programming/pyHack/resources/wall_stone.png')
         __icons[pyHerc.data.tiles.wall_rock] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/wall_stone_deco1.png')
+        __icons[pyHerc.data.tiles.wall_rock_deco_1] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/wall_stone_deco2.png')
+        __icons[pyHerc.data.tiles.wall_rock_deco_2] = surface
+
         surface = pygame.image.load('C:/programming/pyHack/resources/wall_ground.png')
         __icons[pyHerc.data.tiles.wall_ground] = surface
 

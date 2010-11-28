@@ -180,7 +180,13 @@ class CatacombsLevelGenerator:
                     if x < levelSize[0]:
                         tempWalls.append(tempLevel.walls[x+1][y])
                     if tiles.wall_empty in tempWalls:
-                        tempLevel.walls[x][y] = tiles.wall_rock
+                        randTile = random.randint(1, 100)
+                        if randTile == 98:
+                            tempLevel.walls[x][y] = tiles.wall_rock_deco_1
+                        elif randTile == 99:
+                            tempLevel.walls[x][y] = tiles.wall_rock_deco_2
+                        else:
+                            tempLevel.walls[x][y] = tiles.wall_rock
                 tempWalls = []
 
         #enter few rats
