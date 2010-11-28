@@ -71,3 +71,27 @@ class test_generatorUtils:
         assert(section.node1 == None)
         assert(section.node2 == None)
 
+    def test_getAreaQueue(self):
+        section1 = pyHerc.generators.utils.BSPSection((0, 0), (20, 20), None)
+        section2 = pyHerc.generators.utils.BSPSection((0, 0), (20, 10), None)
+        section3 = pyHerc.generators.utils.BSPSection((0, 11), (20, 20), None)
+        section1.node1 = section2
+        section1.node2 = section3
+        section3.parent = section1
+        section2.parent = section1
+        section4 = pyHerc.generators.utils.BSPSection((0, 0), (10, 10), None)
+        section5 = pyHerc.generators.utils.BSPSection((11, 0), (20, 10), None)
+        section2.node1 = section4
+        section2.node2 = section5
+        section4.parent = section2
+        section5.parent = section2
+
+        queue = section1.getAreaQueue()
+        # (section5, section4, section3, section2, section1)
+
+        assert(queue.pop() == section1)
+        assert(queue.pop() in (section2, section3))
+        assert(queue.pop() in (section2, section3))
+        assert(queue.pop() in (section4, section5))
+        assert(queue.pop() in (section4, section5))
+

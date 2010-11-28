@@ -195,11 +195,13 @@ class StartNewGameWindow:
             self.application.world.config['explore'] = 1
         else:
             self.application.world.config['explore'] = 0
+
+        self.character = rules.character.createCharacter('human', 'fighter')
+        self.application.world.player = self.character
         generator = generators.dungeon.DungeonGenerator()
         generator.generateDungeon(self.application.world)
-        self.character = rules.character.createCharacter('human', 'fighter')
         self.character.level = self.application.world.dungeon.levels
-        self.character.location = (1, 1)
+        # self.character.location = (1, 1)
         self.character.name = 'Adventurer'
 
     def __updateDisplay(self):
@@ -244,7 +246,7 @@ class GameWindow:
                     elif event.key in self.moveKeyMap.keys():
                         #handle moving
                         direction = self.moveKeyMap[event.key]
-                        if rules.moving.checkMove(model, player, direction)['ok'] or 1:
+                        if rules.moving.checkMove(model, player, direction)['ok']:
                             #check in case player escaped
                             if player.level != None:
                                 rules.moving.move(model, player, direction)
@@ -285,6 +287,8 @@ class GameWindow:
             creature = pyHerc.rules.time.getNextCreature(model)
 
             if creature == model.player:
+                if self.application.world.player.level != None:
+                    self.__updateDisplay()
                 self.__handlePlayerInput()
                 self.getNewEvents()
                 if self.application.world.player.level != None:
@@ -295,7 +299,7 @@ class GameWindow:
                         creature.act(self.application.world)
                         #TODO: set dirty rectangles
                         self.getNewEvents()
-                        self.__updateDisplay()
+                        #self.__updateDisplay()
 
         self.logger.debug('main loop finished')
 

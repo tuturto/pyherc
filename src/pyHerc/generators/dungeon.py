@@ -53,14 +53,24 @@ class DungeonGenerator:
         itemGenerator = pyHerc.generators.item.ItemGenerator()
         skull = itemGenerator.generateSpecialItem({'name':'crystal skull'})
         #newLevel.addItem(skull, (5, 5))
-        level.addItem(skull, (5, 5))
+
+        levelSize = model.config['level']['size']
+        location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+        while level.walls[location[0]][location[1]] != tiles.wall_empty:
+            location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+        level.addItem(skull, location)
 
         escapePortal = Portal()
         escapePortal.icon = pyHerc.data.tiles.portal_stairs
         escapePortal.otherEnd = None
-        level.addPortal(escapePortal, (1, 1))
+
+        location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+        while level.walls[location[0]][location[1]] != tiles.wall_empty:
+            location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+        level.addPortal(escapePortal, location)
 
         model.dungeon.levels = level
+        model.player.location = location
 
 class CatacombsLevelGenerator:
 
@@ -81,7 +91,7 @@ class CatacombsLevelGenerator:
         levelSize = model.config['level']['size']
         self.logger.debug('dividing level in sections')
         BSPStack = []
-        BSP = utils.BSPSection((0, 0), (levelSize[0] - 1, levelSize[1] - 1), None)
+        BSP = utils.BSPSection((0, 0), (levelSize[0] - 2, levelSize[1] - 2), None)
         BSPStack.append(BSP)
         roomStack = []
 
@@ -100,19 +110,71 @@ class CatacombsLevelGenerator:
 
         self.logger.debug('carving rooms')
         for room in roomStack:
-            corner1 = (random.randint(room.corner1[0] + 1, room.corner1[0] + roomMinSize[0] - 1),
-                            random.randint(room.corner1[1] + 1, room.corner1[1] + roomMinSize[1] - 1))
-            corner2 = (random.randint(room.corner2[0] - roomMinSize[0], room.corner2[0] - 1),
-                            random.randint(room.corner2[1] - roomMinSize[1], room.corner2[1] - 1))
-
-            for y in range(corner1[1], corner2[1]):
-                for x in range(corner1[0], corner2[0]):
+            corner1 = (room.corner1[0] + random.randint(1, 4), room.corner1[1] + random.randint(1, 4))
+            corner2 = (room.corner2[0] - random.randint(1, 4), room.corner2[1] - random.randint(1, 4))
+            self.logger.debug('carving room ' + corner1.__str__() + ':' + corner2.__str__())
+            for y in range(corner1[1], corner2[1] + 1):
+                for x in range(corner1[0], corner2[0] + 1):
                     tempLevel.walls[x][y] = tiles.wall_empty
 
         self.logger.debug('carving tunnels')
 
+        areaQueue = BSP.getAreaQueue()
+        areaQueue.reverse()
 
+        while len(areaQueue) > 1:
+            area1 = areaQueue.pop()
+            area2 = areaQueue.pop()
+            center1 = area1.getCenter()
+            center2 = area2.getCenter()
+            self.logger.debug('carving tunnel between areas ' + area1.__str__() + ' and ' +
+                                        area2.__str__())
+            self.logger.debug('using center points ' + center1.__str__() + ' and ' +
+                                        center2.__str__())
+            #connect these two areas
+            if area1.direction == 1:
+                #areas on top of each other
+                if center1[1] < center2[1]:
+                    self.logger.debug('tunneling top down ' + center1[0].__str__() + ':' +
+                                                range(center1[1], center2[1]).__str__())
+                    for y in range(center1[1], center2[1] + 1):
+                        tempLevel.walls[center1[0]][y] = tiles.wall_empty
+                else:
+                    self.logger.debug('tunneling top down ' + center1[0].__str__() + ':' +
+                                                range(center2[1], center1[1]).__str__())
+                    for y in range(center2[1], center1[1] + 1):
+                        tempLevel.walls[center1[0]][y] = tiles.wall_empty
+            else:
+                #areas next to each other
+                if center1[0] < center2[0]:
+                    self.logger.debug('tunneling sideways ' + range(center1[0], center2[0]).__str__() +
+                                                ':' + center1[1].__str__())
+                    for x in range(center1[0], center2[0] + 1):
+                        tempLevel.walls[x][center1[1]] = tiles.wall_empty
+                else:
+                    self.logger.debug('tunneling sideways ' + range(center2[0], center1[0]).__str__() +
+                                                ':' + center1[1].__str__())
+                    for x in range(center2[0], center1[0] + 1):
+                        tempLevel.walls[x][center1[1]] = tiles.wall_empty
 
+        #enter few rats
+        for i in range(0, 10):
+            #TODO: better placement algorithm
+            tempCreature = self.creatureGenerator.generateCreature({'name':'rat'})
+            location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+            while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
+                location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+            tempLevel.addCreature(tempCreature, location)
+
+        #throw bunch of apples around
+        for i in range(0, 10):
+            #TODO: better placement algorithm
+            tempItem = self.itemGenerator.generateFood({'name':'apple'})
+            location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+            while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
+                location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+            tempItem.location = location
+            tempLevel.items.append(tempItem)
 
         return tempLevel
 
