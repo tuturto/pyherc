@@ -89,6 +89,9 @@ class Character:
         return self.name
 
     def receiveEvent(self, event):
+        """
+        Receives an event from world and enters it into short term memory
+        """
         self.shortTermMemory.append(event)
 
 class Item:

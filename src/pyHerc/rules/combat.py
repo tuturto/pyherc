@@ -84,6 +84,13 @@ def meleeAttack(model, attacker, target, dice = []):
     attacker.tick = time.getNewTick(attacker, 6)
 
 def checkHitInMelee(model, attacker, target, dice = []):
+    """
+    Checks if attacker hits target
+    Parameters:
+        attacker : character attacking
+        target : target of the attack
+        dice : optional prerolled dice
+    """
     assert(model != None)
     assert(attacker != None)
     assert(target != None)
@@ -101,6 +108,14 @@ def checkHitInMelee(model, attacker, target, dice = []):
         return 0
 
 def getDamageInMelee(model, attacker, target, dice = []):
+    """
+    Gets damage done in melee
+    Parameters
+        model : model of the world
+        attacker : character attacking
+        target : target of the attack
+        dice : optional prerolled dice
+    """
     assert(model != None)
     assert(attacker != None)
     assert(target != None)
@@ -114,14 +129,39 @@ def getDamageInMelee(model, attacker, target, dice = []):
     return damageRoll + getAttributeModifier(attacker, 'str')
 
 def getMeleeAttackBonus(model, character):
+    """
+    Get attack bonus used in melee
+    Parameters
+        model : model of the world
+        character : character whose attack bonus should be calculated
+    Returns
+        Attack bonus
+    """
     #Base attack bonus + Strength modifier + size modifier
     #TODO: take base attack bones into account
     return getAttributeModifier(character, 'str') + getSizeModifier(character)
 
 def getArmourClass(model, character):
+    """
+    Get armour class of character
+    Parameters
+        model : model of the world
+        character : character whose armour class should be calculated
+    Returns
+        Armour class
+    """
     return 10 + getSizeModifier(character) + getAttributeModifier(character, 'dex')
 
 def getAttributeModifier(character, attribute):
+    """
+    Get attribute modifier
+    Parameter:
+        character : character whose attribute modifier should be calculated
+        attribute : attribute to check
+                        str, dex
+    Returns:
+        Attribute modifier
+    """
     tables.loadTables()
 
     if attribute == 'str':
@@ -130,6 +170,11 @@ def getAttributeModifier(character, attribute):
         return tables.attributeModifier[character.dex]
 
 def getSizeModifier(character):
+    """
+    Get size modifier for character
+    Parameters:
+        character : character whose size modifier should be calculated
+    """
     assert(character != None)
 
     tables.loadTables()

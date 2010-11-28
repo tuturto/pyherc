@@ -43,17 +43,13 @@ class DungeonGenerator:
         """
         self.logger.info('generating the dungeon')
         model.dungeon = Dungeon()
-        #generator = TestLevelGenerator()
         generator = CatacombsLevelGenerator()
         level = generator.generateLevel(None, model, 2)
-        #for portal in level.portals:
-        #    newLevel = generator.generateLevel(portal, model)
 
-        #add crystal skull to end level
         itemGenerator = pyHerc.generators.item.ItemGenerator()
         skull = itemGenerator.generateSpecialItem({'name':'crystal skull'})
-        #newLevel.addItem(skull, (5, 5))
 
+        #TODO: write utility function for placing objects
         levelSize = model.config['level']['size']
         location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
         while level.walls[location[0]][location[1]] != tiles.wall_empty:
@@ -73,6 +69,9 @@ class DungeonGenerator:
         model.player.location = location
 
 class CatacombsLevelGenerator:
+    """
+    Generator for creating catacombs
+    """
 
     def __init__(self):
         self.logger = logging.getLogger('pyHerc.generators.dungeon.CatacombsLevelGenerator')
@@ -86,6 +85,8 @@ class CatacombsLevelGenerator:
             stairs : link new level to this portal
             model : model being used
             newPortals : amount of portals to generate, default 0
+            level : changes behaviour of the generator
+            roomMinSize : minimum size for rooms
         """
         self.logger.debug('generating level')
         levelSize = model.config['level']['size']
@@ -96,7 +97,7 @@ class CatacombsLevelGenerator:
         roomStack = []
 
         tempLevel = Level(levelSize, tiles.floor_rock, tiles.wall_rock)
-
+        #TODO: split into smaller chuncks
         while len(BSPStack) > 0:
             tempBSP = BSPStack.pop()
             tempBSP.split(minSize = (roomMinSize[0] + 4, roomMinSize[1] + 4))

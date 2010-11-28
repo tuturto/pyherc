@@ -47,6 +47,13 @@ class BSPSection:
                                     self.corner1.__str__() + ' and ' + self.corner2.__str__())
 
     def split(self, minSize = (6, 6), direction = None):
+        """
+        Split BSPSection in two
+        Links two new BSPSections into this one
+        Parameters:
+            minSize : minimum size to split into
+            direction : horizontal (1) / vertical split (2)
+        """
         assert(self.corner1 != None)
         assert(self.corner2 != None)
 
@@ -72,7 +79,7 @@ class BSPSection:
                     direction = 1
 
         if direction == 1:
-            self.logger.debug('split direction horisontal')
+            self.logger.debug('split direction horizontal')
             splitLocation = random.randint(minSize[1], size[1] - minSize[1])
             self.logger.debug('split location ' + splitLocation.__str__())
             self.node1 = BSPSection(self.corner1, (self.corner2[0], self.corner1[1] + splitLocation),
@@ -104,6 +111,9 @@ class BSPSection:
                 return 'None:None'
 
     def getAreaQueue(self):
+        """
+        Gets list of BSPSections, starting from leaves and progressing towards root
+        """
         queue = collections.deque()
         list = []
         queue.append(self)
@@ -121,6 +131,10 @@ class BSPSection:
         return list
 
     def getCenter(self):
+        """
+        Calculates center of the BSPSection
+        Returns : center point
+        """
         assert(self.corner1 != None)
         assert(self.corner2 != None)
         center = (int(self.corner1[0] + ((self.corner2[0] - self.corner1[0]) / 2)),

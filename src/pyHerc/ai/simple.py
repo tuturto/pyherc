@@ -24,6 +24,11 @@ import pyHerc.rules.moving
 import pyHerc.rules.combat
 
 def proofOfConcept(self, model):
+    """
+    Proof of concept
+    This AI will just utter words "hello World"
+    Not to be used with the actual game
+    """
     print('hello world')
     self.tick = self.tick + 10
 
