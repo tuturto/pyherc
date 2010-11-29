@@ -40,3 +40,10 @@ creature_rat_4 = 403
 
 item_crystal_skull = 500
 item_apple = 501
+
+item_dagger_1 = 502
+item_dagger_2 = 503
+item_morning_star_1 = 504
+item_morning_star_2 = 505
+item_morning_star_1 = 506
+item_morning_star_2 = 507
