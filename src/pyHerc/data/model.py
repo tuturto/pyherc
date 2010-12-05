@@ -30,6 +30,7 @@ class Model:
         self.dungeon = None
         self.player = None
         self.config = None
+        self.tables = None
         self.endCondition = 0
 
         self.logger.info('loading config')

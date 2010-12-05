@@ -23,6 +23,7 @@ import pyHerc.generators.item
 import pyHerc.data.tiles
 import pyHerc.data.dungeon
 import pyHerc.rules.items
+import pyHerc.rules.tables
 
 class test_Item:
 
@@ -63,8 +64,10 @@ class test_Item:
         Test that generating crystal skull is possible
         """
         generator = pyHerc.generators.item.ItemGenerator()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
 
-        self.item = generator.generateItem({'type': 'special',
+        self.item = generator.generateItem(tables.items, {'type': 'special',
                                                 'name': 'crystal skull'})
 
         assert(self.item.name == 'Crystal skull')

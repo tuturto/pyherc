@@ -33,6 +33,7 @@ import pyHerc.rules.ending
 import pyHerc.rules.time
 import pyHerc.rules.combat
 import generators.dungeon
+import pyHerc.rules.tables
 from pygame.locals import *
 
 class MainWindow:
@@ -190,6 +191,10 @@ class StartNewGameWindow:
     def __generateNewGame(self):
         #TODO: implement properly
         self.application.world = data.model.Model()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+        self.application.world.tables = tables
+        #TODO: load tables for model
         if self.application.config['explore']:
             self.logger.warn('starting in explore mode')
             self.application.world.config['explore'] = 1

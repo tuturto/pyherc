@@ -47,7 +47,7 @@ class DungeonGenerator:
         level = generator.generateLevel(None, model, 2)
 
         itemGenerator = pyHerc.generators.item.ItemGenerator()
-        skull = itemGenerator.generateSpecialItem({'name':'crystal skull'})
+        skull = itemGenerator.generateSpecialItem(model.tables.items, {'name':'crystal skull'})
 
         #TODO: write utility function for placing objects
         levelSize = model.config['level']['size']
@@ -192,7 +192,7 @@ class CatacombsLevelGenerator:
         #enter few rats
         for i in range(0, 10):
             #TODO: better placement algorithm
-            tempCreature = self.creatureGenerator.generateCreature({'name':'rat'})
+            tempCreature = self.creatureGenerator.generateCreature(model.tables, {'name':'rat'})
             location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
             while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
                 location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
@@ -201,7 +201,7 @@ class CatacombsLevelGenerator:
         #throw bunch of apples around
         for i in range(0, 10):
             #TODO: better placement algorithm
-            tempItem = self.itemGenerator.generateFood({'name':'apple'})
+            tempItem = self.itemGenerator.generateFood(model.tables.items, {'name':'apple'})
             location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
             while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
                 location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
@@ -243,7 +243,7 @@ class TestLevelGenerator:
         #throw bunch of apples around
         for i in range(0, 10):
             #TODO: better placement algorithm
-            tempItem = self.itemGenerator.generateFood({'name':'apple'})
+            tempItem = self.itemGenerator.generateFood(model.tables.items, {'name':'apple'})
             tempItem.location = (random.randint(2, 20), random.randint(2, 20))
             tempLevel.items.append(tempItem)
 
@@ -251,7 +251,7 @@ class TestLevelGenerator:
             #enter few rats
             for i in range(0, 5):
                 #TODO: better placement algorithm
-                tempCreature = self.creatureGenerator.generateCreature({'name':'rat'})
+                tempCreature = self.creatureGenerator.generateCreature(model.tables.creatures, {'name':'rat'})
                 tempLevel.addCreature(tempCreature, (random.randint(2, 20), random.randint(2, 20)))
         else:
             #TODO: spread given monsters around

@@ -23,6 +23,7 @@
 from pyHerc.data.dungeon import Level
 import pyHerc.rules.combat
 import pyHerc.data.model
+import pyHerc.rules.tables
 
 class test_meleeCombat:
 
@@ -36,7 +37,9 @@ class test_meleeCombat:
         character.size = 'tiny' # +2 bonus
         character.dex = 16 # +3 bonus
         model = pyHerc.data.model.Model()
-
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+        model.tables = tables
         ac = pyHerc.rules.combat.getArmourClass(model, character)
 
         assert(ac == 15)
@@ -48,6 +51,9 @@ class test_meleeCombat:
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
         model = pyHerc.data.model.Model()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+        model.tables = tables
         target = pyHerc.data.model.Character()
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
@@ -62,6 +68,9 @@ class test_meleeCombat:
         character.str = 16 # +3 bonus
 
         model = pyHerc.data.model.Model()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+        model.tables = tables
         target = pyHerc.data.model.Character()
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
@@ -79,6 +88,9 @@ class test_meleeCombat:
         character.attack = '1d4'
 
         model = pyHerc.data.model.Model()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+        model.tables = tables
         target = pyHerc.data.model.Character()
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
@@ -94,6 +106,9 @@ class test_meleeCombat:
         character.tick = 0
 
         model = pyHerc.data.model.Model()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+        model.tables = tables
         level = level = Level((20, 20), 0, 0)
         target = pyHerc.data.model.Character()
         target.size = 'medium' # +0 bonus
@@ -114,6 +129,9 @@ class test_meleeCombat:
         character.tick = 0
 
         model = pyHerc.data.model.Model()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+        model.tables = tables
         target = pyHerc.data.model.Character()
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus

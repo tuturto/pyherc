@@ -34,18 +34,22 @@ class CreatureGenerator:
 
     def __init__(self):
         self.logger = logging.getLogger('pyHerc.generators.creature.CreatureGenerator')
-        pyHerc.rules.tables.loadTables()
 
-    def generateCreature(self, parameters):
+    def generateCreature(self, tables, parameters):
         """
         Generates a creature
+        Parameters:
+            tables : tables used in generation
+            parameters : hash table containing parameters
         """
         self.logger.debug('generating a creature')
         self.logger.debug(parameters)
+        assert(tables != None)
+
         newCreature = None
         if not parameters == None:
             if 'name' in parameters.keys():
-                table = pyHerc.rules.tables.creatures[parameters['name']]
+                table = tables.creatures[parameters['name']]
                 newCreature = self.__generateCreatureFromTable(table)
         else:
             #generate completely random creature

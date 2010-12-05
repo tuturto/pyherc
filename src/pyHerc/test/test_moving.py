@@ -25,6 +25,7 @@ from pyHerc.data.dungeon import Portal
 from pyHerc.data.model import Model
 from pyHerc.data.model import Character
 from pyHerc.generators.dungeon import TestLevelGenerator
+from pyHerc.rules.tables import Tables
 
 import pyHerc.rules.moving
 
@@ -34,6 +35,9 @@ class test_moving:
         self.model = Model()
         self.character = Character()
         generator = TestLevelGenerator()
+        tables = Tables()
+        tables.loadTables()
+        self.model.tables = tables
 
         self.model.dungeon = Dungeon()
         self.level1 = generator.generateLevel(None, self.model, monsterList = [])

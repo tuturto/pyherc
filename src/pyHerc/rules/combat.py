@@ -126,7 +126,7 @@ def getDamageInMelee(model, attacker, target, dice = []):
     else:
         damageRoll = utils.rollDice(attacker.attack)
 
-    return damageRoll + getAttributeModifier(attacker, 'str')
+    return damageRoll + getAttributeModifier(model, attacker, 'str')
 
 def getMeleeAttackBonus(model, character):
     """
@@ -139,7 +139,7 @@ def getMeleeAttackBonus(model, character):
     """
     #Base attack bonus + Strength modifier + size modifier
     #TODO: take base attack bones into account
-    return getAttributeModifier(character, 'str') + getSizeModifier(character)
+    return getAttributeModifier(model, character, 'str') + getSizeModifier(model, character)
 
 def getArmourClass(model, character):
     """
@@ -150,33 +150,36 @@ def getArmourClass(model, character):
     Returns
         Armour class
     """
-    return 10 + getSizeModifier(character) + getAttributeModifier(character, 'dex')
+    return 10 + getSizeModifier(model, character) + getAttributeModifier(model, character, 'dex')
 
-def getAttributeModifier(character, attribute):
+def getAttributeModifier(model, character, attribute):
     """
     Get attribute modifier
     Parameter:
+        model : model of the world
         character : character whose attribute modifier should be calculated
         attribute : attribute to check
                         str, dex
     Returns:
         Attribute modifier
     """
-    tables.loadTables()
+    assert(model != None)
+    assert(character != None)
 
     if attribute == 'str':
-        return tables.attributeModifier[character.str]
+        return model.tables.attributeModifier[character.str]
     elif attribute == 'dex':
-        return tables.attributeModifier[character.dex]
+        return model.tables.attributeModifier[character.dex]
 
-def getSizeModifier(character):
+def getSizeModifier(model, character):
     """
     Get size modifier for character
     Parameters:
+        model : model of the world
         character : character whose size modifier should be calculated
     """
+    assert(model != None)
     assert(character != None)
 
-    tables.loadTables()
-    return tables.sizeModifier[character.size]
+    return model.tables.sizeModifier[character.size]
 
