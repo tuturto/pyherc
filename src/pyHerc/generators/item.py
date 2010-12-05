@@ -22,6 +22,7 @@ import os, sys
 import logging
 import pyHerc.data.model
 import pyHerc.rules.tables
+import random
 from pyHerc.data import tiles
 
 class ItemGenerator:
@@ -41,14 +42,17 @@ class ItemGenerator:
         assert(tables != None)
         newItem = None
         if not parameters == None:
-            #TODO: generate named items too?
-            if 'type' in parameters.keys():
-                if parameters['type'] == 'special':
-                    #generate special item
-                    newItem = self.generateSpecialItem(tables, parameters)
-                elif parameters['type'] == 'food':
-                    #generate food
-                    newItem = self.generateFood(tables, parameters)
+            if 'name' in parameters.keys():
+                table = tables.items[parameters['name']]
+                newItem = self.__generateItemFromTable(table)
+            elif 'type' in parameters.keys():
+                rarityRange = tables.tagScore[parameters['type']]
+                score = random.randint(1, rarityRange)
+                for item in tables.itemsByTag[parameters['type']]:
+                    if item[1] <= score and item[2] >= score:
+                        choice = item[0]
+                table = tables.items[choice]
+                newItem = self.__generateItemFromTable(table)
             else:
                 #generate completely random item?
                 pass
@@ -63,32 +67,6 @@ class ItemGenerator:
 
         return newItem
 
-    def generateFood(self, tables, parameters):
-        """
-        Generate a food item
-        Parameters:
-            tables : tables used in generation
-            parameters : hash table containing parameters for generation
-        """
-        self.logger.debug('generating a food item')
-        assert(tables != None)
-
-        if parameters == None:
-            #TODO: generate random food
-            pass
-        elif not 'name' in parameters.keys():
-            #TODO: generate random food
-            pass
-        else:
-            #generate named food
-            table = tables[parameters['name']]
-            newItem = self.__generateItemFromTable(table)
-
-        self.logger.debug('food item generation done')
-
-        return newItem
-
-
     def generateSpecialItem(self, tables, parameters):
         """
         Generate a special item
@@ -102,7 +80,7 @@ class ItemGenerator:
 
         self.logger.debug('generating a special item')
 
-        table = tables[parameters['name']]
+        table = tables.items[parameters['name']]
         newItem = self.__generateItemFromTable(table)
 
         self.logger.debug('special item generation done')
@@ -117,7 +95,11 @@ class ItemGenerator:
 
         newItem = pyHerc.data.model.Item()
         newItem.name = table['name']
-        newItem.icon = table['icon']
+        if hasattr(table['icon'], 'append'):
+            #select from list
+            newItem.icon = random.choice(table['icon'])
+        else:
+            newItem.icon = table['icon']
 
         if 'questItem' in table.keys():
             newItem.questItem = table['questItem']

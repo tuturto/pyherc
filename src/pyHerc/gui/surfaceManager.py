@@ -93,6 +93,16 @@ def loadResources():
         surface = pygame.image.load('C:/programming/pyHack/resources/item_crystal_skull.png')
         __icons[pyHerc.data.tiles.item_crystal_skull] = surface
 
+        #TODO: correct graphics
+        __icons[pyHerc.data.tiles.item_dagger_1] = surface
+        __icons[pyHerc.data.tiles.item_dagger_2] = surface
+        __icons[pyHerc.data.tiles.item_morning_star_1] = surface
+        __icons[pyHerc.data.tiles.item_morning_star_2] = surface
+        __icons[pyHerc.data.tiles.item_morning_star_1] = surface
+        __icons[pyHerc.data.tiles.item_morning_star_2] = surface
+        __icons[pyHerc.data.tiles.item_short_sword_1] = surface
+        __icons[pyHerc.data.tiles.item_short_sword_2] = surface
+
         __resourcesLoaded = 1
         __logger.info('resources loaded')
     else:
@@ -105,4 +115,5 @@ def getIcon(id):
     if id in __icons.keys():
         return __icons[id]
     else:
+        __logger.warn('icon with id %s not found', id)
         return __icons[pyHerc.data.tiles.floor_empty]

@@ -47,3 +47,5 @@ item_morning_star_1 = 504
 item_morning_star_2 = 505
 item_morning_star_1 = 506
 item_morning_star_2 = 507
+item_short_sword_1 = 508
+item_short_sword_2 = 509

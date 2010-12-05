@@ -47,7 +47,7 @@ class DungeonGenerator:
         level = generator.generateLevel(None, model, 2)
 
         itemGenerator = pyHerc.generators.item.ItemGenerator()
-        skull = itemGenerator.generateSpecialItem(model.tables.items, {'name':'crystal skull'})
+        skull = itemGenerator.generateSpecialItem(model.tables, {'name':'crystal skull'})
 
         #TODO: write utility function for placing objects
         levelSize = model.config['level']['size']
@@ -198,10 +198,20 @@ class CatacombsLevelGenerator:
                 location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
             tempLevel.addCreature(tempCreature, location)
 
-        #throw bunch of apples around
+        #throw bunch of food items around
         for i in range(0, 10):
             #TODO: better placement algorithm
-            tempItem = self.itemGenerator.generateFood(model.tables.items, {'name':'apple'})
+            tempItem = self.itemGenerator.generateItem(model.tables, {'type':'food'})
+            location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+            while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
+                location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+            tempItem.location = location
+            tempLevel.items.append(tempItem)
+
+        #throw bunch of weapons around
+        for i in range(0, 10):
+            #TODO: better placement algorithm
+            tempItem = self.itemGenerator.generateItem(model.tables, {'type':'weapon'})
             location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
             while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
                 location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
@@ -240,10 +250,10 @@ class TestLevelGenerator:
             tempLevel.walls[0][y] = tiles.wall_rock
             tempLevel.walls[levelSize[0] - 1][y] = tiles.wall_rock
 
-        #throw bunch of apples around
+        #throw bunch of food around
         for i in range(0, 10):
             #TODO: better placement algorithm
-            tempItem = self.itemGenerator.generateFood(model.tables.items, {'name':'apple'})
+            tempItem = self.itemGenerator.generateItem(model.tables, {'type':'food'})
             tempItem.location = (random.randint(2, 20), random.randint(2, 20))
             tempLevel.items.append(tempItem)
 

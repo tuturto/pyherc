@@ -32,6 +32,7 @@ class Tables:
         self.items = {}
         # item names, sorted by tags
         self.itemsByTag = {}
+        self.tagScore = {}
 
         self.creatures = {}
         self.sizeModifier = []
@@ -41,6 +42,12 @@ class Tables:
         """
         Initialise tables
         """
+        artifact = 1
+        legendary = 2
+        epic = 4
+        rare = 8
+        uncommon = 16
+        common = 32
 
         if self.__initialised:
             return
@@ -50,13 +57,13 @@ class Tables:
                                     'weight' : 1,
                                     'icon' : pyHerc.data.tiles.item_apple,
                                     'type' : ['food'],
-                                    'rarity' : 10}
+                                    'rarity' : common}
 
         self.items['crystal skull'] = {'name' : 'Crystal skull',
                                                             'questItem' : 1,
                                                             'icon' : pyHerc.data.tiles.item_crystal_skull,
                                                             'type' : ['special item', 'quest item'],
-                                                            'rarity' : 1}
+                                                            'rarity' : artifact}
 
         self.items['dagger'] = {'name' : 'dagger',
                                             'cost' : 2,
@@ -68,8 +75,8 @@ class Tables:
                                             'class' : 'simple',
                                             'icon' : [pyHerc.data.tiles.item_dagger_1,
                                                             pyHerc.data.tiles.item_dagger_2],
-                                            'type' : ['weapon', 'light', 'melee', 'simple weapon'],
-                                            'rarity' : 10}
+                                            'type' : ['weapon', 'light weapon', 'melee', 'simple weapon'],
+                                            'rarity' : common}
 
         self.items['morning star'] = {'name' : 'morning star',
                                                     'cost' : 8,
@@ -81,8 +88,8 @@ class Tables:
                                                     'class' : 'simple',
                                                     'icon' : [pyHerc.data.tiles.item_morning_star_1,
                                                                     pyHerc.data.tiles.item_morning_star_2],
-                                                    'type' : ['weapon', 'one-handed', 'melee', 'simple weapon'],
-                                                    'rarity' : 7}
+                                                    'type' : ['weapon', 'one-handed weapon', 'melee', 'simple weapon'],
+                                                    'rarity' : common}
 
         self.items['short sword'] = {'name' : 'short sword',
                                                 'cost' : 10,
@@ -92,10 +99,10 @@ class Tables:
                                                 'weight' : 2,
                                                 'damage type' : ['piercing'],
                                                 'class' : 'martial',
-                                                'icon' : [pyHerc.data.tiles.item_morning_star_1,
-                                                                pyHerc.data.tiles.item_morning_star_2],
-                                                'type' : ['weapon', 'light', 'melee', 'martial weapon'],
-                                                'rarity' : 8}
+                                                'icon' : [pyHerc.data.tiles.item_short_sword_1,
+                                                                pyHerc.data.tiles.item_short_sword_2],
+                                                'type' : ['weapon', 'light weapon', 'melee', 'martial weapon'],
+                                                'rarity' : common}
 
         self.creatures['rat'] = {'name' : 'rat',
                                         'str' : 4,
@@ -125,12 +132,19 @@ class Tables:
         Construct lookup tables for different kinds of items
         """
 
-        itemsByTag = {}
+        self.itemsByTag = {}
+        self.tagScore = {}
 
         for itemKey in self.items.keys():
             for type in self.items[itemKey]['type']:
                 if type in self.itemsByTag.keys():
-                    self.itemsByTag[type].append(self.items[itemKey])
+                    lowerBound = self.tagScore[type]
+                    self.tagScore[type] = self.tagScore[type] + self.items[itemKey]['rarity']
+                    upperBound = self.tagScore[type]
+                    self.itemsByTag[type].append((itemKey, lowerBound, upperBound))
                 else:
                     self.itemsByTag[type] = []
-                    self.itemsByTag[type].append(self.items[itemKey])
+                    lowerBound = 0
+                    self.tagScore[type] = self.items[itemKey]['rarity']
+                    upperBound = self.tagScore[type]
+                    self.itemsByTag[type].append((itemKey, lowerBound, upperBound))

@@ -67,7 +67,7 @@ class test_Item:
         tables = pyHerc.rules.tables.Tables()
         tables.loadTables()
 
-        self.item = generator.generateItem(tables.items, {'type': 'special',
+        self.item = generator.generateItem(tables, {'type': 'special',
                                                 'name': 'crystal skull'})
 
         assert(self.item.name == 'Crystal skull')
