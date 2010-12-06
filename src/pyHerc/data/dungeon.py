@@ -18,6 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+import random
 import logging
 import tiles
 
@@ -182,6 +183,17 @@ class Level:
                 return creature
 
         return None
+
+    def findFreeSpace(self):
+        """
+        Finds free space where stuff can be placed
+        """
+        x = len(self.floor)
+        y = len(self.floor[0])
+        location = (random.randint(2, x - 1), random.randint(2, y - 1))
+        while self.walls[location[0]][location[1]] != tiles.wall_empty:
+            location = (random.randint(2, x - 1), random.randint(2, y - 1))
+        return location
 
 
 class Dungeon:

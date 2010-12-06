@@ -195,46 +195,30 @@ class CatacombsLevelGenerator:
 
         #enter few rats
         for i in range(0, 10):
-            #TODO: better placement algorithm
             tempCreature = self.creatureGenerator.generateCreature(model.tables, {'name':'rat'})
-            location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-            while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
-                location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-            tempLevel.addCreature(tempCreature, location)
+            tempLevel.addCreature(tempCreature, tempLevel.findFreeSpace())
 
         #throw bunch of food items around
         for i in range(0, 10):
-            #TODO: better placement algorithm
             tempItem = self.itemGenerator.generateItem(model.tables, {'type':'food'})
-            location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-            while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
-                location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-            tempItem.location = location
+            tempItem.location = tempLevel.findFreeSpace()
             tempLevel.items.append(tempItem)
 
         #throw bunch of weapons around
         for i in range(0, 10):
-            #TODO: better placement algorithm
             tempItem = self.itemGenerator.generateItem(model.tables, {'type':'weapon'})
-            location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-            while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
-                location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-            tempItem.location = location
+            tempItem.location = tempLevel.findFreeSpace()
             tempLevel.items.append(tempItem)
 
         if portal != None:
             newPortal = Portal()
-            while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
-                location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-            tempLevel.addPortal(newPortal, location, portal)
+            tempLevel.addPortal(newPortal, tempLevel.findFreeSpace(), portal)
 
         if newPortals > 0:
             for i in range(0, newPortals):
                 newPortal = Portal()
                 newPortal.icon = tiles.portal_stairs_down
-                while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
-                    location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-                tempLevel.addPortal(newPortal, location)
+                tempLevel.addPortal(newPortal, tempLevel.findFreeSpace())
 
         return tempLevel
 
