@@ -94,14 +94,30 @@ def loadResources():
         __icons[pyHerc.data.tiles.item_crystal_skull] = surface
 
         #TODO: correct graphics
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_dagger_1.png')
         __icons[pyHerc.data.tiles.item_dagger_1] = surface
         __icons[pyHerc.data.tiles.item_dagger_2] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_morningstar_1.png')
         __icons[pyHerc.data.tiles.item_morning_star_1] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_morningstar_2.png')
         __icons[pyHerc.data.tiles.item_morning_star_2] = surface
-        __icons[pyHerc.data.tiles.item_morning_star_1] = surface
-        __icons[pyHerc.data.tiles.item_morning_star_2] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_short_sword_1.png')
         __icons[pyHerc.data.tiles.item_short_sword_1] = surface
         __icons[pyHerc.data.tiles.item_short_sword_2] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/light_mace.png')
+        __icons[pyHerc.data.tiles.item_light_mace] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_sickle.png')
+        __icons[pyHerc.data.tiles.item_sickle] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/light_mace.png')
+        __icons[pyHerc.data.tiles.item_club] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_mace.png')
+        __icons[pyHerc.data.tiles.item_mace] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_shortspear.png')
+        __icons[pyHerc.data.tiles.item_shortspear] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_longspear.png')
+        __icons[pyHerc.data.tiles.item_longspear] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_spear.png')
+        __icons[pyHerc.data.tiles.item_spear] = surface
 
         __resourcesLoaded = 1
         __logger.info('resources loaded')

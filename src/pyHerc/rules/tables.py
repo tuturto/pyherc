@@ -73,9 +73,56 @@ class Tables:
                                             'weight' : 1,
                                             'damage type' : ['piercing', 'slashing'],
                                             'class' : 'simple',
-                                            'icon' : [pyHerc.data.tiles.item_dagger_1,
-                                                            pyHerc.data.tiles.item_dagger_2],
+                                            'icon' : [pyHerc.data.tiles.item_dagger_1],
                                             'type' : ['weapon', 'light weapon', 'melee', 'simple weapon'],
+                                            'rarity' : common}
+
+        self.items['light mace'] = {'name' : 'light mace',
+                                            'cost' : 5,
+                                            'damage' : '1d6',
+                                            'critical range' : 20,
+                                            'critical damage' : 2,
+                                            'weight' : 4,
+                                            'damage type' : ['bludgeoning'],
+                                            'class' : 'simple',
+                                            'icon' : [pyHerc.data.tiles.item_light_mace],
+                                            'type' : ['weapon', 'light weapon', 'melee', 'simple weapon'],
+                                            'rarity' : common}
+
+        self.items['sickle'] = {'name' : 'sickle',
+                                            'cost' : 6,
+                                            'damage' : '1d6',
+                                            'critical range' : 20,
+                                            'critical damage' : 2,
+                                            'weight' : 2,
+                                            'damage type' : ['slashing'],
+                                            'class' : 'simple',
+                                            'icon' : [pyHerc.data.tiles.item_sickle],
+                                            'type' : ['weapon', 'light weapon', 'melee', 'simple weapon'],
+                                            'rarity' : common}
+
+        self.items['club'] = {'name' : 'club',
+                                            'cost' : 0,
+                                            'damage' : '1d6',
+                                            'critical range' : 20,
+                                            'critical damage' : 2,
+                                            'weight' : 3,
+                                            'damage type' : ['bludgeoning'],
+                                            'class' : 'simple',
+                                            'icon' : [pyHerc.data.tiles.item_club],
+                                            'type' : ['weapon', 'one-handed weapon', 'melee', 'simple weapon'],
+                                            'rarity' : common}
+
+        self.items['heavy mace'] = {'name' : 'heavy mace',
+                                            'cost' : 12,
+                                            'damage' : '1d8',
+                                            'critical range' : 20,
+                                            'critical damage' : 2,
+                                            'weight' : 8,
+                                            'damage type' : ['bludgeoning'],
+                                            'class' : 'simple',
+                                            'icon' : [pyHerc.data.tiles.item_mace],
+                                            'type' : ['weapon', 'one-handed weapon', 'melee', 'simple weapon'],
                                             'rarity' : common}
 
         self.items['morning star'] = {'name' : 'morning star',
@@ -89,6 +136,54 @@ class Tables:
                                                     'icon' : [pyHerc.data.tiles.item_morning_star_1,
                                                                     pyHerc.data.tiles.item_morning_star_2],
                                                     'type' : ['weapon', 'one-handed weapon', 'melee', 'simple weapon'],
+                                                    'rarity' : common}
+
+        self.items['shortspear'] = {'name' : 'shortspear',
+                                                    'cost' : 1,
+                                                    'damage' : '1d6',
+                                                    'critical range' : 20,
+                                                    'critical damage' : 2,
+                                                    'weight' : 3,
+                                                    'damage type' : ['piercing'],
+                                                    'class' : 'simple',
+                                                    'icon' : [pyHerc.data.tiles.item_shortspear],
+                                                    'type' : ['weapon', 'one-handed weapon', 'melee', 'simple weapon'],
+                                                    'rarity' : common}
+
+        self.items['longspear'] = {'name' : 'longspear',
+                                                    'cost' : 5,
+                                                    'damage' : '1d8',
+                                                    'critical range' : 20,
+                                                    'critical damage' : 3,
+                                                    'weight' : 9,
+                                                    'damage type' : ['piercing'],
+                                                    'class' : 'simple',
+                                                    'icon' : [pyHerc.data.tiles.item_longspear],
+                                                    'type' : ['weapon', 'two-handed weapon', 'melee', 'simple weapon'],
+                                                    'rarity' : common}
+
+#       self.items['quarterstaff'] = {'name' : 'quarterstaff',
+#                                                    'cost' : 0,
+#                                                    'damage' : '1d6/1d6',
+#                                                    'critical range' : 20,
+#                                                    'critical damage' : 2,
+#                                                    'weight' : 4,
+#                                                    'damage type' : ['bludgeoning'],
+#                                                    'class' : 'simple',
+#                                                    'icon' : [pyHerc.data.tiles.item_quarterstaff],
+#                                                    'type' : ['weapon', 'two-handed weapon', 'melee', 'simple weapon'],
+#                                                    'rarity' : common}
+
+        self.items['spear'] = {'name' : 'spear',
+                                                    'cost' : 2,
+                                                    'damage' : '1d8',
+                                                    'critical range' : 20,
+                                                    'critical damage' : 3,
+                                                    'weight' : 6,
+                                                    'damage type' : ['piercing'],
+                                                    'class' : 'simple',
+                                                    'icon' : [pyHerc.data.tiles.item_spear],
+                                                    'type' : ['weapon', 'two-handed weapon', 'melee', 'simple weapon'],
                                                     'rarity' : common}
 
         self.items['short sword'] = {'name' : 'short sword',
