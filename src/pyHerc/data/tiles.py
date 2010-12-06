@@ -29,7 +29,8 @@ wall_rock = 102
 wall_rock_deco_1 = 103
 wall_rock_deco_2 = 104
 
-portal_stairs = 200
+portal_stairs_up = 200
+portal_stairs_down = 201
 
 human_fighter = 300
 

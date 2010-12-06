@@ -110,9 +110,16 @@ class Level:
             portal.otherEnd = otherEnd
             otherEnd.otherEnd = portal
             if portal.icon != None:
-                otherEnd.icon = portal.icon
+                if otherEnd.icon == None:
+                    if portal.icon == tiles.portal_stairs_down:
+                        otherEnd.icon = tiles.portal_stairs_up
+                    else:
+                        otherEnd.icon = tiles.portal_stairs_down
             else:
-                portal.icon = otherEnd.icon
+                if otherEnd.icon == tiles.portal_stairs_down:
+                    portal.icon = tiles.portal_stairs_up
+                else:
+                    portal.icon = tiles.portal_stairs_down
 
     def getPortalAt(self, location):
         """

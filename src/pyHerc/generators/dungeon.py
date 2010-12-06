@@ -46,6 +46,11 @@ class DungeonGenerator:
         generator = CatacombsLevelGenerator()
         level = generator.generateLevel(None, model, 2)
 
+        model.dungeon.levels = level
+
+        for portal in level.portals:
+            newLevel = generator.generateLevel(portal, model, 0, level = 2)
+
         itemGenerator = pyHerc.generators.item.ItemGenerator()
         skull = itemGenerator.generateSpecialItem(model.tables, {'name':'crystal skull'})
 
@@ -57,7 +62,7 @@ class DungeonGenerator:
         level.addItem(skull, location)
 
         escapePortal = Portal()
-        escapePortal.icon = pyHerc.data.tiles.portal_stairs
+        escapePortal.icon = pyHerc.data.tiles.portal_stairs_up
         escapePortal.otherEnd = None
 
         location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
@@ -65,7 +70,6 @@ class DungeonGenerator:
             location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
         level.addPortal(escapePortal, location)
 
-        model.dungeon.levels = level
         model.player.location = location
 
 class CatacombsLevelGenerator:
@@ -217,6 +221,20 @@ class CatacombsLevelGenerator:
                 location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
             tempItem.location = location
             tempLevel.items.append(tempItem)
+
+        if portal != None:
+            newPortal = Portal()
+            while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
+                location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+            tempLevel.addPortal(newPortal, location, portal)
+
+        if newPortals > 0:
+            for i in range(0, newPortals):
+                newPortal = Portal()
+                newPortal.icon = tiles.portal_stairs_down
+                while tempLevel.walls[location[0]][location[1]] != tiles.wall_empty:
+                    location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
+                tempLevel.addPortal(newPortal, location)
 
         return tempLevel
 
