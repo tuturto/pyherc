@@ -142,3 +142,28 @@ class test_Item:
 
         items = self.level.getItemsAt((12, 0))
         assert(len(items) == 0)
+
+    def test_createWeapon(self):
+        """
+        Test that a weapon can be created
+        """
+
+        generator = pyHerc.generators.item.ItemGenerator()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+
+        item = generator.generateItem(tables, {'name': 'dagger'})
+
+        assert(item != None)
+        assert(item.name == 'dagger')
+        assert(item.cost == 2)
+        assert(item.damage == '1d4')
+        assert(item.criticalRange == 19)
+        assert(item.criticalDamage == 2)
+        assert(item.weight == 1)
+        assert('piercing' in item.damageType)
+        assert('slashing' in item.damageType)
+        assert(item.weaponType == 'simple')
+        assert('weapon' in item.tags)
+        assert('simple weapon' in item.tags)
+        assert(item.rarity == 32)

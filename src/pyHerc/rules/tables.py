@@ -60,6 +60,8 @@ class Tables:
                                     'rarity' : common}
 
         self.items['crystal skull'] = {'name' : 'Crystal skull',
+                                                            'cost' : 0,
+                                                            'weight' : 5,
                                                             'questItem' : 1,
                                                             'icon' : pyHerc.data.tiles.item_crystal_skull,
                                                             'type' : ['special item', 'quest item'],

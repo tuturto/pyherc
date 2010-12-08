@@ -104,4 +104,17 @@ class ItemGenerator:
         if 'questItem' in table.keys():
             newItem.questItem = table['questItem']
 
+        newItem.cost = table['cost']
+        newItem.weight = table['weight']
+        newItem.rarity = table['rarity']
+
+        #weapon related attributes
+        if 'damage' in table.keys():
+            newItem.damage = table['damage']
+            newItem.criticalRange = table['critical range']
+            newItem.criticalDamage = table['critical damage']
+            newItem.damageType = table['damage type']
+            newItem.weaponType = table['class']
+            newItem.tags = table['type']
+
         return newItem
