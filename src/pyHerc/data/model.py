@@ -77,6 +77,7 @@ class Character:
         self.hp = None
         self.speed = None
         self.inventory = []
+        self.weapons = []
         #location
         self.level = None
         self.location = ()

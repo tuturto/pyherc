@@ -121,12 +121,32 @@ def getDamageInMelee(model, attacker, target, dice = []):
     assert(target != None)
     assert(dice != None)
 
+    if len(attacker.weapons) > 0:
+        #use weapon in close combat attack
+        attackDice = attacker.weapons[0].damage
+    else:
+        #attack with bare hands
+        attackDice = attacker.attack
+
     if len(dice) > 0:
         damageRoll = dice.pop()
+        assert(damageRoll <= utils.getMaxScore(attackDice))
     else:
-        damageRoll = utils.rollDice(attacker.attack)
+        damageRoll = utils.rollDice(attackDice)
 
-    return damageRoll + getAttributeModifier(model, attacker, 'str')
+    if len(attacker.weapons) > 0:
+        weapon = attacker.weapons[0]
+        if 'light weapon' in weapon.tags:
+            #light weapons get only 1 * str bonus when wielded two-handed
+            damage = damageRoll + getAttributeModifier(model, attacker, 'str')
+        else:
+            #all other melee weapons get 1.5 * str bonus when wielded two-handed
+            damage = damageRoll + getAttributeModifier(model, attacker, 'str') * 1.5
+    else:
+        #unarmed combat get only 1 * str bonus
+        damage = damageRoll + getAttributeModifier(model, attacker, 'str')
+
+    return int(round(damage))
 
 def getMeleeAttackBonus(model, character):
     """
@@ -137,9 +157,7 @@ def getMeleeAttackBonus(model, character):
     Returns
         Attack bonus
     """
-    #Base attack bonus + Strength modifier + size modifier
-    #TODO: take base attack bones into account
-    return getAttributeModifier(model, character, 'str') + getSizeModifier(model, character)
+    return  getAttributeModifier(model, character, 'str') + getSizeModifier(model, character)
 
 def getArmourClass(model, character):
     """

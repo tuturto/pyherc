@@ -21,6 +21,7 @@
 # def getDamageInMelee(model, attacker, target, dice = []):
 
 from pyHerc.data.dungeon import Level
+import pyHerc.generators.item
 import pyHerc.rules.combat
 import pyHerc.data.model
 import pyHerc.rules.tables
@@ -66,6 +67,7 @@ class test_meleeCombat:
         character = pyHerc.data.model.Character()
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
+        character.attack = '1d4+1' #hotshot with special fists
 
         model = pyHerc.data.model.Model()
         tables = pyHerc.rules.tables.Tables()
@@ -77,6 +79,58 @@ class test_meleeCombat:
 
         damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [5])
         assert(damage == 8)
+
+    def test_getDamageInMelee_wieldWeaponWithTwoHands(self):
+        """
+        Test that character wearing a single-handed weapon two-handedly gets the 1.5 * str bonus
+        """
+        character = pyHerc.data.model.Character()
+        character.size = 'tiny' # +2 bonus
+        character.str = 16 # +3 bonus
+
+        model = pyHerc.data.model.Model()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+        model.tables = tables
+
+        generator = pyHerc.generators.item.ItemGenerator()
+        weapon = generator.generateItem(tables, {'name' : 'club'})
+
+        character.attack = '1d4'
+        character.weapons = [weapon]
+
+        target = pyHerc.data.model.Character()
+        target.size = 'medium' # +0 bonus
+        target.dex = 10 # no bonus
+
+        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [6])
+        assert(damage == 11) # 1d6 from weapon + 3 from str + 1.5 from str while wielding 2-handed
+
+    def test_getDamageInMelee_wieldLightWeaponWithTwoHands(self):
+        """
+        Test that character wearing a light weapon two-handedly gets the 1 * str bonus
+        """
+        character = pyHerc.data.model.Character()
+        character.size = 'tiny' # +2 bonus
+        character.str = 16 # +3 bonus
+
+        model = pyHerc.data.model.Model()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+        model.tables = tables
+
+        generator = pyHerc.generators.item.ItemGenerator()
+        weapon = generator.generateItem(tables, {'name' : 'sickle'})
+
+        character.attack = '1d4'
+        character.weapons = [weapon]
+
+        target = pyHerc.data.model.Character()
+        target.size = 'medium' # +0 bonus
+        target.dex = 10 # no bonus
+
+        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [6])
+        assert(damage == 9) # 1d6 from weapon + 3 from str
 
     def test_getDamageInMelee_noPrerolls(self):
         """

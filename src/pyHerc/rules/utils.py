@@ -52,3 +52,32 @@ def rollDice(dice):
         score = score - int(bonus)
 
     return score
+
+def getMaxScore(dice):
+    """
+    Get maximum score possible with given dice
+    Parameters:
+        dice : dice to roll, in format AdS+B
+    Returns:
+        maximum score
+    """
+    assert(dice.count('d') == 1)
+
+    score = 0
+
+    amount, d, parts = dice.partition('d')
+
+    if parts.count('+') == 1:
+        sides, sign, bonus = parts.partition('+')
+    else:
+        sides, sign, bonus = parts.partition('-')
+
+    for i in range(0, int(amount)):
+        score = score + int(sides)
+
+    if sign == '+':
+        score = score + int(bonus)
+    elif sign == '-':
+        score = score - int(bonus)
+
+    return score
