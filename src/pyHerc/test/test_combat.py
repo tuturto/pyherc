@@ -78,7 +78,8 @@ class test_meleeCombat:
         target.dex = 10 # no bonus
 
         damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [5])
-        assert(damage == 8)
+        assert(damage.amount == 8)
+        assert(damage.magicBonus == 0)
 
     def test_getDamageInMelee_wieldWeaponWithTwoHands(self):
         """
@@ -104,11 +105,12 @@ class test_meleeCombat:
         target.dex = 10 # no bonus
 
         damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [6])
-        assert(damage == 11) # 1d6 from weapon + 3 from str + 1.5 from str while wielding 2-handed
+        assert(damage.amount == 11) # 1d6 from weapon + 3 from str + 1.5 from str while wielding 2-handed
 
-    def test_getDamageInMelee_wieldLightWeaponWithTwoHands(self):
+    def test_getDamageInMelee_wieldSicleWithTwoHands(self):
         """
-        Test that character wearing a light weapon two-handedly gets the 1 * str bonus
+        Test that character wearing a light weapon (sickle) two-handedly gets the 1 * str bonus
+        Check that damage type is correct
         """
         character = pyHerc.data.model.Character()
         character.size = 'tiny' # +2 bonus
@@ -130,7 +132,8 @@ class test_meleeCombat:
         target.dex = 10 # no bonus
 
         damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [6])
-        assert(damage == 9) # 1d6 from weapon + 3 from str
+        assert(damage.amount == 9) # 1d6 from weapon + 3 from str
+        assert('slashing' in damage.type)
 
     def test_getDamageInMelee_noPrerolls(self):
         """

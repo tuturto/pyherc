@@ -316,7 +316,7 @@ class GameWindow:
                 if event['hit'] == 0:
                     newLine = newLine + ' but misses'
                 else:
-                    newLine = newLine + ' and hits ' + event['damage'].__str__() + ' points of damage'
+                    newLine = newLine + ' and hits ' + event['damage'].amount.__str__() + ' points of damage'
                 self.eventHistory.append(newLine)
             elif event['type'] == 'death':
                 newLine = event['character'].name + ' is now dead'

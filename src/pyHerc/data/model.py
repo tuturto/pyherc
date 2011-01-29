@@ -112,3 +112,12 @@ class Item:
 
     def __str__(self):
         return self.name
+
+class Damage:
+    """
+    Damage done in combat
+    """
+    def __init__(self, amount = 0, type = 'bludgeoning', magicBonus = 0):
+        self.amount = amount
+        self.type = type
+        self.magicBonus = magicBonus

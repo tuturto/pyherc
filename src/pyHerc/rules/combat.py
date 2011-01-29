@@ -22,6 +22,7 @@ import logging
 from pyHerc.rules import tables
 from pyHerc.rules import utils
 from pyHerc.rules import time
+from pyHerc.data.model import Damage
 import random
 
 __logger = logging.getLogger('pyHerc.rules.combat')
@@ -58,9 +59,10 @@ def meleeAttack(model, attacker, target, dice = []):
 
         if damage < 1:
             damage = 1
-        __logger.debug('attack does ' + damage.__str__() + ' points of damage')
+        __logger.debug('attack does ' + damage.amount.__str__() + ' points of damage')
         event['damage'] = damage
-        target.hp = target.hp - damage
+        #TODO: resistances
+        target.hp = target.hp - damage.amount
         __logger.debug(target.__str__() + ' has ' + target.hp.__str__() + ' hp left')
         model.raiseEvent(event)
 
@@ -121,6 +123,8 @@ def getDamageInMelee(model, attacker, target, dice = []):
     assert(target != None)
     assert(dice != None)
 
+    damage = Damage()
+
     if len(attacker.weapons) > 0:
         #use weapon in close combat attack
         attackDice = attacker.weapons[0].damage
@@ -138,15 +142,19 @@ def getDamageInMelee(model, attacker, target, dice = []):
         weapon = attacker.weapons[0]
         if 'light weapon' in weapon.tags:
             #light weapons get only 1 * str bonus when wielded two-handed
-            damage = damageRoll + getAttributeModifier(model, attacker, 'str')
+            damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str')
+            damage.type = weapon.damageType
         else:
             #all other melee weapons get 1.5 * str bonus when wielded two-handed
-            damage = damageRoll + getAttributeModifier(model, attacker, 'str') * 1.5
+            damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str') * 1.5
+            damage.type = weapon.damageType
     else:
         #unarmed combat get only 1 * str bonus
-        damage = damageRoll + getAttributeModifier(model, attacker, 'str')
+        damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str')
+        damage.type = 'bludgeoning'
 
-    return int(round(damage))
+    damage.amount = int(round(damage.amount))
+    return damage
 
 def getMeleeAttackBonus(model, character):
     """
