@@ -70,9 +70,8 @@ class ItemGenerator:
     def generateSpecialItem(self, tables, parameters):
         """
         Generate a special item
-        Parameters:
-            tables : tables used in generation
-            parameters : hash table containing parameters for generation
+        @param tables: tables used in generation
+        @param parameters: hash table containing parameters for generation
         """
         assert(tables != None)
         assert(parameters != None)

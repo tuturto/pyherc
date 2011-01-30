@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyHerc.test.test_generator_utils</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyHerc-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyHerc-module.html">Package&nbsp;pyHerc</a> ::
+        <a href="pyHerc.test-module.html">Package&nbsp;test</a> ::
+        Module&nbsp;test_generator_utils
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyHerc.test.test_generator_utils-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="pyHerc.test.test_generator_utils-module.html">Module pyHerc.test.test_generator_utils</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment">#   Copyright 2010 Tuukka Turto</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment">#   This file is part of pyHerc.</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment">#   pyHerc is free software: you can redistribute it and/or modify</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment">#   it under the terms of the GNU General Public License as published by</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment">#   the Free Software Foundation, either version 3 of the License, or</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-comment">#   (at your option) any later version.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-comment">#   pyHerc is distributed in the hope that it will be useful,</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-comment">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-comment">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-comment">#   GNU General Public License for more details.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-comment">#   You should have received a copy of the GNU General Public License</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-comment">#   along with pyHerc.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package pyHerc=pyHerc-module.html"><a title="pyHerc" class="py-name" href="#" onclick="return doclink('link-0', 'pyHerc', 'link-0');">pyHerc</a></tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name"><a title="pyHerc" class="py-name" href="#" onclick="return doclink('link-1', 'pyHerc', 'link-0');">pyHerc</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package pyHerc.generators=pyHerc.generators-module.html"><a title="pyHerc.generators" class="py-name" href="#" onclick="return doclink('link-2', 'generators', 'link-2');">generators</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module pyHerc.generators.utils=pyHerc.generators.utils-module.html,Module pyHerc.rules.utils=pyHerc.rules.utils-module.html"><a title="pyHerc.generators.utils
+pyHerc.rules.utils" class="py-name" href="#" onclick="return doclink('link-3', 'utils', 'link-3');">utils</a></tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="test_generatorUtils"></a><div id="test_generatorUtils-def"><a name="L24"></a><tt class="py-lineno">24</tt> <a class="py-toggle" href="#" id="test_generatorUtils-toggle" onclick="return toggle('test_generatorUtils');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="pyHerc.test.test_generator_utils.test_generatorUtils-class.html">test_generatorUtils</a><tt class="py-op">:</tt> </tt>
+</div><div id="test_generatorUtils-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="test_generatorUtils-expanded"><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="test_generatorUtils.test_simpleBSPSplit_horisontal"></a><div id="test_generatorUtils.test_simpleBSPSplit_horisontal-def"><a name="L26"></a><tt class="py-lineno">26</tt> <a class="py-toggle" href="#" id="test_generatorUtils.test_simpleBSPSplit_horisontal-toggle" onclick="return toggle('test_generatorUtils.test_simpleBSPSplit_horisontal');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.test.test_generator_utils.test_generatorUtils-class.html#test_simpleBSPSplit_horisontal">test_simpleBSPSplit_horisontal</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test_generatorUtils.test_simpleBSPSplit_horisontal-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="test_generatorUtils.test_simpleBSPSplit_horisontal-expanded"><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">section</tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name"><a title="pyHerc" class="py-name" href="#" onclick="return doclink('link-4', 'pyHerc', 'link-0');">pyHerc</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="pyHerc.generators" class="py-name" href="#" onclick="return doclink('link-5', 'generators', 'link-2');">generators</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="pyHerc.generators.utils
+pyHerc.rules.utils" class="py-name" href="#" onclick="return doclink('link-6', 'utils', 'link-3');">utils</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Class pyHerc.generators.utils.BSPSection=pyHerc.generators.utils.BSPSection-class.html"><a title="pyHerc.generators.utils.BSPSection" class="py-name" href="#" onclick="return doclink('link-7', 'BSPSection', 'link-7');">BSPSection</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-number">20</tt><tt class="py-op">,</tt> <tt class="py-number">20</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-name">section</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method pyHerc.generators.utils.BSPSection.split()=pyHerc.generators.utils.BSPSection-class.html#split"><a title="pyHerc.generators.utils.BSPSection.split" class="py-name" href="#" onclick="return doclink('link-8', 'split', 'link-8');">split</a></tt><tt class="py-op">(</tt><tt class="py-name">direction</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-comment"># 1 split horisontal</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-comment"># 2 split vertical</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt><tt class="py-op">.</tt><tt class="py-name">corner1</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt><tt class="py-op">.</tt><tt class="py-name">corner1</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt><tt class="py-op">.</tt><tt class="py-name">corner1</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt><tt class="py-op">.</tt><tt class="py-name">corner2</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">20</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt><tt class="py-op">.</tt><tt class="py-name">corner2</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt><tt class="py-op">.</tt><tt class="py-name">corner1</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt><tt class="py-op">.</tt><tt class="py-name">corner2</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">20</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt><tt class="py-op">.</tt><tt class="py-name">corner2</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">20</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="test_generatorUtils.test_simpleBSPSplit_vertical"></a><div id="test_generatorUtils.test_simpleBSPSplit_vertical-def"><a name="L45"></a><tt class="py-lineno">45</tt> <a class="py-toggle" href="#" id="test_generatorUtils.test_simpleBSPSplit_vertical-toggle" onclick="return toggle('test_generatorUtils.test_simpleBSPSplit_vertical');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.test.test_generator_utils.test_generatorUtils-class.html#test_simpleBSPSplit_vertical">test_simpleBSPSplit_vertical</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test_generatorUtils.test_simpleBSPSplit_vertical-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="test_generatorUtils.test_simpleBSPSplit_vertical-expanded"><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-name">section</tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name"><a title="pyHerc" class="py-name" href="#" onclick="return doclink('link-9', 'pyHerc', 'link-0');">pyHerc</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="pyHerc.generators" class="py-name" href="#" onclick="return doclink('link-10', 'generators', 'link-2');">generators</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="pyHerc.generators.utils
+pyHerc.rules.utils" class="py-name" href="#" onclick="return doclink('link-11', 'utils', 'link-3');">utils</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="pyHerc.generators.utils.BSPSection" class="py-name" href="#" onclick="return doclink('link-12', 'BSPSection', 'link-7');">BSPSection</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-number">20</tt><tt class="py-op">,</tt> <tt class="py-number">20</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">        <tt class="py-name">section</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="pyHerc.generators.utils.BSPSection.split" class="py-name" href="#" onclick="return doclink('link-13', 'split', 'link-8');">split</a></tt><tt class="py-op">(</tt><tt class="py-name">direction</tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt class="py-comment"># 1 split horisontal</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt class="py-comment"># 2 split vertical</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt><tt class="py-op">.</tt><tt class="py-name">corner1</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt><tt class="py-op">.</tt><tt class="py-name">corner1</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt><tt class="py-op">.</tt><tt class="py-name">corner2</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt><tt class="py-op">.</tt><tt class="py-name">corner1</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt><tt class="py-op">.</tt><tt class="py-name">corner2</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">20</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt><tt class="py-op">.</tt><tt class="py-name">corner2</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">20</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt><tt class="py-op">.</tt><tt class="py-name">corner2</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">20</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"> </tt>
+<a name="test_generatorUtils.test_simpleBSPSplit_notEnoughSpace"></a><div id="test_generatorUtils.test_simpleBSPSplit_notEnoughSpace-def"><a name="L64"></a><tt class="py-lineno">64</tt> <a class="py-toggle" href="#" id="test_generatorUtils.test_simpleBSPSplit_notEnoughSpace-toggle" onclick="return toggle('test_generatorUtils.test_simpleBSPSplit_notEnoughSpace');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.test.test_generator_utils.test_generatorUtils-class.html#test_simpleBSPSplit_notEnoughSpace">test_simpleBSPSplit_notEnoughSpace</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test_generatorUtils.test_simpleBSPSplit_notEnoughSpace-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="test_generatorUtils.test_simpleBSPSplit_notEnoughSpace-expanded"><a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt class="py-name">section</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="pyHerc" class="py-name" href="#" onclick="return doclink('link-14', 'pyHerc', 'link-0');">pyHerc</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="pyHerc.generators" class="py-name" href="#" onclick="return doclink('link-15', 'generators', 'link-2');">generators</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="pyHerc.generators.utils
+pyHerc.rules.utils" class="py-name" href="#" onclick="return doclink('link-16', 'utils', 'link-3');">utils</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="pyHerc.generators.utils.BSPSection" class="py-name" href="#" onclick="return doclink('link-17', 'BSPSection', 'link-7');">BSPSection</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">,</tt> <tt class="py-number">10</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt class="py-name">section</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="pyHerc.generators.utils.BSPSection.split" class="py-name" href="#" onclick="return doclink('link-18', 'split', 'link-8');">split</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">section</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line"> </tt>
+<a name="test_generatorUtils.test_getAreaQueue"></a><div id="test_generatorUtils.test_getAreaQueue-def"><a name="L74"></a><tt class="py-lineno">74</tt> <a class="py-toggle" href="#" id="test_generatorUtils.test_getAreaQueue-toggle" onclick="return toggle('test_generatorUtils.test_getAreaQueue');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.test.test_generator_utils.test_generatorUtils-class.html#test_getAreaQueue">test_getAreaQueue</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test_generatorUtils.test_getAreaQueue-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="test_generatorUtils.test_getAreaQueue-expanded"><a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">        <tt class="py-name">section1</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="pyHerc" class="py-name" href="#" onclick="return doclink('link-19', 'pyHerc', 'link-0');">pyHerc</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="pyHerc.generators" class="py-name" href="#" onclick="return doclink('link-20', 'generators', 'link-2');">generators</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="pyHerc.generators.utils
+pyHerc.rules.utils" class="py-name" href="#" onclick="return doclink('link-21', 'utils', 'link-3');">utils</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="pyHerc.generators.utils.BSPSection" class="py-name" href="#" onclick="return doclink('link-22', 'BSPSection', 'link-7');">BSPSection</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-number">20</tt><tt class="py-op">,</tt> <tt class="py-number">20</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">        <tt class="py-name">section2</tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name"><a title="pyHerc" class="py-name" href="#" onclick="return doclink('link-23', 'pyHerc', 'link-0');">pyHerc</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="pyHerc.generators" class="py-name" href="#" onclick="return doclink('link-24', 'generators', 'link-2');">generators</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="pyHerc.generators.utils
+pyHerc.rules.utils" class="py-name" href="#" onclick="return doclink('link-25', 'utils', 'link-3');">utils</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="pyHerc.generators.utils.BSPSection" class="py-name" href="#" onclick="return doclink('link-26', 'BSPSection', 'link-7');">BSPSection</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-number">20</tt><tt class="py-op">,</tt> <tt class="py-number">10</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">        <tt class="py-name">section3</tt> <tt class="py-op">=</tt> <tt id="link-27" class="py-name"><a title="pyHerc" class="py-name" href="#" onclick="return doclink('link-27', 'pyHerc', 'link-0');">pyHerc</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="pyHerc.generators" class="py-name" href="#" onclick="return doclink('link-28', 'generators', 'link-2');">generators</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="pyHerc.generators.utils
+pyHerc.rules.utils" class="py-name" href="#" onclick="return doclink('link-29', 'utils', 'link-3');">utils</a></tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="pyHerc.generators.utils.BSPSection" class="py-name" href="#" onclick="return doclink('link-30', 'BSPSection', 'link-7');">BSPSection</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">11</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-number">20</tt><tt class="py-op">,</tt> <tt class="py-number">20</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">        <tt class="py-name">section1</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt> <tt class="py-op">=</tt> <tt class="py-name">section2</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">        <tt class="py-name">section1</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt> <tt class="py-op">=</tt> <tt class="py-name">section3</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">        <tt class="py-name">section3</tt><tt class="py-op">.</tt><tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">section1</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">        <tt class="py-name">section2</tt><tt class="py-op">.</tt><tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">section1</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">        <tt class="py-name">section4</tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name"><a title="pyHerc" class="py-name" href="#" onclick="return doclink('link-31', 'pyHerc', 'link-0');">pyHerc</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="pyHerc.generators" class="py-name" href="#" onclick="return doclink('link-32', 'generators', 'link-2');">generators</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="pyHerc.generators.utils
+pyHerc.rules.utils" class="py-name" href="#" onclick="return doclink('link-33', 'utils', 'link-3');">utils</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="pyHerc.generators.utils.BSPSection" class="py-name" href="#" onclick="return doclink('link-34', 'BSPSection', 'link-7');">BSPSection</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">,</tt> <tt class="py-number">10</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">        <tt class="py-name">section5</tt> <tt class="py-op">=</tt> <tt id="link-35" class="py-name"><a title="pyHerc" class="py-name" href="#" onclick="return doclink('link-35', 'pyHerc', 'link-0');">pyHerc</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="pyHerc.generators" class="py-name" href="#" onclick="return doclink('link-36', 'generators', 'link-2');">generators</a></tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="pyHerc.generators.utils
+pyHerc.rules.utils" class="py-name" href="#" onclick="return doclink('link-37', 'utils', 'link-3');">utils</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="pyHerc.generators.utils.BSPSection" class="py-name" href="#" onclick="return doclink('link-38', 'BSPSection', 'link-7');">BSPSection</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">11</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-number">20</tt><tt class="py-op">,</tt> <tt class="py-number">10</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">        <tt class="py-name">section2</tt><tt class="py-op">.</tt><tt class="py-name">node1</tt> <tt class="py-op">=</tt> <tt class="py-name">section4</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">        <tt class="py-name">section2</tt><tt class="py-op">.</tt><tt class="py-name">node2</tt> <tt class="py-op">=</tt> <tt class="py-name">section5</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line">        <tt class="py-name">section4</tt><tt class="py-op">.</tt><tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">section2</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line">        <tt class="py-name">section5</tt><tt class="py-op">.</tt><tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">section2</tt> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line"> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line">        <tt class="py-name">queue</tt> <tt class="py-op">=</tt> <tt class="py-name">section1</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method pyHerc.generators.utils.BSPSection.getAreaQueue()=pyHerc.generators.utils.BSPSection-class.html#getAreaQueue"><a title="pyHerc.generators.utils.BSPSection.getAreaQueue" class="py-name" href="#" onclick="return doclink('link-39', 'getAreaQueue', 'link-39');">getAreaQueue</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line">        <tt class="py-comment"># (section5, section4, section3, section2, section1)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno">91</tt>  <tt class="py-line"> </tt>
+<a name="L92"></a><tt class="py-lineno">92</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">queue</tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-name">section1</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno">93</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">queue</tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt class="py-name">section2</tt><tt class="py-op">,</tt> <tt class="py-name">section3</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno">94</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">queue</tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt class="py-name">section2</tt><tt class="py-op">,</tt> <tt class="py-name">section3</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno">95</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">queue</tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt class="py-name">section4</tt><tt class="py-op">,</tt> <tt class="py-name">section5</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno">96</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt class="py-name">queue</tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt class="py-name">section4</tt><tt class="py-op">,</tt> <tt class="py-name">section5</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L97"></a><tt class="py-lineno">97</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyHerc-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun Jan 30 22:06:26 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -24,15 +24,15 @@ import logging
 import surfaceManager
 import images
 import dialogs
-import rules.character
-import rules.moving
-import data.model
-import data.tiles
+import pyHerc.rules.character
+import pyHerc.rules.moving
+import pyHerc.data.model
+import pyHerc.data.tiles
 import pyHerc.rules.items
 import pyHerc.rules.ending
 import pyHerc.rules.time
 import pyHerc.rules.combat
-import generators.dungeon
+import pyHerc.generators.dungeon
 import pyHerc.rules.tables
 from pygame.locals import *
 
@@ -44,8 +44,7 @@ class MainWindow:
     def __init__(self,  application):
         """
         Initialises the main window
-        Params:
-            application: instance of currently running application
+        @param application: instance of currently running application
         """
         self.logger = logging.getLogger('pyHerc.gui.windows.MainWindow')
         self.logger.info('Initialising MainWindow')
@@ -77,9 +76,8 @@ class StartMenu:
     def __init__(self,  application, screen):
         """
         Initialises start menu
-        Params:
-            application: instance of currently running application
-            screen: display to draw onto
+        @param application: instance of currently running application
+        @param screen: display to draw onto
         """
         self.running = 1
         self.selection = 0

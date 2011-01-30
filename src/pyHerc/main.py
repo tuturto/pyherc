@@ -58,9 +58,7 @@ class Application:
     def loadConfiguration(self, argv):
         """
         Load configuration and process command line options
-
-        Parameters:
-            argv : command line arguments
+        @param argv: command line arguments
         """
         self.config = {}
         self.config['logging'] = {}

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyHerc.data.tiles</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyHerc-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyHerc-module.html">Package&nbsp;pyHerc</a> ::
+        <a href="pyHerc.data-module.html">Package&nbsp;data</a> ::
+        Module&nbsp;tiles
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyHerc.data.tiles-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="pyHerc.data.tiles-module.html">Module pyHerc.data.tiles</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment">#   Copyright 2010 Tuukka Turto</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment">#   This file is part of pyHerc.</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment">#   pyHerc is free software: you can redistribute it and/or modify</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment">#   it under the terms of the GNU General Public License as published by</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment">#   the Free Software Foundation, either version 3 of the License, or</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-comment">#   (at your option) any later version.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-comment">#   pyHerc is distributed in the hope that it will be useful,</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-comment">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-comment">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-comment">#   GNU General Public License for more details.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-comment">#   You should have received a copy of the GNU General Public License</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-comment">#   along with pyHerc.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable pyHerc.data.tiles.floor_empty=pyHerc.data.tiles-module.html#floor_empty"><a title="pyHerc.data.tiles.floor_empty" class="py-name" href="#" onclick="return doclink('link-0', 'floor_empty', 'link-0');">floor_empty</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable pyHerc.data.tiles.floor_rock=pyHerc.data.tiles-module.html#floor_rock"><a title="pyHerc.data.tiles.floor_rock" class="py-name" href="#" onclick="return doclink('link-1', 'floor_rock', 'link-1');">floor_rock</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable pyHerc.data.tiles.floor_brick=pyHerc.data.tiles-module.html#floor_brick"><a title="pyHerc.data.tiles.floor_brick" class="py-name" href="#" onclick="return doclink('link-2', 'floor_brick', 'link-2');">floor_brick</a></tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable pyHerc.data.tiles.floor_wood=pyHerc.data.tiles-module.html#floor_wood"><a title="pyHerc.data.tiles.floor_wood" class="py-name" href="#" onclick="return doclink('link-3', 'floor_wood', 'link-3');">floor_wood</a></tt> <tt class="py-op">=</tt> <tt class="py-number">3</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable pyHerc.data.tiles.wall_empty=pyHerc.data.tiles-module.html#wall_empty"><a title="pyHerc.data.tiles.wall_empty" class="py-name" href="#" onclick="return doclink('link-4', 'wall_empty', 'link-4');">wall_empty</a></tt> <tt class="py-op">=</tt> <tt class="py-number">100</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable pyHerc.data.tiles.wall_ground=pyHerc.data.tiles-module.html#wall_ground"><a title="pyHerc.data.tiles.wall_ground" class="py-name" href="#" onclick="return doclink('link-5', 'wall_ground', 'link-5');">wall_ground</a></tt> <tt class="py-op">=</tt> <tt class="py-number">101</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable pyHerc.data.tiles.wall_rock=pyHerc.data.tiles-module.html#wall_rock"><a title="pyHerc.data.tiles.wall_rock" class="py-name" href="#" onclick="return doclink('link-6', 'wall_rock', 'link-6');">wall_rock</a></tt> <tt class="py-op">=</tt> <tt class="py-number">102</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable pyHerc.data.tiles.wall_rock_deco_1=pyHerc.data.tiles-module.html#wall_rock_deco_1"><a title="pyHerc.data.tiles.wall_rock_deco_1" class="py-name" href="#" onclick="return doclink('link-7', 'wall_rock_deco_1', 'link-7');">wall_rock_deco_1</a></tt> <tt class="py-op">=</tt> <tt class="py-number">103</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable pyHerc.data.tiles.wall_rock_deco_2=pyHerc.data.tiles-module.html#wall_rock_deco_2"><a title="pyHerc.data.tiles.wall_rock_deco_2" class="py-name" href="#" onclick="return doclink('link-8', 'wall_rock_deco_2', 'link-8');">wall_rock_deco_2</a></tt> <tt class="py-op">=</tt> <tt class="py-number">104</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable pyHerc.data.tiles.portal_stairs_up=pyHerc.data.tiles-module.html#portal_stairs_up"><a title="pyHerc.data.tiles.portal_stairs_up" class="py-name" href="#" onclick="return doclink('link-9', 'portal_stairs_up', 'link-9');">portal_stairs_up</a></tt> <tt class="py-op">=</tt> <tt class="py-number">200</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable pyHerc.data.tiles.portal_stairs_down=pyHerc.data.tiles-module.html#portal_stairs_down"><a title="pyHerc.data.tiles.portal_stairs_down" class="py-name" href="#" onclick="return doclink('link-10', 'portal_stairs_down', 'link-10');">portal_stairs_down</a></tt> <tt class="py-op">=</tt> <tt class="py-number">201</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable pyHerc.data.tiles.human_fighter=pyHerc.data.tiles-module.html#human_fighter"><a title="pyHerc.data.tiles.human_fighter" class="py-name" href="#" onclick="return doclink('link-11', 'human_fighter', 'link-11');">human_fighter</a></tt> <tt class="py-op">=</tt> <tt class="py-number">300</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt id="link-12" class="py-name" targets="Variable pyHerc.data.tiles.creature_rat_1=pyHerc.data.tiles-module.html#creature_rat_1"><a title="pyHerc.data.tiles.creature_rat_1" class="py-name" href="#" onclick="return doclink('link-12', 'creature_rat_1', 'link-12');">creature_rat_1</a></tt> <tt class="py-op">=</tt> <tt class="py-number">400</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable pyHerc.data.tiles.creature_rat_2=pyHerc.data.tiles-module.html#creature_rat_2"><a title="pyHerc.data.tiles.creature_rat_2" class="py-name" href="#" onclick="return doclink('link-13', 'creature_rat_2', 'link-13');">creature_rat_2</a></tt> <tt class="py-op">=</tt> <tt class="py-number">401</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt id="link-14" class="py-name" targets="Variable pyHerc.data.tiles.creature_rat_3=pyHerc.data.tiles-module.html#creature_rat_3"><a title="pyHerc.data.tiles.creature_rat_3" class="py-name" href="#" onclick="return doclink('link-14', 'creature_rat_3', 'link-14');">creature_rat_3</a></tt> <tt class="py-op">=</tt> <tt class="py-number">402</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable pyHerc.data.tiles.creature_rat_4=pyHerc.data.tiles-module.html#creature_rat_4"><a title="pyHerc.data.tiles.creature_rat_4" class="py-name" href="#" onclick="return doclink('link-15', 'creature_rat_4', 'link-15');">creature_rat_4</a></tt> <tt class="py-op">=</tt> <tt class="py-number">403</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt id="link-16" class="py-name" targets="Variable pyHerc.data.tiles.item_crystal_skull=pyHerc.data.tiles-module.html#item_crystal_skull"><a title="pyHerc.data.tiles.item_crystal_skull" class="py-name" href="#" onclick="return doclink('link-16', 'item_crystal_skull', 'link-16');">item_crystal_skull</a></tt> <tt class="py-op">=</tt> <tt class="py-number">500</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt id="link-17" class="py-name" targets="Variable pyHerc.data.tiles.item_apple=pyHerc.data.tiles-module.html#item_apple"><a title="pyHerc.data.tiles.item_apple" class="py-name" href="#" onclick="return doclink('link-17', 'item_apple', 'link-17');">item_apple</a></tt> <tt class="py-op">=</tt> <tt class="py-number">501</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt id="link-18" class="py-name" targets="Variable pyHerc.data.tiles.item_dagger_1=pyHerc.data.tiles-module.html#item_dagger_1"><a title="pyHerc.data.tiles.item_dagger_1" class="py-name" href="#" onclick="return doclink('link-18', 'item_dagger_1', 'link-18');">item_dagger_1</a></tt> <tt class="py-op">=</tt> <tt class="py-number">502</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable pyHerc.data.tiles.item_dagger_2=pyHerc.data.tiles-module.html#item_dagger_2"><a title="pyHerc.data.tiles.item_dagger_2" class="py-name" href="#" onclick="return doclink('link-19', 'item_dagger_2', 'link-19');">item_dagger_2</a></tt> <tt class="py-op">=</tt> <tt class="py-number">503</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt id="link-20" class="py-name" targets="Variable pyHerc.data.tiles.item_morning_star_1=pyHerc.data.tiles-module.html#item_morning_star_1"><a title="pyHerc.data.tiles.item_morning_star_1" class="py-name" href="#" onclick="return doclink('link-20', 'item_morning_star_1', 'link-20');">item_morning_star_1</a></tt> <tt class="py-op">=</tt> <tt class="py-number">504</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt id="link-21" class="py-name" targets="Variable pyHerc.data.tiles.item_morning_star_2=pyHerc.data.tiles-module.html#item_morning_star_2"><a title="pyHerc.data.tiles.item_morning_star_2" class="py-name" href="#" onclick="return doclink('link-21', 'item_morning_star_2', 'link-21');">item_morning_star_2</a></tt> <tt class="py-op">=</tt> <tt class="py-number">505</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt id="link-22" class="py-name" targets="Variable pyHerc.data.tiles.item_short_sword_1=pyHerc.data.tiles-module.html#item_short_sword_1"><a title="pyHerc.data.tiles.item_short_sword_1" class="py-name" href="#" onclick="return doclink('link-22', 'item_short_sword_1', 'link-22');">item_short_sword_1</a></tt> <tt class="py-op">=</tt> <tt class="py-number">508</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt id="link-23" class="py-name" targets="Variable pyHerc.data.tiles.item_short_sword_2=pyHerc.data.tiles-module.html#item_short_sword_2"><a title="pyHerc.data.tiles.item_short_sword_2" class="py-name" href="#" onclick="return doclink('link-23', 'item_short_sword_2', 'link-23');">item_short_sword_2</a></tt> <tt class="py-op">=</tt> <tt class="py-number">509</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt id="link-24" class="py-name" targets="Variable pyHerc.data.tiles.item_light_mace=pyHerc.data.tiles-module.html#item_light_mace"><a title="pyHerc.data.tiles.item_light_mace" class="py-name" href="#" onclick="return doclink('link-24', 'item_light_mace', 'link-24');">item_light_mace</a></tt> <tt class="py-op">=</tt> <tt class="py-number">510</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"><tt id="link-25" class="py-name" targets="Variable pyHerc.data.tiles.item_sickle=pyHerc.data.tiles-module.html#item_sickle"><a title="pyHerc.data.tiles.item_sickle" class="py-name" href="#" onclick="return doclink('link-25', 'item_sickle', 'link-25');">item_sickle</a></tt> <tt class="py-op">=</tt> <tt class="py-number">511</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"><tt id="link-26" class="py-name" targets="Variable pyHerc.data.tiles.item_club=pyHerc.data.tiles-module.html#item_club"><a title="pyHerc.data.tiles.item_club" class="py-name" href="#" onclick="return doclink('link-26', 'item_club', 'link-26');">item_club</a></tt> <tt class="py-op">=</tt> <tt class="py-number">512</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt id="link-27" class="py-name" targets="Variable pyHerc.data.tiles.item_mace=pyHerc.data.tiles-module.html#item_mace"><a title="pyHerc.data.tiles.item_mace" class="py-name" href="#" onclick="return doclink('link-27', 'item_mace', 'link-27');">item_mace</a></tt> <tt class="py-op">=</tt> <tt class="py-number">513</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"><tt id="link-28" class="py-name" targets="Variable pyHerc.data.tiles.item_shortspear=pyHerc.data.tiles-module.html#item_shortspear"><a title="pyHerc.data.tiles.item_shortspear" class="py-name" href="#" onclick="return doclink('link-28', 'item_shortspear', 'link-28');">item_shortspear</a></tt> <tt class="py-op">=</tt> <tt class="py-number">514</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"><tt id="link-29" class="py-name" targets="Variable pyHerc.data.tiles.item_longspear=pyHerc.data.tiles-module.html#item_longspear"><a title="pyHerc.data.tiles.item_longspear" class="py-name" href="#" onclick="return doclink('link-29', 'item_longspear', 'link-29');">item_longspear</a></tt> <tt class="py-op">=</tt> <tt class="py-number">515</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"><tt id="link-30" class="py-name" targets="Variable pyHerc.data.tiles.item_spear=pyHerc.data.tiles-module.html#item_spear"><a title="pyHerc.data.tiles.item_spear" class="py-name" href="#" onclick="return doclink('link-30', 'item_spear', 'link-30');">item_spear</a></tt> <tt class="py-op">=</tt> <tt class="py-number">516</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyHerc-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun Jan 30 22:06:26 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+python c:\python26\scripts\epydoc.py --html --output c:/programming/pyhack/doc pyHerc -v

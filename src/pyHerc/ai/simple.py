@@ -89,11 +89,9 @@ def flockingHerbivore(self, model):
 def findDirection(start, end):
     """
     Find direction from start to end
-    Parameters:
-        start : start location
-        end : end location
-    Returns:
-        Direction to travel
+    @param start: start location
+    @param end: end location
+    @return: Direction to travel
     """
     assert(start != None)
     assert(end != None)

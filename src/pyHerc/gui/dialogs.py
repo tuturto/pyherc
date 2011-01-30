@@ -37,9 +37,8 @@ class Inventory:
     def __init__(self, application, screen):
         """
         Initalises this component
-        Parameters:
-            application : link to application showing the display
-            screen : surface for drawing
+        @param application: link to application showing the display
+        @param screen: surface for drawing
         """
         assert(application != None)
         assert(screen != None)
@@ -61,11 +60,9 @@ class Inventory:
     def show(self, list, multipleSelections = 1):
         """
         Displays dialog
-        Parameters:
-            list : list of items to display
-            multipleSelections : is user allowed to select multiple items
-        Returns:
-            list of selected items
+        @param list: list of items to display
+        @param multipleSelections: is user allowed to select multiple items
+        @return: list of selected items
         """
         for item in list:
             self.inventory.append({'selected' : 0, 'item' : item})

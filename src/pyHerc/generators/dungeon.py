@@ -85,12 +85,11 @@ class CatacombsLevelGenerator:
     def generateLevel(self, portal, model, newPortals = 0, level=1, roomMinSize = (6, 6)):
         """
         Generate level that starts from given stairs
-        Parameters:
-            stairs : link new level to this portal
-            model : model being used
-            newPortals : amount of portals to generate, default 0
-            level : changes behaviour of the generator
-            roomMinSize : minimum size for rooms
+        @param portal: link new level to this portal
+        @param model: model being used
+        @param newPortals: amount of portals to generate, default 0
+        @param level: changes behaviour of the generator
+        @param roomMinSize: minimum size for rooms
         """
         self.logger.debug('generating level')
         levelSize = model.config['level']['size']
@@ -234,11 +233,10 @@ class TestLevelGenerator:
     def generateLevel(self, portal, model, newPortals = 0, monsterList = None):
         """
         Generate level that starts from given stairs
-        Parameters:
-            stairs : link new level to this portal
-            model : model being used
-            newPortals : amount of portals to generate, default 0
-            monsterList : list of monsters to use
+        @param portal: link new level to this portal
+        @param model: model being used
+        @param newPortals: amount of portals to generate, default 0
+        @param monsterList: list of monsters to use
         """
         self.logger.debug('creating a test level')
         levelSize = model.config['level']['size']

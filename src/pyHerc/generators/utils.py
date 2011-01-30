@@ -50,9 +50,8 @@ class BSPSection:
         """
         Split BSPSection in two
         Links two new BSPSections into this one
-        Parameters:
-            minSize : minimum size to split into
-            direction : horizontal (1) / vertical split (2)
+        @param minSize: minimum size to split into
+        @param direction: horizontal (1) / vertical split (2)
         """
         assert(self.corner1 != None)
         assert(self.corner2 != None)
@@ -133,7 +132,7 @@ class BSPSection:
     def getCenter(self):
         """
         Calculates center of the BSPSection
-        Returns : center point
+        @return: center point
         """
         assert(self.corner1 != None)
         assert(self.corner2 != None)

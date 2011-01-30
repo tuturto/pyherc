@@ -20,7 +20,7 @@
 
 import os, sys
 import logging
-import data.model
+import pyHerc.data.model
 
 __logger = logging.getLogger('pyHerc.rules.character')
 

@@ -29,12 +29,10 @@ __logger = logging.getLogger('pyHerc.rules.moving')
 def move(model, character, direction):
     """
     moves character to specified direction
-    Params:
-        model : model of the world
-        character : character to move
-        direction : direction to move (1: north, 3: east, 9 enter portal)
-    Remarks:
-        Character does not move if it's not possible
+    @param model: model of the world
+    @param character: character to move
+    @param direction: direction to move (1: north, 3: east, 9 enter portal)
+    @note: Character does not move if it's not possible
     """
     assert(not model == None)
     assert(not character == None)
@@ -65,15 +63,10 @@ def move(model, character, direction):
 def checkMove(model, character, direction):
     """
     checks if character can move to specific direction
-    Params:
-        model : model of the world
-        character : character to move
-        direction : direction to move (1: north, 3: east, 9 enter portal)
-    Returns:
-        dictionary with following keys:
-            location : new location
-            level : new level
-            ok : 1 / 0 depending if move is ok
+    @param model: model of the world
+    @param character: character to move
+    @param direction: direction to move (1: north, 3: east, 9 enter portal)
+    @return: dictionary with keys: location, level, ok
     """
     assert(not model == None)
     assert(not character == None)
@@ -114,13 +107,9 @@ def checkMove(model, character, direction):
 def calculateNewLocation(character, direction):
     """
     Calculate new location if moving from old to certain direction
-    Params:
-        character : character who is about to move
-        direction : direction to move
-    Returns:
-        dictionary with keys:
-            level : level where move ends
-            location : location within that level
+    @param character: character who is about to move
+    @param direction: direction to move
+    @return: dictionary with keys: level, location
     """
     assert(character != None)
     assert(direction >= 1 and direction <= 9)

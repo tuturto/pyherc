@@ -62,9 +62,8 @@ class Level:
     def addItem(self, item, location):
         """
         Add an item to this level
-        Parameters:
-            item : item to add
-            location : location where to put the item
+        @param item: item to add
+        @param location: location where to put the item
         """
         assert(not item == None)
         assert(not location == None)
@@ -77,8 +76,7 @@ class Level:
     def getItemsAt(self, location):
         """
         Get list of items at location
-        Parameters:
-            location : location to check
+        @param location: location to check
         """
         assert(location != None)
         items = []
@@ -91,10 +89,9 @@ class Level:
         """
         Adds precreated portal on level at given location
         If secondary portal is specified, link them together
-        Parameters:
-            portal : portal to add
-            location : location where to add portal
-            otherEnd : optional other end of the portal
+        @param portal: portal to add
+        @param location: location where to add portal
+        @param otherEnd: optional other end of the portal
         """
         assert(portal != None)
         assert(location != None)
@@ -125,9 +122,7 @@ class Level:
     def getPortalAt(self, location):
         """
         Check if there is a portal at given location
-        Returns:
-            Portal if found
-            Otherwise None
+        @return: Portal if found, otherwise None
         """
         for portal in self.portals:
             if portal.location == location:
@@ -138,9 +133,8 @@ class Level:
     def addCreature(self, creature, location = None):
         """
         Add a creature to level
-        Parameters:
-            creature : creature to add
-            location : optional location for the creature
+        @param creature: creature to add
+        @param location: optional location for the creature
         """
         assert(creature != None)
 
@@ -158,8 +152,7 @@ class Level:
     def removeCreature(self, creature):
         """
         Remove creature from level
-        Parameters:
-            creature : creature to remove
+        @param creature: creature to remove
         """
         assert(creature != None)
         assert(creature in self.creatures)
@@ -172,10 +165,8 @@ class Level:
     def getCreatureAt(self, location):
         """
         Get list of creatures at given location
-        Parameters:
-            location : location to check
-        Returns:
-            creature if found
+        @param location: location to check
+        @return: creature if found
         """
         assert(location != None)
         for creature in self.creatures:

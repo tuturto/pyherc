@@ -28,10 +28,9 @@ __logger = logging.getLogger('pyHerc.rules.items')
 def pickUp(model, character, item):
     """
     Pick up an item
-    Parameters:
-        model : model to use
-        character : character picking up the item
-        item : item to be picked up
+    @param model: model to use
+    @param character: character picking up the item
+    @param item: item to be picked up
     """
     assert(not model == None)
     assert(not character == None)
@@ -59,10 +58,9 @@ def pickUp(model, character, item):
 def drop(model, character, item):
     """
     Drop item from inventory
-    Parameters:
-        model : model to use
-        character : character who is dropping the item
-        item : item to be dropped
+    @param model: model to use
+    @param character: character who is dropping the item
+    @param item: item to be dropped
     """
     assert(not model == None)
     assert(not character == None)
@@ -89,11 +87,10 @@ def drop(model, character, item):
 def wield(model, character, item, dualWield = False):
     """
     Wield a weapon
-    Parameters:
-        model : model to use
-        character : character trying to wield the weapon
-        item : weapon to wield
-        dualWield : should character perform dual wield
+    @param model: model to use
+    @param character: character trying to wield the weapon
+    @param item: weapon to wield
+    @param dualWield: should character perform dual wield
     """
     __logger.debug(character.__str__() + ' wielding item ' + item.__str__())
 

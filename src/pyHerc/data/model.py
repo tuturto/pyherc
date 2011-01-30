@@ -47,8 +47,7 @@ class Model:
     def raiseEvent(self, event):
         """
         Relays event to creatures
-        Params:
-            event : event to relay
+        @param event: event to relay
         """
         self.logger.debug('raising event:' + event.__str__())
         #TODO: filter events

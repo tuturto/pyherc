@@ -30,11 +30,10 @@ __logger = logging.getLogger('pyHerc.rules.combat')
 def meleeAttack(model, attacker, target, dice = []):
     """
     Perform single round of attacking in melee
-    Parameters:
-        model : model of the world
-        attacker : character attacking
-        target : target of the attack
-        dice : prerolled dice
+    @param model: model of the world
+    @param attacker: character attacking
+    @param target: target of the attack
+    @param dice: prerolled dice
     """
     assert(model != None)
     assert(attacker != None)
@@ -88,10 +87,9 @@ def meleeAttack(model, attacker, target, dice = []):
 def checkHitInMelee(model, attacker, target, dice = []):
     """
     Checks if attacker hits target
-    Parameters:
-        attacker : character attacking
-        target : target of the attack
-        dice : optional prerolled dice
+    @param attacker: character attacking
+    @param target: target of the attack
+    @param dice: optional prerolled dice
     """
     assert(model != None)
     assert(attacker != None)
@@ -112,11 +110,10 @@ def checkHitInMelee(model, attacker, target, dice = []):
 def getDamageInMelee(model, attacker, target, dice = []):
     """
     Gets damage done in melee
-    Parameters
-        model : model of the world
-        attacker : character attacking
-        target : target of the attack
-        dice : optional prerolled dice
+    @param model: model of the world
+    @param attacker: character attacking
+    @param target: target of the attack
+    @param dice: optional prerolled dice
     """
     assert(model != None)
     assert(attacker != None)
@@ -159,35 +156,29 @@ def getDamageInMelee(model, attacker, target, dice = []):
 def getMeleeAttackBonus(model, character):
     """
     Get attack bonus used in melee
-    Parameters
-        model : model of the world
-        character : character whose attack bonus should be calculated
-    Returns
-        Attack bonus
+    @param model: model of the world
+    @param character: character whose attack bonus should be calculated
+    @return: Attack bonus
     """
     return  getAttributeModifier(model, character, 'str') + getSizeModifier(model, character)
 
 def getArmourClass(model, character):
     """
     Get armour class of character
-    Parameters
-        model : model of the world
-        character : character whose armour class should be calculated
-    Returns
-        Armour class
+    @param model: model of the world
+    @param character: character whose armour class should be calculated
+    @return: Armour class
     """
     return 10 + getSizeModifier(model, character) + getAttributeModifier(model, character, 'dex')
 
 def getAttributeModifier(model, character, attribute):
     """
     Get attribute modifier
-    Parameter:
-        model : model of the world
-        character : character whose attribute modifier should be calculated
-        attribute : attribute to check
-                        str, dex
-    Returns:
-        Attribute modifier
+    @param model: model of the world
+    @param character: character whose attribute modifier should be calculated
+    @param attribute: attribute to check
+    @note: valid attributes are: str, dex
+    @return: Attribute modifier
     """
     assert(model != None)
     assert(character != None)
@@ -200,9 +191,8 @@ def getAttributeModifier(model, character, attribute):
 def getSizeModifier(model, character):
     """
     Get size modifier for character
-    Parameters:
-        model : model of the world
-        character : character whose size modifier should be calculated
+    @param model: model of the world
+    @param character: character whose size modifier should be calculated
     """
     assert(model != None)
     assert(character != None)

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyHerc.data.model</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyHerc-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyHerc-module.html">Package&nbsp;pyHerc</a> ::
+        <a href="pyHerc.data-module.html">Package&nbsp;data</a> ::
+        Module&nbsp;model
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyHerc.data.model-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="pyHerc.data.model-module.html">Module pyHerc.data.model</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#   Copyright 2010 Tuukka Turto</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#   This file is part of pyHerc.</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#   pyHerc is free software: you can redistribute it and/or modify</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#   it under the terms of the GNU General Public License as published by</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#   the Free Software Foundation, either version 3 of the License, or</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#   (at your option) any later version.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment">#   pyHerc is distributed in the hope that it will be useful,</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment">#   GNU General Public License for more details.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment">#   You should have received a copy of the GNU General Public License</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment">#   along with pyHerc.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="Model"></a><div id="Model-def"><a name="L23"></a><tt class="py-lineno"> 23</tt> <a class="py-toggle" href="#" id="Model-toggle" onclick="return toggle('Model');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="pyHerc.data.model.Model-class.html">Model</a><tt class="py-op">:</tt> </tt>
+</div><div id="Model-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Model-expanded"><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">    Represents playing world</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="Model.__init__"></a><div id="Model.__init__-def"><a name="L28"></a><tt class="py-lineno"> 28</tt> <a class="py-toggle" href="#" id="Model.__init__-toggle" onclick="return toggle('Model.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.data.model.Model-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Model.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Model.__init__-expanded"><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">logger</tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">'pyHerc.data.model.Model'</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module pyHerc.data.dungeon=pyHerc.data.dungeon-module.html,Module pyHerc.generators.dungeon=pyHerc.generators.dungeon-module.html"><a title="pyHerc.data.dungeon
+pyHerc.generators.dungeon" class="py-name" href="#" onclick="return doclink('link-0', 'dungeon', 'link-0');">dungeon</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">config</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module pyHerc.rules.tables=pyHerc.rules.tables-module.html"><a title="pyHerc.rules.tables" class="py-name" href="#" onclick="return doclink('link-1', 'tables', 'link-1');">tables</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">endCondition</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">logger</tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">'loading config'</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method pyHerc.data.model.Model.loadConfig()=pyHerc.data.model.Model-class.html#loadConfig"><a title="pyHerc.data.model.Model.loadConfig" class="py-name" href="#" onclick="return doclink('link-2', 'loadConfig', 'link-2');">loadConfig</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="Model.loadConfig"></a><div id="Model.loadConfig-def"><a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="Model.loadConfig-toggle" onclick="return toggle('Model.loadConfig');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.data.model.Model-class.html#loadConfig">loadConfig</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Model.loadConfig-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Model.loadConfig-expanded"><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">        Loads config</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">config</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">config</tt><tt class="py-op">[</tt><tt class="py-string">'level'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">config</tt><tt class="py-op">[</tt><tt class="py-string">'level'</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">'size'</tt><tt class="py-op">]</tt>  <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-number">80</tt><tt class="py-op">,</tt>  <tt class="py-number">40</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="Model.raiseEvent"></a><div id="Model.raiseEvent-def"><a name="L47"></a><tt class="py-lineno"> 47</tt> <a class="py-toggle" href="#" id="Model.raiseEvent-toggle" onclick="return toggle('Model.raiseEvent');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.data.model.Model-class.html#raiseEvent">raiseEvent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Model.raiseEvent-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Model.raiseEvent-expanded"><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">        Relays event to creatures</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">        @param event: event to relay</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">logger</tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-string">'raising event:'</tt> <tt class="py-op">+</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method pyHerc.data.model.Character.__str__()=pyHerc.data.model.Character-class.html#__str__,Method pyHerc.data.model.Item.__str__()=pyHerc.data.model.Item-class.html#__str__,Method pyHerc.generators.utils.BSPSection.__str__()=pyHerc.generators.utils.BSPSection-class.html#__str__"><a title="pyHerc.data.model.Character.__str__
+pyHerc.data.model.Item.__str__
+pyHerc.generators.utils.BSPSection.__str__" class="py-name" href="#" onclick="return doclink('link-3', '__str__', 'link-3');">__str__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-comment">#TODO: filter events</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-4" class="py-name" targets="Module pyHerc.generators.creature=pyHerc.generators.creature-module.html"><a title="pyHerc.generators.creature" class="py-name" href="#" onclick="return doclink('link-4', 'creature', 'link-4');">creature</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-string">'level'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">creatures</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">            <tt id="link-5" class="py-name"><a title="pyHerc.generators.creature" class="py-name" href="#" onclick="return doclink('link-5', 'creature', 'link-4');">creature</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method pyHerc.data.model.Character.receiveEvent()=pyHerc.data.model.Character-class.html#receiveEvent"><a title="pyHerc.data.model.Character.receiveEvent" class="py-name" href="#" onclick="return doclink('link-6', 'receiveEvent', 'link-6');">receiveEvent</a></tt><tt class="py-op">(</tt><tt class="py-name">event</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="pyHerc.data.model.Character.receiveEvent" class="py-name" href="#" onclick="return doclink('link-7', 'receiveEvent', 'link-6');">receiveEvent</a></tt><tt class="py-op">(</tt><tt class="py-name">event</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="Character"></a><div id="Character-def"><a name="L60"></a><tt class="py-lineno"> 60</tt> <a class="py-toggle" href="#" id="Character-toggle" onclick="return toggle('Character');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="pyHerc.data.model.Character-class.html">Character</a><tt class="py-op">:</tt> </tt>
+</div><div id="Character-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Character-expanded"><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">    Represents a character in playing world</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="Character.__init__"></a><div id="Character.__init__-def"><a name="L65"></a><tt class="py-lineno"> 65</tt> <a class="py-toggle" href="#" id="Character.__init__-toggle" onclick="return toggle('Character.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.data.model.Character-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Character.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Character.__init__-expanded"><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-comment"># attributes</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">str</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dex</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">con</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">int</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">wis</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cha</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">=</tt> <tt class="py-string">'prototype'</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">race</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">kit</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">hp</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">speed</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">inventory</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">weapons</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-comment">#location</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">level</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">location</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-comment">#icon</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">icon</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-comment">#internal</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tick</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">shortTermMemory</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="Character.__str__"></a><div id="Character.__str__-def"><a name="L89"></a><tt class="py-lineno"> 89</tt> <a class="py-toggle" href="#" id="Character.__str__-toggle" onclick="return toggle('Character.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.data.model.Character-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Character.__str__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Character.__str__-expanded"><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> </tt>
+</div><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="Character.receiveEvent"></a><div id="Character.receiveEvent-def"><a name="L92"></a><tt class="py-lineno"> 92</tt> <a class="py-toggle" href="#" id="Character.receiveEvent-toggle" onclick="return toggle('Character.receiveEvent');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.data.model.Character-class.html#receiveEvent">receiveEvent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Character.receiveEvent-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Character.receiveEvent-expanded"><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">        Receives an event from world and enters it into short term memory</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">shortTermMemory</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">event</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="Item"></a><div id="Item-def"><a name="L98"></a><tt class="py-lineno"> 98</tt> <a class="py-toggle" href="#" id="Item-toggle" onclick="return toggle('Item');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="pyHerc.data.model.Item-class.html">Item</a><tt class="py-op">:</tt> </tt>
+</div><div id="Item-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Item-expanded"><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">    Represents item</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="Item.__init__"></a><div id="Item.__init__-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="Item.__init__-toggle" onclick="return toggle('Item.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.data.model.Item-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Item.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Item.__init__-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-comment">#attributes</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">=</tt> <tt class="py-string">'prototype'</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">questItem</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-comment">#location</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">location</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-comment">#icon</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">icon</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<a name="Item.__str__"></a><div id="Item.__str__-def"><a name="L112"></a><tt class="py-lineno">112</tt> <a class="py-toggle" href="#" id="Item.__str__-toggle" onclick="return toggle('Item.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.data.model.Item-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Item.__str__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Item.__str__-expanded"><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> </tt>
+</div></div><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="Damage"></a><div id="Damage-def"><a name="L115"></a><tt class="py-lineno">115</tt> <a class="py-toggle" href="#" id="Damage-toggle" onclick="return toggle('Damage');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="pyHerc.data.model.Damage-class.html">Damage</a><tt class="py-op">:</tt> </tt>
+</div><div id="Damage-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Damage-expanded"><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">    Damage done in combat</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="Damage.__init__"></a><div id="Damage.__init__-def"><a name="L119"></a><tt class="py-lineno">119</tt> <a class="py-toggle" href="#" id="Damage.__init__-toggle" onclick="return toggle('Damage.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyHerc.data.model.Damage-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">amount</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">type</tt> <tt class="py-op">=</tt> <tt class="py-string">'bludgeoning'</tt><tt class="py-op">,</tt> <tt class="py-param">magicBonus</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Damage.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Damage.__init__-expanded"><a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">amount</tt> <tt class="py-op">=</tt> <tt class="py-name">amount</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">type</tt> <tt class="py-op">=</tt> <tt class="py-name">type</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">magicBonus</tt> <tt class="py-op">=</tt> <tt class="py-name">magicBonus</tt> </tt>
+</div></div><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyHerc-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun Jan 30 22:06:26 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

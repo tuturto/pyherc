@@ -38,9 +38,8 @@ class CreatureGenerator:
     def generateCreature(self, tables, parameters):
         """
         Generates a creature
-        Parameters:
-            tables : tables used in generation
-            parameters : hash table containing parameters
+        @param tables: tables used in generation
+        @param parameters: hash table containing parameters
         """
         self.logger.debug('generating a creature')
         self.logger.debug(parameters)

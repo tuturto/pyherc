@@ -27,8 +27,7 @@ __logger = logging.getLogger('pyHerc.rules.time')
 def getNextCreature(model):
     """
     Get the character who is next to take action
-    Returns
-        Character
+    @return: Character
     """
     assert(model != None)
 
@@ -47,11 +46,9 @@ def getNextCreature(model):
 def getNewTick(character, cost):
     """
     Calculate new tick for character
-    Parameters:
-        character : character performing the action
-        cost : cost of the action
-    Returns:
-        new tick
+    @param character: character performing the action
+    @param cost: cost of the action
+    @return: new tick
     """
     assert(character != None)
     assert(cost != None)

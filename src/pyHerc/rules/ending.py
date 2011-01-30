@@ -26,17 +26,10 @@ __logger = logging.getLogger('pyHerc.rules.ending')
 def checkResult(model):
     """
     Check how the game actually ended
-    Parameters:
-        model : model containing play data
-    Returns:
-        dictionary containing following keys:
-            reason : reason why game ended
-                        'dead' : player died
-                        'escaped' : player escaped from dungeon
-                        'victory' : player completed the game
-                        'quit' : player quit the game
-            score : score the player got
-            dead reason : if player died, string explaining the reason
+    @param model: model containing play data
+    @return: dictionary containing following keys: reason, score, dead reason
+    @note: valid reasons: dead, escaped, victory, quit
+    @note: dead reason will contain reason of death, if player died
     """
     result = {}
     if model.player.hp <= 0:
@@ -63,10 +56,8 @@ def checkResult(model):
 def getEndingScore(model):
     """
     Calculate ending score
-    Parameters:
-        model : model containing play data
-    Returns:
-        score
+    @param model: model containing play data
+    @return: score
     """
     #TODO: implement scoring
     return 0

@@ -27,10 +27,8 @@ __logger = logging.getLogger('pyHerc.rules.utils')
 def rollDice(dice):
     """
     Roll dice
-    Parameters:
-        dice : dice to roll, in format AdS+B
-    Returns:
-        rolled score
+    @param dice: dice to roll, in format AdS+B
+    @return: rolled score
     """
     assert(dice.count('d') == 1)
 
@@ -56,10 +54,8 @@ def rollDice(dice):
 def getMaxScore(dice):
     """
     Get maximum score possible with given dice
-    Parameters:
-        dice : dice to roll, in format AdS+B
-    Returns:
-        maximum score
+    @param dice: dice to roll, in format AdS+B
+    @return: maximum score
     """
     assert(dice.count('d') == 1)
 
