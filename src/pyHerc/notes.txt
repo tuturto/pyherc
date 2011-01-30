@@ -45,6 +45,8 @@ Event list by type:
         end location
 
 Stuff to do:
+- combat
+    - damage types
 - debug
     - explore mode
 - Events

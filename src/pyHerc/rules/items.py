@@ -85,3 +85,23 @@ def drop(model, character, item):
     character.tick = time.getNewTick(character, 1.5)
 
     __logger.debug('item dropped')
+
+def wield(model, character, item, dualWield = False):
+    """
+    Wield a weapon
+    Parameters:
+        model : model to use
+        character : character trying to wield the weapon
+        item : weapon to wield
+        dualWield : should character perform dual wield
+    """
+    __logger.debug(character.__str__() + ' wielding item ' + item.__str__())
+
+    if len(character.weapons) == 0:
+        #simple wield
+        character.weapons.append(item)
+    else:
+        #possible dual wield?
+        if dualWield == True:
+            if len(character.weapons) == 1:
+                character.weapons.append(item)

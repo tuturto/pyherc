@@ -167,3 +167,39 @@ class test_Item:
         assert('weapon' in item.tags)
         assert('simple weapon' in item.tags)
         assert(item.rarity == 32)
+
+    def test_wieldWeapon(self):
+        """
+        Test that character can wield a weapon (dagger)
+        """
+        generator = pyHerc.generators.item.ItemGenerator()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+
+        item = generator.generateItem(tables, {'name': 'dagger'})
+
+        assert(item not in self.character.weapons)
+
+        pyHerc.rules.items.wield(self.model, self.character, item)
+
+        assert(item in self.character.weapons)
+
+    def test_dualWielding(self):
+        """
+        Test that character can swap a weapon to another
+        """
+        generator = pyHerc.generators.item.ItemGenerator()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+
+        item1 = generator.generateItem(tables, {'name': 'dagger'})
+        item2 = generator.generateItem(tables, {'name': 'sickle'})
+
+        assert(item1 not in self.character.weapons)
+        assert(item2 not in self.character.weapons)
+
+        pyHerc.rules.items.wield(self.model, self.character, item1)
+        pyHerc.rules.items.wield(self.model, self.character, item2,  dualWield = True)
+
+        assert(item1 in self.character.weapons)
+        assert(item2 in self.character.weapons)
