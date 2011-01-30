@@ -203,3 +203,24 @@ class test_Item:
 
         assert(item1 in self.character.weapons)
         assert(item2 in self.character.weapons)
+
+    def test_dualWieldingTwoHandedWeapons(self):
+        """
+        Test that character can not dual wield two-handed weapon
+        """
+        generator = pyHerc.generators.item.ItemGenerator()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+
+        item1 = generator.generateItem(tables, {'name': 'longspear'})
+        item2 = generator.generateItem(tables, {'name': 'sickle'})
+
+        assert(item1 not in self.character.weapons)
+        assert(item2 not in self.character.weapons)
+
+        pyHerc.rules.items.wield(self.model, self.character, item2)
+        pyHerc.rules.items.wield(self.model, self.character, item1,  dualWield = True)
+
+        assert(item1 not in self.character.weapons)
+        assert(item2 in self.character.weapons)
+

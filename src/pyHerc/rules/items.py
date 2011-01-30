@@ -100,8 +100,14 @@ def wield(model, character, item, dualWield = False):
     if len(character.weapons) == 0:
         #simple wield
         character.weapons.append(item)
+        __logger.debug(character.__str__() + ' wielded item ' + item.__str__())
     else:
         #possible dual wield?
         if dualWield == True:
             if len(character.weapons) == 1:
-                character.weapons.append(item)
+                if ('one-handed weapon' in item.tags or 'light weapon' in item.tags):
+                    if ('one-handed weapon' in character.weapons[0].tags or 'light weapon' in character.weapons[0].tags):
+                        character.weapons.append(item)
+                        __logger.debug(character.__str__() + ' dual-wielded item ' + item.__str__())
+                        #TODO: feed back when wielding is not possible
+
