@@ -102,9 +102,34 @@ def wield(model, character, item, dualWield = False):
         #possible dual wield?
         if dualWield == True:
             if len(character.weapons) == 1:
-                if ('one-handed weapon' in item.tags or 'light weapon' in item.tags):
-                    if ('one-handed weapon' in character.weapons[0].tags or 'light weapon' in character.weapons[0].tags):
-                        character.weapons.append(item)
-                        __logger.debug(character.__str__() + ' dual-wielded item ' + item.__str__())
-                        #TODO: feed back when wielding is not possible
+                if canDualWield(model, character, character.weapons[0], item):
+                    character.weapons.append(item)
+                    __logger.debug(character.__str__() + ' dual-wielded item ' + item.__str__())
+                    #TODO: feedback when wielding is not possible
 
+def canDualWield(model, character, item1, item2):
+    """
+    Checks if character can dual-wield given items
+    @param model: model to use
+    @param character: character to try dual-wielding
+    @param item1: item to wield
+    @param item2: item to wield
+    @return: 1 if can dual-wield, 0 otherwise
+    """
+    if dualWieldable(model, character, item1) and dualWieldable(model, character, item2):
+        return 1
+    else:
+        return 0
+
+def dualWieldable(model, character, item):
+    """
+    Checks if item is dual-wieldable for a character
+    @param model: model to use
+    @param character: character to try dual-wielding
+    @param item: item to dual wield
+    @return: 1 if can dual-wield, 0 otherwise
+    """
+    if ('one-handed weapon' in item.tags or 'light weapon' in item.tags):
+        return 1
+    else:
+        return 0
