@@ -56,8 +56,8 @@ def meleeAttack(model, attacker, target, dice = []):
         __logger.debug('attack hits')
         damage = getDamageInMelee(model, attacker, target, dice)
 
-        if damage < 1:
-            damage = 1
+        if damage.amount < 1:
+            damage.amount = 1
         __logger.debug('attack does ' + damage.amount.__str__() + ' points of damage')
         event['damage'] = damage
         #TODO: resistances
@@ -151,6 +151,8 @@ def getDamageInMelee(model, attacker, target, dice = []):
         damage.type = 'bludgeoning'
 
     damage.amount = int(round(damage.amount))
+    if damage.amount < 1:
+        damage.amount = 1
     return damage
 
 def getMeleeAttackBonus(model, character):

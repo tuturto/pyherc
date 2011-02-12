@@ -18,8 +18,6 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-# def getDamageInMelee(model, attacker, target, dice = []):
-
 from pyHerc.data.dungeon import Level
 import pyHerc.generators.item
 import pyHerc.rules.combat
@@ -63,7 +61,6 @@ class test_meleeCombat:
         assert(hit == 1)
 
     def test_getDamageInMelee_simple(self):
-        #def getDamageInMelee(model, attacker, target, dice = []):
         character = pyHerc.data.model.Character()
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
@@ -79,6 +76,24 @@ class test_meleeCombat:
 
         damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [5])
         assert(damage.amount == 8)
+        assert(damage.magicBonus == 0)
+
+    def test_getDamageInMelee_negativeDamage(self):
+        character = pyHerc.data.model.Character()
+        character.size = 'tiny'
+        character.str = 1 # -5 bonus
+        character.attack = '1d3'
+
+        model = pyHerc.data.model.Model()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+        model.tables = tables
+        target = pyHerc.data.model.Character()
+        target.size = 'medium'
+        target.dex = 10
+
+        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [3])
+        assert(damage.amount == 1)
         assert(damage.magicBonus == 0)
 
     def test_getDamageInMelee_wieldWeaponWithTwoHands(self):
