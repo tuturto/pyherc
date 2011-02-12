@@ -277,6 +277,13 @@ class GameWindow:
                         dropItems = dialog.show(player.inventory)
                         for item in dropItems:
                             pyHerc.rules.items.drop(model, player, item)
+                    elif event.key == K_w:
+                        #wield weapons
+                        dialog = dialogs.Inventory(self.application, self.screen)
+                        #TODO: show already wielded weapons
+                        wieldItems = dialog.show(player.inventory)
+                        for item in wieldItems:
+                            pyHerc.rules.items.wield(model, player, item, True)
             else:
                 return
 
@@ -316,6 +323,16 @@ class GameWindow:
                 else:
                     newLine = newLine + ' and hits ' + event['damage'].amount.__str__() + ' points of damage'
                 self.eventHistory.append(newLine)
+            elif event['type'] == 'item':
+                if 'pick up' in event.keys():
+                    newLine = event['character'].name + ' picks up ' + event['item'].name
+                    self.eventHistory.append(newLine)
+                elif 'drop' in event.keys():
+                    newLine = event['character'].name + ' drops ' + event['item'].name
+                    self.eventHistory.append(newLine)
+                elif 'wield' in event.keys():
+                    newLine = event['character'].name + ' wields ' + event['item'].name
+                    self.eventHistory.append(newLine)
             elif event['type'] == 'death':
                 newLine = event['character'].name + ' is now dead'
                 self.eventHistory.append(newLine)

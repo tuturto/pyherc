@@ -98,6 +98,14 @@ def wield(model, character, item, dualWield = False):
         #simple wield
         character.weapons.append(item)
         __logger.debug(character.__str__() + ' wielded item ' + item.__str__())
+        event = {}
+        event['type'] = 'item'
+        event['wield'] = 1
+        event['character'] = character
+        event['item'] = item
+        event['location'] = character.location
+        event['level'] = character.level
+        model.raiseEvent(event)
     else:
         #possible dual wield?
         if dualWield == True:
@@ -105,6 +113,14 @@ def wield(model, character, item, dualWield = False):
                 if canDualWield(model, character, character.weapons[0], item):
                     character.weapons.append(item)
                     __logger.debug(character.__str__() + ' dual-wielded item ' + item.__str__())
+                    event = {}
+                    event['type'] = 'item'
+                    event['wield'] = 1
+                    event['character'] = character
+                    event['item'] = item
+                    event['location'] = character.location
+                    event['level'] = character.level
+                    model.raiseEvent(event)
                     #TODO: feedback when wielding is not possible
 
 def canDualWield(model, character, item1, item2):

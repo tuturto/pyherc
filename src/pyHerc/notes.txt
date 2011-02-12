@@ -36,6 +36,11 @@ Event list by type:
             item
             level
             location
+        wield/unwield
+            character
+            weapon
+            level
+            location
 
     move
         character
@@ -66,7 +71,8 @@ Stuff to do:
     - paging
     - displaying descriptions
     - displaying item quotes
-    - wielding weapons
+    + wielding weapons
+    - show already wielded weapons
 - user interface
     - end screen
         - score
