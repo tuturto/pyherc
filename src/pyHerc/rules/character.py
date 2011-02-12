@@ -80,7 +80,7 @@ def createCharacter(race, kit):
     temp_race = race_stats[race]
     temp_kit = kit_stats[kit]
 
-    newCharacter = data.model.Character()
+    newCharacter = pyHerc.data.model.Character()
     newCharacter.str = temp_race['str'] + temp_kit['str']
     newCharacter.dex = temp_race['dex'] + temp_kit['dex']
     newCharacter.con = temp_race['con'] + temp_kit['con']
@@ -99,4 +99,4 @@ def createCharacter(race, kit):
 
 def __getIcon(race, kit):
     #TODO: implement
-    return data.tiles.human_fighter
+    return pyHerc.data.tiles.human_fighter

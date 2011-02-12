@@ -188,7 +188,7 @@ class StartNewGameWindow:
 
     def __generateNewGame(self):
         #TODO: implement properly
-        self.application.world = data.model.Model()
+        self.application.world = pyHerc.data.model.Model()
         tables = pyHerc.rules.tables.Tables()
         tables.loadTables()
         self.application.world.tables = tables
@@ -199,9 +199,9 @@ class StartNewGameWindow:
         else:
             self.application.world.config['explore'] = 0
 
-        self.character = rules.character.createCharacter('human', 'fighter')
+        self.character = pyHerc.rules.character.createCharacter('human', 'fighter')
         self.application.world.player = self.character
-        generator = generators.dungeon.DungeonGenerator()
+        generator = pyHerc.generators.dungeon.DungeonGenerator()
         generator.generateDungeon(self.application.world)
         self.character.level = self.application.world.dungeon.levels
         # self.character.location = (1, 1)
@@ -249,12 +249,12 @@ class GameWindow:
                     elif event.key in self.moveKeyMap.keys():
                         #handle moving
                         direction = self.moveKeyMap[event.key]
-                        if rules.moving.checkMove(model, player, direction)['ok']:
+                        if pyHerc.rules.moving.checkMove(model, player, direction)['ok']:
                             #check in case player escaped
                             if player.level != None:
-                                rules.moving.move(model, player, direction)
+                                pyHerc.rules.moving.move(model, player, direction)
                         else:
-                            targetLocation = rules.moving.calculateNewLocation(player, direction)
+                            targetLocation = pyHerc.rules.moving.calculateNewLocation(player, direction)
                             if 'location' in targetLocation.keys():
                                 target = player.level.getCreatureAt(targetLocation['location'])
                                 if target != None:
@@ -353,12 +353,12 @@ class GameWindow:
                     if x >= 0 and y >= 0 and x <= len(level.floor)-1 and y <= len(level.floor[x])-1:
                         tile = surfaceManager.getIcon(level.floor[x][y])
                         self.screen.blit(tile, (sx * 32, sy *32))
-                        if not level.walls[x][y] == data.tiles.wall_empty:
+                        if not level.walls[x][y] == pyHerc.data.tiles.wall_empty:
                             tile = surfaceManager.getIcon(level.walls[x][y])
                             self.screen.blit(tile, (sx * 32, sy *32))
                     else:
                         #draw empty
-                        tile = surfaceManager.getIcon(data.tiles.floor_empty)
+                        tile = surfaceManager.getIcon(pyHerc.data.tiles.floor_empty)
                         self.screen.blit(tile, (sx * 32, sy *32))
                     sx = sx + 1
                 sy = sy + 1
