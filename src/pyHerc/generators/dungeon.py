@@ -91,7 +91,7 @@ class CatacombsLevelGenerator:
         @param level: changes behaviour of the generator
         @param roomMinSize: minimum size for rooms
         """
-        self.logger.debug('generating level')
+        self.logger.debug('generating level: ' + level.__str__())
         levelSize = model.config['level']['size']
         self.logger.debug('dividing level in sections')
         BSPStack = []
@@ -192,10 +192,16 @@ class CatacombsLevelGenerator:
                             tempLevel.walls[x][y] = tiles.wall_rock
                 tempWalls = []
 
-        #enter few rats
+        #TODO: more random content creation
+        #enter few monsters
+        #TODO: more intelligent system to choose monsters
         for i in range(0, 10):
-            tempCreature = self.creatureGenerator.generateCreature(model.tables, {'name':'rat'})
-            tempLevel.addCreature(tempCreature, tempLevel.findFreeSpace())
+            if level == 1:
+                tempCreature = self.creatureGenerator.generateCreature(model.tables, {'name':'rat'})
+                tempLevel.addCreature(tempCreature, tempLevel.findFreeSpace())
+            else:
+                tempCreature = self.creatureGenerator.generateCreature(model.tables, {'name':'fire beetle'})
+                tempLevel.addCreature(tempCreature, tempLevel.findFreeSpace())
 
         #throw bunch of food items around
         for i in range(0, 10):

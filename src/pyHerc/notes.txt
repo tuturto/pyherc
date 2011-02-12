@@ -53,6 +53,7 @@ Stuff to do:
 
 - combat
     + damage types
+    - natural base attack bonus
 - debug
     - explore mode
 - Events

@@ -38,6 +38,8 @@ creature_rat_1 = 400
 creature_rat_2 = 401
 creature_rat_3 = 402
 creature_rat_4 = 403
+creature_beetle_1 = 404
+creature_beetle_2 = 405
 
 item_crystal_skull = 500
 item_apple = 501

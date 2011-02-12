@@ -217,6 +217,20 @@ class Tables:
                                         'attack' : '1d4',
                                         'size' : 'small'}
 
+        self.creatures['fire beetle'] = {'name' : 'fire beetle',
+                                        'str' : 10,
+                                        'dex' : 11,
+                                        'con' : 11,
+                                        'int' : 0,
+                                        'wis' : 10,
+                                        'cha' : 7,
+                                        'hp' : 4,
+                                        'speed' : 1.9,
+                                        'icon' : [pyHerc.data.tiles.creature_beetle_1,
+                                                        pyHerc.data.tiles.creature_beetle_2],
+                                        'attack' : '2d4',
+                                        'size' : 'small'}
+
         self.sizeModifier = {'colossal' :  -8, 'gargantuan' : -4, 'huge' : -2, 'large' : -1,
                                 'medium' : 0, 'small' : 1, 'tiny' : 2, 'diminutive' : 4, 'fine' : 8}
 

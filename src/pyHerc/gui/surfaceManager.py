@@ -69,6 +69,10 @@ def loadResources():
         __icons[pyHerc.data.tiles.creature_rat_3] = surface
         surface = pygame.image.load('C:/programming/pyHack/resources/creature_rat_4.png')
         __icons[pyHerc.data.tiles.creature_rat_4] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/creature_beetle_1.png')
+        __icons[pyHerc.data.tiles.creature_beetle_1] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/creature_beetle_2.png')
+        __icons[pyHerc.data.tiles.creature_beetle_2] = surface
 
         surface = pygame.image.load('C:/programming/pyHack/resources/floor_stone.png')
         __icons[pyHerc.data.tiles.floor_rock] = surface
