@@ -270,7 +270,7 @@ class GameWindow:
                     elif event.key == K_i:
                         #display inventory
                         dialog = dialogs.Inventory(self.application, self.screen)
-                        dialog.show(player.inventory, multipleSelections = 0)
+                        dialog.show(player.inventory, 0)
                     elif event.key == K_d:
                         #drop items
                         dialog = dialogs.Inventory(self.application, self.screen)

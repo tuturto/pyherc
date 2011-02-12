@@ -46,6 +46,7 @@ class Inventory:
         self.logger = logging.getLogger('pyHerc.gui.dialogs.Inventory')
         self.inventory = [] # [{'selected': 1/0, 'item' : Item}]
         self.selected = None
+        self.selectCount = 0
         self.application = application
         self.screen = screen
         self.page = 0
@@ -57,13 +58,17 @@ class Inventory:
 
         self.background = surfaceManager.getImage(images.image_inventory_menu)
 
-    def show(self, list, multipleSelections = 1):
+    def show(self, list, multipleSelections = -1):
         """
         Displays dialog
         @param list: list of items to display
-        @param multipleSelections: is user allowed to select multiple items
+        @param multipleSelections: amount of items user is allowed to select
         @return: list of selected items
+        @note: if multipleSelections is not specified, default to amount of items
         """
+        if multipleSelections == -1:
+            multipleSelections = len(list)
+
         for item in list:
             self.inventory.append({'selected' : 0, 'item' : item})
 
@@ -86,9 +91,14 @@ class Inventory:
                             if self.inventory[index]['selected'] == 1:
                                 self.inventory[index]['selected'] = 0
                                 self.selected = None
+                                self.selectCount = self.selectCount - 1
                             else:
-                                self.inventory[index]['selected'] = 1
-                                if multipleSelections == 0:
+                                if multipleSelections > 1:
+                                    if self.selectCount < multipleSelections:
+                                        self.inventory[index]['selected'] = 1
+                                        self.selectCount = self.selectCount + 1
+                                else:
+                                    self.inventory[index]['selected'] = 1
                                     if self.selected != None:
                                         self.inventory[self.selected]['selected'] = 0
                                         self.selected = index

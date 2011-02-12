@@ -45,8 +45,9 @@ Event list by type:
         end location
 
 Stuff to do:
+
 - combat
-    - damage types
+    + damage types
 - debug
     - explore mode
 - Events
@@ -65,6 +66,7 @@ Stuff to do:
     - paging
     - displaying descriptions
     - displaying item quotes
+    - wielding weapons
 - user interface
     - end screen
         - score
