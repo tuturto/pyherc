@@ -281,7 +281,7 @@ class GameWindow:
                         #wield weapons
                         dialog = dialogs.Inventory(self.application, self.screen)
                         #TODO: show already wielded weapons
-                        wieldItems = dialog.show(player.inventory)
+                        wieldItems = dialog.show(player.inventory, 2)
                         for item in wieldItems:
                             pyHerc.rules.items.wield(model, player, item, True)
             else:
