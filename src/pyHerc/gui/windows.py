@@ -243,7 +243,7 @@ class GameWindow:
                     self.logger.info('Quit received, exiting')
                     self.application.running = 0
                 if event.type == pygame.KEYDOWN:
-                    if event.key == K_q:
+                    if event.key == K_ESCAPE:
                         #quit
                         self.application.world.endCondition = 1
                     elif event.key in self.moveKeyMap.keys():
