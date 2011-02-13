@@ -250,3 +250,15 @@ class test_Item:
 
         assert(not pyHerc.rules.items.dualWieldable(self.model, self.character, item1))
         assert(pyHerc.rules.items.dualWieldable(self.model, self.character, item2))
+
+    def test_dualWieldableApples(self):
+        """
+        Test that system can determine if item is dual-wieldable when using mundane items
+        """
+        generator = pyHerc.generators.item.ItemGenerator()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+
+        item = generator.generateItem(tables, {'name': 'apple'})
+
+        assert(not pyHerc.rules.items.dualWieldable(self.model, self.character, item))

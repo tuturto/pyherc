@@ -52,7 +52,6 @@ Event list by type:
 Stuff to do:
 
 - combat
-    + damage types
     - natural base attack bonus
 - debug
     - explore mode
@@ -72,7 +71,6 @@ Stuff to do:
     - paging
     - displaying descriptions
     - displaying item quotes
-    + wielding weapons
     - show already wielded weapons
 - user interface
     - end screen
@@ -112,6 +110,7 @@ Stuff Done:
     + put down
     + generic list window
     + view inventory
+    + wielding weapons
 + stairs / portals
     + generating and linking levels
     + walking up and down
@@ -122,6 +121,8 @@ Stuff Done:
     + generating
     + AI
 + fighting
+    + damage types
+    + attacks with mundane weapons
 + User Interface
     + end screen
         + result

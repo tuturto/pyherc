@@ -124,7 +124,11 @@ def getDamageInMelee(model, attacker, target, dice = []):
 
     if len(attacker.weapons) > 0:
         #use weapon in close combat attack
-        attackDice = attacker.weapons[0].damage
+        if hasattr(attacker.weapons[0], 'damage'):
+            attackDice = attacker.weapons[0].damage
+        else:
+            #mundane items do 1 point of damage + bonuses
+            attackDice = '1d1'
     else:
         #attack with bare hands
         attackDice = attacker.attack
@@ -137,14 +141,19 @@ def getDamageInMelee(model, attacker, target, dice = []):
 
     if len(attacker.weapons) > 0:
         weapon = attacker.weapons[0]
-        if 'light weapon' in weapon.tags:
-            #light weapons get only 1 * str bonus when wielded two-handed
-            damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str')
-            damage.type = weapon.damageType
+        if hasattr(weapon, 'tags'):
+            if 'light weapon' in weapon.tags:
+                #light weapons get only 1 * str bonus when wielded two-handed
+                damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str')
+                damage.type = weapon.damageType
+            else:
+                #all other melee weapons get 1.5 * str bonus when wielded two-handed
+                damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str') * 1.5
+                damage.type = weapon.damageType
         else:
-            #all other melee weapons get 1.5 * str bonus when wielded two-handed
-            damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str') * 1.5
-            damage.type = weapon.damageType
+            #character is using a mundane item as a weapon
+            damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str')
+            damage.type = 'bludgeoning'
     else:
         #unarmed combat get only 1 * str bonus
         damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str')

@@ -145,7 +145,11 @@ def dualWieldable(model, character, item):
     @param item: item to dual wield
     @return: 1 if can dual-wield, 0 otherwise
     """
-    if ('one-handed weapon' in item.tags or 'light weapon' in item.tags):
-        return 1
+    if hasattr(item, 'tags'):
+        if ('one-handed weapon' in item.tags or 'light weapon' in item.tags):
+            return 1
+        else:
+            return 0
     else:
+        #mundane items can not dual-wielded
         return 0

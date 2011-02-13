@@ -150,6 +150,34 @@ class test_meleeCombat:
         assert(damage.amount == 9) # 1d6 from weapon + 3 from str
         assert('slashing' in damage.type)
 
+    def test_getDamageInMelee_mundaneItem(self):
+        """
+        Test that character wearing an apple can use it as a weapon
+        Check that damage type is correct
+        """
+        character = pyHerc.data.model.Character()
+        character.size = 'medium'
+        character.str = 16
+
+        model = pyHerc.data.model.Model()
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables()
+        model.tables = tables
+
+        generator = pyHerc.generators.item.ItemGenerator()
+        weapon = generator.generateItem(tables, {'name' : 'apple'})
+
+        character.attack = '1d4'
+        character.weapons = [weapon]
+
+        target = pyHerc.data.model.Character()
+        target.size = 'medium' # +0 bonus
+        target.dex = 10 # no bonus
+
+        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target)
+        assert(damage.amount == 4) # 1 from apple, +3 strength bonus
+        assert('bludgeoning' in damage.type)
+
     def test_getDamageInMelee_noPrerolls(self):
         """
         Just simple test that damage in melee is possible without prerolled scores
