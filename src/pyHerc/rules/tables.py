@@ -39,6 +39,13 @@ class Tables:
         self.sizeModifier = []
         self.attributeModifier = []
 
+        self.artifact = 1
+        self.legendary = 2
+        self.epic = 4
+        self.rare = 8
+        self.uncommon = 16
+        self.common = 32
+
     def readItemsFromXML(self, document):
         parser = sax.make_parser()
         handler = ItemHandler()
@@ -285,6 +292,10 @@ class ItemHandler(sax.ContentHandler):
         elif name == 'types':
             #start of types section
             self.newItem['type'] = []
+        elif name == 'damageTypes':
+            self.newItem['damage type'] = []
+        elif name == 'icons':
+            self.newItem['icon'] = []
 
     def characters(self, ch):
         self.text = self.text + ch
@@ -307,9 +318,31 @@ class ItemHandler(sax.ContentHandler):
         elif name == 'type':
             self.newItem['type'].append(self.text)
         elif name == 'rarity':
-            self.newItem['rarity'] = self.text
+            #TODO: for now, until better way is found
+            if self.text == 'artifact':
+                self.newItem['rarity'] = 1
+            elif self.text == 'legendary':
+                self.newItem['rarity'] = 2
+            elif self.text == 'epic':
+                self.newItem['rarity'] = 4
+            elif self.text == 'rare':
+                self.newItem['rarity'] = 8
+            elif self.text == 'uncommon':
+                self.newItem['rarity'] = 16
+            elif self.text == 'common':
+                self.newItem['rarity'] = 32
         elif name == 'icon':
-            self.newItem['icon'] = pyHerc.data.tiles.__dict__[self.text]
+            self.newItem['icon'].append(pyHerc.data.tiles.__dict__[self.text])
         elif name == 'questItem':
             self.newItem['questItem'] = int(self.text)
+        elif name == 'damage':
+            self.newItem['damage'] = self.text
+        elif name == 'criticalRange':
+            self.newItem['critical range'] = int(self.text)
+        elif name == 'criticalDamage':
+            self.newItem['critical damage'] = int(self.text)
+        elif name == 'damageType':
+            self.newItem['damage type'].append(self.text)
+        elif name == 'class':
+            self.newItem['class'] = self.text
 

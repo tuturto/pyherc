@@ -29,7 +29,9 @@ class test_Tables:
                     <name>apple</name>
                     <cost>1</cost>
                     <weight>1</weight>
-                    <icon>item_apple</icon>
+                    <icons>
+                        <icon>item_apple</icon>
+                    </icons>
                     <types>
                         <type>food</type>
                     </types>
@@ -45,8 +47,8 @@ class test_Tables:
         assert tables.items['apple']['cost'] == 1
         assert tables.items['apple']['weight'] == 1
         assert tables.items['apple']['type'] == ['food']
-        assert tables.items['apple']['rarity'] == 'common'
-        assert tables.items['apple']['icon'] == pyHerc.data.tiles.item_apple
+        assert tables.items['apple']['rarity'] == tables.common
+        assert pyHerc.data.tiles.item_apple in tables.items['apple']['icon']
 
     def test_readingMoreComplexItem(self):
         itemConfig = """
@@ -56,7 +58,9 @@ class test_Tables:
                     <cost>0</cost>
                     <weight>5</weight>
                     <questItem>1</questItem>
-                    <icon>item_crystal_skull</icon>
+                    <icons>
+                        <icon>item_crystal_skull</icon>
+                    </icons>
                     <types>
                         <type>special item</type>
                         <type>quest item</type>
@@ -75,5 +79,95 @@ class test_Tables:
         assert tables.items['crystal skull']['questItem'] == 1
         assert 'special item' in tables.items['crystal skull']['type']
         assert 'quest item' in tables.items['crystal skull']['type']
-        assert tables.items['crystal skull']['rarity'] == 'artifact'
-        assert tables.items['crystal skull']['icon'] == pyHerc.data.tiles.item_crystal_skull
+        assert tables.items['crystal skull']['rarity'] == tables.artifact
+        assert pyHerc.data.tiles.item_crystal_skull in tables.items['crystal skull']['icon']
+
+    def test_readingTwoItemsFromConfig(self):
+        itemConfig = """
+            <items>
+                <item>
+                    <name>apple</name>
+                    <cost>1</cost>
+                    <weight>1</weight>
+                    <icons>
+                        <icon>item_apple</icon>
+                    </icons>
+                    <types>
+                        <type>food</type>
+                    </types>
+                    <rarity>common</rarity>
+                </item>
+                <item>
+                    <name>crystal skull</name>
+                    <cost>0</cost>
+                    <weight>5</weight>
+                    <questItem>1</questItem>
+                    <icons>
+                        <icon>item_crystal_skull</icon>
+                    </icons>
+                    <types>
+                        <type>special item</type>
+                        <type>quest item</type>
+                    </types>
+                    <rarity>artifact</rarity>
+                </item>
+            </items>
+        """
+
+        tables = pyHerc.rules.tables.Tables()
+        tables.readItemsFromXML(itemConfig)
+
+        assert 'crystal skull' in tables.items.keys()
+        assert 'apple' in tables.items.keys()
+        assert tables.items['crystal skull']['weight'] == 5
+        assert pyHerc.data.tiles.item_apple in tables.items['apple']['icon']
+
+    def test_readingWeaponFromConfig(self):
+        itemConfig = """
+            <items>
+                <item>
+                    <name>morning star</name>
+                    <cost>8</cost>
+                    <damage>1d8</damage>
+                    <criticalRange>20</criticalRange>
+                    <criticalDamage>2</criticalDamage>
+                    <weight>5</weight>
+                    <damageTypes>
+                        <damageType>bludgeoning</damageType>
+                        <damageType>piercing</damageType>
+                    </damageTypes>
+                    <class>simple</class>
+                    <icons>
+                        <icon>item_morning_star_1</icon>
+                        <icon>item_morning_star_2</icon>
+                    </icons>
+                    <types>
+                        <type>weapon</type>
+                        <type>one-handed weapon</type>
+                        <type>melee</type>
+                        <type>simple weapon</type>
+                    </types>
+                    <rarity>common</rarity>
+                </item>
+            </items>
+            """
+        tables = pyHerc.rules.tables.Tables()
+        tables.readItemsFromXML(itemConfig)
+
+        item = tables.items['morning star']
+        assert item['name'] == 'morning star'
+        assert item['cost'] == 8
+        assert item['damage'] == '1d8'
+        assert item['critical range'] == 20
+        assert item['critical damage'] == 2
+        assert item['weight'] == 5
+        assert 'bludgeoning' in item['damage type']
+        assert 'piercing' in item['damage type']
+        assert item['class'] == 'simple'
+        assert pyHerc.data.tiles.item_morning_star_1 in item['icon']
+        assert pyHerc.data.tiles.item_morning_star_2 in item['icon']
+        assert 'weapon' in item['type']
+        assert 'one-handed weapon' in item['type']
+        assert 'melee' in item['type']
+        assert 'simple weapon' in item['type']
+        assert item['rarity'] == tables.common
