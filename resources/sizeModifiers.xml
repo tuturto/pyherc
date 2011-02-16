@@ -1,0 +1,11 @@
+<sizeModifiers>
+    <modifier name="colossal" bonus="-8" />
+    <modifier name="gargantuan" bonus="-4" />
+    <modifier name="huge" bonus="-2" />
+    <modifier name="large" bonus="-1" />
+    <modifier name="medium" bonus="0" />
+    <modifier name="small" bonus="1" />
+    <modifier name="tiny" bonus="2" />
+    <modifier name="diminutive" bonus="4" />
+    <modifier name="fine" bonus="8" />
+</sizeModifiers>
