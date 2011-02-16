@@ -348,12 +348,9 @@ class GameWindow:
         #parse recent events and make a nice text out of them
         eventText = []
         if len(self.eventHistory) <= 5:
-            for text in self.eventHistory:
-                eventText.append(text)
+            eventText = self.eventHistory
         else:
-            for text in self.eventHistory[-5:-1]:
-                eventText.append(text)
-            eventText.append(self.eventHistory[-1])
+            eventText = self.eventHistory[-5:]
 
         return eventText
 
