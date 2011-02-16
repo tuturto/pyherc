@@ -18,4 +18,138 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-pass
+import pyHerc.data.model
+import pyHerc.rules.tables
+
+class IntegrationTest():
+
+    def setup(self):
+        itemConfig = """
+<items>
+    <item>
+        <name>apple</name>
+        <cost>1</cost>
+        <weight>1</weight>
+        <icons>
+            <icon>item_apple</icon>
+        </icons>
+        <types>
+            <type>food</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>crystal skull</name>
+        <cost>0</cost>
+        <weight>5</weight>
+        <questItem>1</questItem>
+        <icons>
+            <icon>item_crystal_skull</icon>
+        </icons>
+        <types>
+            <type>special item</type>
+            <type>quest item</type>
+        </types>
+        <rarity>artifact</rarity>
+    </item>
+    <item>
+        <name>dagger</name>
+        <cost>2</cost>
+        <damage>1d4</damage>
+        <criticalRange>19</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>1</weight>
+        <damageTypes>
+            <damageType>piercing</damageType>
+            <damageType>slashing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_dagger_1</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>light weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>longspear</name>
+        <cost>5</cost>
+        <damage>1d8</damage>
+        <criticalRange>20</criticalRange>
+        <criticalDamage>3</criticalDamage>
+        <weight>9</weight>
+        <damageTypes>
+            <damageType>piercing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_longspear</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>two-handed weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>sickle</name>
+        <cost>6</cost>
+        <damage>1d6</damage>
+        <criticalRange>20</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>2</weight>
+        <damageTypes>
+            <damageType>slashing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_sickle</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>light weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>club</name>
+        <cost>0</cost>
+        <damage>1d6</damage>
+        <criticalRange>20</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>3</weight>
+        <damageTypes>
+            <damageType>bludgeoning</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_club</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>one-handed weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+</items>
+"""
+        self.model = pyHerc.data.model.Model()
+        self.generator = pyHerc.generators.item.ItemGenerator()
+        self.tables = pyHerc.rules.tables.Tables()
+        self.tables.loadTables(itemConfig)
+        self.model.tables = self.tables
+
+        self.setUp2()
+
+    def setUp2(self):
+        pass

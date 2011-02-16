@@ -26,75 +26,19 @@ from pyHerc.data.model import Model
 from pyHerc.data.model import Character
 from pyHerc.generators.dungeon import TestLevelGenerator
 from pyHerc.rules.tables import Tables
+from pyHerc.test import IntegrationTest
 
 import pyHerc.rules.moving
 
-class test_moving:
+class test_moving(IntegrationTest):
 
-    def setup(self):
-        itemConfig = """
-<items>
-    <item>
-        <name>apple</name>
-        <cost>1</cost>
-        <weight>1</weight>
-        <icons>
-            <icon>item_apple</icon>
-        </icons>
-        <types>
-            <type>food</type>
-        </types>
-        <rarity>common</rarity>
-    </item>
-    <item>
-        <name>crystal skull</name>
-        <cost>0</cost>
-        <weight>5</weight>
-        <questItem>1</questItem>
-        <icons>
-            <icon>item_crystal_skull</icon>
-        </icons>
-        <types>
-            <type>special item</type>
-            <type>quest item</type>
-        </types>
-        <rarity>artifact</rarity>
-    </item>
-    <item>
-        <name>dagger</name>
-        <cost>2</cost>
-        <damage>1d4</damage>
-        <criticalRange>19</criticalRange>
-        <criticalDamage>2</criticalDamage>
-        <weight>1</weight>
-        <damageTypes>
-            <damageType>piercing</damageType>
-            <damageType>slashing</damageType>
-        </damageTypes>
-        <class>simple</class>
-        <icons>
-            <icon>item_dagger_1</icon>
-        </icons>
-        <types>
-            <type>weapon</type>
-            <type>light weapon</type>
-            <type>melee</type>
-            <type>simple weapon</type>
-        </types>
-        <rarity>common</rarity>
-    </item>
-</items>
-        """
-        self.model = Model()
+    def setUp2(self):
         self.character = Character()
-        generator = TestLevelGenerator()
-        tables = Tables()
-        tables.loadTables(itemConfig)
-        self.model.tables = tables
+        levelGenerator = TestLevelGenerator()
 
         self.model.dungeon = Dungeon()
-        self.level1 = generator.generateLevel(None, self.model, monsterList = [])
-        self.level2 = generator.generateLevel(None, self.model, monsterList = [])
+        self.level1 = levelGenerator.generateLevel(None, self.model, monsterList = [])
+        self.level2 = levelGenerator.generateLevel(None, self.model, monsterList = [])
         self.portal1 = Portal()
         self.portal1.icon = pyHerc.data.tiles.portal_stairs_down
         self.portal2 = Portal()

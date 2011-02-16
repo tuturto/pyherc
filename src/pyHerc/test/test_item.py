@@ -24,114 +24,17 @@ import pyHerc.data.tiles
 import pyHerc.data.dungeon
 import pyHerc.rules.items
 import pyHerc.rules.tables
+from pyHerc.test import IntegrationTest
 
-class test_ItemWithGenerator:
+class test_ItemWithGenerator(IntegrationTest):
     """
     Tests for items that require item generator to be working
     """
 
-    def setup(self):
-        itemConfig = """
-<items>
-    <item>
-        <name>apple</name>
-        <cost>1</cost>
-        <weight>1</weight>
-        <icons>
-            <icon>item_apple</icon>
-        </icons>
-        <types>
-            <type>food</type>
-        </types>
-        <rarity>common</rarity>
-    </item>
-    <item>
-        <name>crystal skull</name>
-        <cost>0</cost>
-        <weight>5</weight>
-        <questItem>1</questItem>
-        <icons>
-            <icon>item_crystal_skull</icon>
-        </icons>
-        <types>
-            <type>special item</type>
-            <type>quest item</type>
-        </types>
-        <rarity>artifact</rarity>
-    </item>
-    <item>
-        <name>dagger</name>
-        <cost>2</cost>
-        <damage>1d4</damage>
-        <criticalRange>19</criticalRange>
-        <criticalDamage>2</criticalDamage>
-        <weight>1</weight>
-        <damageTypes>
-            <damageType>piercing</damageType>
-            <damageType>slashing</damageType>
-        </damageTypes>
-        <class>simple</class>
-        <icons>
-            <icon>item_dagger_1</icon>
-        </icons>
-        <types>
-            <type>weapon</type>
-            <type>light weapon</type>
-            <type>melee</type>
-            <type>simple weapon</type>
-        </types>
-        <rarity>common</rarity>
-    </item>
-    <item>
-        <name>longspear</name>
-        <cost>5</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
-        <criticalDamage>3</criticalDamage>
-        <weight>9</weight>
-        <damageTypes>
-            <damageType>piercing</damageType>
-        </damageTypes>
-        <class>simple</class>
-        <icons>
-            <icon>item_longspear</icon>
-        </icons>
-        <types>
-            <type>weapon</type>
-            <type>two-handed weapon</type>
-            <type>melee</type>
-            <type>simple weapon</type>
-        </types>
-        <rarity>common</rarity>
-    </item>
-    <item>
-        <name>sickle</name>
-        <cost>6</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
-        <criticalDamage>2</criticalDamage>
-        <weight>2</weight>
-        <damageTypes>
-            <damageType>slashing</damageType>
-        </damageTypes>
-        <class>simple</class>
-        <icons>
-            <icon>item_sickle</icon>
-        </icons>
-        <types>
-            <type>weapon</type>
-            <type>light weapon</type>
-            <type>melee</type>
-            <type>simple weapon</type>
-        </types>
-        <rarity>common</rarity>
-    </item>
-</items>
-"""
+    def setUp2(self):
         self.item = None
         self.level = None
         self.dungeon = None
-        self.model = None
         self.character = None
 
         self.item = pyHerc.data.model.Item()
@@ -155,13 +58,8 @@ class test_ItemWithGenerator:
         self.dungeon = pyHerc.data.dungeon.Dungeon()
         self.dungeon.levels = self.level
 
-        self.model = pyHerc.data.model.Model()
         self.model.dungeon = self.dungeon
         self.model.player = self.character
-
-        self.generator = pyHerc.generators.item.ItemGenerator()
-        self.tables = pyHerc.rules.tables.Tables()
-        self.tables.loadTables(itemConfig)
 
     def test_crystalSkullGeneration(self):
         """
