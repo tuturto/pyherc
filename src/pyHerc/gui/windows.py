@@ -222,8 +222,9 @@ class GameWindow:
         self.application = application
         self.screen = screen
         self.fullUpdate = 1
-        self.background = surfaceManager.getImage(images.image_play_area)
-        self.console = surfaceManager.getImage(images.image_console)
+        if screen != None:
+            self.background = surfaceManager.getImage(images.image_play_area)
+            self.console = surfaceManager.getImage(images.image_console)
         self.logger.debug('display initialised')
         self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
                                     K_KP4:7, K_KP7:8, K_KP5:9}
@@ -340,15 +341,19 @@ class GameWindow:
         del self.application.world.player.shortTermMemory[:]
 
     def formatEventHistory(self):
-        pass
+        """
+        Parse through event history and return 5 latests rows for displaying
+        @return: list of text
+        """
         #parse recent events and make a nice text out of them
         eventText = []
         if len(self.eventHistory) <= 5:
             for text in self.eventHistory:
                 eventText.append(text)
         else:
-            for text in self.eventHistory[-6:-1]:
+            for text in self.eventHistory[-5:-1]:
                 eventText.append(text)
+            eventText.append(self.eventHistory[-1])
 
         return eventText
 
