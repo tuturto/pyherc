@@ -70,7 +70,7 @@ class test_Item:
         self.item = generator.generateItem(tables, {'type': 'special',
                                                 'name': 'crystal skull'})
 
-        assert(self.item.name == 'Crystal skull')
+        assert(self.item.name == 'crystal skull')
         assert(self.item.questItem == 1)
         assert(self.item.icon == pyHerc.data.tiles.item_crystal_skull)
 
