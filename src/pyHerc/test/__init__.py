@@ -76,22 +76,22 @@ class IntegrationTest():
         <rarity>common</rarity>
     </item>
     <item>
-        <name>longspear</name>
+        <name>light mace</name>
         <cost>5</cost>
-        <damage>1d8</damage>
+        <damage>1d6</damage>
         <criticalRange>20</criticalRange>
-        <criticalDamage>3</criticalDamage>
-        <weight>9</weight>
+        <criticalDamage>2</criticalDamage>
+        <weight>4</weight>
         <damageTypes>
-            <damageType>piercing</damageType>
+            <damageType>bludgeoning</damageType>
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_longspear</icon>
+            <icon>item_light_mace</icon>
         </icons>
         <types>
             <type>weapon</type>
-            <type>two-handed weapon</type>
+            <type>light weapon</type>
             <type>melee</type>
             <type>simple weapon</type>
         </types>
@@ -138,6 +138,141 @@ class IntegrationTest():
             <type>one-handed weapon</type>
             <type>melee</type>
             <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>heavy mace</name>
+        <cost>12</cost>
+        <damage>1d8</damage>
+        <criticalRange>20</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>8</weight>
+        <damageTypes>
+            <damageType>bludgeoning</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_mace</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>one-handed weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>morning star</name>
+        <cost>8</cost>
+        <damage>1d8</damage>
+        <criticalRange>20</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>5</weight>
+        <damageTypes>
+            <damageType>bludgeoning</damageType>
+            <damageType>piercing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_morning_star_1</icon>
+            <icon>item_morning_star_2</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>one-handed weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>short spear</name>
+        <cost>1</cost>
+        <damage>1d6</damage>
+        <criticalRange>20</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>3</weight>
+        <damageTypes>
+            <damageType>piercing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_shortspear</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>one-handed weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>longspear</name>
+        <cost>5</cost>
+        <damage>1d8</damage>
+        <criticalRange>20</criticalRange>
+        <criticalDamage>3</criticalDamage>
+        <weight>9</weight>
+        <damageTypes>
+            <damageType>piercing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_longspear</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>two-handed weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>spear</name>
+        <cost>2</cost>
+        <damage>1d8</damage>
+        <criticalRange>20</criticalRange>
+        <criticalDamage>3</criticalDamage>
+        <weight>6</weight>
+        <damageTypes>
+            <damageType>piercing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_spear</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>two-handed weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>short sword</name>
+        <cost>10</cost>
+        <damage>1d6</damage>
+        <criticalRange>19</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>2</weight>
+        <damageTypes>
+            <damageType>piercing</damageType>
+        </damageTypes>
+        <class>martial</class>
+        <icons>
+            <icon>item_short_sword_1</icon>
+            <icon>item_short_sword_2</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>light weapon</type>
+            <type>melee</type>
+            <type>martial weapon</type>
         </types>
         <rarity>common</rarity>
     </item>
