@@ -309,6 +309,7 @@ class ItemHandler(sax.ContentHandler):
         elif name == 'rarity':
             self.newItem['rarity'] = self.text
         elif name == 'icon':
-            #TODO: for now, until better way is discovered
-            self.newItem['icon'] = int(self.text)
+            self.newItem['icon'] = pyHerc.data.tiles.__dict__[self.text]
+        elif name == 'questItem':
+            self.newItem['questItem'] = int(self.text)
 

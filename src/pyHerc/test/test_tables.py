@@ -29,7 +29,7 @@ class test_Tables:
                     <name>apple</name>
                     <cost>1</cost>
                     <weight>1</weight>
-                    <icon>501</icon>
+                    <icon>item_apple</icon>
                     <types>
                         <type>food</type>
                     </types>
@@ -47,3 +47,33 @@ class test_Tables:
         assert tables.items['apple']['type'] == ['food']
         assert tables.items['apple']['rarity'] == 'common'
         assert tables.items['apple']['icon'] == pyHerc.data.tiles.item_apple
+
+    def test_readingMoreComplexItem(self):
+        itemConfig = """
+            <items>
+                <item>
+                    <name>crystal skull</name>
+                    <cost>0</cost>
+                    <weight>5</weight>
+                    <questItem>1</questItem>
+                    <icon>item_crystal_skull</icon>
+                    <types>
+                        <type>special item</type>
+                        <type>quest item</type>
+                    </types>
+                    <rarity>artifact</rarity>
+                </item>
+            </items>
+        """
+        tables = pyHerc.rules.tables.Tables()
+        tables.readItemsFromXML(itemConfig)
+
+        assert len(tables.items) == 1
+        assert 'crystal skull' in tables.items.keys()
+        assert tables.items['crystal skull']['cost'] == 0
+        assert tables.items['crystal skull']['weight'] == 5
+        assert tables.items['crystal skull']['questItem'] == 1
+        assert 'special item' in tables.items['crystal skull']['type']
+        assert 'quest item' in tables.items['crystal skull']['type']
+        assert tables.items['crystal skull']['rarity'] == 'artifact'
+        assert tables.items['crystal skull']['icon'] == pyHerc.data.tiles.item_crystal_skull
