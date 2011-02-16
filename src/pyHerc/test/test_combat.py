@@ -26,6 +26,132 @@ import pyHerc.rules.tables
 
 class test_meleeCombat:
 
+    def setup(self):
+        itemConfig = """
+<items>
+    <item>
+        <name>apple</name>
+        <cost>1</cost>
+        <weight>1</weight>
+        <icons>
+            <icon>item_apple</icon>
+        </icons>
+        <types>
+            <type>food</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>crystal skull</name>
+        <cost>0</cost>
+        <weight>5</weight>
+        <questItem>1</questItem>
+        <icons>
+            <icon>item_crystal_skull</icon>
+        </icons>
+        <types>
+            <type>special item</type>
+            <type>quest item</type>
+        </types>
+        <rarity>artifact</rarity>
+    </item>
+    <item>
+        <name>dagger</name>
+        <cost>2</cost>
+        <damage>1d4</damage>
+        <criticalRange>19</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>1</weight>
+        <damageTypes>
+            <damageType>piercing</damageType>
+            <damageType>slashing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_dagger_1</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>light weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>longspear</name>
+        <cost>5</cost>
+        <damage>1d8</damage>
+        <criticalRange>20</criticalRange>
+        <criticalDamage>3</criticalDamage>
+        <weight>9</weight>
+        <damageTypes>
+            <damageType>piercing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_longspear</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>two-handed weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>sickle</name>
+        <cost>6</cost>
+        <damage>1d6</damage>
+        <criticalRange>20</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>2</weight>
+        <damageTypes>
+            <damageType>slashing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_sickle</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>light weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>club</name>
+        <cost>0</cost>
+        <damage>1d6</damage>
+        <criticalRange>20</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>3</weight>
+        <damageTypes>
+            <damageType>bludgeoning</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_club</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>one-handed weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+</items>
+"""
+        self.model = pyHerc.data.model.Model()
+        self.generator = pyHerc.generators.item.ItemGenerator()
+        self.tables = pyHerc.rules.tables.Tables()
+        self.tables.loadTables(itemConfig)
+        self.model.tables = self.tables
+
     def test_getArmourClass_simple(self):
         """
         Test simple calculation of armour class
@@ -35,29 +161,21 @@ class test_meleeCombat:
         character = pyHerc.data.model.Character()
         character.size = 'tiny' # +2 bonus
         character.dex = 16 # +3 bonus
-        model = pyHerc.data.model.Model()
-        tables = pyHerc.rules.tables.Tables()
-        tables.loadTables()
-        model.tables = tables
-        ac = pyHerc.rules.combat.getArmourClass(model, character)
+
+        ac = pyHerc.rules.combat.getArmourClass(self.model, character)
 
         assert(ac == 15)
-
 
     def test_checkHitInMelee_simple(self):
         # def checkHitInMelee(model, attacker, target, dice = []):
         character = pyHerc.data.model.Character()
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
-        model = pyHerc.data.model.Model()
-        tables = pyHerc.rules.tables.Tables()
-        tables.loadTables()
-        model.tables = tables
         target = pyHerc.data.model.Character()
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        hit = pyHerc.rules.combat.checkHitInMelee(model, character, target, [16])
+        hit = pyHerc.rules.combat.checkHitInMelee(self.model, character, target, [16])
         assert(hit == 1)
 
     def test_getDamageInMelee_simple(self):
@@ -66,15 +184,11 @@ class test_meleeCombat:
         character.str = 16 # +3 bonus
         character.attack = '1d4+1' #hotshot with special fists
 
-        model = pyHerc.data.model.Model()
-        tables = pyHerc.rules.tables.Tables()
-        tables.loadTables()
-        model.tables = tables
         target = pyHerc.data.model.Character()
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [5])
+        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target, dice = [5])
         assert(damage.amount == 8)
         assert(damage.magicBonus == 0)
 
@@ -84,15 +198,11 @@ class test_meleeCombat:
         character.str = 1 # -5 bonus
         character.attack = '1d3'
 
-        model = pyHerc.data.model.Model()
-        tables = pyHerc.rules.tables.Tables()
-        tables.loadTables()
-        model.tables = tables
         target = pyHerc.data.model.Character()
         target.size = 'medium'
         target.dex = 10
 
-        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [3])
+        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target, dice = [3])
         assert(damage.amount == 1)
         assert(damage.magicBonus == 0)
 
@@ -104,13 +214,7 @@ class test_meleeCombat:
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
 
-        model = pyHerc.data.model.Model()
-        tables = pyHerc.rules.tables.Tables()
-        tables.loadTables()
-        model.tables = tables
-
-        generator = pyHerc.generators.item.ItemGenerator()
-        weapon = generator.generateItem(tables, {'name' : 'club'})
+        weapon = self.generator.generateItem(self.tables, {'name' : 'club'})
 
         character.attack = '1d4'
         character.weapons = [weapon]
@@ -119,7 +223,7 @@ class test_meleeCombat:
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [6])
+        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target, dice = [6])
         assert(damage.amount == 11) # 1d6 from weapon + 3 from str + 1.5 from str while wielding 2-handed
 
     def test_getDamageInMelee_wieldSicleWithTwoHands(self):
@@ -131,13 +235,7 @@ class test_meleeCombat:
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
 
-        model = pyHerc.data.model.Model()
-        tables = pyHerc.rules.tables.Tables()
-        tables.loadTables()
-        model.tables = tables
-
-        generator = pyHerc.generators.item.ItemGenerator()
-        weapon = generator.generateItem(tables, {'name' : 'sickle'})
+        weapon = self.generator.generateItem(self.tables, {'name' : 'sickle'})
 
         character.attack = '1d4'
         character.weapons = [weapon]
@@ -146,7 +244,7 @@ class test_meleeCombat:
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target, dice = [6])
+        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target, dice = [6])
         assert(damage.amount == 9) # 1d6 from weapon + 3 from str
         assert('slashing' in damage.type)
 
@@ -159,13 +257,7 @@ class test_meleeCombat:
         character.size = 'medium'
         character.str = 16
 
-        model = pyHerc.data.model.Model()
-        tables = pyHerc.rules.tables.Tables()
-        tables.loadTables()
-        model.tables = tables
-
-        generator = pyHerc.generators.item.ItemGenerator()
-        weapon = generator.generateItem(tables, {'name' : 'apple'})
+        weapon = self.generator.generateItem(self.tables, {'name' : 'apple'})
 
         character.attack = '1d4'
         character.weapons = [weapon]
@@ -174,7 +266,7 @@ class test_meleeCombat:
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target)
+        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target)
         assert(damage.amount == 4) # 1 from apple, +3 strength bonus
         assert('bludgeoning' in damage.type)
 
@@ -187,15 +279,11 @@ class test_meleeCombat:
         character.str = 16 # +3 bonus
         character.attack = '1d4'
 
-        model = pyHerc.data.model.Model()
-        tables = pyHerc.rules.tables.Tables()
-        tables.loadTables()
-        model.tables = tables
         target = pyHerc.data.model.Character()
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        damage = pyHerc.rules.combat.getDamageInMelee(model, character, target)
+        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target)
 
     def test_melee(self):
         character = pyHerc.data.model.Character()
@@ -205,10 +293,6 @@ class test_meleeCombat:
         character.speed = 1
         character.tick = 0
 
-        model = pyHerc.data.model.Model()
-        tables = pyHerc.rules.tables.Tables()
-        tables.loadTables()
-        model.tables = tables
         level = level = Level((20, 20), 0, 0)
         target = pyHerc.data.model.Character()
         target.size = 'medium' # +0 bonus
@@ -217,7 +301,7 @@ class test_meleeCombat:
         level.addCreature(character, (10, 10))
         level.addCreature(target, (11, 10))
 
-        pyHerc.rules.combat.meleeAttack(model, character, target, dice = [4, 19])
+        pyHerc.rules.combat.meleeAttack(self.model, character, target, dice = [4, 19])
         assert(target.hp == 3) # 10 - 4 - 3 (hp - damage roll - str bonus)
 
     def test_dyingInMelee(self):
@@ -228,10 +312,6 @@ class test_meleeCombat:
         character.speed = 1
         character.tick = 0
 
-        model = pyHerc.data.model.Model()
-        tables = pyHerc.rules.tables.Tables()
-        tables.loadTables()
-        model.tables = tables
         target = pyHerc.data.model.Character()
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
@@ -241,6 +321,6 @@ class test_meleeCombat:
         level.addCreature(character)
         level.addCreature(target)
 
-        pyHerc.rules.combat.meleeAttack(model, character, target, dice = [4, 19])
+        pyHerc.rules.combat.meleeAttack(self.model, character, target, dice = [4, 19])
         assert(target.hp == -2) # 5 - 4 - 3 (hp - damage roll - str bonus)
         assert(not target in level.creatures)

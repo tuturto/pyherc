@@ -32,11 +32,64 @@ import pyHerc.rules.moving
 class test_moving:
 
     def setup(self):
+        itemConfig = """
+<items>
+    <item>
+        <name>apple</name>
+        <cost>1</cost>
+        <weight>1</weight>
+        <icons>
+            <icon>item_apple</icon>
+        </icons>
+        <types>
+            <type>food</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>crystal skull</name>
+        <cost>0</cost>
+        <weight>5</weight>
+        <questItem>1</questItem>
+        <icons>
+            <icon>item_crystal_skull</icon>
+        </icons>
+        <types>
+            <type>special item</type>
+            <type>quest item</type>
+        </types>
+        <rarity>artifact</rarity>
+    </item>
+    <item>
+        <name>dagger</name>
+        <cost>2</cost>
+        <damage>1d4</damage>
+        <criticalRange>19</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>1</weight>
+        <damageTypes>
+            <damageType>piercing</damageType>
+            <damageType>slashing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>item_dagger_1</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>light weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+</items>
+        """
         self.model = Model()
         self.character = Character()
         generator = TestLevelGenerator()
         tables = Tables()
-        tables.loadTables()
+        tables.loadTables(itemConfig)
         self.model.tables = tables
 
         self.model.dungeon = Dungeon()

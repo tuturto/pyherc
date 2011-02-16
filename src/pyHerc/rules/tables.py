@@ -68,6 +68,7 @@ class Tables:
             self.readItemsFromXML(itemConfig)
         else:
             #open file and read from there
+            #TODO: relative location
             f = open('C:/programming/pyHack/resources/items.xml', 'r')
             itemConfig = f.read()
             self.readItemsFromXML(itemConfig)
