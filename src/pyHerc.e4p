@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHerc -->
-<!-- Saved: 2011-02-16, 09:56:41 -->
+<!-- Saved: 2011-02-16, 13:05:03 -->
 <!-- Copyright (C) 2011 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -50,6 +50,7 @@
     <Source>pyHerc/test/test_item.py</Source>
     <Source>pyHerc/test/test_moving.py</Source>
     <Source>pyHerc/test/test_gui.py</Source>
+    <Source>pyHerc/test/test_tables.py</Source>
   </Sources>
   <Forms>
   </Forms>

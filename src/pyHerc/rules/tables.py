@@ -18,11 +18,12 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, sys
+import os, sys, StringIO
 import logging
 import pyHerc
 import pyHerc.data.model
 from pyHerc.data import tiles
+from xml import sax
 
 class Tables:
 
@@ -37,6 +38,14 @@ class Tables:
         self.creatures = {}
         self.sizeModifier = []
         self.attributeModifier = []
+
+    def readItemsFromXML(self, document):
+        parser = sax.make_parser()
+        handler = ItemHandler()
+        parser.setContentHandler(handler)
+        file = StringIO.StringIO(document)
+        parser.parse(file)
+        self.items = handler.items
 
     def loadTables(self):
         """
@@ -259,3 +268,47 @@ class Tables:
                     self.tagScore[type] = self.items[itemKey]['rarity']
                     upperBound = self.tagScore[type]
                     self.itemsByTag[type].append((itemKey, lowerBound, upperBound))
+
+
+class ItemHandler(sax.ContentHandler):
+    """
+    Class to process items xml-configuration
+    """
+    def startElement(self, name, attrs):
+        self.text = ""
+        if name == 'items':
+            #start of the configuration document
+            self.items = {}
+        elif name == 'item':
+            #start of new item
+            self.newItem = {}
+        elif name == 'types':
+            #start of types section
+            self.newItem['type'] = []
+
+    def characters(self, ch):
+        self.text = self.text + ch
+
+    def endElement(self, name):
+        if name == 'items':
+            #finished processing the items configuration
+            pass
+        elif name == 'item':
+            #finished processing item
+            self.items[self.newItem['name']] = self.newItem
+            self.newItem = None
+        elif name == 'name':
+            #finished processing name node
+            self.newItem['name'] = self.text
+        elif name == 'cost':
+            self.newItem['cost'] = int(self.text)
+        elif name == 'weight':
+            self.newItem['weight'] = int(self.text)
+        elif name == 'type':
+            self.newItem['type'].append(self.text)
+        elif name == 'rarity':
+            self.newItem['rarity'] = self.text
+        elif name == 'icon':
+            #TODO: for now, until better way is discovered
+            self.newItem['icon'] = int(self.text)
+
