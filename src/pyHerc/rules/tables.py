@@ -71,6 +71,7 @@ class Tables:
             #TODO: relative location
             f = open('C:/programming/pyHack/resources/items.xml', 'r')
             itemConfig = f.read()
+            f.close()
             self.readItemsFromXML(itemConfig)
 
         self.creatures['rat'] = {'name' : 'rat',
