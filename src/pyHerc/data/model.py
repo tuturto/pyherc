@@ -85,6 +85,7 @@ class Character:
         #internal
         self.tick = 0
         self.shortTermMemory = []
+        self.itemMemory = {}
 
     def __str__(self):
         return self.name
@@ -111,6 +112,20 @@ class Item:
 
     def __str__(self):
         return self.name
+
+    def getName(self, character):
+        """
+        Get name of the item
+        Name can be appearance or given name
+        @param character: character handling the item
+        """
+        if hasattr(self, 'appearance'):
+            if self.name in character.itemMemory.keys():
+                return character.itemMemory[self.name]
+            else:
+                return self.appearance
+        else:
+            return self.name
 
 class Damage:
     """

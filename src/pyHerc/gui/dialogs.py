@@ -137,7 +137,7 @@ class Inventory:
             textRect = text.get_rect()
             textRect.topleft = (40, 40 + index*20)
             self.screen.blit(text, textRect)
-            text = font.render(item['item'].name, True, colour, (0, 0, 0))
+            text = font.render(item['item'].getName(self.application.world.player), True, colour, (0, 0, 0))
             textRect = text.get_rect()
             textRect.topleft = (60, 40 + index*20)
             self.screen.blit(text, textRect)

@@ -267,3 +267,38 @@ class test_Item:
 
         items = self.level.getItemsAt((12, 0))
         assert(len(items) == 0)
+
+class test_ItemAdvanced():
+    """
+    Testing more advanced features of item class
+    """
+
+    def test_appearanceOfUnknown(self):
+        """"
+        Test that appearance is reported for an unknown item
+        """
+
+        item = pyHerc.data.model.Item()
+        character = pyHerc.data.model.Character()
+
+        item.name = 'healing potion'
+        item.appearance = 'blue potion'
+
+        name = item.getName(character)
+
+        assert(name == 'blue potion')
+
+    def test_appearanceOfGenericNamedItem(self):
+        """
+        Test that given name is reported for a generally named item
+        """
+        item = pyHerc.data.model.Item()
+        character = pyHerc.data.model.Character()
+        character.itemMemory['healing potion'] = 'doozer potion'
+
+        item.name = 'healing potion'
+        item.appearance = 'blue potion'
+
+        name = item.getName(character)
+
+        assert(name == 'doozer potion')
