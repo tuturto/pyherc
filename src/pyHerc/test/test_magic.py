@@ -22,4 +22,13 @@ import pyHerc
 import pyHerc.rules.magic
 
 class test_magic:
-    pass
+
+    def test_healingEffect(self):
+        """
+        Test that a healing effect can be applied on a character
+        """
+        character = pyHerc.data.model.Character()
+        character.hp = 1
+        pyHerc.rules.magic.castEffect(character, {'name':'healing', 'power':'1d10'}, [10])
+
+        assert(character.hp == 11)
