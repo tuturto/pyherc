@@ -209,6 +209,11 @@ class CatacombsLevelGenerator:
             tempItem.location = tempLevel.findFreeSpace()
             tempLevel.items.append(tempItem)
 
+        for i in range(0, 3):
+            tempItem = self.itemGenerator.generateItem(model.tables, {'type':'potion'})
+            tempItem.location = tempLevel.findFreeSpace()
+            tempLevel.items.append(tempItem)
+
         #throw bunch of weapons around
         for i in range(0, 10):
             tempItem = self.itemGenerator.generateItem(model.tables, {'type':'weapon'})

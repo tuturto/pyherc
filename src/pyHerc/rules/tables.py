@@ -18,7 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, sys, StringIO
+import os, sys, StringIO, random
 import logging
 import pyHerc
 import pyHerc.data.model
@@ -115,9 +115,36 @@ class Tables:
 
         self.attributeModifier = [-6, -5, -4, -4, -3, -3, -2, -2, -1, -1, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
 
-        self.__constructLookupTables()
+        self.potionAppearances = [
+                                ('clay potion',  pyHerc.data.tiles.item_potion_3),
+                                ('ruby potion', pyHerc.data.tiles.item_potion_9),
+                                ('yellow potion', pyHerc.data.tiles.item_potion_10),
+                                ('dark green potion', pyHerc.data.tiles.item_potion_2),
+                                ('cyan potion',  pyHerc.data.tiles.item_potion_4),
+                                ('sky blue potion', pyHerc.data.tiles.item_potion_5),
+                                ('bubbly potion', pyHerc.data.tiles.item_potion_8),
+                                ('black potion', pyHerc.data.tiles.item_potion_6),
+                                ('brown potion', pyHerc.data.tiles.item_potion_1),
+                                ('brown potion', pyHerc.data.tiles.item_potion_7)
+                                ]
 
-    def __constructLookupTables(self):
+        self.constructLookupTables()
+        self.randomizePotions()
+
+    def randomizePotions(self):
+        """
+        Randomize appearances of potions
+        @note: different types of potions may be assigned same appearance
+        """
+        self.__logger.debug('randomizing potion appearance')
+        potionEntries = self.itemsByTag['potion']
+        for entry in potionEntries:
+            appearance = random.choice(self.potionAppearances)
+            self.items[entry[0]]['name'] = appearance[0]
+            self.items[entry[0]]['icon'] = [appearance[1]]
+        self.__logger.debug('potion appearance randomized')
+
+    def constructLookupTables(self):
         """
         Construct lookup tables for different kinds of items
         """

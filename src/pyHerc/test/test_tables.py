@@ -205,3 +205,41 @@ class test_Tables:
         effect = item['effects']['on drink'][0]
         assert(effect['name'] == 'healing')
         assert(effect['power'] == '1d10')
+
+    def test_randomizePotions(self):
+        """
+        Test that potion appearances can be randomized
+        """
+        itemConfig = """
+            <items>
+                <item>
+                    <name>healing potion</name>
+                    <cost>100</cost>
+                    <weight>1</weight>
+                    <icons>
+                        <icon>item_potion_empty</icon>
+                    </icons>
+                    <types>
+                        <type>potion</type>
+                    </types>
+                    <rarity>uncommon</rarity>
+                </item>
+                <item>
+                    <name>potion of bless</name>
+                    <cost>100</cost>
+                    <weight>1</weight>
+                    <icons>
+                        <icon>item_potion_empty</icon>
+                    </icons>
+                    <types>
+                        <type>potion</type>
+                    </types>
+                    <rarity>uncommon</rarity>
+                </item>
+            </items>
+            """
+
+        tables = pyHerc.rules.tables.Tables()
+        tables.loadTables(itemConfig)
+
+        assert(not pyHerc.data.tiles.item_potion_empty in tables.items['potion of bless']['icon'])

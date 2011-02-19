@@ -58,4 +58,14 @@ item_shortspear = 614
 item_longspear = 615
 item_spear = 616
 
+item_potion_empty = 700
 item_potion_1 = 701
+item_potion_2 = 702
+item_potion_3 = 703
+item_potion_4 = 704
+item_potion_5 = 705
+item_potion_6 = 706
+item_potion_7 = 707
+item_potion_8 = 708
+item_potion_9 = 709
+item_potion_10 = 710
