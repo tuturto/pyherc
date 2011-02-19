@@ -164,6 +164,14 @@ class test_ItemWithGenerator(IntegrationTest):
 
         assert(not pyHerc.rules.items.dualWieldable(self.model, self.character, item))
 
+    def test_potionCreation(self):
+        """
+        Test that basic healing potion can be created
+        """
+        self.item = self.generator.generateItem(self.tables, {'name': 'healing potion'})
+
+        assert(self.item != None)
+
 
 class test_Item:
 

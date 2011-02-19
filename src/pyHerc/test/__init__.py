@@ -276,6 +276,18 @@ class IntegrationTest():
         </types>
         <rarity>common</rarity>
     </item>
+    <item>
+        <name>healing potion</name>
+        <cost>100</cost>
+        <weight>1</weight>
+        <icons>
+            <icon>item_potion_1</icon>
+        </icons>
+        <types>
+            <type>potion</type>
+        </types>
+        <rarity>uncommon</rarity>
+    </item>
 </items>
 """
         self.model = pyHerc.data.model.Model()

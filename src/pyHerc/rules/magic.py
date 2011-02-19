@@ -18,44 +18,15 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-floor_empty = 0
-floor_rock = 1
-floor_brick = 2
-floor_wood = 3
+import os, sys
+import logging
+import pyHerc.data.model
 
-wall_empty = 100
-wall_ground = 101
-wall_rock = 102
-wall_rock_deco_1 = 103
-wall_rock_deco_2 = 104
+__logger = logging.getLogger('pyHerc.rules.magic')
 
-portal_stairs_up = 200
-portal_stairs_down = 201
+def castEffect(target, effect):
+    """
+    Casts effect of a spell, potion, etc. on a target
+    """
+    pass
 
-human_fighter = 300
-
-creature_rat_1 = 400
-creature_rat_2 = 401
-creature_rat_3 = 402
-creature_rat_4 = 403
-creature_beetle_1 = 404
-creature_beetle_2 = 405
-
-item_crystal_skull = 500
-item_apple = 501
-
-item_dagger_1 = 602
-item_dagger_2 = 603
-item_morning_star_1 = 604
-item_morning_star_2 = 605
-item_short_sword_1 = 608
-item_short_sword_2 = 609
-item_light_mace = 610
-item_sickle = 611
-item_club = 612
-item_mace = 613
-item_shortspear = 614
-item_longspear = 615
-item_spear = 616
-
-item_potion_1 = 701
