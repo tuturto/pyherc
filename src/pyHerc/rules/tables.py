@@ -46,13 +46,17 @@ class Tables:
         self.uncommon = 16
         self.common = 32
 
+        self.__logger = logging.getLogger('pyHerc.rules.tables')
+
     def readItemsFromXML(self, document):
+        self.__logger.debug('reading item config from xml')
         parser = sax.make_parser()
         handler = ItemHandler()
         parser.setContentHandler(handler)
         file = StringIO.StringIO(document)
         parser.parse(file)
         self.items = handler.items
+        self.__logger.debug('item config read from xml')
 
     def loadTables(self, itemConfig = None):
         """
@@ -62,6 +66,8 @@ class Tables:
 
         if self.__initialised:
             return
+
+        self.__logger.debug('loading tables')
 
         if itemConfig != None:
             #use passed config
@@ -115,7 +121,7 @@ class Tables:
         """
         Construct lookup tables for different kinds of items
         """
-
+        self.__logger.debug('constructing look up tables')
         self.itemsByTag = {}
         self.tagScore = {}
 
@@ -132,6 +138,8 @@ class Tables:
                     self.tagScore[type] = self.items[itemKey]['rarity']
                     upperBound = self.tagScore[type]
                     self.itemsByTag[type].append((itemKey, lowerBound, upperBound))
+
+        self.__logger.debug('look up tables constructed')
 
 
 class ItemHandler(sax.ContentHandler):
@@ -153,6 +161,21 @@ class ItemHandler(sax.ContentHandler):
             self.newItem['damage type'] = []
         elif name == 'icons':
             self.newItem['icon'] = []
+        elif name == 'effects':
+            self.newItem['effects'] = {}
+        elif name == 'effect':
+            #new effect
+            tempEffect = {}
+            effectType = attrs['type']
+            if 'name' in attrs.keys():
+                tempEffect['name'] = attrs['name']
+            if 'power' in attrs.keys():
+                tempEffect['power'] = attrs['power']
+
+            if not effectType in self.newItem['effects'].keys():
+                self.newItem['effects'][effectType] = []
+
+            self.newItem['effects'][effectType].append(tempEffect)
 
     def characters(self, ch):
         self.text = self.text + ch
@@ -202,4 +225,6 @@ class ItemHandler(sax.ContentHandler):
             self.newItem['damage type'].append(self.text)
         elif name == 'class':
             self.newItem['class'] = self.text
+        elif name == 'charges':
+            self.newItem['charges'] = int(self.text)
 

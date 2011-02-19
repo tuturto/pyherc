@@ -171,3 +171,37 @@ class test_Tables:
         assert 'melee' in item['type']
         assert 'simple weapon' in item['type']
         assert item['rarity'] == tables.common
+
+    def test_readingPotionFromConfig(self):
+        """
+        Test that simple healing potion can be read from configuration
+        """
+        itemConfig = """
+            <items>
+                <item>
+                    <name>healing potion</name>
+                    <cost>100</cost>
+                    <weight>1</weight>
+                    <charges>1</charges>
+                    <effects>
+                        <effect type="on drink" name="healing" power="1d10" />
+                    </effects>
+                    <icons>
+                        <icon>item_potion_1</icon>
+                    </icons>
+                    <types>
+                        <type>potion</type>
+                    </types>
+                    <rarity>uncommon</rarity>
+                </item>
+            </items>
+            """
+
+        tables = pyHerc.rules.tables.Tables()
+        tables.readItemsFromXML(itemConfig)
+
+        item = tables.items['healing potion']
+
+        effect = item['effects']['on drink'][0]
+        assert(effect['name'] == 'healing')
+        assert(effect['power'] == '1d10')

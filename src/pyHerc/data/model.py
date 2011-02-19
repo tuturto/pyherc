@@ -74,6 +74,7 @@ class Character:
         self.race = None
         self.kit = None
         self.hp = None
+        self.maxHp = None
         self.speed = None
         self.inventory = []
         self.weapons = []
@@ -95,6 +96,12 @@ class Character:
         Receives an event from world and enters it into short term memory
         """
         self.shortTermMemory.append(event)
+
+    def getMaxHP(self):
+        """
+        Get maximum HP this character can currently have
+        """
+        return self.maxHp
 
 class Item:
     """

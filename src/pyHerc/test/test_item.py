@@ -171,7 +171,12 @@ class test_ItemWithGenerator(IntegrationTest):
         self.item = self.generator.generateItem(self.tables, {'name': 'healing potion'})
 
         assert(self.item != None)
+        assert(self.item.charges == 1)
+        assert('on drink' in self.item.effects.keys())
 
+        effect = self.item.effects['on drink'][0]
+        assert(effect['name'] == 'healing')
+        assert(effect['power'] == '1d10')
 
 class test_Item:
 

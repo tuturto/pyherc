@@ -45,10 +45,13 @@ def castHealingEffect(target, effect, dice = None):
     @param dice: prerolled dice
     """
     healingPower = effect['power']
-    if len(dice) > 0:
+    if dice != None and len(dice) > 0:
         healRoll = dice.pop()
         assert(healRoll <= pyHerc.rules.utils.getMaxScore(healingPower))
     else:
-        healRoll = pyHerc.rules.utils.rollDice()
+        healRoll = pyHerc.rules.utils.rollDice(healingPower)
 
     target.hp = target.hp + healRoll
+
+    if target.hp > target.getMaxHP():
+        target.hp = target.getMaxHP()

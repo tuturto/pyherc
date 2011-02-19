@@ -280,6 +280,10 @@ class IntegrationTest():
         <name>healing potion</name>
         <cost>100</cost>
         <weight>1</weight>
+        <charges>1</charges>
+        <effects>
+            <effect type="on drink" name="healing" power="1d10" />
+        </effects>
         <icons>
             <icon>item_potion_1</icon>
         </icons>

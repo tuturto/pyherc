@@ -153,3 +153,30 @@ def dualWieldable(model, character, item):
     else:
         #mundane items can not dual-wielded
         return 0
+
+def drinkPotion(model, character, potion, dice = None):
+    """
+    Drink a potion
+    @param model: model to use
+    @param character: character drinking a potion
+    @param potion: potion to drink
+    @param dice: optional prerolled dice
+    """
+    __logger.debug(character.__str__() + ' drinking ' + potion.__str__())
+
+    assert(model != None)
+    assert(character != None)
+    assert(potion != None)
+    assert(potion in character.inventory)
+
+    if potion.charges < 1:
+        __logger.warning('no charges left!')
+        #out of charges
+        #TODO: feed back
+        return 0
+
+    if hasattr(potion, 'effects'):
+        for effect in potion.effects['on drink']:
+            pyHerc.rules.magic.castEffect(character, effect, dice)
+
+    __logger.debug(character.__str__() + ' drank ' + potion.__str__())

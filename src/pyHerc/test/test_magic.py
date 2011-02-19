@@ -20,6 +20,8 @@
 
 import pyHerc
 import pyHerc.rules.magic
+import pyHerc.data.model
+from pyHerc.test import IntegrationTest
 
 class test_magic:
 
@@ -29,6 +31,53 @@ class test_magic:
         """
         character = pyHerc.data.model.Character()
         character.hp = 1
+        character.maxHp = 15
         pyHerc.rules.magic.castEffect(character, {'name':'healing', 'power':'1d10'}, [10])
 
         assert(character.hp == 11)
+
+    def test_healingDoesNotHealOverMaxHP(self):
+        """
+        Test that character does not get healed over his maximum hp when getting healing effect
+        """
+        character = pyHerc.data.model.Character()
+        character.hp = 1
+        character.maxHp = 5
+        pyHerc.rules.magic.castEffect(character, {'name':'healing', 'power':'1d10'}, [10])
+
+        assert(character.hp == 5)
+
+class test_magicWithGenerators(IntegrationTest):
+
+    def setUp2(self):
+        self.character = pyHerc.data.model.Character()
+        self.character.hp = 1
+        self.character.maxHp = 5
+
+        self.item = pyHerc.data.model.Item()
+        self.item.name = 'healing potion'
+        self.item.charges = 1
+        self.item.effects = {'on drink':
+                                    [
+                                        {'name':'healing', 'power':'1d10'}
+                                    ]
+                                }
+
+        self.character.inventory.append(self.item)
+
+    def test_drinkingEmptyPotion(self):
+        """
+        Test that empty potion has no effect
+        """
+        self.item.charges = 0
+        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item, [10])
+
+        assert(self.character.hp == 1)
+
+    def test_drinkingHealingPotion(self):
+        """
+        Test that character drinking a healing potion gets healed
+        """
+        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item, [10])
+
+        assert(self.character.hp == 5)

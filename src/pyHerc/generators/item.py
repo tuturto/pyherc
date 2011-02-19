@@ -116,4 +116,15 @@ class ItemGenerator:
             newItem.weaponType = table['class']
             newItem.tags = table['type']
 
+        if 'charges' in table.keys():
+            newItem.charges = table['charges']
+
+        if 'effects' in table.keys():
+            newItem.effects = {}
+            keys = table['effects'].keys()
+            for effectType in keys:
+                newItem.effects[effectType] = []
+                for effect in table['effects'][effectType]:
+                    newItem.effects[effectType].append(effect)
+
         return newItem
