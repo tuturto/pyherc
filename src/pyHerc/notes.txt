@@ -72,7 +72,7 @@ Stuff to do:
     - value
     - icons
         - single / plural
-        - variations
+        + variations
 - inventory handling
     - paging
     - displaying descriptions
@@ -91,6 +91,11 @@ Stuff to do:
 - armour
 - spells
 - potions
+    - removing empty potions
+    - identifying on drink
+    + creation
+    + magic effects
+    + drinking
 - equipment sets
     - need specific items
         - armour

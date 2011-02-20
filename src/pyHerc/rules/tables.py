@@ -125,7 +125,21 @@ class Tables:
                                 ('bubbly potion', pyHerc.data.tiles.item_potion_8),
                                 ('black potion', pyHerc.data.tiles.item_potion_6),
                                 ('brown potion', pyHerc.data.tiles.item_potion_1),
-                                ('brown potion', pyHerc.data.tiles.item_potion_7)
+                                ('brown potion', pyHerc.data.tiles.item_potion_7),
+                                ('black potion', pyHerc.data.tiles.item_potion_11),
+                                ('brilliant blue potion', pyHerc.data.tiles.item_potion_12),
+                                ('milky potion', pyHerc.data.tiles.item_potion_13),
+                                ('amber potion', pyHerc.data.tiles.item_potion_14),
+                                ('pink potion', pyHerc.data.tiles.item_potion_15),
+                                ('swirly potion', pyHerc.data.tiles.item_potion_16),
+                                ('dark blue potion', pyHerc.data.tiles.item_potion_17),
+                                ('murky potion', pyHerc.data.tiles.item_potion_18),
+                                ('red potion', pyHerc.data.tiles.item_potion_19),
+                                ('golden potion', pyHerc.data.tiles.item_potion_20),
+                                ('emerald potion', pyHerc.data.tiles.item_potion_21),
+                                ('fizzy potion', pyHerc.data.tiles.item_potion_22),
+                                ('silver potion', pyHerc.data.tiles.item_potion_23),
+                                ('smoky potion', pyHerc.data.tiles.item_potion_24)
                                 ]
 
         self.constructLookupTables()

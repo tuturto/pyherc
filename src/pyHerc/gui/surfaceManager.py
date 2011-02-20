@@ -147,6 +147,37 @@ def loadResources():
         surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_10.png')
         __icons[pyHerc.data.tiles.item_potion_10] = surface
 
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_11.png')
+        __icons[pyHerc.data.tiles.item_potion_11] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_12.png')
+        __icons[pyHerc.data.tiles.item_potion_12] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_13.png')
+        __icons[pyHerc.data.tiles.item_potion_13] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_14.png')
+        __icons[pyHerc.data.tiles.item_potion_14] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_15.png')
+        __icons[pyHerc.data.tiles.item_potion_15] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_16.png')
+        __icons[pyHerc.data.tiles.item_potion_16] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_17.png')
+        __icons[pyHerc.data.tiles.item_potion_17] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_18.png')
+        __icons[pyHerc.data.tiles.item_potion_18] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_19.png')
+        __icons[pyHerc.data.tiles.item_potion_19] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_20.png')
+        __icons[pyHerc.data.tiles.item_potion_20] = surface
+
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_21.png')
+        __icons[pyHerc.data.tiles.item_potion_21] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_22.png')
+        __icons[pyHerc.data.tiles.item_potion_22] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_23.png')
+        __icons[pyHerc.data.tiles.item_potion_23] = surface
+        surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_24.png')
+        __icons[pyHerc.data.tiles.item_potion_24] = surface
+
+
         __resourcesLoaded = 1
         __logger.info('resources loaded')
     else:
