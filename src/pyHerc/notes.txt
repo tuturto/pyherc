@@ -92,7 +92,7 @@ Stuff to do:
 - spells
 - potions
     - removing empty potions
-    - identifying on drink
+    + identifying on drink
     + creation
     + magic effects
     + drinking

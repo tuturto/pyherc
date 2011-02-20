@@ -315,3 +315,20 @@ class test_ItemAdvanced():
         name = item.getName(character)
 
         assert(name == 'doozer potion')
+
+    def test_identifyingItem(self):
+        """
+        Test that character can identify an item
+        """
+        item = pyHerc.data.model.Item()
+        character = pyHerc.data.model.Character()
+        item.name = 'healing potion'
+        item.appearance = 'blue potion'
+
+        name = item.getName(character)
+        assert(name == 'blue potion')
+
+        character.identifyItem(item)
+
+        name = item.getName(character)
+        assert(name == 'healing potion')

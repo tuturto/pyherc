@@ -104,6 +104,14 @@ class Character:
         """
         return self.maxHp
 
+    def identifyItem(self, item):
+        """
+        Identify item
+        @param item: item to mark as identified
+        """
+        assert (item != None)
+        self.itemMemory[item.name] = item.name
+
 class Item:
     """
     Represents item

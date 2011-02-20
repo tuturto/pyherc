@@ -85,3 +85,12 @@ class test_magicWithGenerators(IntegrationTest):
 
         assert(self.character.hp == 5)
         assert(self.item.charges == 0)
+
+    def test_drinkingPotionIdentifiesIt(self):
+        """
+        Test that drinking a potion correctly identifies it
+        """
+        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item, [10])
+
+        name = self.item.getName(self.character)
+        assert(name == 'healing potion')

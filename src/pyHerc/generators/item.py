@@ -127,4 +127,7 @@ class ItemGenerator:
                 for effect in table['effects'][effectType]:
                     newItem.effects[effectType].append(effect)
 
+        if 'appearance' in table.keys():
+            newItem.appearance = table['appearance']
+
         return newItem

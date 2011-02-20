@@ -154,7 +154,7 @@ class Tables:
         potionEntries = self.itemsByTag['potion']
         for entry in potionEntries:
             appearance = random.choice(self.potionAppearances)
-            self.items[entry[0]]['name'] = appearance[0]
+            self.items[entry[0]]['appearance'] = appearance[0]
             self.items[entry[0]]['icon'] = [appearance[1]]
         self.__logger.debug('potion appearance randomized')
 

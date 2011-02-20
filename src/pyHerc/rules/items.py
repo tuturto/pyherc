@@ -178,6 +178,9 @@ def drinkPotion(model, character, potion, dice = None):
 
     potion.charges = potion.charges - 1
 
+    #drinking a potion usually identifies it
+    character.identifyItem(potion)
+
     if hasattr(potion, 'effects'):
         for effect in potion.effects['on drink']:
             pyHerc.rules.magic.castEffect(model, character, effect, dice)
