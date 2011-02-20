@@ -90,7 +90,24 @@ class test_magicWithGenerators(IntegrationTest):
         """
         Test that drinking a potion correctly identifies it
         """
-        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item, [10])
+        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item)
 
         name = self.item.getName(self.character)
         assert(name == 'healing potion')
+
+    def test_drinkingPotionEmptyDiscardsIt(self):
+        """
+        Test that empty potion is discarded from character inventory
+        """
+        assert(self.item in self.character.inventory)
+        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item)
+        assert(not self.item in self.character.inventory)
+
+    def test_drinkingPotionDoesNotDiscardIt(self):
+        """
+        Test that non-empty potions are not discarded after drinking
+        """
+        self.item.charges = 2
+        assert(self.item in self.character.inventory)
+        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item)
+        assert(self.item in self.character.inventory)

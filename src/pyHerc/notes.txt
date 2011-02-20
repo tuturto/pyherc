@@ -91,11 +91,8 @@ Stuff to do:
 - armour
 - spells
 - potions
-    - removing empty potions
-    + identifying on drink
-    + creation
-    + magic effects
-    + drinking
+    - trying to drink non-drinkable items
+    - spending time while drinking potions
 - equipment sets
     - need specific items
         - armour
@@ -116,6 +113,12 @@ Stuff to do:
 Stuff Done:
 + Items
     + generating
++ potions
+    + removing empty potions
+    + identifying on drink
+    + creation
+    + magic effects
+    + drinking
 + Inventory handling
     + pick up
     + put down

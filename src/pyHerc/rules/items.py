@@ -185,6 +185,9 @@ def drinkPotion(model, character, potion, dice = None):
         for effect in potion.effects['on drink']:
             pyHerc.rules.magic.castEffect(model, character, effect, dice)
 
+    if potion.charges < 1:
+        character.inventory.remove(potion)
+
     #TODO: raise event
     __logger.debug(character.__str__() + ' drank ' + potion.__str__())
 
