@@ -285,6 +285,12 @@ class GameWindow:
                         wieldItems = dialog.show(player.inventory, 2)
                         for item in wieldItems:
                             pyHerc.rules.items.wield(model, player, item, True)
+                    elif event.key == K_q:
+                        #quaff potion
+                        dialog = dialogs.Inventory(self.application, self.screen)
+                        potion = dialog.show(player.inventory, 1)
+                        if len(potion) == 1:
+                            pyHerc.rules.items.drinkPotion(model, player, potion[0])
             else:
                 return
 
@@ -336,6 +342,9 @@ class GameWindow:
                     self.eventHistory.append(newLine)
             elif event['type'] == 'death':
                 newLine = event['character'].name + ' is now dead'
+                self.eventHistory.append(newLine)
+            elif event['type'] == 'heal':
+                newLine = event['character'].name + ' feels better'
                 self.eventHistory.append(newLine)
         #clear short term memory
         del self.application.world.player.shortTermMemory[:]

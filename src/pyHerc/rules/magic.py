@@ -25,21 +25,25 @@ import pyHerc.rules.utils
 
 __logger = logging.getLogger('pyHerc.rules.magic')
 
-def castEffect(target, effect, dice = None):
+def castEffect(model, target, effect, dice = None):
     """
     Casts effect of a spell, potion, etc. on a target
+    @param model: model to use
     @param target: target of the effect
     @param effect: parameters of effect in dictionary
     @param dice: prerolled dice
     """
     assert(effect != None)
 
-    if effect['name'] == 'healing':
-        castHealingEffect(target, effect, dice)
+    __logger.info('casting effect: ' + effect.__str__())
 
-def castHealingEffect(target, effect, dice = None):
+    if effect['name'] == 'healing':
+        castHealingEffect(model, target, effect, dice)
+
+def castHealingEffect(model, target, effect, dice = None):
     """
     Casts healing effect on a target, recovering some of the lost HP
+    @param model: model to use
     @param target: target of the effect
     @param effect: parameters of effect in dictionary
     @param dice: prerolled dice
@@ -55,3 +59,12 @@ def castHealingEffect(target, effect, dice = None):
 
     if target.hp > target.getMaxHP():
         target.hp = target.getMaxHP()
+
+    event = {}
+    event['type'] = 'heal'
+    event['character'] = target
+    event['location'] = target.location
+    event['level'] = target.level
+    event['power'] = healRoll
+
+    model.raiseEvent(event)

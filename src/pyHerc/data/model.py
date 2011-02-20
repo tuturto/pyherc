@@ -51,8 +51,9 @@ class Model:
         """
         self.logger.debug('raising event:' + event.__str__())
         #TODO: filter events
-        for creature in event['level'].creatures:
-            creature.receiveEvent(event)
+        if event['level'] != None:
+            for creature in event['level'].creatures:
+                creature.receiveEvent(event)
 
         if self.player != None:
             self.player.receiveEvent(event)

@@ -21,6 +21,7 @@
 import os, sys
 import logging
 import pyHerc.data.model
+import pyHerc.rules.magic
 import time
 
 __logger = logging.getLogger('pyHerc.rules.items')
@@ -175,8 +176,12 @@ def drinkPotion(model, character, potion, dice = None):
         #TODO: feed back
         return 0
 
+    potion.charges = potion.charges - 1
+
     if hasattr(potion, 'effects'):
         for effect in potion.effects['on drink']:
-            pyHerc.rules.magic.castEffect(character, effect, dice)
+            pyHerc.rules.magic.castEffect(model, character, effect, dice)
 
+    #TODO: raise event
     __logger.debug(character.__str__() + ' drank ' + potion.__str__())
+

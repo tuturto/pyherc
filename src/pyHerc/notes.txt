@@ -12,6 +12,12 @@ http://rltiles.sf.net
 Notes:
 
 Event list by type:
+    heal
+        character
+        level
+        location
+        power
+
     melee
         attacker
         target

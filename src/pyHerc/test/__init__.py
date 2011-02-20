@@ -21,6 +21,14 @@
 import pyHerc.data.model
 import pyHerc.rules.tables
 
+class StubModel():
+    """
+    Simple stub to act as model and do nothing
+    """
+
+    def raiseEvent(self, event):
+        pass
+
 class IntegrationTest():
 
     def setup(self):

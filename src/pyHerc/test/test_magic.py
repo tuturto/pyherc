@@ -22,6 +22,7 @@ import pyHerc
 import pyHerc.rules.magic
 import pyHerc.data.model
 from pyHerc.test import IntegrationTest
+from pyHerc.test import StubModel
 
 class test_magic:
 
@@ -29,10 +30,11 @@ class test_magic:
         """
         Test that a healing effect can be applied on a character
         """
+        model = StubModel()
         character = pyHerc.data.model.Character()
         character.hp = 1
         character.maxHp = 15
-        pyHerc.rules.magic.castEffect(character, {'name':'healing', 'power':'1d10'}, [10])
+        pyHerc.rules.magic.castEffect(model, character, {'name':'healing', 'power':'1d10'}, [10])
 
         assert(character.hp == 11)
 
@@ -40,10 +42,11 @@ class test_magic:
         """
         Test that character does not get healed over his maximum hp when getting healing effect
         """
+        model = StubModel()
         character = pyHerc.data.model.Character()
         character.hp = 1
         character.maxHp = 5
-        pyHerc.rules.magic.castEffect(character, {'name':'healing', 'power':'1d10'}, [10])
+        pyHerc.rules.magic.castEffect(model, character, {'name':'healing', 'power':'1d10'}, [10])
 
         assert(character.hp == 5)
 
@@ -81,3 +84,4 @@ class test_magicWithGenerators(IntegrationTest):
         pyHerc.rules.items.drinkPotion(self.model, self.character, self.item, [10])
 
         assert(self.character.hp == 5)
+        assert(self.item.charges == 0)
