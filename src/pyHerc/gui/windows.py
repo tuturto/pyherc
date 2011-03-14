@@ -343,8 +343,11 @@ class GameWindow:
             elif event['type'] == 'death':
                 newLine = event['character'].name + ' is now dead'
                 self.eventHistory.append(newLine)
-            elif event['type'] == 'heal':
+            elif event['type'] == 'magic heal':
                 newLine = event['character'].name + ' feels better'
+                self.eventHistory.append(newLine)
+            elif event['type'] == 'magic damage':
+                newLine = event['character'].name + ' feels worse'
                 self.eventHistory.append(newLine)
         #clear short term memory
         del self.application.world.player.shortTermMemory[:]

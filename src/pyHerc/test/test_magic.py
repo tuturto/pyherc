@@ -26,6 +26,18 @@ from pyHerc.test import StubModel
 
 class test_magic:
 
+    def test_damageEffect(self):
+        """
+        Test that a damage effect can be applied on a character
+        """
+        model = StubModel()
+        character = pyHerc.data.model.Character()
+        character.hp = 15
+        character.maxHp = 15
+        pyHerc.rules.magic.castEffect(model, character, {'name':'damage', 'power':'1d10'}, [10])
+
+        assert(character.hp == 5)
+
     def test_healingEffect(self):
         """
         Test that a healing effect can be applied on a character

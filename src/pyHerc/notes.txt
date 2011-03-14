@@ -12,7 +12,7 @@ http://rltiles.sf.net
 Notes:
 
 Event list by type:
-    heal
+    magic heal / magic damage
         character
         level
         location
@@ -93,6 +93,7 @@ Stuff to do:
 - potions
     - trying to drink non-drinkable items
     - spending time while drinking potions
+    - dying while hp dropping below 0
 - equipment sets
     - need specific items
         - armour

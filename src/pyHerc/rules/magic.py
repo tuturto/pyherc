@@ -37,34 +37,42 @@ def castEffect(model, target, effect, dice = None):
 
     __logger.info('casting effect: ' + effect.__str__())
 
-    if effect['name'] == 'healing':
-        castHealingEffect(model, target, effect, dice)
+    #TODO: this could be refined a bit when more effects are added
+    if effect['name'] in ('healing', 'damage'):
+        castHPEffect(model, target, effect, dice)
 
-def castHealingEffect(model, target, effect, dice = None):
+def castHPEffect(model, target, effect, dice = None):
     """
-    Casts healing effect on a target, recovering some of the lost HP
+    Casts HP effect on target, causing it to gain or lose some HP
     @param model: model to use
     @param target: target of the effect
     @param effect: parameters of effect in dictionary
     @param dice: prerolled dice
     """
-    healingPower = effect['power']
+    hpPower = effect['power']
     if dice != None and len(dice) > 0:
-        healRoll = dice.pop()
-        assert(healRoll <= pyHerc.rules.utils.getMaxScore(healingPower))
+        hpRoll = dice.pop()
+        assert(hpRoll <= pyHerc.rules.utils.getMaxScore(hpPower))
     else:
-        healRoll = pyHerc.rules.utils.rollDice(healingPower)
+        hpRoll = pyHerc.rules.utils.rollDice(hpPower)
 
-    target.hp = target.hp + healRoll
+    event = {}
+
+    if effect['name'] == 'healing':
+        target.hp = target.hp + hpRoll
+        event['type'] = 'magic heal'
+    elif effect['name'] == 'damage':
+        target.hp = target.hp - hpRoll
+        event['type'] = 'magic damage'
+
+    #TODO: dying
 
     if target.hp > target.getMaxHP():
         target.hp = target.getMaxHP()
 
-    event = {}
-    event['type'] = 'heal'
     event['character'] = target
     event['location'] = target.location
     event['level'] = target.level
-    event['power'] = healRoll
+    event['power'] = hpRoll
 
     model.raiseEvent(event)
