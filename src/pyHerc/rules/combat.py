@@ -22,6 +22,7 @@ import logging
 from pyHerc.rules import tables
 from pyHerc.rules import utils
 from pyHerc.rules import time
+from pyHerc.rules import ending
 from pyHerc.data.model import Damage
 import random
 
@@ -64,20 +65,7 @@ def meleeAttack(model, attacker, target, dice = []):
         target.hp = target.hp - damage.amount
         __logger.debug(target.__str__() + ' has ' + target.hp.__str__() + ' hp left')
         model.raiseEvent(event)
-
-        if target.hp <= 0:
-            __logger.debug(target.__str__() + ' has died')
-            event = {}
-            event['type'] = 'death'
-            event['character'] = target
-            event['location'] = target.location
-            event['level'] = target.level
-            model.raiseEvent(event)
-            #TODO: implement leaving corpse
-            if target != model.player:
-                target.level.removeCreature(target)
-            else:
-                model.endCondition = 1
+        ending.checkDying(model, target, None)
     else:
         __logger.debug('attack misses')
         model.raiseEvent(event)

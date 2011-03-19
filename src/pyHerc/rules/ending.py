@@ -61,3 +61,25 @@ def getEndingScore(model):
     """
     #TODO: implement scoring
     return 0
+
+def checkDying(model, character, deathParams):
+    """
+    Check if cracter is dead and should be dealt with
+    @param mode: model to use
+    @param character: character to check
+    @param deathParams: parameters detailing the death condition
+    """
+    assert character != None
+    if character.hp <= 0:
+        __logger.debug(character.__str__() + ' has died')
+        event = {}
+        event['type'] = 'death'
+        event['character'] = character
+        event['location'] = character.location
+        event['level'] = character.level
+        model.raiseEvent(event)
+        #TODO: implement leaving corpse
+        if character != model.player:
+            character.level.removeCreature(character)
+        else:
+            model.endCondition = 1
