@@ -48,23 +48,11 @@ class DungeonGenerator:
 
         model.dungeon.levels = level
 
-        for portal in level.portals:
-            newLevel = generator.generateLevel(portal, model, 0, level = 2)
-
-        itemGenerator = pyHerc.generators.item.ItemGenerator()
-        skull = itemGenerator.generateSpecialItem(model.tables, {'name':'crystal skull'})
-
-        #TODO: write utility function for placing objects
-        levelSize = model.config['level']['size']
-        location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-        while level.walls[location[0]][location[1]] != tiles.wall_empty:
-            location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-        level.addItem(skull, location)
-
         escapePortal = Portal()
         escapePortal.icon = pyHerc.data.tiles.portal_stairs_up
         escapePortal.otherEnd = None
 
+        levelSize = model.config['level']['size']
         location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
         while level.walls[location[0]][location[1]] != tiles.wall_empty:
             location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
@@ -229,6 +217,16 @@ class CatacombsLevelGenerator:
                 newPortal = Portal()
                 newPortal.icon = tiles.portal_stairs_down
                 tempLevel.addPortal(newPortal, tempLevel.findFreeSpace())
+
+        # generate next level
+        for portal in tempLevel.portals:
+            if portal.otherEnd == None:
+                if level < 5:
+                    #still in catacombs
+                    newLevel = self.generateLevel(portal, model, 1, level = level + 1)
+                else:
+                    #TODO: implement generating dungeon levels
+                    pass
 
         return tempLevel
 
