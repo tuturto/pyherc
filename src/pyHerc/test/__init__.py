@@ -18,8 +18,17 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+import pyHerc.data.dungeon
 import pyHerc.data.model
 import pyHerc.rules.tables
+
+class StubProxyPortal(pyHerc.data.dungeon.Portal):
+    """
+    Simple stub to act as a proxy portal
+    """
+
+    def generateLevel(self, model):
+        self.generateCalled = 1
 
 class StubModel():
     """

@@ -72,7 +72,7 @@ def checkMove(model, character, direction):
     assert(not character == None)
     assert(direction >= 1 and direction <= 9)
 
-    locationData = calculateNewLocation(character, direction)
+    locationData = calculateNewLocation(model, character, direction)
 
     if 'location' in locationData.keys() and 'level' in locationData.keys():
         newLocation = locationData['location']
@@ -104,11 +104,12 @@ def checkMove(model, character, direction):
 
     return locationData
 
-def calculateNewLocation(character, direction):
+def calculateNewLocation(model, character, direction):
     """
     Calculate new location if moving from old to certain direction
     @param character: character who is about to move
     @param direction: direction to move
+    @param model: model to use
     @return: dictionary with keys: level, location
     """
     assert(character != None)
@@ -140,9 +141,16 @@ def calculateNewLocation(character, direction):
                 newLevel = portal.otherEnd.level
                 newLocation = portal.otherEnd.location
             else:
-                #escaping perhaps?
-                newLevel = None
-                newLocation = None
+                #proxy
+                if hasattr(portal, 'generateLevel'):
+                    portal.generateLevel(model)
+                    #TODO: actually move
+                    newLevel = None
+                    newLocation = None
+                else:
+                    #escaping perhaps?
+                    newLevel = None
+                    newLocation = None
         else:
             return {}
 

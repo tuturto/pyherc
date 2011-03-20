@@ -27,6 +27,7 @@ from pyHerc.data.model import Character
 from pyHerc.generators.dungeon import TestLevelGenerator
 from pyHerc.rules.tables import Tables
 from pyHerc.test import IntegrationTest
+from pyHerc.test import StubProxyPortal
 
 import pyHerc.rules.moving
 
@@ -85,7 +86,7 @@ class test_moving(IntegrationTest):
 
     def test_enteringNonExistentPortal(self):
         """
-        Test that character can change level via portal
+        Test that character can not walk through floor
         """
         self.character.location = (6, 3)
         assert(self.character.level == self.level1)
@@ -94,3 +95,17 @@ class test_moving(IntegrationTest):
 
         assert(self.character.location == (6, 3))
         assert(self.character.level == self.level1)
+
+    def test_enteringProxyPortal(self):
+        """
+        Test that entering proxy portal will call portals level generation routine
+        """
+        self.character.location = (8, 8)
+        proxy = StubProxyPortal()
+        proxy.icon = pyHerc.data.tiles.portal_stairs_down
+
+        self.level1.addPortal(proxy, (8, 8))
+
+        proxy.generateCalled = 0
+        pyHerc.rules.moving.move(self.model, self.character, 9)
+        assert(proxy.generateCalled == 1)

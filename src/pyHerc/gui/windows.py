@@ -255,7 +255,7 @@ class GameWindow:
                             if player.level != None:
                                 pyHerc.rules.moving.move(model, player, direction)
                         else:
-                            targetLocation = pyHerc.rules.moving.calculateNewLocation(player, direction)
+                            targetLocation = pyHerc.rules.moving.calculateNewLocation(model, player, direction)
                             if 'location' in targetLocation.keys():
                                 target = player.level.getCreatureAt(targetLocation['location'])
                                 if target != None:
