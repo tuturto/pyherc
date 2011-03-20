@@ -58,10 +58,21 @@ class Tables:
         self.items = handler.items
         self.__logger.debug('item config read from xml')
 
-    def loadTables(self, itemConfig = None):
+    def readCreaturesFromXML(self, document):
+        self.__logger.debug('reading creature config from xml')
+        parser = sax.make_parser()
+        handler = CreatureHandler()
+        parser.setContentHandler(handler)
+        file = StringIO.StringIO(document)
+        parser.parse(file)
+        self.creatures = handler.creatures
+        self.__logger.debug('creature config read from xml')
+
+    def loadTables(self, itemConfig = None, creatureConfig = None):
         """
         Initialise tables
         @param itemConfig: optional config string for items
+        @param creatureConfig: optional config string for creatures
         """
 
         if self.__initialised:
@@ -80,35 +91,16 @@ class Tables:
             f.close()
             self.readItemsFromXML(itemConfig)
 
-        self.creatures['rat'] = {'name' : 'rat',
-                                        'str' : 4,
-                                        'dex' : 12,
-                                        'con' : 4,
-                                        'int' : 2,
-                                        'wis' : 4,
-                                        'cha' : 4,
-                                        'hp' : 2,
-                                        'speed' : 2,
-                                        'icon' : [pyHerc.data.tiles.creature_rat_1,
-                                                        pyHerc.data.tiles.creature_rat_2,
-                                                        pyHerc.data.tiles.creature_rat_3,
-                                                        pyHerc.data.tiles.creature_rat_4],
-                                        'attack' : '1d4',
-                                        'size' : 'small'}
-
-        self.creatures['fire beetle'] = {'name' : 'fire beetle',
-                                        'str' : 10,
-                                        'dex' : 11,
-                                        'con' : 11,
-                                        'int' : 0,
-                                        'wis' : 10,
-                                        'cha' : 7,
-                                        'hp' : 4,
-                                        'speed' : 1.9,
-                                        'icon' : [pyHerc.data.tiles.creature_beetle_1,
-                                                        pyHerc.data.tiles.creature_beetle_2],
-                                        'attack' : '2d4',
-                                        'size' : 'small'}
+        if creatureConfig != None:
+            #use passed config
+            self.readCreaturesFromXML(creatureConfig)
+        else:
+            #open file and read from there
+            #TODO: relative location
+            f = open('C:/programming/pyHack/resources/creatures.xml', 'r')
+            creatureConfig = f.read()
+            f.close()
+            self.readCreaturesFromXML(creatureConfig)
 
         self.sizeModifier = {'colossal' :  -8, 'gargantuan' : -4, 'huge' : -2, 'large' : -1,
                                 'medium' : 0, 'small' : 1, 'tiny' : 2, 'diminutive' : 4, 'fine' : 8}
@@ -182,6 +174,37 @@ class Tables:
 
         self.__logger.debug('look up tables constructed')
 
+class CreatureHandler(sax.ContentHandler):
+    """
+    Class to read creatures from xml-configuration
+    """
+    def startElement(self, name, attrs):
+        self.text = ""
+        if name == 'creatures':
+            #start of the configuration document
+            self.creatures = {}
+        elif name == 'creature':
+            #start of new item
+            self.newCreature = {}
+        elif name == 'icons':
+            self.newCreature['icon'] = []
+
+    def characters(self, ch):
+        self.text = self.text + ch
+
+    def endElement(self, name):
+        if name == 'creature':
+            #finished processing creature
+            self.creatures[self.newCreature['name']] = self.newCreature
+            self.newCreature = None
+        elif name in ('name', 'size', 'attack'):
+            self.newCreature[name] = self.text
+        elif name in ('str', 'dex', 'con', 'int', 'wis', 'cha', 'hp'):
+            self.newCreature[name] = int(self.text)
+        elif name == 'speed':
+            self.newCreature['speed'] = float(self.text)
+        elif name == 'icon':
+            self.newCreature['icon'].append(pyHerc.data.tiles.__dict__[self.text])
 
 class ItemHandler(sax.ContentHandler):
     """

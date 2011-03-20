@@ -65,7 +65,7 @@ class test_ItemWithGenerator(IntegrationTest):
         """
         Test that generating crystal skull is possible
         """
-        self.item = self.generator.generateItem(self.tables, {'type': 'special',
+        self.item = self.itemGenerator.generateItem(self.tables, {'type': 'special',
                                                 'name': 'crystal skull'})
 
         assert(self.item.name == 'crystal skull')
@@ -77,7 +77,7 @@ class test_ItemWithGenerator(IntegrationTest):
         Test that a weapon can be created
         """
 
-        item = self.generator.generateItem(self.tables, {'name': 'dagger'})
+        item = self.itemGenerator.generateItem(self.tables, {'name': 'dagger'})
 
         assert(item != None)
         assert(item.name == 'dagger')
@@ -97,7 +97,7 @@ class test_ItemWithGenerator(IntegrationTest):
         """
         Test that character can wield a weapon (dagger)
         """
-        item = self.generator.generateItem(self.tables, {'name': 'dagger'})
+        item = self.itemGenerator.generateItem(self.tables, {'name': 'dagger'})
 
         assert(item not in self.character.weapons)
 
@@ -109,8 +109,8 @@ class test_ItemWithGenerator(IntegrationTest):
         """
         Test that character can swap a weapon to another
         """
-        item1 = self.generator.generateItem(self.tables, {'name': 'dagger'})
-        item2 = self.generator.generateItem(self.tables, {'name': 'sickle'})
+        item1 = self.itemGenerator.generateItem(self.tables, {'name': 'dagger'})
+        item2 = self.itemGenerator.generateItem(self.tables, {'name': 'sickle'})
 
         assert(item1 not in self.character.weapons)
         assert(item2 not in self.character.weapons)
@@ -125,8 +125,8 @@ class test_ItemWithGenerator(IntegrationTest):
         """
         Test that character can not dual wield two-handed weapon
         """
-        item1 = self.generator.generateItem(self.tables, {'name': 'longspear'})
-        item2 = self.generator.generateItem(self.tables, {'name': 'sickle'})
+        item1 = self.itemGenerator.generateItem(self.tables, {'name': 'longspear'})
+        item2 = self.itemGenerator.generateItem(self.tables, {'name': 'sickle'})
 
         assert(item1 not in self.character.weapons)
         assert(item2 not in self.character.weapons)
@@ -141,8 +141,8 @@ class test_ItemWithGenerator(IntegrationTest):
         """
         Test that system can determine if two items can be dual-wielded
         """
-        item1 = self.generator.generateItem(self.tables, {'name': 'longspear'})
-        item2 = self.generator.generateItem(self.tables, {'name': 'sickle'})
+        item1 = self.itemGenerator.generateItem(self.tables, {'name': 'longspear'})
+        item2 = self.itemGenerator.generateItem(self.tables, {'name': 'sickle'})
 
         assert(not pyHerc.rules.items.canDualWield(self.model, self.character, item1, item2))
 
@@ -150,8 +150,8 @@ class test_ItemWithGenerator(IntegrationTest):
         """
         Test that system can determine if item is dual-wieldable
         """
-        item1 = self.generator.generateItem(self.tables, {'name': 'longspear'})
-        item2 = self.generator.generateItem(self.tables, {'name': 'sickle'})
+        item1 = self.itemGenerator.generateItem(self.tables, {'name': 'longspear'})
+        item2 = self.itemGenerator.generateItem(self.tables, {'name': 'sickle'})
 
         assert(not pyHerc.rules.items.dualWieldable(self.model, self.character, item1))
         assert(pyHerc.rules.items.dualWieldable(self.model, self.character, item2))
@@ -160,7 +160,7 @@ class test_ItemWithGenerator(IntegrationTest):
         """
         Test that system can determine if item is dual-wieldable when using mundane items
         """
-        item = self.generator.generateItem(self.tables, {'name': 'apple'})
+        item = self.itemGenerator.generateItem(self.tables, {'name': 'apple'})
 
         assert(not pyHerc.rules.items.dualWieldable(self.model, self.character, item))
 
@@ -168,7 +168,7 @@ class test_ItemWithGenerator(IntegrationTest):
         """
         Test that basic healing potion can be created
         """
-        self.item = self.generator.generateItem(self.tables, {'name': 'healing potion'})
+        self.item = self.itemGenerator.generateItem(self.tables, {'name': 'healing potion'})
 
         assert(self.item != None)
         assert(self.item.charges == 1)

@@ -302,10 +302,53 @@ class IntegrationTest():
     </item>
 </items>
 """
+
+        creatureConfig = """
+<creatures>
+    <creature>
+        <name>rat</name>
+        <str>4</str>
+        <dex>12</dex>
+        <con>4</con>
+        <int>2</int>
+        <wis>4</wis>
+        <cha>4</cha>
+        <hp>2</hp>
+        <speed>2</speed>
+        <icons>
+            <icon>creature_rat_1</icon>
+            <icon>creature_rat_2</icon>
+            <icon>creature_rat_3</icon>
+            <icon>creature_rat_4</icon>
+        </icons>
+        <attack>1d4</attack>
+        <size>small</size>
+    </creature>
+    <creature>
+        <name>fire beetle</name>
+        <str>10</str>
+        <dex>11</dex>
+        <con>11</con>
+        <int>0</int>
+        <wis>10</wis>
+        <cha>7</cha>
+        <hp>4</hp>
+        <speed>1.9</speed>
+        <icons>
+            <icon>creature_beetle_1</icon>
+            <icon>creature_beetle_2</icon>
+        </icons>
+        <attack>2d4</attack>
+        <size>small</size>
+    </creature>
+</creatures>
+"""
+
         self.model = pyHerc.data.model.Model()
-        self.generator = pyHerc.generators.item.ItemGenerator()
+        self.itemGenerator = pyHerc.generators.item.ItemGenerator()
+        self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator()
         self.tables = pyHerc.rules.tables.Tables()
-        self.tables.loadTables(itemConfig)
+        self.tables.loadTables(itemConfig, creatureConfig)
         self.model.tables = self.tables
 
         self.setUp2()

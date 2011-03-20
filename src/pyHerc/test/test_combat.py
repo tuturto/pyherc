@@ -89,7 +89,7 @@ class test_meleeCombat(IntegrationTest):
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
 
-        weapon = self.generator.generateItem(self.tables, {'name' : 'club'})
+        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'club'})
 
         character.attack = '1d4'
         character.weapons = [weapon]
@@ -110,7 +110,7 @@ class test_meleeCombat(IntegrationTest):
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
 
-        weapon = self.generator.generateItem(self.tables, {'name' : 'sickle'})
+        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'sickle'})
 
         character.attack = '1d4'
         character.weapons = [weapon]
@@ -132,7 +132,7 @@ class test_meleeCombat(IntegrationTest):
         character.size = 'medium'
         character.str = 16
 
-        weapon = self.generator.generateItem(self.tables, {'name' : 'apple'})
+        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'apple'})
 
         character.attack = '1d4'
         character.weapons = [weapon]
