@@ -65,7 +65,8 @@ def meleeAttack(model, attacker, target, dice = []):
         target.hp = target.hp - damage.amount
         __logger.debug(target.__str__() + ' has ' + target.hp.__str__() + ' hp left')
         model.raiseEvent(event)
-        ending.checkDying(model, target, None)
+        if target.hp < 0:
+            ending.checkDying(model, target, None)
     else:
         __logger.debug('attack misses')
         model.raiseEvent(event)

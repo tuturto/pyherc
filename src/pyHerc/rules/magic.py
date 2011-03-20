@@ -65,7 +65,8 @@ def castHPEffect(model, target, effect, dice = None):
         target.hp = target.hp - hpRoll
         event['type'] = 'magic damage'
 
-    pyHerc.rules.ending.checkDying(model, target, None)
+    if target.hp < 0:
+        pyHerc.rules.ending.checkDying(model, target, None)
 
     if target.hp > target.getMaxHP():
         target.hp = target.getMaxHP()
