@@ -50,7 +50,7 @@ class DungeonGenerator:
 
         escapePortal = Portal()
         escapePortal.icon = pyHerc.data.tiles.portal_stairs_up
-        escapePortal.otherEnd = None
+        escapePortal.setOtherEnd(None)
 
         levelSize = model.config['level']['size']
         location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
@@ -220,7 +220,7 @@ class CatacombsLevelGenerator:
 
         # generate next level
         for portal in tempLevel.portals:
-            if portal.otherEnd == None:
+            if portal.getOtherEnd() == None:
                 if level < 5:
                     #still in catacombs
                     newLevel = self.generateLevel(portal, model, 1, level = level + 1)

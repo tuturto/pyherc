@@ -44,11 +44,11 @@ class test_dungeon:
 
         assert(stairs1.level == level1)
         assert(stairs1.location == (10, 10))
-        assert(stairs1.otherEnd == stairs2)
+        assert(stairs1.getOtherEnd() == stairs2)
 
         assert(stairs2.level == level2)
         assert(stairs2.location == (5, 5))
-        assert(stairs2.otherEnd == stairs1)
+        assert(stairs2.getOtherEnd() == stairs1)
 
         assert(stairs1 in level1.portals)
         assert(stairs2 in level2.portals)

@@ -137,16 +137,15 @@ def calculateNewLocation(model, character, direction):
     elif direction == 9:
         portal = newLevel.getPortalAt(location)
         if portal != None:
-            if portal.otherEnd != None:
-                newLevel = portal.otherEnd.level
-                newLocation = portal.otherEnd.location
+            if portal.getOtherEnd() != None:
+                newLevel = portal.getOtherEnd().level
+                newLocation = portal.getOtherEnd().location
             else:
                 #proxy
-                if hasattr(portal, 'generateLevel'):
+                if portal.levelGenerator != None:
                     portal.generateLevel(model)
-                    #TODO: actually move
-                    newLevel = None
-                    newLocation = None
+                    newLevel = portal.getOtherEnd().level
+                    newLocation = portal.getOtherEnd().location
                 else:
                     #escaping perhaps?
                     newLevel = None

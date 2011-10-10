@@ -105,8 +105,8 @@ class Level:
         if otherEnd != None:
             assert(otherEnd.icon != None or portal.icon != None)
 
-            portal.otherEnd = otherEnd
-            otherEnd.otherEnd = portal
+            portal.setOtherEnd (otherEnd)
+            otherEnd.setOtherEnd(portal)
             if portal.icon != None:
                 if otherEnd.icon == None:
                     if portal.icon == tiles.portal_stairs_down:
@@ -205,6 +205,24 @@ class Portal:
         self.level = None
         self.location = ()
         self.icon = None
-        self.otherEnd = None
+        self.__otherEnd = None
         self.questEnd = 0
+        self.levelGenerator = None
         self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')
+
+    def getOtherEnd(self):
+        return self.__otherEnd
+
+    def setOtherEnd(self, portal):
+        self.__otherEnd = portal
+
+    def generateLevel(self, model):
+        '''
+        Generates level if this is a proxy portal
+        '''
+        assert self.levelGenerator != None
+        self.logger.debug('generating a new level')
+
+        #TODO: support for level generation parameters
+        newLevel = self.levelGenerator.generateLevel(self, model, monsterList = [])
+

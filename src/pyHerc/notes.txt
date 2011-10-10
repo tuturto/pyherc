@@ -105,7 +105,6 @@ Stuff to do:
     - artifacts
 - catacombs level generator
     - generate first 5 levels of the game
-- level generator proxy
 - test switch for command line
     - generates specific dungeon
     - unlimited wishes
@@ -131,6 +130,7 @@ Stuff Done:
     + walking up and down
     + escaping from dungeon
         + end conditions for victory
+    + level generator proxy
 + timer for turns
 + monsters
     + generating

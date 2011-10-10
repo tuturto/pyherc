@@ -22,14 +22,6 @@ import pyHerc.data.dungeon
 import pyHerc.data.model
 import pyHerc.rules.tables
 
-class StubProxyPortal(pyHerc.data.dungeon.Portal):
-    """
-    Simple stub to act as a proxy portal
-    """
-
-    def generateLevel(self, model):
-        self.generateCalled = 1
-
 class StubModel():
     """
     Simple stub to act as model and do nothing
