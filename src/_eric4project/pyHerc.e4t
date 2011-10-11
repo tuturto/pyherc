@@ -1,35 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2011-10-11, 00:29:40 -->
+<!-- Saved: 2011-10-11, 22:24:48 -->
 <Tasks version="4.2">
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: handle memory</Summary>
-    <Description></Description>
-    <Created>2011-01-30, 22:06:20</Created>
-    <Resource>
-      <Filename>pyHerc/ai/simple.py</Filename>
-      <Linenumber>44</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: take paging into account</Summary>
-    <Description></Description>
-    <Created>2011-02-18, 21:48:28</Created>
-    <Resource>
-      <Filename>pyHerc/gui/dialogs.py</Filename>
-      <Linenumber>123</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: get from configuration in beginning</Summary>
-    <Description></Description>
-    <Created>2011-02-18, 21:48:28</Created>
-    <Resource>
-      <Filename>pyHerc/gui/dialogs.py</Filename>
-      <Linenumber>130</Linenumber>
-    </Resource>
-  </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: change to use rules.tables</Summary>
     <Description></Description>
@@ -136,15 +109,6 @@
     <Resource>
       <Filename>pyHerc/rules/magic.py</Filename>
       <Linenumber>40</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: AI from tables</Summary>
-    <Description></Description>
-    <Created>2011-03-20, 14:28:55</Created>
-    <Resource>
-      <Filename>pyHerc/generators/creature.py</Filename>
-      <Linenumber>82</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
@@ -274,75 +238,111 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: handle memory</Summary>
+    <Description></Description>
+    <Created>2011-10-11, 22:12:44</Created>
+    <Resource>
+      <Filename>pyHerc/ai/simple.py</Filename>
+      <Linenumber>43</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: AI from tables</Summary>
+    <Description></Description>
+    <Created>2011-10-11, 22:13:47</Created>
+    <Resource>
+      <Filename>pyHerc/generators/creature.py</Filename>
+      <Linenumber>80</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: split into smaller chuncks</Summary>
     <Description></Description>
-    <Created>2011-10-10, 21:46:39</Created>
+    <Created>2011-10-11, 22:19:51</Created>
     <Resource>
       <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>91</Linenumber>
+      <Linenumber>90</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: more random content creation</Summary>
     <Description></Description>
-    <Created>2011-10-10, 21:46:39</Created>
+    <Created>2011-10-11, 22:19:51</Created>
     <Resource>
       <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>183</Linenumber>
+      <Linenumber>182</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: more intelligent system to choose monsters</Summary>
     <Description></Description>
-    <Created>2011-10-10, 21:46:39</Created>
+    <Created>2011-10-11, 22:19:51</Created>
     <Resource>
       <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>185</Linenumber>
+      <Linenumber>184</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement generating dungeon levels</Summary>
     <Description></Description>
-    <Created>2011-10-10, 21:46:39</Created>
+    <Created>2011-10-11, 22:19:51</Created>
     <Resource>
       <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>228</Linenumber>
+      <Linenumber>227</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement properly</Summary>
     <Description></Description>
-    <Created>2011-10-10, 21:46:39</Created>
+    <Created>2011-10-11, 22:19:51</Created>
     <Resource>
       <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>253</Linenumber>
+      <Linenumber>252</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: better placement algorithm</Summary>
     <Description></Description>
-    <Created>2011-10-10, 21:46:39</Created>
+    <Created>2011-10-11, 22:19:51</Created>
     <Resource>
       <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>264</Linenumber>
+      <Linenumber>263</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: better placement algorithm</Summary>
     <Description></Description>
-    <Created>2011-10-10, 21:46:39</Created>
+    <Created>2011-10-11, 22:19:51</Created>
     <Resource>
       <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>272</Linenumber>
+      <Linenumber>271</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: spread given monsters around</Summary>
     <Description></Description>
-    <Created>2011-10-10, 21:46:39</Created>
+    <Created>2011-10-11, 22:19:51</Created>
     <Resource>
       <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>276</Linenumber>
+      <Linenumber>275</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: take paging into account</Summary>
+    <Description></Description>
+    <Created>2011-10-11, 22:22:23</Created>
+    <Resource>
+      <Filename>pyHerc/gui/dialogs.py</Filename>
+      <Linenumber>126</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: get from configuration in beginning</Summary>
+    <Description></Description>
+    <Created>2011-10-11, 22:22:23</Created>
+    <Resource>
+      <Filename>pyHerc/gui/dialogs.py</Filename>
+      <Linenumber>133</Linenumber>
     </Resource>
   </Task>
 </Tasks>

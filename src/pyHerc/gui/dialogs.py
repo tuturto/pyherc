@@ -21,13 +21,16 @@
 import os, sys
 import pygame
 import logging
-import surfaceManager
-import images
+import pyHerc.gui.surfaceManager
+import pyHerc.gui.images
 import pyHerc.data.model
 import pyHerc.data.tiles
 import pyHerc.generators.dungeon
 
-from pygame.locals import *
+from pygame.locals import K_a, K_b, K_c, K_d, K_e, K_f, K_g, K_h, K_i, K_j
+from pygame.locals import K_k, K_l, K_m, K_n, K_o, K_p, K_q, K_r, K_s, K_t
+from pygame.locals import K_u, K_v, K_w, K_x, K_y, K_z
+from pygame.locals import K_ESCAPE, K_RETURN, K_SPACE
 
 class Inventory:
     """
@@ -56,7 +59,7 @@ class Inventory:
                                 K_k:10, K_l:11, K_m:12, K_n:13, K_o:14, K_p:15, K_q:16, K_r:17,
                                 K_s:18, K_t:19, K_u:20, K_v:21, K_w:22, K_x:23, K_y:24, K_z:25}
 
-        self.background = surfaceManager.getImage(images.image_inventory_menu)
+        self.background = pyHerc.gui.surfaceManager.getImage(pyHerc.gui.images.image_inventory_menu)
 
     def show(self, list, multipleSelections = -1):
         """
@@ -193,7 +196,8 @@ class EndScreen:
             self.screen.blit(text, textRect)
         else:
             #quit
-            self.background = surfaceManager.getImage(images.image_end_marble_slate)
+            self.background = pyHerc.gui.surfaceManager.getImage(
+                                                                 pyHerc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' quit', True, colour, (0, 0, 0))
             textRect = text.get_rect()

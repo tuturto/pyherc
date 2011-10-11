@@ -20,7 +20,6 @@
 
 import sys, getopt
 import pygame
-import pyHerc.gui
 import logging
 
 from pyHerc.gui.windows import MainWindow
@@ -124,7 +123,7 @@ class Application:
         logger.info("Logging started")
 
 if __name__ == "__main__":
-    app = Application()
-    app.load_configuration(sys.argv[1:])
-    app.start_logging()
-    app.run()
+    application = Application()
+    application.load_configuration(sys.argv[1:])
+    application.start_logging()
+    application.run()

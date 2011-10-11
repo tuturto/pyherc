@@ -19,13 +19,11 @@
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
 import types
-import os, sys
 import logging
 import random
 import pyHerc.ai.simple
 import pyHerc.data.model
 import pyHerc.rules.tables
-from pyHerc.data import tiles
 
 class CreatureGenerator:
     """
@@ -80,7 +78,7 @@ class CreatureGenerator:
         newCreature.size = table['size']
         newCreature.attack = table['attack']
         #TODO: AI from tables
-        newCreature.act = types.MethodType(pyHerc.ai.simple.flockingHerbivore, newCreature, pyHerc.data.model.Character)
+        newCreature.act = types.MethodType(pyHerc.ai.simple.flocking_herbivore, newCreature, pyHerc.data.model.Character)
 
 
         if hasattr(table['icon'], 'append'):

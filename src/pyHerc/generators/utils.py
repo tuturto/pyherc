@@ -26,16 +26,8 @@ class BSPSection:
     """
     Class used to divide area in sections
     """
-    def __init__(self):
-        self.corner1 = None
-        self.corner2 = None
-        self.node1 = None
-        self.node2 = None
-        self.parent = None
-        self.direction = None
-        self.logger = logging.getLogger('pyHerc.generators.utils.BSPSection')
-
-    def __init__(self, corner1, corner2, parent, direction = None):
+    def __init__(self, corner1 = None, corner2 = None, parent = None,
+                 direction = None):
         self.corner1 = corner1
         self.corner2 = corner2
         self.node1 = None

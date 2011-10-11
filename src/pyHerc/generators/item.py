@@ -18,12 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, sys
 import logging
 import pyHerc.data.model
 import pyHerc.rules.tables
 import random
-from pyHerc.data import tiles
 
 class ItemGenerator:
     """

@@ -19,11 +19,10 @@
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
 import math
-import pyHerc.ai.simple
 import pyHerc.rules.moving
 import pyHerc.rules.combat
 
-def proofOfConcept(self, model):
+def proof_of_concept(self, model):
     """
     Proof of concept
     This AI will just utter words "hello World"
@@ -32,14 +31,14 @@ def proofOfConcept(self, model):
     print('hello world')
     self.tick = self.tick + 10
 
-def flockingHerbivore(self, model):
+def flocking_herbivore(self, model):
     """
     AI for flocking herbivore
     Tries to maintain close distance to other animals
     Seeks out player for combat
     """
-    shortestDistance = None
-    closestCreature = None
+    shortest_distance = None
+    closest_creature = None
 
     #TODO: handle memory
     del self.shortTermMemory[:]
@@ -49,23 +48,23 @@ def flockingHerbivore(self, model):
             x = abs(creature.location[0] - self.location[0])
             y = abs(creature.location[1] - self.location[1])
             distance = math.sqrt(x * x + y * y)
-            if shortestDistance != None:
-                if distance < shortestDistance:
-                    shortestDistance = distance
-                    closestCreature = creature
+            if shortest_distance != None:
+                if distance < shortest_distance:
+                    shortest_distance = distance
+                    closest_creature = creature
             else:
-                shortestDistance = distance
-                closestCreature = creature
+                shortest_distance = distance
+                closest_creature = creature
 
-    if shortestDistance != None:
-        if shortestDistance <= 2:
+    if shortest_distance != None:
+        if shortest_distance <= 2:
             #seek player instead
             x = abs(model.player.location[0] - self.location[0])
             y = abs(model.player.location[1] - self.location[1])
             distance = math.sqrt(x * x + y * y)
 
             if distance > 1:
-                direction = findDirection(self.location, model.player.location)
+                direction = find_direction(self.location, model.player.location)
                 result = pyHerc.rules.moving.checkMove(model, self, direction)
                 if result['ok']:
                     pyHerc.rules.moving.move(model, self, direction)
@@ -76,7 +75,8 @@ def flockingHerbivore(self, model):
                 pyHerc.rules.combat.meleeAttack(model, self, model.player)
         else:
             #find direction
-            direction = pyHerc.ai.simple.findDirection(self.location, closestCreature.location)
+            direction = pyHerc.ai.simple.find_direction(self.location,
+                                                       closest_creature.location)
             result = pyHerc.rules.moving.checkMove(model, self, direction)
             if result['ok']:
                 pyHerc.rules.moving.move(model, self, direction)
@@ -86,7 +86,7 @@ def flockingHerbivore(self, model):
         #we're all alone here
         self.tick = self.tick + 10
 
-def findDirection(start, end):
+def find_direction(start, end):
     """
     Find direction from start to end
     @param start: start location
@@ -96,33 +96,36 @@ def findDirection(start, end):
     assert(start != None)
     assert(end != None)
 
+    direction = None
     if start[0] < end[0]:
         #right side
         if start[1] < end[1]:
             #right, below
-            return 4
+            direction = 4
         elif start[1] > end[1]:
             #right, above
-            return 2
+            direction = 2
         else:
             #right
-            return 3
+            direction = 3
     elif start[0] > end[0]:
         #left side
         if start[1] < end[1]:
             #left, below
-            return 6
+            direction = 6
         elif start[1] > end[1]:
             #left, above
-            return 8
+            direction = 8
         else:
             #left
-            return 7
+            direction = 7
     else:
         #up or down
         if start[1] < end[1]:
             #below
-            return 5
+            direction = 5
         elif start[1] > end[1]:
             #above
-            return 1
+            direction = 1
+
+    return direction
