@@ -77,7 +77,7 @@ def checkDying(model, character, deathParams):
         event['character'] = character
         event['location'] = character.location
         event['level'] = character.level
-        model.raiseEvent(event)
+        model.raise_event(event)
         #TODO: implement leaving corpse
         if character != model.player:
             character.level.removeCreature(character)

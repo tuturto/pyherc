@@ -47,7 +47,7 @@ def pickUp(model, character, item):
     event['item'] = item
     event['location'] = character.location
     event['level'] = character.level
-    model.raiseEvent(event)
+    model.raise_event(event)
 
     character.level.items.remove(item)
     character.inventory.append(item)
@@ -77,7 +77,7 @@ def drop(model, character, item):
     event['item'] = item
     event['location'] = character.location
     event['level'] = character.level
-    model.raiseEvent(event)
+    model.raise_event(event)
 
     character.level.addItem(item, character.location)
     character.inventory.remove(item)
@@ -106,7 +106,7 @@ def wield(model, character, item, dualWield = False):
         event['item'] = item
         event['location'] = character.location
         event['level'] = character.level
-        model.raiseEvent(event)
+        model.raise_event(event)
     else:
         #possible dual wield?
         if dualWield == True:
@@ -121,7 +121,7 @@ def wield(model, character, item, dualWield = False):
                     event['item'] = item
                     event['location'] = character.location
                     event['level'] = character.level
-                    model.raiseEvent(event)
+                    model.raise_event(event)
                     #TODO: feedback when wielding is not possible
 
 def canDualWield(model, character, item1, item2):
@@ -179,7 +179,7 @@ def drinkPotion(model, character, potion, dice = None):
     potion.charges = potion.charges - 1
 
     #drinking a potion usually identifies it
-    character.identifyItem(potion)
+    character.identify_item(potion)
 
     if hasattr(potion, 'effects'):
         for effect in potion.effects['on drink']:

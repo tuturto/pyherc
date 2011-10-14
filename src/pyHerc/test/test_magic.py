@@ -104,7 +104,7 @@ class test_magicWithGenerators(IntegrationTest):
         """
         pyHerc.rules.items.drinkPotion(self.model, self.character, self.item)
 
-        name = self.item.getName(self.character)
+        name = self.item.get_name(self.character)
         assert(name == 'healing potion')
 
     def test_drinkingPotionEmptyDiscardsIt(self):

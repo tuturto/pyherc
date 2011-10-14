@@ -68,12 +68,12 @@ def castHPEffect(model, target, effect, dice = None):
     if target.hp < 0:
         pyHerc.rules.ending.checkDying(model, target, None)
 
-    if target.hp > target.getMaxHP():
-        target.hp = target.getMaxHP()
+    if target.hp > target.get_max_HP():
+        target.hp = target.get_max_HP()
 
     event['character'] = target
     event['location'] = target.location
     event['level'] = target.level
     event['power'] = hpRoll
 
-    model.raiseEvent(event)
+    model.raise_event(event)

@@ -56,7 +56,7 @@ def move(model, character, direction):
         character.tick = time.getNewTick(character, 2)
         event['end location'] = character.location
         event['end level'] = character.level
-        model.raiseEvent(event)
+        model.raise_event(event)
 
     __logger.debug('move finished at ' + character.location.__str__())
 

@@ -64,12 +64,12 @@ def meleeAttack(model, attacker, target, dice = []):
         #TODO: resistances
         target.hp = target.hp - damage.amount
         __logger.debug(target.__str__() + ' has ' + target.hp.__str__() + ' hp left')
-        model.raiseEvent(event)
+        model.raise_event(event)
         if target.hp < 0:
             ending.checkDying(model, target, None)
     else:
         __logger.debug('attack misses')
-        model.raiseEvent(event)
+        model.raise_event(event)
 
     attacker.tick = time.getNewTick(attacker, 6)
 

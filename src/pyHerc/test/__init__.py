@@ -27,7 +27,7 @@ class StubModel():
     Simple stub to act as model and do nothing
     """
 
-    def raiseEvent(self, event):
+    def raise_event(self, event):
         pass
 
 class IntegrationTest():

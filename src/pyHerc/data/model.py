@@ -34,9 +34,9 @@ class Model:
         self.endCondition = 0
 
         self.logger.info('loading config')
-        self.loadConfig()
+        self.load_config()
 
-    def loadConfig(self):
+    def load_config(self):
         """
         Loads config
         """
@@ -44,7 +44,7 @@ class Model:
         self.config['level'] = {}
         self.config['level']['size']  = (80,  40)
 
-    def raiseEvent(self, event):
+    def raise_event(self, event):
         """
         Relays event to creatures
         @param event: event to relay
@@ -53,10 +53,10 @@ class Model:
         #TODO: filter events
         if event['level'] != None:
             for creature in event['level'].creatures:
-                creature.receiveEvent(event)
+                creature.receive_event(event)
 
         if self.player != None:
-            self.player.receiveEvent(event)
+            self.player.receive_event(event)
 
 class Character:
     """
@@ -92,19 +92,19 @@ class Character:
     def __str__(self):
         return self.name
 
-    def receiveEvent(self, event):
+    def receive_event(self, event):
         """
         Receives an event from world and enters it into short term memory
         """
         self.shortTermMemory.append(event)
 
-    def getMaxHP(self):
+    def get_max_HP(self):
         """
         Get maximum HP this character can currently have
         """
         return self.maxHp
 
-    def identifyItem(self, item):
+    def identify_item(self, item):
         """
         Identify item
         @param item: item to mark as identified
@@ -129,19 +129,26 @@ class Item:
     def __str__(self):
         return self.name
 
-    def getName(self, character):
+    def get_name(self, character):
         """
         Get name of the item
         Name can be appearance or given name
         @param character: character handling the item
         """
+        assert character != None
+
         if hasattr(self, 'appearance'):
             if self.name in character.itemMemory.keys():
-                return character.itemMemory[self.name]
+                name = character.itemMemory[self.name]
             else:
-                return self.appearance
+                name = self.appearance
         else:
-            return self.name
+            name = self.name
+
+        if self in character.weapons:
+            name = name + ' (weapon in hand)'
+
+        return name
 
 class Damage:
     """

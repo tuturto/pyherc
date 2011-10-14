@@ -332,13 +332,13 @@ class GameWindow:
                 self.eventHistory.append(newLine)
             elif event['type'] == 'item':
                 if 'pick up' in event.keys():
-                    newLine = event['character'].name + ' picks up ' + event['item'].getName(self.application.world.player)
+                    newLine = event['character'].name + ' picks up ' + event['item'].get_name(self.application.world.player)
                     self.eventHistory.append(newLine)
                 elif 'drop' in event.keys():
-                    newLine = event['character'].name + ' drops ' + event['item'].getName(self.application.world.player)
+                    newLine = event['character'].name + ' drops ' + event['item'].get_name(self.application.world.player)
                     self.eventHistory.append(newLine)
                 elif 'wield' in event.keys():
-                    newLine = event['character'].name + ' wields ' + event['item'].getName(self.application.world.player)
+                    newLine = event['character'].name + ' wields ' + event['item'].get_name(self.application.world.player)
                     self.eventHistory.append(newLine)
             elif event['type'] == 'death':
                 newLine = event['character'].name + ' is now dead'

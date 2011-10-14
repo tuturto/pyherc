@@ -26,7 +26,7 @@ import pyHerc.rules.items
 import pyHerc.rules.tables
 from pyHerc.test import IntegrationTest
 
-class test_ItemWithGenerator(IntegrationTest):
+class test_item_with_generator(IntegrationTest):
     """
     Tests for items that require item generator to be working
     """
@@ -61,7 +61,7 @@ class test_ItemWithGenerator(IntegrationTest):
         self.model.dungeon = self.dungeon
         self.model.player = self.character
 
-    def test_crystalSkullGeneration(self):
+    def test_crystal_skull_generation(self):
         """
         Test that generating crystal skull is possible
         """
@@ -72,7 +72,7 @@ class test_ItemWithGenerator(IntegrationTest):
         assert(self.item.questItem == 1)
         assert(self.item.icon == pyHerc.data.tiles.item_crystal_skull)
 
-    def test_createWeapon(self):
+    def test_create_weapon(self):
         """
         Test that a weapon can be created
         """
@@ -93,7 +93,7 @@ class test_ItemWithGenerator(IntegrationTest):
         assert('simple weapon' in item.tags)
         assert(item.rarity == 32)
 
-    def test_wieldWeapon(self):
+    def test_wield_weapon(self):
         """
         Test that character can wield a weapon (dagger)
         """
@@ -105,7 +105,7 @@ class test_ItemWithGenerator(IntegrationTest):
 
         assert(item in self.character.weapons)
 
-    def test_dualWielding(self):
+    def test_dual_wielding(self):
         """
         Test that character can swap a weapon to another
         """
@@ -121,7 +121,7 @@ class test_ItemWithGenerator(IntegrationTest):
         assert(item1 in self.character.weapons)
         assert(item2 in self.character.weapons)
 
-    def test_dualWieldingTwoHandedWeapons(self):
+    def test_dual_wielding_two_handed_weapons(self):
         """
         Test that character can not dual wield two-handed weapon
         """
@@ -137,7 +137,7 @@ class test_ItemWithGenerator(IntegrationTest):
         assert(item1 not in self.character.weapons)
         assert(item2 in self.character.weapons)
 
-    def test_canDualWield(self):
+    def test_can_dual_wield(self):
         """
         Test that system can determine if two items can be dual-wielded
         """
@@ -146,7 +146,7 @@ class test_ItemWithGenerator(IntegrationTest):
 
         assert(not pyHerc.rules.items.canDualWield(self.model, self.character, item1, item2))
 
-    def test_dualWieldable(self):
+    def test_dual_wieldable(self):
         """
         Test that system can determine if item is dual-wieldable
         """
@@ -156,7 +156,7 @@ class test_ItemWithGenerator(IntegrationTest):
         assert(not pyHerc.rules.items.dualWieldable(self.model, self.character, item1))
         assert(pyHerc.rules.items.dualWieldable(self.model, self.character, item2))
 
-    def test_dualWieldableApples(self):
+    def test_dual_wieldable_apples(self):
         """
         Test that system can determine if item is dual-wieldable when using mundane items
         """
@@ -164,7 +164,7 @@ class test_ItemWithGenerator(IntegrationTest):
 
         assert(not pyHerc.rules.items.dualWieldable(self.model, self.character, item))
 
-    def test_potionCreation(self):
+    def test_potion_creation(self):
         """
         Test that basic healing potion can be created
         """
@@ -212,7 +212,7 @@ class test_Item:
         self.model.dungeon = self.dungeon
         self.model.player = self.character
 
-    def test_pickingUp(self):
+    def test_picking_up(self):
         """
         Test that item can be picked up
         """
@@ -225,7 +225,7 @@ class test_Item:
         assert(not self.item in self.level.items)
         assert(self.item.location == ())
 
-    def test_pickingUpNotCorrectLocation(self):
+    def test_picking_up_not_correct_location(self):
         """
         Test that item is not picked up from wrong location
         """
@@ -239,7 +239,7 @@ class test_Item:
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
 
-    def test_droppingItem(self):
+    def test_dropping_item(self):
         """
         Test that an item can be dropped from inventory
         """
@@ -255,7 +255,7 @@ class test_Item:
         assert(self.item in self.level.items)
         assert(self.item.location == (8, 8))
 
-    def test_findingItems(self):
+    def test_finding_items(self):
         """
         Test that level can be queried for items on a certain location
         """
@@ -286,7 +286,7 @@ class test_ItemAdvanced():
     Testing more advanced features of item class
     """
 
-    def test_appearanceOfUnknown(self):
+    def test_appearance_of_unknown(self):
         """"
         Test that appearance is reported for an unknown item
         """
@@ -297,11 +297,11 @@ class test_ItemAdvanced():
         item.name = 'healing potion'
         item.appearance = 'blue potion'
 
-        name = item.getName(character)
+        name = item.get_name(character)
 
         assert(name == 'blue potion')
 
-    def test_appearanceOfGenericNamedItem(self):
+    def test_appearance_of_generic_named_item(self):
         """
         Test that given name is reported for a generally named item
         """
@@ -312,11 +312,11 @@ class test_ItemAdvanced():
         item.name = 'healing potion'
         item.appearance = 'blue potion'
 
-        name = item.getName(character)
+        name = item.get_name(character)
 
         assert(name == 'doozer potion')
 
-    def test_identifyingItem(self):
+    def test_identifying_item(self):
         """
         Test that character can identify an item
         """
@@ -325,10 +325,26 @@ class test_ItemAdvanced():
         item.name = 'healing potion'
         item.appearance = 'blue potion'
 
-        name = item.getName(character)
+        name = item.get_name(character)
         assert(name == 'blue potion')
 
-        character.identifyItem(item)
+        character.identify_item(item)
 
-        name = item.getName(character)
+        name = item.get_name(character)
         assert(name == 'healing potion')
+
+    def test_item_name_decoration(self):
+        '''
+        Test that item can decorate its name by adding (being worn) or (weapon in hand) to the name
+        '''
+        item = pyHerc.data.model.Item()
+        character = pyHerc.data.model.Character()
+        item.name = 'club'
+
+        character.inventory.append(item)
+        name = item.get_name(character)
+        assert(name == 'club')
+
+        character.weapons = [item]
+        name = item.get_name(character)
+        assert(name == 'club (weapon in hand)')
