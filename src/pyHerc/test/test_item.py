@@ -346,5 +346,8 @@ class test_ItemAdvanced():
         assert(name == 'club')
 
         character.weapons = [item]
-        name = item.get_name(character)
+        name = item.get_name(character, True)
         assert(name == 'club (weapon in hand)')
+
+        name = item.get_name(character, False)
+        assert(name == 'club')

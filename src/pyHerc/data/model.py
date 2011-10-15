@@ -129,11 +129,12 @@ class Item:
     def __str__(self):
         return self.name
 
-    def get_name(self, character):
+    def get_name(self, character, decorate = False):
         """
         Get name of the item
         Name can be appearance or given name
         @param character: character handling the item
+        @param decorate: should name be decorated with status info, default False
         """
         assert character != None
 
@@ -145,8 +146,9 @@ class Item:
         else:
             name = self.name
 
-        if self in character.weapons:
-            name = name + ' (weapon in hand)'
+        if decorate == True:
+            if self in character.weapons:
+                name = name + ' (weapon in hand)'
 
         return name
 
