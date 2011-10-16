@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2011-10-14, 23:26:15 -->
+<!-- Saved: 2011-10-15, 23:18:31 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: change to use rules.tables</Summary>
@@ -211,60 +211,6 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: feedback when wielding is not possible</Summary>
-    <Description></Description>
-    <Created>2011-10-14, 23:21:34</Created>
-    <Resource>
-      <Filename>pyHerc/rules/items.py</Filename>
-      <Linenumber>125</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: feed back</Summary>
-    <Description></Description>
-    <Created>2011-10-14, 23:21:34</Created>
-    <Resource>
-      <Filename>pyHerc/rules/items.py</Filename>
-      <Linenumber>176</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: raise event</Summary>
-    <Description></Description>
-    <Created>2011-10-14, 23:21:34</Created>
-    <Resource>
-      <Filename>pyHerc/rules/items.py</Filename>
-      <Linenumber>191</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: take paging into account</Summary>
-    <Description></Description>
-    <Created>2011-10-14, 23:22:34</Created>
-    <Resource>
-      <Filename>pyHerc/gui/dialogs.py</Filename>
-      <Linenumber>126</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: get from configuration in beginning</Summary>
-    <Description></Description>
-    <Created>2011-10-14, 23:22:35</Created>
-    <Resource>
-      <Filename>pyHerc/gui/dialogs.py</Filename>
-      <Linenumber>133</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: filter events</Summary>
-    <Description></Description>
-    <Created>2011-10-14, 23:22:35</Created>
-    <Resource>
-      <Filename>pyHerc/data/model.py</Filename>
-      <Linenumber>53</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: use configuration</Summary>
     <Description></Description>
     <Created>2011-10-14, 23:22:35</Created>
@@ -343,6 +289,69 @@
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>378</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: filter events</Summary>
+    <Description></Description>
+    <Created>2011-10-15, 21:56:23</Created>
+    <Resource>
+      <Filename>pyHerc/data/model.py</Filename>
+      <Linenumber>53</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: take paging into account</Summary>
+    <Description></Description>
+    <Created>2011-10-15, 21:57:06</Created>
+    <Resource>
+      <Filename>pyHerc/gui/dialogs.py</Filename>
+      <Linenumber>126</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: get from configuration in beginning</Summary>
+    <Description></Description>
+    <Created>2011-10-15, 21:57:06</Created>
+    <Resource>
+      <Filename>pyHerc/gui/dialogs.py</Filename>
+      <Linenumber>133</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement</Summary>
+    <Description></Description>
+    <Created>2011-10-15, 22:37:36</Created>
+    <Resource>
+      <Filename>pyHerc/test/test_item.py</Filename>
+      <Linenumber>118</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: feedback when wielding is not possible</Summary>
+    <Description></Description>
+    <Created>2011-10-15, 23:18:31</Created>
+    <Resource>
+      <Filename>pyHerc/rules/items.py</Filename>
+      <Linenumber>128</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: feed back</Summary>
+    <Description></Description>
+    <Created>2011-10-15, 23:18:31</Created>
+    <Resource>
+      <Filename>pyHerc/rules/items.py</Filename>
+      <Linenumber>193</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: raise event</Summary>
+    <Description></Description>
+    <Created>2011-10-15, 23:18:31</Created>
+    <Resource>
+      <Filename>pyHerc/rules/items.py</Filename>
+      <Linenumber>208</Linenumber>
     </Resource>
   </Task>
 </Tasks>

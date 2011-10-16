@@ -281,10 +281,15 @@ class GameWindow:
                     elif event.key == K_w:
                         #wield weapons
                         dialog = dialogs.Inventory(self.application, self.screen)
-                        #TODO: show already wielded weapons
                         wieldItems = dialog.show(player.inventory, 2)
                         for item in wieldItems:
                             pyHerc.rules.items.wield(model, player, item, True)
+                    elif event.key == K_r:
+                        #unwield weapons
+                        dialog = dialogs.Inventory(self.application, self.screen)
+                        removable = dialog.show(player.weapons)
+                        for item in removable:
+                            pyHerc.rules.items.unwield(model, player, item)
                     elif event.key == K_q:
                         #quaff potion
                         dialog = dialogs.Inventory(self.application, self.screen)
@@ -339,6 +344,9 @@ class GameWindow:
                     self.eventHistory.append(newLine)
                 elif 'wield' in event.keys():
                     newLine = event['character'].name + ' wields ' + event['item'].get_name(self.application.world.player)
+                    self.eventHistory.append(newLine)
+                elif 'unwield' in event.keys():
+                    newLine = event['character'].name + ' unwields ' + event['item'].get_name(self.application.world.player)
                     self.eventHistory.append(newLine)
             elif event['type'] == 'death':
                 newLine = event['character'].name + ' is now dead'

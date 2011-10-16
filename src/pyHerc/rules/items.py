@@ -79,6 +79,9 @@ def drop(model, character, item):
     event['level'] = character.level
     model.raise_event(event)
 
+    if(item in character.weapons):
+        unwield(model, character, item, instant = True)
+
     character.level.addItem(item, character.location)
     character.inventory.remove(item)
     character.tick = time.getNewTick(character, 1.5)
@@ -152,8 +155,34 @@ def dualWieldable(model, character, item):
         else:
             return 0
     else:
-        #mundane items can not dual-wielded
+        #mundane items can not be dual-wielded
         return 0
+
+def unwield(model, character, item, instant = False):
+    '''
+    Unwield an item
+    @param model: model to use
+    @param character: character unwielding an item
+    @param item: item to unwield
+    @param instant: is this instant action, default False
+    @return: True if unwield was succesfull, False otherwise
+    '''
+    __logger.debug(character.__str__() + ' unwielding ' + item.__str__())
+
+    character.weapons.remove(item)
+
+    event = {}
+    event['type'] = 'item'
+    event['unwield'] = 1
+    event['character'] = character
+    event['item'] = item
+    event['location'] = character.location
+    event['level'] = character.level
+    model.raise_event(event)
+
+    return True
+
+    __logger.debug(character.__str__() + ' unwielded ' + item.__str__())
 
 def drinkPotion(model, character, potion, dice = None):
     """

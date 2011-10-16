@@ -105,6 +105,19 @@ class test_item_with_generator(IntegrationTest):
 
         assert(item in self.character.weapons)
 
+    def test_unwielding_item(self):
+        '''
+        Test that wielded item can be unwielded
+        '''
+        item = self.itemGenerator.generateItem(self.tables, {'name': 'dagger'})
+        pyHerc.rules.items.wield(self.model, self.character, item)
+
+        assert(item in self.character.weapons)
+
+        pyHerc.rules.items.unwield(self.model, self.character, item)
+        #TODO: implement
+        assert(not item in self.character.weapons)
+
     def test_dual_wielding(self):
         """
         Test that character can swap a weapon to another
@@ -254,6 +267,25 @@ class test_Item:
         assert(not self.item in self.character.inventory)
         assert(self.item in self.level.items)
         assert(self.item.location == (8, 8))
+
+    def test_dropping_wielded_item(self):
+        '''
+        Test that wielded item is dropped correctly
+        '''
+        pyHerc.rules.items.pickUp(self.model, self.character, self.item)
+        pyHerc.rules.items.wield(self.model, self.character, self.item)
+
+        assert(self.item in self.character.inventory)
+        assert(not self.item in self.level.items)
+        assert(self.item in self.character.weapons)
+
+        self.character.location = (8, 8)
+        pyHerc.rules.items.drop(self.model, self.character, self.item)
+
+        assert(not self.item in self.character.inventory)
+        assert(self.item in self.level.items)
+        assert(self.item.location == (8, 8))
+        assert(not self.item in self.character.weapons)
 
     def test_finding_items(self):
         """
