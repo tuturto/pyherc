@@ -283,7 +283,7 @@ class TestLevelGenerator:
         if newPortals > 0:
             for i in range(0, newPortals):
                 newPortal = pyHerc.data.dungeon.Portal()
-                newPortal.icon = pyHerc.data.tiles.portal_stairs
+                newPortal.icon = pyHerc.data.tiles.portal_stairs_down
                 tempLevel.addPortal(newPortal, (random.randint(2, 20), random.randint(2, 20)))
 
         return tempLevel

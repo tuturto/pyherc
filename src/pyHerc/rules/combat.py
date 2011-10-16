@@ -28,7 +28,7 @@ import random
 
 __logger = logging.getLogger('pyHerc.rules.combat')
 
-def meleeAttack(model, attacker, target, dice = []):
+def melee_attack(model, attacker, target, dice = []):
     """
     Perform single round of attacking in melee
     @param model: model of the world
@@ -49,13 +49,13 @@ def meleeAttack(model, attacker, target, dice = []):
     event['level'] = attacker.level
 
     __logger.debug(attacker.__str__() + ' is attacking ' + target.__str__())
-    hit = checkHitInMelee(model, attacker, target, dice)
+    hit = check_hit_in_melee(model, attacker, target, dice)
 
     event['hit'] = hit
 
     if hit:
         __logger.debug('attack hits')
-        damage = getDamageInMelee(model, attacker, target, dice)
+        damage = get_damage_in_melee(model, attacker, target, dice)
 
         if damage.amount < 1:
             damage.amount = 1
@@ -73,7 +73,7 @@ def meleeAttack(model, attacker, target, dice = []):
 
     attacker.tick = time.getNewTick(attacker, 6)
 
-def checkHitInMelee(model, attacker, target, dice = []):
+def check_hit_in_melee(model, attacker, target, dice = []):
     """
     Checks if attacker hits target
     @param attacker: character attacking
@@ -85,18 +85,18 @@ def checkHitInMelee(model, attacker, target, dice = []):
     assert(target != None)
     assert(dice != None)
 
-    ac = getArmourClass(model, target)
+    ac = get_armour_class(model, target)
     if len(dice) > 0:
-        attackRoll = dice.pop() + getMeleeAttackBonus(model, attacker)
+        attackRoll = dice.pop() + get_melee_attack_bonus(model, attacker)
     else:
-        attackRoll = random.randint(1, 20) + getMeleeAttackBonus(model, attacker)
+        attackRoll = random.randint(1, 20) + get_melee_attack_bonus(model, attacker)
 
     if attackRoll >= ac:
         return 1
     else:
         return 0
 
-def getDamageInMelee(model, attacker, target, dice = []):
+def get_damage_in_melee(model, attacker, target, dice = []):
     """
     Gets damage done in melee
     @param model: model of the world
@@ -133,19 +133,19 @@ def getDamageInMelee(model, attacker, target, dice = []):
         if hasattr(weapon, 'tags'):
             if 'light weapon' in weapon.tags:
                 #light weapons get only 1 * str bonus when wielded two-handed
-                damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str')
+                damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str')
                 damage.type = weapon.damageType
             else:
                 #all other melee weapons get 1.5 * str bonus when wielded two-handed
-                damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str') * 1.5
+                damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str') * 1.5
                 damage.type = weapon.damageType
         else:
             #character is using a mundane item as a weapon
-            damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str')
+            damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str')
             damage.type = 'bludgeoning'
     else:
         #unarmed combat get only 1 * str bonus
-        damage.amount = damageRoll + getAttributeModifier(model, attacker, 'str')
+        damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str')
         damage.type = 'bludgeoning'
 
     damage.amount = int(round(damage.amount))
@@ -153,25 +153,25 @@ def getDamageInMelee(model, attacker, target, dice = []):
         damage.amount = 1
     return damage
 
-def getMeleeAttackBonus(model, character):
+def get_melee_attack_bonus(model, character):
     """
     Get attack bonus used in melee
     @param model: model of the world
     @param character: character whose attack bonus should be calculated
     @return: Attack bonus
     """
-    return  getAttributeModifier(model, character, 'str') + getSizeModifier(model, character)
+    return  get_attribute_modifier(model, character, 'str') + get_size_modifier(model, character)
 
-def getArmourClass(model, character):
+def get_armour_class(model, character):
     """
     Get armour class of character
     @param model: model of the world
     @param character: character whose armour class should be calculated
     @return: Armour class
     """
-    return 10 + getSizeModifier(model, character) + getAttributeModifier(model, character, 'dex')
+    return 10 + get_size_modifier(model, character) + get_attribute_modifier(model, character, 'dex')
 
-def getAttributeModifier(model, character, attribute):
+def get_attribute_modifier(model, character, attribute):
     """
     Get attribute modifier
     @param model: model of the world
@@ -188,7 +188,7 @@ def getAttributeModifier(model, character, attribute):
     elif attribute == 'dex':
         return model.tables.attributeModifier[character.dex]
 
-def getSizeModifier(model, character):
+def get_size_modifier(model, character):
     """
     Get size modifier for character
     @param model: model of the world

@@ -157,7 +157,7 @@ class test_item_with_generator(IntegrationTest):
         item1 = self.itemGenerator.generateItem(self.tables, {'name': 'longspear'})
         item2 = self.itemGenerator.generateItem(self.tables, {'name': 'sickle'})
 
-        assert(not pyHerc.rules.items.canDualWield(self.model, self.character, item1, item2))
+        assert(not pyHerc.rules.items.can_dual_wield(self.model, self.character, item1, item2))
 
     def test_dual_wieldable(self):
         """
@@ -166,8 +166,8 @@ class test_item_with_generator(IntegrationTest):
         item1 = self.itemGenerator.generateItem(self.tables, {'name': 'longspear'})
         item2 = self.itemGenerator.generateItem(self.tables, {'name': 'sickle'})
 
-        assert(not pyHerc.rules.items.dualWieldable(self.model, self.character, item1))
-        assert(pyHerc.rules.items.dualWieldable(self.model, self.character, item2))
+        assert(not pyHerc.rules.items.is_dual_wieldable(self.model, self.character, item1))
+        assert(pyHerc.rules.items.is_dual_wieldable(self.model, self.character, item2))
 
     def test_dual_wieldable_apples(self):
         """
@@ -175,7 +175,7 @@ class test_item_with_generator(IntegrationTest):
         """
         item = self.itemGenerator.generateItem(self.tables, {'name': 'apple'})
 
-        assert(not pyHerc.rules.items.dualWieldable(self.model, self.character, item))
+        assert(not pyHerc.rules.items.is_dual_wieldable(self.model, self.character, item))
 
     def test_potion_creation(self):
         """
@@ -232,7 +232,7 @@ class test_Item:
         assert(self.character.location == (5, 5))
         assert(self.item.location == (5, 5))
 
-        pyHerc.rules.items.pickUp(self.model, self.character, self.item)
+        pyHerc.rules.items.pick_up(self.model, self.character, self.item)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
@@ -247,7 +247,7 @@ class test_Item:
         assert(self.character.location == (6, 6))
         assert(self.item.location == (5, 5))
 
-        pyHerc.rules.items.pickUp(self.model, self.character, self.item)
+        pyHerc.rules.items.pick_up(self.model, self.character, self.item)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
@@ -256,7 +256,7 @@ class test_Item:
         """
         Test that an item can be dropped from inventory
         """
-        pyHerc.rules.items.pickUp(self.model, self.character, self.item)
+        pyHerc.rules.items.pick_up(self.model, self.character, self.item)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
@@ -272,7 +272,7 @@ class test_Item:
         '''
         Test that wielded item is dropped correctly
         '''
-        pyHerc.rules.items.pickUp(self.model, self.character, self.item)
+        pyHerc.rules.items.pick_up(self.model, self.character, self.item)
         pyHerc.rules.items.wield(self.model, self.character, self.item)
 
         assert(self.item in self.character.inventory)

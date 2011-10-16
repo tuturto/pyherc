@@ -26,34 +26,27 @@ class Level:
     """
     Represents a level
     """
-
-    def __init__(self):
-        self.floor = None
-        self.walls = None
-        self.items = []
-        self.portals = []
-        self.creatures = []
-        self.logger = logging.getLogger('pyHerc.data.dungeon.Level')
-
-    def __init__(self, size, floorType, wallType):
+    def __init__(self, size = (0, 0), floorType = None, wallType = None):
         """
         Initialises a level of certain size and fill floor and walls with given types
         """
         self.logger = logging.getLogger('pyHerc.data.dungeon.Level')
 
         self.floor = []
-        for y in range(0, size[0] + 1):
-            temp_row = []
-            for y in range(0, size[1] + 1):
-                temp_row.append(floorType)
-            self.floor.append(temp_row)
-
         self.walls = []
-        for y in range(0, size[0] + 1):
-            temp_row = []
-            for y in range(0, size[1] + 1):
-                temp_row.append(wallType)
-            self.walls.append(temp_row)
+
+        if size[0] != 0 and size[1] != 0:
+            for y in range(0, size[0] + 1):
+                temp_row = []
+                for y in range(0, size[1] + 1):
+                    temp_row.append(floorType)
+                self.floor.append(temp_row)
+
+            for y in range(0, size[0] + 1):
+                temp_row = []
+                for y in range(0, size[1] + 1):
+                    temp_row.append(wallType)
+                self.walls.append(temp_row)
 
         self.items = []
         self.portals = []

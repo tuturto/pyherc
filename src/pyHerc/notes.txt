@@ -77,7 +77,7 @@ Stuff to do:
     - paging
     - displaying descriptions
     - displaying item quotes
-    - show already wielded weapons
+    - dropping a wielded item shows events in wrong order
 - user interface
     - end screen
         - score
@@ -125,6 +125,8 @@ Stuff Done:
     + generic list window
     + view inventory
     + wielding weapons
+    + unwielding weapons
+    + show already wielded weapons
 + stairs / portals
     + generating and linking levels
     + walking up and down

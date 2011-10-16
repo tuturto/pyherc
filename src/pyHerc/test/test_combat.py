@@ -31,18 +31,18 @@ class test_meleeCombat(IntegrationTest):
         """
         Test simple calculation of armour class
         """
-        # def getArmourClass(model, character):
+        # def get_armour_class(model, character):
         #10 + armor bonus + shield bonus + Dexterity modifier + size modifier
         character = pyHerc.data.model.Character()
         character.size = 'tiny' # +2 bonus
         character.dex = 16 # +3 bonus
 
-        ac = pyHerc.rules.combat.getArmourClass(self.model, character)
+        ac = pyHerc.rules.combat.get_armour_class(self.model, character)
 
         assert(ac == 15)
 
     def test_checkHitInMelee_simple(self):
-        # def checkHitInMelee(model, attacker, target, dice = []):
+        # def check_hit_in_melee(model, attacker, target, dice = []):
         character = pyHerc.data.model.Character()
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
@@ -50,7 +50,7 @@ class test_meleeCombat(IntegrationTest):
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        hit = pyHerc.rules.combat.checkHitInMelee(self.model, character, target, [16])
+        hit = pyHerc.rules.combat.check_hit_in_melee(self.model, character, target, [16])
         assert(hit == 1)
 
     def test_getDamageInMelee_simple(self):
@@ -63,7 +63,7 @@ class test_meleeCombat(IntegrationTest):
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target, dice = [5])
+        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [5])
         assert(damage.amount == 8)
         assert(damage.magicBonus == 0)
 
@@ -77,7 +77,7 @@ class test_meleeCombat(IntegrationTest):
         target.size = 'medium'
         target.dex = 10
 
-        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target, dice = [3])
+        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [3])
         assert(damage.amount == 1)
         assert(damage.magicBonus == 0)
 
@@ -98,7 +98,7 @@ class test_meleeCombat(IntegrationTest):
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target, dice = [6])
+        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [6])
         assert(damage.amount == 11) # 1d6 from weapon + 3 from str + 1.5 from str while wielding 2-handed
 
     def test_getDamageInMelee_wieldSicleWithTwoHands(self):
@@ -119,7 +119,7 @@ class test_meleeCombat(IntegrationTest):
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target, dice = [6])
+        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [6])
         assert(damage.amount == 9) # 1d6 from weapon + 3 from str
         assert('slashing' in damage.type)
 
@@ -141,7 +141,7 @@ class test_meleeCombat(IntegrationTest):
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target)
+        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target)
         assert(damage.amount == 4) # 1 from apple, +3 strength bonus
         assert('bludgeoning' in damage.type)
 
@@ -158,7 +158,7 @@ class test_meleeCombat(IntegrationTest):
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
 
-        damage = pyHerc.rules.combat.getDamageInMelee(self.model, character, target)
+        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target)
 
     def test_melee(self):
         character = pyHerc.data.model.Character()
@@ -176,7 +176,7 @@ class test_meleeCombat(IntegrationTest):
         level.addCreature(character, (10, 10))
         level.addCreature(target, (11, 10))
 
-        pyHerc.rules.combat.meleeAttack(self.model, character, target, dice = [4, 19])
+        pyHerc.rules.combat.melee_attack(self.model, character, target, dice = [4, 19])
         assert(target.hp == 3) # 10 - 4 - 3 (hp - damage roll - str bonus)
 
     def test_dyingInMelee(self):
@@ -196,6 +196,6 @@ class test_meleeCombat(IntegrationTest):
         level.addCreature(character)
         level.addCreature(target)
 
-        pyHerc.rules.combat.meleeAttack(self.model, character, target, dice = [4, 19])
+        pyHerc.rules.combat.melee_attack(self.model, character, target, dice = [4, 19])
         assert(target.hp == -2) # 5 - 4 - 3 (hp - damage roll - str bonus)
         assert(not target in level.creatures)

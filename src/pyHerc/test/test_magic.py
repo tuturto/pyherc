@@ -85,7 +85,7 @@ class test_magicWithGenerators(IntegrationTest):
         Test that empty potion has no effect
         """
         self.item.charges = 0
-        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item, [10])
+        pyHerc.rules.items.drink_potion(self.model, self.character, self.item, [10])
 
         assert(self.character.hp == 1)
 
@@ -93,7 +93,7 @@ class test_magicWithGenerators(IntegrationTest):
         """
         Test that character drinking a healing potion gets healed
         """
-        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item, [10])
+        pyHerc.rules.items.drink_potion(self.model, self.character, self.item, [10])
 
         assert(self.character.hp == 5)
         assert(self.item.charges == 0)
@@ -102,7 +102,7 @@ class test_magicWithGenerators(IntegrationTest):
         """
         Test that drinking a potion correctly identifies it
         """
-        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item)
+        pyHerc.rules.items.drink_potion(self.model, self.character, self.item)
 
         name = self.item.get_name(self.character)
         assert(name == 'healing potion')
@@ -112,7 +112,7 @@ class test_magicWithGenerators(IntegrationTest):
         Test that empty potion is discarded from character inventory
         """
         assert(self.item in self.character.inventory)
-        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item)
+        pyHerc.rules.items.drink_potion(self.model, self.character, self.item)
         assert(not self.item in self.character.inventory)
 
     def test_drinkingPotionDoesNotDiscardIt(self):
@@ -121,5 +121,5 @@ class test_magicWithGenerators(IntegrationTest):
         """
         self.item.charges = 2
         assert(self.item in self.character.inventory)
-        pyHerc.rules.items.drinkPotion(self.model, self.character, self.item)
+        pyHerc.rules.items.drink_potion(self.model, self.character, self.item)
         assert(self.item in self.character.inventory)

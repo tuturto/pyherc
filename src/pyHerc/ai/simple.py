@@ -72,7 +72,7 @@ def flocking_herbivore(self, model):
                     self.tick = self.tick + 10
             else:
                 #attack
-                pyHerc.rules.combat.meleeAttack(model, self, model.player)
+                pyHerc.rules.combat.melee_attack(model, self, model.player)
         else:
             #find direction
             direction = pyHerc.ai.simple.find_direction(self.location,

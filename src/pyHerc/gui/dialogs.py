@@ -168,7 +168,7 @@ class EndScreen:
         player = model.player
 
         if ending['reason'] == 'escaped':
-            self.background = surfaceManager.getImage(images.image_end_marble_slate)
+            self.background = pyHerc.gui.surfaceManager.getImage(pyHerc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' escaped from ruins', True, colour, (0, 0, 0))
             textRect = text.get_rect()
@@ -176,7 +176,7 @@ class EndScreen:
             self.screen.blit(text, textRect)
 
         elif ending['reason'] == 'victory':
-            self.background = surfaceManager.getImage(images.image_end_marble_slate)
+            self.background = pyHerc.gui.surfaceManager.getImage(pyHerc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' conquered the ruins', True, colour, (0, 0, 0))
             textRect = text.get_rect()
@@ -184,7 +184,7 @@ class EndScreen:
             self.screen.blit(text, textRect)
 
         elif ending['reason'] == 'dead':
-            self.background = surfaceManager.getImage(images.image_end_tombstone)
+            self.background = pyHerc.gui.surfaceManager.getImage(pyHerc.gui.images.image_end_tombstone)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' died in ruins', True, colour, (0, 0, 0))
             textRect = text.get_rect()

@@ -24,7 +24,6 @@ import logging
 import images
 import pyHerc.data.tiles
 import pyHerc
-from pygame.locals import *
 
 __logger = logging.getLogger('pyHerc.gui.surfaceManager')
 __icons = {}

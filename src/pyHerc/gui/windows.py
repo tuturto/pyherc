@@ -34,12 +34,14 @@ import pyHerc.rules.time
 import pyHerc.rules.combat
 import pyHerc.generators.dungeon
 import pyHerc.rules.tables
-from pygame.locals import *
+from pygame.locals import KEYDOWN
+from pygame.locals import K_DOWN, K_UP
+from pygame.locals import K_SPACE, K_RETURN, K_ESCAPE, K_PERIOD
+from pygame.locals import K_d, K_w, K_r, K_q,  K_i
+from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8, K_KP9
+from pygame.locals import Rect
 
 class MainWindow:
-
-    def __init__(self):
-        self.logger = logging.getLogger('pyHerc.gui.windows.MainWindow')
 
     def __init__(self,  application):
         """
@@ -199,7 +201,7 @@ class StartNewGameWindow:
         else:
             self.application.world.config['explore'] = 0
 
-        self.character = pyHerc.rules.character.createCharacter('human', 'fighter')
+        self.character = pyHerc.rules.character.create_character('human', 'fighter')
         self.application.world.player = self.character
         generator = pyHerc.generators.dungeon.DungeonGenerator()
         generator.generateDungeon(self.application.world)
@@ -259,7 +261,7 @@ class GameWindow:
                             if 'location' in targetLocation.keys():
                                 target = player.level.getCreatureAt(targetLocation['location'])
                                 if target != None:
-                                    pyHerc.rules.combat.meleeAttack(model, player, target)
+                                    pyHerc.rules.combat.melee_attack(model, player, target)
                     elif event.key == K_PERIOD:
                         #pick up items
                         items = player.level.getItemsAt(player.location)
@@ -267,7 +269,7 @@ class GameWindow:
                             dialog = dialogs.Inventory(self.application, self.screen)
                             items = dialog.show(items)
                         for item in items:
-                            pyHerc.rules.items.pickUp(model, player, item)
+                            pyHerc.rules.items.pick_up(model, player, item)
                     elif event.key == K_i:
                         #display inventory
                         dialog = dialogs.Inventory(self.application, self.screen)
@@ -295,7 +297,7 @@ class GameWindow:
                         dialog = dialogs.Inventory(self.application, self.screen)
                         potion = dialog.show(player.inventory, 1)
                         if len(potion) == 1:
-                            pyHerc.rules.items.drinkPotion(model, player, potion[0])
+                            pyHerc.rules.items.drink_potion(model, player, potion[0])
             else:
                 return
 

@@ -27,7 +27,7 @@ __logger = logging.getLogger('pyHerc.rules.character')
 race_stats = None
 kit_stats = None
 
-def initialiseStatTables():
+def initialise_stat_tables():
     """
     Initialise stat tables
     """
@@ -64,7 +64,7 @@ def initialiseStatTables():
 
     __logger.info('stat tables initialised')
 
-def createCharacter(race, kit):
+def create_character(race, kit):
     """
     Creates a new character with given race and kit
     """
@@ -75,7 +75,7 @@ def createCharacter(race, kit):
     __logger.debug('creating a new character: ' + race + " " + kit)
 
     if race_stats == None:
-        initialiseStatTables()
+        initialise_stat_tables()
 
     temp_race = race_stats[race]
     temp_kit = kit_stats[kit]
@@ -94,10 +94,10 @@ def createCharacter(race, kit):
     newCharacter.size = 'medium'
     newCharacter.attack = '1d3'
 
-    newCharacter.icon = __getIcon(race, kit)
+    newCharacter.icon = __get_icon(race, kit)
 
     return newCharacter
 
-def __getIcon(race, kit):
+def __get_icon(race, kit):
     #TODO: implement
     return pyHerc.data.tiles.human_fighter

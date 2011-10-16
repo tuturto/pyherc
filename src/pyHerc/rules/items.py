@@ -26,7 +26,7 @@ import time
 
 __logger = logging.getLogger('pyHerc.rules.items')
 
-def pickUp(model, character, item):
+def pick_up(model, character, item):
     """
     Pick up an item
     @param model: model to use
@@ -114,7 +114,7 @@ def wield(model, character, item, dualWield = False):
         #possible dual wield?
         if dualWield == True:
             if len(character.weapons) == 1:
-                if canDualWield(model, character, character.weapons[0], item):
+                if can_dual_wield(model, character, character.weapons[0], item):
                     character.weapons.append(item)
                     __logger.debug(character.__str__() + ' dual-wielded item ' + item.__str__())
                     event = {}
@@ -127,7 +127,7 @@ def wield(model, character, item, dualWield = False):
                     model.raise_event(event)
                     #TODO: feedback when wielding is not possible
 
-def canDualWield(model, character, item1, item2):
+def can_dual_wield(model, character, item1, item2):
     """
     Checks if character can dual-wield given items
     @param model: model to use
@@ -136,12 +136,12 @@ def canDualWield(model, character, item1, item2):
     @param item2: item to wield
     @return: 1 if can dual-wield, 0 otherwise
     """
-    if dualWieldable(model, character, item1) and dualWieldable(model, character, item2):
+    if is_dual_wieldable(model, character, item1) and is_dual_wieldable(model, character, item2):
         return 1
     else:
         return 0
 
-def dualWieldable(model, character, item):
+def is_dual_wieldable(model, character, item):
     """
     Checks if item is dual-wieldable for a character
     @param model: model to use
@@ -184,7 +184,7 @@ def unwield(model, character, item, instant = False):
 
     __logger.debug(character.__str__() + ' unwielded ' + item.__str__())
 
-def drinkPotion(model, character, potion, dice = None):
+def drink_potion(model, character, potion, dice = None):
     """
     Drink a potion
     @param model: model to use
