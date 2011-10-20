@@ -79,6 +79,7 @@ class Character:
         self.speed = None
         self.inventory = []
         self.weapons = []
+        self.feats = []
         #location
         self.level = None
         self.location = ()
@@ -160,3 +161,11 @@ class Damage:
         self.amount = amount
         self.type = type
         self.magicBonus = magicBonus
+
+class Feat:
+    '''
+    Represents a feat that a character can have
+    '''
+    def __init__(self, name = None, target = None):
+        self.name = name
+        self.target = target

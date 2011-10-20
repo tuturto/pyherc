@@ -160,7 +160,13 @@ def get_melee_attack_bonus(model, character):
     @param character: character whose attack bonus should be calculated
     @return: Attack bonus
     """
-    return  get_attribute_modifier(model, character, 'str') + get_size_modifier(model, character)
+    score = (get_attribute_modifier(model, character, 'str') +
+            get_size_modifier(model, character))
+
+    if len(character.weapons) > 0:
+        score = score + get_weapon_proficiency_modifier(model, character, character.weapons[0])
+
+    return score
 
 def get_armour_class(model, character):
     """
@@ -169,7 +175,31 @@ def get_armour_class(model, character):
     @param character: character whose armour class should be calculated
     @return: Armour class
     """
-    return 10 + get_size_modifier(model, character) + get_attribute_modifier(model, character, 'dex')
+    score = (10 + get_size_modifier(model, character)
+            + get_attribute_modifier(model, character, 'dex'))
+
+    return score
+
+def get_weapon_proficiency_modifier(model, character, weapon):
+    '''
+    Get modifier for weapon proficiency (or lack of thereof)
+    @param model: model of the world
+    @param character: character whose proficiency modifier should be checked
+    @param weapon: weapon being used
+    '''
+    assert(model != None)
+    assert(character != None)
+    assert(weapon != None)
+
+    if weapon.weaponType == 'simple':
+        if 'simple weapon proficiency' in map(lambda x: x.name, character.feats):
+            modifier = 0
+        else:
+            modifier = -4
+    else:
+        modifier = -4
+
+    return modifier
 
 def get_attribute_modifier(model, character, attribute):
     """

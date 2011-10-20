@@ -94,6 +94,8 @@ def create_character(race, kit):
     newCharacter.size = 'medium'
     newCharacter.attack = '1d3'
 
+    #TODO: get from a factory
+    newCharacter.feats.append(pyHerc.data.model.Feat('simple weapon proficiency', None))
     newCharacter.icon = __get_icon(race, kit)
 
     return newCharacter

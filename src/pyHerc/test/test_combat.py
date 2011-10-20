@@ -27,7 +27,7 @@ import pyHerc.rules.tables
 
 class test_meleeCombat(IntegrationTest):
 
-    def test_getArmourClass_simple(self):
+    def test_get_armour_class_simple(self):
         """
         Test simple calculation of armour class
         """
@@ -41,7 +41,7 @@ class test_meleeCombat(IntegrationTest):
 
         assert(ac == 15)
 
-    def test_checkHitInMelee_simple(self):
+    def test_check_hit_in_melee_simple(self):
         # def check_hit_in_melee(model, attacker, target, dice = []):
         character = pyHerc.data.model.Character()
         character.size = 'tiny' # +2 bonus
@@ -53,7 +53,7 @@ class test_meleeCombat(IntegrationTest):
         hit = pyHerc.rules.combat.check_hit_in_melee(self.model, character, target, [16])
         assert(hit == 1)
 
-    def test_getDamageInMelee_simple(self):
+    def test_get_damage_in_melee_simple(self):
         character = pyHerc.data.model.Character()
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
@@ -67,7 +67,7 @@ class test_meleeCombat(IntegrationTest):
         assert(damage.amount == 8)
         assert(damage.magicBonus == 0)
 
-    def test_getDamageInMelee_negativeDamage(self):
+    def test_get_damage_in_melee_negative_damage(self):
         character = pyHerc.data.model.Character()
         character.size = 'tiny'
         character.str = 1 # -5 bonus
@@ -81,7 +81,7 @@ class test_meleeCombat(IntegrationTest):
         assert(damage.amount == 1)
         assert(damage.magicBonus == 0)
 
-    def test_getDamageInMelee_wieldWeaponWithTwoHands(self):
+    def test_get_damage_in_melee_wield_weapon_with_two_hands(self):
         """
         Test that character wearing a single-handed weapon two-handedly gets the 1.5 * str bonus
         """
@@ -101,7 +101,7 @@ class test_meleeCombat(IntegrationTest):
         damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [6])
         assert(damage.amount == 11) # 1d6 from weapon + 3 from str + 1.5 from str while wielding 2-handed
 
-    def test_getDamageInMelee_wieldSicleWithTwoHands(self):
+    def test_get_damage_in_melee_wield_sicle_with_two_hands(self):
         """
         Test that character wearing a light weapon (sickle) two-handedly gets the 1 * str bonus
         Check that damage type is correct
@@ -123,7 +123,7 @@ class test_meleeCombat(IntegrationTest):
         assert(damage.amount == 9) # 1d6 from weapon + 3 from str
         assert('slashing' in damage.type)
 
-    def test_getDamageInMelee_mundaneItem(self):
+    def test_get_damage_in_melee_mundane_item(self):
         """
         Test that character wearing an apple can use it as a weapon
         Check that damage type is correct
@@ -145,7 +145,7 @@ class test_meleeCombat(IntegrationTest):
         assert(damage.amount == 4) # 1 from apple, +3 strength bonus
         assert('bludgeoning' in damage.type)
 
-    def test_getDamageInMelee_noPrerolls(self):
+    def test_get_damage_in_melee_no_prerolls(self):
         """
         Just simple test that damage in melee is possible without prerolled scores
         """
@@ -179,7 +179,7 @@ class test_meleeCombat(IntegrationTest):
         pyHerc.rules.combat.melee_attack(self.model, character, target, dice = [4, 19])
         assert(target.hp == 3) # 10 - 4 - 3 (hp - damage roll - str bonus)
 
-    def test_dyingInMelee(self):
+    def test_dying_in_melee(self):
         character = pyHerc.data.model.Character()
         character.size = 'tiny' # +2 bonus
         character.str = 16 # +3 bonus
@@ -199,3 +199,41 @@ class test_meleeCombat(IntegrationTest):
         pyHerc.rules.combat.melee_attack(self.model, character, target, dice = [4, 19])
         assert(target.hp == -2) # 5 - 4 - 3 (hp - damage roll - str bonus)
         assert(not target in level.creatures)
+
+    def test_simple_weapon_proficiency_modifier(self):
+        '''
+        Simple test that weapon proficiency modifier can be calculated
+        '''
+        character = pyHerc.data.model.Character()
+        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'club'})
+
+        character.attack = '1d4'
+        character.weapons = [weapon]
+        character.feats = []
+
+        modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
+        assert(modifier == -4)
+
+        character.feats.append(pyHerc.data.model.Feat('simple weapon proficiency', None))
+
+        modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
+        assert(modifier == 0)
+
+    def test_martial_weapon_proficiency_modifier(self):
+        '''
+        Simple test that weapon proficiency modifier can be calculated for martial weapons
+        '''
+        character = pyHerc.data.model.Character()
+        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'short sword'})
+
+        character.attack = '1d4'
+        character.weapons = [weapon]
+        character.feats = []
+
+        modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
+        assert(modifier == -4)
+
+        character.feats.append(pyHerc.data.model.Feat('martial weapon proficiency', 'short sword'''))
+
+        modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
+        assert(modifier == 0)
