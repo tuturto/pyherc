@@ -214,7 +214,9 @@ class test_meleeCombat(IntegrationTest):
         modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
         assert(modifier == -4)
 
-        character.feats.append(pyHerc.data.model.Feat('simple weapon proficiency', None))
+        character.feats.append(
+                               pyHerc.data.model.WeaponProficiency(
+                               'simple'))
 
         modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
         assert(modifier == 0)
@@ -233,7 +235,9 @@ class test_meleeCombat(IntegrationTest):
         modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
         assert(modifier == -4)
 
-        character.feats.append(pyHerc.data.model.Feat('martial weapon proficiency', 'short sword'''))
+        character.feats.append(
+                               pyHerc.data.model.WeaponProficiency(
+                               'martial'))
 
         modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
         assert(modifier == 0)

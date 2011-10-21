@@ -169,3 +169,12 @@ class Feat:
     def __init__(self, name = None, target = None):
         self.name = name
         self.target = target
+
+class WeaponProficiency(Feat):
+    '''
+    Represents weapon proficiency feats (proficiency, focus, etc.)
+    '''
+    def __init__(self, weapon_type = 'simple', weapon_name = None):
+        self.name = 'weapon proficiency'
+        self.weapon_type = weapon_type
+        self.weapon_name = weapon_name
