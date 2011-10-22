@@ -70,6 +70,13 @@ def drop(model, character, item):
 
     __logger.debug(character.__str__() + ' dropping item ' + item.__str__())
 
+    if(item in character.weapons):
+        unwield(model, character, item, instant = True)
+
+    character.level.addItem(item, character.location)
+    character.inventory.remove(item)
+    character.tick = time.getNewTick(character, 1.5)
+
     event = {}
     event['type'] = 'item'
     event['drop'] = 1
@@ -78,13 +85,6 @@ def drop(model, character, item):
     event['location'] = character.location
     event['level'] = character.level
     model.raise_event(event)
-
-    if(item in character.weapons):
-        unwield(model, character, item, instant = True)
-
-    character.level.addItem(item, character.location)
-    character.inventory.remove(item)
-    character.tick = time.getNewTick(character, 1.5)
 
     __logger.debug('item dropped')
 
