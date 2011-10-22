@@ -1,0 +1,45 @@
+<characters>
+    <character class="wandering swords-man">
+        <attributes>
+            <attribute name="strength">18</attribute>
+            <attribute name="dexterity">13</attribute>
+            <attribute name="constitution">16</attribute>
+            <attribute name="wisdom">18</attribute>
+            <attribute name="intelligence">18</attribute>
+            <attribute name="charisma">18</attribute>
+            <attribute name="hp">100</attribute>
+            <attribute name="level">10</attribute>
+        </attributes>
+        <skills>
+            <skill name="heal">5</skill>
+            <skill name="listen">2</skill>
+            <skill name="lore">5</skill>
+            <skill name="search">5</skill>
+            <skill name="spot">4</skill>
+            <skill name="discipline">2</skill>
+            <skill name="tumble">2</skill>
+        </skills>
+        <feats>
+            <feat name="armour proficiency">heavy</feat>
+            <feat name="armour proficiency">medium</feat>
+            <feat name="armour proficiency">light</feat>
+            <feat name="blind-fight" />
+            <feat name="cleave" />
+            <feat name="dodge" />
+            <feat name="improved critical">longsword</feat>
+            <feat name="mobility" />
+            <feat name="power attack" />
+            <feat name="weapon proficiency">simple</feat>
+            <feat name="weapon proficiency">longsword</feat>
+            <feat name="weapon focus">longsword</feat>
+            <feat name="weapon spesialisation">longsword</feat>
+            <feat name="athletic" />
+            <feat name="lightning reflexes" />
+        </feats>
+        <inventory>
+            <item name="longsword" />
+            <item name="minor healing potion" amount="2" />
+            <item name="food ration" amount="2" />
+        </inventory>
+    </character>
+</characters>
