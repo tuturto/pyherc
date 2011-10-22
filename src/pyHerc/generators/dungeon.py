@@ -69,7 +69,7 @@ class CatacombsLevelGenerator:
         self.itemGenerator = pyHerc.generators.item.ItemGenerator()
         self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator()
 
-    def generateLevel(self, portal, model, newPortals = 0, level=1, roomMinSize = (6, 6)):
+    def generateLevel(self, portal, model, newPortals = 0, level=1, roomMinSize = (2, 2)):
         """
         Generate level that starts from given stairs
         @param portal: link new level to this portal
