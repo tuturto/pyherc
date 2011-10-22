@@ -191,12 +191,7 @@ def get_weapon_proficiency_modifier(model, character, weapon):
     assert(character != None)
     assert(weapon != None)
 
-    check_proficiency = lambda x: ((x.name == 'weapon proficiency'
-                                   and x.weapon_type == weapon.weaponType)
-                                   and (x.weapon_name == None
-                                        or x.weapon_name == weapon.name))
-
-    if True in map(check_proficiency, character.feats):
+    if character.is_proficient(weapon):
         modifier = 0
     else:
         modifier = -4

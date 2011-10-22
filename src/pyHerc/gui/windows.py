@@ -346,6 +346,8 @@ class GameWindow:
                     self.eventHistory.append(newLine)
                 elif 'wield' in event.keys():
                     newLine = event['character'].name + ' wields ' + event['item'].get_name(self.application.world.player)
+                    if event['proficient'] == False:
+                        newLine = newLine + ' but feels uncomfortable with it'
                     self.eventHistory.append(newLine)
                 elif 'unwield' in event.keys():
                     newLine = event['character'].name + ' unwields ' + event['item'].get_name(self.application.world.player)

@@ -109,6 +109,7 @@ def wield(model, character, item, dualWield = False):
         event['item'] = item
         event['location'] = character.location
         event['level'] = character.level
+        event['proficient'] = character.is_proficient(item)
         model.raise_event(event)
     else:
         #possible dual wield?
@@ -124,6 +125,7 @@ def wield(model, character, item, dualWield = False):
                     event['item'] = item
                     event['location'] = character.location
                     event['level'] = character.level
+                    event['proficient'] = character.is_proficient(item)
                     model.raise_event(event)
                     #TODO: feedback when wielding is not possible
 

@@ -47,6 +47,7 @@ Event list by type:
             weapon
             level
             location
+            proficient True/False
 
     move
         character

@@ -18,12 +18,13 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-import pyHerc
-import pyHerc.generators.item
-import pyHerc.data.tiles
-import pyHerc.data.dungeon
-import pyHerc.rules.items
-import pyHerc.rules.tables
+#import pyHerc
+#import pyHerc.generators.item
+#import pyHerc.data.tiles
+#import pyHerc.data.dungeon
+#import pyHerc.rules.items
+#import pyHerc.rules.tables
+from pyHerc.data.model import Character, WeaponProficiency
 from pyHerc.test import IntegrationTest
 
 class test_CreatureWithGenerator(IntegrationTest):
@@ -31,7 +32,7 @@ class test_CreatureWithGenerator(IntegrationTest):
     Tests for creatures that require generators to be working
     """
 
-    def test_ratGeneration(self):
+    def test_rat_generation(self):
         """
         Test that generating a rat is possible
         """
@@ -39,3 +40,18 @@ class test_CreatureWithGenerator(IntegrationTest):
                                                 'name': 'rat'})
 
         assert(creature.name == 'rat')
+
+    def test_is_proficient(self):
+        '''
+        Test that weapon proficiency of character can be checked
+        '''
+        creature = Character()
+        creature.feats = []
+
+        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'club'})
+
+        assert(creature.is_proficient(weapon) == False)
+
+        creature.feats.append(WeaponProficiency('simple'))
+
+        assert(creature.is_proficient(weapon) == True)

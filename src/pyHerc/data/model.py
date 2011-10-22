@@ -113,6 +113,22 @@ class Character:
         assert (item != None)
         self.itemMemory[item.name] = item.name
 
+    def is_proficient(self, weapon):
+        '''
+        Check if this character is proficient with a given weapon
+        @param weapon: weapon which proficient requirements should be checked
+        @returns: True if proficient, otherwise False
+        '''
+        check_proficiency = lambda x: ((x.name == 'weapon proficiency'
+                                   and x.weapon_type == weapon.weaponType)
+                                   and (x.weapon_name == None
+                                        or x.weapon_name == weapon.name))
+
+        if True in map(check_proficiency, self.feats):
+            return True
+        else:
+            return False
+
 class Item:
     """
     Represents item
