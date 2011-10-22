@@ -22,7 +22,7 @@ import pyHerc
 
 class test_Tables:
 
-    def test_readingSimpleItemConfig(self):
+    def test_reading_simple_item_config(self):
         itemConfig = """
             <items>
                 <item>
@@ -50,7 +50,7 @@ class test_Tables:
         assert tables.items['apple']['rarity'] == tables.common
         assert pyHerc.data.tiles.item_apple in tables.items['apple']['icon']
 
-    def test_readingMoreComplexItem(self):
+    def test_reading_more_complex_item(self):
         itemConfig = """
             <items>
                 <item>
@@ -82,7 +82,7 @@ class test_Tables:
         assert tables.items['crystal skull']['rarity'] == tables.artifact
         assert pyHerc.data.tiles.item_crystal_skull in tables.items['crystal skull']['icon']
 
-    def test_readingTwoItemsFromConfig(self):
+    def test_reading_two_items_from_config(self):
         itemConfig = """
             <items>
                 <item>
@@ -122,7 +122,7 @@ class test_Tables:
         assert tables.items['crystal skull']['weight'] == 5
         assert pyHerc.data.tiles.item_apple in tables.items['apple']['icon']
 
-    def test_readingWeaponFromConfig(self):
+    def test_reading_weapon_from_config(self):
         itemConfig = """
             <items>
                 <item>
@@ -172,7 +172,7 @@ class test_Tables:
         assert 'simple weapon' in item['type']
         assert item['rarity'] == tables.common
 
-    def test_readingPotionFromConfig(self):
+    def test_reading_potion_from_config(self):
         """
         Test that simple healing potion can be read from configuration
         """
@@ -206,7 +206,7 @@ class test_Tables:
         assert(effect['name'] == 'healing')
         assert(effect['power'] == '1d10')
 
-    def test_randomizePotions(self):
+    def test_randomize_potions(self):
         """
         Test that potion appearances can be randomized
         """

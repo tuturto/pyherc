@@ -21,6 +21,7 @@
 import pyHerc
 import pyHerc.rules.magic
 import pyHerc.data.model
+from pyHerc.data.item import Item
 from pyHerc.test import IntegrationTest
 from pyHerc.test import StubModel
 
@@ -69,7 +70,7 @@ class test_magicWithGenerators(IntegrationTest):
         self.character.hp = 1
         self.character.maxHp = 5
 
-        self.item = pyHerc.data.model.Item()
+        self.item = Item()
         self.item.name = 'healing potion'
         self.item.charges = 1
         self.item.effects = {'on drink':

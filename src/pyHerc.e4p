@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHerc -->
-<!-- Saved: 2011-10-11, 00:25:13 -->
+<!-- Saved: 2011-10-22, 18:39:30 -->
 <!-- Copyright (C) 2011 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -54,6 +54,7 @@
     <Source>pyHerc/rules/magic.py</Source>
     <Source>pyHerc/test/test_magic.py</Source>
     <Source>pyHerc/test/test_creature.py</Source>
+    <Source>pyHerc/data/item.py</Source>
   </Sources>
   <Forms>
   </Forms>

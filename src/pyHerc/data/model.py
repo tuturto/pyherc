@@ -119,55 +119,20 @@ class Character:
         @param weapon: weapon which proficient requirements should be checked
         @returns: True if proficient, otherwise False
         '''
+        assert weapon != None
+
+        if weapon.weaponData == None:
+            return True
+
         check_proficiency = lambda x: ((x.name == 'weapon proficiency'
-                                   and x.weapon_type == weapon.weaponType)
+                                   and x.weapon_type == weapon.weaponData.weapon_type)
                                    and (x.weapon_name == None
-                                        or x.weapon_name == weapon.name))
+                                        or x.weapon_name == weapon.weaponData.name))
 
         if True in map(check_proficiency, self.feats):
             return True
         else:
             return False
-
-class Item:
-    """
-    Represents item
-    """
-
-    def __init__(self):
-        #attributes
-        self.name = 'prototype'
-        self.questItem = 0
-        #location
-        self.location = ()
-        #icon
-        self.icon = None
-
-    def __str__(self):
-        return self.name
-
-    def get_name(self, character, decorate = False):
-        """
-        Get name of the item
-        Name can be appearance or given name
-        @param character: character handling the item
-        @param decorate: should name be decorated with status info, default False
-        """
-        assert character != None
-
-        if hasattr(self, 'appearance'):
-            if self.name in character.itemMemory.keys():
-                name = character.itemMemory[self.name]
-            else:
-                name = self.appearance
-        else:
-            name = self.name
-
-        if decorate == True:
-            if self in character.weapons:
-                name = name + ' (weapon in hand)'
-
-        return name
 
 class Damage:
     """

@@ -25,6 +25,7 @@ import pyHerc.data.dungeon
 import pyHerc.rules.items
 import pyHerc.rules.tables
 from pyHerc.test import IntegrationTest
+from pyHerc.data.item import Item
 
 class test_item_with_generator(IntegrationTest):
     """
@@ -37,7 +38,7 @@ class test_item_with_generator(IntegrationTest):
         self.dungeon = None
         self.character = None
 
-        self.item = pyHerc.data.model.Item()
+        self.item = Item()
         self.item.name = 'banana'
         self.item.location = ()
         self.item.icon = None
@@ -82,15 +83,15 @@ class test_item_with_generator(IntegrationTest):
         assert(item != None)
         assert(item.name == 'dagger')
         assert(item.cost == 2)
-        assert(item.damage == '1d4')
-        assert(item.criticalRange == 19)
-        assert(item.criticalDamage == 2)
+        assert(item.weaponData.damage == '1d4')
+        assert(item.weaponData.critical_range == 19)
+        assert(item.weaponData.critical_damage == 2)
         assert(item.weight == 1)
-        assert('piercing' in item.damageType)
-        assert('slashing' in item.damageType)
-        assert(item.weaponType == 'simple')
-        assert('weapon' in item.tags)
-        assert('simple weapon' in item.tags)
+        assert('piercing' in item.weaponData.damage_type)
+        assert('slashing' in item.weaponData.damage_type)
+        assert(item.weaponData.weapon_type == 'simple')
+        assert('weapon' in item.weaponData.tags)
+        assert('simple weapon' in item.weaponData.tags)
         assert(item.rarity == 32)
 
     def test_wield_weapon(self):
@@ -200,7 +201,7 @@ class test_Item:
         self.model = None
         self.character = None
 
-        self.item = pyHerc.data.model.Item()
+        self.item = Item()
         self.item.name = 'banana'
         self.item.location = ()
         self.item.icon = None
@@ -292,13 +293,13 @@ class test_Item:
         Test that level can be queried for items on a certain location
         """
 
-        item = pyHerc.data.model.Item()
+        item = Item()
         item.name = 'apple'
         item.location = ()
         item.icon = None
         self.level.addItem(item, (5, 5))
 
-        item = pyHerc.data.model.Item()
+        item = Item()
         item.name = 'kiwi'
         item.location = ()
         item.icon = None
@@ -323,7 +324,7 @@ class test_ItemAdvanced():
         Test that appearance is reported for an unknown item
         """
 
-        item = pyHerc.data.model.Item()
+        item = Item()
         character = pyHerc.data.model.Character()
 
         item.name = 'healing potion'
@@ -337,7 +338,7 @@ class test_ItemAdvanced():
         """
         Test that given name is reported for a generally named item
         """
-        item = pyHerc.data.model.Item()
+        item = Item()
         character = pyHerc.data.model.Character()
         character.itemMemory['healing potion'] = 'doozer potion'
 
@@ -352,7 +353,7 @@ class test_ItemAdvanced():
         """
         Test that character can identify an item
         """
-        item = pyHerc.data.model.Item()
+        item = Item()
         character = pyHerc.data.model.Character()
         item.name = 'healing potion'
         item.appearance = 'blue potion'
@@ -369,7 +370,7 @@ class test_ItemAdvanced():
         '''
         Test that item can decorate its name by adding (being worn) or (weapon in hand) to the name
         '''
-        item = pyHerc.data.model.Item()
+        item = Item()
         character = pyHerc.data.model.Character()
         item.name = 'club'
 

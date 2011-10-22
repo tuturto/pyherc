@@ -22,6 +22,8 @@ import logging
 import pyHerc.data.model
 import pyHerc.rules.tables
 import random
+from pyHerc.data.item import Item
+from pyHerc.data.item import WeaponData
 
 class ItemGenerator:
     """
@@ -90,7 +92,7 @@ class ItemGenerator:
         """
         assert(table != None)
 
-        newItem = pyHerc.data.model.Item()
+        newItem = Item()
         newItem.name = table['name']
         if hasattr(table['icon'], 'append'):
             #select from list
@@ -107,12 +109,13 @@ class ItemGenerator:
 
         #weapon related attributes
         if 'damage' in table.keys():
-            newItem.damage = table['damage']
-            newItem.criticalRange = table['critical range']
-            newItem.criticalDamage = table['critical damage']
-            newItem.damageType = table['damage type']
-            newItem.weaponType = table['class']
-            newItem.tags = table['type']
+            newItem.weaponData = WeaponData(
+                                    damage = table['damage'],
+                                    critical_range = table['critical range'],
+                                    critical_damage = table['critical damage'],
+                                    damage_type = table['damage type'],
+                                    weapon_type = table['class'],
+                                    tags = table['type'])
 
         if 'charges' in table.keys():
             newItem.charges = table['charges']
