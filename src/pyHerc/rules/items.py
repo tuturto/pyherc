@@ -205,13 +205,11 @@ def drink_potion(model, character, potion, dice = None):
     assert(potion != None)
     assert(potion in character.inventory)
 
-    if potion.charges < 1:
-        __logger.warning('no charges left!')
-        #out of charges
-        #TODO: feed back
-        return 0
-
-    potion.charges = potion.charges - 1
+    if potion.maximum_charges_left() < 1:
+        __logger.warn(character.__str__() +
+                    ' tried to drink an empty potion ' +
+                    potion.__str__())
+        return
 
     #drinking a potion usually identifies it
     character.identify_item(potion)
@@ -219,8 +217,9 @@ def drink_potion(model, character, potion, dice = None):
     if hasattr(potion, 'effects'):
         for effect in potion.effects['on drink']:
             pyHerc.rules.magic.cast_effect(model, character, effect, dice)
+            effect.charges = effect.charges - 1
 
-    if potion.charges < 1:
+    if potion.maximum_charges_left() < 1:
         character.inventory.remove(potion)
 
     #TODO: raise event

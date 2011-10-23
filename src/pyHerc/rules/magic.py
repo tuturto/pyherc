@@ -30,15 +30,14 @@ def cast_effect(model, target, effect, dice = None):
     Casts effect of a spell, potion, etc. on a target
     @param model: model to use
     @param target: target of the effect
-    @param effect: parameters of effect in dictionary
+    @param effect: ItemEffectData object
     @param dice: prerolled dice
     """
     assert(effect != None)
 
-    __logger.info('casting effect: ' + effect.__str__())
+    __logger.info('casting effect: ' + effect.effect_type)
 
-    #TODO: this could be refined a bit when more effects are added
-    if effect['name'] in ('healing', 'damage'):
+    if effect.effect_type in ('healing', 'damage'):
         cast_hp_effect(model, target, effect, dice)
 
 def cast_hp_effect(model, target, effect, dice = None):
@@ -49,7 +48,7 @@ def cast_hp_effect(model, target, effect, dice = None):
     @param effect: parameters of effect in dictionary
     @param dice: prerolled dice
     """
-    hpPower = effect['power']
+    hpPower = effect.power
     if dice != None and len(dice) > 0:
         hpRoll = dice.pop()
         assert(hpRoll <= pyHerc.rules.utils.get_max_score(hpPower))
@@ -58,10 +57,10 @@ def cast_hp_effect(model, target, effect, dice = None):
 
     event = {}
 
-    if effect['name'] == 'healing':
+    if effect.effect_type == 'healing':
         target.hp = target.hp + hpRoll
         event['type'] = 'magic heal'
-    elif effect['name'] == 'damage':
+    elif effect.effect_type == 'damage':
         target.hp = target.hp - hpRoll
         event['type'] = 'magic damage'
 

@@ -18,6 +18,8 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+import collections
+
 class Item:
     """
     Represents item
@@ -93,6 +95,52 @@ class Item:
 
         return effect_list
 
+    def charges_left(self):
+        '''
+        Returns amount of charges left in item
+        In case of multiple charges, a list is returned
+        '''
+        if self.effects == None:
+            return None
+
+        effect_list = self.get_effects()
+
+        amount_of_charges = map(lambda x: x.charges, effect_list)
+
+        if len(amount_of_charges) == 1:
+            return amount_of_charges[0]
+        else:
+            return amount_of_charges
+
+    def maximum_charges_left(self):
+        '''
+        Return highest amount of charges left in item
+        '''
+        charges = self.charges_left()
+
+
+        if charges != None:
+            if isinstance(charges, collections.Sequence):
+                if len(charges) > 0:
+                    return max(charges)
+                else:
+                    return None
+            else:
+                return charges
+        else:
+            return None
+
+    def minimum_charges_left(self):
+        '''
+        Return smallest amount of charges left in item
+        '''
+        charges = self.charges_left()
+
+        if charges != None:
+            return min(charges)
+        else:
+            return None
+
 class WeaponData:
     '''
     Class representing weapon data of items
@@ -111,8 +159,9 @@ class ItemEffectData:
     '''
     Represents magical effect on an item
     '''
-    def __init__(self, trigger = None, effect_type = None, power = None):
+    def __init__(self, trigger = None, effect_type = None, power = None, charges = 1):
 
         self.trigger = trigger
         self.effect_type = effect_type
         self.power = power
+        self.charges = charges

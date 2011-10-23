@@ -128,13 +128,12 @@ class ItemGenerator:
             for effectType in keys:
                 newItem.effects[effectType] = []
                 for effect in table['effects'][effectType]:
-                    print effect
-                    print effectType
+                    #TODO: add support for charges
                     newEffect = ItemEffectData(trigger = effectType,
                                        effect_type = effect['name'],
                                        power = effect['power'])
 
-                newItem.effects[effectType].append(effect)
+                newItem.effects[effectType].append(newEffect)
 
         if 'appearance' in table.keys():
             newItem.appearance = table['appearance']
