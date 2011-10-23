@@ -32,6 +32,7 @@ class Item:
         #icon
         self.icon = None
         self.weaponData = None
+        self.effects = None
 
     def __str__(self):
         return self.name
@@ -59,6 +60,39 @@ class Item:
 
         return name
 
+    def add_effect(self, effect):
+        '''
+        Adds an effect to an item
+        param effect: effect to add
+        '''
+        if self.effects == None:
+            self.effects = {}
+
+        if self.effects.has_key(effect.trigger):
+            self.effects[effect.trigger].append(effect)
+        else:
+            self.effects[effect.trigger] = [effect]
+
+    def get_effects(self, effect_type = None):
+        '''
+        Retrieves effects the item has
+        Param effect_type: type of effects retrieved. Default None
+        Returns: list of effects
+        '''
+        effect_list = []
+
+        if self.effects != None:
+            if effect_type == None:
+                for trigger in self.effects.values():
+                    effect_list = effect_list + trigger
+            else:
+                if self.effects.has_key(effect_type):
+                    effect_list = effect_list + self.effects[effect_type]
+                else:
+                    effect_list = []
+
+        return effect_list
+
 class WeaponData:
     '''
     Class representing weapon data of items
@@ -72,3 +106,13 @@ class WeaponData:
         self.critical_damage = critical_damage
         self.weapon_type = weapon_type
         self.tags = tags
+
+class ItemEffectData:
+    '''
+    Represents magical effect on an item
+    '''
+    def __init__(self, trigger = None, effect_type = None, power = None):
+
+        self.trigger = trigger
+        self.effect_type = effect_type
+        self.power = power

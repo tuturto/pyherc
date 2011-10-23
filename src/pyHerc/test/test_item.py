@@ -26,6 +26,7 @@ import pyHerc.rules.items
 import pyHerc.rules.tables
 from pyHerc.test import IntegrationTest
 from pyHerc.data.item import Item
+from pyHerc.data.item import ItemEffectData
 
 class test_item_with_generator(IntegrationTest):
     """
@@ -192,7 +193,7 @@ class test_item_with_generator(IntegrationTest):
         assert(effect['name'] == 'healing')
         assert(effect['power'] == '1d10')
 
-class test_Item:
+class test_ItemsInLevel:
 
     def setup(self):
         self.item = None
@@ -384,3 +385,40 @@ class test_ItemAdvanced():
 
         name = item.get_name(character, False)
         assert(name == 'club')
+
+class Test_ItemEffects:
+
+    def setup(self):
+        self.item = Item()
+
+        self.effect1 = ItemEffectData('on drink', 'heal', '1d6')
+        self.effect2 = ItemEffectData('on break', 'add charisma', '1')
+
+        self.item.add_effect(self.effect1)
+        self.item.add_effect(self.effect2)
+
+    def test_get_all_effects(self):
+        effects = self.item.get_effects()
+
+        assert(self.effect1 in effects)
+        assert(self.effect2 in effects)
+        assert(len(effects) == 2)
+
+    def test_get_effects_by_trigger(self):
+        effects = self.item.get_effects('on break')
+        assert(not self.effect1 in effects)
+        assert(self.effect2 in effects)
+        assert(len(effects) == 1)
+
+    def test_get_nonexistent_effect(self):
+        effects = self.item.get_effects('on hit')
+        assert(effects == [])
+
+    def test_get_multiple_effects_by_type(self):
+        effect3 = ItemEffectData('on break', 'heal', '2d6')
+        self.item.add_effect(effect3)
+
+        effects = self.item.get_effects('on break')
+        assert(self.effect2 in effects)
+        assert(effect3 in effects)
+        assert(len(effects) == 2)

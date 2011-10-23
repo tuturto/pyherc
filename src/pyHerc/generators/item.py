@@ -24,6 +24,7 @@ import pyHerc.rules.tables
 import random
 from pyHerc.data.item import Item
 from pyHerc.data.item import WeaponData
+from pyHerc.data.item import ItemEffectData
 
 class ItemGenerator:
     """
@@ -123,10 +124,17 @@ class ItemGenerator:
         if 'effects' in table.keys():
             newItem.effects = {}
             keys = table['effects'].keys()
+
             for effectType in keys:
                 newItem.effects[effectType] = []
                 for effect in table['effects'][effectType]:
-                    newItem.effects[effectType].append(effect)
+                    print effect
+                    print effectType
+                    newEffect = ItemEffectData(trigger = effectType,
+                                       effect_type = effect['name'],
+                                       power = effect['power'])
+
+                newItem.effects[effectType].append(effect)
 
         if 'appearance' in table.keys():
             newItem.appearance = table['appearance']
