@@ -40,7 +40,7 @@ class test_Tables:
             </items>
             """
         tables = pyHerc.rules.tables.Tables()
-        tables.readItemsFromXML(itemConfig)
+        tables.read_items_from_xml(itemConfig)
 
         assert len(tables.items) == 1
         assert 'apple' in tables.items.keys()
@@ -70,7 +70,7 @@ class test_Tables:
             </items>
         """
         tables = pyHerc.rules.tables.Tables()
-        tables.readItemsFromXML(itemConfig)
+        tables.read_items_from_xml(itemConfig)
 
         assert len(tables.items) == 1
         assert 'crystal skull' in tables.items.keys()
@@ -115,7 +115,7 @@ class test_Tables:
         """
 
         tables = pyHerc.rules.tables.Tables()
-        tables.readItemsFromXML(itemConfig)
+        tables.read_items_from_xml(itemConfig)
 
         assert 'crystal skull' in tables.items.keys()
         assert 'apple' in tables.items.keys()
@@ -152,7 +152,7 @@ class test_Tables:
             </items>
             """
         tables = pyHerc.rules.tables.Tables()
-        tables.readItemsFromXML(itemConfig)
+        tables.read_items_from_xml(itemConfig)
 
         item = tables.items['morning star']
         assert item['name'] == 'morning star'
@@ -198,7 +198,7 @@ class test_Tables:
             """
 
         tables = pyHerc.rules.tables.Tables()
-        tables.readItemsFromXML(itemConfig)
+        tables.read_items_from_xml(itemConfig)
 
         item = tables.items['healing potion']
 
@@ -240,6 +240,6 @@ class test_Tables:
             """
 
         tables = pyHerc.rules.tables.Tables()
-        tables.loadTables(itemConfig)
+        tables.load_tables(itemConfig)
 
         assert(not pyHerc.data.tiles.item_potion_empty in tables.items['potion of bless']['icon'])

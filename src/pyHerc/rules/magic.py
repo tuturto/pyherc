@@ -25,7 +25,7 @@ import pyHerc.rules.utils
 
 __logger = logging.getLogger('pyHerc.rules.magic')
 
-def castEffect(model, target, effect, dice = None):
+def cast_effect(model, target, effect, dice = None):
     """
     Casts effect of a spell, potion, etc. on a target
     @param model: model to use
@@ -39,9 +39,9 @@ def castEffect(model, target, effect, dice = None):
 
     #TODO: this could be refined a bit when more effects are added
     if effect['name'] in ('healing', 'damage'):
-        castHPEffect(model, target, effect, dice)
+        cast_hp_effect(model, target, effect, dice)
 
-def castHPEffect(model, target, effect, dice = None):
+def cast_hp_effect(model, target, effect, dice = None):
     """
     Casts HP effect on target, causing it to gain or lose some HP
     @param model: model to use
@@ -52,9 +52,9 @@ def castHPEffect(model, target, effect, dice = None):
     hpPower = effect['power']
     if dice != None and len(dice) > 0:
         hpRoll = dice.pop()
-        assert(hpRoll <= pyHerc.rules.utils.getMaxScore(hpPower))
+        assert(hpRoll <= pyHerc.rules.utils.get_max_score(hpPower))
     else:
-        hpRoll = pyHerc.rules.utils.rollDice(hpPower)
+        hpRoll = pyHerc.rules.utils.roll_dice(hpPower)
 
     event = {}
 
@@ -66,7 +66,7 @@ def castHPEffect(model, target, effect, dice = None):
         event['type'] = 'magic damage'
 
     if target.hp < 0:
-        pyHerc.rules.ending.checkDying(model, target, None)
+        pyHerc.rules.ending.check_dying(model, target, None)
 
     if target.hp > target.get_max_HP():
         target.hp = target.get_max_HP()

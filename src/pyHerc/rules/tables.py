@@ -48,7 +48,7 @@ class Tables:
 
         self.__logger = logging.getLogger('pyHerc.rules.tables')
 
-    def readItemsFromXML(self, document):
+    def read_items_from_xml(self, document):
         self.__logger.debug('reading item config from xml')
         parser = sax.make_parser()
         handler = ItemHandler()
@@ -58,7 +58,7 @@ class Tables:
         self.items = handler.items
         self.__logger.debug('item config read from xml')
 
-    def readCreaturesFromXML(self, document):
+    def read_creatures_from_xml(self, document):
         self.__logger.debug('reading creature config from xml')
         parser = sax.make_parser()
         handler = CreatureHandler()
@@ -68,7 +68,7 @@ class Tables:
         self.creatures = handler.creatures
         self.__logger.debug('creature config read from xml')
 
-    def loadTables(self, itemConfig = None, creatureConfig = None):
+    def load_tables(self, itemConfig = None, creatureConfig = None):
         """
         Initialise tables
         @param itemConfig: optional config string for items
@@ -82,25 +82,25 @@ class Tables:
 
         if itemConfig != None:
             #use passed config
-            self.readItemsFromXML(itemConfig)
+            self.read_items_from_xml(itemConfig)
         else:
             #open file and read from there
             #TODO: relative location
             f = open('C:/programming/pyHack/resources/items.xml', 'r')
             itemConfig = f.read()
             f.close()
-            self.readItemsFromXML(itemConfig)
+            self.read_items_from_xml(itemConfig)
 
         if creatureConfig != None:
             #use passed config
-            self.readCreaturesFromXML(creatureConfig)
+            self.read_creatures_from_xml(creatureConfig)
         else:
             #open file and read from there
             #TODO: relative location
             f = open('C:/programming/pyHack/resources/creatures.xml', 'r')
             creatureConfig = f.read()
             f.close()
-            self.readCreaturesFromXML(creatureConfig)
+            self.read_creatures_from_xml(creatureConfig)
 
         self.sizeModifier = {'colossal' :  -8, 'gargantuan' : -4, 'huge' : -2, 'large' : -1,
                                 'medium' : 0, 'small' : 1, 'tiny' : 2, 'diminutive' : 4, 'fine' : 8}
@@ -134,10 +134,10 @@ class Tables:
                                 ('smoky potion', pyHerc.data.tiles.item_potion_24)
                                 ]
 
-        self.constructLookupTables()
-        self.randomizePotions()
+        self.construct_lookup_tables()
+        self.randomise_potions()
 
-    def randomizePotions(self):
+    def randomise_potions(self):
         """
         Randomize appearances of potions
         @note: different types of potions may be assigned same appearance
@@ -150,7 +150,7 @@ class Tables:
             self.items[entry[0]]['icon'] = [appearance[1]]
         self.__logger.debug('potion appearance randomized')
 
-    def constructLookupTables(self):
+    def construct_lookup_tables(self):
         """
         Construct lookup tables for different kinds of items
         """

@@ -66,12 +66,12 @@ def melee_attack(model, attacker, target, dice = []):
         __logger.debug(target.__str__() + ' has ' + target.hp.__str__() + ' hp left')
         model.raise_event(event)
         if target.hp < 0:
-            ending.checkDying(model, target, None)
+            ending.check_dying(model, target, None)
     else:
         __logger.debug('attack misses')
         model.raise_event(event)
 
-    attacker.tick = time.getNewTick(attacker, 6)
+    attacker.tick = time.get_new_tick(attacker, 6)
 
 def check_hit_in_melee(model, attacker, target, dice = []):
     """
@@ -124,9 +124,9 @@ def get_damage_in_melee(model, attacker, target, dice = []):
 
     if len(dice) > 0:
         damageRoll = dice.pop()
-        assert(damageRoll <= utils.getMaxScore(attackDice))
+        assert(damageRoll <= utils.get_max_score(attackDice))
     else:
-        damageRoll = utils.rollDice(attackDice)
+        damageRoll = utils.roll_dice(attackDice)
 
     if len(attacker.weapons) > 0:
         weapon = attacker.weapons[0]

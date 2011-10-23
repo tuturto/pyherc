@@ -24,7 +24,7 @@ import random
 
 __logger = logging.getLogger('pyHerc.rules.utils')
 
-def rollDice(dice):
+def roll_dice(dice):
     """
     Roll dice
     @param dice: dice to roll, in format AdS+B
@@ -51,7 +51,7 @@ def rollDice(dice):
 
     return score
 
-def getMaxScore(dice):
+def get_max_score(dice):
     """
     Get maximum score possible with given dice
     @param dice: dice to roll, in format AdS+B

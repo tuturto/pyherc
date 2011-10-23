@@ -80,26 +80,26 @@ def create_character(race, kit):
     temp_race = race_stats[race]
     temp_kit = kit_stats[kit]
 
-    newCharacter = pyHerc.data.model.Character()
-    newCharacter.str = temp_race['str'] + temp_kit['str']
-    newCharacter.dex = temp_race['dex'] + temp_kit['dex']
-    newCharacter.con = temp_race['con'] + temp_kit['con']
-    newCharacter.wis = temp_race['wis'] + temp_kit['wis']
-    newCharacter.int = temp_race['int'] + temp_kit['int']
-    newCharacter.cha = temp_race['cha'] + temp_kit['cha']
-    newCharacter.hp = temp_race['hp'] + temp_kit['hp']
-    newCharacter.maxHp = newCharacter.hp
-    newCharacter.speed = temp_race['speed'] + temp_kit['speed']
+    new_character = pyHerc.data.model.Character()
+    new_character.str = temp_race['str'] + temp_kit['str']
+    new_character.dex = temp_race['dex'] + temp_kit['dex']
+    new_character.con = temp_race['con'] + temp_kit['con']
+    new_character.wis = temp_race['wis'] + temp_kit['wis']
+    new_character.int = temp_race['int'] + temp_kit['int']
+    new_character.cha = temp_race['cha'] + temp_kit['cha']
+    new_character.hp = temp_race['hp'] + temp_kit['hp']
+    new_character.maxHp = new_character.hp
+    new_character.speed = temp_race['speed'] + temp_kit['speed']
     #TODO: implement properly
-    newCharacter.size = 'medium'
-    newCharacter.attack = '1d3'
+    new_character.size = 'medium'
+    new_character.attack = '1d3'
 
     #TODO: get from a factory
-    newCharacter.feats.append(
+    new_character.feats.append(
                               pyHerc.data.model.WeaponProficiency('simple'))
-    newCharacter.icon = __get_icon(race, kit)
+    new_character.icon = __get_icon(race, kit)
 
-    return newCharacter
+    return new_character
 
 def __get_icon(race, kit):
     #TODO: implement

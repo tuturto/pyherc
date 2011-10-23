@@ -48,19 +48,19 @@ def move(model, character, direction):
     event['location'] = character.location
     event['level'] = character.level
 
-    moveData = checkMove(model, character, direction)
+    moveData = check_move(model, character, direction)
 
     if moveData['ok'] == 1:
         character.location = moveData['location']
         character.level = moveData['level']
-        character.tick = time.getNewTick(character, 2)
+        character.tick = time.get_new_tick(character, 2)
         event['end location'] = character.location
         event['end level'] = character.level
         model.raise_event(event)
 
     __logger.debug('move finished at ' + character.location.__str__())
 
-def checkMove(model, character, direction):
+def check_move(model, character, direction):
     """
     checks if character can move to specific direction
     @param model: model of the world
@@ -72,7 +72,7 @@ def checkMove(model, character, direction):
     assert(not character == None)
     assert(direction >= 1 and direction <= 9)
 
-    locationData = calculateNewLocation(model, character, direction)
+    locationData = calculate_new_location(model, character, direction)
 
     if 'location' in locationData.keys() and 'level' in locationData.keys():
         newLocation = locationData['location']
@@ -104,7 +104,7 @@ def checkMove(model, character, direction):
 
     return locationData
 
-def calculateNewLocation(model, character, direction):
+def calculate_new_location(model, character, direction):
     """
     Calculate new location if moving from old to certain direction
     @param character: character who is about to move

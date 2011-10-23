@@ -35,7 +35,7 @@ class test_magic:
         character = pyHerc.data.model.Character()
         character.hp = 15
         character.maxHp = 15
-        pyHerc.rules.magic.castEffect(model, character, {'name':'damage', 'power':'1d10'}, [10])
+        pyHerc.rules.magic.cast_effect(model, character, {'name':'damage', 'power':'1d10'}, [10])
 
         assert(character.hp == 5)
 
@@ -47,7 +47,7 @@ class test_magic:
         character = pyHerc.data.model.Character()
         character.hp = 1
         character.maxHp = 15
-        pyHerc.rules.magic.castEffect(model, character, {'name':'healing', 'power':'1d10'}, [10])
+        pyHerc.rules.magic.cast_effect(model, character, {'name':'healing', 'power':'1d10'}, [10])
 
         assert(character.hp == 11)
 
@@ -59,7 +59,7 @@ class test_magic:
         character = pyHerc.data.model.Character()
         character.hp = 1
         character.maxHp = 5
-        pyHerc.rules.magic.castEffect(model, character, {'name':'healing', 'power':'1d10'}, [10])
+        pyHerc.rules.magic.cast_effect(model, character, {'name':'healing', 'power':'1d10'}, [10])
 
         assert(character.hp == 5)
 

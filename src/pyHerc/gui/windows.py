@@ -153,7 +153,7 @@ class StartMenu:
         newWindow.mainLoop()
         self.logger.info('game finished')
         if self.application.running:
-            endResult = pyHerc.rules.ending.checkResult(self.application.world)
+            endResult = pyHerc.rules.ending.check_result(self.application.world)
             dialog = dialogs.EndScreen(self.application, self.screen)
             dialog.show(endResult)
 
@@ -192,7 +192,7 @@ class StartNewGameWindow:
         #TODO: implement properly
         self.application.world = pyHerc.data.model.Model()
         tables = pyHerc.rules.tables.Tables()
-        tables.loadTables()
+        tables.load_tables()
         self.application.world.tables = tables
         #TODO: load tables for model
         if self.application.config['explore']:
@@ -252,12 +252,12 @@ class GameWindow:
                     elif event.key in self.moveKeyMap.keys():
                         #handle moving
                         direction = self.moveKeyMap[event.key]
-                        if pyHerc.rules.moving.checkMove(model, player, direction)['ok']:
+                        if pyHerc.rules.moving.check_move(model, player, direction)['ok']:
                             #check in case player escaped
                             if player.level != None:
                                 pyHerc.rules.moving.move(model, player, direction)
                         else:
-                            targetLocation = pyHerc.rules.moving.calculateNewLocation(model, player, direction)
+                            targetLocation = pyHerc.rules.moving.calculate_new_location(model, player, direction)
                             if 'location' in targetLocation.keys():
                                 target = player.level.getCreatureAt(targetLocation['location'])
                                 if target != None:
@@ -308,7 +308,7 @@ class GameWindow:
 
             model = self.application.world
 
-            creature = pyHerc.rules.time.getNextCreature(model)
+            creature = pyHerc.rules.time.get_next_creature(model)
 
             if creature == model.player:
                 if self.application.world.player.level != None:

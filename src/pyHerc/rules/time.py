@@ -24,7 +24,7 @@ import pyHerc.data.model
 
 __logger = logging.getLogger('pyHerc.rules.time')
 
-def getNextCreature(model):
+def get_next_creature(model):
     """
     Get the character who is next to take action
     @return: Character
@@ -43,7 +43,7 @@ def getNextCreature(model):
         for creature in creatures:
             creature.tick = creature.tick - 1
 
-def getNewTick(character, cost):
+def get_new_tick(character, cost):
     """
     Calculate new tick for character
     @param character: character performing the action

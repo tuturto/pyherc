@@ -25,24 +25,24 @@ class test_dice:
 
     def test_simpleDieRolling(self):
         for i in range(0, 50):
-            score = pyHerc.rules.utils.rollDice('1d6')
+            score = pyHerc.rules.utils.roll_dice('1d6')
             assert(score >= 1)
             assert(score <= 6)
 
     def test_multipleDiceRolls(self):
         for i in range(0, 50):
-            score = pyHerc.rules.utils.rollDice('2d6')
+            score = pyHerc.rules.utils.roll_dice('2d6')
             assert(score >= 2)
             assert(score <= 12)
 
     def test_multipleDiceRollsWithBonus(self):
         for i in range(0, 50):
-            score = pyHerc.rules.utils.rollDice('2d6+2')
+            score = pyHerc.rules.utils.roll_dice('2d6+2')
             assert(score >= 4)
             assert(score <= 14)
 
     def test_multipleDiceRollsWithPenalty(self):
         for i in range(0, 50):
-            score = pyHerc.rules.utils.rollDice('4d4-3')
+            score = pyHerc.rules.utils.roll_dice('4d4-3')
             assert(score >= 1)
             assert(score <= 13)

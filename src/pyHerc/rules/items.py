@@ -52,7 +52,7 @@ def pick_up(model, character, item):
     character.level.items.remove(item)
     character.inventory.append(item)
     item.location = ()
-    character.tick = time.getNewTick(character, 1.5)
+    character.tick = time.get_new_tick(character, 1.5)
 
     __logger.debug('item picked up')
 
@@ -75,7 +75,7 @@ def drop(model, character, item):
 
     character.level.addItem(item, character.location)
     character.inventory.remove(item)
-    character.tick = time.getNewTick(character, 1.5)
+    character.tick = time.get_new_tick(character, 1.5)
 
     event = {}
     event['type'] = 'item'
@@ -218,7 +218,7 @@ def drink_potion(model, character, potion, dice = None):
 
     if hasattr(potion, 'effects'):
         for effect in potion.effects['on drink']:
-            pyHerc.rules.magic.castEffect(model, character, effect, dice)
+            pyHerc.rules.magic.cast_effect(model, character, effect, dice)
 
     if potion.charges < 1:
         character.inventory.remove(potion)

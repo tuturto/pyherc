@@ -57,7 +57,7 @@ class test_Time:
         Test that system can tell whose turn it is to act
         One creature has tick of 0
         """
-        creature = pyHerc.rules.time.getNextCreature(self.model)
+        creature = pyHerc.rules.time.get_next_creature(self.model)
         assert(creature == self.creature2)
 
     def test_getNextInTurnPositiveTick(self):
@@ -66,7 +66,7 @@ class test_Time:
         All creatures have positive tick
         """
         self.creature2.tick = 10
-        creature = pyHerc.rules.time.getNextCreature(self.model)
+        creature = pyHerc.rules.time.get_next_creature(self.model)
         print creature
         assert(creature == self.creature3)
 
