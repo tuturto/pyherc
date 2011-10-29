@@ -34,12 +34,14 @@ import pyHerc.rules.time
 import pyHerc.rules.combat
 import pyHerc.generators.dungeon
 import pyHerc.rules.tables
+from pyHerc.rules.los import get_light_matrix
 from pygame.locals import KEYDOWN
 from pygame.locals import K_DOWN, K_UP
 from pygame.locals import K_SPACE, K_RETURN, K_ESCAPE, K_PERIOD
 from pygame.locals import K_d, K_w, K_r, K_q,  K_i
 from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8, K_KP9
 from pygame.locals import Rect
+
 
 class MainWindow:
 
@@ -250,6 +252,7 @@ class GameWindow:
                         #quit
                         self.application.world.endCondition = 1
                     elif event.key in self.moveKeyMap.keys():
+                        player.level.full_update_needed = True
                         #handle moving
                         direction = self.moveKeyMap[event.key]
                         if pyHerc.rules.moving.check_move(model, player, direction)['ok']:
@@ -270,46 +273,52 @@ class GameWindow:
                             items = dialog.show(items)
                         for item in items:
                             pyHerc.rules.items.pick_up(model, player, item)
+                        player.level.full_update_needed = True
                     elif event.key == K_i:
                         #display inventory
                         dialog = dialogs.Inventory(self.application, self.screen)
                         dialog.show(player.inventory, 0)
+                        player.level.full_update_needed = True
                     elif event.key == K_d:
                         #drop items
                         dialog = dialogs.Inventory(self.application, self.screen)
                         dropItems = dialog.show(player.inventory)
                         for item in dropItems:
                             pyHerc.rules.items.drop(model, player, item)
+                        player.level.full_update_needed = True
                     elif event.key == K_w:
                         #wield weapons
                         dialog = dialogs.Inventory(self.application, self.screen)
                         wieldItems = dialog.show(player.inventory, 2)
                         for item in wieldItems:
                             pyHerc.rules.items.wield(model, player, item, True)
+                        player.level.full_update_needed = True
                     elif event.key == K_r:
                         #unwield weapons
                         dialog = dialogs.Inventory(self.application, self.screen)
                         removable = dialog.show(player.weapons)
                         for item in removable:
                             pyHerc.rules.items.unwield(model, player, item)
+                        player.level.full_update_needed = True
                     elif event.key == K_q:
                         #quaff potion
                         dialog = dialogs.Inventory(self.application, self.screen)
                         potion = dialog.show(player.inventory, 1)
                         if len(potion) == 1:
                             pyHerc.rules.items.drink_potion(model, player, potion[0])
+                        player.level.full_update_needed = True
             else:
                 return
 
     def mainLoop(self):
         self.logger.debug('main loop starting')
         while self.application.world.endCondition == 0 and self.application.running:
-            #TODO: implement
 
             model = self.application.world
 
             creature = pyHerc.rules.time.get_next_creature(model)
 
+            #TODO: do not paint screen all the time
             if creature == model.player:
                 if self.application.world.player.level != None:
                     self.__updateDisplay()
@@ -321,8 +330,10 @@ class GameWindow:
                 if self.application.world.player.level != None:
                     if hasattr(creature, 'act'):
                         creature.act(self.application.world)
-                        #TODO: set dirty rectangles
+                        #TODO: set dirty rectangles properly
                         self.getNewEvents()
+                        self.application.world.player.level.full_update_needed = True
+                        #TODO: when dirty rectangles work, uncomment this
                         #self.__updateDisplay()
 
         self.logger.debug('main loop finished')
@@ -378,72 +389,103 @@ class GameWindow:
 
         return eventText
 
+    def __full_screen_update(self):
+        '''
+        Updates full screen
+        '''
+        player = self.application.world.player
+        level = player.level
+
+        player.level.full_update_needed = False
+        #TODO: don't call during each and every update
+        light_matrix = get_light_matrix(self.application.world, player)
+
+        self.screen.blit(self.background, (0, 0))
+        #TODO: make more generic and clean up
+        sy = 0
+        for y in range(player.location[1] - 7, player.location[1] + 8):
+            sx = 0
+            for x in range(player.location[0] - 12, player.location[0] + 13):
+                #draw floor and walls
+                if x >= 0 and y >= 0 and x <= len(level.floor)-1 and y <= len(level.floor[x])-1:
+                    tile = surfaceManager.getIcon(level.floor[x][y])
+                    self.screen.blit(tile, (sx * 32, sy *32))
+                    if not level.walls[x][y] == pyHerc.data.tiles.wall_empty:
+                        if level.walls[x][y] != pyHerc.data.tiles.wall_ground:
+                            tile = surfaceManager.getIcon(level.walls[x][y])
+                            self.screen.blit(tile, (sx * 32, sy *32))
+                        else:
+                            tile = surfaceManager.getIcon(pyHerc.data.tiles.floor_empty)
+                            self.screen.blit(tile, (sx * 32, sy *32))
+                    if light_matrix[sx][sy] == 0:
+                        tile = surfaceManager.getIcon(pyHerc.data.tiles.floor_empty)
+                        self.screen.blit(tile, (sx * 32, sy *32))
+                else:
+                    #draw empty
+                    tile = surfaceManager.getIcon(pyHerc.data.tiles.floor_empty)
+                    self.screen.blit(tile, (sx * 32, sy *32))
+                sx = sx + 1
+            sy = sy + 1
+            sx = 0
+
+        #draw portals
+        for item in level.portals:
+            x = item.location[0] - player.location[0] + 12
+            y = item.location[1] - player.location[1] + 7
+            if x >= 0 and y >= 0 and x <= 24 and y <= 14:
+                if light_matrix[x][y] == True:
+                    tile = surfaceManager.getIcon(item.icon)
+                    self.screen.blit(tile, (x * 32, y *32))
+
+        #draw items
+        for item in level.items:
+            x = item.location[0] - player.location[0] + 12
+            y = item.location[1] - player.location[1] + 7
+            if x >= 0 and y >= 0 and x <= 24 and y <= 14:
+                if light_matrix[x][y] == True:
+                    tile = surfaceManager.getIcon(item.icon)
+                    self.screen.blit(tile, (x * 32, y *32))
+
+        #draw creatures
+        for item in level.creatures:
+            x = item.location[0] - player.location[0] + 12
+            y = item.location[1] - player.location[1] + 7
+            if x >= 0 and y >= 0 and x <= 24 and y <= 14:
+                if light_matrix[x][y] == True:
+                    tile = surfaceManager.getIcon(item.icon)
+                    self.screen.blit(tile, (x * 32, y *32))
+
+        #draw overlay event history
+        self.screen.blit(self.console, (0, 0))
+        eventText = self.formatEventHistory()
+        font = pygame.font.Font(None, 12)
+        lineNumber = 0
+        for line in eventText:
+            text = font.render(line, True, (255, 255, 255))
+            textRect = text.get_rect()
+            textRect.topleft = (5, 5 + lineNumber * 12)
+            self.screen.blit(text, textRect)
+            lineNumber = lineNumber + 1
+
+        tile = surfaceManager.getIcon(player.icon)
+        self.screen.blit(tile, (384, 224))
+        pygame.display.update()
+
+    def __partial_screen_update(self):
+        '''
+        Updates only those portions of the map that have been marked dirty
+        '''
+        pass
+
     def __updateDisplay(self):
         """
         Draws this window on screen
         """
-        if self.fullUpdate == 1:
-            player = self.application.world.player
-            level = player.level
+        player = self.application.world.player
+        level = player.level
 
-            self.screen.blit(self.background, (0, 0))
-            #TODO: make more generic
-            sy = 0
-            for y in range(player.location[1] - 7, player.location[1] + 8):
-                sx = 0
-                for x in range(player.location[0] - 12, player.location[0] + 13):
-                    #draw floor and walls
-                    if x >= 0 and y >= 0 and x <= len(level.floor)-1 and y <= len(level.floor[x])-1:
-                        tile = surfaceManager.getIcon(level.floor[x][y])
-                        self.screen.blit(tile, (sx * 32, sy *32))
-                        if not level.walls[x][y] == pyHerc.data.tiles.wall_empty:
-                            tile = surfaceManager.getIcon(level.walls[x][y])
-                            self.screen.blit(tile, (sx * 32, sy *32))
-                    else:
-                        #draw empty
-                        tile = surfaceManager.getIcon(pyHerc.data.tiles.floor_empty)
-                        self.screen.blit(tile, (sx * 32, sy *32))
-                    sx = sx + 1
-                sy = sy + 1
-                sx = 0
-
-            #draw portals
-            for item in level.portals:
-                x = item.location[0] - player.location[0] + 12
-                y = item.location[1] - player.location[1] + 7
-                if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                    tile = surfaceManager.getIcon(item.icon)
-                    self.screen.blit(tile, (x * 32, y *32))
-
-            #draw items
-            for item in level.items:
-                x = item.location[0] - player.location[0] + 12
-                y = item.location[1] - player.location[1] + 7
-                if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                    tile = surfaceManager.getIcon(item.icon)
-                    self.screen.blit(tile, (x * 32, y *32))
-
-            #draw creatures
-            for item in level.creatures:
-                x = item.location[0] - player.location[0] + 12
-                y = item.location[1] - player.location[1] + 7
-                if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                    tile = surfaceManager.getIcon(item.icon)
-                    self.screen.blit(tile, (x * 32, y *32))
-
-            #draw overlay event history
-            self.screen.blit(self.console, (0, 0))
-            eventText = self.formatEventHistory()
-            font = pygame.font.Font(None, 12)
-            lineNumber = 0
-            for line in eventText:
-                text = font.render(line, True, (255, 255, 255))
-                textRect = text.get_rect()
-                textRect.topleft = (5, 5 + lineNumber * 12)
-                self.screen.blit(text, textRect)
-                lineNumber = lineNumber + 1
-
-            tile = surfaceManager.getIcon(player.icon)
-            self.screen.blit(tile, (384, 224))
-            pygame.display.update()
+        if player.level.full_update_needed == True:
+            self.__full_screen_update()
+        else:
+            self.__partial_screen_update()
 

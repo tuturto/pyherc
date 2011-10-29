@@ -34,6 +34,7 @@ class Level:
 
         self.floor = []
         self.walls = []
+        self.lit = []
 
         if size[0] != 0 and size[1] != 0:
             for y in range(0, size[0] + 1):
@@ -51,6 +52,25 @@ class Level:
         self.items = []
         self.portals = []
         self.creatures = []
+        self.full_update_needed = True
+        self.dirty_rectangles = []
+
+    def get_tile(self, loc_x, loc_y):
+        '''
+        Get tile at given location
+        @param loc_x: x-coordinate of the location
+        @param loc_y: y-coordinate of the location
+        '''
+        if loc_x < 0 or loc_y < 0:
+            return tiles.floor_empty
+
+        if loc_x > len(self.floor[0]) or loc_y > len(self.floor):
+            return tiles.floor_empty
+
+        if self.walls[loc_x][loc_y] != tiles.wall_empty:
+            return self.walls[loc_x][loc_y]
+        else:
+            return self.floor[loc_x][loc_y]
 
     def addItem(self, item, location):
         """
@@ -179,6 +199,24 @@ class Level:
             location = (random.randint(2, x - 1), random.randint(2, y - 1))
         return location
 
+    def get_square(self, x_coordinate, y_coordinate):
+        '''
+        Get square at given coordinates
+        '''
+        if walls[x_coordinate][y_coordinate] != wall_empty:
+            return walls[x][y]
+        else:
+            return floor[x_coordinate][y_coordinate]
+
+    def blocks_los(self, x_coordinate, y_coordinate):
+        '''
+        Checks if there's LOS-blocking wall at given coordinates
+        '''
+
+        if walls[x_coordinate][y_coordinate] != wall_empty:
+            return False
+        else:
+            return True
 
 class Dungeon:
     """
