@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2011-10-29, 00:47:00 -->
+<!-- Saved: 2011-10-29, 16:06:57 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: handle memory</Summary>
@@ -267,25 +267,16 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: filter events</Summary>
     <Description></Description>
-    <Created>2011-10-28, 22:32:29</Created>
+    <Created>2011-10-29, 09:39:47</Created>
     <Resource>
       <Filename>pyHerc/data/model.py</Filename>
       <Linenumber>53</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: support for level generation parameters</Summary>
-    <Description></Description>
-    <Created>2011-10-28, 22:51:51</Created>
-    <Resource>
-      <Filename>pyHerc/data/dungeon.py</Filename>
-      <Linenumber>255</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: use configuration</Summary>
     <Description></Description>
-    <Created>2011-10-29, 00:38:45</Created>
+    <Created>2011-10-29, 11:25:46</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>104</Linenumber>
@@ -294,7 +285,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement</Summary>
     <Description></Description>
-    <Created>2011-10-29, 00:38:45</Created>
+    <Created>2011-10-29, 11:25:46</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>142</Linenumber>
@@ -303,7 +294,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement menu here</Summary>
     <Description></Description>
-    <Created>2011-10-29, 00:38:45</Created>
+    <Created>2011-10-29, 11:25:46</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>189</Linenumber>
@@ -312,7 +303,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement properly</Summary>
     <Description></Description>
-    <Created>2011-10-29, 00:38:45</Created>
+    <Created>2011-10-29, 11:25:46</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>194</Linenumber>
@@ -321,7 +312,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: load tables for model</Summary>
     <Description></Description>
-    <Created>2011-10-29, 00:38:45</Created>
+    <Created>2011-10-29, 11:25:46</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>199</Linenumber>
@@ -330,37 +321,55 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: do not paint screen all the time</Summary>
     <Description></Description>
-    <Created>2011-10-29, 00:38:45</Created>
+    <Created>2011-10-29, 11:25:46</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>314</Linenumber>
+      <Linenumber>321</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: set dirty rectangles</Summary>
+    <Summary>TODO: set dirty rectangles properly</Summary>
     <Description></Description>
-    <Created>2011-10-29, 00:38:45</Created>
+    <Created>2011-10-29, 11:25:46</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>326</Linenumber>
+      <Linenumber>333</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: when dirty rectangles work, uncomment this</Summary>
+    <Description></Description>
+    <Created>2011-10-29, 11:25:46</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>336</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: don't call during each and every update</Summary>
     <Description></Description>
-    <Created>2011-10-29, 00:38:45</Created>
+    <Created>2011-10-29, 11:25:46</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>391</Linenumber>
+      <Linenumber>400</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: make more generic and clean up</Summary>
     <Description></Description>
-    <Created>2011-10-29, 00:38:45</Created>
+    <Created>2011-10-29, 11:25:46</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>395</Linenumber>
+      <Linenumber>404</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: support for level generation parameters</Summary>
+    <Description></Description>
+    <Created>2011-10-29, 14:00:07</Created>
+    <Resource>
+      <Filename>pyHerc/data/dungeon.py</Filename>
+      <Linenumber>271</Linenumber>
     </Resource>
   </Task>
 </Tasks>

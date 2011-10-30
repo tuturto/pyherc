@@ -34,7 +34,7 @@ import pyHerc.rules.time
 import pyHerc.rules.combat
 import pyHerc.generators.dungeon
 import pyHerc.rules.tables
-from pyHerc.rules.los import get_light_matrix
+from pyHerc.rules.los import get_fov_matrix
 from pygame.locals import KEYDOWN
 from pygame.locals import K_DOWN, K_UP
 from pygame.locals import K_SPACE, K_RETURN, K_ESCAPE, K_PERIOD
@@ -398,7 +398,7 @@ class GameWindow:
 
         player.level.full_update_needed = False
         #TODO: don't call during each and every update
-        light_matrix = get_light_matrix(self.application.world, player)
+        light_matrix = get_fov_matrix(self.application.world, player, 13)
 
         self.screen.blit(self.background, (0, 0))
         #TODO: make more generic and clean up
@@ -411,13 +411,9 @@ class GameWindow:
                     tile = surfaceManager.getIcon(level.floor[x][y])
                     self.screen.blit(tile, (sx * 32, sy *32))
                     if not level.walls[x][y] == pyHerc.data.tiles.wall_empty:
-                        if level.walls[x][y] != pyHerc.data.tiles.wall_ground:
-                            tile = surfaceManager.getIcon(level.walls[x][y])
-                            self.screen.blit(tile, (sx * 32, sy *32))
-                        else:
-                            tile = surfaceManager.getIcon(pyHerc.data.tiles.floor_empty)
-                            self.screen.blit(tile, (sx * 32, sy *32))
-                    if light_matrix[sx][sy] == 0:
+                        tile = surfaceManager.getIcon(level.walls[x][y])
+                        self.screen.blit(tile, (sx * 32, sy *32))
+                    if light_matrix[x][y] == False:
                         tile = surfaceManager.getIcon(pyHerc.data.tiles.floor_empty)
                         self.screen.blit(tile, (sx * 32, sy *32))
                 else:
@@ -433,7 +429,7 @@ class GameWindow:
             x = item.location[0] - player.location[0] + 12
             y = item.location[1] - player.location[1] + 7
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x][y] == True:
+                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 7] == True:
                     tile = surfaceManager.getIcon(item.icon)
                     self.screen.blit(tile, (x * 32, y *32))
 
@@ -442,7 +438,7 @@ class GameWindow:
             x = item.location[0] - player.location[0] + 12
             y = item.location[1] - player.location[1] + 7
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x][y] == True:
+                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 7] == True:
                     tile = surfaceManager.getIcon(item.icon)
                     self.screen.blit(tile, (x * 32, y *32))
 
@@ -451,7 +447,7 @@ class GameWindow:
             x = item.location[0] - player.location[0] + 12
             y = item.location[1] - player.location[1] + 7
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x][y] == True:
+                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 7] == True:
                     tile = surfaceManager.getIcon(item.icon)
                     self.screen.blit(tile, (x * 32, y *32))
 

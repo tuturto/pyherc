@@ -64,13 +64,27 @@ class Level:
         if loc_x < 0 or loc_y < 0:
             return tiles.floor_empty
 
-        if loc_x > len(self.floor[0]) or loc_y > len(self.floor):
+        if loc_x > len(self.floor) or loc_y > len(self.floor[0]):
             return tiles.floor_empty
 
         if self.walls[loc_x][loc_y] != tiles.wall_empty:
             return self.walls[loc_x][loc_y]
         else:
             return self.floor[loc_x][loc_y]
+
+    def get_wall_tile(self, loc_x, loc_y):
+        '''
+        Get wall tile at given location
+        @param loc_x: x-coordinate of the location
+        @param loc_y: y-coordinate of the location
+        '''
+        if loc_x < 0 or loc_y < 0:
+            return tiles.wall_ground
+
+        if loc_x > len(self.floor) or loc_y > len(self.floor[0]):
+            return tiles.wall_ground
+
+        return self.walls[loc_x][loc_y]
 
     def addItem(self, item, location):
         """
