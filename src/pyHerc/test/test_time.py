@@ -47,8 +47,8 @@ class test_Time:
         self.creature3.speed = 0.5
         self.creature3.name = 'creature 3'
 
-        self.model.dungeon.levels.addCreature(self.creature1)
-        self.model.dungeon.levels.addCreature(self.creature2)
+        self.model.dungeon.levels.add_creature(self.creature1)
+        self.model.dungeon.levels.add_creature(self.creature2)
         self.model.player = self.creature3
         self.creature3.level = self.model.dungeon.levels
 

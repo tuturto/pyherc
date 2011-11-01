@@ -20,13 +20,13 @@
 
 import random
 import logging
-import tiles
+import pyHerc.data.tiles
 
 class Level:
     """
     Represents a level
     """
-    def __init__(self, size = (0, 0), floorType = None, wallType = None):
+    def __init__(self, size = (0, 0), floor_type = None, wall_type = None):
         """
         Initialises a level of certain size and fill floor and walls with given types
         """
@@ -40,13 +40,13 @@ class Level:
             for y in range(0, size[0] + 1):
                 temp_row = []
                 for y in range(0, size[1] + 1):
-                    temp_row.append(floorType)
+                    temp_row.append(floor_type)
                 self.floor.append(temp_row)
 
             for y in range(0, size[0] + 1):
                 temp_row = []
                 for y in range(0, size[1] + 1):
-                    temp_row.append(wallType)
+                    temp_row.append(wall_type)
                 self.walls.append(temp_row)
 
         self.items = []
@@ -62,12 +62,12 @@ class Level:
         @param loc_y: y-coordinate of the location
         '''
         if loc_x < 0 or loc_y < 0:
-            return tiles.floor_empty
+            return pyHerc.data.tiles.floor_empty
 
         if loc_x > len(self.floor) or loc_y > len(self.floor[0]):
-            return tiles.floor_empty
+            return pyHerc.data.tiles.floor_empty
 
-        if self.walls[loc_x][loc_y] != tiles.wall_empty:
+        if self.walls[loc_x][loc_y] != pyHerc.data.tiles.wall_empty:
             return self.walls[loc_x][loc_y]
         else:
             return self.floor[loc_x][loc_y]
@@ -79,14 +79,14 @@ class Level:
         @param loc_y: y-coordinate of the location
         '''
         if loc_x < 0 or loc_y < 0:
-            return tiles.wall_ground
+            return pyHerc.data.tiles.wall_ground
 
         if loc_x > len(self.floor) or loc_y > len(self.floor[0]):
-            return tiles.wall_ground
+            return pyHerc.data.tiles.wall_ground
 
         return self.walls[loc_x][loc_y]
 
-    def addItem(self, item, location):
+    def add_item(self, item, location):
         """
         Add an item to this level
         @param item: item to add
@@ -100,7 +100,7 @@ class Level:
         self.items.append(item)
         item.location = location
 
-    def getItemsAt(self, location):
+    def get_items_at(self, location):
         """
         Get list of items at location
         @param location: location to check
@@ -112,7 +112,7 @@ class Level:
                 items.append(item)
         return items
 
-    def addPortal(self, portal, location, otherEnd = None):
+    def add_portal(self, portal, location, otherEnd = None):
         """
         Adds precreated portal on level at given location
         If secondary portal is specified, link them together
@@ -136,17 +136,17 @@ class Level:
             otherEnd.setOtherEnd(portal)
             if portal.icon != None:
                 if otherEnd.icon == None:
-                    if portal.icon == tiles.portal_stairs_down:
-                        otherEnd.icon = tiles.portal_stairs_up
+                    if portal.icon == pyHerc.data.tiles.portal_stairs_down:
+                        otherEnd.icon = pyHerc.data.tiles.portal_stairs_up
                     else:
-                        otherEnd.icon = tiles.portal_stairs_down
+                        otherEnd.icon = pyHerc.data.tiles.portal_stairs_down
             else:
-                if otherEnd.icon == tiles.portal_stairs_down:
-                    portal.icon = tiles.portal_stairs_up
+                if otherEnd.icon == pyHerc.data.tiles.portal_stairs_down:
+                    portal.icon = pyHerc.data.tiles.portal_stairs_up
                 else:
-                    portal.icon = tiles.portal_stairs_down
+                    portal.icon = pyHerc.data.tiles.portal_stairs_down
 
-    def getPortalAt(self, location):
+    def get_portal_at(self, location):
         """
         Check if there is a portal at given location
         @return: Portal if found, otherwise None
@@ -157,7 +157,7 @@ class Level:
 
         return None
 
-    def addCreature(self, creature, location = None):
+    def add_creature(self, creature, location = None):
         """
         Add a creature to level
         @param creature: creature to add
@@ -176,7 +176,7 @@ class Level:
         if location != None:
             creature.location = location
 
-    def removeCreature(self, creature):
+    def remove_creature(self, creature):
         """
         Remove creature from level
         @param creature: creature to remove
@@ -189,7 +189,7 @@ class Level:
         creature.level = None
         creature.location = ()
 
-    def getCreatureAt(self, location):
+    def get_creature_at(self, location):
         """
         Get list of creatures at given location
         @param location: location to check
@@ -202,14 +202,14 @@ class Level:
 
         return None
 
-    def findFreeSpace(self):
+    def find_free_space(self):
         """
         Finds free space where stuff can be placed
         """
         x = len(self.floor)
         y = len(self.floor[0])
         location = (random.randint(2, x - 1), random.randint(2, y - 1))
-        while self.walls[location[0]][location[1]] != tiles.wall_empty:
+        while self.walls[location[0]][location[1]] != pyHerc.data.tiles.wall_empty:
             location = (random.randint(2, x - 1), random.randint(2, y - 1))
         return location
 
@@ -217,17 +217,17 @@ class Level:
         '''
         Get square at given coordinates
         '''
-        if walls[x_coordinate][y_coordinate] != wall_empty:
-            return walls[x][y]
+        if self.walls[x_coordinate][y_coordinate] != pyHerc.data.tiles.wall_empty:
+            return self.walls[x_coordinate][y_coordinate]
         else:
-            return floor[x_coordinate][y_coordinate]
+            return self.floor[x_coordinate][y_coordinate]
 
     def blocks_los(self, x_coordinate, y_coordinate):
         '''
         Checks if there's LOS-blocking wall at given coordinates
         '''
 
-        if walls[x_coordinate][y_coordinate] != wall_empty:
+        if walls[x_coordinate][y_coordinate] != pyHerc.data.tiles.wall_empty:
             return False
         else:
             return True
@@ -269,5 +269,7 @@ class Portal:
         self.logger.debug('generating a new level')
 
         #TODO: support for level generation parameters
-        newLevel = self.levelGenerator.generateLevel(self, model, monsterList = [])
+        newLevel = self.levelGenerator.generateLevel(self,
+                                                     model,
+                                                     monsterList = [])
 

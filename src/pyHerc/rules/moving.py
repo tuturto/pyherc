@@ -95,7 +95,7 @@ def check_move(model, character, direction):
             if character == model.player:
                 model.player.location = ()
                 model.player.level = None
-                model.endCondition = 1
+                model.end_condition = 1
                 locationData['ok'] = 1
             else:
                 locationData['ok'] = 0
@@ -135,7 +135,7 @@ def calculate_new_location(model, character, direction):
     elif direction == 8:
         newLocation = (location[0] - 1, location[1] - 1)
     elif direction == 9:
-        portal = newLevel.getPortalAt(location)
+        portal = newLevel.get_portal_at(location)
         if portal != None:
             if portal.getOtherEnd() != None:
                 newLevel = portal.getOtherEnd().level

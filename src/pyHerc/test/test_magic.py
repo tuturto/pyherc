@@ -35,7 +35,7 @@ class test_magic:
         model = StubModel()
         character = pyHerc.data.model.Character()
         character.hp = 15
-        character.maxHp = 15
+        character.max_hp = 15
         pyHerc.rules.magic.cast_effect(
                             model, character,
                             ItemEffectData('on drink', 'damage', '1d10'), [10])
@@ -49,7 +49,7 @@ class test_magic:
         model = StubModel()
         character = pyHerc.data.model.Character()
         character.hp = 1
-        character.maxHp = 15
+        character.max_hp = 15
         pyHerc.rules.magic.cast_effect(
                             model, character,
                             ItemEffectData('on drink', 'healing', '1d10'), [10])
@@ -63,7 +63,7 @@ class test_magic:
         model = StubModel()
         character = pyHerc.data.model.Character()
         character.hp = 1
-        character.maxHp = 5
+        character.max_hp = 5
         pyHerc.rules.magic.cast_effect(
                         model, character,
                         ItemEffectData('on drink', 'healing', '1d10'), [10])
@@ -75,7 +75,7 @@ class test_magicWithGenerators(IntegrationTest):
     def setUp2(self):
         self.character = pyHerc.data.model.Character()
         self.character.hp = 1
-        self.character.maxHp = 5
+        self.character.max_hp = 5
 
         self.item = Item()
         self.item.name = 'healing potion'

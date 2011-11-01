@@ -73,7 +73,7 @@ def drop(model, character, item):
     if(item in character.weapons):
         unwield(model, character, item, instant = True)
 
-    character.level.addItem(item, character.location)
+    character.level.add_item(item, character.location)
     character.inventory.remove(item)
     character.tick = time.get_new_tick(character, 1.5)
 
@@ -155,8 +155,8 @@ def is_dual_wieldable(model, character, item):
     assert character != None
     assert item != None
 
-    if item.weaponData != None:
-        if ('one-handed weapon' in item.weaponData.tags or 'light weapon' in item.weaponData.tags):
+    if item.weapon_data != None:
+        if ('one-handed weapon' in item.weapon_data.tags or 'light weapon' in item.weapon_data.tags):
             return 1
         else:
             return 0

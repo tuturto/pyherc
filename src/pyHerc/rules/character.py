@@ -88,7 +88,7 @@ def create_character(race, kit):
     new_character.int = temp_race['int'] + temp_kit['int']
     new_character.cha = temp_race['cha'] + temp_kit['cha']
     new_character.hp = temp_race['hp'] + temp_kit['hp']
-    new_character.maxHp = new_character.hp
+    new_character.max_hp = new_character.hp
     new_character.speed = temp_race['speed'] + temp_kit['speed']
     #TODO: implement properly
     new_character.size = 'medium'

@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+Main entry point for pyHerc - game
+'''
+
 import sys, getopt
 import pygame
 import logging
@@ -123,7 +127,7 @@ class Application:
         logger.info("Logging started")
 
 if __name__ == "__main__":
-    application = Application()
-    application.load_configuration(sys.argv[1:])
-    application.start_logging()
-    application.run()
+    APP = Application()
+    APP.load_configuration(sys.argv[1:])
+    APP.start_logging()
+    APP.run()

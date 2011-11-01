@@ -18,6 +18,12 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+#   explanation written by Björn Bergström of the FOV algorithm used here can be found from:
+#   http://roguebasin.roguelikedevelopment.org/index.php/FOV_using_recursive_shadowcasting
+#
+#   original implementation by Eric D. Burgess is from:
+#   http://roguebasin.roguelikedevelopment.org/index.php/Python_shadowcasting_implementation
+
 import pyHerc.data.tiles
 
 import logging

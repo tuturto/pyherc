@@ -18,18 +18,15 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+Simple AI for flocking creature
+
+Creature will try to find friends, before attacking the player character
+'''
+
 import math
 import pyHerc.rules.moving
 import pyHerc.rules.combat
-
-def proof_of_concept(self, model):
-    """
-    Proof of concept
-    This AI will just utter words "hello World"
-    Not to be used with the actual game
-    """
-    print('hello world')
-    self.tick = self.tick + 10
 
 def flocking_herbivore(self, model):
     """
@@ -41,13 +38,13 @@ def flocking_herbivore(self, model):
     closest_creature = None
 
     #TODO: handle memory
-    del self.shortTermMemory[:]
+    del self.short_term_memory[:]
 
     for creature in self.level.creatures:
         if creature != self:
-            x = abs(creature.location[0] - self.location[0])
-            y = abs(creature.location[1] - self.location[1])
-            distance = math.sqrt(x * x + y * y)
+            loc_x = abs(creature.location[0] - self.location[0])
+            loc_y = abs(creature.location[1] - self.location[1])
+            distance = math.sqrt(loc_x * loc_x + loc_y * loc_y)
             if shortest_distance != None:
                 if distance < shortest_distance:
                     shortest_distance = distance
@@ -59,9 +56,9 @@ def flocking_herbivore(self, model):
     if shortest_distance != None:
         if shortest_distance <= 2:
             #seek player instead
-            x = abs(model.player.location[0] - self.location[0])
-            y = abs(model.player.location[1] - self.location[1])
-            distance = math.sqrt(x * x + y * y)
+            loc_x = abs(model.player.location[0] - self.location[0])
+            loc_y = abs(model.player.location[1] - self.location[1])
+            distance = math.sqrt(loc_x * loc_x + loc_y * loc_y)
 
             if distance > 1:
                 direction = find_direction(self.location, model.player.location)

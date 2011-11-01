@@ -173,8 +173,8 @@ class test_meleeCombat(IntegrationTest):
         target.size = 'medium' # +0 bonus
         target.dex = 10 # no bonus
         target.hp = 10
-        level.addCreature(character, (10, 10))
-        level.addCreature(target, (11, 10))
+        level.add_creature(character, (10, 10))
+        level.add_creature(target, (11, 10))
 
         pyHerc.rules.combat.melee_attack(self.model, character, target, dice = [4, 19])
         assert(target.hp == 3) # 10 - 4 - 3 (hp - damage roll - str bonus)
@@ -193,8 +193,8 @@ class test_meleeCombat(IntegrationTest):
         target.hp = 5
 
         level = Level((20, 20), 0, 0)
-        level.addCreature(character)
-        level.addCreature(target)
+        level.add_creature(character)
+        level.add_creature(target)
 
         pyHerc.rules.combat.melee_attack(self.model, character, target, dice = [4, 19])
         assert(target.hp == -2) # 5 - 4 - 3 (hp - damage roll - str bonus)

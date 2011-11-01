@@ -28,12 +28,12 @@ class Item:
     def __init__(self):
         #attributes
         self.name = 'prototype'
-        self.questItem = 0
+        self.quest_item = 0
         #location
         self.location = ()
         #icon
         self.icon = None
-        self.weaponData = None
+        self.weapon_data = None
         self.effects = None
 
     def __str__(self):
@@ -49,8 +49,8 @@ class Item:
         assert character != None
 
         if hasattr(self, 'appearance'):
-            if self.name in character.itemMemory.keys():
-                name = character.itemMemory[self.name]
+            if self.name in character.item_memory.keys():
+                name = character.item_memory[self.name]
             else:
                 name = self.appearance
         else:

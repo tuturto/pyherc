@@ -37,10 +37,10 @@ class test_dungeon:
 
         stairs1 = Portal()
         stairs1.icon = tiles.portal_stairs_down
-        level1.addPortal(stairs1, (10, 10))
+        level1.add_portal(stairs1, (10, 10))
 
         stairs2 = Portal()
-        level2.addPortal(stairs2, (5, 5), stairs1)
+        level2.add_portal(stairs2, (5, 5), stairs1)
 
         assert(stairs1.level == level1)
         assert(stairs1.location == (10, 10))

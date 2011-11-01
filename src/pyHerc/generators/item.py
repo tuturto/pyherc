@@ -102,7 +102,7 @@ class ItemGenerator:
             newItem.icon = table['icon']
 
         if 'questItem' in table.keys():
-            newItem.questItem = table['questItem']
+            newItem.quest_item = table['questItem']
 
         newItem.cost = table['cost']
         newItem.weight = table['weight']
@@ -110,7 +110,7 @@ class ItemGenerator:
 
         #weapon related attributes
         if 'damage' in table.keys():
-            newItem.weaponData = WeaponData(
+            newItem.weapon_data = WeaponData(
                                     damage = table['damage'],
                                     critical_range = table['critical range'],
                                     critical_damage = table['critical damage'],

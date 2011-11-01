@@ -18,4 +18,8 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+pyHerc is a rogue clone
+'''
+
 pass

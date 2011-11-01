@@ -80,6 +80,6 @@ def check_dying(model, character, deathParams):
         model.raise_event(event)
         #TODO: implement leaving corpse
         if character != model.player:
-            character.level.removeCreature(character)
+            character.level.remove_creature(character)
         else:
-            model.endCondition = 1
+            model.end_condition = 1

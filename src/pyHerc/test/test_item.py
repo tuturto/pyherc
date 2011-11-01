@@ -55,7 +55,7 @@ class test_item_with_generator(IntegrationTest):
         self.character.speed = 1
         self.character.tick = 1
 
-        self.level.addItem(self.item, (5, 5))
+        self.level.add_item(self.item, (5, 5))
 
         self.dungeon = pyHerc.data.dungeon.Dungeon()
         self.dungeon.levels = self.level
@@ -71,7 +71,7 @@ class test_item_with_generator(IntegrationTest):
                                                 'name': 'crystal skull'})
 
         assert(self.item.name == 'crystal skull')
-        assert(self.item.questItem == 1)
+        assert(self.item.quest_item == 1)
         assert(self.item.icon == pyHerc.data.tiles.item_crystal_skull)
 
     def test_create_weapon(self):
@@ -84,15 +84,15 @@ class test_item_with_generator(IntegrationTest):
         assert(item != None)
         assert(item.name == 'dagger')
         assert(item.cost == 2)
-        assert(item.weaponData.damage == '1d4')
-        assert(item.weaponData.critical_range == 19)
-        assert(item.weaponData.critical_damage == 2)
+        assert(item.weapon_data.damage == '1d4')
+        assert(item.weapon_data.critical_range == 19)
+        assert(item.weapon_data.critical_damage == 2)
         assert(item.weight == 1)
-        assert('piercing' in item.weaponData.damage_type)
-        assert('slashing' in item.weaponData.damage_type)
-        assert(item.weaponData.weapon_type == 'simple')
-        assert('weapon' in item.weaponData.tags)
-        assert('simple weapon' in item.weaponData.tags)
+        assert('piercing' in item.weapon_data.damage_type)
+        assert('slashing' in item.weapon_data.damage_type)
+        assert(item.weapon_data.weapon_type == 'simple')
+        assert('weapon' in item.weapon_data.tags)
+        assert('simple weapon' in item.weapon_data.tags)
         assert(item.rarity == 32)
 
     def test_wield_weapon(self):
@@ -218,7 +218,7 @@ class test_ItemsInLevel:
         self.character.speed = 1
         self.character.tick = 1
 
-        self.level.addItem(self.item, (5, 5))
+        self.level.add_item(self.item, (5, 5))
 
         self.dungeon = pyHerc.data.dungeon.Dungeon()
         self.dungeon.levels = self.level
@@ -298,21 +298,21 @@ class test_ItemsInLevel:
         item.name = 'apple'
         item.location = ()
         item.icon = None
-        self.level.addItem(item, (5, 5))
+        self.level.add_item(item, (5, 5))
 
         item = Item()
         item.name = 'kiwi'
         item.location = ()
         item.icon = None
-        self.level.addItem(item, (3, 3))
+        self.level.add_item(item, (3, 3))
 
-        items = self.level.getItemsAt((5, 5))
+        items = self.level.get_items_at((5, 5))
         assert(len(items) == 2)
 
-        items = self.level.getItemsAt((3, 3))
+        items = self.level.get_items_at((3, 3))
         assert(len(items) == 1)
 
-        items = self.level.getItemsAt((12, 0))
+        items = self.level.get_items_at((12, 0))
         assert(len(items) == 0)
 
 class test_ItemAdvanced():
@@ -341,7 +341,7 @@ class test_ItemAdvanced():
         """
         item = Item()
         character = pyHerc.data.model.Character()
-        character.itemMemory['healing potion'] = 'doozer potion'
+        character.item_memory['healing potion'] = 'doozer potion'
 
         item.name = 'healing potion'
         item.appearance = 'blue potion'

@@ -250,7 +250,7 @@ class GameWindow:
                 if event.type == pygame.KEYDOWN:
                     if event.key == K_ESCAPE:
                         #quit
-                        self.application.world.endCondition = 1
+                        self.application.world.end_condition = 1
                     elif event.key in self.moveKeyMap.keys():
                         player.level.full_update_needed = True
                         #handle moving
@@ -262,12 +262,12 @@ class GameWindow:
                         else:
                             targetLocation = pyHerc.rules.moving.calculate_new_location(model, player, direction)
                             if 'location' in targetLocation.keys():
-                                target = player.level.getCreatureAt(targetLocation['location'])
+                                target = player.level.get_creature_at(targetLocation['location'])
                                 if target != None:
                                     pyHerc.rules.combat.melee_attack(model, player, target)
                     elif event.key == K_PERIOD:
                         #pick up items
-                        items = player.level.getItemsAt(player.location)
+                        items = player.level.get_items_at(player.location)
                         if len(items) > 1:
                             dialog = dialogs.Inventory(self.application, self.screen)
                             items = dialog.show(items)
@@ -312,7 +312,7 @@ class GameWindow:
 
     def mainLoop(self):
         self.logger.debug('main loop starting')
-        while self.application.world.endCondition == 0 and self.application.running:
+        while self.application.world.end_condition == 0 and self.application.running:
 
             model = self.application.world
 
@@ -340,7 +340,7 @@ class GameWindow:
 
     def getNewEvents(self):
         #get interesting events from player memory to event history
-        for event in self.application.world.player.shortTermMemory:
+        for event in self.application.world.player.short_term_memory:
             if event['type'] == 'melee':
                 newLine = event['attacker'].name + ' attacks'
                 if event['hit'] == 0:
@@ -373,7 +373,7 @@ class GameWindow:
                 newLine = event['character'].name + ' feels worse'
                 self.eventHistory.append(newLine)
         #clear short term memory
-        del self.application.world.player.shortTermMemory[:]
+        del self.application.world.player.short_term_memory[:]
 
     def formatEventHistory(self):
         """

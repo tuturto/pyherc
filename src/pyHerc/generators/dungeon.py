@@ -55,7 +55,7 @@ class DungeonGenerator:
         location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
         while level.walls[location[0]][location[1]] != tiles.wall_empty:
             location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-        level.addPortal(escapePortal, location)
+        level.add_portal(escapePortal, location)
 
         model.player.location = location
 
@@ -185,37 +185,37 @@ class CatacombsLevelGenerator:
         for i in range(0, 10):
             if level == 1:
                 tempCreature = self.creatureGenerator.generateCreature(model.tables, {'name':'rat'})
-                tempLevel.addCreature(tempCreature, tempLevel.findFreeSpace())
+                tempLevel.add_creature(tempCreature, tempLevel.find_free_space())
             else:
                 tempCreature = self.creatureGenerator.generateCreature(model.tables, {'name':'fire beetle'})
-                tempLevel.addCreature(tempCreature, tempLevel.findFreeSpace())
+                tempLevel.add_creature(tempCreature, tempLevel.find_free_space())
 
         #throw bunch of food items around
         for i in range(0, 10):
             tempItem = self.itemGenerator.generateItem(model.tables, {'type':'food'})
-            tempItem.location = tempLevel.findFreeSpace()
+            tempItem.location = tempLevel.find_free_space()
             tempLevel.items.append(tempItem)
 
         for i in range(0, 3):
             tempItem = self.itemGenerator.generateItem(model.tables, {'type':'potion'})
-            tempItem.location = tempLevel.findFreeSpace()
+            tempItem.location = tempLevel.find_free_space()
             tempLevel.items.append(tempItem)
 
         #throw bunch of weapons around
         for i in range(0, 10):
             tempItem = self.itemGenerator.generateItem(model.tables, {'type':'weapon'})
-            tempItem.location = tempLevel.findFreeSpace()
+            tempItem.location = tempLevel.find_free_space()
             tempLevel.items.append(tempItem)
 
         if portal != None:
             newPortal = Portal()
-            tempLevel.addPortal(newPortal, tempLevel.findFreeSpace(), portal)
+            tempLevel.add_portal(newPortal, tempLevel.find_free_space(), portal)
 
         if newPortals > 0:
             for i in range(0, newPortals):
                 newPortal = Portal()
                 newPortal.icon = tiles.portal_stairs_down
-                tempLevel.addPortal(newPortal, tempLevel.findFreeSpace())
+                tempLevel.add_portal(newPortal, tempLevel.find_free_space())
 
         # generate next level
         for portal in tempLevel.portals:
@@ -270,7 +270,7 @@ class TestLevelGenerator:
             for i in range(0, 5):
                 #TODO: better placement algorithm
                 tempCreature = self.creatureGenerator.generateCreature(model.tables.creatures, {'name':'rat'})
-                tempLevel.addCreature(tempCreature, (random.randint(2, 20), random.randint(2, 20)))
+                tempLevel.add_creature(tempCreature, (random.randint(2, 20), random.randint(2, 20)))
         else:
             #TODO: spread given monsters around
             pass
@@ -278,12 +278,12 @@ class TestLevelGenerator:
         #set portals
         if portal != None:
             newPortal = pyHerc.data.dungeon.Portal()
-            tempLevel.addPortal(newPortal, (random.randint(2, 20), random.randint(2, 20)), portal)
+            tempLevel.add_portal(newPortal, (random.randint(2, 20), random.randint(2, 20)), portal)
 
         if newPortals > 0:
             for i in range(0, newPortals):
                 newPortal = pyHerc.data.dungeon.Portal()
                 newPortal.icon = pyHerc.data.tiles.portal_stairs_down
-                tempLevel.addPortal(newPortal, (random.randint(2, 20), random.randint(2, 20)))
+                tempLevel.add_portal(newPortal, (random.randint(2, 20), random.randint(2, 20)))
 
         return tempLevel

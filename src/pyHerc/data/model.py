@@ -31,7 +31,7 @@ class Model:
         self.player = None
         self.config = None
         self.tables = None
-        self.endCondition = 0
+        self.end_condition = 0
 
         self.logger.info('loading config')
         self.load_config()
@@ -75,7 +75,7 @@ class Character:
         self.race = None
         self.kit = None
         self.hp = None
-        self.maxHp = None
+        self.max_hp = None
         self.speed = None
         self.inventory = []
         self.weapons = []
@@ -87,8 +87,8 @@ class Character:
         self.icon = None
         #internal
         self.tick = 0
-        self.shortTermMemory = []
-        self.itemMemory = {}
+        self.short_term_memory = []
+        self.item_memory = {}
 
     def __str__(self):
         return self.name
@@ -97,13 +97,13 @@ class Character:
         """
         Receives an event from world and enters it into short term memory
         """
-        self.shortTermMemory.append(event)
+        self.short_term_memory.append(event)
 
     def get_max_HP(self):
         """
         Get maximum HP this character can currently have
         """
-        return self.maxHp
+        return self.max_hp
 
     def identify_item(self, item):
         """
@@ -111,7 +111,7 @@ class Character:
         @param item: item to mark as identified
         """
         assert (item != None)
-        self.itemMemory[item.name] = item.name
+        self.item_memory[item.name] = item.name
 
     def is_proficient(self, weapon):
         '''
@@ -121,13 +121,13 @@ class Character:
         '''
         assert weapon != None
 
-        if weapon.weaponData == None:
+        if weapon.weapon_data == None:
             return True
 
         check_proficiency = lambda x: ((x.name == 'weapon proficiency'
-                                   and x.weapon_type == weapon.weaponData.weapon_type)
+                                   and x.weapon_type == weapon.weapon_data.weapon_type)
                                    and (x.weapon_name == None
-                                        or x.weapon_name == weapon.weaponData.name))
+                                        or x.weapon_name == weapon.weapon_data.name))
 
         if True in map(check_proficiency, self.feats):
             return True

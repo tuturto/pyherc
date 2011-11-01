@@ -113,8 +113,8 @@ def get_damage_in_melee(model, attacker, target, dice = []):
 
     if len(attacker.weapons) > 0:
         #use weapon in close combat attack
-        if attacker.weapons[0].weaponData != None:
-            attackDice = attacker.weapons[0].weaponData.damage
+        if attacker.weapons[0].weapon_data != None:
+            attackDice = attacker.weapons[0].weapon_data.damage
         else:
             #mundane items do 1 point of damage + bonuses
             attackDice = '1d1'
@@ -130,15 +130,15 @@ def get_damage_in_melee(model, attacker, target, dice = []):
 
     if len(attacker.weapons) > 0:
         weapon = attacker.weapons[0]
-        if weapon.weaponData != None:
-            if 'light weapon' in weapon.weaponData.tags:
+        if weapon.weapon_data != None:
+            if 'light weapon' in weapon.weapon_data.tags:
                 #light weapons get only 1 * str bonus when wielded two-handed
                 damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str')
-                damage.type = weapon.weaponData.damage_type
+                damage.type = weapon.weapon_data.damage_type
             else:
                 #all other melee weapons get 1.5 * str bonus when wielded two-handed
                 damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str') * 1.5
-                damage.type = weapon.weaponData.damage_type
+                damage.type = weapon.weapon_data.damage_type
         else:
             #character is using a mundane item as a weapon
             damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str')
