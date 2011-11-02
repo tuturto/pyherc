@@ -79,7 +79,7 @@ def check_move(model, character, direction):
         newLevel = locationData['level']
 
         if newLevel != None:
-            if newLevel.walls[newLocation[0]][newLocation[1]] == pyHerc.data.tiles.wall_empty:
+            if newLevel.walls[newLocation[0]][newLocation[1]] == pyHerc.data.tiles.WALL_EMPTY:
                 #check for other creatures and such
                 locationData['ok'] = 1
                 creatures = newLevel.creatures[:]
@@ -137,15 +137,15 @@ def calculate_new_location(model, character, direction):
     elif direction == 9:
         portal = newLevel.get_portal_at(location)
         if portal != None:
-            if portal.getOtherEnd() != None:
-                newLevel = portal.getOtherEnd().level
-                newLocation = portal.getOtherEnd().location
+            if portal.get_other_end() != None:
+                newLevel = portal.get_other_end().level
+                newLocation = portal.get_other_end().location
             else:
                 #proxy
-                if portal.levelGenerator != None:
-                    portal.generateLevel(model)
-                    newLevel = portal.getOtherEnd().level
-                    newLocation = portal.getOtherEnd().location
+                if portal.level_generator != None:
+                    portal.generate_level(model)
+                    newLevel = portal.get_other_end().level
+                    newLocation = portal.get_other_end().location
                 else:
                     #escaping perhaps?
                     newLevel = None

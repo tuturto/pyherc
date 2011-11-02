@@ -206,7 +206,7 @@ class StartNewGameWindow:
         self.character = pyHerc.rules.character.create_character('human', 'fighter')
         self.application.world.player = self.character
         generator = pyHerc.generators.dungeon.DungeonGenerator()
-        generator.generateDungeon(self.application.world)
+        generator.generate_dungeon(self.application.world)
         self.character.level = self.application.world.dungeon.levels
         # self.character.location = (1, 1)
         self.character.name = 'Adventurer'
@@ -410,15 +410,15 @@ class GameWindow:
                 if x >= 0 and y >= 0 and x <= len(level.floor)-1 and y <= len(level.floor[x])-1:
                     tile = surfaceManager.getIcon(level.floor[x][y])
                     self.screen.blit(tile, (sx * 32, sy * 32))
-                    if not level.walls[x][y] == pyHerc.data.tiles.wall_empty:
+                    if not level.walls[x][y] == pyHerc.data.tiles.WALL_EMPTY:
                         tile = surfaceManager.getIcon(level.walls[x][y])
                         self.screen.blit(tile, (sx * 32, sy * 32))
                     if light_matrix[x][y] == False:
-                        tile = surfaceManager.getIcon(pyHerc.data.tiles.floor_empty)
+                        tile = surfaceManager.getIcon(pyHerc.data.tiles.FLOOR_EMPTY)
                         self.screen.blit(tile, (sx * 32, sy * 32))
                 else:
                     #draw empty
-                    tile = surfaceManager.getIcon(pyHerc.data.tiles.floor_empty)
+                    tile = surfaceManager.getIcon(pyHerc.data.tiles.FLOOR_EMPTY)
                     self.screen.blit(tile, (sx * 32, sy * 32))
                 sx = sx + 1
             sy = sy + 1

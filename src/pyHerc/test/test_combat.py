@@ -65,7 +65,7 @@ class test_meleeCombat(IntegrationTest):
 
         damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [5])
         assert(damage.amount == 8)
-        assert(damage.magicBonus == 0)
+        assert(damage.magic_bonus == 0)
 
     def test_get_damage_in_melee_negative_damage(self):
         character = pyHerc.data.model.Character()
@@ -79,7 +79,7 @@ class test_meleeCombat(IntegrationTest):
 
         damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [3])
         assert(damage.amount == 1)
-        assert(damage.magicBonus == 0)
+        assert(damage.magic_bonus == 0)
 
     def test_get_damage_in_melee_wield_weapon_with_two_hands(self):
         """
@@ -121,7 +121,7 @@ class test_meleeCombat(IntegrationTest):
 
         damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [6])
         assert(damage.amount == 9) # 1d6 from weapon + 3 from str
-        assert('slashing' in damage.type)
+        assert('slashing' in damage.damage_type)
 
     def test_get_damage_in_melee_mundane_item(self):
         """
@@ -143,7 +143,7 @@ class test_meleeCombat(IntegrationTest):
 
         damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target)
         assert(damage.amount == 4) # 1 from apple, +3 strength bonus
-        assert('bludgeoning' in damage.type)
+        assert('bludgeoning' in damage.damage_type)
 
     def test_get_damage_in_melee_no_prerolls(self):
         """

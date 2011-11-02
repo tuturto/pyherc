@@ -18,6 +18,15 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+Module containing classes to represent dungeon
+
+Classes:
+    Level
+    Dungeon
+    Portal
+'''
+
 import random
 import logging
 import pyHerc.data.tiles
@@ -62,12 +71,12 @@ class Level:
         @param loc_y: y-coordinate of the location
         '''
         if loc_x < 0 or loc_y < 0:
-            return pyHerc.data.tiles.floor_empty
+            return pyHerc.data.tiles.FLOOR_EMPTY
 
         if loc_x > len(self.floor) or loc_y > len(self.floor[0]):
-            return pyHerc.data.tiles.floor_empty
+            return pyHerc.data.tiles.FLOOR_EMPTY
 
-        if self.walls[loc_x][loc_y] != pyHerc.data.tiles.wall_empty:
+        if self.walls[loc_x][loc_y] != pyHerc.data.tiles.WALL_EMPTY:
             return self.walls[loc_x][loc_y]
         else:
             return self.floor[loc_x][loc_y]
@@ -79,10 +88,10 @@ class Level:
         @param loc_y: y-coordinate of the location
         '''
         if loc_x < 0 or loc_y < 0:
-            return pyHerc.data.tiles.wall_ground
+            return pyHerc.data.tiles.WALL_GROUND
 
         if loc_x > len(self.floor) or loc_y > len(self.floor[0]):
-            return pyHerc.data.tiles.wall_ground
+            return pyHerc.data.tiles.WALL_GROUND
 
         return self.walls[loc_x][loc_y]
 
@@ -112,13 +121,13 @@ class Level:
                 items.append(item)
         return items
 
-    def add_portal(self, portal, location, otherEnd = None):
+    def add_portal(self, portal, location, other_end = None):
         """
         Adds precreated portal on level at given location
         If secondary portal is specified, link them together
         @param portal: portal to add
         @param location: location where to add portal
-        @param otherEnd: optional other end of the portal
+        @param other_end: optional other end of the portal
         """
         assert(portal != None)
         assert(location != None)
@@ -129,22 +138,22 @@ class Level:
         portal.location = location
         self.portals.append(portal)
 
-        if otherEnd != None:
-            assert(otherEnd.icon != None or portal.icon != None)
+        if other_end != None:
+            assert(other_end.icon != None or portal.icon != None)
 
-            portal.setOtherEnd (otherEnd)
-            otherEnd.setOtherEnd(portal)
+            portal.set_other_end (other_end)
+            other_end.set_other_end(portal)
             if portal.icon != None:
-                if otherEnd.icon == None:
-                    if portal.icon == pyHerc.data.tiles.portal_stairs_down:
-                        otherEnd.icon = pyHerc.data.tiles.portal_stairs_up
+                if other_end.icon == None:
+                    if portal.icon == pyHerc.data.tiles.PORTAL_STAIRS_DOWN:
+                        other_end.icon = pyHerc.data.tiles.PORTAL_STAIRS_UP
                     else:
-                        otherEnd.icon = pyHerc.data.tiles.portal_stairs_down
+                        other_end.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN
             else:
-                if otherEnd.icon == pyHerc.data.tiles.portal_stairs_down:
-                    portal.icon = pyHerc.data.tiles.portal_stairs_up
+                if other_end.icon == pyHerc.data.tiles.PORTAL_STAIRS_DOWN:
+                    portal.icon = pyHerc.data.tiles.PORTAL_STAIRS_UP
                 else:
-                    portal.icon = pyHerc.data.tiles.portal_stairs_down
+                    portal.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN
 
     def get_portal_at(self, location):
         """
@@ -209,7 +218,7 @@ class Level:
         x = len(self.floor)
         y = len(self.floor[0])
         location = (random.randint(2, x - 1), random.randint(2, y - 1))
-        while self.walls[location[0]][location[1]] != pyHerc.data.tiles.wall_empty:
+        while self.walls[location[0]][location[1]] != pyHerc.data.tiles.WALL_EMPTY:
             location = (random.randint(2, x - 1), random.randint(2, y - 1))
         return location
 
@@ -217,7 +226,7 @@ class Level:
         '''
         Get square at given coordinates
         '''
-        if self.walls[x_coordinate][y_coordinate] != pyHerc.data.tiles.wall_empty:
+        if self.walls[x_coordinate][y_coordinate] != pyHerc.data.tiles.WALL_EMPTY:
             return self.walls[x_coordinate][y_coordinate]
         else:
             return self.floor[x_coordinate][y_coordinate]
@@ -227,7 +236,7 @@ class Level:
         Checks if there's LOS-blocking wall at given coordinates
         '''
 
-        if walls[x_coordinate][y_coordinate] != pyHerc.data.tiles.wall_empty:
+        if self.walls[x_coordinate][y_coordinate] != pyHerc.data.tiles.WALL_EMPTY:
             return False
         else:
             return True
@@ -250,26 +259,33 @@ class Portal:
         self.level = None
         self.location = ()
         self.icon = None
-        self.__otherEnd = None
-        self.questEnd = 0
-        self.levelGenerator = None
+        self.other_end = None
+        self.quest_end = 0
+        self.level_generator = None
         self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')
 
-    def getOtherEnd(self):
-        return self.__otherEnd
+    def get_other_end(self):
+        '''
+        Returns the other end of the portal
+        '''
+        return self.other_end
 
-    def setOtherEnd(self, portal):
-        self.__otherEnd = portal
+    def set_other_end(self, portal):
+        '''
+        Set the other end of the portal
+        @param portal: portal where this one leads
+        '''
+        self.other_end = portal
 
-    def generateLevel(self, model):
+    def generate_level(self, model):
         '''
         Generates level if this is a proxy portal
         '''
-        assert self.levelGenerator != None
+        assert self.level_generator != None
         self.logger.debug('generating a new level')
 
         #TODO: support for level generation parameters
-        newLevel = self.levelGenerator.generateLevel(self,
+        new_level = self.level_generator.generate_level(self,
                                                      model,
-                                                     monsterList = [])
+                                                     monster_list = [])
 

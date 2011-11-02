@@ -44,8 +44,8 @@ class test_item_with_generator(IntegrationTest):
         self.item.location = ()
         self.item.icon = None
 
-        self.level = pyHerc.data.dungeon.Level([20, 20], pyHerc.data.tiles.floor_rock,
-                                                    pyHerc.data.tiles.wall_empty)
+        self.level = pyHerc.data.dungeon.Level([20, 20], pyHerc.data.tiles.FLOOR_ROCK,
+                                                    pyHerc.data.tiles.WALL_EMPTY)
 
         self.character = pyHerc.data.model.Character()
 
@@ -207,8 +207,8 @@ class test_ItemsInLevel:
         self.item.location = ()
         self.item.icon = None
 
-        self.level = pyHerc.data.dungeon.Level([20, 20], pyHerc.data.tiles.floor_rock,
-                                                    pyHerc.data.tiles.wall_empty)
+        self.level = pyHerc.data.dungeon.Level([20, 20], pyHerc.data.tiles.FLOOR_ROCK,
+                                                    pyHerc.data.tiles.WALL_EMPTY)
 
         self.character = pyHerc.data.model.Character()
 

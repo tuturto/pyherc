@@ -37,10 +37,10 @@ class test_moving(IntegrationTest):
         levelGenerator = TestLevelGenerator()
 
         self.model.dungeon = Dungeon()
-        self.level1 = levelGenerator.generateLevel(None, self.model, monsterList = [])
-        self.level2 = levelGenerator.generateLevel(None, self.model, monsterList = [])
+        self.level1 = levelGenerator.generate_level(None, self.model, monster_list = [])
+        self.level2 = levelGenerator.generate_level(None, self.model, monster_list = [])
         self.portal1 = Portal()
-        self.portal1.icon = pyHerc.data.tiles.portal_stairs_down
+        self.portal1.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN
         self.portal2 = Portal()
 
         self.level1.add_portal(self.portal1, (5, 5))
@@ -101,8 +101,8 @@ class test_moving(IntegrationTest):
         """
         self.character.location = (8, 8)
         proxy = Portal()
-        proxy.levelGenerator = TestLevelGenerator()
-        proxy.icon = pyHerc.data.tiles.portal_stairs_down
+        proxy.level_generator = TestLevelGenerator()
+        proxy.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN
 
         self.level1.add_portal(proxy, (8, 8))
         pyHerc.rules.moving.move(self.model, self.character, 9)

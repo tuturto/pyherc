@@ -18,6 +18,13 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+Module for creature generation related classes
+
+Classes:
+    CreatureGenerator
+'''
+
 import types
 import logging
 import random
@@ -31,9 +38,10 @@ class CreatureGenerator:
     """
 
     def __init__(self):
-        self.logger = logging.getLogger('pyHerc.generators.creature.CreatureGenerator')
+        self.logger = logging.getLogger(
+                            'pyHerc.generators.creature.CreatureGenerator')
 
-    def generateCreature(self, tables, parameters):
+    def generate_creature(self, tables, parameters):
         """
         Generates a creature
         @param tables: tables used in generation
@@ -43,23 +51,24 @@ class CreatureGenerator:
         self.logger.debug(parameters)
         assert(tables != None)
 
-        newCreature = None
+        new_creature = None
         if not parameters == None:
             if 'name' in parameters.keys():
                 table = tables.creatures[parameters['name']]
-                newCreature = self.__generateCreatureFromTable(table)
+                new_creature = self.generate_creature_from_table(table)
         else:
             #generate completely random creature
             pass
 
-        if newCreature == None:
+        if new_creature == None:
             self.logger.warn('no creature generated')
         else:
-            self.logger.debug('new creature generated: ' + newCreature.__str__())
+            self.logger.debug('new creature generated: '
+                              + new_creature.__str__())
 
-        return newCreature
+        return new_creature
 
-    def __generateCreatureFromTable(self, table):
+    def generate_creature_from_table(self, table):
         """
         Take table entry and generate corresponding creature
         """
@@ -78,7 +87,8 @@ class CreatureGenerator:
         newCreature.size = table['size']
         newCreature.attack = table['attack']
         #TODO: AI from tables
-        newCreature.act = types.MethodType(pyHerc.ai.simple.flocking_herbivore, newCreature, pyHerc.data.model.Character)
+        newCreature.act = types.MethodType(pyHerc.ai.simple.flocking_herbivore,
+                                           newCreature, pyHerc.data.model.Character)
 
 
         if hasattr(table['icon'], 'append'):

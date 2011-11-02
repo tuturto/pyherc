@@ -36,7 +36,7 @@ class test_CreatureWithGenerator(IntegrationTest):
         """
         Test that generating a rat is possible
         """
-        creature = self.creatureGenerator.generateCreature(self.tables, {
+        creature = self.creatureGenerator.generate_creature(self.tables, {
                                                 'name': 'rat'})
 
         assert(creature.name == 'rat')

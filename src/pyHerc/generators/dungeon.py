@@ -18,6 +18,15 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+Module for dungeon generation related classes
+
+Classes:
+    DungeonGenerator
+    CatacombsLevelGenerator
+    TestLevelGenerator
+'''
+
 import logging
 import random
 import pyHerc.generators.item
@@ -36,26 +45,28 @@ class DungeonGenerator:
     def __init__(self):
         self.logger = logging.getLogger('pyHerc.generators.dungeon.DungeonGenerator')
 
-    def generateDungeon(self, model):
+    def generate_dungeon(self, model):
         """
         Generates start of the dungeon
         """
         self.logger.info('generating the dungeon')
         model.dungeon = Dungeon()
         generator = CatacombsLevelGenerator()
-        level = generator.generateLevel(None, model, 2)
+        level = generator.generate_level(None, model, 2)
 
         model.dungeon.levels = level
 
-        escapePortal = Portal()
-        escapePortal.icon = pyHerc.data.tiles.portal_stairs_up
-        escapePortal.setOtherEnd(None)
+        escape_portal = Portal()
+        escape_portal.icon = pyHerc.data.tiles.PORTAL_STAIRS_UP
+        escape_portal.set_other_end(None)
 
-        levelSize = model.config['level']['size']
-        location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-        while level.walls[location[0]][location[1]] != tiles.wall_empty:
-            location = (random.randint(2, levelSize[0]-1), random.randint(2, levelSize[1]-1))
-        level.add_portal(escapePortal, location)
+        level_size = model.config['level']['size']
+        location = (random.randint(2, level_size[0]-1),
+                                        random.randint(2, level_size[1]-1))
+        while level.walls[location[0]][location[1]] != tiles.WALL_EMPTY:
+            location = (random.randint(2, level_size[0]-1),
+                                        random.randint(2, level_size[1]-1))
+        level.add_portal(escape_portal, location)
 
         model.player.location = location
 
@@ -66,168 +77,189 @@ class CatacombsLevelGenerator:
 
     def __init__(self):
         self.logger = logging.getLogger('pyHerc.generators.dungeon.CatacombsLevelGenerator')
-        self.itemGenerator = pyHerc.generators.item.ItemGenerator()
-        self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator()
+        self.item_generator = pyHerc.generators.item.ItemGenerator()
+        self.creature_generator = pyHerc.generators.creature.CreatureGenerator()
 
-    def generateLevel(self, portal, model, newPortals = 0, level=1, roomMinSize = (2, 2)):
+    def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):
         """
         Generate level that starts from given stairs
         @param portal: link new level to this portal
         @param model: model being used
-        @param newPortals: amount of portals to generate, default 0
+        @param new_portals: amount of portals to generate, default 0
         @param level: changes behaviour of the generator
-        @param roomMinSize: minimum size for rooms
+        @param room_min_size: minimum size for rooms
         """
         self.logger.debug('generating level: ' + level.__str__())
-        levelSize = model.config['level']['size']
+        level_size = model.config['level']['size']
         self.logger.debug('dividing level in sections')
         BSPStack = []
-        BSP = pyHerc.generators.utils.BSPSection((0, 0), (levelSize[0] - 2, levelSize[1] - 2), None)
+        BSP = pyHerc.generators.utils.BSPSection((0, 0), (level_size[0] - 2, level_size[1] - 2), None)
         BSPStack.append(BSP)
-        roomStack = []
+        room_stack = []
 
-        tempLevel = Level(levelSize, tiles.floor_rock, tiles.wall_ground)
+        temp_level = Level(level_size, tiles.FLOOR_ROCK, tiles.WALL_GROUND)
         #TODO: split into smaller chuncks
         while len(BSPStack) > 0:
             tempBSP = BSPStack.pop()
-            tempBSP.split(minSize = (roomMinSize[0] + 4, roomMinSize[1] + 4))
+            tempBSP.split(minSize = (room_min_size[0] + 4, room_min_size[1] + 4))
             if tempBSP.node1 != None:
                 BSPStack.append(tempBSP.node1)
             if tempBSP.node2 != None:
                 BSPStack.append(tempBSP.node2)
             if tempBSP.node1 == None and tempBSP.node2 == None:
                 #leaf
-                roomStack.append(tempBSP)
+                room_stack.append(tempBSP)
 
         self.logger.debug('carving rooms')
-        for room in roomStack:
-            corner1 = (room.corner1[0] + random.randint(1, 4), room.corner1[1] + random.randint(1, 4))
-            corner2 = (room.corner2[0] - random.randint(1, 4), room.corner2[1] - random.randint(1, 4))
-            self.logger.debug('carving room ' + corner1.__str__() + ':' + corner2.__str__())
+        for room in room_stack:
+            corner1 = (room.corner1[0] + random.randint(1, 4),
+                       room.corner1[1] + random.randint(1, 4))
+            corner2 = (room.corner2[0] - random.randint(1, 4),
+                       room.corner2[1] - random.randint(1, 4))
+            self.logger.debug('carving room ' +
+                              corner1.__str__() + ':' +
+                              corner2.__str__())
             for y in range(corner1[1], corner2[1] + 1):
                 for x in range(corner1[0], corner2[0] + 1):
-                    tempLevel.walls[x][y] = tiles.wall_empty
+                    temp_level.walls[x][y] = tiles.WALL_EMPTY
 
         self.logger.debug('carving tunnels')
 
-        areaQueue = BSP.getAreaQueue()
-        areaQueue.reverse()
+        area_queue = BSP.getAreaQueue()
+        area_queue.reverse()
 
-        while len(areaQueue) > 1:
-            area1 = areaQueue.pop()
-            area2 = areaQueue.pop()
+        while len(area_queue) > 1:
+            area1 = area_queue.pop()
+            area2 = area_queue.pop()
             center1 = area1.getCenter()
             center2 = area2.getCenter()
-            self.logger.debug('carving tunnel between areas ' + area1.__str__() + ' and ' +
-                                        area2.__str__())
-            self.logger.debug('using center points ' + center1.__str__() + ' and ' +
-                                        center2.__str__())
+            self.logger.debug('carving tunnel between areas '
+                              + area1.__str__() + ' and '
+                              + area2.__str__())
+            self.logger.debug('using center points '
+                              + center1.__str__() + ' and '
+                              + center2.__str__())
             #connect these two areas
             if area1.direction == 1:
                 #areas on top of each other
                 if center1[1] < center2[1]:
-                    self.logger.debug('tunneling top down ' + center1[0].__str__() + ':' +
-                                                range(center1[1], center2[1]).__str__())
+                    self.logger.debug('tunneling top down ' +
+                                    center1[0].__str__() + ':' +
+                                    range(center1[1], center2[1]).__str__())
                     for y in range(center1[1], center2[1] + 1):
-                        tempLevel.walls[center1[0]][y] = tiles.wall_empty
+                        temp_level.walls[center1[0]][y] = tiles.WALL_EMPTY
                 else:
-                    self.logger.debug('tunneling top down ' + center1[0].__str__() + ':' +
-                                                range(center2[1], center1[1]).__str__())
+                    self.logger.debug('tunneling top down ' +
+                                    center1[0].__str__() + ':' +
+                                    range(center2[1], center1[1]).__str__())
                     for y in range(center2[1], center1[1] + 1):
-                        tempLevel.walls[center1[0]][y] = tiles.wall_empty
+                        temp_level.walls[center1[0]][y] = tiles.WALL_EMPTY
             else:
                 #areas next to each other
                 if center1[0] < center2[0]:
-                    self.logger.debug('tunneling sideways ' + range(center1[0], center2[0]).__str__() +
-                                                ':' + center1[1].__str__())
+                    self.logger.debug('tunneling sideways ' +
+                                    range(center1[0], center2[0]).__str__() +
+                                    ':' + center1[1].__str__())
                     for x in range(center1[0], center2[0] + 1):
-                        tempLevel.walls[x][center1[1]] = tiles.wall_empty
+                        temp_level.walls[x][center1[1]] = tiles.WALL_EMPTY
                 else:
-                    self.logger.debug('tunneling sideways ' + range(center2[0], center1[0]).__str__() +
-                                                ':' + center1[1].__str__())
+                    self.logger.debug('tunneling sideways ' +
+                                      range(center2[0], center1[0]).__str__()
+                                      + ':' + center1[1].__str__())
                     for x in range(center2[0], center1[0] + 1):
-                        tempLevel.walls[x][center1[1]] = tiles.wall_empty
+                        temp_level.walls[x][center1[1]] = tiles.WALL_EMPTY
 
         #decorate dungeon a bit
-        tempWalls = []
-        for x in range(0, levelSize[0] + 1):
-            for y in range(0, levelSize[1] + 1):
-                if tempLevel.walls[x][y] != tiles.wall_empty:
+        temp_walls = []
+        for x in range(0, level_size[0] + 1):
+            for y in range(0, level_size[1] + 1):
+                if temp_level.walls[x][y] != tiles.WALL_EMPTY:
                     if y > 1:
-                        tempWalls.append(tempLevel.walls[x][y-1])
+                        temp_walls.append(temp_level.walls[x][y-1])
                         if x > 1:
-                            tempWalls.append(tempLevel.walls[x-1][y-1])
-                        if x < levelSize[0]:
-                            tempWalls.append(tempLevel.walls[x+1][y-1])
-                    if y < levelSize[1]:
-                        tempWalls.append(tempLevel.walls[x][y+1])
+                            temp_walls.append(temp_level.walls[x-1][y-1])
+                        if x < level_size[0]:
+                            temp_walls.append(temp_level.walls[x+1][y-1])
+                    if y < level_size[1]:
+                        temp_walls.append(temp_level.walls[x][y+1])
                         if x > 1:
-                            tempWalls.append(tempLevel.walls[x-1][y+1])
-                        if x < levelSize[0]:
-                            tempWalls.append(tempLevel.walls[x+1][y+1])
+                            temp_walls.append(temp_level.walls[x-1][y+1])
+                        if x < level_size[0]:
+                            temp_walls.append(temp_level.walls[x+1][y+1])
                     if x > 1:
-                        tempWalls.append(tempLevel.walls[x-1][y])
-                    if x < levelSize[0]:
-                        tempWalls.append(tempLevel.walls[x+1][y])
-                    if tiles.wall_empty in tempWalls:
-                        randTile = random.randint(1, 100)
-                        if randTile == 98:
-                            tempLevel.walls[x][y] = tiles.wall_rock_deco_1
-                        elif randTile == 99:
-                            tempLevel.walls[x][y] = tiles.wall_rock_deco_2
+                        temp_walls.append(temp_level.walls[x-1][y])
+                    if x < level_size[0]:
+                        temp_walls.append(temp_level.walls[x+1][y])
+                    if tiles.WALL_EMPTY in temp_walls:
+                        random_tile = random.randint(1, 100)
+                        if random_tile == 98:
+                            temp_level.walls[x][y] = tiles.WALL_ROCK_DECO_1
+                        elif random_tile == 99:
+                            temp_level.walls[x][y] = tiles.WALL_ROCK_DECO_2
                         else:
-                            tempLevel.walls[x][y] = tiles.wall_rock
-                tempWalls = []
+                            temp_level.walls[x][y] = tiles.WALL_ROCK
+                temp_walls = []
 
         #TODO: more random content creation
         #enter few monsters
         #TODO: more intelligent system to choose monsters
         for i in range(0, 10):
             if level == 1:
-                tempCreature = self.creatureGenerator.generateCreature(model.tables, {'name':'rat'})
-                tempLevel.add_creature(tempCreature, tempLevel.find_free_space())
+                temp_creature = self.creature_generator.generate_creature(
+                                            model.tables, {'name':'rat'})
+                temp_level.add_creature(temp_creature,
+                                            temp_level.find_free_space())
             else:
-                tempCreature = self.creatureGenerator.generateCreature(model.tables, {'name':'fire beetle'})
-                tempLevel.add_creature(tempCreature, tempLevel.find_free_space())
+                temp_creature = self.creature_generator.generate_creature(
+                                                model.tables,
+                                                {'name':'fire beetle'})
+                temp_level.add_creature(temp_creature,
+                                        temp_level.find_free_space())
 
         #throw bunch of food items around
         for i in range(0, 10):
-            tempItem = self.itemGenerator.generateItem(model.tables, {'type':'food'})
-            tempItem.location = tempLevel.find_free_space()
-            tempLevel.items.append(tempItem)
+            temp_item = self.item_generator.generateItem(model.tables,
+                                                         {'type':'food'})
+            temp_item.location = temp_level.find_free_space()
+            temp_level.items.append(temp_item)
 
         for i in range(0, 3):
-            tempItem = self.itemGenerator.generateItem(model.tables, {'type':'potion'})
-            tempItem.location = tempLevel.find_free_space()
-            tempLevel.items.append(tempItem)
+            temp_item = self.item_generator.generateItem(model.tables,
+                                                         {'type':'potion'})
+            temp_item.location = temp_level.find_free_space()
+            temp_level.items.append(temp_item)
 
         #throw bunch of weapons around
         for i in range(0, 10):
-            tempItem = self.itemGenerator.generateItem(model.tables, {'type':'weapon'})
-            tempItem.location = tempLevel.find_free_space()
-            tempLevel.items.append(tempItem)
+            temp_item = self.item_generator.generateItem(model.tables,
+                                                         {'type':'weapon'})
+            temp_item.location = temp_level.find_free_space()
+            temp_level.items.append(temp_item)
 
         if portal != None:
-            newPortal = Portal()
-            tempLevel.add_portal(newPortal, tempLevel.find_free_space(), portal)
+            new_portal = Portal()
+            temp_level.add_portal(new_portal,
+                                  temp_level.find_free_space(), portal)
 
-        if newPortals > 0:
-            for i in range(0, newPortals):
-                newPortal = Portal()
-                newPortal.icon = tiles.portal_stairs_down
-                tempLevel.add_portal(newPortal, tempLevel.find_free_space())
+        if new_portals > 0:
+            for i in range(0, new_portals):
+                new_portal = Portal()
+                new_portal.icon = tiles.PORTAL_STAIRS_DOWN
+                temp_level.add_portal(new_portal, temp_level.find_free_space())
 
         # generate next level
-        for portal in tempLevel.portals:
-            if portal.getOtherEnd() == None:
+        for portal in temp_level.portals:
+            if portal.get_other_end() == None:
                 if level < 5:
                     #still in catacombs
-                    newLevel = self.generateLevel(portal, model, 1, level = level + 1)
+
+                    new_level = self.generate_level(portal, model, 1,
+                                                   level = level + 1)
                 else:
                     #TODO: implement generating dungeon levels
                     pass
 
-        return tempLevel
+        return temp_level
 
 class TestLevelGenerator:
     """
@@ -235,55 +267,65 @@ class TestLevelGenerator:
     """
     def __init__(self):
         self.logger = logging.getLogger('pyHerc.generators.dungeon.TestLevelGenerator')
-        self.itemGenerator = pyHerc.generators.item.ItemGenerator()
-        self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator()
+        self.item_generator = pyHerc.generators.item.ItemGenerator()
+        self.creature_generator = pyHerc.generators.creature.CreatureGenerator()
 
-    def generateLevel(self, portal, model, newPortals = 0, monsterList = None):
+    def generate_level(self, portal, model,
+                       new_portals = 0, monster_list = None):
         """
         Generate level that starts from given stairs
         @param portal: link new level to this portal
         @param model: model being used
-        @param newPortals: amount of portals to generate, default 0
-        @param monsterList: list of monsters to use
+        @param new_portals: amount of portals to generate, default 0
+        @param monster_list: list of monsters to use
         """
         self.logger.debug('creating a test level')
-        levelSize = model.config['level']['size']
-        tempLevel = Level(levelSize, tiles.floor_rock, tiles.wall_empty)
+        level_size = model.config['level']['size']
+        temp_level = Level(level_size, tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
         #TODO: implement properly
-        for x in range(0, levelSize[0]):
-            tempLevel.walls[x][0] = tiles.wall_rock
-            tempLevel.walls[x][levelSize[1]-1] = tiles.wall_rock
+        for x in range(0, level_size[0]):
+            temp_level.walls[x][0] = tiles.WALL_ROCK
+            temp_level.walls[x][level_size[1]-1] = tiles.WALL_ROCK
 
-        for y in range(0, levelSize[1]):
-            tempLevel.walls[0][y] = tiles.wall_rock
-            tempLevel.walls[levelSize[0] - 1][y] = tiles.wall_rock
+        for y in range(0, level_size[1]):
+            temp_level.walls[0][y] = tiles.WALL_ROCK
+            temp_level.walls[level_size[0] - 1][y] = tiles.WALL_ROCK
 
         #throw bunch of food around
         for i in range(0, 10):
             #TODO: better placement algorithm
-            tempItem = self.itemGenerator.generateItem(model.tables, {'type':'food'})
-            tempItem.location = (random.randint(2, 20), random.randint(2, 20))
-            tempLevel.items.append(tempItem)
+            temp_item = self.item_generator.generateItem(model.tables,
+                                                         {'type':'food'})
+            temp_item.location = (random.randint(2, 20), random.randint(2, 20))
+            temp_level.items.append(temp_item)
 
-        if monsterList == None:
+        if monster_list == None:
             #enter few rats
             for i in range(0, 5):
                 #TODO: better placement algorithm
-                tempCreature = self.creatureGenerator.generateCreature(model.tables.creatures, {'name':'rat'})
-                tempLevel.add_creature(tempCreature, (random.randint(2, 20), random.randint(2, 20)))
+                temp_creature = self.creature_generator.generate_creature(
+                                                    model.tables.creatures,
+                                                    {'name':'rat'})
+                temp_level.add_creature(temp_creature,
+                                        (random.randint(2, 20),
+                                        random.randint(2, 20)))
         else:
             #TODO: spread given monsters around
             pass
 
         #set portals
         if portal != None:
-            newPortal = pyHerc.data.dungeon.Portal()
-            tempLevel.add_portal(newPortal, (random.randint(2, 20), random.randint(2, 20)), portal)
+            new_portal = pyHerc.data.dungeon.Portal()
+            temp_level.add_portal(new_portal,
+                                  (random.randint(2, 20),
+                                  random.randint(2, 20)), portal)
 
-        if newPortals > 0:
-            for i in range(0, newPortals):
-                newPortal = pyHerc.data.dungeon.Portal()
-                newPortal.icon = pyHerc.data.tiles.portal_stairs_down
-                tempLevel.add_portal(newPortal, (random.randint(2, 20), random.randint(2, 20)))
+        if new_portals > 0:
+            for i in range(0, new_portals):
+                new_portal = pyHerc.data.dungeon.Portal()
+                new_portal.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN
+                temp_level.add_portal(new_portal,
+                                      (random.randint(2, 20),
+                                      random.randint(2, 20)))
 
-        return tempLevel
+        return temp_level

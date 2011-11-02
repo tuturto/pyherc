@@ -18,21 +18,25 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-floor_empty = 0
-floor_rock = 1
-floor_brick = 2
-floor_wood = 3
+'''
+Module listing magic numbers for all the tiles in game
+'''
 
-wall_empty = 100
-wall_ground = 101
-wall_rock = 102
-wall_rock_deco_1 = 103
-wall_rock_deco_2 = 104
+FLOOR_EMPTY = 0
+FLOOR_ROCK = 1
+FLOOR_BRICK = 2
+FLOOR_WOOD = 3
 
-portal_stairs_up = 200
-portal_stairs_down = 201
+WALL_EMPTY = 100
+WALL_GROUND = 101
+WALL_ROCK = 102
+WALL_ROCK_DECO_1 = 103
+WALL_ROCK_DECO_2 = 104
 
-human_fighter = 300
+PORTAL_STAIRS_UP = 200
+PORTAL_STAIRS_DOWN = 201
+
+HUMAN_FIGHTER = 300
 
 creature_rat_1 = 400
 creature_rat_2 = 401

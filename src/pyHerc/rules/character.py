@@ -103,4 +103,4 @@ def create_character(race, kit):
 
 def __get_icon(race, kit):
     #TODO: implement
-    return pyHerc.data.tiles.human_fighter
+    return pyHerc.data.tiles.HUMAN_FIGHTER

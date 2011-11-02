@@ -67,8 +67,8 @@ def cast_hp_effect(model, target, effect, dice = None):
     if target.hp < 0:
         pyHerc.rules.ending.check_dying(model, target, None)
 
-    if target.hp > target.get_max_HP():
-        target.hp = target.get_max_HP()
+    if target.hp > target.get_max_hp():
+        target.hp = target.get_max_hp()
 
     event['character'] = target
     event['location'] = target.location

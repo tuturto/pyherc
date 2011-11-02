@@ -26,17 +26,17 @@ from pyHerc.data import tiles
 class test_dungeon:
 
     def test_simple_level_creation(self):
-        level = Level([20, 20], tiles.floor_rock, tiles.wall_empty)
+        level = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
         assert not (level is None)
-        assert (level.floor[5][5] == tiles.floor_rock)
-        assert(level.walls[0][0] == tiles.wall_empty)
+        assert (level.floor[5][5] == tiles.FLOOR_ROCK)
+        assert(level.walls[0][0] == tiles.WALL_EMPTY)
 
     def test_StairLinking(self):
-        level1 = Level([20, 20], tiles.floor_rock, tiles.wall_empty)
-        level2 = Level([20, 20], tiles.floor_rock, tiles.wall_empty)
+        level1 = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
+        level2 = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
 
         stairs1 = Portal()
-        stairs1.icon = tiles.portal_stairs_down
+        stairs1.icon = tiles.PORTAL_STAIRS_DOWN
         level1.add_portal(stairs1, (10, 10))
 
         stairs2 = Portal()
@@ -44,11 +44,11 @@ class test_dungeon:
 
         assert(stairs1.level == level1)
         assert(stairs1.location == (10, 10))
-        assert(stairs1.getOtherEnd() == stairs2)
+        assert(stairs1.get_other_end() == stairs2)
 
         assert(stairs2.level == level2)
         assert(stairs2.location == (5, 5))
-        assert(stairs2.getOtherEnd() == stairs1)
+        assert(stairs2.get_other_end() == stairs1)
 
         assert(stairs1 in level1.portals)
         assert(stairs2 in level2.portals)

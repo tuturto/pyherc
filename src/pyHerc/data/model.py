@@ -18,6 +18,17 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+Module for Model related classes
+
+Classes:
+    Model
+    Character
+    Damage
+    Feat
+    WeaponProficiency
+'''
+
 import logging
 
 class Model:
@@ -89,6 +100,8 @@ class Character:
         self.tick = 0
         self.short_term_memory = []
         self.item_memory = {}
+        self.size = 'medium'
+        self.attack = None
 
     def __str__(self):
         return self.name
@@ -99,7 +112,7 @@ class Character:
         """
         self.short_term_memory.append(event)
 
-    def get_max_HP(self):
+    def get_max_hp(self):
         """
         Get maximum HP this character can currently have
         """
@@ -125,9 +138,9 @@ class Character:
             return True
 
         check_proficiency = lambda x: ((x.name == 'weapon proficiency'
-                                   and x.weapon_type == weapon.weapon_data.weapon_type)
-                                   and (x.weapon_name == None
-                                        or x.weapon_name == weapon.weapon_data.name))
+                        and x.weapon_type == weapon.weapon_data.weapon_type)
+                        and (x.weapon_name == None
+                            or x.weapon_name == weapon.weapon_data.name))
 
         if True in map(check_proficiency, self.feats):
             return True
@@ -138,10 +151,10 @@ class Damage:
     """
     Damage done in combat
     """
-    def __init__(self, amount = 0, type = 'bludgeoning', magicBonus = 0):
+    def __init__(self, amount = 0, damage_type = 'bludgeoning', magic_bonus = 0):
         self.amount = amount
-        self.type = type
-        self.magicBonus = magicBonus
+        self.damage_type = damage_type
+        self.magic_bonus = magic_bonus
 
 class Feat:
     '''
@@ -156,6 +169,8 @@ class WeaponProficiency(Feat):
     Represents weapon proficiency feats (proficiency, focus, etc.)
     '''
     def __init__(self, weapon_type = 'simple', weapon_name = None):
+        Feat.__init__(self, weapon_type, weapon_name)
+
         self.name = 'weapon proficiency'
         self.weapon_type = weapon_type
         self.weapon_name = weapon_name

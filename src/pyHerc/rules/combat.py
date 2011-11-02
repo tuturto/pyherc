@@ -134,19 +134,19 @@ def get_damage_in_melee(model, attacker, target, dice = []):
             if 'light weapon' in weapon.weapon_data.tags:
                 #light weapons get only 1 * str bonus when wielded two-handed
                 damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str')
-                damage.type = weapon.weapon_data.damage_type
+                damage.damage_type = weapon.weapon_data.damage_type
             else:
                 #all other melee weapons get 1.5 * str bonus when wielded two-handed
                 damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str') * 1.5
-                damage.type = weapon.weapon_data.damage_type
+                damage.damage_type = weapon.weapon_data.damage_type
         else:
             #character is using a mundane item as a weapon
             damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str')
-            damage.type = 'bludgeoning'
+            damage.damage_type = 'bludgeoning'
     else:
         #unarmed combat get only 1 * str bonus
         damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str')
-        damage.type = 'bludgeoning'
+        damage.damage_type = 'bludgeoning'
 
     damage.amount = int(round(damage.amount))
     if damage.amount < 1:
