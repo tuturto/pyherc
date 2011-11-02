@@ -403,23 +403,23 @@ class GameWindow:
         self.screen.blit(self.background, (0, 0))
         #TODO: make more generic and clean up
         sy = 0
-        for y in range(player.location[1] - 7, player.location[1] + 8):
+        for y in range(player.location[1] - 8, player.location[1] + 9):
             sx = 0
             for x in range(player.location[0] - 12, player.location[0] + 13):
                 #draw floor and walls
                 if x >= 0 and y >= 0 and x <= len(level.floor)-1 and y <= len(level.floor[x])-1:
                     tile = surfaceManager.getIcon(level.floor[x][y])
-                    self.screen.blit(tile, (sx * 32, sy *32))
+                    self.screen.blit(tile, (sx * 32, sy * 32))
                     if not level.walls[x][y] == pyHerc.data.tiles.wall_empty:
                         tile = surfaceManager.getIcon(level.walls[x][y])
-                        self.screen.blit(tile, (sx * 32, sy *32))
+                        self.screen.blit(tile, (sx * 32, sy * 32))
                     if light_matrix[x][y] == False:
                         tile = surfaceManager.getIcon(pyHerc.data.tiles.floor_empty)
-                        self.screen.blit(tile, (sx * 32, sy *32))
+                        self.screen.blit(tile, (sx * 32, sy * 32))
                 else:
                     #draw empty
                     tile = surfaceManager.getIcon(pyHerc.data.tiles.floor_empty)
-                    self.screen.blit(tile, (sx * 32, sy *32))
+                    self.screen.blit(tile, (sx * 32, sy * 32))
                 sx = sx + 1
             sy = sy + 1
             sx = 0
@@ -427,27 +427,27 @@ class GameWindow:
         #draw portals
         for item in level.portals:
             x = item.location[0] - player.location[0] + 12
-            y = item.location[1] - player.location[1] + 7
+            y = item.location[1] - player.location[1] + 8
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 7] == True:
+                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 8] == True:
                     tile = surfaceManager.getIcon(item.icon)
                     self.screen.blit(tile, (x * 32, y *32))
 
         #draw items
         for item in level.items:
             x = item.location[0] - player.location[0] + 12
-            y = item.location[1] - player.location[1] + 7
+            y = item.location[1] - player.location[1] + 8
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 7] == True:
+                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 8] == True:
                     tile = surfaceManager.getIcon(item.icon)
                     self.screen.blit(tile, (x * 32, y *32))
 
         #draw creatures
         for item in level.creatures:
             x = item.location[0] - player.location[0] + 12
-            y = item.location[1] - player.location[1] + 7
+            y = item.location[1] - player.location[1] + 8
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 7] == True:
+                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 8] == True:
                     tile = surfaceManager.getIcon(item.icon)
                     self.screen.blit(tile, (x * 32, y *32))
 
@@ -464,7 +464,7 @@ class GameWindow:
             lineNumber = lineNumber + 1
 
         tile = surfaceManager.getIcon(player.icon)
-        self.screen.blit(tile, (384, 224))
+        self.screen.blit(tile, (384, 256))
         pygame.display.update()
 
     def __partial_screen_update(self):

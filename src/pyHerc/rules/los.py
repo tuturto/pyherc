@@ -53,7 +53,6 @@ def is_blocked(loc_x, loc_y, level, character = None):
         return True
 
     if loc_x >= len(level.walls) or loc_y >= len(level.walls[0]):
-        print loc_x,  loc_y
         return True
 
     if level.get_wall_tile(loc_x, loc_y) != pyHerc.data.tiles.wall_empty:
