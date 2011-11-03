@@ -137,12 +137,11 @@ class Character:
         if weapon.weapon_data == None:
             return True
 
-        check_proficiency = lambda x: ((x.name == 'weapon proficiency'
-                        and x.weapon_type == weapon.weapon_data.weapon_type)
-                        and (x.weapon_name == None
-                            or x.weapon_name == weapon.weapon_data.name))
-
-        if True in map(check_proficiency, self.feats):
+        if True in [(x.name == 'weapon proficiency'
+                    and x.weapon_type == weapon.weapon_data.weapon_type)
+                    and (x.weapon_name == None
+                         or x.weapon_name == weapon.weapon_data.name)
+                    for x in self.feats]:
             return True
         else:
             return False

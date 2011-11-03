@@ -114,7 +114,7 @@ class Item:
 
         effect_list = self.get_effects()
 
-        amount_of_charges = map(lambda x: x.charges, effect_list)
+        amount_of_charges = [x.charges for x in effect_list]
 
         if len(amount_of_charges) == 1:
             return amount_of_charges[0]
