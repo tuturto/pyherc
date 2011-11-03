@@ -115,8 +115,9 @@ class ItemGenerator:
                                     critical_range = table['critical range'],
                                     critical_damage = table['critical damage'],
                                     damage_type = table['damage type'],
-                                    weapon_type = table['class'],
-                                    tags = table['type'])
+                                    weapon_type = table['class'])
+
+        newItem.tags = table['type']
 
         if 'charges' in table.keys():
             newItem.charges = table['charges']

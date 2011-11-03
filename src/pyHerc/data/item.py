@@ -44,6 +44,7 @@ class Item:
         self.icon = None
         self.weapon_data = None
         self.effects = None
+        self.tags = {}
 
     def __str__(self):
         return self.name
@@ -150,19 +151,37 @@ class Item:
         else:
             return None
 
+    def get_main_type(self):
+        '''
+        Return main type of the item
+        '''
+        main_type = 'undefined'
+
+        if 'weapon' in self.tags:
+            main_type = 'weapon'
+        elif 'food' in self.tags:
+            main_type = 'food'
+
+        return main_type
+
+    def get_tags(self):
+        '''
+        Return tags
+        '''
+        return self.tags
+
 class WeaponData:
     '''
     Class representing weapon data of items
     '''
     def __init__(self, damage = None, damage_type = None, critical_range = None,
-                 critical_damage = None, weapon_type = None, tags = None):
+                 critical_damage = None, weapon_type = None):
 
         self.damage = damage
         self.damage_type = damage_type
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.weapon_type = weapon_type
-        self.tags = tags
 
 class ItemEffectData:
     '''

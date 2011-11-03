@@ -156,7 +156,7 @@ def is_dual_wieldable(model, character, item):
     assert item != None
 
     if item.weapon_data != None:
-        if ('one-handed weapon' in item.weapon_data.tags or 'light weapon' in item.weapon_data.tags):
+        if ('one-handed weapon' in item.get_tags() or 'light weapon' in item.get_tags()):
             return 1
         else:
             return 0

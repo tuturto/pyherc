@@ -97,8 +97,8 @@ class TestItemWithGenerator(IntegrationTest):
         assert('piercing' in item.weapon_data.damage_type)
         assert('slashing' in item.weapon_data.damage_type)
         assert(item.weapon_data.weapon_type == 'simple')
-        assert('weapon' in item.weapon_data.tags)
-        assert('simple weapon' in item.weapon_data.tags)
+        assert('weapon' in item.get_tags())
+        assert('simple weapon' in item.get_tags())
         assert(item.rarity == 32)
 
     def test_wield_weapon(self):
@@ -226,6 +226,33 @@ class TestItemWithGenerator(IntegrationTest):
         effect = self.item.effects['on drink'][0]
         assert(effect.effect_type == 'healing')
         assert(effect.power == '1d10')
+
+    def test_tags(self):
+        '''
+        Test that different types of items have tags
+        '''
+        self.item = self.itemGenerator.generateItem(self.tables,
+                                                    {'name': 'dagger'})
+
+        assert(self.item.get_tags() is not None)
+
+    def test_main_type_basic(self):
+        '''
+        Test that main type can be retrieved
+        '''
+        self.item = self.itemGenerator.generateItem(self.tables,
+                                                    {'name': 'dagger'})
+
+        main_type = self.item.get_main_type()
+
+        assert(main_type == 'weapon')
+
+        self.item = self.itemGenerator.generateItem(self.tables,
+                                                    {'name': 'apple'})
+
+        main_type = self.item.get_main_type()
+
+        assert(main_type == 'food')
 
 class TestItemsInLevel:
     '''

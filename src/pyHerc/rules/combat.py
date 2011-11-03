@@ -131,7 +131,7 @@ def get_damage_in_melee(model, attacker, target, dice = []):
     if len(attacker.weapons) > 0:
         weapon = attacker.weapons[0]
         if weapon.weapon_data != None:
-            if 'light weapon' in weapon.weapon_data.tags:
+            if 'light weapon' in weapon.get_tags():
                 #light weapons get only 1 * str bonus when wielded two-handed
                 damage.amount = damageRoll + get_attribute_modifier(model, attacker, 'str')
                 damage.damage_type = weapon.weapon_data.damage_type
