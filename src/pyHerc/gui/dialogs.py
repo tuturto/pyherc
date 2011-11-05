@@ -152,11 +152,28 @@ class Inventory:
 
         pygame.display.update()
 
-    def sort_items(self):
+    def sort_items(self, items):
         '''
         Sort items according to their type
+        @param items: items to sort
+        @returns: list of sorted items
         '''
-        pass
+        if items == None:
+            return []
+
+        if len(items) == 0:
+            return []
+
+        weapons = [item for item in items if item.get_main_type() == 'weapon']
+        potions = [item for item in items if item.get_main_type() == 'potion']
+        food = [item for item in items if item.get_main_type() == 'food']
+
+        sorted = []
+        sorted.extend(weapons)
+        sorted.extend(potions)
+        sorted.extend(food)
+
+        return sorted
 
 class EndScreen:
 

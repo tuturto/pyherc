@@ -314,6 +314,38 @@ class IntegrationTest():
         </types>
         <rarity>uncommon</rarity>
     </item>
+    <item>
+        <name>minor potion of poison</name>
+        <cost>100</cost>
+        <weight>1</weight>
+        <charges>1</charges>
+        <effects>
+                <effect type="on drink" name="damage" power="1d6" />
+        </effects>
+        <icons>
+                <icon>item_potion_1</icon>
+        </icons>
+        <types>
+                <type>potion</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>minor healing potion</name>
+        <cost>100</cost>
+        <weight>1</weight>
+        <charges>1</charges>
+        <effects>
+                <effect type="on drink" name="healing" power="1d6" />
+        </effects>
+        <icons>
+                <icon>item_potion_1</icon>
+        </icons>
+        <types>
+                <type>potion</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
 </items>
 """
 

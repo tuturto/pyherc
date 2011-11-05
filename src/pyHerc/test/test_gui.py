@@ -24,6 +24,7 @@ Tests for gui components
 
 import pyHerc.gui.windows
 from pyHerc.test import StubSurfaceManager
+from pyHerc.test import IntegrationTest
 
 class TestGameWindow:
     '''
@@ -81,14 +82,37 @@ class TestGameWindow:
         assert(result[3] == 'five')
         assert(result[4] == 'six')
 
-class TestInventoryDialog():
+class TestInventoryDialog(IntegrationTest):
     '''
     Tests for Inventory dialog
     '''
-
     def test_sort_items(self):
         '''
         Test that items can be sorted by their type
         '''
         surface_manager = StubSurfaceManager()
         inventory = pyHerc.gui.dialogs.Inventory(None, None, surface_manager)
+
+        item1 = self.itemGenerator.generateItem(self.tables, {'name': 'dagger'})
+        item2 = self.itemGenerator.generateItem(self.tables, {'name': 'apple'})
+        item3 = self.itemGenerator.generateItem(self.tables, {'name': 'healing potion'})
+        item4 = self.itemGenerator.generateItem(self.tables, {'name': 'short sword'})
+        item5 = self.itemGenerator.generateItem(self.tables, {'name': 'minor potion of poison'})
+        item6 = self.itemGenerator.generateItem(self.tables, {'name': 'longspear'})
+        item7 = self.itemGenerator.generateItem(self.tables, {'name': 'apple'})
+        item8 = self.itemGenerator.generateItem(self.tables, {'name': 'minor healing potion'})
+
+        unsorted = [item1, item2, item3, item4, item5, item6, item7, item8]
+
+        sorted = inventory.sort_items(unsorted)
+
+        assert len(sorted) == 8
+        assert sorted[0].get_main_type() == 'weapon'
+        assert sorted[1].get_main_type() == 'weapon'
+        assert sorted[2].get_main_type() == 'weapon'
+        assert sorted[3].get_main_type() == 'potion'
+        assert sorted[4].get_main_type() == 'potion'
+        assert sorted[5].get_main_type() == 'potion'
+        assert sorted[6].get_main_type() == 'food'
+        assert sorted[7].get_main_type() == 'food'
+

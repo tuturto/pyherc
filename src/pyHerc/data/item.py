@@ -159,6 +159,8 @@ class Item:
 
         if 'weapon' in self.tags:
             main_type = 'weapon'
+        elif 'potion' in self.tags:
+            main_type = 'potion'
         elif 'food' in self.tags:
             main_type = 'food'
 
