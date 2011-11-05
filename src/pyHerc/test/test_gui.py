@@ -18,11 +18,22 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+Tests for gui components
+'''
+
 import pyHerc.gui.windows
+from pyHerc.test import StubSurfaceManager
 
-class test_gameWindow:
+class TestGameWindow:
+    '''
+    Tests for main game window
+    '''
 
-    def test_formattingEventHistory_LessThanFiveItems(self):
+    def test_formatting_event_history_less_than_five_items(self):
+        '''
+        Test that event history is formatted correctly with less than five items
+        '''
         window = pyHerc.gui.windows.GameWindow(None, None)
         window.eventHistory = []
         window.eventHistory.append('one')
@@ -31,7 +42,10 @@ class test_gameWindow:
         assert(result[0] == 'one')
         assert(result[1] == 'two')
 
-    def test_formattingEventHistory_FiveItems(self):
+    def test_formatting_event_history_five_items(self):
+        '''
+        Test that event history is formatted correctly with five items
+        '''
         window = pyHerc.gui.windows.GameWindow(None, None)
         window.eventHistory = []
         window.eventHistory.append('one')
@@ -46,7 +60,10 @@ class test_gameWindow:
         assert(result[3] == 'four')
         assert(result[4] == 'five')
 
-    def test_formattingEventHistory_MoreThanFiveItems(self):
+    def test_formatting_event_history_more_than_five_items(self):
+        '''
+        Test that event history is formatted correctly with more than five items
+        '''
         window = pyHerc.gui.windows.GameWindow(None, None)
         window.eventHistory = []
         window.eventHistory.append('one')
@@ -63,3 +80,15 @@ class test_gameWindow:
         assert(result[2] == 'four')
         assert(result[3] == 'five')
         assert(result[4] == 'six')
+
+class TestInventoryDialog():
+    '''
+    Tests for Inventory dialog
+    '''
+
+    def test_sort_items(self):
+        '''
+        Test that items can be sorted by their type
+        '''
+        surface_manager = StubSurfaceManager()
+        inventory = pyHerc.gui.dialogs.Inventory(None, None, surface_manager)

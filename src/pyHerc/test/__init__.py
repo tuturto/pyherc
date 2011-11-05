@@ -22,6 +22,19 @@ import pyHerc.data.dungeon
 import pyHerc.data.model
 import pyHerc.rules.tables
 
+class StubSurfaceManager():
+    '''
+    Simple stub to act as a surface manager
+    '''
+    def loadResources(self):
+        pass
+
+    def getImage(self, id):
+        return None
+
+    def getIcon(self, id):
+        return None
+
 class StubModel():
     """
     Simple stub to act as model and do nothing
