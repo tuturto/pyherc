@@ -37,18 +37,19 @@ class Inventory:
     Dialog for selecting one or more items from a list
     """
 
-    def __init__(self, application, screen, surface_manager = None):
+    def __init__(self, application, screen, surface_manager = None, character = None):
         """
         Initalises this component
         @param application: link to application showing the display
         @param screen: surface for drawing
         @param surface_manager: object for tile graphics management
+        @param character: character viewing the inventory
         """
 
         self.logger = logging.getLogger('pyHerc.gui.dialogs.Inventory')
         self.inventory = [] # [{'selected': 1/0, 'item' : Item}]
         self.selected = None
-        self.selectCount = 0
+        self.select_count = 0
         self.application = application
         self.screen = screen
         self.page = 0
@@ -64,21 +65,40 @@ class Inventory:
             self.surface_manager = pyHerc.gui.surfaceManager.SurfaceManager()
             self.surface_manager.loadResources()
 
+        self.character = character
+        if self.character == None:
+            self.logger.warn('No character specified, defaulting to player')
+            self.character = self.application.world.player
+
         self.background = self.surface_manager.getImage(pyHerc.gui.images.image_inventory_menu)
 
-    def show(self, list, multipleSelections = -1):
+    def show(self, list, multiple_selections = -1):
         """
         Displays dialog
         @param list: list of items to display
-        @param multipleSelections: amount of items user is allowed to select
+        @param multiple_selections: amount of items user is allowed to select
         @return: list of selected items
-        @note: if multipleSelections is not specified, default to amount of items
+        @note: if multiple_selections is not specified, default to amount of items
         """
-        if multipleSelections == -1:
-            multipleSelections = len(list)
+        if multiple_selections == -1:
+            multiple_selections = len(list)
 
-        for item in list:
-            self.inventory.append({'selected' : 0, 'item' : item})
+        index = 0
+        main_type = ''
+        for item in self.sort_items(list):
+            if item.get_main_type() != main_type:
+                self.inventory.append({'selected' : 0,
+                                            'item' : None,
+                                            'text' : item.get_main_type(),
+                                            'key' : ''})
+                main_type = item.get_main_type()
+                index = index + 1
+
+            self.inventory.append({'selected' : 0,
+                                            'item' : item,
+                                            'text' : item.get_name(self.character, True),
+                                            'key' : self.letters[index]})
+            index = index + 1
 
         while self.running:
             for event in pygame.event.get():
@@ -99,12 +119,12 @@ class Inventory:
                             if self.inventory[index]['selected'] == 1:
                                 self.inventory[index]['selected'] = 0
                                 self.selected = None
-                                self.selectCount = self.selectCount - 1
+                                self.select_count = self.select_count - 1
                             else:
-                                if multipleSelections > 1:
-                                    if self.selectCount < multipleSelections:
+                                if multiple_selections > 1:
+                                    if self.select_count < multiple_selections:
                                         self.inventory[index]['selected'] = 1
-                                        self.selectCount = self.selectCount + 1
+                                        self.select_count = self.select_count + 1
                                 else:
                                     self.inventory[index]['selected'] = 1
                                     if self.selected != None:
@@ -115,12 +135,12 @@ class Inventory:
 
             self.__updateScreen()
 
-        returnList = []
+        return_list = []
         for item in self.inventory:
             if item['selected'] == 1:
-                returnList.append(item['item'])
+                return_list.append(item['item'])
 
-        return returnList
+        return return_list
 
     def __updateScreen(self):
         """
@@ -140,15 +160,15 @@ class Inventory:
             else:
                 colour = (200, 200, 200)
 
-            text = font.render(self.letters[index], True, colour, (0, 0, 0))
+            text = font.render(item['key'], True, colour, (0, 0, 0))
 
-            textRect = text.get_rect()
-            textRect.topleft = (40, 40 + index*20)
-            self.screen.blit(text, textRect)
-            text = font.render(item['item'].get_name(self.application.world.player, True), True, colour, (0, 0, 0))
-            textRect = text.get_rect()
-            textRect.topleft = (60, 40 + index*20)
-            self.screen.blit(text, textRect)
+            text_rect = text.get_rect()
+            text_rect.topleft = (40, 40 + index*20)
+            self.screen.blit(text, text_rect)
+            text = font.render(item['text'], True, colour, (0, 0, 0))
+            text_rect = text.get_rect()
+            text_rect.topleft = (60, 40 + index*20)
+            self.screen.blit(text, text_rect)
 
         pygame.display.update()
 
@@ -202,38 +222,38 @@ class EndScreen:
             self.background = self.surface_manager.getImage(pyHerc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' escaped from ruins', True, colour, (0, 0, 0))
-            textRect = text.get_rect()
-            textRect.center = (400, 200)
-            self.screen.blit(text, textRect)
+            text_rect = text.get_rect()
+            text_rect.center = (400, 200)
+            self.screen.blit(text, text_rect)
 
         elif ending['reason'] == 'victory':
             self.background = self.surface_manager.getImage(pyHerc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' conquered the ruins', True, colour, (0, 0, 0))
-            textRect = text.get_rect()
-            textRect.center = (400, 200)
-            self.screen.blit(text, textRect)
+            text_rect = text.get_rect()
+            text_rect.center = (400, 200)
+            self.screen.blit(text, text_rect)
 
         elif ending['reason'] == 'dead':
             self.background = self.surface_manager.getImage(pyHerc.gui.images.image_end_tombstone)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' died in ruins', True, colour, (0, 0, 0))
-            textRect = text.get_rect()
-            textRect.center = (400, 200)
-            self.screen.blit(text, textRect)
+            text_rect = text.get_rect()
+            text_rect.center = (400, 200)
+            self.screen.blit(text, text_rect)
             text = font.render(ending['dead reason'], True, colour, (0, 0, 0))
-            textRect = text.get_rect()
-            textRect.center = (400, 220)
-            self.screen.blit(text, textRect)
+            text_rect = text.get_rect()
+            text_rect.center = (400, 220)
+            self.screen.blit(text, text_rect)
         else:
             #quit
             self.background = self.surface_manager.getImage(
                                                                  pyHerc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' quit', True, colour, (0, 0, 0))
-            textRect = text.get_rect()
-            textRect.center = (400, 200)
-            self.screen.blit(text, textRect)
+            text_rect = text.get_rect()
+            text_rect.center = (400, 200)
+            self.screen.blit(text, text_rect)
 
         while self.running:
             for event in pygame.event.get():

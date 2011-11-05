@@ -22,6 +22,25 @@ import pyHerc.data.dungeon
 import pyHerc.data.model
 import pyHerc.rules.tables
 
+class StubCharacter:
+    """
+    Stub for Character class
+    """
+    def __init__(self):
+        pass
+
+    def receive_event(self, event):
+        pass
+
+    def get_max_hp(self):
+        return 10
+
+    def identify_item(self, item):
+        pass
+
+    def is_proficient(self, weapon):
+        return True
+
 class StubSurfaceManager():
     '''
     Simple stub to act as a surface manager
