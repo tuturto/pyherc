@@ -429,23 +429,23 @@ class GameWindow:
         self.screen.blit(self.background, (0, 0))
         #TODO: make more generic and clean up
         sy = 0
-        for y in range(player.location[1] - 8, player.location[1] + 9):
+        for y in range(player.location[1] - 9, player.location[1] + 10):
             sx = 0
             for x in range(player.location[0] - 12, player.location[0] + 13):
                 #draw floor and walls
                 if x >= 0 and y >= 0 and x <= len(level.floor)-1 and y <= len(level.floor[x])-1:
                     tile = self.surface_manager.getIcon(level.floor[x][y])
-                    self.screen.blit(tile, (sx * 32, sy * 32))
+                    self.screen.blit(tile, (sx * 32, sy * 32 - 8))
                     if not level.walls[x][y] == pyHerc.data.tiles.WALL_EMPTY:
                         tile = self.surface_manager.getIcon(level.walls[x][y])
-                        self.screen.blit(tile, (sx * 32, sy * 32))
+                        self.screen.blit(tile, (sx * 32, sy * 32 - 8))
                     if light_matrix[x][y] == False:
                         tile = self.surface_manager.getIcon(pyHerc.data.tiles.FLOOR_EMPTY)
-                        self.screen.blit(tile, (sx * 32, sy * 32))
+                        self.screen.blit(tile, (sx * 32, sy * 32 - 8))
                 else:
                     #draw empty
                     tile = self.surface_manager.getIcon(pyHerc.data.tiles.FLOOR_EMPTY)
-                    self.screen.blit(tile, (sx * 32, sy * 32))
+                    self.screen.blit(tile, (sx * 32, sy * 32 - 8))
                 sx = sx + 1
             sy = sy + 1
             sx = 0
@@ -453,29 +453,29 @@ class GameWindow:
         #draw portals
         for item in level.portals:
             x = item.location[0] - player.location[0] + 12
-            y = item.location[1] - player.location[1] + 8
+            y = item.location[1] - player.location[1] + 9
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 8] == True:
+                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
                     tile = self.surface_manager.getIcon(item.icon)
-                    self.screen.blit(tile, (x * 32, y *32))
+                    self.screen.blit(tile, (x * 32, y *32 - 8))
 
         #draw items
         for item in level.items:
             x = item.location[0] - player.location[0] + 12
-            y = item.location[1] - player.location[1] + 8
+            y = item.location[1] - player.location[1] + 9
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 8] == True:
+                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
                     tile = self.surface_manager.getIcon(item.icon)
-                    self.screen.blit(tile, (x * 32, y *32))
+                    self.screen.blit(tile, (x * 32, y *32 - 8))
 
         #draw creatures
         for item in level.creatures:
             x = item.location[0] - player.location[0] + 12
-            y = item.location[1] - player.location[1] + 8
+            y = item.location[1] - player.location[1] + 9
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 8] == True:
+                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
                     tile = self.surface_manager.getIcon(item.icon)
-                    self.screen.blit(tile, (x * 32, y *32))
+                    self.screen.blit(tile, (x * 32, y *32 - 8))
 
         #draw overlay event history
         self.screen.blit(self.console, (0, 0))
@@ -490,7 +490,7 @@ class GameWindow:
             lineNumber = lineNumber + 1
 
         tile = self.surface_manager.getIcon(player.icon)
-        self.screen.blit(tile, (384, 256))
+        self.screen.blit(tile, (384, 280))
         pygame.display.update()
 
     def __partial_screen_update(self):
