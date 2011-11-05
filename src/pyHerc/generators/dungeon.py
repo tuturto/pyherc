@@ -52,7 +52,7 @@ class DungeonGenerator:
         self.logger.info('generating the dungeon')
         model.dungeon = Dungeon()
         generator = CatacombsLevelGenerator()
-        level = generator.generate_level(None, model, 2)
+        level = generator.generate_level(None, model, 1)
 
         model.dungeon.levels = level
 
