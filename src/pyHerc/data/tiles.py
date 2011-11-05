@@ -87,3 +87,7 @@ item_potion_21 = 721
 item_potion_22 = 722
 item_potion_23 = 723
 item_potion_24 = 724
+
+TRAP_MAGIC_1 = 1001
+TRAP_MAGIC_2 = 1002
+TRAP_MAGIC_3 = 1003

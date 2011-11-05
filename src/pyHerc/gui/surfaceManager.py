@@ -179,6 +179,12 @@ class SurfaceManager:
             surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_24.png')
             self.icons[pyHerc.data.tiles.item_potion_24] = surface
 
+            surface = pygame.image.load('C:/programming/pyHack/resources/trap_magic_1.png')
+            self.icons[pyHerc.data.tiles.TRAP_MAGIC_1] = surface
+            surface = pygame.image.load('C:/programming/pyHack/resources/trap_magic_2.png')
+            self.icons[pyHerc.data.tiles.TRAP_MAGIC_2] = surface
+            surface = pygame.image.load('C:/programming/pyHack/resources/trap_magic_3.png')
+            self.icons[pyHerc.data.tiles.TRAP_MAGIC_3] = surface
 
             self.resourcesLoaded = 1
             self.logger.info('resources loaded')
