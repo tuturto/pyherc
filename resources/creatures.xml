@@ -55,7 +55,7 @@
             <feat name="multiattack" />
             <feat name="damage reduction" type="magic" amount="10" />
             <feat name="darkvision" range="10" />
-            <feat name="freeze" />
+            <feat name="mimic" target="gargoyle statue" />
         </feats>
     </creature>
 </creatures>

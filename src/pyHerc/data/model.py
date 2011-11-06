@@ -102,6 +102,8 @@ class Character:
         self.item_memory = {}
         self.size = 'medium'
         self.attack = None
+        #mimic
+        self.mimic_item = None
 
     def __str__(self):
         return self.name
@@ -152,6 +154,34 @@ class Character:
         else:
             return False
 
+    def set_mimic_item(self, item):
+        '''
+        Sets item this character can mimic or pretend to be
+        @param item: item to mimic
+        '''
+        self.mimic_item = item
+
+    def get_mimic_item(self):
+        '''
+        Gets item this character can mimic
+        @returns: item to mimic
+        '''
+        return self.mimic_item
+
+    def get_location(self):
+        '''
+        Returns location of this character
+        @returns: location
+        '''
+        return self.location
+
+    def set_location(self, location):
+        '''
+        Sets location of this character
+        @param location: location to set
+        '''
+        self.location = location
+
 class Damage:
     """
     Damage done in combat
@@ -179,3 +209,26 @@ class WeaponProficiency(Feat):
         self.name = 'weapon proficiency'
         self.weapon_type = weapon_type
         self.weapon_name = weapon_name
+
+class MimicData():
+    '''
+    Represents mimicing character
+    '''
+    def __init__(self, character):
+        self.fov_matrix = []
+        self.character = character
+
+    def get_character(self):
+        '''
+        Get mimicing character
+        @returns: Character
+        '''
+        return self.character
+
+    def set_character(self, character):
+        '''
+        Set character mimicing this item
+        @param character: Character to set
+        '''
+        self.character = character
+

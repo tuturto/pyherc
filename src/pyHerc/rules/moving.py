@@ -162,4 +162,12 @@ def deactivate(model, character):
     @param model: model to use
     @param character: character to hide
     '''
-    pass
+    __logger.debug('deactivating character: ' + character.__str__())
+    item = character.get_mimic_item()
+    character.set_mimic_item(None)
+    level = character.level
+    location = character.get_location()
+
+    level.add_item(item, location)
+    level.remove_creature(character)
+    __logger.debug('character deactivated')

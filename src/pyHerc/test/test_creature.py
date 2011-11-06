@@ -30,6 +30,7 @@ from pyHerc.test import IntegrationTest
 from pyHerc.generators.dungeon import TestLevelGenerator
 from pyHerc.data.dungeon import Dungeon
 from pyHerc.rules.moving import deactivate
+from pyHerc.data.item import Item
 
 class test_CreatureWithGenerator(IntegrationTest):
     """
@@ -62,12 +63,17 @@ class test_CreatureWithGenerator(IntegrationTest):
 
 class TestStatues(IntegrationTest):
 
-    def test_deactivating_gargoyle(self):
+    def test_deactivating_creature(self):
         '''
-        Test that activated gargoyle can deactivate
+        Test that activated character can deactivate
         '''
-        creature = self.creatureGenerator.generate_creature(self.tables, {
-                                'name': 'gargoyle'})
+        creature = Character()
+        creature.name = 'Mimic'
+        item = Item()
+
+        item.name = 'Chest'
+
+        creature.set_mimic_item(item)
 
         levelGenerator = TestLevelGenerator()
 
