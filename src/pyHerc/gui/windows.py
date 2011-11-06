@@ -489,6 +489,13 @@ class GameWindow:
             self.screen.blit(text, textRect)
             lineNumber = lineNumber + 1
 
+        #temporary hp display
+        text = font.render('HP: ' + player.get_hp().__str__() +
+                           ' / ' + player.get_max_hp().__str__(), True, (255, 255, 255))
+        textRect = text.get_rect()
+        textRect.topleft = (5, 85)
+        self.screen.blit(text, textRect)
+
         tile = self.surface_manager.getIcon(player.icon)
         self.screen.blit(tile, (384, 280))
         pygame.display.update()

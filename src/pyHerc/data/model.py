@@ -112,6 +112,12 @@ class Character:
         """
         self.short_term_memory.append(event)
 
+    def get_hp(self):
+        '''
+        Get current hitpoints
+        '''
+        return self.hp
+
     def get_max_hp(self):
         """
         Get maximum HP this character can currently have
