@@ -75,6 +75,8 @@ class SurfaceManager:
             self.icons[pyHerc.data.tiles.creature_beetle_1] = surface
             surface = pygame.image.load('C:/programming/pyHack/resources/creature_beetle_2.png')
             self.icons[pyHerc.data.tiles.creature_beetle_2] = surface
+            surface = pygame.image.load('C:/programming/pyHack/resources/creature_gargoyle.png')
+            self.icons[pyHerc.data.tiles.CREATURE_GARGOYLE] = surface
 
             surface = pygame.image.load('C:/programming/pyHack/resources/floor_stone.png')
             self.icons[pyHerc.data.tiles.FLOOR_ROCK] = surface
@@ -100,6 +102,8 @@ class SurfaceManager:
             self.icons[pyHerc.data.tiles.item_apple] = surface
             surface = pygame.image.load('C:/programming/pyHack/resources/item_crystal_skull.png')
             self.icons[pyHerc.data.tiles.item_crystal_skull] = surface
+            surface = pygame.image.load('C:/programming/pyHack/resources/statue_gargoyle.png')
+            self.icons[pyHerc.data.tiles.ITEM_GARGOYLE_STATUE] = surface
 
             #TODO: correct graphics
             surface = pygame.image.load('C:/programming/pyHack/resources/item_dagger_1.png')

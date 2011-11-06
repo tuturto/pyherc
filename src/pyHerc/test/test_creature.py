@@ -24,8 +24,12 @@
 #import pyHerc.data.dungeon
 #import pyHerc.rules.items
 #import pyHerc.rules.tables
+
 from pyHerc.data.model import Character, WeaponProficiency
 from pyHerc.test import IntegrationTest
+from pyHerc.generators.dungeon import TestLevelGenerator
+from pyHerc.data.dungeon import Dungeon
+from pyHerc.rules.moving import deactivate
 
 class test_CreatureWithGenerator(IntegrationTest):
     """
@@ -55,3 +59,31 @@ class test_CreatureWithGenerator(IntegrationTest):
         creature.feats.append(WeaponProficiency('simple'))
 
         assert(creature.is_proficient(weapon) == True)
+
+class TestStatues(IntegrationTest):
+
+    def test_deactivating_gargoyle(self):
+        '''
+        Test that activated gargoyle can deactivate
+        '''
+        creature = self.creatureGenerator.generate_creature(self.tables, {
+                                'name': 'gargoyle'})
+
+        levelGenerator = TestLevelGenerator()
+
+        self.model.dungeon = Dungeon()
+        self.level1 = levelGenerator.generate_level(None, self.model, monster_list = [])
+
+        self.model.dungeon.levels = self.level1
+
+        self.level1.add_creature(creature, self.level1.find_free_space())
+
+        location = creature.location
+
+        assert self.level1.get_creature_at(location) == creature
+        assert len(self.level1.get_items_at(location)) == 0
+
+        deactivate(self.model, creature)
+
+        assert self.level1.get_creature_at(location) == None
+        assert len(self.level1.get_items_at(location)) == 1

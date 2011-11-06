@@ -35,4 +35,27 @@
         <attack>2d4</attack>
         <size>small</size>
     </creature>
+    <creature>
+        <name>gargoyle</name>
+        <str>15</str>
+        <dex>14</dex>
+        <con>18</con>
+        <int>6</int>
+        <wis>11</wis>
+        <cha>7</cha>
+        <hp>37</hp>
+        <speed>1</speed>
+        <icons>
+            <icon>CREATURE_GARGOYLE</icon>
+        </icons>
+        <attack>1d4+2</attack>
+        <size>medium</size>
+        <feats>
+            <feat name="toughness" />
+            <feat name="multiattack" />
+            <feat name="damage reduction" type="magic" amount="10" />
+            <feat name="darkvision" range="10" />
+            <feat name="freeze" />
+        </feats>
+    </creature>
 </creatures>

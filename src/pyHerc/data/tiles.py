@@ -44,9 +44,12 @@ creature_rat_3 = 402
 creature_rat_4 = 403
 creature_beetle_1 = 404
 creature_beetle_2 = 405
+CREATURE_GARGOYLE = 406
 
 item_crystal_skull = 500
 item_apple = 501
+
+ITEM_GARGOYLE_STATUE = 550
 
 item_dagger_1 = 602
 item_dagger_2 = 603

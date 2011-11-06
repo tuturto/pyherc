@@ -155,3 +155,11 @@ def calculate_new_location(model, character, direction):
 
     return {'location':newLocation,
                 'level':newLevel}
+
+def deactivate(model, character):
+    '''
+    Deactivates a character, causing it to hide
+    @param model: model to use
+    @param character: character to hide
+    '''
+    pass

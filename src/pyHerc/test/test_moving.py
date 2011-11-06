@@ -30,7 +30,7 @@ from pyHerc.test import IntegrationTest
 
 import pyHerc.rules.moving
 
-class test_moving(IntegrationTest):
+class TestMoving(IntegrationTest):
 
     def setUp2(self):
         self.character = Character()
