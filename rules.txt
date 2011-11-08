@@ -1,0 +1,107 @@
+Rules
+=====
+
+Characters
+==========
+Body    0 - 12
+Finesse 0 - 12
+Mind    0 - 12
+
+Combat
+======
+To Hit (melee): 2d6 <= Body + Modifiers
+                2 is always a hit
+                12 is always a miss
+                
+To Hit (ranged): 2d6 <= Finesse + Modifiers
+                2 is always a hit
+                12 is always a miss
+
+To Hit Modifiers (melee):
+Armour                          varies
+Lack of proper weapon skill     +2
+Lack of proper armour skill     +1 for attacker, -1 if defender lacks the skill
+Dual-wielding                   +1 / +2 (+1 / +1 if secondary is light weapon)
+Light/regular weapon used with 2 hands  -1
+Unarmed opponent                -2 (only if using weapon)
+
+Damage: Weapon damage + Modifiers
+        1 / 36 Critical Hit (double damage)
+
+Armours
+=======
+Leather         +1
+Chainmail       +2
+Scale mail      +3
+Plate mail      +4
+Shield          +1 (cumulative with armour)
+
+Feats
+=====
+Two-weapon fighting: Dual-wielding penalty 0 / +1 (0 / 0 if secondary is light weapon)
+Weapon skill: simple weapons
+Weapon skill: martial weapons
+Weapon skill: exotic weapons
+
+Skilled: weapon: -1 to hit
+Mastery: weapon: -2 to hit
+
+Unarmed combat: opponent has only -1 when attacking with weapon
+Unarmed mastery: opponent receives no bonus when attacking with weapon
+
+Disarm: -2 to hit, can try to disarm opponent if fighting unarmed
+Disarm mastery: -1 to hit, can try to grab opponents weapon
+
+Interceptor: +1 for opponent to hit with ranged weapon (must use unarmed combat or light weapon?)
+
+Magic
+=====
+Summoning only: sigil required for summon: Mind check + Bonuses
+Control level = Mind stat
+After summon, daemon needs to be kept under control: Mind check + Bonuses
+After failed control check, control level -= Level of Failure
+Unsummon: Mind check + Bonuses
+
+Bonuses for summoning:
+Items                                   variable
+Completed rituals                       variable
+Environment (magic circles, etc.)       variable
+
+Attack
+  Unarmed
+    ToHit
+      ToHitUnarmed
+      ToHitUnarmedDisarm
+    Damage
+      UnarmedDamage
+      UnarmedDisarmDamage
+  Melee
+    ToHit
+      ToHitMelee
+      ToHitMeleePowerAttack
+    Damage
+      MeleeDamage
+      MeleeDamagePowerAttack
+  Ranged
+    ToHit
+      ToHitRanged
+    Damage
+      RangedDamage
+
+AttackParameters
+  - attacker
+  - target
+  - special_attack: 'disarm','power attack'
+
+AttackFactory.get_attack(attack_parameters)
+  ToHitRulesFactory.get_to_hit(attack_parameters)
+  DamageRulesFactory.get_damage(attack_parameters)
+  
+Attack
+  to_hit_rules
+  damage_rules
+
+?
+attack_parameters = pyHerc.rules.combat.Attack(attacker, target, special_attack)
+attack = pyHerc.rules.combat.AttackFactory.get_attack(attack_parameters)
+attack.execute()
