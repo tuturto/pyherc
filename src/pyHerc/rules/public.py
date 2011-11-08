@@ -35,7 +35,17 @@ class Action():
     '''
     Object representing an action taken by a character
     '''
-    pass
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
+    def execute(self):
+        '''
+        Executes the action
+        '''
+        pass
 
 class ActionFactory():
     '''
