@@ -18,6 +18,8 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+import types
+
 '''
 Public interface for action subsystem
 
@@ -28,8 +30,6 @@ Classes:
 
     AttackParameters - Class used to guide contruction of attack related actions
 '''
-
-import pyHerc.rules.attack.action
 
 class Action():
     '''
@@ -52,13 +52,60 @@ class ActionFactory():
     Object for creating actions
     '''
 
+    def __init__(self, factories):
+        '''
+        Construct ActionFactory
+        @param factories: a single Factory or list of Factories to initialise
+        '''
+        if isinstance(factories, types.ListType):
+            self.factories = [factory() for factory in factories]
+        else:
+            self.factories = []
+            self.factories.append(factories())
+
     def get_action(self, parameters):
         '''
         Create an action
         @param parameters: Parameters used to control action creation
         '''
-        #TODO: hard coded for now
-        return pyHerc.rules.attack.action.AttackAction(None, None)
+        return self.factories[0].get_action(parameters)
+
+    def get_sub_factories(self):
+        '''
+        Get all sub factories
+        @returns: List of sub factories
+        '''
+        return self.factories
+
+    def get_sub_factory(self, parameters):
+        '''
+        Get sub factory to handle parameters
+        @param parameters: Parameters to use for searching the factory
+        '''
+        subs = [x for x in self.factories if x.can_handle(parameters)]
+
+        if len(subs) == 1:
+            return subs[0]
+        else:
+            return None
+
+class SubActionFactory():
+    '''
+    Factory to handle concrete creation of actions
+    '''
+    def __init__(self):
+        '''
+        Constructor for this factory
+        '''
+        self.action_type = 'default'
+
+    def can_handle(self, parameters):
+        '''
+        Can this factory process these parameters
+        @param parameters: Parameters to check
+        @returns: True if factory is capable of handling parameters
+        '''
+        return self.action_type == parameters.action_type
 
 class ActionParameters():
     '''
@@ -87,5 +134,3 @@ class AttackParameters(ActionParameters):
         self.attacked = attacker
         self.defender = defender
         self.attack_type = attack_type
-
-

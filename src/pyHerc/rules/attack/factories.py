@@ -22,13 +22,25 @@
 Attack related factories are defined here
 '''
 
-from pyHerc.rules.locals import ActionFactory
+from pyHerc.rules.attack.action import AttackAction
+from pyHerc.rules.public import SubActionFactory
 
-class AttackFactory(ActionFactory):
+class AttackFactory(SubActionFactory):
     '''
     Factory for constructing attack actions
     '''
-    pass
+    def __init__(self):
+        '''
+        Constructor for this factory
+        '''
+        self.action_type = 'attack'
+
+    def get_action(self, parameters):
+        '''
+        Create an action
+        @param parameters: Parameters used to control action creation
+        '''
+        return AttackAction(None, None)
 
 class ToHitFactory():
     '''

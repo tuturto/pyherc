@@ -21,9 +21,9 @@
 '''
 Module defining classes related to AttackAction
 '''
+from pyHerc.rules.public import Action
 
-#TODO: have this inherit Action
-class AttackAction():
+class AttackAction(Action):
     '''
     Action for attacking
     '''

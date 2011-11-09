@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2011 Tuukka Turto
 #
 #   This file is part of pyHerc.
 #
@@ -19,19 +19,25 @@
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
-Module for testing combat related rules
+Module defining classes related to MoveAttack
 '''
+from pyHerc.rules.public import Action
 
-from pyHerc.test import IntegrationTest
-from pyHerc.rules.public import ActionFactory
-from pyHerc.rules.public import AttackParameters
-from pyHerc.rules.attack.factories import AttackFactory
-from pyHerc.data.model import Character
-from pyHerc.data.dungeon import Level
-from pyHerc.data import tiles
+class MoveAction(Action):
+    '''
+    Action for moving
+    '''
+    def __init__(self, character, new_location):
+        '''
+        Default constructor
+        @param character: Character moving
+        @param new_location: Location to move
+        '''
+        self.character = character
+        self.new_location = new_location
 
-class TestMeleeCombat():
-    '''
-    Class for testing melee combat related rules
-    '''
-    pass
+    def execute(self):
+        '''
+        Executes this Move
+        '''
+        pass
