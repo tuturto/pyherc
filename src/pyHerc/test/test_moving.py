@@ -28,6 +28,11 @@ from pyHerc.generators.dungeon import TestLevelGenerator
 from pyHerc.rules.tables import Tables
 from pyHerc.test import IntegrationTest
 
+from pyHerc.rules.public import MoveParameters
+from pyHerc.rules.public import ActionFactory
+from pyHerc.rules.move.factories import MoveFactory
+from pyHerc.rules.move.factories import WalkFactory
+
 import pyHerc.rules.moving
 
 class TestMoving(IntegrationTest):
@@ -53,12 +58,17 @@ class TestMoving(IntegrationTest):
         self.character.speed = 1
         self.character.tick = 1
 
-    def test_simpleMoving(self):
-        """
+    def test_simple_move(self):
+        '''
         Test that taking single step is possible
-        """
+        '''
+        move_factory = MoveFactory(WalkFactory())
+        factory = ActionFactory(move_factory)
+        parameters = MoveParameters(self.character, 3, 'walk')
+
         assert(self.character.location == (5, 5))
-        pyHerc.rules.moving.move(self.model, self.character, 3)
+        action = factory.get_action(parameters)
+        action.execute()
         assert(self.character.location == (6, 5))
 
     def test_walkingToWalls(self):

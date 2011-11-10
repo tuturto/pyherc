@@ -21,6 +21,7 @@
 '''
 Module defining classes related to MoveAttack
 '''
+import logging
 from pyHerc.rules.public import Action
 
 class MoveAction(Action):
@@ -33,11 +34,29 @@ class MoveAction(Action):
         @param character: Character moving
         @param new_location: Location to move
         '''
+        self.logger = logging.getLogger('pyHerc.rules.move.action.MoveAction')
+        self.logger.debug('Initialising move action')
         self.character = character
         self.new_location = new_location
+        self.logger.debug('Move action initialised')
 
     def execute(self):
         '''
         Executes this Move
         '''
+        self.logger.debug('Executing move')
+        self.character.location = self.new_location
+        self.logger.debug('Move executed')
+
+class WalkAction(MoveAction):
+    '''
+    Action for walking
+    '''
+    def execute(self):
+        '''
+        Execute this move
+        '''
+        MoveAction.execute(self)
+        self.logger.debug('Executing walk')
         pass
+        self.logger.debug('Walk executed')

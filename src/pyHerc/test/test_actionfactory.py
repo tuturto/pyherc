@@ -49,7 +49,7 @@ class TestMeleeCombat():
         level.add_creature(character1, (10, 10))
         level.add_creature(character2, (10, 11))
 
-        factory = ActionFactory(AttackFactory)
+        factory = ActionFactory(AttackFactory())
         action = factory.get_action(
                             AttackParameters(character1, character2, 'melee'))
 
@@ -64,7 +64,7 @@ class TestActionFactories():
         '''
         Test that action factory can be initialised with single sub factory
         '''
-        factory = ActionFactory(AttackFactory)
+        factory = ActionFactory(AttackFactory())
 
         factories = factory.get_sub_factories()
         found = [isinstance(x, AttackFactory) for x in factories]
@@ -74,7 +74,7 @@ class TestActionFactories():
         '''
         Test that action factory can be initialised with list of factories
         '''
-        factory = ActionFactory([AttackFactory, MoveFactory])
+        factory = ActionFactory([AttackFactory(), MoveFactory()])
         factories = factory.get_sub_factories()
 
         found = [isinstance(x, AttackFactory) for x in factories]
@@ -87,7 +87,7 @@ class TestActionFactories():
         '''
         Test that factory can be found by using Parameters object
         '''
-        factory = ActionFactory([AttackFactory, MoveFactory])
+        factory = ActionFactory([AttackFactory(), MoveFactory()])
         parameters = AttackParameters(None, None, 'melee')
 
         sub_factory = factory.get_sub_factory(parameters)

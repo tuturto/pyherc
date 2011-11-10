@@ -52,16 +52,17 @@ class ActionFactory():
     Object for creating actions
     '''
 
-    def __init__(self, factories):
+    def __init__(self, factories = None):
         '''
         Construct ActionFactory
-        @param factories: a single Factory or list of Factories to initialise
+        @param factories: a single Factory or list of Factories to use
         '''
-        if isinstance(factories, types.ListType):
-            self.factories = [factory() for factory in factories]
-        else:
-            self.factories = []
-            self.factories.append(factories())
+        if factories != None:
+            if isinstance(factories, types.ListType):
+                self.factories = factories
+            else:
+                self.factories = []
+                self.factories.append(factories)
 
     def get_action(self, parameters):
         '''
@@ -134,3 +135,25 @@ class AttackParameters(ActionParameters):
         self.attacked = attacker
         self.defender = defender
         self.attack_type = attack_type
+
+class MoveParameters(ActionParameters):
+    '''
+    Object for controlling move action creation
+    '''
+    def __init__(self, character, direction, movement_mode):
+        '''
+        Construct move parameters
+        @param character: Character moving
+        @param direction: Direction of the move
+        @param movement_mode: Mode of movement
+        '''
+        ActionParameters.__init__(self)
+
+        self.action_type = 'move'
+        self.character = character
+        self.direction = direction
+        self.movement_mode = movement_mode
+
+    def __str__(self):
+        return 'move with movement mode of ' + self.movement_mode
+
