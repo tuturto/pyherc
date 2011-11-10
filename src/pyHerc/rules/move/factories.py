@@ -23,6 +23,7 @@ Attack related factories are defined here
 '''
 import types
 import logging
+import pyHerc.data.tiles
 from pyHerc.rules.move.action import MoveAction
 from pyHerc.rules.public import SubActionFactory
 
@@ -75,13 +76,14 @@ class WalkFactory(SubActionFactory):
     '''
     Factory for creating walk actions
     '''
-    def __init__(self):
+    def __init__(self, model = None):
         '''
         Constructor for this factory
         '''
         self.logger = logging.getLogger('pyHerc.rules.move.factories.WalkFactory')
         self.logger.debug('initialising WalkFactory')
         self.movement_mode = 'walk'
+        self.model = model
         self.logger.debug('WalkFactory initialised')
 
     def __str__(self):
@@ -121,6 +123,28 @@ class WalkFactory(SubActionFactory):
         elif direction == 8:
             newLocation = (location[0] - 1, location[1] - 1)
         elif direction == 9:
-            pass
+            portal = newLevel.get_portal_at(location)
+            if portal != None:
+                if portal.get_other_end() != None:
+                    newLevel = portal.get_other_end().level
+                    newLocation = portal.get_other_end().location
+                else:
+                    #proxy
+                    if portal.level_generator != None:
+                        #TODO: model parameter
+                        portal.generate_level(self.model)
+                        newLevel = portal.get_other_end().level
+                        newLocation = portal.get_other_end().location
+                    else:
+                        #escaping perhaps?
+                        newLevel = None
+                        newLocation = None
+            else:
+                newLevel = parameters.character.level
+                newLocation = parameters.character.location
 
-        return MoveAction(parameters.character, newLocation)
+        #is new location blocked?
+        if newLevel.get_wall_tile(newLocation[0], newLocation[1]) != pyHerc.data.tiles.WALL_EMPTY:
+            newLocation = parameters.character.location
+
+        return MoveAction(parameters.character, newLocation, newLevel)

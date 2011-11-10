@@ -41,6 +41,9 @@ class TestMoving(IntegrationTest):
         self.character = Character()
         levelGenerator = TestLevelGenerator()
 
+        move_factory = MoveFactory(WalkFactory(self.model))
+        self.action_factory = ActionFactory(move_factory)
+
         self.model.dungeon = Dungeon()
         self.level1 = levelGenerator.generate_level(None, self.model, monster_list = [])
         self.level2 = levelGenerator.generate_level(None, self.model, monster_list = [])
@@ -62,50 +65,57 @@ class TestMoving(IntegrationTest):
         '''
         Test that taking single step is possible
         '''
-        move_factory = MoveFactory(WalkFactory())
-        factory = ActionFactory(move_factory)
-        parameters = MoveParameters(self.character, 3, 'walk')
-
         assert(self.character.location == (5, 5))
-        action = factory.get_action(parameters)
+        action = self.action_factory.get_action(
+                            MoveParameters(
+                                           self.character, 3, 'walk'))
         action.execute()
         assert(self.character.location == (6, 5))
 
-    def test_walkingToWalls(self):
+    def test_walking_to_walls(self):
         """
         Test that it is not possible to walk through walls
         """
         self.character.location = (1, 1)
 
         assert(self.character.location == (1, 1))
-        pyHerc.rules.moving.move(self.model, self.character, 1)
+        action = self.action_factory.get_action(
+                            MoveParameters(
+                                           self.character, 1, 'walk'))
+        action.execute()
         assert(self.character.location == (1, 1))
 
-    def test_enteringPortal(self):
+    def test_entering_portal(self):
         """
         Test that character can change level via portal
         """
         assert(self.character.location == (5, 5))
         assert(self.character.level == self.level1)
 
-        pyHerc.rules.moving.move(self.model, self.character, 9)
+        action = self.action_factory.get_action(
+                            MoveParameters(
+                                           self.character, 9, 'walk'))
+        action.execute()
 
         assert(self.character.location == (10, 10))
         assert(self.character.level == self.level2)
 
-    def test_enteringNonExistentPortal(self):
+    def test_entering_non_existent_portal(self):
         """
         Test that character can not walk through floor
         """
         self.character.location = (6, 3)
         assert(self.character.level == self.level1)
 
-        pyHerc.rules.moving.move(self.model, self.character, 9)
+        action = self.action_factory.get_action(
+                            MoveParameters(
+                                           self.character, 9, 'walk'))
+        action.execute()
 
         assert(self.character.location == (6, 3))
         assert(self.character.level == self.level1)
 
-    def test_enterProxyPortal(self):
+    def test_enter_proxy_portal(self):
         """
         Test that entering proxy portal actually moves character to different location
         """
@@ -115,6 +125,9 @@ class TestMoving(IntegrationTest):
         proxy.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN
 
         self.level1.add_portal(proxy, (8, 8))
-        pyHerc.rules.moving.move(self.model, self.character, 9)
+        action = self.action_factory.get_action(
+                            MoveParameters(
+                                           self.character, 9, 'walk'))
+        action.execute()
 
         assert(self.character.level != self.level1)

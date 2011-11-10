@@ -28,7 +28,7 @@ class MoveAction(Action):
     '''
     Action for moving
     '''
-    def __init__(self, character, new_location):
+    def __init__(self, character, new_location, new_level = None):
         '''
         Default constructor
         @param character: Character moving
@@ -38,6 +38,7 @@ class MoveAction(Action):
         self.logger.debug('Initialising move action')
         self.character = character
         self.new_location = new_location
+        self.new_level = new_level
         self.logger.debug('Move action initialised')
 
     def execute(self):
@@ -46,6 +47,8 @@ class MoveAction(Action):
         '''
         self.logger.debug('Executing move')
         self.character.location = self.new_location
+        if self.new_level != None:
+            self.character.level = self.new_level
         self.logger.debug('Move executed')
 
 class WalkAction(MoveAction):

@@ -27,6 +27,7 @@ Creature will try to find friends, before attacking the player character
 import math
 import pyHerc.rules.moving
 import pyHerc.rules.combat
+from pyHerc.rules.public import MoveParameters
 
 def flocking_herbivore(self, model):
     """
