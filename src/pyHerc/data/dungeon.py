@@ -262,12 +262,16 @@ class Portal:
         self.other_end = None
         self.quest_end = 0
         self.level_generator = None
+        self.model = None
         self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')
 
     def get_other_end(self):
         '''
         Returns the other end of the portal
         '''
+        if self.other_end == None and self.level_generator != None:
+            self.generate_level()
+
         return self.other_end
 
     def set_other_end(self, portal):
@@ -277,7 +281,7 @@ class Portal:
         '''
         self.other_end = portal
 
-    def generate_level(self, model):
+    def generate_level(self):
         '''
         Generates level if this is a proxy portal
         '''
@@ -286,6 +290,6 @@ class Portal:
 
         #TODO: support for level generation parameters
         new_level = self.level_generator.generate_level(self,
-                                                     model,
+                                                     self.model,
                                                      monster_list = [])
 

@@ -59,6 +59,8 @@ class DungeonGenerator:
         escape_portal = Portal()
         escape_portal.icon = pyHerc.data.tiles.PORTAL_STAIRS_UP
         escape_portal.set_other_end(None)
+        #TODO: refactor for configuration
+        escape_portal.model = model
 
         level_size = model.config['level']['size']
         location = (random.randint(2, level_size[0]-1),
@@ -238,12 +240,15 @@ class CatacombsLevelGenerator:
 
         if portal != None:
             new_portal = Portal()
+            #TODO: refactor for configuration
+            new_portal.model = model
             temp_level.add_portal(new_portal,
                                   temp_level.find_free_space(), portal)
 
         if new_portals > 0:
             for i in range(0, new_portals):
                 new_portal = Portal()
+                new_portal.model = model
                 new_portal.icon = tiles.PORTAL_STAIRS_DOWN
                 temp_level.add_portal(new_portal, temp_level.find_free_space())
 
@@ -316,6 +321,8 @@ class TestLevelGenerator:
         #set portals
         if portal != None:
             new_portal = pyHerc.data.dungeon.Portal()
+            #TODO: refactor for configuration
+            new_portal.model = model
             temp_level.add_portal(new_portal,
                                   (random.randint(2, 20),
                                   random.randint(2, 20)), portal)
@@ -323,6 +330,8 @@ class TestLevelGenerator:
         if new_portals > 0:
             for i in range(0, new_portals):
                 new_portal = pyHerc.data.dungeon.Portal()
+                #TODO: refactor for configuration
+                new_portal.model = model
                 new_portal.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN
                 temp_level.add_portal(new_portal,
                                       (random.randint(2, 20),

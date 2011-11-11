@@ -34,6 +34,7 @@ import pyHerc.rules.time
 import pyHerc.rules.combat
 import pyHerc.generators.dungeon
 import pyHerc.rules.tables
+from pyHerc.rules.public import MoveParameters
 from pyHerc.rules.los import get_fov_matrix
 from pygame.locals import KEYDOWN
 from pygame.locals import K_DOWN, K_UP
@@ -260,6 +261,13 @@ class GameWindow:
                                     K_KP4:7, K_KP7:8, K_KP5:9}
         self.eventHistory = []
 
+    def get_action_factory(self):
+        '''
+        Action factory for creating actions
+        @returns: ActionFactory instance
+        '''
+        return self.application.action_factory
+
     def __handlePlayerInput(self):
         """
         Handle player input
@@ -284,7 +292,11 @@ class GameWindow:
                         if pyHerc.rules.moving.check_move(model, player, direction)['ok']:
                             #check in case player escaped
                             if player.level != None:
-                                pyHerc.rules.moving.move(model, player, direction)
+                                action = self.get_action_factory().get_action(
+                                        MoveParameters(player, direction, 'walk')
+                                        )
+                                action.execute()
+                                #pyHerc.rules.moving.move(model, player, direction)
                         else:
                             targetLocation = pyHerc.rules.moving.calculate_new_location(model, player, direction)
                             if 'location' in targetLocation.keys():

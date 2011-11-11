@@ -22,6 +22,7 @@
 Module defining classes related to MoveAttack
 '''
 import logging
+import pyHerc.rules.time
 from pyHerc.rules.public import Action
 
 class MoveAction(Action):
@@ -49,6 +50,8 @@ class MoveAction(Action):
         self.character.location = self.new_location
         if self.new_level != None:
             self.character.level = self.new_level
+        #TODO: refactor to be pluggable
+        self.character.tick = pyHerc.rules.time.get_new_tick(self.character, 2)
         self.logger.debug('Move executed')
 
 class WalkAction(MoveAction):

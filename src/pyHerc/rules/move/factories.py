@@ -76,14 +76,13 @@ class WalkFactory(SubActionFactory):
     '''
     Factory for creating walk actions
     '''
-    def __init__(self, model = None):
+    def __init__(self):
         '''
         Constructor for this factory
         '''
         self.logger = logging.getLogger('pyHerc.rules.move.factories.WalkFactory')
         self.logger.debug('initialising WalkFactory')
         self.movement_mode = 'walk'
-        self.model = model
         self.logger.debug('WalkFactory initialised')
 
     def __str__(self):
@@ -132,7 +131,7 @@ class WalkFactory(SubActionFactory):
                     #proxy
                     if portal.level_generator != None:
                         #TODO: model parameter
-                        portal.generate_level(self.model)
+                        portal.generate_level()
                         newLevel = portal.get_other_end().level
                         newLocation = portal.get_other_end().location
                     else:
