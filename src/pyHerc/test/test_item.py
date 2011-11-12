@@ -52,7 +52,7 @@ class TestItemWithGenerator(IntegrationTest):
                                                 pyHerc.data.tiles.FLOOR_ROCK,
                                                 pyHerc.data.tiles.WALL_EMPTY)
 
-        self.character = pyHerc.data.model.Character()
+        self.character = pyHerc.data.model.Character(self.action_factory)
 
         self.character.location = (5, 5)
         self.character.name = 'Timothy Tester'
@@ -275,7 +275,7 @@ class TestItemsInLevel:
                                                 pyHerc.data.tiles.FLOOR_ROCK,
                                                 pyHerc.data.tiles.WALL_EMPTY)
 
-        self.character = pyHerc.data.model.Character()
+        self.character = pyHerc.data.model.Character(None)
 
         self.character.location = (5, 5)
         self.character.name = 'Timothy Tester'
@@ -391,7 +391,7 @@ class TestItemAdvanced():
         """
 
         item = Item()
-        character = pyHerc.data.model.Character()
+        character = pyHerc.data.model.Character(None)
 
         item.name = 'healing potion'
         item.appearance = 'blue potion'
@@ -405,7 +405,7 @@ class TestItemAdvanced():
         Test that given name is reported for a generally named item
         """
         item = Item()
-        character = pyHerc.data.model.Character()
+        character = pyHerc.data.model.Character(None)
         character.item_memory['healing potion'] = 'doozer potion'
 
         item.name = 'healing potion'
@@ -420,7 +420,7 @@ class TestItemAdvanced():
         Test that character can identify an item
         """
         item = Item()
-        character = pyHerc.data.model.Character()
+        character = pyHerc.data.model.Character(None)
         item.name = 'healing potion'
         item.appearance = 'blue potion'
 
@@ -437,7 +437,7 @@ class TestItemAdvanced():
         Test that item can decorate its name
         '''
         item = Item()
-        character = pyHerc.data.model.Character()
+        character = pyHerc.data.model.Character(None)
         item.name = 'club'
 
         character.inventory.append(item)

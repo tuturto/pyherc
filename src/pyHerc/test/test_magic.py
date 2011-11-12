@@ -33,7 +33,7 @@ class test_magic:
         Test that a damage effect can be applied on a character
         """
         model = StubModel()
-        character = pyHerc.data.model.Character()
+        character = pyHerc.data.model.Character(None)
         character.hp = 15
         character.max_hp = 15
         pyHerc.rules.magic.cast_effect(
@@ -47,7 +47,7 @@ class test_magic:
         Test that a healing effect can be applied on a character
         """
         model = StubModel()
-        character = pyHerc.data.model.Character()
+        character = pyHerc.data.model.Character(None)
         character.hp = 1
         character.max_hp = 15
         pyHerc.rules.magic.cast_effect(
@@ -61,7 +61,7 @@ class test_magic:
         Test that character does not get healed over his maximum hp when getting healing effect
         """
         model = StubModel()
-        character = pyHerc.data.model.Character()
+        character = pyHerc.data.model.Character(None)
         character.hp = 1
         character.max_hp = 5
         pyHerc.rules.magic.cast_effect(
@@ -73,7 +73,7 @@ class test_magic:
 class test_magicWithGenerators(IntegrationTest):
 
     def setUp2(self):
-        self.character = pyHerc.data.model.Character()
+        self.character = pyHerc.data.model.Character(self.action_factory)
         self.character.hp = 1
         self.character.max_hp = 5
 

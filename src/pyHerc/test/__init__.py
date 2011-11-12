@@ -22,6 +22,10 @@ import pyHerc.data.dungeon
 import pyHerc.data.model
 import pyHerc.rules.tables
 
+from pyHerc.rules.public import ActionFactory
+from pyHerc.rules.move.factories import MoveFactory
+from pyHerc.rules.move.factories import WalkFactory
+
 class StubCharacter:
     """
     Stub for Character class
@@ -432,9 +436,13 @@ class IntegrationTest():
 </creatures>
 """
 
+        walk_factory = WalkFactory()
+        move_factory = MoveFactory([walk_factory])
+        self.action_factory = ActionFactory([walk_factory])
+
         self.model = pyHerc.data.model.Model()
         self.itemGenerator = pyHerc.generators.item.ItemGenerator()
-        self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator()
+        self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator(self.action_factory)
         self.tables = pyHerc.rules.tables.Tables()
         self.tables.load_tables(itemConfig, creatureConfig)
         self.model.tables = self.tables

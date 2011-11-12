@@ -38,11 +38,8 @@ import pyHerc.rules.moving
 class TestMoving(IntegrationTest):
 
     def setUp2(self):
-        self.character = Character()
-        levelGenerator = TestLevelGenerator()
-
-        move_factory = MoveFactory(WalkFactory())
-        self.action_factory = ActionFactory(move_factory)
+        self.character = Character(self.action_factory)
+        levelGenerator = TestLevelGenerator(self.action_factory)
 
         self.model.dungeon = Dungeon()
         self.level1 = levelGenerator.generate_level(None, self.model, monster_list = [])
@@ -125,7 +122,7 @@ class TestMoving(IntegrationTest):
         """
         self.character.location = (8, 8)
         proxy = Portal()
-        proxy.level_generator = TestLevelGenerator()
+        proxy.level_generator = TestLevelGenerator(self.action_factory)
         #TODO: refactor for configuration
         proxy.model = self.model
         proxy.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN

@@ -43,13 +43,14 @@ class TestMeleeCombat():
         level = Level(size = (20, 20), floor_type = tiles.FLOOR_BRICK,
                             wall_type = tiles.WALL_ROCK)
 
-        character1 = Character()
-        character2 = Character()
+        factory = ActionFactory(AttackFactory())
+
+        character1 = Character(factory)
+        character2 = Character(factory)
 
         level.add_creature(character1, (10, 10))
         level.add_creature(character2, (10, 11))
 
-        factory = ActionFactory(AttackFactory())
         action = factory.get_action(
                             AttackParameters(character1, character2, 'melee'))
 
