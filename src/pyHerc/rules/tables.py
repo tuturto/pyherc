@@ -46,27 +46,42 @@ class Tables:
         self.uncommon = 16
         self.common = 32
 
-        self.__logger = logging.getLogger('pyHerc.rules.tables')
+        self.logger = logging.getLogger('pyHerc.rules.tables')
+
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.rules.tables')
 
     def read_items_from_xml(self, document):
-        self.__logger.debug('reading item config from xml')
+        self.logger.debug('reading item config from xml')
         parser = sax.make_parser()
         handler = ItemHandler()
         parser.setContentHandler(handler)
         file = StringIO.StringIO(document)
         parser.parse(file)
         self.items = handler.items
-        self.__logger.debug('item config read from xml')
+        self.logger.debug('item config read from xml')
 
     def read_creatures_from_xml(self, document):
-        self.__logger.debug('reading creature config from xml')
+        self.logger.debug('reading creature config from xml')
         parser = sax.make_parser()
         handler = CreatureHandler()
         parser.setContentHandler(handler)
         file = StringIO.StringIO(document)
         parser.parse(file)
         self.creatures = handler.creatures
-        self.__logger.debug('creature config read from xml')
+        self.logger.debug('creature config read from xml')
 
     def load_tables(self, itemConfig = None, creatureConfig = None):
         """
@@ -78,7 +93,7 @@ class Tables:
         if self.__initialised:
             return
 
-        self.__logger.debug('loading tables')
+        self.logger.debug('loading tables')
 
         if itemConfig != None:
             #use passed config
@@ -142,19 +157,19 @@ class Tables:
         Randomize appearances of potions
         @note: different types of potions may be assigned same appearance
         """
-        self.__logger.debug('randomizing potion appearance')
+        self.logger.debug('randomizing potion appearance')
         potionEntries = self.itemsByTag['potion']
         for entry in potionEntries:
             appearance = random.choice(self.potionAppearances)
             self.items[entry[0]]['appearance'] = appearance[0]
             self.items[entry[0]]['icon'] = [appearance[1]]
-        self.__logger.debug('potion appearance randomized')
+        self.logger.debug('potion appearance randomized')
 
     def construct_lookup_tables(self):
         """
         Construct lookup tables for different kinds of items
         """
-        self.__logger.debug('constructing look up tables')
+        self.logger.debug('constructing look up tables')
         self.itemsByTag = {}
         self.tagScore = {}
 
@@ -172,7 +187,7 @@ class Tables:
                     upperBound = self.tagScore[type]
                     self.itemsByTag[type].append((itemKey, lowerBound, upperBound))
 
-        self.__logger.debug('look up tables constructed')
+        self.logger.debug('look up tables constructed')
 
 class CreatureHandler(sax.ContentHandler):
     """

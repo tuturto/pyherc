@@ -18,6 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+import pickle
 import os, sys
 import pygame
 import logging
@@ -261,13 +262,6 @@ class GameWindow:
                                     K_KP4:7, K_KP7:8, K_KP5:9}
         self.eventHistory = []
 
-    def get_action_factory(self):
-        '''
-        Action factory for creating actions
-        @returns: ActionFactory instance
-        '''
-        return self.application.action_factory
-
     def __handlePlayerInput(self):
         """
         Handle player input
@@ -364,13 +358,12 @@ class GameWindow:
                     self.__updateDisplay()
             else:
                 if self.application.world.player.level != None:
-                    if hasattr(creature, 'act'):
-                        creature.act(self.application.world)
-                        #TODO: set dirty rectangles properly
-                        self.getNewEvents()
-                        self.application.world.player.level.full_update_needed = True
-                        #TODO: when dirty rectangles work, uncomment this
-                        #self.__updateDisplay()
+                    creature.act(self.application.world)
+                    #TODO: set dirty rectangles properly
+                    self.getNewEvents()
+                    self.application.world.player.level.full_update_needed = True
+                    #TODO: when dirty rectangles work, uncomment this
+                    #self.__updateDisplay()
 
         self.logger.debug('main loop finished')
 

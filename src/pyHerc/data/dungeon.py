@@ -64,6 +64,21 @@ class Level:
         self.full_update_needed = True
         self.dirty_rectangles = []
 
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.data.dungeon.Level')
+
     def get_tile(self, loc_x, loc_y):
         '''
         Get tile at given location
@@ -250,6 +265,21 @@ class Dungeon:
         self.levels = None
         self.logger = logging.getLogger('pyHerc.data.dungeon.Dungeon')
 
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.data.dungeon.Dungeon')
+
 class Portal:
     """
     Portal linking two levels together
@@ -263,6 +293,21 @@ class Portal:
         self.quest_end = 0
         self.level_generator = None
         self.model = None
+        self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')
+
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
         self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')
 
     def get_other_end(self):

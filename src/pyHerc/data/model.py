@@ -47,6 +47,21 @@ class Model:
         self.logger.info('loading config')
         self.load_config()
 
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.data.model.Model')
+
     def load_config(self):
         """
         Loads config
@@ -105,6 +120,7 @@ class Character:
         #mimic
         self.mimic_item = None
         self.action_factory = action_factory
+        self.ai = None
 
     def __str__(self):
         return self.name
@@ -114,6 +130,12 @@ class Character:
         Receives an event from world and enters it into short term memory
         """
         self.short_term_memory.append(event)
+
+    def act(self, model):
+        '''
+        Triggers AI of this character
+        '''
+        self.ai.act(model)
 
     def get_hp(self):
         '''

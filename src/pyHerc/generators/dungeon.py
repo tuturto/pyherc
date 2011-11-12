@@ -83,6 +83,21 @@ class CatacombsLevelGenerator:
         self.item_generator = pyHerc.generators.item.ItemGenerator()
         self.creature_generator = pyHerc.generators.creature.CreatureGenerator(action_factory)
 
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.generators.dungeon.CatacombsLevelGenerator')
+
     def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):
         """
         Generate level that starts from given stairs
@@ -275,6 +290,21 @@ class TestLevelGenerator:
         self.logger = logging.getLogger('pyHerc.generators.dungeon.TestLevelGenerator')
         self.item_generator = pyHerc.generators.item.ItemGenerator()
         self.creature_generator = pyHerc.generators.creature.CreatureGenerator(action_factory)
+
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.generators.dungeon.CatacombsLevelGenerator')
 
     def generate_level(self, portal, model,
                        new_portals = 0, monster_list = None):

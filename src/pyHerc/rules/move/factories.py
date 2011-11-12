@@ -49,6 +49,21 @@ class MoveFactory(SubActionFactory):
 
         self.logger.debug('MoveFactory initialised')
 
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.rules.move.factories.MoveFactory')
+
     def get_sub_factory(self, parameters):
         '''
         Get sub factory to handle parameters
@@ -84,6 +99,21 @@ class WalkFactory(SubActionFactory):
         self.logger.debug('initialising WalkFactory')
         self.movement_mode = 'walk'
         self.logger.debug('WalkFactory initialised')
+
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.rules.move.factories.WalkFactory')
 
     def __str__(self):
         return 'walk factory'

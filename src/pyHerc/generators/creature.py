@@ -88,8 +88,7 @@ class CreatureGenerator:
         newCreature.size = table['size']
         newCreature.attack = table['attack']
         #TODO: AI from tables
-        newCreature.act = types.MethodType(pyHerc.ai.simple.flocking_herbivore,
-                                           newCreature, pyHerc.data.model.Character)
+        newCreature.ai = pyHerc.ai.simple.flocking_herbivore(newCreature)
 
 
         if hasattr(table['icon'], 'append'):
