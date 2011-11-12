@@ -65,7 +65,9 @@ def flocking_herbivore(self, model):
                 direction = find_direction(self.location, model.player.location)
                 result = pyHerc.rules.moving.check_move(model, self, direction)
                 if result['ok']:
-                    pyHerc.rules.moving.move(model, self, direction)
+                    self.execute_action(
+                                        MoveParameters(self, direction, 'walk')
+                                        )
                 else:
                     self.tick = self.tick + 10
             else:
@@ -77,7 +79,9 @@ def flocking_herbivore(self, model):
                                                     closest_creature.location)
             result = pyHerc.rules.moving.check_move(model, self, direction)
             if result['ok']:
-                pyHerc.rules.moving.move(model, self, direction)
+                self.execute_action(
+                                        MoveParameters(self, direction, 'walk')
+                                        )
             else:
                 self.tick = self.tick + 10
     else:
