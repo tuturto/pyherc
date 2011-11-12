@@ -141,6 +141,13 @@ class Application:
         self.action_factory = ActionFactory([walk_factory])
         self.logger.info('Action sub system initialised')
 
+    def get_action_factory(self):
+        '''
+        Get action factory instance
+        @returns: ActionFactory
+        '''
+        return self.action_factory
+
 
 if __name__ == "__main__":
     APP = Application()

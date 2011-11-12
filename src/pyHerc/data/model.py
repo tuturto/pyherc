@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2011 Tuukka Turto
 #
 #   This file is part of pyHerc.
 #
@@ -74,7 +74,7 @@ class Character:
     Represents a character in playing world
     """
 
-    def __init__(self):
+    def __init__(self, action_factory):
         # attributes
         self.str = None
         self.dex = None
@@ -104,6 +104,7 @@ class Character:
         self.attack = None
         #mimic
         self.mimic_item = None
+        self.action_factory = action_factory
 
     def __str__(self):
         return self.name
@@ -181,6 +182,15 @@ class Character:
         @param location: location to set
         '''
         self.location = location
+
+    def execute_action(self, action_parameters):
+        '''
+        Execute action defined by action parameters
+        @param action_parameters: parameters controlling creation of the action
+        '''
+        if self.action_factory != None:
+            action = self.action_factory.get_action(action_parameters)
+            action.execute()
 
 class Damage:
     """

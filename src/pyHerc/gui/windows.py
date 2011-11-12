@@ -224,9 +224,9 @@ class StartNewGameWindow:
         else:
             self.application.world.config['explore'] = 0
 
-        self.character = pyHerc.rules.character.create_character('human', 'fighter')
+        self.character = pyHerc.rules.character.create_character('human', 'fighter', self.application.get_action_factory())
         self.application.world.player = self.character
-        generator = pyHerc.generators.dungeon.DungeonGenerator()
+        generator = pyHerc.generators.dungeon.DungeonGenerator(self.application.get_action_factory())
         generator.generate_dungeon(self.application.world)
         self.character.level = self.application.world.dungeon.levels
         # self.character.location = (1, 1)
@@ -292,11 +292,9 @@ class GameWindow:
                         if pyHerc.rules.moving.check_move(model, player, direction)['ok']:
                             #check in case player escaped
                             if player.level != None:
-                                action = self.get_action_factory().get_action(
+                                player.execute_action(
                                         MoveParameters(player, direction, 'walk')
                                         )
-                                action.execute()
-                                #pyHerc.rules.moving.move(model, player, direction)
                         else:
                             targetLocation = pyHerc.rules.moving.calculate_new_location(model, player, direction)
                             if 'location' in targetLocation.keys():

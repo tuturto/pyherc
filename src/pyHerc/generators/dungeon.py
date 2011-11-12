@@ -42,8 +42,9 @@ class DungeonGenerator:
     This class is used to generate dungeon
     """
 
-    def __init__(self):
+    def __init__(self, action_factory):
         self.logger = logging.getLogger('pyHerc.generators.dungeon.DungeonGenerator')
+        self.action_factory = action_factory
 
     def generate_dungeon(self, model):
         """
@@ -51,7 +52,7 @@ class DungeonGenerator:
         """
         self.logger.info('generating the dungeon')
         model.dungeon = Dungeon()
-        generator = CatacombsLevelGenerator()
+        generator = CatacombsLevelGenerator(self.action_factory)
         level = generator.generate_level(None, model, 1)
 
         model.dungeon.levels = level
@@ -77,10 +78,10 @@ class CatacombsLevelGenerator:
     Generator for creating catacombs
     """
 
-    def __init__(self):
+    def __init__(self, action_factory):
         self.logger = logging.getLogger('pyHerc.generators.dungeon.CatacombsLevelGenerator')
         self.item_generator = pyHerc.generators.item.ItemGenerator()
-        self.creature_generator = pyHerc.generators.creature.CreatureGenerator()
+        self.creature_generator = pyHerc.generators.creature.CreatureGenerator(action_factory)
 
     def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):
         """
@@ -270,10 +271,10 @@ class TestLevelGenerator:
     """
     Generates a simple test level
     """
-    def __init__(self):
+    def __init__(self, action_factory):
         self.logger = logging.getLogger('pyHerc.generators.dungeon.TestLevelGenerator')
         self.item_generator = pyHerc.generators.item.ItemGenerator()
-        self.creature_generator = pyHerc.generators.creature.CreatureGenerator()
+        self.creature_generator = pyHerc.generators.creature.CreatureGenerator(action_factory)
 
     def generate_level(self, portal, model,
                        new_portals = 0, monster_list = None):

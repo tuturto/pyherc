@@ -64,7 +64,7 @@ def initialise_stat_tables():
 
     __logger.info('stat tables initialised')
 
-def create_character(race, kit):
+def create_character(race, kit, action_factory):
     """
     Creates a new character with given race and kit
     """
@@ -80,7 +80,7 @@ def create_character(race, kit):
     temp_race = race_stats[race]
     temp_kit = kit_stats[kit]
 
-    new_character = pyHerc.data.model.Character()
+    new_character = pyHerc.data.model.Character(action_factory)
     new_character.str = temp_race['str'] + temp_kit['str']
     new_character.dex = temp_race['dex'] + temp_kit['dex']
     new_character.con = temp_race['con'] + temp_kit['con']

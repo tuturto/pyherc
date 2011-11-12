@@ -37,9 +37,10 @@ class CreatureGenerator:
     Class used to generate creatures
     """
 
-    def __init__(self):
+    def __init__(self, action_factory):
         self.logger = logging.getLogger(
                             'pyHerc.generators.creature.CreatureGenerator')
+        self.action_factory = action_factory
 
     def generate_creature(self, tables, parameters):
         """
@@ -74,7 +75,7 @@ class CreatureGenerator:
         """
         assert(table != None)
 
-        newCreature = pyHerc.data.model.Character()
+        newCreature = pyHerc.data.model.Character(self.action_factory)
         newCreature.name = table['name']
         newCreature.str = table['str']
         newCreature.dex = table['dex']
