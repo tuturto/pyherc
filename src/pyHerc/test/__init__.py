@@ -100,8 +100,8 @@ class IntegrationTest():
     <item>
         <name>dagger</name>
         <cost>2</cost>
-        <damage>1d4</damage>
-        <criticalRange>19</criticalRange>
+        <damage>2</damage>
+        <criticalRange>11</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>1</weight>
         <damageTypes>
@@ -123,8 +123,8 @@ class IntegrationTest():
     <item>
         <name>light mace</name>
         <cost>5</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>4</weight>
         <damageTypes>
@@ -145,8 +145,8 @@ class IntegrationTest():
     <item>
         <name>sickle</name>
         <cost>6</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>2</weight>
         <damageTypes>
@@ -167,8 +167,8 @@ class IntegrationTest():
     <item>
         <name>club</name>
         <cost>0</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>3</weight>
         <damageTypes>
@@ -189,8 +189,8 @@ class IntegrationTest():
     <item>
         <name>heavy mace</name>
         <cost>12</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>8</weight>
         <damageTypes>
@@ -211,8 +211,8 @@ class IntegrationTest():
     <item>
         <name>morning star</name>
         <cost>8</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>5</weight>
         <damageTypes>
@@ -235,8 +235,8 @@ class IntegrationTest():
     <item>
         <name>short spear</name>
         <cost>1</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>3</weight>
         <damageTypes>
@@ -257,8 +257,8 @@ class IntegrationTest():
     <item>
         <name>longspear</name>
         <cost>5</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>3</criticalDamage>
         <weight>9</weight>
         <damageTypes>
@@ -279,8 +279,8 @@ class IntegrationTest():
     <item>
         <name>spear</name>
         <cost>2</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>3</criticalDamage>
         <weight>6</weight>
         <damageTypes>
@@ -301,8 +301,8 @@ class IntegrationTest():
     <item>
         <name>short sword</name>
         <cost>10</cost>
-        <damage>1d6</damage>
-        <criticalRange>19</criticalRange>
+        <damage>3</damage>
+        <criticalRange>11</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>2</weight>
         <damageTypes>
@@ -323,27 +323,27 @@ class IntegrationTest():
     </item>
     <item>
         <name>healing potion</name>
-        <cost>100</cost>
+        <cost>150</cost>
         <weight>1</weight>
         <charges>1</charges>
         <effects>
-            <effect type="on drink" name="healing" power="1d10" />
+                <effect type="on drink" name="healing" power="1d10" />
         </effects>
         <icons>
-            <icon>item_potion_1</icon>
+                <icon>item_potion_1</icon>
         </icons>
         <types>
-            <type>potion</type>
+                <type>potion</type>
         </types>
         <rarity>uncommon</rarity>
     </item>
     <item>
-        <name>minor potion of poison</name>
+        <name>minor healing potion</name>
         <cost>100</cost>
         <weight>1</weight>
         <charges>1</charges>
         <effects>
-                <effect type="on drink" name="damage" power="1d6" />
+                <effect type="on drink" name="healing" power="1d6" />
         </effects>
         <icons>
                 <icon>item_potion_1</icon>
@@ -354,12 +354,12 @@ class IntegrationTest():
         <rarity>common</rarity>
     </item>
     <item>
-        <name>minor healing potion</name>
+        <name>minor potion of poison</name>
         <cost>100</cost>
         <weight>1</weight>
         <charges>1</charges>
         <effects>
-                <effect type="on drink" name="healing" power="1d6" />
+                <effect type="on drink" name="damage" power="1d6" />
         </effects>
         <icons>
                 <icon>item_potion_1</icon>

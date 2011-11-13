@@ -26,40 +26,6 @@ import pyHerc.data.tiles
 
 __logger = logging.getLogger('pyHerc.rules.moving')
 
-def move(model, character, direction):
-    """
-    moves character to specified direction
-    @param model: model of the world
-    @param character: character to move
-    @param direction: direction to move (1: north, 3: east, 9 enter portal)
-    @note: Character does not move if it's not possible
-    """
-    assert(not model == None)
-    assert(not character == None)
-    assert(direction >= 1 and direction <= 10)
-
-    __logger.debug('character ' + character.name +
-                            ' moving from ' + character.location.__str__() +
-                            ' to direction: ' + direction.__str__())
-
-    event = {}
-    event['type'] = 'moving'
-    event['character'] = character
-    event['location'] = character.location
-    event['level'] = character.level
-
-    moveData = check_move(model, character, direction)
-
-    if moveData['ok'] == 1:
-        character.location = moveData['location']
-        character.level = moveData['level']
-        character.tick = time.get_new_tick(character, 2)
-        event['end location'] = character.location
-        event['end level'] = character.level
-        model.raise_event(event)
-
-    __logger.debug('move finished at ' + character.location.__str__())
-
 def check_move(model, character, direction):
     """
     checks if character can move to specific direction

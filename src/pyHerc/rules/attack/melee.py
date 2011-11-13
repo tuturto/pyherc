@@ -25,5 +25,8 @@ Classes:
     MeleeToHit
     MeleeDamage
 '''
-pass
+class MeleeToHit(object):
+    pass
 
+class MeleeDamage(object):
+    pass

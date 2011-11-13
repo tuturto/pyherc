@@ -28,8 +28,8 @@
     <item>
         <name>dagger</name>
         <cost>2</cost>
-        <damage>1d4</damage>
-        <criticalRange>19</criticalRange>
+        <damage>2</damage>
+        <criticalRange>11</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>1</weight>
         <damageTypes>
@@ -51,8 +51,8 @@
     <item>
         <name>light mace</name>
         <cost>5</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>4</weight>
         <damageTypes>
@@ -73,8 +73,8 @@
     <item>
         <name>sickle</name>
         <cost>6</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>2</weight>
         <damageTypes>
@@ -95,8 +95,8 @@
     <item>
         <name>club</name>
         <cost>0</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>3</weight>
         <damageTypes>
@@ -117,8 +117,8 @@
     <item>
         <name>heavy mace</name>
         <cost>12</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>8</weight>
         <damageTypes>
@@ -139,8 +139,8 @@
     <item>
         <name>morning star</name>
         <cost>8</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>5</weight>
         <damageTypes>
@@ -163,8 +163,8 @@
     <item>
         <name>short spear</name>
         <cost>1</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>3</weight>
         <damageTypes>
@@ -185,8 +185,8 @@
     <item>
         <name>longspear</name>
         <cost>5</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>3</criticalDamage>
         <weight>9</weight>
         <damageTypes>
@@ -207,8 +207,8 @@
     <item>
         <name>spear</name>
         <cost>2</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>3</criticalDamage>
         <weight>6</weight>
         <damageTypes>
@@ -229,8 +229,8 @@
     <item>
         <name>short sword</name>
         <cost>10</cost>
-        <damage>1d6</damage>
-        <criticalRange>19</criticalRange>
+        <damage>3</damage>
+        <criticalRange>11</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>2</weight>
         <damageTypes>
