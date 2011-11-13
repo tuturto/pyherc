@@ -31,6 +31,7 @@ from pyHerc.data.model import Character
 from pyHerc.generators.dungeon import TestLevelGenerator
 from pyHerc.rules.tables import Tables
 from pyHerc.test import IntegrationTest
+from pyHerc.test import StubRandomNumberGenerator
 
 from pyHerc.rules.public import AttackParameters
 from pyHerc.rules.public import ActionFactory
@@ -55,20 +56,39 @@ class TestMeleeCombat(IntegrationTest):
         self.character1.level = self.model.dungeon.levels
         self.character1.speed = 1
         self.character1.tick = 1
+        self.character1.hit_points = 10
 
         self.character2.location = (6, 5)
         self.character2.level = self.model.dungeon.levels
         self.character2.speed = 1
         self.character2.tick = 1
+        self.character2.hit_points = 10
 
     def test_get_unarmed_action(self):
         '''
         Test that unarmed combat action can be generated
         '''
+        rng = StubRandomNumberGenerator()
+        rng.inject(12, [12, 12, 12, 12, 12, 12, 12])
+
         action = self.action_factory.get_action(AttackParameters(
                                                       self.character1,
                                                       self.character2,
-                                                      'unarmed'))
+                                                      'unarmed',
+                                                      rng))
 
         assert isinstance(action,  AttackAction)
         assert action.attack_type == 'unarmed'
+
+    def test_unarmed_attack(self):
+        '''
+        Test that unarmed attack will harm opponent
+        '''
+        rng = StubRandomNumberGenerator()
+        rng.inject(12, [12, 12, 12, 12, 12, 12, 12])
+
+        self.character1.execute_action(AttackParameters(
+                                                self.character1,
+                                                self.character2,
+                                                'unarmed',
+                                                rng))

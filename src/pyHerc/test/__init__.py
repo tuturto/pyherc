@@ -18,6 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+import random
 import pyHerc.data.dungeon
 import pyHerc.data.model
 import pyHerc.rules.tables
@@ -28,6 +29,49 @@ from pyHerc.rules.move.factories import WalkFactory
 
 from pyHerc.rules.attack.factories import UnarmedCombatFactory
 from pyHerc.rules.attack.factories import AttackFactory
+
+class StubRandomNumberGenerator(random.Random):
+    '''
+    Stub for random number generator
+
+    Will always return same numbers
+    '''
+    def __init__(self):
+        self.numbers = []
+
+    def inject(self, max, numbers):
+        self.numbers = [(x / max) - 0.0000000000000001 for x in numbers]
+
+    def random(self):
+        '''
+        Return the next random floating point number in the range [0.0, 1.0).
+        '''
+        return self.numbers.pop(0)
+
+    def seed(self, seed = None):
+        '''
+        Initialize the basic random number generator.
+        '''
+        pass
+
+    def getstate(self):
+        '''
+        Return an object capturing the current internal state of the generator.
+        This object can be passed to setstate() to restore the state.
+        '''
+        return self.numbers
+
+    def setstate(self, state):
+        '''
+        state should have been obtained from a previous call to getstate()
+        setstate() restores the internal state of the generator to what it was
+        at the time setstate() was called.
+        '''
+        self.numbers = state
+
+    def jumpahead(self, jumps):
+        pass
+
 
 class StubCharacter:
     """

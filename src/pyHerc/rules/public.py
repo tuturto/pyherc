@@ -147,7 +147,8 @@ class AttackParameters(ActionParameters):
     '''
     Object for controlling attack action creation
     '''
-    def __init__(self, attacker, defender, attack_type):
+    def __init__(self, attacker, defender, attack_type,
+                        random_number_generator = None):
         '''
         Construct AttackParameters
         @param attacker: Character doing an attack
@@ -160,6 +161,7 @@ class AttackParameters(ActionParameters):
         self.attacked = attacker
         self.defender = defender
         self.attack_type = attack_type
+        self.rng = random_number_generator
 
     def __str__(self):
         return 'attack with attack type of ' + self.attack_type
