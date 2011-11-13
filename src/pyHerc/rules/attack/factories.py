@@ -23,6 +23,7 @@ Attack related factories are defined here
 '''
 
 import types
+import logging
 from pyHerc.rules.attack.action import AttackAction
 from pyHerc.rules.public import SubActionFactory
 
@@ -34,6 +35,8 @@ class AttackFactory(SubActionFactory):
         '''
         Constructor for this factory
         '''
+        self.logger = logging.getLogger('pyHerc.rules.attack.factories.AttackFactory')
+        self.logger.debug('initialising AttackFactory')
         self.action_type = 'attack'
 
         if factories != None:
@@ -43,12 +46,7 @@ class AttackFactory(SubActionFactory):
                 self.factories = []
                 self.factories.append(factories)
 
-    def get_action(self, parameters):
-        '''
-        Create an action
-        @param parameters: Parameters used to control action creation
-        '''
-        return AttackAction(None, None)
+        self.logger.debug('AttackFactory initialised')
 
 class ToHitFactory():
     '''
@@ -60,4 +58,50 @@ class DamageFactory():
     '''
     Factory for constructing Damage objects
     '''
-    pass
+
+class UnarmedCombatFactory():
+    '''
+    Factory for producing unarmed combat actions
+    '''
+
+    def __init__(self):
+        '''
+        Constructor for this factory
+        '''
+        self.logger = logging.getLogger('pyHerc.rules.attack.factories.UnarmedCombatFactory')
+        self.logger.debug('initialising UnarmedCombatFactory')
+        self.attack_type = 'unarmed'
+        self.logger.debug('UnarmedCombatFactory initialised')
+
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.rules.attack.factories.UnarmedCombatFactory')
+
+    def __str__(self):
+        return 'unarmed combat factory'
+
+    def can_handle(self, parameters):
+        '''
+        Can this factory process these parameters
+        @param parameters: Parameters to check
+        @returns: True if factory is capable of handling parameters
+        '''
+        return self.attack_type == parameters.attack_type
+
+    def get_action(self, parameters):
+        '''
+        Create a attack action
+        @param parameters: Parameters used to control attack creation
+        '''
+        return AttackAction('unarmed', None, None)

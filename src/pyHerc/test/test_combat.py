@@ -22,16 +22,53 @@
 Module for testing combat related rules
 '''
 
-from pyHerc.test import IntegrationTest
-from pyHerc.rules.public import ActionFactory
-from pyHerc.rules.public import AttackParameters
-from pyHerc.rules.attack.factories import AttackFactory
-from pyHerc.data.model import Character
+import pyHerc
 from pyHerc.data.dungeon import Level
-from pyHerc.data import tiles
+from pyHerc.data.dungeon import Dungeon
+from pyHerc.data.dungeon import Portal
+from pyHerc.data.model import Model
+from pyHerc.data.model import Character
+from pyHerc.generators.dungeon import TestLevelGenerator
+from pyHerc.rules.tables import Tables
+from pyHerc.test import IntegrationTest
 
-class TestMeleeCombat():
+from pyHerc.rules.public import AttackParameters
+from pyHerc.rules.public import ActionFactory
+from pyHerc.rules.attack.action import AttackAction
+
+class TestMeleeCombat(IntegrationTest):
     '''
     Class for testing melee combat related rules
     '''
-    pass
+
+    def setUp2(self):
+        self.character1 = Character(self.action_factory)
+        self.character2 = Character(self.action_factory)
+        levelGenerator = TestLevelGenerator(self.action_factory)
+
+        self.model.dungeon = Dungeon()
+        self.level = levelGenerator.generate_level(None, self.model, monster_list = [])
+
+        self.model.dungeon.levels = self.level
+
+        self.character1.location = (5, 5)
+        self.character1.level = self.model.dungeon.levels
+        self.character1.speed = 1
+        self.character1.tick = 1
+
+        self.character2.location = (6, 5)
+        self.character2.level = self.model.dungeon.levels
+        self.character2.speed = 1
+        self.character2.tick = 1
+
+    def test_get_unarmed_action(self):
+        '''
+        Test that unarmed combat action can be generated
+        '''
+        action = self.action_factory.get_action(AttackParameters(
+                                                      self.character1,
+                                                      self.character2,
+                                                      'unarmed'))
+
+        assert isinstance(action,  AttackAction)
+        assert action.attack_type == 'unarmed'

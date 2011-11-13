@@ -138,7 +138,7 @@ class Application:
         self.logger.info('Initialising action sub system')
         walk_factory = WalkFactory()
         move_factory = MoveFactory([walk_factory])
-        self.action_factory = ActionFactory([walk_factory])
+        self.action_factory = ActionFactory([move_factory])
         self.logger.info('Action sub system initialised')
 
     def get_action_factory(self):

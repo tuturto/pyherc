@@ -69,7 +69,8 @@ class ActionFactory():
         Create an action
         @param parameters: Parameters used to control action creation
         '''
-        return self.factories[0].get_action(parameters)
+        factory = self.get_sub_factory(parameters)
+        return factory.get_action(parameters)
 
     def get_sub_factories(self):
         '''
@@ -100,6 +101,21 @@ class SubActionFactory():
         '''
         self.action_type = 'default'
 
+    def get_sub_factory(self, parameters):
+        '''
+        Get sub factory to handle parameters
+        @param parameters: Parameters to use for searching the factory
+        '''
+        self.logger.debug('getting sub factory for ' + str(parameters))
+        subs = [x for x in self.factories if x.can_handle(parameters)]
+
+        if len(subs) == 1:
+            self.logger.debug('sub factory found: ' + str(subs[0]))
+            return subs[0]
+        else:
+            self.logger.debug('no factory found')
+            return None
+
     def can_handle(self, parameters):
         '''
         Can this factory process these parameters
@@ -107,6 +123,15 @@ class SubActionFactory():
         @returns: True if factory is capable of handling parameters
         '''
         return self.action_type == parameters.action_type
+
+
+    def get_action(self, parameters):
+        '''
+        Create an action
+        @param parameters: Parameters used to control action creation
+        '''
+        sub = self.get_sub_factory(parameters)
+        return sub.get_action(parameters)
 
 class ActionParameters():
     '''
@@ -135,6 +160,9 @@ class AttackParameters(ActionParameters):
         self.attacked = attacker
         self.defender = defender
         self.attack_type = attack_type
+
+    def __str__(self):
+        return 'attack with attack type of ' + self.attack_type
 
 class MoveParameters(ActionParameters):
     '''

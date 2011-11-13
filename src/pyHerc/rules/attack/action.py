@@ -27,14 +27,18 @@ class AttackAction(Action):
     '''
     Action for attacking
     '''
-    def __init__(self, to_hit, damage):
+    def __init__(self, attack_type, to_hit, damage):
         '''
         Default constructor
+        @attack_type: type of the attack
         @param to_hit: ToHit object for calculating if attack hits
         @param damage: Damage object for calculating done damage
         '''
+        self.action_type = 'attack'
+        self.attack_type = attack_type
         self.to_hit = to_hit
         self.damage = damage
+
 
     def execute(self):
         '''

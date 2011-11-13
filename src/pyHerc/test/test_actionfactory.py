@@ -32,31 +32,6 @@ from pyHerc.data.model import Character
 from pyHerc.data.dungeon import Level
 from pyHerc.data import tiles
 
-class TestMeleeCombat():
-    '''
-    Class for testing melee combat related factories
-    '''
-    def test_basic_melee_action(self):
-        '''
-        Test that basic melee attack can be created
-        '''
-        level = Level(size = (20, 20), floor_type = tiles.FLOOR_BRICK,
-                            wall_type = tiles.WALL_ROCK)
-
-        factory = ActionFactory(AttackFactory())
-
-        character1 = Character(factory)
-        character2 = Character(factory)
-
-        level.add_creature(character1, (10, 10))
-        level.add_creature(character2, (10, 11))
-
-        action = factory.get_action(
-                            AttackParameters(character1, character2, 'melee'))
-
-        assert action != None
-        assert isinstance(action, AttackAction)
-
 class TestActionFactories():
     '''
     Tests related to action factories

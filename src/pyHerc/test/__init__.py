@@ -26,6 +26,9 @@ from pyHerc.rules.public import ActionFactory
 from pyHerc.rules.move.factories import MoveFactory
 from pyHerc.rules.move.factories import WalkFactory
 
+from pyHerc.rules.attack.factories import UnarmedCombatFactory
+from pyHerc.rules.attack.factories import AttackFactory
+
 class StubCharacter:
     """
     Stub for Character class
@@ -438,7 +441,11 @@ class IntegrationTest():
 
         walk_factory = WalkFactory()
         move_factory = MoveFactory([walk_factory])
-        self.action_factory = ActionFactory([walk_factory])
+
+        unarmed_combat = UnarmedCombatFactory()
+        attack_factory = AttackFactory([unarmed_combat])
+
+        self.action_factory = ActionFactory([move_factory, attack_factory])
 
         self.model = pyHerc.data.model.Model()
         self.itemGenerator = pyHerc.generators.item.ItemGenerator()
