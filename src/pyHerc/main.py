@@ -22,6 +22,7 @@
 Main entry point for pyHerc - game
 '''
 
+import os.path
 import sys, getopt
 import pygame
 import logging
@@ -57,6 +58,7 @@ class Application:
         self.gui = None
         self.world = None
         self.running = 1
+        self.base_path = None
 
     def load_configuration(self, argv):
         """
@@ -115,7 +117,7 @@ class Application:
         """
         Starts the application
         """
-        self.gui = MainWindow(self)
+        self.gui = MainWindow(self, self.base_path)
         self.gui.mainLoop()
 
     def start_logging(self):
@@ -126,8 +128,20 @@ class Application:
         logger = logging.getLogger('pyHerc.main.Application')
         logger.info("Logging started")
 
+    def detect_resource_directory(self):
+        search_directory = '.'
+        current = os.path.normpath(os.path.join(os.getcwd(), search_directory))
+
+        while not os.path.exists(os.path.join(current, 'resources')):
+            search_directory = search_directory +'/..'
+            current = os.path.normpath(os.path.join(os.getcwd(), search_directory))
+
+        self.base_path = os.path.join(current, 'resources')
+
+
 if __name__ == "__main__":
     APP = Application()
+    APP.detect_resource_directory()
     APP.load_configuration(sys.argv[1:])
     APP.start_logging()
     APP.run()

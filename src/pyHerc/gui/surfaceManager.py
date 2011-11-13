@@ -18,7 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, sys
+import os, sys, os.path
 import pygame
 import logging
 import images
@@ -37,157 +37,167 @@ class SurfaceManager:
         self.images = {}
         self.resourcesLoaded = 0
 
-    def loadResources(self):
+    def load_surface(self, base_path, image_name):
+        '''
+        Load a file and return corresponding surface object
+        @param base_path: directory of the file
+        @param image_name: file name
+        @returns: Surface
+        '''
+        return pygame.image.load(os.path.join(base_path, image_name))
+
+    def loadResources(self, base_path):
         """
         Load graphics from files
+        @param base_path: Path to directory where resources are location
         """
 
         if self.resourcesLoaded == 0:
             self.logger.info('loading resources')
 
-            surface = pygame.image.load('C:/programming/pyHack/resources/main_menu.png')
+            surface = self.load_surface(base_path, 'main_menu.png')
             self.images[images.image_start_menu] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/menu_arrow.png')
+            surface = self.load_surface(base_path, 'menu_arrow.png')
             self.images[images.image_start_menu_arrow] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/play_area.png')
+            surface = self.load_surface(base_path, 'play_area.png')
             self.images[images.image_play_area] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/inventory_menu.png')
+            surface = self.load_surface(base_path, 'inventory_menu.png')
             self.images[images.image_inventory_menu] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/image_marble_slate.png')
+            surface = self.load_surface(base_path, 'image_marble_slate.png')
             self.images[images.image_end_marble_slate] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/image_tombstone.png')
+            surface = self.load_surface(base_path, 'image_tombstone.png')
             self.images[images.image_end_tombstone] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/image_console.png')
+            surface = self.load_surface(base_path, 'image_console.png')
             self.images[images.image_console] = surface
 
-            surface = pygame.image.load('C:/programming/pyHack/resources/character_human_fighter.png')
+            surface = self.load_surface(base_path, 'character_human_fighter.png')
             self.icons[pyHerc.data.tiles.HUMAN_FIGHTER] = surface
 
-            surface = pygame.image.load('C:/programming/pyHack/resources/creature_rat_1.png')
+            surface = self.load_surface(base_path, 'creature_rat_1.png')
             self.icons[pyHerc.data.tiles.creature_rat_1] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/creature_rat_2.png')
+            surface = self.load_surface(base_path, 'creature_rat_2.png')
             self.icons[pyHerc.data.tiles.creature_rat_2] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/creature_rat_3.png')
+            surface = self.load_surface(base_path, 'creature_rat_3.png')
             self.icons[pyHerc.data.tiles.creature_rat_3] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/creature_rat_4.png')
+            surface = self.load_surface(base_path, 'creature_rat_4.png')
             self.icons[pyHerc.data.tiles.creature_rat_4] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/creature_beetle_1.png')
+            surface = self.load_surface(base_path, 'creature_beetle_1.png')
             self.icons[pyHerc.data.tiles.creature_beetle_1] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/creature_beetle_2.png')
+            surface = self.load_surface(base_path, 'creature_beetle_2.png')
             self.icons[pyHerc.data.tiles.creature_beetle_2] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/creature_gargoyle.png')
+            surface = self.load_surface(base_path, 'creature_gargoyle.png')
             self.icons[pyHerc.data.tiles.CREATURE_GARGOYLE] = surface
 
-            surface = pygame.image.load('C:/programming/pyHack/resources/floor_stone.png')
+            surface = self.load_surface(base_path, 'floor_stone.png')
             self.icons[pyHerc.data.tiles.FLOOR_ROCK] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/empty.png')
+            surface = self.load_surface(base_path, 'empty.png')
             self.icons[pyHerc.data.tiles.FLOOR_EMPTY] = surface
 
-            surface = pygame.image.load('C:/programming/pyHack/resources/wall_stone.png')
+            surface = self.load_surface(base_path, 'wall_stone.png')
             self.icons[pyHerc.data.tiles.WALL_ROCK] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/wall_stone_deco1.png')
+            surface = self.load_surface(base_path, 'wall_stone_deco1.png')
             self.icons[pyHerc.data.tiles.WALL_ROCK_DECO_1] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/wall_stone_deco2.png')
+            surface = self.load_surface(base_path, 'wall_stone_deco2.png')
             self.icons[pyHerc.data.tiles.WALL_ROCK_DECO_2] = surface
 
-            surface = pygame.image.load('C:/programming/pyHack/resources/wall_ground.png')
+            surface = self.load_surface(base_path, 'wall_ground.png')
             self.icons[pyHerc.data.tiles.WALL_GROUND] = surface
 
-            surface = pygame.image.load('C:/programming/pyHack/resources/portal_stairs_down.png')
+            surface = self.load_surface(base_path, 'portal_stairs_down.png')
             self.icons[pyHerc.data.tiles.PORTAL_STAIRS_DOWN] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/portal_stairs_up.png')
+            surface = self.load_surface(base_path, 'portal_stairs_up.png')
             self.icons[pyHerc.data.tiles.PORTAL_STAIRS_UP] = surface
 
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_apple.png')
+            surface = self.load_surface(base_path, 'item_apple.png')
             self.icons[pyHerc.data.tiles.item_apple] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_crystal_skull.png')
+            surface = self.load_surface(base_path, 'item_crystal_skull.png')
             self.icons[pyHerc.data.tiles.item_crystal_skull] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/statue_gargoyle.png')
+            surface = self.load_surface(base_path, 'statue_gargoyle.png')
             self.icons[pyHerc.data.tiles.ITEM_GARGOYLE_STATUE] = surface
 
             #TODO: correct graphics
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_dagger_1.png')
+            surface = self.load_surface(base_path, 'item_dagger_1.png')
             self.icons[pyHerc.data.tiles.item_dagger_1] = surface
             self.icons[pyHerc.data.tiles.item_dagger_2] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_morningstar_1.png')
+            surface = self.load_surface(base_path, 'item_morningstar_1.png')
             self.icons[pyHerc.data.tiles.item_morning_star_1] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_morningstar_2.png')
+            surface = self.load_surface(base_path, 'item_morningstar_2.png')
             self.icons[pyHerc.data.tiles.item_morning_star_2] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_short_sword_1.png')
+            surface = self.load_surface(base_path, 'item_short_sword_1.png')
             self.icons[pyHerc.data.tiles.item_short_sword_1] = surface
             self.icons[pyHerc.data.tiles.item_short_sword_2] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/light_mace.png')
+            surface = self.load_surface(base_path, 'light_mace.png')
             self.icons[pyHerc.data.tiles.item_light_mace] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_sickle.png')
+            surface = self.load_surface(base_path, 'item_sickle.png')
             self.icons[pyHerc.data.tiles.item_sickle] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/light_mace.png')
+            surface = self.load_surface(base_path, 'light_mace.png')
             self.icons[pyHerc.data.tiles.item_club] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_mace.png')
+            surface = self.load_surface(base_path, 'item_mace.png')
             self.icons[pyHerc.data.tiles.item_mace] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_shortspear.png')
+            surface = self.load_surface(base_path, 'item_shortspear.png')
             self.icons[pyHerc.data.tiles.item_shortspear] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_longspear.png')
+            surface = self.load_surface(base_path, 'item_longspear.png')
             self.icons[pyHerc.data.tiles.item_longspear] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_spear.png')
+            surface = self.load_surface(base_path, 'item_spear.png')
             self.icons[pyHerc.data.tiles.item_spear] = surface
 
             #potions
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_1.png')
+            surface = self.load_surface(base_path, 'item_potion_1.png')
             self.icons[pyHerc.data.tiles.item_potion_1] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_2.png')
+            surface = self.load_surface(base_path, 'item_potion_2.png')
             self.icons[pyHerc.data.tiles.item_potion_2] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_3.png')
+            surface = self.load_surface(base_path, 'item_potion_3.png')
             self.icons[pyHerc.data.tiles.item_potion_3] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_4.png')
+            surface = self.load_surface(base_path, 'item_potion_4.png')
             self.icons[pyHerc.data.tiles.item_potion_4] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_5.png')
+            surface = self.load_surface(base_path, 'item_potion_5.png')
             self.icons[pyHerc.data.tiles.item_potion_5] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_6.png')
+            surface = self.load_surface(base_path, 'item_potion_6.png')
             self.icons[pyHerc.data.tiles.item_potion_6] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_7.png')
+            surface = self.load_surface(base_path, 'item_potion_7.png')
             self.icons[pyHerc.data.tiles.item_potion_7] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_8.png')
+            surface = self.load_surface(base_path, 'item_potion_8.png')
             self.icons[pyHerc.data.tiles.item_potion_8] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_9.png')
+            surface = self.load_surface(base_path, 'item_potion_9.png')
             self.icons[pyHerc.data.tiles.item_potion_9] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_10.png')
+            surface = self.load_surface(base_path, 'item_potion_10.png')
             self.icons[pyHerc.data.tiles.item_potion_10] = surface
 
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_11.png')
+            surface = self.load_surface(base_path, 'item_potion_11.png')
             self.icons[pyHerc.data.tiles.item_potion_11] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_12.png')
+            surface = self.load_surface(base_path, 'item_potion_12.png')
             self.icons[pyHerc.data.tiles.item_potion_12] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_13.png')
+            surface = self.load_surface(base_path, 'item_potion_13.png')
             self.icons[pyHerc.data.tiles.item_potion_13] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_14.png')
+            surface = self.load_surface(base_path, 'item_potion_14.png')
             self.icons[pyHerc.data.tiles.item_potion_14] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_15.png')
+            surface = self.load_surface(base_path, 'item_potion_15.png')
             self.icons[pyHerc.data.tiles.item_potion_15] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_16.png')
+            surface = self.load_surface(base_path, 'item_potion_16.png')
             self.icons[pyHerc.data.tiles.item_potion_16] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_17.png')
+            surface = self.load_surface(base_path, 'item_potion_17.png')
             self.icons[pyHerc.data.tiles.item_potion_17] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_18.png')
+            surface = self.load_surface(base_path, 'item_potion_18.png')
             self.icons[pyHerc.data.tiles.item_potion_18] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_19.png')
+            surface = self.load_surface(base_path, 'item_potion_19.png')
             self.icons[pyHerc.data.tiles.item_potion_19] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_20.png')
+            surface = self.load_surface(base_path, 'item_potion_20.png')
             self.icons[pyHerc.data.tiles.item_potion_20] = surface
 
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_21.png')
+            surface = self.load_surface(base_path, 'item_potion_21.png')
             self.icons[pyHerc.data.tiles.item_potion_21] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_22.png')
+            surface = self.load_surface(base_path, 'item_potion_22.png')
             self.icons[pyHerc.data.tiles.item_potion_22] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_23.png')
+            surface = self.load_surface(base_path, 'item_potion_23.png')
             self.icons[pyHerc.data.tiles.item_potion_23] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/item_potion_24.png')
+            surface = self.load_surface(base_path, 'item_potion_24.png')
             self.icons[pyHerc.data.tiles.item_potion_24] = surface
 
-            surface = pygame.image.load('C:/programming/pyHack/resources/trap_magic_1.png')
+            surface = self.load_surface(base_path, 'trap_magic_1.png')
             self.icons[pyHerc.data.tiles.TRAP_MAGIC_1] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/trap_magic_2.png')
+            surface = self.load_surface(base_path, 'trap_magic_2.png')
             self.icons[pyHerc.data.tiles.TRAP_MAGIC_2] = surface
-            surface = pygame.image.load('C:/programming/pyHack/resources/trap_magic_3.png')
+            surface = self.load_surface(base_path, 'trap_magic_3.png')
             self.icons[pyHerc.data.tiles.TRAP_MAGIC_3] = surface
 
             self.resourcesLoaded = 1

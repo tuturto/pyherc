@@ -45,10 +45,12 @@ from pygame.locals import Rect
 
 class MainWindow:
 
-    def __init__(self,  application, surface_manager = None):
+    def __init__(self,  application, base_path, surface_manager = None):
         """
         Initialises the main window
         @param application: instance of currently running application
+        @param base_path: location of resources directory
+        @surface_manager: optional SurfaceManger to use for loading resources
         """
         self.logger = logging.getLogger('pyHerc.gui.windows.MainWindow')
         self.logger.info('Initialising MainWindow')
@@ -64,9 +66,9 @@ class MainWindow:
         if self.surface_manager == None:
             self.logger.warn('Surface manager not specified, defaulting to the system one.')
             self.surface_manager = pyHerc.gui.surfaceManager.SurfaceManager()
-            self.surface_manager.loadResources()
+            self.surface_manager.loadResources(base_path)
 
-        self.surface_manager.loadResources()
+        self.surface_manager.loadResources(base_path)
 
     def mainLoop(self):
         """
