@@ -51,15 +51,15 @@ class Model:
         '''
         Override __getstate__ in order to get pickling work
         '''
-        d = dict(self.__dict__)
-        del d['logger']
-        return d
+        properties = dict(self.__dict__)
+        del properties['logger']
+        return properties
 
-    def __setstate__(self, d):
+    def __setstate__(self, properties):
         '''
         Override __setstate__ in order to get pickling work
         '''
-        self.__dict__.update(d)
+        self.__dict__.update(properties)
         self.logger = logging.getLogger('pyHerc.data.model.Model')
 
     def load_config(self):
@@ -100,7 +100,7 @@ class Character:
         self.name = 'prototype'
         self.race = None
         self.kit = None
-        self.hp = None
+        self.hit_points = None
         self.max_hp = None
         self.speed = None
         self.inventory = []
@@ -120,7 +120,7 @@ class Character:
         #mimic
         self.mimic_item = None
         self.action_factory = action_factory
-        self.ai = None
+        self.artificial_intelligence = None
 
     def __str__(self):
         return self.name
@@ -135,13 +135,13 @@ class Character:
         '''
         Triggers AI of this character
         '''
-        self.ai.act(model)
+        self.artificial_intelligence.act(model)
 
     def get_hp(self):
         '''
         Get current hitpoints
         '''
-        return self.hp
+        return self.hit_points
 
     def get_max_hp(self):
         """
@@ -218,7 +218,8 @@ class Damage:
     """
     Damage done in combat
     """
-    def __init__(self, amount = 0, damage_type = 'bludgeoning', magic_bonus = 0):
+    def __init__(self, amount = 0, damage_type = 'bludgeoning',
+                        magic_bonus = 0):
         self.amount = amount
         self.damage_type = damage_type
         self.magic_bonus = magic_bonus

@@ -32,7 +32,7 @@ def check_result(model):
     @note: dead reason will contain reason of death, if player died
     """
     result = {}
-    if model.player.hp <= 0:
+    if model.player.hit_points <= 0:
         #player has died
         result['reason'] = 'dead'
         #TODO: implement correct reason
@@ -70,7 +70,7 @@ def check_dying(model, character, deathParams):
     @param deathParams: parameters detailing the death condition
     """
     assert character != None
-    if character.hp <= 0:
+    if character.hit_points <= 0:
         __logger.debug(character.__str__() + ' has died')
         event = {}
         event['type'] = 'death'

@@ -68,15 +68,15 @@ class Level:
         '''
         Override __getstate__ in order to get pickling work
         '''
-        d = dict(self.__dict__)
-        del d['logger']
-        return d
+        properties = dict(self.__dict__)
+        del properties['logger']
+        return properties
 
-    def __setstate__(self, d):
+    def __setstate__(self, properties):
         '''
         Override __setstate__ in order to get pickling work
         '''
-        self.__dict__.update(d)
+        self.__dict__.update(properties)
         self.logger = logging.getLogger('pyHerc.data.dungeon.Level')
 
     def get_tile(self, loc_x, loc_y):
@@ -230,11 +230,11 @@ class Level:
         """
         Finds free space where stuff can be placed
         """
-        x = len(self.floor)
-        y = len(self.floor[0])
-        location = (random.randint(2, x - 1), random.randint(2, y - 1))
+        width = len(self.floor)
+        height = len(self.floor[0])
+        location = (random.randint(2, width - 1), random.randint(2, height - 1))
         while self.walls[location[0]][location[1]] != pyHerc.data.tiles.WALL_EMPTY:
-            location = (random.randint(2, x - 1), random.randint(2, y - 1))
+            location = (random.randint(2, width - 1), random.randint(2, height - 1))
         return location
 
     def get_square(self, x_coordinate, y_coordinate):
@@ -269,15 +269,15 @@ class Dungeon:
         '''
         Override __getstate__ in order to get pickling work
         '''
-        d = dict(self.__dict__)
-        del d['logger']
-        return d
+        properties = dict(self.__dict__)
+        del properties['logger']
+        return properties
 
-    def __setstate__(self, d):
+    def __setstate__(self, properties):
         '''
         Override __setstate__ in order to get pickling work
         '''
-        self.__dict__.update(d)
+        self.__dict__.update(properties)
         self.logger = logging.getLogger('pyHerc.data.dungeon.Dungeon')
 
 class Portal:
@@ -299,15 +299,15 @@ class Portal:
         '''
         Override __getstate__ in order to get pickling work
         '''
-        d = dict(self.__dict__)
-        del d['logger']
-        return d
+        properties = dict(self.__dict__)
+        del properties['logger']
+        return properties
 
-    def __setstate__(self, d):
+    def __setstate__(self, properties):
         '''
         Override __setstate__ in order to get pickling work
         '''
-        self.__dict__.update(d)
+        self.__dict__.update(properties)
         self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')
 
     def get_other_end(self):

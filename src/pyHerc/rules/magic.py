@@ -58,17 +58,17 @@ def cast_hp_effect(model, target, effect, dice = None):
     event = {}
 
     if effect.effect_type == 'healing':
-        target.hp = target.hp + hpRoll
+        target.hit_points = target.hit_points + hpRoll
         event['type'] = 'magic heal'
     elif effect.effect_type == 'damage':
-        target.hp = target.hp - hpRoll
+        target.hit_points = target.hit_points - hpRoll
         event['type'] = 'magic damage'
 
-    if target.hp < 0:
+    if target.hit_points < 0:
         pyHerc.rules.ending.check_dying(model, target, None)
 
-    if target.hp > target.get_max_hp():
-        target.hp = target.get_max_hp()
+    if target.hit_points > target.get_max_hp():
+        target.hit_points = target.get_max_hp()
 
     event['character'] = target
     event['location'] = target.location

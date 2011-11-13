@@ -34,13 +34,13 @@ class test_magic:
         """
         model = StubModel()
         character = pyHerc.data.model.Character(None)
-        character.hp = 15
+        character.hit_points = 15
         character.max_hp = 15
         pyHerc.rules.magic.cast_effect(
                             model, character,
                             ItemEffectData('on drink', 'damage', '1d10'), [10])
 
-        assert(character.hp == 5)
+        assert(character.hit_points == 5)
 
     def test_healing_effect(self):
         """
@@ -48,13 +48,13 @@ class test_magic:
         """
         model = StubModel()
         character = pyHerc.data.model.Character(None)
-        character.hp = 1
+        character.hit_points = 1
         character.max_hp = 15
         pyHerc.rules.magic.cast_effect(
                             model, character,
                             ItemEffectData('on drink', 'healing', '1d10'), [10])
 
-        assert(character.hp == 11)
+        assert(character.hit_points == 11)
 
     def test_healing_does_not_heal_over_max_hp(self):
         """
@@ -62,19 +62,19 @@ class test_magic:
         """
         model = StubModel()
         character = pyHerc.data.model.Character(None)
-        character.hp = 1
+        character.hit_points = 1
         character.max_hp = 5
         pyHerc.rules.magic.cast_effect(
                         model, character,
                         ItemEffectData('on drink', 'healing', '1d10'), [10])
 
-        assert(character.hp == 5)
+        assert(character.hit_points == 5)
 
 class test_magicWithGenerators(IntegrationTest):
 
     def setUp2(self):
         self.character = pyHerc.data.model.Character(self.action_factory)
-        self.character.hp = 1
+        self.character.hit_points = 1
         self.character.max_hp = 5
 
         self.item = Item()
@@ -90,7 +90,7 @@ class test_magicWithGenerators(IntegrationTest):
         self.item.effects = {}
         pyHerc.rules.items.drink_potion(self.model, self.character, self.item, [10])
 
-        assert(self.character.hp == 1)
+        assert(self.character.hit_points == 1)
 
     def test_drinking_healing_potion(self):
         """
@@ -98,7 +98,7 @@ class test_magicWithGenerators(IntegrationTest):
         """
         pyHerc.rules.items.drink_potion(self.model, self.character, self.item, [10])
 
-        assert(self.character.hp == 5)
+        assert(self.character.hit_points == 5)
         assert(self.item.maximum_charges_left() == 0)
 
     def test_drinking_potion_identifies_it(self):

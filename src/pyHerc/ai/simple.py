@@ -29,7 +29,7 @@ import pyHerc.rules.moving
 import pyHerc.rules.combat
 from pyHerc.rules.public import MoveParameters
 
-class flocking_herbivore():
+class FlockingHerbivore():
     """
     AI for flocking herbivore
     Tries to maintain close distance to other animals
@@ -40,16 +40,21 @@ class flocking_herbivore():
         self.character = character
 
     def act(self, model):
+        '''
+        Trigger this AI to assess the situation and act accordingly
+        '''
         shortest_distance = None
         closest_creature = None
+        character = self.character
+        player = model.player
 
         #TODO: handle memory
         del self.character.short_term_memory[:]
 
         for creature in self.character.level.creatures:
             if creature != self.character:
-                loc_x = abs(creature.location[0] - self.character.location[0])
-                loc_y = abs(creature.location[1] - self.character.location[1])
+                loc_x = abs(creature.location[0] - character.location[0])
+                loc_y = abs(creature.location[1] - character.location[1])
                 distance = math.sqrt(loc_x * loc_x + loc_y * loc_y)
                 if shortest_distance != None:
                     if distance < shortest_distance:
@@ -62,31 +67,33 @@ class flocking_herbivore():
         if shortest_distance != None:
             if shortest_distance <= 2:
                 #seek player instead
-                loc_x = abs(model.player.location[0] - self.character.location[0])
-                loc_y = abs(model.player.location[1] - self.character.location[1])
+                loc_x = abs(player.location[0] - character.location[0])
+                loc_y = abs(player.location[1] - character.location[1])
                 distance = math.sqrt(loc_x * loc_x + loc_y * loc_y)
 
                 if distance > 1:
-                    direction = self.find_direction(self.character.location, model.player.location)
-                    result = pyHerc.rules.moving.check_move(model, self.character, direction)
+                    direction = self.find_direction(
+                                        character.location, player.location)
+                    result = pyHerc.rules.moving.check_move(model, character, direction)
                     if result['ok']:
                         self.character.execute_action(
-                                            MoveParameters(self.character, direction, 'walk')
-                                            )
+                                MoveParameters(character, direction, 'walk')
+                                )
                     else:
                         self.character.tick = self.character.tick + 10
                 else:
                     #attack
-                    pyHerc.rules.combat.melee_attack(model, self.character, model.player)
+                    pyHerc.rules.combat.melee_attack(model, character, player)
             else:
                 #find direction
-                direction = self.find_direction(self.character.location,
-                                                        closest_creature.location)
-                result = pyHerc.rules.moving.check_move(model, self.character, direction)
+                direction = self.find_direction(character.location,
+                                                    closest_creature.location)
+                result = pyHerc.rules.moving.check_move(model,
+                                                        character, direction)
                 if result['ok']:
                     self.character.execute_action(
-                                            MoveParameters(self.character, direction, 'walk')
-                                            )
+                                    MoveParameters(character, direction, 'walk')
+                                    )
                 else:
                     self.character.tick = self.character.tick + 10
         else:

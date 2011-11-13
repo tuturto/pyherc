@@ -62,6 +62,7 @@ class Application:
         self.world = None
         self.running = 1
         self.action_factory = None
+        self.logger = None
 
     def load_configuration(self, argv):
         """
