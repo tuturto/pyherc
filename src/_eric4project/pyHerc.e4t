@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2011-11-13, 13:39:10 -->
+<!-- Saved: 2011-11-13, 15:32:56 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: handle memory</Summary>
@@ -55,33 +55,6 @@
     <Resource>
       <Filename>pyHerc/generators/creature.py</Filename>
       <Linenumber>89</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: relative location</Summary>
-    <Description></Description>
-    <Created>2011-11-02, 23:37:29</Created>
-    <Resource>
-      <Filename>pyHerc/rules/tables.py</Filename>
-      <Linenumber>88</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: relative location</Summary>
-    <Description></Description>
-    <Created>2011-11-02, 23:37:29</Created>
-    <Resource>
-      <Filename>pyHerc/rules/tables.py</Filename>
-      <Linenumber>99</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: for now, until better way is found</Summary>
-    <Description></Description>
-    <Created>2011-11-02, 23:37:29</Created>
-    <Resource>
-      <Filename>pyHerc/rules/tables.py</Filename>
-      <Linenumber>265</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
@@ -256,9 +229,27 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: correct graphics</Summary>
+    <Description></Description>
+    <Created>2011-11-13, 15:12:18</Created>
+    <Resource>
+      <Filename>pyHerc/gui/surfaceManager.py</Filename>
+      <Linenumber>118</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: for now, until better way is found</Summary>
+    <Description></Description>
+    <Created>2011-11-13, 15:14:21</Created>
+    <Resource>
+      <Filename>pyHerc/rules/tables.py</Filename>
+      <Linenumber>264</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: use configuration</Summary>
     <Description></Description>
-    <Created>2011-11-13, 11:45:35</Created>
+    <Created>2011-11-13, 15:32:17</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>119</Linenumber>
@@ -267,7 +258,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement</Summary>
     <Description></Description>
-    <Created>2011-11-13, 11:45:35</Created>
+    <Created>2011-11-13, 15:32:17</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>157</Linenumber>
@@ -276,7 +267,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement menu here</Summary>
     <Description></Description>
-    <Created>2011-11-13, 11:45:35</Created>
+    <Created>2011-11-13, 15:32:17</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>211</Linenumber>
@@ -285,7 +276,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement properly</Summary>
     <Description></Description>
-    <Created>2011-11-13, 11:45:35</Created>
+    <Created>2011-11-13, 15:32:17</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>216</Linenumber>
@@ -294,7 +285,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: load tables for model</Summary>
     <Description></Description>
-    <Created>2011-11-13, 11:45:35</Created>
+    <Created>2011-11-13, 15:32:17</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>221</Linenumber>
@@ -303,7 +294,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: do not paint screen all the time</Summary>
     <Description></Description>
-    <Created>2011-11-13, 11:45:35</Created>
+    <Created>2011-11-13, 15:32:17</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>349</Linenumber>
@@ -312,7 +303,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: set dirty rectangles properly</Summary>
     <Description></Description>
-    <Created>2011-11-13, 11:45:35</Created>
+    <Created>2011-11-13, 15:32:17</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>361</Linenumber>
@@ -321,7 +312,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: when dirty rectangles work, uncomment this</Summary>
     <Description></Description>
-    <Created>2011-11-13, 11:45:35</Created>
+    <Created>2011-11-13, 15:32:17</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>364</Linenumber>
@@ -330,7 +321,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: don't call during each and every update</Summary>
     <Description></Description>
-    <Created>2011-11-13, 11:45:35</Created>
+    <Created>2011-11-13, 15:32:17</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>428</Linenumber>
@@ -339,19 +330,10 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: make more generic and clean up</Summary>
     <Description></Description>
-    <Created>2011-11-13, 11:45:35</Created>
+    <Created>2011-11-13, 15:32:17</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>432</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: correct graphics</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 13:09:05</Created>
-    <Resource>
-      <Filename>pyHerc/gui/surfaceManager.py</Filename>
-      <Linenumber>118</Linenumber>
     </Resource>
   </Task>
 </Tasks>

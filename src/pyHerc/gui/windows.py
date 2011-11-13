@@ -216,7 +216,7 @@ class StartNewGameWindow:
         #TODO: implement properly
         self.application.world = pyHerc.data.model.Model()
         tables = pyHerc.rules.tables.Tables()
-        tables.load_tables()
+        tables.load_tables(self.application.base_path)
         self.application.world.tables = tables
         #TODO: load tables for model
         if self.application.config['explore']:

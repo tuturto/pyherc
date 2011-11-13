@@ -210,7 +210,7 @@ class test_Tables:
         """
         Test that potion appearances can be randomized
         """
-        itemConfig = """
+        item_config = """
             <items>
                 <item>
                     <name>healing potion</name>
@@ -239,7 +239,12 @@ class test_Tables:
             </items>
             """
 
+        creature_config = """
+        <creatures>
+        </creatures>
+        """
+
         tables = pyHerc.rules.tables.Tables()
-        tables.load_tables(itemConfig)
+        tables.load_tables(None, item_config, creature_config)
 
         assert(not pyHerc.data.tiles.item_potion_empty in tables.items['potion of bless']['icon'])

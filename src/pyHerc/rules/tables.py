@@ -18,7 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, sys, StringIO, random
+import os, sys, StringIO, random, os.path
 import logging
 import pyHerc
 import pyHerc.data.model
@@ -68,9 +68,10 @@ class Tables:
         self.creatures = handler.creatures
         self.__logger.debug('creature config read from xml')
 
-    def load_tables(self, itemConfig = None, creatureConfig = None):
+    def load_tables(self, base_path = None, itemConfig = None, creatureConfig = None):
         """
         Initialise tables
+        @param base_path: directory from where to load files
         @param itemConfig: optional config string for items
         @param creatureConfig: optional config string for creatures
         """
@@ -85,8 +86,7 @@ class Tables:
             self.read_items_from_xml(itemConfig)
         else:
             #open file and read from there
-            #TODO: relative location
-            f = open('C:/programming/pyHack/resources/items.xml', 'r')
+            f = open(os.path.join(base_path, 'items.xml'), 'r')
             itemConfig = f.read()
             f.close()
             self.read_items_from_xml(itemConfig)
@@ -96,8 +96,7 @@ class Tables:
             self.read_creatures_from_xml(creatureConfig)
         else:
             #open file and read from there
-            #TODO: relative location
-            f = open('C:/programming/pyHack/resources/creatures.xml', 'r')
+            f = open(os.path.join(base_path, 'creatures.xml'), 'r')
             creatureConfig = f.read()
             f.close()
             self.read_creatures_from_xml(creatureConfig)

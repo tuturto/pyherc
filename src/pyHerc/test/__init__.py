@@ -436,7 +436,7 @@ class IntegrationTest():
         self.itemGenerator = pyHerc.generators.item.ItemGenerator()
         self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator()
         self.tables = pyHerc.rules.tables.Tables()
-        self.tables.load_tables(itemConfig, creatureConfig)
+        self.tables.load_tables(None, itemConfig, creatureConfig)
         self.model.tables = self.tables
 
         self.setUp2()
