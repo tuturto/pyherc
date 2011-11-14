@@ -10,10 +10,10 @@
         <hp>2</hp>
         <speed>2</speed>
         <icons>
-            <icon>creature_rat_1</icon>
-            <icon>creature_rat_2</icon>
-            <icon>creature_rat_3</icon>
-            <icon>creature_rat_4</icon>
+            <icon>CREATURE_RAT_1</icon>
+            <icon>CREATURE_RAT_2</icon>
+            <icon>CREATURE_RAT_3</icon>
+            <icon>CREATURE_RAT_4</icon>
         </icons>
         <attack>1d4</attack>
         <size>small</size>
@@ -29,8 +29,8 @@
         <hp>4</hp>
         <speed>1.9</speed>
         <icons>
-            <icon>creature_beetle_1</icon>
-            <icon>creature_beetle_2</icon>
+            <icon>CREATURE_BEETLE_1</icon>
+            <icon>CREATURE_BEETLE_2</icon>
         </icons>
         <attack>2d4</attack>
         <size>small</size>

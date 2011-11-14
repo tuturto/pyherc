@@ -78,7 +78,7 @@ class TestItemWithGenerator(IntegrationTest):
 
         assert(self.item.name == 'crystal skull')
         assert(self.item.quest_item == 1)
-        assert(self.item.icon == pyHerc.data.tiles.item_crystal_skull)
+        assert(self.item.icon == pyHerc.data.tiles.ITEM_CRYSTAL_SKULL)
 
     def test_create_weapon(self):
         """

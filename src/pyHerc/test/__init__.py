@@ -123,7 +123,7 @@ class IntegrationTest():
         <cost>1</cost>
         <weight>1</weight>
         <icons>
-            <icon>item_apple</icon>
+            <icon>ITEM_APPLE</icon>
         </icons>
         <types>
             <type>food</type>
@@ -136,7 +136,7 @@ class IntegrationTest():
         <weight>5</weight>
         <questItem>1</questItem>
         <icons>
-            <icon>item_crystal_skull</icon>
+            <icon>ITEM_CRYSTAL_SKULL</icon>
         </icons>
         <types>
             <type>special item</type>
@@ -157,7 +157,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_dagger_1</icon>
+            <icon>ITEM_DAGGER_1</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -179,7 +179,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_light_mace</icon>
+            <icon>ITEM_LIGHT_MACE</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -201,7 +201,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_sickle</icon>
+            <icon>ITEM_SICKLE</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -223,7 +223,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_club</icon>
+            <icon>ITEM_CLUB</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -245,7 +245,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_mace</icon>
+            <icon>ITEM_MACE</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -268,8 +268,8 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_morning_star_1</icon>
-            <icon>item_morning_star_2</icon>
+            <icon>ITEM_MORNING_STAR_1</icon>
+            <icon>ITEM_MORNING_STAR_2</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -291,7 +291,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_shortspear</icon>
+            <icon>ITEM_SHORTSPEAR</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -313,7 +313,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_longspear</icon>
+            <icon>ITEM_LONGSPEAR</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -335,7 +335,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_spear</icon>
+            <icon>ITEM_SPEAR</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -357,8 +357,8 @@ class IntegrationTest():
         </damageTypes>
         <class>martial</class>
         <icons>
-            <icon>item_short_sword_1</icon>
-            <icon>item_short_sword_2</icon>
+            <icon>ITEM_SHORT_SWORD_1</icon>
+            <icon>ITEM_SHORT_SWORD_2</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -377,7 +377,7 @@ class IntegrationTest():
                 <effect type="on drink" name="healing" power="1d10" />
         </effects>
         <icons>
-                <icon>item_potion_1</icon>
+                <icon>ITEM_POTION_1</icon>
         </icons>
         <types>
                 <type>potion</type>
@@ -393,7 +393,7 @@ class IntegrationTest():
                 <effect type="on drink" name="healing" power="1d6" />
         </effects>
         <icons>
-                <icon>item_potion_1</icon>
+                <icon>ITEM_POTION_1</icon>
         </icons>
         <types>
                 <type>potion</type>
@@ -409,7 +409,7 @@ class IntegrationTest():
                 <effect type="on drink" name="damage" power="1d6" />
         </effects>
         <icons>
-                <icon>item_potion_1</icon>
+                <icon>ITEM_POTION_1</icon>
         </icons>
         <types>
                 <type>potion</type>
@@ -432,10 +432,10 @@ class IntegrationTest():
         <hp>2</hp>
         <speed>2</speed>
         <icons>
-            <icon>creature_rat_1</icon>
-            <icon>creature_rat_2</icon>
-            <icon>creature_rat_3</icon>
-            <icon>creature_rat_4</icon>
+            <icon>CREATURE_RAT_1</icon>
+            <icon>CREATURE_RAT_2</icon>
+            <icon>CREATURE_RAT_3</icon>
+            <icon>CREATURE_RAT_4</icon>
         </icons>
         <attack>1d4</attack>
         <size>small</size>
@@ -451,8 +451,8 @@ class IntegrationTest():
         <hp>4</hp>
         <speed>1.9</speed>
         <icons>
-            <icon>creature_beetle_1</icon>
-            <icon>creature_beetle_2</icon>
+            <icon>CREATURE_BEETLE_1</icon>
+            <icon>CREATURE_BEETLE_2</icon>
         </icons>
         <attack>2d4</attack>
         <size>small</size>
