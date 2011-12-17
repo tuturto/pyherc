@@ -49,7 +49,7 @@ class AttackAction(Action):
         Executes this Attack
         '''
         if self.to_hit.is_hit():
-            self.damage.apply_to(self.target)
+            self.damage.apply_damage(self.target)
             #TODO: raise events
 
         #TODO: just a temporary time
@@ -82,10 +82,10 @@ class Damage():
         '''
         Default constructor
         '''
-        pass
+        #TODO: non-constant damage
         self.damage = 5
 
-    def apply_to(self, target):
+    def apply_damage(self, target):
         '''
         Applies damage to target
         @param target: Target to damage
