@@ -210,9 +210,17 @@ class Character:
         Execute action defined by action parameters
         @param action_parameters: parameters controlling creation of the action
         '''
+        action = self.create_action(action_parameters)
+        action.execute()
+
+    def create_action(self, action_parameters):
+        '''
+        Create an action by defined by action parameters
+        @param action_parameters: parameters controlling creation of the action
+        '''
         if self.action_factory != None:
             action = self.action_factory.get_action(action_parameters)
-            action.execute()
+        return action
 
 class Damage:
     """

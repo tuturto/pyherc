@@ -283,18 +283,18 @@ class GameWindow:
                         player.level.full_update_needed = True
                         #handle moving
                         direction = self.moveKeyMap[event.key]
-                        if pyHerc.rules.moving.check_move(model, player, direction)['ok']:
-                            #check in case player escaped
-                            if player.level != None:
-                                player.execute_action(
+                        action = player.create_action(
                                         MoveParameters(player, direction, 'walk')
                                         )
+
+                        if action.is_legal():
+                            #check in case player escaped
+                            if player.level != None:
+                                action.execute()
                         else:
-                            targetLocation = pyHerc.rules.moving.calculate_new_location(model, player, direction)
-                            if 'location' in targetLocation.keys():
-                                target = player.level.get_creature_at(targetLocation['location'])
-                                if target != None:
-                                    pyHerc.rules.combat.melee_attack(model, player, target)
+                            target = player.level.get_creature_at(action.new_location)
+                            if target != None:
+                                pyHerc.rules.combat.melee_attack(model, player, target)
                     elif event.key == K_PERIOD:
                         #pick up items
                         items = player.level.get_items_at(player.location)

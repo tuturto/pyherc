@@ -47,12 +47,39 @@ class MoveAction(Action):
         Executes this Move
         '''
         self.logger.debug('Executing move')
-        self.character.location = self.new_location
-        if self.new_level != None:
-            self.character.level = self.new_level
-        #TODO: refactor to be pluggable
-        self.character.tick = pyHerc.rules.time.get_new_tick(self.character, 2)
+        if self.is_legal():
+            self.character.location = self.new_location
+            if self.new_level != None:
+                self.character.level = self.new_level
+            #TODO: refactor to be pluggable
+            self.character.tick = pyHerc.rules.time.get_new_tick(self.character, 2)
+        else:
+            self.logger.warn('Tried to execute illegal move')
+            self.character.tick = pyHerc.rules.time.get_new_tick(self.character, 2)
         self.logger.debug('Move executed')
+
+    def is_legal(self):
+        '''
+        Check if the move is possible to perform
+        @returns: True if move is possible, false otherwise
+        '''
+        location_ok = False
+        if self.new_level != None:
+            if self.new_level.walls[self.new_location[0]][self.new_location[1]] == pyHerc.data.tiles.WALL_EMPTY:
+                #check for other creatures and such
+                location_ok = True
+                creatures = self.new_level.creatures[:]
+                #TODO: take PC into consideration
+                for creature in creatures:
+                    if creature.location == self.new_location:
+                        location_ok = False
+            else:
+                location_ok = False
+        else:
+            #TODO: is this player escaping?
+            pass
+
+        return location_ok
 
 class WalkAction(MoveAction):
     '''
@@ -62,7 +89,8 @@ class WalkAction(MoveAction):
         '''
         Execute this move
         '''
-        MoveAction.execute(self)
         self.logger.debug('Executing walk')
-        pass
+
+        MoveAction.execute(self)
+
         self.logger.debug('Walk executed')
