@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2011-11-14, 00:35:34 -->
+<!-- Saved: 2011-12-17, 11:03:38 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: add support for charges</Summary>
@@ -64,15 +64,6 @@
     <Resource>
       <Filename>pyHerc/rules/locals.py</Filename>
       <Linenumber>50</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: refactor to be pluggable</Summary>
-    <Description></Description>
-    <Created>2011-11-11, 07:10:09</Created>
-    <Resource>
-      <Filename>pyHerc/rules/move/action.py</Filename>
-      <Linenumber>53</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
@@ -229,15 +220,6 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: handle memory</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:36:24</Created>
-    <Resource>
-      <Filename>pyHerc/ai/simple.py</Filename>
-      <Linenumber>51</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: relative location</Summary>
     <Description></Description>
     <Created>2011-11-13, 21:37:25</Created>
@@ -262,105 +244,6 @@
     <Resource>
       <Filename>pyHerc/rules/tables.py</Filename>
       <Linenumber>280</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: use configuration</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:37:59</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>119</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: implement</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:37:59</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>157</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: implement menu here</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:37:59</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>211</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: implement properly</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:37:59</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>216</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: load tables for model</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:37:59</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>221</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: do not paint screen all the time</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:37:59</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>351</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: set dirty rectangles properly</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:37:59</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>362</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: when dirty rectangles work, uncomment this</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:37:59</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>365</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: don't call during each and every update</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:37:59</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>429</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: make more generic and clean up</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:37:59</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>433</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: resistances</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:38:23</Created>
-    <Resource>
-      <Filename>pyHerc/rules/combat.py</Filename>
-      <Linenumber>64</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
@@ -400,15 +283,6 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: filter events</Summary>
-    <Description></Description>
-    <Created>2011-11-13, 21:38:23</Created>
-    <Resource>
-      <Filename>pyHerc/data/model.py</Filename>
-      <Linenumber>79</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: change to use rules.tables</Summary>
     <Description></Description>
     <Created>2011-11-13, 21:38:23</Created>
@@ -442,6 +316,150 @@
     <Resource>
       <Filename>pyHerc/rules/character.py</Filename>
       <Linenumber>105</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: filter events</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 09:56:20</Created>
+    <Resource>
+      <Filename>pyHerc/data/model.py</Filename>
+      <Linenumber>79</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: resistances</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 10:09:44</Created>
+    <Resource>
+      <Filename>pyHerc/rules/combat.py</Filename>
+      <Linenumber>64</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: handle memory</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 10:23:07</Created>
+    <Resource>
+      <Filename>pyHerc/ai/simple.py</Filename>
+      <Linenumber>52</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: refactor to be pluggable</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:01:25</Created>
+    <Resource>
+      <Filename>pyHerc/rules/move/action.py</Filename>
+      <Linenumber>54</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: take PC into consideration</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:01:25</Created>
+    <Resource>
+      <Filename>pyHerc/rules/move/action.py</Filename>
+      <Linenumber>72</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: is this player escaping?</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:01:25</Created>
+    <Resource>
+      <Filename>pyHerc/rules/move/action.py</Filename>
+      <Linenumber>79</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: use configuration</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:02:07</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>119</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:02:07</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>157</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement menu here</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:02:07</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>211</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement properly</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:02:07</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>216</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: load tables for model</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:02:07</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>221</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: do not paint screen all the time</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:02:07</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>351</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: set dirty rectangles properly</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:02:07</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>362</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: when dirty rectangles work, uncomment this</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:02:07</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>365</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: don't call during each and every update</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:02:07</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>429</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: make more generic and clean up</Summary>
+    <Description></Description>
+    <Created>2011-12-17, 11:02:07</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>433</Linenumber>
     </Resource>
   </Task>
 </Tasks>
