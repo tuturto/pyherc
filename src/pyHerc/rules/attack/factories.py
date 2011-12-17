@@ -25,6 +25,8 @@ Attack related factories are defined here
 import types
 import logging
 from pyHerc.rules.attack.action import AttackAction
+from pyHerc.rules.attack.action import ToHit
+from pyHerc.rules.attack.action import Damage
 from pyHerc.rules.public import SubActionFactory
 
 class AttackFactory(SubActionFactory):
@@ -104,4 +106,5 @@ class UnarmedCombatFactory():
         Create a attack action
         @param parameters: Parameters used to control attack creation
         '''
-        return AttackAction('unarmed', None, None)
+        #TODO: implement: attack_type, to_hit, damage, attacker, target
+        return AttackAction('unarmed', ToHit(), Damage(), parameters.attacker, parameters.target)

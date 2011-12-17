@@ -143,6 +143,13 @@ class Character:
         '''
         return self.hit_points
 
+    def set_hp(self, hit_points):
+        '''
+        Set current hitpoints
+        @param hit_points: hit points to set
+        '''
+        self.hit_points = hit_points
+
     def get_max_hp(self):
         """
         Get maximum HP this character can currently have

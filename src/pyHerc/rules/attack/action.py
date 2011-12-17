@@ -28,34 +28,66 @@ class AttackAction(Action):
     '''
     Action for attacking
     '''
-    def __init__(self, attack_type, to_hit, damage):
+    def __init__(self, attack_type, to_hit, damage, attacker, target):
         '''
         Default constructor
         @attack_type: type of the attack
         @param to_hit: ToHit object for calculating if attack hits
         @param damage: Damage object for calculating done damage
+        @param attacker: Character doing attack
+        @param target: Character being attacked
         '''
         self.action_type = 'attack'
         self.attack_type = attack_type
         self.to_hit = to_hit
         self.damage = damage
-
+        self.attacker = attacker
+        self.target = target
 
     def execute(self):
         '''
         Executes this Attack
         '''
-        self.character.tick = pyHerc.rules.time.get_new_tick(self.character, 20)
-        pass
+        if self.to_hit.is_hit():
+            self.damage.apply_to(self.target)
+            #TODO: raise events
+
+        #TODO: just a temporary time
+        self.attacker.tick = pyHerc.rules.time.get_new_tick(self.attacker, 20)
+
 
 class ToHit():
     '''
     Checks done for hitting
     '''
-    pass
+
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
+    def is_hit(self):
+        '''
+        Checks if the hit lands
+        @returns: True if hit is successful, False otherwise
+        '''
+        return True
 
 class Damage():
     '''
     Damage done in attack
     '''
-    pass
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+        self.damage = 5
+
+    def apply_to(self, target):
+        '''
+        Applies damage to target
+        @param target: Target to damage
+        '''
+        target.set_hp(target.get_hp() - self.damage)

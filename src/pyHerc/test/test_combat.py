@@ -92,3 +92,5 @@ class TestMeleeCombat(IntegrationTest):
                                                 self.character2,
                                                 'unarmed',
                                                 rng))
+
+        assert self.character2.hit_points < 10
