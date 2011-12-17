@@ -22,6 +22,7 @@
 Module defining classes related to AttackAction
 '''
 from pyHerc.rules.public import Action
+import pyHerc.rules.time
 
 class AttackAction(Action):
     '''
@@ -44,6 +45,7 @@ class AttackAction(Action):
         '''
         Executes this Attack
         '''
+        self.character.tick = pyHerc.rules.time.get_new_tick(self.character, 20)
         pass
 
 class ToHit():

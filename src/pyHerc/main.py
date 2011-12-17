@@ -29,6 +29,9 @@ import logging
 from pyHerc.rules.public import ActionFactory
 from pyHerc.rules.move.factories import MoveFactory
 from pyHerc.rules.move.factories import WalkFactory
+from pyHerc.rules.attack.factories import AttackFactory
+from pyHerc.rules.attack.factories import UnarmedCombatFactory
+
 
 from pyHerc.gui.windows import MainWindow
 
@@ -139,7 +142,12 @@ class Application:
         self.logger.info('Initialising action sub system')
         walk_factory = WalkFactory()
         move_factory = MoveFactory([walk_factory])
-        self.action_factory = ActionFactory([move_factory])
+
+        unarmed_combat_factory = UnarmedCombatFactory()
+        attack_factory = AttackFactory([unarmed_combat_factory])
+
+        self.action_factory = ActionFactory([move_factory,
+                                             attack_factory])
         self.logger.info('Action sub system initialised')
 
     def get_action_factory(self):

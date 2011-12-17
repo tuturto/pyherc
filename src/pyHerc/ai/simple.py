@@ -28,6 +28,7 @@ import math
 import pyHerc.rules.moving
 import pyHerc.rules.combat
 from pyHerc.rules.public import MoveParameters
+from pyHerc.rules.public import AttackParameters
 
 class FlockingHerbivore():
     """
@@ -83,7 +84,10 @@ class FlockingHerbivore():
                         self.character.tick = self.character.tick + 10
                 else:
                     #attack
-                    pyHerc.rules.combat.melee_attack(model, character, player)
+                    character.execute_action(
+                                    AttackParameters(character, player, 'unarmed')
+                                    )
+                    # pyHerc.rules.combat.melee_attack(model, character, player)
             else:
                 #find direction
                 direction = self.find_direction(character.location,
