@@ -19,6 +19,7 @@
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
 import types
+import random
 from pyHerc.rules.move.factories import MoveFactory
 from pyHerc.rules.attack.factories import AttackFactory
 
@@ -91,7 +92,7 @@ class AttackParameters(ActionParameters):
     Object for controlling attack action creation
     '''
     def __init__(self, attacker, target, attack_type,
-                        random_number_generator = None):
+                        random_number_generator = random.Random()):
         '''
         Construct AttackParameters
         @param attacker: Character doing an attack
@@ -104,7 +105,7 @@ class AttackParameters(ActionParameters):
         self.attacker = attacker
         self.target = target
         self.attack_type = attack_type
-        self.rng = random_number_generator
+        self.random_number_generator = random_number_generator
 
     def __str__(self):
         return 'attack with attack type of ' + self.attack_type

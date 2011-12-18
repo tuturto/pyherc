@@ -71,7 +71,7 @@ class ToHit():
         Checks if the hit lands
         @returns: True if hit is successful, False otherwise
         '''
-        return True
+        pass
 
 class Damage():
     '''
@@ -81,8 +81,7 @@ class Damage():
         '''
         Default constructor
         '''
-        #TODO: non-constant damage
-        self.damage = 5
+        pass
 
     def apply_damage(self, target):
         '''

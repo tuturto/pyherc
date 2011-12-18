@@ -150,6 +150,14 @@ class Character:
         '''
         self.hit_points = hit_points
 
+    def get_body(self):
+        '''
+        Get body attribute
+        @returns: Body attribute of this character
+        '''
+        #TODO: implement
+        return 7
+
     def get_max_hp(self):
         """
         Get maximum HP this character can currently have

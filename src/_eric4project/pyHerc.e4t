@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2011-12-18, 18:35:18 -->
+<!-- Saved: 2011-12-18, 19:44:09 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: add support for charges</Summary>
@@ -418,24 +418,6 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: filter events</Summary>
-    <Description></Description>
-    <Created>2011-12-17, 20:05:26</Created>
-    <Resource>
-      <Filename>pyHerc/data/model.py</Filename>
-      <Linenumber>79</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: implement: attack_type, to_hit, damage, attacker, target</Summary>
-    <Description></Description>
-    <Created>2011-12-18, 18:24:25</Created>
-    <Resource>
-      <Filename>pyHerc/rules/attack/factories.py</Filename>
-      <Linenumber>88</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: model parameter</Summary>
     <Description></Description>
     <Created>2011-12-18, 18:24:35</Created>
@@ -474,7 +456,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: raise events</Summary>
     <Description></Description>
-    <Created>2011-12-18, 18:28:33</Created>
+    <Created>2011-12-18, 18:51:16</Created>
     <Resource>
       <Filename>pyHerc/rules/attack/action.py</Filename>
       <Linenumber>52</Linenumber>
@@ -483,19 +465,37 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: just a temporary time</Summary>
     <Description></Description>
-    <Created>2011-12-18, 18:28:34</Created>
+    <Created>2011-12-18, 18:51:16</Created>
     <Resource>
       <Filename>pyHerc/rules/attack/action.py</Filename>
       <Linenumber>54</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: non-constant damage</Summary>
+    <Summary>TODO: filter events</Summary>
     <Description></Description>
-    <Created>2011-12-18, 18:28:34</Created>
+    <Created>2011-12-18, 19:20:56</Created>
     <Resource>
-      <Filename>pyHerc/rules/attack/action.py</Filename>
-      <Linenumber>84</Linenumber>
+      <Filename>pyHerc/data/model.py</Filename>
+      <Linenumber>79</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement</Summary>
+    <Description></Description>
+    <Created>2011-12-18, 19:20:56</Created>
+    <Resource>
+      <Filename>pyHerc/data/model.py</Filename>
+      <Linenumber>158</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement: attack_type, to_hit, damage, attacker, target</Summary>
+    <Description></Description>
+    <Created>2011-12-18, 19:29:32</Created>
+    <Resource>
+      <Filename>pyHerc/rules/attack/factories.py</Filename>
+      <Linenumber>78</Linenumber>
     </Resource>
   </Task>
 </Tasks>

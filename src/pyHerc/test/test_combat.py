@@ -85,7 +85,7 @@ class TestMeleeCombat(IntegrationTest):
         Test that unarmed attack will harm opponent
         '''
         rng = StubRandomNumberGenerator()
-        rng.inject(12, [12, 12, 12, 12, 12, 12, 12])
+        rng.inject(12, [2, 2, 2, 2, 2, 2, 2])
 
         self.character1.execute_action(AttackParameters(
                                                 self.character1,
