@@ -482,14 +482,7 @@ class IntegrationTest():
     </creature>
 </creatures>
 """
-
-        walk_factory = WalkFactory()
-        move_factory = MoveFactory([walk_factory])
-
-        unarmed_combat = UnarmedCombatFactory()
-        attack_factory = AttackFactory([unarmed_combat])
-
-        self.action_factory = ActionFactory([move_factory, attack_factory])
+        self.action_factory = ActionFactory()
 
         self.model = pyHerc.data.model.Model()
         self.itemGenerator = pyHerc.generators.item.ItemGenerator()

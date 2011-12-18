@@ -19,40 +19,25 @@
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
 import types
+from pyHerc.rules.move.factories import MoveFactory
+from pyHerc.rules.attack.factories import AttackFactory
 
 '''
 Public interface for action subsystem
 
 Classes:
-    Action - Represents a single action taken by a character
-    ActionFactory - Class used to contruct Action objects
-    ActionParameters - Class used to guide Action construction
+ActionFactory - Class used to contruct Action objects
+ActionParameters - Class used to guide Action construction
 
-    AttackParameters - Class used to guide contruction of attack related actions
+AttackParameters - Class used to guide contruction of attack related actions
 '''
-
-class Action():
-    '''
-    Object representing an action taken by a character
-    '''
-    def __init__(self):
-        '''
-        Default constructor
-        '''
-        pass
-
-    def execute(self):
-        '''
-        Executes the action
-        '''
-        pass
 
 class ActionFactory():
     '''
     Object for creating actions
     '''
 
-    def __init__(self, factories = None):
+    def __init__(self, factories = [MoveFactory(), AttackFactory()]):
         '''
         Construct ActionFactory
         @param factories: a single Factory or list of Factories to use
@@ -90,48 +75,6 @@ class ActionFactory():
             return subs[0]
         else:
             return None
-
-class SubActionFactory():
-    '''
-    Factory to handle concrete creation of actions
-    '''
-    def __init__(self):
-        '''
-        Constructor for this factory
-        '''
-        self.action_type = 'default'
-
-    def get_sub_factory(self, parameters):
-        '''
-        Get sub factory to handle parameters
-        @param parameters: Parameters to use for searching the factory
-        '''
-        self.logger.debug('getting sub factory for ' + str(parameters))
-        subs = [x for x in self.factories if x.can_handle(parameters)]
-
-        if len(subs) == 1:
-            self.logger.debug('sub factory found: ' + str(subs[0]))
-            return subs[0]
-        else:
-            self.logger.debug('no factory found')
-            return None
-
-    def can_handle(self, parameters):
-        '''
-        Can this factory process these parameters
-        @param parameters: Parameters to check
-        @returns: True if factory is capable of handling parameters
-        '''
-        return self.action_type == parameters.action_type
-
-
-    def get_action(self, parameters):
-        '''
-        Create an action
-        @param parameters: Parameters used to control action creation
-        '''
-        sub = self.get_sub_factory(parameters)
-        return sub.get_action(parameters)
 
 class ActionParameters():
     '''

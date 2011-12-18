@@ -27,28 +27,7 @@ import logging
 from pyHerc.rules.attack.action import AttackAction
 from pyHerc.rules.attack.action import ToHit
 from pyHerc.rules.attack.action import Damage
-from pyHerc.rules.public import SubActionFactory
-
-class AttackFactory(SubActionFactory):
-    '''
-    Factory for constructing attack actions
-    '''
-    def __init__(self, factories = None):
-        '''
-        Constructor for this factory
-        '''
-        self.logger = logging.getLogger('pyHerc.rules.attack.factories.AttackFactory')
-        self.logger.debug('initialising AttackFactory')
-        self.action_type = 'attack'
-
-        if factories != None:
-            if isinstance(factories, types.ListType):
-                self.factories = factories
-            else:
-                self.factories = []
-                self.factories.append(factories)
-
-        self.logger.debug('AttackFactory initialised')
+from pyHerc.rules.factory import SubActionFactory
 
 class ToHitFactory():
     '''
@@ -108,3 +87,24 @@ class UnarmedCombatFactory():
         '''
         #TODO: implement: attack_type, to_hit, damage, attacker, target
         return AttackAction('unarmed', ToHit(), Damage(), parameters.attacker, parameters.target)
+
+class AttackFactory(SubActionFactory):
+    '''
+    Factory for constructing attack actions
+    '''
+    def __init__(self, factories = [UnarmedCombatFactory()]):
+        '''
+        Constructor for this factory
+        '''
+        self.logger = logging.getLogger('pyHerc.rules.attack.factories.AttackFactory')
+        self.logger.debug('initialising AttackFactory')
+        self.action_type = 'attack'
+
+        if factories != None:
+            if isinstance(factories, types.ListType):
+                self.factories = factories
+            else:
+                self.factories = []
+                self.factories.append(factories)
+
+        self.logger.debug('AttackFactory initialised')

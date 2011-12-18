@@ -23,9 +23,8 @@ Module defining classes related to MoveAttack
 '''
 import logging
 import pyHerc.rules.time
-from pyHerc.rules.public import Action
 
-class MoveAction(Action):
+class MoveAction():
     '''
     Action for moving
     '''

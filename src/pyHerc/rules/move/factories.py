@@ -25,44 +25,7 @@ import types
 import logging
 import pyHerc.data.tiles
 from pyHerc.rules.move.action import MoveAction
-from pyHerc.rules.public import SubActionFactory
-
-class MoveFactory(SubActionFactory):
-    '''
-    Factory for constructing move actions
-    '''
-    def __init__(self, factories = None):
-        '''
-        Constructor for this factory
-        @param factories: a single Factory or list of Factories to use
-        '''
-        self.logger = logging.getLogger('pyHerc.rules.move.factories.MoveFactory')
-        self.logger.debug('initialising MoveFactory')
-        self.action_type = 'move'
-
-        if factories != None:
-            if isinstance(factories, types.ListType):
-                self.factories = factories
-            else:
-                self.factories = []
-                self.factories.append(factories)
-
-        self.logger.debug('MoveFactory initialised')
-
-    def __getstate__(self):
-        '''
-        Override __getstate__ in order to get pickling work
-        '''
-        d = dict(self.__dict__)
-        del d['logger']
-        return d
-
-    def __setstate__(self, d):
-        '''
-        Override __setstate__ in order to get pickling work
-        '''
-        self.__dict__.update(d)
-        self.logger = logging.getLogger('pyHerc.rules.move.factories.MoveFactory')
+from pyHerc.rules.factory import SubActionFactory
 
 class WalkFactory(SubActionFactory):
     '''
@@ -154,3 +117,40 @@ class WalkFactory(SubActionFactory):
             newLocation = parameters.character.location
 
         return MoveAction(parameters.character, newLocation, newLevel)
+
+class MoveFactory(SubActionFactory):
+    '''
+    Factory for constructing move actions
+    '''
+    def __init__(self, factories = [WalkFactory()]):
+        '''
+        Constructor for this factory
+        @param factories: a single Factory or list of Factories to use
+        '''
+        self.logger = logging.getLogger('pyHerc.rules.move.factories.MoveFactory')
+        self.logger.debug('initialising MoveFactory')
+        self.action_type = 'move'
+
+        if factories != None:
+            if isinstance(factories, types.ListType):
+                self.factories = factories
+            else:
+                self.factories = []
+                self.factories.append(factories)
+
+        self.logger.debug('MoveFactory initialised')
+
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.rules.move.factories.MoveFactory')

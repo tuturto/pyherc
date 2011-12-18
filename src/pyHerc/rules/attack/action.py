@@ -21,10 +21,9 @@
 '''
 Module defining classes related to AttackAction
 '''
-from pyHerc.rules.public import Action
 import pyHerc.rules.time
 
-class AttackAction(Action):
+class AttackAction():
     '''
     Action for attacking
     '''
