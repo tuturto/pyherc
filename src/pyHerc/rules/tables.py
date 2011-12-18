@@ -212,7 +212,9 @@ class CreatureHandler(sax.ContentHandler):
             #finished processing creature
             self.creatures[self.newCreature['name']] = self.newCreature
             self.newCreature = None
-        elif name in ('name', 'size', 'attack'):
+        elif name in ('attack'):
+            self.newCreature[name] = int(self.text)
+        elif name in ('name', 'size'):
             self.newCreature[name] = self.text
         elif name in ('str', 'dex', 'con', 'int', 'wis', 'cha', 'hp'):
             self.newCreature[name] = int(self.text)

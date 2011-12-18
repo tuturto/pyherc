@@ -121,6 +121,7 @@ class Character:
         self.mimic_item = None
         self.action_factory = action_factory
         self.artificial_intelligence = None
+        self.logger = logging.getLogger('pyHerc.data.model.Character')
 
     def __str__(self):
         return self.name
@@ -157,6 +158,20 @@ class Character:
         '''
         #TODO: implement
         return 7
+
+    def get_attack(self):
+        '''
+        Return attack attribute of the character
+        @returns: Attack value
+        '''
+        return self.attack
+
+    def set_attack(self, attack):
+        '''
+        Set attack attribute of the character
+        @param attack: Attack attribute
+        '''
+        self.attack = attack
 
     def get_max_hp(self):
         """
@@ -236,6 +251,21 @@ class Character:
         if self.action_factory != None:
             action = self.action_factory.get_action(action_parameters)
         return action
+
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.data.model.Character')
 
 class Damage:
     """

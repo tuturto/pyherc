@@ -437,7 +437,7 @@ class IntegrationTest():
             <icon>CREATURE_RAT_3</icon>
             <icon>CREATURE_RAT_4</icon>
         </icons>
-        <attack>1d4</attack>
+        <attack>2</attack>
         <size>small</size>
     </creature>
     <creature>
@@ -454,7 +454,7 @@ class IntegrationTest():
             <icon>CREATURE_BEETLE_1</icon>
             <icon>CREATURE_BEETLE_2</icon>
         </icons>
-        <attack>2d4</attack>
+        <attack>4</attack>
         <size>small</size>
     </creature>
     <creature>
@@ -470,7 +470,7 @@ class IntegrationTest():
         <icons>
             <icon>CREATURE_GARGOYLE</icon>
         </icons>
-        <attack>1d4+2</attack>
+        <attack>4</attack>
         <size>medium</size>
         <feats>
             <feat name="toughness" />

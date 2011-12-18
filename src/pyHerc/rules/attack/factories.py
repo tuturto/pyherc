@@ -75,12 +75,16 @@ class UnarmedCombatFactory():
         @param parameters: Parameters used to control attack creation
         '''
         self.logger.debug('Creating an unarmed attack')
-        #TODO: implement: attack_type, to_hit, damage, attacker, target
+
+        attacker = parameters.attacker
+        target = parameters.target
+
         attack = AttackAction('unarmed',
-                            UnarmedToHit(parameters.attacker, parameters.target, parameters.random_number_generator),
-                            UnarmedDamage(50),
-                            parameters.attacker,
-                            parameters.target)
+                        UnarmedToHit(attacker, target,
+                                    parameters.random_number_generator),
+                        UnarmedDamage(attacker.get_attack()),
+                        attacker,
+                        target)
 
         return attack
 
