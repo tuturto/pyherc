@@ -84,7 +84,8 @@ class UnarmedCombatFactory():
                                     parameters.random_number_generator),
                         UnarmedDamage(attacker.get_attack()),
                         attacker,
-                        target)
+                        target,
+                        parameters.model)
 
         return attack
 

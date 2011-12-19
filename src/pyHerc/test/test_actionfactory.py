@@ -24,6 +24,7 @@ Module for testing combat related rules
 
 import random
 from pyHerc.test import IntegrationTest
+from pyHerc.test import StubModel
 from pyHerc.rules.public import ActionFactory
 from pyHerc.rules.public import AttackParameters
 from pyHerc.rules.attack.factories import AttackFactory
@@ -65,7 +66,7 @@ class TestActionFactories():
         Test that factory can be found by using Parameters object
         '''
         factory = ActionFactory([AttackFactory(), MoveFactory()])
-        parameters = AttackParameters(None, None, 'melee', random.Random())
+        parameters = AttackParameters(None, None, 'melee', StubModel())
 
         sub_factory = factory.get_sub_factory(parameters)
 

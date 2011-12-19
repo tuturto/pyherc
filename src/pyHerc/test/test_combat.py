@@ -32,6 +32,7 @@ from pyHerc.generators.dungeon import TestLevelGenerator
 from pyHerc.rules.tables import Tables
 from pyHerc.test import IntegrationTest
 from pyHerc.test import StubRandomNumberGenerator
+from pyHerc.test import StubModel
 
 from pyHerc.rules.public import AttackParameters
 from pyHerc.rules.public import ActionFactory
@@ -79,6 +80,7 @@ class TestMeleeCombat(IntegrationTest):
                                                       self.character1,
                                                       self.character2,
                                                       'unarmed',
+                                                      StubModel(),
                                                       rng))
 
         assert isinstance(action,  AttackAction)
@@ -95,6 +97,7 @@ class TestMeleeCombat(IntegrationTest):
                                                 self.character1,
                                                 self.character2,
                                                 'unarmed',
+                                                StubModel(),
                                                 rng))
 
         assert self.character2.hit_points < 10

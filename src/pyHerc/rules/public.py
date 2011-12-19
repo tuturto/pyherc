@@ -91,13 +91,15 @@ class AttackParameters(ActionParameters):
     '''
     Object for controlling attack action creation
     '''
-    def __init__(self, attacker, target, attack_type,
+    def __init__(self, attacker, target, attack_type, model,
                         random_number_generator = random.Random()):
         '''
         Construct AttackParameters
         @param attacker: Character doing an attack
         @param target: Character being attacked
         @param attack_type: type of attack to perform
+        @param model: Model being used
+        @param random_number_generator: Random number generator to use
         '''
         ActionParameters.__init__(self)
 
@@ -105,6 +107,7 @@ class AttackParameters(ActionParameters):
         self.attacker = attacker
         self.target = target
         self.attack_type = attack_type
+        self.model = model
         self.random_number_generator = random_number_generator
 
     def __str__(self):

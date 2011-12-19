@@ -22,12 +22,13 @@
 Module defining classes related to AttackAction
 '''
 import pyHerc.rules.time
+import pyHerc.rules.ending
 
 class AttackAction():
     '''
     Action for attacking
     '''
-    def __init__(self, attack_type, to_hit, damage, attacker, target):
+    def __init__(self, attack_type, to_hit, damage, attacker, target, model):
         '''
         Default constructor
         @attack_type: type of the attack
@@ -35,6 +36,7 @@ class AttackAction():
         @param damage: Damage object for calculating done damage
         @param attacker: Character doing attack
         @param target: Character being attacked
+        @param model: Model being used
         '''
         self.action_type = 'attack'
         self.attack_type = attack_type
@@ -42,6 +44,7 @@ class AttackAction():
         self.damage = damage
         self.attacker = attacker
         self.target = target
+        self.model = model
 
     def execute(self):
         '''
@@ -50,6 +53,8 @@ class AttackAction():
         if self.to_hit.is_hit():
             self.damage.apply_damage(self.target)
             #TODO: raise events
+
+        # pyHerc.rules.ending.check_dying(model, self.target, None)
 
         #TODO: just a temporary time
         self.attacker.tick = pyHerc.rules.time.get_new_tick(self.attacker, 20)
