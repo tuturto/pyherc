@@ -77,13 +77,10 @@ class CreatureGenerator:
 
         newCreature = pyHerc.data.model.Character(self.action_factory)
         newCreature.name = table['name']
-        newCreature.str = table['str']
-        newCreature.dex = table['dex']
-        newCreature.con = table['con']
-        newCreature.int = table['int']
-        newCreature.wis = table['wis']
-        newCreature.cha = table['cha']
-        newCreature.hit_points = table['hp']
+        newCreature.set_body(table['body'])
+        newCreature.set_finesse(table['finesse'])
+        newCreature.set_mind(table['mind'])
+        newCreature.set_hp(table['hp'])
         newCreature.speed = table['speed']
         newCreature.size = table['size']
         newCreature.attack = table['attack']

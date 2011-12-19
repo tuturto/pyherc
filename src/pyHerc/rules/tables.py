@@ -216,7 +216,7 @@ class CreatureHandler(sax.ContentHandler):
             self.newCreature[name] = int(self.text)
         elif name in ('name', 'size'):
             self.newCreature[name] = self.text
-        elif name in ('str', 'dex', 'con', 'int', 'wis', 'cha', 'hp'):
+        elif name in ('body', 'finesse', 'mind', 'hp'):
             self.newCreature[name] = int(self.text)
         elif name == 'speed':
             self.newCreature['speed'] = float(self.text)

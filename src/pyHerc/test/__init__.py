@@ -423,12 +423,9 @@ class IntegrationTest():
 <creatures>
     <creature>
         <name>rat</name>
-        <str>4</str>
-        <dex>12</dex>
-        <con>4</con>
-        <int>2</int>
-        <wis>4</wis>
-        <cha>4</cha>
+        <body>4</body>
+        <finesse>12</finesse>
+        <mind>2</mind>
         <hp>2</hp>
         <speed>2</speed>
         <icons>
@@ -442,12 +439,9 @@ class IntegrationTest():
     </creature>
     <creature>
         <name>fire beetle</name>
-        <str>10</str>
-        <dex>11</dex>
-        <con>11</con>
-        <int>0</int>
-        <wis>10</wis>
-        <cha>7</cha>
+        <body>10</body>
+        <finesse>11</finesse>
+        <mind>0</mind>
         <hp>4</hp>
         <speed>1.9</speed>
         <icons>
@@ -459,12 +453,9 @@ class IntegrationTest():
     </creature>
     <creature>
         <name>gargoyle</name>
-        <str>15</str>
-        <dex>14</dex>
-        <con>18</con>
-        <int>6</int>
-        <wis>11</wis>
-        <cha>7</cha>
+        <body>15</body>
+        <finesse>14</finesse>
+        <mind>6</mind>
         <hp>37</hp>
         <speed>1</speed>
         <icons>
@@ -477,7 +468,7 @@ class IntegrationTest():
             <feat name="multiattack" />
             <feat name="damage reduction" type="magic" amount="10" />
             <feat name="darkvision" range="10" />
-            <feat name="freeze" />
+            <feat name="mimic" target="gargoyle statue" />
         </feats>
     </creature>
 </creatures>

@@ -91,12 +91,9 @@ class Character:
 
     def __init__(self, action_factory):
         # attributes
-        self.str = None
-        self.dex = None
-        self.con = None
-        self.int = None
-        self.wis = None
-        self.cha = None
+        self.body = None
+        self.finesse = None
+        self.mind = None
         self.name = 'prototype'
         self.race = None
         self.kit = None
@@ -156,8 +153,42 @@ class Character:
         Get body attribute
         @returns: Body attribute of this character
         '''
-        #TODO: implement
-        return 7
+        return self.body
+
+    def set_body(self, body):
+        '''
+        Set body attribute
+        @param body: body attribute to set
+        '''
+        self.body = body
+
+    def get_finesse(self):
+        '''
+        Get finesse attribute
+        @returns: finesse attribute
+        '''
+        return self.finesse
+
+    def set_finesse(self, finesse):
+        '''
+        Set finesse attribute
+        @param finesse: finesse attribute to set
+        '''
+        self.finesse = finesse
+
+    def get_mind(self):
+        '''
+        Get mind attribute
+        @returns: Mind attribute
+        '''
+        return self.mind
+
+    def set_mind(self, mind):
+        '''
+        Set mind attribute
+        @param mind: mind attribute to set
+        '''
+        self.mind = mind
 
     def get_attack(self):
         '''

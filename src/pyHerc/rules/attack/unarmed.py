@@ -60,7 +60,7 @@ class UnarmedToHit(ToHit):
         to_hit_roll = self.rng.randint(1, 6) + self.rng.randint(1, 6)
         self.logger.debug('Rolled {0} for to hit'.format(to_hit_roll))
 
-        if to_hit_roll <= target_number:
+        if (to_hit_roll <= target_number) or (to_hit_roll == 2):
             is_hit = True
         else:
             is_hit = False

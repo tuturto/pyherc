@@ -36,6 +36,7 @@ import pyHerc.rules.combat
 import pyHerc.generators.dungeon
 import pyHerc.rules.tables
 from pyHerc.rules.public import MoveParameters
+from pyHerc.rules.public import AttackParameters
 from pyHerc.rules.los import get_fov_matrix
 from pygame.locals import KEYDOWN
 from pygame.locals import K_DOWN, K_UP
@@ -294,7 +295,10 @@ class GameWindow:
                         else:
                             target = player.level.get_creature_at(action.new_location)
                             if target != None:
-                                pyHerc.rules.combat.melee_attack(model, player, target)
+                                #TODO: melee / unarmed selection
+                                player.execute_action(
+                                        AttackParameters(player, target, 'unarmed')
+                                        )
                     elif event.key == K_PERIOD:
                         #pick up items
                         items = player.level.get_items_at(player.location)
