@@ -28,7 +28,9 @@ from pyHerc.test import StubModel
 from pyHerc.rules.public import ActionFactory
 from pyHerc.rules.public import AttackParameters
 from pyHerc.rules.attack.factories import AttackFactory
+from pyHerc.rules.attack.factories import UnarmedCombatFactory
 from pyHerc.rules.move.factories import MoveFactory
+from pyHerc.rules.move.factories import WalkFactory
 from pyHerc.rules.attack.action import AttackAction
 from pyHerc.data.model import Character
 from pyHerc.data.dungeon import Level
@@ -42,7 +44,8 @@ class TestActionFactories():
         '''
         Test that action factory can be initialised with single sub factory
         '''
-        factory = ActionFactory(AttackFactory())
+        factory = ActionFactory(StubModel(),
+                                AttackFactory(UnarmedCombatFactory()))
 
         factories = factory.get_sub_factories()
         found = [isinstance(x, AttackFactory) for x in factories]
@@ -52,7 +55,9 @@ class TestActionFactories():
         '''
         Test that action factory can be initialised with list of factories
         '''
-        factory = ActionFactory([AttackFactory(), MoveFactory()])
+        factory = ActionFactory(StubModel(),
+                                [AttackFactory(UnarmedCombatFactory()),
+                                    MoveFactory(WalkFactory())])
         factories = factory.get_sub_factories()
 
         found = [isinstance(x, AttackFactory) for x in factories]
@@ -65,7 +70,9 @@ class TestActionFactories():
         '''
         Test that factory can be found by using Parameters object
         '''
-        factory = ActionFactory([AttackFactory(), MoveFactory()])
+        factory = ActionFactory(StubModel(),
+                                [AttackFactory(UnarmedCombatFactory()),
+                                    MoveFactory(WalkFactory())])
         parameters = AttackParameters(None, None, 'melee', StubModel())
 
         sub_factory = factory.get_sub_factory(parameters)

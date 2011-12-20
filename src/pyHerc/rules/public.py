@@ -20,8 +20,6 @@
 
 import types
 import random
-from pyHerc.rules.move.factories import MoveFactory
-from pyHerc.rules.attack.factories import AttackFactory
 
 '''
 Public interface for action subsystem
@@ -38,7 +36,7 @@ class ActionFactory():
     Object for creating actions
     '''
 
-    def __init__(self, model, factories = [MoveFactory(), AttackFactory()]):
+    def __init__(self, model, factories):
         '''
         Construct ActionFactory
         @param model: model to register for the factory

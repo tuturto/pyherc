@@ -142,7 +142,14 @@ class Application:
         '''
         self.logger.info('Initialising action sub system')
 
-        self.action_factory = ActionFactory(model)
+        walk_factory = WalkFactory()
+        move_factory = MoveFactory(walk_factory)
+        unarmed_combat_factory = UnarmedCombatFactory()
+        attack_factory = AttackFactory(unarmed_combat_factory)
+
+        self.action_factory = ActionFactory(
+                                            model,
+                                            [move_factory, attack_factory])
 
         self.logger.info('Action sub system initialised')
 

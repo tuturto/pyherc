@@ -93,7 +93,7 @@ class AttackFactory(SubActionFactory):
     '''
     Factory for constructing attack actions
     '''
-    def __init__(self, factories = [UnarmedCombatFactory()]):
+    def __init__(self, factories):
         '''
         Constructor for this factory
         '''
@@ -101,11 +101,10 @@ class AttackFactory(SubActionFactory):
         self.logger.debug('initialising AttackFactory')
         self.action_type = 'attack'
 
-        if factories != None:
-            if isinstance(factories, types.ListType):
-                self.factories = factories
-            else:
-                self.factories = []
-                self.factories.append(factories)
+        if isinstance(factories, types.ListType):
+            self.factories = factories
+        else:
+            self.factories = []
+            self.factories.append(factories)
 
         self.logger.debug('AttackFactory initialised')

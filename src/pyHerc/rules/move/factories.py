@@ -122,7 +122,7 @@ class MoveFactory(SubActionFactory):
     '''
     Factory for constructing move actions
     '''
-    def __init__(self, factories = [WalkFactory()]):
+    def __init__(self, factories):
         '''
         Constructor for this factory
         @param factories: a single Factory or list of Factories to use
@@ -131,12 +131,11 @@ class MoveFactory(SubActionFactory):
         self.logger.debug('initialising MoveFactory')
         self.action_type = 'move'
 
-        if factories != None:
-            if isinstance(factories, types.ListType):
-                self.factories = factories
-            else:
-                self.factories = []
-                self.factories.append(factories)
+        if isinstance(factories, types.ListType):
+            self.factories = factories
+        else:
+            self.factories = []
+            self.factories.append(factories)
 
         self.logger.debug('MoveFactory initialised')
 
