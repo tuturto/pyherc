@@ -36,7 +36,6 @@ class AttackAction():
         @param damage: Damage object for calculating done damage
         @param attacker: Character doing attack
         @param target: Character being attacked
-        @param model: Model being used
         '''
         self.action_type = 'attack'
         self.attack_type = attack_type
@@ -54,7 +53,7 @@ class AttackAction():
             self.damage.apply_damage(self.target)
             #TODO: raise events
 
-        # pyHerc.rules.ending.check_dying(model, self.target, None)
+        pyHerc.rules.ending.check_dying(self.model, self.target, self.model)
 
         #TODO: just a temporary time
         self.attacker.tick = pyHerc.rules.time.get_new_tick(self.attacker, 20)

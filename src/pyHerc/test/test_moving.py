@@ -27,6 +27,7 @@ from pyHerc.data.model import Character
 from pyHerc.generators.dungeon import TestLevelGenerator
 from pyHerc.rules.tables import Tables
 from pyHerc.test import IntegrationTest
+from pyHerc.test import StubModel
 
 from pyHerc.rules.public import MoveParameters
 from pyHerc.rules.public import ActionFactory

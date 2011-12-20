@@ -166,6 +166,10 @@ class StartMenu:
         self.logger.info('starting a new game')
         newWindow = StartNewGameWindow(self.application, self.screen, self.surface_manager)
         newWindow.mainLoop()
+        #TODO: world initialisation needs action factory
+        #TODO: action factory needs world
+        self.application.initialise_factories(self.application.world)
+
         self.application.world.player = newWindow.character
         newWindow = GameWindow(self.application, self.screen, self.surface_manager)
         newWindow.mainLoop()
@@ -216,6 +220,9 @@ class StartNewGameWindow:
     def __generateNewGame(self):
         #TODO: implement properly
         self.application.world = pyHerc.data.model.Model()
+
+        self.application.initialise_factories(self.application.world)
+
         tables = pyHerc.rules.tables.Tables()
         tables.load_tables()
         self.application.world.tables = tables

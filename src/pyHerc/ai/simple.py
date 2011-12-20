@@ -75,6 +75,7 @@ class FlockingHerbivore():
                 if distance > 1:
                     direction = self.find_direction(
                                         character.location, player.location)
+
                     action = self.character.create_action(
                                 MoveParameters(character, direction, 'walk')
                                 )

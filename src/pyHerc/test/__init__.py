@@ -473,7 +473,7 @@ class IntegrationTest():
     </creature>
 </creatures>
 """
-        self.action_factory = ActionFactory()
+        self.action_factory = ActionFactory(StubModel())
 
         self.model = pyHerc.data.model.Model()
         self.itemGenerator = pyHerc.generators.item.ItemGenerator()

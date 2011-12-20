@@ -80,7 +80,6 @@ class TestMeleeCombat(IntegrationTest):
                                                       self.character1,
                                                       self.character2,
                                                       'unarmed',
-                                                      StubModel(),
                                                       rng))
 
         assert isinstance(action,  AttackAction)
@@ -97,7 +96,6 @@ class TestMeleeCombat(IntegrationTest):
                                                 self.character1,
                                                 self.character2,
                                                 'unarmed',
-                                                StubModel(),
                                                 rng))
 
         assert self.character2.hit_points < 10

@@ -39,6 +39,7 @@ class MoveAction():
         self.character = character
         self.new_location = new_location
         self.new_level = new_level
+        self.model = None
         self.logger.debug('Move action initialised')
 
     def execute(self):

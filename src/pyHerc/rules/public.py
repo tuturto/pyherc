@@ -38,23 +38,27 @@ class ActionFactory():
     Object for creating actions
     '''
 
-    def __init__(self, factories = [MoveFactory(), AttackFactory()]):
+    def __init__(self, model, factories = [MoveFactory(), AttackFactory()]):
         '''
         Construct ActionFactory
+        @param model: model to register for the factory
         @param factories: a single Factory or list of Factories to use
         '''
-        if factories != None:
-            if isinstance(factories, types.ListType):
-                self.factories = factories
-            else:
-                self.factories = []
-                self.factories.append(factories)
+        if isinstance(factories, types.ListType):
+            self.factories = factories
+        else:
+            self.factories = []
+            self.factories.append(factories)
+
+        self.model = model
 
     def get_action(self, parameters):
         '''
         Create an action
         @param parameters: Parameters used to control action creation
         '''
+        parameters.set_model(self.model)
+
         factory = self.get_sub_factory(parameters)
         return factory.get_action(parameters)
 
@@ -87,18 +91,20 @@ class ActionParameters():
         '''
         self.action_type = 'default'
 
+    def set_model(self, model):
+        self.model = model
+
 class AttackParameters(ActionParameters):
     '''
     Object for controlling attack action creation
     '''
-    def __init__(self, attacker, target, attack_type, model,
+    def __init__(self, attacker, target, attack_type,
                         random_number_generator = random.Random()):
         '''
         Construct AttackParameters
         @param attacker: Character doing an attack
         @param target: Character being attacked
         @param attack_type: type of attack to perform
-        @param model: Model being used
         @param random_number_generator: Random number generator to use
         '''
         ActionParameters.__init__(self)
@@ -107,8 +113,8 @@ class AttackParameters(ActionParameters):
         self.attacker = attacker
         self.target = target
         self.attack_type = attack_type
-        self.model = model
         self.random_number_generator = random_number_generator
+        self.model = None
 
     def __str__(self):
         return 'attack with attack type of ' + self.attack_type
@@ -130,6 +136,7 @@ class MoveParameters(ActionParameters):
         self.character = character
         self.direction = direction
         self.movement_mode = movement_mode
+        self.model = None
 
     def __str__(self):
         return 'move with movement mode of ' + self.movement_mode

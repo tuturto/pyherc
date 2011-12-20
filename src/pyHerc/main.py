@@ -135,13 +135,14 @@ class Application:
         self.logger = logging.getLogger('pyHerc.main.Application')
         self.logger.info("Logging started")
 
-    def initialise_factories(self):
+    def initialise_factories(self, model):
         '''
         Initialises action factory and sub factories
+        @param model: Model to register to the factory
         '''
         self.logger.info('Initialising action sub system')
 
-        self.action_factory = ActionFactory()
+        self.action_factory = ActionFactory(model)
 
         self.logger.info('Action sub system initialised')
 
@@ -157,5 +158,4 @@ if __name__ == "__main__":
     APP = Application()
     APP.load_configuration(sys.argv[1:])
     APP.start_logging()
-    APP.initialise_factories()
     APP.run()
