@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2011-12-20, 08:44:56 -->
+<!-- Saved: 2011-12-20, 23:52:21 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: add support for charges</Summary>
@@ -184,15 +184,6 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: model parameter</Summary>
-    <Description></Description>
-    <Created>2011-12-18, 18:24:35</Created>
-    <Resource>
-      <Filename>pyHerc/rules/move/factories.py</Filename>
-      <Linenumber>103</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: resistances</Summary>
     <Description></Description>
     <Created>2011-12-19, 20:17:53</Created>
@@ -328,33 +319,6 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: raise events</Summary>
-    <Description></Description>
-    <Created>2011-12-20, 08:36:38</Created>
-    <Resource>
-      <Filename>pyHerc/rules/attack/action.py</Filename>
-      <Linenumber>54</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: just a temporary time</Summary>
-    <Description></Description>
-    <Created>2011-12-20, 08:36:38</Created>
-    <Resource>
-      <Filename>pyHerc/rules/attack/action.py</Filename>
-      <Linenumber>58</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: handle memory</Summary>
-    <Description></Description>
-    <Created>2011-12-20, 08:37:52</Created>
-    <Resource>
-      <Filename>pyHerc/ai/simple.py</Filename>
-      <Linenumber>52</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: refactor for configuration</Summary>
     <Description></Description>
     <Created>2011-12-20, 08:38:53</Created>
@@ -382,18 +346,9 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: filter events</Summary>
-    <Description></Description>
-    <Created>2011-12-20, 08:44:22</Created>
-    <Resource>
-      <Filename>pyHerc/data/model.py</Filename>
-      <Linenumber>79</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: use configuration</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>120</Linenumber>
@@ -402,7 +357,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>158</Linenumber>
@@ -411,7 +366,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: world initialisation needs action factory</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>169</Linenumber>
@@ -420,7 +375,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: action factory needs world</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>170</Linenumber>
@@ -429,7 +384,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement menu here</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>216</Linenumber>
@@ -438,7 +393,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement properly</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>221</Linenumber>
@@ -447,64 +402,109 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: load tables for model</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>226</Linenumber>
+      <Linenumber>229</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: melee / unarmed selection</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>302</Linenumber>
+      <Linenumber>305</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: do not paint screen all the time</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>359</Linenumber>
+      <Linenumber>362</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: set dirty rectangles properly</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
-    <Resource>
-      <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>370</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: when dirty rectangles work, uncomment this</Summary>
-    <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
       <Linenumber>373</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: don't call during each and every update</Summary>
+    <Summary>TODO: when dirty rectangles work, uncomment this</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>437</Linenumber>
+      <Linenumber>376</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: don't call during each and every update</Summary>
+    <Description></Description>
+    <Created>2011-12-20, 21:28:25</Created>
+    <Resource>
+      <Filename>pyHerc/gui/windows.py</Filename>
+      <Linenumber>440</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: make more generic and clean up</Summary>
     <Description></Description>
-    <Created>2011-12-20, 08:44:53</Created>
+    <Created>2011-12-20, 21:28:25</Created>
     <Resource>
       <Filename>pyHerc/gui/windows.py</Filename>
-      <Linenumber>441</Linenumber>
+      <Linenumber>444</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: raise events</Summary>
+    <Description></Description>
+    <Created>2011-12-20, 21:30:23</Created>
+    <Resource>
+      <Filename>pyHerc/rules/attack/action.py</Filename>
+      <Linenumber>54</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: just a temporary time</Summary>
+    <Description></Description>
+    <Created>2011-12-20, 21:30:23</Created>
+    <Resource>
+      <Filename>pyHerc/rules/attack/action.py</Filename>
+      <Linenumber>58</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: model parameter</Summary>
+    <Description></Description>
+    <Created>2011-12-20, 21:45:50</Created>
+    <Resource>
+      <Filename>pyHerc/rules/move/factories.py</Filename>
+      <Linenumber>103</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: filter events</Summary>
+    <Description></Description>
+    <Created>2011-12-20, 21:56:46</Created>
+    <Resource>
+      <Filename>pyHerc/data/model.py</Filename>
+      <Linenumber>79</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: handle memory</Summary>
+    <Description></Description>
+    <Created>2011-12-20, 21:57:05</Created>
+    <Resource>
+      <Filename>pyHerc/ai/simple.py</Filename>
+      <Linenumber>52</Linenumber>
     </Resource>
   </Task>
 </Tasks>

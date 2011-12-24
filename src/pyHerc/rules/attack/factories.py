@@ -27,7 +27,30 @@ import logging
 from pyHerc.rules.attack.action import AttackAction
 from pyHerc.rules.attack.unarmed import UnarmedToHit
 from pyHerc.rules.attack.unarmed import UnarmedDamage
+from pyHerc.rules.attack.melee import MeleeToHit
+from pyHerc.rules.attack.melee import MeleeDamage
 from pyHerc.rules.factory import SubActionFactory
+
+class AttackFactory(SubActionFactory):
+    '''
+    Factory for constructing attack actions
+    '''
+    def __init__(self, factories):
+        '''
+        Constructor for this factory
+        '''
+        self.logger = logging.getLogger('pyHerc.rules.attack.factories.AttackFactory')
+        self.logger.debug('initialising AttackFactory')
+        self.action_type = 'attack'
+
+        if isinstance(factories, types.ListType):
+            self.factories = factories
+        else:
+            self.factories = []
+            self.factories.append(factories)
+
+        self.logger.debug('AttackFactory initialised')
+
 
 class UnarmedCombatFactory():
     '''
@@ -89,22 +112,63 @@ class UnarmedCombatFactory():
 
         return attack
 
-class AttackFactory(SubActionFactory):
+class MeleeCombatFactory():
     '''
-    Factory for constructing attack actions
+    Factory for producing melee combat actions
     '''
-    def __init__(self, factories):
+
+    def __init__(self):
         '''
         Constructor for this factory
         '''
-        self.logger = logging.getLogger('pyHerc.rules.attack.factories.AttackFactory')
-        self.logger.debug('initialising AttackFactory')
-        self.action_type = 'attack'
+        self.logger = logging.getLogger('pyHerc.rules.attack.factories.MeleeCombatFactory')
+        self.logger.debug('initialising MeleeCombatFactory')
+        self.attack_type = 'melee'
+        self.logger.debug('MeleeCombatFactory initialised')
 
-        if isinstance(factories, types.ListType):
-            self.factories = factories
-        else:
-            self.factories = []
-            self.factories.append(factories)
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
 
-        self.logger.debug('AttackFactory initialised')
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.rules.attack.factories.MeleeCombatFactory')
+
+    def __str__(self):
+        return 'melee combat factory'
+
+    def can_handle(self, parameters):
+        '''
+        Can this factory process these parameters
+        @param parameters: Parameters to check
+        @returns: True if factory is capable of handling parameters
+        '''
+        return self.attack_type == parameters.attack_type
+
+    def get_action(self, parameters):
+        '''
+        Create a attack action
+        @param parameters: Parameters used to control attack creation
+        '''
+        self.logger.debug('Creating a melee attack')
+
+        attacker = parameters.attacker
+        target = parameters.target
+        weapon = attacker.weapons[0]
+
+        attack = AttackAction('melee',
+                        MeleeToHit(attacker, target,
+                                    parameters.random_number_generator),
+                        MeleeDamage(weapon.weapon_data.damage),
+                        attacker,
+                        target,
+                        parameters.model)
+
+        return attack

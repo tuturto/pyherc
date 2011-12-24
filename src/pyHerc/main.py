@@ -31,6 +31,7 @@ from pyHerc.rules.move.factories import MoveFactory
 from pyHerc.rules.move.factories import WalkFactory
 from pyHerc.rules.attack.factories import AttackFactory
 from pyHerc.rules.attack.factories import UnarmedCombatFactory
+from pyHerc.rules.attack.factories import MeleeCombatFactory
 
 
 from pyHerc.gui.windows import MainWindow
@@ -144,8 +145,12 @@ class Application:
 
         walk_factory = WalkFactory()
         move_factory = MoveFactory(walk_factory)
+
         unarmed_combat_factory = UnarmedCombatFactory()
-        attack_factory = AttackFactory(unarmed_combat_factory)
+        melee_combat_factory = MeleeCombatFactory()
+        attack_factory = AttackFactory([
+                                        unarmed_combat_factory,
+                                        melee_combat_factory])
 
         self.action_factory = ActionFactory(
                                             model,

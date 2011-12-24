@@ -47,27 +47,6 @@ class UnarmedToHit(ToHit):
         self.target = target
         self.rng = random_number_generator
 
-    def is_hit(self):
-        '''
-        Checks if the hit lands
-        @returns: True if hit is successful, False otherwise
-        '''
-        self.logger.debug('Checking for hit')
-
-        target_number = self.attacker.get_body()
-        self.logger.debug('Target number is {0}'.format(target_number))
-
-        to_hit_roll = self.rng.randint(1, 6) + self.rng.randint(1, 6)
-        self.logger.debug('Rolled {0} for to hit'.format(to_hit_roll))
-
-        if (to_hit_roll <= target_number) or (to_hit_roll == 2):
-            is_hit = True
-        else:
-            is_hit = False
-
-        self.logger.debug('Hit: {0}'.format(is_hit))
-        return is_hit
-
 class UnarmedDamage(Damage):
     '''
     Damage done in unarmed attack

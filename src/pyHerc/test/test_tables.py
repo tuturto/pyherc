@@ -128,7 +128,7 @@ class test_Tables:
                 <item>
                     <name>morning star</name>
                     <cost>8</cost>
-                    <damage>1d8</damage>
+                    <damage>4</damage>
                     <criticalRange>20</criticalRange>
                     <criticalDamage>2</criticalDamage>
                     <weight>5</weight>
@@ -157,7 +157,7 @@ class test_Tables:
         item = tables.items['morning star']
         assert item['name'] == 'morning star'
         assert item['cost'] == 8
-        assert item['damage'] == '1d8'
+        assert item['damage'] == 4
         assert item['critical range'] == 20
         assert item['critical damage'] == 2
         assert item['weight'] == 5

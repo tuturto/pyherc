@@ -25,8 +25,34 @@ Classes:
     MeleeToHit
     MeleeDamage
 '''
-class MeleeToHit(object):
-    pass
+import logging
+import random
+from pyHerc.rules.attack.action import ToHit
+from pyHerc.rules.attack.action import Damage
 
-class MeleeDamage(object):
-    pass
+class MeleeToHit(ToHit):
+
+    def __init__(self, attacker,  target,
+                        random_number_generator = random.Random()):
+        '''
+        Default constructor
+
+        @param attacker: Character doing the attack
+        @param target: Character being attacked
+        @param rng: Random number generator
+        '''
+        self.logger = logging.getLogger('pyHerc.rules.attack.melee.MeleeToHit')
+        self.attacker = attacker
+        self.target = target
+        self.rng = random_number_generator
+
+class MeleeDamage(Damage):
+    '''
+    Damage done in unarmed attack
+    '''
+    def __init__(self, damage):
+        '''
+        Default constructor
+        '''
+        self.logger = logging.getLogger('pyHerc.rules.attack.unarmed.MeleeDamage')
+        self.damage = damage

@@ -99,3 +99,24 @@ class TestMeleeCombat(IntegrationTest):
                                                 rng))
 
         assert self.character2.hit_points < 10
+
+    def test_attack_with_weapon(self):
+        '''
+        Test that attack with a weapon will reduce targets hit points
+        '''
+        rng = StubRandomNumberGenerator()
+        rng.inject(12, [2, 2, 2, 2, 2, 2, 2])
+
+        dagger = self.item_generator.generateItem(self.tables,
+                                                    {'name': 'dagger'})
+
+        pyHerc.rules.items.wield(self.model, self.character1, dagger)
+        assert self.character2.hit_points == 10
+
+        self.character1.execute_action(AttackParameters(
+                                                self.character1,
+                                                self.character2,
+                                                'melee',
+                                                rng))
+
+        assert self.character2.hit_points == 8

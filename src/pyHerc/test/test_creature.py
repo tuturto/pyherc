@@ -53,7 +53,7 @@ class test_CreatureWithGenerator(IntegrationTest):
         creature = Character(self.action_factory)
         creature.feats = []
 
-        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'club'})
+        weapon = self.item_generator.generateItem(self.tables, {'name' : 'club'})
 
         assert(creature.is_proficient(weapon) == False)
 

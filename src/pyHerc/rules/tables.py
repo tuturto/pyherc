@@ -297,7 +297,7 @@ class ItemHandler(sax.ContentHandler):
         elif name == 'questItem':
             self.newItem['questItem'] = int(self.text)
         elif name == 'damage':
-            self.newItem['damage'] = self.text
+            self.newItem['damage'] = int(self.text)
         elif name == 'criticalRange':
             self.newItem['critical range'] = int(self.text)
         elif name == 'criticalDamage':

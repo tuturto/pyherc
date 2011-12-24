@@ -28,6 +28,7 @@ from pyHerc.rules.move.factories import MoveFactory
 from pyHerc.rules.move.factories import WalkFactory
 
 from pyHerc.rules.attack.factories import UnarmedCombatFactory
+from pyHerc.rules.attack.factories import MeleeCombatFactory
 from pyHerc.rules.attack.factories import AttackFactory
 
 class StubRandomNumberGenerator(random.Random):
@@ -475,15 +476,19 @@ class IntegrationTest():
 """
         walk_factory = WalkFactory()
         move_factory = MoveFactory(walk_factory)
+
         unarmed_combat_factory = UnarmedCombatFactory()
-        attack_factory = AttackFactory(unarmed_combat_factory)
+        melee_combat_factory = MeleeCombatFactory()
+        attack_factory = AttackFactory([
+                                        unarmed_combat_factory,
+                                        melee_combat_factory])
 
         self.action_factory = ActionFactory(
                                             StubModel(),
                                             [move_factory, attack_factory])
 
         self.model = pyHerc.data.model.Model()
-        self.itemGenerator = pyHerc.generators.item.ItemGenerator()
+        self.item_generator = pyHerc.generators.item.ItemGenerator()
         self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator(self.action_factory)
         self.tables = pyHerc.rules.tables.Tables()
         self.tables.load_tables(itemConfig, creatureConfig)
