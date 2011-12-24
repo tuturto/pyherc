@@ -30,7 +30,7 @@ class test_Tables:
                     <cost>1</cost>
                     <weight>1</weight>
                     <icons>
-                        <icon>item_apple</icon>
+                        <icon>ITEM_APPLE</icon>
                     </icons>
                     <types>
                         <type>food</type>
@@ -48,7 +48,7 @@ class test_Tables:
         assert tables.items['apple']['weight'] == 1
         assert tables.items['apple']['type'] == ['food']
         assert tables.items['apple']['rarity'] == tables.common
-        assert pyHerc.data.tiles.item_apple in tables.items['apple']['icon']
+        assert pyHerc.data.tiles.ITEM_APPLE in tables.items['apple']['icon']
 
     def test_reading_more_complex_item(self):
         itemConfig = """
@@ -59,7 +59,7 @@ class test_Tables:
                     <weight>5</weight>
                     <questItem>1</questItem>
                     <icons>
-                        <icon>item_crystal_skull</icon>
+                        <icon>ITEM_CRYSTAL_SKULL</icon>
                     </icons>
                     <types>
                         <type>special item</type>
@@ -80,7 +80,7 @@ class test_Tables:
         assert 'special item' in tables.items['crystal skull']['type']
         assert 'quest item' in tables.items['crystal skull']['type']
         assert tables.items['crystal skull']['rarity'] == tables.artifact
-        assert pyHerc.data.tiles.item_crystal_skull in tables.items['crystal skull']['icon']
+        assert pyHerc.data.tiles.ITEM_CRYSTAL_SKULL in tables.items['crystal skull']['icon']
 
     def test_reading_two_items_from_config(self):
         itemConfig = """
@@ -90,7 +90,7 @@ class test_Tables:
                     <cost>1</cost>
                     <weight>1</weight>
                     <icons>
-                        <icon>item_apple</icon>
+                        <icon>ITEM_APPLE</icon>
                     </icons>
                     <types>
                         <type>food</type>
@@ -103,7 +103,7 @@ class test_Tables:
                     <weight>5</weight>
                     <questItem>1</questItem>
                     <icons>
-                        <icon>item_crystal_skull</icon>
+                        <icon>ITEM_CRYSTAL_SKULL</icon>
                     </icons>
                     <types>
                         <type>special item</type>
@@ -120,7 +120,7 @@ class test_Tables:
         assert 'crystal skull' in tables.items.keys()
         assert 'apple' in tables.items.keys()
         assert tables.items['crystal skull']['weight'] == 5
-        assert pyHerc.data.tiles.item_apple in tables.items['apple']['icon']
+        assert pyHerc.data.tiles.ITEM_APPLE in tables.items['apple']['icon']
 
     def test_reading_weapon_from_config(self):
         itemConfig = """
@@ -128,7 +128,7 @@ class test_Tables:
                 <item>
                     <name>morning star</name>
                     <cost>8</cost>
-                    <damage>1d8</damage>
+                    <damage>4</damage>
                     <criticalRange>20</criticalRange>
                     <criticalDamage>2</criticalDamage>
                     <weight>5</weight>
@@ -138,8 +138,8 @@ class test_Tables:
                     </damageTypes>
                     <class>simple</class>
                     <icons>
-                        <icon>item_morning_star_1</icon>
-                        <icon>item_morning_star_2</icon>
+                        <icon>ITEM_MORNING_STAR_1</icon>
+                        <icon>ITEM_MORNING_STAR_2</icon>
                     </icons>
                     <types>
                         <type>weapon</type>
@@ -157,15 +157,15 @@ class test_Tables:
         item = tables.items['morning star']
         assert item['name'] == 'morning star'
         assert item['cost'] == 8
-        assert item['damage'] == '1d8'
+        assert item['damage'] == 4
         assert item['critical range'] == 20
         assert item['critical damage'] == 2
         assert item['weight'] == 5
         assert 'bludgeoning' in item['damage type']
         assert 'piercing' in item['damage type']
         assert item['class'] == 'simple'
-        assert pyHerc.data.tiles.item_morning_star_1 in item['icon']
-        assert pyHerc.data.tiles.item_morning_star_2 in item['icon']
+        assert pyHerc.data.tiles.ITEM_MORNING_STAR_1 in item['icon']
+        assert pyHerc.data.tiles.ITEM_MORNING_STAR_2 in item['icon']
         assert 'weapon' in item['type']
         assert 'one-handed weapon' in item['type']
         assert 'melee' in item['type']
@@ -187,7 +187,7 @@ class test_Tables:
                         <effect type="on drink" name="healing" power="1d10" />
                     </effects>
                     <icons>
-                        <icon>item_potion_1</icon>
+                        <icon>ITEM_POTION_1</icon>
                     </icons>
                     <types>
                         <type>potion</type>
@@ -217,7 +217,7 @@ class test_Tables:
                     <cost>100</cost>
                     <weight>1</weight>
                     <icons>
-                        <icon>item_potion_empty</icon>
+                        <icon>ITEM_POTION_EMPTY</icon>
                     </icons>
                     <types>
                         <type>potion</type>
@@ -229,7 +229,7 @@ class test_Tables:
                     <cost>100</cost>
                     <weight>1</weight>
                     <icons>
-                        <icon>item_potion_empty</icon>
+                        <icon>ITEM_POTION_EMPTY</icon>
                     </icons>
                     <types>
                         <type>potion</type>
@@ -247,4 +247,4 @@ class test_Tables:
         tables = pyHerc.rules.tables.Tables()
         tables.load_tables(None, item_config, creature_config)
 
-        assert(not pyHerc.data.tiles.item_potion_empty in tables.items['potion of bless']['icon'])
+        assert(not pyHerc.data.tiles.ITEM_POTION_EMPTY in tables.items['potion of bless']['icon'])

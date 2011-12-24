@@ -27,6 +27,14 @@ import sys, getopt
 import pygame
 import logging
 
+from pyHerc.rules.public import ActionFactory
+from pyHerc.rules.move.factories import MoveFactory
+from pyHerc.rules.move.factories import WalkFactory
+from pyHerc.rules.attack.factories import AttackFactory
+from pyHerc.rules.attack.factories import UnarmedCombatFactory
+from pyHerc.rules.attack.factories import MeleeCombatFactory
+
+
 from pyHerc.gui.windows import MainWindow
 
 if not pygame.font:
@@ -59,6 +67,8 @@ class Application:
         self.world = None
         self.running = 1
         self.base_path = None
+        self.action_factory = None
+        self.logger = None
 
     def load_configuration(self, argv):
         """
@@ -125,8 +135,38 @@ class Application:
         Start logging for the system
         '''
         logging.basicConfig(level=self.config['logging']['level'])
-        logger = logging.getLogger('pyHerc.main.Application')
-        logger.info("Logging started")
+        self.logger = logging.getLogger('pyHerc.main.Application')
+        self.logger.info("Logging started")
+
+    def initialise_factories(self, model):
+        '''
+        Initialises action factory and sub factories
+        @param model: Model to register to the factory
+        '''
+        self.logger.info('Initialising action sub system')
+
+        walk_factory = WalkFactory()
+        move_factory = MoveFactory(walk_factory)
+
+        unarmed_combat_factory = UnarmedCombatFactory()
+        melee_combat_factory = MeleeCombatFactory()
+        attack_factory = AttackFactory([
+                                        unarmed_combat_factory,
+                                        melee_combat_factory])
+
+        self.action_factory = ActionFactory(
+                                            model,
+                                            [move_factory, attack_factory])
+
+        self.logger.info('Action sub system initialised')
+
+    def get_action_factory(self):
+        '''
+        Get action factory instance
+        @returns: ActionFactory
+        '''
+        return self.action_factory
+
 
     def detect_resource_directory(self):
         search_directory = '.'

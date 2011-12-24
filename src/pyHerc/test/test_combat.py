@@ -18,226 +18,105 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+Module for testing combat related rules
+'''
+
+import pyHerc
 from pyHerc.data.dungeon import Level
+from pyHerc.data.dungeon import Dungeon
+from pyHerc.data.dungeon import Portal
+from pyHerc.data.model import Model
+from pyHerc.data.model import Character
+from pyHerc.generators.dungeon import TestLevelGenerator
+from pyHerc.rules.tables import Tables
 from pyHerc.test import IntegrationTest
-import pyHerc.generators.item
-import pyHerc.rules.combat
-import pyHerc.data.model
-import pyHerc.rules.tables
+from pyHerc.test import StubRandomNumberGenerator
+from pyHerc.test import StubModel
 
-class test_meleeCombat(IntegrationTest):
+from pyHerc.rules.public import AttackParameters
+from pyHerc.rules.public import ActionFactory
+from pyHerc.rules.attack.action import AttackAction
 
-    def test_get_armour_class_simple(self):
-        """
-        Test simple calculation of armour class
-        """
-        # def get_armour_class(model, character):
-        #10 + armor bonus + shield bonus + Dexterity modifier + size modifier
-        character = pyHerc.data.model.Character()
-        character.size = 'tiny' # +2 bonus
-        character.dex = 16 # +3 bonus
+class TestMeleeCombat(IntegrationTest):
+    '''
+    Class for testing melee combat related rules
+    '''
 
-        ac = pyHerc.rules.combat.get_armour_class(self.model, character)
+    def setUp2(self):
+        self.character1 = Character(self.action_factory)
+        self.character2 = Character(self.action_factory)
+        levelGenerator = TestLevelGenerator(self.action_factory)
 
-        assert(ac == 15)
+        self.model.dungeon = Dungeon()
+        self.level = levelGenerator.generate_level(None, self.model, monster_list = [])
 
-    def test_check_hit_in_melee_simple(self):
-        # def check_hit_in_melee(model, attacker, target, dice = []):
-        character = pyHerc.data.model.Character()
-        character.size = 'tiny' # +2 bonus
-        character.str = 16 # +3 bonus
-        target = pyHerc.data.model.Character()
-        target.size = 'medium' # +0 bonus
-        target.dex = 10 # no bonus
+        self.model.dungeon.levels = self.level
 
-        hit = pyHerc.rules.combat.check_hit_in_melee(self.model, character, target, [16])
-        assert(hit == 1)
+        self.character1.location = (5, 5)
+        self.character1.level = self.model.dungeon.levels
+        self.character1.speed = 1
+        self.character1.tick = 1
+        self.character1.hit_points = 10
+        self.character1.attack = 3
+        self.character1.set_body(5)
 
-    def test_get_damage_in_melee_simple(self):
-        character = pyHerc.data.model.Character()
-        character.size = 'tiny' # +2 bonus
-        character.str = 16 # +3 bonus
-        character.attack = '1d4+1' #hotshot with special fists
+        self.character2.location = (6, 5)
+        self.character2.level = self.model.dungeon.levels
+        self.character2.speed = 1
+        self.character2.tick = 1
+        self.character2.hit_points = 10
+        self.character2.attack = 3
+        self.character2.set_body(5)
 
-        target = pyHerc.data.model.Character()
-        target.size = 'medium' # +0 bonus
-        target.dex = 10 # no bonus
-
-        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [5])
-        assert(damage.amount == 8)
-        assert(damage.magic_bonus == 0)
-
-    def test_get_damage_in_melee_negative_damage(self):
-        character = pyHerc.data.model.Character()
-        character.size = 'tiny'
-        character.str = 1 # -5 bonus
-        character.attack = '1d3'
-
-        target = pyHerc.data.model.Character()
-        target.size = 'medium'
-        target.dex = 10
-
-        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [3])
-        assert(damage.amount == 1)
-        assert(damage.magic_bonus == 0)
-
-    def test_get_damage_in_melee_wield_weapon_with_two_hands(self):
-        """
-        Test that character wearing a single-handed weapon two-handedly gets the 1.5 * str bonus
-        """
-        character = pyHerc.data.model.Character()
-        character.size = 'tiny' # +2 bonus
-        character.str = 16 # +3 bonus
-
-        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'club'})
-
-        character.attack = '1d4'
-        character.weapons = [weapon]
-
-        target = pyHerc.data.model.Character()
-        target.size = 'medium' # +0 bonus
-        target.dex = 10 # no bonus
-
-        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [6])
-        assert(damage.amount == 11) # 1d6 from weapon + 3 from str + 1.5 from str while wielding 2-handed
-
-    def test_get_damage_in_melee_wield_sicle_with_two_hands(self):
-        """
-        Test that character wearing a light weapon (sickle) two-handedly gets the 1 * str bonus
-        Check that damage type is correct
-        """
-        character = pyHerc.data.model.Character()
-        character.size = 'tiny' # +2 bonus
-        character.str = 16 # +3 bonus
-
-        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'sickle'})
-
-        character.attack = '1d4'
-        character.weapons = [weapon]
-
-        target = pyHerc.data.model.Character()
-        target.size = 'medium' # +0 bonus
-        target.dex = 10 # no bonus
-
-        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target, dice = [6])
-        assert(damage.amount == 9) # 1d6 from weapon + 3 from str
-        assert('slashing' in damage.damage_type)
-
-    def test_get_damage_in_melee_mundane_item(self):
-        """
-        Test that character wearing an apple can use it as a weapon
-        Check that damage type is correct
-        """
-        character = pyHerc.data.model.Character()
-        character.size = 'medium'
-        character.str = 16
-
-        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'apple'})
-
-        character.attack = '1d4'
-        character.weapons = [weapon]
-
-        target = pyHerc.data.model.Character()
-        target.size = 'medium' # +0 bonus
-        target.dex = 10 # no bonus
-
-        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target)
-        assert(damage.amount == 4) # 1 from apple, +3 strength bonus
-        assert('bludgeoning' in damage.damage_type)
-
-    def test_get_damage_in_melee_no_prerolls(self):
-        """
-        Just simple test that damage in melee is possible without prerolled scores
-        """
-        character = pyHerc.data.model.Character()
-        character.size = 'tiny' # +2 bonus
-        character.str = 16 # +3 bonus
-        character.attack = '1d4'
-
-        target = pyHerc.data.model.Character()
-        target.size = 'medium' # +0 bonus
-        target.dex = 10 # no bonus
-
-        damage = pyHerc.rules.combat.get_damage_in_melee(self.model, character, target)
-
-    def test_melee(self):
-        character = pyHerc.data.model.Character()
-        character.size = 'tiny' # +2 bonus
-        character.str = 16 # +3 bonus
-        character.attack = '1d4'
-        character.speed = 1
-        character.tick = 0
-
-        level = level = Level((20, 20), 0, 0)
-        target = pyHerc.data.model.Character()
-        target.size = 'medium' # +0 bonus
-        target.dex = 10 # no bonus
-        target.hp = 10
-        level.add_creature(character, (10, 10))
-        level.add_creature(target, (11, 10))
-
-        pyHerc.rules.combat.melee_attack(self.model, character, target, dice = [4, 19])
-        assert(target.hp == 3) # 10 - 4 - 3 (hp - damage roll - str bonus)
-
-    def test_dying_in_melee(self):
-        character = pyHerc.data.model.Character()
-        character.size = 'tiny' # +2 bonus
-        character.str = 16 # +3 bonus
-        character.attack = '1d4'
-        character.speed = 1
-        character.tick = 0
-
-        target = pyHerc.data.model.Character()
-        target.size = 'medium' # +0 bonus
-        target.dex = 10 # no bonus
-        target.hp = 5
-
-        level = Level((20, 20), 0, 0)
-        level.add_creature(character)
-        level.add_creature(target)
-
-        pyHerc.rules.combat.melee_attack(self.model, character, target, dice = [4, 19])
-        assert(target.hp == -2) # 5 - 4 - 3 (hp - damage roll - str bonus)
-        assert(not target in level.creatures)
-
-    def test_simple_weapon_proficiency_modifier(self):
+    def test_get_unarmed_action(self):
         '''
-        Simple test that weapon proficiency modifier can be calculated
+        Test that unarmed combat action can be generated
         '''
-        character = pyHerc.data.model.Character()
-        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'club'})
+        rng = StubRandomNumberGenerator()
+        rng.inject(12, [12, 12, 12, 12, 12, 12, 12])
 
-        character.attack = '1d4'
-        character.weapons = [weapon]
-        character.feats = []
+        action = self.action_factory.get_action(AttackParameters(
+                                                      self.character1,
+                                                      self.character2,
+                                                      'unarmed',
+                                                      rng))
 
-        modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
-        assert(modifier == -4)
+        assert isinstance(action,  AttackAction)
+        assert action.attack_type == 'unarmed'
 
-        character.feats.append(
-                               pyHerc.data.model.WeaponProficiency(
-                               'simple'))
-
-        modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
-        assert(modifier == 0)
-
-    def test_martial_weapon_proficiency_modifier(self):
+    def test_unarmed_attack(self):
         '''
-        Simple test that weapon proficiency modifier can be calculated for martial weapons
+        Test that unarmed attack will harm opponent
         '''
-        character = pyHerc.data.model.Character()
-        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'short sword'})
+        rng = StubRandomNumberGenerator()
+        rng.inject(12, [2, 2, 2, 2, 2, 2, 2])
 
-        character.attack = '1d4'
-        character.weapons = [weapon]
-        character.feats = []
+        self.character1.execute_action(AttackParameters(
+                                                self.character1,
+                                                self.character2,
+                                                'unarmed',
+                                                rng))
 
-        modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
-        assert(modifier == -4)
+        assert self.character2.hit_points < 10
 
-        character.feats.append(
-                               pyHerc.data.model.WeaponProficiency(
-                               'martial'))
+    def test_attack_with_weapon(self):
+        '''
+        Test that attack with a weapon will reduce targets hit points
+        '''
+        rng = StubRandomNumberGenerator()
+        rng.inject(12, [2, 2, 2, 2, 2, 2, 2])
 
-        modifier = pyHerc.rules.combat.get_weapon_proficiency_modifier(self.model, character, weapon)
-        assert(modifier == 0)
+        dagger = self.item_generator.generateItem(self.tables,
+                                                    {'name': 'dagger'})
+
+        pyHerc.rules.items.wield(self.model, self.character1, dagger)
+        assert self.character2.hit_points == 10
+
+        self.character1.execute_action(AttackParameters(
+                                                self.character1,
+                                                self.character2,
+                                                'melee',
+                                                rng))
+
+        assert self.character2.hit_points == 8

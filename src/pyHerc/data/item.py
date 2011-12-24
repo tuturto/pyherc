@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2011 Tuukka Turto
 #
 #   This file is part of pyHerc.
 #
@@ -189,7 +189,8 @@ class ItemEffectData:
     '''
     Represents magical effect on an item
     '''
-    def __init__(self, trigger = None, effect_type = None, power = None, charges = 1):
+    def __init__(self, trigger = None, effect_type = None,
+                        power = None, charges = 1):
 
         self.trigger = trigger
         self.effect_type = effect_type

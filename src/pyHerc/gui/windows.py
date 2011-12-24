@@ -18,6 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+import pickle
 import os, sys
 import pygame
 import logging
@@ -34,6 +35,8 @@ import pyHerc.rules.time
 import pyHerc.rules.combat
 import pyHerc.generators.dungeon
 import pyHerc.rules.tables
+from pyHerc.rules.public import MoveParameters
+from pyHerc.rules.public import AttackParameters
 from pyHerc.rules.los import get_fov_matrix
 from pygame.locals import KEYDOWN
 from pygame.locals import K_DOWN, K_UP
@@ -165,6 +168,10 @@ class StartMenu:
         self.logger.info('starting a new game')
         newWindow = StartNewGameWindow(self.application, self.screen, self.surface_manager)
         newWindow.mainLoop()
+        #TODO: world initialisation needs action factory
+        #TODO: action factory needs world
+        self.application.initialise_factories(self.application.world)
+
         self.application.world.player = newWindow.character
         newWindow = GameWindow(self.application, self.screen, self.surface_manager)
         newWindow.mainLoop()
@@ -215,6 +222,9 @@ class StartNewGameWindow:
     def __generateNewGame(self):
         #TODO: implement properly
         self.application.world = pyHerc.data.model.Model()
+
+        self.application.initialise_factories(self.application.world)
+
         tables = pyHerc.rules.tables.Tables()
         tables.load_tables(self.application.base_path)
         self.application.world.tables = tables
@@ -225,9 +235,9 @@ class StartNewGameWindow:
         else:
             self.application.world.config['explore'] = 0
 
-        self.character = pyHerc.rules.character.create_character('human', 'fighter')
+        self.character = pyHerc.rules.character.create_character('human', 'fighter', self.application.get_action_factory())
         self.application.world.player = self.character
-        generator = pyHerc.generators.dungeon.DungeonGenerator()
+        generator = pyHerc.generators.dungeon.DungeonGenerator(self.application.get_action_factory())
         generator.generate_dungeon(self.application.world)
         self.character.level = self.application.world.dungeon.levels
         # self.character.location = (1, 1)
@@ -283,16 +293,21 @@ class GameWindow:
                         player.level.full_update_needed = True
                         #handle moving
                         direction = self.moveKeyMap[event.key]
-                        if pyHerc.rules.moving.check_move(model, player, direction)['ok']:
+                        action = player.create_action(
+                                        MoveParameters(player, direction, 'walk')
+                                        )
+
+                        if action.is_legal():
                             #check in case player escaped
                             if player.level != None:
-                                pyHerc.rules.moving.move(model, player, direction)
+                                action.execute()
                         else:
-                            targetLocation = pyHerc.rules.moving.calculate_new_location(model, player, direction)
-                            if 'location' in targetLocation.keys():
-                                target = player.level.get_creature_at(targetLocation['location'])
-                                if target != None:
-                                    pyHerc.rules.combat.melee_attack(model, player, target)
+                            target = player.level.get_creature_at(action.new_location)
+                            if target != None:
+                                #TODO: melee / unarmed selection
+                                player.execute_action(
+                                        AttackParameters(player, target, 'unarmed')
+                                        )
                     elif event.key == K_PERIOD:
                         #pick up items
                         items = player.level.get_items_at(player.location)
@@ -356,13 +371,12 @@ class GameWindow:
                     self.__updateDisplay()
             else:
                 if self.application.world.player.level != None:
-                    if hasattr(creature, 'act'):
-                        creature.act(self.application.world)
-                        #TODO: set dirty rectangles properly
-                        self.getNewEvents()
-                        self.application.world.player.level.full_update_needed = True
-                        #TODO: when dirty rectangles work, uncomment this
-                        #self.__updateDisplay()
+                    creature.act(self.application.world)
+                    #TODO: set dirty rectangles properly
+                    self.getNewEvents()
+                    self.application.world.player.level.full_update_needed = True
+                    #TODO: when dirty rectangles work, uncomment this
+                    #self.__updateDisplay()
 
         self.logger.debug('main loop finished')
 

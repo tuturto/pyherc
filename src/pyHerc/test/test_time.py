@@ -29,9 +29,9 @@ from pyHerc.data.dungeon import Level
 class test_Time:
 
     def setup(self):
-        self.creature1 = Character()
-        self.creature2 = Character()
-        self.creature3 = Character()
+        self.creature1 = Character(None)
+        self.creature2 = Character(None)
+        self.creature3 = Character(None)
 
         self.model = Model()
         self.model.dungeon = Dungeon()

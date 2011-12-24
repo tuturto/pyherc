@@ -36,8 +36,6 @@ class Tables:
         self.tagScore = {}
 
         self.creatures = {}
-        self.sizeModifier = []
-        self.attributeModifier = []
 
         self.artifact = 1
         self.legendary = 2
@@ -46,27 +44,42 @@ class Tables:
         self.uncommon = 16
         self.common = 32
 
-        self.__logger = logging.getLogger('pyHerc.rules.tables')
+        self.logger = logging.getLogger('pyHerc.rules.tables')
+
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.rules.tables')
 
     def read_items_from_xml(self, document):
-        self.__logger.debug('reading item config from xml')
+        self.logger.debug('reading item config from xml')
         parser = sax.make_parser()
         handler = ItemHandler()
         parser.setContentHandler(handler)
         file = StringIO.StringIO(document)
         parser.parse(file)
         self.items = handler.items
-        self.__logger.debug('item config read from xml')
+        self.logger.debug('item config read from xml')
 
     def read_creatures_from_xml(self, document):
-        self.__logger.debug('reading creature config from xml')
+        self.logger.debug('reading creature config from xml')
         parser = sax.make_parser()
         handler = CreatureHandler()
         parser.setContentHandler(handler)
         file = StringIO.StringIO(document)
         parser.parse(file)
         self.creatures = handler.creatures
-        self.__logger.debug('creature config read from xml')
+        self.logger.debug('creature config read from xml')
 
     def load_tables(self, base_path = None, itemConfig = None, creatureConfig = None):
         """
@@ -79,7 +92,7 @@ class Tables:
         if self.__initialised:
             return
 
-        self.__logger.debug('loading tables')
+        self.logger.debug('loading tables')
 
         if itemConfig != None:
             #use passed config
@@ -101,36 +114,31 @@ class Tables:
             f.close()
             self.read_creatures_from_xml(creatureConfig)
 
-        self.sizeModifier = {'colossal' :  -8, 'gargantuan' : -4, 'huge' : -2, 'large' : -1,
-                                'medium' : 0, 'small' : 1, 'tiny' : 2, 'diminutive' : 4, 'fine' : 8}
-
-        self.attributeModifier = [-6, -5, -4, -4, -3, -3, -2, -2, -1, -1, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
-
         self.potionAppearances = [
-                                ('clay potion',  pyHerc.data.tiles.item_potion_3),
-                                ('ruby potion', pyHerc.data.tiles.item_potion_9),
-                                ('yellow potion', pyHerc.data.tiles.item_potion_10),
-                                ('dark green potion', pyHerc.data.tiles.item_potion_2),
-                                ('cyan potion',  pyHerc.data.tiles.item_potion_4),
-                                ('sky blue potion', pyHerc.data.tiles.item_potion_5),
-                                ('bubbly potion', pyHerc.data.tiles.item_potion_8),
-                                ('black potion', pyHerc.data.tiles.item_potion_6),
-                                ('brown potion', pyHerc.data.tiles.item_potion_1),
-                                ('brown potion', pyHerc.data.tiles.item_potion_7),
-                                ('black potion', pyHerc.data.tiles.item_potion_11),
-                                ('brilliant blue potion', pyHerc.data.tiles.item_potion_12),
-                                ('milky potion', pyHerc.data.tiles.item_potion_13),
-                                ('amber potion', pyHerc.data.tiles.item_potion_14),
-                                ('pink potion', pyHerc.data.tiles.item_potion_15),
-                                ('swirly potion', pyHerc.data.tiles.item_potion_16),
-                                ('dark blue potion', pyHerc.data.tiles.item_potion_17),
-                                ('murky potion', pyHerc.data.tiles.item_potion_18),
-                                ('red potion', pyHerc.data.tiles.item_potion_19),
-                                ('golden potion', pyHerc.data.tiles.item_potion_20),
-                                ('emerald potion', pyHerc.data.tiles.item_potion_21),
-                                ('fizzy potion', pyHerc.data.tiles.item_potion_22),
-                                ('silver potion', pyHerc.data.tiles.item_potion_23),
-                                ('smoky potion', pyHerc.data.tiles.item_potion_24)
+                                ('clay potion',  pyHerc.data.tiles.ITEM_POTION_3),
+                                ('ruby potion', pyHerc.data.tiles.ITEM_POTION_9),
+                                ('yellow potion', pyHerc.data.tiles.ITEM_POTION_10),
+                                ('dark green potion', pyHerc.data.tiles.ITEM_POTION_2),
+                                ('cyan potion',  pyHerc.data.tiles.ITEM_POTION_4),
+                                ('sky blue potion', pyHerc.data.tiles.ITEM_POTION_5),
+                                ('bubbly potion', pyHerc.data.tiles.ITEM_POTION_8),
+                                ('black potion', pyHerc.data.tiles.ITEM_POTION_6),
+                                ('brown potion', pyHerc.data.tiles.ITEM_POTION_1),
+                                ('brown potion', pyHerc.data.tiles.ITEM_POTION_7),
+                                ('black potion', pyHerc.data.tiles.ITEM_POTION_11),
+                                ('brilliant blue potion', pyHerc.data.tiles.ITEM_POTION_12),
+                                ('milky potion', pyHerc.data.tiles.ITEM_POTION_13),
+                                ('amber potion', pyHerc.data.tiles.ITEM_POTION_14),
+                                ('pink potion', pyHerc.data.tiles.ITEM_POTION_15),
+                                ('swirly potion', pyHerc.data.tiles.ITEM_POTION_16),
+                                ('dark blue potion', pyHerc.data.tiles.ITEM_POTION_17),
+                                ('murky potion', pyHerc.data.tiles.ITEM_POTION_18),
+                                ('red potion', pyHerc.data.tiles.ITEM_POTION_19),
+                                ('golden potion', pyHerc.data.tiles.ITEM_POTION_20),
+                                ('emerald potion', pyHerc.data.tiles.ITEM_POTION_21),
+                                ('fizzy potion', pyHerc.data.tiles.ITEM_POTION_22),
+                                ('silver potion', pyHerc.data.tiles.ITEM_POTION_23),
+                                ('smoky potion', pyHerc.data.tiles.ITEM_POTION_24)
                                 ]
 
         self.construct_lookup_tables()
@@ -141,19 +149,19 @@ class Tables:
         Randomize appearances of potions
         @note: different types of potions may be assigned same appearance
         """
-        self.__logger.debug('randomizing potion appearance')
+        self.logger.debug('randomizing potion appearance')
         potionEntries = self.itemsByTag['potion']
         for entry in potionEntries:
             appearance = random.choice(self.potionAppearances)
             self.items[entry[0]]['appearance'] = appearance[0]
             self.items[entry[0]]['icon'] = [appearance[1]]
-        self.__logger.debug('potion appearance randomized')
+        self.logger.debug('potion appearance randomized')
 
     def construct_lookup_tables(self):
         """
         Construct lookup tables for different kinds of items
         """
-        self.__logger.debug('constructing look up tables')
+        self.logger.debug('constructing look up tables')
         self.itemsByTag = {}
         self.tagScore = {}
 
@@ -171,7 +179,7 @@ class Tables:
                     upperBound = self.tagScore[type]
                     self.itemsByTag[type].append((itemKey, lowerBound, upperBound))
 
-        self.__logger.debug('look up tables constructed')
+        self.logger.debug('look up tables constructed')
 
 class CreatureHandler(sax.ContentHandler):
     """
@@ -196,9 +204,11 @@ class CreatureHandler(sax.ContentHandler):
             #finished processing creature
             self.creatures[self.newCreature['name']] = self.newCreature
             self.newCreature = None
-        elif name in ('name', 'size', 'attack'):
+        elif name in ('attack'):
+            self.newCreature[name] = int(self.text)
+        elif name in ('name', 'size'):
             self.newCreature[name] = self.text
-        elif name in ('str', 'dex', 'con', 'int', 'wis', 'cha', 'hp'):
+        elif name in ('body', 'finesse', 'mind', 'hp'):
             self.newCreature[name] = int(self.text)
         elif name == 'speed':
             self.newCreature['speed'] = float(self.text)
@@ -279,7 +289,7 @@ class ItemHandler(sax.ContentHandler):
         elif name == 'questItem':
             self.newItem['questItem'] = int(self.text)
         elif name == 'damage':
-            self.newItem['damage'] = self.text
+            self.newItem['damage'] = int(self.text)
         elif name == 'criticalRange':
             self.newItem['critical range'] = int(self.text)
         elif name == 'criticalDamage':

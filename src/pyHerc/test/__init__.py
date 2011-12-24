@@ -18,9 +18,61 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+import random
 import pyHerc.data.dungeon
 import pyHerc.data.model
 import pyHerc.rules.tables
+
+from pyHerc.rules.public import ActionFactory
+from pyHerc.rules.move.factories import MoveFactory
+from pyHerc.rules.move.factories import WalkFactory
+
+from pyHerc.rules.attack.factories import UnarmedCombatFactory
+from pyHerc.rules.attack.factories import MeleeCombatFactory
+from pyHerc.rules.attack.factories import AttackFactory
+
+class StubRandomNumberGenerator(random.Random):
+    '''
+    Stub for random number generator
+
+    Will always return same numbers
+    '''
+    def __init__(self):
+        self.numbers = []
+
+    def inject(self, max, numbers):
+        self.numbers = [(x / max) - 0.0000000000000001 for x in numbers]
+
+    def random(self):
+        '''
+        Return the next random floating point number in the range [0.0, 1.0).
+        '''
+        return self.numbers.pop(0)
+
+    def seed(self, seed = None):
+        '''
+        Initialize the basic random number generator.
+        '''
+        pass
+
+    def getstate(self):
+        '''
+        Return an object capturing the current internal state of the generator.
+        This object can be passed to setstate() to restore the state.
+        '''
+        return self.numbers
+
+    def setstate(self, state):
+        '''
+        state should have been obtained from a previous call to getstate()
+        setstate() restores the internal state of the generator to what it was
+        at the time setstate() was called.
+        '''
+        self.numbers = state
+
+    def jumpahead(self, jumps):
+        pass
+
 
 class StubCharacter:
     """
@@ -72,7 +124,7 @@ class IntegrationTest():
         <cost>1</cost>
         <weight>1</weight>
         <icons>
-            <icon>item_apple</icon>
+            <icon>ITEM_APPLE</icon>
         </icons>
         <types>
             <type>food</type>
@@ -85,7 +137,7 @@ class IntegrationTest():
         <weight>5</weight>
         <questItem>1</questItem>
         <icons>
-            <icon>item_crystal_skull</icon>
+            <icon>ITEM_CRYSTAL_SKULL</icon>
         </icons>
         <types>
             <type>special item</type>
@@ -96,8 +148,8 @@ class IntegrationTest():
     <item>
         <name>dagger</name>
         <cost>2</cost>
-        <damage>1d4</damage>
-        <criticalRange>19</criticalRange>
+        <damage>2</damage>
+        <criticalRange>11</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>1</weight>
         <damageTypes>
@@ -106,7 +158,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_dagger_1</icon>
+            <icon>ITEM_DAGGER_1</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -119,8 +171,8 @@ class IntegrationTest():
     <item>
         <name>light mace</name>
         <cost>5</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>4</weight>
         <damageTypes>
@@ -128,7 +180,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_light_mace</icon>
+            <icon>ITEM_LIGHT_MACE</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -141,8 +193,8 @@ class IntegrationTest():
     <item>
         <name>sickle</name>
         <cost>6</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>2</weight>
         <damageTypes>
@@ -150,7 +202,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_sickle</icon>
+            <icon>ITEM_SICKLE</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -163,8 +215,8 @@ class IntegrationTest():
     <item>
         <name>club</name>
         <cost>0</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>3</weight>
         <damageTypes>
@@ -172,7 +224,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_club</icon>
+            <icon>ITEM_CLUB</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -185,8 +237,8 @@ class IntegrationTest():
     <item>
         <name>heavy mace</name>
         <cost>12</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>8</weight>
         <damageTypes>
@@ -194,7 +246,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_mace</icon>
+            <icon>ITEM_MACE</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -207,8 +259,8 @@ class IntegrationTest():
     <item>
         <name>morning star</name>
         <cost>8</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>5</weight>
         <damageTypes>
@@ -217,8 +269,8 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_morning_star_1</icon>
-            <icon>item_morning_star_2</icon>
+            <icon>ITEM_MORNING_STAR_1</icon>
+            <icon>ITEM_MORNING_STAR_2</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -231,8 +283,8 @@ class IntegrationTest():
     <item>
         <name>short spear</name>
         <cost>1</cost>
-        <damage>1d6</damage>
-        <criticalRange>20</criticalRange>
+        <damage>3</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>3</weight>
         <damageTypes>
@@ -240,7 +292,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_shortspear</icon>
+            <icon>ITEM_SHORTSPEAR</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -253,8 +305,8 @@ class IntegrationTest():
     <item>
         <name>longspear</name>
         <cost>5</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>3</criticalDamage>
         <weight>9</weight>
         <damageTypes>
@@ -262,7 +314,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_longspear</icon>
+            <icon>ITEM_LONGSPEAR</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -275,8 +327,8 @@ class IntegrationTest():
     <item>
         <name>spear</name>
         <cost>2</cost>
-        <damage>1d8</damage>
-        <criticalRange>20</criticalRange>
+        <damage>4</damage>
+        <criticalRange>12</criticalRange>
         <criticalDamage>3</criticalDamage>
         <weight>6</weight>
         <damageTypes>
@@ -284,7 +336,7 @@ class IntegrationTest():
         </damageTypes>
         <class>simple</class>
         <icons>
-            <icon>item_spear</icon>
+            <icon>ITEM_SPEAR</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -297,8 +349,8 @@ class IntegrationTest():
     <item>
         <name>short sword</name>
         <cost>10</cost>
-        <damage>1d6</damage>
-        <criticalRange>19</criticalRange>
+        <damage>3</damage>
+        <criticalRange>11</criticalRange>
         <criticalDamage>2</criticalDamage>
         <weight>2</weight>
         <damageTypes>
@@ -306,8 +358,8 @@ class IntegrationTest():
         </damageTypes>
         <class>martial</class>
         <icons>
-            <icon>item_short_sword_1</icon>
-            <icon>item_short_sword_2</icon>
+            <icon>ITEM_SHORT_SWORD_1</icon>
+            <icon>ITEM_SHORT_SWORD_2</icon>
         </icons>
         <types>
             <type>weapon</type>
@@ -319,35 +371,19 @@ class IntegrationTest():
     </item>
     <item>
         <name>healing potion</name>
-        <cost>100</cost>
+        <cost>150</cost>
         <weight>1</weight>
         <charges>1</charges>
         <effects>
-            <effect type="on drink" name="healing" power="1d10" />
+                <effect type="on drink" name="healing" power="1d10" />
         </effects>
         <icons>
-            <icon>item_potion_1</icon>
-        </icons>
-        <types>
-            <type>potion</type>
-        </types>
-        <rarity>uncommon</rarity>
-    </item>
-    <item>
-        <name>minor potion of poison</name>
-        <cost>100</cost>
-        <weight>1</weight>
-        <charges>1</charges>
-        <effects>
-                <effect type="on drink" name="damage" power="1d6" />
-        </effects>
-        <icons>
-                <icon>item_potion_1</icon>
+                <icon>ITEM_POTION_1</icon>
         </icons>
         <types>
                 <type>potion</type>
         </types>
-        <rarity>common</rarity>
+        <rarity>uncommon</rarity>
     </item>
     <item>
         <name>minor healing potion</name>
@@ -358,7 +394,23 @@ class IntegrationTest():
                 <effect type="on drink" name="healing" power="1d6" />
         </effects>
         <icons>
-                <icon>item_potion_1</icon>
+                <icon>ITEM_POTION_1</icon>
+        </icons>
+        <types>
+                <type>potion</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    <item>
+        <name>minor potion of poison</name>
+        <cost>100</cost>
+        <weight>1</weight>
+        <charges>1</charges>
+        <effects>
+                <effect type="on drink" name="damage" power="1d6" />
+        </effects>
+        <icons>
+                <icon>ITEM_POTION_1</icon>
         </icons>
         <types>
                 <type>potion</type>
@@ -372,69 +424,72 @@ class IntegrationTest():
 <creatures>
     <creature>
         <name>rat</name>
-        <str>4</str>
-        <dex>12</dex>
-        <con>4</con>
-        <int>2</int>
-        <wis>4</wis>
-        <cha>4</cha>
+        <body>4</body>
+        <finesse>12</finesse>
+        <mind>2</mind>
         <hp>2</hp>
         <speed>2</speed>
         <icons>
-            <icon>creature_rat_1</icon>
-            <icon>creature_rat_2</icon>
-            <icon>creature_rat_3</icon>
-            <icon>creature_rat_4</icon>
+            <icon>CREATURE_RAT_1</icon>
+            <icon>CREATURE_RAT_2</icon>
+            <icon>CREATURE_RAT_3</icon>
+            <icon>CREATURE_RAT_4</icon>
         </icons>
-        <attack>1d4</attack>
+        <attack>2</attack>
         <size>small</size>
     </creature>
     <creature>
         <name>fire beetle</name>
-        <str>10</str>
-        <dex>11</dex>
-        <con>11</con>
-        <int>0</int>
-        <wis>10</wis>
-        <cha>7</cha>
+        <body>10</body>
+        <finesse>11</finesse>
+        <mind>0</mind>
         <hp>4</hp>
         <speed>1.9</speed>
         <icons>
-            <icon>creature_beetle_1</icon>
-            <icon>creature_beetle_2</icon>
+            <icon>CREATURE_BEETLE_1</icon>
+            <icon>CREATURE_BEETLE_2</icon>
         </icons>
-        <attack>2d4</attack>
+        <attack>4</attack>
         <size>small</size>
     </creature>
     <creature>
         <name>gargoyle</name>
-        <str>15</str>
-        <dex>14</dex>
-        <con>18</con>
-        <int>6</int>
-        <wis>11</wis>
-        <cha>7</cha>
+        <body>15</body>
+        <finesse>14</finesse>
+        <mind>6</mind>
         <hp>37</hp>
         <speed>1</speed>
         <icons>
             <icon>CREATURE_GARGOYLE</icon>
         </icons>
-        <attack>1d4+2</attack>
+        <attack>4</attack>
         <size>medium</size>
         <feats>
             <feat name="toughness" />
             <feat name="multiattack" />
             <feat name="damage reduction" type="magic" amount="10" />
             <feat name="darkvision" range="10" />
-            <feat name="freeze" />
+            <feat name="mimic" target="gargoyle statue" />
         </feats>
     </creature>
 </creatures>
 """
+        walk_factory = WalkFactory()
+        move_factory = MoveFactory(walk_factory)
+
+        unarmed_combat_factory = UnarmedCombatFactory()
+        melee_combat_factory = MeleeCombatFactory()
+        attack_factory = AttackFactory([
+                                        unarmed_combat_factory,
+                                        melee_combat_factory])
+
+        self.action_factory = ActionFactory(
+                                            StubModel(),
+                                            [move_factory, attack_factory])
 
         self.model = pyHerc.data.model.Model()
-        self.itemGenerator = pyHerc.generators.item.ItemGenerator()
-        self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator()
+        self.item_generator = pyHerc.generators.item.ItemGenerator()
+        self.creatureGenerator = pyHerc.generators.creature.CreatureGenerator(self.action_factory)
         self.tables = pyHerc.rules.tables.Tables()
         self.tables.load_tables(None, itemConfig, creatureConfig)
         self.model.tables = self.tables

@@ -50,10 +50,10 @@ class test_CreatureWithGenerator(IntegrationTest):
         '''
         Test that weapon proficiency of character can be checked
         '''
-        creature = Character()
+        creature = Character(self.action_factory)
         creature.feats = []
 
-        weapon = self.itemGenerator.generateItem(self.tables, {'name' : 'club'})
+        weapon = self.item_generator.generateItem(self.tables, {'name' : 'club'})
 
         assert(creature.is_proficient(weapon) == False)
 
@@ -67,7 +67,7 @@ class TestStatues(IntegrationTest):
         '''
         Test that activated character can deactivate
         '''
-        creature = Character()
+        creature = Character(self.action_factory)
         creature.name = 'Mimic'
         item = Item()
 
@@ -75,7 +75,7 @@ class TestStatues(IntegrationTest):
 
         creature.set_mimic_item(item)
 
-        levelGenerator = TestLevelGenerator()
+        levelGenerator = TestLevelGenerator(self.action_factory)
 
         self.model.dungeon = Dungeon()
         self.level1 = levelGenerator.generate_level(None, self.model, monster_list = [])

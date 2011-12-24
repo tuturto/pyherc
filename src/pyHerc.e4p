@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHerc -->
-<!-- Saved: 2011-10-28, 22:09:38 -->
+<!-- Saved: 2011-12-24, 12:24:49 -->
 <!-- Copyright (C) 2011 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -38,7 +38,6 @@
     <Source>pyHerc/ai/simple.py</Source>
     <Source>pyHerc/background.txt</Source>
     <Source>pyHerc/rules/time.py</Source>
-    <Source>pyHerc/rules/combat.py</Source>
     <Source>pyHerc/rules/utils.py</Source>
     <Source>pyHerc/generators/utils.py</Source>
     <Source>pyHerc/test/__init__.py</Source>
@@ -56,6 +55,17 @@
     <Source>pyHerc/test/test_creature.py</Source>
     <Source>pyHerc/data/item.py</Source>
     <Source>pyHerc/rules/los.py</Source>
+    <Source>pyHerc/rules/attack/__init__.py</Source>
+    <Source>pyHerc/rules/attack/factories.py</Source>
+    <Source>pyHerc/rules/attack/melee.py</Source>
+    <Source>pyHerc/rules/attack/action.py</Source>
+    <Source>pyHerc/rules/public.py</Source>
+    <Source>pyHerc/test/test_actionfactory.py</Source>
+    <Source>pyHerc/rules/move/__init__.py</Source>
+    <Source>pyHerc/rules/move/action.py</Source>
+    <Source>pyHerc/rules/move/factories.py</Source>
+    <Source>pyHerc/rules/factory.py</Source>
+    <Source>pyHerc/rules/attack/unarmed.py</Source>
   </Sources>
   <Forms>
   </Forms>

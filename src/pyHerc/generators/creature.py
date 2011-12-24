@@ -37,9 +37,10 @@ class CreatureGenerator:
     Class used to generate creatures
     """
 
-    def __init__(self):
+    def __init__(self, action_factory):
         self.logger = logging.getLogger(
                             'pyHerc.generators.creature.CreatureGenerator')
+        self.action_factory = action_factory
 
     def generate_creature(self, tables, parameters):
         """
@@ -74,21 +75,17 @@ class CreatureGenerator:
         """
         assert(table != None)
 
-        newCreature = pyHerc.data.model.Character()
+        newCreature = pyHerc.data.model.Character(self.action_factory)
         newCreature.name = table['name']
-        newCreature.str = table['str']
-        newCreature.dex = table['dex']
-        newCreature.con = table['con']
-        newCreature.int = table['int']
-        newCreature.wis = table['wis']
-        newCreature.cha = table['cha']
-        newCreature.hp = table['hp']
+        newCreature.set_body(table['body'])
+        newCreature.set_finesse(table['finesse'])
+        newCreature.set_mind(table['mind'])
+        newCreature.set_hp(table['hp'])
         newCreature.speed = table['speed']
         newCreature.size = table['size']
         newCreature.attack = table['attack']
         #TODO: AI from tables
-        newCreature.act = types.MethodType(pyHerc.ai.simple.flocking_herbivore,
-                                           newCreature, pyHerc.data.model.Character)
+        newCreature.artificial_intelligence = pyHerc.ai.simple.FlockingHerbivore(newCreature)
 
 
         if hasattr(table['icon'], 'append'):

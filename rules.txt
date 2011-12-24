@@ -105,3 +105,70 @@ Attack
 attack_parameters = pyHerc.rules.combat.Attack(attacker, target, special_attack)
 attack = pyHerc.rules.combat.AttackFactory.get_attack(attack_parameters)
 attack.execute()
+
+Commands
+========
+Move
+  on level
+  up / down / portal
+  climb
+  jump
+
+Attack
+  Special Attacks
+  Kick / Unarmed attack
+Fire bow
+Throw
+
+Inventory
+  Eat
+  Drink
+  Read (what about scrolls that need target?)
+  Wear / Wield
+  Take off / Remove
+  Drop
+    Single / Multiple
+  Use item (what about targets?)
+
+Pick up
+  Single / Multiple
+
+Wait?
+
+Zap wand
+Cast Spell
+Show spells
+Sacrifice
+
+door
+  Open
+  Close
+  Unlock / Picklock
+  
+System Menu
+  Quit
+  Save
+  Options
+
+Search
+Untrap
+
+Push / Pull
+  Objects / Buttons / Levers
+
+Dip (poisoning for example)
+
+Talk
+
+Controller
+  2 sticks + 2 buttons
+  1 pad
+  4 shoulders
+  4 buttons
+  2 start / select
+
+-> 1 moving
+   1 radial menu
+   4 quick options
+   4 special options (less used?)
+   2 menu

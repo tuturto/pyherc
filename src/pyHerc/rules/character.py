@@ -41,30 +41,24 @@ def initialise_stat_tables():
     kit_stats = {}
 
     temp_race = {}
-    temp_race['str'] = 10
-    temp_race['dex'] = 10
-    temp_race['con'] = 10
-    temp_race['int'] = 10
-    temp_race['wis'] = 10
-    temp_race['cha'] = 10
-    temp_race['hp'] = 10
+    temp_race['body'] = 7
+    temp_race['finesse'] = 7
+    temp_race['mind'] = 7
+    temp_race['hp'] = 7
     temp_race['speed'] = 3
     race_stats['human'] = temp_race
 
     temp_kit = {}
-    temp_kit['str'] = 2
-    temp_kit['dex'] = 0
-    temp_kit['con'] = 2
-    temp_kit['int'] = -2
-    temp_kit['wis'] = -1
-    temp_kit['cha'] = -1
+    temp_kit['body'] = -1
+    temp_kit['finesse'] = 0
+    temp_kit['mind'] = 1
     temp_kit['hp'] = 2
     temp_kit['speed'] = - 0.5
     kit_stats['fighter'] = temp_kit
 
     __logger.info('stat tables initialised')
 
-def create_character(race, kit):
+def create_character(race, kit, action_factory):
     """
     Creates a new character with given race and kit
     """
@@ -80,19 +74,16 @@ def create_character(race, kit):
     temp_race = race_stats[race]
     temp_kit = kit_stats[kit]
 
-    new_character = pyHerc.data.model.Character()
-    new_character.str = temp_race['str'] + temp_kit['str']
-    new_character.dex = temp_race['dex'] + temp_kit['dex']
-    new_character.con = temp_race['con'] + temp_kit['con']
-    new_character.wis = temp_race['wis'] + temp_kit['wis']
-    new_character.int = temp_race['int'] + temp_kit['int']
-    new_character.cha = temp_race['cha'] + temp_kit['cha']
-    new_character.hp = temp_race['hp'] + temp_kit['hp']
-    new_character.max_hp = new_character.hp
+    new_character = pyHerc.data.model.Character(action_factory)
+    new_character.set_body(temp_race['body'] + temp_kit['body'])
+    new_character.set_finesse(temp_race['finesse'] + temp_kit['finesse'])
+    new_character.set_mind(temp_race['mind'] + temp_kit['mind'])
+    new_character.hit_points = temp_race['hp'] + temp_kit['hp']
+    new_character.max_hp = new_character.hit_points
     new_character.speed = temp_race['speed'] + temp_kit['speed']
     #TODO: implement properly
     new_character.size = 'medium'
-    new_character.attack = '1d3'
+    new_character.attack = 3
 
     #TODO: get from a factory
     new_character.feats.append(

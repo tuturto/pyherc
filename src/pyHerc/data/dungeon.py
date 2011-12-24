@@ -64,6 +64,21 @@ class Level:
         self.full_update_needed = True
         self.dirty_rectangles = []
 
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        properties = dict(self.__dict__)
+        del properties['logger']
+        return properties
+
+    def __setstate__(self, properties):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(properties)
+        self.logger = logging.getLogger('pyHerc.data.dungeon.Level')
+
     def get_tile(self, loc_x, loc_y):
         '''
         Get tile at given location
@@ -215,11 +230,11 @@ class Level:
         """
         Finds free space where stuff can be placed
         """
-        x = len(self.floor)
-        y = len(self.floor[0])
-        location = (random.randint(2, x - 1), random.randint(2, y - 1))
+        width = len(self.floor)
+        height = len(self.floor[0])
+        location = (random.randint(2, width - 1), random.randint(2, height - 1))
         while self.walls[location[0]][location[1]] != pyHerc.data.tiles.WALL_EMPTY:
-            location = (random.randint(2, x - 1), random.randint(2, y - 1))
+            location = (random.randint(2, width - 1), random.randint(2, height - 1))
         return location
 
     def get_square(self, x_coordinate, y_coordinate):
@@ -250,6 +265,21 @@ class Dungeon:
         self.levels = None
         self.logger = logging.getLogger('pyHerc.data.dungeon.Dungeon')
 
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        properties = dict(self.__dict__)
+        del properties['logger']
+        return properties
+
+    def __setstate__(self, properties):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(properties)
+        self.logger = logging.getLogger('pyHerc.data.dungeon.Dungeon')
+
 class Portal:
     """
     Portal linking two levels together
@@ -262,12 +292,31 @@ class Portal:
         self.other_end = None
         self.quest_end = 0
         self.level_generator = None
+        self.model = None
+        self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')
+
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        properties = dict(self.__dict__)
+        del properties['logger']
+        return properties
+
+    def __setstate__(self, properties):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(properties)
         self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')
 
     def get_other_end(self):
         '''
         Returns the other end of the portal
         '''
+        if self.other_end == None and self.level_generator != None:
+            self.generate_level()
+
         return self.other_end
 
     def set_other_end(self, portal):
@@ -277,7 +326,7 @@ class Portal:
         '''
         self.other_end = portal
 
-    def generate_level(self, model):
+    def generate_level(self):
         '''
         Generates level if this is a proxy portal
         '''
@@ -286,6 +335,6 @@ class Portal:
 
         #TODO: support for level generation parameters
         new_level = self.level_generator.generate_level(self,
-                                                     model,
+                                                     self.model,
                                                      monster_list = [])
 

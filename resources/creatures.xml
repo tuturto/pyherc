@@ -1,54 +1,45 @@
 <creatures>
     <creature>
         <name>rat</name>
-        <str>4</str>
-        <dex>12</dex>
-        <con>4</con>
-        <int>2</int>
-        <wis>4</wis>
-        <cha>4</cha>
+        <body>4</body>
+        <finesse>12</finesse>
+        <mind>2</mind>
         <hp>2</hp>
         <speed>2</speed>
         <icons>
-            <icon>creature_rat_1</icon>
-            <icon>creature_rat_2</icon>
-            <icon>creature_rat_3</icon>
-            <icon>creature_rat_4</icon>
+            <icon>CREATURE_RAT_1</icon>
+            <icon>CREATURE_RAT_2</icon>
+            <icon>CREATURE_RAT_3</icon>
+            <icon>CREATURE_RAT_4</icon>
         </icons>
-        <attack>1d4</attack>
+        <attack>2</attack>
         <size>small</size>
     </creature>
     <creature>
         <name>fire beetle</name>
-        <str>10</str>
-        <dex>11</dex>
-        <con>11</con>
-        <int>0</int>
-        <wis>10</wis>
-        <cha>7</cha>
+        <body>10</body>
+        <finesse>11</finesse>
+        <mind>0</mind>
         <hp>4</hp>
         <speed>1.9</speed>
         <icons>
-            <icon>creature_beetle_1</icon>
-            <icon>creature_beetle_2</icon>
+            <icon>CREATURE_BEETLE_1</icon>
+            <icon>CREATURE_BEETLE_2</icon>
         </icons>
-        <attack>2d4</attack>
+        <attack>4</attack>
         <size>small</size>
     </creature>
     <creature>
         <name>gargoyle</name>
-        <str>15</str>
-        <dex>14</dex>
-        <con>18</con>
-        <int>6</int>
-        <wis>11</wis>
-        <cha>7</cha>
+        <body>15</body>
+        <finesse>14</finesse>
+        <mind>6</mind>
         <hp>37</hp>
         <speed>1</speed>
         <icons>
             <icon>CREATURE_GARGOYLE</icon>
         </icons>
-        <attack>1d4+2</attack>
+        <attack>4</attack>
         <size>medium</size>
         <feats>
             <feat name="toughness" />

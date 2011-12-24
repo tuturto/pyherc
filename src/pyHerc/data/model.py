@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2011 Tuukka Turto
 #
 #   This file is part of pyHerc.
 #
@@ -47,6 +47,21 @@ class Model:
         self.logger.info('loading config')
         self.load_config()
 
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        properties = dict(self.__dict__)
+        del properties['logger']
+        return properties
+
+    def __setstate__(self, properties):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(properties)
+        self.logger = logging.getLogger('pyHerc.data.model.Model')
+
     def load_config(self):
         """
         Loads config
@@ -74,18 +89,15 @@ class Character:
     Represents a character in playing world
     """
 
-    def __init__(self):
+    def __init__(self, action_factory):
         # attributes
-        self.str = None
-        self.dex = None
-        self.con = None
-        self.int = None
-        self.wis = None
-        self.cha = None
+        self.body = None
+        self.finesse = None
+        self.mind = None
         self.name = 'prototype'
         self.race = None
         self.kit = None
-        self.hp = None
+        self.hit_points = None
         self.max_hp = None
         self.speed = None
         self.inventory = []
@@ -104,6 +116,9 @@ class Character:
         self.attack = None
         #mimic
         self.mimic_item = None
+        self.action_factory = action_factory
+        self.artificial_intelligence = None
+        self.logger = logging.getLogger('pyHerc.data.model.Character')
 
     def __str__(self):
         return self.name
@@ -114,11 +129,80 @@ class Character:
         """
         self.short_term_memory.append(event)
 
+    def act(self, model):
+        '''
+        Triggers AI of this character
+        '''
+        self.artificial_intelligence.act(model)
+
     def get_hp(self):
         '''
         Get current hitpoints
         '''
-        return self.hp
+        return self.hit_points
+
+    def set_hp(self, hit_points):
+        '''
+        Set current hitpoints
+        @param hit_points: hit points to set
+        '''
+        self.hit_points = hit_points
+
+    def get_body(self):
+        '''
+        Get body attribute
+        @returns: Body attribute of this character
+        '''
+        return self.body
+
+    def set_body(self, body):
+        '''
+        Set body attribute
+        @param body: body attribute to set
+        '''
+        self.body = body
+
+    def get_finesse(self):
+        '''
+        Get finesse attribute
+        @returns: finesse attribute
+        '''
+        return self.finesse
+
+    def set_finesse(self, finesse):
+        '''
+        Set finesse attribute
+        @param finesse: finesse attribute to set
+        '''
+        self.finesse = finesse
+
+    def get_mind(self):
+        '''
+        Get mind attribute
+        @returns: Mind attribute
+        '''
+        return self.mind
+
+    def set_mind(self, mind):
+        '''
+        Set mind attribute
+        @param mind: mind attribute to set
+        '''
+        self.mind = mind
+
+    def get_attack(self):
+        '''
+        Return attack attribute of the character
+        @returns: Attack value
+        '''
+        return self.attack
+
+    def set_attack(self, attack):
+        '''
+        Set attack attribute of the character
+        @param attack: Attack attribute
+        '''
+        self.attack = attack
 
     def get_max_hp(self):
         """
@@ -182,11 +266,44 @@ class Character:
         '''
         self.location = location
 
+    def execute_action(self, action_parameters):
+        '''
+        Execute action defined by action parameters
+        @param action_parameters: parameters controlling creation of the action
+        '''
+        action = self.create_action(action_parameters)
+        action.execute()
+
+    def create_action(self, action_parameters):
+        '''
+        Create an action by defined by action parameters
+        @param action_parameters: parameters controlling creation of the action
+        '''
+        if self.action_factory != None:
+            action = self.action_factory.get_action(action_parameters)
+        return action
+
+    def __getstate__(self):
+        '''
+        Override __getstate__ in order to get pickling work
+        '''
+        d = dict(self.__dict__)
+        del d['logger']
+        return d
+
+    def __setstate__(self, d):
+        '''
+        Override __setstate__ in order to get pickling work
+        '''
+        self.__dict__.update(d)
+        self.logger = logging.getLogger('pyHerc.data.model.Character')
+
 class Damage:
     """
     Damage done in combat
     """
-    def __init__(self, amount = 0, damage_type = 'bludgeoning', magic_bonus = 0):
+    def __init__(self, amount = 0, damage_type = 'bludgeoning',
+                        magic_bonus = 0):
         self.amount = amount
         self.damage_type = damage_type
         self.magic_bonus = magic_bonus

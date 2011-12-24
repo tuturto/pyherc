@@ -52,7 +52,7 @@ class TestItemWithGenerator(IntegrationTest):
                                                 pyHerc.data.tiles.FLOOR_ROCK,
                                                 pyHerc.data.tiles.WALL_EMPTY)
 
-        self.character = pyHerc.data.model.Character()
+        self.character = pyHerc.data.model.Character(self.action_factory)
 
         self.character.location = (5, 5)
         self.character.name = 'Timothy Tester'
@@ -72,26 +72,26 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that generating crystal skull is possible
         """
-        self.item = self.itemGenerator.generateItem(self.tables,
+        self.item = self.item_generator.generateItem(self.tables,
                                                     {'type': 'special',
                                                     'name': 'crystal skull'})
 
         assert(self.item.name == 'crystal skull')
         assert(self.item.quest_item == 1)
-        assert(self.item.icon == pyHerc.data.tiles.item_crystal_skull)
+        assert(self.item.icon == pyHerc.data.tiles.ITEM_CRYSTAL_SKULL)
 
     def test_create_weapon(self):
         """
         Test that a weapon can be created
         """
 
-        item = self.itemGenerator.generateItem(self.tables, {'name': 'dagger'})
+        item = self.item_generator.generateItem(self.tables, {'name': 'dagger'})
 
         assert(item != None)
         assert(item.name == 'dagger')
         assert(item.cost == 2)
-        assert(item.weapon_data.damage == '1d4')
-        assert(item.weapon_data.critical_range == 19)
+        assert(item.weapon_data.damage == 2)
+        assert(item.weapon_data.critical_range == 11)
         assert(item.weapon_data.critical_damage == 2)
         assert(item.weight == 1)
         assert('piercing' in item.weapon_data.damage_type)
@@ -105,7 +105,7 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that character can wield a weapon (dagger)
         """
-        item = self.itemGenerator.generateItem(self.tables, {'name': 'dagger'})
+        item = self.item_generator.generateItem(self.tables, {'name': 'dagger'})
 
         assert(item not in self.character.weapons)
 
@@ -117,7 +117,7 @@ class TestItemWithGenerator(IntegrationTest):
         '''
         Test that wielded item can be unwielded
         '''
-        item = self.itemGenerator.generateItem(self.tables, {'name': 'dagger'})
+        item = self.item_generator.generateItem(self.tables, {'name': 'dagger'})
         pyHerc.rules.items.wield(self.model, self.character, item)
 
         assert(item in self.character.weapons)
@@ -130,9 +130,9 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that character can swap a weapon to another
         """
-        item1 = self.itemGenerator.generateItem(
+        item1 = self.item_generator.generateItem(
                                         self.tables, {'name': 'dagger'})
-        item2 = self.itemGenerator.generateItem(
+        item2 = self.item_generator.generateItem(
                                         self.tables, {'name': 'sickle'})
 
         assert(item1 not in self.character.weapons)
@@ -151,9 +151,9 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that character can not dual wield two-handed weapon
         """
-        item1 = self.itemGenerator.generateItem(self.tables,
+        item1 = self.item_generator.generateItem(self.tables,
                                                 {'name': 'longspear'})
-        item2 = self.itemGenerator.generateItem(self.tables,
+        item2 = self.item_generator.generateItem(self.tables,
                                                 {'name': 'sickle'})
 
         assert(item1 not in self.character.weapons)
@@ -171,9 +171,9 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that system can determine if two items can be dual-wielded
         """
-        item1 = self.itemGenerator.generateItem(self.tables,
+        item1 = self.item_generator.generateItem(self.tables,
                                                 {'name': 'longspear'})
-        item2 = self.itemGenerator.generateItem(self.tables,
+        item2 = self.item_generator.generateItem(self.tables,
                                                 {'name': 'sickle'})
 
         assert(not pyHerc.rules.items.can_dual_wield(
@@ -186,9 +186,9 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that system can determine if item is dual-wieldable
         """
-        item1 = self.itemGenerator.generateItem(self.tables,
+        item1 = self.item_generator.generateItem(self.tables,
                                                     {'name': 'longspear'})
-        item2 = self.itemGenerator.generateItem(self.tables,
+        item2 = self.item_generator.generateItem(self.tables,
                                                     {'name': 'sickle'})
 
         assert(not pyHerc.rules.items.is_dual_wieldable(
@@ -204,7 +204,7 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test determing if item is dual-wieldable when using mundane items
         """
-        item = self.itemGenerator.generateItem(self.tables,
+        item = self.item_generator.generateItem(self.tables,
                                                {'name': 'apple'})
 
         assert(not pyHerc.rules.items.is_dual_wieldable(
@@ -216,7 +216,7 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that basic healing potion can be created
         """
-        self.item = self.itemGenerator.generateItem(self.tables,
+        self.item = self.item_generator.generateItem(self.tables,
                                                     {'name': 'healing potion'})
 
         assert(self.item != None)
@@ -231,7 +231,7 @@ class TestItemWithGenerator(IntegrationTest):
         '''
         Test that different types of items have tags
         '''
-        self.item = self.itemGenerator.generateItem(self.tables,
+        self.item = self.item_generator.generateItem(self.tables,
                                                     {'name': 'dagger'})
 
         assert(self.item.get_tags() is not None)
@@ -240,14 +240,14 @@ class TestItemWithGenerator(IntegrationTest):
         '''
         Test that main type can be retrieved
         '''
-        self.item = self.itemGenerator.generateItem(self.tables,
+        self.item = self.item_generator.generateItem(self.tables,
                                                     {'name': 'dagger'})
 
         main_type = self.item.get_main_type()
 
         assert(main_type == 'weapon')
 
-        self.item = self.itemGenerator.generateItem(self.tables,
+        self.item = self.item_generator.generateItem(self.tables,
                                                     {'name': 'apple'})
 
         main_type = self.item.get_main_type()
@@ -275,7 +275,7 @@ class TestItemsInLevel:
                                                 pyHerc.data.tiles.FLOOR_ROCK,
                                                 pyHerc.data.tiles.WALL_EMPTY)
 
-        self.character = pyHerc.data.model.Character()
+        self.character = pyHerc.data.model.Character(None)
 
         self.character.location = (5, 5)
         self.character.name = 'Timothy Tester'
@@ -391,7 +391,7 @@ class TestItemAdvanced():
         """
 
         item = Item()
-        character = pyHerc.data.model.Character()
+        character = pyHerc.data.model.Character(None)
 
         item.name = 'healing potion'
         item.appearance = 'blue potion'
@@ -405,7 +405,7 @@ class TestItemAdvanced():
         Test that given name is reported for a generally named item
         """
         item = Item()
-        character = pyHerc.data.model.Character()
+        character = pyHerc.data.model.Character(None)
         character.item_memory['healing potion'] = 'doozer potion'
 
         item.name = 'healing potion'
@@ -420,7 +420,7 @@ class TestItemAdvanced():
         Test that character can identify an item
         """
         item = Item()
-        character = pyHerc.data.model.Character()
+        character = pyHerc.data.model.Character(None)
         item.name = 'healing potion'
         item.appearance = 'blue potion'
 
@@ -437,7 +437,7 @@ class TestItemAdvanced():
         Test that item can decorate its name
         '''
         item = Item()
-        character = pyHerc.data.model.Character()
+        character = pyHerc.data.model.Character(None)
         item.name = 'club'
 
         character.inventory.append(item)

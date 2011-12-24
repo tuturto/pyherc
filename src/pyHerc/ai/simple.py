@@ -27,102 +27,124 @@ Creature will try to find friends, before attacking the player character
 import math
 import pyHerc.rules.moving
 import pyHerc.rules.combat
+from pyHerc.rules.public import MoveParameters
+from pyHerc.rules.public import AttackParameters
 
-def flocking_herbivore(self, model):
+class FlockingHerbivore():
     """
     AI for flocking herbivore
     Tries to maintain close distance to other animals
     Seeks out player for combat
     """
-    shortest_distance = None
-    closest_creature = None
 
-    #TODO: handle memory
-    del self.short_term_memory[:]
+    def __init__(self, character):
+        self.character = character
 
-    for creature in self.level.creatures:
-        if creature != self:
-            loc_x = abs(creature.location[0] - self.location[0])
-            loc_y = abs(creature.location[1] - self.location[1])
-            distance = math.sqrt(loc_x * loc_x + loc_y * loc_y)
-            if shortest_distance != None:
-                if distance < shortest_distance:
+    def act(self, model):
+        '''
+        Trigger this AI to assess the situation and act accordingly
+        '''
+        shortest_distance = None
+        closest_creature = None
+        character = self.character
+        player = model.player
+
+        #TODO: handle memory
+        del self.character.short_term_memory[:]
+
+        for creature in self.character.level.creatures:
+            if creature != self.character:
+                loc_x = abs(creature.location[0] - character.location[0])
+                loc_y = abs(creature.location[1] - character.location[1])
+                distance = math.sqrt(loc_x * loc_x + loc_y * loc_y)
+                if shortest_distance != None:
+                    if distance < shortest_distance:
+                        shortest_distance = distance
+                        closest_creature = creature
+                else:
                     shortest_distance = distance
                     closest_creature = creature
-            else:
-                shortest_distance = distance
-                closest_creature = creature
 
-    if shortest_distance != None:
-        if shortest_distance <= 2:
-            #seek player instead
-            loc_x = abs(model.player.location[0] - self.location[0])
-            loc_y = abs(model.player.location[1] - self.location[1])
-            distance = math.sqrt(loc_x * loc_x + loc_y * loc_y)
+        if shortest_distance != None:
+            if shortest_distance <= 2:
+                #seek player instead
+                loc_x = abs(player.location[0] - character.location[0])
+                loc_y = abs(player.location[1] - character.location[1])
+                distance = math.sqrt(loc_x * loc_x + loc_y * loc_y)
 
-            if distance > 1:
-                direction = find_direction(self.location, model.player.location)
-                result = pyHerc.rules.moving.check_move(model, self, direction)
-                if result['ok']:
-                    pyHerc.rules.moving.move(model, self, direction)
+                if distance > 1:
+                    direction = self.find_direction(
+                                        character.location, player.location)
+
+                    action = self.character.create_action(
+                                MoveParameters(character, direction, 'walk')
+                                )
+                    if action.is_legal() == True:
+                        action.execute()
+                    else:
+                        self.character.tick = self.character.tick + 10
                 else:
-                    self.tick = self.tick + 10
+                    #attack
+                    character.execute_action(
+                                    AttackParameters(character, player, 'unarmed')
+                                    )
+                    # pyHerc.rules.combat.melee_attack(model, character, player)
             else:
-                #attack
-                pyHerc.rules.combat.melee_attack(model, self, model.player)
-        else:
-            #find direction
-            direction = pyHerc.ai.simple.find_direction(self.location,
+                #find direction
+                direction = self.find_direction(character.location,
                                                     closest_creature.location)
-            result = pyHerc.rules.moving.check_move(model, self, direction)
-            if result['ok']:
-                pyHerc.rules.moving.move(model, self, direction)
+
+                action = self.character.create_action(
+                                    MoveParameters(character, direction, 'walk')
+                                    )
+                if action.is_legal() == True:
+                    action.execute()
+                else:
+                    self.character.tick = self.character.tick + 10
+        else:
+            #we're all alone here
+            self.character.tick = self.character.tick + 10
+
+    def find_direction(self, start, end):
+        """
+        Find direction from start to end
+        @param start: start location
+        @param end: end location
+        @return: Direction to travel
+        """
+        assert(start != None)
+        assert(end != None)
+
+        direction = None
+        if start[0] < end[0]:
+            #right side
+            if start[1] < end[1]:
+                #right, below
+                direction = 4
+            elif start[1] > end[1]:
+                #right, above
+                direction = 2
             else:
-                self.tick = self.tick + 10
-    else:
-        #we're all alone here
-        self.tick = self.tick + 10
-
-def find_direction(start, end):
-    """
-    Find direction from start to end
-    @param start: start location
-    @param end: end location
-    @return: Direction to travel
-    """
-    assert(start != None)
-    assert(end != None)
-
-    direction = None
-    if start[0] < end[0]:
-        #right side
-        if start[1] < end[1]:
-            #right, below
-            direction = 4
-        elif start[1] > end[1]:
-            #right, above
-            direction = 2
+                #right
+                direction = 3
+        elif start[0] > end[0]:
+            #left side
+            if start[1] < end[1]:
+                #left, below
+                direction = 6
+            elif start[1] > end[1]:
+                #left, above
+                direction = 8
+            else:
+                #left
+                direction = 7
         else:
-            #right
-            direction = 3
-    elif start[0] > end[0]:
-        #left side
-        if start[1] < end[1]:
-            #left, below
-            direction = 6
-        elif start[1] > end[1]:
-            #left, above
-            direction = 8
-        else:
-            #left
-            direction = 7
-    else:
-        #up or down
-        if start[1] < end[1]:
-            #below
-            direction = 5
-        elif start[1] > end[1]:
-            #above
-            direction = 1
+            #up or down
+            if start[1] < end[1]:
+                #below
+                direction = 5
+            elif start[1] > end[1]:
+                #above
+                direction = 1
 
-    return direction
+        return direction
