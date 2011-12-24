@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHerc -->
-<!-- Saved: 2011-12-18, 18:43:02 -->
+<!-- Saved: 2011-12-24, 12:24:49 -->
 <!-- Copyright (C) 2011 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -38,7 +38,6 @@
     <Source>pyHerc/ai/simple.py</Source>
     <Source>pyHerc/background.txt</Source>
     <Source>pyHerc/rules/time.py</Source>
-    <Source>pyHerc/rules/combat.py</Source>
     <Source>pyHerc/rules/utils.py</Source>
     <Source>pyHerc/generators/utils.py</Source>
     <Source>pyHerc/test/__init__.py</Source>
