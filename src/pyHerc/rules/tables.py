@@ -36,8 +36,6 @@ class Tables:
         self.tagScore = {}
 
         self.creatures = {}
-        self.sizeModifier = []
-        self.attributeModifier = []
 
         self.artifact = 1
         self.legendary = 2
@@ -116,11 +114,6 @@ class Tables:
             creatureConfig = f.read()
             f.close()
             self.read_creatures_from_xml(creatureConfig)
-
-        self.sizeModifier = {'colossal' :  -8, 'gargantuan' : -4, 'huge' : -2, 'large' : -1,
-                                'medium' : 0, 'small' : 1, 'tiny' : 2, 'diminutive' : 4, 'fine' : 8}
-
-        self.attributeModifier = [-6, -5, -4, -4, -3, -3, -2, -2, -1, -1, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
 
         self.potionAppearances = [
                                 ('clay potion',  pyHerc.data.tiles.ITEM_POTION_3),
