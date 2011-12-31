@@ -1,0 +1,16 @@
+Contents
+========
+
+ - Running the game
+ 
+ - Starting the game
+  - Starting a new game
+  - Loading an old game
+
+ - Playing the game
+  - User interface
+   - Keyboard
+   - Gamepad
+
+ - Dying
+ 
