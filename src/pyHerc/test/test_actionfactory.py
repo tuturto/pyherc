@@ -36,6 +36,10 @@ from pyHerc.data.model import Character
 from pyHerc.data.dungeon import Level
 from pyHerc.data import tiles
 
+from pyHerc.data.model import Model
+
+from mock import Mock
+
 class TestActionFactories():
     '''
     Tests related to action factories
@@ -44,8 +48,11 @@ class TestActionFactories():
         '''
         Test that action factory can be initialised with single sub factory
         '''
-        factory = ActionFactory(StubModel(),
-                                AttackFactory(UnarmedCombatFactory()))
+        mock_model = Mock(Model)
+        mock_attack_factory = Mock(AttackFactory)
+
+        factory = ActionFactory(mock_model,
+                                mock_attack_factory)
 
         factories = factory.get_sub_factories()
         found = [isinstance(x, AttackFactory) for x in factories]
@@ -55,9 +62,13 @@ class TestActionFactories():
         '''
         Test that action factory can be initialised with list of factories
         '''
-        factory = ActionFactory(StubModel(),
-                                [AttackFactory(UnarmedCombatFactory()),
-                                    MoveFactory(WalkFactory())])
+        mock_model = Mock(Model)
+        mock_move_factory = Mock(MoveFactory)
+        mock_attack_factory = Mock(AttackFactory)
+
+        factory = ActionFactory(mock_model,
+                                [mock_attack_factory,
+                                    mock_move_factory])
         factories = factory.get_sub_factories()
 
         found = [isinstance(x, AttackFactory) for x in factories]
@@ -70,11 +81,19 @@ class TestActionFactories():
         '''
         Test that factory can be found by using Parameters object
         '''
-        factory = ActionFactory(StubModel(),
-                                [AttackFactory(UnarmedCombatFactory()),
-                                    MoveFactory(WalkFactory())])
-        parameters = AttackParameters(None, None, 'melee', StubModel())
+        mock_model = Mock(Model)
+        mock_move_factory = Mock(MoveFactory)
+        mock_attack_factory = Mock(AttackFactory)
 
-        sub_factory = factory.get_sub_factory(parameters)
+        mock_attack_factory.can_handle.return_value = True
+        mock_move_factory.can_handle.return_value = False
+
+        factory = ActionFactory(mock_model,
+                                [mock_attack_factory,
+                                    mock_move_factory])
+
+        mock_parameters = Mock(AttackParameters)
+
+        sub_factory = factory.get_sub_factory(mock_parameters)
 
         assert isinstance(sub_factory, AttackFactory)
