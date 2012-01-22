@@ -26,7 +26,9 @@ import os.path
 import sys, getopt
 import pygame
 import logging
+import pgu.gui
 
+import pyHerc.gui.surfaceManager
 from pyHerc.rules.public import ActionFactory
 from pyHerc.rules.move.factories import MoveFactory
 from pyHerc.rules.move.factories import WalkFactory
@@ -127,8 +129,13 @@ class Application:
         """
         Starts the application
         """
-        self.gui = MainWindow(self, self.base_path)
-        self.gui.mainLoop()
+        surface_manager = pyHerc.gui.surfaceManager.SurfaceManager()
+        surface_manager.loadResources(self.base_path)
+        self.screen = pygame.display.set_mode((800, 600), pygame.SWSURFACE)
+        self.gui = MainWindow(self, self.base_path, surface_manager, self.screen)
+        menu = pyHerc.gui.startmenu.StartMenu(self, self.screen, surface_manager)
+        self.gui.connect(pgu.gui.QUIT,self.gui.quit,None)
+        self.gui.run(menu, screen = self.screen)
 
     def start_logging(self):
         '''

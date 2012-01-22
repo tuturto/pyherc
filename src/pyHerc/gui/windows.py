@@ -36,6 +36,7 @@ import pyHerc.rules.combat
 import pyHerc.generators.dungeon
 import pyHerc.rules.tables
 import pyHerc.gui.startmenu
+import pgu.gui.app
 from pyHerc.rules.public import MoveParameters
 from pyHerc.rules.public import AttackParameters
 from pyHerc.rules.los import get_fov_matrix
@@ -47,15 +48,16 @@ from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8
 from pygame.locals import Rect
 
 
-class MainWindow:
+class MainWindow(pgu.gui.app.App):
 
-    def __init__(self,  application, base_path, surface_manager = None):
+    def __init__(self,  application, base_path, surface_manager, screen, theme=None, **params):
         """
         Initialises the main window
         @param application: instance of currently running application
         @param base_path: location of resources directory
         @surface_manager: optional SurfaceManger to use for loading resources
         """
+        super(MainWindow, self).__init__(theme, **params)
         self.logger = logging.getLogger('pyHerc.gui.windows.MainWindow')
         self.logger.info('Initialising MainWindow')
         self.display = None
@@ -63,16 +65,10 @@ class MainWindow:
         pygame.init()
         self.width = application.config['resolution'][0]
         self.height = application.config['resolution'][1]
-        self.screen = pygame.display.set_mode((self.width, self.height))
+        self.screen = screen
         pygame.display.set_caption(application.config['caption'])
 
         self.surface_manager = surface_manager
-        if self.surface_manager == None:
-            self.logger.warn('Surface manager not specified, defaulting to the system one.')
-            self.surface_manager = pyHerc.gui.surfaceManager.SurfaceManager()
-            self.surface_manager.loadResources(base_path)
-
-        self.surface_manager.loadResources(base_path)
 
     def mainLoop(self):
         """
