@@ -12,6 +12,7 @@ System Requirements
 ===================
 Python 2.6.1
 PyGame 1.9.2
+PGU 0.18
 
 Credits
 =======
@@ -27,3 +28,4 @@ and are published under the Creative Commons licence.
 Some tiles, in Dungeon Odyssey "Xerathul's Revenge" module have been drawn 
 by Henk Brouwer.
 
+PGU was originally developed by Phil Hassey but is now being maintained by Peter Rogers.
