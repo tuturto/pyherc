@@ -19,8 +19,7 @@
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
 image_start_menu = 1
-image_start_menu_arrow = 2
-image_inventory_menu = 3
+image_inventory_menu = 2
 
 image_play_area = 4
 

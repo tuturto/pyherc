@@ -57,8 +57,6 @@ class SurfaceManager:
 
             surface = self.load_surface(base_path, 'main_menu.png')
             self.images[images.image_start_menu] = surface
-            surface = self.load_surface(base_path, 'menu_arrow.png')
-            self.images[images.image_start_menu_arrow] = surface
             surface = self.load_surface(base_path, 'play_area.png')
             self.images[images.image_play_area] = surface
             surface = self.load_surface(base_path, 'inventory_menu.png')

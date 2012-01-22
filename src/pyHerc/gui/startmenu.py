@@ -39,17 +39,22 @@ class StartMenu(pgu.gui.Container):
         '''
         Set layout of this screen
         '''
+        bg = pgu.gui.Image(
+                                        self.surface_manager.getImage(images.image_start_menu))
+        self.add(bg, 0, 0)
+
         b = pgu.gui.Button("New game", width=150)
-        self.add(b, 0, 0)
-        b.connect(pgu.gui.CLICK, self.__startNewGame, None)
+        self.add(b, 325, 200)
+        b.connect(pgu.gui.CLICK, self.__startNewGame)
 
         b = pgu.gui.Button("Load game", width=150)
-        self.add(b, 0, 50)
+        self.add(b, 325, 250)
 
         b = pgu.gui.Button("Quit", width=150)
-        self.add(b, 0, 100)
+        self.add(b, 325, 300)
+        b.connect(pgu.gui.CLICK, self.__quit_game)
 
-    def __startNewGame(self, event_params):
+    def __startNewGame(self):
         self.logger.info('starting a new game')
         newWindow = pyHerc.gui.windows.StartNewGameWindow(self.application, self.screen, self.surface_manager)
         newWindow.mainLoop()
@@ -67,3 +72,6 @@ class StartMenu(pgu.gui.Container):
             dialog.show(endResult)
 
         self.repaint()
+
+    def __quit_game(self):
+        self.get_toplevel().quit()

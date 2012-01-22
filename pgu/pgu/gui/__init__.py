@@ -35,6 +35,7 @@ from .keysym import Keysym
 from .slider import VSlider, HSlider, VScrollBar, HScrollBar
 from .select import Select
 from .misc import ProgressBar
+from .imagebox import ImageBox
 
 from .menus import Menus
 from .dialog import Dialog, FileDialog
