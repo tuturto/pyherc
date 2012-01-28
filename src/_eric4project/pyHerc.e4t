@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2012-01-22, 15:40:57 -->
+<!-- Saved: 2012-01-23, 00:19:29 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement menu here</Summary>
@@ -96,7 +96,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: world initialisation needs action factory</Summary>
     <Description></Description>
-    <Created>2012-01-22, 15:32:22</Created>
+    <Created>2012-01-22, 15:46:30</Created>
     <Resource>
       <Filename>pyHerc/gui/startmenu.py</Filename>
       <Linenumber>61</Linenumber>
@@ -105,7 +105,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: action factory needs world</Summary>
     <Description></Description>
-    <Created>2012-01-22, 15:32:22</Created>
+    <Created>2012-01-22, 15:46:30</Created>
     <Resource>
       <Filename>pyHerc/gui/startmenu.py</Filename>
       <Linenumber>62</Linenumber>
