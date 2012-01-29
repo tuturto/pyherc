@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2012-01-29, 15:06:55 -->
+<!-- Saved: 2012-01-29, 21:50:55 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: correct graphics</Summary>
@@ -184,15 +184,6 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: refactor for configuration</Summary>
-    <Description></Description>
-    <Created>2012-01-29, 12:41:38</Created>
-    <Resource>
-      <Filename>pyHerc/generators/dungeon.py</Filename>
-      <Linenumber>59</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: support for level generation parameters</Summary>
     <Description></Description>
     <Created>2012-01-29, 13:59:18</Created>
@@ -325,6 +316,15 @@
     <Resource>
       <Filename>pyHerc/gui/startmenu.py</Filename>
       <Linenumber>55</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: refactor for configuration</Summary>
+    <Description></Description>
+    <Created>2012-01-29, 21:06:22</Created>
+    <Resource>
+      <Filename>pyHerc/generators/dungeon.py</Filename>
+      <Linenumber>59</Linenumber>
     </Resource>
   </Task>
 </Tasks>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHerc -->
-<!-- Saved: 2012-01-29, 12:42:56 -->
+<!-- Saved: 2012-01-29, 21:49:49 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -73,6 +73,10 @@
     <Source>pyHerc/generators/level/testlevel.py</Source>
     <Source>pyHerc/test/test_cryptgenerator.py</Source>
     <Source>pyHerc/generators/level/config.py</Source>
+    <Source>pyHerc/generators/level/partioners/__init__.py</Source>
+    <Source>pyHerc/generators/level/partioners/grid.py</Source>
+    <Source>pyHerc/test/test_gridpartitioner.py</Source>
+    <Source>pyHerc/generators/level/partioners/section.py</Source>
   </Sources>
   <Forms>
   </Forms>
