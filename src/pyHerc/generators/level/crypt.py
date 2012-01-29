@@ -19,6 +19,7 @@
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
 import logging
+import random
 from pyHerc.generators import ItemGenerator
 from pyHerc.generators import CreatureGenerator
 
@@ -37,18 +38,21 @@ class CryptGeneratorFactory:
         self.action_factory = action_factory
         self.level_configurations = level_configurations
 
-    def get_generator(self, level):
+    def get_generator(self, level, random_generator = random.Random()):
         '''
         Get CryptGenerator for given crypt level
+        @param level: current crypt level
+        @param random_generator: Optional random number generator
         '''
         return CryptGenerator(self.action_factory,
-                                        self.level_configurations[level - 1])
+                                        self.level_configurations[level - 1],
+                                        random_generator)
 
 class CryptGenerator:
     '''
     Class used to generate crypts
     '''
-    def __init__(self, action_factory, configuration):
+    def __init__(self, action_factory, configuration, random_generator):
         '''
         Default constructor
         @param action_factory: ActionFactory instance
@@ -57,6 +61,7 @@ class CryptGenerator:
         self.logger = logging.getLogger('pyHerc.generators.level.crypt.CryptGenerator')
         self.item_generator = ItemGenerator()
         self.creature_generator = CreatureGenerator(action_factory)
+        self.random_generator = random_generator
 
         self.action_factory = action_factory
         self.level_partitioners = configuration.level_partitioners
@@ -77,4 +82,14 @@ class CryptGenerator:
         self.logger = logging.getLogger('pyHerc.generators.level.crypt.CryptGenerator')
 
     def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):
-        pass
+        '''
+        Generate crypt level
+        '''
+        # partition level
+        partitioner = self.random_generator.choice(self.level_partitioners)
+        partitioner.partition_level()
+        # generate rooms
+        # decorate level
+        # add stairs
+        # add monsters
+        # add items

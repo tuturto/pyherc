@@ -25,8 +25,12 @@ from pyHerc.generators.level.crypt import CryptGenerator
 from pyHerc.generators.level.crypt import CryptGeneratorFactory
 from pyHerc.generators.level.config import LevelGeneratorConfig
 from pyHerc.rules import ActionFactory
+from pyHerc.data import Portal
+from pyHerc.data import Model
 
 from mock import Mock
+
+import random
 
 class TestCryptGenerator():
     '''
@@ -78,3 +82,30 @@ class TestCryptGeneratorFactoryConfiguration:
 
         assert mock_partitioner in generator.level_partitioners
 
+class TestCryptGenerator:
+    '''
+    Class for testing CryptGenerator
+    '''
+    def test_level_generation_steps(self):
+        '''
+        Test that level generation steps are done
+        '''
+        mock_factory = Mock(ActionFactory)
+        mock_partitioner = Mock()
+        mock_room_generator = Mock()
+        mock_level_decorator = Mock()
+        mock_stair_adder = Mock()
+        mock_config = Mock(LevelGeneratorConfig)
+        mock_config.level_partitioners = [mock_partitioner]
+
+        mock_portal = Mock(Portal)
+        mock_model = Mock(Model)
+
+        generator = CryptGenerator(mock_factory, mock_config, random.Random())
+
+        generator.generate_level(mock_portal, mock_model)
+
+        assert mock_partitioner.partition_level.called
+        assert mock_room_generator.generate_room.called
+        assert mock_level_decorator.decorate_level.called
+        assert mock_stair_adder.add_stairs.called
