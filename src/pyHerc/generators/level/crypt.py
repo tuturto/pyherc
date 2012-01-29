@@ -26,32 +26,40 @@ class CryptGeneratorFactory:
     '''
     Class used to contruct different kinds of crypt generators
     '''
-    def __init__(self, action_factory):
+    def __init__(self, action_factory, level_configurations):
         '''
         Default constructor
 
         @param action_factory: ActionFactory to pass to the generator
+        @param level_configurations: List of LevelGeneratorConfiguration objects
         '''
         self.logger = logging.getLogger('pyHerc.generators.level.crypt.CryptGeneratorFactory')
         self.action_factory = action_factory
+        self.level_configurations = level_configurations
 
     def get_generator(self, level):
         '''
         Get CryptGenerator for given crypt level
         '''
-        return CryptGenerator(self.action_factory)
+        return CryptGenerator(self.action_factory,
+                                        self.level_configurations[level - 1])
 
 class CryptGenerator:
     '''
     Class used to generate crypts
     '''
-    def __init__(self, action_factory):
+    def __init__(self, action_factory, configuration):
+        '''
+        Default constructor
+        @param action_factory: ActionFactory instance
+        @param configuration: LevelGeneratorConfiguration
+        '''
         self.logger = logging.getLogger('pyHerc.generators.level.crypt.CryptGenerator')
         self.item_generator = ItemGenerator()
         self.creature_generator = CreatureGenerator(action_factory)
 
-        self.partitioners = []
-        self.room_generators = []
+        self.action_factory = action_factory
+        self.level_partitioners = configuration.level_partitioners
 
     def __getstate__(self):
         '''

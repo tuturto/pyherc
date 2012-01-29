@@ -21,9 +21,9 @@
 '''
 Tests for CryptGenerator
 '''
-
 from pyHerc.generators.level.crypt import CryptGenerator
 from pyHerc.generators.level.crypt import CryptGeneratorFactory
+from pyHerc.generators.level.config import LevelGeneratorConfig
 from pyHerc.rules import ActionFactory
 
 from mock import Mock
@@ -34,17 +34,47 @@ class TestCryptGenerator():
     '''
     pass
 
-class TestCryptGeneratorFactory():
+class TestCryptGeneratorFactory:
     '''
     Class for testing CryptGeneratorFactory
     '''
+    def setup(self):
+        '''
+        Setup test case
+        '''
+        self.mock_action_factory = Mock(ActionFactory)
+        self.mock_config = Mock(LevelGeneratorConfig)
+        self.mock_partitioner = Mock()
+
+        self.factory = CryptGeneratorFactory(self.mock_action_factory,
+                                             [self.mock_config])
+
     def test_generating_level_generator(self):
         '''
         Test that CryptGeneratorFactory can generate level generator
         '''
+        generator = self.factory.get_generator(level = 1)
+
+        assert generator != None
+        assert generator.action_factory == self.mock_action_factory
+
+class TestCryptGeneratorFactoryConfiguration:
+    '''
+    Class for testing configuring of CryptGeneratorFactory
+    '''
+    def test_passing_partitioner_to_generator(self):
+        '''
+        Test that LevelPartitioner is correctly passed to CryptGenerator
+        '''
         mock_action_factory = Mock(ActionFactory)
-        factory = CryptGeneratorFactory(mock_action_factory)
+        mock_partitioner = Mock()
+        mock_config = Mock(LevelGeneratorConfig)
+        mock_config.level_partitioners = [mock_partitioner]
+
+        factory = CryptGeneratorFactory(mock_action_factory,
+                                             [mock_config])
 
         generator = factory.get_generator(level = 1)
 
-        assert generator != None
+        assert mock_partitioner in generator.level_partitioners
+
