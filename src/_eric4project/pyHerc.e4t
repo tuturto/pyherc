@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2012-01-29, 14:47:25 -->
+<!-- Saved: 2012-01-29, 15:06:55 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: correct graphics</Summary>
@@ -10,24 +10,6 @@
     <Resource>
       <Filename>pyHerc/gui/surfaceManager.py</Filename>
       <Linenumber>116</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: world initialisation needs action factory</Summary>
-    <Description></Description>
-    <Created>2012-01-22, 15:46:30</Created>
-    <Resource>
-      <Filename>pyHerc/gui/startmenu.py</Filename>
-      <Linenumber>61</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: action factory needs world</Summary>
-    <Description></Description>
-    <Created>2012-01-22, 15:46:30</Created>
-    <Resource>
-      <Filename>pyHerc/gui/startmenu.py</Filename>
-      <Linenumber>62</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
@@ -211,51 +193,6 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: split into smaller chuncks</Summary>
-    <Description></Description>
-    <Created>2012-01-29, 12:42:16</Created>
-    <Resource>
-      <Filename>pyHerc/generators/level/catacombs.py</Filename>
-      <Linenumber>74</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: more random content creation</Summary>
-    <Description></Description>
-    <Created>2012-01-29, 12:42:16</Created>
-    <Resource>
-      <Filename>pyHerc/generators/level/catacombs.py</Filename>
-      <Linenumber>176</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: more intelligent system to choose monsters</Summary>
-    <Description></Description>
-    <Created>2012-01-29, 12:42:16</Created>
-    <Resource>
-      <Filename>pyHerc/generators/level/catacombs.py</Filename>
-      <Linenumber>178</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: refactor for configuration</Summary>
-    <Description></Description>
-    <Created>2012-01-29, 12:42:16</Created>
-    <Resource>
-      <Filename>pyHerc/generators/level/catacombs.py</Filename>
-      <Linenumber>214</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: implement generating dungeon levels</Summary>
-    <Description></Description>
-    <Created>2012-01-29, 12:42:16</Created>
-    <Resource>
-      <Filename>pyHerc/generators/level/catacombs.py</Filename>
-      <Linenumber>235</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: support for level generation parameters</Summary>
     <Description></Description>
     <Created>2012-01-29, 13:59:18</Created>
@@ -325,6 +262,69 @@
     <Resource>
       <Filename>pyHerc/generators/level/testlevel.py</Filename>
       <Linenumber>111</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: split into smaller chuncks</Summary>
+    <Description></Description>
+    <Created>2012-01-29, 14:55:43</Created>
+    <Resource>
+      <Filename>pyHerc/generators/level/catacombs.py</Filename>
+      <Linenumber>74</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: more random content creation</Summary>
+    <Description></Description>
+    <Created>2012-01-29, 14:55:43</Created>
+    <Resource>
+      <Filename>pyHerc/generators/level/catacombs.py</Filename>
+      <Linenumber>176</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: more intelligent system to choose monsters</Summary>
+    <Description></Description>
+    <Created>2012-01-29, 14:55:43</Created>
+    <Resource>
+      <Filename>pyHerc/generators/level/catacombs.py</Filename>
+      <Linenumber>178</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: refactor for configuration</Summary>
+    <Description></Description>
+    <Created>2012-01-29, 14:55:43</Created>
+    <Resource>
+      <Filename>pyHerc/generators/level/catacombs.py</Filename>
+      <Linenumber>214</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement generating dungeon levels</Summary>
+    <Description></Description>
+    <Created>2012-01-29, 14:55:43</Created>
+    <Resource>
+      <Filename>pyHerc/generators/level/catacombs.py</Filename>
+      <Linenumber>235</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: world initialisation needs action factory</Summary>
+    <Description></Description>
+    <Created>2012-01-29, 15:00:04</Created>
+    <Resource>
+      <Filename>pyHerc/gui/startmenu.py</Filename>
+      <Linenumber>54</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: action factory needs world</Summary>
+    <Description></Description>
+    <Created>2012-01-29, 15:00:04</Created>
+    <Resource>
+      <Filename>pyHerc/gui/startmenu.py</Filename>
+      <Linenumber>55</Linenumber>
     </Resource>
   </Task>
 </Tasks>
