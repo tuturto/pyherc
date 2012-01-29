@@ -36,13 +36,14 @@ class BSPSection:
         self.direction = direction
         self.logger = logging.getLogger('pyHerc.generators.utils.BSPSection')
         self.logger.debug('created new BSP section with corners ' +
-                                    self.corner1.__str__() + ' and ' + self.corner2.__str__())
+                                    self.corner1.__str__() + ' and ' +
+                                    self.corner2.__str__())
 
-    def split(self, minSize = (6, 6), direction = None):
+    def split(self, min_size = (6, 6), direction = None):
         """
         Split BSPSection in two
         Links two new BSPSections into this one
-        @param minSize: minimum size to split into
+        @param min_size: minimum size to split into
         @param direction: horizontal (1) / vertical split (2)
         """
         assert(self.corner1 != None)
@@ -53,38 +54,48 @@ class BSPSection:
         self.logger.debug('splitting BSP section of size ' + size.__str__())
 
         if direction == None:
-            direction = random.randint(1, 2) # 1 split horisontal, 2 split vertical
+            # 1 split horisontal, 2 split vertical
+            direction = random.randint(1, 2)
         assert(direction in (1, 2))
 
         if direction == 1:
-            if size[1] < 2 * minSize[1]:
-                if size[0] < 2 * minSize[0]:
+            if size[1] < 2 * min_size[1]:
+                if size[0] < 2 * min_size[0]:
                     return None
                 else:
                     direction = 2
         else:
-            if size[0] < 2 * minSize[0]:
-                if size[1] < 2 * minSize[1]:
+            if size[0] < 2 * min_size[0]:
+                if size[1] < 2 * min_size[1]:
                     return None
                 else:
                     direction = 1
 
         if direction == 1:
             self.logger.debug('split direction horizontal')
-            splitLocation = random.randint(minSize[1], size[1] - minSize[1])
-            self.logger.debug('split location ' + splitLocation.__str__())
-            self.node1 = BSPSection(self.corner1, (self.corner2[0], self.corner1[1] + splitLocation),
-                                                self, direction)
-            self.node2 = BSPSection((self.corner1[0], self.corner1[1] + splitLocation + 1),  self.corner2,
-                                                self, direction)
+            split_location = random.randint(min_size[1], size[1] - min_size[1])
+            self.logger.debug('split location ' + split_location.__str__())
+            self.node1 = BSPSection(self.corner1,
+                                    (self.corner2[0],
+                                        self.corner1[1] + split_location),
+                                    self, direction)
+            self.node2 = BSPSection(
+                                    (self.corner1[0],
+                                    self.corner1[1] + split_location + 1),
+                                    self.corner2,
+                                    self, direction)
         else:
             self.logger.debug('split direction vertical')
-            splitLocation = random.randint(minSize[0], size[0] - minSize[0])
-            self.logger.debug('split location ' + splitLocation.__str__())
-            self.node1 = BSPSection(self.corner1, (self.corner1[0] + splitLocation, self.corner2[1]),
-                                                self, direction)
-            self.node2 = BSPSection((self.corner1[0] + splitLocation + 1, self.corner1[1]), self.corner2,
-                                                self, direction)
+            split_location = random.randint(min_size[0], size[0] - min_size[0])
+            self.logger.debug('split location ' + split_location.__str__())
+            self.node1 = BSPSection(self.corner1,
+                                    (self.corner1[0] + split_location,
+                                    self.corner2[1]),
+                                    self, direction)
+            self.node2 = BSPSection((self.corner1[0] + split_location + 1,
+                                    self.corner1[1]),
+                                    self.corner2,
+                                    self, direction)
 
         self.logger.debug('split performed')
 
@@ -128,7 +139,9 @@ class BSPSection:
         """
         assert(self.corner1 != None)
         assert(self.corner2 != None)
-        center = (int(self.corner1[0] + ((self.corner2[0] - self.corner1[0]) / 2)),
-                        int(self.corner1[1] + ((self.corner2[1] - self.corner1[1]) / 2)))
+        center = (int(self.corner1[0] +
+                        ((self.corner2[0] - self.corner1[0]) / 2)),
+                        int(self.corner1[1] +
+                            ((self.corner2[1] - self.corner1[1]) / 2)))
 
         return center

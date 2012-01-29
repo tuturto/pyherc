@@ -71,6 +71,7 @@ class Application:
         self.base_path = None
         self.action_factory = None
         self.logger = None
+        self.screen = None
 
     def load_configuration(self, argv):
         """
@@ -132,9 +133,11 @@ class Application:
         surface_manager = pyHerc.gui.surfaceManager.SurfaceManager()
         surface_manager.loadResources(self.base_path)
         self.screen = pygame.display.set_mode((800, 600), pygame.SWSURFACE)
-        self.gui = MainWindow(self, self.base_path, surface_manager, self.screen)
-        menu = pyHerc.gui.startmenu.StartMenu(self, self.screen, surface_manager)
-        self.gui.connect(pgu.gui.QUIT,self.gui.quit,None)
+        self.gui = MainWindow(self, self.base_path,
+                              surface_manager, self.screen)
+        menu = pyHerc.gui.startmenu.StartMenu(self, self.screen,
+                                              surface_manager)
+        self.gui.connect(pgu.gui.QUIT, self.gui.quit, None)
         self.gui.run(menu, screen = self.screen)
 
     def start_logging(self):
@@ -176,12 +179,16 @@ class Application:
 
 
     def detect_resource_directory(self):
+        '''
+        Detects location of resources directory and updates self.base_path
+        '''
         search_directory = '.'
         current = os.path.normpath(os.path.join(os.getcwd(), search_directory))
 
         while not os.path.exists(os.path.join(current, 'resources')):
             search_directory = search_directory +'/..'
-            current = os.path.normpath(os.path.join(os.getcwd(), search_directory))
+            current = os.path.normpath(os.path.join(os.getcwd(),
+                                                    search_directory))
 
         self.base_path = os.path.join(current, 'resources')
 

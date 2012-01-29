@@ -74,7 +74,7 @@ class CatacombsLevelGenerator:
         #TODO: split into smaller chuncks
         while len(BSPStack) > 0:
             tempBSP = BSPStack.pop()
-            tempBSP.split(minSize = (room_min_size[0] + 4, room_min_size[1] + 4))
+            tempBSP.split(min_size = (room_min_size[0] + 4, room_min_size[1] + 4))
             if tempBSP.node1 != None:
                 BSPStack.append(tempBSP.node1)
             if tempBSP.node2 != None:

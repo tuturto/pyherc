@@ -1,14 +1,7 @@
 import logging
 import images
-import pygame
 import pyHerc
 import pgu.gui
-from pygame.locals import KEYDOWN
-from pygame.locals import K_DOWN, K_UP
-from pygame.locals import K_SPACE, K_RETURN, K_ESCAPE, K_PERIOD
-from pygame.locals import K_d, K_w, K_r, K_q,  K_i
-from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8, K_KP9
-from pygame.locals import Rect
 
 class StartMenu(pgu.gui.Container):
     """
