@@ -34,7 +34,7 @@ class CatacombsLevelGenerator:
     """
 
     def __init__(self, action_factory):
-        self.logger = logging.getLogger('pyHerc.generators.dungeon.CatacombsLevelGenerator')
+        self.logger = logging.getLogger('pyHerc.generators.level.catacombs.CatacombsLevelGenerator')
         self.item_generator = pyHerc.generators.ItemGenerator()
         self.creature_generator = pyHerc.generators.CreatureGenerator(action_factory)
 
@@ -51,7 +51,7 @@ class CatacombsLevelGenerator:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyHerc.generators.dungeon.CatacombsLevelGenerator')
+        self.logger = logging.getLogger('pyHerc.generators.level.catacombs.CatacombsLevelGenerator')
 
     def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):
         """

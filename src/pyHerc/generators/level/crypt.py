@@ -18,14 +18,40 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
+import logging
+from pyHerc.generators import ItemGenerator
+from pyHerc.generators import CreatureGenerator
+
+class CryptGeneratorFactory:
+    '''
+    Class used to contruct different kinds of crypt generators
+    '''
+    def __init__(self, action_factory):
+        '''
+        Default constructor
+
+        @param action_factory: ActionFactory to pass to the generator
+        '''
+        self.logger = logging.getLogger('pyHerc.generators.level.crypt.CryptGeneratorFactory')
+        self.action_factory = action_factory
+
+    def get_generator(self, level):
+        '''
+        Get CryptGenerator for given crypt level
+        '''
+        return CryptGenerator(self.action_factory)
+
 class CryptGenerator:
     '''
     Class used to generate crypts
     '''
     def __init__(self, action_factory):
-        self.logger = logging.getLogger('pyHerc.generators.cryptgenerator.CryptGenerator')
-        self.item_generator = pyHerc.generators.ItemGenerator()
-        self.creature_generator = pyHerc.generators.CreatureGenerator(action_factory)
+        self.logger = logging.getLogger('pyHerc.generators.level.crypt.CryptGenerator')
+        self.item_generator = ItemGenerator()
+        self.creature_generator = CreatureGenerator(action_factory)
+
+        self.partitioners = []
+        self.room_generators = []
 
     def __getstate__(self):
         '''
@@ -40,7 +66,7 @@ class CryptGenerator:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyHerc.generators.cryptgenerator.CryptGenerator')
+        self.logger = logging.getLogger('pyHerc.generators.level.crypt.CryptGenerator')
 
     def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):
         pass

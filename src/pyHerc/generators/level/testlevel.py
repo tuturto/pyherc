@@ -34,7 +34,7 @@ class TestLevelGenerator:
     Generates a simple test level
     """
     def __init__(self, action_factory):
-        self.logger = logging.getLogger('pyHerc.generators.dungeon.TestLevelGenerator')
+        self.logger = logging.getLogger('pyHerc.generators.level.testlevel.TestLevelGenerator')
         self.item_generator = pyHerc.generators.ItemGenerator()
         self.creature_generator = pyHerc.generators.CreatureGenerator(action_factory)
 
@@ -51,7 +51,7 @@ class TestLevelGenerator:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyHerc.generators.dungeon.CatacombsLevelGenerator')
+        self.logger = logging.getLogger('pyHerc.generators.level.testlevel.CatacombsLevelGenerator')
 
     def generate_level(self, portal, model,
                        new_portals = 0, monster_list = None):

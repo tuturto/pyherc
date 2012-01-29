@@ -23,9 +23,28 @@ Tests for CryptGenerator
 '''
 
 from pyHerc.generators.level.crypt import CryptGenerator
+from pyHerc.generators.level.crypt import CryptGeneratorFactory
+from pyHerc.rules import ActionFactory
+
+from mock import Mock
 
 class TestCryptGenerator():
     '''
     Class for testing CryptGenerator
     '''
     pass
+
+class TestCryptGeneratorFactory():
+    '''
+    Class for testing CryptGeneratorFactory
+    '''
+    def test_generating_level_generator(self):
+        '''
+        Test that CryptGeneratorFactory can generate level generator
+        '''
+        mock_action_factory = Mock(ActionFactory)
+        factory = CryptGeneratorFactory(mock_action_factory)
+
+        generator = factory.get_generator(level = 1)
+
+        assert generator != None
