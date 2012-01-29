@@ -125,7 +125,7 @@ class StartNewGameWindow:
 
         self.character = pyHerc.rules.character.create_character('human', 'fighter', self.application.get_action_factory())
         self.application.world.player = self.character
-        generator = pyHerc.generators.dungeon.DungeonGenerator(self.application.get_action_factory())
+        generator = pyHerc.generators.DungeonGenerator(self.application.get_action_factory())
         generator.generate_dungeon(self.application.world)
         self.character.level = self.application.world.dungeon.levels
         # self.character.location = (1, 1)

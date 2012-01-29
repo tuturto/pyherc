@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyHerc -->
-<!-- Saved: 2012-01-21, 10:21:52 -->
+<!-- Saved: 2012-01-29, 11:32:29 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -67,6 +67,11 @@
     <Source>pyHerc/rules/factory.py</Source>
     <Source>pyHerc/rules/attack/unarmed.py</Source>
     <Source>pyHerc/gui/startmenu.py</Source>
+    <Source>pyHerc/test/test_crypt_generator.py</Source>
+    <Source>pyHerc/generators/level/__init__.py</Source>
+    <Source>pyHerc/generators/level/catacombs.py</Source>
+    <Source>pyHerc/generators/level/crypt.py</Source>
+    <Source>pyHerc/generators/level/testlevel.py</Source>
   </Sources>
   <Forms>
   </Forms>

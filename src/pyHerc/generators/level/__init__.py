@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2012 Tuukka Turto
 #
 #   This file is part of pyHerc.
 #
@@ -18,6 +18,4 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-from .dungeon import DungeonGenerator
-from .item import ItemGenerator
-from .creature import CreatureGenerator
+pass

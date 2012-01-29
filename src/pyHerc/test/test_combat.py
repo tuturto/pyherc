@@ -28,7 +28,7 @@ from pyHerc.data.dungeon import Dungeon
 from pyHerc.data.dungeon import Portal
 from pyHerc.data.model import Model
 from pyHerc.data.model import Character
-from pyHerc.generators.dungeon import TestLevelGenerator
+from pyHerc.generators.level.testlevel import TestLevelGenerator
 from pyHerc.rules.tables import Tables
 from pyHerc.test import IntegrationTest
 from pyHerc.test import StubRandomNumberGenerator
