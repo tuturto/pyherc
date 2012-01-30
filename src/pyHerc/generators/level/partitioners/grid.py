@@ -22,6 +22,8 @@
 Module for partitioning level to equal grid
 '''
 
+from pyHerc.generators.level.partitioners.section import Section
+
 class GridPartitioner:
     '''
     Class for partitioning level to equal grid
@@ -33,9 +35,22 @@ class GridPartitioner:
         '''
         pass
 
-    def partition_level(self, level):
+    def partition_level(self, level,  x_sections = 3,  y_sections = 3):
         '''
         Creates partitioning for a given level with connection points
         @param level: Level to partition
         '''
+        size_of_level = level.get_size()
+
+        section_width = (size_of_level[0]) // x_sections
+        section_height = (size_of_level[1]) // y_sections
+
+    def split_range_to_equals(self, range, sections):
+        '''
+        Split range into equal sized chunks
+        @param range: range to split
+        @param sections: amount of sections to split
+        @returns: list containing end points of chunks
+        '''
         pass
+

@@ -256,6 +256,16 @@ class Level:
         else:
             return True
 
+    def get_size(self):
+        '''
+        Gets size of level
+        @returns: tupple, with width and length of level
+        '''
+        x_size = len(self.floor)
+        y_size = len(self.floor[0])
+
+        return (x_size, y_size)
+
 class Dungeon:
     """
     Represents the dungeon
