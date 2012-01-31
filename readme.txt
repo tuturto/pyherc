@@ -1,5 +1,5 @@
 Intro
-====
+=====
 Herculeum is a dungeon adventuring game in a spirit of Rogue and Nethack.
 Player assumes the role of adventurer who has made perilous journey through
 jungles of Thynian and finally reached ruins of Herculeum. His tasks is to
@@ -13,6 +13,7 @@ System Requirements
 Python 2.6.1
 PyGame 1.9.2
 PGU 0.18
+Mock 0.7.2 (only needed for running test cases)
 
 Credits
 =======
