@@ -47,10 +47,17 @@ class test_GridPartitionerUtilities:
     '''
     Tests for various utility methods
     '''
-    partitioner = GridPartitioner()
-    range_to_split = range(0, 10)
 
-    ranges = partitioner.split_range_to_equals(range_to_split, 3)
+    def test_splitting_range(self):
+        '''
+        Test that a line can be split into equal parts
+        '''
+        partitioner = GridPartitioner()
 
-    #TODO: finish this test
-    assert 1 == 0
+        ranges = partitioner.split_range_to_equals(10, 3)
+
+        assert len(ranges) == 3
+
+        assert ranges[0] == (0, 2)
+        assert ranges[1] == (3, 5)
+        assert ranges[2] == (6, 8)

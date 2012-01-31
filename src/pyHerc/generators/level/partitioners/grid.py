@@ -40,17 +40,31 @@ class GridPartitioner:
         Creates partitioning for a given level with connection points
         @param level: Level to partition
         '''
+        sections = []
         size_of_level = level.get_size()
 
-        section_width = (size_of_level[0]) // x_sections
-        section_height = (size_of_level[1]) // y_sections
+        x_sections = self.split_range_to_equals(size_of_level[0], x_sections)
+        y_sections = self.split_range_to_equals(size_of_level[1], y_sections)
 
-    def split_range_to_equals(self, range, sections):
+        for y_block in range(len(y_sections)):
+            for x_block in range(len(x_sections)):
+                temp_section = Section((x_sections[x_block],
+                                                    y_sections[y_block]))
+                sections.append(temp_section)
+
+        return sections
+
+    def split_range_to_equals(self, length, sections):
         '''
         Split range into equal sized chunks
-        @param range: range to split
+        @param length: range to split
         @param sections: amount of sections to split
         @returns: list containing end points of chunks
         '''
-        pass
+        section_length = length // sections
+        ranges = []
 
+        for i in range(sections):
+            ranges.append((i * section_length, (i + 1) * section_length - 1))
+
+        return ranges

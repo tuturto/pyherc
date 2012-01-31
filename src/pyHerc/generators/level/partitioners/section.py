@@ -22,8 +22,8 @@ class Section():
     '''
     Class representing a single section in a level
     '''
-    def __init__(self):
+    def __init__(self, corners):
         '''
         Default constructor
         '''
-        pass
+        self.corners = corners
