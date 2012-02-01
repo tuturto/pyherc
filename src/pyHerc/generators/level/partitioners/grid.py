@@ -22,18 +22,38 @@
 Module for partitioning level to equal grid
 '''
 
+import random
 from pyHerc.generators.level.partitioners.section import Section
 
-class GridPartitioner:
+class RandomConnector(object):
     '''
-    Class for partitioning level to equal grid
+    Class for building random connection network from sections
     '''
-
     def __init__(self):
         '''
         Default constructor
         '''
         pass
+
+    def connect_sections(self, sections):
+        '''
+        Connects sections together
+        @param sections: List of Sections to connect
+        '''
+        return sections
+
+class GridPartitioner(object):
+    '''
+    Class for partitioning level to equal grid
+    '''
+
+    def __init__(self, random_generator = random.Random()):
+        '''
+        Default constructor
+        @param random_generator: optional random number generator
+        '''
+        self.connectors = [RandomConnector()]
+        self.random_generator = random_generator
 
     def partition_level(self, level,  x_sections = 3,  y_sections = 3):
         '''
@@ -52,7 +72,10 @@ class GridPartitioner:
                                                     y_sections[y_block]))
                 sections.append(temp_section)
 
-        return sections
+        connector = self.random_generator.choice(self.connectors)
+        connected_sections = connector.connect_sections(sections)
+
+        return connected_sections
 
     def split_range_to_equals(self, length, sections):
         '''

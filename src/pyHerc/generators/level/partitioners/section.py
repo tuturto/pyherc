@@ -18,7 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
 
-class Section():
+class Section(object):
     '''
     Class representing a single section in a level
     '''
@@ -27,3 +27,11 @@ class Section():
         Default constructor
         '''
         self.corners = corners
+        self.__connections = []
+
+    @property
+    def connections(self):
+        '''
+        List of connections this section has
+        '''
+        return self.__connections

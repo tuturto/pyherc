@@ -23,6 +23,7 @@ Tests for GridPartitioner
 '''
 
 from pyHerc.generators.level.partitioners.grid import GridPartitioner
+from pyHerc.generators.level.partitioners.grid import RandomConnector
 from pyHerc.generators.level.partitioners.section import Section
 from pyHerc.data import Level
 from mock import Mock
@@ -43,6 +44,20 @@ class test_GridPartitioner:
 
         assert len(sections) == 9
 
+    def test_partitioned_sections_are_linked(self):
+        '''
+        Partitioned sections should be linked together
+        '''
+        mock_level = Mock(Level)
+        mock_level.get_size.return_value = (20, 20)
+
+        partitioner = GridPartitioner()
+        sections = partitioner.partition_level(mock_level, 2, 2)
+
+        assert len(sections) == 4
+
+        assert len(sections[0].connections) > 0
+
 class test_GridPartitionerUtilities:
     '''
     Tests for various utility methods
@@ -61,3 +76,22 @@ class test_GridPartitionerUtilities:
         assert ranges[0] == (0, 2)
         assert ranges[1] == (3, 5)
         assert ranges[2] == (6, 8)
+
+class test_RandomConnector:
+    '''
+    Tests for RandomConnector class
+    '''
+
+    def test_connect_two_sections(self):
+        '''
+        Test that two adjacent sections can be connected
+        '''
+        connector = RandomConnector()
+
+        section1 = Section(((0, 10), (0, 10)))
+        section2 = Section(((11, 20), (0, 10)))
+        sections = [section1, section2]
+
+        connected_sections = connector.connect_sections(sections)
+
+        assert connected_sections[1] in connected_sections[0].connections

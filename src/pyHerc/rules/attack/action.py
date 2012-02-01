@@ -23,6 +23,7 @@ Module defining classes related to AttackAction
 '''
 import pyHerc.rules.time
 import pyHerc.rules.ending
+import random
 
 class AttackAction():
     '''
@@ -59,16 +60,20 @@ class AttackAction():
         self.attacker.tick = pyHerc.rules.time.get_new_tick(self.attacker, 20)
 
 
-class ToHit():
+class ToHit(object):
     '''
     Checks done for hitting
     '''
 
-    def __init__(self):
+    def __init__(self, attacker,  target,
+                        random_number_generator = random.Random()):
         '''
         Default constructor
         '''
-        pass
+        self.attacker = attacker
+        self.target = target
+        self.rng = random_number_generator
+        self.logger = logging.getLogger('pyHerc.rules.attack.action.ToHit')
 
     def is_hit(self):
         '''
@@ -91,15 +96,16 @@ class ToHit():
         self.logger.debug('Hit: {0}'.format(is_hit))
         return is_hit
 
-class Damage():
+class Damage(object):
     '''
     Damage done in attack
     '''
-    def __init__(self):
+    def __init__(self, damage):
         '''
         Default constructor
         '''
-        pass
+        self.logger = logging.getLogger('pyHerc.rules.attack.action.Damage')
+        self.damage = damage
 
     def apply_damage(self, target):
         '''
