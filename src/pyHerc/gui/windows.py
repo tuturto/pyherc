@@ -26,13 +26,11 @@ import surfaceManager
 import images
 import dialogs
 import pyHerc.rules.character
-import pyHerc.rules.moving
 import pyHerc.data.model
 import pyHerc.data.tiles
 import pyHerc.rules.items
 import pyHerc.rules.ending
 import pyHerc.rules.time
-import pyHerc.rules.combat
 import pyHerc.generators.dungeon
 import pyHerc.rules.tables
 import pyHerc.gui.startmenu
