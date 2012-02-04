@@ -3,20 +3,20 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 #   explanation written by Björn Bergström of the FOV algorithm used here can be found from:
 #   http://roguebasin.roguelikedevelopment.org/index.php/FOV_using_recursive_shadowcasting
@@ -24,12 +24,12 @@
 #   original implementation by Eric D. Burgess is from:
 #   http://roguebasin.roguelikedevelopment.org/index.php/Python_shadowcasting_implementation
 
-import pyHerc.data.tiles
+import pyherc.data.tiles
 
 import logging
 import math
 
-__logger = logging.getLogger('pyHerc.rules.los')
+__logger = logging.getLogger('pyherc.rules.los')
 
 mult = [
                 [1,  0,  0, -1, -1,  0,  0,  1],
@@ -55,7 +55,7 @@ def is_blocked(loc_x, loc_y, level, character = None):
     if loc_x >= len(level.walls) or loc_y >= len(level.walls[0]):
         return True
 
-    if level.get_wall_tile(loc_x, loc_y) != pyHerc.data.tiles.WALL_EMPTY:
+    if level.get_wall_tile(loc_x, loc_y) != pyherc.data.tiles.WALL_EMPTY:
         return True
     else:
         return False

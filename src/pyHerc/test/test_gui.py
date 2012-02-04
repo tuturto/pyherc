@@ -3,29 +3,29 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Tests for gui components
 '''
 
-import pyHerc.gui.windows
-from pyHerc.test import StubSurfaceManager
-from pyHerc.test import StubCharacter
-from pyHerc.test import IntegrationTest
+import pyherc.gui.windows
+from pyherc.test import StubSurfaceManager
+from pyherc.test import StubCharacter
+from pyherc.test import IntegrationTest
 
 class TestGameWindow:
     '''
@@ -36,7 +36,7 @@ class TestGameWindow:
         '''
         Test that event history is formatted correctly with less than five items
         '''
-        window = pyHerc.gui.windows.GameWindow(None, None, '')
+        window = pyherc.gui.windows.GameWindow(None, None, '')
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
@@ -48,7 +48,7 @@ class TestGameWindow:
         '''
         Test that event history is formatted correctly with five items
         '''
-        window = pyHerc.gui.windows.GameWindow(None, None, '')
+        window = pyherc.gui.windows.GameWindow(None, None, '')
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
@@ -66,7 +66,7 @@ class TestGameWindow:
         '''
         Test that event history is formatted correctly with more than five items
         '''
-        window = pyHerc.gui.windows.GameWindow(None, None, '')
+        window = pyherc.gui.windows.GameWindow(None, None, '')
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
@@ -92,7 +92,7 @@ class TestInventoryDialog(IntegrationTest):
         Test that items can be sorted by their type
         '''
         surface_manager = StubSurfaceManager()
-        inventory = pyHerc.gui.dialogs.Inventory(None, None, surface_manager, StubCharacter())
+        inventory = pyherc.gui.dialogs.Inventory(None, None, surface_manager, StubCharacter())
 
         item1 = self.item_generator.generateItem(self.tables, {'name': 'dagger'})
         item2 = self.item_generator.generateItem(self.tables, {'name': 'apple'})

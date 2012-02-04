@@ -1,7 +1,7 @@
 import logging
 import images
 import pygame
-import pyHerc
+import pyherc
 import pgu.gui
 from pygame.locals import KEYDOWN
 from pygame.locals import K_DOWN, K_UP
@@ -28,7 +28,7 @@ class StartMenu(pgu.gui.Container):
         self.application = application
         self.screen = screen
         self.surface_manager = surface_manager
-        self.logger = logging.getLogger('pyHerc.gui.windows.StartMenu')
+        self.logger = logging.getLogger('pyherc.gui.windows.StartMenu')
         self.logger.debug('initialising start menu')
 
         self.set_layout()
@@ -56,19 +56,19 @@ class StartMenu(pgu.gui.Container):
 
     def __startNewGame(self):
         self.logger.info('starting a new game')
-        newWindow = pyHerc.gui.windows.StartNewGameWindow(self.application, self.screen, self.surface_manager)
+        newWindow = pyherc.gui.windows.StartNewGameWindow(self.application, self.screen, self.surface_manager)
         newWindow.mainLoop()
         #TODO: world initialisation needs action factory
         #TODO: action factory needs world
         self.application.initialise_factories(self.application.world)
 
         self.application.world.player = newWindow.character
-        newWindow = pyHerc.gui.windows.GameWindow(self.application, self.screen, self.surface_manager)
+        newWindow = pyherc.gui.windows.GameWindow(self.application, self.screen, self.surface_manager)
         newWindow.mainLoop()
         self.logger.info('game finished')
         if self.application.running:
-            endResult = pyHerc.rules.ending.check_result(self.application.world)
-            dialog = pyHerc.gui.dialogs.EndScreen(self.application, self.screen, self.surface_manager)
+            endResult = pyherc.rules.ending.check_result(self.application.world)
+            dialog = pyherc.gui.dialogs.EndScreen(self.application, self.screen, self.surface_manager)
             dialog.show(endResult)
 
         self.repaint()

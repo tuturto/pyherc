@@ -3,40 +3,40 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Module for testing combat related rules
 '''
 
 import random
-from pyHerc.test import IntegrationTest
-from pyHerc.test import StubModel
-from pyHerc.rules.public import ActionFactory
-from pyHerc.rules.public import AttackParameters
-from pyHerc.rules.attack.factories import AttackFactory
-from pyHerc.rules.attack.factories import UnarmedCombatFactory
-from pyHerc.rules.move.factories import MoveFactory
-from pyHerc.rules.move.factories import WalkFactory
-from pyHerc.rules.attack.action import AttackAction
-from pyHerc.data.model import Character
-from pyHerc.data.dungeon import Level
-from pyHerc.data import tiles
+from pyherc.test import IntegrationTest
+from pyherc.test import StubModel
+from pyherc.rules.public import ActionFactory
+from pyherc.rules.public import AttackParameters
+from pyherc.rules.attack.factories import AttackFactory
+from pyherc.rules.attack.factories import UnarmedCombatFactory
+from pyherc.rules.move.factories import MoveFactory
+from pyherc.rules.move.factories import WalkFactory
+from pyherc.rules.attack.action import AttackAction
+from pyherc.data.model import Character
+from pyherc.data.dungeon import Level
+from pyherc.data import tiles
 
-from pyHerc.data.model import Model
+from pyherc.data.model import Model
 
 from mock import Mock
 

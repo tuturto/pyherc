@@ -3,40 +3,40 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Module for testing combat related rules
 '''
 
-import pyHerc
-from pyHerc.data.dungeon import Level
-from pyHerc.data.dungeon import Dungeon
-from pyHerc.data.dungeon import Portal
-from pyHerc.data.model import Model
-from pyHerc.data.model import Character
-from pyHerc.generators.dungeon import TestLevelGenerator
-from pyHerc.rules.tables import Tables
-from pyHerc.test import IntegrationTest
-from pyHerc.test import StubRandomNumberGenerator
-from pyHerc.test import StubModel
+import pyherc
+from pyherc.data.dungeon import Level
+from pyherc.data.dungeon import Dungeon
+from pyherc.data.dungeon import Portal
+from pyherc.data.model import Model
+from pyherc.data.model import Character
+from pyherc.generators.dungeon import TestLevelGenerator
+from pyherc.rules.tables import Tables
+from pyherc.test import IntegrationTest
+from pyherc.test import StubRandomNumberGenerator
+from pyherc.test import StubModel
 
-from pyHerc.rules.public import AttackParameters
-from pyHerc.rules.public import ActionFactory
-from pyHerc.rules.attack.action import AttackAction
+from pyherc.rules.public import AttackParameters
+from pyherc.rules.public import ActionFactory
+from pyherc.rules.attack.action import AttackAction
 
 class TestMeleeCombat(IntegrationTest):
     '''
@@ -110,7 +110,7 @@ class TestMeleeCombat(IntegrationTest):
         dagger = self.item_generator.generateItem(self.tables,
                                                     {'name': 'dagger'})
 
-        pyHerc.rules.items.wield(self.model, self.character1, dagger)
+        pyherc.rules.items.wield(self.model, self.character1, dagger)
         assert self.character2.hit_points == 10
 
         self.character1.execute_action(AttackParameters(

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
-<!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2012-01-23, 00:19:29 -->
+<!-- eric4 tasks file for project pyherc -->
+<!-- Saved: 2012-02-04, 08:24:41 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: implement menu here</Summary>

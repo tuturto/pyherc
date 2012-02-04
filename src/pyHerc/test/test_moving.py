@@ -3,38 +3,38 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-import pyHerc
-from pyHerc.data.dungeon import Level
-from pyHerc.data.dungeon import Dungeon
-from pyHerc.data.dungeon import Portal
-from pyHerc.data.model import Model
-from pyHerc.data.model import Character
-from pyHerc.generators.dungeon import TestLevelGenerator
-from pyHerc.rules.tables import Tables
-from pyHerc.test import IntegrationTest
-from pyHerc.test import StubModel
+import pyherc
+from pyherc.data.dungeon import Level
+from pyherc.data.dungeon import Dungeon
+from pyherc.data.dungeon import Portal
+from pyherc.data.model import Model
+from pyherc.data.model import Character
+from pyherc.generators.dungeon import TestLevelGenerator
+from pyherc.rules.tables import Tables
+from pyherc.test import IntegrationTest
+from pyherc.test import StubModel
 
-from pyHerc.rules.public import MoveParameters
-from pyHerc.rules.public import ActionFactory
-from pyHerc.rules.move.factories import MoveFactory
-from pyHerc.rules.move.factories import WalkFactory
+from pyherc.rules.public import MoveParameters
+from pyherc.rules.public import ActionFactory
+from pyherc.rules.move.factories import MoveFactory
+from pyherc.rules.move.factories import WalkFactory
 
-import pyHerc.rules.moving
+import pyherc.rules.moving
 
 class TestMoving(IntegrationTest):
 
@@ -48,7 +48,7 @@ class TestMoving(IntegrationTest):
         self.portal1 = Portal()
         #TODO: refactor for configuration
         self.portal1.model = self.model
-        self.portal1.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN
+        self.portal1.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
         self.portal2 = Portal()
         #TODO: refactor for configuration
         self.portal2.model = self.model
@@ -126,7 +126,7 @@ class TestMoving(IntegrationTest):
         proxy.level_generator = TestLevelGenerator(self.action_factory)
         #TODO: refactor for configuration
         proxy.model = self.model
-        proxy.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN
+        proxy.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
 
         self.level1.add_portal(proxy, (8, 8))
         action = self.action_factory.get_action(

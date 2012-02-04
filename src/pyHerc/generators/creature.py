@@ -3,20 +3,20 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Module for creature generation related classes
@@ -28,9 +28,9 @@ Classes:
 import types
 import logging
 import random
-import pyHerc.ai.simple
-import pyHerc.data.model
-import pyHerc.rules.tables
+import pyherc.ai.simple
+import pyherc.data.model
+import pyherc.rules.tables
 
 class CreatureGenerator:
     """
@@ -39,7 +39,7 @@ class CreatureGenerator:
 
     def __init__(self, action_factory):
         self.logger = logging.getLogger(
-                            'pyHerc.generators.creature.CreatureGenerator')
+                            'pyherc.generators.creature.CreatureGenerator')
         self.action_factory = action_factory
 
     def generate_creature(self, tables, parameters):
@@ -75,7 +75,7 @@ class CreatureGenerator:
         """
         assert(table != None)
 
-        newCreature = pyHerc.data.model.Character(self.action_factory)
+        newCreature = pyherc.data.model.Character(self.action_factory)
         newCreature.name = table['name']
         newCreature.set_body(table['body'])
         newCreature.set_finesse(table['finesse'])
@@ -85,7 +85,7 @@ class CreatureGenerator:
         newCreature.size = table['size']
         newCreature.attack = table['attack']
         #TODO: AI from tables
-        newCreature.artificial_intelligence = pyHerc.ai.simple.FlockingHerbivore(newCreature)
+        newCreature.artificial_intelligence = pyherc.ai.simple.FlockingHerbivore(newCreature)
 
 
         if hasattr(table['icon'], 'append'):

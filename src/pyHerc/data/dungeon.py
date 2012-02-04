@@ -3,20 +3,20 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Module containing classes to represent dungeon
@@ -29,7 +29,7 @@ Classes:
 
 import random
 import logging
-import pyHerc.data.tiles
+import pyherc.data.tiles
 
 class Level:
     """
@@ -39,7 +39,7 @@ class Level:
         """
         Initialises a level of certain size and fill floor and walls with given types
         """
-        self.logger = logging.getLogger('pyHerc.data.dungeon.Level')
+        self.logger = logging.getLogger('pyherc.data.dungeon.Level')
 
         self.floor = []
         self.walls = []
@@ -77,7 +77,7 @@ class Level:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(properties)
-        self.logger = logging.getLogger('pyHerc.data.dungeon.Level')
+        self.logger = logging.getLogger('pyherc.data.dungeon.Level')
 
     def get_tile(self, loc_x, loc_y):
         '''
@@ -86,12 +86,12 @@ class Level:
         @param loc_y: y-coordinate of the location
         '''
         if loc_x < 0 or loc_y < 0:
-            return pyHerc.data.tiles.FLOOR_EMPTY
+            return pyherc.data.tiles.FLOOR_EMPTY
 
         if loc_x > len(self.floor) or loc_y > len(self.floor[0]):
-            return pyHerc.data.tiles.FLOOR_EMPTY
+            return pyherc.data.tiles.FLOOR_EMPTY
 
-        if self.walls[loc_x][loc_y] != pyHerc.data.tiles.WALL_EMPTY:
+        if self.walls[loc_x][loc_y] != pyherc.data.tiles.WALL_EMPTY:
             return self.walls[loc_x][loc_y]
         else:
             return self.floor[loc_x][loc_y]
@@ -103,10 +103,10 @@ class Level:
         @param loc_y: y-coordinate of the location
         '''
         if loc_x < 0 or loc_y < 0:
-            return pyHerc.data.tiles.WALL_GROUND
+            return pyherc.data.tiles.WALL_GROUND
 
         if loc_x > len(self.floor) or loc_y > len(self.floor[0]):
-            return pyHerc.data.tiles.WALL_GROUND
+            return pyherc.data.tiles.WALL_GROUND
 
         return self.walls[loc_x][loc_y]
 
@@ -160,15 +160,15 @@ class Level:
             other_end.set_other_end(portal)
             if portal.icon != None:
                 if other_end.icon == None:
-                    if portal.icon == pyHerc.data.tiles.PORTAL_STAIRS_DOWN:
-                        other_end.icon = pyHerc.data.tiles.PORTAL_STAIRS_UP
+                    if portal.icon == pyherc.data.tiles.PORTAL_STAIRS_DOWN:
+                        other_end.icon = pyherc.data.tiles.PORTAL_STAIRS_UP
                     else:
-                        other_end.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN
+                        other_end.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
             else:
-                if other_end.icon == pyHerc.data.tiles.PORTAL_STAIRS_DOWN:
-                    portal.icon = pyHerc.data.tiles.PORTAL_STAIRS_UP
+                if other_end.icon == pyherc.data.tiles.PORTAL_STAIRS_DOWN:
+                    portal.icon = pyherc.data.tiles.PORTAL_STAIRS_UP
                 else:
-                    portal.icon = pyHerc.data.tiles.PORTAL_STAIRS_DOWN
+                    portal.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
 
     def get_portal_at(self, location):
         """
@@ -233,7 +233,7 @@ class Level:
         width = len(self.floor)
         height = len(self.floor[0])
         location = (random.randint(2, width - 1), random.randint(2, height - 1))
-        while self.walls[location[0]][location[1]] != pyHerc.data.tiles.WALL_EMPTY:
+        while self.walls[location[0]][location[1]] != pyherc.data.tiles.WALL_EMPTY:
             location = (random.randint(2, width - 1), random.randint(2, height - 1))
         return location
 
@@ -241,7 +241,7 @@ class Level:
         '''
         Get square at given coordinates
         '''
-        if self.walls[x_coordinate][y_coordinate] != pyHerc.data.tiles.WALL_EMPTY:
+        if self.walls[x_coordinate][y_coordinate] != pyherc.data.tiles.WALL_EMPTY:
             return self.walls[x_coordinate][y_coordinate]
         else:
             return self.floor[x_coordinate][y_coordinate]
@@ -251,7 +251,7 @@ class Level:
         Checks if there's LOS-blocking wall at given coordinates
         '''
 
-        if self.walls[x_coordinate][y_coordinate] != pyHerc.data.tiles.WALL_EMPTY:
+        if self.walls[x_coordinate][y_coordinate] != pyherc.data.tiles.WALL_EMPTY:
             return False
         else:
             return True
@@ -263,7 +263,7 @@ class Dungeon:
 
     def __init__(self):
         self.levels = None
-        self.logger = logging.getLogger('pyHerc.data.dungeon.Dungeon')
+        self.logger = logging.getLogger('pyherc.data.dungeon.Dungeon')
 
     def __getstate__(self):
         '''
@@ -278,7 +278,7 @@ class Dungeon:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(properties)
-        self.logger = logging.getLogger('pyHerc.data.dungeon.Dungeon')
+        self.logger = logging.getLogger('pyherc.data.dungeon.Dungeon')
 
 class Portal:
     """
@@ -293,7 +293,7 @@ class Portal:
         self.quest_end = 0
         self.level_generator = None
         self.model = None
-        self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')
+        self.logger = logging.getLogger('pyherc.data.dungeon.Portal')
 
     def __getstate__(self):
         '''
@@ -308,7 +308,7 @@ class Portal:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(properties)
-        self.logger = logging.getLogger('pyHerc.data.dungeon.Portal')
+        self.logger = logging.getLogger('pyherc.data.dungeon.Portal')
 
     def get_other_end(self):
         '''

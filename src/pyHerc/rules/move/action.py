@@ -3,26 +3,26 @@
 
 #   Copyright 2010-2011 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Module defining classes related to MoveAttack
 '''
 import logging
-import pyHerc.rules.time
+import pyherc.rules.time
 
 class MoveAction():
     '''
@@ -34,7 +34,7 @@ class MoveAction():
         @param character: Character moving
         @param new_location: Location to move
         '''
-        self.logger = logging.getLogger('pyHerc.rules.move.action.MoveAction')
+        self.logger = logging.getLogger('pyherc.rules.move.action.MoveAction')
         self.logger.debug('Initialising move action')
         self.character = character
         self.new_location = new_location
@@ -52,10 +52,10 @@ class MoveAction():
             if self.new_level != None:
                 self.character.level = self.new_level
             #TODO: refactor to be pluggable
-            self.character.tick = pyHerc.rules.time.get_new_tick(self.character, 2)
+            self.character.tick = pyherc.rules.time.get_new_tick(self.character, 2)
         else:
             self.logger.warn('Tried to execute illegal move')
-            self.character.tick = pyHerc.rules.time.get_new_tick(self.character, 2)
+            self.character.tick = pyherc.rules.time.get_new_tick(self.character, 2)
         self.logger.debug('Move executed')
 
     def is_legal(self):
@@ -65,7 +65,7 @@ class MoveAction():
         '''
         location_ok = False
         if self.new_level != None:
-            if self.new_level.walls[self.new_location[0]][self.new_location[1]] == pyHerc.data.tiles.WALL_EMPTY:
+            if self.new_level.walls[self.new_location[0]][self.new_location[1]] == pyherc.data.tiles.WALL_EMPTY:
                 #check for other creatures and such
                 location_ok = True
                 creatures = self.new_level.creatures[:]

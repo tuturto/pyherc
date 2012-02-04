@@ -3,26 +3,26 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 import os, sys
 import logging
-import pyHerc.data.model
+import pyherc.data.model
 
-__logger = logging.getLogger('pyHerc.rules.character')
+__logger = logging.getLogger('pyherc.rules.character')
 
 race_stats = None
 kit_stats = None
@@ -74,7 +74,7 @@ def create_character(race, kit, action_factory):
     temp_race = race_stats[race]
     temp_kit = kit_stats[kit]
 
-    new_character = pyHerc.data.model.Character(action_factory)
+    new_character = pyherc.data.model.Character(action_factory)
     new_character.set_body(temp_race['body'] + temp_kit['body'])
     new_character.set_finesse(temp_race['finesse'] + temp_kit['finesse'])
     new_character.set_mind(temp_race['mind'] + temp_kit['mind'])
@@ -87,11 +87,11 @@ def create_character(race, kit, action_factory):
 
     #TODO: get from a factory
     new_character.feats.append(
-                              pyHerc.data.model.WeaponProficiency('simple'))
+                              pyherc.data.model.WeaponProficiency('simple'))
     new_character.icon = __get_icon(race, kit)
 
     return new_character
 
 def __get_icon(race, kit):
     #TODO: implement
-    return pyHerc.data.tiles.HUMAN_FIGHTER
+    return pyherc.data.tiles.HUMAN_FIGHTER

@@ -3,27 +3,27 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-import pyHerc
-import pyHerc.rules.time
-from pyHerc.data.model import Model
-from pyHerc.data.model import Character
-from pyHerc.data.dungeon import Dungeon
-from pyHerc.data.dungeon import Level
+import pyherc
+import pyherc.rules.time
+from pyherc.data.model import Model
+from pyherc.data.model import Character
+from pyherc.data.dungeon import Dungeon
+from pyherc.data.dungeon import Level
 
 
 class test_Time:
@@ -57,7 +57,7 @@ class test_Time:
         Test that system can tell whose turn it is to act
         One creature has tick of 0
         """
-        creature = pyHerc.rules.time.get_next_creature(self.model)
+        creature = pyherc.rules.time.get_next_creature(self.model)
         assert(creature == self.creature2)
 
     def test_getNextInTurnPositiveTick(self):
@@ -66,7 +66,7 @@ class test_Time:
         All creatures have positive tick
         """
         self.creature2.tick = 10
-        creature = pyHerc.rules.time.get_next_creature(self.model)
+        creature = pyherc.rules.time.get_next_creature(self.model)
         print creature
         assert(creature == self.creature3)
 
