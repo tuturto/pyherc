@@ -132,7 +132,9 @@ class Application:
         """
         surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
         surface_manager.loadResources(self.base_path)
-        self.screen = pygame.display.set_mode((800, 600), pygame.SWSURFACE)
+        self.screen = pygame.display.set_mode((800, 600),
+                                              pygame.SWSURFACE |
+                                              pygame.FULLSCREEN)
         self.gui = MainWindow(self, self.base_path,
                               surface_manager, self.screen)
         menu = pyherc.gui.startmenu.StartMenu(self, self.screen,
