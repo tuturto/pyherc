@@ -29,4 +29,6 @@ and are published under the Creative Commons licence.
 Some tiles, in Dungeon Odyssey "Xerathul's Revenge" module have been drawn 
 by Henk Brouwer.
 
+Background of the main menu from: http://stock-background-texture.com/
+
 PGU was originally developed by Phil Hassey but is now being maintained by Peter Rogers.
