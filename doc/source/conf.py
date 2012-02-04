@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'pyherc'
+project = u'Herculeum'
 copyright = u'2012, Tuukka Turto'
 
 # The version info for the project you're documenting, acts as replacement for
