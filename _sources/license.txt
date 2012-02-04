@@ -16,3 +16,15 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Game uses graphics downloaded from TomeTik <http://pousse.rapiere.free.fr/tome/>
+
+All tiles except "Xerathul's Revenge" tiles have been drawn by David E. Gervais
+and are published under the Creative Commons licence.
+
+Some tiles, in Dungeon Odyssey "Xerathul's Revenge" module have been drawn 
+by Henk Brouwer.
+
+Background of the main menu from: <http://stock-background-texture.com/>
+
+PGU was originally developed by Phil Hassey but is now being maintained by Peter Rogers.
