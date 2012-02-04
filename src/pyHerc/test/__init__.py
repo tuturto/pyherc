@@ -3,33 +3,33 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 import random
-import pyHerc.data.dungeon
-import pyHerc.data.model
-import pyHerc.rules.tables
+import pyherc.data.dungeon
+import pyherc.data.model
+import pyherc.rules.tables
 
-from pyHerc.rules.public import ActionFactory
-from pyHerc.rules.move.factories import MoveFactory
-from pyHerc.rules.move.factories import WalkFactory
+from pyherc.rules.public import ActionFactory
+from pyherc.rules.move.factories import MoveFactory
+from pyherc.rules.move.factories import WalkFactory
 
-from pyHerc.rules.attack.factories import UnarmedCombatFactory
-from pyHerc.rules.attack.factories import MeleeCombatFactory
-from pyHerc.rules.attack.factories import AttackFactory
+from pyherc.rules.attack.factories import UnarmedCombatFactory
+from pyherc.rules.attack.factories import MeleeCombatFactory
+from pyherc.rules.attack.factories import AttackFactory
 
 class StubRandomNumberGenerator(random.Random):
     '''
@@ -487,10 +487,10 @@ class IntegrationTest():
                                             StubModel(),
                                             [move_factory, attack_factory])
 
-        self.model = pyHerc.data.model.Model()
-        self.item_generator = pyHerc.generators.ItemGenerator()
-        self.creatureGenerator = pyHerc.generators.CreatureGenerator(self.action_factory)
-        self.tables = pyHerc.rules.tables.Tables()
+        self.model = pyherc.data.model.Model()
+        self.item_generator = pyherc.generators.item.ItemGenerator()
+        self.creatureGenerator = pyherc.generators.CreatureGenerator(self.action_factory)
+        self.tables = pyherc.rules.tables.Tables()
         self.tables.load_tables(None, itemConfig, creatureConfig)
         self.model.tables = self.tables
 

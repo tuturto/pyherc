@@ -3,27 +3,27 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 import os, sys
 import logging
-import pyHerc.data.model
-import pyHerc.rules.utils
+import pyherc.data.model
+import pyherc.rules.utils
 
-__logger = logging.getLogger('pyHerc.rules.magic')
+__logger = logging.getLogger('pyherc.rules.magic')
 
 def cast_effect(model, target, effect, dice = None):
     """
@@ -51,9 +51,9 @@ def cast_hp_effect(model, target, effect, dice = None):
     hpPower = effect.power
     if dice != None and len(dice) > 0:
         hpRoll = dice.pop()
-        assert(hpRoll <= pyHerc.rules.utils.get_max_score(hpPower))
+        assert(hpRoll <= pyherc.rules.utils.get_max_score(hpPower))
     else:
-        hpRoll = pyHerc.rules.utils.roll_dice(hpPower)
+        hpRoll = pyherc.rules.utils.roll_dice(hpPower)
 
     event = {}
 
@@ -65,7 +65,7 @@ def cast_hp_effect(model, target, effect, dice = None):
         event['type'] = 'magic damage'
 
     if target.hit_points < 0:
-        pyHerc.rules.ending.check_dying(model, target, None)
+        pyherc.rules.ending.check_dying(model, target, None)
 
     if target.hit_points > target.get_max_hp():
         target.hit_points = target.get_max_hp()

@@ -3,26 +3,26 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 import os, sys, StringIO, random, os.path
 import logging
-import pyHerc
-import pyHerc.data.model
-from pyHerc.data import tiles
+import pyherc
+import pyherc.data.model
+from pyherc.data import tiles
 from xml import sax
 
 class Tables:
@@ -44,7 +44,7 @@ class Tables:
         self.uncommon = 16
         self.common = 32
 
-        self.logger = logging.getLogger('pyHerc.rules.tables')
+        self.logger = logging.getLogger('pyherc.rules.tables')
 
     def __getstate__(self):
         '''
@@ -59,7 +59,7 @@ class Tables:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyHerc.rules.tables')
+        self.logger = logging.getLogger('pyherc.rules.tables')
 
     def read_items_from_xml(self, document):
         self.logger.debug('reading item config from xml')
@@ -115,30 +115,30 @@ class Tables:
             self.read_creatures_from_xml(creatureConfig)
 
         self.potionAppearances = [
-                                ('clay potion',  pyHerc.data.tiles.ITEM_POTION_3),
-                                ('ruby potion', pyHerc.data.tiles.ITEM_POTION_9),
-                                ('yellow potion', pyHerc.data.tiles.ITEM_POTION_10),
-                                ('dark green potion', pyHerc.data.tiles.ITEM_POTION_2),
-                                ('cyan potion',  pyHerc.data.tiles.ITEM_POTION_4),
-                                ('sky blue potion', pyHerc.data.tiles.ITEM_POTION_5),
-                                ('bubbly potion', pyHerc.data.tiles.ITEM_POTION_8),
-                                ('black potion', pyHerc.data.tiles.ITEM_POTION_6),
-                                ('brown potion', pyHerc.data.tiles.ITEM_POTION_1),
-                                ('brown potion', pyHerc.data.tiles.ITEM_POTION_7),
-                                ('black potion', pyHerc.data.tiles.ITEM_POTION_11),
-                                ('brilliant blue potion', pyHerc.data.tiles.ITEM_POTION_12),
-                                ('milky potion', pyHerc.data.tiles.ITEM_POTION_13),
-                                ('amber potion', pyHerc.data.tiles.ITEM_POTION_14),
-                                ('pink potion', pyHerc.data.tiles.ITEM_POTION_15),
-                                ('swirly potion', pyHerc.data.tiles.ITEM_POTION_16),
-                                ('dark blue potion', pyHerc.data.tiles.ITEM_POTION_17),
-                                ('murky potion', pyHerc.data.tiles.ITEM_POTION_18),
-                                ('red potion', pyHerc.data.tiles.ITEM_POTION_19),
-                                ('golden potion', pyHerc.data.tiles.ITEM_POTION_20),
-                                ('emerald potion', pyHerc.data.tiles.ITEM_POTION_21),
-                                ('fizzy potion', pyHerc.data.tiles.ITEM_POTION_22),
-                                ('silver potion', pyHerc.data.tiles.ITEM_POTION_23),
-                                ('smoky potion', pyHerc.data.tiles.ITEM_POTION_24)
+                                ('clay potion',  pyherc.data.tiles.ITEM_POTION_3),
+                                ('ruby potion', pyherc.data.tiles.ITEM_POTION_9),
+                                ('yellow potion', pyherc.data.tiles.ITEM_POTION_10),
+                                ('dark green potion', pyherc.data.tiles.ITEM_POTION_2),
+                                ('cyan potion',  pyherc.data.tiles.ITEM_POTION_4),
+                                ('sky blue potion', pyherc.data.tiles.ITEM_POTION_5),
+                                ('bubbly potion', pyherc.data.tiles.ITEM_POTION_8),
+                                ('black potion', pyherc.data.tiles.ITEM_POTION_6),
+                                ('brown potion', pyherc.data.tiles.ITEM_POTION_1),
+                                ('brown potion', pyherc.data.tiles.ITEM_POTION_7),
+                                ('black potion', pyherc.data.tiles.ITEM_POTION_11),
+                                ('brilliant blue potion', pyherc.data.tiles.ITEM_POTION_12),
+                                ('milky potion', pyherc.data.tiles.ITEM_POTION_13),
+                                ('amber potion', pyherc.data.tiles.ITEM_POTION_14),
+                                ('pink potion', pyherc.data.tiles.ITEM_POTION_15),
+                                ('swirly potion', pyherc.data.tiles.ITEM_POTION_16),
+                                ('dark blue potion', pyherc.data.tiles.ITEM_POTION_17),
+                                ('murky potion', pyherc.data.tiles.ITEM_POTION_18),
+                                ('red potion', pyherc.data.tiles.ITEM_POTION_19),
+                                ('golden potion', pyherc.data.tiles.ITEM_POTION_20),
+                                ('emerald potion', pyherc.data.tiles.ITEM_POTION_21),
+                                ('fizzy potion', pyherc.data.tiles.ITEM_POTION_22),
+                                ('silver potion', pyherc.data.tiles.ITEM_POTION_23),
+                                ('smoky potion', pyherc.data.tiles.ITEM_POTION_24)
                                 ]
 
         self.construct_lookup_tables()
@@ -213,7 +213,7 @@ class CreatureHandler(sax.ContentHandler):
         elif name == 'speed':
             self.newCreature['speed'] = float(self.text)
         elif name == 'icon':
-            self.newCreature['icon'].append(pyHerc.data.tiles.__dict__[self.text])
+            self.newCreature['icon'].append(pyherc.data.tiles.__dict__[self.text])
 
 class ItemHandler(sax.ContentHandler):
     """
@@ -285,7 +285,7 @@ class ItemHandler(sax.ContentHandler):
             elif self.text == 'common':
                 self.newItem['rarity'] = 32
         elif name == 'icon':
-            self.newItem['icon'].append(pyHerc.data.tiles.__dict__[self.text])
+            self.newItem['icon'].append(pyherc.data.tiles.__dict__[self.text])
         elif name == 'questItem':
             self.newItem['questItem'] = int(self.text)
         elif name == 'damage':

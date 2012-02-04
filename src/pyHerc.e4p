@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
-<!-- eric4 project file for project pyHerc -->
+<!-- eric4 project file for project pyherc -->
 <!-- Saved: 2012-01-30, 20:51:33 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
@@ -12,72 +12,72 @@
   <Author>Tuukka Turto</Author>
   <Email>tuukka.turto@oktaeder.net</Email>
   <Sources>
-    <Source>pyHerc/__init__.py</Source>
-    <Source>pyHerc/gui/__init__.py</Source>
-    <Source>pyHerc/main.py</Source>
-    <Source>pyHerc/gui/windows.py</Source>
-    <Source>pyHerc/data/__init__.py</Source>
-    <Source>pyHerc/data/dungeon.py</Source>
-    <Source>pyHerc/data/tiles.py</Source>
-    <Source>pyHerc/generators/__init__.py</Source>
-    <Source>pyHerc/generators/dungeon.py</Source>
-    <Source>pyHerc/data/model.py</Source>
-    <Source>pyHerc/gui/surfaceManager.py</Source>
-    <Source>pyHerc/rules/__init__.py</Source>
-    <Source>pyHerc/rules/character.py</Source>
-    <Source>pyHerc/gui/images.py</Source>
-    <Source>pyHerc/rules/moving.py</Source>
-    <Source>pyHerc/notes.txt</Source>
-    <Source>pyHerc/generators/item.py</Source>
-    <Source>pyHerc/rules/items.py</Source>
-    <Source>pyHerc/gui/dialogs.py</Source>
-    <Source>pyHerc/rules/tables.py</Source>
-    <Source>pyHerc/rules/ending.py</Source>
-    <Source>pyHerc/generators/creature.py</Source>
-    <Source>pyHerc/ai/__init__.py</Source>
-    <Source>pyHerc/ai/simple.py</Source>
-    <Source>pyHerc/background.txt</Source>
-    <Source>pyHerc/rules/time.py</Source>
-    <Source>pyHerc/rules/utils.py</Source>
-    <Source>pyHerc/generators/utils.py</Source>
-    <Source>pyHerc/test/__init__.py</Source>
-    <Source>pyHerc/test/test_time.py</Source>
-    <Source>pyHerc/test/test_combat.py</Source>
-    <Source>pyHerc/test/test_dice.py</Source>
-    <Source>pyHerc/test/test_dungeon.py</Source>
-    <Source>pyHerc/test/test_generator_utils.py</Source>
-    <Source>pyHerc/test/test_item.py</Source>
-    <Source>pyHerc/test/test_moving.py</Source>
-    <Source>pyHerc/test/test_gui.py</Source>
-    <Source>pyHerc/test/test_tables.py</Source>
-    <Source>pyHerc/rules/magic.py</Source>
-    <Source>pyHerc/test/test_magic.py</Source>
-    <Source>pyHerc/test/test_creature.py</Source>
-    <Source>pyHerc/data/item.py</Source>
-    <Source>pyHerc/rules/los.py</Source>
-    <Source>pyHerc/rules/attack/__init__.py</Source>
-    <Source>pyHerc/rules/attack/factories.py</Source>
-    <Source>pyHerc/rules/attack/melee.py</Source>
-    <Source>pyHerc/rules/attack/action.py</Source>
-    <Source>pyHerc/rules/public.py</Source>
-    <Source>pyHerc/test/test_actionfactory.py</Source>
-    <Source>pyHerc/rules/move/__init__.py</Source>
-    <Source>pyHerc/rules/move/action.py</Source>
-    <Source>pyHerc/rules/move/factories.py</Source>
-    <Source>pyHerc/rules/factory.py</Source>
-    <Source>pyHerc/rules/attack/unarmed.py</Source>
-    <Source>pyHerc/gui/startmenu.py</Source>
-    <Source>pyHerc/generators/level/__init__.py</Source>
-    <Source>pyHerc/generators/level/catacombs.py</Source>
-    <Source>pyHerc/generators/level/crypt.py</Source>
-    <Source>pyHerc/generators/level/testlevel.py</Source>
-    <Source>pyHerc/test/test_cryptgenerator.py</Source>
-    <Source>pyHerc/generators/level/config.py</Source>
-    <Source>pyHerc/test/test_gridpartitioner.py</Source>
-    <Source>pyHerc/generators/level/partitioners/grid.py</Source>
-    <Source>pyHerc/generators/level/partitioners/section.py</Source>
-    <Source>pyHerc/generators/level/partitioners/__init__.py</Source>
-    <Source>pyHerc/test/test_level.py</Source>
+    <Source>pyherc/__init__.py</Source>
+    <Source>pyherc/gui/__init__.py</Source>
+    <Source>pyherc/main.py</Source>
+    <Source>pyherc/gui/windows.py</Source>
+    <Source>pyherc/data/__init__.py</Source>
+    <Source>pyherc/data/dungeon.py</Source>
+    <Source>pyherc/data/tiles.py</Source>
+    <Source>pyherc/generators/__init__.py</Source>
+    <Source>pyherc/generators/dungeon.py</Source>
+    <Source>pyherc/data/model.py</Source>
+    <Source>pyherc/gui/surfaceManager.py</Source>
+    <Source>pyherc/rules/__init__.py</Source>
+    <Source>pyherc/rules/character.py</Source>
+    <Source>pyherc/gui/images.py</Source>
+    <Source>pyherc/rules/moving.py</Source>
+    <Source>pyherc/notes.txt</Source>
+    <Source>pyherc/generators/item.py</Source>
+    <Source>pyherc/rules/items.py</Source>
+    <Source>pyherc/gui/dialogs.py</Source>
+    <Source>pyherc/rules/tables.py</Source>
+    <Source>pyherc/rules/ending.py</Source>
+    <Source>pyherc/generators/creature.py</Source>
+    <Source>pyherc/ai/__init__.py</Source>
+    <Source>pyherc/ai/simple.py</Source>
+    <Source>pyherc/background.txt</Source>
+    <Source>pyherc/rules/time.py</Source>
+    <Source>pyherc/rules/utils.py</Source>
+    <Source>pyherc/generators/utils.py</Source>
+    <Source>pyherc/test/__init__.py</Source>
+    <Source>pyherc/test/test_time.py</Source>
+    <Source>pyherc/test/test_combat.py</Source>
+    <Source>pyherc/test/test_dice.py</Source>
+    <Source>pyherc/test/test_dungeon.py</Source>
+    <Source>pyherc/test/test_generator_utils.py</Source>
+    <Source>pyherc/test/test_item.py</Source>
+    <Source>pyherc/test/test_moving.py</Source>
+    <Source>pyherc/test/test_gui.py</Source>
+    <Source>pyherc/test/test_tables.py</Source>
+    <Source>pyherc/rules/magic.py</Source>
+    <Source>pyherc/test/test_magic.py</Source>
+    <Source>pyherc/test/test_creature.py</Source>
+    <Source>pyherc/data/item.py</Source>
+    <Source>pyherc/rules/los.py</Source>
+    <Source>pyherc/rules/attack/__init__.py</Source>
+    <Source>pyherc/rules/attack/factories.py</Source>
+    <Source>pyherc/rules/attack/melee.py</Source>
+    <Source>pyherc/rules/attack/action.py</Source>
+    <Source>pyherc/rules/public.py</Source>
+    <Source>pyherc/test/test_actionfactory.py</Source>
+    <Source>pyherc/rules/move/__init__.py</Source>
+    <Source>pyherc/rules/move/action.py</Source>
+    <Source>pyherc/rules/move/factories.py</Source>
+    <Source>pyherc/rules/factory.py</Source>
+    <Source>pyherc/rules/attack/unarmed.py</Source>
+    <Source>pyherc/gui/startmenu.py</Source>
+    <Source>pyherc/generators/level/__init__.py</Source>
+    <Source>pyherc/generators/level/catacombs.py</Source>
+    <Source>pyherc/generators/level/crypt.py</Source>
+    <Source>pyherc/generators/level/testlevel.py</Source>
+    <Source>pyherc/test/test_cryptgenerator.py</Source>
+    <Source>pyherc/generators/level/config.py</Source>
+    <Source>pyherc/test/test_gridpartitioner.py</Source>
+    <Source>pyherc/generators/level/partitioners/grid.py</Source>
+    <Source>pyherc/generators/level/partitioners/section.py</Source>
+    <Source>pyherc/generators/level/partitioners/__init__.py</Source>
+    <Source>pyherc/test/test_level.py</Source>
   </Sources>
   <Forms>
   </Forms>
@@ -89,7 +89,7 @@
   </Interfaces>
   <Others>
   </Others>
-  <MainScript>pyHerc/main.py</MainScript>
+  <MainScript>pyherc/main.py</MainScript>
   <Vcs>
     <VcsType>None</VcsType>
   </Vcs>

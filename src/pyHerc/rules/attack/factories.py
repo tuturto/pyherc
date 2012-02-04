@@ -3,20 +3,20 @@
 
 #   Copyright 2010-2011 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Attack related factories are defined here
@@ -24,12 +24,12 @@ Attack related factories are defined here
 
 import types
 import logging
-from pyHerc.rules.attack.action import AttackAction
-from pyHerc.rules.attack.unarmed import UnarmedToHit
-from pyHerc.rules.attack.unarmed import UnarmedDamage
-from pyHerc.rules.attack.melee import MeleeToHit
-from pyHerc.rules.attack.melee import MeleeDamage
-from pyHerc.rules.factory import SubActionFactory
+from pyherc.rules.attack.action import AttackAction
+from pyherc.rules.attack.unarmed import UnarmedToHit
+from pyherc.rules.attack.unarmed import UnarmedDamage
+from pyherc.rules.attack.melee import MeleeToHit
+from pyherc.rules.attack.melee import MeleeDamage
+from pyherc.rules.factory import SubActionFactory
 
 class AttackFactory(SubActionFactory):
     '''
@@ -39,7 +39,7 @@ class AttackFactory(SubActionFactory):
         '''
         Constructor for this factory
         '''
-        self.logger = logging.getLogger('pyHerc.rules.attack.factories.AttackFactory')
+        self.logger = logging.getLogger('pyherc.rules.attack.factories.AttackFactory')
         self.logger.debug('initialising AttackFactory')
         self.action_type = 'attack'
 
@@ -61,7 +61,7 @@ class UnarmedCombatFactory():
         '''
         Constructor for this factory
         '''
-        self.logger = logging.getLogger('pyHerc.rules.attack.factories.UnarmedCombatFactory')
+        self.logger = logging.getLogger('pyherc.rules.attack.factories.UnarmedCombatFactory')
         self.logger.debug('initialising UnarmedCombatFactory')
         self.attack_type = 'unarmed'
         self.logger.debug('UnarmedCombatFactory initialised')
@@ -79,7 +79,7 @@ class UnarmedCombatFactory():
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyHerc.rules.attack.factories.UnarmedCombatFactory')
+        self.logger = logging.getLogger('pyherc.rules.attack.factories.UnarmedCombatFactory')
 
     def __str__(self):
         return 'unarmed combat factory'
@@ -121,7 +121,7 @@ class MeleeCombatFactory():
         '''
         Constructor for this factory
         '''
-        self.logger = logging.getLogger('pyHerc.rules.attack.factories.MeleeCombatFactory')
+        self.logger = logging.getLogger('pyherc.rules.attack.factories.MeleeCombatFactory')
         self.logger.debug('initialising MeleeCombatFactory')
         self.attack_type = 'melee'
         self.logger.debug('MeleeCombatFactory initialised')
@@ -139,7 +139,7 @@ class MeleeCombatFactory():
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyHerc.rules.attack.factories.MeleeCombatFactory')
+        self.logger = logging.getLogger('pyherc.rules.attack.factories.MeleeCombatFactory')
 
     def __str__(self):
         return 'melee combat factory'

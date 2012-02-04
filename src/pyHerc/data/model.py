@@ -3,20 +3,20 @@
 
 #   Copyright 2010-2011 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Module for Model related classes
@@ -37,7 +37,7 @@ class Model:
     """
 
     def __init__(self):
-        self.logger = logging.getLogger('pyHerc.data.model.Model')
+        self.logger = logging.getLogger('pyherc.data.model.Model')
         self.dungeon = None
         self.player = None
         self.config = None
@@ -60,7 +60,7 @@ class Model:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(properties)
-        self.logger = logging.getLogger('pyHerc.data.model.Model')
+        self.logger = logging.getLogger('pyherc.data.model.Model')
 
     def load_config(self):
         """
@@ -118,7 +118,7 @@ class Character:
         self.mimic_item = None
         self.action_factory = action_factory
         self.artificial_intelligence = None
-        self.logger = logging.getLogger('pyHerc.data.model.Character')
+        self.logger = logging.getLogger('pyherc.data.model.Character')
 
     def __str__(self):
         return self.name
@@ -296,7 +296,7 @@ class Character:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyHerc.data.model.Character')
+        self.logger = logging.getLogger('pyherc.data.model.Character')
 
 class Damage:
     """

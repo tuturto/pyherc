@@ -3,23 +3,23 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
-Main entry point for pyHerc - game
+Main entry point for pyherc - game
 '''
 
 import os.path
@@ -28,16 +28,16 @@ import pygame
 import logging
 import pgu.gui
 
-import pyHerc.gui.surfaceManager
-from pyHerc.rules.public import ActionFactory
-from pyHerc.rules.move.factories import MoveFactory
-from pyHerc.rules.move.factories import WalkFactory
-from pyHerc.rules.attack.factories import AttackFactory
-from pyHerc.rules.attack.factories import UnarmedCombatFactory
-from pyHerc.rules.attack.factories import MeleeCombatFactory
+import pyherc.gui.surfaceManager
+from pyherc.rules.public import ActionFactory
+from pyherc.rules.move.factories import MoveFactory
+from pyherc.rules.move.factories import WalkFactory
+from pyherc.rules.attack.factories import AttackFactory
+from pyherc.rules.attack.factories import UnarmedCombatFactory
+from pyherc.rules.attack.factories import MeleeCombatFactory
 
 
-from pyHerc.gui.windows import MainWindow
+from pyherc.gui.windows import MainWindow
 
 if not pygame.font:
     print 'Warning, fonts disabled'
@@ -45,18 +45,18 @@ if not pygame.font:
 if not pygame.mixer:
     print 'Warning, sound disabled'
 
-print '#   pyHerc is free software: you can redistribute it and/or modify'
+print '#   pyherc is free software: you can redistribute it and/or modify'
 print '#   it under the terms of the GNU General Public License as published by'
 print '#   the Free Software Foundation, either version 3 of the License, or'
 print '#   (at your option) any later version.'
 print '#'
-print '#   pyHerc is distributed in the hope that it will be useful,'
+print '#   pyherc is distributed in the hope that it will be useful,'
 print '#   but WITHOUT ANY WARRANTY; without even the implied warranty of'
 print '#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the'
 print '#   GNU General Public License for more details.'
 print '#'
 print '#   You should have received a copy of the GNU General Public License'
-print '#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.'
+print '#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.'
 
 class Application:
     """
@@ -130,12 +130,12 @@ class Application:
         """
         Starts the application
         """
-        surface_manager = pyHerc.gui.surfaceManager.SurfaceManager()
+        surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
         surface_manager.loadResources(self.base_path)
         self.screen = pygame.display.set_mode((800, 600), pygame.SWSURFACE)
         self.gui = MainWindow(self, self.base_path,
                               surface_manager, self.screen)
-        menu = pyHerc.gui.startmenu.StartMenu(self, self.screen,
+        menu = pyherc.gui.startmenu.StartMenu(self, self.screen,
                                               surface_manager)
         self.gui.connect(pgu.gui.QUIT, self.gui.quit, None)
         self.gui.run(menu, screen = self.screen)
@@ -145,7 +145,7 @@ class Application:
         Start logging for the system
         '''
         logging.basicConfig(level=self.config['logging']['level'])
-        self.logger = logging.getLogger('pyHerc.main.Application')
+        self.logger = logging.getLogger('pyherc.main.Application')
         self.logger.info("Logging started")
 
     def initialise_factories(self, model):

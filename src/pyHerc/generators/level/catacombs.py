@@ -3,30 +3,30 @@
 
 #   Copyright 2012 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 import logging
 import random
-import pyHerc.generators.item
-import pyHerc.generators.creature
-import pyHerc.generators.utils
-from pyHerc.data.dungeon import Level
-from pyHerc.data.dungeon import Dungeon
-from pyHerc.data.dungeon import Portal
-from pyHerc.data import tiles
+import pyherc.generators.item
+import pyherc.generators.creature
+import pyherc.generators.utils
+from pyherc.data.dungeon import Level
+from pyherc.data.dungeon import Dungeon
+from pyherc.data.dungeon import Portal
+from pyherc.data import tiles
 
 class CatacombsLevelGenerator:
     """
@@ -34,9 +34,9 @@ class CatacombsLevelGenerator:
     """
 
     def __init__(self, action_factory):
-        self.logger = logging.getLogger('pyHerc.generators.level.catacombs.CatacombsLevelGenerator')
-        self.item_generator = pyHerc.generators.ItemGenerator()
-        self.creature_generator = pyHerc.generators.CreatureGenerator(action_factory)
+        self.logger = logging.getLogger('pyherc.generators.level.catacombs.CatacombsLevelGenerator')
+        self.item_generator = pyherc.generators.ItemGenerator()
+        self.creature_generator = pyherc.generators.CreatureGenerator(action_factory)
 
     def __getstate__(self):
         '''
@@ -51,7 +51,7 @@ class CatacombsLevelGenerator:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyHerc.generators.level.catacombs.CatacombsLevelGenerator')
+        self.logger = logging.getLogger('pyherc.generators.level.catacombs.CatacombsLevelGenerator')
 
     def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):
         """
@@ -66,7 +66,7 @@ class CatacombsLevelGenerator:
         level_size = model.config['level']['size']
         self.logger.debug('dividing level in sections')
         BSPStack = []
-        BSP = pyHerc.generators.utils.BSPSection((0, 0), (level_size[0] - 2, level_size[1] - 2), None)
+        BSP = pyherc.generators.utils.BSPSection((0, 0), (level_size[0] - 2, level_size[1] - 2), None)
         BSPStack.append(BSP)
         room_stack = []
 

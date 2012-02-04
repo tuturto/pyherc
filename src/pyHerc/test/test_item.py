@@ -3,34 +3,34 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Module for classes testing Item related operations
 '''
 
-import pyHerc
-import pyHerc.generators.item
-import pyHerc.data.tiles
-import pyHerc.data.dungeon
-import pyHerc.rules.items
-import pyHerc.rules.tables
-from pyHerc.test import IntegrationTest
-from pyHerc.data.item import Item
-from pyHerc.data.item import ItemEffectData
+import pyherc
+import pyherc.generators.item
+import pyherc.data.tiles
+import pyherc.data.dungeon
+import pyherc.rules.items
+import pyherc.rules.tables
+from pyherc.test import IntegrationTest
+from pyherc.data.item import Item
+from pyherc.data.item import ItemEffectData
 
 class TestItemWithGenerator(IntegrationTest):
     """
@@ -48,11 +48,11 @@ class TestItemWithGenerator(IntegrationTest):
         self.item.location = ()
         self.item.icon = None
 
-        self.level = pyHerc.data.dungeon.Level([20, 20],
-                                                pyHerc.data.tiles.FLOOR_ROCK,
-                                                pyHerc.data.tiles.WALL_EMPTY)
+        self.level = pyherc.data.dungeon.Level([20, 20],
+                                                pyherc.data.tiles.FLOOR_ROCK,
+                                                pyherc.data.tiles.WALL_EMPTY)
 
-        self.character = pyHerc.data.model.Character(self.action_factory)
+        self.character = pyherc.data.model.Character(self.action_factory)
 
         self.character.location = (5, 5)
         self.character.name = 'Timothy Tester'
@@ -62,7 +62,7 @@ class TestItemWithGenerator(IntegrationTest):
 
         self.level.add_item(self.item, (5, 5))
 
-        self.dungeon = pyHerc.data.dungeon.Dungeon()
+        self.dungeon = pyherc.data.dungeon.Dungeon()
         self.dungeon.levels = self.level
 
         self.model.dungeon = self.dungeon
@@ -78,7 +78,7 @@ class TestItemWithGenerator(IntegrationTest):
 
         assert(self.item.name == 'crystal skull')
         assert(self.item.quest_item == 1)
-        assert(self.item.icon == pyHerc.data.tiles.ITEM_CRYSTAL_SKULL)
+        assert(self.item.icon == pyherc.data.tiles.ITEM_CRYSTAL_SKULL)
 
     def test_create_weapon(self):
         """
@@ -109,7 +109,7 @@ class TestItemWithGenerator(IntegrationTest):
 
         assert(item not in self.character.weapons)
 
-        pyHerc.rules.items.wield(self.model, self.character, item)
+        pyherc.rules.items.wield(self.model, self.character, item)
 
         assert(item in self.character.weapons)
 
@@ -118,11 +118,11 @@ class TestItemWithGenerator(IntegrationTest):
         Test that wielded item can be unwielded
         '''
         item = self.item_generator.generateItem(self.tables, {'name': 'dagger'})
-        pyHerc.rules.items.wield(self.model, self.character, item)
+        pyherc.rules.items.wield(self.model, self.character, item)
 
         assert(item in self.character.weapons)
 
-        pyHerc.rules.items.unwield(self.model, self.character, item)
+        pyherc.rules.items.unwield(self.model, self.character, item)
 
         assert(not item in self.character.weapons)
 
@@ -138,8 +138,8 @@ class TestItemWithGenerator(IntegrationTest):
         assert(item1 not in self.character.weapons)
         assert(item2 not in self.character.weapons)
 
-        pyHerc.rules.items.wield(self.model, self.character, item1)
-        pyHerc.rules.items.wield(self.model,
+        pyherc.rules.items.wield(self.model, self.character, item1)
+        pyherc.rules.items.wield(self.model,
                                  self.character,
                                  item2,
                                  dualWield = True)
@@ -159,8 +159,8 @@ class TestItemWithGenerator(IntegrationTest):
         assert(item1 not in self.character.weapons)
         assert(item2 not in self.character.weapons)
 
-        pyHerc.rules.items.wield(self.model, self.character, item2)
-        pyHerc.rules.items.wield(self.model, self.character,
+        pyherc.rules.items.wield(self.model, self.character, item2)
+        pyherc.rules.items.wield(self.model, self.character,
                                  item1,
                                  dualWield = True)
 
@@ -176,7 +176,7 @@ class TestItemWithGenerator(IntegrationTest):
         item2 = self.item_generator.generateItem(self.tables,
                                                 {'name': 'sickle'})
 
-        assert(not pyHerc.rules.items.can_dual_wield(
+        assert(not pyherc.rules.items.can_dual_wield(
                                                      self.model,
                                                      self.character,
                                                      item1,
@@ -191,11 +191,11 @@ class TestItemWithGenerator(IntegrationTest):
         item2 = self.item_generator.generateItem(self.tables,
                                                     {'name': 'sickle'})
 
-        assert(not pyHerc.rules.items.is_dual_wieldable(
+        assert(not pyherc.rules.items.is_dual_wieldable(
                                                         self.model,
                                                         self.character,
                                                         item1))
-        assert(pyHerc.rules.items.is_dual_wieldable(
+        assert(pyherc.rules.items.is_dual_wieldable(
                                                     self.model,
                                                     self.character,
                                                     item2))
@@ -207,7 +207,7 @@ class TestItemWithGenerator(IntegrationTest):
         item = self.item_generator.generateItem(self.tables,
                                                {'name': 'apple'})
 
-        assert(not pyHerc.rules.items.is_dual_wieldable(
+        assert(not pyherc.rules.items.is_dual_wieldable(
                                                         self.model,
                                                         self.character,
                                                         item))
@@ -271,11 +271,11 @@ class TestItemsInLevel:
         self.item.location = ()
         self.item.icon = None
 
-        self.level = pyHerc.data.dungeon.Level([20, 20],
-                                                pyHerc.data.tiles.FLOOR_ROCK,
-                                                pyHerc.data.tiles.WALL_EMPTY)
+        self.level = pyherc.data.dungeon.Level([20, 20],
+                                                pyherc.data.tiles.FLOOR_ROCK,
+                                                pyherc.data.tiles.WALL_EMPTY)
 
-        self.character = pyHerc.data.model.Character(None)
+        self.character = pyherc.data.model.Character(None)
 
         self.character.location = (5, 5)
         self.character.name = 'Timothy Tester'
@@ -285,10 +285,10 @@ class TestItemsInLevel:
 
         self.level.add_item(self.item, (5, 5))
 
-        self.dungeon = pyHerc.data.dungeon.Dungeon()
+        self.dungeon = pyherc.data.dungeon.Dungeon()
         self.dungeon.levels = self.level
 
-        self.model = pyHerc.data.model.Model()
+        self.model = pyherc.data.model.Model()
         self.model.dungeon = self.dungeon
         self.model.player = self.character
 
@@ -299,7 +299,7 @@ class TestItemsInLevel:
         assert(self.character.location == (5, 5))
         assert(self.item.location == (5, 5))
 
-        pyHerc.rules.items.pick_up(self.model, self.character, self.item)
+        pyherc.rules.items.pick_up(self.model, self.character, self.item)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
@@ -314,7 +314,7 @@ class TestItemsInLevel:
         assert(self.character.location == (6, 6))
         assert(self.item.location == (5, 5))
 
-        pyHerc.rules.items.pick_up(self.model, self.character, self.item)
+        pyherc.rules.items.pick_up(self.model, self.character, self.item)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
@@ -323,13 +323,13 @@ class TestItemsInLevel:
         """
         Test that an item can be dropped from inventory
         """
-        pyHerc.rules.items.pick_up(self.model, self.character, self.item)
+        pyherc.rules.items.pick_up(self.model, self.character, self.item)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
 
         self.character.location = (8, 8)
-        pyHerc.rules.items.drop(self.model, self.character, self.item)
+        pyherc.rules.items.drop(self.model, self.character, self.item)
 
         assert(not self.item in self.character.inventory)
         assert(self.item in self.level.items)
@@ -339,15 +339,15 @@ class TestItemsInLevel:
         '''
         Test that wielded item is dropped correctly
         '''
-        pyHerc.rules.items.pick_up(self.model, self.character, self.item)
-        pyHerc.rules.items.wield(self.model, self.character, self.item)
+        pyherc.rules.items.pick_up(self.model, self.character, self.item)
+        pyherc.rules.items.wield(self.model, self.character, self.item)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
         assert(self.item in self.character.weapons)
 
         self.character.location = (8, 8)
-        pyHerc.rules.items.drop(self.model, self.character, self.item)
+        pyherc.rules.items.drop(self.model, self.character, self.item)
 
         assert(not self.item in self.character.inventory)
         assert(self.item in self.level.items)
@@ -391,7 +391,7 @@ class TestItemAdvanced():
         """
 
         item = Item()
-        character = pyHerc.data.model.Character(None)
+        character = pyherc.data.model.Character(None)
 
         item.name = 'healing potion'
         item.appearance = 'blue potion'
@@ -405,7 +405,7 @@ class TestItemAdvanced():
         Test that given name is reported for a generally named item
         """
         item = Item()
-        character = pyHerc.data.model.Character(None)
+        character = pyherc.data.model.Character(None)
         character.item_memory['healing potion'] = 'doozer potion'
 
         item.name = 'healing potion'
@@ -420,7 +420,7 @@ class TestItemAdvanced():
         Test that character can identify an item
         """
         item = Item()
-        character = pyHerc.data.model.Character(None)
+        character = pyherc.data.model.Character(None)
         item.name = 'healing potion'
         item.appearance = 'blue potion'
 
@@ -437,7 +437,7 @@ class TestItemAdvanced():
         Test that item can decorate its name
         '''
         item = Item()
-        character = pyHerc.data.model.Character(None)
+        character = pyherc.data.model.Character(None)
         item.name = 'club'
 
         character.inventory.append(item)

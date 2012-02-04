@@ -3,22 +3,22 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-import pyHerc
+import pyherc
 
 class test_Tables:
 
@@ -39,7 +39,7 @@ class test_Tables:
                 </item>
             </items>
             """
-        tables = pyHerc.rules.tables.Tables()
+        tables = pyherc.rules.tables.Tables()
         tables.read_items_from_xml(itemConfig)
 
         assert len(tables.items) == 1
@@ -48,7 +48,7 @@ class test_Tables:
         assert tables.items['apple']['weight'] == 1
         assert tables.items['apple']['type'] == ['food']
         assert tables.items['apple']['rarity'] == tables.common
-        assert pyHerc.data.tiles.ITEM_APPLE in tables.items['apple']['icon']
+        assert pyherc.data.tiles.ITEM_APPLE in tables.items['apple']['icon']
 
     def test_reading_more_complex_item(self):
         itemConfig = """
@@ -69,7 +69,7 @@ class test_Tables:
                 </item>
             </items>
         """
-        tables = pyHerc.rules.tables.Tables()
+        tables = pyherc.rules.tables.Tables()
         tables.read_items_from_xml(itemConfig)
 
         assert len(tables.items) == 1
@@ -80,7 +80,7 @@ class test_Tables:
         assert 'special item' in tables.items['crystal skull']['type']
         assert 'quest item' in tables.items['crystal skull']['type']
         assert tables.items['crystal skull']['rarity'] == tables.artifact
-        assert pyHerc.data.tiles.ITEM_CRYSTAL_SKULL in tables.items['crystal skull']['icon']
+        assert pyherc.data.tiles.ITEM_CRYSTAL_SKULL in tables.items['crystal skull']['icon']
 
     def test_reading_two_items_from_config(self):
         itemConfig = """
@@ -114,13 +114,13 @@ class test_Tables:
             </items>
         """
 
-        tables = pyHerc.rules.tables.Tables()
+        tables = pyherc.rules.tables.Tables()
         tables.read_items_from_xml(itemConfig)
 
         assert 'crystal skull' in tables.items.keys()
         assert 'apple' in tables.items.keys()
         assert tables.items['crystal skull']['weight'] == 5
-        assert pyHerc.data.tiles.ITEM_APPLE in tables.items['apple']['icon']
+        assert pyherc.data.tiles.ITEM_APPLE in tables.items['apple']['icon']
 
     def test_reading_weapon_from_config(self):
         itemConfig = """
@@ -151,7 +151,7 @@ class test_Tables:
                 </item>
             </items>
             """
-        tables = pyHerc.rules.tables.Tables()
+        tables = pyherc.rules.tables.Tables()
         tables.read_items_from_xml(itemConfig)
 
         item = tables.items['morning star']
@@ -164,8 +164,8 @@ class test_Tables:
         assert 'bludgeoning' in item['damage type']
         assert 'piercing' in item['damage type']
         assert item['class'] == 'simple'
-        assert pyHerc.data.tiles.ITEM_MORNING_STAR_1 in item['icon']
-        assert pyHerc.data.tiles.ITEM_MORNING_STAR_2 in item['icon']
+        assert pyherc.data.tiles.ITEM_MORNING_STAR_1 in item['icon']
+        assert pyherc.data.tiles.ITEM_MORNING_STAR_2 in item['icon']
         assert 'weapon' in item['type']
         assert 'one-handed weapon' in item['type']
         assert 'melee' in item['type']
@@ -197,7 +197,7 @@ class test_Tables:
             </items>
             """
 
-        tables = pyHerc.rules.tables.Tables()
+        tables = pyherc.rules.tables.Tables()
         tables.read_items_from_xml(itemConfig)
 
         item = tables.items['healing potion']
@@ -244,7 +244,7 @@ class test_Tables:
         </creatures>
         """
 
-        tables = pyHerc.rules.tables.Tables()
+        tables = pyherc.rules.tables.Tables()
         tables.load_tables(None, item_config, creature_config)
 
-        assert(not pyHerc.data.tiles.ITEM_POTION_EMPTY in tables.items['potion of bless']['icon'])
+        assert(not pyherc.data.tiles.ITEM_POTION_EMPTY in tables.items['potion of bless']['icon'])

@@ -3,29 +3,29 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 import os, sys
 import pygame
 import logging
-import pyHerc.gui.surfaceManager
-import pyHerc.gui.images
-import pyHerc.data.model
-import pyHerc.data.tiles
-import pyHerc.generators.dungeon
+import pyherc.gui.surfaceManager
+import pyherc.gui.images
+import pyherc.data.model
+import pyherc.data.tiles
+import pyherc.generators.dungeon
 
 from pygame.locals import K_a, K_b, K_c, K_d, K_e, K_f, K_g, K_h, K_i, K_j
 from pygame.locals import K_k, K_l, K_m, K_n, K_o, K_p, K_q, K_r, K_s, K_t
@@ -46,7 +46,7 @@ class Inventory:
         @param character: character viewing the inventory
         """
 
-        self.logger = logging.getLogger('pyHerc.gui.dialogs.Inventory')
+        self.logger = logging.getLogger('pyherc.gui.dialogs.Inventory')
         self.inventory = [] # [{'selected': 1/0, 'item' : Item}]
         self.selected = None
         self.select_count = 0
@@ -62,7 +62,7 @@ class Inventory:
         self.surface_manager = surface_manager
         if self.surface_manager == None:
             self.logger.warn('Surface manager not specified, defaulting to the system one.')
-            self.surface_manager = pyHerc.gui.surfaceManager.SurfaceManager()
+            self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
             self.surface_manager.loadResources()
 
         self.character = character
@@ -70,7 +70,7 @@ class Inventory:
             self.logger.warn('No character specified, defaulting to player')
             self.character = self.application.world.player
 
-        self.background = self.surface_manager.getImage(pyHerc.gui.images.image_inventory_menu)
+        self.background = self.surface_manager.getImage(pyherc.gui.images.image_inventory_menu)
 
     def show(self, list, multiple_selections = -1):
         """
@@ -198,7 +198,7 @@ class Inventory:
 class EndScreen:
 
     def __init__(self, application, screen, surface_manager = None):
-        self.logger = logging.getLogger('pyHerc.gui.dialogs.EndScreen')
+        self.logger = logging.getLogger('pyherc.gui.dialogs.EndScreen')
         self.background = None
         self.running = 1
         self.application = application
@@ -206,7 +206,7 @@ class EndScreen:
         self.surface_manager = surface_manager
         if self.surface_manager == None:
             self.logger.warn('Surface manager not specified, defaulting to the system one.')
-            self.surface_manager = pyHerc.gui.surfaceManager.SurfaceManager()
+            self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
             self.surface_manager.loadResources()
 
     def show(self, ending):
@@ -219,7 +219,7 @@ class EndScreen:
         player = model.player
 
         if ending['reason'] == 'escaped':
-            self.background = self.surface_manager.getImage(pyHerc.gui.images.image_end_marble_slate)
+            self.background = self.surface_manager.getImage(pyherc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' escaped from ruins', True, colour, (0, 0, 0))
             text_rect = text.get_rect()
@@ -227,7 +227,7 @@ class EndScreen:
             self.screen.blit(text, text_rect)
 
         elif ending['reason'] == 'victory':
-            self.background = self.surface_manager.getImage(pyHerc.gui.images.image_end_marble_slate)
+            self.background = self.surface_manager.getImage(pyherc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' conquered the ruins', True, colour, (0, 0, 0))
             text_rect = text.get_rect()
@@ -235,7 +235,7 @@ class EndScreen:
             self.screen.blit(text, text_rect)
 
         elif ending['reason'] == 'dead':
-            self.background = self.surface_manager.getImage(pyHerc.gui.images.image_end_tombstone)
+            self.background = self.surface_manager.getImage(pyherc.gui.images.image_end_tombstone)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' died in ruins', True, colour, (0, 0, 0))
             text_rect = text.get_rect()
@@ -248,7 +248,7 @@ class EndScreen:
         else:
             #quit
             self.background = self.surface_manager.getImage(
-                                                                 pyHerc.gui.images.image_end_marble_slate)
+                                                                 pyherc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' quit', True, colour, (0, 0, 0))
             text_rect = text.get_rect()

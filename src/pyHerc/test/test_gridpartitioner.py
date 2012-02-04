@@ -3,29 +3,29 @@
 
 #   Copyright 2012 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Tests for GridPartitioner
 '''
 
-from pyHerc.generators.level.partitioners.grid import GridPartitioner
-from pyHerc.generators.level.partitioners.grid import RandomConnector
-from pyHerc.generators.level.partitioners.section import Section
-from pyHerc.data import Level
+from pyherc.generators.level.partitioners.grid import GridPartitioner
+from pyherc.generators.level.partitioners.grid import RandomConnector
+from pyherc.generators.level.partitioners.section import Section
+from pyherc.data import Level
 from mock import Mock
 
 class test_GridPartitioner:

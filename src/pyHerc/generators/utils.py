@@ -3,20 +3,20 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 import random
 import logging
@@ -34,7 +34,7 @@ class BSPSection:
         self.node2 = None
         self.parent = parent
         self.direction = direction
-        self.logger = logging.getLogger('pyHerc.generators.utils.BSPSection')
+        self.logger = logging.getLogger('pyherc.generators.utils.BSPSection')
         self.logger.debug('created new BSP section with corners ' +
                                     self.corner1.__str__() + ' and ' +
                                     self.corner2.__str__())

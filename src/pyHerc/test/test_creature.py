@@ -3,27 +3,29 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-from pyHerc.data.model import Character, WeaponProficiency
-from pyHerc.test import IntegrationTest
-from pyHerc.generators.level.testlevel import TestLevelGenerator
-from pyHerc.data.dungeon import Dungeon
-from pyHerc.rules.moving import deactivate
-from pyHerc.data.item import Item
+from pyherc.data.model import Character, WeaponProficiency
+from pyherc.test import IntegrationTest
+from pyherc.generators.level.testlevel import TestLevelGenerator
+from pyherc.data.dungeon import Dungeon
+from pyherc.rules.moving import deactivate
+from pyherc.data.item import Item
+
 
 class test_CreatureWithGenerator(IntegrationTest):
     """

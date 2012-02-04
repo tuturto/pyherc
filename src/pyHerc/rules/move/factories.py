@@ -3,29 +3,29 @@
 
 #   Copyright 2010-2011 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Attack related factories are defined here
 '''
 import types
 import logging
-import pyHerc.data.tiles
-from pyHerc.rules.move.action import MoveAction
-from pyHerc.rules.factory import SubActionFactory
+import pyherc.data.tiles
+from pyherc.rules.move.action import MoveAction
+from pyherc.rules.factory import SubActionFactory
 
 class WalkFactory(SubActionFactory):
     '''
@@ -35,7 +35,7 @@ class WalkFactory(SubActionFactory):
         '''
         Constructor for this factory
         '''
-        self.logger = logging.getLogger('pyHerc.rules.move.factories.WalkFactory')
+        self.logger = logging.getLogger('pyherc.rules.move.factories.WalkFactory')
         self.logger.debug('initialising WalkFactory')
         self.movement_mode = 'walk'
         self.logger.debug('WalkFactory initialised')
@@ -53,7 +53,7 @@ class WalkFactory(SubActionFactory):
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyHerc.rules.move.factories.WalkFactory')
+        self.logger = logging.getLogger('pyherc.rules.move.factories.WalkFactory')
 
     def __str__(self):
         return 'walk factory'
@@ -113,7 +113,7 @@ class WalkFactory(SubActionFactory):
                 newLocation = parameters.character.location
 
         #is new location blocked?
-        if newLevel.get_wall_tile(newLocation[0], newLocation[1]) != pyHerc.data.tiles.WALL_EMPTY:
+        if newLevel.get_wall_tile(newLocation[0], newLocation[1]) != pyherc.data.tiles.WALL_EMPTY:
             newLocation = parameters.character.location
 
         return MoveAction(parameters.character, newLocation, newLevel)
@@ -127,7 +127,7 @@ class MoveFactory(SubActionFactory):
         Constructor for this factory
         @param factories: a single Factory or list of Factories to use
         '''
-        self.logger = logging.getLogger('pyHerc.rules.move.factories.MoveFactory')
+        self.logger = logging.getLogger('pyherc.rules.move.factories.MoveFactory')
         self.logger.debug('initialising MoveFactory')
         self.action_type = 'move'
 
@@ -152,4 +152,4 @@ class MoveFactory(SubActionFactory):
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyHerc.rules.move.factories.MoveFactory')
+        self.logger = logging.getLogger('pyherc.rules.move.factories.MoveFactory')

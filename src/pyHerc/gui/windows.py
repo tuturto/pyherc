@@ -3,20 +3,20 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 import pickle
 import os, sys
@@ -25,19 +25,19 @@ import logging
 import surfaceManager
 import images
 import dialogs
-import pyHerc.rules.character
-import pyHerc.data.model
-import pyHerc.data.tiles
-import pyHerc.rules.items
-import pyHerc.rules.ending
-import pyHerc.rules.time
-import pyHerc.generators.dungeon
-import pyHerc.rules.tables
-import pyHerc.gui.startmenu
+import pyherc.rules.character
+import pyherc.data.model
+import pyherc.data.tiles
+import pyherc.rules.items
+import pyherc.rules.ending
+import pyherc.rules.time
+import pyherc.generators.dungeon
+import pyherc.rules.tables
+import pyherc.gui.startmenu
 import pgu.gui.app
-from pyHerc.rules.public import MoveParameters
-from pyHerc.rules.public import AttackParameters
-from pyHerc.rules.los import get_fov_matrix
+from pyherc.rules.public import MoveParameters
+from pyherc.rules.public import AttackParameters
+from pyherc.rules.los import get_fov_matrix
 from pygame.locals import KEYDOWN
 from pygame.locals import K_DOWN, K_UP
 from pygame.locals import K_SPACE, K_RETURN, K_ESCAPE, K_PERIOD
@@ -56,7 +56,7 @@ class MainWindow(pgu.gui.app.App):
         @surface_manager: optional SurfaceManger to use for loading resources
         """
         super(MainWindow, self).__init__(theme, **params)
-        self.logger = logging.getLogger('pyHerc.gui.windows.MainWindow')
+        self.logger = logging.getLogger('pyherc.gui.windows.MainWindow')
         self.logger.info('Initialising MainWindow')
         self.display = None
         self.application = application
@@ -73,7 +73,7 @@ class MainWindow(pgu.gui.app.App):
         This is the event handler for main window
         """
         self.logger.debug('Main loop starting')
-        self.display = pyHerc.gui.startmenu.StartMenu(self.application, self.screen, self.surface_manager)
+        self.display = pyherc.gui.startmenu.StartMenu(self.application, self.screen, self.surface_manager)
         self.display.mainLoop()
 
         self.logger.info('Quit received, exiting')
@@ -87,13 +87,13 @@ class StartNewGameWindow:
         self.running = 1
         self.application = application
         self.screen = screen
-        self.logger = logging.getLogger('pyHerc.gui.windows.StartNewGameWindow')
+        self.logger = logging.getLogger('pyherc.gui.windows.StartNewGameWindow')
         self.logger.debug('initialising display')
 
         self.surface_manager = surface_manager
         if self.surface_manager == None:
             self.logger.warn('Surface manager not specified, defaulting to the system one.')
-            self.surface_manager = pyHerc.gui.surfaceManager.SurfaceManager()
+            self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
             self.surface_manager.loadResources()
 
         self.logger.debug('display initialised')
@@ -107,11 +107,11 @@ class StartNewGameWindow:
 
     def __generateNewGame(self):
         #TODO: implement properly
-        self.application.world = pyHerc.data.model.Model()
+        self.application.world = pyherc.data.model.Model()
 
         self.application.initialise_factories(self.application.world)
 
-        tables = pyHerc.rules.tables.Tables()
+        tables = pyherc.rules.tables.Tables()
         tables.load_tables(self.application.base_path)
         self.application.world.tables = tables
         #TODO: load tables for model
@@ -121,9 +121,9 @@ class StartNewGameWindow:
         else:
             self.application.world.config['explore'] = 0
 
-        self.character = pyHerc.rules.character.create_character('human', 'fighter', self.application.get_action_factory())
+        self.character = pyherc.rules.character.create_character('human', 'fighter', self.application.get_action_factory())
         self.application.world.player = self.character
-        generator = pyHerc.generators.DungeonGenerator(self.application.get_action_factory())
+        generator = pyherc.generators.dungeon.DungeonGenerator(self.application.get_action_factory())
         generator.generate_dungeon(self.application.world)
         self.character.level = self.application.world.dungeon.levels
         # self.character.location = (1, 1)
@@ -139,7 +139,7 @@ class GameWindow:
     Window that displays the playing world
     """
     def __init__(self,  application, screen, surface_manager = None):
-        self.logger = logging.getLogger('pyHerc.gui.windows.GameWindow')
+        self.logger = logging.getLogger('pyherc.gui.windows.GameWindow')
         self.logger.debug('initialising display')
         self.application = application
         self.screen = screen
@@ -147,7 +147,7 @@ class GameWindow:
         self.surface_manager = surface_manager
         if self.surface_manager == None:
             self.logger.warn('Surface manager not specified, defaulting to the system one.')
-            self.surface_manager = pyHerc.gui.surfaceManager.SurfaceManager()
+            self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
             self.surface_manager.loadResources()
 
         if screen != None:
@@ -201,7 +201,7 @@ class GameWindow:
                             dialog = dialogs.Inventory(self.application, self.screen, self.surface_manager)
                             items = dialog.show(items)
                         for item in items:
-                            pyHerc.rules.items.pick_up(model, player, item)
+                            pyherc.rules.items.pick_up(model, player, item)
                         player.level.full_update_needed = True
                     elif event.key == K_i:
                         #display inventory
@@ -213,28 +213,28 @@ class GameWindow:
                         dialog = dialogs.Inventory(self.application, self.screen, self.surface_manager)
                         dropItems = dialog.show(player.inventory)
                         for item in dropItems:
-                            pyHerc.rules.items.drop(model, player, item)
+                            pyherc.rules.items.drop(model, player, item)
                         player.level.full_update_needed = True
                     elif event.key == K_w:
                         #wield weapons
                         dialog = dialogs.Inventory(self.application, self.screen, self.surface_manager)
                         wieldItems = dialog.show(player.inventory, 2)
                         for item in wieldItems:
-                            pyHerc.rules.items.wield(model, player, item, True)
+                            pyherc.rules.items.wield(model, player, item, True)
                         player.level.full_update_needed = True
                     elif event.key == K_r:
                         #unwield weapons
                         dialog = dialogs.Inventory(self.application, self.screen, self.surface_manager)
                         removable = dialog.show(player.weapons)
                         for item in removable:
-                            pyHerc.rules.items.unwield(model, player, item)
+                            pyherc.rules.items.unwield(model, player, item)
                         player.level.full_update_needed = True
                     elif event.key == K_q:
                         #quaff potion
                         dialog = dialogs.Inventory(self.application, self.screen, self.surface_manager)
                         potion = dialog.show(player.inventory, 1)
                         if len(potion) == 1:
-                            pyHerc.rules.items.drink_potion(model, player, potion[0])
+                            pyherc.rules.items.drink_potion(model, player, potion[0])
                         player.level.full_update_needed = True
             else:
                 return
@@ -245,7 +245,7 @@ class GameWindow:
 
             model = self.application.world
 
-            creature = pyHerc.rules.time.get_next_creature(model)
+            creature = pyherc.rules.time.get_next_creature(model)
 
             #TODO: do not paint screen all the time
             if creature == model.player:
@@ -338,15 +338,15 @@ class GameWindow:
                 if x >= 0 and y >= 0 and x <= len(level.floor)-1 and y <= len(level.floor[x])-1:
                     tile = self.surface_manager.getIcon(level.floor[x][y])
                     self.screen.blit(tile, (sx * 32, sy * 32 - 8))
-                    if not level.walls[x][y] == pyHerc.data.tiles.WALL_EMPTY:
+                    if not level.walls[x][y] == pyherc.data.tiles.WALL_EMPTY:
                         tile = self.surface_manager.getIcon(level.walls[x][y])
                         self.screen.blit(tile, (sx * 32, sy * 32 - 8))
                     if light_matrix[x][y] == False:
-                        tile = self.surface_manager.getIcon(pyHerc.data.tiles.FLOOR_EMPTY)
+                        tile = self.surface_manager.getIcon(pyherc.data.tiles.FLOOR_EMPTY)
                         self.screen.blit(tile, (sx * 32, sy * 32 - 8))
                 else:
                     #draw empty
-                    tile = self.surface_manager.getIcon(pyHerc.data.tiles.FLOOR_EMPTY)
+                    tile = self.surface_manager.getIcon(pyherc.data.tiles.FLOOR_EMPTY)
                     self.screen.blit(tile, (sx * 32, sy * 32 - 8))
                 sx = sx + 1
             sy = sy + 1

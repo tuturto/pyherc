@@ -3,28 +3,28 @@
 
 #   Copyright 2010 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-import pyHerc
-import pyHerc.rules.magic
-import pyHerc.data.model
-from pyHerc.data.item import Item
-from pyHerc.data.item import ItemEffectData
-from pyHerc.test import IntegrationTest
-from pyHerc.test import StubModel
+import pyherc
+import pyherc.rules.magic
+import pyherc.data.model
+from pyherc.data.item import Item
+from pyherc.data.item import ItemEffectData
+from pyherc.test import IntegrationTest
+from pyherc.test import StubModel
 
 class test_magic:
 
@@ -33,10 +33,10 @@ class test_magic:
         Test that a damage effect can be applied on a character
         """
         model = StubModel()
-        character = pyHerc.data.model.Character(None)
+        character = pyherc.data.model.Character(None)
         character.hit_points = 15
         character.max_hp = 15
-        pyHerc.rules.magic.cast_effect(
+        pyherc.rules.magic.cast_effect(
                             model, character,
                             ItemEffectData('on drink', 'damage', '1d10'), [10])
 
@@ -47,10 +47,10 @@ class test_magic:
         Test that a healing effect can be applied on a character
         """
         model = StubModel()
-        character = pyHerc.data.model.Character(None)
+        character = pyherc.data.model.Character(None)
         character.hit_points = 1
         character.max_hp = 15
-        pyHerc.rules.magic.cast_effect(
+        pyherc.rules.magic.cast_effect(
                             model, character,
                             ItemEffectData('on drink', 'healing', '1d10'), [10])
 
@@ -61,10 +61,10 @@ class test_magic:
         Test that character does not get healed over his maximum hp when getting healing effect
         """
         model = StubModel()
-        character = pyHerc.data.model.Character(None)
+        character = pyherc.data.model.Character(None)
         character.hit_points = 1
         character.max_hp = 5
-        pyHerc.rules.magic.cast_effect(
+        pyherc.rules.magic.cast_effect(
                         model, character,
                         ItemEffectData('on drink', 'healing', '1d10'), [10])
 
@@ -73,7 +73,7 @@ class test_magic:
 class test_magicWithGenerators(IntegrationTest):
 
     def setUp2(self):
-        self.character = pyHerc.data.model.Character(self.action_factory)
+        self.character = pyherc.data.model.Character(self.action_factory)
         self.character.hit_points = 1
         self.character.max_hp = 5
 
@@ -88,7 +88,7 @@ class test_magicWithGenerators(IntegrationTest):
         Test that empty potion has no effect
         """
         self.item.effects = {}
-        pyHerc.rules.items.drink_potion(self.model, self.character, self.item, [10])
+        pyherc.rules.items.drink_potion(self.model, self.character, self.item, [10])
 
         assert(self.character.hit_points == 1)
 
@@ -96,7 +96,7 @@ class test_magicWithGenerators(IntegrationTest):
         """
         Test that character drinking a healing potion gets healed
         """
-        pyHerc.rules.items.drink_potion(self.model, self.character, self.item, [10])
+        pyherc.rules.items.drink_potion(self.model, self.character, self.item, [10])
 
         assert(self.character.hit_points == 5)
         assert(self.item.maximum_charges_left() == 0)
@@ -105,7 +105,7 @@ class test_magicWithGenerators(IntegrationTest):
         """
         Test that drinking a potion correctly identifies it
         """
-        pyHerc.rules.items.drink_potion(self.model, self.character, self.item)
+        pyherc.rules.items.drink_potion(self.model, self.character, self.item)
 
         name = self.item.get_name(self.character)
         assert(name == 'healing potion')
@@ -115,7 +115,7 @@ class test_magicWithGenerators(IntegrationTest):
         Test that empty potion is discarded from character inventory
         """
         assert(self.item in self.character.inventory)
-        pyHerc.rules.items.drink_potion(self.model, self.character, self.item)
+        pyherc.rules.items.drink_potion(self.model, self.character, self.item)
         assert(not self.item in self.character.inventory)
 
     def test_drinking_potion_does_not_discard_it(self):
@@ -128,7 +128,7 @@ class test_magicWithGenerators(IntegrationTest):
         self.character.inventory.append(self.item)
 
         assert(self.item in self.character.inventory)
-        pyHerc.rules.items.drink_potion(self.model, self.character, self.item)
+        pyherc.rules.items.drink_potion(self.model, self.character, self.item)
         assert(self.item in self.character.inventory)
 
     def test_drinking_non_potion(self):
@@ -138,4 +138,4 @@ class test_magicWithGenerators(IntegrationTest):
         self.item = Item()
         self.item.name = 'club'
         self.character.inventory.append(self.item)
-        pyHerc.rules.items.drink_potion(self.model, self.character, self.item)
+        pyherc.rules.items.drink_potion(self.model, self.character, self.item)

@@ -3,30 +3,30 @@
 
 #   Copyright 2012 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Tests for CryptGenerator
 '''
-from pyHerc.generators.level.crypt import CryptGenerator
-from pyHerc.generators.level.crypt import CryptGeneratorFactory
-from pyHerc.generators.level.config import LevelGeneratorConfig
-from pyHerc.rules import ActionFactory
-from pyHerc.data import Portal
-from pyHerc.data import Model
+from pyherc.generators.level.crypt import CryptGenerator
+from pyherc.generators.level.crypt import CryptGeneratorFactory
+from pyherc.generators.level.config import LevelGeneratorConfig
+from pyherc.rules import ActionFactory
+from pyherc.data import Portal
+from pyherc.data import Model
 
 from mock import Mock
 

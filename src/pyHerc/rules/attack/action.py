@@ -3,26 +3,26 @@
 
 #   Copyright 2010-2011 Tuukka Turto
 #
-#   This file is part of pyHerc.
+#   This file is part of pyherc.
 #
-#   pyHerc is free software: you can redistribute it and/or modify
+#   pyherc is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
 #
-#   pyHerc is distributed in the hope that it will be useful,
+#   pyherc is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with pyHerc.  If not, see <http://www.gnu.org/licenses/>.
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
 Module defining classes related to AttackAction
 '''
-import pyHerc.rules.time
-import pyHerc.rules.ending
+import pyherc.rules.time
+import pyherc.rules.ending
 import random
 
 class AttackAction():
@@ -54,10 +54,10 @@ class AttackAction():
             self.damage.apply_damage(self.target)
             #TODO: raise events
 
-        pyHerc.rules.ending.check_dying(self.model, self.target, self.model)
+        pyherc.rules.ending.check_dying(self.model, self.target, self.model)
 
         #TODO: just a temporary time
-        self.attacker.tick = pyHerc.rules.time.get_new_tick(self.attacker, 20)
+        self.attacker.tick = pyherc.rules.time.get_new_tick(self.attacker, 20)
 
 
 class ToHit(object):
@@ -73,7 +73,7 @@ class ToHit(object):
         self.attacker = attacker
         self.target = target
         self.rng = random_number_generator
-        self.logger = logging.getLogger('pyHerc.rules.attack.action.ToHit')
+        self.logger = logging.getLogger('pyherc.rules.attack.action.ToHit')
 
     def is_hit(self):
         '''
@@ -104,7 +104,7 @@ class Damage(object):
         '''
         Default constructor
         '''
-        self.logger = logging.getLogger('pyHerc.rules.attack.action.Damage')
+        self.logger = logging.getLogger('pyherc.rules.attack.action.Damage')
         self.damage = damage
 
     def apply_damage(self, target):
