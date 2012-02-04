@@ -139,4 +139,5 @@ class test_RandomConnector:
         assert len(connected_sections) == 4
 
         for section in connected_sections:
-            assert len(section.connections) == 2
+            assert len(section.connections) > 0
+            assert section.connected == True

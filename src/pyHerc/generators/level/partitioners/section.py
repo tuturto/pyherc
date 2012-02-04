@@ -26,9 +26,24 @@ class Section(object):
         '''
         Default constructor
         '''
-        self.corners = corners
+        self.__corners = corners
+        self.__connected = False
         self.__connections = []
         self.__neighbours = []
+
+    @property
+    def corners(self):
+        '''
+        Get corners of this section
+        '''
+        return self.__corners
+
+    @corners.setter
+    def corners(self, value):
+        '''
+        Set corners of this section
+        '''
+        self.__corners = value
 
     @property
     def connections(self):
@@ -43,3 +58,14 @@ class Section(object):
         List of sections next to this one
         '''
         return self.__neighbours
+
+    @property
+    def connected(self):
+        '''
+        Is this section connected to a neighbour
+        '''
+        return self.__connected
+
+    @connected.setter
+    def connected(self, value):
+        self.__connected = value

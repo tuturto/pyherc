@@ -47,15 +47,32 @@ class RandomConnector(object):
 
         start_location = self.random_generator.choice(sections)
 
-        if len(start_location.neighbours) > 0:
-            next_section = self.random_generator.choice(
-                                                    start_location.neighbours)
-            start_location.connections.append(next_section)
-            next_section.connections.append(start_location)
-        else:
-            self.logger.warning('no neighbours defined')
+        self.form_path_from_sections(start_location, sections)
 
         return sections
+
+    def form_path_from_sections(self, start_section, sections):
+        '''
+        Builds path of connected sections
+        @param start_section: Section to start connecting from
+        @param sections: List of sections to connect
+        '''
+        current_section = start_section
+        unconnected_neighbours = [x for x in current_section.neighbours
+                                                if x.connected == False]
+
+        while len(unconnected_neighbours) > 0:
+            next_section = self.random_generator.choice(
+                                                unconnected_neighbours)
+            current_section.connections.append(next_section)
+            current_section.connected = True
+            next_section.connections.append(current_section)
+            next_section.connected = True
+
+            current_section = next_section
+            unconnected_neighbours = [x for x in current_section.neighbours
+                                                if x.connected == False]
+
 
 class GridPartitioner(object):
     '''
