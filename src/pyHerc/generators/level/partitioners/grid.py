@@ -38,16 +38,26 @@ class RandomConnector(object):
         self.random_generator = random_generator
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.grid.RandomConnector')
 
-    def connect_sections(self, sections):
+    def connect_sections(self, sections, start_section = None):
         '''
         Connects sections together
         @param sections: List of Sections to connect
+        @param start_section: optional parameter specifying starting section
         '''
         self.logger.debug('connecting sections')
 
-        start_location = self.random_generator.choice(sections)
+        if start_section == None:
+            start_location = self.random_generator.choice(sections)
+        else:
+            start_location = start_section
 
         self.form_path_from_sections(start_location, sections)
+
+        unconnected_neighbours = [x for x in sections
+                                                if x.connected == False]
+
+        if len(unconnected_neighbours) > 0:
+            self.logger.debug('branch detected')
 
         return sections
 

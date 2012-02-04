@@ -93,13 +93,16 @@ class test_RandomConnector:
     '''
     Tests for RandomConnector class
     '''
+    def setup(self):
+        '''
+        Setup the test cases
+        '''
+        self.connector = RandomConnector()
 
     def test_connect_two_sections(self):
         '''
         Test that two adjacent sections can be connected
         '''
-        connector = RandomConnector()
-
         section1 = Section(())
         section2 = Section(())
 
@@ -108,7 +111,7 @@ class test_RandomConnector:
 
         sections = [section1, section2]
 
-        connected_sections = connector.connect_sections(sections)
+        connected_sections = self.connector.connect_sections(sections)
 
         assert connected_sections[1] in connected_sections[0].connections
 
@@ -116,8 +119,6 @@ class test_RandomConnector:
         '''
         Test that 2x2 grid is fully connected
         '''
-        connector = RandomConnector()
-
         section00 = Section(())
         section10 = Section(())
         section01 = Section(())
@@ -134,9 +135,39 @@ class test_RandomConnector:
 
         sections = [section00, section10, section01, section11]
 
-        connected_sections = connector.connect_sections(sections)
+        connected_sections = self.connector.connect_sections(sections)
 
         assert len(connected_sections) == 4
+
+        for section in connected_sections:
+            assert len(section.connections) > 0
+            assert section.connected == True
+
+    def test_connect_row_of_sections(self):
+        '''
+        Test special case where connections have to branch
+
+        Row of Sections is connected, starting from the middle
+        RandomConnector can not connect this in one path, but has to branch
+        '''
+        section0 = Section(())
+        section1 = Section(())
+        section2 = Section(())
+        section3 = Section(())
+        section4 = Section(())
+
+        section0.neighbours.append(section1)
+        section1.neighbours.append(section0)
+        section1.neighbours.append(section2)
+        section2.neighbours.append(section1)
+        section2.neighbours.append(section3)
+        section3.neighbours.append(section2)
+        section3.neighbours.append(section4)
+        section4.neighbours.append(section3)
+
+        sections = [section0, section1, section2, section3, section4]
+
+        connected_sections = self.connector.connect_sections(sections, section2)
 
         for section in connected_sections:
             assert len(section.connections) > 0
