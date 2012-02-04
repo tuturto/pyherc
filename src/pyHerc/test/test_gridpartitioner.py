@@ -44,6 +44,18 @@ class test_GridPartitioner:
 
         assert len(sections) == 9
 
+    def test_sections_have_neighbours(self):
+        '''
+        Test that sections are marked being neighbours
+        '''
+        mock_level = Mock(Level)
+        mock_level.get_size.return_value = (20, 20)
+
+        partitioner = GridPartitioner()
+        sections = partitioner.partition_level(mock_level, 2, 1)
+
+        assert len(sections[0].neighbours) == 1
+
     def test_partitioned_sections_are_linked(self):
         '''
         Partitioned sections should be linked together
@@ -88,8 +100,12 @@ class test_RandomConnector:
         '''
         connector = RandomConnector()
 
-        section1 = Section(((0, 10), (0, 10)))
-        section2 = Section(((11, 20), (0, 10)))
+        section1 = Section(())
+        section2 = Section(())
+
+        section1.neighbours.append(section2)
+        section2.neighbours.append(section1)
+
         sections = [section1, section2]
 
         connected_sections = connector.connect_sections(sections)

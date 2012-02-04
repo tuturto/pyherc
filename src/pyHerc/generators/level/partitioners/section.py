@@ -28,6 +28,7 @@ class Section(object):
         '''
         self.corners = corners
         self.__connections = []
+        self.__neighbours = []
 
     @property
     def connections(self):
@@ -35,3 +36,10 @@ class Section(object):
         List of connections this section has
         '''
         return self.__connections
+
+    @property
+    def neighbours(self):
+        '''
+        List of sections next to this one
+        '''
+        return self.__neighbours
