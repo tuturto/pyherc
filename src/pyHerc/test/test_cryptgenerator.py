@@ -32,12 +32,6 @@ from mock import Mock
 
 import random
 
-class TestCryptGenerator():
-    '''
-    Class for testing CryptGenerator
-    '''
-    pass
-
 class TestCryptGeneratorFactory:
     '''
     Class for testing CryptGeneratorFactory

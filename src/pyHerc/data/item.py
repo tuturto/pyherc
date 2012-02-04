@@ -29,7 +29,7 @@ Classes:
 
 import collections
 
-class Item:
+class Item(object):
     """
     Represents item
     """

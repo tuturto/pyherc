@@ -31,41 +31,50 @@ class Section(object):
         self.__connections = []
         self.__neighbours = []
 
-    @property
-    def corners(self):
+    def get_corners(self):
         '''
         Get corners of this section
         '''
         return self.__corners
 
-    @corners.setter
-    def corners(self, value):
+    def set_corners(self, corners):
         '''
         Set corners of this section
+        @param corners: corners to set
         '''
-        self.__corners = value
+        self.__corners = corners
 
-    @property
-    def connections(self):
+    def get_connections(self):
         '''
         List of connections this section has
         '''
         return self.__connections
 
-    @property
-    def neighbours(self):
+    def get_neighbours(self):
         '''
         List of sections next to this one
         '''
         return self.__neighbours
 
-    @property
-    def connected(self):
+    def get_connected(self):
         '''
         Is this section connected to a neighbour
         '''
         return self.__connected
 
-    @connected.setter
-    def connected(self, value):
+    def set_connected(self, value):
         self.__connected = value
+
+    corners = property(get_corners)
+    connections = property(get_connections)
+    neighbours = property(get_neighbours)
+    connected = property(get_connected, set_connected)
+
+    def connect_to(self, section):
+        '''
+        Connect this Section to another
+        '''
+        self.connected = True
+        section.connected = True
+        self.connections.append(section)
+        section.connections.append(self)
