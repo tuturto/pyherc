@@ -111,3 +111,32 @@ class test_RandomConnector:
         connected_sections = connector.connect_sections(sections)
 
         assert connected_sections[1] in connected_sections[0].connections
+
+    def test_connecting_2x2_grid(self):
+        '''
+        Test that 2x2 grid is fully connected
+        '''
+        connector = RandomConnector()
+
+        section00 = Section(())
+        section10 = Section(())
+        section01 = Section(())
+        section11 = Section(())
+
+        section00.neighbours.append(section10)
+        section00.neighbours.append(section01)
+        section10.neighbours.append(section00)
+        section10.neighbours.append(section11)
+        section01.neighbours.append(section00)
+        section01.neighbours.append(section11)
+        section11.neighbours.append(section10)
+        section11.neighbours.append(section01)
+
+        sections = [section00, section10, section01, section11]
+
+        connected_sections = connector.connect_sections(sections)
+
+        assert len(connected_sections) == 4
+
+        for section in connected_sections:
+            assert len(section.connections) == 2
