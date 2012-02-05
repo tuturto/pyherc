@@ -1,0 +1,54 @@
+Thynian lush jungle
+==============
+ - hidden ruins of the city Herculeum
+   - under the city are catacombs that continue deep inside of earth
+   - catacombs connect to vast network of caves
+   - nobody really knows how far they reach
+ - ruins of Herculeum are inhabited by several tribes
+   - each tribe has their own turf and they battle constantly with each other
+   - live sacrifices to attain favours from old gods
+
+dungeons on city Herculeum
+  - catacombs under the city
+    - used to bury the dead
+    - storage and laboratories of alchemist at the bottom levels
+      - branched of from the main catacombs (alchemist's dungeon)
+      - 2-3 levels deep (inverted)
+      - filled with artificial monsters (golems, constructs, automatons)
+      - contains some artifacts still
+        - most have been stolen during long years
+      - special events and such
+        - "smell of chemicals permeate the air", alchemy table present
+        - "you hear clanking of metal", golem / construct workshop present
+        - "you hear ticking of clocks", automaton workshop present
+      - special rooms
+        - alchemist's laboratory
+          - potions
+          - brewing tools
+        - golem workshop
+          - golems present in level
+          - tools at workshop
+        - automaton workshop
+          - mechanical models of stars and planets
+          - engraved diagrams
+          - tools
+
+http://www.dragonsfoot.org/sw/#swru29
+
+- Inquisition
+  - hunting witches that have following in Herculeum
+  - hunting daemons that live underneath
+
+- Ruins are filled with ancient artefacts
+  - adventurers try to seek them
+  - some have been uncovered
+    - mechanical devices showing position of sun, moon and planets
+    - engraved discs containing descriptions of strange items and diagrams of planetary motions
+
+Character classes
+=============
+Inquisitor
+    - Acolyte, Inquisitor, Ordo Hereticus / Ordo Malleus Inquisitor Lord
+    - accompanied by familiar
+Fighter
+    - accompanied by dog
