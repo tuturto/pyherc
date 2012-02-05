@@ -24,6 +24,7 @@ Module defining classes related to AttackAction
 import pyherc.rules.time
 import pyherc.rules.ending
 import random
+import logging
 
 class AttackAction():
     '''

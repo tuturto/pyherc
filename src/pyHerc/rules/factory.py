@@ -21,8 +21,9 @@
 '''
 Factory related classes are defined here
 '''
+import logging
 
-class SubActionFactory():
+class SubActionFactory(object):
     '''
     Factory to handle concrete creation of actions
     '''
@@ -31,6 +32,8 @@ class SubActionFactory():
         Constructor for this factory
         '''
         self.action_type = 'default'
+        self.logger = logging.getLogger('pyherc.rules.factory.SubActionFactory')
+        self.factories = []
 
     def get_sub_factory(self, parameters):
         '''

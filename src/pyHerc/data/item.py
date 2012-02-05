@@ -37,6 +37,7 @@ class Item(object):
     def __init__(self):
         #attributes
         self.name = 'prototype'
+        self.appearance = ''
         self.quest_item = 0
         #location
         self.location = ()
@@ -58,7 +59,7 @@ class Item(object):
         """
         assert character != None
 
-        if hasattr(self, 'appearance'):
+        if self.appearance != '':
             if self.name in character.item_memory.keys():
                 name = character.item_memory[self.name]
             else:

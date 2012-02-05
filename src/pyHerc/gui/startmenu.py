@@ -68,4 +68,5 @@ class StartMenu(pgu.gui.Container):
         self.repaint()
 
     def __quit_game(self):
+        #pylint: disable=E1103
         self.get_toplevel().quit()

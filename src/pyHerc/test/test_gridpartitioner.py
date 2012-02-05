@@ -32,15 +32,20 @@ class test_GridPartitioner:
     '''
     Tests for GridPartitioner
     '''
+    def setup(self):
+        '''
+        Setup tests
+        '''
+        self.mock_level = Mock(Level)
+        self.mock_level.get_size.return_value = (20, 20)
+
+        self.partitioner = GridPartitioner()
+
     def test_partitioning_returns_sections(self):
         '''
         Test that partitioning level returns default amount of sections
         '''
-        mock_level = Mock(Level)
-        mock_level.get_size.return_value = (20, 20)
-
-        partitioner = GridPartitioner()
-        sections = partitioner.partition_level(mock_level, 3, 3)
+        sections = self.partitioner.partition_level(self.mock_level, 3, 3)
 
         assert len(sections) == 9
 
@@ -48,11 +53,7 @@ class test_GridPartitioner:
         '''
         Test that sections are marked being neighbours
         '''
-        mock_level = Mock(Level)
-        mock_level.get_size.return_value = (20, 20)
-
-        partitioner = GridPartitioner()
-        sections = partitioner.partition_level(mock_level, 2, 1)
+        sections = self.partitioner.partition_level(self.mock_level, 2, 1)
 
         assert len(sections[0].neighbours) == 1
 
@@ -60,11 +61,7 @@ class test_GridPartitioner:
         '''
         Partitioned sections should be linked together
         '''
-        mock_level = Mock(Level)
-        mock_level.get_size.return_value = (20, 20)
-
-        partitioner = GridPartitioner()
-        sections = partitioner.partition_level(mock_level, 2, 2)
+        sections = self.partitioner.partition_level(self.mock_level, 2, 2)
 
         assert len(sections) == 4
 

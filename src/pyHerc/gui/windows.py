@@ -68,17 +68,6 @@ class MainWindow(pgu.gui.app.App):
 
         self.surface_manager = surface_manager
 
-    def mainLoop(self):
-        """
-        This is the event handler for main window
-        """
-        self.logger.debug('Main loop starting')
-        self.display = pyherc.gui.startmenu.StartMenu(self.application, self.screen, self.surface_manager)
-        self.display.mainLoop()
-
-        self.logger.info('Quit received, exiting')
-        sys.exit()
-
 class StartNewGameWindow:
     """
     Window that is displayed when player starts a new game
