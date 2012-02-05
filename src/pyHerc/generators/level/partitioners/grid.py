@@ -109,6 +109,7 @@ class GridPartitioner(object):
         '''
         Creates partitioning for a given level with connection points
         @param level: Level to partition
+        @returns: List of connected sections
         '''
         sections = []
         section_matrix = [[None for i in range(y_sections)]

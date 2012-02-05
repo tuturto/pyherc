@@ -14,6 +14,12 @@ Python 2.6.1
 PyGame 1.9.2
 PGU 0.18
 Mock 0.7.2 (only needed for running test cases)
+Sphinx 1.1.2 (only needed for generating documentation)
+
+Manual
+======
+Manual can be found at doc - directory
+Online manual is available at: http://tuturto.github.com/pyherc/index.html
 
 Credits
 =======

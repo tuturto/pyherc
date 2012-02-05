@@ -22,6 +22,7 @@ import logging
 import random
 from pyherc.generators import ItemGenerator
 from pyherc.generators import CreatureGenerator
+from pyherc.data import Level
 
 class CryptGeneratorFactory:
     '''
@@ -65,6 +66,7 @@ class CryptGenerator:
 
         self.action_factory = action_factory
         self.level_partitioners = configuration.level_partitioners
+        self.room_generators = configuration.room_generators
 
     def __getstate__(self):
         '''
@@ -85,10 +87,18 @@ class CryptGenerator:
         '''
         Generate crypt level
         '''
-        # partition level
+        self.logger.debug('creating a new level')
+        new_level = Level((60, 40))
+
+        self.logger.debug('partitioning level')
         partitioner = self.random_generator.choice(self.level_partitioners)
-        partitioner.partition_level()
-        # generate rooms
+        sections = partitioner.partition_level(level, 4, 3)
+
+        self.logger.debug('generating rooms')
+        for section in sections:
+            room_generator = self.random_generator.choice(self.room_generators)
+            room_generator.generate_room(section)
+
         # decorate level
         # add stairs
         # add monsters

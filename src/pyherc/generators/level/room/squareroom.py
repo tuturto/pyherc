@@ -19,38 +19,15 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
-Classes for configuring level generation
+Classes for generating square rooms
 '''
-class LevelGeneratorConfig():
+
+class SquareRoom(object):
     '''
-    Class to configure level generator
+    Class for generating a square room
     '''
     def __init__(self):
         '''
         Default constructor
         '''
-        self.__room_generators = []
-        self.__level_partitioners = []
-        self.__decorators = []
-
-    def get_level_partitioners(self):
-        '''
-        Get level partitioners in this configurations
-        '''
-        return self.__level_partitioners
-
-    def get_room_generators(self):
-        '''
-        Get room generators in this configuration
-        '''
-        return self.__room_generators
-
-    def get_decorators(self):
-        '''
-        Get level decorators in this configuration
-        '''
-        return self.__decorators
-
-    level_partitioners = property(get_level_partitioners)
-    room_generators = property(get_room_generators)
-    decorators = property(get_decorators)
+        pass
