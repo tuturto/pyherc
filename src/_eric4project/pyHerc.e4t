@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyherc -->
-<!-- Saved: 2012-02-05, 09:41:05 -->
+<!-- Saved: 2012-02-05, 11:27:13 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: correct graphics</Summary>
@@ -460,6 +460,24 @@
     <Resource>
       <Filename>pyherc/gui/startmenu.py</Filename>
       <Linenumber>56</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: filter events</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 10:16:23</Created>
+    <Resource>
+      <Filename>pyherc/data/model.py</Filename>
+      <Linenumber>79</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: support for level generation parameters</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 11:21:49</Created>
+    <Resource>
+      <Filename>pyherc/data/dungeon.py</Filename>
+      <Linenumber>346</Linenumber>
     </Resource>
   </Task>
 </Tasks>

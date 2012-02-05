@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+# usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #   Copyright 2012 Tuukka Turto
@@ -22,5 +22,4 @@
 Package for level partitioners and related classes
 '''
 
-from .grid import GridPartitioner
-
+pass

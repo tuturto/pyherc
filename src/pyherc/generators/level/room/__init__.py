@@ -22,4 +22,5 @@
 Package for room generators
 '''
 
-pass
+from .squareroom import SquareRoom
+

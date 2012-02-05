@@ -109,6 +109,6 @@ class TestCryptGenerator:
         generator.generate_level(mock_portal, mock_model)
 
         assert mock_partitioner.partition_level.called
-        assert mock_room_generator.generate_room.called
+        assert mock_room_generator.generate_room.call_count == 2
         assert mock_level_decorator.decorate_level.called
         assert mock_stair_adder.add_stairs.called

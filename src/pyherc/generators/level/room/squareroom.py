@@ -31,3 +31,11 @@ class SquareRoom(object):
         Default constructor
         '''
         pass
+
+    def generate_room(self, level, section):
+        '''
+        Generate room
+        @param level: Level to modify
+        @param section: Section that generator is allowed to change
+        '''
+        pass

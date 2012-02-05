@@ -97,7 +97,7 @@ class CryptGenerator:
         self.logger.debug('generating rooms')
         for section in sections:
             room_generator = self.random_generator.choice(self.room_generators)
-            room_generator.generate_room(section)
+            room_generator.generate_room(new_level, section)
 
         # decorate level
         # add stairs
