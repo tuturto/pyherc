@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-01-30, 20:51:33 -->
+<!-- Saved: 2012-02-05, 09:20:17 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -78,6 +78,7 @@
     <Source>pyherc/generators/level/partitioners/section.py</Source>
     <Source>pyherc/generators/level/partitioners/__init__.py</Source>
     <Source>pyherc/test/test_level.py</Source>
+    <Source>pyherc/test/test_section.py</Source>
   </Sources>
   <Forms>
   </Forms>

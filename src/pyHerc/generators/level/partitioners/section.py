@@ -78,3 +78,18 @@ class Section(object):
         section.connected = True
         self.connections.append(section)
         section.connections.append(self)
+
+    def unconnected_neighbours(self):
+        '''
+        Get list of unconnected neighbours
+        @returns: List of unconnected neighbours
+        '''
+        return [x for x in self.neighbours
+                        if x.connected == False]
+
+    def has_unconnected_neighbours(self):
+        '''
+        Check if any of this Sections neighbours is unconnected
+        @returns: True if unconnected neighbour is found, otherwise false
+        '''
+        return len(self.unconnected_neighbours()) > 0

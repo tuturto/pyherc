@@ -53,11 +53,21 @@ class RandomConnector(object):
 
         self.form_path_from_sections(start_location, sections)
 
-        unconnected_neighbours = [x for x in sections
+        unconnected_sections = [x for x in sections
                                                 if x.connected == False]
 
-        if len(unconnected_neighbours) > 0:
-            self.logger.debug('branch detected')
+        while len(unconnected_sections) > 0:
+            self.logger.debug('branching')
+            edge_sections = [x for x in sections
+                             if x.connected == True
+                             and x.has_unconnected_neighbours()]
+
+            start_location = self.random_generator.choice(edge_sections)
+
+            self.form_path_from_sections(start_location, sections)
+
+            unconnected_sections = [x for x in sections
+                                                if x.connected == False]
 
         return sections
 

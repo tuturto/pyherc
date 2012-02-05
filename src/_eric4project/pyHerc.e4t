@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
-<!-- eric4 tasks file for project pyHerc -->
-<!-- Saved: 2012-02-01, 07:48:53 -->
+<!-- eric4 tasks file for project pyherc -->
+<!-- Saved: 2012-02-05, 09:41:05 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: correct graphics</Summary>
@@ -343,6 +343,123 @@
     <Resource>
       <Filename>pyHerc/rules/attack/action.py</Filename>
       <Linenumber>59</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: raise events</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 08:57:44</Created>
+    <Resource>
+      <Filename>pyherc/rules/attack/action.py</Filename>
+      <Linenumber>56</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: just a temporary time</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 08:57:44</Created>
+    <Resource>
+      <Filename>pyherc/rules/attack/action.py</Filename>
+      <Linenumber>60</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement menu here</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 09:02:56</Created>
+    <Resource>
+      <Filename>pyherc/gui/windows.py</Filename>
+      <Linenumber>93</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement properly</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 09:02:56</Created>
+    <Resource>
+      <Filename>pyherc/gui/windows.py</Filename>
+      <Linenumber>98</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: load tables for model</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 09:02:56</Created>
+    <Resource>
+      <Filename>pyherc/gui/windows.py</Filename>
+      <Linenumber>106</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: melee / unarmed selection</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 09:02:56</Created>
+    <Resource>
+      <Filename>pyherc/gui/windows.py</Filename>
+      <Linenumber>182</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: do not paint screen all the time</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 09:02:56</Created>
+    <Resource>
+      <Filename>pyherc/gui/windows.py</Filename>
+      <Linenumber>239</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: set dirty rectangles properly</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 09:02:57</Created>
+    <Resource>
+      <Filename>pyherc/gui/windows.py</Filename>
+      <Linenumber>250</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: when dirty rectangles work, uncomment this</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 09:02:57</Created>
+    <Resource>
+      <Filename>pyherc/gui/windows.py</Filename>
+      <Linenumber>253</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: don't call during each and every update</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 09:02:57</Created>
+    <Resource>
+      <Filename>pyherc/gui/windows.py</Filename>
+      <Linenumber>317</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: make more generic and clean up</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 09:02:57</Created>
+    <Resource>
+      <Filename>pyherc/gui/windows.py</Filename>
+      <Linenumber>321</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: world initialisation needs action factory</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 09:09:53</Created>
+    <Resource>
+      <Filename>pyherc/gui/startmenu.py</Filename>
+      <Linenumber>55</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: action factory needs world</Summary>
+    <Description></Description>
+    <Created>2012-02-05, 09:09:53</Created>
+    <Resource>
+      <Filename>pyherc/gui/startmenu.py</Filename>
+      <Linenumber>56</Linenumber>
     </Resource>
   </Task>
 </Tasks>
