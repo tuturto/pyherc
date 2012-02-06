@@ -18,6 +18,11 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+Classes for generating test levels
+These levels are not used in game, their function is to help in testing
+'''
+
 import logging
 import random
 import pyherc.generators.item

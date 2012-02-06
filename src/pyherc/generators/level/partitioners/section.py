@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+Classes to represent division of levels
+'''
+
 class Section(object):
     '''
     Class representing a single section in a level
@@ -62,8 +66,12 @@ class Section(object):
         '''
         return self.__connected
 
-    def set_connected(self, value):
-        self.__connected = value
+    def set_connected(self, connected):
+        '''
+        Set if this level is connected
+        @param connected: Boolean indicating if this level is connected
+        '''
+        self.__connected = connected
 
     corners = property(get_corners)
     connections = property(get_connections)
