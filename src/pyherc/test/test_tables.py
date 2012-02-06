@@ -22,6 +22,12 @@ import pyherc
 
 class test_Tables:
 
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
     def test_reading_simple_item_config(self):
         itemConfig = """
             <items>

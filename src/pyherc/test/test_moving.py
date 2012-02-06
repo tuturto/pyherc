@@ -31,6 +31,12 @@ import pyherc.rules.moving
 
 class TestMoving(IntegrationTest):
 
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
     def setUp2(self):
         self.character = Character(self.action_factory)
         levelGenerator = TestLevelGenerator(self.action_factory)

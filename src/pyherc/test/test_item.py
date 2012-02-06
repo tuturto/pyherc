@@ -36,6 +36,11 @@ class TestItemWithGenerator(IntegrationTest):
     """
     Tests for items that require item generator to be working
     """
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def setUp2(self):
         self.item = None
@@ -258,6 +263,11 @@ class TestItemsInLevel:
     '''
     Tests performed with items that are placed on levels
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def setup(self):
         self.item = None
@@ -384,6 +394,11 @@ class TestItemAdvanced():
     """
     Testing more advanced features of item class
     """
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def test_appearance_of_unknown(self):
         """"
@@ -455,6 +470,11 @@ class TestItemEffects:
     '''
     Tests related to effects on items
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def setup(self):
         '''
@@ -515,6 +535,11 @@ class TestItemCharges:
     '''
     Test charge handling of items
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def setup(self):
         '''

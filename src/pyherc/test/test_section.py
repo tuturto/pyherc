@@ -27,6 +27,12 @@ class TestSectionConnections():
     '''
     Class for testing Section
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
     def setup(self):
         '''
         Setup test case

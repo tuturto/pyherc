@@ -32,6 +32,12 @@ class TestSquareRoom():
     '''
     Tests for SquareRoom room generator
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
     def test_generate_simple_room(self):
         '''
         Test that generator can create a simple room

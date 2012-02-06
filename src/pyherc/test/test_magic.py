@@ -26,7 +26,13 @@ from pyherc.data.item import ItemEffectData
 from pyherc.test import IntegrationTest
 from pyherc.test import StubModel
 
-class test_magic:
+class TestMagic:
+
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def test_damage_effect(self):
         """
@@ -70,7 +76,13 @@ class test_magic:
 
         assert(character.hit_points == 5)
 
-class test_magicWithGenerators(IntegrationTest):
+class TestMagicWithGenerators(IntegrationTest):
+
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def setUp2(self):
         self.character = pyherc.data.model.Character(self.action_factory)

@@ -26,7 +26,13 @@ from pyherc.data.dungeon import Dungeon
 from pyherc.data.dungeon import Level
 
 
-class test_Time:
+class TestTime:
+
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def setup(self):
         self.creature1 = Character(None)

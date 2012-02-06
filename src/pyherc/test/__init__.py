@@ -97,6 +97,12 @@ class StubSurfaceManager():
     '''
     Simple stub to act as a surface manager
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
     def loadResources(self):
         pass
 
@@ -110,11 +116,22 @@ class StubModel():
     """
     Simple stub to act as model and do nothing
     """
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def raise_event(self, event):
         pass
 
 class IntegrationTest():
+
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def setup(self):
         itemConfig = """

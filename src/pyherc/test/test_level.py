@@ -28,6 +28,12 @@ class TestLevel:
     '''
     Tests for Level
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
     def test_get_size(self):
         '''
         Test that Level can report size
