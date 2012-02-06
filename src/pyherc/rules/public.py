@@ -88,6 +88,7 @@ class ActionParameters():
         Default constructor
         '''
         self.action_type = 'default'
+        self.model = None
 
     def set_model(self, model):
         self.model = model

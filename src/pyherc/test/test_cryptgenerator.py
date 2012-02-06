@@ -39,6 +39,15 @@ class TestCryptGeneratorFactory:
     '''
     Class for testing CryptGeneratorFactory
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        self.mock_action_factory = None
+        self.mock_config = None
+        self.mock_partitioner = None
+        self.factory = None
+
     def setup(self):
         '''
         Setup test case
@@ -63,6 +72,12 @@ class TestCryptGeneratorFactoryConfiguration:
     '''
     Class for testing configuring of CryptGeneratorFactory
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
     def test_passing_partitioner_to_generator(self):
         '''
         Test that LevelPartitioner is correctly passed to CryptGenerator
@@ -83,6 +98,12 @@ class TestCryptGenerator:
     '''
     Class for testing CryptGenerator
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
     def test_level_generation_steps(self):
         '''
         Test that level generation steps are done

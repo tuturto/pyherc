@@ -31,6 +31,11 @@ class test_CreatureWithGenerator(IntegrationTest):
     """
     Tests for creatures that require generators to be working
     """
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def test_rat_generation(self):
         """
@@ -57,6 +62,15 @@ class test_CreatureWithGenerator(IntegrationTest):
         assert(creature.is_proficient(weapon) == True)
 
 class TestStatues(IntegrationTest):
+    '''
+    Test handling of statues (mainly mimicing items)
+    '''
+
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def test_deactivating_creature(self):
         '''

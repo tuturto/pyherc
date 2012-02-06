@@ -28,10 +28,17 @@ from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
 from mock import Mock
 
-class test_GridPartitioner:
+class TestGridPartitioner:
     '''
     Tests for GridPartitioner
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        self.mock_level = None
+        self.partitioner = None
+
     def setup(self):
         '''
         Setup tests
@@ -67,10 +74,15 @@ class test_GridPartitioner:
 
         assert len(sections[0].connections) > 0
 
-class test_GridPartitionerUtilities:
+class TestGridPartitionerUtilities:
     '''
     Tests for various utility methods
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def test_splitting_range(self):
         '''
@@ -90,6 +102,12 @@ class test_RandomConnector:
     '''
     Tests for RandomConnector class
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
     def setup(self):
         '''
         Setup the test cases

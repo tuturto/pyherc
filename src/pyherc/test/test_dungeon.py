@@ -22,7 +22,13 @@ from pyherc.data.dungeon import Level
 from pyherc.data.dungeon import Portal
 from pyherc.data import tiles
 
-class test_dungeon:
+class TestDungeon:
+
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def test_simple_level_creation(self):
         level = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)

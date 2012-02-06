@@ -19,8 +19,6 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 import logging
-import time
-import pyherc.data.model
 
 __logger = logging.getLogger('pyherc.rules.moving')
 

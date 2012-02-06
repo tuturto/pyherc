@@ -31,6 +31,11 @@ class TestGameWindow:
     '''
     Tests for main game window
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def test_formatting_event_history_less_than_five_items(self):
         '''
@@ -87,6 +92,12 @@ class TestInventoryDialog(IntegrationTest):
     '''
     Tests for Inventory dialog
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
     def test_sort_items(self):
         '''
         Test that items can be sorted by their type

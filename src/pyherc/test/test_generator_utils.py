@@ -21,7 +21,13 @@
 import pyherc
 import pyherc.generators.utils
 
-class test_generatorUtils:
+class TestGeneratorUtils(object):
+
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
 
     def test_simpleBSPSplit_horisontal(self):
         section = pyherc.generators.utils.BSPSection((0, 0), (20, 20), None)

@@ -35,6 +35,12 @@ class TestActionFactories():
     '''
     Tests related to action factories
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        pass
+
     def test_init_single_factory(self):
         '''
         Test that action factory can be initialised with single sub factory

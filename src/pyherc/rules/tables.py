@@ -35,6 +35,7 @@ class Tables:
         self.tagScore = {}
 
         self.creatures = {}
+        self.potion_appearances = []
 
         self.artifact = 1
         self.legendary = 2
@@ -113,7 +114,7 @@ class Tables:
             f.close()
             self.read_creatures_from_xml(creatureConfig)
 
-        self.potionAppearances = [
+        self.potion_appearances = [
                                 ('clay potion',  pyherc.data.tiles.ITEM_POTION_3),
                                 ('ruby potion', pyherc.data.tiles.ITEM_POTION_9),
                                 ('yellow potion', pyherc.data.tiles.ITEM_POTION_10),
@@ -151,7 +152,7 @@ class Tables:
         self.logger.debug('randomizing potion appearance')
         potionEntries = self.itemsByTag['potion']
         for entry in potionEntries:
-            appearance = random.choice(self.potionAppearances)
+            appearance = random.choice(self.potion_appearances)
             self.items[entry[0]]['appearance'] = appearance[0]
             self.items[entry[0]]['icon'] = [appearance[1]]
         self.logger.debug('potion appearance randomized')
