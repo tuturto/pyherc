@@ -1,6 +1,5 @@
 import logging
 import images
-import pygame
 import pyherc
 import pgu.gui
 

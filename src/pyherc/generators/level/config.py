@@ -21,7 +21,7 @@
 '''
 Classes for configuring level generation
 '''
-class LevelGeneratorConfig():
+class LevelGeneratorConfig(object):
     '''
     Class to configure level generator
     '''

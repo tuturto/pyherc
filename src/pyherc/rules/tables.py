@@ -18,11 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, sys, StringIO, random, os.path
+import os, StringIO, random, os.path
 import logging
 import pyherc
 import pyherc.data.model
-from pyherc.data import tiles
 from xml import sax
 
 class Tables:

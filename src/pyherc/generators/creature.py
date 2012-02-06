@@ -25,7 +25,6 @@ Classes:
     CreatureGenerator
 '''
 
-import types
 import logging
 import random
 import pyherc.ai.simple

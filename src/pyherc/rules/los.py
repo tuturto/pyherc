@@ -27,7 +27,6 @@
 import pyherc.data.tiles
 
 import logging
-import math
 
 __logger = logging.getLogger('pyherc.rules.los')
 

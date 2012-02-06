@@ -23,11 +23,11 @@ import random
 import pyherc.generators.item
 import pyherc.generators.creature
 import pyherc.generators.utils
-from pyherc.generators.level.catacombs import CatacombsLevelGenerator
 from pyherc.data.dungeon import Level
-from pyherc.data.dungeon import Dungeon
 from pyherc.data.dungeon import Portal
 from pyherc.data import tiles
+from pyherc.generators import ItemGenerator
+from pyherc.generators import CreatureGenerator
 
 class TestLevelGenerator:
     """
@@ -35,8 +35,8 @@ class TestLevelGenerator:
     """
     def __init__(self, action_factory):
         self.logger = logging.getLogger('pyherc.generators.level.testlevel.TestLevelGenerator')
-        self.item_generator = pyherc.generators.ItemGenerator()
-        self.creature_generator = pyherc.generators.CreatureGenerator(action_factory)
+        self.item_generator = ItemGenerator()
+        self.creature_generator = CreatureGenerator(action_factory)
 
     def __getstate__(self):
         '''
@@ -98,7 +98,7 @@ class TestLevelGenerator:
 
         #set portals
         if portal != None:
-            new_portal = pyherc.data.dungeon.Portal()
+            new_portal = Portal()
             #TODO: refactor for configuration
             new_portal.model = model
             temp_level.add_portal(new_portal,
@@ -107,7 +107,7 @@ class TestLevelGenerator:
 
         if new_portals > 0:
             for i in range(0, new_portals):
-                new_portal = pyherc.data.dungeon.Portal()
+                new_portal = Portal()
                 #TODO: refactor for configuration
                 new_portal.model = model
                 new_portal.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN

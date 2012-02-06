@@ -24,7 +24,6 @@ import pyherc.generators.item
 import pyherc.generators.creature
 import pyherc.generators.utils
 from pyherc.data.dungeon import Level
-from pyherc.data.dungeon import Dungeon
 from pyherc.data.dungeon import Portal
 from pyherc.data import tiles
 
@@ -34,9 +33,10 @@ class CatacombsLevelGenerator:
     """
 
     def __init__(self, action_factory):
-        self.logger = logging.getLogger('pyherc.generators.level.catacombs.CatacombsLevelGenerator')
+        self.logger = logging.getLogger('pyherc.generators.level.catacombs.CatacombsLevelGenerator') #pylint: disable=C0301
         self.item_generator = pyherc.generators.ItemGenerator()
-        self.creature_generator = pyherc.generators.CreatureGenerator(action_factory)
+        self.creature_generator = pyherc.generators.CreatureGenerator(
+                                                                action_factory)
 
     def __getstate__(self):
         '''
@@ -51,9 +51,10 @@ class CatacombsLevelGenerator:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyherc.generators.level.catacombs.CatacombsLevelGenerator')
+        self.logger = logging.getLogger('pyherc.generators.level.catacombs.CatacombsLevelGenerator') #pylint: disable=C0301
 
-    def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):
+    def generate_level(self, portal, model, new_portals = 0, level=1,
+                                                room_min_size = (2, 2)):
         """
         Generate level that starts from given stairs
         @param portal: link new level to this portal
@@ -66,7 +67,9 @@ class CatacombsLevelGenerator:
         level_size = model.config['level']['size']
         self.logger.debug('dividing level in sections')
         BSPStack = []
-        BSP = pyherc.generators.utils.BSPSection((0, 0), (level_size[0] - 2, level_size[1] - 2), None)
+        BSP = pyherc.generators.utils.BSPSection((0, 0),
+                                                 (level_size[0] - 2,
+                                                 level_size[1] - 2), None)
         BSPStack.append(BSP)
         room_stack = []
 
@@ -74,7 +77,8 @@ class CatacombsLevelGenerator:
         #TODO: split into smaller chuncks
         while len(BSPStack) > 0:
             tempBSP = BSPStack.pop()
-            tempBSP.split(min_size = (room_min_size[0] + 4, room_min_size[1] + 4))
+            tempBSP.split(min_size = (room_min_size[0] + 4,
+                                      room_min_size[1] + 4))
             if tempBSP.node1 != None:
                 BSPStack.append(tempBSP.node1)
             if tempBSP.node2 != None:

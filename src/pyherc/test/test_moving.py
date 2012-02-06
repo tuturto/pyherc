@@ -19,20 +19,13 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 import pyherc
-from pyherc.data.dungeon import Level
 from pyherc.data.dungeon import Dungeon
 from pyherc.data.dungeon import Portal
-from pyherc.data.model import Model
 from pyherc.data.model import Character
 from pyherc.generators.level.testlevel import TestLevelGenerator
-from pyherc.rules.tables import Tables
 from pyherc.test import IntegrationTest
-from pyherc.test import StubModel
 
 from pyherc.rules.public import MoveParameters
-from pyherc.rules.public import ActionFactory
-from pyherc.rules.move.factories import MoveFactory
-from pyherc.rules.move.factories import WalkFactory
 
 import pyherc.rules.moving
 

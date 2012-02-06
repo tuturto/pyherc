@@ -22,19 +22,10 @@
 Module for testing combat related rules
 '''
 
-import random
-from pyherc.test import IntegrationTest
-from pyherc.test import StubModel
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.factories import AttackFactory
-from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.move.factories import MoveFactory
-from pyherc.rules.move.factories import WalkFactory
-from pyherc.rules.attack.action import AttackAction
-from pyherc.data.model import Character
-from pyherc.data.dungeon import Level
-from pyherc.data import tiles
 
 from pyherc.data.model import Model
 

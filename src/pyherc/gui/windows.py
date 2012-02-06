@@ -18,11 +18,8 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-import pickle
-import os, sys
 import pygame
 import logging
-import surfaceManager
 import images
 import dialogs
 import pyherc.rules.character
@@ -38,12 +35,9 @@ import pgu.gui.app
 from pyherc.rules.public import MoveParameters
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.los import get_fov_matrix
-from pygame.locals import KEYDOWN
-from pygame.locals import K_DOWN, K_UP
-from pygame.locals import K_SPACE, K_RETURN, K_ESCAPE, K_PERIOD
+from pygame.locals import K_ESCAPE, K_PERIOD
 from pygame.locals import K_d, K_w, K_r, K_q,  K_i
 from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8, K_KP9
-from pygame.locals import Rect
 
 
 class MainWindow(pgu.gui.app.App):

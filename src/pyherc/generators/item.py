@@ -19,7 +19,6 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 import logging
-import pyherc.data.model
 import pyherc.rules.tables
 import random
 from pyherc.data.item import Item

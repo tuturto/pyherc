@@ -18,7 +18,6 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, sys
 import logging
 import pyherc.data.model
 import pyherc.rules.magic

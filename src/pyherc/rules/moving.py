@@ -18,11 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, sys
 import logging
 import time
 import pyherc.data.model
-import pyherc.data.tiles
 
 __logger = logging.getLogger('pyherc.rules.moving')
 

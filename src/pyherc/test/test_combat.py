@@ -23,33 +23,37 @@ Module for testing combat related rules
 '''
 
 import pyherc
-from pyherc.data.dungeon import Level
 from pyherc.data.dungeon import Dungeon
-from pyherc.data.dungeon import Portal
-from pyherc.data.model import Model
 from pyherc.data.model import Character
 from pyherc.generators.level.testlevel import TestLevelGenerator
-from pyherc.rules.tables import Tables
 from pyherc.test import IntegrationTest
 from pyherc.test import StubRandomNumberGenerator
-from pyherc.test import StubModel
 
 from pyherc.rules.public import AttackParameters
-from pyherc.rules.public import ActionFactory
 from pyherc.rules.attack.action import AttackAction
 
 class TestMeleeCombat(IntegrationTest):
     '''
     Class for testing melee combat related rules
     '''
+    def __init__(self):
+        '''
+        Default constructor
+        '''
+        self.model = None
+        self.level = None
+        self.character1 = None
+        self.character2 = None
 
     def setUp2(self):
         self.character1 = Character(self.action_factory)
         self.character2 = Character(self.action_factory)
-        levelGenerator = TestLevelGenerator(self.action_factory)
+        level_generator = TestLevelGenerator(self.action_factory)
 
         self.model.dungeon = Dungeon()
-        self.level = levelGenerator.generate_level(None, self.model, monster_list = [])
+        self.level = level_generator.generate_level(None,
+                                                   self.model,
+                                                   monster_list = [])
 
         self.model.dungeon.levels = self.level
 

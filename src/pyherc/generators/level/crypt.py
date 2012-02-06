@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+'''
+Classs needed for generating crypt levels
+'''
+
 import logging
 import random
 from pyherc.generators import ItemGenerator
@@ -35,7 +39,7 @@ class CryptGeneratorFactory:
         @param action_factory: ActionFactory to pass to the generator
         @param level_configurations: List of LevelGeneratorConfiguration objects
         '''
-        self.logger = logging.getLogger('pyherc.generators.level.crypt.CryptGeneratorFactory')
+        self.logger = logging.getLogger('pyherc.generators.level.crypt.CryptGeneratorFactory') #pylint: disable=c0301
         self.action_factory = action_factory
         self.level_configurations = level_configurations
 
@@ -59,7 +63,7 @@ class CryptGenerator:
         @param action_factory: ActionFactory instance
         @param configuration: LevelGeneratorConfiguration
         '''
-        self.logger = logging.getLogger('pyherc.generators.level.crypt.CryptGenerator')
+        self.logger = logging.getLogger('pyherc.generators.level.crypt.CryptGenerator') #pylint: disable=C0301
         self.item_generator = ItemGenerator()
         self.creature_generator = CreatureGenerator(action_factory)
         self.random_generator = random_generator
@@ -81,9 +85,10 @@ class CryptGenerator:
         Override __setstate__ in order to get pickling work
         '''
         self.__dict__.update(d)
-        self.logger = logging.getLogger('pyherc.generators.level.crypt.CryptGenerator')
+        self.logger = logging.getLogger('pyherc.generators.level.crypt.CryptGenerator') #pylint: disable=C0301
 
-    def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):
+    def generate_level(self, portal, model, new_portals = 0,
+                                        level=1, room_min_size = (2, 2)):
         '''
         Generate crypt level
         '''
