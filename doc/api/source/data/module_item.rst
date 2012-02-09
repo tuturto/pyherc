@@ -3,9 +3,20 @@ pyherc.data.item
 
 .. automodule:: pyherc.data.item
 
-.. toctree::
-   :maxdepth: 2
+Item
+####
 
-   class_item
-   class_weapondata
-   class_itemeffectdata
+.. autoclass:: pyherc.data.item.Item
+   :members:
+
+WeaponData
+##########
+   
+.. autoclass:: pyherc.data.item.WeaponData
+   :members:
+
+ItemEffectData
+##############
+   
+.. autoclass:: pyherc.data.item.ItemEffectData
+   :members:

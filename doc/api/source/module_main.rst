@@ -3,8 +3,9 @@ pyherc.main
 
 .. automodule:: pyherc.main
 
-.. toctree::
-   :maxdepth: 2
-   
-   class_application
+Application
+###########
+
+.. autoclass:: pyherc.main.Application
+   :members:
    
