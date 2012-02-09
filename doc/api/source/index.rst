@@ -9,13 +9,14 @@ Welcome to pyherc's reference
 Contents:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 10
 
    module_main
    ai/module_ai
    data/module_data
    generators/module_generators
    gui/module_gui
+   rules/module_rules
    test/module_test
 
 Indices and tables
