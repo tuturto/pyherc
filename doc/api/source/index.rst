@@ -14,6 +14,7 @@ Contents:
    module_main
    ai/module_ai
    data/module_data
+   generators/module_generators
 
 Indices and tables
 ==================
