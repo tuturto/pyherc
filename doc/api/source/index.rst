@@ -15,6 +15,8 @@ Contents:
    ai/module_ai
    data/module_data
    generators/module_generators
+   gui/module_gui
+   test/module_test
 
 Indices and tables
 ==================
