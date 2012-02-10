@@ -1,0 +1,181 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.main &mdash; Herculeum 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.1 documentation" href="index.html" />
+    <link rel="next" title="pyherc.ai" href="ai/module_ai.html" />
+    <link rel="prev" title="Welcome to pyherc’s reference" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ai/module_ai.html" title="pyherc.ai"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pyherc’s reference"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.main">
+<span id="pyherc-main"></span><h1>pyherc.main<a class="headerlink" href="#module-pyherc.main" title="Permalink to this headline">¶</a></h1>
+<p>Main entry point for pyherc - game</p>
+<div class="section" id="application">
+<h2>Application<a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.main.Application">
+<em class="property">class </em><tt class="descclassname">pyherc.main.</tt><tt class="descname">Application</tt><a class="headerlink" href="#pyherc.main.Application" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents main application</p>
+<dl class="method">
+<dt id="pyherc.main.Application.detect_resource_directory">
+<tt class="descname">detect_resource_directory</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.main.Application.detect_resource_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detects location of resources directory and updates self.base_path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.main.Application.get_action_factory">
+<tt class="descname">get_action_factory</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.main.Application.get_action_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get action factory instance
+&#64;returns: ActionFactory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.main.Application.initialise_factories">
+<tt class="descname">initialise_factories</tt><big>(</big><em>model</em><big>)</big><a class="headerlink" href="#pyherc.main.Application.initialise_factories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialises action factory and sub factories
+&#64;param model: Model to register to the factory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.main.Application.load_configuration">
+<tt class="descname">load_configuration</tt><big>(</big><em>argv</em><big>)</big><a class="headerlink" href="#pyherc.main.Application.load_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load configuration and process command line options
+&#64;param argv: command line arguments</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.main.Application.run">
+<tt class="descname">run</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.main.Application.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the application</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.main.Application.start_logging">
+<tt class="descname">start_logging</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.main.Application.start_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start logging for the system</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.main.Application.usage">
+<tt class="descname">usage</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.main.Application.usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows usage info</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">pyherc.main</a><ul>
+<li><a class="reference internal" href="#application">Application</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to pyherc&#8217;s reference</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ai/module_ai.html"
+                        title="next chapter">pyherc.ai</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/module_main.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ai/module_ai.html" title="pyherc.ai"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pyherc’s reference"
+             >previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

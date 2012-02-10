@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.rules.tables &mdash; Herculeum 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.1 documentation" href="../index.html" />
+    <link rel="up" title="pyherc.rules" href="module_rules.html" />
+    <link rel="next" title="pyherc.rules.time" href="module_time.html" />
+    <link rel="prev" title="pyherc.rules.public" href="module_public.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_time.html" title="pyherc.rules.time"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_public.html" title="pyherc.rules.public"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+          <li><a href="module_rules.html" accesskey="U">pyherc.rules</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.rules.tables">
+<span id="pyherc-rules-tables"></span><h1>pyherc.rules.tables<a class="headerlink" href="#module-pyherc.rules.tables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="tables">
+<h2>Tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.rules.tables.Tables">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.tables.</tt><tt class="descname">Tables</tt><a class="headerlink" href="#pyherc.rules.tables.Tables" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="pyherc.rules.tables.Tables.construct_lookup_tables">
+<tt class="descname">construct_lookup_tables</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.tables.Tables.construct_lookup_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct lookup tables for different kinds of items</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.tables.Tables.load_tables">
+<tt class="descname">load_tables</tt><big>(</big><em>base_path=None</em>, <em>itemConfig=None</em>, <em>creatureConfig=None</em><big>)</big><a class="headerlink" href="#pyherc.rules.tables.Tables.load_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialise tables
+&#64;param base_path: directory from where to load files
+&#64;param itemConfig: optional config string for items
+&#64;param creatureConfig: optional config string for creatures</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.tables.Tables.randomise_potions">
+<tt class="descname">randomise_potions</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.tables.Tables.randomise_potions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Randomize appearances of potions
+&#64;note: different types of potions may be assigned same appearance</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="creaturehandler">
+<h2>CreatureHandler<a class="headerlink" href="#creaturehandler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.rules.tables.CreatureHandler">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.tables.</tt><tt class="descname">CreatureHandler</tt><a class="headerlink" href="#pyherc.rules.tables.CreatureHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to read creatures from xml-configuration</p>
+</dd></dl>
+
+</div>
+<div class="section" id="itemhandler">
+<h2>ItemHandler<a class="headerlink" href="#itemhandler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.rules.tables.ItemHandler">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.tables.</tt><tt class="descname">ItemHandler</tt><a class="headerlink" href="#pyherc.rules.tables.ItemHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to process items xml-configuration</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">pyherc.rules.tables</a><ul>
+<li><a class="reference internal" href="#tables">Tables</a></li>
+<li><a class="reference internal" href="#creaturehandler">CreatureHandler</a></li>
+<li><a class="reference internal" href="#itemhandler">ItemHandler</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_public.html"
+                        title="previous chapter">pyherc.rules.public</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_time.html"
+                        title="next chapter">pyherc.rules.time</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/rules/module_tables.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_time.html" title="pyherc.rules.time"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_public.html" title="pyherc.rules.public"
+             >previous</a> |</li>
+        <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+          <li><a href="module_rules.html" >pyherc.rules</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

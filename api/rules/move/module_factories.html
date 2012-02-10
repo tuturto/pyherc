@@ -1,0 +1,166 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.rules.move.factories &mdash; Herculeum 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="pyherc.rules.move" href="module_move.html" />
+    <link rel="next" title="pyherc.rules.moving" href="../module_moving.html" />
+    <link rel="prev" title="pyherc.rules.move.action" href="module_action.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../module_moving.html" title="pyherc.rules.moving"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_action.html" title="pyherc.rules.move.action"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+          <li><a href="../module_rules.html" >pyherc.rules</a> &raquo;</li>
+          <li><a href="module_move.html" accesskey="U">pyherc.rules.move</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.rules.move.factories">
+<span id="pyherc-rules-move-factories"></span><h1>pyherc.rules.move.factories<a class="headerlink" href="#module-pyherc.rules.move.factories" title="Permalink to this headline">¶</a></h1>
+<p>Attack related factories are defined here</p>
+<div class="section" id="movefactory">
+<h2>MoveFactory<a class="headerlink" href="#movefactory" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.rules.move.factories.MoveFactory">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.move.factories.</tt><tt class="descname">MoveFactory</tt><big>(</big><em>factories</em><big>)</big><a class="headerlink" href="#pyherc.rules.move.factories.MoveFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factory for constructing move actions</p>
+</dd></dl>
+
+</div>
+<div class="section" id="walkfactory">
+<h2>WalkFactory<a class="headerlink" href="#walkfactory" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.rules.move.factories.WalkFactory">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.move.factories.</tt><tt class="descname">WalkFactory</tt><a class="headerlink" href="#pyherc.rules.move.factories.WalkFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factory for creating walk actions</p>
+<dl class="method">
+<dt id="pyherc.rules.move.factories.WalkFactory.can_handle">
+<tt class="descname">can_handle</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.move.factories.WalkFactory.can_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Can this factory process these parameters
+&#64;param parameters: Parameters to check
+&#64;returns: True if factory is capable of handling parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.move.factories.WalkFactory.get_action">
+<tt class="descname">get_action</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.move.factories.WalkFactory.get_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a walk action
+&#64;param parameters: Parameters used to control walk creation</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">pyherc.rules.move.factories</a><ul>
+<li><a class="reference internal" href="#movefactory">MoveFactory</a></li>
+<li><a class="reference internal" href="#walkfactory">WalkFactory</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_action.html"
+                        title="previous chapter">pyherc.rules.move.action</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../module_moving.html"
+                        title="next chapter">pyherc.rules.moving</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/rules/move/module_factories.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../module_moving.html" title="pyherc.rules.moving"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_action.html" title="pyherc.rules.move.action"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+          <li><a href="../module_rules.html" >pyherc.rules</a> &raquo;</li>
+          <li><a href="module_move.html" >pyherc.rules.move</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
