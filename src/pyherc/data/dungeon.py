@@ -266,6 +266,23 @@ class Level:
 
         return (x_size, y_size)
 
+    def dump_string(self):
+        """
+        Dump this level into a string
+        """
+        level_string = ""
+        size = self.get_size()
+        for loc_y in range(size[1]):
+            for loc_x in range(size[0]):
+                if self.walls[loc_x][loc_y] != pyherc.data.tiles.WALL_EMPTY:
+                    level_string = level_string + "#"
+                elif self.walls[loc_x][loc_y] != pyherc.data.tiles.FLOOR_EMPTY:
+                    level_string = level_string + "."
+                else:
+                    level_string = level_string + " "
+            level_string = level_string + '\n'
+        return level_string
+
 class Dungeon:
     """
     Represents the dungeon

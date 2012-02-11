@@ -68,4 +68,7 @@ class SquareRoom(object):
                 level.floor[loc_x][loc_y] = self.floor_tile
                 level.walls[loc_x][loc_y] = self.empty_tile
 
+        self.logger.debug(level.dump_string())
+
         self.logger.debug('room generated')
+
