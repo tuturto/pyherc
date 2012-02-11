@@ -41,9 +41,6 @@ class BSPSection:
         self.parent = parent
         self.direction = direction
         self.logger = logging.getLogger('pyherc.generators.utils.BSPSection')
-        self.logger.debug('created new BSP section with corners ' +
-                                    self.corner1.__str__() + ' and ' +
-                                    self.corner2.__str__())
 
     def split(self, min_size = (6, 6), direction = None):
         """
@@ -57,7 +54,6 @@ class BSPSection:
 
         size = (abs(self.corner1[0] - self.corner2[0]),
                     abs(self.corner1[1] - self.corner2[1]))
-        self.logger.debug('splitting BSP section of size ' + size.__str__())
 
         if direction == None:
             # 1 split horisontal, 2 split vertical
@@ -78,9 +74,7 @@ class BSPSection:
                     direction = 1
 
         if direction == 1:
-            self.logger.debug('split direction horizontal')
             split_location = random.randint(min_size[1], size[1] - min_size[1])
-            self.logger.debug('split location ' + split_location.__str__())
             self.node1 = BSPSection(self.corner1,
                                     (self.corner2[0],
                                         self.corner1[1] + split_location),
@@ -91,9 +85,7 @@ class BSPSection:
                                     self.corner2,
                                     self, direction)
         else:
-            self.logger.debug('split direction vertical')
             split_location = random.randint(min_size[0], size[0] - min_size[0])
-            self.logger.debug('split location ' + split_location.__str__())
             self.node1 = BSPSection(self.corner1,
                                     (self.corner1[0] + split_location,
                                     self.corner2[1]),
@@ -102,8 +94,6 @@ class BSPSection:
                                     self.corner1[1]),
                                     self.corner2,
                                     self, direction)
-
-        self.logger.debug('split performed')
 
     def __str__(self):
         str = ''

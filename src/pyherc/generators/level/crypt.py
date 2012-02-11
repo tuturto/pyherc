@@ -108,3 +108,5 @@ class CryptGenerator:
         # add stairs
         # add monsters
         # add items
+
+        self.logger.debug(new_level.dump_string())

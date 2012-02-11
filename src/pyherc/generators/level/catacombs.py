@@ -67,9 +67,8 @@ class CatacombsLevelGenerator:
         @param level: changes behaviour of the generator
         @param room_min_size: minimum size for rooms
         """
-        self.logger.debug('generating level: ' + level.__str__())
+        self.logger.debug('generating level: {0}'.format(level))
         level_size = model.config['level']['size']
-        self.logger.debug('dividing level in sections')
         BSPStack = []
         BSP = pyherc.generators.utils.BSPSection((0, 0),
                                                  (level_size[0] - 2,
@@ -91,20 +90,15 @@ class CatacombsLevelGenerator:
                 #leaf
                 room_stack.append(tempBSP)
 
-        self.logger.debug('carving rooms')
         for room in room_stack:
             corner1 = (room.corner1[0] + random.randint(1, 4),
                        room.corner1[1] + random.randint(1, 4))
             corner2 = (room.corner2[0] - random.randint(1, 4),
                        room.corner2[1] - random.randint(1, 4))
-            self.logger.debug('carving room ' +
-                              corner1.__str__() + ':' +
-                              corner2.__str__())
+
             for y in range(corner1[1], corner2[1] + 1):
                 for x in range(corner1[0], corner2[0] + 1):
                     temp_level.walls[x][y] = tiles.WALL_EMPTY
-
-        self.logger.debug('carving tunnels')
 
         area_queue = BSP.getAreaQueue()
         area_queue.reverse()
@@ -114,39 +108,21 @@ class CatacombsLevelGenerator:
             area2 = area_queue.pop()
             center1 = area1.getCenter()
             center2 = area2.getCenter()
-            self.logger.debug('carving tunnel between areas '
-                              + area1.__str__() + ' and '
-                              + area2.__str__())
-            self.logger.debug('using center points '
-                              + center1.__str__() + ' and '
-                              + center2.__str__())
             #connect these two areas
             if area1.direction == 1:
                 #areas on top of each other
                 if center1[1] < center2[1]:
-                    self.logger.debug('tunneling top down ' +
-                                    center1[0].__str__() + ':' +
-                                    range(center1[1], center2[1]).__str__())
                     for y in range(center1[1], center2[1] + 1):
                         temp_level.walls[center1[0]][y] = tiles.WALL_EMPTY
                 else:
-                    self.logger.debug('tunneling top down ' +
-                                    center1[0].__str__() + ':' +
-                                    range(center2[1], center1[1]).__str__())
                     for y in range(center2[1], center1[1] + 1):
                         temp_level.walls[center1[0]][y] = tiles.WALL_EMPTY
             else:
                 #areas next to each other
                 if center1[0] < center2[0]:
-                    self.logger.debug('tunneling sideways ' +
-                                    range(center1[0], center2[0]).__str__() +
-                                    ':' + center1[1].__str__())
                     for x in range(center1[0], center2[0] + 1):
                         temp_level.walls[x][center1[1]] = tiles.WALL_EMPTY
                 else:
-                    self.logger.debug('tunneling sideways ' +
-                                      range(center2[0], center1[0]).__str__()
-                                      + ':' + center1[1].__str__())
                     for x in range(center2[0], center1[0] + 1):
                         temp_level.walls[x][center1[1]] = tiles.WALL_EMPTY
 
@@ -243,4 +219,5 @@ class CatacombsLevelGenerator:
                     #TODO: implement generating dungeon levels
                     pass
 
+        self.logger.debug(temp_level.dump_string())
         return temp_level

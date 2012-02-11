@@ -273,14 +273,24 @@ class Level:
         level_string = ""
         size = self.get_size()
         for loc_y in range(size[1]):
+            level_string = level_string + '\n'
             for loc_x in range(size[0]):
-                if self.walls[loc_x][loc_y] != pyherc.data.tiles.WALL_EMPTY:
+                creature = self.get_creature_at((loc_x, loc_y))
+                portal = self.get_portal_at((loc_x, loc_y))
+                items = self.get_items_at((loc_x, loc_y))
+
+                if creature != None:
+                    level_string = level_string + "X"
+                elif portal != None:
+                    level_string = level_string + "<"
+                elif len(items) > 0:
+                    level_string = level_string + "*"
+                elif self.walls[loc_x][loc_y] != pyherc.data.tiles.WALL_EMPTY:
                     level_string = level_string + "#"
                 elif self.walls[loc_x][loc_y] != pyherc.data.tiles.FLOOR_EMPTY:
                     level_string = level_string + "."
                 else:
                     level_string = level_string + " "
-            level_string = level_string + '\n'
         return level_string
 
 class Dungeon:

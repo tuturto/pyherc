@@ -146,7 +146,8 @@ class Application:
         '''
         Start logging for the system
         '''
-        logging.basicConfig(level=self.config['logging']['level'])
+        logging.basicConfig(filename='pyherc.log',
+                                    level=self.config['logging']['level'])
         self.logger = logging.getLogger('pyherc.main.Application')
         self.logger.info("Logging started")
 
