@@ -26,6 +26,10 @@ import pyherc.data.model
 import pyherc.data.tiles
 import pyherc.generators.dungeon
 
+"""
+Module for various dialog components that can be displayed on screen
+"""
+
 from pygame.locals import K_a, K_b, K_c, K_d, K_e, K_f, K_g, K_h, K_i, K_j
 from pygame.locals import K_k, K_l, K_m, K_n, K_o, K_p, K_q, K_r, K_s, K_t
 from pygame.locals import K_u, K_v, K_w, K_x, K_y, K_z
@@ -195,8 +199,19 @@ class Inventory:
         return sorted
 
 class EndScreen:
+    """
+    Dialog displayed at the end of the game
+    """
 
     def __init__(self, application, screen, surface_manager = None):
+        """
+        Default constructor
+
+        Args:
+            application: Application instance
+            screen: Screen to draw to
+            surface_manage = SurfaceManager for loading graphics
+        """
         self.logger = logging.getLogger('pyherc.gui.dialogs.EndScreen')
         self.background = None
         self.running = 1
@@ -209,6 +224,12 @@ class EndScreen:
             self.surface_manager.loadResources()
 
     def show(self, ending):
+        """
+        Display the end dialog
+
+        Args:
+            ending: Dictionary specifying various data of end condition
+        """
         self.logger.info('showing the end screen')
         self.logger.debug(ending)
 
@@ -267,4 +288,7 @@ class EndScreen:
             self.__updateScreen()
 
     def __updateScreen(self):
+        """
+        Draw dialog on screen
+        """
         pygame.display.update()

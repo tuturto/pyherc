@@ -149,7 +149,7 @@ class TestItemWithGenerator(IntegrationTest):
         pyherc.rules.items.wield(self.model,
                                  self.character,
                                  item2,
-                                 dualWield = True)
+                                 dual_wield = True)
 
         assert(item1 in self.character.weapons)
         assert(item2 in self.character.weapons)
@@ -169,7 +169,7 @@ class TestItemWithGenerator(IntegrationTest):
         pyherc.rules.items.wield(self.model, self.character, item2)
         pyherc.rules.items.wield(self.model, self.character,
                                  item1,
-                                 dualWield = True)
+                                 dual_wield = True)
 
         assert(item1 not in self.character.weapons)
         assert(item2 in self.character.weapons)

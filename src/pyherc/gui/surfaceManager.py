@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Module for handling loading of images and icons
+"""
+
 import os, os.path
 import pygame
 import logging
@@ -25,12 +29,10 @@ import images
 import pyherc.data.tiles
 import pyherc
 
-
-
 class SurfaceManager:
-    '''
+    """
     Class for managing images and icons
-    '''
+    """
     def __init__(self):
         self.logger = logging.getLogger('pyherc.gui.surfaceManager')
         self.icons = {}
@@ -38,12 +40,12 @@ class SurfaceManager:
         self.resourcesLoaded = 0
 
     def load_surface(self, base_path, image_name):
-        '''
+        """
         Load a file and return corresponding surface object
         @param base_path: directory of the file
         @param image_name: file name
         @returns: Surface
-        '''
+        """
         return pygame.image.load(os.path.join(base_path, image_name))
 
     def loadResources(self, base_path):
@@ -204,9 +206,27 @@ class SurfaceManager:
             self.logger.info('resources already loaded')
 
     def getImage(self, id):
+        """
+        Get image with ID
+
+        Args:
+            id: ID number of the image to retrieve
+
+        Returns:
+            Image
+        """
         return self.images[id]
 
     def getIcon(self, id):
+        """
+        Get icon with ID
+
+        Args:
+            id: ID number of the icon to retrieve
+
+        Returns:
+            Icon if found, otherwise empty icon
+        """
         if id in self.icons.keys():
             return self.icons[id]
         else:

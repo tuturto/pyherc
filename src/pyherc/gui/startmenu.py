@@ -29,9 +29,9 @@ class StartMenu(pgu.gui.Container):
         self.logger.debug('start menu initialised')
 
     def set_layout(self):
-        '''
+        """
         Set layout of this screen
-        '''
+        """
         bg = pgu.gui.Image(
                                         self.surface_manager.getImage(images.image_start_menu))
         self.add(bg, 0, 0)
@@ -48,6 +48,9 @@ class StartMenu(pgu.gui.Container):
         b.connect(pgu.gui.CLICK, self.__quit_game)
 
     def __startNewGame(self):
+        """
+        Start a new game
+        """
         self.logger.info('starting a new game')
         newWindow = pyherc.gui.windows.StartNewGameWindow(self.application, self.screen, self.surface_manager)
         newWindow.mainLoop()
@@ -67,5 +70,8 @@ class StartMenu(pgu.gui.Container):
         self.repaint()
 
     def __quit_game(self):
+        """
+        Quit game and exit
+        """
         #pylint: disable=E1103
         self.get_toplevel().quit()

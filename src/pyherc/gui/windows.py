@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Module for various windows used in game
+"""
+
 import pygame
 import logging
 import images
@@ -41,6 +45,9 @@ from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8
 
 
 class MainWindow(pgu.gui.app.App):
+    """
+    Main window of the game
+    """
 
     def __init__(self,  application, base_path, surface_manager, screen, theme=None, **params):
         """
@@ -83,12 +90,18 @@ class StartNewGameWindow:
         self.character = None
 
     def mainLoop(self):
+        """
+        Main loop of the window
+        """
         self.logger.debug('main loop starting')
         #TODO: implement menu here
         self.__generateNewGame()
         self.logger.debug('main loop finished')
 
     def __generateNewGame(self):
+        """
+        Generate a new game
+        """
         #TODO: implement properly
         self.application.world = pyherc.data.model.Model()
 
@@ -223,6 +236,9 @@ class GameWindow:
                 return
 
     def mainLoop(self):
+        """
+        Main loop of the game
+        """
         self.logger.debug('main loop starting')
         while self.application.world.end_condition == 0 and self.application.running:
 
@@ -250,7 +266,9 @@ class GameWindow:
         self.logger.debug('main loop finished')
 
     def getNewEvents(self):
-        #get interesting events from player memory to event history
+        """
+        Process memory of player character and store interesting events
+        """
         for event in self.application.world.player.short_term_memory:
             if event['type'] == 'melee':
                 newLine = event['attacker'].name + ' attacks'

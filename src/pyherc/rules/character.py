@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Various rules used in character generation
+"""
+
 import logging
 import pyherc.data.model
 

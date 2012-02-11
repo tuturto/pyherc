@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Module for magic related tests
+"""
+
 import pyherc
 import pyherc.rules.magic
 import pyherc.data.model
@@ -27,6 +31,9 @@ from pyherc.test import IntegrationTest
 from pyherc.test import StubModel
 
 class TestMagic:
+    """
+    Tests for magic
+    """
 
     def __init__(self):
         '''

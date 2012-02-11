@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Module for listing magic numbers of various images
+"""
+
 image_start_menu = 1
 image_inventory_menu = 2
 
