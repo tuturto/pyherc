@@ -26,11 +26,18 @@ class Section(object):
     '''
     Class representing a single section in a level
     '''
-    def __init__(self, corners):
-        '''
+    def __init__(self, corner1, corner2):
+        """
         Default constructor
-        '''
-        self.__corners = corners
+
+        Args:
+            corner1: Coordinates of first corner
+            corner2: Coordinates of the second corner
+        """
+        self.__corners = []
+        self.__corners.append(corner1)
+        self.__corners.append(corner2)
+
         self.__connections = []
         self.__neighbours = []
 

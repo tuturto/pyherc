@@ -26,7 +26,9 @@ from pyherc.data import Level
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room import SquareRoom
 from mock import Mock
-import pyherc.data.tiles
+from pyherc.data.tiles import FLOOR_ROCK
+from pyherc.data.tiles import WALL_GROUND
+from pyherc.data.tiles import WALL_EMPTY
 
 class TestSquareRoom():
     '''
@@ -42,19 +44,28 @@ class TestSquareRoom():
         '''
         Test that generator can create a simple room
         '''
-        level = Level((20, 20),
-                            pyherc.data.tiles.FLOOR_ROCK,
-                            pyherc.data.tiles.WALL_GROUND)
+        level = Level((20, 20), FLOOR_ROCK, WALL_GROUND)
 
-        mock_section = Mock(Section)
-        generator = SquareRoom()
+        mock_corners = Mock(return_value = [
+                                                 (5, 5),
+                                                 (15, 15)])
 
+        class mock_Section(Section):
+            def __init__(self):
+                pass
+            @property
+            def corners(self):
+                return mock_corners()
+
+        mock_section = mock_Section()
+
+        generator = SquareRoom(FLOOR_ROCK, WALL_EMPTY)
         generator.generate_room(level, mock_section)
 
         room_found = False
         for y_loc in range(20):
             for x_loc in range(20):
-                if level.get_tile(x_loc, y_loc) != pyherc.data.tiles.WALL_GROUND:
+                if level.get_tile(x_loc, y_loc) != WALL_GROUND:
                     room_found = True
 
         assert room_found

@@ -37,8 +37,8 @@ class TestSectionConnections():
         '''
         Setup test case
         '''
-        self.section1 = Section(())
-        self.section2 = Section(())
+        self.section1 = Section((), ())
+        self.section2 = Section((), ())
 
         self.section1.neighbours.append(self.section2)
         self.section2.neighbours.append(self.section1)
