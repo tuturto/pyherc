@@ -31,66 +31,74 @@ class Section(object):
         Default constructor
         '''
         self.__corners = corners
-        self.__connected = False
         self.__connections = []
         self.__neighbours = []
 
-    def get_corners(self):
+    def __get_corners(self):
         '''
         Get corners of this section
         '''
         return self.__corners
 
-    def set_corners(self, corners):
+    def __set_corners(self, corners):
         '''
         Set corners of this section
         @param corners: corners to set
         '''
         self.__corners = corners
 
-    def get_connections(self):
+    def __get_connections(self):
         '''
         List of connections this section has
         '''
         return self.__connections
 
-    def get_neighbours(self):
+    def __get_neighbours(self):
         '''
         List of sections next to this one
         '''
         return self.__neighbours
 
-    def get_connected(self):
+    def __get_connected(self):
         '''
         Is this section connected to a neighbour
-        '''
-        return self.__connected
 
-    def set_connected(self, connected):
+        Returns:
+            True if connected, otherwise False
         '''
-        Set if this level is connected
-        @param connected: Boolean indicating if this level is connected
-        '''
-        self.__connected = connected
+        return len(self.__connections) > 0
 
-    corners = property(get_corners)
-    connections = property(get_connections)
-    neighbours = property(get_neighbours)
-    connected = property(get_connected, set_connected)
+    corners = property(__get_corners, __set_corners)
+    """Corners of this Section."""
+
+    connections = property(__get_connections)
+    """Readonly property to access connections of the section"""
+
+    neighbours = property(__get_neighbours)
+    """Readonly property to access neighbours of the section"""
+
+    connected = property(__get_connected)
+    """Readonly property for connection status of the section
+
+        Returns:
+            True if section is connected, otherwise False"""
 
     def connect_to(self, section):
         '''
         Connect this Section to another
+
+        Args:
+            section: Section to connect to
         '''
-        self.connected = True
-        section.connected = True
         self.connections.append(section)
         section.connections.append(self)
 
     def unconnected_neighbours(self):
         '''
         Get list of unconnected neighbours
-        @returns: List of unconnected neighbours
+
+        Returns:
+            List of unconnected neighbours
         '''
         return [x for x in self.neighbours
                         if x.connected == False]
@@ -98,6 +106,8 @@ class Section(object):
     def has_unconnected_neighbours(self):
         '''
         Check if any of this Sections neighbours is unconnected
-        @returns: True if unconnected neighbour is found, otherwise false
+
+        Returns:
+            True if unconnected neighbour is found, otherwise false
         '''
         return len(self.unconnected_neighbours()) > 0
