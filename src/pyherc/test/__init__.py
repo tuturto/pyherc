@@ -511,7 +511,7 @@ class IntegrationTest():
         self.tables.load_tables(None, itemConfig, creatureConfig)
         self.model.tables = self.tables
 
-        self.setUp2()
+        self.setup2()
 
-    def setUp2(self):
+    def setup2(self):
         pass

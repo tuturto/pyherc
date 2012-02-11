@@ -84,7 +84,7 @@ class TestMagicWithGenerators(IntegrationTest):
         '''
         pass
 
-    def setUp2(self):
+    def setup2(self):
         self.character = pyherc.data.model.Character(self.action_factory)
         self.character.hit_points = 1
         self.character.max_hp = 5

@@ -37,7 +37,7 @@ class TestMoving(IntegrationTest):
         '''
         pass
 
-    def setUp2(self):
+    def setup2(self):
         self.character = Character(self.action_factory)
         levelGenerator = TestLevelGenerator(self.action_factory)
 

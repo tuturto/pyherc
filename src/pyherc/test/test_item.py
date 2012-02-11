@@ -18,9 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module for classes testing Item related operations
-'''
+"""
 
 import pyherc
 import pyherc.generators.item
@@ -37,17 +37,19 @@ class TestItemWithGenerator(IntegrationTest):
     Tests for items that require item generator to be working
     """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
-        pass
-
-    def setUp2(self):
+        """
+        IntegrationTest.__init__(self)
         self.item = None
         self.level = None
         self.dungeon = None
         self.character = None
 
+    def setup2(self):
+        """
+        Secondary setup for this test case
+        """
         self.item = Item()
         self.item.name = 'banana'
         self.item.location = ()
@@ -152,7 +154,7 @@ class TestItemWithGenerator(IntegrationTest):
         assert(item1 in self.character.weapons)
         assert(item2 in self.character.weapons)
 
-    def test_dual_wielding_two_handed_weapons(self):
+    def test_dual_wielding_two_handed_weapons(self): #pylint: disable=C0103
         """
         Test that character can not dual wield two-handed weapon
         """
@@ -236,10 +238,10 @@ class TestItemWithGenerator(IntegrationTest):
         '''
         Test that different types of items have tags
         '''
-        self.item = self.item_generator.generateItem(self.tables,
+        item = self.item_generator.generateItem(self.tables,
                                                     {'name': 'dagger'})
 
-        assert(self.item.get_tags() is not None)
+        assert(item.get_tags() is not None)
 
     def test_main_type_basic(self):
         '''
@@ -267,15 +269,16 @@ class TestItemsInLevel:
         '''
         Default constructor
         '''
-        pass
-
-    def setup(self):
         self.item = None
         self.level = None
         self.dungeon = None
         self.model = None
         self.character = None
 
+    def setup(self):
+        """
+        Setup this test case
+        """
         self.item = Item()
         self.item.name = 'banana'
         self.item.location = ()
@@ -315,7 +318,7 @@ class TestItemsInLevel:
         assert(not self.item in self.level.items)
         assert(self.item.location == ())
 
-    def test_picking_up_not_correct_location(self):
+    def test_picking_up_not_correct_location(self): #pylint: disable=C0103
         """
         Test that item is not picked up from wrong location
         """
@@ -415,7 +418,7 @@ class TestItemAdvanced():
 
         assert(name == 'blue potion')
 
-    def test_appearance_of_generic_named_item(self):
+    def test_appearance_of_generic_named_item(self): #pylint: disable=C0103
         """
         Test that given name is reported for a generally named item
         """
@@ -474,7 +477,9 @@ class TestItemEffects:
         '''
         Default constructor
         '''
-        pass
+        self.item = None
+        self.effect1 = None
+        self.effect2 = None
 
     def setup(self):
         '''
@@ -518,7 +523,7 @@ class TestItemEffects:
         effects = self.item.get_effects('on hit')
         assert(effects == [])
 
-    def test_get_multiple_effects_by_type(self):
+    def test_get_multiple_effects_by_type(self): #pylint: disable=C0103
         '''
         Test that multiple effects can be returned by type
         '''
@@ -539,7 +544,8 @@ class TestItemCharges:
         '''
         Default constructor
         '''
-        pass
+        self.item = None
+        self.effect1 = None
 
     def setup(self):
         '''
@@ -573,7 +579,7 @@ class TestItemCharges:
         assert(1 in charges)
         assert(2 in charges)
 
-    def test_extremes_with_multiple_charges(self):
+    def test_extremes_with_multiple_charges(self): #pylint: disable=C0103
         '''
         Test that smallest and biggest amount of charges left can be retrieved
         '''

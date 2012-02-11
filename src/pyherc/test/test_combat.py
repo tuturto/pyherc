@@ -45,7 +45,7 @@ class TestMeleeCombat(IntegrationTest):
         self.character1 = None
         self.character2 = None
 
-    def setUp2(self):
+    def setup2(self):
         self.character1 = Character(self.action_factory)
         self.character2 = Character(self.action_factory)
         level_generator = TestLevelGenerator(self.action_factory)
