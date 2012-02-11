@@ -50,14 +50,33 @@ class TestSquareRoom():
                                                  (5, 5),
                                                  (15, 15)])
 
-        class mock_Section(Section):
+        class MockSection(Section):
+            """Simple mock for section object"""
             def __init__(self):
+                """Default constructor"""
                 pass
             @property
             def corners(self):
+                """Override corners in order to mock them"""
                 return mock_corners()
+            @property
+            def width(self):
+                """Override width to work with mocking"""
+                return 10
+            @property
+            def height(self):
+                """Override height to work with mocking"""
+                return 10
+            @property
+            def left_edge(self):
+                """Override left_edge to work with mocking"""
+                return 5
+            @property
+            def top_edge(self):
+                """Override top_edge to work with mocking"""
+                return 5
 
-        mock_section = mock_Section()
+        mock_section = MockSection()
 
         generator = SquareRoom(FLOOR_ROCK, WALL_EMPTY)
         generator.generate_room(level, mock_section)

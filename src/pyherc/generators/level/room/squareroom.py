@@ -38,7 +38,9 @@ class SquareRoom(object):
         '''
         self.floor_tile = floor_tile
         self.empty_tile = empty_tile
-        self.logger = logging.getLogger('pyherc.generators.level.room.squareroom.SquareRoom') #pylint disable:W0301
+        self.room_width = None
+        self.room_height = None
+        self.logger = logging.getLogger('pyherc.generators.level.room.squareroom.SquareRoom') #pylint disable=C0301
 
     def generate_room(self, level, section):
         '''
@@ -50,27 +52,20 @@ class SquareRoom(object):
         '''
         self.logger.debug('generating room for area {0}'.format(
                                                             section.corners))
-        section_left_edge = section.corners[0][0]
-        section_right_edge = section.corners[1][0]
-        section_top_edge = section.corners[0][1]
-        section_bottom_edge = section.corners[1][1]
 
-        section_width = abs(section_right_edge - section_left_edge)
-        section_height = abs(section_bottom_edge - section_top_edge)
+        self.room_width = int(section.width * 0.75)
+        self.room_height = int(section.height * 0.75)
 
-        room_width = int(section_width * 0.75)
-        room_height = int(section_height * 0.75)
-
-        room_left_edge = section_left_edge + (
-                                    (section_width - room_width) // 2)
-        room_right_edge = room_left_edge + room_width
-        room_top_edge = section_top_edge + (
-                                    (section_height - room_height) // 2)
-        room_bottom_edge = room_top_edge + room_height
+        room_left_edge = section.left_edge + (
+                                    (section.width - self.room_width) // 2)
+        room_right_edge = room_left_edge + self.room_width
+        room_top_edge = section.top_edge + (
+                                    (section.height - self.room_height) // 2)
+        room_bottom_edge = room_top_edge + self.room_height
 
         for loc_y in range(room_top_edge, room_bottom_edge):
             for loc_x in range(room_left_edge, room_right_edge):
                 level.floor[loc_x][loc_y] = self.floor_tile
-                level.walls[loc_x][loc_y] =self.empty_tile
+                level.walls[loc_x][loc_y] = self.empty_tile
 
         self.logger.debug('room generated')

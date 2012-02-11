@@ -18,25 +18,71 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Tests for Section
-'''
+"""
+
 from pyherc.generators.level.partitioners.section import Section
 
-class TestSectionConnections():
-    '''
-    Class for testing Section
-    '''
+class TestSectionCalculations(object):
+    """
+    Tests for sections methods
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         pass
 
     def setup(self):
-        '''
+        """
         Setup test case
-        '''
+        """
+        self.section = Section((10, 10), (20, 25))
+
+    def test_left_edge(self):
+        """
+        Test that left edge can be calculated correctly
+        """
+        left_edge = self.section.left_edge
+        assert left_edge == 10
+
+    def test_top_edge(self):
+        """
+        Test that top edge can be calculated correctly
+        """
+        top_edge = self.section.top_edge
+        assert top_edge == 10
+
+    def test_width(self):
+        """
+        Test that width can be calculated correctly
+        """
+        width = self.section.width
+        assert width == 10
+
+    def test_height(self):
+        """
+        Test that height can be calculated correctly
+        """
+        height = self.section.height
+        assert height == 15
+
+class TestSectionConnections(object):
+    """
+    Class for testing Section
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.section1 = None
+        self.section2 = None
+
+    def setup(self):
+        """
+        Setup test case
+        """
         self.section1 = Section((), ())
         self.section2 = Section((), ())
 
@@ -44,15 +90,15 @@ class TestSectionConnections():
         self.section2.neighbours.append(self.section1)
 
     def test_unconnected_neighbours(self):
-        '''
+        """
         Test that unconnected neighbours can be detected
-        '''
+        """
         assert self.section1.has_unconnected_neighbours() == True
 
     def test_connected_neighbours_are_not_reported(self):
-        '''
+        """
         Test that connected neighbours are not reported as unconnected
-        '''
+        """
         self.section1.connect_to(self.section2)
 
         assert self.section1.has_unconnected_neighbours() == False
