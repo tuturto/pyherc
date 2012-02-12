@@ -10,3 +10,12 @@ On a high level, pyherc codebase is divided as detailed below:
   * rules - rules of the game, for example how creatures move and fight
   * test - test routines
 
+Model
+=====
+:class:`pyherc.data.model.Model` is the main class representing
+current state of the playing world. It holds reference to important things like:
+
+  * Player character
+  * Dungeon
+  * Configuration
+  * Various tables
