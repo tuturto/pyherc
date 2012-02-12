@@ -35,7 +35,7 @@ class test_CreatureWithGenerator(IntegrationTest):
         '''
         Default constructor
         '''
-        pass
+        IntegrationTest.__init__(self)
 
     def test_rat_generation(self):
         """
@@ -70,7 +70,7 @@ class TestStatues(IntegrationTest):
         '''
         Default constructor
         '''
-        pass
+        IntegrationTest.__init__(self)
 
     def test_deactivating_creature(self):
         '''

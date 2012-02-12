@@ -89,7 +89,7 @@ class TestMagicWithGenerators(IntegrationTest):
         '''
         Default constructor
         '''
-        pass
+        IntegrationTest.__init__(self)
 
     def setup2(self):
         self.character = pyherc.data.model.Character(self.action_factory)

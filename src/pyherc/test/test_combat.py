@@ -40,6 +40,7 @@ class TestMeleeCombat(IntegrationTest):
         '''
         Default constructor
         '''
+        IntegrationTest.__init__(self)
         self.model = None
         self.level = None
         self.character1 = None

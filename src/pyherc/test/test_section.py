@@ -32,7 +32,7 @@ class TestSectionCalculations(object):
         """
         Default constructor
         """
-        pass
+        self.section = None
 
     def setup(self):
         """
@@ -83,8 +83,8 @@ class TestSectionConnections(object):
         """
         Setup test case
         """
-        self.section1 = Section((), ())
-        self.section2 = Section((), ())
+        self.section1 = Section((0, 0), (10, 20))
+        self.section2 = Section((11, 0), (20, 20))
 
         self.section1.neighbours.append(self.section2)
         self.section2.neighbours.append(self.section1)
@@ -95,10 +95,20 @@ class TestSectionConnections(object):
         """
         assert self.section1.has_unconnected_neighbours() == True
 
-    def test_connected_neighbours_are_not_reported(self):
+    def test_connected_neighbours_are_not_reported(self): #pylint: disable=C0103
         """
         Test that connected neighbours are not reported as unconnected
         """
         self.section1.connect_to(self.section2)
 
         assert self.section1.has_unconnected_neighbours() == False
+
+    def test_section_connection_points(self):
+        """
+        Test that linked sections have their connection points set up
+        """
+        self.section1.connect_to(self.section2)
+
+        assert len(self.section1.connection_points) == 1
+        assert len(self.section2.connection_points) == 1
+

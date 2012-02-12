@@ -26,10 +26,9 @@ from pyherc.rules.public import ActionFactory
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.move.factories import MoveFactory
-
 from pyherc.data.model import Model
-
-from mock import Mock
+from pyDoubles.framework import stub,  empty_stub, method_returning
+from pyDoubles.framework import spy, assert_that_method, when, empty_spy
 
 class TestActionFactories():
     '''
@@ -45,52 +44,48 @@ class TestActionFactories():
         '''
         Test that action factory can be initialised with single sub factory
         '''
-        mock_model = Mock(Model)
-        mock_attack_factory = Mock(AttackFactory)
+        mock_model = stub(Model)
+        mock_attack_factory = stub(AttackFactory)
 
         factory = ActionFactory(mock_model,
                                 mock_attack_factory)
 
         factories = factory.get_sub_factories()
-        found = [isinstance(x, AttackFactory) for x in factories]
-        assert True in found
+        assert mock_attack_factory in factories
 
     def test_init_factory_list(self):
         '''
         Test that action factory can be initialised with list of factories
         '''
-        mock_model = Mock(Model)
-        mock_move_factory = Mock(MoveFactory)
-        mock_attack_factory = Mock(AttackFactory)
+        mock_model = stub(Model)
+        mock_move_factory = stub(MoveFactory)
+        mock_attack_factory = stub(AttackFactory)
 
         factory = ActionFactory(mock_model,
                                 [mock_attack_factory,
                                     mock_move_factory])
         factories = factory.get_sub_factories()
 
-        found = [isinstance(x, AttackFactory) for x in factories]
-        assert True in found
-
-        found = [isinstance(x, MoveFactory) for x in factories]
-        assert True in found
+        assert mock_attack_factory in factories
+        assert mock_move_factory in factories
 
     def test_get_factory_by_type(self):
         '''
         Test that factory can be found by using Parameters object
         '''
-        mock_model = Mock(Model)
-        mock_move_factory = Mock(MoveFactory)
-        mock_attack_factory = Mock(AttackFactory)
+        mock_model = stub(Model)
+        mock_move_factory = spy(MoveFactory)
+        mock_attack_factory = spy(AttackFactory)
 
-        mock_attack_factory.can_handle.return_value = True
-        mock_move_factory.can_handle.return_value = False
+        when(mock_attack_factory.can_handle).then_return(True)
+        when(mock_move_factory.can_handle).then_return(False)
 
         factory = ActionFactory(mock_model,
                                 [mock_attack_factory,
                                     mock_move_factory])
 
-        mock_parameters = Mock(AttackParameters)
+        mock_parameters = stub(AttackParameters)
 
         sub_factory = factory.get_sub_factory(mock_parameters)
 
-        assert isinstance(sub_factory, AttackFactory)
+        assert sub_factory == mock_attack_factory

@@ -30,8 +30,8 @@ from pyherc.generators.level.room.squareroom import SquareRoom
 from pyherc.rules import ActionFactory
 from pyherc.data import Portal
 from pyherc.data import Model
-
-from mock import Mock
+from pyDoubles.framework import stub,  empty_stub, method_returning
+from pyDoubles.framework import spy, assert_that_method, when, empty_spy
 
 import random
 
@@ -52,9 +52,9 @@ class TestCryptGeneratorFactory:
         '''
         Setup test case
         '''
-        self.mock_action_factory = Mock(ActionFactory)
-        self.mock_config = Mock(LevelGeneratorConfig)
-        self.mock_partitioner = Mock()
+        self.mock_action_factory = stub(ActionFactory)
+        self.mock_config = stub(LevelGeneratorConfig)
+        self.mock_partitioner = empty_stub()
 
         self.factory = CryptGeneratorFactory(self.mock_action_factory,
                                              [self.mock_config])
@@ -82,9 +82,9 @@ class TestCryptGeneratorFactoryConfiguration:
         '''
         Test that LevelPartitioner is correctly passed to CryptGenerator
         '''
-        mock_action_factory = Mock(ActionFactory)
-        mock_partitioner = Mock()
-        mock_config = Mock(LevelGeneratorConfig)
+        mock_action_factory = stub(ActionFactory)
+        mock_partitioner = empty_stub()
+        mock_config = stub(LevelGeneratorConfig)
         mock_config.level_partitioners = [mock_partitioner]
 
         factory = CryptGeneratorFactory(mock_action_factory,
@@ -108,28 +108,28 @@ class TestCryptGenerator:
         '''
         Test that level generation steps are done
         '''
-        mock_factory = Mock(ActionFactory)
-        mock_partitioner = Mock(GridPartitioner)
-        mock_room_generator = Mock(SquareRoom)
-        mock_level_decorator = Mock()
-        mock_stair_adder = Mock()
-        mock_config = Mock(LevelGeneratorConfig)
+        mock_factory = stub(ActionFactory)
+        mock_partitioner = spy(GridPartitioner)
+        mock_room_generator = spy(SquareRoom)
+        mock_level_decorator = empty_spy()
+        mock_stair_adder = empty_spy()
+        mock_config = stub(LevelGeneratorConfig)
         mock_config.level_partitioners = [mock_partitioner]
         mock_config.room_generators = [mock_room_generator]
 
-        mock_portal = Mock(Portal)
-        mock_model = Mock(Model)
+        mock_portal = stub(Portal)
+        mock_model = stub(Model)
 
-        mock_section1 = Mock(Section)
-        mock_section2 = Mock(Section)
-        mock_partitioner.partition_level.return_value = [mock_section1,
-                                                         mock_section2]
+        mock_section1 = stub(Section)
+        mock_section2 = stub(Section)
+        when(mock_partitioner.partition_level).then_return([mock_section1,
+                                                                mock_section2])
 
         generator = CryptGenerator(mock_factory, mock_config, random.Random())
 
         generator.generate_level(mock_portal, mock_model)
 
-        assert mock_partitioner.partition_level.called
-        assert mock_room_generator.generate_room.call_count == 2
-        assert mock_level_decorator.decorate_level.called
-        assert mock_stair_adder.add_stairs.called
+        assert_that_method(mock_partitioner.partition_level).was_called()
+        assert_that_method(mock_room_generator.generate_room).was_called().times(2)
+        assert_that_method(mock_level_decorator.decorate_level).was_called()
+        assert_that_method(mock_stair_adder.add_stairs).was_called()

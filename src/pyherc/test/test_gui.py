@@ -21,7 +21,7 @@
 '''
 Tests for gui components
 '''
-from mock import Mock
+from pyDoubles.framework import stub
 
 import pyherc.gui.windows
 from pyherc.data import Character
@@ -98,14 +98,14 @@ class TestInventoryDialog(IntegrationTest):
         '''
         Default constructor
         '''
-        pass
+        IntegrationTest.__init__(self)
 
     def test_sort_items(self):
         '''
         Test that items can be sorted by their type
         '''
-        mock_surface_manager = Mock(SurfaceManager)
-        mock_character = Mock(Character)
+        mock_surface_manager = stub(SurfaceManager)
+        mock_character = stub(Character)
         inventory = pyherc.gui.dialogs.Inventory(None,
                                                         None,
                                                         mock_surface_manager,

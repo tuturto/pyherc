@@ -26,7 +26,7 @@ from pyherc.generators.level.partitioners.grid import GridPartitioner
 from pyherc.generators.level.partitioners.grid import RandomConnector
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
-from mock import Mock
+from pyDoubles.framework import spy, when
 
 class TestGridPartitioner:
     '''
@@ -43,8 +43,8 @@ class TestGridPartitioner:
         '''
         Setup tests
         '''
-        self.mock_level = Mock(Level)
-        self.mock_level.get_size.return_value = (20, 20)
+        self.mock_level = spy(Level)
+        when(self.mock_level.get_size).then_return((20, 20))
 
         self.partitioner = GridPartitioner()
 

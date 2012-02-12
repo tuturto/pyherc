@@ -53,8 +53,8 @@ class SquareRoom(object):
         self.logger.debug('generating room for area {0}'.format(
                                                             section.corners))
 
-        self.room_width = int(section.width * 0.75)
-        self.room_height = int(section.height * 0.75)
+        self.room_width = int(section.width * 0.50)
+        self.room_height = int(section.height * 0.50)
 
         room_left_edge = section.left_edge + (
                                     (section.width - self.room_width) // 2)

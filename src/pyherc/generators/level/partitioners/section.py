@@ -41,6 +41,8 @@ class Section(object):
         self.__connections = []
         self.__neighbours = []
 
+        self.connection_points = []
+
     def __get_corners(self):
         """
         Get corners of this section

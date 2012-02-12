@@ -35,7 +35,7 @@ class TestMoving(IntegrationTest):
         '''
         Default constructor
         '''
-        pass
+        IntegrationTest.__init__(self)
 
     def setup2(self):
         self.character = Character(self.action_factory)
