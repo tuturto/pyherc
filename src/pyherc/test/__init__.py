@@ -73,45 +73,6 @@ class StubRandomNumberGenerator(random.Random):
     def jumpahead(self, jumps):
         pass
 
-
-class StubCharacter:
-    """
-    Stub for Character class
-    """
-    def __init__(self):
-        pass
-
-    def receive_event(self, event):
-        pass
-
-    def get_max_hp(self):
-        return 10
-
-    def identify_item(self, item):
-        pass
-
-    def is_proficient(self, weapon):
-        return True
-
-class StubSurfaceManager():
-    '''
-    Simple stub to act as a surface manager
-    '''
-    def __init__(self):
-        '''
-        Default constructor
-        '''
-        pass
-
-    def loadResources(self):
-        pass
-
-    def getImage(self, id):
-        return None
-
-    def getIcon(self, id):
-        return None
-
 class StubModel():
     """
     Simple stub to act as model and do nothing

@@ -21,11 +21,13 @@
 '''
 Tests for gui components
 '''
+from mock import Mock
 
 import pyherc.gui.windows
-from pyherc.test import StubSurfaceManager
-from pyherc.test import StubCharacter
+from pyherc.data import Character
+from pyherc.gui.surfaceManager import SurfaceManager
 from pyherc.test import IntegrationTest
+
 
 class TestGameWindow:
     '''
@@ -102,8 +104,12 @@ class TestInventoryDialog(IntegrationTest):
         '''
         Test that items can be sorted by their type
         '''
-        surface_manager = StubSurfaceManager()
-        inventory = pyherc.gui.dialogs.Inventory(None, None, surface_manager, StubCharacter())
+        mock_surface_manager = Mock(SurfaceManager)
+        mock_character = Mock(Character)
+        inventory = pyherc.gui.dialogs.Inventory(None,
+                                                        None,
+                                                        mock_surface_manager,
+                                                        mock_character)
 
         item1 = self.item_generator.generateItem(self.tables, {'name': 'dagger'})
         item2 = self.item_generator.generateItem(self.tables, {'name': 'apple'})
