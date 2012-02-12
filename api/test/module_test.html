@@ -26,6 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Herculeum 0.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="../api_reference.html" />
     <link rel="prev" title="pyherc.rules.utils" href="../rules/module_utils.html" /> 
   </head>
   <body>
@@ -41,7 +42,8 @@
         <li class="right" >
           <a href="../rules/module_utils.html" title="pyherc.rules.utils"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+          <li><a href="../api_reference.html" accesskey="U">API Reference</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -52,6 +54,46 @@
             
   <div class="section" id="module-pyherc.test">
 <span id="pyherc-test"></span><h1>pyherc.test<a class="headerlink" href="#module-pyherc.test" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyherc.test.StubModel">
+<em class="property">class </em><tt class="descclassname">pyherc.test.</tt><tt class="descname">StubModel</tt><a class="headerlink" href="#pyherc.test.StubModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple stub to act as model and do nothing</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.StubRandomNumberGenerator">
+<em class="property">class </em><tt class="descclassname">pyherc.test.</tt><tt class="descname">StubRandomNumberGenerator</tt><a class="headerlink" href="#pyherc.test.StubRandomNumberGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stub for random number generator</p>
+<p>Will always return same numbers</p>
+<dl class="method">
+<dt id="pyherc.test.StubRandomNumberGenerator.getstate">
+<tt class="descname">getstate</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.StubRandomNumberGenerator.getstate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an object capturing the current internal state of the generator.
+This object can be passed to setstate() to restore the state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.StubRandomNumberGenerator.random">
+<tt class="descname">random</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.StubRandomNumberGenerator.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the next random floating point number in the range [0.0, 1.0).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.StubRandomNumberGenerator.seed">
+<tt class="descname">seed</tt><big>(</big><em>seed=None</em><big>)</big><a class="headerlink" href="#pyherc.test.StubRandomNumberGenerator.seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the basic random number generator.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.StubRandomNumberGenerator.setstate">
+<tt class="descname">setstate</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#pyherc.test.StubRandomNumberGenerator.setstate" title="Permalink to this definition">¶</a></dt>
+<dd><p>state should have been obtained from a previous call to getstate()
+setstate() restores the internal state of the generator to what it was
+at the time setstate() was called.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -97,7 +139,8 @@
         <li class="right" >
           <a href="../rules/module_utils.html" title="pyherc.rules.utils"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+          <li><a href="../api_reference.html" >API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

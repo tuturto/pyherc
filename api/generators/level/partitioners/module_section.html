@@ -47,6 +47,7 @@
           <a href="module_grid.html" title="pyherc.generators.level.partitioners.grid"
              accesskey="P">previous</a> |</li>
         <li><a href="../../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../module_generators.html" >pyherc.generators</a> &raquo;</li>
           <li><a href="../module_level.html" >pyherc.generators.level</a> &raquo;</li>
           <li><a href="module_partitioners.html" accesskey="U">pyherc.generators.level.partitioners</a> &raquo;</li> 
@@ -65,88 +66,88 @@
 <h2>Section<a class="headerlink" href="#section" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pyherc.generators.level.partitioners.section.Section">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.level.partitioners.section.</tt><tt class="descname">Section</tt><big>(</big><em>corners</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.partitioners.section.</tt><tt class="descname">Section</tt><big>(</big><em>corner1</em>, <em>corner2</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class representing a single section in a level</p>
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.section.Section.connect_to">
 <tt class="descname">connect_to</tt><big>(</big><em>section</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.connect_to" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connect this Section to another</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>section: Section to connect to</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pyherc.generators.level.partitioners.section.Section.connected">
 <tt class="descname">connected</tt><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.connected" title="Permalink to this definition">¶</a></dt>
-<dd><p>Is this section connected to a neighbour</p>
+<dd><p>Readonly property for connection status of the section</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>True if section is connected, otherwise False</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pyherc.generators.level.partitioners.section.Section.connections">
 <tt class="descname">connections</tt><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.connections" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of connections this section has</p>
+<dd><p>Readonly property to access connections of the section</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pyherc.generators.level.partitioners.section.Section.corners">
 <tt class="descname">corners</tt><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.corners" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get corners of this section</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.generators.level.partitioners.section.Section.get_connected">
-<tt class="descname">get_connected</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.get_connected" title="Permalink to this definition">¶</a></dt>
-<dd><p>Is this section connected to a neighbour</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.generators.level.partitioners.section.Section.get_connections">
-<tt class="descname">get_connections</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.get_connections" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of connections this section has</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.generators.level.partitioners.section.Section.get_corners">
-<tt class="descname">get_corners</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.get_corners" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get corners of this section</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.generators.level.partitioners.section.Section.get_neighbours">
-<tt class="descname">get_neighbours</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.get_neighbours" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of sections next to this one</p>
+<dd><p>Corners of this Section.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.section.Section.has_unconnected_neighbours">
 <tt class="descname">has_unconnected_neighbours</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.has_unconnected_neighbours" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if any of this Sections neighbours is unconnected
-&#64;returns: True if unconnected neighbour is found, otherwise false</p>
+<dd><p>Check if any of this Sections neighbours is unconnected</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>True if unconnected neighbour is found, otherwise false</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.partitioners.section.Section.height">
+<tt class="descname">height</tt><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Readonly property to find height of the section</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.partitioners.section.Section.left_edge">
+<tt class="descname">left_edge</tt><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.left_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Readonly property to find leftmost point of the section</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pyherc.generators.level.partitioners.section.Section.neighbours">
 <tt class="descname">neighbours</tt><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.neighbours" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of sections next to this one</p>
+<dd><p>Readonly property to access neighbours of the section</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="pyherc.generators.level.partitioners.section.Section.set_connected">
-<tt class="descname">set_connected</tt><big>(</big><em>connected</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.set_connected" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set if this level is connected
-&#64;param connected: Boolean indicating if this level is connected</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.generators.level.partitioners.section.Section.set_corners">
-<tt class="descname">set_corners</tt><big>(</big><em>corners</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.set_corners" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set corners of this section
-&#64;param corners: corners to set</p>
+<dl class="attribute">
+<dt id="pyherc.generators.level.partitioners.section.Section.top_edge">
+<tt class="descname">top_edge</tt><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.top_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Readonly property to find topmost point of the section</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.section.Section.unconnected_neighbours">
 <tt class="descname">unconnected_neighbours</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.unconnected_neighbours" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get list of unconnected neighbours
-&#64;returns: List of unconnected neighbours</p>
+<dd><p>Get list of unconnected neighbours</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>List of unconnected neighbours</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.partitioners.section.Section.width">
+<tt class="descname">width</tt><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Readonly property to calculate width of the section</p>
 </dd></dl>
 
 </dd></dl>
@@ -212,6 +213,7 @@
           <a href="module_grid.html" title="pyherc.generators.level.partitioners.grid"
              >previous</a> |</li>
         <li><a href="../../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../module_generators.html" >pyherc.generators</a> &raquo;</li>
           <li><a href="../module_level.html" >pyherc.generators.level</a> &raquo;</li>
           <li><a href="module_partitioners.html" >pyherc.generators.level.partitioners</a> &raquo;</li> 

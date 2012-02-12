@@ -47,6 +47,7 @@
           <a href="module_item.html" title="pyherc.data.item"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+          <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
       </ul>
     </div>  
@@ -67,6 +68,231 @@ Damage
 Feat
 WeaponProficiency</dd>
 </dl>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.data.model.Model">
+<em class="property">class </em><tt class="descclassname">pyherc.data.model.</tt><tt class="descname">Model</tt><a class="headerlink" href="#pyherc.data.model.Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents playing world</p>
+<dl class="method">
+<dt id="pyherc.data.model.Model.load_config">
+<tt class="descname">load_config</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.model.Model.load_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads config</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Model.raise_event">
+<tt class="descname">raise_event</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Model.raise_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relays event to creatures
+&#64;param event: event to relay</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="character">
+<h2>Character<a class="headerlink" href="#character" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.data.model.Character">
+<em class="property">class </em><tt class="descclassname">pyherc.data.model.</tt><tt class="descname">Character</tt><big>(</big><em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a character in playing world</p>
+<dl class="method">
+<dt id="pyherc.data.model.Character.act">
+<tt class="descname">act</tt><big>(</big><em>model</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Triggers AI of this character</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.create_action">
+<tt class="descname">create_action</tt><big>(</big><em>action_parameters</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.create_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an action by defined by action parameters
+&#64;param action_parameters: parameters controlling creation of the action</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.execute_action">
+<tt class="descname">execute_action</tt><big>(</big><em>action_parameters</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.execute_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute action defined by action parameters
+&#64;param action_parameters: parameters controlling creation of the action</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.get_attack">
+<tt class="descname">get_attack</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.get_attack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return attack attribute of the character
+&#64;returns: Attack value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.get_body">
+<tt class="descname">get_body</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.get_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get body attribute
+&#64;returns: Body attribute of this character</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.get_finesse">
+<tt class="descname">get_finesse</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.get_finesse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get finesse attribute
+&#64;returns: finesse attribute</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.get_hp">
+<tt class="descname">get_hp</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.get_hp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current hitpoints</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.get_location">
+<tt class="descname">get_location</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.get_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns location of this character
+&#64;returns: location</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.get_max_hp">
+<tt class="descname">get_max_hp</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.get_max_hp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get maximum HP this character can currently have</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.get_mimic_item">
+<tt class="descname">get_mimic_item</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.get_mimic_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets item this character can mimic
+&#64;returns: item to mimic</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.get_mind">
+<tt class="descname">get_mind</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.get_mind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get mind attribute
+&#64;returns: Mind attribute</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.identify_item">
+<tt class="descname">identify_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.identify_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identify item
+&#64;param item: item to mark as identified</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.is_proficient">
+<tt class="descname">is_proficient</tt><big>(</big><em>weapon</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.is_proficient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this character is proficient with a given weapon
+&#64;param weapon: weapon which proficient requirements should be checked
+&#64;returns: True if proficient, otherwise False</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.receive_event">
+<tt class="descname">receive_event</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.receive_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives an event from world and enters it into short term memory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.set_attack">
+<tt class="descname">set_attack</tt><big>(</big><em>attack</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.set_attack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set attack attribute of the character
+&#64;param attack: Attack attribute</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.set_body">
+<tt class="descname">set_body</tt><big>(</big><em>body</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.set_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set body attribute
+&#64;param body: body attribute to set</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.set_finesse">
+<tt class="descname">set_finesse</tt><big>(</big><em>finesse</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.set_finesse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set finesse attribute
+&#64;param finesse: finesse attribute to set</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.set_hp">
+<tt class="descname">set_hp</tt><big>(</big><em>hit_points</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.set_hp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set current hitpoints
+&#64;param hit_points: hit points to set</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.set_location">
+<tt class="descname">set_location</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.set_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets location of this character
+&#64;param location: location to set</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.set_mimic_item">
+<tt class="descname">set_mimic_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.set_mimic_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets item this character can mimic or pretend to be
+&#64;param item: item to mimic</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.set_mind">
+<tt class="descname">set_mind</tt><big>(</big><em>mind</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.set_mind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set mind attribute
+&#64;param mind: mind attribute to set</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="damage">
+<h2>Damage<a class="headerlink" href="#damage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.data.model.Damage">
+<em class="property">class </em><tt class="descclassname">pyherc.data.model.</tt><tt class="descname">Damage</tt><big>(</big><em>amount=0</em>, <em>damage_type='bludgeoning'</em>, <em>magic_bonus=0</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Damage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Damage done in combat</p>
+</dd></dl>
+
+</div>
+<div class="section" id="feat">
+<h2>Feat<a class="headerlink" href="#feat" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.data.model.Feat">
+<em class="property">class </em><tt class="descclassname">pyherc.data.model.</tt><tt class="descname">Feat</tt><big>(</big><em>name=None</em>, <em>target=None</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Feat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a feat that a character can have</p>
+</dd></dl>
+
+</div>
+<div class="section" id="weaponproficiency">
+<h2>WeaponProficiency<a class="headerlink" href="#weaponproficiency" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.data.model.WeaponProficiency">
+<em class="property">class </em><tt class="descclassname">pyherc.data.model.</tt><tt class="descname">WeaponProficiency</tt><big>(</big><em>weapon_type='simple'</em>, <em>weapon_name=None</em><big>)</big><a class="headerlink" href="#pyherc.data.model.WeaponProficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents weapon proficiency feats (proficiency, focus, etc.)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mimicdata">
+<h2>MimicData<a class="headerlink" href="#mimicdata" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.data.model.MimicData">
+<em class="property">class </em><tt class="descclassname">pyherc.data.model.</tt><tt class="descname">MimicData</tt><big>(</big><em>character</em><big>)</big><a class="headerlink" href="#pyherc.data.model.MimicData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents mimicing character</p>
+<dl class="method">
+<dt id="pyherc.data.model.MimicData.get_character">
+<tt class="descname">get_character</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.model.MimicData.get_character" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get mimicing character
+&#64;returns: Character</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.MimicData.set_character">
+<tt class="descname">set_character</tt><big>(</big><em>character</em><big>)</big><a class="headerlink" href="#pyherc.data.model.MimicData.set_character" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set character mimicing this item
+&#64;param character: Character to set</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -75,6 +301,19 @@ WeaponProficiency</dd>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">pyherc.data.model</a><ul>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#character">Character</a></li>
+<li><a class="reference internal" href="#damage">Damage</a></li>
+<li><a class="reference internal" href="#feat">Feat</a></li>
+<li><a class="reference internal" href="#weaponproficiency">WeaponProficiency</a></li>
+<li><a class="reference internal" href="#mimicdata">MimicData</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="module_item.html"
                         title="previous chapter">pyherc.data.item</a></p>
@@ -119,6 +358,7 @@ WeaponProficiency</dd>
           <a href="module_item.html" title="pyherc.data.item"
              >previous</a> |</li>
         <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+          <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_data.html" >pyherc.data</a> &raquo;</li> 
       </ul>
     </div>
