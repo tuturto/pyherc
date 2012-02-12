@@ -3,21 +3,19 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pyherc's reference
-=============================
+Welcome to pyherc programmer's reference
+========================================
 
 Contents:
 
 .. toctree::
-   :maxdepth: 10
+   :maxdepth: 2
 
-   module_main
-   ai/module_ai
-   data/module_data
-   generators/module_generators
-   gui/module_gui
-   rules/module_rules
-   test/module_test
+   intro
+   module_descriptions
+   generate_level
+   api_reference
+
 
 Indices and tables
 ==================
