@@ -23,6 +23,7 @@ Tests for Section
 """
 
 from pyherc.generators.level.partitioners.section import Section
+from hamcrest import *
 
 class TestSectionCalculations(object):
     """
@@ -45,28 +46,28 @@ class TestSectionCalculations(object):
         Test that left edge can be calculated correctly
         """
         left_edge = self.section.left_edge
-        assert left_edge == 10
+        assert_that(left_edge, is_(equal_to(10)))
 
     def test_top_edge(self):
         """
         Test that top edge can be calculated correctly
         """
         top_edge = self.section.top_edge
-        assert top_edge == 10
+        assert_that(top_edge, is_(equal_to(10)))
 
     def test_width(self):
         """
         Test that width can be calculated correctly
         """
         width = self.section.width
-        assert width == 10
+        assert_that(width, is_(equal_to(10)))
 
     def test_height(self):
         """
         Test that height can be calculated correctly
         """
         height = self.section.height
-        assert height == 15
+        assert_that(height, is_(equal_to(15)))
 
 class TestSectionConnections(object):
     """
@@ -93,7 +94,7 @@ class TestSectionConnections(object):
         """
         Test that unconnected neighbours can be detected
         """
-        assert self.section1.has_unconnected_neighbours() == True
+        assert_that(self.section1.has_unconnected_neighbours())
 
     def test_connected_neighbours_are_not_reported(self): #pylint: disable=C0103
         """
@@ -101,7 +102,7 @@ class TestSectionConnections(object):
         """
         self.section1.connect_to(self.section2)
 
-        assert self.section1.has_unconnected_neighbours() == False
+        assert_that(is_not(self.section1.has_unconnected_neighbours()))
 
     def test_section_connection_points(self):
         """
@@ -113,7 +114,7 @@ class TestSectionConnections(object):
         point1 = self.section1.connections[0]
         point2 = self.section2.connections[0]
 
-        assert point1.location[0] == 10
-        assert point2.location[0] == 11
-        assert point1.location[1] == point2.location[1]
+        assert_that(point1.location[0], is_(equal_to(10)))
+        assert_that(point2.location[0], is_(equal_to(11)))
+        assert_that(point1.location[1], is_(equal_to(point2.location[1])))
 

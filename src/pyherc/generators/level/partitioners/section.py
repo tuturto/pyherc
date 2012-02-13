@@ -160,7 +160,7 @@ class Section(object):
         #TODO: find common border and connect there
         my_connection = Connection(section, (0, 0))
         self.connections.append(my_connection)
-        other_connection = Connection(self, (0, 0))
+        other_connection = Connection(self, (0, 2))
         section.connections.append(other_connection)
 
     def unconnected_neighbours(self):

@@ -26,5 +26,6 @@ Dependencies
 - PyGame 1.9.2
 - PGU 0.18
 - pyDoubles 1.4 (only needed for running test cases)
+- pyHamcrest 1.6 (only needed for running test cases)
 - Sphinx 1.1.2 (only needed for generating documentation)
 
