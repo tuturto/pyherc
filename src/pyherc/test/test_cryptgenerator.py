@@ -30,8 +30,8 @@ from pyherc.generators.level.room.squareroom import SquareRoom
 from pyherc.rules import ActionFactory
 from pyherc.data import Portal
 from pyherc.data import Model
-from pyDoubles.framework import stub,  empty_stub, method_returning
-from pyDoubles.framework import spy, assert_that_method, when, empty_spy
+from pyDoubles.framework import stub,  empty_stub, method_returning #pylint: disable=F0401, E0611
+from pyDoubles.framework import spy, assert_that_method, when, empty_spy #pylint: disable=F0401, E0611
 
 import random
 

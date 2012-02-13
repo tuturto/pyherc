@@ -27,8 +27,8 @@ from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.move.factories import MoveFactory
 from pyherc.data.model import Model
-from pyDoubles.framework import stub,  empty_stub, method_returning
-from pyDoubles.framework import spy, assert_that_method, when, empty_spy
+from pyDoubles.framework import stub,  empty_stub, method_returning #pylint: disable=F0401, E0611
+from pyDoubles.framework import spy, assert_that_method, when, empty_spy #pylint: disable=F0401, E0611
 
 class TestActionFactories():
     '''

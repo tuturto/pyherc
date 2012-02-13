@@ -25,7 +25,7 @@ Tests for SquareRoom room generator
 from pyherc.data import Level
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room import SquareRoom
-from pyDoubles.framework import stub
+from pyDoubles.framework import stub #pylint: disable=F0401, E0611
 from pyherc.data.tiles import FLOOR_ROCK
 from pyherc.data.tiles import WALL_GROUND
 from pyherc.data.tiles import WALL_EMPTY

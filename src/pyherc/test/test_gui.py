@@ -21,7 +21,7 @@
 '''
 Tests for gui components
 '''
-from pyDoubles.framework import stub
+from pyDoubles.framework import stub #pylint: disable=F0401, E0611
 
 import pyherc.gui.windows
 from pyherc.data import Character

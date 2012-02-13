@@ -26,7 +26,7 @@ from pyherc.generators.level.partitioners.grid import GridPartitioner
 from pyherc.generators.level.partitioners.grid import RandomConnector
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
-from pyDoubles.framework import spy, when
+from pyDoubles.framework import spy, when #pylint: disable=F0401, E0611
 
 class TestGridPartitioner:
     '''
