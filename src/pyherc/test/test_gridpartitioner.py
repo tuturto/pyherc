@@ -128,7 +128,7 @@ class test_RandomConnector:
 
         connected_sections = self.connector.connect_sections(sections)
 
-        assert connected_sections[1] in connected_sections[0].connections
+        assert connected_sections[1] == connected_sections[0].connections[0].connection
 
     def test_connecting_2x2_grid(self):
         '''

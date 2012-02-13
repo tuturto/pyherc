@@ -41,8 +41,6 @@ class Section(object):
         self.__connections = []
         self.__neighbours = []
 
-        self.connection_points = []
-
     def __get_corners(self):
         """
         Get corners of this section
@@ -159,8 +157,11 @@ class Section(object):
         Args:
             section: Section to connect to
         '''
-        self.connections.append(section)
-        section.connections.append(self)
+        #TODO: find common border and connect there
+        my_connection = Connection(section, (0, 0))
+        self.connections.append(my_connection)
+        other_connection = Connection(self, (0, 0))
+        section.connections.append(other_connection)
 
     def unconnected_neighbours(self):
         '''
@@ -180,3 +181,16 @@ class Section(object):
             True if unconnected neighbour is found, otherwise false
         '''
         return len(self.unconnected_neighbours()) > 0
+
+class Connection(object):
+    """
+    Connection between two Sections
+    """
+    def __init__(self, connection, location):
+        """
+        Default constructor
+        """
+        object.__init__(self)
+        self.connection = connection
+        self.location = location
+

@@ -106,9 +106,14 @@ class TestSectionConnections(object):
     def test_section_connection_points(self):
         """
         Test that linked sections have their connection points set up
+        so that they line up in the border
         """
         self.section1.connect_to(self.section2)
 
-        assert len(self.section1.connection_points) == 1
-        assert len(self.section2.connection_points) == 1
+        point1 = self.section1.connections[0]
+        point2 = self.section2.connections[0]
+
+        assert point1.location[0] == 10
+        assert point2.location[0] == 11
+        assert point1.location[1] == point2.location[1]
 
