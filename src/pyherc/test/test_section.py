@@ -130,3 +130,20 @@ class TestSectionConnections(object):
         assert_that(point2.location[0], is_(equal_to(11)))
         assert_that(point1.location[1], is_(equal_to(point2.location[1])))
 
+    def test_get_common_border(self):
+        """
+        Test that Section can calculate common border with another Section
+        """
+
+        self.section1 = Section((0, 0), (10, 20))
+        self.section2 = Section((11, 0), (20, 20))
+
+        common_border = self.section1.get_common_border(self.section2)
+
+        assert_that(common_border, contains_inanyorder(
+                                        (10, 0), (10, 1), (10, 2), (10, 3),
+                                        (10, 4), (10, 5), (10, 6), (10, 7),
+                                        (10, 8), (10, 9), (10, 10), (10, 11),
+                                        (10, 12), (10, 13), (10, 14), (10, 15),
+                                        (10, 16), (10, 17), (10, 18), (10, 19),
+                                        (10, 20)))

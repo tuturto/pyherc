@@ -201,6 +201,25 @@ class Section(object):
 
         return border
 
+    def get_common_border(self, another_section):
+        """
+        Get list of locations that define common border between two Sections
+        Border is placed on the edge of this Section
+
+        Returns:
+            List of (loc_x, loc_y) defining common border
+        """
+        my_border = self.get_border()
+        other_border = another_section.get_border()
+        common_border = []
+
+        for loc_1 in my_border:
+            for loc_2 in other_border:
+                if (loc_1[0] - loc_2[0])**2 + (loc_1[1] - loc_2[1])**2 == 1:
+                    common_border.append(loc_1)
+
+        return common_border
+
 class Connection(object):
     """
     Connection between two Sections
