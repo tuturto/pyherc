@@ -22,6 +22,9 @@
 Classes to represent division of levels
 """
 
+import random
+import logging
+
 class Section(object):
     """
     Class representing a single section in a level
@@ -40,6 +43,8 @@ class Section(object):
 
         self.__connections = []
         self.__neighbours = []
+        self.random_generator = random.Random()
+        self.logger = logging.getLogger('pyherc.generators.level.partitioners.section.Section') #pylint: disable=C0301
 
     def __get_corners(self):
         """
@@ -157,10 +162,13 @@ class Section(object):
         Args:
             section: Section to connect to
         '''
-        #TODO: find common border and connect there
-        my_connection = Connection(section, (0, 0))
+        my_side_of_border = self.get_common_border(section)
+        my_side = self.random_generator.choice(my_side_of_border)
+        my_connection = Connection(section, my_side)
         self.connections.append(my_connection)
-        other_connection = Connection(self, (0, 2))
+
+        other_side = section.get_opposing_point(my_side)
+        other_connection = Connection(self, other_side)
         section.connections.append(other_connection)
 
     def unconnected_neighbours(self):
@@ -191,6 +199,10 @@ class Section(object):
         """
         border = []
 
+        assert(len(self.__corners) == 2)
+        assert(len(self.__corners[0]) == 2)
+        assert(len(self.__corners[1]) == 2)
+
         for loc_x in range(self.__corners[0][0], self.__corners[1][0] + 1):
             border.append((loc_x, self.__corners[0][1]))
             border.append((loc_x, self.__corners[1][1]))
@@ -219,6 +231,26 @@ class Section(object):
                     common_border.append(loc_1)
 
         return common_border
+
+    def get_opposing_point(self, location):
+        """
+        Calculate which of this Section's points corresponds to the point given
+        on the other side of the common border
+
+        Args:
+            location: (loc_x, loc_y) defining point on the other side
+
+        Returns:
+            (loc_x, loc_y) if corresponding point is found, False otherwise
+        """
+        my_side = None
+        my_border = self.get_border()
+
+        for loc_1 in my_border:
+            if (loc_1[0] - location[0])**2 + (loc_1[1] - location[1])**2 == 1:
+                my_side = loc_1
+
+        return my_side
 
 class Connection(object):
     """

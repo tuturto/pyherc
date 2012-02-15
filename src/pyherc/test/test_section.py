@@ -134,10 +134,6 @@ class TestSectionConnections(object):
         """
         Test that Section can calculate common border with another Section
         """
-
-        self.section1 = Section((0, 0), (10, 20))
-        self.section2 = Section((11, 0), (20, 20))
-
         common_border = self.section1.get_common_border(self.section2)
 
         assert_that(common_border, contains_inanyorder(
@@ -147,3 +143,13 @@ class TestSectionConnections(object):
                                         (10, 12), (10, 13), (10, 14), (10, 15),
                                         (10, 16), (10, 17), (10, 18), (10, 19),
                                         (10, 20)))
+
+    def test_get_opposing_point(self):
+        """
+        Test that Section can calculate which of its points corresponds to the
+        point given on the other side of the border
+        """
+        my_point = (10, 9)
+        other_point = self.section2.get_opposing_point(my_point)
+
+        assert_that(other_point, is_(equal_to((11, 9))))

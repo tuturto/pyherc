@@ -118,8 +118,8 @@ class test_RandomConnector:
         '''
         Test that two adjacent sections can be connected
         '''
-        section1 = Section((), ())
-        section2 = Section((), ())
+        section1 = Section((0, 0), (10, 5))
+        section2 = Section((0, 6), (10, 10))
 
         section1.neighbours.append(section2)
         section2.neighbours.append(section1)
@@ -135,10 +135,10 @@ class test_RandomConnector:
         '''
         Test that 2x2 grid is fully connected
         '''
-        section00 = Section((), ())
-        section10 = Section((), ())
-        section01 = Section((), ())
-        section11 = Section((), ())
+        section00 = Section((0, 0), (5, 5))
+        section10 = Section((6, 0), (10, 5))
+        section01 = Section((0, 6), (5, 10))
+        section11 = Section((6, 6), (10, 10))
 
         section00.neighbours.append(section10)
         section00.neighbours.append(section01)
@@ -166,11 +166,11 @@ class test_RandomConnector:
         Row of Sections is connected, starting from the middle
         RandomConnector can not connect this in one path, but has to branch
         '''
-        section0 = Section((), ())
-        section1 = Section((), ())
-        section2 = Section((), ())
-        section3 = Section((), ())
-        section4 = Section((), ())
+        section0 = Section((0, 0), (10, 10))
+        section1 = Section((11, 0), (20, 10))
+        section2 = Section((21, 0), (30, 10))
+        section3 = Section((31, 0), (40, 10))
+        section4 = Section((41, 0), (50, 10))
 
         section0.neighbours.append(section1)
         section1.neighbours.append(section0)
