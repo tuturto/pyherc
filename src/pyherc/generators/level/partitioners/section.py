@@ -182,6 +182,25 @@ class Section(object):
         '''
         return len(self.unconnected_neighbours()) > 0
 
+    def get_border(self):
+        """
+        Get list of locations, defining borders of this Section
+
+        Returns:
+            List of (loc_x, loc_y) defining borders
+        """
+        border = []
+
+        for loc_x in range(self.__corners[0][0], self.__corners[1][0] + 1):
+            border.append((loc_x, self.__corners[0][1]))
+            border.append((loc_x, self.__corners[1][1]))
+
+        for loc_y in range(self.__corners[0][1] + 1, self.__corners[1][1]):
+            border.append((self.__corners[0][0], loc_y))
+            border.append((self.__corners[1][0], loc_y))
+
+        return border
+
 class Connection(object):
     """
     Connection between two Sections

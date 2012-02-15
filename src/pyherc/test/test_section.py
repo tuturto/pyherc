@@ -69,6 +69,18 @@ class TestSectionCalculations(object):
         height = self.section.height
         assert_that(height, is_(equal_to(15)))
 
+    def test_border(self):
+        """
+        Test that Section can report border
+        """
+        border = self.section.get_border()
+        assert_that(border, has_items(
+                            (10, 10), (11, 10), (12, 10), (19, 10), (20, 10),
+                            (10, 11), (10, 12), (10, 13), (10, 24), (10, 25),
+                            (11, 25), (12, 25), (13, 25), (19, 25), (20, 25),
+                            (20, 11), (20, 12), (20, 13), (20, 23), (20, 24),
+                            ))
+
 class TestSectionConnections(object):
     """
     Class for testing Section

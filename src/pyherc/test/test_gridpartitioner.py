@@ -26,7 +26,8 @@ from pyherc.generators.level.partitioners.grid import GridPartitioner
 from pyherc.generators.level.partitioners.grid import RandomConnector
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
-from pyDoubles.framework import spy, when #pylint: disable=F0401, E0611
+from pyDoubles.framework import when, spy #pylint: disable=F0401, E0611
+from hamcrest import * #pylint: disable=F0401, E0611
 
 class TestGridPartitioner:
     '''
@@ -54,7 +55,7 @@ class TestGridPartitioner:
         '''
         sections = self.partitioner.partition_level(self.mock_level, 3, 3)
 
-        assert len(sections) == 9
+        assert_that(sections, has_length(9))
 
     def test_sections_have_neighbours(self):
         '''
@@ -62,7 +63,7 @@ class TestGridPartitioner:
         '''
         sections = self.partitioner.partition_level(self.mock_level, 2, 1)
 
-        assert len(sections[0].neighbours) == 1
+        assert_that(sections[0].neighbours, has_length(1))
 
     def test_partitioned_sections_are_linked(self):
         '''
@@ -70,9 +71,8 @@ class TestGridPartitioner:
         '''
         sections = self.partitioner.partition_level(self.mock_level, 2, 2)
 
-        assert len(sections) == 4
-
-        assert len(sections[0].connections) > 0
+        assert_that(sections, has_length(4))
+        assert_that(sections[0].connections, has_length(greater_than(0)))
 
 class TestGridPartitionerUtilities:
     '''
@@ -92,11 +92,11 @@ class TestGridPartitionerUtilities:
 
         ranges = partitioner.split_range_to_equals(10, 3)
 
-        assert len(ranges) == 3
+        assert_that(ranges, has_length(3))
 
-        assert ranges[0] == (0, 2)
-        assert ranges[1] == (3, 5)
-        assert ranges[2] == (6, 8)
+        assert_that(ranges[0], is_(equal_to((0, 2))))
+        assert_that(ranges[1], is_(equal_to((3, 5))))
+        assert_that(ranges[2], is_(equal_to((6, 8))))
 
 class test_RandomConnector:
     '''
@@ -128,7 +128,8 @@ class test_RandomConnector:
 
         connected_sections = self.connector.connect_sections(sections)
 
-        assert connected_sections[1] == connected_sections[0].connections[0].connection
+        assert_that(connected_sections[1], is_(
+                            equal_to(connected_sections[0].connections[0].connection)))
 
     def test_connecting_2x2_grid(self):
         '''
@@ -152,11 +153,11 @@ class test_RandomConnector:
 
         connected_sections = self.connector.connect_sections(sections)
 
-        assert len(connected_sections) == 4
+        assert_that(connected_sections, has_length(4))
 
         for section in connected_sections:
-            assert len(section.connections) > 0
-            assert section.connected == True
+            assert_that(section.connections, has_length(greater_than(0)))
+            assert_that(section.connected)
 
     def test_connect_row_of_sections(self):
         '''
@@ -185,5 +186,5 @@ class test_RandomConnector:
         connected_sections = self.connector.connect_sections(sections, section2)
 
         for section in connected_sections:
-            assert len(section.connections) > 0
-            assert section.connected == True
+            assert_that(section.connections, has_length(greater_than(0)))
+            assert_that(section.connected)
