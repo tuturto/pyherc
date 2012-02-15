@@ -21,9 +21,9 @@
 """
 Tests for Section
 """
-
+#pylint: disable=W0614
 from pyherc.generators.level.partitioners.section import Section
-from hamcrest import *
+from hamcrest import * #pylint: disable=W0401
 
 class TestSectionCalculations(object):
     """

@@ -21,13 +21,13 @@
 '''
 Tests for GridPartitioner
 '''
-
+#pylint: disable=W0614
 from pyherc.generators.level.partitioners.grid import GridPartitioner
 from pyherc.generators.level.partitioners.grid import RandomConnector
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
 from pyDoubles.framework import when, spy #pylint: disable=F0401, E0611
-from hamcrest import * #pylint: disable=F0401, E0611
+from hamcrest import * #pylint: disable=W0401
 
 class TestGridPartitioner:
     '''
@@ -49,7 +49,7 @@ class TestGridPartitioner:
 
         self.partitioner = GridPartitioner()
 
-    def test_partitioning_returns_sections(self):
+    def test_partitioning_returns_sections(self): # pylint: disable=C0103
         '''
         Test that partitioning level returns default amount of sections
         '''
@@ -65,7 +65,7 @@ class TestGridPartitioner:
 
         assert_that(sections[0].neighbours, has_length(1))
 
-    def test_partitioned_sections_are_linked(self):
+    def test_partitioned_sections_are_linked(self): # pylint: disable=C0103
         '''
         Partitioned sections should be linked together
         '''
@@ -98,7 +98,7 @@ class TestGridPartitionerUtilities:
         assert_that(ranges[1], is_(equal_to((3, 5))))
         assert_that(ranges[2], is_(equal_to((6, 8))))
 
-class test_RandomConnector:
+class TestRandomConnector:
     '''
     Tests for RandomConnector class
     '''
@@ -106,7 +106,7 @@ class test_RandomConnector:
         '''
         Default constructor
         '''
-        pass
+        self.connector = None
 
     def setup(self):
         '''
@@ -128,8 +128,10 @@ class test_RandomConnector:
 
         connected_sections = self.connector.connect_sections(sections)
 
-        assert_that(connected_sections[1], is_(
-                            equal_to(connected_sections[0].connections[0].connection)))
+        assert_that(
+                    connected_sections[1],
+                    is_(equal_to(
+                        connected_sections[0].connections[0].connection)))
 
     def test_connecting_2x2_grid(self):
         '''
