@@ -70,5 +70,10 @@ class SquareRoom(object):
 
         self.logger.debug(level.dump_string())
 
+        section.add_room_connection(None, None)
+        section.add_room_connection(None, None)
+        section.add_room_connection(None, None)
+        section.add_room_connection(None, None)
+
         self.logger.debug('room generated')
 

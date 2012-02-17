@@ -42,6 +42,7 @@ class Section(object):
         self.__corners.append(corner2)
 
         self.__connections = []
+        self.__room_connections = []
         self.__neighbours = []
         self.random_generator = random.Random()
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.section.Section') #pylint: disable=C0301
@@ -64,6 +65,12 @@ class Section(object):
         List of connections this section has
         """
         return self.__connections
+
+    def __get_room_connections(self):
+        """
+        List of connections leading to the room
+        """
+        return self.__room_connections
 
     def __get_neighbours(self):
         """
@@ -134,6 +141,9 @@ class Section(object):
     connections = property(__get_connections)
     """Readonly property to access connections of the section""" #pylint: disable=W0105
 
+    room_connections = property(__get_room_connections)
+    """Readonly property to access connections to the room""" #pylint: disable=W0105
+
     neighbours = property(__get_neighbours)
     """Readonly property to access neighbours of the section""" #pylint: disable=W0105
 
@@ -164,11 +174,13 @@ class Section(object):
         '''
         my_side_of_border = self.get_common_border(section)
         my_side = self.random_generator.choice(my_side_of_border)
-        my_connection = Connection(section, my_side)
+        my_connection = Connection(section, my_side, None)
         self.connections.append(my_connection)
 
+        #TODO: figure out connection directions
+
         other_side = section.get_opposing_point(my_side)
-        other_connection = Connection(self, other_side)
+        other_connection = Connection(self, other_side, None)
         section.connections.append(other_connection)
 
     def unconnected_neighbours(self):
@@ -252,15 +264,37 @@ class Section(object):
 
         return my_side
 
+    def add_room_connection(self, location, direction):
+        """
+        Adds connection to the room
+
+        Room connections are used to connect rooms to edge of Sections
+
+        Args:
+            location: (loc_x, loc_y) where to add the Connection
+            direction: direction where this connections leads
+                up, down, left, right
+        """
+        self.__room_connections.append(
+                                       Connection(None, location, direction))
+
 class Connection(object):
     """
-    Connection between two Sections
+    Connection between Sections or between Section and room
     """
-    def __init__(self, connection, location):
+    def __init__(self, connection, location, direction):
         """
         Default constructor
+
+        Args:
+            connection: Connection on another Section,
+                    if connecting between sections
+            location: (x_loc, y_loc) of this connection
+            direction: direction to connect to
+                up, down, left, right
         """
         object.__init__(self)
         self.connection = connection
         self.location = location
+        self.direction = direction
 

@@ -153,3 +153,11 @@ class TestSectionConnections(object):
         other_point = self.section2.get_opposing_point(my_point)
 
         assert_that(other_point, is_(equal_to((11, 9))))
+
+    def test_adding_room_connections(self):
+        """
+        Test that added room connections are kept track
+        """
+        self.section1.add_room_connection((5, 5), "right")
+
+        assert_that(self.section1.room_connections, has_length(1))
