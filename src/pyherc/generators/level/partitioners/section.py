@@ -29,17 +29,19 @@ class Section(object):
     """
     Class representing a single section in a level
     """
-    def __init__(self, corner1, corner2):
+    def __init__(self, corner1, corner2, level):
         """
         Default constructor
 
         Args:
             corner1: Coordinates of first corner
             corner2: Coordinates of the second corner
+            level: Level where Section is linked
         """
         self.__corners = []
         self.__corners.append(corner1)
         self.__corners.append(corner2)
+        self.level = level
 
         self.__connections = []
         self.__room_connections = []
@@ -277,6 +279,26 @@ class Section(object):
         """
         self.__room_connections.append(
                                        Connection(None, location, direction))
+
+    def set_floor(self, location, tile):
+        """
+        Set floor at given location
+
+        Args:
+            location: (loc_x, loc_y) location to set the tile
+            tile: ID of the tile to use
+        """
+        self.level.floor[location[0]][location[1]] = tile
+
+    def set_wall(self, location, tile):
+        """
+        Set wall at given location
+
+        Args:
+            location: (loc_x, loc_y) location to set the tile
+            tile: ID of the tile to use
+        """
+        self.level.walls[location[0]][location[1]] = tile
 
 class Connection(object):
     """

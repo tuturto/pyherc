@@ -42,13 +42,12 @@ class SquareRoomGenerator(object):
         self.room_height = None
         self.logger = logging.getLogger('pyherc.generators.level.room.squareroom.SquareRoomGenerator') #pylint disable=C0301
 
-    def generate_room(self, level, section):
+    def generate_room(self, section):
         '''
         Generate room
 
         Args:
-            level: Level to modify
-            section: Section that generator is allowed to change
+            section: Section for generator to draw to
         '''
         self.logger.debug('generating room for area {0}'.format(
                                                             section.corners))
@@ -56,19 +55,15 @@ class SquareRoomGenerator(object):
         self.room_width = int(section.width * 0.50)
         self.room_height = int(section.height * 0.50)
 
-        room_left_edge = section.left_edge + (
-                                    (section.width - self.room_width) // 2)
+        room_left_edge = (section.width - self.room_width) // 2
         room_right_edge = room_left_edge + self.room_width
-        room_top_edge = section.top_edge + (
-                                    (section.height - self.room_height) // 2)
+        room_top_edge = (section.height - self.room_height) // 2
         room_bottom_edge = room_top_edge + self.room_height
 
         for loc_y in range(room_top_edge, room_bottom_edge):
             for loc_x in range(room_left_edge, room_right_edge):
-                level.floor[loc_x][loc_y] = self.floor_tile
-                level.walls[loc_x][loc_y] = self.empty_tile
-
-        self.logger.debug(level.dump_string())
+                section.set_floor((loc_x, loc_y), self.floor_tile)
+                section.set_wall((loc_x, loc_y), self.empty_tile)
 
         section.add_room_connection(None, None)
         section.add_room_connection(None, None)

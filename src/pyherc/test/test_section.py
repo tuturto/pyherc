@@ -23,7 +23,11 @@ Tests for Section
 """
 #pylint: disable=W0614
 from pyherc.generators.level.partitioners.section import Section
+from pyherc.data import Level
+from pyherc.data.tiles import FLOOR_EMPTY, FLOOR_ROCK, WALL_EMPTY, WALL_GROUND
+from pyDoubles.framework import stub #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
+
 
 class TestSectionCalculations(object):
     """
@@ -39,7 +43,8 @@ class TestSectionCalculations(object):
         """
         Setup test case
         """
-        self.section = Section((10, 10), (20, 25))
+        mock_level = stub(Level)
+        self.section = Section((10, 10), (20, 25), mock_level)
 
     def test_left_edge(self):
         """
@@ -100,8 +105,9 @@ class TestSectionConnections(object):
         """
         Setup test case
         """
-        self.section1 = Section((0, 0), (10, 20))
-        self.section2 = Section((11, 0), (20, 20))
+        mock_level = stub(Level)
+        self.section1 = Section((0, 0), (10, 20), mock_level)
+        self.section2 = Section((11, 0), (20, 20), mock_level)
 
         self.section1.neighbours.append(self.section2)
         self.section2.neighbours.append(self.section1)
@@ -170,3 +176,38 @@ class TestSectionConnections(object):
         self.section1.add_room_connection((5, 5), "right")
 
         assert_that(self.section1.room_connections, has_length(1))
+
+class TestSectionLevelAccess(object):
+    """
+    Tests to ensure that client has access to portion of level via Section
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        object.__init__(self)
+        self.level = None
+        self.section = None
+
+    def setup(self):
+        """
+        Setup the test case
+        """
+        self.level = Level((10, 10), FLOOR_EMPTY, WALL_EMPTY)
+        self.section = Section((0, 0), (10, 10), self.level)
+
+    def test_setting_floor(self):
+        """
+        Test that floor can be set
+        """
+        self.section.set_floor((5, 5), FLOOR_ROCK)
+
+        assert_that(self.level.floor[5][5], is_(equal_to(FLOOR_ROCK)))
+
+    def test_setting_wall(self):
+        """
+        Test that walls can be set
+        """
+        self.section.set_wall((2, 2), WALL_GROUND)
+
+        assert_that(self.level.walls[2][2], is_(equal_to(WALL_GROUND)))

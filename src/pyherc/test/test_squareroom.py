@@ -25,8 +25,6 @@ Tests for SquareRoomGenerator room generator
 from pyherc.data import Level
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room import SquareRoomGenerator
-from pyDoubles.framework import spy #pylint: disable=F0401, E0611
-from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
 from pyherc.data.tiles import FLOOR_ROCK
 from pyherc.data.tiles import WALL_GROUND
@@ -41,7 +39,7 @@ class TestSquareRoom():
         Default constructor
         '''
         self.level = None
-        self.mock_section = None
+        self.section = None
         self.generator = None
 
     def setup(self):
@@ -49,23 +47,14 @@ class TestSquareRoom():
         Setup the test case
         """
         self.level = Level((20, 20), FLOOR_ROCK, WALL_GROUND)
-
-        self.mock_section = spy(Section)
-        self.mock_section.corners = [(5, 5),
-                                            (15, 15)]
-
-        self.mock_section.width = 10
-        self.mock_section.height = 10
-        self.mock_section.left_edge = 5
-        self.mock_section.top_edge = 5
-
+        self.section = Section((5, 5), (15, 15), self.level)
         self.generator = SquareRoomGenerator(FLOOR_ROCK, WALL_EMPTY)
 
     def test_generate_simple_room(self):
         '''
         Test that generator can create a simple room
         '''
-        self.generator.generate_room(self.level, self.mock_section)
+        self.generator.generate_room(self.section)
 
         room_found = False
         for y_loc in range(20):
@@ -73,14 +62,15 @@ class TestSquareRoom():
                 if self.level.get_tile(x_loc, y_loc) != WALL_GROUND:
                     room_found = True
 
+        print self.level.dump_string()
+
         assert_that(room_found, is_(True))
 
     def test_room_connections_are_placed(self):
         """
         Test that generating a square room will place 4 connectors
         """
-        self.generator.generate_room(self.level, self.mock_section)
+        self.generator.generate_room(self.section)
 
-        assert_that_method(
-            self.mock_section.add_room_connection).was_called(
-            ).times(4)
+        assert_that(self.section.room_connections, has_length(4))
+

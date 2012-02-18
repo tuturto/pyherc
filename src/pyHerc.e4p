@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-02-05, 10:46:07 -->
+<!-- Saved: 2012-02-18, 09:33:42 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -82,6 +82,7 @@
     <Source>pyherc/generators/level/room/__init__.py</Source>
     <Source>pyherc/generators/level/room/squareroom.py</Source>
     <Source>pyherc/test/test_squareroom.py</Source>
+    <Source>pyherc/generators/level/room/corridor.py</Source>
   </Sources>
   <Forms>
   </Forms>

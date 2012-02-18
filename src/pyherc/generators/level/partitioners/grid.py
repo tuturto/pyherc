@@ -119,16 +119,14 @@ class GridPartitioner(object):
         x_sections = self.split_range_to_equals(size_of_level[0], x_sections)
         y_sections = self.split_range_to_equals(size_of_level[1], y_sections)
 
-        print x_sections
-        print y_sections
-
         for y_block in range(len(y_sections)):
             for x_block in range(len(x_sections)):
                 temp_section = Section(
                                        (x_sections[x_block][0],
                                         y_sections[y_block][0]),
                                         (x_sections[x_block][1],
-                                        y_sections[y_block][1]))
+                                        y_sections[y_block][1]),
+                                        level)
 
                 self.connect_new_section(temp_section,
                                          (x_block, y_block),
