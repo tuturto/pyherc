@@ -75,10 +75,14 @@ class TestSectionCalculations(object):
         """
         border = self.section.get_border()
         assert_that(border, has_items(
-                            (10, 10), (11, 10), (12, 10), (19, 10), (20, 10),
-                            (10, 11), (10, 12), (10, 13), (10, 24), (10, 25),
-                            (11, 25), (12, 25), (13, 25), (19, 25), (20, 25),
-                            (20, 11), (20, 12), (20, 13), (20, 23), (20, 24),
+                            (11, 10, "down"), (12, 10, "down"),
+                            (18, 10, "down"), (19, 10, "down"),
+                            (10, 11, "right"), (10, 12, "right"),
+                            (10, 23, "right"), (10, 24, "right"),
+                            (11, 25, "up"), (12, 25, "up"),
+                            (18, 25, "up"), (19, 25, "up"),
+                            (20, 11, "left"), (20, 12, "left"),
+                            (20, 23, "left"), (20, 24, "left"),
                             ))
 
 class TestSectionConnections(object):
@@ -137,12 +141,17 @@ class TestSectionConnections(object):
         common_border = self.section1.get_common_border(self.section2)
 
         assert_that(common_border, contains_inanyorder(
-                                        (10, 0), (10, 1), (10, 2), (10, 3),
-                                        (10, 4), (10, 5), (10, 6), (10, 7),
-                                        (10, 8), (10, 9), (10, 10), (10, 11),
-                                        (10, 12), (10, 13), (10, 14), (10, 15),
-                                        (10, 16), (10, 17), (10, 18), (10, 19),
-                                        (10, 20)))
+                                        (10, 1, "left"), (10, 2, "left"),
+                                        (10, 3, "left"), (10, 4, "left"),
+                                        (10, 5, "left"), (10, 6, "left"),
+                                        (10, 7, "left"), (10, 8, "left"),
+                                        (10, 9, "left"), (10, 10, "left"),
+                                        (10, 11, "left"), (10, 12, "left"),
+                                        (10, 13, "left"), (10, 14, "left"),
+                                        (10, 15, "left"), (10, 16, "left"),
+                                        (10, 17, "left"), (10, 18, "left"),
+                                        (10, 19, "left"),
+                                        ))
 
     def test_get_opposing_point(self):
         """
@@ -152,7 +161,7 @@ class TestSectionConnections(object):
         my_point = (10, 9)
         other_point = self.section2.get_opposing_point(my_point)
 
-        assert_that(other_point, is_(equal_to((11, 9))))
+        assert_that(other_point, is_(equal_to((11, 9, "right"))))
 
     def test_adding_room_connections(self):
         """

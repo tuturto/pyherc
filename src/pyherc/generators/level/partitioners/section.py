@@ -215,13 +215,13 @@ class Section(object):
         assert(len(self.__corners[0]) == 2)
         assert(len(self.__corners[1]) == 2)
 
-        for loc_x in range(self.__corners[0][0], self.__corners[1][0] + 1):
-            border.append((loc_x, self.__corners[0][1]))
-            border.append((loc_x, self.__corners[1][1]))
+        for loc_x in range(self.__corners[0][0] + 1, self.__corners[1][0]):
+            border.append((loc_x, self.__corners[0][1], "down"))
+            border.append((loc_x, self.__corners[1][1], "up"))
 
         for loc_y in range(self.__corners[0][1] + 1, self.__corners[1][1]):
-            border.append((self.__corners[0][0], loc_y))
-            border.append((self.__corners[1][0], loc_y))
+            border.append((self.__corners[0][0], loc_y, "right"))
+            border.append((self.__corners[1][0], loc_y, "left"))
 
         return border
 
@@ -290,7 +290,7 @@ class Connection(object):
             connection: Connection on another Section,
                     if connecting between sections
             location: (x_loc, y_loc) of this connection
-            direction: direction to connect to
+            direction: direction where corridor should start from here
                 up, down, left, right
         """
         object.__init__(self)
