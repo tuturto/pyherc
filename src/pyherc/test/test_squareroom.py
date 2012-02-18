@@ -19,12 +19,12 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
-Tests for SquareRoom room generator
+Tests for SquareRoomGenerator room generator
 '''
 #pylint: disable=W0614
 from pyherc.data import Level
 from pyherc.generators.level.partitioners.section import Section
-from pyherc.generators.level.room import SquareRoom
+from pyherc.generators.level.room import SquareRoomGenerator
 from pyDoubles.framework import spy #pylint: disable=F0401, E0611
 from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
@@ -34,7 +34,7 @@ from pyherc.data.tiles import WALL_EMPTY
 
 class TestSquareRoom():
     '''
-    Tests for SquareRoom room generator
+    Tests for SquareRoomGenerator room generator
     '''
     def __init__(self):
         '''
@@ -59,7 +59,7 @@ class TestSquareRoom():
         self.mock_section.left_edge = 5
         self.mock_section.top_edge = 5
 
-        self.generator = SquareRoom(FLOOR_ROCK, WALL_EMPTY)
+        self.generator = SquareRoomGenerator(FLOOR_ROCK, WALL_EMPTY)
 
     def test_generate_simple_room(self):
         '''

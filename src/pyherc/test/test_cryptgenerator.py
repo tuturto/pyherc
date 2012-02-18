@@ -26,7 +26,7 @@ from pyherc.generators.level.crypt import CryptGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorConfig
 from pyherc.generators.level.partitioners.grid import GridPartitioner
 from pyherc.generators.level.partitioners.section import Section
-from pyherc.generators.level.room.squareroom import SquareRoom
+from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from pyherc.rules import ActionFactory
 from pyherc.data import Portal
 from pyherc.data import Model
@@ -110,7 +110,7 @@ class TestCryptGenerator:
         '''
         mock_factory = stub(ActionFactory)
         mock_partitioner = spy(GridPartitioner)
-        mock_room_generator = spy(SquareRoom)
+        mock_room_generator = spy(SquareRoomGenerator)
         mock_level_decorator = empty_spy()
         mock_stair_adder = empty_spy()
         mock_config = stub(LevelGeneratorConfig)
