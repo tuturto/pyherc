@@ -18,8 +18,6 @@ posses it.
 Installing the game
 *******************
 
-No installation instructions are currently available.
-
 Dependencies
 ============
 - Python 2.6.1
@@ -29,3 +27,29 @@ Dependencies
 - pyHamcrest 1.6 (only needed for running test cases)
 - Sphinx 1.1.2 (only needed for generating documentation)
 
+Installing dependencies
+=======================
+Install python 2.7 from Python_.
+
+Install setuptools, by following instructions at: setuptools_.
+
+Rest of the dependencies can be automatically located and installed by following
+steps:
+
+Install PyGame by typing::
+
+    easy_install -U pygame
+
+PGU is currently included in the distribution, there is no need to install it.
+
+If you want to be able to run test cases, install pyDoubles and pyHamcrest::
+
+    easy_install -U pydoubles
+    easy_install -U pyhamcrest
+
+If you want to generate html manual and programmers guide, install Sphinx::
+
+    easy_install -U Sphinx
+
+.. _Python: http://python.org/getit/
+.. _setuptools: http://pypi.python.org/pypi/setuptools
