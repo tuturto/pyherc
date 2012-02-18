@@ -288,7 +288,10 @@ class Section(object):
             location: (loc_x, loc_y) location to set the tile
             tile: ID of the tile to use
         """
-        self.level.floor[location[0]][location[1]] = tile
+        x_loc = self.__get_left_edge() + location[0]
+        y_loc = self.__get_top_edge() + location[1]
+
+        self.level.floor[x_loc][y_loc] = tile
 
     def set_wall(self, location, tile):
         """
@@ -298,7 +301,10 @@ class Section(object):
             location: (loc_x, loc_y) location to set the tile
             tile: ID of the tile to use
         """
-        self.level.walls[location[0]][location[1]] = tile
+        x_loc = self.__get_left_edge() + location[0]
+        y_loc = self.__get_top_edge() + location[1]
+
+        self.level.walls[x_loc][y_loc] = tile
 
 class Connection(object):
     """

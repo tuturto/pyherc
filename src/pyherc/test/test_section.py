@@ -211,3 +211,39 @@ class TestSectionLevelAccess(object):
         self.section.set_wall((2, 2), WALL_GROUND)
 
         assert_that(self.level.walls[2][2], is_(equal_to(WALL_GROUND)))
+
+class TestSectionLevelAccessWithOffset(object):
+    """
+    Tests to ensure that client has access to portion of level via Section that
+    has been offset from the level
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        object.__init__(self)
+        self.level = None
+        self.section = None
+
+    def setup(self):
+        """
+        Setup the test case
+        """
+        self.level = Level((10, 10), FLOOR_EMPTY, WALL_EMPTY)
+        self.section = Section((5, 5), (10, 10), self.level)
+
+    def test_setting_floor_with_offset(self):
+        """
+        Test that off set Section is correctly mapped to the level
+        """
+        self.section.set_floor((2, 2), FLOOR_ROCK)
+
+        assert_that(self.level.floor[7][7], is_(equal_to(FLOOR_ROCK)))
+
+    def test_setting_wall_with_offset(self):
+        """
+        Test that offset Section is correctly mapped to the level
+        """
+        self.section.set_wall((3, 2), WALL_GROUND)
+
+        assert_that(self.level.walls[8][7], is_(equal_to(WALL_GROUND)))
