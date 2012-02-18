@@ -275,7 +275,6 @@ class Section(object):
         Args:
             location: (loc_x, loc_y) where to add the Connection
             direction: direction where this connections leads
-                up, down, left, right
         """
         self.__room_connections.append(
                                        Connection(None, location, direction))
