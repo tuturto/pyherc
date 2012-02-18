@@ -66,8 +66,20 @@
 <h2>Section<a class="headerlink" href="#section" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pyherc.generators.level.partitioners.section.Section">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.level.partitioners.section.</tt><tt class="descname">Section</tt><big>(</big><em>corner1</em>, <em>corner2</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.partitioners.section.</tt><tt class="descname">Section</tt><big>(</big><em>corner1</em>, <em>corner2</em>, <em>level</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class representing a single section in a level</p>
+<dl class="method">
+<dt id="pyherc.generators.level.partitioners.section.Section.add_room_connection">
+<tt class="descname">add_room_connection</tt><big>(</big><em>location</em>, <em>direction</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.add_room_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds connection to the room</p>
+<p>Room connections are used to connect rooms to edge of Sections</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>location: (loc_x, loc_y) where to add the Connection
+direction: direction where this connections leads</dd>
+</dl>
+</dd></dl>
+
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.section.Section.connect_to">
 <tt class="descname">connect_to</tt><big>(</big><em>section</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.connect_to" title="Permalink to this definition">¶</a></dt>
@@ -101,6 +113,40 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="pyherc.generators.level.partitioners.section.Section.get_border">
+<tt class="descname">get_border</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.get_border" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of locations, defining borders of this Section</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>List of (loc_x, loc_y) defining borders</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.generators.level.partitioners.section.Section.get_common_border">
+<tt class="descname">get_common_border</tt><big>(</big><em>another_section</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.get_common_border" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of locations that define common border between two Sections
+Border is placed on the edge of this Section</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>List of (loc_x, loc_y) defining common border</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.generators.level.partitioners.section.Section.get_opposing_point">
+<tt class="descname">get_opposing_point</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.get_opposing_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate which of this Section&#8217;s points corresponds to the point given
+on the other side of the common border</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>location: (loc_x, loc_y) defining point on the other side</dd>
+<dt>Returns:</dt>
+<dd>(loc_x, loc_y) if corresponding point is found, False otherwise</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyherc.generators.level.partitioners.section.Section.has_unconnected_neighbours">
 <tt class="descname">has_unconnected_neighbours</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.has_unconnected_neighbours" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if any of this Sections neighbours is unconnected</p>
@@ -126,6 +172,34 @@
 <dt id="pyherc.generators.level.partitioners.section.Section.neighbours">
 <tt class="descname">neighbours</tt><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.neighbours" title="Permalink to this definition">¶</a></dt>
 <dd><p>Readonly property to access neighbours of the section</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.partitioners.section.Section.room_connections">
+<tt class="descname">room_connections</tt><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.room_connections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Readonly property to access connections to the room</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.generators.level.partitioners.section.Section.set_floor">
+<tt class="descname">set_floor</tt><big>(</big><em>location</em>, <em>tile</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.set_floor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set floor at given location</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>location: (loc_x, loc_y) location to set the tile
+tile: ID of the tile to use</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.generators.level.partitioners.section.Section.set_wall">
+<tt class="descname">set_wall</tt><big>(</big><em>location</em>, <em>tile</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.set_wall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set wall at given location</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>location: (loc_x, loc_y) location to set the tile
+tile: ID of the tile to use</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">

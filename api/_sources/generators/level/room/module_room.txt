@@ -7,3 +7,4 @@ pyherc.generators.level.room
    :maxdepth: 2
    
    module_squareroom
+   module_corridor

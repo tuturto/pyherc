@@ -64,16 +64,34 @@ posses it.</p>
 </div>
 <div class="section" id="installing-the-game">
 <h2>Installing the game<a class="headerlink" href="#installing-the-game" title="Permalink to this headline">¶</a></h2>
-<p>No installation instructions are currently available.</p>
 <div class="section" id="dependencies">
 <h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Python 2.6.1</li>
 <li>PyGame 1.9.2</li>
 <li>PGU 0.18</li>
-<li>Mock 0.7.2 (only needed for running test cases)</li>
+<li>pyDoubles 1.4 (only needed for running test cases)</li>
+<li>pyHamcrest 1.6 (only needed for running test cases)</li>
 <li>Sphinx 1.1.2 (only needed for generating documentation)</li>
 </ul>
+</div>
+<div class="section" id="installing-dependencies">
+<h3>Installing dependencies<a class="headerlink" href="#installing-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>Install python 2.7 from <a class="reference external" href="http://python.org/getit/">Python</a>.</p>
+<p>Install setuptools, by following instructions at: <a class="reference external" href="http://pypi.python.org/pypi/setuptools">setuptools</a>.</p>
+<p>Rest of the dependencies can be automatically located and installed by following
+steps:</p>
+<p>Install PyGame by typing:</p>
+<div class="highlight-python"><pre>easy_install -U pygame</pre>
+</div>
+<p>PGU is currently included in the distribution, there is no need to install it.</p>
+<p>If you want to be able to run test cases, install pyDoubles and pyHamcrest:</p>
+<div class="highlight-python"><pre>easy_install -U pydoubles
+easy_install -U pyhamcrest</pre>
+</div>
+<p>If you want to generate html manual and programmers guide, install Sphinx:</p>
+<div class="highlight-python"><pre>easy_install -U Sphinx</pre>
+</div>
 </div>
 </div>
 </div>

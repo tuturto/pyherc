@@ -1,0 +1,150 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Generating an item &mdash; Herculeum 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.1 documentation" href="index.html" />
+    <link rel="next" title="API Reference" href="api_reference.html" />
+    <link rel="prev" title="Generating a level" href="generate_level.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api_reference.html" title="API Reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="generate_level.html" title="Generating a level"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="generating-an-item">
+<h1>Generating an item<a class="headerlink" href="#generating-an-item" title="Permalink to this headline">¶</a></h1>
+<p>This section will have a look at item generation and how to add new levels into
+the game.</p>
+<div class="section" id="overview-of-generating-item">
+<h2>Overview of generating item<a class="headerlink" href="#overview-of-generating-item" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generators/module_item.html#pyherc.generators.item.ItemGenerator" title="pyherc.generators.item.ItemGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.item.ItemGenerator</span></tt></a> is used to generate items.</p>
+<p>To generate item, following code can be used:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">new_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_generator</span><span class="o">.</span><span class="n">generateItem</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">tables</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;food&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>This will generate a random item of type food.</p>
+<p>Instance of <a class="reference internal" href="rules/module_tables.html#pyherc.rules.tables.Tables" title="pyherc.rules.tables.Tables"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.tables.Tables</span></tt></a> is passed as a first argument
+to the method. It contains (among other things) list of all possible items
+that the game can create. These are loaded as the game starts up. File where
+item definitions are, is resources/items.xml. By editing this file, new items
+can be easily added.</p>
+<p>Second parameter given to the method is a dictionary, which defines parameters
+used in item generation. Following keys are currently supported:</p>
+<blockquote>
+<div><ul class="simple">
+<li>name: generates item with given name</li>
+<li>type: generates item with given type (food, weapon)</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Generating an item</a><ul>
+<li><a class="reference internal" href="#overview-of-generating-item">Overview of generating item</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="generate_level.html"
+                        title="previous chapter">Generating a level</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api_reference.html"
+                        title="next chapter">API Reference</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/generate_item.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api_reference.html" title="API Reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="generate_level.html" title="Generating a level"
+             >previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
