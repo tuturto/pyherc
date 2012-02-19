@@ -140,6 +140,18 @@ class TestSectionConnections(object):
         assert_that(point2.location[0], is_(equal_to(11)))
         assert_that(point1.location[1], is_(equal_to(point2.location[1])))
 
+    def test_section_connections_have_direction(self):
+        """
+        Test that connections between sections have their directions set up
+        """
+        self.section1.connect_to(self.section2)
+
+        point1 = self.section1.connections[0]
+        point2 = self.section2.connections[0]
+
+        assert_that(point1.direction, is_(equal_to("left")))
+        assert_that(point2.direction, is_(equal_to("right")))
+
     def test_get_common_border(self):
         """
         Test that Section can calculate common border with another Section

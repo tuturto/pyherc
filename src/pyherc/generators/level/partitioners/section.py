@@ -180,18 +180,15 @@ class Section(object):
         my_side_of_border = self.get_common_border(section)
         my_side = self.random_generator.choice(my_side_of_border)
         my_connection = Connection(connection = section,
-                                   location = my_side,
-                                   direction = None,
+                                   location = (my_side[0], my_side[1]),
+                                   direction = my_side[2],
                                    section = self)
-
         self.connections.append(my_connection)
-
-        #TODO: figure out connection directions
 
         other_side = section.get_opposing_point(my_side)
         other_connection = Connection(connection = self,
-                                   location = other_side,
-                                   direction = None,
+                                   location = (other_side[0], other_side[1]),
+                                   direction = other_side[2],
                                    section = section)
         section.connections.append(other_connection)
 
@@ -219,7 +216,7 @@ class Section(object):
         Get list of locations, defining borders of this Section
 
         Returns:
-            List of (loc_x, loc_y) defining borders
+            List of (loc_x, loc_y, direction) defining borders
 
         Note:
             Coordinates are given relative to level origo
@@ -246,7 +243,7 @@ class Section(object):
         Border is placed on the edge of this Section
 
         Returns:
-            List of (loc_x, loc_y) defining common border
+            List of (loc_x, loc_y, direection) defining common border
 
         Note:
             Coordinates are given relative to level origo
