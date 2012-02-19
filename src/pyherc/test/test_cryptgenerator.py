@@ -21,6 +21,7 @@
 '''
 Tests for CryptGenerator
 '''
+#pylint: disable=W0614
 from pyherc.generators.level.crypt import CryptGenerator
 from pyherc.generators.level.crypt import CryptGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorConfig
@@ -34,7 +35,7 @@ from pyherc.data.tiles import FLOOR_ROCK, WALL_EMPTY
 from pyDoubles.framework import stub,  empty_stub, method_returning #pylint: disable=F0401, E0611
 from pyDoubles.framework import spy, assert_that_method, when, empty_spy #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
-from pyherc.test.matchers import whole_map_is_accessible_in
+from pyherc.test.matchers import map_accessibility_in
 
 import random
 
@@ -158,4 +159,4 @@ class TestCryptGenerator:
 
         new_level = generator.generate_level(portal, model)
 
-        assert_that(is_(True), whole_map_is_accessible_in(new_level))
+        assert_that(map_accessibility_in(new_level, WALL_EMPTY), is_(True))

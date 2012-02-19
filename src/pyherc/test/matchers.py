@@ -22,13 +22,9 @@
 Module for customer matchers used in testing
 """
 
-from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.hasmethod import hasmethod
-from hamcrest.core.helpers.wrap_matcher import wrap_matcher
-
-class MapConnectivity(BaseMatcher):
+class MapConnectivity():
     """
-    Metcher used to verify if generated level is fully connected
+    Helper class used to verify if generated level is fully connected
     """
     def __init__(self, level):
         """
@@ -38,32 +34,89 @@ class MapConnectivity(BaseMatcher):
             level: Level to check for connectivity
         """
         self.level = level
-        self.connectivity = None
+        self.all_points = []
+        self.connected_points = []
+        self.connected = None
 
-    def _matches(self, item):
+    def is_connected(self, open):
         """
-        Find out if this Level is fully connected
+        Checks if given level is fully connected
+
+        Args:
+            open: ID of tile considered open
 
         Returns:
-            True if fully connected, otherwise False
+            True if level is connected, otherwise False
         """
-        self.connectivity = False
-        return False
+        self.all_points = self.get_all_points(open)
 
-    def describe_to(self, description):
-        """
-        Describe this match
-        """
-        if self.connectivity == False:
-            description.append("Not connected")
+        if len(self.all_points) > 0:
+            self.get_connected_points(self.all_points[0], open)
+            self.connected = True
+            for point in self.all_points:
+                if not point in self.connected_points:
+                    self.connected = False
         else:
-            description.append("Connected")
+            self.connected = False
 
-def whole_map_is_accessible_in(match):
+        return self.connected
+
+    def get_all_points(self, open):
+        """
+        Get all open points in level
+
+        Args:
+            open: ID of tile considered open
+
+        Returns:
+            List of all open points in level
+        """
+        points = []
+
+        for loc_y in range(len(self.level.walls[0])):
+            for loc_x in range(len(self.level.walls)):
+                if self.level.walls[loc_x][loc_y] == open:
+                    points.append((loc_x, loc_y))
+
+        return points
+
+    def get_connected_points(self, start, open):
+        """
+        Get all points that are connected to a given point
+
+        Args:
+            start: start location
+            open: ID of tile considered open
+        """
+        x_loc = start[0]
+        y_loc = start[1]
+
+        if start in self.connected_points:
+            return None
+
+        if x_loc < 0 or x_loc > len(self.level.walls):
+            return None
+
+        if y_loc < 0 or y_loc > len(self.level.walls[0]):
+            return None
+
+        if self.level.walls[x_loc][y_loc] == open:
+            self.connected_points.append(start)
+            self.get_connected_points((x_loc, y_loc - 1), open)
+            self.get_connected_points((x_loc, y_loc + 1), open)
+            self.get_connected_points((x_loc - 1, y_loc), open)
+            self.get_connected_points((x_loc + 1, y_loc), open)
+
+def map_accessibility_in(level, open):
     """
     Check that the map is fully connected
 
     Args:
-        match: Level to check
+        level: Level to check
+        open: ID of tile considered open
+
+    Returns:
+        True if level is fully connected, False otherwise
     """
-    return MapConnectivity(wrap_matcher(match))
+    connectivity = MapConnectivity(level)
+    return connectivity.is_connected(open)
