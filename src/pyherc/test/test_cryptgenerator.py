@@ -30,8 +30,11 @@ from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from pyherc.rules import ActionFactory
 from pyherc.data import Portal
 from pyherc.data import Model
+from pyherc.data.tiles import FLOOR_ROCK, WALL_EMPTY
 from pyDoubles.framework import stub,  empty_stub, method_returning #pylint: disable=F0401, E0611
 from pyDoubles.framework import spy, assert_that_method, when, empty_spy #pylint: disable=F0401, E0611
+from hamcrest import * #pylint: disable=W0401
+from pyherc.test.matchers import whole_map_is_accessible_in
 
 import random
 
@@ -108,28 +111,51 @@ class TestCryptGenerator:
         '''
         Test that level generation steps are done
         '''
-        mock_factory = stub(ActionFactory)
-        mock_partitioner = spy(GridPartitioner)
-        mock_room_generator = spy(SquareRoomGenerator)
-        mock_level_decorator = empty_spy()
-        mock_stair_adder = empty_spy()
-        mock_config = stub(LevelGeneratorConfig)
-        mock_config.level_partitioners = [mock_partitioner]
-        mock_config.room_generators = [mock_room_generator]
+        factory = stub(ActionFactory)
+        partitioner = spy(GridPartitioner)
+        room_generator = spy(SquareRoomGenerator)
+        level_decorator = empty_spy()
+        stair_adder = empty_spy()
+        config = stub(LevelGeneratorConfig)
+        config.level_partitioners = [partitioner]
+        config.room_generators = [room_generator]
 
-        mock_portal = stub(Portal)
-        mock_model = stub(Model)
+        portal = stub(Portal)
+        model = stub(Model)
 
-        mock_section1 = stub(Section)
-        mock_section2 = stub(Section)
-        when(mock_partitioner.partition_level).then_return([mock_section1,
-                                                                mock_section2])
+        section1 = stub(Section)
+        section2 = stub(Section)
+        when(partitioner.partition_level).then_return([section1,
+                                                       section2])
 
-        generator = CryptGenerator(mock_factory, mock_config, random.Random())
+        generator = CryptGenerator(factory, config, random.Random())
 
-        generator.generate_level(mock_portal, mock_model)
+        generator.generate_level(portal, model)
 
-        assert_that_method(mock_partitioner.partition_level).was_called()
-        assert_that_method(mock_room_generator.generate_room).was_called().times(2)
-        assert_that_method(mock_level_decorator.decorate_level).was_called()
-        assert_that_method(mock_stair_adder.add_stairs).was_called()
+        assert_that_method(partitioner.partition_level).was_called()
+        assert_that_method(room_generator.generate_room).was_called().times(2)
+        assert_that_method(level_decorator.decorate_level).was_called()
+        assert_that_method(stair_adder.add_stairs).was_called()
+
+    def test_generation_creates_connected_level(self):
+        """
+        Test that crypt generator creates a fully connected level
+        """
+        factory = stub(ActionFactory)
+        partitioner = GridPartitioner()
+        room_generator = SquareRoomGenerator(floor_tile = FLOOR_ROCK,
+                                             empty_tile = WALL_EMPTY)
+        level_decorator = empty_spy()
+        stair_adder = empty_spy()
+        config = LevelGeneratorConfig()
+        config.level_partitioners.append(partitioner)
+        config.room_generators.append(room_generator)
+
+        portal = stub(Portal)
+        model = stub(Model)
+
+        generator = CryptGenerator(factory, config, random.Random())
+
+        new_level = generator.generate_level(portal, model)
+
+        assert_that(is_(True), whole_map_is_accessible_in(new_level))
