@@ -18,14 +18,17 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Main entry point for pyherc - game
-'''
-
+"""
 import os.path
 import sys, getopt
-import pygame
 import logging
+
+installation_path = os.path.abspath(".")
+sys.path.append(installation_path)
+
+import pygame
 import pgu.gui
 
 import pyherc.gui.surfaceManager

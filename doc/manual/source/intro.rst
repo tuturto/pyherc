@@ -40,7 +40,9 @@ Install PyGame by typing::
 
     easy_install -U pygame
 
-PGU is currently included in the distribution, there is no need to install it.
+Install PGU by typing::
+
+    easy_install -U pgu
 
 If you want to be able to run test cases, install pyDoubles and pyHamcrest::
 
@@ -53,3 +55,10 @@ If you want to generate html manual and programmers guide, install Sphinx::
 
 .. _Python: http://python.org/getit/
 .. _setuptools: http://pypi.python.org/pypi/setuptools
+
+Last step is to extract installation package to suitable folder.
+
+****************
+Running the game
+****************
+Run game by double clicking pyherc.bat or pyherc.sh in installation folder.
