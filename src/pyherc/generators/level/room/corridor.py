@@ -22,13 +22,46 @@
 Classes for generating corridors
 """
 
-class Corridor(object):
+import logging
+
+class CorridorGenerator(object):
     """
     Class for making simple corridors
     """
-    def __init__(self):
+    def __init__(self, start_point, end_point, tile):
         """
         Default constructor
+
+        Args:
+            start_point: (loc_x, loc_y) starting location
+            end_point: (loc_x, loc_y) ending location
+            tile: ID of tile to place
         """
         object.__init__(self)
+        self.start_point = start_point
+        self.end_point = end_point
+        self.tile = tile
 
+    def generate(self):
+        """
+        Carves corridor from start_point to end_point
+        """
+        if self.start_point.location[1] == self.end_point.location[1]:
+            self.__carve_horizontal()
+
+    def __carve_horizontal(self):
+        """
+        Special case, carving is done in straigth horizontal line
+        """
+        if self.start_point.location[0] > self.end_point.location[0]:
+            start_x = self.end_point.location[0]
+            end_x = self.start_point.location[0]
+        else:
+            start_x = self.start_point.location[0]
+            end_x = self.end_point.location[0]
+
+        y_loc = self.start_point.location[1]
+        section = self.start_point.section
+
+        for x_loc in range(start_x, end_x):
+            section.set_wall((x_loc, y_loc), self.tile)

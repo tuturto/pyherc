@@ -37,6 +37,9 @@ class Section(object):
             corner1: Coordinates of first corner
             corner2: Coordinates of the second corner
             level: Level where Section is linked
+
+        Note:
+            Coordinates are given relative to level origo
         """
         self.__corners = []
         self.__corners.append(corner1)
@@ -176,13 +179,20 @@ class Section(object):
         '''
         my_side_of_border = self.get_common_border(section)
         my_side = self.random_generator.choice(my_side_of_border)
-        my_connection = Connection(section, my_side, None)
+        my_connection = Connection(connection = section,
+                                   location = my_side,
+                                   direction = None,
+                                   section = self)
+
         self.connections.append(my_connection)
 
         #TODO: figure out connection directions
 
         other_side = section.get_opposing_point(my_side)
-        other_connection = Connection(self, other_side, None)
+        other_connection = Connection(connection = self,
+                                   location = other_side,
+                                   direction = None,
+                                   section = section)
         section.connections.append(other_connection)
 
     def unconnected_neighbours(self):
@@ -210,6 +220,9 @@ class Section(object):
 
         Returns:
             List of (loc_x, loc_y) defining borders
+
+        Note:
+            Coordinates are given relative to level origo
         """
         border = []
 
@@ -234,6 +247,9 @@ class Section(object):
 
         Returns:
             List of (loc_x, loc_y) defining common border
+
+        Note:
+            Coordinates are given relative to level origo
         """
         my_border = self.get_border()
         other_border = another_section.get_border()
@@ -256,6 +272,9 @@ class Section(object):
 
         Returns:
             (loc_x, loc_y) if corresponding point is found, False otherwise
+
+        Note:
+            Coordinates are given relative to level origo
         """
         my_side = None
         my_border = self.get_border()
@@ -275,9 +294,15 @@ class Section(object):
         Args:
             location: (loc_x, loc_y) where to add the Connection
             direction: direction where this connections leads
+
+        Note:
+            Coordinates are given relative to section origo
         """
         self.__room_connections.append(
-                                       Connection(None, location, direction))
+                        Connection(connection = None,
+                                   location = location,
+                                   direction = direction,
+                                   section = self))
 
     def set_floor(self, location, tile):
         """
@@ -286,6 +311,9 @@ class Section(object):
         Args:
             location: (loc_x, loc_y) location to set the tile
             tile: ID of the tile to use
+
+        Note:
+            Coordinates are given relative to section origo
         """
         x_loc = self.__get_left_edge() + location[0]
         y_loc = self.__get_top_edge() + location[1]
@@ -299,6 +327,9 @@ class Section(object):
         Args:
             location: (loc_x, loc_y) location to set the tile
             tile: ID of the tile to use
+
+        Note:
+            Coordinates are given relative to section origo
         """
         x_loc = self.__get_left_edge() + location[0]
         y_loc = self.__get_top_edge() + location[1]
@@ -309,7 +340,7 @@ class Connection(object):
     """
     Connection between Sections or between Section and room
     """
-    def __init__(self, connection, location, direction):
+    def __init__(self, connection, location, direction, section):
         """
         Default constructor
 
@@ -318,10 +349,10 @@ class Connection(object):
                     if connecting between sections
             location: (x_loc, y_loc) of this connection
             direction: direction where corridor should start from here
-                up, down, left, right
+            section: Section where connection is located
         """
         object.__init__(self)
         self.connection = connection
         self.location = location
         self.direction = direction
-
+        self.section = section
