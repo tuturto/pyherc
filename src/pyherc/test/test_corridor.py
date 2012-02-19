@@ -41,32 +41,37 @@ class TestCorridor():
         """
         Default constructor
         """
-        pass
+        self.level = None
+        self.section = None
+
+    def setup(self):
+        """
+        Setup the test case
+        """
+        self.level = Level(size = (10, 10),
+                      floor_type = FLOOR_ROCK,
+                      wall_type = WALL_GROUND)
+
+        self.section = Section(corner1 = (0, 0),
+                          corner2 = (10, 10),
+                          level = self.level)
 
     def test_straight_horizontal(self):
         """
         Test that straight horizontal corridor can be made
         """
-        level = Level(size = (10, 10),
-                      floor_type = FLOOR_ROCK,
-                      wall_type = WALL_GROUND)
-
-        section = Section(corner1 = (0, 0),
-                          corner2 = (10, 10),
-                          level = level)
-
         edge_connection = Connection(connection = None,
                                      location = (10, 5),
                                      direction = "left",
-                                     section = section)
+                                     section = self.section)
 
         room_connection = Connection(connection = None,
                                      location = (5, 5),
                                      direction = "right",
-                                     section = section)
+                                     section = self.section)
 
-        section.connections.append(edge_connection)
-        section.room_connections.append(room_connection)
+        self.section.connections.append(edge_connection)
+        self.section.room_connections.append(room_connection)
 
         generator = CorridorGenerator(start_point = edge_connection,
                                       end_point = room_connection,
@@ -74,5 +79,31 @@ class TestCorridor():
 
         generator.generate()
 
-        for x_loc in range(5, 10):
-            assert_that(level.get_tile(x_loc, 5), is_(equal_to(FLOOR_ROCK)))
+        for x_loc in range(5, 11):
+            assert_that(self.level.get_tile(x_loc, 5), is_(equal_to(FLOOR_ROCK)))
+
+    def test_straight_vertical(self):
+        """
+        Test that straight vertical corridor can be made
+        """
+        edge_connection = Connection(connection = None,
+                                     location = (5, 0),
+                                     direction = "down",
+                                     section = self.section)
+
+        room_connection = Connection(connection = None,
+                                     location = (5, 5),
+                                     direction = "up",
+                                     section = self.section)
+
+        self.section.connections.append(edge_connection)
+        self.section.room_connections.append(room_connection)
+
+        generator = CorridorGenerator(start_point = edge_connection,
+                                      end_point = room_connection,
+                                      tile = WALL_EMPTY)
+
+        generator.generate()
+
+        for y_loc in range(0, 6):
+            assert_that(self.level.get_tile(5, y_loc), is_(equal_to(FLOOR_ROCK)))

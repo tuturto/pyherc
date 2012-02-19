@@ -97,12 +97,12 @@ class CryptGenerator:
 
         self.logger.debug('partitioning level')
         partitioner = self.random_generator.choice(self.level_partitioners)
-        sections = partitioner.partition_level(level, 4, 3)
+        sections = partitioner.partition_level(new_level, 4, 3)
 
         self.logger.debug('generating rooms')
         for section in sections:
             room_generator = self.random_generator.choice(self.room_generators)
-            room_generator.generate_room(new_level, section)
+            room_generator.generate_room(section)
 
         # decorate level
         # add stairs
@@ -110,3 +110,5 @@ class CryptGenerator:
         # add items
 
         self.logger.debug(new_level.dump_string())
+
+        return new_level

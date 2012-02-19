@@ -22,8 +22,6 @@
 Classes for generating corridors
 """
 
-import logging
-
 class CorridorGenerator(object):
     """
     Class for making simple corridors
@@ -48,6 +46,8 @@ class CorridorGenerator(object):
         """
         if self.start_point.location[1] == self.end_point.location[1]:
             self.__carve_horizontal()
+        elif self.start_point.location[0] == self.end_point.location[0]:
+            self.__carve_vertical()
 
     def __carve_horizontal(self):
         """
@@ -65,3 +65,26 @@ class CorridorGenerator(object):
 
         for x_loc in range(start_x, end_x):
             section.set_wall((x_loc, y_loc), self.tile)
+
+        section.set_wall(self.end_point.location, self.tile)
+        section.set_wall(self.start_point.location, self.tile)
+
+    def __carve_vertical(self):
+        """
+        Special case, carving is done in straigth vertical line
+        """
+        if self.start_point.location[1] > self.end_point.location[1]:
+            start_y = self.end_point.location[1]
+            end_y = self.start_point.location[1]
+        else:
+            start_y = self.start_point.location[1]
+            end_y = self.end_point.location[1]
+
+        x_loc = self.start_point.location[0]
+        section = self.start_point.section
+
+        for y_loc in range(start_y, end_y):
+            section.set_wall((x_loc, y_loc), self.tile)
+
+        section.set_wall(self.end_point.location, self.tile)
+        section.set_wall(self.start_point.location, self.tile)
