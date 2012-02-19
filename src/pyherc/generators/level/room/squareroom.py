@@ -65,10 +65,12 @@ class SquareRoomGenerator(object):
                 section.set_floor((loc_x, loc_y), self.floor_tile)
                 section.set_wall((loc_x, loc_y), self.empty_tile)
 
-        section.add_room_connection(None, None)
-        section.add_room_connection(None, None)
-        section.add_room_connection(None, None)
-        section.add_room_connection(None, None)
+        center_x = (room_right_edge - room_left_edge) // 2
+        center_y = (room_bottom_edge - room_top_edge) // 2
+
+        section.add_room_connection((center_x, room_top_edge), "up")
+        section.add_room_connection((center_x, room_bottom_edge), "down")
+        section.add_room_connection((room_left_edge, center_y), "left")
+        section.add_room_connection((room_right_edge, center_y), "right")
 
         self.logger.debug('room generated')
-
