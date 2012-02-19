@@ -381,3 +381,21 @@ class Connection(object):
         self.location = location
         self.direction = direction
         self.section = section
+
+    def translate_to_section(self):
+        """
+        Create a new Connection with coordinates translated to section
+
+        Returns:
+            New connection
+        """
+        new_location = (self.location[0] - self.section.left_edge,
+                        self.location[1] - self.section.top_edge)
+
+        new_connection = Connection(self.connection,
+                                    new_location,
+                                    self.direction,
+                                    self.section)
+
+        return new_connection
+

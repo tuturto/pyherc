@@ -88,9 +88,10 @@ class SquareRoomGenerator(object):
         for section_connection in section.connections:
             room_connection = self.find_room_connection(section,
                                                         section_connection)
-            corridor = CorridorGenerator(room_connection,
-                                         section_connection,
-                                         self.empty_tile)
+            corridor = CorridorGenerator(
+                                room_connection,
+                                section_connection.translate_to_section(),
+                                self.empty_tile)
             corridor.generate()
 
     def find_room_connection(self, section, section_connection):

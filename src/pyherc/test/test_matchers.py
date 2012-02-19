@@ -80,3 +80,44 @@ class TestLevelConnectivity():
         points = self.matcher.get_all_points(WALL_EMPTY)
 
         assert_that(points, has_length(3))
+
+    def test_that_open_corners_work(self):
+        """
+        Test that finding connectivity with open corners work
+        """
+        self.level.walls[0][0] = WALL_EMPTY
+        self.level.walls[20][0] = WALL_EMPTY
+        self.level.walls[0][10] = WALL_EMPTY
+        self.level.walls[20][10] = WALL_EMPTY
+
+        assert_that(self.matcher.is_connected(WALL_EMPTY),
+                    is_(equal_to(False)))
+
+    def test_that_convoluted_case_works(self):
+        """
+        Test a convoluted case with 3 open areas and 2 of them being connected
+        to border
+        """
+        self.level = Level(size = (10, 10),
+                      floor_type = FLOOR_ROCK,
+                      wall_type = WALL_GROUND)
+
+        self.level.walls[2][5] = WALL_EMPTY
+        self.level.walls[2][6] = WALL_EMPTY
+        self.level.walls[2][7] = WALL_EMPTY
+        self.level.walls[2][8] = WALL_EMPTY
+        self.level.walls[2][9] = WALL_EMPTY
+        self.level.walls[2][10] = WALL_EMPTY
+
+        self.level.walls[5][8] = WALL_EMPTY
+
+        self.level.walls[5][2] = WALL_EMPTY
+        self.level.walls[6][2] = WALL_EMPTY
+        self.level.walls[7][2] = WALL_EMPTY
+        self.level.walls[8][2] = WALL_EMPTY
+        self.level.walls[9][2] = WALL_EMPTY
+        self.level.walls[10][2] = WALL_EMPTY
+
+        assert_that(self.matcher.is_connected(WALL_EMPTY),
+                    is_(equal_to(False)))
+

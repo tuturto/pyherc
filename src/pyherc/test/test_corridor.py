@@ -25,6 +25,7 @@ Tests for Corridor
 from pyDoubles.framework import spy #pylint: disable=F0401, E0611
 from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
+from pyherc.test.matchers import map_accessibility_in
 
 from pyherc.data import Level
 from pyherc.generators.level.partitioners.section import Section, Connection
@@ -107,3 +108,57 @@ class TestCorridor():
 
         for y_loc in range(0, 6):
             assert_that(self.level.get_tile(5, y_loc), is_(equal_to(FLOOR_ROCK)))
+
+    def test_bent_horizontal(self):
+        """
+        Test that horizontal corridor with bend can be made
+        """
+        edge_connection = Connection(connection = None,
+                                     location = (10, 2),
+                                     direction = "left",
+                                     section = self.section)
+
+        room_connection = Connection(connection = None,
+                                     location = (5, 8),
+                                     direction = "right",
+                                     section = self.section)
+
+        self.section.connections.append(edge_connection)
+        self.section.room_connections.append(room_connection)
+
+        generator = CorridorGenerator(start_point = edge_connection,
+                                      end_point = room_connection,
+                                      tile = WALL_EMPTY)
+
+        generator.generate()
+
+        assert_that(self.level.walls[10][2], is_(equal_to(WALL_EMPTY)))
+        assert_that(self.level.walls[5][8], is_(equal_to(WALL_EMPTY)))
+        assert_that(map_accessibility_in(self.level, WALL_EMPTY), is_(True))
+
+    def test_bent_vertical(self):
+        """
+        Test that horizontal corridor with bend can be made
+        """
+        edge_connection = Connection(connection = None,
+                                     location = (9, 0),
+                                     direction = "down",
+                                     section = self.section)
+
+        room_connection = Connection(connection = None,
+                                     location = (2, 9),
+                                     direction = "up",
+                                     section = self.section)
+
+        self.section.connections.append(edge_connection)
+        self.section.room_connections.append(room_connection)
+
+        generator = CorridorGenerator(start_point = edge_connection,
+                                      end_point = room_connection,
+                                      tile = WALL_EMPTY)
+
+        generator.generate()
+
+        assert_that(self.level.walls[9][0], is_(equal_to(WALL_EMPTY)))
+        assert_that(self.level.walls[2][9], is_(equal_to(WALL_EMPTY)))
+        assert_that(map_accessibility_in(self.level, WALL_EMPTY), is_(True))

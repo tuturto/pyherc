@@ -22,6 +22,8 @@
 Classes for generating corridors
 """
 
+from pyherc.generators.level.partitioners.section import Connection
+
 class CorridorGenerator(object):
     """
     Class for making simple corridors
@@ -45,46 +47,116 @@ class CorridorGenerator(object):
         Carves corridor from start_point to end_point
         """
         if self.start_point.location[1] == self.end_point.location[1]:
-            self.__carve_horizontal()
+            self.__carve_horizontal(self.start_point, self.end_point)
         elif self.start_point.location[0] == self.end_point.location[0]:
-            self.__carve_vertical()
+            self.__carve_vertical(self.start_point, self.end_point)
+        elif self.start_point.direction in ("left", "right"):
+            self.__carve_horizontal_bend(self.start_point, self.end_point)
+        elif self.start_point.direction in ("up", "down"):
+            self.__carve_vertical_bend(self.start_point, self.end_point)
 
-    def __carve_horizontal(self):
+    def __carve_horizontal(self, start_point, end_point):
         """
         Special case, carving is done in straigth horizontal line
-        """
-        if self.start_point.location[0] > self.end_point.location[0]:
-            start_x = self.end_point.location[0]
-            end_x = self.start_point.location[0]
-        else:
-            start_x = self.start_point.location[0]
-            end_x = self.end_point.location[0]
 
-        y_loc = self.start_point.location[1]
-        section = self.start_point.section
+        Args:
+            start_point: Starting connection
+            end_point: Ending connection
+        """
+        if start_point.location[0] > end_point.location[0]:
+            start_x = end_point.location[0]
+            end_x = start_point.location[0]
+        else:
+            start_x = start_point.location[0]
+            end_x = end_point.location[0]
+
+        y_loc = start_point.location[1]
+        section = start_point.section
 
         for x_loc in range(start_x, end_x):
             section.set_wall((x_loc, y_loc), self.tile)
 
-        section.set_wall(self.end_point.location, self.tile)
-        section.set_wall(self.start_point.location, self.tile)
+        section.set_wall(end_point.location, self.tile)
+        section.set_wall(start_point.location, self.tile)
 
-    def __carve_vertical(self):
+    def __carve_horizontal_bend(self, start_point, end_point):
+        """
+        Carve corridor in three sections (horizontal, vertical, horizontal)
+
+         Args:
+            start_point: Starting connection
+            end_point: Ending connection
+        """
+        middle_x = abs(start_point.location[0] - end_point.location[0]) // 2
+
+        if start_point.location[0] < end_point.location[0]:
+            middle_x = middle_x + start_point.location[0]
+        else:
+            middle_x = middle_x + end_point.location[0]
+
+        middle_start = Connection(None,
+                                 (middle_x, start_point.location[1]),
+                                 None,
+                                 self.start_point.section)
+
+        middle_end = Connection(None,
+                                 (middle_x, end_point.location[1]),
+                                 None,
+                                 self.start_point.section)
+
+        self.__carve_horizontal(start_point, middle_start)
+        self.__carve_vertical(middle_start, middle_end)
+        self.__carve_horizontal(middle_end, end_point)
+
+    def __carve_vertical(self, start_point, end_point):
         """
         Special case, carving is done in straigth vertical line
-        """
-        if self.start_point.location[1] > self.end_point.location[1]:
-            start_y = self.end_point.location[1]
-            end_y = self.start_point.location[1]
-        else:
-            start_y = self.start_point.location[1]
-            end_y = self.end_point.location[1]
 
-        x_loc = self.start_point.location[0]
-        section = self.start_point.section
+        Args:
+            start_point: Starting connection
+            end_point: Ending connection
+        """
+        if start_point.location[1] > end_point.location[1]:
+            start_y = end_point.location[1]
+            end_y = start_point.location[1]
+        else:
+            start_y = start_point.location[1]
+            end_y = end_point.location[1]
+
+        x_loc = start_point.location[0]
+        section = start_point.section
 
         for y_loc in range(start_y, end_y):
             section.set_wall((x_loc, y_loc), self.tile)
 
-        section.set_wall(self.end_point.location, self.tile)
-        section.set_wall(self.start_point.location, self.tile)
+        section.set_wall(end_point.location, self.tile)
+        section.set_wall(start_point.location, self.tile)
+
+    def __carve_vertical_bend(self, start_point, end_point):
+        """
+        Carve corridor in three sections (vertical, horizontal,vertical)
+
+         Args:
+            start_point: Starting connection
+            end_point: Ending connection
+        """
+        middle_y = abs(start_point.location[1] - end_point.location[1]) // 2
+
+        if start_point.location[1] < end_point.location[1]:
+            middle_y = middle_y + start_point.location[1]
+        else:
+            middle_y = middle_y + end_point.location[1]
+
+        middle_start = Connection(None,
+                                 (start_point.location[0], middle_y),
+                                 None,
+                                 self.start_point.section)
+
+        middle_end = Connection(None,
+                                 (end_point.location[0], middle_y),
+                                 None,
+                                 self.start_point.section)
+
+        self.__carve_vertical(start_point, middle_start)
+        self.__carve_horizontal(middle_start, middle_end)
+        self.__carve_vertical(middle_end, end_point)

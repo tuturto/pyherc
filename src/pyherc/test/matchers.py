@@ -94,10 +94,10 @@ class MapConnectivity():
         if start in self.connected_points:
             return None
 
-        if x_loc < 0 or x_loc > len(self.level.walls):
+        if x_loc < 0 or x_loc > len(self.level.walls) - 1:
             return None
 
-        if y_loc < 0 or y_loc > len(self.level.walls[0]):
+        if y_loc < 0 or y_loc > len(self.level.walls[0]) - 1:
             return None
 
         if self.level.walls[x_loc][y_loc] == open:
