@@ -189,6 +189,22 @@ class TestSectionConnections(object):
 
         assert_that(self.section1.room_connections, has_length(1))
 
+    def test_finding_room_connection(self):
+        """
+        Test that room connection can be found for given section connection
+        """
+        self.section1.add_room_connection((7, 5), "right")
+        self.section1.add_room_connection((3, 5), "left")
+        self.section1.add_room_connection((5, 7), "down")
+        self.section1.add_room_connection((5, 3), "right")
+
+        self.section1.connect_to(self.section2)
+        edge_connection = self.section1.connections[0]
+
+        connection = self.section1.find_room_connection(edge_connection)
+
+        assert_that(connection.direction, is_(equal_to("right")))
+
 class TestSectionLevelAccess(object):
     """
     Tests to ensure that client has access to portion of level via Section

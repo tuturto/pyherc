@@ -49,6 +49,7 @@ class Section(object):
         self.__connections = []
         self.__room_connections = []
         self.__neighbours = []
+        #TODO: inject from outside
         self.random_generator = random.Random()
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.section.Section') #pylint: disable=C0301
 
@@ -332,6 +333,33 @@ class Section(object):
         y_loc = self.__get_top_edge() + location[1]
 
         self.level.walls[x_loc][y_loc] = tile
+
+    def find_room_connection(self, section_connection):
+        """
+        Find room connection that matches to given section connection
+
+        Args:
+            section_connection: Connection at the edge of section
+
+        Returns:
+            matching room Connection
+        """
+        wanted = None
+        if section_connection.direction == "left":
+            wanted = "right"
+        elif section_connection.direction == "right":
+            wanted = "left"
+        elif section_connection.direction == "up":
+            wanted = "down"
+        else:
+            wanted = "up"
+
+        possible_connections = [x for x in self.room_connections
+                                if x.direction == wanted]
+
+        connection = self.random_generator.choice(possible_connections)
+
+        return connection
 
 class Connection(object):
     """

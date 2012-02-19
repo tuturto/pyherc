@@ -31,8 +31,8 @@ class CorridorGenerator(object):
         Default constructor
 
         Args:
-            start_point: (loc_x, loc_y) starting location
-            end_point: (loc_x, loc_y) ending location
+            start_point: starting Connection
+            end_point: ending Connection
             tile: ID of tile to place
         """
         object.__init__(self)

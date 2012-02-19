@@ -23,6 +23,7 @@ Classes for generating square rooms
 '''
 
 import logging
+from pyherc.generators.level.room.corridor import CorridorGenerator
 
 class SquareRoomGenerator(object):
     '''
@@ -73,4 +74,34 @@ class SquareRoomGenerator(object):
         section.add_room_connection((room_left_edge, center_y), "left")
         section.add_room_connection((room_right_edge, center_y), "right")
 
+        self.add_corridors(section)
+
         self.logger.debug('room generated')
+
+    def add_corridors(self, section):
+        """
+        Add corridors leading from room connection to section connections
+
+        Args:
+            section: Section to add corridors
+        """
+        for section_connection in section.connections:
+            room_connection = self.find_room_connection(section,
+                                                        section_connection)
+            corridor = CorridorGenerator(room_connection,
+                                         section_connection,
+                                         self.empty_tile)
+            corridor.generate()
+
+    def find_room_connection(self, section, section_connection):
+        """
+        Find room connection that matches to given section connection
+
+        Args:
+            section: Section to handle
+            section_connection: Connection at the edge of section
+
+        Returns:
+            matching room Connection
+        """
+        return section.find_room_connection(section_connection)

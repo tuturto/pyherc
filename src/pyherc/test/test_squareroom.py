@@ -73,4 +73,3 @@ class TestSquareRoom():
         self.generator.generate_room(self.section)
 
         assert_that(self.section.room_connections, has_length(4))
-
