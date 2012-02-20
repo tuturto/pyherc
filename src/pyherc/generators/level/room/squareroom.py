@@ -66,8 +66,8 @@ class SquareRoomGenerator(object):
                 section.set_floor((loc_x, loc_y), self.floor_tile)
                 section.set_wall((loc_x, loc_y), self.empty_tile)
 
-        center_x = (room_right_edge - room_left_edge) // 2
-        center_y = (room_bottom_edge - room_top_edge) // 2
+        center_x = (room_right_edge - room_left_edge) // 2 + room_left_edge
+        center_y = (room_bottom_edge - room_top_edge) // 2 + room_top_edge
 
         section.add_room_connection((center_x, room_top_edge), "up")
         section.add_room_connection((center_x, room_bottom_edge), "down")
