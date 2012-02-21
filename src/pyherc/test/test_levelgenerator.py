@@ -19,11 +19,11 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
-Tests for CryptGenerator
+Tests for LevelGenerator
 '''
 #pylint: disable=W0614
-from pyherc.generators.level.crypt import CryptGenerator
-from pyherc.generators.level.crypt import CryptGeneratorFactory
+from pyherc.generators.level.generator import LevelGenerator
+from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorConfig
 from pyherc.generators.level.partitioners.grid import GridPartitioner
 from pyherc.generators.level.partitioners.section import Section
@@ -39,9 +39,9 @@ from pyherc.test.matchers import map_accessibility_in
 
 import random
 
-class TestCryptGeneratorFactory:
+class TestLeveltGeneratorFactory:
     '''
-    Class for testing CryptGeneratorFactory
+    Class for testing LevelGeneratorFactory
     '''
     def __init__(self):
         '''
@@ -60,21 +60,21 @@ class TestCryptGeneratorFactory:
         self.mock_config = stub(LevelGeneratorConfig)
         self.mock_partitioner = empty_stub()
 
-        self.factory = CryptGeneratorFactory(self.mock_action_factory,
+        self.factory = LevelGeneratorFactory(self.mock_action_factory,
                                              [self.mock_config])
 
     def test_generating_level_generator(self):
         '''
-        Test that CryptGeneratorFactory can generate level generator
+        Test that LevelGeneratorFactory can generate level generator
         '''
         generator = self.factory.get_generator(level = 1)
 
         assert generator != None
         assert generator.action_factory == self.mock_action_factory
 
-class TestCryptGeneratorFactoryConfiguration:
+class TestLevelGeneratorFactoryConfiguration:
     '''
-    Class for testing configuring of CryptGeneratorFactory
+    Class for testing configuring of LevelGeneratorFactory
     '''
     def __init__(self):
         '''
@@ -84,23 +84,23 @@ class TestCryptGeneratorFactoryConfiguration:
 
     def test_passing_partitioner_to_generator(self):
         '''
-        Test that LevelPartitioner is correctly passed to CryptGenerator
+        Test that LevelPartitioner is correctly passed to LevelGenerator
         '''
         mock_action_factory = stub(ActionFactory)
         mock_partitioner = empty_stub()
         mock_config = stub(LevelGeneratorConfig)
         mock_config.level_partitioners = [mock_partitioner]
 
-        factory = CryptGeneratorFactory(mock_action_factory,
+        factory = LevelGeneratorFactory(mock_action_factory,
                                              [mock_config])
 
         generator = factory.get_generator(level = 1)
 
         assert mock_partitioner in generator.level_partitioners
 
-class TestCryptGenerator:
+class TestLevelGenerator:
     '''
-    Class for testing CryptGenerator
+    Class for testing LevelGenerator
     '''
     def __init__(self):
         '''
@@ -129,7 +129,7 @@ class TestCryptGenerator:
         when(partitioner.partition_level).then_return([section1,
                                                        section2])
 
-        generator = CryptGenerator(factory, config, random.Random())
+        generator = LevelGenerator(factory, config, random.Random())
 
         generator.generate_level(portal, model)
 
@@ -140,7 +140,7 @@ class TestCryptGenerator:
 
     def test_generation_creates_connected_level(self):
         """
-        Test that crypt generator creates a fully connected level
+        Test that level generator creates a fully connected level
         """
         factory = stub(ActionFactory)
         partitioner = GridPartitioner()
@@ -155,7 +155,7 @@ class TestCryptGenerator:
         portal = stub(Portal)
         model = stub(Model)
 
-        generator = CryptGenerator(factory, config, random.Random())
+        generator = LevelGenerator(factory, config, random.Random())
 
         new_level = generator.generate_level(portal, model)
 
