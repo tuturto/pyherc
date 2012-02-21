@@ -50,6 +50,8 @@ class TestLeveltGeneratorFactory:
         self.mock_action_factory = None
         self.mock_config = None
         self.mock_partitioner = None
+        self.mock_room_generator = None
+        self.decorator = None
         self.factory = None
 
     def setup(self):
@@ -59,9 +61,15 @@ class TestLeveltGeneratorFactory:
         self.mock_action_factory = stub(ActionFactory)
         self.mock_config = stub(LevelGeneratorConfig)
         self.mock_partitioner = empty_stub()
+        self.mock_room_generator = empty_stub()
+        self.decorator = empty_stub()
+
+        self.mock_config.level_partitioners = [self.mock_partitioner]
+        self.mock_config.room_generators = [self.mock_room_generator]
+        self.mock_config.decorators = [self.decorator]
 
         self.factory = LevelGeneratorFactory(self.mock_action_factory,
-                                             [self.mock_config])
+                                             self.mock_config)
 
     def test_generating_level_generator(self):
         '''
@@ -87,16 +95,22 @@ class TestLevelGeneratorFactoryConfiguration:
         Test that LevelPartitioner is correctly passed to LevelGenerator
         '''
         mock_action_factory = stub(ActionFactory)
-        mock_partitioner = empty_stub()
+        mock_partitioner = stub(GridPartitioner)
+        mock_partitioner.level_type = "space"
+        mock_room_generator = empty_stub()
+        mock_decorator = empty_stub()
+
         mock_config = stub(LevelGeneratorConfig)
         mock_config.level_partitioners = [mock_partitioner]
+        mock_config.room_generators = [mock_room_generator]
+        mock_config.decorators = [mock_decorator]
 
         factory = LevelGeneratorFactory(mock_action_factory,
-                                             [mock_config])
+                                             mock_config)
 
         generator = factory.get_generator(level = 1)
 
-        assert mock_partitioner in generator.level_partitioners
+        assert_that(generator.partitioner, is_(same_instance(mock_partitioner)))
 
 class TestLevelGenerator:
     '''
@@ -117,9 +131,6 @@ class TestLevelGenerator:
         room_generator = spy(SquareRoomGenerator)
         level_decorator = empty_spy()
         stair_adder = empty_spy()
-        config = stub(LevelGeneratorConfig)
-        config.level_partitioners = [partitioner]
-        config.room_generators = [room_generator]
 
         portal = stub(Portal)
         model = stub(Model)
@@ -129,7 +140,8 @@ class TestLevelGenerator:
         when(partitioner.partition_level).then_return([section1,
                                                        section2])
 
-        generator = LevelGenerator(factory, config, random.Random())
+        generator = LevelGenerator(factory, partitioner, room_generator, None,
+                                   random.Random())
 
         generator.generate_level(portal, model)
 
@@ -148,14 +160,12 @@ class TestLevelGenerator:
                                              empty_tile = WALL_EMPTY)
         level_decorator = empty_spy()
         stair_adder = empty_spy()
-        config = LevelGeneratorConfig()
-        config.level_partitioners.append(partitioner)
-        config.room_generators.append(room_generator)
 
         portal = stub(Portal)
         model = stub(Model)
 
-        generator = LevelGenerator(factory, config, random.Random())
+        generator = LevelGenerator(factory, partitioner, room_generator, None,
+                                   random.Random())
 
         new_level = generator.generate_level(portal, model)
 

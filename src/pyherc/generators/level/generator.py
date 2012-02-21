@@ -26,13 +26,14 @@ import logging
 import random
 from pyherc.generators import ItemGenerator
 from pyherc.generators import CreatureGenerator
+from pyherc.generators.level.config import LevelGeneratorConfig
 from pyherc.data import Level
 
 class LevelGeneratorFactory:
     '''
     Class used to contruct different kinds of level generators
     '''
-    def __init__(self, action_factory, level_configurations):
+    def __init__(self, action_factory, configuration):
         '''
         Default constructor
 
@@ -41,7 +42,10 @@ class LevelGeneratorFactory:
         '''
         self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGeneratorFactory') #pylint: disable=c0301
         self.action_factory = action_factory
-        self.level_configurations = level_configurations
+        self.level_partitioners = configuration.level_partitioners
+        self.room_generators = configuration.room_generators
+        self.decorators = configuration.decorators
+        self.random_generator = random.Random()
 
     def get_generator(self, level, random_generator = random.Random()):
         '''
@@ -49,15 +53,23 @@ class LevelGeneratorFactory:
         @param level: current level (how deep player has reached)
         @param random_generator: Optional random number generator
         '''
+        partitioner = self.random_generator.choice(self.level_partitioners)
+        room = self.random_generator.choice(self.room_generators)
+        decorator = self.random_generator.choice(self.decorators)
+
+        config = LevelGeneratorConfig()
         return LevelGenerator(self.action_factory,
-                                        self.level_configurations[level - 1],
+                                        partitioner,
+                                        room,
+                                        decorator,
                                         random_generator)
 
 class LevelGenerator:
     '''
     Class used to generate levels
     '''
-    def __init__(self, action_factory, configuration, random_generator):
+    def __init__(self, action_factory, partitioner, room_generator,
+                 decorator, random_generator):
         '''
         Default constructor
         @param action_factory: ActionFactory instance
@@ -69,8 +81,9 @@ class LevelGenerator:
         self.random_generator = random_generator
 
         self.action_factory = action_factory
-        self.level_partitioners = configuration.level_partitioners
-        self.room_generators = configuration.room_generators
+        self.partitioner = partitioner
+        self.room_generator = room_generator
+        self.decorator = decorator
 
     def __getstate__(self):
         '''
@@ -96,13 +109,11 @@ class LevelGenerator:
         new_level = Level((60, 40))
 
         self.logger.debug('partitioning level')
-        partitioner = self.random_generator.choice(self.level_partitioners)
-        sections = partitioner.partition_level(new_level, 4, 3)
+        sections = self.partitioner.partition_level(new_level, 4, 3)
 
         self.logger.debug('generating rooms')
         for section in sections:
-            room_generator = self.random_generator.choice(self.room_generators)
-            room_generator.generate_room(section)
+            self.room_generator.generate_room(section)
 
         # decorate level
         # add stairs
