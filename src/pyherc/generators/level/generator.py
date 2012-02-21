@@ -47,14 +47,30 @@ class LevelGeneratorFactory:
         self.decorators = configuration.decorators
         self.random_generator = random.Random()
 
-    def get_generator(self, level, random_generator = random.Random()):
-        '''
+    def get_generator(self, level, level_type, random_generator):
+        """
         Get LevelGenerator for given level
-        @param level: current level (how deep player has reached)
-        @param random_generator: Optional random number generator
-        '''
+
+        Args:
+            level: current level (how deep player has reached)
+            level_type: type of level to generate
+            random_generator: Optional random number generator
+
+        Returns:
+            configured LevelGenerator
+        """
         partitioner = self.random_generator.choice(self.level_partitioners)
-        room = self.random_generator.choice(self.room_generators)
+
+        matching_room_generators = [x for x in self.room_generators
+                                    if level_type in x.level_types]
+
+        if len(matching_room_generators) > 0:
+            room = self.random_generator.choice(matching_room_generators)
+        else:
+            room = None
+            self.logger.warn("No room generator found for type {0}".format(
+                                                        level_type))
+
         decorator = self.random_generator.choice(self.decorators)
 
         config = LevelGeneratorConfig()

@@ -18,9 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Tests for LevelGenerator
-'''
+"""
 #pylint: disable=W0614
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.generator import LevelGeneratorFactory
@@ -40,13 +40,13 @@ from pyherc.test.matchers import map_accessibility_in
 import random
 
 class TestLeveltGeneratorFactory:
-    '''
+    """
     Class for testing LevelGeneratorFactory
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         self.mock_action_factory = None
         self.mock_config = None
         self.mock_partitioner = None
@@ -55,13 +55,14 @@ class TestLeveltGeneratorFactory:
         self.factory = None
 
     def setup(self):
-        '''
+        """
         Setup test case
-        '''
+        """
         self.mock_action_factory = stub(ActionFactory)
         self.mock_config = stub(LevelGeneratorConfig)
         self.mock_partitioner = empty_stub()
         self.mock_room_generator = empty_stub()
+        self.mock_room_generator.level_types = ['crypt']
         self.decorator = empty_stub()
 
         self.mock_config.level_partitioners = [self.mock_partitioner]
@@ -72,32 +73,34 @@ class TestLeveltGeneratorFactory:
                                              self.mock_config)
 
     def test_generating_level_generator(self):
-        '''
+        """
         Test that LevelGeneratorFactory can generate level generator
-        '''
-        generator = self.factory.get_generator(level = 1)
+        """
+        generator = self.factory.get_generator(level = 1,
+                                            level_type = "crypt",
+                                            random_generator = random.Random())
 
         assert generator != None
         assert generator.action_factory == self.mock_action_factory
 
 class TestLevelGeneratorFactoryConfiguration:
-    '''
+    """
     Class for testing configuring of LevelGeneratorFactory
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         pass
 
     def test_passing_partitioner_to_generator(self):
-        '''
+        """
         Test that LevelPartitioner is correctly passed to LevelGenerator
-        '''
+        """
         mock_action_factory = stub(ActionFactory)
         mock_partitioner = stub(GridPartitioner)
-        mock_partitioner.level_type = "space"
         mock_room_generator = empty_stub()
+        mock_room_generator.level_types = ['crypt']
         mock_decorator = empty_stub()
 
         mock_config = stub(LevelGeneratorConfig)
@@ -108,24 +111,50 @@ class TestLevelGeneratorFactoryConfiguration:
         factory = LevelGeneratorFactory(mock_action_factory,
                                              mock_config)
 
-        generator = factory.get_generator(level = 1)
+        generator = factory.get_generator(level = 1,
+                                          level_type = "crypt",
+                                          random_generator = random.Random())
 
         assert_that(generator.partitioner, is_(same_instance(mock_partitioner)))
 
+    def test_level_type_is_checked(self):
+        """
+        Check that room generator with incorrect level type is not used
+        """
+        mock_action_factory = stub(ActionFactory)
+        mock_partitioner = stub(GridPartitioner)
+        mock_room_generator = empty_stub()
+        mock_room_generator.level_types = ["swamp"]
+        mock_decorator = empty_stub()
+
+        mock_config = stub(LevelGeneratorConfig)
+        mock_config.level_partitioners = [mock_partitioner]
+        mock_config.room_generators = [mock_room_generator]
+        mock_config.decorators = [mock_decorator]
+
+        factory = LevelGeneratorFactory(mock_action_factory,
+                                             mock_config)
+
+        generator = factory.get_generator(level = 1,
+                                          level_type = "crypt",
+                                          random_generator = random.Random())
+
+        assert_that(generator.room_generator, is_(none()))
+
 class TestLevelGenerator:
-    '''
+    """
     Class for testing LevelGenerator
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         pass
 
     def test_level_generation_steps(self):
-        '''
+        """
         Test that level generation steps are done
-        '''
+        """
         factory = stub(ActionFactory)
         partitioner = spy(GridPartitioner)
         room_generator = spy(SquareRoomGenerator)
