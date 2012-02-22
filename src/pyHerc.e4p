@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-02-21, 07:55:54 -->
+<!-- Saved: 2012-02-22, 21:47:25 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -87,6 +87,7 @@
     <Source>pyherc/test/test_connection.py</Source>
     <Source>pyherc/generators/level/generator.py</Source>
     <Source>pyherc/test/test_levelgenerator.py</Source>
+    <Source>pyherc/generators/level/prototiles.py</Source>
   </Sources>
   <Forms>
   </Forms>
