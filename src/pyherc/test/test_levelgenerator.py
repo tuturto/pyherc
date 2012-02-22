@@ -169,7 +169,8 @@ class TestLevelGenerator:
         when(partitioner.partition_level).then_return([section1,
                                                        section2])
 
-        generator = LevelGenerator(factory, partitioner, room_generator, None,
+        generator = LevelGenerator(factory, partitioner, room_generator,
+                                   level_decorator, stair_adder,
                                    random.Random())
 
         generator.generate_level(portal, model)
@@ -193,7 +194,8 @@ class TestLevelGenerator:
         portal = stub(Portal)
         model = stub(Model)
 
-        generator = LevelGenerator(factory, partitioner, room_generator, None,
+        generator = LevelGenerator(factory, partitioner, room_generator,
+                                   level_decorator, stair_adder,
                                    random.Random())
 
         new_level = generator.generate_level(portal, model)

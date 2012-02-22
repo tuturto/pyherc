@@ -45,6 +45,7 @@ class LevelGeneratorFactory:
         self.level_partitioners = configuration.level_partitioners
         self.room_generators = configuration.room_generators
         self.decorators = configuration.decorators
+        self.stair_adder = None
         self.random_generator = random.Random()
 
     def get_generator(self, level, level_type, random_generator):
@@ -78,6 +79,7 @@ class LevelGeneratorFactory:
                                         partitioner,
                                         room,
                                         decorator,
+                                        self.stair_adder,
                                         random_generator)
 
 class LevelGenerator:
@@ -85,7 +87,7 @@ class LevelGenerator:
     Class used to generate levels
     '''
     def __init__(self, action_factory, partitioner, room_generator,
-                 decorator, random_generator):
+                 decorator, stair_adder, random_generator):
         '''
         Default constructor
         @param action_factory: ActionFactory instance
@@ -100,6 +102,7 @@ class LevelGenerator:
         self.partitioner = partitioner
         self.room_generator = room_generator
         self.decorator = decorator
+        self.stair_adder = stair_adder
 
     def __getstate__(self):
         '''
@@ -131,7 +134,9 @@ class LevelGenerator:
         for section in sections:
             self.room_generator.generate_room(section)
 
-        # decorate level
+        self.decorator.decorate_level(new_level)
+
+        self.stair_adder.add_stairs(new_level)
         # add stairs
         # add monsters
         # add items
