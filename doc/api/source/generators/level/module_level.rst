@@ -10,5 +10,7 @@ pyherc.generators.level
    module_config
    module_generator
    module_testlevel
+   module_prototiles
+   decorator/module_decorator
    partitioners/module_partitioners
    room/module_room

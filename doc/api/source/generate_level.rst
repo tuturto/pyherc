@@ -124,8 +124,8 @@ Another option is to use proxy level generators, that will cause levels to
 be generated at the moment when somebody tries to walk through portal to enter
 them.
 
-Addid level into the dungeon
-++++++++++++++++++++++++++++
+Adding level into the dungeon
++++++++++++++++++++++++++++++
 Now you have a generator that can be used to generate new levels. Last step
 is to modify an existing level generator to place a portal and create a level
 using this new generator. If that step is skipped, new type of levels will

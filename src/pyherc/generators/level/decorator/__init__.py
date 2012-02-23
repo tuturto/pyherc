@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -19,18 +19,7 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for proto tile IDs
-
-These IDs are used to mark tiles on generated levels before the level has been
-processed by decorator. This allows level generators to work on higher level of
-abstraction and real theme of the level can be changed by using different
-decorators.
+Module for level decorators
 """
 
-FLOOR_EMPTY = -1
-FLOOR_NATURAL = -2
-FLOOR_CONSTRUCTED = -3
-
-WALL_EMPTY = -100
-WALL_NATURAL = -101
-WALL_CONSTRUCTED = -102
+from .basic import Decorator, DecoratorConfig
