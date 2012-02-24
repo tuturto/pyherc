@@ -42,14 +42,20 @@ class Decorator(object):
         Decorate level
         """
         level = self.level
-        tile_keys = self.configuration.ground_config.keys()
+        floor_keys = self.configuration.ground_config.keys()
         ground_tiles = self.configuration.ground_config
+        wall_keys = self.configuration.wall_config.keys()
+        wall_tiles = self.configuration.wall_config
+
         for loc_y in range(len(level.floor[0])):
             for loc_x in range(len(level.floor)):
-                print loc_x, loc_y
                 proto_tile = level.floor[loc_x][loc_y]
-                if proto_tile in tile_keys:
+                if proto_tile in floor_keys:
                     level.floor[loc_x][loc_y] = ground_tiles[proto_tile]
+
+                proto_tile = level.walls[loc_x][loc_y]
+                if proto_tile in wall_keys:
+                    level.walls[loc_x][loc_y] = wall_tiles[proto_tile]
 
 
 class DecoratorConfig(object):
@@ -62,3 +68,4 @@ class DecoratorConfig(object):
         """
         super(DecoratorConfig, self).__init__()
         self.ground_config = {}
+        self.wall_config = {}

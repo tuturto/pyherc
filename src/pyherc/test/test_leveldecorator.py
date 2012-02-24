@@ -28,40 +28,68 @@ from pyDoubles.framework import when, spy, stub #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
 from pyherc.data.tiles import FLOOR_ROCK, FLOOR_BRICK, WALL_EMPTY, WALL_GROUND
 from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
+from pyherc.generators.level.prototiles import WALL_NATURAL
 
 class TestLevelDecorator():
     """
     Tests for LevelDecorator
     """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.level = None
+        self.config = None
+        self.decorator = None
+
+    def setup(self):
+        """
+        Setup the test case
+        """
+        self.level = Level((10, 15),
+                      floor_type = FLOOR_NATURAL,
+                      wall_type = WALL_EMPTY)
+
+        self.level.floor[5][5] = FLOOR_CONSTRUCTED
+        self.level.floor[6][5] = FLOOR_CONSTRUCTED
+        self.level.floor[7][5] = FLOOR_CONSTRUCTED
+        self.level.floor[0][0] = FLOOR_CONSTRUCTED
+        self.level.floor[10][0] = FLOOR_CONSTRUCTED
+        self.level.floor[0][15] = FLOOR_CONSTRUCTED
+        self.level.floor[10][15] = FLOOR_CONSTRUCTED
+
+        self.level.walls[2][2] = WALL_NATURAL
+        self.level.walls[5][5] = WALL_NATURAL
+
+        self.config = DecoratorConfig()
+        self.config.ground_config[FLOOR_NATURAL] = FLOOR_ROCK
+        self.config.ground_config[FLOOR_CONSTRUCTED] = FLOOR_BRICK
+
+        self.config.wall_config[WALL_NATURAL] = WALL_GROUND
+
+        self.decorator = Decorator(self.config, self.level)
+
     def test_replacing_ground(self):
         """
         Test that proto ground is replaced with given tiles
         """
-        level = Level((10, 15),
-                      floor_type = FLOOR_NATURAL,
-                      wall_type = WALL_EMPTY)
+        self.decorator.decorate_level()
 
-        level.floor[5][5] = FLOOR_CONSTRUCTED
-        level.floor[6][5] = FLOOR_CONSTRUCTED
-        level.floor[7][5] = FLOOR_CONSTRUCTED
-        level.floor[0][0] = FLOOR_CONSTRUCTED
-        level.floor[10][0] = FLOOR_CONSTRUCTED
-        level.floor[0][15] = FLOOR_CONSTRUCTED
-        level.floor[10][15] = FLOOR_CONSTRUCTED
+        assert_that(self.level.floor[5][5], is_(equal_to(FLOOR_BRICK)))
+        assert_that(self.level.floor[6][5], is_(equal_to(FLOOR_BRICK)))
+        assert_that(self.level.floor[7][5], is_(equal_to(FLOOR_BRICK)))
+        assert_that(self.level.floor[0][0], is_(equal_to(FLOOR_BRICK)))
+        assert_that(self.level.floor[10][0], is_(equal_to(FLOOR_BRICK)))
+        assert_that(self.level.floor[0][15], is_(equal_to(FLOOR_BRICK)))
+        assert_that(self.level.floor[10][15], is_(equal_to(FLOOR_BRICK)))
 
-        config = DecoratorConfig()
-        config.ground_config[FLOOR_NATURAL] = FLOOR_ROCK
-        config.ground_config[FLOOR_CONSTRUCTED] = FLOOR_BRICK
+        assert_that(self.level.floor[2][2], is_(equal_to(FLOOR_ROCK)))
 
-        decorator = Decorator(config, level)
-        decorator.decorate_level()
+    def test_replacing_walls(self):
+        """
+        Test that proto walls are replaced with given tiles
+        """
+        self.decorator.decorate_level()
 
-        assert_that(level.floor[5][5], is_(equal_to(FLOOR_BRICK)))
-
-        assert_that(level.floor[5][5], is_(equal_to(FLOOR_BRICK)))
-        assert_that(level.floor[6][5], is_(equal_to(FLOOR_BRICK)))
-        assert_that(level.floor[7][5], is_(equal_to(FLOOR_BRICK)))
-        assert_that(level.floor[0][0], is_(equal_to(FLOOR_BRICK)))
-        assert_that(level.floor[10][0], is_(equal_to(FLOOR_BRICK)))
-        assert_that(level.floor[0][15], is_(equal_to(FLOOR_BRICK)))
-        assert_that(level.floor[10][15], is_(equal_to(FLOOR_BRICK)))
+        assert_that(self.level.walls[2][2], is_(equal_to(WALL_GROUND)))
+        assert_that(self.level.walls[5][5], is_(equal_to(WALL_GROUND)))
