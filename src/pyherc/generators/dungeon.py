@@ -18,9 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module for dungeon generation
-'''
+"""
 
 import logging
 import random
@@ -38,6 +38,12 @@ class DungeonGenerator:
     """
 
     def __init__(self, action_factory):
+        """
+        Default constructor
+
+        Args:
+            action_factory: initialised action factory
+        """
         self.logger = logging.getLogger('pyherc.generators.dungeon.DungeonGenerator')
         self.action_factory = action_factory
 

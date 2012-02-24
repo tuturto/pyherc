@@ -18,6 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Package for rules of the game
+"""
 from .public import ActionFactory
 from .public import ActionParameters
 from .public import AttackParameters

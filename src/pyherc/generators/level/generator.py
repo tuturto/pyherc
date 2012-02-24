@@ -23,7 +23,6 @@ Classs needed for generating levels
 '''
 
 import logging
-import random
 from pyherc.generators import ItemGenerator
 from pyherc.generators import CreatureGenerator
 from pyherc.generators.level.config import LevelGeneratorConfig
@@ -33,12 +32,14 @@ class LevelGeneratorFactory:
     '''
     Class used to contruct different kinds of level generators
     '''
-    def __init__(self, action_factory, configuration):
+    def __init__(self, action_factory, configuration, random_generator):
         '''
         Default constructor
 
-        @param action_factory: ActionFactory to pass to the generator
-        @param level_configurations: List of LevelGeneratorConfiguration objects
+        Args:
+            action_factory: ActionFactory to pass to the generator
+            level_configurations: List of LevelGeneratorConfiguration objects
+            random_generator: Random number generator
         '''
         self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGeneratorFactory') #pylint: disable=c0301
         self.action_factory = action_factory
@@ -46,16 +47,15 @@ class LevelGeneratorFactory:
         self.room_generators = configuration.room_generators
         self.decorators = configuration.decorators
         self.stair_adder = None
-        self.random_generator = random.Random()
+        self.random_generator = random_generator
 
-    def get_generator(self, level, level_type, random_generator):
+    def get_generator(self, level, level_type):
         """
         Get LevelGenerator for given level
 
         Args:
             level: current level (how deep player has reached)
             level_type: type of level to generate
-            random_generator: Optional random number generator
 
         Returns:
             configured LevelGenerator
@@ -68,9 +68,10 @@ class LevelGeneratorFactory:
         if len(matching_room_generators) > 0:
             room = self.random_generator.choice(matching_room_generators)
         else:
-            room = None
-            self.logger.warn("No room generator found for type {0}".format(
-                                                        level_type))
+            error_message = "No room generator found for type {0}".format(
+                                                        level_type)
+            self.logger.error(error_message)
+            raise RuntimeError(error_message)
 
         decorator = self.random_generator.choice(self.decorators)
 
@@ -80,7 +81,7 @@ class LevelGeneratorFactory:
                                         room,
                                         decorator,
                                         self.stair_adder,
-                                        random_generator)
+                                        self.random_generator)
 
 class LevelGenerator:
     '''

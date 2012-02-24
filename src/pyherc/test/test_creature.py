@@ -19,6 +19,10 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Module for testing creatures
+"""
+
 from pyherc.data.model import Character, WeaponProficiency
 from pyherc.test import IntegrationTest
 from pyherc.generators.level.testlevel import TestLevelGenerator

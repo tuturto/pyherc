@@ -24,6 +24,10 @@
 #   original implementation by Eric D. Burgess is from:
 #   http://roguebasin.roguelikedevelopment.org/index.php/Python_shadowcasting_implementation
 
+"""
+Line of sight implementation
+"""
+
 import pyherc.data.tiles
 
 import logging

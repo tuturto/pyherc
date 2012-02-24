@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Module for checking end conditions
+"""
+
 import logging
 
 __logger = logging.getLogger('pyherc.rules.ending')

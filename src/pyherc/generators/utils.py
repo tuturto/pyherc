@@ -18,11 +18,11 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Utility classes
 
 BSPSection
-'''
+"""
 
 import random
 import logging
@@ -34,6 +34,9 @@ class BSPSection:
     """
     def __init__(self, corner1 = None, corner2 = None, parent = None,
                  direction = None):
+        """
+        Default constructor
+        """
         self.corner1 = corner1
         self.corner2 = corner2
         self.node1 = None
@@ -96,6 +99,9 @@ class BSPSection:
                                     self, direction)
 
     def __str__(self):
+        """
+        Override __str__ to print meaningful string representation
+        """
         str = ''
         if self.corner1 != None:
             if self.corner2 != None:

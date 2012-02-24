@@ -18,9 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Classes for generating catacomb levels
-'''
+"""
 
 import logging
 import random
@@ -37,23 +37,29 @@ class CatacombsLevelGenerator:
     """
 
     def __init__(self, action_factory):
+        """
+        Default constructor
+
+        Args:
+            action_factory: Initialised action factory
+        """
         self.logger = logging.getLogger('pyherc.generators.level.catacombs.CatacombsLevelGenerator') #pylint: disable=C0301
         self.item_generator = pyherc.generators.ItemGenerator()
         self.creature_generator = pyherc.generators.CreatureGenerator(
                                                                 action_factory)
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
+        """
         d = dict(self.__dict__)
         del d['logger']
         return d
 
     def __setstate__(self, d):
-        '''
+        """
         Override __setstate__ in order to get pickling work
-        '''
+        """
         self.__dict__.update(d)
         self.logger = logging.getLogger('pyherc.generators.level.catacombs.CatacombsLevelGenerator') #pylint: disable=C0301
 
@@ -61,11 +67,13 @@ class CatacombsLevelGenerator:
                                                 room_min_size = (2, 2)):
         """
         Generate level that starts from given stairs
-        @param portal: link new level to this portal
-        @param model: model being used
-        @param new_portals: amount of portals to generate, default 0
-        @param level: changes behaviour of the generator
-        @param room_min_size: minimum size for rooms
+
+        Args:
+            portal: link new level to this portal
+            model: model being used
+            new_portals: amount of portals to generate, default 0
+            level: changes behaviour of the generator
+            room_min_size: minimum size for rooms
         """
         self.logger.debug('generating level: {0}'.format(level))
         level_size = model.config['level']['size']

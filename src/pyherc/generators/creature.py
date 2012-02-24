@@ -18,12 +18,12 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module for creature generation related classes
 
 Classes:
     CreatureGenerator
-'''
+"""
 
 import logging
 import random
@@ -37,6 +37,12 @@ class CreatureGenerator:
     """
 
     def __init__(self, action_factory):
+        """
+        Default constructor
+
+        Args:
+            action_factory: Initialised action factory
+        """
         self.logger = logging.getLogger(
                             'pyherc.generators.creature.CreatureGenerator')
         self.action_factory = action_factory
@@ -44,8 +50,10 @@ class CreatureGenerator:
     def generate_creature(self, tables, parameters):
         """
         Generates a creature
-        @param tables: tables used in generation
-        @param parameters: hash table containing parameters
+
+        Args:
+            tables: tables used in generation
+            parameters: hash table containing parameters
         """
         self.logger.debug('generating a creature')
         self.logger.debug(parameters)

@@ -18,9 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Classes needed for item generation
-'''
+"""
 
 import logging
 import random
@@ -34,6 +34,9 @@ class ItemGenerator:
     """
 
     def __init__(self):
+        """
+        Default constructor
+        """
         self.logger = logging.getLogger('pyherc.generators.item.ItemGenerator')
 
     def generateItem(self, tables, parameters):

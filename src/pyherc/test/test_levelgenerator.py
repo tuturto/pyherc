@@ -36,6 +36,7 @@ from pyDoubles.framework import stub,  empty_stub, method_returning #pylint: dis
 from pyDoubles.framework import spy, assert_that_method, when, empty_spy #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import map_accessibility_in
+import random
 
 import random
 
@@ -53,6 +54,7 @@ class TestLeveltGeneratorFactory:
         self.mock_room_generator = None
         self.decorator = None
         self.factory = None
+        self.random_generator = None
 
     def setup(self):
         """
@@ -64,21 +66,22 @@ class TestLeveltGeneratorFactory:
         self.mock_room_generator = empty_stub()
         self.mock_room_generator.level_types = ['crypt']
         self.decorator = empty_stub()
+        self.random_generator = random.Random()
 
         self.mock_config.level_partitioners = [self.mock_partitioner]
         self.mock_config.room_generators = [self.mock_room_generator]
         self.mock_config.decorators = [self.decorator]
 
         self.factory = LevelGeneratorFactory(self.mock_action_factory,
-                                             self.mock_config)
+                                             self.mock_config,
+                                             self.random_generator)
 
     def test_generating_level_generator(self):
         """
         Test that LevelGeneratorFactory can generate level generator
         """
-        generator = self.factory.get_generator(level = 1,
-                                            level_type = "crypt",
-                                            random_generator = random.Random())
+        generator = self.factory.get_generator(1,
+                                            "crypt")
 
         assert generator != None
         assert generator.action_factory == self.mock_action_factory
@@ -109,11 +112,11 @@ class TestLevelGeneratorFactoryConfiguration:
         mock_config.decorators = [mock_decorator]
 
         factory = LevelGeneratorFactory(mock_action_factory,
-                                             mock_config)
+                                             mock_config,
+                                             random.Random())
 
         generator = factory.get_generator(level = 1,
-                                          level_type = "crypt",
-                                          random_generator = random.Random())
+                                          level_type = "crypt")
 
         assert_that(generator.partitioner, is_(same_instance(mock_partitioner)))
 
@@ -131,15 +134,22 @@ class TestLevelGeneratorFactoryConfiguration:
         mock_config.level_partitioners = [mock_partitioner]
         mock_config.room_generators = [mock_room_generator]
         mock_config.decorators = [mock_decorator]
+        random_generator = random.Random()
+
+        exception_was_thrown = False
 
         factory = LevelGeneratorFactory(mock_action_factory,
-                                             mock_config)
+                                             mock_config,
+                                             random_generator)
 
-        generator = factory.get_generator(level = 1,
-                                          level_type = "crypt",
-                                          random_generator = random.Random())
+        try:
+            generator = factory.get_generator(1,
+                                          "crypt")
+        except RuntimeError, err:
+            assert_that(str(err), contains_string("No room generator found"))
+            exception_was_thrown = True
 
-        assert_that(generator.room_generator, is_(none()))
+        assert_that(exception_was_thrown)
 
 class TestLevelGenerator:
     """

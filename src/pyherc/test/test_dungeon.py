@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Module for testing dungeon
+"""
+
 from pyherc.data.dungeon import Level
 from pyherc.data.dungeon import Portal
 from pyherc.data import tiles
