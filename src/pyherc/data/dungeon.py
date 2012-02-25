@@ -18,14 +18,14 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module containing classes to represent dungeon
 
 Classes:
     Level
     Dungeon
     Portal
-'''
+"""
 
 import random
 import logging
@@ -43,6 +43,7 @@ class Level:
 
         self.floor = []
         self.walls = []
+        self.room = []
         self.lit = []
 
         if size[0] != 0 and size[1] != 0:
@@ -58,6 +59,12 @@ class Level:
                     temp_row.append(wall_type)
                 self.walls.append(temp_row)
 
+            for loc_x in range(0, size[0] + 1):
+                temp_row = []
+                for loc_y in range(0, size[1] + 1):
+                    temp_row.append(wall_type)
+                self.room.append(temp_row)
+
         self.items = []
         self.portals = []
         self.creatures = []
@@ -65,26 +72,28 @@ class Level:
         self.dirty_rectangles = []
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
+        """
         properties = dict(self.__dict__)
         del properties['logger']
         return properties
 
     def __setstate__(self, properties):
-        '''
+        """
         Override __setstate__ in order to get pickling work
-        '''
+        """
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.dungeon.Level')
 
     def get_tile(self, loc_x, loc_y):
-        '''
+        """
         Get tile at given location
-        @param loc_x: x-coordinate of the location
-        @param loc_y: y-coordinate of the location
-        '''
+
+        Args:
+            loc_x: x-coordinate of the location
+            loc_y: y-coordinate of the location
+        """
         if loc_x < 0 or loc_y < 0:
             return pyherc.data.tiles.FLOOR_EMPTY
 
@@ -97,11 +106,13 @@ class Level:
             return self.floor[loc_x][loc_y]
 
     def get_wall_tile(self, loc_x, loc_y):
-        '''
+        """
         Get wall tile at given location
-        @param loc_x: x-coordinate of the location
-        @param loc_y: y-coordinate of the location
-        '''
+
+        Args:
+            loc_x: x-coordinate of the location
+            loc_y: y-coordinate of the location
+        """
         if loc_x < 0 or loc_y < 0:
             return pyherc.data.tiles.WALL_GROUND
 
@@ -113,8 +124,10 @@ class Level:
     def add_item(self, item, location):
         """
         Add an item to this level
-        @param item: item to add
-        @param location: location where to put the item
+
+        Args:
+            item: item to add
+            location: location where to put the item
         """
         assert(not item == None)
         assert(not location == None)
@@ -127,7 +140,9 @@ class Level:
     def get_items_at(self, location):
         """
         Get list of items at location
-        @param location: location to check
+
+        Args:
+            location: location to check
         """
         assert(location != None)
         items = []
@@ -140,9 +155,11 @@ class Level:
         """
         Adds precreated portal on level at given location
         If secondary portal is specified, link them together
-        @param portal: portal to add
-        @param location: location where to add portal
-        @param other_end: optional other end of the portal
+
+        Args:
+            portal: portal to add
+            location: location where to add portal
+            other_end: optional other end of the portal
         """
         assert(portal != None)
         assert(location != None)
@@ -173,7 +190,9 @@ class Level:
     def get_portal_at(self, location):
         """
         Check if there is a portal at given location
-        @return: Portal if found, otherwise None
+
+        Returns:
+            Portal if found, otherwise None
         """
         for portal in self.portals:
             if portal.location == location:
@@ -184,8 +203,10 @@ class Level:
     def add_creature(self, creature, location = None):
         """
         Add a creature to level
-        @param creature: creature to add
-        @param location: optional location for the creature
+
+        Args:
+            creature: creature to add
+            location: optional location for the creature
         """
         assert(creature != None)
 
@@ -203,7 +224,9 @@ class Level:
     def remove_creature(self, creature):
         """
         Remove creature from level
-        @param creature: creature to remove
+
+        Args:
+            creature: creature to remove
         """
         assert(creature != None)
         assert(creature in self.creatures)
@@ -216,8 +239,12 @@ class Level:
     def get_creature_at(self, location):
         """
         Get list of creatures at given location
-        @param location: location to check
-        @return: creature if found
+
+        Args:
+            location: location to check
+
+        Returns:
+            creature if found
         """
         assert(location != None)
         for creature in self.creatures:
@@ -229,6 +256,9 @@ class Level:
     def find_free_space(self):
         """
         Finds free space where stuff can be placed
+
+        Returns:
+            Location where space is free
         """
         width = len(self.floor)
         height = len(self.floor[0])
@@ -238,18 +268,25 @@ class Level:
         return location
 
     def get_square(self, x_coordinate, y_coordinate):
-        '''
+        """
         Get square at given coordinates
-        '''
+        """
         if self.walls[x_coordinate][y_coordinate] != pyherc.data.tiles.WALL_EMPTY:
             return self.walls[x_coordinate][y_coordinate]
         else:
             return self.floor[x_coordinate][y_coordinate]
 
     def blocks_los(self, x_coordinate, y_coordinate):
-        '''
+        """
         Checks if there's LOS-blocking wall at given coordinates
-        '''
+
+        Args:
+            x_coordinate: x-coordinate of the location
+            y_coordinate: y-coordinate of the location
+
+        Returns:
+            True if location blocks line of sight, otherwise False
+        """
 
         if self.walls[x_coordinate][y_coordinate] != pyherc.data.tiles.WALL_EMPTY:
             return False
@@ -257,14 +294,26 @@ class Level:
             return True
 
     def get_size(self):
-        '''
+        """
         Gets size of level
-        @returns: tupple, with width and length of level
-        '''
+
+        Returns:
+            tupple, with width and length of level
+        """
         x_size = len(self.floor)
         y_size = len(self.floor[0])
 
         return (x_size, y_size)
+
+    def set_room(self, location, value):
+        """
+        Set if given location is part of room or not
+
+        Args:
+            location: (loc_x, loc_y) location to set
+            value: True or False
+        """
+        self.room[location[0]][location[1]] = value
 
     def dump_string(self):
         """
@@ -303,17 +352,17 @@ class Dungeon:
         self.logger = logging.getLogger('pyherc.data.dungeon.Dungeon')
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
+        """
         properties = dict(self.__dict__)
         del properties['logger']
         return properties
 
     def __setstate__(self, properties):
-        '''
+        """
         Override __setstate__ in order to get pickling work
-        '''
+        """
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.dungeon.Dungeon')
 
@@ -323,6 +372,9 @@ class Portal:
     """
 
     def __init__(self):
+        """
+        Default constructor
+        """
         self.level = None
         self.location = ()
         self.icon = None
@@ -333,40 +385,42 @@ class Portal:
         self.logger = logging.getLogger('pyherc.data.dungeon.Portal')
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
+        """
         properties = dict(self.__dict__)
         del properties['logger']
         return properties
 
     def __setstate__(self, properties):
-        '''
+        """
         Override __setstate__ in order to get pickling work
-        '''
+        """
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.dungeon.Portal')
 
     def get_other_end(self):
-        '''
+        """
         Returns the other end of the portal
-        '''
+        """
         if self.other_end == None and self.level_generator != None:
             self.generate_level()
 
         return self.other_end
 
     def set_other_end(self, portal):
-        '''
+        """
         Set the other end of the portal
-        @param portal: portal where this one leads
-        '''
+
+        Args:
+            portal: portal where this one leads
+        """
         self.other_end = portal
 
     def generate_level(self):
-        '''
+        """
         Generates level if this is a proxy portal
-        '''
+        """
         assert self.level_generator != None
         self.logger.debug('generating a new level')
 
