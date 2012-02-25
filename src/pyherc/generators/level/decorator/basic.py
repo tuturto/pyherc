@@ -24,6 +24,27 @@ Module for basic decorators
 
 class Decorator(object):
     """
+    Super class for level decorators
+    """
+    def __init__(self, configuration, level):
+        """
+        Default constructor
+
+        Args:
+            configuration: configuration for decorator
+        """
+        super(Decorator, self).__init__()
+        self.configuration = configuration
+        self.level = level
+
+    def decorate_level(self):
+        """
+        Decorate level
+        """
+        pass
+
+class ReplacingDecorator(Decorator):
+    """
     Simple decorator used to replace prototiles with real ones
     """
     def __init__(self, configuration, level):
@@ -31,11 +52,9 @@ class Decorator(object):
         Default constructor
 
         Args:
-            configuration: DecoratorConfig specifying tiles to replace
+            configuration: ReplacingDecoratorConfig specifying tiles to replace
         """
-        super(Decorator, self).__init__()
-        self.configuration = configuration
-        self.level = level
+        super(ReplacingDecorator, self).__init__(configuration, level)
 
     def decorate_level(self):
         """
@@ -58,14 +77,75 @@ class Decorator(object):
                     level.walls[loc_x][loc_y] = wall_tiles[proto_tile]
 
 
-class DecoratorConfig(object):
+class ReplacingDecoratorConfig(object):
     """
-    Configuration for Decorator
+    Configuration for ReplacingDecorator
     """
     def __init__(self):
         """
         Default constructor
         """
-        super(DecoratorConfig, self).__init__()
+        super(ReplacingDecoratorConfig, self).__init__()
         self.ground_config = {}
         self.wall_config = {}
+
+class WallBuilderDecorator(Decorator):
+    """
+    Decorator used to build walls
+
+    This decorator will search all positions where there are walls next to empty
+    space and replace tiles there with specified ones
+    """
+    def __init__(self, configuration, level):
+        """
+        Default constructor
+
+        Args:
+            configuration: WallBuilderDecoratorConfig
+        """
+        super(WallBuilderDecorator, self).__init__(configuration, level)
+
+    def decorate_level(self):
+        """
+        Decorate level
+        """
+        level = self.level
+
+        for loc_y in range(1, len(level.floor[0]) - 1):
+            for loc_x in range(1, len(level.floor) - 1):
+                if level.walls[loc_x][loc_y] == self.configuration.empty_tile:
+                    self.check_and_replace((loc_x - 1, loc_y))
+                    self.check_and_replace((loc_x + 1, loc_y))
+                    self.check_and_replace((loc_x, loc_y - 1))
+                    self.check_and_replace((loc_x, loc_y + 1))
+                    self.check_and_replace((loc_x - 1, loc_y - 1))
+                    self.check_and_replace((loc_x - 1, loc_y + 1))
+                    self.check_and_replace((loc_x + 1, loc_y - 1))
+                    self.check_and_replace((loc_x + 1, loc_y + 1))
+
+    def check_and_replace(self, location):
+        """
+        Check location and replace tile if it matches configuration
+
+        Args:
+            location: (loc_x, loc_y) location to check
+        """
+        loc_x = location[0]
+        loc_y = location[1]
+        proto_tile = self.level.walls[loc_x][loc_y]
+
+        if proto_tile in self.configuration.wall_config.keys():
+            tile = self.configuration.wall_config[proto_tile]
+            self.level.walls[loc_x][loc_y] = tile
+
+class WallBuilderDecoratorConfig(object):
+    """
+    Configuration for WallBuilderDecorator
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(WallBuilderDecoratorConfig, self).__init__()
+        self.wall_config = {}
+        self.empty_tile = None

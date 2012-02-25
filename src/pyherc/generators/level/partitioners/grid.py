@@ -18,32 +18,36 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module for partitioning level to equal grid
-'''
+"""
 
 import random
 import logging
 from pyherc.generators.level.partitioners.section import Section
 
 class RandomConnector(object):
-    '''
+    """
     Class for building random connection network from sections
-    '''
+    """
     def __init__(self, random_generator = random.Random()):
-        '''
+        """
         Default constructor
-        @param random_generator: optional random number generator
-        '''
+
+        Args:
+            random_generator: optional random number generator
+        """
         self.random_generator = random_generator
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.grid.RandomConnector') #pylint: disable=C0301
 
     def connect_sections(self, sections, start_section = None):
-        '''
+        """
         Connects sections together
-        @param sections: List of Sections to connect
-        @param start_section: optional parameter specifying starting section
-        '''
+
+        Args:
+            sections: List of Sections to connect
+            start_section: optional parameter specifying starting section
+        """
         self.logger.debug('connecting sections')
 
         if start_section == None:
@@ -72,11 +76,13 @@ class RandomConnector(object):
         return sections
 
     def form_path_from_sections(self, start_section, sections):
-        '''
+        """
         Builds path of connected sections
-        @param start_section: Section to start connecting from
-        @param sections: List of sections to connect
-        '''
+
+        Args:
+            start_section: Section to start connecting from
+            sections: List of sections to connect
+        """
         current_section = start_section
         unconnected_neighbours = [x for x in current_section.neighbours
                                                 if x.connected == False]
@@ -93,24 +99,30 @@ class RandomConnector(object):
 
 
 class GridPartitioner(object):
-    '''
+    """
     Class for partitioning level to equal grid
-    '''
+    """
 
     def __init__(self, random_generator = random.Random()):
-        '''
+        """
         Default constructor
-        @param random_generator: optional random number generator
-        '''
+
+        Args:
+            random_generator: optional random number generator
+        """
         self.connectors = [RandomConnector()]
         self.random_generator = random_generator
 
     def partition_level(self, level,  x_sections = 3,  y_sections = 3):
-        '''
+        """
         Creates partitioning for a given level with connection points
-        @param level: Level to partition
-        @returns: List of connected sections
-        '''
+
+        Args:
+            level: Level to partition
+
+        Returns
+            List of connected sections
+        """
         sections = []
         section_matrix = [[None for i in range(y_sections)]
                                                for j in range(x_sections)]
@@ -140,9 +152,9 @@ class GridPartitioner(object):
         return connected_sections
 
     def connect_new_section(self, section, location, sections):
-        '''
+        """
         Connects section in given location to its neighbours
-        '''
+        """
         if location[0] > 0:
             left_section = sections[location[0]-1][location[1]]
             left_section.neighbours.append(section)
@@ -154,12 +166,16 @@ class GridPartitioner(object):
             section.neighbours.append(up_section)
 
     def split_range_to_equals(self, length, sections):
-        '''
+        """
         Split range into equal sized chunks
-        @param length: range to split
-        @param sections: amount of sections to split
-        @returns: list containing end points of chunks
-        '''
+
+        Args:
+            length: range to split
+            sections: amount of sections to split
+
+        Returns:
+            list containing end points of chunks
+        """
         section_length = length // sections
         ranges = []
 

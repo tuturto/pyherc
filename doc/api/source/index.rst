@@ -14,6 +14,7 @@ Contents:
    intro
    module_descriptions
    generate_level
+   modular_levels
    generate_item
    api_reference
 

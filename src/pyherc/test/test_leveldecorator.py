@@ -22,13 +22,15 @@
 Tests for LevelDecorator
 """
 #pylint: disable=W0614
-from pyherc.generators.level.decorator import Decorator, DecoratorConfig
+from pyherc.generators.level.decorator import ReplacingDecorator, ReplacingDecoratorConfig
+from pyherc.generators.level.decorator import WallBuilderDecorator
+from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
 from pyherc.data import Level
 from pyDoubles.framework import when, spy, stub #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
 from pyherc.data.tiles import FLOOR_ROCK, FLOOR_BRICK, WALL_EMPTY, WALL_GROUND
 from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
-from pyherc.generators.level.prototiles import WALL_NATURAL
+from pyherc.generators.level.prototiles import WALL_NATURAL, WALL_CONSTRUCTED
 
 class TestLevelDecorator():
     """
@@ -61,13 +63,13 @@ class TestLevelDecorator():
         self.level.walls[2][2] = WALL_NATURAL
         self.level.walls[5][5] = WALL_NATURAL
 
-        self.config = DecoratorConfig()
+        self.config = ReplacingDecoratorConfig()
         self.config.ground_config[FLOOR_NATURAL] = FLOOR_ROCK
         self.config.ground_config[FLOOR_CONSTRUCTED] = FLOOR_BRICK
 
         self.config.wall_config[WALL_NATURAL] = WALL_GROUND
 
-        self.decorator = Decorator(self.config, self.level)
+        self.decorator = ReplacingDecorator(self.config, self.level)
 
     def test_replacing_ground(self):
         """
@@ -93,3 +95,51 @@ class TestLevelDecorator():
 
         assert_that(self.level.walls[2][2], is_(equal_to(WALL_GROUND)))
         assert_that(self.level.walls[5][5], is_(equal_to(WALL_GROUND)))
+
+class TestWallBuilderDecorator():
+    """
+    Tests for WallBuilderDecorator
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.level = None
+        self.config = None
+        self.decorator = None
+
+    def setup(self):
+        """
+        Setup the test case
+        """
+        self.level = Level((10, 15),
+                      floor_type = FLOOR_NATURAL,
+                      wall_type = WALL_NATURAL)
+
+        for loc_y in range(2, 8):
+            for loc_x in range(2, 8):
+                self.level.walls[loc_x][loc_y] = WALL_EMPTY
+
+        self.config = WallBuilderDecoratorConfig()
+        self.config.wall_config[WALL_NATURAL] = WALL_CONSTRUCTED
+        self.config.empty_tile = WALL_EMPTY
+
+        self.decorator = WallBuilderDecorator(self.config, self.level)
+
+    def test_building_walls(self):
+        """
+        Test that tiles next to empty space are replaced
+        """
+        self.decorator.decorate_level()
+
+        for loc in range(2, 8):
+            assert_that(self.level.walls[loc][1],
+                        is_(equal_to(WALL_CONSTRUCTED)))
+            assert_that(self.level.walls[loc][8],
+                        is_(equal_to(WALL_CONSTRUCTED)))
+            assert_that(self.level.walls[1][loc],
+                        is_(equal_to(WALL_CONSTRUCTED)))
+            assert_that(self.level.walls[8][loc],
+                        is_(equal_to(WALL_CONSTRUCTED)))
+
+        assert_that(self.level.walls[0][0], is_(equal_to(WALL_NATURAL)))
