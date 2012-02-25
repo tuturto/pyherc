@@ -91,7 +91,6 @@ class CreatureGenerator:
         new_creature.speed = table['speed']
         new_creature.size = table['size']
         new_creature.attack = table['attack']
-        #TODO: AI from tables
         new_creature.artificial_intelligence = pyherc.ai.simple.FlockingHerbivore(new_creature)
 
         if hasattr(table['icon'], 'append'):

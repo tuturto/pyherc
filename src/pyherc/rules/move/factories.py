@@ -100,7 +100,6 @@ class WalkFactory(SubActionFactory):
                 else:
                     #proxy
                     if portal.level_generator != None:
-                        #TODO: model parameter
                         portal.generate_level()
                         newLevel = portal.get_other_end().level
                         newLocation = portal.get_other_end().location

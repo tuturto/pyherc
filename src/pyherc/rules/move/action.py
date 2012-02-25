@@ -51,7 +51,6 @@ class MoveAction():
             self.character.location = self.new_location
             if self.new_level != None:
                 self.character.level = self.new_level
-            #TODO: refactor to be pluggable
             self.character.tick = pyherc.rules.time.get_new_tick(self.character, 2)
         else:
             self.logger.warn('Tried to execute illegal move')
@@ -69,14 +68,12 @@ class MoveAction():
                 #check for other creatures and such
                 location_ok = True
                 creatures = self.new_level.creatures[:]
-                #TODO: take PC into consideration
                 for creature in creatures:
                     if creature.location == self.new_location:
                         location_ok = False
             else:
                 location_ok = False
         else:
-            #TODO: is this player escaping?
             pass
 
         return location_ok

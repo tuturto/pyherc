@@ -53,11 +53,9 @@ class AttackAction():
         '''
         if self.to_hit.is_hit():
             self.damage.apply_damage(self.target)
-            #TODO: raise events
 
         pyherc.rules.ending.check_dying(self.model, self.target, self.model)
 
-        #TODO: just a temporary time
         self.attacker.tick = pyherc.rules.time.get_new_tick(self.attacker, 20)
 
 

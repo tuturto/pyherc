@@ -151,14 +151,12 @@ class Inventory:
         """
         #font size 16
         #top left = 40, 40
-        #TODO: take paging into account
         self.screen.blit(self.background, (0, 0))
         font = pygame.font.Font(None, 18)
         for index in range(0, len(self.inventory)):
             item = self.inventory[index]
 
             if item['selected'] :
-                #TODO: get from configuration in beginning
                 colour = (255, 255, 255)
             else:
                 colour = (200, 200, 200)

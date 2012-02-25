@@ -54,7 +54,7 @@ class TestLeveltGeneratorFactory:
         self.mock_room_generator = None
         self.decorator = None
         self.factory = None
-        self.random_generator = None
+        self.rng = None
 
     def setup(self):
         """
@@ -66,7 +66,7 @@ class TestLeveltGeneratorFactory:
         self.mock_room_generator = empty_stub()
         self.mock_room_generator.level_types = ['crypt']
         self.decorator = empty_stub()
-        self.random_generator = random.Random()
+        self.rng = random.Random()
 
         self.mock_config.level_partitioners = [self.mock_partitioner]
         self.mock_config.room_generators = [self.mock_room_generator]
@@ -74,7 +74,7 @@ class TestLeveltGeneratorFactory:
 
         self.factory = LevelGeneratorFactory(self.mock_action_factory,
                                              self.mock_config,
-                                             self.random_generator)
+                                             self.rng)
 
     def test_generating_level_generator(self):
         """

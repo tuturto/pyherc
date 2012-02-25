@@ -370,7 +370,6 @@ class Portal:
         assert self.level_generator != None
         self.logger.debug('generating a new level')
 
-        #TODO: support for level generation parameters
         self.level_generator.generate_level(self,
                                             self.model,
                                             monster_list = [])

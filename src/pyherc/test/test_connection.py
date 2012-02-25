@@ -27,6 +27,7 @@ from pyherc.data import Level
 from pyherc.data.tiles import FLOOR_EMPTY, FLOOR_ROCK, WALL_EMPTY, WALL_GROUND
 from pyDoubles.framework import stub #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
+import random
 
 class TestConnection():
     """
@@ -40,7 +41,8 @@ class TestConnection():
         level = stub(Level)
         section = Section(corner1 = (10, 10),
                           corner2 = (20, 20),
-                          level = level)
+                          level = level,
+                          random_generator = random.Random())
 
         connection = Connection(connection = None,
                              location = (20, 20),

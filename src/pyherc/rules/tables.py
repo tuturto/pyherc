@@ -309,7 +309,6 @@ class ItemHandler(sax.ContentHandler):
         elif name == 'type':
             self.newItem['type'].append(self.text)
         elif name == 'rarity':
-            #TODO: for now, until better way is found
             if self.text == 'artifact':
                 self.newItem['rarity'] = 1
             elif self.text == 'legendary':

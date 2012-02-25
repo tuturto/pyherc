@@ -22,14 +22,13 @@
 Classes to represent division of levels
 """
 
-import random
 import logging
 
 class Section(object):
     """
     Class representing a single section in a level
     """
-    def __init__(self, corner1, corner2, level):
+    def __init__(self, corner1, corner2, level, random_generator):
         """
         Default constructor
 
@@ -37,6 +36,7 @@ class Section(object):
             corner1: Coordinates of first corner
             corner2: Coordinates of the second corner
             level: Level where Section is linked
+            random_generator: Random number generator
 
         Note:
             Coordinates are given relative to level origo
@@ -49,8 +49,7 @@ class Section(object):
         self.__connections = []
         self.__room_connections = []
         self.__neighbours = []
-        #TODO: inject from outside
-        self.random_generator = random.Random()
+        self.random_generator = random_generator
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.section.Section') #pylint: disable=C0301
 
     def __get_corners(self):

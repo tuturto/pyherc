@@ -136,7 +136,6 @@ class ItemGenerator:
             for effectType in keys:
                 new_item.effects[effectType] = []
                 for effect in table['effects'][effectType]:
-                    #TODO: add support for charges
                     newEffect = ItemEffectData(trigger = effectType,
                                        effect_type = effect['name'],
                                        power = effect['power'])

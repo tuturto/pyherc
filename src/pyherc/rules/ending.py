@@ -38,7 +38,6 @@ def check_result(model):
     if model.player.hit_points <= 0:
         #player has died
         result['reason'] = 'dead'
-        #TODO: implement correct reason
         result['dead reason'] = 'died while adventuring'
     elif model.player.level == None:
         #escaped or victory
@@ -62,7 +61,6 @@ def get_ending_score(model):
     @param model: model containing play data
     @return: score
     """
-    #TODO: implement scoring
     return 0
 
 def check_dying(model, character, deathParams):
@@ -81,7 +79,6 @@ def check_dying(model, character, deathParams):
         event['location'] = character.location
         event['level'] = character.level
         model.raise_event(event)
-        #TODO: implement leaving corpse
         if character != model.player:
             character.level.remove_creature(character)
         else:

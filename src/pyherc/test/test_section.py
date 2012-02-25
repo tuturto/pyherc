@@ -27,7 +27,7 @@ from pyherc.data import Level
 from pyherc.data.tiles import FLOOR_EMPTY, FLOOR_ROCK, WALL_EMPTY, WALL_GROUND
 from pyDoubles.framework import stub #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
-
+import random
 
 class TestSectionCalculations(object):
     """
@@ -38,13 +38,15 @@ class TestSectionCalculations(object):
         Default constructor
         """
         self.section = None
+        self.rng = None
 
     def setup(self):
         """
         Setup test case
         """
         mock_level = stub(Level)
-        self.section = Section((10, 10), (20, 25), mock_level)
+        self.rng = random.Random()
+        self.section = Section((10, 10), (20, 25), mock_level, self.rng)
 
     def test_left_edge(self):
         """
@@ -100,14 +102,15 @@ class TestSectionConnections(object):
         """
         self.section1 = None
         self.section2 = None
+        self.rng = random.Random()
 
     def setup(self):
         """
         Setup test case
         """
         mock_level = stub(Level)
-        self.section1 = Section((0, 0), (10, 20), mock_level)
-        self.section2 = Section((11, 0), (20, 20), mock_level)
+        self.section1 = Section((0, 0), (10, 20), mock_level, self.rng)
+        self.section2 = Section((11, 0), (20, 20), mock_level, self.rng)
 
         self.section1.neighbours.append(self.section2)
         self.section2.neighbours.append(self.section1)
@@ -216,13 +219,14 @@ class TestSectionLevelAccess(object):
         object.__init__(self)
         self.level = None
         self.section = None
+        self.rng = random.Random()
 
     def setup(self):
         """
         Setup the test case
         """
         self.level = Level((10, 10), FLOOR_EMPTY, WALL_EMPTY)
-        self.section = Section((0, 0), (10, 10), self.level)
+        self.section = Section((0, 0), (10, 10), self.level, self.rng)
 
     def test_setting_floor(self):
         """
@@ -252,13 +256,14 @@ class TestSectionLevelAccessWithOffset(object):
         object.__init__(self)
         self.level = None
         self.section = None
+        self.rng = random.Random()
 
     def setup(self):
         """
         Setup the test case
         """
         self.level = Level((10, 10), FLOOR_EMPTY, WALL_EMPTY)
-        self.section = Section((5, 5), (10, 10), self.level)
+        self.section = Section((5, 5), (10, 10), self.level, self.rng)
 
     def test_setting_floor_with_offset(self):
         """

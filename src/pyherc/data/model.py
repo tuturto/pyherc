@@ -76,7 +76,7 @@ class Model:
         @param event: event to relay
         """
         self.logger.debug('raising event:' + event.__str__())
-        #TODO: filter events
+
         if event['level'] != None:
             for creature in event['level'].creatures:
                 creature.receive_event(event)

@@ -47,7 +47,6 @@ class FlockingHerbivore():
         character = self.character
         player = model.player
 
-        #TODO: handle memory
         del self.character.short_term_memory[:]
 
         for creature in self.character.level.creatures:

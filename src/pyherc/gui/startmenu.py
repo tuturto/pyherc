@@ -80,8 +80,6 @@ class StartMenu(pgu.gui.Container):
         self.logger.info('starting a new game')
         newWindow = pyherc.gui.windows.StartNewGameWindow(self.application, self.screen, self.surface_manager)
         newWindow.mainLoop()
-        #TODO: world initialisation needs action factory
-        #TODO: action factory needs world
         self.application.initialise_factories(self.application.world)
 
         self.application.world.player = newWindow.character

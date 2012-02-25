@@ -85,7 +85,7 @@ class CatacombsLevelGenerator:
         room_stack = []
 
         temp_level = Level(level_size, tiles.FLOOR_ROCK, tiles.WALL_GROUND)
-        #TODO: split into smaller chuncks
+
         while len(BSPStack) > 0:
             tempBSP = BSPStack.pop()
             tempBSP.split(min_size = (room_min_size[0] + 4,
@@ -165,9 +165,6 @@ class CatacombsLevelGenerator:
                             temp_level.walls[x][y] = tiles.WALL_ROCK
                 temp_walls = []
 
-        #TODO: more random content creation
-        #enter few monsters
-        #TODO: more intelligent system to choose monsters
         for i in range(0, 10):
             if level == 1:
                 temp_creature = self.creature_generator.generate_creature(
@@ -203,7 +200,6 @@ class CatacombsLevelGenerator:
 
         if portal != None:
             new_portal = Portal()
-            #TODO: refactor for configuration
             new_portal.model = model
             temp_level.add_portal(new_portal,
                                   temp_level.find_free_space(), portal)
@@ -219,12 +215,9 @@ class CatacombsLevelGenerator:
         for portal in temp_level.portals:
             if portal.get_other_end() == None:
                 if level < 5:
-                    #still in catacombs
-
                     new_level = self.generate_level(portal, model, 1,
                                                    level = level + 1)
                 else:
-                    #TODO: implement generating dungeon levels
                     pass
 
         self.logger.debug(temp_level.dump_string())

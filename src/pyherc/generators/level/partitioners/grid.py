@@ -138,7 +138,8 @@ class GridPartitioner(object):
                                         y_sections[y_block][0]),
                                         (x_sections[x_block][1],
                                         y_sections[y_block][1]),
-                                        level)
+                                        level,
+                                        self.random_generator)
 
                 self.connect_new_section(temp_section,
                                          (x_block, y_block),

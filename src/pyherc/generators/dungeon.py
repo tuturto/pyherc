@@ -61,7 +61,6 @@ class DungeonGenerator:
         escape_portal = Portal()
         escape_portal.icon = pyherc.data.tiles.PORTAL_STAIRS_UP
         escape_portal.set_other_end(None)
-        #TODO: refactor for configuration
         escape_portal.model = model
 
         level_size = model.config['level']['size']

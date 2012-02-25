@@ -68,7 +68,6 @@ def create_character(race, kit, action_factory):
     global race_stats
     global kit_stats
     global __logger
-    #TODO: change to use rules.tables
     __logger.debug('creating a new character: ' + race + " " + kit)
 
     if race_stats == None:
@@ -83,12 +82,10 @@ def create_character(race, kit, action_factory):
     new_character.set_mind(temp_race['mind'] + temp_kit['mind'])
     new_character.hit_points = temp_race['hp'] + temp_kit['hp']
     new_character.max_hp = new_character.hit_points
-    new_character.speed = temp_race['speed'] + temp_kit['speed']
-    #TODO: implement properly
+    new_character.speed = temp_race['speed'] + temp_kit['speed']   
     new_character.size = 'medium'
     new_character.attack = 3
 
-    #TODO: get from a factory
     new_character.feats.append(
                               pyherc.data.model.WeaponProficiency('simple'))
     new_character.icon = __get_icon(race, kit)
@@ -106,5 +103,4 @@ def __get_icon(race, kit):
     Returns:
         Icon
     """
-    #TODO: implement
     return pyherc.data.tiles.HUMAN_FIGHTER

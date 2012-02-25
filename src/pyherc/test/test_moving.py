@@ -54,11 +54,9 @@ class TestMoving(IntegrationTest):
         self.level1 = levelGenerator.generate_level(None, self.model, monster_list = [])
         self.level2 = levelGenerator.generate_level(None, self.model, monster_list = [])
         self.portal1 = Portal()
-        #TODO: refactor for configuration
         self.portal1.model = self.model
         self.portal1.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
         self.portal2 = Portal()
-        #TODO: refactor for configuration
         self.portal2.model = self.model
 
         self.level1.add_portal(self.portal1, (5, 5))
@@ -132,7 +130,6 @@ class TestMoving(IntegrationTest):
         self.character.location = (8, 8)
         proxy = Portal()
         proxy.level_generator = TestLevelGenerator(self.action_factory)
-        #TODO: refactor for configuration
         proxy.model = self.model
         proxy.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
 

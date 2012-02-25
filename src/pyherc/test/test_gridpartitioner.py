@@ -28,6 +28,7 @@ from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
 from pyDoubles.framework import when, spy, stub #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
+import random
 
 class TestGridPartitioner:
     """
@@ -117,6 +118,7 @@ class TestRandomConnector:
         """
         self.connector = None
         self.mock_level = None
+        self.rng = None
 
     def setup(self):
         """
@@ -124,13 +126,14 @@ class TestRandomConnector:
         """
         self.connector = RandomConnector()
         self.mock_level = stub(Level)
+        self.rng = random.Random()
 
     def test_connect_two_sections(self):
         """
         Test that two adjacent sections can be connected
         """
-        section1 = Section((0, 0), (10, 5), self.mock_level)
-        section2 = Section((0, 6), (10, 10), self.mock_level)
+        section1 = Section((0, 0), (10, 5), self.mock_level, self.rng)
+        section2 = Section((0, 6), (10, 10), self.mock_level, self.rng)
 
         section1.neighbours.append(section2)
         section2.neighbours.append(section1)
@@ -148,10 +151,10 @@ class TestRandomConnector:
         """
         Test that 2x2 grid is fully connected
         """
-        section00 = Section((0, 0), (5, 5), self.mock_level)
-        section10 = Section((6, 0), (10, 5), self.mock_level)
-        section01 = Section((0, 6), (5, 10), self.mock_level)
-        section11 = Section((6, 6), (10, 10), self.mock_level)
+        section00 = Section((0, 0), (5, 5), self.mock_level, self.rng)
+        section10 = Section((6, 0), (10, 5), self.mock_level, self.rng)
+        section01 = Section((0, 6), (5, 10), self.mock_level, self.rng)
+        section11 = Section((6, 6), (10, 10), self.mock_level, self.rng)
 
         section00.neighbours.append(section10)
         section00.neighbours.append(section01)
@@ -179,11 +182,11 @@ class TestRandomConnector:
         Row of Sections is connected, starting from the middle
         RandomConnector can not connect this in one path, but has to branch
         """
-        section0 = Section((0, 0), (10, 10), self.mock_level)
-        section1 = Section((11, 0), (20, 10), self.mock_level)
-        section2 = Section((21, 0), (30, 10), self.mock_level)
-        section3 = Section((31, 0), (40, 10), self.mock_level)
-        section4 = Section((41, 0), (50, 10), self.mock_level)
+        section0 = Section((0, 0), (10, 10), self.mock_level, self.rng)
+        section1 = Section((11, 0), (20, 10), self.mock_level, self.rng)
+        section2 = Section((21, 0), (30, 10), self.mock_level, self.rng)
+        section3 = Section((31, 0), (40, 10), self.mock_level, self.rng)
+        section4 = Section((41, 0), (50, 10), self.mock_level, self.rng)
 
         section0.neighbours.append(section1)
         section1.neighbours.append(section0)

@@ -133,7 +133,6 @@ def wield(model, character, item, dual_wield = False):
                     event['level'] = character.level
                     event['proficient'] = character.is_proficient(item)
                     model.raise_event(event)
-                    #TODO: feedback when wielding is not possible
 
 def can_dual_wield(model, character, item1, item2):
     """
@@ -231,6 +230,5 @@ def drink_potion(model, character, potion, dice = None):
     if potion.maximum_charges_left() < 1:
         character.inventory.remove(potion)
 
-    #TODO: raise event
     logger.debug(character.__str__() + ' drank ' + potion.__str__())
 

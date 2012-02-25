@@ -33,6 +33,7 @@ from pyherc.generators.level.room.corridor import CorridorGenerator
 from pyherc.data.tiles import FLOOR_ROCK
 from pyherc.data.tiles import WALL_GROUND
 from pyherc.data.tiles import WALL_EMPTY
+import random
 
 class TestCorridor():
     """
@@ -44,6 +45,7 @@ class TestCorridor():
         """
         self.level = None
         self.section = None
+        self.rng = None
 
     def setup(self):
         """
@@ -53,9 +55,11 @@ class TestCorridor():
                       floor_type = FLOOR_ROCK,
                       wall_type = WALL_GROUND)
 
+        self.rng = random.Random()
         self.section = Section(corner1 = (0, 0),
                           corner2 = (10, 10),
-                          level = self.level)
+                          level = self.level,
+                          random_generator = self.rng)
 
     def test_straight_horizontal(self):
         """

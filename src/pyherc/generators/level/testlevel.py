@@ -70,7 +70,7 @@ class TestLevelGenerator:
         self.logger.debug('creating a test level')
         level_size = model.config['level']['size']
         temp_level = Level(level_size, tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
-        #TODO: implement properly
+        
         for x in range(0, level_size[0]):
             temp_level.walls[x][0] = tiles.WALL_ROCK
             temp_level.walls[x][level_size[1]-1] = tiles.WALL_ROCK
@@ -81,7 +81,7 @@ class TestLevelGenerator:
 
         #throw bunch of food around
         for i in range(0, 10):
-            #TODO: better placement algorithm
+            
             temp_item = self.item_generator.generate_item(model.tables,
                                                          {'type':'food'})
             temp_item.location = (random.randint(2, 20), random.randint(2, 20))
@@ -90,21 +90,19 @@ class TestLevelGenerator:
         if monster_list == None:
             #enter few rats
             for i in range(0, 5):
-                #TODO: better placement algorithm
+                
                 temp_creature = self.creature_generator.generate_creature(
                                                     model.tables.creatures,
                                                     {'name':'rat'})
                 temp_level.add_creature(temp_creature,
                                         (random.randint(2, 20),
                                         random.randint(2, 20)))
-        else:
-            #TODO: spread given monsters around
+        else:            
             pass
 
         #set portals
         if portal != None:
             new_portal = Portal()
-            #TODO: refactor for configuration
             new_portal.model = model
             temp_level.add_portal(new_portal,
                                   (random.randint(2, 20),
@@ -113,7 +111,6 @@ class TestLevelGenerator:
         if new_portals > 0:
             for i in range(0, new_portals):
                 new_portal = Portal()
-                #TODO: refactor for configuration
                 new_portal.model = model
                 new_portal.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
                 temp_level.add_portal(new_portal,

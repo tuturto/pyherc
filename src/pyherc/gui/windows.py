@@ -94,7 +94,6 @@ class StartNewGameWindow:
         Main loop of the window
         """
         self.logger.debug('main loop starting')
-        #TODO: implement menu here
         self.__generateNewGame()
         self.logger.debug('main loop finished')
 
@@ -102,7 +101,6 @@ class StartNewGameWindow:
         """
         Generate a new game
         """
-        #TODO: implement properly
         self.application.world = pyherc.data.model.Model()
 
         self.application.initialise_factories(self.application.world)
@@ -110,7 +108,6 @@ class StartNewGameWindow:
         tables = pyherc.rules.tables.Tables()
         tables.load_tables(self.application.base_path)
         self.application.world.tables = tables
-        #TODO: load tables for model
         if self.application.config['explore']:
             self.logger.warn('starting in explore mode')
             self.application.world.config['explore'] = 1
@@ -186,7 +183,6 @@ class GameWindow:
                         else:
                             target = player.level.get_creature_at(action.new_location)
                             if target != None:
-                                #TODO: melee / unarmed selection
                                 player.execute_action(
                                         AttackParameters(player, target, 'unarmed')
                                         )
@@ -246,7 +242,6 @@ class GameWindow:
 
             creature = pyherc.rules.time.get_next_creature(model)
 
-            #TODO: do not paint screen all the time
             if creature == model.player:
                 if self.application.world.player.level != None:
                     self.__updateDisplay()
@@ -257,11 +252,8 @@ class GameWindow:
             else:
                 if self.application.world.player.level != None:
                     creature.act(self.application.world)
-                    #TODO: set dirty rectangles properly
                     self.getNewEvents()
                     self.application.world.player.level.full_update_needed = True
-                    #TODO: when dirty rectangles work, uncomment this
-                    #self.__updateDisplay()
 
         self.logger.debug('main loop finished')
 
@@ -326,11 +318,11 @@ class GameWindow:
         level = player.level
 
         player.level.full_update_needed = False
-        #TODO: don't call during each and every update
+
         light_matrix = get_fov_matrix(self.application.world, player, 13)
 
         self.screen.blit(self.background, (0, 0))
-        #TODO: make more generic and clean up
+
         sy = 0
         for y in range(player.location[1] - 9, player.location[1] + 10):
             sx = 0

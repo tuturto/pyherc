@@ -115,7 +115,6 @@ class SurfaceManager:
             surface = self.load_surface(base_path, 'statue_gargoyle.png')
             self.icons[pyherc.data.tiles.ITEM_GARGOYLE_STATUE] = surface
 
-            #TODO: correct graphics
             surface = self.load_surface(base_path, 'item_dagger_1.png')
             self.icons[pyherc.data.tiles.ITEM_DAGGER_1] = surface
             self.icons[pyherc.data.tiles.ITEM_DAGGER_2] = surface
