@@ -36,6 +36,7 @@ class TestLevelConnectivity():
         Default constructor
         """
         self.level = None
+        self.matcher = None
 
     def setup(self):
         """

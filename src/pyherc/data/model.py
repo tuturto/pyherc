@@ -287,15 +287,15 @@ class Character:
         '''
         Override __getstate__ in order to get pickling work
         '''
-        d = dict(self.__dict__)
-        del d['logger']
-        return d
+        properties = dict(self.__dict__)
+        del properties['logger']
+        return properties
 
-    def __setstate__(self, d):
+    def __setstate__(self, properties):
         '''
         Override __setstate__ in order to get pickling work
         '''
-        self.__dict__.update(d)
+        self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.model.Character')
 
 class Damage:

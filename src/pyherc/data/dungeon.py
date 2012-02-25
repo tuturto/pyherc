@@ -46,15 +46,15 @@ class Level:
         self.lit = []
 
         if size[0] != 0 and size[1] != 0:
-            for y in range(0, size[0] + 1):
+            for loc_x in range(0, size[0] + 1):
                 temp_row = []
-                for y in range(0, size[1] + 1):
+                for loc_y in range(0, size[1] + 1):
                     temp_row.append(floor_type)
                 self.floor.append(temp_row)
 
-            for y in range(0, size[0] + 1):
+            for loc_x in range(0, size[0] + 1):
                 temp_row = []
-                for y in range(0, size[1] + 1):
+                for loc_y in range(0, size[1] + 1):
                     temp_row.append(wall_type)
                 self.walls.append(temp_row)
 
@@ -371,7 +371,7 @@ class Portal:
         self.logger.debug('generating a new level')
 
         #TODO: support for level generation parameters
-        new_level = self.level_generator.generate_level(self,
-                                                     self.model,
-                                                     monster_list = [])
+        self.level_generator.generate_level(self,
+                                            self.model,
+                                            monster_list = [])
 

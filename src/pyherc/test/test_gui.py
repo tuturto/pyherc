@@ -111,14 +111,14 @@ class TestInventoryDialog(IntegrationTest):
                                                         mock_surface_manager,
                                                         mock_character)
 
-        item1 = self.item_generator.generateItem(self.tables, {'name': 'dagger'})
-        item2 = self.item_generator.generateItem(self.tables, {'name': 'apple'})
-        item3 = self.item_generator.generateItem(self.tables, {'name': 'healing potion'})
-        item4 = self.item_generator.generateItem(self.tables, {'name': 'short sword'})
-        item5 = self.item_generator.generateItem(self.tables, {'name': 'minor potion of poison'})
-        item6 = self.item_generator.generateItem(self.tables, {'name': 'longspear'})
-        item7 = self.item_generator.generateItem(self.tables, {'name': 'apple'})
-        item8 = self.item_generator.generateItem(self.tables, {'name': 'minor healing potion'})
+        item1 = self.item_generator.generate_item(self.tables, {'name': 'dagger'})
+        item2 = self.item_generator.generate_item(self.tables, {'name': 'apple'})
+        item3 = self.item_generator.generate_item(self.tables, {'name': 'healing potion'})
+        item4 = self.item_generator.generate_item(self.tables, {'name': 'short sword'})
+        item5 = self.item_generator.generate_item(self.tables, {'name': 'minor potion of poison'})
+        item6 = self.item_generator.generate_item(self.tables, {'name': 'longspear'})
+        item7 = self.item_generator.generate_item(self.tables, {'name': 'apple'})
+        item8 = self.item_generator.generate_item(self.tables, {'name': 'minor healing potion'})
 
         unsorted = [item1, item2, item3, item4, item5, item6, item7, item8]
 

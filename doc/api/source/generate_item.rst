@@ -11,7 +11,7 @@ To generate item, following code can be used:
 
 .. code-block:: python
 
-    new_item = self.item_generator.generateItem(model.tables, {'type':'food'})
+    new_item = self.item_generator.generate_item(model.tables, {'type':'food'})
 
 This will generate a random item of type food.
 

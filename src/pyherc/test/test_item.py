@@ -79,7 +79,7 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that generating crystal skull is possible
         """
-        self.item = self.item_generator.generateItem(self.tables,
+        self.item = self.item_generator.generate_item(self.tables,
                                                     {'type': 'special',
                                                     'name': 'crystal skull'})
 
@@ -92,7 +92,7 @@ class TestItemWithGenerator(IntegrationTest):
         Test that a weapon can be created
         """
 
-        item = self.item_generator.generateItem(self.tables, {'name': 'dagger'})
+        item = self.item_generator.generate_item(self.tables, {'name': 'dagger'})
 
         assert(item != None)
         assert(item.name == 'dagger')
@@ -112,7 +112,7 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that character can wield a weapon (dagger)
         """
-        item = self.item_generator.generateItem(self.tables, {'name': 'dagger'})
+        item = self.item_generator.generate_item(self.tables, {'name': 'dagger'})
 
         assert(item not in self.character.weapons)
 
@@ -124,7 +124,7 @@ class TestItemWithGenerator(IntegrationTest):
         '''
         Test that wielded item can be unwielded
         '''
-        item = self.item_generator.generateItem(self.tables, {'name': 'dagger'})
+        item = self.item_generator.generate_item(self.tables, {'name': 'dagger'})
         pyherc.rules.items.wield(self.model, self.character, item)
 
         assert(item in self.character.weapons)
@@ -137,9 +137,9 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that character can swap a weapon to another
         """
-        item1 = self.item_generator.generateItem(
+        item1 = self.item_generator.generate_item(
                                         self.tables, {'name': 'dagger'})
-        item2 = self.item_generator.generateItem(
+        item2 = self.item_generator.generate_item(
                                         self.tables, {'name': 'sickle'})
 
         assert(item1 not in self.character.weapons)
@@ -158,9 +158,9 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that character can not dual wield two-handed weapon
         """
-        item1 = self.item_generator.generateItem(self.tables,
+        item1 = self.item_generator.generate_item(self.tables,
                                                 {'name': 'longspear'})
-        item2 = self.item_generator.generateItem(self.tables,
+        item2 = self.item_generator.generate_item(self.tables,
                                                 {'name': 'sickle'})
 
         assert(item1 not in self.character.weapons)
@@ -178,9 +178,9 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that system can determine if two items can be dual-wielded
         """
-        item1 = self.item_generator.generateItem(self.tables,
+        item1 = self.item_generator.generate_item(self.tables,
                                                 {'name': 'longspear'})
-        item2 = self.item_generator.generateItem(self.tables,
+        item2 = self.item_generator.generate_item(self.tables,
                                                 {'name': 'sickle'})
 
         assert(not pyherc.rules.items.can_dual_wield(
@@ -193,9 +193,9 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that system can determine if item is dual-wieldable
         """
-        item1 = self.item_generator.generateItem(self.tables,
+        item1 = self.item_generator.generate_item(self.tables,
                                                     {'name': 'longspear'})
-        item2 = self.item_generator.generateItem(self.tables,
+        item2 = self.item_generator.generate_item(self.tables,
                                                     {'name': 'sickle'})
 
         assert(not pyherc.rules.items.is_dual_wieldable(
@@ -211,7 +211,7 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test determing if item is dual-wieldable when using mundane items
         """
-        item = self.item_generator.generateItem(self.tables,
+        item = self.item_generator.generate_item(self.tables,
                                                {'name': 'apple'})
 
         assert(not pyherc.rules.items.is_dual_wieldable(
@@ -223,7 +223,7 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Test that basic healing potion can be created
         """
-        self.item = self.item_generator.generateItem(self.tables,
+        self.item = self.item_generator.generate_item(self.tables,
                                                     {'name': 'healing potion'})
 
         assert(self.item != None)
@@ -238,7 +238,7 @@ class TestItemWithGenerator(IntegrationTest):
         '''
         Test that different types of items have tags
         '''
-        item = self.item_generator.generateItem(self.tables,
+        item = self.item_generator.generate_item(self.tables,
                                                     {'name': 'dagger'})
 
         assert(item.get_tags() is not None)
@@ -247,14 +247,14 @@ class TestItemWithGenerator(IntegrationTest):
         '''
         Test that main type can be retrieved
         '''
-        self.item = self.item_generator.generateItem(self.tables,
+        self.item = self.item_generator.generate_item(self.tables,
                                                     {'name': 'dagger'})
 
         main_type = self.item.get_main_type()
 
         assert(main_type == 'weapon')
 
-        self.item = self.item_generator.generateItem(self.tables,
+        self.item = self.item_generator.generate_item(self.tables,
                                                     {'name': 'apple'})
 
         main_type = self.item.get_main_type()

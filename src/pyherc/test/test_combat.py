@@ -112,7 +112,7 @@ class TestMeleeCombat(IntegrationTest):
         rng = StubRandomNumberGenerator()
         rng.inject(12, [2, 2, 2, 2, 2, 2, 2])
 
-        dagger = self.item_generator.generateItem(self.tables,
+        dagger = self.item_generator.generate_item(self.tables,
                                                     {'name': 'dagger'})
 
         pyherc.rules.items.wield(self.model, self.character1, dagger)

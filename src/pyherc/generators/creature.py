@@ -82,24 +82,22 @@ class CreatureGenerator:
         """
         assert(table != None)
 
-        newCreature = pyherc.data.model.Character(self.action_factory)
-        newCreature.name = table['name']
-        newCreature.set_body(table['body'])
-        newCreature.set_finesse(table['finesse'])
-        newCreature.set_mind(table['mind'])
-        newCreature.set_hp(table['hp'])
-        newCreature.speed = table['speed']
-        newCreature.size = table['size']
-        newCreature.attack = table['attack']
+        new_creature = pyherc.data.model.Character(self.action_factory)
+        new_creature.name = table['name']
+        new_creature.set_body(table['body'])
+        new_creature.set_finesse(table['finesse'])
+        new_creature.set_mind(table['mind'])
+        new_creature.set_hp(table['hp'])
+        new_creature.speed = table['speed']
+        new_creature.size = table['size']
+        new_creature.attack = table['attack']
         #TODO: AI from tables
-        newCreature.artificial_intelligence = pyherc.ai.simple.FlockingHerbivore(newCreature)
-
+        new_creature.artificial_intelligence = pyherc.ai.simple.FlockingHerbivore(new_creature)
 
         if hasattr(table['icon'], 'append'):
             #select from list
-            newCreature.icon = random.choice(table['icon'])
+            new_creature.icon = random.choice(table['icon'])
         else:
-            newCreature.icon = table['icon']
+            new_creature.icon = table['icon']
 
-
-        return newCreature
+        return new_creature

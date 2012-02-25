@@ -39,26 +39,26 @@ class ItemGenerator:
         """
         self.logger = logging.getLogger('pyherc.generators.item.ItemGenerator')
 
-    def generateItem(self, tables, parameters):
+    def generate_item(self, tables, parameters):
         """
         Generates an item
         """
         self.logger.debug('generating an item')
         self.logger.debug(parameters)
         assert(tables != None)
-        newItem = None
+        new_item = None
         if not parameters == None:
             if 'name' in parameters.keys():
                 table = tables.items[parameters['name']]
-                newItem = self.__generateItemFromTable(table)
+                new_item = self.generate_item_from_table(table)
             elif 'type' in parameters.keys():
-                rarityRange = tables.tagScore[parameters['type']]
-                score = random.randint(1, rarityRange)
+                rarity_range = tables.tagScore[parameters['type']]
+                score = random.randint(1, rarity_range)
                 for item in tables.itemsByTag[parameters['type']]:
                     if item[1] <= score and item[2] >= score:
                         choice = item[0]
                 table = tables.items[choice]
-                newItem = self.__generateItemFromTable(table)
+                new_item = self.generate_item_from_table(table)
             else:
                 #generate completely random item?
                 pass
@@ -66,18 +66,20 @@ class ItemGenerator:
             #generate completely random item
             pass
 
-        if newItem == None:
+        if new_item == None:
             self.logger.warn('no item generated')
         else:
-            self.logger.debug('new item generated: ' + newItem.__str__())
+            self.logger.debug('new item generated: ' + new_item.__str__())
 
-        return newItem
+        return new_item
 
-    def generateSpecialItem(self, tables, parameters):
+    def generate_special_item(self, tables, parameters):
         """
         Generate a special item
-        @param tables: tables used in generation
-        @param parameters: hash table containing parameters for generation
+
+        Args:
+            tables: tables used in generation
+            parameters: hash table containing parameters for generation
         """
         assert(tables != None)
         assert(parameters != None)
@@ -86,62 +88,62 @@ class ItemGenerator:
         self.logger.debug('generating a special item')
 
         table = tables.items[parameters['name']]
-        newItem = self.__generateItemFromTable(table)
+        new_item = self.generate_item_from_table(table)
 
         self.logger.debug('special item generation done')
 
-        return newItem
+        return new_item
 
-    def __generateItemFromTable(self, table):
+    def generate_item_from_table(self, table):
         """
         Take table entry and generate corresponding item
         """
         assert(table != None)
 
-        newItem = Item()
-        newItem.name = table['name']
+        new_item = Item()
+        new_item.name = table['name']
         if hasattr(table['icon'], 'append'):
             #select from list
-            newItem.icon = random.choice(table['icon'])
+            new_item.icon = random.choice(table['icon'])
         else:
-            newItem.icon = table['icon']
+            new_item.icon = table['icon']
 
         if 'questItem' in table.keys():
-            newItem.quest_item = table['questItem']
+            new_item.quest_item = table['questItem']
 
-        newItem.cost = table['cost']
-        newItem.weight = table['weight']
-        newItem.rarity = table['rarity']
+        new_item.cost = table['cost']
+        new_item.weight = table['weight']
+        new_item.rarity = table['rarity']
 
         #weapon related attributes
         if 'damage' in table.keys():
-            newItem.weapon_data = WeaponData(
+            new_item.weapon_data = WeaponData(
                                     damage = table['damage'],
                                     critical_range = table['critical range'],
                                     critical_damage = table['critical damage'],
                                     damage_type = table['damage type'],
                                     weapon_type = table['class'])
 
-        newItem.tags = table['type']
+        new_item.tags = table['type']
 
         if 'charges' in table.keys():
-            newItem.charges = table['charges']
+            new_item.charges = table['charges']
 
         if 'effects' in table.keys():
-            newItem.effects = {}
+            new_item.effects = {}
             keys = table['effects'].keys()
 
             for effectType in keys:
-                newItem.effects[effectType] = []
+                new_item.effects[effectType] = []
                 for effect in table['effects'][effectType]:
                     #TODO: add support for charges
                     newEffect = ItemEffectData(trigger = effectType,
                                        effect_type = effect['name'],
                                        power = effect['power'])
 
-                newItem.effects[effectType].append(newEffect)
+                new_item.effects[effectType].append(newEffect)
 
         if 'appearance' in table.keys():
-            newItem.appearance = table['appearance']
+            new_item.appearance = table['appearance']
 
-        return newItem
+        return new_item

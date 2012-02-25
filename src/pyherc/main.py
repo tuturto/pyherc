@@ -25,8 +25,8 @@ import os.path
 import sys, getopt
 import logging
 
-installation_path = os.path.abspath(".")
-sys.path.append(installation_path)
+INSTALL_PATH = os.path.abspath(".")
+sys.path.append(INSTALL_PATH)
 
 import pygame
 import pgu.gui

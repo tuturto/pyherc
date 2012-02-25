@@ -82,7 +82,7 @@ class TestLevelGenerator:
         #throw bunch of food around
         for i in range(0, 10):
             #TODO: better placement algorithm
-            temp_item = self.item_generator.generateItem(model.tables,
+            temp_item = self.item_generator.generate_item(model.tables,
                                                          {'type':'food'})
             temp_item.location = (random.randint(2, 20), random.randint(2, 20))
             temp_level.items.append(temp_item)
