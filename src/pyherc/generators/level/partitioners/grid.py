@@ -22,7 +22,6 @@
 Module for partitioning level to equal grid
 """
 
-import random
 import logging
 from pyherc.generators.level.partitioners.section import Section
 
@@ -30,12 +29,12 @@ class RandomConnector(object):
     """
     Class for building random connection network from sections
     """
-    def __init__(self, random_generator = random.Random()):
+    def __init__(self, random_generator):
         """
         Default constructor
 
         Args:
-            random_generator: optional random number generator
+            random_generator: random number generator
         """
         self.random_generator = random_generator
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.grid.RandomConnector') #pylint: disable=C0301
@@ -103,14 +102,14 @@ class GridPartitioner(object):
     Class for partitioning level to equal grid
     """
 
-    def __init__(self, random_generator = random.Random()):
+    def __init__(self, random_generator):
         """
         Default constructor
 
         Args:
-            random_generator: optional random number generator
+            random_generator: random number generator
         """
-        self.connectors = [RandomConnector()]
+        self.connectors = [RandomConnector(random_generator)]
         self.random_generator = random_generator
 
     def partition_level(self, level,  x_sections = 3,  y_sections = 3):

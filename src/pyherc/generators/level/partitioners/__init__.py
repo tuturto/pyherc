@@ -22,4 +22,4 @@
 Package for level partitioners and related classes
 '''
 
-pass
+from .grid import GridPartitioner, RandomConnector

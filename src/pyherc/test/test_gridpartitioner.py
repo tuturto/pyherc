@@ -40,6 +40,7 @@ class TestGridPartitioner:
         """
         self.mock_level = None
         self.partitioner = None
+        self.rng = None
 
     def setup(self):
         """
@@ -47,8 +48,8 @@ class TestGridPartitioner:
         """
         self.mock_level = spy(Level)
         when(self.mock_level.get_size).then_return((20, 20))
-
-        self.partitioner = GridPartitioner()
+        self.rng = random.Random()
+        self.partitioner = GridPartitioner(self.rng)
 
     def test_partitioning_returns_sections(self): # pylint: disable=C0103
         """
@@ -98,7 +99,7 @@ class TestGridPartitionerUtilities:
         """
         Test that a line can be split into equal parts
         """
-        partitioner = GridPartitioner()
+        partitioner = GridPartitioner(random.Random())
 
         ranges = partitioner.split_range_to_equals(10, 3)
 
@@ -124,9 +125,9 @@ class TestRandomConnector:
         """
         Setup the test cases
         """
-        self.connector = RandomConnector()
-        self.mock_level = stub(Level)
         self.rng = random.Random()
+        self.connector = RandomConnector(self.rng)
+        self.mock_level = stub(Level)
 
     def test_connect_two_sections(self):
         """

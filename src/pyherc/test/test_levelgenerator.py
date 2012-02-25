@@ -25,7 +25,7 @@ Tests for LevelGenerator
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorConfig
-from pyherc.generators.level.partitioners.grid import GridPartitioner
+from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from pyherc.rules import ActionFactory
@@ -36,8 +36,6 @@ from pyDoubles.framework import stub,  empty_stub, method_returning #pylint: dis
 from pyDoubles.framework import spy, assert_that_method, when, empty_spy #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import map_accessibility_in
-import random
-
 import random
 
 class TestLeveltGeneratorFactory:
@@ -159,7 +157,13 @@ class TestLevelGenerator:
         """
         Default constructor
         """
-        pass
+        self.rng = None
+
+    def setup(self):
+        """
+        Setup the test case
+        """
+        self.rng = random.Random()
 
     def test_level_generation_steps(self):
         """
@@ -170,6 +174,7 @@ class TestLevelGenerator:
         room_generator = spy(SquareRoomGenerator)
         level_decorator = empty_spy()
         stair_adder = empty_spy()
+        rng = random.Random()
 
         portal = stub(Portal)
         model = stub(Model)
@@ -181,7 +186,7 @@ class TestLevelGenerator:
 
         generator = LevelGenerator(factory, partitioner, room_generator,
                                    level_decorator, stair_adder,
-                                   random.Random())
+                                   self.rng)
 
         generator.generate_level(portal, model)
 
@@ -195,7 +200,7 @@ class TestLevelGenerator:
         Test that level generator creates a fully connected level
         """
         factory = stub(ActionFactory)
-        partitioner = GridPartitioner()
+        partitioner = GridPartitioner(self.rng)
         room_generator = SquareRoomGenerator(floor_tile = FLOOR_ROCK,
                                              empty_tile = WALL_EMPTY)
         level_decorator = empty_spy()
@@ -206,7 +211,7 @@ class TestLevelGenerator:
 
         generator = LevelGenerator(factory, partitioner, room_generator,
                                    level_decorator, stair_adder,
-                                   random.Random())
+                                   self.rng)
 
         new_level = generator.generate_level(portal, model)
 
