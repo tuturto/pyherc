@@ -32,3 +32,16 @@ WallBuilderDecoratorConfig
 
 .. autoclass:: pyherc.generators.level.decorator.basic.WallBuilderDecoratorConfig
    :members:
+
+AggregateDecorator
+##################
+
+.. autoclass:: pyherc.generators.level.decorator.basic.AggregateDecorator
+   :members:
+
+AggregateDecoratorConfig
+########################
+
+.. autoclass:: pyherc.generators.level.decorator.basic.AggregateDecoratorConfig
+   :members:
+   

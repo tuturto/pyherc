@@ -24,3 +24,4 @@ Module for level decorators
 
 from .basic import ReplacingDecorator, ReplacingDecoratorConfig
 from .basic import WallBuilderDecorator, WallBuilderDecoratorConfig
+from .basic import AggregateDecorator, AggregateDecoratorConfig

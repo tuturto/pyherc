@@ -22,11 +22,15 @@
 Tests for LevelDecorator
 """
 #pylint: disable=W0614
-from pyherc.generators.level.decorator import ReplacingDecorator, ReplacingDecoratorConfig
+from pyherc.generators.level.decorator import ReplacingDecorator
+from pyherc.generators.level.decorator import ReplacingDecoratorConfig
 from pyherc.generators.level.decorator import WallBuilderDecorator
 from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
+from pyherc.generators.level.decorator import AggregateDecorator
+from pyherc.generators.level.decorator import AggregateDecoratorConfig
 from pyherc.data import Level
 from pyDoubles.framework import when, spy, stub #pylint: disable=F0401, E0611
+from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
 from pyherc.data.tiles import FLOOR_ROCK, FLOOR_BRICK, WALL_EMPTY, WALL_GROUND
 from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
@@ -143,3 +147,39 @@ class TestWallBuilderDecorator():
                         is_(equal_to(WALL_CONSTRUCTED)))
 
         assert_that(self.level.walls[0][0], is_(equal_to(WALL_NATURAL)))
+
+class TestAggregateDecorator():
+    """
+    Tests for AggregateDecorator
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.level = None
+        self.mock_decorator_1 = None
+        self.mock_decorator_2 = None
+        self.config = None
+        self.decorator = None
+
+    def setup(self):
+        """
+        Setup the testcase
+        """
+        self.level = stub(Level)
+        self.mock_decorator_1 = spy(WallBuilderDecorator)
+        self.mock_decorator_2 = spy(ReplacingDecorator)
+
+        self.config = AggregateDecoratorConfig()
+        self.config.decorators.append(self.mock_decorator_1)
+        self.config.decorators.append(self.mock_decorator_2)
+        self.decorator = AggregateDecorator(self.config, self.level)
+
+    def test_subdecorators_are_called(self):
+        """
+        Test that sub decorators of aggregate decorator are called
+        """
+        self.decorator.decorate_level()
+
+        assert_that_method(self.mock_decorator_1.decorate_level).was_called()
+        assert_that_method(self.mock_decorator_2.decorate_level).was_called()

@@ -149,3 +149,34 @@ class WallBuilderDecoratorConfig(object):
         super(WallBuilderDecoratorConfig, self).__init__()
         self.wall_config = {}
         self.empty_tile = None
+
+class AggregateDecorator(Decorator):
+    """
+    Decorator that consists of multiple decorators
+    """
+    def __init__(self, configuration, level):
+        """
+        Default constructor
+
+        Args:
+            configuration: AggregateDecoratorConfig
+        """
+        super(AggregateDecorator, self).__init__(configuration, level)
+
+    def decorate_level(self):
+        """
+        Decorate level
+        """
+        for decorator in self.configuration.decorators:
+            decorator.decorate_level()
+
+class AggregateDecoratorConfig(object):
+    """
+    Configuration for AggregateDecorator
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(AggregateDecoratorConfig, self).__init__()
+        self.decorators = []
