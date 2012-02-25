@@ -96,5 +96,15 @@ def create_character(race, kit, action_factory):
     return new_character
 
 def __get_icon(race, kit):
+    """
+    Get icon to represent race and kit
+
+    Args:
+        race: name of the race
+        kit: name of the kit
+
+    Returns:
+        Icon
+    """
     #TODO: implement
     return pyherc.data.tiles.HUMAN_FIGHTER

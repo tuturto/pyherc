@@ -33,14 +33,20 @@ from pyherc.rules.public import MoveParameters
 import pyherc.rules.moving
 
 class TestMoving(IntegrationTest):
+    """
+    Tests for moving
+    """
 
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         IntegrationTest.__init__(self)
 
     def setup2(self):
+        """
+        Secondary setup
+        """
         self.character = Character(self.action_factory)
         levelGenerator = TestLevelGenerator(self.action_factory)
 
@@ -66,9 +72,9 @@ class TestMoving(IntegrationTest):
         self.character.tick = 1
 
     def test_simple_move(self):
-        '''
+        """
         Test that taking single step is possible
-        '''
+        """
         assert(self.character.location == (5, 5))
         action = self.action_factory.get_action(
                             MoveParameters(
@@ -139,9 +145,9 @@ class TestMoving(IntegrationTest):
         assert(self.character.level != self.level1)
 
     def test_moving_uses_time(self):
-        '''
+        """
         Test that moving around uses time
-        '''
+        """
         tick = self.character.tick
         action = self.action_factory.get_action(
                             MoveParameters(

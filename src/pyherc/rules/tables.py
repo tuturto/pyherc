@@ -29,8 +29,14 @@ import pyherc.data.model
 from xml import sax
 
 class Tables:
+    """
+    Class representing tables
+    """
 
     def __init__(self):
+        """
+        Default constructor
+        """
         self.__initialised = 0
         # all items, name as key
         self.items = {}
@@ -51,21 +57,24 @@ class Tables:
         self.logger = logging.getLogger('pyherc.rules.tables')
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
+        """
         d = dict(self.__dict__)
         del d['logger']
         return d
 
     def __setstate__(self, d):
-        '''
+        """
         Override __setstate__ in order to get pickling work
-        '''
+        """
         self.__dict__.update(d)
         self.logger = logging.getLogger('pyherc.rules.tables')
 
     def read_items_from_xml(self, document):
+        """
+        Read items from supplied xml-document
+        """
         self.logger.debug('reading item config from xml')
         parser = sax.make_parser()
         handler = ItemHandler()
@@ -76,6 +85,9 @@ class Tables:
         self.logger.debug('item config read from xml')
 
     def read_creatures_from_xml(self, document):
+        """
+        Read creatures from supplied xml-document
+        """
         self.logger.debug('reading creature config from xml')
         parser = sax.make_parser()
         handler = CreatureHandler()
@@ -88,9 +100,11 @@ class Tables:
     def load_tables(self, base_path = None, itemConfig = None, creatureConfig = None):
         """
         Initialise tables
-        @param base_path: directory from where to load files
-        @param itemConfig: optional config string for items
-        @param creatureConfig: optional config string for creatures
+
+        Args:
+            base_path: directory from where to load files
+            itemConfig: optional config string for items
+            creatureConfig: optional config string for creatures
         """
 
         if self.__initialised:
@@ -151,7 +165,9 @@ class Tables:
     def randomise_potions(self):
         """
         Randomize appearances of potions
-        @note: different types of potions may be assigned same appearance
+
+        Note:
+            different types of potions may be assigned same appearance
         """
         self.logger.debug('randomizing potion appearance')
         potionEntries = self.itemsByTag['potion']
@@ -190,6 +206,9 @@ class CreatureHandler(sax.ContentHandler):
     Class to read creatures from xml-configuration
     """
     def startElement(self, name, attrs):
+        """
+        Handle starting of element
+        """
         self.text = ""
         if name == 'creatures':
             #start of the configuration document
@@ -201,9 +220,15 @@ class CreatureHandler(sax.ContentHandler):
             self.newCreature['icon'] = []
 
     def characters(self, ch):
+        """
+        Handle reading character inside element
+        """
         self.text = self.text + ch
 
     def endElement(self, name):
+        """
+        Handle ending of element
+        """
         if name == 'creature':
             #finished processing creature
             self.creatures[self.newCreature['name']] = self.newCreature
@@ -224,6 +249,9 @@ class ItemHandler(sax.ContentHandler):
     Class to process items xml-configuration
     """
     def startElement(self, name, attrs):
+        """
+        Handle starting of element
+        """
         self.text = ""
         if name == 'items':
             #start of the configuration document
@@ -255,9 +283,15 @@ class ItemHandler(sax.ContentHandler):
             self.newItem['effects'][effectType].append(tempEffect)
 
     def characters(self, ch):
+        """
+        Handle reading character inside of element
+        """
         self.text = self.text + ch
 
     def endElement(self, name):
+        """
+        Handle ending of element
+        """
         if name == 'items':
             #finished processing the items configuration
             pass

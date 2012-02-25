@@ -26,20 +26,25 @@ import pyherc
 import pyherc.generators.utils
 
 class TestGeneratorUtils(object):
-
+    """
+    Tests for generator utilities
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         pass
 
-    def test_simpleBSPSplit_horisontal(self):
+    def test_simpleBSPSplit_horizontal(self):
+        """
+        Test that BSP section can be split horizontally
+        """
         section = pyherc.generators.utils.BSPSection((0, 0), (20, 20), None)
         assert(section.node1 == None)
         assert(section.node2 == None)
 
         section.split(direction = 1)
-        # 1 split horisontal
+        # 1 split horizontal
         # 2 split vertical
 
         assert(section.node1 != None)
@@ -53,6 +58,9 @@ class TestGeneratorUtils(object):
         assert(section.node2.corner2[1] == 20)
 
     def test_simpleBSPSplit_vertical(self):
+        """
+        Test that bsp section can split vertical
+        """
         section = pyherc.generators.utils.BSPSection((0, 0), (20, 20), None)
         assert(section.node1 == None)
         assert(section.node2 == None)
@@ -72,6 +80,9 @@ class TestGeneratorUtils(object):
         assert(section.node2.corner2[1] == 20)
 
     def test_simpleBSPSplit_notEnoughSpace(self):
+        """
+        Test that bsp split does not try to split when there is not enough space
+        """
         section = pyherc.generators.utils.BSPSection((0, 0), (10, 10), None)
         assert(section.node1 == None)
         assert(section.node2 == None)
@@ -82,6 +93,9 @@ class TestGeneratorUtils(object):
         assert(section.node2 == None)
 
     def test_getAreaQueue(self):
+        """
+        Test basic functionality of area queue
+        """
         section1 = pyherc.generators.utils.BSPSection((0, 0), (20, 20), None)
         section2 = pyherc.generators.utils.BSPSection((0, 0), (20, 10), None)
         section3 = pyherc.generators.utils.BSPSection((0, 11), (20, 20), None)
@@ -97,7 +111,6 @@ class TestGeneratorUtils(object):
         section5.parent = section2
 
         queue = section1.getAreaQueue()
-        # (section5, section4, section3, section2, section1)
 
         assert(queue.pop() == section1)
         assert(queue.pop() in (section2, section3))

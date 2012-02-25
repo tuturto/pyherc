@@ -36,45 +36,54 @@ from pyherc.rules.attack.factories import MeleeCombatFactory
 from pyherc.rules.attack.factories import AttackFactory
 
 class StubRandomNumberGenerator(random.Random):
-    '''
+    """
     Stub for random number generator
 
     Will always return same numbers
-    '''
+    """
     def __init__(self):
+        """
+        Default constructor
+        """
         self.numbers = []
 
     def inject(self, max, numbers):
+        """
+        Inject random numbers
+        """
         self.numbers = [(x / max) - 0.0000000000000001 for x in numbers]
 
     def random(self):
-        '''
+        """
         Return the next random floating point number in the range [0.0, 1.0).
-        '''
+        """
         return self.numbers.pop(0)
 
     def seed(self, seed = None):
-        '''
+        """
         Initialize the basic random number generator.
-        '''
+        """
         pass
 
     def getstate(self):
-        '''
+        """
         Return an object capturing the current internal state of the generator.
         This object can be passed to setstate() to restore the state.
-        '''
+        """
         return self.numbers
 
     def setstate(self, state):
-        '''
+        """
         state should have been obtained from a previous call to getstate()
         setstate() restores the internal state of the generator to what it was
         at the time setstate() was called.
-        '''
+        """
         self.numbers = state
 
     def jumpahead(self, jumps):
+        """
+        Jump ahead in the sequence
+        """
         pass
 
 class StubModel():
@@ -88,17 +97,26 @@ class StubModel():
         pass
 
     def raise_event(self, event):
+        """
+        Raise event
+        """
         pass
 
 class IntegrationTest():
+    """
+    Test base with tables initialised
+    """
 
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         pass
 
     def setup(self):
+        """
+        Setup test case
+        """
         itemConfig = """
 <items>
     <item>
@@ -479,4 +497,7 @@ class IntegrationTest():
         self.setup2()
 
     def setup2(self):
+        """
+        Secondary setup
+        """
         pass

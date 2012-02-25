@@ -25,14 +25,20 @@ Module for testing tables
 import pyherc
 
 class test_Tables:
+    """
+    Tests for Tables
+    """
 
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         pass
 
     def test_reading_simple_item_config(self):
+        """
+        Test that reading simple configuration works
+        """
         itemConfig = """
             <items>
                 <item>
@@ -61,6 +67,9 @@ class test_Tables:
         assert pyherc.data.tiles.ITEM_APPLE in tables.items['apple']['icon']
 
     def test_reading_more_complex_item(self):
+        """
+        Test reading more complex items
+        """
         itemConfig = """
             <items>
                 <item>
@@ -93,6 +102,9 @@ class test_Tables:
         assert pyherc.data.tiles.ITEM_CRYSTAL_SKULL in tables.items['crystal skull']['icon']
 
     def test_reading_two_items_from_config(self):
+        """
+        Test reading two items from config
+        """
         itemConfig = """
             <items>
                 <item>
@@ -133,6 +145,9 @@ class test_Tables:
         assert pyherc.data.tiles.ITEM_APPLE in tables.items['apple']['icon']
 
     def test_reading_weapon_from_config(self):
+        """
+        Test reading weapon from configuration
+        """
         itemConfig = """
             <items>
                 <item>

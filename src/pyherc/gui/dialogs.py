@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Module for various dialog components that can be displayed on screen
+"""
+
 import pygame
 import logging
 import pyherc.gui.surfaceManager
@@ -25,10 +29,6 @@ import pyherc.gui.images
 import pyherc.data.model
 import pyherc.data.tiles
 import pyherc.generators.dungeon
-
-"""
-Module for various dialog components that can be displayed on screen
-"""
 
 from pygame.locals import K_a, K_b, K_c, K_d, K_e, K_f, K_g, K_h, K_i, K_j
 from pygame.locals import K_k, K_l, K_m, K_n, K_o, K_p, K_q, K_r, K_s, K_t

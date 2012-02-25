@@ -36,9 +36,9 @@ class TestMagic:
     """
 
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         pass
 
     def test_damage_effect(self):
@@ -84,14 +84,20 @@ class TestMagic:
         assert(character.hit_points == 5)
 
 class TestMagicWithGenerators(IntegrationTest):
+    """
+    Magic tests with generated items
+    """
 
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         IntegrationTest.__init__(self)
 
     def setup2(self):
+        """
+        Secondary set up
+        """
         self.character = pyherc.data.model.Character(self.action_factory)
         self.character.hit_points = 1
         self.character.max_hp = 5
@@ -151,9 +157,9 @@ class TestMagicWithGenerators(IntegrationTest):
         assert(self.item in self.character.inventory)
 
     def test_drinking_non_potion(self):
-        '''
+        """
         Test that drinking non-potion item will not crash the system
-        '''
+        """
         self.item = Item()
         self.item.name = 'club'
         self.character.inventory.append(self.item)

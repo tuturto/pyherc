@@ -31,14 +31,23 @@ from pyherc.data.dungeon import Level
 
 
 class TestTime:
+    """
+    Time related tests
+    """
 
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
-        pass
+        """
+        self.creature1 = None
+        self.creature2 = None
+        self.creature3 = None
+        self.model = None
 
     def setup(self):
+        """
+        Setup the test case
+        """
         self.creature1 = Character(None)
         self.creature2 = Character(None)
         self.creature3 = Character(None)

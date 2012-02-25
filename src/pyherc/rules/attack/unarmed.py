@@ -18,13 +18,13 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module defining unarmed attack related objcts
 
 Classes:
 UnarmedToHit
 UnarmedDamage
-'''
+"""
 import logging
 import random
 
@@ -32,36 +32,42 @@ from pyherc.rules.attack.action import ToHit
 from pyherc.rules.attack.action import Damage
 
 class UnarmedToHit(ToHit):
+    """
+    Class to perform to hit calculations in unarmed combat
+    """
 
     def __init__(self, attacker,  target,
                         random_number_generator = random.Random()):
-        '''
+        """
         Default constructor
 
-        @param attacker: Character doing the attack
-        @param target: Character being attacked
-        @param rng: Random number generator
-        '''
+        Args:
+            attacker: Character doing the attack
+            target: Character being attacked
+            rng: Random number generator
+        """
         self.logger = logging.getLogger('pyherc.rules.attack.unarmed.UnarmedToHit')
         self.attacker = attacker
         self.target = target
         self.rng = random_number_generator
 
 class UnarmedDamage(Damage):
-    '''
+    """
     Damage done in unarmed attack
-    '''
+    """
     def __init__(self, damage):
-        '''
+        """
         Default constructor
-        '''
+        """
         self.logger = logging.getLogger('pyherc.rules.attack.unarmed.UnarmedDamage')
         self.damage = damage
 
     def apply_damage(self, target):
-        '''
+        """
         Applies damage to target
-        @param target: Target to damage
-        '''
+
+        Args:
+            target: Target to damage
+        """
         self.logger.debug('Applying damage of {0}'.format(self.damage))
         target.set_hp(target.get_hp() - self.damage)

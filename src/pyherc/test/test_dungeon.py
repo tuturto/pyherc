@@ -27,20 +27,28 @@ from pyherc.data.dungeon import Portal
 from pyherc.data import tiles
 
 class TestDungeon:
-
+    """
+    Tests for Dungeon class
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         pass
 
     def test_simple_level_creation(self):
+        """
+        Test that simple level creation works
+        """
         level = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
         assert not (level is None)
-        assert (level.floor[5][5] == tiles.FLOOR_ROCK)
+        assert(level.floor[5][5] == tiles.FLOOR_ROCK)
         assert(level.walls[0][0] == tiles.WALL_EMPTY)
 
-    def test_StairLinking(self):
+    def test_stair_linking(self):
+        """
+        Test that stairs can be linked
+        """
         level1 = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
         level2 = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
 

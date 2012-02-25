@@ -18,10 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-import types
-import random
-
-'''
+"""
 Public interface for action subsystem
 
 Classes:
@@ -29,19 +26,24 @@ ActionFactory - Class used to contruct Action objects
 ActionParameters - Class used to guide Action construction
 
 AttackParameters - Class used to guide contruction of attack related actions
-'''
+"""
+
+import types
+import random
 
 class ActionFactory():
-    '''
+    """
     Object for creating actions
-    '''
+    """
 
     def __init__(self, model, factories):
-        '''
+        """
         Construct ActionFactory
-        @param model: model to register for the factory
-        @param factories: a single Factory or list of Factories to use
-        '''
+
+        Args:
+            model: model to register for the factory
+            factories: a single Factory or list of Factories to use
+        """
         if isinstance(factories, types.ListType):
             self.factories = factories
         else:
@@ -51,27 +53,36 @@ class ActionFactory():
         self.model = model
 
     def get_action(self, parameters):
-        '''
+        """
         Create an action
-        @param parameters: Parameters used to control action creation
-        '''
+
+        Args:
+            parameters: Parameters used to control action creation
+        """
         parameters.set_model(self.model)
 
         factory = self.get_sub_factory(parameters)
         return factory.get_action(parameters)
 
     def get_sub_factories(self):
-        '''
+        """
         Get all sub factories
-        @returns: List of sub factories
-        '''
+
+        Returns:
+            List of sub factories
+        """
         return self.factories
 
     def get_sub_factory(self, parameters):
-        '''
+        """
         Get sub factory to handle parameters
-        @param parameters: Parameters to use for searching the factory
-        '''
+
+        Args:
+            parameters: Parameters to use for searching the factory
+
+        Returns:
+            Sub factory if found, None otherwise
+        """
         subs = [x for x in self.factories if x.can_handle(parameters)]
 
         if len(subs) == 1:
@@ -80,32 +91,40 @@ class ActionFactory():
             return None
 
 class ActionParameters():
-    '''
+    """
     Object for controlling action creation
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         self.action_type = 'default'
         self.model = None
 
     def set_model(self, model):
+        """
+        Set model
+
+        Args:
+            model: Model to use
+        """
         self.model = model
 
 class AttackParameters(ActionParameters):
-    '''
+    """
     Object for controlling attack action creation
-    '''
+    """
     def __init__(self, attacker, target, attack_type,
                         random_number_generator = random.Random()):
-        '''
+        """
         Construct AttackParameters
-        @param attacker: Character doing an attack
-        @param target: Character being attacked
-        @param attack_type: type of attack to perform
-        @param random_number_generator: Random number generator to use
-        '''
+
+        Args:
+            attacker: Character doing an attack
+            target: Character being attacked
+            attack_type: type of attack to perform
+            random_number_generator: Random number generator to use
+        """
         ActionParameters.__init__(self)
 
         self.action_type = 'attack'
@@ -116,19 +135,24 @@ class AttackParameters(ActionParameters):
         self.model = None
 
     def __str__(self):
+        """
+        Get string representation of this object
+        """
         return 'attack with attack type of ' + self.attack_type
 
 class MoveParameters(ActionParameters):
-    '''
+    """
     Object for controlling move action creation
-    '''
+    """
     def __init__(self, character, direction, movement_mode):
-        '''
+        """
         Construct move parameters
-        @param character: Character moving
-        @param direction: Direction of the move
-        @param movement_mode: Mode of movement
-        '''
+
+        Args:
+            character: Character moving
+            direction: Direction of the move
+            movement_mode: Mode of movement
+        """
         ActionParameters.__init__(self)
 
         self.action_type = 'move'
@@ -138,5 +162,8 @@ class MoveParameters(ActionParameters):
         self.model = None
 
     def __str__(self):
+        """
+        Get string representation of this object
+        """
         return 'move with movement mode of ' + self.movement_mode
 

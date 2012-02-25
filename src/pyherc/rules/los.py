@@ -42,14 +42,18 @@ mult = [
             ]
 
 def is_blocked(loc_x, loc_y, level, character = None):
-    '''
+    """
     Checks if given location should be considered blocking for character
-    @param loc_x: x-coordinate on the map
-    @param loc_y: y-coordinate on the map
-    @param level: level
-    @param character: character
-    @returns: False if not blocking, otherwise True
-    '''
+
+    Args:
+        loc_x: x-coordinate on the map
+        loc_y: y-coordinate on the map
+        level: level
+        character: character
+
+    Returns:
+        False if not blocking, otherwise True
+    """
     assert level != None
 
     if loc_x < 0 or loc_y < 0:
@@ -64,10 +68,12 @@ def is_blocked(loc_x, loc_y, level, character = None):
         return False
 
 def cast_light(cx, cy, row, start, end, radius, xx, xy, yx, yy, fov_matrix, level):
-    ''''
+    """
     Recursive lightcasting function
-    @returns: fov_matrix
-    '''
+
+    Returns:
+        fov_matrix
+    """
     if start < end:
         return
     radius_squared = radius*radius
@@ -112,9 +118,9 @@ def cast_light(cx, cy, row, start, end, radius, xx, xy, yx, yy, fov_matrix, leve
     return fov_matrix
 
 def do_fov(x, y, radius, fov_matrix, level):
-    '''
+    """
     Calculate lit squares from the given location and radius
-    '''
+    """
     for oct in range(8):
         cast_light(x, y, 1, 1.0, 0.0, radius,
                             mult[0][oct], mult[1][oct],
@@ -123,6 +129,17 @@ def do_fov(x, y, radius, fov_matrix, level):
     return fov_matrix
 
 def get_fov_matrix(model, character, distance = 7):
+    """
+    Calculate field of vision matrix
+
+    Args:
+        model: Model to use
+        character: Character to calculate matrix for
+        distance: maximum view distance
+
+    Returns:
+        Matrix defining which parts are visible and which not
+    """
     fov_matrix = []
 
     width = len(character.level.walls[0])
