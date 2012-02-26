@@ -73,13 +73,13 @@ class TestLevelDecorator():
 
         self.config.wall_config[WALL_NATURAL] = WALL_GROUND
 
-        self.decorator = ReplacingDecorator(self.config, self.level)
+        self.decorator = ReplacingDecorator(self.config)
 
     def test_replacing_ground(self):
         """
         Test that proto ground is replaced with given tiles
         """
-        self.decorator.decorate_level()
+        self.decorator.decorate_level(self.level)
 
         assert_that(self.level.floor[5][5], is_(equal_to(FLOOR_BRICK)))
         assert_that(self.level.floor[6][5], is_(equal_to(FLOOR_BRICK)))
@@ -95,7 +95,7 @@ class TestLevelDecorator():
         """
         Test that proto walls are replaced with given tiles
         """
-        self.decorator.decorate_level()
+        self.decorator.decorate_level(self.level)
 
         assert_that(self.level.walls[2][2], is_(equal_to(WALL_GROUND)))
         assert_that(self.level.walls[5][5], is_(equal_to(WALL_GROUND)))
@@ -128,13 +128,13 @@ class TestWallBuilderDecorator():
         self.config.wall_config[WALL_NATURAL] = WALL_CONSTRUCTED
         self.config.empty_tile = WALL_EMPTY
 
-        self.decorator = WallBuilderDecorator(self.config, self.level)
+        self.decorator = WallBuilderDecorator(self.config)
 
     def test_building_walls(self):
         """
         Test that tiles next to empty space are replaced
         """
-        self.decorator.decorate_level()
+        self.decorator.decorate_level(self.level)
 
         for loc in range(2, 8):
             assert_that(self.level.walls[loc][1],
@@ -173,13 +173,13 @@ class TestAggregateDecorator():
         self.config = AggregateDecoratorConfig()
         self.config.decorators.append(self.mock_decorator_1)
         self.config.decorators.append(self.mock_decorator_2)
-        self.decorator = AggregateDecorator(self.config, self.level)
+        self.decorator = AggregateDecorator(self.config)
 
     def test_subdecorators_are_called(self):
         """
         Test that sub decorators of aggregate decorator are called
         """
-        self.decorator.decorate_level()
+        self.decorator.decorate_level(self.level)
 
         assert_that_method(self.mock_decorator_1.decorate_level).was_called()
         assert_that_method(self.mock_decorator_2.decorate_level).was_called()
