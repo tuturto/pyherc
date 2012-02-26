@@ -21,18 +21,19 @@
 """
 Classes for configuring level generation
 """
-class LevelGeneratorConfig(object):
+class LevelGeneratorFactoryConfig(object):
     """
     Class to configure level generator
     """
-    def __init__(self, room_generators = [], level_partitioners = [],
-                 decorators = []):
+    def __init__(self, room_generators, level_partitioners,
+                 decorators, size):
         """
         Default constructor
         """
         self.__room_generators = room_generators
         self.__level_partitioners = level_partitioners
         self.__decorators = decorators
+        self.__size = size
 
     def get_level_partitioners(self):
         """
@@ -52,6 +53,13 @@ class LevelGeneratorConfig(object):
         """
         return self.__decorators
 
+    def get_size(self):
+        """
+        Get size of levels
+        """
+        return self.__size
+
     level_partitioners = property(get_level_partitioners)
     room_generators = property(get_room_generators)
     decorators = property(get_decorators)
+    size = property(get_size)

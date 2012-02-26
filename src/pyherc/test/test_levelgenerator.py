@@ -24,7 +24,7 @@ Tests for LevelGenerator
 #pylint: disable=W0614
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.generator import LevelGeneratorFactory
-from pyherc.generators.level.config import LevelGeneratorConfig
+from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
@@ -61,7 +61,7 @@ class TestLeveltGeneratorFactory:
         Setup test case
         """
         self.mock_action_factory = stub(ActionFactory)
-        self.mock_config = stub(LevelGeneratorConfig)
+        self.mock_config = stub(LevelGeneratorFactoryConfig)
         self.mock_partitioner = empty_stub()
         self.mock_room_generator = empty_stub()
         self.mock_room_generator.level_types = ['crypt']
@@ -106,7 +106,7 @@ class TestLevelGeneratorFactoryConfiguration:
         mock_room_generator.level_types = ['crypt']
         mock_decorator = empty_stub()
 
-        mock_config = stub(LevelGeneratorConfig)
+        mock_config = stub(LevelGeneratorFactoryConfig)
         mock_config.level_partitioners = [mock_partitioner]
         mock_config.room_generators = [mock_room_generator]
         mock_config.decorators = [mock_decorator]
@@ -130,7 +130,7 @@ class TestLevelGeneratorFactoryConfiguration:
         mock_room_generator.level_types = ["swamp"]
         mock_decorator = empty_stub()
 
-        mock_config = stub(LevelGeneratorConfig)
+        mock_config = stub(LevelGeneratorFactoryConfig)
         mock_config.level_partitioners = [mock_partitioner]
         mock_config.room_generators = [mock_room_generator]
         mock_config.decorators = [mock_decorator]
@@ -188,7 +188,8 @@ class TestLevelGenerator:
 
         generator = LevelGenerator(factory, partitioner, room_generator,
                                    level_decorator, stair_adder,
-                                   self.rng)
+                                   self.rng,
+                                   (60, 40))
 
         generator.generate_level(portal, model)
 
@@ -213,7 +214,8 @@ class TestLevelGenerator:
 
         generator = LevelGenerator(factory, partitioner, room_generator,
                                    level_decorator, stair_adder,
-                                   self.rng)
+                                   self.rng,
+                                   (60, 40))
 
         new_level = generator.generate_level(portal, model)
 
