@@ -74,10 +74,10 @@ class CorridorGenerator(object):
         section = start_point.section
 
         for x_loc in range(start_x, end_x):
-            section.set_wall((x_loc, y_loc), self.tile)
+            section.set_wall((x_loc, y_loc), self.tile, 'corridor')
 
-        section.set_wall(end_point.location, self.tile)
-        section.set_wall(start_point.location, self.tile)
+        section.set_wall(end_point.location, self.tile, 'corridor')
+        section.set_wall(start_point.location, self.tile, 'corridor')
 
     def __carve_horizontal_bend(self, start_point, end_point):
         """
@@ -127,10 +127,10 @@ class CorridorGenerator(object):
         section = start_point.section
 
         for y_loc in range(start_y, end_y):
-            section.set_wall((x_loc, y_loc), self.tile)
+            section.set_wall((x_loc, y_loc), self.tile, 'corridor')
 
-        section.set_wall(end_point.location, self.tile)
-        section.set_wall(start_point.location, self.tile)
+        section.set_wall(end_point.location, self.tile, 'corridor')
+        section.set_wall(start_point.location, self.tile, 'corridor')
 
     def __carve_vertical_bend(self, start_point, end_point):
         """

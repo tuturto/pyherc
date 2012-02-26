@@ -63,8 +63,8 @@ class SquareRoomGenerator(object):
 
         for loc_y in range(room_top_edge, room_bottom_edge):
             for loc_x in range(room_left_edge, room_right_edge):
-                section.set_floor((loc_x, loc_y), self.floor_tile)
-                section.set_wall((loc_x, loc_y), self.empty_tile)
+                section.set_floor((loc_x, loc_y), self.floor_tile, 'room')
+                section.set_wall((loc_x, loc_y), self.empty_tile, None)
 
         center_x = (room_right_edge - room_left_edge) // 2 + room_left_edge
         center_y = (room_bottom_edge - room_top_edge) // 2 + room_top_edge

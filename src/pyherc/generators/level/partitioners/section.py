@@ -301,13 +301,14 @@ class Section(object):
                                    direction = direction,
                                    section = self))
 
-    def set_floor(self, location, tile):
+    def set_floor(self, location, tile, location_type):
         """
         Set floor at given location
 
         Args:
             location: (loc_x, loc_y) location to set the tile
             tile: ID of the tile to use
+            location_type: type of location, None to not change
 
         Note:
             Coordinates are given relative to section origo
@@ -316,14 +317,17 @@ class Section(object):
         y_loc = self.__get_top_edge() + location[1]
 
         self.level.floor[x_loc][y_loc] = tile
+        if location_type != None:
+            self.level.set_location_type((x_loc, y_loc), location_type)
 
-    def set_wall(self, location, tile):
+    def set_wall(self, location, tile, location_type):
         """
         Set wall at given location
 
         Args:
             location: (loc_x, loc_y) location to set the tile
             tile: ID of the tile to use
+            location_type: type of location, None to not change
 
         Note:
             Coordinates are given relative to section origo
@@ -332,6 +336,8 @@ class Section(object):
         y_loc = self.__get_top_edge() + location[1]
 
         self.level.walls[x_loc][y_loc] = tile
+        if location_type != None:
+            self.level.set_location_type((x_loc, y_loc), location_type)
 
     def find_room_connection(self, section_connection):
         """

@@ -232,7 +232,7 @@ class TestSectionLevelAccess(object):
         """
         Test that floor can be set
         """
-        self.section.set_floor((5, 5), FLOOR_ROCK)
+        self.section.set_floor((5, 5), FLOOR_ROCK, None)
 
         assert_that(self.level.floor[5][5], is_(equal_to(FLOOR_ROCK)))
 
@@ -240,9 +240,18 @@ class TestSectionLevelAccess(object):
         """
         Test that walls can be set
         """
-        self.section.set_wall((2, 2), WALL_GROUND)
+        self.section.set_wall((2, 2), WALL_GROUND, None)
 
         assert_that(self.level.walls[2][2], is_(equal_to(WALL_GROUND)))
+
+    def test_setting_location_type(self):
+        """
+        Test that location type can be set correctly
+        """
+        self.section.set_floor((2, 3), FLOOR_ROCK, 'corridor')
+
+        assert_that(self.level.get_location_type((2, 3)),
+                                    is_(equal_to('corridor')))
 
 class TestSectionLevelAccessWithOffset(object):
     """
@@ -269,7 +278,7 @@ class TestSectionLevelAccessWithOffset(object):
         """
         Test that off set Section is correctly mapped to the level
         """
-        self.section.set_floor((2, 2), FLOOR_ROCK)
+        self.section.set_floor((2, 2), FLOOR_ROCK, None)
 
         assert_that(self.level.floor[7][7], is_(equal_to(FLOOR_ROCK)))
 
@@ -277,6 +286,6 @@ class TestSectionLevelAccessWithOffset(object):
         """
         Test that offset Section is correctly mapped to the level
         """
-        self.section.set_wall((3, 2), WALL_GROUND)
+        self.section.set_wall((3, 2), WALL_GROUND, None)
 
         assert_that(self.level.walls[8][7], is_(equal_to(WALL_GROUND)))
