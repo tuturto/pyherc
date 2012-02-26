@@ -315,6 +315,21 @@ class Level:
         """
         self.room[location[0]][location[1]] = value
 
+    def get_rooms(self):
+        """
+        Get locations marked as rooms
+
+        Returns:
+            List of (loc_x, loc_y) locations identifying rooms
+        """
+        rooms = []
+        for loc_x in range(len(self.room)):
+            for loc_y in range(len(self.room[0])):
+                if self.room[loc_x][loc_y] == True:
+                    rooms.append((loc_x, loc_y))
+
+        return rooms
+
     def dump_string(self):
         """
         Dump this level into a string

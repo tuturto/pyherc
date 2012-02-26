@@ -26,6 +26,8 @@ from pyherc.data.tiles import FLOOR_ROCK, WALL_EMPTY
 from pyherc.data import Level, Portal
 from pyherc.generators.level.stairs import StairAdder
 from hamcrest import * #pylint: disable=W0401
+from pyherc.test.matchers import * #pylint: disable=W0401
+import random
 
 class TestStairAdder():
     """
@@ -35,7 +37,13 @@ class TestStairAdder():
         """
         Default constructor
         """
-        pass
+        self.rng = None
+
+    def setup(self):
+        """
+        Setup test case
+        """
+        self.rng = random.Random()
 
     def test_add_stairs_to_room(self):
         """
@@ -49,7 +57,7 @@ class TestStairAdder():
             for loc_x in range(8, 12):
                 level.set_room((loc_x, loc_y), True)
 
-        stair_adder = StairAdder(level)
+        stair_adder = StairAdder(level, self.rng)
 
         portal = Portal()
 

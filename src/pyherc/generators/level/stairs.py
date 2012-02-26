@@ -26,15 +26,17 @@ class StairAdder(object):
     """
     Basic class for adding stairs
     """
-    def __init__(self, level):
+    def __init__(self, level, rng):
         """
         Default constructor
 
         Args:
             level: Level where stairs will be added
+            rng: Randon number generator
         """
         super(StairAdder, self).__init__()
         self.level = level
+        self.rng = rng
 
     def add_stairs(self, stairs):
         """
@@ -43,4 +45,6 @@ class StairAdder(object):
         Args:
             stairs: stairs to add
         """
-        pass
+        rooms = self.level.get_rooms()
+        location = self.rng.choice(rooms)
+        self.level.add_portal(stairs, location)
