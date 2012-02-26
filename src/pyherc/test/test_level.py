@@ -34,14 +34,19 @@ class TestLevel:
         """
         Default constructor
         """
-        pass
+        self.level = None
+
+    def setup(self):
+        """
+        Setup test case
+        """
+        self.level = Level(size = (20, 10))
 
     def test_get_size(self):
         """
         Test that Level can report size
         """
-        level = Level(size = (20, 10))
-        size = level.get_size()
+        size = self.level.get_size()
 
         assert size == (21, 11)
 
@@ -49,14 +54,12 @@ class TestLevel:
         """
         Test that level can report what areas of it are marked as being room
         """
-        level = Level((20, 10))
+        self.level.set_location_type((5, 5), 'room')
+        self.level.set_location_type((5, 6), 'room')
+        self.level.set_location_type((8, 8), 'room')
+        self.level.set_location_type((9, 8), 'room')
 
-        level.room[5][5] = True
-        level.room[5][6] = True
-        level.room[8][8] = True
-        level.room[9][8] = True
-
-        rooms = level.get_rooms()
+        rooms = self.level.get_rooms()
 
         assert_that(rooms, contains_inanyorder((5, 5), (5, 6),
                                                (8, 8), (9, 8)))

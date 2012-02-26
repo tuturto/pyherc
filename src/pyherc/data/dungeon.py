@@ -43,7 +43,7 @@ class Level:
 
         self.floor = []
         self.walls = []
-        self.room = []
+        self.__location_type = []
         self.lit = []
 
         if size[0] != 0 and size[1] != 0:
@@ -62,8 +62,8 @@ class Level:
             for loc_x in range(0, size[0] + 1):
                 temp_row = []
                 for loc_y in range(0, size[1] + 1):
-                    temp_row.append(wall_type)
-                self.room.append(temp_row)
+                    temp_row.append(None)
+                self.__location_type.append(temp_row)
 
         self.items = []
         self.portals = []
@@ -211,10 +211,10 @@ class Level:
         assert(creature != None)
 
         if location == None:
-            self.logger.debug('adding ' + creature.__str__())
+            self.logger.debug('adding ' + str(creature))
         else:
-            self.logger.debug('adding ' + creature.__str__()
-                              + ' to location ' + location.__str__())
+            self.logger.debug('adding ' + str(creature)
+                              + ' to location ' + str(location))
 
         self.creatures.append(creature)
         creature.level = self
@@ -230,7 +230,7 @@ class Level:
         """
         assert(creature != None)
         assert(creature in self.creatures)
-        self.logger.debug('removing a creature: ' + creature.__str__())
+        self.logger.debug('removing a creature: ' + str(creature))
 
         self.creatures.remove(creature)
         creature.level = None
@@ -305,15 +305,27 @@ class Level:
 
         return (x_size, y_size)
 
-    def set_room(self, location, value):
+    def set_location_type(self, location, location_type):
         """
-        Set if given location is part of room or not
+        Set type of location
 
         Args:
             location: (loc_x, loc_y) location to set
-            value: True or False
+            location_type: type of location
         """
-        self.room[location[0]][location[1]] = value
+        self.__location_type[location[0]][location[1]] = location_type
+
+    def get_location_type(self, location):
+        """
+        Get type of location
+
+        Args:
+            location: (loc_x, loc_y) location to get
+
+        Returns:
+            Type of location
+        """
+        return self.__location_type[location[0]][location[1]]
 
     def get_rooms(self):
         """
@@ -323,9 +335,9 @@ class Level:
             List of (loc_x, loc_y) locations identifying rooms
         """
         rooms = []
-        for loc_x in range(len(self.room)):
-            for loc_y in range(len(self.room[0])):
-                if self.room[loc_x][loc_y] == True:
+        for loc_x in range(len(self.__location_type)):
+            for loc_y in range(len(self.__location_type[0])):
+                if self.__location_type[loc_x][loc_y] == 'room':
                     rooms.append((loc_x, loc_y))
 
         return rooms

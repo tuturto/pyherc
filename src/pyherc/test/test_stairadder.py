@@ -55,7 +55,7 @@ class TestStairAdder():
 
         for loc_y in range(8, 12):
             for loc_x in range(8, 12):
-                level.set_room((loc_x, loc_y), True)
+                level.set_location_type((loc_x, loc_y), 'room')
 
         stair_adder = StairAdder(level, self.rng)
 

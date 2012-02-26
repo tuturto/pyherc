@@ -132,10 +132,8 @@ def located_in_room(portal):
         True if located in room, False otherwise
     """
     level = portal.level
-    loc_x = portal.location[0]
-    loc_y = portal.location[1]
 
-    if level.room[loc_x][loc_y] == True:
+    if level.get_location_type(portal.location) == 'room':
         return True
     else:
         return False
