@@ -173,6 +173,8 @@ class TestLevelGenerator:
         room_generator = spy(SquareRoomGenerator)
         level_decorator = spy(ReplacingDecorator)
         stair_adder = spy(PortalAdder)
+        item_generator = empty_stub()
+        creature_generator = empty_stub()
         rng = random.Random()
 
         portal = stub(Portal)
@@ -185,6 +187,7 @@ class TestLevelGenerator:
 
         generator = LevelGenerator(factory, partitioner, room_generator,
                                    level_decorator, stair_adder,
+                                   item_generator, creature_generator,
                                    self.rng,
                                    (60, 40))
 
@@ -211,6 +214,7 @@ class TestLevelGenerator:
 
         generator = LevelGenerator(factory, partitioner, room_generator,
                                    level_decorator, stair_adder,
+                                   None, None,
                                    self.rng,
                                    (60, 40))
 

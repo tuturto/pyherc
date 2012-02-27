@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-02-27, 11:24:31 -->
+<!-- Saved: 2012-02-27, 23:46:33 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -93,6 +93,7 @@
     <Source>pyherc/test/test_leveldecorator.py</Source>
     <Source>pyherc/test/test_portaladder.py</Source>
     <Source>pyherc/generators/level/portals.py</Source>
+    <Source>pyherc/test/test_creatureadder.py</Source>
   </Sources>
   <Forms>
   </Forms>

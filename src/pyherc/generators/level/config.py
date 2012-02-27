@@ -26,7 +26,8 @@ class LevelGeneratorFactoryConfig(object):
     Class to configure level generator
     """
     def __init__(self, room_generators, level_partitioners,
-                 decorators, size):
+                 decorators, item_generator, creature_generator,
+                 size):
         """
         Default constructor
         """
@@ -34,6 +35,8 @@ class LevelGeneratorFactoryConfig(object):
         self.__level_partitioners = level_partitioners
         self.__decorators = decorators
         self.__size = size
+        self.item_generator = item_generator
+        self.creature_generator = creature_generator
 
     def get_level_partitioners(self):
         """
