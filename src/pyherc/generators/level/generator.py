@@ -50,12 +50,11 @@ class LevelGeneratorFactory:
         self.random_generator = random_generator
         self.size = configuration.size
 
-    def get_generator(self, level, level_type):
+    def get_generator(self, level_type):
         """
         Get LevelGenerator for given level
 
         Args:
-            level: current level (how deep player has reached)
             level_type: type of level to generate
 
         Returns:

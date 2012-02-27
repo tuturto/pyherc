@@ -80,8 +80,7 @@ class TestLeveltGeneratorFactory:
         """
         Test that LevelGeneratorFactory can generate level generator
         """
-        generator = self.factory.get_generator(1,
-                                            "crypt")
+        generator = self.factory.get_generator('crypt')
 
         assert generator != None
         assert generator.action_factory == self.mock_action_factory
@@ -115,8 +114,7 @@ class TestLevelGeneratorFactoryConfiguration:
                                              mock_config,
                                              random.Random())
 
-        generator = factory.get_generator(level = 1,
-                                          level_type = "crypt")
+        generator = factory.get_generator(level_type = 'crypt')
 
         assert_that(generator.partitioner, is_(same_instance(mock_partitioner)))
 
@@ -143,8 +141,7 @@ class TestLevelGeneratorFactoryConfiguration:
                                              random_generator)
 
         try:
-            generator = factory.get_generator(1,
-                                          "crypt")
+            generator = factory.get_generator('crypt')
         except RuntimeError, err:
             assert_that(str(err), contains_string("No room generator found"))
             exception_was_thrown = True
