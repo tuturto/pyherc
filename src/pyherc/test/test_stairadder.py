@@ -19,19 +19,19 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for testing StairAdder functionality
+Module for testing PortalAdder functionality
 """
 #pylint: disable=W0614
 from pyherc.data.tiles import FLOOR_ROCK, WALL_EMPTY
 from pyherc.data import Level, Portal
-from pyherc.generators.level.stairs import StairAdder
+from pyherc.generators.level.stairs import PortalAdder
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import * #pylint: disable=W0401
 import random
 
-class TestStairAdder():
+class TestPortalAdder():
     """
-    Tests for StairAdder
+    Tests for PortalAdder
     """
     def __init__(self):
         """
@@ -57,11 +57,11 @@ class TestStairAdder():
             for loc_x in range(8, 12):
                 level.set_location_type((loc_x, loc_y), 'room')
 
-        stair_adder = StairAdder(self.rng)
+        portal_adder = PortalAdder(self.rng)
 
         portal = Portal()
 
-        stair_adder.add_stairs(level, portal)
+        portal_adder.add_stairs(level, portal)
 
         portals = level.portals
         assert_that(portals, has_length(1))

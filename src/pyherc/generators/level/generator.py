@@ -98,7 +98,7 @@ class LevelGenerator:
             partitioner: LevelPartitioner to use
             room_generator: RoomGenerator to use
             decorator: LevelDecorator to use
-            stair_adder: StairAdder to use
+            stair_adder: PortalAdder to use
             random_generator: Random number generator
             size: Size of the level to create
         """

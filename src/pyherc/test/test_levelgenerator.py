@@ -29,7 +29,7 @@ from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from pyherc.generators.level.decorator import ReplacingDecorator
-from pyherc.generators.level.stairs import StairAdder
+from pyherc.generators.level.stairs import PortalAdder
 from pyherc.rules import ActionFactory
 from pyherc.data import Portal
 from pyherc.data import Model
@@ -175,7 +175,7 @@ class TestLevelGenerator:
         partitioner = spy(GridPartitioner)
         room_generator = spy(SquareRoomGenerator)
         level_decorator = spy(ReplacingDecorator)
-        stair_adder = spy(StairAdder)
+        stair_adder = spy(PortalAdder)
         rng = random.Random()
 
         portal = stub(Portal)
@@ -207,7 +207,7 @@ class TestLevelGenerator:
         room_generator = SquareRoomGenerator(floor_tile = FLOOR_ROCK,
                                              empty_tile = WALL_EMPTY)
         level_decorator = empty_spy()
-        stair_adder = StairAdder(self.rng)
+        stair_adder = PortalAdder(self.rng)
 
         portal = stub(Portal)
         model = stub(Model)

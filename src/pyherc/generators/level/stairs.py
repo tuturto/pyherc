@@ -22,7 +22,7 @@
 Module for adding stairs
 """
 
-class StairAdder(object):
+class PortalAdder(object):
     """
     Basic class for adding stairs
     """
@@ -33,7 +33,7 @@ class StairAdder(object):
         Args:
             rng: Randon number generator
         """
-        super(StairAdder, self).__init__()
+        super(PortalAdder, self).__init__()
         self.rng = rng
 
     def add_stairs(self, level, stairs):
