@@ -29,7 +29,7 @@ from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from pyherc.generators.level.decorator import ReplacingDecorator
-from pyherc.generators.level.stairs import PortalAdder
+from pyherc.generators.level.portals import PortalAdder
 from pyherc.rules import ActionFactory
 from pyherc.data import Portal
 from pyherc.data import Model

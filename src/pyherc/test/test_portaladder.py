@@ -24,7 +24,7 @@ Module for testing PortalAdder functionality
 #pylint: disable=W0614
 from pyherc.data.tiles import FLOOR_ROCK, WALL_EMPTY
 from pyherc.data import Level, Portal
-from pyherc.generators.level.stairs import PortalAdder
+from pyherc.generators.level.portals import PortalAdder
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import * #pylint: disable=W0401
 import random
