@@ -146,7 +146,7 @@ class LevelGenerator:
 
         self.decorator.decorate_level(new_level)
 
-        self.stair_adder.add_stairs(new_level)
+        self.stair_adder.add_stairs(new_level, portal)
 
         # add monsters
         # add items

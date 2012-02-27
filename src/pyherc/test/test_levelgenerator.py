@@ -207,7 +207,7 @@ class TestLevelGenerator:
         room_generator = SquareRoomGenerator(floor_tile = FLOOR_ROCK,
                                              empty_tile = WALL_EMPTY)
         level_decorator = empty_spy()
-        stair_adder = empty_spy()
+        stair_adder = StairAdder(self.rng)
 
         portal = stub(Portal)
         model = stub(Model)

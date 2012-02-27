@@ -57,11 +57,11 @@ class TestStairAdder():
             for loc_x in range(8, 12):
                 level.set_location_type((loc_x, loc_y), 'room')
 
-        stair_adder = StairAdder(level, self.rng)
+        stair_adder = StairAdder(self.rng)
 
         portal = Portal()
 
-        stair_adder.add_stairs(portal)
+        stair_adder.add_stairs(level, portal)
 
         portals = level.portals
         assert_that(portals, has_length(1))
