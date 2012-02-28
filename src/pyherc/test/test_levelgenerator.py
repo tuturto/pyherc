@@ -30,6 +30,7 @@ from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from pyherc.generators.level.decorator import ReplacingDecorator
 from pyherc.generators.level.portals import PortalAdder
+from pyherc.generators.level.creatures import CreatureAdder
 from pyherc.rules import ActionFactory
 from pyherc.data import Portal
 from pyherc.data import Model
@@ -174,7 +175,7 @@ class TestLevelGenerator:
         level_decorator = spy(ReplacingDecorator)
         stair_adder = spy(PortalAdder)
         item_generator = empty_stub()
-        creature_generator = empty_stub()
+        creature_adder = spy(CreatureAdder)
         rng = random.Random()
 
         portal = stub(Portal)
@@ -187,7 +188,7 @@ class TestLevelGenerator:
 
         generator = LevelGenerator(factory, partitioner, room_generator,
                                    level_decorator, stair_adder,
-                                   item_generator, creature_generator,
+                                   item_generator, creature_adder,
                                    self.rng,
                                    (60, 40))
 
@@ -197,6 +198,7 @@ class TestLevelGenerator:
         assert_that_method(room_generator.generate_room).was_called().times(2)
         assert_that_method(level_decorator.decorate_level).was_called()
         assert_that_method(stair_adder.add_stairs).was_called()
+        assert_that_method(creature_adder.add_creatures).was_called()
 
     def test_generation_creates_connected_level(self):
         """
@@ -208,13 +210,16 @@ class TestLevelGenerator:
                                              empty_tile = WALL_EMPTY)
         level_decorator = empty_spy()
         stair_adder = PortalAdder(self.rng)
+        creature_adder = empty_spy()
+        item_adder = empty_spy()
 
         portal = stub(Portal)
         model = stub(Model)
 
         generator = LevelGenerator(factory, partitioner, room_generator,
                                    level_decorator, stair_adder,
-                                   None, None,
+                                   item_adder,
+                                   creature_adder,
                                    self.rng,
                                    (60, 40))
 
