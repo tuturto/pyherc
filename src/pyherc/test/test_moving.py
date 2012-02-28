@@ -21,6 +21,11 @@
 """
 Module for testing moving
 """
+#pylint: disable=W0614
+from pyDoubles.framework import empty_stub #pylint: disable=F0401, E0611
+from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
+from hamcrest import * #pylint: disable=W0401
+
 import pyherc
 from pyherc.data.dungeon import Dungeon
 from pyherc.data.dungeon import Portal
@@ -48,7 +53,9 @@ class TestMoving(IntegrationTest):
         Secondary setup
         """
         self.character = Character(self.action_factory)
-        levelGenerator = TestLevelGenerator(self.action_factory)
+        levelGenerator = TestLevelGenerator(self.action_factory,
+                                            self.creatureGenerator,
+                                            self.item_generator)
 
         self.model.dungeon = Dungeon()
         self.level1 = levelGenerator.generate_level(None, self.model, monster_list = [])
@@ -122,24 +129,6 @@ class TestMoving(IntegrationTest):
 
         assert(self.character.location == (6, 3))
         assert(self.character.level == self.level1)
-
-    def test_enter_proxy_portal(self):
-        """
-        Test that entering proxy portal actually moves character to different location
-        """
-        self.character.location = (8, 8)
-        proxy = Portal()
-        proxy.level_generator = TestLevelGenerator(self.action_factory)
-        proxy.model = self.model
-        proxy.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
-
-        self.level1.add_portal(proxy, (8, 8))
-        action = self.action_factory.get_action(
-                            MoveParameters(
-                                           self.character, 9, 'walk'))
-        action.execute()
-
-        assert(self.character.level != self.level1)
 
     def test_moving_uses_time(self):
         """

@@ -22,14 +22,18 @@
 Tests for CreatureAdder
 """
 #pylint: disable=W0614
-from pyDoubles.framework import empty_stub #pylint: disable=F0401, E0611
+from pyDoubles.framework import spy, empty_stub, stub #pylint: disable=F0401, E0611
 from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
+from pyherc.test.matchers import has_creature
 
 from pyherc.data import Level
 from pyherc.data.tiles import FLOOR_ROCK
 from pyherc.data.tiles import WALL_EMPTY
 from pyherc.generators.creature import CreatureGenerator
+from pyherc.generators.level.creatures import CreatureAdder
+from pyherc.generators.level.creatures import CreatureAdderConfiguration
+from pyherc.rules.tables import Tables
 import random
 
 class TestCreatureAdder():
@@ -40,13 +44,13 @@ class TestCreatureAdder():
         """
         Default constructor
         """
-        pass
+        self.rng = None
 
     def setup(self):
         """
         Setup the test case
         """
-        pass
+        self.rng = random.Random()
 
     def test_adding_creatures(self):
         """
@@ -56,19 +60,48 @@ class TestCreatureAdder():
 
         level.set_location_type((10, 10), 'room')
 
-        action_factory = empty_stub()
-        creature_generator = CreatureGenerator(action_factory)
+        mock_tables = stub(Tables)
+        mock_tables.creatures = {}
+        mock_tables.creatures['rat'] = {'name': 'rat',
+                                        'body': 1,
+                                        'finesse': 1,
+                                        'mind': 1,
+                                        'hp': 2,
+                                        'speed': 10,
+                                        'size': 2,
+                                        'attack': 2,
+                                        'icon': 1}
+
+        mock_tables.creatures['dragon'] = {'name': 'dragon',
+                                        'body': 10,
+                                        'finesse': 10,
+                                        'mind': 10,
+                                        'hp': 200,
+                                        'speed': 4,
+                                        'size': 6,
+                                        'attack': 20,
+                                        'icon': 2}
+
+        mock_action_factory = empty_stub()
+        creature_generator = CreatureGenerator(mock_action_factory,
+                                               mock_tables)
 
         configuration = CreatureAdderConfiguration()
-        configuration.add_creature(min = 3, max = 4, name = 'rat')
-        configuration.add_creature(min = 1, max = 1,
-                                   name = 'dragon', location = 'room')
-        creature_adder = CreatureAdder(creature_generator, configuration)
+        configuration.add_creature(min_amount = 3,
+                                   max_amount = 4,
+                                   name = 'rat')
+        configuration.add_creature(min_amount = 1,
+                                   max_amount = 1,
+                                   name = 'dragon',
+                                   location = 'room')
+        creature_adder = CreatureAdder(creature_generator,
+                                       configuration,
+                                       self.rng)
 
         creature_adder.add_creatures(level)
 
         assert_that(level.creatures, has_length(greater_than(3)))
         assert_that(level.creatures, has_length(less_than(6)))
 
-        assert_that(level.creatures, has_creature('rat'))
-        assert_that(level.creatures, has_creature('dragon'))
+        assert_that(level, has_creature('rat'))
+        assert_that(level, has_creature('dragon'))

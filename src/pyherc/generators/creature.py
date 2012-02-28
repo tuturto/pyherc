@@ -36,33 +36,33 @@ class CreatureGenerator:
     Class used to generate creatures
     """
 
-    def __init__(self, action_factory):
+    def __init__(self, action_factory, tables):
         """
         Default constructor
 
         Args:
             action_factory: Initialised action factory
+            tables: Tables defining creatures
         """
         self.logger = logging.getLogger(
                             'pyherc.generators.creature.CreatureGenerator')
         self.action_factory = action_factory
+        self.tables = tables
 
-    def generate_creature(self, tables, parameters):
+    def generate_creature(self, parameters):
         """
         Generates a creature
 
         Args:
-            tables: tables used in generation
             parameters: hash table containing parameters
         """
         self.logger.debug('generating a creature')
         self.logger.debug(parameters)
-        assert(tables != None)
 
         new_creature = None
         if not parameters == None:
             if 'name' in parameters.keys():
-                table = tables.creatures[parameters['name']]
+                table = self.tables.creatures[parameters['name']]
                 new_creature = self.generate_creature_from_table(table)
         else:
             #generate completely random creature
@@ -72,7 +72,7 @@ class CreatureGenerator:
             self.logger.warn('no creature generated')
         else:
             self.logger.debug('new creature generated: '
-                              + new_creature.__str__())
+                              + str(new_creature))
 
         return new_creature
 

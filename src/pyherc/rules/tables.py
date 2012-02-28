@@ -44,7 +44,7 @@ class Tables:
         self.itemsByTag = {}
         self.tagScore = {}
 
-        self.creatures = {}
+        self.__creatures = {}
         self.potion_appearances = []
 
         self.artifact = 1
@@ -55,6 +55,17 @@ class Tables:
         self.common = 32
 
         self.logger = logging.getLogger('pyherc.rules.tables')
+
+    def __get_creatures(self):
+        """
+        Get creature tables
+
+        Returns:
+            Dictionary of creatures
+        """
+        return self.__creatures
+
+    creature = property(__get_creatures)
 
     def __getstate__(self):
         """

@@ -49,7 +49,9 @@ class TestMeleeCombat(IntegrationTest):
     def setup2(self):
         self.character1 = Character(self.action_factory)
         self.character2 = Character(self.action_factory)
-        level_generator = TestLevelGenerator(self.action_factory)
+        level_generator = TestLevelGenerator(self.action_factory,
+                                             self.creatureGenerator,
+                                             self.item_generator)
 
         self.model.dungeon = Dungeon()
         self.level = level_generator.generate_level(None,

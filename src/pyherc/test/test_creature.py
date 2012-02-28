@@ -45,7 +45,7 @@ class test_CreatureWithGenerator(IntegrationTest):
         """
         Test that generating a rat is possible
         """
-        creature = self.creatureGenerator.generate_creature(self.tables, {
+        creature = self.creatureGenerator.generate_creature({
                                                 'name': 'rat'})
 
         assert(creature.name == 'rat')
@@ -88,7 +88,9 @@ class TestStatues(IntegrationTest):
 
         creature.set_mimic_item(item)
 
-        levelGenerator = TestLevelGenerator(self.action_factory)
+        levelGenerator = TestLevelGenerator(self.action_factory,
+                                            self.creatureGenerator,
+                                            self.item_generator)
 
         self.model.dungeon = Dungeon()
         self.level1 = levelGenerator.generate_level(None, self.model, monster_list = [])

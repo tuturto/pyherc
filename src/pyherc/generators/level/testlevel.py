@@ -25,36 +25,40 @@ These levels are not used in game, their function is to help in testing
 
 import logging
 import random
-import pyherc.generators.item
-import pyherc.generators.creature
 import pyherc.generators.utils
 from pyherc.data.dungeon import Level
 from pyherc.data.dungeon import Portal
 from pyherc.data import tiles
-from pyherc.generators import ItemGenerator
-from pyherc.generators import CreatureGenerator
 
 class TestLevelGenerator:
     """
     Generates a simple test level
     """
-    def __init__(self, action_factory):
+    def __init__(self, action_factory, creature_generator, item_generator):
+        """
+        Default constructor
+
+        Args:
+            action_factory: ActionFactory
+            creature_generator: CreatureGenerator
+            item_generator: ItemGenerator
+        """
         self.logger = logging.getLogger('pyherc.generators.level.testlevel.TestLevelGenerator')
-        self.item_generator = ItemGenerator()
-        self.creature_generator = CreatureGenerator(action_factory)
+        self.item_generator = item_generator
+        self.creature_generator = creature_generator
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
+        """
         d = dict(self.__dict__)
         del d['logger']
         return d
 
     def __setstate__(self, d):
-        '''
+        """
         Override __setstate__ in order to get pickling work
-        '''
+        """
         self.__dict__.update(d)
         self.logger = logging.getLogger('pyherc.generators.level.testlevel.CatacombsLevelGenerator')
 
@@ -62,15 +66,17 @@ class TestLevelGenerator:
                        new_portals = 0, monster_list = None):
         """
         Generate level that starts from given stairs
-        @param portal: link new level to this portal
-        @param model: model being used
-        @param new_portals: amount of portals to generate, default 0
-        @param monster_list: list of monsters to use
+
+        Args:
+            portal: link new level to this portal
+            model: model being used
+            new_portals: amount of portals to generate, default 0
+            monster_list: list of monsters to use
         """
         self.logger.debug('creating a test level')
         level_size = model.config['level']['size']
         temp_level = Level(level_size, tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
-        
+
         for x in range(0, level_size[0]):
             temp_level.walls[x][0] = tiles.WALL_ROCK
             temp_level.walls[x][level_size[1]-1] = tiles.WALL_ROCK
@@ -81,7 +87,7 @@ class TestLevelGenerator:
 
         #throw bunch of food around
         for i in range(0, 10):
-            
+
             temp_item = self.item_generator.generate_item(model.tables,
                                                          {'type':'food'})
             temp_item.location = (random.randint(2, 20), random.randint(2, 20))
@@ -90,14 +96,14 @@ class TestLevelGenerator:
         if monster_list == None:
             #enter few rats
             for i in range(0, 5):
-                
+
                 temp_creature = self.creature_generator.generate_creature(
                                                     model.tables.creatures,
                                                     {'name':'rat'})
                 temp_level.add_creature(temp_creature,
                                         (random.randint(2, 20),
                                         random.randint(2, 20)))
-        else:            
+        else:
             pass
 
         #set portals

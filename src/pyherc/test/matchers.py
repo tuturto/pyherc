@@ -22,6 +22,8 @@
 Module for customer matchers used in testing
 """
 
+from hamcrest.core.base_matcher import BaseMatcher
+
 class MapConnectivity():
     """
     Helper class used to verify if generated level is fully connected
@@ -138,3 +140,41 @@ def located_in_room(portal):
     else:
         return False
 
+class ContainsCreature(BaseMatcher):
+    """
+    Class to check if given level has creatures
+    """
+    def __init__(self, creature, amount):
+        """
+        Default constructor
+        """
+        self.creature = creature
+        self.amount = amount
+
+    def _matches(self, item):
+        """
+        Check for match
+        """
+        found = False
+
+        for creature in item.creatures:
+            if creature.name == self.creature:
+                found = True
+
+        return found
+
+    def describe_to(self, description):
+        """
+        Describe this matcher
+        """
+        description.append('Level with creature named {0}'.format(self.creature))
+
+def has_creature(creature, amount = None):
+    """
+    Check if level has given creature
+
+    Args:
+        creature: Name of the creature to check
+        amount: Amount of creatures to expect
+    """
+    return ContainsCreature(creature, amount)
