@@ -38,7 +38,8 @@ from pyherc.rules.move.factories import WalkFactory
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory
-
+from pyherc.generators import ItemGenerator, CreatureGenerator
+from pyherc.rules.tables import Tables
 
 from pyherc.gui.windows import MainWindow
 
@@ -73,6 +74,9 @@ class Application:
         self.running = 1
         self.base_path = None
         self.action_factory = None
+        self.item_generator = None
+        self.creature_generator = None
+        self.tables = None
         self.logger = None
         self.screen = None
 
@@ -155,10 +159,12 @@ class Application:
         self.logger.info("Logging started")
 
     def initialise_factories(self, model):
-        '''
-        Initialises action factory and sub factories
-        @param model: Model to register to the factory
-        '''
+        """
+        Initialises action factory, sub factories and various generators
+
+        Args:
+            model: Model to register to the factory
+        """
         self.logger.info('Initialising action sub system')
 
         walk_factory = WalkFactory()
@@ -176,12 +182,45 @@ class Application:
 
         self.logger.info('Action sub system initialised')
 
+        self.logger.info('Initialising tables')
+        self.tables = Tables()
+        self.tables.load_tables(self.base_path)
+        self.logger.info('Tables initialised')
+
+        self.logger.info('Initialising generators')
+
+        self.item_generator = ItemGenerator()
+        self.creature_generator = CreatureGenerator(self.action_factory,
+                                                    self.tables)
+
+        self.logger.info('Generators initialised')
+
     def get_action_factory(self):
-        '''
+        """
         Get action factory instance
-        @returns: ActionFactory
-        '''
+
+        Returns:
+            ActionFactory
+        """
         return self.action_factory
+
+    def get_creature_generator(self):
+        """
+        Get creature generator
+
+        Returns:
+            CreatureGenerator
+        """
+        return self.creature_generator
+
+    def get_item_generator(self):
+        """
+        Get item generator
+
+        Returns:
+            ItemGenerator
+        """
+        return self.item_generator
 
 
     def detect_resource_directory(self):

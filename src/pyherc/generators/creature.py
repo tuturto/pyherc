@@ -28,8 +28,6 @@ Classes:
 import logging
 import random
 import pyherc.ai.simple
-import pyherc.data.model
-import pyherc.rules.tables
 
 class CreatureGenerator:
     """

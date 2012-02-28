@@ -36,17 +36,17 @@ class CatacombsLevelGenerator:
     Generator for creating catacombs
     """
 
-    def __init__(self, action_factory):
+    def __init__(self, creature_generator, item_generator):
         """
         Default constructor
 
         Args:
             action_factory: Initialised action factory
+            tables: Tables used in
         """
         self.logger = logging.getLogger('pyherc.generators.level.catacombs.CatacombsLevelGenerator') #pylint: disable=C0301
-        self.item_generator = pyherc.generators.ItemGenerator()
-        self.creature_generator = pyherc.generators.CreatureGenerator(
-                                                                action_factory)
+        self.item_generator = item_generator
+        self.creature_generator = creature_generator
 
     def __getstate__(self):
         """
@@ -168,12 +168,11 @@ class CatacombsLevelGenerator:
         for i in range(0, 10):
             if level == 1:
                 temp_creature = self.creature_generator.generate_creature(
-                                            model.tables, {'name':'rat'})
+                                            {'name':'rat'})
                 temp_level.add_creature(temp_creature,
                                             temp_level.find_free_space())
             else:
                 temp_creature = self.creature_generator.generate_creature(
-                                                model.tables,
                                                 {'name':'fire beetle'})
                 temp_level.add_creature(temp_creature,
                                         temp_level.find_free_space())

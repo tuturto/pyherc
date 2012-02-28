@@ -65,7 +65,7 @@ class Tables:
         """
         return self.__creatures
 
-    creature = property(__get_creatures)
+    creatures = property(__get_creatures)
 
     def __getstate__(self):
         """
@@ -94,6 +94,8 @@ class Tables:
         parser.parse(file)
         self.items = handler.items
         self.logger.debug('item config read from xml')
+        self.logger.debug('{0} items found'.
+                          format(len(self.items)))
 
     def read_creatures_from_xml(self, document):
         """
@@ -107,6 +109,8 @@ class Tables:
         parser.parse(file)
         self.creatures = handler.creatures
         self.logger.debug('creature config read from xml')
+        self.logger.debug('{0} creatures found'
+                          .format(len(self.creatures.keys())))
 
     def load_tables(self, base_path = None, itemConfig = None, creatureConfig = None):
         """

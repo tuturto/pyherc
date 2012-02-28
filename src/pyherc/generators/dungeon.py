@@ -37,15 +37,17 @@ class DungeonGenerator:
     This class is used to generate dungeon
     """
 
-    def __init__(self, action_factory):
+    def __init__(self, creature_generator, item_generator):
         """
         Default constructor
 
         Args:
-            action_factory: initialised action factory
+            creature_generator: generator for creatures
+            item_generator: generator for items
         """
         self.logger = logging.getLogger('pyherc.generators.dungeon.DungeonGenerator')
-        self.action_factory = action_factory
+        self.creature_generator = creature_generator
+        self.item_generator = item_generator
 
     def generate_dungeon(self, model):
         """
@@ -53,7 +55,8 @@ class DungeonGenerator:
         """
         self.logger.info('generating the dungeon')
         model.dungeon = Dungeon()
-        generator = CatacombsLevelGenerator(self.action_factory)
+        generator = CatacombsLevelGenerator(self.creature_generator,
+                                            self.item_generator)
         level = generator.generate_level(None, model, 1)
 
         model.dungeon.levels = level

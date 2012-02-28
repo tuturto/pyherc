@@ -23,6 +23,7 @@ Module for customer matchers used in testing
 """
 
 from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 class MapConnectivity():
     """
@@ -155,21 +156,38 @@ class ContainsCreature(BaseMatcher):
         """
         Check for match
         """
-        found = False
+        count = 0
 
         for creature in item.creatures:
             if creature.name == self.creature:
-                found = True
+                count = count + 1
 
-        return found
+        return self.amount.matches(count)
 
     def describe_to(self, description):
         """
         Describe this matcher
         """
-        description.append('Level with creature named {0}'.format(self.creature))
+        if self.amount == None:
+            description.append(
+                    'Level with creature named {0}'
+                    .format(self.creature))
+        else:
+            description.append(
+                    'Level with {0} creatures named {1}'
+                    .format(self.amount, self.creature))
 
-def has_creature(creature, amount = None):
+    def describe_mismatch(self, item, mismatch_description):
+        """
+        Describe this mismatch
+        """
+        names = [x.name for x in item.creatures]
+
+        mismatch_description.append('Was level with creatures {0}'
+                                    .format(names))
+
+
+def has_creature(creature, amount):
     """
     Check if level has given creature
 
@@ -177,4 +195,4 @@ def has_creature(creature, amount = None):
         creature: Name of the creature to check
         amount: Amount of creatures to expect
     """
-    return ContainsCreature(creature, amount)
+    return ContainsCreature(creature, wrap_matcher(amount))

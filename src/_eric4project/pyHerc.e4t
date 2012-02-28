@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyherc -->
-<!-- Saved: 2012-02-27, 23:46:50 -->
+<!-- Saved: 2012-02-28, 13:51:45 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: correct graphics</Summary>
@@ -355,69 +355,6 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: implement properly</Summary>
-    <Description></Description>
-    <Created>2012-02-24, 08:25:16</Created>
-    <Resource>
-      <Filename>pyherc/generators/level/testlevel.py</Filename>
-      <Linenumber>73</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: better placement algorithm</Summary>
-    <Description></Description>
-    <Created>2012-02-24, 08:25:16</Created>
-    <Resource>
-      <Filename>pyherc/generators/level/testlevel.py</Filename>
-      <Linenumber>84</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: better placement algorithm</Summary>
-    <Description></Description>
-    <Created>2012-02-24, 08:25:16</Created>
-    <Resource>
-      <Filename>pyherc/generators/level/testlevel.py</Filename>
-      <Linenumber>93</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: spread given monsters around</Summary>
-    <Description></Description>
-    <Created>2012-02-24, 08:25:16</Created>
-    <Resource>
-      <Filename>pyherc/generators/level/testlevel.py</Filename>
-      <Linenumber>101</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: refactor for configuration</Summary>
-    <Description></Description>
-    <Created>2012-02-24, 08:25:16</Created>
-    <Resource>
-      <Filename>pyherc/generators/level/testlevel.py</Filename>
-      <Linenumber>107</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: refactor for configuration</Summary>
-    <Description></Description>
-    <Created>2012-02-24, 08:25:16</Created>
-    <Resource>
-      <Filename>pyherc/generators/level/testlevel.py</Filename>
-      <Linenumber>116</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: refactor for configuration</Summary>
-    <Description></Description>
-    <Created>2012-02-24, 08:25:37</Created>
-    <Resource>
-      <Filename>pyherc/generators/dungeon.py</Filename>
-      <Linenumber>64</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: correct graphics</Summary>
     <Description></Description>
     <Created>2012-02-24, 08:26:01</Created>
@@ -580,57 +517,12 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: for now, until better way is found</Summary>
-    <Description></Description>
-    <Created>2012-02-25, 11:17:48</Created>
-    <Resource>
-      <Filename>pyherc/rules/tables.py</Filename>
-      <Linenumber>312</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: refactor for configuration</Summary>
-    <Description></Description>
-    <Created>2012-02-25, 11:24:40</Created>
-    <Resource>
-      <Filename>pyherc/test/test_moving.py</Filename>
-      <Linenumber>57</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: refactor for configuration</Summary>
-    <Description></Description>
-    <Created>2012-02-25, 11:24:40</Created>
-    <Resource>
-      <Filename>pyherc/test/test_moving.py</Filename>
-      <Linenumber>61</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: refactor for configuration</Summary>
-    <Description></Description>
-    <Created>2012-02-25, 11:24:40</Created>
-    <Resource>
-      <Filename>pyherc/test/test_moving.py</Filename>
-      <Linenumber>135</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: filter events</Summary>
     <Description></Description>
     <Created>2012-02-25, 11:54:58</Created>
     <Resource>
       <Filename>pyherc/data/model.py</Filename>
       <Linenumber>79</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: add support for charges</Summary>
-    <Description></Description>
-    <Created>2012-02-25, 11:58:41</Created>
-    <Resource>
-      <Filename>pyherc/generators/item.py</Filename>
-      <Linenumber>139</Linenumber>
     </Resource>
   </Task>
 </Tasks>

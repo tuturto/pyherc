@@ -103,5 +103,5 @@ class TestCreatureAdder():
         assert_that(level.creatures, has_length(greater_than(3)))
         assert_that(level.creatures, has_length(less_than(6)))
 
-        assert_that(level, has_creature('rat'))
-        assert_that(level, has_creature('dragon'))
+        assert_that(level, has_creature('rat', greater_than_or_equal_to(3)))
+        assert_that(level, has_creature('dragon', 1))
