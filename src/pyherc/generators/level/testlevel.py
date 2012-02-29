@@ -88,8 +88,7 @@ class TestLevelGenerator:
         #throw bunch of food around
         for i in range(0, 10):
 
-            temp_item = self.item_generator.generate_item(model.tables,
-                                                         {'type':'food'})
+            temp_item = self.item_generator.generate_item({'type':'food'})
             temp_item.location = (random.randint(2, 20), random.randint(2, 20))
             temp_level.items.append(temp_item)
 

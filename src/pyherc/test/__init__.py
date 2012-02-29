@@ -488,10 +488,10 @@ class IntegrationTest():
                                             [move_factory, attack_factory])
 
         self.model = pyherc.data.model.Model()
-        self.item_generator = pyherc.generators.item.ItemGenerator()
         self.tables = pyherc.rules.tables.Tables()
         self.tables.load_tables(None, itemConfig, creatureConfig)
         self.model.tables = self.tables
+        self.item_generator = pyherc.generators.item.ItemGenerator(self.tables)
         self.creatureGenerator = pyherc.generators.CreatureGenerator(self.action_factory, self.tables)
 
         self.setup2()

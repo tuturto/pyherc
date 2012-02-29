@@ -33,31 +33,35 @@ class ItemGenerator:
     Class used to generate items
     """
 
-    def __init__(self):
+    def __init__(self, tables):
         """
         Default constructor
+
+        Args:
+            tables: Tables to use
         """
         self.logger = logging.getLogger('pyherc.generators.item.ItemGenerator')
+        self.tables = tables
 
-    def generate_item(self, tables, parameters):
+    def generate_item(self, parameters):
         """
         Generates an item
         """
         self.logger.debug('generating an item')
         self.logger.debug(parameters)
-        assert(tables != None)
+
         new_item = None
         if not parameters == None:
             if 'name' in parameters.keys():
-                table = tables.items[parameters['name']]
+                table = self.tables.items[parameters['name']]
                 new_item = self.generate_item_from_table(table)
             elif 'type' in parameters.keys():
-                rarity_range = tables.tagScore[parameters['type']]
+                rarity_range = self.tables.tagScore[parameters['type']]
                 score = random.randint(1, rarity_range)
-                for item in tables.itemsByTag[parameters['type']]:
+                for item in self.tables.itemsByTag[parameters['type']]:
                     if item[1] <= score and item[2] >= score:
                         choice = item[0]
-                table = tables.items[choice]
+                table = self.tables.items[choice]
                 new_item = self.generate_item_from_table(table)
             else:
                 #generate completely random item?
@@ -73,21 +77,19 @@ class ItemGenerator:
 
         return new_item
 
-    def generate_special_item(self, tables, parameters):
+    def generate_special_item(self, parameters):
         """
         Generate a special item
 
         Args:
-            tables: tables used in generation
             parameters: hash table containing parameters for generation
         """
-        assert(tables != None)
         assert(parameters != None)
         assert('name' in parameters.keys())
 
         self.logger.debug('generating a special item')
 
-        table = tables.items[parameters['name']]
+        table = self.tables.items[parameters['name']]
         new_item = self.generate_item_from_table(table)
 
         self.logger.debug('special item generation done')

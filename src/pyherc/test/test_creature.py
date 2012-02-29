@@ -45,8 +45,7 @@ class test_CreatureWithGenerator(IntegrationTest):
         """
         Test that generating a rat is possible
         """
-        creature = self.creatureGenerator.generate_creature({
-                                                'name': 'rat'})
+        creature = self.creatureGenerator.generate_creature({'name': 'rat'})
 
         assert(creature.name == 'rat')
 
@@ -57,7 +56,7 @@ class test_CreatureWithGenerator(IntegrationTest):
         creature = Character(self.action_factory)
         creature.feats = []
 
-        weapon = self.item_generator.generate_item(self.tables, {'name' : 'club'})
+        weapon = self.item_generator.generate_item({'name' : 'club'})
 
         assert(creature.is_proficient(weapon) == False)
 

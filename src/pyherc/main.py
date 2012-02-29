@@ -189,7 +189,7 @@ class Application:
 
         self.logger.info('Initialising generators')
 
-        self.item_generator = ItemGenerator()
+        self.item_generator = ItemGenerator(self.tables)
         self.creature_generator = CreatureGenerator(self.action_factory,
                                                     self.tables)
 

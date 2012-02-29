@@ -21,16 +21,44 @@
 """
 Classes for item generation
 """
-
-class ItemAdder(object):
+class ItemAdderConfiguration(object):
     """
-    Class for adding items
+    Configuration for ItemAdder
     """
     def __init__(self):
         """
         Default constructor
         """
+        super(ItemAdderConfiguration, self).__init__()
+
+    def add_item(self, min_amount, max_amount, name = None, type = None,
+                 location = None):
+        """
+        Adds item to configuration
+
+        Args:
+            item: specification for item
+        """
+        pass
+
+
+class ItemAdder(object):
+    """
+    Class for adding items
+    """
+    def __init__(self, item_generator, configuration, rng):
+        """
+        Default constructor
+
+        Args:
+            item_generator: ItemGenerator instance
+            configuration: ItemAdderConfiguration
+            rng: random number generator
+        """
         super(ItemAdder, self).__init__()
+        self.item_generator = item_generator
+        self.configuration = configuration
+        self.rng = rng
 
     def add_items(self, level):
         """
@@ -40,4 +68,6 @@ class ItemAdder(object):
             level: Level to add items
         """
         pass
+
+
 

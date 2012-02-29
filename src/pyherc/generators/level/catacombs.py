@@ -179,21 +179,18 @@ class CatacombsLevelGenerator:
 
         #throw bunch of food items around
         for i in range(0, 10):
-            temp_item = self.item_generator.generate_item(model.tables,
-                                                         {'type':'food'})
+            temp_item = self.item_generator.generate_item({'type':'food'})
             temp_item.location = temp_level.find_free_space()
             temp_level.items.append(temp_item)
 
         for i in range(0, 3):
-            temp_item = self.item_generator.generate_item(model.tables,
-                                                         {'type':'potion'})
+            temp_item = self.item_generator.generate_item({'type':'potion'})
             temp_item.location = temp_level.find_free_space()
             temp_level.items.append(temp_item)
 
         #throw bunch of weapons around
         for i in range(0, 10):
-            temp_item = self.item_generator.generate_item(model.tables,
-                                                         {'type':'weapon'})
+            temp_item = self.item_generator.generate_item({'type':'weapon'})
             temp_item.location = temp_level.find_free_space()
             temp_level.items.append(temp_item)
 
