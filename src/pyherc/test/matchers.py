@@ -124,19 +124,22 @@ def map_accessibility_in(level, open):
     connectivity = MapConnectivity(level)
     return connectivity.is_connected(open)
 
-def located_in_room(portal):
+def located_in_room(entity):
     """
-    Check if given Portal is located in room
+    Check if given entity is located in room
 
     Args:
-        portal: Portal to check
+        entity: entity to check
 
     Returns:
         True if located in room, False otherwise
-    """
-    level = portal.level
 
-    if level.get_location_type(portal.location) == 'room':
+    Note:
+        entity should have properties level and location for this to work
+    """
+    level = entity.level
+
+    if level.get_location_type(entity.location) == 'room':
         return True
     else:
         return False

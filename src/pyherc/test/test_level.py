@@ -59,7 +59,7 @@ class TestLevel:
         self.level.set_location_type((8, 8), 'room')
         self.level.set_location_type((9, 8), 'room')
 
-        rooms = self.level.get_rooms()
+        rooms = self.level.get_locations_by_type('room')
 
         assert_that(rooms, contains_inanyorder((5, 5), (5, 6),
                                                (8, 8), (9, 8)))

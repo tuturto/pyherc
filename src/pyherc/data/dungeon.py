@@ -327,9 +327,12 @@ class Level:
         """
         return self.__location_type[location[0]][location[1]]
 
-    def get_rooms(self):
+    def get_locations_by_type(self, location_type):
         """
         Get locations marked as rooms
+
+        Args:
+            location_type: Type of location to search.
 
         Returns:
             List of (loc_x, loc_y) locations identifying rooms
@@ -337,7 +340,8 @@ class Level:
         rooms = []
         for loc_x in range(len(self.__location_type)):
             for loc_y in range(len(self.__location_type[0])):
-                if self.__location_type[loc_x][loc_y] == 'room':
+                if (self.__location_type[loc_x][loc_y] == location_type or
+                        self.__location_type[loc_x][loc_y] != None):
                     rooms.append((loc_x, loc_y))
 
         return rooms

@@ -44,6 +44,6 @@ class PortalAdder(object):
             level: level to modify
             stairs: stairs to add
         """
-        rooms = level.get_rooms()
+        rooms = level.get_locations_by_type('room')
         location = self.rng.choice(rooms)
         level.add_portal(stairs, location)

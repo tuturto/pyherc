@@ -117,6 +117,15 @@ class CreatureAdder(object):
             level: Level to place creatures
         """
         for creature in creatures:
-            location = (0, 0)
+            location_type = [x['location'] for x in creature_list
+                             if x['name'] == creature.name]
+
+            if location_type == None:
+                location_type = 'any'
+
+            locations = level.get_locations_by_type('room')
+
+            location = self.rng.choice(locations)
+
             level.add_creature(creature, location)
 
