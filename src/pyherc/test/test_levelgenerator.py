@@ -31,6 +31,7 @@ from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from pyherc.generators.level.decorator import ReplacingDecorator
 from pyherc.generators.level.portals import PortalAdder
 from pyherc.generators.level.creatures import CreatureAdder
+from pyherc.generators.level.items import ItemAdder
 from pyherc.rules import ActionFactory
 from pyherc.data import Portal
 from pyherc.data import Model
@@ -174,7 +175,7 @@ class TestLevelGenerator:
         room_generator = spy(SquareRoomGenerator)
         level_decorator = spy(ReplacingDecorator)
         stair_adder = spy(PortalAdder)
-        item_generator = empty_stub()
+        item_adder = spy(ItemAdder)
         creature_adder = spy(CreatureAdder)
         rng = random.Random()
 
@@ -188,7 +189,7 @@ class TestLevelGenerator:
 
         generator = LevelGenerator(factory, partitioner, room_generator,
                                    level_decorator, stair_adder,
-                                   item_generator, creature_adder,
+                                   item_adder, creature_adder,
                                    self.rng,
                                    (60, 40))
 
@@ -199,6 +200,7 @@ class TestLevelGenerator:
         assert_that_method(level_decorator.decorate_level).was_called()
         assert_that_method(stair_adder.add_stairs).was_called()
         assert_that_method(creature_adder.add_creatures).was_called()
+        assert_that_method(item_adder.add_items).was_called()
 
     def test_generation_creates_connected_level(self):
         """
