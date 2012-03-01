@@ -7,6 +7,7 @@ Contents:
    :maxdepth: 10
 
    module_main
+   module_config
    ai/module_ai
    data/module_data
    generators/module_generators

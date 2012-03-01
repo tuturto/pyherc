@@ -30,18 +30,10 @@ sys.path.append(INSTALL_PATH)
 
 import pygame
 import pgu.gui
-
-import pyherc.gui.surfaceManager
-from pyherc.rules.public import ActionFactory
-from pyherc.rules.move.factories import MoveFactory
-from pyherc.rules.move.factories import WalkFactory
-from pyherc.rules.attack.factories import AttackFactory
-from pyherc.rules.attack.factories import UnarmedCombatFactory
-from pyherc.rules.attack.factories import MeleeCombatFactory
-from pyherc.generators import ItemGenerator, CreatureGenerator
-from pyherc.rules.tables import Tables
-
 from pyherc.gui.windows import MainWindow
+from pyherc.gui.startmenu import StartMenu
+from pyherc.config import Configuration
+from pyherc.data.model import Model
 
 if not pygame.font:
     print 'Warning, fonts disabled'
@@ -73,25 +65,16 @@ class Application:
         self.world = None
         self.running = 1
         self.base_path = None
-        self.action_factory = None
-        self.item_generator = None
-        self.creature_generator = None
-        self.tables = None
         self.logger = None
         self.screen = None
+        self.log_level = None
 
-    def load_configuration(self, argv):
+    def process_command_line(self, argv):
         """
-        Load configuration and process command line options
-        @param argv: command line arguments
+        Process command line options
         """
-        self.config = {}
-        self.config['logging'] = {}
-        self.config['explore'] = 0
-
         try:
-            opts, args = getopt.getopt(argv, 'l:x', ['logging=',
-                                                                    'explore'])
+            opts, args = getopt.getopt(argv, 'l:x', ['logging='])
         except getopt.GetoptError:
             print('')
             print('Failed to process parameters')
@@ -101,27 +84,23 @@ class Application:
         for opt, arg in opts:
             if opt in ('-l', '--logging'):
                 if arg.lower() == 'debug':
-                    self.config['logging']['level'] = logging.DEBUG
+                    self.log_level = logging.DEBUG
                 elif arg.lower() == 'info':
-                    self.config['logging']['level'] = logging.INFO
+                    self.log_level = logging.INFO
                 elif arg.lower() == 'warning':
-                    self.config['logging']['level'] = logging.WARNING
+                    self.log_level = logging.WARNING
                 elif arg.lower() == 'error':
-                    self.config['logging']['level'] = logging.ERROR
+                    self.log_level = logging.ERROR
                 elif arg.lower() == 'critical':
-                    self.config['logging']['level'] = logging.CRITICAL
+                    self.log_level = logging.CRITICAL
                 else:
                     print('')
                     print('Unknown logging level: ' + arg)
                     self.usage()
                     sys.exit(0)
-            if opt in ('-x', '--explore'):
-                self.config['explore'] = 1
 
-        self.config['resolution'] = (800, 600)
-        self.config['caption'] = 'Herculeum'
-        if not 'level' in self.config['logging'].keys():
-            self.config['logging']['level'] = logging.ERROR
+        if self.log_level == None:
+            self.log_level = logging.ERROR
 
     def usage(self):
         """
@@ -133,67 +112,47 @@ class Application:
         print('    debug, info, warning, error, critical')
         print('')
 
+    def load_configuration(self):
+        """
+        Load configuration
+        """
+        self.world = Model()
+        self.config = Configuration(self.base_path, self.world)
+        self.config.initialise()
+
     def run(self):
         """
         Starts the application
         """
-        surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
-        surface_manager.loadResources(self.base_path)
         self.screen = pygame.display.set_mode((800, 600),
                                               pygame.SWSURFACE |
                                               pygame.FULLSCREEN)
-        self.gui = MainWindow(self, self.base_path,
-                              surface_manager, self.screen)
-        menu = pyherc.gui.startmenu.StartMenu(self, self.screen,
-                                              surface_manager)
+        self.gui = MainWindow(self,
+                              self.base_path,
+                              self.surface_manager,
+                              self.screen)
+        menu = StartMenu(self,
+                         self.screen,
+                         self.surface_manager)
         self.gui.connect(pgu.gui.QUIT, self.gui.quit, None)
         self.gui.run(menu, screen = self.screen)
+
+    def __get_surface_manager(self):
+        """
+        Get surface manager
+        """
+        return self.config.surface_manager
+
+    surface_manager = property(__get_surface_manager)
 
     def start_logging(self):
         '''
         Start logging for the system
         '''
         logging.basicConfig(filename='pyherc.log',
-                                    level=self.config['logging']['level'])
+                            level=self.log_level)
         self.logger = logging.getLogger('pyherc.main.Application')
         self.logger.info("Logging started")
-
-    def initialise_factories(self, model):
-        """
-        Initialises action factory, sub factories and various generators
-
-        Args:
-            model: Model to register to the factory
-        """
-        self.logger.info('Initialising action sub system')
-
-        walk_factory = WalkFactory()
-        move_factory = MoveFactory(walk_factory)
-
-        unarmed_combat_factory = UnarmedCombatFactory()
-        melee_combat_factory = MeleeCombatFactory()
-        attack_factory = AttackFactory([
-                                        unarmed_combat_factory,
-                                        melee_combat_factory])
-
-        self.action_factory = ActionFactory(
-                                            model,
-                                            [move_factory, attack_factory])
-
-        self.logger.info('Action sub system initialised')
-
-        self.logger.info('Initialising tables')
-        self.tables = Tables()
-        self.tables.load_tables(self.base_path)
-        self.logger.info('Tables initialised')
-
-        self.logger.info('Initialising generators')
-
-        self.item_generator = ItemGenerator(self.tables)
-        self.creature_generator = CreatureGenerator(self.action_factory,
-                                                    self.tables)
-
-        self.logger.info('Generators initialised')
 
     def get_action_factory(self):
         """
@@ -202,7 +161,7 @@ class Application:
         Returns:
             ActionFactory
         """
-        return self.action_factory
+        return self.config.action_factory
 
     def get_creature_generator(self):
         """
@@ -211,7 +170,7 @@ class Application:
         Returns:
             CreatureGenerator
         """
-        return self.creature_generator
+        return self.config.creature_generator
 
     def get_item_generator(self):
         """
@@ -220,8 +179,7 @@ class Application:
         Returns:
             ItemGenerator
         """
-        return self.item_generator
-
+        return self.config.item_generator
 
     def detect_resource_directory(self):
         '''
@@ -241,6 +199,7 @@ class Application:
 if __name__ == "__main__":
     APP = Application()
     APP.detect_resource_directory()
-    APP.load_configuration(sys.argv[1:])
+    APP.process_command_line(sys.argv[1:])
     APP.start_logging()
+    APP.load_configuration()
     APP.run()

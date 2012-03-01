@@ -62,10 +62,10 @@ class MainWindow(pgu.gui.app.App):
         self.display = None
         self.application = application
         pygame.init()
-        self.width = application.config['resolution'][0]
-        self.height = application.config['resolution'][1]
+        self.width = application.config.resolution[0]
+        self.height = application.config.resolution[1]
         self.screen = screen
-        pygame.display.set_caption(application.config['caption'])
+        pygame.display.set_caption(application.config.caption)
 
         self.surface_manager = surface_manager
 
@@ -89,31 +89,18 @@ class StartNewGameWindow:
         self.logger.debug('display initialised')
         self.character = None
 
-    def mainLoop(self):
+    def main_loop(self):
         """
         Main loop of the window
         """
         self.logger.debug('main loop starting')
-        self.__generateNewGame()
+        self.__generate_new_game()
         self.logger.debug('main loop finished')
 
-    def __generateNewGame(self):
+    def __generate_new_game(self):
         """
         Generate a new game
         """
-        self.application.world = pyherc.data.model.Model()
-
-        self.application.initialise_factories(self.application.world)
-
-        tables = pyherc.rules.tables.Tables()
-        tables.load_tables(self.application.base_path)
-        self.application.world.tables = tables
-        if self.application.config['explore']:
-            self.logger.warn('starting in explore mode')
-            self.application.world.config['explore'] = 1
-        else:
-            self.application.world.config['explore'] = 0
-
         self.character = pyherc.rules.character.create_character('human', 'fighter', self.application.get_action_factory())
         self.application.world.player = self.character
         generator = pyherc.generators.dungeon.DungeonGenerator(
@@ -122,13 +109,7 @@ class StartNewGameWindow:
 
         generator.generate_dungeon(self.application.world)
         self.character.level = self.application.world.dungeon.levels
-        # self.character.location = (1, 1)
         self.character.name = 'Adventurer'
-
-    def __updateDisplay(self):
-        """
-        Draws this window on screen
-        """
 
 class GameWindow:
     """
