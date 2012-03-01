@@ -41,6 +41,7 @@ class Item(object):
         self.quest_item = 0
         #location
         self.location = ()
+        self.level = None
         #icon
         self.icon = None
         self.weapon_data = None

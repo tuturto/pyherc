@@ -9,6 +9,7 @@ pyherc.generators.level
    module_catacombs
    module_config
    module_creatures
+   module_items
    module_generator
    module_testlevel
    module_prototiles

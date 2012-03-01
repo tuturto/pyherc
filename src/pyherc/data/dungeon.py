@@ -132,10 +132,11 @@ class Level:
         assert(not item == None)
         assert(not location == None)
 
-        self.logger.debug('adding an item: ' + item.__str__() +
-                                ' to location: ' + location.__str__())
+        self.logger.debug('adding an item {0} to location {1}'
+                          .format(item, location))
         self.items.append(item)
         item.location = location
+        item.level = self
 
     def get_items_at(self, location):
         """
@@ -341,7 +342,8 @@ class Level:
         for loc_x in range(len(self.__location_type)):
             for loc_y in range(len(self.__location_type[0])):
                 if (self.__location_type[loc_x][loc_y] == location_type or
-                        self.__location_type[loc_x][loc_y] != None):
+                        self.__location_type[loc_x][loc_y] != None
+                        and location_type == 'any'):
                     rooms.append((loc_x, loc_y))
 
         return rooms

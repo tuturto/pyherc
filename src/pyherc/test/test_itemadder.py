@@ -25,7 +25,7 @@ Tests for ItemAdder
 from pyDoubles.framework import spy, empty_stub, stub #pylint: disable=F0401, E0611
 from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
-from pyherc.test.matchers import located_in_room
+from pyherc.test.matchers import located_in_room, does_have_item
 
 from pyherc.data import Level
 from pyherc.data.tiles import FLOOR_ROCK
@@ -59,11 +59,27 @@ class TestItemAdder():
         self.level = Level((60, 40), FLOOR_ROCK, WALL_EMPTY)
         self.level.set_location_type((10, 10), 'room')
 
+        for x_loc in range(11, 30):
+            self.level.set_location_type((x_loc, 10), 'corridor')
+
         self.mock_tables = stub(Tables)
         self.mock_tables.items = {}
-        self.mock_tables.items['dagger'] = {'name': 'dagger'}
+        self.mock_tables.items['dagger'] = {'name': 'dagger',
+                                            'icon': 1,
+                                            'cost': 5,
+                                            'weight': 10,
+                                            'rarity': 32,
+                                            'type': ['weapon']}
 
-        self.mock_tables.items['red potion'] = {'name': 'red potion'}
+        self.mock_tables.items['red potion'] = {'name': 'red potion',
+                                                'icon': 2,
+                                                'cost': 500,
+                                                'weight': 1,
+                                                'rarity': 16,
+                                                'type': ['potion']}
+
+        self.mock_tables.tag_score = {'potion': 1}
+        self.mock_tables.items_by_tag = {'potion': [('red potion', 0, 1)]}
 
         self.item_generator = ItemGenerator(self.mock_tables)
 
@@ -88,7 +104,17 @@ class TestItemAdder():
         assert_that(self.level.items, has_length(greater_than(3)))
         assert_that(self.level.items, has_length(less_than(6)))
 
-        assert_that(self.level, has_item('dagger',
+        assert_that(self.level, does_have_item('dagger',
                                         greater_than_or_equal_to(3)))
-        assert_that(self.level, has_item('potion', 1))
+        assert_that(self.level, does_have_item('red potion', 1))
 
+    def test_adding_to_location(self):
+        """
+        Test that ItemAdder will use location types passed to it
+        """
+        potion = [x for x in self.level.items
+                  if x.name == 'red potion'][0]
+
+        location = potion.location
+
+        assert_that(located_in_room(potion))

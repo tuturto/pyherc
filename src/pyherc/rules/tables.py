@@ -41,8 +41,8 @@ class Tables:
         # all items, name as key
         self.items = {}
         # item names, sorted by tags
-        self.itemsByTag = {}
-        self.tagScore = {}
+        self.__items_by_tag = {}
+        self.__tag_score = {}
 
         self.__creatures = {}
         self.potion_appearances = []
@@ -55,6 +55,21 @@ class Tables:
         self.common = 32
 
         self.logger = logging.getLogger('pyherc.rules.tables')
+
+    def __get_tag_score(self):
+        """
+        Returns tag score
+        """
+        return self.__tag_score
+
+    def __get_items_by_tag(self):
+        """
+        Returns items by tag
+        """
+        return self.__items_by_tag
+
+    tag_score = property(__get_tag_score)
+    items_by_tag = property(__get_items_by_tag)
 
     def __get_creatures(self):
         """
@@ -185,7 +200,7 @@ class Tables:
             different types of potions may be assigned same appearance
         """
         self.logger.debug('randomizing potion appearance')
-        potionEntries = self.itemsByTag['potion']
+        potionEntries = self.items_by_tag['potion']
         for entry in potionEntries:
             appearance = random.choice(self.potion_appearances)
             self.items[entry[0]]['appearance'] = appearance[0]
@@ -197,22 +212,22 @@ class Tables:
         Construct lookup tables for different kinds of items
         """
         self.logger.debug('constructing look up tables')
-        self.itemsByTag = {}
-        self.tagScore = {}
+        self.items_by_tag = {}
+        self.tag_score = {}
 
         for itemKey in self.items.keys():
             for type in self.items[itemKey]['type']:
-                if type in self.itemsByTag.keys():
-                    lowerBound = self.tagScore[type]
-                    self.tagScore[type] = self.tagScore[type] + self.items[itemKey]['rarity']
-                    upperBound = self.tagScore[type]
-                    self.itemsByTag[type].append((itemKey, lowerBound, upperBound))
+                if type in self.items_by_tag.keys():
+                    lowerBound = self.tag_score[type]
+                    self.tag_score[type] = self.tag_score[type] + self.items[itemKey]['rarity']
+                    upperBound = self.tag_score[type]
+                    self.items_by_tag[type].append((itemKey, lowerBound, upperBound))
                 else:
-                    self.itemsByTag[type] = []
+                    self.items_by_tag[type] = []
                     lowerBound = 0
-                    self.tagScore[type] = self.items[itemKey]['rarity']
-                    upperBound = self.tagScore[type]
-                    self.itemsByTag[type].append((itemKey, lowerBound, upperBound))
+                    self.tag_score[type] = self.items[itemKey]['rarity']
+                    upperBound = self.tag_score[type]
+                    self.items_by_tag[type].append((itemKey, lowerBound, upperBound))
 
         self.logger.debug('look up tables constructed')
 

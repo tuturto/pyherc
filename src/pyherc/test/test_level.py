@@ -63,3 +63,22 @@ class TestLevel:
 
         assert_that(rooms, contains_inanyorder((5, 5), (5, 6),
                                                (8, 8), (9, 8)))
+
+    def test_get_locations_by_type_does_not_report_all_locations(self):
+        """
+        Test that getting locations by type does not return all locations
+        """
+        self.level.set_location_type((5, 5), 'room')
+        self.level.set_location_type((5, 6), 'room')
+        self.level.set_location_type((8, 8), 'room')
+        self.level.set_location_type((9, 8), 'room')
+
+        self.level.set_location_type((6, 5), 'corridor')
+        self.level.set_location_type((6, 6), 'corridor')
+        self.level.set_location_type((6, 7), 'corridor')
+        self.level.set_location_type((6, 8), 'corridor')
+
+        rooms = self.level.get_locations_by_type('room')
+
+        assert_that(rooms, contains_inanyorder((5, 5), (5, 6),
+                                               (8, 8), (9, 8)))

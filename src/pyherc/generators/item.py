@@ -56,9 +56,9 @@ class ItemGenerator:
                 table = self.tables.items[parameters['name']]
                 new_item = self.generate_item_from_table(table)
             elif 'type' in parameters.keys():
-                rarity_range = self.tables.tagScore[parameters['type']]
+                rarity_range = self.tables.tag_score[parameters['type']]
                 score = random.randint(1, rarity_range)
-                for item in self.tables.itemsByTag[parameters['type']]:
+                for item in self.tables.items_by_tag[parameters['type']]:
                     if item[1] <= score and item[2] >= score:
                         choice = item[0]
                 table = self.tables.items[choice]

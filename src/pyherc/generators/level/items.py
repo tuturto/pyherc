@@ -95,10 +95,21 @@ class ItemAdder(object):
             where item_spec is specification used to generate item
             and item is generated Item
         """
+        items = []
         amount = self.rng.randint(item_spec['min_amount'],
                                   item_spec['max_amount'])
 
-        return []
+        params = {}
+        if item_spec['name'] != None:
+            params['name'] = item_spec['name']
+        else:
+            params['type'] = item_spec['type']
+
+        for i in range(amount):
+            new_item = self.item_generator.generate_item(params)
+            items.append((item_spec, new_item))
+
+        return items
 
     def place_items(self, items, level):
         """
@@ -108,4 +119,14 @@ class ItemAdder(object):
             item: list of tupples (item_spec, item)
             level: level to place items
         """
-        pass
+        for item in items:
+            location_type = item[0]['location']
+
+            if location_type == None:
+                location_type = 'any'
+
+            locations = level.get_locations_by_type(location_type)
+
+            location = self.rng.choice(locations)
+
+            level.add_item(item[1], location)
