@@ -30,6 +30,7 @@ class ItemAdderConfiguration(object):
         Default constructor
         """
         super(ItemAdderConfiguration, self).__init__()
+        self.items = []
 
     def add_item(self, min_amount, max_amount, name = None, type = None,
                  location = None):
@@ -39,7 +40,14 @@ class ItemAdderConfiguration(object):
         Args:
             item: specification for item
         """
-        pass
+        item_spec = {}
+        item_spec['min_amount'] = min_amount
+        item_spec['max_amount'] = max_amount
+        item_spec['name'] = name
+        item_spec['type'] = type
+        item_spec['location'] = location
+
+        self.items.append(item_spec)
 
 
 class ItemAdder(object):
@@ -67,7 +75,37 @@ class ItemAdder(object):
         Args:
             level: Level to add items
         """
+        item_list = self.configuration.items
+        items = []
+
+        for item in item_list:
+            items.extend(self.generate_items(item))
+
+        self.place_items(items, level)
+
+    def generate_items(self, item_spec):
+        """
+        Generate items according to specification
+
+        Args:
+            item_spec: Dictionary specifying items to create
+
+        Returns
+            tupple (item_spec, item)
+            where item_spec is specification used to generate item
+            and item is generated Item
+        """
+        amount = self.rng.randint(item_spec['min_amount'],
+                                  item_spec['max_amount'])
+
+        return []
+
+    def place_items(self, items, level):
+        """
+        Place items to level
+
+        Args:
+            item: list of tupples (item_spec, item)
+            level: level to place items
+        """
         pass
-
-
-
