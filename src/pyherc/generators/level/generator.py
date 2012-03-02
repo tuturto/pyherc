@@ -44,8 +44,8 @@ class LevelGeneratorFactory:
         self.room_generators = configuration.room_generators
         self.decorators = configuration.decorators
         self.stair_adder = None
-        self.item_generator = configuration.item_generator
-        self.creature_generator = configuration.creature_generator
+        self.item_adders = configuration.item_adders
+        self.creature_adders = configuration.creature_adders
         self.random_generator = random_generator
         self.size = configuration.size
 
@@ -59,30 +59,65 @@ class LevelGeneratorFactory:
         Returns:
             configured LevelGenerator
         """
-        partitioner = self.random_generator.choice(self.level_partitioners)
+        self.logger.debug('getting generator for type {0}'.format(level_type))
 
-        matching_room_generators = [x for x in self.room_generators
-                                    if level_type in x.level_types]
+        partitioner = self.get_sub_component(level_type,
+                                             self.level_partitioners,
+                                             'partitioner')
 
-        if len(matching_room_generators) > 0:
-            room = self.random_generator.choice(matching_room_generators)
+        room = self.get_sub_component(level_type,
+                                      self.room_generators,
+                                      'room')
+
+        decorator = self.get_sub_component(level_type,
+                                           self.decorators,
+                                           'decorator')
+
+        item_adder = self.get_sub_component(level_type,
+                                            self.item_adders,
+                                            'item adder')
+
+        creature_adder = self.get_sub_component(level_type,
+                                                self.creature_adders,
+                                                'creature adder')
+
+        return LevelGenerator(self.action_factory,
+                              partitioner,
+                              room,
+                              decorator,
+                              self.stair_adder,
+                              item_adder,
+                              creature_adder,
+                              self.random_generator,
+                              self.size)
+
+    def get_sub_component(self, level_type, component_list, component_type):
+        """
+        Get subcomponent
+
+        Args:
+            level_type: type of level to generate
+            component_list: list of subcomponents to choose from
+            component_type: component type for error message
+        """
+        self.logger.debug('getting {0} for type {1}'.format(
+                                                            component_type,
+                                                            level_type))
+        matches = [x for x in component_list
+                   if level_type in x.level_types]
+
+        if len(matches) > 0:
+            component = self.random_generator.choice(matches)
         else:
-            error_message = "No room generator found for type {0}".format(
-                                                        level_type)
+            error_message = "No {0} for type {1} in {2}".format(
+                                                            component_type,
+                                                            level_type,
+                                                            component_list)
             self.logger.error(error_message)
             raise RuntimeError(error_message)
 
-        decorator = self.random_generator.choice(self.decorators)
-
-        return LevelGenerator(self.action_factory,
-                                        partitioner,
-                                        room,
-                                        decorator,
-                                        self.stair_adder,
-                                        self.item_generator,
-                                        self.creature_generator,
-                                        self.random_generator,
-                                        self.size)
+        self.logger.debug('match found')
+        return component
 
 class LevelGenerator:
     """

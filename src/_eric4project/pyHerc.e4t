@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyherc -->
-<!-- Saved: 2012-03-01, 14:33:38 -->
+<!-- Saved: 2012-03-01, 22:38:04 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: correct graphics</Summary>

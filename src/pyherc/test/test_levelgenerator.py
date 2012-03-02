@@ -55,6 +55,8 @@ class TestLeveltGeneratorFactory:
         self.mock_partitioner = None
         self.mock_room_generator = None
         self.decorator = None
+        self.mock_item_adder = None
+        self.mock_creature_adder = None
         self.factory = None
         self.rng = None
 
@@ -65,14 +67,22 @@ class TestLeveltGeneratorFactory:
         self.mock_action_factory = stub(ActionFactory)
         self.mock_config = stub(LevelGeneratorFactoryConfig)
         self.mock_partitioner = empty_stub()
+        self.mock_partitioner.level_types = ['crypt']
         self.mock_room_generator = empty_stub()
         self.mock_room_generator.level_types = ['crypt']
         self.decorator = empty_stub()
+        self.decorator.level_types = ['crypt']
+        self.mock_item_adder = empty_stub()
+        self.mock_item_adder.level_types = ['crypt']
+        self.mock_creature_adder = empty_stub()
+        self.mock_creature_adder.level_types = ['crypt']
         self.rng = random.Random()
 
         self.mock_config.level_partitioners = [self.mock_partitioner]
         self.mock_config.room_generators = [self.mock_room_generator]
         self.mock_config.decorators = [self.decorator]
+        self.mock_config.item_adders = [self.mock_item_adder]
+        self.mock_config.creature_adders = [self.mock_creature_adder]
 
         self.factory = LevelGeneratorFactory(self.mock_action_factory,
                                              self.mock_config,
@@ -103,14 +113,22 @@ class TestLevelGeneratorFactoryConfiguration:
         """
         mock_action_factory = stub(ActionFactory)
         mock_partitioner = stub(GridPartitioner)
+        mock_partitioner.level_types = ['crypt']
         mock_room_generator = empty_stub()
         mock_room_generator.level_types = ['crypt']
         mock_decorator = empty_stub()
+        mock_decorator.level_types = ['crypt']
+        mock_item_adder = empty_stub()
+        mock_item_adder.level_types = ['crypt']
+        mock_creature_adder = empty_stub()
+        mock_creature_adder.level_types = ['crypt']
 
         mock_config = stub(LevelGeneratorFactoryConfig)
         mock_config.level_partitioners = [mock_partitioner]
         mock_config.room_generators = [mock_room_generator]
         mock_config.decorators = [mock_decorator]
+        mock_config.item_adders = [mock_item_adder]
+        mock_config.creature_adders = [mock_creature_adder]
 
         factory = LevelGeneratorFactory(mock_action_factory,
                                              mock_config,
@@ -126,8 +144,9 @@ class TestLevelGeneratorFactoryConfiguration:
         """
         mock_action_factory = stub(ActionFactory)
         mock_partitioner = stub(GridPartitioner)
+        mock_partitioner.level_types = ['crypt']
         mock_room_generator = empty_stub()
-        mock_room_generator.level_types = ["swamp"]
+        mock_room_generator.level_types = ['swamp']
         mock_decorator = empty_stub()
 
         mock_config = stub(LevelGeneratorFactoryConfig)
@@ -145,10 +164,125 @@ class TestLevelGeneratorFactoryConfiguration:
         try:
             generator = factory.get_generator('crypt')
         except RuntimeError, err:
-            assert_that(str(err), contains_string("No room generator found"))
+            assert_that(str(err), contains_string("No room for type crypt"))
             exception_was_thrown = True
 
         assert_that(exception_was_thrown)
+
+class TestFactorySupportForLevelTypes:
+    """
+    Class for testing configuring of LevelGeneratorFactory with level types
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.partitioner_1 = None
+        self.partitioner_2 = None
+        self.room_generator_1 = None
+        self.room_generator_2 = None
+        self.decorator_1 = None
+        self.decorator_2 = None
+        self.item_adder_1 = None
+        self.item_adder_2 = None
+        self.creature_adder_1 = None
+        self.creature_adder_2 = None
+        mock_config = None
+        self.random_generator = None
+        self.factory = None
+
+    def setup(self):
+        """
+        Setup test case
+        """
+        mock_action_factory = stub(ActionFactory)
+        self.partitioner_1 = stub(GridPartitioner)
+        self.partitioner_1.level_types = ['crypt', 'castle']
+        self.partitioner_2 = stub(GridPartitioner)
+        self.partitioner_2.level_types = ['swamp']
+
+        self.room_generator_1 = stub(SquareRoomGenerator)
+        self.room_generator_1.level_types = ['crypt']
+        self.room_generator_2 = stub(SquareRoomGenerator)
+        self.room_generator_2.level_types = ['swamp', 'castle']
+
+        self.decorator_1 = stub(ReplacingDecorator)
+        self.decorator_1.level_types = ['crypt', 'swamp']
+        self.decorator_2 = stub(ReplacingDecorator)
+        self.decorator_2.level_types = ['castle']
+
+        self.item_adder_1 = stub(ItemAdder)
+        self.item_adder_1.level_types = ['crypt']
+        self.item_adder_2 = stub(ItemAdder)
+        self.item_adder_2.level_types = ['castle']
+
+        self.creature_adder_1 = stub(CreatureAdder)
+        self.creature_adder_1.level_types = ['crypt', 'castle']
+        self.creature_adder_2 = stub(CreatureAdder)
+        self.creature_adder_2.level_types = ['swamp']
+
+        mock_config = stub(LevelGeneratorFactoryConfig)
+        mock_config.level_partitioners = [self.partitioner_1,
+                                          self.partitioner_2]
+        mock_config.room_generators = [self.room_generator_1,
+                                       self.room_generator_2]
+        mock_config.decorators = [self.decorator_1,
+                                  self.decorator_2]
+        mock_config.item_adders = [self.item_adder_1,
+                                   self.item_adder_2]
+        mock_config.creature_adders = [self.creature_adder_1,
+                                       self.creature_adder_2]
+
+        self.random_generator = random.Random()
+
+        self.factory = LevelGeneratorFactory(mock_action_factory,
+                                             mock_config,
+                                             self.random_generator)
+
+    def test_partitioner_type(self):
+        """
+        Test that partitioners can be retrieved by level types
+        """
+        generator = self.factory.get_generator('crypt')
+
+        assert_that(generator.partitioner,
+                    is_(same_instance(self.partitioner_1)))
+
+    def test_room_generator_type(self):
+        """
+        Test that room generators can be retrieved by level types
+        """
+        generator = self.factory.get_generator('crypt')
+
+        assert_that(generator.room_generator,
+                    is_(same_instance(self.room_generator_1)))
+
+    def test_decorator_type(self):
+        """
+        Test that decorators can be retrieved by level types
+        """
+        generator = self.factory.get_generator('crypt')
+
+        assert_that(generator.decorator,
+                    is_(same_instance(self.decorator_1)))
+
+    def test_item_adder_type(self):
+        """
+        Test that item adders can be retrieved by level types
+        """
+        generator = self.factory.get_generator('crypt')
+
+        assert_that(generator.item_adder,
+                    is_(same_instance(self.item_adder_1)))
+
+    def test_creature_adder_type(self):
+        """
+        Test that creature adders can be retrieved by level types
+        """
+        generator = self.factory.get_generator('crypt')
+
+        assert_that(generator.creature_adder,
+                    is_(same_instance(self.creature_adder_1)))
 
 class TestLevelGenerator:
     """

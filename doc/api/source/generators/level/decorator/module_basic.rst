@@ -9,6 +9,12 @@ Decorator
 .. autoclass:: pyherc.generators.level.decorator.basic.Decorator
    :members:
 
+DecoratorConfig
+###############
+
+.. autoclass:: pyherc.generators.level.decorator.basic.DecoratorConfig
+   :members:
+   
 ReplacingDecorator
 ##################
 

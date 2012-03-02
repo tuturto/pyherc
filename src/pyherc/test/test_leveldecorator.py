@@ -67,12 +67,11 @@ class TestLevelDecorator():
         self.level.walls[2][2] = WALL_NATURAL
         self.level.walls[5][5] = WALL_NATURAL
 
-        self.config = ReplacingDecoratorConfig()
-        self.config.ground_config[FLOOR_NATURAL] = FLOOR_ROCK
-        self.config.ground_config[FLOOR_CONSTRUCTED] = FLOOR_BRICK
-
-        self.config.wall_config[WALL_NATURAL] = WALL_GROUND
-
+        self.config = ReplacingDecoratorConfig(['crypt'],
+                                               {FLOOR_NATURAL: FLOOR_ROCK,
+                                               FLOOR_CONSTRUCTED: FLOOR_BRICK},
+                                               {WALL_NATURAL: WALL_GROUND}
+                                               )
         self.decorator = ReplacingDecorator(self.config)
 
     def test_replacing_ground(self):
@@ -124,9 +123,9 @@ class TestWallBuilderDecorator():
             for loc_x in range(2, 8):
                 self.level.walls[loc_x][loc_y] = WALL_EMPTY
 
-        self.config = WallBuilderDecoratorConfig()
-        self.config.wall_config[WALL_NATURAL] = WALL_CONSTRUCTED
-        self.config.empty_tile = WALL_EMPTY
+        self.config = WallBuilderDecoratorConfig(['crypt'],
+                                            {WALL_NATURAL: WALL_CONSTRUCTED},
+                                            WALL_EMPTY)
 
         self.decorator = WallBuilderDecorator(self.config)
 
@@ -170,9 +169,9 @@ class TestAggregateDecorator():
         self.mock_decorator_1 = spy(WallBuilderDecorator)
         self.mock_decorator_2 = spy(ReplacingDecorator)
 
-        self.config = AggregateDecoratorConfig()
-        self.config.decorators.append(self.mock_decorator_1)
-        self.config.decorators.append(self.mock_decorator_2)
+        self.config = AggregateDecoratorConfig(['crypt'],
+                                               [self.mock_decorator_1,
+                                               self.mock_decorator_2])
         self.decorator = AggregateDecorator(self.config)
 
     def test_subdecorators_are_called(self):

@@ -41,6 +41,7 @@ class SquareRoomGenerator(object):
         self.empty_tile = empty_tile
         self.room_width = None
         self.room_height = None
+        self.level_types = ['crypt']
         self.logger = logging.getLogger('pyherc.generators.level.room.squareroom.SquareRoomGenerator') #pylint disable=C0301
 
     def generate_room(self, section):

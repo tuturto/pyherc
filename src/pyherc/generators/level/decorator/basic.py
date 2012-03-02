@@ -36,6 +36,17 @@ class Decorator(object):
         super(Decorator, self).__init__()
         self.configuration = configuration
 
+    def __get_level_types(self):
+        """
+        Get types of levels this decorator supports
+
+        Returns:
+            List of level types
+        """
+        return self.configuration.level_types
+
+    level_types = property(__get_level_types)
+
     def decorate_level(self, level):
         """
         Decorate level
@@ -44,6 +55,14 @@ class Decorator(object):
             level: Level to decorate
         """
         pass
+
+class DecoratorConfig(object):
+    """
+    Super class for decorator configuration
+    """
+    def __init__(self, level_types):
+        super(DecoratorConfig, self).__init__()
+        self.level_types = level_types
 
 class ReplacingDecorator(Decorator):
     """
@@ -81,17 +100,17 @@ class ReplacingDecorator(Decorator):
                     level.walls[loc_x][loc_y] = wall_tiles[proto_tile]
 
 
-class ReplacingDecoratorConfig(object):
+class ReplacingDecoratorConfig(DecoratorConfig):
     """
     Configuration for ReplacingDecorator
     """
-    def __init__(self):
+    def __init__(self, level_types, ground_config, wall_config):
         """
         Default constructor
         """
-        super(ReplacingDecoratorConfig, self).__init__()
-        self.ground_config = {}
-        self.wall_config = {}
+        super(ReplacingDecoratorConfig, self).__init__(level_types)
+        self.ground_config = ground_config
+        self.wall_config = wall_config
 
 class WallBuilderDecorator(Decorator):
     """
@@ -144,17 +163,17 @@ class WallBuilderDecorator(Decorator):
             tile = self.configuration.wall_config[proto_tile]
             level.walls[loc_x][loc_y] = tile
 
-class WallBuilderDecoratorConfig(object):
+class WallBuilderDecoratorConfig(DecoratorConfig):
     """
     Configuration for WallBuilderDecorator
     """
-    def __init__(self):
+    def __init__(self, level_types, wall_config, empty_tile):
         """
         Default constructor
         """
-        super(WallBuilderDecoratorConfig, self).__init__()
-        self.wall_config = {}
-        self.empty_tile = None
+        super(WallBuilderDecoratorConfig, self).__init__(level_types)
+        self.wall_config = wall_config
+        self.empty_tile = empty_tile
 
 class AggregateDecorator(Decorator):
     """
@@ -179,13 +198,13 @@ class AggregateDecorator(Decorator):
         for decorator in self.configuration.decorators:
             decorator.decorate_level(level)
 
-class AggregateDecoratorConfig(object):
+class AggregateDecoratorConfig(DecoratorConfig):
     """
     Configuration for AggregateDecorator
     """
-    def __init__(self):
+    def __init__(self, level_types, decorators):
         """
         Default constructor
         """
-        super(AggregateDecoratorConfig, self).__init__()
-        self.decorators = []
+        super(AggregateDecoratorConfig, self).__init__(level_types)
+        self.decorators = decorators

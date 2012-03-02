@@ -22,6 +22,7 @@
 Configuration for herculeum
 """
 import logging
+import random
 import pyherc.gui.surfaceManager
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.move.factories import MoveFactory
@@ -30,7 +31,28 @@ from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory
 from pyherc.generators import ItemGenerator, CreatureGenerator
+from pyherc.generators.level.generator import LevelGenerator
+from pyherc.generators.level.generator import LevelGeneratorFactory
+from pyherc.generators.level.config import LevelGeneratorFactoryConfig
+from pyherc.generators.level.room import SquareRoomGenerator
+from pyherc.generators.level.partitioners import GridPartitioner
+
+from pyherc.generators.level.decorator import ReplacingDecorator
+from pyherc.generators.level.decorator import ReplacingDecoratorConfig
+from pyherc.generators.level.decorator import WallBuilderDecorator
+from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
+from pyherc.generators.level.decorator import AggregateDecorator
+from pyherc.generators.level.decorator import AggregateDecoratorConfig
+
 from pyherc.rules.tables import Tables
+
+from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
+from pyherc.generators.level.prototiles import WALL_EMPTY, WALL_NATURAL
+from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
+
+from pyherc.data.tiles import FLOOR_EMPTY, FLOOR_ROCK, FLOOR_BRICK
+from pyherc.data.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
+from pyherc.data.tiles import WALL_ROCK_DECO_1, WALL_ROCK_DECO_2
 
 class Configuration(object):
     """
@@ -46,9 +68,12 @@ class Configuration(object):
         self.base_path = None
         self.item_generator = None
         self.creature_generator = None
+        self.level_generator_factory = None
         self.tables = None
+        self.level_size = None
         self.base_path = base_path
         self.model = model
+        self.rng = random.Random()
         self.logger = logging.getLogger('pyherc.config.Configuration')
 
     def initialise(self):
@@ -65,9 +90,12 @@ class Configuration(object):
         self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
         self.surface_manager.loadResources(self.base_path)
 
+        self.level_size = (80, 60)
+
         self.initialise_factories()
         self.initialise_tables()
         self.initialise_generators()
+        self.initialise_level_generators()
 
     def initialise_factories(self):
         """
@@ -89,7 +117,8 @@ class Configuration(object):
 
         self.action_factory = ActionFactory(
                                             self.model,
-                                            [move_factory, attack_factory])
+                                            [move_factory,
+                                            attack_factory])
 
         self.logger.info('Action sub system initialised')
 
@@ -113,3 +142,48 @@ class Configuration(object):
                                                     self.tables)
 
         self.logger.info('Generators initialised')
+
+    def initialise_level_generators(self):
+        """
+        Initialise level generators
+        """
+        self.logger.info('Initialising level generators')
+
+        room_generators = [SquareRoomGenerator(FLOOR_NATURAL, WALL_EMPTY),
+                           SquareRoomGenerator(FLOOR_CONSTRUCTED, WALL_EMPTY)]
+        level_partitioners = [GridPartitioner(self.rng)]
+
+        replacer_config = ReplacingDecoratorConfig(['crypt'],
+                                        {FLOOR_NATURAL: FLOOR_ROCK,
+                                        FLOOR_CONSTRUCTED: FLOOR_BRICK},
+                                        {WALL_NATURAL: WALL_GROUND,
+                                        WALL_CONSTRUCTED: WALL_ROCK})
+        replacer = ReplacingDecorator(replacer_config)
+
+        wallbuilder_config = WallBuilderDecoratorConfig(['crypt'],
+                                            {WALL_NATURAL: WALL_CONSTRUCTED},
+                                            WALL_EMPTY)
+        wallbuilder = WallBuilderDecorator(wallbuilder_config)
+
+        aggregate_decorator_config = AggregateDecoratorConfig(['crypt'],
+                                                              [wallbuilder,
+                                                              replacer])
+
+        decorators = [AggregateDecorator(aggregate_decorator_config)]
+
+        item_adders = None
+        creature_adders = None
+
+        config = LevelGeneratorFactoryConfig(room_generators,
+                                             level_partitioners,
+                                             decorators,
+                                             item_adders,
+                                             creature_adders,
+                                             self.level_size)
+
+        self.level_generator_factory = LevelGeneratorFactory(self.action_factory,
+                                                             config,
+                                                             self.rng)
+
+        self.logger.info('Level generators initialised')
+
