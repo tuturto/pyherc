@@ -89,7 +89,7 @@ class LevelGeneratorFactory:
                               partitioner,
                               room,
                               decorator,
-                              portal_adder,
+                              [portal_adder],
                               item_adder,
                               creature_adder,
                               self.random_generator,
@@ -128,7 +128,7 @@ class LevelGenerator:
     Class used to generate levels
     """
     def __init__(self, action_factory, partitioner, room_generator,
-                 decorator, portal_adder,
+                 decorator, portal_adders,
                  item_adder, creature_adder,
                  random_generator, size):
         """
@@ -154,7 +154,7 @@ class LevelGenerator:
         self.partitioner = partitioner
         self.room_generator = room_generator
         self.decorator = decorator
-        self.portal_adder = portal_adder
+        self.portal_adders = portal_adders
         self.size = size
 
     def __getstate__(self):
@@ -172,8 +172,7 @@ class LevelGenerator:
         self.__dict__.update(d)
         self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGenerator') #pylint: disable=C0301
 
-    def generate_level(self, portal, model, new_portals = 0,
-                                        level=1, room_min_size = (2, 2)):
+    def generate_level(self, portal, model):
         """
         Generate level
         """
@@ -189,10 +188,8 @@ class LevelGenerator:
 
         self.decorator.decorate_level(new_level)
 
-        self.portal_adder.add_stairs(new_level, portal)
-
-        if new_portals > 0:
-            self.logger.warn('support for generating more portals not ready')
+        for adder in self.portal_adders:
+            adder.add_stairs(new_level, portal)
 
         self.creature_adder.add_creatures(new_level)
 
