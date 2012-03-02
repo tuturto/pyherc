@@ -25,11 +25,12 @@ class ItemAdderConfiguration(object):
     """
     Configuration for ItemAdder
     """
-    def __init__(self):
+    def __init__(self, level_types):
         """
         Default constructor
         """
         super(ItemAdderConfiguration, self).__init__()
+        self.level_types = level_types
         self.items = []
 
     def add_item(self, min_amount, max_amount, name = None, type = None,

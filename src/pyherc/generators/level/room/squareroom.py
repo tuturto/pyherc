@@ -29,19 +29,20 @@ class SquareRoomGenerator(object):
     '''
     Class for generating a square room
     '''
-    def __init__(self, floor_tile, empty_tile):
+    def __init__(self, floor_tile, empty_tile, level_types):
         '''
         Default constructor
 
         Args:
             floor_tile: id of the tile to use for floors
             empty_tile: id of the empty wall tile
+            level_types: types of level this generator can be used
         '''
         self.floor_tile = floor_tile
         self.empty_tile = empty_tile
         self.room_width = None
         self.room_height = None
-        self.level_types = ['crypt']
+        self.level_types = level_types
         self.logger = logging.getLogger('pyherc.generators.level.room.squareroom.SquareRoomGenerator') #pylint disable=C0301
 
     def generate_room(self, section):

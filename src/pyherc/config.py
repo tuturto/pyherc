@@ -44,6 +44,10 @@ from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
 from pyherc.generators.level.decorator import AggregateDecorator
 from pyherc.generators.level.decorator import AggregateDecoratorConfig
 
+from pyherc.generators.level.items import ItemAdderConfiguration, ItemAdder
+from pyherc.generators.level.creatures import CreatureAdderConfiguration
+from pyherc.generators.level.creatures import CreatureAdder
+
 from pyherc.rules.tables import Tables
 
 from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
@@ -149,30 +153,18 @@ class Configuration(object):
         """
         self.logger.info('Initialising level generators')
 
-        room_generators = [SquareRoomGenerator(FLOOR_NATURAL, WALL_EMPTY),
-                           SquareRoomGenerator(FLOOR_CONSTRUCTED, WALL_EMPTY)]
-        level_partitioners = [GridPartitioner(self.rng)]
+        room_generators = []
+        level_partitioners = []
+        decorators = []
+        item_adders = []
+        creature_adders = []
 
-        replacer_config = ReplacingDecoratorConfig(['crypt'],
-                                        {FLOOR_NATURAL: FLOOR_ROCK,
-                                        FLOOR_CONSTRUCTED: FLOOR_BRICK},
-                                        {WALL_NATURAL: WALL_GROUND,
-                                        WALL_CONSTRUCTED: WALL_ROCK})
-        replacer = ReplacingDecorator(replacer_config)
-
-        wallbuilder_config = WallBuilderDecoratorConfig(['crypt'],
-                                            {WALL_NATURAL: WALL_CONSTRUCTED},
-                                            WALL_EMPTY)
-        wallbuilder = WallBuilderDecorator(wallbuilder_config)
-
-        aggregate_decorator_config = AggregateDecoratorConfig(['crypt'],
-                                                              [wallbuilder,
-                                                              replacer])
-
-        decorators = [AggregateDecorator(aggregate_decorator_config)]
-
-        item_adders = None
-        creature_adders = None
+        upper_crypt = self.init_upper_crypt()
+        room_generators.extend(upper_crypt.room_generators)
+        level_partitioners.extend(upper_crypt.level_partitioners)
+        decorators.extend(upper_crypt.decorators)
+        item_adders.extend(upper_crypt.item_adders)
+        creature_adders.extend(upper_crypt.creature_adders)
 
         config = LevelGeneratorFactoryConfig(room_generators,
                                              level_partitioners,
@@ -186,4 +178,77 @@ class Configuration(object):
                                                              self.rng)
 
         self.logger.info('Level generators initialised')
+
+    def init_upper_crypt(self):
+        """
+        Initialise upper crypt levels
+        """
+        room_generators = [SquareRoomGenerator(['upper crypt'],
+                                               FLOOR_NATURAL,
+                                               WALL_EMPTY),
+                           SquareRoomGenerator(['upper crypt'],
+                                               FLOOR_CONSTRUCTED,
+                                               WALL_EMPTY)]
+        level_partitioners = [GridPartitioner(['upper crypt'],
+                                              self.rng)]
+
+        replacer_config = ReplacingDecoratorConfig(['upper crypt'],
+                                        {FLOOR_NATURAL: FLOOR_ROCK,
+                                        FLOOR_CONSTRUCTED: FLOOR_BRICK},
+                                        {WALL_NATURAL: WALL_GROUND,
+                                        WALL_CONSTRUCTED: WALL_ROCK})
+        replacer = ReplacingDecorator(replacer_config)
+
+        wallbuilder_config = WallBuilderDecoratorConfig(['upper crypt'],
+                                            {WALL_NATURAL: WALL_CONSTRUCTED},
+                                            WALL_EMPTY)
+        wallbuilder = WallBuilderDecorator(wallbuilder_config)
+
+        aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
+                                                              [wallbuilder,
+                                                              replacer])
+
+        decorators = [AggregateDecorator(aggregate_decorator_config)]
+
+        item_adder_config = ItemAdderConfiguration(['upper crypt'])
+        item_adder_config.add_item(min_amount = 1,
+                                   max_amount = 3,
+                                   type = 'weapon',
+                                   location = 'room')
+        item_adder_config.add_item(min_amount = 0,
+                                   max_amount = 5,
+                                   type = 'potion',
+                                   location = 'room')
+        item_adder_config.add_item(min_amount = 0,
+                                   max_amount = 5,
+                                   type = 'food',
+                                   location = 'room')
+        item_adders = [ItemAdder(self.item_generator,
+                                item_adder_config,
+                                self.rng)]
+
+        creature_adder_config = CreatureAdderConfiguration(['upper crypt'])
+        creature_adder_config.add_creature(min_amount = 3,
+                                           max_amount = 9,
+                                           name = 'bat')
+        creature_adder_config.add_creature(min_amount = 3,
+                                           max_amount = 9,
+                                           name = 'spider')
+        creature_adder_config.add_creature(min_amount = 2,
+                                           max_amount = 6,
+                                           name = 'skeleton',
+                                           location = 'room')
+
+        creature_adders = [CreatureAdder(self.creature_generator,
+                                        creature_adder_config,
+                                        self.rng)]
+
+        config = LevelGeneratorFactoryConfig(room_generators,
+                                             level_partitioners,
+                                             decorators,
+                                             item_adders,
+                                             creature_adders,
+                                             self.level_size)
+
+        return config
 

@@ -26,11 +26,15 @@ class CreatureAdderConfiguration(object):
     """
     Class used to configure CreatureAdder
     """
-    def __init__(self):
+    def __init__(self, level_types):
         """
         Default constructor
+
+        Args:
+            level_types: types of levels adder can be used at
         """
         super(CreatureAdderConfiguration, self).__init__()
+        self.level_types = level_types
         self.creature_list = []
 
     def add_creature(self, min_amount, max_amount, name, location = None):

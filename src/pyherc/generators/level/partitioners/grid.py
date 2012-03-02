@@ -102,14 +102,16 @@ class GridPartitioner(object):
     Class for partitioning level to equal grid
     """
 
-    def __init__(self, random_generator):
+    def __init__(self, level_types, random_generator):
         """
         Default constructor
 
         Args:
+            level_types: types of level partitioner can be used for
             random_generator: random number generator
         """
         self.connectors = [RandomConnector(random_generator)]
+        self.level_types = level_types
         self.random_generator = random_generator
 
     def partition_level(self, level,  x_sections = 3,  y_sections = 3):

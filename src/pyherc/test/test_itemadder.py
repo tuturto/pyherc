@@ -83,7 +83,7 @@ class TestItemAdder():
 
         self.item_generator = ItemGenerator(self.mock_tables)
 
-        self.configuration = ItemAdderConfiguration()
+        self.configuration = ItemAdderConfiguration(['crypt'])
         self.configuration.add_item(min_amount = 3,
                                     max_amount = 4,
                                     name = 'dagger')

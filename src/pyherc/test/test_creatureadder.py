@@ -86,7 +86,7 @@ class TestCreatureAdder():
         self.creature_generator = CreatureGenerator(self.mock_action_factory,
                                                     self.mock_tables)
 
-        self.configuration = CreatureAdderConfiguration()
+        self.configuration = CreatureAdderConfiguration(['crypt'])
         self.configuration.add_creature(min_amount = 3,
                                         max_amount = 4,
                                         name = 'rat')

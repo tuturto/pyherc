@@ -341,9 +341,11 @@ class TestLevelGenerator:
         Test that level generator creates a fully connected level
         """
         factory = stub(ActionFactory)
-        partitioner = GridPartitioner(self.rng)
-        room_generator = SquareRoomGenerator(floor_tile = FLOOR_ROCK,
-                                             empty_tile = WALL_EMPTY)
+        partitioner = GridPartitioner(['crypt'],
+                                      self.rng)
+        room_generator = SquareRoomGenerator(FLOOR_ROCK,
+                                             WALL_EMPTY,
+                                             ['crypt'])
         level_decorator = empty_spy()
         stair_adder = PortalAdder(self.rng)
         creature_adder = empty_spy()

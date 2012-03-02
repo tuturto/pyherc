@@ -50,7 +50,9 @@ class TestSquareRoom():
         """
         self.level = Level((20, 20), FLOOR_ROCK, WALL_GROUND)
         self.section = Section((5, 5), (15, 15), self.level, self.rng)
-        self.generator = SquareRoomGenerator(FLOOR_ROCK, WALL_EMPTY)
+        self.generator = SquareRoomGenerator(FLOOR_ROCK,
+                                             WALL_EMPTY,
+                                             ['crypt'])
 
     def test_generate_simple_room(self):
         '''
