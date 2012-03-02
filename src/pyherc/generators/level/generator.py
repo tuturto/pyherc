@@ -43,11 +43,11 @@ class LevelGeneratorFactory:
         self.level_partitioners = configuration.level_partitioners
         self.room_generators = configuration.room_generators
         self.decorators = configuration.decorators
-        self.stair_adder = None
+        self.portal_adders = configuration.portal_adders
         self.item_adders = configuration.item_adders
         self.creature_adders = configuration.creature_adders
-        self.random_generator = random_generator
         self.size = configuration.size
+        self.random_generator = random_generator
 
     def get_generator(self, level_type):
         """
@@ -81,11 +81,15 @@ class LevelGeneratorFactory:
                                                 self.creature_adders,
                                                 'creature adder')
 
+        portal_adder = self.get_sub_component(level_type,
+                                              self.portal_adders,
+                                              'portal adder')
+
         return LevelGenerator(self.action_factory,
                               partitioner,
                               room,
                               decorator,
-                              self.stair_adder,
+                              portal_adder,
                               item_adder,
                               creature_adder,
                               self.random_generator,
@@ -124,7 +128,7 @@ class LevelGenerator:
     Class used to generate levels
     """
     def __init__(self, action_factory, partitioner, room_generator,
-                 decorator, stair_adder,
+                 decorator, portal_adder,
                  item_adder, creature_adder,
                  random_generator, size):
         """
@@ -135,7 +139,7 @@ class LevelGenerator:
             partitioner: LevelPartitioner to use
             room_generator: RoomGenerator to use
             decorator: LevelDecorator to use
-            stair_adder: PortalAdder to use
+            portal_adder: PortalAdder to use
             item_adder: ItemAdder to generate items
             creature_adder: CreatureAdder to add creatures
             random_generator: Random number generator
@@ -150,7 +154,7 @@ class LevelGenerator:
         self.partitioner = partitioner
         self.room_generator = room_generator
         self.decorator = decorator
-        self.stair_adder = stair_adder
+        self.portal_adder = portal_adder
         self.size = size
 
     def __getstate__(self):
@@ -185,7 +189,7 @@ class LevelGenerator:
 
         self.decorator.decorate_level(new_level)
 
-        self.stair_adder.add_stairs(new_level, portal)
+        self.portal_adder.add_stairs(new_level, portal)
 
         if new_portals > 0:
             self.logger.warn('support for generating more portals not ready')

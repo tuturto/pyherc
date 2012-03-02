@@ -27,7 +27,7 @@ class LevelGeneratorFactoryConfig(object):
     """
     def __init__(self, room_generators, level_partitioners,
                  decorators, item_adders, creature_adders,
-                 size):
+                 portal_adders, size):
         """
         Default constructor
         """
@@ -37,32 +37,40 @@ class LevelGeneratorFactoryConfig(object):
         self.__size = size
         self.item_adders = item_adders
         self.creature_adders = creature_adders
+        self.__portal_adders = portal_adders
 
-    def get_level_partitioners(self):
+    def __get_level_partitioners(self):
         """
         Get level partitioners in this configurations
         """
         return self.__level_partitioners
 
-    def get_room_generators(self):
+    def __get_room_generators(self):
         """
         Get room generators in this configuration
         """
         return self.__room_generators
 
-    def get_decorators(self):
+    def __get_decorators(self):
         """
         Get level decorators in this configuration
         """
         return self.__decorators
 
-    def get_size(self):
+    def __get_size(self):
         """
         Get size of levels
         """
         return self.__size
 
-    level_partitioners = property(get_level_partitioners)
-    room_generators = property(get_room_generators)
-    decorators = property(get_decorators)
-    size = property(get_size)
+    def __get_portal_adders(self):
+        """
+        Get portal adders
+        """
+        return self.__portal_adders
+
+    level_partitioners = property(__get_level_partitioners)
+    room_generators = property(__get_room_generators)
+    decorators = property(__get_decorators)
+    size = property(__get_size)
+    portal_adders = property(__get_portal_adders)

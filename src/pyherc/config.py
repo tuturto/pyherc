@@ -158,6 +158,7 @@ class Configuration(object):
         decorators = []
         item_adders = []
         creature_adders = []
+        portal_adders = []
 
         upper_crypt = self.init_upper_crypt()
         room_generators.extend(upper_crypt.room_generators)
@@ -165,12 +166,14 @@ class Configuration(object):
         decorators.extend(upper_crypt.decorators)
         item_adders.extend(upper_crypt.item_adders)
         creature_adders.extend(upper_crypt.creature_adders)
+        portal_adders.extend(upper_crypt.portal_adders)
 
         config = LevelGeneratorFactoryConfig(room_generators,
                                              level_partitioners,
                                              decorators,
                                              item_adders,
                                              creature_adders,
+                                             portal_adders,
                                              self.level_size)
 
         self.level_generator_factory = LevelGeneratorFactory(self.action_factory,
@@ -243,11 +246,14 @@ class Configuration(object):
                                         creature_adder_config,
                                         self.rng)]
 
+        portal_adders = [None]
+
         config = LevelGeneratorFactoryConfig(room_generators,
                                              level_partitioners,
                                              decorators,
                                              item_adders,
                                              creature_adders,
+                                             portal_adders,
                                              self.level_size)
 
         return config
