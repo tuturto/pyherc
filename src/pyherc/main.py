@@ -143,8 +143,6 @@ class Application:
         """
         return self.config.surface_manager
 
-    surface_manager = property(__get_surface_manager)
-
     def start_logging(self):
         '''
         Start logging for the system
@@ -154,7 +152,7 @@ class Application:
         self.logger = logging.getLogger('pyherc.main.Application')
         self.logger.info("Logging started")
 
-    def get_action_factory(self):
+    def __get_action_factory(self):
         """
         Get action factory instance
 
@@ -163,7 +161,7 @@ class Application:
         """
         return self.config.action_factory
 
-    def get_creature_generator(self):
+    def __get_creature_generator(self):
         """
         Get creature generator
 
@@ -172,7 +170,7 @@ class Application:
         """
         return self.config.creature_generator
 
-    def get_item_generator(self):
+    def __get_item_generator(self):
         """
         Get item generator
 
@@ -180,6 +178,12 @@ class Application:
             ItemGenerator
         """
         return self.config.item_generator
+
+    def __get_level_generator_factory(self):
+        """
+        Get level generator factory
+        """
+        return self.config.level_generator_factory
 
     def detect_resource_directory(self):
         '''
@@ -195,6 +199,11 @@ class Application:
 
         self.base_path = os.path.join(current, 'resources')
 
+    surface_manager = property(__get_surface_manager)
+    action_factory = property(__get_action_factory)
+    creature_generator = property(__get_creature_generator)
+    item_generator = property(__get_item_generator)
+    level_generator_factory = property(__get_level_generator_factory)
 
 if __name__ == "__main__":
     APP = Application()

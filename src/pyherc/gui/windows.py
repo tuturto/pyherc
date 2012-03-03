@@ -101,11 +101,15 @@ class StartNewGameWindow:
         """
         Generate a new game
         """
-        self.character = pyherc.rules.character.create_character('human', 'fighter', self.application.get_action_factory())
+        self.character = pyherc.rules.character.create_character('human', 'fighter', self.application.action_factory)
         self.application.world.player = self.character
+
+        level_generator = self.application.level_generator_factory.get_generator('upper crypt')
+
         generator = pyherc.generators.dungeon.DungeonGenerator(
-                                self.application.get_creature_generator(),
-                                self.application.get_item_generator())
+                                self.application.creature_generator,
+                                self.application.item_generator,
+                                level_generator)
 
         generator.generate_dungeon(self.application.world)
         self.character.level = self.application.world.dungeon.levels

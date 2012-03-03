@@ -22,6 +22,8 @@
 Module for basic decorators
 """
 
+import logging
+
 class Decorator(object):
     """
     Super class for level decorators
@@ -35,6 +37,7 @@ class Decorator(object):
         """
         super(Decorator, self).__init__()
         self.configuration = configuration
+        self.logger = logging.getLogger('pyherc.generators.level.decorator.basic.Decorator')
 
     def __get_level_types(self):
         """
@@ -76,6 +79,7 @@ class ReplacingDecorator(Decorator):
             configuration: ReplacingDecoratorConfig specifying tiles to replace
         """
         super(ReplacingDecorator, self).__init__(configuration)
+        self.logger = logging.getLogger('pyherc.generators.level.decorator.basic.ReplacingDecorator')
 
     def decorate_level(self, level):
         """
@@ -84,6 +88,8 @@ class ReplacingDecorator(Decorator):
         Args:
             level: Level to decorate
         """
+        self.logger.debug('decorating level')
+
         floor_keys = self.configuration.ground_config.keys()
         ground_tiles = self.configuration.ground_config
         wall_keys = self.configuration.wall_config.keys()
@@ -98,6 +104,8 @@ class ReplacingDecorator(Decorator):
                 proto_tile = level.walls[loc_x][loc_y]
                 if proto_tile in wall_keys:
                     level.walls[loc_x][loc_y] = wall_tiles[proto_tile]
+
+        self.logger.debug('level decorated')
 
 
 class ReplacingDecoratorConfig(DecoratorConfig):
@@ -127,6 +135,7 @@ class WallBuilderDecorator(Decorator):
             configuration: WallBuilderDecoratorConfig
         """
         super(WallBuilderDecorator, self).__init__(configuration)
+        self.logger = logging.getLogger('pyherc.generators.level.decorator.basic.WallBuilderDecorator')
 
     def decorate_level(self, level):
         """
@@ -135,6 +144,8 @@ class WallBuilderDecorator(Decorator):
         Args:
             level: Level to decorate
         """
+        self.logger.debug('decorating level')
+
         for loc_y in range(1, len(level.floor[0]) - 1):
             for loc_x in range(1, len(level.floor) - 1):
                 if level.walls[loc_x][loc_y] == self.configuration.empty_tile:
@@ -146,6 +157,8 @@ class WallBuilderDecorator(Decorator):
                     self.check_and_replace((loc_x - 1, loc_y + 1), level)
                     self.check_and_replace((loc_x + 1, loc_y - 1), level)
                     self.check_and_replace((loc_x + 1, loc_y + 1), level)
+
+        self.logger.debug('level decorated')
 
     def check_and_replace(self, location, level):
         """
@@ -187,6 +200,7 @@ class AggregateDecorator(Decorator):
             configuration: AggregateDecoratorConfig
         """
         super(AggregateDecorator, self).__init__(configuration)
+        self.logger = logging.getLogger('pyherc.generators.level.decorator.basic.AggregateDecorator')
 
     def decorate_level(self, level):
         """
@@ -195,8 +209,12 @@ class AggregateDecorator(Decorator):
         Args:
             level: Level to decorate
         """
+        self.logger.debug('decorating level')
+
         for decorator in self.configuration.decorators:
             decorator.decorate_level(level)
+
+        self.logger.debug('level decorated')
 
 class AggregateDecoratorConfig(DecoratorConfig):
     """

@@ -181,7 +181,8 @@ class LevelGenerator:
             portal: Portal to link to this level
         """
         self.logger.debug('creating a new level')
-        new_level = Level(self.size)
+        #TODO: configurable
+        new_level = Level(self.size, -2, -101)
 
         self.logger.debug('partitioning level')
         sections = self.partitioner.partition_level(new_level, 4, 3)

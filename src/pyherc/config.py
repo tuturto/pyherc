@@ -95,7 +95,7 @@ class Configuration(object):
         self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
         self.surface_manager.loadResources(self.base_path)
 
-        self.level_size = (80, 60)
+        self.level_size = (80, 30)
 
         self.initialise_factories()
         self.initialise_tables()
@@ -192,12 +192,12 @@ class Configuration(object):
         """
         Initialise upper crypt levels
         """
-        room_generators = [SquareRoomGenerator(['upper crypt'],
-                                               FLOOR_NATURAL,
-                                               WALL_EMPTY),
-                           SquareRoomGenerator(['upper crypt'],
-                                               FLOOR_CONSTRUCTED,
-                                               WALL_EMPTY)]
+        room_generators = [SquareRoomGenerator(FLOOR_NATURAL,
+                                               WALL_EMPTY,
+                                               ['upper crypt']),
+                           SquareRoomGenerator(FLOOR_CONSTRUCTED,
+                                               WALL_EMPTY,
+                                               ['upper crypt'])]
         level_partitioners = [GridPartitioner(['upper crypt'],
                                               self.rng)]
 
@@ -237,15 +237,19 @@ class Configuration(object):
                                 self.rng)]
 
         creature_adder_config = CreatureAdderConfiguration(['upper crypt'])
-        creature_adder_config.add_creature(min_amount = 3,
-                                           max_amount = 9,
-                                           name = 'bat')
-        creature_adder_config.add_creature(min_amount = 3,
-                                           max_amount = 9,
-                                           name = 'spider')
+        #creature_adder_config.add_creature(min_amount = 3,
+        #                                   max_amount = 9,
+        #                                   name = 'bat')
+        #creature_adder_config.add_creature(min_amount = 3,
+        #                                   max_amount = 9,
+        #                                   name = 'spider')
+        #creature_adder_config.add_creature(min_amount = 2,
+        #                                   max_amount = 6,
+        #                                   name = 'skeleton',
+        #                                   location = 'room')
         creature_adder_config.add_creature(min_amount = 2,
                                            max_amount = 6,
-                                           name = 'skeleton',
+                                           name = 'rat',
                                            location = 'room')
 
         creature_adders = [CreatureAdder(self.creature_generator,

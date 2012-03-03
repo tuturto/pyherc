@@ -90,6 +90,8 @@ class SurfaceManager:
 
             surface = self.load_surface(base_path, 'floor_stone.png')
             self.icons[pyherc.data.tiles.FLOOR_ROCK] = surface
+            surface = self.load_surface(base_path, 'floor_stone.png')
+            self.icons[pyherc.data.tiles.FLOOR_BRICK] = surface
             surface = self.load_surface(base_path, 'empty.png')
             self.icons[pyherc.data.tiles.FLOOR_EMPTY] = surface
 

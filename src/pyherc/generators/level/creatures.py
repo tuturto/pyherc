@@ -73,6 +73,12 @@ class CreatureAdder(object):
         self.configuration = configuration
         self.rng = rng
 
+    def __get_level_types(self):
+        """
+        Get level types this adder can be used at
+        """
+        return self.configuration.level_types
+
     def add_creatures(self, level):
         """
         Add creatures to level according to configuration
@@ -132,4 +138,6 @@ class CreatureAdder(object):
             location = self.rng.choice(locations)
 
             level.add_creature(creature, location)
+
+    level_types = property(__get_level_types)
 

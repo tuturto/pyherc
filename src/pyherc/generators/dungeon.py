@@ -37,17 +37,20 @@ class DungeonGenerator:
     This class is used to generate dungeon
     """
 
-    def __init__(self, creature_generator, item_generator):
+    def __init__(self, creature_generator, item_generator,
+                 level_generator):
         """
         Default constructor
 
         Args:
             creature_generator: generator for creatures
             item_generator: generator for items
+            level_generator: level generator for the first level
         """
         self.logger = logging.getLogger('pyherc.generators.dungeon.DungeonGenerator')
         self.creature_generator = creature_generator
         self.item_generator = item_generator
+        self.level_generator = level_generator
 
     def generate_dungeon(self, model):
         """
@@ -55,23 +58,16 @@ class DungeonGenerator:
         """
         self.logger.info('generating the dungeon')
         model.dungeon = Dungeon()
-        generator = CatacombsLevelGenerator(self.creature_generator,
-                                            self.item_generator)
-        level = generator.generate_level(None, model, 1)
+
+        level = self.level_generator.generate_level(None)
 
         model.dungeon.levels = level
 
-        escape_portal = Portal()
-        escape_portal.icon = pyherc.data.tiles.PORTAL_STAIRS_UP
-        escape_portal.other_end = None
-        escape_portal.model = model
-
-        level_size = model.config['level']['size']
+        level_size = level.get_size()
         location = (random.randint(2, level_size[0]-1),
                                         random.randint(2, level_size[1]-1))
         while level.walls[location[0]][location[1]] != tiles.WALL_EMPTY:
             location = (random.randint(2, level_size[0]-1),
                                         random.randint(2, level_size[1]-1))
-        level.add_portal(escape_portal, location)
 
         model.player.location = location

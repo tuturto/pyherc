@@ -69,6 +69,12 @@ class ItemAdder(object):
         self.configuration = configuration
         self.rng = rng
 
+    def __get_level_types(self):
+        """
+        Get level types this item adder can be used at
+        """
+        return self.configuration.level_types
+
     def add_items(self, level):
         """
         Add items
@@ -131,3 +137,5 @@ class ItemAdder(object):
             location = self.rng.choice(locations)
 
             level.add_item(item[1], location)
+
+    level_types = property(__get_level_types)
