@@ -26,9 +26,10 @@ from pyherc.data.tiles import FLOOR_ROCK, WALL_EMPTY
 from pyherc.data import Level, Portal
 from pyherc.generators.level.portals import PortalAdder, PortalAdderFactory
 from pyherc.generators.level.portals import PortalAdderConfiguration
+from pyherc.generators.level.generator import LevelGenerator
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import * #pylint: disable=W0401
-from pyDoubles.framework import empty_stub #pylint: disable=F0401, E0611
+from pyDoubles.framework import empty_stub, stub #pylint: disable=F0401, E0611
 import random
 
 class TestPortalAdder():
@@ -60,6 +61,7 @@ class TestPortalAdder():
                 level.set_location_type((loc_x, loc_y), 'room')
 
         portal_adder = PortalAdder('room',
+                                   empty_stub(),
                                    self.rng)
 
         portal_adder.add_stairs(level)
@@ -68,6 +70,32 @@ class TestPortalAdder():
         assert_that(portals, has_length(1))
         portal = level.portals[0]
         assert_that(located_in_room(portal), is_(True))
+
+    def test_level_generator_is_created(self):
+        """
+        Test that level generator is created for newly created portal
+        """
+        level = Level(size = (20, 20),
+                      floor_type = FLOOR_ROCK,
+                      wall_type = WALL_EMPTY)
+
+        level_generator = stub(LevelGenerator)
+
+        for loc_y in range(8, 12):
+            for loc_x in range(8, 12):
+                level.set_location_type((loc_x, loc_y), 'room')
+
+        portal_adder = PortalAdder('room',
+                                   level_generator,
+                                   self.rng)
+
+        portal_adder.add_stairs(level)
+
+        portals = level.portals
+        portal = level.portals[0]
+
+        assert_that(portal.level_generator, is_(same_instance(level_generator)))
+
 
 class TestPortalAdderFactory():
     """
@@ -195,3 +223,22 @@ class TestPortalAdderFactory():
         portal_adders = factory.create_portal_adders('catacombs')
 
         assert_that(factory.config, has_length(1))
+
+    def test_level_generator_is_created(self):
+        """
+        Test that portal adder has level generator set to it
+        """
+        portal_config = [PortalAdderConfiguration(level_type = 'catacombs',
+                                                 location_type = 'room',
+                                                 chance = 100,
+                                                 new_level = 'upper crypt',
+                                                 unique = False)]
+
+        factory = PortalAdderFactory(portal_config,
+                                     self.rng)
+
+        portal_adders = factory.create_portal_adders('catacombs')
+
+        portal_adder = portal_adders[0]
+
+        assert_that(portal_adder.level_generator, is_(not_none()))

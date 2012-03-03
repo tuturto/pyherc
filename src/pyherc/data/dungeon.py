@@ -404,15 +404,18 @@ class Portal:
     Portal linking two levels together
     """
 
-    def __init__(self):
+    def __init__(self, level_generator = None):
         """
         Default constructor
+
+        Args:
+            level_generator: LevelGenerator for proxy portals
         """
         self.level = None
         self.location = ()
         self.icon = None
         self.__other_end = None
-        self.level_generator = None
+        self.level_generator = level_generator
         self.model = None
         self.logger = logging.getLogger('pyherc.data.dungeon.Portal')
 
@@ -449,8 +452,6 @@ class Portal:
         """
         self.__other_end = portal
 
-    other_end = property(__get_other_end, __set_other_end)
-
     def generate_level(self):
         """
         Generates level if this is a proxy portal
@@ -460,3 +461,4 @@ class Portal:
 
         self.level_generator.generate_level(self)
 
+    other_end = property(__get_other_end, __set_other_end)

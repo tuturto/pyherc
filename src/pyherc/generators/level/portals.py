@@ -111,8 +111,11 @@ class PortalAdderFactory(object):
         matches = [x for x in self.config
                    if x.level_type == level_type]
 
+        level_generator = None
+
         for spec in matches:
             new_adder = PortalAdder(spec.location_type,
+                                    level_generator,
                                     self.rng)
             if spec.is_unique:
                 self.config.remove(spec)
@@ -124,16 +127,18 @@ class PortalAdder(object):
     """
     Basic class for adding portals
     """
-    def __init__(self, location_type, rng):
+    def __init__(self, location_type, level_generator, rng):
         """
         Default constructor
 
         Args:
             location_type: type of location to add portal
+            level_generator: LevelGenerator
             rng: Randon number generator
         """
         super(PortalAdder, self).__init__()
         self.location_type = location_type
+        self.level_generator = level_generator
         self.rng = rng
 
     def add_stairs(self, level):
@@ -146,6 +151,6 @@ class PortalAdder(object):
         locations = level.get_locations_by_type(self.location_type)
         location = self.rng.choice(locations)
 
-        portal = Portal()
+        portal = Portal(level_generator = self.level_generator)
 
         level.add_portal(portal, location)
