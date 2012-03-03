@@ -89,15 +89,109 @@ class TestPortalAdderFactory():
         """
         Test that factory can create a portal adder
         """
-        portal_config = PortalAdderConfiguration(level_type = 'catacombs',
+        portal_config = [PortalAdderConfiguration(level_type = 'catacombs',
                                                  location_type = 'room',
                                                  chance = 100,
                                                  new_level = 'upper crypt',
-                                                 unique = False)
+                                                 unique = False)]
 
-        factory = PortalAdderFactory([portal_config],
+        factory = PortalAdderFactory(portal_config,
                                      self.rng)
 
         portal_adders = factory.create_portal_adders('catacombs')
 
         assert_that(portal_adders, has_length(1))
+
+    def test_multiple_adders_can_be_returned(self):
+        """
+        Test that portal adder factory respects level type
+        """
+        portal_config = [PortalAdderConfiguration(level_type = 'catacombs',
+                                                 location_type = 'room',
+                                                 chance = 100,
+                                                 new_level = 'upper crypt',
+                                                 unique = False),
+                         PortalAdderConfiguration(level_type = 'catacombs',
+                                                 location_type = 'room',
+                                                 chance = 100,
+                                                 new_level = 'dungeon',
+                                                 unique = False)
+                                                 ]
+
+        factory = PortalAdderFactory(portal_config,
+                                     self.rng)
+
+        portal_adders = factory.create_portal_adders('catacombs')
+
+        assert_that(portal_adders, has_length(2))
+
+    def test_level_type_is_respected(self):
+        """
+        Test that portal adder factory respects level type
+        """
+        portal_config = [PortalAdderConfiguration(level_type = 'catacombs',
+                                                 location_type = 'room',
+                                                 chance = 100,
+                                                 new_level = 'upper crypt',
+                                                 unique = False),
+                         PortalAdderConfiguration(level_type = 'upper crypt',
+                                                 location_type = 'room',
+                                                 chance = 100,
+                                                 new_level = 'lower crypt',
+                                                 unique = False)
+                                                 ]
+
+        factory = PortalAdderFactory(portal_config,
+                                     self.rng)
+
+        portal_adders = factory.create_portal_adders('catacombs')
+
+        assert_that(portal_adders, has_length(1))
+
+    def test_handling_no_matches(self):
+        """
+        Test that portal adder factory graciously returns empty list when
+        no match has been found
+        """
+        portal_config = [PortalAdderConfiguration(level_type = 'catacombs',
+                                                 location_type = 'room',
+                                                 chance = 100,
+                                                 new_level = 'upper crypt',
+                                                 unique = False),
+                         PortalAdderConfiguration(level_type = 'upper crypt',
+                                                 location_type = 'room',
+                                                 chance = 100,
+                                                 new_level = 'lower crypt',
+                                                 unique = False)
+                                                 ]
+
+        factory = PortalAdderFactory(portal_config,
+                                     self.rng)
+
+        portal_adders = factory.create_portal_adders('castle')
+
+        assert_that(portal_adders, has_length(0))
+
+    def test_removing_unique_portal_adders(self):
+        """
+        Test that unique portal adder specificatin is removed from configuration
+        after it has been used first time
+        """
+        portal_config = [PortalAdderConfiguration(level_type = 'catacombs',
+                                                 location_type = 'room',
+                                                 chance = 100,
+                                                 new_level = 'upper crypt',
+                                                 unique = True),
+                         PortalAdderConfiguration(level_type = 'upper crypt',
+                                                 location_type = 'room',
+                                                 chance = 100,
+                                                 new_level = 'lower crypt',
+                                                 unique = False)
+                                                 ]
+
+        factory = PortalAdderFactory(portal_config,
+                                     self.rng)
+
+        portal_adders = factory.create_portal_adders('catacombs')
+
+        assert_that(factory.config, has_length(1))

@@ -114,6 +114,8 @@ class PortalAdderFactory(object):
         for spec in matches:
             new_adder = PortalAdder(spec.location_type,
                                     self.rng)
+            if spec.is_unique:
+                self.config.remove(spec)
             adders.append(new_adder)
 
         return adders

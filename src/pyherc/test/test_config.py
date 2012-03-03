@@ -22,9 +22,10 @@
 Module for testing main configuration
 """
 
+#pylint: disable=W0614
 import os.path
 from pyherc.config import Configuration
-from pyDoubles.framework import empty_stub
+from pyDoubles.framework import empty_stub #pylint: disable=F0401, E0611
 from hamcrest import *
 
 class TestMainConfiguration():
