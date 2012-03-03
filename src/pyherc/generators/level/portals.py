@@ -95,6 +95,7 @@ class PortalAdderFactory(object):
         """
         super(PortalAdderFactory, self).__init__()
         self.config = config
+        self.level_generator_factory = None
         self.rng = rng
 
     def create_portal_adders(self, level_type):
@@ -111,9 +112,9 @@ class PortalAdderFactory(object):
         matches = [x for x in self.config
                    if x.level_type == level_type]
 
-        level_generator = None
-
         for spec in matches:
+            level_generator = self.level_generator_factory.get_generator(
+                                                        spec.new_level)
             new_adder = PortalAdder(spec.location_type,
                                     level_generator,
                                     self.rng)

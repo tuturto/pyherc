@@ -29,7 +29,8 @@ class LevelGeneratorFactory:
     """
     Class used to contruct different kinds of level generators
     """
-    def __init__(self, action_factory, configuration, random_generator):
+    def __init__(self, action_factory, portal_adder_factory, configuration,
+                 random_generator):
         """
         Default constructor
 
@@ -43,7 +44,9 @@ class LevelGeneratorFactory:
         self.level_partitioners = configuration.level_partitioners
         self.room_generators = configuration.room_generators
         self.decorators = configuration.decorators
-        self.portal_adders = configuration.portal_adders
+        self.portal_adder_configurations = configuration.portal_adder_configurations
+        self.portal_adder_factory = portal_adder_factory
+        self.portal_adder_factory.level_generator_factory = self
         self.item_adders = configuration.item_adders
         self.creature_adders = configuration.creature_adders
         self.size = configuration.size
@@ -81,15 +84,13 @@ class LevelGeneratorFactory:
                                                 self.creature_adders,
                                                 'creature adder')
 
-        portal_adder = self.get_sub_component(level_type,
-                                              self.portal_adders,
-                                              'portal adder')
+        portal_adders = self.portal_adder_factory.create_portal_adders(level_type)
 
         return LevelGenerator(self.action_factory,
                               partitioner,
                               room,
                               decorator,
-                              [portal_adder],
+                              portal_adders,
                               item_adder,
                               creature_adder,
                               self.random_generator,

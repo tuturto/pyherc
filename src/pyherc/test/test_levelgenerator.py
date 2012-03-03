@@ -89,6 +89,7 @@ class TestLeveltGeneratorFactory:
         self.mock_config.portal_adders = [self.mock_portal_adder]
 
         self.factory = LevelGeneratorFactory(self.mock_action_factory,
+                                             empty_stub(),
                                              self.mock_config,
                                              self.rng)
 
@@ -138,8 +139,9 @@ class TestLevelGeneratorFactoryConfiguration:
         mock_config.portal_adders = [mock_portal_adder]
 
         factory = LevelGeneratorFactory(mock_action_factory,
-                                             mock_config,
-                                             random.Random())
+                                        empty_stub(),
+                                        mock_config,
+                                        random.Random())
 
         generator = factory.get_generator(level_type = 'crypt')
 
@@ -165,8 +167,9 @@ class TestLevelGeneratorFactoryConfiguration:
         exception_was_thrown = False
 
         factory = LevelGeneratorFactory(mock_action_factory,
-                                             mock_config,
-                                             random_generator)
+                                        empty_stub(),
+                                        mock_config,
+                                        random_generator)
 
         try:
             generator = factory.get_generator('crypt')
@@ -194,8 +197,6 @@ class TestFactorySupportForLevelTypes:
         self.item_adder_2 = None
         self.creature_adder_1 = None
         self.creature_adder_2 = None
-        self.portal_adder_1 = None
-        self.portal_adder_2 = None
         mock_config = None
         self.random_generator = None
         self.factory = None
@@ -230,11 +231,6 @@ class TestFactorySupportForLevelTypes:
         self.creature_adder_2 = stub(CreatureAdder)
         self.creature_adder_2.level_types = ['swamp']
 
-        self.portal_adder_1 = stub(PortalAdder)
-        self.portal_adder_1.level_types = ['crypt', 'castle']
-        self.portal_adder_2 = stub(PortalAdder)
-        self.portal_adder_2.level_types = ['swamp']
-
         mock_config = stub(LevelGeneratorFactoryConfig)
         mock_config.level_partitioners = [self.partitioner_1,
                                           self.partitioner_2]
@@ -246,12 +242,12 @@ class TestFactorySupportForLevelTypes:
                                    self.item_adder_2]
         mock_config.creature_adders = [self.creature_adder_1,
                                        self.creature_adder_2]
-        mock_config.portal_adders = [self.portal_adder_1,
-                                     self.portal_adder_2]
+        mock_config.portal_adder_configurations = []
 
         self.random_generator = random.Random()
 
         self.factory = LevelGeneratorFactory(mock_action_factory,
+                                             empty_stub(),
                                              mock_config,
                                              self.random_generator)
 
@@ -299,15 +295,6 @@ class TestFactorySupportForLevelTypes:
 
         assert_that(generator.creature_adder,
                     is_(same_instance(self.creature_adder_1)))
-
-    def test_portal_adder_type(self):
-        """
-        Test that portal adders can be selected by level types
-        """
-        generator = self.factory.get_generator('crypt')
-
-        assert_that(generator.portal_adders,
-                    has_item(self.portal_adder_1))
 
 class TestLevelGenerator:
     """

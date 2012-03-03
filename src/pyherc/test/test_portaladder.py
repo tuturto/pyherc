@@ -27,9 +27,10 @@ from pyherc.data import Level, Portal
 from pyherc.generators.level.portals import PortalAdder, PortalAdderFactory
 from pyherc.generators.level.portals import PortalAdderConfiguration
 from pyherc.generators.level.generator import LevelGenerator
+from pyherc.generators.level.generator import LevelGeneratorFactory
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import * #pylint: disable=W0401
-from pyDoubles.framework import empty_stub, stub #pylint: disable=F0401, E0611
+from pyDoubles.framework import empty_stub, stub, when #pylint: disable=F0401, E0611
 import random
 
 class TestPortalAdder():
@@ -125,6 +126,7 @@ class TestPortalAdderFactory():
 
         factory = PortalAdderFactory(portal_config,
                                      self.rng)
+        factory.level_generator_factory = empty_stub()
 
         portal_adders = factory.create_portal_adders('catacombs')
 
@@ -148,6 +150,7 @@ class TestPortalAdderFactory():
 
         factory = PortalAdderFactory(portal_config,
                                      self.rng)
+        factory.level_generator_factory = empty_stub()
 
         portal_adders = factory.create_portal_adders('catacombs')
 
@@ -171,6 +174,7 @@ class TestPortalAdderFactory():
 
         factory = PortalAdderFactory(portal_config,
                                      self.rng)
+        factory.level_generator_factory = empty_stub()
 
         portal_adders = factory.create_portal_adders('catacombs')
 
@@ -219,6 +223,7 @@ class TestPortalAdderFactory():
 
         factory = PortalAdderFactory(portal_config,
                                      self.rng)
+        factory.level_generator_factory = empty_stub()
 
         portal_adders = factory.create_portal_adders('catacombs')
 
@@ -234,11 +239,17 @@ class TestPortalAdderFactory():
                                                  new_level = 'upper crypt',
                                                  unique = False)]
 
+        level_generator_factory = stub(LevelGeneratorFactory)
+        level_generator = stub(LevelGenerator)
+        when(level_generator_factory.get_generator).then_return(level_generator)
+
         factory = PortalAdderFactory(portal_config,
                                      self.rng)
+        factory.level_generator_factory = level_generator_factory
 
         portal_adders = factory.create_portal_adders('catacombs')
 
         portal_adder = portal_adders[0]
 
-        assert_that(portal_adder.level_generator, is_(not_none()))
+        assert_that(portal_adder.level_generator,
+                    is_(same_instance(level_generator)))

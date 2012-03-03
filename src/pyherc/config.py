@@ -31,6 +31,7 @@ from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory
 from pyherc.generators import ItemGenerator, CreatureGenerator
+from pyherc.generators.level.portals import PortalAdderFactory
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
@@ -158,7 +159,7 @@ class Configuration(object):
         decorators = []
         item_adders = []
         creature_adders = []
-        portal_adders = []
+        portal_adder_configs = []
 
         upper_crypt = self.init_upper_crypt()
         room_generators.extend(upper_crypt.room_generators)
@@ -166,19 +167,24 @@ class Configuration(object):
         decorators.extend(upper_crypt.decorators)
         item_adders.extend(upper_crypt.item_adders)
         creature_adders.extend(upper_crypt.creature_adders)
-        portal_adders.extend(upper_crypt.portal_adders)
+        portal_adder_configs.extend(upper_crypt.portal_adder_configurations)
+
+        portal_adder_factory = PortalAdderFactory(portal_adder_configs,
+                                                  self.rng)
 
         config = LevelGeneratorFactoryConfig(room_generators,
                                              level_partitioners,
                                              decorators,
                                              item_adders,
                                              creature_adders,
-                                             portal_adders,
+                                             portal_adder_configs,
                                              self.level_size)
 
-        self.level_generator_factory = LevelGeneratorFactory(self.action_factory,
-                                                             config,
-                                                             self.rng)
+        self.level_generator_factory = LevelGeneratorFactory(
+                                                    self.action_factory,
+                                                    portal_adder_factory,
+                                                    config,
+                                                    self.rng)
 
         self.logger.info('Level generators initialised')
 
@@ -246,14 +252,14 @@ class Configuration(object):
                                         creature_adder_config,
                                         self.rng)]
 
-        portal_adders = [None]
+        portal_adder_configurations = []
 
         config = LevelGeneratorFactoryConfig(room_generators,
                                              level_partitioners,
                                              decorators,
                                              item_adders,
                                              creature_adders,
-                                             portal_adders,
+                                             portal_adder_configurations,
                                              self.level_size)
 
         return config
