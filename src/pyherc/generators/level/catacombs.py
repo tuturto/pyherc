@@ -209,7 +209,7 @@ class CatacombsLevelGenerator:
 
         # generate next level
         for portal in temp_level.portals:
-            if portal.get_other_end() == None:
+            if portal.other_end == None:
                 if level < 5:
                     new_level = self.generate_level(portal, model, 1,
                                                    level = level + 1)

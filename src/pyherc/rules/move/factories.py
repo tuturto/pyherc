@@ -94,19 +94,9 @@ class WalkFactory(SubActionFactory):
         elif direction == 9:
             portal = newLevel.get_portal_at(location)
             if portal != None:
-                if portal.get_other_end() != None:
-                    newLevel = portal.get_other_end().level
-                    newLocation = portal.get_other_end().location
-                else:
-                    #proxy
-                    if portal.level_generator != None:
-                        portal.generate_level()
-                        newLevel = portal.get_other_end().level
-                        newLocation = portal.get_other_end().location
-                    else:
-                        #escaping perhaps?
-                        newLevel = None
-                        newLocation = None
+                if portal.other_end != None:
+                    newLevel = portal.other_end.level
+                    newLocation = portal.other_end.location
             else:
                 newLevel = parameters.character.level
                 newLocation = parameters.character.location

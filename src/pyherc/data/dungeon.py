@@ -174,8 +174,8 @@ class Level:
         if other_end != None:
             assert(other_end.icon != None or portal.icon != None)
 
-            portal.set_other_end (other_end)
-            other_end.set_other_end(portal)
+            portal.other_end = other_end
+            other_end.other_end = portal
             if portal.icon != None:
                 if other_end.icon == None:
                     if portal.icon == pyherc.data.tiles.PORTAL_STAIRS_DOWN:
@@ -411,8 +411,7 @@ class Portal:
         self.level = None
         self.location = ()
         self.icon = None
-        self.other_end = None
-        self.quest_end = 0
+        self.__other_end = None
         self.level_generator = None
         self.model = None
         self.logger = logging.getLogger('pyherc.data.dungeon.Portal')
@@ -432,23 +431,25 @@ class Portal:
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.dungeon.Portal')
 
-    def get_other_end(self):
+    def __get_other_end(self):
         """
         Returns the other end of the portal
         """
-        if self.other_end == None and self.level_generator != None:
+        if self.__other_end == None and self.level_generator != None:
             self.generate_level()
 
-        return self.other_end
+        return self.__other_end
 
-    def set_other_end(self, portal):
+    def __set_other_end(self, portal):
         """
         Set the other end of the portal
 
         Args:
             portal: portal where this one leads
         """
-        self.other_end = portal
+        self.__other_end = portal
+
+    other_end = property(__get_other_end, __set_other_end)
 
     def generate_level(self):
         """
@@ -457,7 +458,5 @@ class Portal:
         assert self.level_generator != None
         self.logger.debug('generating a new level')
 
-        self.level_generator.generate_level(self,
-                                            self.model,
-                                            monster_list = [])
+        self.level_generator.generate_level(self)
 

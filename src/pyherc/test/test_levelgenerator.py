@@ -339,7 +339,6 @@ class TestLevelGenerator:
         rng = random.Random()
 
         portal = stub(Portal)
-        model = stub(Model)
 
         section1 = stub(Section)
         section2 = stub(Section)
@@ -352,7 +351,7 @@ class TestLevelGenerator:
                                    self.rng,
                                    (60, 40))
 
-        generator.generate_level(portal, model)
+        generator.generate_level(portal)
 
         assert_that_method(partitioner.partition_level).was_called()
         assert_that_method(room_generator.generate_room).was_called().times(2)
@@ -377,7 +376,6 @@ class TestLevelGenerator:
         item_adder = empty_spy()
 
         portal = stub(Portal)
-        model = stub(Model)
 
         generator = LevelGenerator(factory, partitioner, room_generator,
                                    level_decorator, [stair_adder],
@@ -386,6 +384,6 @@ class TestLevelGenerator:
                                    self.rng,
                                    (60, 40))
 
-        new_level = generator.generate_level(portal, model)
+        new_level = generator.generate_level(portal)
 
         assert_that(map_accessibility_in(new_level, WALL_EMPTY), is_(True))

@@ -172,9 +172,12 @@ class LevelGenerator:
         self.__dict__.update(d)
         self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGenerator') #pylint: disable=C0301
 
-    def generate_level(self, portal, model):
+    def generate_level(self, portal):
         """
         Generate level
+
+        Args:
+            portal: Portal to link to this level
         """
         self.logger.debug('creating a new level')
         new_level = Level(self.size)
