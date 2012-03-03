@@ -30,6 +30,7 @@ from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from pyherc.generators.level.decorator import ReplacingDecorator
 from pyherc.generators.level.portals import PortalAdder
+from pyherc.generators.level.portals import PortalAdderConfiguration
 from pyherc.generators.level.creatures import CreatureAdder
 from pyherc.generators.level.items import ItemAdder
 from pyherc.rules import ActionFactory
@@ -356,7 +357,6 @@ class TestLevelGenerator:
         assert_that_method(partitioner.partition_level).was_called()
         assert_that_method(room_generator.generate_room).was_called().times(2)
         assert_that_method(level_decorator.decorate_level).was_called()
-        assert_that_method(stair_adder.add_stairs).was_called()
         assert_that_method(creature_adder.add_creatures).was_called()
         assert_that_method(item_adder.add_items).was_called()
 
@@ -371,7 +371,8 @@ class TestLevelGenerator:
                                              WALL_EMPTY,
                                              ['crypt'])
         level_decorator = empty_spy()
-        stair_adder = PortalAdder(self.rng)
+        stair_adder = PortalAdder('crypt',
+                                  self.rng)
         creature_adder = empty_spy()
         item_adder = empty_spy()
 

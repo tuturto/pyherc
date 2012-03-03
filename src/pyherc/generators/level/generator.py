@@ -188,8 +188,8 @@ class LevelGenerator:
 
         self.decorator.decorate_level(new_level)
 
-        for adder in self.portal_adders:
-            adder.add_stairs(new_level, portal)
+        #for adder in self.portal_adders:
+        #    adder.add_stairs(new_level, portal)
 
         self.creature_adder.add_creatures(new_level)
 
