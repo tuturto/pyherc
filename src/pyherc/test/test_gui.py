@@ -21,7 +21,7 @@
 '''
 Tests for gui components
 '''
-from pyDoubles.framework import stub #pylint: disable=F0401, E0611
+from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
 
 import pyherc.gui.windows
 from pyherc.data import Character
@@ -43,7 +43,9 @@ class TestGameWindow:
         '''
         Test that event history is formatted correctly with less than five items
         '''
-        window = pyherc.gui.windows.GameWindow(None, None, '')
+        window = pyherc.gui.windows.GameWindow(empty_stub(),
+                                               empty_stub(),
+                                               empty_stub())
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
@@ -55,7 +57,9 @@ class TestGameWindow:
         '''
         Test that event history is formatted correctly with five items
         '''
-        window = pyherc.gui.windows.GameWindow(None, None, '')
+        window = pyherc.gui.windows.GameWindow(empty_stub(),
+                                               empty_stub(),
+                                               empty_stub())
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
@@ -73,7 +77,9 @@ class TestGameWindow:
         '''
         Test that event history is formatted correctly with more than five items
         '''
-        window = pyherc.gui.windows.GameWindow(None, None, '')
+        window = pyherc.gui.windows.GameWindow(empty_stub(),
+                                               empty_stub(),
+                                               empty_stub())
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
@@ -107,9 +113,9 @@ class TestInventoryDialog(IntegrationTest):
         mock_surface_manager = stub(SurfaceManager)
         mock_character = stub(Character)
         inventory = pyherc.gui.dialogs.Inventory(None,
-                                                        None,
-                                                        mock_surface_manager,
-                                                        mock_character)
+                                                 None,
+                                                 mock_surface_manager,
+                                                 mock_character)
 
         item1 = self.item_generator.generate_item({'name': 'dagger'})
         item2 = self.item_generator.generate_item({'name': 'apple'})

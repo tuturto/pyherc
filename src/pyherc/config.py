@@ -93,7 +93,7 @@ class Configuration(object):
         self.caption = 'Herculeum'
 
         self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
-        self.surface_manager.loadResources(self.base_path)
+        self.surface_manager.load_resources(self.base_path)
 
         self.level_size = (80, 30)
 
@@ -220,16 +220,16 @@ class Configuration(object):
         decorators = [AggregateDecorator(aggregate_decorator_config)]
 
         item_adder_config = ItemAdderConfiguration(['upper crypt'])
-        item_adder_config.add_item(min_amount = 1,
-                                   max_amount = 3,
+        item_adder_config.add_item(min_amount = 20,
+                                   max_amount = 30,
                                    type = 'weapon',
                                    location = 'room')
-        item_adder_config.add_item(min_amount = 0,
-                                   max_amount = 5,
+        item_adder_config.add_item(min_amount = 20,
+                                   max_amount = 30,
                                    type = 'potion',
                                    location = 'room')
-        item_adder_config.add_item(min_amount = 0,
-                                   max_amount = 5,
+        item_adder_config.add_item(min_amount = 20,
+                                   max_amount = 30,
                                    type = 'food',
                                    location = 'room')
         item_adders = [ItemAdder(self.item_generator,
@@ -247,8 +247,8 @@ class Configuration(object):
         #                                   max_amount = 6,
         #                                   name = 'skeleton',
         #                                   location = 'room')
-        creature_adder_config.add_creature(min_amount = 2,
-                                           max_amount = 6,
+        creature_adder_config.add_creature(min_amount = 20,
+                                           max_amount = 30,
                                            name = 'rat',
                                            location = 'room')
 

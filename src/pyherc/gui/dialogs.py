@@ -40,13 +40,15 @@ class Inventory:
     Dialog for selecting one or more items from a list
     """
 
-    def __init__(self, application, screen, surface_manager = None, character = None):
+    def __init__(self, application, screen, surface_manager, character):
         """
         Initalises this component
-        @param application: link to application showing the display
-        @param screen: surface for drawing
-        @param surface_manager: object for tile graphics management
-        @param character: character viewing the inventory
+
+        Args:
+            application: link to application showing the display
+            screen: surface for drawing
+            surface_manager: object for tile graphics management
+            character: character viewing the inventory
         """
 
         self.logger = logging.getLogger('pyherc.gui.dialogs.Inventory')
@@ -63,15 +65,7 @@ class Inventory:
                                 K_s:18, K_t:19, K_u:20, K_v:21, K_w:22, K_x:23, K_y:24, K_z:25}
 
         self.surface_manager = surface_manager
-        if self.surface_manager == None:
-            self.logger.warn('Surface manager not specified, defaulting to the system one.')
-            self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
-            self.surface_manager.loadResources()
-
         self.character = character
-        if self.character == None:
-            self.logger.warn('No character specified, defaulting to player')
-            self.character = self.application.world.player
 
         self.background = self.surface_manager.getImage(pyherc.gui.images.image_inventory_menu)
 
@@ -201,7 +195,7 @@ class EndScreen:
     Dialog displayed at the end of the game
     """
 
-    def __init__(self, application, screen, surface_manager = None):
+    def __init__(self, application, screen, surface_manager):
         """
         Default constructor
 
@@ -216,10 +210,6 @@ class EndScreen:
         self.application = application
         self.screen = screen
         self.surface_manager = surface_manager
-        if self.surface_manager == None:
-            self.logger.warn('Surface manager not specified, defaulting to the system one.')
-            self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
-            self.surface_manager.loadResources()
 
     def show(self, ending):
         """

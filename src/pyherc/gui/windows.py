@@ -73,21 +73,17 @@ class StartNewGameWindow:
     """
     Window that is displayed when player starts a new game
     """
-    def __init__(self,  application, screen, surface_manager = None):
-        self.running = 1
-        self.application = application
-        self.screen = screen
+    def __init__(self,  application, screen, surface_manager):
         self.logger = logging.getLogger('pyherc.gui.windows.StartNewGameWindow')
         self.logger.debug('initialising display')
 
+        self.running = 1
+        self.application = application
+        self.screen = screen
         self.surface_manager = surface_manager
-        if self.surface_manager == None:
-            self.logger.warn('Surface manager not specified, defaulting to the system one.')
-            self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
-            self.surface_manager.loadResources()
+        self.character = None
 
         self.logger.debug('display initialised')
-        self.character = None
 
     def main_loop(self):
         """
@@ -119,25 +115,21 @@ class GameWindow:
     """
     Window that displays the playing world
     """
-    def __init__(self,  application, screen, surface_manager = None):
+    def __init__(self,  application, screen, surface_manager):
         self.logger = logging.getLogger('pyherc.gui.windows.GameWindow')
         self.logger.debug('initialising display')
+
         self.application = application
         self.screen = screen
         self.fullUpdate = 1
         self.surface_manager = surface_manager
-        if self.surface_manager == None:
-            self.logger.warn('Surface manager not specified, defaulting to the system one.')
-            self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
-            self.surface_manager.loadResources()
-
-        if screen != None:
-            self.background = self.surface_manager.getImage(images.image_play_area)
-            self.console = self.surface_manager.getImage(images.image_console)
-        self.logger.debug('display initialised')
+        self.background = self.surface_manager.getImage(images.image_play_area)
+        self.console = self.surface_manager.getImage(images.image_console)
         self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
                                     K_KP4:7, K_KP7:8, K_KP5:9}
         self.eventHistory = []
+
+        self.logger.debug('display initialised')
 
     def __handlePlayerInput(self):
         """
@@ -178,40 +170,58 @@ class GameWindow:
                         #pick up items
                         items = player.level.get_items_at(player.location)
                         if len(items) > 1:
-                            dialog = dialogs.Inventory(self.application, self.screen, self.surface_manager)
+                            dialog = dialogs.Inventory(self.application,
+                                                       self.screen,
+                                                       self.surface_manager,
+                                                       player)
                             items = dialog.show(items)
                         for item in items:
                             pyherc.rules.items.pick_up(model, player, item)
                         player.level.full_update_needed = True
                     elif event.key == K_i:
                         #display inventory
-                        dialog = dialogs.Inventory(self.application, self.screen, self.surface_manager)
+                        dialog = dialogs.Inventory(self.application,
+                                                   self.screen,
+                                                   self.surface_manager,
+                                                   player)
                         dialog.show(player.inventory, 0)
                         player.level.full_update_needed = True
                     elif event.key == K_d:
                         #drop items
-                        dialog = dialogs.Inventory(self.application, self.screen, self.surface_manager)
+                        dialog = dialogs.Inventory(self.application,
+                                                   self.screen,
+                                                   self.surface_manager,
+                                                   player)
                         dropItems = dialog.show(player.inventory)
                         for item in dropItems:
                             pyherc.rules.items.drop(model, player, item)
                         player.level.full_update_needed = True
                     elif event.key == K_w:
                         #wield weapons
-                        dialog = dialogs.Inventory(self.application, self.screen, self.surface_manager)
+                        dialog = dialogs.Inventory(self.application,
+                                                   self.screen,
+                                                   self.surface_manager,
+                                                   player)
                         wieldItems = dialog.show(player.inventory, 2)
                         for item in wieldItems:
                             pyherc.rules.items.wield(model, player, item, True)
                         player.level.full_update_needed = True
                     elif event.key == K_r:
                         #unwield weapons
-                        dialog = dialogs.Inventory(self.application, self.screen, self.surface_manager)
+                        dialog = dialogs.Inventory(self.application,
+                                                   self.screen,
+                                                   self.surface_manager,
+                                                   player)
                         removable = dialog.show(player.weapons)
                         for item in removable:
                             pyherc.rules.items.unwield(model, player, item)
                         player.level.full_update_needed = True
                     elif event.key == K_q:
                         #quaff potion
-                        dialog = dialogs.Inventory(self.application, self.screen, self.surface_manager)
+                        dialog = dialogs.Inventory(self.application,
+                                                   self.screen,
+                                                   self.surface_manager,
+                                                   player)
                         potion = dialog.show(player.inventory, 1)
                         if len(potion) == 1:
                             pyherc.rules.items.drink_potion(model, player, potion[0])
