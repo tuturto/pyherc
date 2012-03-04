@@ -23,6 +23,7 @@ Module for adding portals
 """
 
 from pyherc.data.dungeon import Portal
+import logging
 
 class PortalAdderConfiguration(object):
     """
@@ -94,9 +95,12 @@ class PortalAdderFactory(object):
             rng: Random number generator
         """
         super(PortalAdderFactory, self).__init__()
+        self.logger = logging.getLogger('pyherc.generators.level.portals.PortalAdderFactory')
+        self.logger.debug('initialising factory')
         self.config = config
         self.level_generator_factory = None
         self.rng = rng
+        self.logger.debug('factory initialised')
 
     def create_portal_adders(self, level_type):
         """
@@ -108,10 +112,13 @@ class PortalAdderFactory(object):
         Returns:
             list of generated portal adders
         """
+        self.logger.debug('creating portal adders for type {0}'.
+                          format(level_type))
         adders = []
         matches = [x for x in self.config
                    if x.level_type == level_type]
 
+        self.logger.debug('{0} matches found'.format(len(matches)))
         for spec in matches:
             level_generator = self.level_generator_factory.get_generator(
                                                         spec.new_level)
@@ -122,6 +129,7 @@ class PortalAdderFactory(object):
                 self.config.remove(spec)
             adders.append(new_adder)
 
+        self.logger.debug('{0} adders initialised'.format(len(adders)))
         return adders
 
 class PortalAdder(object):
@@ -138,20 +146,28 @@ class PortalAdder(object):
             rng: Randon number generator
         """
         super(PortalAdder, self).__init__()
+        self.logger = logging.getLogger('pyherc.generators.level.portals.PortalAdder')
+        self.logger.debug('initialising')
         self.location_type = location_type
         self.level_generator = level_generator
         self.rng = rng
+        self.logger.debug('initialisation done')
 
-    def add_stairs(self, level):
+    def add_portal(self, level):
         """
         Add given stairs to the level
 
         Args:
             level: level to modify
         """
+        self.logger.debug('adding portal for location type {0}'.
+                          format(self.location_type))
         locations = level.get_locations_by_type(self.location_type)
-        location = self.rng.choice(locations)
 
-        portal = Portal(level_generator = self.level_generator)
+        if len(locations) > 0:
+            location = self.rng.choice(locations)
+            portal = Portal(level_generator = self.level_generator)
+            level.add_portal(portal, location)
+        else:
+            self.logger.warn('no matching location found, skipping')
 
-        level.add_portal(portal, location)

@@ -71,6 +71,13 @@ class TestMainConfiguration():
         assert_that(config.model, is_(not_none()))
         assert_that(config.rng, is_(not_none()))
 
+    def test_upper_catacombs_generator(self):
+        """
+        Test that upper catacombs level generator can be retrieved
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('upper catacombs')
+
     def test_upper_crypt_generator(self):
         """
         Test that upper crypt level generator can be retrieved

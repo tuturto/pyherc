@@ -23,7 +23,7 @@ Classs needed for generating levels
 """
 
 import logging
-from pyherc.data import Level
+from pyherc.data import Level, Portal
 
 class LevelGeneratorFactory:
     """
@@ -193,8 +193,21 @@ class LevelGenerator:
 
         self.decorator.decorate_level(new_level)
 
-        #for adder in self.portal_adders:
-        #    adder.add_stairs(new_level, portal)
+        for adder in self.portal_adders:
+            adder.add_portal(new_level)
+
+        # all this needs to be cleaned up
+        if portal != None:
+            self.logger.debug('linking portal to new level')
+            rooms = new_level.get_locations_by_type('room')
+            if len(rooms) > 0:
+                new_portal = Portal()
+                new_portal.icon = 201
+                location = self.random_generator.choice(rooms)
+                new_level.add_portal(new_portal, location, portal)
+            else:
+                self.logger.warn('no location found, skipping')
+
 
         self.creature_adder.add_creatures(new_level)
 

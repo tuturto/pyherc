@@ -65,7 +65,7 @@ class TestPortalAdder():
                                    empty_stub(),
                                    self.rng)
 
-        portal_adder.add_stairs(level)
+        portal_adder.add_portal(level)
 
         portals = level.portals
         assert_that(portals, has_length(1))
@@ -90,7 +90,7 @@ class TestPortalAdder():
                                    level_generator,
                                    self.rng)
 
-        portal_adder.add_stairs(level)
+        portal_adder.add_portal(level)
 
         portals = level.portals
         portal = level.portals[0]

@@ -100,7 +100,7 @@ class StartNewGameWindow:
         self.character = pyherc.rules.character.create_character('human', 'fighter', self.application.action_factory)
         self.application.world.player = self.character
 
-        level_generator = self.application.level_generator_factory.get_generator('upper crypt')
+        level_generator = self.application.level_generator_factory.get_generator('upper catacombs')
 
         generator = pyherc.generators.dungeon.DungeonGenerator(
                                 self.application.creature_generator,
