@@ -59,7 +59,7 @@ class StartMenu(pgu.gui.Container):
         Set layout of this screen
         """
         bg = pgu.gui.Image(
-                self.surface_manager.getImage(
+                self.surface_manager.get_image(
                         images.image_start_menu))
         self.add(bg, 0, 0)
 

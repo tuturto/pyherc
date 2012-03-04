@@ -67,7 +67,7 @@ class Inventory:
         self.surface_manager = surface_manager
         self.character = character
 
-        self.background = self.surface_manager.getImage(pyherc.gui.images.image_inventory_menu)
+        self.background = self.surface_manager.get_image(pyherc.gui.images.image_inventory_menu)
 
     def show(self, list, multiple_selections = -1):
         """
@@ -227,7 +227,7 @@ class EndScreen:
         player = model.player
 
         if ending['reason'] == 'escaped':
-            self.background = self.surface_manager.getImage(pyherc.gui.images.image_end_marble_slate)
+            self.background = self.surface_manager.get_image(pyherc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' escaped from ruins', True, colour, (0, 0, 0))
             text_rect = text.get_rect()
@@ -235,7 +235,7 @@ class EndScreen:
             self.screen.blit(text, text_rect)
 
         elif ending['reason'] == 'victory':
-            self.background = self.surface_manager.getImage(pyherc.gui.images.image_end_marble_slate)
+            self.background = self.surface_manager.get_image(pyherc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' conquered the ruins', True, colour, (0, 0, 0))
             text_rect = text.get_rect()
@@ -243,7 +243,7 @@ class EndScreen:
             self.screen.blit(text, text_rect)
 
         elif ending['reason'] == 'dead':
-            self.background = self.surface_manager.getImage(pyherc.gui.images.image_end_tombstone)
+            self.background = self.surface_manager.get_image(pyherc.gui.images.image_end_tombstone)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' died in ruins', True, colour, (0, 0, 0))
             text_rect = text.get_rect()
@@ -255,7 +255,7 @@ class EndScreen:
             self.screen.blit(text, text_rect)
         else:
             #quit
-            self.background = self.surface_manager.getImage(
+            self.background = self.surface_manager.get_image(
                                                                  pyherc.gui.images.image_end_marble_slate)
             self.screen.blit(self.background, (0, 0))
             text = font.render(player.name + ' quit', True, colour, (0, 0, 0))

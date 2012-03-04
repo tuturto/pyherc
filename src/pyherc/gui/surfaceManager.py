@@ -64,8 +64,6 @@ class SurfaceManager:
         """
         self.logger.info('loading resources')
 
-        self.load_resources_old(base_path)
-
         surface = self.load_surface(base_path, 'weapons.png')
         tiles = self.split_surface(surface, (32, 32))
 
@@ -157,6 +155,31 @@ class SurfaceManager:
         self.icons[pyherc.data.tiles.ITEM_POTION_59] = tiles[58]
         self.icons[pyherc.data.tiles.ITEM_POTION_60] = tiles[59]
 
+        surface = self.load_surface(base_path, 'dungeon.png')
+        tiles = self.split_surface(surface, (32, 32))
+
+        self.icons[pyherc.data.tiles.FLOOR_ROCK] = tiles[9]
+        self.icons[pyherc.data.tiles.FLOOR_BRICK] = tiles[19]
+        self.icons[pyherc.data.tiles.FLOOR_EMPTY] = tiles[263]
+
+        self.icons[pyherc.data.tiles.WALL_ROCK] = tiles[120]
+        self.icons[pyherc.data.tiles.WALL_ROCK_DECO_1] = tiles[40]
+        self.icons[pyherc.data.tiles.WALL_ROCK_DECO_2] = tiles[46]
+
+        self.icons[pyherc.data.tiles.WALL_GROUND] = tiles[225]
+
+        self.icons[pyherc.data.tiles.PORTAL_STAIRS_DOWN] = tiles[260]
+        self.icons[pyherc.data.tiles.PORTAL_STAIRS_UP] = tiles[261]
+
+        surface = self.load_surface(base_path, 'items.png')
+        tiles = self.split_surface(surface, (32, 32))
+        self.icons[pyherc.data.tiles.ITEM_APPLE] = tiles[0]
+        self.icons[pyherc.data.tiles.ITEM_CRYSTAL_SKULL] = tiles[1]
+
+        surface = self.load_surface(base_path, 'characters.png')
+        tiles = self.split_surface(surface, (32, 32))
+        self.icons[pyherc.data.tiles.HUMAN_FIGHTER] = tiles[3]
+
         surface = self.load_surface(base_path, 'main_menu.png')
         self.images[images.image_start_menu] = surface
         surface = self.load_surface(base_path, 'play_area.png')
@@ -169,6 +192,8 @@ class SurfaceManager:
         self.images[images.image_end_tombstone] = surface
         surface = self.load_surface(base_path, 'image_console.png')
         self.images[images.image_console] = surface
+
+        self.logger.info('resources loaded')
 
     def split_surface(self, surface, tile_size):
         """
@@ -198,46 +223,7 @@ class SurfaceManager:
 
         return tiles
 
-    def load_resources_old(self, base_path):
-        """
-        Load graphics from files
-
-        Args:
-            base_path: Path to directory where resources are location
-        """
-        surface = self.load_surface(base_path, 'character_human_fighter.png')
-        self.icons[pyherc.data.tiles.HUMAN_FIGHTER] = surface
-
-        surface = self.load_surface(base_path, 'floor_stone.png')
-        self.icons[pyherc.data.tiles.FLOOR_ROCK] = surface
-        surface = self.load_surface(base_path, 'floor_stone.png')
-        self.icons[pyherc.data.tiles.FLOOR_BRICK] = surface
-        surface = self.load_surface(base_path, 'empty.png')
-        self.icons[pyherc.data.tiles.FLOOR_EMPTY] = surface
-
-        surface = self.load_surface(base_path, 'wall_stone.png')
-        self.icons[pyherc.data.tiles.WALL_ROCK] = surface
-        surface = self.load_surface(base_path, 'wall_stone_deco1.png')
-        self.icons[pyherc.data.tiles.WALL_ROCK_DECO_1] = surface
-        surface = self.load_surface(base_path, 'wall_stone_deco2.png')
-        self.icons[pyherc.data.tiles.WALL_ROCK_DECO_2] = surface
-
-        surface = self.load_surface(base_path, 'wall_ground.png')
-        self.icons[pyherc.data.tiles.WALL_GROUND] = surface
-
-        surface = self.load_surface(base_path, 'portal_stairs_down.png')
-        self.icons[pyherc.data.tiles.PORTAL_STAIRS_DOWN] = surface
-        surface = self.load_surface(base_path, 'portal_stairs_up.png')
-        self.icons[pyherc.data.tiles.PORTAL_STAIRS_UP] = surface
-
-        surface = self.load_surface(base_path, 'item_apple.png')
-        self.icons[pyherc.data.tiles.ITEM_APPLE] = surface
-        surface = self.load_surface(base_path, 'item_crystal_skull.png')
-        self.icons[pyherc.data.tiles.ITEM_CRYSTAL_SKULL] = surface
-
-        self.logger.info('resources loaded')
-
-    def getImage(self, id):
+    def get_image(self, id):
         """
         Get image with ID
 
@@ -249,7 +235,7 @@ class SurfaceManager:
         """
         return self.images[id]
 
-    def getIcon(self, id):
+    def get_icon(self, id):
         """
         Get icon with ID
 

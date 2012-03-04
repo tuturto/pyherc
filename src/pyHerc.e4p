@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-03-04, 07:02:04 -->
+<!-- Saved: 2012-03-04, 14:59:21 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -99,6 +99,7 @@
     <Source>pyherc/test/test_itemadder.py</Source>
     <Source>pyherc/config.py</Source>
     <Source>pyherc/test/integration/__init__.py</Source>
+    <Source>pyherc/test/integration/test_config.py</Source>
   </Sources>
   <Forms>
   </Forms>

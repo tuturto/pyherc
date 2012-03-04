@@ -123,8 +123,8 @@ class GameWindow:
         self.screen = screen
         self.fullUpdate = 1
         self.surface_manager = surface_manager
-        self.background = self.surface_manager.getImage(images.image_play_area)
-        self.console = self.surface_manager.getImage(images.image_console)
+        self.background = self.surface_manager.get_image(images.image_play_area)
+        self.console = self.surface_manager.get_image(images.image_console)
         self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
                                     K_KP4:7, K_KP7:8, K_KP5:9}
         self.eventHistory = []
@@ -327,17 +327,17 @@ class GameWindow:
             for x in range(player.location[0] - 12, player.location[0] + 13):
                 #draw floor and walls
                 if x >= 0 and y >= 0 and x <= len(level.floor)-1 and y <= len(level.floor[x])-1:
-                    tile = self.surface_manager.getIcon(level.floor[x][y])
+                    tile = self.surface_manager.get_icon(level.floor[x][y])
                     self.screen.blit(tile, (sx * 32, sy * 32 - 8))
                     if not level.walls[x][y] == pyherc.data.tiles.WALL_EMPTY:
-                        tile = self.surface_manager.getIcon(level.walls[x][y])
+                        tile = self.surface_manager.get_icon(level.walls[x][y])
                         self.screen.blit(tile, (sx * 32, sy * 32 - 8))
                     if light_matrix[x][y] == False:
-                        tile = self.surface_manager.getIcon(pyherc.data.tiles.FLOOR_EMPTY)
+                        tile = self.surface_manager.get_icon(pyherc.data.tiles.FLOOR_EMPTY)
                         self.screen.blit(tile, (sx * 32, sy * 32 - 8))
                 else:
                     #draw empty
-                    tile = self.surface_manager.getIcon(pyherc.data.tiles.FLOOR_EMPTY)
+                    tile = self.surface_manager.get_icon(pyherc.data.tiles.FLOOR_EMPTY)
                     self.screen.blit(tile, (sx * 32, sy * 32 - 8))
                 sx = sx + 1
             sy = sy + 1
@@ -349,7 +349,7 @@ class GameWindow:
             y = item.location[1] - player.location[1] + 9
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
                 if light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
-                    tile = self.surface_manager.getIcon(item.icon)
+                    tile = self.surface_manager.get_icon(item.icon)
                     self.screen.blit(tile, (x * 32, y *32 - 8))
 
         #draw items
@@ -358,7 +358,7 @@ class GameWindow:
             y = item.location[1] - player.location[1] + 9
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
                 if light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
-                    tile = self.surface_manager.getIcon(item.icon)
+                    tile = self.surface_manager.get_icon(item.icon)
                     self.screen.blit(tile, (x * 32, y *32 - 8))
 
         #draw creatures
@@ -367,7 +367,7 @@ class GameWindow:
             y = item.location[1] - player.location[1] + 9
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
                 if light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
-                    tile = self.surface_manager.getIcon(item.icon)
+                    tile = self.surface_manager.get_icon(item.icon)
                     self.screen.blit(tile, (x * 32, y *32 - 8))
 
         #draw overlay event history
@@ -389,7 +389,7 @@ class GameWindow:
         textRect.topleft = (5, 85)
         self.screen.blit(text, textRect)
 
-        tile = self.surface_manager.getIcon(player.icon)
+        tile = self.surface_manager.get_icon(player.icon)
         self.screen.blit(tile, (384, 280))
         pygame.display.update()
 
