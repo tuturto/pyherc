@@ -54,9 +54,6 @@ class CreatureGenerator:
         Args:
             parameters: hash table containing parameters
         """
-        self.logger.debug('generating a creature')
-        self.logger.debug(parameters)
-
         new_creature = None
         if not parameters == None:
             if 'name' in parameters.keys():
@@ -65,12 +62,6 @@ class CreatureGenerator:
         else:
             #generate completely random creature
             pass
-
-        if new_creature == None:
-            self.logger.warn('no creature generated')
-        else:
-            self.logger.debug('new creature generated: '
-                              + str(new_creature))
 
         return new_creature
 

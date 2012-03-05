@@ -48,11 +48,8 @@ class StartMenu(pgu.gui.Container):
         self.screen = screen
         self.surface_manager = surface_manager
         self.logger = logging.getLogger('pyherc.gui.windows.StartMenu')
-        self.logger.debug('initialising start menu')
 
         self.set_layout()
-
-        self.logger.debug('start menu initialised')
 
     def set_layout(self):
         """

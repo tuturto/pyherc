@@ -40,7 +40,6 @@ class AttackFactory(SubActionFactory):
         Constructor for this factory
         '''
         self.logger = logging.getLogger('pyherc.rules.attack.factories.AttackFactory')
-        self.logger.debug('initialising AttackFactory')
         self.action_type = 'attack'
 
         if isinstance(factories, types.ListType):
@@ -48,8 +47,6 @@ class AttackFactory(SubActionFactory):
         else:
             self.factories = []
             self.factories.append(factories)
-
-        self.logger.debug('AttackFactory initialised')
 
 
 class UnarmedCombatFactory():
@@ -62,9 +59,7 @@ class UnarmedCombatFactory():
         Constructor for this factory
         '''
         self.logger = logging.getLogger('pyherc.rules.attack.factories.UnarmedCombatFactory')
-        self.logger.debug('initialising UnarmedCombatFactory')
         self.attack_type = 'unarmed'
-        self.logger.debug('UnarmedCombatFactory initialised')
 
     def __getstate__(self):
         '''
@@ -97,8 +92,6 @@ class UnarmedCombatFactory():
         Create a attack action
         @param parameters: Parameters used to control attack creation
         '''
-        self.logger.debug('Creating an unarmed attack')
-
         attacker = parameters.attacker
         target = parameters.target
 
@@ -122,9 +115,7 @@ class MeleeCombatFactory():
         Constructor for this factory
         '''
         self.logger = logging.getLogger('pyherc.rules.attack.factories.MeleeCombatFactory')
-        self.logger.debug('initialising MeleeCombatFactory')
         self.attack_type = 'melee'
-        self.logger.debug('MeleeCombatFactory initialised')
 
     def __getstate__(self):
         '''
@@ -157,8 +148,6 @@ class MeleeCombatFactory():
         Create a attack action
         @param parameters: Parameters used to control attack creation
         '''
-        self.logger.debug('Creating a melee attack')
-
         attacker = parameters.attacker
         target = parameters.target
         weapon = attacker.weapons[0]

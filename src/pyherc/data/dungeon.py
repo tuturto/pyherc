@@ -30,15 +30,20 @@ Classes:
 import random
 import logging
 import pyherc.data.tiles
+from pyherc.aspects import Logged
 
-class Level:
+class Level(object):
     """
     Represents a level
     """
+    __logger_name__ = 'pyherc.data.dungeon.Level'
+
+    @Logged(__logger_name__)
     def __init__(self, size = (0, 0), floor_type = None, wall_type = None):
         """
         Initialises a level of certain size and fill floor and walls with given types
         """
+        super(Level, self).__init__()
         self.logger = logging.getLogger('pyherc.data.dungeon.Level')
 
         self.floor = []
@@ -121,6 +126,7 @@ class Level:
 
         return self.walls[loc_x][loc_y]
 
+    @Logged(__logger_name__)
     def add_item(self, item, location):
         """
         Add an item to this level
@@ -132,8 +138,6 @@ class Level:
         assert(not item == None)
         assert(not location == None)
 
-        self.logger.debug('adding an item {0} to location {1}'
-                          .format(item, location))
         self.items.append(item)
         item.location = location
         item.level = self
@@ -152,6 +156,7 @@ class Level:
                 items.append(item)
         return items
 
+    @Logged(__logger_name__)
     def add_portal(self, portal, location, other_end = None):
         """
         Adds precreated portal on level at given location
@@ -165,8 +170,6 @@ class Level:
         assert(portal != None)
         assert(location != None)
 
-        self.logger.debug('adding a portal to location: ' + location.__str__())
-
         portal.level = self
         portal.location = location
         self.portals.append(portal)
@@ -176,6 +179,7 @@ class Level:
 
             portal.other_end = other_end
             other_end.other_end = portal
+
             if portal.icon != None:
                 if other_end.icon == None:
                     if portal.icon == pyherc.data.tiles.PORTAL_STAIRS_DOWN:
@@ -201,6 +205,7 @@ class Level:
 
         return None
 
+    @Logged(__logger_name__)
     def add_creature(self, creature, location = None):
         """
         Add a creature to level
@@ -211,17 +216,12 @@ class Level:
         """
         assert(creature != None)
 
-        if location == None:
-            self.logger.debug('adding ' + str(creature))
-        else:
-            self.logger.debug('adding ' + str(creature)
-                              + ' to location ' + str(location))
-
         self.creatures.append(creature)
         creature.level = self
         if location != None:
             creature.location = location
 
+    @Logged(__logger_name__)
     def remove_creature(self, creature):
         """
         Remove creature from level
@@ -231,7 +231,6 @@ class Level:
         """
         assert(creature != None)
         assert(creature in self.creatures)
-        self.logger.debug('removing a creature: ' + str(creature))
 
         self.creatures.remove(creature)
         creature.level = None
@@ -254,6 +253,7 @@ class Level:
 
         return None
 
+    @Logged(__logger_name__)
     def find_free_space(self):
         """
         Finds free space where stuff can be placed
@@ -294,6 +294,7 @@ class Level:
         else:
             return True
 
+    @Logged(__logger_name__)
     def get_size(self):
         """
         Gets size of level
@@ -306,6 +307,7 @@ class Level:
 
         return (x_size, y_size)
 
+    @Logged(__logger_name__)
     def set_location_type(self, location, location_type):
         """
         Set type of location
@@ -316,6 +318,7 @@ class Level:
         """
         self.__location_type[location[0]][location[1]] = location_type
 
+    @Logged(__logger_name__)
     def get_location_type(self, location):
         """
         Get type of location
@@ -328,6 +331,7 @@ class Level:
         """
         return self.__location_type[location[0]][location[1]]
 
+    @Logged(__logger_name__)
     def get_locations_by_type(self, location_type):
         """
         Get locations marked as rooms
@@ -375,12 +379,15 @@ class Level:
                     level_string = level_string + " "
         return level_string
 
-class Dungeon:
+class Dungeon(object):
     """
     Represents the dungeon
     """
+    __logger_name__ = 'pyherc.data.dungeon.Dungeon'
 
+    @Logged(__logger_name__)
     def __init__(self):
+        super(Dungeon, self).__init__()
         self.levels = None
         self.logger = logging.getLogger('pyherc.data.dungeon.Dungeon')
 
@@ -399,21 +406,25 @@ class Dungeon:
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.dungeon.Dungeon')
 
-class Portal:
+class Portal(object):
     """
     Portal linking two levels together
     """
+    __logger_name__ = 'pyherc.data.dungeon.Portal'
 
-    def __init__(self, level_generator = None):
+    @Logged(__logger_name__)
+    def __init__(self, icons, level_generator):
         """
         Default constructor
 
         Args:
+            icons: (my_icon, icon for other end)
             level_generator: LevelGenerator for proxy portals
         """
+        super(Portal, self).__init__()
         self.level = None
         self.location = ()
-        self.icon = None
+        self.__icons = icons
         self.__other_end = None
         self.level_generator = level_generator
         self.model = None
@@ -434,15 +445,17 @@ class Portal:
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.dungeon.Portal')
 
+    @Logged(__logger_name__)
     def __get_other_end(self):
         """
         Returns the other end of the portal
         """
         if self.__other_end == None and self.level_generator != None:
-            self.generate_level()
+            self.level_generator.generate_level(self)
 
         return self.__other_end
 
+    @Logged(__logger_name__)
     def __set_other_end(self, portal):
         """
         Set the other end of the portal
@@ -452,13 +465,18 @@ class Portal:
         """
         self.__other_end = portal
 
-    def generate_level(self):
+    def __get_icon(self):
         """
-        Generates level if this is a proxy portal
+        Get icon to display this portal
         """
-        assert self.level_generator != None
-        self.logger.debug('generating a new level')
+        return self.__icons[0]
 
-        self.level_generator.generate_level(self)
+    def __get_other_end_icon(self):
+        """
+        Get icon used for other end of this portal
+        """
+        return self.__icons[1]
 
     other_end = property(__get_other_end, __set_other_end)
+    icon = property(__get_icon)
+    other_end_icon = property(__get_other_end_icon)

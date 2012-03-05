@@ -101,30 +101,30 @@ class Tables:
         """
         Read items from supplied xml-document
         """
-        self.logger.debug('reading item config from xml')
+        self.logger.info('reading item config from xml')
         parser = sax.make_parser()
         handler = ItemHandler()
         parser.setContentHandler(handler)
         file = StringIO.StringIO(document)
         parser.parse(file)
         self.items = handler.items
-        self.logger.debug('item config read from xml')
-        self.logger.debug('{0} items found'.
+        self.logger.info('item config read from xml')
+        self.logger.info('{0} items found'.
                           format(len(self.items)))
 
     def read_creatures_from_xml(self, document):
         """
         Read creatures from supplied xml-document
         """
-        self.logger.debug('reading creature config from xml')
+        self.logger.info('reading creature config from xml')
         parser = sax.make_parser()
         handler = CreatureHandler()
         parser.setContentHandler(handler)
         file = StringIO.StringIO(document)
         parser.parse(file)
         self.creatures = handler.creatures
-        self.logger.debug('creature config read from xml')
-        self.logger.debug('{0} creatures found'
+        self.logger.info('creature config read from xml')
+        self.logger.info('{0} creatures found'
                           .format(len(self.creatures.keys())))
 
     def load_tables(self, base_path = None, itemConfig = None, creatureConfig = None):
@@ -139,8 +139,6 @@ class Tables:
 
         if self.__initialised:
             return
-
-        self.logger.debug('loading tables')
 
         if itemConfig != None:
             #use passed config
@@ -234,19 +232,16 @@ class Tables:
         Note:
             different types of potions may be assigned same appearance
         """
-        self.logger.debug('randomizing potion appearance')
         potionEntries = self.items_by_tag['potion']
         for entry in potionEntries:
             appearance = random.choice(self.potion_appearances)
             self.items[entry[0]]['appearance'] = appearance[0]
             self.items[entry[0]]['icon'] = [appearance[1]]
-        self.logger.debug('potion appearance randomized')
 
     def construct_lookup_tables(self):
         """
         Construct lookup tables for different kinds of items
         """
-        self.logger.debug('constructing look up tables')
         self.items_by_tag = {}
         self.tag_score = {}
 
@@ -263,8 +258,6 @@ class Tables:
                     self.tag_score[type] = self.items[itemKey]['rarity']
                     upperBound = self.tag_score[type]
                     self.items_by_tag[type].append((itemKey, lowerBound, upperBound))
-
-        self.logger.debug('look up tables constructed')
 
 class CreatureHandler(sax.ContentHandler):
     """

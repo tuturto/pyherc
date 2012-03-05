@@ -125,8 +125,7 @@ class Application:
         Starts the application
         """
         self.screen = pygame.display.set_mode((800, 600),
-                                              pygame.SWSURFACE |
-                                              pygame.FULLSCREEN)
+                                              pygame.SWSURFACE)
         self.gui = MainWindow(self,
                               self.base_path,
                               self.surface_manager,

@@ -219,7 +219,6 @@ class EndScreen:
             ending: Dictionary specifying various data of end condition
         """
         self.logger.info('showing the end screen')
-        self.logger.debug(ending)
 
         font = pygame.font.Font(None, 18)
         colour = (255, 255, 255)

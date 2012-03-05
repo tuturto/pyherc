@@ -60,10 +60,11 @@ class TestMoving(IntegrationTest):
         self.model.dungeon = Dungeon()
         self.level1 = levelGenerator.generate_level(None, self.model, monster_list = [])
         self.level2 = levelGenerator.generate_level(None, self.model, monster_list = [])
-        self.portal1 = Portal()
+        self.portal1 = Portal((None, None), None)
         self.portal1.model = self.model
         self.portal1.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
-        self.portal2 = Portal()
+        self.portal2 = Portal((None, None), None)
+        self.portal2 = Portal((None, None), None)
         self.portal2.model = self.model
 
         self.level1.add_portal(self.portal1, (5, 5))

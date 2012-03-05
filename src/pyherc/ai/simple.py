@@ -27,6 +27,7 @@ Creature will try to find friends, before attacking the player character
 import math
 from pyherc.rules.public import MoveParameters
 from pyherc.rules.public import AttackParameters
+from pyherc.aspects import Logged
 
 class FlockingHerbivore():
     """
@@ -35,9 +36,16 @@ class FlockingHerbivore():
     Seeks out player for combat
     """
 
+    __logger_name__ = 'pyherc.ai.simple.FlockingHerbivore'
+
+    @Logged(__logger_name__)
     def __init__(self, character):
+        """
+        Default constructor
+        """
         self.character = character
 
+    @Logged(__logger_name__)
     def act(self, model):
         '''
         Trigger this AI to assess the situation and act accordingly
@@ -102,6 +110,7 @@ class FlockingHerbivore():
             #we're all alone here
             self.character.tick = self.character.tick + 10
 
+    @Logged(__logger_name__)
     def find_direction(self, start, end):
         """
         Find direction from start to end

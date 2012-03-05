@@ -357,7 +357,8 @@ class TestLevelGenerator:
                                              WALL_EMPTY,
                                              ['crypt'])
         level_decorator = empty_spy()
-        stair_adder = PortalAdder('crypt',
+        stair_adder = PortalAdder((1, 2),
+                                  'crypt',
                                   empty_stub(),
                                   self.rng)
         creature_adder = empty_spy()

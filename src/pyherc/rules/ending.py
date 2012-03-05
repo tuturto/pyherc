@@ -72,7 +72,6 @@ def check_dying(model, character, deathParams):
     """
     assert character != None
     if character.hit_points <= 0:
-        __logger.debug(character.__str__() + ' has died')
         event = {}
         event['type'] = 'death'
         event['character'] = character

@@ -35,18 +35,15 @@ class MoveAction():
         @param new_location: Location to move
         '''
         self.logger = logging.getLogger('pyherc.rules.move.action.MoveAction')
-        self.logger.debug('Initialising move action')
         self.character = character
         self.new_location = new_location
         self.new_level = new_level
         self.model = None
-        self.logger.debug('Move action initialised')
 
     def execute(self):
         '''
         Executes this Move
         '''
-        self.logger.debug('Executing move')
         if self.is_legal():
             self.character.location = self.new_location
             if self.new_level != None:
@@ -55,13 +52,14 @@ class MoveAction():
         else:
             self.logger.warn('Tried to execute illegal move')
             self.character.tick = pyherc.rules.time.get_new_tick(self.character, 2)
-        self.logger.debug('Move executed')
 
     def is_legal(self):
-        '''
+        """
         Check if the move is possible to perform
-        @returns: True if move is possible, false otherwise
-        '''
+
+        Returns:
+            True if move is possible, false otherwise
+        """
         location_ok = False
         if self.new_level != None:
             if self.new_level.walls[self.new_location[0]][self.new_location[1]] == pyherc.data.tiles.WALL_EMPTY:
@@ -86,8 +84,4 @@ class WalkAction(MoveAction):
         '''
         Execute this move
         '''
-        self.logger.debug('Executing walk')
-
         MoveAction.execute(self)
-
-        self.logger.debug('Walk executed')

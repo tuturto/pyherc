@@ -43,8 +43,6 @@ def pick_up(model, character, item):
     assert(not item == None)
     assert(item in character.level.items)
 
-    logger.debug(character.__str__() + ' picking up item: ' + item.__str__())
-
     event = {}
     event['type'] = 'item'
     event['pick up'] = 1
@@ -59,8 +57,6 @@ def pick_up(model, character, item):
     item.location = ()
     character.tick = pyherc.rules.time.get_new_tick(character, 1.5)
 
-    logger.debug('item picked up')
-
 def drop(model, character, item):
     """
     Drop item from inventory
@@ -72,8 +68,6 @@ def drop(model, character, item):
     assert(not character == None)
     assert(not item == None)
     assert(item in character.inventory)
-
-    logger.debug('{0} dropping item {1}'.format(character, item))
 
     if(item in character.weapons):
         unwield(model, character, item, instant = True)
@@ -91,8 +85,6 @@ def drop(model, character, item):
     event['level'] = character.level
     model.raise_event(event)
 
-    logger.debug('item dropped')
-
 def wield(model, character, item, dual_wield = False):
     """
     Wield a weapon
@@ -101,12 +93,10 @@ def wield(model, character, item, dual_wield = False):
     @param item: weapon to wield
     @param dual_wield: should character perform dual wield
     """
-    logger.debug(character.__str__() + ' wielding item ' + item.__str__())
 
     if len(character.weapons) == 0:
         #simple wield
         character.weapons.append(item)
-        logger.debug(character.__str__() + ' wielded item ' + item.__str__())
         event = {}
         event['type'] = 'item'
         event['wield'] = 1
@@ -122,8 +112,7 @@ def wield(model, character, item, dual_wield = False):
             if len(character.weapons) == 1:
                 if can_dual_wield(model, character, character.weapons[0], item):
                     character.weapons.append(item)
-                    logger.debug('{0} dual-wielded item {1}'.format(
-                                                    character, item))
+
                     event = {}
                     event['type'] = 'item'
                     event['wield'] = 1
@@ -181,8 +170,6 @@ def unwield(model, character, item, instant = False):
     @param instant: is this instant action, default False
     @return: True if unwield was succesfull, False otherwise
     '''
-    logger.debug('{0} unwielding {1}'.format(character, item))
-
     character.weapons.remove(item)
 
     event = {}
@@ -194,8 +181,6 @@ def unwield(model, character, item, instant = False):
     event['level'] = character.level
     model.raise_event(event)
 
-    logger.debug('{0} unwielded {1}'.format(character, item))
-
     return True
 
 def drink_potion(model, character, potion, dice = None):
@@ -206,8 +191,6 @@ def drink_potion(model, character, potion, dice = None):
     @param potion: potion to drink
     @param dice: optional prerolled dice
     """
-    logger.debug(character.__str__() + ' drinking ' + potion.__str__())
-
     assert(model != None)
     assert(character != None)
     assert(potion != None)
@@ -229,6 +212,4 @@ def drink_potion(model, character, potion, dice = None):
 
     if potion.maximum_charges_left() < 1:
         character.inventory.remove(potion)
-
-    logger.debug(character.__str__() + ' drank ' + potion.__str__())
 

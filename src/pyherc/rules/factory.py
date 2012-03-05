@@ -40,14 +40,11 @@ class SubActionFactory(object):
         Get sub factory to handle parameters
         @param parameters: Parameters to use for searching the factory
         '''
-        self.logger.debug('getting sub factory for ' + str(parameters))
         subs = [x for x in self.factories if x.can_handle(parameters)]
 
         if len(subs) == 1:
-            self.logger.debug('sub factory found: ' + str(subs[0]))
             return subs[0]
         else:
-            self.logger.debug('no factory found')
             return None
 
     def can_handle(self, parameters):

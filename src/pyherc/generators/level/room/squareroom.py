@@ -52,8 +52,6 @@ class SquareRoomGenerator(object):
         Args:
             section: Section for generator to draw to
         '''
-        self.logger.debug('generating room for area {0}'.format(
-                                                            section.corners))
 
         self.room_width = int(section.width * 0.50)
         self.room_height = int(section.height * 0.50)
@@ -63,8 +61,8 @@ class SquareRoomGenerator(object):
         room_top_edge = (section.height - self.room_height) // 2
         room_bottom_edge = room_top_edge + self.room_height
 
-        for loc_y in range(room_top_edge, room_bottom_edge):
-            for loc_x in range(room_left_edge, room_right_edge):
+        for loc_y in range(room_top_edge + 1, room_bottom_edge):
+            for loc_x in range(room_left_edge + 1, room_right_edge):
                 section.set_floor((loc_x, loc_y), self.floor_tile, 'room')
                 section.set_wall((loc_x, loc_y), self.empty_tile, None)
 
@@ -77,8 +75,6 @@ class SquareRoomGenerator(object):
         section.add_room_connection((room_right_edge, center_y), "right")
 
         self.add_corridors(section)
-
-        self.logger.debug('room generated')
 
     def add_corridors(self, section):
         """

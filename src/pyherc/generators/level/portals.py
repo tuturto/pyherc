@@ -23,23 +23,30 @@ Module for adding portals
 """
 
 from pyherc.data.dungeon import Portal
+from pyherc.aspects import Logged
 import logging
 
 class PortalAdderConfiguration(object):
     """
     Configuration class for adding portals
     """
-    def __init__(self, level_type, location_type, chance, new_level, unique):
+    __logger_name__ = 'pyherc.generators.level.portals.PortalAdderConfiguration'
+
+    @Logged(__logger_name__)
+    def __init__(self, icons, level_type, location_type, chance,
+                 new_level, unique):
         """
         Default constructor
 
         Args:
+            icons: pair of icons to use for poratl and other end
             level_type: type of level this portal can be added
             location_type: type of location to add portal
             chance: chance of portal being added 1 - 100
             new_level: name of new level
             unique: is more than one instance allowed
         """
+        self.__icons = icons
         self.__level_type = level_type
         self.__location_type = location_type
         self.__chance = chance
@@ -76,16 +83,26 @@ class PortalAdderConfiguration(object):
         """
         return self.__unique
 
+    def __get_icons(self):
+        """
+        Get pair of icons to use for portal and the other end
+        """
+        return self.__icons
+
     level_type = property(__get_level_type)
     location_type = property(__get_location_type)
     chance = property(__get_chance)
     new_level = property(__get_new_level)
     is_unique = property(__is_unique)
+    icons = property(__get_icons)
 
 class PortalAdderFactory(object):
     """
     Class for creating portal adders
     """
+    __logger_name__ = 'pyherc.generators.level.portals.PortalAdderFactory'
+
+    @Logged(__logger_name__)
     def __init__(self, config, rng):
         """
         Default constructor
@@ -96,12 +113,11 @@ class PortalAdderFactory(object):
         """
         super(PortalAdderFactory, self).__init__()
         self.logger = logging.getLogger('pyherc.generators.level.portals.PortalAdderFactory')
-        self.logger.debug('initialising factory')
         self.config = config
         self.level_generator_factory = None
         self.rng = rng
-        self.logger.debug('factory initialised')
 
+    @Logged(__logger_name__)
     def create_portal_adders(self, level_type):
         """
         Create portal adders for level type
@@ -112,47 +128,48 @@ class PortalAdderFactory(object):
         Returns:
             list of generated portal adders
         """
-        self.logger.debug('creating portal adders for type {0}'.
-                          format(level_type))
         adders = []
         matches = [x for x in self.config
                    if x.level_type == level_type]
 
-        self.logger.debug('{0} matches found'.format(len(matches)))
         for spec in matches:
             level_generator = self.level_generator_factory.get_generator(
                                                         spec.new_level)
-            new_adder = PortalAdder(spec.location_type,
+            new_adder = PortalAdder(spec.icons,
+                                    spec.location_type,
                                     level_generator,
                                     self.rng)
             if spec.is_unique:
                 self.config.remove(spec)
             adders.append(new_adder)
 
-        self.logger.debug('{0} adders initialised'.format(len(adders)))
         return adders
 
 class PortalAdder(object):
     """
     Basic class for adding portals
     """
-    def __init__(self, location_type, level_generator, rng):
+    __logger_name__ = 'pyherc.generators.level.portals.PortalAdder'
+
+    @Logged(__logger_name__)
+    def __init__(self, icons,  location_type, level_generator, rng):
         """
         Default constructor
 
         Args:
+            icons: pair of icons to use this portal and other end
             location_type: type of location to add portal
             level_generator: LevelGenerator
             rng: Randon number generator
         """
         super(PortalAdder, self).__init__()
         self.logger = logging.getLogger('pyherc.generators.level.portals.PortalAdder')
-        self.logger.debug('initialising')
         self.location_type = location_type
         self.level_generator = level_generator
         self.rng = rng
-        self.logger.debug('initialisation done')
+        self.icons = icons
 
+    @Logged(__logger_name__)
     def add_portal(self, level):
         """
         Add given stairs to the level
@@ -160,13 +177,12 @@ class PortalAdder(object):
         Args:
             level: level to modify
         """
-        self.logger.debug('adding portal for location type {0}'.
-                          format(self.location_type))
         locations = level.get_locations_by_type(self.location_type)
 
         if len(locations) > 0:
             location = self.rng.choice(locations)
-            portal = Portal(level_generator = self.level_generator)
+            portal = Portal(icons = self.icons,
+                            level_generator = self.level_generator)
             level.add_portal(portal, location)
         else:
             self.logger.warn('no matching location found, skipping')

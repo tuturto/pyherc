@@ -75,7 +75,6 @@ class StartNewGameWindow:
     """
     def __init__(self,  application, screen, surface_manager):
         self.logger = logging.getLogger('pyherc.gui.windows.StartNewGameWindow')
-        self.logger.debug('initialising display')
 
         self.running = 1
         self.application = application
@@ -83,15 +82,11 @@ class StartNewGameWindow:
         self.surface_manager = surface_manager
         self.character = None
 
-        self.logger.debug('display initialised')
-
     def main_loop(self):
         """
         Main loop of the window
         """
-        self.logger.debug('main loop starting')
         self.__generate_new_game()
-        self.logger.debug('main loop finished')
 
     def __generate_new_game(self):
         """
@@ -117,7 +112,6 @@ class GameWindow:
     """
     def __init__(self,  application, screen, surface_manager):
         self.logger = logging.getLogger('pyherc.gui.windows.GameWindow')
-        self.logger.debug('initialising display')
 
         self.application = application
         self.screen = screen
@@ -128,8 +122,6 @@ class GameWindow:
         self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
                                     K_KP4:7, K_KP7:8, K_KP5:9}
         self.eventHistory = []
-
-        self.logger.debug('display initialised')
 
     def __handlePlayerInput(self):
         """
@@ -233,7 +225,6 @@ class GameWindow:
         """
         Main loop of the game
         """
-        self.logger.debug('main loop starting')
         while self.application.world.end_condition == 0 and self.application.running:
 
             model = self.application.world
@@ -252,8 +243,6 @@ class GameWindow:
                     creature.act(self.application.world)
                     self.getNewEvents()
                     self.application.world.player.level.full_update_needed = True
-
-        self.logger.debug('main loop finished')
 
     def getNewEvents(self):
         """

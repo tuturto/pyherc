@@ -68,7 +68,6 @@ def create_character(race, kit, action_factory):
     global race_stats
     global kit_stats
     global __logger
-    __logger.debug('creating a new character: ' + race + " " + kit)
 
     if race_stats == None:
         initialise_stat_tables()

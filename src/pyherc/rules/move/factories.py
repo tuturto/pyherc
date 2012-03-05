@@ -36,9 +36,7 @@ class WalkFactory(SubActionFactory):
         Constructor for this factory
         '''
         self.logger = logging.getLogger('pyherc.rules.move.factories.WalkFactory')
-        self.logger.debug('initialising WalkFactory')
         self.movement_mode = 'walk'
-        self.logger.debug('WalkFactory initialised')
 
     def __getstate__(self):
         '''
@@ -67,10 +65,12 @@ class WalkFactory(SubActionFactory):
         return self.movement_mode == parameters.movement_mode
 
     def get_action(self, parameters):
-        '''
+        """
         Create a walk action
-        @param parameters: Parameters used to control walk creation
-        '''
+
+        Args:
+            parameters: Parameters used to control walk creation
+        """
         location = parameters.character.location
         newLevel = parameters.character.level
         direction = parameters.direction
@@ -97,6 +97,9 @@ class WalkFactory(SubActionFactory):
                 if portal.other_end != None:
                     newLevel = portal.other_end.level
                     newLocation = portal.other_end.location
+                else:
+                    self.logger.error('Portal leads to void!')
+                    raise RuntimeError('Portal leads to void!')
             else:
                 newLevel = parameters.character.level
                 newLocation = parameters.character.location
@@ -117,7 +120,6 @@ class MoveFactory(SubActionFactory):
         @param factories: a single Factory or list of Factories to use
         '''
         self.logger = logging.getLogger('pyherc.rules.move.factories.MoveFactory')
-        self.logger.debug('initialising MoveFactory')
         self.action_type = 'move'
 
         if isinstance(factories, types.ListType):
@@ -125,8 +127,6 @@ class MoveFactory(SubActionFactory):
         else:
             self.factories = []
             self.factories.append(factories)
-
-        self.logger.debug('MoveFactory initialised')
 
     def __getstate__(self):
         '''

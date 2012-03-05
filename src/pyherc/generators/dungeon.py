@@ -31,12 +31,15 @@ from pyherc.generators.level.catacombs import CatacombsLevelGenerator
 from pyherc.data.dungeon import Dungeon
 from pyherc.data.dungeon import Portal
 from pyherc.data import tiles
+from pyherc.aspects import Logged
 
 class DungeonGenerator:
     """
     This class is used to generate dungeon
     """
+    __logger_name__ = 'pyherc.generators.dungeon.DungeonGenerator'
 
+    @Logged(__logger_name__)
     def __init__(self, creature_generator, item_generator,
                  level_generator):
         """
@@ -52,6 +55,7 @@ class DungeonGenerator:
         self.item_generator = item_generator
         self.level_generator = level_generator
 
+    @Logged(__logger_name__)
     def generate_dungeon(self, model):
         """
         Generates start of the dungeon

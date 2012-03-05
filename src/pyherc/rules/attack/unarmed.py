@@ -69,5 +69,4 @@ class UnarmedDamage(Damage):
         Args:
             target: Target to damage
         """
-        self.logger.debug('Applying damage of {0}'.format(self.damage))
         target.set_hp(target.get_hp() - self.damage)

@@ -73,7 +73,6 @@ class TestLevelGenerator:
             new_portals: amount of portals to generate, default 0
             monster_list: list of monsters to use
         """
-        self.logger.debug('creating a test level')
         level_size = model.config['level']['size']
         temp_level = Level(level_size, tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
 

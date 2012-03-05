@@ -21,16 +21,22 @@
 """
 Classes for configuring level generation
 """
+from pyherc.aspects import Logged
+
 class LevelGeneratorFactoryConfig(object):
     """
     Class to configure level generator
     """
+    __logger_name__ = 'pyherc.generators.level.config.LevelGeneratorFactoryConfig'
+
+    @Logged(__logger_name__)
     def __init__(self, room_generators, level_partitioners,
                  decorators, item_adders, creature_adders,
                  portal_adder_configurations, size):
         """
         Default constructor
         """
+        super(LevelGeneratorFactoryConfig, self).__init__()
         self.__room_generators = room_generators
         self.__level_partitioners = level_partitioners
         self.__decorators = decorators

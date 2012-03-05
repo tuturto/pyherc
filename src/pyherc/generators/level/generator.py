@@ -24,11 +24,16 @@ Classs needed for generating levels
 
 import logging
 from pyherc.data import Level, Portal
+from pyherc.aspects import Logged
 
 class LevelGeneratorFactory:
     """
     Class used to contruct different kinds of level generators
     """
+
+    __logger_name__ = 'pyherc.generators.level.generator.LevelGenerator.Factory'
+
+    @Logged(__logger_name__)
     def __init__(self, action_factory, portal_adder_factory, configuration,
                  random_generator):
         """
@@ -52,6 +57,7 @@ class LevelGeneratorFactory:
         self.size = configuration.size
         self.random_generator = random_generator
 
+    @Logged(__logger_name__)
     def get_generator(self, level_type):
         """
         Get LevelGenerator for given level
@@ -62,8 +68,6 @@ class LevelGeneratorFactory:
         Returns:
             configured LevelGenerator
         """
-        self.logger.debug('getting generator for type {0}'.format(level_type))
-
         partitioner = self.get_sub_component(level_type,
                                              self.level_partitioners,
                                              'partitioner')
@@ -96,6 +100,7 @@ class LevelGeneratorFactory:
                               self.random_generator,
                               self.size)
 
+    @Logged(__logger_name__)
     def get_sub_component(self, level_type, component_list, component_type):
         """
         Get subcomponent
@@ -105,9 +110,6 @@ class LevelGeneratorFactory:
             component_list: list of subcomponents to choose from
             component_type: component type for error message
         """
-        self.logger.debug('getting {0} for type {1}'.format(
-                                                            component_type,
-                                                            level_type))
         matches = [x for x in component_list
                    if level_type in x.level_types]
 
@@ -121,13 +123,15 @@ class LevelGeneratorFactory:
             self.logger.error(error_message)
             raise RuntimeError(error_message)
 
-        self.logger.debug('match found')
         return component
 
 class LevelGenerator:
     """
     Class used to generate levels
     """
+    __logger_name__ = 'pyherc.generators.level.generator.LevelGenerator'
+
+    @Logged(__logger_name__)
     def __init__(self, action_factory, partitioner, room_generator,
                  decorator, portal_adders,
                  item_adder, creature_adder,
@@ -173,6 +177,7 @@ class LevelGenerator:
         self.__dict__.update(d)
         self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGenerator') #pylint: disable=C0301
 
+    @Logged(__logger_name__)
     def generate_level(self, portal):
         """
         Generate level
@@ -180,14 +185,11 @@ class LevelGenerator:
         Args:
             portal: Portal to link to this level
         """
-        self.logger.debug('creating a new level')
         #TODO: configurable
         new_level = Level(self.size, -2, -101)
 
-        self.logger.debug('partitioning level')
         sections = self.partitioner.partition_level(new_level, 4, 3)
 
-        self.logger.debug('generating rooms')
         for section in sections:
             self.room_generator.generate_room(section)
 
@@ -198,11 +200,10 @@ class LevelGenerator:
 
         # all this needs to be cleaned up
         if portal != None:
-            self.logger.debug('linking portal to new level')
             rooms = new_level.get_locations_by_type('room')
             if len(rooms) > 0:
-                new_portal = Portal()
-                new_portal.icon = 201
+                new_portal = Portal(icons = (portal.other_end_icon, None),
+                                    level_generator = None)
                 location = self.random_generator.choice(rooms)
                 new_level.add_portal(new_portal, location, portal)
             else:

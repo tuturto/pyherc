@@ -52,11 +52,11 @@ class TestDungeon:
         level1 = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
         level2 = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
 
-        stairs1 = Portal()
+        stairs1 = Portal((None, None), None)
         stairs1.icon = tiles.PORTAL_STAIRS_DOWN
         level1.add_portal(stairs1, (10, 10))
 
-        stairs2 = Portal()
+        stairs2 = Portal((None, None), None)
         level2.add_portal(stairs2, (5, 5), stairs1)
 
         assert(stairs1.level == level1)

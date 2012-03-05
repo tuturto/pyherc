@@ -47,8 +47,6 @@ class RandomConnector(object):
             sections: List of Sections to connect
             start_section: optional parameter specifying starting section
         """
-        self.logger.debug('connecting sections')
-
         if start_section == None:
             start_location = self.random_generator.choice(sections)
         else:
@@ -60,7 +58,6 @@ class RandomConnector(object):
                                                 if x.connected == False]
 
         while len(unconnected_sections) > 0:
-            self.logger.debug('branching')
             edge_sections = [x for x in sections
                              if x.connected == True
                              and x.has_unconnected_neighbours()]

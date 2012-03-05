@@ -75,7 +75,6 @@ class CatacombsLevelGenerator:
             level: changes behaviour of the generator
             room_min_size: minimum size for rooms
         """
-        self.logger.debug('generating level: {0}'.format(level))
         level_size = model.config['level']['size']
         BSPStack = []
         BSP = pyherc.generators.utils.BSPSection((0, 0),

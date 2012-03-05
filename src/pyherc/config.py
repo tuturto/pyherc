@@ -59,6 +59,7 @@ from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
 from pyherc.data.tiles import FLOOR_EMPTY, FLOOR_ROCK, FLOOR_BRICK
 from pyherc.data.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
 from pyherc.data.tiles import WALL_ROCK_DECO_1, WALL_ROCK_DECO_2
+from pyherc.data.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
 
 class Configuration(object):
     """
@@ -256,12 +257,14 @@ class Configuration(object):
                                         self.rng)]
 
         portal_adder_configurations = [PortalAdderConfiguration(
+                                            icons = (PORTAL_STAIRS_DOWN, PORTAL_STAIRS_UP),
                                             level_type = 'upper catacombs',
                                             location_type = 'room',
                                             chance = 100,
                                             new_level = 'lower catacombs',
                                             unique = True),
                                         PortalAdderConfiguration(
+                                            icons = (PORTAL_STAIRS_DOWN, PORTAL_STAIRS_UP),
                                             level_type = 'upper catacombs',
                                             location_type = 'room',
                                             chance = 25,
@@ -328,16 +331,16 @@ class Configuration(object):
                                 self.rng)]
 
         creature_adder_config = CreatureAdderConfiguration(['upper crypt'])
-        creature_adder_config.add_creature(min_amount = 6,
-                                           max_amount = 12,
-                                           name = 'bat')
-        creature_adder_config.add_creature(min_amount = 4,
-                                           max_amount = 8,
-                                           name = 'spider')
-        creature_adder_config.add_creature(min_amount = 4,
-                                           max_amount = 8,
-                                           name = 'skeleton',
-                                           location = 'room')
+        #creature_adder_config.add_creature(min_amount = 6,
+        #                                   max_amount = 12,
+        #                                   name = 'bat')
+        #creature_adder_config.add_creature(min_amount = 4,
+        #                                   max_amount = 8,
+        #                                   name = 'spider')
+        #creature_adder_config.add_creature(min_amount = 4,
+        #                                   max_amount = 8,
+        #                                   name = 'skeleton',
+        #                                   location = 'room')
 
         creature_adders = [CreatureAdder(self.creature_generator,
                                         creature_adder_config,

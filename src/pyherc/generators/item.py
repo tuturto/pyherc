@@ -47,9 +47,6 @@ class ItemGenerator:
         """
         Generates an item
         """
-        self.logger.debug('generating an item')
-        self.logger.debug(parameters)
-
         new_item = None
         if not parameters == None:
             if 'name' in parameters.keys():
@@ -70,11 +67,6 @@ class ItemGenerator:
             #generate completely random item
             pass
 
-        if new_item == None:
-            self.logger.warn('no item generated')
-        else:
-            self.logger.debug('new item generated: ' + new_item.__str__())
-
         return new_item
 
     def generate_special_item(self, parameters):
@@ -87,12 +79,8 @@ class ItemGenerator:
         assert(parameters != None)
         assert('name' in parameters.keys())
 
-        self.logger.debug('generating a special item')
-
         table = self.tables.items[parameters['name']]
         new_item = self.generate_item_from_table(table)
-
-        self.logger.debug('special item generation done')
 
         return new_item
 
