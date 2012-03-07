@@ -37,9 +37,9 @@ class DungeonGenerator:
     """
     This class is used to generate dungeon
     """
-    __logger_name__ = 'pyherc.generators.dungeon.DungeonGenerator'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, creature_generator, item_generator,
                  level_generator):
         """
@@ -55,7 +55,7 @@ class DungeonGenerator:
         self.item_generator = item_generator
         self.level_generator = level_generator
 
-    @Logged(__logger_name__)
+    @logged
     def generate_dungeon(self, model):
         """
         Generates start of the dungeon

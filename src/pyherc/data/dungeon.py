@@ -36,9 +36,9 @@ class Level(object):
     """
     Represents a level
     """
-    __logger_name__ = 'pyherc.data.dungeon.Level'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, size = (0, 0), floor_type = None, wall_type = None):
         """
         Initialises a level of certain size and fill floor and walls with given types
@@ -126,7 +126,7 @@ class Level(object):
 
         return self.walls[loc_x][loc_y]
 
-    @Logged(__logger_name__)
+    @logged
     def add_item(self, item, location):
         """
         Add an item to this level
@@ -156,7 +156,7 @@ class Level(object):
                 items.append(item)
         return items
 
-    @Logged(__logger_name__)
+    @logged
     def add_portal(self, portal, location, other_end = None):
         """
         Adds precreated portal on level at given location
@@ -205,7 +205,7 @@ class Level(object):
 
         return None
 
-    @Logged(__logger_name__)
+    @logged
     def add_creature(self, creature, location = None):
         """
         Add a creature to level
@@ -221,7 +221,7 @@ class Level(object):
         if location != None:
             creature.location = location
 
-    @Logged(__logger_name__)
+    @logged
     def remove_creature(self, creature):
         """
         Remove creature from level
@@ -253,7 +253,7 @@ class Level(object):
 
         return None
 
-    @Logged(__logger_name__)
+    @logged
     def find_free_space(self):
         """
         Finds free space where stuff can be placed
@@ -294,7 +294,7 @@ class Level(object):
         else:
             return True
 
-    @Logged(__logger_name__)
+    @logged
     def get_size(self):
         """
         Gets size of level
@@ -307,7 +307,7 @@ class Level(object):
 
         return (x_size, y_size)
 
-    @Logged(__logger_name__)
+    @logged
     def set_location_type(self, location, location_type):
         """
         Set type of location
@@ -318,7 +318,7 @@ class Level(object):
         """
         self.__location_type[location[0]][location[1]] = location_type
 
-    @Logged(__logger_name__)
+    @logged
     def get_location_type(self, location):
         """
         Get type of location
@@ -331,7 +331,7 @@ class Level(object):
         """
         return self.__location_type[location[0]][location[1]]
 
-    @Logged(__logger_name__)
+    @logged
     def get_locations_by_type(self, location_type):
         """
         Get locations marked as rooms
@@ -383,9 +383,9 @@ class Dungeon(object):
     """
     Represents the dungeon
     """
-    __logger_name__ = 'pyherc.data.dungeon.Dungeon'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self):
         super(Dungeon, self).__init__()
         self.levels = None
@@ -410,9 +410,9 @@ class Portal(object):
     """
     Portal linking two levels together
     """
-    __logger_name__ = 'pyherc.data.dungeon.Portal'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, icons, level_generator):
         """
         Default constructor
@@ -445,7 +445,7 @@ class Portal(object):
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.dungeon.Portal')
 
-    @Logged(__logger_name__)
+    @logged
     def __get_other_end(self):
         """
         Returns the other end of the portal
@@ -455,7 +455,7 @@ class Portal(object):
 
         return self.__other_end
 
-    @Logged(__logger_name__)
+    @logged
     def __set_other_end(self, portal):
         """
         Set the other end of the portal

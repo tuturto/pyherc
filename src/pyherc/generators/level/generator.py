@@ -31,9 +31,9 @@ class LevelGeneratorFactory:
     Class used to contruct different kinds of level generators
     """
 
-    __logger_name__ = 'pyherc.generators.level.generator.LevelGenerator.Factory'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, action_factory, portal_adder_factory, configuration,
                  random_generator):
         """
@@ -57,7 +57,7 @@ class LevelGeneratorFactory:
         self.size = configuration.size
         self.random_generator = random_generator
 
-    @Logged(__logger_name__)
+    @logged
     def get_generator(self, level_type):
         """
         Get LevelGenerator for given level
@@ -100,7 +100,7 @@ class LevelGeneratorFactory:
                               self.random_generator,
                               self.size)
 
-    @Logged(__logger_name__)
+    @logged
     def get_sub_component(self, level_type, component_list, component_type):
         """
         Get subcomponent
@@ -129,9 +129,9 @@ class LevelGenerator:
     """
     Class used to generate levels
     """
-    __logger_name__ = 'pyherc.generators.level.generator.LevelGenerator'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, action_factory, partitioner, room_generator,
                  decorator, portal_adders,
                  item_adder, creature_adder,
@@ -177,7 +177,7 @@ class LevelGenerator:
         self.__dict__.update(d)
         self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGenerator') #pylint: disable=C0301
 
-    @Logged(__logger_name__)
+    @logged
     def generate_level(self, portal):
         """
         Generate level

@@ -28,9 +28,9 @@ class CreatureAdderConfiguration(object):
     """
     Class used to configure CreatureAdder
     """
-    __logger_name__ = 'pyherc.generators.level.creatures.CreatureAdderConfiguration'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, level_types):
         """
         Default constructor
@@ -42,7 +42,7 @@ class CreatureAdderConfiguration(object):
         self.level_types = level_types
         self.creature_list = []
 
-    @Logged(__logger_name__)
+    @logged
     def add_creature(self, min_amount, max_amount, name, location = None):
         """
         Adds creature specification
@@ -65,9 +65,9 @@ class CreatureAdder(object):
     """
     Class used to add creatures during level generation
     """
-    __logger_name__ = 'pyherc.generators.level.creatures.CreatureAdder'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, creature_generator, configuration, rng):
         """
         Default constructor
@@ -82,14 +82,14 @@ class CreatureAdder(object):
         self.configuration = configuration
         self.rng = rng
 
-    @Logged(__logger_name__)
+    @logged
     def __get_level_types(self):
         """
         Get level types this adder can be used at
         """
         return self.configuration.level_types
 
-    @Logged(__logger_name__)
+    @logged
     def add_creatures(self, level):
         """
         Add creatures to level according to configuration
@@ -108,7 +108,7 @@ class CreatureAdder(object):
 
         self.place_creatures(creatures, creature_list, level)
 
-    @Logged(__logger_name__)
+    @logged
     def generate_creatures(self, name, amount):
         """
         Generate creatures
@@ -129,7 +129,7 @@ class CreatureAdder(object):
 
         return creatures
 
-    @Logged(__logger_name__)
+    @logged
     def place_creatures(self, creatures, creature_list, level):
         """
         Place creatures into a level

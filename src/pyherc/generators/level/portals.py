@@ -30,9 +30,9 @@ class PortalAdderConfiguration(object):
     """
     Configuration class for adding portals
     """
-    __logger_name__ = 'pyherc.generators.level.portals.PortalAdderConfiguration'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, icons, level_type, location_type, chance,
                  new_level, unique):
         """
@@ -100,9 +100,9 @@ class PortalAdderFactory(object):
     """
     Class for creating portal adders
     """
-    __logger_name__ = 'pyherc.generators.level.portals.PortalAdderFactory'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, config, rng):
         """
         Default constructor
@@ -117,7 +117,7 @@ class PortalAdderFactory(object):
         self.level_generator_factory = None
         self.rng = rng
 
-    @Logged(__logger_name__)
+    @logged
     def create_portal_adders(self, level_type):
         """
         Create portal adders for level type
@@ -149,9 +149,9 @@ class PortalAdder(object):
     """
     Basic class for adding portals
     """
-    __logger_name__ = 'pyherc.generators.level.portals.PortalAdder'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, icons,  location_type, level_generator, rng):
         """
         Default constructor
@@ -169,7 +169,7 @@ class PortalAdder(object):
         self.rng = rng
         self.icons = icons
 
-    @Logged(__logger_name__)
+    @logged
     def add_portal(self, level):
         """
         Add given stairs to the level

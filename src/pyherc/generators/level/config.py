@@ -27,9 +27,9 @@ class LevelGeneratorFactoryConfig(object):
     """
     Class to configure level generator
     """
-    __logger_name__ = 'pyherc.generators.level.config.LevelGeneratorFactoryConfig'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, room_generators, level_partitioners,
                  decorators, item_adders, creature_adders,
                  portal_adder_configurations, size):

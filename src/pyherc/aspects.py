@@ -29,15 +29,11 @@ class Logged(Aspect):
     """
     Aspect to perform logging
     """
-    def __init__(self, name):
+    def __init__(self):
         """
         Default constructor
-
-        Args:
-            name: Name of the logger
         """
-        self.name = name
-        self.logger = logging.getLogger(name)
+        self.logger = None
 
     def atCall(self, call_data):
         """
@@ -47,7 +43,24 @@ class Logged(Aspect):
         kwargs = call_data.kwargs
         function = call_data.function
 
-        log_message = '{0} :call: {1} : {2}'.format(function, args, kwargs)
+        if self.logger == None:
+            cls = call_data.cls
+            if cls != None:
+                logger_name = cls.__module__ + "." + cls.__name__
+            else:
+                logger_name = call_data.function.__name__
+
+            self.logger = logging.getLogger(logger_name)
+
+        if function != None:
+            function_name = function.__name__
+        else:
+            function_name = ' '
+
+        log_message = '{0} :call: {1} : {2}'.format(
+                                                    function_name,
+                                                    args,
+                                                    kwargs)
         self.logger.debug(log_message)
 
     def atRaise(self, call_data):
@@ -63,6 +76,12 @@ class Logged(Aspect):
         function = call_data.function
         return_value = call_data.returned
 
-        log_message = '{0} :return: {1}'.format(function, return_value)
+        if function != None:
+            function_name = function.__name__
+        else:
+            function_name = ' '
+
+        log_message = '{0} :return: {1}'.format(function_name,
+                                                return_value)
         self.logger.debug(log_message)
 

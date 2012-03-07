@@ -36,16 +36,16 @@ class FlockingHerbivore():
     Seeks out player for combat
     """
 
-    __logger_name__ = 'pyherc.ai.simple.FlockingHerbivore'
+    logged = Logged()
 
-    @Logged(__logger_name__)
+    @logged
     def __init__(self, character):
         """
         Default constructor
         """
         self.character = character
 
-    @Logged(__logger_name__)
+    @logged
     def act(self, model):
         '''
         Trigger this AI to assess the situation and act accordingly
@@ -110,7 +110,7 @@ class FlockingHerbivore():
             #we're all alone here
             self.character.tick = self.character.tick + 10
 
-    @Logged(__logger_name__)
+    @logged
     def find_direction(self, start, end):
         """
         Find direction from start to end
