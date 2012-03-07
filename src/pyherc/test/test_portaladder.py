@@ -280,7 +280,11 @@ class TestPortalAdderFactory():
 
         level_generator_factory = stub(LevelGeneratorFactory)
         level_generator = stub(LevelGenerator)
-        when(level_generator_factory.get_generator).then_return(level_generator)
+
+        def mock_get_generator(farg, *args, **kwargs):
+            return level_generator
+
+        level_generator_factory.get_generator = mock_get_generator
 
         factory = PortalAdderFactory(portal_config,
                                      self.rng)

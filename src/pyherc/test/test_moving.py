@@ -22,8 +22,7 @@
 Module for testing moving
 """
 #pylint: disable=W0614
-from pyDoubles.framework import empty_stub #pylint: disable=F0401, E0611
-from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
+from mockito import mock, verify, when, any
 from hamcrest import * #pylint: disable=W0401
 
 import pyherc

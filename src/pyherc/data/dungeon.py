@@ -471,6 +471,14 @@ class Portal(object):
         """
         return self.__icons[0]
 
+    def __set_icon(self, icon):
+        """
+        Set icon to display this portal
+        """
+        if self.__icons == None:
+            self.__icons = (None, None)
+        self.__icons = (icon, self.__icons[1])
+
     def __get_other_end_icon(self):
         """
         Get icon used for other end of this portal
@@ -478,5 +486,5 @@ class Portal(object):
         return self.__icons[1]
 
     other_end = property(__get_other_end, __set_other_end)
-    icon = property(__get_icon)
+    icon = property(__get_icon, __set_icon)
     other_end_icon = property(__get_other_end_icon)

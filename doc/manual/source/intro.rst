@@ -23,7 +23,8 @@ Dependencies
 - Python 2.6.1
 - PyGame 1.9.2
 - PGU 0.18
-- pyDoubles 1.4 (only needed for running test cases)
+- Aspyct 3.0 beta 4
+- mockito-python 0.5.0 (only needed for running test cases)
 - pyHamcrest 1.6 (only needed for running test cases)
 - Sphinx 1.1.2 (only needed for generating documentation)
 
@@ -44,9 +45,9 @@ Install PGU by typing::
 
     easy_install -U pgu
 
-If you want to be able to run test cases, install pyDoubles and pyHamcrest::
+If you want to be able to run test cases, install mockito-python and pyHamcrest::
 
-    easy_install -U pydoubles
+    easy_install -U mockito
     easy_install -U pyhamcrest
 
 If you want to generate html manual and programmers guide, install Sphinx::

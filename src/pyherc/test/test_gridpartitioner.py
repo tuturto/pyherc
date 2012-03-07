@@ -26,7 +26,7 @@ from pyherc.generators.level.partitioners.grid import GridPartitioner
 from pyherc.generators.level.partitioners.grid import RandomConnector
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
-from pyDoubles.framework import when, spy, stub #pylint: disable=F0401, E0611
+from mockito import mock, verify, when, any
 from hamcrest import * #pylint: disable=W0401
 import random
 
@@ -46,8 +46,8 @@ class TestGridPartitioner:
         """
         Setup tests
         """
-        self.mock_level = spy(Level)
-        when(self.mock_level.get_size).then_return((20, 20))
+        self.mock_level = mock(Level)
+        when(self.mock_level).get_size().thenReturn((20, 20))
         self.rng = random.Random()
         self.partitioner = GridPartitioner('crypt',
                                            self.rng)
@@ -129,7 +129,7 @@ class TestRandomConnector:
         """
         self.rng = random.Random()
         self.connector = RandomConnector(self.rng)
-        self.mock_level = stub(Level)
+        self.mock_level = mock(Level)
 
     def test_connect_two_sections(self):
         """

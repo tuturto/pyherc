@@ -13,7 +13,8 @@ System Requirements
 Python 2.6.1
 PyGame 1.9.2
 PGU 0.18
-pyDoubles 1.4 (only needed for running test cases)
+Aspyct 3.0 beta 4
+mockito-python 0.5.0 (only needed for running test cases)
 pyHamcrest 1.6 (only needed for running test cases)
 Sphinx 1.1.2 (only needed for generating documentation)
 
