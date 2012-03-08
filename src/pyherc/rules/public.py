@@ -30,12 +30,16 @@ AttackParameters - Class used to guide contruction of attack related actions
 
 import types
 import random
+from pyherc.aspects import Logged
 
 class ActionFactory():
     """
     Object for creating actions
     """
 
+    logged = Logged()
+
+    @logged
     def __init__(self, model, factories):
         """
         Construct ActionFactory
@@ -52,6 +56,7 @@ class ActionFactory():
 
         self.model = model
 
+    @logged
     def get_action(self, parameters):
         """
         Create an action
@@ -64,6 +69,7 @@ class ActionFactory():
         factory = self.get_sub_factory(parameters)
         return factory.get_action(parameters)
 
+    @logged
     def get_sub_factories(self):
         """
         Get all sub factories
@@ -73,6 +79,7 @@ class ActionFactory():
         """
         return self.factories
 
+    @logged
     def get_sub_factory(self, parameters):
         """
         Get sub factory to handle parameters
@@ -94,6 +101,9 @@ class ActionParameters():
     """
     Object for controlling action creation
     """
+    logged = Logged()
+
+    @logged
     def __init__(self):
         """
         Default constructor
@@ -101,6 +111,7 @@ class ActionParameters():
         self.action_type = 'default'
         self.model = None
 
+    @logged
     def set_model(self, model):
         """
         Set model
@@ -114,6 +125,8 @@ class AttackParameters(ActionParameters):
     """
     Object for controlling attack action creation
     """
+
+    @Logged()
     def __init__(self, attacker, target, attack_type,
                         random_number_generator = random.Random()):
         """
@@ -144,6 +157,7 @@ class MoveParameters(ActionParameters):
     """
     Object for controlling move action creation
     """
+    @Logged()
     def __init__(self, character, direction, movement_mode):
         """
         Construct move parameters

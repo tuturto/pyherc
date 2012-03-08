@@ -18,12 +18,13 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Attack related factories are defined here
-'''
+"""
 
 import types
 import logging
+from pyherc.aspects import Logged
 from pyherc.rules.attack.action import AttackAction
 from pyherc.rules.attack.unarmed import UnarmedToHit
 from pyherc.rules.attack.unarmed import UnarmedDamage
@@ -32,13 +33,15 @@ from pyherc.rules.attack.melee import MeleeDamage
 from pyherc.rules.factory import SubActionFactory
 
 class AttackFactory(SubActionFactory):
-    '''
+    """
     Factory for constructing attack actions
-    '''
+    """
+
+    @Logged()
     def __init__(self, factories):
-        '''
+        """
         Constructor for this factory
-        '''
+        """
         self.logger = logging.getLogger('pyherc.rules.attack.factories.AttackFactory')
         self.action_type = 'attack'
 
@@ -50,48 +53,61 @@ class AttackFactory(SubActionFactory):
 
 
 class UnarmedCombatFactory():
-    '''
+    """
     Factory for producing unarmed combat actions
-    '''
+    """
+    logged = Logged()
 
+    @logged
     def __init__(self):
-        '''
+        """
         Constructor for this factory
-        '''
+        """
         self.logger = logging.getLogger('pyherc.rules.attack.factories.UnarmedCombatFactory')
         self.attack_type = 'unarmed'
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
+        """
         d = dict(self.__dict__)
         del d['logger']
         return d
 
     def __setstate__(self, d):
-        '''
+        """
         Override __setstate__ in order to get pickling work
-        '''
+        """
         self.__dict__.update(d)
         self.logger = logging.getLogger('pyherc.rules.attack.factories.UnarmedCombatFactory')
 
     def __str__(self):
         return 'unarmed combat factory'
 
+    @logged
     def can_handle(self, parameters):
-        '''
+        """
         Can this factory process these parameters
-        @param parameters: Parameters to check
-        @returns: True if factory is capable of handling parameters
-        '''
+
+        Args:
+            parameters: Parameters to check
+
+        Returns:
+            True if factory is capable of handling parameters
+        """
         return self.attack_type == parameters.attack_type
 
+    @logged
     def get_action(self, parameters):
-        '''
+        """
         Create a attack action
-        @param parameters: Parameters used to control attack creation
-        '''
+
+        Args:
+            parameters: Parameters used to control attack creation
+
+        Returns:
+            Action that can be executed
+        """
         attacker = parameters.attacker
         target = parameters.target
 
@@ -106,48 +122,58 @@ class UnarmedCombatFactory():
         return attack
 
 class MeleeCombatFactory():
-    '''
+    """
     Factory for producing melee combat actions
-    '''
+    """
+    logged = Logged()
 
+    @logged
     def __init__(self):
-        '''
+        """
         Constructor for this factory
-        '''
+        """
         self.logger = logging.getLogger('pyherc.rules.attack.factories.MeleeCombatFactory')
         self.attack_type = 'melee'
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
+        """
         d = dict(self.__dict__)
         del d['logger']
         return d
 
     def __setstate__(self, d):
-        '''
+        """
         Override __setstate__ in order to get pickling work
-        '''
+        """
         self.__dict__.update(d)
         self.logger = logging.getLogger('pyherc.rules.attack.factories.MeleeCombatFactory')
 
     def __str__(self):
         return 'melee combat factory'
 
+    @logged
     def can_handle(self, parameters):
-        '''
+        """
         Can this factory process these parameters
-        @param parameters: Parameters to check
-        @returns: True if factory is capable of handling parameters
-        '''
+
+        Args:
+            parameters: Parameters to check
+
+        Returns:
+            True if factory is capable of handling parameters
+        """
         return self.attack_type == parameters.attack_type
 
+    @logged
     def get_action(self, parameters):
-        '''
+        """
         Create a attack action
-        @param parameters: Parameters used to control attack creation
-        '''
+
+        Args:
+            parameters: Parameters used to control attack creation
+        """
         attacker = parameters.attacker
         target = parameters.target
         weapon = attacker.weapons[0]

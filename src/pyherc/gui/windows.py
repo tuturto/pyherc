@@ -36,6 +36,7 @@ import pyherc.generators.dungeon
 import pyherc.rules.tables
 import pyherc.gui.startmenu
 import pgu.gui.app
+from pyherc.aspects import Logged
 from pyherc.rules.public import MoveParameters
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.los import get_fov_matrix
@@ -110,6 +111,9 @@ class GameWindow:
     """
     Window that displays the playing world
     """
+    logged = Logged()
+
+    @logged
     def __init__(self,  application, screen, surface_manager):
         self.logger = logging.getLogger('pyherc.gui.windows.GameWindow')
 
@@ -244,6 +248,7 @@ class GameWindow:
                     self.getNewEvents()
                     self.application.world.player.level.full_update_needed = True
 
+    @logged
     def getNewEvents(self):
         """
         Process memory of player character and store interesting events
@@ -254,7 +259,7 @@ class GameWindow:
                 if event['hit'] == 0:
                     newLine = newLine + ' but misses'
                 else:
-                    newLine = newLine + ' and hits ' + event['damage'].amount.__str__() + ' points of damage'
+                    newLine = newLine + ' and hits ' + str(event['damage'].damage) + ' points of damage'
                 self.eventHistory.append(newLine)
             elif event['type'] == 'item':
                 if 'pick up' in event.keys():
@@ -283,6 +288,7 @@ class GameWindow:
         #clear short term memory
         del self.application.world.player.short_term_memory[:]
 
+    @logged
     def formatEventHistory(self):
         """
         Parse through event history and return 5 latests rows for displaying

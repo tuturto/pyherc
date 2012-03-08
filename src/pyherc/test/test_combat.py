@@ -18,9 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module for testing combat related rules
-'''
+"""
 
 import pyherc
 from pyherc.data.dungeon import Dungeon
@@ -32,14 +32,16 @@ from pyherc.test import StubRandomNumberGenerator
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.action import AttackAction
 
+from mockito import mock, verify, when, any
+
 class TestMeleeCombat(IntegrationTest):
-    '''
+    """
     Class for testing melee combat related rules
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         IntegrationTest.__init__(self)
         self.model = None
         self.level = None
@@ -77,9 +79,9 @@ class TestMeleeCombat(IntegrationTest):
         self.character2.set_body(5)
 
     def test_get_unarmed_action(self):
-        '''
+        """
         Test that unarmed combat action can be generated
-        '''
+        """
         rng = StubRandomNumberGenerator()
         rng.inject(12, [12, 12, 12, 12, 12, 12, 12])
 
@@ -93,9 +95,9 @@ class TestMeleeCombat(IntegrationTest):
         assert action.attack_type == 'unarmed'
 
     def test_unarmed_attack(self):
-        '''
+        """
         Test that unarmed attack will harm opponent
-        '''
+        """
         rng = StubRandomNumberGenerator()
         rng.inject(12, [2, 2, 2, 2, 2, 2, 2])
 
@@ -107,10 +109,33 @@ class TestMeleeCombat(IntegrationTest):
 
         assert self.character2.hit_points < 10
 
+    def test_events_in_unarmed_combat(self):
+        """
+        Test that attacking raises events
+        """
+        rng = StubRandomNumberGenerator()
+        rng.inject(12, [2, 2, 2, 2, 2, 2, 2])
+
+        character1 = mock(Character)
+        when(character1).get_attack().thenReturn(12)
+        character1.speed = 1
+        character1.tick = 0
+
+        character2 = mock(Character)
+        when(character2).get_hp().thenReturn(20)
+
+        self.character1.execute_action(AttackParameters(
+                                                character1,
+                                                character2,
+                                                'unarmed',
+                                                rng))
+
+        verify(character1).raise_event(any())
+
     def test_attack_with_weapon(self):
-        '''
+        """
         Test that attack with a weapon will reduce targets hit points
-        '''
+        """
         rng = StubRandomNumberGenerator()
         rng.inject(12, [2, 2, 2, 2, 2, 2, 2])
 

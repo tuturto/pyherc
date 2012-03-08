@@ -18,27 +18,33 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module defining classes related to AttackAction
-'''
+"""
 import pyherc.rules.time
 import pyherc.rules.ending
 import random
 import logging
+from pyherc.aspects import Logged
 
 class AttackAction():
-    '''
+    """
     Action for attacking
-    '''
+    """
+    logged = Logged()
+
+    @logged
     def __init__(self, attack_type, to_hit, damage, attacker, target, model):
-        '''
+        """
         Default constructor
-        @attack_type: type of the attack
-        @param to_hit: ToHit object for calculating if attack hits
-        @param damage: Damage object for calculating done damage
-        @param attacker: Character doing attack
-        @param target: Character being attacked
-        '''
+
+        Args:
+            attack_type: type of the attack
+            to_hit: ToHit object for calculating if attack hits
+            damage: Damage object for calculating done damage
+            attacker: Character doing attack
+            target: Character being attacked
+        """
         self.action_type = 'attack'
         self.attack_type = attack_type
         self.to_hit = to_hit
@@ -47,12 +53,26 @@ class AttackAction():
         self.target = target
         self.model = model
 
+    @logged
     def execute(self):
-        '''
+        """
         Executes this Attack
-        '''
+        """
+        event = {}
+        event['type'] = 'melee'
+        event['attacker'] = self.attacker
+        event['target'] = self.target
+        event['damage'] = self.damage
+        event['level'] = self.attacker.level
+        event['location'] = self.attacker.location
+
         if self.to_hit.is_hit():
             self.damage.apply_damage(self.target)
+            event['hit'] = True
+        else:
+            event['hit'] = False
+
+        self.attacker.raise_event(event)
 
         pyherc.rules.ending.check_dying(self.model, self.target, self.model)
 
@@ -60,25 +80,28 @@ class AttackAction():
 
 
 class ToHit(object):
-    '''
+    """
     Checks done for hitting
-    '''
+    """
+    logged = Logged()
 
+    @logged
     def __init__(self, attacker,  target,
                         random_number_generator = random.Random()):
-        '''
+        """
         Default constructor
-        '''
+        """
         self.attacker = attacker
         self.target = target
         self.rng = random_number_generator
         self.logger = logging.getLogger('pyherc.rules.attack.action.ToHit')
 
+    @logged
     def is_hit(self):
-        '''
+        """
         Checks if the hit lands
         @returns: True if hit is successful, False otherwise
-        '''
+        """
         target_number = self.attacker.get_body()
 
         to_hit_roll = self.rng.randint(1, 6) + self.rng.randint(1, 6)
@@ -91,19 +114,23 @@ class ToHit(object):
         return is_hit
 
 class Damage(object):
-    '''
+    """
     Damage done in attack
-    '''
+    """
+    logged = Logged()
+
+    @logged
     def __init__(self, damage):
-        '''
+        """
         Default constructor
-        '''
+        """
         self.logger = logging.getLogger('pyherc.rules.attack.action.Damage')
         self.damage = damage
 
+    @logged
     def apply_damage(self, target):
-        '''
+        """
         Applies damage to target
         @param target: Target to damage
-        '''
+        """
         target.set_hp(target.get_hp() - self.damage)

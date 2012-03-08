@@ -27,6 +27,7 @@ Classes:
 """
 import logging
 import random
+from pyherc.aspects import Logged
 from pyherc.rules.attack.action import ToHit
 from pyherc.rules.attack.action import Damage
 
@@ -35,6 +36,7 @@ class MeleeToHit(ToHit):
     Class to perform to hit calculations in melee combat
     """
 
+    @Logged()
     def __init__(self, attacker,  target,
                         random_number_generator = random.Random()):
         """
@@ -54,6 +56,8 @@ class MeleeDamage(Damage):
     """
     Damage done in unarmed attack
     """
+
+    @Logged()
     def __init__(self, damage):
         """
         Default constructor

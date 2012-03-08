@@ -18,7 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module for Model related classes
 
 Classes:
@@ -27,25 +27,27 @@ Classes:
     Damage
     Feat
     WeaponProficiency
-'''
+"""
 
 import logging
+from pyherc.aspects import Logged
 
 class Model:
     """
     Represents playing world
     """
+    logged = Logged()
 
+    @logged
     def __init__(self):
-        self.logger = logging.getLogger('pyherc.data.model.Model')
+        """
+        Default constructor
+        """
         self.dungeon = None
         self.player = None
         self.config = None
         self.tables = None
         self.end_condition = 0
-
-        self.logger.info('loading config')
-        self.load_config()
 
     def __getstate__(self):
         '''
@@ -62,18 +64,13 @@ class Model:
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.model.Model')
 
-    def load_config(self):
-        """
-        Loads config
-        """
-        self.config = {}
-        self.config['level'] = {}
-        self.config['level']['size']  = (80,  21)
-
+    @logged
     def raise_event(self, event):
         """
         Relays event to creatures
-        @param event: event to relay
+
+        Args:
+            event: event to relay
         """
         if event['level'] != None:
             for creature in event['level'].creatures:
@@ -86,8 +83,13 @@ class Character:
     """
     Represents a character in playing world
     """
+    logged = Logged()
 
+    @logged
     def __init__(self, action_factory):
+        """
+        Default constructor
+        """
         # attributes
         self.body = None
         self.finesse = None
@@ -121,85 +123,91 @@ class Character:
     def __str__(self):
         return self.name
 
+    @logged
     def receive_event(self, event):
         """
         Receives an event from world and enters it into short term memory
         """
         self.short_term_memory.append(event)
 
+    @logged
     def act(self, model):
-        '''
+        """
         Triggers AI of this character
-        '''
+        """
         self.artificial_intelligence.act(model)
 
     def get_hp(self):
-        '''
+        """
         Get current hitpoints
-        '''
+        """
         return self.hit_points
 
     def set_hp(self, hit_points):
-        '''
+        """
         Set current hitpoints
-        @param hit_points: hit points to set
-        '''
+            hit_points: hit points to set
+        """
         self.hit_points = hit_points
 
     def get_body(self):
-        '''
+        """
         Get body attribute
-        @returns: Body attribute of this character
-        '''
+
+        Returns:
+            Body attribute of this character
+        """
         return self.body
 
     def set_body(self, body):
-        '''
+        """
         Set body attribute
-        @param body: body attribute to set
-        '''
+
+        Args:
+            body: body attribute to set
+        """
         self.body = body
 
     def get_finesse(self):
-        '''
+        """
         Get finesse attribute
         @returns: finesse attribute
-        '''
+        """
         return self.finesse
 
     def set_finesse(self, finesse):
-        '''
+        """
         Set finesse attribute
         @param finesse: finesse attribute to set
-        '''
+        """
         self.finesse = finesse
 
     def get_mind(self):
-        '''
+        """
         Get mind attribute
         @returns: Mind attribute
-        '''
+        """
         return self.mind
 
     def set_mind(self, mind):
-        '''
+        """
         Set mind attribute
         @param mind: mind attribute to set
-        '''
+        """
         self.mind = mind
 
     def get_attack(self):
-        '''
+        """
         Return attack attribute of the character
         @returns: Attack value
-        '''
+        """
         return self.attack
 
     def set_attack(self, attack):
-        '''
+        """
         Set attack attribute of the character
         @param attack: Attack attribute
-        '''
+        """
         self.attack = attack
 
     def get_max_hp(self):
@@ -208,20 +216,28 @@ class Character:
         """
         return self.max_hp
 
+    @logged
     def identify_item(self, item):
         """
         Identify item
-        @param item: item to mark as identified
+
+        Args:
+            item: item to mark as identified
         """
         assert (item != None)
         self.item_memory[item.name] = item.name
 
+    @logged
     def is_proficient(self, weapon):
-        '''
+        """
         Check if this character is proficient with a given weapon
-        @param weapon: weapon which proficient requirements should be checked
-        @returns: True if proficient, otherwise False
-        '''
+
+        Args:
+        weapon: weapon which proficient requirements should be checked
+
+        Returns:
+            True if proficient, otherwise False
+        """
         assert weapon != None
 
         if weapon.weapon_data == None:
@@ -237,46 +253,48 @@ class Character:
             return False
 
     def set_mimic_item(self, item):
-        '''
+        """
         Sets item this character can mimic or pretend to be
         @param item: item to mimic
-        '''
+        """
         self.mimic_item = item
 
     def get_mimic_item(self):
-        '''
+        """
         Gets item this character can mimic
         @returns: item to mimic
-        '''
+        """
         return self.mimic_item
 
     def get_location(self):
-        '''
+        """
         Returns location of this character
         @returns: location
-        '''
+        """
         return self.location
 
     def set_location(self, location):
-        '''
+        """
         Sets location of this character
         @param location: location to set
-        '''
+        """
         self.location = location
 
+    @logged
     def execute_action(self, action_parameters):
-        '''
+        """
         Execute action defined by action parameters
         @param action_parameters: parameters controlling creation of the action
-        '''
+        """
         action = self.create_action(action_parameters)
         action.execute()
 
+    @logged
     def create_action(self, action_parameters):
-        '''
+        """
         Create an action by defined by action parameters
         @param action_parameters: parameters controlling creation of the action
-        '''
+        """
         if self.action_factory != None:
             action = self.action_factory.get_action(action_parameters)
         return action
@@ -295,6 +313,13 @@ class Character:
         '''
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.model.Character')
+
+    @logged
+    def raise_event(self, event):
+        """
+        Raise event for other creatures to see
+        """
+        self.action_factory.model.raise_event(event)
 
 class Damage:
     """
