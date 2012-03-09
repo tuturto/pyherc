@@ -127,7 +127,7 @@ class GameWindow:
                                     K_KP4:7, K_KP7:8, K_KP5:9}
         self.eventHistory = []
 
-    def __handlePlayerInput(self):
+    def __handle_player_input(self):
         """
         Handle player input
         """
@@ -225,7 +225,7 @@ class GameWindow:
             else:
                 return
 
-    def mainLoop(self):
+    def main_loop(self):
         """
         Main loop of the game
         """
@@ -238,18 +238,17 @@ class GameWindow:
             if creature == model.player:
                 if self.application.world.player.level != None:
                     self.__updateDisplay()
-                self.__handlePlayerInput()
-                self.getNewEvents()
+                self.__handle_player_input()
+                self.get_new_events()
                 if self.application.world.player.level != None:
                     self.__updateDisplay()
             else:
                 if self.application.world.player.level != None:
                     creature.act(self.application.world)
-                    self.getNewEvents()
+                    self.get_new_events()
                     self.application.world.player.level.full_update_needed = True
 
-    @logged
-    def getNewEvents(self):
+    def get_new_events(self):
         """
         Process memory of player character and store interesting events
         """
@@ -289,7 +288,7 @@ class GameWindow:
         del self.application.world.player.short_term_memory[:]
 
     @logged
-    def formatEventHistory(self):
+    def format_event_history(self):
         """
         Parse through event history and return 5 latests rows for displaying
         @return: list of text
@@ -367,7 +366,7 @@ class GameWindow:
 
         #draw overlay event history
         self.screen.blit(self.console, (0, 0))
-        eventText = self.formatEventHistory()
+        eventText = self.format_event_history()
         font = pygame.font.Font(None, 12)
         lineNumber = 0
         for line in eventText:

@@ -49,7 +49,7 @@ class TestGameWindow:
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
-        result = window.formatEventHistory()
+        result = window.format_event_history()
         assert(result[0] == 'one')
         assert(result[1] == 'two')
 
@@ -66,7 +66,7 @@ class TestGameWindow:
         window.eventHistory.append('three')
         window.eventHistory.append('four')
         window.eventHistory.append('five')
-        result = window.formatEventHistory()
+        result = window.format_event_history()
         assert(result[0] == 'one')
         assert(result[1] == 'two')
         assert(result[2] == 'three')
@@ -87,7 +87,7 @@ class TestGameWindow:
         window.eventHistory.append('four')
         window.eventHistory.append('five')
         window.eventHistory.append('six')
-        result = window.formatEventHistory()
+        result = window.format_event_history()
         print result
         assert(len(result) == 5)
         assert(result[0] == 'two')
