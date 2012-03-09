@@ -32,8 +32,6 @@ from pyherc.data.model import Character
 from pyherc.generators.level.testlevel import TestLevelGenerator
 from pyherc.test import IntegrationTest
 
-from pyherc.rules.public import MoveParameters
-
 import pyherc.rules.moving
 
 class TestMoving(IntegrationTest):
@@ -81,10 +79,9 @@ class TestMoving(IntegrationTest):
         Test that taking single step is possible
         """
         assert(self.character.location == (5, 5))
-        action = self.action_factory.get_action(
-                            MoveParameters(
-                                           self.character, 3, 'walk'))
-        action.execute()
+
+        self.character.move(3, 'walk')
+
         assert(self.character.location == (6, 5))
 
     def test_walking_to_walls(self):
@@ -93,11 +90,8 @@ class TestMoving(IntegrationTest):
         """
         self.character.location = (1, 1)
 
-        assert(self.character.location == (1, 1))
-        action = self.action_factory.get_action(
-                            MoveParameters(
-                                           self.character, 1, 'walk'))
-        action.execute()
+        self.character.move(1, 'walk')
+
         assert(self.character.location == (1, 1))
 
     def test_entering_portal(self):
@@ -107,10 +101,7 @@ class TestMoving(IntegrationTest):
         assert(self.character.location == (5, 5))
         assert(self.character.level == self.level1)
 
-        action = self.action_factory.get_action(
-                            MoveParameters(
-                                           self.character, 9, 'walk'))
-        action.execute()
+        self.character.move(9, 'walk')
 
         assert(self.character.location == (10, 10))
         assert(self.character.level == self.level2)
@@ -122,10 +113,7 @@ class TestMoving(IntegrationTest):
         self.character.location = (6, 3)
         assert(self.character.level == self.level1)
 
-        action = self.action_factory.get_action(
-                            MoveParameters(
-                                           self.character, 9, 'walk'))
-        action.execute()
+        self.character.move(9, 'walk')
 
         assert(self.character.location == (6, 3))
         assert(self.character.level == self.level1)
@@ -135,8 +123,7 @@ class TestMoving(IntegrationTest):
         Test that moving around uses time
         """
         tick = self.character.tick
-        action = self.action_factory.get_action(
-                            MoveParameters(
-                                           self.character, 3, 'walk'))
-        action.execute()
+
+        self.character.move(3, 'walk')
+
         assert self.character.tick > tick

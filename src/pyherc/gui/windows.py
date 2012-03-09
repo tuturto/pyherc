@@ -148,14 +148,8 @@ class GameWindow:
                         player.level.full_update_needed = True
                         #handle moving
                         direction = self.moveKeyMap[event.key]
-                        action = player.create_action(
-                                        MoveParameters(player, direction, 'walk')
-                                        )
-
-                        if action.is_legal():
-                            #check in case player escaped
-                            if player.level != None:
-                                action.execute()
+                        if player.is_move_legal(direction, 'walk'):
+                            player.move(direction, 'walk')
                         else:
                             target = player.level.get_creature_at(action.new_location)
                             if target != None:

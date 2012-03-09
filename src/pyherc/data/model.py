@@ -31,6 +31,7 @@ Classes:
 
 import logging
 from pyherc.aspects import Logged
+from pyherc.rules.public import MoveParameters
 
 class Model:
     """
@@ -298,6 +299,41 @@ class Character:
         if self.action_factory != None:
             action = self.action_factory.get_action(action_parameters)
         return action
+
+    @logged
+    def move(self, direction, movement_mode):
+        """
+        Move this character to specified direction
+
+        Args:
+            direction: direction to move
+            movement_mode: movement mode
+        """
+        action = self.action_factory.get_action(
+                                                MoveParameters(
+                                                                self,
+                                                                direction,
+                                                                movement_mode))
+        action.execute()
+
+    @logged
+    def is_move_legal(self, direction, movement_mode):
+        """
+        Check if movement is legal
+
+        Args:
+            direction: direction to move
+            movement_mode: mode of movement
+
+        Returns:
+            True if move is legal, False otherwise
+        """
+        action = self.action_factory.get_action(
+                                                MoveParameters(
+                                                                self,
+                                                                direction,
+                                                                movement_mode))
+        return action.is_legal()
 
     def __getstate__(self):
         '''
