@@ -76,12 +76,12 @@ def create_character(race, kit, action_factory):
     temp_kit = kit_stats[kit]
 
     new_character = pyherc.data.model.Character(action_factory)
-    new_character.set_body(temp_race['body'] + temp_kit['body'])
-    new_character.set_finesse(temp_race['finesse'] + temp_kit['finesse'])
-    new_character.set_mind(temp_race['mind'] + temp_kit['mind'])
+    new_character.body = temp_race['body'] + temp_kit['body']
+    new_character.finesse = temp_race['finesse'] + temp_kit['finesse']
+    new_character.mind = temp_race['mind'] + temp_kit['mind']
     new_character.hit_points = temp_race['hp'] + temp_kit['hp']
     new_character.max_hp = new_character.hit_points
-    new_character.speed = temp_race['speed'] + temp_kit['speed']   
+    new_character.speed = temp_race['speed'] + temp_kit['speed']
     new_character.size = 'medium'
     new_character.attack = 3
 

@@ -68,7 +68,7 @@ class TestMeleeCombat(IntegrationTest):
         self.character1.tick = 1
         self.character1.hit_points = 10
         self.character1.attack = 3
-        self.character1.set_body(5)
+        self.character1.body = 5
 
         self.character2.location = (6, 5)
         self.character2.level = self.model.dungeon.levels
@@ -76,7 +76,7 @@ class TestMeleeCombat(IntegrationTest):
         self.character2.tick = 1
         self.character2.hit_points = 10
         self.character2.attack = 3
-        self.character2.set_body(5)
+        self.character2.body = 5
 
     def test_get_unarmed_action(self):
         """
@@ -122,7 +122,7 @@ class TestMeleeCombat(IntegrationTest):
         character1.tick = 0
 
         character2 = mock(Character)
-        when(character2).get_hp().thenReturn(20)
+        character2.hit_points = 20
 
         self.character1.execute_action(AttackParameters(
                                                 character1,

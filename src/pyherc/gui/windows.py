@@ -371,7 +371,7 @@ class GameWindow:
             lineNumber = lineNumber + 1
 
         #temporary hp display
-        text = font.render('HP: ' + player.get_hp().__str__() +
+        text = font.render('HP: ' + str(player.hp) +
                            ' / ' + player.get_max_hp().__str__(), True, (255, 255, 255))
         textRect = text.get_rect()
         textRect.topleft = (5, 85)

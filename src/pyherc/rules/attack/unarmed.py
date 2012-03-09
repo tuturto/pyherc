@@ -75,4 +75,4 @@ class UnarmedDamage(Damage):
         Args:
             target: Target to damage
         """
-        target.set_hp(target.get_hp() - self.damage)
+        target.hit_points = target.hit_points - self.damage

@@ -102,7 +102,7 @@ class ToHit(object):
         Checks if the hit lands
         @returns: True if hit is successful, False otherwise
         """
-        target_number = self.attacker.get_body()
+        target_number = self.attacker.body
 
         to_hit_roll = self.rng.randint(1, 6) + self.rng.randint(1, 6)
 
@@ -133,4 +133,4 @@ class Damage(object):
         Applies damage to target
         @param target: Target to damage
         """
-        target.set_hp(target.get_hp() - self.damage)
+        target.hit_points = target.hit_points - self.damage

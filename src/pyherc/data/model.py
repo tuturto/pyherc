@@ -80,7 +80,7 @@ class Model:
         if self.player != None:
             self.player.receive_event(event)
 
-class Character:
+class Character(object):
     """
     Represents a character in playing world
     """
@@ -91,14 +91,15 @@ class Character:
         """
         Default constructor
         """
+        super(Character, self).__init__()
         # attributes
-        self.body = None
-        self.finesse = None
+        self.__body = None
+        self.__finesse = None
         self.mind = None
         self.name = 'prototype'
         self.race = None
         self.kit = None
-        self.hit_points = None
+        self.__hit_points = None
         self.max_hp = None
         self.speed = None
         self.inventory = []
@@ -138,64 +139,64 @@ class Character:
         """
         self.artificial_intelligence.act(model)
 
-    def get_hp(self):
+    def __get_hp(self):
         """
         Get current hitpoints
         """
-        return self.hit_points
+        return self.__hit_points
 
-    def set_hp(self, hit_points):
+    def __set_hp(self, hit_points):
         """
         Set current hitpoints
             hit_points: hit points to set
         """
-        self.hit_points = hit_points
+        self.__hit_points = hit_points
 
-    def get_body(self):
+    def __get_body(self):
         """
         Get body attribute
 
         Returns:
             Body attribute of this character
         """
-        return self.body
+        return self.__body
 
-    def set_body(self, body):
+    def __set_body(self, body):
         """
         Set body attribute
 
         Args:
             body: body attribute to set
         """
-        self.body = body
+        self.__body = body
 
-    def get_finesse(self):
+    def __get_finesse(self):
         """
         Get finesse attribute
         @returns: finesse attribute
         """
-        return self.finesse
+        return self.__finesse
 
-    def set_finesse(self, finesse):
+    def __set_finesse(self, finesse):
         """
         Set finesse attribute
         @param finesse: finesse attribute to set
         """
-        self.finesse = finesse
+        self.__finesse = finesse
 
-    def get_mind(self):
+    def __get_mind(self):
         """
         Get mind attribute
         @returns: Mind attribute
         """
-        return self.mind
+        return self.__mind
 
-    def set_mind(self, mind):
+    def __set_mind(self, mind):
         """
         Set mind attribute
         @param mind: mind attribute to set
         """
-        self.mind = mind
+        self.__mind = mind
 
     def get_attack(self):
         """
@@ -356,6 +357,11 @@ class Character:
         Raise event for other creatures to see
         """
         self.action_factory.model.raise_event(event)
+
+    hit_points = property(__get_hp, __set_hp)
+    body = property(__get_body, __set_body)
+    finesse = property(__get_finesse, __set_finesse)
+    mind = property(__get_mind, __set_mind)
 
 class Damage:
     """
