@@ -67,7 +67,18 @@ class Logged(Aspect):
         """
         Called when associated method raises an exception
         """
-        pass
+        function = call_data.function
+        exception = call_data.exception
+
+        if function != None:
+            function_name = function.__name__
+        else:
+            function_name = ' '
+
+        log_message = '{0} :exception raised: {1}'.format(
+                                                          function_name,
+                                                          exception)
+        self.logger.error(log_message)
 
     def atReturn(self, call_data):
         """
