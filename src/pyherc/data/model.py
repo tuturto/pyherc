@@ -30,8 +30,9 @@ Classes:
 """
 
 import logging
+import random
 from pyherc.aspects import Logged
-from pyherc.rules.public import MoveParameters
+from pyherc.rules.public import MoveParameters, AttackParameters
 
 class Model:
     """
@@ -120,6 +121,7 @@ class Character(object):
         self.mimic_item = None
         self.action_factory = action_factory
         self.artificial_intelligence = None
+        self.rng = random.Random()
         self.logger = logging.getLogger('pyherc.data.model.Character')
 
     def __str__(self):
@@ -335,6 +337,22 @@ class Character(object):
                                                                 direction,
                                                                 movement_mode))
         return action.is_legal()
+
+    @logged
+    def perform_attack(self, direction):
+        """
+        Attack to given direction
+
+        Args:
+            direction: direction to attack
+        """
+        action = self.action_factory.get_action(
+                                                AttackParameters(
+                                                                self,
+                                                                direction,
+                                                                'unarmed',
+                                                                self.rng))
+        action.execute()
 
     def __getstate__(self):
         '''

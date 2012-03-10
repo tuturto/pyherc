@@ -102,7 +102,7 @@ class StubModel():
         """
         pass
 
-class IntegrationTest():
+class IntegrationTest(object):
     """
     Test base with tables initialised
     """
@@ -474,6 +474,8 @@ class IntegrationTest():
     </creature>
 </creatures>
 """
+        self.model = pyherc.data.model.Model()
+
         walk_factory = WalkFactory()
         move_factory = MoveFactory(walk_factory)
 
@@ -484,10 +486,9 @@ class IntegrationTest():
                                         melee_combat_factory])
 
         self.action_factory = ActionFactory(
-                                            StubModel(),
+                                            self.model,
                                             [move_factory, attack_factory])
 
-        self.model = pyherc.data.model.Model()
         self.tables = pyherc.rules.tables.Tables()
         self.tables.load_tables(None, itemConfig, creatureConfig)
         self.model.tables = self.tables

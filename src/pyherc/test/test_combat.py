@@ -42,8 +42,7 @@ class TestMeleeCombat(IntegrationTest):
         """
         Default constructor
         """
-        IntegrationTest.__init__(self)
-        self.model = None
+        super(TestMeleeCombat, self).__init__()
         self.level = None
         self.character1 = None
         self.character2 = None
@@ -111,10 +110,7 @@ class TestMeleeCombat(IntegrationTest):
         """
         Test that attacking raises events
         """
-        rng = StubRandomNumberGenerator()
-        rng.inject(12, [2, 2, 2, 2, 2, 2, 2])
-
-        character1 = mock(Character)
+        character1 = Character(self.action_factory)
         when(character1).get_attack().thenReturn(12)
         character1.speed = 1
         character1.tick = 0
@@ -124,13 +120,9 @@ class TestMeleeCombat(IntegrationTest):
         character2.hit_points = 20
         self.level.add_creature(character2, (2, 3))
 
-        self.character1.execute_action(AttackParameters(
-                                                character1,
-                                                5,
-                                                'unarmed',
-                                                rng))
+        character1.perform_attack(5)
 
-        verify(character1).raise_event(any())
+        verify(character2).receive_event(any())
 
     def test_attack_with_weapon(self):
         """
