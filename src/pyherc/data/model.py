@@ -304,19 +304,18 @@ class Character(object):
         return action
 
     @logged
-    def move(self, direction, movement_mode):
+    def move(self, direction):
         """
         Move this character to specified direction
 
         Args:
             direction: direction to move
-            movement_mode: movement mode
         """
         action = self.action_factory.get_action(
                                                 MoveParameters(
                                                                 self,
                                                                 direction,
-                                                                movement_mode))
+                                                                'walk'))
         action.execute()
 
     @logged

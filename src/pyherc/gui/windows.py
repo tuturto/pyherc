@@ -149,13 +149,9 @@ class GameWindow:
                         #handle moving
                         direction = self.moveKeyMap[event.key]
                         if player.is_move_legal(direction, 'walk'):
-                            player.move(direction, 'walk')
+                            player.move(direction)
                         else:
-                            target = player.level.get_creature_at(action.new_location)
-                            if target != None:
-                                player.execute_action(
-                                        AttackParameters(player, target, 'unarmed')
-                                        )
+                            player.perform_attack(direction)
                     elif event.key == K_PERIOD:
                         #pick up items
                         items = player.level.get_items_at(player.location)

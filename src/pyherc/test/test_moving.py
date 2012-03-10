@@ -80,7 +80,7 @@ class TestMoving(IntegrationTest):
         """
         assert(self.character.location == (5, 5))
 
-        self.character.move(3, 'walk')
+        self.character.move(3)
 
         assert(self.character.location == (6, 5))
 
@@ -90,7 +90,7 @@ class TestMoving(IntegrationTest):
         """
         self.character.location = (1, 1)
 
-        self.character.move(1, 'walk')
+        self.character.move(1)
 
         assert(self.character.location == (1, 1))
 
@@ -101,7 +101,7 @@ class TestMoving(IntegrationTest):
         assert(self.character.location == (5, 5))
         assert(self.character.level == self.level1)
 
-        self.character.move(9, 'walk')
+        self.character.move(9)
 
         assert(self.character.location == (10, 10))
         assert(self.character.level == self.level2)
@@ -113,7 +113,7 @@ class TestMoving(IntegrationTest):
         self.character.location = (6, 3)
         assert(self.character.level == self.level1)
 
-        self.character.move(9, 'walk')
+        self.character.move(9)
 
         assert(self.character.location == (6, 3))
         assert(self.character.level == self.level1)
@@ -124,6 +124,6 @@ class TestMoving(IntegrationTest):
         """
         tick = self.character.tick
 
-        self.character.move(3, 'walk')
+        self.character.move(3)
 
         assert self.character.tick > tick
