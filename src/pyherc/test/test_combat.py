@@ -62,21 +62,19 @@ class TestMeleeCombat(IntegrationTest):
 
         self.model.dungeon.levels = self.level
 
-        self.character1.location = (5, 5)
-        self.character1.level = self.model.dungeon.levels
         self.character1.speed = 1
         self.character1.tick = 1
         self.character1.hit_points = 10
         self.character1.attack = 3
         self.character1.body = 5
+        self.level.add_creature(self.character1, (5, 5))
 
-        self.character2.location = (6, 5)
-        self.character2.level = self.model.dungeon.levels
         self.character2.speed = 1
         self.character2.tick = 1
         self.character2.hit_points = 10
         self.character2.attack = 3
         self.character2.body = 5
+        self.level.add_creature(self.character2, (6, 5))
 
     def test_get_unarmed_action(self):
         """
@@ -87,7 +85,7 @@ class TestMeleeCombat(IntegrationTest):
 
         action = self.action_factory.get_action(AttackParameters(
                                                       self.character1,
-                                                      self.character2,
+                                                      3,
                                                       'unarmed',
                                                       rng))
 
@@ -103,7 +101,7 @@ class TestMeleeCombat(IntegrationTest):
 
         self.character1.execute_action(AttackParameters(
                                                 self.character1,
-                                                self.character2,
+                                                3,
                                                 'unarmed',
                                                 rng))
 
@@ -120,13 +118,15 @@ class TestMeleeCombat(IntegrationTest):
         when(character1).get_attack().thenReturn(12)
         character1.speed = 1
         character1.tick = 0
+        self.level.add_creature(character1, (2, 2))
 
         character2 = mock(Character)
         character2.hit_points = 20
+        self.level.add_creature(character2, (2, 3))
 
         self.character1.execute_action(AttackParameters(
                                                 character1,
-                                                character2,
+                                                5,
                                                 'unarmed',
                                                 rng))
 
@@ -146,7 +146,7 @@ class TestMeleeCombat(IntegrationTest):
 
         self.character1.execute_action(AttackParameters(
                                                 self.character1,
-                                                self.character2,
+                                                3,
                                                 'melee',
                                                 rng))
 

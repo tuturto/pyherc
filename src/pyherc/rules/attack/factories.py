@@ -42,7 +42,6 @@ class AttackFactory(SubActionFactory):
         """
         Constructor for this factory
         """
-        self.logger = logging.getLogger('pyherc.rules.attack.factories.AttackFactory')
         self.action_type = 'attack'
 
         if isinstance(factories, types.ListType):
@@ -63,23 +62,7 @@ class UnarmedCombatFactory():
         """
         Constructor for this factory
         """
-        self.logger = logging.getLogger('pyherc.rules.attack.factories.UnarmedCombatFactory')
         self.attack_type = 'unarmed'
-
-    def __getstate__(self):
-        """
-        Override __getstate__ in order to get pickling work
-        """
-        d = dict(self.__dict__)
-        del d['logger']
-        return d
-
-    def __setstate__(self, d):
-        """
-        Override __setstate__ in order to get pickling work
-        """
-        self.__dict__.update(d)
-        self.logger = logging.getLogger('pyherc.rules.attack.factories.UnarmedCombatFactory')
 
     def __str__(self):
         return 'unarmed combat factory'
@@ -109,17 +92,57 @@ class UnarmedCombatFactory():
             Action that can be executed
         """
         attacker = parameters.attacker
-        target = parameters.target
+        target = self.get_target(parameters)
 
-        attack = AttackAction('unarmed',
+        if target != None:
+            attack = AttackAction('unarmed',
                         UnarmedToHit(attacker, target,
                                     parameters.random_number_generator),
                         UnarmedDamage(attacker.get_attack()),
                         attacker,
                         target,
                         parameters.model)
+        else:
+            attack = None
 
         return attack
+
+    @logged
+    def get_target(self, parameters):
+        """
+        Get target of the attack
+
+        Args:
+            parameters: UnarmedAttackParameters
+
+        Returns:
+            target character if found, otherwise None
+        """
+        attacker = parameters.attacker
+        location = attacker.location
+        direction = parameters.direction
+        level = attacker.level
+
+        if direction == 1:
+            target_location = (location[0], location[1] - 1)
+        elif direction == 2:
+            target_location = (location[0] + 1, location[1] - 1)
+        elif direction == 3:
+            target_location = (location[0] + 1, location[1])
+        elif direction == 4:
+            target_location = (location[0] + 1, location[1] + 1)
+        elif direction == 5:
+            target_location = (location[0], location[1] + 1)
+        elif direction == 6:
+            target_location = (location[0] - 1, location[1] + 1)
+        elif direction == 7:
+            target_location = (location[0] - 1, location[1])
+        elif direction == 8:
+            target_location = (location[0] - 1, location[1] - 1)
+
+        target = level.get_creature_at(target_location)
+
+        return target
 
 class MeleeCombatFactory():
     """
@@ -132,23 +155,7 @@ class MeleeCombatFactory():
         """
         Constructor for this factory
         """
-        self.logger = logging.getLogger('pyherc.rules.attack.factories.MeleeCombatFactory')
         self.attack_type = 'melee'
-
-    def __getstate__(self):
-        """
-        Override __getstate__ in order to get pickling work
-        """
-        d = dict(self.__dict__)
-        del d['logger']
-        return d
-
-    def __setstate__(self, d):
-        """
-        Override __setstate__ in order to get pickling work
-        """
-        self.__dict__.update(d)
-        self.logger = logging.getLogger('pyherc.rules.attack.factories.MeleeCombatFactory')
 
     def __str__(self):
         return 'melee combat factory'
@@ -175,15 +182,55 @@ class MeleeCombatFactory():
             parameters: Parameters used to control attack creation
         """
         attacker = parameters.attacker
-        target = parameters.target
+        target = self.get_target(parameters)
         weapon = attacker.weapons[0]
 
-        attack = AttackAction('melee',
+        if target != None:
+            attack = AttackAction('melee',
                         MeleeToHit(attacker, target,
                                     parameters.random_number_generator),
                         MeleeDamage(weapon.weapon_data.damage),
                         attacker,
                         target,
                         parameters.model)
+        else:
+            attack = None
 
         return attack
+
+    @logged
+    def get_target(self, parameters):
+        """
+        Get target of the attack
+
+        Args:
+            parameters: UnarmedAttackParameters
+
+        Returns:
+            target character if found, otherwise None
+        """
+        attacker = parameters.attacker
+        location = attacker.location
+        direction = parameters.direction
+        level = attacker.level
+
+        if direction == 1:
+            target_location = (location[0], location[1] - 1)
+        elif direction == 2:
+            target_location = (location[0] + 1, location[1] - 1)
+        elif direction == 3:
+            target_location = (location[0] + 1, location[1])
+        elif direction == 4:
+            target_location = (location[0] + 1, location[1] + 1)
+        elif direction == 5:
+            target_location = (location[0], location[1] + 1)
+        elif direction == 6:
+            target_location = (location[0] - 1, location[1] + 1)
+        elif direction == 7:
+            target_location = (location[0] - 1, location[1])
+        elif direction == 8:
+            target_location = (location[0] - 1, location[1] - 1)
+
+        target = level.get_creature_at(target_location)
+
+        return target

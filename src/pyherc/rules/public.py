@@ -127,14 +127,14 @@ class AttackParameters(ActionParameters):
     """
 
     @Logged()
-    def __init__(self, attacker, target, attack_type,
-                        random_number_generator = random.Random()):
+    def __init__(self, attacker, direction, attack_type,
+                 random_number_generator):
         """
         Construct AttackParameters
 
         Args:
             attacker: Character doing an attack
-            target: Character being attacked
+            direction: Direction to attack to
             attack_type: type of attack to perform
             random_number_generator: Random number generator to use
         """
@@ -142,7 +142,7 @@ class AttackParameters(ActionParameters):
 
         self.action_type = 'attack'
         self.attacker = attacker
-        self.target = target
+        self.direction = direction
         self.attack_type = attack_type
         self.random_number_generator = random_number_generator
         self.model = None
