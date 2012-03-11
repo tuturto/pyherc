@@ -23,4 +23,4 @@ Package for room generators
 '''
 
 from .squareroom import SquareRoomGenerator
-
+from .catacombs import CatacombsGenerator

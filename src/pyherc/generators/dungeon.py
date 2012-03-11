@@ -27,7 +27,6 @@ import random
 import pyherc.generators.item
 import pyherc.generators.creature
 import pyherc.generators.utils
-from pyherc.generators.level.catacombs import CatacombsLevelGenerator
 from pyherc.data.dungeon import Dungeon
 from pyherc.data.dungeon import Portal
 from pyherc.data import tiles

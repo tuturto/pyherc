@@ -37,6 +37,7 @@ from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.room import SquareRoomGenerator
+from pyherc.generators.level.room import CatacombsGenerator
 from pyherc.generators.level.partitioners import GridPartitioner
 
 from pyherc.generators.level.decorator import ReplacingDecorator
@@ -199,13 +200,16 @@ class Configuration(object):
         """
         Initialise upper catacombs
         """
-        room_generators = [SquareRoomGenerator(FLOOR_CONSTRUCTED,
+        room_generators = [CatacombsGenerator(FLOOR_CONSTRUCTED,
                                                WALL_EMPTY,
                                                ['upper catacombs',
-                                               'lower catacombs'])]
+                                               'lower catacombs'],
+                                               self.rng)]
         level_partitioners = [GridPartitioner(['upper catacombs',
                                                'lower catacombs'],
-                                              self.rng)]
+                                               1,
+                                               1,
+                                               self.rng)]
 
         replacer_config = ReplacingDecoratorConfig(['upper catacombs',
                                                     'lower catacombs'],
@@ -293,6 +297,8 @@ class Configuration(object):
                                                WALL_EMPTY,
                                                ['upper crypt'])]
         level_partitioners = [GridPartitioner(['upper crypt'],
+                                              4,
+                                              3,
                                               self.rng)]
 
         replacer_config = ReplacingDecoratorConfig(['upper crypt'],

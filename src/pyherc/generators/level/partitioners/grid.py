@@ -24,11 +24,15 @@ Module for partitioning level to equal grid
 
 import logging
 from pyherc.generators.level.partitioners.section import Section
+from pyherc.aspects import Logged
 
 class RandomConnector(object):
     """
     Class for building random connection network from sections
     """
+    logged = Logged()
+
+    @logged
     def __init__(self, random_generator):
         """
         Default constructor
@@ -39,6 +43,7 @@ class RandomConnector(object):
         self.random_generator = random_generator
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.grid.RandomConnector') #pylint: disable=C0301
 
+    @logged
     def connect_sections(self, sections, start_section = None):
         """
         Connects sections together
@@ -54,23 +59,25 @@ class RandomConnector(object):
 
         self.form_path_from_sections(start_location, sections)
 
-        unconnected_sections = [x for x in sections
-                                                if x.connected == False]
-
-        while len(unconnected_sections) > 0:
-            edge_sections = [x for x in sections
-                             if x.connected == True
-                             and x.has_unconnected_neighbours()]
-
-            start_location = self.random_generator.choice(edge_sections)
-
-            self.form_path_from_sections(start_location, sections)
-
+        if len(sections) > 1:
             unconnected_sections = [x for x in sections
-                                                if x.connected == False]
+                                if x.connected == False]
+
+            while len(unconnected_sections) > 0:
+                edge_sections = [x for x in sections
+                                if x.connected == True
+                                and x.has_unconnected_neighbours()]
+
+                start_location = self.random_generator.choice(edge_sections)
+
+                self.form_path_from_sections(start_location, sections)
+
+                unconnected_sections = [x for x in sections
+                                        if x.connected == False]
 
         return sections
 
+    @logged
     def form_path_from_sections(self, start_section, sections):
         """
         Builds path of connected sections
@@ -98,20 +105,27 @@ class GridPartitioner(object):
     """
     Class for partitioning level to equal grid
     """
+    logged = Logged()
 
-    def __init__(self, level_types, random_generator):
+    @logged
+    def __init__(self, level_types, x_sections,  y_sections, random_generator):
         """
         Default constructor
 
         Args:
             level_types: types of level partitioner can be used for
+            x_sections: amount of sections to split horizontally
+            y_sections: amount of sections to split vertically
             random_generator: random number generator
         """
         self.connectors = [RandomConnector(random_generator)]
         self.level_types = level_types
+        self.x_sections = x_sections
+        self.y_sections = y_sections
         self.random_generator = random_generator
 
-    def partition_level(self, level,  x_sections = 3,  y_sections = 3):
+    @logged
+    def partition_level(self, level):
         """
         Creates partitioning for a given level with connection points
 
@@ -122,12 +136,14 @@ class GridPartitioner(object):
             List of connected sections
         """
         sections = []
-        section_matrix = [[None for i in range(y_sections)]
-                                               for j in range(x_sections)]
+        section_matrix = [[None for i in range(self.y_sections)]
+                                               for j in range(self.x_sections)]
         size_of_level = level.get_size()
 
-        x_sections = self.split_range_to_equals(size_of_level[0], x_sections)
-        y_sections = self.split_range_to_equals(size_of_level[1], y_sections)
+        x_sections = self.split_range_to_equals(size_of_level[0],
+                                                self.x_sections)
+        y_sections = self.split_range_to_equals(size_of_level[1],
+                                                self.y_sections)
 
         for y_block in range(len(y_sections)):
             for x_block in range(len(x_sections)):
@@ -150,6 +166,7 @@ class GridPartitioner(object):
 
         return connected_sections
 
+    @logged
     def connect_new_section(self, section, location, sections):
         """
         Connects section in given location to its neighbours
@@ -164,6 +181,7 @@ class GridPartitioner(object):
             up_section.neighbours.append(section)
             section.neighbours.append(up_section)
 
+    @logged
     def split_range_to_equals(self, length, sections):
         """
         Split range into equal sized chunks

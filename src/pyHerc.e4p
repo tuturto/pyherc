@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-03-06, 01:06:09 -->
+<!-- Saved: 2012-03-11, 10:42:48 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -68,7 +68,6 @@
     <Source>pyherc/rules/attack/unarmed.py</Source>
     <Source>pyherc/gui/startmenu.py</Source>
     <Source>pyherc/generators/level/__init__.py</Source>
-    <Source>pyherc/generators/level/catacombs.py</Source>
     <Source>pyherc/generators/level/testlevel.py</Source>
     <Source>pyherc/generators/level/config.py</Source>
     <Source>pyherc/test/test_gridpartitioner.py</Source>
@@ -101,6 +100,7 @@
     <Source>pyherc/test/integration/__init__.py</Source>
     <Source>pyherc/test/integration/test_config.py</Source>
     <Source>pyherc/aspects.py</Source>
+    <Source>pyherc/generators/level/room/catacombs.py</Source>
   </Sources>
   <Forms>
   </Forms>

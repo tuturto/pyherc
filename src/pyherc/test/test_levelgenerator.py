@@ -28,6 +28,7 @@ from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
+from pyherc.generators.level.room.catacombs import CatacombsGenerator
 from pyherc.generators.level.decorator import ReplacingDecorator
 from pyherc.generators.level.portals import PortalAdder
 from pyherc.generators.level.portals import PortalAdderConfiguration
@@ -329,10 +330,8 @@ class TestLevelGenerator:
         section1 = mock()
         section2 = mock()
 
-        when(partitioner).partition_level(any(),
-                                          any(),
-                                          any()).thenReturn([section1,
-                                                        section2])
+        when(partitioner).partition_level(any()).thenReturn([section1,
+                                                             section2])
 
         generator = LevelGenerator(factory, partitioner, room_generator,
                                    level_decorator, [stair_adder],
@@ -342,7 +341,7 @@ class TestLevelGenerator:
 
         generator.generate_level(portal)
 
-        verify(partitioner).partition_level(any(), any(), any())
+        verify(partitioner).partition_level(any())
         verify(room_generator, times = 2).generate_room(any())
         verify(level_decorator).decorate_level(any())
         verify(creature_adder).add_creatures(any())
@@ -354,10 +353,46 @@ class TestLevelGenerator:
         """
         factory = mock(ActionFactory)
         partitioner = GridPartitioner(['crypt'],
+                                      4,
+                                      3,
                                       self.rng)
         room_generator = SquareRoomGenerator(FLOOR_ROCK,
                                              WALL_EMPTY,
                                              ['crypt'])
+        level_decorator = mock()
+        portal_adder = PortalAdder((1, 2),
+                                  'crypt',
+                                  mock(),
+                                  self.rng)
+        creature_adder = mock()
+        item_adder = mock()
+
+        portal = mock(Portal)
+
+        generator = LevelGenerator(factory, partitioner, room_generator,
+                                   level_decorator, [portal_adder],
+                                   item_adder,
+                                   creature_adder,
+                                   self.rng,
+                                   (60, 40))
+
+        new_level = generator.generate_level(portal)
+
+        assert_that(map_accessibility_in(new_level, WALL_EMPTY), is_(True))
+
+    def test_catacombs_generation(self):
+        """
+        Test that catacombs generator creates a fully connected level
+        """
+        factory = mock(ActionFactory)
+        partitioner = GridPartitioner(['crypt'],
+                                      1,
+                                      1,
+                                      self.rng)
+        room_generator = CatacombsGenerator(FLOOR_ROCK,
+                                             WALL_EMPTY,
+                                             ['crypt'],
+                                             self.rng)
         level_decorator = mock()
         portal_adder = PortalAdder((1, 2),
                                   'crypt',

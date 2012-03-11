@@ -50,13 +50,20 @@ class TestGridPartitioner:
         when(self.mock_level).get_size().thenReturn((20, 20))
         self.rng = random.Random()
         self.partitioner = GridPartitioner('crypt',
+                                           2,
+                                           1,
                                            self.rng)
 
     def test_partitioning_returns_sections(self): # pylint: disable=C0103
         """
         Test that partitioning level returns default amount of sections
         """
-        sections = self.partitioner.partition_level(self.mock_level, 3, 3)
+        partitioner = GridPartitioner('crypt',
+                                      3,
+                                      3,
+                                      self.rng)
+
+        sections = partitioner.partition_level(self.mock_level)
 
         assert_that(sections, has_length(9))
 
@@ -64,7 +71,7 @@ class TestGridPartitioner:
         """
         Test that sections are marked being neighbours
         """
-        sections = self.partitioner.partition_level(self.mock_level, 2, 1)
+        sections = self.partitioner.partition_level(self.mock_level)
 
         assert_that(sections[0].neighbours, has_length(1))
 
@@ -72,7 +79,11 @@ class TestGridPartitioner:
         """
         Partitioned sections should be linked together
         """
-        sections = self.partitioner.partition_level(self.mock_level, 2, 2)
+        partitioner = GridPartitioner('crypt',
+                                      2,
+                                      2,
+                                      self.rng)
+        sections = partitioner.partition_level(self.mock_level)
 
         assert_that(sections, has_length(4))
         assert_that(sections[0].connections, has_length(greater_than(0)))
@@ -81,7 +92,7 @@ class TestGridPartitioner:
         """
         Test that created sections are linked to level
         """
-        sections = self.partitioner.partition_level(self.mock_level, 2, 2)
+        sections = self.partitioner.partition_level(self.mock_level)
 
         for section in sections:
             assert_that(section.level, is_(same_instance(self.mock_level)))
@@ -101,6 +112,8 @@ class TestGridPartitionerUtilities:
         Test that a line can be split into equal parts
         """
         partitioner = GridPartitioner(['crypt'],
+                                      4,
+                                      3,
                                       random.Random())
 
         ranges = partitioner.split_range_to_equals(10, 3)

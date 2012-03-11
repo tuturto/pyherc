@@ -6,7 +6,6 @@ pyherc.generators.level
 .. toctree::
    :maxdepth: 2
    
-   module_catacombs
    module_config
    module_creatures
    module_items

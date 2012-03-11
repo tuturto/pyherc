@@ -188,7 +188,7 @@ class LevelGenerator:
         #TODO: configurable
         new_level = Level(self.size, -2, -101)
 
-        sections = self.partitioner.partition_level(new_level, 4, 3)
+        sections = self.partitioner.partition_level(new_level)
 
         for section in sections:
             self.room_generator.generate_room(section)
