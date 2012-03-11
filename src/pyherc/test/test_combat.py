@@ -111,7 +111,7 @@ class TestMeleeCombat(IntegrationTest):
         Test that attacking raises events
         """
         character1 = Character(self.action_factory)
-        when(character1).get_attack().thenReturn(12)
+        character1.attack = 12
         character1.speed = 1
         character1.tick = 0
         self.level.add_creature(character1, (2, 2))

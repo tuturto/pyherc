@@ -123,7 +123,6 @@ class CatacombsGenerator(object):
                 #areas next to each other
                 if center1[0] < center2[0]:
                     for x in range(center1[0], center2[0] + 1):
-                        temp_level.walls[x][center1[1]] = self.empty_tile
                         section.set_floor((x, center1[1]),
                                           self.floor_tile,
                                           'corridor')
