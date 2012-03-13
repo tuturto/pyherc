@@ -5,3 +5,5 @@
 report.html
 pyherc.log
 setup.cfg
+cover
+.coverage
