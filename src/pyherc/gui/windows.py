@@ -44,12 +44,16 @@ from pygame.locals import K_ESCAPE, K_PERIOD
 from pygame.locals import K_d, K_w, K_r, K_q,  K_i
 from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8, K_KP9
 
+from pyherc.gui.options import OptionsMenu
+from pyherc.gui.startmenu import StartMenu
 
 class MainWindow(pgu.gui.app.App):
     """
     Main window of the game
     """
+    logged = Logged()
 
+    @logged
     def __init__(self,  application, base_path, surface_manager, screen, theme=None, **params):
         """
         Initialises the main window
@@ -69,6 +73,28 @@ class MainWindow(pgu.gui.app.App):
         pygame.display.set_caption(application.config.caption)
 
         self.surface_manager = surface_manager
+
+    @logged
+    def change_state(self, state):
+        """
+        Change state of the gui
+
+        Args:
+            state: String specifying which state to display
+        """
+        if state == 'options menu':
+            mode = OptionsMenu(self.application,
+                               self.screen,
+                               self.surface_manager)
+        elif state == 'start menu':
+            mode = StartMenu(self.application,
+                             self.screen,
+                             self.surface_manager)
+
+        if state != None:
+            self.init(widget = mode, screen = self.screen)
+
+
 
 class StartNewGameWindow:
     """

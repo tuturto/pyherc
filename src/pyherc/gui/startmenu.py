@@ -27,6 +27,8 @@ import images
 import pyherc
 import pgu.gui
 
+from pyherc.gui.options import OptionsMenu
+
 class StartMenu(pgu.gui.Container):
     """
     Start menu
@@ -67,8 +69,12 @@ class StartMenu(pgu.gui.Container):
         b = pgu.gui.Button("Load game", width=150)
         self.add(b, 325, 250)
 
-        b = pgu.gui.Button("Quit", width=150)
+        b = pgu.gui.Button("Options", width=150)
         self.add(b, 325, 300)
+        b.connect(pgu.gui.CLICK, self.__options)
+
+        b = pgu.gui.Button("Quit", width=150)
+        self.add(b, 325, 350)
         b.connect(pgu.gui.CLICK, self.__quit_game)
 
     def __start_new_game(self):
@@ -96,3 +102,10 @@ class StartMenu(pgu.gui.Container):
         """
         #pylint: disable=E1103
         self.get_toplevel().quit()
+
+    def __options(self):
+        """
+        Display options
+        """
+        self.application.change_state('options menu')
+

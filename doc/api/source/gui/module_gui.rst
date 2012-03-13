@@ -9,5 +9,6 @@ pyherc.gui
    module_dialogs
    module_images
    module_startmenu
+   module_options
    module_surfacemanager
    module_windows

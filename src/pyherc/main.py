@@ -151,6 +151,15 @@ class Application:
         self.logger = logging.getLogger('pyherc.main.Application')
         self.logger.info("Logging started")
 
+    def change_state(self, state):
+        """
+        Change state of the gui
+
+        Args:
+            state: String specifying which state to display
+        """
+        self.gui.change_state(state)
+
     def __get_action_factory(self):
         """
         Get action factory instance
