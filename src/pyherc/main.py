@@ -54,12 +54,13 @@ print '#'
 print '#   You should have received a copy of the GNU General Public License'
 print '#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.'
 
-class Application:
+class Application(object):
     """
     This class represents main application
     """
 
     def __init__(self):
+        super(Application, self).__init__()
         self.config = None
         self.gui = None
         self.world = None
