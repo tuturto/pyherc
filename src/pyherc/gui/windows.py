@@ -46,6 +46,7 @@ from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8
 
 from pyherc.gui.options import OptionsMenu
 from pyherc.gui.startmenu import StartMenu
+from pyherc.gui.gamewindow import GameWindow
 
 class MainWindow(pgu.gui.app.App):
     """
@@ -90,6 +91,10 @@ class MainWindow(pgu.gui.app.App):
             mode = StartMenu(self.application,
                              self.screen,
                              self.surface_manager)
+        elif state == 'game window':
+            mode = GameWindow(self.application,
+                              self.screen,
+                              self.surface_manager)
 
         if state != None:
             self.init(widget = mode, screen = self.screen)
@@ -133,7 +138,7 @@ class StartNewGameWindow:
         self.character.level = self.application.world.dungeon.levels
         self.character.name = 'Adventurer'
 
-class GameWindow:
+class OldGameWindow:
     """
     Window that displays the playing world
     """
