@@ -192,4 +192,5 @@ class Application(object):
     item_generator = property(__get_item_generator)
     level_generator_factory = property(__get_level_generator_factory)
 
+render = None
 APP = Application()

@@ -25,6 +25,7 @@ import sys
 import os.path
 import pygame
 import thread
+from pyherc.debug import initialise_server, get_urls
 
 try:
     import web
@@ -56,18 +57,6 @@ print '#'
 print '#   You should have received a copy of the GNU General Public License'
 print '#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.'
 
-class Index:
-    def GET(self):
-        return render.index()
-
-class Map:
-    def GET(self):
-        return APP.world.player.level.dump_string()
-
-class Player:
-    def GET(self):
-        return render.player(APP.world.player)
-
 if __name__ == "__main__":
     APP.detect_resource_directory()
     APP.process_command_line(sys.argv[1:])
@@ -77,12 +66,8 @@ if __name__ == "__main__":
     if web_loaded == False:
         print 'web.py not found, debug server not available'
     else:
-        render = web.template.render('{0}/html/'.format(APP.base_path))
-        urls = (
-            '/', 'Index',
-            '/map', 'Map',
-            '/player', 'Player'
-            )
+        initialise_server()
+        urls = get_urls()
         app = web.application(urls, globals())
         thread.start_new_thread(app.run, ())
 
