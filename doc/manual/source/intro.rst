@@ -24,6 +24,7 @@ Dependencies
 - PyGame 1.9.2
 - PGU 0.18
 - Aspyct 3.0 beta 4
+- web.py 0.3 (only needed for running debug server)
 - mockito-python 0.5.0 (only needed for running test cases)
 - pyHamcrest 1.6 (only needed for running test cases)
 - Sphinx 1.1.2 (only needed for generating documentation)
@@ -45,6 +46,10 @@ Install PGU by typing::
 
     easy_install -U pgu
 
+If you want to run debug server, install web.py::
+
+    easy_install -U web.py
+    
 If you want to be able to run test cases, install mockito-python and pyHamcrest::
 
     easy_install -U mockito
