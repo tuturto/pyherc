@@ -58,12 +58,7 @@ print '#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.'
 
 class Index:
     def GET(self):
-        return '''
-        <html><head></head><body>
-        <p><a href="map">Map</a></p>
-        <p><a href="player">Player</a></p>
-        </body></html>
-        '''
+        return render.index()
 
 class Map:
     def GET(self):
@@ -71,18 +66,18 @@ class Map:
 
 class Player:
     def GET(self):
-        data = vars(APP.world.player)
-        return_value = ''
-
-        for key in data.keys():
-            return_value = return_value + key + " : " + str(data[key]) + '\n'
-
-        return return_value
+        return render.player(APP.world.player)
 
 if __name__ == "__main__":
+    APP.detect_resource_directory()
+    APP.process_command_line(sys.argv[1:])
+    APP.start_logging()
+    APP.load_configuration()
+
     if web_loaded == False:
         print 'web.py not found, debug server not available'
     else:
+        render = web.template.render('{0}/html/'.format(APP.base_path))
         urls = (
             '/', 'Index',
             '/map', 'Map',
@@ -91,8 +86,4 @@ if __name__ == "__main__":
         app = web.application(urls, globals())
         thread.start_new_thread(app.run, ())
 
-    APP.detect_resource_directory()
-    APP.process_command_line(sys.argv[1:])
-    APP.start_logging()
-    APP.load_configuration()
     APP.run()
