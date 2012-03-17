@@ -353,11 +353,15 @@ class Character(object):
         Args:
             direction: direction to attack
         """
+        if len(self.weapons) == 0:
+            attack_type = 'unarmed'
+        else:
+            attack_type = 'melee'
         action = self.action_factory.get_action(
                                                 AttackParameters(
                                                                 self,
                                                                 direction,
-                                                                'unarmed',
+                                                                attack_type,
                                                                 self.rng))
         if action != None:
             action.execute()
