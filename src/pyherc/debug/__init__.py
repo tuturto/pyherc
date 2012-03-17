@@ -21,7 +21,4 @@
 """
 Package for debug server
 """
-from data import render
-from handlers import initialise_server
-from handlers import get_urls
-from handlers import Index, Map, Player
+from handlers import get_debug_server

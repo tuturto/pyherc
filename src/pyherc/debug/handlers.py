@@ -31,25 +31,81 @@ except ImportError:
     pass
 
 def initialise_server():
+    """
+    Initialise render component for server
+    """
     pyherc.debug.data.render = web.template.render(
                                 '{0}/html/'.format(APP.base_path))
 
 def get_urls():
+    """
+    Get mapping between urls and handlers
+
+    Returns:
+        Mapping that can be passed on web.application
+    """
     return (
-            '/', 'pyherc.debug.Index',
-            '/map', 'pyherc.debug.Map',
-            '/player', 'pyherc.debug.Player'
+            '/', 'Index',
+            '/map', 'Map',
+            '/player', 'Player'
             )
 
+def get_debug_server():
+    """
+    Set up debug server
+
+    Returns:
+        Initialised debug server
+    """
+    initialise_server()
+    app = web.application(get_urls(), vars(pyherc.debug.handlers))
+    return app
+
 class Index:
+    """
+    Class for displaying start page
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        pass
+
     def GET(self):
+        """
+        Handle http get
+        """
         return pyherc.debug.data.render.index()
 
 class Map:
+    """
+    Class for displaying map
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        pass
+
     def GET(self):
+        """
+        Handle http get
+        """
         return APP.world.player.level.dump_string()
 
 class Player:
+    """
+    Class for displaying player
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        pass
+
     def GET(self):
+        """
+        Handle http get
+        """
         return pyherc.debug.data.render.player(APP.world.player)
 

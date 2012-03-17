@@ -25,7 +25,7 @@ import sys
 import os.path
 import pygame
 import thread
-from pyherc.debug import initialise_server, get_urls
+from pyherc.debug import get_debug_server
 
 try:
     import web
@@ -66,9 +66,8 @@ if __name__ == "__main__":
     if web_loaded == False:
         print 'web.py not found, debug server not available'
     else:
-        initialise_server()
-        urls = get_urls()
-        app = web.application(urls, globals())
-        thread.start_new_thread(app.run, ())
+        server = get_debug_server()
+        thread.start_new_thread(server.run, ())
 
     APP.run()
+
