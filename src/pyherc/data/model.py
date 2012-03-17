@@ -359,7 +359,8 @@ class Character(object):
                                                                 direction,
                                                                 'unarmed',
                                                                 self.rng))
-        action.execute()
+        if action != None:
+            action.execute()
 
     def __getstate__(self):
         '''
