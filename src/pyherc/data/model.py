@@ -78,9 +78,6 @@ class Model:
             for creature in event['level'].creatures:
                 creature.receive_event(event)
 
-        if self.player != None:
-            self.player.receive_event(event)
-
 class Character(object):
     """
     Represents a character in playing world
@@ -288,7 +285,9 @@ class Character(object):
     def execute_action(self, action_parameters):
         """
         Execute action defined by action parameters
-        @param action_parameters: parameters controlling creation of the action
+
+        Args:
+            action_parameters: parameters controlling creation of the action
         """
         action = self.create_action(action_parameters)
         action.execute()
@@ -297,10 +296,19 @@ class Character(object):
     def create_action(self, action_parameters):
         """
         Create an action by defined by action parameters
-        @param action_parameters: parameters controlling creation of the action
+
+        Args:
+            action_parameters: parameters controlling creation of the action
+
+        Returns:
+            Action
         """
-        if self.action_factory != None:
-            action = self.action_factory.get_action(action_parameters)
+        assert self.action_factory != None
+
+        action = self.action_factory.get_action(action_parameters)
+
+        assert action != None
+
         return action
 
     @logged

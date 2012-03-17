@@ -18,22 +18,24 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module defining classes related to MoveAttack
-'''
+"""
 import logging
 import pyherc.rules.time
 
 class MoveAction():
-    '''
+    """
     Action for moving
-    '''
+    """
     def __init__(self, character, new_location, new_level = None):
-        '''
+        """
         Default constructor
-        @param character: Character moving
-        @param new_location: Location to move
-        '''
+
+        Args:
+            character: Character moving
+            new_location: Location to move
+        """
         self.logger = logging.getLogger('pyherc.rules.move.action.MoveAction')
         self.character = character
         self.new_location = new_location
@@ -41,13 +43,17 @@ class MoveAction():
         self.model = None
 
     def execute(self):
-        '''
+        """
         Executes this Move
-        '''
+        """
         if self.is_legal():
             self.character.location = self.new_location
             if self.new_level != None:
-                self.character.level = self.new_level
+                if self.character.level != self.new_level:
+                    self.character.level.remove_creature(self.character)
+                    self.character.level = self.new_level
+                    self.new_level.add_creature(self.character,
+                                                self.new_location)
             self.character.tick = pyherc.rules.time.get_new_tick(self.character, 2)
         else:
             self.logger.warn('Tried to execute illegal move')
@@ -65,7 +71,7 @@ class MoveAction():
             if self.new_level.walls[self.new_location[0]][self.new_location[1]] == pyherc.data.tiles.WALL_EMPTY:
                 #check for other creatures and such
                 location_ok = True
-                creatures = self.new_level.creatures[:]
+                creatures = self.new_level.creatures
                 for creature in creatures:
                     if creature.location == self.new_location:
                         location_ok = False
@@ -77,11 +83,11 @@ class MoveAction():
         return location_ok
 
 class WalkAction(MoveAction):
-    '''
+    """
     Action for walking
-    '''
+    """
     def execute(self):
-        '''
+        """
         Execute this move
-        '''
+        """
         MoveAction.execute(self)

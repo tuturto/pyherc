@@ -69,7 +69,7 @@ class TestTime:
         self.model.dungeon.levels.add_creature(self.creature1)
         self.model.dungeon.levels.add_creature(self.creature2)
         self.model.player = self.creature3
-        self.creature3.level = self.model.dungeon.levels
+        self.model.dungeon.levels.add_creature(self.creature3)
 
     def test_getNextInTurnZeroTick(self):
         """
@@ -84,8 +84,9 @@ class TestTime:
         Test that system can tell whose turn it is to act
         All creatures have positive tick
         """
+        self.creature1.tick = 5
         self.creature2.tick = 10
+        self.creature3.tick = 3
         creature = pyherc.rules.time.get_next_creature(self.model)
-        print creature
         assert(creature == self.creature3)
 

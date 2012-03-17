@@ -69,8 +69,7 @@ class TestMoving(IntegrationTest):
 
         self.model.dungeon.levels = self.level1
 
-        self.character.location = (5, 5)
-        self.character.level = self.model.dungeon.levels
+        self.level1.add_creature(self.character, (5, 5))
         self.character.speed = 1
         self.character.tick = 1
 
@@ -105,6 +104,29 @@ class TestMoving(IntegrationTest):
 
         assert(self.character.location == (10, 10))
         assert(self.character.level == self.level2)
+
+    def test_entering_portal_adds_character_to_creatures(self):
+        """
+        Test that entering portal will add character to the creatures list
+        """
+        assert self.character.level == self.level1
+        assert self.character in self.level1.creatures
+
+        self.character.move(9)
+
+        assert self.character.level == self.level2
+        assert self.character in self.level2.creatures
+
+    def test_entering_portal_removes_character_from_old_level(self):
+        """
+        Test that entering portal will remove character from level
+        """
+        assert self.character.level == self.level1
+        assert self.character in self.level1.creatures
+
+        self.character.move(9)
+
+        assert self.character not in self.level1.creatures
 
     def test_entering_non_existent_portal(self):
         """

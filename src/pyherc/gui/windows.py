@@ -57,9 +57,11 @@ class MainWindow(pgu.gui.app.App):
     def __init__(self,  application, base_path, surface_manager, screen, theme=None, **params):
         """
         Initialises the main window
-        @param application: instance of currently running application
-        @param base_path: location of resources directory
-        @surface_manager: optional SurfaceManger to use for loading resources
+
+        Args:
+            application: instance of currently running application
+            base_path: location of resources directory
+            surface_manager: optional SurfaceManger to use for loading resources
         """
         super(MainWindow, self).__init__(theme, **params)
         self.logger = logging.getLogger('pyherc.gui.windows.MainWindow')

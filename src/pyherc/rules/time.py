@@ -29,13 +29,17 @@ __logger = logging.getLogger('pyherc.rules.time')
 def get_next_creature(model):
     """
     Get the character who is next to take action
-    @return: Character
+
+    Returns
+        Character to act next
     """
     assert(model != None)
 
     level = model.player.level
-    creatures = level.creatures[:]
-    creatures.append(model.player)
+    creatures = level.creatures
+
+    assert len(creatures) != 0
+    assert model.player in level.creatures
 
     while 1:
         for creature in creatures:
@@ -48,9 +52,13 @@ def get_next_creature(model):
 def get_new_tick(character, cost):
     """
     Calculate new tick for character
-    @param character: character performing the action
-    @param cost: cost of the action
-    @return: new tick
+
+    Args:
+        character: character performing the action
+        cost: cost of the action
+
+    Returns:
+        new tick
     """
     assert(character != None)
     assert(cost != None)

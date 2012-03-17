@@ -29,7 +29,7 @@ from pyherc.gui.windows import MainWindow
 from pyherc.gui.startmenu import StartMenu
 from pyherc.config import Configuration
 from pyherc.data.model import Model
-import sys, getopt
+import sys
 import logging
 
 class Application(object):
@@ -52,44 +52,18 @@ class Application(object):
         """
         Process command line options
         """
-        try:
-            opts, args = getopt.getopt(argv, 'l:x', ['logging='])
-        except getopt.GetoptError:
-            print('')
-            print('Failed to process parameters')
-            self.usage()
-            sys.exit()
-
-        for opt, arg in opts:
-            if opt in ('-l', '--logging'):
-                if arg.lower() == 'debug':
-                    self.log_level = logging.DEBUG
-                elif arg.lower() == 'info':
-                    self.log_level = logging.INFO
-                elif arg.lower() == 'warning':
-                    self.log_level = logging.WARNING
-                elif arg.lower() == 'error':
-                    self.log_level = logging.ERROR
-                elif arg.lower() == 'critical':
-                    self.log_level = logging.CRITICAL
-                else:
-                    print('')
-                    print('Unknown logging level: ' + arg)
-                    self.usage()
-                    sys.exit(0)
-
-        if self.log_level == None:
-            self.log_level = logging.ERROR
-
-    def usage(self):
-        """
-        Shows usage info
-        """
-        print('')
-        print('Usage:')
-        print('  -l --logging=')
-        print('    debug, info, warning, error, critical')
-        print('')
+        args = sys.argv
+        for argument in args:
+            if argument == 'debug':
+                self.log_level = logging.DEBUG
+            elif argument == 'info':
+                self.log_level = logging.INFO
+            elif argument == 'warning':
+                self.log_level = logging.WARNING
+            elif argument == 'error':
+                self.log_level = logging.ERROR
+            elif argument == 'critical':
+                self.log_level = logging.CRITICAL
 
     def load_configuration(self):
         """

@@ -25,8 +25,6 @@ Creature will try to find friends, before attacking the player character
 '''
 
 import math
-from pyherc.rules.public import MoveParameters
-from pyherc.rules.public import AttackParameters
 from pyherc.aspects import Logged
 
 class FlockingHerbivore():
@@ -55,10 +53,10 @@ class FlockingHerbivore():
         character = self.character
         player = model.player
 
-        del self.character.short_term_memory[:]
+        del character.short_term_memory[:]
 
-        for creature in self.character.level.creatures:
-            if creature != self.character:
+        for creature in character.level.creatures:
+            if creature != character:
                 loc_x = abs(creature.location[0] - character.location[0])
                 loc_y = abs(creature.location[1] - character.location[1])
                 distance = math.sqrt(loc_x * loc_x + loc_y * loc_y)
@@ -77,38 +75,28 @@ class FlockingHerbivore():
                 loc_y = abs(player.location[1] - character.location[1])
                 distance = math.sqrt(loc_x * loc_x + loc_y * loc_y)
 
-                if distance > 1:
-                    direction = self.find_direction(
+                direction = self.find_direction(
                                         character.location, player.location)
 
-                    action = self.character.create_action(
-                                MoveParameters(character, direction, 'walk')
-                                )
-                    if action.is_legal() == True:
-                        action.execute()
+                if distance > 1:
+                    if character.is_move_legal(direction, 'walk'):
+                        character.move(direction)
                     else:
-                        self.character.tick = self.character.tick + 10
+                        character.tick = character.tick + 10
                 else:
                     #attack
-                    character.execute_action(
-                                    AttackParameters(character, player, 'unarmed')
-                                    )
-                    # pyherc.rules.combat.melee_attack(model, character, player)
+                    character.perform_attack(direction)
             else:
                 #find direction
                 direction = self.find_direction(character.location,
                                                     closest_creature.location)
-
-                action = self.character.create_action(
-                                    MoveParameters(character, direction, 'walk')
-                                    )
-                if action.is_legal() == True:
-                    action.execute()
+                if character.is_move_legal(direction, 'walk'):
+                    character.move(direction)
                 else:
-                    self.character.tick = self.character.tick + 10
+                    character.tick = character.tick + 10
         else:
             #we're all alone here
-            self.character.tick = self.character.tick + 10
+            character.tick = character.tick + 10
 
     @logged
     def find_direction(self, start, end):

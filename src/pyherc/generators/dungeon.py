@@ -73,4 +73,4 @@ class DungeonGenerator:
             location = (random.randint(2, level_size[0]-1),
                                         random.randint(2, level_size[1]-1))
 
-        model.player.location = location
+        level.add_creature(model.player, location)

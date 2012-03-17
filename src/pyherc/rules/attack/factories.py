@@ -63,6 +63,7 @@ class UnarmedCombatFactory():
         Constructor for this factory
         """
         self.attack_type = 'unarmed'
+        self.logger = logging.getLogger('pyherc.rules.attack.factories.UnarmedCombatFactory')
 
     def __str__(self):
         return 'unarmed combat factory'
@@ -103,6 +104,7 @@ class UnarmedCombatFactory():
                         target,
                         parameters.model)
         else:
+            self.logger.warn('No target found')
             attack = None
 
         return attack
