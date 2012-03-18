@@ -6,6 +6,8 @@ Contents:
 .. toctree::
    :maxdepth: 10
 
+   module_application
+   module_aspects
    module_main
    module_config
    ai/module_ai
@@ -14,6 +16,7 @@ Contents:
    gui/module_gui
    rules/module_rules
    test/module_test
+   debug/module_debug
 
 Indices and tables
 ==================

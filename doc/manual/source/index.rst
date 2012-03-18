@@ -13,7 +13,7 @@ Contents:
 
    intro
    commands
-   monsters
+   regions
    items     
    license
 

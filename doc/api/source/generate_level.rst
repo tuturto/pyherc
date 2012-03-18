@@ -38,16 +38,11 @@ be written first. It has a simple interface:
 
 .. code-block:: python
     
-    def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2))
+    def generate_level(self, portal)
 
 Arguments supplied to this function are:
 
   * portal - Portal at an existing level, where this level should be connected
-  * model - Model instance being used
-  * new_portals - Amount of portals to be generated and placed on new level
-  * level - deepness of the level
-  * room_min_size - Minimum size of the rooms to generate. This parameter will
-    most likely be removed in the future
 
 Shape of the level
 ++++++++++++++++++
