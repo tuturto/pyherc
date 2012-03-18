@@ -51,20 +51,20 @@ def cast_hp_effect(model, target, effect, dice = None):
     @param effect: parameters of effect in dictionary
     @param dice: prerolled dice
     """
-    hpPower = effect.power
+    hp_power = effect.power
     if dice != None and len(dice) > 0:
-        hpRoll = dice.pop()
-        assert(hpRoll <= pyherc.rules.utils.get_max_score(hpPower))
+        hp_roll = dice.pop()
+        assert(hp_roll <= pyherc.rules.utils.get_max_score(hp_power))
     else:
-        hpRoll = pyherc.rules.utils.roll_dice(hpPower)
+        hp_roll = pyherc.rules.utils.roll_dice(hp_power)
 
     event = {}
 
     if effect.effect_type == 'healing':
-        target.hit_points = target.hit_points + hpRoll
+        target.hit_points = target.hit_points + hp_roll
         event['type'] = 'magic heal'
     elif effect.effect_type == 'damage':
-        target.hit_points = target.hit_points - hpRoll
+        target.hit_points = target.hit_points - hp_roll
         event['type'] = 'magic damage'
 
     if target.hit_points < 0:
@@ -76,6 +76,6 @@ def cast_hp_effect(model, target, effect, dice = None):
     event['character'] = target
     event['location'] = target.location
     event['level'] = target.level
-    event['power'] = hpRoll
+    event['power'] = hp_roll
 
     model.raise_event(event)

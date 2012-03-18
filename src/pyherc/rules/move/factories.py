@@ -28,40 +28,44 @@ from pyherc.rules.move.action import MoveAction
 from pyherc.rules.factory import SubActionFactory
 
 class WalkFactory(SubActionFactory):
-    '''
+    """
     Factory for creating walk actions
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Constructor for this factory
-        '''
+        """
         self.logger = logging.getLogger('pyherc.rules.move.factories.WalkFactory')
         self.movement_mode = 'walk'
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
-        d = dict(self.__dict__)
-        del d['logger']
-        return d
+        """
+        data = dict(self.__dict__)
+        del data['logger']
+        return data
 
-    def __setstate__(self, d):
-        '''
+    def __setstate__(self, data):
+        """
         Override __setstate__ in order to get pickling work
-        '''
-        self.__dict__.update(d)
+        """
+        self.__dict__.update(data)
         self.logger = logging.getLogger('pyherc.rules.move.factories.WalkFactory')
 
     def __str__(self):
         return 'walk factory'
 
     def can_handle(self, parameters):
-        '''
+        """
         Can this factory process these parameters
-        @param parameters: Parameters to check
-        @returns: True if factory is capable of handling parameters
-        '''
+
+        Args:
+            parameters: Parameters to check
+
+        Returns:
+            True if factory is capable of handling parameters
+        """
         return self.movement_mode == parameters.movement_mode
 
     def get_action(self, parameters):
@@ -72,53 +76,56 @@ class WalkFactory(SubActionFactory):
             parameters: Parameters used to control walk creation
         """
         location = parameters.character.location
-        newLevel = parameters.character.level
+        new_level = parameters.character.level
         direction = parameters.direction
+        new_location = None
 
         if direction == 1:
-            newLocation = (location[0], location[1] - 1)
+            new_location = (location[0], location[1] - 1)
         elif direction == 2:
-            newLocation = (location[0] + 1, location[1] - 1)
+            new_location = (location[0] + 1, location[1] - 1)
         elif direction == 3:
-            newLocation = (location[0] + 1, location[1])
+            new_location = (location[0] + 1, location[1])
         elif direction == 4:
-            newLocation = (location[0] + 1, location[1] + 1)
+            new_location = (location[0] + 1, location[1] + 1)
         elif direction == 5:
-            newLocation = (location[0], location[1] + 1)
+            new_location = (location[0], location[1] + 1)
         elif direction == 6:
-            newLocation = (location[0] - 1, location[1] + 1)
+            new_location = (location[0] - 1, location[1] + 1)
         elif direction == 7:
-            newLocation = (location[0] - 1, location[1])
+            new_location = (location[0] - 1, location[1])
         elif direction == 8:
-            newLocation = (location[0] - 1, location[1] - 1)
+            new_location = (location[0] - 1, location[1] - 1)
         elif direction == 9:
-            portal = newLevel.get_portal_at(location)
+            portal = new_level.get_portal_at(location)
             if portal != None:
                 if portal.other_end != None:
-                    newLevel = portal.other_end.level
-                    newLocation = portal.other_end.location
+                    new_level = portal.other_end.level
+                    new_location = portal.other_end.location
                 else:
                     self.logger.error('Portal leads to void!')
                     raise RuntimeError('Portal leads to void!')
             else:
-                newLevel = parameters.character.level
-                newLocation = parameters.character.location
+                new_level = parameters.character.level
+                new_location = parameters.character.location
 
         #is new location blocked?
-        if newLevel.get_wall_tile(newLocation[0], newLocation[1]) != pyherc.data.tiles.WALL_EMPTY:
-            newLocation = parameters.character.location
+        if new_level.get_wall_tile(new_location[0], new_location[1]) != pyherc.data.tiles.WALL_EMPTY:
+            new_location = parameters.character.location
 
-        return MoveAction(parameters.character, newLocation, newLevel)
+        return MoveAction(parameters.character, new_location, new_level)
 
 class MoveFactory(SubActionFactory):
-    '''
+    """
     Factory for constructing move actions
-    '''
+    """
     def __init__(self, factories):
-        '''
+        """
         Constructor for this factory
-        @param factories: a single Factory or list of Factories to use
-        '''
+
+        Args:
+            factories: a single Factory or list of Factories to use
+        """
         self.logger = logging.getLogger('pyherc.rules.move.factories.MoveFactory')
         self.action_type = 'move'
 
@@ -129,16 +136,16 @@ class MoveFactory(SubActionFactory):
             self.factories.append(factories)
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
-        d = dict(self.__dict__)
-        del d['logger']
-        return d
+        """
+        data = dict(self.__dict__)
+        del data['logger']
+        return data
 
-    def __setstate__(self, d):
-        '''
+    def __setstate__(self, data):
+        """
         Override __setstate__ in order to get pickling work
-        '''
-        self.__dict__.update(d)
+        """
+        self.__dict__.update(data)
         self.logger = logging.getLogger('pyherc.rules.move.factories.MoveFactory')

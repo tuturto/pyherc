@@ -110,7 +110,7 @@ class TestGeneratorUtils(object):
         section4.parent = section2
         section5.parent = section2
 
-        queue = section1.getAreaQueue()
+        queue = section1.get_area_queue()
 
         assert(queue.pop() == section1)
         assert(queue.pop() in (section2, section3))

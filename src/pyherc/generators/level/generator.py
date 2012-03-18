@@ -195,15 +195,15 @@ class LevelGenerator:
         """
         Override __getstate__ in order to get pickling work
         """
-        d = dict(self.__dict__)
-        del d['logger']
-        return d
+        data = dict(self.__dict__)
+        del data['logger']
+        return data
 
-    def __setstate__(self, d):
+    def __setstate__(self, data):
         """
         Override __setstate__ in order to get pickling work
         """
-        self.__dict__.update(d)
+        self.__dict__.update(data)
         self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGenerator') #pylint: disable=C0301
 
     @logged

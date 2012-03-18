@@ -130,7 +130,7 @@ class Inventory:
                                     else:
                                         self.selected = index
 
-            self.__updateScreen()
+            self.__update_screen()
 
         return_list = []
         for item in self.inventory:
@@ -139,7 +139,7 @@ class Inventory:
 
         return return_list
 
-    def __updateScreen(self):
+    def __update_screen(self):
         """
         Draws display on screen
         """

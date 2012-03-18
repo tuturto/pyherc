@@ -114,7 +114,7 @@ class BSPSection:
             else:
                 return 'None:None'
 
-    def getAreaQueue(self):
+    def get_area_queue(self):
         """
         Gets list of BSPSections, starting from leaves and progressing towards root
         """
@@ -134,7 +134,7 @@ class BSPSection:
 
         return list
 
-    def getCenter(self):
+    def get_center(self):
         """
         Calculates center of the BSPSection
         @return: center point

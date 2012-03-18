@@ -92,14 +92,14 @@ class CatacombsGenerator(object):
                                       self.empty_tile,
                                       None)
 
-        area_queue = BSP.getAreaQueue()
+        area_queue = BSP.get_area_queue()
         area_queue.reverse()
 
         while len(area_queue) > 1:
             area1 = area_queue.pop()
             area2 = area_queue.pop()
-            center1 = area1.getCenter()
-            center2 = area2.getCenter()
+            center1 = area1.get_center()
+            center2 = area2.get_center()
             #connect these two areas
             if area1.direction == 1:
                 #areas on top of each other

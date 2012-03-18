@@ -282,6 +282,9 @@ class TestPortalAdderFactory():
         level_generator = stub(LevelGenerator)
 
         def mock_get_generator(farg, *args, **kwargs):
+            """
+            Simple mock to return level generator
+            """
             return level_generator
 
         level_generator_factory.get_generator = mock_get_generator
