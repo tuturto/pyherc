@@ -266,8 +266,8 @@ class TestFactorySupportForLevelTypes:
         """
         generator = self.factory.get_generator('crypt')
 
-        assert_that(generator.room_generator,
-                    is_(same_instance(self.room_generator_1)))
+        assert_that(generator.room_generators,
+                    has_item(self.room_generator_1))
 
     def test_decorator_type(self):
         """
@@ -333,7 +333,7 @@ class TestLevelGenerator:
         when(partitioner).partition_level(any()).thenReturn([section1,
                                                              section2])
 
-        generator = LevelGenerator(factory, partitioner, room_generator,
+        generator = LevelGenerator(factory, partitioner, [room_generator],
                                    level_decorator, [stair_adder],
                                    item_adder, creature_adder,
                                    self.rng,
@@ -369,7 +369,7 @@ class TestLevelGenerator:
 
         portal = mock(Portal)
 
-        generator = LevelGenerator(factory, partitioner, room_generator,
+        generator = LevelGenerator(factory, partitioner, [room_generator],
                                    level_decorator, [portal_adder],
                                    item_adder,
                                    creature_adder,
@@ -403,7 +403,7 @@ class TestLevelGenerator:
 
         portal = mock(Portal)
 
-        generator = LevelGenerator(factory, partitioner, room_generator,
+        generator = LevelGenerator(factory, partitioner, [room_generator],
                                    level_decorator, [portal_adder],
                                    item_adder,
                                    creature_adder,

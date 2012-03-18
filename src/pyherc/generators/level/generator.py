@@ -72,7 +72,7 @@ class LevelGeneratorFactory:
                                              self.level_partitioners,
                                              'partitioner')
 
-        room = self.get_sub_component(level_type,
+        rooms = self.get_sub_components(level_type,
                                       self.room_generators,
                                       'room')
 
@@ -92,13 +92,39 @@ class LevelGeneratorFactory:
 
         return LevelGenerator(self.action_factory,
                               partitioner,
-                              room,
+                              rooms,
                               decorator,
                               portal_adders,
                               item_adder,
                               creature_adder,
                               self.random_generator,
                               self.size)
+
+    @logged
+    def get_sub_components(self, level_type, component_list, component_type):
+        """
+        Get subcomponent
+
+        Args:
+            level_type: type of level to generate
+            component_list: list of subcomponents to choose from
+            component_type: component type for error message
+
+        Returns:
+            List of components
+        """
+        components = [x for x in component_list
+                      if level_type in x.level_types]
+
+        if len(components) == 0:
+            error_message = "No {0} for type {1} in {2}".format(
+                                                            component_type,
+                                                            level_type,
+                                                            component_list)
+            self.logger.error(error_message)
+            raise RuntimeError(error_message)
+
+        return components
 
     @logged
     def get_sub_component(self, level_type, component_list, component_type):
@@ -109,6 +135,9 @@ class LevelGeneratorFactory:
             level_type: type of level to generate
             component_list: list of subcomponents to choose from
             component_type: component type for error message
+
+        Returns:
+            Single component
         """
         matches = [x for x in component_list
                    if level_type in x.level_types]
@@ -132,7 +161,7 @@ class LevelGenerator:
     logged = Logged()
 
     @logged
-    def __init__(self, action_factory, partitioner, room_generator,
+    def __init__(self, action_factory, partitioner, room_generators,
                  decorator, portal_adders,
                  item_adder, creature_adder,
                  random_generator, size):
@@ -142,7 +171,7 @@ class LevelGenerator:
         Args:
             action_factory: ActionFactory instance
             partitioner: LevelPartitioner to use
-            room_generator: RoomGenerator to use
+            room_generators: RoomGenerators to use
             decorator: LevelDecorator to use
             portal_adder: PortalAdder to use
             item_adder: ItemAdder to generate items
@@ -157,7 +186,7 @@ class LevelGenerator:
 
         self.action_factory = action_factory
         self.partitioner = partitioner
-        self.room_generator = room_generator
+        self.room_generators = room_generators
         self.decorator = decorator
         self.portal_adders = portal_adders
         self.size = size
@@ -191,7 +220,8 @@ class LevelGenerator:
         sections = self.partitioner.partition_level(new_level)
 
         for section in sections:
-            self.room_generator.generate_room(section)
+            generator = self.random_generator.choice(self.room_generators)
+            generator.generate_room(section)
 
         self.decorator.decorate_level(new_level)
 
