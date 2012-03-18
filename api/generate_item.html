@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Generating an item &mdash; Herculeum 0.1 documentation</title>
+    <title>Generating an item &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="index.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="index.html" />
     <link rel="next" title="API Reference" href="api_reference.html" />
-    <link rel="prev" title="Generating a level" href="generate_level.html" /> 
+    <link rel="prev" title="Modular level generator" href="modular_levels.html" /> 
   </head>
   <body>
     <div class="related">
@@ -43,9 +43,9 @@
           <a href="api_reference.html" title="API Reference"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="generate_level.html" title="Generating a level"
+          <a href="modular_levels.html" title="Modular level generator"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,13 +56,13 @@
             
   <div class="section" id="generating-an-item">
 <h1>Generating an item<a class="headerlink" href="#generating-an-item" title="Permalink to this headline">¶</a></h1>
-<p>This section will have a look at item generation and how to add new levels into
+<p>This section will have a look at item generation and how to add new items into
 the game.</p>
 <div class="section" id="overview-of-generating-item">
 <h2>Overview of generating item<a class="headerlink" href="#overview-of-generating-item" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="generators/module_item.html#pyherc.generators.item.ItemGenerator" title="pyherc.generators.item.ItemGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.item.ItemGenerator</span></tt></a> is used to generate items.</p>
 <p>To generate item, following code can be used:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">new_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_generator</span><span class="o">.</span><span class="n">generateItem</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">tables</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;food&#39;</span><span class="p">})</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">new_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_generator</span><span class="o">.</span><span class="n">generate_item</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">tables</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;food&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>This will generate a random item of type food.</p>
@@ -80,6 +80,93 @@ used in item generation. Following keys are currently supported:</p>
 </ul>
 </div></blockquote>
 </div>
+<div class="section" id="defining-items">
+<h2>Defining items<a class="headerlink" href="#defining-items" title="Permalink to this headline">¶</a></h2>
+<p>Items are defined in resources/items.xml. Following snippet is used for dagger:</p>
+<div class="highlight-python"><pre>&lt;item&gt;
+    &lt;name&gt;dagger&lt;/name&gt;
+    &lt;cost&gt;2&lt;/cost&gt;
+    &lt;damage&gt;2&lt;/damage&gt;
+    &lt;criticalRange&gt;11&lt;/criticalRange&gt;
+    &lt;criticalDamage&gt;2&lt;/criticalDamage&gt;
+    &lt;weight&gt;1&lt;/weight&gt;
+    &lt;damageTypes&gt;
+        &lt;damageType&gt;piercing&lt;/damageType&gt;
+        &lt;damageType&gt;slashing&lt;/damageType&gt;
+    &lt;/damageTypes&gt;
+    &lt;class&gt;simple&lt;/class&gt;
+    &lt;icons&gt;
+        &lt;icon&gt;ITEM_DAGGER_1&lt;/icon&gt;
+    &lt;/icons&gt;
+    &lt;types&gt;
+        &lt;type&gt;weapon&lt;/type&gt;
+        &lt;type&gt;light weapon&lt;/type&gt;
+        &lt;type&gt;melee&lt;/type&gt;
+        &lt;type&gt;simple weapon&lt;/type&gt;
+    &lt;/types&gt;
+    &lt;rarity&gt;common&lt;/rarity&gt;
+&lt;/item&gt;</pre>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="25%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Element</th>
+<th class="head">Explanation</th>
+<th class="head">Notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Name</td>
+<td>Name of the item</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Cost</td>
+<td>Base cost in coins</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Damage</td>
+<td>Base damage</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>criticalRange</td>
+<td>Chances for critical hit</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>criticalDamage</td>
+<td>Amount of critical damage</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>weight</td>
+<td>Weight of the item</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>damageTypes</td>
+<td>Types of damage weapon does</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>class</td>
+<td>Class of the weapon</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>icons</td>
+<td>Icons used to display the item</td>
+<td>Only one is selected when item is created</td>
+</tr>
+<tr class="row-odd"><td>types</td>
+<td>Tags</td>
+<td>Used in item generation, for example when generator should make &#8216;simple weapon&#8217;</td>
+</tr>
+<tr class="row-even"><td>rarity</td>
+<td>Rarity of the item</td>
+<td>common, uncommon, rare, epic, legendary, artifact</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 
@@ -92,13 +179,14 @@ used in item generation. Following keys are currently supported:</p>
   <ul>
 <li><a class="reference internal" href="#">Generating an item</a><ul>
 <li><a class="reference internal" href="#overview-of-generating-item">Overview of generating item</a></li>
+<li><a class="reference internal" href="#defining-items">Defining items</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="generate_level.html"
-                        title="previous chapter">Generating a level</a></p>
+  <p class="topless"><a href="modular_levels.html"
+                        title="previous chapter">Modular level generator</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="api_reference.html"
                         title="next chapter">API Reference</a></p>
@@ -137,9 +225,9 @@ used in item generation. Following keys are currently supported:</p>
           <a href="api_reference.html" title="API Reference"
              >next</a> |</li>
         <li class="right" >
-          <a href="generate_level.html" title="Generating a level"
+          <a href="modular_levels.html" title="Modular level generator"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

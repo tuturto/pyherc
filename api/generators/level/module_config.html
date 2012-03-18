@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.generators.level.config &mdash; Herculeum 0.1 documentation</title>
+    <title>pyherc.generators.level.config &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.generators.level" href="module_level.html" />
-    <link rel="next" title="pyherc.generators.level.crypt" href="module_crypt.html" />
-    <link rel="prev" title="pyherc.generators.level.catacombs" href="module_catacombs.html" /> 
+    <link rel="next" title="pyherc.generators.level.creatures" href="module_creatures.html" />
+    <link rel="prev" title="pyherc.generators.level" href="module_level.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,12 +41,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_crypt.html" title="pyherc.generators.level.crypt"
+          <a href="module_creatures.html" title="pyherc.generators.level.creatures"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="module_catacombs.html" title="pyherc.generators.level.catacombs"
+          <a href="module_level.html" title="pyherc.generators.level"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../module_generators.html" >pyherc.generators</a> &raquo;</li>
           <li><a href="module_level.html" accesskey="U">pyherc.generators.level</a> &raquo;</li> 
@@ -61,51 +61,42 @@
   <div class="section" id="module-pyherc.generators.level.config">
 <span id="pyherc-generators-level-config"></span><h1>pyherc.generators.level.config<a class="headerlink" href="#module-pyherc.generators.level.config" title="Permalink to this headline">¶</a></h1>
 <p>Classes for configuring level generation</p>
-<div class="section" id="levelgeneratorconfig">
-<h2>LevelGeneratorConfig<a class="headerlink" href="#levelgeneratorconfig" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pyherc.generators.level.config.LevelGeneratorConfig">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.level.config.</tt><tt class="descname">LevelGeneratorConfig</tt><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorConfig" title="Permalink to this definition">¶</a></dt>
+<dt id="pyherc.generators.level.config.LevelGeneratorFactoryConfig">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.config.</tt><tt class="descname">LevelGeneratorFactoryConfig</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorFactoryConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to configure level generator</p>
 <dl class="attribute">
-<dt id="pyherc.generators.level.config.LevelGeneratorConfig.decorators">
-<tt class="descname">decorators</tt><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorConfig.decorators" title="Permalink to this definition">¶</a></dt>
+<dt id="pyherc.generators.level.config.LevelGeneratorFactoryConfig.decorators">
+<tt class="descname">decorators</tt><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorFactoryConfig.decorators" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get level decorators in this configuration</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.generators.level.config.LevelGeneratorConfig.get_decorators">
-<tt class="descname">get_decorators</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorConfig.get_decorators" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get level decorators in this configuration</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.generators.level.config.LevelGeneratorConfig.get_level_partitioners">
-<tt class="descname">get_level_partitioners</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorConfig.get_level_partitioners" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get level partitioners in this configurations</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.generators.level.config.LevelGeneratorConfig.get_room_generators">
-<tt class="descname">get_room_generators</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorConfig.get_room_generators" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get room generators in this configuration</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pyherc.generators.level.config.LevelGeneratorConfig.level_partitioners">
-<tt class="descname">level_partitioners</tt><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorConfig.level_partitioners" title="Permalink to this definition">¶</a></dt>
+<dt id="pyherc.generators.level.config.LevelGeneratorFactoryConfig.level_partitioners">
+<tt class="descname">level_partitioners</tt><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorFactoryConfig.level_partitioners" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get level partitioners in this configurations</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pyherc.generators.level.config.LevelGeneratorConfig.room_generators">
-<tt class="descname">room_generators</tt><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorConfig.room_generators" title="Permalink to this definition">¶</a></dt>
+<dt id="pyherc.generators.level.config.LevelGeneratorFactoryConfig.portal_adder_configurations">
+<tt class="descname">portal_adder_configurations</tt><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorFactoryConfig.portal_adder_configurations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get portal adder configurations</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.config.LevelGeneratorFactoryConfig.room_generators">
+<tt class="descname">room_generators</tt><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorFactoryConfig.room_generators" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get room generators in this configuration</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="pyherc.generators.level.config.LevelGeneratorFactoryConfig.size">
+<tt class="descname">size</tt><a class="headerlink" href="#pyherc.generators.level.config.LevelGeneratorFactoryConfig.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get size of levels</p>
 </dd></dl>
 
-</div>
+</dd></dl>
+
 </div>
 
 
@@ -114,20 +105,12 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pyherc.generators.level.config</a><ul>
-<li><a class="reference internal" href="#levelgeneratorconfig">LevelGeneratorConfig</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="module_catacombs.html"
-                        title="previous chapter">pyherc.generators.level.catacombs</a></p>
+  <p class="topless"><a href="module_level.html"
+                        title="previous chapter">pyherc.generators.level</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="module_crypt.html"
-                        title="next chapter">pyherc.generators.level.crypt</a></p>
+  <p class="topless"><a href="module_creatures.html"
+                        title="next chapter">pyherc.generators.level.creatures</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../_sources/generators/level/module_config.txt"
@@ -160,12 +143,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_crypt.html" title="pyherc.generators.level.crypt"
+          <a href="module_creatures.html" title="pyherc.generators.level.creatures"
              >next</a> |</li>
         <li class="right" >
-          <a href="module_catacombs.html" title="pyherc.generators.level.catacombs"
+          <a href="module_level.html" title="pyherc.generators.level"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../module_generators.html" >pyherc.generators</a> &raquo;</li>
           <li><a href="module_level.html" >pyherc.generators.level</a> &raquo;</li> 

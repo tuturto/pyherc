@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API Reference &mdash; Herculeum 0.1 documentation</title>
+    <title>API Reference &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,8 +25,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="index.html" />
-    <link rel="next" title="pyherc.main" href="module_main.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="index.html" />
+    <link rel="next" title="pyherc.application" href="module_application.html" />
     <link rel="prev" title="Generating an item" href="generate_item.html" /> 
   </head>
   <body>
@@ -40,12 +40,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_main.html" title="pyherc.main"
+          <a href="module_application.html" title="pyherc.application"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="generate_item.html" title="Generating an item"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -59,102 +59,47 @@
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="module_main.html">pyherc.main</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_main.html#application">Application</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="module_application.html">pyherc.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_aspects.html">pyherc.aspects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_main.html">pyherc.main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_config.html">pyherc.config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ai/module_ai.html">pyherc.ai</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ai/module_simple.html">pyherc.ai.simple</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ai/module_simple.html#flockingherbivore">FlockingHerbivore</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="ai/module_simple.html">pyherc.ai.simple</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="data/module_data.html">pyherc.data</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data/module_dungeon.html">pyherc.data.dungeon</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="data/module_dungeon.html#dungeon">Dungeon</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data/module_dungeon.html#level">Level</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data/module_dungeon.html#portal">Portal</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="data/module_dungeon.html#connecting-levels">Connecting levels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="data/module_dungeon.html#proxies">Proxies</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="data/module_item.html">pyherc.data.item</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="data/module_item.html#item">Item</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data/module_item.html#weapondata">WeaponData</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data/module_item.html#itemeffectdata">ItemEffectData</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="data/module_model.html">pyherc.data.model</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="data/module_model.html#model">Model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data/module_model.html#character">Character</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data/module_model.html#damage">Damage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data/module_model.html#feat">Feat</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data/module_model.html#weaponproficiency">WeaponProficiency</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data/module_model.html#mimicdata">MimicData</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="data/module_dungeon.html">pyherc.data.dungeon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data/module_item.html">pyherc.data.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data/module_model.html">pyherc.data.model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data/module_tiles.html">pyherc.data.tiles</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="generators/module_generators.html">pyherc.generators</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generators/module_creature.html">pyherc.generators.creature</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generators/module_creature.html#creaturegenerator">CreatureGenerator</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="generators/module_dungeon.html">pyherc.generators.dungeon</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generators/module_dungeon.html#dungeongenerator">DungeonGenerator</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="generators/module_item.html">pyherc.generators.item</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generators/module_item.html#itemgenerator">ItemGenerator</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="generators/module_utils.html">pyherc.generators.utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generators/module_utils.html#bspsection">BSPSection</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="generators/module_creature.html">pyherc.generators.creature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators/module_dungeon.html">pyherc.generators.dungeon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators/module_item.html">pyherc.generators.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators/module_utils.html">pyherc.generators.utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators/level/module_level.html">pyherc.generators.level</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generators/level/module_catacombs.html">pyherc.generators.level.catacombs</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generators/level/module_catacombs.html#catacombslevelgenerator">CatacombsLevelGenerator</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="generators/level/module_config.html">pyherc.generators.level.config</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generators/level/module_config.html#levelgeneratorconfig">LevelGeneratorConfig</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="generators/level/module_crypt.html">pyherc.generators.level.crypt</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generators/level/module_crypt.html#cryptgeneratorfactory">CryptGeneratorFactory</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generators/level/module_crypt.html#cryptgenerator">CryptGenerator</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="generators/level/module_testlevel.html">pyherc.generators.level.testlevel</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generators/level/module_testlevel.html#testlevelgenerator">TestLevelGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generators/level/module_config.html">pyherc.generators.level.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generators/level/module_creatures.html">pyherc.generators.level.creatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generators/level/module_items.html">pyherc.generators.level.items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generators/level/module_generator.html">pyherc.generators.level.generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generators/level/module_testlevel.html">pyherc.generators.level.testlevel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generators/level/module_prototiles.html">pyherc.generators.level.prototiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generators/level/module_portals.html">pyherc.generators.level.portals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generators/level/decorator/module_decorator.html">pyherc.generators.level.decorator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generators/level/decorator/module_basic.html">pyherc.generators.level.decorator.basic</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="generators/level/partitioners/module_partitioners.html">pyherc.generators.level.partitioners</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generators/level/partitioners/module_grid.html">pyherc.generators.level.partitioners.grid</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="generators/level/partitioners/module_grid.html#randomconnector">RandomConnector</a></li>
-<li class="toctree-l5"><a class="reference internal" href="generators/level/partitioners/module_grid.html#gridpartitioner">GridPartitioner</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="generators/level/partitioners/module_section.html">pyherc.generators.level.partitioners.section</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="generators/level/partitioners/module_section.html#section">Section</a></li>
-</ul>
-</li>
+<li class="toctree-l4"><a class="reference internal" href="generators/level/partitioners/module_grid.html">pyherc.generators.level.partitioners.grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generators/level/partitioners/module_section.html">pyherc.generators.level.partitioners.section</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="generators/level/room/module_room.html">pyherc.generators.level.room</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generators/level/room/module_squareroom.html">pyherc.generators.level.room.squareroom</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="generators/level/room/module_squareroom.html#squareroomgenerator">SquareRoomGenerator</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="generators/level/room/module_corridor.html">pyherc.generators.level.room.corridor</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="generators/level/room/module_corridor.html#corridorgenerator">CorridorGenerator</a></li>
-</ul>
-</li>
+<li class="toctree-l4"><a class="reference internal" href="generators/level/room/module_squareroom.html">pyherc.generators.level.room.squareroom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generators/level/room/module_catacombs.html">pyherc.generators.level.room.catacombs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generators/level/room/module_corridor.html">pyherc.generators.level.room.corridor</a></li>
 </ul>
 </li>
 </ul>
@@ -162,52 +107,20 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="gui/module_gui.html">pyherc.gui</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="gui/module_dialogs.html">pyherc.gui.dialogs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="gui/module_dialogs.html#inventory">Inventory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="gui/module_dialogs.html#endscreen">EndScreen</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="gui/module_dialogs.html">pyherc.gui.dialogs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gui/module_images.html">pyherc.gui.images</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gui/module_startmenu.html">pyherc.gui.startmenu</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="gui/module_startmenu.html#startmenu">StartMenu</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="gui/module_surfacemanager.html">pyherc.gui.surfaceManager</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="gui/module_surfacemanager.html#surfacemanager">SurfaceManager</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="gui/module_windows.html">pyherc.gui.windows</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="gui/module_windows.html#mainwindow">MainWindow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="gui/module_windows.html#startnewgamewindow">StartNewGameWindow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="gui/module_windows.html#gamewindow">GameWindow</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="gui/module_startmenu.html">pyherc.gui.startmenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui/module_options.html">pyherc.gui.options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui/module_surfacemanager.html">pyherc.gui.surfaceManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui/module_windows.html">pyherc.gui.windows</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rules/module_rules.html">pyherc.rules</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="rules/attack/module_attack.html">pyherc.rules.attack</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rules/attack/module_action.html">pyherc.rules.attack.action</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rules/attack/module_action.html#attackaction">AttackAction</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rules/attack/module_action.html#tohit">ToHit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rules/attack/module_action.html#damage">Damage</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rules/attack/module_factories.html">pyherc.rules.attack.factories</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rules/attack/module_factories.html#attackfactory">AttackFactory</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rules/attack/module_factories.html#unarmedcombatfactory">UnarmedCombatFactory</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rules/attack/module_factories.html#meleecombatfactory">MeleeCombatFactory</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rules/attack/module_melee.html">pyherc.rules.attack.melee</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rules/attack/module_melee.html#meleetohit">MeleeToHit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rules/attack/module_melee.html#meleedamage">MeleeDamage</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rules/attack/module_unarmed.html">pyherc.rules.attack.unarmed</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rules/attack/module_unarmed.html#unarmedtohit">UnarmedToHit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rules/attack/module_unarmed.html#unarmeddamage">UnarmedDamage</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="rules/attack/module_action.html">pyherc.rules.attack.action</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rules/attack/module_factories.html">pyherc.rules.attack.factories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rules/attack/module_melee.html">pyherc.rules.attack.melee</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rules/attack/module_unarmed.html">pyherc.rules.attack.unarmed</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_character.html">pyherc.rules.character</a></li>
@@ -217,37 +130,23 @@
 <li class="toctree-l2"><a class="reference internal" href="rules/module_los.html">pyherc.rules.los</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_magic.html">pyherc.rules.magic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/move/module_move.html">pyherc.rules.move</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rules/move/module_action.html">pyherc.rules.move.action</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rules/move/module_action.html#moveaction">MoveAction</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rules/move/module_action.html#walkactions">WalkActions</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rules/move/module_factories.html">pyherc.rules.move.factories</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rules/move/module_factories.html#movefactory">MoveFactory</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rules/move/module_factories.html#walkfactory">WalkFactory</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="rules/move/module_action.html">pyherc.rules.move.action</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rules/move/module_factories.html">pyherc.rules.move.factories</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_moving.html">pyherc.rules.moving</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rules/module_public.html">pyherc.rules.public</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rules/module_public.html#actionfactory">ActionFactory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rules/module_public.html#actionparameters">ActionParameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rules/module_public.html#attackparameters">AttackParameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rules/module_public.html#moveparameters">MoveParameters</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="rules/module_tables.html">pyherc.rules.tables</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rules/module_tables.html#tables">Tables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rules/module_tables.html#creaturehandler">CreatureHandler</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rules/module_tables.html#itemhandler">ItemHandler</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="rules/module_public.html">pyherc.rules.public</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rules/module_tables.html">pyherc.rules.tables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_time.html">pyherc.rules.time</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_utils.html">pyherc.rules.utils</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="test/module_test.html">pyherc.test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug/module_debug.html">pyherc.debug</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="debug/module_data.html">pyherc.debug.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug/module_handlers.html">pyherc.debug.handlers</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -277,8 +176,8 @@
   <p class="topless"><a href="generate_item.html"
                         title="previous chapter">Generating an item</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="module_main.html"
-                        title="next chapter">pyherc.main</a></p>
+  <p class="topless"><a href="module_application.html"
+                        title="next chapter">pyherc.application</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/api_reference.txt"
@@ -311,12 +210,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_main.html" title="pyherc.main"
+          <a href="module_application.html" title="pyherc.application"
              >next</a> |</li>
         <li class="right" >
           <a href="generate_item.html" title="Generating an item"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

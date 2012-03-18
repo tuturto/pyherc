@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.generators.level.room.squareroom &mdash; Herculeum 0.1 documentation</title>
+    <title>pyherc.generators.level.room.squareroom &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.generators.level.room" href="module_room.html" />
-    <link rel="next" title="pyherc.generators.level.room.corridor" href="module_corridor.html" />
+    <link rel="next" title="pyherc.generators.level.room.catacombs" href="module_catacombs.html" />
     <link rel="prev" title="pyherc.generators.level.room" href="module_room.html" /> 
   </head>
   <body>
@@ -41,12 +41,12 @@
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_corridor.html" title="pyherc.generators.level.room.corridor"
+          <a href="module_catacombs.html" title="pyherc.generators.level.room.catacombs"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="module_room.html" title="pyherc.generators.level.room"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../module_generators.html" >pyherc.generators</a> &raquo;</li>
           <li><a href="../module_level.html" >pyherc.generators.level</a> &raquo;</li>
@@ -62,12 +62,33 @@
   <div class="section" id="module-pyherc.generators.level.room.squareroom">
 <span id="pyherc-generators-level-room-squareroom"></span><h1>pyherc.generators.level.room.squareroom<a class="headerlink" href="#module-pyherc.generators.level.room.squareroom" title="Permalink to this headline">¶</a></h1>
 <p>Classes for generating square rooms</p>
-<div class="section" id="squareroomgenerator">
-<h2>SquareRoomGenerator<a class="headerlink" href="#squareroomgenerator" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pyherc.generators.level.room.squareroom.SquareRoomGenerator">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.level.room.squareroom.</tt><tt class="descname">SquareRoomGenerator</tt><big>(</big><em>floor_tile</em>, <em>empty_tile</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.room.squareroom.SquareRoomGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.room.squareroom.</tt><tt class="descname">SquareRoomGenerator</tt><big>(</big><em>floor_tile</em>, <em>empty_tile</em>, <em>level_types</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.room.squareroom.SquareRoomGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for generating a square room</p>
+<dl class="method">
+<dt id="pyherc.generators.level.room.squareroom.SquareRoomGenerator.add_corridors">
+<tt class="descname">add_corridors</tt><big>(</big><em>section</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.room.squareroom.SquareRoomGenerator.add_corridors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add corridors leading from room connection to section connections</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>section: Section to add corridors</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.generators.level.room.squareroom.SquareRoomGenerator.find_room_connection">
+<tt class="descname">find_room_connection</tt><big>(</big><em>section</em>, <em>section_connection</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.room.squareroom.SquareRoomGenerator.find_room_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find room connection that matches to given section connection</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>section: Section to handle
+section_connection: Connection at the edge of section</dd>
+<dt>Returns:</dt>
+<dd>matching room Connection</dd>
+</dl>
+</dd></dl>
+
 <dl class="method">
 <dt id="pyherc.generators.level.room.squareroom.SquareRoomGenerator.generate_room">
 <tt class="descname">generate_room</tt><big>(</big><em>section</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.room.squareroom.SquareRoomGenerator.generate_room" title="Permalink to this definition">¶</a></dt>
@@ -81,7 +102,6 @@
 </dd></dl>
 
 </div>
-</div>
 
 
           </div>
@@ -89,20 +109,12 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pyherc.generators.level.room.squareroom</a><ul>
-<li><a class="reference internal" href="#squareroomgenerator">SquareRoomGenerator</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
   <p class="topless"><a href="module_room.html"
                         title="previous chapter">pyherc.generators.level.room</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="module_corridor.html"
-                        title="next chapter">pyherc.generators.level.room.corridor</a></p>
+  <p class="topless"><a href="module_catacombs.html"
+                        title="next chapter">pyherc.generators.level.room.catacombs</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../../_sources/generators/level/room/module_squareroom.txt"
@@ -135,12 +147,12 @@
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_corridor.html" title="pyherc.generators.level.room.corridor"
+          <a href="module_catacombs.html" title="pyherc.generators.level.room.catacombs"
              >next</a> |</li>
         <li class="right" >
           <a href="module_room.html" title="pyherc.generators.level.room"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../module_generators.html" >pyherc.generators</a> &raquo;</li>
           <li><a href="../module_level.html" >pyherc.generators.level</a> &raquo;</li>

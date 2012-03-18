@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.generators.level.partitioners.section &mdash; Herculeum 0.1 documentation</title>
+    <title>pyherc.generators.level.partitioners.section &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.generators.level.partitioners" href="module_partitioners.html" />
     <link rel="next" title="pyherc.generators.level.room" href="../room/module_room.html" />
     <link rel="prev" title="pyherc.generators.level.partitioners.grid" href="module_grid.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_grid.html" title="pyherc.generators.level.partitioners.grid"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../module_generators.html" >pyherc.generators</a> &raquo;</li>
           <li><a href="../module_level.html" >pyherc.generators.level</a> &raquo;</li>
@@ -62,11 +62,25 @@
   <div class="section" id="module-pyherc.generators.level.partitioners.section">
 <span id="pyherc-generators-level-partitioners-section"></span><h1>pyherc.generators.level.partitioners.section<a class="headerlink" href="#module-pyherc.generators.level.partitioners.section" title="Permalink to this headline">¶</a></h1>
 <p>Classes to represent division of levels</p>
-<div class="section" id="section">
-<h2>Section<a class="headerlink" href="#section" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyherc.generators.level.partitioners.section.Connection">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.partitioners.section.</tt><tt class="descname">Connection</tt><big>(</big><em>connection</em>, <em>location</em>, <em>direction</em>, <em>section</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connection between Sections or between Section and room</p>
+<dl class="method">
+<dt id="pyherc.generators.level.partitioners.section.Connection.translate_to_section">
+<tt class="descname">translate_to_section</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Connection.translate_to_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new Connection with coordinates translated to section</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>New connection</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="class">
 <dt id="pyherc.generators.level.partitioners.section.Section">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.level.partitioners.section.</tt><tt class="descname">Section</tt><big>(</big><em>corner1</em>, <em>corner2</em>, <em>level</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.partitioners.section.</tt><tt class="descname">Section</tt><big>(</big><em>corner1</em>, <em>corner2</em>, <em>level</em>, <em>random_generator</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class representing a single section in a level</p>
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.section.Section.add_room_connection">
@@ -115,12 +129,24 @@ direction: direction where this connections leads</dd>
 </dd></dl>
 
 <dl class="method">
+<dt id="pyherc.generators.level.partitioners.section.Section.find_room_connection">
+<tt class="descname">find_room_connection</tt><big>(</big><em>section_connection</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.find_room_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find room connection that matches to given section connection</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>section_connection: Connection at the edge of section</dd>
+<dt>Returns:</dt>
+<dd>matching room Connection</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyherc.generators.level.partitioners.section.Section.get_border">
 <tt class="descname">get_border</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.get_border" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get list of locations, defining borders of this Section</p>
 <dl class="docutils">
 <dt>Returns:</dt>
-<dd>List of (loc_x, loc_y) defining borders</dd>
+<dd>List of (loc_x, loc_y, direction) defining borders</dd>
 <dt>Note:</dt>
 <dd>Coordinates are given relative to level origo</dd>
 </dl>
@@ -133,7 +159,7 @@ direction: direction where this connections leads</dd>
 Border is placed on the edge of this Section</p>
 <dl class="docutils">
 <dt>Returns:</dt>
-<dd>List of (loc_x, loc_y) defining common border</dd>
+<dd>List of (loc_x, loc_y, direection) defining common border</dd>
 <dt>Note:</dt>
 <dd>Coordinates are given relative to level origo</dd>
 </dl>
@@ -190,12 +216,13 @@ on the other side of the common border</p>
 
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.section.Section.set_floor">
-<tt class="descname">set_floor</tt><big>(</big><em>location</em>, <em>tile</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.set_floor" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_floor</tt><big>(</big><em>location</em>, <em>tile</em>, <em>location_type</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.set_floor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set floor at given location</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd>location: (loc_x, loc_y) location to set the tile
-tile: ID of the tile to use</dd>
+tile: ID of the tile to use
+location_type: type of location, None to not change</dd>
 <dt>Note:</dt>
 <dd>Coordinates are given relative to section origo</dd>
 </dl>
@@ -203,12 +230,13 @@ tile: ID of the tile to use</dd>
 
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.section.Section.set_wall">
-<tt class="descname">set_wall</tt><big>(</big><em>location</em>, <em>tile</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.set_wall" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_wall</tt><big>(</big><em>location</em>, <em>tile</em>, <em>location_type</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.section.Section.set_wall" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set wall at given location</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd>location: (loc_x, loc_y) location to set the tile
-tile: ID of the tile to use</dd>
+tile: ID of the tile to use
+location_type: type of location, None to not change</dd>
 <dt>Note:</dt>
 <dd>Coordinates are given relative to section origo</dd>
 </dl>
@@ -239,7 +267,6 @@ tile: ID of the tile to use</dd>
 </dd></dl>
 
 </div>
-</div>
 
 
           </div>
@@ -247,14 +274,6 @@ tile: ID of the tile to use</dd>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pyherc.generators.level.partitioners.section</a><ul>
-<li><a class="reference internal" href="#section">Section</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
   <p class="topless"><a href="module_grid.html"
                         title="previous chapter">pyherc.generators.level.partitioners.grid</a></p>
@@ -298,7 +317,7 @@ tile: ID of the tile to use</dd>
         <li class="right" >
           <a href="module_grid.html" title="pyherc.generators.level.partitioners.grid"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../module_generators.html" >pyherc.generators</a> &raquo;</li>
           <li><a href="../module_level.html" >pyherc.generators.level</a> &raquo;</li>

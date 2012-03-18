@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.generators.level.testlevel &mdash; Herculeum 0.1 documentation</title>
+    <title>pyherc.generators.level.testlevel &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.generators.level" href="module_level.html" />
-    <link rel="next" title="pyherc.generators.level.partitioners" href="partitioners/module_partitioners.html" />
-    <link rel="prev" title="pyherc.generators.level.crypt" href="module_crypt.html" /> 
+    <link rel="next" title="pyherc.generators.level.prototiles" href="module_prototiles.html" />
+    <link rel="prev" title="pyherc.generators.level.generator" href="module_generator.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,12 +41,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="partitioners/module_partitioners.html" title="pyherc.generators.level.partitioners"
+          <a href="module_prototiles.html" title="pyherc.generators.level.prototiles"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="module_crypt.html" title="pyherc.generators.level.crypt"
+          <a href="module_generator.html" title="pyherc.generators.level.generator"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../module_generators.html" >pyherc.generators</a> &raquo;</li>
           <li><a href="module_level.html" accesskey="U">pyherc.generators.level</a> &raquo;</li> 
@@ -62,25 +62,25 @@
 <span id="pyherc-generators-level-testlevel"></span><h1>pyherc.generators.level.testlevel<a class="headerlink" href="#module-pyherc.generators.level.testlevel" title="Permalink to this headline">¶</a></h1>
 <p>Classes for generating test levels
 These levels are not used in game, their function is to help in testing</p>
-<div class="section" id="testlevelgenerator">
-<h2>TestLevelGenerator<a class="headerlink" href="#testlevelgenerator" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pyherc.generators.level.testlevel.TestLevelGenerator">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.level.testlevel.</tt><tt class="descname">TestLevelGenerator</tt><big>(</big><em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.testlevel.TestLevelGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.testlevel.</tt><tt class="descname">TestLevelGenerator</tt><big>(</big><em>action_factory</em>, <em>creature_generator</em>, <em>item_generator</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.testlevel.TestLevelGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a simple test level</p>
 <dl class="method">
 <dt id="pyherc.generators.level.testlevel.TestLevelGenerator.generate_level">
 <tt class="descname">generate_level</tt><big>(</big><em>portal</em>, <em>model</em>, <em>new_portals=0</em>, <em>monster_list=None</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.testlevel.TestLevelGenerator.generate_level" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate level that starts from given stairs
-&#64;param portal: link new level to this portal
-&#64;param model: model being used
-&#64;param new_portals: amount of portals to generate, default 0
-&#64;param monster_list: list of monsters to use</p>
+<dd><p>Generate level that starts from given stairs</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>portal: link new level to this portal
+model: model being used
+new_portals: amount of portals to generate, default 0
+monster_list: list of monsters to use</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
-</div>
 </div>
 
 
@@ -89,20 +89,12 @@ These levels are not used in game, their function is to help in testing</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pyherc.generators.level.testlevel</a><ul>
-<li><a class="reference internal" href="#testlevelgenerator">TestLevelGenerator</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="module_crypt.html"
-                        title="previous chapter">pyherc.generators.level.crypt</a></p>
+  <p class="topless"><a href="module_generator.html"
+                        title="previous chapter">pyherc.generators.level.generator</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="partitioners/module_partitioners.html"
-                        title="next chapter">pyherc.generators.level.partitioners</a></p>
+  <p class="topless"><a href="module_prototiles.html"
+                        title="next chapter">pyherc.generators.level.prototiles</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../_sources/generators/level/module_testlevel.txt"
@@ -135,12 +127,12 @@ These levels are not used in game, their function is to help in testing</p>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="partitioners/module_partitioners.html" title="pyherc.generators.level.partitioners"
+          <a href="module_prototiles.html" title="pyherc.generators.level.prototiles"
              >next</a> |</li>
         <li class="right" >
-          <a href="module_crypt.html" title="pyherc.generators.level.crypt"
+          <a href="module_generator.html" title="pyherc.generators.level.generator"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../module_generators.html" >pyherc.generators</a> &raquo;</li>
           <li><a href="module_level.html" >pyherc.generators.level</a> &raquo;</li> 

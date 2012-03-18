@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.attack.action &mdash; Herculeum 0.1 documentation</title>
+    <title>pyherc.rules.attack.action &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.rules.attack" href="module_attack.html" />
     <link rel="next" title="pyherc.rules.attack.factories" href="module_factories.html" />
     <link rel="prev" title="pyherc.rules.attack" href="module_attack.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_attack.html" title="pyherc.rules.attack"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../module_rules.html" >pyherc.rules</a> &raquo;</li>
           <li><a href="module_attack.html" accesskey="U">pyherc.rules.attack</a> &raquo;</li> 
@@ -61,53 +61,44 @@
   <div class="section" id="module-pyherc.rules.attack.action">
 <span id="pyherc-rules-attack-action"></span><h1>pyherc.rules.attack.action<a class="headerlink" href="#module-pyherc.rules.attack.action" title="Permalink to this headline">¶</a></h1>
 <p>Module defining classes related to AttackAction</p>
-<div class="section" id="attackaction">
-<h2>AttackAction<a class="headerlink" href="#attackaction" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pyherc.rules.attack.action.AttackAction">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.action.</tt><tt class="descname">AttackAction</tt><big>(</big><em>attack_type</em>, <em>to_hit</em>, <em>damage</em>, <em>attacker</em>, <em>target</em>, <em>model</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.AttackAction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.action.</tt><tt class="descname">AttackAction</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.AttackAction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Action for attacking</p>
 <dl class="method">
 <dt id="pyherc.rules.attack.action.AttackAction.execute">
-<tt class="descname">execute</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.AttackAction.execute" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">execute</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.AttackAction.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Executes this Attack</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="tohit">
-<h2>ToHit<a class="headerlink" href="#tohit" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pyherc.rules.attack.action.ToHit">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.action.</tt><tt class="descname">ToHit</tt><big>(</big><em>attacker</em>, <em>target</em>, <em>random_number_generator=&lt;random.Random object at 0x020DB178&gt;</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.ToHit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks done for hitting</p>
-<dl class="method">
-<dt id="pyherc.rules.attack.action.ToHit.is_hit">
-<tt class="descname">is_hit</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.ToHit.is_hit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the hit lands
-&#64;returns: True if hit is successful, False otherwise</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="damage">
-<h2>Damage<a class="headerlink" href="#damage" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pyherc.rules.attack.action.Damage">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.action.</tt><tt class="descname">Damage</tt><big>(</big><em>damage</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.Damage" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.action.</tt><tt class="descname">Damage</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.Damage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Damage done in attack</p>
 <dl class="method">
 <dt id="pyherc.rules.attack.action.Damage.apply_damage">
-<tt class="descname">apply_damage</tt><big>(</big><em>target</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.Damage.apply_damage" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">apply_damage</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.Damage.apply_damage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies damage to target
 &#64;param target: Target to damage</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
+<dl class="class">
+<dt id="pyherc.rules.attack.action.ToHit">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.action.</tt><tt class="descname">ToHit</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.ToHit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks done for hitting</p>
+<dl class="method">
+<dt id="pyherc.rules.attack.action.ToHit.is_hit">
+<tt class="descname">is_hit</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.action.ToHit.is_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the hit lands
+&#64;returns: True if hit is successful, False otherwise</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -116,16 +107,6 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pyherc.rules.attack.action</a><ul>
-<li><a class="reference internal" href="#attackaction">AttackAction</a></li>
-<li><a class="reference internal" href="#tohit">ToHit</a></li>
-<li><a class="reference internal" href="#damage">Damage</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
   <p class="topless"><a href="module_attack.html"
                         title="previous chapter">pyherc.rules.attack</a></p>
@@ -169,7 +150,7 @@
         <li class="right" >
           <a href="module_attack.html" title="pyherc.rules.attack"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../module_rules.html" >pyherc.rules</a> &raquo;</li>
           <li><a href="module_attack.html" >pyherc.rules.attack</a> &raquo;</li> 

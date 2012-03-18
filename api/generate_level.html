@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Generating a level &mdash; Herculeum 0.1 documentation</title>
+    <title>Generating a level &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,8 +25,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="index.html" />
-    <link rel="next" title="Generating an item" href="generate_item.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="index.html" />
+    <link rel="next" title="Modular level generator" href="modular_levels.html" />
     <link rel="prev" title="Building blocks" href="module_descriptions.html" /> 
   </head>
   <body>
@@ -40,12 +40,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="generate_item.html" title="Generating an item"
+          <a href="modular_levels.html" title="Modular level generator"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="module_descriptions.html" title="Building blocks"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -72,7 +72,7 @@ it starts by generating catacombs, where the game starts.</p>
 <span class="n">model</span><span class="o">.</span><span class="n">dungeon</span><span class="o">.</span><span class="n">levels</span> <span class="o">=</span> <span class="n">level</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="generators/level/module_catacombs.html#pyherc.generators.level.catacombs.CatacombsLevelGenerator" title="pyherc.generators.level.catacombs.CatacombsLevelGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.catacombs.CatacombsLevelGenerator</span></tt></a> has
+<p><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.catacombs.CatacombsLevelGenerator</span></tt> has
 responsibility to both create catacombs and ensure levels accessed from
 catacombs are generated as well. It is recommended that other portions of the
 dungeon are linked via proxies in portals.</p>
@@ -86,17 +86,12 @@ accomplished.</p>
 <h3>Level generator<a class="headerlink" href="#level-generator" title="Permalink to this headline">¶</a></h3>
 <p>In order to add a new type of level into the game, a level generator needs to
 be written first. It has a simple interface:</p>
-<div class="highlight-python"><pre>def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2))</pre>
+<div class="highlight-python"><pre>def generate_level(self, portal)</pre>
 </div>
 <p>Arguments supplied to this function are:</p>
 <blockquote>
 <div><ul class="simple">
 <li>portal - Portal at an existing level, where this level should be connected</li>
-<li>model - Model instance being used</li>
-<li>new_portals - Amount of portals to be generated and placed on new level</li>
-<li>level - deepness of the level</li>
-<li>room_min_size - Minimum size of the rooms to generate. This parameter will
-most likely be removed in the future</li>
 </ul>
 </div></blockquote>
 <div class="section" id="shape-of-the-level">
@@ -164,8 +159,8 @@ generate level.</p>
 be generated at the moment when somebody tries to walk through portal to enter
 them.</p>
 </div>
-<div class="section" id="addid-level-into-the-dungeon">
-<h4>Addid level into the dungeon<a class="headerlink" href="#addid-level-into-the-dungeon" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="adding-level-into-the-dungeon">
+<h4>Adding level into the dungeon<a class="headerlink" href="#adding-level-into-the-dungeon" title="Permalink to this headline">¶</a></h4>
 <p>Now you have a generator that can be used to generate new levels. Last step
 is to modify an existing level generator to place a portal and create a level
 using this new generator. If that step is skipped, new type of levels will
@@ -192,7 +187,7 @@ never get generated.</p>
 <li><a class="reference internal" href="#adding-items">Adding items</a></li>
 <li><a class="reference internal" href="#linking-to-previous-level">Linking to previous level</a></li>
 <li><a class="reference internal" href="#linking-to-further-levels">Linking to further levels</a></li>
-<li><a class="reference internal" href="#addid-level-into-the-dungeon">Addid level into the dungeon</a></li>
+<li><a class="reference internal" href="#adding-level-into-the-dungeon">Adding level into the dungeon</a></li>
 </ul>
 </li>
 </ul>
@@ -205,8 +200,8 @@ never get generated.</p>
   <p class="topless"><a href="module_descriptions.html"
                         title="previous chapter">Building blocks</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="generate_item.html"
-                        title="next chapter">Generating an item</a></p>
+  <p class="topless"><a href="modular_levels.html"
+                        title="next chapter">Modular level generator</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/generate_level.txt"
@@ -239,12 +234,12 @@ never get generated.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="generate_item.html" title="Generating an item"
+          <a href="modular_levels.html" title="Modular level generator"
              >next</a> |</li>
         <li class="right" >
           <a href="module_descriptions.html" title="Building blocks"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

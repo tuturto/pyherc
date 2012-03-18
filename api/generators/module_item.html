@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.generators.item &mdash; Herculeum 0.1 documentation</title>
+    <title>pyherc.generators.item &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="../index.html" />
     <link rel="up" title="pyherc.generators" href="module_generators.html" />
     <link rel="next" title="pyherc.generators.utils" href="module_utils.html" />
     <link rel="prev" title="pyherc.generators.dungeon" href="module_dungeon.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_dungeon.html" title="pyherc.generators.dungeon"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_generators.html" accesskey="U">pyherc.generators</a> &raquo;</li> 
       </ul>
@@ -60,29 +60,34 @@
   <div class="section" id="module-pyherc.generators.item">
 <span id="pyherc-generators-item"></span><h1>pyherc.generators.item<a class="headerlink" href="#module-pyherc.generators.item" title="Permalink to this headline">¶</a></h1>
 <p>Classes needed for item generation</p>
-<div class="section" id="itemgenerator">
-<h2>ItemGenerator<a class="headerlink" href="#itemgenerator" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pyherc.generators.item.ItemGenerator">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.item.</tt><tt class="descname">ItemGenerator</tt><a class="headerlink" href="#pyherc.generators.item.ItemGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.generators.item.</tt><tt class="descname">ItemGenerator</tt><big>(</big><em>tables</em><big>)</big><a class="headerlink" href="#pyherc.generators.item.ItemGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class used to generate items</p>
 <dl class="method">
-<dt id="pyherc.generators.item.ItemGenerator.generateItem">
-<tt class="descname">generateItem</tt><big>(</big><em>tables</em>, <em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.generators.item.ItemGenerator.generateItem" title="Permalink to this definition">¶</a></dt>
+<dt id="pyherc.generators.item.ItemGenerator.generate_item">
+<tt class="descname">generate_item</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.generators.item.ItemGenerator.generate_item" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates an item</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pyherc.generators.item.ItemGenerator.generateSpecialItem">
-<tt class="descname">generateSpecialItem</tt><big>(</big><em>tables</em>, <em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.generators.item.ItemGenerator.generateSpecialItem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate a special item
-&#64;param tables: tables used in generation
-&#64;param parameters: hash table containing parameters for generation</p>
+<dt id="pyherc.generators.item.ItemGenerator.generate_item_from_table">
+<tt class="descname">generate_item_from_table</tt><big>(</big><em>table</em><big>)</big><a class="headerlink" href="#pyherc.generators.item.ItemGenerator.generate_item_from_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take table entry and generate corresponding item</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.generators.item.ItemGenerator.generate_special_item">
+<tt class="descname">generate_special_item</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.generators.item.ItemGenerator.generate_special_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a special item</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>parameters: hash table containing parameters for generation</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
-</div>
 </div>
 
 
@@ -91,14 +96,6 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pyherc.generators.item</a><ul>
-<li><a class="reference internal" href="#itemgenerator">ItemGenerator</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
   <p class="topless"><a href="module_dungeon.html"
                         title="previous chapter">pyherc.generators.dungeon</a></p>
@@ -142,7 +139,7 @@
         <li class="right" >
           <a href="module_dungeon.html" title="pyherc.generators.dungeon"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_generators.html" >pyherc.generators</a> &raquo;</li> 
       </ul>

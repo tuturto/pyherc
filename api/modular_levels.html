@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Modular level generator &mdash; Herculeum 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.2 documentation" href="index.html" />
+    <link rel="next" title="Generating an item" href="generate_item.html" />
+    <link rel="prev" title="Generating a level" href="generate_level.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="generate_item.html" title="Generating an item"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="generate_level.html" title="Generating a level"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="modular-level-generator">
+<h1>Modular level generator<a class="headerlink" href="#modular-level-generator" title="Permalink to this headline">¶</a></h1>
+<p>Now that we are aware how level generation works in general, we can have
+a look at more modular approach.
+<a class="reference internal" href="generators/level/module_generator.html#pyherc.generators.level.generator.LevelGenerator" title="pyherc.generators.level.generator.LevelGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.generator.LevelGenerator</span></tt></a> is a high level
+generator that can be used to create different kinds of levels. Usually
+the system does not directly use it, but queries a fully setup generator
+from <a class="reference internal" href="generators/level/module_generator.html#pyherc.generators.level.generator.LevelGeneratorFactory" title="pyherc.generators.level.generator.LevelGeneratorFactory"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.generator.LevelGeneratorFactory</span></tt></a></p>
+<div class="section" id="overview-of-levelgenerator">
+<h2>Overview of LevelGenerator<a class="headerlink" href="#overview-of-levelgenerator" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):</pre>
+</div>
+<p>LevelGenerator has same generate_level - method as other level generators and
+calling it functions in the same way. Difference is in the internals of the
+generator. Instead of performing all the level generation by itself,
+LevelGenerator breaks it into steps and delegates each step to a sub component.</p>
+<p>First new level is created and sent to a partitioner. This component will
+divide level into sections and link them to each other randomly. Partitioners
+are required to ensure that all sections are reachable.</p>
+<p>A room is generated within each section and corridors are used to link rooms
+to neighbouring sections. Linking is done according to links set up in the
+previous phase. This in turn ensures that each room is reachable.</p>
+<p>In decoration step details are added into the level. Walls are built where
+empty space meets solid ground and floors are detailed.</p>
+<p>Portals are added by portal adders. These portals will lead deeper in the dungeon
+and cause new levels generated when player walks down to them. One special portal
+is also created, that links generated level to the higher level.</p>
+<p>Adding of creatures is done by creature adders. These contains information of the
+type of creatures to add and their placement.</p>
+<p>Items are added in the same way as the portals, but item adders are used.</p>
+</div>
+<div class="section" id="partitioners">
+<h2>Partitioners<a class="headerlink" href="#partitioners" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generators/level/partitioners/module_grid.html#pyherc.generators.level.partitioners.grid.GridPartitioner" title="pyherc.generators.level.partitioners.grid.GridPartitioner"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.partitioners.grid.GridPartitioner</span></tt></a> is basic partitioner,
+which knows how to divide level into a grid with equal sized sections.</p>
+<p>GridPartitioner has method:</p>
+<div class="highlight-python"><pre>def partition_level(self, level,  x_sections = 3,  y_sections = 3):</pre>
+</div>
+<p>Calling this method will partition level to sections, link sections to each other
+and return them in a list.</p>
+<p><a class="reference internal" href="generators/level/partitioners/module_section.html#pyherc.generators.level.partitioners.section.Section" title="pyherc.generators.level.partitioners.section.Section"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.partitioners.section.Section</span></tt></a> is used to represent
+section. It defines a rectangular area in level, links to neighbouring areas and
+information how they should connect to each other. It also defines connections
+for rooms.</p>
+</div>
+<div class="section" id="room-generators">
+<h2>Room generators<a class="headerlink" href="#room-generators" title="Permalink to this headline">¶</a></h2>
+<p>Room generators are used to create rooms inside of sections created by partitioner.
+Each section has information how they link together and these connection points must
+be linked together by room generator.</p>
+<p>Room generator only needs a single method:</p>
+<div class="highlight-python"><pre>def generate_room(self, section):</pre>
+</div>
+<p>Calling this method should create a room inside section and connect all connection
+points together.</p>
+<p>Simple example can be found from <a class="reference internal" href="generators/level/room/module_squareroom.html#pyherc.generators.level.room.squareroom.SquareRoomGenerator" title="pyherc.generators.level.room.squareroom.SquareRoomGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.room.squareroom.SquareRoomGenerator</span></tt></a></p>
+</div>
+<div class="section" id="decorators">
+<h2>Decorators<a class="headerlink" href="#decorators" title="Permalink to this headline">¶</a></h2>
+<p>Decorators can be used to add theme to level. Simple ones can be used to change
+appearance of the floor to something different than what was generated by room
+generator. More complex usage is to detect where walls are located and change
+their appearance.</p>
+<p>New decorator can be created by subclassing <a class="reference internal" href="generators/level/decorator/module_basic.html#pyherc.generators.level.decorator.basic.Decorator" title="pyherc.generators.level.decorator.basic.Decorator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.decorator.basic.Decorator</span></tt></a>
+and overriding method:</p>
+<div class="highlight-python"><pre>def decorate_level(self, level):</pre>
+</div>
+</div>
+<div class="section" id="portal-adders">
+<h2>Portal adders<a class="headerlink" href="#portal-adders" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generators/level/module_portals.html#pyherc.generators.level.portals.PortalAdder" title="pyherc.generators.level.portals.PortalAdder"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.portals.PortalAdder</span></tt></a> is responsible class for
+generating portals. the class itself is pretty simple. It contains information
+of what kind of icons to use, where to place the portal (room, corridor,
+treasure chamber and so on) and what kind of level it will lead to.</p>
+<p>Method:</p>
+<div class="highlight-python"><pre>def add_portal(self, level):</pre>
+</div>
+<p>Will create a proxy portal at a random location. This portal will contain
+name of the level, instead of direct link. When player enters the portal,
+a new level generator is created and used to generate the new level.</p>
+</div>
+<div class="section" id="creature-adder">
+<h2>Creature adder<a class="headerlink" href="#creature-adder" title="Permalink to this headline">¶</a></h2>
+<p>Creatures are added with <a class="reference internal" href="generators/level/module_creatures.html#pyherc.generators.level.creatures.CreatureAdder" title="pyherc.generators.level.creatures.CreatureAdder"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.creatures.CreatureAdder</span></tt></a>.
+Usually there is no reason to subclass this class, but simple configuration is
+enough.</p>
+</div>
+<div class="section" id="item-adder">
+<h2>Item adder<a class="headerlink" href="#item-adder" title="Permalink to this headline">¶</a></h2>
+<p>Items  are added with <a class="reference internal" href="generators/level/module_items.html#pyherc.generators.level.items.ItemAdder" title="pyherc.generators.level.items.ItemAdder"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.items.ItemAdder</span></tt></a>.
+Usually there is no reason to subclass this class, but simple configuration is
+enough.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Modular level generator</a><ul>
+<li><a class="reference internal" href="#overview-of-levelgenerator">Overview of LevelGenerator</a></li>
+<li><a class="reference internal" href="#partitioners">Partitioners</a></li>
+<li><a class="reference internal" href="#room-generators">Room generators</a></li>
+<li><a class="reference internal" href="#decorators">Decorators</a></li>
+<li><a class="reference internal" href="#portal-adders">Portal adders</a></li>
+<li><a class="reference internal" href="#creature-adder">Creature adder</a></li>
+<li><a class="reference internal" href="#item-adder">Item adder</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="generate_level.html"
+                        title="previous chapter">Generating a level</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="generate_item.html"
+                        title="next chapter">Generating an item</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/modular_levels.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="generate_item.html" title="Generating an item"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="generate_level.html" title="Generating a level"
+             >previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

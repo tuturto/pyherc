@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.attack.factories &mdash; Herculeum 0.1 documentation</title>
+    <title>pyherc.rules.attack.factories &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.rules.attack" href="module_attack.html" />
     <link rel="next" title="pyherc.rules.attack.melee" href="module_melee.html" />
     <link rel="prev" title="pyherc.rules.attack.action" href="module_action.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_action.html" title="pyherc.rules.attack.action"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../module_rules.html" >pyherc.rules</a> &raquo;</li>
           <li><a href="module_attack.html" accesskey="U">pyherc.rules.attack</a> &raquo;</li> 
@@ -61,63 +61,94 @@
   <div class="section" id="module-pyherc.rules.attack.factories">
 <span id="pyherc-rules-attack-factories"></span><h1>pyherc.rules.attack.factories<a class="headerlink" href="#module-pyherc.rules.attack.factories" title="Permalink to this headline">¶</a></h1>
 <p>Attack related factories are defined here</p>
-<div class="section" id="attackfactory">
-<h2>AttackFactory<a class="headerlink" href="#attackfactory" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pyherc.rules.attack.factories.AttackFactory">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.factories.</tt><tt class="descname">AttackFactory</tt><big>(</big><em>factories</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.AttackFactory" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.factories.</tt><tt class="descname">AttackFactory</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.AttackFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factory for constructing attack actions</p>
 </dd></dl>
 
-</div>
-<div class="section" id="unarmedcombatfactory">
-<h2>UnarmedCombatFactory<a class="headerlink" href="#unarmedcombatfactory" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pyherc.rules.attack.factories.UnarmedCombatFactory">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.factories.</tt><tt class="descname">UnarmedCombatFactory</tt><a class="headerlink" href="#pyherc.rules.attack.factories.UnarmedCombatFactory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Factory for producing unarmed combat actions</p>
-<dl class="method">
-<dt id="pyherc.rules.attack.factories.UnarmedCombatFactory.can_handle">
-<tt class="descname">can_handle</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.UnarmedCombatFactory.can_handle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Can this factory process these parameters
-&#64;param parameters: Parameters to check
-&#64;returns: True if factory is capable of handling parameters</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.rules.attack.factories.UnarmedCombatFactory.get_action">
-<tt class="descname">get_action</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.UnarmedCombatFactory.get_action" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a attack action
-&#64;param parameters: Parameters used to control attack creation</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="meleecombatfactory">
-<h2>MeleeCombatFactory<a class="headerlink" href="#meleecombatfactory" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pyherc.rules.attack.factories.MeleeCombatFactory">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.factories.</tt><tt class="descname">MeleeCombatFactory</tt><a class="headerlink" href="#pyherc.rules.attack.factories.MeleeCombatFactory" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.factories.</tt><tt class="descname">MeleeCombatFactory</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.MeleeCombatFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factory for producing melee combat actions</p>
 <dl class="method">
 <dt id="pyherc.rules.attack.factories.MeleeCombatFactory.can_handle">
-<tt class="descname">can_handle</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.MeleeCombatFactory.can_handle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Can this factory process these parameters
-&#64;param parameters: Parameters to check
-&#64;returns: True if factory is capable of handling parameters</p>
+<tt class="descname">can_handle</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.MeleeCombatFactory.can_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Can this factory process these parameters</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>parameters: Parameters to check</dd>
+<dt>Returns:</dt>
+<dd>True if factory is capable of handling parameters</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.rules.attack.factories.MeleeCombatFactory.get_action">
-<tt class="descname">get_action</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.MeleeCombatFactory.get_action" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a attack action
-&#64;param parameters: Parameters used to control attack creation</p>
+<tt class="descname">get_action</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.MeleeCombatFactory.get_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a attack action</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>parameters: Parameters used to control attack creation</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.attack.factories.MeleeCombatFactory.get_target">
+<tt class="descname">get_target</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.MeleeCombatFactory.get_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get target of the attack</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>parameters: UnarmedAttackParameters</dd>
+<dt>Returns:</dt>
+<dd>target character if found, otherwise None</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
-</div>
+<dl class="class">
+<dt id="pyherc.rules.attack.factories.UnarmedCombatFactory">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.factories.</tt><tt class="descname">UnarmedCombatFactory</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.UnarmedCombatFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factory for producing unarmed combat actions</p>
+<dl class="method">
+<dt id="pyherc.rules.attack.factories.UnarmedCombatFactory.can_handle">
+<tt class="descname">can_handle</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.UnarmedCombatFactory.can_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Can this factory process these parameters</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>parameters: Parameters to check</dd>
+<dt>Returns:</dt>
+<dd>True if factory is capable of handling parameters</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.attack.factories.UnarmedCombatFactory.get_action">
+<tt class="descname">get_action</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.UnarmedCombatFactory.get_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a attack action</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>parameters: Parameters used to control attack creation</dd>
+<dt>Returns:</dt>
+<dd>Action that can be executed</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.attack.factories.UnarmedCombatFactory.get_target">
+<tt class="descname">get_target</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.factories.UnarmedCombatFactory.get_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get target of the attack</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>parameters: UnarmedAttackParameters</dd>
+<dt>Returns:</dt>
+<dd>target character if found, otherwise None</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -126,16 +157,6 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pyherc.rules.attack.factories</a><ul>
-<li><a class="reference internal" href="#attackfactory">AttackFactory</a></li>
-<li><a class="reference internal" href="#unarmedcombatfactory">UnarmedCombatFactory</a></li>
-<li><a class="reference internal" href="#meleecombatfactory">MeleeCombatFactory</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
   <p class="topless"><a href="module_action.html"
                         title="previous chapter">pyherc.rules.attack.action</a></p>
@@ -179,7 +200,7 @@
         <li class="right" >
           <a href="module_action.html" title="pyherc.rules.attack.action"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../module_rules.html" >pyherc.rules</a> &raquo;</li>
           <li><a href="module_attack.html" >pyherc.rules.attack</a> &raquo;</li> 

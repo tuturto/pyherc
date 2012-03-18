@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.generators.level.items &mdash; Herculeum 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.2 documentation" href="../../index.html" />
+    <link rel="up" title="pyherc.generators.level" href="module_level.html" />
+    <link rel="next" title="pyherc.generators.level.generator" href="module_generator.html" />
+    <link rel="prev" title="pyherc.generators.level.creatures" href="module_creatures.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_generator.html" title="pyherc.generators.level.generator"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_creatures.html" title="pyherc.generators.level.creatures"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../module_generators.html" >pyherc.generators</a> &raquo;</li>
+          <li><a href="module_level.html" accesskey="U">pyherc.generators.level</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.generators.level.items">
+<span id="pyherc-generators-level-items"></span><h1>pyherc.generators.level.items<a class="headerlink" href="#module-pyherc.generators.level.items" title="Permalink to this headline">¶</a></h1>
+<p>Classes for item generation</p>
+<dl class="class">
+<dt id="pyherc.generators.level.items.ItemAdder">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.items.</tt><tt class="descname">ItemAdder</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.items.ItemAdder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for adding items</p>
+<dl class="method">
+<dt id="pyherc.generators.level.items.ItemAdder.add_items">
+<tt class="descname">add_items</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.items.ItemAdder.add_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add items</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>level: Level to add items</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.generators.level.items.ItemAdder.generate_items">
+<tt class="descname">generate_items</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.items.ItemAdder.generate_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate items according to specification</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>item_spec: Dictionary specifying items to create</dd>
+<dt>Returns</dt>
+<dd>tupple (item_spec, item)
+where item_spec is specification used to generate item
+and item is generated Item</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.items.ItemAdder.level_types">
+<tt class="descname">level_types</tt><a class="headerlink" href="#pyherc.generators.level.items.ItemAdder.level_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get level types this item adder can be used at</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.generators.level.items.ItemAdder.place_items">
+<tt class="descname">place_items</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.items.ItemAdder.place_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place items to level</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>item: list of tupples (item_spec, item)
+level: level to place items</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.generators.level.items.ItemAdderConfiguration">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.items.</tt><tt class="descname">ItemAdderConfiguration</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.items.ItemAdderConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configuration for ItemAdder</p>
+<dl class="method">
+<dt id="pyherc.generators.level.items.ItemAdderConfiguration.add_item">
+<tt class="descname">add_item</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.items.ItemAdderConfiguration.add_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds item to configuration</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>item: specification for item</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_creatures.html"
+                        title="previous chapter">pyherc.generators.level.creatures</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_generator.html"
+                        title="next chapter">pyherc.generators.level.generator</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/generators/level/module_items.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_generator.html" title="pyherc.generators.level.generator"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_creatures.html" title="pyherc.generators.level.creatures"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../module_generators.html" >pyherc.generators</a> &raquo;</li>
+          <li><a href="module_level.html" >pyherc.generators.level</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

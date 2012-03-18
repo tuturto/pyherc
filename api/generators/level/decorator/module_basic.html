@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.generators.level.decorator.basic &mdash; Herculeum 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.2 documentation" href="../../../index.html" />
+    <link rel="up" title="pyherc.generators.level.decorator" href="module_decorator.html" />
+    <link rel="next" title="pyherc.generators.level.partitioners" href="../partitioners/module_partitioners.html" />
+    <link rel="prev" title="pyherc.generators.level.decorator" href="module_decorator.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../partitioners/module_partitioners.html" title="pyherc.generators.level.partitioners"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_decorator.html" title="pyherc.generators.level.decorator"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../module_generators.html" >pyherc.generators</a> &raquo;</li>
+          <li><a href="../module_level.html" >pyherc.generators.level</a> &raquo;</li>
+          <li><a href="module_decorator.html" accesskey="U">pyherc.generators.level.decorator</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.generators.level.decorator.basic">
+<span id="pyherc-generators-level-decorator-basic"></span><h1>pyherc.generators.level.decorator.basic<a class="headerlink" href="#module-pyherc.generators.level.decorator.basic" title="Permalink to this headline">¶</a></h1>
+<p>Module for basic decorators</p>
+<dl class="class">
+<dt id="pyherc.generators.level.decorator.basic.AggregateDecorator">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.decorator.basic.</tt><tt class="descname">AggregateDecorator</tt><big>(</big><em>configuration</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.AggregateDecorator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that consists of multiple decorators</p>
+<dl class="method">
+<dt id="pyherc.generators.level.decorator.basic.AggregateDecorator.decorate_level">
+<tt class="descname">decorate_level</tt><big>(</big><em>level</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.AggregateDecorator.decorate_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorate level</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>level: Level to decorate</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.generators.level.decorator.basic.AggregateDecoratorConfig">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.decorator.basic.</tt><tt class="descname">AggregateDecoratorConfig</tt><big>(</big><em>level_types</em>, <em>decorators</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.AggregateDecoratorConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configuration for AggregateDecorator</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.generators.level.decorator.basic.Decorator">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.decorator.basic.</tt><tt class="descname">Decorator</tt><big>(</big><em>configuration</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.Decorator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Super class for level decorators</p>
+<dl class="method">
+<dt id="pyherc.generators.level.decorator.basic.Decorator.decorate_level">
+<tt class="descname">decorate_level</tt><big>(</big><em>level</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.Decorator.decorate_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorate level</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>level: Level to decorate</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.decorator.basic.Decorator.level_types">
+<tt class="descname">level_types</tt><a class="headerlink" href="#pyherc.generators.level.decorator.basic.Decorator.level_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get types of levels this decorator supports</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>List of level types</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.generators.level.decorator.basic.DecoratorConfig">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.decorator.basic.</tt><tt class="descname">DecoratorConfig</tt><big>(</big><em>level_types</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.DecoratorConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Super class for decorator configuration</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.generators.level.decorator.basic.ReplacingDecorator">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.decorator.basic.</tt><tt class="descname">ReplacingDecorator</tt><big>(</big><em>configuration</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.ReplacingDecorator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple decorator used to replace prototiles with real ones</p>
+<dl class="method">
+<dt id="pyherc.generators.level.decorator.basic.ReplacingDecorator.decorate_level">
+<tt class="descname">decorate_level</tt><big>(</big><em>level</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.ReplacingDecorator.decorate_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorate level</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>level: Level to decorate</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.generators.level.decorator.basic.ReplacingDecoratorConfig">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.decorator.basic.</tt><tt class="descname">ReplacingDecoratorConfig</tt><big>(</big><em>level_types</em>, <em>ground_config</em>, <em>wall_config</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.ReplacingDecoratorConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configuration for ReplacingDecorator</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.generators.level.decorator.basic.WallBuilderDecorator">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.decorator.basic.</tt><tt class="descname">WallBuilderDecorator</tt><big>(</big><em>configuration</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.WallBuilderDecorator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator used to build walls</p>
+<p>This decorator will search all positions where there are walls next to empty
+space and replace tiles there with specified ones</p>
+<dl class="method">
+<dt id="pyherc.generators.level.decorator.basic.WallBuilderDecorator.check_and_replace">
+<tt class="descname">check_and_replace</tt><big>(</big><em>location</em>, <em>level</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.WallBuilderDecorator.check_and_replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check location and replace tile if it matches configuration</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>location: (loc_x, loc_y) location to check
+level: Level to use</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.generators.level.decorator.basic.WallBuilderDecorator.decorate_level">
+<tt class="descname">decorate_level</tt><big>(</big><em>level</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.WallBuilderDecorator.decorate_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorate level</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>level: Level to decorate</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.generators.level.decorator.basic.WallBuilderDecoratorConfig">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.decorator.basic.</tt><tt class="descname">WallBuilderDecoratorConfig</tt><big>(</big><em>level_types</em>, <em>wall_config</em>, <em>empty_tile</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.decorator.basic.WallBuilderDecoratorConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configuration for WallBuilderDecorator</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_decorator.html"
+                        title="previous chapter">pyherc.generators.level.decorator</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../partitioners/module_partitioners.html"
+                        title="next chapter">pyherc.generators.level.partitioners</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/generators/level/decorator/module_basic.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../partitioners/module_partitioners.html" title="pyherc.generators.level.partitioners"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_decorator.html" title="pyherc.generators.level.decorator"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../module_generators.html" >pyherc.generators</a> &raquo;</li>
+          <li><a href="../module_level.html" >pyherc.generators.level</a> &raquo;</li>
+          <li><a href="module_decorator.html" >pyherc.generators.level.decorator</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

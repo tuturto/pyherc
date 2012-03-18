@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.generators.level.portals &mdash; Herculeum 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.2 documentation" href="../../index.html" />
+    <link rel="up" title="pyherc.generators.level" href="module_level.html" />
+    <link rel="next" title="pyherc.generators.level.decorator" href="decorator/module_decorator.html" />
+    <link rel="prev" title="pyherc.generators.level.prototiles" href="module_prototiles.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="decorator/module_decorator.html" title="pyherc.generators.level.decorator"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_prototiles.html" title="pyherc.generators.level.prototiles"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../module_generators.html" >pyherc.generators</a> &raquo;</li>
+          <li><a href="module_level.html" accesskey="U">pyherc.generators.level</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.generators.level.portals">
+<span id="pyherc-generators-level-portals"></span><h1>pyherc.generators.level.portals<a class="headerlink" href="#module-pyherc.generators.level.portals" title="Permalink to this headline">¶</a></h1>
+<p>Module for adding portals</p>
+<dl class="class">
+<dt id="pyherc.generators.level.portals.PortalAdder">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.portals.</tt><tt class="descname">PortalAdder</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic class for adding portals</p>
+<dl class="method">
+<dt id="pyherc.generators.level.portals.PortalAdder.add_portal">
+<tt class="descname">add_portal</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdder.add_portal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add given stairs to the level</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>level: level to modify</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.generators.level.portals.PortalAdderConfiguration">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.portals.</tt><tt class="descname">PortalAdderConfiguration</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configuration class for adding portals</p>
+<dl class="attribute">
+<dt id="pyherc.generators.level.portals.PortalAdderConfiguration.chance">
+<tt class="descname">chance</tt><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderConfiguration.chance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chance of portal being added</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.portals.PortalAdderConfiguration.icons">
+<tt class="descname">icons</tt><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderConfiguration.icons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get pair of icons to use for portal and the other end</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.portals.PortalAdderConfiguration.is_unique">
+<tt class="descname">is_unique</tt><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderConfiguration.is_unique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is more than one instance allowed</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.portals.PortalAdderConfiguration.level_type">
+<tt class="descname">level_type</tt><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderConfiguration.level_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of level this portal can be added</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.portals.PortalAdderConfiguration.location_type">
+<tt class="descname">location_type</tt><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderConfiguration.location_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of location to add portal</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.portals.PortalAdderConfiguration.new_level">
+<tt class="descname">new_level</tt><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderConfiguration.new_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the new level</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.generators.level.portals.PortalAdderFactory">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.portals.</tt><tt class="descname">PortalAdderFactory</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for creating portal adders</p>
+<dl class="method">
+<dt id="pyherc.generators.level.portals.PortalAdderFactory.create_portal_adders">
+<tt class="descname">create_portal_adders</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderFactory.create_portal_adders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create portal adders for level type</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>level_type: type of level to create portal adders for</dd>
+<dt>Returns:</dt>
+<dd>list of generated portal adders</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_prototiles.html"
+                        title="previous chapter">pyherc.generators.level.prototiles</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="decorator/module_decorator.html"
+                        title="next chapter">pyherc.generators.level.decorator</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/generators/level/module_portals.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="decorator/module_decorator.html" title="pyherc.generators.level.decorator"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_prototiles.html" title="pyherc.generators.level.prototiles"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../module_generators.html" >pyherc.generators</a> &raquo;</li>
+          <li><a href="module_level.html" >pyherc.generators.level</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

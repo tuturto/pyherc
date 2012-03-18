@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.data.dungeon &mdash; Herculeum 0.1 documentation</title>
+    <title>pyherc.data.dungeon &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="../index.html" />
     <link rel="up" title="pyherc.data" href="module_data.html" />
     <link rel="next" title="pyherc.data.item" href="module_item.html" />
     <link rel="prev" title="pyherc.data" href="module_data.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_data.html" title="pyherc.data"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
       </ul>
@@ -66,51 +66,62 @@
 Dungeon
 Portal</dd>
 </dl>
-<div class="section" id="dungeon">
-<h2>Dungeon<a class="headerlink" href="#dungeon" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pyherc.data.dungeon.Dungeon">
-<em class="property">class </em><tt class="descclassname">pyherc.data.dungeon.</tt><tt class="descname">Dungeon</tt><a class="headerlink" href="#pyherc.data.dungeon.Dungeon" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.data.dungeon.</tt><tt class="descname">Dungeon</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Dungeon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents the dungeon</p>
 </dd></dl>
 
-</div>
-<div class="section" id="level">
-<h2>Level<a class="headerlink" href="#level" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pyherc.data.dungeon.Level">
-<em class="property">class </em><tt class="descclassname">pyherc.data.dungeon.</tt><tt class="descname">Level</tt><big>(</big><em>size=(0</em>, <em>0)</em>, <em>floor_type=None</em>, <em>wall_type=None</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.data.dungeon.</tt><tt class="descname">Level</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a level</p>
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.add_creature">
-<tt class="descname">add_creature</tt><big>(</big><em>creature</em>, <em>location=None</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.add_creature" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a creature to level
-&#64;param creature: creature to add
-&#64;param location: optional location for the creature</p>
+<tt class="descname">add_creature</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.add_creature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a creature to level</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>creature: creature to add
+location: optional location for the creature</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.add_item">
-<tt class="descname">add_item</tt><big>(</big><em>item</em>, <em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.add_item" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add an item to this level
-&#64;param item: item to add
-&#64;param location: location where to put the item</p>
+<tt class="descname">add_item</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.add_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an item to this level</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>item: item to add
+location: location where to put the item</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.add_portal">
-<tt class="descname">add_portal</tt><big>(</big><em>portal</em>, <em>location</em>, <em>other_end=None</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.add_portal" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_portal</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.add_portal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds precreated portal on level at given location
-If secondary portal is specified, link them together
-&#64;param portal: portal to add
-&#64;param location: location where to add portal
-&#64;param other_end: optional other end of the portal</p>
+If secondary portal is specified, link them together</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>portal: portal to add
+location: location where to add portal
+other_end: optional other end of the portal</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.blocks_los">
 <tt class="descname">blocks_los</tt><big>(</big><em>x_coordinate</em>, <em>y_coordinate</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.blocks_los" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if there&#8217;s LOS-blocking wall at given coordinates</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>x_coordinate: x-coordinate of the location
+y_coordinate: y-coordinate of the location</dd>
+<dt>Returns:</dt>
+<dd>True if location blocks line of sight, otherwise False</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -121,37 +132,78 @@ If secondary portal is specified, link them together
 
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.find_free_space">
-<tt class="descname">find_free_space</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.find_free_space" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">find_free_space</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.find_free_space" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds free space where stuff can be placed</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>Location where space is free</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.get_creature_at">
 <tt class="descname">get_creature_at</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.get_creature_at" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get list of creatures at given location
-&#64;param location: location to check
-&#64;return: creature if found</p>
+<dd><p>Get list of creatures at given location</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>location: location to check</dd>
+<dt>Returns:</dt>
+<dd>creature if found</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.get_items_at">
 <tt class="descname">get_items_at</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.get_items_at" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get list of items at location
-&#64;param location: location to check</p>
+<dd><p>Get list of items at location</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>location: location to check</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.dungeon.Level.get_location_type">
+<tt class="descname">get_location_type</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.get_location_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get type of location</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>location: (loc_x, loc_y) location to get</dd>
+<dt>Returns:</dt>
+<dd>Type of location</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.dungeon.Level.get_locations_by_type">
+<tt class="descname">get_locations_by_type</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.get_locations_by_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get locations marked as rooms</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>location_type: Type of location to search.</dd>
+<dt>Returns:</dt>
+<dd>List of (loc_x, loc_y) locations identifying rooms</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.get_portal_at">
 <tt class="descname">get_portal_at</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.get_portal_at" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if there is a portal at given location
-&#64;return: Portal if found, otherwise None</p>
+<dd><p>Check if there is a portal at given location</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>Portal if found, otherwise None</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.get_size">
-<tt class="descname">get_size</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.get_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets size of level
-&#64;returns: tupple, with width and length of level</p>
+<tt class="descname">get_size</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.get_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets size of level</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>tupple, with width and length of level</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -163,84 +215,72 @@ If secondary portal is specified, link them together
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.get_tile">
 <tt class="descname">get_tile</tt><big>(</big><em>loc_x</em>, <em>loc_y</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.get_tile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get tile at given location
-&#64;param loc_x: x-coordinate of the location
-&#64;param loc_y: y-coordinate of the location</p>
+<dd><p>Get tile at given location</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>loc_x: x-coordinate of the location
+loc_y: y-coordinate of the location</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.get_wall_tile">
 <tt class="descname">get_wall_tile</tt><big>(</big><em>loc_x</em>, <em>loc_y</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.get_wall_tile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get wall tile at given location
-&#64;param loc_x: x-coordinate of the location
-&#64;param loc_y: y-coordinate of the location</p>
+<dd><p>Get wall tile at given location</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>loc_x: x-coordinate of the location
+loc_y: y-coordinate of the location</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.data.dungeon.Level.remove_creature">
-<tt class="descname">remove_creature</tt><big>(</big><em>creature</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.remove_creature" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove creature from level
-&#64;param creature: creature to remove</p>
+<tt class="descname">remove_creature</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.remove_creature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove creature from level</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>creature: creature to remove</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.dungeon.Level.set_location_type">
+<tt class="descname">set_location_type</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Level.set_location_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set type of location</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>location: (loc_x, loc_y) location to set
+location_type: type of location</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="portal">
-<h2>Portal<a class="headerlink" href="#portal" title="Permalink to this headline">¶</a></h2>
-<p>Portals are used to link levels together. They can be stairs, ladders or
-magical portals. Anything that allows characters to move from one level to
-another is a portal.</p>
 <dl class="class">
 <dt id="pyherc.data.dungeon.Portal">
-<em class="property">class </em><tt class="descclassname">pyherc.data.dungeon.</tt><tt class="descname">Portal</tt><a class="headerlink" href="#pyherc.data.dungeon.Portal" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.data.dungeon.</tt><tt class="descname">Portal</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Portal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Portal linking two levels together</p>
-<dl class="method">
-<dt id="pyherc.data.dungeon.Portal.generate_level">
-<tt class="descname">generate_level</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Portal.generate_level" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates level if this is a proxy portal</p>
+<dl class="attribute">
+<dt id="pyherc.data.dungeon.Portal.icon">
+<tt class="descname">icon</tt><a class="headerlink" href="#pyherc.data.dungeon.Portal.icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get icon to display this portal</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="pyherc.data.dungeon.Portal.get_other_end">
-<tt class="descname">get_other_end</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Portal.get_other_end" title="Permalink to this definition">¶</a></dt>
+<dl class="attribute">
+<dt id="pyherc.data.dungeon.Portal.other_end">
+<tt class="descname">other_end</tt><a class="headerlink" href="#pyherc.data.dungeon.Portal.other_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the other end of the portal</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="pyherc.data.dungeon.Portal.set_other_end">
-<tt class="descname">set_other_end</tt><big>(</big><em>portal</em><big>)</big><a class="headerlink" href="#pyherc.data.dungeon.Portal.set_other_end" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the other end of the portal
-&#64;param portal: portal where this one leads</p>
+<dl class="attribute">
+<dt id="pyherc.data.dungeon.Portal.other_end_icon">
+<tt class="descname">other_end_icon</tt><a class="headerlink" href="#pyherc.data.dungeon.Portal.other_end_icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get icon used for other end of this portal</p>
 </dd></dl>
 
 </dd></dl>
 
-<div class="section" id="connecting-levels">
-<h3>Connecting levels<a class="headerlink" href="#connecting-levels" title="Permalink to this headline">¶</a></h3>
-<p>Two levels can be connected in following way</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">level_a</span> <span class="o">=</span> <span class="n">Level</span><span class="p">()</span>
-<span class="n">level_b</span> <span class="o">=</span> <span class="n">Level</span><span class="p">()</span>
-
-<span class="n">portal_a</span> <span class="o">=</span> <span class="n">Portal</span><span class="p">()</span>
-<span class="n">portal_b</span> <span class="o">=</span> <span class="n">Portal</span><span class="p">()</span>
-
-<span class="n">level_a</span><span class="o">.</span><span class="n">add_portal</span><span class="p">(</span><span class="n">portal_a</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">level_b</span><span class="o">.</span><span class="n">add_portal</span><span class="p">(</span><span class="n">portal_b</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">portal_a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="proxies">
-<h3>Proxies<a class="headerlink" href="#proxies" title="Permalink to this headline">¶</a></h3>
-<p>Proxies are special type of portal. They have only one end, while another end
-is left unspecified. They also have reference to a level generator. When a
-character tries to enter a proxy portal, new level is generated and linked with
-old level, via the portal. After this level generator is removed.</p>
-<p>Proxies are used to generate dungeon while the player descents deeper and
-deeper. This speeds up start up of the game, allows game to adapt to player
-progress and reduces memory consumption.</p>
-</div>
-</div>
 </div>
 
 
@@ -249,20 +289,6 @@ progress and reduces memory consumption.</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pyherc.data.dungeon</a><ul>
-<li><a class="reference internal" href="#dungeon">Dungeon</a></li>
-<li><a class="reference internal" href="#level">Level</a></li>
-<li><a class="reference internal" href="#portal">Portal</a><ul>
-<li><a class="reference internal" href="#connecting-levels">Connecting levels</a></li>
-<li><a class="reference internal" href="#proxies">Proxies</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
   <p class="topless"><a href="module_data.html"
                         title="previous chapter">pyherc.data</a></p>
@@ -306,7 +332,7 @@ progress and reduces memory consumption.</p>
         <li class="right" >
           <a href="module_data.html" title="pyherc.data"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_data.html" >pyherc.data</a> &raquo;</li> 
       </ul>

@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.config &mdash; Herculeum 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.2 documentation" href="index.html" />
+    <link rel="up" title="API Reference" href="api_reference.html" />
+    <link rel="next" title="pyherc.ai" href="ai/module_ai.html" />
+    <link rel="prev" title="pyherc.main" href="module_main.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ai/module_ai.html" title="pyherc.ai"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_main.html" title="pyherc.main"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+          <li><a href="api_reference.html" accesskey="U">API Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.config">
+<span id="pyherc-config"></span><h1>pyherc.config<a class="headerlink" href="#module-pyherc.config" title="Permalink to this headline">¶</a></h1>
+<p>Configuration for herculeum</p>
+<dl class="class">
+<dt id="pyherc.config.Configuration">
+<em class="property">class </em><tt class="descclassname">pyherc.config.</tt><tt class="descname">Configuration</tt><big>(</big><em>base_path</em>, <em>model</em><big>)</big><a class="headerlink" href="#pyherc.config.Configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configuration object for Herculeum</p>
+<dl class="method">
+<dt id="pyherc.config.Configuration.extend_configuration">
+<tt class="descname">extend_configuration</tt><big>(</big><em>config</em>, <em>new_config</em><big>)</big><a class="headerlink" href="#pyherc.config.Configuration.extend_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sums two configurations together</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>config: config to extend
+new_config: items to add to configuration</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.config.Configuration.init_catacombs">
+<tt class="descname">init_catacombs</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.config.Configuration.init_catacombs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialise upper catacombs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.config.Configuration.init_upper_crypt">
+<tt class="descname">init_upper_crypt</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.config.Configuration.init_upper_crypt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialise upper crypt levels</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.config.Configuration.initialise">
+<tt class="descname">initialise</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.config.Configuration.initialise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialises configuration</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>base_path: path to root of installation</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.config.Configuration.initialise_factories">
+<tt class="descname">initialise_factories</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.config.Configuration.initialise_factories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialises action factory, sub factories and various generators</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>model: Model to register to the factory</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.config.Configuration.initialise_generators">
+<tt class="descname">initialise_generators</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.config.Configuration.initialise_generators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialise generators</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.config.Configuration.initialise_level_generators">
+<tt class="descname">initialise_level_generators</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.config.Configuration.initialise_level_generators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialise level generators</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.config.Configuration.initialise_tables">
+<tt class="descname">initialise_tables</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.config.Configuration.initialise_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialise tables</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_main.html"
+                        title="previous chapter">pyherc.main</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ai/module_ai.html"
+                        title="next chapter">pyherc.ai</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/module_config.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ai/module_ai.html" title="pyherc.ai"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_main.html" title="pyherc.main"
+             >previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+          <li><a href="api_reference.html" >API Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

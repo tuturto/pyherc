@@ -1,6 +1,6 @@
 Generating an item
 ******************
-This section will have a look at item generation and how to add new levels into
+This section will have a look at item generation and how to add new items into
 the game.
 
 Overview of generating item
@@ -11,7 +11,7 @@ To generate item, following code can be used:
 
 .. code-block:: python
 
-    new_item = self.item_generator.generateItem(model.tables, {'type':'food'})
+    new_item = self.item_generator.generate_item(model.tables, {'type':'food'})
 
 This will generate a random item of type food.
 
@@ -26,4 +26,58 @@ used in item generation. Following keys are currently supported:
 
   - name: generates item with given name
   - type: generates item with given type (food, weapon)
+
+Defining items
+==============
+Items are defined in resources/items.xml. Following snippet is used for dagger::
+
+    <item>
+        <name>dagger</name>
+        <cost>2</cost>
+        <damage>2</damage>
+        <criticalRange>11</criticalRange>
+        <criticalDamage>2</criticalDamage>
+        <weight>1</weight>
+        <damageTypes>
+            <damageType>piercing</damageType>
+            <damageType>slashing</damageType>
+        </damageTypes>
+        <class>simple</class>
+        <icons>
+            <icon>ITEM_DAGGER_1</icon>
+        </icons>
+        <types>
+            <type>weapon</type>
+            <type>light weapon</type>
+            <type>melee</type>
+            <type>simple weapon</type>
+        </types>
+        <rarity>common</rarity>
+    </item>
+    
++---------------+-------------------------------+--------------------------------------------------------------------------------+
+|Element        |Explanation                    |Notes                                                                           |
++===============+===============================+================================================================================+
+|Name           |Name of the item               |                                                                                |
++---------------+-------------------------------+--------------------------------------------------------------------------------+
+|Cost           |Base cost in coins             |                                                                                |
++---------------+-------------------------------+--------------------------------------------------------------------------------+
+|Damage         |Base damage                    |                                                                                |
++---------------+-------------------------------+--------------------------------------------------------------------------------+
+|criticalRange  |Chances for critical hit       |                                                                                |
++---------------+-------------------------------+--------------------------------------------------------------------------------+
+|criticalDamage |Amount of critical damage      |                                                                                |
++---------------+-------------------------------+--------------------------------------------------------------------------------+
+|weight         |Weight of the item             |                                                                                |
++---------------+-------------------------------+--------------------------------------------------------------------------------+
+|damageTypes    |Types of damage weapon does    |                                                                                |
++---------------+-------------------------------+--------------------------------------------------------------------------------+
+|class          |Class of the weapon            |                                                                                |
++---------------+-------------------------------+--------------------------------------------------------------------------------+
+|icons          |Icons used to display the item |Only one is selected when item is created                                       |
++---------------+-------------------------------+--------------------------------------------------------------------------------+
+|types          |Tags                           |Used in item generation, for example when generator should make 'simple weapon' |
++---------------+-------------------------------+--------------------------------------------------------------------------------+
+|rarity         |Rarity of the item             |common, uncommon, rare, epic, legendary, artifact                               |
++---------------+-------------------------------+--------------------------------------------------------------------------------+
 

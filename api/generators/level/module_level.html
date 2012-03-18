@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.generators.level &mdash; Herculeum 0.1 documentation</title>
+    <title>pyherc.generators.level &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.generators" href="../module_generators.html" />
-    <link rel="next" title="pyherc.generators.level.catacombs" href="module_catacombs.html" />
+    <link rel="next" title="pyherc.generators.level.config" href="module_config.html" />
     <link rel="prev" title="pyherc.generators.utils" href="../module_utils.html" /> 
   </head>
   <body>
@@ -41,12 +41,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_catacombs.html" title="pyherc.generators.level.catacombs"
+          <a href="module_config.html" title="pyherc.generators.level.config"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../module_utils.html" title="pyherc.generators.utils"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../module_generators.html" accesskey="U">pyherc.generators</a> &raquo;</li> 
       </ul>
@@ -62,21 +62,15 @@
 <p>Package for various level generators</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="module_catacombs.html">pyherc.generators.level.catacombs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_catacombs.html#catacombslevelgenerator">CatacombsLevelGenerator</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_config.html">pyherc.generators.level.config</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_config.html#levelgeneratorconfig">LevelGeneratorConfig</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_crypt.html">pyherc.generators.level.crypt</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_crypt.html#cryptgeneratorfactory">CryptGeneratorFactory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_crypt.html#cryptgenerator">CryptGenerator</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_testlevel.html">pyherc.generators.level.testlevel</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_testlevel.html#testlevelgenerator">TestLevelGenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_config.html">pyherc.generators.level.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_creatures.html">pyherc.generators.level.creatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_items.html">pyherc.generators.level.items</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_generator.html">pyherc.generators.level.generator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_testlevel.html">pyherc.generators.level.testlevel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_prototiles.html">pyherc.generators.level.prototiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_portals.html">pyherc.generators.level.portals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorator/module_decorator.html">pyherc.generators.level.decorator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="decorator/module_basic.html">pyherc.generators.level.decorator.basic</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="partitioners/module_partitioners.html">pyherc.generators.level.partitioners</a><ul>
@@ -86,6 +80,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="room/module_room.html">pyherc.generators.level.room</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="room/module_squareroom.html">pyherc.generators.level.room.squareroom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="room/module_catacombs.html">pyherc.generators.level.room.catacombs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="room/module_corridor.html">pyherc.generators.level.room.corridor</a></li>
 </ul>
 </li>
@@ -103,8 +98,8 @@
   <p class="topless"><a href="../module_utils.html"
                         title="previous chapter">pyherc.generators.utils</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="module_catacombs.html"
-                        title="next chapter">pyherc.generators.level.catacombs</a></p>
+  <p class="topless"><a href="module_config.html"
+                        title="next chapter">pyherc.generators.level.config</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../_sources/generators/level/module_level.txt"
@@ -137,12 +132,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_catacombs.html" title="pyherc.generators.level.catacombs"
+          <a href="module_config.html" title="pyherc.generators.level.config"
              >next</a> |</li>
         <li class="right" >
           <a href="../module_utils.html" title="pyherc.generators.utils"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../module_generators.html" >pyherc.generators</a> &raquo;</li> 
       </ul>

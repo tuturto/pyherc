@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.main &mdash; Herculeum 0.1 documentation</title>
+    <title>pyherc.main &mdash; Herculeum 0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.1 documentation" href="index.html" />
+    <link rel="top" title="Herculeum 0.2 documentation" href="index.html" />
     <link rel="up" title="API Reference" href="api_reference.html" />
-    <link rel="next" title="pyherc.ai" href="ai/module_ai.html" />
-    <link rel="prev" title="API Reference" href="api_reference.html" /> 
+    <link rel="next" title="pyherc.config" href="module_config.html" />
+    <link rel="prev" title="pyherc.aspects" href="module_aspects.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,12 +41,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="ai/module_ai.html" title="pyherc.ai"
+          <a href="module_config.html" title="pyherc.config"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="api_reference.html" title="API Reference"
+          <a href="module_aspects.html" title="pyherc.aspects"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="api_reference.html" accesskey="U">API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -59,60 +59,6 @@
   <div class="section" id="module-pyherc.main">
 <span id="pyherc-main"></span><h1>pyherc.main<a class="headerlink" href="#module-pyherc.main" title="Permalink to this headline">¶</a></h1>
 <p>Main entry point for pyherc - game</p>
-<div class="section" id="application">
-<h2>Application<a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pyherc.main.Application">
-<em class="property">class </em><tt class="descclassname">pyherc.main.</tt><tt class="descname">Application</tt><a class="headerlink" href="#pyherc.main.Application" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class represents main application</p>
-<dl class="method">
-<dt id="pyherc.main.Application.detect_resource_directory">
-<tt class="descname">detect_resource_directory</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.main.Application.detect_resource_directory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Detects location of resources directory and updates self.base_path</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.main.Application.get_action_factory">
-<tt class="descname">get_action_factory</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.main.Application.get_action_factory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get action factory instance
-&#64;returns: ActionFactory</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.main.Application.initialise_factories">
-<tt class="descname">initialise_factories</tt><big>(</big><em>model</em><big>)</big><a class="headerlink" href="#pyherc.main.Application.initialise_factories" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialises action factory and sub factories
-&#64;param model: Model to register to the factory</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.main.Application.load_configuration">
-<tt class="descname">load_configuration</tt><big>(</big><em>argv</em><big>)</big><a class="headerlink" href="#pyherc.main.Application.load_configuration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load configuration and process command line options
-&#64;param argv: command line arguments</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.main.Application.run">
-<tt class="descname">run</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.main.Application.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Starts the application</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.main.Application.start_logging">
-<tt class="descname">start_logging</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.main.Application.start_logging" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start logging for the system</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.main.Application.usage">
-<tt class="descname">usage</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.main.Application.usage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shows usage info</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
 </div>
 
 
@@ -121,20 +67,12 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pyherc.main</a><ul>
-<li><a class="reference internal" href="#application">Application</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="api_reference.html"
-                        title="previous chapter">API Reference</a></p>
+  <p class="topless"><a href="module_aspects.html"
+                        title="previous chapter">pyherc.aspects</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="ai/module_ai.html"
-                        title="next chapter">pyherc.ai</a></p>
+  <p class="topless"><a href="module_config.html"
+                        title="next chapter">pyherc.config</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/module_main.txt"
@@ -167,12 +105,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="ai/module_ai.html" title="pyherc.ai"
+          <a href="module_config.html" title="pyherc.config"
              >next</a> |</li>
         <li class="right" >
-          <a href="api_reference.html" title="API Reference"
+          <a href="module_aspects.html" title="pyherc.aspects"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.1 documentation</a> &raquo;</li>
+        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li>
           <li><a href="api_reference.html" >API Reference</a> &raquo;</li> 
       </ul>
     </div>
