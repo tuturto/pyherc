@@ -86,6 +86,7 @@ class StartMenu(pgu.gui.Container):
         newWindow.main_loop()
 
         self.application.world.player = newWindow.character
+        self.application.world.end_condition = 0
         newWindow = pyherc.gui.windows.GameWindow(self.application, self.screen, self.surface_manager)
         newWindow.main_loop()
         self.logger.info('game finished')
