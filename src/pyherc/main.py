@@ -25,11 +25,11 @@ import sys
 import os.path
 import pygame
 import thread
-from pyherc.debug import get_debug_server
 
 INSTALL_PATH = os.path.abspath(".")
 sys.path.append(INSTALL_PATH)
 
+from pyherc.debug import get_debug_server
 from pyherc.application import APP
 
 if not pygame.font:
