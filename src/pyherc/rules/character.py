@@ -87,19 +87,6 @@ def create_character(race, kit, action_factory):
 
     new_character.feats.append(
                               pyherc.data.model.WeaponProficiency('simple'))
-    new_character.icon = __get_icon(race, kit)
+    new_character.icon = pyherc.data.tiles.HUMAN_FIGHTER
 
     return new_character
-
-def __get_icon(race, kit):
-    """
-    Get icon to represent race and kit
-
-    Args:
-        race: name of the race
-        kit: name of the kit
-
-    Returns:
-        Icon
-    """
-    return pyherc.data.tiles.HUMAN_FIGHTER

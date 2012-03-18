@@ -21,4 +21,4 @@
 """
 Package for debug server
 """
-from handlers import get_debug_server
+from pyherc.debug.handlers import get_debug_server

@@ -50,6 +50,7 @@ class Model:
         self.config = None
         self.tables = None
         self.end_condition = 0
+        self.logger = logging.getLogger('pyherc.data.model.Model')
 
     def __getstate__(self):
         '''
@@ -93,7 +94,7 @@ class Character(object):
         # attributes
         self.__body = None
         self.__finesse = None
-        self.mind = None
+        self.__mind = None
         self.name = 'prototype'
         self.race = None
         self.kit = None

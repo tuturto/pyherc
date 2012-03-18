@@ -48,7 +48,7 @@ class Application(object):
         self.screen = None
         self.log_level = None
 
-    def process_command_line(self, argv):
+    def process_command_line(self):
         """
         Process command line options
         """

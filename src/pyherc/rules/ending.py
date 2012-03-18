@@ -29,10 +29,14 @@ __logger = logging.getLogger('pyherc.rules.ending')
 def check_result(model):
     """
     Check how the game actually ended
-    @param model: model containing play data
-    @return: dictionary containing following keys: reason, score, dead reason
-    @note: valid reasons: dead, escaped, victory, quit
-    @note: dead reason will contain reason of death, if player died
+
+    Args:
+        model: model containing play data
+
+    Returns:
+        dictionary containing following keys: reason, score, dead reason
+        valid reasons: dead, escaped, victory, quit
+        dead reason will contain reason of death, if player died
     """
     result = {}
     if model.player.hit_points <= 0:
@@ -58,17 +62,23 @@ def check_result(model):
 def get_ending_score(model):
     """
     Calculate ending score
-    @param model: model containing play data
-    @return: score
+
+    Args:
+        model: model containing play data
+
+    Returns:
+        score
     """
     return 0
 
-def check_dying(model, character, deathParams):
+def check_dying(model, character, death_params):
     """
     Check if cracter is dead and should be dealt with
-    @param mode: model to use
-    @param character: character to check
-    @param deathParams: parameters detailing the death condition
+
+    Args:
+        mode: model to use
+        character: character to check
+        death_params: parameters detailing the death condition
     """
     assert character != None
     if character.hit_points <= 0:

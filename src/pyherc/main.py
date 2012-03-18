@@ -27,12 +27,6 @@ import pygame
 import thread
 from pyherc.debug import get_debug_server
 
-try:
-    import web
-    web_loaded = True
-except ImportError:
-    web_loaded = False
-
 INSTALL_PATH = os.path.abspath(".")
 sys.path.append(INSTALL_PATH)
 
@@ -59,14 +53,12 @@ print '#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.'
 
 if __name__ == "__main__":
     APP.detect_resource_directory()
-    APP.process_command_line(sys.argv[1:])
+    APP.process_command_line()
     APP.start_logging()
     APP.load_configuration()
 
-    if web_loaded == False:
-        print 'web.py not found, debug server not available'
-    else:
-        server = get_debug_server()
+    server = get_debug_server()
+    if server != None:
         thread.start_new_thread(server.run, ())
 
     APP.run()

@@ -46,6 +46,10 @@ class Item(object):
         self.icon = None
         self.weapon_data = None
         self.effects = None
+        self.weight = None
+        self.charges = None
+        self.rarity = None
+        self.cost = None
         self.tags = {}
 
     def __str__(self):

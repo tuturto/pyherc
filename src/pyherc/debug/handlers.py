@@ -21,14 +21,16 @@
 """
 Module for page handlers
 """
-import pyherc
+import pyherc.debug.data
 from pyherc.application import APP
-from pyherc.debug.data import render
+
+web_loaded = False
 
 try:
     import web
+    web_loaded = True
 except ImportError:
-    pass
+    web_loaded = False
 
 def initialise_server():
     """
@@ -57,6 +59,9 @@ def get_debug_server():
     Returns:
         Initialised debug server
     """
+    if web_loaded == False:
+        return None
+
     initialise_server()
     app = web.application(get_urls(), vars(pyherc.debug.handlers))
     return app

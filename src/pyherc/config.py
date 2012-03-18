@@ -33,7 +33,6 @@ from pyherc.rules.attack.factories import MeleeCombatFactory
 from pyherc.generators import ItemGenerator, CreatureGenerator
 from pyherc.generators.level.portals import PortalAdderFactory
 from pyherc.generators.level.portals import PortalAdderConfiguration
-from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.room import SquareRoomGenerator
@@ -57,9 +56,8 @@ from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
 from pyherc.generators.level.prototiles import WALL_EMPTY, WALL_NATURAL
 from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
 
-from pyherc.data.tiles import FLOOR_EMPTY, FLOOR_ROCK, FLOOR_BRICK
+from pyherc.data.tiles import FLOOR_ROCK, FLOOR_BRICK
 from pyherc.data.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
-from pyherc.data.tiles import WALL_ROCK_DECO_1, WALL_ROCK_DECO_2
 from pyherc.data.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
 
 class Configuration(object):
