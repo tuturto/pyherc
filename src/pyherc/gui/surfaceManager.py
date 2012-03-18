@@ -88,8 +88,9 @@ class SurfaceManager:
         self.icons[pyherc.data.tiles.CREATURE_RAT_2] = tiles[25]
         self.icons[pyherc.data.tiles.CREATURE_RAT_3] = tiles[26]
         self.icons[pyherc.data.tiles.CREATURE_RAT_4] = tiles[27]
-        self.icons[pyherc.data.tiles.CREATURE_BEETLE_1] = tiles[115]
-        self.icons[pyherc.data.tiles.CREATURE_BEETLE_2] = tiles[116]
+        self.icons[pyherc.data.tiles.CREATURE_BEETLE_1] = tiles[112]
+        self.icons[pyherc.data.tiles.CREATURE_BEETLE_2] = tiles[113]
+        self.icons[pyherc.data.tiles.CREATURE_SPIDER_1] = tiles[122]
 
         surface = self.load_surface(base_path, 'potions.png')
         tiles = self.split_surface(surface, (32, 32))

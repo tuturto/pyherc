@@ -200,7 +200,7 @@ class Configuration(object):
         """
         Initialise upper catacombs
         """
-        room_generators = [CatacombsGenerator(FLOOR_CONSTRUCTED,
+        room_generators = [CatacombsGenerator(FLOOR_NATURAL,
                                                WALL_EMPTY,
                                                ['upper catacombs',
                                                'lower catacombs'],
@@ -213,8 +213,7 @@ class Configuration(object):
 
         replacer_config = ReplacingDecoratorConfig(['upper catacombs',
                                                     'lower catacombs'],
-                                        {FLOOR_NATURAL: FLOOR_ROCK,
-                                        FLOOR_CONSTRUCTED: FLOOR_BRICK},
+                                        {FLOOR_NATURAL: FLOOR_ROCK},
                                         {WALL_NATURAL: WALL_GROUND,
                                         WALL_CONSTRUCTED: WALL_ROCK})
         replacer = ReplacingDecorator(replacer_config)
@@ -234,31 +233,42 @@ class Configuration(object):
 
         item_adder_config = ItemAdderConfiguration(['upper catacombs',
                                                    'lower catacombs'])
-        item_adder_config.add_item(min_amount = 4,
-                                   max_amount = 5,
+        item_adder_config.add_item(min_amount = 2,
+                                   max_amount = 4,
                                    type = 'weapon',
                                    location = 'room')
         item_adder_config.add_item(min_amount = 0,
                                    max_amount = 2,
                                    type = 'potion',
                                    location = 'room')
-        item_adder_config.add_item(min_amount = 0,
-                                   max_amount = 2,
+        item_adder_config.add_item(min_amount = 1,
+                                   max_amount = 3,
                                    type = 'food',
                                    location = 'room')
         item_adders = [ItemAdder(self.item_generator,
                                 item_adder_config,
                                 self.rng)]
 
-        creature_adder_config = CreatureAdderConfiguration(['upper catacombs',
-                                                           'lower catacombs'])
-        creature_adder_config.add_creature(min_amount = 6,
-                                           max_amount = 12,
-                                           name = 'rat')
+        creatures_upper = CreatureAdderConfiguration(['upper catacombs'])
+        creatures_upper.add_creature(min_amount = 6,
+                                     max_amount = 12,
+                                     name = 'rat')
+
+        creatures_lower = CreatureAdderConfiguration(['lower catacombs'])
+        creatures_lower.add_creature(min_amount = 6,
+                                     max_amount = 12,
+                                     name = 'rat')
+        creatures_lower.add_creature(min_amount = 2,
+                                     max_amount = 5,
+                                     name = 'fire beetle')
 
         creature_adders = [CreatureAdder(self.creature_generator,
-                                        creature_adder_config,
-                                        self.rng)]
+                                        creatures_upper,
+                                        self.rng),
+                           CreatureAdder(self.creature_generator,
+                                        creatures_lower,
+                                        self.rng)
+                                        ]
 
         portal_adder_configurations = [PortalAdderConfiguration(
                                             icons = (PORTAL_STAIRS_DOWN, PORTAL_STAIRS_UP),
@@ -320,16 +330,16 @@ class Configuration(object):
         decorators = [AggregateDecorator(aggregate_decorator_config)]
 
         item_adder_config = ItemAdderConfiguration(['upper crypt'])
-        item_adder_config.add_item(min_amount = 20,
-                                   max_amount = 30,
+        item_adder_config.add_item(min_amount = 2,
+                                   max_amount = 4,
                                    type = 'weapon',
                                    location = 'room')
-        item_adder_config.add_item(min_amount = 20,
-                                   max_amount = 30,
+        item_adder_config.add_item(min_amount = 2,
+                                   max_amount = 4,
                                    type = 'potion',
                                    location = 'room')
-        item_adder_config.add_item(min_amount = 20,
-                                   max_amount = 30,
+        item_adder_config.add_item(min_amount = 0,
+                                   max_amount = 5,
                                    type = 'food',
                                    location = 'room')
         item_adders = [ItemAdder(self.item_generator,
@@ -340,9 +350,9 @@ class Configuration(object):
         #creature_adder_config.add_creature(min_amount = 6,
         #                                   max_amount = 12,
         #                                   name = 'bat')
-        #creature_adder_config.add_creature(min_amount = 4,
-        #                                   max_amount = 8,
-        #                                   name = 'spider')
+        creature_adder_config.add_creature(min_amount = 4,
+                                           max_amount = 8,
+                                           name = 'spider')
         #creature_adder_config.add_creature(min_amount = 4,
         #                                   max_amount = 8,
         #                                   name = 'skeleton',

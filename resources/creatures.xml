@@ -30,6 +30,26 @@
         <size>small</size>
     </creature>
     <creature>
+        <name>spider</name>
+        <body>6</body>
+        <finesse>12</finesse>
+        <mind>8</mind>
+        <hp>6</hp>
+        <speed>1</speed>
+        <icons>
+            <icon>CREATURE_SPIDER_1</icon>
+        </icons>
+        <attack>4</attack>
+        <size>medium</size>
+        <feats>
+            <feat name="poisonous">
+                <duration>150</duration>
+                <frequency>30</frequency>
+                <damage>1</damage>
+            </feat>
+        </feats>
+    </creature>
+    <creature>
         <name>gargoyle</name>
         <body>15</body>
         <finesse>14</finesse>
@@ -44,9 +64,16 @@
         <feats>
             <feat name="toughness" />
             <feat name="multiattack" />
-            <feat name="damage reduction" type="magic" amount="10" />
-            <feat name="darkvision" range="10" />
-            <feat name="mimic" target="gargoyle statue" />
+            <feat name="damage reduction"> 
+                <type>magic</type>
+                <amount>10</amount>
+            </feat>
+            <feat name="darkvision"> 
+                <range>10</range>
+            </feat>
+            <feat name="mimic">
+                <target>gargoyle statue</target>
+            </feat>
         </feats>
     </creature>
 </creatures>
