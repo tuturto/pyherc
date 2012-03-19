@@ -117,6 +117,7 @@ class Character(object):
         self.attack = None
         #mimic
         self.mimic_item = None
+        self.effects = []
         self.action_factory = action_factory
         self.artificial_intelligence = None
         self.rng = random.Random()
@@ -388,6 +389,17 @@ class Character(object):
         Raise event for other creatures to see
         """
         self.action_factory.model.raise_event(event)
+
+    @logged
+    def add_effect(self, effect):
+        """
+        Adds effect to this character
+
+        Args:
+            effect: Effect to add
+        """
+        assert effect != None
+        self.effects.append(effect)
 
     hit_points = property(__get_hp, __set_hp)
     body = property(__get_body, __set_body)
