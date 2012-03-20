@@ -23,6 +23,45 @@ Module for effects
 """
 from pyherc.aspects import Logged
 
+class EffectsFactory(object):
+    """
+    Factory for creating effects
+    """
+    logged = Logged()
+
+    @logged
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(EffectsFactory, self).__init__()
+        self.effects = {}
+
+    @logged
+    def add_effect(self, key, type):
+        """
+        Add effect to internal dictionary
+
+        Args:
+            key: name of the effect
+            type: type used for effect
+        """
+        self.effects[key] = type
+
+    @logged
+    def get_effect(self, key, **kwargs):
+        """
+        Instantiates new effect with given parameters
+
+        Args:
+            key: name of the effect
+            kwargs: keyword arguments, passed to the effect
+        """
+        type = self.effects[key]
+        return type(**kwargs)
+
+
+
 class Poison(object):
     """
     Class representing effects of poison

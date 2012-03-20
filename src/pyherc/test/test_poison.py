@@ -24,6 +24,7 @@ Module for testing poison related rules
 #pylint: disable=W0614
 from pyherc.data import Character
 from pyherc.rules.effects import Poison
+from pyherc.rules.effects import EffectsFactory
 from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
 
@@ -50,6 +51,32 @@ class TestPoison():
         poison.trigger()
 
         assert_that(character.hit_points, is_(equal_to(5)))
+
+class TestEffectsFactory():
+    """
+    Poison related tests for effects factory
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        pass
+
+    def test_creating_poison(self):
+        """
+        Test that poison effect can be created
+        """
+        factory = EffectsFactory()
+        factory.add_effect('poison', Poison)
+
+        character = stub(Character)
+
+        effect = factory.get_effect('poison',
+                                    damage = 5,
+                                    target = character)
+
+        assert_that(effect.damage, is_(equal_to(5)))
+        assert_that(effect.target, is_(equal_to(character)))
 
 class TestCharacter():
     """
