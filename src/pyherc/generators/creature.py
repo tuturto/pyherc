@@ -34,7 +34,7 @@ class CreatureGenerator:
     Class used to generate creatures
     """
 
-    def __init__(self, action_factory, tables):
+    def __init__(self, model, action_factory, tables, rng):
         """
         Default constructor
 
@@ -44,8 +44,10 @@ class CreatureGenerator:
         """
         self.logger = logging.getLogger(
                             'pyherc.generators.creature.CreatureGenerator')
+        self.model = model
         self.action_factory = action_factory
         self.tables = tables
+        self.rng = rng
 
     def generate_creature(self, parameters):
         """
@@ -71,7 +73,9 @@ class CreatureGenerator:
         """
         assert(table != None)
 
-        new_creature = pyherc.data.model.Character(self.action_factory)
+        new_creature = pyherc.data.model.Character(self.model,
+                                                   self.action_factory,
+                                                   self.rng)
         new_creature.name = table['name']
         new_creature.body = table['body']
         new_creature.finesse = table['finesse']

@@ -30,7 +30,6 @@ from pyherc.data.dungeon import Dungeon
 from pyherc.rules.moving import deactivate
 from pyherc.data.item import Item
 
-
 class test_CreatureWithGenerator(IntegrationTest):
     """
     Tests for creatures that require generators to be working
@@ -53,7 +52,9 @@ class test_CreatureWithGenerator(IntegrationTest):
         '''
         Test that weapon proficiency of character can be checked
         '''
-        creature = Character(self.action_factory)
+        creature = Character(self.model,
+                             self.action_factory,
+                             self.rng)
         creature.feats = []
 
         weapon = self.item_generator.generate_item({'name' : 'club'})
@@ -79,7 +80,9 @@ class TestStatues(IntegrationTest):
         '''
         Test that activated character can deactivate
         '''
-        creature = Character(self.action_factory)
+        creature = Character(self.model,
+                             self.action_factory,
+                             self.rng)
         creature.name = 'Mimic'
         item = Item()
 

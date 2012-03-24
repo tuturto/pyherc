@@ -21,13 +21,16 @@
 """
 Module for testing time related functions
 """
-
+#pylint: disable=W0614
 import pyherc
 import pyherc.rules.time
 from pyherc.data.model import Model
 from pyherc.data.model import Character
 from pyherc.data.dungeon import Dungeon
 from pyherc.data.dungeon import Level
+
+from hamcrest import * #pylint: disable=W0401
+from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
 
 
 class TestTime:
@@ -48,9 +51,13 @@ class TestTime:
         """
         Setup the test case
         """
-        self.creature1 = Character(None)
-        self.creature2 = Character(None)
-        self.creature3 = Character(None)
+        model = empty_stub()
+        action_factory = empty_stub()
+        rng = empty_stub()
+
+        self.creature1 = Character(model, action_factory, rng)
+        self.creature2 = Character(model, action_factory, rng)
+        self.creature3 = Character(model, action_factory, rng)
 
         self.model = Model()
         self.model.dungeon = Dungeon()
@@ -71,15 +78,15 @@ class TestTime:
         self.model.player = self.creature3
         self.model.dungeon.levels.add_creature(self.creature3)
 
-    def test_getNextInTurnZeroTick(self):
+    def test_get_next_zero_tick(self):
         """
         Test that system can tell whose turn it is to act
         One creature has tick of 0
         """
         creature = pyherc.rules.time.get_next_creature(self.model)
-        assert(creature == self.creature2)
+        assert_that(creature, is_(equal_to(self.creature2)))
 
-    def test_getNextInTurnPositiveTick(self):
+    def test_get_next_positive_tick(self):
         """
         Test that system can tell whose turn it is to act
         All creatures have positive tick
@@ -88,5 +95,4 @@ class TestTime:
         self.creature2.tick = 10
         self.creature3.tick = 3
         creature = pyherc.rules.time.get_next_creature(self.model)
-        assert(creature == self.creature3)
-
+        assert_that(creature, is_(equal_to(self.creature3)))

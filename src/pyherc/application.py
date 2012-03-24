@@ -146,6 +146,12 @@ class Application(object):
         """
         return self.config.level_generator_factory
 
+    def __get_rng(self):
+        """
+        Get random number generator
+        """
+        return self.config.rng
+
     def detect_resource_directory(self):
         '''
         Detects location of resources directory and updates self.base_path
@@ -165,6 +171,7 @@ class Application(object):
     creature_generator = property(__get_creature_generator)
     item_generator = property(__get_item_generator)
     level_generator_factory = property(__get_level_generator_factory)
+    rng = property(__get_rng)
 
 render = None
 APP = Application()

@@ -48,8 +48,12 @@ class TestMeleeCombat(IntegrationTest):
         self.character2 = None
 
     def setup2(self):
-        self.character1 = Character(self.action_factory)
-        self.character2 = Character(self.action_factory)
+        self.character1 = Character(self.model,
+                                    self.action_factory,
+                                    self.rng)
+        self.character2 = Character(self.model,
+                                    self.action_factory,
+                                    self.rng)
         level_generator = TestLevelGenerator(self.action_factory,
                                              self.creatureGenerator,
                                              self.item_generator)
@@ -110,7 +114,9 @@ class TestMeleeCombat(IntegrationTest):
         """
         Test that attacking raises events
         """
-        character1 = Character(self.action_factory)
+        character1 = Character(self.model,
+                               self.action_factory,
+                               self.rng)
         character1.attack = 12
         character1.speed = 1
         character1.tick = 0

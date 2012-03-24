@@ -121,7 +121,11 @@ class StartNewGameWindow:
         """
         Generate a new game
         """
-        self.character = pyherc.rules.character.create_character('human', 'fighter', self.application.action_factory)
+        self.character = pyherc.rules.character.create_character('human',
+                                                'fighter',
+                                                self.application.world,
+                                                self.application.action_factory,
+                                                self.application.rng)
         self.application.world.player = self.character
 
         level_generator = self.application.level_generator_factory.get_generator('upper catacombs')

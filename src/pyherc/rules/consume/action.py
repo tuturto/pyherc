@@ -51,8 +51,7 @@ class DrinkAction():
 
             if 'on drink' in self.potion.effects.keys():
                 for effect in self.potion.effects['on drink']:
-                    pyherc.rules.magic.cast_effect(self.model,
-                                                    self.character,
+                    pyherc.rules.magic.cast_effect(self.character,
                                                     effect)
                     effect.charges = effect.charges - 1
 

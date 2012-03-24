@@ -101,8 +101,7 @@ class UnarmedCombatFactory():
                                     parameters.random_number_generator),
                         UnarmedDamage(attacker.get_attack()),
                         attacker,
-                        target,
-                        parameters.model)
+                        target)
         else:
             self.logger.warn('No target found')
             attack = None
@@ -193,8 +192,7 @@ class MeleeCombatFactory():
                                     parameters.random_number_generator),
                         MeleeDamage(weapon.weapon_data.damage),
                         attacker,
-                        target,
-                        parameters.model)
+                        target)
         else:
             attack = None
 

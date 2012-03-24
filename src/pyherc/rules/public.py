@@ -66,8 +66,6 @@ class ActionFactory():
         Args:
             parameters: Parameters used to control action creation
         """
-        parameters.set_model(self.model)
-
         factory = self.get_sub_factory(parameters)
         return factory.get_action(parameters)
 
@@ -111,17 +109,6 @@ class ActionParameters():
         Default constructor
         """
         self.action_type = 'default'
-        self.model = None
-
-    @logged
-    def set_model(self, model):
-        """
-        Set model
-
-        Args:
-            model: Model to use
-        """
-        self.model = model
 
 class AttackParameters(ActionParameters):
     """

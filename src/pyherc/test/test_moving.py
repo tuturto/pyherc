@@ -49,7 +49,9 @@ class TestMoving(IntegrationTest):
         """
         Secondary setup
         """
-        self.character = Character(self.action_factory)
+        self.character = Character(self.model,
+                                   self.action_factory,
+                                   self.rng)
         levelGenerator = TestLevelGenerator(self.action_factory,
                                             self.creatureGenerator,
                                             self.item_generator)

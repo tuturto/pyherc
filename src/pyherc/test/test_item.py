@@ -28,9 +28,11 @@ import pyherc.data.tiles
 import pyherc.data.dungeon
 import pyherc.rules.items
 import pyherc.rules.tables
+from random import Random
 from pyherc.test import IntegrationTest
 from pyherc.data.item import Item
 from pyherc.data.item import ItemEffectData
+from pyDoubles.framework import empty_stub #pylint: disable=F0401, E0611
 
 class TestItemWithGenerator(IntegrationTest):
     """
@@ -59,7 +61,9 @@ class TestItemWithGenerator(IntegrationTest):
                                                 pyherc.data.tiles.FLOOR_ROCK,
                                                 pyherc.data.tiles.WALL_EMPTY)
 
-        self.character = pyherc.data.model.Character(self.action_factory)
+        self.character = pyherc.data.model.Character(self.model,
+                                                     self.action_factory,
+                                                     self.rng)
 
         self.character.location = (5, 5)
         self.character.name = 'Timothy Tester'
@@ -259,11 +263,13 @@ class TestItemsInLevel:
         self.dungeon = None
         self.model = None
         self.character = None
+        self.rng = None
 
     def setup(self):
         """
         Setup this test case
         """
+        self.rng = Random()
         self.item = Item()
         self.item.name = 'banana'
         self.item.location = ()
@@ -273,7 +279,9 @@ class TestItemsInLevel:
                                                 pyherc.data.tiles.FLOOR_ROCK,
                                                 pyherc.data.tiles.WALL_EMPTY)
 
-        self.character = pyherc.data.model.Character(None)
+        self.character = pyherc.data.model.Character(empty_stub(),
+                                                     empty_stub(),
+                                                     self.rng)
 
         self.character.location = (5, 5)
         self.character.name = 'Timothy Tester'
@@ -386,7 +394,15 @@ class TestItemAdvanced():
         '''
         Default constructor
         '''
-        pass
+        self.character = None
+
+    def setup(self):
+        """
+        Setup test case
+        """
+        self.character = pyherc.data.model.Character(empty_stub(),
+                                                    empty_stub(),
+                                                    Random())
 
     def test_appearance_of_unknown(self):
         """"
@@ -394,12 +410,11 @@ class TestItemAdvanced():
         """
 
         item = Item()
-        character = pyherc.data.model.Character(None)
 
         item.name = 'healing potion'
         item.appearance = 'blue potion'
 
-        name = item.get_name(character)
+        name = item.get_name(self.character)
 
         assert(name == 'blue potion')
 
@@ -408,13 +423,13 @@ class TestItemAdvanced():
         Test that given name is reported for a generally named item
         """
         item = Item()
-        character = pyherc.data.model.Character(None)
-        character.item_memory['healing potion'] = 'doozer potion'
+
+        self.character.item_memory['healing potion'] = 'doozer potion'
 
         item.name = 'healing potion'
         item.appearance = 'blue potion'
 
-        name = item.get_name(character)
+        name = item.get_name(self.character)
 
         assert(name == 'doozer potion')
 
@@ -423,16 +438,16 @@ class TestItemAdvanced():
         Test that character can identify an item
         """
         item = Item()
-        character = pyherc.data.model.Character(None)
+
         item.name = 'healing potion'
         item.appearance = 'blue potion'
 
-        name = item.get_name(character)
+        name = item.get_name(self.character)
         assert(name == 'blue potion')
 
-        character.identify_item(item)
+        self.character.identify_item(item)
 
-        name = item.get_name(character)
+        name = item.get_name(self.character)
         assert(name == 'healing potion')
 
     def test_item_name_decoration(self):
@@ -440,18 +455,18 @@ class TestItemAdvanced():
         Test that item can decorate its name
         '''
         item = Item()
-        character = pyherc.data.model.Character(None)
+
         item.name = 'club'
 
-        character.inventory.append(item)
-        name = item.get_name(character)
+        self.character.inventory.append(item)
+        name = item.get_name(self.character)
         assert(name == 'club')
 
-        character.weapons = [item]
-        name = item.get_name(character, True)
+        self.character.weapons = [item]
+        name = item.get_name(self.character, True)
         assert(name == 'club (weapon in hand)')
 
-        name = item.get_name(character, False)
+        name = item.get_name(self.character, False)
         assert(name == 'club')
 
 class TestItemEffects:

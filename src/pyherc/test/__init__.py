@@ -474,6 +474,7 @@ class IntegrationTest(object):
     </creature>
 </creatures>
 """
+        self.rng = random.Random()
         self.model = pyherc.data.model.Model()
 
         walk_factory = WalkFactory()
@@ -493,8 +494,10 @@ class IntegrationTest(object):
         self.tables.load_tables(None, itemConfig, creatureConfig)
         self.model.tables = self.tables
         self.item_generator = pyherc.generators.item.ItemGenerator(self.tables)
-        self.creatureGenerator = pyherc.generators.CreatureGenerator(self.action_factory, self.tables)
-
+        self.creatureGenerator = pyherc.generators.CreatureGenerator(self.model,
+                                                                     self.action_factory,
+                                                                     self.tables,
+                                                                     self.rng)
         self.setup2()
 
     def setup2(self):

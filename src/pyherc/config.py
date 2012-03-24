@@ -148,8 +148,10 @@ class Configuration(object):
         self.logger.info('Initialising generators')
 
         self.item_generator = ItemGenerator(self.tables)
-        self.creature_generator = CreatureGenerator(self.action_factory,
-                                                    self.tables)
+        self.creature_generator = CreatureGenerator(self.model,
+                                                    self.action_factory,
+                                                    self.tables,
+                                                    self.rng)
 
         self.logger.info('Generators initialised')
 

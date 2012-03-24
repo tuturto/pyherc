@@ -28,9 +28,10 @@ from pyherc.data import Item
 from pyherc.data import ItemEffectData
 from pyherc.rules.consume import DrinkFactory
 from pyherc.rules import ActionFactory
+from random import Random
 
 from hamcrest import * #pylint: disable=W0401
-from pyDoubles.framework import stub #pylint: disable=F0401, E0611
+from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
 
 class TestPotions():
     """
@@ -45,20 +46,25 @@ class TestPotions():
         self.action_factory = None
         self.potion = None
         self.model = None
+        self.rng = None
 
     def setup(self):
         """
         Setup the test case
         """
-        self.model = stub(Model)
+        self.rng = Random()
+        self.model = empty_stub()
 
         drink_factory = DrinkFactory()
         self.action_factory = ActionFactory(self.model,
                                             drink_factory)
 
-        self.character = Character(self.action_factory)
+        self.character = Character(self.model,
+                                   self.action_factory,
+                                   self.rng)
         self.character.hit_points = 1
         self.character.max_hp = 5
+        self.character.model = self.model
 
         self.potion = Item()
         self.potion.name = 'healing potion'

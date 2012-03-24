@@ -28,30 +28,31 @@ import pyherc.rules.utils
 
 __logger = logging.getLogger('pyherc.rules.magic')
 
-def cast_effect(model, target, effect, dice = None):
+def cast_effect(target, effect, dice = None):
     """
     Casts effect of a spell, potion, etc. on a target
-    @param model: model to use
-    @param target: target of the effect
-    @param effect: ItemEffectData object
-    @param dice: prerolled dice
+
+    Args:
+        target: target of the effect
+        effect: ItemEffectData object
+        dice: prerolled dice
     """
     assert(effect != None)
 
     __logger.info('casting effect: ' + effect.effect_type)
 
     if effect.effect_type in ('healing', 'damage'):
-        cast_hp_effect(model, target, effect, dice)
+        cast_hp_effect(target, effect, dice)
 
-def cast_hp_effect(model, target, effect, dice = None):
+def cast_hp_effect(target, effect, dice = None):
     """
     Casts HP effect on target, causing it to gain or lose some HP
-    @param model: model to use
     @param target: target of the effect
     @param effect: parameters of effect in dictionary
     @param dice: prerolled dice
     """
     hp_power = effect.power
+    model = target.model
     if dice != None and len(dice) > 0:
         hp_roll = dice.pop()
         assert(hp_roll <= pyherc.rules.utils.get_max_score(hp_power))
@@ -78,5 +79,4 @@ def cast_hp_effect(model, target, effect, dice = None):
     event['level'] = target.level
     event['power'] = hp_roll
 
-    if model != None:
-        model.raise_event(event)
+    model.raise_event(event)

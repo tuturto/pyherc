@@ -25,6 +25,7 @@ Module for testing poison related rules
 from pyherc.data import Character
 from pyherc.rules.effects import Poison
 from pyherc.rules.effects import EffectsFactory
+from random import Random
 from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
 from hamcrest import * #pylint: disable=W0401
 
@@ -88,7 +89,9 @@ class TestEffectsFactory():
         """
         Test that poison can be created by passing it a parameter array
         """
-        character = Character(empty_stub())
+        character = Character(empty_stub(),
+                              empty_stub(),
+                              Random())
 
         params = {'duration': 150,
                   'frequency': 30,
@@ -115,7 +118,9 @@ class TestCharacter():
         """
         Test that poison effect can be added to a character
         """
-        character = Character(empty_stub())
+        character = Character(empty_stub(),
+                              empty_stub(),
+                              Random())
         poison = stub(Poison)
 
         character.add_effect(poison)

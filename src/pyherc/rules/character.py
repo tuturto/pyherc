@@ -61,7 +61,7 @@ def initialise_stat_tables():
 
     __logger.info('stat tables initialised')
 
-def create_character(race, kit, action_factory):
+def create_character(race, kit, model, action_factory, rng):
     """
     Creates a new character with given race and kit
     """
@@ -75,7 +75,9 @@ def create_character(race, kit, action_factory):
     temp_race = race_stats[race]
     temp_kit = kit_stats[kit]
 
-    new_character = pyherc.data.model.Character(action_factory)
+    new_character = pyherc.data.model.Character(model,
+                                                action_factory,
+                                                rng)
     new_character.body = temp_race['body'] + temp_kit['body']
     new_character.finesse = temp_race['finesse'] + temp_kit['finesse']
     new_character.mind = temp_race['mind'] + temp_kit['mind']

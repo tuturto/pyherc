@@ -83,8 +83,11 @@ class TestCreatureAdder():
                                         'icon': 2}
 
         self.mock_action_factory = empty_stub()
-        self.creature_generator = CreatureGenerator(self.mock_action_factory,
-                                                    self.mock_tables)
+        self.model = empty_stub()
+        self.creature_generator = CreatureGenerator(self.model,
+                                                    self.mock_action_factory,
+                                                    self.mock_tables,
+                                                    self.rng)
 
         self.configuration = CreatureAdderConfiguration(['crypt'])
         self.configuration.add_creature(min_amount = 3,

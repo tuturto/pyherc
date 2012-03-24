@@ -86,12 +86,18 @@ class Character(object):
     logged = Logged()
 
     @logged
-    def __init__(self, action_factory):
+    def __init__(self, model, action_factory, rng):
         """
         Default constructor
+
+        Args:
+            model: Model where character acts
+            action_factory: ActionFactory for character to use
+            rng: Random number generator
         """
         super(Character, self).__init__()
         # attributes
+        self.model = model
         self.__body = None
         self.__finesse = None
         self.__mind = None
@@ -120,7 +126,7 @@ class Character(object):
         self.effects = []
         self.action_factory = action_factory
         self.artificial_intelligence = None
-        self.rng = random.Random()
+        self.rng = rng
         self.logger = logging.getLogger('pyherc.data.model.Character')
 
     def __str__(self):

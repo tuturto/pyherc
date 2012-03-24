@@ -34,7 +34,7 @@ class AttackAction():
     logged = Logged()
 
     @logged
-    def __init__(self, attack_type, to_hit, damage, attacker, target, model):
+    def __init__(self, attack_type, to_hit, damage, attacker, target):
         """
         Default constructor
 
@@ -51,7 +51,6 @@ class AttackAction():
         self.damage = damage
         self.attacker = attacker
         self.target = target
-        self.model = model
 
     @logged
     def execute(self):
@@ -74,7 +73,9 @@ class AttackAction():
 
         self.attacker.raise_event(event)
 
-        pyherc.rules.ending.check_dying(self.model, self.target, self.model)
+        pyherc.rules.ending.check_dying(self.target.model,
+                                        self.target,
+                                        self.target.model)
 
         self.attacker.tick = pyherc.rules.time.get_new_tick(self.attacker, 20)
 
