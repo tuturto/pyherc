@@ -35,6 +35,7 @@ class Item(object):
     """
 
     def __init__(self):
+        super(Item, self).__init__()
         #attributes
         self.name = 'prototype'
         self.appearance = ''
@@ -45,9 +46,8 @@ class Item(object):
         #icon
         self.icon = None
         self.weapon_data = None
-        self.effects = None
+        self.effects = {}
         self.weight = None
-        self.charges = None
         self.rarity = None
         self.cost = None
         self.tags = {}
@@ -111,29 +111,22 @@ class Item(object):
 
         return effect_list
 
-    def charges_left(self):
-        '''
-        Returns amount of charges left in item
-        In case of multiple charges, a list is returned
-        '''
+    def __get_charges_left(self):
+        """
+        Returns list containing amount of charges left in item
+        """
         if self.effects == None:
-            return None
+            return []
 
         effect_list = self.get_effects()
 
-        amount_of_charges = [x.charges for x in effect_list]
+        return [x.charges for x in effect_list]
 
-        if len(amount_of_charges) == 1:
-            return amount_of_charges[0]
-        else:
-            return amount_of_charges
-
-    def maximum_charges_left(self):
-        '''
+    def __get_maximum_charges_left(self):
+        """
         Return highest amount of charges left in item
-        '''
-        charges = self.charges_left()
-
+        """
+        charges = self.charges_left
 
         if charges != None:
             if isinstance(charges, collections.Sequence):
@@ -146,16 +139,20 @@ class Item(object):
         else:
             return None
 
-    def minimum_charges_left(self):
+    def __get_minimum_charges_left(self):
         '''
         Return smallest amount of charges left in item
         '''
-        charges = self.charges_left()
+        charges = self.charges_left
 
         if charges != None:
             return min(charges)
         else:
             return None
+
+    charges_left = property(__get_charges_left)
+    maximum_charges_left = property(__get_maximum_charges_left)
+    minimum_charges_left = property(__get_minimum_charges_left)
 
     def get_main_type(self):
         '''

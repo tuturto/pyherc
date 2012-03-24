@@ -28,3 +28,6 @@ from .dungeon import Portal
 
 from .model import Model
 from .model import Character
+
+from .item import Item
+from .item import ItemEffectData

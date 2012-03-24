@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -19,10 +19,26 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for rules of the game
+Drinking and eating related factories are defined here
 """
-from .public import ActionFactory
-from .public import ActionParameters
-from .public import AttackParameters
-from .public import MoveParameters
-from .public import DrinkParameters
+from pyherc.rules.consume.action import DrinkAction
+from pyherc.rules.factory import SubActionFactory
+
+class DrinkFactory(SubActionFactory):
+    """
+    Factory for creating drink actions
+    """
+    def __init__(self):
+        """
+        Constructor for this factory
+        """
+        self.action_type = 'drink'
+
+    def get_action(self, parameters):
+        """
+        Create a drink action
+
+        Args:
+            parameters: Parameters used to control drink action creation
+        """
+        return DrinkAction(parameters.character, parameters.item)

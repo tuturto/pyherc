@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2011 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -19,10 +19,11 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for rules of the game
+Module for eating and drinking related actions, factories and such
+
+Usually you do not need to create instance of anything defined here. Use
+classes defined in pyherc.rules.locals instead to access these functions.
 """
-from .public import ActionFactory
-from .public import ActionParameters
-from .public import AttackParameters
-from .public import MoveParameters
-from .public import DrinkParameters
+
+from .factories import DrinkFactory
+from .factories import DrinkAction

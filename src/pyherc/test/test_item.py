@@ -216,7 +216,6 @@ class TestItemWithGenerator(IntegrationTest):
         self.item = self.item_generator.generate_item({'name': 'healing potion'})
 
         assert(self.item != None)
-        assert(self.item.charges == 1)
         assert('on drink' in self.item.effects.keys())
 
         effect = self.item.effects['on drink'][0]
@@ -548,9 +547,10 @@ class TestItemCharges:
         '''
         Test that amount of charges left can be retrieved
         '''
-        charges = self.item.charges_left()
+        charges = self.item.charges_left
 
-        assert(charges == 1)
+        assert(len(charges) == 1)
+        assert(1 in charges)
 
     def test_multiple_charges(self):
         '''
@@ -559,7 +559,7 @@ class TestItemCharges:
         effect2 = ItemEffectData('on kick', 'damage', '5d10', 2)
         self.item.add_effect(effect2)
 
-        charges = self.item.charges_left()
+        charges = self.item.charges_left
 
         assert(len(charges) == 2)
         assert(1 in charges)
@@ -572,8 +572,8 @@ class TestItemCharges:
         effect2 = ItemEffectData('on kick', 'damage', '5d10', 2)
         self.item.add_effect(effect2)
 
-        minimum_charges = self.item.minimum_charges_left()
+        minimum_charges = self.item.minimum_charges_left
         assert(minimum_charges == 1)
 
-        maximum_charges = self.item.maximum_charges_left()
+        maximum_charges = self.item.maximum_charges_left
         assert(maximum_charges == 2)

@@ -27,6 +27,7 @@ import pyherc.gui.surfaceManager
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.move.factories import MoveFactory
 from pyherc.rules.move.factories import WalkFactory
+from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory
@@ -121,10 +122,13 @@ class Configuration(object):
                                         unarmed_combat_factory,
                                         melee_combat_factory])
 
+        drink_factory = DrinkFactory()
+
         self.action_factory = ActionFactory(
                                             self.model,
                                             [move_factory,
-                                            attack_factory])
+                                            attack_factory,
+                                            drink_factory])
 
         self.logger.info('Action sub system initialised')
 

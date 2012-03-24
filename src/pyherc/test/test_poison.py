@@ -45,7 +45,9 @@ class TestPoison():
         character = stub(Character)
         character.hit_points = 10
 
-        poison = Poison(damage = 5,
+        poison = Poison(duration = 1,
+                        frequency = 1,
+                        damage = 5,
                         target = character)
 
         poison.trigger()
@@ -72,10 +74,32 @@ class TestEffectsFactory():
         character = stub(Character)
 
         effect = factory.get_effect('poison',
+                                    duration = 150,
+                                    frequency = 30,
                                     damage = 5,
                                     target = character)
 
+        assert_that(effect.duration, is_(equal_to(150)))
+        assert_that(effect.frequency, is_(equal_to(30)))
         assert_that(effect.damage, is_(equal_to(5)))
+        assert_that(effect.target, is_(equal_to(character)))
+
+    def test_creating_poison_with_paramarray(self):
+        """
+        Test that poison can be created by passing it a parameter array
+        """
+        character = Character(empty_stub())
+
+        params = {'duration': 150,
+                  'frequency': 30,
+                  'damage': 1,
+                  'target': character}
+
+        effect = Poison(**params)
+
+        assert_that(effect.duration, is_(equal_to(150)))
+        assert_that(effect.frequency, is_(equal_to(30)))
+        assert_that(effect.damage, is_(equal_to(1)))
         assert_that(effect.target, is_(equal_to(character)))
 
 class TestCharacter():
@@ -97,3 +121,4 @@ class TestCharacter():
         character.add_effect(poison)
 
         assert_that(character.effects, has_item(poison))
+

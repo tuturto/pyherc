@@ -61,19 +61,35 @@ class EffectsFactory(object):
         return type(**kwargs)
 
 
+class Effect(object):
+    """
+    Class representing effects
+    """
 
-class Poison(object):
+    def __init__(self, duration, frequency):
+        """
+        Default constructor
+
+        Args:
+            duration: duration of the effect in ticks
+            frequency: frequency of the effect in ticks
+        """
+        super(Effect, self).__init__()
+        self.duration = duration
+        self.frequency = frequency
+
+class Poison(Effect):
     """
     Class representing effects of poison
     """
     logged = Logged()
 
     @logged
-    def __init__(self, damage, target):
+    def __init__(self, duration, frequency, damage, target):
         """
         Default constructor
         """
-        super(Poison, self).__init__()
+        super(Poison, self).__init__(duration, frequency)
         self.damage = damage
         self.target = target
 

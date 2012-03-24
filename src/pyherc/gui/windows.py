@@ -238,7 +238,7 @@ class GameWindow:
                                                    player)
                         potion = dialog.show(player.inventory, 1)
                         if len(potion) == 1:
-                            pyherc.rules.items.drink_potion(model, player, potion[0])
+                            player.drink(potion[0])
                         player.level.full_update_needed = True
             else:
                 return

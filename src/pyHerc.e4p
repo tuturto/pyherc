@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-03-19, 20:55:23 -->
+<!-- Saved: 2012-03-24, 08:29:16 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -108,6 +108,10 @@
     <Source>pyherc/debug/data.py</Source>
     <Source>pyherc/test/test_poison.py</Source>
     <Source>pyherc/rules/effects.py</Source>
+    <Source>pyherc/test/test_potions.py</Source>
+    <Source>pyherc/rules/consume/__init__.py</Source>
+    <Source>pyherc/rules/consume/action.py</Source>
+    <Source>pyherc/rules/consume/factories.py</Source>
   </Sources>
   <Forms>
   </Forms>

@@ -32,7 +32,7 @@ Classes:
 import logging
 import random
 from pyherc.aspects import Logged
-from pyherc.rules.public import MoveParameters, AttackParameters
+from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 
 class Model:
     """
@@ -367,6 +367,20 @@ class Character(object):
                                                                 self.rng))
         if action != None:
             action.execute()
+
+    @logged
+    def drink(self, potion):
+        """
+        Drink potion
+
+        Args:
+            potion: Item to drink
+        """
+        action = self.action_factory.get_action(
+                                                DrinkParameters(
+                                                                self,
+                                                                potion))
+        action.execute()
 
     def __getstate__(self):
         '''

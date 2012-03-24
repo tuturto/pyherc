@@ -78,4 +78,5 @@ def cast_hp_effect(model, target, effect, dice = None):
     event['level'] = target.level
     event['power'] = hp_roll
 
-    model.raise_event(event)
+    if model != None:
+        model.raise_event(event)

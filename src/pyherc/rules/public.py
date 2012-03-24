@@ -26,6 +26,8 @@ ActionFactory - Class used to contruct Action objects
 ActionParameters - Class used to guide Action construction
 
 AttackParameters - Class used to guide contruction of attack related actions
+MoveParameters - Class used to guide construction of move related actions
+DrinkParameters - Class used to guide drinking related actions
 """
 
 import types
@@ -180,4 +182,30 @@ class MoveParameters(ActionParameters):
         Get string representation of this object
         """
         return 'move with movement mode of ' + self.movement_mode
+
+class DrinkParameters(ActionParameters):
+    """
+    Object for controlling drink action creation
+    """
+    @Logged()
+    def __init__(self, character, item):
+        """
+        Construct drink parameters
+
+        Args:
+            character: Character moving
+            item: Item to drink
+        """
+        ActionParameters.__init__(self)
+
+        self.action_type = 'drink'
+        self.character = character
+        self.item = item
+        self.model = None
+
+    def __str__(self):
+        """
+        Get string representation of this object
+        """
+        return 'drink parameters'
 

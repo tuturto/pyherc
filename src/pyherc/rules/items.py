@@ -182,34 +182,3 @@ def unwield(model, character, item, instant = False):
     model.raise_event(event)
 
     return True
-
-def drink_potion(model, character, potion, dice = None):
-    """
-    Drink a potion
-    @param model: model to use
-    @param character: character drinking a potion
-    @param potion: potion to drink
-    @param dice: optional prerolled dice
-    """
-    assert(model != None)
-    assert(character != None)
-    assert(potion != None)
-    assert(potion in character.inventory)
-
-    if potion.maximum_charges_left() < 1:
-        logger.warn(character.__str__() +
-                    ' tried to drink an empty potion ' +
-                    potion.__str__())
-        return
-
-    #drinking a potion usually identifies it
-    character.identify_item(potion)
-
-    if hasattr(potion, 'effects'):
-        for effect in potion.effects['on drink']:
-            pyherc.rules.magic.cast_effect(model, character, effect, dice)
-            effect.charges = effect.charges - 1
-
-    if potion.maximum_charges_left() < 1:
-        character.inventory.remove(potion)
-
