@@ -123,7 +123,7 @@ class Character(object):
         self.attack = None
         #mimic
         self.mimic_item = None
-        self.effects = []
+        self.__active_effects = [] # active effects
         self.action_factory = action_factory
         self.artificial_intelligence = None
         self.rng = rng
@@ -419,12 +419,25 @@ class Character(object):
             effect: Effect to add
         """
         assert effect != None
-        self.effects.append(effect)
+        self.active_effects.append(effect)
+
+    def __get_active_effects(self):
+        """
+        Get active effects of the character
+
+        Returns:
+            List of active effects
+        """
+        if self.__active_effects is None:
+            self.__active_effects = []
+
+        return self.__active_effects
 
     hit_points = property(__get_hp, __set_hp)
     body = property(__get_body, __set_body)
     finesse = property(__get_finesse, __set_finesse)
     mind = property(__get_mind, __set_mind)
+    active_effects = property(__get_active_effects)
 
 class Damage:
     """

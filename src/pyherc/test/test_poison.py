@@ -125,5 +125,5 @@ class TestCharacter():
 
         character.add_effect(poison)
 
-        assert_that(character.effects, has_item(poison))
+        assert_that(character.active_effects, has_item(poison))
 
