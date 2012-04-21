@@ -28,10 +28,11 @@ from pyherc.data.model import Model
 from pyherc.data.model import Character
 from pyherc.data.dungeon import Dungeon
 from pyherc.data.dungeon import Level
+from pyherc.rules.effects import Poison
 
 from hamcrest import * #pylint: disable=W0401
-from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
-
+# from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
+from mockito import mock, verify, when, any
 
 class TestTime:
     """
@@ -51,9 +52,9 @@ class TestTime:
         """
         Setup the test case
         """
-        model = empty_stub()
-        action_factory = empty_stub()
-        rng = empty_stub()
+        model = mock()
+        action_factory = mock()
+        rng = mock()
 
         self.creature1 = Character(model, action_factory, rng)
         self.creature2 = Character(model, action_factory, rng)
@@ -96,3 +97,25 @@ class TestTime:
         self.creature3.tick = 3
         creature = pyherc.rules.time.get_next_creature(self.model)
         assert_that(creature, is_(equal_to(self.creature3)))
+
+class TestEffectsAndTime:
+    """
+    Tests for effects and time
+    """
+
+    def test_trigger_effect_on_time(self):
+        """
+        Test that effect will be triggered
+        """
+        creature = mock(Character)
+        creature.tick = 5
+        effect = mock(Poison)
+        model = mock(Model)
+        model.player = creature
+        level = mock(Level)
+        level.creatures = [creature]
+        creature.level = level
+
+        creature = pyherc.rules.time.get_next_creature(model) # modeli tarvitaan
+
+        verify(effect).trigger()
