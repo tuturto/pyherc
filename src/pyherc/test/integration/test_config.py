@@ -26,7 +26,7 @@ Module for testing main configuration
 
 from pyherc.config import Configuration
 from pyherc.test.integration import detect_base_path
-from pyDoubles.framework import empty_stub #pylint: disable=F0401, E0611
+from mockito import mock
 from hamcrest import *
 
 class TestMainConfiguration():
@@ -44,7 +44,7 @@ class TestMainConfiguration():
         Setup test case
         """
         base_path = detect_base_path()
-        self.config = Configuration(base_path, empty_stub())
+        self.config = Configuration(base_path, mock())
         self.config.initialise()
 
     def test_initialisation(self):
