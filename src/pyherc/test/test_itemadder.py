@@ -22,8 +22,7 @@
 Tests for ItemAdder
 """
 #pylint: disable=W0614
-from pyDoubles.framework import spy, empty_stub, stub #pylint: disable=F0401, E0611
-from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
+from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import located_in_room, does_have_item
 
@@ -62,7 +61,7 @@ class TestItemAdder():
         for x_loc in range(11, 30):
             self.level.set_location_type((x_loc, 10), 'corridor')
 
-        self.mock_tables = stub(Tables)
+        self.mock_tables = mock(Tables)
         self.mock_tables.items = {}
         self.mock_tables.items['dagger'] = {'name': 'dagger',
                                             'icon': 1,

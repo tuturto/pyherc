@@ -31,7 +31,6 @@ from pyherc.data.dungeon import Level
 from pyherc.rules.effects import Poison
 
 from hamcrest import * #pylint: disable=W0401
-# from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
 from mockito import mock, verify, when, any
 
 class TestTime:

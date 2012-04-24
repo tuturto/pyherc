@@ -26,7 +26,7 @@ from pyherc.data import Character
 from pyherc.rules.effects import Poison
 from pyherc.rules.effects import EffectsFactory
 from random import Random
-from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
+from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 
 class TestPoison():
@@ -43,7 +43,7 @@ class TestPoison():
         """
         Test that triggered poison will damage character
         """
-        character = stub(Character)
+        character = mock(Character)
         character.hit_points = 10
 
         poison = Poison(duration = 1,
@@ -72,7 +72,7 @@ class TestEffectsFactory():
         factory = EffectsFactory()
         factory.add_effect('poison', Poison)
 
-        character = stub(Character)
+        character = mock(Character)
 
         effect = factory.get_effect('poison',
                                     duration = 150,
@@ -89,8 +89,8 @@ class TestEffectsFactory():
         """
         Test that poison can be created by passing it a parameter array
         """
-        character = Character(empty_stub(),
-                              empty_stub(),
+        character = Character(mock(),
+                              mock(),
                               Random())
 
         params = {'duration': 150,
@@ -118,10 +118,10 @@ class TestCharacter():
         """
         Test that poison effect can be added to a character
         """
-        character = Character(empty_stub(),
-                              empty_stub(),
+        character = Character(mock(),
+                              mock(),
                               Random())
-        poison = stub(Poison)
+        poison = mock(Poison)
 
         character.add_effect(poison)
 

@@ -25,7 +25,7 @@ Tests for Section
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
 from pyherc.data.tiles import FLOOR_EMPTY, FLOOR_ROCK, WALL_EMPTY, WALL_GROUND
-from pyDoubles.framework import stub #pylint: disable=F0401, E0611
+from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 import random
 
@@ -44,7 +44,7 @@ class TestSectionCalculations(object):
         """
         Setup test case
         """
-        mock_level = stub(Level)
+        mock_level = mock(Level)
         self.rng = random.Random()
         self.section = Section((10, 10), (20, 25), mock_level, self.rng)
 
@@ -108,7 +108,7 @@ class TestSectionConnections(object):
         """
         Setup test case
         """
-        mock_level = stub(Level)
+        mock_level = mock(Level)
         self.section1 = Section((0, 0), (10, 20), mock_level, self.rng)
         self.section2 = Section((11, 0), (20, 20), mock_level, self.rng)
 

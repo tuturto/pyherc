@@ -22,8 +22,7 @@
 Tests for CreatureAdder
 """
 #pylint: disable=W0614
-from pyDoubles.framework import spy, empty_stub, stub #pylint: disable=F0401, E0611
-from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
+from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import has_creature, located_in_room
 
@@ -60,7 +59,7 @@ class TestCreatureAdder():
         self.level = Level((60, 40), FLOOR_ROCK, WALL_EMPTY)
         self.level.set_location_type((10, 10), 'room')
 
-        self.mock_tables = stub(Tables)
+        self.mock_tables = mock(Tables)
         self.mock_tables.creatures = {}
         self.mock_tables.creatures['rat'] = {'name': 'rat',
                                         'body': 1,
@@ -82,8 +81,8 @@ class TestCreatureAdder():
                                         'attack': 20,
                                         'icon': 2}
 
-        self.mock_action_factory = empty_stub()
-        self.model = empty_stub()
+        self.mock_action_factory = mock()
+        self.model = mock()
         self.creature_generator = CreatureGenerator(self.model,
                                                     self.mock_action_factory,
                                                     self.mock_tables,

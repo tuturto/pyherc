@@ -21,7 +21,7 @@
 '''
 Tests for gui components
 '''
-from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
+from mockito import mock
 
 import pyherc.gui.windows
 from pyherc.data import Character
@@ -43,9 +43,9 @@ class TestGameWindow:
         '''
         Test that event history is formatted correctly with less than five items
         '''
-        window = pyherc.gui.windows.GameWindow(empty_stub(),
-                                               empty_stub(),
-                                               empty_stub())
+        window = pyherc.gui.windows.GameWindow(mock(),
+                                               mock(),
+                                               mock())
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
@@ -57,9 +57,9 @@ class TestGameWindow:
         '''
         Test that event history is formatted correctly with five items
         '''
-        window = pyherc.gui.windows.GameWindow(empty_stub(),
-                                               empty_stub(),
-                                               empty_stub())
+        window = pyherc.gui.windows.GameWindow(mock(),
+                                               mock(),
+                                               mock())
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
@@ -77,9 +77,9 @@ class TestGameWindow:
         '''
         Test that event history is formatted correctly with more than five items
         '''
-        window = pyherc.gui.windows.GameWindow(empty_stub(),
-                                               empty_stub(),
-                                               empty_stub())
+        window = pyherc.gui.windows.GameWindow(mock(),
+                                               mock(),
+                                               mock())
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
@@ -110,8 +110,8 @@ class TestInventoryDialog(IntegrationTest):
         '''
         Test that items can be sorted by their type
         '''
-        mock_surface_manager = stub(SurfaceManager)
-        mock_character = stub(Character)
+        mock_surface_manager = mock(SurfaceManager)
+        mock_character = mock(Character)
         inventory = pyherc.gui.dialogs.Inventory(None,
                                                  None,
                                                  mock_surface_manager,

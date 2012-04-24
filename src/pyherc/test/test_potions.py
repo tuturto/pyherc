@@ -31,7 +31,7 @@ from pyherc.rules import ActionFactory
 from random import Random
 
 from hamcrest import * #pylint: disable=W0401
-from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
+from mockito import mock
 
 class TestPotions():
     """
@@ -53,7 +53,7 @@ class TestPotions():
         Setup the test case
         """
         self.rng = Random()
-        self.model = empty_stub()
+        self.model = mock()
 
         drink_factory = DrinkFactory()
         self.action_factory = ActionFactory(self.model,

@@ -32,7 +32,7 @@ from random import Random
 from pyherc.test import IntegrationTest
 from pyherc.data.item import Item
 from pyherc.data.item import ItemEffectData
-from pyDoubles.framework import empty_stub #pylint: disable=F0401, E0611
+from mockito import mock
 
 class TestItemWithGenerator(IntegrationTest):
     """
@@ -279,8 +279,8 @@ class TestItemsInLevel:
                                                 pyherc.data.tiles.FLOOR_ROCK,
                                                 pyherc.data.tiles.WALL_EMPTY)
 
-        self.character = pyherc.data.model.Character(empty_stub(),
-                                                     empty_stub(),
+        self.character = pyherc.data.model.Character(mock(),
+                                                     mock(),
                                                      self.rng)
 
         self.character.location = (5, 5)
@@ -400,8 +400,8 @@ class TestItemAdvanced():
         """
         Setup test case
         """
-        self.character = pyherc.data.model.Character(empty_stub(),
-                                                    empty_stub(),
+        self.character = pyherc.data.model.Character(mock(),
+                                                    mock(),
                                                     Random())
 
     def test_appearance_of_unknown(self):

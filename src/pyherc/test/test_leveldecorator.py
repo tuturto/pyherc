@@ -29,8 +29,7 @@ from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
 from pyherc.generators.level.decorator import AggregateDecorator
 from pyherc.generators.level.decorator import AggregateDecoratorConfig
 from pyherc.data import Level
-from pyDoubles.framework import when, spy, stub #pylint: disable=F0401, E0611
-from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
+from mockito import mock, verify
 from hamcrest import * #pylint: disable=W0401
 from pyherc.data.tiles import FLOOR_ROCK, FLOOR_BRICK, WALL_EMPTY, WALL_GROUND
 from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
@@ -165,9 +164,9 @@ class TestAggregateDecorator():
         """
         Setup the testcase
         """
-        self.level = stub(Level)
-        self.mock_decorator_1 = spy(WallBuilderDecorator)
-        self.mock_decorator_2 = spy(ReplacingDecorator)
+        self.level = mock(Level)
+        self.mock_decorator_1 = mock(WallBuilderDecorator)
+        self.mock_decorator_2 = mock(ReplacingDecorator)
 
         self.config = AggregateDecoratorConfig(['crypt'],
                                                [self.mock_decorator_1,
@@ -180,5 +179,5 @@ class TestAggregateDecorator():
         """
         self.decorator.decorate_level(self.level)
 
-        assert_that_method(self.mock_decorator_1.decorate_level).was_called()
-        assert_that_method(self.mock_decorator_2.decorate_level).was_called()
+        verify(self.mock_decorator_1).decorate_level(self.level)
+        verify(self.mock_decorator_2).decorate_level(self.level)

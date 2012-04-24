@@ -30,7 +30,7 @@ from pyherc.data.item import ItemEffectData
 from pyherc.test import IntegrationTest
 from pyherc.test import StubModel
 from random import Random
-from pyDoubles.framework import stub, empty_stub #pylint: disable=F0401, E0611
+from mockito import mock
 
 class TestMagic:
     """
@@ -48,8 +48,8 @@ class TestMagic:
         Test that a damage effect can be applied on a character
         """
         model = StubModel()
-        character = pyherc.data.model.Character(empty_stub(),
-                                                empty_stub(),
+        character = pyherc.data.model.Character(mock(),
+                                                mock(),
                                                 Random())
         character.model = model
         character.hit_points = 15
@@ -65,8 +65,8 @@ class TestMagic:
         Test that a healing effect can be applied on a character
         """
         model = StubModel()
-        character = pyherc.data.model.Character(empty_stub(),
-                                                empty_stub(),
+        character = pyherc.data.model.Character(mock(),
+                                                mock(),
                                                 Random())
         character.model = model
         character.hit_points = 1
@@ -82,8 +82,8 @@ class TestMagic:
         Test that character does not get healed over his maximum hp when getting healing effect
         """
         model = StubModel()
-        character = pyherc.data.model.Character(empty_stub(),
-                                                empty_stub(),
+        character = pyherc.data.model.Character(mock(),
+                                                mock(),
                                                 Random())
         character.model = model
         character.hit_points = 1

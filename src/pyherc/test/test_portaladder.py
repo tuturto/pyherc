@@ -30,7 +30,7 @@ from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import * #pylint: disable=W0401
-from pyDoubles.framework import empty_stub, stub, when #pylint: disable=F0401, E0611
+from mockito import mock
 import random
 
 class TestPortalAdder():
@@ -63,7 +63,7 @@ class TestPortalAdder():
 
         portal_adder = PortalAdder((1, 2),
                                    'room',
-                                   empty_stub(),
+                                   mock(),
                                    self.rng)
 
         portal_adder.add_portal(level)
@@ -81,7 +81,7 @@ class TestPortalAdder():
                       floor_type = FLOOR_ROCK,
                       wall_type = WALL_EMPTY)
 
-        level_generator = stub(LevelGenerator)
+        level_generator = mock(LevelGenerator)
 
         for loc_y in range(8, 12):
             for loc_x in range(8, 12):
@@ -108,7 +108,7 @@ class TestPortalAdder():
                       floor_type = FLOOR_ROCK,
                       wall_type = WALL_EMPTY)
 
-        level_generator = stub(LevelGenerator)
+        level_generator = mock(LevelGenerator)
 
         for loc_y in range(8, 12):
             for loc_x in range(8, 12):
@@ -156,7 +156,7 @@ class TestPortalAdderFactory():
 
         factory = PortalAdderFactory(portal_config,
                                      self.rng)
-        factory.level_generator_factory = empty_stub()
+        factory.level_generator_factory = mock()
 
         portal_adders = factory.create_portal_adders('catacombs')
 
@@ -182,7 +182,7 @@ class TestPortalAdderFactory():
 
         factory = PortalAdderFactory(portal_config,
                                      self.rng)
-        factory.level_generator_factory = empty_stub()
+        factory.level_generator_factory = mock()
 
         portal_adders = factory.create_portal_adders('catacombs')
 
@@ -208,7 +208,7 @@ class TestPortalAdderFactory():
 
         factory = PortalAdderFactory(portal_config,
                                      self.rng)
-        factory.level_generator_factory = empty_stub()
+        factory.level_generator_factory = mock()
 
         portal_adders = factory.create_portal_adders('catacombs')
 
@@ -261,7 +261,7 @@ class TestPortalAdderFactory():
 
         factory = PortalAdderFactory(portal_config,
                                      self.rng)
-        factory.level_generator_factory = empty_stub()
+        factory.level_generator_factory = mock()
 
         portal_adders = factory.create_portal_adders('catacombs')
 
@@ -278,8 +278,8 @@ class TestPortalAdderFactory():
                                                   new_level = 'upper crypt',
                                                   unique = False)]
 
-        level_generator_factory = stub(LevelGeneratorFactory)
-        level_generator = stub(LevelGenerator)
+        level_generator_factory = mock(LevelGeneratorFactory)
+        level_generator = mock(LevelGenerator)
 
         def mock_get_generator(farg, *args, **kwargs):
             """

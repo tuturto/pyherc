@@ -22,8 +22,7 @@
 Tests for Corridor
 """
 #pylint: disable=W0614
-from pyDoubles.framework import spy #pylint: disable=F0401, E0611
-from pyDoubles.framework import assert_that_method #pylint: disable=F0401, E0611
+from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import map_accessibility_in
 

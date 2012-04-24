@@ -25,7 +25,7 @@ Tests for Connection
 from pyherc.generators.level.partitioners.section import Section, Connection
 from pyherc.data import Level
 from pyherc.data.tiles import FLOOR_EMPTY, FLOOR_ROCK, WALL_EMPTY, WALL_GROUND
-from pyDoubles.framework import stub #pylint: disable=F0401, E0611
+from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 import random
 
@@ -38,7 +38,7 @@ class TestConnection():
         """
         Test that Connection can be translated to section coordinates
         """
-        level = stub(Level)
+        level = mock(Level)
         section = Section(corner1 = (10, 10),
                           corner2 = (20, 20),
                           level = level,
