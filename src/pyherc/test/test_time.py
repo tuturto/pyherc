@@ -106,9 +106,11 @@ class TestEffectsAndTime:
         """
         Test that effect will be triggered
         """
+        effect = mock(Poison)
+        effect.counter = 4
         creature = mock(Character)
         creature.tick = 5
-        effect = mock(Poison)
+        creature.active_effects = [effect]
         model = mock(Model)
         model.player = creature
         level = mock(Level)
