@@ -162,14 +162,14 @@ def is_dual_wieldable(model, character, item):
         return 0
 
 def unwield(model, character, item, instant = False):
-    '''
+    """
     Unwield an item
     @param model: model to use
     @param character: character unwielding an item
     @param item: item to unwield
     @param instant: is this instant action, default False
     @return: True if unwield was succesfull, False otherwise
-    '''
+    """
     character.weapons.remove(item)
 
     event = {}

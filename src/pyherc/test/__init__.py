@@ -91,9 +91,9 @@ class StubModel():
     Simple stub to act as model and do nothing
     """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         pass
 
     def raise_event(self, event):

@@ -96,9 +96,9 @@ class Application(object):
         return self.config.surface_manager
 
     def start_logging(self):
-        '''
+        """
         Start logging for the system
-        '''
+        """
         logging.basicConfig(filename='pyherc.log',
                             level=self.log_level)
         self.logger = logging.getLogger('pyherc.main.Application')
@@ -153,9 +153,9 @@ class Application(object):
         return self.config.rng
 
     def detect_resource_directory(self):
-        '''
+        """
         Detects location of resources directory and updates self.base_path
-        '''
+        """
         search_directory = '.'
         current = os.path.normpath(os.path.join(os.getcwd(), search_directory))
 

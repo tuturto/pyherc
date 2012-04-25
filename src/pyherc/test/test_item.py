@@ -124,9 +124,9 @@ class TestItemWithGenerator(IntegrationTest):
         assert(item in self.character.weapons)
 
     def test_unwielding_item(self):
-        '''
+        """
         Test that wielded item can be unwielded
-        '''
+        """
         item = self.item_generator.generate_item({'name': 'dagger'})
         pyherc.rules.items.wield(self.model, self.character, item)
 
@@ -227,17 +227,17 @@ class TestItemWithGenerator(IntegrationTest):
         assert(effect.power == '1d10')
 
     def test_tags(self):
-        '''
+        """
         Test that different types of items have tags
-        '''
+        """
         item = self.item_generator.generate_item({'name': 'dagger'})
 
         assert(item.get_tags() is not None)
 
     def test_main_type_basic(self):
-        '''
+        """
         Test that main type can be retrieved
-        '''
+        """
         self.item = self.item_generator.generate_item({'name': 'dagger'})
 
         main_type = self.item.get_main_type()
@@ -251,13 +251,13 @@ class TestItemWithGenerator(IntegrationTest):
         assert(main_type == 'food')
 
 class TestItemsInLevel:
-    '''
+    """
     Tests performed with items that are placed on levels
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         self.item = None
         self.level = None
         self.dungeon = None
@@ -342,9 +342,9 @@ class TestItemsInLevel:
         assert(self.item.location == (8, 8))
 
     def test_dropping_wielded_item(self):
-        '''
+        """
         Test that wielded item is dropped correctly
-        '''
+        """
         pyherc.rules.items.pick_up(self.model, self.character, self.item)
         pyherc.rules.items.wield(self.model, self.character, self.item)
 
@@ -391,9 +391,9 @@ class TestItemAdvanced():
     Testing more advanced features of item class
     """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         self.character = None
 
     def setup(self):
@@ -451,9 +451,9 @@ class TestItemAdvanced():
         assert(name == 'healing potion')
 
     def test_item_name_decoration(self):
-        '''
+        """
         Test that item can decorate its name
-        '''
+        """
         item = Item()
 
         item.name = 'club'
@@ -470,21 +470,21 @@ class TestItemAdvanced():
         assert(name == 'club')
 
 class TestItemEffects:
-    '''
+    """
     Tests related to effects on items
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         self.item = None
         self.effect1 = None
         self.effect2 = None
 
     def setup(self):
-        '''
+        """
         Set up the test with an item and two effects
-        '''
+        """
 
         self.item = Item()
 
@@ -495,9 +495,9 @@ class TestItemEffects:
         self.item.add_effect(self.effect2)
 
     def test_get_all_effects(self):
-        '''
+        """
         Test that all effects can be returned
-        '''
+        """
 
         effects = self.item.get_effects()
 
@@ -506,9 +506,9 @@ class TestItemEffects:
         assert(len(effects) == 2)
 
     def test_get_effects_by_trigger(self):
-        '''
+        """
         Test that effects triggered by certain trigger can be returned
-        '''
+        """
 
         effects = self.item.get_effects('on break')
         assert(not self.effect1 in effects)
@@ -516,17 +516,17 @@ class TestItemEffects:
         assert(len(effects) == 1)
 
     def test_get_nonexistent_effect(self):
-        '''
+        """
         Test that items without effects don't crash effects returning
-        '''
+        """
 
         effects = self.item.get_effects('on hit')
         assert(effects == [])
 
     def test_get_multiple_effects_by_type(self): #pylint: disable=C0103
-        '''
+        """
         Test that multiple effects can be returned by type
-        '''
+        """
 
         effect3 = ItemEffectData('on break', 'heal', '2d6')
         self.item.add_effect(effect3)
@@ -537,20 +537,20 @@ class TestItemEffects:
         assert(len(effects) == 2)
 
 class TestItemCharges:
-    '''
+    """
     Test charge handling of items
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         self.item = None
         self.effect1 = None
 
     def setup(self):
-        '''
+        """
         Set up the test with an item and two effects
-        '''
+        """
 
         self.item = Item()
 
@@ -559,18 +559,18 @@ class TestItemCharges:
         self.item.add_effect(self.effect1)
 
     def test_get_single_charge(self):
-        '''
+        """
         Test that amount of charges left can be retrieved
-        '''
+        """
         charges = self.item.charges_left
 
         assert(len(charges) == 1)
         assert(1 in charges)
 
     def test_multiple_charges(self):
-        '''
+        """
         Test that amount of charges can be retrieved with multiple effects
-        '''
+        """
         effect2 = ItemEffectData('on kick', 'damage', '5d10', 2)
         self.item.add_effect(effect2)
 
@@ -581,9 +581,9 @@ class TestItemCharges:
         assert(2 in charges)
 
     def test_extremes_with_multiple_charges(self): #pylint: disable=C0103
-        '''
+        """
         Test that smallest and biggest amount of charges left can be retrieved
-        '''
+        """
         effect2 = ItemEffectData('on kick', 'damage', '5d10', 2)
         self.item.add_effect(effect2)
 

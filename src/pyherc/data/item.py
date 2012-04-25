@@ -18,14 +18,14 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module for item related classes
 
 Classes:
     Item
     WeaponData
     ItemEffectData
-'''
+"""
 
 import collections
 
@@ -79,10 +79,10 @@ class Item(object):
         return name
 
     def add_effect(self, effect):
-        '''
+        """
         Adds an effect to an item
         param effect: effect to add
-        '''
+        """
         if self.effects == None:
             self.effects = {}
 
@@ -92,11 +92,11 @@ class Item(object):
             self.effects[effect.trigger] = [effect]
 
     def get_effects(self, effect_type = None):
-        '''
+        """
         Retrieves effects the item has
         Param effect_type: type of effects retrieved. Default None
         Returns: list of effects
-        '''
+        """
         effect_list = []
 
         if self.effects != None:
@@ -140,9 +140,9 @@ class Item(object):
             return None
 
     def __get_minimum_charges_left(self):
-        '''
+        """
         Return smallest amount of charges left in item
-        '''
+        """
         charges = self.charges_left
 
         if charges != None:
@@ -155,9 +155,9 @@ class Item(object):
     minimum_charges_left = property(__get_minimum_charges_left)
 
     def get_main_type(self):
-        '''
+        """
         Return main type of the item
-        '''
+        """
         main_type = 'undefined'
 
         if 'weapon' in self.tags:
@@ -170,15 +170,15 @@ class Item(object):
         return main_type
 
     def get_tags(self):
-        '''
+        """
         Return tags
-        '''
+        """
         return self.tags
 
 class WeaponData:
-    '''
+    """
     Class representing weapon data of items
-    '''
+    """
     def __init__(self, damage = None, damage_type = None, critical_range = None,
                  critical_damage = None, weapon_type = None):
 
@@ -189,9 +189,9 @@ class WeaponData:
         self.weapon_type = weapon_type
 
 class ItemEffectData:
-    '''
+    """
     Represents magical effect on an item
-    '''
+    """
     def __init__(self, trigger = None, effect_type = None,
                         power = None, charges = 1):
 

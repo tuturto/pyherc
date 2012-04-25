@@ -35,9 +35,9 @@ class test_CreatureWithGenerator(IntegrationTest):
     Tests for creatures that require generators to be working
     """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         IntegrationTest.__init__(self)
 
     def test_rat_generation(self):
@@ -49,9 +49,9 @@ class test_CreatureWithGenerator(IntegrationTest):
         assert(creature.name == 'rat')
 
     def test_is_proficient(self):
-        '''
+        """
         Test that weapon proficiency of character can be checked
-        '''
+        """
         creature = Character(self.model,
                              self.action_factory,
                              self.rng)
@@ -66,20 +66,20 @@ class test_CreatureWithGenerator(IntegrationTest):
         assert(creature.is_proficient(weapon) == True)
 
 class TestStatues(IntegrationTest):
-    '''
+    """
     Test handling of statues (mainly mimicing items)
-    '''
+    """
 
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         IntegrationTest.__init__(self)
 
     def test_deactivating_creature(self):
-        '''
+        """
         Test that activated character can deactivate
-        '''
+        """
         creature = Character(self.model,
                              self.action_factory,
                              self.rng)

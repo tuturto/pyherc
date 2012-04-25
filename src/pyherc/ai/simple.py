@@ -18,11 +18,11 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Simple AI for flocking creature
 
 Creature will try to find friends, before attacking the player character
-'''
+"""
 
 import math
 from pyherc.aspects import Logged
@@ -45,9 +45,9 @@ class FlockingHerbivore():
 
     @logged
     def act(self, model):
-        '''
+        """
         Trigger this AI to assess the situation and act accordingly
-        '''
+        """
         shortest_distance = None
         closest_creature = None
         character = self.character

@@ -325,9 +325,9 @@ class GameWindow:
         return eventText
 
     def __full_screen_update(self):
-        '''
+        """
         Updates full screen
-        '''
+        """
         player = self.application.world.player
         level = player.level
 
@@ -410,9 +410,9 @@ class GameWindow:
         pygame.display.update()
 
     def __partial_screen_update(self):
-        '''
+        """
         Updates only those portions of the map that have been marked dirty
-        '''
+        """
         pass
 
     def __updateDisplay(self):

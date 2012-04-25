@@ -18,9 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module for data related modules and classes that represent state of the game
-'''
+"""
 
 from .dungeon import Level
 from .dungeon import Dungeon

@@ -27,11 +27,11 @@ import logging
 __logger = logging.getLogger('pyherc.rules.moving')
 
 def deactivate(model, character):
-    '''
+    """
     Deactivates a character, causing it to hide
     @param model: model to use
     @param character: character to hide
-    '''
+    """
     item = character.get_mimic_item()
     character.set_mimic_item(None)
     level = character.level

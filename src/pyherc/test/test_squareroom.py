@@ -18,9 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Tests for SquareRoomGenerator room generator
-'''
+"""
 #pylint: disable=W0614
 from pyherc.data import Level
 from pyherc.generators.level.partitioners.section import Section
@@ -32,13 +32,13 @@ from pyherc.data.tiles import WALL_EMPTY
 import random
 
 class TestSquareRoom():
-    '''
+    """
     Tests for SquareRoomGenerator room generator
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         self.level = None
         self.section = None
         self.generator = None
@@ -55,9 +55,9 @@ class TestSquareRoom():
                                              ['crypt'])
 
     def test_generate_simple_room(self):
-        '''
+        """
         Test that generator can create a simple room
-        '''
+        """
         self.generator.generate_room(self.section)
 
         room_found = False

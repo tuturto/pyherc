@@ -18,9 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module listing magic numbers for all the tiles in game
-'''
+"""
 
 FLOOR_EMPTY = 0
 FLOOR_ROCK = 1

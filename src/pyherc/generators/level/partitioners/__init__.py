@@ -18,8 +18,8 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Package for level partitioners and related classes
-'''
+"""
 
 from .grid import GridPartitioner, RandomConnector

@@ -18,9 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Attack related factories are defined here
-'''
+"""
 import types
 import logging
 import pyherc.data.tiles

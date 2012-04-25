@@ -18,11 +18,11 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Module for attack related actions, factories and such
 
 Usually you do not need to create instance of anything defined here. Use
 classes defined in pyherc.rules.locals instead to access these functions.
-'''
+"""
 
 pass

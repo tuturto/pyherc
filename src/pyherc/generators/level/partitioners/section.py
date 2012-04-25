@@ -171,12 +171,12 @@ class Section(object):
     """Readonly property to find height of the section""" #pylint: disable=W0105
 
     def connect_to(self, section):
-        '''
+        """
         Connect this Section to another
 
         Args:
             section: Section to connect to
-        '''
+        """
         my_side_of_border = self.get_common_border(section)
         my_side = self.random_generator.choice(my_side_of_border)
         my_connection = Connection(connection = section,
@@ -193,22 +193,22 @@ class Section(object):
         section.connections.append(other_connection)
 
     def unconnected_neighbours(self):
-        '''
+        """
         Get list of unconnected neighbours
 
         Returns:
             List of unconnected neighbours
-        '''
+        """
         return [x for x in self.neighbours
                         if x.connected == False]
 
     def has_unconnected_neighbours(self):
-        '''
+        """
         Check if any of this Sections neighbours is unconnected
 
         Returns:
             True if unconnected neighbour is found, otherwise false
-        '''
+        """
         return len(self.unconnected_neighbours()) > 0
 
     def get_border(self):

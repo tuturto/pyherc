@@ -18,9 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Tests for gui components
-'''
+"""
 from mockito import mock
 
 import pyherc.gui.windows
@@ -30,19 +30,19 @@ from pyherc.test import IntegrationTest
 
 
 class TestGameWindow:
-    '''
+    """
     Tests for main game window
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         pass
 
     def test_formatting_event_history_less_than_five_items(self):
-        '''
+        """
         Test that event history is formatted correctly with less than five items
-        '''
+        """
         window = pyherc.gui.windows.GameWindow(mock(),
                                                mock(),
                                                mock())
@@ -54,9 +54,9 @@ class TestGameWindow:
         assert(result[1] == 'two')
 
     def test_formatting_event_history_five_items(self):
-        '''
+        """
         Test that event history is formatted correctly with five items
-        '''
+        """
         window = pyherc.gui.windows.GameWindow(mock(),
                                                mock(),
                                                mock())
@@ -74,9 +74,9 @@ class TestGameWindow:
         assert(result[4] == 'five')
 
     def test_formatting_event_history_more_than_five_items(self):
-        '''
+        """
         Test that event history is formatted correctly with more than five items
-        '''
+        """
         window = pyherc.gui.windows.GameWindow(mock(),
                                                mock(),
                                                mock())
@@ -97,19 +97,19 @@ class TestGameWindow:
         assert(result[4] == 'six')
 
 class TestInventoryDialog(IntegrationTest):
-    '''
+    """
     Tests for Inventory dialog
-    '''
+    """
     def __init__(self):
-        '''
+        """
         Default constructor
-        '''
+        """
         IntegrationTest.__init__(self)
 
     def test_sort_items(self):
-        '''
+        """
         Test that items can be sorted by their type
-        '''
+        """
         mock_surface_manager = mock(SurfaceManager)
         mock_character = mock(Character)
         inventory = pyherc.gui.dialogs.Inventory(None,

@@ -53,17 +53,17 @@ class Model:
         self.logger = logging.getLogger('pyherc.data.model.Model')
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
+        """
         properties = dict(self.__dict__)
         del properties['logger']
         return properties
 
     def __setstate__(self, properties):
-        '''
+        """
         Override __setstate__ in order to get pickling work
-        '''
+        """
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.model.Model')
 
@@ -389,17 +389,17 @@ class Character(object):
         action.execute()
 
     def __getstate__(self):
-        '''
+        """
         Override __getstate__ in order to get pickling work
-        '''
+        """
         properties = dict(self.__dict__)
         del properties['logger']
         return properties
 
     def __setstate__(self, properties):
-        '''
+        """
         Override __setstate__ in order to get pickling work
-        '''
+        """
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.model.Character')
 
@@ -450,17 +450,17 @@ class Damage:
         self.magic_bonus = magic_bonus
 
 class Feat:
-    '''
+    """
     Represents a feat that a character can have
-    '''
+    """
     def __init__(self, name = None, target = None):
         self.name = name
         self.target = target
 
 class WeaponProficiency(Feat):
-    '''
+    """
     Represents weapon proficiency feats (proficiency, focus, etc.)
-    '''
+    """
     def __init__(self, weapon_type = 'simple', weapon_name = None):
         Feat.__init__(self, weapon_type, weapon_name)
 
@@ -469,24 +469,24 @@ class WeaponProficiency(Feat):
         self.weapon_name = weapon_name
 
 class MimicData():
-    '''
+    """
     Represents mimicing character
-    '''
+    """
     def __init__(self, character):
         self.fov_matrix = []
         self.character = character
 
     def get_character(self):
-        '''
+        """
         Get mimicing character
         @returns: Character
-        '''
+        """
         return self.character
 
     def set_character(self, character):
-        '''
+        """
         Set character mimicing this item
         @param character: Character to set
-        '''
+        """
         self.character = character
 

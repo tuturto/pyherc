@@ -18,14 +18,14 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 Package for generation related activities
 Main interface consists of following classes
 
 DungeonGenerator
 ItemGenerator
 CreatureGenerator
-'''
+"""
 
 from .dungeon import DungeonGenerator
 from .item import ItemGenerator

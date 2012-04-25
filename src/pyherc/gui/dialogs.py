@@ -168,11 +168,11 @@ class Inventory:
         pygame.display.update()
 
     def sort_items(self, items):
-        '''
+        """
         Sort items according to their type
         @param items: items to sort
         @returns: list of sorted items
-        '''
+        """
         if items == None:
             return []
 
