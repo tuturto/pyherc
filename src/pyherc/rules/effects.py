@@ -66,17 +66,28 @@ class Effect(object):
     Class representing effects
     """
 
-    def __init__(self, duration, frequency):
+    def __init__(self, duration, frequency, tick):
         """
         Default constructor
 
         Args:
             duration: duration of the effect in ticks
             frequency: frequency of the effect in ticks
+            tick: initial value for timer
         """
         super(Effect, self).__init__()
         self.duration = duration
         self.frequency = frequency
+        self.tick = tick
+
+    def trigger(self):
+        """
+        Override this method to contain logic of effect
+
+        Note:
+            This method will be called when tick reaches zero
+        """
+        pass
 
 class Poison(Effect):
     """
@@ -85,11 +96,11 @@ class Poison(Effect):
     logged = Logged()
 
     @logged
-    def __init__(self, duration, frequency, damage, target):
+    def __init__(self, duration, frequency, tick, damage, target):
         """
         Default constructor
         """
-        super(Poison, self).__init__(duration, frequency)
+        super(Poison, self).__init__(duration, frequency, tick)
         self.damage = damage
         self.target = target
 

@@ -49,8 +49,8 @@ def get_next_creature(model):
         for creature in creatures:
             creature.tick = creature.tick - 1
             for effect in creature.active_effects:
-                effect.counter = effect.counter - 1
-                if effect.counter == 0:
+                effect.tick = effect.tick - 1
+                if effect.tick == 0:
                     effect.trigger()
 
 def get_new_tick(character, cost):

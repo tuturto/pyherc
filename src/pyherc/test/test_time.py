@@ -28,7 +28,7 @@ from pyherc.data.model import Model
 from pyherc.data.model import Character
 from pyherc.data.dungeon import Dungeon
 from pyherc.data.dungeon import Level
-from pyherc.rules.effects import Poison
+from pyherc.rules.effects import Effect
 
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock, verify, when, any
@@ -106,8 +106,8 @@ class TestEffectsAndTime:
         """
         Test that effect will be triggered
         """
-        effect = mock(Poison)
-        effect.counter = 4
+        effect = mock(Effect)
+        effect.tick = 4
         creature = mock(Character)
         creature.tick = 5
         creature.active_effects = [effect]

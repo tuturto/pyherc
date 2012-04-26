@@ -48,6 +48,7 @@ class TestPoison():
 
         poison = Poison(duration = 1,
                         frequency = 1,
+                        tick = 0,
                         damage = 5,
                         target = character)
 
@@ -77,6 +78,7 @@ class TestEffectsFactory():
         effect = factory.get_effect('poison',
                                     duration = 150,
                                     frequency = 30,
+                                    tick  = 10,
                                     damage = 5,
                                     target = character)
 
@@ -95,6 +97,7 @@ class TestEffectsFactory():
 
         params = {'duration': 150,
                   'frequency': 30,
+                  'tick': 10,
                   'damage': 1,
                   'target': character}
 
