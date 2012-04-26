@@ -83,7 +83,7 @@ class TestTime:
         Test that system can tell whose turn it is to act
         One creature has tick of 0
         """
-        creature = pyherc.rules.time.get_next_creature(self.model)
+        creature = self.model.get_next_creature()
         assert_that(creature, is_(equal_to(self.creature2)))
 
     def test_get_next_positive_tick(self):
@@ -94,7 +94,7 @@ class TestTime:
         self.creature1.tick = 5
         self.creature2.tick = 10
         self.creature3.tick = 3
-        creature = pyherc.rules.time.get_next_creature(self.model)
+        creature = self.model.get_next_creature()
         assert_that(creature, is_(equal_to(self.creature3)))
 
 class TestEffectsAndTime:
@@ -117,7 +117,7 @@ class TestEffectsAndTime:
         """
         self.creature = mock(Character)
         self.creature.tick = 5
-        self.model = mock(Model)
+        self.model = Model()
         self.model.player = self.creature
         self.level = mock(Level)
         self.level.creatures = [self.creature]
@@ -133,7 +133,7 @@ class TestEffectsAndTime:
         effect.tick = 5
         self.creature.active_effects = [effect]
 
-        next_creature = pyherc.rules.time.get_next_creature(self.model)
+        next_creature = self.model.get_next_creature()
 
         verify(effect).trigger()
 
@@ -146,7 +146,7 @@ class TestEffectsAndTime:
                         tick = 5)
         self.creature.active_effects = [effect]
 
-        next_creature = pyherc.rules.time.get_next_creature(self.model)
+        next_creature = self.model.get_next_creature()
         effect = self.creature.active_effects[0]
 
         assert_that(effect.tick, is_(equal_to(5)))

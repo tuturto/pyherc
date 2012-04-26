@@ -79,6 +79,31 @@ class Model:
             for creature in event['level'].creatures:
                 creature.receive_event(event)
 
+    def get_next_creature(self):
+        """
+        Get the character who is next to take action
+
+        Returns
+            Character to act next
+        """
+        level = self.player.level
+        creatures = level.creatures
+
+        assert len(creatures) != 0
+        assert self.player in level.creatures
+
+        while 1:
+            for creature in creatures:
+                if creature.tick <= 0:
+                    return creature
+
+            for creature in creatures:
+                creature.tick = creature.tick - 1
+                for effect in creature.active_effects:
+                    effect.tick = effect.tick - 1
+                    if effect.tick == 0:
+                        effect.trigger()
+
 class Character(object):
     """
     Represents a character in playing world

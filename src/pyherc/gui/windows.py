@@ -255,7 +255,7 @@ class GameWindow:
 
             model = self.application.world
 
-            creature = pyherc.rules.time.get_next_creature(model)
+            creature = model.get_next_creature()
 
             if creature == model.player:
                 if self.application.world.player.level != None:
