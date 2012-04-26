@@ -433,6 +433,16 @@ class Character(object):
 
         return self.__active_effects
 
+    def add_to_tick(self, cost):
+        """
+        Add cost of action to characters tick,
+        while taking characters speed into account
+
+        Args:
+            cost: Cost of action in ticks
+        """
+        self.tick = self.tick + (self.speed * cost)
+
     hit_points = property(__get_hp, __set_hp)
     body = property(__get_body, __set_body)
     finesse = property(__get_finesse, __set_finesse)

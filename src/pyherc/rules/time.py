@@ -52,19 +52,3 @@ def get_next_creature(model):
                 effect.tick = effect.tick - 1
                 if effect.tick == 0:
                     effect.trigger()
-
-def get_new_tick(character, cost):
-    """
-    Calculate new tick for character
-
-    Args:
-        character: character performing the action
-        cost: cost of the action
-
-    Returns:
-        new tick
-    """
-    assert(character != None)
-    assert(cost != None)
-
-    return character.tick + (character.speed * cost)

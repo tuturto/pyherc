@@ -55,7 +55,7 @@ def pick_up(model, character, item):
     character.level.items.remove(item)
     character.inventory.append(item)
     item.location = ()
-    character.tick = pyherc.rules.time.get_new_tick(character, 1.5)
+    character.add_to_tick(1.5)
 
 def drop(model, character, item):
     """
@@ -74,7 +74,7 @@ def drop(model, character, item):
 
     character.level.add_item(item, character.location)
     character.inventory.remove(item)
-    character.tick = pyherc.rules.time.get_new_tick(character, 1.5)
+    character.add_to_tick(1.5)
 
     event = {}
     event['type'] = 'item'

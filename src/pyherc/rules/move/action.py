@@ -54,10 +54,10 @@ class MoveAction():
                     self.character.level = self.new_level
                     self.new_level.add_creature(self.character,
                                                 self.new_location)
-            self.character.tick = pyherc.rules.time.get_new_tick(self.character, 2)
+            self.character.add_to_tick(2)
         else:
             self.logger.warn('Tried to execute illegal move')
-            self.character.tick = pyherc.rules.time.get_new_tick(self.character, 2)
+            self.character.add_to_tick(2)
 
     def is_legal(self):
         """

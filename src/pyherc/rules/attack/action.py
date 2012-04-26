@@ -77,7 +77,7 @@ class AttackAction():
                                         self.target,
                                         self.target.model)
 
-        self.attacker.tick = pyherc.rules.time.get_new_tick(self.attacker, 20)
+        self.attacker.add_to_tick(20)
 
 
 class ToHit(object):
