@@ -102,21 +102,51 @@ class TestEffectsAndTime:
     Tests for effects and time
     """
 
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.effect = None
+        self.creature = None
+        self.model = None
+        self.level = None
+
+    def setup(self):
+        """
+        Setup the test case
+        """
+        self.creature = mock(Character)
+        self.creature.tick = 5
+        self.model = mock(Model)
+        self.model.player = self.creature
+        self.level = mock(Level)
+        self.level.creatures = [self.creature]
+        self.creature.level = self.level
+
     def test_trigger_effect_on_time(self):
         """
         Test that effect will be triggered
         """
         effect = mock(Effect)
-        effect.tick = 4
-        creature = mock(Character)
-        creature.tick = 5
-        creature.active_effects = [effect]
-        model = mock(Model)
-        model.player = creature
-        level = mock(Level)
-        level.creatures = [creature]
-        creature.level = level
+        effect.duration = 50
+        effect.frequency = 5
+        effect.tick = 5
+        self.creature.active_effects = [effect]
 
-        creature = pyherc.rules.time.get_next_creature(model) # modeli tarvitaan
+        next_creature = pyherc.rules.time.get_next_creature(self.model)
 
         verify(effect).trigger()
+
+    def test_tick_will_be_reset(self):
+        """
+        Test that tick of effect will be reset after it has been triggered
+        """
+        effect = Effect(duration = 50,
+                        frequency = 5,
+                        tick = 5)
+        self.creature.active_effects = [effect]
+
+        next_creature = pyherc.rules.time.get_next_creature(self.model)
+        effect = self.creature.active_effects[0]
+
+        assert_that(effect.tick, is_(equal_to(5)))

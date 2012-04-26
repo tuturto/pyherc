@@ -65,6 +65,7 @@ class Effect(object):
     """
     Class representing effects
     """
+    logged = Logged()
 
     def __init__(self, duration, frequency, tick):
         """
@@ -80,14 +81,31 @@ class Effect(object):
         self.frequency = frequency
         self.tick = tick
 
+    @logged
     def trigger(self):
         """
-        Override this method to contain logic of effect
+        Trigger the effect
 
         Note:
             This method will be called when tick reaches zero
         """
+        self.do_trigger()
+        self.post_trigger()
+
+    @logged
+    def do_trigger(self):
+        """
+        Override this method to contain logic of the effect
+        """
         pass
+
+    @logged
+    def post_trigger(self):
+        """
+        Do house keeping after effect has been triggered
+        """
+        self.tick = self.frequency
+
 
 class Poison(Effect):
     """
@@ -105,7 +123,7 @@ class Poison(Effect):
         self.target = target
 
     @logged
-    def trigger(self):
+    def do_trigger(self):
         """
         Triggers effects of the poison
         """
