@@ -194,3 +194,26 @@ class TestEffectsAndTime:
         next_creature = self.model.get_next_creature()
 
         assert_that(effect.duration, is_(equal_to(45)))
+
+    def test_expired_effects_are_removed(self):
+        """
+        Test that expired effects are removed
+        """
+        creature = Character(model = self.model,
+                             action_factory = mock(),
+                             rng = mock())
+
+        creature.tick = 5
+        self.model.player = creature
+        self.level.creatures = [creature]
+        creature.level = self.level
+
+        effect = Effect(duration = 5,
+                        frequency = 5,
+                        tick = 5)
+
+        creature.add_effect(effect)
+
+        next_creature = self.model.get_next_creature()
+
+        assert_that(creature.active_effects, is_not(has_item(effect)))

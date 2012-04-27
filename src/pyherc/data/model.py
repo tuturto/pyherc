@@ -104,6 +104,7 @@ class Model:
                     effect.tick = effect.tick - 1
                     if effect.tick == 0:
                         effect.trigger()
+                creature.remove_expired_effects()
 
 class Character(object):
     """
@@ -458,6 +459,13 @@ class Character(object):
             self.__active_effects = []
 
         return self.__active_effects
+
+    def remove_expired_effects(self):
+        """
+        Remove all effects that have expired
+        """
+        self.__active_effects = [x for x in self.__active_effects
+                                 if x.duration > 0]
 
     def add_to_tick(self, cost):
         """
