@@ -180,3 +180,17 @@ class TestEffectsAndTime:
         next_creature.tick = 10
         next_creature = self.model.get_next_creature()
         assert_that(effect1.tick, is_(equal_to(effect2.tick)))
+
+    def test_effects_duration_goes_down(self):
+        """
+        Test that duration of effect is gradually counted down
+        """
+        effect = Effect(duration = 50,
+                        frequency = 5,
+                        tick = 5)
+
+        self.creature.active_effects = [effect]
+
+        next_creature = self.model.get_next_creature()
+
+        assert_that(effect.duration, is_(equal_to(45)))
