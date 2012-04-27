@@ -79,6 +79,7 @@ class Model:
             for creature in event['level'].creatures:
                 creature.receive_event(event)
 
+    @logged
     def get_next_creature(self):
         """
         Get the character who is next to take action

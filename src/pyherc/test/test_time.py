@@ -150,3 +150,33 @@ class TestEffectsAndTime:
         effect = self.creature.active_effects[0]
 
         assert_that(effect.tick, is_(equal_to(5)))
+
+    def test_effects_will_stay_in_sync(self):
+        """
+        Test that two effects will stay in sync
+        """
+        effect1 = Effect(duration = 50,
+                        frequency = 5,
+                        tick = 5)
+
+        self.creature.active_effects = [effect1]
+
+        effect2 = Effect(duration = 50,
+                         frequency = 5,
+                         tick = 5)
+
+        creature2 = mock(Character)
+        creature2.tick = 10
+
+        creature2.active_effects = [effect2]
+        creature2.level = self.level
+
+        self.level.creatures = [self.creature,
+                                creature2]
+
+        next_creature = self.model.get_next_creature()
+        assert_that(effect1.tick, is_(equal_to(effect2.tick)))
+
+        next_creature.tick = 10
+        next_creature = self.model.get_next_creature()
+        assert_that(effect1.tick, is_(equal_to(effect2.tick)))
