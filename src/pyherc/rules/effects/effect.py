@@ -19,47 +19,9 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for effects
+Module for baseclass of every Effect
 """
 from pyherc.aspects import Logged
-
-class EffectsFactory(object):
-    """
-    Factory for creating effects
-    """
-    logged = Logged()
-
-    @logged
-    def __init__(self):
-        """
-        Default constructor
-        """
-        super(EffectsFactory, self).__init__()
-        self.effects = {}
-
-    @logged
-    def add_effect(self, key, type):
-        """
-        Add effect to internal dictionary
-
-        Args:
-            key: name of the effect
-            type: type used for effect
-        """
-        self.effects[key] = type
-
-    @logged
-    def get_effect(self, key, **kwargs):
-        """
-        Instantiates new effect with given parameters
-
-        Args:
-            key: name of the effect
-            kwargs: keyword arguments, passed to the effect
-        """
-        type = self.effects[key]
-        return type(**kwargs)
-
 
 class Effect(object):
     """
@@ -106,26 +68,3 @@ class Effect(object):
         """
         self.tick = self.frequency
         self.duration = self.duration - self.frequency
-
-
-class Poison(Effect):
-    """
-    Class representing effects of poison
-    """
-    logged = Logged()
-
-    @logged
-    def __init__(self, duration, frequency, tick, damage, target):
-        """
-        Default constructor
-        """
-        super(Poison, self).__init__(duration, frequency, tick)
-        self.damage = damage
-        self.target = target
-
-    @logged
-    def do_trigger(self):
-        """
-        Triggers effects of the poison
-        """
-        self.target.hit_points = self.target.hit_points - self.damage

@@ -28,6 +28,7 @@ from pyherc.data import Item
 from pyherc.data import ItemEffectData
 from pyherc.rules.consume import DrinkFactory
 from pyherc.rules import ActionFactory
+from pyherc.rules.effects import Heal
 from random import Random
 
 from hamcrest import * #pylint: disable=W0401
@@ -68,7 +69,12 @@ class TestPotions():
 
         self.potion = Item()
         self.potion.name = 'healing potion'
-        self.potion.add_effect(ItemEffectData('on drink', 'healing', '1d10', 1))
+        effect = Heal(duration = 0,
+                      frequency = 0,
+                      tick = 0,
+                      healing = 5,
+                      target = self.character)
+        self.potion.add_effect('on drink', effect)
 
         self.character.inventory.append(self.potion)
 
