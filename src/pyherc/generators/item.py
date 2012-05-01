@@ -127,7 +127,7 @@ class ItemGenerator:
                 new_item.effects[effect_type] = []
                 for effect in table['effects'][effect_type]:
                     new_effect = ItemEffectData(trigger = effect_type,
-                                       effect_type = effect['name'],
+                                       effect = effect['name'],
                                        power = effect['power'])
 
                 new_item.effects[effect_type].append(new_effect)

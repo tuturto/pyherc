@@ -39,9 +39,9 @@ def cast_effect(target, effect, dice = None):
     """
     assert(effect != None)
 
-    __logger.info('casting effect: ' + effect.effect_type)
+    __logger.info('casting effect: ' + effect.effect)
 
-    if effect.effect_type in ('healing', 'damage'):
+    if effect.effect in ('healing', 'damage'):
         cast_hp_effect(target, effect, dice)
 
 def cast_hp_effect(target, effect, dice = None):
@@ -61,10 +61,10 @@ def cast_hp_effect(target, effect, dice = None):
 
     event = {}
 
-    if effect.effect_type == 'healing':
+    if effect.effect == 'healing':
         target.hit_points = target.hit_points + hp_roll
         event['type'] = 'magic heal'
-    elif effect.effect_type == 'damage':
+    elif effect.effect == 'damage':
         target.hit_points = target.hit_points - hp_roll
         event['type'] = 'magic damage'
 

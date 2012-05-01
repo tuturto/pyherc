@@ -59,8 +59,10 @@ class Item(object):
         """
         Get name of the item
         Name can be appearance or given name
-        @param character: character handling the item
-        @param decorate: should name be decorated with status info, default False
+
+        Args:
+            character: character handling the item
+            decorate: should name be decorated with status info, default False
         """
         assert character != None
 
@@ -78,24 +80,31 @@ class Item(object):
 
         return name
 
-    def add_effect(self, effect):
+    def add_effect(self, trigger, effect):
         """
         Adds an effect to an item
-        param effect: effect to add
+
+        Args:
+            trigger: trigger for the effect
+            effect: effect to add
         """
         if self.effects == None:
             self.effects = {}
 
-        if self.effects.has_key(effect.trigger):
-            self.effects[effect.trigger].append(effect)
+        if self.effects.has_key(trigger):
+            self.effects[trigger].append(effect)
         else:
-            self.effects[effect.trigger] = [effect]
+            self.effects[trigger] = [effect]
 
     def get_effects(self, effect_type = None):
         """
         Retrieves effects the item has
-        Param effect_type: type of effects retrieved. Default None
-        Returns: list of effects
+
+        Args:
+            effect_type: type of effects retrieved. Default None
+
+        Returns:
+            list of effects
         """
         effect_list = []
 
@@ -192,10 +201,7 @@ class ItemEffectData:
     """
     Represents magical effect on an item
     """
-    def __init__(self, trigger = None, effect_type = None,
-                        power = None, charges = 1):
+    def __init__(self, effect, charges):
 
-        self.trigger = trigger
-        self.effect_type = effect_type
-        self.power = power
+        self.effect = effect
         self.charges = charges
