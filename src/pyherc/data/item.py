@@ -201,7 +201,8 @@ class ItemEffectData:
     """
     Represents magical effect on an item
     """
-    def __init__(self, effect, charges):
+    def __init__(self, effect, parameters, charges):
 
         self.effect = effect
+        self.parameters = parameters
         self.charges = charges

@@ -29,6 +29,7 @@ from pyherc.data.item import Item
 from pyherc.data.item import ItemEffectData
 from pyherc.test import IntegrationTest
 from pyherc.test import StubModel
+from pyherc.rules.effects import Heal, Damage
 from random import Random
 from mockito import mock
 
@@ -54,9 +55,13 @@ class TestMagic:
         character.model = model
         character.hit_points = 15
         character.max_hp = 15
-        pyherc.rules.magic.cast_effect(
-                            character,
-                            ItemEffectData('on drink', 'damage', '1d10'), [10])
+        effect = Damage(duration = 0,
+                        frequency = 0,
+                        tick = 0,
+                        healing = 10,
+                        target = character)
+
+        effect.trigger()
 
         assert(character.hit_points == 5)
 
@@ -71,9 +76,12 @@ class TestMagic:
         character.model = model
         character.hit_points = 1
         character.max_hp = 15
-        pyherc.rules.magic.cast_effect(
-                            character,
-                            ItemEffectData('on drink', 'healing', '1d10'), [10])
+        effect = Heal(duration = 0,
+                      frequency = 0,
+                      tick = 0,
+                      healing = 10,
+                      target = character)
+        effect.trigger()
 
         assert(character.hit_points == 11)
 
@@ -88,9 +96,13 @@ class TestMagic:
         character.model = model
         character.hit_points = 1
         character.max_hp = 5
-        pyherc.rules.magic.cast_effect(
-                        character,
-                        ItemEffectData('on drink', 'healing', '1d10'), [10])
+        effect = Heal(duration = 0,
+                      frequency = 0,
+                      tick = 0,
+                      healing = 10,
+                      target = character)
+
+        effect.trigger()
 
         assert(character.hit_points == 5)
 

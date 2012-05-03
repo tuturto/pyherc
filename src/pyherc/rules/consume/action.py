@@ -29,18 +29,19 @@ class DrinkAction():
     """
     Action for drinking
     """
-    def __init__(self, character, potion):
+    def __init__(self, character, potion, effect_factory):
         """
         Default constructor
 
         Args:
             character: Character drinking
             potion: Item to drink
+            effect_factory: Initialised EffectsFactory
         """
         self.logger = logging.getLogger('pyherc.rules.move.action.MoveAction')
         self.character = character
         self.potion = potion
-        self.model = None
+        self.effect_factory = effect_factory
 
     def execute(self):
         """
@@ -49,11 +50,15 @@ class DrinkAction():
         if self.is_legal():
             self.character.identify_item(self.potion)
 
-            if 'on drink' in self.potion.effects.keys():
-                for effect in self.potion.effects['on drink']:
-                    pyherc.rules.magic.cast_effect(self.character,
-                                                    effect)
-                    effect.charges = effect.charges - 1
+            drink_effects = self.potion.get_effects('on drink')
+
+            if len(drink_effects) > 0:
+                for effect_spec in drink_effects:
+                    effect = self.effect_factory.get_effect(
+                                                    effect_spec.effect,
+                                                    effect_spec.parameters)
+                    effect.trigger()
+                    effect_spec.charges = effect_spec.charges - 1
 
                 if self.potion.maximum_charges_left < 1:
                     self.character.inventory.remove(self.potion)

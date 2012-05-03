@@ -26,9 +26,13 @@ Module for testing effects
 from pyherc.data import Character, Item, ItemEffectData
 from pyherc.rules.effects import Heal
 from pyherc.rules.effects import Poison
+from pyherc.rules.effects import Effect
 from pyherc.rules.effects import EffectsFactory
+from pyherc.rules.public import ActionFactory
+from pyherc.rules.consume.factories import DrinkFactory
 from random import Random
-from mockito import mock, when
+
+from mockito import mock, when, any, verify
 from hamcrest import * #pylint: disable=W0401
 
 class TestEffects(object):
@@ -36,17 +40,26 @@ class TestEffects(object):
     """
     pass
 
-    def test_create_effect_while_drinking(self):
+    def test_effect_triggered_while_drinking(self):
         """
-        Test that effect will be created when drinking potion
+        Test that effect will be triggered when drinking potion
         """
+        effect_factory = mock(EffectsFactory)
         effect_spec = mock(ItemEffectData)
+        effect = mock (Effect)
         potion = mock(Item)
 
-        when(potion).get_effects('on drink').thenReturn(effect_spec)
+        effect_spec.charges = 2
+        when(potion).get_effects('on drink').thenReturn([effect_spec])
+        when(effect_factory).get_effect(any(), any()).thenReturn(effect)
 
-        character = mock(Character)
+        model = mock()
+        action_factory = ActionFactory(model = model,
+                                       factories = [DrinkFactory(effect_factory)])
+
+        character = Character(model = model,
+                              action_factory = action_factory,
+                              rng = Random())
         character.drink(potion)
 
-        # verify(potion).trigger()
-
+        verify(effect).trigger()

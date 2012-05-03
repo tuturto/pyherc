@@ -554,7 +554,7 @@ class TestItemCharges:
 
         self.item = Item()
 
-        self.effect1 = ItemEffectData(mock(), 1)
+        self.effect1 = ItemEffectData(mock(), mock(), 1)
 
         self.item.add_effect('on drink', self.effect1)
 

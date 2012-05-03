@@ -45,3 +45,6 @@ class Heal(Effect):
         Triggers effects of the healing
         """
         self.target.hit_points = self.target.hit_points + self.healing
+
+        if self.target.hit_points > self.target.max_hp:
+            self.target.hit_points = self.target.max_hp

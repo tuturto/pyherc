@@ -27,13 +27,17 @@ class SubActionFactory(object):
     """
     Factory to handle concrete creation of actions
     """
-    def __init__(self):
+    def __init__(self, effect_factory = None):
         """
         Constructor for this factory
+
+        Args:
+            effect_factory: Initialised EffectsFactory
         """
         self.action_type = 'default'
         self.logger = logging.getLogger('pyherc.rules.factory.SubActionFactory')
         self.factories = []
+        self.effect_factory = effect_factory
 
     def get_sub_factory(self, parameters):
         """

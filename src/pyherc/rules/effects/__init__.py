@@ -25,3 +25,4 @@ from .core import EffectsFactory
 from .effect import Effect
 from .poison import Poison
 from .heal import Heal
+from .damage import Damage

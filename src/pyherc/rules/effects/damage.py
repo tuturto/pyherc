@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010-2012 Tuukka Turto
+#   Copyright 2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -19,29 +19,30 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Drinking and eating related factories are defined here
+Module for damage
 """
-from pyherc.rules.consume.action import DrinkAction
-from pyherc.rules.factory import SubActionFactory
+from pyherc.aspects import Logged
+from pyherc.rules.effects.effect import Effect
 
-class DrinkFactory(SubActionFactory):
+class Damage(Effect):
     """
-    Factory for creating drink actions
+    Class representing effects of damage
     """
-    def __init__(self, effect_factory = None):
-        """
-        Constructor for this factory
-        """
-        super(DrinkFactory, self).__init__(effect_factory)
-        self.action_type = 'drink'
+    logged = Logged()
 
-    def get_action(self, parameters):
+    @logged
+    def __init__(self, duration, frequency, tick, damage, target):
         """
-        Create a drink action
+        Default constructor
+        """
+        super(Damage, self).__init__(duration, frequency, tick)
+        self.damage = damage
+        self.target = target
 
-        Args:
-            parameters: Parameters used to control drink action creation
+    @logged
+    def do_trigger(self):
         """
-        return DrinkAction(parameters.character,
-                           parameters.item,
-                           self.effect_factory)
+        Triggers effects of the damage
+        """
+        self.target.hit_points = self.target.hit_points - self.damage
+
