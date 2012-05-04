@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-05-03, 23:13:59 -->
+<!-- Saved: 2012-05-04, 08:06:45 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -138,6 +138,59 @@
     <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
   </FiletypeAssociations>
+  <Documentation>
+    <DocumentationParams>
+      <dict>
+        <key>
+          <string>ERIC4API</string>
+        </key>
+        <value>
+          <dict>
+            <key>
+              <string>basePackage</string>
+            </key>
+            <value>
+              <unicode>pyherc</unicode>
+            </value>
+            <key>
+              <string>ignoreFilePatterns</string>
+            </key>
+            <value>
+              <list>
+                <unicode></unicode>
+              </list>
+            </value>
+            <key>
+              <string>includePrivate</string>
+            </key>
+            <value>
+              <bool>True</bool>
+            </value>
+            <key>
+              <string>languages</string>
+            </key>
+            <value>
+              <list>
+                <unicode>Python</unicode>
+              </list>
+            </value>
+            <key>
+              <string>outputFile</string>
+            </key>
+            <value>
+              <unicode>C:\programming\pyHack\doc\herculeum.api</unicode>
+            </value>
+            <key>
+              <string>useRecursion</string>
+            </key>
+            <value>
+              <bool>True</bool>
+            </value>
+          </dict>
+        </value>
+      </dict>
+    </DocumentationParams>
+  </Documentation>
   <Checkers>
     <CheckersParams>
       <dict>
