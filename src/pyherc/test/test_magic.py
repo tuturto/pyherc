@@ -58,7 +58,7 @@ class TestMagic:
         effect = Damage(duration = 0,
                         frequency = 0,
                         tick = 0,
-                        healing = 10,
+                        damage = 10,
                         target = character)
 
         effect.trigger()

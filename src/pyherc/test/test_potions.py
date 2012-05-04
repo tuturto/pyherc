@@ -32,7 +32,7 @@ from pyherc.rules.effects import Heal
 from random import Random
 
 from hamcrest import * #pylint: disable=W0401
-from mockito import mock
+from mockito import mock, when, any
 
 class TestPotions():
     """
@@ -48,6 +48,7 @@ class TestPotions():
         self.potion = None
         self.model = None
         self.rng = None
+        self.effect_factory = None
 
     def setup(self):
         """
@@ -55,8 +56,9 @@ class TestPotions():
         """
         self.rng = Random()
         self.model = mock()
+        self.effect_factory = mock()
 
-        drink_factory = DrinkFactory()
+        drink_factory = DrinkFactory(self.effect_factory)
         self.action_factory = ActionFactory(self.model,
                                             drink_factory)
 
@@ -74,7 +76,12 @@ class TestPotions():
                       tick = 0,
                       healing = 5,
                       target = self.character)
-        self.potion.add_effect('on drink', effect)
+        when(self.effect_factory).create_effect(any(), any()).thenReturn(effect)
+
+        self.potion.add_effect(trigger = 'on drink',
+                               effect = ItemEffectData(effect = 'heal',
+                                                       parameters = None,
+                                                       charges = 1))
 
         self.character.inventory.append(self.potion)
 
@@ -119,7 +126,10 @@ class TestPotions():
         """
         self.potion = Item()
         self.potion.name = 'healing potion'
-        self.potion.add_effect(ItemEffectData('on drink', 'healing', '1d10', 5))
+        self.potion.add_effect(trigger = 'on drink',
+                               effect = ItemEffectData(effect = 'heal',
+                                                       parameters = None,
+                                                       charges = 5))
         self.character.inventory.append(self.potion)
 
         assert_that(self.character.inventory, has_item(self.potion))

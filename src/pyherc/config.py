@@ -115,6 +115,7 @@ class Configuration(object):
 
         walk_factory = WalkFactory()
         move_factory = MoveFactory(walk_factory)
+        effect_factory = None
 
         unarmed_combat_factory = UnarmedCombatFactory()
         melee_combat_factory = MeleeCombatFactory()
@@ -122,7 +123,7 @@ class Configuration(object):
                                         unarmed_combat_factory,
                                         melee_combat_factory])
 
-        drink_factory = DrinkFactory()
+        drink_factory = DrinkFactory(effect_factory)
 
         self.action_factory = ActionFactory(
                                             self.model,

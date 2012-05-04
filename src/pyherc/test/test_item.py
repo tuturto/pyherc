@@ -488,8 +488,8 @@ class TestItemEffects:
 
         self.item = Item()
 
-        self.effect1 = ItemEffectData(mock(), 1)
-        self.effect2 = ItemEffectData(mock(), 2)
+        self.effect1 = ItemEffectData('heal', mock(), 1)
+        self.effect2 = ItemEffectData('bless', mock(), 2)
 
         self.item.add_effect('on drink', self.effect1)
         self.item.add_effect('on break', self.effect2)
@@ -528,7 +528,7 @@ class TestItemEffects:
         Test that multiple effects can be returned by type
         """
 
-        effect3 = ItemEffectData(mock(), 1)
+        effect3 = ItemEffectData('cure', mock(), 1)
         self.item.add_effect('on break', effect3)
 
         effects = self.item.get_effects('on break')
@@ -571,7 +571,7 @@ class TestItemCharges:
         """
         Test that amount of charges can be retrieved with multiple effects
         """
-        effect2 = ItemEffectData(mock(), 2)
+        effect2 = ItemEffectData('fire', mock(), 2)
         self.item.add_effect('on kick', effect2)
 
         charges = self.item.charges_left
@@ -584,7 +584,7 @@ class TestItemCharges:
         """
         Test that smallest and biggest amount of charges left can be retrieved
         """
-        effect2 = ItemEffectData(mock(), 2)
+        effect2 = ItemEffectData('poison', mock(), 2)
         self.item.add_effect('on kick', effect2)
 
         minimum_charges = self.item.minimum_charges_left

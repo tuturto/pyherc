@@ -28,7 +28,7 @@ class DrinkFactory(SubActionFactory):
     """
     Factory for creating drink actions
     """
-    def __init__(self, effect_factory = None):
+    def __init__(self, effect_factory):
         """
         Constructor for this factory
         """
