@@ -23,7 +23,6 @@ Module for testing time related functions
 """
 #pylint: disable=W0614
 import pyherc
-import pyherc.rules.time
 from pyherc.data.model import Model
 from pyherc.data.model import Character
 from pyherc.data.dungeon import Dungeon

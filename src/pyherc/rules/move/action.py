@@ -22,7 +22,7 @@
 Module defining classes related to MoveAttack
 """
 import logging
-import pyherc.rules.time
+import pyherc.data.tiles
 
 class MoveAction():
     """

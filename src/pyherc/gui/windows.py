@@ -31,7 +31,6 @@ import pyherc.data.model
 import pyherc.data.tiles
 import pyherc.rules.items
 import pyherc.rules.ending
-import pyherc.rules.time
 import pyherc.generators.dungeon
 import pyherc.rules.tables
 import pyherc.gui.startmenu

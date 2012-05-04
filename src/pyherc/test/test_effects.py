@@ -51,7 +51,7 @@ class TestEffects(object):
 
         effect_spec.charges = 2
         when(potion).get_effects('on drink').thenReturn([effect_spec])
-        when(effect_factory).get_effect(any(), any()).thenReturn(effect)
+        when(effect_factory).create_effect(any(), any()).thenReturn(effect)
 
         model = mock()
         action_factory = ActionFactory(model = model,

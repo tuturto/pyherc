@@ -21,7 +21,7 @@
 """
 Package for magical effects
 """
-from .core import EffectsFactory
+from .factory import EffectsFactory
 from .effect import Effect
 from .poison import Poison
 from .heal import Heal

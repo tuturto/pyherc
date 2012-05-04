@@ -49,7 +49,7 @@ class EffectsFactory(object):
         self.effects[key] = type
 
     @logged
-    def get_effect(self, key, **kwargs):
+    def create_effect(self, key, **kwargs):
         """
         Instantiates new effect with given parameters
 

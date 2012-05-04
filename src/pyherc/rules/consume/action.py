@@ -22,7 +22,6 @@
 Module defining classes related to DrinkAction
 """
 import logging
-import pyherc.rules.time
 import pyherc.rules.magic
 
 class DrinkAction():
@@ -54,7 +53,7 @@ class DrinkAction():
 
             if len(drink_effects) > 0:
                 for effect_spec in drink_effects:
-                    effect = self.effect_factory.get_effect(
+                    effect = self.effect_factory.create_effect(
                                                     effect_spec.effect,
                                                     effect_spec.parameters)
                     effect.trigger()

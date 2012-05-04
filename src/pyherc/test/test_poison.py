@@ -75,7 +75,7 @@ class TestEffectsFactory():
 
         character = mock(Character)
 
-        effect = factory.get_effect('poison',
+        effect = factory.create_effect('poison',
                                     duration = 150,
                                     frequency = 30,
                                     tick  = 10,
