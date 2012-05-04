@@ -1,0 +1,848 @@
+pyherc.ai.simple.FlockingHerbivore.act?4(model)
+pyherc.ai.simple.FlockingHerbivore.find_direction?4(start, end)
+pyherc.ai.simple.FlockingHerbivore.logged?7
+pyherc.ai.simple.FlockingHerbivore?1(character)
+pyherc.application.APP?7
+pyherc.application.Application.__get_action_factory?6()
+pyherc.application.Application.__get_creature_generator?6()
+pyherc.application.Application.__get_item_generator?6()
+pyherc.application.Application.__get_level_generator_factory?6()
+pyherc.application.Application.__get_rng?6()
+pyherc.application.Application.__get_surface_manager?6()
+pyherc.application.Application.action_factory?7
+pyherc.application.Application.change_state?4(state)
+pyherc.application.Application.creature_generator?7
+pyherc.application.Application.detect_resource_directory?4()
+pyherc.application.Application.item_generator?7
+pyherc.application.Application.level_generator_factory?7
+pyherc.application.Application.load_configuration?4()
+pyherc.application.Application.process_command_line?4()
+pyherc.application.Application.rng?7
+pyherc.application.Application.run?4()
+pyherc.application.Application.start_logging?4()
+pyherc.application.Application.surface_manager?7
+pyherc.application.Application?1()
+pyherc.application.render?7
+pyherc.aspects.Logged.atCall?4(call_data)
+pyherc.aspects.Logged.atRaise?4(call_data)
+pyherc.aspects.Logged.atReturn?4(call_data)
+pyherc.aspects.Logged?1()
+pyherc.config.Configuration.extend_configuration?4(config, new_config)
+pyherc.config.Configuration.init_catacombs?4()
+pyherc.config.Configuration.init_upper_crypt?4()
+pyherc.config.Configuration.initialise?4()
+pyherc.config.Configuration.initialise_factories?4()
+pyherc.config.Configuration.initialise_generators?4()
+pyherc.config.Configuration.initialise_level_generators?4()
+pyherc.config.Configuration.initialise_tables?4()
+pyherc.config.Configuration?1(base_path, model)
+pyherc.data.dungeon.Dungeon.__getstate__?6()
+pyherc.data.dungeon.Dungeon.__setstate__?6(properties)
+pyherc.data.dungeon.Dungeon.logged?7
+pyherc.data.dungeon.Dungeon?1()
+pyherc.data.dungeon.Level.__getstate__?6()
+pyherc.data.dungeon.Level.__setstate__?6(properties)
+pyherc.data.dungeon.Level.add_creature?4(creature, location = None)
+pyherc.data.dungeon.Level.add_item?4(item, location)
+pyherc.data.dungeon.Level.add_portal?4(portal, location, other_end = None)
+pyherc.data.dungeon.Level.blocks_los?4(x_coordinate, y_coordinate)
+pyherc.data.dungeon.Level.dump_string?4()
+pyherc.data.dungeon.Level.find_free_space?4()
+pyherc.data.dungeon.Level.get_creature_at?4(location)
+pyherc.data.dungeon.Level.get_items_at?4(location)
+pyherc.data.dungeon.Level.get_location_type?4(location)
+pyherc.data.dungeon.Level.get_locations_by_type?4(location_type)
+pyherc.data.dungeon.Level.get_portal_at?4(location)
+pyherc.data.dungeon.Level.get_size?4()
+pyherc.data.dungeon.Level.get_square?4(x_coordinate, y_coordinate)
+pyherc.data.dungeon.Level.get_tile?4(loc_x, loc_y)
+pyherc.data.dungeon.Level.get_wall_tile?4(loc_x, loc_y)
+pyherc.data.dungeon.Level.logged?7
+pyherc.data.dungeon.Level.remove_creature?4(creature)
+pyherc.data.dungeon.Level.set_location_type?4(location, location_type)
+pyherc.data.dungeon.Level?1(size = (0, 0), floor_type = None, wall_type = None)
+pyherc.data.dungeon.Portal.__get_icon?6()
+pyherc.data.dungeon.Portal.__get_other_end?6()
+pyherc.data.dungeon.Portal.__get_other_end_icon?6()
+pyherc.data.dungeon.Portal.__getstate__?6()
+pyherc.data.dungeon.Portal.__set_icon?6(icon)
+pyherc.data.dungeon.Portal.__set_other_end?6(portal)
+pyherc.data.dungeon.Portal.__setstate__?6(properties)
+pyherc.data.dungeon.Portal.icon?7
+pyherc.data.dungeon.Portal.logged?7
+pyherc.data.dungeon.Portal.other_end?7
+pyherc.data.dungeon.Portal.other_end_icon?7
+pyherc.data.dungeon.Portal?1(icons, level_generator)
+pyherc.data.item.Item.__get_charges_left?6()
+pyherc.data.item.Item.__get_maximum_charges_left?6()
+pyherc.data.item.Item.__get_minimum_charges_left?6()
+pyherc.data.item.Item.__str__?6()
+pyherc.data.item.Item.add_effect?4(trigger, effect)
+pyherc.data.item.Item.charges_left?7
+pyherc.data.item.Item.get_effects?4(effect_type = None)
+pyherc.data.item.Item.get_main_type?4()
+pyherc.data.item.Item.get_name?4(character, decorate = False)
+pyherc.data.item.Item.get_tags?4()
+pyherc.data.item.Item.maximum_charges_left?7
+pyherc.data.item.Item.minimum_charges_left?7
+pyherc.data.item.Item?1()
+pyherc.data.item.ItemEffectData?1(effect, parameters, charges)
+pyherc.data.item.WeaponData?1(damage = None, damage_type = None, critical_range = None, critical_damage = None, weapon_type = None)
+pyherc.data.model.Character.__get_active_effects?6()
+pyherc.data.model.Character.__get_body?6()
+pyherc.data.model.Character.__get_finesse?6()
+pyherc.data.model.Character.__get_hp?6()
+pyherc.data.model.Character.__get_mind?6()
+pyherc.data.model.Character.__getstate__?6()
+pyherc.data.model.Character.__set_body?6(body)
+pyherc.data.model.Character.__set_finesse?6(finesse)
+pyherc.data.model.Character.__set_hp?6(hit_points)
+pyherc.data.model.Character.__set_mind?6(mind)
+pyherc.data.model.Character.__setstate__?6(properties)
+pyherc.data.model.Character.__str__?6()
+pyherc.data.model.Character.act?4(model)
+pyherc.data.model.Character.active_effects?7
+pyherc.data.model.Character.add_effect?4(effect)
+pyherc.data.model.Character.add_to_tick?4(cost)
+pyherc.data.model.Character.body?7
+pyherc.data.model.Character.create_action?4(action_parameters)
+pyherc.data.model.Character.drink?4(potion)
+pyherc.data.model.Character.execute_action?4(action_parameters)
+pyherc.data.model.Character.finesse?7
+pyherc.data.model.Character.get_attack?4()
+pyherc.data.model.Character.get_location?4()
+pyherc.data.model.Character.get_max_hp?4()
+pyherc.data.model.Character.get_mimic_item?4()
+pyherc.data.model.Character.hit_points?7
+pyherc.data.model.Character.identify_item?4(item)
+pyherc.data.model.Character.is_move_legal?4(direction, movement_mode)
+pyherc.data.model.Character.is_proficient?4(weapon)
+pyherc.data.model.Character.logged?7
+pyherc.data.model.Character.mind?7
+pyherc.data.model.Character.move?4(direction)
+pyherc.data.model.Character.perform_attack?4(direction)
+pyherc.data.model.Character.raise_event?4(event)
+pyherc.data.model.Character.receive_event?4(event)
+pyherc.data.model.Character.remove_expired_effects?4()
+pyherc.data.model.Character.set_attack?4(attack)
+pyherc.data.model.Character.set_location?4(location)
+pyherc.data.model.Character.set_mimic_item?4(item)
+pyherc.data.model.Character?1(model, action_factory, rng)
+pyherc.data.model.Damage?1(amount = 0, damage_type = 'bludgeoning', magic_bonus = 0)
+pyherc.data.model.Feat?1(name = None, target = None)
+pyherc.data.model.MimicData.get_character?4()
+pyherc.data.model.MimicData.set_character?4(character)
+pyherc.data.model.MimicData?1(character)
+pyherc.data.model.Model.__getstate__?6()
+pyherc.data.model.Model.__setstate__?6(properties)
+pyherc.data.model.Model.get_next_creature?4()
+pyherc.data.model.Model.logged?7
+pyherc.data.model.Model.raise_event?4(event)
+pyherc.data.model.Model?1()
+pyherc.data.model.WeaponProficiency?1(weapon_type = 'simple', weapon_name = None)
+pyherc.data.tiles.CREATURE_BEETLE_1?7
+pyherc.data.tiles.CREATURE_BEETLE_2?7
+pyherc.data.tiles.CREATURE_GARGOYLE?7
+pyherc.data.tiles.CREATURE_RAT_1?7
+pyherc.data.tiles.CREATURE_RAT_2?7
+pyherc.data.tiles.CREATURE_RAT_3?7
+pyherc.data.tiles.CREATURE_RAT_4?7
+pyherc.data.tiles.CREATURE_SPIDER_1?7
+pyherc.data.tiles.FLOOR_BRICK?7
+pyherc.data.tiles.FLOOR_EMPTY?7
+pyherc.data.tiles.FLOOR_ROCK?7
+pyherc.data.tiles.FLOOR_WOOD?7
+pyherc.data.tiles.HUMAN_FIGHTER?7
+pyherc.data.tiles.ITEM_APPLE?7
+pyherc.data.tiles.ITEM_CLUB?7
+pyherc.data.tiles.ITEM_CRYSTAL_SKULL?7
+pyherc.data.tiles.ITEM_DAGGER_1?7
+pyherc.data.tiles.ITEM_DAGGER_2?7
+pyherc.data.tiles.ITEM_GARGOYLE_STATUE?7
+pyherc.data.tiles.ITEM_LIGHT_MACE?7
+pyherc.data.tiles.ITEM_LONGSPEAR?7
+pyherc.data.tiles.ITEM_MACE?7
+pyherc.data.tiles.ITEM_MORNING_STAR_1?7
+pyherc.data.tiles.ITEM_MORNING_STAR_2?7
+pyherc.data.tiles.ITEM_POTION_10?7
+pyherc.data.tiles.ITEM_POTION_11?7
+pyherc.data.tiles.ITEM_POTION_12?7
+pyherc.data.tiles.ITEM_POTION_13?7
+pyherc.data.tiles.ITEM_POTION_14?7
+pyherc.data.tiles.ITEM_POTION_15?7
+pyherc.data.tiles.ITEM_POTION_16?7
+pyherc.data.tiles.ITEM_POTION_17?7
+pyherc.data.tiles.ITEM_POTION_18?7
+pyherc.data.tiles.ITEM_POTION_19?7
+pyherc.data.tiles.ITEM_POTION_1?7
+pyherc.data.tiles.ITEM_POTION_20?7
+pyherc.data.tiles.ITEM_POTION_21?7
+pyherc.data.tiles.ITEM_POTION_22?7
+pyherc.data.tiles.ITEM_POTION_23?7
+pyherc.data.tiles.ITEM_POTION_24?7
+pyherc.data.tiles.ITEM_POTION_25?7
+pyherc.data.tiles.ITEM_POTION_26?7
+pyherc.data.tiles.ITEM_POTION_27?7
+pyherc.data.tiles.ITEM_POTION_28?7
+pyherc.data.tiles.ITEM_POTION_29?7
+pyherc.data.tiles.ITEM_POTION_2?7
+pyherc.data.tiles.ITEM_POTION_30?7
+pyherc.data.tiles.ITEM_POTION_31?7
+pyherc.data.tiles.ITEM_POTION_32?7
+pyherc.data.tiles.ITEM_POTION_33?7
+pyherc.data.tiles.ITEM_POTION_34?7
+pyherc.data.tiles.ITEM_POTION_35?7
+pyherc.data.tiles.ITEM_POTION_36?7
+pyherc.data.tiles.ITEM_POTION_37?7
+pyherc.data.tiles.ITEM_POTION_38?7
+pyherc.data.tiles.ITEM_POTION_39?7
+pyherc.data.tiles.ITEM_POTION_3?7
+pyherc.data.tiles.ITEM_POTION_40?7
+pyherc.data.tiles.ITEM_POTION_41?7
+pyherc.data.tiles.ITEM_POTION_42?7
+pyherc.data.tiles.ITEM_POTION_43?7
+pyherc.data.tiles.ITEM_POTION_44?7
+pyherc.data.tiles.ITEM_POTION_45?7
+pyherc.data.tiles.ITEM_POTION_46?7
+pyherc.data.tiles.ITEM_POTION_47?7
+pyherc.data.tiles.ITEM_POTION_48?7
+pyherc.data.tiles.ITEM_POTION_49?7
+pyherc.data.tiles.ITEM_POTION_4?7
+pyherc.data.tiles.ITEM_POTION_50?7
+pyherc.data.tiles.ITEM_POTION_51?7
+pyherc.data.tiles.ITEM_POTION_52?7
+pyherc.data.tiles.ITEM_POTION_53?7
+pyherc.data.tiles.ITEM_POTION_54?7
+pyherc.data.tiles.ITEM_POTION_55?7
+pyherc.data.tiles.ITEM_POTION_56?7
+pyherc.data.tiles.ITEM_POTION_57?7
+pyherc.data.tiles.ITEM_POTION_58?7
+pyherc.data.tiles.ITEM_POTION_59?7
+pyherc.data.tiles.ITEM_POTION_5?7
+pyherc.data.tiles.ITEM_POTION_60?7
+pyherc.data.tiles.ITEM_POTION_6?7
+pyherc.data.tiles.ITEM_POTION_7?7
+pyherc.data.tiles.ITEM_POTION_8?7
+pyherc.data.tiles.ITEM_POTION_9?7
+pyherc.data.tiles.ITEM_POTION_EMPTY?7
+pyherc.data.tiles.ITEM_SHORTSPEAR?7
+pyherc.data.tiles.ITEM_SHORT_SWORD_1?7
+pyherc.data.tiles.ITEM_SHORT_SWORD_2?7
+pyherc.data.tiles.ITEM_SICKLE?7
+pyherc.data.tiles.ITEM_SPEAR?7
+pyherc.data.tiles.PORTAL_STAIRS_DOWN?7
+pyherc.data.tiles.PORTAL_STAIRS_UP?7
+pyherc.data.tiles.TRAP_MAGIC_1?7
+pyherc.data.tiles.TRAP_MAGIC_2?7
+pyherc.data.tiles.TRAP_MAGIC_3?7
+pyherc.data.tiles.WALL_EMPTY?7
+pyherc.data.tiles.WALL_GROUND?7
+pyherc.data.tiles.WALL_ROCK?7
+pyherc.data.tiles.WALL_ROCK_DECO_1?7
+pyherc.data.tiles.WALL_ROCK_DECO_2?7
+pyherc.debug.data.render?7
+pyherc.debug.handlers.Index.GET?4()
+pyherc.debug.handlers.Index?1()
+pyherc.debug.handlers.Map.GET?4()
+pyherc.debug.handlers.Map?1()
+pyherc.debug.handlers.Player.GET?4()
+pyherc.debug.handlers.Player?1()
+pyherc.debug.handlers.get_debug_server?4()
+pyherc.debug.handlers.get_urls?4()
+pyherc.debug.handlers.initialise_server?4()
+pyherc.debug.handlers.web_loaded?7
+pyherc.generators.creature.CreatureGenerator.generate_creature?4(parameters)
+pyherc.generators.creature.CreatureGenerator.generate_creature_from_table?4(table)
+pyherc.generators.creature.CreatureGenerator?1(model, action_factory, tables, rng)
+pyherc.generators.dungeon.DungeonGenerator.generate_dungeon?4(model)
+pyherc.generators.dungeon.DungeonGenerator.logged?7
+pyherc.generators.dungeon.DungeonGenerator?1(creature_generator, item_generator, level_generator)
+pyherc.generators.item.ItemGenerator.generate_item?4(parameters)
+pyherc.generators.item.ItemGenerator.generate_item_from_table?4(table)
+pyherc.generators.item.ItemGenerator.generate_special_item?4(parameters)
+pyherc.generators.item.ItemGenerator?1(tables)
+pyherc.generators.level.config.LevelGeneratorFactoryConfig.__get_decorators?6()
+pyherc.generators.level.config.LevelGeneratorFactoryConfig.__get_level_partitioners?6()
+pyherc.generators.level.config.LevelGeneratorFactoryConfig.__get_portal_adder_configurations?6()
+pyherc.generators.level.config.LevelGeneratorFactoryConfig.__get_room_generators?6()
+pyherc.generators.level.config.LevelGeneratorFactoryConfig.__get_size?6()
+pyherc.generators.level.config.LevelGeneratorFactoryConfig.decorators?7
+pyherc.generators.level.config.LevelGeneratorFactoryConfig.level_partitioners?7
+pyherc.generators.level.config.LevelGeneratorFactoryConfig.logged?7
+pyherc.generators.level.config.LevelGeneratorFactoryConfig.portal_adder_configurations?7
+pyherc.generators.level.config.LevelGeneratorFactoryConfig.room_generators?7
+pyherc.generators.level.config.LevelGeneratorFactoryConfig.size?7
+pyherc.generators.level.config.LevelGeneratorFactoryConfig?1(room_generators, level_partitioners, decorators, item_adders, creature_adders, portal_adder_configurations, size)
+pyherc.generators.level.creatures.CreatureAdder.__get_level_types?6()
+pyherc.generators.level.creatures.CreatureAdder.add_creatures?4(level)
+pyherc.generators.level.creatures.CreatureAdder.generate_creatures?4(name, amount)
+pyherc.generators.level.creatures.CreatureAdder.level_types?7
+pyherc.generators.level.creatures.CreatureAdder.logged?7
+pyherc.generators.level.creatures.CreatureAdder.place_creatures?4(creatures, creature_list, level)
+pyherc.generators.level.creatures.CreatureAdder?1(creature_generator, configuration, rng)
+pyherc.generators.level.creatures.CreatureAdderConfiguration.add_creature?4(min_amount, max_amount, name, location = None)
+pyherc.generators.level.creatures.CreatureAdderConfiguration.logged?7
+pyherc.generators.level.creatures.CreatureAdderConfiguration?1(level_types)
+pyherc.generators.level.decorator.basic.AggregateDecorator.decorate_level?4(level)
+pyherc.generators.level.decorator.basic.AggregateDecorator?1(configuration)
+pyherc.generators.level.decorator.basic.AggregateDecoratorConfig?1(level_types, decorators)
+pyherc.generators.level.decorator.basic.Decorator.__get_level_types?6()
+pyherc.generators.level.decorator.basic.Decorator.decorate_level?4(level)
+pyherc.generators.level.decorator.basic.Decorator.level_types?7
+pyherc.generators.level.decorator.basic.Decorator?1(configuration)
+pyherc.generators.level.decorator.basic.DecoratorConfig?1(level_types)
+pyherc.generators.level.decorator.basic.ReplacingDecorator.decorate_level?4(level)
+pyherc.generators.level.decorator.basic.ReplacingDecorator?1(configuration)
+pyherc.generators.level.decorator.basic.ReplacingDecoratorConfig?1(level_types, ground_config, wall_config)
+pyherc.generators.level.decorator.basic.WallBuilderDecorator.check_and_replace?4(location, level)
+pyherc.generators.level.decorator.basic.WallBuilderDecorator.decorate_level?4(level)
+pyherc.generators.level.decorator.basic.WallBuilderDecorator?1(configuration)
+pyherc.generators.level.decorator.basic.WallBuilderDecoratorConfig?1(level_types, wall_config, empty_tile)
+pyherc.generators.level.generator.LevelGenerator.__getstate__?6()
+pyherc.generators.level.generator.LevelGenerator.__setstate__?6(data)
+pyherc.generators.level.generator.LevelGenerator.generate_level?4(portal)
+pyherc.generators.level.generator.LevelGenerator.logged?7
+pyherc.generators.level.generator.LevelGenerator?1(action_factory, partitioner, room_generators, decorator, portal_adders, item_adder, creature_adder, random_generator, size)
+pyherc.generators.level.generator.LevelGeneratorFactory.get_generator?4(level_type)
+pyherc.generators.level.generator.LevelGeneratorFactory.get_sub_component?4(level_type, component_list, component_type)
+pyherc.generators.level.generator.LevelGeneratorFactory.get_sub_components?4(level_type, component_list, component_type)
+pyherc.generators.level.generator.LevelGeneratorFactory.logged?7
+pyherc.generators.level.generator.LevelGeneratorFactory?1(action_factory, portal_adder_factory, configuration, random_generator)
+pyherc.generators.level.items.ItemAdder.__get_level_types?6()
+pyherc.generators.level.items.ItemAdder.add_items?4(level)
+pyherc.generators.level.items.ItemAdder.generate_items?4(item_spec)
+pyherc.generators.level.items.ItemAdder.level_types?7
+pyherc.generators.level.items.ItemAdder.logged?7
+pyherc.generators.level.items.ItemAdder.place_items?4(items, level)
+pyherc.generators.level.items.ItemAdder?1(item_generator, configuration, rng)
+pyherc.generators.level.items.ItemAdderConfiguration.add_item?4(min_amount, max_amount, name = None, type = None, location = None)
+pyherc.generators.level.items.ItemAdderConfiguration.logged?7
+pyherc.generators.level.items.ItemAdderConfiguration?1(level_types)
+pyherc.generators.level.partitioners.grid.GridPartitioner.connect_new_section?4(section, location, sections)
+pyherc.generators.level.partitioners.grid.GridPartitioner.logged?7
+pyherc.generators.level.partitioners.grid.GridPartitioner.partition_level?4(level)
+pyherc.generators.level.partitioners.grid.GridPartitioner.split_range_to_equals?4(length, sections)
+pyherc.generators.level.partitioners.grid.GridPartitioner?1(level_types, x_sections, y_sections, random_generator)
+pyherc.generators.level.partitioners.grid.RandomConnector.connect_sections?4(sections, start_section = None)
+pyherc.generators.level.partitioners.grid.RandomConnector.form_path_from_sections?4(start_section, sections)
+pyherc.generators.level.partitioners.grid.RandomConnector.logged?7
+pyherc.generators.level.partitioners.grid.RandomConnector?1(random_generator)
+pyherc.generators.level.partitioners.section.Connection.translate_to_section?4()
+pyherc.generators.level.partitioners.section.Connection?1(connection, location, direction, section)
+pyherc.generators.level.partitioners.section.Section.__get_connected?6()
+pyherc.generators.level.partitioners.section.Section.__get_connections?6()
+pyherc.generators.level.partitioners.section.Section.__get_corners?6()
+pyherc.generators.level.partitioners.section.Section.__get_height?6()
+pyherc.generators.level.partitioners.section.Section.__get_left_edge?6()
+pyherc.generators.level.partitioners.section.Section.__get_neighbours?6()
+pyherc.generators.level.partitioners.section.Section.__get_room_connections?6()
+pyherc.generators.level.partitioners.section.Section.__get_top_edge?6()
+pyherc.generators.level.partitioners.section.Section.__get_width?6()
+pyherc.generators.level.partitioners.section.Section.__set_corners?6(corners)
+pyherc.generators.level.partitioners.section.Section.add_room_connection?4(location, direction)
+pyherc.generators.level.partitioners.section.Section.connect_to?4(section)
+pyherc.generators.level.partitioners.section.Section.connected?7
+pyherc.generators.level.partitioners.section.Section.connections?7
+pyherc.generators.level.partitioners.section.Section.corners?7
+pyherc.generators.level.partitioners.section.Section.find_room_connection?4(section_connection)
+pyherc.generators.level.partitioners.section.Section.get_border?4()
+pyherc.generators.level.partitioners.section.Section.get_common_border?4(another_section)
+pyherc.generators.level.partitioners.section.Section.get_opposing_point?4(location)
+pyherc.generators.level.partitioners.section.Section.has_unconnected_neighbours?4()
+pyherc.generators.level.partitioners.section.Section.height?7
+pyherc.generators.level.partitioners.section.Section.left_edge?7
+pyherc.generators.level.partitioners.section.Section.neighbours?7
+pyherc.generators.level.partitioners.section.Section.room_connections?7
+pyherc.generators.level.partitioners.section.Section.set_floor?4(location, tile, location_type)
+pyherc.generators.level.partitioners.section.Section.set_wall?4(location, tile, location_type)
+pyherc.generators.level.partitioners.section.Section.top_edge?7
+pyherc.generators.level.partitioners.section.Section.unconnected_neighbours?4()
+pyherc.generators.level.partitioners.section.Section.width?7
+pyherc.generators.level.partitioners.section.Section?1(corner1, corner2, level, random_generator)
+pyherc.generators.level.portals.PortalAdder.add_portal?4(level)
+pyherc.generators.level.portals.PortalAdder.logged?7
+pyherc.generators.level.portals.PortalAdder?1(icons, location_type, level_generator, rng)
+pyherc.generators.level.portals.PortalAdderConfiguration.__get_chance?6()
+pyherc.generators.level.portals.PortalAdderConfiguration.__get_icons?6()
+pyherc.generators.level.portals.PortalAdderConfiguration.__get_level_type?6()
+pyherc.generators.level.portals.PortalAdderConfiguration.__get_location_type?6()
+pyherc.generators.level.portals.PortalAdderConfiguration.__get_new_level?6()
+pyherc.generators.level.portals.PortalAdderConfiguration.__is_unique?6()
+pyherc.generators.level.portals.PortalAdderConfiguration.chance?7
+pyherc.generators.level.portals.PortalAdderConfiguration.icons?7
+pyherc.generators.level.portals.PortalAdderConfiguration.is_unique?7
+pyherc.generators.level.portals.PortalAdderConfiguration.level_type?7
+pyherc.generators.level.portals.PortalAdderConfiguration.location_type?7
+pyherc.generators.level.portals.PortalAdderConfiguration.logged?7
+pyherc.generators.level.portals.PortalAdderConfiguration.new_level?7
+pyherc.generators.level.portals.PortalAdderConfiguration?1(icons, level_type, location_type, chance, new_level, unique)
+pyherc.generators.level.portals.PortalAdderFactory.create_portal_adders?4(level_type)
+pyherc.generators.level.portals.PortalAdderFactory.logged?7
+pyherc.generators.level.portals.PortalAdderFactory?1(config, rng)
+pyherc.generators.level.prototiles.FLOOR_CONSTRUCTED?7
+pyherc.generators.level.prototiles.FLOOR_EMPTY?7
+pyherc.generators.level.prototiles.FLOOR_NATURAL?7
+pyherc.generators.level.prototiles.WALL_CONSTRUCTED?7
+pyherc.generators.level.prototiles.WALL_EMPTY?7
+pyherc.generators.level.prototiles.WALL_NATURAL?7
+pyherc.generators.level.room.catacombs.CatacombsGenerator.generate_room?4(section)
+pyherc.generators.level.room.catacombs.CatacombsGenerator.logged?7
+pyherc.generators.level.room.catacombs.CatacombsGenerator?1(floor_tile, empty_tile, level_types, rng)
+pyherc.generators.level.room.corridor.CorridorGenerator.__carve_horizontal?6(start_point, end_point)
+pyherc.generators.level.room.corridor.CorridorGenerator.__carve_horizontal_bend?6(start_point, end_point)
+pyherc.generators.level.room.corridor.CorridorGenerator.__carve_vertical?6(start_point, end_point)
+pyherc.generators.level.room.corridor.CorridorGenerator.__carve_vertical_bend?6(start_point, end_point)
+pyherc.generators.level.room.corridor.CorridorGenerator.generate?4()
+pyherc.generators.level.room.corridor.CorridorGenerator?1(start_point, end_point, tile)
+pyherc.generators.level.room.squareroom.SquareRoomGenerator.add_corridors?4(section)
+pyherc.generators.level.room.squareroom.SquareRoomGenerator.find_room_connection?4(section, section_connection)
+pyherc.generators.level.room.squareroom.SquareRoomGenerator.generate_room?4(section)
+pyherc.generators.level.room.squareroom.SquareRoomGenerator?1(floor_tile, empty_tile, level_types)
+pyherc.generators.level.testlevel.TestLevelGenerator.__getstate__?6()
+pyherc.generators.level.testlevel.TestLevelGenerator.__setstate__?6(data)
+pyherc.generators.level.testlevel.TestLevelGenerator.generate_level?4(portal, model, new_portals = 0, monster_list = None)
+pyherc.generators.level.testlevel.TestLevelGenerator?1(action_factory, creature_generator, item_generator)
+pyherc.generators.utils.BSPSection.__str__?6()
+pyherc.generators.utils.BSPSection.get_area_queue?4()
+pyherc.generators.utils.BSPSection.get_center?4()
+pyherc.generators.utils.BSPSection.split?4(min_size = (6, 6), direction = None)
+pyherc.generators.utils.BSPSection?1(corner1 = None, corner2 = None, parent = None, direction = None)
+pyherc.gui.dialogs.EndScreen.__updateScreen?6()
+pyherc.gui.dialogs.EndScreen.show?4(ending)
+pyherc.gui.dialogs.EndScreen?1(application, screen, surface_manager)
+pyherc.gui.dialogs.Inventory.__update_screen?6()
+pyherc.gui.dialogs.Inventory.show?4(list, multiple_selections = -1)
+pyherc.gui.dialogs.Inventory.sort_items?4(items)
+pyherc.gui.dialogs.Inventory?1(application, screen, surface_manager, character)
+pyherc.gui.images.image_console?7
+pyherc.gui.images.image_end_marble_slate?7
+pyherc.gui.images.image_end_tombstone?7
+pyherc.gui.images.image_inventory_menu?7
+pyherc.gui.images.image_play_area?7
+pyherc.gui.images.image_start_menu?7
+pyherc.gui.options.OptionsMenu.__back_to_start_menu?6()
+pyherc.gui.options.OptionsMenu.set_layout?4()
+pyherc.gui.options.OptionsMenu?1(application, screen, surface_manager, **params)
+pyherc.gui.startmenu.StartMenu.__options?6()
+pyherc.gui.startmenu.StartMenu.__quit_game?6()
+pyherc.gui.startmenu.StartMenu.__start_new_game?6()
+pyherc.gui.startmenu.StartMenu.set_layout?4()
+pyherc.gui.startmenu.StartMenu?1(application, screen, surface_manager, **params)
+pyherc.gui.surfaceManager.SurfaceManager.get_icon?4(id)
+pyherc.gui.surfaceManager.SurfaceManager.get_image?4(id)
+pyherc.gui.surfaceManager.SurfaceManager.load_resources?4(base_path)
+pyherc.gui.surfaceManager.SurfaceManager.load_surface?4(base_path, image_name)
+pyherc.gui.surfaceManager.SurfaceManager.split_surface?4(surface, tile_size)
+pyherc.gui.surfaceManager.SurfaceManager?1()
+pyherc.gui.windows.GameWindow.__full_screen_update?6()
+pyherc.gui.windows.GameWindow.__handle_player_input?6()
+pyherc.gui.windows.GameWindow.__partial_screen_update?6()
+pyherc.gui.windows.GameWindow.__updateDisplay?6()
+pyherc.gui.windows.GameWindow.format_event_history?4()
+pyherc.gui.windows.GameWindow.get_new_events?4()
+pyherc.gui.windows.GameWindow.logged?7
+pyherc.gui.windows.GameWindow.main_loop?4()
+pyherc.gui.windows.GameWindow?1(application, screen, surface_manager)
+pyherc.gui.windows.MainWindow.change_state?4(state)
+pyherc.gui.windows.MainWindow.logged?7
+pyherc.gui.windows.MainWindow?1(application, base_path, surface_manager, screen, theme=None, **params)
+pyherc.gui.windows.StartNewGameWindow.__generate_new_game?6()
+pyherc.gui.windows.StartNewGameWindow.main_loop?4()
+pyherc.gui.windows.StartNewGameWindow?1(application, screen, surface_manager)
+pyherc.main.INSTALL_PATH?7
+pyherc.rules.attack.action.AttackAction.execute?4()
+pyherc.rules.attack.action.AttackAction.logged?7
+pyherc.rules.attack.action.AttackAction?1(attack_type, to_hit, damage, attacker, target)
+pyherc.rules.attack.action.Damage.apply_damage?4(target)
+pyherc.rules.attack.action.Damage.logged?7
+pyherc.rules.attack.action.Damage?1(damage)
+pyherc.rules.attack.action.ToHit.is_hit?4()
+pyherc.rules.attack.action.ToHit.logged?7
+pyherc.rules.attack.action.ToHit?1(attacker, target, random_number_generator = random.Random())
+pyherc.rules.attack.factories.AttackFactory?1(factories)
+pyherc.rules.attack.factories.MeleeCombatFactory.__str__?6()
+pyherc.rules.attack.factories.MeleeCombatFactory.can_handle?4(parameters)
+pyherc.rules.attack.factories.MeleeCombatFactory.get_action?4(parameters)
+pyherc.rules.attack.factories.MeleeCombatFactory.get_target?4(parameters)
+pyherc.rules.attack.factories.MeleeCombatFactory.logged?7
+pyherc.rules.attack.factories.MeleeCombatFactory?1()
+pyherc.rules.attack.factories.UnarmedCombatFactory.__str__?6()
+pyherc.rules.attack.factories.UnarmedCombatFactory.can_handle?4(parameters)
+pyherc.rules.attack.factories.UnarmedCombatFactory.get_action?4(parameters)
+pyherc.rules.attack.factories.UnarmedCombatFactory.get_target?4(parameters)
+pyherc.rules.attack.factories.UnarmedCombatFactory.logged?7
+pyherc.rules.attack.factories.UnarmedCombatFactory?1()
+pyherc.rules.attack.melee.MeleeDamage?1(damage)
+pyherc.rules.attack.melee.MeleeToHit?1(attacker, target, random_number_generator = random.Random())
+pyherc.rules.attack.unarmed.UnarmedDamage.apply_damage?4(target)
+pyherc.rules.attack.unarmed.UnarmedDamage.logged?7
+pyherc.rules.attack.unarmed.UnarmedDamage?1(damage)
+pyherc.rules.attack.unarmed.UnarmedToHit?1(attacker, target, random_number_generator)
+pyherc.rules.character.__logger?9
+pyherc.rules.character.create_character?4(race, kit, model, action_factory, rng)
+pyherc.rules.character.initialise_stat_tables?4()
+pyherc.rules.character.kit_stats?7
+pyherc.rules.character.race_stats?7
+pyherc.rules.consume.action.DrinkAction.execute?4()
+pyherc.rules.consume.action.DrinkAction.is_legal?4()
+pyherc.rules.consume.action.DrinkAction?1(character, potion, effect_factory)
+pyherc.rules.consume.factories.DrinkFactory.get_action?4(parameters)
+pyherc.rules.consume.factories.DrinkFactory?1(effect_factory = None)
+pyherc.rules.effects.damage.Damage.do_trigger?4()
+pyherc.rules.effects.damage.Damage.logged?7
+pyherc.rules.effects.damage.Damage?1(duration, frequency, tick, damage, target)
+pyherc.rules.effects.effect.Effect.do_trigger?4()
+pyherc.rules.effects.effect.Effect.logged?7
+pyherc.rules.effects.effect.Effect.post_trigger?4()
+pyherc.rules.effects.effect.Effect.trigger?4()
+pyherc.rules.effects.effect.Effect?1(duration, frequency, tick)
+pyherc.rules.effects.factory.EffectsFactory.add_effect?4(key, type)
+pyherc.rules.effects.factory.EffectsFactory.create_effect?4(key, **kwargs)
+pyherc.rules.effects.factory.EffectsFactory.logged?7
+pyherc.rules.effects.factory.EffectsFactory?1()
+pyherc.rules.effects.heal.Heal.do_trigger?4()
+pyherc.rules.effects.heal.Heal.logged?7
+pyherc.rules.effects.heal.Heal?1(duration, frequency, tick, healing, target)
+pyherc.rules.effects.poison.Poison.do_trigger?4()
+pyherc.rules.effects.poison.Poison.logged?7
+pyherc.rules.effects.poison.Poison?1(duration, frequency, tick, damage, target)
+pyherc.rules.ending.__logger?9
+pyherc.rules.ending.check_dying?4(model, character, death_params)
+pyherc.rules.ending.check_result?4(model)
+pyherc.rules.ending.get_ending_score?4(model)
+pyherc.rules.factory.SubActionFactory.can_handle?4(parameters)
+pyherc.rules.factory.SubActionFactory.get_action?4(parameters)
+pyherc.rules.factory.SubActionFactory.get_sub_factory?4(parameters)
+pyherc.rules.factory.SubActionFactory?1(effect_factory = None)
+pyherc.rules.items.can_dual_wield?4(model, character, item1, item2)
+pyherc.rules.items.drop?4(model, character, item)
+pyherc.rules.items.is_dual_wieldable?4(model, character, item)
+pyherc.rules.items.logger?7
+pyherc.rules.items.pick_up?4(model, character, item)
+pyherc.rules.items.unwield?4(model, character, item, instant = False)
+pyherc.rules.items.wield?4(model, character, item, dual_wield = False)
+pyherc.rules.los.__logger?9
+pyherc.rules.los.cast_light?4(cx, cy, row, start, end, radius, xx, xy, yx, yy, fov_matrix, level)
+pyherc.rules.los.do_fov?4(x, y, radius, fov_matrix, level)
+pyherc.rules.los.get_fov_matrix?4(model, character, distance = 7)
+pyherc.rules.los.is_blocked?4(loc_x, loc_y, level, character = None)
+pyherc.rules.los.mult?7
+pyherc.rules.magic.__logger?9
+pyherc.rules.magic.cast_effect?4(target, effect, dice = None)
+pyherc.rules.magic.cast_hp_effect?4(target, effect, dice = None)
+pyherc.rules.move.action.MoveAction.execute?4()
+pyherc.rules.move.action.MoveAction.is_legal?4()
+pyherc.rules.move.action.MoveAction?1(character, new_location, new_level = None)
+pyherc.rules.move.action.WalkAction.execute?4()
+pyherc.rules.move.factories.MoveFactory.__getstate__?6()
+pyherc.rules.move.factories.MoveFactory.__setstate__?6(data)
+pyherc.rules.move.factories.MoveFactory?1(factories)
+pyherc.rules.move.factories.WalkFactory.__getstate__?6()
+pyherc.rules.move.factories.WalkFactory.__setstate__?6(data)
+pyherc.rules.move.factories.WalkFactory.__str__?6()
+pyherc.rules.move.factories.WalkFactory.can_handle?4(parameters)
+pyherc.rules.move.factories.WalkFactory.get_action?4(parameters)
+pyherc.rules.move.factories.WalkFactory?1()
+pyherc.rules.moving.__logger?9
+pyherc.rules.moving.deactivate?4(model, character)
+pyherc.rules.public.ActionFactory.get_action?4(parameters)
+pyherc.rules.public.ActionFactory.get_sub_factories?4()
+pyherc.rules.public.ActionFactory.get_sub_factory?4(parameters)
+pyherc.rules.public.ActionFactory.logged?7
+pyherc.rules.public.ActionFactory?1(model, factories)
+pyherc.rules.public.ActionParameters.logged?7
+pyherc.rules.public.ActionParameters?1()
+pyherc.rules.public.AttackParameters.__str__?6()
+pyherc.rules.public.AttackParameters?1(attacker, direction, attack_type, random_number_generator)
+pyherc.rules.public.DrinkParameters.__str__?6()
+pyherc.rules.public.DrinkParameters?1(character, item)
+pyherc.rules.public.MoveParameters.__str__?6()
+pyherc.rules.public.MoveParameters?1(character, direction, movement_mode)
+pyherc.rules.tables.CreatureHandler.characters?4(ch)
+pyherc.rules.tables.CreatureHandler.endElement?4(name)
+pyherc.rules.tables.CreatureHandler.startElement?4(name, attrs)
+pyherc.rules.tables.ItemHandler.characters?4(ch)
+pyherc.rules.tables.ItemHandler.endElement?4(name)
+pyherc.rules.tables.ItemHandler.startElement?4(name, attrs)
+pyherc.rules.tables.Tables.__get_creatures?6()
+pyherc.rules.tables.Tables.__get_items_by_tag?6()
+pyherc.rules.tables.Tables.__get_tag_score?6()
+pyherc.rules.tables.Tables.__getstate__?6()
+pyherc.rules.tables.Tables.__setstate__?6(d)
+pyherc.rules.tables.Tables.construct_lookup_tables?4()
+pyherc.rules.tables.Tables.creatures?7
+pyherc.rules.tables.Tables.items_by_tag?7
+pyherc.rules.tables.Tables.load_tables?4(base_path = None, itemConfig = None, creatureConfig = None)
+pyherc.rules.tables.Tables.randomise_potions?4()
+pyherc.rules.tables.Tables.read_creatures_from_xml?4(document)
+pyherc.rules.tables.Tables.read_items_from_xml?4(document)
+pyherc.rules.tables.Tables.tag_score?7
+pyherc.rules.tables.Tables?1()
+pyherc.rules.utils.__logger?9
+pyherc.rules.utils.get_max_score?4(dice)
+pyherc.rules.utils.roll_dice?4(dice)
+pyherc.test.IntegrationTest.setup2?4()
+pyherc.test.IntegrationTest.setup?4()
+pyherc.test.IntegrationTest?1()
+pyherc.test.StubModel.raise_event?4(event)
+pyherc.test.StubModel?1()
+pyherc.test.StubRandomNumberGenerator.getstate?4()
+pyherc.test.StubRandomNumberGenerator.inject?4(max, numbers)
+pyherc.test.StubRandomNumberGenerator.jumpahead?4(jumps)
+pyherc.test.StubRandomNumberGenerator.random?4()
+pyherc.test.StubRandomNumberGenerator.seed?4(seed = None)
+pyherc.test.StubRandomNumberGenerator.setstate?4(state)
+pyherc.test.StubRandomNumberGenerator?1()
+pyherc.test.integration.detect_base_path?4()
+pyherc.test.integration.test_config.TestMainConfiguration.setup?4()
+pyherc.test.integration.test_config.TestMainConfiguration.test_initialisation?4()
+pyherc.test.integration.test_config.TestMainConfiguration.test_upper_catacombs_generator?4()
+pyherc.test.integration.test_config.TestMainConfiguration.test_upper_crypt_generator?4()
+pyherc.test.integration.test_config.TestMainConfiguration?1()
+pyherc.test.matchers.ContainsCreature._matches?5(item)
+pyherc.test.matchers.ContainsCreature.describe_mismatch?4(item, mismatch_description)
+pyherc.test.matchers.ContainsCreature.describe_to?4(description)
+pyherc.test.matchers.ContainsCreature?1(creature, amount)
+pyherc.test.matchers.ContainsItem._matches?5(item)
+pyherc.test.matchers.ContainsItem.describe_mismatch?4(item, mismatch_description)
+pyherc.test.matchers.ContainsItem.describe_to?4(description)
+pyherc.test.matchers.ContainsItem?1(item, amount)
+pyherc.test.matchers.MapConnectivity.get_all_points?4(open)
+pyherc.test.matchers.MapConnectivity.get_connected_points?4(start, open)
+pyherc.test.matchers.MapConnectivity.is_connected?4(open)
+pyherc.test.matchers.MapConnectivity?1(level)
+pyherc.test.matchers.does_have_item?4(item, amount)
+pyherc.test.matchers.has_creature?4(creature, amount)
+pyherc.test.matchers.located_in_room?4(entity)
+pyherc.test.matchers.map_accessibility_in?4(level, open)
+pyherc.test.test_actionfactory.TestActionFactories.test_get_factory_by_type?4()
+pyherc.test.test_actionfactory.TestActionFactories.test_init_factory_list?4()
+pyherc.test.test_actionfactory.TestActionFactories.test_init_single_factory?4()
+pyherc.test.test_actionfactory.TestActionFactories?1()
+pyherc.test.test_combat.TestMeleeCombat.setup2?4()
+pyherc.test.test_combat.TestMeleeCombat.test_attack_with_weapon?4()
+pyherc.test.test_combat.TestMeleeCombat.test_events_in_unarmed_combat?4()
+pyherc.test.test_combat.TestMeleeCombat.test_get_unarmed_action?4()
+pyherc.test.test_combat.TestMeleeCombat.test_unarmed_attack?4()
+pyherc.test.test_combat.TestMeleeCombat?1()
+pyherc.test.test_connection.TestConnection.test_translating_to_section?4()
+pyherc.test.test_corridor.TestCorridor.setup?4()
+pyherc.test.test_corridor.TestCorridor.test_bent_horizontal?4()
+pyherc.test.test_corridor.TestCorridor.test_bent_vertical?4()
+pyherc.test.test_corridor.TestCorridor.test_straight_horizontal?4()
+pyherc.test.test_corridor.TestCorridor.test_straight_vertical?4()
+pyherc.test.test_corridor.TestCorridor?1()
+pyherc.test.test_creature.TestStatues.test_deactivating_creature?4()
+pyherc.test.test_creature.TestStatues?1()
+pyherc.test.test_creature.test_CreatureWithGenerator.test_is_proficient?4()
+pyherc.test.test_creature.test_CreatureWithGenerator.test_rat_generation?4()
+pyherc.test.test_creature.test_CreatureWithGenerator?1()
+pyherc.test.test_creatureadder.TestCreatureAdder.setup?4()
+pyherc.test.test_creatureadder.TestCreatureAdder.test_adding_creatures?4()
+pyherc.test.test_creatureadder.TestCreatureAdder.test_adding_to_location?4()
+pyherc.test.test_creatureadder.TestCreatureAdder?1()
+pyherc.test.test_dice.TestDice.test_multiple_dice_rolls?4()
+pyherc.test.test_dice.TestDice.test_multiple_dice_rolls_with_bonus?4()
+pyherc.test.test_dice.TestDice.test_multiple_dice_rolls_with_penalty?4()
+pyherc.test.test_dice.TestDice.test_simple_die_rolling?4()
+pyherc.test.test_dice.TestDice?1()
+pyherc.test.test_dungeon.TestDungeon.test_simple_level_creation?4()
+pyherc.test.test_dungeon.TestDungeon.test_stair_linking?4()
+pyherc.test.test_dungeon.TestDungeon?1()
+pyherc.test.test_effects.TestEffects.test_effect_triggered_while_drinking?4()
+pyherc.test.test_generator_utils.TestGeneratorUtils.test_getAreaQueue?4()
+pyherc.test.test_generator_utils.TestGeneratorUtils.test_simpleBSPSplit_horizontal?4()
+pyherc.test.test_generator_utils.TestGeneratorUtils.test_simpleBSPSplit_notEnoughSpace?4()
+pyherc.test.test_generator_utils.TestGeneratorUtils.test_simpleBSPSplit_vertical?4()
+pyherc.test.test_generator_utils.TestGeneratorUtils?1()
+pyherc.test.test_gridpartitioner.TestGridPartitioner.setup?4()
+pyherc.test.test_gridpartitioner.TestGridPartitioner.test_new_sections_are_on_level?4()
+pyherc.test.test_gridpartitioner.TestGridPartitioner.test_partitioned_sections_are_linked?4()
+pyherc.test.test_gridpartitioner.TestGridPartitioner.test_partitioning_returns_sections?4()
+pyherc.test.test_gridpartitioner.TestGridPartitioner.test_sections_have_neighbours?4()
+pyherc.test.test_gridpartitioner.TestGridPartitioner?1()
+pyherc.test.test_gridpartitioner.TestGridPartitionerUtilities.test_splitting_range?4()
+pyherc.test.test_gridpartitioner.TestGridPartitionerUtilities?1()
+pyherc.test.test_gridpartitioner.TestRandomConnector.setup?4()
+pyherc.test.test_gridpartitioner.TestRandomConnector.test_connect_row_of_sections?4()
+pyherc.test.test_gridpartitioner.TestRandomConnector.test_connect_two_sections?4()
+pyherc.test.test_gridpartitioner.TestRandomConnector.test_connecting_2x2_grid?4()
+pyherc.test.test_gridpartitioner.TestRandomConnector?1()
+pyherc.test.test_gui.TestGameWindow.test_formatting_event_history_five_items?4()
+pyherc.test.test_gui.TestGameWindow.test_formatting_event_history_less_than_five_items?4()
+pyherc.test.test_gui.TestGameWindow.test_formatting_event_history_more_than_five_items?4()
+pyherc.test.test_gui.TestGameWindow?1()
+pyherc.test.test_gui.TestInventoryDialog.test_sort_items?4()
+pyherc.test.test_gui.TestInventoryDialog?1()
+pyherc.test.test_item.TestItemAdvanced.setup?4()
+pyherc.test.test_item.TestItemAdvanced.test_appearance_of_generic_named_item?4()
+pyherc.test.test_item.TestItemAdvanced.test_appearance_of_unknown?4()
+pyherc.test.test_item.TestItemAdvanced.test_identifying_item?4()
+pyherc.test.test_item.TestItemAdvanced.test_item_name_decoration?4()
+pyherc.test.test_item.TestItemAdvanced?1()
+pyherc.test.test_item.TestItemCharges.setup?4()
+pyherc.test.test_item.TestItemCharges.test_extremes_with_multiple_charges?4()
+pyherc.test.test_item.TestItemCharges.test_get_single_charge?4()
+pyherc.test.test_item.TestItemCharges.test_multiple_charges?4()
+pyherc.test.test_item.TestItemCharges?1()
+pyherc.test.test_item.TestItemEffects.setup?4()
+pyherc.test.test_item.TestItemEffects.test_get_all_effects?4()
+pyherc.test.test_item.TestItemEffects.test_get_effects_by_trigger?4()
+pyherc.test.test_item.TestItemEffects.test_get_multiple_effects_by_type?4()
+pyherc.test.test_item.TestItemEffects.test_get_nonexistent_effect?4()
+pyherc.test.test_item.TestItemEffects?1()
+pyherc.test.test_item.TestItemWithGenerator.setup2?4()
+pyherc.test.test_item.TestItemWithGenerator.test_can_dual_wield?4()
+pyherc.test.test_item.TestItemWithGenerator.test_create_weapon?4()
+pyherc.test.test_item.TestItemWithGenerator.test_crystal_skull_generation?4()
+pyherc.test.test_item.TestItemWithGenerator.test_dual_wieldable?4()
+pyherc.test.test_item.TestItemWithGenerator.test_dual_wieldable_apples?4()
+pyherc.test.test_item.TestItemWithGenerator.test_dual_wielding?4()
+pyherc.test.test_item.TestItemWithGenerator.test_dual_wielding_two_handed_weapons?4()
+pyherc.test.test_item.TestItemWithGenerator.test_main_type_basic?4()
+pyherc.test.test_item.TestItemWithGenerator.test_potion_creation?4()
+pyherc.test.test_item.TestItemWithGenerator.test_tags?4()
+pyherc.test.test_item.TestItemWithGenerator.test_unwielding_item?4()
+pyherc.test.test_item.TestItemWithGenerator.test_wield_weapon?4()
+pyherc.test.test_item.TestItemWithGenerator?1()
+pyherc.test.test_item.TestItemsInLevel.setup?4()
+pyherc.test.test_item.TestItemsInLevel.test_dropping_item?4()
+pyherc.test.test_item.TestItemsInLevel.test_dropping_wielded_item?4()
+pyherc.test.test_item.TestItemsInLevel.test_finding_items?4()
+pyherc.test.test_item.TestItemsInLevel.test_picking_up?4()
+pyherc.test.test_item.TestItemsInLevel.test_picking_up_not_correct_location?4()
+pyherc.test.test_item.TestItemsInLevel?1()
+pyherc.test.test_itemadder.TestItemAdder.setup?4()
+pyherc.test.test_itemadder.TestItemAdder.test_adding_items?4()
+pyherc.test.test_itemadder.TestItemAdder.test_adding_to_location?4()
+pyherc.test.test_itemadder.TestItemAdder?1()
+pyherc.test.test_level.TestLevel.setup?4()
+pyherc.test.test_level.TestLevel.test_get_locations_by_type_does_not_report_all_locations?4()
+pyherc.test.test_level.TestLevel.test_get_rooms?4()
+pyherc.test.test_level.TestLevel.test_get_size?4()
+pyherc.test.test_level.TestLevel?1()
+pyherc.test.test_leveldecorator.TestAggregateDecorator.setup?4()
+pyherc.test.test_leveldecorator.TestAggregateDecorator.test_subdecorators_are_called?4()
+pyherc.test.test_leveldecorator.TestAggregateDecorator?1()
+pyherc.test.test_leveldecorator.TestLevelDecorator.setup?4()
+pyherc.test.test_leveldecorator.TestLevelDecorator.test_replacing_ground?4()
+pyherc.test.test_leveldecorator.TestLevelDecorator.test_replacing_walls?4()
+pyherc.test.test_leveldecorator.TestLevelDecorator?1()
+pyherc.test.test_leveldecorator.TestWallBuilderDecorator.setup?4()
+pyherc.test.test_leveldecorator.TestWallBuilderDecorator.test_building_walls?4()
+pyherc.test.test_leveldecorator.TestWallBuilderDecorator?1()
+pyherc.test.test_levelgenerator.TestFactorySupportForLevelTypes.setup?4()
+pyherc.test.test_levelgenerator.TestFactorySupportForLevelTypes.test_creature_adder_type?4()
+pyherc.test.test_levelgenerator.TestFactorySupportForLevelTypes.test_decorator_type?4()
+pyherc.test.test_levelgenerator.TestFactorySupportForLevelTypes.test_item_adder_type?4()
+pyherc.test.test_levelgenerator.TestFactorySupportForLevelTypes.test_partitioner_type?4()
+pyherc.test.test_levelgenerator.TestFactorySupportForLevelTypes.test_room_generator_type?4()
+pyherc.test.test_levelgenerator.TestFactorySupportForLevelTypes?1()
+pyherc.test.test_levelgenerator.TestLevelGenerator.setup?4()
+pyherc.test.test_levelgenerator.TestLevelGenerator.test_catacombs_generation?4()
+pyherc.test.test_levelgenerator.TestLevelGenerator.test_generation_creates_connected_level?4()
+pyherc.test.test_levelgenerator.TestLevelGenerator.test_level_generation_steps?4()
+pyherc.test.test_levelgenerator.TestLevelGenerator?1()
+pyherc.test.test_levelgenerator.TestLevelGeneratorFactoryConfiguration.test_level_type_is_checked?4()
+pyherc.test.test_levelgenerator.TestLevelGeneratorFactoryConfiguration.test_passing_partitioner_to_generator?4()
+pyherc.test.test_levelgenerator.TestLevelGeneratorFactoryConfiguration?1()
+pyherc.test.test_levelgenerator.TestLeveltGeneratorFactory.setup?4()
+pyherc.test.test_levelgenerator.TestLeveltGeneratorFactory.test_generating_level_generator?4()
+pyherc.test.test_levelgenerator.TestLeveltGeneratorFactory?1()
+pyherc.test.test_magic.TestMagic.test_damage_effect?4()
+pyherc.test.test_magic.TestMagic.test_healing_does_not_heal_over_max_hp?4()
+pyherc.test.test_magic.TestMagic.test_healing_effect?4()
+pyherc.test.test_magic.TestMagic?1()
+pyherc.test.test_matchers.TestLevelConnectivity.setup?4()
+pyherc.test.test_matchers.TestLevelConnectivity.test_connected_level?4()
+pyherc.test.test_matchers.TestLevelConnectivity.test_that_all_points_are_found?4()
+pyherc.test.test_matchers.TestLevelConnectivity.test_that_convoluted_case_works?4()
+pyherc.test.test_matchers.TestLevelConnectivity.test_that_open_corners_work?4()
+pyherc.test.test_matchers.TestLevelConnectivity.test_unconnected_level?4()
+pyherc.test.test_matchers.TestLevelConnectivity?1()
+pyherc.test.test_moving.TestMoving.setup2?4()
+pyherc.test.test_moving.TestMoving.test_entering_non_existent_portal?4()
+pyherc.test.test_moving.TestMoving.test_entering_portal?4()
+pyherc.test.test_moving.TestMoving.test_entering_portal_adds_character_to_creatures?4()
+pyherc.test.test_moving.TestMoving.test_entering_portal_removes_character_from_old_level?4()
+pyherc.test.test_moving.TestMoving.test_moving_uses_time?4()
+pyherc.test.test_moving.TestMoving.test_simple_move?4()
+pyherc.test.test_moving.TestMoving.test_walking_to_walls?4()
+pyherc.test.test_moving.TestMoving?1()
+pyherc.test.test_poison.TestCharacter.test_adding_effect?4()
+pyherc.test.test_poison.TestCharacter?1()
+pyherc.test.test_poison.TestEffectsFactory.test_creating_poison?4()
+pyherc.test.test_poison.TestEffectsFactory.test_creating_poison_with_paramarray?4()
+pyherc.test.test_poison.TestEffectsFactory?1()
+pyherc.test.test_poison.TestPoison.test_cause_damage?4()
+pyherc.test.test_poison.TestPoison?1()
+pyherc.test.test_portaladder.TestPortalAdder.setup?4()
+pyherc.test.test_portaladder.TestPortalAdder.test_add_stairs_to_room?4()
+pyherc.test.test_portaladder.TestPortalAdder.test_level_generator_is_created?4()
+pyherc.test.test_portaladder.TestPortalAdder.test_portal_has_icons?4()
+pyherc.test.test_portaladder.TestPortalAdder?1()
+pyherc.test.test_portaladder.TestPortalAdderFactory.mock_get_generator?4(*args, **kwargs)
+pyherc.test.test_portaladder.TestPortalAdderFactory.setup?4()
+pyherc.test.test_portaladder.TestPortalAdderFactory.test_create_portal_adder?4()
+pyherc.test.test_portaladder.TestPortalAdderFactory.test_handling_no_matches?4()
+pyherc.test.test_portaladder.TestPortalAdderFactory.test_level_generator_is_created?4()
+pyherc.test.test_portaladder.TestPortalAdderFactory.test_level_type_is_respected?4()
+pyherc.test.test_portaladder.TestPortalAdderFactory.test_multiple_adders_can_be_returned?4()
+pyherc.test.test_portaladder.TestPortalAdderFactory.test_removing_unique_portal_adders?4()
+pyherc.test.test_portaladder.TestPortalAdderFactory?1()
+pyherc.test.test_potions.TestPotions.setup?4()
+pyherc.test.test_potions.TestPotions.test_drinking_empty_potion?4()
+pyherc.test.test_potions.TestPotions.test_drinking_healing_potion?4()
+pyherc.test.test_potions.TestPotions.test_drinking_non_potion?4()
+pyherc.test.test_potions.TestPotions.test_drinking_potion_does_not_discard_it?4()
+pyherc.test.test_potions.TestPotions.test_drinking_potion_empty_discards_it?4()
+pyherc.test.test_potions.TestPotions.test_drinking_potion_identifies_it?4()
+pyherc.test.test_potions.TestPotions?1()
+pyherc.test.test_section.TestSectionCalculations.setup?4()
+pyherc.test.test_section.TestSectionCalculations.test_border?4()
+pyherc.test.test_section.TestSectionCalculations.test_height?4()
+pyherc.test.test_section.TestSectionCalculations.test_left_edge?4()
+pyherc.test.test_section.TestSectionCalculations.test_top_edge?4()
+pyherc.test.test_section.TestSectionCalculations.test_width?4()
+pyherc.test.test_section.TestSectionCalculations?1()
+pyherc.test.test_section.TestSectionConnections.setup?4()
+pyherc.test.test_section.TestSectionConnections.test_adding_room_connections?4()
+pyherc.test.test_section.TestSectionConnections.test_connected_neighbours_are_not_reported?4()
+pyherc.test.test_section.TestSectionConnections.test_finding_room_connection?4()
+pyherc.test.test_section.TestSectionConnections.test_get_common_border?4()
+pyherc.test.test_section.TestSectionConnections.test_get_opposing_point?4()
+pyherc.test.test_section.TestSectionConnections.test_section_connection_points?4()
+pyherc.test.test_section.TestSectionConnections.test_section_connections_have_direction?4()
+pyherc.test.test_section.TestSectionConnections.test_unconnected_neighbours?4()
+pyherc.test.test_section.TestSectionConnections?1()
+pyherc.test.test_section.TestSectionLevelAccess.setup?4()
+pyherc.test.test_section.TestSectionLevelAccess.test_setting_floor?4()
+pyherc.test.test_section.TestSectionLevelAccess.test_setting_location_type?4()
+pyherc.test.test_section.TestSectionLevelAccess.test_setting_wall?4()
+pyherc.test.test_section.TestSectionLevelAccess?1()
+pyherc.test.test_section.TestSectionLevelAccessWithOffset.setup?4()
+pyherc.test.test_section.TestSectionLevelAccessWithOffset.test_setting_floor_with_offset?4()
+pyherc.test.test_section.TestSectionLevelAccessWithOffset.test_setting_wall_with_offset?4()
+pyherc.test.test_section.TestSectionLevelAccessWithOffset?1()
+pyherc.test.test_squareroom.TestSquareRoom.setup?4()
+pyherc.test.test_squareroom.TestSquareRoom.test_generate_simple_room?4()
+pyherc.test.test_squareroom.TestSquareRoom.test_room_connections_are_placed?4()
+pyherc.test.test_squareroom.TestSquareRoom?1()
+pyherc.test.test_tables.test_Tables.test_randomize_potions?4()
+pyherc.test.test_tables.test_Tables.test_reading_more_complex_item?4()
+pyherc.test.test_tables.test_Tables.test_reading_potion_from_config?4()
+pyherc.test.test_tables.test_Tables.test_reading_simple_item_config?4()
+pyherc.test.test_tables.test_Tables.test_reading_two_items_from_config?4()
+pyherc.test.test_tables.test_Tables.test_reading_weapon_from_config?4()
+pyherc.test.test_tables.test_Tables?1()
+pyherc.test.test_time.TestEffectsAndTime.setup?4()
+pyherc.test.test_time.TestEffectsAndTime.test_effects_duration_goes_down?4()
+pyherc.test.test_time.TestEffectsAndTime.test_effects_will_stay_in_sync?4()
+pyherc.test.test_time.TestEffectsAndTime.test_expired_effects_are_removed?4()
+pyherc.test.test_time.TestEffectsAndTime.test_tick_will_be_reset?4()
+pyherc.test.test_time.TestEffectsAndTime.test_trigger_effect_on_time?4()
+pyherc.test.test_time.TestEffectsAndTime?1()
+pyherc.test.test_time.TestTime.setup?4()
+pyherc.test.test_time.TestTime.test_get_next_positive_tick?4()
+pyherc.test.test_time.TestTime.test_get_next_zero_tick?4()
+pyherc.test.test_time.TestTime?1()
