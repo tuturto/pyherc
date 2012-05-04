@@ -26,8 +26,8 @@ These levels are not used in game, their function is to help in testing
 import logging
 import random
 import pyherc.generators.utils
-from pyherc.data.dungeon import Level
-from pyherc.data.dungeon import Portal
+from pyherc.data import Level
+from pyherc.data import Portal
 from pyherc.data import tiles
 
 class TestLevelGenerator:

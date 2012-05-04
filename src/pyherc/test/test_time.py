@@ -25,8 +25,8 @@ Module for testing time related functions
 import pyherc
 from pyherc.data.model import Model
 from pyherc.data.model import Character
-from pyherc.data.dungeon import Dungeon
-from pyherc.data.dungeon import Level
+from pyherc.data import Dungeon
+from pyherc.data import Level
 from pyherc.rules.effects import Effect
 
 from hamcrest import * #pylint: disable=W0401

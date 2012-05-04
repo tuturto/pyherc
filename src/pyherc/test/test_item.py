@@ -30,6 +30,7 @@ import pyherc.rules.items
 import pyherc.rules.tables
 from random import Random
 from pyherc.test import IntegrationTest
+from pyherc.data import Level
 from pyherc.data.item import Item
 from pyherc.data.item import ItemEffectData
 from mockito import mock
@@ -57,9 +58,9 @@ class TestItemWithGenerator(IntegrationTest):
         self.item.location = ()
         self.item.icon = None
 
-        self.level = pyherc.data.dungeon.Level([20, 20],
-                                                pyherc.data.tiles.FLOOR_ROCK,
-                                                pyherc.data.tiles.WALL_EMPTY)
+        self.level = Level([20, 20],
+                        pyherc.data.tiles.FLOOR_ROCK,
+                        pyherc.data.tiles.WALL_EMPTY)
 
         self.character = pyherc.data.model.Character(self.model,
                                                      self.action_factory,
@@ -275,9 +276,9 @@ class TestItemsInLevel:
         self.item.location = ()
         self.item.icon = None
 
-        self.level = pyherc.data.dungeon.Level([20, 20],
-                                                pyherc.data.tiles.FLOOR_ROCK,
-                                                pyherc.data.tiles.WALL_EMPTY)
+        self.level = Level([20, 20],
+                        pyherc.data.tiles.FLOOR_ROCK,
+                        pyherc.data.tiles.WALL_EMPTY)
 
         self.character = pyherc.data.model.Character(mock(),
                                                      mock(),

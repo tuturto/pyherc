@@ -26,8 +26,8 @@ from mockito import mock, verify, when, any
 from hamcrest import * #pylint: disable=W0401
 
 import pyherc
-from pyherc.data.dungeon import Dungeon
-from pyherc.data.dungeon import Portal
+from pyherc.data import Dungeon
+from pyherc.data import Portal
 from pyherc.data.model import Character
 from pyherc.generators.level.testlevel import TestLevelGenerator
 from pyherc.test import IntegrationTest

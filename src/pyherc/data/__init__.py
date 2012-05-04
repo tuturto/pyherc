@@ -22,9 +22,9 @@
 Module for data related modules and classes that represent state of the game
 """
 
-from .dungeon import Level
+from .level import Level
 from .dungeon import Dungeon
-from .dungeon import Portal
+from .portal import Portal
 
 from .model import Model
 from .model import Character

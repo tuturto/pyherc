@@ -27,8 +27,8 @@ import random
 import pyherc.generators.item
 import pyherc.generators.creature
 import pyherc.generators.utils
-from pyherc.data.dungeon import Dungeon
-from pyherc.data.dungeon import Portal
+from pyherc.data import Dungeon
+from pyherc.data import Portal
 from pyherc.data import tiles
 from pyherc.aspects import Logged
 

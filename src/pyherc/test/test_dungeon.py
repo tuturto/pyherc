@@ -22,8 +22,8 @@
 Module for testing dungeon
 """
 
-from pyherc.data.dungeon import Level
-from pyherc.data.dungeon import Portal
+from pyherc.data import Level
+from pyherc.data import Portal
 from pyherc.data import tiles
 
 class TestDungeon:
