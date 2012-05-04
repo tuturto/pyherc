@@ -488,11 +488,11 @@ class TestItemEffects:
 
         self.item = Item()
 
-        self.effect1 = ItemEffectData('heal', mock(), 1)
-        self.effect2 = ItemEffectData('bless', mock(), 2)
+        self.effect1 = ItemEffectData('on drink', 'heal', mock(), 1)
+        self.effect2 = ItemEffectData('on break', 'bless', mock(), 2)
 
-        self.item.add_effect('on drink', self.effect1)
-        self.item.add_effect('on break', self.effect2)
+        self.item.add_effect(self.effect1)
+        self.item.add_effect(self.effect2)
 
     def test_get_all_effects(self):
         """
@@ -528,8 +528,8 @@ class TestItemEffects:
         Test that multiple effects can be returned by type
         """
 
-        effect3 = ItemEffectData('cure', mock(), 1)
-        self.item.add_effect('on break', effect3)
+        effect3 = ItemEffectData('on break', 'cure', mock(), 1)
+        self.item.add_effect(effect3)
 
         effects = self.item.get_effects('on break')
         assert(self.effect2 in effects)
@@ -554,9 +554,9 @@ class TestItemCharges:
 
         self.item = Item()
 
-        self.effect1 = ItemEffectData(mock(), mock(), 1)
+        self.effect1 = ItemEffectData('on drink', mock(), mock(), 1)
 
-        self.item.add_effect('on drink', self.effect1)
+        self.item.add_effect(self.effect1)
 
     def test_get_single_charge(self):
         """
@@ -571,8 +571,8 @@ class TestItemCharges:
         """
         Test that amount of charges can be retrieved with multiple effects
         """
-        effect2 = ItemEffectData('fire', mock(), 2)
-        self.item.add_effect('on kick', effect2)
+        effect2 = ItemEffectData('on kick', 'fire', mock(), 2)
+        self.item.add_effect(effect2)
 
         charges = self.item.charges_left
 
@@ -584,8 +584,8 @@ class TestItemCharges:
         """
         Test that smallest and biggest amount of charges left can be retrieved
         """
-        effect2 = ItemEffectData('poison', mock(), 2)
-        self.item.add_effect('on kick', effect2)
+        effect2 = ItemEffectData('on kick', 'poison', mock(), 2)
+        self.item.add_effect(effect2)
 
         minimum_charges = self.item.minimum_charges_left
         assert(minimum_charges == 1)

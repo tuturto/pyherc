@@ -78,10 +78,10 @@ class TestPotions():
                       target = self.character)
         when(self.effect_factory).create_effect(any(), any()).thenReturn(effect)
 
-        self.potion.add_effect(trigger = 'on drink',
-                               effect = ItemEffectData(effect = 'heal',
-                                                       parameters = None,
-                                                       charges = 1))
+        self.potion.add_effect(ItemEffectData(trigger = 'on drink',
+                                              effect = 'heal',
+                                              parameters = None,
+                                              charges = 1))
 
         self.character.inventory.append(self.potion)
 
@@ -126,8 +126,8 @@ class TestPotions():
         """
         self.potion = Item()
         self.potion.name = 'healing potion'
-        self.potion.add_effect(trigger = 'on drink',
-                               effect = ItemEffectData(effect = 'heal',
+        self.potion.add_effect(effect = ItemEffectData(trigger = 'on drink',
+                                                       effect = 'heal',
                                                        parameters = None,
                                                        charges = 5))
         self.character.inventory.append(self.potion)

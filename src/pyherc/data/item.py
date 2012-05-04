@@ -80,21 +80,20 @@ class Item(object):
 
         return name
 
-    def add_effect(self, trigger, effect):
+    def add_effect(self, effect):
         """
         Adds an effect to an item
 
         Args:
-            trigger: trigger for the effect
             effect: effect to add
         """
         if self.effects == None:
             self.effects = {}
 
-        if self.effects.has_key(trigger):
-            self.effects[trigger].append(effect)
+        if self.effects.has_key(effect.trigger):
+            self.effects[effect.trigger].append(effect)
         else:
-            self.effects[trigger] = [effect]
+            self.effects[effect.trigger] = [effect]
 
     def get_effects(self, effect_type = None):
         """
@@ -201,8 +200,9 @@ class ItemEffectData:
     """
     Represents magical effect on an item
     """
-    def __init__(self, effect, parameters, charges):
+    def __init__(self, trigger, effect, parameters, charges):
 
+        self.trigger = trigger
         self.effect = effect
         self.parameters = parameters
         self.charges = charges
