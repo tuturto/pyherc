@@ -54,8 +54,7 @@ class DrinkAction():
             if len(drink_effects) > 0:
                 for effect_spec in drink_effects:
                     effect = self.effect_factory.create_effect(
-                                                    effect_spec.effect,
-                                                    effect_spec.parameters)
+                                                    effect_spec.effect)
                     effect.trigger()
                     effect_spec.charges = effect_spec.charges - 1
 

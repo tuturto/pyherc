@@ -70,7 +70,7 @@ class TestEffectsFactory():
         """
         Test that poison effect can be created
         """
-        factory = EffectsFactory()
+        factory = EffectsFactory(mock())
         factory.add_effect('poison', Poison)
 
         character = mock(Character)

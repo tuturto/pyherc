@@ -28,6 +28,7 @@ from pyherc.rules.effects import Heal
 from pyherc.rules.effects import Poison
 from pyherc.rules.effects import Effect
 from pyherc.rules.effects import EffectsFactory
+from pyherc.rules.effects import EffectsConfiguration
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.consume.factories import DrinkFactory
 from random import Random
@@ -51,7 +52,7 @@ class TestEffects(object):
 
         effect_spec.charges = 2
         when(potion).get_effects('on drink').thenReturn([effect_spec])
-        when(effect_factory).create_effect(any(), any()).thenReturn(effect)
+        when(effect_factory).create_effect(any()).thenReturn(effect)
 
         model = mock()
         action_factory = ActionFactory(model = model,
@@ -80,14 +81,15 @@ class TestEffects(object):
         effect_factory = EffectsFactory(effects_configuration)
 
         potion = Item()
-        item.add_effect(ItemEffect(trigger = 'on drink',
-                                   effect = 'major heal',
-                                   charges = 2))
+        potion.add_effect(ItemEffectData(trigger = 'on drink',
+                                         effect = 'major heal',
+                                         parameters = None,
+                                         charges = 2))
 
-        action_factory = ActionFactory(model = model,
+        action_factory = ActionFactory(model = mock(),
                                        factories = [DrinkFactory(effect_factory)])
 
-        character = Character(model = model,
+        character = Character(model = mock(),
                               action_factory = action_factory,
                               rng = Random())
         character.hit_points = 1

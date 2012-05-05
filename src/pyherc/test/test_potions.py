@@ -76,7 +76,7 @@ class TestPotions():
                       tick = 0,
                       healing = 5,
                       target = self.character)
-        when(self.effect_factory).create_effect(any(), any()).thenReturn(effect)
+        when(self.effect_factory).create_effect(any()).thenReturn(effect)
 
         self.potion.add_effect(ItemEffectData(trigger = 'on drink',
                                               effect = 'heal',

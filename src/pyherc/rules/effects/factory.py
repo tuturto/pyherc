@@ -22,6 +22,7 @@
 Module for Factory for creating effects
 """
 from pyherc.aspects import Logged
+import copy
 
 class EffectsFactory(object):
     """
@@ -30,12 +31,16 @@ class EffectsFactory(object):
     logged = Logged()
 
     @logged
-    def __init__(self):
+    def __init__(self, config):
         """
         Default constructor
+
+        Args:
+            config: configuration parameters for effects
         """
         super(EffectsFactory, self).__init__()
         self.effects = {}
+        self.config = config
 
     @logged
     def add_effect(self, key, type):
@@ -58,4 +63,14 @@ class EffectsFactory(object):
             kwargs: keyword arguments, passed to the effect
         """
         type = self.effects[key]
-        return type(**kwargs)
+
+        params = copy.deepcopy(self.config.get_configuration(key))
+
+        if params != None:
+            for kw_key in kwargs:
+                params.pop(kw_key)
+                params[kw_key] = kwargs[kw_key]
+        else:
+            params = kwargs
+
+        return type(**params)
