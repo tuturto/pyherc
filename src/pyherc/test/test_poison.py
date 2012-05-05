@@ -75,12 +75,14 @@ class TestEffectsFactory():
 
         character = mock(Character)
 
+        effect_spec = {'duration' : 150,
+                        'frequency' : 30,
+                        'tick'  : 10,
+                        'damage' : 5,
+                        'target' : character}
+
         effect = factory.create_effect('poison',
-                                    duration = 150,
-                                    frequency = 30,
-                                    tick  = 10,
-                                    damage = 5,
-                                    target = character)
+                                    **effect_spec)
 
         assert_that(effect.duration, is_(equal_to(150)))
         assert_that(effect.frequency, is_(equal_to(30)))

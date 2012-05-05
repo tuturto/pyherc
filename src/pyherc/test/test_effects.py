@@ -37,8 +37,8 @@ from hamcrest import * #pylint: disable=W0401
 
 class TestEffects(object):
     """
+    Tests for effects in general
     """
-    pass
 
     def test_effect_triggered_while_drinking(self):
         """
@@ -63,3 +63,35 @@ class TestEffects(object):
         character.drink(potion)
 
         verify(effect).trigger()
+
+    def test_creating_effect(self):
+        """
+        Test that effect can be created
+        """
+        effects_configuration = EffectsConfiguration()
+
+        effects_configuration.add_configuration(
+                            'major heal',
+                            {'duration': 10,
+                            'frequency': 2,
+                            'tick': 2,
+                            'healing': 4})
+
+        effect_factory = EffectsFactory(effects_configuration)
+
+        potion = Item()
+        item.add_effect(ItemEffect(trigger = 'on drink',
+                                   effect = 'major heal',
+                                   charges = 2))
+
+        action_factory = ActionFactory(model = model,
+                                       factories = [DrinkFactory(effect_factory)])
+
+        character = Character(model = model,
+                              action_factory = action_factory,
+                              rng = Random())
+        character.hit_points = 1
+        character.max_hp = 10
+        character.drink(potion)
+
+        assert_that(character.hit_points, is_(equal_to(10)))
