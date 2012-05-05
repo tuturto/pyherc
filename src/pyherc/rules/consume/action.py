@@ -22,6 +22,7 @@
 Module defining classes related to DrinkAction
 """
 import logging
+import copy
 import pyherc.rules.magic
 
 class DrinkAction(object):
@@ -54,7 +55,8 @@ class DrinkAction(object):
             if len(drink_effects) > 0:
                 for effect_spec in drink_effects:
                     effect = self.effect_factory.create_effect(
-                                                    effect_spec.effect)
+                                                    effect_spec.effect,
+                                                    target = self.character)
                     effect.trigger()
                     effect_spec.charges = effect_spec.charges - 1
 

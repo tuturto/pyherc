@@ -206,3 +206,10 @@ class ItemEffectData(object):
         self.effect = effect
         self.parameters = parameters
         self.charges = charges
+
+    def __str__(self):
+        """
+        String representation of this object
+        """
+        return "trigger: {0}, effect: {1}, parameters: {2}, charges: {3}".format(
+            self.trigger, self.effect, self.parameters, self.charges)

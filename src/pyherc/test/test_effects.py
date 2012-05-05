@@ -79,6 +79,7 @@ class TestEffects(object):
                             'healing': 4})
 
         effect_factory = EffectsFactory(effects_configuration)
+        effect_factory.add_effect('major heal', Heal)
 
         potion = Item()
         potion.add_effect(ItemEffectData(trigger = 'on drink',
