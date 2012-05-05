@@ -183,7 +183,7 @@ class Item(object):
         """
         return self.tags
 
-class WeaponData:
+class WeaponData(object):
     """
     Class representing weapon data of items
     """
@@ -196,7 +196,7 @@ class WeaponData:
         self.critical_damage = critical_damage
         self.weapon_type = weapon_type
 
-class ItemEffectData:
+class ItemEffectData(object):
     """
     Represents magical effect on an item
     """

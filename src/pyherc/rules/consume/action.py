@@ -24,7 +24,7 @@ Module defining classes related to DrinkAction
 import logging
 import pyherc.rules.magic
 
-class DrinkAction():
+class DrinkAction(object):
     """
     Action for drinking
     """

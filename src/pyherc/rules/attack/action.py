@@ -26,7 +26,7 @@ import random
 import logging
 from pyherc.aspects import Logged
 
-class AttackAction():
+class AttackAction(object):
     """
     Action for attacking
     """

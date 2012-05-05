@@ -34,7 +34,7 @@ import types
 import random
 from pyherc.aspects import Logged
 
-class ActionFactory():
+class ActionFactory(object):
     """
     Object for creating actions
     """
@@ -97,7 +97,7 @@ class ActionFactory():
         else:
             return None
 
-class ActionParameters():
+class ActionParameters(object):
     """
     Object for controlling action creation
     """

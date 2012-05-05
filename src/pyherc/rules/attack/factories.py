@@ -51,7 +51,7 @@ class AttackFactory(SubActionFactory):
             self.factories.append(factories)
 
 
-class UnarmedCombatFactory():
+class UnarmedCombatFactory(object):
     """
     Factory for producing unarmed combat actions
     """
@@ -145,7 +145,7 @@ class UnarmedCombatFactory():
 
         return target
 
-class MeleeCombatFactory():
+class MeleeCombatFactory(object):
     """
     Factory for producing melee combat actions
     """

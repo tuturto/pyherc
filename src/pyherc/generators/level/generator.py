@@ -26,7 +26,7 @@ import logging
 from pyherc.data import Level, Portal
 from pyherc.aspects import Logged
 
-class LevelGeneratorFactory:
+class LevelGeneratorFactory(object):
     """
     Class used to contruct different kinds of level generators
     """
@@ -154,7 +154,7 @@ class LevelGeneratorFactory:
 
         return component
 
-class LevelGenerator:
+class LevelGenerator(object):
     """
     Class used to generate levels
     """

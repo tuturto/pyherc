@@ -28,7 +28,7 @@ from pyherc.data.item import Item
 from pyherc.data.item import WeaponData
 from pyherc.data.item import ItemEffectData
 
-class ItemGenerator:
+class ItemGenerator(object):
     """
     Class used to generate items
     """

@@ -32,7 +32,7 @@ from pyherc.data import Portal
 from pyherc.data import tiles
 from pyherc.aspects import Logged
 
-class DungeonGenerator:
+class DungeonGenerator(object):
     """
     This class is used to generate dungeon
     """

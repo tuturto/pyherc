@@ -29,7 +29,7 @@ import logging
 import random
 import pyherc.ai.simple
 
-class CreatureGenerator:
+class CreatureGenerator(object):
     """
     Class used to generate creatures
     """

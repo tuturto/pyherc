@@ -30,7 +30,7 @@ from pyherc.data import Level
 from pyherc.data import Portal
 from pyherc.data import tiles
 
-class TestLevelGenerator:
+class TestLevelGenerator(object):
     """
     Generates a simple test level
     """

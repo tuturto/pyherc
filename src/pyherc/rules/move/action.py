@@ -24,7 +24,7 @@ Module defining classes related to MoveAttack
 import logging
 import pyherc.data.tiles
 
-class MoveAction():
+class MoveAction(object):
     """
     Action for moving
     """

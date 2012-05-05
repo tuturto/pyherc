@@ -34,7 +34,7 @@ import random
 from pyherc.aspects import Logged
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 
-class Model:
+class Model(object):
     """
     Represents playing world
     """
@@ -483,7 +483,7 @@ class Character(object):
     mind = property(__get_mind, __set_mind)
     active_effects = property(__get_active_effects)
 
-class Damage:
+class Damage(object):
     """
     Damage done in combat
     """
@@ -493,7 +493,7 @@ class Damage:
         self.damage_type = damage_type
         self.magic_bonus = magic_bonus
 
-class Feat:
+class Feat(object):
     """
     Represents a feat that a character can have
     """
