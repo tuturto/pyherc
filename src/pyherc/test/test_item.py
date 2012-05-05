@@ -225,7 +225,6 @@ class TestItemWithGenerator(IntegrationTest):
 
         effect = self.item.effects['on drink'][0]
         assert(effect.effect == 'healing')
-        assert(effect.power == '1d10')
 
     def test_tags(self):
         """
