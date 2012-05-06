@@ -31,6 +31,7 @@ from pyherc.rules import ActionFactory
 from pyherc.rules.effects import Heal
 from random import Random
 
+from pyherc.test.builders import CharacterBuilder
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock, when, any
 
@@ -62,12 +63,11 @@ class TestPotions():
         self.action_factory = ActionFactory(self.model,
                                             drink_factory)
 
-        self.character = Character(self.model,
-                                   self.action_factory,
-                                   self.rng)
-        self.character.hit_points = 1
-        self.character.max_hp = 5
-        self.character.model = self.model
+        self.character = (CharacterBuilder()
+                            .with_action_factory(self.action_factory)
+                            .with_hit_points(1)
+                            .with_max_hp(5)
+                            .build())
 
         self.potion = Item()
         self.potion.name = 'healing potion'
