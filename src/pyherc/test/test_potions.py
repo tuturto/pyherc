@@ -69,8 +69,6 @@ class TestPotions():
                             .with_max_hp(5)
                             .build())
 
-        #self.potion = Item()
-        #self.potion.name = 'healing potion'
         effect = Heal(duration = 0,
                       frequency = 0,
                       tick = 0,
@@ -78,11 +76,6 @@ class TestPotions():
                       target = self.character)
         when(self.effect_factory).create_effect(any(),
                                                 target = any()).thenReturn(effect)
-
-        #self.potion.add_effect(ItemEffectData(trigger = 'on drink',
-        #                                      effect = 'heal',
-        #                                      parameters = None,
-        #                                      charges = 1))
 
         self.potion = (ItemBuilder()
                             .with_name('healing potion')
