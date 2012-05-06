@@ -24,7 +24,7 @@ Module for item related classes
 Classes:
     Item
     WeaponData
-    ItemEffectData
+    EffectHandle
 """
 
 import collections
@@ -196,9 +196,15 @@ class WeaponData(object):
         self.critical_damage = critical_damage
         self.weapon_type = weapon_type
 
-class ItemEffectData(object):
+class EffectHandle(object):
     """
     Represents magical effect on an item
+
+    Args:
+        trigger: name of the trigger of the effect
+        effect: name of the effect
+        parameters: overriding parameters for the effect
+        charges: amount of charges effect has
     """
     def __init__(self, trigger, effect, parameters, charges):
 

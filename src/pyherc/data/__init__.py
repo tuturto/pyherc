@@ -30,4 +30,4 @@ from .model import Model
 from .model import Character
 
 from .item import Item
-from .item import ItemEffectData
+from .item import EffectHandle

@@ -34,7 +34,7 @@ def cast_effect(target, effect, dice = None):
 
     Args:
         target: target of the effect
-        effect: ItemEffectData object
+        effect: EffectHandle object
         dice: prerolled dice
     """
     assert(effect != None)

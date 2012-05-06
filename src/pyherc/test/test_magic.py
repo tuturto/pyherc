@@ -26,7 +26,7 @@ import pyherc
 import pyherc.rules.magic
 import pyherc.data.model
 from pyherc.data.item import Item
-from pyherc.data.item import ItemEffectData
+from pyherc.data.item import EffectHandle
 from pyherc.test import IntegrationTest
 from pyherc.test import StubModel
 from pyherc.rules.effects import Heal, Damage

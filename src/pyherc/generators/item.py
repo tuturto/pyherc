@@ -26,7 +26,7 @@ import logging
 import random
 from pyherc.data.item import Item
 from pyherc.data.item import WeaponData
-from pyherc.data.item import ItemEffectData
+from pyherc.data.item import EffectHandle
 
 class ItemGenerator(object):
     """
@@ -127,7 +127,7 @@ class ItemGenerator(object):
                 new_item.effects[effect_type] = []
                 for effect in table['effects'][effect_type]:
                     #TODO: temporary hack
-                    new_effect = ItemEffectData(trigger = effect_type,
+                    new_effect = EffectHandle(trigger = effect_type,
                                        effect = effect['name'],
                                        parameters = effect['power'],
                                        charges = 1)

@@ -23,7 +23,7 @@ Module for item effect tests
 """
 #pylint: disable=W0614
 from pyherc.data import Item
-from pyherc.data import ItemEffectData
+from pyherc.data import EffectHandle
 from pyherc.rules.consume import DrinkFactory
 from pyherc.rules import ActionFactory
 from pyherc.rules.effects import Heal
@@ -128,7 +128,7 @@ class TestPotions():
         """
         self.potion = Item()
         self.potion.name = 'healing potion'
-        self.potion.add_effect(effect = ItemEffectData(trigger = 'on drink',
+        self.potion.add_effect(effect = EffectHandle(trigger = 'on drink',
                                                        effect = 'heal',
                                                        parameters = None,
                                                        charges = 5))

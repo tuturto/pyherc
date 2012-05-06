@@ -23,7 +23,7 @@ Module for testing effects
 """
 
 #pylint: disable=W0614
-from pyherc.data import Character, Item, ItemEffectData
+from pyherc.data import Character, Item, EffectHandle
 from pyherc.rules.effects import Heal
 from pyherc.rules.effects import Poison
 from pyherc.rules.effects import Effect
@@ -46,7 +46,7 @@ class TestEffects(object):
         Test that effect will be triggered when drinking potion
         """
         effect_factory = mock(EffectsFactory)
-        effect_spec = mock(ItemEffectData)
+        effect_spec = mock(EffectHandle)
         effect = mock (Effect)
         potion = mock(Item)
 
@@ -83,7 +83,7 @@ class TestEffects(object):
         effect_factory.add_effect('major heal', Heal)
 
         potion = Item()
-        potion.add_effect(ItemEffectData(trigger = 'on drink',
+        potion.add_effect(EffectHandle(trigger = 'on drink',
                                          effect = 'major heal',
                                          parameters = None,
                                          charges = 2))

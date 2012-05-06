@@ -21,7 +21,7 @@
 """
 Module for effect specification builder
 """
-from pyherc.data import ItemEffectData
+from pyherc.data import EffectHandle
 
 class EffectSpecBuilder(object):
     """
@@ -58,9 +58,9 @@ class EffectSpecBuilder(object):
         Build effect specification
 
         Returns:
-            ItemEffectData
+            EffectHandle
         """
-        effect = ItemEffectData(trigger = self.trigger,
+        effect = EffectHandle(trigger = self.trigger,
                                 effect = self.effect,
                                 parameters = self.parameters,
                                 charges = self.charges)
