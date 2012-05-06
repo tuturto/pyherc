@@ -32,6 +32,8 @@ from pyherc.test import StubRandomNumberGenerator
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.action import AttackAction
 
+from pyherc.test.builders import CharacterBuilder
+
 from mockito import mock, verify, when, any
 
 class TestMeleeCombat(IntegrationTest):
@@ -48,12 +50,29 @@ class TestMeleeCombat(IntegrationTest):
         self.character2 = None
 
     def setup2(self):
-        self.character1 = Character(self.model,
-                                    self.action_factory,
-                                    self.rng)
-        self.character2 = Character(self.model,
-                                    self.action_factory,
-                                    self.rng)
+
+        self.character1 = (CharacterBuilder()
+                                .with_model(self.model)
+                                .with_action_factory(self.action_factory)
+                                .with_rng(self.rng)
+                                .with_speed(1)
+                                .with_tick(1)
+                                .with_hit_points(10)
+                                .with_attack(3)
+                                .with_body(5)
+                                .build())
+
+        self.character2 = (CharacterBuilder()
+                                .with_model(self.model)
+                                .with_action_factory(self.action_factory)
+                                .with_rng(self.rng)
+                                .with_speed(1)
+                                .with_tick(1)
+                                .with_hit_points(10)
+                                .with_attack(3)
+                                .with_body(5)
+                                .build())
+
         level_generator = TestLevelGenerator(self.action_factory,
                                              self.creatureGenerator,
                                              self.item_generator)
@@ -65,18 +84,7 @@ class TestMeleeCombat(IntegrationTest):
 
         self.model.dungeon.levels = self.level
 
-        self.character1.speed = 1
-        self.character1.tick = 1
-        self.character1.hit_points = 10
-        self.character1.attack = 3
-        self.character1.body = 5
         self.level.add_creature(self.character1, (5, 5))
-
-        self.character2.speed = 1
-        self.character2.tick = 1
-        self.character2.hit_points = 10
-        self.character2.attack = 3
-        self.character2.body = 5
         self.level.add_creature(self.character2, (6, 5))
 
     def test_get_unarmed_action(self):
@@ -114,12 +122,15 @@ class TestMeleeCombat(IntegrationTest):
         """
         Test that attacking raises events
         """
-        character1 = Character(self.model,
-                               self.action_factory,
-                               self.rng)
-        character1.attack = 12
-        character1.speed = 1
-        character1.tick = 0
+        character1 = (CharacterBuilder()
+                        .with_model(self.model)
+                        .with_action_factory(self.action_factory)
+                        .with_rng(self.rng)
+                        .with_attack(12)
+                        .with_speed(1)
+                        .with_tick(0)
+                        .build())
+
         self.level.add_creature(character1, (2, 2))
 
         character2 = mock(Character)

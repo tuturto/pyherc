@@ -40,6 +40,14 @@ class CharacterBuilder(object):
         self.action_factory = mock()
         self.rng = Random()
 
+        self.speed = 1
+        self.tick = 0
+        self.attack = 1
+        self.body = 1
+
+        self.level = None
+        self.location = ()
+
     def with_model(self, model):
         self.model = model
         return self
@@ -60,6 +68,30 @@ class CharacterBuilder(object):
         self.max_hp = max_hp
         return self
 
+    def with_speed(self, speed):
+        self.speed = speed
+        return self
+
+    def with_tick(self, tick):
+        self.tick = tick
+        return self
+
+    def with_attack(self, attack):
+        self.attack = attack
+        return self
+
+    def with_body(self, body):
+        self.body = body
+        return self
+
+    def with_level(self, level):
+        self.level = level
+        return self
+
+    def with_location(self, location):
+        self.location = location
+        return self
+
     def build(self):
         """
         Build character
@@ -73,5 +105,13 @@ class CharacterBuilder(object):
 
         character.hit_points = self.hit_points
         character.max_hp = self.max_hp
+
+        character.body = self.body
+        character.attack = self.attack
+
+        character.speed = self.speed
+        character.tick = self.tick
+        character.level = self.level
+        character.location = self.location
 
         return character

@@ -21,7 +21,7 @@
 """
 Module for classes testing Item related operations
 """
-
+#pylint: disable=W0614
 import pyherc
 import pyherc.generators.item
 import pyherc.data.tiles
@@ -31,8 +31,11 @@ import pyherc.rules.tables
 from random import Random
 from pyherc.test import IntegrationTest
 from pyherc.data import Level
-from pyherc.data.item import Item
-from pyherc.data.item import ItemEffectData
+from pyherc.test.builders import ItemBuilder
+from pyherc.test.builders import CharacterBuilder
+from pyherc.test.builders import EffectSpecBuilder
+
+from hamcrest import * #pylint: disable=W0401
 from mockito import mock
 
 class TestItemWithGenerator(IntegrationTest):
@@ -53,24 +56,21 @@ class TestItemWithGenerator(IntegrationTest):
         """
         Secondary setup for this test case
         """
-        self.item = Item()
-        self.item.name = 'banana'
-        self.item.location = ()
-        self.item.icon = None
+        self.item = (ItemBuilder()
+                        .with_name('banana')
+                        .build())
 
         self.level = Level([20, 20],
                         pyherc.data.tiles.FLOOR_ROCK,
                         pyherc.data.tiles.WALL_EMPTY)
 
-        self.character = pyherc.data.model.Character(self.model,
-                                                     self.action_factory,
-                                                     self.rng)
-
-        self.character.location = (5, 5)
-        self.character.name = 'Timothy Tester'
-        self.character.level = self.level
-        self.character.speed = 1
-        self.character.tick = 1
+        self.character = (CharacterBuilder()
+                            .with_model(self.model)
+                            .with_action_factory(self.action_factory)
+                            .with_rng(self.rng)
+                            .with_level(self.level)
+                            .with_location((5, 5))
+                            .build())
 
         self.level.add_item(self.item, (5, 5))
 
@@ -87,9 +87,9 @@ class TestItemWithGenerator(IntegrationTest):
         self.item = self.item_generator.generate_item({'type': 'special',
                                                     'name': 'crystal skull'})
 
-        assert(self.item.name == 'crystal skull')
-        assert(self.item.quest_item == 1)
-        assert(self.item.icon == pyherc.data.tiles.ITEM_CRYSTAL_SKULL)
+        assert_that(self.item.name, is_(equal_to('crystal skull')))
+        assert_that(self.item.quest_item, is_(equal_to(1)))
+        assert_that(self.item.icon, is_(equal_to(pyherc.data.tiles.ITEM_CRYSTAL_SKULL)))
 
     def test_create_weapon(self):
         """
@@ -98,19 +98,19 @@ class TestItemWithGenerator(IntegrationTest):
 
         item = self.item_generator.generate_item({'name': 'dagger'})
 
-        assert(item != None)
-        assert(item.name == 'dagger')
-        assert(item.cost == 2)
-        assert(item.weapon_data.damage == 2)
-        assert(item.weapon_data.critical_range == 11)
-        assert(item.weapon_data.critical_damage == 2)
-        assert(item.weight == 1)
-        assert('piercing' in item.weapon_data.damage_type)
-        assert('slashing' in item.weapon_data.damage_type)
-        assert(item.weapon_data.weapon_type == 'simple')
-        assert('weapon' in item.get_tags())
-        assert('simple weapon' in item.get_tags())
-        assert(item.rarity == 32)
+        assert_that(item, is_(not_none()))
+        assert_that(item.name, is_(equal_to('dagger')))
+        assert_that(item.cost, is_(equal_to(2)))
+        assert_that(item.weapon_data.damage, is_(equal_to(2)))
+        assert_that(item.weapon_data.critical_range, is_(equal_to(11)))
+        assert_that(item.weapon_data.critical_damage, is_(equal_to(2)))
+        assert_that(item.weight, is_(equal_to(1)))
+        assert_that(item.weapon_data.damage_type, has_item('piercing'))
+        assert_that(item.weapon_data.damage_type, has_item('slashing'))
+        assert_that(item.weapon_data.weapon_type, is_(equal_to('simple')))
+        assert_that(item.get_tags(), has_item('weapon'))
+        assert_that(item.get_tags(), has_item('simple weapon'))
+        assert_that(item.rarity, is_(equal_to(32)))
 
     def test_wield_weapon(self):
         """
@@ -118,11 +118,11 @@ class TestItemWithGenerator(IntegrationTest):
         """
         item = self.item_generator.generate_item({'name': 'dagger'})
 
-        assert(item not in self.character.weapons)
+        assert_that(item, is_not(is_in(self.character.weapons)))
 
         pyherc.rules.items.wield(self.model, self.character, item)
 
-        assert(item in self.character.weapons)
+        assert_that(item, is_in(self.character.weapons))
 
     def test_unwielding_item(self):
         """
@@ -131,11 +131,11 @@ class TestItemWithGenerator(IntegrationTest):
         item = self.item_generator.generate_item({'name': 'dagger'})
         pyherc.rules.items.wield(self.model, self.character, item)
 
-        assert(item in self.character.weapons)
+        assert_that(item, is_in(self.character.weapons))
 
         pyherc.rules.items.unwield(self.model, self.character, item)
 
-        assert(not item in self.character.weapons)
+        assert_that(item, is_not(is_in(self.character.weapons)))
 
     def test_dual_wielding(self):
         """
@@ -144,8 +144,8 @@ class TestItemWithGenerator(IntegrationTest):
         item1 = self.item_generator.generate_item({'name': 'dagger'})
         item2 = self.item_generator.generate_item({'name': 'sickle'})
 
-        assert(item1 not in self.character.weapons)
-        assert(item2 not in self.character.weapons)
+        assert_that(item1, is_not(is_in(self.character.weapons)))
+        assert_that(item2, is_not(is_in(self.character.weapons)))
 
         pyherc.rules.items.wield(self.model, self.character, item1)
         pyherc.rules.items.wield(self.model,
@@ -153,8 +153,8 @@ class TestItemWithGenerator(IntegrationTest):
                                  item2,
                                  dual_wield = True)
 
-        assert(item1 in self.character.weapons)
-        assert(item2 in self.character.weapons)
+        assert_that(item1, is_in(self.character.weapons))
+        assert_that(item2, is_in(self.character.weapons))
 
     def test_dual_wielding_two_handed_weapons(self): #pylint: disable=C0103
         """
@@ -163,16 +163,16 @@ class TestItemWithGenerator(IntegrationTest):
         item1 = self.item_generator.generate_item({'name': 'longspear'})
         item2 = self.item_generator.generate_item({'name': 'sickle'})
 
-        assert(item1 not in self.character.weapons)
-        assert(item2 not in self.character.weapons)
+        assert_that(item1, is_not(is_in(self.character.weapons)))
+        assert_that(item2, is_not(is_in(self.character.weapons)))
 
         pyherc.rules.items.wield(self.model, self.character, item2)
         pyherc.rules.items.wield(self.model, self.character,
                                  item1,
                                  dual_wield = True)
 
-        assert(item1 not in self.character.weapons)
-        assert(item2 in self.character.weapons)
+        assert_that(item1, is_not(is_in(self.character.weapons)))
+        assert_that(item2, is_in(self.character.weapons))
 
     def test_can_dual_wield(self):
         """
@@ -270,24 +270,18 @@ class TestItemsInLevel:
         Setup this test case
         """
         self.rng = Random()
-        self.item = Item()
-        self.item.name = 'banana'
-        self.item.location = ()
-        self.item.icon = None
+
+        self.item = (ItemBuilder()
+                        .build())
 
         self.level = Level([20, 20],
                         pyherc.data.tiles.FLOOR_ROCK,
                         pyherc.data.tiles.WALL_EMPTY)
 
-        self.character = pyherc.data.model.Character(mock(),
-                                                     mock(),
-                                                     self.rng)
-
-        self.character.location = (5, 5)
-        self.character.name = 'Timothy Tester'
-        self.character.level = self.level
-        self.character.speed = 1
-        self.character.tick = 1
+        self.character = (CharacterBuilder()
+                            .with_location((5, 5))
+                            .with_level(self.level)
+                            .build())
 
         self.level.add_item(self.item, (5, 5))
 
@@ -364,17 +358,14 @@ class TestItemsInLevel:
         """
         Test that level can be queried for items on a certain location
         """
-
-        item = Item()
-        item.name = 'apple'
-        item.location = ()
-        item.icon = None
+        item = (ItemBuilder()
+                    .with_name('apple')
+                    .build())
         self.level.add_item(item, (5, 5))
 
-        item = Item()
-        item.name = 'kiwi'
-        item.location = ()
-        item.icon = None
+        item = (ItemBuilder()
+                    .with_name('kiwi')
+                    .build())
         self.level.add_item(item, (3, 3))
 
         items = self.level.get_items_at((5, 5))
@@ -400,19 +391,18 @@ class TestItemAdvanced():
         """
         Setup test case
         """
-        self.character = pyherc.data.model.Character(mock(),
-                                                    mock(),
-                                                    Random())
+        self.character = (CharacterBuilder()
+                            .build())
 
     def test_appearance_of_unknown(self):
         """"
         Test that appearance is reported for an unknown item
         """
 
-        item = Item()
-
-        item.name = 'healing potion'
-        item.appearance = 'blue potion'
+        item = (ItemBuilder()
+                    .with_name('healing potion')
+                    .with_appearance('blue potion')
+                    .build())
 
         name = item.get_name(self.character)
 
@@ -422,52 +412,52 @@ class TestItemAdvanced():
         """
         Test that given name is reported for a generally named item
         """
-        item = Item()
+        item = (ItemBuilder()
+                    .with_name('healing potion')
+                    .with_appearance('blue potion')
+                    .build())
 
         self.character.item_memory['healing potion'] = 'doozer potion'
 
-        item.name = 'healing potion'
-        item.appearance = 'blue potion'
-
         name = item.get_name(self.character)
 
-        assert(name == 'doozer potion')
+        assert_that(name, is_(equal_to('doozer potion')))
 
     def test_identifying_item(self):
         """
         Test that character can identify an item
         """
-        item = Item()
-
-        item.name = 'healing potion'
-        item.appearance = 'blue potion'
+        item = (ItemBuilder()
+                    .with_name('healing potion')
+                    .with_appearance('blue potion')
+                    .build())
 
         name = item.get_name(self.character)
-        assert(name == 'blue potion')
+        assert_that(name, is_(equal_to('blue potion')))
 
         self.character.identify_item(item)
 
         name = item.get_name(self.character)
-        assert(name == 'healing potion')
+        assert_that(name, is_(equal_to('healing potion')))
 
     def test_item_name_decoration(self):
         """
         Test that item can decorate its name
         """
-        item = Item()
-
-        item.name = 'club'
+        item = (ItemBuilder()
+                    .with_name('club')
+                    .build())
 
         self.character.inventory.append(item)
         name = item.get_name(self.character)
-        assert(name == 'club')
+        assert_that(name, is_(equal_to('club')))
 
         self.character.weapons = [item]
         name = item.get_name(self.character, True)
-        assert(name == 'club (weapon in hand)')
+        assert_that(name, is_(equal_to('club (weapon in hand)')))
 
         name = item.get_name(self.character, False)
-        assert(name == 'club')
+        assert_that(name, is_(equal_to('club')))
 
 class TestItemEffects:
     """
@@ -486,10 +476,14 @@ class TestItemEffects:
         Set up the test with an item and two effects
         """
 
-        self.item = Item()
+        self.item = ItemBuilder().build()
 
-        self.effect1 = ItemEffectData('on drink', 'heal', mock(), 1)
-        self.effect2 = ItemEffectData('on break', 'bless', mock(), 2)
+        self.effect1 = (EffectSpecBuilder()
+                            .with_trigger('on drink')
+                            .build())
+        self.effect2 = (EffectSpecBuilder()
+                            .with_trigger('on break')
+                            .build())
 
         self.item.add_effect(self.effect1)
         self.item.add_effect(self.effect2)
@@ -528,7 +522,9 @@ class TestItemEffects:
         Test that multiple effects can be returned by type
         """
 
-        effect3 = ItemEffectData('on break', 'cure', mock(), 1)
+        effect3 = (EffectSpecBuilder()
+                        .with_trigger('on break')
+                        .build())
         self.item.add_effect(effect3)
 
         effects = self.item.get_effects('on break')
@@ -545,18 +541,17 @@ class TestItemCharges:
         Default constructor
         """
         self.item = None
-        self.effect1 = None
 
     def setup(self):
         """
         Set up the test with an item and two effects
         """
 
-        self.item = Item()
-
-        self.effect1 = ItemEffectData('on drink', mock(), mock(), 1)
-
-        self.item.add_effect(self.effect1)
+        self.item = (ItemBuilder()
+                        .with_effect(EffectSpecBuilder()
+                                .with_trigger('on drink')
+                                .with_charges(1))
+                        .build())
 
     def test_get_single_charge(self):
         """
@@ -571,7 +566,11 @@ class TestItemCharges:
         """
         Test that amount of charges can be retrieved with multiple effects
         """
-        effect2 = ItemEffectData('on kick', 'fire', mock(), 2)
+        effect2 = (EffectSpecBuilder()
+                        .with_trigger('on kick')
+                        .with_effect('fire')
+                        .with_charges(2)
+                        .build())
         self.item.add_effect(effect2)
 
         charges = self.item.charges_left
@@ -584,7 +583,11 @@ class TestItemCharges:
         """
         Test that smallest and biggest amount of charges left can be retrieved
         """
-        effect2 = ItemEffectData('on kick', 'poison', mock(), 2)
+        effect2 = (EffectSpecBuilder()
+                        .with_trigger('on kick')
+                        .with_effect('poison')
+                        .with_charges(2)
+                        .build())
         self.item.add_effect(effect2)
 
         minimum_charges = self.item.minimum_charges_left

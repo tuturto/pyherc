@@ -33,10 +33,17 @@ class ItemBuilder(object):
         """
         super(ItemBuilder, self).__init__()
         self.name = 'prototype'
+        self.appearance = ''
         self.effects = []
+        self.location = ()
+        self.icon = 0
 
     def with_name(self, name):
         self.name = name
+        return self
+
+    def with_appearance(self, appearance):
+        self.appearance = appearance
         return self
 
     def with_effect(self, effect):
@@ -44,6 +51,14 @@ class ItemBuilder(object):
             self.effects.append(effect.build())
         else:
             self.effects.append(effect)
+        return self
+
+    def with_location(self, location):
+        self.location = location
+        return self
+
+    def with_icon(self, icon):
+        self.icon = icon
         return self
 
     def build(self):
@@ -56,6 +71,9 @@ class ItemBuilder(object):
         item = Item()
 
         item.name = self.name
+        item.appearance = self.appearance
+        item.location = self.location
+        item.icon = self.icon
 
         for effect in self.effects:
             item.add_effect(effect)
