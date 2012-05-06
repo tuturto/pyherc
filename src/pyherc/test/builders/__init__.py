@@ -23,4 +23,4 @@ Package for test builders
 """
 from .character import CharacterBuilder
 from .item import ItemBuilder
-from .effect import EffectSpecBuilder
+from .effect import EffectHandleBuilder

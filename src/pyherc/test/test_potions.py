@@ -23,7 +23,6 @@ Module for item effect tests
 """
 #pylint: disable=W0614
 from pyherc.data import Item
-from pyherc.data import EffectHandle
 from pyherc.rules.consume import DrinkFactory
 from pyherc.rules import ActionFactory
 from pyherc.rules.effects import Heal
@@ -31,7 +30,7 @@ from random import Random
 
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ItemBuilder
-from pyherc.test.builders import EffectSpecBuilder
+from pyherc.test.builders import EffectHandleBuilder
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock, when, any
 
@@ -80,7 +79,7 @@ class TestPotions():
         self.potion = (ItemBuilder()
                             .with_name('healing potion')
                             .with_effect(
-                                EffectSpecBuilder()
+                                EffectHandleBuilder()
                                     .with_trigger('on drink')
                                     .with_effect('heal'))
                             .build())
@@ -126,12 +125,14 @@ class TestPotions():
         """
         Test that non-empty potions are not discarded after drinking
         """
-        self.potion = Item()
-        self.potion.name = 'healing potion'
-        self.potion.add_effect(effect = EffectHandle(trigger = 'on drink',
-                                                       effect = 'heal',
-                                                       parameters = None,
-                                                       charges = 5))
+        self.potion = (ItemBuilder()
+                            .with_name('healing potion')
+                            .with_effect(
+                                EffectHandleBuilder()
+                                    .with_trigger('on drink')
+                                    .with_charges(5))
+                            .build())
+
         self.character.inventory.append(self.potion)
 
         assert_that(self.character.inventory, has_item(self.potion))

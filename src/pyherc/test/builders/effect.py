@@ -21,9 +21,9 @@
 """
 Module for effect specification builder
 """
-from pyherc.data import EffectHandle
+from pyherc.rules.effects import EffectHandle
 
-class EffectSpecBuilder(object):
+class EffectHandleBuilder(object):
     """
     Class for building effect specifications
     """
@@ -31,7 +31,7 @@ class EffectSpecBuilder(object):
         """
         Default constructor
         """
-        super(EffectSpecBuilder, self).__init__()
+        super(EffectHandleBuilder, self).__init__()
         self.trigger = 'on drink'
         self.effect = 'heal'
         self.parameters = None

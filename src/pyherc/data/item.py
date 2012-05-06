@@ -195,27 +195,3 @@ class WeaponData(object):
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.weapon_type = weapon_type
-
-class EffectHandle(object):
-    """
-    Represents magical effect on an item
-
-    Args:
-        trigger: name of the trigger of the effect
-        effect: name of the effect
-        parameters: overriding parameters for the effect
-        charges: amount of charges effect has
-    """
-    def __init__(self, trigger, effect, parameters, charges):
-
-        self.trigger = trigger
-        self.effect = effect
-        self.parameters = parameters
-        self.charges = charges
-
-    def __str__(self):
-        """
-        String representation of this object
-        """
-        return "trigger: {0}, effect: {1}, parameters: {2}, charges: {3}".format(
-            self.trigger, self.effect, self.parameters, self.charges)

@@ -33,7 +33,7 @@ from pyherc.test import IntegrationTest
 from pyherc.data import Level
 from pyherc.test.builders import ItemBuilder
 from pyherc.test.builders import CharacterBuilder
-from pyherc.test.builders import EffectSpecBuilder
+from pyherc.test.builders import EffectHandleBuilder
 
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock
@@ -478,10 +478,10 @@ class TestItemEffects:
 
         self.item = ItemBuilder().build()
 
-        self.effect1 = (EffectSpecBuilder()
+        self.effect1 = (EffectHandleBuilder()
                             .with_trigger('on drink')
                             .build())
-        self.effect2 = (EffectSpecBuilder()
+        self.effect2 = (EffectHandleBuilder()
                             .with_trigger('on break')
                             .build())
 
@@ -522,7 +522,7 @@ class TestItemEffects:
         Test that multiple effects can be returned by type
         """
 
-        effect3 = (EffectSpecBuilder()
+        effect3 = (EffectHandleBuilder()
                         .with_trigger('on break')
                         .build())
         self.item.add_effect(effect3)
@@ -548,7 +548,7 @@ class TestItemCharges:
         """
 
         self.item = (ItemBuilder()
-                        .with_effect(EffectSpecBuilder()
+                        .with_effect(EffectHandleBuilder()
                                 .with_trigger('on drink')
                                 .with_charges(1))
                         .build())
@@ -566,7 +566,7 @@ class TestItemCharges:
         """
         Test that amount of charges can be retrieved with multiple effects
         """
-        effect2 = (EffectSpecBuilder()
+        effect2 = (EffectHandleBuilder()
                         .with_trigger('on kick')
                         .with_effect('fire')
                         .with_charges(2)
@@ -583,7 +583,7 @@ class TestItemCharges:
         """
         Test that smallest and biggest amount of charges left can be retrieved
         """
-        effect2 = (EffectSpecBuilder()
+        effect2 = (EffectHandleBuilder()
                         .with_trigger('on kick')
                         .with_effect('poison')
                         .with_charges(2)

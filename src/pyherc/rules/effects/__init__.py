@@ -23,7 +23,7 @@ Package for magical effects
 """
 from .factory import EffectsFactory
 from .configuration import EffectsConfiguration
-from .effect import Effect
+from .effect import Effect, EffectHandle
 from .poison import Poison
 from .heal import Heal
 from .damage import Damage
