@@ -24,10 +24,11 @@ Module for testing time related functions
 #pylint: disable=W0614
 import pyherc
 from pyherc.data.model import Model
-from pyherc.data.model import Character
 from pyherc.data import Dungeon
 from pyherc.data import Level
 from pyherc.rules.effects import Effect
+
+from pyherc.test.builders import CharacterBuilder
 
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock, verify, when, any
@@ -54,23 +55,27 @@ class TestTime:
         action_factory = mock()
         rng = mock()
 
-        self.creature1 = Character(model, action_factory, rng)
-        self.creature2 = Character(model, action_factory, rng)
-        self.creature3 = Character(model, action_factory, rng)
+        self.creature1 = (CharacterBuilder()
+                            .with_tick(5)
+                            .with_speed(1)
+                            .with_name('creature 1')
+                            .build())
+
+        self.creature2 = (CharacterBuilder()
+                            .with_tick(0)
+                            .with_speed(2)
+                            .with_name('creature 2')
+                            .build())
+
+        self.creature3 = (CharacterBuilder()
+                            .with_tick(3)
+                            .with_speed(0.5)
+                            .with_name('creature 3')
+                            .build())
 
         self.model = Model()
         self.model.dungeon = Dungeon()
         self.model.dungeon.levels = Level((20, 20), 0, 0)
-
-        self.creature1.tick = 5
-        self.creature1.speed = 1
-        self.creature1.name = 'creature 1'
-        self.creature2.tick = 0
-        self.creature2.speed = 2
-        self.creature2.name = 'creature 2'
-        self.creature3.tick = 3
-        self.creature3.speed = 0.5
-        self.creature3.name = 'creature 3'
 
         self.model.dungeon.levels.add_creature(self.creature1)
         self.model.dungeon.levels.add_creature(self.creature2)
@@ -114,8 +119,10 @@ class TestEffectsAndTime:
         """
         Setup the test case
         """
-        self.creature = mock(Character)
-        self.creature.tick = 5
+        self.creature = (CharacterBuilder()
+                            .with_tick(5)
+                            .build())
+
         self.model = Model()
         self.model.player = self.creature
         self.level = mock(Level)
@@ -130,7 +137,7 @@ class TestEffectsAndTime:
         effect.duration = 50
         effect.frequency = 5
         effect.tick = 5
-        self.creature.active_effects = [effect]
+        self.creature.active_effects.append(effect)
 
         next_creature = self.model.get_next_creature()
 
@@ -143,7 +150,7 @@ class TestEffectsAndTime:
         effect = Effect(duration = 50,
                         frequency = 5,
                         tick = 5)
-        self.creature.active_effects = [effect]
+        self.creature.active_effects.append(effect)
 
         next_creature = self.model.get_next_creature()
         effect = self.creature.active_effects[0]
@@ -158,17 +165,19 @@ class TestEffectsAndTime:
                         frequency = 5,
                         tick = 5)
 
-        self.creature.active_effects = [effect1]
+        self.creature.active_effects.append(effect1)
 
         effect2 = Effect(duration = 50,
                          frequency = 5,
                          tick = 5)
 
-        creature2 = mock(Character)
-        creature2.tick = 10
+        creature2 = (CharacterBuilder()
+                        .with_tick(10)
+                        .with_effect(effect2)
+                        .with_level(self.level)
+                        .build()
+                        )
 
-        creature2.active_effects = [effect2]
-        creature2.level = self.level
 
         self.level.creatures = [self.creature,
                                 creature2]
@@ -198,14 +207,13 @@ class TestEffectsAndTime:
         """
         Test that expired effects are removed
         """
-        creature = Character(model = self.model,
-                             action_factory = mock(),
-                             rng = mock())
+        creature = (CharacterBuilder()
+                        .with_tick(5)
+                        .with_level(self.level)
+                        .build())
 
-        creature.tick = 5
         self.model.player = creature
         self.level.creatures = [creature]
-        creature.level = self.level
 
         effect = Effect(duration = 5,
                         frequency = 5,

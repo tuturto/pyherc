@@ -45,8 +45,12 @@ class CharacterBuilder(object):
         self.attack = 1
         self.body = 1
 
+        self.name = 'prototype'
+
         self.level = None
         self.location = ()
+
+        self.effects = []
 
     def with_model(self, model):
         self.model = model
@@ -58,6 +62,13 @@ class CharacterBuilder(object):
 
     def with_rng(self, rng):
         self.rng = rng
+        return self
+
+    def with_effect(self, effect):
+        if hasattr(effect, 'build'):
+            self.effects.append(effect.build())
+        else:
+            self.effects.append(effect)
         return self
 
     def with_hit_points(self, hit_points):
@@ -92,6 +103,10 @@ class CharacterBuilder(object):
         self.location = location
         return self
 
+    def with_name(self, name):
+        self.name = name
+        return self
+
     def build(self):
         """
         Build character
@@ -102,6 +117,8 @@ class CharacterBuilder(object):
         character = Character(model = self.model,
                               action_factory = self.action_factory,
                               rng = self.rng)
+
+        character.name = self.name
 
         character.hit_points = self.hit_points
         character.max_hp = self.max_hp
