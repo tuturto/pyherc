@@ -126,10 +126,9 @@ class ItemGenerator(object):
             for effect_type in keys:
                 new_item.effects[effect_type] = []
                 for effect in table['effects'][effect_type]:
-                    #TODO: temporary hack
                     new_effect = EffectHandle(trigger = effect_type,
                                        effect = effect['name'],
-                                       parameters = effect['power'],
+                                       parameters = None,
                                        charges = 1)
 
                 new_item.effects[effect_type].append(new_effect)

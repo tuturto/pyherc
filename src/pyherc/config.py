@@ -51,6 +51,10 @@ from pyherc.generators.level.items import ItemAdderConfiguration, ItemAdder
 from pyherc.generators.level.creatures import CreatureAdderConfiguration
 from pyherc.generators.level.creatures import CreatureAdder
 
+from pyherc.rules.effects import EffectsFactory
+from pyherc.rules.effects import EffectsConfiguration
+from pyherc.rules.effects import Heal, Poison
+
 from pyherc.rules.tables import Tables
 
 from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
@@ -115,7 +119,27 @@ class Configuration(object):
 
         walk_factory = WalkFactory()
         move_factory = MoveFactory(walk_factory)
-        effect_factory = None
+
+        effect_config = EffectsConfiguration()
+        effect_config.add_configuration('cure minor wounds',
+                                            {'duration': 0,
+                                            'frequency': 0,
+                                            'tick': 0,
+                                            'healing': 5})
+        effect_config.add_configuration('cure medium wounds',
+                                            {'duration': 0,
+                                            'frequency': 0,
+                                            'tick': 0,
+                                            'healing': 10})
+        effect_config.add_configuration('minor poison',
+                                            {'duration': 0,
+                                            'frequency': 0,
+                                            'tick': 0,
+                                            'damage': 5})
+        effect_factory = EffectsFactory(effect_config)
+        effect_factory.add_effect('cure minor wounds', Heal)
+        effect_factory.add_effect('cure medium wounds', Heal)
+        effect_factory.add_effect('minor poison', Poison)
 
         unarmed_combat_factory = UnarmedCombatFactory()
         melee_combat_factory = MeleeCombatFactory()

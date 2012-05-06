@@ -197,7 +197,7 @@ class TestEffectsAndTime:
                         frequency = 5,
                         tick = 5)
 
-        self.creature.active_effects = [effect]
+        self.creature.active_effects.append(effect)
 
         next_creature = self.model.get_next_creature()
 

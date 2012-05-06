@@ -332,8 +332,10 @@ class ItemHandler(sax.ContentHandler):
             effectType = attrs['type']
             if 'name' in attrs.keys():
                 tempEffect['name'] = attrs['name']
-            if 'power' in attrs.keys():
-                tempEffect['power'] = attrs['power']
+            if 'charges' in attrs.keys():
+                tempEffect['charges'] = int(attrs['charges'])
+            else:
+                tempEffect['charges'] = 1
 
             if not effectType in self.newItem['effects'].keys():
                 self.newItem['effects'][effectType] = []

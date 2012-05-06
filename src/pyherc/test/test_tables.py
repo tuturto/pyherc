@@ -209,7 +209,7 @@ class test_Tables:
                     <weight>1</weight>
                     <charges>1</charges>
                     <effects>
-                        <effect type="on drink" name="healing" power="1d10" />
+                        <effect type="on drink" name="healing" />
                     </effects>
                     <icons>
                         <icon>ITEM_POTION_1</icon>
@@ -229,7 +229,6 @@ class test_Tables:
 
         effect = item['effects']['on drink'][0]
         assert(effect['name'] == 'healing')
-        assert(effect['power'] == '1d10')
 
     def test_randomize_potions(self):
         """

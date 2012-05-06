@@ -375,7 +375,7 @@ class IntegrationTest(object):
         <weight>1</weight>
         <charges>1</charges>
         <effects>
-                <effect type="on drink" name="healing" power="1d10" />
+                <effect type="on drink" name="cure medium wounds" />
         </effects>
         <icons>
                 <icon>ITEM_POTION_1</icon>
@@ -391,7 +391,7 @@ class IntegrationTest(object):
         <weight>1</weight>
         <charges>1</charges>
         <effects>
-                <effect type="on drink" name="healing" power="1d6" />
+                <effect type="on drink" name="cure minor wounds" />
         </effects>
         <icons>
                 <icon>ITEM_POTION_1</icon>
@@ -407,7 +407,7 @@ class IntegrationTest(object):
         <weight>1</weight>
         <charges>1</charges>
         <effects>
-                <effect type="on drink" name="damage" power="1d6" />
+                <effect type="on drink" name="minor poison" />
         </effects>
         <icons>
                 <icon>ITEM_POTION_1</icon>
