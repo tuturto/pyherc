@@ -52,7 +52,8 @@ class TestEffects(object):
 
         effect_spec.charges = 2
         when(potion).get_effects('on drink').thenReturn([effect_spec])
-        when(effect_factory).create_effect(any()).thenReturn(effect)
+        when(effect_factory).create_effect(any(),
+                                           target = any()).thenReturn(effect)
 
         model = mock()
         action_factory = ActionFactory(model = model,
@@ -73,10 +74,10 @@ class TestEffects(object):
 
         effects_configuration.add_configuration(
                             'major heal',
-                            {'duration': 10,
-                            'frequency': 2,
-                            'tick': 2,
-                            'healing': 4})
+                            {'duration': 0,
+                            'frequency': 0,
+                            'tick': 0,
+                            'healing': 10})
 
         effect_factory = EffectsFactory(effects_configuration)
         effect_factory.add_effect('major heal', Heal)
