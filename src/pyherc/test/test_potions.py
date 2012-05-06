@@ -22,8 +22,6 @@
 Module for item effect tests
 """
 #pylint: disable=W0614
-from pyherc.data import Character
-from pyherc.data import Model
 from pyherc.data import Item
 from pyherc.data import ItemEffectData
 from pyherc.rules.consume import DrinkFactory
@@ -32,6 +30,8 @@ from pyherc.rules.effects import Heal
 from random import Random
 
 from pyherc.test.builders import CharacterBuilder
+from pyherc.test.builders import ItemBuilder
+from pyherc.test.builders import EffectSpecBuilder
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock, when, any
 
@@ -69,8 +69,8 @@ class TestPotions():
                             .with_max_hp(5)
                             .build())
 
-        self.potion = Item()
-        self.potion.name = 'healing potion'
+        #self.potion = Item()
+        #self.potion.name = 'healing potion'
         effect = Heal(duration = 0,
                       frequency = 0,
                       tick = 0,
@@ -79,10 +79,18 @@ class TestPotions():
         when(self.effect_factory).create_effect(any(),
                                                 target = any()).thenReturn(effect)
 
-        self.potion.add_effect(ItemEffectData(trigger = 'on drink',
-                                              effect = 'heal',
-                                              parameters = None,
-                                              charges = 1))
+        #self.potion.add_effect(ItemEffectData(trigger = 'on drink',
+        #                                      effect = 'heal',
+        #                                      parameters = None,
+        #                                      charges = 1))
+
+        self.potion = (ItemBuilder()
+                            .with_name('healing potion')
+                            .with_effect(
+                                EffectSpecBuilder()
+                                    .with_trigger('on drink')
+                                    .with_effect('heal'))
+                            .build())
 
         self.character.inventory.append(self.potion)
 
