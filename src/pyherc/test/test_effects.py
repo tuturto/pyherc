@@ -33,7 +33,7 @@ from pyherc.rules.consume.factories import DrinkFactory
 from random import Random
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder
-from pyherc.test.matchers import has_active_effects
+from pyherc.test.matchers import has_active_effects, has_no_active_effects
 
 from mockito import mock, when, any, verify
 from hamcrest import * #pylint: disable=W0401
@@ -102,6 +102,7 @@ class TestEffects(object):
         character.drink(potion)
 
         assert_that(character.hit_points, is_(equal_to(10)))
+        assert_that(character, has_no_active_effects())
 
     def test_timed_effect_is_triggered(self):
         """

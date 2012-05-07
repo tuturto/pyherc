@@ -214,6 +214,9 @@ class ActiveEffects(BaseMatcher):
 def has_active_effects(amount_of_effects):
     return ActiveEffects(wrap_matcher(amount_of_effects))
 
+def has_no_active_effects():
+    return ActiveEffects(wrap_matcher(0))
+
 def has_creature(creature, amount):
     """
     Check if level has given creature
