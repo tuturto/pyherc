@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-05-06, 09:50:52 -->
+<!-- Saved: 2012-05-07, 23:00:11 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -119,7 +119,6 @@
     <Source>pyherc/rules/effects/damage.py</Source>
     <Source>pyherc/data/portal.py</Source>
     <Source>pyherc/data/level.py</Source>
-    <Source>pyherc/rules/effects/configuration.py</Source>
     <Source>pyherc/test/builders/__init__.py</Source>
     <Source>pyherc/test/builders/character.py</Source>
     <Source>pyherc/test/builders/item.py</Source>
