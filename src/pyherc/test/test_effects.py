@@ -28,7 +28,6 @@ from pyherc.rules.effects import Heal
 from pyherc.rules.effects import Poison
 from pyherc.rules.effects import Effect
 from pyherc.rules.effects import EffectsFactory
-from pyherc.rules.effects import EffectsConfiguration
 from pyherc.rules.effects import EffectHandle
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.consume.factories import DrinkFactory
@@ -71,17 +70,14 @@ class TestEffects(object):
         """
         Test that effect can be created
         """
-        effects_configuration = EffectsConfiguration()
-
-        effects_configuration.add_configuration(
+        effect_factory = EffectsFactory()
+        effect_factory.add_effect(
                             'major heal',
-                            {'duration': 0,
+                            {'type': Heal,
+                            'duration': 0,
                             'frequency': 0,
                             'tick': 0,
                             'healing': 10})
-
-        effect_factory = EffectsFactory(effects_configuration)
-        effect_factory.add_effect('major heal', Heal)
 
         potion = Item()
         potion.add_effect(EffectHandle(trigger = 'on drink',

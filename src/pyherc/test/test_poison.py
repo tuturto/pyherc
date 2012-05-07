@@ -70,19 +70,17 @@ class TestEffectsFactory():
         """
         Test that poison effect can be created
         """
-        factory = EffectsFactory(mock())
-        factory.add_effect('poison', Poison)
-
         character = mock(Character)
-
-        effect_spec = {'duration' : 150,
-                        'frequency' : 30,
-                        'tick'  : 10,
-                        'damage' : 5,
-                        'target' : character}
+        factory = EffectsFactory()
+        factory.add_effect('poison',
+                            {'type': Poison,
+                            'duration': 150,
+                            'frequency': 30,
+                            'tick': 10,
+                            'damage': 5})
 
         effect = factory.create_effect('poison',
-                                    **effect_spec)
+                                       target = character)
 
         assert_that(effect.duration, is_(equal_to(150)))
         assert_that(effect.frequency, is_(equal_to(30)))
