@@ -58,11 +58,10 @@ class EffectsFactory(object):
             key: name of the effect
             kwargs: keyword arguments, passed to the effect
         """
-        print kwargs
         config = self.effects[key]
-        print config
+
         params = copy.deepcopy(config)
-        print params
+
         type = params.pop('type')
         if params != None:
             for kw_key in kwargs:
@@ -71,5 +70,5 @@ class EffectsFactory(object):
                 params[kw_key] = kwargs[kw_key]
         else:
             params = kwargs
-        print params
+
         return type(**params)

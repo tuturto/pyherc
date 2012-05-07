@@ -189,6 +189,30 @@ class ContainsCreature(BaseMatcher):
         mismatch_description.append('Was level with creatures {0}'
                                     .format(names))
 
+class ActiveEffects(BaseMatcher):
+    """
+    Class to check amount of active effects
+    """
+    def __init__(self, amount_of_effects):
+        """
+        Default constructor
+        """
+        self.amount_of_effects = amount_of_effects
+
+    def _matches(self, item):
+        return self.amount_of_effects.matches(len(item.active_effects))
+
+    def describe_to(self, description):
+        description.append(
+                    'Object with {0} active effects'
+                    .format(self.amount_of_effects))
+
+    def describe_mismatch(self, item, mismatch_description):
+        mismatch_description.append('Was object with {0} active effects'
+                                    .format(len(item.active_effects)))
+
+def has_active_effects(amount_of_effects):
+    return ActiveEffects(wrap_matcher(amount_of_effects))
 
 def has_creature(creature, amount):
     """

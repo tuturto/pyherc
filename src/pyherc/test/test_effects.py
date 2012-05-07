@@ -23,7 +23,6 @@ Module for testing effects
 """
 
 #pylint: disable=W0614
-from pyherc.data import Character, Item
 from pyherc.rules.effects import Heal
 from pyherc.rules.effects import Poison
 from pyherc.rules.effects import Effect
@@ -32,6 +31,9 @@ from pyherc.rules.effects import EffectHandle
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.consume.factories import DrinkFactory
 from random import Random
+from pyherc.test.builders import CharacterBuilder, ItemBuilder
+from pyherc.test.builders import EffectHandleBuilder
+from pyherc.test.matchers import has_active_effects
 
 from mockito import mock, when, any, verify
 from hamcrest import * #pylint: disable=W0401
@@ -48,7 +50,7 @@ class TestEffects(object):
         effect_factory = mock(EffectsFactory)
         effect_spec = mock(EffectHandle)
         effect = mock (Effect)
-        potion = mock(Item)
+        potion = mock()
 
         effect_spec.charges = 2
         when(potion).get_effects('on drink').thenReturn([effect_spec])
@@ -59,16 +61,17 @@ class TestEffects(object):
         action_factory = ActionFactory(model = model,
                                        factories = [DrinkFactory(effect_factory)])
 
-        character = Character(model = model,
-                              action_factory = action_factory,
-                              rng = Random())
+        character = (CharacterBuilder()
+                        .with_model(model)
+                        .with_action_factory(action_factory)
+                        .build())
         character.drink(potion)
 
         verify(effect).trigger()
 
     def test_creating_effect(self):
         """
-        Test that effect can be created
+        Test that effect can be created and triggered immediately
         """
         effect_factory = EffectsFactory()
         effect_factory.add_effect(
@@ -79,20 +82,58 @@ class TestEffects(object):
                             'tick': 0,
                             'healing': 10})
 
-        potion = Item()
-        potion.add_effect(EffectHandle(trigger = 'on drink',
-                                         effect = 'major heal',
-                                         parameters = None,
-                                         charges = 2))
+        potion = (ItemBuilder()
+                        .with_effect(
+                            EffectHandleBuilder()
+                                .with_trigger('on drink')
+                                .with_effect('major heal')
+                                .with_charges(2))
+                        .build())
 
         action_factory = ActionFactory(model = mock(),
                                        factories = [DrinkFactory(effect_factory)])
 
-        character = Character(model = mock(),
-                              action_factory = action_factory,
-                              rng = Random())
-        character.hit_points = 1
-        character.max_hp = 10
+        character = (CharacterBuilder()
+                        .with_action_factory(action_factory)
+                        .with_hit_points(1)
+                        .with_max_hp(10)
+                        .build())
+
         character.drink(potion)
 
         assert_that(character.hit_points, is_(equal_to(10)))
+
+    def test_timed_effect_is_triggered(self):
+        """
+        Test that timed effect is triggered only after enough time
+        has passed
+        """
+        effect_factory = EffectsFactory()
+        effect_factory.add_effect(
+                            'major heal',
+                            {'type': Heal,
+                            'duration': 12,
+                            'frequency': 3,
+                            'tick': 3,
+                            'healing': 10})
+
+        potion = (ItemBuilder()
+                        .with_effect(
+                            EffectHandleBuilder()
+                                .with_trigger('on drink')
+                                .with_effect('major heal')
+                                .with_charges(2))
+                        .build())
+
+        action_factory = ActionFactory(model = mock(),
+                                       factories = [DrinkFactory(effect_factory)])
+
+        character = (CharacterBuilder()
+                        .with_action_factory(action_factory)
+                        .with_hit_points(1)
+                        .with_max_hp(10)
+                        .build())
+
+        character.drink(potion)
+
+        assert_that(character, has_active_effects(1))
