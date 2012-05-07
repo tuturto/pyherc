@@ -21,13 +21,14 @@
 """
 Module for testing combat related rules
 """
-
+#pylint: disable=W0614
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.move.factories import MoveFactory
 from pyherc.data.model import Model
 from mockito import mock, when, any
+from hamcrest import * #pylint: disable=W0401
 
 class TestActionFactories():
     """
@@ -50,7 +51,7 @@ class TestActionFactories():
                                 mock_attack_factory)
 
         factories = factory.get_sub_factories()
-        assert mock_attack_factory in factories
+        assert_that(mock_attack_factory, is_in(factories))
 
     def test_init_factory_list(self):
         """
@@ -65,8 +66,8 @@ class TestActionFactories():
                                     mock_move_factory])
         factories = factory.get_sub_factories()
 
-        assert mock_attack_factory in factories
-        assert mock_move_factory in factories
+        assert_that(mock_attack_factory, is_in(factories))
+        assert_that(mock_move_factory, is_in(factories))
 
     def test_get_factory_by_type(self):
         """
@@ -87,5 +88,4 @@ class TestActionFactories():
 
         sub_factory = factory.get_sub_factory(mock_parameters)
 
-        print sub_factory
-        assert sub_factory == mock_attack_factory
+        assert_that(sub_factory, is_(same_instance(mock_attack_factory)))

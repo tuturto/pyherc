@@ -21,7 +21,7 @@
 """
 Module for testing combat related rules
 """
-
+#pylint: disable=W0614
 import pyherc
 from pyherc.data.dungeon import Dungeon
 from pyherc.data.model import Character
@@ -35,6 +35,7 @@ from pyherc.rules.attack.action import AttackAction
 from pyherc.test.builders import CharacterBuilder
 
 from mockito import mock, verify, when, any
+from hamcrest import * #pylint: disable=W0401
 
 class TestMeleeCombat(IntegrationTest):
     """
@@ -91,8 +92,7 @@ class TestMeleeCombat(IntegrationTest):
         """
         Test that unarmed combat action can be generated
         """
-        rng = StubRandomNumberGenerator()
-        rng.inject(12, [12, 12, 12, 12, 12, 12, 12])
+        rng = mock()
 
         action = self.action_factory.get_action(AttackParameters(
                                                       self.character1,
@@ -100,8 +100,8 @@ class TestMeleeCombat(IntegrationTest):
                                                       'unarmed',
                                                       rng))
 
-        assert isinstance(action,  AttackAction)
-        assert action.attack_type == 'unarmed'
+        assert_that(action, is_(instance_of(AttackAction)))
+        assert_that(action.attack_type, is_(equal_to('unarmed')))
 
     def test_unarmed_attack(self):
         """
@@ -116,7 +116,7 @@ class TestMeleeCombat(IntegrationTest):
                                                 'unarmed',
                                                 rng))
 
-        assert self.character2.hit_points < 10
+        assert_that(self.character2.hit_points, is_(less_than(10)))
 
     def test_events_in_unarmed_combat(self):
         """
@@ -151,7 +151,6 @@ class TestMeleeCombat(IntegrationTest):
         dagger = self.item_generator.generate_item({'name': 'dagger'})
 
         pyherc.rules.items.wield(self.model, self.character1, dagger)
-        assert self.character2.hit_points == 10
 
         self.character1.execute_action(AttackParameters(
                                                 self.character1,
@@ -159,4 +158,4 @@ class TestMeleeCombat(IntegrationTest):
                                                 'melee',
                                                 rng))
 
-        assert self.character2.hit_points == 8
+        assert_that(self.character2.hit_points, is_(equal_to(8)))

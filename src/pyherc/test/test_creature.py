@@ -22,15 +22,17 @@
 """
 Module for testing creatures
 """
-
-from pyherc.data.model import Character, WeaponProficiency
+#pylint: disable=W0614
+from pyherc.data.model import WeaponProficiency
 from pyherc.test import IntegrationTest
+from pyherc.test.builders import CharacterBuilder
+from pyherc.test.builders import ItemBuilder
 from pyherc.generators.level.testlevel import TestLevelGenerator
 from pyherc.data.dungeon import Dungeon
 from pyherc.rules.moving import deactivate
-from pyherc.data.item import Item
+from hamcrest import * #pylint: disable=W0401
 
-class test_CreatureWithGenerator(IntegrationTest):
+class TestCreatureWithGenerator(IntegrationTest):
     """
     Tests for creatures that require generators to be working
     """
@@ -38,7 +40,7 @@ class test_CreatureWithGenerator(IntegrationTest):
         """
         Default constructor
         """
-        IntegrationTest.__init__(self)
+        super(TestCreatureWithGenerator, self).__init__()
 
     def test_rat_generation(self):
         """
@@ -46,24 +48,23 @@ class test_CreatureWithGenerator(IntegrationTest):
         """
         creature = self.creatureGenerator.generate_creature({'name': 'rat'})
 
-        assert(creature.name == 'rat')
+        assert_that(creature.name, is_(equal_to('rat')))
 
     def test_is_proficient(self):
         """
         Test that weapon proficiency of character can be checked
         """
-        creature = Character(self.model,
-                             self.action_factory,
-                             self.rng)
-        creature.feats = []
+        creature = CharacterBuilder().build()
 
         weapon = self.item_generator.generate_item({'name' : 'club'})
 
-        assert(creature.is_proficient(weapon) == False)
+        proficiency = creature.is_proficient(weapon)
+        assert_that(proficiency, is_(equal_to(False)))
 
         creature.feats.append(WeaponProficiency('simple'))
 
-        assert(creature.is_proficient(weapon) == True)
+        proficiency = creature.is_proficient(weapon)
+        assert_that(proficiency, is_(equal_to(True)))
 
 class TestStatues(IntegrationTest):
     """
@@ -74,19 +75,22 @@ class TestStatues(IntegrationTest):
         """
         Default constructor
         """
-        IntegrationTest.__init__(self)
+        super(TestStatues, self).__init__()
 
     def test_deactivating_creature(self):
         """
         Test that activated character can deactivate
         """
-        creature = Character(self.model,
-                             self.action_factory,
-                             self.rng)
-        creature.name = 'Mimic'
-        item = Item()
+        creature = (CharacterBuilder()
+                        .with_model(self.model)
+                        .with_action_factory(self.action_factory)
+                        .with_rng(self.rng)
+                        .with_name('Mimic')
+                        .build())
 
-        item.name = 'Chest'
+        item = (ItemBuilder()
+                    .with_name('Chest')
+                    .build())
 
         creature.set_mimic_item(item)
 
@@ -103,10 +107,14 @@ class TestStatues(IntegrationTest):
 
         location = creature.location
 
-        assert self.level1.get_creature_at(location) == creature
-        assert len(self.level1.get_items_at(location)) == 0
+        creatures = self.level1.get_creature_at(location)
+        items = self.level1.get_items_at(location)
+        assert_that(creatures, is_(same_instance(creature)))
+        assert_that(len(items), is_(equal_to(0)))
 
         deactivate(self.model, creature)
 
-        assert self.level1.get_creature_at(location) == None
-        assert len(self.level1.get_items_at(location)) == 1
+        creatures = self.level1.get_creature_at(location)
+        items = self.level1.get_items_at(location)
+        assert_that(creatures, is_(none()))
+        assert_that(len(items), is_(equal_to(1)))
