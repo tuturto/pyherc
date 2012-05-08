@@ -122,22 +122,22 @@ class Configuration(object):
         effect_factory = EffectsFactory()
         effect_factory.add_effect('cure minor wounds',
                                         {'type': Heal,
-                                        'duration': 0,
-                                        'frequency': 0,
-                                        'tick': 0,
-                                        'healing': 5})
+                                        'duration': 20,
+                                        'frequency': 5,
+                                        'tick': 2,
+                                        'healing': 1})
         effect_factory.add_effect('cure medium wounds',
                                         {'type': Heal,
-                                        'duration': 0,
-                                        'frequency': 0,
-                                        'tick': 0,
-                                        'healing': 10})
+                                        'duration': 20,
+                                        'frequency': 5,
+                                        'tick': 2,
+                                        'healing': 2})
         effect_factory.add_effect('minor poison',
-                                        {'type': Heal,
-                                        'duration': 0,
-                                        'frequency': 0,
-                                        'tick': 0,
-                                        'damage': 5})
+                                        {'type': Poison,
+                                        'duration': 60,
+                                        'frequency': 10,
+                                        'tick': 10,
+                                        'damage': 1})
 
         unarmed_combat_factory = UnarmedCombatFactory()
         melee_combat_factory = MeleeCombatFactory()

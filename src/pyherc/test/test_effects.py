@@ -50,6 +50,7 @@ class TestEffects(object):
         effect_factory = mock(EffectsFactory)
         effect_spec = mock(EffectHandle)
         effect = mock (Effect)
+        effect.duration = 0
         potion = mock()
 
         effect_spec.charges = 2
