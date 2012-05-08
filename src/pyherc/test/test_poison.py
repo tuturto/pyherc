@@ -22,10 +22,10 @@
 Module for testing poison related rules
 """
 #pylint: disable=W0614
-from pyherc.data import Character
 from pyherc.rules.effects import Poison
 from pyherc.rules.effects import EffectsFactory
-from random import Random
+from pyherc.test.builders import CharacterBuilder
+from pyherc.test.matchers import has_active_effect
 from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 
@@ -43,8 +43,9 @@ class TestPoison():
         """
         Test that triggered poison will damage character
         """
-        character = mock(Character)
-        character.hit_points = 10
+        character = (CharacterBuilder()
+                        .with_hit_points(10)
+                        .build())
 
         poison = Poison(duration = 1,
                         frequency = 1,
@@ -70,7 +71,7 @@ class TestEffectsFactory():
         """
         Test that poison effect can be created
         """
-        character = mock(Character)
+        character = CharacterBuilder().build()
         factory = EffectsFactory()
         factory.add_effect('poison',
                             {'type': Poison,
@@ -91,9 +92,7 @@ class TestEffectsFactory():
         """
         Test that poison can be created by passing it a parameter array
         """
-        character = Character(mock(),
-                              mock(),
-                              Random())
+        character = CharacterBuilder().build()
 
         params = {'duration': 150,
                   'frequency': 30,
@@ -121,12 +120,9 @@ class TestCharacter():
         """
         Test that poison effect can be added to a character
         """
-        character = Character(mock(),
-                              mock(),
-                              Random())
+        character = CharacterBuilder().build()
         poison = mock(Poison)
 
         character.add_effect(poison)
 
-        assert_that(character.active_effects, has_item(poison))
-
+        assert_that(character, has_active_effect(poison))

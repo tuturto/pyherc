@@ -22,6 +22,7 @@
 Module for customer matchers used in testing
 """
 
+from hamcrest import * #pylint: disable=W0401
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
@@ -211,11 +212,39 @@ class ActiveEffects(BaseMatcher):
         mismatch_description.append('Was object with {0} active effects'
                                     .format(len(item.active_effects)))
 
+class ActiveEffectInstance(BaseMatcher):
+    """
+    Class to check amount of active effects
+    """
+    def __init__(self, effect):
+        """
+        Default constructor
+        """
+        self.effect = effect
+
+    def _matches(self, item):
+        for effect in item.active_effects:
+            if effect == self.effect:
+                return True
+        return False
+
+    def describe_to(self, description):
+        description.append(
+                    'Object with active effects containing {0}'
+                    .format(self.effect))
+
+    def describe_mismatch(self, item, mismatch_description):
+        mismatch_description.append('Was object with active effects {0}'
+                                    .format(item.active_effects))
+
 def has_active_effects(amount_of_effects):
     return ActiveEffects(wrap_matcher(amount_of_effects))
 
 def has_no_active_effects():
     return ActiveEffects(wrap_matcher(0))
+
+def has_active_effect(effect):
+    return ActiveEffectInstance(effect)
 
 def has_creature(creature, amount):
     """
