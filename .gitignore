@@ -7,3 +7,5 @@ pyherc.log
 setup.cfg
 cover
 .coverage
+test_results.html
+nosetests.xml
