@@ -45,7 +45,7 @@ class TestLevelConnectivity():
         self.level = Level(size = (20, 10),
                       floor_type = FLOOR_ROCK,
                       wall_type = WALL_GROUND)
-        self.matcher = MapConnectivity(self.level)
+        self.matcher = MapConnectivity(WALL_EMPTY)
 
     def test_unconnected_level(self):
         """
@@ -55,8 +55,7 @@ class TestLevelConnectivity():
             self.level.walls[loc_x][2] = WALL_EMPTY
             self.level.walls[loc_x][5] = WALL_EMPTY
 
-        assert_that(self.matcher.is_connected(WALL_EMPTY),
-                    is_(equal_to(False)))
+        assert_that(self.matcher._matches(self.level), is_(equal_to(False)))
 
     def test_connected_level(self):
         """
@@ -67,8 +66,7 @@ class TestLevelConnectivity():
             self.level.walls[loc_x][5] = WALL_EMPTY
             self.level.walls[5][loc_x] = WALL_EMPTY
 
-        assert_that(self.matcher.is_connected(WALL_EMPTY),
-                    is_(equal_to(True)))
+        assert_that(self.matcher._matches(self.level), is_(equal_to(True)))
 
     def test_that_all_points_are_found(self):
         """
@@ -78,7 +76,7 @@ class TestLevelConnectivity():
         self.level.walls[5][5] = WALL_EMPTY
         self.level.walls[20][10] = WALL_EMPTY
 
-        points = self.matcher.get_all_points(WALL_EMPTY)
+        points = self.matcher.get_all_points(self.level, WALL_EMPTY)
 
         assert_that(points, has_length(3))
 
@@ -91,8 +89,7 @@ class TestLevelConnectivity():
         self.level.walls[0][10] = WALL_EMPTY
         self.level.walls[20][10] = WALL_EMPTY
 
-        assert_that(self.matcher.is_connected(WALL_EMPTY),
-                    is_(equal_to(False)))
+        assert_that(self.matcher._matches(self.level), is_(equal_to(False)))
 
     def test_that_convoluted_case_works(self):
         """
@@ -119,6 +116,13 @@ class TestLevelConnectivity():
         self.level.walls[9][2] = WALL_EMPTY
         self.level.walls[10][2] = WALL_EMPTY
 
-        assert_that(self.matcher.is_connected(WALL_EMPTY),
-                    is_(equal_to(False)))
+        all_points = self.matcher.get_all_points(self.level, WALL_EMPTY)
+        connected_points = self.matcher.get_connected_points(self.level,
+                                                all_points[0],
+                                                WALL_EMPTY,
+                                                [])
 
+        print 'all points: {0}'.format(all_points)
+        print 'connected points: {0}'.format(connected_points)
+
+        assert_that(self.matcher._matches(self.level), is_(equal_to(False)))

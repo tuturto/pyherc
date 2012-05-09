@@ -40,7 +40,7 @@ from pyherc.data import Model
 from pyherc.data.tiles import FLOOR_ROCK, WALL_EMPTY
 from mockito import mock, verify, when, any
 from hamcrest import * #pylint: disable=W0401
-from pyherc.test.matchers import map_accessibility_in
+from pyherc.test.matchers import is_fully_accessible_via
 import random
 
 class TestLeveltGeneratorFactory:
@@ -378,7 +378,7 @@ class TestLevelGenerator:
 
         new_level = generator.generate_level(portal)
 
-        assert_that(map_accessibility_in(new_level, WALL_EMPTY), is_(True))
+        assert_that(new_level, is_fully_accessible_via(WALL_EMPTY))
 
     def test_catacombs_generation(self):
         """
@@ -412,4 +412,4 @@ class TestLevelGenerator:
 
         new_level = generator.generate_level(portal)
 
-        assert_that(map_accessibility_in(new_level, WALL_EMPTY), is_(True))
+        assert_that(new_level, is_fully_accessible_via(WALL_EMPTY))

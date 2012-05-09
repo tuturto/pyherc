@@ -30,42 +30,43 @@ class MapConnectivity():
     """
     Helper class used to verify if generated level is fully connected
     """
-    def __init__(self, level):
+    def __init__(self, open_tile):
         """
         Initialise this matcher
-
-        Args:
-            level: Level to check for connectivity
         """
-        self.level = level
-        self.all_points = []
-        self.connected_points = []
-        self.connected = None
+        self.open_tile = open_tile
 
-    def is_connected(self, open):
-        """
-        Checks if given level is fully connected
+    def _matches(self, item):
+        all_points = self.get_all_points(item, self.open_tile)
 
-        Args:
-            open: ID of tile considered open
-
-        Returns:
-            True if level is connected, otherwise False
-        """
-        self.all_points = self.get_all_points(open)
-
-        if len(self.all_points) > 0:
-            self.get_connected_points(self.all_points[0], open)
-            self.connected = True
-            for point in self.all_points:
-                if not point in self.connected_points:
-                    self.connected = False
+        if len(all_points) > 0:
+            connected_points = self.get_connected_points(item,
+                                                         all_points[0],
+                                                         self.open_tile,
+                                                         [])
+            connected = True
+            for point in all_points:
+                if not point in connected_points:
+                    connected = False
         else:
-            self.connected = False
+            connected = False
 
-        return self.connected
+        return connected
 
-    def get_all_points(self, open):
+    def describe_to(self, description):
+        """
+        Describe this matcher
+        """
+        description.append(
+                'Level')
+
+    def describe_mismatch(self, item, mismatch_description):
+        """
+        Describe this mismatch
+        """
+        mismatch_description.append('Unconnected level')
+
+    def get_all_points(self, level, open_tile):
         """
         Get all open points in level
 
@@ -77,53 +78,48 @@ class MapConnectivity():
         """
         points = []
 
-        for loc_y in range(len(self.level.walls[0])):
-            for loc_x in range(len(self.level.walls)):
-                if self.level.walls[loc_x][loc_y] == open:
+        for loc_y in range(len(level.walls[0])):
+            for loc_x in range(len(level.walls)):
+                if level.walls[loc_x][loc_y] == open_tile:
                     points.append((loc_x, loc_y))
 
         return points
 
-    def get_connected_points(self, start, open):
+    def get_connected_points(self, level, start, open_tile, connected_points):
         """
         Get all points that are connected to a given point
 
         Args:
+            level: level to check
             start: start location
             open: ID of tile considered open
+
+        Returns:
+            list of connected points
         """
         x_loc = start[0]
         y_loc = start[1]
 
-        if start in self.connected_points:
+        if start in connected_points:
             return None
 
-        if x_loc < 0 or x_loc > len(self.level.walls) - 1:
+        if x_loc < 0 or x_loc > len(level.walls) - 1:
             return None
 
-        if y_loc < 0 or y_loc > len(self.level.walls[0]) - 1:
+        if y_loc < 0 or y_loc > len(level.walls[0]) - 1:
             return None
 
-        if self.level.walls[x_loc][y_loc] == open:
-            self.connected_points.append(start)
-            self.get_connected_points((x_loc, y_loc - 1), open)
-            self.get_connected_points((x_loc, y_loc + 1), open)
-            self.get_connected_points((x_loc - 1, y_loc), open)
-            self.get_connected_points((x_loc + 1, y_loc), open)
+        if level.get_wall_tile(x_loc, y_loc) == open_tile:
+            connected_points.append(start)
+            self.get_connected_points(level, (x_loc, y_loc - 1), open_tile, connected_points)
+            self.get_connected_points(level, (x_loc, y_loc + 1), open_tile, connected_points)
+            self.get_connected_points(level, (x_loc - 1, y_loc), open_tile, connected_points)
+            self.get_connected_points(level, (x_loc + 1, y_loc), open_tile, connected_points)
 
-def map_accessibility_in(level, open):
-    """
-    Check that the map is fully connected
+        return connected_points
 
-    Args:
-        level: Level to check
-        open: ID of tile considered open
-
-    Returns:
-        True if level is fully connected, False otherwise
-    """
-    connectivity = MapConnectivity(level)
-    return connectivity.is_connected(open)
+def is_fully_accessible_via(open_tile):
+    return MapConnectivity(open_tile)
 
 def located_in_room(entity):
     """

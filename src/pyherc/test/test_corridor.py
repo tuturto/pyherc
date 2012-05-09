@@ -24,7 +24,7 @@ Tests for Corridor
 #pylint: disable=W0614
 from mockito import mock
 from hamcrest import * #pylint: disable=W0401
-from pyherc.test.matchers import map_accessibility_in
+from pyherc.test.matchers import is_fully_accessible_via
 
 from pyherc.data import Level
 from pyherc.generators.level.partitioners.section import Section, Connection
@@ -135,9 +135,9 @@ class TestCorridor():
 
         generator.generate()
 
-        assert_that(self.level.walls[10][2], is_(equal_to(WALL_EMPTY)))
-        assert_that(self.level.walls[5][8], is_(equal_to(WALL_EMPTY)))
-        assert_that(map_accessibility_in(self.level, WALL_EMPTY), is_(True))
+        assert_that(self.level.get_wall_tile(10, 2), is_(equal_to(WALL_EMPTY)))
+        assert_that(self.level.get_wall_tile(5, 8), is_(equal_to(WALL_EMPTY)))
+        assert_that(self.level, is_fully_accessible_via(WALL_EMPTY))
 
     def test_bent_vertical(self):
         """
@@ -162,6 +162,6 @@ class TestCorridor():
 
         generator.generate()
 
-        assert_that(self.level.walls[9][0], is_(equal_to(WALL_EMPTY)))
-        assert_that(self.level.walls[2][9], is_(equal_to(WALL_EMPTY)))
-        assert_that(map_accessibility_in(self.level, WALL_EMPTY), is_(True))
+        assert_that(self.level.get_wall_tile(9, 0), is_(equal_to(WALL_EMPTY)))
+        assert_that(self.level.get_wall_tile(2, 9), is_(equal_to(WALL_EMPTY)))
+        assert_that(self.level, is_fully_accessible_via(WALL_EMPTY))
