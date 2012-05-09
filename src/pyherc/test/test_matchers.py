@@ -24,7 +24,7 @@ Module for testing customer matchers
 #pylint: disable=W0614
 from pyherc.data import Level
 from pyherc.data.tiles import WALL_EMPTY, FLOOR_ROCK, WALL_GROUND
-from pyherc.test.matchers import MapConnectivity
+from pyherc.test.matchers.map_connectivity import MapConnectivity
 from hamcrest import * #pylint: disable=W0401
 
 class TestLevelConnectivity():

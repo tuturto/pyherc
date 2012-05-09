@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-05-07, 23:00:11 -->
+<!-- Saved: 2012-05-09, 07:56:30 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -80,7 +80,6 @@
     <Source>pyherc/test/test_squareroom.py</Source>
     <Source>pyherc/generators/level/room/corridor.py</Source>
     <Source>pyherc/test/test_corridor.py</Source>
-    <Source>pyherc/test/matchers.py</Source>
     <Source>pyherc/test/test_matchers.py</Source>
     <Source>pyherc/test/test_connection.py</Source>
     <Source>pyherc/generators/level/generator.py</Source>
@@ -123,6 +122,11 @@
     <Source>pyherc/test/builders/character.py</Source>
     <Source>pyherc/test/builders/item.py</Source>
     <Source>pyherc/test/builders/effect.py</Source>
+    <Source>pyherc/test/matchers/__init__.py</Source>
+    <Source>pyherc/test/matchers/map_connectivity.py</Source>
+    <Source>pyherc/test/matchers/contains_creature.py</Source>
+    <Source>pyherc/test/matchers/items.py</Source>
+    <Source>pyherc/test/matchers/active_effects.py</Source>
   </Sources>
   <Forms>
   </Forms>
