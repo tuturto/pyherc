@@ -23,6 +23,7 @@ Module for poison
 """
 from pyherc.aspects import Logged
 from pyherc.rules.effects.effect import Effect
+from pyherc.rules.ending import check_dying
 
 class Poison(Effect):
     """
@@ -45,3 +46,6 @@ class Poison(Effect):
         Triggers effects of the poison
         """
         self.target.hit_points = self.target.hit_points - self.damage
+        check_dying(model = self.target.model,
+                    character = self.target,
+                    death_params = None)
