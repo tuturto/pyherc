@@ -80,3 +80,53 @@ def has_creature(creature, amount):
         amount: Amount of creatures to expect
     """
     return ContainsCreature(creature, wrap_matcher(amount))
+
+class IsLocatedIn(BaseMatcher):
+    """
+    Class to check if given level has creatures
+    """
+    def __init__(self, level):
+        """
+        Default constructor
+        """
+        self.level = level
+        self.item = None
+
+    def _matches(self, item):
+        """
+        Check for match
+        """
+        count = 0
+        self.item = item
+
+        if item in self.level.creatures:
+            return True
+        else:
+            return False
+
+    def describe_to(self, description):
+        """
+        Describe this matcher
+        """
+        description.append(
+                'Level with monster named {0}'
+                .format(self.item))
+
+    def describe_mismatch(self, item, mismatch_description):
+        """
+        Describe this mismatch
+        """
+        mismatch_description.append('Was level with creatures {0}'
+                                    .format(self.level.creatures))
+
+def is_at(level):
+    """
+    Check that level does have given creature
+    """
+    return IsLocatedIn(level)
+
+def is_not_at(level):
+    """
+    Check that level does not have given creature
+    """
+    return is_not(IsLocatedIn(level))

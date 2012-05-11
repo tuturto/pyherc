@@ -25,7 +25,8 @@ Module for testing poison related rules
 from pyherc.rules.effects import Poison
 from pyherc.rules.effects import EffectsFactory
 from pyherc.test.builders import CharacterBuilder
-from pyherc.test.matchers import has_active_effect
+from pyherc.test.builders import LevelBuilder
+from pyherc.test.matchers import has_active_effect, is_not_at
 from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 
@@ -56,6 +57,28 @@ class TestPoison():
         poison.trigger()
 
         assert_that(character.hit_points, is_(equal_to(5)))
+
+    def test_character_can_die(self):
+        """
+        Test that character with less than 1 hit points is removed from play
+        """
+        character = (CharacterBuilder()
+                        .with_hit_points(5)
+                        .build())
+
+        level = (LevelBuilder()
+                    .with_character(character)
+                    .build())
+
+        poison = Poison(duration = 0,
+                        frequency = 0,
+                        tick = 0,
+                        damage = 10,
+                        target = character)
+
+        poison.trigger()
+
+        assert_that(character, is_not_at(level))
 
 class TestEffectsFactory():
     """

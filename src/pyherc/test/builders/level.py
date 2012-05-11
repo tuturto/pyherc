@@ -19,9 +19,38 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for test builders
+Module for level builder
 """
-from .character import CharacterBuilder
-from .item import ItemBuilder
-from .effect import EffectHandleBuilder
-from .level import LevelBuilder
+from pyherc.data import Level
+
+class LevelBuilder(object):
+    """
+    Class for building levels
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(LevelBuilder, self).__init__()
+        self.characters = []
+
+    def with_character(self, character):
+        if hasattr(character, 'build'):
+            self.characters.append(character.build())
+        else:
+            self.characters.append(character)
+        return self
+
+    def build(self):
+        """
+        Build level
+
+        Returns:
+            Level
+        """
+        level = Level()
+
+        for creature in self.characters:
+            level.add_creature(creature)
+
+        return level
