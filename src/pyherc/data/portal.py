@@ -19,12 +19,7 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module containing classes to represent dungeon
-
-Classes:
-    Level
-    Dungeon
-    Portal
+Module containing classes to represent Portals
 """
 
 import random

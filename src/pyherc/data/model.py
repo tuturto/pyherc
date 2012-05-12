@@ -20,13 +20,6 @@
 
 """
 Module for Model related classes
-
-Classes:
-    Model
-    Character
-    Damage
-    Feat
-    WeaponProficiency
 """
 
 import logging

@@ -24,7 +24,6 @@ Module for item related classes
 Classes:
     Item
     WeaponData
-    EffectHandle
 """
 
 import collections

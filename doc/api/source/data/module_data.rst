@@ -8,6 +8,8 @@ pyherc.data
    
    module_dungeon
    module_item
+   module_level   
    module_model
+   module_portal
    module_tiles
    

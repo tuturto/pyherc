@@ -20,11 +20,6 @@
 
 """
 Module containing classes to represent dungeon
-
-Classes:
-    Level
-    Dungeon
-    Portal
 """
 
 import random
