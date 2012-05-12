@@ -69,6 +69,13 @@ class Configuration(object):
     Configuration object for Herculeum
     """
     def __init__(self, base_path, model):
+        """
+        Default constructor
+
+        Args:
+            base_path: path to resources directory
+            model: Model to register with factories
+        """
         super(Configuration, self).__init__()
         self.resolution = None
         self.full_screen = None
@@ -89,9 +96,6 @@ class Configuration(object):
     def initialise(self):
         """
         Initialises configuration
-
-        Args:
-            base_path: path to root of installation
         """
         self.resolution = (800, 600)
         self.full_screen = True
@@ -110,9 +114,6 @@ class Configuration(object):
     def initialise_factories(self):
         """
         Initialises action factory, sub factories and various generators
-
-        Args:
-            model: Model to register to the factory
         """
         self.logger.info('Initialising action sub system')
 

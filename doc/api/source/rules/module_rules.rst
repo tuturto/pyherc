@@ -17,5 +17,4 @@ pyherc.rules
    module_moving
    module_public
    module_tables
-   module_time
    module_utils
