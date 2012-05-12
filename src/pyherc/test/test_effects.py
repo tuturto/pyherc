@@ -32,7 +32,7 @@ from pyherc.rules.public import ActionFactory
 from pyherc.rules.consume.factories import DrinkFactory
 from random import Random
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
-from pyherc.test.builders import EffectHandleBuilder
+from pyherc.test.builders import EffectHandleBuilder, ActionFactoryBuilder
 from pyherc.test.matchers import has_active_effects, has_no_active_effects
 
 from mockito import mock, when, any, verify
@@ -67,6 +67,36 @@ class TestEffects(object):
                         .with_action_factory(action_factory)
                         .build())
         character.drink(potion)
+
+        verify(effect).trigger()
+
+    def test_effect__triggered_when_hitting_target(self):
+        """
+        Test that effect is triggered when attack hits target
+        """
+        effect = mock()
+        model = mock()
+
+        effect_factory = mock(EffectsFactory)
+        when(effect_factory).create_effect(any(),
+                                           target = any()).thenReturn(effect)
+
+        action_factory = (ActionFactoryBuilder()
+                            .with_model(model)
+                            .with_attack_factory()
+                            .with_effect_factory(effect_factory)
+                            .build())
+
+        attacker = (CharacterBuilder()
+                        .with_effect(
+                                EffectHandleBuilder()
+                                    .with_trigger('on attack hit'))
+                        .build())
+
+        defender = (CharacterBuilder()
+                        .build())
+
+        attacker.perform_attack(defender)
 
         verify(effect).trigger()
 

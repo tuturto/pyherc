@@ -25,3 +25,4 @@ from .character import CharacterBuilder
 from .item import ItemBuilder
 from .effect import EffectHandleBuilder
 from .level import LevelBuilder
+from .action import ActionFactoryBuilder
