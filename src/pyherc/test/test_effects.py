@@ -33,6 +33,7 @@ from pyherc.rules.consume.factories import DrinkFactory
 from random import Random
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder, ActionFactoryBuilder
+from pyherc.test.builders import LevelBuilder
 from pyherc.test.matchers import has_active_effects, has_no_active_effects
 
 from mockito import mock, when, any, verify
@@ -75,6 +76,7 @@ class TestEffects(object):
         Test that effect is triggered when attack hits target
         """
         effect = mock()
+        effect.duration = 0
         model = mock()
 
         effect_factory = mock(EffectsFactory)
@@ -91,12 +93,20 @@ class TestEffects(object):
                         .with_effect(
                                 EffectHandleBuilder()
                                     .with_trigger('on attack hit'))
+                        .with_action_factory(action_factory)
+                        .with_location((5, 5))
                         .build())
 
         defender = (CharacterBuilder()
+                        .with_location((6, 5))
                         .build())
 
-        attacker.perform_attack(defender)
+        level = (LevelBuilder()
+                    .with_character(attacker)
+                    .with_character(defender)
+                    .build())
+
+        attacker.perform_attack(3)
 
         verify(effect).trigger()
 

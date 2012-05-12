@@ -479,9 +479,10 @@ class IntegrationTest(object):
 
         walk_factory = WalkFactory()
         move_factory = MoveFactory(walk_factory)
+        effect_factory = None
 
-        unarmed_combat_factory = UnarmedCombatFactory()
-        melee_combat_factory = MeleeCombatFactory()
+        unarmed_combat_factory = UnarmedCombatFactory(effect_factory)
+        melee_combat_factory = MeleeCombatFactory(effect_factory)
         attack_factory = AttackFactory([
                                         unarmed_combat_factory,
                                         melee_combat_factory])

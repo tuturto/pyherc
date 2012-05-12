@@ -63,8 +63,8 @@ class ActionFactoryBuilder(object):
 
     def build(self):
         if self.use_real_attack_factory == True:
-            unarmed_combat_factory = UnarmedCombatFactory()
-            melee_combat_factory = MeleeCombatFactory()
+            unarmed_combat_factory = UnarmedCombatFactory(self.effect_factory)
+            melee_combat_factory = MeleeCombatFactory(self.effect_factory)
             self.attack_factory = AttackFactory([
                                         unarmed_combat_factory,
                                         melee_combat_factory])

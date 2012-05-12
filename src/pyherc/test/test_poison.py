@@ -146,6 +146,6 @@ class TestCharacter():
         character = CharacterBuilder().build()
         poison = mock(Poison)
 
-        character.add_effect(poison)
+        character.add_active_effect(poison)
 
         assert_that(character, has_active_effect(poison))

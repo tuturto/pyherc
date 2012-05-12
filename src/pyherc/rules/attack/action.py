@@ -33,7 +33,8 @@ class AttackAction(object):
     logged = Logged()
 
     @logged
-    def __init__(self, attack_type, to_hit, damage, attacker, target):
+    def __init__(self, attack_type, to_hit, damage,
+                 attacker, target, effect_factory):
         """
         Default constructor
 
@@ -43,6 +44,7 @@ class AttackAction(object):
             damage: Damage object for calculating done damage
             attacker: Character doing attack
             target: Character being attacked
+            effect_factory: Factory used for creating magic effects
         """
         self.action_type = 'attack'
         self.attack_type = attack_type
@@ -50,6 +52,7 @@ class AttackAction(object):
         self.damage = damage
         self.attacker = attacker
         self.target = target
+        self.effect_factory = effect_factory
 
     @logged
     def execute(self):
@@ -72,12 +75,28 @@ class AttackAction(object):
 
         self.attacker.raise_event(event)
 
+        self.trigger_attack_effects()
+
         pyherc.rules.ending.check_dying(self.target.model,
                                         self.target,
                                         self.target.model)
 
         self.attacker.add_to_tick(20)
 
+    def trigger_attack_effects(self):
+        """
+        Trigger effects
+        """
+        if 'on attack hit' in self.attacker.effects.keys():
+            effects = self.attacker.effects['on attack hit']
+            for effect_spec in effects:
+                effect = self.effect_factory.create_effect(
+                                                    effect_spec.effect,
+                                                    target = self.target)
+                if effect.duration == 0:
+                    effect.trigger()
+                else:
+                    self.target.active_effects.append(effect)
 
 class ToHit(object):
     """

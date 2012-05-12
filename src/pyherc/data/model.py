@@ -143,6 +143,7 @@ class Character(object):
         #mimic
         self.mimic_item = None
         self.__active_effects = [] # active effects
+        self.effects = {}
         self.action_factory = action_factory
         self.artificial_intelligence = None
         self.rng = rng
@@ -431,6 +432,22 @@ class Character(object):
 
     @logged
     def add_effect(self, effect):
+        """
+        Adds an effect to an character
+
+        Args:
+            effect: effect to add
+        """
+        if self.effects == None:
+            self.effects = {}
+
+        if self.effects.has_key(effect.trigger):
+            self.effects[effect.trigger].append(effect)
+        else:
+            self.effects[effect.trigger] = [effect]
+
+    @logged
+    def add_active_effect(self, effect):
         """
         Adds effect to this character
 

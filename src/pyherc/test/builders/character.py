@@ -131,4 +131,7 @@ class CharacterBuilder(object):
         character.level = self.level
         character.location = self.location
 
+        for effect in self.effects:
+            character.add_effect(effect)
+
         return character

@@ -58,11 +58,12 @@ class UnarmedCombatFactory(object):
     logged = Logged()
 
     @logged
-    def __init__(self):
+    def __init__(self, effect_factory):
         """
         Constructor for this factory
         """
         self.attack_type = 'unarmed'
+        self.effect_factory = effect_factory
         self.logger = logging.getLogger('pyherc.rules.attack.factories.UnarmedCombatFactory')
 
     def __str__(self):
@@ -97,11 +98,12 @@ class UnarmedCombatFactory(object):
 
         if target != None:
             attack = AttackAction('unarmed',
-                        UnarmedToHit(attacker, target,
-                                    parameters.random_number_generator),
-                        UnarmedDamage(attacker.get_attack()),
-                        attacker,
-                        target)
+                        to_hit = UnarmedToHit(attacker, target,
+                                              parameters.random_number_generator),
+                        damage = UnarmedDamage(attacker.get_attack()),
+                        attacker = attacker,
+                        target = target,
+                        effect_factory = self.effect_factory)
         else:
             self.logger.warn('No target found')
             attack = None
@@ -152,11 +154,12 @@ class MeleeCombatFactory(object):
     logged = Logged()
 
     @logged
-    def __init__(self):
+    def __init__(self, effect_factory):
         """
         Constructor for this factory
         """
         self.attack_type = 'melee'
+        self.effect_factory = effect_factory
 
     def __str__(self):
         return 'melee combat factory'
@@ -187,12 +190,14 @@ class MeleeCombatFactory(object):
         weapon = attacker.weapons[0]
 
         if target != None:
-            attack = AttackAction('melee',
-                        MeleeToHit(attacker, target,
-                                    parameters.random_number_generator),
-                        MeleeDamage(weapon.weapon_data.damage),
-                        attacker,
-                        target)
+            attack = AttackAction(
+                        attack_type = 'melee',
+                        to_hit = MeleeToHit(attacker, target,
+                                            parameters.random_number_generator),
+                        damage = MeleeDamage(weapon.weapon_data.damage),
+                        attacker = attacker,
+                        target = target,
+                        effect_factory = self.effect_factory)
         else:
             attack = None
 
