@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.public &mdash; Herculeum 0.2 documentation</title>
+    <title>pyherc.rules.public &mdash; Herculeum 0.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.2 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.3 documentation" href="../index.html" />
     <link rel="up" title="pyherc.rules" href="module_rules.html" />
     <link rel="next" title="pyherc.rules.tables" href="module_tables.html" />
     <link rel="prev" title="pyherc.rules.moving" href="module_moving.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_moving.html" title="pyherc.rules.moving"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_rules.html" accesskey="U">pyherc.rules</a> &raquo;</li> 
       </ul>
@@ -63,7 +63,9 @@
 <p>Classes:
 ActionFactory - Class used to contruct Action objects
 ActionParameters - Class used to guide Action construction</p>
-<p>AttackParameters - Class used to guide contruction of attack related actions</p>
+<p>AttackParameters - Class used to guide contruction of attack related actions
+MoveParameters - Class used to guide construction of move related actions
+DrinkParameters - Class used to guide drinking related actions</p>
 <dl class="class">
 <dt id="pyherc.rules.public.ActionFactory">
 <em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">ActionFactory</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionFactory" title="Permalink to this definition">¶</a></dt>
@@ -106,22 +108,18 @@ ActionParameters - Class used to guide Action construction</p>
 <dt id="pyherc.rules.public.ActionParameters">
 <em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">ActionParameters</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Object for controlling action creation</p>
-<dl class="method">
-<dt id="pyherc.rules.public.ActionParameters.set_model">
-<tt class="descname">set_model</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionParameters.set_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set model</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>model: Model to use</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
 <dt id="pyherc.rules.public.AttackParameters">
 <em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">AttackParameters</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.AttackParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Object for controlling attack action creation</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.rules.public.DrinkParameters">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">DrinkParameters</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.DrinkParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object for controlling drink action creation</p>
 </dd></dl>
 
 <dl class="class">
@@ -181,7 +179,7 @@ ActionParameters - Class used to guide Action construction</p>
         <li class="right" >
           <a href="module_moving.html" title="pyherc.rules.moving"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_rules.html" >pyherc.rules</a> &raquo;</li> 
       </ul>

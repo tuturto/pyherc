@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.data.model &mdash; Herculeum 0.2 documentation</title>
+    <title>pyherc.data.model &mdash; Herculeum 0.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.2 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.3 documentation" href="../index.html" />
     <link rel="up" title="pyherc.data" href="module_data.html" />
-    <link rel="next" title="pyherc.data.tiles" href="module_tiles.html" />
-    <link rel="prev" title="pyherc.data.item" href="module_item.html" /> 
+    <link rel="next" title="pyherc.data.portal" href="module_portal.html" />
+    <link rel="prev" title="pyherc.data.level" href="module_level.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,12 +41,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_tiles.html" title="pyherc.data.tiles"
+          <a href="module_portal.html" title="pyherc.data.portal"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="module_item.html" title="pyherc.data.item"
+          <a href="module_level.html" title="pyherc.data.level"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
       </ul>
@@ -60,14 +60,6 @@
   <div class="section" id="module-pyherc.data.model">
 <span id="pyherc-data-model"></span><h1>pyherc.data.model<a class="headerlink" href="#module-pyherc.data.model" title="Permalink to this headline">¶</a></h1>
 <p>Module for Model related classes</p>
-<dl class="docutils">
-<dt>Classes:</dt>
-<dd>Model
-Character
-Damage
-Feat
-WeaponProficiency</dd>
-</dl>
 <dl class="class">
 <dt id="pyherc.data.model.Character">
 <em class="property">class </em><tt class="descclassname">pyherc.data.model.</tt><tt class="descname">Character</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character" title="Permalink to this definition">¶</a></dt>
@@ -76,6 +68,37 @@ WeaponProficiency</dd>
 <dt id="pyherc.data.model.Character.act">
 <tt class="descname">act</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Triggers AI of this character</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.data.model.Character.active_effects">
+<tt class="descname">active_effects</tt><a class="headerlink" href="#pyherc.data.model.Character.active_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get active effects of the character</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>List of active effects</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.add_effect">
+<tt class="descname">add_effect</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.add_effect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds effect to this character</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>effect: Effect to add</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.add_to_tick">
+<tt class="descname">add_to_tick</tt><big>(</big><em>cost</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.add_to_tick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add cost of action to characters tick,
+while taking characters speed into account</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>cost: Cost of action in ticks</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -97,6 +120,16 @@ WeaponProficiency</dd>
 <dd>action_parameters: parameters controlling creation of the action</dd>
 <dt>Returns:</dt>
 <dd>Action</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.model.Character.drink">
+<tt class="descname">drink</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.drink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drink potion</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>potion: Item to drink</dd>
 </dl>
 </dd></dl>
 
@@ -225,6 +258,12 @@ weapon: weapon which proficient requirements should be checked</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pyherc.data.model.Character.remove_expired_effects">
+<tt class="descname">remove_expired_effects</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.remove_expired_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all effects that have expired</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyherc.data.model.Character.set_attack">
 <tt class="descname">set_attack</tt><big>(</big><em>attack</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Character.set_attack" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set attack attribute of the character
@@ -284,6 +323,16 @@ weapon: weapon which proficient requirements should be checked</p>
 <em class="property">class </em><tt class="descclassname">pyherc.data.model.</tt><tt class="descname">Model</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents playing world</p>
 <dl class="method">
+<dt id="pyherc.data.model.Model.get_next_creature">
+<tt class="descname">get_next_creature</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Model.get_next_creature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the character who is next to take action</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>Character to act next</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyherc.data.model.Model.raise_event">
 <tt class="descname">raise_event</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.model.Model.raise_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Relays event to creatures</p>
@@ -310,11 +359,11 @@ weapon: weapon which proficient requirements should be checked</p>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="module_item.html"
-                        title="previous chapter">pyherc.data.item</a></p>
+  <p class="topless"><a href="module_level.html"
+                        title="previous chapter">pyherc.data.level</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="module_tiles.html"
-                        title="next chapter">pyherc.data.tiles</a></p>
+  <p class="topless"><a href="module_portal.html"
+                        title="next chapter">pyherc.data.portal</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/data/module_model.txt"
@@ -347,12 +396,12 @@ weapon: weapon which proficient requirements should be checked</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_tiles.html" title="pyherc.data.tiles"
+          <a href="module_portal.html" title="pyherc.data.portal"
              >next</a> |</li>
         <li class="right" >
-          <a href="module_item.html" title="pyherc.data.item"
+          <a href="module_level.html" title="pyherc.data.level"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_data.html" >pyherc.data</a> &raquo;</li> 
       </ul>

@@ -5,7 +5,7 @@
     
     
     <meta http-equiv='X-UA-Compatible' content='IE=emulateIE7' />
-    <title>Coverage for pyherc.rules.ending: 26%</title>
+    <title>Coverage for pyherc.rules.ending: 52%</title>
     <link rel='stylesheet' href='style.css' type='text/css'>
     <script type='text/javascript' src='jquery-1.4.3.min.js'></script>
     <script type='text/javascript' src='jquery.hotkeys.js'></script>
@@ -20,13 +20,13 @@
 <div id='header'>
     <div class='content'>
         <h1>Coverage for <b>pyherc.rules.ending</b> :
-            <span class='pc_cov'>26%</span>
+            <span class='pc_cov'>52%</span>
         </h1>
         <img id='keyboard_icon' src='keybd_closed.png'>
         <h2 class='stats'>
             31 statements
-            <span class='run hide_run shortkey_r' onclick='coverage.toggle_lines(this, "run")'>8 run</span>
-            <span class='mis shortkey_m' onclick='coverage.toggle_lines(this, "mis")'>23 missing</span>
+            <span class='run hide_run shortkey_r' onclick='coverage.toggle_lines(this, "run")'>16 run</span>
+            <span class='mis shortkey_m' onclick='coverage.toggle_lines(this, "mis")'>15 missing</span>
             <span class='exc shortkey_x' onclick='coverage.toggle_lines(this, "exc")'>0 excluded</span>
             
         </h2>
@@ -144,14 +144,14 @@
 <p id='n82' class='pln'><a href='#n82'>82</a></p>
 <p id='n83' class='stm run hide_run'><a href='#n83'>83</a></p>
 <p id='n84' class='stm run hide_run'><a href='#n84'>84</a></p>
-<p id='n85' class='stm mis'><a href='#n85'>85</a></p>
-<p id='n86' class='stm mis'><a href='#n86'>86</a></p>
-<p id='n87' class='stm mis'><a href='#n87'>87</a></p>
-<p id='n88' class='stm mis'><a href='#n88'>88</a></p>
-<p id='n89' class='stm mis'><a href='#n89'>89</a></p>
-<p id='n90' class='stm mis'><a href='#n90'>90</a></p>
-<p id='n91' class='stm mis'><a href='#n91'>91</a></p>
-<p id='n92' class='stm mis'><a href='#n92'>92</a></p>
+<p id='n85' class='stm run hide_run'><a href='#n85'>85</a></p>
+<p id='n86' class='stm run hide_run'><a href='#n86'>86</a></p>
+<p id='n87' class='stm run hide_run'><a href='#n87'>87</a></p>
+<p id='n88' class='stm run hide_run'><a href='#n88'>88</a></p>
+<p id='n89' class='stm run hide_run'><a href='#n89'>89</a></p>
+<p id='n90' class='stm run hide_run'><a href='#n90'>90</a></p>
+<p id='n91' class='stm run hide_run'><a href='#n91'>91</a></p>
+<p id='n92' class='stm run hide_run'><a href='#n92'>92</a></p>
 <p id='n93' class='pln'><a href='#n93'>93</a></p>
 <p id='n94' class='stm mis'><a href='#n94'>94</a></p>
                 
@@ -241,14 +241,14 @@
 <p id='t82' class='pln'><span class='str'>&nbsp; &nbsp; &quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
 <p id='t83' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>character</span> <span class='op'>!=</span> <span class='nam'>None</span><span class='strut'>&nbsp;</span></p>
 <p id='t84' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>hit_points</span> <span class='op'>&lt;=</span> <span class='num'>0</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t85' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>event</span> <span class='op'>=</span> <span class='op'>{</span><span class='op'>}</span><span class='strut'>&nbsp;</span></p>
-<p id='t86' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>event</span><span class='op'>[</span><span class='str'>&#39;type&#39;</span><span class='op'>]</span> <span class='op'>=</span> <span class='str'>&#39;death&#39;</span><span class='strut'>&nbsp;</span></p>
-<p id='t87' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>event</span><span class='op'>[</span><span class='str'>&#39;character&#39;</span><span class='op'>]</span> <span class='op'>=</span> <span class='nam'>character</span><span class='strut'>&nbsp;</span></p>
-<p id='t88' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>event</span><span class='op'>[</span><span class='str'>&#39;location&#39;</span><span class='op'>]</span> <span class='op'>=</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>location</span><span class='strut'>&nbsp;</span></p>
-<p id='t89' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>event</span><span class='op'>[</span><span class='str'>&#39;level&#39;</span><span class='op'>]</span> <span class='op'>=</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>level</span><span class='strut'>&nbsp;</span></p>
-<p id='t90' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>model</span><span class='op'>.</span><span class='nam'>raise_event</span><span class='op'>(</span><span class='nam'>event</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t91' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>character</span> <span class='op'>!=</span> <span class='nam'>model</span><span class='op'>.</span><span class='nam'>player</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t92' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>character</span><span class='op'>.</span><span class='nam'>level</span><span class='op'>.</span><span class='nam'>remove_creature</span><span class='op'>(</span><span class='nam'>character</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t85' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>event</span> <span class='op'>=</span> <span class='op'>{</span><span class='op'>}</span><span class='strut'>&nbsp;</span></p>
+<p id='t86' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>event</span><span class='op'>[</span><span class='str'>&#39;type&#39;</span><span class='op'>]</span> <span class='op'>=</span> <span class='str'>&#39;death&#39;</span><span class='strut'>&nbsp;</span></p>
+<p id='t87' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>event</span><span class='op'>[</span><span class='str'>&#39;character&#39;</span><span class='op'>]</span> <span class='op'>=</span> <span class='nam'>character</span><span class='strut'>&nbsp;</span></p>
+<p id='t88' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>event</span><span class='op'>[</span><span class='str'>&#39;location&#39;</span><span class='op'>]</span> <span class='op'>=</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>location</span><span class='strut'>&nbsp;</span></p>
+<p id='t89' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>event</span><span class='op'>[</span><span class='str'>&#39;level&#39;</span><span class='op'>]</span> <span class='op'>=</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>level</span><span class='strut'>&nbsp;</span></p>
+<p id='t90' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>model</span><span class='op'>.</span><span class='nam'>raise_event</span><span class='op'>(</span><span class='nam'>event</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t91' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>character</span> <span class='op'>!=</span> <span class='nam'>model</span><span class='op'>.</span><span class='nam'>player</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t92' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>character</span><span class='op'>.</span><span class='nam'>level</span><span class='op'>.</span><span class='nam'>remove_creature</span><span class='op'>(</span><span class='nam'>character</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
 <p id='t93' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>else</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
 <p id='t94' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>model</span><span class='op'>.</span><span class='nam'>end_condition</span> <span class='op'>=</span> <span class='num'>1</span><span class='strut'>&nbsp;</span></p>
                 

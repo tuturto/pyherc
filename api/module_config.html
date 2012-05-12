@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.config &mdash; Herculeum 0.2 documentation</title>
+    <title>pyherc.config &mdash; Herculeum 0.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.2',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.2 documentation" href="index.html" />
+    <link rel="top" title="Herculeum 0.3 documentation" href="index.html" />
     <link rel="up" title="API Reference" href="api_reference.html" />
     <link rel="next" title="pyherc.ai" href="ai/module_ai.html" />
     <link rel="prev" title="pyherc.main" href="module_main.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_main.html" title="pyherc.main"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="api_reference.html" accesskey="U">API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -56,8 +56,24 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-pyherc.config">
-<span id="pyherc-config"></span><h1>pyherc.config<a class="headerlink" href="#module-pyherc.config" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="pyherc-config">
+<h1>pyherc.config<a class="headerlink" href="#pyherc-config" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Configuration of the game is placed in one convenient location, namely to
+Configuration class. Initialisation is done by creating an instance of
+Configuration object and passing path to the directory where resources can be
+found and instance of Model class. After this configuration can be set by
+calling initialise():</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="s">&#39;./&#39;</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">initialise</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-pyherc.config">
+<span id="api"></span><h2>API<a class="headerlink" href="#module-pyherc.config" title="Permalink to this headline">¶</a></h2>
 <p>Configuration for herculeum</p>
 <dl class="class">
 <dt id="pyherc.config.Configuration">
@@ -90,20 +106,12 @@ new_config: items to add to configuration</dd>
 <dt id="pyherc.config.Configuration.initialise">
 <tt class="descname">initialise</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.config.Configuration.initialise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialises configuration</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>base_path: path to root of installation</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.config.Configuration.initialise_factories">
 <tt class="descname">initialise_factories</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.config.Configuration.initialise_factories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialises action factory, sub factories and various generators</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>model: Model to register to the factory</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -127,6 +135,7 @@ new_config: items to add to configuration</dd>
 </dd></dl>
 
 </div>
+</div>
 
 
           </div>
@@ -134,6 +143,15 @@ new_config: items to add to configuration</dd>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">pyherc.config</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#module-pyherc.config">API</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="module_main.html"
                         title="previous chapter">pyherc.main</a></p>
@@ -177,7 +195,7 @@ new_config: items to add to configuration</dd>
         <li class="right" >
           <a href="module_main.html" title="pyherc.main"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="api_reference.html" >API Reference</a> &raquo;</li> 
       </ul>
     </div>

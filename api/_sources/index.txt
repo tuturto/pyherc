@@ -16,6 +16,7 @@ Contents:
    generate_level
    modular_levels
    generate_item
+   actions
    api_reference
 
 

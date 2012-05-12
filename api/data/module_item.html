@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.data.item &mdash; Herculeum 0.2 documentation</title>
+    <title>pyherc.data.item &mdash; Herculeum 0.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.2 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.3 documentation" href="../index.html" />
     <link rel="up" title="pyherc.data" href="module_data.html" />
-    <link rel="next" title="pyherc.data.model" href="module_model.html" />
+    <link rel="next" title="pyherc.data.level" href="module_level.html" />
     <link rel="prev" title="pyherc.data.dungeon" href="module_dungeon.html" /> 
   </head>
   <body>
@@ -41,12 +41,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_model.html" title="pyherc.data.model"
+          <a href="module_level.html" title="pyherc.data.level"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="module_dungeon.html" title="pyherc.data.dungeon"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
       </ul>
@@ -63,8 +63,7 @@
 <dl class="docutils">
 <dt>Classes:</dt>
 <dd>Item
-WeaponData
-ItemEffectData</dd>
+WeaponData</dd>
 </dl>
 <dl class="class">
 <dt id="pyherc.data.item.Item">
@@ -73,23 +72,29 @@ ItemEffectData</dd>
 <dl class="method">
 <dt id="pyherc.data.item.Item.add_effect">
 <tt class="descname">add_effect</tt><big>(</big><em>effect</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.add_effect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds an effect to an item
-param effect: effect to add</p>
+<dd><p>Adds an effect to an item</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>effect: effect to add</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="pyherc.data.item.Item.charges_left">
-<tt class="descname">charges_left</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.charges_left" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns amount of charges left in item
-In case of multiple charges, a list is returned</p>
+<tt class="descname">charges_left</tt><a class="headerlink" href="#pyherc.data.item.Item.charges_left" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list containing amount of charges left in item</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.data.item.Item.get_effects">
 <tt class="descname">get_effects</tt><big>(</big><em>effect_type=None</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.get_effects" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves effects the item has
-Param effect_type: type of effects retrieved. Default None
-Returns: list of effects</p>
+<dd><p>Retrieves effects the item has</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>effect_type: type of effects retrieved. Default None</dd>
+<dt>Returns:</dt>
+<dd>list of effects</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -102,9 +107,12 @@ Returns: list of effects</p>
 <dt id="pyherc.data.item.Item.get_name">
 <tt class="descname">get_name</tt><big>(</big><em>character</em>, <em>decorate=False</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.get_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get name of the item
-Name can be appearance or given name
-&#64;param character: character handling the item
-&#64;param decorate: should name be decorated with status info, default False</p>
+Name can be appearance or given name</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>character: character handling the item
+decorate: should name be decorated with status info, default False</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -113,24 +121,18 @@ Name can be appearance or given name
 <dd><p>Return tags</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="pyherc.data.item.Item.maximum_charges_left">
-<tt class="descname">maximum_charges_left</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.maximum_charges_left" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">maximum_charges_left</tt><a class="headerlink" href="#pyherc.data.item.Item.maximum_charges_left" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return highest amount of charges left in item</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="pyherc.data.item.Item.minimum_charges_left">
-<tt class="descname">minimum_charges_left</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.minimum_charges_left" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">minimum_charges_left</tt><a class="headerlink" href="#pyherc.data.item.Item.minimum_charges_left" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return smallest amount of charges left in item</p>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="class">
-<dt id="pyherc.data.item.ItemEffectData">
-<em class="property">class </em><tt class="descclassname">pyherc.data.item.</tt><tt class="descname">ItemEffectData</tt><big>(</big><em>trigger=None</em>, <em>effect_type=None</em>, <em>power=None</em>, <em>charges=1</em><big>)</big><a class="headerlink" href="#pyherc.data.item.ItemEffectData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Represents magical effect on an item</p>
 </dd></dl>
 
 <dl class="class">
@@ -151,8 +153,8 @@ Name can be appearance or given name
   <p class="topless"><a href="module_dungeon.html"
                         title="previous chapter">pyherc.data.dungeon</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="module_model.html"
-                        title="next chapter">pyherc.data.model</a></p>
+  <p class="topless"><a href="module_level.html"
+                        title="next chapter">pyherc.data.level</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/data/module_item.txt"
@@ -185,12 +187,12 @@ Name can be appearance or given name
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_model.html" title="pyherc.data.model"
+          <a href="module_level.html" title="pyherc.data.level"
              >next</a> |</li>
         <li class="right" >
           <a href="module_dungeon.html" title="pyherc.data.dungeon"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_data.html" >pyherc.data</a> &raquo;</li> 
       </ul>

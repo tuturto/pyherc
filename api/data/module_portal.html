@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.time &mdash; Herculeum 0.2 documentation</title>
+    <title>pyherc.data.portal &mdash; Herculeum 0.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.2 documentation" href="../index.html" />
-    <link rel="up" title="pyherc.rules" href="module_rules.html" />
-    <link rel="next" title="pyherc.rules.utils" href="module_utils.html" />
-    <link rel="prev" title="pyherc.rules.tables" href="module_tables.html" /> 
+    <link rel="top" title="Herculeum 0.3 documentation" href="../index.html" />
+    <link rel="up" title="pyherc.data" href="module_data.html" />
+    <link rel="next" title="pyherc.data.tiles" href="module_tiles.html" />
+    <link rel="prev" title="pyherc.data.model" href="module_model.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,14 +41,14 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_utils.html" title="pyherc.rules.utils"
+          <a href="module_tiles.html" title="pyherc.data.tiles"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="module_tables.html" title="pyherc.rules.tables"
+          <a href="module_model.html" title="pyherc.data.model"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
-          <li><a href="module_rules.html" accesskey="U">pyherc.rules</a> &raquo;</li> 
+          <li><a href="module_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -57,30 +57,31 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-pyherc.rules.time">
-<span id="pyherc-rules-time"></span><h1>pyherc.rules.time<a class="headerlink" href="#module-pyherc.rules.time" title="Permalink to this headline">¶</a></h1>
-<p>Module handling time functions</p>
-<dl class="function">
-<dt id="pyherc.rules.time.get_new_tick">
-<tt class="descclassname">pyherc.rules.time.</tt><tt class="descname">get_new_tick</tt><big>(</big><em>character</em>, <em>cost</em><big>)</big><a class="headerlink" href="#pyherc.rules.time.get_new_tick" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate new tick for character</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>character: character performing the action
-cost: cost of the action</dd>
-<dt>Returns:</dt>
-<dd>new tick</dd>
-</dl>
+  <div class="section" id="module-pyherc.data.portal">
+<span id="pyherc-data-portal"></span><h1>pyherc.data.portal<a class="headerlink" href="#module-pyherc.data.portal" title="Permalink to this headline">¶</a></h1>
+<p>Module containing classes to represent Portals</p>
+<dl class="class">
+<dt id="pyherc.data.portal.Portal">
+<em class="property">class </em><tt class="descclassname">pyherc.data.portal.</tt><tt class="descname">Portal</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Portal linking two levels together</p>
+<dl class="attribute">
+<dt id="pyherc.data.portal.Portal.icon">
+<tt class="descname">icon</tt><a class="headerlink" href="#pyherc.data.portal.Portal.icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get icon to display this portal</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="pyherc.rules.time.get_next_creature">
-<tt class="descclassname">pyherc.rules.time.</tt><tt class="descname">get_next_creature</tt><big>(</big><em>model</em><big>)</big><a class="headerlink" href="#pyherc.rules.time.get_next_creature" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the character who is next to take action</p>
-<dl class="docutils">
-<dt>Returns</dt>
-<dd>Character to act next</dd>
-</dl>
+<dl class="attribute">
+<dt id="pyherc.data.portal.Portal.other_end">
+<tt class="descname">other_end</tt><a class="headerlink" href="#pyherc.data.portal.Portal.other_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the other end of the portal</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.data.portal.Portal.other_end_icon">
+<tt class="descname">other_end_icon</tt><a class="headerlink" href="#pyherc.data.portal.Portal.other_end_icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get icon used for other end of this portal</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -92,14 +93,14 @@ cost: cost of the action</dd>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="module_tables.html"
-                        title="previous chapter">pyherc.rules.tables</a></p>
+  <p class="topless"><a href="module_model.html"
+                        title="previous chapter">pyherc.data.model</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="module_utils.html"
-                        title="next chapter">pyherc.rules.utils</a></p>
+  <p class="topless"><a href="module_tiles.html"
+                        title="next chapter">pyherc.data.tiles</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/rules/module_time.txt"
+    <li><a href="../_sources/data/module_portal.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -129,14 +130,14 @@ cost: cost of the action</dd>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_utils.html" title="pyherc.rules.utils"
+          <a href="module_tiles.html" title="pyherc.data.tiles"
              >next</a> |</li>
         <li class="right" >
-          <a href="module_tables.html" title="pyherc.rules.tables"
+          <a href="module_model.html" title="pyherc.data.model"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
-          <li><a href="module_rules.html" >pyherc.rules</a> &raquo;</li> 
+          <li><a href="module_data.html" >pyherc.data</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

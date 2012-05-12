@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.factory &mdash; Herculeum 0.2 documentation</title>
+    <title>pyherc.rules.factory &mdash; Herculeum 0.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.2 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.3 documentation" href="../index.html" />
     <link rel="up" title="pyherc.rules" href="module_rules.html" />
     <link rel="next" title="pyherc.rules.items" href="module_items.html" />
     <link rel="prev" title="pyherc.rules.ending" href="module_ending.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_ending.html" title="pyherc.rules.ending"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_rules.html" accesskey="U">pyherc.rules</a> &raquo;</li> 
       </ul>
@@ -62,28 +62,38 @@
 <p>Factory related classes are defined here</p>
 <dl class="class">
 <dt id="pyherc.rules.factory.SubActionFactory">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.factory.</tt><tt class="descname">SubActionFactory</tt><a class="headerlink" href="#pyherc.rules.factory.SubActionFactory" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.factory.</tt><tt class="descname">SubActionFactory</tt><big>(</big><em>effect_factory=None</em><big>)</big><a class="headerlink" href="#pyherc.rules.factory.SubActionFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factory to handle concrete creation of actions</p>
 <dl class="method">
 <dt id="pyherc.rules.factory.SubActionFactory.can_handle">
 <tt class="descname">can_handle</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.factory.SubActionFactory.can_handle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Can this factory process these parameters
-&#64;param parameters: Parameters to check
-&#64;returns: True if factory is capable of handling parameters</p>
+<dd><p>Can this factory process these parameters</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>parameters: Parameters to check</dd>
+<dt>Returns:</dt>
+<dd>True if factory is capable of handling parameters</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.rules.factory.SubActionFactory.get_action">
 <tt class="descname">get_action</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.factory.SubActionFactory.get_action" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an action
-&#64;param parameters: Parameters used to control action creation</p>
+<dd><p>Create an action</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>parameters: Parameters used to control action creation</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.rules.factory.SubActionFactory.get_sub_factory">
 <tt class="descname">get_sub_factory</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.factory.SubActionFactory.get_sub_factory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get sub factory to handle parameters
-&#64;param parameters: Parameters to use for searching the factory</p>
+<dd><p>Get sub factory to handle parameters</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>parameters: Parameters to use for searching the factory</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -139,7 +149,7 @@
         <li class="right" >
           <a href="module_ending.html" title="pyherc.rules.ending"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.3 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="module_rules.html" >pyherc.rules</a> &raquo;</li> 
       </ul>
