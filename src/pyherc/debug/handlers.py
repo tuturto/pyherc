@@ -110,11 +110,55 @@ class Player:
         """
         pass
 
+    def get_form(self):
+        """
+        Creates form to display
+
+        Returns:
+            Form
+        """
+        display_form = form.Form(
+            form.Textbox("name", description="Name"),
+            form.Textbox("hit_points", description="Hit points"),
+            form.Textbox("body", description="Body"),
+            form.Textbox("finesse", description="Finesse"),
+            form.Textbox("mind", description="Mind"),
+            form.Button('Ok')
+            )
+
+        return display_form
+
     def GET(self):
         """
         Handle http get
         """
-        return pyherc.debug.data.render.player(APP.world.player)
+        player_character = APP.world.player
+        input_form = self.get_form()
+        input_form.fill({'name': player_character.name,
+                         'hit_points': player_character.hit_points,
+                         'body': player_character.body,
+                         'finesse': player_character.finesse,
+                         'mind': player_character.mind})
+
+        return pyherc.debug.data.render.player(input_form)
+
+    def POST(self):
+        """
+        Handle http post
+        """
+        form_data = web.input()
+        player_character = APP.world.player
+
+        player_character.name = form_data.name
+        player_character.hit_points = int(form_data.hit_points)
+        player_character.body = int(form_data.body)
+        player_character.finesse = int(form_data.finesse)
+        player_character.mind = int(form_data.mind)
+
+        input_form = self.get_form()
+        input_form.fill(form_data)
+
+        return pyherc.debug.data.render.player(input_form)
 
 class Factory:
     """

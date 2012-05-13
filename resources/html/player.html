@@ -1,25 +1,11 @@
-$def with (player)
+$def with (form)
 <html>
-    <head>
-        <title>Herculeum debug server</title>
-    </head>
-    <body>
-        <table border="1">
-            <tr><th>Name</th><td>$player.name</td></tr>
-            <tr><th>Body</th><td>$player.body</td></tr>
-            <tr><th>Mind</th><td>$player.mind</td></tr>
-            <tr><th>Finesse</th><td>$player.finesse</td></tr>
-            <tr><th>Speed</th><td>$player.speed</td></tr>
-            <tr><th>Hit points</th><td>$player.hit_points / $player.max_hp</td></tr>
-            <tr><th>Location</th><td>$player.location</td></tr>                               
-            <tr><th rowspan="$(len(player.inventory)+1)">Inventory</th></tr>
-
-$for item in player.inventory:
-    <tr><td>$item.name</td></tr>
-
-<tr><th rowspan="$(len(player.inventory)+1)">Weapons</th></tr>
-$for item in player.weapons:
-    <tr><td>$item.name</td></tr>
-</table>
+<head>
+<title>Herculeum debug server</title>
+</head>
+<body>
+<form method="POST">
+    $:form.render()
+</form>
 </body>
 </html>
