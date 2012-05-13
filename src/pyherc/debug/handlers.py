@@ -149,7 +149,6 @@ class Factory:
         """
         Handle http post
         """
-        # return pyherc.debug.data.render.factory(display_form)
         form_data = web.input()
         creature_name = form_data.creature_name
 
