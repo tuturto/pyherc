@@ -1,12 +1,12 @@
 ###########
-Release 0.3
+Release 0.4
 ###########
 
 ************
 New features
 ************
 
-- Potions now affect characters for multiple turns
+- None
 
 **********
 Fixed bugs
@@ -18,5 +18,5 @@ Fixed bugs
 Other notes
 ***********
 
-- various builders can now be used in testing
-- more hamcrest matchers were added
+- get_next_creature does not produce debug log anymore
+- very rudimentary monster spawning added to debug server

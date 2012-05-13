@@ -23,6 +23,7 @@ Module for page handlers
 """
 import pyherc.debug.data
 from pyherc.application import APP
+from web import form
 
 web_loaded = False
 
@@ -49,7 +50,8 @@ def get_urls():
     return (
             '/', 'Index',
             '/map', 'Map',
-            '/player', 'Player'
+            '/player', 'Player',
+            '/factory', 'Factory'
             )
 
 def get_debug_server():
@@ -114,3 +116,48 @@ class Player:
         """
         return pyherc.debug.data.render.player(APP.world.player)
 
+class Factory:
+    """
+    Class for creating new objects
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        pass
+
+    def get_form(self):
+        """
+        Creates form to display
+
+        Returns:
+            Form
+        """
+        display_form = form.Form(
+            form.Textbox("creature_name", description="Creature")
+            )
+
+        return display_form
+
+    def GET(self):
+        """
+        Handle http get
+        """
+        return pyherc.debug.data.render.factory(self.get_form())
+
+    def POST(self):
+        """
+        Handle http post
+        """
+        # return pyherc.debug.data.render.factory(display_form)
+        form_data = web.input()
+        creature_name = form_data.creature_name
+
+        creature = APP.creature_generator.generate_creature({'name':creature_name})
+        player_character = APP.world.player
+        level = player_character.level
+        location = player_character.location
+
+        level.add_creature(creature, (location[0] + 2, location[1]))
+
+        return 'Created monster called {0}'.format(form_data.creature_name)
