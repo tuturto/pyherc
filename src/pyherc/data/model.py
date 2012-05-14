@@ -175,6 +175,8 @@ class Character(object):
     def __set_hp(self, hit_points):
         """
         Set current hitpoints
+
+        Args:
             hit_points: hit points to set
         """
         self.__hit_points = hit_points
@@ -200,42 +202,54 @@ class Character(object):
     def __get_finesse(self):
         """
         Get finesse attribute
-        @returns: finesse attribute
+
+        Returns:
+            finesse attribute
         """
         return self.__finesse
 
     def __set_finesse(self, finesse):
         """
         Set finesse attribute
-        @param finesse: finesse attribute to set
+
+        Args:
+            finesse: finesse attribute to set
         """
         self.__finesse = finesse
 
     def __get_mind(self):
         """
         Get mind attribute
-        @returns: Mind attribute
+
+        Returns:
+            Mind attribute
         """
         return self.__mind
 
     def __set_mind(self, mind):
         """
         Set mind attribute
-        @param mind: mind attribute to set
+
+        Args:
+            mind: mind attribute to set
         """
         self.__mind = mind
 
     def get_attack(self):
         """
         Return attack attribute of the character
-        @returns: Attack value
+
+        Returns:
+            Attack value
         """
         return self.attack
 
     def set_attack(self, attack):
         """
         Set attack attribute of the character
-        @param attack: Attack attribute
+
+        Args:
+            attack: Attack attribute
         """
         self.attack = attack
 
@@ -284,28 +298,36 @@ class Character(object):
     def set_mimic_item(self, item):
         """
         Sets item this character can mimic or pretend to be
-        @param item: item to mimic
+
+        Args:
+            item: item to mimic
         """
         self.mimic_item = item
 
     def get_mimic_item(self):
         """
         Gets item this character can mimic
-        @returns: item to mimic
+
+        Returns:
+            item to mimic
         """
         return self.mimic_item
 
     def get_location(self):
         """
         Returns location of this character
-        @returns: location
+
+        Returns:
+            location
         """
         return self.location
 
     def set_location(self, location):
         """
         Sets location of this character
-        @param location: location to set
+
+        Args:
+            location: location to set
         """
         self.location = location
 
@@ -481,10 +503,21 @@ class Character(object):
         Add cost of action to characters tick,
         while taking characters speed into account
 
+        For example:
+        >>> pc = Character(None, None, None)
+        >>> pc.tick = 5
+        >>> pc.speed = 2
+        >>> pc.add_to_tick(5)
+        15
+
         Args:
             cost: Cost of action in ticks
+
+        Returns:
+            New ticks
         """
         self.tick = self.tick + (self.speed * cost)
+        return self.tick
 
     hit_points = property(__get_hp, __set_hp)
     body = property(__get_body, __set_body)
@@ -532,14 +565,18 @@ class MimicData():
     def get_character(self):
         """
         Get mimicing character
-        @returns: Character
+
+        Returns:
+            Character
         """
         return self.character
 
     def set_character(self, character):
         """
         Set character mimicing this item
-        @param character: Character to set
+
+        Args:
+            character: Character to set
         """
         self.character = character
 
