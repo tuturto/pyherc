@@ -52,18 +52,15 @@ class Application(object):
         """
         Process command line options
         """
+        log_levels = {'debug': logging.DEBUG,
+                      'info': logging.INFO,
+                      'warning': logging.WARNING,
+                      'error': logging.ERROR,
+                      'critical': logging.CRITICAL}
         args = sys.argv
         for argument in args:
-            if argument == 'debug':
-                self.log_level = logging.DEBUG
-            elif argument == 'info':
-                self.log_level = logging.INFO
-            elif argument == 'warning':
-                self.log_level = logging.WARNING
-            elif argument == 'error':
-                self.log_level = logging.ERROR
-            elif argument == 'critical':
-                self.log_level = logging.CRITICAL
+            if argument in log_levels:
+                self.log_level = log_levels[argument]
 
     def load_configuration(self):
         """

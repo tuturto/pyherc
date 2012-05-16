@@ -41,3 +41,7 @@ by Henk Brouwer.
 Background of the main menu from: http://stock-background-texture.com/
 
 PGU was originally developed by Phil Hassey but is now being maintained by Peter Rogers.
+
+Following people have contributed to the code in a way or another, thank you!
+
+ - Chiman
