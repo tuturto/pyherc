@@ -21,4 +21,7 @@ API
 ===
 
 .. automodule:: pyherc.config
-   :members:
+    :members:
+
+    :inherited-members:
+    :show-inheritance:

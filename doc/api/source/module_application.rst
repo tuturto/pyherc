@@ -2,4 +2,5 @@ pyherc.application
 ******************
 
 .. automodule:: pyherc.application
-   :members:
+    :members:
+    :show-inheritance:

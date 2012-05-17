@@ -2,5 +2,6 @@ pyherc.gui.windows
 ******************
 
 .. automodule:: pyherc.gui.windows
-   :members:
+    :members:
+    :show-inheritance:
    

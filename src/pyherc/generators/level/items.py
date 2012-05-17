@@ -33,6 +33,8 @@ class ItemAdderConfiguration(object):
     def __init__(self, level_types):
         """
         Default constructor
+
+        :param level_types: list of types of level
         """
         super(ItemAdderConfiguration, self).__init__()
         self.level_types = level_types
@@ -44,8 +46,16 @@ class ItemAdderConfiguration(object):
         """
         Adds item to configuration
 
-        Args:
-            item: specification for item
+        :param min_amount: minimum amount of items to generate
+        :type min_amount: integer
+        :param max_amount: maximum amount of items to generate
+        :type max_amount: integer
+        :param name: optional name of item to generate
+        :type name: string
+        :param type: optional type of item to generate
+        :type type: string
+        :param location: optional location type for item placement
+        :type location: string
         """
         item_spec = {}
         item_spec['min_amount'] = min_amount
@@ -68,10 +78,12 @@ class ItemAdder(object):
         """
         Default constructor
 
-        Args:
-            item_generator: ItemGenerator instance
-            configuration: ItemAdderConfiguration
-            rng: random number generator
+        :param item_generator: configured item generator
+        :type item_generator: ItemGenerator
+        :param configuration: configuration
+        :type configuration: ItemAdderConfiguration
+        :param rng: random number generator
+        :type rng: Random
         """
         super(ItemAdder, self).__init__()
         self.item_generator = item_generator
@@ -90,8 +102,8 @@ class ItemAdder(object):
         """
         Add items
 
-        Args:
-            level: Level to add items
+        :param level: Level to add items
+        :type level: Level
         """
         item_list = self.configuration.items
         items = []
@@ -106,13 +118,10 @@ class ItemAdder(object):
         """
         Generate items according to specification
 
-        Args:
-            item_spec: Dictionary specifying items to create
+        :param item_spec: Dictionary specifying items to create
+        :type item_spec: dict
 
-        Returns
-            tupple (item_spec, item)
-            where item_spec is specification used to generate item
-            and item is generated Item
+        :returns: tupple (item_spec, item)
         """
         items = []
         amount = self.rng.randint(item_spec['min_amount'],
@@ -135,9 +144,9 @@ class ItemAdder(object):
         """
         Place items to level
 
-        Args:
-            item: list of tupples (item_spec, item)
-            level: level to place items
+        :param items: list of tupples (item_spec, item)
+        :param level: level to place items
+        :type level: Level
         """
         for item in items:
             location_type = item[0]['location']

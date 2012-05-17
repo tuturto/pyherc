@@ -2,4 +2,5 @@ pyherc.rules.moving
 *******************
 
 .. automodule:: pyherc.rules.moving
-   :members:
+    :members:
+    :show-inheritance:

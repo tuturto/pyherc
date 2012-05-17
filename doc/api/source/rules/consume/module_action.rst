@@ -2,4 +2,5 @@ pyherc.rules.consume.action
 ***************************
 
 .. automodule:: pyherc.rules.consume.action
-   :members:
+    :members:
+    :show-inheritance:

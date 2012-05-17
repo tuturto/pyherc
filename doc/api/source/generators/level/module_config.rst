@@ -2,5 +2,6 @@ pyherc.generators.level.config
 ******************************
 
 .. automodule:: pyherc.generators.level.config
-   :members:
+    :members:
+    :show-inheritance:
    

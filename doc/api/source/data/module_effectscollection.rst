@@ -2,4 +2,5 @@ pyherc.data.effectscollection
 *****************************
 
 .. automodule:: pyherc.data.effectscollection
-   :members:
+    :members:
+    :show-inheritance:

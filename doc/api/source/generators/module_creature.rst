@@ -2,5 +2,6 @@ pyherc.generators.creature
 **************************
 
 .. automodule:: pyherc.generators.creature
-   :members:
+    :members:
+    :show-inheritance:
    

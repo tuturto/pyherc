@@ -2,4 +2,5 @@ pyherc.rules.magic
 ******************
 
 .. automodule:: pyherc.rules.magic
-   :members:
+    :members:
+    :show-inheritance:

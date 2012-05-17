@@ -2,4 +2,5 @@ pyherc.rules.consume.factories
 ******************************
 
 .. automodule:: pyherc.rules.consume.factories
-   :members:
+    :members:
+    :show-inheritance:

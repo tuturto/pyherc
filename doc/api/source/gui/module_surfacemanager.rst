@@ -2,4 +2,5 @@ pyherc.gui.surfaceManager
 *************************
 
 .. automodule:: pyherc.gui.surfaceManager
-   :members:
+    :members:
+    :show-inheritance:

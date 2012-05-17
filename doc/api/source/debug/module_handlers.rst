@@ -2,4 +2,5 @@ pyherc.debug.handlers
 *********************
 
 .. automodule:: pyherc.debug.handlers
-   :members:
+    :members:
+    :show-inheritance:

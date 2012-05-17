@@ -2,4 +2,5 @@ pyherc.test.builders.effect
 ***************************
 
 .. automodule:: pyherc.test.builders.effect
-   :members:
+    :members:
+    :show-inheritance:

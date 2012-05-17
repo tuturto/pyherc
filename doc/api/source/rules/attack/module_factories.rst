@@ -2,4 +2,5 @@ pyherc.rules.attack.factories
 *****************************
 
 .. automodule:: pyherc.rules.attack.factories
-   :members:
+    :members:
+    :show-inheritance:

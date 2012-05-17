@@ -2,4 +2,5 @@ pyherc.rules.effects.damage
 ***************************
 
 .. automodule:: pyherc.rules.effects.damage
-   :members:
+    :members:
+    :show-inheritance:

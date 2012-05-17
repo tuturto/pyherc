@@ -2,4 +2,5 @@ pyherc.rules.items
 ******************
 
 .. automodule:: pyherc.rules.items
-   :members:
+    :members:
+    :show-inheritance:

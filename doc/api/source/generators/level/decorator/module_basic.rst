@@ -2,5 +2,6 @@ pyherc.generators.level.decorator.basic
 ***************************************
 
 .. automodule:: pyherc.generators.level.decorator.basic
-   :members:
+    :members:
+    :show-inheritance:
    

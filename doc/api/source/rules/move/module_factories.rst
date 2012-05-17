@@ -2,4 +2,5 @@ pyherc.rules.move.factories
 ***************************
 
 .. automodule:: pyherc.rules.move.factories
-   :members:
+    :members:
+    :show-inheritance:

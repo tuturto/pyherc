@@ -2,4 +2,5 @@ pyherc.gui.startmenu
 ********************
 
 .. automodule:: pyherc.gui.startmenu
-   :members:
+    :members:
+    :show-inheritance:

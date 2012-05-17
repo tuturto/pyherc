@@ -2,4 +2,5 @@ pyherc.data.tiles
 *****************
 
 .. automodule:: pyherc.data.tiles
-   :members:
+    :members:
+    :show-inheritance:

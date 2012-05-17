@@ -2,4 +2,6 @@ pyherc.generators.level.portals
 *******************************
 
 .. automodule:: pyherc.generators.level.portals
-   :members:
+    :members:
+    :show-inheritance:
+    
