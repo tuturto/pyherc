@@ -54,17 +54,17 @@ inheriting it and overriding type of action it can be used to construct:
   
   class WaitFactory(SubActionFactory):
   
-    def __init__(self):
-      self.action_type = 'wait'
+      def __init__(self):
+          self.action_type = 'wait'
 
 Next we need to define factory method that can actually create our new action:
 
 .. code-block:: python
 
   def get_action(self, parameters):
-    wait_time = parameters.wait_time
-    target = parameters.target
-    return WaitAction(target, wait_time)
+      wait_time = parameters.wait_time
+      target = parameters.target
+      return WaitAction(target, wait_time)
 
 Defining new parameter class
 ----------------------------
@@ -74,10 +74,10 @@ WaitParameters class is very simple, almost could do without it even:
 
   class WaitParameters(ActionParameters):
   
-    def __init__(self, target, wait_time):
-      self.action_type = 'wait'
-      self.target = target
-      self.wait_time = wait_time
+      def __init__(self, target, wait_time):
+          self.action_type = 'wait'
+          self.target = target
+          self.wait_time = wait_time
 
 Constructor takes two parameters: target who is character doing the waiting
 and wait_time, which is amount of ticks to wait. action_type is used by the
@@ -93,15 +93,15 @@ WaitAction is not much more complex:
 
   class WaitAction(object):
   
-    def __init__(self, target, wait_time):
-      self.target = target
-      self.wait_time = wait_time
+      def __init__(self, target, wait_time):
+          self.target = target
+          self.wait_time = wait_time
 
-    def is_legal(self):
-      return True
+      def is_legal(self):
+          return True
       
-    def execute(self):
-      self.target.tick = self.target.tick + self.wait_time
+      def execute(self):
+          self.target.tick = self.target.tick + self.wait_time
 
 Constructor is used to create a new instance of WaitAction, with given
 Character and wait time. 
@@ -139,9 +139,9 @@ Last finishing step is to add easy to use method to Character class:
 .. code-block:: python
  
   def wait(self, ticks = 5):
-    action = self.action_factory.get_action(WaitParameters(self,
-                                                           ticks))
-    action.execute()
+      action = self.action_factory.get_action(WaitParameters(self,
+                                                             ticks))
+      action.execute()
 
 Now we can have our character to wait for a bit, just by calling:
 
