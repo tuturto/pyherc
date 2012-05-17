@@ -25,7 +25,10 @@ Module for testing customer matchers
 from pyherc.data import Level
 from pyherc.data.tiles import WALL_EMPTY, FLOOR_ROCK, WALL_GROUND
 from pyherc.test.matchers.map_connectivity import MapConnectivity
+from pyherc.data import EffectsCollection
+from pyherc.test.matchers.effect_collection import ContainsEffectHandle
 from hamcrest import * #pylint: disable=W0401
+from mockito import mock
 
 class TestLevelConnectivity():
     """
@@ -126,3 +129,43 @@ class TestLevelConnectivity():
         print 'connected points: {0}'.format(connected_points)
 
         assert_that(self.matcher._matches(self.level), is_(equal_to(False)))
+
+class TestContainsEffectHandle(object):
+    """
+    Tests for ContainsEffectHandle matcher
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestContainsEffectHandle, self).__init__()
+
+    def test_match_single_handle(self):
+        """
+        Test that single handle can be matched
+        """
+        collection = EffectsCollection()
+        handle = mock()
+        handle.trigger = 'on drink'
+
+        collection.add_effect_handle(handle)
+
+        matcher = ContainsEffectHandle(handle)
+
+        assert_that(matcher._matches(collection), is_(equal_to(True)))
+
+    def test_detect_sinle_mismatch(self):
+        """
+        Test that missing a single handle is detected correctly
+        """
+        collection = EffectsCollection()
+        handle1 = mock()
+        handle1.trigger = 'on drink'
+
+        collection.add_effect_handle(handle1)
+
+        handle2 = mock()
+
+        matcher = ContainsEffectHandle(handle2)
+
+        assert_that(matcher._matches(collection), is_(equal_to(False)))
