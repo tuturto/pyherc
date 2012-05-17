@@ -30,3 +30,4 @@ from .model import Model
 from .model import Character
 
 from .item import Item
+from .effectscollection import EffectsCollection

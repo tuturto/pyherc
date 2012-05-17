@@ -25,7 +25,7 @@ Classes:
     Item
     WeaponData
 """
-
+from .effectscollection import EffectsCollection
 import collections
 
 class Item(object):

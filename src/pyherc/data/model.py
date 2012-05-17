@@ -24,6 +24,7 @@ Module for Model related classes
 
 import logging
 import random
+from .effectscollection import EffectsCollection
 from pyherc.aspects import Logged
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 
