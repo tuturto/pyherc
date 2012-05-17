@@ -26,9 +26,10 @@ from pyherc.data import Level
 from pyherc.data.tiles import WALL_EMPTY, FLOOR_ROCK, WALL_GROUND
 from pyherc.test.matchers.map_connectivity import MapConnectivity
 from pyherc.data import EffectsCollection
+from pyherc.rules.effects import EffectHandle
 from pyherc.test.matchers.effect_collection import ContainsEffectHandle
 from hamcrest import * #pylint: disable=W0401
-from mockito import mock
+from mockito import *  #pylint: disable=W0401
 
 class TestLevelConnectivity():
     """
@@ -145,8 +146,10 @@ class TestContainsEffectHandle(object):
         Test that single handle can be matched
         """
         collection = EffectsCollection()
-        handle = mock()
-        handle.trigger = 'on drink'
+        handle = EffectHandle(trigger = 'on drink',
+                              effect = None,
+                              parameters = None,
+                              charges = 1)
 
         collection.add_effect_handle(handle)
 
@@ -159,13 +162,67 @@ class TestContainsEffectHandle(object):
         Test that missing a single handle is detected correctly
         """
         collection = EffectsCollection()
-        handle1 = mock()
-        handle1.trigger = 'on drink'
+        handle1 = EffectHandle(trigger = 'on drink',
+                               effect = None,
+                               parameters = None,
+                               charges = 1)
 
         collection.add_effect_handle(handle1)
 
-        handle2 = mock()
+        handle2 = EffectHandle(trigger = 'on kick',
+                               effect = None,
+                               parameters = None,
+                               charges = 1)
 
         matcher = ContainsEffectHandle(handle2)
+
+        assert_that(matcher._matches(collection), is_(equal_to(False)))
+
+    def test_match_multiple_handles(self):
+        """
+        Test that matcher can match multiple handlers
+        """
+        collection = EffectsCollection()
+        handle1 = EffectHandle(trigger = 'on drink',
+                               effect = None,
+                               parameters = None,
+                               charges = 1)
+
+        handle2 = EffectHandle(trigger = 'on kick',
+                               effect = None,
+                               parameters = None,
+                               charges = 1)
+
+        collection.add_effect_handle(handle1)
+        collection.add_effect_handle(handle2)
+
+        matcher = ContainsEffectHandle([handle1, handle2])
+
+        assert_that(matcher._matches(collection), is_(equal_to(True)))
+
+    def test_detect_mismatch_in_collection(self):
+        """
+        Test that matcher can detect a mismatch in collection
+        """
+        collection = EffectsCollection()
+        handle1 = EffectHandle(trigger = 'on drink',
+                               effect = None,
+                               parameters = None,
+                               charges = 1)
+
+        handle2 = EffectHandle(trigger = 'on kick',
+                               effect = None,
+                               parameters = None,
+                               charges = 1)
+
+        handle3 = EffectHandle(trigger = 'on burn',
+                               effect = None,
+                               parameters = None,
+                               charges = 1)
+
+        collection.add_effect_handle(handle1)
+        collection.add_effect_handle(handle2)
+
+        matcher = ContainsEffectHandle([handle1, handle2, handle3])
 
         assert_that(matcher._matches(collection), is_(equal_to(False)))

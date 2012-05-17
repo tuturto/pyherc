@@ -2,5 +2,9 @@ pyherc.test
 ***********
 
 .. automodule:: pyherc.test
-   :members:
 
+.. toctree::
+   :maxdepth: 2
+   
+   builders/module_builders
+   matchers/module_matchers

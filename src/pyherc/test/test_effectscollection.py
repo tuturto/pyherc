@@ -25,7 +25,7 @@ Module for testing effects collection
 from pyherc.data import EffectsCollection
 from pyherc.test.builders import EffectHandleBuilder
 from hamcrest import * #pylint: disable=W0401
-from pyherc.test.matchers import has_effect_handle
+from pyherc.test.matchers import has_effect_handle, has_effect_handles
 
 class TestEffectsCollection(object):
     """
@@ -68,5 +68,21 @@ class TestEffectsCollection(object):
         self.collection.add_effect_handle(handle1)
         self.collection.add_effect_handle(handle2)
 
-        assert_that(self.collection.get_effect_handles(),
-                    has_items(handle1, handle2))
+        assert_that(self.collection, has_effect_handles([handle1, handle2]))
+
+    def test_returning_only_specific_handles(self):
+        """
+        Test that handles can be retrieved by their trigger
+        """
+        handle1 = (EffectHandleBuilder()
+                        .with_trigger('on drink')
+                        .build())
+        handle2 = (EffectHandleBuilder()
+                        .with_trigger('on bash')
+                        .build())
+        self.collection.add_effect_handle(handle1)
+        self.collection.add_effect_handle(handle2)
+
+        handles = self.collection.get_effect_handles('on bash')
+
+        assert_that(handle2, is_in(handles))

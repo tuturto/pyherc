@@ -46,17 +46,23 @@ class EffectsCollection(object):
             handles[trigger] = []
         handles[trigger].append(handle)
 
-    def get_effect_handles(self):
+    def get_effect_handles(self, trigger = None):
         """
         Get effect handles
+
+        Args:
+            trigger: optional trigger type
 
         Returns:
             List of effect handles
         """
-        keys = self.handles.keys()
-        effects = []
-        for key in self.handles:
-            for handle in self.handles[key]:
-                effects.append(handle)
+        if trigger is None:
+            keys = self.handles.keys()
+            effects = []
+            for key in self.handles:
+                for handle in self.handles[key]:
+                    effects.append(handle)
+        else:
+            effects = [x for x in self.handles[trigger]]
 
         return effects

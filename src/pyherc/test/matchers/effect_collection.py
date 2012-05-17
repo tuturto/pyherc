@@ -34,7 +34,10 @@ class ContainsEffectHandle(BaseMatcher):
         """
         Default constructor
         """
-        self.handle = handle
+        if hasattr(handle, '__iter__'):
+            self.handles = handle
+        else:
+            self.handles = [handle]
 
     def _matches(self, item):
         """
@@ -42,10 +45,11 @@ class ContainsEffectHandle(BaseMatcher):
         """
         handles = item.get_effect_handles()
 
-        if self.handle in handles:
-            return True
-        else:
-            return False
+        for handle in self.handles:
+            if not handle in handles:
+                return False
+
+        return True
 
     def describe_to(self, description):
         """
@@ -69,5 +73,14 @@ def has_effect_handle(handle):
 
     Args:
         handle: handle to expect
+    """
+    return ContainsEffectHandle(handle)
+
+def has_effect_handles(handle):
+    """
+    Check if collection has all the handles
+
+    Args:
+        list of handles to expect
     """
     return ContainsEffectHandle(handle)
