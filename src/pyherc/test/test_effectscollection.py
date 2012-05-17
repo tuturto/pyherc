@@ -86,3 +86,14 @@ class TestEffectsCollection(object):
         handles = self.collection.get_effect_handles('on bash')
 
         assert_that(handle2, is_in(handles))
+
+    def test_removing_handle(self):
+        """
+        Test that a handle can be removed
+        """
+        handle = EffectHandleBuilder().build()
+
+        self.collection.add_effect_handle(handle)
+        self.collection.remove_effect_handle(handle)
+
+        assert_that(self.collection, is_not(has_effect_handle(handle)))

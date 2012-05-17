@@ -55,8 +55,8 @@ class ContainsEffectHandle(BaseMatcher):
         """
         Describe this matcher
         """
-        description.append('Collection with handle {0}'
-                           .format(self.handle))
+        description.append('Collection with handles {0}'
+                           .format(self.handles))
 
     def describe_mismatch(self, item, mismatch_description):
         """

@@ -66,3 +66,14 @@ class EffectsCollection(object):
             effects = [x for x in self.handles[trigger]]
 
         return effects
+
+    def remove_effect_handle(self, handle):
+        """
+        Remove given handle
+
+        Args:
+            handle: handle to remove
+        """
+        for key, value in self.handles.items():
+            if handle in value:
+                value.remove(handle)
