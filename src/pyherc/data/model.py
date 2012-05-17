@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010-2011 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -66,8 +66,8 @@ class Model(object):
         """
         Relays event to creatures
 
-        Args:
-            event: event to relay
+        :param event: event to relay
+        :type event: dict
         """
         if event['level'] != None:
             for creature in event['level'].creatures:
@@ -77,8 +77,8 @@ class Model(object):
         """
         Get the character who is next to take action
 
-        Returns
-            Character to act next
+        :returns: Character to act next
+        :rtype: Character
         """
         level = self.player.level
         creatures = level.creatures
@@ -110,10 +110,12 @@ class Character(object):
         """
         Default constructor
 
-        Args:
-            model: Model where character acts
-            action_factory: ActionFactory for character to use
-            rng: Random number generator
+        :param model: model where character acts
+        :type model: Model
+        :param action_factory: action factory for character to use
+        :type action_factory: ActionFactory
+        :param rng: random number generator
+        :type rng: Random
         """
         super(Character, self).__init__()
         # attributes
@@ -157,6 +159,9 @@ class Character(object):
     def receive_event(self, event):
         """
         Receives an event from world and enters it into short term memory
+
+        :param event: event to receive
+        :type event: Event
         """
         self.short_term_memory.append(event)
 
@@ -164,12 +169,18 @@ class Character(object):
     def act(self, model):
         """
         Triggers AI of this character
+
+        :param model: model where character is located
+        :type model: Model
         """
         self.artificial_intelligence.act(model)
 
     def __get_hp(self):
         """
         Get current hitpoints
+
+        :returns: hit points
+        :rtype: integer
         """
         return self.__hit_points
 
@@ -177,8 +188,8 @@ class Character(object):
         """
         Set current hitpoints
 
-        Args:
-            hit_points: hit points to set
+        :param hit_points: hit points to set
+        :type hit_points: integer
         """
         self.__hit_points = hit_points
 
@@ -186,8 +197,8 @@ class Character(object):
         """
         Get body attribute
 
-        Returns:
-            Body attribute of this character
+        :returns: Body attribute of this character
+        :rtype: integer
         """
         return self.__body
 
@@ -195,8 +206,8 @@ class Character(object):
         """
         Set body attribute
 
-        Args:
-            body: body attribute to set
+        :param body: body attribute to set
+        :type body: integer
         """
         self.__body = body
 
@@ -204,8 +215,8 @@ class Character(object):
         """
         Get finesse attribute
 
-        Returns:
-            finesse attribute
+        :returns: finesse attribute
+        :rtype: integer
         """
         return self.__finesse
 
@@ -213,8 +224,8 @@ class Character(object):
         """
         Set finesse attribute
 
-        Args:
-            finesse: finesse attribute to set
+        :param finesse: finesse attribute to set
+        :type finesse: integer
         """
         self.__finesse = finesse
 
@@ -222,8 +233,8 @@ class Character(object):
         """
         Get mind attribute
 
-        Returns:
-            Mind attribute
+        :returns: Mind attribute
+        :rtype: integer
         """
         return self.__mind
 
@@ -231,8 +242,8 @@ class Character(object):
         """
         Set mind attribute
 
-        Args:
-            mind: mind attribute to set
+        :param mind: mind attribute to set
+        :type mind: integer
         """
         self.__mind = mind
 
@@ -240,8 +251,8 @@ class Character(object):
         """
         Return attack attribute of the character
 
-        Returns:
-            Attack value
+        :returns: Attack value
+        :rtype: integer
         """
         return self.attack
 
@@ -249,14 +260,17 @@ class Character(object):
         """
         Set attack attribute of the character
 
-        Args:
-            attack: Attack attribute
+        :param attack: Attack attribute
+        :type attack: integer
         """
         self.attack = attack
 
     def get_max_hp(self):
         """
         Get maximum HP this character can currently have
+
+        :returns: maximum hit points
+        :rtype: integer
         """
         return self.max_hp
 
@@ -265,8 +279,8 @@ class Character(object):
         """
         Identify item
 
-        Args:
-            item: item to mark as identified
+        :param item: item to mark as identified
+        :type item: Item
         """
         assert (item != None)
         self.item_memory[item.name] = item.name
@@ -276,11 +290,10 @@ class Character(object):
         """
         Check if this character is proficient with a given weapon
 
-        Args:
-        weapon: weapon which proficient requirements should be checked
-
-        Returns:
-            True if proficient, otherwise False
+        :param weapon: weapon which proficient requirements should be checked
+        :type weapon: Item
+        :returns: True if proficient, otherwise False
+        :rtype: Boolean
         """
         assert weapon != None
 
@@ -300,8 +313,8 @@ class Character(object):
         """
         Sets item this character can mimic or pretend to be
 
-        Args:
-            item: item to mimic
+        :param item: item to mimic
+        :type item: Item
         """
         self.mimic_item = item
 
@@ -309,8 +322,8 @@ class Character(object):
         """
         Gets item this character can mimic
 
-        Returns:
-            item to mimic
+        :returns: item to mimic
+        :rtype: Item
         """
         return self.mimic_item
 
@@ -318,8 +331,8 @@ class Character(object):
         """
         Returns location of this character
 
-        Returns:
-            location
+        :returns: location
+        :rtype: (integer, integer)
         """
         return self.location
 
@@ -327,8 +340,8 @@ class Character(object):
         """
         Sets location of this character
 
-        Args:
-            location: location to set
+        :param location: location to set
+        :type location: (integer, integer)
         """
         self.location = location
 
@@ -337,8 +350,8 @@ class Character(object):
         """
         Execute action defined by action parameters
 
-        Args:
-            action_parameters: parameters controlling creation of the action
+        :param action_parameters: parameters controlling creation of the action
+        :type action_parameters: ActionParameters
         """
         action = self.create_action(action_parameters)
         action.execute()
@@ -348,11 +361,9 @@ class Character(object):
         """
         Create an action by defined by action parameters
 
-        Args:
-            action_parameters: parameters controlling creation of the action
-
-        Returns:
-            Action
+        :param action_parameters: parameters controlling creation of the action
+        :type action_parameters: ActionParameters
+        :returns: Action
         """
         assert self.action_factory != None
 
@@ -367,8 +378,8 @@ class Character(object):
         """
         Move this character to specified direction
 
-        Args:
-            direction: direction to move
+        :param direction: direction to move
+        :type direction: integer
         """
         action = self.action_factory.get_action(
                                                 MoveParameters(
@@ -382,12 +393,12 @@ class Character(object):
         """
         Check if movement is legal
 
-        Args:
-            direction: direction to move
-            movement_mode: mode of movement
-
-        Returns:
-            True if move is legal, False otherwise
+        :param direction: direction to move
+        :type direction: integer
+        :param movement_mode: mode of movement
+        :type movement_mode: string
+        :returns: True if move is legal, False otherwise
+        :rtype: Boolean
         """
         action = self.action_factory.get_action(
                                                 MoveParameters(
@@ -401,8 +412,8 @@ class Character(object):
         """
         Attack to given direction
 
-        Args:
-            direction: direction to attack
+        :param direction: direction to attack
+        :type direction: integer
         """
         if len(self.weapons) == 0:
             attack_type = 'unarmed'
@@ -422,8 +433,8 @@ class Character(object):
         """
         Drink potion
 
-        Args:
-            potion: Item to drink
+        :param potion: potion to drink
+        :type potion: Item
         """
         action = self.action_factory.get_action(
                                                 DrinkParameters(
@@ -450,6 +461,9 @@ class Character(object):
     def raise_event(self, event):
         """
         Raise event for other creatures to see
+
+        :param event: event to raise
+        :type event: Event
         """
         self.action_factory.model.raise_event(event)
 
@@ -458,8 +472,8 @@ class Character(object):
         """
         Adds an effect to an character
 
-        Args:
-            effect: effect to add
+        :param effect: effect to add
+        :type effect: EffectHandle
         """
         if self.effects == None:
             self.effects = {}
@@ -474,8 +488,8 @@ class Character(object):
         """
         Adds effect to this character
 
-        Args:
-            effect: Effect to add
+        :param effect: Effect to add
+        :type effect: Effect
         """
         assert effect != None
         self.active_effects.append(effect)
@@ -484,8 +498,8 @@ class Character(object):
         """
         Get active effects of the character
 
-        Returns:
-            List of active effects
+        :returns: active effects
+        :rtype: list
         """
         if self.__active_effects is None:
             self.__active_effects = []
@@ -504,21 +518,10 @@ class Character(object):
         Add cost of action to characters tick,
         while taking characters speed into account
 
-        For example:
-        >>> pc = Character(None, None, None)
-        >>> pc.tick = 5
-        >>> pc.speed = 2
-        >>> pc.add_to_tick(5)
-        15
-
-        Args:
-            cost: Cost of action in ticks
-
-        Returns:
-            New ticks
+        :param cost: Cost of action in ticks
+        :type cost: integer
         """
         self.tick = self.tick + (self.speed * cost)
-        return self.tick
 
     hit_points = property(__get_hp, __set_hp)
     body = property(__get_body, __set_body)
@@ -567,8 +570,8 @@ class MimicData():
         """
         Get mimicing character
 
-        Returns:
-            Character
+        :returns: Character
+        :rtype: Character
         """
         return self.character
 
@@ -576,8 +579,7 @@ class MimicData():
         """
         Set character mimicing this item
 
-        Args:
-            character: Character to set
+        :param character: Character to set
+        :type character: Character
         """
         self.character = character
-

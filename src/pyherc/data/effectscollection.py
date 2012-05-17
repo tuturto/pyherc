@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -36,8 +36,8 @@ class EffectsCollection(object):
         """
         Add effect handle
 
-        Args:
-            handle: effect handle to add
+        :param handle: effect handle to add
+        :type handle: EffectHandle
         """
         handles = self.handles
         trigger = handle.trigger
@@ -50,11 +50,11 @@ class EffectsCollection(object):
         """
         Get effect handles
 
-        Args:
-            trigger: optional trigger type
+        :param trigger: optional trigger type
+        :type trigger: string
 
-        Returns:
-            List of effect handles
+        :returns: effect handles
+        :rtype: List
         """
         if trigger is None:
             keys = self.handles.keys()
@@ -71,8 +71,8 @@ class EffectsCollection(object):
         """
         Remove given handle
 
-        Args:
-            handle: handle to remove
+        :param handle: handle to remove
+        :type handle: EffectHandle
         """
         for key, value in self.handles.items():
             if handle in value:

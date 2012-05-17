@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -40,6 +40,9 @@ class FlockingHerbivore(object):
     def __init__(self, character):
         """
         Default constructor
+
+        :param character: character to connect
+        :type character: Character
         """
         self.character = character
 
@@ -47,6 +50,9 @@ class FlockingHerbivore(object):
     def act(self, model):
         """
         Trigger this AI to assess the situation and act accordingly
+
+        :param model: model where the character is located
+        :type model: Model
         """
         shortest_distance = None
         closest_creature = None
@@ -102,9 +108,14 @@ class FlockingHerbivore(object):
     def find_direction(self, start, end):
         """
         Find direction from start to end
-        @param start: start location
-        @param end: end location
-        @return: Direction to travel
+
+        :param start: start location
+        :type start: (integer, integer)
+        :param end: end location
+        :type end: (integer, integer)
+
+        :returns: Direction to travel
+        :rtype: integer
         """
         assert(start != None)
         assert(end != None)

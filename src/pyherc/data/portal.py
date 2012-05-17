@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -38,9 +38,10 @@ class Portal(object):
         """
         Default constructor
 
-        Args:
-            icons: (my_icon, icon for other end)
-            level_generator: LevelGenerator for proxy portals
+        :param icons: (my_icon, icon for other end)
+        :type icons: (integer, integer)
+        :param level_generator: level generator for proxy portals
+        :type level_generator: LevelGenerator
         """
         super(Portal, self).__init__()
         self.level = None
@@ -70,6 +71,9 @@ class Portal(object):
     def __get_other_end(self):
         """
         Returns the other end of the portal
+
+        :returns: other end of the portal
+        :rtype: Portal
         """
         if self.__other_end == None and self.level_generator != None:
             self.level_generator.generate_level(self)
@@ -81,20 +85,26 @@ class Portal(object):
         """
         Set the other end of the portal
 
-        Args:
-            portal: portal where this one leads
+        :param portal: portal where this one leads
+        :type portal: Portal
         """
         self.__other_end = portal
 
     def __get_icon(self):
         """
         Get icon to display this portal
+
+        :returns: icon of the portal
+        :rtype: integer
         """
         return self.__icons[0]
 
     def __set_icon(self, icon):
         """
         Set icon to display this portal
+
+        :param icon: icon to use for the portal
+        :type icon: integer
         """
         if self.__icons == None:
             self.__icons = (None, None)
@@ -103,6 +113,9 @@ class Portal(object):
     def __get_other_end_icon(self):
         """
         Get icon used for other end of this portal
+
+        :returns: icon of the other end
+        :rtype: integer
         """
         return self.__icons[1]
 

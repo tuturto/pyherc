@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010-2011 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -59,9 +59,10 @@ class Item(object):
         Get name of the item
         Name can be appearance or given name
 
-        Args:
-            character: character handling the item
-            decorate: should name be decorated with status info, default False
+        :param character: character handling the item
+        :type character: Character
+        :param decorate: should name be decorated with status info, default False
+        :type decorate: Boolean
         """
         assert character != None
 
@@ -83,8 +84,8 @@ class Item(object):
         """
         Adds an effect to an item
 
-        Args:
-            effect: effect to add
+        :param effect: effect to add
+        :type effect: Effect
         """
         if self.effects == None:
             self.effects = {}
@@ -98,11 +99,11 @@ class Item(object):
         """
         Retrieves effects the item has
 
-        Args:
-            effect_type: type of effects retrieved. Default None
+        :param effect_type: type of effects retrieved. Default None
+        :type effect_type: string
 
-        Returns:
-            list of effects
+        :returns: effects
+        :rtype: List
         """
         effect_list = []
 
@@ -164,6 +165,9 @@ class Item(object):
     def get_main_type(self):
         """
         Return main type of the item
+
+        :returns: main type
+        :rtype: string
         """
         main_type = 'undefined'
 
@@ -188,6 +192,20 @@ class WeaponData(object):
     """
     def __init__(self, damage = None, damage_type = None, critical_range = None,
                  critical_damage = None, weapon_type = None):
+        """
+        Default constructor
+
+        :param damage: amount of damage
+        :type damage: integer
+        :param damage_type: type of damage
+        :type damage_type: string
+        :param critical_range: range where critical might occur
+        :type critical_range: integer
+        :param critical_damage: multiplier for critical damage
+        :type critical_damage: integer
+        :param weapon_type: type of weapon
+        :type weapon_type: string
+        """
 
         self.damage = damage
         self.damage_type = damage_type

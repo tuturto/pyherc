@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -37,6 +37,13 @@ class Level(object):
     def __init__(self, size = (0, 0), floor_type = None, wall_type = None):
         """
         Initialises a level of certain size and fill floor and walls with given types
+
+        :param size: optional size of the level
+        :type size: (integer, integer)
+        :param floor_type: type of floor to fill level
+        :type floor_type: integer
+        :param wall_type: type of wall to fill level
+        :type wall_type: integer
         """
         super(Level, self).__init__()
         self.logger = logging.getLogger('pyherc.data.dungeon.Level')
@@ -90,9 +97,12 @@ class Level(object):
         """
         Get tile at given location
 
-        Args:
-            loc_x: x-coordinate of the location
-            loc_y: y-coordinate of the location
+        :param loc_x: x-coordinate of the location
+        :type loc_x: integer
+        :param loc_y: y-coordinate of the location
+        :type loc_y: integer
+        :returns: tile ID at given location
+        :rtype: integer
         """
         if loc_x < 0 or loc_y < 0:
             return pyherc.data.tiles.FLOOR_EMPTY
@@ -109,9 +119,12 @@ class Level(object):
         """
         Get wall tile at given location
 
-        Args:
-            loc_x: x-coordinate of the location
-            loc_y: y-coordinate of the location
+        :param loc_x: x-coordinate of the location
+        :type loc_x: integer
+        :param loc_y: y-coordinate of the location
+        :type loc_y: integer
+        :returns: wall tile ID at given location
+        :rtype: integer
         """
         if loc_x < 0 or loc_y < 0:
             return pyherc.data.tiles.WALL_GROUND
@@ -126,9 +139,10 @@ class Level(object):
         """
         Add an item to this level
 
-        Args:
-            item: item to add
-            location: location where to put the item
+        :param item: item to add
+        :type item: Item
+        :param location: location where to put the item
+        :type location: (integer, integer)
         """
         assert(not item == None)
         assert(not location == None)
@@ -141,8 +155,10 @@ class Level(object):
         """
         Get list of items at location
 
-        Args:
-            location: location to check
+        :param location: location to check
+        :type location: (integer, integer)
+        :returns: items at given location
+        :rtype: list
         """
         assert(location != None)
         items = []
@@ -157,10 +173,12 @@ class Level(object):
         Adds precreated portal on level at given location
         If secondary portal is specified, link them together
 
-        Args:
-            portal: portal to add
-            location: location where to add portal
-            other_end: optional other end of the portal
+        :param portal: portal to add
+        :type portal: Portal
+        :param location: location where to add portal
+        :type location: (integer, integer)
+        :param other_end: optional other end of the portal
+        :type other_end: Portal
         """
         assert(portal != None)
         assert(location != None)
@@ -191,8 +209,10 @@ class Level(object):
         """
         Check if there is a portal at given location
 
-        Returns:
-            Portal if found, otherwise None
+        :param location: location of portal
+        :type location: (integer, integer)
+        :returns: Portal if found, otherwise None
+        :rtype: Porta
         """
         for portal in self.portals:
             if portal.location == location:
@@ -205,9 +225,10 @@ class Level(object):
         """
         Add a creature to level
 
-        Args:
-            creature: creature to add
-            location: optional location for the creature
+        :param creature: creature to add
+        :type creature: Creature
+        :param location: optional location for the creature
+        :type location: (integer, integer)
         """
         assert(creature != None)
 
@@ -221,8 +242,8 @@ class Level(object):
         """
         Remove creature from level
 
-        Args:
-            creature: creature to remove
+        :param creature: creature to remove
+        :type creature: Creature
         """
         assert(creature != None)
         assert(creature in self.creatures)
@@ -235,11 +256,10 @@ class Level(object):
         """
         Get list of creatures at given location
 
-        Args:
-            location: location to check
-
-        Returns:
-            creature if found
+        :param location: location to check
+        :type location: (integer, integer)
+        :returns: creature if found
+        :rtype: Creature
         """
         assert(location != None)
         for creature in self.creatures:
@@ -253,8 +273,8 @@ class Level(object):
         """
         Finds free space where stuff can be placed
 
-        Returns:
-            Location where space is free
+        :returns: Location where space is free
+        :rtype: (integer, integer)
         """
         width = len(self.floor)
         height = len(self.floor[0])
@@ -266,6 +286,13 @@ class Level(object):
     def get_square(self, x_coordinate, y_coordinate):
         """
         Get square at given coordinates
+
+        :param x_coordinate: x-coorinate of location
+        :type x_coordinate: integer
+        :param y_coordinate: y-coordinate of location
+        :type y_coordinate: integer
+        :returns: icon ID of the tile
+        :rtype: integer
         """
         if self.walls[x_coordinate][y_coordinate] != pyherc.data.tiles.WALL_EMPTY:
             return self.walls[x_coordinate][y_coordinate]
@@ -276,12 +303,12 @@ class Level(object):
         """
         Checks if there's LOS-blocking wall at given coordinates
 
-        Args:
-            x_coordinate: x-coordinate of the location
-            y_coordinate: y-coordinate of the location
-
-        Returns:
-            True if location blocks line of sight, otherwise False
+        :param x_coordinate: x-coordinate of the location
+        :type x_coordinate: integer
+        :param y_coordinate: y-coordinate of the location
+        :type y_coordinate: integer
+        :returns: True if location blocks line of sight, otherwise False
+        :rtype: Boolean
         """
 
         if self.walls[x_coordinate][y_coordinate] != pyherc.data.tiles.WALL_EMPTY:
@@ -294,8 +321,8 @@ class Level(object):
         """
         Gets size of level
 
-        Returns:
-            tupple, with width and length of level
+        :returns: tupple, with width and length of level
+        :rtype: (integer, integer)
         """
         x_size = len(self.floor)
         y_size = len(self.floor[0])
@@ -307,9 +334,10 @@ class Level(object):
         """
         Set type of location
 
-        Args:
-            location: (loc_x, loc_y) location to set
-            location_type: type of location
+        :param  location: location to set
+        :type location: (integer, integer)
+        :param location_type: type of location
+        :type location_type: integer
         """
         self.__location_type[location[0]][location[1]] = location_type
 
@@ -318,11 +346,10 @@ class Level(object):
         """
         Get type of location
 
-        Args:
-            location: (loc_x, loc_y) location to get
-
-        Returns:
-            Type of location
+        :param location: location to get
+        :type location: (integer, integer)
+        :returns: Type of location
+        :rtype: integer
         """
         return self.__location_type[location[0]][location[1]]
 
@@ -331,11 +358,10 @@ class Level(object):
         """
         Get locations marked as rooms
 
-        Args:
-            location_type: Type of location to search.
-
-        Returns:
-            List of (loc_x, loc_y) locations identifying rooms
+        :param location_type: Type of location to search.
+        :type location_type: string
+        :returns: locations identifying rooms
+        :rtype: list
         """
         rooms = []
         for loc_x in range(len(self.__location_type)):
@@ -350,6 +376,9 @@ class Level(object):
     def dump_string(self):
         """
         Dump this level into a string
+
+        :returns: ascii representation of level
+        :rtype: list of list
         """
         level_string = ""
         size = self.get_size()
