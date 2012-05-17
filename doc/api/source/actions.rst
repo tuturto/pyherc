@@ -203,6 +203,9 @@ changes value in character's internal clock.
     action.execute()
     print('Ticks after waiting {0}'.format(character.tick))
 
+The output shows how it is character's turn to move (tick is 0), but after
+executing wait action, the tick is 5.
+    
 .. testoutput::
 
     Ticks 0
