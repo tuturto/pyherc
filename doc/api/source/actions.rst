@@ -75,7 +75,7 @@ WaitParameters class is very simple, almost could do without it even:
   class WaitParameters(ActionParameters):
   
     def __init__(self, target, wait_time):
-      self.action_type = 'attack'
+      self.action_type = 'wait'
       self.target = target
       self.wait_time = wait_time
 
@@ -94,14 +94,14 @@ WaitAction is not much more complex:
   class WaitAction(object):
   
     def __init__(self, target, wait_time):
-      self.target = targer
+      self.target = target
       self.wait_time = wait_time
 
     def is_legal(self):
       return True
       
     def execute(self):
-      self.target.tick = self.target.tick + wait_time
+      self.target.tick = self.target.tick + self.wait_time
 
 Constructor is used to create a new instance of WaitAction, with given
 Character and wait time. 
@@ -148,7 +148,66 @@ Now we can have our character to wait for a bit, just by calling:
 .. code-block:: python
 
   player_character.wait()
+
+Whole code
+----------
+Below is shown the whole example of wait action and demonstration how it
+changes value in character's internal clock.
+
+.. testcode::
+
+    from pyherc.data import Character, Model
+    from pyherc.rules import ActionFactory, ActionParameters
+    from pyherc.rules.factory import SubActionFactory
+    from random import Random
+  
+    class WaitParameters(ActionParameters):
+  
+        def __init__(self, target, wait_time):
+            self.action_type = 'wait'
+            self.target = target
+            self.wait_time = wait_time
+
+    class WaitAction(object):
+  
+        def __init__(self, target, wait_time):
+            self.target = target
+            self.wait_time = wait_time
+
+        def is_legal(self):
+            return True
+      
+        def execute(self):
+            self.target.tick = self.target.tick + self.wait_time
+            
+    class WaitFactory(SubActionFactory):
+  
+        def __init__(self):
+            self.action_type = 'wait'
+
+        def get_action(self, parameters):
+            wait_time = parameters.wait_time
+            target = parameters.target
+            return WaitAction(target, wait_time)
+
+    model = Model()    
+    wait_factory = WaitFactory()
+    action_factory = ActionFactory(model = model,
+                                   factories = [wait_factory])
+    character = Character(model = model, 
+                          action_factory = action_factory,
+                          rng = Random())
+    action = character.create_action(WaitParameters(character, 5))
     
+    print('Ticks {0}'.format(character.tick))
+    action.execute()
+    print('Ticks after waiting {0}'.format(character.tick))
+
+.. testoutput::
+
+    Ticks 0
+    Ticks after waiting 5
+
 List of current actions
 =======================
 

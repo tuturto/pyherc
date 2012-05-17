@@ -38,17 +38,6 @@ class EffectsCollection(object):
 
         Args:
             handle: effect handle to add
-
-        Example:
-        >>> from pyherc.rules.effects import EffectHandle
-        >>> collection = EffectsCollection()
-        >>> handle = EffectHandle(trigger = 'on kick',
-        ...                       effect = 'explosion',
-        ...                       parameters = None,
-        ...                       charges = 1)
-        >>> collection.add_effect_handle(handle)
-        >>> print(collection.get_effect_handles('on kick')) # doctest: +ELLIPSIS
-        [<pyherc.rules.effects.effect.EffectHandle object at 0x...>]
         """
         handles = self.handles
         trigger = handle.trigger

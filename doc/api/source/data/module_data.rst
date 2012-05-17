@@ -7,6 +7,7 @@ pyherc.data
    :maxdepth: 2
    
    module_dungeon
+   module_effectscollection
    module_item
    module_level   
    module_model

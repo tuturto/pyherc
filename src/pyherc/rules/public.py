@@ -67,6 +67,7 @@ class ActionFactory(object):
             parameters: Parameters used to control action creation
         """
         factory = self.get_sub_factory(parameters)
+        assert factory != None, 'suitable factory not configured'
         return factory.get_action(parameters)
 
     @logged
