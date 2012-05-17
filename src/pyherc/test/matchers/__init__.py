@@ -28,3 +28,4 @@ from .contains_creature import has_creature, is_at, is_not_at
 from .active_effects import has_active_effects, has_no_active_effects
 from .active_effects import has_active_effect
 from .items import does_have_item
+from .effect_collection import has_effect_handle

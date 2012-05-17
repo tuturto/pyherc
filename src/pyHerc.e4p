@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-05-17, 08:17:34 -->
+<!-- Saved: 2012-05-17, 08:23:31 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -131,6 +131,7 @@
     <Source>pyherc/test/builders/action.py</Source>
     <Source>pyherc/test/test_effectscollection.py</Source>
     <Source>pyherc/data/effectscollection.py</Source>
+    <Source>pyherc/test/matchers/effect_collection.py</Source>
   </Sources>
   <Forms>
   </Forms>

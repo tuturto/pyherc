@@ -25,6 +25,7 @@ Module for testing effects collection
 from pyherc.data import EffectsCollection
 from pyherc.test.builders import EffectHandleBuilder
 from hamcrest import * #pylint: disable=W0401
+from pyherc.test.matchers import has_effect_handle
 
 class TestEffectsCollection(object):
     """
@@ -35,15 +36,37 @@ class TestEffectsCollection(object):
         Default constructor
         """
         super(TestEffectsCollection, self).__init__()
+        self.collection = None
 
-    def test_adding_effect_specification(self):
+    def setup(self):
+        """
+        Setup test case
+        """
+        self.collection = EffectsCollection()
+
+    def test_adding_effect_handle(self):
         """
         Test that effect handle can be added and retrieved
         """
-        collection = EffectsCollection()
-
         handle = EffectHandleBuilder().build()
 
-        collection.add_effect_handle(handle)
+        self.collection.add_effect_handle(handle)
 
-        assert_that(collection.get_effect_handles(), has_item(handle))
+        assert_that(self.collection, has_effect_handle(handle))
+
+    def test_adding_multiple_handles(self):
+        """
+        Test that adding two handles don't create key collisions
+        """
+        handle1 = (EffectHandleBuilder()
+                        .with_effect('heal')
+                        .build())
+        handle2 = (EffectHandleBuilder()
+                        .with_effect('bless')
+                        .build())
+
+        self.collection.add_effect_handle(handle1)
+        self.collection.add_effect_handle(handle2)
+
+        assert_that(self.collection.get_effect_handles(),
+                    has_items(handle1, handle2))
