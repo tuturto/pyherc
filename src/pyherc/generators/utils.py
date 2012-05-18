@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -49,8 +49,8 @@ class BSPSection(object):
         """
         Split BSPSection in two
         Links two new BSPSections into this one
-        @param min_size: minimum size to split into
-        @param direction: horizontal (1) / vertical split (2)
+        :param min_size: minimum size to split into
+        :param direction: horizontal (1) / vertical split (2)
         """
         assert(self.corner1 != None)
         assert(self.corner2 != None)
@@ -137,7 +137,7 @@ class BSPSection(object):
     def get_center(self):
         """
         Calculates center of the BSPSection
-        @return: center point
+        :returns: center point
         """
         assert(self.corner1 != None)
         assert(self.corner2 != None)

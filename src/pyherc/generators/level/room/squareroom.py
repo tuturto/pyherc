@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -33,10 +33,12 @@ class SquareRoomGenerator(object):
         """
         Default constructor
 
-        Args:
-            floor_tile: id of the tile to use for floors
-            empty_tile: id of the empty wall tile
-            level_types: types of level this generator can be used
+        :param floor_tile: id of the tile to use for floors
+        :type floor_tile: integer
+        :param empty_tile: id of the empty wall tile
+        :type empty_tile: integer
+        :param level_types: types of level this generator can be used
+        :type level_types: [string]
         """
         self.floor_tile = floor_tile
         self.empty_tile = empty_tile
@@ -49,8 +51,8 @@ class SquareRoomGenerator(object):
         """
         Generate room
 
-        Args:
-            section: Section for generator to draw to
+        :param section: section for generator to draw to
+        :type section: Section
         """
 
         self.room_width = int(section.width * 0.50)
@@ -80,8 +82,8 @@ class SquareRoomGenerator(object):
         """
         Add corridors leading from room connection to section connections
 
-        Args:
-            section: Section to add corridors
+        :param section: section to add corridors
+        :type section: Section
         """
         for section_connection in section.connections:
             room_connection = self.find_room_connection(section,
@@ -96,11 +98,11 @@ class SquareRoomGenerator(object):
         """
         Find room connection that matches to given section connection
 
-        Args:
-            section: Section to handle
-            section_connection: Connection at the edge of section
-
-        Returns:
-            matching room Connection
+        :param section: section to handle
+        :type section: Section
+        :param section_connection: connection at the edge of section
+        :type section_connection: Connection
+        :returns: matching room connection
+        :rtype: Connection
         """
         return section.find_room_connection(section_connection)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -35,11 +35,14 @@ class CatacombsGenerator(object):
         """
         Default constructor
 
-        Args:
-            floor_tile: id of the tile to use for floors
-            empty_tile: id of the empty wall tile
-            level_types: types of level this generator can be used
-            rng: random number generator
+        :param floor_tile: id of the tile to use for floors
+        :type floor_tile: integer
+        :param empty_tile: id of the empty wall tile
+        :type empty_tile: integer
+        :param level_types: types of level this generator can be used
+        :type level_types: [string]
+        :param rng: random number generator
+        :type rng: Random
         """
         self.floor_tile = floor_tile
         self.empty_tile = empty_tile
@@ -53,8 +56,8 @@ class CatacombsGenerator(object):
         """
         Generate room
 
-        Args:
-            section: Section for generator to draw to
+        :param section: section for generator to draw to
+        :type section: Section
         """
         level_size = (section.width, section.height)
         room_min_size = (3, 3)

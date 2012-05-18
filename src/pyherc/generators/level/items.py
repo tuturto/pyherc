@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -34,7 +34,8 @@ class ItemAdderConfiguration(object):
         """
         Default constructor
 
-        :param level_types: list of types of level
+        :param level_types: types of level adder can be used at
+        :type level_types: [string]
         """
         super(ItemAdderConfiguration, self).__init__()
         self.level_types = level_types
@@ -102,7 +103,7 @@ class ItemAdder(object):
         """
         Add items
 
-        :param level: Level to add items
+        :param level: level to add items
         :type level: Level
         """
         item_list = self.configuration.items
@@ -120,7 +121,6 @@ class ItemAdder(object):
 
         :param item_spec: Dictionary specifying items to create
         :type item_spec: dict
-
         :returns: tupple (item_spec, item)
         """
         items = []

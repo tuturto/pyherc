@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -38,10 +38,12 @@ class TestLevelGenerator(object):
         """
         Default constructor
 
-        Args:
-            action_factory: ActionFactory
-            creature_generator: CreatureGenerator
-            item_generator: ItemGenerator
+        :param action_factory: action factory instance
+        :type action_factory: ActionFactory
+        :param creature_generator: creature generator instance
+        :type creature_generator: CreatureGenerator
+        :param item_generator: item generator instance
+        :type item_generator: ItemGenerator
         """
         self.logger = logging.getLogger('pyherc.generators.level.testlevel.TestLevelGenerator')
         self.item_generator = item_generator
@@ -67,11 +69,14 @@ class TestLevelGenerator(object):
         """
         Generate level that starts from given stairs
 
-        Args:
-            portal: link new level to this portal
-            model: model being used
-            new_portals: amount of portals to generate, default 0
-            monster_list: list of monsters to use
+        :param portal: link new level to this portal
+        :type portal: Portal
+        :param model: model being used
+        :type model: Model
+        :param new_portals: amount of portals to generate, default 0
+        :type new_portals: integer
+        :param monster_list: monsters to use
+        :type monster_list: [Character]
         """
         level_size = (80, 40)
         temp_level = Level(level_size, tiles.FLOOR_ROCK, tiles.WALL_EMPTY)

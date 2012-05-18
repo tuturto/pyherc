@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -39,10 +39,12 @@ class LevelGeneratorFactory(object):
         """
         Default constructor
 
-        Args:
-            action_factory: ActionFactory to pass to the generator
-            configuration: Configuration for factory
-            random_generator: Random number generator
+        :param action_factory: action factory to pass to the generator
+        :type action_factory: ActionFactory
+        :param configuration: configuration for factory
+        :type configuration: LevelGeneratorFactoryConfiguration
+        :param random_generator: random number generator
+        :type random_generator: Random
         """
         self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGeneratorFactory') #pylint: disable=c0301
         self.action_factory = action_factory
@@ -62,11 +64,10 @@ class LevelGeneratorFactory(object):
         """
         Get LevelGenerator for given level
 
-        Args:
-            level_type: type of level to generate
-
-        Returns:
-            configured LevelGenerator
+        :param level_type: type of level to generate
+        :type level_type: string
+        :returns: configured level generator
+        :rtype: LevelGenerator
         """
         partitioner = self.get_sub_component(level_type,
                                              self.level_partitioners,
@@ -105,13 +106,14 @@ class LevelGeneratorFactory(object):
         """
         Get subcomponent
 
-        Args:
-            level_type: type of level to generate
-            component_list: list of subcomponents to choose from
-            component_type: component type for error message
-
-        Returns:
-            List of components
+        :param level_type: type of level to generate
+        :type level_type: string
+        :param component_list: list of subcomponents to choose from
+        :type component_list: [object]
+        :param component_type: component type for error message
+        :type component_type: string
+        :returns: components
+        :rtype: [object]
         """
         components = [x for x in component_list
                       if level_type in x.level_types]
@@ -131,13 +133,14 @@ class LevelGeneratorFactory(object):
         """
         Get subcomponent
 
-        Args:
-            level_type: type of level to generate
-            component_list: list of subcomponents to choose from
-            component_type: component type for error message
-
-        Returns:
-            Single component
+        :param level_type: type of level to generate
+        :type level_type: string
+        :param component_list: subcomponents to choose from
+        :type component_list: [object]
+        :param component_type: component type for error message
+        :type component_type: string
+        :returns: single component
+        :rtype: object
         """
         matches = [x for x in component_list
                    if level_type in x.level_types]
@@ -168,16 +171,15 @@ class LevelGenerator(object):
         """
         Default constructor
 
-        Args:
-            action_factory: ActionFactory instance
-            partitioner: LevelPartitioner to use
-            room_generators: RoomGenerators to use
-            decorator: LevelDecorator to use
-            portal_adder: PortalAdder to use
-            item_adder: ItemAdder to generate items
-            creature_adder: CreatureAdder to add creatures
-            random_generator: Random number generator
-            size: Size of the level to create
+        :param action_factory: ActionFactory instance
+        :param partitioner: LevelPartitioner to use
+        :param room_generators: RoomGenerators to use
+        :param decorator: LevelDecorator to use
+        :param portal_adder: PortalAdder to use
+        :param item_adder: ItemAdder to generate items
+        :param creature_adder: CreatureAdder to add creatures
+        :param random_generator: Random number generator
+        :param size: Size of the level to create
         """
         self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGenerator') #pylint: disable=C0301
         self.item_adder = item_adder
@@ -211,8 +213,8 @@ class LevelGenerator(object):
         """
         Generate level
 
-        Args:
-            portal: Portal to link to this level
+        :param portal: portal to link to this level
+        :type portal: Portal
         """
         #TODO: configurable
         new_level = Level(self.size, -2, -101)

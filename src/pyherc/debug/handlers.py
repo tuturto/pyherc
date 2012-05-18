@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -44,8 +44,7 @@ def get_urls():
     """
     Get mapping between urls and handlers
 
-    Returns:
-        Mapping that can be passed on web.application
+    :returns: Mapping that can be passed on web.application
     """
     return (
             '/', 'Index',
@@ -58,8 +57,7 @@ def get_debug_server():
     """
     Set up debug server
 
-    Returns:
-        Initialised debug server
+    :returns: Initialised debug server
     """
     if web_loaded == False:
         return None
@@ -114,8 +112,7 @@ class Player:
         """
         Creates form to display
 
-        Returns:
-            Form
+        :returns: form
         """
         display_form = form.Form(
             form.Textbox("name", description="Name"),
@@ -174,8 +171,7 @@ class Factory:
         """
         Creates form to display
 
-        Returns:
-            Form
+        :returns: form
         """
         display_form = form.Form(
             form.Textbox("creature_name", description="Creature")

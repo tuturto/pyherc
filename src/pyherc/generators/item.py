@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -37,8 +37,7 @@ class ItemGenerator(object):
         """
         Default constructor
 
-        Args:
-            tables: Tables to use
+        :param tables: Tables to use
         """
         self.logger = logging.getLogger('pyherc.generators.item.ItemGenerator')
         self.tables = tables
@@ -46,6 +45,11 @@ class ItemGenerator(object):
     def generate_item(self, parameters):
         """
         Generates an item
+
+        :param parameters: parameters guiding generation
+        :type parameters: dict
+        :returns: generated item
+        :rtype: Item
         """
         new_item = None
         if not parameters == None:
@@ -73,8 +77,7 @@ class ItemGenerator(object):
         """
         Generate a special item
 
-        Args:
-            parameters: hash table containing parameters for generation
+        :param parameters: hash table containing parameters for generation
         """
         assert(parameters != None)
         assert('name' in parameters.keys())

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -37,8 +37,8 @@ class RandomConnector(object):
         """
         Default constructor
 
-        Args:
-            random_generator: random number generator
+        :param random_generator: random number generator
+        :type random_generator: Random
         """
         self.random_generator = random_generator
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.grid.RandomConnector') #pylint: disable=C0301
@@ -48,9 +48,10 @@ class RandomConnector(object):
         """
         Connects sections together
 
-        Args:
-            sections: List of Sections to connect
-            start_section: optional parameter specifying starting section
+        :param sections: sections to connect
+        :type sections: [Section]
+        :param start_section: optional parameter specifying starting section
+        :type start_section: Section
         """
         if start_section == None:
             start_location = self.random_generator.choice(sections)
@@ -82,9 +83,10 @@ class RandomConnector(object):
         """
         Builds path of connected sections
 
-        Args:
-            start_section: Section to start connecting from
-            sections: List of sections to connect
+        :param start_section: section to start connecting from
+        :type start_section: Section
+        :param sections: sections to connect
+        :type sections: [Section]
         """
         current_section = start_section
         unconnected_neighbours = [x for x in current_section.neighbours
@@ -112,11 +114,14 @@ class GridPartitioner(object):
         """
         Default constructor
 
-        Args:
-            level_types: types of level partitioner can be used for
-            x_sections: amount of sections to split horizontally
-            y_sections: amount of sections to split vertically
-            random_generator: random number generator
+        :param level_types: types of level partitioner can be used for
+        :type level_types: [string]
+        :param x_sections: amount of sections to split horizontally
+        :type x_sections: integer
+        :param y_sections: amount of sections to split vertically
+        :type y_sections: integer
+        :param random_generator: random number generator
+        :type random_generator: Random
         """
         self.connectors = [RandomConnector(random_generator)]
         self.level_types = level_types
@@ -129,11 +134,10 @@ class GridPartitioner(object):
         """
         Creates partitioning for a given level with connection points
 
-        Args:
-            level: Level to partition
-
-        Returns
-            List of connected sections
+        :param level: level to partition
+        :type level: Level
+        :returns: connected sections
+        :rtype: [Section]
         """
         sections = []
         section_matrix = [[None for i in range(self.y_sections)]
@@ -170,6 +174,12 @@ class GridPartitioner(object):
     def connect_new_section(self, section, location, sections):
         """
         Connects section in given location to its neighbours
+
+        :param section: section to connect
+        :type section: Section
+        :param location: location of the section
+        :param sections: sections
+        :type sections: [Section]
         """
         if location[0] > 0:
             left_section = sections[location[0]-1][location[1]]
@@ -186,12 +196,12 @@ class GridPartitioner(object):
         """
         Split range into equal sized chunks
 
-        Args:
-            length: range to split
-            sections: amount of sections to split
-
-        Returns:
-            list containing end points of chunks
+        :param length: range to split
+        :type length: integer
+        :param sections: amount of sections to split
+        :type sections: integer
+        :returns: list containing end points of chunks
+        :rtype: [integer]
         """
         section_length = length // sections
         ranges = []

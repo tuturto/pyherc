@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -32,14 +32,16 @@ class Section(object):
         """
         Default constructor
 
-        Args:
-            corner1: Coordinates of first corner
-            corner2: Coordinates of the second corner
-            level: Level where Section is linked
-            random_generator: Random number generator
+        :param corner1: Coordinates of first corner
+        :type corner1: (integer, integer)
+        :param corner2: Coordinates of the second corner
+        :type corner2: (integer, integer)
+        :param level: level where section is linked
+        :type level: Level
+        :param random_generator: random number generator
+        :type random_generator: Random
 
-        Note:
-            Coordinates are given relative to level origo
+        .. note:: Coordinates are given relative to level origo
         """
         self.__corners = []
         self.__corners.append(corner1)
@@ -55,31 +57,45 @@ class Section(object):
     def __get_corners(self):
         """
         Get corners of this section
+
+        :returns: corners of the section
+        :rtype: [(integer, integer), (integer, integer)]
         """
         return self.__corners
 
     def __set_corners(self, corners):
         """
         Set corners of this section
-        @param corners: corners to set
+
+        :param corners: Corners to set
+        :type corners: [(integer, integer), (integer, integer)]
         """
         self.__corners = corners
 
     def __get_connections(self):
         """
         List of connections this section has
+
+        :returns: connections of section
+        :rtype: [Connection]
         """
         return self.__connections
 
     def __get_room_connections(self):
         """
         List of connections leading to the room
+
+        :returns: connections
+        :rtype: [Connection]
         """
         return self.__room_connections
 
     def __get_neighbours(self):
         """
         List of sections next to this one
+
+        :returns: sections next to this one
+        :rtype: [Section]
         """
         return self.__neighbours
 
@@ -87,8 +103,8 @@ class Section(object):
         """
         Is this section connected to a neighbour
 
-        Returns:
-            True if connected, otherwise False
+        :returns: True if connected, otherwise False
+        :rtype: Boolean
         """
         return len(self.__connections) > 0
 
@@ -96,8 +112,8 @@ class Section(object):
         """
         Get leftmost point of the section
 
-        Returns:
-            Leftmost point of the section
+        :returns: leftmost point of the section
+        :rtype: (integer, integer)
         """
         point1 = self.__corners[0][0]
         point2 = self.__corners[1][0]
@@ -111,8 +127,8 @@ class Section(object):
         """
         Get width of the section
 
-        Returns:
-            Width of the section
+        :returns: width of the section
+        :rtype: integer
         """
         return abs(self.__corners[0][0] - self.__corners[1][0])
 
@@ -120,8 +136,8 @@ class Section(object):
         """
         Get top edge of the section
 
-        Returns:
-            Highest point of the section
+        :returns: highest point of the section
+        :rtype: (integer, integer)
         """
         point1 = self.__corners[0][1]
         point2 = self.__corners[1][1]
@@ -135,8 +151,8 @@ class Section(object):
         """
         Get height of the section
 
-        Returns:
-            Height of the section
+        :returns: height of the section
+        :rtype: integer
         """
         return abs(self.__corners[0][1] - self.__corners[1][1])
 
@@ -155,8 +171,8 @@ class Section(object):
     connected = property(__get_connected)
     """Readonly property for connection status of the section
 
-        Returns:
-            True if section is connected, otherwise False""" #pylint: disable=W0105
+        :returns: True if section is connected, otherwise False
+        :rtype: Boolean""" #pylint: disable=W0105
 
     left_edge = property(__get_left_edge)
     """Readonly property to find leftmost point of the section""" #pylint: disable=W0105
@@ -174,8 +190,8 @@ class Section(object):
         """
         Connect this Section to another
 
-        Args:
-            section: Section to connect to
+        :param section: section to connect to
+        :type section: Section
         """
         my_side_of_border = self.get_common_border(section)
         my_side = self.random_generator.choice(my_side_of_border)
@@ -196,8 +212,8 @@ class Section(object):
         """
         Get list of unconnected neighbours
 
-        Returns:
-            List of unconnected neighbours
+        :returns: unconnected neighbours
+        :rtype: [Section]
         """
         return [x for x in self.neighbours
                         if x.connected == False]
@@ -206,8 +222,8 @@ class Section(object):
         """
         Check if any of this Sections neighbours is unconnected
 
-        Returns:
-            True if unconnected neighbour is found, otherwise false
+        :returns: True if unconnected neighbour is found, otherwise false
+        :rtype: Boolean
         """
         return len(self.unconnected_neighbours()) > 0
 
@@ -215,11 +231,10 @@ class Section(object):
         """
         Get list of locations, defining borders of this Section
 
-        Returns:
-            List of (loc_x, loc_y, direction) defining borders
+        :returns: List of (loc_x, loc_y, direction) defining borders
+        :rtype: [(integer, integer, string)
 
-        Note:
-            Coordinates are given relative to level origo
+        .. note:: coordinates are given relative to level origo
         """
         border = []
 
@@ -242,11 +257,10 @@ class Section(object):
         Get list of locations that define common border between two Sections
         Border is placed on the edge of this Section
 
-        Returns:
-            List of (loc_x, loc_y, direection) defining common border
+        :returns: List of (loc_x, loc_y, direction) defining common border
+        :rtype: [(integer, integer, string)]
 
-        Note:
-            Coordinates are given relative to level origo
+        .. note:: Coordinates are given relative to level origo
         """
         my_border = self.get_border()
         other_border = another_section.get_border()
@@ -264,14 +278,12 @@ class Section(object):
         Calculate which of this Section's points corresponds to the point given
         on the other side of the common border
 
-        Args:
-            location: (loc_x, loc_y) defining point on the other side
+        :param location: (loc_x, loc_y) defining point on the other side
+        :type location: (integer, integer)
+        :returns: (loc_x, loc_y) if corresponding point is found, False otherwise
+        :rtype: (integer, integer) or Boolean
 
-        Returns:
-            (loc_x, loc_y) if corresponding point is found, False otherwise
-
-        Note:
-            Coordinates are given relative to level origo
+        .. note:: Coordinates are given relative to level origo
         """
         my_side = None
         my_border = self.get_border()
@@ -288,12 +300,12 @@ class Section(object):
 
         Room connections are used to connect rooms to edge of Sections
 
-        Args:
-            location: (loc_x, loc_y) where to add the Connection
-            direction: direction where this connections leads
+        :param location: location where to add the Connection
+        :type location: (integer, integer)
+        :direction: direction where this connections leads
+        :type direction: string
 
-        Note:
-            Coordinates are given relative to section origo
+        .. note:: Coordinates are given relative to section origo
         """
         self.__room_connections.append(
                         Connection(connection = None,
@@ -305,13 +317,14 @@ class Section(object):
         """
         Set floor at given location
 
-        Args:
-            location: (loc_x, loc_y) location to set the tile
-            tile: ID of the tile to use
-            location_type: type of location, None to not change
+        :param location: location to set the tile
+        :type location: (integer, integer)
+        :param tile: ID of the tile to use
+        :type tile: integer
+        :param location_type: type of location, None to not change
+        :type location_type: string
 
-        Note:
-            Coordinates are given relative to section origo
+        .. note:: Coordinates are given relative to section origo
         """
         x_loc = self.__get_left_edge() + location[0]
         y_loc = self.__get_top_edge() + location[1]
@@ -324,13 +337,14 @@ class Section(object):
         """
         Set wall at given location
 
-        Args:
-            location: (loc_x, loc_y) location to set the tile
-            tile: ID of the tile to use
-            location_type: type of location, None to not change
+        :param location: location to set the tile
+        :type location: (integer, integer)
+        :param tile: ID of the tile to use
+        :type tile: integer
+        :param location_type: type of location, None to not change
+        :type location_type: string
 
-        Note:
-            Coordinates are given relative to section origo
+        .. note:: Coordinates are given relative to section origo
         """
         x_loc = self.__get_left_edge() + location[0]
         y_loc = self.__get_top_edge() + location[1]
@@ -343,11 +357,10 @@ class Section(object):
         """
         Find room connection that matches to given section connection
 
-        Args:
-            section_connection: Connection at the edge of section
-
-        Returns:
-            matching room Connection
+        :param section_connection: connection at the edge of section
+        :type section_connection: Section
+        :returns: matching room connection
+        :rtype: Connection
         """
         wanted = None
         if section_connection.direction == "left":
@@ -374,12 +387,15 @@ class Connection(object):
         """
         Default constructor
 
-        Args:
-            connection: Connection on another Section,
-                    if connecting between sections
-            location: (x_loc, y_loc) of this connection
-            direction: direction where corridor should start from here
-            section: Section where connection is located
+        :param connection: Connection on another Section,
+                           if connecting between sections
+        :type connection: Connection
+        :param location: location of this connection
+        :type location: (integer, integer)
+        :param direction: direction where corridor should start from here
+        :type direction: string
+        :param section: section where connection is located
+        :type section: Section
         """
         object.__init__(self)
         self.connection = connection
@@ -391,8 +407,8 @@ class Connection(object):
         """
         Create a new Connection with coordinates translated to section
 
-        Returns:
-            New connection
+        :returns: new connection
+        :rtype: Connection
         """
         new_location = (self.location[0] - self.section.left_edge,
                         self.location[1] - self.section.top_edge)

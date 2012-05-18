@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -48,30 +48,45 @@ class LevelGeneratorFactoryConfig(object):
     def __get_level_partitioners(self):
         """
         Get level partitioners in this configurations
+
+        :returns: level partitioners
+        :rtype: [Partitioner]
         """
         return self.__level_partitioners
 
     def __get_room_generators(self):
         """
         Get room generators in this configuration
+
+        :returns: room generators
+        :rtype: [RoomGenerator]
         """
         return self.__room_generators
 
     def __get_decorators(self):
         """
         Get level decorators in this configuration
+
+        :returns: decorators
+        :rtype: [Decorator]
         """
         return self.__decorators
 
     def __get_size(self):
         """
         Get size of levels
+
+        :returns: size of the level
+        :rtype: (integer, integer)
         """
         return self.__size
 
     def __get_portal_adder_configurations(self):
         """
         Get portal adder configurations
+
+        :returns: configurations for portal adders
+        :rtype: [PortalAdderConfiguration]
         """
         return self.__portal_adder_configurations
 

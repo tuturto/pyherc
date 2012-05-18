@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -44,10 +44,9 @@ class DungeonGenerator(object):
         """
         Default constructor
 
-        Args:
-            creature_generator: generator for creatures
-            item_generator: generator for items
-            level_generator: level generator for the first level
+        :param creature_generator: generator for creatures
+        :param item_generator: generator for items
+        :param level_generator: level generator for the first level
         """
         self.logger = logging.getLogger('pyherc.generators.dungeon.DungeonGenerator')
         self.creature_generator = creature_generator

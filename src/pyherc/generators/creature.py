@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -38,9 +38,9 @@ class CreatureGenerator(object):
         """
         Default constructor
 
-        Args:
-            action_factory: Initialised action factory
-            tables: Tables defining creatures
+        :param action_factory: Initialised action factory
+        :type action_factory: ActionFactory
+        :param tables: Tables defining creatures
         """
         self.logger = logging.getLogger(
                             'pyherc.generators.creature.CreatureGenerator')
@@ -53,8 +53,10 @@ class CreatureGenerator(object):
         """
         Generates a creature
 
-        Args:
-            parameters: hash table containing parameters
+        :param parameters: hash table containing parameters
+        :type parameters: dict
+        :returns: generated creature
+        :rtype: Character
         """
         new_creature = None
         if not parameters == None:

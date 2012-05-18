@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -32,10 +32,12 @@ class CorridorGenerator(object):
         """
         Default constructor
 
-        Args:
-            start_point: starting Connection
-            end_point: ending Connection
-            tile: ID of tile to place
+        :param start_point: starting connection
+        :type start_point: Connection
+        :param end_point: ending connection
+        :type end_point: Connection
+        :param tile: ID of tile to place
+        :type tile: integer
         """
         object.__init__(self)
         self.start_point = start_point
@@ -59,9 +61,10 @@ class CorridorGenerator(object):
         """
         Special case, carving is done in straigth horizontal line
 
-        Args:
-            start_point: Starting connection
-            end_point: Ending connection
+        :param start_point: starting connection
+        :type start_point: Connection
+        :param end_point: ending connection
+        :type end_point: Connection
         """
         if start_point.location[0] > end_point.location[0]:
             start_x = end_point.location[0]
@@ -83,9 +86,10 @@ class CorridorGenerator(object):
         """
         Carve corridor in three sections (horizontal, vertical, horizontal)
 
-         Args:
-            start_point: Starting connection
-            end_point: Ending connection
+        :param start_point: starting connection
+        :type start_point: Connection
+        :param end_point: ending connection
+        :type end_point: Connection
         """
         middle_x = abs(start_point.location[0] - end_point.location[0]) // 2
 
@@ -112,9 +116,10 @@ class CorridorGenerator(object):
         """
         Special case, carving is done in straigth vertical line
 
-        Args:
-            start_point: Starting connection
-            end_point: Ending connection
+        :param start_point: starting connection
+        :type start_point: Connection
+        :param end_point: ending connection
+        :type end_point: Connection
         """
         if start_point.location[1] > end_point.location[1]:
             start_y = end_point.location[1]
@@ -136,9 +141,10 @@ class CorridorGenerator(object):
         """
         Carve corridor in three sections (vertical, horizontal,vertical)
 
-         Args:
-            start_point: Starting connection
-            end_point: Ending connection
+        :param start_point: starting connection
+        :type start_point: Connection
+        :param end_point: ending connection
+        :type end_point: Connection
         """
         middle_y = abs(start_point.location[1] - end_point.location[1]) // 2
 

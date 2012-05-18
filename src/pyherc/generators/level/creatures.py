@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -35,8 +35,8 @@ class CreatureAdderConfiguration(object):
         """
         Default constructor
 
-        Args:
-            level_types: types of levels adder can be used at
+        :param level_types: types of levels adder can be used at
+        :type level_types: [string]
         """
         super(CreatureAdderConfiguration, self).__init__()
         self.level_types = level_types
@@ -47,11 +47,14 @@ class CreatureAdderConfiguration(object):
         """
         Adds creature specification
 
-        Args:
-            min_amount: Minimum amount of creatures to generate
-            max_amount: Maximum amount of creatures to generate
-            name: Name of the creature to generate
-            location: location type where creature is placed
+        :param min_amount: minimum amount of creatures to generate
+        :type min_amount: integer
+        :param max_amount: maximum amount of creatures to generate
+        :type max_amount: integer
+        :param name: name of the creature to generate
+        :type name: string
+        :param location: location type where creature is placed
+        :type location: string
         """
         config_item = {}
         config_item['min_amount'] = min_amount
@@ -72,10 +75,12 @@ class CreatureAdder(object):
         """
         Default constructor
 
-        Args:
-            creature_generator: CreatureGenerator used to create creatures
-            configuration: CreatureAdderConfiguration
-            rng: random number generator
+        :param creature_generator: creature generator used to create creatures
+        :type creature_generator: CreatureGenerator
+        :param configuration: configuration
+        :type configuration: CreatureAdderConfiguration
+        :param rng: random number generator
+        :type rng: Random
         """
         super(CreatureAdder, self).__init__()
         self.creature_generator = creature_generator
@@ -86,6 +91,9 @@ class CreatureAdder(object):
     def __get_level_types(self):
         """
         Get level types this adder can be used at
+
+        :returns: level types this adder can be used at
+        :rtype: [string]
         """
         return self.configuration.level_types
 
@@ -94,8 +102,8 @@ class CreatureAdder(object):
         """
         Add creatures to level according to configuration
 
-        Args:
-            level: Level to add creatures
+        :param level: level to add creatures
+        :type level: Level
         """
         creature_list = self.configuration.creature_list
         creatures = []
@@ -113,12 +121,12 @@ class CreatureAdder(object):
         """
         Generate creatures
 
-        Args:
-            name: Name of the creatures to generate
-            amount: Amount of creatures to generate
-
-        Returns:
-            List of generated creatures
+        :param name: name of the creatures to generate
+        :type name: string
+        :param amount: amount of creatures to generate
+        :type amount: integer
+        :returns: generated creatures
+        :rtype: [Character]
         """
         creatures = []
         params = {}
@@ -134,10 +142,12 @@ class CreatureAdder(object):
         """
         Place creatures into a level
 
-        Args:
-            creatures: List of Creatures to place
-            creature_list: specification where to place creatures
-            level: Level to place creatures
+        :param creatures: creatures to place
+        :type creatures: [Character]
+        :param creature_list: specification where to place creatures
+        :type creature_list: dict
+        :param level: level to place creatures
+        :type level: Level
         """
         for creature in creatures:
             location_type = [x['location'] for x in creature_list

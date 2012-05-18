@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -32,8 +32,7 @@ class Decorator(object):
         """
         Default constructor
 
-        Args:
-            configuration: configuration for decorator
+        :param configuration: configuration for decorator
         """
         super(Decorator, self).__init__()
         self.configuration = configuration
@@ -43,8 +42,8 @@ class Decorator(object):
         """
         Get types of levels this decorator supports
 
-        Returns:
-            List of level types
+        :returns: level types
+        :rtype: [string]
         """
         return self.configuration.level_types
 
@@ -54,8 +53,8 @@ class Decorator(object):
         """
         Decorate level
 
-        Args:
-            level: Level to decorate
+        :param level: Level to decorate
+        :type level: Level
         """
         pass
 
@@ -64,6 +63,12 @@ class DecoratorConfig(object):
     Super class for decorator configuration
     """
     def __init__(self, level_types):
+        """
+        Default constructor
+
+        :param level_types: level types to handle
+        :type level_types: [string]
+        """
         super(DecoratorConfig, self).__init__()
         self.level_types = level_types
 
@@ -75,8 +80,8 @@ class ReplacingDecorator(Decorator):
         """
         Default constructor
 
-        Args:
-            configuration: ReplacingDecoratorConfig specifying tiles to replace
+        :param configuration: configuration specifying tiles to replace
+        :type configuration: ReplacingDecoratorConfig
         """
         super(ReplacingDecorator, self).__init__(configuration)
         self.logger = logging.getLogger('pyherc.generators.level.decorator.basic.ReplacingDecorator')
@@ -85,8 +90,8 @@ class ReplacingDecorator(Decorator):
         """
         Decorate level
 
-        Args:
-            level: Level to decorate
+        :param level: level to decorate
+        :type level: Level
         """
         floor_keys = self.configuration.ground_config.keys()
         ground_tiles = self.configuration.ground_config
@@ -111,6 +116,11 @@ class ReplacingDecoratorConfig(DecoratorConfig):
     def __init__(self, level_types, ground_config, wall_config):
         """
         Default constructor
+
+        :param level_types: types of level to handle
+        :type level_types: [string]
+        :param ground_config: configuration for ground
+        :param wall_config: configuration for walls
         """
         super(ReplacingDecoratorConfig, self).__init__(level_types)
         self.ground_config = ground_config
@@ -127,8 +137,8 @@ class WallBuilderDecorator(Decorator):
         """
         Default constructor
 
-        Args:
-            configuration: WallBuilderDecoratorConfig
+        :param configuration: configuration
+        :type configuration: WallBuilderDecoratorConfig
         """
         super(WallBuilderDecorator, self).__init__(configuration)
         self.logger = logging.getLogger('pyherc.generators.level.decorator.basic.WallBuilderDecorator')
@@ -137,8 +147,8 @@ class WallBuilderDecorator(Decorator):
         """
         Decorate level
 
-        Args:
-            level: Level to decorate
+        :param level: level to decorate
+        :type level: Level
         """
         for loc_y in range(1, len(level.floor[0]) - 1):
             for loc_x in range(1, len(level.floor) - 1):
@@ -156,9 +166,10 @@ class WallBuilderDecorator(Decorator):
         """
         Check location and replace tile if it matches configuration
 
-        Args:
-            location: (loc_x, loc_y) location to check
-            level: Level to use
+        :param location: location to check
+        :type location: (integer, integer)
+        :param level: level to use
+        :type level: Level
         """
         loc_x = location[0]
         loc_y = location[1]
@@ -175,6 +186,12 @@ class WallBuilderDecoratorConfig(DecoratorConfig):
     def __init__(self, level_types, wall_config, empty_tile):
         """
         Default constructor
+
+        :param level_types: types of level to handle
+        :type level_types: [string]
+        :param wall_config: configuration for walls
+        :param empty_tile: tile ID to use for empty spaces
+        :type empty_tile: integer
         """
         super(WallBuilderDecoratorConfig, self).__init__(level_types)
         self.wall_config = wall_config
@@ -188,8 +205,8 @@ class AggregateDecorator(Decorator):
         """
         Default constructor
 
-        Args:
-            configuration: AggregateDecoratorConfig
+        :param configuration: configuration
+        :type configuration: AggregateDecoratorConfig
         """
         super(AggregateDecorator, self).__init__(configuration)
         self.logger = logging.getLogger('pyherc.generators.level.decorator.basic.AggregateDecorator')
@@ -198,8 +215,8 @@ class AggregateDecorator(Decorator):
         """
         Decorate level
 
-        Args:
-            level: Level to decorate
+        :param level: level to decorate
+        :type level: Level
         """
         for decorator in self.configuration.decorators:
             decorator.decorate_level(level)
@@ -211,6 +228,11 @@ class AggregateDecoratorConfig(DecoratorConfig):
     def __init__(self, level_types, decorators):
         """
         Default constructor
+
+        :param level_types: types of levels to handle
+        :type level_types: [string]
+        :decorators: decorators to group
+        :type decorators: [Decorator]
         """
         super(AggregateDecoratorConfig, self).__init__(level_types)
         self.decorators = decorators
