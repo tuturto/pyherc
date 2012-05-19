@@ -87,6 +87,19 @@ class TestEffectsCollection(object):
 
         assert_that(handle2, is_in(handles))
 
+    def test_no_matching_trigger(self):
+        """
+        Test that collection returns an empty list when trigger does not match
+        """
+        handle1 = (EffectHandleBuilder()
+                        .with_trigger('on sleep')
+                        .build())
+        self.collection.add_effect_handle(handle1)
+
+        handles = self.collection.get_effect_handles('on kick')
+
+        assert_that(handles, is_(equal_to([])))
+
     def test_removing_handle(self):
         """
         Test that a handle can be removed

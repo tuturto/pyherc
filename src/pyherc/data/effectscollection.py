@@ -54,7 +54,7 @@ class EffectsCollection(object):
         :type trigger: string
 
         :returns: effect handles
-        :rtype: List
+        :rtype: [EffectHandle]
         """
         if trigger is None:
             keys = self.handles.keys()
@@ -63,7 +63,10 @@ class EffectsCollection(object):
                 for handle in self.handles[key]:
                     effects.append(handle)
         else:
-            effects = [x for x in self.handles[trigger]]
+            if trigger in self.handles.keys():
+                effects = [x for x in self.handles[trigger]]
+            else:
+                effects = []
 
         return effects
 

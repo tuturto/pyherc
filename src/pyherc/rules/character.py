@@ -24,7 +24,7 @@ Various rules used in character generation
 
 import logging
 import pyherc.data.tiles
-from pyherc.data import Character, WeaponProficiency
+from pyherc.data import Character, WeaponProficiency, EffectsCollection
 
 __logger = logging.getLogger('pyherc.rules.character')
 
@@ -78,6 +78,7 @@ def create_character(race, kit, model, action_factory, rng):
 
     new_character = Character(model,
                               action_factory,
+                              EffectsCollection(),
                               rng)
     new_character.body = temp_race['body'] + temp_kit['body']
     new_character.finesse = temp_race['finesse'] + temp_kit['finesse']

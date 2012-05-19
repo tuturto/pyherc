@@ -31,7 +31,7 @@ class Character(object):
     logged = Logged()
 
     @logged
-    def __init__(self, model, action_factory, rng):
+    def __init__(self, model, action_factory, effects_collection, rng):
         """
         Default constructor
 
@@ -39,6 +39,8 @@ class Character(object):
         :type model: Model
         :param action_factory: action factory for character to use
         :type action_factory: ActionFactory
+        :param effects_collection: collection for effects
+        :type effects_collection: EffectsCollection
         :param rng: random number generator
         :type rng: Random
         """
@@ -71,9 +73,9 @@ class Character(object):
         #mimic
         self.mimic_item = None
         self.__active_effects = [] # active effects
-        self.effects = {}
         self.action_factory = action_factory
         self.artificial_intelligence = None
+        self.effects_collection = effects_collection
         self.rng = rng
 
     def __str__(self):
@@ -391,20 +393,37 @@ class Character(object):
         self.action_factory.model.raise_event(event)
 
     @logged
-    def add_effect(self, effect):
+    def add_effect_handle(self, effect):
         """
-        Adds an effect to an character
+        Adds an effect handle to an character
 
         :param effect: effect to add
         :type effect: EffectHandle
         """
-        if self.effects == None:
-            self.effects = {}
+        self.effects_collection.add_effect_handle(effect)
 
-        if self.effects.has_key(effect.trigger):
-            self.effects[effect.trigger].append(effect)
-        else:
-            self.effects[effect.trigger] = [effect]
+    @logged
+    def get_effect_handles(self, trigger = None):
+        """
+        Get effect handles
+
+        :param trigger: optional trigger type
+        :type trigger: string
+
+        :returns: effect handles
+        :rtype: [EffectHandle]
+        """
+        return self.effects_collection.get_effect_handles(trigger)
+
+    @logged
+    def remove_effect_handle(self, handle):
+        """
+        Remove given handle
+
+        :param handle: handle to remove
+        :type handle: EffectHandle
+        """
+        self.effects_collect.remove_effect_handle(handle)
 
     @logged
     def add_active_effect(self, effect):

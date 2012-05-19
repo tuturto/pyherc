@@ -21,7 +21,7 @@
 """
 Module for character builder
 """
-from pyherc.data import Character
+from pyherc.data import Character, EffectsCollection
 from mockito import mock
 from random import Random
 
@@ -51,6 +51,7 @@ class CharacterBuilder(object):
         self.location = ()
 
         self.effects = []
+        self.effects_collection = EffectsCollection()
 
     def with_model(self, model):
         self.model = model
@@ -116,7 +117,8 @@ class CharacterBuilder(object):
         """
         character = Character(model = self.model,
                               action_factory = self.action_factory,
-                              rng = self.rng)
+                              rng = self.rng,
+                              effects_collection = self.effects_collection)
 
         character.name = self.name
 
@@ -132,6 +134,6 @@ class CharacterBuilder(object):
         character.location = self.location
 
         for effect in self.effects:
-            character.add_effect(effect)
+            character.add_effect_handle(effect)
 
         return character

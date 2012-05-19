@@ -87,16 +87,15 @@ class AttackAction(object):
         """
         Trigger effects
         """
-        if 'on attack hit' in self.attacker.effects.keys():
-            effects = self.attacker.effects['on attack hit']
-            for effect_spec in effects:
-                effect = self.effect_factory.create_effect(
+        effects = self.attacker.get_effect_handles('on attack hit')
+        for effect_spec in effects:
+            effect = self.effect_factory.create_effect(
                                                     effect_spec.effect,
                                                     target = self.target)
-                if effect.duration == 0:
-                    effect.trigger()
-                else:
-                    self.target.active_effects.append(effect)
+            if effect.duration == 0:
+                effect.trigger()
+            else:
+                self.target.active_effects.append(effect)
 
 class ToHit(object):
     """

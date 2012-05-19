@@ -25,7 +25,7 @@ Classes:
     CreatureGenerator
 """
 from pyherc.ai import FlockingHerbivore
-from pyherc.data import Character
+from pyherc.data import Character, EffectsCollection
 import logging
 import random
 
@@ -77,6 +77,7 @@ class CreatureGenerator(object):
 
         new_creature = Character(self.model,
                                  self.action_factory,
+                                 EffectsCollection(),
                                  self.rng)
         new_creature.name = table['name']
         new_creature.body = table['body']
