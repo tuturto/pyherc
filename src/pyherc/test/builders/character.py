@@ -50,6 +50,7 @@ class CharacterBuilder(object):
         self.level = None
         self.location = ()
 
+        self.effect_handles = []
         self.effects = []
         self.effects_collection = EffectsCollection()
 
@@ -63,6 +64,13 @@ class CharacterBuilder(object):
 
     def with_rng(self, rng):
         self.rng = rng
+        return self
+
+    def with_effect_handle(self, handle):
+        if hasattr(handle, 'build'):
+            self.effect_handles.append(handle.build())
+        else:
+            self.effect_handles.append(handle)
         return self
 
     def with_effect(self, effect):
@@ -133,7 +141,10 @@ class CharacterBuilder(object):
         character.level = self.level
         character.location = self.location
 
+        for handle in self.effect_handles:
+            character.add_effect_handle(handle)
+
         for effect in self.effects:
-            character.add_effect_handle(effect)
+            character.add_effect(effect)
 
         return character

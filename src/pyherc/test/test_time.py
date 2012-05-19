@@ -173,7 +173,7 @@ class TestEffectsAndTime:
 
         creature2 = (CharacterBuilder()
                         .with_tick(10)
-                        .with_effect(effect2)
+                        .with_effect_handle(effect2)
                         .with_level(self.level)
                         .build()
                         )

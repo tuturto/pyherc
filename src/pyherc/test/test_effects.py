@@ -90,7 +90,7 @@ class TestEffects(object):
                             .build())
 
         attacker = (CharacterBuilder()
-                        .with_effect(
+                        .with_effect_handle(
                                 EffectHandleBuilder()
                                     .with_trigger('on attack hit'))
                         .with_action_factory(action_factory)

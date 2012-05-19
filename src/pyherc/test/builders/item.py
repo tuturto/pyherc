@@ -34,7 +34,7 @@ class ItemBuilder(object):
         super(ItemBuilder, self).__init__()
         self.name = 'prototype'
         self.appearance = ''
-        self.effects = []
+        self.effect_handles = []
         self.location = ()
         self.icon = 0
 
@@ -46,11 +46,11 @@ class ItemBuilder(object):
         self.appearance = appearance
         return self
 
-    def with_effect(self, effect):
-        if hasattr(effect, 'build'):
-            self.effects.append(effect.build())
+    def with_effect(self, handle):
+        if hasattr(handle, 'build'):
+            self.effect_handles.append(handle.build())
         else:
-            self.effects.append(effect)
+            self.effect_handles.append(handle)
         return self
 
     def with_location(self, location):
@@ -75,7 +75,7 @@ class ItemBuilder(object):
         item.location = self.location
         item.icon = self.icon
 
-        for handle in self.effects:
+        for handle in self.effect_handles:
             item.add_effect_handle(handle)
 
         return item
