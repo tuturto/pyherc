@@ -38,6 +38,8 @@ type of creatures to add and their placement.
 
 Items are added in the same way as the portals, but item adders are used.
 
+.. graphviz:: dot/level_generator.dot
+
 Partitioners
 ============
 :class:`pyherc.generators.level.partitioners.grid.GridPartitioner` is basic partitioner,
