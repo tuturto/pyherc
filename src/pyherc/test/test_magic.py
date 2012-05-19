@@ -21,16 +21,10 @@
 """
 Module for magic related tests
 """
-
-import pyherc
-import pyherc.rules.magic
-import pyherc.data.model
-from pyherc.data.item import Item
-from pyherc.test import IntegrationTest
-from pyherc.test import StubModel
+#pylint: disable=W0614
 from pyherc.rules.effects import Heal, Damage
-from random import Random
-from mockito import mock
+from pyherc.test.builders import CharacterBuilder
+from hamcrest import * #pylint: disable=W0401
 
 class TestMagic:
     """
@@ -47,13 +41,11 @@ class TestMagic:
         """
         Test that a damage effect can be applied on a character
         """
-        model = StubModel()
-        character = pyherc.data.model.Character(mock(),
-                                                mock(),
-                                                Random())
-        character.model = model
-        character.hit_points = 15
-        character.max_hp = 15
+        character = (CharacterBuilder()
+                        .with_hit_points(15)
+                        .with_max_hp(15)
+                        .build())
+
         effect = Damage(duration = 0,
                         frequency = 0,
                         tick = 0,
@@ -62,19 +54,17 @@ class TestMagic:
 
         effect.trigger()
 
-        assert(character.hit_points == 5)
+        assert_that(character.hit_points, is_(equal_to(5)))
 
     def test_healing_effect(self):
         """
         Test that a healing effect can be applied on a character
         """
-        model = StubModel()
-        character = pyherc.data.model.Character(mock(),
-                                                mock(),
-                                                Random())
-        character.model = model
-        character.hit_points = 1
-        character.max_hp = 15
+        character = (CharacterBuilder()
+                        .with_hit_points(1)
+                        .with_max_hp(15)
+                        .build())
+
         effect = Heal(duration = 0,
                       frequency = 0,
                       tick = 0,
@@ -82,19 +72,17 @@ class TestMagic:
                       target = character)
         effect.trigger()
 
-        assert(character.hit_points == 11)
+        assert_that(character.hit_points, is_(equal_to(11)))
 
     def test_healing_does_not_heal_over_max_hp(self):
         """
         Test that character does not get healed over his maximum hp when getting healing effect
         """
-        model = StubModel()
-        character = pyherc.data.model.Character(mock(),
-                                                mock(),
-                                                Random())
-        character.model = model
-        character.hit_points = 1
-        character.max_hp = 5
+        character = (CharacterBuilder()
+                        .with_hit_points(1)
+                        .with_max_hp(5)
+                        .build())
+
         effect = Heal(duration = 0,
                       frequency = 0,
                       tick = 0,
@@ -103,5 +91,4 @@ class TestMagic:
 
         effect.trigger()
 
-        assert(character.hit_points == 5)
-
+        assert_that(character.hit_points, is_(equal_to(5)))

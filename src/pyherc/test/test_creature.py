@@ -23,7 +23,7 @@
 Module for testing creatures
 """
 #pylint: disable=W0614
-from pyherc.data.model import WeaponProficiency
+from pyherc.data import WeaponProficiency
 from pyherc.test import IntegrationTest
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ItemBuilder

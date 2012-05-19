@@ -27,7 +27,9 @@ from .dungeon import Dungeon
 from .portal import Portal
 
 from .model import Model
-from .model import Character
+
+from .character import Character
+from .character import WeaponProficiency
 
 from .item import Item
 from .effectscollection import EffectsCollection

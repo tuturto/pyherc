@@ -23,7 +23,8 @@ Various rules used in character generation
 """
 
 import logging
-import pyherc.data.model
+import pyherc.data.tiles
+from pyherc.data import Character, WeaponProficiency
 
 __logger = logging.getLogger('pyherc.rules.character')
 
@@ -75,9 +76,9 @@ def create_character(race, kit, model, action_factory, rng):
     temp_race = race_stats[race]
     temp_kit = kit_stats[kit]
 
-    new_character = pyherc.data.model.Character(model,
-                                                action_factory,
-                                                rng)
+    new_character = Character(model,
+                              action_factory,
+                              rng)
     new_character.body = temp_race['body'] + temp_kit['body']
     new_character.finesse = temp_race['finesse'] + temp_kit['finesse']
     new_character.mind = temp_race['mind'] + temp_kit['mind']
@@ -87,8 +88,7 @@ def create_character(race, kit, model, action_factory, rng):
     new_character.size = 'medium'
     new_character.attack = 3
 
-    new_character.feats.append(
-                              pyherc.data.model.WeaponProficiency('simple'))
+    new_character.feats.append(WeaponProficiency('simple'))
     new_character.icon = pyherc.data.tiles.HUMAN_FIGHTER
 
     return new_character

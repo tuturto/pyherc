@@ -28,9 +28,9 @@ from hamcrest import * #pylint: disable=W0401
 import pyherc
 from pyherc.data import Dungeon
 from pyherc.data import Portal
-from pyherc.data.model import Character
 from pyherc.generators.level.testlevel import TestLevelGenerator
 from pyherc.test import IntegrationTest
+from pyherc.test.builders import CharacterBuilder
 
 import pyherc.rules.moving
 
@@ -49,9 +49,11 @@ class TestMoving(IntegrationTest):
         """
         Secondary setup
         """
-        self.character = Character(self.model,
-                                   self.action_factory,
-                                   self.rng)
+        self.character = (CharacterBuilder()
+                                .with_model(self.model)
+                                .with_action_factory(self.action_factory)
+                                .with_rng(self.rng)
+                                .build())
         levelGenerator = TestLevelGenerator(self.action_factory,
                                             self.creatureGenerator,
                                             self.item_generator)

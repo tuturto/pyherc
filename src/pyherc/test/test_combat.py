@@ -23,8 +23,8 @@ Module for testing combat related rules
 """
 #pylint: disable=W0614
 import pyherc
-from pyherc.data.dungeon import Dungeon
-from pyherc.data.model import Character
+from pyherc.data import Character
+from pyherc.data import Dungeon
 from pyherc.generators.level.testlevel import TestLevelGenerator
 from pyherc.test import IntegrationTest
 from pyherc.test import StubRandomNumberGenerator

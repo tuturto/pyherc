@@ -6,6 +6,7 @@ pyherc.data
 .. toctree::
    :maxdepth: 2
    
+   module_character
    module_dungeon
    module_effectscollection
    module_item
@@ -13,4 +14,3 @@ pyherc.data
    module_model
    module_portal
    module_tiles
-   

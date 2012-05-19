@@ -22,4 +22,4 @@
 Module containing AI routines for pyherc
 """
 
-pass
+from .simple import FlockingHerbivore

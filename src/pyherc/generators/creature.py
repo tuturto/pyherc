@@ -24,10 +24,10 @@ Module for creature generation related classes
 Classes:
     CreatureGenerator
 """
-
+from pyherc.ai import FlockingHerbivore
+from pyherc.data import Character
 import logging
 import random
-import pyherc.ai.simple
 
 class CreatureGenerator(object):
     """
@@ -75,9 +75,9 @@ class CreatureGenerator(object):
         """
         assert(table != None)
 
-        new_creature = pyherc.data.model.Character(self.model,
-                                                   self.action_factory,
-                                                   self.rng)
+        new_creature = Character(self.model,
+                                 self.action_factory,
+                                 self.rng)
         new_creature.name = table['name']
         new_creature.body = table['body']
         new_creature.finesse = table['finesse']
@@ -86,7 +86,7 @@ class CreatureGenerator(object):
         new_creature.speed = table['speed']
         new_creature.size = table['size']
         new_creature.attack = table['attack']
-        new_creature.artificial_intelligence = pyherc.ai.simple.FlockingHerbivore(new_creature)
+        new_creature.artificial_intelligence = FlockingHerbivore(new_creature)
 
         if hasattr(table['icon'], 'append'):
             #select from list
