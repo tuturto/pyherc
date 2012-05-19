@@ -83,6 +83,7 @@ class AttackAction(object):
 
         self.attacker.add_to_tick(20)
 
+    @logged
     def trigger_attack_effects(self):
         """
         Trigger effects
@@ -95,7 +96,7 @@ class AttackAction(object):
             if effect.duration == 0:
                 effect.trigger()
             else:
-                self.target.active_effects.append(effect)
+                self.target.add_effect(effect)
 
 class ToHit(object):
     """

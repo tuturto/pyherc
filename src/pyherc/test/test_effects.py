@@ -33,8 +33,9 @@ from pyherc.rules.consume.factories import DrinkFactory
 from random import Random
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder, ActionFactoryBuilder
+from pyherc.test.builders import EffectBuilder
 from pyherc.test.builders import LevelBuilder
-from pyherc.test.matchers import has_effects, has_no_effects
+from pyherc.test.matchers import has_effect, has_effects, has_no_effects
 
 from mockito import mock, when, any, verify
 from hamcrest import * #pylint: disable=W0401
@@ -179,3 +180,44 @@ class TestEffects(object):
         character.drink(potion)
 
         assert_that(character, has_effects(1))
+
+    def test_add_effect_in_melee(self):
+        """
+        Test that effect can be added as a result of unarmed combat
+        """
+        effect_factory = EffectsFactory()
+        effect_factory.add_effect(
+                            'poison',
+                            {'type': Poison,
+                            'duration': 12,
+                            'frequency': 3,
+                            'tick': 3,
+                            'damage': 5})
+
+        action_factory = (ActionFactoryBuilder()
+                            .with_attack_factory()
+                            .with_effect_factory(effect_factory)
+                            .build())
+
+        attacker = (CharacterBuilder()
+                        .with_action_factory(action_factory)
+                        .with_location((5, 5))
+                        .with_effect_handle(EffectHandleBuilder()
+                                                 .with_trigger('on attack hit')
+                                                 .with_effect('poison'))
+                        .build())
+
+        defender = (CharacterBuilder()
+                        .with_action_factory(action_factory)
+                        .with_location((5, 4))
+                        .with_hit_points(50)
+                        .build())
+
+        level = (LevelBuilder()
+                    .with_character(attacker)
+                    .with_character(defender)
+                    .build())
+
+        attacker.perform_attack(1)
+
+        assert_that(defender, has_effect())

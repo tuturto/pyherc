@@ -57,16 +57,29 @@ class EffectInstance(BaseMatcher):
         Default constructor
         """
         self.effect = effect
+        if effect == None:
+            self.match_any = True
+        else:
+            self.match_any = False
 
     def _matches(self, item):
+        if self.match_any:
+            if len(item.get_effects()) > 0:
+                return True
+            else:
+                return False
+
         for effect in item.get_effects():
             if effect == self.effect:
                 return True
         return False
 
     def describe_to(self, description):
-        description.append(
-                    'Object with active effects containing {0}'
+        if self.match_any:
+            description.append('Object with any effect')
+        else:
+            description.append(
+                    'Object with effects containing {0}'
                     .format(self.effect))
 
     def describe_mismatch(self, item, mismatch_description):
@@ -79,5 +92,5 @@ def has_effects(amount_of_effects):
 def has_no_effects():
     return Effects(wrap_matcher(0))
 
-def has_effect(effect):
+def has_effect(effect = None):
     return EffectInstance(effect)

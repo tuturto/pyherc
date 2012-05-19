@@ -87,7 +87,7 @@ class EffectBuilder(object):
 
     def with_tick(self, tick):
         self.tick = tick
-        return tick
+        return self
 
     def build(self):
         return Effect(duration = self.duration,
