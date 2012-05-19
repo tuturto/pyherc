@@ -57,8 +57,8 @@ class EffectsCollection(object):
         :rtype: [EffectHandle]
         """
         if trigger is None:
-            keys = self.handles.keys()
             effects = []
+            keys = self.handles.keys()
             for key in self.handles:
                 for handle in self.handles[key]:
                     effects.append(handle)

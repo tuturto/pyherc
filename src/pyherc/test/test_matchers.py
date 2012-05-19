@@ -226,3 +226,29 @@ class TestContainsEffectHandle(object):
         matcher = ContainsEffectHandle([handle1, handle2, handle3])
 
         assert_that(matcher._matches(collection), is_(equal_to(False)))
+
+    def test_mismatch_any(self):
+        """
+        Test that matcher can mismatch to any handle
+        """
+        collection = EffectsCollection()
+
+        matcher = ContainsEffectHandle(None)
+
+        assert_that(matcher._matches(collection), is_(equal_to(False)))
+
+    def test_match_any(self):
+        """
+        Test that matcher can match to any handle
+        """
+        collection = EffectsCollection()
+        handle1 = EffectHandle(trigger = 'on drink',
+                               effect = None,
+                               parameters = None,
+                               charges = 1)
+
+        collection.add_effect_handle(handle1)
+
+        matcher = ContainsEffectHandle(None)
+
+        assert_that(matcher._matches(collection), is_(equal_to(True)))

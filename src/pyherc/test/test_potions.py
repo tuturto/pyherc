@@ -22,7 +22,6 @@
 Module for item effect tests
 """
 #pylint: disable=W0614
-from pyherc.data import Item
 from pyherc.rules.consume import DrinkFactory
 from pyherc.rules import ActionFactory
 from pyherc.rules.effects import Heal
@@ -90,7 +89,9 @@ class TestPotions():
         """
         Test that empty potion has no effect
         """
-        self.potion.effects = {}
+        self.potion = (ItemBuilder()
+                            .with_name('empty potion')
+                            .build())
         self.character.drink(self.potion)
 
         assert_that(self.character.hit_points, is_(equal_to(1)))
@@ -143,7 +144,9 @@ class TestPotions():
         """
         Test that drinking non-potion item will not crash the system
         """
-        item = Item()
-        item.name = 'club'
+        item = (ItemBuilder()
+                    .with_name('club')
+                    .build())
+
         self.character.inventory.append(self.potion)
         self.character.drink(item)

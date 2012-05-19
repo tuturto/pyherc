@@ -24,7 +24,7 @@ Classes needed for item generation
 
 import logging
 import random
-from pyherc.data import Item
+from pyherc.data import Item, EffectsCollection
 from pyherc.data.item import WeaponData
 from pyherc.rules.effects import EffectHandle
 
@@ -93,7 +93,7 @@ class ItemGenerator(object):
         """
         assert(table != None)
 
-        new_item = Item()
+        new_item = Item(EffectsCollection())
         new_item.name = table['name']
         if hasattr(table['icon'], 'append'):
             #select from list
@@ -129,12 +129,12 @@ class ItemGenerator(object):
             for effect_type in keys:
                 new_item.effects[effect_type] = []
                 for effect in table['effects'][effect_type]:
-                    new_effect = EffectHandle(trigger = effect_type,
+                    new_handle = EffectHandle(trigger = effect_type,
                                        effect = effect['name'],
                                        parameters = None,
                                        charges = 1)
 
-                new_item.effects[effect_type].append(new_effect)
+                new_item.add_effect_handle(new_handle)
 
         if 'appearance' in table.keys():
             new_item.appearance = table['appearance']

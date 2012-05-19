@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -223,7 +223,7 @@ class TestItemWithGenerator(IntegrationTest):
         assert(self.item != None)
         assert('on drink' in self.item.effects.keys())
 
-        effect = self.item.effects['on drink'][0]
+        effect = self.item.get_effect_handles('on drink')[0]
         assert(effect.effect == 'cure medium wounds')
 
     def test_tags(self):
@@ -475,25 +475,23 @@ class TestItemEffects:
         """
         Set up the test with an item and two effects
         """
-
-        self.item = ItemBuilder().build()
-
         self.effect1 = (EffectHandleBuilder()
                             .with_trigger('on drink')
                             .build())
         self.effect2 = (EffectHandleBuilder()
                             .with_trigger('on break')
                             .build())
-
-        self.item.add_effect(self.effect1)
-        self.item.add_effect(self.effect2)
+        self.item = (ItemBuilder()
+                        .with_effect(self.effect1)
+                        .with_effect(self.effect2)
+                        .build())
 
     def test_get_all_effects(self):
         """
         Test that all effects can be returned
         """
 
-        effects = self.item.get_effects()
+        effects = self.item.get_effect_handles()
 
         assert(self.effect1 in effects)
         assert(self.effect2 in effects)
@@ -504,7 +502,7 @@ class TestItemEffects:
         Test that effects triggered by certain trigger can be returned
         """
 
-        effects = self.item.get_effects('on break')
+        effects = self.item.get_effect_handles('on break')
         assert(not self.effect1 in effects)
         assert(self.effect2 in effects)
         assert(len(effects) == 1)
@@ -514,8 +512,8 @@ class TestItemEffects:
         Test that items without effects don't crash effects returning
         """
 
-        effects = self.item.get_effects('on hit')
-        assert(effects == [])
+        handles = self.item.get_effect_handles('on hit')
+        assert(handles == [])
 
     def test_get_multiple_effects_by_type(self): #pylint: disable=C0103
         """
@@ -525,12 +523,12 @@ class TestItemEffects:
         effect3 = (EffectHandleBuilder()
                         .with_trigger('on break')
                         .build())
-        self.item.add_effect(effect3)
+        self.item.add_effect_handle(effect3)
 
-        effects = self.item.get_effects('on break')
-        assert(self.effect2 in effects)
-        assert(effect3 in effects)
-        assert(len(effects) == 2)
+        effects = self.item.get_effect_handles('on break')
+        assert_that(self.effect2, is_in(effects))
+        assert_that(effect3, is_in(effects))
+        assert_that(len(effects), is_(equal_to(2)))
 
 class TestItemCharges:
     """
@@ -571,7 +569,7 @@ class TestItemCharges:
                         .with_effect('fire')
                         .with_charges(2)
                         .build())
-        self.item.add_effect(effect2)
+        self.item.add_effect_handle(effect2)
 
         charges = self.item.charges_left
 
@@ -588,7 +586,7 @@ class TestItemCharges:
                         .with_effect('poison')
                         .with_charges(2)
                         .build())
-        self.item.add_effect(effect2)
+        self.item.add_effect_handle(effect2)
 
         minimum_charges = self.item.minimum_charges_left
         assert(minimum_charges == 1)

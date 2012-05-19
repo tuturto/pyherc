@@ -50,7 +50,7 @@ class DrinkAction(object):
         if self.is_legal():
             self.character.identify_item(self.potion)
 
-            drink_effects = self.potion.get_effects('on drink')
+            drink_effects = self.potion.get_effect_handles('on drink')
 
             if len(drink_effects) > 0:
                 for effect_spec in drink_effects:

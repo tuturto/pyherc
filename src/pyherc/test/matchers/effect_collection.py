@@ -34,16 +34,27 @@ class ContainsEffectHandle(BaseMatcher):
         """
         Default constructor
         """
-        if hasattr(handle, '__iter__'):
-            self.handles = handle
+        if handle != None:
+            self.match_any = False
+            if hasattr(handle, '__iter__'):
+                self.handles = handle
+            else:
+                self.handles = [handle]
         else:
-            self.handles = [handle]
+            self.match_any = True
+            self.handles = []
 
     def _matches(self, item):
         """
         Check for match
         """
         handles = item.get_effect_handles()
+
+        if self.match_any:
+            if len(handles) > 0:
+                return True
+            else:
+                return False
 
         for handle in self.handles:
             if not handle in handles:
@@ -55,8 +66,11 @@ class ContainsEffectHandle(BaseMatcher):
         """
         Describe this matcher
         """
-        description.append('Collection with handles {0}'
-                           .format(self.handles))
+        if self.match_any:
+            description.append('Collection with any handle')
+        else:
+            description.append('Collection with handles {0}'
+                               .format(self.handles))
 
     def describe_mismatch(self, item, mismatch_description):
         """
@@ -67,12 +81,14 @@ class ContainsEffectHandle(BaseMatcher):
         mismatch_description.append('Was collection with handles {0}'
                                     .format(handles))
 
-def has_effect_handle(handle):
+def has_effect_handle(handle = None):
     """
     Check if collection has the handle
 
-    Args:
-        handle: handle to expect
+    :param handle: handle to expect
+    :type handle: EffectHandle
+
+    .. note:: If left empty, any handle will match
     """
     return ContainsEffectHandle(handle)
 

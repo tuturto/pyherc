@@ -25,15 +25,22 @@ Classes:
     Item
     WeaponData
 """
-from .effectscollection import EffectsCollection
+from pyherc.aspects import Logged
 import collections
 
 class Item(object):
     """
     Represents item
     """
+    logged = Logged()
 
-    def __init__(self):
+    def __init__(self, effects_collection):
+        """
+        Default constructor
+
+        :param effects_collection: collection for effects
+        :type effects_collection: EffectsCollection
+        """
         super(Item, self).__init__()
         #attributes
         self.name = 'prototype'
@@ -45,7 +52,7 @@ class Item(object):
         #icon
         self.icon = None
         self.weapon_data = None
-        self.effects = {}
+        self.effects_collection = effects_collection
         self.weight = None
         self.rarity = None
         self.cost = None
@@ -54,6 +61,7 @@ class Item(object):
     def __str__(self):
         return self.name
 
+    @logged
     def get_name(self, character, decorate = False):
         """
         Get name of the item
@@ -80,53 +88,36 @@ class Item(object):
 
         return name
 
-    def add_effect(self, effect):
+    def add_effect_handle(self, handle):
         """
-        Adds an effect to an item
+        Adds an effect handle to an item
 
-        :param effect: effect to add
-        :type effect: Effect
+        :param handle: effect handle to add
+        :type handle: EffectHandle
         """
-        if self.effects == None:
-            self.effects = {}
+        self.effects_collection.add_effect_handle(handle)
 
-        if self.effects.has_key(effect.trigger):
-            self.effects[effect.trigger].append(effect)
-        else:
-            self.effects[effect.trigger] = [effect]
-
-    def get_effects(self, effect_type = None):
+    @logged
+    def get_effect_handles(self, trigger = None):
         """
-        Retrieves effects the item has
+        Retrieves effects handles the item has
 
-        :param effect_type: type of effects retrieved. Default None
-        :type effect_type: string
+        :param trigger: type of effects retrieved. Default None
+        :type trigger: string
 
-        :returns: effects
-        :rtype: List
+        :returns: effect handles
+        :rtype: [EffectHandle]
         """
-        effect_list = []
-
-        if self.effects != None:
-            if effect_type == None:
-                for trigger in self.effects.values():
-                    effect_list = effect_list + trigger
-            else:
-                if self.effects.has_key(effect_type):
-                    effect_list = effect_list + self.effects[effect_type]
-                else:
-                    effect_list = []
-
-        return effect_list
+        return self.effects_collection.get_effect_handles(trigger)
 
     def __get_charges_left(self):
         """
         Returns list containing amount of charges left in item
         """
-        if self.effects == None:
+        if len(self.get_effect_handles()) == 0:
             return []
 
-        effect_list = self.get_effects()
+        effect_list = self.get_effect_handles()
 
         return [x.charges for x in effect_list]
 
@@ -162,6 +153,7 @@ class Item(object):
     maximum_charges_left = property(__get_maximum_charges_left)
     minimum_charges_left = property(__get_minimum_charges_left)
 
+    @logged
     def get_main_type(self):
         """
         Return main type of the item
@@ -180,6 +172,7 @@ class Item(object):
 
         return main_type
 
+    @logged
     def get_tags(self):
         """
         Return tags

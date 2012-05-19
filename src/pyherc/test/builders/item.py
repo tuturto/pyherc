@@ -21,7 +21,7 @@
 """
 Module for item builder
 """
-from pyherc.data import Item
+from pyherc.data import Item, EffectsCollection
 
 class ItemBuilder(object):
     """
@@ -68,14 +68,14 @@ class ItemBuilder(object):
         Returns:
             Item
         """
-        item = Item()
+        item = Item(effects_collection = EffectsCollection())
 
         item.name = self.name
         item.appearance = self.appearance
         item.location = self.location
         item.icon = self.icon
 
-        for effect in self.effects:
-            item.add_effect(effect)
+        for handle in self.effects:
+            item.add_effect_handle(handle)
 
         return item
