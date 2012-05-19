@@ -54,7 +54,7 @@ class Character(object):
         self.race = None
         self.kit = None
         self.__hit_points = None
-        self.max_hp = None
+        self.__max_hp = None
         self.speed = None
         self.inventory = []
         self.weapons = []
@@ -191,14 +191,23 @@ class Character(object):
         """
         self.attack = attack
 
-    def get_max_hp(self):
+    def __get_max_hp(self):
         """
         Get maximum HP this character can currently have
 
         :returns: maximum hit points
         :rtype: integer
         """
-        return self.max_hp
+        return self.__max_hp
+
+    def __set_max_hp(self, max_hp):
+        """
+        Set maximum HP this character can currently have
+
+        :param max_hp: maximum hit points
+        :type max_hp: integer
+        """
+        self.__max_hp = max_hp
 
     @logged
     def identify_item(self, item):
@@ -463,9 +472,19 @@ class Character(object):
         self.tick = self.tick + (self.speed * cost)
 
     hit_points = property(__get_hp, __set_hp)
+    """Current hit points of the character"""
+
+    max_hp = property(__get_max_hp, __set_max_hp)
+    """Current maximum hit points of the character"""
+
     body = property(__get_body, __set_body)
+    """Body attribute of the character"""
+
     finesse = property(__get_finesse, __set_finesse)
+    """Finesse attribute of the character"""
+
     mind = property(__get_mind, __set_mind)
+    """Mind attribute of the character"""
 
 class Feat(object):
     """
