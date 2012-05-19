@@ -156,7 +156,7 @@ changes value in character's internal clock.
 
 .. testcode::
 
-    from pyherc.data import Character, Model
+    from pyherc.data import Character, Model, EffectsCollection
     from pyherc.rules import ActionFactory, ActionParameters
     from pyherc.rules.factory import SubActionFactory
     from random import Random
@@ -196,6 +196,7 @@ changes value in character's internal clock.
                                    factories = [wait_factory])
     character = Character(model = model, 
                           action_factory = action_factory,
+                          effects_collection = EffectsCollection(),
                           rng = Random())
     action = character.create_action(WaitParameters(character, 5))
     
