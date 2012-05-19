@@ -26,7 +26,6 @@ Classes:
     WeaponData
 """
 from pyherc.aspects import Logged
-import collections
 
 class Item(object):
     """
@@ -52,7 +51,7 @@ class Item(object):
         #icon
         self.icon = None
         self.weapon_data = None
-        self.effects_collection = effects_collection
+        self.__effects_collection = effects_collection
         self.weight = None
         self.rarity = None
         self.cost = None
@@ -95,7 +94,7 @@ class Item(object):
         :param handle: effect handle to add
         :type handle: EffectHandle
         """
-        self.effects_collection.add_effect_handle(handle)
+        self.__effects_collection.add_effect_handle(handle)
 
     @logged
     def get_effect_handles(self, trigger = None):
@@ -108,46 +107,34 @@ class Item(object):
         :returns: effect handles
         :rtype: [EffectHandle]
         """
-        return self.effects_collection.get_effect_handles(trigger)
+        return self.__effects_collection.get_effect_handles(trigger)
 
     def __get_charges_left(self):
         """
-        Returns list containing amount of charges left in item
+        Amount of charges left in collection
+
+        :returns: amount of charges
+        :rtype: [integer]
         """
-        if len(self.get_effect_handles()) == 0:
-            return []
-
-        effect_list = self.get_effect_handles()
-
-        return [x.charges for x in effect_list]
+        return self.__effects_collection.get_charges_left()
 
     def __get_maximum_charges_left(self):
         """
-        Return highest amount of charges left in item
-        """
-        charges = self.charges_left
+        Return highest amount of charges left in collection
 
-        if charges != None:
-            if isinstance(charges, collections.Sequence):
-                if len(charges) > 0:
-                    return max(charges)
-                else:
-                    return None
-            else:
-                return charges
-        else:
-            return None
+        :returns: highest charge
+        :rtype: integer
+        """
+        return self.__effects_collection.get_maximum_charges_left()
 
     def __get_minimum_charges_left(self):
         """
         Return smallest amount of charges left in item
-        """
-        charges = self.charges_left
 
-        if charges != None:
-            return min(charges)
-        else:
-            return None
+        :returns: smallest charge in collection
+        :rtype: integer
+        """
+        return self.__effects_collection.get_minimum_charges_left()
 
     charges_left = property(__get_charges_left)
     maximum_charges_left = property(__get_maximum_charges_left)

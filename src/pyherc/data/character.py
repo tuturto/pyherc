@@ -75,7 +75,7 @@ class Character(object):
         self.__active_effects = [] # active effects
         self.action_factory = action_factory
         self.artificial_intelligence = None
-        self.effects_collection = effects_collection
+        self.__effects_collection = effects_collection
         self.rng = rng
 
     def __str__(self):
@@ -400,7 +400,7 @@ class Character(object):
         :param effect: effect to add
         :type effect: EffectHandle
         """
-        self.effects_collection.add_effect_handle(effect)
+        self.__effects_collection.add_effect_handle(effect)
 
     @logged
     def get_effect_handles(self, trigger = None):
@@ -413,7 +413,7 @@ class Character(object):
         :returns: effect handles
         :rtype: [EffectHandle]
         """
-        return self.effects_collection.get_effect_handles(trigger)
+        return self.__effects_collection.get_effect_handles(trigger)
 
     @logged
     def remove_effect_handle(self, handle):
@@ -433,8 +433,9 @@ class Character(object):
         :param effect: Effect to add
         :type effect: Effect
         """
-        self.effects_collection.add_effect(effect)
+        self.__effects_collection.add_effect(effect)
 
+    @logged
     def get_effects(self):
         """
         Get effects of the character
@@ -442,13 +443,14 @@ class Character(object):
         :returns: effects
         :rtype: [Effect]
         """
-        return self.effects_collection.get_effects()
+        return self.__effects_collection.get_effects()
 
+    @logged
     def remove_expired_effects(self):
         """
         Remove all effects that have expired
         """
-        self.effects_collection.remove_expired_effects()
+        self.__effects_collection.remove_expired_effects()
 
     def add_to_tick(self, cost):
         """

@@ -21,6 +21,8 @@
 """
 Module for effects collection
 """
+import collections
+
 class EffectsCollection(object):
     """
     Class for representing collection of effects
@@ -112,3 +114,49 @@ class EffectsCollection(object):
         """
         self.effects = [x for x in self.effects
                                 if x.duration > 0]
+
+    def get_charges_left(self):
+        """
+        Amount of charges left in collection
+
+        :returns: amount of charges
+        :rtype: [integer]
+        """
+        if len(self.get_effect_handles()) == 0:
+            return []
+
+        return [x.charges for x in self.get_effect_handles()]
+
+    def get_maximum_charges_left(self):
+        """
+        Return highest amount of charges left in collection
+
+        :returns: highest charge
+        :rtype: integer
+        """
+        charges = self.get_charges_left()
+
+        if charges != None:
+            if isinstance(charges, collections.Sequence):
+                if len(charges) > 0:
+                    return max(charges)
+                else:
+                    return None
+            else:
+                return charges
+        else:
+            return None
+
+    def get_minimum_charges_left(self):
+        """
+        Return smallest amount of charges left in item
+
+        :returns: smallest charge in collection
+        :rtype: integer
+        """
+        charges = self.get_charges_left()
+
+        if charges != None:
+            return min(charges)
+        else:
+            return None
