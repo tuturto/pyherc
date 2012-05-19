@@ -92,7 +92,7 @@ class Model(object):
 
             for creature in creatures:
                 creature.tick = creature.tick - 1
-                for effect in creature.active_effects:
+                for effect in creature.get_effects():
                     effect.tick = effect.tick - 1
                     if effect.tick == 0:
                         effect.trigger()

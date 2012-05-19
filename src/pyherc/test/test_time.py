@@ -137,7 +137,7 @@ class TestEffectsAndTime:
         effect.duration = 50
         effect.frequency = 5
         effect.tick = 5
-        self.creature.active_effects.append(effect)
+        self.creature.add_effect(effect)
 
         next_creature = self.model.get_next_creature()
 
@@ -150,10 +150,10 @@ class TestEffectsAndTime:
         effect = Effect(duration = 50,
                         frequency = 5,
                         tick = 5)
-        self.creature.active_effects.append(effect)
+        self.creature.add_effect(effect)
 
         next_creature = self.model.get_next_creature()
-        effect = self.creature.active_effects[0]
+        effect = self.creature.get_effects()[0]
 
         assert_that(effect.tick, is_(equal_to(5)))
 
@@ -165,7 +165,7 @@ class TestEffectsAndTime:
                         frequency = 5,
                         tick = 5)
 
-        self.creature.active_effects.append(effect1)
+        self.creature.add_effect(effect1)
 
         effect2 = Effect(duration = 50,
                          frequency = 5,
@@ -197,7 +197,7 @@ class TestEffectsAndTime:
                         frequency = 5,
                         tick = 5)
 
-        self.creature.active_effects.append(effect)
+        self.creature.add_effect(effect)
 
         next_creature = self.model.get_next_creature()
 
@@ -219,8 +219,8 @@ class TestEffectsAndTime:
                         frequency = 5,
                         tick = 5)
 
-        creature.add_active_effect(effect)
+        creature.add_effect(effect)
 
         next_creature = self.model.get_next_creature()
 
-        assert_that(creature.active_effects, is_not(has_item(effect)))
+        assert_that(creature.get_effects(), is_not(has_item(effect)))

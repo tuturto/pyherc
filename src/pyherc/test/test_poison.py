@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -26,7 +26,7 @@ from pyherc.rules.effects import Poison
 from pyherc.rules.effects import EffectsFactory
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import LevelBuilder
-from pyherc.test.matchers import has_active_effect, is_not_at
+from pyherc.test.matchers import has_effect, is_not_at
 from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 
@@ -146,6 +146,6 @@ class TestCharacter():
         character = CharacterBuilder().build()
         poison = mock(Poison)
 
-        character.add_active_effect(poison)
+        character.add_effect(poison)
 
-        assert_that(character, has_active_effect(poison))
+        assert_that(character, has_effect(poison))

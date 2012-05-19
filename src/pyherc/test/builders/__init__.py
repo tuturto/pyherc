@@ -23,6 +23,6 @@ Package for test builders
 """
 from .character import CharacterBuilder
 from .item import ItemBuilder
-from .effect import EffectHandleBuilder
+from .effect import EffectBuilder, EffectHandleBuilder
 from .level import LevelBuilder
 from .action import ActionFactoryBuilder

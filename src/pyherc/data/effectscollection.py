@@ -31,6 +31,7 @@ class EffectsCollection(object):
         """
         super(EffectsCollection, self).__init__()
         self.handles = {}
+        self.effects = []
 
     def add_effect_handle(self, handle):
         """
@@ -80,3 +81,25 @@ class EffectsCollection(object):
         for key, value in self.handles.items():
             if handle in value:
                 value.remove(handle)
+
+    def add_effect(self, effect):
+        """
+        Add effect
+
+        :param effect: effect to add
+        :type effect: Effect
+        """
+        self.effects.append(effect)
+
+    def get_effects(self):
+        """
+        Get effects from collection
+        """
+        return [x for x in self.effects]
+
+    def remove_expired_effects(self):
+        """
+        Remove expired effects from collection
+        """
+        self.effects = [x for x in self.effects
+                                if x.duration > 0]

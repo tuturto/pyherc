@@ -24,8 +24,10 @@ Module for testing effects collection
 #pylint: disable=W0614
 from pyherc.data import EffectsCollection
 from pyherc.test.builders import EffectHandleBuilder
+from pyherc.test.builders import EffectBuilder
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import has_effect_handle, has_effect_handles
+from pyherc.test.matchers import has_effect
 
 class TestEffectsCollection(object):
     """
@@ -110,3 +112,26 @@ class TestEffectsCollection(object):
         self.collection.remove_effect_handle(handle)
 
         assert_that(self.collection, is_not(has_effect_handle(handle)))
+
+    def test_adding_effects(self):
+        """
+        Test that an effect can be added
+        """
+        effect = EffectBuilder().build()
+
+        self.collection.add_effect(effect)
+
+        assert_that(self.collection, has_effect(effect))
+
+    def test_removing_expired_effects(self):
+        """
+        Test that expired effects are removed
+        """
+        effect = (EffectBuilder()
+                    .with_duration(0)
+                    .build())
+
+        self.collection.add_effect(effect)
+        self.collection.remove_expired_effects()
+
+        assert_that(self.collection, is_not(has_effect(effect)))

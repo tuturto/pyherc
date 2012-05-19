@@ -21,7 +21,7 @@
 """
 Module for effect specification builder
 """
-from pyherc.rules.effects import EffectHandle
+from pyherc.rules.effects import Effect, EffectHandle
 
 class EffectHandleBuilder(object):
     """
@@ -66,3 +66,31 @@ class EffectHandleBuilder(object):
                                 charges = self.charges)
 
         return effect
+
+class EffectBuilder(object):
+    """
+    Class to build effects
+    """
+    def __init__(self):
+        super(EffectBuilder, self).__init__()
+        self.duration = 0
+        self.frequency = 0
+        self.tick = 0
+
+    def with_duration(self, duration):
+        self.duration = duration
+        return self
+
+    def with_frequency(self, frequency):
+        self.frequency = frequency
+        return self
+
+    def with_tick(self, tick):
+        self.tick = tick
+        return tick
+
+    def build(self):
+        return Effect(duration = self.duration,
+                      frequency = self.frequency,
+                      tick = self.tick)
+

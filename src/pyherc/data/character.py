@@ -426,34 +426,29 @@ class Character(object):
         self.effects_collect.remove_effect_handle(handle)
 
     @logged
-    def add_active_effect(self, effect):
+    def add_effect(self, effect):
         """
         Adds effect to this character
 
         :param effect: Effect to add
         :type effect: Effect
         """
-        assert effect != None
-        self.active_effects.append(effect)
+        self.effects_collection.add_effect(effect)
 
-    def __get_active_effects(self):
+    def get_effects(self):
         """
-        Get active effects of the character
+        Get effects of the character
 
-        :returns: active effects
-        :rtype: list
+        :returns: effects
+        :rtype: [Effect]
         """
-        if self.__active_effects is None:
-            self.__active_effects = []
-
-        return self.__active_effects
+        return self.effects_collection.get_effects()
 
     def remove_expired_effects(self):
         """
         Remove all effects that have expired
         """
-        self.__active_effects = [x for x in self.__active_effects
-                                 if x.duration > 0]
+        self.effects_collection.remove_expired_effects()
 
     def add_to_tick(self, cost):
         """
@@ -469,7 +464,6 @@ class Character(object):
     body = property(__get_body, __set_body)
     finesse = property(__get_finesse, __set_finesse)
     mind = property(__get_mind, __set_mind)
-    active_effects = property(__get_active_effects)
 
 class Feat(object):
     """

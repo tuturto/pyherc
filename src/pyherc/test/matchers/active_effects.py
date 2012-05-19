@@ -26,7 +26,7 @@ from hamcrest import * #pylint: disable=W0401
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
-class ActiveEffects(BaseMatcher):
+class Effects(BaseMatcher):
     """
     Class to check amount of active effects
     """
@@ -37,20 +37,20 @@ class ActiveEffects(BaseMatcher):
         self.amount_of_effects = amount_of_effects
 
     def _matches(self, item):
-        return self.amount_of_effects.matches(len(item.active_effects))
+        return self.amount_of_effects.matches(len(item.get_effects()))
 
     def describe_to(self, description):
         description.append(
-                    'Object with {0} active effects'
+                    'Object with {0} effects'
                     .format(self.amount_of_effects))
 
     def describe_mismatch(self, item, mismatch_description):
-        mismatch_description.append('Was object with {0} active effects'
-                                    .format(len(item.active_effects)))
+        mismatch_description.append('Was object with {0} effects'
+                                    .format(len(item.get_effects())))
 
-class ActiveEffectInstance(BaseMatcher):
+class EffectInstance(BaseMatcher):
     """
-    Class to check amount of active effects
+    Class to check amount of effects
     """
     def __init__(self, effect):
         """
@@ -59,7 +59,7 @@ class ActiveEffectInstance(BaseMatcher):
         self.effect = effect
 
     def _matches(self, item):
-        for effect in item.active_effects:
+        for effect in item.get_effects():
             if effect == self.effect:
                 return True
         return False
@@ -70,14 +70,14 @@ class ActiveEffectInstance(BaseMatcher):
                     .format(self.effect))
 
     def describe_mismatch(self, item, mismatch_description):
-        mismatch_description.append('Was object with active effects {0}'
-                                    .format(item.active_effects))
+        mismatch_description.append('Was object with effects {0}'
+                                    .format(item.get_effects()))
 
-def has_active_effects(amount_of_effects):
-    return ActiveEffects(wrap_matcher(amount_of_effects))
+def has_effects(amount_of_effects):
+    return Effects(wrap_matcher(amount_of_effects))
 
-def has_no_active_effects():
-    return ActiveEffects(wrap_matcher(0))
+def has_no_effects():
+    return Effects(wrap_matcher(0))
 
-def has_active_effect(effect):
-    return ActiveEffectInstance(effect)
+def has_effect(effect):
+    return EffectInstance(effect)

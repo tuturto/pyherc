@@ -60,7 +60,7 @@ class DrinkAction(object):
                     if effect.duration == 0:
                         effect.trigger()
                     else:
-                        self.character.active_effects.append(effect)
+                        self.character.add_effect(effect)
                     effect_spec.charges = effect_spec.charges - 1
 
                 if self.potion.maximum_charges_left < 1:
