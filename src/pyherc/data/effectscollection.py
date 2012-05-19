@@ -40,6 +40,8 @@ class EffectsCollection(object):
         :param handle: effect handle to add
         :type handle: EffectHandle
         """
+        assert handle != None
+
         handles = self.handles
         trigger = handle.trigger
 
@@ -78,6 +80,8 @@ class EffectsCollection(object):
         :param handle: handle to remove
         :type handle: EffectHandle
         """
+        assert handle != None
+
         for key, value in self.handles.items():
             if handle in value:
                 value.remove(handle)
@@ -89,11 +93,16 @@ class EffectsCollection(object):
         :param effect: effect to add
         :type effect: Effect
         """
+        assert effect != None
+
         self.effects.append(effect)
 
     def get_effects(self):
         """
         Get effects from collection
+
+        :returns: effects
+        :rtype: [Effect]
         """
         return [x for x in self.effects]
 
