@@ -135,9 +135,9 @@ class Configuration(object):
                                         'healing': 2})
         effect_factory.add_effect('minor poison',
                                         {'type': Poison,
-                                        'duration': 60,
-                                        'frequency': 10,
-                                        'tick': 10,
+                                        'duration': 240,
+                                        'frequency': 60,
+                                        'tick': 60,
                                         'damage': 1})
 
         unarmed_combat_factory = UnarmedCombatFactory(effect_factory)

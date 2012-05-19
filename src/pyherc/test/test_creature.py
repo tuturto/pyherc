@@ -30,6 +30,7 @@ from pyherc.test.builders import ItemBuilder
 from pyherc.generators.level.testlevel import TestLevelGenerator
 from pyherc.data.dungeon import Dungeon
 from pyherc.rules.moving import deactivate
+from pyherc.test.matchers import has_effect_handle
 from hamcrest import * #pylint: disable=W0401
 
 class TestCreatureWithGenerator(IntegrationTest):
@@ -49,6 +50,15 @@ class TestCreatureWithGenerator(IntegrationTest):
         creature = self.creatureGenerator.generate_creature({'name': 'rat'})
 
         assert_that(creature.name, is_(equal_to('rat')))
+
+    def test_spider_generation(self):
+        """
+        Test generating spider
+        """
+        creature = self.creatureGenerator.generate_creature({'name': 'spider'})
+
+        assert_that(creature, is_(not_none()))
+        assert_that(creature, has_effect_handle())
 
     def test_is_proficient(self):
         """

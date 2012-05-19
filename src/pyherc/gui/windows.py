@@ -399,7 +399,7 @@ class GameWindow:
 
         #temporary hp display
         text = font.render('HP: ' + str(player.hit_points) +
-                           ' / ' + player.get_max_hp().__str__(), True, (255, 255, 255))
+                           ' / ' + str(player.max_hp), True, (255, 255, 255))
         textRect = text.get_rect()
         textRect.topleft = (5, 85)
         self.screen.blit(text, textRect)

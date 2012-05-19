@@ -41,13 +41,9 @@
         </icons>
         <attack>4</attack>
         <size>medium</size>
-        <feats>
-            <feat name="poisonous">
-                <duration>150</duration>
-                <frequency>30</frequency>
-                <damage>1</damage>
-            </feat>
-        </feats>
+        <effecthandles>
+            <handle trigger="on attack hit" effect="minor poison" />
+        </effecthandles>
     </creature>
     <creature>
         <name>gargoyle</name>

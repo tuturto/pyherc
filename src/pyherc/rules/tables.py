@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -259,6 +259,13 @@ class Tables:
                     upperBound = self.tag_score[type]
                     self.items_by_tag[type].append((itemKey, lowerBound, upperBound))
 
+class EffectHandleElement():
+    def __init__(self, trigger, effect, parameters, charges):
+        self.trigger = trigger
+        self.effect = effect
+        self.parameters = parameters
+        self.charges = charges
+
 class CreatureHandler(sax.ContentHandler):
     """
     Class to read creatures from xml-configuration
@@ -276,6 +283,14 @@ class CreatureHandler(sax.ContentHandler):
             self.newCreature = {}
         elif name == 'icons':
             self.newCreature['icon'] = []
+        elif name == 'handle':
+            new_handle = EffectHandleElement(attrs['trigger'],
+                                             attrs['effect'],
+                                             None,
+                                             500)
+            if not 'effecthandles' in self.newCreature.keys():
+                self.newCreature['effecthandles'] = []
+            self.newCreature['effecthandles'].append(new_handle)
 
     def characters(self, ch):
         """

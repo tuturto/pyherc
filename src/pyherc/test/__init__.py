@@ -423,6 +423,29 @@ class IntegrationTest(object):
         creatureConfig = """
 <creatures>
     <creature>
+        <name>spider</name>
+        <body>6</body>
+        <finesse>12</finesse>
+        <mind>8</mind>
+        <hp>6</hp>
+        <speed>1</speed>
+        <icons>
+            <icon>CREATURE_SPIDER_1</icon>
+        </icons>
+        <attack>4</attack>
+        <size>medium</size>
+        <effecthandles>
+            <handle trigger="on attack hit" effect="minor poison" />
+        </effecthandles>
+        <feats>
+            <feat name="poisonous">
+                <duration>150</duration>
+                <frequency>30</frequency>
+                <damage>1</damage>
+            </feat>
+        </feats>
+    </creature>
+    <creature>
         <name>rat</name>
         <body>4</body>
         <finesse>12</finesse>

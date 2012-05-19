@@ -26,14 +26,17 @@ Classes:
 """
 from pyherc.ai import FlockingHerbivore
 from pyherc.data import Character, EffectsCollection
-import logging
+from pyherc.rules.effects import EffectHandle
+from pyherc.aspects import Logged
 import random
 
 class CreatureGenerator(object):
     """
     Class used to generate creatures
     """
+    logged = Logged()
 
+    @logged
     def __init__(self, model, action_factory, tables, rng):
         """
         Default constructor
@@ -42,13 +45,12 @@ class CreatureGenerator(object):
         :type action_factory: ActionFactory
         :param tables: Tables defining creatures
         """
-        self.logger = logging.getLogger(
-                            'pyherc.generators.creature.CreatureGenerator')
         self.model = model
         self.action_factory = action_factory
         self.tables = tables
         self.rng = rng
 
+    @logged
     def generate_creature(self, parameters):
         """
         Generates a creature
@@ -67,8 +69,10 @@ class CreatureGenerator(object):
             #generate completely random creature
             pass
 
+        assert new_creature != None, 'Creature generation failed'
         return new_creature
 
+    @logged
     def generate_creature_from_table(self, table):
         """
         Take table entry and generate corresponding creature
@@ -95,4 +99,13 @@ class CreatureGenerator(object):
         else:
             new_creature.icon = table['icon']
 
+        if 'effecthandles' in table.keys():
+            for handle in table['effecthandles']:
+                new_creature.add_effect_handle(
+                                EffectHandle(trigger = handle.trigger,
+                                             effect = handle.effect,
+                                             parameters = handle.parameters,
+                                             charges = handle.charges))
+
+        assert new_creature != None, 'creature generation failed'
         return new_creature
