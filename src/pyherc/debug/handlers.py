@@ -174,7 +174,9 @@ class Factory:
         :returns: form
         """
         display_form = form.Form(
-            form.Textbox("creature_name", description="Creature")
+            form.Textbox("creature_name", description="Creature"),
+            form.Textbox("item_name", description="Item"),
+            form.Button('Ok')
             )
 
         return display_form
@@ -191,12 +193,18 @@ class Factory:
         """
         form_data = web.input()
         creature_name = form_data.creature_name
+        item_name = form_data.item_name
 
-        creature = APP.creature_generator.generate_creature({'name':creature_name})
         player_character = APP.world.player
         level = player_character.level
         location = player_character.location
 
-        level.add_creature(creature, (location[0] + 2, location[1]))
+        if creature_name != '':
+            creature = APP.creature_generator.generate_creature({'name':creature_name})
+            level.add_creature(creature, (location[0] + 2, location[1]))
 
-        return 'Created monster called {0}'.format(form_data.creature_name)
+        if item_name != '':
+            item = APP.item_generator.generate_item({'name':item_name})
+            level.add_item(item, (location[0] + 2, location[1]))
+
+        return 'ok'
