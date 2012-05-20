@@ -9,6 +9,7 @@ pyherc.rules
    attack/module_attack
    consume/module_consume
    effects/module_effects
+   inventory/module_inventory
    move/module_move
    module_character
    module_ending
