@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-05-19, 10:01:21 -->
+<!-- Saved: 2012-05-20, 11:06:14 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -135,6 +135,9 @@
     <Source>pyherc/test/test_charactercreation.py</Source>
     <Source>pyherc/data/character.py</Source>
     <Source>pyherc/test/test_itemgeneration.py</Source>
+    <Source>pyherc/rules/inventory/__init__.py</Source>
+    <Source>pyherc/rules/inventory/action.py</Source>
+    <Source>pyherc/rules/inventory/factories.py</Source>
   </Sources>
   <Forms>
   </Forms>

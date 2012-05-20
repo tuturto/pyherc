@@ -23,6 +23,7 @@ Module for Character related classes
 """
 from pyherc.aspects import Logged
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
+from pyherc.rules import InventoryParameters
 
 class Character(object):
     """
@@ -375,6 +376,21 @@ class Character(object):
                                                 DrinkParameters(
                                                                 self,
                                                                 potion))
+        action.execute()
+
+    @logged
+    def pick_up(self, item):
+        """
+        Pick up item
+
+        :param item: item to pick up
+        :type item: Item
+        """
+        action = self.action_factory.get_action(
+                                    InventoryParameters(
+                                                        self,
+                                                        item,
+                                                        'pick up'))
         action.execute()
 
     def __getstate__(self):

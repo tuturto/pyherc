@@ -28,7 +28,7 @@ import pyherc.rules.magic
 
 logger = logging.getLogger('pyherc.rules.items')
 
-def pick_up(model, character, item):
+def __pick_up(model, character, item):
     """
     Pick up an item
 

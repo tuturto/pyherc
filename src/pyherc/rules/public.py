@@ -28,6 +28,7 @@ ActionParameters - Class used to guide Action construction
 AttackParameters - Class used to guide contruction of attack related actions
 MoveParameters - Class used to guide construction of move related actions
 DrinkParameters - Class used to guide drinking related actions
+InventoryParameters - Class used to guide inventory related actions
 """
 
 import types
@@ -197,3 +198,25 @@ class DrinkParameters(ActionParameters):
         """
         return 'drink parameters'
 
+class InventoryParameters(ActionParameters):
+    """
+    Class for controlling inventory action creation
+    """
+    @Logged()
+    def __init__(self, character, item, sub_action):
+        """
+        Construct inventory parameters
+
+        :param character: character manipulating the item
+        :type character: Character
+        :param item: item to manipulate
+        :type item: Item
+        :param sub_action: type of action to perform
+        :type sub_action: string
+        """
+        ActionParameters.__init__(self)
+
+        self.action_type = 'inventory'
+        self.sub_action = sub_action
+        self.character = character
+        self.item = item

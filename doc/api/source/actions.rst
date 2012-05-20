@@ -217,14 +217,17 @@ List of current actions
 
 - Moving
 
- - :class:`pyherc.rules.move.action.MoveAction`
- - :class:`pyherc.rules.move.action.WalkAction`
+  - :class:`pyherc.rules.move.action.MoveAction`
+  - :class:`pyherc.rules.move.action.WalkAction`
 
 - Combat
 
- - :class:`pyherc.rules.attack.action.AttackAction`
+  - :class:`pyherc.rules.attack.action.AttackAction`
 
 - Eating and drinking
 
- - :class:`pyherc.rules.consume.action.DrinkAction`
- 
+  - :class:`pyherc.rules.consume.action.DrinkAction`
+
+- Inventory manipulation
+
+  - :class:`pyherc.rules.inventory.action.PickUpAction`

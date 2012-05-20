@@ -28,6 +28,8 @@ from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory
 from pyherc.rules.consume.factories import DrinkFactory
+from pyherc.rules.inventory.factories import InventoryFactory
+from pyherc.rules.inventory.factories import PickUpFactory
 
 class ActionFactoryBuilder(object):
     """
@@ -40,10 +42,13 @@ class ActionFactoryBuilder(object):
         self.attack_factory.action_type = 'attack'
         self.drink_factory = mock()
         self.drink_factory.action_type = 'drink'
+        self.inventory_factory = mock()
+        self.inventory_factory.action_type = 'inventory'
 
         self.effect_factory = mock()
         self.use_real_attack_factory = False
         self.use_real_drink_factory = False
+        self.use_real_inventory_factory = False
 
     def with_model(self, model):
         self.model = model
@@ -55,6 +60,10 @@ class ActionFactoryBuilder(object):
 
     def with_drink_factory(self):
         self.use_real_drink_factory = True
+        return self
+
+    def with_inventory_factory(self):
+        self.use_real_inventory_factory = True
         return self
 
     def with_effect_factory(self, effect_factory):
@@ -72,8 +81,14 @@ class ActionFactoryBuilder(object):
         if self.use_real_drink_factory == True:
             drink_factory = DrinkFactory(effect_factory)
 
+        if self.use_real_inventory_factory == True:
+            pick_up_factory = PickUpFactory()
+            self.inventory_factory = InventoryFactory([
+                                            pick_up_factory])
+
         action_factory = ActionFactory(self.model,
                                        [self.drink_factory,
-                                        self.attack_factory])
+                                        self.attack_factory,
+                                        self.inventory_factory])
 
         return action_factory

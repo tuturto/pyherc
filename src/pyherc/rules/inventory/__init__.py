@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -19,11 +19,6 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for rules of the game
+Package for inventory manipulation
 """
-from .public import ActionFactory
-from .public import ActionParameters
-from .public import AttackParameters
-from .public import MoveParameters
-from .public import DrinkParameters
-from .public import InventoryParameters
+pass

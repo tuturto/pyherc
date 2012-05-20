@@ -34,6 +34,7 @@ from pyherc.data import Level
 from pyherc.test.builders import ItemBuilder
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import EffectHandleBuilder
+from pyherc.test.builders import ActionFactoryBuilder
 
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock
@@ -281,6 +282,9 @@ class TestItemsInLevel:
         self.character = (CharacterBuilder()
                             .with_location((5, 5))
                             .with_level(self.level)
+                            .with_action_factory(
+                                ActionFactoryBuilder()
+                                    .with_inventory_factory())
                             .build())
 
         self.level.add_item(self.item, (5, 5))
@@ -314,10 +318,10 @@ class TestItemsInLevel:
         assert(self.character.location == (6, 6))
         assert(self.item.location == (5, 5))
 
-        pyherc.rules.items.pick_up(self.model, self.character, self.item)
+        self.character.pick_up(self.item)
 
-        assert(self.item in self.character.inventory)
-        assert(not self.item in self.level.items)
+        assert(not self.item in self.character.inventory)
+        assert(self.item in self.level.items)
 
     def test_dropping_item(self):
         """

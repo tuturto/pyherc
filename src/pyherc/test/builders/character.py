@@ -59,7 +59,10 @@ class CharacterBuilder(object):
         return self
 
     def with_action_factory(self, factory):
-        self.action_factory = factory
+        if hasattr(factory, 'build'):
+            self.action_factory = factory.build()
+        else:
+            self.action_factory = factory
         return self
 
     def with_rng(self, rng):
