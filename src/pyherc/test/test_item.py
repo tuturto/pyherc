@@ -303,7 +303,7 @@ class TestItemsInLevel:
         assert(self.character.location == (5, 5))
         assert(self.item.location == (5, 5))
 
-        pyherc.rules.items.pick_up(self.model, self.character, self.item)
+        self.character.pick_up(self.item)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
@@ -327,7 +327,7 @@ class TestItemsInLevel:
         """
         Test that an item can be dropped from inventory
         """
-        pyherc.rules.items.pick_up(self.model, self.character, self.item)
+        self.character.pick_up(self.item)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
@@ -343,7 +343,7 @@ class TestItemsInLevel:
         """
         Test that wielded item is dropped correctly
         """
-        pyherc.rules.items.pick_up(self.model, self.character, self.item)
+        self.character.pick_up(self.item)
         pyherc.rules.items.wield(self.model, self.character, self.item)
 
         assert(self.item in self.character.inventory)

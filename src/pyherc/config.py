@@ -31,6 +31,8 @@ from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory
+from pyherc.rules.inventory.factories import InventoryFactory
+from pyherc.rules.inventory.factories import PickUpFactory
 from pyherc.generators import ItemGenerator, CreatureGenerator
 from pyherc.generators.level.portals import PortalAdderFactory
 from pyherc.generators.level.portals import PortalAdderConfiguration
@@ -148,11 +150,14 @@ class Configuration(object):
 
         drink_factory = DrinkFactory(effect_factory)
 
+        inventory_factory = InventoryFactory(PickUpFactory())
+
         self.action_factory = ActionFactory(
                                             self.model,
                                             [move_factory,
                                             attack_factory,
-                                            drink_factory])
+                                            drink_factory,
+                                            inventory_factory])
 
         self.logger.info('Action sub system initialised')
 

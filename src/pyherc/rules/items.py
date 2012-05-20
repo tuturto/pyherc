@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -20,6 +20,8 @@
 
 """
 Rules for manipulating items
+
+.. warning:: This code will be eventually replaced by action sub system
 """
 
 import logging
@@ -28,40 +30,17 @@ import pyherc.rules.magic
 
 logger = logging.getLogger('pyherc.rules.items')
 
-def __pick_up(model, character, item):
-    """
-    Pick up an item
-
-    Args:
-        model: model to use
-        character: character picking up the item
-        item: item to be picked up
-    """
-    assert(not model == None)
-    assert(not character == None)
-    assert(not item == None)
-    assert(item in character.level.items)
-
-    event = {}
-    event['type'] = 'item'
-    event['pick up'] = 1
-    event['character'] = character
-    event['item'] = item
-    event['location'] = character.location
-    event['level'] = character.level
-    model.raise_event(event)
-
-    character.level.items.remove(item)
-    character.inventory.append(item)
-    item.location = ()
-    character.add_to_tick(1.5)
-
 def drop(model, character, item):
     """
     Drop item from inventory
-    @param model: model to use
-    @param character: character who is dropping the item
-    @param item: item to be dropped
+    :param model: model to use
+    :type model: Model
+    :param character: character who is dropping the item
+    :type character: Character
+    :param item: item to be dropped
+    :type item: Item
+
+    .. warning:: This code will be eventually replaced by action sub system
     """
     assert(not model == None)
     assert(not character == None)
@@ -87,10 +66,16 @@ def drop(model, character, item):
 def wield(model, character, item, dual_wield = False):
     """
     Wield a weapon
-    @param model: model to use
-    @param character: character trying to wield the weapon
-    @param item: weapon to wield
-    @param dual_wield: should character perform dual wield
+    :param model: model to use
+    :type model: Model
+    :param character: character trying to wield the weapon
+    :type character: Character
+    :param item: weapon to wield
+    :type item: Item
+    :param dual_wield: should character perform dual wield
+    :type dual_wield: Boolean
+
+    .. warning:: This code will be eventually replaced by action sub system
     """
 
     if len(character.weapons) == 0:
@@ -125,11 +110,19 @@ def wield(model, character, item, dual_wield = False):
 def can_dual_wield(model, character, item1, item2):
     """
     Checks if character can dual-wield given items
-    @param model: model to use
-    @param character: character to try dual-wielding
-    @param item1: item to wield
-    @param item2: item to wield
-    @return: 1 if can dual-wield, 0 otherwise
+
+    :param model: model to use
+    :type model: Model
+    :param character: character to try dual-wielding
+    :type character: Character
+    :param item1: item to wield
+    :type item1: Item
+    :param item2: item to wield
+    :type item2: Item
+    :returns: 1 if can dual-wield, 0 otherwise
+    :rtype: integer
+
+    .. warning:: This code will be eventually replaced by action sub system
     """
     if (is_dual_wieldable(model, character, item1)
             and is_dual_wieldable(model, character, item2)):
@@ -141,10 +134,17 @@ def can_dual_wield(model, character, item1, item2):
 def is_dual_wieldable(model, character, item):
     """
     Checks if item is dual-wieldable for a character
-    @param model: model to use
-    @param character: character to try dual-wielding
-    @param item: item to dual wield
-    @return: 1 if can dual-wield, 0 otherwise
+
+    :param model: model to use
+    :type model: Model
+    :param character: character to try dual-wielding
+    :type character: Character
+    :param item: item to dual wield
+    :type item: Item
+    :returns: 1 if can dual-wield, 0 otherwise
+    :rtype: integer
+
+    .. warning:: This code will be eventually replaced by action sub system
     """
     assert model != None
     assert character != None
@@ -163,11 +163,19 @@ def is_dual_wieldable(model, character, item):
 def unwield(model, character, item, instant = False):
     """
     Unwield an item
-    @param model: model to use
-    @param character: character unwielding an item
-    @param item: item to unwield
-    @param instant: is this instant action, default False
-    @return: True if unwield was succesfull, False otherwise
+
+    :param model: model to use
+    :type model: Model
+    :param character: character unwielding an item
+    :type character: Character
+    :param item: item to unwield
+    :type item: Item
+    :param instant: is this instant action, default False
+    :type instant: Boolean
+    :returns: True if unwield was succesfull, False otherwise
+    :rtype: Boolean
+
+    .. warning:: This code will be eventually replaced by action sub system
     """
     character.weapons.remove(item)
 

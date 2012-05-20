@@ -193,7 +193,7 @@ class GameWindow:
                                                        player)
                             items = dialog.show(items)
                         for item in items:
-                            pyherc.rules.items.pick_up(model, player, item)
+                            player.pick_up(item)
                         player.level.full_update_needed = True
                     elif event.key == K_i:
                         #display inventory

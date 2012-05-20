@@ -25,6 +25,7 @@ Module for testing main configuration
 #pylint: disable=W0614
 
 from pyherc.config import Configuration
+from pyherc.rules import InventoryParameters
 from pyherc.test.integration import detect_base_path
 from mockito import mock
 from hamcrest import *
@@ -85,4 +86,13 @@ class TestMainConfiguration():
         factory = self.config.level_generator_factory
         generator = factory.get_generator('upper crypt')
 
+    def test_inventory_factory_has_been_initialised(self):
+        """
+        Test that inventory action factory has been initialised
+        """
+        factory = self.config.action_factory.get_sub_factory(
+                            InventoryParameters(character = None,
+                                                item = None,
+                                                sub_action = 'pick up'))
 
+        assert_that(factory, is_(not_none()))

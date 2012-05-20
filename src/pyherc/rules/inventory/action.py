@@ -21,10 +21,15 @@
 """
 Module defining classes related to inventory actions
 """
+from pyherc.aspects import Logged
+
 class PickUpAction(object):
     """
     Action for moving
     """
+    logged = Logged()
+
+    @logged
     def __init__(self, character, item):
         """
         Default constructor
@@ -37,16 +42,20 @@ class PickUpAction(object):
         self.character = character
         self.item = item
 
+    @logged
     def execute(self):
         """
         Executes this action
         """
         if self.is_legal():
-            pass
+            self.character.level.items.remove(self.item)
+            self.character.inventory.append(self.item)
+            self.item.location = ()
+            self.character.add_to_tick(1.5)
         else:
-            self.logger.warn('Tried to execute illegal move')
             self.character.add_to_tick(2)
 
+    @logged
     def is_legal(self):
         """
         Check if the action is possible to perform
@@ -54,4 +63,10 @@ class PickUpAction(object):
         :returns: True if move is possible, false otherwise
         :rtype: Boolean
         """
+        character = self.character
+        item = self.item
+
+        if character.location != item.location:
+            return False
+
         return True
