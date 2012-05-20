@@ -18,6 +18,7 @@ Contents:
    generate_item
    actions
    effects
+   testing
    api_reference
 
 
