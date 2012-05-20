@@ -38,7 +38,37 @@ type of creatures to add and their placement.
 
 Items are added in the same way as the portals, but item adders are used.
 
-.. graphviz:: dot/level_generator.dot
+.. graphviz:: 
+
+    digraph hierarchy {
+    splines=false
+    size="9,9"
+    node[shape=record,style=filled,fillcolor=gray95]
+    edge[dir=forward, arrowtail=empty]
+    LevelGenerator [label = "{LevelGenerator|...|+ generate_level(portal)}"]
+    Partitioner [label = "{Partitioner|...| + partition_level(level)}"]
+    RoomGenerator [label = "{RoomGenerator|...|+ generate_room(section)}"]
+    Decorator [label = "{Decorator|...|+ decorate_level(level)}"]
+    PortalAdder [label = "{PortalAdder|...|+ add_portal(level)}"]
+    ItemAdder [label = "{ItemAdder|...| + add_items(level)}"]
+    CreatureAdder [label = "{CreatureAdder|...| + add_creatures(level)}"]
+    Connector [label = "{Connector|...|+ connect_sections(...)}"]
+    DecoratorConfig [label = "{DecoratorConfig|...|...}"]
+    ItemAdderConfiguration [label = "{ItemAdderConfiguration|...|+ add_item(...)}"]
+    CreatureAdderConfiguration [label = "{CreatureAdderConfiguration|...|+ add_creature(...)}"]
+
+    LevelGenerator->Partitioner [tailport=s, headport=n]
+    LevelGenerator->RoomGenerator [headlabel="*", tailport=s, headport=n]
+    LevelGenerator->Decorator [headlabel="*", tailport=s, headport=n]
+    LevelGenerator->PortalAdder [tailport=s, headport=n] 
+    LevelGenerator->ItemAdder [tailport=s, headport=n]
+    LevelGenerator->CreatureAdder [tailport=s, headport=n]
+    
+    Partitioner->Connector [headlabel="*", tailport=s, headport=n]
+    Decorator->DecoratorConfig [tailport=s, headport=n]
+    ItemAdder->ItemAdderConfiguration [tailport=s, headport=n]
+    CreatureAdder->CreatureAdderConfiguration [tailport=s, headport=n]
+    }
 
 Partitioners
 ============
