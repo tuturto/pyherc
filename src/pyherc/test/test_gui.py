@@ -43,9 +43,9 @@ class TestGameWindow:
         """
         Test that event history is formatted correctly with less than five items
         """
-        window = pyherc.gui.windows.GameWindow(mock(),
-                                               mock(),
-                                               mock())
+        window = pyherc.gui.windows.OldGameWindow(mock(),
+                                                  mock(),
+                                                  mock())
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
@@ -57,9 +57,9 @@ class TestGameWindow:
         """
         Test that event history is formatted correctly with five items
         """
-        window = pyherc.gui.windows.GameWindow(mock(),
-                                               mock(),
-                                               mock())
+        window = pyherc.gui.windows.OldGameWindow(mock(),
+                                                  mock(),
+                                                  mock())
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')
@@ -77,9 +77,9 @@ class TestGameWindow:
         """
         Test that event history is formatted correctly with more than five items
         """
-        window = pyherc.gui.windows.GameWindow(mock(),
-                                               mock(),
-                                               mock())
+        window = pyherc.gui.windows.OldGameWindow(mock(),
+                                                  mock(),
+                                                  mock())
         window.eventHistory = []
         window.eventHistory.append('one')
         window.eventHistory.append('two')

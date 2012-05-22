@@ -87,7 +87,7 @@ class StartMenu(pgu.gui.Container):
 
         self.application.world.player = newWindow.character
         self.application.world.end_condition = 0
-        newWindow = pyherc.gui.windows.GameWindow(self.application, self.screen, self.surface_manager)
+        newWindow = pyherc.gui.windows.OldGameWindow(self.application, self.screen, self.surface_manager)
         newWindow.main_loop()
         self.logger.info('game finished')
         if self.application.running:
@@ -96,6 +96,17 @@ class StartMenu(pgu.gui.Container):
             dialog.show(endResult)
 
         self.repaint()
+        # self.application.change_state('game window')
+        
+        #newWindow = pyherc.gui.windows.GameWindow(self.application, self.screen, self.surface_manager)
+        #newWindow.main_loop()
+        #self.logger.info('game finished')
+        #if self.application.running:
+        #    endResult = pyherc.rules.ending.check_result(self.application.world)
+        #    dialog = pyherc.gui.dialogs.EndScreen(self.application, self.screen, self.surface_manager)
+        #    dialog.show(endResult)
+
+        #self.repaint()
 
     def __quit_game(self):
         """
