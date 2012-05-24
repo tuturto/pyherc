@@ -106,11 +106,14 @@ class MainWindow(pgu.gui.app.App):
         super(MainWindow, self).loop()
         if self.state == 'game window':
             model = self.application.world
-            creature = model.get_next_creature()
+            player = model.player
 
-            if creature != model.player:
-                if self.application.world.player.level != None:
-                    creature.act(self.application.world)
+            if player.tick > 0:
+                creature = model.get_next_creature()
+
+                if creature != model.player:
+                    if self.application.world.player.level != None:
+                        creature.act(self.application.world)
 
 class StartNewGameWindow:
     """

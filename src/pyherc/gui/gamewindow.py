@@ -79,6 +79,7 @@ class GameArea(Widget):
 
         self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
                                     K_KP4:7, K_KP7:8, K_KP5:9}
+        self.old_location = (0, 0)
 
     def paint(self,s):
         # Paint the pygame.Surface
@@ -164,7 +165,13 @@ class GameArea(Widget):
 
     def update(self, s):
         # Update the pygame.Surface and return the update rects
-        self.paint(s)
+        model = self.application.world
+        player = model.player
+
+        if self.old_location != player.location:
+            self.old_location = player.location
+            self.paint(s)
+
         return [Rect(0,0,self.rect.w,self.rect.h)]
 
     def event(self, event):
