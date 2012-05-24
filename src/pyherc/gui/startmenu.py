@@ -34,20 +34,18 @@ class StartMenu(pgu.gui.Container):
     Start menu
     """
 
-    def __init__(self,  application, screen, surface_manager, **params):
+    def __init__(self,  application, surface_manager, **params):
         """
         Initialises start menu
 
-        Args:
-            application: instance of currently running application
-            screen: display to draw onto
+        :param application: instance of currently running application
+        :type application: Application
         """
         super(StartMenu, self).__init__(**params)
 
         self.running = 1
         self.selection = 0
         self.application = application
-        self.screen = screen
         self.surface_manager = surface_manager
         self.logger = logging.getLogger('pyherc.gui.windows.StartMenu')
 
@@ -82,22 +80,25 @@ class StartMenu(pgu.gui.Container):
         Start a new game
         """
         self.logger.info('starting a new game')
-        newWindow = pyherc.gui.windows.StartNewGameWindow(self.application, self.screen, self.surface_manager)
+        newWindow = pyherc.gui.windows.StartNewGameWindow(self.application, self.surface_manager)
         newWindow.main_loop()
 
         self.application.world.player = newWindow.character
         self.application.world.end_condition = 0
-        newWindow = pyherc.gui.windows.OldGameWindow(self.application, self.screen, self.surface_manager)
-        newWindow.main_loop()
-        self.logger.info('game finished')
-        if self.application.running:
-            endResult = pyherc.rules.ending.check_result(self.application.world)
-            dialog = pyherc.gui.dialogs.EndScreen(self.application, self.screen, self.surface_manager)
-            dialog.show(endResult)
 
-        self.repaint()
+        self.application.change_state('game window')
+
+        # newWindow = pyherc.gui.windows.OldGameWindow(self.application, self.screen, self.surface_manager)
+        # newWindow.main_loop()
+        #  self.logger.info('game finished')
+        # if self.application.running:
+        #    endResult = pyherc.rules.ending.check_result(self.application.world)
+        #    dialog = pyherc.gui.dialogs.EndScreen(self.application, self.screen, self.surface_manager)
+        #    dialog.show(endResult)
+
+        # self.repaint()
         # self.application.change_state('game window')
-        
+
         #newWindow = pyherc.gui.windows.GameWindow(self.application, self.screen, self.surface_manager)
         #newWindow.main_loop()
         #self.logger.info('game finished')

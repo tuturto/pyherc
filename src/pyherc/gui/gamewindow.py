@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -22,14 +22,13 @@
 Module main display
 """
 
-import pgu.gui
-import images
-from pgu import tilevid
+from pgu.gui import Widget
+from pgu.gui import Container
+from pygame import Rect
 
-class GameWindow(pgu.gui.Container):
-    pass
+class GameWindow(Container):
 
-    def __init__(self,  application, screen, surface_manager, **params):
+    def __init__(self,  application, surface_manager, **params):
         """
         Initialises game window
 
@@ -41,7 +40,6 @@ class GameWindow(pgu.gui.Container):
         super(GameWindow, self).__init__(**params)
 
         self.application = application
-        self.screen = screen
         self.surface_manager = surface_manager
         self.set_layout()
 
@@ -49,24 +47,39 @@ class GameWindow(pgu.gui.Container):
         """
         Set layout of this screen
         """
-        bg = pgu.gui.Image(
-                self.surface_manager.get_image(
-                        images.image_play_area))
-        self.add(bg, 0, 0)
+        play_area = GameArea(self.application, self.surface_manager)
+        self.add(play_area, 0, 0)
 
     def run(self):
         """
         Update screen
         """
-        #self.screen.fill((0,0,0))
-        #self.screen.paint(self.screen)
-        #pygame.display.flip()
+        pass
 
-        # images  -- a dict for images to be put in.
-        # tlayer  -- the foreground tiles layer
-        # blayer  -- the background tiles layer (optional)
-        assert 1 == 2
-        self.tilevid.loop()
+class GameArea(Widget):
+    """
+    Component to draw game area
+    """
+    def __init__(self, application, surface_manager,  **kwargs):
+        """
+        Default constructor
+        """
+        super(GameArea, self).__init__(**kwargs)
+        self.application = application
+        self.surface_manager = surface_manager
 
-        updates = self.tilevid.update(self.tilevid.screen)
-        pygame.display.update(updates)
+    def paint(self,s):
+        # Paint the pygame.Surface
+        return
+
+    def update(self,s):
+        # Update the pygame.Surface and return the update rects
+        return [Rect(0,0,self.rect.w,self.rect.h)]
+
+    def event(self,e):
+        # Handle the pygame.Event
+        return
+
+    def resize(self,width=None,height=None):
+        # Return the width and height of this widget
+        return 256,256

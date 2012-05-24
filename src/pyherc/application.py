@@ -78,10 +78,8 @@ class Application(object):
                                               pygame.SWSURFACE)
         self.gui = MainWindow(self,
                               self.base_path,
-                              self.surface_manager,
-                              self.screen)
+                              self.surface_manager)
         menu = StartMenu(self,
-                         self.screen,
                          self.surface_manager)
         self.gui.connect(pgu.gui.QUIT, self.gui.quit, None)
         self.gui.run(menu, screen = self.screen)

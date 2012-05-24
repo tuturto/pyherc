@@ -54,7 +54,7 @@ class MainWindow(pgu.gui.app.App):
     logged = Logged()
 
     @logged
-    def __init__(self,  application, base_path, surface_manager, screen, theme=None, **params):
+    def __init__(self,  application, base_path, surface_manager, theme=None, **params):
         """
         Initialises the main window
 
@@ -71,7 +71,6 @@ class MainWindow(pgu.gui.app.App):
         pygame.init()
         self.width = application.config.resolution[0]
         self.height = application.config.resolution[1]
-        self.screen = screen
         pygame.display.set_caption(application.config.caption)
 
         self.surface_manager = surface_manager
@@ -86,19 +85,16 @@ class MainWindow(pgu.gui.app.App):
         """
         if state == 'options menu':
             mode = OptionsMenu(self.application,
-                               self.screen,
                                self.surface_manager)
         elif state == 'start menu':
             mode = StartMenu(self.application,
-                             self.screen,
                              self.surface_manager)
         elif state == 'game window':
             mode = GameWindow(self.application,
-                              self.screen,
                               self.surface_manager)
 
         if state != None:
-            self.init(widget = mode, screen = self.screen)
+            self.init(widget = mode)
 
 
 
@@ -106,12 +102,11 @@ class StartNewGameWindow:
     """
     Window that is displayed when player starts a new game
     """
-    def __init__(self,  application, screen, surface_manager):
+    def __init__(self,  application, surface_manager):
         self.logger = logging.getLogger('pyherc.gui.windows.StartNewGameWindow')
 
         self.running = 1
         self.application = application
-        self.screen = screen
         self.surface_manager = surface_manager
         self.character = None
 

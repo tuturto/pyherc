@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -33,20 +33,20 @@ class OptionsMenu(pgu.gui.Container):
     Start menu
     """
 
-    def __init__(self,  application, screen, surface_manager, **params):
+    def __init__(self,  application, surface_manager, **params):
         """
         Initialises start menu
 
-        Args:
-            application: instance of currently running application
-            screen: display to draw onto
+        :param application: instance of currently running application
+        :type application: Application
+        :param surface_manager: image loader
+        :type surface_manager: SurfaceManager
         """
         super(OptionsMenu, self).__init__(**params)
 
         self.running = 1
         self.selection = 0
         self.application = application
-        self.screen = screen
         self.surface_manager = surface_manager
 
         self.set_layout()
