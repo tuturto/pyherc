@@ -74,6 +74,7 @@ class MainWindow(pgu.gui.app.App):
         pygame.display.set_caption(application.config.caption)
 
         self.surface_manager = surface_manager
+        self.state = None
 
     @logged
     def change_state(self, state):
@@ -83,6 +84,7 @@ class MainWindow(pgu.gui.app.App):
         Args:
             state: String specifying which state to display
         """
+        self.state = state
         if state == 'options menu':
             mode = OptionsMenu(self.application,
                                self.surface_manager)
@@ -96,7 +98,19 @@ class MainWindow(pgu.gui.app.App):
         if state != None:
             self.init(widget = mode)
 
+    def loop(self):
+        """
+        Performs one iteration of the PGU application loop, which
+        processes events and update the pygame display.
+        """
+        super(MainWindow, self).loop()
+        if self.state == 'game window':
+            model = self.application.world
+            creature = model.get_next_creature()
 
+            if creature != model.player:
+                if self.application.world.player.level != None:
+                    creature.act(self.application.world)
 
 class StartNewGameWindow:
     """
