@@ -42,6 +42,7 @@ class Model(object):
         self.player = None
         self.config = None
         self.tables = None
+        self.__event_listeners = []
         self.end_condition = 0
         self.logger = logging.getLogger('pyherc.data.model.Model')
 
@@ -59,6 +60,23 @@ class Model(object):
         """
         self.__dict__.update(properties)
         self.logger = logging.getLogger('pyherc.data.model.Model')
+
+    @logged
+    def register_event_listener(self, listener):
+        """
+        Registers event listener on this model
+
+        :param listener: Listener to register
+        """
+        assert listener != None
+        self.__event_listeners.append(listener)
+
+    @logged
+    def get_event_listeners(self):
+        """
+        Retrieve registered event listeners
+        """
+        return self.__event_listeners[:]
 
     @logged
     def raise_event(self, event):

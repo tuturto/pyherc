@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -19,14 +19,32 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for customer pyHamcrest matchers used in testing
+Module for testing Model
 """
+#pylint: disable=W0614
+from pyherc.data import Model
+from pyherc.test.matchers import has_event_listener
+from hamcrest import * #pylint: disable=W0401
+from mockito import mock
 
-from .map_connectivity import is_fully_accessible_via
-from .map_connectivity import located_in_room
-from .contains_creature import has_creature, is_at, is_not_at
-from .active_effects import has_effects, has_no_effects
-from .active_effects import has_effect
-from .items import does_have_item
-from .effect_collection import has_effect_handle, has_effect_handles
-from .event_listener import has_event_listener
+class TestModel(object):
+    """
+    Class for testing Model
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestModel, self).__init__()
+
+    def test_registering_event_listener(self):
+        """
+        Test that event listener can be registered on the model
+        """
+        model = Model()
+
+        listener = mock()
+
+        model.register_event_listener(listener)
+
+        assert_that(model, has_event_listener(listener))

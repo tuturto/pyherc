@@ -25,11 +25,16 @@ from mockito import mock
 
 import pyherc.gui.windows
 from pyherc.data import Character
+from pyherc.data import Model
 from pyherc.gui.surfaceManager import SurfaceManager
 from pyherc.test import IntegrationTest
+from pyherc.gui.gamewindow import GameArea
 
+from pyherc.test.builders import CharacterBuilder
+from pyherc.test.builders import LevelBuilder
+from pyherc.test.builders import ActionFactoryBuilder
 
-class TestGameWindow:
+class TestGameWindow(object):
     """
     Tests for main game window
     """
@@ -37,7 +42,44 @@ class TestGameWindow:
         """
         Default constructor
         """
-        pass
+        super(TestGameWindow, self).__init__()
+
+    def test_updating_screen_while_monster_moves(self):
+        """
+        Test that only certain portion of screen is updated when monster moves
+        """
+        model = Model()
+
+        player = (CharacterBuilder()
+                        .with_model(model)
+                        .as_player_character()
+                        .with_name('player')
+                        .with_location((11, 11))
+                        .build())
+
+        monster = (CharacterBuilder()
+                        .with_model(model)
+                        .with_action_factory(ActionFactoryBuilder()
+                                                .with_model(model)
+                                                .with_move_factory())
+                        .with_name('rat')
+                        .with_location((5, 5))
+                        .build())
+
+        level = (LevelBuilder()
+                    .with_character(player)
+                    .with_character(monster)
+                    .build())
+
+        game_gui = GameArea(application = mock(),
+                            surface_manager = mock())
+
+        model.register_event_listener(game_gui)
+
+        monster.move(7)
+
+        assert 1 == 2
+        #varmista tässä piirretyt kohdat
 
     def test_formatting_event_history_less_than_five_items(self):
         """
@@ -139,4 +181,3 @@ class TestInventoryDialog(IntegrationTest):
         assert sorted[5].get_main_type() == 'potion'
         assert sorted[6].get_main_type() == 'food'
         assert sorted[7].get_main_type() == 'food'
-

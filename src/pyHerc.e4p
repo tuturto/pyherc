@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-05-20, 11:06:14 -->
+<!-- Saved: 2012-05-26, 15:39:57 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -139,6 +139,8 @@
     <Source>pyherc/rules/inventory/action.py</Source>
     <Source>pyherc/rules/inventory/factories.py</Source>
     <Source>pyherc/gui/gamewindow.py</Source>
+    <Source>pyherc/test/test_model.py</Source>
+    <Source>pyherc/test/matchers/event_listener.py</Source>
   </Sources>
   <Forms>
   </Forms>

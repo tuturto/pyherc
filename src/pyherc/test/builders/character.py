@@ -53,6 +53,11 @@ class CharacterBuilder(object):
         self.effect_handles = []
         self.effects = []
         self.effects_collection = EffectsCollection()
+        self.player_character = False
+
+    def as_player_character(self):
+        self.player_character = True
+        return self
 
     def with_model(self, model):
         self.model = model
@@ -130,6 +135,9 @@ class CharacterBuilder(object):
                               action_factory = self.action_factory,
                               rng = self.rng,
                               effects_collection = self.effects_collection)
+
+        if self.player_character:
+            self.model.player = character
 
         character.name = self.name
 
