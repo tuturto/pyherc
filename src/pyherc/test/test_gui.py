@@ -21,7 +21,11 @@
 """
 Tests for gui components
 """
+#pylint: disable=W0614
 from mockito import mock
+from hamcrest import * #pylint: disable=W0401
+
+from pygame import Rect
 
 import pyherc.gui.windows
 from pyherc.data import Character
@@ -29,6 +33,7 @@ from pyherc.data import Model
 from pyherc.gui.surfaceManager import SurfaceManager
 from pyherc.test import IntegrationTest
 from pyherc.gui.gamewindow import GameArea
+from pyherc.application import Application
 
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import LevelBuilder
@@ -46,9 +51,10 @@ class TestGameWindow(object):
 
     def test_updating_screen_while_monster_moves(self):
         """
-        Test that only certain portion of screen is updated when monster moves
+        Test that only needed spots are reported as updated as a monster moves
         """
         model = Model()
+        surface = mock()
 
         player = (CharacterBuilder()
                         .with_model(model)
@@ -71,15 +77,20 @@ class TestGameWindow(object):
                     .with_character(monster)
                     .build())
 
-        game_gui = GameArea(application = mock(),
-                            surface_manager = mock())
+        application = Application()
+        application.world = model
+
+        game_gui = GameArea(application = application,
+                            surface_manager = mock(),
+                            decorate = False)
 
         model.register_event_listener(game_gui)
 
         monster.move(7)
+        rects = game_gui.update(surface)
 
-        assert 1 == 2
-        #varmista tässä piirretyt kohdat
+        assert_that(rects, has_item(Rect(160, 88, 192, 120)))
+        assert_that(rects, has_item(Rect(192, 88, 224, 120)))
 
     def test_formatting_event_history_less_than_five_items(self):
         """

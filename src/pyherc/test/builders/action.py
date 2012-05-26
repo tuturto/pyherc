@@ -24,6 +24,7 @@ Module for action factory builders
 from mockito import mock
 
 from pyherc.rules.public import ActionFactory
+from pyherc.rules.move.factories import MoveFactory, WalkFactory
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory
@@ -44,14 +45,21 @@ class ActionFactoryBuilder(object):
         self.drink_factory.action_type = 'drink'
         self.inventory_factory = mock()
         self.inventory_factory.action_type = 'inventory'
+        self.move_factory = mock()
+        self.move_factory.action_type = 'move'
 
         self.effect_factory = mock()
         self.use_real_attack_factory = False
         self.use_real_drink_factory = False
         self.use_real_inventory_factory = False
+        self.use_real_move_factory = False
 
     def with_model(self, model):
         self.model = model
+        return self
+
+    def with_move_factory(self):
+        self.use_real_move_factory = True
         return self
 
     def with_attack_factory(self):
@@ -86,8 +94,13 @@ class ActionFactoryBuilder(object):
             self.inventory_factory = InventoryFactory([
                                             pick_up_factory])
 
+        if self.use_real_move_factory == True:
+            walk_factory = WalkFactory()
+            self.move_factory = MoveFactory(walk_factory)
+
         action_factory = ActionFactory(self.model,
-                                       [self.drink_factory,
+                                       [self.move_factory,
+                                        self.drink_factory,
                                         self.attack_factory,
                                         self.inventory_factory])
 

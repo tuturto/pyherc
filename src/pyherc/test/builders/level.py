@@ -22,6 +22,7 @@
 Module for level builder
 """
 from pyherc.data import Level
+from pyherc.data import tiles
 
 class LevelBuilder(object):
     """
@@ -33,6 +34,9 @@ class LevelBuilder(object):
         """
         super(LevelBuilder, self).__init__()
         self.characters = []
+        self.level_size = (80, 40)
+        self.floor_tile = tiles.FLOOR_ROCK
+        self.wall_tile = tiles.WALL_EMPTY
 
     def with_character(self, character):
         if hasattr(character, 'build'):
@@ -48,7 +52,7 @@ class LevelBuilder(object):
         Returns:
             Level
         """
-        level = Level()
+        level = Level(self.level_size, self.floor_tile, self.wall_tile)
 
         for creature in self.characters:
             level.add_creature(creature)
