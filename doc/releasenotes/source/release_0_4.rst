@@ -7,6 +7,7 @@ New features
 ************
 
   - Certain creatures can make poisoned attacks
+  - Title music
 
 **********
 Fixed bugs
@@ -23,3 +24,5 @@ Other notes
   - very rudimentary item spawning added to debug server
   - documentation regarding to testing added
   - internals of inventory handling improved
+  - improved internals of user interface
+  

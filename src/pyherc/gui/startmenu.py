@@ -25,7 +25,9 @@ Module for start menu related functionality
 import logging
 import images
 import pyherc
+import pygame
 import pgu.gui
+import os
 
 from pyherc.gui.options import OptionsMenu
 
@@ -48,6 +50,12 @@ class StartMenu(pgu.gui.Container):
         self.application = application
         self.surface_manager = surface_manager
         self.logger = logging.getLogger('pyherc.gui.windows.StartMenu')
+
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.load(os.path.join(application.base_path,
+                'music/demetrios_katis_-_the_gathering_of_the_tribes.ogg'))
+            pygame.mixer.music.set_volume(0.5)
+            pygame.mixer.music.play(-1)
 
         self.set_layout()
 
@@ -80,6 +88,9 @@ class StartMenu(pgu.gui.Container):
         Start a new game
         """
         self.logger.info('starting a new game')
+
+        pygame.mixer.music.fadeout(1000)
+
         newWindow = pyherc.gui.windows.StartNewGameWindow(self.application, self.surface_manager)
         newWindow.main_loop()
 

@@ -27,4 +27,16 @@ by Henk Brouwer.
 
 Background of the main menu from: <http://stock-background-texture.com/>
 
-PGU was originally developed by Phil Hassey but is now being maintained by Peter Rogers.
+PGU was originally developed by Phil Hassey and is now being maintained by Peter Rogers.
+
+Music score
+-----------
+ - the Gathering of the Tribes - Demetrios Katis <http://www.BeatPick.com/>
+
+Music is licensed under Creative Common Attribution-NonCommercial-ShareAlike 3.0 <http://creativecommons.org/licenses/by-nc-sa/3.0/>
+ 
+Other help
+----------
+Following people have contributed to the code in a way or another, thank you!
+
+ - Chiman
