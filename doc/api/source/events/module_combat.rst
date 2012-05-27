@@ -1,6 +1,6 @@
-pyherc.events.move
-******************
+pyherc.events.combat
+********************
 
-.. automodule:: pyherc.events.move
+.. automodule:: pyherc.events.combat
     :members:
     :show-inheritance:

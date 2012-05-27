@@ -259,3 +259,12 @@ class GameArea(Widget):
     def resize(self,width=None,height=None):
         # Return the width and height of this widget
         return 800, 600
+
+    def receive_event(self, event):
+        """
+        Receive event from event subsystem
+
+        :param event: event to receive
+        :type event: Event
+        """
+        pass

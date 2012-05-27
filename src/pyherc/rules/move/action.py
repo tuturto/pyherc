@@ -23,11 +23,16 @@ Module defining classes related to MoveAttack
 """
 import logging
 import pyherc.data.tiles
+from pyherc.events import MoveEvent
+from pyherc.aspects import Logged
 
 class MoveAction(object):
     """
     Action for moving
     """
+    logged = Logged()
+
+    @logged
     def __init__(self, character, new_location, new_level = None):
         """
         Default constructor
@@ -42,6 +47,7 @@ class MoveAction(object):
         self.new_level = new_level
         self.model = None
 
+    @logged
     def execute(self):
         """
         Executes this Move
@@ -55,10 +61,16 @@ class MoveAction(object):
                     self.new_level.add_creature(self.character,
                                                 self.new_location)
             self.character.add_to_tick(2)
+
+            self.character.raise_event(MoveEvent(
+                                            level = self.character.level,
+                                            location = self.character.location))
+
         else:
             self.logger.warn('Tried to execute illegal move')
             self.character.add_to_tick(2)
 
+    @logged
     def is_legal(self):
         """
         Check if the move is possible to perform

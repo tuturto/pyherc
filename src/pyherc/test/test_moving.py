@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -32,7 +32,50 @@ from pyherc.generators.level.testlevel import TestLevelGenerator
 from pyherc.test import IntegrationTest
 from pyherc.test.builders import CharacterBuilder
 
+from pyherc.data import Model
+from pyherc.test.builders import LevelBuilder
+from pyherc.test.builders import ActionFactoryBuilder
+from pyherc.test.helpers import EventListener
+
 import pyherc.rules.moving
+
+class TestEventDispatching(object):
+    """
+    Tests for event dispatching relating to moving
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestEventDispatching, self).__init__()
+
+    def test_event_is_relayed(self):
+        """
+        Test that moving will create an event and send it forward
+        """
+        model = Model()
+
+        action_factory = (ActionFactoryBuilder()
+                                .with_move_factory()
+                                .build())
+
+        character = (CharacterBuilder()
+                        .with_action_factory(action_factory)
+                        .with_model(model)
+                        .with_location((10, 10))
+                        .build())
+
+        level = (LevelBuilder()
+                        .with_character(character)
+                        .build())
+
+        listener = EventListener()
+
+        model.register_event_listener(listener)
+
+        character.move(3)
+
+        assert_that(len(listener.events), is_(equal_to(1)))
 
 class TestMoving(IntegrationTest):
     """
