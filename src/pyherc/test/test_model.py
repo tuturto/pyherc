@@ -64,7 +64,8 @@ class TestModel(object):
         Test that events are dispatched to listeners
         """
         event = MoveEvent(level = self.level,
-                          location = (10, 10))
+                          location = (10, 10),
+                          affected_tiles = [])
 
         self.model.raise_event(event)
 

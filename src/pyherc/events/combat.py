@@ -27,12 +27,14 @@ class AttackHitEvent(Event):
     """
     Event that can be used to relay information about moving
     """
-    def __init__(self, level, location, type, attacker, target, damage, hit):
+    def __init__(self, level, location, type, attacker, target, damage, hit,
+                 affected_tiles):
         """
         Default constructor
         """
         super(AttackHitEvent, self).__init__(level = level,
-                                             location = location)
+                                             location = location,
+                                             affected_tiles = affected_tiles)
 
         self.type = type
         self.attacker = attacker

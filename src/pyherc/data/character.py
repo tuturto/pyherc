@@ -415,7 +415,7 @@ class Character(object):
         :param event: event to raise
         :type event: Event
         """
-        self.action_factory.model.raise_event(event)
+        self.model.raise_event(event)
 
     @logged
     def add_effect_handle(self, effect):

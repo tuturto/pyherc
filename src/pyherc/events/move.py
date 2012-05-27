@@ -27,9 +27,10 @@ class MoveEvent(Event):
     """
     Event that can be used to relay information about moving
     """
-    def __init__(self, level, location):
+    def __init__(self, level, location, affected_tiles):
         """
         Default constructor
         """
         super(MoveEvent, self).__init__(level = level,
-                                        location = location)
+                                        location = location,
+                                        affected_tiles = affected_tiles)

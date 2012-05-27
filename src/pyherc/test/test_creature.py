@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -32,6 +32,35 @@ from pyherc.data.dungeon import Dungeon
 from pyherc.rules.moving import deactivate
 from pyherc.test.matchers import has_effect_handle
 from hamcrest import * #pylint: disable=W0401
+from pyherc.events import MoveEvent
+from pyherc.test.builders import LevelBuilder
+from mockito import mock, any, verify
+
+class TestCharacter(object):
+    """
+    Tests for character
+    """
+    def __init__(self):
+        super(TestCharacter, self).__init__()
+
+    def test_raising_event(self):
+        """
+        Test that character can raise event
+        """
+        model = mock()
+        character = (CharacterBuilder()
+                        .with_model(model)
+                        .build())
+
+        level = (LevelBuilder()
+                    .with_character(character)
+                    .build())
+
+        character.raise_event(MoveEvent(level = level,
+                                        location = character.location,
+                                        affected_tiles = []))
+
+        verify(model).raise_event(any())
 
 class TestCreatureWithGenerator(IntegrationTest):
     """

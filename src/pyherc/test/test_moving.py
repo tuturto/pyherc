@@ -36,6 +36,7 @@ from pyherc.data import Model
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.helpers import EventListener
+from pyherc.test.matchers import has_marked_for_redrawing
 
 import pyherc.rules.moving
 
@@ -49,33 +50,55 @@ class TestEventDispatching(object):
         """
         super(TestEventDispatching, self).__init__()
 
+        self.model = None
+        self.character = None
+        self.level = None
+        self.listener = None
+
+    def setup(self):
+        """
+        Setup test case
+        """
+        self.model = Model()
+
+        action_factory = (ActionFactoryBuilder()
+                                    .with_move_factory()
+                                    .build())
+
+        self.character = (CharacterBuilder()
+                                .with_action_factory(action_factory)
+                                .with_model(self.model)
+                                .with_location((10, 10))
+                                .build())
+
+        self.level = (LevelBuilder()
+                            .with_character(self.character)
+                            .build())
+
+        self.listener = EventListener()
+
+        self.model.register_event_listener(self.listener)
+
     def test_event_is_relayed(self):
         """
         Test that moving will create an event and send it forward
         """
-        model = Model()
+        self.character.move(3)
 
-        action_factory = (ActionFactoryBuilder()
-                                .with_move_factory()
-                                .build())
+        assert_that(len(self.listener.events), is_(equal_to(1)))
 
-        character = (CharacterBuilder()
-                        .with_action_factory(action_factory)
-                        .with_model(model)
-                        .with_location((10, 10))
-                        .build())
+    def test_affected_tiles_are_marked(self):
+        """
+        Test that moving marks tiles for redrawing
+        """
+        expected_redraws = [(10, 10),
+                            (10, 11)]
 
-        level = (LevelBuilder()
-                        .with_character(character)
-                        .build())
+        self.character.move(5)
 
-        listener = EventListener()
+        event = self.listener.events[0]
 
-        model.register_event_listener(listener)
-
-        character.move(3)
-
-        assert_that(len(listener.events), is_(equal_to(1)))
+        assert_that(event, has_marked_for_redrawing(expected_redraws))
 
 class TestMoving(IntegrationTest):
     """

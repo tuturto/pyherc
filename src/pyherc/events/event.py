@@ -25,7 +25,7 @@ class Event(object):
     """
     Super class for events
     """
-    def __init__(self, level, location):
+    def __init__(self, level, location, affected_tiles):
         """
         Default constructor
 
@@ -35,3 +35,4 @@ class Event(object):
         super(Event, self).__init__()
         self.level = level
         self.location = location
+        self.affected_tiles = affected_tiles

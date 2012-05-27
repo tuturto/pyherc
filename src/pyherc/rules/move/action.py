@@ -53,6 +53,10 @@ class MoveAction(object):
         Executes this Move
         """
         if self.is_legal():
+
+            affected_tiles = [self.character.location,
+                              self.new_location]
+
             self.character.location = self.new_location
             if self.new_level != None:
                 if self.character.level != self.new_level:
@@ -64,7 +68,8 @@ class MoveAction(object):
 
             self.character.raise_event(MoveEvent(
                                             level = self.character.level,
-                                            location = self.character.location))
+                                            location = self.character.location,
+                                            affected_tiles = affected_tiles))
 
         else:
             self.logger.warn('Tried to execute illegal move')

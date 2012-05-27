@@ -21,10 +21,15 @@
 """
 Module for event helpers
 """
+from pyherc.aspects import Logged
+
 class EventListener(object):
     """
     Event listener that stores all events it receives
     """
+    logged = Logged()
+
+    @logged
     def __init__(self):
         """
         Default constructor
@@ -32,6 +37,7 @@ class EventListener(object):
         super(EventListener, self).__init__()
         self.events = []
 
+    @logged
     def receive_event(self, event):
         """
         Receive event

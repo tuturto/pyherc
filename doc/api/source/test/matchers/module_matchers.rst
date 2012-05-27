@@ -9,6 +9,7 @@ pyherc.test.matchers
    module_active_effects
    module_contains_creature
    module_effect_collection
+   module_event
    module_items
    module_map_connectivity
    
