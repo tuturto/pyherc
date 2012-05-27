@@ -144,25 +144,6 @@ class GameArea(Widget):
                     tile = self.surface_manager.get_icon(item.icon)
                     s.blit(tile, (x * 32, y *32 - 8))
 
-        #draw overlay event history
-        #self.screen.blit(self.console, (0, 0))
-        #eventText = self.format_event_history()
-        #font = pygame.font.Font(None, 12)
-        #lineNumber = 0
-        #for line in eventText:
-        #    text = font.render(line, True, (255, 255, 255))
-        #    textRect = text.get_rect()
-        #    textRect.topleft = (5, 5 + lineNumber * 12)
-        #    self.screen.blit(text, textRect)
-        #    lineNumber = lineNumber + 1
-
-        #temporary hp display
-        #text = font.render('HP: ' + str(player.hit_points) +
-        #                   ' / ' + str(player.max_hp), True, (255, 255, 255))
-        #textRect = text.get_rect()
-        #textRect.topleft = (5, 85)
-        #s.blit(text, textRect)
-
         tile = self.surface_manager.get_icon(player.icon)
         s.blit(tile, (384, 280))
 
