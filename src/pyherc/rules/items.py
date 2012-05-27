@@ -54,15 +54,6 @@ def drop(model, character, item):
     character.inventory.remove(item)
     character.add_to_tick(1.5)
 
-    event = {}
-    event['type'] = 'item'
-    event['drop'] = 1
-    event['character'] = character
-    event['item'] = item
-    event['location'] = character.location
-    event['level'] = character.level
-    model.raise_event(event)
-
 def wield(model, character, item, dual_wield = False):
     """
     Wield a weapon
@@ -81,31 +72,12 @@ def wield(model, character, item, dual_wield = False):
     if len(character.weapons) == 0:
         #simple wield
         character.weapons.append(item)
-        event = {}
-        event['type'] = 'item'
-        event['wield'] = 1
-        event['character'] = character
-        event['item'] = item
-        event['location'] = character.location
-        event['level'] = character.level
-        event['proficient'] = character.is_proficient(item)
-        model.raise_event(event)
     else:
         #possible dual wield?
         if dual_wield == True:
             if len(character.weapons) == 1:
                 if can_dual_wield(model, character, character.weapons[0], item):
                     character.weapons.append(item)
-
-                    event = {}
-                    event['type'] = 'item'
-                    event['wield'] = 1
-                    event['character'] = character
-                    event['item'] = item
-                    event['location'] = character.location
-                    event['level'] = character.level
-                    event['proficient'] = character.is_proficient(item)
-                    model.raise_event(event)
 
 def can_dual_wield(model, character, item1, item2):
     """
@@ -178,14 +150,5 @@ def unwield(model, character, item, instant = False):
     .. warning:: This code will be eventually replaced by action sub system
     """
     character.weapons.remove(item)
-
-    event = {}
-    event['type'] = 'item'
-    event['unwield'] = 1
-    event['character'] = character
-    event['item'] = item
-    event['location'] = character.location
-    event['level'] = character.level
-    model.raise_event(event)
 
     return True

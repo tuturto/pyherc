@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010-2011 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -25,6 +25,7 @@ import pyherc.rules.ending
 import random
 import logging
 from pyherc.aspects import Logged
+from pyherc.events import AttackHitEvent
 
 class AttackAction(object):
     """
@@ -38,13 +39,18 @@ class AttackAction(object):
         """
         Default constructor
 
-        Args:
-            attack_type: type of the attack
-            to_hit: ToHit object for calculating if attack hits
-            damage: Damage object for calculating done damage
-            attacker: Character doing attack
-            target: Character being attacked
-            effect_factory: Factory used for creating magic effects
+        :param attack_type: type of the attack
+        :type attack_type: string
+        :param to_hit: ToHit object for calculating if attack hits
+        :type to_hit: ToHit
+        :param damage: Damage object for calculating done damage
+        :type damage: Damage
+        :param attacker: Character doing attack
+        :type attacker: Character
+        :param target: Character being attacked
+        :type target: Character
+        :param effect_factory: Factory used for creating magic effects
+        :type effect_factory: EffectFactory
         """
         self.action_type = 'attack'
         self.attack_type = attack_type
@@ -59,21 +65,19 @@ class AttackAction(object):
         """
         Executes this Attack
         """
-        event = {}
-        event['type'] = 'melee'
-        event['attacker'] = self.attacker
-        event['target'] = self.target
-        event['damage'] = self.damage
-        event['level'] = self.attacker.level
-        event['location'] = self.attacker.location
+        was_hit = self.to_hit.is_hit()
 
-        if self.to_hit.is_hit():
+        if was_hit:
             self.damage.apply_damage(self.target)
-            event['hit'] = True
-        else:
-            event['hit'] = False
 
-        self.attacker.raise_event(event)
+        self.attacker.raise_event(AttackHitEvent(
+                                        type = 'melee',
+                                        attacker = self.attacker,
+                                        target = self.target,
+                                        damage = self.damage,
+                                        level = self.attacker.level,
+                                        location = self.attacker.location,
+                                        hit = was_hit))
 
         self.trigger_attack_effects()
 
@@ -150,6 +154,7 @@ class Damage(object):
     def apply_damage(self, target):
         """
         Applies damage to target
-        @param target: Target to damage
+        :param target: target to damage
+        :type target: Character
         """
         target.hit_points = target.hit_points - self.damage

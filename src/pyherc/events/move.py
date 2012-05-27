@@ -27,5 +27,9 @@ class MoveEvent(Event):
     """
     Event that can be used to relay information about moving
     """
-    def __init__(self, **kwargs):
-        super(MoveEvent, self).__init__(**kwargs)
+    def __init__(self, level, location):
+        """
+        Default constructor
+        """
+        super(MoveEvent, self).__init__(level = level,
+                                        location = location)

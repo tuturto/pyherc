@@ -19,19 +19,23 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Classes for events
+Classes for move events
 """
-class Event(object):
+from pyherc.events.event import Event
+
+class AttackHitEvent(Event):
     """
-    Super class for events
+    Event that can be used to relay information about moving
     """
-    def __init__(self, level, location):
+    def __init__(self, level, location, type, attacker, target, damage, hit):
         """
         Default constructor
-
-        :param level: level where event happened
-        :type level: Level
         """
-        super(Event, self).__init__()
-        self.level = level
-        self.location = location
+        super(AttackHitEvent, self).__init__(level = level,
+                                             location = location)
+
+        self.type = type
+        self.attacker = attacker
+        self.target = target
+        self.damage = damage
+        self.hit = hit

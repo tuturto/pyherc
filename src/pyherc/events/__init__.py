@@ -22,3 +22,4 @@
 Package for events that are used to communicate between creatures and UI
 """
 from .move import MoveEvent
+from .combat import AttackHitEvent
