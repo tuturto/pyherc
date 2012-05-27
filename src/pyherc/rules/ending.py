@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -82,12 +82,6 @@ def check_dying(model, character, death_params):
     """
     assert character != None
     if character.hit_points <= 0:
-        event = {}
-        event['type'] = 'death'
-        event['character'] = character
-        event['location'] = character.location
-        event['level'] = character.level
-        model.raise_event(event)
         if character != model.player:
             character.level.remove_creature(character)
         else:
