@@ -57,7 +57,9 @@ class GameWindow(Container):
         Set layout of this screen
         """
         play_area = GameArea(self.application, self.surface_manager)
+        self.application.world.register_event_listener(play_area)
         self.add(play_area, 0, 0)
+
 
     def run(self):
         """
@@ -80,6 +82,7 @@ class GameArea(Widget):
         self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
                                     K_KP4:7, K_KP7:8, K_KP5:9}
         self.old_location = (0, 0)
+        self.dirty_tiles = []
 
     def paint(self,s):
         # Paint the pygame.Surface
@@ -167,12 +170,50 @@ class GameArea(Widget):
         # Update the pygame.Surface and return the update rects
         model = self.application.world
         player = model.player
+        level = player.level
 
         if self.old_location != player.location:
             self.old_location = player.location
             self.paint(s)
+            return [Rect(0,0,self.rect.w,self.rect.h)]
+        else:
+            light_matrix = get_fov_matrix(self.application.world, player, 13)
+            player = self.application.world.player
+            updated_tiles = []
 
-        return [Rect(0,0,self.rect.w,self.rect.h)]
+            for update in self.dirty_tiles:
+                screen_x = 384 + (update[0] - player.location[0]) * 32
+                screen_y = 280 + (update[1] - player.location[1]) * 32
+
+                if screen_x > 0 and screen_x < 768 and screen_y > 0 and screen_y < 568:
+                    #do update
+                    if light_matrix[update[0]][update[1]] == False:
+                        tile = self.surface_manager.get_icon(pyherc.data.tiles.FLOOR_EMPTY)
+                        s.blit(tile, (screen_x, screen_y))
+                    else:
+                        tile = self.surface_manager.get_icon(level.get_tile(update[0], update[1]))
+                        s.blit(tile, (screen_x, screen_y))
+
+                        #draw portals
+                        portal = level.get_portal_at(update)
+                        if portal != None:
+                            tile = self.surface_manager.get_icon(portal.icon)
+                            s.blit(tile, (screen_x, screen_y))
+                        #draw items
+                        items = level.get_items_at(update)
+                        if len(items) > 0:
+                            for item in items:
+                                tile = self.surface_manager.get_icon(item.icon)
+                                s.blit(tile, (screen_x, screen_y))
+                        #draw creatures
+                        creature = level.get_creature_at(update)
+                        if creature != None:
+                            tile = self.surface_manager.get_icon(creature.icon)
+                            s.blit(tile, (screen_x, screen_y))
+
+                    updated_tiles.append(Rect(screen_x, screen_y,
+                                              screen_x+32, screen_y+32))
+            return updated_tiles
 
     def event(self, event):
         # Handle the pygame.Event
@@ -267,4 +308,5 @@ class GameArea(Widget):
         :param event: event to receive
         :type event: Event
         """
-        pass
+        assert event != None
+        self.dirty_tiles.extend(event.affected_tiles)

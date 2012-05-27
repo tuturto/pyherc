@@ -34,7 +34,7 @@ from pyherc.gui.surfaceManager import SurfaceManager
 from pyherc.test import IntegrationTest
 from pyherc.gui.gamewindow import GameArea
 from pyherc.application import Application
-
+from pyherc.events import MoveEvent
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import ActionFactoryBuilder
@@ -84,13 +84,34 @@ class TestGameWindow(object):
                             surface_manager = mock(),
                             decorate = False)
 
+        game_gui.old_location = player.location
+
         model.register_event_listener(game_gui)
 
         monster.move(7)
         rects = game_gui.update(surface)
 
-        assert_that(rects, has_item(Rect(160, 88, 192, 120)))
-        assert_that(rects, has_item(Rect(192, 88, 224, 120)))
+        assert_that(rects, has_items(Rect(160, 88, 192, 120),
+                                     Rect(192, 88, 224, 120)))
+
+    def test_recording_dirty_tiles(self):
+        """
+        Test that GameArea records dirty tiles for updating based on events
+        """
+        level = LevelBuilder().build()
+
+        game_gui = GameArea(application = Application(),
+                            surface_manager = mock(),
+                            decorate = False)
+
+        tiles = [(10, 10),
+                 (11, 11)]
+
+        game_gui.receive_event(MoveEvent(level = level,
+                                         location = (10, 10),
+                                         affected_tiles = tiles))
+
+        assert_that(game_gui.dirty_tiles, has_items((10, 10), (11, 11)))
 
     def test_formatting_event_history_less_than_five_items(self):
         """
