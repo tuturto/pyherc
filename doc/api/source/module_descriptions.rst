@@ -12,6 +12,7 @@ On a high level, pyherc codebase is divided as detailed below:
         ai
         data
         debug
+        events
         generators
         gui
         rules
@@ -20,6 +21,7 @@ On a high level, pyherc codebase is divided as detailed below:
         pyherc->ai
         pyherc->data
         pyherc->debug
+        pyherc->events
         pyherc->generators
         pyherc->gui
         pyherc->rules
@@ -31,6 +33,7 @@ Convenient links to each of main components
   * :py:mod:`pyherc.ai`
   * :py:mod:`pyherc.data`
   * :py:mod:`pyherc.debug`
+  * :py:mod:`pyherc.events`
   * :py:mod:`pyherc.generators`
   * :py:mod:`pyherc.gui`
   * :py:mod:`pyherc.rules`

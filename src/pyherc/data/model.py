@@ -86,9 +86,14 @@ class Model(object):
         :param event: event to relay
         :type event: dict
         """
-        if event['level'] != None:
-            for creature in event['level'].creatures:
+        level = event.level
+
+        if level != None:
+            for creature in level.creatures:
                 creature.receive_event(event)
+
+        for listener in self.__event_listeners:
+            listener.receive_event(event)
 
     def get_next_creature(self):
         """

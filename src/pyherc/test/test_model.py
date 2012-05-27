@@ -24,8 +24,10 @@ Module for testing Model
 #pylint: disable=W0614
 from pyherc.data import Model
 from pyherc.test.matchers import has_event_listener
+from pyherc.test.builders import LevelBuilder
 from hamcrest import * #pylint: disable=W0401
-from mockito import mock
+from mockito import mock, verify
+from pyherc.events import MoveEvent
 
 class TestModel(object):
     """
@@ -37,14 +39,32 @@ class TestModel(object):
         """
         super(TestModel, self).__init__()
 
+        self.model = None
+        self.listener = None
+        self.level = None
+
+    def setup(self):
+        """
+        Setup test cases
+        """
+        self.model = Model()
+        self.listener = mock()
+        self.level = LevelBuilder().build()
+
+        self.model.register_event_listener(self.listener)
+
     def test_registering_event_listener(self):
         """
         Test that event listener can be registered on the model
         """
-        model = Model()
+        assert_that(self.model, has_event_listener(self.listener))
 
-        listener = mock()
+    def test_dispatching_event_to_listeners(self):
+        """
+        Test that events are dispatched to listeners
+        """
+        event = MoveEvent(level = self.level)
 
-        model.register_event_listener(listener)
+        self.model.raise_event(event)
 
-        assert_that(model, has_event_listener(listener))
+        verify(self.listener).receive_event(event)

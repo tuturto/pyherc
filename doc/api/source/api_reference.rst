@@ -12,6 +12,7 @@ Contents:
    module_config
    ai/module_ai
    data/module_data
+   events/package_events
    generators/module_generators
    gui/module_gui
    rules/module_rules
