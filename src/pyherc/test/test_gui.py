@@ -82,7 +82,9 @@ class TestGameWindow(object):
 
         game_gui = GameArea(application = application,
                             surface_manager = mock(),
-                            decorate = False)
+                            decorate = False,
+                            width = 800,
+                            height = 600)
 
         game_gui.old_location = player.location
 
@@ -93,6 +95,55 @@ class TestGameWindow(object):
 
         assert_that(rects, has_items(Rect(160, 88, 192, 120),
                                      Rect(192, 88, 224, 120)))
+
+    def test_player_moving_updates_whole_screen(self):
+        """
+        Test that moving player character reports whole screen updated
+        """
+        model = Model()
+        surface = mock()
+
+        player = (CharacterBuilder()
+                        .with_model(model)
+                        .as_player_character()
+                        .with_action_factory(ActionFactoryBuilder()
+                                                .with_model(model)
+                                                .with_move_factory())
+                        .with_name('player')
+                        .with_location((11, 11))
+                        .build())
+
+        monster = (CharacterBuilder()
+                        .with_model(model)
+                        .with_action_factory(ActionFactoryBuilder()
+                                                .with_model(model)
+                                                .with_move_factory())
+                        .with_name('rat')
+                        .with_location((5, 5))
+                        .build())
+
+        level = (LevelBuilder()
+                    .with_character(player)
+                    .with_character(monster)
+                    .build())
+
+        application = Application()
+        application.world = model
+
+        game_gui = GameArea(application = application,
+                            surface_manager = mock(),
+                            decorate = False,
+                            width = 800,
+                            height = 600)
+
+        game_gui.old_location = player.location
+
+        model.register_event_listener(game_gui)
+
+        player.move(7)
+        rects = game_gui.update(surface)
+
+        assert_that(rects, has_items(Rect(0, 0, 800, 600)))
 
     def test_recording_dirty_tiles(self):
         """

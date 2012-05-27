@@ -56,7 +56,8 @@ class GameWindow(Container):
         """
         Set layout of this screen
         """
-        play_area = GameArea(self.application, self.surface_manager)
+        play_area = GameArea(application = self.application,
+                             surface_manager = self.surface_manager)
         self.application.world.register_event_listener(play_area)
         self.add(play_area, 0, 0)
 
@@ -200,6 +201,9 @@ class GameArea(Widget):
         # Handle the pygame.Event
         model = self.application.world
         player = model.player
+
+        if player.tick > 0:
+            return
 
         if event != None:
             if event.type == pygame.QUIT:

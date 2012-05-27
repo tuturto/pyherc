@@ -73,7 +73,7 @@ class MoveAction(object):
 
         else:
             self.logger.warn('Tried to execute illegal move')
-            self.character.add_to_tick(2)
+            self.character.add_to_tick(1)
 
     @logged
     def is_legal(self):

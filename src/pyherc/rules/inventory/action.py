@@ -51,9 +51,8 @@ class PickUpAction(object):
             self.character.level.items.remove(self.item)
             self.character.inventory.append(self.item)
             self.item.location = ()
-            self.character.add_to_tick(1.5)
-        else:
-            self.character.add_to_tick(2)
+
+        self.character.add_to_tick(2)
 
     @logged
     def is_legal(self):

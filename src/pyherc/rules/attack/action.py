@@ -86,7 +86,7 @@ class AttackAction(object):
                                         self.target,
                                         self.target.model)
 
-        self.attacker.add_to_tick(20)
+        self.attacker.add_to_tick(3)
 
     @logged
     def trigger_attack_effects(self):
