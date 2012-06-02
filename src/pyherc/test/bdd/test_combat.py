@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#   Copyright 2010-2012 Tuukka Turto
+#
+#   This file is part of pyherc.
+#
+#   pyherc is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   pyherc is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
+
+"""
+Package for combat tests
+"""
+from .dictionary import strong, Adventurer
+from .dictionary import weak, Goblin
+from .dictionary import Level
+
+from .dictionary import place, middle_of
+from .dictionary import right_of
+from .dictionary import make,  hit
+
+from hamcrest import assert_that
+from .dictionary import has_less_hit_points
+
+class TestCombatBehaviour():
+    """
+    Combat related behaviour
+    """
+    def test_hitting_reduces_hit_points(self):
+        """
+        Getting hit should reduce hit points
+        """
+        Pete = strong(Adventurer())
+        Uglak = weak(Goblin())
+
+        place(Uglak, middle_of(Level()))
+        place(Pete, right_of(Uglak))
+
+        make(Uglak, hit(Pete))
+
+        assert_that(Pete, has_less_hit_points())

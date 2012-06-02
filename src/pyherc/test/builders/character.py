@@ -44,6 +44,7 @@ class CharacterBuilder(object):
         self.tick = 0
         self.attack = 1
         self.body = 1
+        self.mind = 1
 
         self.name = 'prototype'
 
@@ -100,6 +101,10 @@ class CharacterBuilder(object):
         self.speed = speed
         return self
 
+    def with_mind(self, mind):
+        self.mind = mind
+        return self
+
     def with_tick(self, tick):
         self.tick = tick
         return self
@@ -144,6 +149,7 @@ class CharacterBuilder(object):
         character.hit_points = self.hit_points
         character.max_hp = self.max_hp
 
+        character.mind = self.mind
         character.body = self.body
         character.attack = self.attack
 

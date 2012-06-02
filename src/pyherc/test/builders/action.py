@@ -87,7 +87,7 @@ class ActionFactoryBuilder(object):
                                         melee_combat_factory])
 
         if self.use_real_drink_factory == True:
-            drink_factory = DrinkFactory(effect_factory)
+            drink_factory = DrinkFactory(self.effect_factory)
 
         if self.use_real_inventory_factory == True:
             pick_up_factory = PickUpFactory()

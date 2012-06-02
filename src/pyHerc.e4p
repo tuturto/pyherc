@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-05-27, 12:00:33 -->
+<!-- Saved: 2012-06-01, 23:58:36 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -148,6 +148,9 @@
     <Source>pyherc/test/helpers/__init__.py</Source>
     <Source>pyherc/test/helpers/events.py</Source>
     <Source>pyherc/test/matchers/event.py</Source>
+    <Source>pyherc/test/bdd/__init__.py</Source>
+    <Source>pyherc/test/bdd/test_combat.py</Source>
+    <Source>pyherc/test/bdd/dictionary.py</Source>
   </Sources>
   <Forms>
   </Forms>
