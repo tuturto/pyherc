@@ -103,21 +103,6 @@ class TestMeleeCombat(IntegrationTest):
         assert_that(action, is_(instance_of(AttackAction)))
         assert_that(action.attack_type, is_(equal_to('unarmed')))
 
-    def test_unarmed_attack(self):
-        """
-        Test that unarmed attack will harm opponent
-        """
-        rng = StubRandomNumberGenerator()
-        rng.inject(12, [2, 2, 2, 2, 2, 2, 2])
-
-        self.character1.execute_action(AttackParameters(
-                                                self.character1,
-                                                3,
-                                                'unarmed',
-                                                rng))
-
-        assert_that(self.character2.hit_points, is_(less_than(10)))
-
     def test_events_in_unarmed_combat(self):
         """
         Test that attacking raises events

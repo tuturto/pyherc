@@ -28,6 +28,7 @@ from .dictionary import Level
 from .dictionary import place, middle_of
 from .dictionary import right_of
 from .dictionary import make,  hit
+from .dictionary import with_, Dagger
 
 from hamcrest import assert_that
 from .dictionary import has_less_hit_points
@@ -47,5 +48,19 @@ class TestCombatBehaviour():
         place(Pete, right_of(Uglak))
 
         make(Uglak, hit(Pete))
+
+        assert_that(Pete, has_less_hit_points())
+
+    def test_hitting_with_weapon_reduces_hit_points(self):
+        """
+        Getting hit by weapon should reduce hit points
+        """
+        Pete = strong(Adventurer())
+        Uglak = weak(Goblin())
+
+        place(Uglak, middle_of(Level()))
+        place(Pete, right_of(Uglak))
+
+        make(Uglak, hit(Pete, with_(Dagger())))
 
         assert_that(Pete, has_less_hit_points())

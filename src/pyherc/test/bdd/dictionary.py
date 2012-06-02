@@ -33,14 +33,36 @@ from hamcrest import assert_that, is_, equal_to
 from mockito import mock, when
 
 def strong(character):
+    """
+    Modifies character to be strong
+
+    :param character: character to modify
+    :type character: Character
+    """
     character.body = 10
+    character.hit_points = 20
+    character.maximum_hit_points = 20
     return character
 
 def weak(character):
+    """
+    Modifies character to be weak
+
+    :param character: character to modify
+    :type character: Character
+    """
     character.body = 2
+    character.hit_points = 5
+    character.maximum_hit_points = 5
     return character
 
 def Adventurer():
+    """
+    Creates a adventurer character
+
+    :returns: fully initialised adventurer
+    :rtype: Character
+    """
     character = (CharacterBuilder()
                     .with_action_factory(ActionFactoryBuilder()
                                             .with_move_factory()
@@ -59,6 +81,12 @@ def Adventurer():
     return character
 
 def Goblin():
+    """
+    Creates a goblin
+
+    :returns: fully initialised goblin
+    :rtype: Character
+    """
     character = (CharacterBuilder()
                     .with_action_factory(ActionFactoryBuilder()
                                             .with_move_factory()
@@ -75,25 +103,67 @@ def Goblin():
                     )
     return character
 
+def Dagger():
+    """
+    Creates a dagger
+    """
+    return None
+
 def Level():
+    """
+    Creates a level
+
+    :returns: fully initialised level
+    :rtype: Level
+    """
     level = (LevelBuilder()
                     .build())
     return level
 
 class LevelLocation(object):
+    """
+    Defines a location in game world
+    """
     def __init__(self, level, location):
+        """
+        Default constructor
+
+        :param level: level where location is
+        :type level: Level
+        :param location: location within level
+        :type location: (int, int)
+        """
         super(LevelLocation, self).__init__()
         self.level = level
         self.location = location
 
     def __str__(self):
+        """
+        Create string representation of location
+        """
         return 'level: {0}, location: {1}'.format(self.level,
                                                   self.location)
 
 def place(character, location):
+    """
+    Place character to given location
+
+    :param character: character to place
+    :type character: Character
+    :param location: location to place the character
+    :type location: LevelLocation
+    """
     location.level.add_creature(character, location.location)
 
 def middle_of(level):
+    """
+    Find out middle point of level
+
+    :param level: level to inspect
+    :type level: Level
+    :returns: middle point of level
+    :rtype: (int, int)
+    """
     x_loc = level.get_size()[0] // 2
     y_loc = level.get_size()[1] // 2
     location = LevelLocation(level, (x_loc, y_loc))
@@ -101,6 +171,14 @@ def middle_of(level):
     return location
 
 def right_of(object):
+    """
+    Find location on the right side of something
+
+    :param object: entity on map
+    :type object: Item or Creature
+    :returns: point right of the entity
+    :rtype: (int, int)
+    """
     x_loc = object.location[0] + 1
     y_loc = object.location[1]
     location = LevelLocation(object.level, (x_loc, y_loc))
@@ -108,37 +186,114 @@ def right_of(object):
     return location
 
 def make(actor, action):
+    """
+    Trigger an action
+
+    :param actor: actor doing the action
+    :type actor: Character
+    :param action: action to perfrom
+    """
     action(actor)
 
 class Hit(object):
+    """
+    Class representing a hit in unarmed combat
+    """
     def __init__(self, target):
+        """
+        Default constructor
+
+        :param target: target to attack
+        """
         super(Hit, self).__init__()
         self.target = target
 
     def __call__(self, attacker):
+        """
+        Performs the hit
+
+        :param attacker: character attacking
+        :type attacker: Character
+        """
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
 
         self.target.old_values = {}
         self.target.old_values['hit points'] = self.target.hit_points
-        #TODO: direction, attack type
+
         params = AttackParameters(attacker = attacker,
-                                  direction = 3,
+                                  direction = self.find_direction(attacker.location,
+                                                                  self.target.location),
                                   attack_type = 'unarmed',
                                   random_number_generator = rng)
 
         attacker.execute_action(params)
 
+    def find_direction(self, start, end):
+        """
+        Find direction from one point to another
+
+        :param start: start location
+        :type start: (int, int)
+        :param end: end location
+        :type end: (int, int)
+        """
+        direction = 0
+        if start[0] > end[0]:
+            #to left
+            if start[1] < end[1]:
+                direction = 8
+            elif start[1] > end[1]:
+                direction = 6
+            else:
+                direction = 7
+        elif start[0] < end[0]:
+            #to right
+            if start[1] < end[1]:
+                direction = 2
+            elif start[1] > end[1]:
+                direction = 4
+            else:
+                direction = 3
+        elif start[1] < end[1]:
+            #down
+            direction = 5
+        else:
+            #up
+            direction = 1
+        return direction
+
+
 def hit(target):
+    """
+    Hit target
+
+    :param target: target to hit
+    :returns: callable action
+    """
     action = Hit(target)
     return action
 
+def with_(something):
+    pass
+
 class HasLessHitPoints(BaseMatcher):
+    """
+    Matcher for checking that hit points have gone down
+    """
     def __init__(self):
+        """
+        Default constructor
+        """
         super(HasLessHitPoints, self).__init__()
         self.old_hit_points = None
 
     def _matches(self, item):
+        """
+        Check if match
+
+        :param item: match against this item
+        """
         if hasattr(item, 'old_values'):
             self.old_hit_points = item.old_values['hit points']
             if self.old_hit_points > item.hit_points:
@@ -149,14 +304,30 @@ class HasLessHitPoints(BaseMatcher):
             return False
 
     def describe_to(self, description):
+        """
+        Descripe the match
+
+        :param description: description text to append
+        :type description: string
+        """
         description.append(
                     'Character with less than {0} hitpoints'.format(
                                                         self.old_hit_points))
 
     def describe_mismatch(self, item, mismatch_description):
+        """
+        Descripe the mismatch
+
+        :item: mismatching item
+        :param mismatch_description: description text to append
+        :type mismatch_description: string
+        """
         mismatch_description.append(
                         'Character has {0} hit points'.format(
                                                         item.hit_points))
 
 def has_less_hit_points():
+    """
+    Check that hit points have gone down
+    """
     return HasLessHitPoints()
