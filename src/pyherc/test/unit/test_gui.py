@@ -31,7 +31,7 @@ import pyherc.gui.windows
 from pyherc.data import Character
 from pyherc.data import Model
 from pyherc.gui.surfaceManager import SurfaceManager
-from pyherc.test import IntegrationTest
+from pyherc.test.unit import IntegrationTest
 from pyherc.gui.gamewindow import GameArea
 from pyherc.application import Application
 from pyherc.events import MoveEvent

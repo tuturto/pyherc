@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -22,6 +22,7 @@
 Module for item builder
 """
 from pyherc.data import Item, EffectsCollection
+from pyherc.data.item import WeaponData
 
 class ItemBuilder(object):
     """
@@ -37,6 +38,7 @@ class ItemBuilder(object):
         self.effect_handles = []
         self.location = ()
         self.icon = 0
+        self.weapon_data = None
 
     def with_name(self, name):
         self.name = name
@@ -61,6 +63,12 @@ class ItemBuilder(object):
         self.icon = icon
         return self
 
+    def with_damage(self, damage):
+        if self.weapon_data == None:
+            self.weapon_data = WeaponData()
+        self.weapon_data.damage = damage
+        return self
+
     def build(self):
         """
         Build item
@@ -74,6 +82,8 @@ class ItemBuilder(object):
         item.appearance = self.appearance
         item.location = self.location
         item.icon = self.icon
+        if self.weapon_data != None:
+            item.weapon_data = self.weapon_data
 
         for handle in self.effect_handles:
             item.add_effect_handle(handle)

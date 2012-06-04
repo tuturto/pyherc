@@ -8,6 +8,7 @@ New features
 
   - Certain creatures can make poisoned attacks
   - Title music
+  - First version of Cutesy testing language included
 
 **********
 Fixed bugs
@@ -25,4 +26,4 @@ Other notes
   - documentation regarding to testing added
   - internals of inventory handling improved
   - improved internals of user interface
-  
+  - tests are grouped by function (unit, integration, acceptance)

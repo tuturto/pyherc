@@ -29,7 +29,7 @@ import pyherc.data.dungeon
 import pyherc.rules.items
 import pyherc.rules.tables
 from random import Random
-from pyherc.test import IntegrationTest
+from pyherc.test.unit import IntegrationTest
 from pyherc.data import Level
 from pyherc.test.builders import ItemBuilder
 from pyherc.test.builders import CharacterBuilder

@@ -26,8 +26,8 @@ import pyherc
 from pyherc.data import Character
 from pyherc.data import Dungeon
 from pyherc.generators.level.testlevel import TestLevelGenerator
-from pyherc.test import IntegrationTest
-from pyherc.test import StubRandomNumberGenerator
+from pyherc.test.unit import IntegrationTest
+from pyherc.test.unit import StubRandomNumberGenerator
 
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.action import AttackAction
@@ -125,22 +125,3 @@ class TestMeleeCombat(IntegrationTest):
         character1.perform_attack(5)
 
         verify(character2).receive_event(any())
-
-    def test_attack_with_weapon(self):
-        """
-        Test that attack with a weapon will reduce targets hit points
-        """
-        rng = StubRandomNumberGenerator()
-        rng.inject(12, [2, 2, 2, 2, 2, 2, 2])
-
-        dagger = self.item_generator.generate_item({'name': 'dagger'})
-
-        pyherc.rules.items.wield(self.model, self.character1, dagger)
-
-        self.character1.execute_action(AttackParameters(
-                                                self.character1,
-                                                3,
-                                                'melee',
-                                                rng))
-
-        assert_that(self.character2.hit_points, is_(equal_to(8)))

@@ -24,6 +24,7 @@ Dictionary for behaviour driven tests
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.builders import LevelBuilder
+from pyherc.test.builders import ItemBuilder
 
 from pyherc.rules import AttackParameters
 
@@ -80,7 +81,7 @@ def Adventurer():
                     )
     return character
 
-def Goblin():
+def Goblin(action = None):
     """
     Creates a goblin
 
@@ -101,13 +102,21 @@ def Goblin():
                     .with_name('Goblin')
                     .build()
                     )
+    if action != None:
+        action(character)
+
     return character
 
 def Dagger():
     """
     Creates a dagger
     """
-    return None
+    item = (ItemBuilder()
+                .with_name('dagger')
+                .with_damage(2)
+                .build())
+
+    return item
 
 def Level():
     """
@@ -221,10 +230,15 @@ class Hit(object):
         self.target.old_values = {}
         self.target.old_values['hit points'] = self.target.hit_points
 
+        if len(attacker.weapons) > 0:
+            attack_type = 'melee'
+        else:
+            attack_type = 'unarmed'
+
         params = AttackParameters(attacker = attacker,
                                   direction = self.find_direction(attacker.location,
                                                                   self.target.location),
-                                  attack_type = 'unarmed',
+                                  attack_type = attack_type,
                                   random_number_generator = rng)
 
         attacker.execute_action(params)
@@ -274,8 +288,35 @@ def hit(target):
     action = Hit(target)
     return action
 
-def with_(something):
-    pass
+class WieldAction(object):
+    """
+    Action to get chracter to wield something
+    """
+    def __init__(self, weapon):
+        """
+        Default constructor
+
+        :param weapon: weapon to wield
+        :type weapon: Item
+        """
+        self.weapon = weapon
+
+    def __call__(self, character):
+        """
+        Wield the item
+
+        :param character: character wielding the weapon
+        :type character: Character
+        """
+        character.weapons.append(self.weapon)
+        return character
+
+def wielding(weapon):
+    """
+    Make a character to wield a weapon
+    """
+    action = WieldAction(weapon)
+    return action
 
 class HasLessHitPoints(BaseMatcher):
     """

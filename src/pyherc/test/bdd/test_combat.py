@@ -21,17 +21,17 @@
 """
 Package for combat tests
 """
-from .dictionary import strong, Adventurer
-from .dictionary import weak, Goblin
-from .dictionary import Level
+from pyherc.test.cutesy.dictionary import strong, Adventurer
+from pyherc.test.cutesy.dictionary import weak, Goblin
+from pyherc.test.cutesy.dictionary import Level
 
-from .dictionary import place, middle_of
-from .dictionary import right_of
-from .dictionary import make,  hit
-from .dictionary import with_, Dagger
+from pyherc.test.cutesy.dictionary import place, middle_of
+from pyherc.test.cutesy.dictionary import right_of
+from pyherc.test.cutesy.dictionary import make,  hit
+from pyherc.test.cutesy.dictionary import wielding, Dagger
 
 from hamcrest import assert_that
-from .dictionary import has_less_hit_points
+from pyherc.test.cutesy.dictionary import has_less_hit_points
 
 class TestCombatBehaviour():
     """
@@ -56,11 +56,11 @@ class TestCombatBehaviour():
         Getting hit by weapon should reduce hit points
         """
         Pete = strong(Adventurer())
-        Uglak = weak(Goblin())
+        Uglak = weak(Goblin(wielding(Dagger())))
 
         place(Uglak, middle_of(Level()))
         place(Pete, right_of(Uglak))
 
-        make(Uglak, hit(Pete, with_(Dagger())))
+        make(Uglak, hit(Pete))
 
         assert_that(Pete, has_less_hit_points())

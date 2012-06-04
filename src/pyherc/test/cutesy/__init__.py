@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2010-2012 Tuukka Turto
+#   Copyright 2010 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -19,6 +19,6 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for tests
+Package for testing dsl
 """
 pass

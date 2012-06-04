@@ -29,7 +29,7 @@ import pyherc
 from pyherc.data import Dungeon
 from pyherc.data import Portal
 from pyherc.generators.level.testlevel import TestLevelGenerator
-from pyherc.test import IntegrationTest
+from pyherc.test.unit import IntegrationTest
 from pyherc.test.builders import CharacterBuilder
 
 from pyherc.data import Model
