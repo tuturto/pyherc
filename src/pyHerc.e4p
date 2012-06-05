@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-06-04, 20:21:27 -->
+<!-- Saved: 2012-06-05, 20:43:17 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -153,6 +153,7 @@
     <Source>pyherc/test/unit/test_tables.py</Source>
     <Source>pyherc/test/cutesy/__init__.py</Source>
     <Source>pyherc/test/cutesy/dictionary.py</Source>
+    <Source>pyherc/gui/inventory.py</Source>
   </Sources>
   <Forms>
   </Forms>

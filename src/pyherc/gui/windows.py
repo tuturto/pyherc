@@ -46,6 +46,7 @@ from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8
 from pyherc.gui.options import OptionsMenu
 from pyherc.gui.startmenu import StartMenu
 from pyherc.gui.gamewindow import GameWindow
+from pyherc.gui.inventory import InventoryWindow
 
 class MainWindow(pgu.gui.app.App):
     """
@@ -94,7 +95,9 @@ class MainWindow(pgu.gui.app.App):
         elif state == 'game window':
             mode = GameWindow(self.application,
                               self.surface_manager)
-
+        elif state == 'inventory':
+            mode = InventoryWindow(self.application,
+                                   self.surface_manager)
         if state != None:
             self.init(widget = mode)
 

@@ -8,6 +8,7 @@ pyherc.gui
    
    module_dialogs
    module_images
+   module_inventory
    module_startmenu
    module_options
    module_surfacemanager

@@ -235,12 +235,7 @@ class GameArea(Widget):
                         player.level.full_update_needed = True
                 elif event.key == K_i:
                     #display inventory
-                    dialog = dialogs.Inventory(self.application,
-                                                   self.screen,
-                                                   self.surface_manager,
-                                                   player)
-                    dialog.show(player.inventory, 0)
-                    player.level.full_update_needed = True
+                    self.application.change_state('inventory')
                 elif event.key == K_d:
                     #drop items
                     dialog = dialogs.Inventory(self.application,
