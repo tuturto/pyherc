@@ -67,11 +67,12 @@ Coverage report is placed in cover - directory.
 Writing tests
 =============
 
-Nose
-----
-Nosetests are placed in package :py:mod:`pyherc.test` Any module that is named
-as "test_*" will be inspected automatically by Nose when it is gathering tests
-to run. It will search for classes named "Test*" and methods named "test_*".
+Unit tests
+----------
+Unit tests are placed in package :py:mod:`pyherc.test.unit` Any module that is
+named as "test_*" will be inspected automatically by Nose when it is gathering
+tests to run. It will search for classes named "Test*" and methods named 
+"test_*".
 
 Following code is simple test that creates EffectHandle object and tries to
 add it into EffectsCollection object. Then it verifies that it actually was
@@ -122,6 +123,49 @@ cleaner. If the internal implementation of class changes, we need to only
 change how builders construct it and how matchers match it and tests should not
 need any modifications. Custom matchers can be found at 
 :py:mod:`pyherc.test.matchers` module.
+
+Cutesy
+------
+Cutesy is an internal domain specific language. Basically, it's just a 
+collection of functions that can be used to contruct nice looking tests. Theory
+is that these easy to read tests can be used to communicate what the system
+is supposed to be doing on a high level, without making things complicated
+with all the technical details.
+
+Here's an example, how to test that getting hit will cause hit points to go
+down.
+
+.. testcode::
+
+    from pyherc.test.cutesy.dictionary import strong, Adventurer
+    from pyherc.test.cutesy.dictionary import weak, Goblin
+    from pyherc.test.cutesy.dictionary import Level
+
+    from pyherc.test.cutesy.dictionary import place, middle_of
+    from pyherc.test.cutesy.dictionary import right_of
+    from pyherc.test.cutesy.dictionary import make,  hit
+
+    from hamcrest import assert_that
+    from pyherc.test.cutesy.dictionary import has_less_hit_points
+
+    class TestCombatBehaviour():
+    
+        def test_hitting_reduces_hit_points(self):
+            Pete = strong(Adventurer())
+            Uglak = weak(Goblin())
+
+            place(Uglak, middle_of(Level()))
+            place(Pete, right_of(Uglak))
+
+            make(Uglak, hit(Pete))
+
+            assert_that(Pete, has_less_hit_points())
+        
+    test = TestCombatBehaviour()
+    test.test_hitting_reduces_hit_points()
+
+Tests written with Cutesy follow same guidelines as regular unit tests. However
+they are placed in package :py:mod:`pyherc.test.bdd`
     
 Doctest
 -------
@@ -141,3 +185,4 @@ view source of this page, you can see how it has been constructed.
 
 More information can be found at 
 `Sphinx documentation <http://sphinx.pocoo.org/ext/doctest.html>`_.
+
