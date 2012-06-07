@@ -71,6 +71,7 @@ class StartMenu(pgu.gui.Container):
         b = pgu.gui.Button("New game", width=150)
         self.add(b, 325, 200)
         b.connect(pgu.gui.CLICK, self.__start_new_game)
+        b.focus()
 
         b = pgu.gui.Button("Load game", width=150)
         self.add(b, 325, 250)

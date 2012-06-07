@@ -60,6 +60,7 @@ class GameWindow(Container):
                              surface_manager = self.surface_manager)
         self.application.world.register_event_listener(play_area)
         self.add(play_area, 0, 0)
+        play_area.focus()
 
 
     def run(self):
