@@ -208,7 +208,6 @@ class GameArea(Widget):
 
         if event != None:
             if event.type == pygame.QUIT:
-                self.logger.info('Quit received, exiting')
                 self.application.running = 0
             if event.type == pygame.KEYDOWN:
                 if event.key == K_ESCAPE:
@@ -222,61 +221,9 @@ class GameArea(Widget):
                         player.move(direction)
                     else:
                         player.perform_attack(direction)
-                elif event.key == K_PERIOD:
-                    #pick up items
-                    items = player.level.get_items_at(player.location)
-                    if len(items) > 1:
-                        dialog = dialogs.Inventory(self.application,
-                                                       self.screen,
-                                                       self.surface_manager,
-                                                       player)
-                        items = dialog.show(items)
-                        for item in items:
-                            player.pick_up(item)
-                        player.level.full_update_needed = True
                 elif event.key == K_i:
                     #display inventory
                     self.application.change_state('inventory')
-                elif event.key == K_d:
-                    #drop items
-                    dialog = dialogs.Inventory(self.application,
-                                                   self.screen,
-                                                   self.surface_manager,
-                                                   player)
-                    dropItems = dialog.show(player.inventory)
-                    for item in dropItems:
-                        pyherc.rules.items.drop(model, player, item)
-                    player.level.full_update_needed = True
-                elif event.key == K_w:
-                    #wield weapons
-                    dialog = dialogs.Inventory(self.application,
-                                                   self.screen,
-                                                   self.surface_manager,
-                                                   player)
-                    wieldItems = dialog.show(player.inventory, 2)
-                    for item in wieldItems:
-                        pyherc.rules.items.wield(model, player, item, True)
-                    player.level.full_update_needed = True
-                elif event.key == K_r:
-                    #unwield weapons
-                    dialog = dialogs.Inventory(self.application,
-                                                   self.screen,
-                                                   self.surface_manager,
-                                                   player)
-                    removable = dialog.show(player.weapons)
-                    for item in removable:
-                        pyherc.rules.items.unwield(model, player, item)
-                    player.level.full_update_needed = True
-                elif event.key == K_q:
-                    #quaff potion
-                    dialog = dialogs.Inventory(self.application,
-                                                   self.screen,
-                                                   self.surface_manager,
-                                                   player)
-                    potion = dialog.show(player.inventory, 1)
-                    if len(potion) == 1:
-                        player.drink(potion[0])
-                    player.level.full_update_needed = True
 
     def resize(self,width=None,height=None):
         # Return the width and height of this widget
