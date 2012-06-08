@@ -448,7 +448,7 @@ class Character(object):
         :param handle: handle to remove
         :type handle: EffectHandle
         """
-        self.effects_collection.remove_effect_handle(handle)
+        self.__effects_collection.remove_effect_handle(handle)
 
     @logged
     def add_effect(self, effect):
