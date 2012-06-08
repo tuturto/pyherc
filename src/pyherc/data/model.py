@@ -23,8 +23,6 @@ Module for Model related classes
 """
 
 import logging
-import random
-from .effectscollection import EffectsCollection
 from pyherc.aspects import Logged
 
 class Model(object):

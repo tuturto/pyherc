@@ -63,7 +63,6 @@ class EffectsCollection(object):
         """
         if trigger is None:
             effects = []
-            keys = self.handles.keys()
             for key in self.handles:
                 for handle in self.handles[key]:
                     effects.append(handle)

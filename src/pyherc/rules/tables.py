@@ -28,7 +28,7 @@ import pyherc
 import pyherc.data.model
 from xml import sax
 
-class Tables:
+class Tables(object):
     """
     Class representing tables
     """
@@ -37,6 +37,7 @@ class Tables:
         """
         Default constructor
         """
+        super(Tables, self).__init__()
         self.__initialised = 0
         # all items, name as key
         self.items = {}
@@ -122,43 +123,44 @@ class Tables:
         parser.setContentHandler(handler)
         file = StringIO.StringIO(document)
         parser.parse(file)
-        self.creatures = handler.creatures
+        self.__creatures = handler.creatures
         self.logger.info('creature config read from xml')
         self.logger.info('{0} creatures found'
                           .format(len(self.creatures.keys())))
 
-    def load_tables(self, base_path = None, itemConfig = None, creatureConfig = None):
+    def load_tables(self, base_path = None, item_config = None,
+                    creature_config = None):
         """
         Initialise tables
 
         Args:
             base_path: directory from where to load files
-            itemConfig: optional config string for items
-            creatureConfig: optional config string for creatures
+            item_config: optional config string for items
+            creature_config: optional config string for creatures
         """
 
         if self.__initialised:
             return
 
-        if itemConfig != None:
+        if item_config != None:
             #use passed config
-            self.read_items_from_xml(itemConfig)
+            self.read_items_from_xml(item_config)
         else:
             #open file and read from there
             f = open(os.path.join(base_path, 'items.xml'), 'r')
-            itemConfig = f.read()
+            item_config = f.read()
             f.close()
-            self.read_items_from_xml(itemConfig)
+            self.read_items_from_xml(item_config)
 
-        if creatureConfig != None:
+        if creature_config != None:
             #use passed config
-            self.read_creatures_from_xml(creatureConfig)
+            self.read_creatures_from_xml(creature_config)
         else:
             #open file and read from there
             f = open(os.path.join(base_path, 'creatures.xml'), 'r')
-            creatureConfig = f.read()
+            creature_config = f.read()
             f.close()
-            self.read_creatures_from_xml(creatureConfig)
+            self.read_creatures_from_xml(creature_config)
 
         self.potion_appearances = [
                                 ('dark flask', pyherc.data.tiles.ITEM_POTION_1),
@@ -242,8 +244,8 @@ class Tables:
         """
         Construct lookup tables for different kinds of items
         """
-        self.items_by_tag = {}
-        self.tag_score = {}
+        self.__items_by_tag = {}
+        self.__tag_score = {}
 
         for itemKey in self.items.keys():
             for type in self.items[itemKey]['type']:

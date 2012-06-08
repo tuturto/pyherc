@@ -32,7 +32,6 @@ InventoryParameters - Class used to guide inventory related actions
 """
 
 import types
-import random
 from pyherc.aspects import Logged
 
 class ActionFactory(object):

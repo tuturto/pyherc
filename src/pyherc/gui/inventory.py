@@ -22,15 +22,10 @@
 Module for inventory menu related functionality
 """
 
-import logging
-import images
-import pyherc
 import pygame
 import pgu.gui
-import os
 
 from pygame.locals import K_ESCAPE
-from pyherc.gui.gamewindow import GameWindow
 
 class InventoryWindow(pgu.gui.Container):
     """

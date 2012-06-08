@@ -24,8 +24,8 @@ Module for various windows used in game
 
 import pygame
 import logging
-import images
-import dialogs
+import pyherc.gui.images
+import pyherc.gui.dialogs
 import pyherc.rules.character
 import pyherc.data.model
 import pyherc.data.tiles
@@ -36,8 +36,6 @@ import pyherc.rules.tables
 import pyherc.gui.startmenu
 import pgu.gui.app
 from pyherc.aspects import Logged
-from pyherc.rules.public import MoveParameters
-from pyherc.rules.public import AttackParameters
 from pyherc.rules.los import get_fov_matrix
 from pygame.locals import K_ESCAPE, K_PERIOD
 from pygame.locals import K_d, K_w, K_r, K_q,  K_i
@@ -172,8 +170,10 @@ class OldGameWindow:
         self.screen = screen
         self.fullUpdate = 1
         self.surface_manager = surface_manager
-        self.background = self.surface_manager.get_image(images.image_play_area)
-        self.console = self.surface_manager.get_image(images.image_console)
+        self.background = self.surface_manager.get_image(
+                                            pyherc.gui.images.image_play_area)
+        self.console = self.surface_manager.get_image(
+                                            pyherc.gui.images.image_console)
         self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
                                     K_KP4:7, K_KP7:8, K_KP5:9}
         self.eventHistory = []

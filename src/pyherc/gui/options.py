@@ -22,11 +22,8 @@
 Module for options menu related functionality
 """
 
-import logging
-import images
-import pyherc
+import pyherc.gui.images
 import pgu.gui
-import pygame
 
 class OptionsMenu(pgu.gui.Container):
     """

@@ -227,7 +227,8 @@ class Configuration(object):
         config.decorators.extend(new_config.decorators)
         config.item_adders.extend(new_config.item_adders)
         config.creature_adders.extend(new_config.creature_adders)
-        config.portal_adder_configurations.extend(new_config.portal_adder_configurations)
+        config.portal_adder_configurations.extend(
+                                    new_config.portal_adder_configurations)
 
     def init_catacombs(self):
         """
@@ -257,10 +258,11 @@ class Configuration(object):
                                             WALL_EMPTY)
         wallbuilder = WallBuilderDecorator(wallbuilder_config)
 
-        aggregate_decorator_config = AggregateDecoratorConfig(['upper catacombs',
-                                                              'lower catacombs'],
-                                                              [wallbuilder,
-                                                              replacer])
+        aggregate_decorator_config = AggregateDecoratorConfig(
+                                                    ['upper catacombs',
+                                                    'lower catacombs'],
+                                                    [wallbuilder,
+                                                    replacer])
 
         decorators = [AggregateDecorator(aggregate_decorator_config)]
 
@@ -304,14 +306,16 @@ class Configuration(object):
                                         ]
 
         portal_adder_configurations = [PortalAdderConfiguration(
-                                            icons = (PORTAL_STAIRS_DOWN, PORTAL_STAIRS_UP),
+                                            icons = (PORTAL_STAIRS_DOWN,
+                                                     PORTAL_STAIRS_UP),
                                             level_type = 'upper catacombs',
                                             location_type = 'room',
                                             chance = 100,
                                             new_level = 'lower catacombs',
                                             unique = True),
                                         PortalAdderConfiguration(
-                                            icons = (PORTAL_STAIRS_DOWN, PORTAL_STAIRS_UP),
+                                            icons = (PORTAL_STAIRS_DOWN,
+                                                     PORTAL_STAIRS_UP),
                                             level_type = 'upper catacombs',
                                             location_type = 'room',
                                             chance = 25,

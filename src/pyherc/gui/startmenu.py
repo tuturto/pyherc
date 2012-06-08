@@ -23,13 +23,11 @@ Module for start menu related functionality
 """
 
 import logging
-import images
+import pyherc.gui.images
 import pyherc
 import pygame
 import pgu.gui
 import os
-
-from pyherc.gui.options import OptionsMenu
 
 class StartMenu(pgu.gui.Container):
     """
@@ -65,7 +63,7 @@ class StartMenu(pgu.gui.Container):
         """
         bg = pgu.gui.Image(
                 self.surface_manager.get_image(
-                        images.image_start_menu))
+                        pyherc.gui.images.image_start_menu))
         self.add(bg, 0, 0)
 
         b = pgu.gui.Button("New game", width=150)

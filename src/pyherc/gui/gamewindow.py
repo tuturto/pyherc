@@ -26,8 +26,8 @@ from pgu.gui import Widget
 from pgu.gui import Container
 from pygame import Rect
 
-from pygame.locals import K_ESCAPE, K_PERIOD
-from pygame.locals import K_d, K_w, K_r, K_q,  K_i
+from pygame.locals import K_ESCAPE
+from pygame.locals import K_i
 from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8, K_KP9
 
 import pygame
@@ -81,8 +81,8 @@ class GameArea(Widget):
         self.application = application
         self.surface_manager = surface_manager
 
-        self.moveKeyMap = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5, K_KP1:6,
-                                    K_KP4:7, K_KP7:8, K_KP5:9}
+        self.move_key_map = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5,
+                             K_KP1:6, K_KP4:7, K_KP7:8, K_KP5:9}
         self.old_location = (0, 0)
         self.dirty_tiles = []
 
@@ -158,7 +158,7 @@ class GameArea(Widget):
         if self.old_location != player.location:
             self.old_location = player.location
             self.paint(s)
-            return [Rect(0,0,self.rect.w,self.rect.h)]
+            return [Rect(0, 0, self.rect.w, self.rect.h)]
         else:
             light_matrix = get_fov_matrix(self.application.world, player, 13)
             player = self.application.world.player
@@ -213,10 +213,10 @@ class GameArea(Widget):
                 if event.key == K_ESCAPE:
                     #quit
                     self.application.world.end_condition = 1
-                elif event.key in self.moveKeyMap.keys():
+                elif event.key in self.move_key_map.keys():
                     player.level.full_update_needed = True
                     #handle moving
-                    direction = self.moveKeyMap[event.key]
+                    direction = self.move_key_map[event.key]
                     if player.is_move_legal(direction, 'walk'):
                         player.move(direction)
                     else:
@@ -225,7 +225,7 @@ class GameArea(Widget):
                     #display inventory
                     self.application.change_state('inventory')
 
-    def resize(self,width=None,height=None):
+    def resize(self, width=None, height=None):
         # Return the width and height of this widget
         return 800, 600
 
