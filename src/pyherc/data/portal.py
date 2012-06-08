@@ -23,7 +23,6 @@ Module containing classes to represent Portals
 """
 
 import logging
-import pyherc.data.tiles
 from pyherc.aspects import Logged
 
 class Portal(object):

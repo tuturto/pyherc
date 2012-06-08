@@ -23,7 +23,6 @@ Module containing classes to represent dungeon
 """
 
 import logging
-import pyherc.data.tiles
 from pyherc.aspects import Logged
 
 class Dungeon(object):

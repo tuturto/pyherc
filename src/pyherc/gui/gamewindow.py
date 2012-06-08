@@ -36,6 +36,9 @@ from pyherc.rules.los import get_fov_matrix
 
 
 class GameWindow(Container):
+    """
+    Container for Game window
+    """
 
     def __init__(self,  application, surface_manager, **params):
         """
@@ -86,16 +89,19 @@ class GameArea(Widget):
         self.old_location = (0, 0)
         self.dirty_tiles = []
 
-    def paint(self,s):
-        # Paint the pygame.Surface
+    def paint(self, s):
+        """
+        Paint this widget on given surface
+
+        :param s: surface to paint on
+        :type s: Surface
+        """
         player = self.application.world.player
         level = player.level
 
         player.level.full_update_needed = False
 
         light_matrix = get_fov_matrix(self.application.world, player, 13)
-
-        #s.blit(self.background, (0, 0))
 
         sy = 0
         for y in range(player.location[1] - 9, player.location[1] + 10):
