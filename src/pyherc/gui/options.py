@@ -54,7 +54,7 @@ class OptionsMenu(pgu.gui.Container):
         """
         bg = pgu.gui.Image(
                 self.surface_manager.get_image(
-                        images.image_start_menu))
+                        pyherc.gui.images.image_start_menu))
         self.add(bg, 0, 0)
 
         b = pgu.gui.Button("Back", width=150)
