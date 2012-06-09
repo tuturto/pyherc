@@ -27,3 +27,4 @@ Other notes
   - internals of inventory handling improved
   - improved internals of user interface
   - tests are grouped by function (unit, integration, acceptance)
+  - IntegrationTest class has been removed

@@ -31,24 +31,6 @@ Keyboard
 
 Player can move around using keypad.
 
-*************
-Picking items
-*************
-
-Keyboard
-========
-
-Items can be picked up by pressing .
-
-**************
-Dropping items
-**************
-
-Keyboard
-========
-
-Items can be dropped by pressing d
-
 *****************
 Attacking enemies
 *****************
