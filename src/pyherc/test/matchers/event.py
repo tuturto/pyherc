@@ -22,7 +22,6 @@
 Module for event listener matchers used in testing
 """
 
-from hamcrest import * #pylint: disable=W0401
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
@@ -34,9 +33,17 @@ class EventRedraws(BaseMatcher):
         """
         Default constructor
         """
+        super(EventRedraws, self).__init__()
         self.redraws = redraws
 
     def _matches(self, item):
+        """
+        Check if matcher matches item
+
+        :param item: object to match against
+        :returns: True if matching, otherwise False
+        :rtype: Boolean
+        """
         for redraw in self.redraws:
             if not redraw in item.affected_tiles:
                 return False
@@ -44,13 +51,22 @@ class EventRedraws(BaseMatcher):
         return True
 
     def describe_to(self, description):
+        """
+        Describe this match
+        """
         description.append(
                     'Event with affected tiles {0}'
                     .format(self.redraws))
 
     def describe_mismatch(self, item, mismatch_description):
+        """
+        Describe this mismatch
+        """
         mismatch_description.append('Was event with affected tiles {0}'
                                     .format(item.affected_tiles))
 
 def has_marked_for_redrawing(redraws):
+    """
+    Check that item has given sections marked for redrawing
+    """
     return EventRedraws(redraws)

@@ -22,7 +22,6 @@
 Module for event listener matchers used in testing
 """
 
-from hamcrest import * #pylint: disable=W0401
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
@@ -34,19 +33,36 @@ class EventListeners(BaseMatcher):
         """
         Default constructor
         """
+        super(EventListeners, self).__init__()
         self.listener = listener
 
     def _matches(self, item):
+        """
+        Check if matcher matches item
+
+        :param item: object to match against
+        :returns: True if matching, otherwise False
+        :rtype: Boolean
+        """
         return self.listener in item.get_event_listeners()
 
     def describe_to(self, description):
+        """
+        Describe this match
+        """
         description.append(
                     'Object with event listener {0}'
                     .format(self.listener))
 
     def describe_mismatch(self, item, mismatch_description):
+        """
+        Describe this mismatch
+        """
         mismatch_description.append('Was object with listeners {0}'
                                     .format(item.get_event_listeners()))
 
 def has_event_listener(listener):
+    """
+    Check if item has event listener
+    """
     return EventListeners(listener)

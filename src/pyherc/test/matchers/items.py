@@ -22,7 +22,6 @@
 Module for customer matchers used in testing
 """
 
-from hamcrest import * #pylint: disable=W0401
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
@@ -34,12 +33,17 @@ class ContainsItem(BaseMatcher):
         """
         Default constructor
         """
+        super(ContainsItem, self).__init__()
         self.item = item
         self.amount = amount
 
     def _matches(self, item):
         """
-        Check for match
+        Check if matcher matches item
+
+        :param item: object to match against
+        :returns: True if matching, otherwise False
+        :rtype: Boolean
         """
         count = 0
 
@@ -75,8 +79,9 @@ def does_have_item(item, amount):
     """
     Check if level has given item
 
-    Args:
-        item: Name of the item to check
-        amount: Amount of items to expect
+    :param item: name of the item to check
+    :type item: String
+    :param amount: amount of items to expect
+    :type amount: int
     """
     return ContainsItem(item, wrap_matcher(amount))

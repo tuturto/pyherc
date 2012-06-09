@@ -22,7 +22,7 @@
 Module for customer matchers used in testing
 """
 
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import is_not
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
@@ -34,12 +34,17 @@ class ContainsCreature(BaseMatcher):
         """
         Default constructor
         """
+        super(ContainsCreature, self).__init__()
         self.creature = creature
         self.amount = amount
 
     def _matches(self, item):
         """
-        Check for match
+        Check if matcher matches item
+
+        :param item: object to match against
+        :returns: True if matching, otherwise False
+        :rtype: Boolean
         """
         count = 0
 
@@ -75,9 +80,10 @@ def has_creature(creature, amount):
     """
     Check if level has given creature
 
-    Args:
-        creature: Name of the creature to check
-        amount: Amount of creatures to expect
+    :param creature: name of the creature to check
+    :type creature: String
+    :param amount: amount of creatures to expect
+    :type amount: int
     """
     return ContainsCreature(creature, wrap_matcher(amount))
 
@@ -89,12 +95,17 @@ class IsLocatedIn(BaseMatcher):
         """
         Default constructor
         """
+        super(IsLocatedIn, self).__init__()
         self.level = level
         self.item = None
 
     def _matches(self, item):
         """
-        Check for match
+        Check if matcher matches item
+
+        :param item: object to match against
+        :returns: True if matching, otherwise False
+        :rtype: Boolean
         """
         count = 0
         self.item = item

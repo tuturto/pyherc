@@ -22,7 +22,6 @@
 Module for customer matchers used in testing
 """
 
-from hamcrest import * #pylint: disable=W0401
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
@@ -34,6 +33,7 @@ class ContainsEffectHandle(BaseMatcher):
         """
         Default constructor
         """
+        super(ContainsEffectHandle, self).__init__()
         if handle != None:
             self.match_any = False
             if hasattr(handle, '__iter__'):
@@ -46,7 +46,11 @@ class ContainsEffectHandle(BaseMatcher):
 
     def _matches(self, item):
         """
-        Check for match
+        Check if matcher matches item
+
+        :param item: object to match against
+        :returns: True if matching, otherwise False
+        :rtype: Boolean
         """
         handles = item.get_effect_handles()
 
@@ -96,7 +100,7 @@ def has_effect_handles(handle):
     """
     Check if collection has all the handles
 
-    Args:
-        list of handles to expect
+    :param handle: list of handles to expect
+    :type handle: []
     """
     return ContainsEffectHandle(handle)
