@@ -17,6 +17,7 @@ Contents:
    modular_levels
    generate_item
    actions
+   events
    effects
    testing
    api_reference
