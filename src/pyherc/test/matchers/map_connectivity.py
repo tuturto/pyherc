@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Copyright 2012 Tuukka Turto
+#   Copyright 2010-2012 Tuukka Turto
 #
 #   This file is part of pyherc.
 #
@@ -22,11 +22,9 @@
 Module for customer matchers used in testing
 """
 
-from hamcrest import * #pylint: disable=W0401
 from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
-class MapConnectivity():
+class MapConnectivity(BaseMatcher):
     """
     Helper class used to verify if generated level is fully connected
     """
@@ -34,9 +32,17 @@ class MapConnectivity():
         """
         Initialise this matcher
         """
+        super(MapConnectivity, self).__init__()
         self.open_tile = open_tile
 
     def _matches(self, item):
+        """
+        Check if matcher matches item
+
+        :param item: object to match against
+        :returns: True if matching, otherwise False
+        :rtype: Boolean
+        """
         all_points = self.get_all_points(item, self.open_tile)
 
         if len(all_points) > 0:
@@ -111,28 +117,37 @@ class MapConnectivity():
 
         if level.get_wall_tile(x_loc, y_loc) == open_tile:
             connected_points.append(start)
-            self.get_connected_points(level, (x_loc, y_loc - 1), open_tile, connected_points)
-            self.get_connected_points(level, (x_loc, y_loc + 1), open_tile, connected_points)
-            self.get_connected_points(level, (x_loc - 1, y_loc), open_tile, connected_points)
-            self.get_connected_points(level, (x_loc + 1, y_loc), open_tile, connected_points)
+            self.get_connected_points(level, (x_loc, y_loc - 1),
+                                      open_tile,
+                                      connected_points)
+            self.get_connected_points(level, (x_loc, y_loc + 1),
+                                      open_tile,
+                                      connected_points)
+            self.get_connected_points(level, (x_loc - 1, y_loc),
+                                      open_tile,
+                                      connected_points)
+            self.get_connected_points(level, (x_loc + 1, y_loc),
+                                      open_tile,
+                                      connected_points)
 
         return connected_points
 
 def is_fully_accessible_via(open_tile):
+    """
+    Check if level is fully connected
+
+    :param open_tile: tile_id to use for empty walls
+    :type open_tile: int
+    """
     return MapConnectivity(open_tile)
 
 def located_in_room(entity):
     """
     Check if given entity is located in room
 
-    Args:
-        entity: entity to check
-
-    Returns:
-        True if located in room, False otherwise
-
-    Note:
-        entity should have properties level and location for this to work
+    :param entity: entity to check
+    :returns: True if located in room, False otherwise
+    :rtype: Boolean
     """
     level = entity.level
 
