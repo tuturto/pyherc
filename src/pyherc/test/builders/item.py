@@ -39,6 +39,7 @@ class ItemBuilder(object):
         self.location = ()
         self.icon = 0
         self.weapon_data = None
+        self.tags = []
 
     def with_name(self, name):
         self.name = name
@@ -69,6 +70,16 @@ class ItemBuilder(object):
         self.weapon_data.damage = damage
         return self
 
+    def with_tag(self, tag):
+        self.tags.append(tag)
+        return self
+
+    def with_weapon_type(self, weapon_type):
+        if self.weapon_data == None:
+            self.weapon_data = WeaponData()
+        self.weapon_data.weapon_type = weapon_type
+        return self
+
     def build(self):
         """
         Build item
@@ -87,5 +98,7 @@ class ItemBuilder(object):
 
         for handle in self.effect_handles:
             item.add_effect_handle(handle)
+
+        item.tags = self.tags
 
         return item

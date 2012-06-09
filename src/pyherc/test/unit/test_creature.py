@@ -23,8 +23,8 @@
 Module for testing creatures
 """
 #pylint: disable=W0614
+from pyherc.data import Model
 from pyherc.data import WeaponProficiency
-from pyherc.test.unit import IntegrationTest
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ItemBuilder
 from pyherc.generators.level.testlevel import TestLevelGenerator
@@ -62,7 +62,7 @@ class TestCharacter(object):
 
         verify(model).raise_event(any())
 
-class TestCreatureWithGenerator(IntegrationTest):
+class TestCreatures(object):
     """
     Tests for creatures that require generators to be working
     """
@@ -70,24 +70,7 @@ class TestCreatureWithGenerator(IntegrationTest):
         """
         Default constructor
         """
-        super(TestCreatureWithGenerator, self).__init__()
-
-    def test_rat_generation(self):
-        """
-        Test that generating a rat is possible
-        """
-        creature = self.creatureGenerator.generate_creature({'name': 'rat'})
-
-        assert_that(creature.name, is_(equal_to('rat')))
-
-    def test_spider_generation(self):
-        """
-        Test generating spider
-        """
-        creature = self.creatureGenerator.generate_creature({'name': 'spider'})
-
-        assert_that(creature, is_(not_none()))
-        assert_that(creature, has_effect_handle())
+        super(TestCreatures, self).__init__()
 
     def test_is_proficient(self):
         """
@@ -95,7 +78,15 @@ class TestCreatureWithGenerator(IntegrationTest):
         """
         creature = CharacterBuilder().build()
 
-        weapon = self.item_generator.generate_item({'name' : 'club'})
+        weapon = (ItemBuilder()
+                        .with_name('club')
+                        .with_tag('weapon')
+                        .with_tag('one-handed weapon')
+                        .with_tag('melee')
+                        .with_tag('simple weapon')
+                        .with_damage(2)
+                        .with_weapon_type('simple')
+                        .build())
 
         proficiency = creature.is_proficient(weapon)
         assert_that(proficiency, is_(equal_to(False)))
@@ -105,7 +96,7 @@ class TestCreatureWithGenerator(IntegrationTest):
         proficiency = creature.is_proficient(weapon)
         assert_that(proficiency, is_(equal_to(True)))
 
-class TestStatues(IntegrationTest):
+class TestStatues(object):
     """
     Test handling of statues (mainly mimicing items)
     """
@@ -120,10 +111,10 @@ class TestStatues(IntegrationTest):
         """
         Test that activated character can deactivate
         """
+        self.model = Model()
+
         creature = (CharacterBuilder()
                         .with_model(self.model)
-                        .with_action_factory(self.action_factory)
-                        .with_rng(self.rng)
                         .with_name('Mimic')
                         .build())
 
@@ -133,13 +124,9 @@ class TestStatues(IntegrationTest):
 
         creature.set_mimic_item(item)
 
-        levelGenerator = TestLevelGenerator(self.action_factory,
-                                            self.creatureGenerator,
-                                            self.item_generator)
-
         self.model.dungeon = Dungeon()
-        self.level1 = levelGenerator.generate_level(None, self.model, monster_list = [])
 
+        self.level1 = LevelBuilder().build()
         self.model.dungeon.levels = self.level1
 
         self.level1.add_creature(creature, self.level1.find_free_space())

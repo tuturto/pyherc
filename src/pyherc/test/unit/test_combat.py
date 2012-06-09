@@ -25,19 +25,20 @@ Module for testing combat related rules
 import pyherc
 from pyherc.data import Character
 from pyherc.data import Dungeon
+from pyherc.data import Model
 from pyherc.generators.level.testlevel import TestLevelGenerator
-from pyherc.test.unit import IntegrationTest
-from pyherc.test.unit import StubRandomNumberGenerator
 
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.action import AttackAction
 
 from pyherc.test.builders import CharacterBuilder
+from pyherc.test.builders import ActionFactoryBuilder
+from pyherc.test.builders import LevelBuilder
 
 from mockito import mock, verify, when, any
 from hamcrest import * #pylint: disable=W0401
 
-class TestMeleeCombat(IntegrationTest):
+class TestMeleeCombat(object):
     """
     Class for testing melee combat related rules
     """
@@ -47,15 +48,25 @@ class TestMeleeCombat(IntegrationTest):
         """
         super(TestMeleeCombat, self).__init__()
         self.level = None
+        self.modle = None
         self.character1 = None
         self.character2 = None
+        self.action_factory = None
 
-    def setup2(self):
+    def setup(self):
+        """
+        Setup for testcases
+        """
+
+        self.model = Model()
+
+        self.action_factory = (ActionFactoryBuilder()
+                                    .with_attack_factory()
+                                    .build())
 
         self.character1 = (CharacterBuilder()
                                 .with_model(self.model)
                                 .with_action_factory(self.action_factory)
-                                .with_rng(self.rng)
                                 .with_speed(1)
                                 .with_tick(1)
                                 .with_hit_points(10)
@@ -66,7 +77,6 @@ class TestMeleeCombat(IntegrationTest):
         self.character2 = (CharacterBuilder()
                                 .with_model(self.model)
                                 .with_action_factory(self.action_factory)
-                                .with_rng(self.rng)
                                 .with_speed(1)
                                 .with_tick(1)
                                 .with_hit_points(10)
@@ -74,14 +84,8 @@ class TestMeleeCombat(IntegrationTest):
                                 .with_body(5)
                                 .build())
 
-        level_generator = TestLevelGenerator(self.action_factory,
-                                             self.creatureGenerator,
-                                             self.item_generator)
-
         self.model.dungeon = Dungeon()
-        self.level = level_generator.generate_level(None,
-                                                   self.model,
-                                                   monster_list = [])
+        self.level = LevelBuilder().build()
 
         self.model.dungeon.levels = self.level
 
@@ -110,7 +114,6 @@ class TestMeleeCombat(IntegrationTest):
         character1 = (CharacterBuilder()
                         .with_model(self.model)
                         .with_action_factory(self.action_factory)
-                        .with_rng(self.rng)
                         .with_attack(12)
                         .with_speed(1)
                         .with_tick(0)

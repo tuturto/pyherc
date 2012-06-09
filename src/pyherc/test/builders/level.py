@@ -37,12 +37,30 @@ class LevelBuilder(object):
         self.level_size = (80, 40)
         self.floor_tile = tiles.FLOOR_ROCK
         self.wall_tile = tiles.WALL_EMPTY
+        self.solid_wall = tiles.WALL_ROCK
+        self.walls = []
 
     def with_character(self, character):
+        """
+        Place given character to level
+
+        :param character: character to place to level
+        :type character: Character
+        """
         if hasattr(character, 'build'):
             self.characters.append(character.build())
         else:
             self.characters.append(character)
+        return self
+
+    def with_wall_at(self, location):
+        """
+        Place wall to given location
+
+        :param location: location of the wall
+        :type location: (int, int)
+        """
+        self.walls.append(location)
         return self
 
     def build(self):
@@ -53,6 +71,9 @@ class LevelBuilder(object):
             Level
         """
         level = Level(self.level_size, self.floor_tile, self.wall_tile)
+
+        for wall in self.walls:
+            level.walls[wall[0]][wall[1]] = self.solid_wall
 
         for creature in self.characters:
             level.add_creature(creature)

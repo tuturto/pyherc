@@ -29,7 +29,6 @@ import pyherc
 from pyherc.data import Dungeon
 from pyherc.data import Portal
 from pyherc.generators.level.testlevel import TestLevelGenerator
-from pyherc.test.unit import IntegrationTest
 from pyherc.test.builders import CharacterBuilder
 
 from pyherc.data import Model
@@ -100,7 +99,7 @@ class TestEventDispatching(object):
 
         assert_that(event, has_marked_for_redrawing(expected_redraws))
 
-class TestMoving(IntegrationTest):
+class TestMoving(object):
     """
     Tests for moving
     """
@@ -109,39 +108,40 @@ class TestMoving(IntegrationTest):
         """
         Default constructor
         """
-        IntegrationTest.__init__(self)
+        super(TestMoving, self).__init__()
+        self.action_factory = None
+        self.character = None
+        self.level1 = None
+        self.level2 = None
+        self.portal1 = None
+        self.portal2 = None
+        self.model = None
 
-    def setup2(self):
+    def setup(self):
         """
-        Secondary setup
+        Setup the test case
         """
+        self.action_factory = ActionFactoryBuilder().with_move_factory().build()
+
         self.character = (CharacterBuilder()
-                                .with_model(self.model)
                                 .with_action_factory(self.action_factory)
-                                .with_rng(self.rng)
                                 .build())
-        levelGenerator = TestLevelGenerator(self.action_factory,
-                                            self.creatureGenerator,
-                                            self.item_generator)
 
-        self.model.dungeon = Dungeon()
-        self.level1 = levelGenerator.generate_level(None, self.model, monster_list = [])
-        self.level2 = levelGenerator.generate_level(None, self.model, monster_list = [])
+        self.level1 = (LevelBuilder()
+                            .with_wall_at((1, 0))
+                            .build())
+
+        self.level2 = LevelBuilder().build()
         self.portal1 = Portal((None, None), None)
-        self.portal1.model = self.model
+
         self.portal1.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
         self.portal2 = Portal((None, None), None)
         self.portal2 = Portal((None, None), None)
-        self.portal2.model = self.model
 
         self.level1.add_portal(self.portal1, (5, 5))
         self.level2.add_portal(self.portal2, (10, 10), self.portal1)
 
-        self.model.dungeon.levels = self.level1
-
         self.level1.add_creature(self.character, (5, 5))
-        self.character.speed = 1
-        self.character.tick = 1
 
     def test_simple_move(self):
         """
