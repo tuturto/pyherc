@@ -27,7 +27,9 @@ import pgu.gui
 
 class OptionsMenu(pgu.gui.Container):
     """
-    Start menu
+    Options menu
+
+    .. versionadded:: 0.4
     """
 
     def __init__(self,  application, surface_manager, **params):

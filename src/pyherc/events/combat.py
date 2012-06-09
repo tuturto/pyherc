@@ -26,6 +26,8 @@ from pyherc.events.event import Event
 class AttackHitEvent(Event):
     """
     Event that can be used to relay information about moving
+
+    .. versionadded:: 0.4
     """
     def __init__(self, level, location, type, attacker, target, damage, hit,
                  affected_tiles):

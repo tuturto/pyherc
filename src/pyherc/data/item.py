@@ -93,6 +93,8 @@ class Item(object):
 
         :param handle: effect handle to add
         :type handle: EffectHandle
+
+        .. versionadded:: 0.4
         """
         self.__effects_collection.add_effect_handle(handle)
 
@@ -106,6 +108,8 @@ class Item(object):
 
         :returns: effect handles
         :rtype: [EffectHandle]
+
+        .. versionadded:: 0.4
         """
         return self.__effects_collection.get_effect_handles(trigger)
 

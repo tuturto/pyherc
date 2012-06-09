@@ -92,6 +92,8 @@ class AttackAction(object):
     def trigger_attack_effects(self):
         """
         Trigger effects
+
+        .. versionadded:: 0.4
         """
         effects = self.attacker.get_effect_handles('on attack hit')
         for effect_spec in effects:

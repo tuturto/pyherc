@@ -32,6 +32,8 @@ import os
 class StartMenu(pgu.gui.Container):
     """
     Start menu
+
+    .. versionadded:: 0.4
     """
 
     def __init__(self,  application, surface_manager, **params):

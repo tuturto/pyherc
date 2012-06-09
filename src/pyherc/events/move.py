@@ -26,6 +26,8 @@ from pyherc.events.event import Event
 class MoveEvent(Event):
     """
     Event that can be used to relay information about moving
+
+    .. versionadded:: 0.4
     """
     def __init__(self, level, location, affected_tiles):
         """

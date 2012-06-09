@@ -30,6 +30,8 @@ from pygame.locals import K_ESCAPE
 class InventoryWindow(pgu.gui.Container):
     """
     Inventory window
+
+    .. versionadded:: 0.4
     """
 
     def __init__(self,  application, surface_manager, **params):

@@ -164,6 +164,8 @@ class Factory:
     def __init__(self):
         """
         Default constructor
+
+        .. versionadded:: 0.4
         """
         pass
 

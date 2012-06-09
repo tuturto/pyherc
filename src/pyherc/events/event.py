@@ -24,6 +24,8 @@ Classes for events
 class Event(object):
     """
     Super class for events
+
+    .. versionadded:: 0.4
     """
     def __init__(self, level, location, affected_tiles):
         """

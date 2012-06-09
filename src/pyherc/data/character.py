@@ -385,6 +385,8 @@ class Character(object):
 
         :param item: item to pick up
         :type item: Item
+
+        .. versionadded:: 0.4
         """
         action = self.action_factory.get_action(
                                     InventoryParameters(
@@ -424,6 +426,8 @@ class Character(object):
 
         :param effect: effect to add
         :type effect: EffectHandle
+
+        .. versionadded:: 0.4
         """
         self.__effects_collection.add_effect_handle(effect)
 
@@ -437,6 +441,8 @@ class Character(object):
 
         :returns: effect handles
         :rtype: [EffectHandle]
+
+        .. versionadded:: 0.4
         """
         return self.__effects_collection.get_effect_handles(trigger)
 
@@ -447,6 +453,8 @@ class Character(object):
 
         :param handle: handle to remove
         :type handle: EffectHandle
+
+        .. versionadded:: 0.4
         """
         self.__effects_collection.remove_effect_handle(handle)
 
@@ -457,6 +465,8 @@ class Character(object):
 
         :param effect: Effect to add
         :type effect: Effect
+
+        .. versionadded:: 0.4
         """
         self.__effects_collection.add_effect(effect)
 
@@ -467,6 +477,8 @@ class Character(object):
 
         :returns: effects
         :rtype: [Effect]
+
+        .. versionadded:: 0.4
         """
         return self.__effects_collection.get_effects()
 
@@ -474,6 +486,8 @@ class Character(object):
     def remove_expired_effects(self):
         """
         Remove all effects that have expired
+
+        .. versionadded:: 0.4
         """
         self.__effects_collection.remove_expired_effects()
 

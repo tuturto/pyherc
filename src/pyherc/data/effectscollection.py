@@ -26,6 +26,8 @@ import collections
 class EffectsCollection(object):
     """
     Class for representing collection of effects
+
+    .. versionadded:: 0.4
     """
     def __init__(self):
         """

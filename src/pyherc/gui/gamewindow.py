@@ -38,6 +38,8 @@ from pyherc.rules.los import get_fov_matrix
 class GameWindow(Container):
     """
     Container for Game window
+
+    .. versionadded:: 0.4
     """
 
     def __init__(self,  application, surface_manager, **params):
@@ -75,6 +77,8 @@ class GameWindow(Container):
 class GameArea(Widget):
     """
     Component to draw game area
+
+    .. versionadded:: 0.4
     """
     def __init__(self, application, surface_manager,  **kwargs):
         """

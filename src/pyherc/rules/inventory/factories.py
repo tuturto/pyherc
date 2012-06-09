@@ -29,6 +29,8 @@ from pyherc.aspects import Logged
 class PickUpFactory(SubActionFactory):
     """
     Factory for creating pick up actions
+
+    .. versionadded:: 0.4
     """
     logged = Logged()
 
@@ -63,6 +65,8 @@ class PickUpFactory(SubActionFactory):
 class InventoryFactory(SubActionFactory):
     """
     Factory for constructing inventory actions
+
+    .. versionadded:: 0.4
     """
     logged = Logged()
 

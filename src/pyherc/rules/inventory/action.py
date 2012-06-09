@@ -26,6 +26,8 @@ from pyherc.aspects import Logged
 class PickUpAction(object):
     """
     Action for moving
+
+    .. versionadded:: 0.4
     """
     logged = Logged()
 
