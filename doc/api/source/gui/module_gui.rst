@@ -6,6 +6,7 @@ pyherc.gui
 .. toctree::
    :maxdepth: 2
    
+   core/package_core
    module_dialogs
    module_images
    module_inventory

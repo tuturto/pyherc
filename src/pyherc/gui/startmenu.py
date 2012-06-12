@@ -28,8 +28,9 @@ import pyherc
 import pygame
 import pgu.gui
 import os
+from pyherc.gui.core import Container
 
-class StartMenu(pgu.gui.Container):
+class StartMenu(Container):
     """
     Start menu
 
