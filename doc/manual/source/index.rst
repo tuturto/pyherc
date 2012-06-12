@@ -14,7 +14,8 @@ Contents:
    intro
    commands
    regions
-   items     
+   items
+   background
    license
 
 Indices and tables
