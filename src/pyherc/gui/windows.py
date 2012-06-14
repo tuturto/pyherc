@@ -40,6 +40,7 @@ from pyherc.rules.los import get_fov_matrix
 from pygame.locals import K_ESCAPE, K_PERIOD
 from pygame.locals import K_d, K_w, K_r, K_q,  K_i
 from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8, K_KP9
+from pygame.locals import JOYAXISMOTION, JOYBUTTONUP
 
 from pyherc.gui.options import OptionsMenu
 from pyherc.gui.startmenu import StartMenu
@@ -115,6 +116,16 @@ class MainWindow(pgu.gui.app.App):
                 if creature != model.player:
                     if self.application.world.player.level != None:
                         creature.act(self.application.world)
+
+    def event(self, ev):
+        super(MainWindow, self).event(ev)
+
+    def send(self,code,event=None):
+        if event != None and event.type in (JOYAXISMOTION, JOYBUTTONUP):
+            if self.widget != None:
+                self.widget.send(code, event)
+        super(MainWindow, self).send(code, event)
+
 
 class StartNewGameWindow:
     """
