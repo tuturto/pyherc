@@ -35,38 +35,17 @@ from pyherc.rules.inventory.factories import InventoryFactory
 from pyherc.rules.inventory.factories import PickUpFactory
 from pyherc.generators import ItemGenerator, CreatureGenerator
 from pyherc.generators.level.portals import PortalAdderFactory
-from pyherc.generators.level.portals import PortalAdderConfiguration
+
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
-from pyherc.generators.level.room import SquareRoomGenerator
-
-from pyherc.generators.level.partitioners import GridPartitioner
-
-from pyherc.generators.level.decorator import ReplacingDecorator
-from pyherc.generators.level.decorator import ReplacingDecoratorConfig
-from pyherc.generators.level.decorator import WallBuilderDecorator
-from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
-from pyherc.generators.level.decorator import AggregateDecorator
-from pyherc.generators.level.decorator import AggregateDecoratorConfig
-
-from pyherc.generators.level.items import ItemAdderConfiguration, ItemAdder
-from pyherc.generators.level.creatures import CreatureAdderConfiguration
-from pyherc.generators.level.creatures import CreatureAdder
 
 from pyherc.rules.effects import EffectsFactory
 from pyherc.rules.effects import Heal, Poison
 
 from pyherc.rules.tables import Tables
 
-from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
-from pyherc.generators.level.prototiles import WALL_EMPTY, WALL_NATURAL
-from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
-
-from pyherc.data.tiles import FLOOR_ROCK, FLOOR_BRICK
-from pyherc.data.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
-from pyherc.data.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
-
-import pyherc.config.configure_catacombs
+from pyherc.config.configure_catacombs import init_catacombs
+from pyherc.config.configure_upper_crypt import init_upper_crypt
 
 class Configuration(object):
     """
@@ -201,12 +180,15 @@ class Configuration(object):
                                              self.level_size)
 
         self.extend_configuration(config,
-                pyherc.config.configure_catacombs.init_catacombs(self.rng,
-                                                                 self.item_generator,
-                                                                 self.creature_generator,
-                                                                 self.level_size))
-        self.extend_configuration(config, self.init_upper_crypt())
-
+                                  init_catacombs(self.rng,
+                                                 self.item_generator,
+                                                 self.creature_generator,
+                                                 self.level_size))
+        self.extend_configuration(config,
+                                  init_upper_crypt(self.rng,
+                                                   self.item_generator,
+                                                   self.creature_generator,
+                                                   self.level_size))
 
         portal_adder_factory = PortalAdderFactory(
                                 config.portal_adder_configurations,
@@ -236,81 +218,4 @@ class Configuration(object):
         config.portal_adder_configurations.extend(
                                     new_config.portal_adder_configurations)
 
-    def init_upper_crypt(self):
-        """
-        Initialise upper crypt levels
-        """
-        room_generators = [SquareRoomGenerator(FLOOR_NATURAL,
-                                               WALL_EMPTY,
-                                               ['upper crypt']),
-                           SquareRoomGenerator(FLOOR_CONSTRUCTED,
-                                               WALL_EMPTY,
-                                               ['upper crypt'])]
-        level_partitioners = [GridPartitioner(['upper crypt'],
-                                              4,
-                                              3,
-                                              self.rng)]
-
-        replacer_config = ReplacingDecoratorConfig(['upper crypt'],
-                                        {FLOOR_NATURAL: FLOOR_ROCK,
-                                        FLOOR_CONSTRUCTED: FLOOR_BRICK},
-                                        {WALL_NATURAL: WALL_GROUND,
-                                        WALL_CONSTRUCTED: WALL_ROCK})
-        replacer = ReplacingDecorator(replacer_config)
-
-        wallbuilder_config = WallBuilderDecoratorConfig(['upper crypt'],
-                                            {WALL_NATURAL: WALL_CONSTRUCTED},
-                                            WALL_EMPTY)
-        wallbuilder = WallBuilderDecorator(wallbuilder_config)
-
-        aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
-                                                              [wallbuilder,
-                                                              replacer])
-
-        decorators = [AggregateDecorator(aggregate_decorator_config)]
-
-        item_adder_config = ItemAdderConfiguration(['upper crypt'])
-        item_adder_config.add_item(min_amount = 2,
-                                   max_amount = 4,
-                                   type = 'weapon',
-                                   location = 'room')
-        item_adder_config.add_item(min_amount = 2,
-                                   max_amount = 4,
-                                   type = 'potion',
-                                   location = 'room')
-        item_adder_config.add_item(min_amount = 0,
-                                   max_amount = 5,
-                                   type = 'food',
-                                   location = 'room')
-        item_adders = [ItemAdder(self.item_generator,
-                                item_adder_config,
-                                self.rng)]
-
-        creature_adder_config = CreatureAdderConfiguration(['upper crypt'])
-        #creature_adder_config.add_creature(min_amount = 6,
-        #                                   max_amount = 12,
-        #                                   name = 'bat')
-        creature_adder_config.add_creature(min_amount = 4,
-                                           max_amount = 8,
-                                           name = 'spider')
-        #creature_adder_config.add_creature(min_amount = 4,
-        #                                   max_amount = 8,
-        #                                   name = 'skeleton',
-        #                                   location = 'room')
-
-        creature_adders = [CreatureAdder(self.creature_generator,
-                                        creature_adder_config,
-                                        self.rng)]
-
-        portal_adder_configurations = []
-
-        config = LevelGeneratorFactoryConfig(room_generators,
-                                             level_partitioners,
-                                             decorators,
-                                             item_adders,
-                                             creature_adders,
-                                             portal_adder_configurations,
-                                             self.level_size)
-
-        return config
 
