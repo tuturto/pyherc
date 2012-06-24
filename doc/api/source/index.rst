@@ -19,6 +19,7 @@ Contents:
    actions
    events
    effects
+   configuration
    testing
    api_reference
 

@@ -9,15 +9,15 @@ Contents:
    module_application
    module_aspects
    module_main
-   module_config
    ai/module_ai
+   config/package_config   
    data/module_data
+   debug/module_debug
    events/package_events
    generators/module_generators
    gui/module_gui
    rules/module_rules
    test/module_test
-   debug/module_debug
 
 Indices and tables
 ==================
