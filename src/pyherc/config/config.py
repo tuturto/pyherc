@@ -44,8 +44,8 @@ from pyherc.rules.effects import Heal, Poison
 
 from pyherc.rules.tables import Tables
 
-from pyherc.config.configure_catacombs import init_catacombs
-from pyherc.config.configure_upper_crypt import init_upper_crypt
+from pyherc.config.levels.configure_catacombs import init_catacombs
+from pyherc.config.levels.configure_upper_crypt import init_upper_crypt
 
 class Configuration(object):
     """
