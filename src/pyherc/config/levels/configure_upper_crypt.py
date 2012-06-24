@@ -46,7 +46,7 @@ from pyherc.data.tiles import FLOOR_ROCK, FLOOR_BRICK
 from pyherc.data.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
 from pyherc.data.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
 
-def init_upper_crypt(rng, item_generator, creature_generator, level_size):
+def init_level(rng, item_generator, creature_generator, level_size):
     """
     Initialise upper crypt levels
     """

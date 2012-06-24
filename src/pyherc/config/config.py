@@ -44,8 +44,8 @@ from pyherc.rules.effects import Heal, Poison
 
 from pyherc.rules.tables import Tables
 
-from pyherc.config.levels.configure_catacombs import init_catacombs
-from pyherc.config.levels.configure_upper_crypt import init_upper_crypt
+import pyherc.config.levels.configure_catacombs
+import pyherc.config.levels.configure_upper_crypt
 
 class Configuration(object):
     """
@@ -179,13 +179,16 @@ class Configuration(object):
                                              [],
                                              self.level_size)
 
-        self.extend_configuration(config,
-                                  init_catacombs(self.rng,
-                                                 self.item_generator,
-                                                 self.creature_generator,
-                                                 self.level_size))
-        self.extend_configuration(config,
-                                  init_upper_crypt(self.rng,
+        config_names = filter(lambda x: x[0] != '_',
+                              dir(pyherc.config.levels))
+        config_modules = map(lambda x: getattr(pyherc.config.levels, x),
+                             config_names)
+        configurators = map(lambda x: getattr(x, 'init_level'),
+                            config_modules)
+
+        for configurator in configurators:
+            self.extend_configuration(config,
+                                      configurator(self.rng,
                                                    self.item_generator,
                                                    self.creature_generator,
                                                    self.level_size))
