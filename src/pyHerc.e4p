@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-06-24, 09:19:40 -->
+<!-- Saved: 2012-06-24, 09:35:48 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -157,6 +157,7 @@
     <Source>pyherc/gui/core/container.py</Source>
     <Source>pyherc/config/__init__.py</Source>
     <Source>pyherc/config/config.py</Source>
+    <Source>pyherc/config/configure_catacombs.py</Source>
   </Sources>
   <Forms>
   </Forms>

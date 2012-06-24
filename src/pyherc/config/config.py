@@ -39,7 +39,7 @@ from pyherc.generators.level.portals import PortalAdderConfiguration
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.room import SquareRoomGenerator
-from pyherc.generators.level.room import CatacombsGenerator
+
 from pyherc.generators.level.partitioners import GridPartitioner
 
 from pyherc.generators.level.decorator import ReplacingDecorator
@@ -65,6 +65,8 @@ from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
 from pyherc.data.tiles import FLOOR_ROCK, FLOOR_BRICK
 from pyherc.data.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
 from pyherc.data.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
+
+import pyherc.config.configure_catacombs
 
 class Configuration(object):
     """
@@ -198,7 +200,11 @@ class Configuration(object):
                                              [],
                                              self.level_size)
 
-        self.extend_configuration(config, self.init_catacombs())
+        self.extend_configuration(config,
+                pyherc.config.configure_catacombs.init_catacombs(self.rng,
+                                                                 self.item_generator,
+                                                                 self.creature_generator,
+                                                                 self.level_size))
         self.extend_configuration(config, self.init_upper_crypt())
 
 
@@ -229,109 +235,6 @@ class Configuration(object):
         config.creature_adders.extend(new_config.creature_adders)
         config.portal_adder_configurations.extend(
                                     new_config.portal_adder_configurations)
-
-    def init_catacombs(self):
-        """
-        Initialise upper catacombs
-        """
-        room_generators = [CatacombsGenerator(FLOOR_NATURAL,
-                                               WALL_EMPTY,
-                                               ['upper catacombs',
-                                               'lower catacombs'],
-                                               self.rng)]
-        level_partitioners = [GridPartitioner(['upper catacombs',
-                                               'lower catacombs'],
-                                               1,
-                                               1,
-                                               self.rng)]
-
-        replacer_config = ReplacingDecoratorConfig(['upper catacombs',
-                                                    'lower catacombs'],
-                                        {FLOOR_NATURAL: FLOOR_ROCK},
-                                        {WALL_NATURAL: WALL_GROUND,
-                                        WALL_CONSTRUCTED: WALL_ROCK})
-        replacer = ReplacingDecorator(replacer_config)
-
-        wallbuilder_config = WallBuilderDecoratorConfig(['upper catacombs',
-                                                        'lower catacombs'],
-                                            {WALL_NATURAL: WALL_CONSTRUCTED},
-                                            WALL_EMPTY)
-        wallbuilder = WallBuilderDecorator(wallbuilder_config)
-
-        aggregate_decorator_config = AggregateDecoratorConfig(
-                                                    ['upper catacombs',
-                                                    'lower catacombs'],
-                                                    [wallbuilder,
-                                                    replacer])
-
-        decorators = [AggregateDecorator(aggregate_decorator_config)]
-
-        item_adder_config = ItemAdderConfiguration(['upper catacombs',
-                                                   'lower catacombs'])
-        item_adder_config.add_item(min_amount = 2,
-                                   max_amount = 4,
-                                   type = 'weapon',
-                                   location = 'room')
-        item_adder_config.add_item(min_amount = 0,
-                                   max_amount = 2,
-                                   type = 'potion',
-                                   location = 'room')
-        item_adder_config.add_item(min_amount = 1,
-                                   max_amount = 3,
-                                   type = 'food',
-                                   location = 'room')
-        item_adders = [ItemAdder(self.item_generator,
-                                item_adder_config,
-                                self.rng)]
-
-        creatures_upper = CreatureAdderConfiguration(['upper catacombs'])
-        creatures_upper.add_creature(min_amount = 6,
-                                     max_amount = 12,
-                                     name = 'rat')
-
-        creatures_lower = CreatureAdderConfiguration(['lower catacombs'])
-        creatures_lower.add_creature(min_amount = 6,
-                                     max_amount = 12,
-                                     name = 'rat')
-        creatures_lower.add_creature(min_amount = 2,
-                                     max_amount = 5,
-                                     name = 'fire beetle')
-
-        creature_adders = [CreatureAdder(self.creature_generator,
-                                        creatures_upper,
-                                        self.rng),
-                           CreatureAdder(self.creature_generator,
-                                        creatures_lower,
-                                        self.rng)
-                                        ]
-
-        portal_adder_configurations = [PortalAdderConfiguration(
-                                            icons = (PORTAL_STAIRS_DOWN,
-                                                     PORTAL_STAIRS_UP),
-                                            level_type = 'upper catacombs',
-                                            location_type = 'room',
-                                            chance = 100,
-                                            new_level = 'lower catacombs',
-                                            unique = True),
-                                        PortalAdderConfiguration(
-                                            icons = (PORTAL_STAIRS_DOWN,
-                                                     PORTAL_STAIRS_UP),
-                                            level_type = 'upper catacombs',
-                                            location_type = 'room',
-                                            chance = 25,
-                                            new_level = 'upper crypt',
-                                            unique = True)
-                                            ]
-
-        config = LevelGeneratorFactoryConfig(room_generators,
-                                             level_partitioners,
-                                             decorators,
-                                             item_adders,
-                                             creature_adders,
-                                             portal_adder_configurations,
-                                             self.level_size)
-
-        return config
 
     def init_upper_crypt(self):
         """
