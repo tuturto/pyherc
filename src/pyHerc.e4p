@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-06-11, 23:13:28 -->
+<!-- Saved: 2012-06-24, 09:19:40 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -70,7 +70,6 @@
     <Source>pyherc/generators/level/portals.py</Source>
     <Source>pyherc/generators/level/creatures.py</Source>
     <Source>pyherc/generators/level/items.py</Source>
-    <Source>pyherc/config.py</Source>
     <Source>pyherc/test/integration/__init__.py</Source>
     <Source>pyherc/test/integration/test_config.py</Source>
     <Source>pyherc/aspects.py</Source>
@@ -156,6 +155,8 @@
     <Source>pyherc/gui/inventory.py</Source>
     <Source>pyherc/gui/core/__init__.py</Source>
     <Source>pyherc/gui/core/container.py</Source>
+    <Source>pyherc/config/__init__.py</Source>
+    <Source>pyherc/config/config.py</Source>
   </Sources>
   <Forms>
   </Forms>
