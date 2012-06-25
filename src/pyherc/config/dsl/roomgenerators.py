@@ -19,7 +19,31 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-package for configuring language
+module for RoomGenerators
 """
-from .levelgeneratorfactory import LevelConfiguration
-from .roomgenerators import Catacombs, natural_floor
+from pyherc.generators.level.room.catacombs import CatacombsGenerator
+
+class Catacombs(object):
+    """
+    Generator for catacombs
+    """
+    def __init__(self):
+        super(Catacombs, self).__init__()
+
+    def with_(self, parameter):
+        return self
+
+    def located_at(self, location):
+        return self
+
+    def using(self, rng):
+        return self
+
+    def build(self):
+        return CatacombsGenerator(floor_tile = None,
+                                  empty_tile = None,
+                                  level_types = [],
+                                  rng = None)
+
+def natural_floor():
+    return 10, 10

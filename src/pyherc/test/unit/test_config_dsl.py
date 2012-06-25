@@ -22,9 +22,11 @@
 """
 Module for testing configuration DSL
 """
+from pyherc.generators.level.prototiles import FLOOR_NATURAL
+
 from mockito import mock
 from hamcrest import assert_that, is_, equal_to
-from pyherc.config.dsl import LevelConfiguration
+from pyherc.config.dsl import LevelConfiguration, Catacombs, natural_floor
 
 class TestConfigDSL(object):
     """
@@ -62,3 +64,21 @@ class TestConfigDSL(object):
         assert_that(config.creature_adders, is_(equal_to(creatures)))
         assert_that(config.portal_adder_configurations, is_(equal_to(portals)))
         assert_that(config.size, is_(equal_to(size)))
+
+    def test_catacombs_generator(self):
+        """
+        test that catacombs generator can be created
+        """
+        rng = mock()
+
+        generator = (Catacombs()
+                        .with_(natural_floor())
+                        .located_at('upper catacombs')
+                        .located_at('lower catacombs')
+                        .using(rng)
+                        .build())
+
+        assert_that(generator.floor_tile, is_(equal_to(FLOOR_NATURAL)))
+        assert_that(generator.level_types, has_item('upper catacombs'))
+        assert_that(generator.level_types, has_item('lower catacombs'))
+        assert_that(generator.rng, is_(equal_to(rng)))
