@@ -36,7 +36,6 @@ from pyherc.generators.level.creatures import CreatureAdderConfiguration
 from pyherc.generators.level.creatures import CreatureAdder
 
 from pyherc.generators.level.portals import PortalAdderConfiguration
-from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 
 from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
 from pyherc.generators.level.prototiles import WALL_EMPTY, WALL_NATURAL
@@ -45,6 +44,8 @@ from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
 from pyherc.data.tiles import FLOOR_ROCK, FLOOR_BRICK
 from pyherc.data.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
 from pyherc.data.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
+
+from pyherc.config.dsl import LevelConfiguration
 
 def init_level(rng, item_generator, creature_generator, level_size):
     """
@@ -139,12 +140,14 @@ def init_level(rng, item_generator, creature_generator, level_size):
                                         unique = True)
                                         ]
 
-    config = LevelGeneratorFactoryConfig(room_generators,
-                                         level_partitioners,
-                                         decorators,
-                                         item_adders,
-                                         creature_adders,
-                                         portal_adder_configurations,
-                                         level_size)
+    config = (LevelConfiguration()
+                    .with_rooms(room_generators)
+                    .with_partitioners(level_partitioners)
+                    .with_decorators(decorators)
+                    .with_items(item_adders)
+                    .with_creatures(creature_adders)
+                    .with_portals(portal_adder_configurations)
+                    .with_level_size(level_size)
+                    .build())
 
     return config
