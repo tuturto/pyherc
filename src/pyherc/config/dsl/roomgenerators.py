@@ -36,9 +36,6 @@ class Catacombs(object):
     def located_at(self, location):
         return self
 
-    def using(self, rng):
-        return self
-
     def build(self):
         return CatacombsGenerator(floor_tile = None,
                                   empty_tile = None,

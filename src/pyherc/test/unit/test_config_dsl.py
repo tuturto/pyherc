@@ -75,7 +75,7 @@ class TestConfigDSL(object):
                         .with_(natural_floor())
                         .located_at('upper catacombs')
                         .located_at('lower catacombs')
-                        .using(rng)
+                        .with_(rng)
                         .build())
 
         assert_that(generator.floor_tile, is_(equal_to(FLOOR_NATURAL)))
