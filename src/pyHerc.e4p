@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-06-29, 19:43:19 -->
+<!-- Saved: 2012-06-29, 20:16:46 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -13,23 +13,18 @@
   <Email>tuukka.turto@oktaeder.net</Email>
   <Sources>
     <Source>pyherc/__init__.py</Source>
-    <Source>pyherc/gui/__init__.py</Source>
-    <Source>pyherc/gui/windows.py</Source>
     <Source>pyherc/data/__init__.py</Source>
     <Source>pyherc/data/dungeon.py</Source>
     <Source>pyherc/data/tiles.py</Source>
     <Source>pyherc/generators/__init__.py</Source>
     <Source>pyherc/generators/dungeon.py</Source>
     <Source>pyherc/data/model.py</Source>
-    <Source>pyherc/gui/surfaceManager.py</Source>
     <Source>pyherc/rules/__init__.py</Source>
     <Source>pyherc/rules/character.py</Source>
-    <Source>pyherc/gui/images.py</Source>
     <Source>pyherc/rules/moving.py</Source>
     <Source>pyherc/notes.txt</Source>
     <Source>pyherc/generators/item.py</Source>
     <Source>pyherc/rules/items.py</Source>
-    <Source>pyherc/gui/dialogs.py</Source>
     <Source>pyherc/rules/tables.py</Source>
     <Source>pyherc/rules/ending.py</Source>
     <Source>pyherc/generators/creature.py</Source>
@@ -52,7 +47,6 @@
     <Source>pyherc/rules/move/factories.py</Source>
     <Source>pyherc/rules/factory.py</Source>
     <Source>pyherc/rules/attack/unarmed.py</Source>
-    <Source>pyherc/gui/startmenu.py</Source>
     <Source>pyherc/generators/level/__init__.py</Source>
     <Source>pyherc/generators/level/testlevel.py</Source>
     <Source>pyherc/generators/level/config.py</Source>
@@ -73,7 +67,6 @@
     <Source>pyherc/test/integration/test_config.py</Source>
     <Source>pyherc/aspects.py</Source>
     <Source>pyherc/generators/level/room/catacombs.py</Source>
-    <Source>pyherc/gui/options.py</Source>
     <Source>pyherc/application.py</Source>
     <Source>pyherc/debug/__init__.py</Source>
     <Source>pyherc/debug/handlers.py</Source>
@@ -106,7 +99,6 @@
     <Source>pyherc/rules/inventory/__init__.py</Source>
     <Source>pyherc/rules/inventory/action.py</Source>
     <Source>pyherc/rules/inventory/factories.py</Source>
-    <Source>pyherc/gui/gamewindow.py</Source>
     <Source>pyherc/test/matchers/event_listener.py</Source>
     <Source>pyherc/events/__init__.py</Source>
     <Source>pyherc/events/move.py</Source>
@@ -151,20 +143,29 @@
     <Source>pyherc/test/unit/test_tables.py</Source>
     <Source>pyherc/test/cutesy/__init__.py</Source>
     <Source>pyherc/test/cutesy/dictionary.py</Source>
-    <Source>pyherc/gui/inventory.py</Source>
-    <Source>pyherc/gui/core/__init__.py</Source>
-    <Source>pyherc/gui/core/container.py</Source>
     <Source>pyherc/config/__init__.py</Source>
     <Source>pyherc/config/config.py</Source>
-    <Source>pyherc/config/levels/__init__.py</Source>
-    <Source>pyherc/config/levels/configure_catacombs.py</Source>
-    <Source>pyherc/config/levels/configure_upper_crypt.py</Source>
     <Source>pyherc/test/unit/test_config_dsl.py</Source>
     <Source>pyherc/config/dsl/__init__.py</Source>
     <Source>pyherc/config/dsl/levelgeneratorfactory.py</Source>
     <Source>pyherc/config/dsl/roomgenerators.py</Source>
     <Source>herculeum/__init__.py</Source>
     <Source>herculeum/main.py</Source>
+    <Source>herculeum/config/__init__.py</Source>
+    <Source>herculeum/config/levels/__init__.py</Source>
+    <Source>herculeum/config/levels/configure_catacombs.py</Source>
+    <Source>herculeum/config/levels/configure_upper_crypt.py</Source>
+    <Source>herculeum/gui/__init__.py</Source>
+    <Source>herculeum/gui/core/__init__.py</Source>
+    <Source>herculeum/gui/core/container.py</Source>
+    <Source>herculeum/gui/windows.py</Source>
+    <Source>herculeum/gui/dialogs.py</Source>
+    <Source>herculeum/gui/gamewindow.py</Source>
+    <Source>herculeum/gui/images.py</Source>
+    <Source>herculeum/gui/inventory.py</Source>
+    <Source>herculeum/gui/options.py</Source>
+    <Source>herculeum/gui/startmenu.py</Source>
+    <Source>herculeum/gui/surfaceManager.py</Source>
   </Sources>
   <Forms>
   </Forms>

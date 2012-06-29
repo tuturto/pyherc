@@ -24,7 +24,7 @@ Module for various windows used in game
 
 import pygame
 import logging
-import pyherc.gui.images
+import herculeum.gui.images
 import pyherc.rules.character
 import pyherc.data.model
 import pyherc.data.tiles
@@ -32,9 +32,9 @@ import pyherc.rules.items
 import pyherc.rules.ending
 import pyherc.generators.dungeon
 import pyherc.rules.tables
-import pyherc.gui.startmenu
+import herculeum.gui.startmenu
 import pgu.gui.app
-from pyherc.gui.dialogs import Inventory
+from herculeum.gui.dialogs import Inventory
 from pyherc.aspects import Logged
 from pyherc.rules.los import get_fov_matrix
 from pygame.locals import K_ESCAPE, K_PERIOD
@@ -42,10 +42,10 @@ from pygame.locals import K_d, K_w, K_r, K_q,  K_i
 from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8, K_KP9
 from pygame.locals import JOYAXISMOTION, JOYBUTTONUP
 
-from pyherc.gui.options import OptionsMenu
-from pyherc.gui.startmenu import StartMenu
-from pyherc.gui.gamewindow import GameWindow
-from pyherc.gui.inventory import InventoryWindow
+from herculeum.gui.options import OptionsMenu
+from herculeum.gui.startmenu import StartMenu
+from herculeum.gui.gamewindow import GameWindow
+from herculeum.gui.inventory import InventoryWindow
 
 class MainWindow(pgu.gui.app.App):
     """

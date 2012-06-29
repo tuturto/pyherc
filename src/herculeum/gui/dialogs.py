@@ -24,8 +24,8 @@ Module for various dialog components that can be displayed on screen
 
 import pygame
 import logging
-import pyherc.gui.surfaceManager
-import pyherc.gui.images
+import herculeum.gui.surfaceManager
+import herculeum.gui.images
 import pyherc.data.model
 import pyherc.data.tiles
 import pyherc.generators.dungeon

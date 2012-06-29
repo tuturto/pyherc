@@ -23,12 +23,12 @@ Module for start menu related functionality
 """
 
 import logging
-import pyherc.gui.images
+import herculeum.gui.images
 import pyherc
 import pygame
 import pgu.gui
 import os
-from pyherc.gui.core import Container
+from herculeum.gui.core import Container
 
 class StartMenu(Container):
     """
@@ -66,7 +66,7 @@ class StartMenu(Container):
         """
         bg = pgu.gui.Image(
                 self.surface_manager.get_image(
-                        pyherc.gui.images.image_start_menu))
+                        herculeum.gui.images.image_start_menu))
         self.add(bg, 0, 0)
 
         b = pgu.gui.Button("New game", width=150)
@@ -93,7 +93,7 @@ class StartMenu(Container):
 
         pygame.mixer.music.fadeout(1000)
 
-        newWindow = pyherc.gui.windows.StartNewGameWindow(self.application, self.surface_manager)
+        newWindow = herculeum.gui.windows.StartNewGameWindow(self.application, self.surface_manager)
         newWindow.main_loop()
 
         self.application.world.player = newWindow.character

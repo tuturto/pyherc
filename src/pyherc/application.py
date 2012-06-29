@@ -25,8 +25,8 @@ Module for application level objects
 import os.path
 import pygame
 import pgu.gui
-from pyherc.gui.windows import MainWindow
-from pyherc.gui.startmenu import StartMenu
+from herculeum.gui.windows import MainWindow
+from herculeum.gui.startmenu import StartMenu
 from pyherc.config import Configuration
 from pyherc.data.model import Model
 import sys

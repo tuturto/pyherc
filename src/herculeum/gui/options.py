@@ -22,7 +22,7 @@
 Module for options menu related functionality
 """
 
-import pyherc.gui.images
+import herculeum.gui.images
 import pgu.gui
 
 class OptionsMenu(pgu.gui.Container):
@@ -56,7 +56,7 @@ class OptionsMenu(pgu.gui.Container):
         """
         bg = pgu.gui.Image(
                 self.surface_manager.get_image(
-                        pyherc.gui.images.image_start_menu))
+                        herculeum.gui.images.image_start_menu))
         self.add(bg, 0, 0)
 
         b = pgu.gui.Button("Back", width=150)

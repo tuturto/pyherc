@@ -23,7 +23,7 @@ Configuration for herculeum
 """
 import logging
 import random
-import pyherc.gui.surfaceManager
+import herculeum.gui.surfaceManager
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.move.factories import MoveFactory
 from pyherc.rules.move.factories import WalkFactory
@@ -81,7 +81,7 @@ class Configuration(object):
         self.full_screen = True
         self.caption = 'Herculeum'
 
-        self.surface_manager = pyherc.gui.surfaceManager.SurfaceManager()
+        self.surface_manager = herculeum.gui.surfaceManager.SurfaceManager()
         self.surface_manager.load_resources(self.base_path)
 
         self.level_size = (80, 30)
