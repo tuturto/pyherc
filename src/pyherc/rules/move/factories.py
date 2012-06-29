@@ -23,7 +23,6 @@ Attack related factories are defined here
 """
 import types
 import logging
-import pyherc.data.tiles
 from pyherc.rules.move.action import MoveAction
 from pyherc.rules.factory import SubActionFactory
 

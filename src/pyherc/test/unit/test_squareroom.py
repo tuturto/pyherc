@@ -26,9 +26,6 @@ from pyherc.data import Level
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room import SquareRoomGenerator
 from hamcrest import * #pylint: disable=W0401
-from pyherc.data.tiles import FLOOR_ROCK
-from pyherc.data.tiles import WALL_GROUND
-from pyherc.data.tiles import WALL_EMPTY
 import random
 
 class TestSquareRoom():
@@ -42,16 +39,20 @@ class TestSquareRoom():
         self.level = None
         self.section = None
         self.generator = None
+        self.floor_empty = 0
+        self.floor_rock = 1
+        self.wall_empty = 10
+        self.wall_ground = 11
         self.rng = random.Random()
 
     def setup(self):
         """
         Setup the test case
         """
-        self.level = Level((20, 20), FLOOR_ROCK, WALL_GROUND)
+        self.level = Level((20, 20), self.floor_rock, self.wall_ground)
         self.section = Section((5, 5), (15, 15), self.level, self.rng)
-        self.generator = SquareRoomGenerator(FLOOR_ROCK,
-                                             WALL_EMPTY,
+        self.generator = SquareRoomGenerator(self.floor_rock,
+                                             self.wall_empty,
                                              ['crypt'])
 
     def test_generate_simple_room(self):
@@ -63,7 +64,7 @@ class TestSquareRoom():
         room_found = False
         for y_loc in range(20):
             for x_loc in range(20):
-                if self.level.get_tile(x_loc, y_loc) != WALL_GROUND:
+                if self.level.get_tile(x_loc, y_loc) != self.wall_empty:
                     room_found = True
 
         assert_that(room_found, is_(True))

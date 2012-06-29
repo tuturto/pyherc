@@ -22,7 +22,6 @@
 Module defining classes related to MoveAttack
 """
 import logging
-import pyherc.data.tiles
 from pyherc.events import MoveEvent
 from pyherc.aspects import Logged
 

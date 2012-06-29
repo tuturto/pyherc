@@ -22,7 +22,7 @@
 Module for level builder
 """
 from pyherc.data import Level
-from pyherc.data import tiles
+from herculeum.config import tiles
 
 class LevelBuilder(object):
     """

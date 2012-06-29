@@ -24,7 +24,6 @@ Module containing classes to represent Level
 
 import random
 import logging
-import pyherc.data.tiles
 from pyherc.aspects import Logged
 
 class Level(object):
@@ -34,7 +33,8 @@ class Level(object):
     logged = Logged()
 
     @logged
-    def __init__(self, size = (0, 0), floor_type = None, wall_type = None):
+    def __init__(self, size = (0, 0), floor_type = None, wall_type = None,
+                 empty_floor = 0, empty_wall = 0):
         """
         Initialises a level of certain size and fill floor and walls with given types
 
@@ -44,12 +44,18 @@ class Level(object):
         :type floor_type: integer
         :param wall_type: type of wall to fill level
         :type wall_type: integer
+        :empty_floor: type of floor for empty
+        :type empty_floor: integer
+        :empty_wall: type of wall for empty
+        :type empty_wall: integer
         """
         super(Level, self).__init__()
         self.logger = logging.getLogger('pyherc.data.dungeon.Level')
 
         self.floor = []
         self.walls = []
+        self.empty_floor = empty_floor
+        self.empty_wall = empty_wall
         self.__location_type = []
         self.lit = []
 
@@ -105,12 +111,12 @@ class Level(object):
         :rtype: integer
         """
         if loc_x < 0 or loc_y < 0:
-            return pyherc.data.tiles.FLOOR_EMPTY
+            return self.empty_floor
 
         if loc_x > len(self.floor) or loc_y > len(self.floor[0]):
-            return pyherc.data.tiles.FLOOR_EMPTY
+            return self.empty_floor
 
-        if self.walls[loc_x][loc_y] != pyherc.data.tiles.WALL_EMPTY:
+        if self.walls[loc_x][loc_y] != self.empty_wall:
             return self.walls[loc_x][loc_y]
         else:
             return self.floor[loc_x][loc_y]
@@ -127,10 +133,10 @@ class Level(object):
         :rtype: integer
         """
         if loc_x < 0 or loc_y < 0:
-            return pyherc.data.tiles.WALL_GROUND
+            return self.empty_wall #?
 
         if loc_x > len(self.floor) or loc_y > len(self.floor[0]):
-            return pyherc.data.tiles.WALL_GROUND
+            return self.empty_wall
 
         return self.walls[loc_x][loc_y]
 
@@ -279,7 +285,7 @@ class Level(object):
         width = len(self.floor)
         height = len(self.floor[0])
         location = (random.randint(2, width - 1), random.randint(2, height - 1))
-        while self.walls[location[0]][location[1]] != pyherc.data.tiles.WALL_EMPTY:
+        while self.walls[location[0]][location[1]] != self.empty_wall:
             location = (random.randint(2, width - 1), random.randint(2, height - 1))
         return location
 
@@ -294,7 +300,7 @@ class Level(object):
         :returns: icon ID of the tile
         :rtype: integer
         """
-        if self.walls[x_coordinate][y_coordinate] != pyherc.data.tiles.WALL_EMPTY:
+        if self.walls[x_coordinate][y_coordinate] != self.empty_wall:
             return self.walls[x_coordinate][y_coordinate]
         else:
             return self.floor[x_coordinate][y_coordinate]
@@ -311,7 +317,7 @@ class Level(object):
         :rtype: Boolean
         """
 
-        if self.walls[x_coordinate][y_coordinate] != pyherc.data.tiles.WALL_EMPTY:
+        if self.walls[x_coordinate][y_coordinate] != self.empty_wall:
             return False
         else:
             return True
@@ -395,9 +401,9 @@ class Level(object):
                     level_string = level_string + "<"
                 elif len(items) > 0:
                     level_string = level_string + "*"
-                elif self.walls[loc_x][loc_y] != pyherc.data.tiles.WALL_EMPTY:
+                elif self.walls[loc_x][loc_y] != self.empty_wall:
                     level_string = level_string + "#"
-                elif self.walls[loc_x][loc_y] != pyherc.data.tiles.FLOOR_EMPTY:
+                elif self.walls[loc_x][loc_y] != self.empty_floor:
                     level_string = level_string + "."
                 else:
                     level_string = level_string + " "

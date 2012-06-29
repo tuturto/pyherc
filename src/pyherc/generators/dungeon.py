@@ -25,7 +25,6 @@ Module for dungeon generation
 import logging
 import random
 from pyherc.data import Dungeon
-from pyherc.data import tiles
 from pyherc.aspects import Logged
 
 class DungeonGenerator(object):
@@ -62,10 +61,5 @@ class DungeonGenerator(object):
         model.dungeon.levels = level
 
         level_size = level.get_size()
-        location = (random.randint(2, level_size[0]-1),
-                                        random.randint(2, level_size[1]-1))
-        while level.walls[location[0]][location[1]] != tiles.WALL_EMPTY:
-            location = (random.randint(2, level_size[0]-1),
-                                        random.randint(2, level_size[1]-1))
 
-        level.add_creature(model.player, location)
+        level.add_creature(model.player, level.find_free_space())

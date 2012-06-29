@@ -26,6 +26,7 @@ import os, StringIO, random, os.path
 import logging
 import pyherc
 import pyherc.data.model
+import herculeum.config.tiles
 from xml import sax
 
 class Tables(object):
@@ -399,7 +400,8 @@ class ItemHandler(sax.ContentHandler):
             elif self.text == 'common':
                 self.newItem['rarity'] = 32
         elif name == 'icon':
-            self.newItem['icon'].append(pyherc.data.tiles.__dict__[self.text])
+            #TODO: remove the link
+            self.newItem['icon'].append(herculeum.config.tiles.__dict__[self.text])
         elif name == 'questItem':
             self.newItem['questItem'] = int(self.text)
         elif name == 'damage':

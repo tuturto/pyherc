@@ -23,6 +23,8 @@ Module for testing tables
 """
 
 import pyherc
+import pyherc.rules.tables
+import herculeum.config.tiles
 
 class test_Tables:
     """
@@ -64,7 +66,8 @@ class test_Tables:
         assert tables.items['apple']['weight'] == 1
         assert tables.items['apple']['type'] == ['food']
         assert tables.items['apple']['rarity'] == tables.common
-        assert pyherc.data.tiles.ITEM_APPLE in tables.items['apple']['icon']
+        #TODO: remove link
+        assert herculeum.config.tiles.ITEM_APPLE in tables.items['apple']['icon']
 
     def test_reading_more_complex_item(self):
         """
@@ -189,8 +192,8 @@ class test_Tables:
         assert 'bludgeoning' in item['damage type']
         assert 'piercing' in item['damage type']
         assert item['class'] == 'simple'
-        assert pyherc.data.tiles.ITEM_MORNING_STAR_1 in item['icon']
-        assert pyherc.data.tiles.ITEM_MORNING_STAR_2 in item['icon']
+        assert herculeum.config.tiles.ITEM_MORNING_STAR_1 in item['icon']
+        assert herculeum.config.tiles.ITEM_MORNING_STAR_2 in item['icon']
         assert 'weapon' in item['type']
         assert 'one-handed weapon' in item['type']
         assert 'melee' in item['type']
