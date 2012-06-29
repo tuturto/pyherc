@@ -21,4 +21,5 @@
 """
 package for configuring levels
 """
-pass
+import configure_catacombs
+import configure_upper_crypt

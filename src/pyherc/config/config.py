@@ -44,9 +44,6 @@ from pyherc.rules.effects import Heal, Poison
 
 from pyherc.rules.tables import Tables
 
-import pyherc.config.levels.configure_catacombs
-import pyherc.config.levels.configure_upper_crypt
-
 class Configuration(object):
     """
     Configuration object for Herculeum
@@ -76,7 +73,7 @@ class Configuration(object):
         self.rng = random.Random()
         self.logger = logging.getLogger('pyherc.config.Configuration')
 
-    def initialise(self):
+    def initialise(self, level_config):
         """
         Initialises configuration
         """
@@ -92,7 +89,7 @@ class Configuration(object):
         self.initialise_factories()
         self.initialise_tables()
         self.initialise_generators()
-        self.initialise_level_generators()
+        self.initialise_level_generators(level_config)
 
     def initialise_factories(self):
         """
@@ -165,9 +162,12 @@ class Configuration(object):
 
         self.logger.info('Generators initialised')
 
-    def initialise_level_generators(self):
+    def initialise_level_generators(self, level_config):
         """
         Initialise level generators
+
+        :param level_config: module containing level configurations
+        :type level_config: module
         """
         self.logger.info('Initialising level generators')
 
@@ -180,8 +180,8 @@ class Configuration(object):
                                              self.level_size)
 
         config_names = filter(lambda x: x[0] != '_',
-                              dir(pyherc.config.levels))
-        config_modules = map(lambda x: getattr(pyherc.config.levels, x),
+                              dir(level_config))
+        config_modules = map(lambda x: getattr(level_config, x),
                              config_names)
         configurators = map(lambda x: getattr(x, 'init_level'),
                             config_modules)

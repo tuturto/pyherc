@@ -19,18 +19,19 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Main entry point for pyherc - game
+Main entry point for Herculeum - game
 """
 import sys
 import os.path
 import pygame
 import thread
 
+from pyherc.debug import get_debug_server
+from pyherc.application import APP
+
 INSTALL_PATH = os.path.abspath(".")
 sys.path.append(INSTALL_PATH)
 
-from pyherc.debug import get_debug_server
-from pyherc.application import APP
 
 if not pygame.font:
     print 'Warning, fonts disabled'

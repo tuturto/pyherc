@@ -31,6 +31,7 @@ from pyherc.config import Configuration
 from pyherc.data.model import Model
 import sys
 import logging
+import herculeum.config.levels
 
 class Application(object):
     """
@@ -68,7 +69,7 @@ class Application(object):
         """
         self.world = Model()
         self.config = Configuration(self.base_path, self.world)
-        self.config.initialise()
+        self.config.initialise(herculeum.config.levels)
 
     def run(self):
         """

@@ -29,6 +29,7 @@ from pyherc.rules import InventoryParameters
 from pyherc.test.integration import detect_base_path
 from mockito import mock
 from hamcrest import *
+import herculeum.config.levels
 
 class TestMainConfiguration():
     """
@@ -46,7 +47,7 @@ class TestMainConfiguration():
         """
         base_path = detect_base_path()
         self.config = Configuration(base_path, mock())
-        self.config.initialise()
+        self.config.initialise(herculeum.config.levels)
 
     def test_initialisation(self):
         """
