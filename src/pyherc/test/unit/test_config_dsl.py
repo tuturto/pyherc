@@ -25,8 +25,9 @@ Module for testing configuration DSL
 from pyherc.generators.level.prototiles import FLOOR_NATURAL
 
 from mockito import mock
-from hamcrest import assert_that, is_, equal_to
+from hamcrest import assert_that, is_, equal_to, has_item
 from pyherc.config.dsl import LevelConfiguration, Catacombs, natural_floor
+from random import Random
 
 class TestConfigDSL(object):
     """
@@ -69,7 +70,7 @@ class TestConfigDSL(object):
         """
         test that catacombs generator can be created
         """
-        rng = mock()
+        rng = Random()
 
         generator = (Catacombs()
                         .with_(natural_floor())

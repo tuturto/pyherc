@@ -22,6 +22,8 @@
 module for RoomGenerators
 """
 from pyherc.generators.level.room.catacombs import CatacombsGenerator
+from pyherc.generators.level.prototiles import FLOOR_NATURAL
+from random import Random
 
 class Catacombs(object):
     """
@@ -29,18 +31,30 @@ class Catacombs(object):
     """
     def __init__(self):
         super(Catacombs, self).__init__()
+        self.floor_tile = 0
+        self.empty_tile = 0
+        self.rng = Random()
+        self.locations = []
 
     def with_(self, parameter):
+        if hasattr(parameter, 'count'):
+            if parameter[0] == 'floor':
+                self.floor_tile = parameter[1]
+
+        elif hasattr(parameter, 'random'):
+            self.rng = parameter
+
         return self
 
     def located_at(self, location):
+        self.locations.append(location)
         return self
 
     def build(self):
-        return CatacombsGenerator(floor_tile = None,
-                                  empty_tile = None,
-                                  level_types = [],
-                                  rng = None)
+        return CatacombsGenerator(floor_tile = self.floor_tile,
+                                  empty_tile = self.empty_tile,
+                                  level_types = self.locations,
+                                  rng = self.rng)
 
 def natural_floor():
-    return 10, 10
+    return ('floor', FLOOR_NATURAL)
