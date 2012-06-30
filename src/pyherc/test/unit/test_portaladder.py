@@ -29,7 +29,7 @@ from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import * #pylint: disable=W0401
-from mockito import mock
+from mockito import mock, when, any
 import random
 
 class TestPortalAdder():
@@ -284,13 +284,7 @@ class TestPortalAdderFactory():
         level_generator_factory = mock(LevelGeneratorFactory)
         level_generator = mock(LevelGenerator)
 
-        def mock_get_generator(farg, *args, **kwargs):
-            """
-            Simple mock to return level generator
-            """
-            return level_generator
-
-        level_generator_factory.get_generator = mock_get_generator
+        when(level_generator_factory).get_generator(any()).thenReturn(level_generator)
 
         factory = PortalAdderFactory(portal_config,
                                      self.rng)
