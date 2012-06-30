@@ -13,4 +13,3 @@ pyherc.data
    module_level   
    module_model
    module_portal
-   module_tiles

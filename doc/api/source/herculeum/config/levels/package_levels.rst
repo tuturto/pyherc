@@ -1,7 +1,7 @@
-pyherc.config.levels
-********************
+herculeum.config.levels
+***********************
 
-.. automodule:: pyherc.config.levels
+.. automodule:: herculeum.config.levels
 
 .. toctree::
    :maxdepth: 2

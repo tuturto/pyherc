@@ -12,7 +12,6 @@ On a high level, pyherc codebase is divided as detailed below:
         pyherc
         ai
         config
-        config_levels[label="levels"]
         data
         debug
         events
@@ -21,8 +20,6 @@ On a high level, pyherc codebase is divided as detailed below:
         generators_level_decorator[label="decorator"]
         generators_level_partitioners[label="partitioners"]
         generators_level_room[label="room"]
-        gui
-        gui_core[label="core"]
         rules
         rules_attack[label="attack"]
         rules_consume[label="consume"]
@@ -39,14 +36,13 @@ On a high level, pyherc codebase is divided as detailed below:
         test_unit[label="unit"]
 
         pyherc->ai
-        pyherc->config->config_levels        
+        pyherc->config
         pyherc->data
         pyherc->debug
         pyherc->events
         pyherc->generators->generators_level->generators_level_decorator
         generators_level->generators_level_partitioners
         generators_level->generators_level_room
-        pyherc->gui->gui_core
         pyherc->rules->rules_attack
         rules->rules_consume
         rules->rules_effects
@@ -69,7 +65,6 @@ Convenient links to each of main components
   * :py:mod:`pyherc.debug`
   * :py:mod:`pyherc.events`
   * :py:mod:`pyherc.generators`
-  * :py:mod:`pyherc.gui`
   * :py:mod:`pyherc.rules`
   * :py:mod:`pyherc.test`
     

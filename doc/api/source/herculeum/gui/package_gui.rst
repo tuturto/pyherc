@@ -1,7 +1,7 @@
-pyherc.gui
-**********
+herculeum.gui
+*************
 
-.. automodule:: pyherc.gui
+.. automodule:: herculeum.gui
 
 .. toctree::
    :maxdepth: 2

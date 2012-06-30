@@ -1,6 +1,6 @@
-pyherc.gui.startmenu
+herculeum.gui.images
 ********************
 
-.. automodule:: pyherc.gui.startmenu
+.. automodule:: herculeum.gui.images
     :members:
     :show-inheritance:

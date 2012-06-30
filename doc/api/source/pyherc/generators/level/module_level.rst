@@ -10,7 +10,6 @@ pyherc.generators.level
    module_creatures
    module_items
    module_generator
-   module_testlevel
    module_prototiles
    module_portals
    decorator/module_decorator
