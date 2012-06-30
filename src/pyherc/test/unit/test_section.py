@@ -24,7 +24,6 @@ Tests for Section
 #pylint: disable=W0614
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
-from pyherc.data.tiles import FLOOR_EMPTY, FLOOR_ROCK, WALL_EMPTY, WALL_GROUND
 from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 import random
@@ -219,36 +218,44 @@ class TestSectionLevelAccess(object):
         object.__init__(self)
         self.level = None
         self.section = None
+        self.floor_empty = None
+        self.floor_rock = None
+        self.wall_empty = None
+        self.wall_ground = None
         self.rng = random.Random()
 
     def setup(self):
         """
         Setup the test case
         """
-        self.level = Level((10, 10), FLOOR_EMPTY, WALL_EMPTY)
+        self.floor_empty = 0
+        self.floor_rock = 1
+        self.wall_empty = 10
+        self.wall_ground = 11
+        self.level = Level((10, 10), self.floor_empty, self.wall_empty)
         self.section = Section((0, 0), (10, 10), self.level, self.rng)
 
     def test_setting_floor(self):
         """
         Test that floor can be set
         """
-        self.section.set_floor((5, 5), FLOOR_ROCK, None)
+        self.section.set_floor((5, 5), self.floor_rock, None)
 
-        assert_that(self.level.floor[5][5], is_(equal_to(FLOOR_ROCK)))
+        assert_that(self.level.floor[5][5], is_(equal_to(self.floor_rock)))
 
     def test_setting_wall(self):
         """
         Test that walls can be set
         """
-        self.section.set_wall((2, 2), WALL_GROUND, None)
+        self.section.set_wall((2, 2), self.wall_ground, None)
 
-        assert_that(self.level.walls[2][2], is_(equal_to(WALL_GROUND)))
+        assert_that(self.level.walls[2][2], is_(equal_to(self.wall_ground)))
 
     def test_setting_location_type(self):
         """
         Test that location type can be set correctly
         """
-        self.section.set_floor((2, 3), FLOOR_ROCK, 'corridor')
+        self.section.set_floor((2, 3), self.floor_rock, 'corridor')
 
         assert_that(self.level.get_location_type((2, 3)),
                                     is_(equal_to('corridor')))
@@ -266,26 +273,34 @@ class TestSectionLevelAccessWithOffset(object):
         self.level = None
         self.section = None
         self.rng = random.Random()
+        self.floor_empty = None
+        self.floor_rock = None
+        self.wall_empty = None
+        self.wall_ground = None
 
     def setup(self):
         """
         Setup the test case
         """
-        self.level = Level((10, 10), FLOOR_EMPTY, WALL_EMPTY)
+        self.floor_empty = 0
+        self.floor_rock = 1
+        self.wall_empty = 10
+        self.wall_ground = 11
+        self.level = Level((10, 10), self.floor_empty, self.wall_empty)
         self.section = Section((5, 5), (10, 10), self.level, self.rng)
 
     def test_setting_floor_with_offset(self):
         """
         Test that off set Section is correctly mapped to the level
         """
-        self.section.set_floor((2, 2), FLOOR_ROCK, None)
+        self.section.set_floor((2, 2), self.floor_rock, None)
 
-        assert_that(self.level.floor[7][7], is_(equal_to(FLOOR_ROCK)))
+        assert_that(self.level.floor[7][7], is_(equal_to(self.floor_rock)))
 
     def test_setting_wall_with_offset(self):
         """
         Test that offset Section is correctly mapped to the level
         """
-        self.section.set_wall((3, 2), WALL_GROUND, None)
+        self.section.set_wall((3, 2), self.wall_ground, None)
 
-        assert_that(self.level.walls[8][7], is_(equal_to(WALL_GROUND)))
+        assert_that(self.level.walls[8][7], is_(equal_to(self.wall_ground)))

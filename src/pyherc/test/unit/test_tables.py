@@ -102,7 +102,7 @@ class test_Tables:
         assert 'special item' in tables.items['crystal skull']['type']
         assert 'quest item' in tables.items['crystal skull']['type']
         assert tables.items['crystal skull']['rarity'] == tables.artifact
-        assert pyherc.data.tiles.ITEM_CRYSTAL_SKULL in tables.items['crystal skull']['icon']
+        assert herculeum.config.tiles.ITEM_CRYSTAL_SKULL in tables.items['crystal skull']['icon']
 
     def test_reading_two_items_from_config(self):
         """
@@ -145,7 +145,7 @@ class test_Tables:
         assert 'crystal skull' in tables.items.keys()
         assert 'apple' in tables.items.keys()
         assert tables.items['crystal skull']['weight'] == 5
-        assert pyherc.data.tiles.ITEM_APPLE in tables.items['apple']['icon']
+        assert herculeum.config.tiles.ITEM_APPLE in tables.items['apple']['icon']
 
     def test_reading_weapon_from_config(self):
         """
@@ -274,4 +274,4 @@ class test_Tables:
         tables = pyherc.rules.tables.Tables()
         tables.load_tables(None, item_config, creature_config)
 
-        assert(not pyherc.data.tiles.ITEM_POTION_EMPTY in tables.items['potion of bless']['icon'])
+        assert(not herculeum.config.tiles.ITEM_POTION_EMPTY in tables.items['potion of bless']['icon'])

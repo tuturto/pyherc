@@ -22,7 +22,6 @@
 Module for testing PortalAdder functionality
 """
 #pylint: disable=W0614
-from pyherc.data.tiles import FLOOR_ROCK, WALL_EMPTY
 from pyherc.data import Level, Portal
 from pyherc.generators.level.portals import PortalAdder, PortalAdderFactory
 from pyherc.generators.level.portals import PortalAdderConfiguration
@@ -42,20 +41,24 @@ class TestPortalAdder():
         Default constructor
         """
         self.rng = None
+        self.floor_rock = None
+        self.wall_empty = None
 
     def setup(self):
         """
         Setup test case
         """
         self.rng = random.Random()
+        self.floor_rock = 1
+        self.wall_empty = 10
 
     def test_add_stairs_to_room(self):
         """
         Test that stairs can be added to a room
         """
         level = Level(size = (20, 20),
-                      floor_type = FLOOR_ROCK,
-                      wall_type = WALL_EMPTY)
+                      floor_type = self.floor_rock,
+                      wall_type = self.wall_empty)
 
         for loc_y in range(8, 12):
             for loc_x in range(8, 12):
@@ -78,8 +81,8 @@ class TestPortalAdder():
         Test that level generator is created for newly created portal
         """
         level = Level(size = (20, 20),
-                      floor_type = FLOOR_ROCK,
-                      wall_type = WALL_EMPTY)
+                      floor_type = self.floor_rock,
+                      wall_type = self.wall_empty)
 
         level_generator = mock(LevelGenerator)
 
@@ -105,8 +108,8 @@ class TestPortalAdder():
         One to display and another to be used by opposite end
         """
         level = Level(size = (20, 20),
-                      floor_type = FLOOR_ROCK,
-                      wall_type = WALL_EMPTY)
+                      floor_type = self.floor_rock,
+                      wall_type = self.wall_empty)
 
         level_generator = mock(LevelGenerator)
 

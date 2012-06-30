@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-06-29, 20:32:19 -->
+<!-- Saved: 2012-06-29, 23:28:01 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -15,7 +15,6 @@
     <Source>pyherc/__init__.py</Source>
     <Source>pyherc/data/__init__.py</Source>
     <Source>pyherc/data/dungeon.py</Source>
-    <Source>pyherc/data/tiles.py</Source>
     <Source>pyherc/generators/__init__.py</Source>
     <Source>pyherc/generators/dungeon.py</Source>
     <Source>pyherc/data/model.py</Source>
@@ -169,6 +168,7 @@
     <Source>herculeum/test/unit/__init__.py</Source>
     <Source>herculeum/test/integration/__init__.py</Source>
     <Source>herculeum/test/integration/test_config.py</Source>
+    <Source>herculeum/config/tiles.py</Source>
   </Sources>
   <Forms>
   </Forms>
