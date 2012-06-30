@@ -24,7 +24,6 @@ Tests for Connection
 #pylint: disable=W0614
 from pyherc.generators.level.partitioners.section import Section, Connection
 from pyherc.data import Level
-from pyherc.data.tiles import FLOOR_EMPTY, FLOOR_ROCK, WALL_EMPTY, WALL_GROUND
 from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 import random

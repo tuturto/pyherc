@@ -346,7 +346,7 @@ class Level(object):
         if x_coordinate >= len(self.walls) or y_coordinate >= len(self.walls[0]):
             return True
 
-        if self.walls[x_coordinate][y_coordinate] != self.empty_wall:
+        if self.walls[x_coordinate][y_coordinate] == self.empty_wall:
             return False
         else:
             return True

@@ -22,7 +22,6 @@
 Module for level builder
 """
 from pyherc.data import Level
-from herculeum.config import tiles
 
 class LevelBuilder(object):
     """
@@ -35,10 +34,27 @@ class LevelBuilder(object):
         super(LevelBuilder, self).__init__()
         self.characters = []
         self.level_size = (80, 40)
-        self.floor_tile = tiles.FLOOR_ROCK
-        self.wall_tile = tiles.WALL_EMPTY
-        self.solid_wall = tiles.WALL_ROCK
+        self.floor_tile = 1
+        self.wall_tile = 10
+        self.empty_wall_tile = 10
+        self.solid_wall_tile = 11
         self.walls = []
+
+    def with_floor_tile(self, tile):
+        self.floor_tile = tile
+        return self
+
+    def with_wall_tile(self, tile):
+        self.wall_tile = tile
+        return self
+
+    def with_empty_wall_tile(self, tile):
+        self.empty_wall_tile = tile
+        return self
+
+    def with_solid_wall_tile(self, tile):
+        self.solid_wall_tile = tile
+        return self
 
     def with_character(self, character):
         """
@@ -73,11 +89,10 @@ class LevelBuilder(object):
         level = Level(size = self.level_size,
                       floor_type = self.floor_tile,
                       wall_type = self.wall_tile,
-                      empty_floor = tiles.FLOOR_EMPTY,
-                      empty_wall = tiles.WALL_EMPTY)
+                      empty_wall = self.empty_wall_tile)
 
         for wall in self.walls:
-            level.walls[wall[0]][wall[1]] = self.solid_wall
+            level.walls[wall[0]][wall[1]] = self.solid_wall_tile
 
         for creature in self.characters:
             level.add_creature(creature)

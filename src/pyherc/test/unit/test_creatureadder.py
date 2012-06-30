@@ -27,8 +27,6 @@ from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import has_creature, located_in_room
 
 from pyherc.data import Level
-from pyherc.data.tiles import FLOOR_ROCK
-from pyherc.data.tiles import WALL_EMPTY
 from pyherc.generators.creature import CreatureGenerator
 from pyherc.generators.level.creatures import CreatureAdder
 from pyherc.generators.level.creatures import CreatureAdderConfiguration
@@ -56,7 +54,7 @@ class TestCreatureAdder():
         Setup the test case
         """
         self.rng = random.Random()
-        self.level = Level((60, 40), FLOOR_ROCK, WALL_EMPTY)
+        self.level = Level((60, 40))
         self.level.set_location_type((10, 10), 'room')
 
         self.mock_tables = mock(Tables)

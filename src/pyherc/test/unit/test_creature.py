@@ -27,7 +27,7 @@ from pyherc.data import Model
 from pyherc.data import WeaponProficiency
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ItemBuilder
-from pyherc.generators.level.testlevel import TestLevelGenerator
+from pyherc.test.builders import LevelBuilder
 from pyherc.data.dungeon import Dungeon
 from pyherc.rules.moving import deactivate
 from pyherc.test.matchers import has_effect_handle

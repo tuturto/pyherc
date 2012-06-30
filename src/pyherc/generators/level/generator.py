@@ -216,8 +216,12 @@ class LevelGenerator(object):
         :param portal: portal to link to this level
         :type portal: Portal
         """
-        #TODO: configurable
-        new_level = Level(self.size, -2, -101)
+        #TODO: configurable, break link
+        new_level = Level(size = self.size,
+                          floor_type = -2,
+                          wall_type = -101,
+                          empty_floor = 0,
+                          empty_wall = 100)
 
         sections = self.partitioner.partition_level(new_level)
 

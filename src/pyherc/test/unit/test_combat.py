@@ -26,7 +26,6 @@ import pyherc
 from pyherc.data import Character
 from pyherc.data import Dungeon
 from pyherc.data import Model
-from pyherc.generators.level.testlevel import TestLevelGenerator
 
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.action import AttackAction
