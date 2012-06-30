@@ -22,7 +22,7 @@
 Module for page handlers
 """
 import pyherc.debug.data
-from pyherc.application import APP
+from herculeum.application import APP
 from web import form
 
 web_loaded = False

@@ -8,4 +8,5 @@ herculeum
    
    config/package_config
    gui/package_gui
+   module_application
    module_main

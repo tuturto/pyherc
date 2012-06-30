@@ -17,5 +17,4 @@ pyherc
    rules/module_rules
    test/module_test
    
-   module_application
    module_aspects

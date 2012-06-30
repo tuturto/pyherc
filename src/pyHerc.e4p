@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-06-30, 10:06:13 -->
+<!-- Saved: 2012-06-30, 18:54:52 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -64,7 +64,6 @@
     <Source>pyherc/test/integration/__init__.py</Source>
     <Source>pyherc/aspects.py</Source>
     <Source>pyherc/generators/level/room/catacombs.py</Source>
-    <Source>pyherc/application.py</Source>
     <Source>pyherc/debug/__init__.py</Source>
     <Source>pyherc/debug/handlers.py</Source>
     <Source>pyherc/debug/data.py</Source>
@@ -168,6 +167,7 @@
     <Source>herculeum/test/integration/__init__.py</Source>
     <Source>herculeum/test/integration/test_config.py</Source>
     <Source>herculeum/config/tiles.py</Source>
+    <Source>herculeum/application.py</Source>
   </Sources>
   <Forms>
   </Forms>

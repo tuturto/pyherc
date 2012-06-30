@@ -27,7 +27,7 @@ import pygame
 import thread
 
 from pyherc.debug import get_debug_server
-from pyherc.application import APP
+from herculeum.application import APP
 
 INSTALL_PATH = os.path.abspath(".")
 sys.path.append(INSTALL_PATH)

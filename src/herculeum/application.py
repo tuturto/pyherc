@@ -21,7 +21,6 @@
 """
 Module for application level objects
 """
-
 import os.path
 import pygame
 import pgu.gui

@@ -32,7 +32,7 @@ from pyherc.data import Character
 from pyherc.data import Model
 from herculeum.gui.surfaceManager import SurfaceManager
 from herculeum.gui.gamewindow import GameArea
-from pyherc.application import Application
+from herculeum.application import Application
 from pyherc.events import MoveEvent
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import LevelBuilder
