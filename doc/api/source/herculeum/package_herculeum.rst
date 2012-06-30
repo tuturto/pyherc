@@ -7,4 +7,5 @@ herculeum
    :maxdepth: 2
    
    config/package_config
+   gui/package_gui
    module_main

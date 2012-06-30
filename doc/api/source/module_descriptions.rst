@@ -1,7 +1,7 @@
 Building blocks
 ***************
 
-On a high level, pyherc codebase is divided as detailed below:
+On a high level, pyherc and herculeum codebases are divided as detailed below:
 
 .. graphviz:: 
 
@@ -12,6 +12,7 @@ On a high level, pyherc codebase is divided as detailed below:
         pyherc
         ai
         config
+        config_dsl[label="dsl"]
         data
         debug
         events
@@ -35,8 +36,14 @@ On a high level, pyherc codebase is divided as detailed below:
         test_matchers[label="matchers"]
         test_unit[label="unit"]
 
+        herculeum
+        herculeum_config[label="config"]
+        herculeum_config_levels[label="levels"]
+        herculeum_gui[label="gui"]
+        herculeum_gui_core[label="core"]
+        
         pyherc->ai
-        pyherc->config
+        pyherc->config->config_dsl
         pyherc->data
         pyherc->debug
         pyherc->events
@@ -55,10 +62,16 @@ On a high level, pyherc codebase is divided as detailed below:
         test->test_integration
         test->test_matchers
         test->test_unit
+        
+        herculeum->herculeum_config->herculeum_config_levels
+        herculeum->herculeum_gui->herculeum_gui_core
     }
 
 Convenient links to each of main components
 
+  pyherc:
+  
+  * :py:mod:`pyherc`
   * :py:mod:`pyherc.ai`
   * :py:mod:`pyherc.config`
   * :py:mod:`pyherc.data`
@@ -67,7 +80,13 @@ Convenient links to each of main components
   * :py:mod:`pyherc.generators`
   * :py:mod:`pyherc.rules`
   * :py:mod:`pyherc.test`
-    
+
+  herculeum:
+  
+  * :py:mod:`herculeum`
+  * :py:mod:`herculeum.config`
+  * :py:mod:`herculeum.gui`
+  
 Model
 =====
 :class:`pyherc.data.model.Model` is the main class representing

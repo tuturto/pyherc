@@ -8,8 +8,16 @@ Level configuration
 ===================
 Level configuration is done with internal scripts and supports dynamic
 detection and loading of scripts. It is enough to place new file
-containing configuration script in :py:mod:`pyherc.config.levels`.
-The file should contain following function to perform configuration.
+containing configuration script in correct directory, call initialise method
+and supply correct namespace:
+
+.. code-block:: python
+
+   config = Configuration(self.base_path, self.world)
+   config.initialise(herculeum.config.levels)
+
+The file containing configuration should contain following function to perform
+configuration.
 
 .. code-block:: python
 
