@@ -23,8 +23,8 @@ Various rules used in character generation
 """
 
 import logging
-import pyherc.data.tiles
 from pyherc.data import Character, WeaponProficiency, EffectsCollection
+import herculeum.config.tiles
 
 __logger = logging.getLogger('pyherc.rules.character')
 
@@ -90,6 +90,6 @@ def create_character(race, kit, model, action_factory, rng):
     new_character.attack = 3
 
     new_character.feats.append(WeaponProficiency('simple'))
-    new_character.icon = pyherc.data.tiles.HUMAN_FIGHTER
+    new_character.icon = herculeum.config.tiles.HUMAN_FIGHTER
 
     return new_character

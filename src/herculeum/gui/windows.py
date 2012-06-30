@@ -24,10 +24,10 @@ Module for various windows used in game
 
 import pygame
 import logging
+import herculeum.config.tiles
 import herculeum.gui.images
 import pyherc.rules.character
 import pyherc.data.model
-import pyherc.data.tiles
 import pyherc.rules.items
 import pyherc.rules.ending
 import pyherc.generators.dungeon

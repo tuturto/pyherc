@@ -27,7 +27,6 @@ import logging
 import herculeum.gui.surfaceManager
 import herculeum.gui.images
 import pyherc.data.model
-import pyherc.data.tiles
 import pyherc.generators.dungeon
 
 from pygame.locals import K_a, K_b, K_c, K_d, K_e, K_f, K_g, K_h, K_i, K_j

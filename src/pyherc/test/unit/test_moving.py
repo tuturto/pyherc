@@ -28,7 +28,7 @@ from hamcrest import * #pylint: disable=W0401
 import pyherc
 from pyherc.data import Dungeon
 from pyherc.data import Portal
-from pyherc.generators.level.testlevel import TestLevelGenerator
+from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import CharacterBuilder
 
 from pyherc.data import Model
@@ -134,7 +134,7 @@ class TestMoving(object):
         self.level2 = LevelBuilder().build()
         self.portal1 = Portal((None, None), None)
 
-        self.portal1.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
+        self.portal1.icon = 1
         self.portal2 = Portal((None, None), None)
         self.portal2 = Portal((None, None), None)
 

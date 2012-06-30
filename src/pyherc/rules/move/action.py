@@ -84,7 +84,8 @@ class MoveAction(object):
         """
         location_ok = False
         if self.new_level != None:
-            if self.new_level.walls[self.new_location[0]][self.new_location[1]] == pyherc.data.tiles.WALL_EMPTY:
+            if not self.new_level.blocks_movement(self.new_location[0],
+                                                  self.new_location[1]):
                 #check for other creatures and such
                 location_ok = True
                 creatures = self.new_level.creatures

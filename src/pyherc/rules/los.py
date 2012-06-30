@@ -27,13 +27,6 @@
 """
 Line of sight implementation
 """
-
-import pyherc.data.tiles
-
-import logging
-
-__logger = logging.getLogger('pyherc.rules.los')
-
 mult = [
                 [1,  0,  0, -1, -1,  0,  0,  1],
                 [0,  1, -1,  0,  0, -1,  1,  0],
@@ -56,16 +49,7 @@ def is_blocked(loc_x, loc_y, level, character = None):
     """
     assert level != None
 
-    if loc_x < 0 or loc_y < 0:
-        return True
-
-    if loc_x >= len(level.walls) or loc_y >= len(level.walls[0]):
-        return True
-
-    if level.get_wall_tile(loc_x, loc_y) != pyherc.data.tiles.WALL_EMPTY:
-        return True
-    else:
-        return False
+    return level.blocks_los(loc_x, loc_y)
 
 def cast_light(cx, cy, row, start, end, radius, xx, xy, yx, yy, fov_matrix, level):
     """

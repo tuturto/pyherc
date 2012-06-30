@@ -41,9 +41,9 @@ from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
 from pyherc.generators.level.prototiles import WALL_EMPTY, WALL_NATURAL
 from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
 
-from pyherc.data.tiles import FLOOR_ROCK, FLOOR_BRICK
-from pyherc.data.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
-from pyherc.data.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
+from herculeum.config.tiles import FLOOR_ROCK, FLOOR_BRICK
+from herculeum.config.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
+from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
 
 from pyherc.config.dsl import LevelConfiguration
 

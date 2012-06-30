@@ -199,17 +199,18 @@ class Level(object):
             portal.other_end = other_end
             other_end.other_end = portal
 
+            #TODO: remove link
             if portal.icon != None:
                 if other_end.icon == None:
-                    if portal.icon == pyherc.data.tiles.PORTAL_STAIRS_DOWN:
-                        other_end.icon = pyherc.data.tiles.PORTAL_STAIRS_UP
+                    if portal.icon == 201:
+                        other_end.icon = 200
                     else:
-                        other_end.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
+                        other_end.icon = 201
             else:
-                if other_end.icon == pyherc.data.tiles.PORTAL_STAIRS_DOWN:
-                    portal.icon = pyherc.data.tiles.PORTAL_STAIRS_UP
+                if other_end.icon == 201:
+                    portal.icon = 200
                 else:
-                    portal.icon = pyherc.data.tiles.PORTAL_STAIRS_DOWN
+                    portal.icon = 201
 
     def get_portal_at(self, location):
         """
@@ -305,6 +306,28 @@ class Level(object):
         else:
             return self.floor[x_coordinate][y_coordinate]
 
+    def blocks_movement(self, loc_x, loc_y):
+        """
+        Checks if there's movement blocking wall at given coordinates
+
+        :param loc_x: x-coordinate of the location
+        :type loc_x: integer
+        :param loc_Y: y-coordinate of the location
+        :type loc_y: integer
+        :returns: True if location blocks regular movement, otherwise False
+        :rtype: Boolean
+        """
+        if loc_x < 0 or loc_y < 0:
+            return True
+
+        if loc_x >= len(self.walls) or loc_y >= len(self.walls[0]):
+            return True
+
+        if self.walls[loc_x][loc_y] == self.empty_wall:
+            return False
+        else:
+            return True
+
     def blocks_los(self, x_coordinate, y_coordinate):
         """
         Checks if there's LOS-blocking wall at given coordinates
@@ -316,6 +339,12 @@ class Level(object):
         :returns: True if location blocks line of sight, otherwise False
         :rtype: Boolean
         """
+
+        if x_coordinate < 0 or y_coordinate < 0:
+            return True
+
+        if x_coordinate >= len(self.walls) or y_coordinate >= len(self.walls[0]):
+            return True
 
         if self.walls[x_coordinate][y_coordinate] != self.empty_wall:
             return False

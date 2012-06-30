@@ -70,7 +70,11 @@ class LevelBuilder(object):
         Returns:
             Level
         """
-        level = Level(self.level_size, self.floor_tile, self.wall_tile)
+        level = Level(size = self.level_size,
+                      floor_type = self.floor_tile,
+                      wall_type = self.wall_tile,
+                      empty_floor = tiles.FLOOR_EMPTY,
+                      empty_wall = tiles.WALL_EMPTY)
 
         for wall in self.walls:
             level.walls[wall[0]][wall[1]] = self.solid_wall

@@ -32,6 +32,7 @@ from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8
 
 import pygame
 import pyherc
+import herculeum.config.tiles
 from pyherc.rules.los import get_fov_matrix
 
 
@@ -115,15 +116,15 @@ class GameArea(Widget):
                 if x >= 0 and y >= 0 and x <= len(level.floor)-1 and y <= len(level.floor[x])-1:
                     tile = self.surface_manager.get_icon(level.floor[x][y])
                     s.blit(tile, (sx * 32, sy * 32 - 8))
-                    if not level.walls[x][y] == pyherc.data.tiles.WALL_EMPTY:
+                    if not level.walls[x][y] == herculeum.config.tiles.WALL_EMPTY:
                         tile = self.surface_manager.get_icon(level.walls[x][y])
                         s.blit(tile, (sx * 32, sy * 32 - 8))
                     if light_matrix[x][y] == False:
-                        tile = self.surface_manager.get_icon(pyherc.data.tiles.FLOOR_EMPTY)
+                        tile = self.surface_manager.get_icon(herculeum.config.tiles.FLOOR_EMPTY)
                         s.blit(tile, (sx * 32, sy * 32 - 8))
                 else:
                     #draw empty
-                    tile = self.surface_manager.get_icon(pyherc.data.tiles.FLOOR_EMPTY)
+                    tile = self.surface_manager.get_icon(herculeum.config.tiles.FLOOR_EMPTY)
                     s.blit(tile, (sx * 32, sy * 32 - 8))
                 sx = sx + 1
             sy = sy + 1
@@ -181,7 +182,7 @@ class GameArea(Widget):
                 if screen_x > 0 and screen_x < 768 and screen_y > 0 and screen_y < 568:
                     #do update
                     if light_matrix[update[0]][update[1]] == False:
-                        tile = self.surface_manager.get_icon(pyherc.data.tiles.FLOOR_EMPTY)
+                        tile = self.surface_manager.get_icon(herculeum.config.tiles.FLOOR_EMPTY)
                         s.blit(tile, (screen_x, screen_y))
                     else:
                         tile = self.surface_manager.get_icon(level.get_tile(update[0], update[1]))

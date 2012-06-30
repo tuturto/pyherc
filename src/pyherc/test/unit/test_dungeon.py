@@ -24,7 +24,6 @@ Module for testing dungeon
 
 from pyherc.data import Level
 from pyherc.data import Portal
-from pyherc.data import tiles
 
 class TestDungeon:
     """
@@ -34,26 +33,28 @@ class TestDungeon:
         """
         Default constructor
         """
-        pass
+        self.floor_rock = 1
+        self.wall_empty = 2
 
     def test_simple_level_creation(self):
         """
         Test that simple level creation works
         """
-        level = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
+        level = Level([20, 20], self.floor_rock, self.wall_empty)
         assert not (level is None)
-        assert(level.floor[5][5] == tiles.FLOOR_ROCK)
-        assert(level.walls[0][0] == tiles.WALL_EMPTY)
+        assert(level.floor[5][5] == self.floor_rock)
+        assert(level.walls[0][0] == self.wall_empty)
 
     def test_stair_linking(self):
         """
         Test that stairs can be linked
         """
-        level1 = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
-        level2 = Level([20, 20], tiles.FLOOR_ROCK, tiles.WALL_EMPTY)
+        level1 = Level([20, 20], self.floor_rock, self.wall_empty)
+        level2 = Level([20, 20], self.floor_rock, self.wall_empty)
 
         stairs1 = Portal((None, None), None)
-        stairs1.icon = tiles.PORTAL_STAIRS_DOWN
+        #TODO: beak link
+        stairs1.icon = 200
         level1.add_portal(stairs1, (10, 10))
 
         stairs2 = Portal((None, None), None)

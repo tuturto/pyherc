@@ -109,7 +109,7 @@ class WalkFactory(SubActionFactory):
                 new_location = parameters.character.location
 
         #is new location blocked?
-        if new_level.get_wall_tile(new_location[0], new_location[1]) != pyherc.data.tiles.WALL_EMPTY:
+        if new_level.blocks_movement(new_location[0], new_location[1]):
             new_location = parameters.character.location
 
         return MoveAction(parameters.character, new_location, new_level)
