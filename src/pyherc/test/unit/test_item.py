@@ -24,7 +24,6 @@ Module for classes testing Item related operations
 #pylint: disable=W0614
 import pyherc
 import pyherc.generators.item
-import pyherc.data.tiles
 import pyherc.data.dungeon
 import pyherc.rules.items
 import pyherc.rules.tables
@@ -60,9 +59,7 @@ class TestItems(object):
                         .with_name('banana')
                         .build())
 
-        self.level = Level([20, 20],
-                        pyherc.data.tiles.FLOOR_ROCK,
-                        pyherc.data.tiles.WALL_EMPTY)
+        self.level = Level([20, 20])
 
         self.character = (CharacterBuilder()
                             .with_action_factory(ActionFactoryBuilder()
@@ -266,9 +263,7 @@ class TestItemsInLevel:
         self.item = (ItemBuilder()
                         .build())
 
-        self.level = Level([20, 20],
-                        pyherc.data.tiles.FLOOR_ROCK,
-                        pyherc.data.tiles.WALL_EMPTY)
+        self.level = Level([20, 20])
 
         self.character = (CharacterBuilder()
                             .with_location((5, 5))

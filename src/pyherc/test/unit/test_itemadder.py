@@ -27,8 +27,6 @@ from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import located_in_room, does_have_item
 
 from pyherc.data import Level
-from pyherc.data.tiles import FLOOR_ROCK
-from pyherc.data.tiles import WALL_EMPTY
 from pyherc.generators.item import ItemGenerator
 from pyherc.generators.level.items import ItemAdder
 from pyherc.generators.level.items import ItemAdderConfiguration
@@ -49,13 +47,17 @@ class TestItemAdder():
         self.item_generator = None
         self.configuration = None
         self.item_adder = None
+        self.floor_rock = None
+        self.wall_empty = None
 
     def setup(self):
         """
         Setup the test case
         """
+        self.floor_rock = 1
+        self.wall_empty = 2
         self.rng = random.Random()
-        self.level = Level((60, 40), FLOOR_ROCK, WALL_EMPTY)
+        self.level = Level((60, 40), self.floor_rock, self.wall_empty)
         self.level.set_location_type((10, 10), 'room')
 
         for x_loc in range(11, 30):

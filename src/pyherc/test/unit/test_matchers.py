@@ -23,7 +23,6 @@ Module for testing customer matchers
 """
 #pylint: disable=W0614
 from pyherc.data import Level
-from pyherc.data.tiles import WALL_EMPTY, FLOOR_ROCK, WALL_GROUND
 from pyherc.test.matchers.map_connectivity import MapConnectivity
 from pyherc.data import EffectsCollection
 from pyherc.rules.effects import EffectHandle
@@ -41,23 +40,29 @@ class TestLevelConnectivity():
         """
         self.level = None
         self.matcher = None
+        self.wall_empty = None
+        self.floor_rock = None
+        self.wall_ground = None
 
     def setup(self):
         """
         Setup the tests
         """
+        self.wall_empty = 1
+        self.floor_rock = 2
+        self.wall_ground = 3
         self.level = Level(size = (20, 10),
-                      floor_type = FLOOR_ROCK,
-                      wall_type = WALL_GROUND)
-        self.matcher = MapConnectivity(WALL_EMPTY)
+                      floor_type = self.floor_rock,
+                      wall_type = self.wall_ground)
+        self.matcher = MapConnectivity(self.wall_empty)
 
     def test_unconnected_level(self):
         """
         Test that unconnected level is reported correctly
         """
         for loc_x in range(2, 5):
-            self.level.walls[loc_x][2] = WALL_EMPTY
-            self.level.walls[loc_x][5] = WALL_EMPTY
+            self.level.walls[loc_x][2] = self.wall_empty
+            self.level.walls[loc_x][5] = self.wall_empty
 
         assert_that(self.matcher._matches(self.level), is_(equal_to(False)))
 
@@ -66,9 +71,9 @@ class TestLevelConnectivity():
         Test that connected level is reported correctly
         """
         for loc_x in range(2, 8):
-            self.level.walls[loc_x][3] = WALL_EMPTY
-            self.level.walls[loc_x][5] = WALL_EMPTY
-            self.level.walls[5][loc_x] = WALL_EMPTY
+            self.level.walls[loc_x][3] = self.wall_empty
+            self.level.walls[loc_x][5] = self.wall_empty
+            self.level.walls[5][loc_x] = self.wall_empty
 
         assert_that(self.matcher._matches(self.level), is_(equal_to(True)))
 
@@ -76,11 +81,11 @@ class TestLevelConnectivity():
         """
         Test that connectivity can find all open points
         """
-        self.level.walls[0][0] = WALL_EMPTY
-        self.level.walls[5][5] = WALL_EMPTY
-        self.level.walls[20][10] = WALL_EMPTY
+        self.level.walls[0][0] = self.wall_empty
+        self.level.walls[5][5] = self.wall_empty
+        self.level.walls[20][10] = self.wall_empty
 
-        points = self.matcher.get_all_points(self.level, WALL_EMPTY)
+        points = self.matcher.get_all_points(self.level, self.wall_empty)
 
         assert_that(points, has_length(3))
 
@@ -88,10 +93,10 @@ class TestLevelConnectivity():
         """
         Test that finding connectivity with open corners work
         """
-        self.level.walls[0][0] = WALL_EMPTY
-        self.level.walls[20][0] = WALL_EMPTY
-        self.level.walls[0][10] = WALL_EMPTY
-        self.level.walls[20][10] = WALL_EMPTY
+        self.level.walls[0][0] = self.wall_empty
+        self.level.walls[20][0] = self.wall_empty
+        self.level.walls[0][10] = self.wall_empty
+        self.level.walls[20][10] = self.wall_empty
 
         assert_that(self.matcher._matches(self.level), is_(equal_to(False)))
 
@@ -101,29 +106,29 @@ class TestLevelConnectivity():
         to border
         """
         self.level = Level(size = (10, 10),
-                      floor_type = FLOOR_ROCK,
-                      wall_type = WALL_GROUND)
+                      floor_type = self.floor_rock,
+                      wall_type = self.wall_ground)
 
-        self.level.walls[2][5] = WALL_EMPTY
-        self.level.walls[2][6] = WALL_EMPTY
-        self.level.walls[2][7] = WALL_EMPTY
-        self.level.walls[2][8] = WALL_EMPTY
-        self.level.walls[2][9] = WALL_EMPTY
-        self.level.walls[2][10] = WALL_EMPTY
+        self.level.walls[2][5] = self.wall_empty
+        self.level.walls[2][6] = self.wall_empty
+        self.level.walls[2][7] = self.wall_empty
+        self.level.walls[2][8] = self.wall_empty
+        self.level.walls[2][9] = self.wall_empty
+        self.level.walls[2][10] = self.wall_empty
 
-        self.level.walls[5][8] = WALL_EMPTY
+        self.level.walls[5][8] = self.wall_empty
 
-        self.level.walls[5][2] = WALL_EMPTY
-        self.level.walls[6][2] = WALL_EMPTY
-        self.level.walls[7][2] = WALL_EMPTY
-        self.level.walls[8][2] = WALL_EMPTY
-        self.level.walls[9][2] = WALL_EMPTY
-        self.level.walls[10][2] = WALL_EMPTY
+        self.level.walls[5][2] = self.wall_empty
+        self.level.walls[6][2] = self.wall_empty
+        self.level.walls[7][2] = self.wall_empty
+        self.level.walls[8][2] = self.wall_empty
+        self.level.walls[9][2] = self.wall_empty
+        self.level.walls[10][2] = self.wall_empty
 
-        all_points = self.matcher.get_all_points(self.level, WALL_EMPTY)
+        all_points = self.matcher.get_all_points(self.level, self.wall_empty)
         connected_points = self.matcher.get_connected_points(self.level,
                                                 all_points[0],
-                                                WALL_EMPTY,
+                                                self.wall_empty,
                                                 [])
 
         print 'all points: {0}'.format(all_points)

@@ -31,7 +31,6 @@ from pyherc.generators.level.decorator import AggregateDecoratorConfig
 from pyherc.data import Level
 from mockito import mock, verify
 from hamcrest import * #pylint: disable=W0401
-from pyherc.data.tiles import FLOOR_ROCK, FLOOR_BRICK, WALL_EMPTY, WALL_GROUND
 from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
 from pyherc.generators.level.prototiles import WALL_NATURAL, WALL_CONSTRUCTED
 
@@ -46,14 +45,22 @@ class TestLevelDecorator():
         self.level = None
         self.config = None
         self.decorator = None
+        self.floor_rock = None
+        self.floor_brick = None
+        self.wall_empty = None
+        self.wall_ground = None
 
     def setup(self):
         """
         Setup the test case
         """
+        self.floor_rock = 1
+        self.floor_brick = 2
+        self.wall_empty = 3
+        self.wall_ground = 4
         self.level = Level((10, 15),
                       floor_type = FLOOR_NATURAL,
-                      wall_type = WALL_EMPTY)
+                      wall_type = self.wall_empty)
 
         self.level.floor[5][5] = FLOOR_CONSTRUCTED
         self.level.floor[6][5] = FLOOR_CONSTRUCTED
@@ -67,9 +74,9 @@ class TestLevelDecorator():
         self.level.walls[5][5] = WALL_NATURAL
 
         self.config = ReplacingDecoratorConfig(['crypt'],
-                                               {FLOOR_NATURAL: FLOOR_ROCK,
-                                               FLOOR_CONSTRUCTED: FLOOR_BRICK},
-                                               {WALL_NATURAL: WALL_GROUND}
+                                               {FLOOR_NATURAL: self.floor_rock,
+                                               FLOOR_CONSTRUCTED: self.floor_brick},
+                                               {WALL_NATURAL: self.wall_ground}
                                                )
         self.decorator = ReplacingDecorator(self.config)
 
@@ -79,15 +86,15 @@ class TestLevelDecorator():
         """
         self.decorator.decorate_level(self.level)
 
-        assert_that(self.level.floor[5][5], is_(equal_to(FLOOR_BRICK)))
-        assert_that(self.level.floor[6][5], is_(equal_to(FLOOR_BRICK)))
-        assert_that(self.level.floor[7][5], is_(equal_to(FLOOR_BRICK)))
-        assert_that(self.level.floor[0][0], is_(equal_to(FLOOR_BRICK)))
-        assert_that(self.level.floor[10][0], is_(equal_to(FLOOR_BRICK)))
-        assert_that(self.level.floor[0][15], is_(equal_to(FLOOR_BRICK)))
-        assert_that(self.level.floor[10][15], is_(equal_to(FLOOR_BRICK)))
+        assert_that(self.level.floor[5][5], is_(equal_to(self.floor_brick)))
+        assert_that(self.level.floor[6][5], is_(equal_to(self.floor_brick)))
+        assert_that(self.level.floor[7][5], is_(equal_to(self.floor_brick)))
+        assert_that(self.level.floor[0][0], is_(equal_to(self.floor_brick)))
+        assert_that(self.level.floor[10][0], is_(equal_to(self.floor_brick)))
+        assert_that(self.level.floor[0][15], is_(equal_to(self.floor_brick)))
+        assert_that(self.level.floor[10][15], is_(equal_to(self.floor_brick)))
 
-        assert_that(self.level.floor[2][2], is_(equal_to(FLOOR_ROCK)))
+        assert_that(self.level.floor[2][2], is_(equal_to(self.floor_rock)))
 
     def test_replacing_walls(self):
         """
@@ -95,8 +102,8 @@ class TestLevelDecorator():
         """
         self.decorator.decorate_level(self.level)
 
-        assert_that(self.level.walls[2][2], is_(equal_to(WALL_GROUND)))
-        assert_that(self.level.walls[5][5], is_(equal_to(WALL_GROUND)))
+        assert_that(self.level.walls[2][2], is_(equal_to(self.wall_ground)))
+        assert_that(self.level.walls[5][5], is_(equal_to(self.wall_ground)))
 
 class TestWallBuilderDecorator():
     """
@@ -109,22 +116,24 @@ class TestWallBuilderDecorator():
         self.level = None
         self.config = None
         self.decorator = None
+        self.wall_empty = None
 
     def setup(self):
         """
         Setup the test case
         """
+        self.wall_empty = 1
         self.level = Level((10, 15),
                       floor_type = FLOOR_NATURAL,
                       wall_type = WALL_NATURAL)
 
         for loc_y in range(2, 8):
             for loc_x in range(2, 8):
-                self.level.walls[loc_x][loc_y] = WALL_EMPTY
+                self.level.walls[loc_x][loc_y] = self.wall_empty
 
         self.config = WallBuilderDecoratorConfig(['crypt'],
                                             {WALL_NATURAL: WALL_CONSTRUCTED},
-                                            WALL_EMPTY)
+                                            self.wall_empty)
 
         self.decorator = WallBuilderDecorator(self.config)
 

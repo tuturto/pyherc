@@ -37,7 +37,6 @@ from pyherc.generators.level.items import ItemAdder
 from pyherc.rules import ActionFactory
 from pyherc.data import Portal
 from pyherc.data import Model
-from pyherc.data.tiles import FLOOR_ROCK, WALL_EMPTY
 from mockito import mock, verify, when, any
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import is_fully_accessible_via
@@ -305,12 +304,16 @@ class TestLevelGenerator:
         Default constructor
         """
         self.rng = None
+        self.floor_rock = None
+        self.wall_empty = None
 
     def setup(self):
         """
         Setup the test case
         """
         self.rng = random.Random()
+        self.floor_rock = 1
+        self.wall_empty = 2
 
     def test_level_generation_steps(self):
         """
@@ -356,8 +359,8 @@ class TestLevelGenerator:
                                       4,
                                       3,
                                       self.rng)
-        room_generator = SquareRoomGenerator(FLOOR_ROCK,
-                                             WALL_EMPTY,
+        room_generator = SquareRoomGenerator(self.floor_rock,
+                                             self.wall_empty,
                                              ['crypt'])
         level_decorator = mock()
         portal_adder = PortalAdder((1, 2),
@@ -378,7 +381,7 @@ class TestLevelGenerator:
 
         new_level = generator.generate_level(portal)
 
-        assert_that(new_level, is_fully_accessible_via(WALL_EMPTY))
+        assert_that(new_level, is_fully_accessible_via(self.wall_empty))
 
     def test_catacombs_generation(self):
         """
@@ -389,8 +392,8 @@ class TestLevelGenerator:
                                       1,
                                       1,
                                       self.rng)
-        room_generator = CatacombsGenerator(FLOOR_ROCK,
-                                             WALL_EMPTY,
+        room_generator = CatacombsGenerator(self.floor_rock,
+                                             self.wall_empty,
                                              ['crypt'],
                                              self.rng)
         level_decorator = mock()
@@ -412,4 +415,4 @@ class TestLevelGenerator:
 
         new_level = generator.generate_level(portal)
 
-        assert_that(new_level, is_fully_accessible_via(WALL_EMPTY))
+        assert_that(new_level, is_fully_accessible_via(self.wall_empty))
