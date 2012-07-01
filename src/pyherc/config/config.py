@@ -19,11 +19,10 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Configuration for herculeum
+Configuration for pyherc
 """
 import logging
 import random
-import herculeum.gui.surfaceManager
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.move.factories import MoveFactory
 from pyherc.rules.move.factories import WalkFactory
