@@ -6,7 +6,6 @@ pyherc
 .. toctree::
    :maxdepth: 2
    
-   module_application
    module_aspects   
    ai/module_ai
    config/package_config   

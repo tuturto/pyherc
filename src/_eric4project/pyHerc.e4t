@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project pyherc -->
-<!-- Saved: 2012-06-04, 20:13:17 -->
+<!-- Saved: 2012-06-30, 23:27:29 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: correct graphics</Summary>
@@ -355,12 +355,48 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: configurable</Summary>
+    <Summary>TODO: remove link</Summary>
     <Description></Description>
-    <Created>2012-05-05, 21:16:42</Created>
+    <Created>2012-06-30, 09:05:36</Created>
+    <Resource>
+      <Filename>pyherc/test/unit/test_tables.py</Filename>
+      <Linenumber>69</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: remove the link</Summary>
+    <Description></Description>
+    <Created>2012-06-30, 09:08:41</Created>
+    <Resource>
+      <Filename>pyherc/rules/tables.py</Filename>
+      <Linenumber>403</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: beak link</Summary>
+    <Description></Description>
+    <Created>2012-06-30, 10:45:41</Created>
+    <Resource>
+      <Filename>pyherc/test/unit/test_dungeon.py</Filename>
+      <Linenumber>56</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: configurable, break link</Summary>
+    <Description></Description>
+    <Created>2012-06-30, 10:57:47</Created>
     <Resource>
       <Filename>pyherc/generators/level/generator.py</Filename>
-      <Linenumber>217</Linenumber>
+      <Linenumber>219</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: remove link</Summary>
+    <Description></Description>
+    <Created>2012-06-30, 12:32:16</Created>
+    <Resource>
+      <Filename>pyherc/data/level.py</Filename>
+      <Linenumber>202</Linenumber>
     </Resource>
   </Task>
 </Tasks>

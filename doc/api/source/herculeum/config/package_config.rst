@@ -7,5 +7,6 @@ herculeum.config
    :maxdepth: 2
    
    levels/package_levels
+   module_config
    module_tiles
    

@@ -1,6 +1,6 @@
-pyherc.application
-******************
+herculeum.application
+*********************
 
-.. automodule:: pyherc.application
+.. automodule:: herculeum.application
     :members:
     :show-inheritance:

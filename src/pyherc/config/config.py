@@ -60,7 +60,6 @@ class Configuration(object):
         self.resolution = None
         self.full_screen = None
         self.caption = None
-        self.surface_manager = None
         self.action_factory = None
         self.base_path = None
         self.item_generator = None
@@ -77,13 +76,6 @@ class Configuration(object):
         """
         Initialises configuration
         """
-        self.resolution = (800, 600)
-        self.full_screen = True
-        self.caption = 'Herculeum'
-
-        self.surface_manager = herculeum.gui.surfaceManager.SurfaceManager()
-        self.surface_manager.load_resources(self.base_path)
-
         self.level_size = (80, 30)
 
         self.initialise_factories()

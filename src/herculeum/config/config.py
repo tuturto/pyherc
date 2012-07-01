@@ -19,9 +19,27 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for gui elements
+Module for herculeum main configuration
 """
+import pyherc.config
+from herculeum.gui.surfaceManager import SurfaceManager
 
-from .startmenu import StartMenu
-from .options import OptionsMenu
-from .gamewindow import GameWindow
+class Configuration(pyherc.config.Configuration):
+
+    def __init__(self, base_path, model):
+        """
+        Default constructor
+        """
+        super(Configuration, self).__init__(base_path, model)
+
+        self.surface_manager = None
+
+    def initialise(self, level_config):
+        super(Configuration, self).initialise(level_config)
+
+        self.resolution = (800, 600)
+        self.full_screen = True
+        self.caption = 'Herculeum'
+
+        self.surface_manager = SurfaceManager()
+        self.surface_manager.load_resources(self.base_path)

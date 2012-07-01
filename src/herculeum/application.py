@@ -26,7 +26,7 @@ import pygame
 import pgu.gui
 from herculeum.gui.windows import MainWindow
 from herculeum.gui.startmenu import StartMenu
-from pyherc.config import Configuration
+from herculeum.config import Configuration
 from pyherc.data.model import Model
 import sys
 import logging

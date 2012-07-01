@@ -23,7 +23,7 @@ Module for testing main configuration
 """
 
 #pylint: disable=W0614
-from pyherc.config import Configuration
+from herculeum.config import Configuration
 from pyherc.rules import InventoryParameters
 from pyherc.test.integration import detect_base_path
 from mockito import mock
