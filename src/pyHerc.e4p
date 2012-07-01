@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-06-30, 18:54:52 -->
+<!-- Saved: 2012-06-30, 19:07:38 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -120,7 +120,6 @@
     <Source>pyherc/test/unit/test_effectscollection.py</Source>
     <Source>pyherc/test/unit/test_generator_utils.py</Source>
     <Source>pyherc/test/unit/test_gridpartitioner.py</Source>
-    <Source>pyherc/test/unit/test_gui.py</Source>
     <Source>pyherc/test/unit/test_item.py</Source>
     <Source>pyherc/test/unit/test_itemadder.py</Source>
     <Source>pyherc/test/unit/test_itemgeneration.py</Source>
@@ -168,6 +167,7 @@
     <Source>herculeum/test/integration/test_config.py</Source>
     <Source>herculeum/config/tiles.py</Source>
     <Source>herculeum/application.py</Source>
+    <Source>herculeum/test/unit/test_gui.py</Source>
   </Sources>
   <Forms>
   </Forms>
