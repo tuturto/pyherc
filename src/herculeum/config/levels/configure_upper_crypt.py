@@ -113,7 +113,14 @@ def init_level(rng, item_generator, creature_generator, level_size):
                                     creature_adder_config,
                                     rng)]
 
-    portal_adder_configurations = []
+    portal_adder_configurations = [PortalAdderConfiguration(
+                                        icons = (PORTAL_STAIRS_DOWN,
+                                                 PORTAL_STAIRS_UP),
+                                        level_type = 'upper catacombs',
+                                        location_type = 'room',
+                                        chance = 25,
+                                        new_level = 'upper crypt',
+                                        unique = True)]
 
     config = (LevelConfiguration()
                     .with_rooms(room_generators)
