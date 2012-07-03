@@ -24,6 +24,8 @@ Module main display
 
 from pgu.gui import Widget
 from pgu.gui import Container
+from pgu.gui import TextArea
+import pgu.gui.basic
 from pygame import Rect
 
 from pygame.locals import K_ESCAPE
@@ -65,7 +67,15 @@ class GameWindow(Container):
         play_area = GameArea(application = self.application,
                              surface_manager = self.surface_manager)
         self.application.world.register_event_listener(play_area)
-        self.add(play_area, 0, 0)
+        self.add(play_area, 0, 45)
+        w = TextArea(value="You set out to adventure\nIt looks dangerous here\nBe careful",
+                     width=800,
+                     height=40,
+                     size=8,
+                     focusable = False,
+                     font = pygame.font.Font(None, 12),
+                     color = (0, 0, 0))
+        self.add(w, 0, 0)
         play_area.focus()
 
 
