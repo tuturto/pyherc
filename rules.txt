@@ -7,6 +7,11 @@ Body    0 - 12
 Finesse 0 - 12
 Mind    0 - 12
 
+Bonus chart
+===========
+1 2 3 4 5 6  7  8  9  10 11  12
+1 2 3 5 8 13 21 34 55 89 144 233
+
 Combat
 ======
 To Hit (melee): 2d6 <= Body + Modifiers
@@ -26,15 +31,39 @@ Light/regular weapon used with 2 hands  -1
 Unarmed opponent                -2 (only if using weapon)
 
 Damage: Weapon damage + Modifiers
-        1 / 36 Critical Hit (double damage)
+Critical hit:
+    chance as per weapon (separate roll)
+    damage as per weapon
 
-Armours
-=======
-Leather         +1
-Chainmail       +2
-Scale mail      +3
-Plate mail      +4
-Shield          +1 (cumulative with armour)
+Armours         Bonus   Speed  Casting
+=======         =====   =====  =======
+Leather         +1      * 1    
+Chainmail       +2      * 0.9  -1
+Scale mail      +3      * 0.7  -2
+Plate mail      +4      * 0.5  -3
+Shield          +1      * 1    -1
+
+Weapons        Damage  Critical  Critical  Damage Types
+                       Range     Damage
+=======        ======  ========  ========  ============
+Dagger         2       10        2         pierce
+Sword          5       12        5         slash/pierce
+Axe            5       12        5         slash/crush
+Club           3       11        3         crush
+Warhammer      7       12        7         crush
+Spear          5       11        5         pierce
+Whip           3       11        3         slash
+Sickle         3       10        3         slash
+Morning star   5       12        5         crush/pierce
+
+Weapon Enchantments
+===================
+Keen: -1 critical range (only bladed weapons)
+Elemental: elemental damage (pierce -> pierce/fire, slash/pierce -> slash/pierce/fire)
+           fire, frost
++n/m: +n/m to damage / critical damage
+Balanced: -1 to hit
+
 
 Feats
 =====
