@@ -47,32 +47,40 @@ class NewItemGenerator(object):
         self.config = config
 
     @logged
-    def generate_item(self, name):
+    def generate_item(self, name = None, item_type = None):
         """
         Generate an item
 
         :param name: name of the item to generate
         :type name: string
+        :param item_type: type of the item to generate
+        :type item_type: string
         :return: Generated item
         :rtype: Item
         """
-        item_specification = self.find_item_specification(name)
+        item_specification = self.find_item_specification(name = name,
+                                                          item_type = item_type)
 
         item = self.create_item(item_specification)
 
         return item
 
     @logged
-    def find_item_specification(self, name):
+    def find_item_specification(self, name = None, item_type = None):
         """
         Find item specification by given parameters
 
         :param name: name of the item
         :type name: string
+        :param item_type: type of the item to generate
+        :type item_type: string
         :return: item specification
         :rtype: ItemConfiguration
         """
-        return self.config.get_by_name(name)
+        if not name is None:
+            return self.config.get_by_name(name)
+        else:
+            return self.config.get_by_type(item_type)
 
     @logged
     def create_item(self, item_specification):
@@ -118,13 +126,17 @@ class ItemConfigurations(object):
     """
     logged = Logged()
 
-    def __init__(self):
+    def __init__(self, rng):
         """
         Default constructor
+
+        :param rng: random number generator
+        :type rng: Random
         """
         super(ItemConfigurations, self).__init__()
         self.__items = []
         self.__items_by_name = {}
+        self.rng = rng
 
     @logged
     def add_item(self, item_config):
@@ -156,11 +168,44 @@ class ItemConfigurations(object):
         """
         return self.__items_by_name[name]
 
+    @logged
+    def get_by_type(self, item_type):
+        """
+        Retrieve a random specification of item by type
+
+        :param item_type: type of the item
+        :type item_type: string
+        :return: item specification
+        :rtype: ItemConfiguration
+        """
+        matching_specs = filter(lambda x: item_type in x.types,
+                                self.__items)
+
+        max_score = reduce(lambda x, y: x + y.rarity,
+                           matching_specs, 0)
+
+        score = self.rng.randint(1, max_score)
+        current_score = 0
+
+        for spec in matching_specs:
+            current_score = current_score + spec.rarity
+            if current_score >= score:
+                return spec
+
+        return None
+
 class ItemConfiguration(object):
     """
     Class representing a single item
     """
     logged = Logged()
+
+    rarities = {'artifact': 1,
+                'legendary': 4,
+                'epic': 16,
+                'rare': 64,
+                'uncommon': 256,
+                'common': 1024}
 
     @logged
     def __init__(self, name, cost, weight, icons, types, rarity,
@@ -173,7 +218,7 @@ class ItemConfiguration(object):
         self.weight = weight
         self.icons = icons
         self.types = types
-        self.rarity = rarity
+        self.rarity = self.rarities[rarity]
         self.weapon_configration = weapon_configration
 
         if effect_handles is None:

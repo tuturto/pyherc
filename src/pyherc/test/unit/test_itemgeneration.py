@@ -30,6 +30,7 @@ from hamcrest import * #pylint: disable=W0401
 from pyherc.generators.item import NewItemGenerator, ItemConfigurations
 from pyherc.generators.item import ItemConfiguration, WeaponConfiguration
 from pyherc.rules.effects import EffectHandle
+from random import Random
 
 class TestNewItemGeneration(object):
     """
@@ -47,7 +48,7 @@ class TestNewItemGeneration(object):
         """
         Setup test case
         """
-        self.item_config = ItemConfigurations()
+        self.item_config = ItemConfigurations(Random())
 
         self.item_config.add_item(
                     ItemConfiguration(name = 'apple',
@@ -126,6 +127,14 @@ class TestNewItemGeneration(object):
         assert_that(item, is_(not_none()))
 
         assert_that(item, has_effect_handle())
+
+    def test_generating_random_item(self):
+        """
+        Test that a random item can be generated
+        """
+        item = self.generator.generate_item(item_type = 'food')
+
+        assert_that(item.name, is_(equal_to('apple')))
 
 class TestItemGeneration(object):
     """
