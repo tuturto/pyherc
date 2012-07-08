@@ -38,41 +38,63 @@ class TestNewItemGeneration(object):
         Default constructor
         """
         super(TestNewItemGeneration, self).__init__()
+        self.item_config = None
+        self.generator = None
+
+    def setup(self):
+        """
+        Setup test case
+        """
+        self.item_config = ItemConfigurations()
+
+        self.item_config.add_item(name = 'apple',
+                                  cost = 1,
+                                  weight = 1,
+                                  icons = [500, 501],
+                                  types = ['food'],
+                                  rarity = 'common')
+
+        self.item_config.add_weapon(name = 'dagger',
+                                    cost = 2,
+                                    weight = 1,
+                                    icons = [500],
+                                    types = ['weapon',
+                                             'light weapon',
+                                             'melee',
+                                             'simple weapon'],
+                                    damage = 2,
+                                    critical_range = 11,
+                                    critical_damage = 2,
+                                    damage_types = ['piercing',
+                                                    'slashing'],
+                                    weapon_class = 'simple',
+                                    rarity = 'common')
+
+        self.generator = NewItemGenerator(self.item_config)
 
     def test_create_mundane_item(self):
         """
         Test that creating a simple item is possible
         """
-        item_config = ItemConfigurations()
-
-        item_config.add_item(name = 'apple',
-                             cost = 1,
-                             weight = 1,
-                             icons = [500, 501],
-                             types = ['food'],
-                             rarity = 'common')
-
-        generator = NewItemGenerator(item_config)
-
-        item = generator.generate_item(name = 'apple')
+        item = self.generator.generate_item(name = 'apple')
 
         assert_that(item.name, is_(equal_to('apple')))
+
+    def test_create_weapon(self):
+        """
+        Test that a weapon can be created
+        """
+        item = self.generator.generate_item(name = 'dagger')
 
     def test_configuring_item_generation(self):
         """
         Test that configuration can be added
         """
-        item_config = ItemConfigurations()
+        specs = self.item_config.get_all_items()
 
-        item_config.add_item(name = 'apple',
-                             cost = 1,
-                             weight = 1,
-                             icons = [500, 501],
-                             types = ['food'],
-                             rarity = 'common')
+        apple_spec = filter(lambda x: x.name == 'apple', specs)
 
-        spec = item_config.get_all_items()[0]
-        assert_that(spec.name, is_(equal_to('apple')))
+        assert_that(len(apple_spec), is_(equal_to(1)))
 
 class TestItemGeneration(object):
     """

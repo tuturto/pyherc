@@ -115,13 +115,45 @@ class ItemConfigurations(object):
         Add item to internal configuration
         """
         config = ItemConfiguration(name = name,
-                                    cost = cost,
-                                    weight = weight,
-                                    icons = icons,
-                                    types = types,
-                                    rarity = rarity)
-        self.__items.append(config)
-        self.__items_by_name[name] = config
+                                   cost = cost,
+                                   weight = weight,
+                                   icons = icons,
+                                   types = types,
+                                   rarity = rarity)
+
+        self.__add_configuration(config)
+
+    def add_weapon(self, name, cost, weight, icons, types, rarity,
+                   damage, critical_range, critical_damage, damage_types,
+                   weapon_class):
+        """
+        Add a weapon to internal configuration
+        """
+        weapon_config = WeaponConfiguration(damage = damage,
+                                            critical_range = critical_range,
+                                            critical_damage = critical_damage,
+                                            damage_types = damage_types,
+                                            weapon_class = weapon_class)
+
+        config = ItemConfiguration(name = name,
+                                   cost = cost,
+                                   weight = weight,
+                                   icons = icons,
+                                   types = types,
+                                   rarity = rarity,
+                                   weapon_configration = weapon_config)
+
+        self.__add_configuration(config)
+
+    def __add_configuration(self, configuration):
+        """
+        Add configuration to internal lists
+
+        :param configuration: configuration to add
+        :type configuration: ItemConfiguration
+        """
+        self.__items.append(configuration)
+        self.__items_by_name[configuration.name] = configuration
 
     @logged
     def get_all_items(self):
@@ -152,7 +184,8 @@ class ItemConfiguration(object):
     logged = Logged()
 
     @logged
-    def __init__(self, name, cost, weight, icons, types, rarity):
+    def __init__(self, name, cost, weight, icons, types, rarity,
+                 weapon_configration = None):
         """
         Default constructor
         """
@@ -162,6 +195,25 @@ class ItemConfiguration(object):
         self.icons = icons
         self.types = types
         self.rarity = rarity
+        self.weapon_configration = weapon_configration
+
+class WeaponConfiguration(object):
+    """
+    Class representing weapon configuration
+    """
+    logged = Logged()
+
+    @logged
+    def __init__(self, damage, critical_range, critical_damage, damage_types,
+                   weapon_class):
+        """
+        Default constructor
+        """
+        self.damage = damage
+        self.critical_range = critical_range
+        self.critical_damage = critical_damage
+        self.damage_types = damage_types
+        self.weapon_class = weapon_class
 
 class ItemGenerator(object):
     """
