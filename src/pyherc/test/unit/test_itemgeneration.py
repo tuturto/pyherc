@@ -27,6 +27,53 @@ from pyherc.rules.tables import Tables
 from pyherc.test.matchers import has_effect_handle
 from hamcrest import * #pylint: disable=W0401
 
+from pyherc.generators.item import NewItemGenerator, ItemConfigurations
+
+class TestNewItemGeneration(object):
+    """
+    Tests for new item generator
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestNewItemGeneration, self).__init__()
+
+    def test_create_mundane_item(self):
+        """
+        Test that creating a simple item is possible
+        """
+        item_config = ItemConfigurations()
+
+        item_config.add_item(name = 'apple',
+                             cost = 1,
+                             weight = 1,
+                             icons = [500, 501],
+                             types = ['food'],
+                             rarity = 'common')
+
+        generator = NewItemGenerator(item_config)
+
+        item = generator.generate_item(name = 'apple')
+
+        assert_that(item.name, is_(equal_to('apple')))
+
+    def test_configuring_item_generation(self):
+        """
+        Test that configuration can be added
+        """
+        item_config = ItemConfigurations()
+
+        item_config.add_item(name = 'apple',
+                             cost = 1,
+                             weight = 1,
+                             icons = [500, 501],
+                             types = ['food'],
+                             rarity = 'common')
+
+        spec = item_config.items[0]
+        assert_that(spec.name, is_(equal_to('apple')))
+
 class TestItemGeneration(object):
     """
     Tests for generating items

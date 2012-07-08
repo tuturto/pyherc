@@ -27,6 +27,78 @@ import random
 from pyherc.data import Item, EffectsCollection
 from pyherc.data.item import WeaponData
 from pyherc.rules.effects import EffectHandle
+from pyherc.aspects import Logged
+
+class NewItemGenerator(object):
+    """
+    Class used to generate items
+    """
+    logged = Logged()
+
+    @logged
+    def __init__(self, config):
+        """
+        Default constructor
+
+        :param config: configuration for items
+        :type config: ItemConfiguration
+        """
+        super(NewItemGenerator, self).__init__()
+
+    @logged
+    def generate_item(self, name):
+        """
+        Generate an item
+
+        :param name: name of the item to generate
+        :type name: string
+        :return: Generated item
+        :rtype: Item
+        """
+        return Item(EffectsCollection())
+
+class ItemConfigurations(object):
+    """
+    Class for configuring items
+    """
+    logged = Logged()
+
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(ItemConfigurations, self).__init__()
+        self.items = []
+
+    @logged
+    def add_item(self, name, cost, weight, icons, types, rarity):
+        """
+        Add item to internal configuration
+        """
+        self.items.append(ItemConfiguration(name = name,
+                                            cost = cost,
+                                            weight = weight,
+                                            icons = icons,
+                                            types = types,
+                                            rarity = rarity))
+
+class ItemConfiguration(object):
+    """
+    Class representing a single item
+    """
+    logged = Logged()
+
+    @logged
+    def __init__(self, name, cost, weight, icons, types, rarity):
+        """
+        Default constructor
+        """
+        self.name = name
+        self.cost = cost
+        self.weight = weight
+        self.icons = icons
+        self.types = types
+        self.rarity = rarity
 
 class ItemGenerator(object):
     """
