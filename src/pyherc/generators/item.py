@@ -93,6 +93,23 @@ class NewItemGenerator(object):
         item.rarity = item_specification.rarity
         item.tags = item_specification.types
 
+        if not item_specification.weapon_configration is None:
+            weapon_spec = item_specification.weapon_configration
+            item.weapon_data = WeaponData(
+                                    damage = weapon_spec.damage,
+                                    critical_range = weapon_spec.critical_range,
+                                    critical_damage = weapon_spec.critical_damage,
+                                    damage_type = weapon_spec.damage_types,
+                                    weapon_type = weapon_spec.weapon_class)
+
+        for spec in item_specification.effect_handles:
+            new_handle = EffectHandle(trigger = spec.trigger,
+                                       effect = spec.effect,
+                                       parameters = spec.parameters,
+                                       charges = spec.charges)
+
+            item.add_effect_handle(new_handle)
+
         return item
 
 class ItemConfigurations(object):
@@ -147,7 +164,7 @@ class ItemConfiguration(object):
 
     @logged
     def __init__(self, name, cost, weight, icons, types, rarity,
-                 weapon_configration = None):
+                 weapon_configration = None, effect_handles = None):
         """
         Default constructor
         """
@@ -158,6 +175,11 @@ class ItemConfiguration(object):
         self.types = types
         self.rarity = rarity
         self.weapon_configration = weapon_configration
+
+        if effect_handles is None:
+            self.effect_handles = []
+        else:
+            self.effect_handles = effect_handles
 
 class WeaponConfiguration(object):
     """

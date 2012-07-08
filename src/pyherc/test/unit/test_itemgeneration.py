@@ -29,6 +29,7 @@ from hamcrest import * #pylint: disable=W0401
 
 from pyherc.generators.item import NewItemGenerator, ItemConfigurations
 from pyherc.generators.item import ItemConfiguration, WeaponConfiguration
+from pyherc.rules.effects import EffectHandle
 
 class TestNewItemGeneration(object):
     """
@@ -74,6 +75,19 @@ class TestNewItemGeneration(object):
                                                             'slashing'],
                                             weapon_class = 'simple')))
 
+        self.item_config.add_item(
+                    ItemConfiguration(name = 'healing potion',
+                                      cost = 150,
+                                      weight = 1,
+                                      icons = [100],
+                                      types = ['potion'],
+                                      rarity = 'rare',
+                                      effect_handles = [EffectHandle(
+                                            trigger = 'on drink',
+                                            effect = 'cure medium wounds',
+                                            parameters = None,
+                                            charges = 1)]))
+
         self.generator = NewItemGenerator(self.item_config)
 
     def test_create_mundane_item(self):
@@ -90,6 +104,10 @@ class TestNewItemGeneration(object):
         """
         item = self.generator.generate_item(name = 'dagger')
 
+        weapon_data = item.weapon_data
+
+        assert_that(weapon_data.damage, is_(equal_to(2)))
+
     def test_configuring_item_generation(self):
         """
         Test that configuration can be added
@@ -98,6 +116,16 @@ class TestNewItemGeneration(object):
                             self.item_config.get_all_items())
 
         assert_that(len(apple_spec), is_(equal_to(1)))
+
+    def test_generate_item_with_effect(self):
+        """
+        Test that item with effect can be generated
+        """
+        item = self.generator.generate_item(name = 'healing potion')
+
+        assert_that(item, is_(not_none()))
+
+        assert_that(item, has_effect_handle())
 
 class TestItemGeneration(object):
     """
