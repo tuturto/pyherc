@@ -28,6 +28,7 @@ from pyherc.test.matchers import has_effect_handle
 from hamcrest import * #pylint: disable=W0401
 
 from pyherc.generators.item import NewItemGenerator, ItemConfigurations
+from pyherc.generators.item import ItemConfiguration, WeaponConfiguration
 
 class TestNewItemGeneration(object):
     """
@@ -47,28 +48,31 @@ class TestNewItemGeneration(object):
         """
         self.item_config = ItemConfigurations()
 
-        self.item_config.add_item(name = 'apple',
-                                  cost = 1,
-                                  weight = 1,
-                                  icons = [500, 501],
-                                  types = ['food'],
-                                  rarity = 'common')
+        self.item_config.add_item(
+                    ItemConfiguration(name = 'apple',
+                                      cost = 1,
+                                      weight = 1,
+                                      icons = [500, 501],
+                                      types = ['food'],
+                                      rarity = 'common'))
 
-        self.item_config.add_weapon(name = 'dagger',
-                                    cost = 2,
-                                    weight = 1,
-                                    icons = [500],
-                                    types = ['weapon',
-                                             'light weapon',
-                                             'melee',
-                                             'simple weapon'],
-                                    damage = 2,
-                                    critical_range = 11,
-                                    critical_damage = 2,
-                                    damage_types = ['piercing',
-                                                    'slashing'],
-                                    weapon_class = 'simple',
-                                    rarity = 'common')
+        self.item_config.add_item(
+                    ItemConfiguration(name = 'dagger',
+                                      cost = 2,
+                                      weight = 1,
+                                      icons = [500],
+                                      types = ['weapon',
+                                               'light weapon',
+                                               'melee',
+                                               'simple weapon'],
+                                      rarity = 'common',
+                                      weapon_configration = WeaponConfiguration(
+                                            damage = 2,
+                                            critical_range = 11,
+                                            critical_damage = 2,
+                                            damage_types = ['piercing',
+                                                            'slashing'],
+                                            weapon_class = 'simple')))
 
         self.generator = NewItemGenerator(self.item_config)
 
@@ -90,9 +94,8 @@ class TestNewItemGeneration(object):
         """
         Test that configuration can be added
         """
-        specs = self.item_config.get_all_items()
-
-        apple_spec = filter(lambda x: x.name == 'apple', specs)
+        apple_spec = filter(lambda x: x.name == 'apple',
+                            self.item_config.get_all_items())
 
         assert_that(len(apple_spec), is_(equal_to(1)))
 

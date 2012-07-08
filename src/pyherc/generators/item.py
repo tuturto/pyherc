@@ -110,50 +110,12 @@ class ItemConfigurations(object):
         self.__items_by_name = {}
 
     @logged
-    def add_item(self, name, cost, weight, icons, types, rarity):
+    def add_item(self, item_config):
         """
         Add item to internal configuration
         """
-        config = ItemConfiguration(name = name,
-                                   cost = cost,
-                                   weight = weight,
-                                   icons = icons,
-                                   types = types,
-                                   rarity = rarity)
-
-        self.__add_configuration(config)
-
-    def add_weapon(self, name, cost, weight, icons, types, rarity,
-                   damage, critical_range, critical_damage, damage_types,
-                   weapon_class):
-        """
-        Add a weapon to internal configuration
-        """
-        weapon_config = WeaponConfiguration(damage = damage,
-                                            critical_range = critical_range,
-                                            critical_damage = critical_damage,
-                                            damage_types = damage_types,
-                                            weapon_class = weapon_class)
-
-        config = ItemConfiguration(name = name,
-                                   cost = cost,
-                                   weight = weight,
-                                   icons = icons,
-                                   types = types,
-                                   rarity = rarity,
-                                   weapon_configration = weapon_config)
-
-        self.__add_configuration(config)
-
-    def __add_configuration(self, configuration):
-        """
-        Add configuration to internal lists
-
-        :param configuration: configuration to add
-        :type configuration: ItemConfiguration
-        """
-        self.__items.append(configuration)
-        self.__items_by_name[configuration.name] = configuration
+        self.__items.append(item_config)
+        self.__items_by_name[item_config.name] = item_config
 
     @logged
     def get_all_items(self):
