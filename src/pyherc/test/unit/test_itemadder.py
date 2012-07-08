@@ -28,10 +28,13 @@ from pyherc.test.matchers import located_in_room, does_have_item
 
 from pyherc.data import Level
 from pyherc.generators.item import ItemGenerator
+from pyherc.generators.item import ItemConfiguration, ItemConfigurations
+from pyherc.generators.item import WeaponConfiguration
+from pyherc.rules.effects import EffectHandle
 from pyherc.generators.level.items import ItemAdder
 from pyherc.generators.level.items import ItemAdderConfiguration
 from pyherc.rules.tables import Tables
-import random
+from random import Random
 
 class TestItemAdder():
     """
@@ -56,33 +59,47 @@ class TestItemAdder():
         """
         self.floor_rock = 1
         self.wall_empty = 2
-        self.rng = random.Random()
+        self.rng = Random()
         self.level = Level((60, 40), self.floor_rock, self.wall_empty)
         self.level.set_location_type((10, 10), 'room')
 
         for x_loc in range(11, 30):
             self.level.set_location_type((x_loc, 10), 'corridor')
 
-        self.mock_tables = mock(Tables)
-        self.mock_tables.items = {}
-        self.mock_tables.items['dagger'] = {'name': 'dagger',
-                                            'icon': 1,
-                                            'cost': 5,
-                                            'weight': 10,
-                                            'rarity': 32,
-                                            'type': ['weapon']}
+        item_config = ItemConfigurations(Random())
 
-        self.mock_tables.items['red potion'] = {'name': 'red potion',
-                                                'icon': 2,
-                                                'cost': 500,
-                                                'weight': 1,
-                                                'rarity': 16,
-                                                'type': ['potion']}
+        item_config.add_item(
+                    ItemConfiguration(name = 'dagger',
+                                      cost = 2,
+                                      weight = 1,
+                                      icons = [500],
+                                      types = ['weapon',
+                                               'light weapon',
+                                               'melee',
+                                               'simple weapon'],
+                                      rarity = 'common',
+                                      weapon_configration = WeaponConfiguration(
+                                            damage = 2,
+                                            critical_range = 11,
+                                            critical_damage = 2,
+                                            damage_types = ['piercing',
+                                                            'slashing'],
+                                            weapon_class = 'simple')))
 
-        self.mock_tables.tag_score = {'potion': 1}
-        self.mock_tables.items_by_tag = {'potion': [('red potion', 0, 1)]}
+        item_config.add_item(
+                    ItemConfiguration(name = 'red potion',
+                                      cost = 150,
+                                      weight = 1,
+                                      icons = [100],
+                                      types = ['potion'],
+                                      rarity = 'rare',
+                                      effect_handles = [EffectHandle(
+                                            trigger = 'on drink',
+                                            effect = 'cure medium wounds',
+                                            parameters = None,
+                                            charges = 1)]))
 
-        self.item_generator = ItemGenerator(self.mock_tables)
+        self.item_generator = ItemGenerator(item_config)
 
         self.configuration = ItemAdderConfiguration(['crypt'])
         self.configuration.add_item(min_amount = 3,

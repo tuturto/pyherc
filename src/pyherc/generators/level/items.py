@@ -127,14 +127,10 @@ class ItemAdder(object):
         amount = self.rng.randint(item_spec['min_amount'],
                                   item_spec['max_amount'])
 
-        params = {}
-        if item_spec['name'] != None:
-            params['name'] = item_spec['name']
-        else:
-            params['type'] = item_spec['type']
-
         for i in range(amount):
-            new_item = self.item_generator.generate_item(params)
+            new_item = self.item_generator.generate_item(
+                                                name = item_spec['name'],
+                                                item_type = item_spec['type'])
             items.append((item_spec, new_item))
 
         return items

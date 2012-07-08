@@ -28,5 +28,6 @@ CreatureGenerator
 """
 
 from .dungeon import DungeonGenerator
-from .item import ItemGenerator
+from .item import ItemGenerator, ItemConfigurations, ItemConfiguration
+from .item import WeaponConfiguration
 from .creature import CreatureGenerator
