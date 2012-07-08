@@ -41,6 +41,10 @@ from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 from pyherc.rules.effects import EffectsFactory
 from pyherc.rules.effects import Heal, Poison
 
+from pyherc.generators import ItemConfigurations
+from pyherc.generators import ItemConfiguration, WeaponConfiguration
+from pyherc.rules.effects import EffectHandle
+
 from pyherc.rules.tables import Tables
 
 class Configuration(object):
@@ -139,13 +143,57 @@ class Configuration(object):
         self.tables.load_tables(self.base_path)
         self.logger.info('Tables initialised')
 
+    def get_item_config(self):
+        item_config = ItemConfigurations(self.rng)
+
+        item_config.add_item(
+                    ItemConfiguration(name = 'apple',
+                                      cost = 1,
+                                      weight = 1,
+                                      icons = [501],
+                                      types = ['food'],
+                                      rarity = 'common'))
+
+        item_config.add_item(
+                    ItemConfiguration(name = 'dagger',
+                                      cost = 2,
+                                      weight = 1,
+                                      icons = [602, 603],
+                                      types = ['weapon',
+                                               'light weapon',
+                                               'melee',
+                                               'simple weapon'],
+                                      rarity = 'common',
+                                      weapon_configration = WeaponConfiguration(
+                                            damage = 2,
+                                            critical_range = 11,
+                                            critical_damage = 2,
+                                            damage_types = ['piercing',
+                                                            'slashing'],
+                                            weapon_class = 'simple')))
+
+        item_config.add_item(
+                    ItemConfiguration(name = 'healing potion',
+                                      cost = 150,
+                                      weight = 1,
+                                      icons = [701],
+                                      types = ['potion'],
+                                      rarity = 'rare',
+                                      effect_handles = [EffectHandle(
+                                            trigger = 'on drink',
+                                            effect = 'cure medium wounds',
+                                            parameters = None,
+                                            charges = 1)]))
+
+        return item_config
+
     def initialise_generators(self):
         """
         Initialise generators
         """
         self.logger.info('Initialising generators')
 
-        self.item_generator = ItemGenerator(self.tables)
+        self.item_generator = ItemGenerator(self.get_item_config())
         self.creature_generator = CreatureGenerator(self.model,
                                                     self.action_factory,
                                                     self.tables,
