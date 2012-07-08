@@ -71,7 +71,7 @@ class TestNewItemGeneration(object):
                              types = ['food'],
                              rarity = 'common')
 
-        spec = item_config.items[0]
+        spec = item_config.get_all_items()[0]
         assert_that(spec.name, is_(equal_to('apple')))
 
 class TestItemGeneration(object):

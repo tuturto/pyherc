@@ -44,6 +44,7 @@ class NewItemGenerator(object):
         :type config: ItemConfiguration
         """
         super(NewItemGenerator, self).__init__()
+        self.config = config
 
     @logged
     def generate_item(self, name):
@@ -55,7 +56,44 @@ class NewItemGenerator(object):
         :return: Generated item
         :rtype: Item
         """
-        return Item(EffectsCollection())
+        item_specification = self.find_item_specification(name)
+
+        item = self.create_item(item_specification)
+
+        return item
+
+    @logged
+    def find_item_specification(self, name):
+        """
+        Find item specification by given parameters
+
+        :param name: name of the item
+        :type name: string
+        :return: item specification
+        :rtype: ItemConfiguration
+        """
+        return self.config.get_by_name(name)
+
+    @logged
+    def create_item(self, item_specification):
+        """
+        Create new item based on specification
+
+        :param item_specification: specification of item
+        :type item_specification: ItemConfiguration
+        :return: new item
+        :rtype: Item
+        """
+        item = Item(EffectsCollection())
+
+        item.name = item_specification.name
+        item.icon = random.choice(item_specification.icons)
+        item.cost = item_specification.cost
+        item.weight = item_specification.weight
+        item.rarity = item_specification.rarity
+        item.tags = item_specification.types
+
+        return item
 
 class ItemConfigurations(object):
     """
@@ -68,19 +106,44 @@ class ItemConfigurations(object):
         Default constructor
         """
         super(ItemConfigurations, self).__init__()
-        self.items = []
+        self.__items = []
+        self.__items_by_name = {}
 
     @logged
     def add_item(self, name, cost, weight, icons, types, rarity):
         """
         Add item to internal configuration
         """
-        self.items.append(ItemConfiguration(name = name,
-                                            cost = cost,
-                                            weight = weight,
-                                            icons = icons,
-                                            types = types,
-                                            rarity = rarity))
+        config = ItemConfiguration(name = name,
+                                    cost = cost,
+                                    weight = weight,
+                                    icons = icons,
+                                    types = types,
+                                    rarity = rarity)
+        self.__items.append(config)
+        self.__items_by_name[name] = config
+
+    @logged
+    def get_all_items(self):
+        """
+        Returns all items
+
+        :return: list of items
+        :rtype: [ItemConfiguration]
+        """
+        return self.__items
+
+    @logged
+    def get_by_name(self, name):
+        """
+        Retrieve specification of item by name
+
+        :param name: name of the item
+        :type name: string
+        :return: item specification
+        :rtype: ItemConfiguration
+        """
+        return self.__items_by_name[name]
 
 class ItemConfiguration(object):
     """
