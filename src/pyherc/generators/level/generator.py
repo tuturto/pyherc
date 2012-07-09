@@ -91,6 +91,13 @@ class LevelGeneratorFactory(object):
 
         portal_adders = self.portal_adder_factory.create_portal_adders(level_type)
 
+        #TODO: configurable, break link
+        level_context = LevelContext(size = self.size,
+                                     floor_type = -2,
+                                     wall_type = -101,
+                                     empty_floor = 0,
+                                     empty_wall = 100)
+
         return LevelGenerator(self.action_factory,
                               partitioner,
                               rooms,
@@ -99,7 +106,7 @@ class LevelGeneratorFactory(object):
                               item_adder,
                               creature_adder,
                               self.random_generator,
-                              self.size)
+                              level_context)
 
     @logged
     def get_sub_components(self, level_type, component_list, component_type):
@@ -167,7 +174,7 @@ class LevelGenerator(object):
     def __init__(self, action_factory, partitioner, room_generators,
                  decorator, portal_adders,
                  item_adder, creature_adder,
-                 random_generator, size):
+                 random_generator, level_context):
         """
         Default constructor
 
@@ -179,6 +186,7 @@ class LevelGenerator(object):
         :param item_adder: ItemAdder to generate items
         :param creature_adder: CreatureAdder to add creatures
         :param random_generator: Random number generator
+        :param level_context: Context for level
         :param size: Size of the level to create
         """
         self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGenerator') #pylint: disable=C0301
@@ -191,7 +199,7 @@ class LevelGenerator(object):
         self.room_generators = room_generators
         self.decorator = decorator
         self.portal_adders = portal_adders
-        self.size = size
+        self.level_context = level_context
 
     def __getstate__(self):
         """
@@ -216,12 +224,11 @@ class LevelGenerator(object):
         :param portal: portal to link to this level
         :type portal: Portal
         """
-        #TODO: configurable, break link
-        new_level = Level(size = self.size,
-                          floor_type = -2,
-                          wall_type = -101,
-                          empty_floor = 0,
-                          empty_wall = 100)
+        new_level = Level(size = self.level_context.size,
+                          floor_type = self.level_context.floor_type,
+                          wall_type = self.level_context.wall_type,
+                          empty_floor = self.level_context.empty_floor,
+                          empty_wall = self.level_context.empty_wall)
 
         sections = self.partitioner.partition_level(new_level)
 
@@ -253,3 +260,28 @@ class LevelGenerator(object):
         self.logger.debug(new_level.dump_string())
 
         return new_level
+
+class LevelContext(object):
+    """
+    Context for level generation
+    """
+    def __init__(self, size, floor_type, wall_type, empty_floor, empty_wall):
+        """
+        Default constructor
+
+        :param size: size of the level
+        :type size: (int, int)
+        :param floor_type: initial floor type to use
+        :type floor_type: int
+        :param wall_type: initial wall type to use
+        :type wall_type: int
+        :param empty_floor: floor tile to be considered empty
+        :type empty_floor: int
+        :param empty_wall: wall tile to be considered empty
+        :type empty_wall: int
+        """
+        self.size = size
+        self.floor_type = floor_type
+        self.wall_type = wall_type
+        self.empty_floor = empty_floor
+        self.empty_wall = empty_wall

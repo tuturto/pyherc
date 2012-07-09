@@ -23,7 +23,8 @@ Tests for LevelGenerator
 """
 #pylint: disable=W0614
 from pyherc.generators.level.generator import LevelGenerator
-from pyherc.generators.level.generator import LevelGeneratorFactory
+from pyherc.generators.level import LevelGeneratorFactory
+from pyherc.generators.level import LevelContext
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.partitioners.section import Section
@@ -336,11 +337,17 @@ class TestLevelGenerator:
         when(partitioner).partition_level(any()).thenReturn([section1,
                                                              section2])
 
+        level_context = LevelContext(size = (60, 40),
+                                     floor_type = self.floor_rock,
+                                     wall_type = -101,
+                                     empty_floor = 0,
+                                     empty_wall = self.wall_empty)
+
         generator = LevelGenerator(factory, partitioner, [room_generator],
                                    level_decorator, [stair_adder],
                                    item_adder, creature_adder,
                                    self.rng,
-                                   (60, 40))
+                                   level_context)
 
         generator.generate_level(portal)
 
@@ -377,7 +384,11 @@ class TestLevelGenerator:
                                    item_adder,
                                    creature_adder,
                                    self.rng,
-                                   (60, 40))
+                                   LevelContext(size = (60, 40),
+                                        floor_type = -2,
+                                        wall_type = -101,
+                                        empty_floor = 0,
+                                        empty_wall = 100))
 
         new_level = generator.generate_level(portal)
 
@@ -411,7 +422,11 @@ class TestLevelGenerator:
                                    item_adder,
                                    creature_adder,
                                    self.rng,
-                                   (60, 40))
+                                   LevelContext(size = (60, 40),
+                                        floor_type = -2,
+                                        wall_type = -101,
+                                        empty_floor = 0,
+                                        empty_wall = 100))
 
         new_level = generator.generate_level(portal)
 
