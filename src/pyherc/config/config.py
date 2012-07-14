@@ -218,12 +218,12 @@ class Configuration(object):
                                              [],
                                              self.level_size)
 
-        config_names = filter(lambda x: x[0] != '_',
-                              dir(level_config))
         config_modules = map(lambda x: getattr(level_config, x),
-                             config_names)
+                             filter(lambda x: x[0] != '_',
+                                    dir(level_config)))
         configurators = map(lambda x: getattr(x, 'init_level'),
-                            config_modules)
+                            filter(lambda y: hasattr(y, 'init_level'),
+                                   config_modules))
 
         for configurator in configurators:
             self.extend_configuration(config,
