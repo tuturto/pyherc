@@ -426,7 +426,7 @@ class TestLevelGenerator:
                                         floor_type = -2,
                                         wall_type = -101,
                                         empty_floor = 0,
-                                        empty_wall = 100))
+                                        empty_wall = self.wall_empty))
 
         new_level = generator.generate_level(portal)
 

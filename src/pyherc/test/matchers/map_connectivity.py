@@ -130,6 +130,19 @@ class MapConnectivity(BaseMatcher):
                                       open_tile,
                                       connected_points)
 
+            self.get_connected_points(level, (x_loc - 1, y_loc - 1),
+                                      open_tile,
+                                      connected_points)
+            self.get_connected_points(level, (x_loc - 1, y_loc + 1),
+                                      open_tile,
+                                      connected_points)
+            self.get_connected_points(level, (x_loc - 1, y_loc - 1),
+                                      open_tile,
+                                      connected_points)
+            self.get_connected_points(level, (x_loc + 1, y_loc + 1),
+                                      open_tile,
+                                      connected_points)
+
         return connected_points
 
 def is_fully_accessible_via(open_tile):
