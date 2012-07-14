@@ -146,12 +146,8 @@ class Configuration(object):
     def get_item_config(self, item_config):
         config = ItemConfigurations(self.rng)
 
-        config_modules = map(lambda x: getattr(item_config, x),
-                             filter(lambda x: x[0] != '_',
-                                    dir(item_config)))
-        configurators = map(lambda x: getattr(x, 'init_items'),
-                            filter(lambda y: hasattr(y, 'init_items'),
-                                   config_modules))
+        configurators = self.get_configurators(item_config,
+                                               'init_items')
 
         for configurator in configurators:
             items = configurator()
@@ -159,6 +155,20 @@ class Configuration(object):
                 config.add_item(item)
 
         return config
+
+    def get_configurators(self, location, function_name):
+        """
+        Get functions to configure given sub-system
+        """
+
+        config_modules = map(lambda x: getattr(location, x),
+                             filter(lambda x: x[0] != '_',
+                                    dir(location)))
+        configurators = map(lambda x: getattr(x, function_name),
+                            filter(lambda y: hasattr(y, function_name),
+                                   config_modules))
+
+        return configurators
 
     def initialise_generators(self, item_config):
         """
@@ -192,12 +202,8 @@ class Configuration(object):
                                              [],
                                              self.level_size)
 
-        config_modules = map(lambda x: getattr(level_config, x),
-                             filter(lambda x: x[0] != '_',
-                                    dir(level_config)))
-        configurators = map(lambda x: getattr(x, 'init_level'),
-                            filter(lambda y: hasattr(y, 'init_level'),
-                                   config_modules))
+        configurators = self.get_configurators(level_config,
+                                               'init_level')
 
         for configurator in configurators:
             self.extend_configuration(config,
