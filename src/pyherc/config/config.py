@@ -83,7 +83,7 @@ class Configuration(object):
 
         self.initialise_factories()
         self.initialise_tables()
-        self.initialise_generators()
+        self.initialise_generators(level_config)
         self.initialise_level_generators(level_config)
 
     def initialise_factories(self):
@@ -143,57 +143,31 @@ class Configuration(object):
         self.tables.load_tables(self.base_path)
         self.logger.info('Tables initialised')
 
-    def get_item_config(self):
-        item_config = ItemConfigurations(self.rng)
+    def get_item_config(self, item_config):
+        config = ItemConfigurations(self.rng)
 
-        item_config.add_item(
-                    ItemConfiguration(name = 'apple',
-                                      cost = 1,
-                                      weight = 1,
-                                      icons = [501],
-                                      types = ['food'],
-                                      rarity = 'common'))
+        config_modules = map(lambda x: getattr(item_config, x),
+                             filter(lambda x: x[0] != '_',
+                                    dir(item_config)))
+        configurators = map(lambda x: getattr(x, 'init_items'),
+                            filter(lambda y: hasattr(y, 'init_items'),
+                                   config_modules))
 
-        item_config.add_item(
-                    ItemConfiguration(name = 'dagger',
-                                      cost = 2,
-                                      weight = 1,
-                                      icons = [602, 603],
-                                      types = ['weapon',
-                                               'light weapon',
-                                               'melee',
-                                               'simple weapon'],
-                                      rarity = 'common',
-                                      weapon_configration = WeaponConfiguration(
-                                            damage = 2,
-                                            critical_range = 11,
-                                            critical_damage = 2,
-                                            damage_types = ['piercing',
-                                                            'slashing'],
-                                            weapon_class = 'simple')))
+        for configurator in configurators:
+            items = configurator()
+            for item in items:
+                config.add_item(item)
 
-        item_config.add_item(
-                    ItemConfiguration(name = 'healing potion',
-                                      cost = 150,
-                                      weight = 1,
-                                      icons = [701],
-                                      types = ['potion'],
-                                      rarity = 'rare',
-                                      effect_handles = [EffectHandle(
-                                            trigger = 'on drink',
-                                            effect = 'cure medium wounds',
-                                            parameters = None,
-                                            charges = 1)]))
+        return config
 
-        return item_config
-
-    def initialise_generators(self):
+    def initialise_generators(self, item_config):
         """
         Initialise generators
         """
         self.logger.info('Initialising generators')
 
-        self.item_generator = ItemGenerator(self.get_item_config())
+        self.item_generator = ItemGenerator(self.get_item_config(item_config))
+
         self.creature_generator = CreatureGenerator(self.model,
                                                     self.action_factory,
                                                     self.tables,

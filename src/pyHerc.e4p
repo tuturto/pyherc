@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-07-01, 22:57:38 -->
+<!-- Saved: 2012-07-14, 21:09:27 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -169,6 +169,7 @@
     <Source>herculeum/application.py</Source>
     <Source>herculeum/test/unit/test_gui.py</Source>
     <Source>herculeum/config/config.py</Source>
+    <Source>herculeum/config/levels/configure_items.py</Source>
   </Sources>
   <Forms>
   </Forms>
