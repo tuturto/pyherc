@@ -68,6 +68,21 @@ class TestCreatureGeneration(object):
                                               icons = [100, 101],
                                               attack = 2))
 
+        self.creature_config.add_creature(
+                        CreatureConfiguration(name = 'spider',
+                                              body = 6,
+                                              finesse = 12,
+                                              mind = 8,
+                                              hp = 6,
+                                              speed = 1,
+                                              icons = [102],
+                                              attack = 4,
+                                              effect_handles = [EffectHandle(
+                                                    trigger = 'on attack hit',
+                                                    effect = 'minor poison',
+                                                    parameters = None,
+                                                    charges = 100)]))
+
         self.generator = CreatureGenerator(configuration = self.creature_config,
                                            model = self.model,
                                            action_factory = self.action_factory,
@@ -81,3 +96,11 @@ class TestCreatureGeneration(object):
         creature = self.generator.generate_creature(name = 'rat')
 
         assert_that(creature.name, is_(equal_to('rat')))
+
+    def test_creating_creature_with_effect(self):
+        """
+        Test that creature with effect can be created
+        """
+        creature = self.generator.generate_creature(name = 'spider')
+
+        assert_that(creature, has_effect_handle())

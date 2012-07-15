@@ -71,6 +71,14 @@ class NewCreatureGenerator(object):
         new_creature.icons = config.icons
         new_creature.attack = config.attack
 
+        for spec in config.effect_handles:
+            new_handle = EffectHandle(trigger = spec.trigger,
+                                       effect = spec.effect,
+                                       parameters = spec.parameters,
+                                       charges = spec.charges)
+
+            new_creature.add_effect_handle(new_handle)
+
         return new_creature
 
     @logged
@@ -125,7 +133,8 @@ class CreatureConfiguration(object):
     Configuration for an creature
     """
 
-    def __init__(self, name, body, finesse, mind, hp, speed, icons, attack):
+    def __init__(self, name, body, finesse, mind, hp, speed, icons, attack,
+                 effect_handles = None):
         """
         Default constructor
         """
@@ -137,6 +146,11 @@ class CreatureConfiguration(object):
         self.speed = speed
         self.icons = icons
         self.attack = attack
+
+        if effect_handles == None:
+            self.effect_handles = []
+        else:
+            self.effect_handles = effect_handles
 
 
 
