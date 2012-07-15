@@ -30,6 +30,7 @@ from mockito import mock
 from pyherc.generators import CreatureConfigurations
 from pyherc.generators import CreatureConfiguration
 from pyherc.rules.effects import EffectHandle
+from pyherc.ai import FlockingHerbivore
 from random import Random
 
 class TestCreatureGeneration(object):
@@ -66,7 +67,8 @@ class TestCreatureGeneration(object):
                                               hp = 2,
                                               speed = 2,
                                               icons = [100, 101],
-                                              attack = 2))
+                                              attack = 2,
+                                              ai = FlockingHerbivore))
 
         self.creature_config.add_creature(
                         CreatureConfiguration(name = 'spider',
@@ -77,6 +79,7 @@ class TestCreatureGeneration(object):
                                               speed = 1,
                                               icons = [102],
                                               attack = 4,
+                                              ai = FlockingHerbivore,
                                               effect_handles = [EffectHandle(
                                                     trigger = 'on attack hit',
                                                     effect = 'minor poison',
@@ -104,3 +107,12 @@ class TestCreatureGeneration(object):
         creature = self.generator.generate_creature(name = 'spider')
 
         assert_that(creature, has_effect_handle())
+
+    def test_creating_creature_with_ai(self):
+        """
+        Test that creature can have AI created
+        """
+        creature = self.generator.generate_creature(name = 'rat')
+
+        assert_that(creature.artificial_intelligence,
+                    is_(not_none()))

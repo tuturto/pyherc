@@ -79,6 +79,9 @@ class NewCreatureGenerator(object):
 
             new_creature.add_effect_handle(new_handle)
 
+        if not config.ai == None:
+            new_creature.artificial_intelligence = config.ai(new_creature)
+
         return new_creature
 
     @logged
@@ -134,7 +137,7 @@ class CreatureConfiguration(object):
     """
 
     def __init__(self, name, body, finesse, mind, hp, speed, icons, attack,
-                 effect_handles = None):
+                 ai = None, effect_handles = None):
         """
         Default constructor
         """
@@ -146,6 +149,7 @@ class CreatureConfiguration(object):
         self.speed = speed
         self.icons = icons
         self.attack = attack
+        self.ai = ai
 
         if effect_handles == None:
             self.effect_handles = []
