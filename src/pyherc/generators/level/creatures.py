@@ -129,10 +129,8 @@ class CreatureAdder(object):
         :rtype: [Character]
         """
         creatures = []
-        params = {}
-        params['name'] = name
         for i in range(amount):
-            new_creature = self.creature_generator.generate_creature(params)
+            new_creature = self.creature_generator.generate_creature(name)
             creatures.append(new_creature)
 
         return creatures

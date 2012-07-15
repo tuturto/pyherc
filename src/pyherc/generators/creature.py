@@ -24,13 +24,12 @@ Module for creature generation related classes
 Classes:
     CreatureGenerator
 """
-from pyherc.ai import FlockingHerbivore
 from pyherc.data import Character, EffectsCollection
 from pyherc.rules.effects import EffectHandle
 from pyherc.aspects import Logged
 import random
 
-class NewCreatureGenerator(object):
+class CreatureGenerator(object):
     """
     Class used to generate creatures
     """
@@ -41,7 +40,7 @@ class NewCreatureGenerator(object):
         """
         Default constructor
         """
-        super(NewCreatureGenerator, self).__init__()
+        super(CreatureGenerator, self).__init__()
         self.configuration = configuration
         self.model = model
         self.action_factory = action_factory
@@ -68,7 +67,7 @@ class NewCreatureGenerator(object):
         new_creature.mind = config.mind
         new_creature.hp = config.hp
         new_creature.speed = config.speed
-        new_creature.icons = config.icons
+        new_creature.icon = config.icons #TODO: pick random
         new_creature.attack = config.attack
 
         for spec in config.effect_handles:
@@ -155,85 +154,3 @@ class CreatureConfiguration(object):
             self.effect_handles = []
         else:
             self.effect_handles = effect_handles
-
-
-
-class CreatureGenerator(object):
-    """
-    Class used to generate creatures
-    """
-    logged = Logged()
-
-    @logged
-    def __init__(self, model, action_factory, tables, rng):
-        """
-        Default constructor
-
-        :param action_factory: Initialised action factory
-        :type action_factory: ActionFactory
-        :param tables: Tables defining creatures
-        """
-        self.model = model
-        self.action_factory = action_factory
-        self.tables = tables
-        self.rng = rng
-
-    @logged
-    def generate_creature(self, parameters):
-        """
-        Generates a creature
-
-        :param parameters: hash table containing parameters
-        :type parameters: dict
-        :returns: generated creature
-        :rtype: Character
-        """
-        new_creature = None
-        if not parameters == None:
-            if 'name' in parameters.keys():
-                table = self.tables.creatures[parameters['name']]
-                new_creature = self.generate_creature_from_table(table)
-        else:
-            #generate completely random creature
-            pass
-
-        assert new_creature != None, 'Creature generation failed'
-        return new_creature
-
-    @logged
-    def generate_creature_from_table(self, table):
-        """
-        Take table entry and generate corresponding creature
-        """
-        assert(table != None)
-
-        new_creature = Character(self.model,
-                                 self.action_factory,
-                                 EffectsCollection(),
-                                 self.rng)
-        new_creature.name = table['name']
-        new_creature.body = table['body']
-        new_creature.finesse = table['finesse']
-        new_creature.mind = table['mind']
-        new_creature.hit_points = table['hp']
-        new_creature.speed = table['speed']
-        new_creature.size = table['size']
-        new_creature.attack = table['attack']
-        new_creature.artificial_intelligence = FlockingHerbivore(new_creature)
-
-        if hasattr(table['icon'], 'append'):
-            #select from list
-            new_creature.icon = random.choice(table['icon'])
-        else:
-            new_creature.icon = table['icon']
-
-        if 'effecthandles' in table.keys():
-            for handle in table['effecthandles']:
-                new_creature.add_effect_handle(
-                                EffectHandle(trigger = handle.trigger,
-                                             effect = handle.effect,
-                                             parameters = handle.parameters,
-                                             charges = handle.charges))
-
-        assert new_creature != None, 'creature generation failed'
-        return new_creature

@@ -44,6 +44,11 @@ from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
 from herculeum.config.tiles import FLOOR_ROCK, FLOOR_BRICK
 from herculeum.config.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
 from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
+from herculeum.config.tiles import CREATURE_SPIDER_1
+
+from pyherc.ai import FlockingHerbivore
+from pyherc.generators import CreatureConfiguration
+from pyherc.rules.effects import EffectHandle
 
 from pyherc.config.dsl import LevelConfiguration
 
@@ -131,4 +136,25 @@ def init_level(rng, item_generator, creature_generator, level_size):
                     .with_portals(portal_adder_configurations)
                     .with_level_size(level_size)
                     .build())
+    return config
+
+def init_creatures():
+
+    config = []
+
+    config.append(CreatureConfiguration(name = 'spider',
+                                        body = 6,
+                                        finesse = 12,
+                                        mind = 8,
+                                        hp = 6,
+                                        speed = 1,
+                                        icons = CREATURE_SPIDER_1,
+                                        attack = 4,
+                                        ai = FlockingHerbivore,
+                                        effect_handles = [EffectHandle(
+                                                    trigger = 'on attack hit',
+                                                    effect = 'minor poison',
+                                                    parameters = None,
+                                                    charges = 100)]))
+
     return config

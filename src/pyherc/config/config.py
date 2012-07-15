@@ -40,8 +40,8 @@ from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 
 from pyherc.rules.effects import EffectsFactory
 
-
 from pyherc.generators import ItemConfigurations
+from pyherc.generators import CreatureConfigurations
 
 from pyherc.rules.tables import Tables
 
@@ -131,6 +131,19 @@ class Configuration(object):
         self.tables.load_tables(self.base_path)
         self.logger.info('Tables initialised')
 
+    def get_creature_config(self, level_config):
+        config = CreatureConfigurations(self.rng)
+
+        configurators = self.get_configurators(level_config,
+                                               'init_creatures')
+
+        for configurator in configurators:
+            creatures = configurator()
+            for creature in creatures:
+                config.add_creature(creature)
+
+        return config
+
     def get_item_config(self, item_config):
         config = ItemConfigurations(self.rng)
 
@@ -158,18 +171,19 @@ class Configuration(object):
 
         return configurators
 
-    def initialise_generators(self, item_config):
+    def initialise_generators(self, level_config):
         """
         Initialise generators
         """
         self.logger.info('Initialising generators')
 
-        self.item_generator = ItemGenerator(self.get_item_config(item_config))
+        self.item_generator = ItemGenerator(self.get_item_config(level_config))
 
-        self.creature_generator = CreatureGenerator(self.model,
-                                                    self.action_factory,
-                                                    self.tables,
-                                                    self.rng)
+        self.creature_generator = CreatureGenerator(
+                                        self.get_creature_config(level_config),
+                                        self.model,
+                                        self.action_factory,
+                                        self.rng)
 
         self.logger.info('Generators initialised')
 

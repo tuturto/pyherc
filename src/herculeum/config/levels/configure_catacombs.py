@@ -45,7 +45,13 @@ from herculeum.config.tiles import FLOOR_ROCK, FLOOR_BRICK
 from herculeum.config.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
 from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
 
+from herculeum.config.tiles import CREATURE_RAT_1, CREATURE_RAT_2
+from herculeum.config.tiles import CREATURE_RAT_3, CREATURE_RAT_4
+from herculeum.config.tiles import CREATURE_BEETLE_1, CREATURE_BEETLE_2
+
 from pyherc.config.dsl import LevelConfiguration
+from pyherc.generators import CreatureConfiguration
+from pyherc.ai import FlockingHerbivore
 
 def init_level(rng, item_generator, creature_generator, level_size):
     """
@@ -141,5 +147,31 @@ def init_level(rng, item_generator, creature_generator, level_size):
                     .with_portals(portal_adder_configurations)
                     .with_level_size(level_size)
                     .build())
+
+    return config
+
+def init_creatures():
+
+    config = []
+
+    config.append(CreatureConfiguration(name = 'rat',
+                                        body = 4,
+                                        finesse = 12,
+                                        mind = 2,
+                                        hp = 2,
+                                        speed = 2,
+                                        icons = CREATURE_RAT_1,
+                                        attack = 2,
+                                        ai = FlockingHerbivore))
+
+    config.append(CreatureConfiguration(name = 'fire beetle',
+                                        body = 10,
+                                        finesse = 11,
+                                        mind = 0,
+                                        hp = 4,
+                                        speed = 1.9,
+                                        icons = CREATURE_BEETLE_1,
+                                        attack = 4,
+                                        ai = FlockingHerbivore))
 
     return config
