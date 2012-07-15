@@ -39,11 +39,9 @@ from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 
 from pyherc.rules.effects import EffectsFactory
-from pyherc.rules.effects import Heal, Poison
+
 
 from pyherc.generators import ItemConfigurations
-from pyherc.generators import ItemConfiguration, WeaponConfiguration
-from pyherc.rules.effects import EffectHandle
 
 from pyherc.rules.tables import Tables
 
@@ -81,12 +79,12 @@ class Configuration(object):
         """
         self.level_size = (80, 30)
 
-        self.initialise_factories()
+        self.initialise_factories(level_config)
         self.initialise_tables()
         self.initialise_generators(level_config)
         self.initialise_level_generators(level_config)
 
-    def initialise_factories(self):
+    def initialise_factories(self, level_config):
         """
         Initialises action factory, sub factories and various generators
         """
@@ -96,24 +94,14 @@ class Configuration(object):
         move_factory = MoveFactory(walk_factory)
 
         effect_factory = EffectsFactory()
-        effect_factory.add_effect('cure minor wounds',
-                                        {'type': Heal,
-                                        'duration': 20,
-                                        'frequency': 5,
-                                        'tick': 2,
-                                        'healing': 1})
-        effect_factory.add_effect('cure medium wounds',
-                                        {'type': Heal,
-                                        'duration': 20,
-                                        'frequency': 5,
-                                        'tick': 2,
-                                        'healing': 2})
-        effect_factory.add_effect('minor poison',
-                                        {'type': Poison,
-                                        'duration': 240,
-                                        'frequency': 60,
-                                        'tick': 60,
-                                        'damage': 1})
+
+        configurators = self.get_configurators(level_config,
+                                               'init_effects')
+
+        for configurator in configurators:
+            effects = configurator()
+            for effect in effects:
+                effect_factory.add_effect(effect[0], effect[1])
 
         unarmed_combat_factory = UnarmedCombatFactory(effect_factory)
         melee_combat_factory = MeleeCombatFactory(effect_factory)

@@ -24,3 +24,4 @@ package for configuring levels
 import configure_catacombs
 import configure_upper_crypt
 import configure_items
+import effects
