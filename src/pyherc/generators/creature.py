@@ -30,6 +30,45 @@ from pyherc.rules.effects import EffectHandle
 from pyherc.aspects import Logged
 import random
 
+class NewCreatureGenerator(object):
+    """
+    Class used to generate creatures
+    """
+    logged = Logged()
+
+    @logged
+    def __init__(self):
+        """
+        Default constructor
+        """
+        pass
+
+class CreatureConfigurations(object):
+    """
+    Collection of creature configurations
+    """
+    logged = Logged()
+
+    @logged
+    def __init__(self):
+        """
+        Default constructor
+        """
+        pass
+
+class CreatureConfiguration(object):
+    """
+    Configuration for an creature
+    """
+
+    def __init__(self):
+        """
+        Default constructor
+        """
+        pass
+
+
+
 class CreatureGenerator(object):
     """
     Class used to generate creatures
