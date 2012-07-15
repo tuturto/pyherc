@@ -25,6 +25,7 @@ Tests for creature generation
 from pyherc.generators import NewCreatureGenerator as CreatureGenerator
 from pyherc.test.matchers import has_effect_handle
 from hamcrest import * #pylint: disable=W0401
+from mockito import mock
 
 from pyherc.generators import CreatureConfigurations
 from pyherc.generators import CreatureConfiguration
@@ -43,11 +44,19 @@ class TestCreatureGeneration(object):
         self.creature_config = None
         self.generator = None
 
+        self.model = None
+        self.action_factory = None
+        self.rng = None
+
     def setup(self):
         """
         Setup test case
         """
         self.creature_config = CreatureConfigurations(Random())
+
+        self.model = mock()
+        self.action_factory = mock()
+        self.rng = Random()
 
         self.creature_config.add_creature(
                         CreatureConfiguration(name = 'rat',
@@ -59,7 +68,11 @@ class TestCreatureGeneration(object):
                                               icons = [100, 101],
                                               attack = 2))
 
-        self.generator = CreatureGenerator(self.creature_config)
+        self.generator = CreatureGenerator(configuration = self.creature_config,
+                                           model = self.model,
+                                           action_factory = self.action_factory,
+                                           rng = self.rng
+                                           )
 
     def test_creating_simple_creature(self):
         """

@@ -37,12 +37,15 @@ class NewCreatureGenerator(object):
     logged = Logged()
 
     @logged
-    def __init__(self, configuration):
+    def __init__(self, configuration, model, action_factory, rng):
         """
         Default constructor
         """
         super(NewCreatureGenerator, self).__init__()
         self.configuration = configuration
+        self.model = model
+        self.action_factory = action_factory
+        self.rng = rng
 
     @logged
     def generate_creature(self, name):
@@ -52,7 +55,33 @@ class NewCreatureGenerator(object):
         :param name: name of the creature to generate
         :type name: string
         """
-        pass
+        config = self.__get_creature_config(name)
+
+        new_creature = Character(self.model,
+                                 self.action_factory,
+                                 EffectsCollection(),
+                                 self.rng)
+
+        new_creature.name = config.name
+        new_creature.body = config.body
+        new_creature.finesse = config.finesse
+        new_creature.mind = config.mind
+        new_creature.hp = config.hp
+        new_creature.speed = config.speed
+        new_creature.icons = config.icons
+        new_creature.attack = config.attack
+
+        return new_creature
+
+    @logged
+    def __get_creature_config(self, name):
+        """
+        Get creature config
+
+        :param name: name of the creature
+        :type name: string
+        """
+        return self.configuration.get_by_name(name)
 
 class CreatureConfigurations(object):
     """
@@ -80,6 +109,16 @@ class CreatureConfigurations(object):
         :type specification: CreatureConfiguration
         """
         self.creatures[specification.name] = specification
+
+    @logged
+    def get_by_name(self, name):
+        """
+        Get creature configuration
+
+        :param name: name of the creature
+        :type name: string
+        """
+        return self.creatures[name]
 
 class CreatureConfiguration(object):
     """
