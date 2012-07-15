@@ -65,7 +65,7 @@ class CreatureGenerator(object):
         new_creature.body = config.body
         new_creature.finesse = config.finesse
         new_creature.mind = config.mind
-        new_creature.hp = config.hp
+        new_creature.hit_points = config.hp
         new_creature.speed = config.speed
         new_creature.icon = config.icons #TODO: pick random
         new_creature.attack = config.attack
