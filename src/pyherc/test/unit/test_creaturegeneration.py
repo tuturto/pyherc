@@ -49,5 +49,22 @@ class TestCreatureGeneration(object):
         """
         self.creature_config = CreatureConfigurations(Random())
 
-        self.generator = CreatureGenerator(self.item_config)
+        self.creature_config.add_creature(
+                        CreatureConfiguration(name = 'rat',
+                                              body = 4,
+                                              finesse = 12,
+                                              mind = 2,
+                                              hp = 2,
+                                              speed = 2,
+                                              icons = [100, 101],
+                                              attack = 2))
 
+        self.generator = CreatureGenerator(self.creature_config)
+
+    def test_creating_simple_creature(self):
+        """
+        Test that simple creature can be created by name
+        """
+        creature = self.generator.generate_creature(name = 'rat')
+
+        assert_that(creature.name, is_(equal_to('rat')))

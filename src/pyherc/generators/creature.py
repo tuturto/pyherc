@@ -37,9 +37,20 @@ class NewCreatureGenerator(object):
     logged = Logged()
 
     @logged
-    def __init__(self):
+    def __init__(self, configuration):
         """
         Default constructor
+        """
+        super(NewCreatureGenerator, self).__init__()
+        self.configuration = configuration
+
+    @logged
+    def generate_creature(self, name):
+        """
+        Generate creature
+
+        :param name: name of the creature to generate
+        :type name: string
         """
         pass
 
@@ -50,22 +61,43 @@ class CreatureConfigurations(object):
     logged = Logged()
 
     @logged
-    def __init__(self):
+    def __init__(self, rng):
         """
         Default constructor
+
+        :param rng: random number generator
+        :type rng: Random
         """
-        pass
+        self.rng = rng
+        self.creatures = {}
+
+    @logged
+    def add_creature(self, specification):
+        """
+        Add creature to configuration
+
+        :param specification: specification of creature
+        :type specification: CreatureConfiguration
+        """
+        self.creatures[specification.name] = specification
 
 class CreatureConfiguration(object):
     """
     Configuration for an creature
     """
 
-    def __init__(self):
+    def __init__(self, name, body, finesse, mind, hp, speed, icons, attack):
         """
         Default constructor
         """
-        pass
+        self.name = name
+        self.body = body
+        self.finesse = finesse
+        self.mind = mind
+        self.hp = hp
+        self.speed = speed
+        self.icons = icons
+        self.attack = attack
 
 
 
