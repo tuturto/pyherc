@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-07-15, 10:13:12 -->
+<!-- Saved: 2012-07-15, 15:59:32 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -24,7 +24,6 @@
     <Source>pyherc/notes.txt</Source>
     <Source>pyherc/generators/item.py</Source>
     <Source>pyherc/rules/items.py</Source>
-    <Source>pyherc/rules/tables.py</Source>
     <Source>pyherc/rules/ending.py</Source>
     <Source>pyherc/generators/creature.py</Source>
     <Source>pyherc/ai/__init__.py</Source>
@@ -135,7 +134,6 @@
     <Source>pyherc/test/unit/test_potions.py</Source>
     <Source>pyherc/test/unit/test_section.py</Source>
     <Source>pyherc/test/unit/test_squareroom.py</Source>
-    <Source>pyherc/test/unit/test_tables.py</Source>
     <Source>pyherc/test/cutesy/__init__.py</Source>
     <Source>pyherc/test/cutesy/dictionary.py</Source>
     <Source>pyherc/config/__init__.py</Source>

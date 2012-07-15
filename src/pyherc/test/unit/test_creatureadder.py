@@ -30,7 +30,7 @@ from pyherc.data import Level
 from pyherc.generators.creature import CreatureGenerator
 from pyherc.generators.level.creatures import CreatureAdder
 from pyherc.generators.level.creatures import CreatureAdderConfiguration
-from pyherc.rules.tables import Tables
+from pyherc.generators import CreatureConfigurations, CreatureConfiguration
 import random
 
 class TestCreatureAdder():
@@ -43,7 +43,6 @@ class TestCreatureAdder():
         """
         self.rng = None
         self.level = None
-        self.mock_tables = None
         self.mock_action_factory = None
         self.creature_generator = None
         self.configuration = None
@@ -57,33 +56,34 @@ class TestCreatureAdder():
         self.level = Level((60, 40))
         self.level.set_location_type((10, 10), 'room')
 
-        self.mock_tables = mock(Tables)
-        self.mock_tables.creatures = {}
-        self.mock_tables.creatures['rat'] = {'name': 'rat',
-                                        'body': 1,
-                                        'finesse': 1,
-                                        'mind': 1,
-                                        'hp': 2,
-                                        'speed': 10,
-                                        'size': 2,
-                                        'attack': 2,
-                                        'icon': 1}
+        creature_config = CreatureConfigurations(self.rng)
+        creature_config.add_creature(
+                        CreatureConfiguration(name = 'rat',
+                                              body = 4,
+                                              finesse = 12,
+                                              mind = 2,
+                                              hp = 2,
+                                              speed = 2,
+                                              icons = 1,
+                                              attack = 2,
+                                              ai = None))
 
-        self.mock_tables.creatures['dragon'] = {'name': 'dragon',
-                                        'body': 10,
-                                        'finesse': 10,
-                                        'mind': 10,
-                                        'hp': 200,
-                                        'speed': 4,
-                                        'size': 6,
-                                        'attack': 20,
-                                        'icon': 2}
+        creature_config.add_creature(
+                        CreatureConfiguration(name = 'dragon',
+                                              body = 4,
+                                              finesse = 12,
+                                              mind = 2,
+                                              hp = 2,
+                                              speed = 2,
+                                              icons = 1,
+                                              attack = 2,
+                                              ai = None))
 
         self.mock_action_factory = mock()
         self.model = mock()
-        self.creature_generator = CreatureGenerator(self.model,
+        self.creature_generator = CreatureGenerator(creature_config,
+                                                    self.model,
                                                     self.mock_action_factory,
-                                                    self.mock_tables,
                                                     self.rng)
 
         self.configuration = CreatureAdderConfiguration(['crypt'])

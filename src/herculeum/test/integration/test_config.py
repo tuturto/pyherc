@@ -66,7 +66,6 @@ class TestMainConfiguration():
         assert_that(config.item_generator, is_(not_none()))
         assert_that(config.creature_generator, is_(not_none()))
         assert_that(config.level_generator_factory, is_(not_none()))
-        assert_that(config.tables, is_(not_none()))
         assert_that(config.level_size, is_(not_none()))
         assert_that(config.base_path, is_(not_none()))
         assert_that(config.model, is_(not_none()))

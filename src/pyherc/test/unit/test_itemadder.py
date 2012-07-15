@@ -33,7 +33,6 @@ from pyherc.generators.item import WeaponConfiguration
 from pyherc.rules.effects import EffectHandle
 from pyherc.generators.level.items import ItemAdder
 from pyherc.generators.level.items import ItemAdderConfiguration
-from pyherc.rules.tables import Tables
 from random import Random
 
 class TestItemAdder():
@@ -46,7 +45,6 @@ class TestItemAdder():
         """
         self.rng = None
         self.level = None
-        self.mock_tables = None
         self.item_generator = None
         self.configuration = None
         self.item_adder = None

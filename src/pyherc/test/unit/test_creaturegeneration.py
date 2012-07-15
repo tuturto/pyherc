@@ -22,7 +22,7 @@
 Tests for creature generation
 """
 #pylint: disable=W0614
-from pyherc.generators import NewCreatureGenerator as CreatureGenerator
+from pyherc.generators import CreatureGenerator
 from pyherc.test.matchers import has_effect_handle
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock

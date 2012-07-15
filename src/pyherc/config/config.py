@@ -43,8 +43,6 @@ from pyherc.rules.effects import EffectsFactory
 from pyherc.generators import ItemConfigurations
 from pyherc.generators import CreatureConfigurations
 
-from pyherc.rules.tables import Tables
-
 class Configuration(object):
     """
     Configuration object for Herculeum
@@ -66,7 +64,6 @@ class Configuration(object):
         self.item_generator = None
         self.creature_generator = None
         self.level_generator_factory = None
-        self.tables = None
         self.level_size = None
         self.base_path = base_path
         self.model = model
@@ -80,7 +77,6 @@ class Configuration(object):
         self.level_size = (80, 30)
 
         self.initialise_factories(level_config)
-        self.initialise_tables()
         self.initialise_generators(level_config)
         self.initialise_level_generators(level_config)
 
@@ -121,15 +117,6 @@ class Configuration(object):
                                             inventory_factory])
 
         self.logger.info('Action sub system initialised')
-
-    def initialise_tables(self):
-        """
-        Initialise tables
-        """
-        self.logger.info('Initialising tables')
-        self.tables = Tables()
-        self.tables.load_tables(self.base_path)
-        self.logger.info('Tables initialised')
 
     def get_creature_config(self, level_config):
         config = CreatureConfigurations(self.rng)

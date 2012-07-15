@@ -31,7 +31,6 @@ import pyherc.data.model
 import pyherc.rules.items
 import pyherc.rules.ending
 import pyherc.generators.dungeon
-import pyherc.rules.tables
 import herculeum.gui.startmenu
 import pgu.gui.app
 from herculeum.gui.dialogs import Inventory

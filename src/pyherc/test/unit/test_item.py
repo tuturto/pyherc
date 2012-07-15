@@ -26,7 +26,6 @@ import pyherc
 import pyherc.generators.item
 import pyherc.data.dungeon
 import pyherc.rules.items
-import pyherc.rules.tables
 from random import Random
 from pyherc.data import Level
 from pyherc.test.builders import ItemBuilder
