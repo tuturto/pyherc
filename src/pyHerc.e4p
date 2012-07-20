@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-07-15, 15:59:32 -->
+<!-- Saved: 2012-07-20, 19:44:18 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -170,6 +170,7 @@
     <Source>herculeum/config/levels/configure_items.py</Source>
     <Source>herculeum/config/levels/effects.py</Source>
     <Source>pyherc/test/unit/test_creaturegeneration.py</Source>
+    <Source>pyherc/test/unit/test_events.py</Source>
   </Sources>
   <Forms>
   </Forms>

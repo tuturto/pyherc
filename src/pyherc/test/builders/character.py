@@ -56,6 +56,8 @@ class CharacterBuilder(object):
         self.effects_collection = EffectsCollection()
         self.player_character = False
 
+        self.listeners = []
+
     def as_player_character(self):
         self.player_character = True
         return self
@@ -129,6 +131,10 @@ class CharacterBuilder(object):
         self.name = name
         return self
 
+    def with_event_listener(self, listener):
+        self.listeners.append(listener)
+        return self
+
     def build(self):
         """
         Build character
@@ -163,5 +169,8 @@ class CharacterBuilder(object):
 
         for effect in self.effects:
             character.add_effect(effect)
+
+        for listener in self.listeners:
+            character.add_event_listener(listener)
 
         return character

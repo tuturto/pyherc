@@ -68,6 +68,7 @@ class Character(object):
         #internal
         self.tick = 0
         self.short_term_memory = []
+        self.__event_listeners = []
         self.item_memory = {}
         self.size = 'medium'
         self.attack = None
@@ -91,6 +92,19 @@ class Character(object):
         :type event: Event
         """
         self.short_term_memory.append(event)
+
+        for listener in self.__event_listeners:
+            listener.receive_event(event)
+
+    @logged
+    def add_event_listener(self, listener):
+        """
+        Register event listener
+
+        :param listener: listener to add
+        :type listener: Listener
+        """
+        self.__event_listeners.append(listener)
 
     @logged
     def act(self, model):
