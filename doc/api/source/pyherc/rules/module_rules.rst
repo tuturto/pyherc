@@ -19,5 +19,4 @@ pyherc.rules
    module_magic
    module_moving
    module_public
-   module_tables
    module_utils
