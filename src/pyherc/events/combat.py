@@ -43,3 +43,58 @@ class AttackHitEvent(Event):
         self.target = target
         self.damage = damage
         self.hit = hit
+
+    def event_type(self):
+        """
+        Type of the event
+
+        :returns: type of the event
+        :rtype: string
+        """
+        return 'attack hit'
+
+    def first_person_source(self):
+        """
+        Description from point of view of source
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return 'you hit {0}'.format(self.target.name)
+
+    def first_person_target(self):
+        """
+        Description from point of view of target
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return 'you are hit'
+
+    def third_person_source(self):
+        """
+        Description of the source
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return '{0} hits'.format(self.attacker.name)
+
+    def third_person_target(self):
+        """
+        Description of the target
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return '{0} is hit'.format(self.target.name)
+
+    def third_person(self):
+        """
+        Description of the event
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return '{0} hits {1}'.format(self.attacker.name,
+                                     self.target.name)

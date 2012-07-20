@@ -97,12 +97,14 @@ class Character(object):
             listener.receive_event(event)
 
     @logged
-    def add_event_listener(self, listener):
+    def register_event_listener(self, listener):
         """
         Register event listener
 
         :param listener: listener to add
         :type listener: Listener
+
+        .. versionadded:: 0.4
         """
         self.__event_listeners.append(listener)
 

@@ -56,6 +56,9 @@ class GameWindow(Container):
         """
         super(GameWindow, self).__init__(**params)
 
+        self.play_area = None
+        self.text_console = None
+
         self.application = application
         self.surface_manager = surface_manager
         self.set_layout()
@@ -64,26 +67,39 @@ class GameWindow(Container):
         """
         Set layout of this screen
         """
-        play_area = GameArea(application = self.application,
-                             surface_manager = self.surface_manager)
-        self.application.world.register_event_listener(play_area)
-        self.add(play_area, 0, 45)
-        w = TextArea(value="You set out to adventure\nIt looks dangerous here\nBe careful",
+        self.play_area = GameArea(application = self.application,
+                                  surface_manager = self.surface_manager)
+        self.application.world.player.register_event_listener(self)
+        self.add(self.play_area, 0, 45)
+        self.text_console = TextArea(
+                     value="You set out to adventure\nIt looks dangerous here\nBe careful",
                      width=800,
                      height=40,
                      size=8,
                      focusable = False,
                      font = pygame.font.Font(None, 12),
                      color = (0, 0, 0))
-        self.add(w, 0, 0)
-        play_area.focus()
-
+        self.add(self.text_console, 0, 0)
+        self.play_area.focus()
 
     def run(self):
         """
         Update screen
         """
         pass
+
+    def receive_event(self, event):
+        """
+        Receive event from event subsystem
+
+        :param event: event to receive
+        :type event: Event
+
+        .. versionadded:: 0.4
+        """
+        self.play_area.receive_event(event)
+
+        self.text_console.value = event.third_person()
 
 class GameArea(Widget):
     """
@@ -259,3 +275,5 @@ class GameArea(Widget):
         """
         assert event != None
         self.dirty_tiles.extend(event.affected_tiles)
+
+

@@ -171,6 +171,6 @@ class CharacterBuilder(object):
             character.add_effect(effect)
 
         for listener in self.listeners:
-            character.add_event_listener(listener)
+            character.register_event_listener(listener)
 
         return character

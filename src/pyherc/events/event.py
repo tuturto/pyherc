@@ -38,3 +38,57 @@ class Event(object):
         self.level = level
         self.location = location
         self.affected_tiles = affected_tiles
+
+    def event_type(self):
+        """
+        Type of the event
+
+        :returns: type of the event
+        :rtype: string
+        """
+        return 'prototype'
+
+    def first_person_source(self):
+        """
+        Description from point of view of source
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return 'you do something'
+
+    def first_person_target(self):
+        """
+        Description from point of view of target
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return 'you are done something'
+
+    def third_person_source(self):
+        """
+        Description of the source
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return 'somebody does something'
+
+    def third_person_target(self):
+        """
+        Description of the target
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return 'somebody is done something'
+
+    def third_person(self):
+        """
+        Description of the event
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return 'somebody does something to someone'
