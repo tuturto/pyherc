@@ -58,6 +58,8 @@ class GameWindow(Container):
 
         self.play_area = None
         self.text_console = None
+        self.lines = []
+        self.event_types_to_show = ['attack hit']
 
         self.application = application
         self.surface_manager = surface_manager
@@ -99,7 +101,15 @@ class GameWindow(Container):
         """
         self.play_area.receive_event(event)
 
-        self.text_console.value = event.third_person()
+        if event.event_type() in self.event_types_to_show:
+            self.lines.append(event.third_person())
+            self.lines = self.lines[-4:]
+
+            temp_text = ''
+            for line in self.lines:
+                temp_text = temp_text + line + '\n'
+
+            self.text_console.value = temp_text
 
 class GameArea(Widget):
     """
