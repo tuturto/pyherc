@@ -27,7 +27,7 @@ from pyherc.rules.effects import EffectsFactory
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.matchers import has_effect, is_not_at
-from mockito import mock
+from mockito import mock, verify, any
 from hamcrest import * #pylint: disable=W0401
 
 class TestPoison():
@@ -79,6 +79,27 @@ class TestPoison():
         poison.trigger()
 
         assert_that(character, is_not_at(level))
+
+    def test_effect_event(self):
+        """
+        Test that event is raised when poison is triggered
+        """
+        model = mock()
+
+        character = (CharacterBuilder()
+                        .with_hit_points(10)
+                        .with_model(model)
+                        .build())
+
+        poison = Poison(duration = 1,
+                        frequency = 1,
+                        tick = 0,
+                        damage = 5,
+                        target = character)
+
+        poison.trigger()
+
+        verify(model).raise_event(any())
 
 class TestEffectsFactory():
     """
