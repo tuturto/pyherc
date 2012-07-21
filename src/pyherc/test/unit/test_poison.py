@@ -80,7 +80,7 @@ class TestPoison():
 
         assert_that(character, is_not_at(level))
 
-    def test_effect_event(self):
+    def test_event_is_raised_on_trigger(self):
         """
         Test that event is raised when poison is triggered
         """
