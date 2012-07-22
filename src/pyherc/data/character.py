@@ -482,9 +482,12 @@ class Character(object):
         :param effect: Effect to add
         :type effect: Effect
 
+        .. note: Multiples of same type of effect are not added
         .. versionadded:: 0.4
         """
-        self.__effects_collection.add_effect(effect)
+        if not self.__effects_collection.has_effect(effect):
+            self.__effects_collection.add_effect(effect)
+            self.raise_event(effect.get_add_event())
 
     @logged
     def get_effects(self):

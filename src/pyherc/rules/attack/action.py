@@ -80,7 +80,7 @@ class AttackAction(object):
                                     hit = was_hit,
                                     affected_tiles = [self.target.location]))
 
-        self.trigger_attack_effects()
+        self.__trigger_attack_effects()
 
         pyherc.rules.ending.check_dying(self.target.model,
                                         self.target,
@@ -89,7 +89,7 @@ class AttackAction(object):
         self.attacker.add_to_tick(3)
 
     @logged
-    def trigger_attack_effects(self):
+    def __trigger_attack_effects(self):
         """
         Trigger effects
 

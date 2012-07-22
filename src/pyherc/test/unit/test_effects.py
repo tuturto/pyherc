@@ -30,6 +30,7 @@ from pyherc.rules.effects import EffectsFactory
 from pyherc.rules.effects import EffectHandle
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.consume.factories import DrinkFactory
+from pyherc.events import AttackHitEvent, PoisonAddedEvent
 from random import Random
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder, ActionFactoryBuilder
@@ -194,11 +195,14 @@ class TestEffectsInMelee(object):
 
         self.attacker = None
         self.defender = None
+        self.model = None
 
     def setup(self):
         """
         Setup test case
         """
+        self.model = mock()
+
         effect_factory = EffectsFactory()
         effect_factory.add_effect(
                             'poison',
@@ -219,12 +223,14 @@ class TestEffectsInMelee(object):
                             .with_effect_handle(EffectHandleBuilder()
                                                  .with_trigger('on attack hit')
                                                  .with_effect('poison'))
+                            .with_model(self.model)
                             .build())
 
         self.defender = (CharacterBuilder()
                             .with_action_factory(action_factory)
                             .with_location((5, 4))
                             .with_hit_points(50)
+                            .with_model(self.model)
                             .build())
 
         level = (LevelBuilder()
@@ -248,3 +254,11 @@ class TestEffectsInMelee(object):
         self.attacker.perform_attack(1)
 
         assert_that(self.defender, has_effects(1))
+
+    def test_effect_creation_event_is_raised(self):
+        """
+        Test that event is raised to indicate an effect was created
+        """
+        self.attacker.perform_attack(1)
+
+        verify(self.model).raise_event(any(PoisonAddedEvent))

@@ -22,6 +22,7 @@
 Module for baseclass of every Effect
 """
 from pyherc.aspects import Logged
+from pyherc.events import Event
 
 class Effect(object):
     """
@@ -69,6 +70,18 @@ class Effect(object):
         """
         self.tick = self.frequency
         self.duration = self.duration - self.frequency
+
+    @logged
+    def get_add_event(self):
+        """
+        Get event describing adding of this effect
+
+        :returns: event describing adding of this effect
+        :rtype: Event
+        """
+        return Event(level = None,
+                     location = None,
+                     affected_tiles = [])
 
 class EffectHandle(object):
     """

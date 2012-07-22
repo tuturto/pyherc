@@ -89,19 +89,25 @@ class EffectsCollection(object):
             if handle in value:
                 value.remove(handle)
 
+    def has_effect(self, effect):
+        """
+        Check if given type of effect exists in collection
+
+        :param effect: effect to check
+        :type effect: Effect
+        """
+        return effect.effect_name in [x.effect_name for x in self.effects]
+
     def add_effect(self, effect):
         """
         Add effect
 
         :param effect: effect to add
         :type effect: Effect
-
-        :note: Multiples of same type of effect are not added
         """
         assert effect != None
 
-        if not effect.effect_name in map(lambda x: x.effect_name, self.effects):
-            self.effects.append(effect)
+        self.effects.append(effect)
 
     def get_effects(self):
         """

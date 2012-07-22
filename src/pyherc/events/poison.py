@@ -23,7 +23,7 @@ Classes for poison events
 """
 from pyherc.events.event import Event
 
-class PoisonTriggered(Event):
+class PoisonTriggeredEvent(Event):
     """
     Event that can be used to relay information about poison being triggered
 
@@ -33,9 +33,9 @@ class PoisonTriggered(Event):
         """
         Default constructor
         """
-        super(PoisonTriggered, self).__init__(level = level,
-                                             location = location,
-                                             affected_tiles = [])
+        super(PoisonTriggeredEvent, self).__init__(level = level,
+                                                   location = location,
+                                                   affected_tiles = [])
 
         self.target = target
         self.damage = damage
@@ -93,3 +93,79 @@ class PoisonTriggered(Event):
         :rtype: string
         """
         return '{0} suffers from poison'.format(self.target.name)
+
+class PoisonAddedEvent(Event):
+    """
+    Event raised when character has been poisoned
+
+    .. versionadded:: 0.4
+    """
+    def __init__(self, target):
+        """
+        Default constructor
+
+        :param level: level of event being triggered
+        :type level: Level
+        :param location: location of event being triggered
+        :type location: (int, int)
+        :param target: target of the event
+        :type target: Character
+        """
+        super(PoisonAddedEvent, self).__init__(level = target.level,
+                                               location = target.location,
+                                               affected_tiles = [])
+        self.target = target
+
+    def event_type(self):
+        """
+        Type of the event
+
+        :returns: type of the event
+        :rtype: string
+        """
+        return 'poisoned'
+
+    def first_person_source(self):
+        """
+        Description from point of view of source
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return ''
+
+    def first_person_target(self):
+        """
+        Description from point of view of target
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return 'you have been poisoned'
+
+    def third_person_source(self):
+        """
+        Description of the source
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return ''
+
+    def third_person_target(self):
+        """
+        Description of the target
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return '{0} has been poisoned'.format(self.target.name)
+
+    def third_person(self):
+        """
+        Description of the event
+
+        :returns: description of the event
+        :rtype: string
+        """
+        return '{0} has been poisoned'.format(self.target.name)

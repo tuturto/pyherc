@@ -22,7 +22,7 @@
 Module for poison
 """
 from pyherc.aspects import Logged
-from pyherc.events import PoisonTriggered
+from pyherc.events import PoisonTriggeredEvent, PoisonAddedEvent
 from pyherc.rules.effects.effect import Effect
 from pyherc.rules.ending import check_dying
 
@@ -50,11 +50,21 @@ class Poison(Effect):
         self.target.hit_points = self.target.hit_points - self.damage
 
         self.target.raise_event(
-                        PoisonTriggered(level = self.target.level,
-                                        location = self.target.location,
-                                        target = self.target,
-                                        damage = self.damage))
+                        PoisonTriggeredEvent(level = self.target.level,
+                                             location = self.target.location,
+                                             target = self.target,
+                                             damage = self.damage))
 
         check_dying(model = self.target.model,
                     character = self.target,
                     death_params = None)
+
+    @logged
+    def get_event(self):
+        """
+        Get event describing adding of this effect
+
+        :returns: event describing adding of this effect
+        :rtype: Event
+        """
+        return PoisonAddedEvent(target = self.target)
