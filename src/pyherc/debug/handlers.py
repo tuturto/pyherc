@@ -202,11 +202,11 @@ class Factory:
         location = player_character.location
 
         if creature_name != '':
-            creature = APP.creature_generator.generate_creature({'name':creature_name})
+            creature = APP.creature_generator.generate_creature(name = creature_name)
             level.add_creature(creature, (location[0] + 2, location[1]))
 
         if item_name != '':
-            item = APP.item_generator.generate_item({'name':item_name})
+            item = APP.item_generator.generate_item(name = item_name)
             level.add_item(item, (location[0] + 2, location[1]))
 
         return 'ok'
