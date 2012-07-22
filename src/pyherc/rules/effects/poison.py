@@ -60,7 +60,7 @@ class Poison(Effect):
                     death_params = None)
 
     @logged
-    def get_event(self):
+    def get_add_event(self):
         """
         Get event describing adding of this effect
 
