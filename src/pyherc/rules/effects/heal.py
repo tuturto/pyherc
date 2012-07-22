@@ -38,6 +38,7 @@ class Heal(Effect):
         super(Heal, self).__init__(duration, frequency, tick)
         self.healing = healing
         self.target = target
+        self.effect_name = 'heal'
 
     @logged
     def do_trigger(self):

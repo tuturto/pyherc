@@ -42,6 +42,7 @@ class Effect(object):
         self.duration = duration
         self.frequency = frequency
         self.tick = tick
+        self.effect_name = 'effect'
 
     @logged
     def trigger(self):

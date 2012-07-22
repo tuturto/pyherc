@@ -181,9 +181,23 @@ class TestEffects(object):
 
         assert_that(character, has_effects(1))
 
-    def test_add_effect_in_melee(self):
+class TestEffectsInMelee(object):
+    """
+    Test of effect creation and handling in melee
+    """
+
+    def __init__(self):
         """
-        Test that effect can be added as a result of unarmed combat
+        Default constructor
+        """
+        super(TestEffectsInMelee, self).__init__()
+
+        self.attacker = None
+        self.defender = None
+
+    def setup(self):
+        """
+        Setup test case
         """
         effect_factory = EffectsFactory()
         effect_factory.add_effect(
@@ -199,25 +213,38 @@ class TestEffects(object):
                             .with_effect_factory(effect_factory)
                             .build())
 
-        attacker = (CharacterBuilder()
-                        .with_action_factory(action_factory)
-                        .with_location((5, 5))
-                        .with_effect_handle(EffectHandleBuilder()
+        self.attacker = (CharacterBuilder()
+                            .with_action_factory(action_factory)
+                            .with_location((5, 5))
+                            .with_effect_handle(EffectHandleBuilder()
                                                  .with_trigger('on attack hit')
                                                  .with_effect('poison'))
-                        .build())
+                            .build())
 
-        defender = (CharacterBuilder()
-                        .with_action_factory(action_factory)
-                        .with_location((5, 4))
-                        .with_hit_points(50)
-                        .build())
+        self.defender = (CharacterBuilder()
+                            .with_action_factory(action_factory)
+                            .with_location((5, 4))
+                            .with_hit_points(50)
+                            .build())
 
         level = (LevelBuilder()
-                    .with_character(attacker)
-                    .with_character(defender)
+                    .with_character(self.attacker)
+                    .with_character(self.defender)
                     .build())
 
-        attacker.perform_attack(1)
+    def test_add_effect_in_melee(self):
+        """
+        Test that effect can be added as a result of unarmed combat
+        """
+        self.attacker.perform_attack(1)
 
-        assert_that(defender, has_effect())
+        assert_that(self.defender, has_effect())
+
+    def test_effects_do_not_stack(self):
+        """
+        Test that single type of effect will not added twice
+        """
+        self.attacker.perform_attack(1)
+        self.attacker.perform_attack(1)
+
+        assert_that(self.defender, has_effects(1))

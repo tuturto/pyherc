@@ -40,6 +40,7 @@ class Poison(Effect):
         super(Poison, self).__init__(duration, frequency, tick)
         self.damage = damage
         self.target = target
+        self.effect_name = 'poison'
 
     @logged
     def do_trigger(self):

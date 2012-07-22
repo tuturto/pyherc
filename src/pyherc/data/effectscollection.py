@@ -95,10 +95,13 @@ class EffectsCollection(object):
 
         :param effect: effect to add
         :type effect: Effect
+
+        :note: Multiples of same type of effect are not added
         """
         assert effect != None
 
-        self.effects.append(effect)
+        if not effect.effect_name in map(lambda x: x.effect_name, self.effects):
+            self.effects.append(effect)
 
     def get_effects(self):
         """
