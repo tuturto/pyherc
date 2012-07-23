@@ -37,6 +37,7 @@ Critical hit:
 
 Armours         Bonus   Speed  Casting
 =======         =====   =====  =======
+Robes           -       * 1    +1
 Leather         +1      * 1    
 Chainmail       +2      * 0.9  -1
 Scale mail      +3      * 0.7  -2
