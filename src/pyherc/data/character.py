@@ -508,7 +508,12 @@ class Character(object):
 
         .. versionadded:: 0.4
         """
-        self.__effects_collection.remove_expired_effects()
+        removed = self.__effects_collection.get_expired_effects()
+
+        if len(removed) > 0:
+            self.__effects_collection.remove_expired_effects()
+            for effect in removed:
+                self.raise_event(effect.get_removal_event())
 
     def add_to_tick(self, cost):
         """

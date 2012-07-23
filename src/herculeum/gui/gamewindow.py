@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2012 Tuukka Turto
@@ -61,6 +62,7 @@ class GameWindow(Container):
         self.lines = []
         self.event_types_to_show = ['attack hit',
                                     'poison triggered',
+                                    'poison ended',
                                     'poisoned']
 
         self.application = application
@@ -103,7 +105,7 @@ class GameWindow(Container):
         """
         self.play_area.receive_event(event)
 
-        if event.event_type() in self.event_types_to_show:
+        if event.event_type in self.event_types_to_show:
             self.lines.append(event.third_person())
             self.lines = self.lines[-4:]
 

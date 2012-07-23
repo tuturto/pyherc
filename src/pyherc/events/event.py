@@ -38,15 +38,7 @@ class Event(object):
         self.level = level
         self.location = location
         self.affected_tiles = affected_tiles
-
-    def event_type(self):
-        """
-        Type of the event
-
-        :returns: type of the event
-        :rtype: string
-        """
-        return 'prototype'
+        self.event_type = 'prototype'
 
     def first_person_source(self):
         """

@@ -30,7 +30,7 @@ from pyherc.rules.effects import EffectsFactory
 from pyherc.rules.effects import EffectHandle
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.consume.factories import DrinkFactory
-from pyherc.events import AttackHitEvent, PoisonAddedEvent
+from pyherc.events import AttackHitEvent, PoisonAddedEvent, Event
 from random import Random
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder, ActionFactoryBuilder
@@ -181,6 +181,24 @@ class TestEffects(object):
         character.drink(potion)
 
         assert_that(character, has_effects(1))
+
+    def test_effect_expiration_event_is_raised(self):
+        """
+        Test that effect expiration raises an event
+        """
+        model = mock()
+
+        character = (CharacterBuilder()
+                        .with_effect(EffectBuilder()
+                                        .with_duration(0)
+                                        .with_tick(10)
+                                        .with_frequency(10))
+                        .with_model(model)
+                        .build())
+
+        character.remove_expired_effects()
+
+        verify(model, times = 2).raise_event(any(Event))
 
 class TestEffectsInMelee(object):
     """

@@ -23,6 +23,7 @@ Module for poison
 """
 from pyherc.aspects import Logged
 from pyherc.events import PoisonTriggeredEvent, PoisonAddedEvent
+from pyherc.events import PoisonEndedEvent
 from pyherc.rules.effects.effect import Effect
 from pyherc.rules.ending import check_dying
 
@@ -68,3 +69,13 @@ class Poison(Effect):
         :rtype: Event
         """
         return PoisonAddedEvent(target = self.target)
+
+    @logged
+    def get_removal_event(self):
+        """
+        Get event describing removal of this event
+
+        :return: event describing removal of this event
+        :rtype: Event
+        """
+        return PoisonEndedEvent(target = self.target)

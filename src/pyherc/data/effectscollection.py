@@ -118,6 +118,16 @@ class EffectsCollection(object):
         """
         return [x for x in self.effects]
 
+    def get_expired_effects(self):
+        """
+        Get expired effects
+
+        :returns: expired effects
+        :rtype: [Effect]
+        """
+        return [x for x in self.effects
+                        if x.duration <= 0]
+
     def remove_expired_effects(self):
         """
         Remove expired effects from collection

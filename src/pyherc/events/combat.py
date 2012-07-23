@@ -43,15 +43,7 @@ class AttackHitEvent(Event):
         self.target = target
         self.damage = damage
         self.hit = hit
-
-    def event_type(self):
-        """
-        Type of the event
-
-        :returns: type of the event
-        :rtype: string
-        """
-        return 'attack hit'
+        self.event_type = 'attack hit'
 
     def first_person_source(self):
         """

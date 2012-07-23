@@ -36,3 +36,5 @@ class MoveEvent(Event):
         super(MoveEvent, self).__init__(level = level,
                                         location = location,
                                         affected_tiles = affected_tiles)
+
+        self.event_type = 'move'

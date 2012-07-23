@@ -83,6 +83,18 @@ class Effect(object):
                      location = None,
                      affected_tiles = [])
 
+    @logged
+    def get_removal_event(self):
+        """
+        Get event describing removal of this event
+
+        :return: event describing removal of this event
+        :rtype: Event
+        """
+        return Event(level = None,
+                     location = None,
+                     affected_tiles = [])
+
 class EffectHandle(object):
     """
     Handle that can be used to construct effects

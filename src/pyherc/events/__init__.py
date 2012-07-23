@@ -24,4 +24,4 @@ Package for events that are used to communicate between creatures and UI
 from .event import Event
 from .move import MoveEvent
 from .combat import AttackHitEvent
-from .poison import PoisonTriggeredEvent, PoisonAddedEvent
+from .poison import PoisonTriggeredEvent, PoisonAddedEvent, PoisonEndedEvent
