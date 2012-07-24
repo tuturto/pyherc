@@ -34,7 +34,8 @@ class AttackHitEvent(Event):
         """
         Default constructor
         """
-        super(AttackHitEvent, self).__init__(level = level,
+        super(AttackHitEvent, self).__init__(event_type = 'attack hit',
+                                             level = level,
                                              location = location,
                                              affected_tiles = affected_tiles)
 
@@ -43,7 +44,6 @@ class AttackHitEvent(Event):
         self.target = target
         self.damage = damage
         self.hit = hit
-        self.event_type = 'attack hit'
 
     def first_person_source(self):
         """

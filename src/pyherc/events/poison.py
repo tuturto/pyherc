@@ -33,13 +33,13 @@ class PoisonTriggeredEvent(Event):
         """
         Default constructor
         """
-        super(PoisonTriggeredEvent, self).__init__(level = level,
+        super(PoisonTriggeredEvent, self).__init__(event_type = 'poison triggered',
+                                                   level = level,
                                                    location = location,
                                                    affected_tiles = [])
 
         self.target = target
         self.damage = damage
-        self.event_type = 'poison triggered'
 
     def first_person_source(self):
         """
@@ -103,11 +103,11 @@ class PoisonAddedEvent(Event):
         :param target: target of the event
         :type target: Character
         """
-        super(PoisonAddedEvent, self).__init__(level = target.level,
+        super(PoisonAddedEvent, self).__init__(event_type = 'poisoned',
+                                               level = target.level,
                                                location = target.location,
                                                affected_tiles = [])
         self.target = target
-        self.event_type = 'poisoned'
 
     def first_person_source(self):
         """
@@ -165,11 +165,11 @@ class PoisonEndedEvent(Event):
         :param target: character not suffering from poisoning anymore
         :type target: Character
         """
-        super(PoisonEndedEvent, self).__init__(level = target.level,
+        super(PoisonEndedEvent, self).__init__(event_type = 'poison ended',
+                                               level = target.level,
                                                location = target.location,
                                                affected_tiles = [])
         self.target = target
-        self.event_type = 'poison ended'
 
     def first_person_source(self):
         """

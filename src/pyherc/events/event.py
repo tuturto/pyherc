@@ -27,18 +27,61 @@ class Event(object):
 
     .. versionadded:: 0.4
     """
-    def __init__(self, level, location, affected_tiles):
+    def __init__(self, event_type, level, location, affected_tiles):
         """
         Default constructor
 
+        :param event_type: type of event
+        :type event_type: string
         :param level: level where event happened
         :type level: Level
+        :param location: location where event happened
+        :type location: (int, int)
+        :param affected_tiles: tiles affected by the event
+        :type affected_tiles: [(int, int)]
         """
         super(Event, self).__init__()
-        self.level = level
-        self.location = location
-        self.affected_tiles = affected_tiles
-        self.event_type = 'prototype'
+        self.__level = level
+        self.__location = location
+        self.__affected_tiles = affected_tiles
+        self.__event_type = event_type
+
+    def __get_event_type(self):
+        """
+        Type of the event
+
+        :rtype: string
+        """
+        return self.__event_type
+
+    def __get_affected_tiles(self):
+        """
+        Tiles affected by this event
+
+        :rtype: [(int, int)]
+        """
+        return self.__affected_tiles
+
+    def __get_location(self):
+        """
+        Location of the event
+
+        :rtype: (int, int)
+        """
+        return self.__location
+
+    def __get_level(self):
+        """
+        Level where event was triggered
+
+        :rtype: Level
+        """
+        return self.__level
+
+    event_type = property(__get_event_type)
+    affected_tiles = property(__get_affected_tiles)
+    location = property(__get_location)
+    level = property(__get_level)
 
     def first_person_source(self):
         """

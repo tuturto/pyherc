@@ -33,8 +33,7 @@ class MoveEvent(Event):
         """
         Default constructor
         """
-        super(MoveEvent, self).__init__(level = level,
+        super(MoveEvent, self).__init__(event_type = 'move',
+                                        level = level,
                                         location = location,
                                         affected_tiles = affected_tiles)
-
-        self.event_type = 'move'
