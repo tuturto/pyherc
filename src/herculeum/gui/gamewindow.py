@@ -133,6 +133,7 @@ class GameArea(Widget):
                              K_KP1:6, K_KP4:7, K_KP7:8, K_KP5:9}
         self.old_location = (0, 0)
         self.dirty_tiles = []
+        self.light_matrix = None
 
     def paint(self, s):
         """
@@ -146,7 +147,7 @@ class GameArea(Widget):
 
         player.level.full_update_needed = False
 
-        light_matrix = get_fov_matrix(self.application.world, player, 13)
+        self.light_matrix = get_fov_matrix(self.application.world, player, 13)
 
         sy = 0
         for y in range(player.location[1] - 9, player.location[1] + 10):
@@ -159,7 +160,7 @@ class GameArea(Widget):
                     if not level.walls[x][y] == herculeum.config.tiles.WALL_EMPTY:
                         tile = self.surface_manager.get_icon(level.walls[x][y])
                         s.blit(tile, (sx * 32, sy * 32 - 8))
-                    if light_matrix[x][y] == False:
+                    if self.light_matrix[x][y] == False:
                         tile = self.surface_manager.get_icon(herculeum.config.tiles.FLOOR_EMPTY)
                         s.blit(tile, (sx * 32, sy * 32 - 8))
                 else:
@@ -175,7 +176,7 @@ class GameArea(Widget):
             x = item.location[0] - player.location[0] + 12
             y = item.location[1] - player.location[1] + 9
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
+                if self.light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
                     tile = self.surface_manager.get_icon(item.icon)
                     s.blit(tile, (x * 32, y *32 - 8))
 
@@ -184,7 +185,7 @@ class GameArea(Widget):
             x = item.location[0] - player.location[0] + 12
             y = item.location[1] - player.location[1] + 9
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
+                if self.light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
                     tile = self.surface_manager.get_icon(item.icon)
                     s.blit(tile, (x * 32, y *32 - 8))
 
@@ -193,7 +194,7 @@ class GameArea(Widget):
             x = item.location[0] - player.location[0] + 12
             y = item.location[1] - player.location[1] + 9
             if x >= 0 and y >= 0 and x <= 24 and y <= 14:
-                if light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
+                if self.light_matrix[x + player.location[0] - 12][y + player.location[1] - 9] == True:
                     tile = self.surface_manager.get_icon(item.icon)
                     s.blit(tile, (x * 32, y *32 - 8))
 
@@ -211,7 +212,6 @@ class GameArea(Widget):
             self.paint(s)
             return [Rect(0, 0, self.rect.w, self.rect.h)]
         else:
-            light_matrix = get_fov_matrix(self.application.world, player, 13)
             player = self.application.world.player
             updated_tiles = []
 
@@ -221,7 +221,7 @@ class GameArea(Widget):
 
                 if screen_x > 0 and screen_x < 768 and screen_y > 0 and screen_y < 568:
                     #do update
-                    if light_matrix[update[0]][update[1]] == False:
+                    if self.light_matrix[update[0]][update[1]] == False:
                         tile = self.surface_manager.get_icon(herculeum.config.tiles.FLOOR_EMPTY)
                         s.blit(tile, (screen_x, screen_y))
                     else:
