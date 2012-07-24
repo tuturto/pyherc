@@ -89,6 +89,7 @@ class TestGameWindow(object):
 
         model.register_event_listener(game_gui)
 
+        game_gui.paint(surface)
         monster.move(7)
         rects = game_gui.update(surface)
 
