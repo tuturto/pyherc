@@ -66,6 +66,7 @@ class MoveAction(object):
             self.character.add_to_tick(2)
 
             self.character.raise_event(MoveEvent(
+                                            actor = self.character,
                                             level = self.character.level,
                                             location = self.character.location,
                                             affected_tiles = affected_tiles))

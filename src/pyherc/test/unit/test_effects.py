@@ -30,7 +30,7 @@ from pyherc.rules.effects import EffectsFactory
 from pyherc.rules.effects import EffectHandle
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.consume.factories import DrinkFactory
-from pyherc.events import AttackHitEvent, PoisonAddedEvent, Event
+from pyherc.events import PoisonAddedEvent, Event
 from random import Random
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder, ActionFactoryBuilder

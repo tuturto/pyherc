@@ -63,7 +63,8 @@ class TestModel(object):
         """
         Test that events are dispatched to listeners
         """
-        event = MoveEvent(level = self.level,
+        event = MoveEvent(actor = mock(),
+                          level = self.level,
                           location = (10, 10),
                           affected_tiles = [])
 

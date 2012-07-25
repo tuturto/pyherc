@@ -159,6 +159,7 @@ class TestGameWindow(object):
                  (11, 11)]
 
         game_gui.receive_event(MoveEvent(level = level,
+                                         actor = mock(),
                                          location = (10, 10),
                                          affected_tiles = tiles))
 

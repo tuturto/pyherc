@@ -80,6 +80,7 @@ class Effect(object):
         :rtype: Event
         """
         return Event(event_type = 'empty event',
+                     actor = None,
                      level = None,
                      location = None,
                      affected_tiles = [])
@@ -93,6 +94,7 @@ class Effect(object):
         :rtype: Event
         """
         return Event(event_type = 'empty event',
+                     actor = None,
                      level = None,
                      location = None,
                      affected_tiles = [])

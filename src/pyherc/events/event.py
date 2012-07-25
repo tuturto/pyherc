@@ -27,12 +27,14 @@ class Event(object):
 
     .. versionadded:: 0.4
     """
-    def __init__(self, event_type, level, location, affected_tiles):
+    def __init__(self, event_type, actor, level, location, affected_tiles):
         """
         Default constructor
 
         :param event_type: type of event
         :type event_type: string
+        :param actor: actor of the event
+        :type actor: Character
         :param level: level where event happened
         :type level: Level
         :param location: location where event happened
@@ -42,6 +44,7 @@ class Event(object):
         """
         super(Event, self).__init__()
         self.__level = level
+        self.__actor = actor
         self.__location = location
         self.__affected_tiles = affected_tiles
         self.__event_type = event_type
@@ -53,6 +56,14 @@ class Event(object):
         :rtype: string
         """
         return self.__event_type
+
+    def __get_actor(self):
+        """
+        Actor of the event
+
+        :rtype: Character
+        """
+        return self.__actor
 
     def __get_affected_tiles(self):
         """
@@ -79,51 +90,37 @@ class Event(object):
         return self.__level
 
     event_type = property(__get_event_type)
+    actor = property(__get_actor)
     affected_tiles = property(__get_affected_tiles)
     location = property(__get_location)
     level = property(__get_level)
 
-    def first_person_source(self):
+    def first_person_description(self):
         """
-        Description from point of view of source
+        Description of the event in first person
 
         :returns: description of the event
         :rtype: string
         """
-        return 'you do something'
+        return 'I do something'
 
-    def first_person_target(self):
+    def second_person_description(self):
         """
-        Description from point of view of target
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return 'you are done something'
-
-    def third_person_source(self):
-        """
-        Description of the source
+        Description of the event in second person
 
         :returns: description of the event
         :rtype: string
         """
-        return 'somebody does something'
+        return 'You do something'
 
-    def third_person_target(self):
+    def third_person_description(self):
         """
-        Description of the target
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return 'somebody is done something'
-
-    def third_person(self):
-        """
-        Description of the event
+        Description of the event in third person
 
         :returns: description of the event
         :rtype: string
         """
-        return 'somebody does something to someone'
+        if actor != None:
+            return '{0} does something'.format(self.actor.name)
+        else:
+            return 'somebody does something'
