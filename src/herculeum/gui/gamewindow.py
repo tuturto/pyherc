@@ -106,7 +106,11 @@ class GameWindow(Container):
         self.play_area.receive_event(event)
 
         if event.event_type in self.event_types_to_show:
-            self.lines.append(event.third_person_description())
+            if event.actor != None:
+                if event.actor == self.application.world.player:
+                    self.lines.append(event.second_person_description())
+                else:
+                    self.lines.append(event.third_person_description())
             self.lines = self.lines[-4:]
 
             temp_text = ''
