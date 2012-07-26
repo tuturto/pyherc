@@ -29,46 +29,37 @@ class AttackHitEvent(Event):
 
     .. versionadded:: 0.4
     """
-    def __init__(self, level, location, type, actor, target, damage, hit,
+    def __init__(self, type, attacker, target, damage, hit,
                  affected_tiles):
         """
         Default constructor
         """
         super(AttackHitEvent, self).__init__(event_type = 'attack hit',
-                                             actor = actor,
-                                             level = level,
-                                             location = location,
+                                             level = attacker.level,
+                                             location = attacker.location,
                                              affected_tiles = affected_tiles)
 
         self.type = type
+        self.attacker = attacker
         self.target = target
         self.damage = damage
         self.hit = hit
 
-    def first_person_description(self):
+    def get_description(self, point_of_view):
         """
-        Description of the event in first person
+        Description of the event
 
+        :param point_of_view: point of view for description
+        :type point_of_view: Character
         :returns: description of the event
         :rtype: string
         """
-        return 'I hit {0}'.format(self.target.name)
+        if point_of_view == self.attacker:
+           description = 'You hit {0}'.format(self.target.name)
+        elif point_of_view == self.target:
+            description = '{0} hits you'.format(self.attacker.name)
+        else:
+            description = '{0} hits {1}'.format(self.attacker.name,
+                                                self.target.name)
 
-    def second_person_description(self):
-        """
-        Description of the event in second person
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return 'You hit {0}'.format(self.target.name)
-
-    def third_person_description(self):
-        """
-        Description of the event in third person
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return '{0} hits {1}'.format(self.actor.name,
-                                     self.target.name)
+        return description

@@ -29,45 +29,37 @@ class PoisonTriggeredEvent(Event):
 
     .. versionadded:: 0.4
     """
-    def __init__(self, actor, level, location, damage):
+    def __init__(self, target, damage):
         """
         Default constructor
+
+        :param target: character who is suffering of poisoning
+        :type target: Character
+        :param damage: amount of damage suffered
+        :type damage: int
         """
         super(PoisonTriggeredEvent, self).__init__(event_type = 'poison triggered',
-                                                   actor = actor,
-                                                   level = level,
-                                                   location = location,
+                                                   level = target.level,
+                                                   location = target.location,
                                                    affected_tiles = [])
-
+        self.target = target
         self.damage = damage
 
-    def first_person_description(self):
+    def get_description(self, point_of_view):
         """
-        Description of the event in first person
+        Description of the event
 
+        :param point_of_view: point of view for description
+        :type point_of_view: Character
         :returns: description of the event
         :rtype: string
         """
-        return 'I suffer from poison'
+        if point_of_view == self.target:
+            description = 'You suffer from poison'
+        else:
+            description = '{0} suffers from poison'.format(self.target.name)
 
-    def second_person_description(self):
-        """
-        Description of the event in second person
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return 'You suffer from poison'
-
-    def third_person_description(self):
-        """
-        Description of the event in third person
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return '{0} suffers from poison'.format(self.actor.name)
-
+        return description
 
 class PoisonAddedEvent(Event):
     """
@@ -75,55 +67,40 @@ class PoisonAddedEvent(Event):
 
     .. versionadded:: 0.4
     """
-    def __init__(self, actor):
+    def __init__(self, target):
         """
         Default constructor
 
-        :param level: level of event being triggered
-        :type level: Level
-        :param location: location of event being triggered
-        :type location: (int, int)
-        :param actor: actor of the event
+        :param target: target of the event
         :type target: Character
         """
         super(PoisonAddedEvent, self).__init__(event_type = 'poisoned',
-                                               actor = actor,
-                                               level = actor.level,
-                                               location = actor.location,
+                                               level = target.level,
+                                               location = target.location,
                                                affected_tiles = [])
+        self.target = target
 
-    def first_person_description(self):
+    def get_description(self, point_of_view):
         """
-        Description of the event in first person
+        Description of the event
 
+        :param point_of_view: point of view for description
+        :type point_of_view: Character
         :returns: description of the event
         :rtype: string
         """
-        return 'I have been poisoned'
+        if point_of_view == self.target:
+            description = 'You have been poisoned'
+        else:
+            description = '{0} has been poisoned'.format(self.target.name)
 
-    def second_person_description(self):
-        """
-        Description of the event in second person
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return 'You have been poisoned'
-
-    def third_person_description(self):
-        """
-        Description of the event in third person
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return '{0} has been poisoned'.format(self.actor.name)
+        return description
 
 class PoisonEndedEvent(Event):
     """
     Event to signal that poisoning is over
     """
-    def __init__(self, actor):
+    def __init__(self, target):
         """
         Default constructor
 
@@ -131,34 +108,23 @@ class PoisonEndedEvent(Event):
         :type actor: Character
         """
         super(PoisonEndedEvent, self).__init__(event_type = 'poison ended',
-                                               actor = actor,
-                                               level = actor.level,
-                                               location = actor.location,
+                                               level = target.level,
+                                               location = target.location,
                                                affected_tiles = [])
+        self.target = target
 
-    def first_person_description(self):
+    def get_description(self, point_of_view):
         """
-        Description of the event in first person
+        Description of the event
 
+        :param point_of_view: point of view for description
+        :type point_of_view: Character
         :returns: description of the event
         :rtype: string
         """
-        return 'I am no longer poisoned'
+        if point_of_view == self.target:
+            description = 'You are no longer poisoned'
+        else:
+            description = '{0} is no longer poisoned'.format(self.target.name)
 
-    def second_person_description(self):
-        """
-        Description of the event in second person
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return 'You are no longer poisoned'
-
-    def third_person_description(self):
-        """
-        Description of the event in third person
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return '{0} is no longer poisoned'.format(self.actor.name)
+        return description

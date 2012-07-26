@@ -51,9 +51,7 @@ class Poison(Effect):
         self.target.hit_points = self.target.hit_points - self.damage
 
         self.target.raise_event(
-                        PoisonTriggeredEvent(level = self.target.level,
-                                             location = self.target.location,
-                                             actor = self.target,
+                        PoisonTriggeredEvent(target = self.target,
                                              damage = self.damage))
 
         check_dying(model = self.target.model,
@@ -68,7 +66,7 @@ class Poison(Effect):
         :returns: event describing adding of this effect
         :rtype: Event
         """
-        return PoisonAddedEvent(actor = self.target)
+        return PoisonAddedEvent(target = self.target)
 
     @logged
     def get_removal_event(self):
@@ -78,4 +76,4 @@ class Poison(Effect):
         :return: event describing removal of this event
         :rtype: Event
         """
-        return PoisonEndedEvent(actor = self.target)
+        return PoisonEndedEvent(target = self.target)

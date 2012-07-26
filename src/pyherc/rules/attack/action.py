@@ -72,11 +72,9 @@ class AttackAction(object):
 
         self.attacker.raise_event(AttackHitEvent(
                                     type = 'melee',
-                                    actor = self.attacker,
+                                    attacker = self.attacker,
                                     target = self.target,
                                     damage = self.damage,
-                                    level = self.attacker.level,
-                                    location = self.attacker.location,
                                     hit = was_hit,
                                     affected_tiles = [self.target.location]))
 

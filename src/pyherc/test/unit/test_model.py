@@ -22,9 +22,9 @@
 Module for testing Model
 """
 #pylint: disable=W0614
-from pyherc.data import Model
+from pyherc.data import Model, Level
 from pyherc.test.matchers import has_event_listener
-from pyherc.test.builders import LevelBuilder
+from pyherc.test.builders import LevelBuilder, CharacterBuilder
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock, verify
 from pyherc.events import MoveEvent
@@ -63,9 +63,9 @@ class TestModel(object):
         """
         Test that events are dispatched to listeners
         """
-        event = MoveEvent(actor = mock(),
-                          level = self.level,
-                          location = (10, 10),
+        event = MoveEvent(mover = (CharacterBuilder()
+                                        .with_model(self.model)
+                                        .build()),
                           affected_tiles = [])
 
         self.model.raise_event(event)

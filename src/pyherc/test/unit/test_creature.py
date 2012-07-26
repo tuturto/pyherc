@@ -56,9 +56,7 @@ class TestCharacter(object):
                     .with_character(character)
                     .build())
 
-        character.raise_event(MoveEvent(actor = character,
-                                        level = level,
-                                        location = character.location,
+        character.raise_event(MoveEvent(mover = character,
                                         affected_tiles = []))
 
         verify(model).raise_event(any())

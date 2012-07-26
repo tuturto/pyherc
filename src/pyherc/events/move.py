@@ -29,39 +29,34 @@ class MoveEvent(Event):
 
     .. versionadded:: 0.4
     """
-    def __init__(self, actor, level, location, affected_tiles):
+    def __init__(self, mover, affected_tiles):
         """
         Default constructor
+
+        :param mover: character moving around
+        :type mover: Character
+        :param affected_tiles: tiles affected by event
+        :type affected_tiles: [(int, int)]
         """
         super(MoveEvent, self).__init__(event_type = 'move',
-                                        actor = actor,
-                                        level = level,
-                                        location = location,
+                                        level = mover.level,
+                                        location = mover.location,
                                         affected_tiles = affected_tiles)
 
-    def first_person_description(self):
-        """
-        Description of the event in first person
+        self.mover = mover
 
+    def get_description(self, point_of_view):
+        """
+        Description of the event
+
+        :param point_of_view: point of view for description
+        :type point_of_view: Character
         :returns: description of the event
         :rtype: string
         """
-        return 'I move'
+        if point_of_view == self.mover:
+            description = 'You move'
+        else:
+            description = '{0} moves'.format(self.mover.name)
 
-    def second_person_description(self):
-        """
-        Description of the event in second person
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return 'You move'
-
-    def third_person_description(self):
-        """
-        Description of the event in third person
-
-        :returns: description of the event
-        :rtype: string
-        """
-        return '{0} moves'.format(self.actor.name)
+        return description

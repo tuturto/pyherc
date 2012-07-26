@@ -158,9 +158,11 @@ class TestGameWindow(object):
         tiles = [(10, 10),
                  (11, 11)]
 
-        game_gui.receive_event(MoveEvent(level = level,
-                                         actor = mock(),
-                                         location = (10, 10),
+        mover = mock()
+        mover.location = (10, 10)
+        mover.level = mock()
+
+        game_gui.receive_event(MoveEvent(mover = mover,
                                          affected_tiles = tiles))
 
         assert_that(game_gui.dirty_tiles, has_items((10, 10), (11, 11)))
