@@ -7,7 +7,6 @@ New features
 ************
 
   - Certain creatures can make poisoned attacks
-  - Title music
   - First version of Cutesy testing language included
 
 **********
