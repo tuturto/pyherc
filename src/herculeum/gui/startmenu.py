@@ -52,11 +52,11 @@ class StartMenu(Container):
         self.surface_manager = surface_manager
         self.logger = logging.getLogger('pyherc.gui.windows.StartMenu')
 
-        if not pygame.mixer.music.get_busy():
-            pygame.mixer.music.load(os.path.join(application.base_path,
-                'music/demetrios_katis_-_the_gathering_of_the_tribes.ogg'))
-            pygame.mixer.music.set_volume(0.5)
-            pygame.mixer.music.play(-1)
+        #if not pygame.mixer.music.get_busy():
+        #    pygame.mixer.music.load(os.path.join(application.base_path,
+        #        'music/demetrios_katis_-_the_gathering_of_the_tribes.ogg'))
+        #    pygame.mixer.music.set_volume(0.5)
+        #    pygame.mixer.music.play(-1)
 
         self.set_layout()
 

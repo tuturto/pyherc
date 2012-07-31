@@ -108,7 +108,7 @@ class Level(object):
         :param loc_y: y-coordinate of the location
         :type loc_y: integer
         :returns: tile ID at given location
-        :rtype: integer
+        :rtype: int
         """
         if loc_x < 0 or loc_y < 0:
             return self.empty_floor
@@ -130,7 +130,7 @@ class Level(object):
         :param loc_y: y-coordinate of the location
         :type loc_y: integer
         :returns: wall tile ID at given location
-        :rtype: integer
+        :rtype: int
         """
         if loc_x < 0 or loc_y < 0:
             return self.empty_wall #?
@@ -164,7 +164,7 @@ class Level(object):
         :param location: location to check
         :type location: (integer, integer)
         :returns: items at given location
-        :rtype: list
+        :rtype: [Item]
         """
         assert(location != None)
         items = []
@@ -219,7 +219,7 @@ class Level(object):
         :param location: location of portal
         :type location: (integer, integer)
         :returns: Portal if found, otherwise None
-        :rtype: Porta
+        :rtype: Portal
         """
         for portal in self.portals:
             if portal.location == location:
@@ -281,7 +281,7 @@ class Level(object):
         Finds free space where stuff can be placed
 
         :returns: Location where space is free
-        :rtype: (integer, integer)
+        :rtype: (int, int)
         """
         width = len(self.floor)
         height = len(self.floor[0])
@@ -299,7 +299,7 @@ class Level(object):
         :param y_coordinate: y-coordinate of location
         :type y_coordinate: integer
         :returns: icon ID of the tile
-        :rtype: integer
+        :rtype: int
         """
         if self.walls[x_coordinate][y_coordinate] != self.empty_wall:
             return self.walls[x_coordinate][y_coordinate]
@@ -357,7 +357,7 @@ class Level(object):
         Gets size of level
 
         :returns: tupple, with width and length of level
-        :rtype: (integer, integer)
+        :rtype: (int, int)
         """
         x_size = len(self.floor)
         y_size = len(self.floor[0])
@@ -372,7 +372,7 @@ class Level(object):
         :param  location: location to set
         :type location: (integer, integer)
         :param location_type: type of location
-        :type location_type: integer
+        :type location_type: int
         """
         self.__location_type[location[0]][location[1]] = location_type
 
@@ -384,7 +384,7 @@ class Level(object):
         :param location: location to get
         :type location: (integer, integer)
         :returns: Type of location
-        :rtype: integer
+        :rtype: int
         """
         return self.__location_type[location[0]][location[1]]
 
@@ -396,7 +396,7 @@ class Level(object):
         :param location_type: Type of location to search.
         :type location_type: string
         :returns: locations identifying rooms
-        :rtype: list
+        :rtype: [(int, int)]
         """
         rooms = []
         for loc_x in range(len(self.__location_type)):

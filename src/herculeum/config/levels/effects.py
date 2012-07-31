@@ -25,7 +25,9 @@ from pyherc.rules.effects import Heal, Poison
 
 def init_effects():
     """
-    Initialise common items
+    Initialise common effects
+
+    :returns: effect configuration
     """
     config = []
 

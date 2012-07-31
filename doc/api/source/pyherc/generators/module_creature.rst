@@ -7,5 +7,13 @@ pyherc.generators.creature
     .. autoclass:: CreatureGenerator
       :show-inheritance:
 
-        .. automethod:: __init__(model, action_factory, tables, rng)
-        .. automethod:: generate_creature(parameters)
+        .. automethod:: __init__(configuration, model, action_factory, rng)
+        .. automethod:: generate_creature(name)
+
+    .. autoclass:: CreatureConfigurations
+      :show-inheritance:        
+      :members:
+        
+    .. autoclass:: CreatureConfiguration
+      :show-inheritance:
+      :members:

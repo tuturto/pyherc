@@ -56,6 +56,9 @@ from pyherc.ai import FlockingHerbivore
 def init_level(rng, item_generator, creature_generator, level_size):
     """
     Initialise upper catacombs
+
+    :returns: level configuration
+    :rtype: LevelConfiguration
     """
     room_generators = [CatacombsGenerator(FLOOR_NATURAL,
                                            WALL_EMPTY,
@@ -151,6 +154,12 @@ def init_level(rng, item_generator, creature_generator, level_size):
     return config
 
 def init_creatures():
+    """
+    Initialise creatures''
+
+    :returns: list of configuration items
+    :rtype: [CreatureConfiguration]
+    """
 
     config = []
 

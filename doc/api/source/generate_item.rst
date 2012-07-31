@@ -11,73 +11,62 @@ To generate item, following code can be used:
 
 .. code-block:: python
 
-    new_item = self.item_generator.generate_item(model.tables, {'type':'food'})
+    new_item = self.item_generator.generate_item(item_type = 'food')
 
-This will generate a random item of type food.
+This will generate a random item of type food. To generate item of specic name,
+following code can be used:
 
-Instance of :class:`pyherc.rules.tables.Tables` is passed as a first argument
-to the method. It contains (among other things) list of all possible items
-that the game can create. These are loaded as the game starts up. File where
-item definitions are, is resources/items.xml. By editing this file, new items
-can be easily added.
+.. code-block:: python
 
-Second parameter given to the method is a dictionary, which defines parameters
-used in item generation. Following keys are currently supported:
+    new_item = self.item_generator.generate_item(name = 'apple')
 
-  - name: generates item with given name
-  - type: generates item with given type (food, weapon)
+This will generate an apple.
 
 Defining items
 ==============
-Items are defined in resources/items.xml. Following snippet is used for dagger::
+Items are defined in configuration scripts that are fed to 
+:class:`pyherc.config.config.Configuration` during system startup. Following 
+example defines an apple and dagger for configuration.
 
-    <item>
-        <name>dagger</name>
-        <cost>2</cost>
-        <damage>2</damage>
-        <criticalRange>11</criticalRange>
-        <criticalDamage>2</criticalDamage>
-        <weight>1</weight>
-        <damageTypes>
-            <damageType>piercing</damageType>
-            <damageType>slashing</damageType>
-        </damageTypes>
-        <class>simple</class>
-        <icons>
-            <icon>ITEM_DAGGER_1</icon>
-        </icons>
-        <types>
-            <type>weapon</type>
-            <type>light weapon</type>
-            <type>melee</type>
-            <type>simple weapon</type>
-        </types>
-        <rarity>common</rarity>
-    </item>
-    
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
-|Element        |Explanation                    |Notes                                                                           |
-+===============+===============================+================================================================================+
-|Name           |Name of the item               |                                                                                |
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
-|Cost           |Base cost in coins             |                                                                                |
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
-|Damage         |Base damage                    |                                                                                |
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
-|criticalRange  |Chances for critical hit       |                                                                                |
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
-|criticalDamage |Amount of critical damage      |                                                                                |
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
-|weight         |Weight of the item             |                                                                                |
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
-|damageTypes    |Types of damage weapon does    |                                                                                |
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
-|class          |Class of the weapon            |                                                                                |
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
-|icons          |Icons used to display the item |Only one is selected when item is created                                       |
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
-|types          |Tags                           |Used in item generation, for example when generator should make 'simple weapon' |
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
-|rarity         |Rarity of the item             |common, uncommon, rare, epic, legendary, artifact                               |
-+---------------+-------------------------------+--------------------------------------------------------------------------------+
+.. testcode::
 
+    from pyherc.generators import ItemConfigurations
+    from pyherc.generators import ItemConfiguration, WeaponConfiguration
+    from pyherc.rules.effects import EffectHandle
+
+    def init_items():
+        """
+        Initialise common items
+        """
+        config = []
+
+        config.append(
+                      ItemConfiguration(name = 'apple',
+                                        cost = 1,
+                                        weight = 1,
+                                        icons = [501],
+                                        types = ['food'],
+                                        rarity = 'common'))
+
+        config.append(
+                      ItemConfiguration(name = 'dagger',
+                                        cost = 2,
+                                        weight = 1,
+                                        icons = [602, 603],
+                                        types = ['weapon',
+                                                   'light weapon',
+                                                   'melee',
+                                                   'simple weapon'],
+                                        rarity = 'common',
+                                        weapon_configration = WeaponConfiguration(
+                                                damage = 2,
+                                                critical_range = 11,
+                                                critical_damage = 2,
+                                                damage_types = ['piercing',
+                                                                'slashing'],
+                                                weapon_class = 'simple')))
+
+        return config
+
+For more details regarding to configuration, refer to :doc:`configuration`
+page.

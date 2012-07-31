@@ -50,3 +50,11 @@ For brewity, creation of ItemGenerator has been left out from the example.
     item_adder = ItemAdder(item_generator,
                            item_adder_config,
                            Random())
+
+    print item_adder
+    
+item_adder now contains a fully configured ItemAdder object.
+    
+.. testoutput::
+
+    <pyherc.generators.level.items.ItemAdder object at 0x...>

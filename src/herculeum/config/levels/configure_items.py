@@ -28,6 +28,9 @@ from pyherc.rules.effects import EffectHandle
 def init_items():
     """
     Initialise common items
+
+    :returns: item configurations
+    :rtype: [ItemConfiguration]
     """
     config = []
 

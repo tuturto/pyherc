@@ -25,16 +25,30 @@ import pyherc.config
 from herculeum.gui.surfaceManager import SurfaceManager
 
 class Configuration(pyherc.config.Configuration):
+    """
+    Configuration for herculeum
+    """
 
     def __init__(self, base_path, model):
         """
         Default constructor
+
+        :param base_path: path to resources
+        :type base_path: string
+        :param model: model to use in configuration
+        :param type: Model
         """
         super(Configuration, self).__init__(base_path, model)
 
         self.surface_manager = None
 
     def initialise(self, level_config):
+        """
+        Initialise configuration
+
+        :param level_config: package containing configuration
+        :type level_config: Package
+        """
         super(Configuration, self).initialise(level_config)
 
         self.resolution = (800, 600)

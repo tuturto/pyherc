@@ -104,6 +104,14 @@ Following example creates an EffectHandle and adds it to the collection.
                          parameters = None,
                          charges = 1)
    collection.add_effect_handle(handle)
+   
+   print collection.get_effect_handles()
+   
+The collection now contains a single EffectHandle object.
+   
+.. testoutput::
+
+   [<pyherc.rules.effects.effect.EffectHandle object at 0x...>]
 
 Following example creates an Effect and adds it to the collection.
 
@@ -119,3 +127,11 @@ Following example creates an Effect and adds it to the collection.
                    damage = 1, 
                    target = None)
    collection.add_effect(effect)
+   
+   print collection.get_effects()
+
+The collection now contains a single Poison object.
+   
+.. testoutput::
+
+   [<pyherc.rules.effects.poison.Poison object at 0x...>]
