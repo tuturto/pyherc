@@ -1,0 +1,235 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.generators.level.creatures &mdash; Herculeum 0.4 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.4 documentation" href="../../../index.html" />
+    <link rel="up" title="pyherc.generators.level" href="module_level.html" />
+    <link rel="next" title="pyherc.generators.level.items" href="module_items.html" />
+    <link rel="prev" title="pyherc.generators.level.config" href="module_config.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_items.html" title="pyherc.generators.level.items"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_config.html" title="pyherc.generators.level.config"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../module_generators.html" >pyherc.generators</a> &raquo;</li>
+          <li><a href="module_level.html" accesskey="U">pyherc.generators.level</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.generators.level.creatures">
+<span id="pyherc-generators-level-creatures"></span><h1>pyherc.generators.level.creatures<a class="headerlink" href="#module-pyherc.generators.level.creatures" title="Permalink to this headline">¶</a></h1>
+<p>Classes for creature generation</p>
+<dl class="class">
+<dt id="pyherc.generators.level.creatures.CreatureAdder">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.creatures.</tt><tt class="descname">CreatureAdder</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.creatures.CreatureAdder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class used to add creatures during level generation</p>
+<dl class="method">
+<dt id="pyherc.generators.level.creatures.CreatureAdder.add_creatures">
+<tt class="descname">add_creatures</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.creatures.CreatureAdder.add_creatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add creatures to level according to configuration</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>level</strong> (<em>Level</em>) &#8211; level to add creatures</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.generators.level.creatures.CreatureAdder.generate_creatures">
+<tt class="descname">generate_creatures</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.creatures.CreatureAdder.generate_creatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate creatures</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>string</em>) &#8211; name of the creatures to generate</li>
+<li><strong>amount</strong> (<em>integer</em>) &#8211; amount of creatures to generate</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">generated creatures</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[Character]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.creatures.CreatureAdder.level_types">
+<tt class="descname">level_types</tt><a class="headerlink" href="#pyherc.generators.level.creatures.CreatureAdder.level_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get level types this adder can be used at</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">level types this adder can be used at</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[string]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.generators.level.creatures.CreatureAdder.place_creatures">
+<tt class="descname">place_creatures</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.creatures.CreatureAdder.place_creatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place creatures into a level</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>creatures</strong> (<em>[Character]</em>) &#8211; creatures to place</li>
+<li><strong>creature_list</strong> (<em>dict</em>) &#8211; specification where to place creatures</li>
+<li><strong>level</strong> (<em>Level</em>) &#8211; level to place creatures</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.generators.level.creatures.CreatureAdderConfiguration">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.creatures.</tt><tt class="descname">CreatureAdderConfiguration</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.creatures.CreatureAdderConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class used to configure CreatureAdder</p>
+<dl class="method">
+<dt id="pyherc.generators.level.creatures.CreatureAdderConfiguration.add_creature">
+<tt class="descname">add_creature</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.creatures.CreatureAdderConfiguration.add_creature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds creature specification</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>min_amount</strong> (<em>integer</em>) &#8211; minimum amount of creatures to generate</li>
+<li><strong>max_amount</strong> (<em>integer</em>) &#8211; maximum amount of creatures to generate</li>
+<li><strong>name</strong> (<em>string</em>) &#8211; name of the creature to generate</li>
+<li><strong>location</strong> (<em>string</em>) &#8211; location type where creature is placed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_config.html"
+                        title="previous chapter">pyherc.generators.level.config</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_items.html"
+                        title="next chapter">pyherc.generators.level.items</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/pyherc/generators/level/module_creatures.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_items.html" title="pyherc.generators.level.items"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_config.html" title="pyherc.generators.level.config"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../module_generators.html" >pyherc.generators</a> &raquo;</li>
+          <li><a href="module_level.html" >pyherc.generators.level</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

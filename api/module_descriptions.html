@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Building blocks &mdash; Herculeum 0.3 documentation</title>
+    <title>Building blocks &mdash; Herculeum 0.4 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.3',
+        VERSION:     '0.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.3 documentation" href="index.html" />
+    <link rel="top" title="Herculeum 0.4 documentation" href="index.html" />
     <link rel="next" title="Generating a level" href="generate_level.html" />
     <link rel="prev" title="Intro" href="intro.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="intro.html" title="Intro"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,21 +56,100 @@
             
   <div class="section" id="building-blocks">
 <h1>Building blocks<a class="headerlink" href="#building-blocks" title="Permalink to this headline">¶</a></h1>
-<p>On a high level, pyherc codebase is divided as detailed below:</p>
+<p>Codebase is divided in two main pieces <a class="reference internal" href="pyherc/package_pyherc.html#module-pyherc" title="pyherc"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc</span></tt></a> and <a class="reference internal" href="herculeum/package_herculeum.html#module-herculeum" title="herculeum"><tt class="xref py py-mod docutils literal"><span class="pre">herculeum</span></tt></a>.
+pyherc is a sort of platform or library for writing roguelike games. herculeum
+on the other hand is a sample game that has been written on top of pyherc.</p>
+<p>On a high level, pyherc and herculeum codebases are divided as detailed below:</p>
+<p class="graphviz">
+<img src="_images/graphviz-0932e9b9e3447d5aba969e57916162588e6a0ad2.png" alt="digraph hierarchy {
+    rankdir=LR
+    node[shape=box]
+    edge[dir=forward, arrowtail=empty, arrowhead=none]
+    pyherc
+    ai
+    config
+    config_dsl[label=&quot;dsl&quot;]
+    data
+    debug
+    events
+    generators
+    generators_level[label=&quot;level&quot;]
+    generators_level_decorator[label=&quot;decorator&quot;]
+    generators_level_partitioners[label=&quot;partitioners&quot;]
+    generators_level_room[label=&quot;room&quot;]
+    rules
+    rules_attack[label=&quot;attack&quot;]
+    rules_consume[label=&quot;consume&quot;]
+    rules_effects[label=&quot;effects&quot;]
+    rules_inventory[label=&quot;inventory&quot;]
+    rules_move[label=&quot;move&quot;]
+    test
+    test_bdd[label=&quot;bdd&quot;]
+    test_builders[label=&quot;builders&quot;]
+    test_cutesy[label=&quot;cutesy&quot;]
+    test_helpers[label=&quot;helpers&quot;]
+    test_integration[label=&quot;integration&quot;]
+    test_matchers[label=&quot;matchers&quot;]
+    test_unit[label=&quot;unit&quot;]
+
+    herculeum
+    herculeum_config[label=&quot;config&quot;]
+    herculeum_config_levels[label=&quot;levels&quot;]
+    herculeum_gui[label=&quot;gui&quot;]
+    herculeum_gui_core[label=&quot;core&quot;]
+
+    pyherc-&gt;ai
+    pyherc-&gt;config-&gt;config_dsl
+    pyherc-&gt;data
+    pyherc-&gt;debug
+    pyherc-&gt;events
+    pyherc-&gt;generators-&gt;generators_level-&gt;generators_level_decorator
+    generators_level-&gt;generators_level_partitioners
+    generators_level-&gt;generators_level_room
+    pyherc-&gt;rules-&gt;rules_attack
+    rules-&gt;rules_consume
+    rules-&gt;rules_effects
+    rules-&gt;rules_inventory
+    rules-&gt;rules_move
+    pyherc-&gt;test-&gt;test_bdd
+    test-&gt;test_builders
+    test-&gt;test_cutesy
+    test-&gt;test_helpers
+    test-&gt;test_integration
+    test-&gt;test_matchers
+    test-&gt;test_unit
+
+    herculeum-&gt;herculeum_config-&gt;herculeum_config_levels
+    herculeum-&gt;herculeum_gui-&gt;herculeum_gui_core
+}" />
+</p>
+<p>Convenient links to each of main components</p>
 <blockquote>
-<div><ul class="simple">
-<li>ai - Artificial Intelligence for monsters</li>
-<li>data - Classes that represent playing world (dungeon, levels, items and so on)</li>
-<li>debug - Debug webserver</li>
-<li>generators - Classes used to create the world</li>
-<li>gui - routines needed to interact with the player</li>
-<li>rules - rules of the game, for example how creatures move and fight</li>
-<li>test - test routines</li>
+<div><p>pyherc:</p>
+<ul class="simple">
+<li><a class="reference internal" href="pyherc/package_pyherc.html#module-pyherc" title="pyherc"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/ai/module_ai.html#module-pyherc.ai" title="pyherc.ai"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.ai</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/config/package_config.html#module-pyherc.config" title="pyherc.config"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.config</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/data/module_data.html#module-pyherc.data" title="pyherc.data"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.data</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/debug/module_debug.html#module-pyherc.debug" title="pyherc.debug"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.debug</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/events/package_events.html#module-pyherc.events" title="pyherc.events"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.events</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/generators/module_generators.html#module-pyherc.generators" title="pyherc.generators"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.generators</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/rules/module_rules.html#module-pyherc.rules" title="pyherc.rules"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/test/module_test.html#module-pyherc.test" title="pyherc.test"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.test</span></tt></a></li>
+</ul>
+<p>herculeum:</p>
+<ul class="simple">
+<li><a class="reference internal" href="herculeum/package_herculeum.html#module-herculeum" title="herculeum"><tt class="xref py py-mod docutils literal"><span class="pre">herculeum</span></tt></a></li>
+<li><a class="reference internal" href="herculeum/config/package_config.html#module-herculeum.config" title="herculeum.config"><tt class="xref py py-mod docutils literal"><span class="pre">herculeum.config</span></tt></a></li>
+<li><a class="reference internal" href="herculeum/gui/package_gui.html#module-herculeum.gui" title="herculeum.gui"><tt class="xref py py-mod docutils literal"><span class="pre">herculeum.gui</span></tt></a></li>
 </ul>
 </div></blockquote>
+</div>
+<div class="section" id="main-components">
+<h1>Main components<a class="headerlink" href="#main-components" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="data/module_model.html#pyherc.data.model.Model" title="pyherc.data.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.data.model.Model</span></tt></a> is the main class representing
+<p><a class="reference internal" href="pyherc/data/module_model.html#pyherc.data.model.Model" title="pyherc.data.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.data.model.Model</span></tt></a> is the main class representing
 current state of the playing world. It holds reference to important things like:</p>
 <blockquote>
 <div><ul class="simple">
@@ -80,6 +159,43 @@ current state of the playing world. It holds reference to important things like:
 <li>Various tables</li>
 </ul>
 </div></blockquote>
+</div>
+<div class="section" id="character">
+<h2>Character<a class="headerlink" href="#character" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="pyherc/data/module_character.html#pyherc.data.character.Character" title="pyherc.data.character.Character"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.data.character.Character</span></tt></a> is used to represent both player
+character and monsters. It manages things like:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Stats</li>
+<li>Inventory</li>
+<li>Location</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="dungeon">
+<h2>Dungeon<a class="headerlink" href="#dungeon" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="pyherc/data/module_dungeon.html#pyherc.data.dungeon.Dungeon" title="pyherc.data.dungeon.Dungeon"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.data.dungeon.Dungeon</span></tt></a> is currently very sparse and is only
+used to hold reference to first level in the dungeon.</p>
+</div>
+<div class="section" id="level">
+<h2>Level<a class="headerlink" href="#level" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="pyherc/data/module_level.html#pyherc.data.level.Level" title="pyherc.data.level.Level"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.data.level.Level</span></tt></a> is key component, as it is used to store
+layout and content of levels where player adventures. It manages:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Shape of the level, including stairs leading to other levels</li>
+<li>Items</li>
+<li>Characters</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rules">
+<h2>Rules<a class="headerlink" href="#rules" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="pyherc/rules/module_rules.html#module-pyherc.rules" title="pyherc.rules"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules</span></tt></a> is what defines what kind of actions player and monsters
+are allowed to take and how they affect the world around them. Rules for things
+like moving, fighting and drinking potions are found here. Refer to
+<a class="reference internal" href="actions.html"><em>Actions</em></a> for more detailed description how actions are created and how to
+add more.</p>
 </div>
 </div>
 
@@ -91,8 +207,13 @@ current state of the playing world. It holds reference to important things like:
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Building blocks</a><ul>
+<li><a class="reference internal" href="#">Building blocks</a></li>
+<li><a class="reference internal" href="#main-components">Main components</a><ul>
 <li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#character">Character</a></li>
+<li><a class="reference internal" href="#dungeon">Dungeon</a></li>
+<li><a class="reference internal" href="#level">Level</a></li>
+<li><a class="reference internal" href="#rules">Rules</a></li>
 </ul>
 </li>
 </ul>
@@ -140,7 +261,7 @@ current state of the playing world. It holds reference to important things like:
         <li class="right" >
           <a href="intro.html" title="Intro"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

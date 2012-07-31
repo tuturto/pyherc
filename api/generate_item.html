@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Generating an item &mdash; Herculeum 0.3 documentation</title>
+    <title>Generating an item &mdash; Herculeum 0.4 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.3',
+        VERSION:     '0.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.3 documentation" href="index.html" />
+    <link rel="top" title="Herculeum 0.4 documentation" href="index.html" />
     <link rel="next" title="Actions" href="actions.html" />
     <link rel="prev" title="Modular level generator" href="modular_levels.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="modular_levels.html" title="Modular level generator"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -60,112 +60,64 @@
 the game.</p>
 <div class="section" id="overview-of-generating-item">
 <h2>Overview of generating item<a class="headerlink" href="#overview-of-generating-item" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="generators/module_item.html#pyherc.generators.item.ItemGenerator" title="pyherc.generators.item.ItemGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.item.ItemGenerator</span></tt></a> is used to generate items.</p>
+<p><a class="reference internal" href="pyherc/generators/module_item.html#pyherc.generators.item.ItemGenerator" title="pyherc.generators.item.ItemGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.item.ItemGenerator</span></tt></a> is used to generate items.</p>
 <p>To generate item, following code can be used:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">new_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_generator</span><span class="o">.</span><span class="n">generate_item</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">tables</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;food&#39;</span><span class="p">})</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">new_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_generator</span><span class="o">.</span><span class="n">generate_item</span><span class="p">(</span><span class="n">item_type</span> <span class="o">=</span> <span class="s">&#39;food&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This will generate a random item of type food.</p>
-<p>Instance of <a class="reference internal" href="rules/module_tables.html#pyherc.rules.tables.Tables" title="pyherc.rules.tables.Tables"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.tables.Tables</span></tt></a> is passed as a first argument
-to the method. It contains (among other things) list of all possible items
-that the game can create. These are loaded as the game starts up. File where
-item definitions are, is resources/items.xml. By editing this file, new items
-can be easily added.</p>
-<p>Second parameter given to the method is a dictionary, which defines parameters
-used in item generation. Following keys are currently supported:</p>
-<blockquote>
-<div><ul class="simple">
-<li>name: generates item with given name</li>
-<li>type: generates item with given type (food, weapon)</li>
-</ul>
-</div></blockquote>
+<p>This will generate a random item of type food. To generate item of specic name,
+following code can be used:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">new_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_generator</span><span class="o">.</span><span class="n">generate_item</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;apple&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will generate an apple.</p>
 </div>
 <div class="section" id="defining-items">
 <h2>Defining items<a class="headerlink" href="#defining-items" title="Permalink to this headline">¶</a></h2>
-<p>Items are defined in resources/items.xml. Following snippet is used for dagger:</p>
-<div class="highlight-python"><pre>&lt;item&gt;
-    &lt;name&gt;dagger&lt;/name&gt;
-    &lt;cost&gt;2&lt;/cost&gt;
-    &lt;damage&gt;2&lt;/damage&gt;
-    &lt;criticalRange&gt;11&lt;/criticalRange&gt;
-    &lt;criticalDamage&gt;2&lt;/criticalDamage&gt;
-    &lt;weight&gt;1&lt;/weight&gt;
-    &lt;damageTypes&gt;
-        &lt;damageType&gt;piercing&lt;/damageType&gt;
-        &lt;damageType&gt;slashing&lt;/damageType&gt;
-    &lt;/damageTypes&gt;
-    &lt;class&gt;simple&lt;/class&gt;
-    &lt;icons&gt;
-        &lt;icon&gt;ITEM_DAGGER_1&lt;/icon&gt;
-    &lt;/icons&gt;
-    &lt;types&gt;
-        &lt;type&gt;weapon&lt;/type&gt;
-        &lt;type&gt;light weapon&lt;/type&gt;
-        &lt;type&gt;melee&lt;/type&gt;
-        &lt;type&gt;simple weapon&lt;/type&gt;
-    &lt;/types&gt;
-    &lt;rarity&gt;common&lt;/rarity&gt;
-&lt;/item&gt;</pre>
+<p>Items are defined in configuration scripts that are fed to
+<a class="reference internal" href="pyherc/config/module_config.html#pyherc.config.config.Configuration" title="pyherc.config.config.Configuration"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.config.config.Configuration</span></tt></a> during system startup. Following
+example defines an apple and dagger for configuration.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.generators</span> <span class="kn">import</span> <span class="n">ItemConfigurations</span>
+<span class="kn">from</span> <span class="nn">pyherc.generators</span> <span class="kn">import</span> <span class="n">ItemConfiguration</span><span class="p">,</span> <span class="n">WeaponConfiguration</span>
+<span class="kn">from</span> <span class="nn">pyherc.rules.effects</span> <span class="kn">import</span> <span class="n">EffectHandle</span>
+
+<span class="k">def</span> <span class="nf">init_items</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initialise common items</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">config</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                  <span class="n">ItemConfiguration</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;apple&#39;</span><span class="p">,</span>
+                                    <span class="n">cost</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                    <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                    <span class="n">icons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">501</span><span class="p">],</span>
+                                    <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;food&#39;</span><span class="p">],</span>
+                                    <span class="n">rarity</span> <span class="o">=</span> <span class="s">&#39;common&#39;</span><span class="p">))</span>
+
+    <span class="n">config</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                  <span class="n">ItemConfiguration</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;dagger&#39;</span><span class="p">,</span>
+                                    <span class="n">cost</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+                                    <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                    <span class="n">icons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">602</span><span class="p">,</span> <span class="mi">603</span><span class="p">],</span>
+                                    <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;weapon&#39;</span><span class="p">,</span>
+                                               <span class="s">&#39;light weapon&#39;</span><span class="p">,</span>
+                                               <span class="s">&#39;melee&#39;</span><span class="p">,</span>
+                                               <span class="s">&#39;simple weapon&#39;</span><span class="p">],</span>
+                                    <span class="n">rarity</span> <span class="o">=</span> <span class="s">&#39;common&#39;</span><span class="p">,</span>
+                                    <span class="n">weapon_configration</span> <span class="o">=</span> <span class="n">WeaponConfiguration</span><span class="p">(</span>
+                                            <span class="n">damage</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+                                            <span class="n">critical_range</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span>
+                                            <span class="n">critical_damage</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+                                            <span class="n">damage_types</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;piercing&#39;</span><span class="p">,</span>
+                                                            <span class="s">&#39;slashing&#39;</span><span class="p">],</span>
+                                            <span class="n">weapon_class</span> <span class="o">=</span> <span class="s">&#39;simple&#39;</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">config</span>
+</pre></div>
 </div>
-<table border="1" class="docutils">
-<colgroup>
-<col width="12%" />
-<col width="25%" />
-<col width="63%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Element</th>
-<th class="head">Explanation</th>
-<th class="head">Notes</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>Name</td>
-<td>Name of the item</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>Cost</td>
-<td>Base cost in coins</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>Damage</td>
-<td>Base damage</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>criticalRange</td>
-<td>Chances for critical hit</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>criticalDamage</td>
-<td>Amount of critical damage</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>weight</td>
-<td>Weight of the item</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>damageTypes</td>
-<td>Types of damage weapon does</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>class</td>
-<td>Class of the weapon</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>icons</td>
-<td>Icons used to display the item</td>
-<td>Only one is selected when item is created</td>
-</tr>
-<tr class="row-odd"><td>types</td>
-<td>Tags</td>
-<td>Used in item generation, for example when generator should make &#8216;simple weapon&#8217;</td>
-</tr>
-<tr class="row-even"><td>rarity</td>
-<td>Rarity of the item</td>
-<td>common, uncommon, rare, epic, legendary, artifact</td>
-</tr>
-</tbody>
-</table>
+<p>For more details regarding to configuration, refer to <a class="reference internal" href="configuration.html"><em>Configuration</em></a>
+page.</p>
 </div>
 </div>
 
@@ -227,7 +179,7 @@ used in item generation. Following keys are currently supported:</p>
         <li class="right" >
           <a href="modular_levels.html" title="Modular level generator"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

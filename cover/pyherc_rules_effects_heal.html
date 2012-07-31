@@ -24,8 +24,8 @@
         </h1>
         <img id='keyboard_icon' src='keybd_closed.png'>
         <h2 class='stats'>
-            13 statements
-            <span class='run hide_run shortkey_r' onclick='coverage.toggle_lines(this, "run")'>13 run</span>
+            14 statements
+            <span class='run hide_run shortkey_r' onclick='coverage.toggle_lines(this, "run")'>14 run</span>
             <span class='mis shortkey_m' onclick='coverage.toggle_lines(this, "mis")'>0 missing</span>
             <span class='exc shortkey_x' onclick='coverage.toggle_lines(this, "exc")'>0 excluded</span>
             
@@ -100,23 +100,24 @@
 <p id='n38' class='stm run hide_run'><a href='#n38'>38</a></p>
 <p id='n39' class='stm run hide_run'><a href='#n39'>39</a></p>
 <p id='n40' class='stm run hide_run'><a href='#n40'>40</a></p>
-<p id='n41' class='pln'><a href='#n41'>41</a></p>
-<p id='n42' class='stm run hide_run'><a href='#n42'>42</a></p>
-<p id='n43' class='pln'><a href='#n43'>43</a></p>
+<p id='n41' class='stm run hide_run'><a href='#n41'>41</a></p>
+<p id='n42' class='pln'><a href='#n42'>42</a></p>
+<p id='n43' class='stm run hide_run'><a href='#n43'>43</a></p>
 <p id='n44' class='pln'><a href='#n44'>44</a></p>
 <p id='n45' class='pln'><a href='#n45'>45</a></p>
 <p id='n46' class='pln'><a href='#n46'>46</a></p>
-<p id='n47' class='stm run hide_run'><a href='#n47'>47</a></p>
-<p id='n48' class='pln'><a href='#n48'>48</a></p>
-<p id='n49' class='stm run hide_run'><a href='#n49'>49</a></p>
+<p id='n47' class='pln'><a href='#n47'>47</a></p>
+<p id='n48' class='stm run hide_run'><a href='#n48'>48</a></p>
+<p id='n49' class='pln'><a href='#n49'>49</a></p>
 <p id='n50' class='stm run hide_run'><a href='#n50'>50</a></p>
+<p id='n51' class='stm run hide_run'><a href='#n51'>51</a></p>
                 
             </td>
             <td class='text' valign='top'>
 <p id='t1' class='pln'><span class='com'>#!/usr/bin/env python</span><span class='strut'>&nbsp;</span></p>
 <p id='t2' class='pln'><span class='com'># -*- coding: utf-8 -*-</span><span class='strut'>&nbsp;</span></p>
 <p id='t3' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t4' class='pln'><span class='com'>#&nbsp;&nbsp; Copyright 2012 Tuukka Turto</span><span class='strut'>&nbsp;</span></p>
+<p id='t4' class='pln'><span class='com'>#&nbsp;&nbsp; Copyright 2010-2012 Tuukka Turto</span><span class='strut'>&nbsp;</span></p>
 <p id='t5' class='pln'><span class='com'>#</span><span class='strut'>&nbsp;</span></p>
 <p id='t6' class='pln'><span class='com'>#&nbsp;&nbsp; This file is part of pyherc.</span><span class='strut'>&nbsp;</span></p>
 <p id='t7' class='pln'><span class='com'>#</span><span class='strut'>&nbsp;</span></p>
@@ -153,16 +154,17 @@
 <p id='t38' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>super</span><span class='op'>(</span><span class='nam'>Heal</span><span class='op'>,</span> <span class='nam'>self</span><span class='op'>)</span><span class='op'>.</span><span class='nam'>__init__</span><span class='op'>(</span><span class='nam'>duration</span><span class='op'>,</span> <span class='nam'>frequency</span><span class='op'>,</span> <span class='nam'>tick</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
 <p id='t39' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>healing</span> <span class='op'>=</span> <span class='nam'>healing</span><span class='strut'>&nbsp;</span></p>
 <p id='t40' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span> <span class='op'>=</span> <span class='nam'>target</span><span class='strut'>&nbsp;</span></p>
-<p id='t41' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t42' class='stm run hide_run'>&nbsp; &nbsp; <span class='op'>@</span><span class='nam'>logged</span><span class='strut'>&nbsp;</span></p>
-<p id='t43' class='pln'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>do_trigger</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t44' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
-<p id='t45' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; Triggers effects of the healing</span><span class='strut'>&nbsp;</span></p>
-<p id='t46' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; &quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
-<p id='t47' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>hit_points</span> <span class='op'>=</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>hit_points</span> <span class='op'>+</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>healing</span><span class='strut'>&nbsp;</span></p>
-<p id='t48' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t49' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>hit_points</span> <span class='op'>&gt;</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>max_hp</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t50' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>hit_points</span> <span class='op'>=</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>max_hp</span><span class='strut'>&nbsp;</span></p>
+<p id='t41' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>effect_name</span> <span class='op'>=</span> <span class='str'>&#39;heal&#39;</span><span class='strut'>&nbsp;</span></p>
+<p id='t42' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t43' class='stm run hide_run'>&nbsp; &nbsp; <span class='op'>@</span><span class='nam'>logged</span><span class='strut'>&nbsp;</span></p>
+<p id='t44' class='pln'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>do_trigger</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t45' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
+<p id='t46' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; Triggers effects of the healing</span><span class='strut'>&nbsp;</span></p>
+<p id='t47' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; &quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
+<p id='t48' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>hit_points</span> <span class='op'>=</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>hit_points</span> <span class='op'>+</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>healing</span><span class='strut'>&nbsp;</span></p>
+<p id='t49' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t50' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>hit_points</span> <span class='op'>&gt;</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>max_hp</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t51' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>hit_points</span> <span class='op'>=</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>target</span><span class='op'>.</span><span class='nam'>max_hp</span><span class='strut'>&nbsp;</span></p>
                 
             </td>
         </tr>

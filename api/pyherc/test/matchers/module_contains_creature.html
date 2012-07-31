@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.test.matchers.contains_creature &mdash; Herculeum 0.4 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.4 documentation" href="../../../index.html" />
+    <link rel="up" title="pyherc.test.matchers" href="module_matchers.html" />
+    <link rel="next" title="pyherc.test.matchers.effect_collection" href="module_effect_collection.html" />
+    <link rel="prev" title="pyherc.test.matchers.active_effects" href="module_active_effects.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_effect_collection.html" title="pyherc.test.matchers.effect_collection"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_active_effects.html" title="pyherc.test.matchers.active_effects"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../module_test.html" >pyherc.test</a> &raquo;</li>
+          <li><a href="module_matchers.html" accesskey="U">pyherc.test.matchers</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.test.matchers.contains_creature">
+<span id="pyherc-test-matchers-contains-creature"></span><h1>pyherc.test.matchers.contains_creature<a class="headerlink" href="#module-pyherc.test.matchers.contains_creature" title="Permalink to this headline">¶</a></h1>
+<p>Module for customer matchers used in testing</p>
+<dl class="class">
+<dt id="pyherc.test.matchers.contains_creature.ContainsCreature">
+<em class="property">class </em><tt class="descclassname">pyherc.test.matchers.contains_creature.</tt><tt class="descname">ContainsCreature</tt><big>(</big><em>creature</em>, <em>amount</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.contains_creature.ContainsCreature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">hamcrest.core.base_matcher.BaseMatcher</span></tt></p>
+<p>Class to check if given level has creatures</p>
+<dl class="method">
+<dt id="pyherc.test.matchers.contains_creature.ContainsCreature.describe_mismatch">
+<tt class="descname">describe_mismatch</tt><big>(</big><em>item</em>, <em>mismatch_description</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.contains_creature.ContainsCreature.describe_mismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describe this mismatch</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.matchers.contains_creature.ContainsCreature.describe_to">
+<tt class="descname">describe_to</tt><big>(</big><em>description</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.contains_creature.ContainsCreature.describe_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describe this matcher</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.matchers.contains_creature.IsLocatedIn">
+<em class="property">class </em><tt class="descclassname">pyherc.test.matchers.contains_creature.</tt><tt class="descname">IsLocatedIn</tt><big>(</big><em>level</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.contains_creature.IsLocatedIn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">hamcrest.core.base_matcher.BaseMatcher</span></tt></p>
+<p>Class to check if given level has creatures</p>
+<dl class="method">
+<dt id="pyherc.test.matchers.contains_creature.IsLocatedIn.describe_mismatch">
+<tt class="descname">describe_mismatch</tt><big>(</big><em>item</em>, <em>mismatch_description</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.contains_creature.IsLocatedIn.describe_mismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describe this mismatch</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.matchers.contains_creature.IsLocatedIn.describe_to">
+<tt class="descname">describe_to</tt><big>(</big><em>description</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.contains_creature.IsLocatedIn.describe_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describe this matcher</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.matchers.contains_creature.has_creature">
+<tt class="descclassname">pyherc.test.matchers.contains_creature.</tt><tt class="descname">has_creature</tt><big>(</big><em>creature</em>, <em>amount</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.contains_creature.has_creature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if level has given creature</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>creature</strong> (<em>String</em>) &#8211; name of the creature to check</li>
+<li><strong>amount</strong> (<em>int</em>) &#8211; amount of creatures to expect</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.matchers.contains_creature.is_at">
+<tt class="descclassname">pyherc.test.matchers.contains_creature.</tt><tt class="descname">is_at</tt><big>(</big><em>level</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.contains_creature.is_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that level does have given creature</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.matchers.contains_creature.is_not_at">
+<tt class="descclassname">pyherc.test.matchers.contains_creature.</tt><tt class="descname">is_not_at</tt><big>(</big><em>level</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.contains_creature.is_not_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that level does not have given creature</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_active_effects.html"
+                        title="previous chapter">pyherc.test.matchers.active_effects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_effect_collection.html"
+                        title="next chapter">pyherc.test.matchers.effect_collection</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/pyherc/test/matchers/module_contains_creature.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_effect_collection.html" title="pyherc.test.matchers.effect_collection"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_active_effects.html" title="pyherc.test.matchers.active_effects"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../module_test.html" >pyherc.test</a> &raquo;</li>
+          <li><a href="module_matchers.html" >pyherc.test.matchers</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

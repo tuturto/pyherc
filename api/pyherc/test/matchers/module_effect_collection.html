@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.test.matchers.effect_collection &mdash; Herculeum 0.4 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.4 documentation" href="../../../index.html" />
+    <link rel="up" title="pyherc.test.matchers" href="module_matchers.html" />
+    <link rel="next" title="pyherc.test.matchers.event" href="module_event.html" />
+    <link rel="prev" title="pyherc.test.matchers.contains_creature" href="module_contains_creature.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_event.html" title="pyherc.test.matchers.event"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_contains_creature.html" title="pyherc.test.matchers.contains_creature"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../module_test.html" >pyherc.test</a> &raquo;</li>
+          <li><a href="module_matchers.html" accesskey="U">pyherc.test.matchers</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.test.matchers.effect_collection">
+<span id="pyherc-test-matchers-effect-collection"></span><h1>pyherc.test.matchers.effect_collection<a class="headerlink" href="#module-pyherc.test.matchers.effect_collection" title="Permalink to this headline">¶</a></h1>
+<p>Module for customer matchers used in testing</p>
+<dl class="class">
+<dt id="pyherc.test.matchers.effect_collection.ContainsEffectHandle">
+<em class="property">class </em><tt class="descclassname">pyherc.test.matchers.effect_collection.</tt><tt class="descname">ContainsEffectHandle</tt><big>(</big><em>handle</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.effect_collection.ContainsEffectHandle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">hamcrest.core.base_matcher.BaseMatcher</span></tt></p>
+<p>Class to check if given collection has effect handles</p>
+<dl class="method">
+<dt id="pyherc.test.matchers.effect_collection.ContainsEffectHandle.describe_mismatch">
+<tt class="descname">describe_mismatch</tt><big>(</big><em>item</em>, <em>mismatch_description</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.effect_collection.ContainsEffectHandle.describe_mismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describe this mismatch</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.matchers.effect_collection.ContainsEffectHandle.describe_to">
+<tt class="descname">describe_to</tt><big>(</big><em>description</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.effect_collection.ContainsEffectHandle.describe_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describe this matcher</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.matchers.effect_collection.has_effect_handle">
+<tt class="descclassname">pyherc.test.matchers.effect_collection.</tt><tt class="descname">has_effect_handle</tt><big>(</big><em>handle=None</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.effect_collection.has_effect_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if collection has the handle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>handle</strong> (<em>EffectHandle</em>) &#8211; handle to expect</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If left empty, any handle will match</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.matchers.effect_collection.has_effect_handles">
+<tt class="descclassname">pyherc.test.matchers.effect_collection.</tt><tt class="descname">has_effect_handles</tt><big>(</big><em>handle</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.effect_collection.has_effect_handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if collection has all the handles</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>handle</strong> (<em>[]</em>) &#8211; list of handles to expect</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_contains_creature.html"
+                        title="previous chapter">pyherc.test.matchers.contains_creature</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_event.html"
+                        title="next chapter">pyherc.test.matchers.event</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/pyherc/test/matchers/module_effect_collection.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_event.html" title="pyherc.test.matchers.event"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_contains_creature.html" title="pyherc.test.matchers.contains_creature"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../module_test.html" >pyherc.test</a> &raquo;</li>
+          <li><a href="module_matchers.html" >pyherc.test.matchers</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

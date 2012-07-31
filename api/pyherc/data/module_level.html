@@ -1,0 +1,507 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.data.level &mdash; Herculeum 0.4 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.4 documentation" href="../../index.html" />
+    <link rel="up" title="pyherc.data" href="module_data.html" />
+    <link rel="next" title="pyherc.data.model" href="module_model.html" />
+    <link rel="prev" title="pyherc.data.item" href="module_item.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_model.html" title="pyherc.data.model"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_item.html" title="pyherc.data.item"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="module_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.data.level">
+<span id="pyherc-data-level"></span><h1>pyherc.data.level<a class="headerlink" href="#module-pyherc.data.level" title="Permalink to this headline">¶</a></h1>
+<p>Module containing classes to represent Level</p>
+<dl class="class">
+<dt id="pyherc.data.level.Level">
+<em class="property">class </em><tt class="descclassname">pyherc.data.level.</tt><tt class="descname">Level</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Represents a level</p>
+<blockquote>
+<div><dl class="method">
+<dt id="pyherc.data.level.Level.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>size = (0</em>, <em>0)</em>, <em>floor_type = None</em>, <em>wall_type = None</em>, <em>empty_floor = 0</em>, <em>empty_wall = 0</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialises a level of certain size and fill floor and walls with given types</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>size</strong> (<em>(integer, integer)</em>) &#8211; optional size of the level</li>
+<li><strong>floor_type</strong> (<em>integer</em>) &#8211; type of floor to fill level</li>
+<li><strong>wall_type</strong> (<em>integer</em>) &#8211; type of wall to fill level</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Empty_floor :</th><td class="field-body"><p class="first">type of floor for empty</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Empty_wall :</th><td class="field-body"><p class="first last">type of wall for empty</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.get_tile">
+<tt class="descname">get_tile</tt><big>(</big><em>loc_x</em>, <em>loc_y</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.get_tile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get tile at given location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>loc_x</strong> (<em>integer</em>) &#8211; x-coordinate of the location</li>
+<li><strong>loc_y</strong> (<em>integer</em>) &#8211; y-coordinate of the location</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">tile ID at given location</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.get_wall_tile">
+<tt class="descname">get_wall_tile</tt><big>(</big><em>loc_x</em>, <em>loc_y</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.get_wall_tile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get wall tile at given location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>loc_x</strong> (<em>integer</em>) &#8211; x-coordinate of the location</li>
+<li><strong>loc_y</strong> (<em>integer</em>) &#8211; y-coordinate of the location</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">wall tile ID at given location</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.add_item">
+<tt class="descname">add_item</tt><big>(</big><em>item</em>, <em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.add_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an item to this level</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>item</strong> (<em>Item</em>) &#8211; item to add</li>
+<li><strong>location</strong> (<em>(integer, integer)</em>) &#8211; location where to put the item</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.get_items_at">
+<tt class="descname">get_items_at</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.get_items_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of items at location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>location</strong> (<em>(integer, integer)</em>) &#8211; location to check</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">items at given location</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">[Item]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.add_portal">
+<tt class="descname">add_portal</tt><big>(</big><em>portal</em>, <em>location</em>, <em>other_end = None</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.add_portal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds precreated portal on level at given location
+If secondary portal is specified, link them together</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>portal</strong> (<em>Portal</em>) &#8211; portal to add</li>
+<li><strong>location</strong> (<em>(integer, integer)</em>) &#8211; location where to add portal</li>
+<li><strong>other_end</strong> (<em>Portal</em>) &#8211; optional other end of the portal</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.get_portal_at">
+<tt class="descname">get_portal_at</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.get_portal_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if there is a portal at given location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>location</strong> (<em>(integer, integer)</em>) &#8211; location of portal</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Portal if found, otherwise None</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Portal</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.add_creature">
+<tt class="descname">add_creature</tt><big>(</big><em>creature</em>, <em>location = None</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.add_creature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a creature to level</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>creature</strong> (<em>Creature</em>) &#8211; creature to add</li>
+<li><strong>location</strong> (<em>(integer, integer)</em>) &#8211; optional location for the creature</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.remove_creature">
+<tt class="descname">remove_creature</tt><big>(</big><em>creature</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.remove_creature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove creature from level</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>creature</strong> (<em>Creature</em>) &#8211; creature to remove</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.get_creature_at">
+<tt class="descname">get_creature_at</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.get_creature_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of creatures at given location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>location</strong> (<em>(integer, integer)</em>) &#8211; location to check</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">creature if found</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Creature</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.find_free_space">
+<tt class="descname">find_free_space</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.find_free_space" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds free space where stuff can be placed</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Location where space is free</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(int, int)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.get_square">
+<tt class="descname">get_square</tt><big>(</big><em>x_coordinate</em>, <em>y_coordinate</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.get_square" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get square at given coordinates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x_coordinate</strong> (<em>integer</em>) &#8211; x-coorinate of location</li>
+<li><strong>y_coordinate</strong> (<em>integer</em>) &#8211; y-coordinate of location</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">icon ID of the tile</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.blocks_movement">
+<tt class="descname">blocks_movement</tt><big>(</big><em>loc_x</em>, <em>loc_y</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.blocks_movement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if there&#8217;s movement blocking wall at given coordinates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>loc_x</strong> (<em>integer</em>) &#8211; x-coordinate of the location</li>
+<li><strong>loc_Y</strong> &#8211; y-coordinate of the location</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if location blocks regular movement, otherwise False</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.blocks_los">
+<tt class="descname">blocks_los</tt><big>(</big><em>x_coordinate</em>, <em>y_coordinate</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.blocks_los" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if there&#8217;s LOS-blocking wall at given coordinates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x_coordinate</strong> (<em>integer</em>) &#8211; x-coordinate of the location</li>
+<li><strong>y_coordinate</strong> (<em>integer</em>) &#8211; y-coordinate of the location</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if location blocks line of sight, otherwise False</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.get_size">
+<tt class="descname">get_size</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.get_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets size of level</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">tupple, with width and length of level</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(int, int)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.set_location_type">
+<tt class="descname">set_location_type</tt><big>(</big><em>location</em>, <em>location_type</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.set_location_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set type of location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>location</strong> (<em>(integer, integer)</em>) &#8211; location to set</li>
+<li><strong>location_type</strong> (<em>int</em>) &#8211; type of location</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.get_location_type">
+<tt class="descname">get_location_type</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.get_location_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get type of location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>location</strong> (<em>(integer, integer)</em>) &#8211; location to get</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Type of location</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.get_locations_by_type">
+<tt class="descname">get_locations_by_type</tt><big>(</big><em>location_type</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.get_locations_by_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get locations marked as rooms</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>location_type</strong> (<em>string</em>) &#8211; Type of location to search.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">locations identifying rooms</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">[(int, int)]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Following methods are best suited for debugging purposes</p>
+<dl class="method">
+<dt id="pyherc.data.level.Level.dump_string">
+<tt class="descname">dump_string</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.dump_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump this level into a string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">ascii representation of level</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_item.html"
+                        title="previous chapter">pyherc.data.item</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_model.html"
+                        title="next chapter">pyherc.data.model</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pyherc/data/module_level.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_model.html" title="pyherc.data.model"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_item.html" title="pyherc.data.item"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="module_data.html" >pyherc.data</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,181 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuration &mdash; Herculeum 0.4 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.4 documentation" href="index.html" />
+    <link rel="next" title="Testing" href="testing.html" />
+    <link rel="prev" title="Effects" href="effects.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="effects.html" title="Effects"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>Configuration of pyherc is driven by external files and internal scripts.
+External files are located in resources directory and internal scripts
+in package <a class="reference internal" href="pyherc/config/package_config.html#module-pyherc.config" title="pyherc.config"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.config</span></tt></a>.</p>
+<div class="section" id="configuration-scripts">
+<h2>Configuration scripts<a class="headerlink" href="#configuration-scripts" title="Permalink to this headline">¶</a></h2>
+<p>pyherc supports dynamic detection of configuration scripts. The system can be
+configured by placing all scripts containing configuration in a single
+package and supplying that package to <tt class="xref py py-class docutils literal"><span class="pre">pyherc.config.config.Config</span></tt>
+class during system start:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">initialise</span><span class="p">(</span><span class="n">herculeum</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="level-configuration">
+<h2>Level configuration<a class="headerlink" href="#level-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The file containing level configuration should contain following function to
+perform configuration.</p>
+<div class="highlight-python"><pre>def init_level(rng, item_generator, creature_generator, level_size)</pre>
+</div>
+<p>This function should create <a class="reference internal" href="pyherc/generators/level/module_config.html#pyherc.generators.level.config.LevelGeneratorFactoryConfig" title="pyherc.generators.level.config.LevelGeneratorFactoryConfig"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.config.LevelGeneratorFactoryConfig</span></tt></a>
+with appropriate values and return it. This configuration is eventually fed to
+<a class="reference internal" href="pyherc/generators/level/module_generator.html#pyherc.generators.level.generator.LevelGeneratorFactory" title="pyherc.generators.level.generator.LevelGeneratorFactory"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.generator.LevelGeneratorFactory</span></tt></a> when new level
+is requested.</p>
+</div>
+<div class="section" id="item-configuration">
+<h2>Item configuration<a class="headerlink" href="#item-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The file containing item configuration should contain following function to
+perform configuration</p>
+<div class="highlight-python"><pre>def init_items():</pre>
+</div>
+<p>This function should return a list of <a class="reference internal" href="pyherc/generators/module_item.html#pyherc.generators.item.ItemConfiguration" title="pyherc.generators.item.ItemConfiguration"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.item.ItemConfiguration</span></tt></a>
+objects.</p>
+</div>
+<div class="section" id="character-configuration">
+<h2>Character configuration<a class="headerlink" href="#character-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The file containing character configuration should contain following function
+to perform configuration:</p>
+<div class="highlight-python"><pre>def init_creatures():</pre>
+</div>
+<p>This function should return a list of <a class="reference internal" href="pyherc/generators/module_creature.html#pyherc.generators.creature.CreatureConfiguration" title="pyherc.generators.creature.CreatureConfiguration"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.creature.CreatureConfiguration</span></tt></a>
+objects.</p>
+</div>
+<div class="section" id="effects-configuration">
+<h2>Effects configuration<a class="headerlink" href="#effects-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The file containing effects configuration should contain following function to
+perform configuration</p>
+<div class="highlight-python"><pre>def init_effects():</pre>
+</div>
+<p>This function should return a list of effect specifications.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuration</a><ul>
+<li><a class="reference internal" href="#configuration-scripts">Configuration scripts</a></li>
+<li><a class="reference internal" href="#level-configuration">Level configuration</a></li>
+<li><a class="reference internal" href="#item-configuration">Item configuration</a></li>
+<li><a class="reference internal" href="#character-configuration">Character configuration</a></li>
+<li><a class="reference internal" href="#effects-configuration">Effects configuration</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="effects.html"
+                        title="previous chapter">Effects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="testing.html"
+                        title="next chapter">Testing</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/configuration.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="effects.html" title="Effects"
+             >previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

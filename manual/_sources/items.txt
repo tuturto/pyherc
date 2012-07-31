@@ -27,6 +27,12 @@ Spear
 Whip
 ====
 
+Sickle
+======
+
+Morning star
+============
+
 ******
 Armour
 ******
@@ -34,14 +40,17 @@ Armour
 Leather armour
 ==============
 
-Bronze armour
-=============
+Chainmail
+=========
 
-Iron armour
-===========
+Scale mail
+==========
 
-Steel armour
-============
+Plate mail
+==========
+
+Shield
+======
 
 *****
 Magic
@@ -49,4 +58,7 @@ Magic
 
 Holy water
 ==========
+
+Potions
+=======
 

@@ -1,0 +1,153 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.events.move &mdash; Herculeum 0.4 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.4 documentation" href="../../index.html" />
+    <link rel="up" title="pyherc.events" href="package_events.html" />
+    <link rel="next" title="pyherc.generators" href="../generators/module_generators.html" />
+    <link rel="prev" title="pyherc.events.event" href="module_event.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../generators/module_generators.html" title="pyherc.generators"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_event.html" title="pyherc.events.event"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="package_events.html" accesskey="U">pyherc.events</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.events.move">
+<span id="pyherc-events-move"></span><h1>pyherc.events.move<a class="headerlink" href="#module-pyherc.events.move" title="Permalink to this headline">¶</a></h1>
+<p>Classes for move events</p>
+<dl class="class">
+<dt id="pyherc.events.move.MoveEvent">
+<em class="property">class </em><tt class="descclassname">pyherc.events.move.</tt><tt class="descname">MoveEvent</tt><big>(</big><em>mover</em>, <em>affected_tiles</em><big>)</big><a class="headerlink" href="#pyherc.events.move.MoveEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="module_event.html#pyherc.events.event.Event" title="pyherc.events.event.Event"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.events.event.Event</span></tt></a></p>
+<p>Event that can be used to relay information about moving</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.4.</span></p>
+<dl class="method">
+<dt id="pyherc.events.move.MoveEvent.get_description">
+<tt class="descname">get_description</tt><big>(</big><em>point_of_view</em><big>)</big><a class="headerlink" href="#pyherc.events.move.MoveEvent.get_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description of the event</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>point_of_view</strong> (<em>Character</em>) &#8211; point of view for description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">description of the event</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_event.html"
+                        title="previous chapter">pyherc.events.event</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../generators/module_generators.html"
+                        title="next chapter">pyherc.generators</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pyherc/events/module_move.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../generators/module_generators.html" title="pyherc.generators"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_event.html" title="pyherc.events.event"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="package_events.html" >pyherc.events</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

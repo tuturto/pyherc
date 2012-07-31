@@ -54,17 +54,17 @@ inheriting it and overriding type of action it can be used to construct:
   
   class WaitFactory(SubActionFactory):
   
-    def __init__(self):
-      self.action_type = 'wait'
+      def __init__(self):
+          self.action_type = 'wait'
 
 Next we need to define factory method that can actually create our new action:
 
 .. code-block:: python
 
   def get_action(self, parameters):
-    wait_time = parameters.wait_time
-    target = parameters.target
-    return WaitAction(target, wait_time)
+      wait_time = parameters.wait_time
+      target = parameters.target
+      return WaitAction(target, wait_time)
 
 Defining new parameter class
 ----------------------------
@@ -74,10 +74,10 @@ WaitParameters class is very simple, almost could do without it even:
 
   class WaitParameters(ActionParameters):
   
-    def __init__(self, target, wait_time):
-      self.action_type = 'wait'
-      self.target = target
-      self.wait_time = wait_time
+      def __init__(self, target, wait_time):
+          self.action_type = 'wait'
+          self.target = target
+          self.wait_time = wait_time
 
 Constructor takes two parameters: target who is character doing the waiting
 and wait_time, which is amount of ticks to wait. action_type is used by the
@@ -93,15 +93,15 @@ WaitAction is not much more complex:
 
   class WaitAction(object):
   
-    def __init__(self, target, wait_time):
-      self.target = target
-      self.wait_time = wait_time
+      def __init__(self, target, wait_time):
+          self.target = target
+          self.wait_time = wait_time
 
-    def is_legal(self):
-      return True
+      def is_legal(self):
+          return True
       
-    def execute(self):
-      self.target.tick = self.target.tick + self.wait_time
+      def execute(self):
+          self.target.tick = self.target.tick + self.wait_time
 
 Constructor is used to create a new instance of WaitAction, with given
 Character and wait time. 
@@ -139,9 +139,9 @@ Last finishing step is to add easy to use method to Character class:
 .. code-block:: python
  
   def wait(self, ticks = 5):
-    action = self.action_factory.get_action(WaitParameters(self,
-                                                           ticks))
-    action.execute()
+      action = self.action_factory.get_action(WaitParameters(self,
+                                                             ticks))
+      action.execute()
 
 Now we can have our character to wait for a bit, just by calling:
 
@@ -156,7 +156,7 @@ changes value in character's internal clock.
 
 .. testcode::
 
-    from pyherc.data import Character, Model
+    from pyherc.data import Character, Model, EffectsCollection
     from pyherc.rules import ActionFactory, ActionParameters
     from pyherc.rules.factory import SubActionFactory
     from random import Random
@@ -196,6 +196,7 @@ changes value in character's internal clock.
                                    factories = [wait_factory])
     character = Character(model = model, 
                           action_factory = action_factory,
+                          effects_collection = EffectsCollection(),
                           rng = Random())
     action = character.create_action(WaitParameters(character, 5))
     
@@ -203,6 +204,9 @@ changes value in character's internal clock.
     action.execute()
     print('Ticks after waiting {0}'.format(character.tick))
 
+The output shows how it is character's turn to move (tick is 0), but after
+executing wait action, the tick is 5.
+    
 .. testoutput::
 
     Ticks 0
@@ -213,14 +217,17 @@ List of current actions
 
 - Moving
 
- - :class:`pyherc.rules.move.action.MoveAction`
- - :class:`pyherc.rules.move.action.WalkAction`
+  - :class:`pyherc.rules.move.action.MoveAction`
+  - :class:`pyherc.rules.move.action.WalkAction`
 
 - Combat
 
- - :class:`pyherc.rules.attack.action.AttackAction`
+  - :class:`pyherc.rules.attack.action.AttackAction`
 
 - Eating and drinking
 
- - :class:`pyherc.rules.consume.action.DrinkAction`
- 
+  - :class:`pyherc.rules.consume.action.DrinkAction`
+
+- Inventory manipulation
+
+  - :class:`pyherc.rules.inventory.action.PickUpAction`
