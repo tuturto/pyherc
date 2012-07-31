@@ -68,5 +68,17 @@ example defines an apple and dagger for configuration.
 
         return config
 
+    config = init_items()
+    
+    print len(config)
+    print config[0]
+
+Example creates a list containing two ItemConfiguration objects.
+    
+.. testoutput::
+        
+    2
+    <pyherc.generators.item.ItemConfiguration object at 0x...>
+        
 For more details regarding to configuration, refer to :doc:`configuration`
 page.
