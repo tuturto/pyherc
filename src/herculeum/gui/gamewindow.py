@@ -272,7 +272,7 @@ class GameArea(Widget):
                     direction = self.move_key_map[event.key]
                     if player.is_move_legal(direction, 'walk'):
                         player.move(direction)
-                    else:
+                    elif direction != 9:
                         player.perform_attack(direction)
                 elif event.key == K_i:
                     #display inventory
