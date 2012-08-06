@@ -25,7 +25,7 @@ import pyherc.rules.ending
 import random
 import logging
 from pyherc.aspects import Logged
-from pyherc.events import AttackHitEvent
+from pyherc.events import AttackHitEvent, AttackNothingEvent
 
 class AttackAction(object):
     """
@@ -65,6 +65,12 @@ class AttackAction(object):
         """
         Executes this Attack
         """
+        if self.target == None:
+            self.attacker.raise_event(AttackNothingEvent(
+                                            attacker = self.attacker,
+                                            affected_tiles = []))
+            return None
+
         was_hit = self.to_hit.is_hit()
 
         if was_hit:

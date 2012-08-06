@@ -96,17 +96,13 @@ class UnarmedCombatFactory(object):
         attacker = parameters.attacker
         target = self.get_target(parameters)
 
-        if target != None:
-            attack = AttackAction('unarmed',
-                        to_hit = UnarmedToHit(attacker, target,
-                                              parameters.random_number_generator),
-                        damage = UnarmedDamage(attacker.get_attack()),
-                        attacker = attacker,
-                        target = target,
-                        effect_factory = self.effect_factory)
-        else:
-            self.logger.warn('No target found')
-            attack = None
+        attack = AttackAction('unarmed',
+                    to_hit = UnarmedToHit(attacker, target,
+                                          parameters.random_number_generator),
+                    damage = UnarmedDamage(attacker.get_attack()),
+                    attacker = attacker,
+                    target = target,
+                    effect_factory = self.effect_factory)
 
         return attack
 

@@ -29,6 +29,7 @@ from pyherc.data import Model
 
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.action import AttackAction
+from pyherc.events import AttackNothingEvent
 
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ActionFactoryBuilder
@@ -127,3 +128,14 @@ class TestMeleeCombat(object):
         character1.perform_attack(5)
 
         verify(character2).receive_event(any())
+
+    def test_attack_into_air_raises_event(self):
+        """
+        Attacks into thin air should raise correct event
+        """
+        observer = mock(Character)
+        self.level.add_creature(observer, (2, 3))
+
+        self.character1.perform_attack(1)
+
+        verify(observer).receive_event(any(AttackNothingEvent))

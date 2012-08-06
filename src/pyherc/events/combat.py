@@ -63,3 +63,36 @@ class AttackHitEvent(Event):
                                                 self.target.name)
 
         return description
+
+class AttackNothingEvent(Event):
+    """
+    Event describing attack that targets nothing at all
+
+    .. versionadded:: 0.5
+    """
+    def __init__(self, attacker, affected_tiles):
+        """
+        Default constructor
+        """
+        super(AttackNothingEvent, self).__init__(
+                                        event_type = 'attack nothing',
+                                        level = attacker.level,
+                                        location = attacker.location,
+                                        affected_tiles = affected_tiles)
+
+    def get_description(self, point_of_view):
+        """
+        Description of the event
+
+        :param point_of_view: point of view for description
+        :type point_of_view: Character
+        :returns: description of the event
+        :rtype: string
+        """
+        if point_of_view == self.attacker:
+           description = 'You flail around, hitting nothing'
+        else:
+            description = '{0} flails around, hitting nothing'.format(
+                                                            self.attacker.name)
+
+        return description
