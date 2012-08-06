@@ -61,6 +61,7 @@ class GameWindow(Container):
         self.text_console = None
         self.lines = []
         self.event_types_to_show = ['attack hit',
+                                    'attack nothing',
                                     'poison triggered',
                                     'poison ended',
                                     'poisoned']

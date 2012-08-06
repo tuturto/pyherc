@@ -79,6 +79,7 @@ class AttackNothingEvent(Event):
                                         level = attacker.level,
                                         location = attacker.location,
                                         affected_tiles = affected_tiles)
+        self.attacker = attacker
 
     def get_description(self, point_of_view):
         """
