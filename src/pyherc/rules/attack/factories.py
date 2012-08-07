@@ -138,10 +138,14 @@ class UnarmedCombatFactory(object):
             target_location = (location[0] - 1, location[1])
         elif direction == 8:
             target_location = (location[0] - 1, location[1] - 1)
+        else:
+            target_location = None
 
-        target = level.get_creature_at(target_location)
-
-        return target
+        if target_location != None:
+            target = level.get_creature_at(target_location)
+            return target
+        else:
+            return None
 
 class MeleeCombatFactory(object):
     """

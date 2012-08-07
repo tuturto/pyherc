@@ -139,3 +139,17 @@ class TestMeleeCombat(object):
         self.character1.perform_attack(1)
 
         verify(observer).receive_event(any(AttackNothingEvent))
+
+    def test_attacking_to_portal_is_not_legal(self):
+        """
+        Attacking through portals is not legal
+        """
+        rng = mock()
+
+        action = self.action_factory.get_action(AttackParameters(
+                                                      self.character1,
+                                                      9,
+                                                      'unarmed',
+                                                      rng))
+
+        assert_that(action.is_legal(), is_(equal_to(False)))

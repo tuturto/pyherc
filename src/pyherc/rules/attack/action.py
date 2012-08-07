@@ -61,6 +61,22 @@ class AttackAction(object):
         self.effect_factory = effect_factory
 
     @logged
+    def is_legal(self):
+        """
+        Check if the attack is possible to perform
+
+        :returns: true if attackis possible, false otherwise
+        :rtype: Boolean
+        """
+        if self.attacker == None:
+            return False
+
+        if self.target == None:
+            return False
+
+        return True
+
+    @logged
     def execute(self):
         """
         Executes this Attack
