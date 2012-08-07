@@ -71,9 +71,6 @@ class AttackAction(object):
         if self.attacker == None:
             return False
 
-        if self.target == None:
-            return False
-
         return True
 
     @logged

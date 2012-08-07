@@ -140,16 +140,17 @@ class TestMeleeCombat(object):
 
         verify(observer).receive_event(any(AttackNothingEvent))
 
-    def test_attacking_to_portal_is_not_legal(self):
+    def test_attacking_to_enter_direction_is_treated_like_attacking_air(self):
         """
-        Attacking through portals is not legal
+        Attacking through portal should be treated like attacking into air
         """
-        rng = mock()
+        observer = mock(Character)
+        self.level.add_creature(observer, (2, 3))
 
         action = self.action_factory.get_action(AttackParameters(
                                                       self.character1,
                                                       9,
                                                       'unarmed',
-                                                      rng))
+                                                      mock()))
 
-        assert_that(action.is_legal(), is_(equal_to(False)))
+        assert_that(action.target, is_(equal_to(None)))
