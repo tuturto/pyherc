@@ -39,7 +39,6 @@ class TestCharacterCreation(object):
                                         race = 'human',
                                         kit = 'fighter',
                                         model = None,
-                                        action_factory = None,
                                         rng = None)
 
         assert_that(character, is_(not_none()))

@@ -51,6 +51,7 @@ class TestEventDispatching(object):
 
         self.model = None
         self.character = None
+        self.action_factory = None
         self.level = None
         self.listener = None
 
@@ -60,12 +61,11 @@ class TestEventDispatching(object):
         """
         self.model = Model()
 
-        action_factory = (ActionFactoryBuilder()
+        self.action_factory = (ActionFactoryBuilder()
                                     .with_move_factory()
                                     .build())
 
         self.character = (CharacterBuilder()
-                                .with_action_factory(action_factory)
                                 .with_model(self.model)
                                 .with_location((10, 10))
                                 .build())
@@ -82,7 +82,8 @@ class TestEventDispatching(object):
         """
         Test that moving will create an event and send it forward
         """
-        self.character.move(3)
+        self.character.move(3,
+                            self.action_factory)
 
         assert_that(len(self.listener.events), is_(equal_to(1)))
 
@@ -93,7 +94,8 @@ class TestEventDispatching(object):
         expected_redraws = [(10, 10),
                             (10, 11)]
 
-        self.character.move(5)
+        self.character.move(5,
+                            self.action_factory)
 
         event = self.listener.events[0]
 
@@ -124,7 +126,6 @@ class TestMoving(object):
         self.action_factory = ActionFactoryBuilder().with_move_factory().build()
 
         self.character = (CharacterBuilder()
-                                .with_action_factory(self.action_factory)
                                 .build())
 
         self.level1 = (LevelBuilder()
@@ -149,7 +150,8 @@ class TestMoving(object):
         """
         assert(self.character.location == (5, 5))
 
-        self.character.move(3)
+        self.character.move(3,
+                            self.action_factory)
 
         assert(self.character.location == (6, 5))
 
@@ -159,7 +161,8 @@ class TestMoving(object):
         """
         self.character.location = (1, 1)
 
-        self.character.move(1)
+        self.character.move(1,
+                            self.action_factory)
 
         assert(self.character.location == (1, 1))
 
@@ -170,7 +173,8 @@ class TestMoving(object):
         assert(self.character.location == (5, 5))
         assert(self.character.level == self.level1)
 
-        self.character.move(9)
+        self.character.move(9,
+                            self.action_factory)
 
         assert(self.character.location == (10, 10))
         assert(self.character.level == self.level2)
@@ -182,7 +186,8 @@ class TestMoving(object):
         assert self.character.level == self.level1
         assert self.character in self.level1.creatures
 
-        self.character.move(9)
+        self.character.move(9,
+                            self.action_factory)
 
         assert self.character.level == self.level2
         assert self.character in self.level2.creatures
@@ -194,7 +199,8 @@ class TestMoving(object):
         assert self.character.level == self.level1
         assert self.character in self.level1.creatures
 
-        self.character.move(9)
+        self.character.move(9,
+                            self.action_factory)
 
         assert self.character not in self.level1.creatures
 
@@ -205,7 +211,8 @@ class TestMoving(object):
         self.character.location = (6, 3)
         assert(self.character.level == self.level1)
 
-        self.character.move(9)
+        self.character.move(9,
+                            self.action_factory)
 
         assert(self.character.location == (6, 3))
         assert(self.character.level == self.level1)
@@ -216,6 +223,7 @@ class TestMoving(object):
         """
         tick = self.character.tick
 
-        self.character.move(3)
+        self.character.move(3,
+                            self.action_factory)
 
         assert self.character.tick > tick

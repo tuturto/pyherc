@@ -62,7 +62,6 @@ class TestPotions():
                                             drink_factory)
 
         self.character = (CharacterBuilder()
-                            .with_action_factory(self.action_factory)
                             .with_hit_points(1)
                             .with_max_hp(5)
                             .build())
@@ -92,7 +91,8 @@ class TestPotions():
         self.potion = (ItemBuilder()
                             .with_name('empty potion')
                             .build())
-        self.character.drink(self.potion)
+        self.character.drink(self.potion,
+                             self.action_factory)
 
         assert_that(self.character.hit_points, is_(equal_to(1)))
 
@@ -100,7 +100,8 @@ class TestPotions():
         """
         Test that character drinking a healing potion gets healed
         """
-        self.character.drink(self.potion)
+        self.character.drink(self.potion,
+                             self.action_factory)
 
         assert_that(self.character.hit_points, is_(greater_than(1)))
         assert_that(self.potion.maximum_charges_left, is_(equal_to(0)))
@@ -109,7 +110,8 @@ class TestPotions():
         """
         Test that drinking a potion correctly identifies it
         """
-        self.character.drink(self.potion)
+        self.character.drink(self.potion,
+                             self.action_factory)
 
         name = self.potion.get_name(self.character)
         assert_that(name, is_(equal_to('healing potion')))
@@ -119,7 +121,8 @@ class TestPotions():
         Test that empty potion is discarded from character inventory
         """
         assert_that(self.character.inventory, has_item(self.potion))
-        self.character.drink(self.potion)
+        self.character.drink(self.potion,
+                             self.action_factory)
         assert_that(self.character.inventory, is_not(has_item(self.potion)))
 
     def test_drinking_potion_does_not_discard_it(self):
@@ -137,7 +140,8 @@ class TestPotions():
         self.character.inventory.append(self.potion)
 
         assert_that(self.character.inventory, has_item(self.potion))
-        self.character.drink(self.potion)
+        self.character.drink(self.potion,
+                             self.action_factory)
         assert_that(self.character.inventory, has_item(self.potion))
 
     def test_drinking_non_potion(self):
@@ -149,4 +153,5 @@ class TestPotions():
                     .build())
 
         self.character.inventory.append(self.potion)
-        self.character.drink(item)
+        self.character.drink(item,
+                             self.action_factory)

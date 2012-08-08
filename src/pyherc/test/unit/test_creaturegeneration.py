@@ -88,7 +88,6 @@ class TestCreatureGeneration(object):
 
         self.generator = CreatureGenerator(configuration = self.creature_config,
                                            model = self.model,
-                                           action_factory = self.action_factory,
                                            rng = self.rng
                                            )
 

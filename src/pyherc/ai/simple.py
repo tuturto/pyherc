@@ -47,12 +47,14 @@ class FlockingHerbivore(object):
         self.character = character
 
     @logged
-    def act(self, model):
+    def act(self, model, action_factory):
         """
         Trigger this AI to assess the situation and act accordingly
 
         :param model: model where the character is located
         :type model: Model
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
         """
         shortest_distance = None
         closest_creature = None
@@ -85,19 +87,26 @@ class FlockingHerbivore(object):
                                         character.location, player.location)
 
                 if distance > 1:
-                    if character.is_move_legal(direction, 'walk'):
-                        character.move(direction)
+                    if character.is_move_legal(direction,
+                                               'walk',
+                                               action_factory):
+                        character.move(direction,
+                                       action_factory)
                     else:
                         character.tick = character.tick + 10
                 else:
                     #attack
-                    character.perform_attack(direction)
+                    character.perform_attack(direction,
+                                             action_factory)
             else:
                 #find direction
                 direction = self.find_direction(character.location,
                                                     closest_creature.location)
-                if character.is_move_legal(direction, 'walk'):
-                    character.move(direction)
+                if character.is_move_legal(direction,
+                                           'walk',
+                                           action_factory):
+                    character.move(direction,
+                                   action_factory)
                 else:
                     character.tick = character.tick + 10
         else:

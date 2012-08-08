@@ -32,14 +32,12 @@ class Character(object):
     logged = Logged()
 
     @logged
-    def __init__(self, model, action_factory, effects_collection, rng):
+    def __init__(self, model, effects_collection, rng):
         """
         Default constructor
 
         :param model: model where character acts
         :type model: Model
-        :param action_factory: action factory for character to use
-        :type action_factory: ActionFactory
         :param effects_collection: collection for effects
         :type effects_collection: EffectsCollection
         :param rng: random number generator
@@ -75,7 +73,6 @@ class Character(object):
         #mimic
         self.mimic_item = None
         self.__active_effects = [] # active effects
-        self.action_factory = action_factory
         self.artificial_intelligence = None
         self.__effects_collection = effects_collection
         self.rng = rng
@@ -109,14 +106,17 @@ class Character(object):
         self.__event_listeners.append(listener)
 
     @logged
-    def act(self, model):
+    def act(self, model, action_factory):
         """
         Triggers AI of this character
 
         :param model: model where character is located
         :type model: Model
+        :param action_factory: factory for creating actions
+        :type action_factory: ActionFactory
         """
-        self.artificial_intelligence.act(model)
+        self.artificial_intelligence.act(model,
+                                         action_factory)
 
     def __get_hp(self):
         """
@@ -298,50 +298,55 @@ class Character(object):
         self.location = location
 
     @logged
-    def execute_action(self, action_parameters):
+    def execute_action(self, action_parameters, action_factory):
         """
         Execute action defined by action parameters
 
         :param action_parameters: parameters controlling creation of the action
         :type action_parameters: ActionParameters
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
         """
-        action = self.create_action(action_parameters)
+        action = self.create_action(action_parameters,
+                                    action_factory)
         action.execute()
 
     @logged
-    def create_action(self, action_parameters):
+    def create_action(self, action_parameters, action_factory):
         """
         Create an action by defined by action parameters
 
         :param action_parameters: parameters controlling creation of the action
         :type action_parameters: ActionParameters
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
         :returns: Action
         """
-        assert self.action_factory != None
-
-        action = self.action_factory.get_action(action_parameters)
+        action = action_factory.get_action(action_parameters)
 
         assert action != None
 
         return action
 
     @logged
-    def move(self, direction):
+    def move(self, direction, action_factory):
         """
         Move this character to specified direction
 
         :param direction: direction to move
         :type direction: integer
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
         """
-        action = self.action_factory.get_action(
-                                                MoveParameters(
-                                                                self,
-                                                                direction,
-                                                                'walk'))
+        action = action_factory.get_action(
+                                           MoveParameters(
+                                                          self,
+                                                          direction,
+                                                          'walk'))
         action.execute()
 
     @logged
-    def is_move_legal(self, direction, movement_mode):
+    def is_move_legal(self, direction, movement_mode, action_factory):
         """
         Check if movement is legal
 
@@ -349,62 +354,69 @@ class Character(object):
         :type direction: integer
         :param movement_mode: mode of movement
         :type movement_mode: string
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
         :returns: True if move is legal, False otherwise
         :rtype: Boolean
         """
-        action = self.action_factory.get_action(
-                                                MoveParameters(
-                                                                self,
-                                                                direction,
-                                                                movement_mode))
+        action = action_factory.get_action(
+                                           MoveParameters(
+                                                          self,
+                                                          direction,
+                                                          movement_mode))
         return action.is_legal()
 
     @logged
-    def perform_attack(self, direction):
+    def perform_attack(self, direction, action_factory):
         """
         Attack to given direction
 
         :param direction: direction to attack
         :type direction: integer
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
         """
         if len(self.weapons) == 0:
             attack_type = 'unarmed'
         else:
             attack_type = 'melee'
-        action = self.action_factory.get_action(
-                                                AttackParameters(
-                                                                self,
-                                                                direction,
-                                                                attack_type,
-                                                                self.rng))
-        if action != None:
-            action.execute()
+        action = action_factory.get_action(
+                                           AttackParameters(
+                                                            self,
+                                                            direction,
+                                                            attack_type,
+                                                            self.rng))
+        action.execute()
 
     @logged
-    def drink(self, potion):
+    def drink(self, potion, action_factory):
         """
         Drink potion
 
         :param potion: potion to drink
         :type potion: Item
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
         """
-        action = self.action_factory.get_action(
-                                                DrinkParameters(
-                                                                self,
-                                                                potion))
+        action = action_factory.get_action(
+                                           DrinkParameters(
+                                                           self,
+                                                           potion))
         action.execute()
 
     @logged
-    def pick_up(self, item):
+    def pick_up(self, item, action_factory):
         """
         Pick up item
 
         :param item: item to pick up
         :type item: Item
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
 
         .. versionadded:: 0.4
         """
-        action = self.action_factory.get_action(
+        action = action_factory.get_action(
                                     InventoryParameters(
                                                         self,
                                                         item,

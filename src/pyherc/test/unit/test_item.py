@@ -61,8 +61,6 @@ class TestItems(object):
         self.level = Level([20, 20])
 
         self.character = (CharacterBuilder()
-                            .with_action_factory(ActionFactoryBuilder()
-                                                    .with_move_factory())
                             .with_level(self.level)
                             .with_location((5, 5))
                             .build())
@@ -252,6 +250,7 @@ class TestItemsInLevel:
         self.model = None
         self.character = None
         self.rng = None
+        self.action_factory = None
 
     def setup(self):
         """
@@ -267,9 +266,6 @@ class TestItemsInLevel:
         self.character = (CharacterBuilder()
                             .with_location((5, 5))
                             .with_level(self.level)
-                            .with_action_factory(
-                                ActionFactoryBuilder()
-                                    .with_inventory_factory())
                             .build())
 
         self.level.add_item(self.item, (5, 5))
@@ -281,6 +277,10 @@ class TestItemsInLevel:
         self.model.dungeon = self.dungeon
         self.model.player = self.character
 
+        self.action_factory = (ActionFactoryBuilder()
+                                    .with_inventory_factory()
+                                    .build())
+
     def test_picking_up(self):
         """
         Test that item can be picked up
@@ -288,7 +288,8 @@ class TestItemsInLevel:
         assert(self.character.location == (5, 5))
         assert(self.item.location == (5, 5))
 
-        self.character.pick_up(self.item)
+        self.character.pick_up(self.item,
+                               self.action_factory)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
@@ -303,7 +304,8 @@ class TestItemsInLevel:
         assert(self.character.location == (6, 6))
         assert(self.item.location == (5, 5))
 
-        self.character.pick_up(self.item)
+        self.character.pick_up(self.item,
+                               self.action_factory)
 
         assert(not self.item in self.character.inventory)
         assert(self.item in self.level.items)
@@ -312,7 +314,8 @@ class TestItemsInLevel:
         """
         Test that an item can be dropped from inventory
         """
-        self.character.pick_up(self.item)
+        self.character.pick_up(self.item,
+                               self.action_factory)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
@@ -328,7 +331,8 @@ class TestItemsInLevel:
         """
         Test that wielded item is dropped correctly
         """
-        self.character.pick_up(self.item)
+        self.character.pick_up(self.item,
+                               self.action_factory)
         pyherc.rules.items.wield(self.model, self.character, self.item)
 
         assert(self.item in self.character.inventory)

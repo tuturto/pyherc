@@ -37,7 +37,6 @@ class CharacterBuilder(object):
         self.hit_points = 10
         self.max_hp = 10
         self.model = mock()
-        self.action_factory = mock()
         self.rng = Random()
 
         self.speed = 1
@@ -64,13 +63,6 @@ class CharacterBuilder(object):
 
     def with_model(self, model):
         self.model = model
-        return self
-
-    def with_action_factory(self, factory):
-        if hasattr(factory, 'build'):
-            self.action_factory = factory.build()
-        else:
-            self.action_factory = factory
         return self
 
     def with_rng(self, rng):
@@ -143,7 +135,6 @@ class CharacterBuilder(object):
             Character
         """
         character = Character(model = self.model,
-                              action_factory = self.action_factory,
                               rng = self.rng,
                               effects_collection = self.effects_collection)
 

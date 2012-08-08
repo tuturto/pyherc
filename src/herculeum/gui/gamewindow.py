@@ -46,7 +46,8 @@ class GameWindow(Container):
     .. versionadded:: 0.4
     """
 
-    def __init__(self,  application, surface_manager, **params):
+    def __init__(self,  application, surface_manager, action_factory,
+                 **params):
         """
         Initialises game window
 
@@ -69,6 +70,7 @@ class GameWindow(Container):
 
         self.application = application
         self.surface_manager = surface_manager
+        self.action_factory = action_factory
         self.set_layout()
 
     def set_layout(self):
@@ -76,7 +78,8 @@ class GameWindow(Container):
         Set layout of this screen
         """
         self.play_area = GameArea(application = self.application,
-                                  surface_manager = self.surface_manager)
+                                  surface_manager = self.surface_manager,
+                                  action_factory = self.action_factory)
         self.application.world.player.register_event_listener(self)
         self.add(self.play_area, 0, 45)
         self.text_console = TextArea(
@@ -125,13 +128,15 @@ class GameArea(Widget):
 
     .. versionadded:: 0.4
     """
-    def __init__(self, application, surface_manager,  **kwargs):
+    def __init__(self, application, surface_manager,
+                 action_factory, **kwargs):
         """
         Default constructor
         """
         super(GameArea, self).__init__(**kwargs)
         self.application = application
         self.surface_manager = surface_manager
+        self.action_factory = action_factory
 
         self.move_key_map = {K_KP8:1, K_KP9:2, K_KP6:3, K_KP3:4, K_KP2:5,
                              K_KP1:6, K_KP4:7, K_KP7:8, K_KP5:9}
@@ -272,10 +277,14 @@ class GameArea(Widget):
                     player.level.full_update_needed = True
                     #handle moving
                     direction = self.move_key_map[event.key]
-                    if player.is_move_legal(direction, 'walk'):
-                        player.move(direction)
+                    if player.is_move_legal(direction,
+                                            'walk',
+                                            self.action_factory):
+                        player.move(direction,
+                                    self.action_factory)
                     elif direction != 9:
-                        player.perform_attack(direction)
+                        player.perform_attack(direction,
+                                              self.action_factory)
                 elif event.key == K_i:
                     #display inventory
                     self.application.change_state('inventory')

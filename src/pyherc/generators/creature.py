@@ -36,14 +36,13 @@ class CreatureGenerator(object):
     logged = Logged()
 
     @logged
-    def __init__(self, configuration, model, action_factory, rng):
+    def __init__(self, configuration, model, rng):
         """
         Default constructor
         """
         super(CreatureGenerator, self).__init__()
         self.configuration = configuration
         self.model = model
-        self.action_factory = action_factory
         self.rng = rng
 
     @logged
@@ -57,7 +56,6 @@ class CreatureGenerator(object):
         config = self.__get_creature_config(name)
 
         new_creature = Character(self.model,
-                                 self.action_factory,
                                  EffectsCollection(),
                                  self.rng)
 

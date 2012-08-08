@@ -43,7 +43,6 @@ class TestCreatureAdder():
         """
         self.rng = None
         self.level = None
-        self.mock_action_factory = None
         self.creature_generator = None
         self.configuration = None
         self.creature_adder = None
@@ -79,11 +78,9 @@ class TestCreatureAdder():
                                               attack = 2,
                                               ai = None))
 
-        self.mock_action_factory = mock()
         self.model = mock()
         self.creature_generator = CreatureGenerator(creature_config,
                                                     self.model,
-                                                    self.mock_action_factory,
                                                     self.rng)
 
         self.configuration = CreatureAdderConfiguration(['crypt'])

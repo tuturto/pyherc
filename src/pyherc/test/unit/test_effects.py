@@ -67,9 +67,9 @@ class TestEffects(object):
 
         character = (CharacterBuilder()
                         .with_model(model)
-                        .with_action_factory(action_factory)
                         .build())
-        character.drink(potion)
+        character.drink(potion,
+                        action_factory)
 
         verify(effect).trigger()
 
@@ -95,7 +95,6 @@ class TestEffects(object):
                         .with_effect_handle(
                                 EffectHandleBuilder()
                                     .with_trigger('on attack hit'))
-                        .with_action_factory(action_factory)
                         .with_location((5, 5))
                         .build())
 
@@ -108,7 +107,8 @@ class TestEffects(object):
                     .with_character(defender)
                     .build())
 
-        attacker.perform_attack(3)
+        attacker.perform_attack(3,
+                                action_factory)
 
         verify(effect).trigger()
 
@@ -137,12 +137,12 @@ class TestEffects(object):
                                        factories = [DrinkFactory(effect_factory)])
 
         character = (CharacterBuilder()
-                        .with_action_factory(action_factory)
                         .with_hit_points(1)
                         .with_max_hp(10)
                         .build())
 
-        character.drink(potion)
+        character.drink(potion,
+                        action_factory)
 
         assert_that(character.hit_points, is_(equal_to(10)))
         assert_that(character, has_no_effects())
@@ -173,12 +173,12 @@ class TestEffects(object):
                                        factories = [DrinkFactory(effect_factory)])
 
         character = (CharacterBuilder()
-                        .with_action_factory(action_factory)
                         .with_hit_points(1)
                         .with_max_hp(10)
                         .build())
 
-        character.drink(potion)
+        character.drink(potion,
+                        action_factory)
 
         assert_that(character, has_effects(1))
 
@@ -214,6 +214,7 @@ class TestEffectsInMelee(object):
         self.attacker = None
         self.defender = None
         self.model = None
+        self.action_factory = None
 
     def setup(self):
         """
@@ -230,13 +231,12 @@ class TestEffectsInMelee(object):
                             'tick': 3,
                             'damage': 5})
 
-        action_factory = (ActionFactoryBuilder()
-                            .with_attack_factory()
-                            .with_effect_factory(effect_factory)
-                            .build())
+        self.action_factory = (ActionFactoryBuilder()
+                                    .with_attack_factory()
+                                    .with_effect_factory(effect_factory)
+                                    .build())
 
         self.attacker = (CharacterBuilder()
-                            .with_action_factory(action_factory)
                             .with_location((5, 5))
                             .with_effect_handle(EffectHandleBuilder()
                                                  .with_trigger('on attack hit')
@@ -245,7 +245,6 @@ class TestEffectsInMelee(object):
                             .build())
 
         self.defender = (CharacterBuilder()
-                            .with_action_factory(action_factory)
                             .with_location((5, 4))
                             .with_hit_points(50)
                             .with_model(self.model)
@@ -260,7 +259,8 @@ class TestEffectsInMelee(object):
         """
         Test that effect can be added as a result of unarmed combat
         """
-        self.attacker.perform_attack(1)
+        self.attacker.perform_attack(1,
+                                     self.action_factory)
 
         assert_that(self.defender, has_effect())
 
@@ -268,8 +268,10 @@ class TestEffectsInMelee(object):
         """
         Test that single type of effect will not added twice
         """
-        self.attacker.perform_attack(1)
-        self.attacker.perform_attack(1)
+        self.attacker.perform_attack(1,
+                                     self.action_factory)
+        self.attacker.perform_attack(1,
+                                     self.action_factory)
 
         assert_that(self.defender, has_effects(1))
 
@@ -277,6 +279,7 @@ class TestEffectsInMelee(object):
         """
         Test that event is raised to indicate an effect was created
         """
-        self.attacker.perform_attack(1)
+        self.attacker.perform_attack(1,
+                                     self.action_factory)
 
         verify(self.model).raise_event(any(PoisonAddedEvent))

@@ -62,11 +62,13 @@ class TestGameWindow(object):
                         .with_location((11, 11))
                         .build())
 
+        action_factory = (ActionFactoryBuilder()
+                                .with_model(model)
+                                .with_move_factory()
+                                .build())
+
         monster = (CharacterBuilder()
                         .with_model(model)
-                        .with_action_factory(ActionFactoryBuilder()
-                                                .with_model(model)
-                                                .with_move_factory())
                         .with_name('rat')
                         .with_location((5, 5))
                         .build())
@@ -81,6 +83,7 @@ class TestGameWindow(object):
 
         game_gui = GameArea(application = application,
                             surface_manager = mock(),
+                            action_factory = mock(),
                             decorate = False,
                             width = 800,
                             height = 600)
@@ -90,7 +93,8 @@ class TestGameWindow(object):
         model.register_event_listener(game_gui)
 
         game_gui.paint(surface)
-        monster.move(7)
+        monster.move(7,
+                     action_factory)
         rects = game_gui.update(surface)
 
         assert_that(rects, has_items(Rect(160, 88, 192, 120),
@@ -103,21 +107,20 @@ class TestGameWindow(object):
         model = Model()
         surface = mock()
 
+        action_factory = (ActionFactoryBuilder()
+                                .with_model(model)
+                                .with_move_factory()
+                                .build())
+
         player = (CharacterBuilder()
                         .with_model(model)
                         .as_player_character()
-                        .with_action_factory(ActionFactoryBuilder()
-                                                .with_model(model)
-                                                .with_move_factory())
                         .with_name('player')
                         .with_location((11, 11))
                         .build())
 
         monster = (CharacterBuilder()
                         .with_model(model)
-                        .with_action_factory(ActionFactoryBuilder()
-                                                .with_model(model)
-                                                .with_move_factory())
                         .with_name('rat')
                         .with_location((5, 5))
                         .build())
@@ -132,6 +135,7 @@ class TestGameWindow(object):
 
         game_gui = GameArea(application = application,
                             surface_manager = mock(),
+                            action_factory = mock(),
                             decorate = False,
                             width = 800,
                             height = 600)
@@ -140,7 +144,8 @@ class TestGameWindow(object):
 
         model.register_event_listener(game_gui)
 
-        player.move(7)
+        player.move(7,
+                    action_factory)
         rects = game_gui.update(surface)
 
         assert_that(rects, has_items(Rect(0, 0, 800, 600)))
@@ -153,6 +158,7 @@ class TestGameWindow(object):
 
         game_gui = GameArea(application = Application(),
                             surface_manager = mock(),
+                            action_factory = mock(),
                             decorate = False)
 
         tiles = [(10, 10),

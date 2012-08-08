@@ -66,7 +66,6 @@ class TestMeleeCombat(object):
 
         self.character1 = (CharacterBuilder()
                                 .with_model(self.model)
-                                .with_action_factory(self.action_factory)
                                 .with_speed(1)
                                 .with_tick(1)
                                 .with_hit_points(10)
@@ -76,7 +75,6 @@ class TestMeleeCombat(object):
 
         self.character2 = (CharacterBuilder()
                                 .with_model(self.model)
-                                .with_action_factory(self.action_factory)
                                 .with_speed(1)
                                 .with_tick(1)
                                 .with_hit_points(10)
@@ -113,7 +111,6 @@ class TestMeleeCombat(object):
         """
         character1 = (CharacterBuilder()
                         .with_model(self.model)
-                        .with_action_factory(self.action_factory)
                         .with_attack(12)
                         .with_speed(1)
                         .with_tick(0)
@@ -125,7 +122,8 @@ class TestMeleeCombat(object):
         character2.hit_points = 20
         self.level.add_creature(character2, (2, 3))
 
-        character1.perform_attack(5)
+        character1.perform_attack(5,
+                                  self.action_factory)
 
         #TODO: refactor to differiate hits and misses
         verify(character2).receive_event(any())
@@ -137,7 +135,8 @@ class TestMeleeCombat(object):
         observer = mock(Character)
         self.level.add_creature(observer, (2, 3))
 
-        self.character1.perform_attack(1)
+        self.character1.perform_attack(1,
+                                       self.action_factory)
 
         verify(observer).receive_event(any(AttackNothingEvent))
 

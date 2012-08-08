@@ -65,11 +65,6 @@ def Adventurer():
     :rtype: Character
     """
     character = (CharacterBuilder()
-                    .with_action_factory(ActionFactoryBuilder()
-                                            .with_move_factory()
-                                            .with_attack_factory()
-                                            .with_drink_factory()
-                                            .with_inventory_factory())
                     .with_hit_points(10)
                     .with_max_hp(10)
                     .with_speed(5)
@@ -89,11 +84,6 @@ def Goblin(action = None):
     :rtype: Character
     """
     character = (CharacterBuilder()
-                    .with_action_factory(ActionFactoryBuilder()
-                                            .with_move_factory()
-                                            .with_attack_factory()
-                                            .with_drink_factory()
-                                            .with_inventory_factory())
                     .with_hit_points(5)
                     .with_max_hp(5)
                     .with_speed(3)
@@ -235,13 +225,21 @@ class Hit(object):
         else:
             attack_type = 'unarmed'
 
+        action_factory = (ActionFactoryBuilder()
+                                    .with_move_factory()
+                                    .with_attack_factory()
+                                    .with_drink_factory()
+                                    .with_inventory_factory()
+                                    .build())
+
         params = AttackParameters(attacker = attacker,
                                   direction = self.find_direction(attacker.location,
                                                                   self.target.location),
                                   attack_type = attack_type,
                                   random_number_generator = rng)
 
-        attacker.execute_action(params)
+        attacker.execute_action(params,
+                                action_factory)
 
     def find_direction(self, start, end):
         """

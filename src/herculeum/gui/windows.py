@@ -92,7 +92,8 @@ class MainWindow(pgu.gui.app.App):
                              self.surface_manager)
         elif state == 'game window':
             mode = GameWindow(self.application,
-                              self.surface_manager)
+                              self.surface_manager,
+                              self.application.action_factory)
         elif state == 'inventory':
             mode = InventoryWindow(self.application,
                                    self.surface_manager)
@@ -114,7 +115,8 @@ class MainWindow(pgu.gui.app.App):
 
                 if creature != model.player:
                     if self.application.world.player.level != None:
-                        creature.act(self.application.world)
+                        creature.act(self.application.world,
+                                     self.application.action_factory)
 
     def event(self, ev):
         super(MainWindow, self).event(ev)
@@ -151,7 +153,6 @@ class StartNewGameWindow:
         self.character = pyherc.rules.character.create_character('human',
                                                 'fighter',
                                                 self.application.world,
-                                                self.application.action_factory,
                                                 self.application.rng)
         self.application.world.player = self.character
 

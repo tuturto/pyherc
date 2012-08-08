@@ -169,7 +169,6 @@ class Configuration(object):
         self.creature_generator = CreatureGenerator(
                                         self.get_creature_config(level_config),
                                         self.model,
-                                        self.action_factory,
                                         self.rng)
 
         self.logger.info('Generators initialised')
