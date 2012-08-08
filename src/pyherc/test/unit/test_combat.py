@@ -127,6 +127,7 @@ class TestMeleeCombat(object):
 
         character1.perform_attack(5)
 
+        #TODO: refactor to differiate hits and misses
         verify(character2).receive_event(any())
 
     def test_attack_into_air_raises_event(self):

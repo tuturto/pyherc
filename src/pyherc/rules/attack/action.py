@@ -25,7 +25,7 @@ import pyherc.rules.ending
 import random
 import logging
 from pyherc.aspects import Logged
-from pyherc.events import AttackHitEvent, AttackNothingEvent
+from pyherc.events import AttackHitEvent, AttackNothingEvent, AttackMissEvent
 
 class AttackAction(object):
     """
@@ -89,13 +89,18 @@ class AttackAction(object):
         if was_hit:
             self.damage.apply_damage(self.target)
 
-        self.attacker.raise_event(AttackHitEvent(
-                                    type = 'melee',
-                                    attacker = self.attacker,
-                                    target = self.target,
-                                    damage = self.damage,
-                                    hit = was_hit,
-                                    affected_tiles = [self.target.location]))
+            self.attacker.raise_event(AttackHitEvent(
+                                        type = self.attack_type,
+                                        attacker = self.attacker,
+                                        target = self.target,
+                                        damage = self.damage,
+                                        affected_tiles = [self.target.location]))
+        else:
+            self.attacker.raise_event(AttackMissEvent(
+                                        type = self.attack_type,
+                                        attacker = self.attacker,
+                                        target = self.target,
+                                        affected_tiles = [self.target.location]))
 
         self.__trigger_attack_effects()
 

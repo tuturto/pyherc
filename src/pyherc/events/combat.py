@@ -25,12 +25,11 @@ from pyherc.events.event import Event
 
 class AttackHitEvent(Event):
     """
-    Event that can be used to relay information about moving
+    Event that can be used to indicate attacking hitting
 
     .. versionadded:: 0.4
     """
-    def __init__(self, type, attacker, target, damage, hit,
-                 affected_tiles):
+    def __init__(self, type, attacker, target, damage, affected_tiles):
         """
         Default constructor
         """
@@ -43,7 +42,6 @@ class AttackHitEvent(Event):
         self.attacker = attacker
         self.target = target
         self.damage = damage
-        self.hit = hit
 
     def get_description(self, point_of_view):
         """
@@ -61,6 +59,44 @@ class AttackHitEvent(Event):
         else:
             description = '{0} hits {1}'.format(self.attacker.name,
                                                 self.target.name)
+
+        return description
+
+class AttackMissEvent(Event):
+    """
+    Event that can be used to indicate attacking missing
+
+    .. versionadded:: 0.4
+    """
+    def __init__(self, type, attacker, target, affected_tiles):
+        """
+        Default constructor
+        """
+        super(AttackMissEvent, self).__init__(event_type = 'attack miss',
+                                              level = attacker.level,
+                                              location = attacker.location,
+                                              affected_tiles = affected_tiles)
+
+        self.type = type
+        self.attacker = attacker
+        self.target = target
+
+    def get_description(self, point_of_view):
+        """
+        Description of the event
+
+        :param point_of_view: point of view for description
+        :type point_of_view: Character
+        :returns: description of the event
+        :rtype: string
+        """
+        if point_of_view == self.attacker:
+           description = 'You miss {0}'.format(self.target.name)
+        elif point_of_view == self.target:
+            description = '{0} misses you'.format(self.attacker.name)
+        else:
+            description = '{0} misses {1}'.format(self.attacker.name,
+                                                  self.target.name)
 
         return description
 
