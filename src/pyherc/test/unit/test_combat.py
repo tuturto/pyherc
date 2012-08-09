@@ -29,7 +29,7 @@ from pyherc.data import Model
 
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.action import AttackAction
-from pyherc.events import AttackNothingEvent
+from pyherc.events import AttackNothingEvent, AttackHitEvent, AttackMissEvent
 
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ActionFactoryBuilder
@@ -105,9 +105,9 @@ class TestMeleeCombat(object):
         assert_that(action, is_(instance_of(AttackAction)))
         assert_that(action.attack_type, is_(equal_to('unarmed')))
 
-    def test_events_in_unarmed_combat(self):
+    def test_unarmed_attack_hit_event(self):
         """
-        Test that attacking raises events
+        Test that landing an unarmed hit will raise correct event
         """
         character1 = (CharacterBuilder()
                         .with_model(self.model)
@@ -122,21 +122,53 @@ class TestMeleeCombat(object):
         character2.hit_points = 20
         self.level.add_creature(character2, (2, 3))
 
-        character1.perform_attack(5,
-                                  self.action_factory)
+        rng = mock()
+        when(rng).randint(1, 6).thenReturn(1)
 
-        #TODO: refactor to differiate hits and misses
-        verify(character2).receive_event(any())
+        character1.perform_attack(5,
+                                  self.action_factory,
+                                  rng)
+
+        verify(character2).receive_event(any(AttackHitEvent))
+
+    def test_unarmed_attack_miss_event(self):
+        """
+        Test that landing an unarmed miss will raise correct event
+        """
+        character1 = (CharacterBuilder()
+                        .with_model(self.model)
+                        .with_attack(12)
+                        .with_speed(1)
+                        .with_tick(0)
+                        .build())
+
+        self.level.add_creature(character1, (2, 2))
+
+        character2 = mock(Character)
+        character2.hit_points = 20
+        self.level.add_creature(character2, (2, 3))
+
+        rng = mock()
+        when(rng).randint(1, 6).thenReturn(6)
+
+        character1.perform_attack(5,
+                                  self.action_factory,
+                                  rng)
+
+        verify(character2).receive_event(any(AttackMissEvent))
 
     def test_attack_into_air_raises_event(self):
         """
         Attacks into thin air should raise correct event
         """
+        rng = mock()
+        when(rng).randint(1, 6).thenReturn(1)
         observer = mock(Character)
         self.level.add_creature(observer, (2, 3))
 
         self.character1.perform_attack(1,
-                                       self.action_factory)
+                                       self.action_factory,
+                                       rng)
 
         verify(observer).receive_event(any(AttackNothingEvent))
 

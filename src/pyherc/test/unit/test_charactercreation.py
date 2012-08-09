@@ -38,7 +38,6 @@ class TestCharacterCreation(object):
         character = pyherc.rules.character.create_character(
                                         race = 'human',
                                         kit = 'fighter',
-                                        model = None,
-                                        rng = None)
+                                        model = None)
 
         assert_that(character, is_(not_none()))

@@ -80,6 +80,9 @@ class TestEffects(object):
         effect = mock()
         effect.duration = 0
         model = mock()
+        rng = mock()
+
+        when(rng).randint(1, 6).thenReturn(1)
 
         effect_factory = mock(EffectsFactory)
         when(effect_factory).create_effect(any(),
@@ -108,7 +111,8 @@ class TestEffects(object):
                     .build())
 
         attacker.perform_attack(3,
-                                action_factory)
+                                action_factory,
+                                rng)
 
         verify(effect).trigger()
 
@@ -259,8 +263,12 @@ class TestEffectsInMelee(object):
         """
         Test that effect can be added as a result of unarmed combat
         """
+        rng = mock()
+        when(rng).randint(1, 6).thenReturn(1)
+
         self.attacker.perform_attack(1,
-                                     self.action_factory)
+                                     self.action_factory,
+                                     rng)
 
         assert_that(self.defender, has_effect())
 
@@ -268,10 +276,15 @@ class TestEffectsInMelee(object):
         """
         Test that single type of effect will not added twice
         """
+        rng = mock()
+        when(rng).randint(1, 6).thenReturn(1)
+
         self.attacker.perform_attack(1,
-                                     self.action_factory)
+                                     self.action_factory,
+                                     rng)
         self.attacker.perform_attack(1,
-                                     self.action_factory)
+                                     self.action_factory,
+                                     rng)
 
         assert_that(self.defender, has_effects(1))
 
@@ -279,7 +292,11 @@ class TestEffectsInMelee(object):
         """
         Test that event is raised to indicate an effect was created
         """
+        rng = mock()
+        when(rng).randint(1, 6).thenReturn(1)
+
         self.attacker.perform_attack(1,
-                                     self.action_factory)
+                                     self.action_factory,
+                                     rng)
 
         verify(self.model).raise_event(any(PoisonAddedEvent))

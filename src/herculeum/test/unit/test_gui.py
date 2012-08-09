@@ -28,7 +28,6 @@ from hamcrest import * #pylint: disable=W0401
 from pygame import Rect
 
 import herculeum.gui.windows
-from pyherc.data import Character
 from pyherc.data import Model
 from herculeum.gui.surfaceManager import SurfaceManager
 from herculeum.gui.gamewindow import GameArea

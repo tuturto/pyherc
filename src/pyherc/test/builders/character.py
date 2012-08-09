@@ -37,7 +37,6 @@ class CharacterBuilder(object):
         self.hit_points = 10
         self.max_hp = 10
         self.model = mock()
-        self.rng = Random()
 
         self.speed = 1
         self.tick = 0
@@ -63,10 +62,6 @@ class CharacterBuilder(object):
 
     def with_model(self, model):
         self.model = model
-        return self
-
-    def with_rng(self, rng):
-        self.rng = rng
         return self
 
     def with_effect_handle(self, handle):
@@ -135,7 +130,6 @@ class CharacterBuilder(object):
             Character
         """
         character = Character(model = self.model,
-                              rng = self.rng,
                               effects_collection = self.effects_collection)
 
         if self.player_character:

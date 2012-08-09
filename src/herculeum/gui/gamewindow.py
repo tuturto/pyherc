@@ -284,7 +284,8 @@ class GameArea(Widget):
                                     self.action_factory)
                     elif direction != 9:
                         player.perform_attack(direction,
-                                              self.action_factory)
+                                              self.action_factory,
+                                              self.application.rng)
                 elif event.key == K_i:
                     #display inventory
                     self.application.change_state('inventory')

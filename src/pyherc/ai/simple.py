@@ -47,7 +47,7 @@ class FlockingHerbivore(object):
         self.character = character
 
     @logged
-    def act(self, model, action_factory):
+    def act(self, model, action_factory, rng):
         """
         Trigger this AI to assess the situation and act accordingly
 
@@ -55,6 +55,8 @@ class FlockingHerbivore(object):
         :type model: Model
         :param action_factory: factory to create actions
         :type action_factory: ActionFactory
+        :param rng: random number generator
+        :type rng: Random
         """
         shortest_distance = None
         closest_creature = None
@@ -97,7 +99,8 @@ class FlockingHerbivore(object):
                 else:
                     #attack
                     character.perform_attack(direction,
-                                             action_factory)
+                                             action_factory,
+                                             rng)
             else:
                 #find direction
                 direction = self.find_direction(character.location,

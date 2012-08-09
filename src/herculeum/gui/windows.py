@@ -116,7 +116,8 @@ class MainWindow(pgu.gui.app.App):
                 if creature != model.player:
                     if self.application.world.player.level != None:
                         creature.act(self.application.world,
-                                     self.application.action_factory)
+                                     self.application.action_factory,
+                                     self.application.rng)
 
     def event(self, ev):
         super(MainWindow, self).event(ev)
@@ -152,8 +153,7 @@ class StartNewGameWindow:
         """
         self.character = pyherc.rules.character.create_character('human',
                                                 'fighter',
-                                                self.application.world,
-                                                self.application.rng)
+                                                self.application.world)
         self.application.world.player = self.character
 
         level_generator = self.application.level_generator_factory.get_generator('upper catacombs')

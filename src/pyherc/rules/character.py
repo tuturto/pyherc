@@ -62,7 +62,7 @@ def initialise_stat_tables():
 
     __logger.info('stat tables initialised')
 
-def create_character(race, kit, model, rng):
+def create_character(race, kit, model):
     """
     Creates a new character with given race and kit
     """
@@ -77,8 +77,7 @@ def create_character(race, kit, model, rng):
     temp_kit = kit_stats[kit]
 
     new_character = Character(model,
-                              EffectsCollection(),
-                              rng)
+                              EffectsCollection())
     new_character.body = temp_race['body'] + temp_kit['body']
     new_character.finesse = temp_race['finesse'] + temp_kit['finesse']
     new_character.mind = temp_race['mind'] + temp_kit['mind']

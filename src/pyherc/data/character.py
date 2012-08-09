@@ -32,7 +32,7 @@ class Character(object):
     logged = Logged()
 
     @logged
-    def __init__(self, model, effects_collection, rng):
+    def __init__(self, model, effects_collection):
         """
         Default constructor
 
@@ -40,8 +40,6 @@ class Character(object):
         :type model: Model
         :param effects_collection: collection for effects
         :type effects_collection: EffectsCollection
-        :param rng: random number generator
-        :type rng: Random
         """
         super(Character, self).__init__()
         # attributes
@@ -75,7 +73,6 @@ class Character(object):
         self.__active_effects = [] # active effects
         self.artificial_intelligence = None
         self.__effects_collection = effects_collection
-        self.rng = rng
 
     def __str__(self):
         return self.name
@@ -106,7 +103,7 @@ class Character(object):
         self.__event_listeners.append(listener)
 
     @logged
-    def act(self, model, action_factory):
+    def act(self, model, action_factory, rng):
         """
         Triggers AI of this character
 
@@ -114,9 +111,12 @@ class Character(object):
         :type model: Model
         :param action_factory: factory for creating actions
         :type action_factory: ActionFactory
+        :param rng: random number generator
+        :type rng: Random
         """
         self.artificial_intelligence.act(model,
-                                         action_factory)
+                                         action_factory,
+                                         rng)
 
     def __get_hp(self):
         """
@@ -367,7 +367,7 @@ class Character(object):
         return action.is_legal()
 
     @logged
-    def perform_attack(self, direction, action_factory):
+    def perform_attack(self, direction, action_factory, rng):
         """
         Attack to given direction
 
@@ -375,6 +375,8 @@ class Character(object):
         :type direction: integer
         :param action_factory: factory to create actions
         :type action_factory: ActionFactory
+        :param rng: random number generator
+        :type rng: Random
         """
         if len(self.weapons) == 0:
             attack_type = 'unarmed'
@@ -385,7 +387,7 @@ class Character(object):
                                                             self,
                                                             direction,
                                                             attack_type,
-                                                            self.rng))
+                                                            rng))
         action.execute()
 
     @logged

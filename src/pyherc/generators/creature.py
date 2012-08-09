@@ -56,8 +56,7 @@ class CreatureGenerator(object):
         config = self.__get_creature_config(name)
 
         new_creature = Character(self.model,
-                                 EffectsCollection(),
-                                 self.rng)
+                                 EffectsCollection())
 
         new_creature.name = config.name
         new_creature.body = config.body
