@@ -138,17 +138,22 @@ Last finishing step is to add easy to use method to Character class:
 
 .. code-block:: python
  
-  def wait(self, ticks = 5):
-      action = self.action_factory.get_action(WaitParameters(self,
-                                                             ticks))
+  def wait(self, ticks, action_factory):
+      action = action_factory.get_action(WaitParameters(self,
+                                                        ticks))
       action.execute()
 
 Now we can have our character to wait for a bit, just by calling:
 
 .. code-block:: python
 
-  player_character.wait()
+  player_character.wait(5, action_factory)
 
+Notice how we are passing ActionFactory from outside of Character objects,
+instead of defining it as an attribute of Character. We do not want to inject
+service objects into domain objects, because it would complicate saving and
+loading later on.
+  
 Whole code
 ----------
 Below is shown the whole example of wait action and demonstration how it
