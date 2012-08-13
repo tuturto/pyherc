@@ -195,10 +195,9 @@ changes value in character's internal clock.
     action_factory = ActionFactory(model = model,
                                    factories = [wait_factory])
     character = Character(model = model, 
-                          action_factory = action_factory,
-                          effects_collection = EffectsCollection(),
-                          rng = Random())
-    action = character.create_action(WaitParameters(character, 5))
+                          effects_collection = EffectsCollection())
+    action = character.create_action(WaitParameters(character, 5),
+                                     action_factory)
     
     print('Ticks {0}'.format(character.tick))
     action.execute()
