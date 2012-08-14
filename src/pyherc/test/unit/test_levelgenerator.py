@@ -51,7 +51,6 @@ class TestLeveltGeneratorFactory:
         """
         Default constructor
         """
-        self.mock_action_factory = None
         self.mock_config = None
         self.mock_partitioner = None
         self.mock_room_generator = None
@@ -65,7 +64,6 @@ class TestLeveltGeneratorFactory:
         """
         Setup test case
         """
-        self.mock_action_factory = mock(ActionFactory)
         self.mock_config = mock(LevelGeneratorFactoryConfig)
         self.mock_partitioner = mock()
         self.mock_partitioner.level_types = ['crypt']
@@ -88,8 +86,7 @@ class TestLeveltGeneratorFactory:
         self.mock_config.creature_adders = [self.mock_creature_adder]
         self.mock_config.portal_adders = [self.mock_portal_adder]
 
-        self.factory = LevelGeneratorFactory(self.mock_action_factory,
-                                             mock(),
+        self.factory = LevelGeneratorFactory(mock(),
                                              self.mock_config,
                                              self.rng)
 
@@ -100,7 +97,6 @@ class TestLeveltGeneratorFactory:
         generator = self.factory.get_generator('crypt')
 
         assert generator != None
-        assert generator.action_factory == self.mock_action_factory
 
 class TestLevelGeneratorFactoryConfiguration:
     """
@@ -116,7 +112,6 @@ class TestLevelGeneratorFactoryConfiguration:
         """
         Test that LevelPartitioner is correctly passed to LevelGenerator
         """
-        mock_action_factory = mock(ActionFactory)
         mock_partitioner = mock(GridPartitioner)
         mock_partitioner.level_types = ['crypt']
         mock_room_generator = mock()
@@ -138,8 +133,7 @@ class TestLevelGeneratorFactoryConfiguration:
         mock_config.creature_adders = [mock_creature_adder]
         mock_config.portal_adders = [mock_portal_adder]
 
-        factory = LevelGeneratorFactory(mock_action_factory,
-                                        mock(),
+        factory = LevelGeneratorFactory(mock(),
                                         mock_config,
                                         random.Random())
 
@@ -151,7 +145,6 @@ class TestLevelGeneratorFactoryConfiguration:
         """
         Check that room generator with incorrect level type is not used
         """
-        mock_action_factory = mock(ActionFactory)
         mock_partitioner = mock(GridPartitioner)
         mock_partitioner.level_types = ['crypt']
         mock_room_generator = mock()
@@ -166,8 +159,7 @@ class TestLevelGeneratorFactoryConfiguration:
 
         exception_was_thrown = False
 
-        factory = LevelGeneratorFactory(mock_action_factory,
-                                        mock(),
+        factory = LevelGeneratorFactory(mock(),
                                         mock_config,
                                         random_generator)
 
@@ -205,7 +197,6 @@ class TestFactorySupportForLevelTypes:
         """
         Setup test case
         """
-        mock_action_factory = mock(ActionFactory)
         self.partitioner_1 = mock(GridPartitioner)
         self.partitioner_1.level_types = ['crypt', 'castle']
         self.partitioner_2 = mock(GridPartitioner)
@@ -246,8 +237,7 @@ class TestFactorySupportForLevelTypes:
 
         self.random_generator = random.Random()
 
-        self.factory = LevelGeneratorFactory(mock_action_factory,
-                                             mock(),
+        self.factory = LevelGeneratorFactory(mock(),
                                              mock_config,
                                              self.random_generator)
 
@@ -320,7 +310,6 @@ class TestLevelGenerator:
         """
         Test that level generation steps are done
         """
-        factory = mock()
         partitioner = mock()
         room_generator = mock()
         level_decorator = mock()
@@ -343,7 +332,7 @@ class TestLevelGenerator:
                                      empty_floor = 0,
                                      empty_wall = self.wall_empty)
 
-        generator = LevelGenerator(factory, partitioner, [room_generator],
+        generator = LevelGenerator(partitioner, [room_generator],
                                    level_decorator, [stair_adder],
                                    item_adder, creature_adder,
                                    self.rng,
@@ -361,7 +350,6 @@ class TestLevelGenerator:
         """
         Test that level generator creates a fully connected level
         """
-        factory = mock(ActionFactory)
         partitioner = GridPartitioner(['crypt'],
                                       4,
                                       3,
@@ -379,7 +367,7 @@ class TestLevelGenerator:
 
         portal = mock(Portal)
 
-        generator = LevelGenerator(factory, partitioner, [room_generator],
+        generator = LevelGenerator(partitioner, [room_generator],
                                    level_decorator, [portal_adder],
                                    item_adder,
                                    creature_adder,
@@ -398,7 +386,6 @@ class TestLevelGenerator:
         """
         Test that catacombs generator creates a fully connected level
         """
-        factory = mock(ActionFactory)
         partitioner = GridPartitioner(['crypt'],
                                       1,
                                       1,
@@ -417,7 +404,7 @@ class TestLevelGenerator:
 
         portal = mock(Portal)
 
-        generator = LevelGenerator(factory, partitioner, [room_generator],
+        generator = LevelGenerator(partitioner, [room_generator],
                                    level_decorator, [portal_adder],
                                    item_adder,
                                    creature_adder,

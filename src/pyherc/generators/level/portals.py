@@ -112,7 +112,6 @@ class PortalAdderFactory(object):
         :type rng: Random
         """
         super(PortalAdderFactory, self).__init__()
-        self.logger = logging.getLogger('pyherc.generators.level.portals.PortalAdderFactory')
         self.config = config
         self.level_generator_factory = None
         self.rng = rng
@@ -132,11 +131,9 @@ class PortalAdderFactory(object):
                    if x.level_type == level_type]
 
         for spec in matches:
-            level_generator = self.level_generator_factory.get_generator(
-                                                        spec.new_level)
             new_adder = PortalAdder(spec.icons,
                                     spec.location_type,
-                                    level_generator,
+                                    spec.new_level,
                                     self.rng)
             if spec.is_unique:
                 self.config.remove(spec)
@@ -151,19 +148,18 @@ class PortalAdder(object):
     logged = Logged()
 
     @logged
-    def __init__(self, icons,  location_type, level_generator, rng):
+    def __init__(self, icons,  location_type, level_generator_name, rng):
         """
         Default constructor
 
         :param icons: pair of icons to use this portal and other end
         :param location_type: type of location to add portal
-        :param level_generator: LevelGenerator
+        :param level_generator_name: name of level generator
         :param rng: Randon number generator
         """
         super(PortalAdder, self).__init__()
-        self.logger = logging.getLogger('pyherc.generators.level.portals.PortalAdder')
         self.location_type = location_type
-        self.level_generator = level_generator
+        self.level_generator_name = level_generator_name
         self.rng = rng
         self.icons = icons
 
@@ -180,8 +176,5 @@ class PortalAdder(object):
         if len(locations) > 0:
             location = self.rng.choice(locations)
             portal = Portal(icons = self.icons,
-                            level_generator = self.level_generator)
+                            level_generator_name = self.level_generator_name)
             level.add_portal(portal, location)
-        else:
-            self.logger.warn('no matching location found, skipping')
-

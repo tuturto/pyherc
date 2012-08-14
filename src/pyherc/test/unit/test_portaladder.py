@@ -76,32 +76,6 @@ class TestPortalAdder():
         portal = level.portals[0]
         assert_that(located_in_room(portal), is_(True))
 
-    def test_level_generator_is_created(self):
-        """
-        Test that level generator is created for newly created portal
-        """
-        level = Level(size = (20, 20),
-                      floor_type = self.floor_rock,
-                      wall_type = self.wall_empty)
-
-        level_generator = mock(LevelGenerator)
-
-        for loc_y in range(8, 12):
-            for loc_x in range(8, 12):
-                level.set_location_type((loc_x, loc_y), 'room')
-
-        portal_adder = PortalAdder((1, 2),
-                                   'room',
-                                   level_generator,
-                                   self.rng)
-
-        portal_adder.add_portal(level)
-
-        portals = level.portals
-        portal = level.portals[0]
-
-        assert_that(portal.level_generator, is_(same_instance(level_generator)))
-
     def test_portal_has_icons(self):
         """
         Test that portal created by adder has two icons set
@@ -281,18 +255,12 @@ class TestPortalAdderFactory():
                                                   new_level = 'upper crypt',
                                                   unique = False)]
 
-        level_generator_factory = mock(LevelGeneratorFactory)
-        level_generator = mock(LevelGenerator)
-
-        when(level_generator_factory).get_generator(any()).thenReturn(level_generator)
-
         factory = PortalAdderFactory(portal_config,
                                      self.rng)
-        factory.level_generator_factory = level_generator_factory
 
         portal_adders = factory.create_portal_adders('catacombs')
 
         portal_adder = portal_adders[0]
 
-        assert_that(portal_adder.level_generator,
-                    is_(same_instance(level_generator)))
+        assert_that(portal_adder.level_generator_name,
+                    is_(equal_to('upper crypt')))

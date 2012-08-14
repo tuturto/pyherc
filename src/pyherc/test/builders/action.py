@@ -95,7 +95,7 @@ class ActionFactoryBuilder(object):
                                             pick_up_factory])
 
         if self.use_real_move_factory == True:
-            walk_factory = WalkFactory()
+            walk_factory = WalkFactory(mock())
             self.move_factory = MoveFactory(walk_factory)
 
         action_factory = ActionFactory(self.model,

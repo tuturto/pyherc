@@ -196,8 +196,8 @@ class Level(object):
         if other_end != None:
             assert(other_end.icon != None or portal.icon != None)
 
-            portal.other_end = other_end
-            other_end.other_end = portal
+            portal.set_other_end(other_end)
+            other_end.set_other_end(portal)
 
             #TODO: remove link
             if portal.icon != None:

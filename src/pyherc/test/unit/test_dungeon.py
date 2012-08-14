@@ -24,6 +24,7 @@ Module for testing dungeon
 
 from pyherc.data import Level
 from pyherc.data import Portal
+from mockito import mock
 
 class TestDungeon:
     """
@@ -62,11 +63,11 @@ class TestDungeon:
 
         assert(stairs1.level == level1)
         assert(stairs1.location == (10, 10))
-        assert(stairs1.other_end == stairs2)
+        assert(stairs1.get_other_end(mock()) == stairs2)
 
         assert(stairs2.level == level2)
         assert(stairs2.location == (5, 5))
-        assert(stairs2.other_end == stairs1)
+        assert(stairs2.get_other_end(mock()) == stairs1)
 
         assert(stairs1 in level1.portals)
         assert(stairs2 in level2.portals)

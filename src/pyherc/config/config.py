@@ -76,9 +76,9 @@ class Configuration(object):
         """
         self.level_size = (80, 30)
 
-        self.initialise_factories(level_config)
         self.initialise_generators(level_config)
         self.initialise_level_generators(level_config)
+        self.initialise_factories(level_config)
 
     def initialise_factories(self, level_config):
         """
@@ -86,7 +86,7 @@ class Configuration(object):
         """
         self.logger.info('Initialising action sub system')
 
-        walk_factory = WalkFactory()
+        walk_factory = WalkFactory(self.level_generator_factory)
         move_factory = MoveFactory(walk_factory)
 
         effect_factory = EffectsFactory()
@@ -205,7 +205,6 @@ class Configuration(object):
                                 self.rng)
 
         self.level_generator_factory = LevelGeneratorFactory(
-                                                    self.action_factory,
                                                     portal_adder_factory,
                                                     config,
                                                     self.rng)

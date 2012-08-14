@@ -30,10 +30,14 @@ class WalkFactory(SubActionFactory):
     """
     Factory for creating walk actions
     """
-    def __init__(self):
+    def __init__(self, level_generator_factory):
         """
         Constructor for this factory
+
+        :param level_generator_factory: Factory for generating level generators
+        :type level_generator_factory: LevelGeneratorFactory
         """
+        self.level_generator_factory = level_generator_factory
         self.logger = logging.getLogger('pyherc.rules.move.factories.WalkFactory')
         self.movement_mode = 'walk'
 
@@ -98,9 +102,10 @@ class WalkFactory(SubActionFactory):
         elif direction == 9:
             portal = new_level.get_portal_at(location)
             if portal != None:
-                if portal.other_end != None:
-                    new_level = portal.other_end.level
-                    new_location = portal.other_end.location
+                other_end = portal.get_other_end(self.level_generator_factory)
+                if other_end != None:
+                    new_level = other_end.level
+                    new_location = other_end.location
                 else:
                     self.logger.error('Portal leads to void!')
                     raise RuntimeError('Portal leads to void!')

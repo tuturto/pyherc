@@ -22,7 +22,6 @@
 Module containing classes to represent Portals
 """
 
-import logging
 from pyherc.aspects import Logged
 
 class Portal(object):
@@ -32,54 +31,42 @@ class Portal(object):
     logged = Logged()
 
     @logged
-    def __init__(self, icons, level_generator):
+    def __init__(self, icons, level_generator_name):
         """
         Default constructor
 
         :param icons: (my_icon, icon for other end)
         :type icons: (integer, integer)
-        :param level_generator: level generator for proxy portals
-        :type level_generator: LevelGenerator
+        :param level_generator_name: name of level generator for proxy portals
+        :type level_generator_name: String
         """
         super(Portal, self).__init__()
         self.level = None
         self.location = ()
         self.__icons = icons
         self.__other_end = None
-        self.level_generator = level_generator
+        self.level_generator_name = level_generator_name
         self.model = None
-        self.logger = logging.getLogger('pyherc.data.dungeon.Portal')
-
-    def __getstate__(self):
-        """
-        Override __getstate__ in order to get pickling work
-        """
-        properties = dict(self.__dict__)
-        del properties['logger']
-        return properties
-
-    def __setstate__(self, properties):
-        """
-        Override __setstate__ in order to get pickling work
-        """
-        self.__dict__.update(properties)
-        self.logger = logging.getLogger('pyherc.data.dungeon.Portal')
 
     @logged
-    def __get_other_end(self):
+    def get_other_end(self, level_generator_factory):
         """
         Returns the other end of the portal
 
+        :param level_generator_factory: factory to generate level generators
+        :type level_generator_factory: LevelGeneratorFactory
         :returns: other end of the portal
         :rtype: Portal
         """
-        if self.__other_end == None and self.level_generator != None:
-            self.level_generator.generate_level(self)
+        if self.__other_end == None:
+            level_generator = level_generator_factory.get_generator(
+                                                    self.level_generator_name)
+            level_generator.generate_level(self)
 
         return self.__other_end
 
     @logged
-    def __set_other_end(self, portal):
+    def set_other_end(self, portal):
         """
         Set the other end of the portal
 
@@ -117,6 +104,5 @@ class Portal(object):
         """
         return self.__icons[1]
 
-    other_end = property(__get_other_end, __set_other_end)
     icon = property(__get_icon, __set_icon)
     other_end_icon = property(__get_other_end_icon)

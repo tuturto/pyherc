@@ -34,20 +34,17 @@ class LevelGeneratorFactory(object):
     logged = Logged()
 
     @logged
-    def __init__(self, action_factory, portal_adder_factory, configuration,
+    def __init__(self, portal_adder_factory, configuration,
                  random_generator):
         """
         Default constructor
 
-        :param action_factory: action factory to pass to the generator
-        :type action_factory: ActionFactory
         :param configuration: configuration for factory
         :type configuration: LevelGeneratorFactoryConfiguration
         :param random_generator: random number generator
         :type random_generator: Random
         """
         self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGeneratorFactory') #pylint: disable=c0301
-        self.action_factory = action_factory
         self.level_partitioners = configuration.level_partitioners
         self.room_generators = configuration.room_generators
         self.decorators = configuration.decorators
@@ -98,8 +95,7 @@ class LevelGeneratorFactory(object):
                                      empty_floor = 0,
                                      empty_wall = 100)
 
-        return LevelGenerator(self.action_factory,
-                              partitioner,
+        return LevelGenerator(partitioner,
                               rooms,
                               decorator,
                               portal_adders,
@@ -171,14 +167,13 @@ class LevelGenerator(object):
     logged = Logged()
 
     @logged
-    def __init__(self, action_factory, partitioner, room_generators,
+    def __init__(self, partitioner, room_generators,
                  decorator, portal_adders,
                  item_adder, creature_adder,
                  random_generator, level_context):
         """
         Default constructor
 
-        :param action_factory: ActionFactory instance
         :param partitioner: LevelPartitioner to use
         :param room_generators: RoomGenerators to use
         :param decorator: LevelDecorator to use
@@ -194,7 +189,6 @@ class LevelGenerator(object):
         self.creature_adder = creature_adder
         self.random_generator = random_generator
 
-        self.action_factory = action_factory
         self.partitioner = partitioner
         self.room_generators = room_generators
         self.decorator = decorator
@@ -246,7 +240,7 @@ class LevelGenerator(object):
             rooms = new_level.get_locations_by_type('room')
             if len(rooms) > 0:
                 new_portal = Portal(icons = (portal.other_end_icon, None),
-                                    level_generator = None)
+                                    level_generator_name = None)
                 location = self.random_generator.choice(rooms)
                 new_level.add_portal(new_portal, location, portal)
             else:
