@@ -17,6 +17,7 @@ Aspyct 3.0 beta 4
 web.py 0.3 (only needed for running debug server)
 mockito-python 0.5.0 (only needed for running test cases)
 pyHamcrest 1.6 (only needed for running test cases)
+gc (only needed for running test cases)
 Sphinx 1.1.2 (only needed for generating documentation)
 
 Manual
