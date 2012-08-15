@@ -161,7 +161,8 @@ changes value in character's internal clock.
 
 .. testcode::
 
-    from pyherc.data import Character, Model, EffectsCollection
+    from pyherc.data import Character, Model
+    from pyherc.data.effects import EffectsCollection
     from pyherc.rules import ActionFactory, ActionParameters
     from pyherc.rules.factory import SubActionFactory
     from random import Random

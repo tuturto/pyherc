@@ -8,5 +8,6 @@ pyherc.data.effects
    
    module_damage
    module_effect
+   module_effectscollection
    module_heal
    module_poison

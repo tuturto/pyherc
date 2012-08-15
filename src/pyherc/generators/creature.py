@@ -24,8 +24,8 @@ Module for creature generation related classes
 Classes:
     CreatureGenerator
 """
-from pyherc.data import Character, EffectsCollection
-from pyherc.data.effects import EffectHandle
+from pyherc.data import Character
+from pyherc.data.effects import EffectHandle, EffectsCollection
 from pyherc.aspects import Logged
 import random
 

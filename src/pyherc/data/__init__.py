@@ -32,4 +32,4 @@ from .character import Character
 from .character import WeaponProficiency
 
 from .item import Item
-from .effectscollection import EffectsCollection
+

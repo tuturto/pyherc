@@ -80,7 +80,7 @@ added there.
 
 .. testcode::
 
-    from pyherc.data import EffectsCollection
+    from pyherc.data.effects import EffectsCollection
     from pyherc.test.builders import EffectHandleBuilder
     from hamcrest import *
     from pyherc.test.matchers import has_effect_handle

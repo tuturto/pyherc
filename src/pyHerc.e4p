@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-08-15, 06:53:07 -->
+<!-- Saved: 2012-08-15, 07:30:22 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -82,7 +82,6 @@
     <Source>pyherc/test/matchers/active_effects.py</Source>
     <Source>pyherc/test/builders/level.py</Source>
     <Source>pyherc/test/builders/action.py</Source>
-    <Source>pyherc/data/effectscollection.py</Source>
     <Source>pyherc/test/matchers/effect_collection.py</Source>
     <Source>pyherc/data/character.py</Source>
     <Source>pyherc/rules/inventory/__init__.py</Source>
@@ -169,9 +168,10 @@
     <Source>pyherc/data/effects/__init__.py</Source>
     <Source>pyherc/data/effects/damage.py</Source>
     <Source>pyherc/data/effects/effect.py</Source>
-    <Source>pyherc/data/effects/factory.py</Source>
     <Source>pyherc/data/effects/heal.py</Source>
     <Source>pyherc/data/effects/poison.py</Source>
+    <Source>pyherc/generators/effects.py</Source>
+    <Source>pyherc/data/effects/effectscollection.py</Source>
   </Sources>
   <Forms>
   </Forms>

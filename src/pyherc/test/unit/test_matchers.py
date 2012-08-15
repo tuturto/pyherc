@@ -24,8 +24,7 @@ Module for testing customer matchers
 #pylint: disable=W0614
 from pyherc.data import Level
 from pyherc.test.matchers.map_connectivity import MapConnectivity
-from pyherc.data import EffectsCollection
-from pyherc.data.effects import EffectHandle
+from pyherc.data.effects import EffectHandle, EffectsCollection
 from pyherc.test.matchers.effect_collection import ContainsEffectHandle
 from hamcrest import * #pylint: disable=W0401
 from mockito import *  #pylint: disable=W0401

@@ -24,9 +24,9 @@ Classes needed for item generation
 
 import logging
 import random
-from pyherc.data import Item, EffectsCollection
+from pyherc.data import Item
 from pyherc.data.item import WeaponData
-from pyherc.data.effects import EffectHandle
+from pyherc.data.effects import EffectsCollection, EffectHandle
 from pyherc.aspects import Logged
 
 class ItemGenerator(object):

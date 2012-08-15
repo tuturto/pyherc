@@ -23,7 +23,8 @@ Various rules used in character generation
 """
 
 import logging
-from pyherc.data import Character, WeaponProficiency, EffectsCollection
+from pyherc.data import Character, WeaponProficiency
+from pyherc.data.effects import EffectsCollection
 import herculeum.config.tiles
 
 __logger = logging.getLogger('pyherc.rules.character')

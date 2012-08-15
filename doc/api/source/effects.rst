@@ -86,16 +86,15 @@ in the dictionary. These parameters are then used to override the default ones.
 
 Effects collection
 ==================
-:class:`pyherc.data.effectscollection.EffectsCollection` is tasked to keep
-track of effects and effect handles for particular object. Both Item and
+:class:`pyherc.data.effects.effectscollection.EffectsCollection` is tasked to
+keep track of effects and effect handles for particular object. Both Item and
 Character objects use it to interact with effects sub system.
 
 Following example creates an EffectHandle and adds it to the collection.
 
 .. testcode::
    
-   from pyherc.data.effects import EffectHandle
-   from pyherc.data import EffectsCollection
+   from pyherc.data.effects import EffectsCollection,EffectHandle
    
    collection = EffectsCollection()
    handle = EffectHandle(trigger = 'on kick',
@@ -116,8 +115,7 @@ Following example creates an Effect and adds it to the collection.
 
 .. testcode::
 
-   from pyherc.data.effects import Poison
-   from pyherc.data import EffectsCollection
+   from pyherc.data.effects import EffectsCollection, Poison
 
    collection = EffectsCollection()
    effect = Poison(duration = 200, 

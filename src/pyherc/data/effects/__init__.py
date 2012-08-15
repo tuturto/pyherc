@@ -21,6 +21,7 @@
 """
 Package for magical effects
 """
+from .effectscollection import EffectsCollection
 from .effect import Effect, EffectHandle
 from .poison import Poison
 from .heal import Heal
