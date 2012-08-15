@@ -19,10 +19,30 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for magical effects
+Module for damage
 """
-from .factory import EffectsFactory
-from .effect import Effect, EffectHandle
-from .poison import Poison
-from .heal import Heal
-from .damage import Damage
+from pyherc.aspects import Logged
+from pyherc.data.effects.effect import Effect
+
+class Damage(Effect):
+    """
+    Class representing effects of damage
+    """
+    logged = Logged()
+
+    @logged
+    def __init__(self, duration, frequency, tick, damage, target):
+        """
+        Default constructor
+        """
+        super(Damage, self).__init__(duration, frequency, tick)
+        self.damage = damage
+        self.target = target
+
+    @logged
+    def do_trigger(self):
+        """
+        Triggers effects of the damage
+        """
+        self.target.hit_points = self.target.hit_points - self.damage
+

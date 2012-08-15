@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-07-21, 09:25:32 -->
+<!-- Saved: 2012-08-15, 06:53:07 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -69,12 +69,6 @@
     <Source>pyherc/rules/consume/__init__.py</Source>
     <Source>pyherc/rules/consume/action.py</Source>
     <Source>pyherc/rules/consume/factories.py</Source>
-    <Source>pyherc/rules/effects/__init__.py</Source>
-    <Source>pyherc/rules/effects/poison.py</Source>
-    <Source>pyherc/rules/effects/factory.py</Source>
-    <Source>pyherc/rules/effects/effect.py</Source>
-    <Source>pyherc/rules/effects/heal.py</Source>
-    <Source>pyherc/rules/effects/damage.py</Source>
     <Source>pyherc/data/portal.py</Source>
     <Source>pyherc/data/level.py</Source>
     <Source>pyherc/test/builders/__init__.py</Source>
@@ -172,6 +166,12 @@
     <Source>pyherc/test/unit/test_creaturegeneration.py</Source>
     <Source>pyherc/test/unit/test_events.py</Source>
     <Source>pyherc/events/poison.py</Source>
+    <Source>pyherc/data/effects/__init__.py</Source>
+    <Source>pyherc/data/effects/damage.py</Source>
+    <Source>pyherc/data/effects/effect.py</Source>
+    <Source>pyherc/data/effects/factory.py</Source>
+    <Source>pyherc/data/effects/heal.py</Source>
+    <Source>pyherc/data/effects/poison.py</Source>
   </Sources>
   <Forms>
   </Forms>

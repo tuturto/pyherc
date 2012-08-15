@@ -26,7 +26,7 @@ import pyherc
 from pyherc.data.model import Model
 from pyherc.data import Dungeon
 from pyherc.data import Level
-from pyherc.rules.effects import Effect
+from pyherc.data.effects import Effect
 
 from pyherc.test.builders import CharacterBuilder
 

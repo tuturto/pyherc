@@ -30,7 +30,7 @@ from pyherc.data import Level
 from pyherc.generators.item import ItemGenerator
 from pyherc.generators.item import ItemConfiguration, ItemConfigurations
 from pyherc.generators.item import WeaponConfiguration
-from pyherc.rules.effects import EffectHandle
+from pyherc.data.effects import EffectHandle
 from pyherc.generators.level.items import ItemAdder
 from pyherc.generators.level.items import ItemAdderConfiguration
 from random import Random

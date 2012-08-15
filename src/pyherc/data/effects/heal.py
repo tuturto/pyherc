@@ -19,30 +19,33 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for damage
+Module for healing
 """
 from pyherc.aspects import Logged
-from pyherc.rules.effects.effect import Effect
+from pyherc.data.effects.effect import Effect
 
-class Damage(Effect):
+class Heal(Effect):
     """
-    Class representing effects of damage
+    Class representing effects of healing
     """
     logged = Logged()
 
     @logged
-    def __init__(self, duration, frequency, tick, damage, target):
+    def __init__(self, duration, frequency, tick, healing, target):
         """
         Default constructor
         """
-        super(Damage, self).__init__(duration, frequency, tick)
-        self.damage = damage
+        super(Heal, self).__init__(duration, frequency, tick)
+        self.healing = healing
         self.target = target
+        self.effect_name = 'heal'
 
     @logged
     def do_trigger(self):
         """
-        Triggers effects of the damage
+        Triggers effects of the healing
         """
-        self.target.hit_points = self.target.hit_points - self.damage
+        self.target.hit_points = self.target.hit_points + self.healing
 
+        if self.target.hit_points > self.target.max_hp:
+            self.target.hit_points = self.target.max_hp

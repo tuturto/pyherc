@@ -19,17 +19,9 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for generation related activities
-Main interface consists of following classes
-
-DungeonGenerator
-ItemGenerator
-CreatureGenerator
+Package for magical effects
 """
-
-from .dungeon import DungeonGenerator
-from .item import ItemGenerator, ItemConfigurations, ItemConfiguration
-from .item import WeaponConfiguration
-from .creature import CreatureGenerator
-from .creature import CreatureConfigurations, CreatureConfiguration
-from .effects import EffectsFactory
+from .effect import Effect, EffectHandle
+from .poison import Poison
+from .heal import Heal
+from .damage import Damage

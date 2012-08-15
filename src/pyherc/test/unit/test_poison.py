@@ -22,8 +22,8 @@
 Module for testing poison related rules
 """
 #pylint: disable=W0614
-from pyherc.rules.effects import Poison
-from pyherc.rules.effects import EffectsFactory
+from pyherc.data.effects import Poison
+from pyherc.generators import EffectsFactory
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.matchers import has_effect, is_not_at

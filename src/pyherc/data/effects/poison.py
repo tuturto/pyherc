@@ -24,7 +24,7 @@ Module for poison
 from pyherc.aspects import Logged
 from pyherc.events import PoisonTriggeredEvent, PoisonAddedEvent
 from pyherc.events import PoisonEndedEvent
-from pyherc.rules.effects.effect import Effect
+from pyherc.data.effects.effect import Effect
 from pyherc.rules.ending import check_dying
 
 class Poison(Effect):

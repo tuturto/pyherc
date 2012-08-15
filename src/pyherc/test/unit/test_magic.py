@@ -22,7 +22,7 @@
 Module for magic related tests
 """
 #pylint: disable=W0614
-from pyherc.rules.effects import Heal, Damage
+from pyherc.data.effects import Heal, Damage
 from pyherc.test.builders import CharacterBuilder
 from hamcrest import * #pylint: disable=W0401
 

@@ -21,7 +21,7 @@
 """
 module for configuring effects
 """
-from pyherc.rules.effects import Heal, Poison
+from pyherc.data.effects import Heal, Poison
 
 def init_effects():
     """

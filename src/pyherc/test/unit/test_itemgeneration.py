@@ -28,7 +28,7 @@ from hamcrest import * #pylint: disable=W0401
 
 from pyherc.generators import ItemConfigurations
 from pyherc.generators import ItemConfiguration, WeaponConfiguration
-from pyherc.rules.effects import EffectHandle
+from pyherc.data.effects import EffectHandle
 from random import Random
 
 class TestItemGeneration(object):

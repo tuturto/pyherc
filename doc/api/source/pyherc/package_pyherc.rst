@@ -9,11 +9,11 @@ pyherc
    module_aspects   
    ai/module_ai
    config/package_config   
-   data/module_data
+   data/package_data
    debug/module_debug
    events/package_events
-   generators/module_generators
-   rules/module_rules
+   generators/package_generators
+   rules/package_rules
    test/module_test
    
    module_aspects

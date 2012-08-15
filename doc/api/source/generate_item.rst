@@ -32,7 +32,7 @@ example defines an apple and dagger for configuration.
 
     from pyherc.generators import ItemConfigurations
     from pyherc.generators import ItemConfiguration, WeaponConfiguration
-    from pyherc.rules.effects import EffectHandle
+    from pyherc.data.effects import EffectHandle
 
     def init_items():
         """

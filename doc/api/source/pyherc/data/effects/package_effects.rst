@@ -1,13 +1,12 @@
-pyherc.rules.effects
-********************
+pyherc.data.effects
+*******************
 
-.. automodule:: pyherc.rules.effects
+.. automodule:: pyherc.data.effects
 
 .. toctree::
    :maxdepth: 2
    
    module_damage
    module_effect
-   module_factory
    module_heal
    module_poison

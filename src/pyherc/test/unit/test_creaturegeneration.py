@@ -29,7 +29,7 @@ from mockito import mock
 
 from pyherc.generators import CreatureConfigurations
 from pyherc.generators import CreatureConfiguration
-from pyherc.rules.effects import EffectHandle
+from pyherc.data.effects import EffectHandle
 from pyherc.ai import FlockingHerbivore
 from random import Random
 

@@ -23,11 +23,11 @@ Module for testing effects
 """
 
 #pylint: disable=W0614
-from pyherc.rules.effects import Heal
-from pyherc.rules.effects import Poison
-from pyherc.rules.effects import Effect
-from pyherc.rules.effects import EffectsFactory
-from pyherc.rules.effects import EffectHandle
+from pyherc.data.effects import Heal
+from pyherc.data.effects import Poison
+from pyherc.data.effects import Effect
+from pyherc.generators import EffectsFactory
+from pyherc.data.effects import EffectHandle
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.events import PoisonAddedEvent, Event

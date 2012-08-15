@@ -6,6 +6,7 @@ pyherc.data
 .. toctree::
    :maxdepth: 2
    
+   effects/package_effects
    module_character
    module_dungeon
    module_effectscollection

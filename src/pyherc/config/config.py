@@ -38,7 +38,7 @@ from pyherc.generators.level.portals import PortalAdderFactory
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 
-from pyherc.rules.effects import EffectsFactory
+from pyherc.generators import EffectsFactory
 
 from pyherc.generators import ItemConfigurations
 from pyherc.generators import CreatureConfigurations

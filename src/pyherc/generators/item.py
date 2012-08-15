@@ -26,7 +26,7 @@ import logging
 import random
 from pyherc.data import Item, EffectsCollection
 from pyherc.data.item import WeaponData
-from pyherc.rules.effects import EffectHandle
+from pyherc.data.effects import EffectHandle
 from pyherc.aspects import Logged
 
 class ItemGenerator(object):

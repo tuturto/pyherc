@@ -21,7 +21,7 @@
 """
 Module for effect specification builder
 """
-from pyherc.rules.effects import Effect, EffectHandle
+from pyherc.data.effects import Effect, EffectHandle
 
 class EffectHandleBuilder(object):
     """

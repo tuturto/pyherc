@@ -48,7 +48,7 @@ from herculeum.config.tiles import CREATURE_SPIDER_1
 
 from pyherc.ai import FlockingHerbivore
 from pyherc.generators import CreatureConfiguration
-from pyherc.rules.effects import EffectHandle
+from pyherc.data.effects import EffectHandle
 
 from pyherc.config.dsl import LevelConfiguration
 

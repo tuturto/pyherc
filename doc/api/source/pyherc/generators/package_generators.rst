@@ -8,6 +8,7 @@ pyherc.generators
    
    module_creature
    module_dungeon
+   module_effects
    module_item
    module_utils
    level/module_level
