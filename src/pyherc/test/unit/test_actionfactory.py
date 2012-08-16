@@ -66,8 +66,8 @@ class TestActionFactories():
                                     mock_move_factory])
         factories = factory.get_sub_factories()
 
-        assert_that(mock_attack_factory, is_in(factories))
-        assert_that(mock_move_factory, is_in(factories))
+        assert_that(factories, contains_inanyorder(mock_attack_factory,
+                                                   mock_move_factory))
 
     def test_get_factory_by_type(self):
         """
