@@ -35,6 +35,8 @@ from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.builders import LevelBuilder
 
+from pyherc.test.cutesy import at_
+
 from mockito import mock, verify, when, any
 from hamcrest import * #pylint: disable=W0401
 
@@ -66,8 +68,6 @@ class TestMeleeCombat(object):
 
         self.character1 = (CharacterBuilder()
                                 .with_model(self.model)
-                                .with_speed(1)
-                                .with_tick(1)
                                 .with_hit_points(10)
                                 .with_attack(3)
                                 .with_body(5)
@@ -75,20 +75,18 @@ class TestMeleeCombat(object):
 
         self.character2 = (CharacterBuilder()
                                 .with_model(self.model)
-                                .with_speed(1)
-                                .with_tick(1)
                                 .with_hit_points(10)
                                 .with_attack(3)
                                 .with_body(5)
                                 .build())
 
         self.model.dungeon = Dungeon()
-        self.level = LevelBuilder().build()
+        self.level = (LevelBuilder()
+                        .with_character(self.character1, at_(5, 5))
+                        .with_character(self.character2, at_(6, 5))
+                        .build())
 
         self.model.dungeon.levels = self.level
-
-        self.level.add_creature(self.character1, (5, 5))
-        self.level.add_creature(self.character2, (6, 5))
 
     def test_get_unarmed_action(self):
         """

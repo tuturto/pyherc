@@ -56,7 +56,7 @@ class LevelBuilder(object):
         self.solid_wall_tile = tile
         return self
 
-    def with_character(self, character):
+    def with_character(self, character, location = None):
         """
         Place given character to level
 
@@ -64,9 +64,14 @@ class LevelBuilder(object):
         :type character: Character
         """
         if hasattr(character, 'build'):
-            self.characters.append(character.build())
+            new_character = character.build()
         else:
-            self.characters.append(character)
+            new_character = character
+
+        if location != None:
+            new_character.location = location
+
+        self.characters.append(new_character)
         return self
 
     def with_wall_at(self, location):
