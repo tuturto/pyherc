@@ -40,24 +40,6 @@ class TestPoison():
         """
         pass
 
-    def test_cause_damage(self):
-        """
-        Test that triggered poison will damage character
-        """
-        character = (CharacterBuilder()
-                        .with_hit_points(10)
-                        .build())
-
-        poison = Poison(duration = 1,
-                        frequency = 1,
-                        tick = 0,
-                        damage = 5,
-                        target = character)
-
-        poison.trigger()
-
-        assert_that(character.hit_points, is_(equal_to(5)))
-
     def test_event_is_raised_on_trigger(self):
         """
         Test that event is raised when poison is triggered

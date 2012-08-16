@@ -19,9 +19,11 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 from pyherc.test.cutesy.dictionary import weak, Goblin
+from pyherc.test.cutesy.dictionary import strong, Adventurer
 from pyherc.test.cutesy.dictionary import Level
 from pyherc.test.cutesy.dictionary import place, middle_of
-from pyherc.test.cutesy import affect, with_, potent_poison
+from pyherc.test.cutesy import affect, with_, potent_poison, weak_poison
+from pyherc.test.cutesy.dictionary import has_less_hit_points
 from pyherc.test.matchers import is_not_at
 from hamcrest import assert_that
 
@@ -34,6 +36,16 @@ class TestPoison(object):
         Default constructor
         """
         super(TestPoison, self).__init__()
+
+    def test_poison_causes_damage(self):
+        """
+        Test that triggered poison will damage character
+        """
+        Pete = strong(Adventurer())
+
+        affect(Pete, with_(weak_poison()))
+
+        assert_that(Pete, has_less_hit_points())
 
     def test_character_can_die_from_poisoning(self):
         """

@@ -400,6 +400,9 @@ def affect(target, effect_spec):
 
     new_effect = effect_type(**effect_spec)
 
+    target.old_values = {}
+    target.old_values['hit points'] = target.hit_points
+
     new_effect.trigger()
 
 def with_(effect_spec):
@@ -427,4 +430,20 @@ def potent_poison(target = None):
             'frequency': 1,
             'tick': 0,
             'damage': 100,
+            'target': target}
+
+def weak_poison(target = None):
+    """
+    Creates effect specification for poison
+
+    :param target: target of the effect
+    :type target: Character
+    :returns: effect specification
+    :rtype: {}
+    """
+    return {'effect_type': Poison,
+            'duration': 1,
+            'frequency': 1,
+            'tick': 0,
+            'damage': 1,
             'target': target}
