@@ -27,6 +27,7 @@ from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import ItemBuilder
 
 from pyherc.rules import AttackParameters
+from pyherc.data.effects import Poison
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
@@ -383,3 +384,47 @@ def at_(loc_x, loc_y):
     :rtype: (int, int)
     """
     return (loc_x, loc_y)
+
+def affect(target, effect_spec):
+    """
+    Triggers an effect on target
+
+    :param target: target of the effect
+    :type target: Character
+    :param effect_spec: effect specification
+    :type effect_spec: {}
+    """
+    effect_type = effect_spec['effect_type']
+    del effect_spec['effect_type']
+    effect_spec['target'] = target
+
+    new_effect = effect_type(**effect_spec)
+
+    new_effect.trigger()
+
+def with_(effect_spec):
+    """
+    Syntactic sugar
+
+    :param effect_spec: effect specification
+    :type effect_spec: {}
+    :returns: effect specification
+    :rtype: {}
+    """
+    return effect_spec
+
+def potent_poison(target = None):
+    """
+    Creates effect specification for poison
+
+    :param target: target of the effect
+    :type target: Character
+    :returns: effect specification
+    :rtype: {}
+    """
+    return {'effect_type': Poison,
+            'duration': 1,
+            'frequency': 1,
+            'tick': 0,
+            'damage': 100,
+            'target': target}

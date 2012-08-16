@@ -23,3 +23,4 @@ Package for testing dsl
 """
 
 from .dictionary import at_
+from .dictionary import affect, with_, potent_poison

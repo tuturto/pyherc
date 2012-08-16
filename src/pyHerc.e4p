@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-08-15, 07:30:22 -->
+<!-- Saved: 2012-08-16, 12:55:32 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -172,6 +172,7 @@
     <Source>pyherc/data/effects/poison.py</Source>
     <Source>pyherc/generators/effects.py</Source>
     <Source>pyherc/data/effects/effectscollection.py</Source>
+    <Source>pyherc/test/bdd/test_poison.py</Source>
   </Sources>
   <Forms>
   </Forms>
