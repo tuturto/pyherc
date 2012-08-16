@@ -130,13 +130,13 @@ class IsLocatedIn(BaseMatcher):
         mismatch_description.append('Was level with creatures {0}'
                                     .format(self.level.creatures))
 
-def is_at(level):
+def is_in(level):
     """
     Check that level does have given creature
     """
     return IsLocatedIn(level)
 
-def is_not_at(level):
+def is_not_in(level):
     """
     Check that level does not have given creature
     """

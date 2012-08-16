@@ -24,7 +24,7 @@ Package for customer pyHamcrest matchers used in testing
 
 from .map_connectivity import is_fully_accessible_via
 from .map_connectivity import located_in_room
-from .contains_creature import has_creature, is_at, is_not_at
+from .contains_creature import has_creature, is_in, is_not_in
 from .active_effects import has_effects, has_no_effects
 from .active_effects import has_effect
 from .items import does_have_item

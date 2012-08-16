@@ -24,7 +24,7 @@ from pyherc.test.cutesy.dictionary import Level
 from pyherc.test.cutesy.dictionary import place, middle_of
 from pyherc.test.cutesy import affect, with_, potent_poison, weak_poison
 from pyherc.test.cutesy.dictionary import has_less_hit_points
-from pyherc.test.matchers import is_dead, is_not_at
+from pyherc.test.matchers import is_dead, is_not_in
 from hamcrest import assert_that
 
 class TestPoison(object):
@@ -58,4 +58,4 @@ class TestPoison(object):
         affect(Uglak, with_(potent_poison()))
 
         assert_that(Uglak, is_dead())
-        assert_that(Uglak, is_not_at(room))
+        assert_that(Uglak, is_not_in(room))

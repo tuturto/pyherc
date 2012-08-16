@@ -26,7 +26,7 @@ from pyherc.data.effects import Poison
 from pyherc.generators import EffectsFactory
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import LevelBuilder
-from pyherc.test.matchers import has_effect, is_not_at
+from pyherc.test.matchers import has_effect, is_not_in
 from mockito import mock, verify, any
 from hamcrest import * #pylint: disable=W0401
 
