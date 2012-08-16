@@ -21,4 +21,5 @@
 """
 Package for testing dsl
 """
-pass
+
+from .dictionary import at_

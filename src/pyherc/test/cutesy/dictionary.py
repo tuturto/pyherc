@@ -370,3 +370,16 @@ def has_less_hit_points():
     Check that hit points have gone down
     """
     return HasLessHitPoints()
+
+def at_(loc_x, loc_y):
+    """
+    Create a new location entity
+
+    :param loc_x: x-coordinate of location
+    :type loc_x: int
+    :param loc_y: y-coordinate of location
+    :type loc_y: int
+    :returns: location
+    :rtype: (int, int)
+    """
+    return (loc_x, loc_y)
