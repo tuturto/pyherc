@@ -53,13 +53,13 @@ class TestMeleeCombat(object):
         self.modle = None
         self.character1 = None
         self.character2 = None
+        self.observer = None
         self.action_factory = None
 
     def setup(self):
         """
         Setup for testcases
         """
-
         self.model = Model()
 
         self.action_factory = (ActionFactoryBuilder()
@@ -80,10 +80,14 @@ class TestMeleeCombat(object):
                                 .with_body(5)
                                 .build())
 
+        self.observer = mock()
+        when(self.observer).build().thenReturn(self.observer)
+
         self.model.dungeon = Dungeon()
         self.level = (LevelBuilder()
                         .with_character(self.character1, at_(5, 5))
                         .with_character(self.character2, at_(6, 5))
+                        .with_character(self.observer, at_(2, 3))
                         .build())
 
         self.model.dungeon.levels = self.level
@@ -107,53 +111,27 @@ class TestMeleeCombat(object):
         """
         Test that landing an unarmed hit will raise correct event
         """
-        character1 = (CharacterBuilder()
-                        .with_model(self.model)
-                        .with_attack(12)
-                        .with_speed(1)
-                        .with_tick(0)
-                        .build())
-
-        self.level.add_creature(character1, (2, 2))
-
-        character2 = mock(Character)
-        character2.hit_points = 20
-        self.level.add_creature(character2, (2, 3))
-
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
 
-        character1.perform_attack(5,
-                                  self.action_factory,
-                                  rng)
+        self.character1.perform_attack(3,
+                                       self.action_factory,
+                                       rng)
 
-        verify(character2).receive_event(any(AttackHitEvent))
+        verify(self.observer).receive_event(any(AttackHitEvent))
 
     def test_unarmed_attack_miss_event(self):
         """
         Test that landing an unarmed miss will raise correct event
         """
-        character1 = (CharacterBuilder()
-                        .with_model(self.model)
-                        .with_attack(12)
-                        .with_speed(1)
-                        .with_tick(0)
-                        .build())
-
-        self.level.add_creature(character1, (2, 2))
-
-        character2 = mock(Character)
-        character2.hit_points = 20
-        self.level.add_creature(character2, (2, 3))
-
         rng = mock()
         when(rng).randint(1, 6).thenReturn(6)
 
-        character1.perform_attack(5,
-                                  self.action_factory,
-                                  rng)
+        self.character1.perform_attack(3,
+                                       self.action_factory,
+                                       rng)
 
-        verify(character2).receive_event(any(AttackMissEvent))
+        verify(self.observer).receive_event(any(AttackMissEvent))
 
     def test_attack_into_air_raises_event(self):
         """
@@ -161,22 +139,17 @@ class TestMeleeCombat(object):
         """
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
-        observer = mock(Character)
-        self.level.add_creature(observer, (2, 3))
 
         self.character1.perform_attack(1,
                                        self.action_factory,
                                        rng)
 
-        verify(observer).receive_event(any(AttackNothingEvent))
+        verify(self.observer).receive_event(any(AttackNothingEvent))
 
     def test_attacking_to_enter_direction_is_treated_like_attacking_air(self):
         """
         Attacking through portal should be treated like attacking into air
         """
-        observer = mock(Character)
-        self.level.add_creature(observer, (2, 3))
-
         action = self.action_factory.get_action(AttackParameters(
                                                       self.character1,
                                                       9,
