@@ -27,6 +27,8 @@ from PyQt4.QtCore import SIGNAL
 import PyQt4.QtGui
 import os
 
+from herculeum.gui.startgame import StartGameWidget
+
 class MainWindow(QMainWindow):
     """
     Class for displaying main window
@@ -99,7 +101,7 @@ class MainWindow(QMainWindow):
                      SIGNAL("triggered()"),
                      self.__show_new_game)
 
-        self.setGeometry(300, 300, 800, 600)
+        self.setGeometry(50, 50, 800, 600)
         self.setWindowTitle('Herculeum')
         self.setWindowIcon(QIcon(os.path.join(self.application.base_path,
                                                 'rune-stone.png')))
@@ -109,5 +111,8 @@ class MainWindow(QMainWindow):
         """
         Show new game dialog
         """
-        pass
+        start_dialog = StartGameWidget(parent = self,
+                                       application = self.application,
+                                       surface_manager = self.surface_manager)
 
+        start_dialog.open()

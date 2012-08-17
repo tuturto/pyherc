@@ -22,10 +22,12 @@
 Module for start game window related functionality
 """
 
-from PyQt4.QtGui import QWidget, QPushButton, QSizePolicy, QVBoxLayout
+from PyQt4.QtGui import QDialog, QPushButton, QSizePolicy, QVBoxLayout
+from PyQt4.QtGui import QHBoxLayout, QComboBox, QIcon
 import PyQt4.QtCore
+import os
 
-class StartGameWidget(QWidget):
+class StartGameWidget(QDialog):
     """
     Start menu
 
@@ -51,16 +53,28 @@ class StartGameWidget(QWidget):
                                        QSizePolicy.Fixed,
                                        QSizePolicy.Fixed))
 
-        vertical_layout = QVBoxLayout()
-
+        horizontal_layout = QHBoxLayout()
 
         ok_button = QPushButton('Ok', self)
-        ok_button.resize(button .sizeHint())
+        ok_button.resize(ok_button.sizeHint())
 
         cancel_button = QPushButton('Cancel', self)
-        cancel_button.resize(button .sizeHint())
+        cancel_button.resize(cancel_button.sizeHint())
 
-        vertical_layout.addWidget(ok_button)
-        vertical_layout.addWidget(cancel_button)
+        horizontal_layout.addWidget(ok_button)
+        horizontal_layout.addWidget(cancel_button)
+
+        vertical_layout = QVBoxLayout()
+
+        kit_selection = QComboBox(self)
+        kit_selection.addItem('Adventurer')
+        kit_selection.addItem('Vampire Hunter')
+
+        vertical_layout.addWidget(kit_selection)
+        vertical_layout.addLayout(horizontal_layout)
 
         self.setLayout(vertical_layout)
+
+        self.setWindowTitle('New game')
+        self.setWindowIcon(QIcon(os.path.join(self.application.base_path,
+                                                'cycle.png')))
