@@ -44,22 +44,49 @@ class MainWindow(QMainWindow):
     def set_layout(self):
 
         #surface manager?
-        exitAction = QAction(QIcon(os.path.join(self.application.base_path,
+        new_action = QAction(QIcon(os.path.join(self.application.base_path,
+                                                'cycle.png')),
+                             '&New game',
+                             self)
+        new_action.setShortcut('Ctrl+N')
+        new_action.setStatusTip('Start a new game')
+
+        exit_action = QAction(QIcon(os.path.join(self.application.base_path,
                                                 'wooden-door.png')),
                              '&Quit',
                              self)
-        exitAction.setShortcut('Ctrl+Q')
-        exitAction.setStatusTip('Quit game')
-        exitAction.triggered.connect(PyQt4.QtGui.qApp.quit)
+        exit_action.setShortcut('Ctrl+Q')
+        exit_action.setStatusTip('Quit game')
+        exit_action.triggered.connect(PyQt4.QtGui.qApp.quit)
 
-        self.toolbar = self.addToolBar('Quit')
-        self.toolbar.addAction(exitAction)
+        inventory_action = QAction(QIcon(os.path.join(self.application.base_path,
+                                                      'swap-bag.png')),
+                                         'Inventory',
+                                         self)
+        inventory_action.setShortcut('Ctrl+I')
+        inventory_action.setStatusTip('Show inventory')
+
+        character_action = QAction(QIcon(os.path.join(self.application.base_path,
+                                                      'strong.png')),
+                                         'Character',
+                                         self)
+        character_action.setShortcut('Ctrl+C')
+        character_action.setStatusTip('Show character')
+
+        self.toolbar = self.addToolBar('toolbar')
+        self.toolbar.addAction(inventory_action)
+        self.toolbar.addAction(character_action)
 
         self.statusBar()
 
         menubar = self.menuBar()
-        fileMenu = menubar.addMenu('&File')
-        fileMenu.addAction(exitAction)
+        file_menu = menubar.addMenu('&File')
+        file_menu.addAction(new_action)
+        file_menu.addAction(exit_action)
+
+        actions_menu = menubar.addMenu('&Actions')
+        actions_menu.addAction(inventory_action)
+        actions_menu.addAction(character_action)
 
         self.ws = QWorkspace(self)
         self.ws.setScrollBarsEnabled(True)
@@ -67,4 +94,6 @@ class MainWindow(QMainWindow):
 
         self.setGeometry(300, 300, 800, 600)
         self.setWindowTitle('Herculeum')
+        self.setWindowIcon(QIcon(os.path.join(self.application.base_path,
+                                                'rune-stone.png')))
         self.show()
