@@ -26,6 +26,7 @@ from PyQt4.QtGui import QDialog, QPushButton, QSizePolicy, QVBoxLayout
 from PyQt4.QtGui import QHBoxLayout, QComboBox, QIcon
 import PyQt4.QtCore
 import os
+import pyherc
 
 class StartGameWidget(QDialog):
     """
@@ -43,6 +44,8 @@ class StartGameWidget(QDialog):
         self.application = application
         self.surface_manager = surface_manager
 
+        self.player_character = None
+
         self.__set_layout()
 
     def __set_layout(self):
@@ -57,6 +60,7 @@ class StartGameWidget(QDialog):
 
         ok_button = QPushButton('Ok', self)
         ok_button.resize(ok_button.sizeHint())
+        ok_button.clicked.connect(self.__generate_character)
 
         cancel_button = QPushButton('Cancel', self)
         cancel_button.resize(cancel_button.sizeHint())
@@ -75,6 +79,17 @@ class StartGameWidget(QDialog):
 
         self.setLayout(vertical_layout)
 
+        ok_button.setDefault(True)
+
         self.setWindowTitle('New game')
         self.setWindowIcon(QIcon(os.path.join(self.application.base_path,
                                                 'cycle.png')))
+
+    def __generate_character(self):
+        """
+        Generate player character based on selected settings
+        """
+        self.player_character = pyherc.rules.character.create_character('human',
+                                                'fighter',
+                                                self.application.world)
+        self.accept()

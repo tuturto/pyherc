@@ -23,9 +23,11 @@ Module for main window related functionality
 """
 
 from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QWorkspace
+from PyQt4.QtGui import QDialog
 from PyQt4.QtCore import SIGNAL
 import PyQt4.QtGui
 import os
+import pyherc.rules.character
 
 from herculeum.gui.startgame import StartGameWidget
 
@@ -115,4 +117,18 @@ class MainWindow(QMainWindow):
                                        application = self.application,
                                        surface_manager = self.surface_manager)
 
-        start_dialog.open()
+        result = start_dialog.exec_()
+
+        if result == QDialog.Accepted:
+            self.application.world.player = start_dialog.player_character
+
+            level_generator = self.application.level_generator_factory.get_generator('upper catacombs')
+
+            generator = pyherc.generators.dungeon.DungeonGenerator(
+                                self.application.creature_generator,
+                                self.application.item_generator,
+                                level_generator)
+
+            generator.generate_dungeon(self.application.world)
+            self.application.world.level = self.application.world.dungeon.levels
+            self.application.world.name = 'Adventurer'

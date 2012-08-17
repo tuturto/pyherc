@@ -67,16 +67,16 @@ class StartMenuWidget(QWidget):
         button.move(325, 200)
 
         button = QPushButton('Load game', self)
-        button.resize(button .sizeHint())
+        button.resize(button.sizeHint())
         button.move(325, 250)
 
         button = QPushButton('Options', self)
-        button.resize(button .sizeHint())
+        button.resize(button.sizeHint())
         button.move(325, 300)
 
         button = QPushButton('Quit', self)
         button.clicked.connect(PyQt4.QtCore.QCoreApplication.instance().quit)
-        button.resize(button .sizeHint())
+        button.resize(button.sizeHint())
         button.move(325, 350)
 
     def __start_new_game(self):
