@@ -22,6 +22,4 @@
 Package for gui elements
 """
 
-from .startmenu import StartMenu
-from .options import OptionsMenu
-from .gamewindow import GameWindow
+from .startmenu import StartMenuWidget

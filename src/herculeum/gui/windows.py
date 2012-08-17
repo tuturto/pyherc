@@ -42,7 +42,7 @@ from pygame.locals import K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8
 from pygame.locals import JOYAXISMOTION, JOYBUTTONUP
 
 from herculeum.gui.options import OptionsMenu
-from herculeum.gui.startmenu import StartMenu
+from herculeum.gui.startmenu import StartMenuWidget
 from herculeum.gui.gamewindow import GameWindow
 from herculeum.gui.inventory import InventoryWindow
 

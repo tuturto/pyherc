@@ -22,15 +22,14 @@
 Module for application level objects
 """
 import os.path
-import pygame
-import pgu.gui
-from herculeum.gui.windows import MainWindow
-from herculeum.gui.startmenu import StartMenu
 from herculeum.config import Configuration
 from pyherc.data.model import Model
 import sys
 import logging
 import herculeum.config.levels
+
+from herculeum.gui import StartMenuWidget
+from PyQt4.QtGui import QApplication
 
 class Application(object):
     """
@@ -74,15 +73,11 @@ class Application(object):
         """
         Starts the application
         """
-        self.screen = pygame.display.set_mode((800, 600),
-                                              pygame.SWSURFACE)
-        self.gui = MainWindow(self,
-                              self.base_path,
-                              self.surface_manager)
-        menu = StartMenu(self,
-                         self.surface_manager)
-        self.gui.connect(pgu.gui.QUIT, self.gui.quit, None)
-        self.gui.run(menu, screen = self.screen)
+        app = QApplication(sys.argv)
+        start_menu = StartMenuWidget(APP,
+                                     APP.surface_manager)
+        start_menu.show()
+        sys.exit(app.exec_())
 
     def __get_surface_manager(self):
         """
@@ -106,7 +101,8 @@ class Application(object):
         Args:
             state: String specifying which state to display
         """
-        self.gui.change_state(state)
+        #TODO: change state
+        #self.gui.change_state(state)
 
     def __get_action_factory(self):
         """

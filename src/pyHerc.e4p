@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-08-16, 17:02:29 -->
+<!-- Saved: 2012-08-17, 16:56:42 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -143,7 +143,6 @@
     <Source>herculeum/config/levels/configure_upper_crypt.py</Source>
     <Source>herculeum/gui/__init__.py</Source>
     <Source>herculeum/gui/core/__init__.py</Source>
-    <Source>herculeum/gui/core/container.py</Source>
     <Source>herculeum/gui/windows.py</Source>
     <Source>herculeum/gui/dialogs.py</Source>
     <Source>herculeum/gui/gamewindow.py</Source>

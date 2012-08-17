@@ -25,38 +25,29 @@ Module for start menu related functionality
 import logging
 import herculeum.gui.images
 import pyherc
-import pygame
-import pgu.gui
 import os
-from herculeum.gui.core import Container
 
-class StartMenu(Container):
+from PyQt4.QtGui import QWidget, QPushButton, QSizePolicy
+import PyQt4.QtCore
+
+class StartMenuWidget(QWidget):
     """
     Start menu
 
     .. versionadded:: 0.4
     """
 
-    def __init__(self,  application, surface_manager, **params):
+    def __init__(self,  application, surface_manager):
         """
         Initialises start menu
 
         :param application: instance of currently running application
         :type application: Application
         """
-        super(StartMenu, self).__init__(**params)
+        super(StartMenuWidget, self).__init__()
 
-        self.running = 1
-        self.selection = 0
         self.application = application
         self.surface_manager = surface_manager
-        self.logger = logging.getLogger('pyherc.gui.windows.StartMenu')
-
-        #if not pygame.mixer.music.get_busy():
-        #    pygame.mixer.music.load(os.path.join(application.base_path,
-        #        'music/demetrios_katis_-_the_gathering_of_the_tribes.ogg'))
-        #    pygame.mixer.music.set_volume(0.5)
-        #    pygame.mixer.music.play(-1)
 
         self.set_layout()
 
@@ -64,34 +55,35 @@ class StartMenu(Container):
         """
         Set layout of this screen
         """
-        bg = pgu.gui.Image(
-                self.surface_manager.get_image(
-                        herculeum.gui.images.image_start_menu))
-        self.add(bg, 0, 0)
+        self.setSizePolicy(QSizePolicy(
+                                       QSizePolicy.Fixed,
+                                       QSizePolicy.Fixed))
 
-        b = pgu.gui.Button("New game", width=150)
-        self.add(b, 325, 200)
-        b.connect(pgu.gui.CLICK, self.__start_new_game)
-        b.focus()
+        self.width = 800
+        self.height = 600
 
-        b = pgu.gui.Button("Load game", width=150)
-        self.add(b, 325, 250)
+        button = QPushButton('New game', self)
+        button.resize(button .sizeHint())
+        button.move(325, 200)
 
-        b = pgu.gui.Button("Options", width=150)
-        self.add(b, 325, 300)
-        b.connect(pgu.gui.CLICK, self.__options)
+        button = QPushButton('Load game', self)
+        button.resize(button .sizeHint())
+        button.move(325, 250)
 
-        b = pgu.gui.Button("Quit", width=150)
-        self.add(b, 325, 350)
-        b.connect(pgu.gui.CLICK, self.__quit_game)
+        button = QPushButton('Options', self)
+        button.resize(button .sizeHint())
+        button.move(325, 300)
+
+        button = QPushButton('Quit', self)
+        button.clicked.connect(PyQt4.QtCore.QCoreApplication.instance().quit)
+        button.resize(button .sizeHint())
+        button.move(325, 350)
 
     def __start_new_game(self):
         """
         Start a new game
         """
         self.logger.info('starting a new game')
-
-        pygame.mixer.music.fadeout(1000)
 
         newWindow = herculeum.gui.windows.StartNewGameWindow(self.application, self.surface_manager)
         newWindow.main_loop()
@@ -101,37 +93,8 @@ class StartMenu(Container):
 
         self.application.change_state('game window')
 
-        # newWindow = pyherc.gui.windows.OldGameWindow(self.application, self.screen, self.surface_manager)
-        # newWindow.main_loop()
-        #  self.logger.info('game finished')
-        # if self.application.running:
-        #    endResult = pyherc.rules.ending.check_result(self.application.world)
-        #    dialog = pyherc.gui.dialogs.EndScreen(self.application, self.screen, self.surface_manager)
-        #    dialog.show(endResult)
-
-        # self.repaint()
-        # self.application.change_state('game window')
-
-        #newWindow = pyherc.gui.windows.GameWindow(self.application, self.screen, self.surface_manager)
-        #newWindow.main_loop()
-        #self.logger.info('game finished')
-        #if self.application.running:
-        #    endResult = pyherc.rules.ending.check_result(self.application.world)
-        #    dialog = pyherc.gui.dialogs.EndScreen(self.application, self.screen, self.surface_manager)
-        #    dialog.show(endResult)
-
-        #self.repaint()
-
-    def __quit_game(self):
-        """
-        Quit game and exit
-        """
-        #pylint: disable=E1103
-        self.get_toplevel().quit()
-
     def __options(self):
         """
         Display options
         """
         self.application.change_state('options menu')
-
