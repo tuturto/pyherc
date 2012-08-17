@@ -55,12 +55,12 @@ class StartMenuWidget(QWidget):
         """
         Set layout of this screen
         """
+        self.width = 800
+        self.height = 600
+
         self.setSizePolicy(QSizePolicy(
                                        QSizePolicy.Fixed,
                                        QSizePolicy.Fixed))
-
-        self.width = 800
-        self.height = 600
 
         button = QPushButton('New game', self)
         button.resize(button .sizeHint())

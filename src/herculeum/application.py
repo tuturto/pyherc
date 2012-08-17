@@ -28,7 +28,7 @@ import sys
 import logging
 import herculeum.config.levels
 
-from herculeum.gui import StartMenuWidget
+from herculeum.gui import StartMenuWidget, MainWindow
 from PyQt4.QtGui import QApplication
 
 class Application(object):
@@ -74,9 +74,11 @@ class Application(object):
         Starts the application
         """
         app = QApplication(sys.argv)
-        start_menu = StartMenuWidget(APP,
-                                     APP.surface_manager)
-        start_menu.show()
+        main_window = MainWindow(APP,
+                                 APP.surface_manager)
+        #start_menu = StartMenuWidget(APP,
+        #                             APP.surface_manager)
+        #start_menu.show()
         sys.exit(app.exec_())
 
     def __get_surface_manager(self):
