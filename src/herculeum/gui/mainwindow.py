@@ -22,7 +22,7 @@
 Module for main window related functionality
 """
 
-from PyQt4.QtGui import QMainWindow, QAction, QIcon
+from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QWorkspace
 import PyQt4.QtGui
 import os
 
@@ -60,6 +60,10 @@ class MainWindow(QMainWindow):
         menubar = self.menuBar()
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(exitAction)
+
+        self.ws = QWorkspace(self)
+        self.ws.setScrollBarsEnabled(True)
+        self.setCentralWidget(self.ws)
 
         self.setGeometry(300, 300, 800, 600)
         self.setWindowTitle('Herculeum')
