@@ -34,7 +34,7 @@ class StartMenuWidget(QWidget):
     """
     Start menu
 
-    .. versionadded:: 0.4
+    .. versionadded:: 0.5
     """
 
     def __init__(self,  application, surface_manager):

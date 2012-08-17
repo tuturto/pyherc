@@ -23,12 +23,15 @@ Module for main window related functionality
 """
 
 from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QWorkspace
+from PyQt4.QtCore import SIGNAL
 import PyQt4.QtGui
 import os
 
 class MainWindow(QMainWindow):
     """
     Class for displaying main window
+
+    .. versionadded:: 0.5
     """
     def __init__(self, application, surface_manager):
         """
@@ -39,9 +42,9 @@ class MainWindow(QMainWindow):
         self.application = application
         self.surface_manager = surface_manager
 
-        self.set_layout()
+        self.__set_layout()
 
-    def set_layout(self):
+    def __set_layout(self):
 
         #surface manager?
         new_action = QAction(QIcon(os.path.join(self.application.base_path,
@@ -92,8 +95,19 @@ class MainWindow(QMainWindow):
         self.ws.setScrollBarsEnabled(True)
         self.setCentralWidget(self.ws)
 
+        self.connect(new_action,
+                     SIGNAL("triggered()"),
+                     self.__show_new_game)
+
         self.setGeometry(300, 300, 800, 600)
         self.setWindowTitle('Herculeum')
         self.setWindowIcon(QIcon(os.path.join(self.application.base_path,
                                                 'rune-stone.png')))
         self.show()
+
+    def __show_new_game(self):
+        """
+        Show new game dialog
+        """
+        pass
+
