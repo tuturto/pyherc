@@ -31,7 +31,7 @@ class PlayMapWindow(QMdiSubWindow):
 
     .. versionadded:: 0.5
     """
-    def __init__(self, parent, model, surface_manager, action_factory):
+    def __init__(self, parent, model, surface_manager, action_factory, rng):
         """
         Default constructor
         """
@@ -40,17 +40,19 @@ class PlayMapWindow(QMdiSubWindow):
         self.model = model
         self.surface_manager = surface_manager
         self.action_factory = action_factory
+        self.rng = rng
 
-        self.__set_layout(model, surface_manager, action_factory)
+        self.__set_layout(model, surface_manager, action_factory, rng)
 
-    def __set_layout(self, model, surface_manager, action_factory):
+    def __set_layout(self, model, surface_manager, action_factory, rng):
         """
         Set layout of this window
         """
         self.map_widget = PlayMapWidget(parent = self,
                                         model = model,
                                         surface_manager = surface_manager,
-                                        action_factory = action_factory)
+                                        action_factory = action_factory,
+                                        rng = rng)
 
         self.setWidget(self.map_widget)
 
@@ -64,7 +66,7 @@ class PlayMapWidget(QWidget):
 
     .. versionadded:: 0.5
     """
-    def __init__(self, parent, model, surface_manager, action_factory):
+    def __init__(self, parent, model, surface_manager, action_factory, rng):
         """
         Default constructor
         """
@@ -74,6 +76,7 @@ class PlayMapWidget(QWidget):
         self.scene = None
         self.surface_manager = surface_manager
         self.action_factory = action_factory
+        self.rng = rng
 
         self.move_key_map = {Qt.Key_8:1, Qt.Key_9:2, Qt.Key_6:3, Qt.Key_3:4,
                              Qt.Key_2:5, Qt.Key_1:6, Qt.Key_4:7, Qt.Key_7:8,
@@ -138,19 +141,28 @@ class PlayMapWidget(QWidget):
         key_code = event.key()
 
         player = self.model.player
+        next_creature = self.model.get_next_creature()
 
-        if key_code in self.move_key_map.keys():
-            direction = self.move_key_map[key_code]
+        if next_creature == player:
 
-            if player.is_move_legal(direction,
-                                    'walk',
-                                    self.action_factory):
-                player.move(direction,
-                            self.action_factory)
-            elif direction != 9:
-                player.perform_attack(direction,
-                                      self.action_factory,
-                                      self.application.rng)
+            if key_code in self.move_key_map.keys():
+                direction = self.move_key_map[key_code]
+
+                if player.is_move_legal(direction,
+                                        'walk',
+                                        self.action_factory):
+                    player.move(direction,
+                                self.action_factory)
+                elif direction != 9:
+                    player.perform_attack(direction,
+                                          self.action_factory,
+                                          self.application.rng)
+        else:
+            while next_creature != player:
+                next_creature.act(model = self.model,
+                                  action_factory = self.action_factory,
+                                  rng = self.rng)
+                next_creature = self.model.get_next_creature()
 
 
 class MapGlyph(QGraphicsPixmapItem):

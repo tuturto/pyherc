@@ -139,5 +139,6 @@ class MainWindow(QMainWindow):
         map_window = PlayMapWindow(parent = self.mdi_area,
                                    model = self.application.world,
                                    surface_manager = self.surface_manager,
-                                   action_factory = self.application.action_factory)
+                                   action_factory = self.application.action_factory,
+                                   rng = self.application.rng)
         map_window.show()
