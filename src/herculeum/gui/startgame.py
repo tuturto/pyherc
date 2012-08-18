@@ -61,6 +61,7 @@ class StartGameWidget(QDialog):
         self.ok_button.resize(self.ok_button.sizeHint())
         self.ok_button.clicked.connect(self.__generate_character)
         self.cancel_button = QPushButton('Cancel', self)
+        self.cancel_button.clicked.connect(self.reject)
         self.cancel_button.resize(self.cancel_button.sizeHint())
         self.button_layout.addWidget(self.ok_button)
         self.button_layout.addWidget(self.cancel_button)
