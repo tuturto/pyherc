@@ -22,14 +22,15 @@
 Module for main window related functionality
 """
 
-from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QWorkspace
-from PyQt4.QtGui import QDialog
+from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QMdiArea
+from PyQt4.QtGui import QDialog, QPushButton, QWorkspace
 from PyQt4.QtCore import SIGNAL
 import PyQt4.QtGui
 import os
 import pyherc.rules.character
 
 from herculeum.gui.startgame import StartGameWidget
+from herculeum.gui.map import PlayMapWindow
 
 class MainWindow(QMainWindow):
     """
@@ -95,9 +96,9 @@ class MainWindow(QMainWindow):
         actions_menu.addAction(inventory_action)
         actions_menu.addAction(character_action)
 
-        self.ws = QWorkspace(self)
-        self.ws.setScrollBarsEnabled(True)
-        self.setCentralWidget(self.ws)
+        self.mdi_area = QWorkspace(self)
+        self.mdi_area.setScrollBarsEnabled(True)
+        self.setCentralWidget(self.mdi_area)
 
         self.connect(new_action,
                      SIGNAL("triggered()"),
@@ -131,3 +132,12 @@ class MainWindow(QMainWindow):
 
             generator.generate_dungeon(self.application.world)
             self.application.world.level = self.application.world.dungeon.levels
+
+            self.__show_map_window()
+
+    def __show_map_window(self):
+        """
+        Show map window
+        """
+        map_window = PlayMapWindow(self.mdi_area)
+        map_window.show()
