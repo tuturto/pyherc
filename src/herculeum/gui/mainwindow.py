@@ -24,7 +24,7 @@ Module for main window related functionality
 
 from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QMdiArea
 from PyQt4.QtGui import QDialog, QPushButton, QWorkspace
-from PyQt4.QtCore import SIGNAL
+from PyQt4.QtCore import SIGNAL, Qt
 import PyQt4.QtGui
 import os
 import pyherc.rules.character
@@ -96,8 +96,9 @@ class MainWindow(QMainWindow):
         actions_menu.addAction(inventory_action)
         actions_menu.addAction(character_action)
 
-        self.mdi_area = QWorkspace(self)
-        self.mdi_area.setScrollBarsEnabled(True)
+        self.mdi_area = QMdiArea(self)
+        self.mdi_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.mdi_area.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.setCentralWidget(self.mdi_area)
 
         self.connect(new_action,
