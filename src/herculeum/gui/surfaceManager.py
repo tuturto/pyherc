@@ -205,6 +205,22 @@ class SurfaceManager:
         tiles = self.split_surface(surface, (32, 32))
         self.icons[herculeum.config.tiles.ICON_QUIT_GAME] = tiles[0]
 
+        surface = self.__load_image(base_path, 'cycle.png')
+        tiles = self.split_surface(surface, (32, 32))
+        self.icons[herculeum.config.tiles.ICON_NEW_GAME] = tiles[0]
+
+        surface = self.__load_image(base_path, 'swap-bag.png')
+        tiles = self.split_surface(surface, (32, 32))
+        self.icons[herculeum.config.tiles.ICON_INVENTORY] = tiles[0]
+
+        surface = self.__load_image(base_path, 'strong.png')
+        tiles = self.split_surface(surface, (32, 32))
+        self.icons[herculeum.config.tiles.ICON_CHARACTER] = tiles[0]
+
+        surface = self.__load_image(base_path, 'rune-stone.png')
+        tiles = self.split_surface(surface, (32, 32))
+        self.icons[herculeum.config.tiles.ICON_HERCULEUM] = tiles[0]
+
         self.logger.info('resources loaded')
 
     def split_surface(self, image, tile_size):

@@ -31,7 +31,7 @@ import pyherc.rules.character
 
 from herculeum.gui.startgame import StartGameWidget
 from herculeum.gui.map import PlayMapWindow
-import herculeum.config.tiles
+from herculeum.config import tiles
 
 class MainWindow(QMainWindow):
     """
@@ -52,14 +52,13 @@ class MainWindow(QMainWindow):
 
     def __set_layout(self):
 
-        new_action = QAction(QIcon(os.path.join(self.application.base_path,
-                                                'cycle.png')),
+        new_action = QAction(QIcon(self.surface_manager.get_icon(tiles.ICON_NEW_GAME)),
                              '&New game',
                              self)
         new_action.setShortcut('Ctrl+N')
         new_action.setStatusTip('Start a new game')
 
-        exit_action = QAction(QIcon(self.surface_manager.get_icon(herculeum.config.tiles.ICON_QUIT_GAME)),
+        exit_action = QAction(QIcon(self.surface_manager.get_icon(tiles.ICON_QUIT_GAME)),
                              '&Quit',
                              self)
 
@@ -67,15 +66,13 @@ class MainWindow(QMainWindow):
         exit_action.setStatusTip('Quit game')
         exit_action.triggered.connect(PyQt4.QtGui.qApp.quit)
 
-        inventory_action = QAction(QIcon(os.path.join(self.application.base_path,
-                                                      'swap-bag.png')),
+        inventory_action = QAction(QIcon(self.surface_manager.get_icon(tiles.ICON_INVENTORY)),
                                          'Inventory',
                                          self)
         inventory_action.setShortcut('Ctrl+I')
         inventory_action.setStatusTip('Show inventory')
 
-        character_action = QAction(QIcon(os.path.join(self.application.base_path,
-                                                      'strong.png')),
+        character_action = QAction(QIcon(self.surface_manager.get_icon(tiles.ICON_CHARACTER)),
                                          'Character',
                                          self)
         character_action.setShortcut('Ctrl+C')
@@ -107,8 +104,7 @@ class MainWindow(QMainWindow):
 
         self.setGeometry(50, 50, 800, 600)
         self.setWindowTitle('Herculeum')
-        self.setWindowIcon(QIcon(os.path.join(self.application.base_path,
-                                                'rune-stone.png')))
+        self.setWindowIcon(QIcon(self.surface_manager.get_icon(tiles.ICON_HERCULEUM)))
         self.show()
 
     def __show_new_game(self):
