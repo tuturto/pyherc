@@ -103,6 +103,21 @@ class PlayMapWidget(QWidget):
                 new_glyph.setPos(loc_x * 32, loc_y * 32)
                 new_scene.addItem(new_glyph)
 
+        for portal in level.portals:
+                new_glyph = MapGlyph(self.surface_manager.get_icon(portal.icon))
+                new_glyph.setPos(portal.location[0] * 32, portal.location[1] * 32)
+                new_scene.addItem(new_glyph)
+
+        for item in level.items:
+                new_glyph = MapGlyph(self.surface_manager.get_icon(item.icon))
+                new_glyph.setPos(item.location[0] * 32, item.location[1] * 32)
+                new_scene.addItem(new_glyph)
+
+        for creature in level.creatures:
+                new_glyph = MapGlyph(self.surface_manager.get_icon(creature.icon))
+                new_glyph.setPos(creature.location[0] * 32, creature.location[1] * 32)
+                new_scene.addItem(new_glyph)
+
         return new_scene
 
 class MapGlyph(QGraphicsPixmapItem):
