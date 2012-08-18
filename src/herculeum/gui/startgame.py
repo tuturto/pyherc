@@ -23,7 +23,7 @@ Module for start game window related functionality
 """
 
 from PyQt4.QtGui import QDialog, QPushButton, QSizePolicy, QVBoxLayout
-from PyQt4.QtGui import QHBoxLayout, QComboBox, QIcon
+from PyQt4.QtGui import QHBoxLayout, QComboBox, QIcon, QLabel, QLineEdit
 import PyQt4.QtCore
 import os
 import pyherc
@@ -56,30 +56,37 @@ class StartGameWidget(QDialog):
                                        QSizePolicy.Fixed,
                                        QSizePolicy.Fixed))
 
-        horizontal_layout = QHBoxLayout()
+        self.button_layout = QHBoxLayout()
+        self.ok_button = QPushButton('Ok', self)
+        self.ok_button.resize(self.ok_button.sizeHint())
+        self.ok_button.clicked.connect(self.__generate_character)
+        self.cancel_button = QPushButton('Cancel', self)
+        self.cancel_button.resize(self.cancel_button.sizeHint())
+        self.button_layout.addWidget(self.ok_button)
+        self.button_layout.addWidget(self.cancel_button)
 
-        ok_button = QPushButton('Ok', self)
-        ok_button.resize(ok_button.sizeHint())
-        ok_button.clicked.connect(self.__generate_character)
+        self.name_layout = QHBoxLayout()
+        self.name_label = QLabel('Name:', self)
+        self.name_text = QLineEdit('Adventurer', self)
+        self.name_layout.addWidget(self.name_label)
+        self.name_layout.addWidget(self.name_text)
 
-        cancel_button = QPushButton('Cancel', self)
-        cancel_button.resize(cancel_button.sizeHint())
+        self.kit_selection_layout = QHBoxLayout()
+        self.kit_selection_label = QLabel('Kit:', self)
+        self.kit_selection = QComboBox(self)
+        self.kit_selection.addItem('Adventurer')
+        self.kit_selection.addItem('Vampire Hunter')
+        self.kit_selection_layout.addWidget(self.kit_selection_label)
+        self.kit_selection_layout.addWidget(self.kit_selection)
 
-        horizontal_layout.addWidget(ok_button)
-        horizontal_layout.addWidget(cancel_button)
+        self.vertical_layout = QVBoxLayout()
+        self.vertical_layout.addLayout(self.name_layout)
+        self.vertical_layout.addLayout(self.kit_selection_layout)
+        self.vertical_layout.addLayout(self.button_layout)
 
-        vertical_layout = QVBoxLayout()
+        self.setLayout(self.vertical_layout)
 
-        kit_selection = QComboBox(self)
-        kit_selection.addItem('Adventurer')
-        kit_selection.addItem('Vampire Hunter')
-
-        vertical_layout.addWidget(kit_selection)
-        vertical_layout.addLayout(horizontal_layout)
-
-        self.setLayout(vertical_layout)
-
-        ok_button.setDefault(True)
+        self.ok_button.setDefault(True)
 
         self.setWindowTitle('New game')
         self.setWindowIcon(QIcon(os.path.join(self.application.base_path,
@@ -92,4 +99,5 @@ class StartGameWidget(QDialog):
         self.player_character = pyherc.rules.character.create_character('human',
                                                 'fighter',
                                                 self.application.world)
+        self.player_character.name = self.name_text.displayText()
         self.accept()

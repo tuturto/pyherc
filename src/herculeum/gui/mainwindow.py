@@ -131,4 +131,3 @@ class MainWindow(QMainWindow):
 
             generator.generate_dungeon(self.application.world)
             self.application.world.level = self.application.world.dungeon.levels
-            self.application.world.name = 'Adventurer'

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-08-17, 22:29:47 -->
+<!-- Saved: 2012-08-18, 08:17:08 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -174,6 +174,7 @@
     <Source>pyherc/test/bdd/test_poison.py</Source>
     <Source>pyherc/test/matchers/character.py</Source>
     <Source>herculeum/gui/startgame.py</Source>
+    <Source>herculeum/gui/mainwindow.py</Source>
   </Sources>
   <Forms>
   </Forms>
