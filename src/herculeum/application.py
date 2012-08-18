@@ -46,6 +46,7 @@ class Application(object):
         self.logger = None
         self.screen = None
         self.log_level = None
+        self.qt_app = QApplication(sys.argv)
 
     def process_command_line(self):
         """
@@ -73,13 +74,12 @@ class Application(object):
         """
         Starts the application
         """
-        app = QApplication(sys.argv)
         main_window = MainWindow(APP,
                                  APP.surface_manager)
         #start_menu = StartMenuWidget(APP,
         #                             APP.surface_manager)
         #start_menu.show()
-        sys.exit(app.exec_())
+        sys.exit(self.qt_app.exec_())
 
     def __get_surface_manager(self):
         """

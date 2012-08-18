@@ -31,6 +31,7 @@ import pyherc.rules.character
 
 from herculeum.gui.startgame import StartGameWidget
 from herculeum.gui.map import PlayMapWindow
+import herculeum.config.tiles
 
 class MainWindow(QMainWindow):
     """
@@ -51,7 +52,6 @@ class MainWindow(QMainWindow):
 
     def __set_layout(self):
 
-        #surface manager?
         new_action = QAction(QIcon(os.path.join(self.application.base_path,
                                                 'cycle.png')),
                              '&New game',
@@ -59,10 +59,10 @@ class MainWindow(QMainWindow):
         new_action.setShortcut('Ctrl+N')
         new_action.setStatusTip('Start a new game')
 
-        exit_action = QAction(QIcon(os.path.join(self.application.base_path,
-                                                'wooden-door.png')),
+        exit_action = QAction(QIcon(self.surface_manager.get_icon(herculeum.config.tiles.ICON_QUIT_GAME)),
                              '&Quit',
                              self)
+
         exit_action.setShortcut('Ctrl+Q')
         exit_action.setStatusTip('Quit game')
         exit_action.triggered.connect(PyQt4.QtGui.qApp.quit)

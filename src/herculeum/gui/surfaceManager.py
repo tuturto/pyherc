@@ -23,11 +23,13 @@ Module for handling loading of images and icons
 """
 
 import os, os.path
-import pygame
 import logging
 import images
 import herculeum.config.tiles
 import pyherc
+
+from PyQt4.QtGui import QPixmap
+from PyQt4.QtCore import QRect
 
 class SurfaceManager:
     """
@@ -42,29 +44,34 @@ class SurfaceManager:
         self.images = {}
         self.resourcesLoaded = 0
 
-    def load_surface(self, base_path, image_name):
+    def __load_image(self, base_path, image_name):
         """
         Load a file and return corresponding surface object
 
-        Args:
-            base_path: directory of the file
-            image_name: file name
+        :param base_path: directory of the file
+        :type base_path: string
+        :param image_name: file name
+        :type image_name: string
 
-        Returns:
-            Surface
+        :returns: image
+        :rtype: QPixmap
         """
-        return pygame.image.load(os.path.join(base_path, image_name))
+        image = QPixmap()
+        image.load(os.path.join(base_path, image_name))
+
+        return image
 
     def load_resources(self, base_path):
         """
         Load graphics from files
 
-        Args:
-            base_path: Path to directory where resources are location
+        :param base_path: path to directory where resources are location
+        :type base_path: string
         """
         self.logger.info('loading resources')
 
-        surface = self.load_surface(base_path, 'weapons.png')
+        surface = self.__load_image(base_path, 'weapons.png')
+
         tiles = self.split_surface(surface, (32, 32))
 
         self.icons[herculeum.config.tiles.ITEM_DAGGER_1] = tiles[3]
@@ -81,7 +88,7 @@ class SurfaceManager:
         self.icons[herculeum.config.tiles.ITEM_LONGSPEAR] = tiles[34]
         self.icons[herculeum.config.tiles.ITEM_SPEAR] = tiles[30]
 
-        surface = self.load_surface(base_path, 'monsters.png')
+        surface = self.__load_image(base_path, 'monsters.png')
         tiles = self.split_surface(surface, (32, 32))
 
         self.icons[herculeum.config.tiles.CREATURE_RAT_1] = tiles[24]
@@ -92,7 +99,7 @@ class SurfaceManager:
         self.icons[herculeum.config.tiles.CREATURE_BEETLE_2] = tiles[113]
         self.icons[herculeum.config.tiles.CREATURE_SPIDER_1] = tiles[122]
 
-        surface = self.load_surface(base_path, 'potions.png')
+        surface = self.__load_image(base_path, 'potions.png')
         tiles = self.split_surface(surface, (32, 32))
 
         self.icons[herculeum.config.tiles.ITEM_POTION_1] = tiles[0]
@@ -156,7 +163,7 @@ class SurfaceManager:
         self.icons[herculeum.config.tiles.ITEM_POTION_59] = tiles[58]
         self.icons[herculeum.config.tiles.ITEM_POTION_60] = tiles[59]
 
-        surface = self.load_surface(base_path, 'dungeon.png')
+        surface = self.__load_image(base_path, 'dungeon.png')
         tiles = self.split_surface(surface, (32, 32))
 
         self.icons[herculeum.config.tiles.FLOOR_ROCK] = tiles[9]
@@ -172,41 +179,48 @@ class SurfaceManager:
         self.icons[herculeum.config.tiles.PORTAL_STAIRS_DOWN] = tiles[260]
         self.icons[herculeum.config.tiles.PORTAL_STAIRS_UP] = tiles[261]
 
-        surface = self.load_surface(base_path, 'items.png')
+        surface = self.__load_image(base_path, 'items.png')
         tiles = self.split_surface(surface, (32, 32))
         self.icons[herculeum.config.tiles.ITEM_APPLE] = tiles[0]
         self.icons[herculeum.config.tiles.ITEM_CRYSTAL_SKULL] = tiles[1]
 
-        surface = self.load_surface(base_path, 'characters.png')
+        surface = self.__load_image(base_path, 'characters.png')
         tiles = self.split_surface(surface, (32, 32))
         self.icons[herculeum.config.tiles.HUMAN_FIGHTER] = tiles[3]
 
-        surface = self.load_surface(base_path, 'main_menu.png')
+        surface = self.__load_image(base_path, 'main_menu.png')
         self.images[images.image_start_menu] = surface
-        surface = self.load_surface(base_path, 'play_area.png')
+        surface = self.__load_image(base_path, 'play_area.png')
         self.images[images.image_play_area] = surface
-        surface = self.load_surface(base_path, 'inventory_menu.png')
+        surface = self.__load_image(base_path, 'inventory_menu.png')
         self.images[images.image_inventory_menu] = surface
-        surface = self.load_surface(base_path, 'image_marble_slate.png')
+        surface = self.__load_image(base_path, 'image_marble_slate.png')
         self.images[images.image_end_marble_slate] = surface
-        surface = self.load_surface(base_path, 'image_tombstone.png')
+        surface = self.__load_image(base_path, 'image_tombstone.png')
         self.images[images.image_end_tombstone] = surface
-        surface = self.load_surface(base_path, 'image_console.png')
+        surface = self.__load_image(base_path, 'image_console.png')
         self.images[images.image_console] = surface
+
+        surface = self.__load_image(base_path, 'wooden-door.png')
+        tiles = self.split_surface(surface, (32, 32))
+        self.icons[herculeum.config.tiles.ICON_QUIT_GAME] = tiles[0]
 
         self.logger.info('resources loaded')
 
-    def split_surface(self, surface, tile_size):
+    def split_surface(self, image, tile_size):
         """
-        Split surface to tiles
+        Split image to tiles
 
-        Args:
-            surface: Surface to split
-            tile_size: (width, height) size of the tile
+        :param image: image to split
+        :type image: QPixmap
+        :param tile_size: size of the tile
+        :type tile_size: (int, int)
+        :returns: array of tiles
+        :rtype: [QPixmap]
         """
         tiles = []
-        image_width = surface.get_width()
-        image_height = surface.get_height()
+        image_width = image.width()
+        image_height = image.height()
 
         tile_width = tile_size[0]
         tile_height = tile_size[1]
@@ -216,11 +230,13 @@ class SurfaceManager:
 
         for loc_y in range(y_repeats):
             for loc_x in range(x_repeats):
-                sub_surface = surface.subsurface(loc_x * tile_width,
-                                                 loc_y * tile_height,
-                                                 tile_width,
-                                                 tile_height)
-                tiles.append(sub_surface)
+                rect = QRect(loc_x * tile_width,
+                             loc_y * tile_height,
+                             tile_width,
+                             tile_height)
+
+                sub_image = image.copy(rect)
+                tiles.append(sub_image)
 
         return tiles
 
@@ -228,11 +244,10 @@ class SurfaceManager:
         """
         Get image with ID
 
-        Args:
-            id: ID number of the image to retrieve
-
-        Returns:
-            Image
+        :param id: ID number of the image to retrieve
+        :type id: int
+        :returns: image
+        :rtype: QPixmap
         """
         return self.images[id]
 
@@ -240,11 +255,10 @@ class SurfaceManager:
         """
         Get icon with ID
 
-        Args:
-            id: ID number of the icon to retrieve
-
-        Returns:
-            Icon if found, otherwise empty icon
+        :param id: ID number of the icon to retrieve
+        :type id: int
+        :returns: icon if found, otherwise empty icon
+        :rtype: QPixmap
         """
         if id in self.icons.keys():
             return self.icons[id]

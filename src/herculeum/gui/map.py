@@ -22,7 +22,7 @@
 Module for main map related functionality
 """
 from PyQt4.QtGui import QMdiSubWindow, QWidget
-from PyQt4.QtGui import QPushButton
+from PyQt4.QtGui import QGraphicsPixmapItem
 from PyQt4.QtCore import QSize
 
 class PlayMapWindow(QMdiSubWindow):
@@ -62,3 +62,13 @@ class PlayMapWidget(QWidget):
         Default constructor
         """
         super(PlayMapWidget, self).__init__(parent)
+
+class MapGlyph(QGraphicsPixmapItem):
+    """
+    Widget to represent a glyph on map
+    """
+    def __init__(self, pixmap, parent):
+        """
+        Default constructor
+        """
+        super(MapGlyph, self).__init__(pixmap, parent)
