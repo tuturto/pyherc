@@ -78,7 +78,7 @@ class PlayMapWidget(QWidget):
         """
         Set layout of this widget
         """
-        self.scene = self.construct_scene(self.model)
+        self.scene = self.__construct_scene(self.model)
 
         layout = QHBoxLayout()
 
@@ -88,7 +88,7 @@ class PlayMapWidget(QWidget):
         self.setLayout(layout)
 
 
-    def construct_scene(self, model):
+    def __construct_scene(self, model):
         """
         Constructs scene to display
         """
