@@ -136,5 +136,7 @@ class MainWindow(QMainWindow):
         """
         Show map window
         """
-        map_window = PlayMapWindow(self.mdi_area)
+        map_window = PlayMapWindow(parent = self.mdi_area,
+                                   model = self.application.world,
+                                   surface_manager = self.surface_manager)
         map_window.show()
