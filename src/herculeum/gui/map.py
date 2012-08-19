@@ -207,10 +207,14 @@ class MapGlyph(QGraphicsPixmapItem):
         if entity != None:
             entity.register_for_updates(self)
 
-    def receive_update(self, entity):
+    def receive_update(self, event):
         """
         Receive event from model
         """
-        if entity.location != None:
-            self.setPos(self.entity.location[0] * 32,
-                        self.entity.location[1] * 32)
+        if event.event_type == 'move':
+            location = event.mover.location
+            if location != None:
+                self.setPos(location[0] * 32,
+                            location[1] * 32)
+        #elif event.event_type == 'death':
+            #self.parentWidget().removeItem(self)

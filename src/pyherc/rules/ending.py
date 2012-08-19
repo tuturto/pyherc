@@ -23,6 +23,7 @@ Module for checking end conditions
 """
 
 import logging
+from pyherc.events import DeathEvent
 
 __logger = logging.getLogger('pyherc.rules.ending')
 
@@ -83,6 +84,8 @@ def check_dying(model, character, death_params):
     assert character != None
     if character.hit_points <= 0:
         if character != model.player:
+            character.raise_event(DeathEvent(deceased = character,
+                                             affected_tiles = character.location))
             character.level.remove_creature(character)
         else:
             model.end_condition = 1
