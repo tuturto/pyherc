@@ -96,6 +96,7 @@ class PlayMapWidget(QWidget):
         layout.addWidget(self.view)
 
         self.model.player.register_for_updates(self)
+        self.model.register_event_listener(self)
         self.__center_view_on_character(self.model.player)
 
         self.setLayout(layout)
@@ -153,9 +154,20 @@ class PlayMapWidget(QWidget):
 
         return new_scene
 
-    def receive_update(self, event):
+    def receive_event(self, event):
         """
         Receive event from model
+        """
+        if event.event_type == 'death':
+            glyphs = [x for x in self.view.items()
+                      if x.entity == event.deceased]
+
+            for glyph in glyphs:
+                self.view.scene().removeItem(glyph)
+
+    def receive_update(self, event):
+        """
+        Receive update from entity
         """
         if event.event_type == 'move':
             self.__center_view_on_character(self.model.player)
@@ -216,5 +228,3 @@ class MapGlyph(QGraphicsPixmapItem):
             if location != None:
                 self.setPos(location[0] * 32,
                             location[1] * 32)
-        #elif event.event_type == 'death':
-            #self.parentWidget().removeItem(self)
