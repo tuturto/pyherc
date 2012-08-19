@@ -23,7 +23,7 @@ Module for main window related functionality
 """
 
 from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QMdiArea
-from PyQt4.QtGui import QDialog, QPushButton, QWorkspace
+from PyQt4.QtGui import QDialog, QPushButton, QWorkspace, QDockWidget
 from PyQt4.QtCore import SIGNAL, Qt
 import PyQt4.QtGui
 import os
@@ -31,6 +31,7 @@ import pyherc.rules.character
 
 from herculeum.gui.startgame import StartGameWidget
 from herculeum.gui.map import PlayMapWindow
+from herculeum.gui.eventdisplay import EventMessageDisplay
 from herculeum.config import tiles
 
 class MainWindow(QMainWindow):
@@ -78,9 +79,9 @@ class MainWindow(QMainWindow):
         character_action.setShortcut('Ctrl+C')
         character_action.setStatusTip('Show character')
 
-        self.toolbar = self.addToolBar('toolbar')
-        self.toolbar.addAction(inventory_action)
-        self.toolbar.addAction(character_action)
+        toolbar = self.addToolBar('Actions')
+        toolbar.addAction(inventory_action)
+        toolbar.addAction(character_action)
 
         self.statusBar()
 
@@ -131,6 +132,7 @@ class MainWindow(QMainWindow):
             self.application.world.level = self.application.world.dungeon.levels
 
             self.__show_map_window()
+            self.__show_message_window(self.application.world.player)
 
     def __show_map_window(self):
         """
@@ -142,3 +144,19 @@ class MainWindow(QMainWindow):
                                    action_factory = self.application.action_factory,
                                    rng = self.application.rng)
         map_window.show()
+
+    def __show_message_window(self, character):
+        """
+        Show message display
+
+        :param character: character which events to display
+        :type character: Character
+        """
+        messages_display = EventMessageDisplay(self)
+        dock = QDockWidget()
+        dock.setWidget(messages_display)
+        self.addDockWidget(Qt.BottomDockWidgetArea,
+                           dock)
+
+        character.register_event_listener(messages_display)
+        messages_display.set_point_of_view(character)
