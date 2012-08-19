@@ -178,14 +178,12 @@ class MapGlyph(QGraphicsPixmapItem):
         self.entity = entity
 
         if entity != None:
-            if hasattr(entity, 'register_event_listener'):
-                entity.register_event_listener(self)
+            entity.register_for_updates(self)
 
-    def receive_event(self, event):
+    def receive_update(self, entity):
         """
         Receive event from model
         """
-        if hasattr(event, 'mover'):
-            if event.mover == self.entity:
-                self.setPos(self.entity.location[0] * 32,
-                            self.entity.location[1] * 32)
+        if entity.location != None:
+            self.setPos(self.entity.location[0] * 32,
+                        self.entity.location[1] * 32)

@@ -47,6 +47,7 @@ class Portal(object):
         self.__other_end = None
         self.level_generator_name = level_generator_name
         self.model = None
+        self.__update_listeners = []
 
     @logged
     def get_other_end(self, level_generator_factory):
@@ -103,6 +104,28 @@ class Portal(object):
         :rtype: integer
         """
         return self.__icons[1]
+
+    @logged
+    def register_for_updates(self, listener):
+        """
+        Register listener to receive updates for this entity
+
+        :param listener: listener to add
+        :type listener: Listener
+
+        .. versionadded:: 0.5
+        """
+        self.__update_listeners.append(listener)
+
+    @logged
+    def notify_update_listeners(self):
+        """
+        Notify all listeners registered for update of this entity
+
+        .. versionadded:: 0.5
+        """
+        for listener in self.__update_listeners:
+            listener.receive_update(self)
 
     icon = property(__get_icon, __set_icon)
     other_end_icon = property(__get_other_end_icon)

@@ -65,6 +65,7 @@ class Character(object):
         self.tick = 0
         self.short_term_memory = []
         self.__event_listeners = []
+        self.__update_listeners = []
         self.item_memory = {}
         self.size = 'medium'
         self.attack = None
@@ -101,6 +102,28 @@ class Character(object):
         .. versionadded:: 0.4
         """
         self.__event_listeners.append(listener)
+
+    @logged
+    def register_for_updates(self, listener):
+        """
+        Register listener to receive updates for this entity
+
+        :param listener: listener to add
+        :type listener: Listener
+
+        .. versionadded:: 0.5
+        """
+        self.__update_listeners.append(listener)
+
+    @logged
+    def notify_update_listeners(self):
+        """
+        Notify all listeners registered for update of this entity
+
+        .. versionadded:: 0.5
+        """
+        for listener in self.__update_listeners:
+            listener.receive_update(self)
 
     @logged
     def act(self, model, action_factory, rng):
@@ -344,6 +367,10 @@ class Character(object):
                                                           direction,
                                                           'walk'))
         action.execute()
+        self.notify_update_listeners()
+
+        for listener in self.__update_listeners:
+            listener.receive_update(self)
 
     @logged
     def is_move_legal(self, direction, movement_mode, action_factory):

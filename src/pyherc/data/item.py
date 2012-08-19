@@ -56,6 +56,7 @@ class Item(object):
         self.rarity = None
         self.cost = None
         self.tags = {}
+        self.__update_listeners = []
 
     def __str__(self):
         return self.name
@@ -169,6 +170,28 @@ class Item(object):
         Return tags
         """
         return self.tags
+
+    @logged
+    def register_for_updates(self, listener):
+        """
+        Register listener to receive updates for this entity
+
+        :param listener: listener to add
+        :type listener: Listener
+
+        .. versionadded:: 0.5
+        """
+        self.__update_listeners.append(listener)
+
+    @logged
+    def notify_update_listeners(self):
+        """
+        Notify all listeners registered for update of this entity
+
+        .. versionadded:: 0.5
+        """
+        for listener in self.__update_listeners:
+            listener.receive_update(self)
 
 class WeaponData(object):
     """
