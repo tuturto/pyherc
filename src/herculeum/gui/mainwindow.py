@@ -23,7 +23,7 @@ Module for main window related functionality
 """
 
 from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QMdiArea
-from PyQt4.QtGui import QDialog, QPushButton, QWorkspace, QDockWidget
+from PyQt4.QtGui import QDialog, QPushButton, QWorkspace
 from PyQt4.QtCore import SIGNAL, Qt
 import PyQt4.QtGui
 import os
@@ -31,7 +31,7 @@ import pyherc.rules.character
 
 from herculeum.gui.startgame import StartGameWidget
 from herculeum.gui.map import PlayMapWindow
-from herculeum.gui.eventdisplay import EventMessageDisplay
+from herculeum.gui.eventdisplay import EventMessageDockWidget
 from herculeum.config import tiles
 
 class MainWindow(QMainWindow):
@@ -152,12 +152,8 @@ class MainWindow(QMainWindow):
         :param character: character which events to display
         :type character: Character
         """
-        messages_display = EventMessageDisplay(self)
-        dock = QDockWidget()
-        dock.setWidget(messages_display)
-        dock.setWindowTitle('Messages')
-        self.addDockWidget(Qt.BottomDockWidgetArea,
-                           dock)
+        messages_display = EventMessageDockWidget(self, character)
 
-        character.register_event_listener(messages_display)
-        messages_display.set_point_of_view(character)
+        self.addDockWidget(Qt.BottomDockWidgetArea,
+                           messages_display)
+

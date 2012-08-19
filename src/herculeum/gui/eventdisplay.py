@@ -22,10 +22,36 @@
 """
 Module displaying events on screen
 """
-from PyQt4.QtGui import QTextEdit, QWidget, QHBoxLayout
+from PyQt4.QtGui import QTextEdit, QWidget, QHBoxLayout, QDockWidget
 import PyQt4.QtGui
 
-class EventMessageDisplay(QWidget):
+class EventMessageDockWidget(QDockWidget):
+    """
+    Dock widget to display event messages
+    """
+    def __init__(self, parent, character):
+        """
+        Default constructor
+        """
+        super(EventMessageDockWidget, self).__init__(parent)
+
+        self.character = character
+
+        self.__set_layout(character)
+
+    def __set_layout(self, character):
+        """
+        Set layout of this widget
+        """
+        self.message_display = EventMessageWidget(self)
+        self.setWidget(self.message_display)
+        self.setWindowTitle('Messages')
+
+        character.register_event_listener(self.message_display)
+        self.message_display.set_point_of_view(character)
+
+
+class EventMessageWidget(QWidget):
     """
     Widget to display event messages
     """
@@ -33,7 +59,7 @@ class EventMessageDisplay(QWidget):
         """
         Default constructor
         """
-        super(EventMessageDisplay, self).__init__(parent)
+        super(EventMessageWidget, self).__init__(parent)
 
         self.__set_layout()
         self.__set_events_to_display()
