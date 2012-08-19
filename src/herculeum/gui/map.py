@@ -95,8 +95,23 @@ class PlayMapWidget(QWidget):
         self.view = QGraphicsView(self.scene)
         layout.addWidget(self.view)
 
+        self.model.player.register_for_updates(self)
+        self.__center_view_on_character(self.model.player)
+
         self.setLayout(layout)
 
+    def __center_view_on_character(self, entity):
+        """
+        Center view on given entity
+        """
+        location = entity.location
+        width = 320
+        height = 320
+
+        self.view.setSceneRect((location[0] * 32) - width // 2,
+                              (location[1] * 32) - height // 2,
+                              width,
+                              height)
 
     def __construct_scene(self, model):
         """
@@ -134,6 +149,12 @@ class PlayMapWidget(QWidget):
 
         return new_scene
 
+    def receive_update(self, entity):
+        """
+        Receive event from model
+        """
+        self.__center_view_on_character(self.model.player)
+
     def keyPressEvent(self, event):
         """
         Handle key events
@@ -157,12 +178,13 @@ class PlayMapWidget(QWidget):
                     player.perform_attack(direction,
                                           self.action_factory,
                                           self.application.rng)
-        else:
-            while next_creature != player:
-                next_creature.act(model = self.model,
-                                  action_factory = self.action_factory,
-                                  rng = self.rng)
-                next_creature = self.model.get_next_creature()
+
+        next_creature = self.model.get_next_creature()
+        while next_creature != player:
+            next_creature.act(model = self.model,
+                              action_factory = self.action_factory,
+                              rng = self.rng)
+            next_creature = self.model.get_next_creature()
 
 
 class MapGlyph(QGraphicsPixmapItem):
