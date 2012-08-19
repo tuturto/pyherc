@@ -116,14 +116,17 @@ class Character(object):
         self.__update_listeners.append(listener)
 
     @logged
-    def notify_update_listeners(self):
+    def notify_update_listeners(self, event):
         """
         Notify all listeners registered for update of this entity
+
+        :param event: event to relay to update listeners
+        :type event: Event
 
         .. versionadded:: 0.5
         """
         for listener in self.__update_listeners:
-            listener.receive_update(self)
+            listener.receive_update(event)
 
     @logged
     def act(self, model, action_factory, rng):
@@ -367,10 +370,6 @@ class Character(object):
                                                           direction,
                                                           'walk'))
         action.execute()
-        self.notify_update_listeners()
-
-        for listener in self.__update_listeners:
-            listener.receive_update(self)
 
     @logged
     def is_move_legal(self, direction, movement_mode, action_factory):
@@ -476,6 +475,7 @@ class Character(object):
         :type event: Event
         """
         self.model.raise_event(event)
+        self.notify_update_listeners(event)
 
     @logged
     def add_effect_handle(self, effect):

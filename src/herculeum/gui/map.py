@@ -153,11 +153,12 @@ class PlayMapWidget(QWidget):
 
         return new_scene
 
-    def receive_update(self, entity):
+    def receive_update(self, event):
         """
         Receive event from model
         """
-        self.__center_view_on_character(self.model.player)
+        if event.event_type == 'move':
+            self.__center_view_on_character(self.model.player)
 
     def keyPressEvent(self, event):
         """

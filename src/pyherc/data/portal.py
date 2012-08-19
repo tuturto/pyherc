@@ -118,14 +118,17 @@ class Portal(object):
         self.__update_listeners.append(listener)
 
     @logged
-    def notify_update_listeners(self):
+    def notify_update_listeners(self, event):
         """
         Notify all listeners registered for update of this entity
+
+        :param event: event to relay to update listeners
+        :type event: Event
 
         .. versionadded:: 0.5
         """
         for listener in self.__update_listeners:
-            listener.receive_update(self)
+            listener.receive_update(event)
 
     icon = property(__get_icon, __set_icon)
     other_end_icon = property(__get_other_end_icon)

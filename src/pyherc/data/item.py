@@ -184,14 +184,17 @@ class Item(object):
         self.__update_listeners.append(listener)
 
     @logged
-    def notify_update_listeners(self):
+    def notify_update_listeners(self, event):
         """
         Notify all listeners registered for update of this entity
+
+        :param event: event to relay to update listeners
+        :type event: Event
 
         .. versionadded:: 0.5
         """
         for listener in self.__update_listeners:
-            listener.receive_update(self)
+            listener.receive_update(event)
 
 class WeaponData(object):
     """
