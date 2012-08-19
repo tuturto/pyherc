@@ -155,6 +155,7 @@ class MainWindow(QMainWindow):
         messages_display = EventMessageDisplay(self)
         dock = QDockWidget()
         dock.setWidget(messages_display)
+        dock.setWindowTitle('Messages')
         self.addDockWidget(Qt.BottomDockWidgetArea,
                            dock)
 
