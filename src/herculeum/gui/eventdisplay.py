@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2012 Tuukka Turto
@@ -28,6 +27,8 @@ import PyQt4.QtGui
 class EventMessageDockWidget(QDockWidget):
     """
     Dock widget to display event messages
+
+    .. versionadded:: 0.5
     """
     def __init__(self, parent, character):
         """
@@ -54,6 +55,8 @@ class EventMessageDockWidget(QDockWidget):
 class EventMessageWidget(QWidget):
     """
     Widget to display event messages
+
+    .. versionadded:: 0.5
     """
     def __init__(self, parent):
         """

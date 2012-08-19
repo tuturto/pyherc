@@ -21,8 +21,7 @@ Installing the game
 Dependencies
 ============
 - Python 2.6.1
-- PyGame 1.9.2
-- PGU 0.18
+- PyQt4
 - Aspyct 3.0 beta 4 (packaged with the system)
 - web.py 0.3 (only needed for running debug server)
 - mockito-python 0.5.0 (only needed for running test cases)
@@ -36,20 +35,14 @@ Install python 2.7 from Python_.
 
 Install setuptools, by following instructions at: setuptools_.
 
+Install PyQt4, by following instructions at: PyQt4_
+
 Install pip (only needed for installing qc)::
 
     easy_install -U pip
 
 Rest of the dependencies can be automatically located and installed by following
 steps:
-
-Install PyGame by typing::
-
-    easy_install -U pygame
-
-Install PGU by typing::
-
-    easy_install -U pgu
 
 If you want to run debug server, install web.py::
 
@@ -67,6 +60,7 @@ If you want to generate html manual and programmers guide, install Sphinx::
 
 .. _Python: http://python.org/getit/
 .. _setuptools: http://pypi.python.org/pypi/setuptools
+.. _PyQt4: http://www.riverbankcomputing.co.uk/software/pyqt/intro
 
 Last step is to extract installation package to suitable folder.
 

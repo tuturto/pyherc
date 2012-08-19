@@ -6,7 +6,7 @@ Release 0.5
 New features
 ************
 
-  - None
+  - User interface rewrite with Qt
 
 **********
 Fixed bugs

@@ -6,11 +6,9 @@ herculeum.gui
 .. toctree::
    :maxdepth: 2
    
-   core/package_core
-   module_dialogs
+   module_eventdisplay
    module_images
-   module_inventory
-   module_startmenu
-   module_options
+   module_mainwindow
+   module_map
+   module_startgame
    module_surfacemanager
-   module_windows

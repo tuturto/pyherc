@@ -7,6 +7,7 @@ pyherc.events
    :maxdepth: 2
    
    module_combat
+   module_death
    module_event
    module_move
    

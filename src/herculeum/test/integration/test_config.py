@@ -28,6 +28,7 @@ from pyherc.rules import InventoryParameters
 from pyherc.test.integration import detect_base_path
 from mockito import mock
 from hamcrest import *
+from PyQt4.QtGui import QApplication
 import herculeum.config.levels
 
 class TestMainConfiguration():
@@ -44,6 +45,7 @@ class TestMainConfiguration():
         """
         Setup test case
         """
+        app = QApplication([])
         base_path = detect_base_path()
         self.config = Configuration(base_path, mock())
         self.config.initialise(herculeum.config.levels)

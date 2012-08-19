@@ -11,8 +11,7 @@ posses it.
 System Requirements
 ===================
 Python 2.6.1
-PyGame 1.9.2
-PGU 0.18
+PyQt4
 Aspyct 3.0 beta 4
 web.py 0.3 (only needed for running debug server)
 mockito-python 0.5.0 (only needed for running test cases)

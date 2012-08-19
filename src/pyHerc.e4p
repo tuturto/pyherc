@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-08-19, 20:18:58 -->
+<!-- Saved: 2012-08-19, 21:33:33 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -142,13 +142,7 @@
     <Source>herculeum/config/levels/configure_catacombs.py</Source>
     <Source>herculeum/config/levels/configure_upper_crypt.py</Source>
     <Source>herculeum/gui/__init__.py</Source>
-    <Source>herculeum/gui/windows.py</Source>
-    <Source>herculeum/gui/dialogs.py</Source>
-    <Source>herculeum/gui/gamewindow.py</Source>
     <Source>herculeum/gui/images.py</Source>
-    <Source>herculeum/gui/inventory.py</Source>
-    <Source>herculeum/gui/options.py</Source>
-    <Source>herculeum/gui/startmenu.py</Source>
     <Source>herculeum/gui/surfaceManager.py</Source>
     <Source>herculeum/test/__init__.py</Source>
     <Source>herculeum/test/unit/__init__.py</Source>
@@ -156,7 +150,6 @@
     <Source>herculeum/test/integration/test_config.py</Source>
     <Source>herculeum/config/tiles.py</Source>
     <Source>herculeum/application.py</Source>
-    <Source>herculeum/test/unit/test_gui.py</Source>
     <Source>herculeum/config/config.py</Source>
     <Source>herculeum/config/levels/configure_items.py</Source>
     <Source>herculeum/config/levels/effects.py</Source>
@@ -172,11 +165,11 @@
     <Source>pyherc/data/effects/effectscollection.py</Source>
     <Source>pyherc/test/bdd/test_poison.py</Source>
     <Source>pyherc/test/matchers/character.py</Source>
-    <Source>herculeum/gui/startgame.py</Source>
     <Source>herculeum/gui/mainwindow.py</Source>
     <Source>herculeum/gui/map.py</Source>
     <Source>herculeum/gui/eventdisplay.py</Source>
     <Source>pyherc/events/death.py</Source>
+    <Source>herculeum/gui/startgame.py</Source>
   </Sources>
   <Forms>
   </Forms>

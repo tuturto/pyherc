@@ -207,6 +207,8 @@ class PlayMapWidget(QWidget):
 class MapGlyph(QGraphicsPixmapItem):
     """
     Widget to represent a glyph on map
+
+    .. versionadded:: 0.5
     """
     def __init__(self, pixmap, entity):
         """

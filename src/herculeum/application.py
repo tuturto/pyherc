@@ -28,7 +28,7 @@ import sys
 import logging
 import herculeum.config.levels
 
-from herculeum.gui import StartMenuWidget, MainWindow
+from herculeum.gui import MainWindow
 from PyQt4.QtGui import QApplication
 
 class Application(object):

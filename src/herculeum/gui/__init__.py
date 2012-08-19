@@ -22,5 +22,4 @@
 Package for gui elements
 """
 
-from .startmenu import StartMenuWidget
 from .mainwindow import MainWindow
