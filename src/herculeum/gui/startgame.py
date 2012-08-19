@@ -100,5 +100,5 @@ class StartGameWidget(QDialog):
         self.player_character = pyherc.rules.character.create_character('human',
                                                 'fighter',
                                                 self.application.world)
-        self.player_character.name = self.name_text.displayText()
+        self.player_character.name = str(self.name_text.displayText())
         self.accept()

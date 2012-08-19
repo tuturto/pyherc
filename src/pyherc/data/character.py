@@ -410,11 +410,12 @@ class Character(object):
         else:
             attack_type = 'melee'
         action = action_factory.get_action(
-                                           AttackParameters(
-                                                            self,
-                                                            direction,
-                                                            attack_type,
-                                                            rng))
+                            AttackParameters(
+                                attacker = self,
+                                direction = direction,
+                                attack_type = attack_type,
+                                random_number_generator = rng))
+
         action.execute()
 
     @logged

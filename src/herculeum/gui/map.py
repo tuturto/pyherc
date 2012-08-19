@@ -181,7 +181,7 @@ class PlayMapWidget(QWidget):
                 elif direction != 9:
                     player.perform_attack(direction,
                                           self.action_factory,
-                                          self.application.rng)
+                                          self.rng)
 
         next_creature = self.model.get_next_creature()
         while next_creature != player:
