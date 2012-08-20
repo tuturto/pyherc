@@ -32,6 +32,7 @@ import pyherc.rules.character
 from herculeum.gui.startgame import StartGameWidget
 from herculeum.gui.map import PlayMapWindow
 from herculeum.gui.eventdisplay import EventMessageDockWidget
+from herculeum.gui.inventory import InventoryDockWidget
 from herculeum.config import tiles
 
 class MainWindow(QMainWindow):
@@ -72,6 +73,7 @@ class MainWindow(QMainWindow):
                                          self)
         inventory_action.setShortcut('Ctrl+I')
         inventory_action.setStatusTip('Show inventory')
+        inventory_action.triggered.connect(self.__show_inventory)
 
         character_action = QAction(QIcon(self.surface_manager.get_icon(tiles.ICON_CHARACTER)),
                                          'Character',
@@ -157,3 +159,13 @@ class MainWindow(QMainWindow):
         self.addDockWidget(Qt.BottomDockWidgetArea,
                            messages_display)
 
+
+    def __show_inventory(self):
+        """
+        Show inventory
+        """
+        inventory_display = InventoryDockWidget(self.surface_manager,
+                                                self)
+
+        self.addDockWidget(Qt.LeftDockWidgetArea,
+                           inventory_display)

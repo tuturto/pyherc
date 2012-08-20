@@ -8,6 +8,7 @@ herculeum.gui
    
    module_eventdisplay
    module_images
+   module_inventory
    module_mainwindow
    module_map
    module_startgame
