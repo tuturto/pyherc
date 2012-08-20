@@ -184,6 +184,18 @@ class Item(object):
         self.__update_listeners.append(listener)
 
     @logged
+    def remove_from_updates(self, listener):
+        """
+        Remove listener
+
+        :param listener: listener to remove
+        :type listener: Listener
+
+        .. versionadded:: 0.5
+        """
+        self.__update_listeners.remove(listener)
+
+    @logged
     def notify_update_listeners(self, event):
         """
         Notify all listeners registered for update of this entity

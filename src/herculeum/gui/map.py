@@ -41,6 +41,7 @@ class PlayMapWindow(QMdiSubWindow):
         self.surface_manager = surface_manager
         self.action_factory = action_factory
         self.rng = rng
+        self.current_level = None
 
         self.__set_layout(model, surface_manager, action_factory, rng)
 
@@ -88,7 +89,8 @@ class PlayMapWidget(QWidget):
         """
         Set layout of this widget
         """
-        self.scene = self.__construct_scene(self.model)
+        self.scene = QGraphicsScene()
+        self.__construct_scene(self.model, self.scene)
 
         layout = QHBoxLayout()
 
@@ -114,45 +116,46 @@ class PlayMapWidget(QWidget):
                               width,
                               height)
 
-    def __construct_scene(self, model):
+    def __construct_scene(self, model, scene):
         """
         Constructs scene to display
         """
-        new_scene = QGraphicsScene()
+        for item in scene.items():
+            item.clear_update_registration()
 
-        level = model.player.level
-        size = level.get_size()
+        scene.clear()
+
+        self.current_level = model.player.level
+        size = self.current_level.get_size()
 
         for loc_x in range(0, size[0]):
             for loc_y in range(0, size[1]):
-                new_glyph = MapGlyph(self.surface_manager.get_icon(level.get_tile(loc_x, loc_y)),
+                new_glyph = MapGlyph(self.surface_manager.get_icon(self.current_level.get_tile(loc_x, loc_y)),
                                      None)
                 new_glyph.setZValue(0)
                 new_glyph.setPos(loc_x * 32, loc_y * 32)
-                new_scene.addItem(new_glyph)
+                scene.addItem(new_glyph)
 
-        for portal in level.portals:
+        for portal in self.current_level.portals:
                 new_glyph = MapGlyph(self.surface_manager.get_icon(portal.icon),
                                      portal)
                 new_glyph.setZValue(1)
                 new_glyph.setPos(portal.location[0] * 32, portal.location[1] * 32)
-                new_scene.addItem(new_glyph)
+                scene.addItem(new_glyph)
 
-        for item in level.items:
+        for item in self.current_level.items:
                 new_glyph = MapGlyph(self.surface_manager.get_icon(item.icon),
                                      item)
                 new_glyph.setZValue(2)
                 new_glyph.setPos(item.location[0] * 32, item.location[1] * 32)
-                new_scene.addItem(new_glyph)
+                scene.addItem(new_glyph)
 
-        for creature in level.creatures:
+        for creature in self.current_level.creatures:
                 new_glyph = MapGlyph(self.surface_manager.get_icon(creature.icon),
                                      creature)
                 new_glyph.setZValue(3)
                 new_glyph.setPos(creature.location[0] * 32, creature.location[1] * 32)
-                new_scene.addItem(new_glyph)
-
-        return new_scene
+                scene.addItem(new_glyph)
 
     def receive_event(self, event):
         """
@@ -170,7 +173,10 @@ class PlayMapWidget(QWidget):
         Receive update from entity
         """
         if event.event_type == 'move':
+            if self.model.player.level != self.current_level:
+                self.__construct_scene(self.model, self.scene)
             self.__center_view_on_character(self.model.player)
+
 
     def keyPressEvent(self, event):
         """
@@ -230,3 +236,10 @@ class MapGlyph(QGraphicsPixmapItem):
             if location != None:
                 self.setPos(location[0] * 32,
                             location[1] * 32)
+
+    def clear_update_registration(self):
+        """
+        Clear update registrations
+        """
+        if self.entity != None:
+            self.entity.remove_from_updates(self)
