@@ -57,14 +57,29 @@ class CharacterBuilder(object):
         self.listeners = []
 
     def as_player_character(self):
+        """
+        Configure generated character to be player
+        """
         self.player_character = True
         return self
 
     def with_model(self, model):
+        """
+        Use given model
+
+        :param model: model
+        :type model: Model
+        """
         self.model = model
         return self
 
     def with_effect_handle(self, handle):
+        """
+        Add effect handle to generated character
+
+        :param handle: effect handle
+        :type handle: EffectHandle
+        """
         if hasattr(handle, 'build'):
             self.effect_handles.append(handle.build())
         else:
@@ -72,6 +87,12 @@ class CharacterBuilder(object):
         return self
 
     def with_effect(self, effect):
+        """
+        Add effect to generated character
+
+        :param effect: effect
+        :type effect: Effect
+        """
         if hasattr(effect, 'build'):
             self.effects.append(effect.build())
         else:
@@ -79,46 +100,114 @@ class CharacterBuilder(object):
         return self
 
     def with_hit_points(self, hit_points):
+        """
+        Configure amount of hit points
+
+        :param hit_points: hit points
+        :type hit_points: int
+        """
         self.hit_points = hit_points
         return self
 
     def with_max_hp(self, max_hp):
+        """
+        Configure maximum amount of hit points
+
+        :param max_hp: maximum hit points
+        :type max_hp: int
+        """
         self.max_hp = max_hp
         return self
 
     def with_speed(self, speed):
+        """
+        Configure speed
+
+        :param speed: speed of character
+        :type speed: int
+        """
         self.speed = speed
         return self
 
     def with_mind(self, mind):
+        """
+        Configure mind
+
+        :param mind: mind of character
+        :type mind: int
+        """
         self.mind = mind
         return self
 
     def with_tick(self, tick):
+        """
+        Set internal clock of character
+
+        :param tick: tick
+        :type tick: int
+        """
         self.tick = tick
         return self
 
     def with_attack(self, attack):
+        """
+        Configure attack value of character
+
+        :param attack: attack value
+        :type attack: int
+        """
         self.attack = attack
         return self
 
     def with_body(self, body):
+        """
+        Configure body value of character
+
+        :param body: body value
+        :type body: int
+        """
         self.body = body
         return self
 
     def with_level(self, level):
+        """
+        Set level where character is located
+
+        :param level: level
+        :type level: Level
+        """
         self.level = level
         return self
 
     def with_location(self, location):
+        """
+        Set location of character
+
+        :param location: location
+        :type location: (int, int)
+        """
         self.location = location
         return self
 
     def with_name(self, name):
+        """
+        Set name of character
+
+        :param name: name
+        :type name: string
+        """
         self.name = name
         return self
 
     def with_event_listener(self, listener):
+        """
+        Register event listener to listen this character
+
+        :param listener: listener
+        :type listener: listener
+
+        .. note:: Can be called multiple times
+        """
         self.listeners.append(listener)
         return self
 
@@ -126,8 +215,8 @@ class CharacterBuilder(object):
         """
         Build character
 
-        Returns:
-            Character
+        :returns: character
+        :rtype: Character
         """
         character = Character(model = self.model,
                               effects_collection = self.effects_collection)

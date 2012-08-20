@@ -119,6 +119,14 @@ class Configuration(object):
         self.logger.info('Action sub system initialised')
 
     def get_creature_config(self, level_config):
+        """
+        Load creature configuration
+
+        :param level_config: namespace of configurations
+        :type level_config: Package
+        :returns: configuration for creatures
+        :rtype: CreatureConfigurations
+        """
         config = CreatureConfigurations(self.rng)
 
         configurators = self.get_configurators(level_config,
@@ -132,6 +140,14 @@ class Configuration(object):
         return config
 
     def get_item_config(self, item_config):
+        """
+        Load item configuration
+
+        :param level_config: namespace of configurations
+        :type level_config: Package
+        :returns: configuration for items
+        :rtype: ItemConfigurations
+        """
         config = ItemConfigurations(self.rng)
 
         configurators = self.get_configurators(item_config,

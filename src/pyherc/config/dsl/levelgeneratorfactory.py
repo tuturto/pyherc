@@ -24,6 +24,9 @@ module for LevelGeneratorFactoryConfig
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 
 class LevelConfiguration(object):
+    """
+    DSL for configuring levels
+    """
 
     def __init__(self):
         """
@@ -39,34 +42,82 @@ class LevelConfiguration(object):
         self.size = None
 
     def with_rooms(self, rooms):
+        """
+        Add rooms to configuration
+
+        :param rooms: rooms to use
+        :type rooms: [RoomGenerator]
+        """
         self.room_generators = rooms
         return self
 
     def with_partitioners(self, partitioners):
+        """
+        Add partitioners to configuration
+
+        :param partitioners: partitioners to use
+        :type partitioners: [LevelPartitioner]
+        """
         self.level_partitioners = partitioners
         return self
 
     def with_decorators(self, decorators):
+        """
+        Add decorators to configuration
+
+        :param decorators: decorators to use
+        :type decorators: [LevelDecorator]
+        """
         self.decorators = decorators
         return self
 
     def with_items(self, items):
+        """
+        Add items to configuration
+
+        :param items: items to use
+        :type items: [ItemAdder]
+        """
         self.item_adders = items
         return self
 
     def with_creatures(self, creatures):
+        """
+        Add creatures to configuration
+
+        :param creatures: creatures to use
+        :type creatures: [CreatureAdder]
+        """
         self.creature_adders = creatures
         return self
 
     def with_portals(self, portals):
+        """
+        Add portals to configuration
+
+        :param portals: portals to use
+        :type portals: [PortalAdder]
+        """
         self.portal_adder_configurations = portals
         return self
 
     def with_level_size(self, level_size):
+        """
+        Set level size
+
+        :param level_size: size of level
+        :type level_size: (int, int)
+        """
         self.size = level_size
         return self
 
     def build(self):
+        """
+        Build configuration
+
+        :returns: configuration for level generator factory
+        :rtype: LevelGeneratorFactoryConfig
+        """
         return LevelGeneratorFactoryConfig(room_generators = self.room_generators,
                                            level_partitioners = self.level_partitioners,
                                            decorators = self.decorators,

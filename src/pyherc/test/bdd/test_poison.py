@@ -18,6 +18,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+Tests for poison
+"""
+
 from pyherc.test.cutesy.dictionary import weak, Goblin
 from pyherc.test.cutesy.dictionary import strong, Adventurer
 from pyherc.test.cutesy.dictionary import Level

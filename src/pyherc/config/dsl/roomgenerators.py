@@ -30,6 +30,9 @@ class Catacombs(object):
     Generator for catacombs
     """
     def __init__(self):
+        """
+        Default constructor
+        """
         super(Catacombs, self).__init__()
         self.floor_tile = 0
         self.empty_tile = 0
@@ -37,6 +40,12 @@ class Catacombs(object):
         self.locations = []
 
     def with_(self, parameter):
+        """
+        set parameter for room generation
+
+        :param parameter: parameter to set
+        :type parameter: (string, value)
+        """
         if hasattr(parameter, 'count'):
             if parameter[0] == 'floor':
                 self.floor_tile = parameter[1]
@@ -47,14 +56,32 @@ class Catacombs(object):
         return self
 
     def located_at(self, location):
+        """
+        Set location of room
+
+        :param location: name of location
+        :type location: string
+        """
         self.locations.append(location)
         return self
 
     def build(self):
+        """
+        Build generator
+
+        :returns: configured generator
+        :rtype: CatacombsGenerator
+        """
         return CatacombsGenerator(floor_tile = self.floor_tile,
                                   empty_tile = self.empty_tile,
                                   level_types = self.locations,
                                   rng = self.rng)
 
 def natural_floor():
+    """
+    Get definition of natural floor
+
+    :returns: definition of natural floor
+    :rtype: (string, int)
+    """
     return ('floor', FLOOR_NATURAL)

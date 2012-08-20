@@ -37,6 +37,9 @@ class ActionFactoryBuilder(object):
     Class for building action factories
     """
     def __init__(self):
+        """
+        Default constructor
+        """
         self.model = mock()
 
         self.attack_factory = mock()
@@ -55,30 +58,60 @@ class ActionFactoryBuilder(object):
         self.use_real_move_factory = False
 
     def with_model(self, model):
+        """
+        Set model to use with factory
+
+        :param model: model
+        :type model: Model
+        """
         self.model = model
         return self
 
     def with_move_factory(self):
+        """
+        Configure action factory to use real move factory
+        """
         self.use_real_move_factory = True
         return self
 
     def with_attack_factory(self):
+        """
+        Configure action factory to use real attack factory
+        """
         self.use_real_attack_factory = True
         return self
 
     def with_drink_factory(self):
+        """
+        Configure action factory to use real drink factory
+        """
         self.use_real_drink_factory = True
         return self
 
     def with_inventory_factory(self):
+        """
+        Configure action factory to use real inventory factory
+        """
         self.use_real_inventory_factory = True
         return self
 
     def with_effect_factory(self, effect_factory):
+        """
+        Configure action factory to use effect factory
+
+        :param effect_factory: effect factory to use
+        :type effect_factory: EffectFactory
+        """
         self.effect_factory = effect_factory
         return self
 
     def build(self):
+        """
+        Build action factory
+
+        :returns: action factory
+        :rtype: ActionFactory
+        """
         if self.use_real_attack_factory == True:
             unarmed_combat_factory = UnarmedCombatFactory(self.effect_factory)
             melee_combat_factory = MeleeCombatFactory(self.effect_factory)
