@@ -24,7 +24,6 @@ Module for character builder
 from pyherc.data import Character
 from pyherc.data.effects import EffectsCollection
 from mockito import mock
-from random import Random
 
 class CharacterBuilder(object):
     """

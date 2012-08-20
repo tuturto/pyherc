@@ -23,7 +23,6 @@ Module for event listener matchers used in testing
 """
 
 from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 class EventListeners(BaseMatcher):
     """

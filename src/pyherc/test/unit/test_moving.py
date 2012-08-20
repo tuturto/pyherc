@@ -22,19 +22,15 @@
 Module for testing moving
 """
 #pylint: disable=W0614
-from mockito import mock, verify, when, any
 from hamcrest import * #pylint: disable=W0401
 
 from qc import forall, integers
 
-import pyherc
-from pyherc.data import Dungeon
 from pyherc.data import Portal
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import CharacterBuilder
 
 from pyherc.data import Model
-from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.helpers import EventListener
 from pyherc.test.matchers import has_marked_for_redrawing

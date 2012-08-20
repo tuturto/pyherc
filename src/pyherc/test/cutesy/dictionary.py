@@ -30,8 +30,6 @@ from pyherc.rules import AttackParameters
 from pyherc.data.effects import Poison
 
 from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.wrap_matcher import wrap_matcher
-from hamcrest import assert_that, is_, equal_to
 from mockito import mock, when
 
 def strong(character):

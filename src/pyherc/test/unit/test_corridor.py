@@ -22,7 +22,6 @@
 Tests for Corridor
 """
 #pylint: disable=W0614
-from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import is_fully_accessible_via
 

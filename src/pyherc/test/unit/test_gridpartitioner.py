@@ -26,7 +26,7 @@ from pyherc.generators.level.partitioners.grid import GridPartitioner
 from pyherc.generators.level.partitioners.grid import RandomConnector
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
-from mockito import mock, verify, when, any
+from mockito import mock, when
 from hamcrest import * #pylint: disable=W0401
 import random
 

@@ -22,7 +22,6 @@
 Tests for ItemAdder
 """
 #pylint: disable=W0614
-from mockito import mock
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import located_in_room, does_have_item
 

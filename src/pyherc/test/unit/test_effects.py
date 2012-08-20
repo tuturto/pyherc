@@ -31,7 +31,6 @@ from pyherc.data.effects import EffectHandle
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.events import PoisonAddedEvent, Event
-from random import Random
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder, ActionFactoryBuilder
 from pyherc.test.builders import EffectBuilder

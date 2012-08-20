@@ -17,7 +17,6 @@
 #
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
-#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
 Module for testing creatures
@@ -30,10 +29,8 @@ from pyherc.test.builders import ItemBuilder
 from pyherc.test.builders import LevelBuilder
 from pyherc.data.dungeon import Dungeon
 from pyherc.rules.moving import deactivate
-from pyherc.test.matchers import has_effect_handle
 from hamcrest import * #pylint: disable=W0401
 from pyherc.events import MoveEvent
-from pyherc.test.builders import LevelBuilder
 from mockito import mock, any, verify
 
 class TestCharacter(object):

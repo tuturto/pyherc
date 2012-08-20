@@ -22,7 +22,7 @@
 Module for testing Model
 """
 #pylint: disable=W0614
-from pyherc.data import Model, Level
+from pyherc.data import Model
 from pyherc.test.matchers import has_event_listener
 from pyherc.test.builders import LevelBuilder, CharacterBuilder
 from hamcrest import * #pylint: disable=W0401

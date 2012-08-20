@@ -22,8 +22,6 @@
 Module for testing combat related rules
 """
 #pylint: disable=W0614
-import pyherc
-from pyherc.data import Character
 from pyherc.data import Dungeon
 from pyherc.data import Model
 

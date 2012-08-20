@@ -22,14 +22,14 @@
 Module for testing PortalAdder functionality
 """
 #pylint: disable=W0614
-from pyherc.data import Level, Portal
+from pyherc.data import Level
 from pyherc.generators.level.portals import PortalAdder, PortalAdderFactory
 from pyherc.generators.level.portals import PortalAdderConfiguration
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from hamcrest import * #pylint: disable=W0401
 from pyherc.test.matchers import * #pylint: disable=W0401
-from mockito import mock, when, any
+from mockito import mock
 import random
 
 class TestPortalAdder():
