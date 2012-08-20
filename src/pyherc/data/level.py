@@ -23,7 +23,6 @@ Module containing classes to represent Level
 """
 
 import random
-import logging
 from pyherc.aspects import Logged
 
 class Level(object):
@@ -50,7 +49,6 @@ class Level(object):
         :type empty_wall: integer
         """
         super(Level, self).__init__()
-        self.logger = logging.getLogger('pyherc.data.dungeon.Level')
 
         self.floor = []
         self.walls = []
@@ -83,21 +81,6 @@ class Level(object):
         self.creatures = []
         self.full_update_needed = True
         self.dirty_rectangles = []
-
-    def __getstate__(self):
-        """
-        Override __getstate__ in order to get pickling work
-        """
-        properties = dict(self.__dict__)
-        del properties['logger']
-        return properties
-
-    def __setstate__(self, properties):
-        """
-        Override __setstate__ in order to get pickling work
-        """
-        self.__dict__.update(properties)
-        self.logger = logging.getLogger('pyherc.data.dungeon.Level')
 
     def get_tile(self, loc_x, loc_y):
         """

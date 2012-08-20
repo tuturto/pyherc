@@ -22,7 +22,6 @@
 Module for Model related classes
 """
 
-import logging
 from pyherc.aspects import Logged
 
 class Model(object):
@@ -42,22 +41,6 @@ class Model(object):
         self.tables = None
         self.__event_listeners = []
         self.end_condition = 0
-        self.logger = logging.getLogger('pyherc.data.model.Model')
-
-    def __getstate__(self):
-        """
-        Override __getstate__ in order to get pickling work
-        """
-        properties = dict(self.__dict__)
-        del properties['logger']
-        return properties
-
-    def __setstate__(self, properties):
-        """
-        Override __setstate__ in order to get pickling work
-        """
-        self.__dict__.update(properties)
-        self.logger = logging.getLogger('pyherc.data.model.Model')
 
     @logged
     def register_event_listener(self, listener):

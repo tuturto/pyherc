@@ -464,20 +464,6 @@ class Character(object):
                                                         'pick up'))
         action.execute()
 
-    def __getstate__(self):
-        """
-        Override __getstate__ in order to get pickling work
-        """
-        properties = dict(self.__dict__)
-        del properties['logger']
-        return properties
-
-    def __setstate__(self, properties):
-        """
-        Override __setstate__ in order to get pickling work
-        """
-        self.__dict__.update(properties)
-
     @logged
     def raise_event(self, event):
         """

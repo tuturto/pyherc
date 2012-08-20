@@ -22,7 +22,6 @@
 Module containing classes to represent dungeon
 """
 
-import logging
 from pyherc.aspects import Logged
 
 class Dungeon(object):
@@ -35,19 +34,3 @@ class Dungeon(object):
     def __init__(self):
         super(Dungeon, self).__init__()
         self.levels = None
-        self.logger = logging.getLogger('pyherc.data.dungeon.Dungeon')
-
-    def __getstate__(self):
-        """
-        Override __getstate__ in order to get pickling work
-        """
-        properties = dict(self.__dict__)
-        del properties['logger']
-        return properties
-
-    def __setstate__(self, properties):
-        """
-        Override __setstate__ in order to get pickling work
-        """
-        self.__dict__.update(properties)
-        self.logger = logging.getLogger('pyherc.data.dungeon.Dungeon')

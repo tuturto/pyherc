@@ -41,21 +41,6 @@ class WalkFactory(SubActionFactory):
         self.logger = logging.getLogger('pyherc.rules.move.factories.WalkFactory')
         self.movement_mode = 'walk'
 
-    def __getstate__(self):
-        """
-        Override __getstate__ in order to get pickling work
-        """
-        data = dict(self.__dict__)
-        del data['logger']
-        return data
-
-    def __setstate__(self, data):
-        """
-        Override __setstate__ in order to get pickling work
-        """
-        self.__dict__.update(data)
-        self.logger = logging.getLogger('pyherc.rules.move.factories.WalkFactory')
-
     def __str__(self):
         return 'walk factory'
 
@@ -138,18 +123,3 @@ class MoveFactory(SubActionFactory):
         else:
             self.factories = []
             self.factories.append(factories)
-
-    def __getstate__(self):
-        """
-        Override __getstate__ in order to get pickling work
-        """
-        data = dict(self.__dict__)
-        del data['logger']
-        return data
-
-    def __setstate__(self, data):
-        """
-        Override __setstate__ in order to get pickling work
-        """
-        self.__dict__.update(data)
-        self.logger = logging.getLogger('pyherc.rules.move.factories.MoveFactory')

@@ -195,21 +195,6 @@ class LevelGenerator(object):
         self.portal_adders = portal_adders
         self.level_context = level_context
 
-    def __getstate__(self):
-        """
-        Override __getstate__ in order to get pickling work
-        """
-        data = dict(self.__dict__)
-        del data['logger']
-        return data
-
-    def __setstate__(self, data):
-        """
-        Override __setstate__ in order to get pickling work
-        """
-        self.__dict__.update(data)
-        self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGenerator') #pylint: disable=C0301
-
     @logged
     def generate_level(self, portal):
         """
