@@ -118,10 +118,11 @@ class LevelConfiguration(object):
         :returns: configuration for level generator factory
         :rtype: LevelGeneratorFactoryConfig
         """
-        return LevelGeneratorFactoryConfig(room_generators = self.room_generators,
-                                           level_partitioners = self.level_partitioners,
-                                           decorators = self.decorators,
-                                           item_adders = self.item_adders,
-                                           creature_adders = self.creature_adders,
-                                           portal_adder_configurations = self.portal_adder_configurations,
-                                           size = self.size)
+        return LevelGeneratorFactoryConfig(
+                room_generators = self.room_generators,
+                level_partitioners = self.level_partitioners,
+                decorators = self.decorators,
+                item_adders = self.item_adders,
+                creature_adders = self.creature_adders,
+                portal_adder_configurations = self.portal_adder_configurations,
+                size = self.size)

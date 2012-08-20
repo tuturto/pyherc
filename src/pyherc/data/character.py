@@ -158,109 +158,73 @@ class Character(object):
 
     def __get_hp(self):
         """
-        Get current hitpoints
-
-        :returns: hit points
-        :rtype: integer
+        Current hitpoints
         """
         return self.__hit_points
 
     def __set_hp(self, hit_points):
         """
-        Set current hitpoints
-
-        :param hit_points: hit points to set
-        :type hit_points: integer
+        Current hitpoints
         """
         self.__hit_points = hit_points
 
     def __get_body(self):
         """
-        Get body attribute
-
-        :returns: Body attribute of this character
-        :rtype: integer
+        Current body attribute
         """
         return self.__body
 
     def __set_body(self, body):
         """
-        Set body attribute
-
-        :param body: body attribute to set
-        :type body: integer
+        Current body attribute
         """
         self.__body = body
 
     def __get_finesse(self):
         """
-        Get finesse attribute
-
-        :returns: finesse attribute
-        :rtype: integer
+        Current finesse attribute
         """
         return self.__finesse
 
     def __set_finesse(self, finesse):
         """
-        Set finesse attribute
-
-        :param finesse: finesse attribute to set
-        :type finesse: integer
+        Current finesse attribute
         """
         self.__finesse = finesse
 
     def __get_mind(self):
         """
-        Get mind attribute
-
-        :returns: Mind attribute
-        :rtype: integer
+        Current mind attribute
         """
         return self.__mind
 
     def __set_mind(self, mind):
         """
-        Set mind attribute
-
-        :param mind: mind attribute to set
-        :type mind: integer
+        Current mind attribute
         """
         self.__mind = mind
 
     def get_attack(self):
         """
-        Return attack attribute of the character
-
-        :returns: Attack value
-        :rtype: integer
+        Attack attribute of the character
         """
         return self.attack
 
     def set_attack(self, attack):
         """
-        Set attack attribute of the character
-
-        :param attack: Attack attribute
-        :type attack: integer
+        Attack attribute of the character
         """
         self.attack = attack
 
     def __get_max_hp(self):
         """
-        Get maximum HP this character can currently have
-
-        :returns: maximum hit points
-        :rtype: integer
+        Maximum HP this character can currently have
         """
         return self.__max_hp
 
     def __set_max_hp(self, max_hp):
         """
-        Set maximum HP this character can currently have
-
-        :param max_hp: maximum hit points
-        :type max_hp: integer
+        Maximum HP this character can currently have
         """
         self.__max_hp = max_hp
 
@@ -566,19 +530,10 @@ class Character(object):
         self.tick = self.tick + (self.speed * cost)
 
     hit_points = property(__get_hp, __set_hp)
-    """Current hit points of the character"""
-
     max_hp = property(__get_max_hp, __set_max_hp)
-    """Current maximum hit points of the character"""
-
     body = property(__get_body, __set_body)
-    """Body attribute of the character"""
-
     finesse = property(__get_finesse, __set_finesse)
-    """Finesse attribute of the character"""
-
     mind = property(__get_mind, __set_mind)
-    """Mind attribute of the character"""
 
 class Feat(object):
     """
