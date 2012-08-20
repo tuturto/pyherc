@@ -53,7 +53,7 @@ class AttackHitEvent(Event):
         :rtype: string
         """
         if point_of_view == self.attacker:
-           description = 'You hit {0}'.format(self.target.name)
+            description = 'You hit {0}'.format(self.target.name)
         elif point_of_view == self.target:
             description = '{0} hits you'.format(self.attacker.name)
         else:
@@ -91,7 +91,7 @@ class AttackMissEvent(Event):
         :rtype: string
         """
         if point_of_view == self.attacker:
-           description = 'You miss {0}'.format(self.target.name)
+            description = 'You miss {0}'.format(self.target.name)
         elif point_of_view == self.target:
             description = '{0} misses you'.format(self.attacker.name)
         else:
@@ -127,7 +127,7 @@ class AttackNothingEvent(Event):
         :rtype: string
         """
         if point_of_view == self.attacker:
-           description = 'You flail around, hitting nothing'
+            description = 'You flail around, hitting nothing'
         else:
             description = '{0} flails around, hitting nothing'.format(
                                                             self.attacker.name)

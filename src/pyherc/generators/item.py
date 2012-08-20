@@ -22,7 +22,6 @@
 Classes needed for item generation
 """
 
-import logging
 import random
 from pyherc.data import Item
 from pyherc.data.item import WeaponData

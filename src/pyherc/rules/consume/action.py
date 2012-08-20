@@ -21,9 +21,6 @@
 """
 Module defining classes related to DrinkAction
 """
-import logging
-import copy
-import pyherc.rules.magic
 
 class DrinkAction(object):
     """
@@ -38,7 +35,6 @@ class DrinkAction(object):
             potion: Item to drink
             effect_factory: Initialised EffectsFactory
         """
-        self.logger = logging.getLogger('pyherc.rules.move.action.MoveAction')
         self.character = character
         self.potion = potion
         self.effect_factory = effect_factory

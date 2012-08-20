@@ -27,7 +27,6 @@ Classes:
 from pyherc.data import Character
 from pyherc.data.effects import EffectHandle, EffectsCollection
 from pyherc.aspects import Logged
-import random
 
 class CreatureGenerator(object):
     """

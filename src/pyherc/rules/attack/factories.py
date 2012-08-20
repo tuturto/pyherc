@@ -42,6 +42,7 @@ class AttackFactory(SubActionFactory):
         """
         Constructor for this factory
         """
+        super(AttackFactory, self).__init__()
         self.action_type = 'attack'
 
         if isinstance(factories, types.ListType):

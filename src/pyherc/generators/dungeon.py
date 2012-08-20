@@ -23,7 +23,6 @@ Module for dungeon generation
 """
 
 import logging
-import random
 from pyherc.data import Dungeon
 from pyherc.aspects import Logged
 
