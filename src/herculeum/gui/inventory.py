@@ -29,13 +29,14 @@ class InventoryDockWidget(QDockWidget):
     """
     Dock widget for showing inventory
     """
-    def __init__(self, surface_manager, parent):
+    def __init__(self, surface_manager, character, parent):
         """
         Default constructor
         """
         super(InventoryDockWidget, self).__init__(parent)
 
         self.surface_manager = surface_manager
+        self.character = character
 
         self.__set_layout()
 
@@ -44,6 +45,7 @@ class InventoryDockWidget(QDockWidget):
         Set layout of this widget
         """
         self.inventory = InventoryWidget(self.surface_manager,
+                                         self.character,
                                          self)
         self.setWidget(self.inventory)
         self.setWindowTitle('Inventory')
@@ -52,13 +54,14 @@ class InventoryWidget(QWidget):
     """
     Widget for showing inventory
     """
-    def __init__(self, surface_manager, parent):
+    def __init__(self, surface_manager, character, parent):
         """
         Default constructor
         """
         super(InventoryWidget, self).__init__(parent)
 
         self.surface_manager = surface_manager
+        self.character = character
 
         self.__set_layout()
 
@@ -76,6 +79,25 @@ class InventoryWidget(QWidget):
         self.vertical_layout.addWidget(self.items2)
 
         self.setLayout(self.vertical_layout)
+
+        self.character.register_for_updates(self)
+
+    def receive_update(self, event):
+        """
+        Receive event from character
+        """
+        if event.event_type == 'move':
+            self.__update_ground_inventory()
+
+    def __update_ground_inventory(self):
+        """
+        Update items displayed in ground
+        """
+        location = self.character.location
+        level = self.character.level
+        items = level.get_items_at(location)
+
+        self.items2.show_items(items)
 
 class ItemBox(QWidget):
     """
@@ -99,6 +121,7 @@ class ItemBox(QWidget):
 
         self.grid_layout = QGridLayout()
         self.grid_layout.setSpacing(0)
+        self.items = []
 
         for y in range(0, width):
             for x in range(0, height):
@@ -107,8 +130,24 @@ class ItemBox(QWidget):
                                      self)
 
                 self.grid_layout.addWidget(new_item, x, y)
+                self.items.append(new_item)
 
         self.setLayout(self.grid_layout)
+
+    def show_items(self, items):
+        """
+        Show given items
+        """
+        empty_icon = self.surface_manager.get_icon(0)
+
+        item_count = len(items)
+
+        for counter in range(0, item_count):
+            self.items[counter].display.setPixmap(
+                            self.surface_manager.get_icon(items[counter].icon))
+
+        for counter in range(item_count, len(self.items)):
+            self.items[counter].display.setPixmap(empty_icon)
 
 class ItemGlyph(QWidget):
     """
