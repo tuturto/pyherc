@@ -9,5 +9,6 @@ pyherc.events
    module_combat
    module_death
    module_event
+   module_inventory
    module_move
    
