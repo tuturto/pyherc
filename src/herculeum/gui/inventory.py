@@ -32,7 +32,7 @@ class InventoryDockWidget(QDockWidget):
     """
     Dock widget for showing inventory
     """
-    def __init__(self, surface_manager, character, parent):
+    def __init__(self, surface_manager, character, action_factory, parent):
         """
         Default constructor
         """
@@ -40,6 +40,7 @@ class InventoryDockWidget(QDockWidget):
 
         self.surface_manager = surface_manager
         self.character = character
+        self.action_factory = action_factory
 
         self.__set_layout()
 
@@ -49,6 +50,7 @@ class InventoryDockWidget(QDockWidget):
         """
         self.inventory = InventoryWidget(self.surface_manager,
                                          self.character,
+                                         self.action_factory,
                                          self)
         self.setWidget(self.inventory)
         self.setWindowTitle('Inventory')
@@ -57,7 +59,7 @@ class InventoryWidget(QWidget):
     """
     Widget for showing inventory
     """
-    def __init__(self, surface_manager, character, parent):
+    def __init__(self, surface_manager, character, action_factory, parent):
         """
         Default constructor
         """
@@ -65,6 +67,7 @@ class InventoryWidget(QWidget):
 
         self.surface_manager = surface_manager
         self.character = character
+        self.action_factory = action_factory
 
         self.__set_layout()
 
@@ -94,6 +97,7 @@ class InventoryWidget(QWidget):
 
         if event.event_type == 'pick up':
             self.__update_carried_inventory()
+            self.__update_ground_inventory()
 
     def __update_ground_inventory(self):
         """
@@ -112,6 +116,12 @@ class InventoryWidget(QWidget):
         items = self.character.inventory
 
         self.items1.show_items(items)
+
+    def handle_item(self, items, item):
+        if items == self.items1:
+            #pick up
+            self.character.pick_up(item,
+                                   self.action_factory)
 
 class ItemBox(QWidget):
     """
@@ -161,9 +171,11 @@ class ItemBox(QWidget):
         for counter in range(0, item_count):
             self.items[counter].display.setPixmap(
                             self.surface_manager.get_icon(items[counter].icon))
+            self.items[counter].item = items[counter]
 
         for counter in range(item_count, len(self.items)):
             self.items[counter].display.setPixmap(empty_icon)
+            self.items[counter].item = None
 
 
     def dragEnterEvent(self, e):
@@ -172,7 +184,6 @@ class ItemBox(QWidget):
 
         :param e: event
         """
-
         e.accept()
 
     def dropEvent(self, e):
@@ -181,6 +192,9 @@ class ItemBox(QWidget):
 
         :param e: event
         """
+        item = e.source().item
+
+        self.parent().handle_item(self, item)
 
         e.setDropAction(Qt.MoveAction)
         e.accept()

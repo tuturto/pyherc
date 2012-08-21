@@ -166,6 +166,7 @@ class MainWindow(QMainWindow):
         """
         inventory_display = InventoryDockWidget(self.surface_manager,
                                                 self.application.world.player,
+                                                self.application.action_factory,
                                                 self)
 
         self.addDockWidget(Qt.LeftDockWidgetArea,

@@ -167,6 +167,12 @@ class PlayMapWidget(QWidget):
 
             for glyph in glyphs:
                 self.view.scene().removeItem(glyph)
+        elif event.event_type == 'pick up':
+            glyphs = [x for x in self.view.items()
+                      if x.entity == event.item]
+
+            for glyph in glyphs:
+                self.view.scene().removeItem(glyph)
 
     def receive_update(self, event):
         """
