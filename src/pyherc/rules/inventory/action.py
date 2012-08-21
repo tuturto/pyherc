@@ -22,6 +22,7 @@
 Module defining classes related to inventory actions
 """
 from pyherc.aspects import Logged
+from pyherc.events import PickUpEvent
 
 class PickUpAction(object):
     """
@@ -53,6 +54,9 @@ class PickUpAction(object):
             self.character.level.items.remove(self.item)
             self.character.inventory.append(self.item)
             self.item.location = ()
+
+            self.character.raise_event(PickUpEvent(self.character,
+                                                   self.item))
 
         self.character.add_to_tick(2)
 

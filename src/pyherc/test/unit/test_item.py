@@ -27,14 +27,15 @@ import pyherc.generators.item
 import pyherc.data.dungeon
 import pyherc.rules.items
 from random import Random
-from pyherc.data import Level
+from pyherc.data import Level, Character
 from pyherc.test.builders import ItemBuilder
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import EffectHandleBuilder
 from pyherc.test.builders import ActionFactoryBuilder
+from pyherc.events import PickUpEvent
 
 from hamcrest import * #pylint: disable=W0401
-from mockito import mock
+from mockito import mock, verify, any
 
 class TestItems(object):
     """
@@ -263,9 +264,12 @@ class TestItemsInLevel:
 
         self.level = Level([20, 20])
 
+        self.model = pyherc.data.model.Model()
+
         self.character = (CharacterBuilder()
                             .with_location((5, 5))
                             .with_level(self.level)
+                            .with_model(self.model)
                             .build())
 
         self.level.add_item(self.item, (5, 5))
@@ -273,7 +277,6 @@ class TestItemsInLevel:
         self.dungeon = pyherc.data.dungeon.Dungeon()
         self.dungeon.levels = self.level
 
-        self.model = pyherc.data.model.Model()
         self.model.dungeon = self.dungeon
         self.model.player = self.character
 
@@ -294,6 +297,19 @@ class TestItemsInLevel:
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
         assert(self.item.location == ())
+
+    def test_picking_up_raises_event(self):
+        """
+        Event should be raised when item is picked up
+        """
+        observer = mock(Character)
+
+        self.level.add_creature(observer, (1, 1))
+
+        self.character.pick_up(self.item,
+                               self.action_factory)
+
+        verify(observer).receive_event(any(PickUpEvent))
 
     def test_picking_up_not_correct_location(self): #pylint: disable=C0103
         """
