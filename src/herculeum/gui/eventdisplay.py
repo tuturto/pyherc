@@ -91,7 +91,8 @@ class EventMessageWidget(QWidget):
                                     'poison triggered',
                                     'poison ended',
                                     'poisoned',
-                                    'death']
+                                    'death',
+                                    'pick up']
 
     def set_point_of_view(self, character):
         """

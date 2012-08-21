@@ -5,14 +5,16 @@ Release 0.5
 ************
 New features
 ************
+New features that are readily visible to players:
 
   - User interface rewrite with PyQt
   - Message is shown for missed attack
   - Message is shown for dying monster
+  - Message is shown for picked up item
   - Player character can be given a name
 
 Following new features are more technical in nature and not visible during
-gameplay.
+gameplay:
   
   - _at function added to Cutesy
   - is_dead matcher added
@@ -22,7 +24,7 @@ gameplay.
 Fixed bugs
 **********
 
-  - #17	Taking stairs do not update display correctly
+  - 17_ Taking stairs do not update display correctly
 
 ***********
 Other notes
@@ -36,3 +38,5 @@ Other notes
   - is_at and is_not_at changed to is_in and is_not_in
   - herculeum.gui.core removed
   - PGU and pygame removed as dependecies
+
+.. _17: https://github.com/tuturto/pyherc/issues/17

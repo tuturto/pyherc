@@ -22,8 +22,11 @@
 Module for displaying inventory
 """
 from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
-from PyQt4.QtGui import QDockWidget, QGridLayout
+from PyQt4.QtGui import QDockWidget, QGridLayout, QDrag
+from PyQt4.QtCore import Qt, QMimeData
 import PyQt4.QtGui
+
+
 
 class InventoryDockWidget(QDockWidget):
     """
@@ -89,6 +92,9 @@ class InventoryWidget(QWidget):
         if event.event_type == 'move':
             self.__update_ground_inventory()
 
+        if event.event_type == 'pick up':
+            self.__update_carried_inventory()
+
     def __update_ground_inventory(self):
         """
         Update items displayed in ground
@@ -98,6 +104,14 @@ class InventoryWidget(QWidget):
         items = level.get_items_at(location)
 
         self.items2.show_items(items)
+
+    def __update_carried_inventory(self):
+        """
+        Update items displayed being carried
+        """
+        items = self.character.inventory
+
+        self.items1.show_items(items)
 
 class ItemBox(QWidget):
     """
@@ -132,6 +146,8 @@ class ItemBox(QWidget):
                 self.grid_layout.addWidget(new_item, x, y)
                 self.items.append(new_item)
 
+        self.setAcceptDrops(True)
+
         self.setLayout(self.grid_layout)
 
     def show_items(self, items):
@@ -148,6 +164,26 @@ class ItemBox(QWidget):
 
         for counter in range(item_count, len(self.items)):
             self.items[counter].display.setPixmap(empty_icon)
+
+
+    def dragEnterEvent(self, e):
+        """
+        Called when object being dragged has entered
+
+        :param e: event
+        """
+
+        e.accept()
+
+    def dropEvent(self, e):
+        """
+        Called when object has been dropped
+
+        :param e: event
+        """
+
+        e.setDropAction(Qt.MoveAction)
+        e.accept()
 
 class ItemGlyph(QWidget):
     """
@@ -180,6 +216,24 @@ class ItemGlyph(QWidget):
 
         self.display.setPixmap(self.icon)
 
-        #self.setWidget(self.display)
         self.grid_layout.addWidget(self.display)
         self.setLayout(self.grid_layout)
+
+    def mouseMoveEvent(self, e):
+        """
+        Called when mouse is being moved on top of the widget
+
+        :param e: event
+        """
+
+        if e.buttons() != Qt.LeftButton:
+            return
+
+        mimeData = QMimeData()
+
+        drag = QDrag(self)
+        drag.setMimeData(mimeData)
+        drag.setHotSpot(e.pos() - self.rect().topLeft())
+
+        dropAction = drag.start(Qt.MoveAction)
+
