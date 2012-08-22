@@ -429,6 +429,24 @@ class Character(object):
         action.execute()
 
     @logged
+    def drop_item(self, item, action_factory):
+        """
+        Drop item from inventory
+
+        :param item: item to drop
+        :type item: Item
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
+
+        .. versionadded:: 0.5
+        """
+        action = action_factory.get_action(
+                                InventoryParameters(self,
+                                                    item,
+                                                    'drop'))
+        action.execute()
+
+    @logged
     def raise_event(self, event):
         """
         Raise event for other creatures to see

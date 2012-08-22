@@ -22,7 +22,7 @@
 Inventory manipulation related factories are defined here
 """
 import types
-from pyherc.rules.inventory.action import PickUpAction
+from pyherc.rules.inventory.action import PickUpAction, DropAction
 from pyherc.rules.factory import SubActionFactory
 from pyherc.aspects import Logged
 
@@ -61,6 +61,42 @@ class PickUpFactory(SubActionFactory):
         :type parameters: InventoryParameters
         """
         return PickUpAction(parameters.character, parameters.item)
+
+class DropFactory(SubActionFactory):
+    """
+    Factory for creating drop actions
+
+    .. versionadded:: 0.5
+    """
+    logged = Logged()
+
+    @logged
+    def __init__(self):
+        """
+        Constructor for this factory
+        """
+        self.sub_action = 'drop'
+
+    @logged
+    def can_handle(self, parameters):
+        """
+        Can this factory process these parameters
+
+        :param parameters: parameters to check
+        :returns: True if factory is capable of handling parameters
+        :rtype: Boolean
+        """
+        return self.sub_action == parameters.sub_action
+
+    @logged
+    def get_action(self, parameters):
+        """
+        Create a drop action
+
+        :param parameters: parameters used to control creation
+        :type parameters: InventoryParameters
+        """
+        return DropAction(parameters.character, parameters.item)
 
 class InventoryFactory(SubActionFactory):
     """

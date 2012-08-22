@@ -445,3 +445,133 @@ def weak_poison(target = None):
             'tick': 0,
             'damage': 1,
             'target': target}
+
+class CarryAction(object):
+    """
+    Action to get chracter to carry something
+    """
+    def __init__(self, item):
+        """
+        Default constructor
+
+        :param item: item to carry
+        :type item: Item
+        """
+        self.item = item
+
+    def __call__(self, character):
+        """
+        Put item in inventory
+
+        :param character: character carrying the item
+        :type character: Character
+        """
+        character.inventory.append(self.item)
+        return character
+
+def carrying(item):
+    """
+    make character to carry an item
+    """
+    action = CarryAction(item)
+    return action
+
+class Drop(object):
+    """
+    Class representing dropping an item
+    """
+    def __init__(self, item):
+        """
+        Default constructor
+
+        :param item: item to drop
+        """
+        super(Drop, self).__init__()
+        self.item = item
+
+    def __call__(self, actor):
+        """
+        Performs the drop action
+
+        :param actor: character dropping the item
+        :type actor: Character
+        """
+        self.item.old_values = {}
+        self.item.old_values['location'] = self.item.location
+        self.item.old_values['level'] = self.item.level
+
+        actor.old_values = {}
+        actor.old_values['inventory'] = []
+        actor.old_values['inventory'].append(self.item)
+
+        action_factory = (ActionFactoryBuilder()
+                                    .with_move_factory()
+                                    .with_attack_factory()
+                                    .with_drink_factory()
+                                    .with_inventory_factory()
+                                    .build())
+
+        actor.drop_item(self.item,
+                        action_factory)
+
+def drop(item):
+    """
+    make chracter to drop an item
+    """
+    action = Drop(item)
+    return action
+
+class HasDropped(BaseMatcher):
+    """
+    Matcher for checking that item has been dropped
+    """
+    def __init__(self, item):
+        """
+        Default constructor
+        """
+        super(HasDropped, self).__init__()
+        self.item = item
+        self.fail_reason = ''
+
+    def _matches(self, item):
+        """
+        Check if match
+
+        :param item: match against this item
+        """
+        if self.item in item.inventory:
+            self.fail_reason = 'item not dropped'
+            return False
+
+        return True
+
+    def describe_to(self, description):
+        """
+        Descripe the match
+
+        :param description: description text to append
+        :type description: string
+        """
+        description.append('Character who dropped {0}'
+                           .format(self.item.name))
+
+    def describe_mismatch(self, item, mismatch_description):
+        """
+        Descripe the mismatch
+
+        :item: mismatching item
+        :param mismatch_description: description text to append
+        :type mismatch_description: string
+        """
+        if self.fail_reason == 'item not dropped':
+            mismatch_description.append('{0} is still holding {1}'
+                                        .format(item,
+                                                self.item))
+        else:
+            mismatch_description.append('Unimplemented matcher')
+
+def has_dropped(item):
+    """
+    Check if character has dropped item
+    """
+    return HasDropped(item)

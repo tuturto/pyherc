@@ -26,7 +26,7 @@ from pyherc.events import PickUpEvent
 
 class PickUpAction(object):
     """
-    Action for moving
+    Action for picking up item
 
     .. versionadded:: 0.4
     """
@@ -74,4 +74,44 @@ class PickUpAction(object):
         if character.location != item.location:
             return False
 
+        return True
+
+class DropAction(object):
+    """
+    Action for dropping item
+
+    .. versionadded:: 0.5
+    """
+    logged = Logged()
+
+    @logged
+    def __init__(self, character, item):
+        """
+        Default constructor
+
+        :param character: character dropping item
+        :type character: Character
+        :param item: item to drop
+        :type item: Item
+        """
+        super(DropAction, self).__init__()
+
+        self.character = character
+        self.item = item
+
+    @logged
+    def execute(self):
+        """
+        Executes this action
+        """
+        self.character.inventory.remove(self.item)
+
+    @logged
+    def is_legal(self):
+        """
+        Check if the action is possible to perform
+
+        :returns: True if move is possible, false otherwise
+        :rtype: Boolean
+        """
         return True

@@ -22,5 +22,10 @@
 Package for testing dsl
 """
 
+from .dictionary import Dagger, Goblin
 from .dictionary import at_
 from .dictionary import affect, with_, potent_poison, weak_poison
+from .dictionary import carrying
+from .dictionary import place, middle_of, Level
+from .dictionary import make, drop
+from .dictionary import has_dropped

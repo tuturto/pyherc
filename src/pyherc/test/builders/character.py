@@ -49,6 +49,8 @@ class CharacterBuilder(object):
         self.level = None
         self.location = ()
 
+        self.items = []
+
         self.effect_handles = []
         self.effects = []
         self.effects_collection = EffectsCollection()
@@ -211,6 +213,18 @@ class CharacterBuilder(object):
         self.listeners.append(listener)
         return self
 
+    def with_item(self, item):
+        """
+        Add item into characters inventory
+
+        :param item: item to add
+        :type item: Item
+
+        .. note:: Can be called multiple times
+        """
+        self.items.append(item)
+        return self
+
     def build(self):
         """
         Build character
@@ -237,6 +251,9 @@ class CharacterBuilder(object):
         character.tick = self.tick
         character.level = self.level
         character.location = self.location
+
+        for item in self.items:
+            character.inventory.append(item)
 
         for handle in self.effect_handles:
             character.add_effect_handle(handle)
