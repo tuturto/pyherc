@@ -24,7 +24,7 @@ Module for testing drop action factory
 from pyherc.rules.inventory.factories import DropFactory
 from pyherc.rules import InventoryParameters
 from pyherc.test.builders import ItemBuilder, CharacterBuilder
-from pyherc.test.builders import ActionFactoryBuilder
+from pyherc.test.builders import ActionFactoryBuilder, LevelBuilder
 
 from mockito import mock
 from hamcrest import assert_that, is_, equal_to, is_in, is_not
@@ -52,18 +52,53 @@ class TestDropFactory(object):
 
         assert_that(can_handle, is_(equal_to(True)))
 
+class TestDropAction(object):
+    """
+    Tests for dropping item
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestDropAction, self).__init__()
+
+        self.item = None
+        self.level = None
+        self.character = None
+        self.action_factory = None
+
+    def setup(self):
+        """
+        Setup test case
+        """
+        self.level = LevelBuilder().build()
+        self.item = ItemBuilder().build()
+
+        self.character = (CharacterBuilder()
+                                .with_item(self.item)
+                                .with_level(self.level)
+                                .build())
+
+        self.action_factory = (ActionFactoryBuilder()
+                                    .with_inventory_factory()
+                                    .build())
+
     def test_dropped_item_is_removed_from_inventory(self):
         """
         Test that dropped item is removed from inventory
         """
-        item = ItemBuilder().build()
-        character = (CharacterBuilder()
-                        .with_item(item)
-                        .build())
-        action_factory = (ActionFactoryBuilder()
-                            .with_inventory_factory()
-                            .build())
+        self.character.drop_item(self.item,
+                                 self.action_factory)
 
-        character.drop_item(item, action_factory)
+        assert_that(self.item,
+                    is_not(is_in(self.character.inventory)))
 
-        assert_that(item, is_not(is_in(character.inventory)))
+    def test_dropped_item_is_added_on_level(self):
+        """
+        Test that dropped item ends up on level
+        """
+        self.character.drop_item(self.item,
+                                 self.action_factory)
+
+        assert_that(self.item.level,
+                    is_(equal_to(self.level)))

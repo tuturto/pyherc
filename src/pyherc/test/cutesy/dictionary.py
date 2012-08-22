@@ -543,6 +543,10 @@ class HasDropped(BaseMatcher):
             self.fail_reason = 'item not dropped'
             return False
 
+        if self.item.level == None:
+            self.fail_reason = 'item in limbo'
+            return False
+
         return True
 
     def describe_to(self, description):
@@ -567,6 +571,9 @@ class HasDropped(BaseMatcher):
             mismatch_description.append('{0} is still holding {1}'
                                         .format(item,
                                                 self.item))
+        elif self.fail_reason == 'item in limbo':
+            mismatch_description.append('{0} is not in any level'
+                                        .format(self.item))
         else:
             mismatch_description.append('Unimplemented matcher')
 

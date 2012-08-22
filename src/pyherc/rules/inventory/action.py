@@ -105,6 +105,8 @@ class DropAction(object):
         Executes this action
         """
         self.character.inventory.remove(self.item)
+        self.character.level.add_item(item = self.item,
+                                      location = (0, 0))
 
     @logged
     def is_legal(self):
