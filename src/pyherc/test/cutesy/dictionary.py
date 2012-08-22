@@ -547,6 +547,14 @@ class HasDropped(BaseMatcher):
             self.fail_reason = 'item in limbo'
             return False
 
+        if self.item.location != item.location:
+            self.fail_reason = 'item dropped to incorrect location'
+            return False
+
+        if not self.item in self.item.level.items:
+            self.fail_reason = 'item not in level'
+            return False
+
         return True
 
     def describe_to(self, description):
@@ -574,6 +582,15 @@ class HasDropped(BaseMatcher):
         elif self.fail_reason == 'item in limbo':
             mismatch_description.append('{0} is not in any level'
                                         .format(self.item))
+        elif self.fail_reason == 'item dropped to incorrect location':
+            mismatch_description.append('{0} dropped to {1}, should been {2}'
+                                        .format(self.item,
+                                                self.item.location,
+                                                item.location))
+        elif self.fail_reason == 'item not in level':
+            mismatch_description.append('{0} is not in level {1}'
+                                        .format(self.item,
+                                                self.item.level))
         else:
             mismatch_description.append('Unimplemented matcher')
 
