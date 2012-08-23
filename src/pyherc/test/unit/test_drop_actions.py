@@ -23,10 +23,12 @@ Module for testing drop action factory
 """
 from pyherc.rules.inventory.factories import DropFactory
 from pyherc.rules import InventoryParameters
+from pyherc.events import DropEvent
+from pyherc.data import Model
 from pyherc.test.builders import ItemBuilder, CharacterBuilder
 from pyherc.test.builders import ActionFactoryBuilder, LevelBuilder
 
-from mockito import mock
+from mockito import mock, verify, any
 from hamcrest import assert_that, is_, equal_to, is_in, is_not, greater_than
 from qc import forall, integers
 
@@ -67,11 +69,13 @@ class TestDropAction(object):
         self.level = None
         self.character = None
         self.action_factory = None
+        self.model = None
 
     def setup(self):
         """
         Setup test case
         """
+        self.model = mock(Model)
         self.level = LevelBuilder().build()
         self.item = ItemBuilder().build()
 
@@ -79,6 +83,7 @@ class TestDropAction(object):
                                 .with_item(self.item)
                                 .with_level(self.level)
                                 .with_location((5, 5))
+                                .with_model(self.model)
                                 .build())
 
         self.action_factory = (ActionFactoryBuilder()
@@ -134,3 +139,12 @@ class TestDropAction(object):
         new_time = self.character.tick
 
         assert_that(new_time, is_(greater_than(old_time)))
+
+    def test_dropping_raises_event(self):
+        """
+        Dropping an item should raise an event
+        """
+        self.character.drop_item(self.item,
+                                 self.action_factory)
+
+        verify(self.model).raise_event(any(DropEvent))

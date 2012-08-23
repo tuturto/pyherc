@@ -37,8 +37,6 @@ class PickUpEvent(Event):
         :type character: Character
         :param item: item being picked up
         :type item: Item
-        :param affected_tiles: tiles affected by event
-        :type affected_tiles: [(int, int)]
         """
         super(PickUpEvent, self).__init__(event_type = 'pick up',
                                           level = character.level,
@@ -62,5 +60,45 @@ class PickUpEvent(Event):
         else:
             description = '{0} picks up {1}'.format(self.character.name,
                                                     self.item.name)
+
+        return description
+
+class DropEvent(Event):
+    """
+    Event that can be used to relay information about item being dropped
+
+    .. versionadded:: 0.5
+    """
+    def __init__(self, character, item):
+        """
+        Default constructor
+
+        :param character: character dropping the item
+        :type character: Character
+        :param item: item being dropped
+        :type item: Item
+        """
+        super(DropEvent, self).__init__(event_type = 'drop',
+                                        level = character.level,
+                                        location = character.location,
+                                        affected_tiles = [])
+
+        self.character = character
+        self.item = item
+
+    def get_description(self, point_of_view):
+        """
+        Description of the event
+
+        :param point_of_view: point of view for description
+        :type point_of_view: Character
+        :returns: description of the event
+        :rtype: string
+        """
+        if point_of_view == self.character:
+            description = 'You drop {0}'.format(self.item.name)
+        else:
+            description = '{0} drops {1}'.format(self.character.name,
+                                                 self.item.name)
 
         return description

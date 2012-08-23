@@ -22,7 +22,7 @@
 Module defining classes related to inventory actions
 """
 from pyherc.aspects import Logged
-from pyherc.events import PickUpEvent
+from pyherc.events import PickUpEvent, DropEvent
 
 class PickUpAction(object):
     """
@@ -109,6 +109,8 @@ class DropAction(object):
                                       location = (self.character.location[0],
                                                   self.character.location[1]))
         self.character.add_to_tick(2)
+        self.character.raise_event(DropEvent(self.character,
+                                             self.item))
 
     @logged
     def is_legal(self):

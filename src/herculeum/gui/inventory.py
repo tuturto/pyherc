@@ -95,7 +95,8 @@ class InventoryWidget(QWidget):
         if event.event_type == 'move':
             self.__update_ground_inventory()
 
-        if event.event_type == 'pick up':
+        if event.event_type in ('pick up',
+                                'drop'):
             self.__update_carried_inventory()
             self.__update_ground_inventory()
 
@@ -119,9 +120,11 @@ class InventoryWidget(QWidget):
 
     def handle_item(self, items, item):
         if items == self.items1:
-            #pick up
             self.character.pick_up(item,
                                    self.action_factory)
+        if items == self.items2:
+            self.character.drop_item(item,
+                                     self.action_factory)
 
 class ItemBox(QWidget):
     """
