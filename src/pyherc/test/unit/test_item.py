@@ -326,43 +326,6 @@ class TestItemsInLevel:
         assert(not self.item in self.character.inventory)
         assert(self.item in self.level.items)
 
-    def test_dropping_item(self):
-        """
-        Test that an item can be dropped from inventory
-        """
-        self.character.pick_up(self.item,
-                               self.action_factory)
-
-        assert(self.item in self.character.inventory)
-        assert(not self.item in self.level.items)
-
-        self.character.location = (8, 8)
-        pyherc.rules.items.drop(self.model, self.character, self.item)
-
-        assert(not self.item in self.character.inventory)
-        assert(self.item in self.level.items)
-        assert(self.item.location == (8, 8))
-
-    def test_dropping_wielded_item(self):
-        """
-        Test that wielded item is dropped correctly
-        """
-        self.character.pick_up(self.item,
-                               self.action_factory)
-        pyherc.rules.items.wield(self.model, self.character, self.item)
-
-        assert(self.item in self.character.inventory)
-        assert(not self.item in self.level.items)
-        assert(self.item in self.character.weapons)
-
-        self.character.location = (8, 8)
-        pyherc.rules.items.drop(self.model, self.character, self.item)
-
-        assert(not self.item in self.character.inventory)
-        assert(self.item in self.level.items)
-        assert(self.item.location == (8, 8))
-        assert(not self.item in self.character.weapons)
-
     def test_finding_items(self):
         """
         Test that level can be queried for items on a certain location

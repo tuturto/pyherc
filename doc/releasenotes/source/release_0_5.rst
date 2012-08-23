@@ -11,6 +11,7 @@ New features that are readily visible to players:
   - Message is shown for missed attack
   - Message is shown for dying monster
   - Message is shown for picked up item
+  - Message is shown for dropped item
   - Player character can be given a name
 
 Following new features are more technical in nature and not visible during
@@ -19,6 +20,7 @@ gameplay:
   - _at function added to Cutesy
   - is_dead matcher added
   - other components can register to receive updates from domain objects
+  - pyherc.rules.items.drop replaced with DropAction
 
 **********
 Fixed bugs

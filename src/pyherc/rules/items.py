@@ -29,30 +29,6 @@ import pyherc.rules.magic
 
 logger = logging.getLogger('pyherc.rules.items')
 
-def drop(model, character, item):
-    """
-    Drop item from inventory
-    :param model: model to use
-    :type model: Model
-    :param character: character who is dropping the item
-    :type character: Character
-    :param item: item to be dropped
-    :type item: Item
-
-    .. warning:: This code will be eventually replaced by action sub system
-    """
-    assert(not model == None)
-    assert(not character == None)
-    assert(not item == None)
-    assert(item in character.inventory)
-
-    if(item in character.weapons):
-        unwield(model, character, item, instant = True)
-
-    character.level.add_item(item, character.location)
-    character.inventory.remove(item)
-    character.add_to_tick(1.5)
-
 def wield(model, character, item, dual_wield = False):
     """
     Wield a weapon
