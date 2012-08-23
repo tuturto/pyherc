@@ -85,9 +85,3 @@ def does_have_item(item, amount):
     :type amount: int
     """
     return ContainsItem(item, wrap_matcher(amount))
-
-def has_item(item):
-    """
-    Check if character has item
-    """
-    return CharacterHasItem(item)
