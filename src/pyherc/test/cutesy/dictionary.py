@@ -503,6 +503,7 @@ class Drop(object):
         actor.old_values = {}
         actor.old_values['inventory'] = []
         actor.old_values['inventory'].append(self.item)
+        actor.old_values['tick'] = actor.tick
 
         action_factory = (ActionFactoryBuilder()
                                     .with_move_factory()
@@ -555,6 +556,12 @@ class HasDropped(BaseMatcher):
             self.fail_reason = 'item not in level'
             return False
 
+        self.old_time = item.old_values['tick']
+        self.new_time = item.tick
+        if not self.old_time < self.new_time:
+            self.fail_reason = 'time did not pass'
+            return False
+
         return True
 
     def describe_to(self, description):
@@ -591,6 +598,11 @@ class HasDropped(BaseMatcher):
             mismatch_description.append('{0} is not in level {1}'
                                         .format(self.item,
                                                 self.item.level))
+        elif self.fail_reason == 'time did not pass':
+            mismatch_description.append(
+                        'Flow of time is incorrect. Before: {0}, after: {1}'
+                                .format(self.old_time,
+                                        self.new_time))
         else:
             mismatch_description.append('Unimplemented matcher')
 

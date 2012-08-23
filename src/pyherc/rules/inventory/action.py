@@ -108,6 +108,7 @@ class DropAction(object):
         self.character.level.add_item(item = self.item,
                                       location = (self.character.location[0],
                                                   self.character.location[1]))
+        self.character.add_to_tick(2)
 
     @logged
     def is_legal(self):

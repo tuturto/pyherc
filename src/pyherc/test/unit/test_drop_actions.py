@@ -27,7 +27,7 @@ from pyherc.test.builders import ItemBuilder, CharacterBuilder
 from pyherc.test.builders import ActionFactoryBuilder, LevelBuilder
 
 from mockito import mock
-from hamcrest import assert_that, is_, equal_to, is_in, is_not
+from hamcrest import assert_that, is_, equal_to, is_in, is_not, greater_than
 from qc import forall, integers
 
 class TestDropFactory(object):
@@ -122,3 +122,15 @@ class TestDropAction(object):
 
         assert_that(self.item.location,
                     is_(equal_to(self.character.location)))
+
+    def test_dropping_takes_time(self):
+        """
+        Dropping an item should move characters time forward
+        """
+        old_time = self.character.tick
+
+        self.character.drop_item(self.item,
+                                 self.action_factory)
+        new_time = self.character.tick
+
+        assert_that(new_time, is_(greater_than(old_time)))
