@@ -28,6 +28,7 @@ from pyherc.test.builders import ActionFactoryBuilder, LevelBuilder
 
 from mockito import mock
 from hamcrest import assert_that, is_, equal_to, is_in, is_not
+from qc import forall, integers
 
 class TestDropFactory(object):
     """
@@ -77,6 +78,7 @@ class TestDropAction(object):
         self.character = (CharacterBuilder()
                                 .with_item(self.item)
                                 .with_level(self.level)
+                                .with_location((5, 5))
                                 .build())
 
         self.action_factory = (ActionFactoryBuilder()
@@ -102,3 +104,21 @@ class TestDropAction(object):
 
         assert_that(self.item.level,
                     is_(equal_to(self.level)))
+
+    @forall(tries = 5,
+            loc_x = integers(low = 1, high = 19),
+            loc_y = integers(low = 1, high = 19))
+    def test_dropped_item_added_to_correct_location(self, loc_x, loc_y):
+        """
+        Test that dropped item is added to correct location
+        """
+        self.character.location = (loc_x, loc_y)
+        self.item.level = None
+        self.item.location = (0, 0)
+        self.character.inventory = [self.item]
+
+        self.character.drop_item(self.item,
+                                 self.action_factory)
+
+        assert_that(self.item.location,
+                    is_(equal_to(self.character.location)))

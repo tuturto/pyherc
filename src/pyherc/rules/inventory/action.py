@@ -106,7 +106,8 @@ class DropAction(object):
         """
         self.character.inventory.remove(self.item)
         self.character.level.add_item(item = self.item,
-                                      location = (0, 0))
+                                      location = (self.character.location[0],
+                                                  self.character.location[1]))
 
     @logged
     def is_legal(self):
