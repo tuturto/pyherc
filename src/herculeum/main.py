@@ -23,7 +23,6 @@ Main entry point for Herculeum - game
 """
 import sys
 import os.path
-import pygame
 import thread
 
 from pyherc.debug import get_debug_server
@@ -31,13 +30,6 @@ from herculeum.application import APP
 
 INSTALL_PATH = os.path.abspath(".")
 sys.path.append(INSTALL_PATH)
-
-
-if not pygame.font:
-    print 'Warning, fonts disabled'
-
-if not pygame.mixer:
-    print 'Warning, sound disabled'
 
 print '#   pyherc is free software: you can redistribute it and/or modify'
 print '#   it under the terms of the GNU General Public License as published by'
