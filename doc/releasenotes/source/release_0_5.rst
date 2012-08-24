@@ -8,6 +8,7 @@ New features
 New features that are readily visible to players:
 
   - User interface rewrite with PyQt
+  - 16_ inventory window
   - Message is shown for missed attack
   - Message is shown for dying monster
   - Message is shown for picked up item
@@ -41,4 +42,5 @@ Other notes
   - herculeum.gui.core removed
   - PGU and pygame removed as dependecies
 
+.. _16: https://github.com/tuturto/pyherc/issues/16
 .. _17: https://github.com/tuturto/pyherc/issues/17

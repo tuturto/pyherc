@@ -31,6 +31,8 @@ from pyherc.data import Item
 class InventoryDockWidget(QDockWidget):
     """
     Dock widget for showing inventory
+
+    .. versionadded:: 0.5
     """
     def __init__(self, surface_manager, character, action_factory, parent):
         """
@@ -58,6 +60,8 @@ class InventoryDockWidget(QDockWidget):
 class InventoryWidget(QWidget):
     """
     Widget for showing inventory
+
+    .. versionadded:: 0.5
     """
     def __init__(self, surface_manager, character, action_factory, parent):
         """
@@ -148,6 +152,8 @@ class InventoryWidget(QWidget):
 class ItemBox(QWidget):
     """
     Widget for displaying many items
+
+    .. versionadded:: 0.5
     """
     def __init__(self, surface_manager, parent, width, height):
         """
@@ -226,6 +232,8 @@ class ItemBox(QWidget):
 class ItemGlyph(QWidget):
     """
     Class to display item on screen
+
+    .. versionadded:: 0.5
     """
     def __init__(self, item, surface_manager, parent):
         """

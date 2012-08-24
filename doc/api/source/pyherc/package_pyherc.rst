@@ -14,6 +14,6 @@ pyherc
    events/package_events
    generators/package_generators
    rules/package_rules
-   test/module_test
+   test/package_test
    
    module_aspects

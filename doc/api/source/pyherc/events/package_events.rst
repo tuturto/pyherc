@@ -11,4 +11,5 @@ pyherc.events
    module_event
    module_inventory
    module_move
+   module_poison
    
