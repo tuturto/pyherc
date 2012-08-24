@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Building blocks &mdash; Herculeum 0.4 documentation</title>
+    <title>Building blocks &mdash; Herculeum 0.5 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.4 documentation" href="index.html" />
+    <link rel="top" title="Herculeum 0.5 documentation" href="index.html" />
     <link rel="next" title="Generating a level" href="generate_level.html" />
     <link rel="prev" title="Intro" href="intro.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="intro.html" title="Intro"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -61,7 +61,7 @@ pyherc is a sort of platform or library for writing roguelike games. herculeum
 on the other hand is a sample game that has been written on top of pyherc.</p>
 <p>On a high level, pyherc and herculeum codebases are divided as detailed below:</p>
 <p class="graphviz">
-<img src="_images/graphviz-0932e9b9e3447d5aba969e57916162588e6a0ad2.png" alt="digraph hierarchy {
+<img src="_images/graphviz-a00fd08bac965ceb9341e8ce1104e51b02ba638b.png" alt="digraph hierarchy {
     rankdir=LR
     node[shape=box]
     edge[dir=forward, arrowtail=empty, arrowhead=none]
@@ -70,6 +70,7 @@ on the other hand is a sample game that has been written on top of pyherc.</p>
     config
     config_dsl[label=&quot;dsl&quot;]
     data
+    data_effects[label=&quot;effects&quot;]
     debug
     events
     generators
@@ -80,7 +81,6 @@ on the other hand is a sample game that has been written on top of pyherc.</p>
     rules
     rules_attack[label=&quot;attack&quot;]
     rules_consume[label=&quot;consume&quot;]
-    rules_effects[label=&quot;effects&quot;]
     rules_inventory[label=&quot;inventory&quot;]
     rules_move[label=&quot;move&quot;]
     test
@@ -100,7 +100,7 @@ on the other hand is a sample game that has been written on top of pyherc.</p>
 
     pyherc-&gt;ai
     pyherc-&gt;config-&gt;config_dsl
-    pyherc-&gt;data
+    pyherc-&gt;data-&gt;data_effects
     pyherc-&gt;debug
     pyherc-&gt;events
     pyherc-&gt;generators-&gt;generators_level-&gt;generators_level_decorator
@@ -108,7 +108,6 @@ on the other hand is a sample game that has been written on top of pyherc.</p>
     generators_level-&gt;generators_level_room
     pyherc-&gt;rules-&gt;rules_attack
     rules-&gt;rules_consume
-    rules-&gt;rules_effects
     rules-&gt;rules_inventory
     rules-&gt;rules_move
     pyherc-&gt;test-&gt;test_bdd
@@ -130,12 +129,12 @@ on the other hand is a sample game that has been written on top of pyherc.</p>
 <li><a class="reference internal" href="pyherc/package_pyherc.html#module-pyherc" title="pyherc"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc</span></tt></a></li>
 <li><a class="reference internal" href="pyherc/ai/module_ai.html#module-pyherc.ai" title="pyherc.ai"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.ai</span></tt></a></li>
 <li><a class="reference internal" href="pyherc/config/package_config.html#module-pyherc.config" title="pyherc.config"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.config</span></tt></a></li>
-<li><a class="reference internal" href="pyherc/data/module_data.html#module-pyherc.data" title="pyherc.data"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.data</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/data/package_data.html#module-pyherc.data" title="pyherc.data"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.data</span></tt></a></li>
 <li><a class="reference internal" href="pyherc/debug/module_debug.html#module-pyherc.debug" title="pyherc.debug"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.debug</span></tt></a></li>
 <li><a class="reference internal" href="pyherc/events/package_events.html#module-pyherc.events" title="pyherc.events"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.events</span></tt></a></li>
-<li><a class="reference internal" href="pyherc/generators/module_generators.html#module-pyherc.generators" title="pyherc.generators"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.generators</span></tt></a></li>
-<li><a class="reference internal" href="pyherc/rules/module_rules.html#module-pyherc.rules" title="pyherc.rules"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules</span></tt></a></li>
-<li><a class="reference internal" href="pyherc/test/module_test.html#module-pyherc.test" title="pyherc.test"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.test</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/generators/package_generators.html#module-pyherc.generators" title="pyherc.generators"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.generators</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/rules/package_rules.html#module-pyherc.rules" title="pyherc.rules"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules</span></tt></a></li>
+<li><a class="reference internal" href="pyherc/test/package_test.html#module-pyherc.test" title="pyherc.test"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.test</span></tt></a></li>
 </ul>
 <p>herculeum:</p>
 <ul class="simple">
@@ -191,7 +190,7 @@ layout and content of levels where player adventures. It manages:</p>
 </div>
 <div class="section" id="rules">
 <h2>Rules<a class="headerlink" href="#rules" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="pyherc/rules/module_rules.html#module-pyherc.rules" title="pyherc.rules"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules</span></tt></a> is what defines what kind of actions player and monsters
+<p><a class="reference internal" href="pyherc/rules/package_rules.html#module-pyherc.rules" title="pyherc.rules"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules</span></tt></a> is what defines what kind of actions player and monsters
 are allowed to take and how they affect the world around them. Rules for things
 like moving, fighting and drinking potions are found here. Refer to
 <a class="reference internal" href="actions.html"><em>Actions</em></a> for more detailed description how actions are created and how to
@@ -261,7 +260,7 @@ add more.</p>
         <li class="right" >
           <a href="intro.html" title="Intro"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

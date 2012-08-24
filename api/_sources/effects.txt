@@ -15,13 +15,13 @@ healing potion can grant healing.
 
 Effect handles
 ==============
-:class:`pyherc.rules.effects.effect.EffectHandle` are sort of prototypes for
+:class:`pyherc.data.effects.effect.EffectHandle` are sort of prototypes for
 effects. They contain information on when to trigger the effect, name of the
 effect, possible overriding parameters and amount of charges.
 
 Effect
 ======
-:class:`pyherc.rules.effects.effect.Effect` is a baseclass for all effects.
+:class:`pyherc.data.effects.effect.Effect` is a baseclass for all effects.
 All effects have duration, frequency and tick. Duration tells how long it takes
 until effect naturally expires. Frequency tells how often effect is triggered
 and tick is internal counter which keeps track when effect should trigger.
@@ -38,17 +38,16 @@ effect has not been expired.
 
 EffectsFactory
 ==============
-Effects are cread by :class:`pyherc.rules.effects.factory.EffectsFactory`. It
-can take EffectHandle, some parameters and create a correctly instantiated
-Effect.
+Effects are cread by :class:`pyherc.generators.effects.EffectsFactory`. It can 
+take EffectHandle, some parameters and create a correctly instantiated Effect.
 
 EffectsFactory is configured during the start up of the system with information
 that links names of effects to concrete Effect subclasses and their parameters.
 
 .. testcode::
 
-    from pyherc.rules.effects import EffectsFactory
-    from pyherc.rules.effects import Poison
+    from pyherc.generators import EffectsFactory
+    from pyherc.data.effects import Poison
     from pyherc.test.cutesy.dictionary import Adventurer
 
     effect_factory = EffectsFactory()
@@ -87,16 +86,15 @@ in the dictionary. These parameters are then used to override the default ones.
 
 Effects collection
 ==================
-:class:`pyherc.data.effectscollection.EffectsCollection` is tasked to keep
-track of effects and effect handles for particular object. Both Item and
+:class:`pyherc.data.effects.effectscollection.EffectsCollection` is tasked to
+keep track of effects and effect handles for particular object. Both Item and
 Character objects use it to interact with effects sub system.
 
 Following example creates an EffectHandle and adds it to the collection.
 
 .. testcode::
    
-   from pyherc.rules.effects import EffectHandle
-   from pyherc.data import EffectsCollection
+   from pyherc.data.effects import EffectsCollection,EffectHandle
    
    collection = EffectsCollection()
    handle = EffectHandle(trigger = 'on kick',
@@ -111,14 +109,13 @@ The collection now contains a single EffectHandle object.
    
 .. testoutput::
 
-   [<pyherc.rules.effects.effect.EffectHandle object at 0x...>]
+   [<pyherc.data.effects.effect.EffectHandle object at 0x...>]
 
 Following example creates an Effect and adds it to the collection.
 
 .. testcode::
 
-   from pyherc.rules.effects import Poison
-   from pyherc.data import EffectsCollection
+   from pyherc.data.effects import EffectsCollection, Poison
 
    collection = EffectsCollection()
    effect = Poison(duration = 200, 
@@ -134,4 +131,4 @@ The collection now contains a single Poison object.
    
 .. testoutput::
 
-   [<pyherc.rules.effects.poison.Poison object at 0x...>]
+   [<pyherc.data.effects.poison.Poison object at 0x...>]

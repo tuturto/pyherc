@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.data.effects.effectscollection &mdash; Herculeum 0.5 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.5 documentation" href="../../../index.html" />
+    <link rel="up" title="pyherc.data.effects" href="package_effects.html" />
+    <link rel="next" title="pyherc.data.effects.heal" href="module_heal.html" />
+    <link rel="prev" title="pyherc.data.effects.effect" href="module_effect.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_heal.html" title="pyherc.data.effects.heal"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_effect.html" title="pyherc.data.effects.effect"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../package_data.html" >pyherc.data</a> &raquo;</li>
+          <li><a href="package_effects.html" accesskey="U">pyherc.data.effects</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.data.effects.effectscollection">
+<span id="pyherc-data-effects-effectscollection"></span><h1>pyherc.data.effects.effectscollection<a class="headerlink" href="#module-pyherc.data.effects.effectscollection" title="Permalink to this headline">¶</a></h1>
+<p>Module for effects collection</p>
+<dl class="class">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection">
+<em class="property">class </em><tt class="descclassname">pyherc.data.effects.effectscollection.</tt><tt class="descname">EffectsCollection</tt><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class for representing collection of effects</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.4.</span></p>
+<dl class="method">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection.add_effect">
+<tt class="descname">add_effect</tt><big>(</big><em>effect</em><big>)</big><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection.add_effect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add effect</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>effect</strong> (<em>Effect</em>) &#8211; effect to add</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection.add_effect_handle">
+<tt class="descname">add_effect_handle</tt><big>(</big><em>handle</em><big>)</big><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection.add_effect_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add effect handle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>handle</strong> (<em>EffectHandle</em>) &#8211; effect handle to add</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection.get_charges_left">
+<tt class="descname">get_charges_left</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection.get_charges_left" title="Permalink to this definition">¶</a></dt>
+<dd><p>Amount of charges left in collection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">amount of charges</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[integer]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection.get_effect_handles">
+<tt class="descname">get_effect_handles</tt><big>(</big><em>trigger=None</em><big>)</big><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection.get_effect_handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get effect handles</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>trigger</strong> (<em>string</em>) &#8211; optional trigger type</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">effect handles</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">[EffectHandle]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection.get_effects">
+<tt class="descname">get_effects</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection.get_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get effects from collection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">effects</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[Effect]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection.get_expired_effects">
+<tt class="descname">get_expired_effects</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection.get_expired_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get expired effects</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">expired effects</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[Effect]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection.get_maximum_charges_left">
+<tt class="descname">get_maximum_charges_left</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection.get_maximum_charges_left" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return highest amount of charges left in collection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">highest charge</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection.get_minimum_charges_left">
+<tt class="descname">get_minimum_charges_left</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection.get_minimum_charges_left" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return smallest amount of charges left in item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">smallest charge in collection</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection.has_effect">
+<tt class="descname">has_effect</tt><big>(</big><em>effect</em><big>)</big><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection.has_effect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if given type of effect exists in collection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>effect</strong> (<em>Effect</em>) &#8211; effect to check</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection.remove_effect_handle">
+<tt class="descname">remove_effect_handle</tt><big>(</big><em>handle</em><big>)</big><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection.remove_effect_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove given handle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>handle</strong> (<em>EffectHandle</em>) &#8211; handle to remove</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.effects.effectscollection.EffectsCollection.remove_expired_effects">
+<tt class="descname">remove_expired_effects</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.effects.effectscollection.EffectsCollection.remove_expired_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove expired effects from collection</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_effect.html"
+                        title="previous chapter">pyherc.data.effects.effect</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_heal.html"
+                        title="next chapter">pyherc.data.effects.heal</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/pyherc/data/effects/module_effectscollection.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_heal.html" title="pyherc.data.effects.heal"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_effect.html" title="pyherc.data.effects.effect"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../package_data.html" >pyherc.data</a> &raquo;</li>
+          <li><a href="package_effects.html" >pyherc.data.effects</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

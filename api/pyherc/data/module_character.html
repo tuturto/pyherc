@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.data.character &mdash; Herculeum 0.4 documentation</title>
+    <title>pyherc.data.character &mdash; Herculeum 0.5 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.4 documentation" href="../../index.html" />
-    <link rel="up" title="pyherc.data" href="module_data.html" />
+    <link rel="top" title="Herculeum 0.5 documentation" href="../../index.html" />
+    <link rel="up" title="pyherc.data" href="package_data.html" />
     <link rel="next" title="pyherc.data.dungeon" href="module_dungeon.html" />
-    <link rel="prev" title="pyherc.data" href="module_data.html" /> 
+    <link rel="prev" title="pyherc.data.effects.poison" href="effects/module_poison.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,12 +44,12 @@
           <a href="module_dungeon.html" title="pyherc.data.dungeon"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="module_data.html" title="pyherc.data"
+          <a href="effects/module_poison.html" title="pyherc.data.effects.poison"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
-          <li><a href="module_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
+          <li><a href="package_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -76,9 +76,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>model</strong> (<em>Model</em>) &#8211; model where character acts</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; action factory for character to use</li>
 <li><strong>effects_collection</strong> (<em>EffectsCollection</em>) &#8211; collection for effects</li>
-<li><strong>rng</strong> (<em>Random</em>) &#8211; random number generator</li>
 </ul>
 </td>
 </tr>
@@ -89,31 +87,31 @@
 <dl class="attribute">
 <dt id="pyherc.data.character.Character.hit_points">
 <tt class="descname">hit_points</tt><a class="headerlink" href="#pyherc.data.character.Character.hit_points" title="Permalink to this definition">¶</a></dt>
-<dd><p>Current hit points of the character</p>
+<dd><p>Current hitpoints</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pyherc.data.character.Character.max_hp">
 <tt class="descname">max_hp</tt><a class="headerlink" href="#pyherc.data.character.Character.max_hp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Current maximum hit points of the character</p>
+<dd><p>Maximum HP this character can currently have</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pyherc.data.character.Character.body">
 <tt class="descname">body</tt><a class="headerlink" href="#pyherc.data.character.Character.body" title="Permalink to this definition">¶</a></dt>
-<dd><p>Body attribute of the character</p>
+<dd><p>Current body attribute</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pyherc.data.character.Character.finesse">
 <tt class="descname">finesse</tt><a class="headerlink" href="#pyherc.data.character.Character.finesse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finesse attribute of the character</p>
+<dd><p>Current finesse attribute</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pyherc.data.character.Character.mind">
 <tt class="descname">mind</tt><a class="headerlink" href="#pyherc.data.character.Character.mind" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mind attribute of the character</p>
+<dd><p>Current mind attribute</p>
 </dd></dl>
 
 <dl class="method">
@@ -138,7 +136,12 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>Model</em>) &#8211; model where character is located</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>Model</em>) &#8211; model where character is located</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory for creating actions</li>
+<li><strong>rng</strong> (<em>Random</em>) &#8211; random number generator</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -147,31 +150,13 @@
 <dl class="method">
 <dt id="pyherc.data.character.Character.get_attack">
 <tt class="descname">get_attack</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_attack" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return attack attribute of the character</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Attack value</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
-</tr>
-</tbody>
-</table>
+<dd><p>Attack attribute of the character</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.data.character.Character.set_attack">
 <tt class="descname">set_attack</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.set_attack" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set attack attribute of the character</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attack</strong> (<em>integer</em>) &#8211; Attack attribute</td>
-</tr>
-</tbody>
-</table>
+<dd><p>Attack attribute of the character</p>
 </dd></dl>
 
 <dl class="method">
@@ -274,7 +259,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>action_parameters</strong> (<em>ActionParameters</em>) &#8211; parameters controlling creation of the action</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>action_parameters</strong> (<em>ActionParameters</em>) &#8211; parameters controlling creation of the action</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -288,9 +277,14 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>action_parameters</strong> (<em>ActionParameters</em>) &#8211; parameters controlling creation of the action</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>action_parameters</strong> (<em>ActionParameters</em>) &#8211; parameters controlling creation of the action</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Action</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Action</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -304,7 +298,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>direction</strong> (<em>integer</em>) &#8211; direction to move</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>direction</strong> (<em>integer</em>) &#8211; direction to move</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -321,6 +319,7 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>direction</strong> (<em>integer</em>) &#8211; direction to move</li>
 <li><strong>movement_mode</strong> (<em>string</em>) &#8211; mode of movement</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
 </ul>
 </td>
 </tr>
@@ -342,7 +341,12 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>direction</strong> (<em>integer</em>) &#8211; direction to attack</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>direction</strong> (<em>integer</em>) &#8211; direction to attack</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+<li><strong>rng</strong> (<em>Random</em>) &#8211; random number generator</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -356,7 +360,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>potion</strong> (<em>Item</em>) &#8211; potion to drink</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>potion</strong> (<em>Item</em>) &#8211; potion to drink</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -496,8 +504,8 @@ while taking characters speed into account</p>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="module_data.html"
-                        title="previous chapter">pyherc.data</a></p>
+  <p class="topless"><a href="effects/module_poison.html"
+                        title="previous chapter">pyherc.data.effects.poison</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="module_dungeon.html"
                         title="next chapter">pyherc.data.dungeon</a></p>
@@ -536,12 +544,12 @@ while taking characters speed into account</p>
           <a href="module_dungeon.html" title="pyherc.data.dungeon"
              >next</a> |</li>
         <li class="right" >
-          <a href="module_data.html" title="pyherc.data"
+          <a href="effects/module_poison.html" title="pyherc.data.effects.poison"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
-          <li><a href="module_data.html" >pyherc.data</a> &raquo;</li> 
+          <li><a href="package_data.html" >pyherc.data</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

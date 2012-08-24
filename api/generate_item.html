@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Generating an item &mdash; Herculeum 0.4 documentation</title>
+    <title>Generating an item &mdash; Herculeum 0.5 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.4 documentation" href="index.html" />
+    <link rel="top" title="Herculeum 0.5 documentation" href="index.html" />
     <link rel="next" title="Actions" href="actions.html" />
     <link rel="prev" title="Modular level generator" href="modular_levels.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="modular_levels.html" title="Modular level generator"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -79,7 +79,7 @@ following code can be used:</p>
 example defines an apple and dagger for configuration.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.generators</span> <span class="kn">import</span> <span class="n">ItemConfigurations</span>
 <span class="kn">from</span> <span class="nn">pyherc.generators</span> <span class="kn">import</span> <span class="n">ItemConfiguration</span><span class="p">,</span> <span class="n">WeaponConfiguration</span>
-<span class="kn">from</span> <span class="nn">pyherc.rules.effects</span> <span class="kn">import</span> <span class="n">EffectHandle</span>
+<span class="kn">from</span> <span class="nn">pyherc.data.effects</span> <span class="kn">import</span> <span class="n">EffectHandle</span>
 
 <span class="k">def</span> <span class="nf">init_items</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -114,6 +114,16 @@ example defines an apple and dagger for configuration.</p>
                                             <span class="n">weapon_class</span> <span class="o">=</span> <span class="s">&#39;simple&#39;</span><span class="p">)))</span>
 
     <span class="k">return</span> <span class="n">config</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">init_items</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">config</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Example creates a list containing two ItemConfiguration objects.</p>
+<div class="highlight-none"><div class="highlight"><pre>2
+&lt;pyherc.generators.item.ItemConfiguration object at 0x...&gt;
 </pre></div>
 </div>
 <p>For more details regarding to configuration, refer to <a class="reference internal" href="configuration.html"><em>Configuration</em></a>
@@ -179,7 +189,7 @@ page.</p>
         <li class="right" >
           <a href="modular_levels.html" title="Modular level generator"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

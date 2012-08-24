@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.config.config &mdash; Herculeum 0.4 documentation</title>
+    <title>pyherc.config.config &mdash; Herculeum 0.5 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.4 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.5 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.config" href="package_config.html" />
-    <link rel="next" title="pyherc.data" href="../data/module_data.html" />
+    <link rel="next" title="pyherc.data" href="../data/package_data.html" />
     <link rel="prev" title="pyherc.config" href="package_config.html" /> 
   </head>
   <body>
@@ -41,12 +41,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../data/module_data.html" title="pyherc.data"
+          <a href="../data/package_data.html" title="pyherc.data"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="package_config.html" title="pyherc.config"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_config.html" accesskey="U">pyherc.config</a> &raquo;</li> 
@@ -81,6 +81,42 @@ new_config: items to add to configuration</dd>
 <dt id="pyherc.config.config.Configuration.get_configurators">
 <tt class="descname">get_configurators</tt><big>(</big><em>location</em>, <em>function_name</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.get_configurators" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get functions to configure given sub-system</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.config.config.Configuration.get_creature_config">
+<tt class="descname">get_creature_config</tt><big>(</big><em>level_config</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.get_creature_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load creature configuration</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>level_config</strong> (<em>Package</em>) &#8211; namespace of configurations</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">configuration for creatures</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">CreatureConfigurations</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.config.config.Configuration.get_item_config">
+<tt class="descname">get_item_config</tt><big>(</big><em>item_config</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.get_item_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load item configuration</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>level_config</strong> (<em>Package</em>) &#8211; namespace of configurations</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">configuration for items</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ItemConfigurations</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -129,7 +165,7 @@ new_config: items to add to configuration</dd>
   <p class="topless"><a href="package_config.html"
                         title="previous chapter">pyherc.config</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../data/module_data.html"
+  <p class="topless"><a href="../data/package_data.html"
                         title="next chapter">pyherc.data</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
@@ -163,12 +199,12 @@ new_config: items to add to configuration</dd>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../data/module_data.html" title="pyherc.data"
+          <a href="../data/package_data.html" title="pyherc.data"
              >next</a> |</li>
         <li class="right" >
           <a href="package_config.html" title="pyherc.config"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_config.html" >pyherc.config</a> &raquo;</li> 

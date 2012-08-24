@@ -1,0 +1,124 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Release 0.5 &mdash; Release notes</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Release notes" href="index.html" />
+    <link rel="next" title="Release 0.4" href="release_0_4.html" />
+    <link rel="prev" title="pyherc’s release documentation" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Release notes</span></a></h1>
+        <h2 class="heading"><span>Release 0.5</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">pyherc&#8217;s release documentation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="release_0_4.html">Release 0.4</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="release-0-5">
+<h1>Release 0.5<a class="headerlink" href="#release-0-5" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="new-features">
+<h2>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h2>
+<p>New features that are readily visible to players:</p>
+<blockquote>
+<div><ul class="simple">
+<li>User interface rewrite with PyQt</li>
+<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/16">16</a> inventory window</li>
+<li>Message is shown for missed attack</li>
+<li>Message is shown for dying monster</li>
+<li>Message is shown for picked up item</li>
+<li>Message is shown for dropped item</li>
+<li>Player character can be given a name</li>
+</ul>
+</div></blockquote>
+<p>Following new features are more technical in nature and not visible during
+gameplay:</p>
+<blockquote>
+<div><ul class="simple">
+<li>_at function added to Cutesy</li>
+<li>is_dead matcher added</li>
+<li>other components can register to receive updates from domain objects</li>
+<li>pyherc.rules.items.drop replaced with DropAction</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="fixed-bugs">
+<h2>Fixed bugs<a class="headerlink" href="#fixed-bugs" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/17">17</a> Taking stairs do not update display correctly</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="other-notes">
+<h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Services are no longer injected to domain objects</li>
+<li>pyherc.rules.effects moved to pyherc.data.effects</li>
+<li>EffectsCollection moved to pyherc.data.effects</li>
+<li>qc added for testing</li>
+<li>poisoning and dying from poison tests moved to BDD side</li>
+<li>is_at and is_not_at changed to is_in and is_not_in</li>
+<li>herculeum.gui.core removed</li>
+<li>PGU and pygame removed as dependecies</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">pyherc&#8217;s release documentation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="release_0_4.html">Release 0.4</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

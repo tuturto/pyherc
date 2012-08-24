@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.test.builders.action &mdash; Herculeum 0.4 documentation</title>
+    <title>pyherc.test.builders.action &mdash; Herculeum 0.5 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.4 documentation" href="../../../index.html" />
-    <link rel="up" title="pyherc.test.builders" href="module_builders.html" />
+    <link rel="top" title="Herculeum 0.5 documentation" href="../../../index.html" />
+    <link rel="up" title="pyherc.test.builders" href="package_builders.html" />
     <link rel="next" title="pyherc.test.builders.character" href="module_character.html" />
-    <link rel="prev" title="pyherc.test.builders" href="module_builders.html" /> 
+    <link rel="prev" title="pyherc.test.builders" href="package_builders.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,13 +44,13 @@
           <a href="module_character.html" title="pyherc.test.builders.character"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="module_builders.html" title="pyherc.test.builders"
+          <a href="package_builders.html" title="pyherc.test.builders"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
-          <li><a href="../module_test.html" >pyherc.test</a> &raquo;</li>
-          <li><a href="module_builders.html" accesskey="U">pyherc.test.builders</a> &raquo;</li> 
+          <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
+          <li><a href="package_builders.html" accesskey="U">pyherc.test.builders</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -67,6 +67,74 @@
 <em class="property">class </em><tt class="descclassname">pyherc.test.builders.action.</tt><tt class="descname">ActionFactoryBuilder</tt><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Class for building action factories</p>
+<dl class="method">
+<dt id="pyherc.test.builders.action.ActionFactoryBuilder.build">
+<tt class="descname">build</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build action factory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">action factory</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">ActionFactory</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.action.ActionFactoryBuilder.with_attack_factory">
+<tt class="descname">with_attack_factory</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder.with_attack_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure action factory to use real attack factory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.action.ActionFactoryBuilder.with_drink_factory">
+<tt class="descname">with_drink_factory</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder.with_drink_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure action factory to use real drink factory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.action.ActionFactoryBuilder.with_effect_factory">
+<tt class="descname">with_effect_factory</tt><big>(</big><em>effect_factory</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder.with_effect_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure action factory to use effect factory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>effect_factory</strong> (<em>EffectFactory</em>) &#8211; effect factory to use</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.action.ActionFactoryBuilder.with_inventory_factory">
+<tt class="descname">with_inventory_factory</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder.with_inventory_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure action factory to use real inventory factory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.action.ActionFactoryBuilder.with_model">
+<tt class="descname">with_model</tt><big>(</big><em>model</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder.with_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set model to use with factory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>Model</em>) &#8211; model</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.action.ActionFactoryBuilder.with_move_factory">
+<tt class="descname">with_move_factory</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder.with_move_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure action factory to use real move factory</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -78,7 +146,7 @@
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="module_builders.html"
+  <p class="topless"><a href="package_builders.html"
                         title="previous chapter">pyherc.test.builders</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="module_character.html"
@@ -118,13 +186,13 @@
           <a href="module_character.html" title="pyherc.test.builders.character"
              >next</a> |</li>
         <li class="right" >
-          <a href="module_builders.html" title="pyherc.test.builders"
+          <a href="package_builders.html" title="pyherc.test.builders"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
-          <li><a href="../module_test.html" >pyherc.test</a> &raquo;</li>
-          <li><a href="module_builders.html" >pyherc.test.builders</a> &raquo;</li> 
+          <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
+          <li><a href="package_builders.html" >pyherc.test.builders</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

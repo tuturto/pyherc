@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.data.item &mdash; Herculeum 0.4 documentation</title>
+    <title>pyherc.data.item &mdash; Herculeum 0.5 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.4 documentation" href="../../index.html" />
-    <link rel="up" title="pyherc.data" href="module_data.html" />
+    <link rel="top" title="Herculeum 0.5 documentation" href="../../index.html" />
+    <link rel="up" title="pyherc.data" href="package_data.html" />
     <link rel="next" title="pyherc.data.level" href="module_level.html" />
-    <link rel="prev" title="pyherc.data.effectscollection" href="module_effectscollection.html" /> 
+    <link rel="prev" title="pyherc.data.dungeon" href="module_dungeon.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,12 +44,12 @@
           <a href="module_level.html" title="pyherc.data.level"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="module_effectscollection.html" title="pyherc.data.effectscollection"
+          <a href="module_dungeon.html" title="pyherc.data.dungeon"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
-          <li><a href="module_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
+          <li><a href="package_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -196,6 +196,54 @@ Name can be appearance or given name</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="pyherc.data.item.Item.notify_update_listeners">
+<tt class="descname">notify_update_listeners</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.notify_update_listeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify all listeners registered for update of this entity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<em>Event</em>) &#8211; event to relay to update listeners</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.5.</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.item.Item.register_for_updates">
+<tt class="descname">register_for_updates</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.register_for_updates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register listener to receive updates for this entity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>listener</strong> (<em>Listener</em>) &#8211; listener to add</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.5.</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.item.Item.remove_from_updates">
+<tt class="descname">remove_from_updates</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.remove_from_updates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove listener</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>listener</strong> (<em>Listener</em>) &#8211; listener to remove</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.5.</span></p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -214,8 +262,8 @@ Name can be appearance or given name</p>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="module_effectscollection.html"
-                        title="previous chapter">pyherc.data.effectscollection</a></p>
+  <p class="topless"><a href="module_dungeon.html"
+                        title="previous chapter">pyherc.data.dungeon</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="module_level.html"
                         title="next chapter">pyherc.data.level</a></p>
@@ -254,12 +302,12 @@ Name can be appearance or given name</p>
           <a href="module_level.html" title="pyherc.data.level"
              >next</a> |</li>
         <li class="right" >
-          <a href="module_effectscollection.html" title="pyherc.data.effectscollection"
+          <a href="module_dungeon.html" title="pyherc.data.dungeon"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
-          <li><a href="module_data.html" >pyherc.data</a> &raquo;</li> 
+          <li><a href="package_data.html" >pyherc.data</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

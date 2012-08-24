@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Effects &mdash; Herculeum 0.4 documentation</title>
+    <title>Effects &mdash; Herculeum 0.5 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.4 documentation" href="index.html" />
+    <link rel="top" title="Herculeum 0.5 documentation" href="index.html" />
     <link rel="next" title="Configuration" href="configuration.html" />
     <link rel="prev" title="Events" href="events.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="events.html" title="Events"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -69,13 +69,13 @@ healing potion can grant healing.</p>
 </div>
 <div class="section" id="effect-handles">
 <h2>Effect handles<a class="headerlink" href="#effect-handles" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="pyherc/rules/effects/module_effect.html#pyherc.rules.effects.effect.EffectHandle" title="pyherc.rules.effects.effect.EffectHandle"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.effects.effect.EffectHandle</span></tt></a> are sort of prototypes for
+<p><a class="reference internal" href="pyherc/data/effects/module_effect.html#pyherc.data.effects.effect.EffectHandle" title="pyherc.data.effects.effect.EffectHandle"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.data.effects.effect.EffectHandle</span></tt></a> are sort of prototypes for
 effects. They contain information on when to trigger the effect, name of the
 effect, possible overriding parameters and amount of charges.</p>
 </div>
 <div class="section" id="effect">
 <h2>Effect<a class="headerlink" href="#effect" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="pyherc/rules/effects/module_effect.html#pyherc.rules.effects.effect.Effect" title="pyherc.rules.effects.effect.Effect"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.effects.effect.Effect</span></tt></a> is a baseclass for all effects.
+<p><a class="reference internal" href="pyherc/data/effects/module_effect.html#pyherc.data.effects.effect.Effect" title="pyherc.data.effects.effect.Effect"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.data.effects.effect.Effect</span></tt></a> is a baseclass for all effects.
 All effects have duration, frequency and tick. Duration tells how long it takes
 until effect naturally expires. Frequency tells how often effect is triggered
 and tick is internal counter which keeps track when effect should trigger.</p>
@@ -88,13 +88,12 @@ effect has not been expired.</p>
 </div>
 <div class="section" id="effectsfactory">
 <h2>EffectsFactory<a class="headerlink" href="#effectsfactory" title="Permalink to this headline">¶</a></h2>
-<p>Effects are cread by <a class="reference internal" href="pyherc/rules/effects/module_factory.html#pyherc.rules.effects.factory.EffectsFactory" title="pyherc.rules.effects.factory.EffectsFactory"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.effects.factory.EffectsFactory</span></tt></a>. It
-can take EffectHandle, some parameters and create a correctly instantiated
-Effect.</p>
+<p>Effects are cread by <a class="reference internal" href="pyherc/generators/module_effects.html#pyherc.generators.effects.EffectsFactory" title="pyherc.generators.effects.EffectsFactory"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.effects.EffectsFactory</span></tt></a>. It can
+take EffectHandle, some parameters and create a correctly instantiated Effect.</p>
 <p>EffectsFactory is configured during the start up of the system with information
 that links names of effects to concrete Effect subclasses and their parameters.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.rules.effects</span> <span class="kn">import</span> <span class="n">EffectsFactory</span>
-<span class="kn">from</span> <span class="nn">pyherc.rules.effects</span> <span class="kn">import</span> <span class="n">Poison</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.generators</span> <span class="kn">import</span> <span class="n">EffectsFactory</span>
+<span class="kn">from</span> <span class="nn">pyherc.data.effects</span> <span class="kn">import</span> <span class="n">Poison</span>
 <span class="kn">from</span> <span class="nn">pyherc.test.cutesy.dictionary</span> <span class="kn">import</span> <span class="n">Adventurer</span>
 
 <span class="n">effect_factory</span> <span class="o">=</span> <span class="n">EffectsFactory</span><span class="p">()</span>
@@ -131,12 +130,11 @@ in the dictionary. These parameters are then used to override the default ones.<
 </div>
 <div class="section" id="effects-collection">
 <h2>Effects collection<a class="headerlink" href="#effects-collection" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="pyherc/data/module_effectscollection.html#pyherc.data.effectscollection.EffectsCollection" title="pyherc.data.effectscollection.EffectsCollection"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.data.effectscollection.EffectsCollection</span></tt></a> is tasked to keep
-track of effects and effect handles for particular object. Both Item and
+<p><a class="reference internal" href="pyherc/data/effects/module_effectscollection.html#pyherc.data.effects.effectscollection.EffectsCollection" title="pyherc.data.effects.effectscollection.EffectsCollection"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.data.effects.effectscollection.EffectsCollection</span></tt></a> is tasked to
+keep track of effects and effect handles for particular object. Both Item and
 Character objects use it to interact with effects sub system.</p>
 <p>Following example creates an EffectHandle and adds it to the collection.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.rules.effects</span> <span class="kn">import</span> <span class="n">EffectHandle</span>
-<span class="kn">from</span> <span class="nn">pyherc.data</span> <span class="kn">import</span> <span class="n">EffectsCollection</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.data.effects</span> <span class="kn">import</span> <span class="n">EffectsCollection</span><span class="p">,</span><span class="n">EffectHandle</span>
 
 <span class="n">collection</span> <span class="o">=</span> <span class="n">EffectsCollection</span><span class="p">()</span>
 <span class="n">handle</span> <span class="o">=</span> <span class="n">EffectHandle</span><span class="p">(</span><span class="n">trigger</span> <span class="o">=</span> <span class="s">&#39;on kick&#39;</span><span class="p">,</span>
@@ -149,12 +147,11 @@ Character objects use it to interact with effects sub system.</p>
 </pre></div>
 </div>
 <p>The collection now contains a single EffectHandle object.</p>
-<div class="highlight-none"><div class="highlight"><pre>[&lt;pyherc.rules.effects.effect.EffectHandle object at 0x...&gt;]
+<div class="highlight-none"><div class="highlight"><pre>[&lt;pyherc.data.effects.effect.EffectHandle object at 0x...&gt;]
 </pre></div>
 </div>
 <p>Following example creates an Effect and adds it to the collection.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.rules.effects</span> <span class="kn">import</span> <span class="n">Poison</span>
-<span class="kn">from</span> <span class="nn">pyherc.data</span> <span class="kn">import</span> <span class="n">EffectsCollection</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.data.effects</span> <span class="kn">import</span> <span class="n">EffectsCollection</span><span class="p">,</span> <span class="n">Poison</span>
 
 <span class="n">collection</span> <span class="o">=</span> <span class="n">EffectsCollection</span><span class="p">()</span>
 <span class="n">effect</span> <span class="o">=</span> <span class="n">Poison</span><span class="p">(</span><span class="n">duration</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
@@ -168,7 +165,7 @@ Character objects use it to interact with effects sub system.</p>
 </pre></div>
 </div>
 <p>The collection now contains a single Poison object.</p>
-<div class="highlight-none"><div class="highlight"><pre>[&lt;pyherc.rules.effects.poison.Poison object at 0x...&gt;]
+<div class="highlight-none"><div class="highlight"><pre>[&lt;pyherc.data.effects.poison.Poison object at 0x...&gt;]
 </pre></div>
 </div>
 </div>
@@ -235,7 +232,7 @@ Character objects use it to interact with effects sub system.</p>
         <li class="right" >
           <a href="events.html" title="Events"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

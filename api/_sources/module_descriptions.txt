@@ -18,6 +18,7 @@ On a high level, pyherc and herculeum codebases are divided as detailed below:
         config
         config_dsl[label="dsl"]
         data
+        data_effects[label="effects"]
         debug
         events
         generators
@@ -27,8 +28,7 @@ On a high level, pyherc and herculeum codebases are divided as detailed below:
         generators_level_room[label="room"]
         rules
         rules_attack[label="attack"]
-        rules_consume[label="consume"]
-        rules_effects[label="effects"]
+        rules_consume[label="consume"]        
         rules_inventory[label="inventory"]
         rules_move[label="move"]
         test
@@ -48,7 +48,7 @@ On a high level, pyherc and herculeum codebases are divided as detailed below:
         
         pyherc->ai
         pyherc->config->config_dsl
-        pyherc->data
+        pyherc->data->data_effects
         pyherc->debug
         pyherc->events
         pyherc->generators->generators_level->generators_level_decorator
@@ -56,7 +56,6 @@ On a high level, pyherc and herculeum codebases are divided as detailed below:
         generators_level->generators_level_room
         pyherc->rules->rules_attack
         rules->rules_consume
-        rules->rules_effects
         rules->rules_inventory
         rules->rules_move
         pyherc->test->test_bdd

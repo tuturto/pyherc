@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Actions &mdash; Herculeum 0.4 documentation</title>
+    <title>Actions &mdash; Herculeum 0.5 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.4 documentation" href="index.html" />
+    <link rel="top" title="Herculeum 0.5 documentation" href="index.html" />
     <link rel="next" title="Events" href="events.html" />
     <link rel="prev" title="Generating an item" href="generate_item.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="generate_item.html" title="Generating an item"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -84,7 +84,7 @@ single step to given direction.</p>
 specific amount of ticks.</p>
 <div class="section" id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
-<p>Actions are located in <a class="reference internal" href="pyherc/rules/module_rules.html#module-pyherc.rules" title="pyherc.rules"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules</span></tt></a>. Custom is to have own package for
+<p>Actions are located in <a class="reference internal" href="pyherc/rules/package_rules.html#module-pyherc.rules" title="pyherc.rules"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules</span></tt></a>. Custom is to have own package for
 each type of action. For example, code related to moving is placed in
 <a class="reference internal" href="pyherc/rules/move/module_move.html#module-pyherc.rules.move" title="pyherc.rules.move"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules.move</span></tt></a> while code for various attacks is in
 <a class="reference internal" href="pyherc/rules/attack/module_attack.html#module-pyherc.rules.attack" title="pyherc.rules.attack"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules.attack</span></tt></a>. Parameter classes are placed to
@@ -175,22 +175,27 @@ to be able to create our new WaitAction. This is done in
 <div class="section" id="adding-easy-to-use-interface">
 <h3>Adding easy to use interface<a class="headerlink" href="#adding-easy-to-use-interface" title="Permalink to this headline">¶</a></h3>
 <p>Last finishing step is to add easy to use method to Character class:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">wait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ticks</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
-    <span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_factory</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="n">WaitParameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                                                           <span class="n">ticks</span><span class="p">))</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">wait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ticks</span><span class="p">,</span> <span class="n">action_factory</span><span class="p">):</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">action_factory</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="n">WaitParameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                                      <span class="n">ticks</span><span class="p">))</span>
     <span class="n">action</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Now we can have our character to wait for a bit, just by calling:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">player_character</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">player_character</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">action_factory</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Notice how we are passing ActionFactory from outside of Character objects,
+instead of defining it as an attribute of Character. We do not want to inject
+service objects into domain objects, because it would complicate saving and
+loading later on.</p>
 </div>
 <div class="section" id="whole-code">
 <h3>Whole code<a class="headerlink" href="#whole-code" title="Permalink to this headline">¶</a></h3>
 <p>Below is shown the whole example of wait action and demonstration how it
 changes value in character&#8217;s internal clock.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.data</span> <span class="kn">import</span> <span class="n">Character</span><span class="p">,</span> <span class="n">Model</span><span class="p">,</span> <span class="n">EffectsCollection</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.data</span> <span class="kn">import</span> <span class="n">Character</span><span class="p">,</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">pyherc.data.effects</span> <span class="kn">import</span> <span class="n">EffectsCollection</span>
 <span class="kn">from</span> <span class="nn">pyherc.rules</span> <span class="kn">import</span> <span class="n">ActionFactory</span><span class="p">,</span> <span class="n">ActionParameters</span>
 <span class="kn">from</span> <span class="nn">pyherc.rules.factory</span> <span class="kn">import</span> <span class="n">SubActionFactory</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">Random</span>
@@ -229,10 +234,9 @@ changes value in character&#8217;s internal clock.</p>
 <span class="n">action_factory</span> <span class="o">=</span> <span class="n">ActionFactory</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">,</span>
                                <span class="n">factories</span> <span class="o">=</span> <span class="p">[</span><span class="n">wait_factory</span><span class="p">])</span>
 <span class="n">character</span> <span class="o">=</span> <span class="n">Character</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">,</span>
-                      <span class="n">action_factory</span> <span class="o">=</span> <span class="n">action_factory</span><span class="p">,</span>
-                      <span class="n">effects_collection</span> <span class="o">=</span> <span class="n">EffectsCollection</span><span class="p">(),</span>
-                      <span class="n">rng</span> <span class="o">=</span> <span class="n">Random</span><span class="p">())</span>
-<span class="n">action</span> <span class="o">=</span> <span class="n">character</span><span class="o">.</span><span class="n">create_action</span><span class="p">(</span><span class="n">WaitParameters</span><span class="p">(</span><span class="n">character</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+                      <span class="n">effects_collection</span> <span class="o">=</span> <span class="n">EffectsCollection</span><span class="p">())</span>
+<span class="n">action</span> <span class="o">=</span> <span class="n">character</span><span class="o">.</span><span class="n">create_action</span><span class="p">(</span><span class="n">WaitParameters</span><span class="p">(</span><span class="n">character</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                                 <span class="n">action_factory</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s">&#39;Ticks {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">character</span><span class="o">.</span><span class="n">tick</span><span class="p">))</span>
 <span class="n">action</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
@@ -340,7 +344,7 @@ Ticks after waiting 5
         <li class="right" >
           <a href="generate_item.html" title="Generating an item"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

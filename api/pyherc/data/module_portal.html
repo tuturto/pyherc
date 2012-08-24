@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.data.portal &mdash; Herculeum 0.4 documentation</title>
+    <title>pyherc.data.portal &mdash; Herculeum 0.5 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4',
+        VERSION:     '0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,8 +25,8 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.4 documentation" href="../../index.html" />
-    <link rel="up" title="pyherc.data" href="module_data.html" />
+    <link rel="top" title="Herculeum 0.5 documentation" href="../../index.html" />
+    <link rel="up" title="pyherc.data" href="package_data.html" />
     <link rel="next" title="pyherc.debug" href="../debug/module_debug.html" />
     <link rel="prev" title="pyherc.data.model" href="module_model.html" /> 
   </head>
@@ -46,10 +46,10 @@
         <li class="right" >
           <a href="module_model.html" title="pyherc.data.model"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
-          <li><a href="module_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
+          <li><a href="package_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -66,6 +66,24 @@
 <em class="property">class </em><tt class="descclassname">pyherc.data.portal.</tt><tt class="descname">Portal</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Portal linking two levels together</p>
+<dl class="method">
+<dt id="pyherc.data.portal.Portal.get_other_end">
+<tt class="descname">get_other_end</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.get_other_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the other end of the portal</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>level_generator_factory</strong> (<em>LevelGeneratorFactory</em>) &#8211; factory to generate level generators</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">other end of the portal</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Portal</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="pyherc.data.portal.Portal.icon">
 <tt class="descname">icon</tt><a class="headerlink" href="#pyherc.data.portal.Portal.icon" title="Permalink to this definition">¶</a></dt>
@@ -82,20 +100,20 @@
 </table>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pyherc.data.portal.Portal.other_end">
-<tt class="descname">other_end</tt><a class="headerlink" href="#pyherc.data.portal.Portal.other_end" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the other end of the portal</p>
+<dl class="method">
+<dt id="pyherc.data.portal.Portal.notify_update_listeners">
+<tt class="descname">notify_update_listeners</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.notify_update_listeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify all listeners registered for update of this entity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">other end of the portal</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Portal</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<em>Event</em>) &#8211; event to relay to update listeners</td>
 </tr>
 </tbody>
 </table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.5.</span></p>
 </dd></dl>
 
 <dl class="attribute">
@@ -109,6 +127,52 @@
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">icon of the other end</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.portal.Portal.register_for_updates">
+<tt class="descname">register_for_updates</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.register_for_updates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register listener to receive updates for this entity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>listener</strong> (<em>Listener</em>) &#8211; listener to add</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.5.</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.portal.Portal.remove_from_updates">
+<tt class="descname">remove_from_updates</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.remove_from_updates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove listener</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>listener</strong> (<em>Listener</em>) &#8211; listener to remove</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.5.</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.portal.Portal.set_other_end">
+<tt class="descname">set_other_end</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.set_other_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the other end of the portal</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>portal</strong> (<em>Portal</em>) &#8211; portal where this one leads</td>
 </tr>
 </tbody>
 </table>
@@ -167,10 +231,10 @@
         <li class="right" >
           <a href="module_model.html" title="pyherc.data.model"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.4 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
-          <li><a href="module_data.html" >pyherc.data</a> &raquo;</li> 
+          <li><a href="package_data.html" >pyherc.data</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

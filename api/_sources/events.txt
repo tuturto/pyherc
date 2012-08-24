@@ -34,8 +34,3 @@ update. For example, move action will usually have two tiles in the list: the
 original location of character and the new location. If character were carrying
 a lightsource when moving, appropriate squares should be listed too (those that
 were lighted, but are now in darkness and vice versa).
-
-List of events
-==============
- - :class:`pyherc.events.combat.AttackHitEvent`
- - :class:`pyherc.events.move.MoveEvent`
