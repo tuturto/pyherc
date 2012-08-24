@@ -23,10 +23,10 @@ Module for displaying inventory
 """
 from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QDockWidget, QGridLayout, QDrag
-from PyQt4.QtCore import Qt, QMimeData
+from PyQt4.QtCore import Qt, QMimeData, pyqtSignal
 import PyQt4.QtGui
 
-
+from pyherc.data import Item
 
 class InventoryDockWidget(QDockWidget):
     """
@@ -71,6 +71,9 @@ class InventoryWidget(QWidget):
 
         self.__set_layout()
 
+    ItemPickedUp = pyqtSignal(Item, name='ItemPickedUp')
+    ItemDropped = pyqtSignal(Item, name='ItemDropped')
+
     def __set_layout(self):
         """
         Set layout of this widget
@@ -79,7 +82,9 @@ class InventoryWidget(QWidget):
         self.vertical_layout.setSpacing(0)
 
         self.items1 = ItemBox(self.surface_manager, self, 4, 8)
+        self.items1.ItemAccepted.connect(self.handle_item_picked_up)
         self.items2 = ItemBox(self.surface_manager, self, 4, 2)
+        self.items2.ItemAccepted.connect(self.handle_item_dropped)
 
         self.vertical_layout.addWidget(self.items1)
         self.vertical_layout.addWidget(self.items2)
@@ -100,6 +105,28 @@ class InventoryWidget(QWidget):
             self.__update_carried_inventory()
             self.__update_ground_inventory()
 
+    def handle_item_picked_up(self, item):
+        """
+        Handle item being dragged on top of inventory
+
+        :param item: item to pick up
+        :type item: Item
+        """
+        self.character.pick_up(item,
+                               self.action_factory)
+        self.ItemPickedUp.emit(item)
+
+    def handle_item_dropped(self, item):
+        """
+        Handle request to drop item
+
+        :param item: item to drop
+        :type item: Item
+        """
+        self.character.drop_item(item,
+                                 self.action_factory)
+        self.ItemDropped.emit(item)
+
     def __update_ground_inventory(self):
         """
         Update items displayed in ground
@@ -118,14 +145,6 @@ class InventoryWidget(QWidget):
 
         self.items1.show_items(items)
 
-    def handle_item(self, items, item):
-        if items == self.items1:
-            self.character.pick_up(item,
-                                   self.action_factory)
-        if items == self.items2:
-            self.character.drop_item(item,
-                                     self.action_factory)
-
 class ItemBox(QWidget):
     """
     Widget for displaying many items
@@ -139,6 +158,8 @@ class ItemBox(QWidget):
         self.surface_manager = surface_manager
 
         self.__set_layout(width, height)
+
+    ItemAccepted = pyqtSignal(Item, name='ItemAccepted')
 
     def __set_layout(self, width, height):
         """
@@ -197,10 +218,10 @@ class ItemBox(QWidget):
         """
         item = e.source().item
 
-        self.parent().handle_item(self, item)
-
         e.setDropAction(Qt.MoveAction)
         e.accept()
+
+        self.ItemAccepted.emit(item)
 
 class ItemGlyph(QWidget):
     """

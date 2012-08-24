@@ -137,25 +137,30 @@ class PlayMapWidget(QWidget):
                 scene.addItem(new_glyph)
 
         for portal in self.current_level.portals:
-                new_glyph = MapGlyph(self.surface_manager.get_icon(portal.icon),
-                                     portal)
-                new_glyph.setZValue(1)
-                new_glyph.setPos(portal.location[0] * 32, portal.location[1] * 32)
-                scene.addItem(new_glyph)
+                self.add_glyph(portal, scene, 1)
 
         for item in self.current_level.items:
-                new_glyph = MapGlyph(self.surface_manager.get_icon(item.icon),
-                                     item)
-                new_glyph.setZValue(2)
-                new_glyph.setPos(item.location[0] * 32, item.location[1] * 32)
-                scene.addItem(new_glyph)
+                self.add_glyph(item, scene, 2)
 
         for creature in self.current_level.creatures:
-                new_glyph = MapGlyph(self.surface_manager.get_icon(creature.icon),
-                                     creature)
-                new_glyph.setZValue(3)
-                new_glyph.setPos(creature.location[0] * 32, creature.location[1] * 32)
-                scene.addItem(new_glyph)
+                self.add_glyph(creature, scene, 3)
+
+    def add_glyph(self, entity, scene, z_order):
+        """
+        Add graphical representation of an entity
+
+        :param entity: entity to display
+        :param scene: scene where glyph will be added
+        :type scene: QGraphicsScene
+        :param z_order: z-order of entity being displayed
+        :type z_order: int
+        """
+        new_glyph = MapGlyph(self.surface_manager.get_icon(entity.icon),
+                             entity)
+        new_glyph.setZValue(z_order)
+        new_glyph.setPos(entity.location[0] * 32,
+                         entity.location[1] * 32)
+        scene.addItem(new_glyph)
 
     def receive_event(self, event):
         """
@@ -173,6 +178,9 @@ class PlayMapWidget(QWidget):
 
             for glyph in glyphs:
                 self.view.scene().removeItem(glyph)
+
+        elif event.event_type == 'drop':
+            self.add_glyph(event.item, self.scene, 2)
 
     def receive_update(self, event):
         """
