@@ -10,6 +10,8 @@ New features
 Fixed bugs
 **********
 
+ - 22_ python path is not modified before first imports
+
 ***********
 Other notes
 ***********
@@ -17,4 +19,5 @@ Other notes
  * behave_ taken into use for BDD
  * testing guidelines updated
 
+.. _22: https://github.com/tuturto/pyherc/issues/22
 .. _behave: http://pypi.python.org/pypi/behave
