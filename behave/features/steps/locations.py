@@ -19,11 +19,13 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 from pyherc.test.cutesy import Level, place, middle_of
+from hamcrest import assert_that, is_in, is_not
 
-@given(u'{character_name} is standing in room')
-def impl(context, character_name):
+@given(u'{character_name} is standing in {location_name}')
+def impl(context, character_name, location_name):
     context.places = []
     room = Level()
+    room.name = location_name
     context.places.append(room)
     
     characters = [x for x in context.characters
@@ -48,3 +50,14 @@ def impl(context, character_name, target_name):
 
     level.add_creature(character, location)
 
+@then(u'{character_name} is not in {place_name}')
+def impl(context, character_name, place_name):
+    characters = [x for x in context.characters
+                  if x.name == character_name]
+    character = characters[0]
+
+    places = [x for x in context.places
+              if x.name == place_name]
+    place = places[0]
+
+    assert_that(character, is_not(is_in(place.creatures)))

@@ -19,6 +19,8 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 from pyherc.test.cutesy import Adventurer, Goblin
+from pyherc.test.matchers import is_dead, is_not_in
+from hamcrest import assert_that
 
 @given(u'{character_name} is Adventurer')
 def impl(context, character_name):
@@ -36,3 +38,10 @@ def impl(context, character_name):
     new_character.name = character_name
     context.characters.append(new_character)
 
+@then(u'{character_name} should be dead')
+def impl(context, character_name):
+    characters = [x for x in context.characters
+                  if x.name == character_name]
+    character = characters[0]
+
+    assert_that(character, is_dead())
