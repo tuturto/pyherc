@@ -216,23 +216,3 @@ executing wait action, the tick is 5.
 
     Ticks 0
     Ticks after waiting 5
-
-List of current actions
-=======================
-
-- Moving
-
-  - :class:`pyherc.rules.move.action.MoveAction`
-  - :class:`pyherc.rules.move.action.WalkAction`
-
-- Combat
-
-  - :class:`pyherc.rules.attack.action.AttackAction`
-
-- Eating and drinking
-
-  - :class:`pyherc.rules.consume.action.DrinkAction`
-
-- Inventory manipulation
-
-  - :class:`pyherc.rules.inventory.action.PickUpAction`
