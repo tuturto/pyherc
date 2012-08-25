@@ -25,11 +25,11 @@ import sys
 import os.path
 import thread
 
-from pyherc.debug import get_debug_server
-from herculeum.application import APP
-
 INSTALL_PATH = os.path.abspath(".")
 sys.path.append(INSTALL_PATH)
+
+from pyherc.debug import get_debug_server
+from herculeum.application import APP
 
 print '#   pyherc is free software: you can redistribute it and/or modify'
 print '#   it under the terms of the GNU General Public License as published by'
