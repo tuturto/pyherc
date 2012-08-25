@@ -4,6 +4,6 @@ cd api
 call make doctest
 cd ..
 cd ..
-cd behave
+cd behave --junit
 behave
 cd ..
