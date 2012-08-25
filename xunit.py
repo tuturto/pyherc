@@ -1,3 +1,4 @@
+import os
 from xml.dom.minidom import parse, parseString
 
 def write_header(f):    
@@ -62,9 +63,10 @@ f = open('test_results.html', 'w')
 write_header(f)
 f.write('<table border="0">\n')
 
-write_test_suite('./behave/reports/TESTS-combat.xml', f)
-write_test_suite('./behave/reports/TESTS-dropping.xml', f)
-write_test_suite('./behave/reports/TESTS-poison.xml', f)
+files = os.listdir('./behave/reports/')
+for file in files:
+    write_test_suite(os.path.join('./behave/reports/', file), f)
+
 write_test_suite('nosetests.xml', f)
 
 f.write('</tr>\n')
