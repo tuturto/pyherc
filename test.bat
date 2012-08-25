@@ -4,3 +4,6 @@ cd api
 call make doctest
 cd ..
 cd ..
+cd behave
+behave
+cd ..
