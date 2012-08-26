@@ -6,9 +6,12 @@ def write_header(f):
     f.write('<head><title>Test results</title></head>\n')
     f.write('<body>\n')
 
-def write_summary(f, top_element):
+def write_summary(f, test_caption, top_element):
     
     f.write('<tr>\n')
+    f.write('<th colspan="4" align="left"><h2>{0}</h2></th>\n'.format(
+                                    test_caption))
+    f.write('</tr>\n')
     f.write('<th colspan="4">Tests: {0}, Errors: {1}, Failures: {2}, Skip: {3}</th>\n'.format(
                                     top_element.getAttribute('tests'),
                                     top_element.getAttribute('errors'),
@@ -53,10 +56,10 @@ def write_results(f, top_element):
                                         case.getAttribute('name'),
                                         case.getAttribute('time')))
             
-def write_test_suite(xunit_file_name, report_file_name):    
+def write_test_suite(xunit_file_name, caption, report_file_name):    
     document = parse(xunit_file_name)
     top_element = document.documentElement
-    write_summary(report_file_name, top_element)
+    write_summary(report_file_name, caption, top_element)
     write_results(report_file_name, top_element)
 
 f = open('test_results.html', 'w')
@@ -65,9 +68,15 @@ f.write('<table border="0">\n')
 
 files = os.listdir('./behave/reports/')
 for file in files:
-    write_test_suite(os.path.join('./behave/reports/', file), f)
+    #caption = 'TESTS-combat.xml'
+    caption = file
+    dash_location = caption.find('-')
+    caption = caption[dash_location+1:-4]
+    caption = caption.capitalize()
+    
+    write_test_suite(os.path.join('./behave/reports/', file), caption, f)
 
-write_test_suite('nosetests.xml', f)
+write_test_suite('nosetests.xml', 'Unit tests', f)
 
 f.write('</tr>\n')
 f.close()
