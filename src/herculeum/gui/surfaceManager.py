@@ -99,6 +99,11 @@ class SurfaceManager:
         self.icons[herculeum.config.tiles.CREATURE_BEETLE_2] = tiles[113]
         self.icons[herculeum.config.tiles.CREATURE_SPIDER_1] = tiles[122]
 
+        surface = self.__load_image(base_path, 'blade-bite.png')
+        tiles = self.split_surface(surface, (32, 32))
+        self.icons[herculeum.config.tiles.CREATURE_SKELETON_WARRIOR] = tiles[0]
+
+
         surface = self.__load_image(base_path, 'potions.png')
         tiles = self.split_surface(surface, (32, 32))
 
