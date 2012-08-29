@@ -194,7 +194,7 @@ def init_creatures():
                                         body = 8,
                                         finesse = 11,
                                         mind = 0,
-                                        hp = 6,
+                                        hp = 8,
                                         speed = 2.5,
                                         icons = CREATURE_SKELETON_WARRIOR,
                                         attack = 2,
