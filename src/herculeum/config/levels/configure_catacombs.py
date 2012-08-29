@@ -48,6 +48,7 @@ from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
 from herculeum.config.tiles import CREATURE_RAT_1, CREATURE_RAT_2
 from herculeum.config.tiles import CREATURE_RAT_3, CREATURE_RAT_4
 from herculeum.config.tiles import CREATURE_BEETLE_1, CREATURE_BEETLE_2
+from herculeum.config.tiles import CREATURE_SKELETON_WARRIOR
 
 from pyherc.config.dsl import LevelConfiguration
 from pyherc.generators import CreatureConfiguration
@@ -114,6 +115,9 @@ def init_level(rng, item_generator, creature_generator, level_size):
     creatures_upper.add_creature(min_amount = 6,
                                  max_amount = 12,
                                  name = 'rat')
+    creatures_upper.add_creature(min_amount = 0,
+                                 max_amount = 1,
+                                 name = 'skeleton warrior')
 
     creatures_lower = CreatureAdderConfiguration(['lower catacombs'])
     creatures_lower.add_creature(min_amount = 6,
@@ -122,6 +126,9 @@ def init_level(rng, item_generator, creature_generator, level_size):
     creatures_lower.add_creature(min_amount = 2,
                                  max_amount = 5,
                                  name = 'fire beetle')
+    creatures_lower.add_creature(min_amount = 1,
+                                 max_amount = 3,
+                                 name = 'skeleton warrior')
 
     creature_adders = [CreatureAdder(creature_generator,
                                     creatures_upper,
@@ -181,6 +188,16 @@ def init_creatures():
                                         speed = 1.9,
                                         icons = CREATURE_BEETLE_1,
                                         attack = 4,
+                                        ai = FlockingHerbivore))
+
+    config.append(CreatureConfiguration(name = 'skeleton warrior',
+                                        body = 8,
+                                        finesse = 11,
+                                        mind = 0,
+                                        hp = 6,
+                                        speed = 2.5,
+                                        icons = CREATURE_SKELETON_WARRIOR,
+                                        attack = 2,
                                         ai = FlockingHerbivore))
 
     return config
