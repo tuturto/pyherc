@@ -45,3 +45,11 @@ def impl(context, character_name):
     character = characters[0]
 
     assert_that(character, is_dead())
+
+@given(u'{character_name} is almost dead')
+def impl(context, character_name):
+    characters = [x for x in context.characters
+                  if x.name == character_name]
+    character = characters[0]
+    
+    character.hit_points = 1

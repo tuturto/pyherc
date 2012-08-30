@@ -54,7 +54,7 @@ def impl(context, item_name):
     item = items[0]
     
     room = context.places[0]
-    
+
     assert item.level == room
 
 @then(u'{item_name} should be at same place as {character_name}')
