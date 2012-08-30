@@ -171,3 +171,4 @@ class TestItemsInCreatureGeneration(object):
         creature = self.generator.generate_creature(name = 'skeleton warrior')
 
         verify(item_generator).generate_item(name = 'dagger')
+

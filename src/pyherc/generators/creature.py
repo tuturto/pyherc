@@ -76,7 +76,9 @@ class CreatureGenerator(object):
             new_creature.add_effect_handle(new_handle)
 
         for spec in config.inventory:
-            self.item_generator.generate_item(name = spec.item_name)
+            new_creature.inventory.append(
+                                self.item_generator.generate_item(
+                                                        name = spec.item_name))
 
         if not config.ai == None:
             new_creature.artificial_intelligence = config.ai(new_creature)
