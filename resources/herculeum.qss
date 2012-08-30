@@ -1,0 +1,55 @@
+/**
+ ** Generic style rules common to all platforms
+ **/
+
+QWidget {
+ color: black;
+ /* margin: 0px; */
+}
+
+/* The background of the tab bar */
+QMainWindow {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 darkgray, stop:1 black);
+    padding: 0;
+    margin: 0;
+}
+
+QTextEdit {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 darkgray, stop:1 black);
+    color: white;
+    border-width: 1px;
+    padding: 0px;
+    spacing: 0px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 4px;
+}
+
+QAbstractScrollArea {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 darkgray, stop:1 black);
+    color: white;
+    border-width: 1px;
+    padding: 0px;
+    spacing: 0px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 4px;
+}
+
+QMenuBar  {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 darkgray, stop:1 black);
+}
+
+QFrame {
+    color: white;
+    border-width: 1px;
+    padding: 0px;
+    spacing: 0px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 4px;
+}

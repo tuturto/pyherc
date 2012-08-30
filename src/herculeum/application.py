@@ -30,6 +30,7 @@ import herculeum.config.levels
 
 from herculeum.gui import MainWindow
 from PyQt4.QtGui import QApplication
+from PyQt4.QtCore import QFile, QLatin1String
 
 class Application(object):
     """
@@ -46,6 +47,7 @@ class Application(object):
         self.logger = None
         self.screen = None
         self.log_level = None
+
         self.qt_app = QApplication(sys.argv)
 
     def process_command_line(self):
@@ -66,6 +68,11 @@ class Application(object):
         """
         Load configuration
         """
+        file = QFile(os.path.join(self.base_path, 'herculeum.qss'));
+        file.open(QFile.ReadOnly)
+        styleSheet = QLatin1String(file.readAll());
+        self.qt_app.setStyleSheet(styleSheet);
+
         self.world = Model()
         self.config = Configuration(self.base_path, self.world)
         self.config.initialise(herculeum.config.levels)

@@ -6,6 +6,8 @@ Release 0.6
 New features
 ************
 
+ - Support for Qt style sheets
+
 **********
 Fixed bugs
 **********
