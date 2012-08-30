@@ -25,10 +25,11 @@ Tests for creature generation
 from pyherc.generators import CreatureGenerator
 from pyherc.test.matchers import has_effect_handle
 from hamcrest import * #pylint: disable=W0401
-from mockito import mock
+from mockito import mock, verify
 
 from pyherc.generators import CreatureConfigurations
 from pyherc.generators import CreatureConfiguration
+from pyherc.generators import InventoryConfiguration
 from pyherc.data.effects import EffectHandle
 from pyherc.ai import FlockingHerbivore
 from random import Random
@@ -46,7 +47,6 @@ class TestCreatureGeneration(object):
         self.generator = None
 
         self.model = None
-        self.action_factory = None
         self.rng = None
 
     def setup(self):
@@ -56,7 +56,6 @@ class TestCreatureGeneration(object):
         self.creature_config = CreatureConfigurations(Random())
 
         self.model = mock()
-        self.action_factory = mock()
         self.rng = Random()
 
         self.creature_config.add_creature(
@@ -88,7 +87,8 @@ class TestCreatureGeneration(object):
 
         self.generator = CreatureGenerator(configuration = self.creature_config,
                                            model = self.model,
-                                           rng = self.rng
+                                           rng = self.rng,
+                                           item_generator = mock(),
                                            )
 
     def test_creating_simple_creature(self):
@@ -115,3 +115,59 @@ class TestCreatureGeneration(object):
 
         assert_that(creature.artificial_intelligence,
                     is_(not_none()))
+
+class TestItemsInCreatureGeneration(object):
+    """
+    Test that items can be handled in creature generation
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestItemsInCreatureGeneration, self).__init__()
+
+    def setup(self):
+        """
+        Setup testcases
+        """
+        self.model = mock()
+        self.rng = Random()
+
+        inventory_config = [InventoryConfiguration(
+                                item_name = 'dagger',
+                                min_amount = 1,
+                                max_amount = 1,
+                                probability = 100
+                                )]
+
+        self.skeleton_config = CreatureConfiguration(
+                                      name = 'skeleton warrior',
+                                      body = 8,
+                                      finesse = 11,
+                                      mind = 0,
+                                      hp = 8,
+                                      speed = 2.5,
+                                      icons = [405],
+                                      attack = 2,
+                                      ai = FlockingHerbivore,
+                                      inventory = inventory_config)
+
+        self.creature_config = CreatureConfigurations(self.rng)
+
+    def test_creating_creature_with_item_calls_itemgenerator(self):
+        """
+        Test that generating creature with item calls item generator
+        """
+        self.creature_config.add_creature(self.skeleton_config)
+
+        item_generator = mock()
+
+        self.generator = CreatureGenerator(
+                                    configuration = self.creature_config,
+                                    model = self.model,
+                                    item_generator = item_generator,
+                                    rng = self.rng)
+
+        creature = self.generator.generate_creature(name = 'skeleton warrior')
+
+        verify(item_generator).generate_item(name = 'dagger')

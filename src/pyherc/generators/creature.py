@@ -35,7 +35,7 @@ class CreatureGenerator(object):
     logged = Logged()
 
     @logged
-    def __init__(self, configuration, model, rng):
+    def __init__(self, configuration, model, item_generator, rng):
         """
         Default constructor
         """
@@ -43,6 +43,7 @@ class CreatureGenerator(object):
         self.configuration = configuration
         self.model = model
         self.rng = rng
+        self.item_generator = item_generator
 
     @logged
     def generate_creature(self, name):
@@ -73,6 +74,9 @@ class CreatureGenerator(object):
                                        charges = spec.charges)
 
             new_creature.add_effect_handle(new_handle)
+
+        for spec in config.inventory:
+            self.item_generator.generate_item(name = spec.item_name)
 
         if not config.ai == None:
             new_creature.artificial_intelligence = config.ai(new_creature)
@@ -132,7 +136,7 @@ class CreatureConfiguration(object):
     """
 
     def __init__(self, name, body, finesse, mind, hp, speed, icons, attack,
-                 ai = None, effect_handles = None):
+                 ai = None, effect_handles = None, inventory = None):
         """
         Default constructor
         """
@@ -150,3 +154,23 @@ class CreatureConfiguration(object):
             self.effect_handles = []
         else:
             self.effect_handles = effect_handles
+
+        if inventory == None:
+            self.inventory = []
+        else:
+            self.inventory = inventory
+
+class InventoryConfiguration(object):
+    """
+    Configuration for inventory of a creature
+
+    .. versionadded:: 0.6
+    """
+    def __init__(self, item_name, min_amount, max_amount, probability):
+        """
+        Default constructor
+        """
+        self.item_name = item_name
+        self.min_amount = min_amount
+        self.max_amount = max_amount
+        self.probability = probability

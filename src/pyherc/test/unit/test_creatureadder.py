@@ -81,6 +81,7 @@ class TestCreatureAdder():
         self.model = mock()
         self.creature_generator = CreatureGenerator(creature_config,
                                                     self.model,
+                                                    mock(),
                                                     self.rng)
 
         self.configuration = CreatureAdderConfiguration(['crypt'])

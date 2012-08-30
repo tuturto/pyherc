@@ -91,13 +91,15 @@ class SurfaceManager:
         surface = self.__load_image(base_path, 'monsters.png')
         tiles = self.split_surface(surface, (32, 32))
 
-        self.icons[herculeum.config.tiles.CREATURE_RAT_1] = tiles[24]
-        self.icons[herculeum.config.tiles.CREATURE_RAT_2] = tiles[25]
-        self.icons[herculeum.config.tiles.CREATURE_RAT_3] = tiles[26]
-        self.icons[herculeum.config.tiles.CREATURE_RAT_4] = tiles[27]
-        self.icons[herculeum.config.tiles.CREATURE_BEETLE_1] = tiles[112]
-        self.icons[herculeum.config.tiles.CREATURE_BEETLE_2] = tiles[113]
-        self.icons[herculeum.config.tiles.CREATURE_SPIDER_1] = tiles[122]
+        self.icons[herculeum.config.tiles.CREATURE_RAT_1] = tiles[0]
+        self.icons[herculeum.config.tiles.CREATURE_RAT_2] = tiles[0]
+        self.icons[herculeum.config.tiles.CREATURE_RAT_3] = tiles[0]
+        self.icons[herculeum.config.tiles.CREATURE_RAT_4] = tiles[0]
+        self.icons[herculeum.config.tiles.CREATURE_BEETLE_1] = tiles[2]
+        self.icons[herculeum.config.tiles.CREATURE_BEETLE_2] = tiles[2]
+        self.icons[herculeum.config.tiles.CREATURE_SPIDER_1] = tiles[1]
+
+        self.icons[herculeum.config.tiles.HUMAN_FIGHTER] = tiles[3]
 
         surface = self.__load_image(base_path, 'blade-bite.png')
         tiles = self.split_surface(surface, (32, 32))
@@ -188,10 +190,6 @@ class SurfaceManager:
         tiles = self.split_surface(surface, (32, 32))
         self.icons[herculeum.config.tiles.ITEM_APPLE] = tiles[0]
         self.icons[herculeum.config.tiles.ITEM_CRYSTAL_SKULL] = tiles[1]
-
-        surface = self.__load_image(base_path, 'characters.png')
-        tiles = self.split_surface(surface, (32, 32))
-        self.icons[herculeum.config.tiles.HUMAN_FIGHTER] = tiles[3]
 
         surface = self.__load_image(base_path, 'main_menu.png')
         self.images[images.image_start_menu] = surface
