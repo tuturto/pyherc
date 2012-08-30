@@ -34,6 +34,7 @@ from pyherc.generators.level.decorator import AggregateDecoratorConfig
 from pyherc.generators.level.items import ItemAdderConfiguration, ItemAdder
 from pyherc.generators.level.creatures import CreatureAdderConfiguration
 from pyherc.generators.level.creatures import CreatureAdder
+from pyherc.generators import InventoryConfiguration
 
 from pyherc.generators.level.portals import PortalAdderConfiguration
 
@@ -190,6 +191,11 @@ def init_creatures():
                                         attack = 4,
                                         ai = FlockingHerbivore))
 
+    skeleton_inventory = [InventoryConfiguration(item_name = 'dagger',
+                                                min_amount = 0,
+                                                max_amount = 1,
+                                                probability = 50)]
+
     config.append(CreatureConfiguration(name = 'skeleton warrior',
                                         body = 8,
                                         finesse = 11,
@@ -198,6 +204,7 @@ def init_creatures():
                                         speed = 2.5,
                                         icons = CREATURE_SKELETON_WARRIOR,
                                         attack = 2,
-                                        ai = FlockingHerbivore))
+                                        ai = FlockingHerbivore,
+                                        inventory = skeleton_inventory))
 
     return config
