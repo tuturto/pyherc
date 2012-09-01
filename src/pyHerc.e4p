@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-08-22, 10:34:47 -->
+<!-- Saved: 2012-09-01, 08:41:19 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -174,6 +174,9 @@
     <Source>pyherc/events/inventory.py</Source>
     <Source>pyherc/test/bdd/test_inventory.py</Source>
     <Source>pyherc/test/unit/test_drop_actions.py</Source>
+    <Source>pyherc/rules/engine.py</Source>
+    <Source>pyherc/test/unit/test_dying.py</Source>
+    <Source>pyherc/test/matchers/inventory_parameters.py</Source>
   </Sources>
   <Forms>
   </Forms>

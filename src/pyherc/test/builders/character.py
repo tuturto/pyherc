@@ -222,7 +222,11 @@ class CharacterBuilder(object):
 
         .. note:: Can be called multiple times
         """
-        self.items.append(item)
+        if hasattr(item, 'build'):
+            self.items.append(item.build())
+        else:
+            self.items.append(item)
+
         return self
 
     def build(self):

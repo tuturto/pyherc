@@ -24,6 +24,7 @@ Module for checking end conditions
 
 import logging
 from pyherc.events import DeathEvent
+from pyherc.aspects import Logged
 
 __logger = logging.getLogger('pyherc.rules.ending')
 
@@ -89,3 +90,30 @@ def check_dying(model, character, death_params):
             character.level.remove_creature(character)
         else:
             model.end_condition = 1
+
+class Dying(object):
+    """
+    Rules for actions happening when dying
+
+    .. versionadded:: 0.6
+    """
+    logged = Logged()
+
+    @logged
+    def __init__(self, action_factory):
+        """
+        Default constructor
+        """
+        super(Dying, self).__init__()
+
+        self.action_factory = action_factory
+
+    @logged
+    def check_dying(self, character):
+        """
+        Check if character dies and process it
+        """
+        if character.hit_points <= 0:
+            for item in character.inventory:
+                character.drop_item(item = item,
+                                    action_factory = self.action_factory)

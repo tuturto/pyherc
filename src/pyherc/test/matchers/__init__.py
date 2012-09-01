@@ -32,3 +32,4 @@ from .effect_collection import has_effect_handle, has_effect_handles
 from .event_listener import has_event_listener
 from .event import has_marked_for_redrawing
 from .character import is_dead
+from .inventory_parameters import DropActionParameterMatcher

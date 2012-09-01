@@ -27,3 +27,4 @@ from .public import AttackParameters
 from .public import MoveParameters
 from .public import DrinkParameters
 from .public import InventoryParameters
+from .ending import Dying
