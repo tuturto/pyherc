@@ -22,74 +22,8 @@
 Module for checking end conditions
 """
 
-import logging
 from pyherc.events import DeathEvent
 from pyherc.aspects import Logged
-
-__logger = logging.getLogger('pyherc.rules.ending')
-
-def check_result(model):
-    """
-    Check how the game actually ended
-
-    Args:
-        model: model containing play data
-
-    Returns:
-        dictionary containing following keys: reason, score, dead reason
-        valid reasons: dead, escaped, victory, quit
-        dead reason will contain reason of death, if player died
-    """
-    result = {}
-    if model.player.hit_points <= 0:
-        #player has died
-        result['reason'] = 'dead'
-        result['dead reason'] = 'died while adventuring'
-    elif model.player.level == None:
-        #escaped or victory
-        for item in model.player.inventory:
-            if item.name == 'crystal skull':
-                #victory
-                result['reason'] = 'victory'
-        if not 'reason' in result.keys():
-            #escaped
-            result['reason'] = 'escaped'
-    else:
-        result['reason'] = 'quit'
-
-    result['score'] = get_ending_score(model)
-
-    return result
-
-def get_ending_score(model):
-    """
-    Calculate ending score
-
-    Args:
-        model: model containing play data
-
-    Returns:
-        score
-    """
-    return 0
-
-def check_dying(model, character, death_params):
-    """
-    Check if cracter is dead and should be dealt with
-
-    Args:
-        mode: model to use
-        character: character to check
-        death_params: parameters detailing the death condition
-    """
-    assert character != None
-    if character.hit_points <= 0:
-        if character != model.player:
-            character.raise_event(DeathEvent(deceased = character,
-                                             affected_tiles = character.location))
-            character.level.remove_creature(character)
-        else:
-            model.end_condition = 1
 
 class Dying(object):
     """
@@ -115,3 +49,7 @@ class Dying(object):
             for item in character.inventory:
                 #drop items
                 pass
+
+            character.raise_event(DeathEvent(deceased = character,
+                                             affected_tiles = character.location))
+            character.level.remove_creature(character)

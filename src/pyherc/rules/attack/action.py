@@ -105,9 +105,7 @@ class AttackAction(object):
 
         self.__trigger_attack_effects()
 
-        pyherc.rules.ending.check_dying(self.target.model,
-                                        self.target,
-                                        self.target.model)
+        self.dying_rules.check_dying(self.target)
 
         self.attacker.add_to_tick(3)
 

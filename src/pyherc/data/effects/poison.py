@@ -53,6 +53,8 @@ class Poison(Effect):
                         PoisonTriggeredEvent(target = self.target,
                                              damage = self.damage))
 
+        dying_rules.check_dying(self.target)
+
     @logged
     def get_add_event(self):
         """
