@@ -24,12 +24,14 @@ Main entry point for Herculeum - game
 import sys
 import os.path
 import thread
+import time
 
 INSTALL_PATH = os.path.abspath(".")
 sys.path.append(INSTALL_PATH)
 
 from pyherc.debug import get_debug_server
 from herculeum.application import APP
+from PyQt4.QtGui import QPixmap, QSplashScreen
 
 print '#   pyherc is free software: you can redistribute it and/or modify'
 print '#   it under the terms of the GNU General Public License as published by'
@@ -46,6 +48,11 @@ print '#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.'
 
 if __name__ == "__main__":
     APP.detect_resource_directory()
+
+    pixmap = QPixmap(os.path.join(APP.base_path, 'splash.png'));
+    splash_screen = QSplashScreen(pixmap)
+    splash_screen.show()
+
     APP.process_command_line()
     APP.start_logging()
     APP.load_configuration()
@@ -54,5 +61,5 @@ if __name__ == "__main__":
     if server != None:
         thread.start_new_thread(server.run, ())
 
-    APP.run()
+    APP.run(splash_screen)
 

@@ -7,6 +7,7 @@ New features
 ************
 
  - Support for Qt style sheets
+ - Splash screen at start up
 
 **********
 Fixed bugs

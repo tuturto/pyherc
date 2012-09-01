@@ -77,12 +77,14 @@ class Application(object):
         self.config = Configuration(self.base_path, self.world)
         self.config.initialise(herculeum.config.levels)
 
-    def run(self):
+    def run(self, splash_screen):
         """
         Starts the application
         """
         main_window = MainWindow(APP,
                                  APP.surface_manager)
+        splash_screen.finish(main_window)
+
         sys.exit(self.qt_app.exec_())
 
     def __get_surface_manager(self):
