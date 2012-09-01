@@ -30,6 +30,7 @@ from random import Random
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder
+from pyherc.test.builders import HealBuilder
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock, when, any
 
@@ -65,12 +66,14 @@ class TestPotions():
                             .with_hit_points(1)
                             .with_max_hp(5)
                             .build())
+        effect = (HealBuilder()
+                    .with_duration(0)
+                    .with_frequency(0)
+                    .with_tick(0)
+                    .with_healing(5)
+                    .with_target(self.character)
+                    .build())
 
-        effect = Heal(duration = 0,
-                      frequency = 0,
-                      tick = 0,
-                      healing = 5,
-                      target = self.character)
         when(self.effect_factory).create_effect(any(),
                                                 target = any()).thenReturn(effect)
 

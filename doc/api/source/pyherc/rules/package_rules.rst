@@ -16,7 +16,6 @@ pyherc.rules
    module_factory
    module_items
    module_los
-   module_magic
    module_moving
    module_public
    module_utils

@@ -24,7 +24,7 @@ Module for testing poison related rules
 #pylint: disable=W0614
 from pyherc.data.effects import Poison
 from pyherc.generators import EffectsFactory
-from pyherc.test.builders import CharacterBuilder
+from pyherc.test.builders import CharacterBuilder, PoisonBuilder
 from pyherc.test.matchers import has_effect
 from mockito import mock, verify, any
 from hamcrest import * #pylint: disable=W0401
@@ -50,11 +50,9 @@ class TestPoison():
                         .with_model(model)
                         .build())
 
-        poison = Poison(duration = 1,
-                        frequency = 1,
-                        tick = 0,
-                        damage = 5,
-                        target = character)
+        poison = (PoisonBuilder()
+                    .with_target(character)
+                    .build())
 
         poison.trigger()
 

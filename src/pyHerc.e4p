@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-09-01, 08:41:19 -->
+<!-- Saved: 2012-09-01, 09:33:17 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -32,7 +32,6 @@
     <Source>pyherc/rules/utils.py</Source>
     <Source>pyherc/generators/utils.py</Source>
     <Source>pyherc/test/__init__.py</Source>
-    <Source>pyherc/rules/magic.py</Source>
     <Source>pyherc/data/item.py</Source>
     <Source>pyherc/rules/los.py</Source>
     <Source>pyherc/rules/attack/__init__.py</Source>
@@ -177,6 +176,8 @@
     <Source>pyherc/rules/engine.py</Source>
     <Source>pyherc/test/unit/test_dying.py</Source>
     <Source>pyherc/test/matchers/inventory_parameters.py</Source>
+    <Source>pyherc/test/builders/poison.py</Source>
+    <Source>pyherc/test/builders/heal.py</Source>
   </Sources>
   <Forms>
   </Forms>

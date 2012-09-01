@@ -25,7 +25,6 @@ Rules for manipulating items
 """
 
 import logging
-import pyherc.rules.magic
 
 logger = logging.getLogger('pyherc.rules.items')
 

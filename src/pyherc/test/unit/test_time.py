@@ -27,7 +27,7 @@ from pyherc.data import Dungeon
 from pyherc.data import Level
 from pyherc.data.effects import Effect
 
-from pyherc.test.builders import CharacterBuilder
+from pyherc.test.builders import CharacterBuilder, EffectBuilder
 
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock, verify
@@ -146,9 +146,12 @@ class TestEffectsAndTime:
         """
         Test that tick of effect will be reset after it has been triggered
         """
-        effect = Effect(duration = 50,
-                        frequency = 5,
-                        tick = 5)
+        effect = (EffectBuilder()
+                    .with_duration(50)
+                    .with_frequency(5)
+                    .with_tick(5)
+                    .build())
+
         self.creature.add_effect(effect)
 
         next_creature = self.model.get_next_creature()
@@ -160,15 +163,19 @@ class TestEffectsAndTime:
         """
         Test that two effects will stay in sync
         """
-        effect1 = Effect(duration = 50,
-                        frequency = 5,
-                        tick = 5)
+        effect1 = (EffectBuilder()
+                    .with_duration(50)
+                    .with_frequency(5)
+                    .with_tick(5)
+                    .build())
 
         self.creature.add_effect(effect1)
 
-        effect2 = Effect(duration = 50,
-                         frequency = 5,
-                         tick = 5)
+        effect2 = (EffectBuilder()
+                    .with_duration(50)
+                    .with_frequency(5)
+                    .with_tick(5)
+                    .build())
 
         creature2 = (CharacterBuilder()
                         .with_tick(10)
@@ -192,9 +199,11 @@ class TestEffectsAndTime:
         """
         Test that duration of effect is gradually counted down
         """
-        effect = Effect(duration = 50,
-                        frequency = 5,
-                        tick = 5)
+        effect = (EffectBuilder()
+                    .with_duration(50)
+                    .with_frequency(5)
+                    .with_tick(5)
+                    .build())
 
         self.creature.add_effect(effect)
 
@@ -214,9 +223,11 @@ class TestEffectsAndTime:
         self.model.player = creature
         self.level.creatures = [creature]
 
-        effect = Effect(duration = 5,
-                        frequency = 5,
-                        tick = 5)
+        effect = (EffectBuilder()
+                    .with_duration(5)
+                    .with_frequency(5)
+                    .with_tick(5)
+                    .build())
 
         creature.add_effect(effect)
 
