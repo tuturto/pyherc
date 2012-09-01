@@ -58,6 +58,7 @@ class ActionFactoryBuilder(object):
         self.use_real_drink_factory = False
         self.use_real_inventory_factory = False
         self.use_real_move_factory = False
+        self.use_real_dying_rules = False
 
     def with_model(self, model):
         """
@@ -113,6 +114,10 @@ class ActionFactoryBuilder(object):
         self.effect_factory = effect_factory
         return self
 
+    def with_dying_rules(self):
+        self.use_real_dying_rules = True
+        return self
+
     def build(self):
         """
         Build action factory
@@ -120,6 +125,9 @@ class ActionFactoryBuilder(object):
         :returns: action factory
         :rtype: ActionFactory
         """
+        if self.use_real_dying_rules == True:
+            self.dying_rules = Dying()
+
         if self.use_real_attack_factory == True:
             unarmed_combat_factory = UnarmedCombatFactory(self.effect_factory,
                                                           self.dying_rules)
@@ -130,14 +138,10 @@ class ActionFactoryBuilder(object):
                                         melee_combat_factory])
 
         if self.use_real_drink_factory == True:
-            drink_factory = (DrinkFactoryBuilder()
-                                .with_effect_factory(self.effect_factory)
-                                .with_dying_rules()
-                                .build())
-        else:
-            drink_factory = (DrinkFactoryBuilder()
-                                .with_effect_factory(self.effect_factory)
-                                .build())
+            self.drink_factory = (DrinkFactoryBuilder()
+                                    .with_effect_factory(self.effect_factory)
+                                    .with_dying_rules(self.dying_rules)
+                                    .build())
 
         if self.use_real_inventory_factory == True:
             pick_up_factory = PickUpFactory()
@@ -180,11 +184,14 @@ class DrinkFactoryBuilder(object):
         self.effect_factory = effect_factory
         return self
 
-    def with_dying_rules(self):
+    def with_dying_rules(self, dying_rules = None):
         """
         Set dying rules to use
         """
-        self.use_real_dying_rules = True
+        if dying_rules != None:
+            self.dying_rules = dying_rules
+        else:
+            self.use_real_dying_rules = True
         return self
 
     def build(self):

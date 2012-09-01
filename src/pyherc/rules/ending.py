@@ -47,8 +47,12 @@ class Dying(object):
         """
         if character.hit_points <= 0:
             for item in character.inventory:
-                #drop items
-                pass
+                character.inventory.remove(item)
+                character.level.add_item(item, character.location)
+
+            for item in character.weapons:
+                character.weapons.remove(item)
+                character.level.add_item(item, character.location)
 
             character.raise_event(DeathEvent(deceased = character,
                                              affected_tiles = character.location))

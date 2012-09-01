@@ -229,6 +229,7 @@ class Hit(object):
                                     .with_attack_factory()
                                     .with_drink_factory()
                                     .with_inventory_factory()
+                                    .with_dying_rules()
                                     .build())
 
         params = AttackParameters(attacker = attacker,
