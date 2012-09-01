@@ -165,10 +165,10 @@ def init_items(context):
                                             weapon_class = 'exotic')))
 
     config.append(
-                  ItemConfiguration(name = 'sicle',
+                  ItemConfiguration(name = 'sickle',
                                     cost = 6,
                                     weight = 4,
-                                    icons = [surface_manager.add_icon('sicle', 'scythe.png')],
+                                    icons = [surface_manager.add_icon('sickle', 'scythe.png')],
                                     types = ['weapon',
                                              'light weapon',
                                              'melee',
