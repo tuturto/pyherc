@@ -25,6 +25,7 @@ from .character import CharacterBuilder
 from .item import ItemBuilder
 from .effect import EffectBuilder, EffectHandleBuilder
 from .level import LevelBuilder
-from .action import ActionFactoryBuilder
+from .action import ActionFactoryBuilder, DrinkFactoryBuilder
 from .poison import PoisonBuilder
 from .heal import HealBuilder
+from .rules_engine import RulesEngineBuilder

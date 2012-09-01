@@ -28,12 +28,13 @@ class DrinkFactory(SubActionFactory):
     """
     Factory for creating drink actions
     """
-    def __init__(self, effect_factory):
+    def __init__(self, effect_factory, dying_rules):
         """
         Constructor for this factory
         """
         super(DrinkFactory, self).__init__(effect_factory)
         self.action_type = 'drink'
+        self.dying_rules = dying_rules
 
     def get_action(self, parameters):
         """
@@ -44,4 +45,5 @@ class DrinkFactory(SubActionFactory):
         """
         return DrinkAction(parameters.character,
                            parameters.item,
-                           self.effect_factory)
+                           self.effect_factory,
+                           self.dying_rules)

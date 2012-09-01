@@ -34,10 +34,12 @@ class Effect(object):
         """
         Default constructor
 
-        Args:
-            duration: duration of the effect in ticks
-            frequency: frequency of the effect in ticks
-            tick: initial value for timer
+        :param duration: duration of the effect in ticks
+        :type duration: int
+        :param frequency: frequency of the effect in ticks
+        :type frequency: int
+        :param tick: initial value for timer
+        :type tick: int
         """
         super(Effect, self).__init__()
         self.duration = duration
@@ -46,18 +48,17 @@ class Effect(object):
         self.effect_name = 'effect'
 
     @logged
-    def trigger(self):
+    def trigger(self, dying_rules):
         """
         Trigger the effect
 
-        Note:
-            This method will be called when tick reaches zero
+        .. Note:: This method will be called when tick reaches zero
         """
-        self.do_trigger()
+        self.do_trigger(dying_rules)
         self.post_trigger()
 
     @logged
-    def do_trigger(self):
+    def do_trigger(self, dying_rules):
         """
         Override this method to contain logic of the effect
         """
@@ -100,14 +101,20 @@ class Effect(object):
 class EffectHandle(object):
     """
     Handle that can be used to construct effects
-
-    Args:
-        trigger: name of the trigger of the effect
-        effect: name of the effect
-        parameters: overriding parameters for the effect
-        charges: amount of charges effect has
     """
     def __init__(self, trigger, effect, parameters, charges):
+        """
+        Default constructor
+
+        :param trigger: name of the trigger of the effect
+        :type trigger: string
+        :param effect: name of the effect
+        :type effect: string
+        :param parameters: overriding parameters for the effect
+        :type parameters: {string, object}
+        :param charges: amount of charges effect has
+        :type charges: int
+        """
 
         self.trigger = trigger
         self.effect = effect

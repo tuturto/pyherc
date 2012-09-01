@@ -24,6 +24,7 @@ Module for action factory builders
 from mockito import mock
 
 from pyherc.rules.public import ActionFactory
+from pyherc.rules import Dying
 from pyherc.rules.move.factories import MoveFactory, WalkFactory
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
@@ -50,6 +51,7 @@ class ActionFactoryBuilder(object):
         self.inventory_factory.action_type = 'inventory'
         self.move_factory = mock()
         self.move_factory.action_type = 'move'
+        self.dying_rules = mock()
 
         self.effect_factory = mock()
         self.use_real_attack_factory = False
@@ -81,11 +83,17 @@ class ActionFactoryBuilder(object):
         self.use_real_attack_factory = True
         return self
 
-    def with_drink_factory(self):
+    def with_drink_factory(self, drink_factory = None):
         """
         Configure action factory to use real drink factory
         """
-        self.use_real_drink_factory = True
+        if drink_factory == None:
+            self.use_real_drink_factory = True
+        else:
+            if hasattr(drink_factory, 'build'):
+                self.drink_factory = drink_factory.build()
+            else:
+                self.drink_factory = drink_factory
         return self
 
     def with_inventory_factory(self):
@@ -113,14 +121,23 @@ class ActionFactoryBuilder(object):
         :rtype: ActionFactory
         """
         if self.use_real_attack_factory == True:
-            unarmed_combat_factory = UnarmedCombatFactory(self.effect_factory)
-            melee_combat_factory = MeleeCombatFactory(self.effect_factory)
+            unarmed_combat_factory = UnarmedCombatFactory(self.effect_factory,
+                                                          self.dying_rules)
+            melee_combat_factory = MeleeCombatFactory(self.effect_factory,
+                                                      self.dying_rules)
             self.attack_factory = AttackFactory([
                                         unarmed_combat_factory,
                                         melee_combat_factory])
 
         if self.use_real_drink_factory == True:
-            drink_factory = DrinkFactory(self.effect_factory)
+            drink_factory = (DrinkFactoryBuilder()
+                                .with_effect_factory(self.effect_factory)
+                                .with_dying_rules()
+                                .build())
+        else:
+            drink_factory = (DrinkFactoryBuilder()
+                                .with_effect_factory(self.effect_factory)
+                                .build())
 
         if self.use_real_inventory_factory == True:
             pick_up_factory = PickUpFactory()
@@ -140,3 +157,42 @@ class ActionFactoryBuilder(object):
                                         self.inventory_factory])
 
         return action_factory
+
+class DrinkFactoryBuilder(object):
+    """
+    Class to build drink factories
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(DrinkFactoryBuilder, self).__init__()
+
+        self.effect_factory = mock()
+        self.dying_rules = mock()
+
+        self.use_real_dying_rules = False
+
+    def with_effect_factory(self, effect_factory):
+        """
+        Set effect factory to use
+        """
+        self.effect_factory = effect_factory
+        return self
+
+    def with_dying_rules(self):
+        """
+        Set dying rules to use
+        """
+        self.use_real_dying_rules = True
+        return self
+
+    def build(self):
+        """
+        Builds drink factory
+        """
+        if self.use_real_dying_rules == True:
+            self.dying_rules = Dying()
+
+        return DrinkFactory(self.effect_factory,
+                            self.dying_rules)

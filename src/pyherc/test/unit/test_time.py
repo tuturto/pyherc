@@ -28,9 +28,10 @@ from pyherc.data import Level
 from pyherc.data.effects import Effect
 
 from pyherc.test.builders import CharacterBuilder, EffectBuilder
+from pyherc.test.builders import RulesEngineBuilder
 
 from hamcrest import * #pylint: disable=W0401
-from mockito import mock, verify
+from mockito import mock, verify, any
 
 class TestTime:
     """
@@ -45,6 +46,7 @@ class TestTime:
         self.creature2 = None
         self.creature3 = None
         self.model = None
+        self.rules_engine = None
 
     def setup(self):
         """
@@ -81,12 +83,14 @@ class TestTime:
         self.model.player = self.creature3
         self.model.dungeon.levels.add_creature(self.creature3)
 
+        self.rules_engine = RulesEngineBuilder().build()
+
     def test_get_next_zero_tick(self):
         """
         Test that system can tell whose turn it is to act
         One creature has tick of 0
         """
-        creature = self.model.get_next_creature()
+        creature = self.model.get_next_creature(self.rules_engine)
         assert_that(creature, is_(equal_to(self.creature2)))
 
     def test_get_next_positive_tick(self):
@@ -97,7 +101,7 @@ class TestTime:
         self.creature1.tick = 5
         self.creature2.tick = 10
         self.creature3.tick = 3
-        creature = self.model.get_next_creature()
+        creature = self.model.get_next_creature(self.rules_engine)
         assert_that(creature, is_(equal_to(self.creature3)))
 
 class TestEffectsAndTime:
@@ -113,6 +117,7 @@ class TestEffectsAndTime:
         self.creature = None
         self.model = None
         self.level = None
+        self.rules_engine = None
 
     def setup(self):
         """
@@ -127,6 +132,7 @@ class TestEffectsAndTime:
         self.level = mock(Level)
         self.level.creatures = [self.creature]
         self.creature.level = self.level
+        self.rules_engine = RulesEngineBuilder().build()
 
     def test_trigger_effect_on_time(self):
         """
@@ -138,9 +144,9 @@ class TestEffectsAndTime:
         effect.tick = 5
         self.creature.add_effect(effect)
 
-        next_creature = self.model.get_next_creature()
+        next_creature = self.model.get_next_creature(self.rules_engine)
 
-        verify(effect).trigger()
+        verify(effect).trigger(any())
 
     def test_tick_will_be_reset(self):
         """
@@ -154,7 +160,7 @@ class TestEffectsAndTime:
 
         self.creature.add_effect(effect)
 
-        next_creature = self.model.get_next_creature()
+        next_creature = self.model.get_next_creature(self.rules_engine)
         effect = self.creature.get_effects()[0]
 
         assert_that(effect.tick, is_(equal_to(5)))
@@ -188,11 +194,11 @@ class TestEffectsAndTime:
         self.level.creatures = [self.creature,
                                 creature2]
 
-        next_creature = self.model.get_next_creature()
+        next_creature = self.model.get_next_creature(self.rules_engine)
         assert_that(effect1.tick, is_(equal_to(effect2.tick)))
 
         next_creature.tick = 10
-        next_creature = self.model.get_next_creature()
+        next_creature = self.model.get_next_creature(self.rules_engine)
         assert_that(effect1.tick, is_(equal_to(effect2.tick)))
 
     def test_effects_duration_goes_down(self):
@@ -207,7 +213,7 @@ class TestEffectsAndTime:
 
         self.creature.add_effect(effect)
 
-        next_creature = self.model.get_next_creature()
+        next_creature = self.model.get_next_creature(self.rules_engine)
 
         assert_that(effect.duration, is_(equal_to(45)))
 
@@ -231,6 +237,6 @@ class TestEffectsAndTime:
 
         creature.add_effect(effect)
 
-        next_creature = self.model.get_next_creature()
+        next_creature = self.model.get_next_creature(self.rules_engine)
 
         assert_that(creature.get_effects(), is_not(has_item(effect)))

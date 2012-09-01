@@ -26,7 +26,7 @@ from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import ItemBuilder
 
-from pyherc.rules import AttackParameters
+from pyherc.rules import AttackParameters, Dying
 from pyherc.data.effects import Poison
 
 from hamcrest.core.base_matcher import BaseMatcher
@@ -401,7 +401,7 @@ def affect(target, effect_spec):
     target.old_values = {}
     target.old_values['hit points'] = target.hit_points
 
-    new_effect.trigger()
+    new_effect.trigger(Dying())
 
 def with_(effect_spec):
     """

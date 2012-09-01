@@ -35,7 +35,7 @@ class AttackAction(object):
 
     @logged
     def __init__(self, attack_type, to_hit, damage,
-                 attacker, target, effect_factory):
+                 attacker, target, effect_factory, dying_rules):
         """
         Default constructor
 
@@ -59,6 +59,7 @@ class AttackAction(object):
         self.attacker = attacker
         self.target = target
         self.effect_factory = effect_factory
+        self.dying_rules = dying_rules
 
     @logged
     def is_legal(self):
@@ -123,7 +124,7 @@ class AttackAction(object):
                                                     effect_spec.effect,
                                                     target = self.target)
             if effect.duration == 0:
-                effect.trigger()
+                effect.trigger(self.dying_rules)
             else:
                 self.target.add_effect(effect)
 

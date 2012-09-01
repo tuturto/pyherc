@@ -49,6 +49,7 @@ class TestPotions():
         self.model = None
         self.rng = None
         self.effect_factory = None
+        self.dying_rules = None
 
     def setup(self):
         """
@@ -57,8 +58,10 @@ class TestPotions():
         self.rng = Random()
         self.model = mock()
         self.effect_factory = mock()
+        self.dying_rules = mock()
 
-        drink_factory = DrinkFactory(self.effect_factory)
+        drink_factory = DrinkFactory(self.effect_factory,
+                                     self.dying_rules)
         self.action_factory = ActionFactory(self.model,
                                             drink_factory)
 

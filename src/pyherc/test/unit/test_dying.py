@@ -36,22 +36,4 @@ class TestDying(object):
         """
         super(TestDying, self).__init__()
 
-    def test_wielded_weapons_are_dropped_when_dying(self):
-        """
-        Test that wielded weapons are dropped when dying
-        """
-        action_factory = mock(ActionFactory)
-        when(action_factory).get_action(any()).thenReturn(mock())
 
-        item = ItemBuilder().build()
-
-        character = (CharacterBuilder()
-                        .with_hit_points(-1)
-                        .with_item(item)
-                        .build())
-
-        dying = Dying(action_factory)
-
-        dying.check_dying(character)
-
-        verify(action_factory).get_action(DropActionParameterMatcher(item))

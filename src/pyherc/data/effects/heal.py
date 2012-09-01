@@ -41,7 +41,7 @@ class Heal(Effect):
         self.effect_name = 'heal'
 
     @logged
-    def do_trigger(self):
+    def do_trigger(self, dying_rules):
         """
         Triggers effects of the healing
         """

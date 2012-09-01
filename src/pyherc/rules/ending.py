@@ -100,13 +100,11 @@ class Dying(object):
     logged = Logged()
 
     @logged
-    def __init__(self, action_factory):
+    def __init__(self):
         """
         Default constructor
         """
         super(Dying, self).__init__()
-
-        self.action_factory = action_factory
 
     @logged
     def check_dying(self, character):
@@ -115,5 +113,5 @@ class Dying(object):
         """
         if character.hit_points <= 0:
             for item in character.inventory:
-                character.drop_item(item = item,
-                                    action_factory = self.action_factory)
+                #drop items
+                pass

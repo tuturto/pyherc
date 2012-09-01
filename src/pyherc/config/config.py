@@ -24,6 +24,7 @@ Configuration for pyherc
 import logging
 import random
 from pyherc.rules.public import ActionFactory
+from pyherc.rules import Dying
 from pyherc.rules.move.factories import MoveFactory
 from pyherc.rules.move.factories import WalkFactory
 from pyherc.rules.consume.factories import DrinkFactory
@@ -99,13 +100,16 @@ class Configuration(object):
             for effect in effects:
                 effect_factory.add_effect(effect[0], effect[1])
 
-        unarmed_combat_factory = UnarmedCombatFactory(effect_factory)
-        melee_combat_factory = MeleeCombatFactory(effect_factory)
+        unarmed_combat_factory = UnarmedCombatFactory(effect_factory,
+                                                      Dying())
+        melee_combat_factory = MeleeCombatFactory(effect_factory,
+                                                  Dying())
         attack_factory = AttackFactory([
                                         unarmed_combat_factory,
                                         melee_combat_factory])
 
-        drink_factory = DrinkFactory(effect_factory)
+        drink_factory = DrinkFactory(effect_factory,
+                                     Dying())
 
         inventory_factory = InventoryFactory([PickUpFactory(),
                                              DropFactory()])

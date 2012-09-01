@@ -25,7 +25,6 @@ from pyherc.aspects import Logged
 from pyherc.events import PoisonTriggeredEvent, PoisonAddedEvent
 from pyherc.events import PoisonEndedEvent
 from pyherc.data.effects.effect import Effect
-from pyherc.rules.ending import check_dying
 
 class Poison(Effect):
     """
@@ -44,7 +43,7 @@ class Poison(Effect):
         self.effect_name = 'poison'
 
     @logged
-    def do_trigger(self):
+    def do_trigger(self, dying_rules):
         """
         Triggers effects of the poison
         """
@@ -53,10 +52,6 @@ class Poison(Effect):
         self.target.raise_event(
                         PoisonTriggeredEvent(target = self.target,
                                              damage = self.damage))
-
-        check_dying(model = self.target.model,
-                    character = self.target,
-                    death_params = None)
 
     @logged
     def get_add_event(self):

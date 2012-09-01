@@ -40,7 +40,7 @@ class Damage(Effect):
         self.target = target
 
     @logged
-    def do_trigger(self):
+    def do_trigger(self, dying_rules):
         """
         Triggers effects of the damage
         """

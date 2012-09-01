@@ -59,12 +59,13 @@ class UnarmedCombatFactory(object):
     logged = Logged()
 
     @logged
-    def __init__(self, effect_factory):
+    def __init__(self, effect_factory, dying_rules):
         """
         Constructor for this factory
         """
         self.attack_type = 'unarmed'
         self.effect_factory = effect_factory
+        self.dying_rules = dying_rules
         self.logger = logging.getLogger('pyherc.rules.attack.factories.UnarmedCombatFactory')
 
     def __str__(self):
@@ -103,7 +104,8 @@ class UnarmedCombatFactory(object):
                     damage = UnarmedDamage(attacker.get_attack()),
                     attacker = attacker,
                     target = target,
-                    effect_factory = self.effect_factory)
+                    effect_factory = self.effect_factory,
+                    dying_rules = self.dying_rules)
 
         return attack
 
@@ -155,12 +157,13 @@ class MeleeCombatFactory(object):
     logged = Logged()
 
     @logged
-    def __init__(self, effect_factory):
+    def __init__(self, effect_factory, dying_rules):
         """
         Constructor for this factory
         """
         self.attack_type = 'melee'
         self.effect_factory = effect_factory
+        self.dying_rules = dying_rules
 
     def __str__(self):
         return 'melee combat factory'
@@ -198,7 +201,8 @@ class MeleeCombatFactory(object):
                         damage = MeleeDamage(weapon.weapon_data.damage),
                         attacker = attacker,
                         target = target,
-                        effect_factory = self.effect_factory)
+                        effect_factory = self.effect_factory,
+                        dying_rules = self.dying_rules)
         else:
             attack = None
 

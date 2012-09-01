@@ -25,6 +25,7 @@ Module for magic related tests
 from pyherc.data.effects import Heal, Damage
 from pyherc.test.builders import CharacterBuilder
 from hamcrest import * #pylint: disable=W0401
+from mockito import mock
 
 class TestMagic:
     """
@@ -52,7 +53,7 @@ class TestMagic:
                         damage = 10,
                         target = character)
 
-        effect.trigger()
+        effect.trigger(mock())
 
         assert_that(character.hit_points, is_(equal_to(5)))
 
@@ -70,7 +71,7 @@ class TestMagic:
                       tick = 0,
                       healing = 10,
                       target = character)
-        effect.trigger()
+        effect.trigger(mock())
 
         assert_that(character.hit_points, is_(equal_to(11)))
 
@@ -89,6 +90,6 @@ class TestMagic:
                       healing = 10,
                       target = character)
 
-        effect.trigger()
+        effect.trigger(mock())
 
         assert_that(character.hit_points, is_(equal_to(5)))

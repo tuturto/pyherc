@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-09-01, 09:33:17 -->
+<!-- Saved: 2012-09-01, 11:13:31 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -178,6 +178,7 @@
     <Source>pyherc/test/matchers/inventory_parameters.py</Source>
     <Source>pyherc/test/builders/poison.py</Source>
     <Source>pyherc/test/builders/heal.py</Source>
+    <Source>pyherc/test/builders/rules_engine.py</Source>
   </Sources>
   <Forms>
   </Forms>

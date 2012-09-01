@@ -76,10 +76,12 @@ class Model(object):
         for listener in self.__event_listeners:
             listener.receive_event(event)
 
-    def get_next_creature(self):
+    def get_next_creature(self, rules_engine):
         """
         Get the character who is next to take action
 
+        :param rules_engine: engine containing rules
+        :type rules_engine: RulesEngine
         :returns: Character to act next
         :rtype: Character
         """
@@ -99,7 +101,7 @@ class Model(object):
                 for effect in creature.get_effects():
                     effect.tick = effect.tick - 1
                     if effect.tick == 0:
-                        effect.trigger()
+                        effect.trigger(rules_engine.dying_rules)
                 creature.remove_expired_effects()
 
 class Damage(object):

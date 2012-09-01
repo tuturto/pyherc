@@ -54,7 +54,7 @@ class TestPoison():
                     .with_target(character)
                     .build())
 
-        poison.trigger()
+        poison.trigger(mock())
 
         verify(model).raise_event(any())
 

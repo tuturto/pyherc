@@ -19,13 +19,27 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for rules of the game
+Module for rules engine builder
 """
-from .public import ActionFactory
-from .public import ActionParameters
-from .public import AttackParameters
-from .public import MoveParameters
-from .public import DrinkParameters
-from .public import InventoryParameters
-from .ending import Dying
-from .engine import RulesEngine
+from pyherc.rules import RulesEngine
+from mockito import mock
+
+class RulesEngineBuilder(object):
+    """
+    Class to build rules engines
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(RulesEngineBuilder, self).__init__()
+
+        self.action_factory = mock()
+        self.dying_rules = mock()
+
+    def build(self):
+        """
+        Builds rules engine
+        """
+        return RulesEngine(action_factory = self.action_factory,
+                           dying_rules = self.dying_rules)

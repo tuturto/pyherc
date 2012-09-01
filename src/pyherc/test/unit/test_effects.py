@@ -29,13 +29,15 @@ from pyherc.data.effects import Effect
 from pyherc.generators import EffectsFactory
 from pyherc.data.effects import EffectHandle
 from pyherc.rules.public import ActionFactory
-from pyherc.rules.consume.factories import DrinkFactory
+#from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.events import PoisonAddedEvent, Event
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder, ActionFactoryBuilder
+from pyherc.test.builders import DrinkFactoryBuilder
 from pyherc.test.builders import EffectBuilder
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.matchers import has_effect, has_effects, has_no_effects
+from pyherc.rules import Dying
 
 from mockito import mock, when, any, verify
 from hamcrest import * #pylint: disable=W0401
@@ -61,8 +63,11 @@ class TestEffects(object):
                                            target = any()).thenReturn(effect)
 
         model = mock()
-        action_factory = ActionFactory(model = model,
-                                       factories = [DrinkFactory(effect_factory)])
+        action_factory = (ActionFactoryBuilder()
+                            .with_model(model)
+                            .with_drink_factory(DrinkFactoryBuilder()
+                                                    .with_effect_factory(effect_factory))
+                            .build())
 
         character = (CharacterBuilder()
                         .with_model(model)
@@ -70,7 +75,7 @@ class TestEffects(object):
         character.drink(potion,
                         action_factory)
 
-        verify(effect).trigger()
+        verify(effect).trigger(any())
 
     def test_effect__triggered_when_hitting_target(self):
         """
@@ -113,7 +118,7 @@ class TestEffects(object):
                                 action_factory,
                                 rng)
 
-        verify(effect).trigger()
+        verify(effect).trigger(any())
 
     def test_creating_effect(self):
         """
@@ -136,8 +141,10 @@ class TestEffects(object):
                                 .with_charges(2))
                         .build())
 
-        action_factory = ActionFactory(model = mock(),
-                                       factories = [DrinkFactory(effect_factory)])
+        action_factory = (ActionFactoryBuilder()
+                            .with_drink_factory(DrinkFactoryBuilder()
+                                                    .with_effect_factory(effect_factory))
+                         .build())
 
         character = (CharacterBuilder()
                         .with_hit_points(1)
@@ -172,8 +179,10 @@ class TestEffects(object):
                                 .with_charges(2))
                         .build())
 
-        action_factory = ActionFactory(model = mock(),
-                                       factories = [DrinkFactory(effect_factory)])
+        action_factory = (ActionFactoryBuilder()
+                            .with_drink_factory(DrinkFactoryBuilder()
+                                                    .with_effect_factory(effect_factory))
+                            .build())
 
         character = (CharacterBuilder()
                         .with_hit_points(1)
