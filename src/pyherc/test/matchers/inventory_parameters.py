@@ -21,7 +21,7 @@
 """
 Module for matching inventory action arguments
 """
-from mockito.matchers import Matcher
+from mockito.matchers import Matcher # pylint: disable=E0611
 
 class DropActionParameterMatcher(Matcher):
     """

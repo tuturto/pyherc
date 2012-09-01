@@ -74,8 +74,10 @@ class Application(object):
         self.qt_app.setStyleSheet(styleSheet);
 
         self.world = Model()
-        self.config = Configuration(self.base_path, self.world)
-        self.config.initialise(herculeum.config.levels)
+        self.config = Configuration(self.base_path,
+                                    self.world,
+                                    herculeum.config.levels)
+        self.config.initialise()
 
     def run(self, splash_screen):
         """

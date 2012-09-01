@@ -25,20 +25,21 @@ from pyherc.generators import ItemConfigurations
 from pyherc.generators import ItemConfiguration, WeaponConfiguration
 from pyherc.data.effects import EffectHandle
 
-def init_items():
+def init_items(context):
     """
     Initialise common items
 
     :returns: item configurations
     :rtype: [ItemConfiguration]
     """
+    surface_manager = context.surface_manager
     config = []
 
     config.append(
                   ItemConfiguration(name = 'apple',
                                     cost = 1,
                                     weight = 1,
-                                    icons = [501],
+                                    icons = [surface_manager.add_icon('apple', 'apple.png')],
                                     types = ['food'],
                                     rarity = 'common'))
 
@@ -46,7 +47,7 @@ def init_items():
                   ItemConfiguration(name = 'dagger',
                                     cost = 2,
                                     weight = 1,
-                                    icons = [602, 603],
+                                    icons = [surface_manager.add_icon('dagger', 'dagger.png')],
                                     types = ['weapon',
                                                'light weapon',
                                                'melee',
@@ -64,7 +65,7 @@ def init_items():
                   ItemConfiguration(name = 'healing potion',
                                     cost = 150,
                                     weight = 1,
-                                    icons = [701],
+                                    icons = [surface_manager.add_icon('plain_potion', 'plain_potion.png')],
                                     types = ['potion'],
                                     rarity = 'rare',
                                     effect_handles = [EffectHandle(

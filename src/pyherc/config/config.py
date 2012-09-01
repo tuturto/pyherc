@@ -21,7 +21,6 @@
 """
 Configuration for pyherc
 """
-import logging
 import random
 from pyherc.rules.public import ActionFactory
 from pyherc.rules import RulesEngine
@@ -71,23 +70,22 @@ class Configuration(object):
         self.model = model
         self.rng = random.Random()
         self.rules_engine = None
-        self.logger = logging.getLogger('pyherc.config.Configuration')
 
-    def initialise(self, level_config):
+    def initialise(self, context):
         """
         Initialises configuration
         """
         self.level_size = (80, 30)
 
-        self.initialise_generators(level_config)
-        self.initialise_level_generators(level_config)
-        self.initialise_factories(level_config)
+        self.initialise_generators(context)
+        self.initialise_level_generators(context)
+        self.initialise_factories(context)
 
-    def initialise_factories(self, level_config):
+    def initialise_factories(self, context):
         """
         Initialises action factory, sub factories and various generators
         """
-        self.logger.info('Initialising action sub system')
+        print('Initialising action sub system')
 
         dying_rules = Dying()
 
@@ -96,7 +94,7 @@ class Configuration(object):
 
         effect_factory = EffectsFactory()
 
-        configurators = self.get_configurators(level_config,
+        configurators = self.get_configurators(context.config_package,
                                                'init_effects')
 
         for configurator in configurators:
@@ -128,9 +126,9 @@ class Configuration(object):
         self.rules_engine = RulesEngine(self.action_factory,
                                         dying_rules)
 
-        self.logger.info('Action sub system initialised')
+        print('Action sub system initialised')
 
-    def get_creature_config(self, level_config):
+    def get_creature_config(self, context):
         """
         Load creature configuration
 
@@ -141,17 +139,17 @@ class Configuration(object):
         """
         config = CreatureConfigurations(self.rng)
 
-        configurators = self.get_configurators(level_config,
+        configurators = self.get_configurators(context.config_package,
                                                'init_creatures')
 
         for configurator in configurators:
-            creatures = configurator()
+            creatures = configurator(context)
             for creature in creatures:
                 config.add_creature(creature)
 
         return config
 
-    def get_item_config(self, item_config):
+    def get_item_config(self, context):
         """
         Load item configuration
 
@@ -162,11 +160,11 @@ class Configuration(object):
         """
         config = ItemConfigurations(self.rng)
 
-        configurators = self.get_configurators(item_config,
+        configurators = self.get_configurators(context.config_package,
                                                'init_items')
 
         for configurator in configurators:
-            items = configurator()
+            items = configurator(context)
             for item in items:
                 config.add_item(item)
 
@@ -186,30 +184,31 @@ class Configuration(object):
 
         return configurators
 
-    def initialise_generators(self, level_config):
+    def initialise_generators(self, context):
         """
         Initialise generators
         """
-        self.logger.info('Initialising generators')
+        print('Initialising generators')
 
-        self.item_generator = ItemGenerator(self.get_item_config(level_config))
+        self.item_generator = ItemGenerator(
+                                    self.get_item_config(context))
 
         self.creature_generator = CreatureGenerator(
-                                        self.get_creature_config(level_config),
+                                        self.get_creature_config(context),
                                         self.model,
                                         self.item_generator,
                                         self.rng)
 
-        self.logger.info('Generators initialised')
+        print('Generators initialised')
 
-    def initialise_level_generators(self, level_config):
+    def initialise_level_generators(self, context):
         """
         Initialise level generators
 
         :param level_config: module containing level configurations
         :type level_config: module
         """
-        self.logger.info('Initialising level generators')
+        print('Initialising level generators')
 
         config = LevelGeneratorFactoryConfig([],
                                              [],
@@ -219,7 +218,7 @@ class Configuration(object):
                                              [],
                                              self.level_size)
 
-        configurators = self.get_configurators(level_config,
+        configurators = self.get_configurators(context.config_package,
                                                'init_level')
 
         for configurator in configurators:
@@ -238,7 +237,7 @@ class Configuration(object):
                                                     config,
                                                     self.rng)
 
-        self.logger.info('Level generators initialised')
+        print('Level generators initialised')
 
     def extend_configuration(self, config, new_config):
         """

@@ -8,6 +8,7 @@ New features
 
  - Support for Qt style sheets
  - Splash screen at start up
+ - icons can be specified in level specific configuration scripts
 
 **********
 Fixed bugs

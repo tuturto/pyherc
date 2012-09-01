@@ -44,7 +44,6 @@ from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
 from herculeum.config.tiles import FLOOR_ROCK, FLOOR_BRICK
 from herculeum.config.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
 from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
-from herculeum.config.tiles import CREATURE_SPIDER_1
 
 from pyherc.ai import FlockingHerbivore
 from pyherc.generators import CreatureConfiguration
@@ -106,16 +105,10 @@ def init_level(rng, item_generator, creature_generator, level_size):
                             rng)]
 
     creature_adder_config = CreatureAdderConfiguration(['upper crypt'])
-    #creature_adder_config.add_creature(min_amount = 6,
-    #                                   max_amount = 12,
-    #                                   name = 'bat')
+
     creature_adder_config.add_creature(min_amount = 4,
                                        max_amount = 8,
                                        name = 'spider')
-    #creature_adder_config.add_creature(min_amount = 4,
-    #                                   max_amount = 8,
-    #                                   name = 'skeleton',
-    #                                   location = 'room')
 
     creature_adders = [CreatureAdder(creature_generator,
                                     creature_adder_config,
@@ -141,15 +134,15 @@ def init_level(rng, item_generator, creature_generator, level_size):
                     .build())
     return config
 
-def init_creatures():
+def init_creatures(context):
     """
     Initialise creatures
 
     :returns: list of creature configurations
     :rtype: [CreatureConfiguration]
     """
-
     config = []
+    surface_manager = context.surface_manager
 
     config.append(CreatureConfiguration(name = 'spider',
                                         body = 6,
@@ -157,7 +150,7 @@ def init_creatures():
                                         mind = 8,
                                         hp = 6,
                                         speed = 1,
-                                        icons = CREATURE_SPIDER_1,
+                                        icons = surface_manager.add_icon('spider', 'masked-spider.png'),
                                         attack = 4,
                                         ai = FlockingHerbivore,
                                         effect_handles = [EffectHandle(

@@ -23,11 +23,11 @@ Module for handling loading of images and icons
 """
 
 import os, os.path
-import logging
 import images
 import herculeum.config.tiles
 import pyherc
 
+from pyherc.aspects import Logged
 from PyQt4.QtGui import QPixmap
 from PyQt4.QtCore import QRect
 
@@ -35,14 +35,17 @@ class SurfaceManager:
     """
     Class for managing images and icons
     """
-    def __init__(self):
+    logged = Logged()
+
+    @logged
+    def __init__(self, base_path):
         """
         Default constructor
         """
-        self.logger = logging.getLogger('pyherc.gui.surfaceManager')
         self.icons = {}
         self.images = {}
         self.resourcesLoaded = 0
+        self.base_path = base_path
 
     def __load_image(self, base_path, image_name):
         """
@@ -61,6 +64,18 @@ class SurfaceManager:
 
         return image
 
+    @logged
+    def add_icon(self, key, filename):
+        """
+        Add icon to internal collection
+        """
+        if not key in self.icons.keys():
+            surface = self.__load_image(self.base_path, filename)
+            self.icons[key] = surface
+
+        return key
+
+    @logged
     def load_resources(self, base_path):
         """
         Load graphics from files
@@ -68,14 +83,10 @@ class SurfaceManager:
         :param base_path: path to directory where resources are location
         :type base_path: string
         """
-        self.logger.info('loading resources')
-
         surface = self.__load_image(base_path, 'weapons.png')
 
         tiles = self.split_surface(surface, (32, 32))
 
-        self.icons[herculeum.config.tiles.ITEM_DAGGER_1] = tiles[3]
-        self.icons[herculeum.config.tiles.ITEM_DAGGER_2] = tiles[4]
         self.icons[herculeum.config.tiles.ITEM_MORNING_STAR_1] = tiles[22]
         self.icons[herculeum.config.tiles.ITEM_MORNING_STAR_2] = tiles[23]
         self.icons[herculeum.config.tiles.ITEM_SHORT_SWORD_1] = tiles[6]
@@ -91,84 +102,7 @@ class SurfaceManager:
         surface = self.__load_image(base_path, 'monsters.png')
         tiles = self.split_surface(surface, (32, 32))
 
-        self.icons[herculeum.config.tiles.CREATURE_RAT_1] = tiles[0]
-        self.icons[herculeum.config.tiles.CREATURE_RAT_2] = tiles[0]
-        self.icons[herculeum.config.tiles.CREATURE_RAT_3] = tiles[0]
-        self.icons[herculeum.config.tiles.CREATURE_RAT_4] = tiles[0]
-        self.icons[herculeum.config.tiles.CREATURE_BEETLE_1] = tiles[2]
-        self.icons[herculeum.config.tiles.CREATURE_BEETLE_2] = tiles[2]
-        self.icons[herculeum.config.tiles.CREATURE_SPIDER_1] = tiles[1]
-
         self.icons[herculeum.config.tiles.HUMAN_FIGHTER] = tiles[3]
-
-        surface = self.__load_image(base_path, 'blade-bite.png')
-        tiles = self.split_surface(surface, (32, 32))
-        self.icons[herculeum.config.tiles.CREATURE_SKELETON_WARRIOR] = tiles[0]
-
-
-        surface = self.__load_image(base_path, 'potions.png')
-        tiles = self.split_surface(surface, (32, 32))
-
-        self.icons[herculeum.config.tiles.ITEM_POTION_1] = tiles[0]
-        self.icons[herculeum.config.tiles.ITEM_POTION_2] = tiles[1]
-        self.icons[herculeum.config.tiles.ITEM_POTION_3] = tiles[2]
-        self.icons[herculeum.config.tiles.ITEM_POTION_4] = tiles[3]
-        self.icons[herculeum.config.tiles.ITEM_POTION_5] = tiles[4]
-        self.icons[herculeum.config.tiles.ITEM_POTION_6] = tiles[5]
-        self.icons[herculeum.config.tiles.ITEM_POTION_7] = tiles[6]
-        self.icons[herculeum.config.tiles.ITEM_POTION_8] = tiles[7]
-        self.icons[herculeum.config.tiles.ITEM_POTION_9] = tiles[8]
-        self.icons[herculeum.config.tiles.ITEM_POTION_10] = tiles[9]
-        self.icons[herculeum.config.tiles.ITEM_POTION_11] = tiles[10]
-        self.icons[herculeum.config.tiles.ITEM_POTION_12] = tiles[11]
-        self.icons[herculeum.config.tiles.ITEM_POTION_13] = tiles[12]
-        self.icons[herculeum.config.tiles.ITEM_POTION_14] = tiles[13]
-        self.icons[herculeum.config.tiles.ITEM_POTION_15] = tiles[14]
-        self.icons[herculeum.config.tiles.ITEM_POTION_16] = tiles[15]
-        self.icons[herculeum.config.tiles.ITEM_POTION_17] = tiles[16]
-        self.icons[herculeum.config.tiles.ITEM_POTION_18] = tiles[17]
-        self.icons[herculeum.config.tiles.ITEM_POTION_19] = tiles[18]
-        self.icons[herculeum.config.tiles.ITEM_POTION_20] = tiles[19]
-        self.icons[herculeum.config.tiles.ITEM_POTION_21] = tiles[20]
-        self.icons[herculeum.config.tiles.ITEM_POTION_22] = tiles[21]
-        self.icons[herculeum.config.tiles.ITEM_POTION_23] = tiles[22]
-        self.icons[herculeum.config.tiles.ITEM_POTION_24] = tiles[23]
-        self.icons[herculeum.config.tiles.ITEM_POTION_25] = tiles[24]
-        self.icons[herculeum.config.tiles.ITEM_POTION_26] = tiles[25]
-        self.icons[herculeum.config.tiles.ITEM_POTION_27] = tiles[26]
-        self.icons[herculeum.config.tiles.ITEM_POTION_28] = tiles[27]
-        self.icons[herculeum.config.tiles.ITEM_POTION_29] = tiles[28]
-        self.icons[herculeum.config.tiles.ITEM_POTION_30] = tiles[29]
-        self.icons[herculeum.config.tiles.ITEM_POTION_31] = tiles[30]
-        self.icons[herculeum.config.tiles.ITEM_POTION_32] = tiles[31]
-        self.icons[herculeum.config.tiles.ITEM_POTION_33] = tiles[32]
-        self.icons[herculeum.config.tiles.ITEM_POTION_34] = tiles[33]
-        self.icons[herculeum.config.tiles.ITEM_POTION_35] = tiles[34]
-        self.icons[herculeum.config.tiles.ITEM_POTION_36] = tiles[35]
-        self.icons[herculeum.config.tiles.ITEM_POTION_37] = tiles[36]
-        self.icons[herculeum.config.tiles.ITEM_POTION_38] = tiles[37]
-        self.icons[herculeum.config.tiles.ITEM_POTION_39] = tiles[38]
-        self.icons[herculeum.config.tiles.ITEM_POTION_40] = tiles[39]
-        self.icons[herculeum.config.tiles.ITEM_POTION_41] = tiles[40]
-        self.icons[herculeum.config.tiles.ITEM_POTION_42] = tiles[41]
-        self.icons[herculeum.config.tiles.ITEM_POTION_43] = tiles[42]
-        self.icons[herculeum.config.tiles.ITEM_POTION_44] = tiles[43]
-        self.icons[herculeum.config.tiles.ITEM_POTION_45] = tiles[44]
-        self.icons[herculeum.config.tiles.ITEM_POTION_46] = tiles[45]
-        self.icons[herculeum.config.tiles.ITEM_POTION_47] = tiles[46]
-        self.icons[herculeum.config.tiles.ITEM_POTION_48] = tiles[47]
-        self.icons[herculeum.config.tiles.ITEM_POTION_49] = tiles[48]
-        self.icons[herculeum.config.tiles.ITEM_POTION_50] = tiles[49]
-        self.icons[herculeum.config.tiles.ITEM_POTION_51] = tiles[50]
-        self.icons[herculeum.config.tiles.ITEM_POTION_52] = tiles[51]
-        self.icons[herculeum.config.tiles.ITEM_POTION_53] = tiles[52]
-        self.icons[herculeum.config.tiles.ITEM_POTION_54] = tiles[53]
-        self.icons[herculeum.config.tiles.ITEM_POTION_55] = tiles[54]
-        self.icons[herculeum.config.tiles.ITEM_POTION_56] = tiles[55]
-        self.icons[herculeum.config.tiles.ITEM_POTION_57] = tiles[56]
-        self.icons[herculeum.config.tiles.ITEM_POTION_58] = tiles[57]
-        self.icons[herculeum.config.tiles.ITEM_POTION_59] = tiles[58]
-        self.icons[herculeum.config.tiles.ITEM_POTION_60] = tiles[59]
 
         surface = self.__load_image(base_path, 'dungeon.png')
         tiles = self.split_surface(surface, (32, 32))
@@ -191,19 +125,6 @@ class SurfaceManager:
         self.icons[herculeum.config.tiles.ITEM_APPLE] = tiles[0]
         self.icons[herculeum.config.tiles.ITEM_CRYSTAL_SKULL] = tiles[1]
 
-        surface = self.__load_image(base_path, 'main_menu.png')
-        self.images[images.image_start_menu] = surface
-        surface = self.__load_image(base_path, 'play_area.png')
-        self.images[images.image_play_area] = surface
-        surface = self.__load_image(base_path, 'inventory_menu.png')
-        self.images[images.image_inventory_menu] = surface
-        surface = self.__load_image(base_path, 'image_marble_slate.png')
-        self.images[images.image_end_marble_slate] = surface
-        surface = self.__load_image(base_path, 'image_tombstone.png')
-        self.images[images.image_end_tombstone] = surface
-        surface = self.__load_image(base_path, 'image_console.png')
-        self.images[images.image_console] = surface
-
         surface = self.__load_image(base_path, 'wooden-door.png')
         tiles = self.split_surface(surface, (32, 32))
         self.icons[herculeum.config.tiles.ICON_QUIT_GAME] = tiles[0]
@@ -224,8 +145,7 @@ class SurfaceManager:
         tiles = self.split_surface(surface, (32, 32))
         self.icons[herculeum.config.tiles.ICON_HERCULEUM] = tiles[0]
 
-        self.logger.info('resources loaded')
-
+    @logged
     def split_surface(self, image, tile_size):
         """
         Split image to tiles
@@ -259,6 +179,7 @@ class SurfaceManager:
 
         return tiles
 
+    @logged
     def get_image(self, id):
         """
         Get image with ID
@@ -270,6 +191,7 @@ class SurfaceManager:
         """
         return self.images[id]
 
+    @logged
     def get_icon(self, id):
         """
         Get icon with ID
@@ -282,5 +204,4 @@ class SurfaceManager:
         if id in self.icons.keys():
             return self.icons[id]
         else:
-            self.logger.warn('icon with id %s not found', id)
             return self.icons[herculeum.config.tiles.FLOOR_EMPTY]

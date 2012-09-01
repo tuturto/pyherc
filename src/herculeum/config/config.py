@@ -29,7 +29,7 @@ class Configuration(pyherc.config.Configuration):
     Configuration for herculeum
     """
 
-    def __init__(self, base_path, model):
+    def __init__(self, base_path, model, config_package):
         """
         Default constructor
 
@@ -40,20 +40,37 @@ class Configuration(pyherc.config.Configuration):
         """
         super(Configuration, self).__init__(base_path, model)
 
-        self.surface_manager = None
+        self.surface_manager = SurfaceManager(base_path)
+        self.surface_manager.load_resources(base_path)
 
-    def initialise(self, level_config):
+        self.context = ConfigurationContext(config_package,
+                                            base_path,
+                                            self.surface_manager)
+
+    def initialise(self):
         """
         Initialise configuration
-
-        :param level_config: package containing configuration
-        :type level_config: Package
         """
-        super(Configuration, self).initialise(level_config)
+        super(Configuration, self).initialise(self.context)
 
-        self.resolution = (800, 600)
-        self.full_screen = True
-        self.caption = 'Herculeum'
+class ConfigurationContext(object):
+    """
+    Class to relay information between different configuration phases
 
-        self.surface_manager = SurfaceManager()
-        self.surface_manager.load_resources(self.base_path)
+    .. versionadded:: 0.6
+    """
+    def __init__(self, config_package, base_path, surface_manager):
+        """
+        Default constructor
+
+        :param config_package: package containing configurations
+        :type config_package: Package
+        :param base_path: location of resource files
+        :type base_path: string
+        :param surface_manager: manager to handle graphics
+        :type surface_manager: SurfaceManager
+        """
+        super(ConfigurationContext, self).__init__()
+        self.config_package = config_package
+        self.base_path = base_path
+        self.surface_manager = surface_manager

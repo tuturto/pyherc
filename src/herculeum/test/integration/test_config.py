@@ -47,8 +47,11 @@ class TestMainConfiguration():
         """
         app = QApplication([])
         base_path = detect_base_path()
-        self.config = Configuration(base_path, mock())
-        self.config.initialise(herculeum.config.levels)
+        self.config = Configuration(base_path,
+                                    mock(),
+                                    herculeum.config.levels)
+
+        self.config.initialise()
 
     def test_initialisation(self):
         """
@@ -58,10 +61,6 @@ class TestMainConfiguration():
             This test reads configuration from resources directory
         """
         config = self.config
-        assert_that(config.resolution, is_(not_none()))
-        assert_that(config.resolution, is_(not_none()))
-        assert_that(config.full_screen, is_(not_none()))
-        assert_that(config.caption, is_(not_none()))
         assert_that(config.surface_manager, is_(not_none()))
         assert_that(config.action_factory, is_(not_none()))
         assert_that(config.base_path, is_(not_none()))

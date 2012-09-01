@@ -161,14 +161,14 @@ def init_level(rng, item_generator, creature_generator, level_size):
 
     return config
 
-def init_creatures():
+def init_creatures(context):
     """
     Initialise creatures''
 
     :returns: list of configuration items
     :rtype: [CreatureConfiguration]
     """
-
+    surface_manager = context.surface_manager
     config = []
 
     config.append(CreatureConfiguration(name = 'rat',
@@ -177,7 +177,7 @@ def init_creatures():
                                         mind = 2,
                                         hp = 2,
                                         speed = 2,
-                                        icons = CREATURE_RAT_1,
+                                        icons = surface_manager.add_icon('rat', 'mouse.png'),
                                         attack = 2,
                                         ai = FlockingHerbivore))
 
@@ -187,7 +187,7 @@ def init_creatures():
                                         mind = 0,
                                         hp = 4,
                                         speed = 1.9,
-                                        icons = CREATURE_BEETLE_1,
+                                        icons = surface_manager.add_icon('fire beetle', 'scarab-beetle.png'),
                                         attack = 4,
                                         ai = FlockingHerbivore))
 
@@ -202,7 +202,7 @@ def init_creatures():
                                         mind = 0,
                                         hp = 8,
                                         speed = 2.5,
-                                        icons = CREATURE_SKELETON_WARRIOR,
+                                        icons = surface_manager.add_icon('skeleton warrior', 'blade-bite.png'),
                                         attack = 2,
                                         ai = FlockingHerbivore,
                                         inventory = skeleton_inventory))
