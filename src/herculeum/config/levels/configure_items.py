@@ -57,9 +57,147 @@ def init_items(context):
                                             damage = 2,
                                             critical_range = 11,
                                             critical_damage = 2,
+                                            damage_types = ['piercing'],
+                                            weapon_class = 'simple')))
+
+    config.append(
+                  ItemConfiguration(name = 'sword',
+                                    cost = 6,
+                                    weight = 4,
+                                    icons = [surface_manager.add_icon('sword', 'stiletto.png')],
+                                    types = ['weapon',
+                                             'one-handed',
+                                             'melee',
+                                             'martial weapon'],
+                                    rarity = 'uncommon',
+                                    weapon_configration = WeaponConfiguration(
+                                            damage = 2,
+                                            critical_range = 12,
+                                            critical_damage = 2,
                                             damage_types = ['piercing',
                                                             'slashing'],
+                                            weapon_class = 'martial')))
+
+    config.append(
+                  ItemConfiguration(name = 'axe',
+                                    cost = 6,
+                                    weight = 4,
+                                    icons = [surface_manager.add_icon('axe', 'battle-axe.png')],
+                                    types = ['weapon',
+                                             'two-handed',
+                                             'melee',
+                                             'martial weapon'],
+                                    rarity = 'uncommon',
+                                    weapon_configration = WeaponConfiguration(
+                                            damage = 2,
+                                            critical_range = 12,
+                                            critical_damage = 2,
+                                            damage_types = ['crushing',
+                                                            'slashing'],
+                                            weapon_class = 'martial')))
+
+    config.append(
+                  ItemConfiguration(name = 'club',
+                                    cost = 6,
+                                    weight = 4,
+                                    icons = [surface_manager.add_icon('club', 'mace.png')],
+                                    types = ['weapon',
+                                             'one-handed',
+                                             'melee',
+                                             'simple weapon'],
+                                    rarity = 'common',
+                                    weapon_configration = WeaponConfiguration(
+                                            damage = 3,
+                                            critical_range = 11,
+                                            critical_damage = 3,
+                                            damage_types = ['crushing'],
                                             weapon_class = 'simple')))
+
+    config.append(
+                  ItemConfiguration(name = 'warhammer',
+                                    cost = 6,
+                                    weight = 4,
+                                    icons = [surface_manager.add_icon('warhammer', 'gavel.png')],
+                                    types = ['weapon',
+                                             'two-handed',
+                                             'melee',
+                                             'martial weapon'],
+                                    rarity = 'rare',
+                                    weapon_configration = WeaponConfiguration(
+                                            damage = 7,
+                                            critical_range = 12,
+                                            critical_damage = 7,
+                                            damage_types = ['crushing'],
+                                            weapon_class = 'martial')))
+
+    config.append(
+                  ItemConfiguration(name = 'spear',
+                                    cost = 6,
+                                    weight = 4,
+                                    icons = [surface_manager.add_icon('spear', 'barbed-spear.png')],
+                                    types = ['weapon',
+                                             'one-handed',
+                                             'melee',
+                                             'martial weapon'],
+                                    rarity = 'rare',
+                                    weapon_configration = WeaponConfiguration(
+                                            damage = 5,
+                                            critical_range = 11,
+                                            critical_damage = 5,
+                                            damage_types = ['piercing'],
+                                            weapon_class = 'martial')))
+
+    config.append(
+                  ItemConfiguration(name = 'whip',
+                                    cost = 6,
+                                    weight = 4,
+                                    icons = [surface_manager.add_icon('whip', 'whip.png')],
+                                    types = ['weapon',
+                                             'one-handed',
+                                             'melee',
+                                             'exotic weapon'],
+                                    rarity = 'common',
+                                    weapon_configration = WeaponConfiguration(
+                                            damage = 3,
+                                            critical_range = 11,
+                                            critical_damage = 3,
+                                            damage_types = ['slashing'],
+                                            weapon_class = 'exotic')))
+
+    config.append(
+                  ItemConfiguration(name = 'sicle',
+                                    cost = 6,
+                                    weight = 4,
+                                    icons = [surface_manager.add_icon('sicle', 'scythe.png')],
+                                    types = ['weapon',
+                                             'light weapon',
+                                             'melee',
+                                             'exotic weapon'],
+                                    rarity = 'common',
+                                    weapon_configration = WeaponConfiguration(
+                                            damage = 3,
+                                            critical_range = 10,
+                                            critical_damage = 3,
+                                            damage_types = ['slashing'],
+                                            weapon_class = 'exotic')))
+
+    config.append(
+                  ItemConfiguration(name = 'morning star',
+                                    cost = 6,
+                                    weight = 4,
+                                    icons = [surface_manager.add_icon('morning star', 'spiked-mace.png')],
+                                    types = ['weapon',
+                                             'one-handed',
+                                             'melee',
+                                             'martial weapon'],
+                                    rarity = 'uncommon',
+                                    weapon_configration = WeaponConfiguration(
+                                            damage = 2,
+                                            critical_range = 12,
+                                            critical_damage = 2,
+                                            damage_types = ['crushing',
+                                                            'piercing'],
+                                            weapon_class = 'martial')))
 
     config.append(
                   ItemConfiguration(name = 'healing potion',

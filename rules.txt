@@ -44,18 +44,18 @@ Scale mail      +3      * 0.7  -2
 Plate mail      +4      * 0.5  -3
 Shield          +1      * 1    -1
 
-Weapons        Damage  Critical  Critical  Damage Types
-                       Range     Damage
-=======        ======  ========  ========  ============
-Dagger         2       10        2         pierce
-Sword          5       12        5         slash/pierce
-Axe            5       12        5         slash/crush
-Club           3       11        3         crush
-Warhammer      7       12        7         crush
-Spear          5       11        5         pierce
-Whip           3       11        3         slash
-Sickle         3       10        3         slash
-Morning star   5       12        5         crush/pierce
+Weapons        Damage  Critical  Critical  Damage Types     Type                    Rarity
+                       Range     Damage                 
+=======        ======  ========  ========  ============     ======================  ======
+Dagger         2       10        2         pierce           simple      light       common
+Sword          2       12        2         slash/pierce     martial     one-handed  uncommon
+Axe            2       12        2         slash/crush      martial     two-handed  uncommon
+Club           3       11        3         crush            simple      one-handed  common
+Warhammer      7       12        7         crush            martial     two-handed  rare
+Spear          5       11        5         pierce           martial     one-handed  rare
+Whip           3       11        3         slash            exotic      one-handed  common
+Sickle         3       10        3         slash            exotic      light       common
+Morning star   2       12        2         crush/pierce     martial     one-handed  uncommon
 
 Weapon Enchantments
 ===================
