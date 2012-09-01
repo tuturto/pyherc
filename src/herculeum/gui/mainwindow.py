@@ -144,7 +144,8 @@ class MainWindow(QMainWindow):
                                    model = self.application.world,
                                    surface_manager = self.surface_manager,
                                    action_factory = self.application.action_factory,
-                                   rng = self.application.rng)
+                                   rng = self.application.rng,
+                                   rules_engine = self.application.rules_engine)
         map_window.show()
 
     def __show_message_window(self, character):

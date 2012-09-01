@@ -31,7 +31,8 @@ class PlayMapWindow(QMdiSubWindow):
 
     .. versionadded:: 0.5
     """
-    def __init__(self, parent, model, surface_manager, action_factory, rng):
+    def __init__(self, parent, model, surface_manager, action_factory, rng,
+                 rules_engine):
         """
         Default constructor
         """
@@ -43,9 +44,11 @@ class PlayMapWindow(QMdiSubWindow):
         self.rng = rng
         self.current_level = None
 
-        self.__set_layout(model, surface_manager, action_factory, rng)
+        self.__set_layout(model, surface_manager, action_factory, rng,
+                          rules_engine)
 
-    def __set_layout(self, model, surface_manager, action_factory, rng):
+    def __set_layout(self, model, surface_manager, action_factory, rng,
+                     rules_engine):
         """
         Set layout of this window
         """
@@ -53,7 +56,8 @@ class PlayMapWindow(QMdiSubWindow):
                                         model = model,
                                         surface_manager = surface_manager,
                                         action_factory = action_factory,
-                                        rng = rng)
+                                        rng = rng,
+                                        rules_engine = rules_engine)
 
         self.setWidget(self.map_widget)
 
@@ -67,7 +71,8 @@ class PlayMapWidget(QWidget):
 
     .. versionadded:: 0.5
     """
-    def __init__(self, parent, model, surface_manager, action_factory, rng):
+    def __init__(self, parent, model, surface_manager, action_factory, rng,
+                 rules_engine):
         """
         Default constructor
         """
@@ -78,6 +83,7 @@ class PlayMapWidget(QWidget):
         self.surface_manager = surface_manager
         self.action_factory = action_factory
         self.rng = rng
+        self.rules_engine = rules_engine
 
         self.move_key_map = {Qt.Key_8:1, Qt.Key_9:2, Qt.Key_6:3, Qt.Key_3:4,
                              Qt.Key_2:5, Qt.Key_1:6, Qt.Key_4:7, Qt.Key_7:8,
@@ -199,7 +205,7 @@ class PlayMapWidget(QWidget):
         key_code = event.key()
 
         player = self.model.player
-        next_creature = self.model.get_next_creature()
+        next_creature = self.model.get_next_creature(self.rules_engine)
 
         if next_creature == player:
 
@@ -216,12 +222,12 @@ class PlayMapWidget(QWidget):
                                           self.action_factory,
                                           self.rng)
 
-        next_creature = self.model.get_next_creature()
+        next_creature = self.model.get_next_creature(self.rules_engine)
         while next_creature != player:
             next_creature.act(model = self.model,
                               action_factory = self.action_factory,
                               rng = self.rng)
-            next_creature = self.model.get_next_creature()
+            next_creature = self.model.get_next_creature(self.rules_engine)
 
 
 class MapGlyph(QGraphicsPixmapItem):

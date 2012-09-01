@@ -83,9 +83,6 @@ class Application(object):
         """
         main_window = MainWindow(APP,
                                  APP.surface_manager)
-        #start_menu = StartMenuWidget(APP,
-        #                             APP.surface_manager)
-        #start_menu.show()
         sys.exit(self.qt_app.exec_())
 
     def __get_surface_manager(self):
@@ -152,6 +149,12 @@ class Application(object):
         """
         return self.config.rng
 
+    def __get_rules_engine(self):
+        """
+        Get rules engine
+        """
+        return self.config.rules_engine
+
     def detect_resource_directory(self):
         """
         Detects location of resources directory and updates self.base_path
@@ -172,6 +175,7 @@ class Application(object):
     item_generator = property(__get_item_generator)
     level_generator_factory = property(__get_level_generator_factory)
     rng = property(__get_rng)
+    rules_engine = property(__get_rules_engine)
 
 render = None
 APP = Application()

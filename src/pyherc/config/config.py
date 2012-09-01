@@ -24,6 +24,7 @@ Configuration for pyherc
 import logging
 import random
 from pyherc.rules.public import ActionFactory
+from pyherc.rules import RulesEngine
 from pyherc.rules import Dying
 from pyherc.rules.move.factories import MoveFactory
 from pyherc.rules.move.factories import WalkFactory
@@ -69,6 +70,7 @@ class Configuration(object):
         self.base_path = base_path
         self.model = model
         self.rng = random.Random()
+        self.rules_engine = None
         self.logger = logging.getLogger('pyherc.config.Configuration')
 
     def initialise(self, level_config):
@@ -87,6 +89,8 @@ class Configuration(object):
         """
         self.logger.info('Initialising action sub system')
 
+        dying_rules = Dying()
+
         walk_factory = WalkFactory(self.level_generator_factory)
         move_factory = MoveFactory(walk_factory)
 
@@ -101,15 +105,15 @@ class Configuration(object):
                 effect_factory.add_effect(effect[0], effect[1])
 
         unarmed_combat_factory = UnarmedCombatFactory(effect_factory,
-                                                      Dying())
+                                                      dying_rules)
         melee_combat_factory = MeleeCombatFactory(effect_factory,
-                                                  Dying())
+                                                  dying_rules)
         attack_factory = AttackFactory([
                                         unarmed_combat_factory,
                                         melee_combat_factory])
 
         drink_factory = DrinkFactory(effect_factory,
-                                     Dying())
+                                     dying_rules)
 
         inventory_factory = InventoryFactory([PickUpFactory(),
                                              DropFactory()])
@@ -120,6 +124,9 @@ class Configuration(object):
                                             attack_factory,
                                             drink_factory,
                                             inventory_factory])
+
+        self.rules_engine = RulesEngine(self.action_factory,
+                                        dying_rules)
 
         self.logger.info('Action sub system initialised')
 
