@@ -52,6 +52,8 @@ Difficult to use weapon that requires years of practice.
 ******
 Armour
 ******
+Robes
+=====
 
 Leather armour
 ==============
@@ -77,4 +79,10 @@ Holy water
 
 Potions
 =======
+
+Healing potion
+--------------
+
+Poison
+------
 

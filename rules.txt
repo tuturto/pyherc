@@ -64,7 +64,11 @@ Elemental: elemental damage (pierce -> pierce/fire, slash/pierce -> slash/pierce
            fire, frost
 +n/m: +n/m to damage / critical damage
 Balanced: -1 to hit
+Adamantine: -1 critical range, *0.5 to damage, *0.7 to speed
 
+Armour Enchantments
+===================
+Adamantine: *0.5 bonus (not applicable for leather), *0.7 to speed
 
 Feats
 =====
