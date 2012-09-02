@@ -96,10 +96,13 @@ class MainWindow(QMainWindow):
         actions_menu.addAction(inventory_action)
         actions_menu.addAction(character_action)
 
-        self.mdi_area = QMdiArea(self)
-        self.mdi_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.mdi_area.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.setCentralWidget(self.mdi_area)
+        self.map_window = PlayMapWindow(parent = None,
+                                        model = self.application.world,
+                                        surface_manager = self.surface_manager,
+                                        action_factory = self.application.action_factory,
+                                        rng = self.application.rng,
+                                        rules_engine = self.application.rules_engine)
+        self.setCentralWidget(self.map_window)
 
         self.connect(new_action,
                      SIGNAL("triggered()"),
@@ -134,19 +137,13 @@ class MainWindow(QMainWindow):
             self.application.world.level = self.application.world.dungeon.levels
 
             self.__show_map_window()
-            self.__show_message_window(self.application.world.player)
+            #self.__show_message_window(self.application.world.player)
 
     def __show_map_window(self):
         """
         Show map window
         """
-        map_window = PlayMapWindow(parent = self.mdi_area,
-                                   model = self.application.world,
-                                   surface_manager = self.surface_manager,
-                                   action_factory = self.application.action_factory,
-                                   rng = self.application.rng,
-                                   rules_engine = self.application.rules_engine)
-        map_window.show()
+        self.map_window.construct_scene()
 
     def __show_message_window(self, character):
         """

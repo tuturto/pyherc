@@ -261,6 +261,7 @@ class ItemGlyph(QWidget):
             self.icon = self.surface_manager.get_icon(0)
 
         self.display.setPixmap(self.icon)
+        self.display.setMaximumSize(34, 34)
 
         self.grid_layout.addWidget(self.display)
         self.setLayout(self.grid_layout)

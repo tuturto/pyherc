@@ -21,11 +21,13 @@
 """
 Module for main map related functionality
 """
-from PyQt4.QtGui import QMdiSubWindow, QWidget, QHBoxLayout
+from PyQt4.QtGui import QMdiSubWindow, QWidget, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QGraphicsPixmapItem, QGraphicsView, QGraphicsScene
+from PyQt4.QtGui import QSplitter
 from PyQt4.QtCore import QSize, Qt
+from herculeum.gui.eventdisplay import EventMessageWidget
 
-class PlayMapWindow(QMdiSubWindow):
+class PlayMapWindow(QWidget):
     """
     Window for displaying playing world
 
@@ -52,18 +54,33 @@ class PlayMapWindow(QMdiSubWindow):
         """
         Set layout of this window
         """
+        layout = QVBoxLayout()
+        splitter = QSplitter()
+        splitter.setOrientation(Qt.Vertical)
+
         self.map_widget = PlayMapWidget(parent = self,
                                         model = model,
                                         surface_manager = surface_manager,
                                         action_factory = action_factory,
                                         rng = rng,
                                         rules_engine = rules_engine)
+        splitter.addWidget(self.map_widget)
 
-        self.setWidget(self.map_widget)
+        self.message_widget = EventMessageWidget(parent = self)
+        splitter.addWidget(self.message_widget)
+        splitter.setSizes([575, 50])
 
-        self.setWindowTitle('Map')
-
+        layout.addWidget(splitter)
+        self.setLayout(layout)
         self.resize(QSize(640, 480))
+
+    def construct_scene(self):
+        """
+        Create scene to display
+        """
+        self.map_widget.construct_scene()
+        self.model.player.register_event_listener(self.message_widget)
+        self.message_widget.set_point_of_view(self.model.player)
 
 class PlayMapWidget(QWidget):
     """
@@ -96,18 +113,23 @@ class PlayMapWidget(QWidget):
         Set layout of this widget
         """
         self.scene = QGraphicsScene()
-        self.__construct_scene(self.model, self.scene)
 
         layout = QHBoxLayout()
 
         self.view = QGraphicsView(self.scene)
         layout.addWidget(self.view)
 
+        self.setLayout(layout)
+
+    def construct_scene(self):
+        """
+        Construct scene to display
+        """
+        self.__construct_scene(self.model, self.scene)
+
         self.model.player.register_for_updates(self)
         self.model.register_event_listener(self)
         self.__center_view_on_character(self.model.player)
-
-        self.setLayout(layout)
 
     def __center_view_on_character(self, entity):
         """
@@ -202,6 +224,9 @@ class PlayMapWidget(QWidget):
         """
         Handle key events
         """
+        if self.model.player is None:
+            return
+
         key_code = event.key()
 
         player = self.model.player
