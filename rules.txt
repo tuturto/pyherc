@@ -35,14 +35,15 @@ Critical hit:
     chance as per weapon (separate roll)
     damage as per weapon
 
-Armours         Bonus   Speed  Casting
-=======         =====   =====  =======
-Robes           -       * 1    +1
-Leather         +1      * 1    
-Chainmail       +2      * 0.9  -1
-Scale mail      +3      * 0.7  -2
-Plate mail      +4      * 0.5  -3
-Shield          +1      * 1    -1
+Armours         Bonus   Damage      Speed  Casting
+                        reduction    
+=======         =====   =========   =====  =======
+Robes           -       -           * 1    +1
+Leather         +1      1           * 1    
+Chainmail       +2      2           * 0.9  -1
+Scale mail      +3      3           * 0.7  -2
+Plate mail      +4      5           * 0.5  -3
+Shield          +1      1           * 1    -1
 
 Weapons        Damage  Critical  Critical  Damage Types     Type                    Rarity
                        Range     Damage                 
@@ -69,6 +70,7 @@ Adamantine: -1 critical range, *0.5 to damage, *0.7 to speed
 Armour Enchantments
 ===================
 Adamantine: *0.5 bonus (not applicable for leather), *0.7 to speed
++n/m: +n/m to bonus / damage reduction
 
 Feats
 =====
