@@ -23,8 +23,8 @@ Module for main map related functionality
 """
 from PyQt4.QtGui import QMdiSubWindow, QWidget, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QGraphicsPixmapItem, QGraphicsView, QGraphicsScene
-from PyQt4.QtGui import QSplitter
-from PyQt4.QtCore import QSize, Qt
+from PyQt4.QtGui import QSplitter, QGraphicsSimpleTextItem, QColor
+from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
 from herculeum.gui.eventdisplay import EventMessageWidget
 
 class PlayMapWindow(QWidget):
@@ -196,19 +196,36 @@ class PlayMapWidget(QWidget):
         """
         if event.event_type == 'death':
             glyphs = [x for x in self.view.items()
-                      if x.entity == event.deceased]
+                      if (hasattr(x, 'entity'))
+                      and (x.entity == event.deceased)]
 
             for glyph in glyphs:
                 self.view.scene().removeItem(glyph)
         elif event.event_type == 'pick up':
             glyphs = [x for x in self.view.items()
-                      if x.entity == event.item]
+                      if (hasattr(x, 'entity'))
+                      and (x.entity == event.item)]
 
             for glyph in glyphs:
                 self.view.scene().removeItem(glyph)
 
         elif event.event_type == 'drop':
             self.add_glyph(event.item, self.scene, 2)
+        elif event.event_type == 'attack hit':
+            damage = event.damage.damage
+            target = event.target
+            damage_counter = DamageCounter(damage = damage,
+                                           parent = self)
+            self.view.scene().addItem(damage_counter)
+            damage_counter.setPos(target.location[0] * 32 + 16,
+                                  target.location[1] * 32)
+
+            self.anim = QPropertyAnimation(damage_counter.qobject,
+                                           'y_location')
+            self.anim.setDuration(1500)
+            self.anim.setStartValue(target.location[1] * 32)
+            self.anim.setEndValue(target.location[1] * 32 - 32)
+            self.anim.start()
 
     def receive_update(self, event):
         """
@@ -218,7 +235,6 @@ class PlayMapWidget(QWidget):
             if self.model.player.level != self.current_level:
                 self.__construct_scene(self.model, self.scene)
             self.__center_view_on_character(self.model.player)
-
 
     def keyPressEvent(self, event):
         """
@@ -253,6 +269,44 @@ class PlayMapWidget(QWidget):
                               action_factory = self.action_factory,
                               rng = self.rng)
             next_creature = self.model.get_next_creature(self.rules_engine)
+
+class DamageCounter(QGraphicsSimpleTextItem):
+    """
+    Counter for showing damage
+
+    .. versionadded:: 0.6
+    """
+    def __init__(self, damage, parent):
+        """
+        Default constructor
+        """
+        super(DamageCounter, self).__init__()
+
+        self.setText(str(damage))
+        self.setBrush(QColor('white'))
+
+        self.qobject = DamageCounterAdapter(self, self)
+
+class DamageCounterAdapter(QObject):
+    """
+    Adapter for damage counter
+
+    .. versionadded:: 0.6
+    """
+    def __init__(self, parent, object_to_animate):
+        """
+        Default constructor
+        """
+        super(DamageCounterAdapter, self).__init__()
+        self.object_to_animate = object_to_animate
+
+    def __get_y_location(self):
+        return self.object_to_animate.y()
+
+    def __set_y_location(self, y):
+        self.object_to_animate.setY(y)
+
+    y_location = pyqtProperty(int, __get_y_location, __set_y_location)
 
 
 class MapGlyph(QGraphicsPixmapItem):
