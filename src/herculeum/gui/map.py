@@ -25,6 +25,7 @@ from PyQt4.QtGui import QMdiSubWindow, QWidget, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QGraphicsPixmapItem, QGraphicsView, QGraphicsScene
 from PyQt4.QtGui import QSplitter, QGraphicsSimpleTextItem, QColor
 from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
+from PyQt4.QtCore import QAbstractAnimation
 from herculeum.gui.eventdisplay import EventMessageWidget
 
 class PlayMapWindow(QWidget):
@@ -101,6 +102,8 @@ class PlayMapWidget(QWidget):
         self.action_factory = action_factory
         self.rng = rng
         self.rules_engine = rules_engine
+
+        self.animations = []
 
         self.move_key_map = {Qt.Key_8:1, Qt.Key_9:2, Qt.Key_6:3, Qt.Key_3:4,
                              Qt.Key_2:5, Qt.Key_1:6, Qt.Key_4:7, Qt.Key_7:8,
@@ -220,12 +223,31 @@ class PlayMapWidget(QWidget):
             damage_counter.setPos(target.location[0] * 32 + 16,
                                   target.location[1] * 32)
 
-            self.anim = QPropertyAnimation(damage_counter.qobject,
+            animation = QPropertyAnimation(damage_counter.adapter,
                                            'y_location')
-            self.anim.setDuration(1500)
-            self.anim.setStartValue(target.location[1] * 32)
-            self.anim.setEndValue(target.location[1] * 32 - 32)
-            self.anim.start()
+            animation.setDuration(1500)
+            animation.setStartValue(target.location[1] * 32)
+            animation.setEndValue(target.location[1] * 32 - 32)
+            animation.finished.connect(self.remove_finished_animation)
+
+            self.animations.append(animation)
+
+            animation.start()
+
+    def remove_finished_animation(self):
+        """
+        Remove finished animation
+        """
+        finished_animations  = [x for x in self.animations
+                                if x.state() == QAbstractAnimation.Stopped]
+        counters = [x.targetObject().object_to_animate
+                    for x in finished_animations]
+
+        for item in finished_animations:
+            self.animations.remove(item)
+
+        for item in counters:
+            self.view.scene().removeItem(item)
 
     def receive_update(self, event):
         """
@@ -285,7 +307,7 @@ class DamageCounter(QGraphicsSimpleTextItem):
         self.setText(str(damage))
         self.setBrush(QColor('white'))
 
-        self.qobject = DamageCounterAdapter(self, self)
+        self.adapter = DamageCounterAdapter(self, self)
 
 class DamageCounterAdapter(QObject):
     """
