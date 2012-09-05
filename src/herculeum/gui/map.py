@@ -25,7 +25,8 @@ from PyQt4.QtGui import QMdiSubWindow, QWidget, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QGraphicsPixmapItem, QGraphicsView, QGraphicsScene
 from PyQt4.QtGui import QSplitter, QGraphicsSimpleTextItem, QColor
 from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
-from PyQt4.QtCore import QAbstractAnimation
+from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
+from PyQt4.QtCore import QEasingCurve
 from herculeum.gui.eventdisplay import EventMessageWidget
 
 class PlayMapWindow(QWidget):
@@ -216,23 +217,46 @@ class PlayMapWidget(QWidget):
             self.add_glyph(event.item, self.scene, 2)
         elif event.event_type == 'attack hit':
             damage = event.damage.damage
-            target = event.target
-            damage_counter = DamageCounter(damage = damage,
-                                           parent = self)
-            self.view.scene().addItem(damage_counter)
-            damage_counter.setPos(target.location[0] * 32 + 16,
-                                  target.location[1] * 32)
+            self.show_damage_counter(event.target.location, damage)
+        elif event.event_type == 'poisoned':
+            self.show_damage_counter(event.target.location,
+                                     'poisoned')
+        elif event.event_type == 'poison triggered':
+            self.show_damage_counter(event.target.location,
+                                     event.damage)
 
-            animation = QPropertyAnimation(damage_counter.adapter,
-                                           'y_location')
-            animation.setDuration(1500)
-            animation.setStartValue(target.location[1] * 32)
-            animation.setEndValue(target.location[1] * 32 - 32)
-            animation.finished.connect(self.remove_finished_animation)
+    def show_damage_counter(self, location, damage):
+        """
+        Show damage counter
+        """
+        damage_counter = DamageCounter(damage = str(damage),
+                                        parent = self)
+        self.view.scene().addItem(damage_counter)
+        damage_counter.setPos(location[0] * 32 + 16,
+                              location[1] * 32)
 
-            self.animations.append(animation)
+        animation = QSequentialAnimationGroup()
 
-            animation.start()
+        moving = QPropertyAnimation(damage_counter.adapter,
+                                    'y_location')
+        moving.setDuration(750)
+        moving.setStartValue(location[1] * 32)
+        moving.setEndValue(location[1] * 32 - 32)
+        curve = QEasingCurve(QEasingCurve.OutElastic)
+        moving.setEasingCurve(curve)
+        animation.addAnimation(moving)
+
+        fading = QPropertyAnimation(damage_counter.adapter,
+                                    'opacity')
+        fading.setDuration(750)
+        fading.setStartValue(1.0)
+        fading.setEndValue(0.0)
+        animation.addAnimation(fading)
+
+        animation.finished.connect(self.remove_finished_animation)
+        self.animations.append(animation)
+
+        animation.start()
 
     def remove_finished_animation(self):
         """
@@ -240,10 +264,11 @@ class PlayMapWidget(QWidget):
         """
         finished_animations  = [x for x in self.animations
                                 if x.state() == QAbstractAnimation.Stopped]
-        counters = [x.targetObject().object_to_animate
+        counters = [x.animationAt(0).targetObject().object_to_animate
                     for x in finished_animations]
 
         for item in finished_animations:
+            item.clear()
             self.animations.remove(item)
 
         for item in counters:
@@ -328,7 +353,14 @@ class DamageCounterAdapter(QObject):
     def __set_y_location(self, y):
         self.object_to_animate.setY(y)
 
+    def __get_opacity(self):
+        return self.object_to_animate.opacity()
+
+    def __set_opacity(self, opacity):
+        self.object_to_animate.setOpacity(opacity)
+
     y_location = pyqtProperty(int, __get_y_location, __set_y_location)
+    opacity = pyqtProperty(float, __get_opacity, __set_opacity)
 
 
 class MapGlyph(QGraphicsPixmapItem):
