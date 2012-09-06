@@ -24,6 +24,7 @@ Module for main map related functionality
 from PyQt4.QtGui import QMdiSubWindow, QWidget, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QGraphicsPixmapItem, QGraphicsView, QGraphicsScene
 from PyQt4.QtGui import QSplitter, QGraphicsSimpleTextItem, QColor
+from PyQt4.QtGui import QFont
 from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
 from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
 from PyQt4.QtCore import QEasingCurve
@@ -217,22 +218,68 @@ class PlayMapWidget(QWidget):
             self.add_glyph(event.item, self.scene, 2)
         elif event.event_type == 'attack hit':
             damage = event.damage.damage
-            self.show_damage_counter(event.target.location, damage)
-        elif event.event_type == 'poisoned':
             self.show_damage_counter(event.target.location,
-                                     'poisoned')
+                                     damage,
+                                     'white')
+        elif event.event_type == 'poisoned':
+            self.show_status_counter(event.target.location,
+                                     'poisoned',
+                                     'green')
         elif event.event_type == 'poison triggered':
             self.show_damage_counter(event.target.location,
-                                     event.damage)
+                                     event.damage,
+                                     'green')
 
-    def show_damage_counter(self, location, damage):
+    def show_status_counter(self, location, status, colour):
+        """
+        Show damage counter
+        """
+        damage_counter = DamageCounter(damage = str(status),
+                                       colour = colour,
+                                       parent = self)
+        self.view.scene().addItem(damage_counter)
+
+        bounds = damage_counter.boundingRect()
+        width = bounds.width()
+
+        damage_counter.setPos(location[0] * 32 + 16 - (width / 2),
+                              location[1] * 32)
+
+        animation = QSequentialAnimationGroup()
+
+        moving = QPropertyAnimation(damage_counter.adapter,
+                                    'y_location')
+        moving.setDuration(750)
+        moving.setStartValue(location[1] * 32)
+        moving.setEndValue(location[1] * 32 - 32)
+
+        animation.addAnimation(moving)
+
+        fading = QPropertyAnimation(damage_counter.adapter,
+                                    'opacity')
+        fading.setDuration(750)
+        fading.setStartValue(1.0)
+        fading.setEndValue(0.0)
+        animation.addAnimation(fading)
+
+        animation.finished.connect(self.remove_finished_animation)
+        self.animations.append(animation)
+
+        animation.start()
+
+    def show_damage_counter(self, location, damage, colour):
         """
         Show damage counter
         """
         damage_counter = DamageCounter(damage = str(damage),
-                                        parent = self)
+                                       colour = colour,
+                                       parent = self)
         self.view.scene().addItem(damage_counter)
-        damage_counter.setPos(location[0] * 32 + 16,
+
+        bounds = damage_counter.boundingRect()
+        width = bounds.width()
+
+        damage_counter.setPos(location[0] * 32 + 16 - (width / 2),
                               location[1] * 32)
 
         animation = QSequentialAnimationGroup()
@@ -323,14 +370,20 @@ class DamageCounter(QGraphicsSimpleTextItem):
 
     .. versionadded:: 0.6
     """
-    def __init__(self, damage, parent):
+    def __init__(self, damage, colour, parent):
         """
         Default constructor
         """
         super(DamageCounter, self).__init__()
 
+        font = QFont('Helvetica',
+                     12,
+                     QFont.Bold,
+                     False)
+
         self.setText(str(damage))
-        self.setBrush(QColor('white'))
+        self.setBrush(QColor(colour))
+        self.setFont(font)
 
         self.adapter = DamageCounterAdapter(self, self)
 
