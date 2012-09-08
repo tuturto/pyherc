@@ -43,3 +43,6 @@ def impl(context, character_name):
     
     assert new_hit_points < old_hit_points
 
+@then(u'Attack should deal {damage_type} damage')
+def impl(context, damage_type):
+    assert False
