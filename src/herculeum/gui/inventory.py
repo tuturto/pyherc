@@ -22,11 +22,81 @@
 Module for displaying inventory
 """
 from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
-from PyQt4.QtGui import QDockWidget, QGridLayout, QDrag
+from PyQt4.QtGui import QDockWidget, QGridLayout, QDrag, QDialog
 from PyQt4.QtCore import Qt, QMimeData, pyqtSignal
 import PyQt4.QtGui
 
 from pyherc.data import Item
+
+class InventoryDialog(QDialog):
+    """
+    Dialog to show inventory
+
+    .. versionadded:: 0.6
+    """
+    def __init__(self, surface_manager, parent, flags):
+        """
+        Default constructor
+        """
+        super(InventoryDialog, self).__init__(parent, flags)
+
+        self.surface_manager = surface_manager
+
+        self.__set_layout()
+
+    def __set_layout(self):
+        """
+        Set layout of this widget
+        """
+        main_layout = QHBoxLayout()
+
+        left_side = QVBoxLayout()
+        self.character_inventory = CharacterInventoryWidget(self)
+        self.item_description = ItemDescriptionWidget(self)
+        left_side.addWidget(self.character_inventory)
+        left_side.addWidget(self.item_description)
+
+        right_side = QVBoxLayout()
+        self.items_carried = ItemBox(surface_manager = self.surface_manager,
+                                     parent = self,
+                                     width = 6,
+                                     height = 6)
+
+        self.items_in_ground = ItemBox(surface_manager = self.surface_manager,
+                                       parent = self,
+                                       width = 6,
+                                       height = 2)
+        right_side.addWidget(self.items_carried)
+        right_side.addWidget(self.items_in_ground)
+
+        main_layout.addLayout(left_side)
+        main_layout.addLayout(right_side)
+
+        self.setLayout(main_layout)
+
+class CharacterInventoryWidget(QWidget):
+    """
+    Widget to show inventory of a character
+
+    .. versionadded:: 0.6
+    """
+    def __init__(self, parent):
+        """
+        Default constructor
+        """
+        super(CharacterInventoryWidget, self).__init__(parent)
+
+class ItemDescriptionWidget(QWidget):
+    """
+    Widget to show item description
+
+    .. versionadded:: 0.6
+    """
+    def __init__(self, parent):
+        """
+        Default constructor
+        """
+        super(ItemDescriptionWidget, self).__init__(parent)
 
 class InventoryDockWidget(QDockWidget):
     """

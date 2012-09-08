@@ -32,7 +32,7 @@ import pyherc.rules.character
 from herculeum.gui.startgame import StartGameWidget
 from herculeum.gui.map import PlayMapWindow
 from herculeum.gui.eventdisplay import EventMessageDockWidget
-from herculeum.gui.inventory import InventoryDockWidget
+from herculeum.gui.inventory import InventoryDockWidget, InventoryDialog
 from herculeum.config import tiles
 
 class MainWindow(QMainWindow):
@@ -162,10 +162,15 @@ class MainWindow(QMainWindow):
         """
         Show inventory
         """
-        inventory_display = InventoryDockWidget(self.surface_manager,
-                                                self.application.world.player,
-                                                self.application.action_factory,
-                                                self)
+        inventory_dialog = InventoryDialog(self.surface_manager,
+                                           self,
+                                           Qt.Dialog)
+        inventory_dialog.exec_()
+        #inventory_display = InventoryDockWidget(self.surface_manager,
+        #                                        self.application.world.player,
+        #                                        self.application.action_factory,
+        #                                        self)
 
-        self.addDockWidget(Qt.LeftDockWidgetArea,
-                           inventory_display)
+        #self.addDockWidget(Qt.LeftDockWidgetArea,
+        #                   inventory_display)
+
