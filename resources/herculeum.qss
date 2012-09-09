@@ -7,6 +7,14 @@ QWidget {
  /* margin: 0px; */
 }
 
+QPushButton {
+    background-color: darkgray;
+    border-style: solid;
+    border-color: white;
+    border-radius: 4px;
+    padding: 0;
+}
+
 QDialog {
     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
                                       stop:0 darkgray, stop:1 black);
