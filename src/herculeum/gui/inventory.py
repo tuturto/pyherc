@@ -89,7 +89,8 @@ class CharacterInventoryWidget(QWidget):
         left_side = QVBoxLayout()
         self.ring_slot = ItemGlyph(None,
                                    surface_manager,
-                                   self)
+                                   self,
+                                   QPixmap(':ring.png'))
         self.weapon_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
@@ -109,10 +110,12 @@ class CharacterInventoryWidget(QWidget):
         middle_top = QHBoxLayout()
         self.head_slot = ItemGlyph(None,
                                    surface_manager,
-                                   self)
+                                   self,
+                                   QPixmap(':helm.png'))
         self.necklace_slot = ItemGlyph(None,
                                        surface_manager,
-                                       self)
+                                       self,
+                                       QPixmap(':necklace.png'))
         middle_top.addStretch()
         middle_top.addWidget(self.head_slot)
         middle_top.addWidget(self.necklace_slot)
