@@ -206,6 +206,12 @@ class ItemDescriptionWidget(QWidget):
         layout.addWidget(self.text_edit)
         self.setLayout(layout)
 
+    def set_text(self, text):
+        """
+        Set text being displayed on this widget
+        """
+        self.text_edit.setText(text)
+
 class InventoryWidget(QWidget):
     """
     Widget for showing inventory
@@ -246,14 +252,14 @@ class InventoryWidget(QWidget):
                                      parent = self,
                                      width = 6,
                                      height = 6)
-        self.items_carried.show_items(character.inventory)
+        self.items_carried.ItemFocused.connect(self.on_item_focused)
 
         self.items_in_ground = ItemBox(surface_manager = surface_manager,
                                        parent = self,
                                        width = 6,
                                        height = 2)
-        items = character.level.get_items_at(character.location)
-        self.items_in_ground.show_items(items)
+        self.items_in_ground.ItemFocused.connect(self.on_item_focused)
+        self.items_in_ground.ItemLeftSelected.connect(self.pick_up_item)
 
         right_side.addWidget(self.items_carried)
         right_side.addWidget(self.items_in_ground)
@@ -262,6 +268,31 @@ class InventoryWidget(QWidget):
         main_layout.addLayout(right_side)
 
         self.setLayout(main_layout)
+
+        self.update_inventory()
+
+    def update_inventory(self):
+        """
+        Update items being displayed
+        """
+        self.items_carried.show_items(self.character.inventory)
+        items = self.character.level.get_items_at(self.character.location)
+        self.items_in_ground.show_items(items)
+
+    def on_item_focused(self, item):
+        """
+        Handle item focused
+        """
+        self.item_description.set_text(item.name)
+
+    def pick_up_item(self, item):
+        """
+        Pick up item
+        """
+        self.character.pick_up(item, self.action_factory)
+
+        self.update_inventory()
+        self.ItemPickedUp.emit(item)
 
 class ItemBox(QWidget):
     """
@@ -279,6 +310,10 @@ class ItemBox(QWidget):
 
         self.__set_layout(width, height)
 
+    ItemFocused = pyqtSignal(Item, name='ItemFocused')
+    ItemLeftSelected = pyqtSignal(Item, name='ItemLeftSelected')
+    ItemRightSelected = pyqtSignal(Item, name='ItemRightSelected')
+
     def __set_layout(self, width, height):
         """
         Set layout of this widget
@@ -295,8 +330,12 @@ class ItemBox(QWidget):
                                      self.surface_manager,
                                      self)
 
+                new_item.ItemFocused.connect(self.on_item_focused)
+                new_item.ItemLeftSelected.connect(self.on_item_left_selected)
+                new_item.ItemRightSelected.connect(self.on_item_right_selected)
                 self.grid_layout.addWidget(new_item, y, x)
                 self.items.append(new_item)
+
 
         self.setLayout(self.grid_layout)
 
@@ -316,6 +355,24 @@ class ItemBox(QWidget):
         for counter in range(item_count, len(self.items)):
             self.items[counter].display.setPixmap(empty_icon)
             self.items[counter].item = None
+
+    def on_item_left_selected(self, item):
+        """
+        Handle left selecting item
+        """
+        self.ItemLeftSelected.emit(item)
+
+    def on_item_right_selected(self, item):
+        """
+        Handle right selecting item
+        """
+        self.ItemRightSelected.emit(item)
+
+    def on_item_focused(self, item):
+        """
+        Handle item focusing
+        """
+        self.ItemFocused.emit(item)
 
 class ItemGlyph(QWidget):
     """
@@ -337,7 +394,9 @@ class ItemGlyph(QWidget):
 
         self.__set_layout()
 
-    ItemSelected = pyqtSignal(Item, name='ItemSelected')
+    ItemFocused = pyqtSignal(Item, name='ItemFocused')
+    ItemLeftSelected = pyqtSignal(Item, name='ItemLeftSelected')
+    ItemRightSelected = pyqtSignal(Item, name='ItemRightSelected')
 
     def __set_layout(self):
         """
@@ -356,7 +415,7 @@ class ItemGlyph(QWidget):
                 self.icon = self.default_icon
 
         self.display.setPixmap(self.icon)
-        self.display.setMaximumSize(34, 34)
+        self.display.setMaximumSize(40, 40)
         self.display.setObjectName('passive_inventorybox')
 
         self.grid_layout.addWidget(self.display)
@@ -368,6 +427,8 @@ class ItemGlyph(QWidget):
         """
         self.display.setObjectName('active_inventorybox')
         self.display.setStyle(QApplication.style())
+        if self.item != None:
+            self.ItemFocused.emit(self.item)
 
     def focusOutEvent(self, event):
         """
@@ -375,6 +436,19 @@ class ItemGlyph(QWidget):
         """
         self.display.setObjectName('passive_inventorybox')
         self.display.setStyle(QApplication.style())
+
+    def mousePressEvent(self, event):
+        """
+        Handle mouse buttons
+        """
+        if event.buttons() == Qt.LeftButton:
+            if self.item != None:
+                self.ItemLeftSelected.emit(self.item)
+            return
+        elif event.buttons() == Qt.RightButton:
+            if self.item != None:
+                self.ItemRightSelected.emit(self.item)
+            return
 
     def enabled(self, enabled):
         """
