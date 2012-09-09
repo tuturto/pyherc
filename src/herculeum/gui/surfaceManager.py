@@ -149,6 +149,21 @@ class SurfaceManager:
         tiles = self.split_surface(surface, (32, 32))
         self.icons[herculeum.config.tiles.ICON_HERCULEUM] = tiles[0]
 
+        surface = self.__load_image(base_path, 'mailed-fist.png')
+        self.icons[herculeum.config.tiles.ICON_MAILED_FIST] = surface
+        surface = self.__load_image(base_path, 'shield.png')
+        self.icons[herculeum.config.tiles.ICON_SHIELD] = surface
+        surface = self.__load_image(base_path, 'arrow-cluster.png')
+        self.icons[herculeum.config.tiles.ICON_ARROWS] = surface
+        surface = self.__load_image(base_path, 'breastplate.png')
+        self.icons[herculeum.config.tiles.ICON_ARMOUR] = surface
+        surface = self.__load_image(base_path, 'belts.png')
+        self.icons[herculeum.config.tiles.ICON_BELT] = surface
+        surface = self.__load_image(base_path, 'boots.png')
+        self.icons[herculeum.config.tiles.ICON_BOOTS] = surface
+        surface = self.__load_image(base_path, 'inventory_sword.png')
+        self.icons[herculeum.config.tiles.ICON_WEAPON] = surface
+
     @logged
     def split_surface(self, image, tile_size):
         """

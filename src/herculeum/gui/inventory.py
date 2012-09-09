@@ -29,7 +29,10 @@ from PyQt4.QtCore import Qt, QMimeData, pyqtSignal
 import PyQt4.QtGui
 
 from pyherc.data import Item
-from herculeum.config.tiles import ICON_INVENTORY_CHARACTER
+from herculeum.config.tiles import TRANSPARENT, ICON_INVENTORY_CHARACTER
+from herculeum.config.tiles import ICON_MAILED_FIST, ICON_SHIELD, ICON_ARROWS
+from herculeum.config.tiles import ICON_ARMOUR, ICON_BELT, ICON_BOOTS
+from herculeum.config.tiles import ICON_WEAPON
 
 class InventoryDialog(QDialog):
     """
@@ -93,10 +96,12 @@ class CharacterInventoryWidget(QWidget):
                                    self)
         self.weapon_slot = ItemGlyph(None,
                                      surface_manager,
-                                     self)
+                                     self,
+                                     default_icon = ICON_WEAPON)
         self.gloves_slot = ItemGlyph(None,
                                      surface_manager,
-                                     self)
+                                     self,
+                                     default_icon = ICON_MAILED_FIST)
         left_side.addStretch()
         left_side.addWidget(self.ring_slot)
         left_side.addWidget(self.weapon_slot)
@@ -118,9 +123,7 @@ class CharacterInventoryWidget(QWidget):
         middle_top.addStretch()
 
         middle_middle = QHBoxLayout()
-        #TODO: from resources
         self.character_icon = surface_manager.get_svg_icon(ICON_INVENTORY_CHARACTER)
-        #self.character_icon = QSvgWidget('C:/programming/pyHack/resources/strong.svg', self)
         self.character_icon.setMaximumSize(150, 150)
         self.character_icon.setMinimumSize(150, 150)
         middle_middle.addWidget(self.character_icon)
@@ -128,10 +131,12 @@ class CharacterInventoryWidget(QWidget):
         middle_bottom = QHBoxLayout()
         self.boots_slot = ItemGlyph(None,
                                     surface_manager,
-                                    self)
+                                    self,
+                                    default_icon = ICON_BOOTS)
         self.belt_slot = ItemGlyph(None,
                                    surface_manager,
-                                   self)
+                                   self,
+                                   default_icon = ICON_BELT)
         middle_bottom.addStretch()
         middle_bottom.addWidget(self.boots_slot)
         middle_bottom.addWidget(self.belt_slot)
@@ -144,13 +149,16 @@ class CharacterInventoryWidget(QWidget):
         right_side = QVBoxLayout()
         self.arrows_slot = ItemGlyph(None,
                                      surface_manager,
-                                     self)
+                                     self,
+                                     default_icon = ICON_ARROWS)
         self.shield_slot = ItemGlyph(None,
                                      surface_manager,
-                                     self)
+                                     self,
+                                     default_icon = ICON_SHIELD)
         self.armour_slot = ItemGlyph(None,
                                      surface_manager,
-                                     self)
+                                     self,
+                                     default_icon = ICON_ARMOUR)
         right_side.addStretch()
         right_side.addWidget(self.arrows_slot)
         right_side.addWidget(self.shield_slot)
@@ -356,7 +364,7 @@ class ItemGlyph(QWidget):
 
     .. versionadded:: 0.5
     """
-    def __init__(self, item, surface_manager, parent):
+    def __init__(self, item, surface_manager, parent, default_icon = None):
         """
         Default constructor
         """
@@ -364,6 +372,7 @@ class ItemGlyph(QWidget):
 
         self.item = item
         self.surface_manager = surface_manager
+        self.default_icon = default_icon
 
         self.__set_layout()
 
@@ -378,8 +387,10 @@ class ItemGlyph(QWidget):
         if self.item != None:
             self.icon = self.surface_manager.get_icon(self.item.icon)
         else:
-            #TODO: empty box
-            self.icon = self.surface_manager.get_icon(0)
+            if self.default_icon == None:
+                self.icon = self.surface_manager.get_icon(TRANSPARENT)
+            else:
+                self.icon = self.surface_manager.get_icon(self.default_icon)
 
         self.display.setPixmap(self.icon)
         self.display.setMaximumSize(34, 34)
