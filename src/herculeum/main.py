@@ -50,7 +50,7 @@ print '#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.'
 if __name__ == "__main__":
     APP.detect_resource_directory()
 
-    pixmap = QPixmap(os.path.join(APP.base_path, 'splash.png'));
+    pixmap = QPixmap(':splash.png');
     splash_screen = QSplashScreen(pixmap)
     splash_screen.show()
 
