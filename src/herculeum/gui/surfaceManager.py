@@ -129,41 +129,6 @@ class SurfaceManager:
         self.icons[herculeum.config.tiles.ITEM_APPLE] = tiles[0]
         self.icons[herculeum.config.tiles.ITEM_CRYSTAL_SKULL] = tiles[1]
 
-        surface = self.__load_image(base_path, 'wooden-door.png')
-        tiles = self.split_surface(surface, (32, 32))
-        self.icons[herculeum.config.tiles.ICON_QUIT_GAME] = tiles[0]
-
-        surface = self.__load_image(base_path, 'cycle.png')
-        tiles = self.split_surface(surface, (32, 32))
-        self.icons[herculeum.config.tiles.ICON_NEW_GAME] = tiles[0]
-
-        surface = self.__load_image(base_path, 'swap-bag.png')
-        tiles = self.split_surface(surface, (32, 32))
-        self.icons[herculeum.config.tiles.ICON_INVENTORY] = tiles[0]
-
-        surface = self.__load_image(base_path, 'strong.png')
-        tiles = self.split_surface(surface, (32, 32))
-        self.icons[herculeum.config.tiles.ICON_CHARACTER] = tiles[0]
-
-        surface = self.__load_image(base_path, 'rune-stone.png')
-        tiles = self.split_surface(surface, (32, 32))
-        self.icons[herculeum.config.tiles.ICON_HERCULEUM] = tiles[0]
-
-        surface = self.__load_image(base_path, 'mailed-fist.png')
-        self.icons[herculeum.config.tiles.ICON_MAILED_FIST] = surface
-        surface = self.__load_image(base_path, 'shield.png')
-        self.icons[herculeum.config.tiles.ICON_SHIELD] = surface
-        surface = self.__load_image(base_path, 'arrow-cluster.png')
-        self.icons[herculeum.config.tiles.ICON_ARROWS] = surface
-        surface = self.__load_image(base_path, 'breastplate.png')
-        self.icons[herculeum.config.tiles.ICON_ARMOUR] = surface
-        surface = self.__load_image(base_path, 'belts.png')
-        self.icons[herculeum.config.tiles.ICON_BELT] = surface
-        surface = self.__load_image(base_path, 'boots.png')
-        self.icons[herculeum.config.tiles.ICON_BOOTS] = surface
-        surface = self.__load_image(base_path, 'inventory_sword.png')
-        self.icons[herculeum.config.tiles.ICON_WEAPON] = surface
-
     @logged
     def split_surface(self, image, tile_size):
         """
@@ -224,16 +189,3 @@ class SurfaceManager:
             return self.icons[id]
         else:
             return self.icons[herculeum.config.tiles.TRANSPARENT]
-
-    @logged
-    def get_svg_icon(self, id):
-        """
-        Get svg icon with ID
-
-        :param id: ID number of the icon to retrieve
-        :type id: int
-        :returns: icon if found, otherwise empty icon
-        :rtype: QPixmap
-        """
-        #TODO: implement configuration
-        return QSvgWidget(os.path.join(self.base_path, 'strong.svg'))

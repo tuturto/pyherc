@@ -32,6 +32,7 @@ sys.path.append(INSTALL_PATH)
 from pyherc.debug import get_debug_server
 from herculeum.application import APP
 from PyQt4.QtGui import QPixmap, QSplashScreen
+import herculeum.gui.resources
 
 print '#   pyherc is free software: you can redistribute it and/or modify'
 print '#   it under the terms of the GNU General Public License as published by'

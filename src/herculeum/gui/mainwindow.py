@@ -54,13 +54,13 @@ class MainWindow(QMainWindow):
 
     def __set_layout(self):
 
-        new_action = QAction(QIcon(self.surface_manager.get_icon(tiles.ICON_NEW_GAME)),
+        new_action = QAction(QIcon(':new-game.png'),
                              '&New game',
                              self)
         new_action.setShortcut('Ctrl+N')
         new_action.setStatusTip('Start a new game')
 
-        exit_action = QAction(QIcon(self.surface_manager.get_icon(tiles.ICON_QUIT_GAME)),
+        exit_action = QAction(QIcon(':exit-game.png'),
                              '&Quit',
                              self)
 
@@ -68,14 +68,14 @@ class MainWindow(QMainWindow):
         exit_action.setStatusTip('Quit game')
         exit_action.triggered.connect(PyQt4.QtGui.qApp.quit)
 
-        inventory_action = QAction(QIcon(self.surface_manager.get_icon(tiles.ICON_INVENTORY)),
+        inventory_action = QAction(QIcon(':inventory.png'),
                                          'Inventory',
                                          self)
         inventory_action.setShortcut('Ctrl+I')
         inventory_action.setStatusTip('Show inventory')
         inventory_action.triggered.connect(self.__show_inventory)
 
-        character_action = QAction(QIcon(self.surface_manager.get_icon(tiles.ICON_CHARACTER)),
+        character_action = QAction(QIcon(':character.png'),
                                          'Character',
                                          self)
         character_action.setShortcut('Ctrl+C')
@@ -110,7 +110,7 @@ class MainWindow(QMainWindow):
 
         self.setGeometry(50, 50, 800, 600)
         self.setWindowTitle('Herculeum')
-        self.setWindowIcon(QIcon(self.surface_manager.get_icon(tiles.ICON_HERCULEUM)))
+        self.setWindowIcon(QIcon(':rune-stone.png'))
         self.show()
 
     def __show_new_game(self):

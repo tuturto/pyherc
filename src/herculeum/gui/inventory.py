@@ -23,16 +23,12 @@ Module for displaying inventory
 """
 from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QDockWidget, QGridLayout, QDrag, QDialog
-from PyQt4.QtGui import QTextEdit
+from PyQt4.QtGui import QTextEdit,  QIcon, QPixmap
 from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import Qt, QMimeData, pyqtSignal
 import PyQt4.QtGui
 
 from pyherc.data import Item
-from herculeum.config.tiles import TRANSPARENT, ICON_INVENTORY_CHARACTER
-from herculeum.config.tiles import ICON_MAILED_FIST, ICON_SHIELD, ICON_ARROWS
-from herculeum.config.tiles import ICON_ARMOUR, ICON_BELT, ICON_BOOTS
-from herculeum.config.tiles import ICON_WEAPON
 
 class InventoryDialog(QDialog):
     """
@@ -97,11 +93,11 @@ class CharacterInventoryWidget(QWidget):
         self.weapon_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
-                                     default_icon = ICON_WEAPON)
+                                     QPixmap(':inventory_sword.png'))
         self.gloves_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
-                                     default_icon = ICON_MAILED_FIST)
+                                     QPixmap(':mailed-fist.png'))
         left_side.addStretch()
         left_side.addWidget(self.ring_slot)
         left_side.addWidget(self.weapon_slot)
@@ -123,7 +119,8 @@ class CharacterInventoryWidget(QWidget):
         middle_top.addStretch()
 
         middle_middle = QHBoxLayout()
-        self.character_icon = surface_manager.get_svg_icon(ICON_INVENTORY_CHARACTER)
+
+        self.character_icon = QSvgWidget(':strong.svg')
         self.character_icon.setMaximumSize(150, 150)
         self.character_icon.setMinimumSize(150, 150)
         middle_middle.addWidget(self.character_icon)
@@ -132,11 +129,11 @@ class CharacterInventoryWidget(QWidget):
         self.boots_slot = ItemGlyph(None,
                                     surface_manager,
                                     self,
-                                    default_icon = ICON_BOOTS)
+                                    QPixmap(':boots.png'))
         self.belt_slot = ItemGlyph(None,
                                    surface_manager,
                                    self,
-                                   default_icon = ICON_BELT)
+                                   QPixmap(':belts.png'))
         middle_bottom.addStretch()
         middle_bottom.addWidget(self.boots_slot)
         middle_bottom.addWidget(self.belt_slot)
@@ -150,15 +147,15 @@ class CharacterInventoryWidget(QWidget):
         self.arrows_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
-                                     default_icon = ICON_ARROWS)
+                                     QPixmap(':arrow-cluster.png'))
         self.shield_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
-                                     default_icon = ICON_SHIELD)
+                                     QPixmap(':shield.png'))
         self.armour_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
-                                     default_icon = ICON_ARMOUR)
+                                     QPixmap(':breastplate.png'))
         right_side.addStretch()
         right_side.addWidget(self.arrows_slot)
         right_side.addWidget(self.shield_slot)
@@ -388,9 +385,9 @@ class ItemGlyph(QWidget):
             self.icon = self.surface_manager.get_icon(self.item.icon)
         else:
             if self.default_icon == None:
-                self.icon = self.surface_manager.get_icon(TRANSPARENT)
+                self.icon = QPixmap(':transparent.png')
             else:
-                self.icon = self.surface_manager.get_icon(self.default_icon)
+                self.icon = self.default_icon
 
         self.display.setPixmap(self.icon)
         self.display.setMaximumSize(34, 34)

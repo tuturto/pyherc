@@ -1,0 +1,20 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource>
+        <file>arrow-cluster.png</file>
+        <file>belts.png</file>
+        <file>boots.png</file>
+        <file>breastplate.png</file>
+        <file>character.png</file>
+        <file>exit-game.png</file>
+        <file>inventory.png</file>
+        <file>inventory_sword.png</file>
+        <file>mailed-fist.png</file>
+        <file>new-game.png</file>
+        <file>rune-stone.png</file>
+        <file>shield.png</file>
+        <file>splash.png</file>
+        <file>strong.svg</file>
+        <file>transparent.png</file>
+    </qresource>
+</RCC>
