@@ -253,6 +253,7 @@ class InventoryWidget(QWidget):
                                      width = 6,
                                      height = 6)
         self.items_carried.ItemFocused.connect(self.on_item_focused)
+        self.items_carried.ItemRightSelected.connect(self.drop_item)
 
         self.items_in_ground = ItemBox(surface_manager = surface_manager,
                                        parent = self,
@@ -293,6 +294,15 @@ class InventoryWidget(QWidget):
 
         self.update_inventory()
         self.ItemPickedUp.emit(item)
+
+    def drop_item(self, item):
+        """
+        Drop item
+        """
+        self.character.drop_item(item, self.action_factory)
+
+        self.update_inventory()
+        self.ItemDropped.emit(item)
 
 class ItemBox(QWidget):
     """
