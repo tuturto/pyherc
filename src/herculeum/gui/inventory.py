@@ -23,7 +23,7 @@ Module for displaying inventory
 """
 from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QDockWidget, QGridLayout, QDrag, QDialog
-from PyQt4.QtGui import QTextEdit,  QIcon, QPixmap
+from PyQt4.QtGui import QTextEdit,  QIcon, QPixmap, QApplication
 from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import Qt, QMimeData, pyqtSignal
 import PyQt4.QtGui
@@ -91,14 +91,17 @@ class CharacterInventoryWidget(QWidget):
                                    surface_manager,
                                    self,
                                    QPixmap(':ring.png'))
+        self.ring_slot.enabled(False)
         self.weapon_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
                                      QPixmap(':inventory_sword.png'))
+        self.weapon_slot.enabled(False)
         self.gloves_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
                                      QPixmap(':mailed-fist.png'))
+        self.gloves_slot.enabled(False)
         left_side.addStretch()
         left_side.addWidget(self.ring_slot)
         left_side.addWidget(self.weapon_slot)
@@ -112,10 +115,12 @@ class CharacterInventoryWidget(QWidget):
                                    surface_manager,
                                    self,
                                    QPixmap(':helm.png'))
+        self.head_slot.enabled(False)
         self.necklace_slot = ItemGlyph(None,
                                        surface_manager,
                                        self,
                                        QPixmap(':necklace.png'))
+        self.necklace_slot.enabled(False)
         middle_top.addStretch()
         middle_top.addWidget(self.head_slot)
         middle_top.addWidget(self.necklace_slot)
@@ -133,10 +138,12 @@ class CharacterInventoryWidget(QWidget):
                                     surface_manager,
                                     self,
                                     QPixmap(':boots.png'))
+        self.boots_slot.enabled(False)
         self.belt_slot = ItemGlyph(None,
                                    surface_manager,
                                    self,
                                    QPixmap(':belts.png'))
+        self.belt_slot.enabled(False)
         middle_bottom.addStretch()
         middle_bottom.addWidget(self.boots_slot)
         middle_bottom.addWidget(self.belt_slot)
@@ -151,14 +158,17 @@ class CharacterInventoryWidget(QWidget):
                                      surface_manager,
                                      self,
                                      QPixmap(':arrow-cluster.png'))
+        self.arrows_slot.enabled(False)
         self.shield_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
                                      QPixmap(':shield.png'))
+        self.shield_slot.enabled(False)
         self.armour_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
                                      QPixmap(':breastplate.png'))
+        self.armour_slot.enabled(False)
         right_side.addStretch()
         right_side.addWidget(self.arrows_slot)
         right_side.addWidget(self.shield_slot)
@@ -195,35 +205,6 @@ class ItemDescriptionWidget(QWidget):
 
         layout.addWidget(self.text_edit)
         self.setLayout(layout)
-
-class InventoryDockWidget(QDockWidget):
-    """
-    Dock widget for showing inventory
-
-    .. versionadded:: 0.5
-    """
-    def __init__(self, surface_manager, character, action_factory, parent):
-        """
-        Default constructor
-        """
-        super(InventoryDockWidget, self).__init__(parent)
-
-        self.surface_manager = surface_manager
-        self.character = character
-        self.action_factory = action_factory
-
-        self.__set_layout()
-
-    def __set_layout(self):
-        """
-        Set layout of this widget
-        """
-        self.inventory = InventoryWidget(self.surface_manager,
-                                         self.character,
-                                         self.action_factory,
-                                         self)
-        self.setWidget(self.inventory)
-        self.setWindowTitle('Inventory')
 
 class InventoryWidget(QWidget):
     """
@@ -265,11 +246,15 @@ class InventoryWidget(QWidget):
                                      parent = self,
                                      width = 6,
                                      height = 6)
+        self.items_carried.show_items(character.inventory)
 
         self.items_in_ground = ItemBox(surface_manager = surface_manager,
                                        parent = self,
                                        width = 6,
                                        height = 2)
+        items = character.level.get_items_at(character.location)
+        self.items_in_ground.show_items(items)
+
         right_side.addWidget(self.items_carried)
         right_side.addWidget(self.items_in_ground)
 
@@ -294,8 +279,6 @@ class ItemBox(QWidget):
 
         self.__set_layout(width, height)
 
-    ItemAccepted = pyqtSignal(Item, name='ItemAccepted')
-
     def __set_layout(self, width, height):
         """
         Set layout of this widget
@@ -306,16 +289,14 @@ class ItemBox(QWidget):
         self.grid_layout.setSpacing(0)
         self.items = []
 
-        for y in range(0, width):
-            for x in range(0, height):
+        for y in range(0, height):
+            for x in range(0, width):
                 new_item = ItemGlyph(None,
                                      self.surface_manager,
                                      self)
 
-                self.grid_layout.addWidget(new_item, x, y)
+                self.grid_layout.addWidget(new_item, y, x)
                 self.items.append(new_item)
-
-        self.setAcceptDrops(True)
 
         self.setLayout(self.grid_layout)
 
@@ -323,7 +304,7 @@ class ItemBox(QWidget):
         """
         Show given items
         """
-        empty_icon = self.surface_manager.get_icon(0)
+        empty_icon = QPixmap(':transparent.png')
 
         item_count = len(items)
 
@@ -335,28 +316,6 @@ class ItemBox(QWidget):
         for counter in range(item_count, len(self.items)):
             self.items[counter].display.setPixmap(empty_icon)
             self.items[counter].item = None
-
-
-    def dragEnterEvent(self, e):
-        """
-        Called when object being dragged has entered
-
-        :param e: event
-        """
-        e.accept()
-
-    def dropEvent(self, e):
-        """
-        Called when object has been dropped
-
-        :param e: event
-        """
-        item = e.source().item
-
-        e.setDropAction(Qt.MoveAction)
-        e.accept()
-
-        self.ItemAccepted.emit(item)
 
 class ItemGlyph(QWidget):
     """
@@ -374,7 +333,11 @@ class ItemGlyph(QWidget):
         self.surface_manager = surface_manager
         self.default_icon = default_icon
 
+        self.setFocusPolicy(Qt.StrongFocus)
+
         self.__set_layout()
+
+    ItemSelected = pyqtSignal(Item, name='ItemSelected')
 
     def __set_layout(self):
         """
@@ -394,25 +357,30 @@ class ItemGlyph(QWidget):
 
         self.display.setPixmap(self.icon)
         self.display.setMaximumSize(34, 34)
+        self.display.setObjectName('passive_inventorybox')
 
         self.grid_layout.addWidget(self.display)
         self.setLayout(self.grid_layout)
 
-    def mouseMoveEvent(self, e):
+    def focusInEvent(self, event):
         """
-        Called when mouse is being moved on top of the widget
-
-        :param e: event
+        Handle focus in
         """
+        self.display.setObjectName('active_inventorybox')
+        self.display.setStyle(QApplication.style())
 
-        if e.buttons() != Qt.LeftButton:
-            return
+    def focusOutEvent(self, event):
+        """
+        Handle focus out
+        """
+        self.display.setObjectName('passive_inventorybox')
+        self.display.setStyle(QApplication.style())
 
-        mimeData = QMimeData()
-
-        drag = QDrag(self)
-        drag.setMimeData(mimeData)
-        drag.setHotSpot(e.pos() - self.rect().topLeft())
-
-        dropAction = drag.start(Qt.MoveAction)
-
+    def enabled(self, enabled):
+        """
+        Set this control enabled or disabled
+        """
+        if enabled == True:
+            self.setFocusPolicy(Qt.StrongFocus)
+        else:
+            self.setFocusPolicy(Qt.NoFocus)

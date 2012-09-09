@@ -32,7 +32,7 @@ import pyherc.rules.character
 from herculeum.gui.startgame import StartGameWidget
 from herculeum.gui.map import PlayMapWindow
 from herculeum.gui.eventdisplay import EventMessageDockWidget
-from herculeum.gui.inventory import InventoryDockWidget, InventoryDialog
+from herculeum.gui.inventory import InventoryDialog
 from herculeum.config import tiles
 
 class MainWindow(QMainWindow):
