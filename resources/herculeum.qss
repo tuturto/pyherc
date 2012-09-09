@@ -14,29 +14,12 @@ QDialog {
     margin: 0;
 }
 
-QWidget#damagecounter {
- color: white;
- /* margin: 0px; */
-}
-
 /* The background of the tab bar */
 QMainWindow {
     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
                                       stop:0 darkgray, stop:1 black);
     padding: 0;
     margin: 0;
-}
-
-QTextEdit {
-    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                      stop:0 darkgray, stop:1 black);
-    color: white;
-    border-width: 1px;
-    padding: 0px;
-    spacing: 0px;
-    border-style: solid;
-    border-color: white;
-    border-radius: 4px;
 }
 
 QAbstractScrollArea {
@@ -52,8 +35,7 @@ QAbstractScrollArea {
 }
 
 QMenuBar  {
-    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                      stop:0 darkgray, stop:1 black);
+    background-color: darkgray;
 }
 
 QFrame {
@@ -72,4 +54,15 @@ QSplitter::handle:horizontal {
 
 QSplitter::handle:vertical {
     height: 1px;
+}
+
+QTextEdit {
+    background-color: black;
+    color: white;
+    border-width: 1px;
+    padding: 0px;
+    spacing: 0px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 4px;
 }
