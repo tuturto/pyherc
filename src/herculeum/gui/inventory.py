@@ -23,10 +23,13 @@ Module for displaying inventory
 """
 from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QDockWidget, QGridLayout, QDrag, QDialog
+from PyQt4.QtGui import QTextEdit
+from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import Qt, QMimeData, pyqtSignal
 import PyQt4.QtGui
 
 from pyherc.data import Item
+from herculeum.config.tiles import ICON_INVENTORY_CHARACTER
 
 class InventoryDialog(QDialog):
     """
@@ -34,45 +37,32 @@ class InventoryDialog(QDialog):
 
     .. versionadded:: 0.6
     """
-    def __init__(self, surface_manager, parent, flags):
+    def __init__(self, surface_manager, character, action_factory, parent,
+                 flags):
         """
         Default constructor
         """
         super(InventoryDialog, self).__init__(parent, flags)
 
-        self.surface_manager = surface_manager
+        self.__set_layout(surface_manager,
+                          character,
+                          action_factory,
+                          parent)
 
-        self.__set_layout()
-
-    def __set_layout(self):
+    def __set_layout(self, surface_manager, character, action_factory, parent):
         """
         Set layout of this widget
         """
-        main_layout = QHBoxLayout()
+        self.setWindowTitle('Inventory')
+        self.inventory = InventoryWidget(surface_manager = surface_manager,
+                                         character = character,
+                                         action_factory = action_factory,
+                                         parent = parent)
 
-        left_side = QVBoxLayout()
-        self.character_inventory = CharacterInventoryWidget(self)
-        self.item_description = ItemDescriptionWidget(self)
-        left_side.addWidget(self.character_inventory)
-        left_side.addWidget(self.item_description)
+        layout = QVBoxLayout()
+        layout.addWidget(self.inventory)
 
-        right_side = QVBoxLayout()
-        self.items_carried = ItemBox(surface_manager = self.surface_manager,
-                                     parent = self,
-                                     width = 6,
-                                     height = 6)
-
-        self.items_in_ground = ItemBox(surface_manager = self.surface_manager,
-                                       parent = self,
-                                       width = 6,
-                                       height = 2)
-        right_side.addWidget(self.items_carried)
-        right_side.addWidget(self.items_in_ground)
-
-        main_layout.addLayout(left_side)
-        main_layout.addLayout(right_side)
-
-        self.setLayout(main_layout)
+        self.setLayout(layout)
 
 class CharacterInventoryWidget(QWidget):
     """
@@ -80,11 +70,98 @@ class CharacterInventoryWidget(QWidget):
 
     .. versionadded:: 0.6
     """
-    def __init__(self, parent):
+    def __init__(self, surface_manager, character, parent):
         """
         Default constructor
         """
         super(CharacterInventoryWidget, self).__init__(parent)
+
+        self.surface_manager = surface_manager
+        self.character = character
+
+        self.__set_layout(surface_manager, character, parent)
+
+    def __set_layout(self, surface_manager, character, parent):
+        """
+        Set layout of this widget
+        """
+        main_layout = QHBoxLayout()
+
+        left_side = QVBoxLayout()
+        self.ring_slot = ItemGlyph(None,
+                                   surface_manager,
+                                   self)
+        self.weapon_slot = ItemGlyph(None,
+                                     surface_manager,
+                                     self)
+        self.gloves_slot = ItemGlyph(None,
+                                     surface_manager,
+                                     self)
+        left_side.addStretch()
+        left_side.addWidget(self.ring_slot)
+        left_side.addWidget(self.weapon_slot)
+        left_side.addWidget(self.gloves_slot)
+        left_side.addStretch()
+
+        middle = QVBoxLayout()
+
+        middle_top = QHBoxLayout()
+        self.head_slot = ItemGlyph(None,
+                                   surface_manager,
+                                   self)
+        self.necklace_slot = ItemGlyph(None,
+                                       surface_manager,
+                                       self)
+        middle_top.addStretch()
+        middle_top.addWidget(self.head_slot)
+        middle_top.addWidget(self.necklace_slot)
+        middle_top.addStretch()
+
+        middle_middle = QHBoxLayout()
+        #TODO: from resources
+        self.character_icon = surface_manager.get_svg_icon(ICON_INVENTORY_CHARACTER)
+        #self.character_icon = QSvgWidget('C:/programming/pyHack/resources/strong.svg', self)
+        self.character_icon.setMaximumSize(150, 150)
+        self.character_icon.setMinimumSize(150, 150)
+        middle_middle.addWidget(self.character_icon)
+
+        middle_bottom = QHBoxLayout()
+        self.boots_slot = ItemGlyph(None,
+                                    surface_manager,
+                                    self)
+        self.belt_slot = ItemGlyph(None,
+                                   surface_manager,
+                                   self)
+        middle_bottom.addStretch()
+        middle_bottom.addWidget(self.boots_slot)
+        middle_bottom.addWidget(self.belt_slot)
+        middle_bottom.addStretch()
+
+        middle.addLayout(middle_top)
+        middle.addLayout(middle_middle)
+        middle.addLayout(middle_bottom)
+
+        right_side = QVBoxLayout()
+        self.arrows_slot = ItemGlyph(None,
+                                     surface_manager,
+                                     self)
+        self.shield_slot = ItemGlyph(None,
+                                     surface_manager,
+                                     self)
+        self.armour_slot = ItemGlyph(None,
+                                     surface_manager,
+                                     self)
+        right_side.addStretch()
+        right_side.addWidget(self.arrows_slot)
+        right_side.addWidget(self.shield_slot)
+        right_side.addWidget(self.armour_slot)
+        right_side.addStretch()
+
+        main_layout.addLayout(left_side)
+        main_layout.addLayout(middle)
+        main_layout.addLayout(right_side)
+
+        self.setLayout(main_layout)
 
 class ItemDescriptionWidget(QWidget):
     """
@@ -97,6 +174,19 @@ class ItemDescriptionWidget(QWidget):
         Default constructor
         """
         super(ItemDescriptionWidget, self).__init__(parent)
+
+        self.__set_layout()
+
+    def __set_layout(self):
+        """
+        Sets layout of this widget
+        """
+        layout = QHBoxLayout()
+        self.text_edit = QTextEdit()
+        self.text_edit.setReadOnly(True)
+
+        layout.addWidget(self.text_edit)
+        self.setLayout(layout)
 
 class InventoryDockWidget(QDockWidget):
     """
@@ -143,81 +233,42 @@ class InventoryWidget(QWidget):
         self.character = character
         self.action_factory = action_factory
 
-        self.__set_layout()
+        self.__set_layout(surface_manager, character)
 
     ItemPickedUp = pyqtSignal(Item, name='ItemPickedUp')
     ItemDropped = pyqtSignal(Item, name='ItemDropped')
 
-    def __set_layout(self):
+    def __set_layout(self, surface_manager, character):
         """
         Set layout of this widget
         """
-        self.vertical_layout = QVBoxLayout()
-        self.vertical_layout.setSpacing(0)
+        main_layout = QHBoxLayout()
 
-        self.items1 = ItemBox(self.surface_manager, self, 4, 8)
-        self.items1.ItemAccepted.connect(self.handle_item_picked_up)
-        self.items2 = ItemBox(self.surface_manager, self, 4, 2)
-        self.items2.ItemAccepted.connect(self.handle_item_dropped)
+        left_side = QVBoxLayout()
+        self.character_inventory = CharacterInventoryWidget(surface_manager,
+                                                            character,
+                                                            self)
+        self.item_description = ItemDescriptionWidget(self)
+        left_side.addWidget(self.character_inventory)
+        left_side.addWidget(self.item_description)
 
-        self.vertical_layout.addWidget(self.items1)
-        self.vertical_layout.addWidget(self.items2)
+        right_side = QVBoxLayout()
+        self.items_carried = ItemBox(surface_manager = surface_manager,
+                                     parent = self,
+                                     width = 6,
+                                     height = 6)
 
-        self.setLayout(self.vertical_layout)
+        self.items_in_ground = ItemBox(surface_manager = surface_manager,
+                                       parent = self,
+                                       width = 6,
+                                       height = 2)
+        right_side.addWidget(self.items_carried)
+        right_side.addWidget(self.items_in_ground)
 
-        self.character.register_for_updates(self)
+        main_layout.addLayout(left_side)
+        main_layout.addLayout(right_side)
 
-    def receive_update(self, event):
-        """
-        Receive event from character
-        """
-        if event.event_type == 'move':
-            self.__update_ground_inventory()
-
-        if event.event_type in ('pick up',
-                                'drop'):
-            self.__update_carried_inventory()
-            self.__update_ground_inventory()
-
-    def handle_item_picked_up(self, item):
-        """
-        Handle item being dragged on top of inventory
-
-        :param item: item to pick up
-        :type item: Item
-        """
-        self.character.pick_up(item,
-                               self.action_factory)
-        self.ItemPickedUp.emit(item)
-
-    def handle_item_dropped(self, item):
-        """
-        Handle request to drop item
-
-        :param item: item to drop
-        :type item: Item
-        """
-        self.character.drop_item(item,
-                                 self.action_factory)
-        self.ItemDropped.emit(item)
-
-    def __update_ground_inventory(self):
-        """
-        Update items displayed in ground
-        """
-        location = self.character.location
-        level = self.character.level
-        items = level.get_items_at(location)
-
-        self.items2.show_items(items)
-
-    def __update_carried_inventory(self):
-        """
-        Update items displayed being carried
-        """
-        items = self.character.inventory
-
-        self.items1.show_items(items)
+        self.setLayout(main_layout)
 
 class ItemBox(QWidget):
     """

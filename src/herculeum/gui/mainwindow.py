@@ -163,14 +163,8 @@ class MainWindow(QMainWindow):
         Show inventory
         """
         inventory_dialog = InventoryDialog(self.surface_manager,
+                                           self.application.world.player,
+                                           self.application.action_factory,
                                            self,
                                            Qt.Dialog)
         inventory_dialog.exec_()
-        #inventory_display = InventoryDockWidget(self.surface_manager,
-        #                                        self.application.world.player,
-        #                                        self.application.action_factory,
-        #                                        self)
-
-        #self.addDockWidget(Qt.LeftDockWidgetArea,
-        #                   inventory_display)
-

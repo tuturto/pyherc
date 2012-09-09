@@ -29,6 +29,7 @@ import pyherc
 
 from pyherc.aspects import Logged
 from PyQt4.QtGui import QPixmap
+from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import QRect
 
 class SurfaceManager:
@@ -83,6 +84,9 @@ class SurfaceManager:
         :param base_path: path to directory where resources are location
         :type base_path: string
         """
+        surface = self.__load_image(base_path, 'transparent.png')
+        self.icons[herculeum.config.tiles.TRANSPARENT] = surface
+
         surface = self.__load_image(base_path, 'weapons.png')
 
         tiles = self.split_surface(surface, (32, 32))
@@ -204,4 +208,17 @@ class SurfaceManager:
         if id in self.icons.keys():
             return self.icons[id]
         else:
-            return self.icons[herculeum.config.tiles.FLOOR_EMPTY]
+            return self.icons[herculeum.config.tiles.TRANSPARENT]
+
+    @logged
+    def get_svg_icon(self, id):
+        """
+        Get svg icon with ID
+
+        :param id: ID number of the icon to retrieve
+        :type id: int
+        :returns: icon if found, otherwise empty icon
+        :rtype: QPixmap
+        """
+        #TODO: implement configuration
+        return QSvgWidget(os.path.join(self.base_path, 'strong.svg'))

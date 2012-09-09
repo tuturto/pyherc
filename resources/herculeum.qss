@@ -1,10 +1,17 @@
 /**
  ** Generic style rules common to all platforms
  **/
-
+ 
 QWidget {
  color: black;
  /* margin: 0px; */
+}
+
+QDialog {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 darkgray, stop:1 black);
+    padding: 0;
+    margin: 0;
 }
 
 QWidget#damagecounter {
