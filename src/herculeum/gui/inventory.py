@@ -192,6 +192,7 @@ class ItemDescriptionWidget(QWidget):
         Default constructor
         """
         super(ItemDescriptionWidget, self).__init__(parent)
+        self.setFocusPolicy(Qt.NoFocus)
 
         self.__set_layout()
 
@@ -271,6 +272,7 @@ class InventoryWidget(QWidget):
         self.setLayout(main_layout)
 
         self.update_inventory()
+        self.items_carried.items[0].setFocus(Qt.OtherFocusReason)
 
     def update_inventory(self):
         """
@@ -317,6 +319,8 @@ class ItemBox(QWidget):
         super(ItemBox, self).__init__(parent)
 
         self.surface_manager = surface_manager
+        self.item_width = width
+        self.item_height = height
 
         self.__set_layout(width, height)
 
@@ -348,6 +352,41 @@ class ItemBox(QWidget):
 
 
         self.setLayout(self.grid_layout)
+
+    def keyPressEvent(self, event):
+        """
+        Handle keyboard events
+        """
+        if event.key() in (Qt.Key_1, Qt.Key_2, Qt.Key_3, Qt.Key_4, Qt.Key_6,
+                           Qt.Key_7, Qt.Key_8, Qt.Key_9):
+            current = [x for x in self.items
+                       if x.display.objectName() == 'active_inventorybox'][0]
+
+            index = self.items.index(current)
+
+            if event.key() == Qt.Key_8:
+                new_index = index - self.item_width
+            elif event.key() == Qt.Key_2:
+                new_index = index + self.item_width
+            elif event.key() == Qt.Key_4:
+                new_index = index - 1
+            elif event.key() == Qt.Key_6:
+                new_index = index + 1
+            else:
+                new_index = index
+
+            new = self.items[new_index]
+            new.setFocus(Qt.OtherFocusReason)
+        elif event.key() in (Qt.Key_5, Qt.Key_Enter):
+            item = [x for x in self.items
+                    if x.display.objectName() == 'active_inventorybox'][0].item
+            if item != None:
+                if event.key() == Qt.Key_5:
+                    self.ItemLeftSelected.emit(item)
+                else:
+                    self.ItemRightSelected.emit(item)
+        else:
+            super(ItemBox, self).keyPressEvent(event)
 
     def show_items(self, items):
         """
