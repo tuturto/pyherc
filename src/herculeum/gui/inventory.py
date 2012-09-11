@@ -62,6 +62,35 @@ class InventoryDialog(QDialog):
         layout.addWidget(self.inventory)
 
         self.setLayout(layout)
+        self.inventory.items_carried.items[0].setFocus()
+
+    def focusNextPrevChild(self, next):
+        if len([x for x in self.inventory.items_carried.items
+                if x.display.objectName() == 'active_inventorybox']) > 0:
+            focused = self.inventory.items_carried
+        elif len([x for x in self.inventory.items_in_ground.items
+                  if x.display.objectName() == 'active_inventorybox']) > 0:
+            focused = self.inventory.items_in_ground.items
+        else:
+            focused = self.inventory.character_inventory
+
+        if focused == self.inventory.character_inventory:
+            if next == True:
+                self.inventory.items_carried.items[0].setFocus()
+            else:
+                self.inventory.items_in_ground.items[0].setFocus()
+        elif focused == self.inventory.items_carried:
+            if next == True:
+                self.inventory.items_in_ground.items[0].setFocus()
+            else:
+                self.inventory.character_inventory.items[0].setFocus()
+        else:
+            if next == True:
+                self.inventory.character_inventory.items[0].setFocus()
+            else:
+                self.inventory.items_carried.items[0].setFocus()
+
+        return True
 
 class CharacterInventoryWidget(QWidget):
     """
@@ -77,8 +106,18 @@ class CharacterInventoryWidget(QWidget):
 
         self.surface_manager = surface_manager
         self.character = character
+        self.items = []
 
         self.__set_layout(surface_manager, character, parent)
+
+        self.move_keys = {Qt.Key_1: 1,
+                          Qt.Key_2: 1,
+                          Qt.Key_3: 1,
+                          Qt.Key_4: -1,
+                          Qt.Key_6: 1,
+                          Qt.Key_7: -1,
+                          Qt.Key_8: -1,
+                          Qt.Key_9: -1}
 
     def __set_layout(self, surface_manager, character, parent):
         """
@@ -91,17 +130,20 @@ class CharacterInventoryWidget(QWidget):
                                    surface_manager,
                                    self,
                                    QPixmap(':ring.png'))
-        self.ring_slot.enabled(False)
+        self.items.append(self.ring_slot)
+
         self.weapon_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
                                      QPixmap(':inventory_sword.png'))
-        self.weapon_slot.enabled(False)
+        self.items.append(self.weapon_slot)
+
         self.gloves_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
                                      QPixmap(':mailed-fist.png'))
-        self.gloves_slot.enabled(False)
+        self.items.append(self.gloves_slot)
+
         left_side.addStretch()
         left_side.addWidget(self.ring_slot)
         left_side.addWidget(self.weapon_slot)
@@ -115,12 +157,14 @@ class CharacterInventoryWidget(QWidget):
                                    surface_manager,
                                    self,
                                    QPixmap(':helm.png'))
-        self.head_slot.enabled(False)
+        self.items.append(self.head_slot)
+
         self.necklace_slot = ItemGlyph(None,
                                        surface_manager,
                                        self,
                                        QPixmap(':necklace.png'))
-        self.necklace_slot.enabled(False)
+        self.items.append(self.necklace_slot)
+
         middle_top.addStretch()
         middle_top.addWidget(self.head_slot)
         middle_top.addWidget(self.necklace_slot)
@@ -138,12 +182,14 @@ class CharacterInventoryWidget(QWidget):
                                     surface_manager,
                                     self,
                                     QPixmap(':boots.png'))
-        self.boots_slot.enabled(False)
+        self.items.append(self.boots_slot)
+
         self.belt_slot = ItemGlyph(None,
                                    surface_manager,
                                    self,
                                    QPixmap(':belts.png'))
-        self.belt_slot.enabled(False)
+        self.items.append(self.belt_slot)
+
         middle_bottom.addStretch()
         middle_bottom.addWidget(self.boots_slot)
         middle_bottom.addWidget(self.belt_slot)
@@ -158,17 +204,20 @@ class CharacterInventoryWidget(QWidget):
                                      surface_manager,
                                      self,
                                      QPixmap(':arrow-cluster.png'))
-        self.arrows_slot.enabled(False)
+        self.items.append(self.arrows_slot)
+
         self.shield_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
                                      QPixmap(':shield.png'))
-        self.shield_slot.enabled(False)
+        self.items.append(self.shield_slot)
+
         self.armour_slot = ItemGlyph(None,
                                      surface_manager,
                                      self,
                                      QPixmap(':breastplate.png'))
-        self.armour_slot.enabled(False)
+        self.items.append(self.armour_slot)
+
         right_side.addStretch()
         right_side.addWidget(self.arrows_slot)
         right_side.addWidget(self.shield_slot)
@@ -180,6 +229,35 @@ class CharacterInventoryWidget(QWidget):
         main_layout.addLayout(right_side)
 
         self.setLayout(main_layout)
+
+    def keyPressEvent(self, event):
+        """
+        Handle keyboard events
+        """
+        if event.key() in (Qt.Key_1, Qt.Key_2, Qt.Key_3, Qt.Key_4, Qt.Key_6,
+                           Qt.Key_7, Qt.Key_8, Qt.Key_9):
+            current = [x for x in self.items
+                       if x.display.objectName() == 'active_inventorybox'][0]
+
+            index = self.items.index(current)
+
+            new_index = index + self.move_keys[event.key()]
+
+            if new_index < len(self.items):
+                new = self.items[new_index]
+                new.setFocus(Qt.OtherFocusReason)
+            else:
+                self.focusNextChild()
+        elif event.key() in (Qt.Key_5, Qt.Key_Enter):
+            item = [x for x in self.items
+                    if x.display.objectName() == 'active_inventorybox'][0].item
+            if item != None:
+                if event.key() == Qt.Key_5:
+                    self.ItemLeftSelected.emit(item)
+                else:
+                    self.ItemRightSelected.emit(item)
+        else:
+            super(CharacterInventoryWidget, self).keyPressEvent(event)
 
 class ItemDescriptionWidget(QWidget):
     """
@@ -324,6 +402,15 @@ class ItemBox(QWidget):
 
         self.__set_layout(width, height)
 
+        self.move_keys = {Qt.Key_1: width - 1,
+                          Qt.Key_2: width,
+                          Qt.Key_3: width + 1,
+                          Qt.Key_4: -1,
+                          Qt.Key_6: 1,
+                          Qt.Key_7: -width - 1,
+                          Qt.Key_8: -width,
+                          Qt.Key_9: -width + 1}
+
     ItemFocused = pyqtSignal(Item, name='ItemFocused')
     ItemLeftSelected = pyqtSignal(Item, name='ItemLeftSelected')
     ItemRightSelected = pyqtSignal(Item, name='ItemRightSelected')
@@ -364,19 +451,17 @@ class ItemBox(QWidget):
 
             index = self.items.index(current)
 
-            if event.key() == Qt.Key_8:
-                new_index = index - self.item_width
-            elif event.key() == Qt.Key_2:
-                new_index = index + self.item_width
-            elif event.key() == Qt.Key_4:
-                new_index = index - 1
-            elif event.key() == Qt.Key_6:
-                new_index = index + 1
-            else:
-                new_index = index
+            new_index = index + self.move_keys[event.key()]
 
-            new = self.items[new_index]
-            new.setFocus(Qt.OtherFocusReason)
+            if new_index < len(self.items) and new_index >= 0:
+                new = self.items[new_index]
+                new.setFocus(Qt.OtherFocusReason)
+            else:
+                if new_index >= len(self.items):
+                    self.focusNextChild()
+                else:
+                    self.focusPreviousChild()
+
         elif event.key() in (Qt.Key_5, Qt.Key_Enter):
             item = [x for x in self.items
                     if x.display.objectName() == 'active_inventorybox'][0].item
