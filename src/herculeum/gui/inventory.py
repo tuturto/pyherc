@@ -94,6 +94,15 @@ class InventoryDialog(QDialog):
 
         return True
 
+    def keyPressEvent(self, event):
+        """
+        Handle keyboard
+        """
+        if event.key() == Qt.Key_Space:
+            self.done(0)
+
+        super(InventoryDialog, self).keyPressEvent(event)
+
 class CharacterInventoryWidget(QWidget):
     """
     Widget to show inventory of a character

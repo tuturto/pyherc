@@ -108,6 +108,8 @@ class MainWindow(QMainWindow):
                      SIGNAL("triggered()"),
                      self.__show_new_game)
 
+        self.map_window.MenuRequested.connect(self.__show_inventory)
+
         self.setGeometry(50, 50, 800, 600)
         self.setWindowTitle('Herculeum')
         self.setWindowIcon(QIcon(':rune-stone.png'))

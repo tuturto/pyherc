@@ -27,7 +27,7 @@ from PyQt4.QtGui import QSplitter, QGraphicsSimpleTextItem, QColor
 from PyQt4.QtGui import QFont
 from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
 from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
-from PyQt4.QtCore import QEasingCurve
+from PyQt4.QtCore import QEasingCurve, pyqtSignal
 from herculeum.gui.eventdisplay import EventMessageWidget
 
 class PlayMapWindow(QWidget):
@@ -52,6 +52,8 @@ class PlayMapWindow(QWidget):
         self.__set_layout(model, surface_manager, action_factory, rng,
                           rules_engine)
 
+    MenuRequested = pyqtSignal(name='MenuRequested')
+
     def __set_layout(self, model, surface_manager, action_factory, rng,
                      rules_engine):
         """
@@ -67,6 +69,7 @@ class PlayMapWindow(QWidget):
                                         action_factory = action_factory,
                                         rng = rng,
                                         rules_engine = rules_engine)
+        self.map_widget.MenuRequested.connect(self.on_menu_requested)
         splitter.addWidget(self.map_widget)
 
         self.message_widget = EventMessageWidget(parent = self)
@@ -84,6 +87,12 @@ class PlayMapWindow(QWidget):
         self.map_widget.construct_scene()
         self.model.player.register_event_listener(self.message_widget)
         self.message_widget.set_point_of_view(self.model.player)
+
+    def on_menu_requested(self):
+        """
+        Handle requesting menu window
+        """
+        self.MenuRequested.emit()
 
 class PlayMapWidget(QWidget):
     """
@@ -112,6 +121,8 @@ class PlayMapWidget(QWidget):
                              Qt.Key_5:9}
 
         self.__set_layout()
+
+    MenuRequested = pyqtSignal(name='MenuRequested')
 
     def __set_layout(self):
         """
@@ -356,6 +367,8 @@ class PlayMapWidget(QWidget):
                     player.perform_attack(direction,
                                           self.action_factory,
                                           self.rng)
+            elif key_code == Qt.Key_Space:
+                self.MenuRequested.emit()
 
         next_creature = self.model.get_next_creature(self.rules_engine)
         while next_creature != player:
