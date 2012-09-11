@@ -471,8 +471,7 @@ class ItemBox(QWidget):
         """
         if event.key() in (Qt.Key_1, Qt.Key_2, Qt.Key_3, Qt.Key_4, Qt.Key_6,
                            Qt.Key_7, Qt.Key_8, Qt.Key_9):
-            current = [x for x in self.items
-                       if x.display.objectName() == 'active_inventorybox'][0]
+            current = self.get_current_slot()
 
             index = self.items.index(current)
 
@@ -488,8 +487,7 @@ class ItemBox(QWidget):
                     self.focusPreviousChild()
 
         elif event.key() in (Qt.Key_5, Qt.Key_Enter):
-            item = [x for x in self.items
-                    if x.display.objectName() == 'active_inventorybox'][0].item
+            item = self.get_current_slot().item
             if item != None:
                 if event.key() == Qt.Key_5:
                     self.ItemLeftSelected.emit(item)
@@ -516,6 +514,18 @@ class ItemBox(QWidget):
         for counter in range(item_count, len(self.items)):
             self.items[counter].display.setPixmap(empty_icon)
             self.items[counter].item = None
+
+    def get_current_slot(self):
+        """
+        Get currently selected slot
+        """
+        current = [x for x in self.items
+                   if x.display.objectName() == 'active_inventorybox']
+
+        if len(current) > 0:
+            return current[0]
+        else:
+            return None
 
     def on_item_left_selected(self, item):
         """
