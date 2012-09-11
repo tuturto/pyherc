@@ -77,10 +77,8 @@ class InventoryDialog(QDialog):
         if focused == self.inventory.character_inventory:
             if next == True:
                 self.inventory.items_carried.focus_on_first_row(0)
-                #self.inventory.items_carried.items[0].setFocus()
             else:
                 self.inventory.items_in_ground.focus_on_bottom_row(0)
-                #self.inventory.items_in_ground.items[0].setFocus()
         elif focused == self.inventory.items_carried:
             if next == True:
                 index = self.inventory.items_carried.get_current_column()
