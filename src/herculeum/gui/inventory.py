@@ -76,19 +76,23 @@ class InventoryDialog(QDialog):
 
         if focused == self.inventory.character_inventory:
             if next == True:
-                self.inventory.items_carried.items[0].setFocus()
+                self.inventory.items_carried.focus_on_first_row(0)
+                #self.inventory.items_carried.items[0].setFocus()
             else:
-                self.inventory.items_in_ground.items[0].setFocus()
+                self.inventory.items_in_ground.focus_on_bottom_row(0)
+                #self.inventory.items_in_ground.items[0].setFocus()
         elif focused == self.inventory.items_carried:
             if next == True:
-                self.inventory.items_in_ground.items[0].setFocus()
+                index = self.inventory.items_carried.get_current_column()
+                self.inventory.items_in_ground.focus_on_first_row(index)
             else:
                 self.inventory.character_inventory.focus_on_last_item()
         else:
             if next == True:
                 self.inventory.character_inventory.focus_on_first_item()
             else:
-                self.inventory.items_carried.items[0].setFocus()
+                index = self.inventory.items_in_ground.get_current_column()
+                self.inventory.items_carried.focus_on_bottom_row(index)
 
         return True
 
@@ -526,6 +530,32 @@ class ItemBox(QWidget):
             return current[0]
         else:
             return None
+
+    def get_current_column(self):
+        """
+        Get index of current column
+        """
+        slot = self.get_current_slot()
+
+        if slot == None:
+            return None
+
+        index = self.items.index(slot)
+        column = index % self.item_width
+
+        return column
+
+    def focus_on_first_row(self, index):
+        """
+        Focus on slot on first row
+        """
+        self.items[index].setFocus()
+
+    def focus_on_bottom_row(self, index):
+        """
+        Focus on slot on last row
+        """
+        self.items[-self.item_width + index].setFocus()
 
     def on_item_left_selected(self, item):
         """
