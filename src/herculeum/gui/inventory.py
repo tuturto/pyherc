@@ -83,10 +83,10 @@ class InventoryDialog(QDialog):
             if next == True:
                 self.inventory.items_in_ground.items[0].setFocus()
             else:
-                self.inventory.character_inventory.items[0].setFocus()
+                self.inventory.character_inventory.focus_on_last_item()
         else:
             if next == True:
-                self.inventory.character_inventory.items[0].setFocus()
+                self.inventory.character_inventory.focus_on_first_item()
             else:
                 self.inventory.items_carried.items[0].setFocus()
 
@@ -243,11 +243,14 @@ class CharacterInventoryWidget(QWidget):
 
             new_index = index + self.move_keys[event.key()]
 
-            if new_index < len(self.items):
+            if new_index < len(self.items) and new_index >= 0:
                 new = self.items[new_index]
                 new.setFocus(Qt.OtherFocusReason)
             else:
-                self.focusNextChild()
+                if new_index < 0:
+                    self.focusPreviousChild()
+                else:
+                    self.focusNextChild()
         elif event.key() in (Qt.Key_5, Qt.Key_Enter):
             item = [x for x in self.items
                     if x.display.objectName() == 'active_inventorybox'][0].item
@@ -258,6 +261,18 @@ class CharacterInventoryWidget(QWidget):
                     self.ItemRightSelected.emit(item)
         else:
             super(CharacterInventoryWidget, self).keyPressEvent(event)
+
+    def focus_on_first_item(self):
+        """
+        Focus on the first item
+        """
+        self.items[0].setFocus()
+
+    def focus_on_last_item(self):
+        """
+        Focus on the last item
+        """
+        self.items[-1].setFocus()
 
 class ItemDescriptionWidget(QWidget):
     """
@@ -355,6 +370,8 @@ class InventoryWidget(QWidget):
     def update_inventory(self):
         """
         Update items being displayed
+
+        .. versionadded:: 0.6
         """
         self.items_carried.show_items(self.character.inventory)
         items = self.character.level.get_items_at(self.character.location)
@@ -363,12 +380,16 @@ class InventoryWidget(QWidget):
     def on_item_focused(self, item):
         """
         Handle item focused
+
+        .. versionadded:: 0.6
         """
         self.item_description.set_text(item.name)
 
     def pick_up_item(self, item):
         """
         Pick up item
+
+        .. versionadded:: 0.6
         """
         self.character.pick_up(item, self.action_factory)
 
@@ -378,6 +399,8 @@ class InventoryWidget(QWidget):
     def drop_item(self, item):
         """
         Drop item
+
+        .. versionadded:: 0.6
         """
         self.character.drop_item(item, self.action_factory)
 
@@ -443,6 +466,8 @@ class ItemBox(QWidget):
     def keyPressEvent(self, event):
         """
         Handle keyboard events
+
+        .. versionadded:: 0.6
         """
         if event.key() in (Qt.Key_1, Qt.Key_2, Qt.Key_3, Qt.Key_4, Qt.Key_6,
                            Qt.Key_7, Qt.Key_8, Qt.Key_9):
@@ -476,6 +501,8 @@ class ItemBox(QWidget):
     def show_items(self, items):
         """
         Show given items
+
+        .. versionadded:: 0.6
         """
         empty_icon = QPixmap(':transparent.png')
 
@@ -493,18 +520,24 @@ class ItemBox(QWidget):
     def on_item_left_selected(self, item):
         """
         Handle left selecting item
+
+        .. versionadded:: 0.6
         """
         self.ItemLeftSelected.emit(item)
 
     def on_item_right_selected(self, item):
         """
         Handle right selecting item
+
+        .. versionadded:: 0.6
         """
         self.ItemRightSelected.emit(item)
 
     def on_item_focused(self, item):
         """
         Handle item focusing
+
+        .. versionadded:: 0.6
         """
         self.ItemFocused.emit(item)
 
@@ -558,6 +591,8 @@ class ItemGlyph(QWidget):
     def focusInEvent(self, event):
         """
         Handle focus in
+
+        .. versionadded:: 0.6
         """
         self.display.setObjectName('active_inventorybox')
         self.display.setStyle(QApplication.style())
@@ -567,6 +602,8 @@ class ItemGlyph(QWidget):
     def focusOutEvent(self, event):
         """
         Handle focus out
+
+        .. versionadded:: 0.6
         """
         self.display.setObjectName('passive_inventorybox')
         self.display.setStyle(QApplication.style())
@@ -574,6 +611,8 @@ class ItemGlyph(QWidget):
     def mousePressEvent(self, event):
         """
         Handle mouse buttons
+
+        .. versionadded:: 0.6
         """
         if event.buttons() == Qt.LeftButton:
             if self.item != None:
@@ -587,6 +626,8 @@ class ItemGlyph(QWidget):
     def enabled(self, enabled):
         """
         Set this control enabled or disabled
+
+        .. versionadded:: 0.6
         """
         if enabled == True:
             self.setFocusPolicy(Qt.StrongFocus)
