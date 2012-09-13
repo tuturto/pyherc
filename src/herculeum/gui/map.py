@@ -240,6 +240,14 @@ class PlayMapWidget(QWidget):
             self.show_damage_counter(event.target.location,
                                      event.damage,
                                      'green')
+        elif event.event_type == 'heal started':
+            self.show_status_counter(event.target.location,
+                                     'healing',
+                                     'blue')
+        elif event.event_type == 'heal triggered':
+            self.show_damage_counter(event.target.location,
+                                     event.healing,
+                                     'blue');
 
     def show_status_counter(self, location, status, colour):
         """

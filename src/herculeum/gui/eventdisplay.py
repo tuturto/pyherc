@@ -91,6 +91,9 @@ class EventMessageWidget(QWidget):
                                     'poison triggered',
                                     'poison ended',
                                     'poisoned',
+                                    'heal started',
+                                    'heal ended',
+                                    'heal triggered',
                                     'death',
                                     'pick up',
                                     'drop']

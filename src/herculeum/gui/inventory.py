@@ -358,6 +358,7 @@ class InventoryWidget(QWidget):
                                      width = 6,
                                      height = 6)
         self.items_carried.ItemFocused.connect(self.on_item_focused)
+        self.items_carried.ItemLeftSelected.connect(self.use_item)
         self.items_carried.ItemRightSelected.connect(self.drop_item)
 
         self.items_in_ground = ItemBox(surface_manager = surface_manager,
@@ -417,6 +418,16 @@ class InventoryWidget(QWidget):
 
         self.update_inventory()
         self.ItemDropped.emit(item)
+
+    def use_item(self, item):
+        """
+        Use item in different ways, depending on the item
+
+        .. versionadded:: 0.6
+        """
+        if item.get_main_type() == 'potion':
+            self.character.drink(item, self.action_factory)
+        self.update_inventory()
 
 class ItemBox(QWidget):
     """

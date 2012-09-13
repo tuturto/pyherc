@@ -10,6 +10,9 @@ New features
  - Splash screen at start up
  - icons can be specified in level specific configuration scripts
  - new weapons added
+ - new inventory screen
+ - player can drink potions
+ - on-screen counters to show damage, healing and status effects
 
 **********
 Fixed bugs
