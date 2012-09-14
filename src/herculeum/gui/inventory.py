@@ -241,6 +241,19 @@ class CharacterInventoryWidget(QWidget):
 
         self.setLayout(main_layout)
 
+    def show_character(self, character):
+        """
+        Show character
+
+        :param character: character to show
+        :type character: Character
+        """
+        pass
+        # for each slot
+        #  does character have item there?
+        #   yes-> show icon of item
+        #   no -> show default icon
+
     def keyPressEvent(self, event):
         """
         Handle keyboard events
@@ -388,6 +401,7 @@ class InventoryWidget(QWidget):
         self.items_carried.show_items(self.character.inventory)
         items = self.character.level.get_items_at(self.character.location)
         self.items_in_ground.show_items(items)
+        self.character_inventory.show_character(self.character)
 
     def on_item_focused(self, item):
         """
@@ -524,18 +538,13 @@ class ItemBox(QWidget):
 
         .. versionadded:: 0.6
         """
-        empty_icon = QPixmap(':transparent.png')
-
         item_count = len(items)
 
         for counter in range(0, item_count):
-            self.items[counter].display.setPixmap(
-                            self.surface_manager.get_icon(items[counter].icon))
-            self.items[counter].item = items[counter]
+            self.items[counter].set_item(items[counter])
 
         for counter in range(item_count, len(self.items)):
-            self.items[counter].display.setPixmap(empty_icon)
-            self.items[counter].item = None
+            self.items[counter].set_item(None)
 
     def get_current_slot(self):
         """
@@ -631,15 +640,8 @@ class ItemGlyph(QWidget):
         self.grid_layout.setSpacing(0)
         self.display = QLabel()
 
-        if self.item != None:
-            self.icon = self.surface_manager.get_icon(self.item.icon)
-        else:
-            if self.default_icon == None:
-                self.icon = QPixmap(':transparent.png')
-            else:
-                self.icon = self.default_icon
+        self.set_item(self.item)
 
-        self.display.setPixmap(self.icon)
         self.display.setMaximumSize(40, 40)
         self.display.setObjectName('passive_inventorybox')
 
@@ -691,3 +693,21 @@ class ItemGlyph(QWidget):
             self.setFocusPolicy(Qt.StrongFocus)
         else:
             self.setFocusPolicy(Qt.NoFocus)
+
+    def set_item(self, item):
+        """
+        Set item to be displayed
+
+        .. versionadded:: 0.6
+        """
+        self.item = item
+
+        if item != None:
+            self.icon = self.surface_manager.get_icon(item.icon)
+        else:
+            if self.default_icon == None:
+                self.icon = QPixmap(':transparent.png')
+            else:
+                self.icon = self.default_icon
+
+        self.display.setPixmap(self.icon)
