@@ -27,6 +27,8 @@ from PyQt4.QtGui import QTextEdit,  QIcon, QPixmap, QApplication
 from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import Qt, QMimeData, pyqtSignal
 import PyQt4.QtGui
+import pyherc
+import pyherc.rules.items
 
 from pyherc.data import Item
 
@@ -129,6 +131,10 @@ class CharacterInventoryWidget(QWidget):
                           Qt.Key_7: -1,
                           Qt.Key_8: -1,
                           Qt.Key_9: -1}
+
+    ItemFocused = pyqtSignal(Item, name='ItemFocused')
+    ItemLeftSelected = pyqtSignal(Item, name='ItemLeftSelected')
+    ItemRightSelected = pyqtSignal(Item, name='ItemRightSelected')
 
     def __set_layout(self, surface_manager, character, parent):
         """
@@ -248,7 +254,7 @@ class CharacterInventoryWidget(QWidget):
         :param character: character to show
         :type character: Character
         """
-        pass
+        self.weapon_slot.set_item(self.character.weapon)
         # for each slot
         #  does character have item there?
         #   yes-> show icon of item
@@ -361,6 +367,9 @@ class InventoryWidget(QWidget):
         self.character_inventory = CharacterInventoryWidget(surface_manager,
                                                             character,
                                                             self)
+        self.character_inventory.ItemLeftSelected.connect(self.unwield_weapon)
+        self.character_inventory.ItemRightSelected.connect(self.unwield_weapon)
+
         self.item_description = ItemDescriptionWidget(self)
         left_side.addWidget(self.character_inventory)
         left_side.addWidget(self.item_description)
@@ -409,7 +418,8 @@ class InventoryWidget(QWidget):
 
         .. versionadded:: 0.6
         """
-        self.item_description.set_text(item.name)
+        self.item_description.set_text(item.get_name(self.character,
+                                                     True))
 
     def pick_up_item(self, item):
         """
@@ -441,7 +451,26 @@ class InventoryWidget(QWidget):
         """
         if item.get_main_type() == 'potion':
             self.character.drink(item, self.action_factory)
+        elif item.get_main_type() == 'weapon':
+            pyherc.rules.items.wield(None,
+                                     self.character,
+                                     item,
+                                     False)
+
         self.update_inventory()
+
+    def unwield_weapon(self, item):
+        """
+        Unwield current weapon
+
+        .. versionadded:: 0.6
+        """
+        if self.character_inventory.weapon_slot.item != None:
+            pyherc.rules.items.unwield(None,
+                                       self.character,
+                                       item,
+                                       False)
+            self.update_inventory()
 
 class ItemBox(QWidget):
     """
