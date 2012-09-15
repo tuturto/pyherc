@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.ending &mdash; Herculeum 0.5 documentation</title>
+    <title>pyherc.rules.ending &mdash; Herculeum 0.6 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5',
+        VERSION:     '0.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.5 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.6 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.rules" href="package_rules.html" />
-    <link rel="next" title="pyherc.rules.factory" href="module_factory.html" />
+    <link rel="next" title="pyherc.rules.engine" href="module_engine.html" />
     <link rel="prev" title="pyherc.rules.character" href="module_character.html" /> 
   </head>
   <body>
@@ -41,12 +41,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_factory.html" title="pyherc.rules.factory"
+          <a href="module_engine.html" title="pyherc.rules.engine"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="module_character.html" title="pyherc.rules.character"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.6 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_rules.html" accesskey="U">pyherc.rules</a> &raquo;</li> 
@@ -61,42 +61,19 @@
   <div class="section" id="module-pyherc.rules.ending">
 <span id="pyherc-rules-ending"></span><h1>pyherc.rules.ending<a class="headerlink" href="#module-pyherc.rules.ending" title="Permalink to this headline">¶</a></h1>
 <p>Module for checking end conditions</p>
-<dl class="function">
-<dt id="pyherc.rules.ending.check_dying">
-<tt class="descclassname">pyherc.rules.ending.</tt><tt class="descname">check_dying</tt><big>(</big><em>model</em>, <em>character</em>, <em>death_params</em><big>)</big><a class="headerlink" href="#pyherc.rules.ending.check_dying" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if cracter is dead and should be dealt with</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>mode: model to use
-character: character to check
-death_params: parameters detailing the death condition</dd>
-</dl>
+<dl class="class">
+<dt id="pyherc.rules.ending.Dying">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.ending.</tt><tt class="descname">Dying</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.ending.Dying" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Rules for actions happening when dying</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.6.</span></p>
+<dl class="method">
+<dt id="pyherc.rules.ending.Dying.check_dying">
+<tt class="descname">check_dying</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.ending.Dying.check_dying" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if character dies and process it</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="pyherc.rules.ending.check_result">
-<tt class="descclassname">pyherc.rules.ending.</tt><tt class="descname">check_result</tt><big>(</big><em>model</em><big>)</big><a class="headerlink" href="#pyherc.rules.ending.check_result" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check how the game actually ended</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>model: model containing play data</dd>
-<dt>Returns:</dt>
-<dd>dictionary containing following keys: reason, score, dead reason
-valid reasons: dead, escaped, victory, quit
-dead reason will contain reason of death, if player died</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="pyherc.rules.ending.get_ending_score">
-<tt class="descclassname">pyherc.rules.ending.</tt><tt class="descname">get_ending_score</tt><big>(</big><em>model</em><big>)</big><a class="headerlink" href="#pyherc.rules.ending.get_ending_score" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate ending score</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>model: model containing play data</dd>
-<dt>Returns:</dt>
-<dd>score</dd>
-</dl>
 </dd></dl>
 
 </div>
@@ -111,8 +88,8 @@ dead reason will contain reason of death, if player died</dd>
   <p class="topless"><a href="module_character.html"
                         title="previous chapter">pyherc.rules.character</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="module_factory.html"
-                        title="next chapter">pyherc.rules.factory</a></p>
+  <p class="topless"><a href="module_engine.html"
+                        title="next chapter">pyherc.rules.engine</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../_sources/pyherc/rules/module_ending.txt"
@@ -145,20 +122,20 @@ dead reason will contain reason of death, if player died</dd>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_factory.html" title="pyherc.rules.factory"
+          <a href="module_engine.html" title="pyherc.rules.engine"
              >next</a> |</li>
         <li class="right" >
           <a href="module_character.html" title="pyherc.rules.character"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.6 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_rules.html" >pyherc.rules</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2012, Tuukka Turto.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+        &copy; Copyright 2010-2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

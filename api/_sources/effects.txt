@@ -49,6 +49,7 @@ that links names of effects to concrete Effect subclasses and their parameters.
     from pyherc.generators import EffectsFactory
     from pyherc.data.effects import Poison
     from pyherc.test.cutesy.dictionary import Adventurer
+    from pyherc.rules import Dying
 
     effect_factory = EffectsFactory()
     effect_factory.add_effect('minor poison',
@@ -62,7 +63,7 @@ that links names of effects to concrete Effect subclasses and their parameters.
     print('Hit points before poisoning: {0}'.format(Pete.hit_points))
     
     poisoning = effect_factory.create_effect('minor poison', target = Pete)
-    poisoning.trigger()
+    poisoning.trigger(Dying())
     
     print('Hit points after poisoning: {0}'.format(Pete.hit_points))
 

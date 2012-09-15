@@ -5,8 +5,14 @@ writing of the game and how to add more tests.
 
 Overview of testing
 ===================
-There are two main tools currently in use: `nose <https://github.com/nose-devs/nose/>`_ 
-and `doctest <http://docs.python.org/library/doctest.html>`_.
+Tools currently in use are:
+
+ * nose_
+ * doctest_
+ * behave_
+ * mockito-python_
+ * pyhamcrest_
+ * qc_
 
 Nosetests are mainly used to help the design and development of the software.
 They form nice safety net that catches bugs that might otherwise go unnoticed
@@ -15,12 +21,18 @@ for periods of time.
 Doctest is used to ensure that code examples and snippets in documentation are
 up to date.
 
-Additional tool called `nosy <http://pypi.python.org/pypi/nosy>`_ can be used
-to run nosetests automatically as soon as any file change is detected. This is
-very useful when doing test driven development.
+Behave is used to write tests that are as close as possible to natural
+language.
+
+Additional tool called nosy_ can be used to run nosetests automatically as 
+soon as any file change is detected. This is very useful when doing test
+driven development.
 
 Running tests
 =============
+
+Nose
+----
 Nose tests can be run by issuing following command in pyherc directory::
 
   nosetests
@@ -37,6 +49,8 @@ the end::
 If there are any problems with the tests (or the code they are testing),
 error will be shown along with stack trace.
   
+Doctest
+-------
 Running doctest is as simple. Navigate to the directory containing make.bat
 for documentation containing tests (doc/api/) and issue command::
 
@@ -63,6 +77,21 @@ gather test coverage metrics from nosetests::
   test.bat
 
 Coverage report is placed in cover - directory.
+
+Behave
+------
+Navigate to directory containing tests written with behave (behave) and issue
+command::
+
+  behave
+  
+This will start behave and run all tests. Results for each feature are 
+displayed on screen and finally a summary is shown::
+      
+    2 features passed, 0 failed, 0 skipped
+    3 scenarios passed, 0 failed, 0 skipped
+    21 steps passed, 0 failed, 0 skipped, 0 undefined
+    Took 0m0.0s
 
 Writing tests
 =============
@@ -186,3 +215,47 @@ view source of this page, you can see how it has been constructed.
 More information can be found at 
 `Sphinx documentation <http://sphinx.pocoo.org/ext/doctest.html>`_.
 
+Behave
+------
+Tests with behave are placed under directory behave/features. They consists of
+two parts: feature-file specifying one or more test scenarios and python
+implementation of steps in feature-files.
+
+The earlier Cutesy example can be translated to behave as follows::
+
+    Feature: Combat
+      as an character
+      in order to kill enemies
+      I want to damage my enemies
+    
+      Scenario: hit in unarmed combat
+         Given Pete is Adventurer
+           And Uglak is Goblin
+           And Uglak is standing in room
+           And Pete is standing next to Uglak     
+          When Uglak hits Pete
+          Then Pete should have less hitpoints
+          
+Each of the steps need to be defined as Python code::
+
+    @given(u'{character_name} is Adventurer')
+    def impl(context, character_name):
+        if not hasattr(context, 'characters'):
+            context.characters = []
+        new_character = Adventurer()
+        new_character.name = character_name
+        context.characters.append(new_character)
+
+It is advisable not to reimplement all the logic in behave tests, but reuse
+existing functionality from Cutesy. This makes tests both faster to write and
+easier to maintain. For more information on using behave, have a look at their
+online tutorial_.
+        
+.. _nose: https://github.com/nose-devs/nose/
+.. _doctest: http://docs.python.org/library/doctest.html
+.. _behave: http://pypi.python.org/pypi/behave
+.. _mockito-python: http://code.google.com/p/mockito-python/
+.. _qc: https://github.com/dbravender/qc
+.. _pyhamcrest: http://pypi.python.org/pypi/PyHamcrest
+.. _nosy: http://pypi.python.org/pypi/nosy
+.. _tutorial: http://packages.python.org/behave/tutorial.html

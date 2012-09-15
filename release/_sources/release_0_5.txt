@@ -40,7 +40,7 @@ Other notes
   - poisoning and dying from poison tests moved to BDD side
   - is_at and is_not_at changed to is_in and is_not_in
   - herculeum.gui.core removed
-  - PGU and pygame removed as dependecies
+  - PGU and pygame removed as dependencies
 
 .. _16: https://github.com/tuturto/pyherc/issues/16
 .. _17: https://github.com/tuturto/pyherc/issues/17

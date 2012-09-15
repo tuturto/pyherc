@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Modular level generator &mdash; Herculeum 0.5 documentation</title>
+    <title>Modular level generator &mdash; Herculeum 0.6 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.5',
+        VERSION:     '0.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.5 documentation" href="index.html" />
+    <link rel="top" title="Herculeum 0.6 documentation" href="index.html" />
     <link rel="next" title="Generating an item" href="generate_item.html" />
     <link rel="prev" title="Generating a level" href="generate_level.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="generate_level.html" title="Generating a level"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.5 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.6 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -64,7 +64,8 @@ the system does not directly use it, but queries a fully setup generator
 from <a class="reference internal" href="pyherc/generators/level/module_generator.html#pyherc.generators.level.generator.LevelGeneratorFactory" title="pyherc.generators.level.generator.LevelGeneratorFactory"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.generator.LevelGeneratorFactory</span></tt></a></p>
 <div class="section" id="overview-of-levelgenerator">
 <h2>Overview of LevelGenerator<a class="headerlink" href="#overview-of-levelgenerator" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><pre>def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">generate_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">portal</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">new_portals</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">room_min_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
+</pre></div>
 </div>
 <p>LevelGenerator has same generate_level - method as other level generators and
 calling it functions in the same way. Difference is in the internals of the
@@ -121,7 +122,8 @@ CreatureAdder-&gt;CreatureAdderConfiguration [tailport=s, headport=n]
 <p><a class="reference internal" href="pyherc/generators/level/partitioners/module_grid.html#pyherc.generators.level.partitioners.grid.GridPartitioner" title="pyherc.generators.level.partitioners.grid.GridPartitioner"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.partitioners.grid.GridPartitioner</span></tt></a> is basic partitioner,
 which knows how to divide level into a grid with equal sized sections.</p>
 <p>GridPartitioner has method:</p>
-<div class="highlight-python"><pre>def partition_level(self, level,  x_sections = 3,  y_sections = 3):</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">partition_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span>  <span class="n">x_sections</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>  <span class="n">y_sections</span> <span class="o">=</span> <span class="mi">3</span><span class="p">):</span>
+</pre></div>
 </div>
 <p>Calling this method will partition level to sections, link sections to each other
 and return them in a list.</p>
@@ -136,7 +138,8 @@ for rooms.</p>
 Each section has information how they link together and these connection points must
 be linked together by room generator.</p>
 <p>Room generator only needs a single method:</p>
-<div class="highlight-python"><pre>def generate_room(self, section):</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">generate_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">):</span>
+</pre></div>
 </div>
 <p>Calling this method should create a room inside section and connect all connection
 points together.</p>
@@ -150,7 +153,8 @@ generator. More complex usage is to detect where walls are located and change
 their appearance.</p>
 <p>New decorator can be created by subclassing <a class="reference internal" href="pyherc/generators/level/decorator/module_basic.html#pyherc.generators.level.decorator.basic.Decorator" title="pyherc.generators.level.decorator.basic.Decorator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.decorator.basic.Decorator</span></tt></a>
 and overriding method:</p>
-<div class="highlight-python"><pre>def decorate_level(self, level):</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">decorate_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="portal-adders">
@@ -160,7 +164,8 @@ generating portals. the class itself is pretty simple. It contains information
 of what kind of icons to use, where to place the portal (room, corridor,
 treasure chamber and so on) and what kind of level it will lead to.</p>
 <p>Method:</p>
-<div class="highlight-python"><pre>def add_portal(self, level):</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">add_portal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+</pre></div>
 </div>
 <p>Will create a proxy portal at a random location. This portal will contain
 name of the level, instead of direct link. When player enters the portal,
@@ -371,12 +376,12 @@ was omitted from the brevity&#8217;s sake in this example.</p>
         <li class="right" >
           <a href="generate_level.html" title="Generating a level"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.5 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.6 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2012, Tuukka Turto.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+        &copy; Copyright 2010-2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

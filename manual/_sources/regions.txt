@@ -22,6 +22,13 @@ Found deeper in the catacombs. This creature has adapted living in darkness by
 producing light in its internal organs. Fighting them can give a nasty surprise
 for unprepared, since their bite is strong and causes strong burning sensation.
 
+Skeleton
+========
+Skeletons are people long dead that have been raised back to eternal realm with
+powerful magic. They have been guarding silent halls and corridors of catacombs
+for uncountable years. Skeletons often carry equipment they had when they were
+still among living.
+
 *****
 Crypt
 *****

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.magic &mdash; Herculeum 0.5 documentation</title>
+    <title>pyherc.rules.engine &mdash; Herculeum 0.6 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5',
+        VERSION:     '0.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.5 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.6 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.rules" href="package_rules.html" />
-    <link rel="next" title="pyherc.rules.moving" href="module_moving.html" />
-    <link rel="prev" title="pyherc.rules.los" href="module_los.html" /> 
+    <link rel="next" title="pyherc.rules.factory" href="module_factory.html" />
+    <link rel="prev" title="pyherc.rules.ending" href="module_ending.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,12 +41,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_moving.html" title="pyherc.rules.moving"
+          <a href="module_factory.html" title="pyherc.rules.factory"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="module_los.html" title="pyherc.rules.los"
+          <a href="module_ending.html" title="pyherc.rules.ending"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.6 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_rules.html" accesskey="U">pyherc.rules</a> &raquo;</li> 
@@ -58,28 +58,28 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-pyherc.rules.magic">
-<span id="pyherc-rules-magic"></span><h1>pyherc.rules.magic<a class="headerlink" href="#module-pyherc.rules.magic" title="Permalink to this headline">¶</a></h1>
-<p>Module for magic</p>
-<dl class="function">
-<dt id="pyherc.rules.magic.cast_effect">
-<tt class="descclassname">pyherc.rules.magic.</tt><tt class="descname">cast_effect</tt><big>(</big><em>target</em>, <em>effect</em>, <em>dice=None</em><big>)</big><a class="headerlink" href="#pyherc.rules.magic.cast_effect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Casts effect of a spell, potion, etc. on a target</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>target: target of the effect
-effect: EffectHandle object
-dice: prerolled dice</dd>
-</dl>
+  <div class="section" id="module-pyherc.rules.engine">
+<span id="pyherc-rules-engine"></span><h1>pyherc.rules.engine<a class="headerlink" href="#module-pyherc.rules.engine" title="Permalink to this headline">¶</a></h1>
+<p>Module defining rules engine</p>
+<dl class="class">
+<dt id="pyherc.rules.engine.RulesEngine">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.engine.</tt><tt class="descname">RulesEngine</tt><big>(</big><em>action_factory</em>, <em>dying_rules</em><big>)</big><a class="headerlink" href="#pyherc.rules.engine.RulesEngine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Engine for rules of the game</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.6.</span></p>
+<dl class="attribute">
+<dt id="pyherc.rules.engine.RulesEngine.action_factory">
+<tt class="descname">action_factory</tt><a class="headerlink" href="#pyherc.rules.engine.RulesEngine.action_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Action factory of the rules engine</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="pyherc.rules.magic.cast_hp_effect">
-<tt class="descclassname">pyherc.rules.magic.</tt><tt class="descname">cast_hp_effect</tt><big>(</big><em>target</em>, <em>effect</em>, <em>dice=None</em><big>)</big><a class="headerlink" href="#pyherc.rules.magic.cast_hp_effect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Casts HP effect on target, causing it to gain or lose some HP
-&#64;param target: target of the effect
-&#64;param effect: parameters of effect in dictionary
-&#64;param dice: prerolled dice</p>
+<dl class="attribute">
+<dt id="pyherc.rules.engine.RulesEngine.dying_rules">
+<tt class="descname">dying_rules</tt><a class="headerlink" href="#pyherc.rules.engine.RulesEngine.dying_rules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rules for dying</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -91,14 +91,14 @@ dice: prerolled dice</dd>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="module_los.html"
-                        title="previous chapter">pyherc.rules.los</a></p>
+  <p class="topless"><a href="module_ending.html"
+                        title="previous chapter">pyherc.rules.ending</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="module_moving.html"
-                        title="next chapter">pyherc.rules.moving</a></p>
+  <p class="topless"><a href="module_factory.html"
+                        title="next chapter">pyherc.rules.factory</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../../_sources/pyherc/rules/module_magic.txt"
+    <li><a href="../../_sources/pyherc/rules/module_engine.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -128,20 +128,20 @@ dice: prerolled dice</dd>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_moving.html" title="pyherc.rules.moving"
+          <a href="module_factory.html" title="pyherc.rules.factory"
              >next</a> |</li>
         <li class="right" >
-          <a href="module_los.html" title="pyherc.rules.los"
+          <a href="module_ending.html" title="pyherc.rules.ending"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.6 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_rules.html" >pyherc.rules</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2012, Tuukka Turto.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+        &copy; Copyright 2010-2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

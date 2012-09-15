@@ -7,6 +7,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=emulateIE7' />
     <title>Coverage for pyherc.data.item: 93%</title>
     <link rel='stylesheet' href='style.css' type='text/css'>
+    
     <script type='text/javascript' src='jquery-1.4.3.min.js'></script>
     <script type='text/javascript' src='jquery.hotkeys.js'></script>
     <script type='text/javascript' src='jquery.isonscreen.js'></script>
@@ -24,10 +25,10 @@
         </h1>
         <img id='keyboard_icon' src='keybd_closed.png'>
         <h2 class='stats'>
-            72 statements
-            <span class='run hide_run shortkey_r' onclick='coverage.toggle_lines(this, "run")'>67 run</span>
-            <span class='mis shortkey_m' onclick='coverage.toggle_lines(this, "mis")'>5 missing</span>
-            <span class='exc shortkey_x' onclick='coverage.toggle_lines(this, "exc")'>0 excluded</span>
+            72 statements &nbsp;
+            <span class='run hide_run shortkey_r button_toggle_run'>67 run</span>
+            <span class='mis shortkey_m button_toggle_mis'>5 missing</span>
+            <span class='exc shortkey_x button_toggle_exc'>0 excluded</span>
             
         </h2>
     </div>
@@ -384,7 +385,7 @@
 <p id='t83' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>name</span> <span class='op'>=</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>name</span><span class='strut'>&nbsp;</span></p>
 <p id='t84' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t85' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>decorate</span> <span class='op'>==</span> <span class='nam'>True</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t86' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>self</span> <span class='key'>in</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>weapons</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t86' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>weapon</span> <span class='op'>==</span> <span class='nam'>self</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
 <p id='t87' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>name</span> <span class='op'>=</span> <span class='nam'>name</span> <span class='op'>+</span> <span class='str'>&#39; (weapon in hand)&#39;</span><span class='strut'>&nbsp;</span></p>
 <p id='t88' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t89' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>name</span><span class='strut'>&nbsp;</span></p>
@@ -544,7 +545,7 @@
 <div id='footer'>
     <div class='content'>
         <p>
-            <a class='nav' href='index.html'>&#xab; index</a> &nbsp; &nbsp; <a class='nav' href='http://nedbatchelder.com/code/coverage'>coverage.py v3.5.1</a>
+            <a class='nav' href='index.html'>&#xab; index</a> &nbsp; &nbsp; <a class='nav' href='http://nedbatchelder.com/code/coverage'>coverage.py v3.5.2</a>
         </p>
     </div>
 </div>

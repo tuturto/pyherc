@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.config.config &mdash; Herculeum 0.5 documentation</title>
+    <title>pyherc.config.config &mdash; Herculeum 0.6 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5',
+        VERSION:     '0.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.5 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.6 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.config" href="package_config.html" />
     <link rel="next" title="pyherc.data" href="../data/package_data.html" />
     <link rel="prev" title="pyherc.config" href="package_config.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="package_config.html" title="pyherc.config"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.6 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_config.html" accesskey="U">pyherc.config</a> &raquo;</li> 
@@ -85,7 +85,7 @@ new_config: items to add to configuration</dd>
 
 <dl class="method">
 <dt id="pyherc.config.config.Configuration.get_creature_config">
-<tt class="descname">get_creature_config</tt><big>(</big><em>level_config</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.get_creature_config" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_creature_config</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.get_creature_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load creature configuration</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -103,7 +103,7 @@ new_config: items to add to configuration</dd>
 
 <dl class="method">
 <dt id="pyherc.config.config.Configuration.get_item_config">
-<tt class="descname">get_item_config</tt><big>(</big><em>item_config</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.get_item_config" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_item_config</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.get_item_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load item configuration</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -121,25 +121,25 @@ new_config: items to add to configuration</dd>
 
 <dl class="method">
 <dt id="pyherc.config.config.Configuration.initialise">
-<tt class="descname">initialise</tt><big>(</big><em>level_config</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.initialise" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">initialise</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.initialise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialises configuration</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.config.config.Configuration.initialise_factories">
-<tt class="descname">initialise_factories</tt><big>(</big><em>level_config</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.initialise_factories" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">initialise_factories</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.initialise_factories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialises action factory, sub factories and various generators</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.config.config.Configuration.initialise_generators">
-<tt class="descname">initialise_generators</tt><big>(</big><em>level_config</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.initialise_generators" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">initialise_generators</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.initialise_generators" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialise generators</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.config.config.Configuration.initialise_level_generators">
-<tt class="descname">initialise_level_generators</tt><big>(</big><em>level_config</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.initialise_level_generators" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">initialise_level_generators</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#pyherc.config.config.Configuration.initialise_level_generators" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialise level generators</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -204,15 +204,15 @@ new_config: items to add to configuration</dd>
         <li class="right" >
           <a href="package_config.html" title="pyherc.config"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.5 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.6 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_config.html" >pyherc.config</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2012, Tuukka Turto.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+        &copy; Copyright 2010-2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

@@ -6,7 +6,307 @@
 
 <h1>Report</h1>
 
-<p>5550 statements analysed.</p><div>
+<p>5656 statements analysed.</p><div>
+
+<h2>Duplication</h2>
+
+<table>
+
+<tr class="header">
+
+<th>&#160;</th>
+
+<th>now</th>
+
+<th>previous</th>
+
+<th>difference</th>
+
+</tr>
+
+<tr class="even">
+
+<th>nb duplicated lines</th>
+
+<td>260</td>
+
+<td>260</td>
+
+<td>=</td>
+
+</tr>
+
+<tr class="odd">
+
+<th>percent duplicated lines</th>
+
+<td>1.479</td>
+
+<td>1.479</td>
+
+<td>=</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div>
+
+<h2>Raw metrics</h2>
+
+<table>
+
+<tr class="header">
+
+<th>type</th>
+
+<th>number</th>
+
+<th>%</th>
+
+<th>previous</th>
+
+<th>difference</th>
+
+</tr>
+
+<tr class="even">
+
+<td>code</td>
+
+<td>7329</td>
+
+<td>43.30</td>
+
+<td>7329</td>
+
+<td>=</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>docstring</td>
+
+<td>5375</td>
+
+<td>31.75</td>
+
+<td>5375</td>
+
+<td>=</td>
+
+</tr>
+
+<tr class="even">
+
+<td>comment</td>
+
+<td>2606</td>
+
+<td>15.39</td>
+
+<td>2606</td>
+
+<td>=</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>empty</td>
+
+<td>1618</td>
+
+<td>9.56</td>
+
+<td>1618</td>
+
+<td>=</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div>
+
+<h2>External dependencies</h2>
+
+<pre>Aspyct 
+
+  \-aop 
+
+    \-Aspect (pyherc.aspects)
+
+collections (pyherc.data.effects.effectscollection,pyherc.generators.utils)
+
+copy (pyherc.generators.effects)
+
+hamcrest 
+
+  \-assert_that (pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_drop_actions,pyherc.test.bdd.test_inventory,pyherc.test.bdd.test_combat)
+
+  \-core 
+
+  | \-base_matcher 
+
+  | | \-BaseMatcher (pyherc.test.matchers.character,pyherc.test.matchers.effect_collection,pyherc.test.matchers.items,pyherc.test.matchers.map_connectivity,pyherc.test.matchers.event,pyherc.test.matchers.event_listener,pyherc.test.matchers.contains_creature,pyherc.test.matchers.active_effects,pyherc.test.cutesy.dictionary)
+
+  | \-helpers 
+
+  |   \-wrap_matcher 
+
+  |     \-wrap_matcher (pyherc.test.matchers.items,pyherc.test.matchers.active_effects,pyherc.test.matchers.contains_creature)
+
+  \-equal_to (pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_drop_actions)
+
+  \-greater_than (pyherc.test.unit.test_drop_actions)
+
+  \-has_item (pyherc.test.unit.test_config_dsl)
+
+  \-is_ (pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_drop_actions)
+
+  \-is_in (pyherc.test.unit.test_drop_actions)
+
+  \-is_not (pyherc.test.unit.test_drop_actions,pyherc.test.matchers.contains_creature)
+
+herculeum 
+
+  \-application 
+
+  | \-APP (pyherc.debug.handlers)
+
+  \-config 
+
+    \-tiles (pyherc.rules.character)
+
+logging (pyherc.generators.level.partitioners.grid,pyherc.rules.character,pyherc.rules.attack.melee,pyherc.rules.move.factories,pyherc.rules.moving,pyherc.generators.level.generator,pyherc.generators.utils,pyherc.generators.level.partitioners.section,pyherc.rules.factory,pyherc.rules.attack.action,pyherc.rules.attack.unarmed,pyherc.generators.level.room.squareroom,pyherc.generators.level.decorator.basic,pyherc.rules.attack.factories,pyherc.rules.items,pyherc.generators.dungeon,pyherc.rules.move.action,pyherc.rules.utils,pyherc.aspects)
+
+mockito 
+
+  \-any (pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_combat,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_time,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_dying,pyherc.test.unit.test_poison,pyherc.test.unit.test_creature,pyherc.test.unit.test_potions,pyherc.test.unit.test_item)
+
+  \-mock (pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_events,pyherc.test.unit.test_combat,pyherc.test.unit.test_magic,pyherc.test.unit.test_portaladder,pyherc.test.unit.test_creatureadder,pyherc.test.unit.test_poison,pyherc.test.builders.action,pyherc.test.cutesy.dictionary,pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.builders.poison,pyherc.test.unit.test_item,pyherc.test.unit.test_time,pyherc.test.unit.test_model,pyherc.test.builders.character,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_section,pyherc.test.unit.test_dying,pyherc.test.unit.test_config_dsl,pyherc.test.builders.rules_engine,pyherc.test.unit.test_leveldecorator,pyherc.test.builders.heal,pyherc.test.unit.test_connection,pyherc.test.unit.test_potions,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_dungeon,pyherc.test.unit.test_creature,pyherc.test.unit.test_creaturegeneration)
+
+  \-verify (pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_combat,pyherc.test.unit.test_events,pyherc.test.unit.test_item,pyherc.test.unit.test_time,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_dying,pyherc.test.unit.test_poison,pyherc.test.unit.test_leveldecorator,pyherc.test.unit.test_model,pyherc.test.unit.test_creature,pyherc.test.unit.test_creaturegeneration)
+
+  \-when (pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_effects,pyherc.test.unit.test_combat,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_dying,pyherc.test.unit.test_potions,pyherc.test.cutesy.dictionary)
+
+os 
+
+  \-path (pyherc.test.integration)
+
+qc 
+
+  \-forall (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_moving)
+
+  \-integers (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_moving)
+
+random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_connection,pyherc.rules.attack.melee,pyherc.config.config,pyherc.generators.item,pyherc.generators.utils,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_section,pyherc.rules.attack.action,pyherc.test.unit.test_creatureadder,pyherc.test.unit.test_squareroom,pyherc.test.unit.test_portaladder,pyherc.test.unit.test_corridor,pyherc.rules.utils)
+
+  \-Random (pyherc.test.unit.test_itemadder,pyherc.test.unit.test_potions,pyherc.test.unit.test_itemgeneration,pyherc.test.unit.test_item,pyherc.test.unit.test_config_dsl,pyherc.config.dsl.roomgenerators,pyherc.test.unit.test_creaturegeneration)
+
+types (pyherc.rules.public,pyherc.rules.attack.factories,pyherc.rules.inventory.factories,pyherc.rules.move.factories)
+
+web (pyherc.debug.handlers)
+
+  \-form (pyherc.debug.handlers)</pre></div>
+
+<div>
+
+<h2>Statistics by type</h2>
+
+<table>
+
+<tr class="header">
+
+<th>type</th>
+
+<th>number</th>
+
+<th>old number</th>
+
+<th>difference</th>
+
+<th>%documented</th>
+
+<th>%badname</th>
+
+</tr>
+
+<tr class="even">
+
+<td>module</td>
+
+<td>142</td>
+
+<td>142</td>
+
+<td>=</td>
+
+<td>100.00</td>
+
+<td>0.00</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>class</td>
+
+<td>197</td>
+
+<td>197</td>
+
+<td>=</td>
+
+<td>100.00</td>
+
+<td>0.00</td>
+
+</tr>
+
+<tr class="even">
+
+<td>method</td>
+
+<td>813</td>
+
+<td>813</td>
+
+<td>=</td>
+
+<td>97.42</td>
+
+<td>7.01</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>function</td>
+
+<td>51</td>
+
+<td>51</td>
+
+<td>=</td>
+
+<td>98.04</td>
+
+<td>7.84</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div>
 
 <h2>Messages by category</h2>
 
@@ -28,9 +328,9 @@
 
 <td>convention</td>
 
-<td>180</td>
+<td>178</td>
 
-<td>180</td>
+<td>178</td>
 
 <td>=</td>
 
@@ -40,9 +340,9 @@
 
 <td>refactor</td>
 
-<td>186</td>
+<td>197</td>
 
-<td>186</td>
+<td>197</td>
 
 <td>=</td>
 
@@ -52,9 +352,9 @@
 
 <td>warning</td>
 
-<td>115</td>
+<td>135</td>
 
-<td>115</td>
+<td>135</td>
 
 <td>=</td>
 
@@ -102,21 +402,35 @@
 
 <td>0.00</td>
 
-<td>9.57</td>
+<td>8.15</td>
 
-<td>3.23</td>
+<td>3.05</td>
 
 <td>0.56</td>
 
 </tr>
 
 <tr class="odd">
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>0.00</td>
+
+<td>8.15</td>
+
+<td>0.51</td>
+
+<td>0.00</td>
+
+</tr>
+
+<tr class="even">
 
 <td>pyherc.test.unit.test_time</td>
 
 <td>0.00</td>
 
-<td>6.09</td>
+<td>5.93</td>
 
 <td>0.00</td>
 
@@ -124,155 +438,85 @@
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>pyherc.rules.character</td>
 
 <td>0.00</td>
 
-<td>5.22</td>
+<td>4.44</td>
 
 <td>0.00</td>
 
-<td>1.67</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>pyherc.test.unit.test_levelgenerator</td>
-
-<td>0.00</td>
-
-<td>4.35</td>
-
-<td>2.15</td>
-
-<td>1.11</td>
+<td>1.69</td>
 
 </tr>
 
 <tr class="even">
 
-<td>pyherc.test.cutesy.dictionary</td>
+<td>pyherc.test.unit.test_creaturegeneration</td>
 
 <td>0.00</td>
 
-<td>3.48</td>
+<td>4.44</td>
 
-<td>3.23</td>
+<td>0.00</td>
 
-<td>3.33</td>
+<td>1.12</td>
 
 </tr>
 
 <tr class="odd">
-
-<td>pyherc.test.unit.test_creature</td>
-
-<td>0.00</td>
-
-<td>3.48</td>
-
-<td>2.69</td>
-
-<td>0.00</td>
-
-</tr>
-
-<tr class="even">
-
-<td>pyherc.test.unit.test_dice</td>
-
-<td>0.00</td>
-
-<td>3.48</td>
-
-<td>2.15</td>
-
-<td>1.11</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>pyherc.config.config</td>
-
-<td>0.00</td>
-
-<td>3.48</td>
-
-<td>1.61</td>
-
-<td>0.00</td>
-
-</tr>
-
-<tr class="even">
-
-<td>pyherc.rules.los</td>
-
-<td>0.00</td>
-
-<td>3.48</td>
-
-<td>1.08</td>
-
-<td>15.00</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>pyherc.rules.utils</td>
-
-<td>0.00</td>
-
-<td>3.48</td>
-
-<td>0.00</td>
-
-<td>1.67</td>
-
-</tr>
-
-<tr class="even">
 
 <td>pyherc.test.unit.test_effects</td>
 
 <td>0.00</td>
 
-<td>2.61</td>
+<td>3.70</td>
 
-<td>2.69</td>
+<td>2.54</td>
 
-<td>3.89</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>pyherc.data.level</td>
-
-<td>0.00</td>
-
-<td>2.61</td>
-
-<td>1.08</td>
-
-<td>1.11</td>
+<td>3.93</td>
 
 </tr>
 
 <tr class="even">
 
-<td>pyherc.generators.level.partitioners.grid</td>
+<td>pyherc.test.unit.test_levelgenerator</td>
 
 <td>0.00</td>
 
-<td>2.61</td>
+<td>3.70</td>
 
-<td>1.08</td>
+<td>2.03</td>
+
+<td>1.12</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>pyherc.test.cutesy.dictionary</td>
+
+<td>0.00</td>
+
+<td>2.96</td>
+
+<td>3.05</td>
+
+<td>3.37</td>
+
+</tr>
+
+<tr class="even">
+
+<td>pyherc.test.unit.test_creature</td>
+
+<td>0.00</td>
+
+<td>2.96</td>
+
+<td>2.54</td>
 
 <td>0.00</td>
 
@@ -280,29 +524,113 @@
 
 <tr class="odd">
 
-<td>pyherc.test.unit.test_portaladder</td>
+<td>pyherc.test.unit.test_dice</td>
 
 <td>0.00</td>
 
-<td>2.61</td>
+<td>2.96</td>
 
-<td>0.00</td>
+<td>2.03</td>
 
-<td>1.11</td>
+<td>1.12</td>
 
 </tr>
 
 <tr class="even">
+
+<td>pyherc.config.config</td>
+
+<td>0.00</td>
+
+<td>2.96</td>
+
+<td>1.52</td>
+
+<td>0.00</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>pyherc.rules.los</td>
+
+<td>0.00</td>
+
+<td>2.96</td>
+
+<td>1.02</td>
+
+<td>15.17</td>
+
+</tr>
+
+<tr class="even">
+
+<td>pyherc.rules.utils</td>
+
+<td>0.00</td>
+
+<td>2.96</td>
+
+<td>0.00</td>
+
+<td>1.69</td>
+
+</tr>
+
+<tr class="odd">
 
 <td>pyherc.rules.items</td>
 
 <td>0.00</td>
 
-<td>2.61</td>
+<td>2.96</td>
 
 <td>0.00</td>
 
 <td>0.56</td>
+
+</tr>
+
+<tr class="even">
+
+<td>pyherc.data.level</td>
+
+<td>0.00</td>
+
+<td>2.22</td>
+
+<td>1.02</td>
+
+<td>1.12</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>pyherc.generators.level.partitioners.grid</td>
+
+<td>0.00</td>
+
+<td>2.22</td>
+
+<td>1.02</td>
+
+<td>0.00</td>
+
+</tr>
+
+<tr class="even">
+
+<td>pyherc.test.unit.test_portaladder</td>
+
+<td>0.00</td>
+
+<td>2.22</td>
+
+<td>0.00</td>
+
+<td>1.12</td>
 
 </tr>
 
@@ -312,7 +640,7 @@
 
 <td>0.00</td>
 
-<td>2.61</td>
+<td>2.22</td>
 
 <td>0.00</td>
 
@@ -326,7 +654,7 @@
 
 <td>0.00</td>
 
-<td>2.61</td>
+<td>2.22</td>
 
 <td>0.00</td>
 
@@ -340,7 +668,7 @@
 
 <td>0.00</td>
 
-<td>2.61</td>
+<td>2.22</td>
 
 <td>0.00</td>
 
@@ -354,9 +682,9 @@
 
 <td>0.00</td>
 
-<td>1.74</td>
+<td>1.48</td>
 
-<td>3.23</td>
+<td>3.05</td>
 
 <td>0.56</td>
 
@@ -368,9 +696,9 @@
 
 <td>0.00</td>
 
-<td>1.74</td>
+<td>1.48</td>
 
-<td>2.15</td>
+<td>2.03</td>
 
 <td>0.00</td>
 
@@ -382,11 +710,11 @@
 
 <td>0.00</td>
 
-<td>1.74</td>
+<td>1.48</td>
 
-<td>1.08</td>
+<td>1.02</td>
 
-<td>1.11</td>
+<td>1.12</td>
 
 </tr>
 
@@ -396,9 +724,9 @@
 
 <td>0.00</td>
 
-<td>1.74</td>
+<td>1.48</td>
 
-<td>1.08</td>
+<td>1.02</td>
 
 <td>0.56</td>
 
@@ -410,9 +738,9 @@
 
 <td>0.00</td>
 
-<td>1.74</td>
+<td>1.48</td>
 
-<td>1.08</td>
+<td>1.02</td>
 
 <td>0.00</td>
 
@@ -424,39 +752,39 @@
 
 <td>0.00</td>
 
-<td>1.74</td>
+<td>1.48</td>
 
-<td>0.54</td>
+<td>0.51</td>
 
-<td>1.11</td>
+<td>1.12</td>
 
 </tr>
 
 <tr class="even">
 
-<td>pyherc.test.unit.test_combat</td>
+<td>pyherc.test.unit.test_potions</td>
 
 <td>0.00</td>
 
-<td>1.74</td>
+<td>1.48</td>
 
 <td>0.00</td>
 
-<td>1.11</td>
+<td>2.25</td>
 
 </tr>
 
 <tr class="odd">
 
-<td>pyherc.rules.ending</td>
+<td>pyherc.test.unit.test_combat</td>
 
 <td>0.00</td>
 
-<td>1.74</td>
+<td>1.48</td>
 
 <td>0.00</td>
 
-<td>1.11</td>
+<td>1.12</td>
 
 </tr>
 
@@ -466,7 +794,7 @@
 
 <td>0.00</td>
 
-<td>1.74</td>
+<td>1.48</td>
 
 <td>0.00</td>
 
@@ -480,11 +808,11 @@
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
-<td>3.23</td>
+<td>3.05</td>
 
-<td>1.11</td>
+<td>1.12</td>
 
 </tr>
 
@@ -494,9 +822,9 @@
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
-<td>3.23</td>
+<td>3.05</td>
 
 <td>0.56</td>
 
@@ -508,121 +836,121 @@
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
-<td>2.15</td>
+<td>2.54</td>
 
-<td>3.33</td>
+<td>3.37</td>
 
 </tr>
 
 <tr class="even">
+
+<td>pyherc.rules.attack.action</td>
+
+<td>0.00</td>
+
+<td>0.74</td>
+
+<td>2.03</td>
+
+<td>1.12</td>
+
+</tr>
+
+<tr class="odd">
 
 <td>pyherc.test.unit.test_actionfactory</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
-<td>1.61</td>
+<td>1.52</td>
 
 <td>0.00</td>
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>pyherc.test.bdd.test_combat</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
-<td>1.08</td>
+<td>1.02</td>
 
-<td>2.78</td>
+<td>2.81</td>
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>pyherc.test.unit.test_drop_actions</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
-<td>1.08</td>
+<td>1.02</td>
 
-<td>1.67</td>
+<td>1.69</td>
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>pyherc.test.unit.test_connection</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
-<td>1.08</td>
+<td>1.02</td>
 
 <td>0.00</td>
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>pyherc.events.event</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
-<td>1.08</td>
-
-<td>0.00</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>pyherc.generators.dungeon</td>
+<td>1.02</td>
 
 <td>0.00</td>
-
-<td>0.87</td>
-
-<td>0.54</td>
-
-<td>0.56</td>
 
 </tr>
 
 <tr class="even">
 
-<td>pyherc.test.unit.test_item</td>
+<td>pyherc.generators.dungeon</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
-<td>0.54</td>
+<td>0.51</td>
 
-<td>0.00</td>
+<td>0.56</td>
 
 </tr>
 
 <tr class="odd">
 
-<td>pyherc.test.builders.action</td>
+<td>pyherc.test.unit.test_item</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
-<td>0.54</td>
+<td>0.51</td>
 
 <td>0.00</td>
 
@@ -634,49 +962,35 @@
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
-<td>0.54</td>
+<td>0.51</td>
 
 <td>0.00</td>
 
 </tr>
 
 <tr class="odd">
-
-<td>pyherc.test.unit.test_potions</td>
-
-<td>0.00</td>
-
-<td>0.87</td>
-
-<td>0.00</td>
-
-<td>2.22</td>
-
-</tr>
-
-<tr class="even">
 
 <td>pyherc.test.unit.test_moving</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
 <td>0.00</td>
 
-<td>1.67</td>
+<td>1.69</td>
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>pyherc.test.unit.test_itemgeneration</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
 <td>0.00</td>
 
@@ -684,13 +998,13 @@
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>pyherc.rules.moving</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
 <td>0.00</td>
 
@@ -698,27 +1012,13 @@
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>pyherc.test.unit.test_itemadder</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
-
-<td>0.00</td>
-
-<td>0.00</td>
-
-</tr>
-
-<tr class="even">
-
-<td>pyherc.test.unit.test_dungeon</td>
-
-<td>0.00</td>
-
-<td>0.87</td>
+<td>0.74</td>
 
 <td>0.00</td>
 
@@ -728,11 +1028,11 @@
 
 <tr class="odd">
 
-<td>pyherc.test.matchers.contains_creature</td>
+<td>pyherc.test.unit.test_dungeon</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
 <td>0.00</td>
 
@@ -742,11 +1042,25 @@
 
 <tr class="even">
 
+<td>pyherc.test.matchers.contains_creature</td>
+
+<td>0.00</td>
+
+<td>0.74</td>
+
+<td>0.00</td>
+
+<td>0.00</td>
+
+</tr>
+
+<tr class="odd">
+
 <td>pyherc.data.effects.effectscollection</td>
 
 <td>0.00</td>
 
-<td>0.87</td>
+<td>0.74</td>
 
 <td>0.00</td>
 
@@ -776,7 +1090,7 @@
 
 <td>C0103</td>
 
-<td>112</td>
+<td>108</td>
 
 </tr>
 
@@ -784,7 +1098,7 @@
 
 <td>R0903</td>
 
-<td>70</td>
+<td>79</td>
 
 </tr>
 
@@ -792,7 +1106,7 @@
 
 <td>R0201</td>
 
-<td>68</td>
+<td>67</td>
 
 </tr>
 
@@ -800,7 +1114,7 @@
 
 <td>C0301</td>
 
-<td>47</td>
+<td>48</td>
 
 </tr>
 
@@ -816,7 +1130,7 @@
 
 <td>C0111</td>
 
-<td>21</td>
+<td>22</td>
 
 </tr>
 
@@ -824,13 +1138,13 @@
 
 <td>W0622</td>
 
-<td>19</td>
+<td>21</td>
 
 </tr>
 
 <tr class="odd">
 
-<td>R0913</td>
+<td>W0611</td>
 
 <td>16</td>
 
@@ -838,9 +1152,9 @@
 
 <tr class="even">
 
-<td>R0902</td>
+<td>R0913</td>
 
-<td>13</td>
+<td>16</td>
 
 </tr>
 
@@ -848,7 +1162,23 @@
 
 <td>R0801</td>
 
-<td>13</td>
+<td>15</td>
+
+</tr>
+
+<tr class="even">
+
+<td>R0902</td>
+
+<td>14</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>W0201</td>
+
+<td>12</td>
 
 </tr>
 
@@ -878,21 +1208,13 @@
 
 <tr class="odd">
 
-<td>W0201</td>
-
-<td>7</td>
-
-</tr>
-
-<tr class="even">
-
 <td>W0141</td>
 
 <td>6</td>
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W0602</td>
 
@@ -900,19 +1222,11 @@
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W0511</td>
 
 <td>4</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>W0611</td>
-
-<td>3</td>
 
 </tr>
 
@@ -964,99 +1278,11 @@
 
 </tr>
 
-</table>
-
-</div>
-
-<div>
-
-<h2>Global evaluation</h2>
-
-Your code has been rated at 9.13/10 (previous run: 9.13/10)</div>
-
-<div>
-
-<h2>Statistics by type</h2>
-
-<table>
-
-<tr class="header">
-
-<th>type</th>
-
-<th>number</th>
-
-<th>old number</th>
-
-<th>difference</th>
-
-<th>%documented</th>
-
-<th>%badname</th>
-
-</tr>
-
 <tr class="even">
 
-<td>module</td>
+<td>F0401</td>
 
-<td>137</td>
-
-<td>137</td>
-
-<td>=</td>
-
-<td>100.00</td>
-
-<td>0.00</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>class</td>
-
-<td>185</td>
-
-<td>185</td>
-
-<td>=</td>
-
-<td>100.00</td>
-
-<td>0.00</td>
-
-</tr>
-
-<tr class="even">
-
-<td>method</td>
-
-<td>779</td>
-
-<td>779</td>
-
-<td>=</td>
-
-<td>97.43</td>
-
-<td>7.45</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>function</td>
-
-<td>58</td>
-
-<td>58</td>
-
-<td>=</td>
-
-<td>98.28</td>
-
-<td>6.90</td>
+<td>1</td>
 
 </tr>
 
@@ -1066,213 +1292,9 @@ Your code has been rated at 9.13/10 (previous run: 9.13/10)</div>
 
 <div>
 
-<h2>Raw metrics</h2>
+<h2>Global evaluation</h2>
 
-<table>
-
-<tr class="header">
-
-<th>type</th>
-
-<th>number</th>
-
-<th>%</th>
-
-<th>previous</th>
-
-<th>difference</th>
-
-</tr>
-
-<tr class="even">
-
-<td>code</td>
-
-<td>7186</td>
-
-<td>43.57</td>
-
-<td>7186</td>
-
-<td>=</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>docstring</td>
-
-<td>5225</td>
-
-<td>31.68</td>
-
-<td>5225</td>
-
-<td>=</td>
-
-</tr>
-
-<tr class="even">
-
-<td>comment</td>
-
-<td>2516</td>
-
-<td>15.25</td>
-
-<td>2516</td>
-
-<td>=</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>empty</td>
-
-<td>1566</td>
-
-<td>9.49</td>
-
-<td>1566</td>
-
-<td>=</td>
-
-</tr>
-
-</table>
-
-</div>
-
-<div>
-
-<h2>External dependencies</h2>
-
-<pre>Aspyct 
-
-  \-aop 
-
-    \-Aspect (pyherc.aspects)
-
-collections (pyherc.data.effects.effectscollection,pyherc.generators.utils)
-
-copy (pyherc.generators.effects)
-
-hamcrest 
-
-  \-assert_that (pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_drop_actions,pyherc.test.bdd.test_inventory,pyherc.test.bdd.test_combat,pyherc.test.bdd.test_poison)
-
-  \-core 
-
-  | \-base_matcher 
-
-  | | \-BaseMatcher (pyherc.test.matchers.character,pyherc.test.matchers.effect_collection,pyherc.test.matchers.items,pyherc.test.matchers.map_connectivity,pyherc.test.matchers.event,pyherc.test.matchers.event_listener,pyherc.test.matchers.contains_creature,pyherc.test.matchers.active_effects,pyherc.test.cutesy.dictionary)
-
-  | \-helpers 
-
-  |   \-wrap_matcher 
-
-  |     \-wrap_matcher (pyherc.test.matchers.items,pyherc.test.matchers.active_effects,pyherc.test.matchers.contains_creature)
-
-  \-equal_to (pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_drop_actions)
-
-  \-greater_than (pyherc.test.unit.test_drop_actions)
-
-  \-has_item (pyherc.test.unit.test_config_dsl)
-
-  \-is_ (pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_drop_actions)
-
-  \-is_in (pyherc.test.unit.test_drop_actions)
-
-  \-is_not (pyherc.test.unit.test_drop_actions,pyherc.test.matchers.contains_creature)
-
-herculeum 
-
-  \-application 
-
-  | \-APP (pyherc.debug.handlers)
-
-  \-config 
-
-    \-tiles (pyherc.rules.character)
-
-logging (pyherc.rules.move.action,pyherc.generators.level.partitioners.section,pyherc.rules.attack.action,pyherc.rules.attack.unarmed,pyherc.generators.dungeon,pyherc.rules.utils,pyherc.generators.level.partitioners.grid,pyherc.rules.move.factories,pyherc.generators.level.generator,pyherc.rules.character,pyherc.generators.level.decorator.basic,pyherc.rules.factory,pyherc.rules.moving,pyherc.rules.attack.melee,pyherc.generators.utils,pyherc.config.config,pyherc.rules.attack.factories,pyherc.generators.level.room.squareroom,pyherc.aspects,pyherc.rules.ending,pyherc.rules.magic,pyherc.rules.items)
-
-mockito 
-
-  \-any (pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_combat,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_creature,pyherc.test.unit.test_poison,pyherc.test.unit.test_item,pyherc.test.unit.test_potions,pyherc.test.unit.test_levelgenerator)
-
-  \-mock (pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_events,pyherc.test.unit.test_combat,pyherc.test.unit.test_portaladder,pyherc.test.unit.test_creatureadder,pyherc.test.unit.test_poison,pyherc.test.builders.action,pyherc.test.cutesy.dictionary,pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_item,pyherc.test.unit.test_time,pyherc.test.unit.test_model,pyherc.test.builders.character,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_section,pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_leveldecorator,pyherc.test.unit.test_connection,pyherc.test.unit.test_creaturegeneration,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_dungeon,pyherc.test.unit.test_creature,pyherc.test.unit.test_potions)
-
-  \-verify (pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_combat,pyherc.test.unit.test_events,pyherc.test.unit.test_item,pyherc.test.unit.test_time,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_model,pyherc.test.unit.test_poison,pyherc.test.unit.test_leveldecorator,pyherc.test.unit.test_creature)
-
-  \-when (pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_effects,pyherc.test.unit.test_combat,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_potions,pyherc.test.cutesy.dictionary)
-
-os 
-
-  \-path (pyherc.test.integration)
-
-qc 
-
-  \-forall (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_moving)
-
-  \-integers (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_moving)
-
-random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_connection,pyherc.rules.attack.melee,pyherc.config.config,pyherc.generators.item,pyherc.generators.utils,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_section,pyherc.rules.attack.action,pyherc.test.unit.test_creatureadder,pyherc.test.unit.test_squareroom,pyherc.test.unit.test_portaladder,pyherc.test.unit.test_corridor,pyherc.rules.utils)
-
-  \-Random (pyherc.test.unit.test_itemadder,pyherc.test.unit.test_potions,pyherc.test.unit.test_itemgeneration,pyherc.test.unit.test_item,pyherc.test.unit.test_config_dsl,pyherc.config.dsl.roomgenerators,pyherc.test.unit.test_creaturegeneration)
-
-types (pyherc.rules.public,pyherc.rules.attack.factories,pyherc.rules.inventory.factories,pyherc.rules.move.factories)
-
-web (pyherc.debug.handlers)
-
-  \-form (pyherc.debug.handlers)</pre></div>
-
-<div>
-
-<h2>Duplication</h2>
-
-<table>
-
-<tr class="header">
-
-<th>&#160;</th>
-
-<th>now</th>
-
-<th>previous</th>
-
-<th>difference</th>
-
-</tr>
-
-<tr class="even">
-
-<th>nb duplicated lines</th>
-
-<td>183</td>
-
-<td>183</td>
-
-<td>=</td>
-
-</tr>
-
-<tr class="odd">
-
-<th>percent duplicated lines</th>
-
-<td>1.066</td>
-
-<td>1.066</td>
-
-<td>=</td>
-
-</tr>
-
-</table>
-
-</div>
+Your code has been rated at 9.10/10 (previous run: 9.10/10)</div>
 
 <div>
 
@@ -1384,7 +1406,7 @@ web (pyherc.debug.handlers)
 
 <td>Configuration</td>
 
-<td>46</td>
+<td>47</td>
 
 <td>0</td>
 
@@ -1400,7 +1422,7 @@ web (pyherc.debug.handlers)
 
 <td>Configuration.get_configurators</td>
 
-<td>169</td>
+<td>178</td>
 
 <td>25</td>
 
@@ -1416,7 +1438,7 @@ web (pyherc.debug.handlers)
 
 <td>Configuration.get_configurators</td>
 
-<td>170</td>
+<td>179</td>
 
 <td>29</td>
 
@@ -1432,7 +1454,7 @@ web (pyherc.debug.handlers)
 
 <td>Configuration.get_configurators</td>
 
-<td>172</td>
+<td>181</td>
 
 <td>24</td>
 
@@ -1448,7 +1470,7 @@ web (pyherc.debug.handlers)
 
 <td>Configuration.get_configurators</td>
 
-<td>173</td>
+<td>182</td>
 
 <td>28</td>
 
@@ -1464,7 +1486,7 @@ web (pyherc.debug.handlers)
 
 <td>Configuration.get_configurators</td>
 
-<td>164</td>
+<td>173</td>
 
 <td>4</td>
 
@@ -1480,7 +1502,7 @@ web (pyherc.debug.handlers)
 
 <td>Configuration.extend_configuration</td>
 
-<td>231</td>
+<td>242</td>
 
 <td>4</td>
 
@@ -1752,7 +1774,7 @@ web (pyherc.debug.handlers)
 
 <td>Damage</td>
 
-<td>105</td>
+<td>107</td>
 
 <td>0</td>
 
@@ -1784,7 +1806,7 @@ web (pyherc.debug.handlers)
 
 <td>&#160;</td>
 
-<td>121</td>
+<td>128</td>
 
 <td>0</td>
 
@@ -1800,7 +1822,7 @@ web (pyherc.debug.handlers)
 
 <td>Effect.get_add_event</td>
 
-<td>75</td>
+<td>76</td>
 
 <td>4</td>
 
@@ -1816,7 +1838,7 @@ web (pyherc.debug.handlers)
 
 <td>Effect.get_removal_event</td>
 
-<td>88</td>
+<td>89</td>
 
 <td>4</td>
 
@@ -1832,7 +1854,7 @@ web (pyherc.debug.handlers)
 
 <td>EffectHandle</td>
 
-<td>100</td>
+<td>101</td>
 
 <td>0</td>
 
@@ -1864,7 +1886,7 @@ web (pyherc.debug.handlers)
 
 <td>Heal.__init__</td>
 
-<td>34</td>
+<td>35</td>
 
 <td>4</td>
 
@@ -1880,7 +1902,7 @@ web (pyherc.debug.handlers)
 
 <td>Poison.__init__</td>
 
-<td>37</td>
+<td>36</td>
 
 <td>4</td>
 
@@ -2338,6 +2360,70 @@ web (pyherc.debug.handlers)
 
 <tr class="odd">
 
+<td>C</td>
+
+<td>pyherc.events.healing</td>
+
+<td>&#160;</td>
+
+<td>135</td>
+
+<td>0</td>
+
+<td>Line too long (82/80)</td>
+
+</tr>
+
+<tr class="even">
+
+<td>R</td>
+
+<td>pyherc.events.healing</td>
+
+<td>HealTriggeredEvent</td>
+
+<td>27</td>
+
+<td>0</td>
+
+<td>Too few public methods (1/2)</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>R</td>
+
+<td>pyherc.events.healing</td>
+
+<td>HealAddedEvent</td>
+
+<td>67</td>
+
+<td>0</td>
+
+<td>Too few public methods (1/2)</td>
+
+</tr>
+
+<tr class="even">
+
+<td>R</td>
+
+<td>pyherc.events.healing</td>
+
+<td>HealEndedEvent</td>
+
+<td>104</td>
+
+<td>0</td>
+
+<td>Too few public methods (1/2)</td>
+
+</tr>
+
+<tr class="odd">
+
 <td>R</td>
 
 <td>pyherc.events.inventory</td>
@@ -2456,7 +2542,7 @@ web (pyherc.debug.handlers)
 
 <td>&#160;</td>
 
-<td>66</td>
+<td>67</td>
 
 <td>0</td>
 
@@ -2488,11 +2574,11 @@ web (pyherc.debug.handlers)
 
 <td>CreatureConfiguration</td>
 
-<td>129</td>
+<td>135</td>
 
 <td>0</td>
 
-<td>Too many instance attributes (10/7)</td>
+<td>Too many instance attributes (11/7)</td>
 
 </tr>
 
@@ -2504,7 +2590,7 @@ web (pyherc.debug.handlers)
 
 <td>CreatureConfiguration.__init__</td>
 
-<td>147</td>
+<td>153</td>
 
 <td>8</td>
 
@@ -2520,7 +2606,7 @@ web (pyherc.debug.handlers)
 
 <td>CreatureConfiguration.__init__</td>
 
-<td>143</td>
+<td>149</td>
 
 <td>8</td>
 
@@ -2536,11 +2622,11 @@ web (pyherc.debug.handlers)
 
 <td>CreatureConfiguration.__init__</td>
 
-<td>134</td>
+<td>140</td>
 
 <td>4</td>
 
-<td>Too many arguments (11/5)</td>
+<td>Too many arguments (12/5)</td>
 
 </tr>
 
@@ -2552,7 +2638,7 @@ web (pyherc.debug.handlers)
 
 <td>CreatureConfiguration.__init__</td>
 
-<td>134</td>
+<td>140</td>
 
 <td>4</td>
 
@@ -2568,7 +2654,7 @@ web (pyherc.debug.handlers)
 
 <td>CreatureConfiguration.__init__</td>
 
-<td>134</td>
+<td>140</td>
 
 <td>4</td>
 
@@ -2584,7 +2670,7 @@ web (pyherc.debug.handlers)
 
 <td>CreatureConfiguration.__init__</td>
 
-<td>134</td>
+<td>140</td>
 
 <td>50</td>
 
@@ -2600,7 +2686,7 @@ web (pyherc.debug.handlers)
 
 <td>CreatureConfiguration.__init__</td>
 
-<td>135</td>
+<td>141</td>
 
 <td>17</td>
 
@@ -2616,7 +2702,7 @@ web (pyherc.debug.handlers)
 
 <td>CreatureConfiguration</td>
 
-<td>129</td>
+<td>135</td>
 
 <td>0</td>
 
@@ -2625,6 +2711,22 @@ web (pyherc.debug.handlers)
 </tr>
 
 <tr class="odd">
+
+<td>R</td>
+
+<td>pyherc.generators.creature</td>
+
+<td>InventoryConfiguration</td>
+
+<td>165</td>
+
+<td>0</td>
+
+<td>Too few public methods (0/2)</td>
+
+</tr>
+
+<tr class="even">
 
 <td>C</td>
 
@@ -2640,7 +2742,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -2656,7 +2758,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -2672,7 +2774,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -2688,7 +2790,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -2704,7 +2806,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -2720,7 +2822,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -2736,7 +2838,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -2752,7 +2854,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -2768,7 +2870,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -2784,7 +2886,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -2800,7 +2902,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -2816,7 +2918,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -2832,7 +2934,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -2848,7 +2950,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -2864,7 +2966,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -2880,7 +2982,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -2896,7 +2998,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -2912,7 +3014,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -2928,7 +3030,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -2944,7 +3046,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -2960,7 +3062,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -2976,7 +3078,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -2992,7 +3094,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3008,7 +3110,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -3024,7 +3126,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -3040,7 +3142,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3056,7 +3158,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3072,7 +3174,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3088,7 +3190,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3104,7 +3206,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3120,7 +3222,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3136,7 +3238,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -3152,7 +3254,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3168,7 +3270,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3184,7 +3286,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -3200,7 +3302,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3216,7 +3318,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3232,7 +3334,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3248,7 +3350,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3264,7 +3366,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -3280,7 +3382,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3296,7 +3398,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -3312,7 +3414,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3328,7 +3430,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3344,7 +3446,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3360,7 +3462,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3376,7 +3478,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3392,7 +3494,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3408,7 +3510,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3424,7 +3526,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3440,7 +3542,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -3456,7 +3558,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -3472,7 +3574,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -3488,7 +3590,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -3504,7 +3606,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3520,7 +3622,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3536,7 +3638,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -3552,7 +3654,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -3568,7 +3670,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3584,7 +3686,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -3600,7 +3702,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3616,7 +3718,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -3632,7 +3734,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3648,7 +3750,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -3664,7 +3766,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3680,7 +3782,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3696,7 +3798,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3712,7 +3814,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -3728,7 +3830,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3744,7 +3846,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -3760,7 +3862,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3776,7 +3878,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -3792,7 +3894,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3808,7 +3910,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -3824,7 +3926,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3840,7 +3942,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3856,7 +3958,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -3872,7 +3974,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3888,7 +3990,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3904,7 +4006,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -3920,7 +4022,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3936,7 +4038,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -3952,7 +4054,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -3968,7 +4070,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -3984,7 +4086,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -4000,7 +4102,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -4016,7 +4118,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -4032,7 +4134,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -4048,7 +4150,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -4064,7 +4166,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -4072,7 +4174,7 @@ web (pyherc.debug.handlers)
 
 <td>&#160;</td>
 
-<td>88</td>
+<td>59</td>
 
 <td>0</td>
 
@@ -4080,55 +4182,55 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
-<td>C</td>
+<td>R</td>
 
 <td>pyherc.rules.ending</td>
 
-<td>&#160;</td>
+<td>Dying.check_dying</td>
+
+<td>44</td>
+
+<td>4</td>
+
+<td>Method could be a function</td>
+
+</tr>
+
+<tr class="even">
+
+<td>R</td>
+
+<td>pyherc.rules.ending</td>
+
+<td>Dying</td>
 
 <td>28</td>
 
 <td>0</td>
 
-<td>Invalid name "__logger" (should match (([A-Z_][A-Z0-9_]*)|(__.*__))$)</td>
+<td>Too few public methods (1/2)</td>
 
 </tr>
 
 <tr class="odd">
 
-<td>W</td>
+<td>R</td>
 
-<td>pyherc.rules.ending</td>
+<td>pyherc.rules.engine</td>
 
-<td>get_ending_score</td>
+<td>RulesEngine</td>
 
-<td>63</td>
+<td>25</td>
 
-<td>21</td>
+<td>0</td>
 
-<td>Unused argument 'model'</td>
+<td>Too few public methods (0/2)</td>
 
 </tr>
 
 <tr class="even">
-
-<td>W</td>
-
-<td>pyherc.rules.ending</td>
-
-<td>check_dying</td>
-
-<td>75</td>
-
-<td>34</td>
-
-<td>Unused argument 'death_params'</td>
-
-</tr>
-
-<tr class="odd">
 
 <td>C</td>
 
@@ -4136,7 +4238,7 @@ web (pyherc.debug.handlers)
 
 <td>&#160;</td>
 
-<td>30</td>
+<td>29</td>
 
 <td>0</td>
 
@@ -4144,17 +4246,33 @@ web (pyherc.debug.handlers)
 
 </tr>
 
+<tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.rules.items</td>
+
+<td>wield</td>
+
+<td>31</td>
+
+<td>34</td>
+
+<td>Unused argument 'dual_wield'</td>
+
+</tr>
+
 <tr class="even">
 
 <td>W</td>
 
 <td>pyherc.rules.items</td>
 
-<td>unwield</td>
+<td>wield</td>
 
-<td>110</td>
+<td>31</td>
 
-<td>12</td>
+<td>10</td>
 
 <td>Unused argument 'model'</td>
 
@@ -4168,11 +4286,11 @@ web (pyherc.debug.handlers)
 
 <td>unwield</td>
 
-<td>110</td>
+<td>49</td>
 
-<td>36</td>
+<td>12</td>
 
-<td>Unused argument 'instant'</td>
+<td>Unused argument 'model'</td>
 
 </tr>
 
@@ -4182,13 +4300,13 @@ web (pyherc.debug.handlers)
 
 <td>pyherc.rules.items</td>
 
-<td>&#160;</td>
+<td>unwield</td>
 
-<td>28</td>
+<td>49</td>
 
-<td>0</td>
+<td>36</td>
 
-<td>Unused import pyherc</td>
+<td>Unused argument 'instant'</td>
 
 </tr>
 
@@ -4724,22 +4842,6 @@ web (pyherc.debug.handlers)
 
 <td>C</td>
 
-<td>pyherc.rules.magic</td>
-
-<td>&#160;</td>
-
-<td>29</td>
-
-<td>0</td>
-
-<td>Invalid name "__logger" (should match (([A-Z_][A-Z0-9_]*)|(__.*__))$)</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>C</td>
-
 <td>pyherc.rules.moving</td>
 
 <td>&#160;</td>
@@ -4752,7 +4854,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -4768,7 +4870,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -4784,7 +4886,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -4800,7 +4902,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -4816,7 +4918,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -4832,7 +4934,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -4848,7 +4950,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -4864,7 +4966,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -4880,7 +4982,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -4896,7 +4998,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -4912,7 +5014,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -4928,7 +5030,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -4944,7 +5046,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -4960,6 +5062,22 @@ web (pyherc.debug.handlers)
 
 </tr>
 
+<tr class="even">
+
+<td>C</td>
+
+<td>pyherc.rules.attack.action</td>
+
+<td>&#160;</td>
+
+<td>98</td>
+
+<td>0</td>
+
+<td>Line too long (81/80)</td>
+
+</tr>
+
 <tr class="odd">
 
 <td>C</td>
@@ -4968,7 +5086,7 @@ web (pyherc.debug.handlers)
 
 <td>&#160;</td>
 
-<td>97</td>
+<td>104</td>
 
 <td>0</td>
 
@@ -4978,17 +5096,17 @@ web (pyherc.debug.handlers)
 
 <tr class="even">
 
-<td>C</td>
+<td>R</td>
 
 <td>pyherc.rules.attack.action</td>
 
-<td>&#160;</td>
+<td>AttackAction</td>
 
-<td>103</td>
+<td>30</td>
 
 <td>0</td>
 
-<td>Line too long (81/80)</td>
+<td>Too many instance attributes (8/7)</td>
 
 </tr>
 
@@ -5004,7 +5122,7 @@ web (pyherc.debug.handlers)
 
 <td>4</td>
 
-<td>Too many arguments (7/5)</td>
+<td>Too many arguments (8/5)</td>
 
 </tr>
 
@@ -5016,7 +5134,7 @@ web (pyherc.debug.handlers)
 
 <td>ToHit</td>
 
-<td>130</td>
+<td>129</td>
 
 <td>0</td>
 
@@ -5032,7 +5150,7 @@ web (pyherc.debug.handlers)
 
 <td>Damage</td>
 
-<td>164</td>
+<td>163</td>
 
 <td>0</td>
 
@@ -5042,33 +5160,33 @@ web (pyherc.debug.handlers)
 
 <tr class="even">
 
+<td>W</td>
+
+<td>pyherc.rules.attack.action</td>
+
+<td>&#160;</td>
+
+<td>24</td>
+
+<td>0</td>
+
+<td>Unused import pyherc</td>
+
+</tr>
+
+<tr class="odd">
+
 <td>C</td>
 
 <td>pyherc.rules.attack.factories</td>
 
 <td>&#160;</td>
 
-<td>68</td>
+<td>69</td>
 
 <td>0</td>
 
 <td>Line too long (93/80)</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>R</td>
-
-<td>pyherc.rules.attack.factories</td>
-
-<td>UnarmedCombatFactory.get_target</td>
-
-<td>111</td>
-
-<td>4</td>
-
-<td>Method could be a function</td>
 
 </tr>
 
@@ -5078,9 +5196,9 @@ web (pyherc.debug.handlers)
 
 <td>pyherc.rules.attack.factories</td>
 
-<td>MeleeCombatFactory.get_target</td>
+<td>UnarmedCombatFactory.get_target</td>
 
-<td>208</td>
+<td>113</td>
 
 <td>4</td>
 
@@ -5089,6 +5207,22 @@ web (pyherc.debug.handlers)
 </tr>
 
 <tr class="odd">
+
+<td>R</td>
+
+<td>pyherc.rules.attack.factories</td>
+
+<td>MeleeCombatFactory.get_target</td>
+
+<td>209</td>
+
+<td>4</td>
+
+<td>Method could be a function</td>
+
+</tr>
+
+<tr class="even">
 
 <td>C</td>
 
@@ -5104,7 +5238,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -5120,7 +5254,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -5136,7 +5270,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -5152,7 +5286,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -5168,7 +5302,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -5184,7 +5318,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -5200,7 +5334,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -5216,7 +5350,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -5232,7 +5366,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -5248,7 +5382,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -5264,7 +5398,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -5272,7 +5406,7 @@ web (pyherc.debug.handlers)
 
 <td>DrinkAction.is_legal</td>
 
-<td>65</td>
+<td>67</td>
 
 <td>4</td>
 
@@ -5280,7 +5414,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -5296,7 +5430,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -5312,7 +5446,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -5328,7 +5462,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -5344,7 +5478,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -5360,7 +5494,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -5376,7 +5510,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -5392,7 +5526,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -5408,7 +5542,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -5424,7 +5558,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -5440,7 +5574,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -5456,7 +5590,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -5472,7 +5606,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -5488,7 +5622,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -5504,7 +5638,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -5520,7 +5654,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -5536,7 +5670,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -5552,7 +5686,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -5568,7 +5702,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -5584,7 +5718,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -5600,86 +5734,6 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
-
-<td>C</td>
-
-<td>pyherc.test.bdd.test_poison</td>
-
-<td>TestPoison.test_poison_causes_damage</td>
-
-<td>48</td>
-
-<td>8</td>
-
-<td>Invalid name "Pete" (should match [a-z_][a-z0-9_]{2,30}$)</td>
-
-</tr>
-
-<tr class="even">
-
-<td>R</td>
-
-<td>pyherc.test.bdd.test_poison</td>
-
-<td>TestPoison.test_poison_causes_damage</td>
-
-<td>44</td>
-
-<td>4</td>
-
-<td>Method could be a function</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>C</td>
-
-<td>pyherc.test.bdd.test_poison</td>
-
-<td>TestPoison.test_character_can_die_from_poisoning</td>
-
-<td>54</td>
-
-<td>4</td>
-
-<td>Invalid name "test_character_can_die_from_poisoning" (should match [a-z_][a-z0-9_]{2,30}$)</td>
-
-</tr>
-
-<tr class="even">
-
-<td>C</td>
-
-<td>pyherc.test.bdd.test_poison</td>
-
-<td>TestPoison.test_character_can_die_from_poisoning</td>
-
-<td>58</td>
-
-<td>8</td>
-
-<td>Invalid name "Uglak" (should match [a-z_][a-z0-9_]{2,30}$)</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>R</td>
-
-<td>pyherc.test.bdd.test_poison</td>
-
-<td>TestPoison.test_character_can_die_from_poisoning</td>
-
-<td>54</td>
-
-<td>4</td>
-
-<td>Method could be a function</td>
-
-</tr>
-
 <tr class="even">
 
 <td>R</td>
@@ -5688,27 +5742,27 @@ web (pyherc.debug.handlers)
 
 <td>ActionFactoryBuilder</td>
 
-<td>35</td>
+<td>36</td>
 
 <td>0</td>
 
-<td>Too many instance attributes (10/7)</td>
+<td>Too many instance attributes (12/7)</td>
 
 </tr>
 
 <tr class="odd">
 
-<td>W</td>
+<td>C</td>
 
 <td>pyherc.test.builders.action</td>
 
-<td>ActionFactoryBuilder.build</td>
+<td>ActionFactoryBuilder.with_dying_rules</td>
 
-<td>123</td>
+<td>117</td>
 
-<td>12</td>
+<td>4</td>
 
-<td>Unused variable 'drink_factory'</td>
+<td>Missing docstring</td>
 
 </tr>
 
@@ -6050,17 +6104,17 @@ web (pyherc.debug.handlers)
 
 <tr class="odd">
 
-<td>C</td>
+<td>R</td>
 
-<td>pyherc.test.cutesy.dictionary</td>
+<td>pyherc.test.builders.rules_engine</td>
 
-<td>&#160;</td>
+<td>RulesEngineBuilder</td>
 
-<td>235</td>
+<td>27</td>
 
 <td>0</td>
 
-<td>Line too long (84/80)</td>
+<td>Too few public methods (1/2)</td>
 
 </tr>
 
@@ -6076,11 +6130,27 @@ web (pyherc.debug.handlers)
 
 <td>0</td>
 
-<td>Line too long (88/80)</td>
+<td>Line too long (84/80)</td>
 
 </tr>
 
 <tr class="odd">
+
+<td>C</td>
+
+<td>pyherc.test.cutesy.dictionary</td>
+
+<td>&#160;</td>
+
+<td>237</td>
+
+<td>0</td>
+
+<td>Line too long (88/80)</td>
+
+</tr>
+
+<tr class="even">
 
 <td>C</td>
 
@@ -6096,7 +6166,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -6112,7 +6182,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -6128,7 +6198,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -6144,7 +6214,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -6160,7 +6230,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -6176,7 +6246,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -6184,7 +6254,7 @@ web (pyherc.debug.handlers)
 
 <td>Hit.find_direction</td>
 
-<td>243</td>
+<td>244</td>
 
 <td>4</td>
 
@@ -6192,7 +6262,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -6208,7 +6278,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -6216,7 +6286,7 @@ web (pyherc.debug.handlers)
 
 <td>WieldAction</td>
 
-<td>288</td>
+<td>289</td>
 
 <td>0</td>
 
@@ -6224,7 +6294,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -6232,27 +6302,11 @@ web (pyherc.debug.handlers)
 
 <td>affect</td>
 
-<td>399</td>
+<td>400</td>
 
 <td>17</td>
 
 <td>Used * or ** magic</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>R</td>
-
-<td>pyherc.test.cutesy.dictionary</td>
-
-<td>CarryAction</td>
-
-<td>449</td>
-
-<td>0</td>
-
-<td>Too few public methods (0/2)</td>
 
 </tr>
 
@@ -6262,9 +6316,9 @@ web (pyherc.debug.handlers)
 
 <td>pyherc.test.cutesy.dictionary</td>
 
-<td>Drop</td>
+<td>CarryAction</td>
 
-<td>479</td>
+<td>450</td>
 
 <td>0</td>
 
@@ -6274,17 +6328,17 @@ web (pyherc.debug.handlers)
 
 <tr class="odd">
 
-<td>W</td>
+<td>R</td>
 
 <td>pyherc.test.cutesy.dictionary</td>
 
-<td>HasDropped._matches</td>
+<td>Drop</td>
 
-<td>559</td>
+<td>480</td>
 
-<td>8</td>
+<td>0</td>
 
-<td>Attribute 'old_time' defined outside __init__</td>
+<td>Too few public methods (0/2)</td>
 
 </tr>
 
@@ -6300,11 +6354,27 @@ web (pyherc.debug.handlers)
 
 <td>8</td>
 
-<td>Attribute 'new_time' defined outside __init__</td>
+<td>Attribute 'old_time' defined outside __init__</td>
 
 </tr>
 
 <tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.test.cutesy.dictionary</td>
+
+<td>HasDropped._matches</td>
+
+<td>561</td>
+
+<td>8</td>
+
+<td>Attribute 'new_time' defined outside __init__</td>
+
+</tr>
+
+<tr class="even">
 
 <td>R</td>
 
@@ -6320,7 +6390,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -6336,7 +6406,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -6349,6 +6419,54 @@ web (pyherc.debug.handlers)
 <td>8</td>
 
 <td>Unused variable 'count'</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>I</td>
+
+<td>pyherc.test.matchers.inventory_parameters</td>
+
+<td>&#160;</td>
+
+<td>24</td>
+
+<td>0</td>
+
+<td>Locally disabling E0611</td>
+
+</tr>
+
+<tr class="even">
+
+<td>F</td>
+
+<td>pyherc.test.matchers.inventory_parameters</td>
+
+<td>&#160;</td>
+
+<td>24</td>
+
+<td>0</td>
+
+<td>Unable to import 'mockito.matchers'</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>R</td>
+
+<td>pyherc.test.matchers.inventory_parameters</td>
+
+<td>DropActionParameterMatcher</td>
+
+<td>26</td>
+
+<td>0</td>
+
+<td>Too few public methods (1/2)</td>
 
 </tr>
 
@@ -7096,7 +7214,7 @@ web (pyherc.debug.handlers)
 
 <td>TestCreatureAdder.test_adding_to_location</td>
 
-<td>118</td>
+<td>119</td>
 
 <td>8</td>
 
@@ -7170,6 +7288,118 @@ web (pyherc.debug.handlers)
 
 <tr class="odd">
 
+<td>C</td>
+
+<td>pyherc.test.unit.test_creaturegeneration</td>
+
+<td>TestItemsInCreatureGeneration.test_creating_creature_with_item_calls_itemgenerator</td>
+
+<td>157</td>
+
+<td>4</td>
+
+<td>Invalid name "test_creating_creature_with_item_calls_itemgenerator" (should match [a-z_][a-z0-9_]{2,30}$)</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_creaturegeneration</td>
+
+<td>TestItemsInCreatureGeneration.test_creating_creature_with_item_calls_itemgenerator</td>
+
+<td>171</td>
+
+<td>8</td>
+
+<td>Unused variable 'creature'</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_creaturegeneration</td>
+
+<td>TestItemsInCreatureGeneration.setup</td>
+
+<td>133</td>
+
+<td>8</td>
+
+<td>Attribute 'model' defined outside __init__</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_creaturegeneration</td>
+
+<td>TestItemsInCreatureGeneration.setup</td>
+
+<td>134</td>
+
+<td>8</td>
+
+<td>Attribute 'rng' defined outside __init__</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_creaturegeneration</td>
+
+<td>TestItemsInCreatureGeneration.setup</td>
+
+<td>143</td>
+
+<td>8</td>
+
+<td>Attribute 'skeleton_config' defined outside __init__</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_creaturegeneration</td>
+
+<td>TestItemsInCreatureGeneration.test_creating_creature_with_item_calls_itemgenerator</td>
+
+<td>165</td>
+
+<td>8</td>
+
+<td>Attribute 'generator' defined outside __init__</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_creaturegeneration</td>
+
+<td>TestItemsInCreatureGeneration.setup</td>
+
+<td>155</td>
+
+<td>8</td>
+
+<td>Attribute 'creature_config' defined outside __init__</td>
+
+</tr>
+
+<tr class="even">
+
 <td>W</td>
 
 <td>pyherc.test.unit.test_dice</td>
@@ -7184,7 +7414,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -7200,7 +7430,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -7216,7 +7446,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -7232,7 +7462,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -7248,7 +7478,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -7264,7 +7494,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -7280,7 +7510,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -7296,7 +7526,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -7312,7 +7542,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -7328,7 +7558,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -7344,7 +7574,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -7360,7 +7590,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -7376,7 +7606,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -7392,7 +7622,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -7408,7 +7638,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -7424,7 +7654,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -7440,7 +7670,199 @@ web (pyherc.debug.handlers)
 
 </tr>
 
+<tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>&#160;</td>
+
+<td>27</td>
+
+<td>0</td>
+
+<td>Redefining built-in 'any'</td>
+
+</tr>
+
 <tr class="even">
+
+<td>R</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>TestDying</td>
+
+<td>29</td>
+
+<td>0</td>
+
+<td>Too few public methods (0/2)</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>&#160;</td>
+
+<td>25</td>
+
+<td>0</td>
+
+<td>Unused import CharacterBuilder</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>&#160;</td>
+
+<td>24</td>
+
+<td>0</td>
+
+<td>Unused import Dying</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>&#160;</td>
+
+<td>27</td>
+
+<td>0</td>
+
+<td>Unused import verify</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>&#160;</td>
+
+<td>24</td>
+
+<td>0</td>
+
+<td>Unused import InventoryParameters</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>&#160;</td>
+
+<td>27</td>
+
+<td>0</td>
+
+<td>Unused import when</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>&#160;</td>
+
+<td>25</td>
+
+<td>0</td>
+
+<td>Unused import ItemBuilder</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>&#160;</td>
+
+<td>26</td>
+
+<td>0</td>
+
+<td>Unused import DropActionParameterMatcher</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>&#160;</td>
+
+<td>24</td>
+
+<td>0</td>
+
+<td>Unused import ActionFactory</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>&#160;</td>
+
+<td>27</td>
+
+<td>0</td>
+
+<td>Unused import any</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_dying</td>
+
+<td>&#160;</td>
+
+<td>27</td>
+
+<td>0</td>
+
+<td>Unused import mock</td>
+
+</tr>
+
+<tr class="odd">
 
 <td>I</td>
 
@@ -7456,7 +7878,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -7464,7 +7886,7 @@ web (pyherc.debug.handlers)
 
 <td>&#160;</td>
 
-<td>41</td>
+<td>43</td>
 
 <td>0</td>
 
@@ -7472,22 +7894,6 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
-
-<td>C</td>
-
-<td>pyherc.test.unit.test_effects</td>
-
-<td>&#160;</td>
-
-<td>65</td>
-
-<td>0</td>
-
-<td>Line too long (82/80)</td>
-
-</tr>
-
 <tr class="odd">
 
 <td>C</td>
@@ -7496,11 +7902,11 @@ web (pyherc.debug.handlers)
 
 <td>&#160;</td>
 
-<td>140</td>
+<td>69</td>
 
 <td>0</td>
 
-<td>Line too long (82/80)</td>
+<td>Line too long (89/80)</td>
 
 </tr>
 
@@ -7512,15 +7918,223 @@ web (pyherc.debug.handlers)
 
 <td>&#160;</td>
 
-<td>176</td>
+<td>146</td>
 
 <td>0</td>
 
-<td>Line too long (82/80)</td>
+<td>Line too long (89/80)</td>
 
 </tr>
 
 <tr class="odd">
+
+<td>C</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>&#160;</td>
+
+<td>184</td>
+
+<td>0</td>
+
+<td>Line too long (89/80)</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>&#160;</td>
+
+<td>42</td>
+
+<td>0</td>
+
+<td>Redefining built-in 'any'</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>C</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>TestEffects.test_effect_triggered_while_drinking</td>
+
+<td>50</td>
+
+<td>4</td>
+
+<td>Invalid name "test_effect_triggered_while_drinking" (should match [a-z_][a-z0-9_]{2,30}$)</td>
+
+</tr>
+
+<tr class="even">
+
+<td>R</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>TestEffects.test_effect_triggered_while_drinking</td>
+
+<td>50</td>
+
+<td>4</td>
+
+<td>Method could be a function</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>C</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>TestEffects.test_effect__triggered_when_hitting_target</td>
+
+<td>80</td>
+
+<td>4</td>
+
+<td>Invalid name "test_effect__triggered_when_hitting_target" (should match [a-z_][a-z0-9_]{2,30}$)</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>TestEffects.test_effect__triggered_when_hitting_target</td>
+
+<td>112</td>
+
+<td>8</td>
+
+<td>Unused variable 'level'</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>R</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>TestEffects.test_effect__triggered_when_hitting_target</td>
+
+<td>80</td>
+
+<td>4</td>
+
+<td>Method could be a function</td>
+
+</tr>
+
+<tr class="even">
+
+<td>R</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>TestEffects.test_creating_effect</td>
+
+<td>123</td>
+
+<td>4</td>
+
+<td>Method could be a function</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>R</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>TestEffects.test_timed_effect_is_triggered</td>
+
+<td>160</td>
+
+<td>4</td>
+
+<td>Method could be a function</td>
+
+</tr>
+
+<tr class="even">
+
+<td>C</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>TestEffects.test_effect_expiration_event_is_raised</td>
+
+<td>197</td>
+
+<td>4</td>
+
+<td>Invalid name "test_effect_expiration_event_is_raised" (should match [a-z_][a-z0-9_]{2,30}$)</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>R</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>TestEffects.test_effect_expiration_event_is_raised</td>
+
+<td>197</td>
+
+<td>4</td>
+
+<td>Method could be a function</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>TestEffectsInMelee.setup</td>
+
+<td>265</td>
+
+<td>8</td>
+
+<td>Unused variable 'level'</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>C</td>
+
+<td>pyherc.test.unit.test_effects</td>
+
+<td>TestEffectsInMelee.test_effect_creation_event_is_raised</td>
+
+<td>299</td>
+
+<td>4</td>
+
+<td>Invalid name "test_effect_creation_event_is_raised" (should match [a-z_][a-z0-9_]{2,30}$)</td>
+
+</tr>
+
+<tr class="even">
 
 <td>W</td>
 
@@ -7532,55 +8146,7 @@ web (pyherc.debug.handlers)
 
 <td>0</td>
 
-<td>Redefining built-in 'any'</td>
-
-</tr>
-
-<tr class="even">
-
-<td>C</td>
-
-<td>pyherc.test.unit.test_effects</td>
-
-<td>TestEffects.test_effect_triggered_while_drinking</td>
-
-<td>48</td>
-
-<td>4</td>
-
-<td>Invalid name "test_effect_triggered_while_drinking" (should match [a-z_][a-z0-9_]{2,30}$)</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>R</td>
-
-<td>pyherc.test.unit.test_effects</td>
-
-<td>TestEffects.test_effect_triggered_while_drinking</td>
-
-<td>48</td>
-
-<td>4</td>
-
-<td>Method could be a function</td>
-
-</tr>
-
-<tr class="even">
-
-<td>C</td>
-
-<td>pyherc.test.unit.test_effects</td>
-
-<td>TestEffects.test_effect__triggered_when_hitting_target</td>
-
-<td>75</td>
-
-<td>4</td>
-
-<td>Invalid name "test_effect__triggered_when_hitting_target" (should match [a-z_][a-z0-9_]{2,30}$)</td>
+<td>Unused import Dying</td>
 
 </tr>
 
@@ -7590,129 +8156,17 @@ web (pyherc.debug.handlers)
 
 <td>pyherc.test.unit.test_effects</td>
 
-<td>TestEffects.test_effect__triggered_when_hitting_target</td>
+<td>&#160;</td>
 
-<td>107</td>
+<td>31</td>
 
-<td>8</td>
+<td>0</td>
 
-<td>Unused variable 'level'</td>
-
-</tr>
-
-<tr class="even">
-
-<td>R</td>
-
-<td>pyherc.test.unit.test_effects</td>
-
-<td>TestEffects.test_effect__triggered_when_hitting_target</td>
-
-<td>75</td>
-
-<td>4</td>
-
-<td>Method could be a function</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>R</td>
-
-<td>pyherc.test.unit.test_effects</td>
-
-<td>TestEffects.test_creating_effect</td>
-
-<td>118</td>
-
-<td>4</td>
-
-<td>Method could be a function</td>
+<td>Unused import ActionFactory</td>
 
 </tr>
 
 <tr class="even">
-
-<td>R</td>
-
-<td>pyherc.test.unit.test_effects</td>
-
-<td>TestEffects.test_timed_effect_is_triggered</td>
-
-<td>153</td>
-
-<td>4</td>
-
-<td>Method could be a function</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>C</td>
-
-<td>pyherc.test.unit.test_effects</td>
-
-<td>TestEffects.test_effect_expiration_event_is_raised</td>
-
-<td>188</td>
-
-<td>4</td>
-
-<td>Invalid name "test_effect_expiration_event_is_raised" (should match [a-z_][a-z0-9_]{2,30}$)</td>
-
-</tr>
-
-<tr class="even">
-
-<td>R</td>
-
-<td>pyherc.test.unit.test_effects</td>
-
-<td>TestEffects.test_effect_expiration_event_is_raised</td>
-
-<td>188</td>
-
-<td>4</td>
-
-<td>Method could be a function</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>W</td>
-
-<td>pyherc.test.unit.test_effects</td>
-
-<td>TestEffectsInMelee.setup</td>
-
-<td>256</td>
-
-<td>8</td>
-
-<td>Unused variable 'level'</td>
-
-</tr>
-
-<tr class="even">
-
-<td>C</td>
-
-<td>pyherc.test.unit.test_effects</td>
-
-<td>TestEffectsInMelee.test_effect_creation_event_is_raised</td>
-
-<td>290</td>
-
-<td>4</td>
-
-<td>Invalid name "test_effect_creation_event_is_raised" (should match [a-z_][a-z0-9_]{2,30}$)</td>
-
-</tr>
-
-<tr class="odd">
 
 <td>I</td>
 
@@ -7728,7 +8182,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -7744,7 +8198,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -7760,7 +8214,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -7776,7 +8230,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -7792,7 +8246,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -7808,7 +8262,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -7824,7 +8278,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -7840,7 +8294,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -7856,7 +8310,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -7872,7 +8326,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -7888,7 +8342,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -7904,7 +8358,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -7920,7 +8374,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -7936,7 +8390,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -7952,7 +8406,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -7968,7 +8422,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -7984,7 +8438,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -8000,7 +8454,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -8016,7 +8470,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -8032,7 +8486,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -8048,7 +8502,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -8056,7 +8510,7 @@ web (pyherc.debug.handlers)
 
 <td>&#160;</td>
 
-<td>124</td>
+<td>198</td>
 
 <td>0</td>
 
@@ -8064,7 +8518,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -8080,7 +8534,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -8088,7 +8542,7 @@ web (pyherc.debug.handlers)
 
 <td>TestItems.test_tags</td>
 
-<td>212</td>
+<td>96</td>
 
 <td>4</td>
 
@@ -8096,7 +8550,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -8112,7 +8566,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -8128,7 +8582,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -8144,7 +8598,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -8160,7 +8614,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -8176,7 +8630,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -8192,7 +8646,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -8208,7 +8662,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -8224,7 +8678,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -8240,7 +8694,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -8256,7 +8710,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -8272,7 +8726,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -8288,7 +8742,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -8304,7 +8758,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -8320,7 +8774,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -8336,7 +8790,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -8352,7 +8806,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -8368,7 +8822,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -8384,7 +8838,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -8400,7 +8854,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -8416,7 +8870,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -8432,7 +8886,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -8448,7 +8902,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -8464,7 +8918,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -8480,7 +8934,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -8496,7 +8950,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -8512,7 +8966,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -8528,7 +8982,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -8544,7 +8998,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -8552,7 +9006,7 @@ web (pyherc.debug.handlers)
 
 <td>TestMagic.test_damage_effect</td>
 
-<td>40</td>
+<td>41</td>
 
 <td>4</td>
 
@@ -8560,7 +9014,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -8568,7 +9022,7 @@ web (pyherc.debug.handlers)
 
 <td>TestMagic.test_healing_effect</td>
 
-<td>59</td>
+<td>60</td>
 
 <td>4</td>
 
@@ -8576,7 +9030,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -8584,7 +9038,7 @@ web (pyherc.debug.handlers)
 
 <td>TestMagic.test_healing_does_not_heal_over_max_hp</td>
 
-<td>77</td>
+<td>78</td>
 
 <td>4</td>
 
@@ -8592,7 +9046,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -8600,7 +9054,7 @@ web (pyherc.debug.handlers)
 
 <td>TestMagic.test_healing_does_not_heal_over_max_hp</td>
 
-<td>77</td>
+<td>78</td>
 
 <td>4</td>
 
@@ -8608,7 +9062,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -8624,7 +9078,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -8640,7 +9094,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -8656,7 +9110,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -8672,7 +9126,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -8688,7 +9142,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -8704,7 +9158,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -8720,7 +9174,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -8736,7 +9190,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -8752,7 +9206,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -8768,7 +9222,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -8784,7 +9238,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -8800,7 +9254,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -8816,7 +9270,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -8832,7 +9286,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -8848,7 +9302,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -8864,7 +9318,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -8880,7 +9334,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -8896,7 +9350,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -8912,7 +9366,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -8928,7 +9382,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -8944,7 +9398,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -8960,7 +9414,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -8976,7 +9430,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -8992,7 +9446,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -9008,7 +9462,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -9024,7 +9478,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -9040,7 +9494,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -9056,7 +9510,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -9072,7 +9526,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -9088,7 +9542,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -9104,7 +9558,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -9120,7 +9574,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -9136,7 +9590,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -9152,7 +9606,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -9160,7 +9614,7 @@ web (pyherc.debug.handlers)
 
 <td>TestEffectsFactory.test_creating_poison</td>
 
-<td>73</td>
+<td>71</td>
 
 <td>4</td>
 
@@ -9168,7 +9622,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -9176,7 +9630,7 @@ web (pyherc.debug.handlers)
 
 <td>TestEffectsFactory.test_creating_poison_with_paramarray</td>
 
-<td>94</td>
+<td>92</td>
 
 <td>4</td>
 
@@ -9184,7 +9638,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -9192,7 +9646,7 @@ web (pyherc.debug.handlers)
 
 <td>TestEffectsFactory.test_creating_poison_with_paramarray</td>
 
-<td>106</td>
+<td>104</td>
 
 <td>17</td>
 
@@ -9200,7 +9654,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -9208,23 +9662,7 @@ web (pyherc.debug.handlers)
 
 <td>TestEffectsFactory.test_creating_poison_with_paramarray</td>
 
-<td>94</td>
-
-<td>4</td>
-
-<td>Method could be a function</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>R</td>
-
-<td>pyherc.test.unit.test_poison</td>
-
-<td>TestCharacter.test_adding_effect</td>
-
-<td>122</td>
+<td>92</td>
 
 <td>4</td>
 
@@ -9238,9 +9676,25 @@ web (pyherc.debug.handlers)
 
 <td>pyherc.test.unit.test_poison</td>
 
+<td>TestCharacter.test_adding_effect</td>
+
+<td>120</td>
+
+<td>4</td>
+
+<td>Method could be a function</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>R</td>
+
+<td>pyherc.test.unit.test_poison</td>
+
 <td>TestCharacter</td>
 
-<td>113</td>
+<td>111</td>
 
 <td>0</td>
 
@@ -9248,7 +9702,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>I</td>
 
@@ -9264,7 +9718,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -9280,7 +9734,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -9296,7 +9750,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>C</td>
 
@@ -9312,7 +9766,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -9328,7 +9782,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -9344,7 +9798,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -9360,7 +9814,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>I</td>
 
@@ -9376,41 +9830,9 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
-
-<td>I</td>
-
-<td>pyherc.test.unit.test_potions</td>
-
-<td>&#160;</td>
-
-<td>33</td>
-
-<td>0</td>
-
-<td>Locally disabling W0401</td>
-
-</tr>
-
 <tr class="even">
 
-<td>C</td>
-
-<td>pyherc.test.unit.test_potions</td>
-
-<td>&#160;</td>
-
-<td>75</td>
-
-<td>0</td>
-
-<td>Line too long (82/80)</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>W</td>
+<td>I</td>
 
 <td>pyherc.test.unit.test_potions</td>
 
@@ -9420,23 +9842,7 @@ web (pyherc.debug.handlers)
 
 <td>0</td>
 
-<td>Redefining built-in 'any'</td>
-
-</tr>
-
-<tr class="even">
-
-<td>C</td>
-
-<td>pyherc.test.unit.test_potions</td>
-
-<td>TestPotions.test_drinking_potion_identifies_it</td>
-
-<td>109</td>
-
-<td>4</td>
-
-<td>Invalid name "test_drinking_potion_identifies_it" (should match [a-z_][a-z0-9_]{2,30}$)</td>
+<td>Locally disabling W0401</td>
 
 </tr>
 
@@ -9446,13 +9852,45 @@ web (pyherc.debug.handlers)
 
 <td>pyherc.test.unit.test_potions</td>
 
-<td>TestPotions.test_drinking_potion_empty_discards_it</td>
+<td>&#160;</td>
 
-<td>119</td>
+<td>81</td>
+
+<td>0</td>
+
+<td>Line too long (82/80)</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_potions</td>
+
+<td>&#160;</td>
+
+<td>35</td>
+
+<td>0</td>
+
+<td>Redefining built-in 'any'</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>C</td>
+
+<td>pyherc.test.unit.test_potions</td>
+
+<td>TestPotions.test_drinking_potion_identifies_it</td>
+
+<td>115</td>
 
 <td>4</td>
 
-<td>Invalid name "test_drinking_potion_empty_discards_it" (should match [a-z_][a-z0-9_]{2,30}$)</td>
+<td>Invalid name "test_drinking_potion_identifies_it" (should match [a-z_][a-z0-9_]{2,30}$)</td>
 
 </tr>
 
@@ -9462,13 +9900,45 @@ web (pyherc.debug.handlers)
 
 <td>pyherc.test.unit.test_potions</td>
 
+<td>TestPotions.test_drinking_potion_empty_discards_it</td>
+
+<td>125</td>
+
+<td>4</td>
+
+<td>Invalid name "test_drinking_potion_empty_discards_it" (should match [a-z_][a-z0-9_]{2,30}$)</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>C</td>
+
+<td>pyherc.test.unit.test_potions</td>
+
 <td>TestPotions.test_drinking_potion_does_not_discard_it</td>
 
-<td>128</td>
+<td>134</td>
 
 <td>4</td>
 
 <td>Invalid name "test_drinking_potion_does_not_discard_it" (should match [a-z_][a-z0-9_]{2,30}$)</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_potions</td>
+
+<td>&#160;</td>
+
+<td>27</td>
+
+<td>0</td>
+
+<td>Unused import Heal</td>
 
 </tr>
 
@@ -9624,11 +10094,43 @@ web (pyherc.debug.handlers)
 
 <td>&#160;</td>
 
-<td>32</td>
+<td>33</td>
 
 <td>0</td>
 
 <td>Locally disabling W0401</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_time</td>
+
+<td>&#160;</td>
+
+<td>34</td>
+
+<td>0</td>
+
+<td>Redefining built-in 'any'</td>
+
+</tr>
+
+<tr class="even">
+
+<td>W</td>
+
+<td>pyherc.test.unit.test_time</td>
+
+<td>TestTime.setup</td>
+
+<td>57</td>
+
+<td>8</td>
+
+<td>Unused variable 'rng'</td>
 
 </tr>
 
@@ -9644,7 +10146,7 @@ web (pyherc.debug.handlers)
 
 <td>8</td>
 
-<td>Unused variable 'rng'</td>
+<td>Unused variable 'model'</td>
 
 </tr>
 
@@ -9656,23 +10158,7 @@ web (pyherc.debug.handlers)
 
 <td>TestTime.setup</td>
 
-<td>53</td>
-
-<td>8</td>
-
-<td>Unused variable 'model'</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>W</td>
-
-<td>pyherc.test.unit.test_time</td>
-
-<td>TestTime.setup</td>
-
-<td>54</td>
+<td>56</td>
 
 <td>8</td>
 
@@ -9680,7 +10166,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -9688,7 +10174,7 @@ web (pyherc.debug.handlers)
 
 <td>TestEffectsAndTime.test_trigger_effect_on_time</td>
 
-<td>141</td>
+<td>147</td>
 
 <td>8</td>
 
@@ -9696,7 +10182,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>W</td>
 
@@ -9704,7 +10190,7 @@ web (pyherc.debug.handlers)
 
 <td>TestEffectsAndTime.test_tick_will_be_reset</td>
 
-<td>154</td>
+<td>163</td>
 
 <td>8</td>
 
@@ -9712,7 +10198,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -9720,7 +10206,7 @@ web (pyherc.debug.handlers)
 
 <td>TestEffectsAndTime.test_effects_duration_goes_down</td>
 
-<td>201</td>
+<td>216</td>
 
 <td>8</td>
 
@@ -9728,7 +10214,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>C</td>
 
@@ -9736,7 +10222,7 @@ web (pyherc.debug.handlers)
 
 <td>TestEffectsAndTime.test_expired_effects_are_removed</td>
 
-<td>205</td>
+<td>220</td>
 
 <td>4</td>
 
@@ -9744,7 +10230,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>W</td>
 
@@ -9752,7 +10238,7 @@ web (pyherc.debug.handlers)
 
 <td>TestEffectsAndTime.test_expired_effects_are_removed</td>
 
-<td>223</td>
+<td>240</td>
 
 <td>8</td>
 
@@ -9760,7 +10246,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -9856,6 +10342,78 @@ web (pyherc.debug.handlers)
 
 </tr>
 
+<tr class="odd">
+
+<td>R</td>
+
+<td>pyherc.test.unit.__init__</td>
+
+<td>&#160;</td>
+
+<td>1</td>
+
+<td>0</td>
+
+<td>Similar lines in 2 files
+
+==pyherc.test.builders.heal:39
+
+==pyherc.test.builders.poison:39
+
+        self.target = mock()
+
+
+
+    def with_duration(self, duration):
+
+        """
+
+        Set duration of heal
+
+
+
+        :param duration: duration
+
+        :type duration: int
+
+        """
+
+        self.duration = duration
+
+        return self
+
+
+
+    def with_frequency(self, frequency):
+
+        """
+
+        Set frequency of heal
+
+        """
+
+        self.frequency = frequency
+
+        return self
+
+
+
+    def with_tick(self, tick):
+
+        """
+
+        Set internal clock of heal
+
+        """
+
+        self.tick = tick
+
+        return self
+
+</td>
+
+</tr>
+
 <tr class="even">
 
 <td>R</td>
@@ -9922,6 +10480,60 @@ web (pyherc.debug.handlers)
 
 <td>0</td>
 
+<td>Similar lines in 4 files
+
+==pyherc.events.healing:117
+
+==pyherc.events.healing:82
+
+==pyherc.events.poison:110
+
+==pyherc.events.poison:77
+
+                                             level = target.level,
+
+                                             location = target.location,
+
+                                             affected_tiles = [])
+
+        self.target = target
+
+
+
+    def get_description(self, point_of_view):
+
+        """
+
+        Description of the event
+
+
+
+        :param point_of_view: point of view for description
+
+        :type point_of_view: Character
+
+        :returns: description of the event
+
+        :rtype: string
+
+        """
+
+        if point_of_view == self.target:</td>
+
+</tr>
+
+<tr class="even">
+
+<td>R</td>
+
+<td>pyherc.test.unit.__init__</td>
+
+<td>&#160;</td>
+
+<td>1</td>
+
+<td>0</td>
+
 <td>Similar lines in 2 files
 
 ==pyherc.test.unit.test_levelgenerator:288
@@ -9955,6 +10567,52 @@ web (pyherc.debug.handlers)
         self.rng = random.Random()
 
         self.floor_rock = 1</td>
+
+</tr>
+
+<tr class="odd">
+
+<td>R</td>
+
+<td>pyherc.test.unit.__init__</td>
+
+<td>&#160;</td>
+
+<td>1</td>
+
+<td>0</td>
+
+<td>Similar lines in 2 files
+
+==pyherc.test.builders.heal:70
+
+==pyherc.test.builders.poison:70
+
+        return self
+
+
+
+    def with_target(self, target):
+
+        """
+
+        Set target of the poison
+
+        """
+
+        self.target = target
+
+        return self
+
+
+
+    def build(self):
+
+        """
+
+        Builds poison object
+
+        """</td>
 
 </tr>
 
@@ -10054,40 +10712,6 @@ web (pyherc.debug.handlers)
 
 <td>Similar lines in 2 files
 
-==pyherc.test.unit.test_magic:81
-
-==pyherc.test.unit.test_potions:64
-
-                            .with_hit_points(1)
-
-                            .with_max_hp(5)
-
-                            .build())
-
-
-
-        effect = Heal(duration = 0,
-
-                      frequency = 0,
-
-                      tick = 0,</td>
-
-</tr>
-
-<tr class="odd">
-
-<td>R</td>
-
-<td>pyherc.test.unit.__init__</td>
-
-<td>&#160;</td>
-
-<td>1</td>
-
-<td>0</td>
-
-<td>Similar lines in 2 files
-
 ==pyherc.rules.factory:48
 
 ==pyherc.rules.public:93
@@ -10108,7 +10732,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -10124,7 +10748,7 @@ web (pyherc.debug.handlers)
 
 ==pyherc.test.unit.test_creatureadder:59
 
-==pyherc.test.unit.test_creaturegeneration:62
+==pyherc.test.unit.test_creaturegeneration:61
 
                         CreatureConfiguration(name = 'rat',
 
@@ -10140,7 +10764,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -10172,7 +10796,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -10204,7 +10828,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
@@ -10220,7 +10844,7 @@ web (pyherc.debug.handlers)
 
 ==pyherc.test.unit.test_creatureadder:71
 
-==pyherc.test.unit.test_creaturegeneration:63
+==pyherc.test.unit.test_creaturegeneration:62
 
                                               body = 4,
 
@@ -10234,7 +10858,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="even">
+<tr class="odd">
 
 <td>R</td>
 
@@ -10268,7 +10892,7 @@ web (pyherc.debug.handlers)
 
 </tr>
 
-<tr class="odd">
+<tr class="even">
 
 <td>R</td>
 
