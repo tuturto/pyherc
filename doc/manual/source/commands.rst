@@ -37,7 +37,8 @@ the same time.
 .. image:: images/inventory.png
    :alt: Picture of inventory screen
 
-Inventory can be opened by clicking the command menu or by pressing space.
+Inventory can be opened and closed by clicking the command menu or by pressing
+space.
    
 Keyboard
 ========
