@@ -219,10 +219,10 @@ class Hit(object):
         self.target.old_values = {}
         self.target.old_values['hit points'] = self.target.hit_points
 
-        if len(attacker.weapons) > 0:
-            attack_type = 'melee'
-        else:
+        if attacker.weapon == None:
             attack_type = 'unarmed'
+        else:
+            attack_type = 'melee'
 
         action_factory = (ActionFactoryBuilder()
                                     .with_move_factory()
@@ -306,7 +306,7 @@ class WieldAction(object):
         :param character: character wielding the weapon
         :type character: Character
         """
-        character.weapons.append(self.weapon)
+        character.weapon = self.weapon
         return character
 
 def wielding(weapon):

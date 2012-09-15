@@ -74,11 +74,11 @@ class TestItems(object):
         """
         item = ItemBuilder().build()
 
-        assert_that(item, is_not(is_in(self.character.weapons)))
+        assert_that(item, is_not(equal_to(self.character.weapon)))
 
         pyherc.rules.items.wield(mock(), self.character, item)
 
-        assert_that(item, is_in(self.character.weapons))
+        assert_that(item, is_(equal_to(self.character.weapon)))
 
     def test_unwielding_item(self):
         """
@@ -87,127 +87,11 @@ class TestItems(object):
         item = ItemBuilder().build()
         pyherc.rules.items.wield(mock(), self.character, item)
 
-        assert_that(item, is_in(self.character.weapons))
+        assert_that(item, is_(equal_to(self.character.weapon)))
 
         pyherc.rules.items.unwield(mock(), self.character, item)
 
-        assert_that(item, is_not(is_in(self.character.weapons)))
-
-    def test_dual_wielding(self):
-        """
-        Test that character can wield two weapons
-        """
-        item1 = (ItemBuilder()
-                        .with_name('dagger')
-                        .with_tag('light weapon')
-                        .with_damage(1)
-                        .build())
-
-        item2 = (ItemBuilder()
-                        .with_name('sickle')
-                        .with_tag('light weapon')
-                        .with_damage(2)
-                        .build())
-
-        assert_that(item1, is_not(is_in(self.character.weapons)))
-        assert_that(item2, is_not(is_in(self.character.weapons)))
-
-        pyherc.rules.items.wield(mock(), self.character, item1)
-        pyherc.rules.items.wield(mock(),
-                                 self.character,
-                                 item2,
-                                 dual_wield = True)
-
-        assert_that(item1, is_in(self.character.weapons))
-        assert_that(item2, is_in(self.character.weapons))
-
-    def test_dual_wielding_two_handed_weapons(self): #pylint: disable=C0103
-        """
-        Test that character can not dual wield two-handed weapon
-        """
-        item1 = (ItemBuilder()
-                        .with_name('longspear')
-                        .with_tag('two-handed weapon')
-                        .with_tag('weapon')
-                        .build())
-
-        item2 = (ItemBuilder()
-                        .with_name('sickle')
-                        .with_tag('light weapon')
-                        .with_tag('weapon')
-                        .build())
-
-        assert_that(item1, is_not(is_in(self.character.weapons)))
-        assert_that(item2, is_not(is_in(self.character.weapons)))
-
-        pyherc.rules.items.wield(mock(), self.character, item2)
-        pyherc.rules.items.wield(mock(), self.character,
-                                 item1,
-                                 dual_wield = True)
-
-        assert_that(item1, is_not(is_in(self.character.weapons)))
-        assert_that(item2, is_in(self.character.weapons))
-
-    def test_can_dual_wield(self):
-        """
-        Test that system can determine if two items can be dual-wielded
-        """
-        item1 = (ItemBuilder()
-                    .with_name('longspear')
-                    .with_tag('weapon')
-                    .with_damage(2)
-                    .build())
-
-        item2 = (ItemBuilder()
-                    .with_name('sickle')
-                    .with_tag('light weapon')
-                    .with_damage(1)
-                    .build())
-
-        assert(not pyherc.rules.items.can_dual_wield(
-                                                     mock(),
-                                                     self.character,
-                                                     item1,
-                                                     item2))
-
-    def test_dual_wieldable(self):
-        """
-        Test that system can determine if item is dual-wieldable
-        """
-        item1 = (ItemBuilder()
-                    .with_name('longspear')
-                    .with_tag('weapon')
-                    .with_damage(3)
-                    .build())
-
-        item2 = (ItemBuilder()
-                    .with_name('sickle')
-                    .with_tag('light weapon')
-                    .with_damage(1)
-                    .build())
-
-        assert(not pyherc.rules.items.is_dual_wieldable(
-                                                        mock(),
-                                                        self.character,
-                                                        item1))
-        assert(pyherc.rules.items.is_dual_wieldable(
-                                                    mock(),
-                                                    self.character,
-                                                    item2))
-
-    def test_dual_wieldable_apples(self):
-        """
-        Test determing if item is dual-wieldable when using mundane items
-        """
-        item = (ItemBuilder()
-                    .with_name('apple')
-                    .with_tag('food')
-                    .build())
-
-        assert(not pyherc.rules.items.is_dual_wieldable(
-                                                        mock(),
-                                                        self.character,
-                                                        item))
+        assert_that(item, is_not(equal_to(self.character.weapon)))
 
     def test_tags(self):
         """
@@ -424,7 +308,7 @@ class TestItemAdvanced():
         name = item.get_name(self.character)
         assert_that(name, is_(equal_to('club')))
 
-        self.character.weapons = [item]
+        self.character.weapon = item
         name = item.get_name(self.character, True)
         assert_that(name, is_(equal_to('club (weapon in hand)')))
 

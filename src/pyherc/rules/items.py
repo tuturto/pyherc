@@ -43,68 +43,8 @@ def wield(model, character, item, dual_wield = False):
     .. warning:: This code will be eventually replaced by action sub system
     """
 
-    if len(character.weapons) == 0:
-        #simple wield
-        character.weapons.append(item)
-    else:
-        #possible dual wield?
-        if dual_wield == True:
-            if len(character.weapons) == 1:
-                if can_dual_wield(model, character, character.weapons[0], item):
-                    character.weapons.append(item)
-
-def can_dual_wield(model, character, item1, item2):
-    """
-    Checks if character can dual-wield given items
-
-    :param model: model to use
-    :type model: Model
-    :param character: character to try dual-wielding
-    :type character: Character
-    :param item1: item to wield
-    :type item1: Item
-    :param item2: item to wield
-    :type item2: Item
-    :returns: 1 if can dual-wield, 0 otherwise
-    :rtype: integer
-
-    .. warning:: This code will be eventually replaced by action sub system
-    """
-    if (is_dual_wieldable(model, character, item1)
-            and is_dual_wieldable(model, character, item2)):
-
-        return 1
-    else:
-        return 0
-
-def is_dual_wieldable(model, character, item):
-    """
-    Checks if item is dual-wieldable for a character
-
-    :param model: model to use
-    :type model: Model
-    :param character: character to try dual-wielding
-    :type character: Character
-    :param item: item to dual wield
-    :type item: Item
-    :returns: 1 if can dual-wield, 0 otherwise
-    :rtype: integer
-
-    .. warning:: This code will be eventually replaced by action sub system
-    """
-    assert model != None
-    assert character != None
-    assert item != None
-
-    if item.weapon_data != None:
-        if (('one-handed weapon' in item.get_tags()
-            or 'light weapon' in item.get_tags())):
-            return 1
-        else:
-            return 0
-    else:
-        #mundane items can not be dual-wielded
-        return 0
+    if character.weapon == None:
+        character.weapon = item
 
 def unwield(model, character, item, instant = False):
     """
@@ -123,6 +63,7 @@ def unwield(model, character, item, instant = False):
 
     .. warning:: This code will be eventually replaced by action sub system
     """
-    character.weapons.remove(item)
+    if character.weapon == item:
+        character.weapon = None
 
     return True

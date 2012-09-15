@@ -50,9 +50,10 @@ class Dying(object):
                 character.inventory.remove(item)
                 character.level.add_item(item, character.location)
 
-            for item in character.weapons:
-                character.weapons.remove(item)
-                character.level.add_item(item, character.location)
+            if not character.weapon == None:
+                character.weapon = None
+                character.level.add_item(character.weapon,
+                                         character.location)
 
             character.raise_event(DeathEvent(deceased = character,
                                              affected_tiles = character.location))

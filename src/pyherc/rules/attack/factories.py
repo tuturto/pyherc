@@ -191,7 +191,7 @@ class MeleeCombatFactory(object):
         """
         attacker = parameters.attacker
         target = self.get_target(parameters)
-        weapon = attacker.weapons[0]
+        weapon = attacker.weapon
 
         if target != None:
             attack = AttackAction(
