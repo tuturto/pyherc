@@ -2,17 +2,6 @@
 Commands
 ########
 
-*********
-Main menu
-*********
-
-When starting the game, you are presented with a main menu. Currently only
-the new game and quit buttons are active. Select new game to start playing and
-quit to exit the game.
-
-.. image:: images/main_menu.png
-   :alt: Picture of main menu
-
 **************
 Main interface
 **************
@@ -37,3 +26,23 @@ Attacking enemies
 
 Character automatically attacks enemies if player tries to enter same location
 as the enemy is.
+
+*********
+Inventory
+*********
+
+Iventory window shows items on the ground, carried items and items in use at
+the same time.
+
+.. image:: images/inventory.png
+   :alt: Picture of inventory screen
+   
+Keyboard
+========
+If numlock has been turned on, cursor can be moved around with keypad. Key 5 is
+used to pick up and use items, while enter is used to drop them back to ground.
+
+Mouse
+=====
+Left clicking is used to pick up and use items. Right clicking an item will
+drop it.
