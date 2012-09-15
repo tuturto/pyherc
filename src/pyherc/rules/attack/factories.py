@@ -193,18 +193,15 @@ class MeleeCombatFactory(object):
         target = self.get_target(parameters)
         weapon = attacker.weapon
 
-        if target != None:
-            attack = AttackAction(
-                        attack_type = 'melee',
-                        to_hit = MeleeToHit(attacker, target,
-                                            parameters.random_number_generator),
-                        damage = MeleeDamage(weapon.weapon_data.damage),
-                        attacker = attacker,
-                        target = target,
-                        effect_factory = self.effect_factory,
-                        dying_rules = self.dying_rules)
-        else:
-            attack = None
+        attack = AttackAction(
+                    attack_type = 'melee',
+                    to_hit = MeleeToHit(attacker, target,
+                                        parameters.random_number_generator),
+                    damage = MeleeDamage(weapon.weapon_data.damage),
+                    attacker = attacker,
+                    target = target,
+                    effect_factory = self.effect_factory,
+                    dying_rules = self.dying_rules)
 
         return attack
 
@@ -240,7 +237,13 @@ class MeleeCombatFactory(object):
             target_location = (location[0] - 1, location[1])
         elif direction == 8:
             target_location = (location[0] - 1, location[1] - 1)
+        else:
+            target_location = None
 
         target = level.get_creature_at(target_location)
 
-        return target
+        if target_location != None:
+            target = level.get_creature_at(target_location)
+            return target
+        else:
+            return None
