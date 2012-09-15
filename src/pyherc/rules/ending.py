@@ -51,9 +51,9 @@ class Dying(object):
                 character.level.add_item(item, character.location)
 
             if not character.weapon == None:
-                character.weapon = None
                 character.level.add_item(character.weapon,
                                          character.location)
+                character.weapon = None
 
             character.raise_event(DeathEvent(deceased = character,
                                              affected_tiles = character.location))
