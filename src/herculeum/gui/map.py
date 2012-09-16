@@ -29,6 +29,7 @@ from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
 from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
 from PyQt4.QtCore import QEasingCurve, pyqtSignal
 from herculeum.gui.eventdisplay import EventMessageWidget
+from random import Random
 
 class PlayMapWindow(QWidget):
     """
@@ -230,7 +231,7 @@ class PlayMapWidget(QWidget):
         elif event.event_type == 'attack hit':
             damage = event.damage.damage
             self.show_damage_counter(event.target.location,
-                                     damage,
+                                     -damage,
                                      'white')
         elif event.event_type == 'poisoned':
             self.show_status_counter(event.target.location,
@@ -238,7 +239,7 @@ class PlayMapWidget(QWidget):
                                      'green')
         elif event.event_type == 'poison triggered':
             self.show_damage_counter(event.target.location,
-                                     event.damage,
+                                     -event.damage,
                                      'green')
         elif event.event_type == 'heal started':
             self.show_status_counter(event.target.location,
@@ -251,7 +252,7 @@ class PlayMapWidget(QWidget):
 
     def show_status_counter(self, location, status, colour):
         """
-        Show damage counter
+        Show status counter
         """
         damage_counter = DamageCounter(damage = str(status),
                                        colour = colour,
@@ -298,7 +299,11 @@ class PlayMapWidget(QWidget):
         bounds = damage_counter.boundingRect()
         width = bounds.width()
 
-        damage_counter.setPos(location[0] * 32 + 16 - (width / 2),
+        rand = Random()
+
+        damage_counter.setPos((location[0] * 32
+                                    + 16 - (width / 2)
+                                    + rand.randint(-16, 16)),
                               location[1] * 32)
 
         animation = QSequentialAnimationGroup()
