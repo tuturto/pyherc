@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-09-13, 06:33:59 -->
+<!-- Saved: 2012-09-17, 07:17:11 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -180,6 +180,7 @@
     <Source>pyherc/test/builders/rules_engine.py</Source>
     <Source>herculeum/gui/resources.py</Source>
     <Source>pyherc/events/healing.py</Source>
+    <Source>pyherc/data/inventory.py</Source>
   </Sources>
   <Forms>
   </Forms>

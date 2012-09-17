@@ -9,6 +9,7 @@ pyherc.data
    effects/package_effects
    module_character
    module_dungeon
+   module_inventory
    module_item
    module_level   
    module_model
