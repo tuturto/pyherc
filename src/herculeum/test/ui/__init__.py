@@ -19,8 +19,6 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for gui elements
+Package for UI tests
 """
-
-from .mainwindow import MainWindow
-from .inventory import InventoryDialog
+pass

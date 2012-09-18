@@ -45,13 +45,19 @@ class TestMainConfiguration():
         """
         Setup test case
         """
-        app = QApplication([])
+        self.app = QApplication([])
         base_path = detect_base_path()
         self.config = Configuration(base_path,
                                     mock(),
                                     herculeum.config.levels)
 
         self.config.initialise()
+
+    def teardown(self):
+        """
+        Teardown the test case
+        """
+        self.app = None
 
     def test_initialisation(self):
         """
