@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-09-17, 22:59:30 -->
+<!-- Saved: 2012-09-18, 07:55:12 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -182,6 +182,8 @@
     <Source>pyherc/events/healing.py</Source>
     <Source>pyherc/data/inventory.py</Source>
     <Source>pyherc/test/unit/test_inventory.py</Source>
+    <Source>herculeum/test/ui/__init__.py</Source>
+    <Source>herculeum/test/ui/test_inventory.py</Source>
   </Sources>
   <Forms>
   </Forms>
