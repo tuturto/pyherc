@@ -69,6 +69,21 @@ class TestInventory(object):
 
         assert_that(inventory[0], is_(equal_to(item_2)))
 
+    def test_deleting_items(self):
+        """
+        Test that item can be deleted from inventory
+        """
+        inventory = Inventory()
+        item = mock()
+
+        inventory.append(item)
+
+        assert_that(item, is_in(inventory))
+
+        del inventory[0]
+
+        assert_that(item, is_not(is_in(inventory)))
+
     def test_removing_items(self):
         """
         Test that item can be removed from inventory
@@ -80,7 +95,7 @@ class TestInventory(object):
 
         assert_that(item, is_in(inventory))
 
-        del inventory[0]
+        inventory.remove(item)
 
         assert_that(item, is_not(is_in(inventory)))
 

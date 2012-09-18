@@ -32,7 +32,7 @@ class Character(object):
     logged = Logged()
 
     @logged
-    def __init__(self, model, effects_collection):
+    def __init__(self, model, effects_collection, inventory):
         """
         Default constructor
 
@@ -40,6 +40,8 @@ class Character(object):
         :type model: Model
         :param effects_collection: collection for effects
         :type effects_collection: EffectsCollection
+        :param inventory: inventory for character
+        :type inventory: Inventory
         """
         super(Character, self).__init__()
         # attributes
@@ -53,7 +55,7 @@ class Character(object):
         self.__hit_points = None
         self.__max_hp = None
         self.speed = None
-        self.inventory = []
+        self.inventory = inventory
         self.weapon = None
         self.feats = []
         #location

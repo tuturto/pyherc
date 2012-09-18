@@ -21,7 +21,7 @@
 """
 Module for character builder
 """
-from pyherc.data import Character
+from pyherc.data import Character, Inventory
 from pyherc.data.effects import EffectsCollection
 from mockito import mock
 
@@ -54,6 +54,7 @@ class CharacterBuilder(object):
         self.effect_handles = []
         self.effects = []
         self.effects_collection = EffectsCollection()
+        self.inventory = Inventory()
         self.player_character = False
 
         self.listeners = []
@@ -237,7 +238,8 @@ class CharacterBuilder(object):
         :rtype: Character
         """
         character = Character(model = self.model,
-                              effects_collection = self.effects_collection)
+                              effects_collection = self.effects_collection,
+                              inventory = self.inventory)
 
         if self.player_character:
             self.model.player = character

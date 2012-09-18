@@ -24,7 +24,7 @@ Module for creature generation related classes
 Classes:
     CreatureGenerator
 """
-from pyherc.data import Character
+from pyherc.data import Character, Inventory
 from pyherc.data.effects import EffectHandle, EffectsCollection
 from pyherc.aspects import Logged
 
@@ -56,7 +56,8 @@ class CreatureGenerator(object):
         config = self.__get_creature_config(name)
 
         new_creature = Character(self.model,
-                                 EffectsCollection())
+                                 EffectsCollection(),
+                                 Inventory())
 
         new_creature.name = config.name
         new_creature.body = config.body

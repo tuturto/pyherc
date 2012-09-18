@@ -85,3 +85,12 @@ class Inventory(object):
         Append an item into inventory
         """
         self.__items.append(item)
+
+    def remove(self, item):
+        """
+        Remove item from inventory
+
+        :param item: item to remove
+        :type item: Item
+        """
+        self.__items.remove(item)

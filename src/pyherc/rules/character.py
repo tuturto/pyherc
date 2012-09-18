@@ -23,7 +23,7 @@ Various rules used in character generation
 """
 
 import logging
-from pyherc.data import Character, WeaponProficiency
+from pyherc.data import Character, WeaponProficiency, Inventory
 from pyherc.data.effects import EffectsCollection
 import herculeum.config.tiles
 
@@ -78,7 +78,8 @@ def create_character(race, kit, model):
     temp_kit = kit_stats[kit]
 
     new_character = Character(model,
-                              EffectsCollection())
+                              EffectsCollection(),
+                              Inventory())
     new_character.body = temp_race['body'] + temp_kit['body']
     new_character.finesse = temp_race['finesse'] + temp_kit['finesse']
     new_character.mind = temp_race['mind'] + temp_kit['mind']
