@@ -89,3 +89,23 @@ class TestInventoryDialog(object):
         QTest.mouseClick(first_item_in_ground, Qt.LeftButton)
 
         assert_that(self.level, does_have_item(item.name, 0))
+
+    def test_dropping_item(self):
+        """
+        Test that item can be dropped
+        """
+        item = ItemBuilder().build()
+
+        self.character.inventory.append(item)
+
+        dialog = InventoryDialog(surface_manager = self.surface_manager,
+                                 character = self.character,
+                                 action_factory = self.action_factory,
+                                 parent = None,
+                                 flags = Qt.Dialog)
+
+        first_item_held = dialog.inventory.items_carried.items[0]
+
+        QTest.mouseClick(first_item_held, Qt.RightButton)
+
+        assert_that(self.level, does_have_item(item.name, 1))
