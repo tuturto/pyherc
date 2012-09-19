@@ -56,7 +56,6 @@ class Character(object):
         self.__max_hp = None
         self.speed = None
         self.inventory = inventory
-        self.weapon = None
         self.feats = []
         #location
         self.level = None
@@ -382,7 +381,7 @@ class Character(object):
         :param rng: random number generator
         :type rng: Random
         """
-        if self.weapon == None:
+        if self.inventory.weapon == None:
             attack_type = 'unarmed'
         else:
             attack_type = 'melee'

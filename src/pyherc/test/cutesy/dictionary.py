@@ -219,7 +219,7 @@ class Hit(object):
         self.target.old_values = {}
         self.target.old_values['hit points'] = self.target.hit_points
 
-        if attacker.weapon == None:
+        if attacker.inventory.weapon == None:
             attack_type = 'unarmed'
         else:
             attack_type = 'melee'
@@ -306,7 +306,7 @@ class WieldAction(object):
         :param character: character wielding the weapon
         :type character: Character
         """
-        character.weapon = self.weapon
+        character.inventory.weapon = self.weapon
         return character
 
 def wielding(weapon):

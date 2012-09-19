@@ -74,11 +74,11 @@ class TestItems(object):
         """
         item = ItemBuilder().build()
 
-        assert_that(item, is_not(equal_to(self.character.weapon)))
+        assert_that(item, is_not(equal_to(self.character.inventory.weapon)))
 
         pyherc.rules.items.wield(mock(), self.character, item)
 
-        assert_that(item, is_(equal_to(self.character.weapon)))
+        assert_that(item, is_(equal_to(self.character.inventory.weapon)))
 
     def test_unwielding_item(self):
         """
@@ -87,11 +87,11 @@ class TestItems(object):
         item = ItemBuilder().build()
         pyherc.rules.items.wield(mock(), self.character, item)
 
-        assert_that(item, is_(equal_to(self.character.weapon)))
+        assert_that(item, is_(equal_to(self.character.inventory.weapon)))
 
         pyherc.rules.items.unwield(mock(), self.character, item)
 
-        assert_that(item, is_not(equal_to(self.character.weapon)))
+        assert_that(item, is_not(equal_to(self.character.inventory.weapon)))
 
     def test_tags(self):
         """
@@ -308,7 +308,7 @@ class TestItemAdvanced():
         name = item.get_name(self.character)
         assert_that(name, is_(equal_to('club')))
 
-        self.character.weapon = item
+        self.character.inventory.weapon = item
         name = item.get_name(self.character, True)
         assert_that(name, is_(equal_to('club (weapon in hand)')))
 

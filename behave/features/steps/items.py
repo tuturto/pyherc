@@ -91,4 +91,5 @@ def impl(context, character_name):
                   if x.name == character_name]
     character = characters[0]
     
-    character.weapon = dagger
+    character.inventory.append(dagger)
+    character.inventory.weapon = dagger

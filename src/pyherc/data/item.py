@@ -83,7 +83,7 @@ class Item(object):
             name = self.name
 
         if decorate == True:
-            if character.weapon == self:
+            if character.inventory.weapon == self:
                 name = name + ' (weapon in hand)'
 
         return name

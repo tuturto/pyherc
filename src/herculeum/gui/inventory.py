@@ -254,7 +254,7 @@ class CharacterInventoryWidget(QWidget):
         :param character: character to show
         :type character: Character
         """
-        self.weapon_slot.set_item(self.character.weapon)
+        self.weapon_slot.set_item(self.character.inventory.weapon)
         # for each slot
         #  does character have item there?
         #   yes-> show icon of item

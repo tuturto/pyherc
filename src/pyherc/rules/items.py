@@ -43,8 +43,8 @@ def wield(model, character, item, dual_wield = False):
     .. warning:: This code will be eventually replaced by action sub system
     """
 
-    if character.weapon == None:
-        character.weapon = item
+    if character.inventory.weapon == None:
+        character.inventory.weapon = item
 
 def unwield(model, character, item, instant = False):
     """
@@ -63,7 +63,7 @@ def unwield(model, character, item, instant = False):
 
     .. warning:: This code will be eventually replaced by action sub system
     """
-    if character.weapon == item:
-        character.weapon = None
+    if character.inventory.weapon == item:
+        character.inventory.weapon = None
 
     return True

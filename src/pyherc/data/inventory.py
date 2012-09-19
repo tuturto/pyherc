@@ -94,3 +94,17 @@ class Inventory(object):
         :type item: Item
         """
         self.__items.remove(item)
+
+    def __get_weapon(self):
+        """
+        Weapon currently in use
+        """
+        return self.__weapon
+
+    def __set_weapon(self, weapon):
+        """
+        Weapon currently in use
+        """
+        self.__weapon = weapon
+
+    weapon = property(__get_weapon, __set_weapon)
