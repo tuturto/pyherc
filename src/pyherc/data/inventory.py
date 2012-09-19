@@ -72,7 +72,8 @@ class Inventory(object):
         """
         Delete item from inventory
         """
-        self.__items.__delitem__(key)
+        item = self.__items[key]
+        self.remove(item)
 
     def __iter__(self):
         """
@@ -94,6 +95,9 @@ class Inventory(object):
         :type item: Item
         """
         self.__items.remove(item)
+
+        if item == self.weapon:
+            self.weapon = None
 
     def __get_weapon(self):
         """

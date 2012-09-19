@@ -20,6 +20,7 @@
 
 from pyherc.data import Inventory
 from hamcrest import assert_that, is_,  equal_to, is_in, not_none, is_not
+from hamcrest import none
 from mockito import mock
 
 """
@@ -111,3 +112,31 @@ class TestInventory(object):
         iterator = inventory.__iter__()
 
         assert_that(iterator, is_(not_none()))
+
+    def test_removing_weapon_in_use(self):
+        """
+        Test that weapon in use is removed when dropped
+        """
+        inventory = Inventory()
+        item = mock()
+
+        inventory.append(item)
+        inventory.weapon = item
+
+        inventory.remove(item)
+
+        assert_that(inventory.weapon, is_(none()))
+
+    def test_deleting_weapon_in_use(self):
+        """
+        Test that deleting weapon in use from inventory removes it from use
+        """
+        inventory = Inventory()
+        item = mock()
+
+        inventory.append(item)
+        inventory.weapon = item
+
+        del inventory[0]
+
+        assert_that(inventory.weapon, is_(none()))
