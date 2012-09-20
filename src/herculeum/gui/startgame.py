@@ -77,6 +77,8 @@ class StartGameWidget(QDialog):
         self.kit_selection = QComboBox(self)
         self.kit_selection.addItem('Adventurer')
         self.kit_selection.addItem('Vampire Hunter')
+        self.kit_selection.setWhatsThis('You can select your kit from here. ' +
+                            'Different kits have different weapons and powers.')
         self.kit_selection_layout.addWidget(self.kit_selection_label)
         self.kit_selection_layout.addWidget(self.kit_selection)
 
