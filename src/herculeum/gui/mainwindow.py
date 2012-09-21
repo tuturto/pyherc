@@ -87,8 +87,7 @@ class MainWindow(QMainWindow):
         toolbar = self.addToolBar('Actions')
         toolbar.addAction(inventory_action)
         toolbar.addAction(character_action)
-        toolbar.addAction(help_action)
-
+        
         self.statusBar()
 
         menubar = self.menuBar()
