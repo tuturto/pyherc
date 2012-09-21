@@ -28,7 +28,7 @@ import sys
 import logging
 import herculeum.config.levels
 
-from herculeum.gui import MainWindow
+from herculeum.gui import MainWindow, HelpProvider
 from PyQt4.QtGui import QApplication
 from PyQt4.QtCore import QFile, QLatin1String
 
@@ -47,6 +47,7 @@ class Application(object):
         self.logger = None
         self.screen = None
         self.log_level = None
+        self.help = None
 
         self.qt_app = QApplication(sys.argv)
 
@@ -77,6 +78,8 @@ class Application(object):
         self.config = Configuration(self.base_path,
                                     self.world,
                                     herculeum.config.levels)
+
+        self.help = HelpProvider(self.base_path)
         self.config.initialise()
 
     def run(self, splash_screen):

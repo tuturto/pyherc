@@ -24,3 +24,4 @@ Package for gui elements
 
 from .mainwindow import MainWindow
 from .inventory import InventoryDialog
+from .help import HelpProvider

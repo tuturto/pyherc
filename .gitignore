@@ -9,3 +9,5 @@ cover
 .coverage
 test_results.html
 nosetests.xml
+manual.qch
+herculeum.qhc

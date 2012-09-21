@@ -52,6 +52,9 @@ class MainWindow(QMainWindow):
 
         self.__set_layout()
 
+    def show_help(self):
+        self.application.help.show_help('test')
+
     def __set_layout(self):
 
         new_action = QAction(QIcon(':new-game.png'),
@@ -84,6 +87,7 @@ class MainWindow(QMainWindow):
         toolbar = self.addToolBar('Actions')
         toolbar.addAction(inventory_action)
         toolbar.addAction(character_action)
+        toolbar.addAction(help_action)
 
         self.statusBar()
 
