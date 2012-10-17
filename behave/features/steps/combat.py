@@ -45,4 +45,11 @@ def impl(context, character_name):
 
 @then(u'Attack should deal {damage_type} damage')
 def impl(context, damage_type):
-    assert False
+    observer = context.observer
+    
+    events = [x for x in context.observer.events
+              if x.event_type == 'attack hit' and
+                 hasattr(x, 'damage_type') and
+                 x.damage_type == damage_type]
+
+    assert len(events) > 0
