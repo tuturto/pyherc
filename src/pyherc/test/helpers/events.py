@@ -44,32 +44,12 @@ class Observed(Aspect):
         context = args[0]
 
         if not hasattr(context, 'observer'):
-            context.observer = Observer()
+            context.observer = EventListener()
 
             if not hasattr(context, 'model'):
                 context.model = Model()
 
             context.model.register_event_listener(context.observer)
-
-class Observer(object):
-    """
-    Class used to observe event during testing
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        super(Observer, self).__init__()
-        self.events = []
-
-    def receive_event(self, event):
-        """
-        Receive event
-
-        :param event: event to receive
-        :type event: Event
-        """
-        self.events.append(event)
 
 class EventListener(object):
     """
