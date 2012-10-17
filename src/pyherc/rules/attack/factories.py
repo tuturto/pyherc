@@ -76,11 +76,10 @@ class UnarmedCombatFactory(object):
         """
         Can this factory process these parameters
 
-        Args:
-            parameters: Parameters to check
-
-        Returns:
-            True if factory is capable of handling parameters
+        :param parameters: parameters to check
+        :type parameters: UnarmedAttackParameters
+        :returns: true if factory is capable of handling parameters
+        :rtype: boolean
         """
         return self.attack_type == parameters.attack_type
 
@@ -89,11 +88,10 @@ class UnarmedCombatFactory(object):
         """
         Create a attack action
 
-        Args:
-            parameters: Parameters used to control attack creation
-
-        Returns:
-            Action that can be executed
+        :param parameters: parameters used to control attack creation
+        :type parameters: UnarmedAttackParameters
+        :returns: action that can be executed
+        :rtype: AttackAction
         """
         attacker = parameters.attacker
         target = self.get_target(parameters)
@@ -114,11 +112,10 @@ class UnarmedCombatFactory(object):
         """
         Get target of the attack
 
-        Args:
-            parameters: UnarmedAttackParameters
-
-        Returns:
-            target character if found, otherwise None
+        :param parameters: attack parameters
+        :type parameters: UnarmedAttackParameters
+        :returns: target character if found, otherwise None
+        :rtype: Character
         """
         attacker = parameters.attacker
         location = attacker.location
@@ -173,11 +170,10 @@ class MeleeCombatFactory(object):
         """
         Can this factory process these parameters
 
-        Args:
-            parameters: Parameters to check
-
-        Returns:
-            True if factory is capable of handling parameters
+        :param parameters: parameters to check
+        :type parameters: MeleeAttackParameters
+        :returns: true if factory is capable of handling parameters
+        :rtype: boolean
         """
         return self.attack_type == parameters.attack_type
 
@@ -186,8 +182,10 @@ class MeleeCombatFactory(object):
         """
         Create a attack action
 
-        Args:
-            parameters: Parameters used to control attack creation
+        :param parameters: parameters used to control attack creation
+        :type parameters: MeleeAttackParameters
+        :returns: action that can be executed
+        :rtype: AttackAction
         """
         attacker = parameters.attacker
         target = self.get_target(parameters)
@@ -210,11 +208,10 @@ class MeleeCombatFactory(object):
         """
         Get target of the attack
 
-        Args:
-            parameters: UnarmedAttackParameters
-
-        Returns:
-            target character if found, otherwise None
+        :param parameters: parameters to control attack
+        :type parameters: MeleeAttackParameters
+        :returns: target character if found, otherwise None
+        :rtype: Character
         """
         attacker = parameters.attacker
         location = attacker.location
