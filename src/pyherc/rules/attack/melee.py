@@ -58,9 +58,10 @@ class MeleeDamage(Damage):
     """
 
     @Logged()
-    def __init__(self, damage):
+    def __init__(self, damage, damage_type):
         """
         Default constructor
         """
         self.logger = logging.getLogger('pyherc.rules.attack.unarmed.MeleeDamage')
         self.damage = damage
+        self.damage_type = damage_type

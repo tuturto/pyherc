@@ -190,12 +190,14 @@ class MeleeCombatFactory(object):
         attacker = parameters.attacker
         target = self.get_target(parameters)
         weapon = attacker.inventory.weapon
+        weapon_data = weapon.weapon_data
 
         attack = AttackAction(
                     attack_type = 'melee',
                     to_hit = MeleeToHit(attacker, target,
                                         parameters.random_number_generator),
-                    damage = MeleeDamage(weapon.weapon_data.damage),
+                    damage = MeleeDamage(damage = weapon_data.damage,
+                                         damage_type = weapon_data.damage_types[0]),
                     attacker = attacker,
                     target = target,
                     effect_factory = self.effect_factory,

@@ -106,7 +106,7 @@ class ItemGenerator(object):
                                     damage = weapon_spec.damage,
                                     critical_range = weapon_spec.critical_range,
                                     critical_damage = weapon_spec.critical_damage,
-                                    damage_type = weapon_spec.damage_types,
+                                    damage_types = weapon_spec.damage_types,
                                     weapon_type = weapon_spec.weapon_class)
 
         for spec in item_specification.effect_handles:

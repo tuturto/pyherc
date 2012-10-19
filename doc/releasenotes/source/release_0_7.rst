@@ -7,6 +7,7 @@ New features
 ************
 
  - damage is shown negative in counters
+ - weapons deal different types of damage
 
 **********
 Fixed bugs

@@ -102,7 +102,7 @@ def Dagger():
     """
     item = (ItemBuilder()
                 .with_name('dagger')
-                .with_damage(2)
+                .with_damage(2, 'piercing')
                 .build())
 
     return item

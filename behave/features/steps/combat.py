@@ -49,7 +49,7 @@ def impl(context, damage_type):
     
     events = [x for x in context.observer.events
               if x.event_type == 'attack hit' and
-                 hasattr(x, 'damage_type') and
-                 x.damage_type == damage_type]
+                 hasattr(x.damage, 'damage_type') and
+                 x.damage.damage_type == damage_type]
 
     assert len(events) > 0

@@ -65,10 +65,11 @@ class ItemBuilder(object):
         self.icon = icon
         return self
 
-    def with_damage(self, damage):
+    def with_damage(self, damage, damage_type):
         if self.weapon_data == None:
             self.weapon_data = WeaponData()
         self.weapon_data.damage = damage
+        self.weapon_data.damage_types = [damage_type]
         return self
 
     def with_tag(self, tag):

@@ -212,14 +212,14 @@ class WeaponData(object):
     """
     Class representing weapon data of items
     """
-    def __init__(self, damage = None, damage_type = None, critical_range = None,
+    def __init__(self, damage = None, damage_types = None, critical_range = None,
                  critical_damage = None, weapon_type = None):
         """
         Default constructor
 
         :param damage: amount of damage
         :type damage: integer
-        :param damage_type: type of damage
+        :param damage_types: types of damage
         :type damage_type: string
         :param critical_range: range where critical might occur
         :type critical_range: integer
@@ -230,7 +230,7 @@ class WeaponData(object):
         """
 
         self.damage = damage
-        self.damage_type = damage_type
+        self.damage_types = damage_types
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.weapon_type = weapon_type

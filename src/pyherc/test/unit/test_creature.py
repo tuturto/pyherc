@@ -80,7 +80,7 @@ class TestCreatures(object):
                         .with_tag('one-handed weapon')
                         .with_tag('melee')
                         .with_tag('simple weapon')
-                        .with_damage(2)
+                        .with_damage(2, 'bashing')
                         .with_weapon_type('simple')
                         .build())
 
