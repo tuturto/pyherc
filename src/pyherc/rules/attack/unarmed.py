@@ -25,7 +25,6 @@ Classes:
 UnarmedToHit
 UnarmedDamage
 """
-import logging
 
 from pyherc.aspects import Logged
 from pyherc.rules.attack.action import ToHit
@@ -46,7 +45,6 @@ class UnarmedToHit(ToHit):
             target: Character being attacked
             random_number_generator: Random number generator
         """
-        self.logger = logging.getLogger('pyherc.rules.attack.unarmed.UnarmedToHit')
         self.attacker = attacker
         self.target = target
         self.rng = random_number_generator
@@ -58,12 +56,11 @@ class UnarmedDamage(Damage):
     logged = Logged()
 
     @logged
-    def __init__(self, damage):
+    def __init__(self, damage, damage_type):
         """
         Default constructor
         """
-        self.logger = logging.getLogger('pyherc.rules.attack.unarmed.UnarmedDamage')
-        self.damage = damage
+        super(UnarmedDamage, self).__init__(damage, damage_type)
 
     @logged
     def apply_damage(self, target):

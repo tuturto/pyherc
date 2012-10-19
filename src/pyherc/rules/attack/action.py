@@ -23,7 +23,6 @@ Module defining classes related to AttackAction
 """
 import pyherc.rules.ending
 import random
-import logging
 from pyherc.aspects import Logged
 from pyherc.events import AttackHitEvent, AttackNothingEvent, AttackMissEvent
 
@@ -141,7 +140,6 @@ class ToHit(object):
         self.attacker = attacker
         self.target = target
         self.rng = random_number_generator
-        self.logger = logging.getLogger('pyherc.rules.attack.action.ToHit')
 
     @logged
     def is_hit(self):
@@ -167,12 +165,12 @@ class Damage(object):
     logged = Logged()
 
     @logged
-    def __init__(self, damage):
+    def __init__(self, damage, damage_type):
         """
         Default constructor
         """
-        self.logger = logging.getLogger('pyherc.rules.attack.action.Damage')
         self.damage = damage
+        self.damage_type = damage_type
 
     @logged
     def apply_damage(self, target):

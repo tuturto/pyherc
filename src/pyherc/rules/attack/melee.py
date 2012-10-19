@@ -25,7 +25,6 @@ Classes:
     MeleeToHit
     MeleeDamage
 """
-import logging
 import random
 from pyherc.aspects import Logged
 from pyherc.rules.attack.action import ToHit
@@ -47,7 +46,6 @@ class MeleeToHit(ToHit):
             target: Character being attacked
             rng: Random number generator
         """
-        self.logger = logging.getLogger('pyherc.rules.attack.melee.MeleeToHit')
         self.attacker = attacker
         self.target = target
         self.rng = random_number_generator
@@ -62,6 +60,4 @@ class MeleeDamage(Damage):
         """
         Default constructor
         """
-        self.logger = logging.getLogger('pyherc.rules.attack.unarmed.MeleeDamage')
-        self.damage = damage
-        self.damage_type = damage_type
+        super(MeleeDamage, self).__init__(damage, damage_type)

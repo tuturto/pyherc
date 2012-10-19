@@ -53,12 +53,21 @@ class AttackHitEvent(Event):
         :rtype: string
         """
         if point_of_view == self.attacker:
-            description = 'You hit {0}'.format(self.target.name)
+            description = 'You hit {0} and make {1} points of {2} damage'.format(
+                           self.target.name,
+                           self.damage.damage,
+                           self.damage.damage_type)
         elif point_of_view == self.target:
-            description = '{0} hits you'.format(self.attacker.name)
+            description = '{0} hits you and makes {1} points of {2} damage'.format(
+                            self.attacker.name,
+                            self.damage.damage,
+                            self.damage.damage_type)
         else:
-            description = '{0} hits {1}'.format(self.attacker.name,
-                                                self.target.name)
+            description = '{0} hits {1} and makes {2} points of {3} damage'.format(
+                            self.attacker.name,
+                            self.target.name,
+                            self.damage.damage,
+                            self.damage.damage_type)
 
         return description
 
