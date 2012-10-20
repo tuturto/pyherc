@@ -18,6 +18,12 @@ Feature: Combat
       When Uglak hits Pete
       Then Pete should have less hitpoints
 
+  Scenario: Suspectible against piercing damage
+     Given Pete wields dagger
+       And Uglak is suspectible against piercing
+      When Pete hits Uglak
+      Then Uglak should suffer extra damage
+
   Scenario: die in combat
       Given Uglak wields dagger
         And Uglak is almost dead

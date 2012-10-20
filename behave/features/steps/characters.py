@@ -59,3 +59,7 @@ def impl(context, character_name):
     character = characters[0]
     
     character.hit_points = 1
+
+@given(u'{character_name} is suspectible against {damage_type}')
+def impl(context, character_name, damage_type):
+    assert False
