@@ -76,11 +76,10 @@ class TestItemAdder():
                                                'simple weapon'],
                                       rarity = 'common',
                                       weapon_configration = WeaponConfiguration(
-                                            damage = 2,
+                                            damage = [(2, 'piercing'),
+                                                      (2, 'slashing')],
                                             critical_range = 11,
                                             critical_damage = 2,
-                                            damage_types = ['piercing',
-                                                            'slashing'],
                                             weapon_class = 'simple')))
 
         item_config.add_item(

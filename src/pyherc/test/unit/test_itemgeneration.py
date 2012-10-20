@@ -23,7 +23,7 @@ Tests for item generation
 """
 #pylint: disable=W0614
 from pyherc.generators import ItemGenerator
-from pyherc.test.matchers import has_effect_handle
+from pyherc.test.matchers import has_effect_handle, has_damage
 from hamcrest import * #pylint: disable=W0401
 
 from pyherc.generators import ItemConfigurations
@@ -68,11 +68,9 @@ class TestItemGeneration(object):
                                                'simple weapon'],
                                       rarity = 'common',
                                       weapon_configration = WeaponConfiguration(
-                                            damage = 2,
+                                            damage = [(2, 'piercing')],
                                             critical_range = 11,
                                             critical_damage = 2,
-                                            damage_types = ['piercing',
-                                                            'slashing'],
                                             weapon_class = 'simple')))
 
         self.item_config.add_item(
@@ -106,7 +104,7 @@ class TestItemGeneration(object):
 
         weapon_data = item.weapon_data
 
-        assert_that(weapon_data.damage, is_(equal_to(2)))
+        assert_that(item, has_damage(2, 'piercing'))
 
     def test_configuring_item_generation(self):
         """

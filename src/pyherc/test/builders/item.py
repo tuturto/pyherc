@@ -68,8 +68,7 @@ class ItemBuilder(object):
     def with_damage(self, damage, damage_type):
         if self.weapon_data == None:
             self.weapon_data = WeaponData()
-        self.weapon_data.damage = damage
-        self.weapon_data.damage_types = [damage_type]
+        self.weapon_data.damage.append((damage, damage_type))
         return self
 
     def with_tag(self, tag):

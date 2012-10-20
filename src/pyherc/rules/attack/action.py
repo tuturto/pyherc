@@ -165,12 +165,11 @@ class Damage(object):
     logged = Logged()
 
     @logged
-    def __init__(self, damage, damage_type):
+    def __init__(self, damage):
         """
         Default constructor
         """
         self.damage = damage
-        self.damage_type = damage_type
 
     @logged
     def apply_damage(self, target):
@@ -179,4 +178,5 @@ class Damage(object):
         :param target: target to damage
         :type target: Character
         """
-        target.hit_points = target.hit_points - self.damage
+        for damage in self.damage:
+            target.hit_points = target.hit_points - damage[0]

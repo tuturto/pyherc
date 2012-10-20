@@ -47,9 +47,10 @@ def impl(context, character_name):
 def impl(context, damage_type):
     observer = context.observer
     
-    events = [x for x in context.observer.events
-              if x.event_type == 'attack hit' and
-                 hasattr(x.damage, 'damage_type') and
-                 x.damage.damage_type == damage_type]
+    attack_hit_events = [x for x in context.observer.events
+                         if x.event_type == 'attack hit']
 
-    assert len(events) > 0
+    matching_events = [x for x in attack_hit_events
+                       if damage_type in [y[1] for y in x.damage.damage]]
+
+    assert len(matching_events) > 0

@@ -93,12 +93,12 @@ class UnarmedCombatFactory(object):
         """
         attacker = parameters.attacker
         target = self.get_target(parameters)
+        damage = [(attacker.get_attack(), 'crushing')]
 
         attack = AttackAction('unarmed',
                     to_hit = UnarmedToHit(attacker, target,
                                           parameters.random_number_generator),
-                    damage = UnarmedDamage(damage = attacker.get_attack(),
-                                           damage_type = 'crushing'),
+                    damage = UnarmedDamage(damage = damage),
                     attacker = attacker,
                     target = target,
                     effect_factory = self.effect_factory,
@@ -195,8 +195,7 @@ class MeleeCombatFactory(object):
                     attack_type = 'melee',
                     to_hit = MeleeToHit(attacker, target,
                                         parameters.random_number_generator),
-                    damage = MeleeDamage(damage = weapon_data.damage,
-                                         damage_type = weapon_data.damage_types[0]),
+                    damage = MeleeDamage(damage = weapon_data.damage),
                     attacker = attacker,
                     target = target,
                     effect_factory = self.effect_factory,

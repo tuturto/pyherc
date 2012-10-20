@@ -107,6 +107,18 @@ def Dagger():
 
     return item
 
+def Sword():
+    """
+    Creates a sword
+    """
+    item = (ItemBuilder()
+                .with_name('sword')
+                .with_damage(2, 'piercing')
+                .with_damage(2, 'slashing')
+                .build())
+
+    return item
+
 def Level():
     """
     Creates a level

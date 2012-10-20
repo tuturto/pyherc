@@ -102,11 +102,12 @@ class ItemGenerator(object):
 
         if not item_specification.weapon_configration is None:
             weapon_spec = item_specification.weapon_configration
+            damage = []
+            damage.extend(weapon_spec.damage)
             item.weapon_data = WeaponData(
-                                    damage = weapon_spec.damage,
+                                    damage = (damage),
                                     critical_range = weapon_spec.critical_range,
                                     critical_damage = weapon_spec.critical_damage,
-                                    damage_types = weapon_spec.damage_types,
                                     weapon_type = weapon_spec.weapon_class)
 
         for spec in item_specification.effect_handles:
@@ -232,13 +233,11 @@ class WeaponConfiguration(object):
     logged = Logged()
 
     @logged
-    def __init__(self, damage, critical_range, critical_damage, damage_types,
-                   weapon_class):
+    def __init__(self, damage, critical_range, critical_damage, weapon_class):
         """
         Default constructor
         """
         self.damage = damage
         self.critical_range = critical_range
         self.critical_damage = critical_damage
-        self.damage_types = damage_types
         self.weapon_class = weapon_class

@@ -8,6 +8,7 @@ New features
 
  - damage is shown negative in counters
  - weapons deal different types of damage
+ - split damage is supported
 
 **********
 Fixed bugs

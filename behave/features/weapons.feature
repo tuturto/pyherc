@@ -13,3 +13,9 @@ Feature: Weapons
       Given Uglak wields dagger
        When Uglak hits Pete
        Then Attack should deal piercing damage
+
+  Scenario: Split damage
+      Given Uglak wields sword
+       When Uglak hits Pete
+       Then Attack should deal piercing damage
+        And Attack should deal slashing damage

@@ -56,18 +56,8 @@ class UnarmedDamage(Damage):
     logged = Logged()
 
     @logged
-    def __init__(self, damage, damage_type):
+    def __init__(self, damage):
         """
         Default constructor
         """
-        super(UnarmedDamage, self).__init__(damage, damage_type)
-
-    @logged
-    def apply_damage(self, target):
-        """
-        Applies damage to target
-
-        Args:
-            target: Target to damage
-        """
-        target.hit_points = target.hit_points - self.damage
+        super(UnarmedDamage, self).__init__(damage)

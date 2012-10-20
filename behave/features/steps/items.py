@@ -18,7 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-from pyherc.test.cutesy import Dagger
+from pyherc.test.cutesy import Dagger, Sword
 from pyherc.test.cutesy import make, drop
 
 @given(u'{character_name} has dagger')
@@ -32,6 +32,18 @@ def impl(context, character_name):
     character = characters[0]
     
     character.inventory.append(dagger)
+
+@given(u'{character_name} has sword')
+def impl(context, character_name):
+    context.items = []
+    sword = Sword()    
+    context.items.append(sword)
+    
+    characters = [x for x in context.characters
+                  if x.name == character_name]
+    character = characters[0]
+    
+    character.inventory.append(sword)
 
 @when(u'{character_name} drops {item_name}')
 def impl(context, character_name, item_name):
@@ -93,3 +105,16 @@ def impl(context, character_name):
     
     character.inventory.append(dagger)
     character.inventory.weapon = dagger
+
+@given(u'{character_name} wields sword')
+def impl(context, character_name):
+    context.items = []
+    sword = Sword()    
+    context.items.append(sword)
+
+    characters = [x for x in context.characters
+                  if x.name == character_name]
+    character = characters[0]
+  
+    character.inventory.append(sword)
+    character.inventory.weapon = sword

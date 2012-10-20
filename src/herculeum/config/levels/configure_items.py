@@ -54,10 +54,9 @@ def init_items(context):
                                                'simple weapon'],
                                     rarity = 'common',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = 2,
+                                            damage = [(2, 'piercing')],
                                             critical_range = 11,
                                             critical_damage = 2,
-                                            damage_types = ['piercing'],
                                             weapon_class = 'simple')))
 
     config.append(
@@ -71,11 +70,10 @@ def init_items(context):
                                              'martial weapon'],
                                     rarity = 'uncommon',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = 2,
+                                            damage = [(2, 'piercing'),
+                                                      (2, 'slashing')],
                                             critical_range = 12,
                                             critical_damage = 2,
-                                            damage_types = ['piercing',
-                                                            'slashing'],
                                             weapon_class = 'martial')))
 
     config.append(
@@ -89,11 +87,10 @@ def init_items(context):
                                              'martial weapon'],
                                     rarity = 'uncommon',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = 2,
+                                            damage = [(2, 'crushing'),
+                                                      (2, 'slashing')],
                                             critical_range = 12,
                                             critical_damage = 2,
-                                            damage_types = ['crushing',
-                                                            'slashing'],
                                             weapon_class = 'martial')))
 
     config.append(
@@ -107,10 +104,9 @@ def init_items(context):
                                              'simple weapon'],
                                     rarity = 'common',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = 3,
+                                            damage = [(3, 'crushing')],
                                             critical_range = 11,
                                             critical_damage = 3,
-                                            damage_types = ['crushing'],
                                             weapon_class = 'simple')))
 
     config.append(
@@ -124,10 +120,9 @@ def init_items(context):
                                              'martial weapon'],
                                     rarity = 'rare',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = 7,
+                                            damage = [(7, 'crushing')],
                                             critical_range = 12,
                                             critical_damage = 7,
-                                            damage_types = ['crushing'],
                                             weapon_class = 'martial')))
 
     config.append(
@@ -141,10 +136,9 @@ def init_items(context):
                                              'martial weapon'],
                                     rarity = 'rare',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = 5,
+                                            damage = [(5, 'piercing')],
                                             critical_range = 11,
                                             critical_damage = 5,
-                                            damage_types = ['piercing'],
                                             weapon_class = 'martial')))
 
     config.append(
@@ -158,10 +152,9 @@ def init_items(context):
                                              'exotic weapon'],
                                     rarity = 'common',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = 3,
+                                            damage = [(3, 'slashing')],
                                             critical_range = 11,
                                             critical_damage = 3,
-                                            damage_types = ['slashing'],
                                             weapon_class = 'exotic')))
 
     config.append(
@@ -175,10 +168,9 @@ def init_items(context):
                                              'exotic weapon'],
                                     rarity = 'common',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = 3,
+                                            damage = [(3, 'slashing')],
                                             critical_range = 10,
                                             critical_damage = 3,
-                                            damage_types = ['slashing'],
                                             weapon_class = 'exotic')))
 
     config.append(
@@ -192,11 +184,10 @@ def init_items(context):
                                              'martial weapon'],
                                     rarity = 'uncommon',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = 2,
+                                            damage = [(2, 'crushing'),
+                                                      (2, 'piercing')],
                                             critical_range = 12,
                                             critical_damage = 2,
-                                            damage_types = ['crushing',
-                                                            'piercing'],
                                             weapon_class = 'martial')))
 
     config.append(

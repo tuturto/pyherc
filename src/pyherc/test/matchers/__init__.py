@@ -27,7 +27,7 @@ from .map_connectivity import located_in_room
 from .contains_creature import has_creature, is_in, is_not_in
 from .active_effects import has_effects, has_no_effects
 from .active_effects import has_effect
-from .items import does_have_item
+from .items import does_have_item, has_damage
 from .effect_collection import has_effect_handle, has_effect_handles
 from .event_listener import has_event_listener
 from .event import has_marked_for_redrawing

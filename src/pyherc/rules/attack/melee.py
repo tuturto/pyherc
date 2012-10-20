@@ -56,8 +56,8 @@ class MeleeDamage(Damage):
     """
 
     @Logged()
-    def __init__(self, damage, damage_type):
+    def __init__(self, damage):
         """
         Default constructor
         """
-        super(MeleeDamage, self).__init__(damage, damage_type)
+        super(MeleeDamage, self).__init__(damage)
