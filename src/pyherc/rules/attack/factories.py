@@ -23,7 +23,6 @@ Attack related factories are defined here
 """
 
 import types
-import logging
 from pyherc.aspects import Logged
 from pyherc.rules.attack.action import AttackAction
 from pyherc.rules.attack.unarmed import UnarmedToHit
@@ -66,7 +65,6 @@ class UnarmedCombatFactory(object):
         self.attack_type = 'unarmed'
         self.effect_factory = effect_factory
         self.dying_rules = dying_rules
-        self.logger = logging.getLogger('pyherc.rules.attack.factories.UnarmedCombatFactory')
 
     def __str__(self):
         return 'unarmed combat factory'
@@ -100,7 +98,7 @@ class UnarmedCombatFactory(object):
                     to_hit = UnarmedToHit(attacker, target,
                                           parameters.random_number_generator),
                     damage = UnarmedDamage(damage = attacker.get_attack(),
-                                           damage_type = 'bashing'),
+                                           damage_type = 'crushing'),
                     attacker = attacker,
                     target = target,
                     effect_factory = self.effect_factory,
