@@ -24,6 +24,6 @@ Known bugs
 Other notes
 ***********
 
-
+ - web.py is not required unless using debug server
 
 .. _27: https://github.com/tuturto/pyherc/issues/27

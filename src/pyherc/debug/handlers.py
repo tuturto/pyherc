@@ -23,12 +23,11 @@ Module for page handlers
 """
 import pyherc.debug.data
 from herculeum.application import APP
-from web import form
-
 web_loaded = False
 
 try:
     import web
+    from web import form
     web_loaded = True
 except ImportError:
     web_loaded = False
