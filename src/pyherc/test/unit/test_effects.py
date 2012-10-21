@@ -26,10 +26,11 @@ Module for testing effects
 from pyherc.data.effects import Heal
 from pyherc.data.effects import Poison
 from pyherc.data.effects import Effect
+from pyherc.data import Level, Model
 from pyherc.generators import EffectsFactory
 from pyherc.data.effects import EffectHandle
 from pyherc.rules.public import ActionFactory
-#from pyherc.rules.consume.factories import DrinkFactory
+
 from pyherc.events import PoisonAddedEvent, Event
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder, ActionFactoryBuilder
@@ -308,3 +309,58 @@ class TestEffectsInMelee(object):
                                      rng)
 
         verify(self.model).raise_event(any(PoisonAddedEvent))
+
+class TestEternalEffects(object):
+    """
+    Tests related to effects that do not time out
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestEternalEffects, self).__init__()
+
+    def setup(self):
+        """
+        Setup test case
+        """
+        self.effect = Effect(duration = None,
+                             frequency = None,
+                             tick = None)
+
+        self.model = Model()
+        level = Level()
+
+        self.character1 = (CharacterBuilder()
+                            .as_player_character()
+                            .with_model(self.model)
+                            .with_tick(10)
+                            .build())
+
+        self.character2 = (CharacterBuilder()
+                            .with_model(self.model)
+                            .with_tick(8)
+                            .with_effect(self.effect)
+                            .build())
+
+        level = (LevelBuilder()
+                    .with_character(self.character1, (2, 2))
+                    .with_character(self.character2, (5, 5))
+                    .build())
+
+        self.model.player = self.character1
+
+    def test_reducing_tick(self):
+        """
+        Test that effect with duration, frequency and tick None does
+        not cause null reference exception
+        """
+        self.model.get_next_creature(mock())
+
+    def test_effect_is_not_removed(self):
+        """
+        Eternal effects should not be removed due to time out
+        """
+        self.model.get_next_creature(mock())
+
+        assert_that(self.character2, has_effect(self.effect))

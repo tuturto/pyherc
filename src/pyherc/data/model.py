@@ -99,9 +99,10 @@ class Model(object):
             for creature in creatures:
                 creature.tick = creature.tick - 1
                 for effect in creature.get_effects():
-                    effect.tick = effect.tick - 1
-                    if effect.tick == 0:
-                        effect.trigger(rules_engine.dying_rules)
+                    if effect.tick != None:
+                        effect.tick = effect.tick - 1
+                        if effect.tick == 0:
+                            effect.trigger(rules_engine.dying_rules)
                 creature.remove_expired_effects()
 
 class Damage(object):

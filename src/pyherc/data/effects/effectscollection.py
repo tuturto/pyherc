@@ -126,7 +126,8 @@ class EffectsCollection(object):
         :rtype: [Effect]
         """
         return [x for x in self.effects
-                        if x.duration <= 0]
+                        if x.duration != None
+                        and x.duration <= 0]
 
     def remove_expired_effects(self):
         """
