@@ -54,3 +54,7 @@ def impl(context, damage_type):
                        if damage_type in [y[1] for y in x.damage.damage]]
 
     assert len(matching_events) > 0
+
+@then(u'Uglak should suffer extra damage')
+def impl(context):
+    assert False

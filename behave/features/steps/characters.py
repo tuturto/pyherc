@@ -62,4 +62,7 @@ def impl(context, character_name):
 
 @given(u'{character_name} is suspectible against {damage_type}')
 def impl(context, character_name, damage_type):
-    assert False
+    characters = [x for x in context.characters
+                  if x.name == character_name]
+    character = characters[0]
+

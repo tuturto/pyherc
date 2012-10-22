@@ -179,4 +179,15 @@ class Damage(object):
         :type target: Character
         """
         for damage in self.damage:
-            target.hit_points = target.hit_points - damage[0]
+            damage_type = damage[1]
+
+            matching_modifiers = [x for x in target.get_effects()
+                                  if x.effect_name == 'damage modifier'
+                                  and x.damage_type == damage_type]
+
+            total_damage = damage[0]
+
+            for modifier in matching_modifiers:
+                total_damage = total_damage + modifier.modifier
+
+            target.hit_points = target.hit_points - total_damage
