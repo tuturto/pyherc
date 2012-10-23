@@ -68,6 +68,7 @@ class TestItems(object):
 
         self.level.add_item(self.item, (5, 5))
 
+    #pylint: disable=E1103
     def test_wield_weapon(self):
         """
         Test that character can wield a weapon (dagger)
@@ -80,6 +81,7 @@ class TestItems(object):
 
         assert_that(item, is_(equal_to(self.character.inventory.weapon)))
 
+    #pylint: disable=E1103
     def test_unwielding_item(self):
         """
         Test that wielded item can be unwielded
