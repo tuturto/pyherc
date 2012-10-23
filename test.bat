@@ -8,3 +8,4 @@ cd behave
 behave --junit
 cd ..
 python xunit.py
+python run_pylint.py

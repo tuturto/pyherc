@@ -62,7 +62,7 @@ def write_test_suite(xunit_file_name, caption, report_file_name):
     write_summary(report_file_name, caption, top_element)
     write_results(report_file_name, top_element)
 
-f = open('test_results.html', 'w')
+f = open('doc/test_results.html', 'w')
 write_header(f)
 f.write('<table border="0">\n')
 
