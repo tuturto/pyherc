@@ -46,6 +46,7 @@ class TestDamageModifiers(object):
         self.character1 = None
         self.character2 = None
         self.action_factory = None
+        self.rng = None
 
     def setup(self):
         """
@@ -69,6 +70,7 @@ class TestDamageModifiers(object):
                                      duration = None,
                                      frequency = None,
                                      tick = None)
+        self.effect.multiple_allowed = True
 
         self.character2 = (CharacterBuilder()
                                 .with_model(self.model)
@@ -86,16 +88,16 @@ class TestDamageModifiers(object):
 
         self.model.dungeon.levels = self.level
 
+        self.rng = mock()
+        when(self.rng).randint(1, 6).thenReturn(1)
+
     def test_damage_is_increased(self):
         """
         Test that suffered damage can be modified
         """
-        rng = mock()
-        when(rng).randint(1, 6).thenReturn(1)
-
         self.character1.perform_attack(3,
                                        self.action_factory,
-                                       rng)
+                                       self.rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(6)))
 
@@ -104,13 +106,29 @@ class TestDamageModifiers(object):
         Test that suffered damage is not modified when modifier does not
         match with the damage
         """
-        rng = mock()
-        when(rng).randint(1, 6).thenReturn(1)
-
         self.effect.damage_type = 'slashing'
 
         self.character1.perform_attack(3,
                                        self.action_factory,
-                                       rng)
+                                       self.rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(7)))
+
+    def test_multiple_modifiers_are_handled(self):
+        """
+        Test that multiple modifier are taken into account and not skipped
+        """
+        print self.character2.get_effects()
+        effect_2 = DamageModifier(modifier = 3,
+                                  damage_type = 'crushing',
+                                  duration = None,
+                                  frequency = None,
+                                  tick = None)
+        effect_2.multiple_allowed = True
+        self.character2.add_effect(effect_2)
+
+        self.character1.perform_attack(3,
+                                       self.action_factory,
+                                       self.rng)
+
+        assert_that(self.character2.hit_points, is_(equal_to(3)))

@@ -310,6 +310,87 @@ class TestEffectsInMelee(object):
 
         verify(self.model).raise_event(any(PoisonAddedEvent))
 
+class TestEffectHandling(object):
+    """
+    Test for adding effects
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestEffectHandling, self).__init__()
+
+        self.character = None
+
+    def setup(self):
+        """
+        Setup test case
+        """
+        self.character = CharacterBuilder().build()
+
+    def test_add_effect(self):
+        """
+        Adding a single effect should be possible
+        """
+        effect = EffectBuilder().build()
+
+        self.character.add_effect(effect)
+
+        assert_that(self.character, has_effect(effect))
+
+    def test_add_multiple_effects(self):
+        """
+        It should be possible to add multiple effects of different type
+        """
+        effect_1 = (EffectBuilder()
+                        .with_effect_name('spell')
+                        .build())
+        effect_2 = (EffectBuilder()
+                        .with_effect_name('curse')
+                        .build())
+
+        self.character.add_effect(effect_1)
+        self.character.add_effect(effect_2)
+
+        assert_that(self.character, has_effect(effect_1))
+        assert_that(self.character, has_effect(effect_2))
+
+    def test_add_multiple_effects_of_same_type(self):
+        """
+        Adding multiple effects of same type should not be possible
+        """
+        effect_1 = (EffectBuilder()
+                        .with_effect_name('spell')
+                        .build())
+        effect_2 = (EffectBuilder()
+                        .with_effect_name('spell')
+                        .build())
+
+        self.character.add_effect(effect_1)
+        self.character.add_effect(effect_2)
+
+        assert_that(self.character, has_effect(effect_1))
+        assert_that(self.character, is_not(has_effect(effect_2)))
+
+    def test_add_multiple_effects_of_same_type_when_allowed(self):
+        """
+        In special cases, adding multiple effects of same type is allowed
+        """
+        effect_1 = (EffectBuilder()
+                        .with_effect_name('spell')
+                        .with_multiple_allowed()
+                        .build())
+        effect_2 = (EffectBuilder()
+                        .with_effect_name('spell')
+                        .with_multiple_allowed()
+                        .build())
+
+        self.character.add_effect(effect_1)
+        self.character.add_effect(effect_2)
+
+        assert_that(self.character, has_effect(effect_1))
+        assert_that(self.character, has_effect(effect_2))
+
 class TestEternalEffects(object):
     """
     Tests related to effects that do not time out

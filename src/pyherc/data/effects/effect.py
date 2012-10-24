@@ -46,6 +46,7 @@ class Effect(object):
         self.frequency = frequency
         self.tick = tick
         self.effect_name = 'effect'
+        self.multiple_allowed = False
 
     @logged
     def trigger(self, dying_rules):

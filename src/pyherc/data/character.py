@@ -508,7 +508,11 @@ class Character(object):
         .. note: Multiples of same type of effect are not added
         .. versionadded:: 0.4
         """
-        if not self.__effects_collection.has_effect(effect):
+        if effect.multiple_allowed == False:
+            if not self.__effects_collection.has_effect(effect):
+                self.__effects_collection.add_effect(effect)
+                self.raise_event(effect.get_add_event())
+        else:
             self.__effects_collection.add_effect(effect)
             self.raise_event(effect.get_add_event())
 
