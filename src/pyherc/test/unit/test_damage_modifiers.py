@@ -64,18 +64,18 @@ class TestDamageModifiers(object):
                                 .with_body(5)
                                 .build())
 
-        effect = DamageModifier(modifier = 1,
-                                damage_type = 'crushing',
-                                duration = None,
-                                frequency = None,
-                                tick = None)
+        self.effect = DamageModifier(modifier = 1,
+                                     damage_type = 'crushing',
+                                     duration = None,
+                                     frequency = None,
+                                     tick = None)
 
         self.character2 = (CharacterBuilder()
                                 .with_model(self.model)
                                 .with_hit_points(10)
                                 .with_attack(3)
                                 .with_body(5)
-                                .with_effect(effect)
+                                .with_effect(self.effect)
                                 .build())
 
         self.model.dungeon = Dungeon()
@@ -98,3 +98,19 @@ class TestDamageModifiers(object):
                                        rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(6)))
+
+    def test_non_matching_damage_increase_is_not_done(self):
+        """
+        Test that suffered damage is not modified when modifier does not
+        match with the damage
+        """
+        rng = mock()
+        when(rng).randint(1, 6).thenReturn(1)
+
+        self.effect.damage_type = 'slashing'
+
+        self.character1.perform_attack(3,
+                                       self.action_factory,
+                                       rng)
+
+        assert_that(self.character2.hit_points, is_(equal_to(7)))
