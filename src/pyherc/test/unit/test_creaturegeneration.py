@@ -21,10 +21,10 @@
 """
 Tests for creature generation
 """
-#pylint: disable=W0614
+#pylint: disable=W0614, W0401, C0103
 from pyherc.generators import CreatureGenerator
 from pyherc.test.matchers import has_effect_handle
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import *
 from mockito import mock, verify
 
 from pyherc.generators import CreatureConfigurations
@@ -126,6 +126,11 @@ class TestItemsInCreatureGeneration(object):
         """
         super(TestItemsInCreatureGeneration, self).__init__()
 
+        self.model = None
+        self.rng = None
+        self.skeleton_config = None
+        self.creature_config = None
+
     def setup(self):
         """
         Setup testcases
@@ -168,7 +173,7 @@ class TestItemsInCreatureGeneration(object):
                                     item_generator = item_generator,
                                     rng = self.rng)
 
-        creature = self.generator.generate_creature(name = 'skeleton warrior')
+        self.generator.generate_creature(name = 'skeleton warrior')
 
         verify(item_generator).generate_item(name = 'dagger')
 

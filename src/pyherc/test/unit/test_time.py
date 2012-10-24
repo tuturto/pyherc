@@ -21,7 +21,7 @@
 """
 Module for testing time related functions
 """
-#pylint: disable=W0614
+#pylint: disable=W0614, C0103
 from pyherc.data.model import Model
 from pyherc.data import Dungeon
 from pyherc.data import Level
@@ -52,10 +52,6 @@ class TestTime:
         """
         Setup the test case
         """
-        model = mock()
-        action_factory = mock()
-        rng = mock()
-
         self.creature1 = (CharacterBuilder()
                             .with_tick(5)
                             .with_speed(1)
@@ -144,7 +140,7 @@ class TestEffectsAndTime:
         effect.tick = 5
         self.creature.add_effect(effect)
 
-        next_creature = self.model.get_next_creature(self.rules_engine)
+        self.model.get_next_creature(self.rules_engine)
 
         verify(effect).trigger(any())
 
@@ -160,7 +156,7 @@ class TestEffectsAndTime:
 
         self.creature.add_effect(effect)
 
-        next_creature = self.model.get_next_creature(self.rules_engine)
+        self.model.get_next_creature(self.rules_engine)
         effect = self.creature.get_effects()[0]
 
         assert_that(effect.tick, is_(equal_to(5)))
@@ -213,7 +209,7 @@ class TestEffectsAndTime:
 
         self.creature.add_effect(effect)
 
-        next_creature = self.model.get_next_creature(self.rules_engine)
+        self.model.get_next_creature(self.rules_engine)
 
         assert_that(effect.duration, is_(equal_to(45)))
 
@@ -237,6 +233,6 @@ class TestEffectsAndTime:
 
         creature.add_effect(effect)
 
-        next_creature = self.model.get_next_creature(self.rules_engine)
+        self.model.get_next_creature(self.rules_engine)
 
         assert_that(creature.get_effects(), is_not(has_item(effect)))

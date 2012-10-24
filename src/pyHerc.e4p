@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-10-21, 22:13:45 -->
+<!-- Saved: 2012-10-24, 21:40:23 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -173,7 +173,6 @@
     <Source>pyherc/test/bdd/test_inventory.py</Source>
     <Source>pyherc/test/unit/test_drop_actions.py</Source>
     <Source>pyherc/rules/engine.py</Source>
-    <Source>pyherc/test/unit/test_dying.py</Source>
     <Source>pyherc/test/matchers/inventory_parameters.py</Source>
     <Source>pyherc/test/builders/poison.py</Source>
     <Source>pyherc/test/builders/heal.py</Source>

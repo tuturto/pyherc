@@ -21,7 +21,8 @@
 """
 Module for testing customer matchers
 """
-#pylint: disable=W0614
+#pylint: disable=W0614, W0212, C0103
+
 from pyherc.data import Level
 from pyherc.test.matchers.map_connectivity import MapConnectivity
 from pyherc.data.effects import EffectHandle, EffectsCollection

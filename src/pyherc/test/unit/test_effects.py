@@ -22,14 +22,13 @@
 Module for testing effects
 """
 
-#pylint: disable=W0614
+#pylint: disable=W0614, C0103
 from pyherc.data.effects import Heal
 from pyherc.data.effects import Poison
 from pyherc.data.effects import Effect
 from pyherc.data import Level, Model
 from pyherc.generators import EffectsFactory
 from pyherc.data.effects import EffectHandle
-from pyherc.rules.public import ActionFactory
 
 from pyherc.events import PoisonAddedEvent, Event
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
@@ -38,7 +37,6 @@ from pyherc.test.builders import DrinkFactoryBuilder
 from pyherc.test.builders import EffectBuilder
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.matchers import has_effect, has_effects, has_no_effects
-from pyherc.rules import Dying
 
 from mockito import mock, when, any, verify
 from hamcrest import * #pylint: disable=W0401
@@ -400,6 +398,11 @@ class TestEternalEffects(object):
         Default constructor
         """
         super(TestEternalEffects, self).__init__()
+
+        self.model = None
+        self.character1 = None
+        self.effect = None
+        self.character2 = None
 
     def setup(self):
         """
