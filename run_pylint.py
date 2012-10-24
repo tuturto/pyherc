@@ -68,4 +68,6 @@ else:
     if result & 16 == 16:
         print 'Some conventions are violated'
 
+os.chdir('..')
+        
 sys.exit(result)

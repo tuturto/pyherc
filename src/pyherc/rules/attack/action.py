@@ -185,9 +185,8 @@ class Damage(object):
                                   if x.effect_name == 'damage modifier'
                                   and x.damage_type == damage_type]
 
-            total_damage = damage[0]
-
-            for modifier in matching_modifiers:
-                total_damage = total_damage + modifier.modifier
+            total_damage = reduce(lambda x, y: x+y.modifier,
+                                  matching_modifiers,
+                                  damage[0])
 
             target.hit_points = target.hit_points - total_damage
