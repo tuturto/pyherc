@@ -118,7 +118,6 @@ class TestDamageModifiers(object):
         """
         Test that multiple modifier are taken into account and not skipped
         """
-        print self.character2.get_effects()
         effect_2 = DamageModifier(modifier = 3,
                                   damage_type = 'crushing',
                                   duration = None,

@@ -169,7 +169,7 @@ class Damage(object):
         """
         Default constructor
         """
-        self.damage = damage
+        self.__damage = damage
 
     @logged
     def apply_damage(self, target):
@@ -178,7 +178,7 @@ class Damage(object):
         :param target: target to damage
         :type target: Character
         """
-        for damage in self.damage:
+        for damage in self.__damage:
             damage_type = damage[1]
 
             matching_modifiers = [x for x in target.get_effects()
@@ -190,3 +190,26 @@ class Damage(object):
                                   damage[0])
 
             target.hit_points = target.hit_points - total_damage
+
+    def __get_damage(self):
+        """
+        Total damage caused
+
+        :returns: total damage caused
+        :rtype: int
+        """
+        return reduce(lambda x, y: x+y,
+                      [dmg[0] for dmg in self.__damage])
+
+    def __get_damage_types(self):
+        """
+        Types of damage caused
+
+        :return: types of damage caused
+        :rtype: [string]
+        """
+        return [x[1] for x
+                in self.__damage]
+
+    damage = property(__get_damage)
+    damage_types = property(__get_damage_types)

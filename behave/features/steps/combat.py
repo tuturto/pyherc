@@ -51,10 +51,29 @@ def impl(context, damage_type):
                          if x.event_type == 'attack hit']
 
     matching_events = [x for x in attack_hit_events
-                       if damage_type in [y[1] for y in x.damage.damage]]
+                       if damage_type in x.damage.damage_types]
 
     assert len(matching_events) > 0
 
-@then(u'Uglak should suffer extra damage')
-def impl(context):
-    assert False
+@then(u'{character_name} should suffer extra damage')
+def impl(context, character_name):
+    characters = [x for x in context.characters
+                  if x.name == character_name]
+    character = characters[0]
+    
+    old_hit_points = character.old_values['hit points']
+    new_hit_points = character.hit_points
+    total_damage_suffered = old_hit_points - new_hit_points
+    
+    attack_hit_events = [x for x in context.observer.events
+                         if x.event_type == 'attack hit']
+    matching_events = [x for x in attack_hit_events
+                       if x.target.name == character_name]
+    hit_event = matching_events[0]
+    attacker = hit_event.attacker
+    
+    total_damage_from_weapon = reduce(lambda x, y: x+y[0],
+                                      attacker.inventory.weapon.weapon_data.damage,
+                                      0)
+    
+    assert(total_damage_suffered > total_damage_from_weapon)

@@ -230,8 +230,6 @@ class PlayMapWidget(QWidget):
             self.add_glyph(event.item, self.scene, 2)
         elif event.event_type == 'attack hit':
             damage = event.damage.damage
-            damage = reduce(lambda x, y: x+y,
-                            [dmg[0] for dmg in damage])
             self.show_damage_counter(event.target.location,
                                      -damage,
                                      'white')

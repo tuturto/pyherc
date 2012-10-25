@@ -18,6 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+from pyherc.data.effects import DamageModifier
 from pyherc.test.cutesy import Adventurer, Goblin
 from pyherc.test.matchers import is_dead, is_not_in
 from pyherc.test.helpers import Observed
@@ -66,3 +67,9 @@ def impl(context, character_name, damage_type):
                   if x.name == character_name]
     character = characters[0]
 
+    modifier = DamageModifier(modifier = 2,
+                              damage_type = damage_type,
+                              duration = None,
+                              frequency = None,
+                              tick = None)
+    character.add_effect(modifier)
