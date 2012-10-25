@@ -87,7 +87,7 @@ def create_character(race, kit, model):
     new_character.max_hp = new_character.hit_points
     new_character.speed = temp_race['speed'] + temp_kit['speed']
     new_character.size = 'medium'
-    new_character.attack = 3
+    new_character.attack = 1
 
     new_character.feats.append(WeaponProficiency('simple'))
     new_character.icon = herculeum.config.tiles.HUMAN_FIGHTER
