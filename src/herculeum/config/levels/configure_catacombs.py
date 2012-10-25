@@ -54,6 +54,7 @@ from herculeum.config.tiles import CREATURE_SKELETON_WARRIOR
 from pyherc.config.dsl import LevelConfiguration
 from pyherc.generators import CreatureConfiguration
 from pyherc.ai import FlockingHerbivore
+from pyherc.data.effects import DamageModifier
 
 def init_level(rng, item_generator, creature_generator, level_size):
     """
@@ -196,6 +197,27 @@ def init_creatures(context):
                                                 max_amount = 1,
                                                 probability = 50)]
 
+    skeleton_effects = [DamageModifier(modifier = 2,
+                                       damage_type = 'crushing',
+                                       duration = None,
+                                       frequency = None,
+                                       tick = None),
+                        DamageModifier(modifier = 2,
+                                       damage_type = 'holy',
+                                       duration = None,
+                                       frequency = None,
+                                       tick = None),
+                        DamageModifier(modifier = -2,
+                                       damage_type = 'piercing',
+                                       duration = None,
+                                       frequency = None,
+                                       tick = None),
+                        DamageModifier(modifier = 2,
+                                       damage_type = 'poison',
+                                       duration = None,
+                                       frequency = None,
+                                       tick = None)]
+
     config.append(CreatureConfiguration(name = 'skeleton warrior',
                                         body = 8,
                                         finesse = 11,
@@ -205,6 +227,7 @@ def init_creatures(context):
                                         icons = surface_manager.add_icon('skeleton warrior', 'blade-bite.png'),
                                         attack = 2,
                                         ai = FlockingHerbivore,
-                                        inventory = skeleton_inventory))
+                                        inventory = skeleton_inventory,
+                                        effects = skeleton_effects))
 
     return config

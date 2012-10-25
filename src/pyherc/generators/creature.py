@@ -76,6 +76,12 @@ class CreatureGenerator(object):
 
             new_creature.add_effect_handle(new_handle)
 
+        for spec in config.effects:
+            #TODO: temporary hack for techday demo
+            new_effect = spec.clone()
+            new_creature.add_effect(new_effect)
+
+
         for spec in config.inventory:
             new_creature.inventory.append(
                                 self.item_generator.generate_item(
@@ -139,7 +145,8 @@ class CreatureConfiguration(object):
     """
 
     def __init__(self, name, body, finesse, mind, hp, speed, icons, attack,
-                 ai = None, effect_handles = None, inventory = None):
+                 ai = None, effect_handles = None, effects = None,
+                 inventory = None):
         """
         Default constructor
         """
@@ -157,6 +164,11 @@ class CreatureConfiguration(object):
             self.effect_handles = []
         else:
             self.effect_handles = effect_handles
+
+        if effects == None:
+            self.effects = []
+        else:
+            self.effects = effects
 
         if inventory == None:
             self.inventory = []

@@ -23,7 +23,7 @@ Module for testing damage modification rules
 """
 from pyherc.data import Model,  Dungeon
 from pyherc.test.builders import ActionFactoryBuilder
-from pyherc.test.builders import CharacterBuilder, LevelBuilder
+from pyherc.test.builders import CharacterBuilder, LevelBuilder, ItemBuilder
 from pyherc.data.effects import DamageModifier
 
 from pyherc.test.cutesy import at_
@@ -131,3 +131,20 @@ class TestDamageModifiers(object):
                                        self.rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(3)))
+
+    def test_melee_combat_is_handled(self):
+        """
+        Damage modifiers should be handled in melee combat too
+        """
+        weapon = (ItemBuilder()
+                        .with_name('hammer')
+                        .with_damage(2, 'crushing')
+                        .build())
+
+        self.character1.inventory.weapon = weapon
+
+        self.character1.perform_attack(3,
+                                       self.action_factory,
+                                       self.rng)
+
+        assert_that(self.character2.hit_points, is_(equal_to(7)))

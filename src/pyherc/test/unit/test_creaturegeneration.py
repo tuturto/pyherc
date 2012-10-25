@@ -23,14 +23,14 @@ Tests for creature generation
 """
 #pylint: disable=W0614, W0401, C0103
 from pyherc.generators import CreatureGenerator
-from pyherc.test.matchers import has_effect_handle
+from pyherc.test.matchers import has_effect_handle, has_effect
 from hamcrest import *
 from mockito import mock, verify
 
 from pyherc.generators import CreatureConfigurations
 from pyherc.generators import CreatureConfiguration
 from pyherc.generators import InventoryConfiguration
-from pyherc.data.effects import EffectHandle
+from pyherc.data.effects import EffectHandle, DamageModifier
 from pyherc.ai import FlockingHerbivore
 from random import Random
 
@@ -85,6 +85,22 @@ class TestCreatureGeneration(object):
                                                     parameters = None,
                                                     charges = 100)]))
 
+        self.creature_config.add_creature(
+                  CreatureConfiguration(name = 'skeleton warrior',
+                                        body = 8,
+                                        finesse = 11,
+                                        mind = 0,
+                                        hp = 8,
+                                        speed = 2.5,
+                                        icons = [110],
+                                        attack = 2,
+                                        ai = FlockingHerbivore,
+                                        effects = [DamageModifier(modifier = 2,
+                                                                  damage_type = 'crushing',
+                                                                  duration = None,
+                                                                  frequency = None,
+                                                                  tick = None)]))
+
         self.generator = CreatureGenerator(configuration = self.creature_config,
                                            model = self.model,
                                            rng = self.rng,
@@ -99,13 +115,21 @@ class TestCreatureGeneration(object):
 
         assert_that(creature.name, is_(equal_to('rat')))
 
-    def test_creating_creature_with_effect(self):
+    def test_creating_creature_with_effect_handle(self):
         """
-        Test that creature with effect can be created
+        Test that creature with effect handle can be created
         """
         creature = self.generator.generate_creature(name = 'spider')
 
         assert_that(creature, has_effect_handle())
+
+    def test_creating_creature_with_effect(self):
+        """
+        Test that creature with effect can be created
+        """
+        creature = self.generator.generate_creature(name = 'skeleton warrior')
+
+        assert_that(creature, has_effect())
 
     def test_creating_creature_with_ai(self):
         """

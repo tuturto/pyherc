@@ -185,11 +185,14 @@ class Damage(object):
                                   if x.effect_name == 'damage modifier'
                                   and x.damage_type == damage_type]
 
-            total_damage = reduce(lambda x, y: x+y.modifier,
-                                  matching_modifiers,
-                                  damage[0])
+            #TODO: temporary hack for tech day
+            self.total_damage = reduce(lambda x, y: x+y.modifier,
+                                       matching_modifiers,
+                                       damage[0])
+            if self.total_damage< 1:
+                self.total_damage = 1
 
-            target.hit_points = target.hit_points - total_damage
+            target.hit_points = target.hit_points - self.total_damage
 
     def __get_damage(self):
         """

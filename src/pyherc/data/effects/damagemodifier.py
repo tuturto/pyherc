@@ -41,3 +41,12 @@ class DamageModifier(Effect):
         self.modifier = modifier
         self.damage_type = damage_type
         self.effect_name = 'damage modifier'
+        self.multiple_allowed = True
+
+    def clone(self):
+        """
+        Temporary hack for tech day
+        """
+        return DamageModifier(self.modifier, self.damage_type,
+                              self.duration, self.frequency,
+                              self.tick)
