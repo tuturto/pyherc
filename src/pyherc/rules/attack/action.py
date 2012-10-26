@@ -170,6 +170,7 @@ class Damage(object):
         Default constructor
         """
         self.__damage = damage
+        self.damage_inflicted = 0
 
     @logged
     def apply_damage(self, target):
@@ -186,13 +187,13 @@ class Damage(object):
                                   and x.damage_type == damage_type]
 
             #TODO: temporary hack for tech day
-            self.total_damage = reduce(lambda x, y: x+y.modifier,
-                                       matching_modifiers,
-                                       damage[0])
-            if self.total_damage< 1:
-                self.total_damage = 1
+            self.damage_inflicted = reduce(lambda x, y: x+y.modifier,
+                                           matching_modifiers,
+                                           damage[0])
+            if self.damage_inflicted< 1:
+                self.damage_inflicted = 1
 
-            target.hit_points = target.hit_points - self.total_damage
+            target.hit_points = target.hit_points - self.damage_inflicted
 
     def __get_damage(self):
         """
