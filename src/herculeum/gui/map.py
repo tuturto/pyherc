@@ -383,12 +383,13 @@ class PlayMapWidget(QWidget):
             elif key_code == Qt.Key_Space:
                 self.MenuRequested.emit()
 
-        next_creature = self.model.get_next_creature(self.rules_engine)
-        while next_creature != player:
-            next_creature.act(model = self.model,
-                              action_factory = self.action_factory,
-                              rng = self.rng)
+        if player.level != None:
             next_creature = self.model.get_next_creature(self.rules_engine)
+            while next_creature != player and next_creature != None:
+                next_creature.act(model = self.model,
+                                  action_factory = self.action_factory,
+                                  rng = self.rng)
+                next_creature = self.model.get_next_creature(self.rules_engine)
 
 class DamageCounter(QGraphicsSimpleTextItem):
     """
