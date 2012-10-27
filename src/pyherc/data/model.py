@@ -86,6 +86,10 @@ class Model(object):
         :rtype: Character
         """
         level = self.player.level
+
+        if level == None:
+            return None
+
         creatures = level.creatures
 
         assert len(creatures) != 0

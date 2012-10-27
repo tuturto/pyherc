@@ -33,6 +33,7 @@ from herculeum.gui.startgame import StartGameWidget
 from herculeum.gui.map import PlayMapWindow
 from herculeum.gui.eventdisplay import EventMessageDockWidget
 from herculeum.gui.inventory import InventoryDialog
+from herculeum.gui.widgets import DockingHitPointsWidget
 from herculeum.config import tiles
 
 class MainWindow(QMainWindow):
@@ -85,9 +86,10 @@ class MainWindow(QMainWindow):
         character_action.setStatusTip('Show character')
 
         toolbar = self.addToolBar('Actions')
+        self.addToolBar(Qt.LeftToolBarArea, toolbar)
         toolbar.addAction(inventory_action)
         toolbar.addAction(character_action)
-        
+
         self.statusBar()
 
         menubar = self.menuBar()
@@ -106,6 +108,10 @@ class MainWindow(QMainWindow):
                                         rng = self.application.rng,
                                         rules_engine = self.application.rules_engine)
         self.setCentralWidget(self.map_window)
+
+
+        self.hit_points_dock = DockingHitPointsWidget(self)
+        self.addDockWidget(Qt.TopDockWidgetArea, self.hit_points_dock)
 
         self.connect(new_action,
                      SIGNAL("triggered()"),
@@ -129,8 +135,10 @@ class MainWindow(QMainWindow):
         result = start_dialog.exec_()
 
         if result == QDialog.Accepted:
-            self.application.world.player = start_dialog.player_character
-
+            player = start_dialog.player_character
+            self.application.world.player = player
+            player.register_for_updates(self.hit_points_dock)
+            self.hit_points_dock.show_hit_points(player)
             level_generator = self.application.level_generator_factory.get_generator('upper catacombs')
 
             generator = pyherc.generators.dungeon.DungeonGenerator(

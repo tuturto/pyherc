@@ -15,6 +15,10 @@ QPushButton {
     padding: 0;
 }
 
+QLabel#no_border {
+    border: 0px
+}
+
 QLabel#active_inventorybox {
      border: 2px solid white;
      border-radius: 4px;

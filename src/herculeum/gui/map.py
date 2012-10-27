@@ -384,7 +384,7 @@ class PlayMapWidget(QWidget):
                 self.MenuRequested.emit()
 
         next_creature = self.model.get_next_creature(self.rules_engine)
-        while next_creature != player:
+        while next_creature != player and next_creature != None:
             next_creature.act(model = self.model,
                               action_factory = self.action_factory,
                               rng = self.rng)

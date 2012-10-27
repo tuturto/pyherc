@@ -39,5 +39,6 @@ class HitPointsChangedEvent(Event):
                                 location = character.location,
                                 affected_tiles = [])
 
+        self.character = character
         self.old_hit_points = old_hit_points
         self.new_hit_points = new_hit_points
