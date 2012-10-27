@@ -27,6 +27,7 @@ from pyherc.test.cutesy import make, drop
 from pyherc.test.cutesy import has_dropped
 from hamcrest import assert_that
 
+#pylint: disable=C0103
 class TestDroppingItems(object):
     """
     Tests for dropping items

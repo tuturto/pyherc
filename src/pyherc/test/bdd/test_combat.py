@@ -33,10 +33,17 @@ from pyherc.test.cutesy.dictionary import wielding, Dagger
 from hamcrest import assert_that
 from pyherc.test.cutesy.dictionary import has_less_hit_points
 
-class TestCombatBehaviour():
+#pylint: disable=C0103
+class TestCombatBehaviour(object):
     """
     Combat related behaviour
     """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestCombatBehaviour, self).__init__()
+
     def test_hitting_reduces_hit_points(self):
         """
         Getting hit should reduce hit points

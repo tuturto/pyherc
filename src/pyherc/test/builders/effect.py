@@ -38,18 +38,41 @@ class EffectHandleBuilder(object):
         self.charges = 1
 
     def with_trigger(self, trigger):
+        """
+        Configure effect handle to use specified trigger
+
+        :param trigger: trigger to use
+        :type trigger: string
+        """
         self.trigger = trigger
         return self
 
     def with_effect(self, effect):
+        """
+        Configure effect handle to use specified effect
+
+        :param effect: effect to create
+        :type effect: Effect
+        """
         self.effect = effect
         return self
 
     def with_parameters(self, parameters):
+        """
+        Configure effect handle with given parameters
+
+        :param parameters: parameters to use when creating an effect
+        """
         self.parameters = parameters
         return self
 
     def with_charges(self, charges):
+        """
+        Set amount of charges effect handle has
+
+        :param charges: amount of charges
+        :type charges: int
+        """
         self.charges = charges
         return self
 
@@ -80,30 +103,62 @@ class EffectBuilder(object):
         self.multiple_allowed = False
 
     def with_duration(self, duration):
+        """
+        Set duration of the effect
+
+        :param duration: duration in ticks
+        :type duration: int
+        """
         self.duration = duration
         return self
 
     def with_frequency(self, frequency):
+        """
+        Set frequency effect triggers
+
+        :param frequency: frequency in ticks
+        :type frequency: int
+        """
         self.frequency = frequency
         return self
 
     def with_tick(self, tick):
+        """
+        Set internal clock of the effect
+
+        :param tick: internal clock in ticks
+        :type tick: int
+        """
         self.tick = tick
         return self
 
     def with_effect_name(self, effect_name):
+        """
+        Set name of the effect
+
+        :param effect_name: name to use
+        :type effect_name: string
+        """
         self.effect_name = effect_name
         return self
 
     def with_multiple_allowed(self):
+        """
+        Mark the effect to allow multiple instances
+        """
         self.multiple_allowed = True
         return self
 
     def build(self):
+        """
+        Build the effect
+
+        :returns: fully configured effect
+        :rtype: Effect
+        """
         effect = Effect(duration = self.duration,
                         frequency = self.frequency,
                         tick = self.tick)
         effect.effect_name = self.effect_name
         effect.multiple_allowed = self.multiple_allowed
         return effect
-

@@ -115,6 +115,9 @@ class ActionFactoryBuilder(object):
         return self
 
     def with_dying_rules(self):
+        """
+        Configure action factory to use dying rules
+        """
         self.use_real_dying_rules = True
         return self
 
