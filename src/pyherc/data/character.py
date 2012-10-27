@@ -24,6 +24,7 @@ Module for Character related classes
 from pyherc.aspects import Logged
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 from pyherc.rules import InventoryParameters
+from pyherc.events import HitPointsChangedEvent
 
 class Character(object):
     """
@@ -167,6 +168,11 @@ class Character(object):
         """
         Current hitpoints
         """
+        self.raise_event(
+            HitPointsChangedEvent(character = self,
+                                  old_hit_points = self.__hit_points,
+                                  new_hit_points = hit_points))
+
         self.__hit_points = hit_points
 
     def __get_body(self):

@@ -25,7 +25,7 @@ Module for testing poison related rules
 from pyherc.data.effects import Poison
 from pyherc.generators import EffectsFactory
 from pyherc.test.builders import CharacterBuilder, PoisonBuilder
-from pyherc.test.matchers import has_effect
+from pyherc.test.matchers import has_effect, EventType
 from mockito import mock, verify, any
 from hamcrest import * #pylint: disable=W0401
 
@@ -56,7 +56,7 @@ class TestPoison():
 
         poison.trigger(mock())
 
-        verify(model).raise_event(any())
+        verify(model).raise_event(EventType('poison triggered'))
 
 class TestEffectsFactory():
     """

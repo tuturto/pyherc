@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-10-25, 07:41:35 -->
+<!-- Saved: 2012-10-27, 09:32:52 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -103,7 +103,6 @@
     <Source>pyherc/test/unit/test_combat.py</Source>
     <Source>pyherc/test/unit/test_connection.py</Source>
     <Source>pyherc/test/unit/test_corridor.py</Source>
-    <Source>pyherc/test/unit/test_creature.py</Source>
     <Source>pyherc/test/unit/test_creatureadder.py</Source>
     <Source>pyherc/test/unit/test_dice.py</Source>
     <Source>pyherc/test/unit/test_dungeon.py</Source>
@@ -187,6 +186,10 @@
     <Source>pyherc/test/unit/test_damage_modifiers.py</Source>
     <Source>pyherc/data/effects/damagemodifier.py</Source>
     <Source>pyherc/test/unit/test_damage.py</Source>
+    <Source>herculeum/gui/widgets.py</Source>
+    <Source>pyherc/test/unit/test_character.py</Source>
+    <Source>pyherc/events/hitpoints.py</Source>
+    <Source>pyherc/test/matchers/event_parameters.py</Source>
   </Sources>
   <Forms>
   </Forms>

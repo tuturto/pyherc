@@ -81,7 +81,7 @@ class Effect(object):
         :returns: event describing adding of this effect
         :rtype: Event
         """
-        return Event(event_type = 'empty event',
+        return Event(event_type = 'add event',
                      level = None,
                      location = None,
                      affected_tiles = [])
@@ -94,7 +94,7 @@ class Effect(object):
         :return: event describing removal of this event
         :rtype: Event
         """
-        return Event(event_type = 'empty event',
+        return Event(event_type = 'remove event',
                      level = None,
                      location = None,
                      affected_tiles = [])

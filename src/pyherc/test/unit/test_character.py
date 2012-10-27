@@ -19,7 +19,7 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for testing creatures
+Module for testing characters
 """
 #pylint: disable=W0614
 from pyherc.data import Model
@@ -29,6 +29,7 @@ from pyherc.test.builders import ItemBuilder
 from pyherc.test.builders import LevelBuilder
 from pyherc.data.dungeon import Dungeon
 from pyherc.rules.moving import deactivate
+from pyherc.test.matchers import EventType
 from hamcrest import * #pylint: disable=W0401
 from pyherc.events import MoveEvent
 from mockito import mock, any, verify
@@ -39,6 +40,20 @@ class TestCharacter(object):
     """
     def __init__(self):
         super(TestCharacter, self).__init__()
+
+    def test_event_is_raised_for_hp_change(self):
+        """
+        Event should be raised when hit points change
+        """
+        listener = mock()
+
+        character = (CharacterBuilder()
+                        .with_update_listener(listener)
+                        .build())
+
+        character.hit_points = 20
+
+        verify(listener).receive_update(EventType('hit points changed'))
 
     def test_raising_event(self):
         """
@@ -56,7 +71,7 @@ class TestCharacter(object):
         character.raise_event(MoveEvent(mover = character,
                                         affected_tiles = []))
 
-        verify(model).raise_event(any())
+        verify(model).raise_event(EventType('move'))
 
 class TestCreatures(object):
     """

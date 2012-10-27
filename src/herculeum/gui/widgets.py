@@ -17,28 +17,43 @@
 #
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
-#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for testing character creation
+Module for small widgets
 """
-#pylint: disable=W0614
-import pyherc.rules.character
-from hamcrest import * #pylint: disable=W0401
-from mockito import mock
 
-class TestCharacterCreation(object):
-    """
-    Tests for character creation
-    """
-    def test_creation(self):
-        """
-        Test that simple character creation works
-        """
-        pyherc.rules.character.initialise_stat_tables()
-        character = pyherc.rules.character.create_character(
-                                        race = 'human',
-                                        kit = 'fighter',
-                                        model = mock())
+from PyQt4.QtGui import QWidget, QLCDNumber, QHBoxLayout
 
-        assert_that(character, is_(not_none()))
+class HitPointsWidget(QWidget):
+    """
+    Widget to show hitpoints
+    """
+    def __init__(self, parent):
+        """
+        Default constructor
+
+        :param parent: parent of this widget
+        :type parent: QWidget
+        """
+        super(HitPointsWidget, self).__init__(parent)
+
+        self.__counter = None
+        self.__set_layout()
+
+    def __set_layout(self):
+        """
+        Set layout of this widget
+        """
+        layout = QHBoxLayout()
+
+        self.counter = QLCDNumber()
+        layout.addWidget(self.counter)
+
+        self.setLayout(layout)
+
+    def receive_update(self, event):
+        """
+        Receive update from entity
+        """
+        print event
+        #self.counter.text =

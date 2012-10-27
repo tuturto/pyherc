@@ -13,3 +13,4 @@ herculeum.gui
    module_map
    module_startgame
    module_surfacemanager
+   module_widgets

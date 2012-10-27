@@ -19,18 +19,25 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for customer pyHamcrest matchers used in testing
+Events for hit points
 """
+from pyherc.events.event import Event
 
-from .map_connectivity import is_fully_accessible_via
-from .map_connectivity import located_in_room
-from .contains_creature import has_creature, is_in, is_not_in
-from .active_effects import has_effects, has_no_effects
-from .active_effects import has_effect
-from .items import does_have_item, has_damage
-from .effect_collection import has_effect_handle, has_effect_handles
-from .event_listener import has_event_listener
-from .event import has_marked_for_redrawing
-from .character import is_dead
-from .inventory_parameters import DropActionParameterMatcher
-from .event_parameters import EventType
+class HitPointsChangedEvent(Event):
+    """
+    Event to raise when hit points change
+
+    .. versionadded:: 0.7
+    """
+    def __init__(self, character, old_hit_points, new_hit_points):
+        """
+        Default constructor
+        """
+        super(HitPointsChangedEvent, self).__init__(
+                                event_type = 'hit points changed',
+                                level = character.level,
+                                location = character.location,
+                                affected_tiles = [])
+
+        self.old_hit_points = old_hit_points
+        self.new_hit_points = new_hit_points

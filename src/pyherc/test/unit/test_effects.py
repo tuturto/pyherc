@@ -37,6 +37,7 @@ from pyherc.test.builders import DrinkFactoryBuilder
 from pyherc.test.builders import EffectBuilder
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.matchers import has_effect, has_effects, has_no_effects
+from pyherc.test.matchers import EventType
 
 from mockito import mock, when, any, verify
 from hamcrest import * #pylint: disable=W0401
@@ -209,7 +210,7 @@ class TestEffects(object):
 
         character.remove_expired_effects()
 
-        verify(model, times = 2).raise_event(any(Event))
+        verify(model).raise_event(EventType('remove event'))
 
 class TestEffectsInMelee(object):
     """

@@ -58,6 +58,7 @@ class CharacterBuilder(object):
         self.player_character = False
 
         self.listeners = []
+        self.update_listeners = []
 
     def as_player_character(self):
         """
@@ -214,6 +215,18 @@ class CharacterBuilder(object):
         self.listeners.append(listener)
         return self
 
+    def with_update_listener(self, listener):
+        """
+        Register update listener to listen this character
+
+        :param listener: listener
+        :type listener: listner
+
+        .. note:: Can be called multiple times
+        """
+        self.update_listeners.append(listener)
+        return self
+
     def with_item(self, item):
         """
         Add item into characters inventory
@@ -269,5 +282,8 @@ class CharacterBuilder(object):
 
         for listener in self.listeners:
             character.register_event_listener(listener)
+
+        for listener in self.update_listeners:
+            character.register_for_updates(listener)
 
         return character
