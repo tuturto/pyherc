@@ -9,6 +9,9 @@ New features
  - damage is shown negative in counters
  - weapons deal different types of damage
  - split damage is supported
+ - 30_ showing hit points of player
+ - 29_ being weak against damage
+ - 28_ damage resistance
 
 **********
 Fixed bugs
@@ -35,6 +38,9 @@ Other notes
 
  - web.py is not required unless using debug server
 
+.. _30: https://github.com/tuturto/pyherc/issues/30
+.. _29: https://github.com/tuturto/pyherc/issues/29
+.. _28: https://github.com/tuturto/pyherc/issues/28
 .. _27: https://github.com/tuturto/pyherc/issues/27
 .. _26: https://github.com/tuturto/pyherc/issues/26
 .. _25: https://github.com/tuturto/pyherc/issues/25
