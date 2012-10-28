@@ -12,6 +12,7 @@ herculeum.gui
    module_inventory
    module_mainwindow
    module_map
+   module_menu
    module_startgame
    module_surfacemanager
    module_widgets
