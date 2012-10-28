@@ -19,7 +19,7 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for displaying inventory
+Module for displaying character
 """
 from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QDockWidget, QGridLayout, QDrag, QDialog
@@ -32,20 +32,72 @@ import pyherc.rules.items
 
 from pyherc.data import Item
 
-class InventoryDialog(QDialog):
+class CharacterWidget(QWidget):
     """
-    Dialog to show inventory
+    Widget to show character
 
     .. versionadded:: 0.7
     """
-    def __init__(self, surface_manager, character, action_factory, parent,
-                 flags):
+    def __init__(self, surface_manager, character, parent):
         """
         Default constructor
         """
-        super(InventoryDialog, self).__init__(parent, flags)
+        super(CharacterWidget, self).__init__(parent)
 
         self.__set_layout(surface_manager,
-                          character,
-                          action_factory,
-                          parent)
+                          character)
+
+    def __set_layout(self, surface_manager, character):
+        """
+        Set layout of this widget
+        """
+        main_layout = QHBoxLayout()
+        left_layout = QVBoxLayout()
+        right_layout = QVBoxLayout()
+
+        left_top_layout = QHBoxLayout()
+        left_bottom_layout = QVBoxLayout()
+
+        icon_layout = QVBoxLayout()
+        stat_layout = QVBoxLayout()
+
+        self.body = QLabel()
+        self.body.setText('Body: {0}'.format(character.body))
+        self.mind = QLabel()
+        self.mind.setText('Mind: {0}'.format(character.mind))
+        self.finesse = QLabel()
+        self.finesse.setText('Finesse: {0}'.format(character.finesse))
+        self.hp = QLabel()
+        self.hp.setText('Hit points: {0}/{1}'.format(character.hit_points,
+                                                     character.max_hp))
+        self.mana = QLabel()
+        self.mana.setText('Mana: 0/0')
+
+        stat_layout.addWidget(self.body)
+        stat_layout.addWidget(self.mind)
+        stat_layout.addWidget(self.finesse)
+        stat_layout.addWidget(self.hp)
+        stat_layout.addWidget(self.mana)
+
+        self.character_icon = QSvgWidget(':strong.svg')
+        self.character_icon.setMaximumSize(150, 150)
+        self.character_icon.setMinimumSize(150, 150)
+        icon_layout.addWidget(self.character_icon)
+
+        skills = QLabel()
+        skills.setText('Skills')
+
+        right_layout.addWidget(skills)
+
+        effects = QLabel()
+        effects.setText('Effects')
+        left_bottom_layout.addWidget(effects)
+
+        left_top_layout.addLayout(icon_layout)
+        left_top_layout.addLayout(stat_layout)
+        left_layout.addLayout(left_top_layout)
+        left_layout.addLayout(left_bottom_layout)
+        main_layout.addLayout(left_layout)
+        main_layout.addLayout(right_layout)
+
+        self.setLayout(main_layout)

@@ -32,7 +32,7 @@ import pyherc.rules.character
 from herculeum.gui.startgame import StartGameWidget
 from herculeum.gui.map import PlayMapWindow
 from herculeum.gui.eventdisplay import EventMessageDockWidget
-from herculeum.gui.inventory import InventoryDialog
+from herculeum.gui.menu import MenuDialog
 from herculeum.gui.widgets import DockingHitPointsWidget
 from herculeum.config import tiles
 
@@ -77,7 +77,7 @@ class MainWindow(QMainWindow):
                                          self)
         inventory_action.setShortcut('Ctrl+I')
         inventory_action.setStatusTip('Show inventory')
-        inventory_action.triggered.connect(self.__show_inventory)
+        inventory_action.triggered.connect(self.__show_menu)
 
         character_action = QAction(QIcon(':character.png'),
                                          'Character',
@@ -117,7 +117,7 @@ class MainWindow(QMainWindow):
                      SIGNAL("triggered()"),
                      self.__show_new_game)
 
-        self.map_window.MenuRequested.connect(self.__show_inventory)
+        self.map_window.MenuRequested.connect(self.__show_menu)
 
         self.setGeometry(50, 50, 800, 600)
         self.setWindowTitle('Herculeum')
@@ -171,13 +171,13 @@ class MainWindow(QMainWindow):
                            messages_display)
 
 
-    def __show_inventory(self):
+    def __show_menu(self):
         """
-        Show inventory
+        Show menu
         """
-        inventory_dialog = InventoryDialog(self.surface_manager,
-                                           self.application.world.player,
-                                           self.application.action_factory,
-                                           self,
-                                           Qt.Dialog)
-        inventory_dialog.exec_()
+        menu_dialog = MenuDialog(self.surface_manager,
+                                 self.application.world.player,
+                                 self.application.action_factory,
+                                 self,
+                                 Qt.Dialog)
+        menu_dialog.exec_()
