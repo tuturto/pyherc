@@ -6,6 +6,7 @@ herculeum.gui
 .. toctree::
    :maxdepth: 2
    
+   module_character
    module_eventdisplay
    module_images
    module_inventory
