@@ -193,6 +193,10 @@ def init_creatures(context):
                                         ai = FlockingHerbivore))
 
     skeleton_inventory = [InventoryConfiguration(item_name = 'dagger',
+                                                min_amount = 1,
+                                                max_amount = 1,
+                                                probability = 100),
+                          InventoryConfiguration(item_name = 'sword',
                                                 min_amount = 0,
                                                 max_amount = 1,
                                                 probability = 50)]

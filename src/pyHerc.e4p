@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-10-27, 09:32:52 -->
+<!-- Saved: 2012-10-27, 13:02:26 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -190,6 +190,7 @@
     <Source>pyherc/test/unit/test_character.py</Source>
     <Source>pyherc/events/hitpoints.py</Source>
     <Source>pyherc/test/matchers/event_parameters.py</Source>
+    <Source>pyherc/ai/skeleton.py</Source>
   </Sources>
   <Forms>
   </Forms>

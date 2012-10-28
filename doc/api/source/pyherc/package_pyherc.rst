@@ -7,7 +7,7 @@ pyherc
    :maxdepth: 2
    
    module_aspects   
-   ai/module_ai
+   ai/package_ai
    config/package_config   
    data/package_data
    debug/module_debug
