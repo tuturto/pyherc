@@ -30,7 +30,7 @@ import herculeum.config.levels
 
 from herculeum.gui import MainWindow, HelpProvider
 from PyQt4.QtGui import QApplication
-from PyQt4.QtCore import QFile, QLatin1String
+from PyQt4.QtCore import QFile, QLatin1String, Qt
 
 class Application(object):
     """
@@ -87,7 +87,9 @@ class Application(object):
         Starts the application
         """
         main_window = MainWindow(APP,
-                                 APP.surface_manager)
+                                 APP.surface_manager,
+                                 None,
+                                 Qt.FramelessWindowHint)
         splash_screen.finish(main_window)
 
         sys.exit(self.qt_app.exec_())

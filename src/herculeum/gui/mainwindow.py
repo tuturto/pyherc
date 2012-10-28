@@ -42,11 +42,11 @@ class MainWindow(QMainWindow):
 
     .. versionadded:: 0.5
     """
-    def __init__(self, application, surface_manager):
+    def __init__(self, application, surface_manager, parent, flags):
         """
         Default constructor
         """
-        super(MainWindow, self).__init__()
+        super(MainWindow, self).__init__(parent, flags)
 
         self.application = application
         self.surface_manager = surface_manager
@@ -122,7 +122,7 @@ class MainWindow(QMainWindow):
         self.setGeometry(50, 50, 800, 600)
         self.setWindowTitle('Herculeum')
         self.setWindowIcon(QIcon(':rune-stone.png'))
-        self.show()
+        self.showMaximized()
 
     def __show_new_game(self):
         """
@@ -130,7 +130,8 @@ class MainWindow(QMainWindow):
         """
         start_dialog = StartGameWidget(parent = self,
                                        application = self.application,
-                                       surface_manager = self.surface_manager)
+                                       surface_manager = self.surface_manager,
+                                       flags = Qt.Dialog | Qt.CustomizeWindowHint)
 
         result = start_dialog.exec_()
 
@@ -179,5 +180,5 @@ class MainWindow(QMainWindow):
                                  self.application.world.player,
                                  self.application.action_factory,
                                  self,
-                                 Qt.Dialog)
+                                 Qt.Dialog | Qt.CustomizeWindowHint)
         menu_dialog.exec_()

@@ -35,11 +35,11 @@ class StartGameWidget(QDialog):
     .. versionadded:: 0.5
     """
 
-    def __init__(self,  parent, application, surface_manager):
+    def __init__(self,  parent, application, surface_manager, flags):
         """
         Default constructor
         """
-        super(StartGameWidget, self).__init__(parent)
+        super(StartGameWidget, self).__init__(parent, flags)
 
         self.application = application
         self.surface_manager = surface_manager
