@@ -80,5 +80,7 @@ class MenuDialog(QDialog):
             current_tab = self.tabs.currentIndex()
             if current_tab > 0:
                 self.tabs.setCurrentIndex(current_tab - 1)
+        elif event.key() == Qt.Key_Space:
+            self.done(0)
         else:
             super(MenuDialog, self).keyPressEvent(event)
