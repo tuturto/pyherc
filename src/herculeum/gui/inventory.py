@@ -457,6 +457,12 @@ class InventoryWidget(QWidget):
         if item.get_main_type() == 'potion':
             self.character.drink(item, self.action_factory)
         elif item.get_main_type() == 'weapon':
+            if self.character.inventory.weapon != None:
+                pyherc.rules.items.unwield(None,
+                                           self.character,
+                                           self.character.inventory.weapon,
+                                           False)
+
             pyherc.rules.items.wield(None,
                                      self.character,
                                      item,
