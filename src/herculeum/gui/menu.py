@@ -24,6 +24,7 @@ Module for displaying menu
 from herculeum.gui.inventory import InventoryWidget
 from herculeum.gui.character import CharacterWidget
 from PyQt4.QtGui import QDialog, QTabWidget, QVBoxLayout
+from PyQt4.QtCore import Qt
 
 class MenuDialog(QDialog):
     """
@@ -65,4 +66,19 @@ class MenuDialog(QDialog):
         layout.addWidget(self.tabs)
 
         self.setLayout(layout)
-        # self.inventory.items_carried.items[0].setFocus()
+        self.inventory.items_carried.items[0].setFocus()
+
+    def keyPressEvent(self, event):
+        """
+        Handle keyboard events
+        """
+        if event.key() == (Qt.Key_PageUp):
+            current_tab = self.tabs.currentIndex()
+            if current_tab < self.tabs.count():
+                self.tabs.setCurrentIndex(current_tab + 1)
+        elif event.key() == (Qt.Key_PageDown):
+            current_tab = self.tabs.currentIndex()
+            if current_tab > 0:
+                self.tabs.setCurrentIndex(current_tab - 1)
+        else:
+            super(MenuDialog, self).keyPressEvent(event)
