@@ -380,6 +380,13 @@ class PlayMapWidget(QWidget):
                     player.perform_attack(direction,
                                           self.action_factory,
                                           self.rng)
+                elif direction == 9:
+                    level = player.level
+                    items = level.get_items_at(player.location)
+
+                    if items != None and len(items) == 1:
+                        player.pick_up(items[0],
+                                       self.action_factory)
             elif key_code == Qt.Key_Space:
                 self.MenuRequested.emit()
 
