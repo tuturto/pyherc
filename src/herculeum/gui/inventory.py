@@ -66,36 +66,6 @@ class InventoryDialog(QDialog):
         self.setLayout(layout)
         self.inventory.items_carried.items[0].setFocus()
 
-    def focusNextPrevChild(self, next):
-        if len([x for x in self.inventory.items_carried.items
-                if x.display.objectName() == 'active_inventorybox']) > 0:
-            focused = self.inventory.items_carried
-        elif len([x for x in self.inventory.items_in_ground.items
-                  if x.display.objectName() == 'active_inventorybox']) > 0:
-            focused = self.inventory.items_in_ground.items
-        else:
-            focused = self.inventory.character_inventory
-
-        if focused == self.inventory.character_inventory:
-            if next == True:
-                self.inventory.items_carried.focus_on_first_row(0)
-            else:
-                self.inventory.items_in_ground.focus_on_bottom_row(0)
-        elif focused == self.inventory.items_carried:
-            if next == True:
-                index = self.inventory.items_carried.get_current_column()
-                self.inventory.items_in_ground.focus_on_first_row(index)
-            else:
-                self.inventory.character_inventory.focus_on_last_item()
-        else:
-            if next == True:
-                self.inventory.character_inventory.focus_on_first_item()
-            else:
-                index = self.inventory.items_in_ground.get_current_column()
-                self.inventory.items_carried.focus_on_bottom_row(index)
-
-        return True
-
     def keyPressEvent(self, event):
         """
         Handle keyboard
@@ -431,6 +401,41 @@ class InventoryWidget(QWidget):
 
         self.update_inventory()
         self.ItemPickedUp.emit(item)
+
+    def focusNextPrevChild(self, next):
+        """
+        Handle moving focus around the widget
+
+        .. versionadded:: 0.7
+        """
+        if len([x for x in self.items_carried.items
+                if x.display.objectName() == 'active_inventorybox']) > 0:
+            focused = self.items_carried
+        elif len([x for x in self.items_in_ground.items
+                  if x.display.objectName() == 'active_inventorybox']) > 0:
+            focused = self.items_in_ground.items
+        else:
+            focused = self.character_inventory
+
+        if focused == self.character_inventory:
+            if next == True:
+                self.items_carried.focus_on_first_row(0)
+            else:
+                self.items_in_ground.focus_on_bottom_row(0)
+        elif focused == self.items_carried:
+            if next == True:
+                index = self.items_carried.get_current_column()
+                self.items_in_ground.focus_on_first_row(index)
+            else:
+                self.character_inventory.focus_on_last_item()
+        else:
+            if next == True:
+                self.character_inventory.focus_on_first_item()
+            else:
+                index = self.items_in_ground.get_current_column()
+                self.items_carried.focus_on_bottom_row(index)
+
+        return True
 
     def drop_item(self, item):
         """
