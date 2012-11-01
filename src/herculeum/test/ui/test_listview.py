@@ -71,4 +71,4 @@ class TestListViewItem(object):
 
         assert_that(item, is_showing(title = 'Title',
                                      description = 'Here is description',
-                                     icon = icon))
+                                     icon = any(QPixmap)))

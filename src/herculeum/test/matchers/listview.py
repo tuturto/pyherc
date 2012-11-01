@@ -48,13 +48,13 @@ class ListViewItemMatcher(BaseMatcher):
         :returns: True if matching, otherwise False
         :rtype: Boolean
         """
-        if not self.title._matches(item.title):
+        if not self.title.matches(item.title):
             return False
 
-        if not self.description._matches(item.description):
+        if not self.description.matches(item.description):
             return False
 
-        if not self.icon._matches(item.icon):
+        if not self.icon.matches(item.icon):
             return False
 
         return True
@@ -77,6 +77,11 @@ def is_showing(title = None, description = None, icon = None):
 
     .. versionadded:: 0.7
     """
+    if not hasattr(icon, 'matches'):
+        icon_matcher = wrap_matcher(icon)
+    else:
+        icon_matcher = icon
+
     return ListViewItemMatcher(wrap_matcher(title),
                                wrap_matcher(description),
-                               wrap_matcher(icon))
+                               icon_matcher)

@@ -151,8 +151,10 @@ class ListViewItem(QWidget):
         """
         self._icon = QLabel()
         self._title = QLabel()
+        self._title.setText(title)
         self._description = QLabel()
-        #self.display.setPixmap(self.icon)
+        self._description.setText(description)
+        self._icon.setPixmap(icon)
 
         main_layout = QHBoxLayout()
         left_layout = QVBoxLayout()
