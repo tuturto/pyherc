@@ -22,7 +22,7 @@
 Module for small widgets
 """
 
-from PyQt4.QtGui import QWidget, QLabel, QLCDNumber, QHBoxLayout, QDockWidget
+from PyQt4.QtGui import QWidget, QLabel, QDockWidget, QHBoxLayout, QVBoxLayout
 
 class HitPointsWidget(QWidget):
     """
@@ -117,3 +117,66 @@ class DockingHitPointsWidget(QDockWidget):
         :type character: Character
         """
         self.counter.show_hit_points(character)
+
+class ListViewItem(QWidget):
+    """
+    Widget to show icon, title and description in a list control
+
+    .. versionadded:: 0.7
+    """
+    def __init__(self, icon = None, title = '', description = ''):
+        """
+        Default constructor
+
+        :param icon: icon to show
+        :type icon: QPixmap
+        :param title: title to show
+        :type title: string
+        :param description: description to show
+        :type description: string
+        """
+        super(ListViewItem, self).__init__()
+
+        self._icon = None
+        self._title = None
+        self._description = None
+
+        self.__set_layout(icon = icon,
+                          title = title,
+                          description = description)
+
+    def __set_layout(self, icon, title, description):
+        """
+        Set layout of this widget
+        """
+        self._icon = QLabel()
+        self._title = QLabel()
+        self._description = QLabel()
+        #self.display.setPixmap(self.icon)
+
+        main_layout = QHBoxLayout()
+        left_layout = QVBoxLayout()
+        right_layout = QHBoxLayout()
+
+        left_layout.addWidget(self._icon)
+
+        right_layout.addWidget(self._title)
+        right_layout.addWidget(self._description)
+
+        main_layout.addLayout(left_layout)
+        main_layout.addLayout(right_layout)
+
+        self.setLayout(main_layout)
+
+    def __get_title(self):
+        return self._title.text()
+
+    def __get_description(self):
+        return self._description.text()
+
+    def __get_icon(self):
+        return self._icon.pixmap()
+
+    title = property(__get_title)
+    description = property(__get_description)
+    icon = property(__get_icon)
