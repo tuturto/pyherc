@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-11-04, 11:08:21 -->
+<!-- Saved: 2012-11-04, 17:52:12 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -195,6 +195,7 @@
     <Source>herculeum/gui/menu.py</Source>
     <Source>herculeum/test/ui/test_listview.py</Source>
     <Source>herculeum/test/matchers/__init__.py</Source>
+    <Source>herculeum/test/ui/test_characterwidget.py</Source>
   </Sources>
   <Forms>
   </Forms>
