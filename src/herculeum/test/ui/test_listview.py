@@ -28,7 +28,8 @@ import herculeum.gui.resources
 
 from mockito import mock, when, any
 from hamcrest import assert_that
-from herculeum.test.matchers import is_showing
+
+from satin import has_label
 
 from PyQt4.QtTest import QTest
 from PyQt4.QtGui import QApplication, QPixmap
@@ -69,6 +70,5 @@ class TestListViewItem(object):
                             description = 'Here is description',
                             icon = icon)
 
-        assert_that(item, is_showing(title = 'Title',
-                                     description = 'Here is description',
-                                     icon = any(QPixmap)))
+        assert_that(item, has_label('Title'))
+        assert_that(item, has_label('Here is description'))

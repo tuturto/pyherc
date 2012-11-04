@@ -18,6 +18,7 @@ mockito-python 0.5.0 (only needed for running test cases)
 pyHamcrest 1.6 (only needed for running test cases)
 gc (only needed for running test cases)
 behave (only needed for running test cases)
+satin-python (only needed for running test cases)
 Sphinx 1.1.2 (only needed for generating documentation)
 
 Manual

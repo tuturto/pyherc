@@ -21,4 +21,4 @@
 """
 Package for custom hamcrest matchers
 """
-from .listview import is_showing
+pass
