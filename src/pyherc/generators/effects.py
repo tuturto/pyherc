@@ -65,7 +65,7 @@ class EffectsFactory(object):
         type = params.pop('type')
         if params != None:
             for kw_key in kwargs:
-                if kw_key in params.keys():
+                if kw_key in params:
                     params.pop(kw_key)
                 params[kw_key] = kwargs[kw_key]
         else:

@@ -75,7 +75,7 @@ class Item(object):
         assert character != None
 
         if self.appearance != '':
-            if self.name in character.item_memory.keys():
+            if self.name in character.item_memory:
                 name = character.item_memory[self.name]
             else:
                 name = self.appearance

@@ -368,7 +368,7 @@ class PlayMapWidget(QWidget):
 
         if next_creature == player:
 
-            if key_code in self.move_key_map.keys():
+            if key_code in self.move_key_map:
                 direction = self.move_key_map[key_code]
 
                 if player.is_move_legal(direction,

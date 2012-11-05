@@ -70,7 +70,7 @@ class SurfaceManager:
         """
         Add icon to internal collection
         """
-        if not key in self.icons.keys():
+        if not key in self.icons:
             surface = self.__load_image(self.base_path, filename)
             self.icons[key] = surface
 
@@ -185,7 +185,7 @@ class SurfaceManager:
         :returns: icon if found, otherwise empty icon
         :rtype: QPixmap
         """
-        if id in self.icons.keys():
+        if id in self.icons:
             return self.icons[id]
         else:
             return self.icons[herculeum.config.tiles.TRANSPARENT]

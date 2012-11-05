@@ -49,7 +49,7 @@ class EffectsCollection(object):
         handles = self.handles
         trigger = handle.trigger
 
-        if not trigger in handles.keys():
+        if not trigger in handles:
             handles[trigger] = []
         handles[trigger].append(handle)
 
@@ -69,7 +69,7 @@ class EffectsCollection(object):
                 for handle in self.handles[key]:
                     effects.append(handle)
         else:
-            if trigger in self.handles.keys():
+            if trigger in self.handles:
                 effects = [x for x in self.handles[trigger]]
             else:
                 effects = []

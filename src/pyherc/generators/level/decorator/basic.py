@@ -93,19 +93,17 @@ class ReplacingDecorator(Decorator):
         :param level: level to decorate
         :type level: Level
         """
-        floor_keys = self.configuration.ground_config.keys()
         ground_tiles = self.configuration.ground_config
-        wall_keys = self.configuration.wall_config.keys()
         wall_tiles = self.configuration.wall_config
 
         for loc_y in range(len(level.floor[0])):
             for loc_x in range(len(level.floor)):
                 proto_tile = level.floor[loc_x][loc_y]
-                if proto_tile in floor_keys:
+                if proto_tile in ground_tiles:
                     level.floor[loc_x][loc_y] = ground_tiles[proto_tile]
 
                 proto_tile = level.walls[loc_x][loc_y]
-                if proto_tile in wall_keys:
+                if proto_tile in wall_tiles:
                     level.walls[loc_x][loc_y] = wall_tiles[proto_tile]
 
 
@@ -175,7 +173,7 @@ class WallBuilderDecorator(Decorator):
         loc_y = location[1]
         proto_tile = level.walls[loc_x][loc_y]
 
-        if proto_tile in self.configuration.wall_config.keys():
+        if proto_tile in self.configuration.wall_config:
             tile = self.configuration.wall_config[proto_tile]
             level.walls[loc_x][loc_y] = tile
 
