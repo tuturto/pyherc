@@ -121,7 +121,7 @@ class HasDamage(BaseMatcher):
         mismatch_description.append('Was weapon with damage: {0}'.format(
                 item.weapon_data.damage))
 
-def does_have_item(item, amount):
+def does_have_item(item, amount = 1):
     """
     Check if level has given item
 
@@ -131,6 +131,15 @@ def does_have_item(item, amount):
     :type amount: int
     """
     return ContainsItem(item, wrap_matcher(amount))
+
+def does_not_have_item(item):
+    """
+    Check that level does not have given item
+
+    :param item: name of the item to check
+    :type item: String
+    """
+    return ContainsItem(item, wrap_matcher(0))
 
 def has_damage(damage_amount = None, damage_type = None):
     """

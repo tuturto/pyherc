@@ -29,9 +29,11 @@ import herculeum.gui.resources
 
 from mockito import mock, when, any
 from hamcrest import assert_that
-from pyherc.test.matchers import does_have_item
+from pyherc.test.matchers import does_have_item, does_not_have_item
 from pyherc.test.builders import CharacterBuilder, LevelBuilder, ItemBuilder
 from pyherc.test.builders import ActionFactoryBuilder
+
+from satin import find_widget
 
 from PyQt4.QtTest import QTest
 from PyQt4.QtGui import QApplication, QPixmap
@@ -75,7 +77,9 @@ class TestInventoryDialog(object):
         """
         Test that item can be picked up
         """
-        item = ItemBuilder().build()
+        item = (ItemBuilder()
+                    .with_name('dagger')
+                    .build())
         self.level.add_item(item, (5, 5))
 
         dialog = InventoryDialog(surface_manager = self.surface_manager,
@@ -84,17 +88,19 @@ class TestInventoryDialog(object):
                                  parent = None,
                                  flags = Qt.Dialog)
 
-        first_item_in_ground = dialog.inventory.items_in_ground.items[0]
+        QTest.mouseClick(find_widget(dialog,
+                                     slot_with_item('dagger')),
+                         Qt.LeftButton)
 
-        QTest.mouseClick(first_item_in_ground, Qt.LeftButton)
-
-        assert_that(self.level, does_have_item(item.name, 0))
+        assert_that(self.level, does_not_have_item(item.name))
 
     def test_dropping_item(self):
         """
         Test that item can be dropped
         """
-        item = ItemBuilder().build()
+        item = (ItemBuilder()
+                    .with_name('dagger')
+                    .build())
 
         self.character.inventory.append(item)
 
@@ -104,8 +110,37 @@ class TestInventoryDialog(object):
                                  parent = None,
                                  flags = Qt.Dialog)
 
-        first_item_held = dialog.inventory.items_carried.items[0]
+        QTest.mouseClick(find_widget(dialog,
+                                     slot_with_item('dagger')),
+                         Qt.RightButton)
 
-        QTest.mouseClick(first_item_held, Qt.RightButton)
+        assert_that(self.level, does_have_item(item.name))
 
-        assert_that(self.level, does_have_item(item.name, 1))
+def slot_with_item(name):
+    """
+    Create function to determine if given QWidget has an item with
+    specified name
+
+    :param name: name of item to detect
+    :type name: string
+    :returns: function to check if item is found or not
+    :rtype: function
+    """
+    def matcher(widget):
+        """
+        Check if widget contains item with given name
+
+        :param widget: widget to check
+        :type widget: ItemGlyph
+        :returns: True if name matches, otherwise false
+        :rtype: boolean
+        """
+        if (widget != None
+                and hasattr(widget, 'item')
+                and widget.item != None
+                and widget.item.name == name):
+                    return True
+        else:
+            return False
+
+    return matcher
