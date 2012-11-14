@@ -33,7 +33,7 @@ from pyherc.test.matchers import does_have_item, does_not_have_item
 from pyherc.test.builders import CharacterBuilder, LevelBuilder, ItemBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 
-from satin import find_widget
+import satin
 
 from PyQt4.QtTest import QTest
 from PyQt4.QtGui import QApplication, QPixmap
@@ -88,8 +88,8 @@ class TestInventoryDialog(object):
                                  parent = None,
                                  flags = Qt.Dialog)
 
-        QTest.mouseClick(find_widget(dialog,
-                                     slot_with_item('dagger')),
+        QTest.mouseClick(satin.widget(dialog,
+                                      slot_with_item('dagger')),
                          Qt.LeftButton)
 
         assert_that(self.level, does_not_have_item(item.name))
@@ -110,8 +110,8 @@ class TestInventoryDialog(object):
                                  parent = None,
                                  flags = Qt.Dialog)
 
-        QTest.mouseClick(find_widget(dialog,
-                                     slot_with_item('dagger')),
+        QTest.mouseClick(satin.widget(dialog,
+                                      slot_with_item('dagger')),
                          Qt.RightButton)
 
         assert_that(self.level, does_have_item(item.name))
