@@ -21,4 +21,5 @@
 """
 Package for custom hamcrest matchers
 """
-pass
+
+from .itemglyph import slot_with_item

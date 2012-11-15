@@ -26,6 +26,7 @@ from herculeum.gui import InventoryDialog
 from herculeum.gui.surfaceManager import SurfaceManager
 from pyherc.rules import ActionFactory
 import herculeum.gui.resources
+from herculeum.test.matchers import slot_with_item
 
 from mockito import mock, when, any
 from hamcrest import assert_that
@@ -115,32 +116,3 @@ class TestInventoryDialog(object):
                          Qt.RightButton)
 
         assert_that(self.level, does_have_item(item.name))
-
-def slot_with_item(name):
-    """
-    Create function to determine if given QWidget has an item with
-    specified name
-
-    :param name: name of item to detect
-    :type name: string
-    :returns: function to check if item is found or not
-    :rtype: function
-    """
-    def matcher(widget):
-        """
-        Check if widget contains item with given name
-
-        :param widget: widget to check
-        :type widget: ItemGlyph
-        :returns: True if name matches, otherwise false
-        :rtype: boolean
-        """
-        if (widget != None
-                and hasattr(widget, 'item')
-                and widget.item != None
-                and widget.item.name == name):
-                    return True
-        else:
-            return False
-
-    return matcher
