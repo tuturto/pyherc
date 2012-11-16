@@ -58,12 +58,6 @@ class MainWindow(QMainWindow):
 
     def __set_layout(self):
 
-        new_action = QAction(QIcon(':new-game.png'),
-                             '&New game',
-                             self)
-        new_action.setShortcut('Ctrl+N')
-        new_action.setStatusTip('Start a new game')
-
         exit_action = QAction(QIcon(':exit-game.png'),
                              '&Quit',
                              self)
@@ -85,21 +79,9 @@ class MainWindow(QMainWindow):
         character_action.setShortcut('Ctrl+C')
         character_action.setStatusTip('Show character')
 
-        toolbar = self.addToolBar('Actions')
-        self.addToolBar(Qt.LeftToolBarArea, toolbar)
-        toolbar.addAction(inventory_action)
-        toolbar.addAction(character_action)
-
-        self.statusBar()
-
         menubar = self.menuBar()
         file_menu = menubar.addMenu('&File')
-        file_menu.addAction(new_action)
         file_menu.addAction(exit_action)
-
-        actions_menu = menubar.addMenu('&Actions')
-        actions_menu.addAction(inventory_action)
-        actions_menu.addAction(character_action)
 
         self.map_window = PlayMapWindow(parent = None,
                                         model = self.application.world,
@@ -113,10 +95,6 @@ class MainWindow(QMainWindow):
         self.hit_points_dock = DockingHitPointsWidget(self)
         self.addDockWidget(Qt.TopDockWidgetArea, self.hit_points_dock)
 
-        self.connect(new_action,
-                     SIGNAL("triggered()"),
-                     self.__show_new_game)
-
         self.map_window.MenuRequested.connect(self.__show_menu)
 
         self.setGeometry(50, 50, 800, 600)
@@ -124,7 +102,7 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(':rune-stone.png'))
         self.showMaximized()
 
-    def __show_new_game(self):
+    def show_new_game(self):
         """
         Show new game dialog
         """

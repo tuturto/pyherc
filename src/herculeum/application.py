@@ -91,6 +91,7 @@ class Application(object):
                                  None,
                                  Qt.FramelessWindowHint)
         splash_screen.finish(main_window)
+        main_window.show_new_game()
 
         sys.exit(self.qt_app.exec_())
 
