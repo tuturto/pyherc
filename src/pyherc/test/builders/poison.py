@@ -38,6 +38,9 @@ class PoisonBuilder(object):
         self.tick = 0
         self.damage = 5
         self.target = mock()
+        self.icon = 101
+        self.title = 'poison'
+        self.description = 'causes damage'
 
     def with_duration(self, duration):
         """
@@ -85,4 +88,7 @@ class PoisonBuilder(object):
                       frequency = self.frequency,
                       tick = self.tick,
                       damage = self.damage,
-                      target = self.target)
+                      target = self.target,
+                      icon = self.icon,
+                      title = self.title,
+                      description = self.description)

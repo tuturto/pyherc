@@ -101,6 +101,9 @@ class EffectBuilder(object):
         self.tick = 0
         self.effect_name = 'proto'
         self.multiple_allowed = False
+        self.icon = 101
+        self.title = 'effect'
+        self.description = 'description'
 
     def with_duration(self, duration):
         """
@@ -158,7 +161,10 @@ class EffectBuilder(object):
         """
         effect = Effect(duration = self.duration,
                         frequency = self.frequency,
-                        tick = self.tick)
+                        tick = self.tick,
+                        icon = self.icon,
+                        title = self.title,
+                        description = self.description)
         effect.effect_name = self.effect_name
         effect.multiple_allowed = self.multiple_allowed
         return effect

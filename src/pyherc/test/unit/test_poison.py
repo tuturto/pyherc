@@ -79,7 +79,10 @@ class TestEffectsFactory():
                             'duration': 150,
                             'frequency': 30,
                             'tick': 10,
-                            'damage': 5})
+                            'damage': 5,
+                            'icon': 101,
+                            'title': 'Moderate poison',
+                            'description': 'Causes damage'})
 
         effect = factory.create_effect('poison',
                                        target = character)
@@ -88,6 +91,9 @@ class TestEffectsFactory():
         assert_that(effect.frequency, is_(equal_to(30)))
         assert_that(effect.damage, is_(equal_to(5)))
         assert_that(effect.target, is_(equal_to(character)))
+        assert_that(effect.icon, is_(equal_to(101)))
+        assert_that(effect.title, is_(equal_to('Moderate poison')))
+        assert_that(effect.description, is_(equal_to('Causes damage')))
 
     def test_creating_poison_with_paramarray(self):
         """
@@ -99,7 +105,10 @@ class TestEffectsFactory():
                   'frequency': 30,
                   'tick': 10,
                   'damage': 1,
-                  'target': character}
+                  'target': character,
+                  'icon': 101,
+                  'title': 'Moderate poison',
+                  'description': 'Causes damage'}
 
         effect = Poison(**params)
 
@@ -107,6 +116,9 @@ class TestEffectsFactory():
         assert_that(effect.frequency, is_(equal_to(30)))
         assert_that(effect.damage, is_(equal_to(1)))
         assert_that(effect.target, is_(equal_to(character)))
+        assert_that(effect.icon, is_(equal_to(101)))
+        assert_that(effect.title, is_(equal_to('Moderate poison')))
+        assert_that(effect.description, is_(equal_to('Causes damage')))
 
 class TestCharacter():
     """

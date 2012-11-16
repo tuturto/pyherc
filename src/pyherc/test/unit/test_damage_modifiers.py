@@ -69,7 +69,10 @@ class TestDamageModifiers(object):
                                      damage_type = 'crushing',
                                      duration = None,
                                      frequency = None,
-                                     tick = None)
+                                     tick = None,
+                                     icon = 101,
+                                     title = 'Weakness against crushing',
+                                     description = 'This character is weak')
         self.effect.multiple_allowed = True
 
         self.character2 = (CharacterBuilder()
@@ -122,7 +125,10 @@ class TestDamageModifiers(object):
                                   damage_type = 'crushing',
                                   duration = None,
                                   frequency = None,
-                                  tick = None)
+                                  tick = None,
+                                  icon = 101,
+                                  title = 'title',
+                                  description = 'description')
         effect_2.multiple_allowed = True
         self.character2.add_effect(effect_2)
 

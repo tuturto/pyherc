@@ -36,20 +36,29 @@ def init_effects():
                     'duration': 20,
                     'frequency': 5,
                     'tick': 2,
-                    'healing': 1}))
+                    'healing': 1,
+                    'icon': 300,
+                    'title': 'Cure minor wounds',
+                    'description': 'Cures small amount of damage'}))
 
     config.append(('cure medium wounds',
                    {'type': Heal,
                     'duration': 20,
                     'frequency': 5,
                     'tick': 2,
-                    'healing': 2}))
+                    'healing': 2,
+                    'icon': 300,
+                    'title': 'Cure medium wounds',
+                    'description': 'Cures medium amount of damage'}))
 
     config.append(('minor poison',
                    {'type': Poison,
                     'duration': 240,
                     'frequency': 60,
                     'tick': 60,
-                    'damage': 1}))
+                    'damage': 1,
+                    'icon': 300,
+                    'title': 'Minor poison',
+                    'description': 'Causes minor amount of damage'}))
 
     return config

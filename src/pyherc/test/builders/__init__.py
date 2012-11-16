@@ -29,3 +29,4 @@ from .action import ActionFactoryBuilder, DrinkFactoryBuilder
 from .poison import PoisonBuilder
 from .heal import HealBuilder
 from .rules_engine import RulesEngineBuilder
+from .damage import DamageBuilder

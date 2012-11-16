@@ -19,12 +19,12 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for building heal related objects
+Module for building damage related objects
 """
-from pyherc.data.effects import Heal
+from pyherc.data.effects import Damage
 from mockito import mock
 
-class HealBuilder(object):
+class DamageBuilder(object):
     """
     Class for building heal
     """
@@ -32,19 +32,19 @@ class HealBuilder(object):
         """
         Default constructor
         """
-        super(HealBuilder, self).__init__()
+        super(DamageBuilder, self).__init__()
         self.duration = 1
         self.frequency = 1
         self.tick = 0
-        self.healing = 5
+        self.damage = 5
         self.target = mock()
         self.icon = 101
-        self.title = 'healing'
-        self.description = 'heals wounds'
+        self.title = 'damage'
+        self.description = 'causes wounds'
 
     def with_duration(self, duration):
         """
-        Set duration of heal
+        Set duration of damage
 
         :param duration: duration
         :type duration: int
@@ -54,41 +54,41 @@ class HealBuilder(object):
 
     def with_frequency(self, frequency):
         """
-        Set frequency of heal
+        Set frequency of damage
         """
         self.frequency = frequency
         return self
 
     def with_tick(self, tick):
         """
-        Set internal clock of heal
+        Set internal clock of damage
         """
         self.tick = tick
         return self
 
-    def with_healing(self, healing):
+    def with_damage(self, damage):
         """
-        Set healing amount
+        Set damage amount
         """
-        self.healing = healing
+        self.damage = damage
         return self
 
     def with_target(self, target):
         """
-        Set target of the heal
+        Set target of the damage
         """
         self.target = target
         return self
 
     def build(self):
         """
-        Builds heal object
+        Builds damage object
         """
-        return Heal(duration = self.duration,
-                    frequency = self.frequency,
-                    tick = self.tick,
-                    healing = self.healing,
-                    target = self.target,
-                    icon = self.icon,
-                    title = self.title,
-                    description = self.description)
+        return Damage(duration = self.duration,
+                      frequency = self.frequency,
+                      tick = self.tick,
+                      damage = self.damage,
+                      target = self.target,
+                      icon = self.icon,
+                      title = self.title,
+                      description = self.description)

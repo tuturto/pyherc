@@ -30,7 +30,8 @@ class Effect(object):
     """
     logged = Logged()
 
-    def __init__(self, duration, frequency, tick):
+    def __init__(self, duration, frequency, tick,
+                 icon, title, description):
         """
         Default constructor
 
@@ -46,6 +47,9 @@ class Effect(object):
         self.frequency = frequency
         self.tick = tick
         self.effect_name = 'effect'
+        self.icon = icon
+        self.title = title
+        self.description = description
         self.multiple_allowed = False
 
     @logged

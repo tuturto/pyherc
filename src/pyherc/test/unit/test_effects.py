@@ -131,7 +131,10 @@ class TestEffects(object):
                             'duration': 0,
                             'frequency': 0,
                             'tick': 0,
-                            'healing': 10})
+                            'healing': 10,
+                            'icon': 101,
+                            'title': 'title',
+                            'description': 'major heal'})
 
         potion = (ItemBuilder()
                         .with_effect(
@@ -169,7 +172,10 @@ class TestEffects(object):
                             'duration': 12,
                             'frequency': 3,
                             'tick': 3,
-                            'healing': 10})
+                            'healing': 10,
+                            'icon': 100,
+                            'title': 'healig',
+                            'description': 'healing'})
 
         potion = (ItemBuilder()
                         .with_effect(
@@ -241,7 +247,10 @@ class TestEffectsInMelee(object):
                             'duration': 12,
                             'frequency': 3,
                             'tick': 3,
-                            'damage': 5})
+                            'damage': 5,
+                            'icon': 101,
+                            'title': 'poison',
+                            'description': 'Causes damage'})
 
         self.action_factory = (ActionFactoryBuilder()
                                     .with_attack_factory()
@@ -409,9 +418,11 @@ class TestEternalEffects(object):
         """
         Setup test case
         """
-        self.effect = Effect(duration = None,
-                             frequency = None,
-                             tick = None)
+        self.effect = (EffectBuilder()
+                            .with_duration(None)
+                            .with_frequency(None)
+                            .with_tick(None)
+                            .build())
 
         self.model = Model()
         level = Level()

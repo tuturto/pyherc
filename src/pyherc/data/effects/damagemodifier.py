@@ -33,11 +33,17 @@ class DamageModifier(Effect):
     logged = Logged()
 
     @logged
-    def __init__(self, modifier, damage_type, duration, frequency, tick):
+    def __init__(self, modifier, damage_type, duration, frequency, tick,
+                 icon, title, description):
         """
         Default constructor
         """
-        super(DamageModifier, self).__init__(duration, frequency, tick)
+        super(DamageModifier, self).__init__(duration = duration,
+                                             frequency = frequency,
+                                             tick = tick,
+                                             icon = icon,
+                                             title = title,
+                                             description = description)
         self.modifier = modifier
         self.damage_type = damage_type
         self.effect_name = 'damage modifier'
@@ -49,4 +55,5 @@ class DamageModifier(Effect):
         """
         return DamageModifier(self.modifier, self.damage_type,
                               self.duration, self.frequency,
-                              self.tick)
+                              self.tick, self.icon, self.title,
+                              self.description)

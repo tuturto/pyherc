@@ -22,8 +22,7 @@
 Module for magic related tests
 """
 #pylint: disable=W0614
-from pyherc.data.effects import Heal, Damage
-from pyherc.test.builders import CharacterBuilder
+from pyherc.test.builders import CharacterBuilder, HealBuilder, DamageBuilder
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock
 
@@ -47,11 +46,13 @@ class TestMagic:
                         .with_max_hp(15)
                         .build())
 
-        effect = Damage(duration = 0,
-                        frequency = 0,
-                        tick = 0,
-                        damage = 10,
-                        target = character)
+        effect = (DamageBuilder()
+                    .with_duration(0)
+                    .with_frequency(0)
+                    .with_tick(0)
+                    .with_damage(10)
+                    .with_target(character)
+                    .build())
 
         effect.trigger(mock())
 
@@ -66,11 +67,14 @@ class TestMagic:
                         .with_max_hp(15)
                         .build())
 
-        effect = Heal(duration = 0,
-                      frequency = 0,
-                      tick = 0,
-                      healing = 10,
-                      target = character)
+        effect = (HealBuilder()
+                    .with_duration(0)
+                    .with_frequency(0)
+                    .with_tick(0)
+                    .with_healing(10)
+                    .with_target(character)
+                    .build())
+
         effect.trigger(mock())
 
         assert_that(character.hit_points, is_(equal_to(11)))
@@ -84,11 +88,13 @@ class TestMagic:
                         .with_max_hp(5)
                         .build())
 
-        effect = Heal(duration = 0,
-                      frequency = 0,
-                      tick = 0,
-                      healing = 10,
-                      target = character)
+        effect = (HealBuilder()
+                    .with_duration(0)
+                    .with_frequency(0)
+                    .with_tick(0)
+                    .with_healing(10)
+                    .with_target(character)
+                    .build())
 
         effect.trigger(mock())
 

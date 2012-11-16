@@ -33,11 +33,17 @@ class Poison(Effect):
     logged = Logged()
 
     @logged
-    def __init__(self, duration, frequency, tick, damage, target):
+    def __init__(self, duration, frequency, tick, damage, target,
+                 icon, title, description):
         """
         Default constructor
         """
-        super(Poison, self).__init__(duration, frequency, tick)
+        super(Poison, self).__init__(duration = duration,
+                                     frequency = frequency,
+                                     tick = tick,
+                                     icon = icon,
+                                     title = title,
+                                     description = description)
         self.damage = damage
         self.target = target
         self.effect_name = 'poison'

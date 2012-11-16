@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-11-15, 16:47:35 -->
+<!-- Saved: 2012-11-16, 12:15:33 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -197,6 +197,7 @@
     <Source>herculeum/test/matchers/__init__.py</Source>
     <Source>herculeum/test/ui/test_characterwidget.py</Source>
     <Source>herculeum/test/matchers/itemglyph.py</Source>
+    <Source>pyherc/test/builders/damage.py</Source>
   </Sources>
   <Forms>
   </Forms>

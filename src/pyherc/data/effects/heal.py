@@ -32,11 +32,17 @@ class Heal(Effect):
     logged = Logged()
 
     @logged
-    def __init__(self, duration, frequency, tick, healing, target):
+    def __init__(self, duration, frequency, tick, healing, target,
+                 icon, title, description):
         """
         Default constructor
         """
-        super(Heal, self).__init__(duration, frequency, tick)
+        super(Heal, self).__init__(duration = duration,
+                                   frequency = frequency,
+                                   tick = tick,
+                                   icon = icon,
+                                   title = title,
+                                   description = description)
         self.healing = healing
         self.target = target
         self.effect_name = 'heal'

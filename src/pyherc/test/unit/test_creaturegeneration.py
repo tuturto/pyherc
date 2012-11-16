@@ -99,7 +99,10 @@ class TestCreatureGeneration(object):
                                                                   damage_type = 'crushing',
                                                                   duration = None,
                                                                   frequency = None,
-                                                                  tick = None)]))
+                                                                  tick = None,
+                                                                  icon = 101,
+                                                                  title = 'title',
+                                                                  description = 'description')]))
 
         self.generator = CreatureGenerator(configuration = self.creature_config,
                                            model = self.model,
