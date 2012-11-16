@@ -23,7 +23,7 @@ Module for testing list view
 """
 
 from herculeum.gui.surfaceManager import SurfaceManager
-from herculeum.gui.widgets import ListViewItem
+from herculeum.gui.widgets import ListView, ListViewItem
 import herculeum.gui.resources
 
 from mockito import mock, when, any
@@ -72,3 +72,39 @@ class TestListViewItem(object):
 
         assert_that(item, has_label('Title'))
         assert_that(item, has_label('Here is description'))
+
+class TestListView(object):
+    """
+    Tests for list view
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestListView, self).__init__()
+        self.application = None
+        self.list_view = None
+
+    def setup(self):
+        """
+        Setup test case
+        """
+        self.application = QApplication([])
+        self.list_view = ListView()
+
+    def teardown(self):
+        """
+        Tear down the test case
+        """
+        self.application = None
+
+    def test_add_item(self):
+        """
+        Adding a new item to an empty list should display it
+        """
+        self.list_view.add_item(title = 'Title of item',
+                                description = 'Description of item',
+                                icon = QPixmap())
+
+        assert_that(self.list_view, has_label('Title of item'))
+        assert_that(self.list_view, has_label('Description of item'))

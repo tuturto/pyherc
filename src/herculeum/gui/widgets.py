@@ -150,23 +150,29 @@ class ListViewItem(QWidget):
         Set layout of this widget
         """
         self._icon = QLabel()
+        self._icon.setObjectName('no_border')
         self._title = QLabel()
         self._title.setText(title)
+        self._title.setWordWrap(True)
+        self._title.setObjectName('charactermenu_skill_title')
         self._description = QLabel()
         self._description.setText(description)
+        self._description.setWordWrap(True)
+        self._description.setObjectName('no_border')
         self._icon.setPixmap(icon)
+        self._icon.setMaximumSize(32, 32)
 
-        main_layout = QHBoxLayout()
-        left_layout = QVBoxLayout()
-        right_layout = QHBoxLayout()
+        main_layout = QVBoxLayout()
+        top_layout = QHBoxLayout()
+        bottom_layout = QHBoxLayout()
 
-        left_layout.addWidget(self._icon)
+        top_layout.addWidget(self._icon)
 
-        right_layout.addWidget(self._title)
-        right_layout.addWidget(self._description)
+        top_layout.addWidget(self._title)
+        bottom_layout.addWidget(self._description)
 
-        main_layout.addLayout(left_layout)
-        main_layout.addLayout(right_layout)
+        main_layout.addLayout(top_layout)
+        main_layout.addLayout(bottom_layout)
 
         self.setLayout(main_layout)
 
@@ -182,3 +188,44 @@ class ListViewItem(QWidget):
     title = property(__get_title)
     description = property(__get_description)
     icon = property(__get_icon)
+
+class ListView(QWidget):
+    """
+    Widget to show ListViewItems
+
+    .. versionadded:: 0.7
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(ListView, self).__init__()
+
+        self.spacer = None
+
+        self._set_layout()
+
+    def _set_layout(self):
+        """
+        Set layout of this widget
+        """
+        layout = QVBoxLayout()
+        layout.addStretch()
+        self.setLayout(layout)
+
+    def add_item(self, title, description, icon):
+        """
+        Add item to list view
+
+        :param title: title to show
+        :type title: string
+        :param description: description to show
+        :type description: string
+        :param icon: icon to show
+        :type icon: QPixmap
+        """
+        new_item = ListViewItem(title = title,
+                                description = description,
+                                icon = icon)
+        self.layout().insertWidget(self.layout().count() - 1,
+                                   new_item)

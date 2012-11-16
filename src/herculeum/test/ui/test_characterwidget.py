@@ -21,11 +21,11 @@
 """
 Module for testing character widget
 """
-from PyQt4.QtGui import QApplication
+from PyQt4.QtGui import QApplication, QPixmap
 from pyherc.data import Character
 from herculeum.gui.character import CharacterWidget
 
-from mockito import mock
+from mockito import mock, when, any
 from hamcrest import assert_that
 from satin import has_label
 
@@ -64,7 +64,10 @@ class TestCharacterWidget(object):
         character.finesse = 6
         character.mind = 7
 
-        widget = CharacterWidget(surface_manager = mock(),
+        surface_manager = mock()
+        when(surface_manager).get_icon(any()).thenReturn(QPixmap())
+
+        widget = CharacterWidget(surface_manager = surface_manager,
                                  character = character,
                                  parent = None)
 

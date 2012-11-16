@@ -31,6 +31,7 @@ import pyherc
 import pyherc.rules.items
 
 from pyherc.data import Item
+from herculeum.gui.widgets import ListView
 
 class CharacterWidget(QWidget):
     """
@@ -106,13 +107,33 @@ class CharacterWidget(QWidget):
         self.character_icon.setMinimumSize(150, 150)
         icon_layout.addWidget(self.character_icon)
 
-        skills = QLabel()
-        skills.setText('Skills')
+        skills_label = QLabel('Skills')
+        skills_label.setObjectName('section_title')
+        skills = ListView()
+        skills.add_item(title = 'Adventuring',
+                        description = 'Character has natural affinity to adventuring and enjoys immensly finding new locations.',
+                        icon = surface_manager.get_icon(300))
+        skills.add_item(title = 'Spelunking',
+                        description = '+1 bonus to spelunking',
+                        icon = surface_manager.get_icon(300))
+        skills.add_item(title = 'Unarmed combat',
+                        description = '+1 bonus to unarmed combat',
+                        icon = surface_manager.get_icon(300))
 
+        right_layout.addWidget(skills_label)
         right_layout.addWidget(skills)
 
-        effects = QLabel()
-        effects.setText('Effects')
+        effects_label = QLabel('Effects')
+        effects_label.setObjectName('section_title')
+        effects = ListView()
+        effects.add_item(title = 'Bless',
+                        description = 'Removes effects of fear and terror. Raises attack bonus by +1.',
+                        icon = surface_manager.get_icon(300))
+        effects.add_item(title = 'Poison',
+                        description = 'Damages character and prevents healing.',
+                        icon = surface_manager.get_icon(300))
+
+        left_bottom_layout.addWidget(effects_label)
         left_bottom_layout.addWidget(effects)
 
         left_top_layout.addLayout(icon_layout)
