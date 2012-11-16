@@ -110,15 +110,15 @@ class CharacterWidget(QWidget):
         skills_label = QLabel('Skills')
         skills_label.setObjectName('section_title')
         skills = ListView()
-        skills.add_item(title = 'Adventuring',
-                        description = 'Character has natural affinity to adventuring and enjoys immensly finding new locations.',
-                        icon = surface_manager.get_icon(300))
-        skills.add_item(title = 'Spelunking',
-                        description = '+1 bonus to spelunking',
-                        icon = surface_manager.get_icon(300))
-        skills.add_item(title = 'Unarmed combat',
-                        description = '+1 bonus to unarmed combat',
-                        icon = surface_manager.get_icon(300))
+        #skills.add_item(title = 'Adventuring',
+        #                description = 'Character has natural affinity to adventuring and enjoys immensly finding new locations.',
+        #                icon = surface_manager.get_icon(300))
+        #skills.add_item(title = 'Spelunking',
+        #                description = '+1 bonus to spelunking',
+        #                icon = surface_manager.get_icon(300))
+        #skills.add_item(title = 'Unarmed combat',
+        #                description = '+1 bonus to unarmed combat',
+        #                icon = surface_manager.get_icon(300))
 
         right_layout.addWidget(skills_label)
         right_layout.addWidget(skills)
@@ -126,12 +126,11 @@ class CharacterWidget(QWidget):
         effects_label = QLabel('Effects')
         effects_label.setObjectName('section_title')
         effects = ListView()
-        effects.add_item(title = 'Bless',
-                        description = 'Removes effects of fear and terror. Raises attack bonus by +1.',
-                        icon = surface_manager.get_icon(300))
-        effects.add_item(title = 'Poison',
-                        description = 'Damages character and prevents healing.',
-                        icon = surface_manager.get_icon(300))
+
+        for effect in character.get_effects():
+            effects.add_item(title = effect.title,
+                             description = effect.description,
+                             icon = surface_manager.get_icon(effect.icon))
 
         left_bottom_layout.addWidget(effects_label)
         left_bottom_layout.addWidget(effects)

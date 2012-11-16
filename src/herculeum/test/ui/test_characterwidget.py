@@ -22,7 +22,7 @@
 Module for testing character widget
 """
 from PyQt4.QtGui import QApplication, QPixmap
-from pyherc.data import Character
+from pyherc.test.builders import CharacterBuilder, EffectBuilder
 from herculeum.gui.character import CharacterWidget
 
 from mockito import mock, when, any
@@ -56,13 +56,11 @@ class TestCharacterWidget(object):
         """
         Displaying character should show stats
         """
-        character = Character(model = mock(),
-                              effects_collection = mock(),
-                              inventory = mock())
-
-        character.body = 5
-        character.finesse = 6
-        character.mind = 7
+        character = (CharacterBuilder()
+                        .with_body(5)
+                        .with_finesse(6)
+                        .with_mind(7)
+                        .build())
 
         surface_manager = mock()
         when(surface_manager).get_icon(any()).thenReturn(QPixmap())
@@ -74,3 +72,27 @@ class TestCharacterWidget(object):
         assert_that(widget, has_label(str(character.body)))
         assert_that(widget, has_label(str(character.finesse)))
         assert_that(widget, has_label(str(character.mind)))
+
+    def test_displaying_effects(self):
+        """
+        Displaying character should show effects
+        """
+        character = (CharacterBuilder()
+                        .with_body(5)
+                        .with_finesse(6)
+                        .with_mind(7)
+                        .with_effect(EffectBuilder()
+                                        .with_title('Cure minor wounds')
+                                        .with_description('Cures small amount of damage')
+                                        )
+                        .build())
+
+        surface_manager = mock()
+        when(surface_manager).get_icon(any()).thenReturn(QPixmap())
+
+        widget = CharacterWidget(surface_manager = surface_manager,
+                                 character = character,
+                                 parent = None)
+
+        assert_that(widget, has_label('Cure minor wounds'))
+        assert_that(widget, has_label('Cures small amount of damage'))

@@ -36,6 +36,9 @@ class EffectHandleBuilder(object):
         self.effect = 'heal'
         self.parameters = None
         self.charges = 1
+        self.icon = 0
+        self.title = 'title'
+        self.description = 'description'
 
     def with_trigger(self, trigger):
         """
@@ -150,6 +153,36 @@ class EffectBuilder(object):
         Mark the effect to allow multiple instances
         """
         self.multiple_allowed = True
+        return self
+
+    def with_icon(self, icon):
+        """
+        Set icon for effect
+
+        :param icon: icon to set
+        :type icon: integer
+        """
+        self.icon = icon
+        return self
+
+    def with_title(self, title):
+        """
+        Set title for effect
+
+        :param title: title to set
+        :type title: string
+        """
+        self.title = title
+        return self
+
+    def with_description(self, description):
+        """
+        Set description for effect
+
+        :param description: description to set
+        :type description: string
+        """
+        self.description = description
         return self
 
     def build(self):

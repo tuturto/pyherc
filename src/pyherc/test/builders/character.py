@@ -43,6 +43,7 @@ class CharacterBuilder(object):
         self.attack = 1
         self.body = 1
         self.mind = 1
+        self.finesse = 1
 
         self.name = 'prototype'
 
@@ -243,6 +244,16 @@ class CharacterBuilder(object):
 
         return self
 
+    def with_finesse(self, finesse):
+        """
+        Set finesse of the character
+
+        :param finesse: finesse to set
+        :type finesse: integer
+        """
+        self.finesse = finesse
+        return self
+
     def build(self):
         """
         Build character
@@ -264,6 +275,7 @@ class CharacterBuilder(object):
 
         character.mind = self.mind
         character.body = self.body
+        character.finesse = self.finesse
         character.attack = self.attack
 
         character.speed = self.speed
