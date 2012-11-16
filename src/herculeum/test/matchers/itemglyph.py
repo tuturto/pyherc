@@ -23,7 +23,6 @@ Package for custom hamcrest matchers for ItemGlyph
 """
 
 from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 class ItemGlyphMatcher(BaseMatcher):
     """
@@ -49,7 +48,7 @@ class ItemGlyphMatcher(BaseMatcher):
                 and hasattr(item, 'item')
                 and item.item != None
                 and item.item.name == self.item_name):
-                    return True
+            return True
         else:
             return False
 
@@ -57,7 +56,7 @@ class ItemGlyphMatcher(BaseMatcher):
         """
         Describe this matcher
         """
-        description.append('Item glyph with item named {0}'.format(item_name))
+        description.append('Item glyph with item named {0}'.format(self.item_name))
 
     def describe_mismatch(self, item, mismatch_description):
         """
