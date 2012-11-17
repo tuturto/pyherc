@@ -118,19 +118,6 @@ class TestMeleeCombat(object):
 
         verify(self.observer).receive_event(any(AttackHitEvent))
 
-    def test_unarmed_attack_miss_event(self):
-        """
-        Test that landing an unarmed miss will raise correct event
-        """
-        rng = mock()
-        when(rng).randint(1, 6).thenReturn(6)
-
-        self.character1.perform_attack(3,
-                                       self.action_factory,
-                                       rng)
-
-        verify(self.observer).receive_event(any(AttackMissEvent))
-
     def test_attack_into_air_raises_event(self):
         """
         Attacks into thin air should raise correct event

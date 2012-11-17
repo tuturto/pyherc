@@ -147,16 +147,7 @@ class ToHit(object):
         Checks if the hit lands
         @returns: True if hit is successful, False otherwise
         """
-        target_number = self.attacker.body
-
-        to_hit_roll = self.rng.randint(1, 6) + self.rng.randint(1, 6)
-
-        if (to_hit_roll <= target_number) or (to_hit_roll == 2):
-            is_hit = True
-        else:
-            is_hit = False
-
-        return is_hit
+        return True
 
 class Damage(object):
     """
