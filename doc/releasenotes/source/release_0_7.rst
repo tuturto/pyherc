@@ -9,6 +9,7 @@ New features
  - damage is shown negative in counters
  - weapons deal different types of damage
  - split damage is supported
+ - more streamlined user interface
  - 30_ showing hit points of player
  - 29_ being weak against damage
  - 28_ damage resistance
@@ -17,6 +18,7 @@ New features
 Fixed bugs
 **********
 
+ - 33_ using stairs while there is damage counter on screen crashes game
  - 27_ dropping a weapon in use retains the weapon in use
 
 **********
@@ -38,6 +40,7 @@ Other notes
 
  - web.py is not required unless using debug server
 
+.. _33: https://github.com/tuturto/pyherc/issues/33
 .. _30: https://github.com/tuturto/pyherc/issues/30
 .. _29: https://github.com/tuturto/pyherc/issues/29
 .. _28: https://github.com/tuturto/pyherc/issues/28

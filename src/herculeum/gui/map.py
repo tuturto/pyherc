@@ -165,16 +165,22 @@ class PlayMapWidget(QWidget):
         """
         Constructs scene to display
         """
-        for item in scene.items():
+        for item in (item for item in scene.items()
+                     if hasattr(item, 'clear_update_registration')):
             item.clear_update_registration()
+
+        for anim in [x for x in self.animations]:
+            anim.clear()
+
+        self.animations = []
 
         scene.clear()
 
         self.current_level = model.player.level
         size = self.current_level.get_size()
 
-        for loc_x in range(0, size[0]):
-            for loc_y in range(0, size[1]):
+        for loc_x in xrange(0, size[0]):
+            for loc_y in xrange(0, size[1]):
                 new_glyph = MapGlyph(self.surface_manager.get_icon(self.current_level.get_tile(loc_x, loc_y)),
                                      None)
                 new_glyph.setZValue(0)
@@ -333,10 +339,10 @@ class PlayMapWidget(QWidget):
         """
         Remove finished animation
         """
-        finished_animations  = [x for x in self.animations
-                                if x.state() == QAbstractAnimation.Stopped]
-        counters = [x.animationAt(0).targetObject().object_to_animate
-                    for x in finished_animations]
+        finished_animations  = (x for x in self.animations
+                                if x.state() == QAbstractAnimation.Stopped)
+        counters = (x.animationAt(0).targetObject().object_to_animate
+                    for x in finished_animations)
 
         for item in finished_animations:
             item.clear()
