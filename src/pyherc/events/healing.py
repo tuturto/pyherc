@@ -72,18 +72,21 @@ class HealAddedEvent(Event):
     """
 
     @Logged()
-    def __init__(self, target):
+    def __init__(self, target, effect):
         """
         Default constructor
 
         :param target: target of the event
         :type target: Character
+        :param effect: healing effect added
+        :type effect: Heal
         """
         super(HealAddedEvent, self).__init__(event_type = 'heal started',
                                              level = target.level,
                                              location = target.location,
                                              affected_tiles = [])
         self.target = target
+        self.effect = effect
 
     def get_description(self, point_of_view):
         """
@@ -107,18 +110,21 @@ class HealEndedEvent(Event):
     """
 
     @Logged()
-    def __init__(self, target):
+    def __init__(self, target, effect):
         """
         Default constructor
 
         :param actor: character not being healed anymore
         :type actor: Character
+        :param effect: heal effect being removed
+        :type effect: Heal
         """
         super(HealEndedEvent, self).__init__(event_type = 'heal ended',
                                              level = target.level,
                                              location = target.location,
                                              affected_tiles = [])
         self.target = target
+        self.effect = effect
 
     def get_description(self, point_of_view):
         """

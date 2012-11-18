@@ -69,7 +69,8 @@ class Heal(Effect):
         :returns: event describing adding of this effect
         :rtype: Event
         """
-        return HealAddedEvent(target = self.target)
+        return HealAddedEvent(target = self.target,
+                              effect = self)
 
     @logged
     def get_removal_event(self):
@@ -79,4 +80,5 @@ class Heal(Effect):
         :return: event describing removal of this event
         :rtype: Event
         """
-        return HealEndedEvent(target = self.target)
+        return HealEndedEvent(target = self.target,
+                              effect = self)

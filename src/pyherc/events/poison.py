@@ -67,18 +67,21 @@ class PoisonAddedEvent(Event):
 
     .. versionadded:: 0.4
     """
-    def __init__(self, target):
+    def __init__(self, target, effect):
         """
         Default constructor
 
         :param target: target of the event
         :type target: Character
+        :param effect: effect being added
+        :type effect: Poison
         """
         super(PoisonAddedEvent, self).__init__(event_type = 'poisoned',
                                                level = target.level,
                                                location = target.location,
                                                affected_tiles = [])
         self.target = target
+        self.effect = effect
 
     def get_description(self, point_of_view):
         """
@@ -100,18 +103,21 @@ class PoisonEndedEvent(Event):
     """
     Event to signal that poisoning is over
     """
-    def __init__(self, target):
+    def __init__(self, target, effect):
         """
         Default constructor
 
         :param actor: character not suffering from poisoning anymore
         :type actor: Character
+        :param effect: effect being removed
+        :type effect: Poison
         """
         super(PoisonEndedEvent, self).__init__(event_type = 'poison ended',
                                                level = target.level,
                                                location = target.location,
                                                affected_tiles = [])
         self.target = target
+        self.effect = effect
 
     def get_description(self, point_of_view):
         """
