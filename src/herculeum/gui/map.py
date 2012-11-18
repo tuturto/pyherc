@@ -29,7 +29,7 @@ from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
 from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
 from PyQt4.QtCore import QEasingCurve, pyqtSignal
 from herculeum.gui.eventdisplay import EventMessageWidget
-from herculeum.gui.widgets import HitPointsWidget
+from herculeum.gui.widgets import HitPointsWidget, EffectsWidget
 from random import Random
 
 class PlayMapWindow(QWidget):
@@ -62,8 +62,11 @@ class PlayMapWindow(QWidget):
         Set layout of this window
         """
         layout = QVBoxLayout()
+        status_layout = QHBoxLayout()
 
         self.hit_points_widget = HitPointsWidget(parent = self)
+        self.effects_widget = EffectsWidget(parent = self,
+                                            surface_manager = surface_manager)
 
         self.map_widget = PlayMapWidget(parent = self,
                                         model = model,
@@ -76,7 +79,11 @@ class PlayMapWindow(QWidget):
         self.message_widget = EventMessageWidget(parent = self)
         self.message_widget.setMaximumHeight(100)
 
-        layout.addWidget(self.hit_points_widget)
+        status_layout.addWidget(self.hit_points_widget)
+        status_layout.addWidget(self.effects_widget)
+        status_layout.addStretch()
+
+        layout.addLayout(status_layout)
         layout.addWidget(self.map_widget)
         layout.addWidget(self.message_widget)
         self.setLayout(layout)
@@ -89,6 +96,7 @@ class PlayMapWindow(QWidget):
         self.map_widget.construct_scene()
         self.model.player.register_event_listener(self.message_widget)
         self.message_widget.set_point_of_view(self.model.player)
+        self.model.player.register_for_updates(self.effects_widget)
 
     def on_menu_requested(self):
         """

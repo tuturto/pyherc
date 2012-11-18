@@ -10,6 +10,7 @@ New features
  - weapons deal different types of damage
  - split damage is supported
  - more streamlined user interface
+ - status effects are shown on main screen
  - 30_ showing hit points of player
  - 29_ being weak against damage
  - 28_ damage resistance

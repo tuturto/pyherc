@@ -57,7 +57,6 @@ class HitPointsWidget(QWidget):
         self.counter.setObjectName('no_border')
         layout.addWidget(self.description)
         layout.addWidget(self.counter)
-        layout.addStretch()
 
         self.setLayout(layout)
 
@@ -211,9 +210,6 @@ class ListView(QWidget):
         Default constructor
         """
         super(ListView, self).__init__()
-
-        self.spacer = None
-
         self._set_layout()
 
     def _set_layout(self):
@@ -240,3 +236,41 @@ class ListView(QWidget):
                                 icon = icon)
         self.layout().insertWidget(self.layout().count() - 1,
                                    new_item)
+
+class EffectsWidget(QWidget):
+    """
+    Widget to show current active effects
+
+    .. versionadded:: 0.7
+    """
+    def __init__(self, parent, surface_manager):
+        """
+        Default constructor
+        """
+        super(EffectsWidget, self).__init__(parent)
+        self.main_layout = None
+        self.surface_manager = surface_manager
+        self._set_layout()
+
+    def _set_layout(self):
+        """
+        Set layout of this widget
+        """
+        self.main_layout = QHBoxLayout()
+        self.setLayout(self.main_layout)
+
+    def receive_update(self, event):
+        """
+        Receive update from entity
+        """
+        if event.event_type in ('heal started', 'poisoned',
+                                'heal ended', 'poison ended'):
+            for i in range(self.layout().count()):
+                self.layout().itemAt(i).widget().close()
+
+            character = event.target
+            for effect in character.get_effects():
+                new_icon = QLabel()
+                new_icon.setPixmap(self.surface_manager.get_icon(effect.icon))
+                self.layout().insertWidget(self.layout().count() - 1,
+                                       new_icon)
