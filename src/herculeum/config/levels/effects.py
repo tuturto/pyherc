@@ -23,12 +23,13 @@ module for configuring effects
 """
 from pyherc.data.effects import Heal, Poison
 
-def init_effects():
+def init_effects(context):
     """
     Initialise common effects
 
     :returns: effect configuration
     """
+    surface_manager = context.surface_manager
     config = []
 
     config.append(('cure minor wounds',
@@ -37,7 +38,8 @@ def init_effects():
                     'frequency': 5,
                     'tick': 2,
                     'healing': 1,
-                    'icon': 300,
+                    'icon': surface_manager.add_icon('cure minor wounds',
+                                                     'minor_healing.png'),
                     'title': 'Cure minor wounds',
                     'description': 'Cures small amount of damage'}))
 
@@ -47,7 +49,8 @@ def init_effects():
                     'frequency': 5,
                     'tick': 2,
                     'healing': 2,
-                    'icon': 300,
+                    'icon': surface_manager.add_icon('cure medium wounds',
+                                                     'moderate_healing.png'),
                     'title': 'Cure medium wounds',
                     'description': 'Cures medium amount of damage'}))
 
@@ -57,7 +60,8 @@ def init_effects():
                     'frequency': 60,
                     'tick': 60,
                     'damage': 1,
-                    'icon': 300,
+                    'icon': surface_manager.add_icon('minor poison',
+                                                     'minor_poison.png'),
                     'title': 'Minor poison',
                     'description': 'Causes minor amount of damage'}))
 

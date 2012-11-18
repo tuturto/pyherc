@@ -98,7 +98,7 @@ class Configuration(object):
                                                'init_effects')
 
         for configurator in configurators:
-            effects = configurator()
+            effects = configurator(context)
             for effect in effects:
                 effect_factory.add_effect(effect[0], effect[1])
 
