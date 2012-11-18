@@ -23,6 +23,7 @@ Module for small widgets
 """
 
 from PyQt4.QtGui import QWidget, QLabel, QDockWidget, QHBoxLayout, QVBoxLayout
+from PyQt4.QtGui import QFrame
 
 class HitPointsWidget(QWidget):
     """
@@ -162,6 +163,11 @@ class ListViewItem(QWidget):
         self._icon.setPixmap(icon)
         self._icon.setMaximumSize(32, 32)
 
+        frame = QFrame()
+        frame.setObjectName('effect')
+
+        outer_layout = QVBoxLayout()
+        frame_layout = QVBoxLayout()
         main_layout = QVBoxLayout()
         top_layout = QHBoxLayout()
         bottom_layout = QHBoxLayout()
@@ -171,8 +177,13 @@ class ListViewItem(QWidget):
         top_layout.addWidget(self._title)
         bottom_layout.addWidget(self._description)
 
-        main_layout.addLayout(top_layout)
-        main_layout.addLayout(bottom_layout)
+        frame_layout.addLayout(top_layout)
+        frame_layout.addLayout(bottom_layout)
+        frame.setLayout(frame_layout)
+
+        outer_layout.addWidget(frame)
+
+        main_layout.addLayout(outer_layout)
 
         self.setLayout(main_layout)
 
