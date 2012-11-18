@@ -23,12 +23,13 @@ Module for main map related functionality
 """
 from PyQt4.QtGui import QMdiSubWindow, QWidget, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QGraphicsPixmapItem, QGraphicsView, QGraphicsScene
-from PyQt4.QtGui import QSplitter, QGraphicsSimpleTextItem, QColor
+from PyQt4.QtGui import QGraphicsSimpleTextItem, QColor
 from PyQt4.QtGui import QFont
 from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
 from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
 from PyQt4.QtCore import QEasingCurve, pyqtSignal
 from herculeum.gui.eventdisplay import EventMessageWidget
+from herculeum.gui.widgets import HitPointsWidget
 from random import Random
 
 class PlayMapWindow(QWidget):
@@ -61,8 +62,8 @@ class PlayMapWindow(QWidget):
         Set layout of this window
         """
         layout = QVBoxLayout()
-        splitter = QSplitter()
-        splitter.setOrientation(Qt.Vertical)
+
+        self.hit_points_widget = HitPointsWidget(parent = self)
 
         self.map_widget = PlayMapWidget(parent = self,
                                         model = model,
@@ -71,13 +72,13 @@ class PlayMapWindow(QWidget):
                                         rng = rng,
                                         rules_engine = rules_engine)
         self.map_widget.MenuRequested.connect(self.on_menu_requested)
-        splitter.addWidget(self.map_widget)
 
         self.message_widget = EventMessageWidget(parent = self)
-        splitter.addWidget(self.message_widget)
-        splitter.setSizes([575, 50])
+        self.message_widget.setMaximumHeight(100)
 
-        layout.addWidget(splitter)
+        layout.addWidget(self.hit_points_widget)
+        layout.addWidget(self.map_widget)
+        layout.addWidget(self.message_widget)
         self.setLayout(layout)
         self.resize(QSize(640, 480))
 
