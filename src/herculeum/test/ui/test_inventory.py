@@ -50,6 +50,19 @@ class TestInventoryDialog(object):
         """
         super(TestInventoryDialog, self).__init__()
         self.application = None
+        self.action_factory = None
+        self.level = None
+        self.character = None
+        self.surface_manager = None
+
+    def setup(self):
+        """
+        Setup test case
+        """
+        self.application = QApplication([])
+        self.surface_manager = mock(SurfaceManager)
+        when(self.surface_manager).get_icon(any()).thenReturn(QPixmap())
+
         self.action_factory = (ActionFactoryBuilder()
                                     .with_inventory_factory()
                                     .build())
@@ -59,14 +72,6 @@ class TestInventoryDialog(object):
                                 .with_level(self.level)
                                 .with_location((5, 5))
                                 .build())
-
-    def setup(self):
-        """
-        Setup test case
-        """
-        self.application = QApplication([])
-        self.surface_manager = mock(SurfaceManager)
-        when(self.surface_manager).get_icon(any()).thenReturn(QPixmap())
 
     def teardown(self):
         """
