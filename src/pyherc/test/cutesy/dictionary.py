@@ -441,7 +441,10 @@ def potent_poison(target = None):
             'frequency': 1,
             'tick': 0,
             'damage': 100,
-            'target': target}
+            'target': target,
+            'icon': 101,
+            'title': 'potent poison',
+            'description': 'causes huge amount of damage'}
 
 def weak_poison(target = None):
     """
@@ -457,7 +460,10 @@ def weak_poison(target = None):
             'frequency': 1,
             'tick': 0,
             'damage': 1,
-            'target': target}
+            'target': target,
+            'icon': 101,
+            'title': 'weak poison',
+            'description': 'causes tiny amount of damage'}
 
 class CarryAction(object):
     """

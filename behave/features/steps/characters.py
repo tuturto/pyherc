@@ -71,5 +71,8 @@ def impl(context, character_name, damage_type):
                               damage_type = damage_type,
                               duration = None,
                               frequency = None,
-                              tick = None)
+                              tick = None,
+                              icon = 101,
+                              title = 'weak against {0}'.format(damage_type),
+                              description = '{0} causes extra damage'.format(damage_type))
     character.add_effect(modifier)
