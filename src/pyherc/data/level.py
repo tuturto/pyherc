@@ -420,3 +420,35 @@ class Level(object):
                 else:
                     level_string = level_string + " "
         return level_string
+
+    def heuristic_estimate_of_distance(self, start, goal):
+        """
+        This should be >= 0
+        If you want to be sure, that the found path is the sortest one,
+        let this return a constant 0.
+        """
+        l = len(goal)
+        return (sum([(start[i] - goal[i]) ** 2 for i in xrange(l)])) ** 0.5
+
+    def neighbor_nodes(self, node):
+        """
+        node : the node of which neighbours you want to get
+        It might also be a good choise to implement a class for the node
+        """
+        nodes = []
+        loc_x = node[0]
+        loc_y = node[1]
+        for x in xrange(loc_x - 1, loc_x + 2):
+            for y in xrange(loc_y -1, loc_y + 2):
+                if (x != loc_x or y != loc_y) and not self.blocks_movement(x, y):
+                    nodes.append((x, y))
+        print nodes
+        return nodes
+
+    def dist_between(self, start, goal):
+        """
+        The real distance between two adjacent nodes.
+        This should be >= 0
+        """
+        l = len(goal)
+        return (sum([(start[i] - goal[i]) ** 2 for i in xrange(l)])) ** 0.5

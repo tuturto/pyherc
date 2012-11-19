@@ -42,7 +42,7 @@ by Henk Brouwer.
 
 Some graphics is from http://game-icons.net/
 
-Background of the main menu from: <http://stock-background-texture.com/>
+A star implementation adapted from one by Pauli Henrikki Rikula
 
 Music score
 -----------

@@ -24,3 +24,4 @@ Module containing AI routines for pyherc
 
 from .simple import FlockingHerbivore
 from .skeleton import SkeletonWarriorAI
+from .pathfinding import a_star
