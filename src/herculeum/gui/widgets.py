@@ -23,7 +23,7 @@ Module for small widgets
 """
 
 from PyQt4.QtGui import QWidget, QLabel, QDockWidget, QHBoxLayout, QVBoxLayout
-from PyQt4.QtGui import QFrame
+from PyQt4.QtGui import QFrame, QGridLayout
 
 class HitPointsWidget(QWidget):
     """
@@ -40,23 +40,36 @@ class HitPointsWidget(QWidget):
         """
         super(HitPointsWidget, self).__init__(parent)
 
-        self.__counter = None
+        self.hp = None
+        self.hp_label = None
+        self.mana = None
+        self.mana_label = None
         self.__set_layout()
 
     def __set_layout(self):
         """
         Set layout of this widget
         """
-        layout = QHBoxLayout()
+        layout = QGridLayout()
 
-        self.description = QLabel()
-        self.description.setText('Hitpoints: ')
-        self.description.setObjectName('no_border')
-        self.counter = QLabel()
-        self.counter.setText('0 / 0')
-        self.counter.setObjectName('no_border')
-        layout.addWidget(self.description)
-        layout.addWidget(self.counter)
+        self.hp_label = QLabel()
+        self.hp_label.setText('hp: ')
+        self.hp_label.setObjectName('no_border')
+        self.hp = QLabel()
+        self.hp.setText('0 / 0')
+        self.hp.setObjectName('no_border')
+
+        self.mana_label = QLabel()
+        self.mana_label.setText('mana: ')
+        self.mana_label.setObjectName('no_border')
+        self.mana = QLabel()
+        self.mana.setText('0 / 0')
+        self.mana.setObjectName('no_border')
+
+        layout.addWidget(self.hp_label, 0, 0)
+        layout.addWidget(self.hp, 0, 1)
+        layout.addWidget(self.mana_label, 1, 0)
+        layout.addWidget(self.mana, 1, 1)
 
         self.setLayout(layout)
 
@@ -76,7 +89,7 @@ class HitPointsWidget(QWidget):
         """
         current_hp = character.hit_points
         max_hp = character.max_hp
-        self.counter.setText(str(current_hp) + '/' + str(max_hp))
+        self.hp.setText(str(current_hp) + '/' + str(max_hp))
 
 class DockingHitPointsWidget(QDockWidget):
     """
