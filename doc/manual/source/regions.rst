@@ -29,6 +29,9 @@ powerful magic. They have been guarding silent halls and corridors of catacombs
 for uncountable years. Skeletons often carry equipment they had when they were
 still among living.
 
+Skeleton are slow as they wander aimlessly in the catacombs, but as soon as
+they sense blood of living human they will relentlesly pursue them.
+
 *****
 Crypt
 *****
@@ -38,5 +41,5 @@ adventurers and eventually kill them.
 
 Spider
 ======
-Spider of huge size. These monsters stand almost as tall as human. They are
-extremely fast and their poisoned attacks can quickly kill careless adventurer.
+Spider of huge size. These monsters stand almost as tall as human. They are not
+particularly fast, but their poisoned attacks can quickly kill careless adventurer.
