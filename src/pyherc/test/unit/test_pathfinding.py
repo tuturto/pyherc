@@ -22,9 +22,22 @@
 tests for path finding
 """
 from pyherc.test.builders import LevelBuilder
+from pyherc.test.matchers import continuous_path
 from pyherc.ai import a_star
 
-from hamcrest import assert_that, contains
+from hamcrest import assert_that, contains, is_
+from mockito import mock
+
+from pyherc.generators.level.generator import LevelGenerator
+from pyherc.generators.level import LevelContext
+from pyherc.generators.level.partitioners import GridPartitioner
+from pyherc.generators.level.room.catacombs import CatacombsGenerator
+from pyherc.generators.level.portals import PortalAdder
+from pyherc.data import Portal
+
+from qc import forall
+
+from random import Random
 
 FLOOR_TILE = 100
 WALL_TILE = 200
@@ -51,7 +64,7 @@ class TestAStar(object):
                     .with_solid_wall_tile(WALL_TILE)
                     .build())
 
-        path, connections, uptated = a_star(start = (10, 10),
+        path, connections, updated = a_star(start = (10, 10),
                                             goal = (15, 10),
                                             a_map = level)
 
@@ -61,3 +74,92 @@ class TestAStar(object):
                                    (13, 10),
                                    (14, 10),
                                    (15, 10)))
+
+    def test_going_around_wall(self):
+        """
+        Test that path can be found around a wall
+        """
+        level = (LevelBuilder()
+                    .with_floor_tile(FLOOR_TILE)
+                    .with_wall_tile(EMPTY_TILE)
+                    .with_empty_wall_tile(EMPTY_TILE)
+                    .with_solid_wall_tile(WALL_TILE)
+                    .with_wall_at((12, 8))
+                    .with_wall_at((12, 9))
+                    .with_wall_at((12, 10))
+                    .with_wall_at((12, 11))
+                    .with_wall_at((12, 12))
+                    .build())
+
+        path, connections, updated = a_star(start = (10, 10),
+                                            goal = (15, 10),
+                                            a_map = level)
+
+        assert_that(path, is_(continuous_path(start = (10, 10),
+                                              destination = (15, 10),
+                                              level = level)))
+
+class TestPathfindingInLevel(object):
+    """
+    Test pathfinding in a generated level
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestPathfindingInLevel, self).__init__()
+
+        self.new_level = None
+
+    def setup(self):
+        """
+        set up test case
+        """
+        rng = Random()
+
+        partitioner = GridPartitioner(['crypt'],
+                                      1,
+                                      1,
+                                      rng)
+        room_generator = CatacombsGenerator(FLOOR_TILE,
+                                             EMPTY_TILE,
+                                             ['crypt'],
+                                             rng)
+        level_decorator = mock()
+        portal_adder = PortalAdder((1, 2),
+                                  'crypt',
+                                  mock(),
+                                  rng)
+        creature_adder = mock()
+        item_adder = mock()
+
+        portal = mock(Portal)
+
+        generator = LevelGenerator(partitioner, [room_generator],
+                                   level_decorator, [portal_adder],
+                                   item_adder,
+                                   creature_adder,
+                                   rng,
+                                   LevelContext(size = (60, 40),
+                                        floor_type = FLOOR_TILE,
+                                        wall_type = WALL_TILE,
+                                        empty_floor = EMPTY_TILE,
+                                        empty_wall = EMPTY_TILE))
+
+        self.level = generator.generate_level(portal)
+
+    @forall(tries=10)
+    def test_finding_path(self):
+        """
+        Test pathfinding in a level
+        """
+        start = self.level.find_free_space()
+        destination = self.level.find_free_space()
+
+        path, connections, updated = a_star(start = start,
+                                            goal = destination,
+                                            a_map = self.level)
+
+        assert_that(path, is_(continuous_path(start = start,
+                                              destination = destination,
+                                              level = self.level)))

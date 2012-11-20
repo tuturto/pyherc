@@ -442,7 +442,7 @@ class Level(object):
             for y in xrange(loc_y -1, loc_y + 2):
                 if (x != loc_x or y != loc_y) and not self.blocks_movement(x, y):
                     nodes.append((x, y))
-        print nodes
+
         return nodes
 
     def dist_between(self, start, goal):

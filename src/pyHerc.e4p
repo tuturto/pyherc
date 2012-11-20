@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-11-19, 19:24:08 -->
+<!-- Saved: 2012-11-20, 11:18:53 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -202,6 +202,7 @@
     <Source>pyherc/test/unit/test_pathfinding.py</Source>
     <Source>pyherc/ai/heapset.py</Source>
     <Source>pyherc/ai/pyheapq.py</Source>
+    <Source>pyherc/test/matchers/path_finding.py</Source>
   </Sources>
   <Forms>
   </Forms>

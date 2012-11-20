@@ -34,3 +34,4 @@ from .event import has_marked_for_redrawing
 from .character import is_dead
 from .inventory_parameters import DropActionParameterMatcher
 from .event_parameters import EventType
+from .path_finding import continuous_path
