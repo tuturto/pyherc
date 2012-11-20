@@ -187,9 +187,9 @@ def init_creatures(context):
                                         finesse = 11,
                                         mind = 0,
                                         hp = 4,
-                                        speed = 1.9,
+                                        speed = 3,
                                         icons = surface_manager.add_icon('fire beetle', 'scarab-beetle.png'),
-                                        attack = 4,
+                                        attack = 2,
                                         ai = FlockingHerbivore))
 
     skeleton_inventory = [InventoryConfiguration(item_name = 'sword',
@@ -235,9 +235,9 @@ def init_creatures(context):
                                         finesse = 11,
                                         mind = 0,
                                         hp = 8,
-                                        speed = 2.5,
+                                        speed = 4,
                                         icons = surface_manager.add_icon('skeleton warrior', 'blade-bite.png'),
-                                        attack = 2,
+                                        attack = 1,
                                         ai = SkeletonWarriorAI,
                                         inventory = skeleton_inventory,
                                         effects = skeleton_effects))

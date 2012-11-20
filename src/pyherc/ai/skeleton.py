@@ -61,6 +61,17 @@ class SkeletonWarriorAI(object):
         """
         del self.character.short_term_memory[:]
 
+        c_location = self.character.location
+        p_location = model.player.location
+
+        distance = ((c_location[0] - p_location[0]) ** 2 +
+                    (c_location[1] - p_location[1]) ** 2) ** 0.5
+
+        if distance < 4:
+            self.mode = 'combat'
+        else:
+            self.mode == 'patrol'
+
         if self.mode == 'patrol':
             self._patrol(model, action_factory, rng)
         else:
@@ -99,7 +110,36 @@ class SkeletonWarriorAI(object):
         """
         Attack enemies
         """
-        pass
+        character = self.character
+        player = model.player
+        c_location = character.location
+        p_location = player.location
+
+        distance = ((c_location[0] - p_location[0]) ** 2 +
+                    (c_location[1] - p_location[1]) ** 2) ** 0.5
+
+        if distance < 1.42:
+            direction = self.find_direction(c_location,
+                                            p_location)
+            character.perform_attack(direction,
+                                     action_factory,
+                                     rng)
+        else:
+            path, connections, updated = a_star(c_location,
+                                                p_location,
+                                                character.level)
+            next_tile = path[1]
+
+            direction = self.find_direction(character.location,
+                                            next_tile)
+
+            if character.is_move_legal(direction,
+                                       'walk',
+                                       action_factory):
+                character.move(direction,
+                               action_factory)
+            else:
+                character.tick = character.tick + 10
 
     @logged
     def find_direction(self, start, end):
