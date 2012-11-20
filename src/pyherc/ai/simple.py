@@ -88,7 +88,7 @@ class FlockingHerbivore(object):
                 direction = self.find_direction(
                                         character.location, player.location)
 
-                if distance > 1:
+                if distance > 1.42:
                     if character.is_move_legal(direction,
                                                'walk',
                                                action_factory):
