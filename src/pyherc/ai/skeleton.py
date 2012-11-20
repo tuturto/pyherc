@@ -22,6 +22,7 @@
 AI routines for skeletons
 """
 
+import pyherc
 from pyherc.aspects import Logged
 from pyherc.ai.pathfinding import a_star
 
@@ -61,6 +62,9 @@ class SkeletonWarriorAI(object):
         """
         del self.character.short_term_memory[:]
 
+        if self.character.inventory.weapon == None:
+            self._wield_weapon(model)
+
         c_location = self.character.location
         p_location = model.player.location
 
@@ -70,13 +74,28 @@ class SkeletonWarriorAI(object):
         if distance < 4:
             self.mode = 'combat'
         else:
-            self.mode == 'patrol'
+            self.mode = 'patrol'
 
         if self.mode == 'patrol':
             self._patrol(model, action_factory, rng)
         else:
             self._combat(model, action_factory, rng)
 
+    @logged
+    def _wield_weapon(self, model):
+        """
+        Check if it is possible to wield a weapon and do so
+        """
+        weapons = [item for item in
+                   self.character.inventory
+                   if item.weapon_data != None]
+
+        pyherc.rules.items.wield(model = model,
+                                 character = self.character,
+                                 item = weapons[0],
+                                 dual_wield = False)
+
+    @logged
     def _patrol(self, model, action_factory, rng):
         """
         Patrol around the level
@@ -106,6 +125,7 @@ class SkeletonWarriorAI(object):
         else:
             character.tick = character.tick + 10
 
+    @logged
     def _combat(self, model, action_factory, rng):
         """
         Attack enemies
