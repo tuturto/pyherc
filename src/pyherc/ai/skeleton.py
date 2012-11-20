@@ -23,6 +23,7 @@ AI routines for skeletons
 """
 
 from pyherc.aspects import Logged
+from pyherc.ai.pathfinding import a_star
 
 class SkeletonWarriorAI(object):
     """
@@ -43,6 +44,9 @@ class SkeletonWarriorAI(object):
         """
         self.character = character
 
+        self.mode = 'patrol'
+        self.destination = None
+
     @logged
     def act(self, model, action_factory, rng):
         """
@@ -55,4 +59,94 @@ class SkeletonWarriorAI(object):
         :param rng: random number generator
         :type rng: Random
         """
+        del self.character.short_term_memory[:]
+
+        if self.mode == 'patrol':
+            self._patrol(model, action_factory, rng)
+        else:
+            self._combat(model, action_factory, rng)
+
+    def _patrol(self, model, action_factory, rng):
+        """
+        Patrol around the level
+        """
+        character = self.character
+        level = self.character.level
+
+        while (self.destination == None
+               or character.location == self.destination):
+
+            self.destination = level.find_free_space()
+
+        path, connections, updated = a_star(character.location,
+                                            self.destination,
+                                            level)
+
+        next_tile = path[1]
+
+        direction = self.find_direction(character.location,
+                                        next_tile)
+
+        if character.is_move_legal(direction,
+                                   'walk',
+                                   action_factory):
+            character.move(direction,
+                           action_factory)
+        else:
+            character.tick = character.tick + 10
+
+    def _combat(self, model, action_factory, rng):
+        """
+        Attack enemies
+        """
         pass
+
+    @logged
+    def find_direction(self, start, end):
+        """
+        Find direction from start to end
+
+        :param start: start location
+        :type start: (integer, integer)
+        :param end: end location
+        :type end: (integer, integer)
+
+        :returns: Direction to travel
+        :rtype: integer
+        """
+        assert(start != None)
+        assert(end != None)
+
+        direction = None
+        if start[0] < end[0]:
+            #right side
+            if start[1] < end[1]:
+                #right, below
+                direction = 4
+            elif start[1] > end[1]:
+                #right, above
+                direction = 2
+            else:
+                #right
+                direction = 3
+        elif start[0] > end[0]:
+            #left side
+            if start[1] < end[1]:
+                #left, below
+                direction = 6
+            elif start[1] > end[1]:
+                #left, above
+                direction = 8
+            else:
+                #left
+                direction = 7
+        else:
+            #up or down
+            if start[1] < end[1]:
+                #below
+                direction = 5
+            elif start[1] > end[1]:
+                #above
+                direction = 1
+
+        return direction

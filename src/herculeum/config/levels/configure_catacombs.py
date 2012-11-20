@@ -53,7 +53,7 @@ from herculeum.config.tiles import CREATURE_SKELETON_WARRIOR
 
 from pyherc.config.dsl import LevelConfiguration
 from pyherc.generators import CreatureConfiguration
-from pyherc.ai import FlockingHerbivore
+from pyherc.ai import FlockingHerbivore, SkeletonWarriorAI
 from pyherc.data.effects import DamageModifier
 
 def init_level(rng, item_generator, creature_generator, level_size):
@@ -242,7 +242,7 @@ def init_creatures(context):
                                         speed = 2.5,
                                         icons = surface_manager.add_icon('skeleton warrior', 'blade-bite.png'),
                                         attack = 2,
-                                        ai = FlockingHerbivore,
+                                        ai = SkeletonWarriorAI,
                                         inventory = skeleton_inventory,
                                         effects = skeleton_effects))
 
