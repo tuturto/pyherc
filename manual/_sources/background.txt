@@ -45,12 +45,22 @@ from Black Cliffs but never reach the Thynian river water it.
 
 Marmaron Desert
 ===============
-
+Marmaron desert is located west of Thynian Jungle. Vast plains of rock and sand
+span beyond horizon under scorching sun. The hostile desert is mainly
+unexplored and only few caravans dare the venture across it.
 
 Notable persons
 ***************
 
+von Stein family
+================
+von Stein family is renowed noble family mostly located at Port Rhombulos.
+They are traders and sometimes send out expeditions in order to find new
+trading routes.
+
 Leon von Stein
-==============
+--------------
 Current head of von Stein family.
 
+Lucas von Stein
+---------------

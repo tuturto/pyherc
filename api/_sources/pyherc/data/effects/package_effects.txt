@@ -7,6 +7,7 @@ pyherc.data.effects
    :maxdepth: 2
    
    module_damage
+   module_damagemodifier
    module_effect
    module_effectscollection
    module_heal

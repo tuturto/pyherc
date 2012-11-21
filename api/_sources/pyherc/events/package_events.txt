@@ -10,6 +10,7 @@ pyherc.events
    module_death
    module_event
    module_healing
+   module_hitpoints
    module_inventory
    module_move
    module_poison

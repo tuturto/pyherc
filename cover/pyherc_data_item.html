@@ -25,8 +25,8 @@
         </h1>
         <img id='keyboard_icon' src='keybd_closed.png'>
         <h2 class='stats'>
-            72 statements &nbsp;
-            <span class='run hide_run shortkey_r button_toggle_run'>67 run</span>
+            73 statements &nbsp;
+            <span class='run hide_run shortkey_r button_toggle_run'>68 run</span>
             <span class='mis shortkey_m button_toggle_mis'>5 missing</span>
             <span class='exc shortkey_x button_toggle_exc'>0 excluded</span>
             
@@ -290,13 +290,14 @@
 <p id='n227' class='pln'><a href='#n227'>227</a></p>
 <p id='n228' class='pln'><a href='#n228'>228</a></p>
 <p id='n229' class='pln'><a href='#n229'>229</a></p>
-<p id='n230' class='pln'><a href='#n230'>230</a></p>
-<p id='n231' class='pln'><a href='#n231'>231</a></p>
-<p id='n232' class='stm run hide_run'><a href='#n232'>232</a></p>
+<p id='n230' class='stm run hide_run'><a href='#n230'>230</a></p>
+<p id='n231' class='stm run hide_run'><a href='#n231'>231</a></p>
+<p id='n232' class='pln'><a href='#n232'>232</a></p>
 <p id='n233' class='stm run hide_run'><a href='#n233'>233</a></p>
-<p id='n234' class='stm run hide_run'><a href='#n234'>234</a></p>
+<p id='n234' class='pln'><a href='#n234'>234</a></p>
 <p id='n235' class='stm run hide_run'><a href='#n235'>235</a></p>
 <p id='n236' class='stm run hide_run'><a href='#n236'>236</a></p>
+<p id='n237' class='stm run hide_run'><a href='#n237'>237</a></p>
                 
             </td>
             <td class='text' valign='top'>
@@ -377,7 +378,7 @@
 <p id='t75' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>character</span> <span class='op'>!=</span> <span class='nam'>None</span><span class='strut'>&nbsp;</span></p>
 <p id='t76' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t77' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>appearance</span> <span class='op'>!=</span> <span class='str'>&#39;&#39;</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t78' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>name</span> <span class='key'>in</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>item_memory</span><span class='op'>.</span><span class='nam'>keys</span><span class='op'>(</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t78' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>name</span> <span class='key'>in</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>item_memory</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
 <p id='t79' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>name</span> <span class='op'>=</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>item_memory</span><span class='op'>[</span><span class='nam'>self</span><span class='op'>.</span><span class='nam'>name</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
 <p id='t80' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>else</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
 <p id='t81' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>name</span> <span class='op'>=</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>appearance</span><span class='strut'>&nbsp;</span></p>
@@ -385,7 +386,7 @@
 <p id='t83' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>name</span> <span class='op'>=</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>name</span><span class='strut'>&nbsp;</span></p>
 <p id='t84' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t85' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>decorate</span> <span class='op'>==</span> <span class='nam'>True</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t86' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>weapon</span> <span class='op'>==</span> <span class='nam'>self</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t86' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>character</span><span class='op'>.</span><span class='nam'>inventory</span><span class='op'>.</span><span class='nam'>weapon</span> <span class='op'>==</span> <span class='nam'>self</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
 <p id='t87' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>name</span> <span class='op'>=</span> <span class='nam'>name</span> <span class='op'>+</span> <span class='str'>&#39; (weapon in hand)&#39;</span><span class='strut'>&nbsp;</span></p>
 <p id='t88' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t89' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>name</span><span class='strut'>&nbsp;</span></p>
@@ -514,28 +515,29 @@
 <p id='t212' class='pln'>&nbsp; &nbsp; <span class='str'>&quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
 <p id='t213' class='pln'><span class='str'>&nbsp; &nbsp; Class representing weapon data of items</span><span class='strut'>&nbsp;</span></p>
 <p id='t214' class='pln'><span class='str'>&nbsp; &nbsp; &quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
-<p id='t215' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>__init__</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>,</span> <span class='nam'>damage</span> <span class='op'>=</span> <span class='nam'>None</span><span class='op'>,</span> <span class='nam'>damage_type</span> <span class='op'>=</span> <span class='nam'>None</span><span class='op'>,</span> <span class='nam'>critical_range</span> <span class='op'>=</span> <span class='nam'>None</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t215' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>__init__</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>,</span> <span class='nam'>damage</span> <span class='op'>=</span> <span class='nam'>None</span><span class='op'>,</span> <span class='nam'>critical_range</span> <span class='op'>=</span> <span class='nam'>None</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t216' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class='nam'>critical_damage</span> <span class='op'>=</span> <span class='nam'>None</span><span class='op'>,</span> <span class='nam'>weapon_type</span> <span class='op'>=</span> <span class='nam'>None</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
 <p id='t217' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
 <p id='t218' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; Default constructor</span><span class='strut'>&nbsp;</span></p>
 <p id='t219' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t220' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :param damage: amount of damage</span><span class='strut'>&nbsp;</span></p>
-<p id='t221' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :type damage: integer</span><span class='strut'>&nbsp;</span></p>
-<p id='t222' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :param damage_type: type of damage</span><span class='strut'>&nbsp;</span></p>
-<p id='t223' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :type damage_type: string</span><span class='strut'>&nbsp;</span></p>
-<p id='t224' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :param critical_range: range where critical might occur</span><span class='strut'>&nbsp;</span></p>
-<p id='t225' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :type critical_range: integer</span><span class='strut'>&nbsp;</span></p>
-<p id='t226' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :param critical_damage: multiplier for critical damage</span><span class='strut'>&nbsp;</span></p>
-<p id='t227' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :type critical_damage: integer</span><span class='strut'>&nbsp;</span></p>
-<p id='t228' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :param weapon_type: type of weapon</span><span class='strut'>&nbsp;</span></p>
-<p id='t229' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :type weapon_type: string</span><span class='strut'>&nbsp;</span></p>
-<p id='t230' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; &quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
-<p id='t231' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t232' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>damage</span> <span class='op'>=</span> <span class='nam'>damage</span><span class='strut'>&nbsp;</span></p>
-<p id='t233' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>damage_type</span> <span class='op'>=</span> <span class='nam'>damage_type</span><span class='strut'>&nbsp;</span></p>
-<p id='t234' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>critical_range</span> <span class='op'>=</span> <span class='nam'>critical_range</span><span class='strut'>&nbsp;</span></p>
-<p id='t235' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>critical_damage</span> <span class='op'>=</span> <span class='nam'>critical_damage</span><span class='strut'>&nbsp;</span></p>
-<p id='t236' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>weapon_type</span> <span class='op'>=</span> <span class='nam'>weapon_type</span><span class='strut'>&nbsp;</span></p>
+<p id='t220' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :param damage: array of amount and type of damage</span><span class='strut'>&nbsp;</span></p>
+<p id='t221' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :type damage: [(integer, string), ...]</span><span class='strut'>&nbsp;</span></p>
+<p id='t222' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :param critical_range: range where critical might occur</span><span class='strut'>&nbsp;</span></p>
+<p id='t223' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :type critical_range: integer</span><span class='strut'>&nbsp;</span></p>
+<p id='t224' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :param critical_damage: multiplier for critical damage</span><span class='strut'>&nbsp;</span></p>
+<p id='t225' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :type critical_damage: integer</span><span class='strut'>&nbsp;</span></p>
+<p id='t226' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :param weapon_type: type of weapon</span><span class='strut'>&nbsp;</span></p>
+<p id='t227' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :type weapon_type: string</span><span class='strut'>&nbsp;</span></p>
+<p id='t228' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; &quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
+<p id='t229' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t230' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>damage</span> <span class='op'>==</span> <span class='nam'>None</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t231' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>damage</span> <span class='op'>=</span> <span class='op'>[</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
+<p id='t232' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>else</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t233' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>damage</span> <span class='op'>=</span> <span class='nam'>damage</span><span class='strut'>&nbsp;</span></p>
+<p id='t234' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t235' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>critical_range</span> <span class='op'>=</span> <span class='nam'>critical_range</span><span class='strut'>&nbsp;</span></p>
+<p id='t236' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>critical_damage</span> <span class='op'>=</span> <span class='nam'>critical_damage</span><span class='strut'>&nbsp;</span></p>
+<p id='t237' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>self</span><span class='op'>.</span><span class='nam'>weapon_type</span> <span class='op'>=</span> <span class='nam'>weapon_type</span><span class='strut'>&nbsp;</span></p>
                 
             </td>
         </tr>

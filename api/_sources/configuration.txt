@@ -37,7 +37,7 @@ perform configuration
 
 .. code-block:: python
 
-    def init_items():
+    def init_items(context):
     
 This function should return a list of :class:`pyherc.generators.item.ItemConfiguration`
 objects.
@@ -49,7 +49,7 @@ to perform configuration:
 
 .. code-block:: python
 
-   def init_creatures():
+   def init_creatures(context):
    
 This function should return a list of :class:`pyherc.generators.creature.CreatureConfiguration`
 objects.
@@ -61,7 +61,14 @@ perform configuration
 
 .. code-block:: python
 
-    def init_effects():
+    def init_effects(context):
     
 This function should return a list of effect specifications.
 
+Handling icons
+==============
+Each of the configurators shown above take single parameter, context. This 
+context is set by client application and can be used to relay information that
+is needed in configuration process. One such an example is loading icons.
+
+Example of context can be found at :class:`herculeum.config.config.ConfigurationContext`.

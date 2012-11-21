@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.test.matchers.items &mdash; Herculeum 0.6 documentation</title>
+    <title>pyherc.test.matchers.items &mdash; Herculeum 0.7 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.6',
+        VERSION:     '0.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.6 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.7 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.test.matchers" href="package_matchers.html" />
     <link rel="next" title="pyherc.test.matchers.map_connectivity" href="module_map_connectivity.html" />
     <link rel="prev" title="pyherc.test.matchers.event" href="module_event.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_event.html" title="pyherc.test.matchers.event"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.6 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
@@ -81,9 +81,28 @@
 
 </dd></dl>
 
+<dl class="class">
+<dt id="pyherc.test.matchers.items.HasDamage">
+<em class="property">class </em><tt class="descclassname">pyherc.test.matchers.items.</tt><tt class="descname">HasDamage</tt><big>(</big><em>damage_amount</em>, <em>damage_type</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.items.HasDamage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">hamcrest.core.base_matcher.BaseMatcher</span></tt></p>
+<p>Class to check if item makes specific amount of specific damage</p>
+<dl class="method">
+<dt id="pyherc.test.matchers.items.HasDamage.describe_mismatch">
+<tt class="descname">describe_mismatch</tt><big>(</big><em>item</em>, <em>mismatch_description</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.items.HasDamage.describe_mismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describe this mismatch</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.matchers.items.HasDamage.describe_to">
+<tt class="descname">describe_to</tt><big>(</big><em>description</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.items.HasDamage.describe_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describe this matcher</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="function">
 <dt id="pyherc.test.matchers.items.does_have_item">
-<tt class="descclassname">pyherc.test.matchers.items.</tt><tt class="descname">does_have_item</tt><big>(</big><em>item</em>, <em>amount</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.items.does_have_item" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">pyherc.test.matchers.items.</tt><tt class="descname">does_have_item</tt><big>(</big><em>item</em>, <em>amount=1</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.items.does_have_item" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if level has given item</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -92,6 +111,40 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>item</strong> (<em>String</em>) &#8211; name of the item to check</li>
 <li><strong>amount</strong> (<em>int</em>) &#8211; amount of items to expect</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.matchers.items.does_not_have_item">
+<tt class="descclassname">pyherc.test.matchers.items.</tt><tt class="descname">does_not_have_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.items.does_not_have_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that level does not have given item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>String</em>) &#8211; name of the item to check</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.matchers.items.has_damage">
+<tt class="descclassname">pyherc.test.matchers.items.</tt><tt class="descname">has_damage</tt><big>(</big><em>damage_amount=None</em>, <em>damage_type=None</em><big>)</big><a class="headerlink" href="#pyherc.test.matchers.items.has_damage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if weapon makes specific amount and type of damage
+Both parameters support using matchers
+has_damage(greater_than(3), &#8216;piercing&#8217;) is valid call</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>damage_amount</strong> (<em>int</em>) &#8211; amount of damage</li>
+<li><strong>damage_type</strong> (<em>string</em>) &#8211; type of damage</li>
 </ul>
 </td>
 </tr>
@@ -150,7 +203,7 @@
         <li class="right" >
           <a href="module_event.html" title="pyherc.test.matchers.event"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.6 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>

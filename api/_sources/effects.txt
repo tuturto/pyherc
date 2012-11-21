@@ -57,7 +57,10 @@ that links names of effects to concrete Effect subclasses and their parameters.
                                         'duration': 240,
                                         'frequency': 60,
                                         'tick': 60,
-                                        'damage': 1})
+                                        'damage': 1,
+                                        'icon': 101,
+                                        'title': 'Minor poison',
+                                        'description': 'Causes minor amount of damage'})
 
     Pete = Adventurer()
     print('Hit points before poisoning: {0}'.format(Pete.hit_points))
@@ -123,7 +126,10 @@ Following example creates an Effect and adds it to the collection.
                    frequency = 10, 
                    tick = 0, 
                    damage = 1, 
-                   target = None)
+                   target = None,
+                   icon = 101,
+                   title = 'minor poison',
+                   description = 'Causes small amount of damage')
    collection.add_effect(effect)
    
    print collection.get_effects()

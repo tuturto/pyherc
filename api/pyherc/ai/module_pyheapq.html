@@ -1,0 +1,182 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.ai.pyheapq &mdash; Herculeum 0.7 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.7 documentation" href="../../index.html" />
+    <link rel="up" title="pyherc.ai" href="package_ai.html" />
+    <link rel="next" title="pyherc.ai.simple" href="module_simple.html" />
+    <link rel="prev" title="pyherc.ai.pathfinding" href="module_pathfinding.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_simple.html" title="pyherc.ai.simple"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_pathfinding.html" title="pyherc.ai.pathfinding"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="package_ai.html" accesskey="U">pyherc.ai</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.ai.pyheapq">
+<span id="pyherc-ai-pyheapq"></span><h1>pyherc.ai.pyheapq<a class="headerlink" href="#module-pyherc.ai.pyheapq" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt>This is a slightly modified version of python 2.6&#8217;s default heapq.py file:</dt>
+<dd><ul class="first simple">
+<li>added the updateheapvalue -function</li>
+<li>removed the importing of the C implementation</li>
+</ul>
+<p class="last">&#8211; Pauli Rikula</p>
+</dd>
+</dl>
+<dl class="function">
+<dt id="pyherc.ai.pyheapq.heappush">
+<tt class="descclassname">pyherc.ai.pyheapq.</tt><tt class="descname">heappush</tt><big>(</big><em>heap</em>, <em>item</em><big>)</big><a class="headerlink" href="#pyherc.ai.pyheapq.heappush" title="Permalink to this definition">¶</a></dt>
+<dd><p>Push item onto heap, maintaining the heap invariant.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.ai.pyheapq.heappop">
+<tt class="descclassname">pyherc.ai.pyheapq.</tt><tt class="descname">heappop</tt><big>(</big><em>heap</em><big>)</big><a class="headerlink" href="#pyherc.ai.pyheapq.heappop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pop the smallest item off the heap, maintaining the heap invariant.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.ai.pyheapq.heapify">
+<tt class="descclassname">pyherc.ai.pyheapq.</tt><tt class="descname">heapify</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#pyherc.ai.pyheapq.heapify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform list into a heap, in-place, in O(len(heap)) time.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.ai.pyheapq.heapreplace">
+<tt class="descclassname">pyherc.ai.pyheapq.</tt><tt class="descname">heapreplace</tt><big>(</big><em>heap</em>, <em>item</em><big>)</big><a class="headerlink" href="#pyherc.ai.pyheapq.heapreplace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pop and return the current smallest value, and add the new item.</p>
+<p>This is more efficient than heappop() followed by heappush(), and can be
+more appropriate when using a fixed-size heap.  Note that the value
+returned may be larger than item!  That constrains reasonable uses of
+this routine unless written as part of a conditional replacement:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>if item &gt; heap[0]:</dt>
+<dd>item = heapreplace(heap, item)</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.ai.pyheapq.nlargest">
+<tt class="descclassname">pyherc.ai.pyheapq.</tt><tt class="descname">nlargest</tt><big>(</big><em>n</em>, <em>iterable</em>, <em>key=None</em><big>)</big><a class="headerlink" href="#pyherc.ai.pyheapq.nlargest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the n largest elements in a dataset.</p>
+<p>Equivalent to:  sorted(iterable, key=key, reverse=True)[:n]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.ai.pyheapq.nsmallest">
+<tt class="descclassname">pyherc.ai.pyheapq.</tt><tt class="descname">nsmallest</tt><big>(</big><em>n</em>, <em>iterable</em>, <em>key=None</em><big>)</big><a class="headerlink" href="#pyherc.ai.pyheapq.nsmallest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the n smallest elements in a dataset.</p>
+<p>Equivalent to:  sorted(iterable, key=key)[:n]</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_pathfinding.html"
+                        title="previous chapter">pyherc.ai.pathfinding</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_simple.html"
+                        title="next chapter">pyherc.ai.simple</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pyherc/ai/module_pyheapq.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_simple.html" title="pyherc.ai.simple"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_pathfinding.html" title="pyherc.ai.pathfinding"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="package_ai.html" >pyherc.ai</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

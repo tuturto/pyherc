@@ -9,8 +9,9 @@ pyherc's release documentation
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
+   release_0_7
    release_0_6
    release_0_5
    release_0_4

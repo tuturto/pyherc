@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuration &mdash; Herculeum 0.6 documentation</title>
+    <title>Configuration &mdash; Herculeum 0.7 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.6',
+        VERSION:     '0.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.6 documentation" href="index.html" />
+    <link rel="top" title="Herculeum 0.7 documentation" href="index.html" />
     <link rel="next" title="Testing" href="testing.html" />
     <link rel="prev" title="Effects" href="effects.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="effects.html" title="Effects"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.6 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.7 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -86,7 +86,7 @@ is requested.</p>
 <h2>Item configuration<a class="headerlink" href="#item-configuration" title="Permalink to this headline">¶</a></h2>
 <p>The file containing item configuration should contain following function to
 perform configuration</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">init_items</span><span class="p">():</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">init_items</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
 </pre></div>
 </div>
 <p>This function should return a list of <a class="reference internal" href="pyherc/generators/module_item.html#pyherc.generators.item.ItemConfiguration" title="pyherc.generators.item.ItemConfiguration"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.item.ItemConfiguration</span></tt></a>
@@ -96,7 +96,7 @@ objects.</p>
 <h2>Character configuration<a class="headerlink" href="#character-configuration" title="Permalink to this headline">¶</a></h2>
 <p>The file containing character configuration should contain following function
 to perform configuration:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">init_creatures</span><span class="p">():</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">init_creatures</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
 </pre></div>
 </div>
 <p>This function should return a list of <a class="reference internal" href="pyherc/generators/module_creature.html#pyherc.generators.creature.CreatureConfiguration" title="pyherc.generators.creature.CreatureConfiguration"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.creature.CreatureConfiguration</span></tt></a>
@@ -106,10 +106,17 @@ objects.</p>
 <h2>Effects configuration<a class="headerlink" href="#effects-configuration" title="Permalink to this headline">¶</a></h2>
 <p>The file containing effects configuration should contain following function to
 perform configuration</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">init_effects</span><span class="p">():</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">init_effects</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
 </pre></div>
 </div>
 <p>This function should return a list of effect specifications.</p>
+</div>
+<div class="section" id="handling-icons">
+<h2>Handling icons<a class="headerlink" href="#handling-icons" title="Permalink to this headline">¶</a></h2>
+<p>Each of the configurators shown above take single parameter, context. This
+context is set by client application and can be used to relay information that
+is needed in configuration process. One such an example is loading icons.</p>
+<p>Example of context can be found at <a class="reference internal" href="herculeum/config/module_config.html#herculeum.config.config.ConfigurationContext" title="herculeum.config.config.ConfigurationContext"><tt class="xref py py-class docutils literal"><span class="pre">herculeum.config.config.ConfigurationContext</span></tt></a>.</p>
 </div>
 </div>
 
@@ -127,6 +134,7 @@ perform configuration</p>
 <li><a class="reference internal" href="#item-configuration">Item configuration</a></li>
 <li><a class="reference internal" href="#character-configuration">Character configuration</a></li>
 <li><a class="reference internal" href="#effects-configuration">Effects configuration</a></li>
+<li><a class="reference internal" href="#handling-icons">Handling icons</a></li>
 </ul>
 </li>
 </ul>
@@ -174,7 +182,7 @@ perform configuration</p>
         <li class="right" >
           <a href="effects.html" title="Effects"
              >previous</a> |</li>
-        <li><a href="index.html">Herculeum 0.6 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Herculeum 0.7 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

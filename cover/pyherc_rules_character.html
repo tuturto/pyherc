@@ -142,7 +142,7 @@
 <p id='n79' class='pln'><a href='#n79'>79</a></p>
 <p id='n80' class='stm run hide_run'><a href='#n80'>80</a></p>
 <p id='n81' class='pln'><a href='#n81'>81</a></p>
-<p id='n82' class='stm run hide_run'><a href='#n82'>82</a></p>
+<p id='n82' class='pln'><a href='#n82'>82</a></p>
 <p id='n83' class='stm run hide_run'><a href='#n83'>83</a></p>
 <p id='n84' class='stm run hide_run'><a href='#n84'>84</a></p>
 <p id='n85' class='stm run hide_run'><a href='#n85'>85</a></p>
@@ -150,11 +150,12 @@
 <p id='n87' class='stm run hide_run'><a href='#n87'>87</a></p>
 <p id='n88' class='stm run hide_run'><a href='#n88'>88</a></p>
 <p id='n89' class='stm run hide_run'><a href='#n89'>89</a></p>
-<p id='n90' class='pln'><a href='#n90'>90</a></p>
-<p id='n91' class='stm run hide_run'><a href='#n91'>91</a></p>
+<p id='n90' class='stm run hide_run'><a href='#n90'>90</a></p>
+<p id='n91' class='pln'><a href='#n91'>91</a></p>
 <p id='n92' class='stm run hide_run'><a href='#n92'>92</a></p>
-<p id='n93' class='pln'><a href='#n93'>93</a></p>
-<p id='n94' class='stm run hide_run'><a href='#n94'>94</a></p>
+<p id='n93' class='stm run hide_run'><a href='#n93'>93</a></p>
+<p id='n94' class='pln'><a href='#n94'>94</a></p>
+<p id='n95' class='stm run hide_run'><a href='#n95'>95</a></p>
                 
             </td>
             <td class='text' valign='top'>
@@ -183,7 +184,7 @@
 <p id='t23' class='pln'><span class='str'>&quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
 <p id='t24' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t25' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>logging</span><span class='strut'>&nbsp;</span></p>
-<p id='t26' class='stm run hide_run'><span class='key'>from</span> <span class='nam'>pyherc</span><span class='op'>.</span><span class='nam'>data</span> <span class='key'>import</span> <span class='nam'>Character</span><span class='op'>,</span> <span class='nam'>WeaponProficiency</span><span class='strut'>&nbsp;</span></p>
+<p id='t26' class='stm run hide_run'><span class='key'>from</span> <span class='nam'>pyherc</span><span class='op'>.</span><span class='nam'>data</span> <span class='key'>import</span> <span class='nam'>Character</span><span class='op'>,</span> <span class='nam'>WeaponProficiency</span><span class='op'>,</span> <span class='nam'>Inventory</span><span class='strut'>&nbsp;</span></p>
 <p id='t27' class='stm run hide_run'><span class='key'>from</span> <span class='nam'>pyherc</span><span class='op'>.</span><span class='nam'>data</span><span class='op'>.</span><span class='nam'>effects</span> <span class='key'>import</span> <span class='nam'>EffectsCollection</span><span class='strut'>&nbsp;</span></p>
 <p id='t28' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>herculeum</span><span class='op'>.</span><span class='nam'>config</span><span class='op'>.</span><span class='nam'>tiles</span><span class='strut'>&nbsp;</span></p>
 <p id='t29' class='pln'><span class='strut'>&nbsp;</span></p>
@@ -238,20 +239,21 @@
 <p id='t78' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>temp_kit</span> <span class='op'>=</span> <span class='nam'>kit_stats</span><span class='op'>[</span><span class='nam'>kit</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
 <p id='t79' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t80' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span> <span class='op'>=</span> <span class='nam'>Character</span><span class='op'>(</span><span class='nam'>model</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
-<p id='t81' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>EffectsCollection</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t82' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>body</span> <span class='op'>=</span> <span class='nam'>temp_race</span><span class='op'>[</span><span class='str'>&#39;body&#39;</span><span class='op'>]</span> <span class='op'>+</span> <span class='nam'>temp_kit</span><span class='op'>[</span><span class='str'>&#39;body&#39;</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
-<p id='t83' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>finesse</span> <span class='op'>=</span> <span class='nam'>temp_race</span><span class='op'>[</span><span class='str'>&#39;finesse&#39;</span><span class='op'>]</span> <span class='op'>+</span> <span class='nam'>temp_kit</span><span class='op'>[</span><span class='str'>&#39;finesse&#39;</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
-<p id='t84' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>mind</span> <span class='op'>=</span> <span class='nam'>temp_race</span><span class='op'>[</span><span class='str'>&#39;mind&#39;</span><span class='op'>]</span> <span class='op'>+</span> <span class='nam'>temp_kit</span><span class='op'>[</span><span class='str'>&#39;mind&#39;</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
-<p id='t85' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>hit_points</span> <span class='op'>=</span> <span class='nam'>temp_race</span><span class='op'>[</span><span class='str'>&#39;hp&#39;</span><span class='op'>]</span> <span class='op'>+</span> <span class='nam'>temp_kit</span><span class='op'>[</span><span class='str'>&#39;hp&#39;</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
-<p id='t86' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>max_hp</span> <span class='op'>=</span> <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>hit_points</span><span class='strut'>&nbsp;</span></p>
-<p id='t87' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>speed</span> <span class='op'>=</span> <span class='nam'>temp_race</span><span class='op'>[</span><span class='str'>&#39;speed&#39;</span><span class='op'>]</span> <span class='op'>+</span> <span class='nam'>temp_kit</span><span class='op'>[</span><span class='str'>&#39;speed&#39;</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
-<p id='t88' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>size</span> <span class='op'>=</span> <span class='str'>&#39;medium&#39;</span><span class='strut'>&nbsp;</span></p>
-<p id='t89' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>attack</span> <span class='op'>=</span> <span class='num'>3</span><span class='strut'>&nbsp;</span></p>
-<p id='t90' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t91' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>feats</span><span class='op'>.</span><span class='nam'>append</span><span class='op'>(</span><span class='nam'>WeaponProficiency</span><span class='op'>(</span><span class='str'>&#39;simple&#39;</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t92' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>icon</span> <span class='op'>=</span> <span class='nam'>herculeum</span><span class='op'>.</span><span class='nam'>config</span><span class='op'>.</span><span class='nam'>tiles</span><span class='op'>.</span><span class='nam'>HUMAN_FIGHTER</span><span class='strut'>&nbsp;</span></p>
-<p id='t93' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t94' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>new_character</span><span class='strut'>&nbsp;</span></p>
+<p id='t81' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>EffectsCollection</span><span class='op'>(</span><span class='op'>)</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t82' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>Inventory</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t83' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>body</span> <span class='op'>=</span> <span class='nam'>temp_race</span><span class='op'>[</span><span class='str'>&#39;body&#39;</span><span class='op'>]</span> <span class='op'>+</span> <span class='nam'>temp_kit</span><span class='op'>[</span><span class='str'>&#39;body&#39;</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
+<p id='t84' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>finesse</span> <span class='op'>=</span> <span class='nam'>temp_race</span><span class='op'>[</span><span class='str'>&#39;finesse&#39;</span><span class='op'>]</span> <span class='op'>+</span> <span class='nam'>temp_kit</span><span class='op'>[</span><span class='str'>&#39;finesse&#39;</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
+<p id='t85' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>mind</span> <span class='op'>=</span> <span class='nam'>temp_race</span><span class='op'>[</span><span class='str'>&#39;mind&#39;</span><span class='op'>]</span> <span class='op'>+</span> <span class='nam'>temp_kit</span><span class='op'>[</span><span class='str'>&#39;mind&#39;</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
+<p id='t86' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>hit_points</span> <span class='op'>=</span> <span class='nam'>temp_race</span><span class='op'>[</span><span class='str'>&#39;hp&#39;</span><span class='op'>]</span> <span class='op'>+</span> <span class='nam'>temp_kit</span><span class='op'>[</span><span class='str'>&#39;hp&#39;</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
+<p id='t87' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>max_hp</span> <span class='op'>=</span> <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>hit_points</span><span class='strut'>&nbsp;</span></p>
+<p id='t88' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>speed</span> <span class='op'>=</span> <span class='nam'>temp_race</span><span class='op'>[</span><span class='str'>&#39;speed&#39;</span><span class='op'>]</span> <span class='op'>+</span> <span class='nam'>temp_kit</span><span class='op'>[</span><span class='str'>&#39;speed&#39;</span><span class='op'>]</span><span class='strut'>&nbsp;</span></p>
+<p id='t89' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>size</span> <span class='op'>=</span> <span class='str'>&#39;medium&#39;</span><span class='strut'>&nbsp;</span></p>
+<p id='t90' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>attack</span> <span class='op'>=</span> <span class='num'>1</span><span class='strut'>&nbsp;</span></p>
+<p id='t91' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t92' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>feats</span><span class='op'>.</span><span class='nam'>append</span><span class='op'>(</span><span class='nam'>WeaponProficiency</span><span class='op'>(</span><span class='str'>&#39;simple&#39;</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t93' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>new_character</span><span class='op'>.</span><span class='nam'>icon</span> <span class='op'>=</span> <span class='nam'>herculeum</span><span class='op'>.</span><span class='nam'>config</span><span class='op'>.</span><span class='nam'>tiles</span><span class='op'>.</span><span class='nam'>HUMAN_FIGHTER</span><span class='strut'>&nbsp;</span></p>
+<p id='t94' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t95' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>new_character</span><span class='strut'>&nbsp;</span></p>
                 
             </td>
         </tr>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.test.builders.effect &mdash; Herculeum 0.6 documentation</title>
+    <title>pyherc.test.builders.effect &mdash; Herculeum 0.7 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.6',
+        VERSION:     '0.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.6 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.7 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.test.builders" href="package_builders.html" />
     <link rel="next" title="pyherc.test.builders.item" href="module_item.html" />
     <link rel="prev" title="pyherc.test.builders.character" href="module_character.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_character.html" title="pyherc.test.builders.character"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.6 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
@@ -67,6 +67,126 @@
 <em class="property">class </em><tt class="descclassname">pyherc.test.builders.effect.</tt><tt class="descname">EffectBuilder</tt><a class="headerlink" href="#pyherc.test.builders.effect.EffectBuilder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Class to build effects</p>
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectBuilder.build">
+<tt class="descname">build</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectBuilder.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the effect</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">fully configured effect</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Effect</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectBuilder.with_description">
+<tt class="descname">with_description</tt><big>(</big><em>description</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectBuilder.with_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set description for effect</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>description</strong> (<em>string</em>) &#8211; description to set</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectBuilder.with_duration">
+<tt class="descname">with_duration</tt><big>(</big><em>duration</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectBuilder.with_duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set duration of the effect</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>duration</strong> (<em>int</em>) &#8211; duration in ticks</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectBuilder.with_effect_name">
+<tt class="descname">with_effect_name</tt><big>(</big><em>effect_name</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectBuilder.with_effect_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set name of the effect</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>effect_name</strong> (<em>string</em>) &#8211; name to use</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectBuilder.with_frequency">
+<tt class="descname">with_frequency</tt><big>(</big><em>frequency</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectBuilder.with_frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set frequency effect triggers</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frequency</strong> (<em>int</em>) &#8211; frequency in ticks</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectBuilder.with_icon">
+<tt class="descname">with_icon</tt><big>(</big><em>icon</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectBuilder.with_icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set icon for effect</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>icon</strong> (<em>integer</em>) &#8211; icon to set</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectBuilder.with_multiple_allowed">
+<tt class="descname">with_multiple_allowed</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectBuilder.with_multiple_allowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mark the effect to allow multiple instances</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectBuilder.with_tick">
+<tt class="descname">with_tick</tt><big>(</big><em>tick</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectBuilder.with_tick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set internal clock of the effect</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tick</strong> (<em>int</em>) &#8211; internal clock in ticks</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectBuilder.with_title">
+<tt class="descname">with_title</tt><big>(</big><em>title</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectBuilder.with_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set title for effect</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>title</strong> (<em>string</em>) &#8211; title to set</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -82,6 +202,62 @@
 <dt>Returns:</dt>
 <dd>EffectHandle</dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectHandleBuilder.with_charges">
+<tt class="descname">with_charges</tt><big>(</big><em>charges</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectHandleBuilder.with_charges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set amount of charges effect handle has</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>charges</strong> (<em>int</em>) &#8211; amount of charges</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectHandleBuilder.with_effect">
+<tt class="descname">with_effect</tt><big>(</big><em>effect</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectHandleBuilder.with_effect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure effect handle to use specified effect</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>effect</strong> (<em>Effect</em>) &#8211; effect to create</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectHandleBuilder.with_parameters">
+<tt class="descname">with_parameters</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectHandleBuilder.with_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure effect handle with given parameters</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> &#8211; parameters to use when creating an effect</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.effect.EffectHandleBuilder.with_trigger">
+<tt class="descname">with_trigger</tt><big>(</big><em>trigger</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.effect.EffectHandleBuilder.with_trigger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure effect handle to use specified trigger</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>trigger</strong> (<em>string</em>) &#8211; trigger to use</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -137,7 +313,7 @@
         <li class="right" >
           <a href="module_character.html" title="pyherc.test.builders.character"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.6 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
