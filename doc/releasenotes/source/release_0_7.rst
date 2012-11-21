@@ -22,6 +22,7 @@ New features
 Fixed bugs
 **********
 
+ - 34_ Split damage weapons do not show full damage on screen
  - 33_ using stairs while there is damage counter on screen crashes game
  - 27_ dropping a weapon in use retains the weapon in use
 
@@ -44,6 +45,7 @@ Other notes
 
  - web.py is not required unless using debug server
 
+.. _34: https://github.com/tuturto/pyherc/issues/34
 .. _33: https://github.com/tuturto/pyherc/issues/33
 .. _32: https://github.com/tuturto/pyherc/issues/32
 .. _31: https://github.com/tuturto/pyherc/issues/31
