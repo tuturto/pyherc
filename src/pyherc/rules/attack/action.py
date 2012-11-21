@@ -95,14 +95,14 @@ class AttackAction(object):
                                         target = self.target,
                                         damage = self.damage,
                                         affected_tiles = [self.target.location]))
+
+            self.__trigger_attack_effects()
         else:
             self.attacker.raise_event(AttackMissEvent(
                                         type = self.attack_type,
                                         attacker = self.attacker,
                                         target = self.target,
                                         affected_tiles = [self.target.location]))
-
-        self.__trigger_attack_effects()
 
         self.dying_rules.check_dying(self.target)
 

@@ -29,6 +29,8 @@ from pyherc.data.effects import Effect
 from pyherc.data import Level, Model
 from pyherc.generators import EffectsFactory
 from pyherc.data.effects import EffectHandle
+from pyherc.rules.attack.action import AttackAction
+from pyherc.data import Character
 
 from pyherc.events import PoisonAddedEvent, Event
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
@@ -39,7 +41,7 @@ from pyherc.test.builders import LevelBuilder
 from pyherc.test.matchers import has_effect, has_effects, has_no_effects
 from pyherc.test.matchers import EventType
 
-from mockito import mock, when, any, verify
+from mockito import mock, when, any, verify, never
 from hamcrest import * #pylint: disable=W0401
 
 class TestEffects(object):
@@ -460,3 +462,41 @@ class TestEternalEffects(object):
         self.model.get_next_creature(mock())
 
         assert_that(self.character2, has_effect(self.effect))
+
+class TestEffectsInCombat(object):
+    """
+    Test that effects are created correctly during combat
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestEffectsInCombat, self).__init__()
+
+    def test_effect_is_not_created_on_miss(self):
+        """
+        Test that effect is not created when attack misses
+        """
+        to_hit = mock()
+        when(to_hit).is_hit().thenReturn(False)
+
+        attacker = mock(Character)
+        when(attacker).get_effect_handles('on attack hit').thenReturn([mock()])
+
+        factory = mock()
+        when(factory).create_effect(any(),
+                                    target = any()).thenReturn(mock())
+
+        action = AttackAction(attack_type = '',
+                              to_hit = to_hit,
+                              damage = mock(),
+                              attacker = attacker,
+                              target = mock(),
+                              effect_factory = factory,
+                              dying_rules = mock())
+
+        action.execute()
+
+        verify(factory, never).create_effect(any(),
+                                             target = any())
+
