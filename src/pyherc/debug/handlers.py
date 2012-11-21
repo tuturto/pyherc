@@ -23,6 +23,7 @@ Module for page handlers
 """
 import pyherc.debug.data
 from herculeum.application import APP
+from pyherc.events import DropEvent
 web_loaded = False
 
 try:
@@ -207,5 +208,8 @@ class Factory:
         if item_name != '':
             item = APP.item_generator.generate_item(name = item_name)
             level.add_item(item, (location[0] + 2, location[1]))
+
+            player_character.raise_event(DropEvent(player_character,
+                                                   item))
 
         return 'ok'

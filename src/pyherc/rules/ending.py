@@ -22,7 +22,7 @@
 Module for checking end conditions
 """
 
-from pyherc.events import DeathEvent
+from pyherc.events import DeathEvent, DropEvent
 from pyherc.aspects import Logged
 
 class Dying(object):
@@ -49,10 +49,14 @@ class Dying(object):
             for item in character.inventory:
                 character.inventory.remove(item)
                 character.level.add_item(item, character.location)
+                character.raise_event(DropEvent(character,
+                                                item))
 
             if not character.inventory.weapon == None:
                 character.level.add_item(character.inventory.weapon,
                                          character.location)
+                character.raise_event(DropEvent(character,
+                                                item))
                 character.inventory.weapon = None
 
             character.raise_event(DeathEvent(deceased = character,

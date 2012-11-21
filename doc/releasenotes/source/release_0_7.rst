@@ -25,6 +25,7 @@ Fixed bugs
  - 34_ Split damage weapons do not show full damage on screen
  - 33_ using stairs while there is damage counter on screen crashes game
  - 27_ dropping a weapon in use retains the weapon in use
+ - 18_ bug: Entities created by debug server are not shown on map
 
 **********
 Known bugs
@@ -33,7 +34,6 @@ Known bugs
  - 26_ bug: spider poisons in combat even when it misses
  - 25_ bug: dying should make game to return to main screen
  - 21_ bug: PyQt user interface does not support line of sight
- - 18_ bug: Entities created by debug server are not shown on map
  - 10_ bug: Player character creation has hard coded values
  - 9_ bug: Attacks use hard coded time
  - 5_ bug: Raised events are not filtered, but delivered to all creatures
