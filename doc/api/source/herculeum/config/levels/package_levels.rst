@@ -9,5 +9,6 @@ herculeum.config.levels
    module_configure_catacombs
    module_configure_items
    module_configure_upper_crypt
+   module_crimson_lair
    module_effects
    

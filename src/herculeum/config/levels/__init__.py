@@ -21,6 +21,7 @@
 """
 package for configuring levels
 """
+import crimson_lair
 import configure_catacombs
 import configure_upper_crypt
 import configure_items

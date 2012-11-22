@@ -6,6 +6,7 @@ pyherc.generators.level.room
 .. toctree::
    :maxdepth: 2
    
-   module_squareroom
    module_catacombs
    module_corridor
+   module_crimson_lair
+   module_squareroom
