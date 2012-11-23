@@ -14,21 +14,7 @@ Bonus chart
 
 Combat
 ======
-To Hit (melee): 2d6 <= Body + Modifiers
-                2 is always a hit
-                12 is always a miss
-                
-To Hit (ranged): 2d6 <= Finesse + Modifiers
-                2 is always a hit
-                12 is always a miss
-
-To Hit Modifiers (melee):
-Armour                          varies
-Lack of proper weapon skill     +2
-Lack of proper armour skill     +1 for attacker, -1 if defender lacks the skill
-Dual-wielding                   +1 / +2 (+1 / +1 if secondary is light weapon)
-Light/regular weapon used with 2 hands  -1
-Unarmed opponent                -2 (only if using weapon)
+To Hit: normally automatic
 
 Damage: Weapon damage + Modifiers
 Critical hit:
