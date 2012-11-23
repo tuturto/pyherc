@@ -115,12 +115,15 @@ class AttackAction(object):
 
         .. versionadded:: 0.4
         """
+        weapon = self.attacker.inventory.weapon
         effects = self.attacker.get_effect_handles('on attack hit')
+        if weapon != None:
+            effects.extend(weapon.get_effect_handles('on attack hit'))
         for effect_spec in effects:
             effect = self.effect_factory.create_effect(
                                                     effect_spec.effect,
                                                     target = self.target)
-            if effect.duration == 0:
+            if effect.duration <= 0:
                 effect.trigger(self.dying_rules)
             else:
                 self.target.add_effect(effect)

@@ -122,6 +122,52 @@ class TestEffects(object):
 
         verify(effect).trigger(any())
 
+    def test_effect_on_weapon_triggered_on_hit(self):
+        """
+        Effects on weapon should be triggered when landing a hit
+        """
+        effect = mock()
+        effect.duration = 0
+        model = mock()
+        rng = mock()
+
+        when(rng).randint(1, 6).thenReturn(1)
+
+        effect_factory = mock(EffectsFactory)
+        when(effect_factory).create_effect(any(),
+                                           target = any()).thenReturn(effect)
+
+        action_factory = (ActionFactoryBuilder()
+                            .with_model(model)
+                            .with_attack_factory()
+                            .with_effect_factory(effect_factory)
+                            .build())
+
+        attacker = (CharacterBuilder()
+                        .with_weapon(ItemBuilder()
+                                        .with_damage(2, 'piercing')
+                                        .with_effect(
+                                            EffectHandleBuilder()
+                                                .with_trigger('on attack hit')))
+                        .with_location((5, 5))
+                        .build())
+
+        defender = (CharacterBuilder()
+                        .with_location((6, 5))
+                        .build())
+
+        level = (LevelBuilder()
+                    .with_character(attacker)
+                    .with_character(defender)
+                    .build())
+
+        attacker.perform_attack(3,
+                                action_factory,
+                                rng)
+
+        verify(effect).trigger(any())
+
+
     def test_creating_effect(self):
         """
         Test that effect can be created and triggered immediately

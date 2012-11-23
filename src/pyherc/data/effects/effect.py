@@ -74,8 +74,9 @@ class Effect(object):
         """
         Do house keeping after effect has been triggered
         """
-        self.tick = self.frequency
-        self.duration = self.duration - self.frequency
+        if self.duration != None:
+            self.tick = self.frequency
+            self.duration = self.duration - self.frequency
 
     @logged
     def get_add_event(self):

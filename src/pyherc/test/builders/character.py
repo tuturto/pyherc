@@ -51,6 +51,7 @@ class CharacterBuilder(object):
         self.location = ()
 
         self.items = []
+        self.weapon = None
 
         self.effect_handles = []
         self.effects = []
@@ -244,6 +245,21 @@ class CharacterBuilder(object):
 
         return self
 
+    def with_weapon(self, weapon):
+        """
+        Set weapon to use
+
+        :param weapon: weapon to use
+        :type weapon: Item
+        """
+        if hasattr(weapon, 'build'):
+            self.weapon = weapon.build()
+        else:
+            self.weapon = weapon
+
+        return self
+
+
     def with_finesse(self, finesse):
         """
         Set finesse of the character
@@ -282,6 +298,7 @@ class CharacterBuilder(object):
         character.tick = self.tick
         character.level = self.level
         character.location = self.location
+        character.inventory.weapon = self.weapon
 
         for item in self.items:
             character.inventory.append(item)
