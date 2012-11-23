@@ -37,6 +37,7 @@ class DamageBuilder(object):
         self.frequency = 1
         self.tick = 0
         self.damage = 5
+        self.damage_type = 'magical'
         self.target = mock()
         self.icon = 101
         self.title = 'damage'
@@ -80,6 +81,13 @@ class DamageBuilder(object):
         self.target = target
         return self
 
+    def with_damage_type(self, damage_type):
+        """
+        Set type of damage
+        """
+        self.damage_type = damage_type
+        return self
+
     def build(self):
         """
         Builds damage object
@@ -88,6 +96,7 @@ class DamageBuilder(object):
                       frequency = self.frequency,
                       tick = self.tick,
                       damage = self.damage,
+                      damage_type = self.damage_type,
                       target = self.target,
                       icon = self.icon,
                       title = self.title,

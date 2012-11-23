@@ -21,7 +21,7 @@
 """
 module for configuring effects
 """
-from pyherc.data.effects import Heal, Poison
+from pyherc.data.effects import Heal, Poison, Damage
 
 def init_effects(context):
     """
@@ -64,5 +64,17 @@ def init_effects(context):
                                                      'minor_poison.png'),
                     'title': 'Minor poison',
                     'description': 'Causes minor amount of damage'}))
+
+    config.append(('major fire damage',
+                   {'type': Damage,
+                    'duration': None,
+                    'frequency': None,
+                    'tick': None,
+                    'damage': 12,
+                    'damage_type': 'fire',
+                    'icon': surface_manager.add_icon('minor poison',
+                                                     'minor_poison.png'),
+                    'title': 'Major fire damage',
+                    'description': 'Causes major amount of fire damage'}))
 
     return config

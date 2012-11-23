@@ -51,6 +51,10 @@ from herculeum.config.tiles import CREATURE_RAT_3, CREATURE_RAT_4
 from herculeum.config.tiles import CREATURE_BEETLE_1, CREATURE_BEETLE_2
 from herculeum.config.tiles import CREATURE_SKELETON_WARRIOR
 
+from pyherc.generators import ItemConfigurations
+from pyherc.generators import ItemConfiguration, WeaponConfiguration
+from pyherc.data.effects import EffectHandle
+
 from pyherc.config.dsl import LevelConfiguration
 from pyherc.generators import CreatureConfiguration
 from pyherc.ai import FlockingHerbivore, SkeletonWarriorAI
@@ -148,6 +152,7 @@ def init_creatures(context):
     config = []
     surface_manager = context.surface_manager
 
+
     config.append(CreatureConfiguration(name = 'crimson jaw',
                                         body = 12,
                                         finesse = 9,
@@ -156,7 +161,45 @@ def init_creatures(context):
                                         speed = 3,
                                         icons = surface_manager.add_icon('crimson jaw',
                                                                          'crimson-jaw.png'),
-                                        attack = 4,
-                                        ai = FlockingHerbivore))
+                                        attack = 8,
+                                        inventory = [InventoryConfiguration(
+                                                            item_name = 'whip of ashmque',
+                                                            min_amount = 0,
+                                                            max_amount = 1,
+                                                            probability = 100)],
+                                        ai = SkeletonWarriorAI))
+
+    return config
+
+def init_items(context):
+    """
+    Initialise special items
+
+    :returns: item configurations
+    :rtype: [ItemConfiguration]
+    """
+    surface_manager = context.surface_manager
+    config = []
+
+    config.append(
+                  ItemConfiguration(name = 'whip of ashmque',
+                                    cost = 0,
+                                    weight = 12,
+                                    icons = [surface_manager.add_icon('whip of ashmque', 'ashmque.png')],
+                                    types = ['weapon',
+                                             'one-handed',
+                                             'melee',
+                                             'exotic weapon'],
+                                    rarity = 'artifact',
+                                    effect_handles = [EffectHandle(
+                                            trigger = 'on attack hit',
+                                            effect = 'major fire damage',
+                                            parameters = None,
+                                            charges = 999999)],
+                                    weapon_configration = WeaponConfiguration(
+                                            damage = [(12, 'slashing')],
+                                            critical_range = 10,
+                                            critical_damage = 12,
+                                            weapon_class = 'exotic')))
 
     return config

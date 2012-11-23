@@ -32,6 +32,7 @@ class Damage(Effect):
 
     @logged
     def __init__(self, duration, frequency, tick, damage, target,
+                 damage_type,
                  icon, title, description):
         """
         Default constructor
@@ -43,6 +44,7 @@ class Damage(Effect):
                                      title = title,
                                      description = description)
         self.damage = damage
+        self.damage_type = damage_type
         self.target = target
 
     @logged
