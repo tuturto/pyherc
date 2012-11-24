@@ -19,14 +19,31 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for events that are used to communicate between creatures and UI
+Tests for damage effect
 """
-from .event import Event
-from .move import MoveEvent
-from .combat import AttackHitEvent, AttackNothingEvent, AttackMissEvent
-from .poison import PoisonTriggeredEvent, PoisonAddedEvent, PoisonEndedEvent
-from .healing import HealTriggeredEvent, HealAddedEvent, HealEndedEvent
-from .death import DeathEvent
-from .inventory import PickUpEvent, DropEvent
-from .hitpoints import HitPointsChangedEvent
-from .damage import DamageAddedEvent, DamageTriggeredEvent, DamageEndedEvent
+from mockito import mock, verify, any
+from pyherc.test.builders import DamageBuilder
+
+class TestDamageEffect(object):
+    """
+    Tests for damage effect
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestDamageEffect, self).__init__()
+
+    def test_triggering_damage_raises_event(self):
+        """
+        Triggering damage effect should raise a proper event
+        """
+        target = mock()
+        target.hit_points = 10
+        effect = (DamageBuilder()
+                    .with_target(target)
+                    .build())
+
+        effect.trigger(dying_rules = mock())
+
+        verify(target).raise_event(any())

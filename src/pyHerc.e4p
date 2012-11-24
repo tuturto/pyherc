@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-11-22, 11:48:54 -->
+<!-- Saved: 2012-11-24, 20:54:37 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -205,6 +205,8 @@
     <Source>pyherc/test/matchers/path_finding.py</Source>
     <Source>pyherc/generators/level/room/crimson_lair.py</Source>
     <Source>herculeum/config/levels/crimson_lair.py</Source>
+    <Source>pyherc/test/unit/test_damage_effect.py</Source>
+    <Source>pyherc/events/damage.py</Source>
   </Sources>
   <Forms>
   </Forms>

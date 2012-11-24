@@ -23,6 +23,7 @@ Module for damage
 """
 from pyherc.aspects import Logged
 from pyherc.data.effects.effect import Effect
+from pyherc.events import DamageTriggeredEvent
 
 class Damage(Effect):
     """
@@ -54,3 +55,7 @@ class Damage(Effect):
         """
         self.target.hit_points = self.target.hit_points - self.damage
 
+        self.target.raise_event(
+                        DamageTriggeredEvent(target = self.target,
+                                             damage = self.damage,
+                                             damage_type = self.damage_type))

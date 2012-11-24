@@ -248,6 +248,11 @@ class PlayMapWidget(QWidget):
             self.show_damage_counter(event.target.location,
                                      -damage,
                                      'white')
+        elif event.event_type == 'damage triggered':
+            damage = event.damage
+            self.show_damage_counter(event.target.location,
+                                     -damage,
+                                     'red')
         elif event.event_type == 'poisoned':
             self.show_status_counter(event.target.location,
                                      'poisoned',
