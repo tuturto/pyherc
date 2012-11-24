@@ -252,25 +252,30 @@ class PlayMapWidget(QWidget):
             damage = event.damage
             self.show_damage_counter(event.target.location,
                                      -damage,
-                                     'red')
+                                     'red',
+                                     (0, 16))
         elif event.event_type == 'poisoned':
             self.show_status_counter(event.target.location,
                                      'poisoned',
-                                     'green')
+                                     'green',
+                                     (0, 16))
         elif event.event_type == 'poison triggered':
             self.show_damage_counter(event.target.location,
                                      -event.damage,
-                                     'green')
+                                     'green',
+                                     (0, 16))
         elif event.event_type == 'heal started':
             self.show_status_counter(event.target.location,
                                      'healing',
-                                     'blue')
+                                     'blue',
+                                     (0, 16))
         elif event.event_type == 'heal triggered':
             self.show_damage_counter(event.target.location,
                                      event.healing,
-                                     'blue');
+                                     'blue',
+                                     (0, 16));
 
-    def show_status_counter(self, location, status, colour):
+    def show_status_counter(self, location, status, colour, offset = (0, 0)):
         """
         Show status counter
         """
@@ -282,8 +287,8 @@ class PlayMapWidget(QWidget):
         bounds = damage_counter.boundingRect()
         width = bounds.width()
 
-        damage_counter.setPos(location[0] * 32 + 16 - (width / 2),
-                              location[1] * 32)
+        damage_counter.setPos(location[0] * 32 + 16 - (width / 2) + offset[0],
+                              location[1] * 32 + offset[1])
 
         animation = QSequentialAnimationGroup()
 
@@ -307,7 +312,7 @@ class PlayMapWidget(QWidget):
 
         animation.start()
 
-    def show_damage_counter(self, location, damage, colour):
+    def show_damage_counter(self, location, damage, colour, offset = (0, 0)):
         """
         Show damage counter
         """
@@ -323,16 +328,17 @@ class PlayMapWidget(QWidget):
 
         damage_counter.setPos((location[0] * 32
                                     + 16 - (width / 2)
-                                    + rand.randint(-16, 16)),
-                              location[1] * 32)
+                                    + rand.randint(-16, 16))
+                                    + offset[0],
+                              location[1] * 32 + offset[1])
 
         animation = QSequentialAnimationGroup()
 
         moving = QPropertyAnimation(damage_counter.adapter,
                                     'y_location')
         moving.setDuration(750)
-        moving.setStartValue(location[1] * 32)
-        moving.setEndValue(location[1] * 32 - 32)
+        moving.setStartValue(location[1] * 32 + offset[1])
+        moving.setEndValue(location[1] * 32 - 32 + offset[1])
         curve = QEasingCurve(QEasingCurve.OutElastic)
         moving.setEasingCurve(curve)
         animation.addAnimation(moving)
