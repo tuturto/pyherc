@@ -11,21 +11,27 @@ Playing area is displayed in the middle of the screen.
 .. image:: images/game_area.png
    :alt: Picture of playing area
 
+The game has been designed to be played with keyboard or with joypad with help
+of correct tools. Buttons used to control the game are (*example configuration
+for joypad in emphasised*):
+
+ * keypad or *joystick* - used to move around and navigate menus
+ * 5 in keypad or *action button 1* - confirm selection, use item, use stairs
+ * enter on keypad or *action button 2* - cancel selection, drop item
+ * space or *menu button* - open or close menu
+ * page up / page down or *shoulder buttons* - move to different page in menu
+
 *************
 Moving around
 *************
-
-Keyboard
-========
-
-Player can move around using keypad.
+Player can move in eight directions and descent or ascent stairs.
 
 *****************
 Attacking enemies
 *****************
 
-Character automatically attacks enemies if player tries to enter same location
-as the enemy is.
+Character automatically attacks an enemy if player tries to enter same location
+where the enemy is.
 
 *********
 Inventory
@@ -37,15 +43,5 @@ the same time.
 .. image:: images/inventory.png
    :alt: Picture of inventory screen
 
-Inventory can be opened and closed by clicking the command menu or by pressing
-space.
-   
-Keyboard
-========
-If numlock has been turned on, cursor can be moved around with keypad. Key 5 is
-used to pick up and use items, while enter is used to drop them back to ground.
-
-Mouse
-=====
-Left clicking is used to pick up and use items. Right clicking an item will
-drop it.
+Inventory is accessible from menu. In inventory window, player can pick up 
+items from ground, drop them back to ground or use them.

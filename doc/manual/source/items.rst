@@ -74,15 +74,38 @@ Shield
 Magic
 *****
 
-Holy water
-==========
-
 Potions
 =======
 
+Holy water
+----------
+
 Healing potion
 --------------
+Potions of healing are used to soothe and heal pains and damage of their user.
+Effect of healing potion is usually gradual and it takes a while for the full
+benefit to be received.
+
+Most of the healing potions can not properly function if the user has been
+poisoned. Two mixtures will interact and prevent healing from taking effect.
 
 Poison
 ------
+There are various poisons that will harm person coming into contact with them.
+Some are weak, only dealing small amount of damage, while some can kill almost
+instantly. If the poisoning does not kill the character, it will usually heal
+over time. The most notable exception to this are poisons extracted from Lotus
+flowers. These poisons will deal damage until the victim succumbs and dies.
 
+Weapons
+=======
+
+Whip of Ashmque
+---------------
+From the Tome of Um'bano:
+
+  *The whip of Ashmque is horrendous weapon. Thong of the whip is made of 
+  blackened links of steel and eternal flame is burning around it. Only the
+  strongest of men can even try to wield it because of the heavy construction.
+  It is said that the whip of Ashmque was forged at the dawn of ages by 
+  demon smith Ashmque.*
