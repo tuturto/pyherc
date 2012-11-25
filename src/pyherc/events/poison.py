@@ -55,9 +55,10 @@ class PoisonTriggeredEvent(Event):
         :rtype: string
         """
         if point_of_view == self.target:
-            description = 'You suffer from poison'
+            description = 'You suffer from poison ({0} points of damage)'.format(self.damage)
         else:
-            description = '{0} suffers from poison'.format(self.target.name)
+            description = '{0} suffers from poison ({1} points of damage)'.format(self.target.name,
+                                                                                  self.damage)
 
         return description
 

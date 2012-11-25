@@ -58,10 +58,12 @@ class DamageTriggeredEvent(Event):
         :rtype: string
         """
         if point_of_view == self.target:
-            description = 'You suffer from {0} damage'.format(self.damage_type)
+            description = 'You suffer from {0} damage ({1} points of damage)'.format(self.damage_type,
+                                                                                     self.damage)
         else:
-            description = '{0} suffers from {1} damage'.format(self.target.name,
-                                                               self.damage_type)
+            description = '{0} suffers from {1} damage ({2} points of damage)'.format(self.target.name,
+                                                                               self.damage_type,
+                                                                               self.damage)
 
         return description
 

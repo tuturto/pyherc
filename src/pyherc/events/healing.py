@@ -58,9 +58,10 @@ class HealTriggeredEvent(Event):
         :rtype: string
         """
         if point_of_view == self.target:
-            description = 'You feel better'
+            description = 'You feel better ({0} points healed)'.format(self.healing)
         else:
-            description = '{0} feels better'.format(self.target.name)
+            description = '{0} feels better ({1} points healed)'.format(self.target.name,
+                                                                        self.healing)
 
         return description
 
