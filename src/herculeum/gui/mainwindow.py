@@ -101,7 +101,8 @@ class MainWindow(QMainWindow):
         """
         Show new game dialog
         """
-        start_dialog = StartGameWidget(parent = self,
+        start_dialog = StartGameWidget(config = None,
+                                       parent = self,
                                        application = self.application,
                                        surface_manager = self.surface_manager,
                                        flags = Qt.Dialog | Qt.CustomizeWindowHint)

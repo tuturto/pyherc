@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-11-24, 20:54:37 -->
+<!-- Saved: 2012-11-29, 06:50:13 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -207,6 +207,7 @@
     <Source>herculeum/config/levels/crimson_lair.py</Source>
     <Source>pyherc/test/unit/test_damage_effect.py</Source>
     <Source>pyherc/events/damage.py</Source>
+    <Source>herculeum/test/ui/test_startscreen.py</Source>
   </Sources>
   <Forms>
   </Forms>

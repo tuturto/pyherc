@@ -24,6 +24,7 @@ Module for start game window related functionality
 
 from PyQt4.QtGui import QDialog, QPushButton, QSizePolicy, QVBoxLayout
 from PyQt4.QtGui import QHBoxLayout, QComboBox, QIcon, QLabel, QLineEdit
+from PyQt4.QtCore import Qt
 import PyQt4.QtCore
 import os
 import pyherc
@@ -35,7 +36,7 @@ class StartGameWidget(QDialog):
     .. versionadded:: 0.5
     """
 
-    def __init__(self,  parent, application, surface_manager, flags):
+    def __init__(self, config, parent, application, surface_manager, flags):
         """
         Default constructor
         """
@@ -43,6 +44,11 @@ class StartGameWidget(QDialog):
 
         self.application = application
         self.surface_manager = surface_manager
+
+        if config != None:
+            self.config = config
+        else:
+            self.config = []
 
         self.player_character = None
 
@@ -56,51 +62,62 @@ class StartGameWidget(QDialog):
                                        QSizePolicy.Fixed,
                                        QSizePolicy.Fixed))
 
-        self.button_layout = QHBoxLayout()
-        self.ok_button = QPushButton('Ok', self)
-        self.ok_button.resize(self.ok_button.sizeHint())
-        self.ok_button.clicked.connect(self.__generate_character)
-        self.cancel_button = QPushButton('Cancel', self)
-        self.cancel_button.clicked.connect(self.reject)
-        self.cancel_button.resize(self.cancel_button.sizeHint())
-        self.button_layout.addWidget(self.ok_button)
-        self.button_layout.addWidget(self.cancel_button)
+        main_layout = QVBoxLayout()
+        top_layout = QHBoxLayout()
+        middle_layout = QHBoxLayout()
+        bottom_layout = QHBoxLayout()
 
-        self.name_layout = QHBoxLayout()
-        self.name_label = QLabel('Name:', self)
-        self.name_text = QLineEdit('Adventurer', self)
-        self.name_layout.addWidget(self.name_label)
-        self.name_layout.addWidget(self.name_text)
+        main_layout.addLayout(top_layout)
+        main_layout.addLayout(middle_layout)
+        main_layout.addLayout(bottom_layout)
 
-        self.kit_selection_layout = QHBoxLayout()
-        self.kit_selection_label = QLabel('Kit:', self)
-        self.kit_selection = QComboBox(self)
-        self.kit_selection.addItem('Adventurer')
-        self.kit_selection.addItem('Vampire Hunter')
-        self.kit_selection.setWhatsThis('You can select your kit from here. ' +
-                            'Different kits have different weapons and powers.')
-        self.kit_selection_layout.addWidget(self.kit_selection_label)
-        self.kit_selection_layout.addWidget(self.kit_selection)
+        self.class_name = QLabel('')
+        self.class_name.setMinimumSize(200, 50)
+        self.class_name.setMaximumSize(200, 50)
+        self.class_name.setAlignment(Qt.AlignCenter);
+        self.class_icon = QLabel('')
+        self.class_icon.setMinimumSize(100, 100)
+        self.class_icon.setMaximumSize(100, 100)
+        self.class_description = QLabel('')
+        self.class_description.setWordWrap(True)
+        self.class_description.setMinimumSize(600, 300)
+        self.class_description.setMaximumSize(600, 300)
+        self.class_description.setAlignment(Qt.AlignTop);
 
-        self.vertical_layout = QVBoxLayout()
-        self.vertical_layout.addLayout(self.name_layout)
-        self.vertical_layout.addLayout(self.kit_selection_layout)
-        self.vertical_layout.addLayout(self.button_layout)
+        top_layout.addStretch()
+        top_layout.addWidget(self.class_name)
+        top_layout.addStretch()
+        middle_layout.addStretch()
+        middle_layout.addWidget(self.class_icon)
+        middle_layout.addStretch()
+        bottom_layout.addStretch()
+        bottom_layout.addWidget(self.class_description)
+        bottom_layout.addStretch()
 
-        self.setLayout(self.vertical_layout)
-
-        self.ok_button.setDefault(True)
+        self.setLayout(main_layout)
 
         self.setWindowTitle('New game')
-        self.setWindowIcon(QIcon(os.path.join(self.application.base_path,
-                                                'cycle.png')))
+        #self.setWindowIcon(QIcon(os.path.join(self.application.base_path,
+        #                                        'cycle.png')))
+
+        if len(self.config) > 0:
+            self._show_character(self.config[0])
+
+    def _show_character(self, character):
+        """
+        Show character on screen
+
+        .. versionadded:: 0.8
+        """
+        self.class_name.setText(character.class_name)
+        self.class_description.setText(character.class_description)
 
     def __generate_character(self):
         """
         Generate player character based on selected settings
         """
+        self.player_character = None
         self.player_character = pyherc.rules.character.create_character('human',
                                                 'fighter',
                                                 self.application.world)
-        self.player_character.name = str(self.name_text.displayText())
         self.accept()

@@ -20,9 +20,6 @@
 
 """
 Module for creature generation related classes
-
-Classes:
-    CreatureGenerator
 """
 from pyherc.data import Character, Inventory
 from pyherc.data.effects import EffectHandle, EffectsCollection
@@ -189,3 +186,21 @@ class InventoryConfiguration(object):
         self.min_amount = min_amount
         self.max_amount = max_amount
         self.probability = probability
+
+class PlayerCharacterConfiguration(object):
+    """
+    Configuration for player character
+
+    .. versionadded:: 0.8
+    """
+    def __init__(self, class_name, class_icon, class_description,
+                 class_configuration):
+        """
+        Default constructor
+        """
+        super(PlayerCharacterConfiguration, self).__init__()
+
+        self.class_name = class_name
+        self.class_icon = class_icon
+        self.class_description = class_description
+        self.class_configuration = class_configuration
