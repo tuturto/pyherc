@@ -22,7 +22,7 @@
 Package for start screen tests
 """
 from herculeum.gui.startgame import StartGameWidget
-from pyherc.generators import PlayerCharacterConfiguration
+from pyherc.generators import CreatureConfiguration
 from herculeum.gui.surfaceManager import SurfaceManager
 
 from PyQt4.QtTest import QTest
@@ -32,6 +32,7 @@ from PyQt4.QtCore import Qt
 from mockito import mock, when, any
 from hamcrest import assert_that
 from satin import has_label
+from random import Random
 
 class TestStartScreen(object):
     """
@@ -64,11 +65,18 @@ class TestStartScreen(object):
         """
         Test that a single character can be shown on dialog
         """
-        config = [PlayerCharacterConfiguration(
-                                class_name = 'Warrior',
-                                class_icon = 101,
-                                class_description = 'Stout warrior',
-                                class_configuration = None)]
+        config = {}
+
+        config['Warrior'] = CreatureConfiguration(
+                                name = 'Warrior',
+                                body = 8,
+                                finesse = 8,
+                                mind = 5,
+                                hp = 9,
+                                speed = 1,
+                                icons = 101,
+                                attack = 1,
+                                description = 'Stout warrior')
 
         dialog = StartGameWidget(config = config,
                                  parent = None,

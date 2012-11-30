@@ -42,7 +42,6 @@ from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 from pyherc.generators import EffectsFactory
 
 from pyherc.generators import ItemConfigurations
-from pyherc.generators import CreatureConfigurations
 
 class Configuration(object):
     """
@@ -137,7 +136,7 @@ class Configuration(object):
         :returns: configuration for creatures
         :rtype: CreatureConfigurations
         """
-        config = CreatureConfigurations(self.rng)
+        config = {}
 
         configurators = self.get_configurators(context.config_package,
                                                'init_creatures')
@@ -145,7 +144,7 @@ class Configuration(object):
         for configurator in configurators:
             creatures = configurator(context)
             for creature in creatures:
-                config.add_creature(creature)
+                config[creature.name] = creature
 
         return config
 

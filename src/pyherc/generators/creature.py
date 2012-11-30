@@ -97,44 +97,7 @@ class CreatureGenerator(object):
         :param name: name of the creature
         :type name: string
         """
-        return self.configuration.get_by_name(name)
-
-class CreatureConfigurations(object):
-    """
-    Collection of creature configurations
-    """
-    logged = Logged()
-
-    @logged
-    def __init__(self, rng):
-        """
-        Default constructor
-
-        :param rng: random number generator
-        :type rng: Random
-        """
-        self.rng = rng
-        self.creatures = {}
-
-    @logged
-    def add_creature(self, specification):
-        """
-        Add creature to configuration
-
-        :param specification: specification of creature
-        :type specification: CreatureConfiguration
-        """
-        self.creatures[specification.name] = specification
-
-    @logged
-    def get_by_name(self, name):
-        """
-        Get creature configuration
-
-        :param name: name of the creature
-        :type name: string
-        """
-        return self.creatures[name]
+        return self.configuration[name]
 
 class CreatureConfiguration(object):
     """
@@ -143,7 +106,7 @@ class CreatureConfiguration(object):
 
     def __init__(self, name, body, finesse, mind, hp, speed, icons, attack,
                  ai = None, effect_handles = None, effects = None,
-                 inventory = None):
+                 inventory = None, description = None):
         """
         Default constructor
         """
@@ -156,6 +119,7 @@ class CreatureConfiguration(object):
         self.icons = icons
         self.attack = attack
         self.ai = ai
+        self.description = description
 
         if effect_handles == None:
             self.effect_handles = []
@@ -186,21 +150,3 @@ class InventoryConfiguration(object):
         self.min_amount = min_amount
         self.max_amount = max_amount
         self.probability = probability
-
-class PlayerCharacterConfiguration(object):
-    """
-    Configuration for player character
-
-    .. versionadded:: 0.8
-    """
-    def __init__(self, class_name, class_icon, class_description,
-                 class_configuration):
-        """
-        Default constructor
-        """
-        super(PlayerCharacterConfiguration, self).__init__()
-
-        self.class_name = class_name
-        self.class_icon = class_icon
-        self.class_description = class_description
-        self.class_configuration = class_configuration

@@ -45,10 +45,7 @@ class StartGameWidget(QDialog):
         self.application = application
         self.surface_manager = surface_manager
 
-        if config != None:
-            self.config = config
-        else:
-            self.config = []
+        self.config = config
 
         self.player_character = None
 
@@ -96,12 +93,9 @@ class StartGameWidget(QDialog):
 
         self.setLayout(main_layout)
 
-        self.setWindowTitle('New game')
-        #self.setWindowIcon(QIcon(os.path.join(self.application.base_path,
-        #                                        'cycle.png')))
-
-        if len(self.config) > 0:
-            self._show_character(self.config[0])
+        self.keys = self.config.keys()
+        if len(self.keys) > 0:
+            self._show_character(self.config[self.keys[0]])
 
     def _show_character(self, character):
         """
@@ -109,8 +103,8 @@ class StartGameWidget(QDialog):
 
         .. versionadded:: 0.8
         """
-        self.class_name.setText(character.class_name)
-        self.class_description.setText(character.class_description)
+        self.class_name.setText(character.name)
+        self.class_description.setText(character.description)
 
     def __generate_character(self):
         """

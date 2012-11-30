@@ -27,7 +27,6 @@ from pyherc.test.matchers import has_effect_handle, has_effect
 from hamcrest import *
 from mockito import mock, verify
 
-from pyherc.generators import CreatureConfigurations
 from pyherc.generators import CreatureConfiguration
 from pyherc.generators import InventoryConfiguration
 from pyherc.data.effects import EffectHandle, DamageModifier
@@ -53,13 +52,12 @@ class TestCreatureGeneration(object):
         """
         Setup test case
         """
-        self.creature_config = CreatureConfigurations(Random())
+        self.creature_config = {}
 
         self.model = mock()
         self.rng = Random()
 
-        self.creature_config.add_creature(
-                        CreatureConfiguration(name = 'rat',
+        self.creature_config['rat'] = CreatureConfiguration(name = 'rat',
                                               body = 4,
                                               finesse = 12,
                                               mind = 2,
@@ -67,10 +65,9 @@ class TestCreatureGeneration(object):
                                               speed = 2,
                                               icons = [100, 101],
                                               attack = 2,
-                                              ai = FlockingHerbivore))
+                                              ai = FlockingHerbivore)
 
-        self.creature_config.add_creature(
-                        CreatureConfiguration(name = 'spider',
+        self.creature_config['spider'] = CreatureConfiguration(name = 'spider',
                                               body = 6,
                                               finesse = 12,
                                               mind = 8,
@@ -83,26 +80,26 @@ class TestCreatureGeneration(object):
                                                     trigger = 'on attack hit',
                                                     effect = 'minor poison',
                                                     parameters = None,
-                                                    charges = 100)]))
+                                                    charges = 100)])
 
-        self.creature_config.add_creature(
-                  CreatureConfiguration(name = 'skeleton warrior',
-                                        body = 8,
-                                        finesse = 11,
-                                        mind = 0,
-                                        hp = 8,
-                                        speed = 2.5,
-                                        icons = [110],
-                                        attack = 2,
-                                        ai = FlockingHerbivore,
-                                        effects = [DamageModifier(modifier = 2,
+        self.creature_config['skeleton warrior'] = CreatureConfiguration(
+                                                    name = 'skeleton warrior',
+                                                    body = 8,
+                                                    finesse = 11,
+                                                    mind = 0,
+                                                    hp = 8,
+                                                    speed = 2.5,
+                                                    icons = [110],
+                                                    attack = 2,
+                                                    ai = FlockingHerbivore,
+                                                    effects = [DamageModifier(modifier = 2,
                                                                   damage_type = 'crushing',
                                                                   duration = None,
                                                                   frequency = None,
                                                                   tick = None,
                                                                   icon = 101,
                                                                   title = 'title',
-                                                                  description = 'description')]))
+                                                                  description = 'description')])
 
         self.generator = CreatureGenerator(configuration = self.creature_config,
                                            model = self.model,
@@ -184,13 +181,13 @@ class TestItemsInCreatureGeneration(object):
                                       ai = FlockingHerbivore,
                                       inventory = inventory_config)
 
-        self.creature_config = CreatureConfigurations(self.rng)
+        self.creature_config = {}
 
     def test_creating_creature_with_item_calls_itemgenerator(self):
         """
         Test that generating creature with item calls item generator
         """
-        self.creature_config.add_creature(self.skeleton_config)
+        self.creature_config['skeleton warrior'] = self.skeleton_config
 
         item_generator = mock()
 

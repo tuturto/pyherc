@@ -30,7 +30,7 @@ from pyherc.data import Level
 from pyherc.generators.creature import CreatureGenerator
 from pyherc.generators.level.creatures import CreatureAdder
 from pyherc.generators.level.creatures import CreatureAdderConfiguration
-from pyherc.generators import CreatureConfigurations, CreatureConfiguration
+from pyherc.generators import CreatureConfiguration
 import random
 
 class TestCreatureAdder():
@@ -55,20 +55,19 @@ class TestCreatureAdder():
         self.level = Level((60, 40))
         self.level.set_location_type((10, 10), 'room')
 
-        creature_config = CreatureConfigurations(self.rng)
-        creature_config.add_creature(
-                        CreatureConfiguration(name = 'rat',
-                                              body = 4,
-                                              finesse = 12,
-                                              mind = 2,
-                                              hp = 2,
-                                              speed = 2,
-                                              icons = 1,
-                                              attack = 2,
-                                              ai = None))
+        creature_config = {}
+        creature_config['rat'] = CreatureConfiguration(name = 'rat',
+                                                       body = 4,
+                                                       finesse = 12,
+                                                       mind = 2,
+                                                       hp = 2,
+                                                       speed = 2,
+                                                       icons = 1,
+                                                       attack = 2,
+                                                       ai = None)
 
-        creature_config.add_creature(
-                        CreatureConfiguration(name = 'dragon',
+        creature_config['dragon'] = CreatureConfiguration(
+                                              name = 'dragon',
                                               body = 4,
                                               finesse = 12,
                                               mind = 2,
@@ -76,7 +75,7 @@ class TestCreatureAdder():
                                               speed = 2,
                                               icons = 1,
                                               attack = 2,
-                                              ai = None))
+                                              ai = None)
 
         self.model = mock()
         self.creature_generator = CreatureGenerator(creature_config,
