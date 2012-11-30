@@ -36,7 +36,7 @@ class StartGameWidget(QDialog):
     .. versionadded:: 0.5
     """
 
-    def __init__(self, config, parent, application, surface_manager, flags):
+    def __init__(self, generator, parent, application, surface_manager, flags):
         """
         Default constructor
         """
@@ -45,7 +45,7 @@ class StartGameWidget(QDialog):
         self.application = application
         self.surface_manager = surface_manager
 
-        self.config = config
+        self.generator = generator
 
         self.player_character = None
 
@@ -93,9 +93,10 @@ class StartGameWidget(QDialog):
 
         self.setLayout(main_layout)
 
-        self.keys = self.config.keys()
+        #TODO: clean up
+        self.keys = self.generator.configuration.keys()
         if len(self.keys) > 0:
-            self._show_character(self.config[self.keys[0]])
+            self._show_character(self.generator.configuration[self.keys[0]])
 
     def _show_character(self, character):
         """

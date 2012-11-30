@@ -22,7 +22,7 @@
 Package for start screen tests
 """
 from herculeum.gui.startgame import StartGameWidget
-from pyherc.generators import CreatureConfiguration
+from pyherc.generators import CreatureConfiguration, CreatureGenerator
 from herculeum.gui.surfaceManager import SurfaceManager
 
 from PyQt4.QtTest import QTest
@@ -78,7 +78,12 @@ class TestStartScreen(object):
                                 attack = 1,
                                 description = 'Stout warrior')
 
-        dialog = StartGameWidget(config = config,
+        generator = CreatureGenerator(configuration = config,
+                                      model = mock(),
+                                      item_generator = mock(),
+                                      rng = mock())
+
+        dialog = StartGameWidget(generator = generator,
                                  parent = None,
                                  application = mock(),
                                  surface_manager = self.surface_manager,
