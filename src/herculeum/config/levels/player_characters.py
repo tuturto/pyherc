@@ -45,14 +45,17 @@ def init_players(context):
                                         effect_handles = None,
                                         inventory = [InventoryConfiguration(
                                                             item_name = 'sword',
-                                                            min_amount = 0,
+                                                            min_amount = 1,
                                                             max_amount = 1,
                                                             probability = 100),
                                                      InventoryConfiguration(
                                                             item_name = 'healing potion',
-                                                            min_amount = 0,
-                                                            max_amount = 1,
-                                                            probability = 100)],
-                                        description = 'A skillful adventurer.'))
+                                                            min_amount = 1,
+                                                            max_amount = 2,
+                                                            probability = 50)],
+                                        description = '\n'.join(['A skillful adventurer.',
+                                                                '',
+                                                                'Adventurer is armed and ready to explore any dungeon he sees. He is strong enough to survive combat with some of the dangers, while some he definitely should avoid',
+                                                                'Adventurer also carries some potions that will help him on his journey.'])))
 
     return config

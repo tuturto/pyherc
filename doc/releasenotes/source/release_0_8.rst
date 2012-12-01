@@ -30,6 +30,9 @@ Known bugs
 Other notes
 ***********
 
+ - 41_ player character configuration
+
+.. _26: https://github.com/tuturto/pyherc/issues/41
 .. _26: https://github.com/tuturto/pyherc/issues/26
 .. _25: https://github.com/tuturto/pyherc/issues/25
 .. _21: https://github.com/tuturto/pyherc/issues/21
