@@ -10,7 +10,6 @@ pyherc.rules
    consume/module_consume
    inventory/module_inventory
    move/module_move
-   module_character
    module_ending
    module_engine
    module_factory
