@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#   Copyright 2010-2012 Tuukka Turto
+#
+#   This file is part of pyherc.
+#
+#   pyherc is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   pyherc is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
+
+"""
+module for configuring player characters
+"""
+from pyherc.generators import CreatureConfiguration, InventoryConfiguration
+
+def init_players(context):
+    """
+    Initialise creatures
+
+    :returns: list of creature configurations
+    :rtype: [CreatureConfiguration]
+    """
+    config = []
+    surface_manager = context.surface_manager
+
+    config.append(CreatureConfiguration(name = 'Adventurer',
+                                        body = 6,
+                                        finesse = 7,
+                                        mind = 8,
+                                        hp = 9,
+                                        speed = 2.5,
+                                        icons = surface_manager.add_icon('adventurer', 'strong-2.png'),
+                                        attack = 1,
+                                        ai = None,
+                                        effect_handles = None,
+                                        inventory = [InventoryConfiguration(
+                                                            item_name = 'sword',
+                                                            min_amount = 0,
+                                                            max_amount = 1,
+                                                            probability = 100),
+                                                     InventoryConfiguration(
+                                                            item_name = 'healing potion',
+                                                            min_amount = 0,
+                                                            max_amount = 1,
+                                                            probability = 100)],
+                                        description = 'A skillful adventurer.'))
+
+    return config

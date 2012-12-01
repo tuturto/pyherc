@@ -11,4 +11,4 @@ herculeum.config.levels
    module_configure_upper_crypt
    module_crimson_lair
    module_effects
-   
+   module_player_characters
