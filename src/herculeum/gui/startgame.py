@@ -94,6 +94,8 @@ class StartGameWidget(QDialog):
         self.setLayout(main_layout)
 
         self.class_names = self.generator.configuration.keys()
+        self.class_names.sort()
+
         self.selected_index = 0
         if len(self.class_names) > 0:
             self._show_character(

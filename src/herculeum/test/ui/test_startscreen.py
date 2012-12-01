@@ -55,17 +55,29 @@ class TestStartScreen(object):
         self.surface_manager = mock(SurfaceManager)
         when(self.surface_manager).get_icon(any()).thenReturn(QPixmap())
 
-    def teardown(self):
-        """
-        Tear down the test case
-        """
-        self.application = None
-
-    def test_showing_single_character(self):
-        """
-        Test that a single character can be shown on dialog
-        """
         config = {}
+
+        config['Adventurer'] = CreatureConfiguration(
+                                    name = 'Adventurer',
+                                    body = 8,
+                                    finesse = 8,
+                                    mind = 5,
+                                    hp = 9,
+                                    speed = 1,
+                                    icons = 101,
+                                    attack = 1,
+                                    description = 'Clever adventurer')
+
+        config['Thief'] = CreatureConfiguration(
+                                    name = 'Thief',
+                                    body = 8,
+                                    finesse = 8,
+                                    mind = 5,
+                                    hp = 9,
+                                    speed = 1,
+                                    icons = 101,
+                                    attack = 1,
+                                    description = 'Sly thief')
 
         config['Warrior'] = CreatureConfiguration(
                                 name = 'Warrior',
@@ -83,11 +95,21 @@ class TestStartScreen(object):
                                       item_generator = mock(),
                                       rng = mock())
 
-        dialog = StartGameWidget(generator = generator,
-                                 parent = None,
-                                 application = mock(),
-                                 surface_manager = self.surface_manager,
-                                 flags = Qt.Dialog)
+        self.dialog = StartGameWidget(generator = generator,
+                                      parent = None,
+                                      application = mock(),
+                                      surface_manager = self.surface_manager,
+                                      flags = Qt.Dialog)
 
-        assert_that(dialog, has_label('Warrior'))
-        assert_that(dialog, has_label('Stout warrior'))
+    def teardown(self):
+        """
+        Tear down the test case
+        """
+        self.application = None
+
+    def test_showing_character(self):
+        """
+        Test that a character can be shown on dialog
+        """
+        assert_that(self.dialog, has_label('Adventurer'))
+        assert_that(self.dialog, has_label('Clever adventurer'))
