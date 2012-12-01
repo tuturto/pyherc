@@ -25,14 +25,13 @@ Classes:
     Item
     WeaponData
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class Item(object):
     """
     Represents item
     """
-    logged = Logged()
-
+    @logged
     def __init__(self, effects_collection):
         """
         Default constructor

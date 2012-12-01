@@ -24,7 +24,7 @@ Inventory manipulation related factories are defined here
 import types
 from pyherc.rules.inventory.action import PickUpAction, DropAction
 from pyherc.rules.factory import SubActionFactory
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class PickUpFactory(SubActionFactory):
     """
@@ -32,8 +32,6 @@ class PickUpFactory(SubActionFactory):
 
     .. versionadded:: 0.4
     """
-    logged = Logged()
-
     @logged
     def __init__(self):
         """
@@ -68,8 +66,6 @@ class DropFactory(SubActionFactory):
 
     .. versionadded:: 0.5
     """
-    logged = Logged()
-
     @logged
     def __init__(self):
         """
@@ -104,8 +100,6 @@ class InventoryFactory(SubActionFactory):
 
     .. versionadded:: 0.4
     """
-    logged = Logged()
-
     @logged
     def __init__(self, factories):
         """

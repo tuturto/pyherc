@@ -23,7 +23,7 @@ Module for checking end conditions
 """
 
 from pyherc.events import DeathEvent, DropEvent
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class Dying(object):
     """
@@ -31,8 +31,6 @@ class Dying(object):
 
     .. versionadded:: 0.6
     """
-    logged = Logged()
-
     @logged
     def __init__(self):
         """

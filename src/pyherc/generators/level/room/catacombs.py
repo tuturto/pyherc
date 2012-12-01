@@ -21,15 +21,13 @@
 """
 Classes for generating catacombs
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from pyherc.generators.utils import BSPSection
 
 class CatacombsGenerator(object):
     """
     Class for generating a catacomblike rooms
     """
-    logged = Logged()
-
     @logged
     def __init__(self, floor_tile, empty_tile, level_types, rng):
         """

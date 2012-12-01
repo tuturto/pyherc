@@ -21,7 +21,7 @@
 """
 Module for damage
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from pyherc.data.effects.effect import Effect
 from pyherc.events import DamageTriggeredEvent
 
@@ -29,8 +29,6 @@ class Damage(Effect):
     """
     Class representing effects of damage
     """
-    logged = Logged()
-
     @logged
     def __init__(self, duration, frequency, tick, damage, target,
                  damage_type,

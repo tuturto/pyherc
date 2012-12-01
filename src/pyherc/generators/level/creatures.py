@@ -22,14 +22,12 @@
 Classes for creature generation
 """
 
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class CreatureAdderConfiguration(object):
     """
     Class used to configure CreatureAdder
     """
-    logged = Logged()
-
     @logged
     def __init__(self, level_types):
         """
@@ -68,8 +66,6 @@ class CreatureAdder(object):
     """
     Class used to add creatures during level generation
     """
-    logged = Logged()
-
     @logged
     def __init__(self, creature_generator, configuration, rng):
         """

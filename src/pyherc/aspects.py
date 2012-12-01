@@ -21,78 +21,10 @@
 """
 Module for aspects
 """
-
-from Aspyct.aop import Aspect
 import logging
 
-class Logged(Aspect):
-    """
-    Aspect to perform logging
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        self.logger = None
+def logged(fn):
+    def wrapper(*args, **kwargs):
+        return fn(*args, **kwargs)
 
-    def atCall(self, call_data):
-        """
-        Called right before associated method is called
-        """
-        args = call_data.args
-        kwargs = call_data.kwargs
-        function = call_data.function
-
-        if self.logger == None:
-            cls = call_data.cls
-            if cls != None:
-                logger_name = cls.__module__ + "." + cls.__name__
-            else:
-                logger_name = call_data.function.__name__
-
-            self.logger = logging.getLogger(logger_name)
-
-        if function != None:
-            function_name = function.__name__
-        else:
-            function_name = ' '
-
-        log_message = '{0} :call: {1} : {2}'.format(
-                                                    function_name,
-                                                    args,
-                                                    kwargs)
-        self.logger.debug(log_message)
-
-    def atRaise(self, call_data):
-        """
-        Called when associated method raises an exception
-        """
-        function = call_data.function
-        exception = call_data.exception
-
-        if function != None:
-            function_name = function.__name__
-        else:
-            function_name = ' '
-
-        log_message = '{0} :exception raised: {1}'.format(
-                                                          function_name,
-                                                          exception)
-        self.logger.error(log_message)
-
-    def atReturn(self, call_data):
-        """
-        Called right after associated method returns
-        """
-        function = call_data.function
-        return_value = call_data.returned
-
-        if function != None:
-            function_name = function.__name__
-        else:
-            function_name = ' '
-
-        log_message = '{0} :return: {1}'.format(function_name,
-                                                return_value)
-        self.logger.debug(log_message)
-
+    return wrapper

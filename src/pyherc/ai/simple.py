@@ -25,7 +25,7 @@ Creature will try to find friends, before attacking the player character
 """
 
 import math
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class FlockingHerbivore(object):
     """
@@ -33,9 +33,6 @@ class FlockingHerbivore(object):
     Tries to maintain close distance to other animals
     Seeks out player for combat
     """
-
-    logged = Logged()
-
     @logged
     def __init__(self, character):
         """

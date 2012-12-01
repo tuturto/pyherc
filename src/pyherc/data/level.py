@@ -23,14 +23,12 @@ Module containing classes to represent Level
 """
 
 import random
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class Level(object):
     """
     Represents a level
     """
-    logged = Logged()
-
     @logged
     def __init__(self, size = (0, 0), floor_type = None, wall_type = None,
                  empty_floor = 0, empty_wall = 0):

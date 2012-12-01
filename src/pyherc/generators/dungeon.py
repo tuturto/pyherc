@@ -24,14 +24,12 @@ Module for dungeon generation
 
 import logging
 from pyherc.data import Dungeon
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class DungeonGenerator(object):
     """
     This class is used to generate dungeon
     """
-    logged = Logged()
-
     @logged
     def __init__(self, creature_generator, item_generator,
                  level_generator):

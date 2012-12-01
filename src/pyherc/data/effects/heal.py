@@ -21,7 +21,7 @@
 """
 Module for healing
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from pyherc.data.effects.effect import Effect
 from pyherc.events import HealTriggeredEvent, HealAddedEvent, HealEndedEvent
 
@@ -29,8 +29,6 @@ class Heal(Effect):
     """
     Class representing effects of healing
     """
-    logged = Logged()
-
     @logged
     def __init__(self, duration, frequency, tick, healing, target,
                  icon, title, description):

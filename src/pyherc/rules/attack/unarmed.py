@@ -26,7 +26,7 @@ UnarmedToHit
 UnarmedDamage
 """
 
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from pyherc.rules.attack.action import ToHit
 from pyherc.rules.attack.action import Damage
 
@@ -34,8 +34,7 @@ class UnarmedToHit(ToHit):
     """
     Class to perform to hit calculations in unarmed combat
     """
-
-    @Logged()
+    @logged
     def __init__(self, attacker, target, random_number_generator):
         """
         Default constructor
@@ -53,8 +52,6 @@ class UnarmedDamage(Damage):
     """
     Damage done in unarmed attack
     """
-    logged = Logged()
-
     @logged
     def __init__(self, damage):
         """

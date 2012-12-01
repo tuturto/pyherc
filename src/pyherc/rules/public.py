@@ -32,14 +32,12 @@ InventoryParameters - Class used to guide inventory related actions
 """
 
 import types
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class ActionFactory(object):
     """
     Object for creating actions
     """
-
-    logged = Logged()
 
     @logged
     def __init__(self, model, factories):
@@ -102,7 +100,6 @@ class ActionParameters(object):
     """
     Object for controlling action creation
     """
-    logged = Logged()
 
     @logged
     def __init__(self):
@@ -116,7 +113,7 @@ class AttackParameters(ActionParameters):
     Object for controlling attack action creation
     """
 
-    @Logged()
+    @logged
     def __init__(self, attacker, direction, attack_type,
                  random_number_generator):
         """
@@ -147,7 +144,7 @@ class MoveParameters(ActionParameters):
     """
     Object for controlling move action creation
     """
-    @Logged()
+    @logged
     def __init__(self, character, direction, movement_mode):
         """
         Construct move parameters
@@ -175,7 +172,7 @@ class DrinkParameters(ActionParameters):
     """
     Object for controlling drink action creation
     """
-    @Logged()
+    @logged
     def __init__(self, character, item):
         """
         Construct drink parameters
@@ -201,7 +198,7 @@ class InventoryParameters(ActionParameters):
     """
     Class for controlling inventory action creation
     """
-    @Logged()
+    @logged
     def __init__(self, character, item, sub_action):
         """
         Construct inventory parameters

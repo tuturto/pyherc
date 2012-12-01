@@ -24,14 +24,12 @@ Module for partitioning level to equal grid
 
 import logging
 from pyherc.generators.level.partitioners.section import Section
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class RandomConnector(object):
     """
     Class for building random connection network from sections
     """
-    logged = Logged()
-
     @logged
     def __init__(self, random_generator):
         """
@@ -107,8 +105,6 @@ class GridPartitioner(object):
     """
     Class for partitioning level to equal grid
     """
-    logged = Logged()
-
     @logged
     def __init__(self, level_types, x_sections,  y_sections, random_generator):
         """

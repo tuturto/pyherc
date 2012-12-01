@@ -23,14 +23,12 @@ Module for creature generation related classes
 """
 from pyherc.data import Character, Inventory
 from pyherc.data.effects import EffectHandle, EffectsCollection
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class CreatureGenerator(object):
     """
     Class used to generate creatures
     """
-    logged = Logged()
-
     @logged
     def __init__(self, configuration, model, item_generator, rng):
         """

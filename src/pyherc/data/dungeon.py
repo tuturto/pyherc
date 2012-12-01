@@ -22,14 +22,12 @@
 Module containing classes to represent dungeon
 """
 
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class Dungeon(object):
     """
     Represents the dungeon
     """
-    logged = Logged()
-
     @logged
     def __init__(self):
         super(Dungeon, self).__init__()

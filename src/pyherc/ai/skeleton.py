@@ -23,7 +23,7 @@ AI routines for skeletons
 """
 
 import pyherc
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from pyherc.ai.pathfinding import a_star
 
 class SkeletonWarriorAI(object):
@@ -32,9 +32,6 @@ class SkeletonWarriorAI(object):
 
     ..versionadded:: 0.7
     """
-
-    logged = Logged()
-
     @logged
     def __init__(self, character):
         """

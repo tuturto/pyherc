@@ -21,7 +21,7 @@
 """
 Module for Character related classes
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 from pyherc.rules import InventoryParameters
 from pyherc.events import HitPointsChangedEvent
@@ -30,8 +30,6 @@ class Character(object):
     """
     Represents a character in playing world
     """
-    logged = Logged()
-
     @logged
     def __init__(self, model, effects_collection, inventory):
         """

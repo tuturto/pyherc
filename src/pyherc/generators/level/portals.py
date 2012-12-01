@@ -23,14 +23,12 @@ Module for adding portals
 """
 
 from pyherc.data import Portal
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class PortalAdderConfiguration(object):
     """
     Configuration class for adding portals
     """
-    logged = Logged()
-
     @logged
     def __init__(self, icons, level_type, location_type, chance,
                  new_level, unique):
@@ -98,8 +96,6 @@ class PortalAdderFactory(object):
     """
     Class for creating portal adders
     """
-    logged = Logged()
-
     @logged
     def __init__(self, config, rng):
         """
@@ -144,8 +140,6 @@ class PortalAdder(object):
     """
     Basic class for adding portals
     """
-    logged = Logged()
-
     @logged
     def __init__(self, icons,  location_type, level_generator_name, rng):
         """

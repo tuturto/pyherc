@@ -27,7 +27,7 @@ import images
 import herculeum.config.tiles
 import pyherc
 
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from PyQt4.QtGui import QPixmap
 from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import QRect
@@ -36,8 +36,6 @@ class SurfaceManager:
     """
     Class for managing images and icons
     """
-    logged = Logged()
-
     @logged
     def __init__(self, base_path):
         """

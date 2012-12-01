@@ -23,14 +23,12 @@ Module defining classes related to MoveAttack
 """
 import logging
 from pyherc.events import MoveEvent
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class MoveAction(object):
     """
     Action for moving
     """
-    logged = Logged()
-
     @logged
     def __init__(self, character, new_location, new_level = None):
         """

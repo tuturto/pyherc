@@ -21,7 +21,7 @@
 """
 Module for poison
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from pyherc.events import PoisonTriggeredEvent, PoisonAddedEvent
 from pyherc.events import PoisonEndedEvent
 from pyherc.data.effects.effect import Effect
@@ -30,8 +30,6 @@ class Poison(Effect):
     """
     Class representing effects of poison
     """
-    logged = Logged()
-
     @logged
     def __init__(self, duration, frequency, tick, damage, target,
                  icon, title, description):

@@ -26,14 +26,12 @@ import random
 from pyherc.data import Item
 from pyherc.data.item import WeaponData
 from pyherc.data.effects import EffectsCollection, EffectHandle
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class ItemGenerator(object):
     """
     Class used to generate items
     """
-    logged = Logged()
-
     @logged
     def __init__(self, config):
         """
@@ -124,8 +122,6 @@ class ItemConfigurations(object):
     """
     Class for configuring items
     """
-    logged = Logged()
-
     def __init__(self, rng):
         """
         Default constructor
@@ -198,8 +194,6 @@ class ItemConfiguration(object):
     """
     Class representing a single item
     """
-    logged = Logged()
-
     rarities = {'artifact': 1,
                 'legendary': 4,
                 'epic': 16,
@@ -230,8 +224,6 @@ class WeaponConfiguration(object):
     """
     Class representing weapon configuration
     """
-    logged = Logged()
-
     @logged
     def __init__(self, damage, critical_range, critical_damage, weapon_class):
         """

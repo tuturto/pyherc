@@ -21,7 +21,7 @@
 """
 Module for event helpers
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from Aspyct.aop import Aspect
 from pyherc.data import Model
 
@@ -55,8 +55,6 @@ class EventListener(object):
     """
     Event listener that stores all events it receives
     """
-    logged = Logged()
-
     @logged
     def __init__(self):
         """

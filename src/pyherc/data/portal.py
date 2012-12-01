@@ -22,14 +22,12 @@
 Module containing classes to represent Portals
 """
 
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class Portal(object):
     """
     Portal linking two levels together
     """
-    logged = Logged()
-
     @logged
     def __init__(self, icons, level_generator_name):
         """

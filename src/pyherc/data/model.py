@@ -22,14 +22,12 @@
 Module for Model related classes
 """
 
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class Model(object):
     """
     Represents playing world
     """
-    logged = Logged()
-
     @logged
     def __init__(self):
         """

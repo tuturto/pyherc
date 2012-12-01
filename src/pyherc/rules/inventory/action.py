@@ -21,7 +21,7 @@
 """
 Module defining classes related to inventory actions
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from pyherc.events import PickUpEvent, DropEvent
 
 class PickUpAction(object):
@@ -30,8 +30,6 @@ class PickUpAction(object):
 
     .. versionadded:: 0.4
     """
-    logged = Logged()
-
     @logged
     def __init__(self, character, item):
         """
@@ -82,8 +80,6 @@ class DropAction(object):
 
     .. versionadded:: 0.5
     """
-    logged = Logged()
-
     @logged
     def __init__(self, character, item):
         """

@@ -22,7 +22,7 @@
 Classes for heal events
 """
 from pyherc.events.event import Event
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class HealTriggeredEvent(Event):
     """
@@ -31,7 +31,7 @@ class HealTriggeredEvent(Event):
     .. versionadded:: 0.6
     """
 
-    @Logged()
+    @logged
     def __init__(self, target, healing):
         """
         Default constructor
@@ -72,7 +72,7 @@ class HealAddedEvent(Event):
     .. versionadded:: 0.6
     """
 
-    @Logged()
+    @logged
     def __init__(self, target, effect):
         """
         Default constructor
@@ -110,7 +110,7 @@ class HealEndedEvent(Event):
     Event to signal that healing is over
     """
 
-    @Logged()
+    @logged
     def __init__(self, target, effect):
         """
         Default constructor

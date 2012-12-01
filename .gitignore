@@ -5,9 +5,11 @@
 report.html
 pyherc.log
 setup.cfg
-cover
+cover/
 .coverage
 test_results.html
 nosetests.xml
 manual.qch
 herculeum.qhc
+build/
+dist/

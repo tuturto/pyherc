@@ -21,15 +21,13 @@
 """
 Module for Factory for creating effects
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 import copy
 
 class EffectsFactory(object):
     """
     Factory for creating effects
     """
-    logged = Logged()
-
     @logged
     def __init__(self):
         """

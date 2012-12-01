@@ -21,7 +21,7 @@
 """
 Module for damage modifiers
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from pyherc.data.effects.effect import Effect
 
 class DamageModifier(Effect):
@@ -30,8 +30,6 @@ class DamageModifier(Effect):
 
     .. versionadded:: 0.7
     """
-    logged = Logged()
-
     @logged
     def __init__(self, modifier, damage_type, duration, frequency, tick,
                  icon, title, description):

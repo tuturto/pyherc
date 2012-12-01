@@ -21,15 +21,14 @@
 """
 Module for baseclass of every Effect
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 from pyherc.events import Event
 
 class Effect(object):
     """
     Class representing effects
     """
-    logged = Logged()
-
+    @logged
     def __init__(self, duration, frequency, tick,
                  icon, title, description):
         """

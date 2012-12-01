@@ -21,14 +21,12 @@
 """
 Classes for item generation
 """
-from pyherc.aspects import Logged
+from pyherc.aspects import logged
 
 class ItemAdderConfiguration(object):
     """
     Configuration for ItemAdder
     """
-    logged = Logged()
-
     @logged
     def __init__(self, level_types):
         """
@@ -72,8 +70,6 @@ class ItemAdder(object):
     """
     Class for adding items
     """
-    logged = Logged()
-
     @logged
     def __init__(self, item_generator, configuration, rng):
         """
