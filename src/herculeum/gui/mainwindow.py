@@ -27,8 +27,7 @@ from PyQt4.QtGui import QDialog, QPushButton, QWorkspace
 from PyQt4.QtCore import SIGNAL, Qt
 import PyQt4.QtGui
 import os
-import pyherc.rules.character
-
+import pyherc
 from herculeum.gui.startgame import StartGameWidget
 from herculeum.gui.map import PlayMapWindow
 from herculeum.gui.eventdisplay import EventMessageDockWidget

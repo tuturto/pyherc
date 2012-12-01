@@ -125,5 +125,17 @@ class StartGameWidget(QDialog):
         if event.key() == Qt.Key_5:
             self.__generate_character()
             self.accept()
+        elif event.key() == Qt.Key_6:
+            self.selected_index = self.selected_index + 1
+            if self.selected_index >= len(self.class_names):
+                self.selected_index = 0
+            self._show_character(
+                    self.generator.configuration[self.class_names[self.selected_index]])
+        elif event.key() == Qt.Key_4:
+            self.selected_index = self.selected_index - 1
+            if self.selected_index < 0:
+                self.selected_index = len(self.class_names) - 1
+            self._show_character(
+                    self.generator.configuration[self.class_names[self.selected_index]])
         else:
             super(StartGameWidget, self).keyPressEvent(event)

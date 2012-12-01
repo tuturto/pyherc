@@ -29,7 +29,7 @@ from PyQt4.QtTest import QTest
 from PyQt4.QtGui import QApplication, QPixmap
 from PyQt4.QtCore import Qt
 
-from mockito import mock, when, any
+from mockito import mock, when, any, verify
 from hamcrest import assert_that
 from satin import has_label
 from random import Random
@@ -90,12 +90,10 @@ class TestStartScreen(object):
                                 attack = 1,
                                 description = 'Stout warrior')
 
-        generator = CreatureGenerator(configuration = config,
-                                      model = mock(),
-                                      item_generator = mock(),
-                                      rng = mock())
+        self.generator = mock(CreatureGenerator)
+        self.generator.configuration = config
 
-        self.dialog = StartGameWidget(generator = generator,
+        self.dialog = StartGameWidget(generator = self.generator,
                                       parent = None,
                                       application = mock(),
                                       surface_manager = self.surface_manager,
@@ -113,3 +111,64 @@ class TestStartScreen(object):
         """
         assert_that(self.dialog, has_label('Adventurer'))
         assert_that(self.dialog, has_label('Clever adventurer'))
+
+    def test_switching_to_next_character(self):
+        """
+        Test that next character can be shown
+        """
+        QTest.keyClick(self.dialog,
+                       Qt.Key_6)
+
+        assert_that(self.dialog, has_label('Thief'))
+        assert_that(self.dialog, has_label('Sly thief'))
+
+    def test_switching_to_previous_character(self):
+        """
+        Test that previous character can be shown
+        """
+        QTest.keyClick(self.dialog,
+                       Qt.Key_6)
+        QTest.keyClick(self.dialog,
+                       Qt.Key_4)
+
+        assert_that(self.dialog, has_label('Adventurer'))
+        assert_that(self.dialog, has_label('Clever adventurer'))
+
+    def test_selecting_previous_from_first(self):
+        """
+        Selecting previous class while at the first, should display the last one
+        """
+        QTest.keyClick(self.dialog,
+                       Qt.Key_4)
+
+        assert_that(self.dialog, has_label('Warrior'))
+        assert_that(self.dialog, has_label('Stout warrior'))
+
+    def test_selecting_next_from_last(self):
+        """
+        Selecting next while at last, should display first
+        """
+        QTest.keyClick(self.dialog,
+                       Qt.Key_6)
+        QTest.keyClick(self.dialog,
+                       Qt.Key_6)
+        QTest.keyClick(self.dialog,
+                       Qt.Key_6)
+        assert_that(self.dialog, has_label('Adventurer'))
+        assert_that(self.dialog, has_label('Clever adventurer'))
+
+    def test_pressing_random_key_does_not_crash_dialog(self):
+        """
+        Pressing random key should not crash the dialog
+        """
+        QTest.keyClick(self.dialog,
+                       Qt.Key_A)
+
+    def test_generating_character(self):
+        """
+        Pressing 5 should trigger character generation
+        """
+        QTest.keyClick(self.dialog,
+                       Qt.Key_5)
+
+        verify(self.generator).generate_creature(name = 'Adventurer')

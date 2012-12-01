@@ -58,4 +58,29 @@ def init_players(context):
                                                                 'Adventurer is armed and ready to explore any dungeon he sees. He is strong enough to survive combat with some of the dangers, while some he definitely should avoid',
                                                                 'Adventurer also carries some potions that will help him on his journey.'])))
 
+    config.append(CreatureConfiguration(name = 'Warrior',
+                                        body = 8,
+                                        finesse = 7,
+                                        mind = 6,
+                                        hp = 12,
+                                        speed = 2.5,
+                                        icons = surface_manager.add_icon('warrior', 'strong-2.png'),
+                                        attack = 2,
+                                        ai = None,
+                                        effect_handles = None,
+                                        inventory = [InventoryConfiguration(
+                                                            item_name = 'sword',
+                                                            min_amount = 1,
+                                                            max_amount = 1,
+                                                            probability = 100),
+                                                     InventoryConfiguration(
+                                                            item_name = 'dagger',
+                                                            min_amount = 1,
+                                                            max_amount = 1,
+                                                            probability = 100)],
+                                        description = '\n'.join(['A stout warrior',
+                                                                '',
+                                                                'Warrior is armed to teeth and tends to solve his problems with brute force.',
+                                                                'Warrior has nice selection of weapons to use but very little of anything else.'])))
+
     return config
