@@ -93,10 +93,11 @@ class StartGameWidget(QDialog):
 
         self.setLayout(main_layout)
 
-        #TODO: clean up
-        self.keys = self.generator.configuration.keys()
-        if len(self.keys) > 0:
-            self._show_character(self.generator.configuration[self.keys[0]])
+        self.class_names = self.generator.configuration.keys()
+        self.selected_index = 0
+        if len(self.class_names) > 0:
+            self._show_character(
+                    self.generator.configuration[self.class_names[self.selected_index]])
 
     def _show_character(self, character):
         """
@@ -112,7 +113,14 @@ class StartGameWidget(QDialog):
         Generate player character based on selected settings
         """
         self.player_character = None
-        self.player_character = pyherc.rules.character.create_character('human',
-                                                'fighter',
-                                                self.application.world)
-        self.accept()
+        self.player_character = self.generator.generate_creature(name = 'Warrior')
+
+    def keyPressEvent(self, event):
+        """
+        Process keyboard events
+        """
+        if event.key() == Qt.Key_5:
+            self.__generate_character()
+            self.accept()
+        else:
+            super(StartGameWidget, self).keyPressEvent(event)
