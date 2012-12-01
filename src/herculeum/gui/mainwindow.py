@@ -35,7 +35,6 @@ from herculeum.gui.eventdisplay import EventMessageDockWidget
 from herculeum.gui.menu import MenuDialog
 from herculeum.config import tiles
 
-from pyherc.generators import CreatureConfiguration, CreatureGenerator
 from random import Random
 
 class MainWindow(QMainWindow):
@@ -104,27 +103,9 @@ class MainWindow(QMainWindow):
         """
         Show new game dialog
         """
-        config = {}
-
-        config['Warrior'] = CreatureConfiguration(
-                                name = 'Warrior',
-                                body = 8,
-                                finesse = 8,
-                                mind = 5,
-                                hp = 9,
-                                speed = 1,
-                                icons = 300,
-                                attack = 1,
-                                description = 'Stout warrior')
-
         app = self.application
 
-        generator = CreatureGenerator(configuration = config,
-                                      model = app.world,
-                                      item_generator = app.item_generator,
-                                      rng = app.rng)
-
-        start_dialog = StartGameWidget(generator = generator,
+        start_dialog = StartGameWidget(generator = app.player_generator,
                                        parent = self,
                                        application = self.application,
                                        surface_manager = self.surface_manager,

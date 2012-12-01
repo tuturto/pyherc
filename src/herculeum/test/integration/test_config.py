@@ -102,3 +102,10 @@ class TestMainConfiguration():
                                                 sub_action = 'pick up'))
 
         assert_that(factory, is_(not_none()))
+
+    def test_player_character_generator_has_been_initialised(self):
+        """
+        Test that player character generator is initialised during
+        configuration phase
+        """
+        assert_that(self.config.player_generator, is_(not_none()))

@@ -165,6 +165,12 @@ class Application(object):
         """
         return self.config.rules_engine
 
+    def __get_player_generator(self):
+        """
+        Get player generator
+        """
+        return self.config.player_generator
+
     def detect_resource_directory(self):
         """
         Detects location of resources directory and updates self.base_path
@@ -182,6 +188,7 @@ class Application(object):
     surface_manager = property(__get_surface_manager)
     action_factory = property(__get_action_factory)
     creature_generator = property(__get_creature_generator)
+    player_generator = property(__get_player_generator)
     item_generator = property(__get_item_generator)
     level_generator_factory = property(__get_level_generator_factory)
     rng = property(__get_rng)

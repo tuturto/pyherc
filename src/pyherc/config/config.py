@@ -63,6 +63,7 @@ class Configuration(object):
         self.base_path = None
         self.item_generator = None
         self.creature_generator = None
+        self.player_generator = None
         self.level_generator_factory = None
         self.level_size = None
         self.base_path = base_path
@@ -148,6 +149,29 @@ class Configuration(object):
 
         return config
 
+    def get_player_config(self, context):
+        """
+        Load player configuration
+
+        :param level_config: namespace of configurations
+        :type level_config: Package
+        :returns: configuration for player characters
+        :rtype: CreatureConfigurations
+
+        .. versionadded:: 0.8
+        """
+        config = {}
+
+        configurators = self.get_configurators(context.config_package,
+                                               'init_players')
+
+        for configurator in configurators:
+            creatures = configurator(context)
+            for creature in creatures:
+                config[creature.name] = creature
+
+        return config
+
     def get_item_config(self, context):
         """
         Load item configuration
@@ -194,6 +218,12 @@ class Configuration(object):
 
         self.creature_generator = CreatureGenerator(
                                         self.get_creature_config(context),
+                                        self.model,
+                                        self.item_generator,
+                                        self.rng)
+
+        self.player_generator = CreatureGenerator(
+                                        self.get_player_config(context),
                                         self.model,
                                         self.item_generator,
                                         self.rng)

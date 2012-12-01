@@ -113,7 +113,8 @@ class StartGameWidget(QDialog):
         Generate player character based on selected settings
         """
         self.player_character = None
-        self.player_character = self.generator.generate_creature(name = 'Warrior')
+        self.player_character = self.generator.generate_creature(
+                                            name = self.class_names[self.selected_index])
 
     def keyPressEvent(self, event):
         """
