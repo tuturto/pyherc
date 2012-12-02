@@ -59,7 +59,7 @@ class SurfaceManager:
         :rtype: QPixmap
         """
         image = QPixmap()
-        image.load(os.path.join(base_path, image_name))
+        image.load(image_name)
 
         return image
 
@@ -82,10 +82,10 @@ class SurfaceManager:
         :param base_path: path to directory where resources are location
         :type base_path: string
         """
-        surface = self.__load_image(base_path, 'transparent.png')
+        surface = self.__load_image(base_path, ':transparent.png')
         self.icons[herculeum.config.tiles.TRANSPARENT] = surface
 
-        surface = self.__load_image(base_path, 'weapons.png')
+        surface = self.__load_image(base_path, ':weapons.png')
 
         tiles = self.split_surface(surface, (32, 32))
 
@@ -101,12 +101,12 @@ class SurfaceManager:
         self.icons[herculeum.config.tiles.ITEM_LONGSPEAR] = tiles[34]
         self.icons[herculeum.config.tiles.ITEM_SPEAR] = tiles[30]
 
-        surface = self.__load_image(base_path, 'monsters.png')
+        surface = self.__load_image(base_path, ':monsters.png')
         tiles = self.split_surface(surface, (32, 32))
 
         self.icons[herculeum.config.tiles.HUMAN_FIGHTER] = tiles[3]
 
-        surface = self.__load_image(base_path, 'dungeon.png')
+        surface = self.__load_image(base_path, ':dungeon.png')
         tiles = self.split_surface(surface, (32, 32))
 
         self.icons[herculeum.config.tiles.FLOOR_ROCK] = tiles[9]
@@ -122,7 +122,7 @@ class SurfaceManager:
         self.icons[herculeum.config.tiles.PORTAL_STAIRS_DOWN] = tiles[260]
         self.icons[herculeum.config.tiles.PORTAL_STAIRS_UP] = tiles[261]
 
-        surface = self.__load_image(base_path, 'items.png')
+        surface = self.__load_image(base_path, ':items.png')
         tiles = self.split_surface(surface, (32, 32))
         self.icons[herculeum.config.tiles.ITEM_APPLE] = tiles[0]
         self.icons[herculeum.config.tiles.ITEM_CRYSTAL_SKULL] = tiles[1]

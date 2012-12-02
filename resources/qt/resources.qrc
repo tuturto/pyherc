@@ -19,5 +19,34 @@
         <file>splash.png</file>
         <file>strong.svg</file>
         <file>transparent.png</file>
+        <file>apple.png</file>
+        <file>ashmque.png</file>
+        <file>barbed-spear.png</file>
+        <file>battle-axe.png</file>
+        <file>blade-bite.png</file>
+        <file>characters.png</file>
+        <file>crimson-jaw.png</file>
+        <file>dagger.png</file>
+        <file>dungeon.png</file>
+        <file>gavel.png</file>
+        <file>herculeum.qss</file>
+        <file>items.png</file>
+        <file>mace.png</file>
+        <file>masked-spider.png</file>
+        <file>minor_healing.png</file>
+        <file>minor_poison.png</file>
+        <file>moderate_healing.png</file>
+        <file>monsters.png</file>
+        <file>mouse.png</file>
+        <file>plain_potion.png</file>
+        <file>potions.png</file>
+        <file>scarab-beetle.png</file>
+        <file>scythe.png</file>
+        <file>spiked-mace.png</file>
+        <file>stiletto.png</file>
+        <file>strong-2.png</file>
+        <file>weapons.png</file>
+        <file>whip.png</file>
+        <file>wood-axe.png</file>
     </qresource>
 </RCC>

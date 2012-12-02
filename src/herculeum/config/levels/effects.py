@@ -39,7 +39,7 @@ def init_effects(context):
                     'tick': 2,
                     'healing': 1,
                     'icon': surface_manager.add_icon('cure minor wounds',
-                                                     'minor_healing.png'),
+                                                     ':minor_healing.png'),
                     'title': 'Cure minor wounds',
                     'description': 'Cures small amount of damage'}))
 
@@ -50,7 +50,7 @@ def init_effects(context):
                     'tick': 2,
                     'healing': 2,
                     'icon': surface_manager.add_icon('cure medium wounds',
-                                                     'moderate_healing.png'),
+                                                     ':moderate_healing.png'),
                     'title': 'Cure medium wounds',
                     'description': 'Cures medium amount of damage'}))
 
@@ -61,7 +61,7 @@ def init_effects(context):
                     'tick': 60,
                     'damage': 1,
                     'icon': surface_manager.add_icon('minor poison',
-                                                     'minor_poison.png'),
+                                                     ':minor_poison.png'),
                     'title': 'Minor poison',
                     'description': 'Causes minor amount of damage'}))
 
@@ -73,7 +73,7 @@ def init_effects(context):
                     'damage': 12,
                     'damage_type': 'fire',
                     'icon': surface_manager.add_icon('minor poison',
-                                                     'minor_poison.png'),
+                                                     ':minor_poison.png'),
                     'title': 'Major fire damage',
                     'description': 'Causes major amount of fire damage'}))
 

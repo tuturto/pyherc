@@ -69,7 +69,7 @@ class Application(object):
         """
         Load configuration
         """
-        file = QFile(os.path.join(self.base_path, 'herculeum.qss'));
+        file = QFile(':herculeum.qss');
         file.open(QFile.ReadOnly)
         styleSheet = QLatin1String(file.readAll());
         self.qt_app.setStyleSheet(styleSheet);
