@@ -24,7 +24,33 @@ Module for aspects
 import logging
 
 def logged(fn):
-    def wrapper(*args, **kwargs):
-        return fn(*args, **kwargs)
+    """
+    Decorator to perform logging
+    """
+    logger_name = str(fn)
+    logger = logging.getLogger(logger_name)
 
-    return wrapper
+    def log(*args, **kwargs):
+        """
+        Log function call
+        """
+        call_message = ' '.join([logger_name,
+                                 'call',
+                                 ':',
+                                 str(args),
+                                 str(kwargs)])
+
+        logger.debug(call_message)
+
+        result = fn(*args, **kwargs)
+
+        result_message = ' '.join([logger_name,
+                                   'return',
+                                   ':',
+                                   str(result)])
+
+        logger.debug(result_message)
+
+        return result
+
+    return log

@@ -22,25 +22,16 @@
 Module for event helpers
 """
 from pyherc.aspects import logged
-from Aspyct.aop import Aspect
 from pyherc.data import Model
 
-class Observed(Aspect):
+def observed(fn):
     """
-    Aspect to install observer in behave tests
+    Decorator to inject observer
     """
-    def __init__(self):
+    def observe(*args, **kwargs):
         """
-        Default constructor
+        Inject observer
         """
-        pass
-
-    def atCall(self, call_data):
-        """
-        Called right before associated method is called
-        """
-        args = call_data.args
-
         context = args[0]
 
         if not hasattr(context, 'observer'):
@@ -50,6 +41,10 @@ class Observed(Aspect):
                 context.model = Model()
 
             context.model.register_event_listener(context.observer)
+
+        return fn(*args, **kwargs)
+
+    return observe
 
 class EventListener(object):
     """

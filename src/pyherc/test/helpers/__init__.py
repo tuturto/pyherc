@@ -21,4 +21,4 @@
 """
 Package for test helpers
 """
-from .events import EventListener, Observed
+from .events import EventListener, observed

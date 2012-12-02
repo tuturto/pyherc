@@ -50,7 +50,6 @@ Dependencies
 ------------
 - Python 2.7.3 (2.6.1 should be sufficient if you do not wish to run tests)
 - PyQt4
-- Aspyct 3.0 beta 4 (packaged with the system)
 - web.py 0.3 (only needed for running debug server)
 - mockito-python 0.5.0 (only needed for running test cases)
 - pyHamcrest 1.6 (only needed for running test cases)

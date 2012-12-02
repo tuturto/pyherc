@@ -33,6 +33,7 @@ Other notes
 ***********
 
  - 41_ player character configuration
+ - Aspyct is no longer needed to run the game
 
 .. _41: https://github.com/tuturto/pyherc/issues/41
 .. _37: https://github.com/tuturto/pyherc/issues/37

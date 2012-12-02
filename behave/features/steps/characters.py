@@ -21,11 +21,11 @@
 from pyherc.data.effects import DamageModifier
 from pyherc.test.cutesy import Adventurer, Goblin
 from pyherc.test.matchers import is_dead, is_not_in
-from pyherc.test.helpers import Observed
+from pyherc.test.helpers import observed
 from hamcrest import assert_that
 
 @given(u'{character_name} is Adventurer')
-@Observed()
+@observed
 def impl(context, character_name):
     if not hasattr(context, 'characters'):
         context.characters = []
@@ -35,7 +35,7 @@ def impl(context, character_name):
     context.characters.append(new_character)
 
 @given(u'{character_name} is Goblin')
-@Observed()
+@observed
 def impl(context, character_name):
     if not hasattr(context, 'characters'):
         context.characters = []
@@ -53,7 +53,7 @@ def impl(context, character_name):
     assert_that(character, is_dead())
 
 @given(u'{character_name} is almost dead')
-@Observed()
+@observed
 def impl(context, character_name):
     characters = [x for x in context.characters
                   if x.name == character_name]
