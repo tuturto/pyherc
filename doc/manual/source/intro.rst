@@ -17,9 +17,37 @@ posses it.
 *******************
 Installing the game
 *******************
+There are two ways of installing the game. First one is to use the provided
+Windows executable. This is the easiest method, but will only work on computers
+running on Windows operating system.
+
+Second option is to install Python interpreter, some libraries and run the game
+from source code.
+
+Windows executable
+==================
+Windows executable bundles together Python interpreter, all required libraries
+and the game. Just unpack the distribution package to a folder, install
+required dependencies and start the game by double clicking herculeum.exe
 
 Dependencies
-============
+------------
+- Microsoft Visual C++ 2008 Redistributable Package 
+
+Installing dependencies
+-----------------------
+Install Microsoft Visual C++ 2008 Redistributable Package from Microsoft_.
+
+Source code distribution
+========================
+Source code distribution is more complicated to set up (not much though), but
+it gives you possibility to read and modify the source code. Start by
+installing required dependencies, unpack the distribution package to a folder
+and start the game by double clicking pyherc.bat or pyherc.sh in installation
+folder.
+
+Dependencies
+------------
 - Python 2.7.3 (2.6.1 should be sufficient if you do not wish to run tests)
 - PyQt4
 - Aspyct 3.0 beta 4 (packaged with the system)
@@ -32,7 +60,7 @@ Dependencies
 - Sphinx 1.1.2 (only needed for generating documentation)
 
 Installing dependencies
-=======================
+-----------------------
 Install python 2.7 from Python_.
 
 Install setuptools, by following instructions at: setuptools_.
@@ -65,10 +93,4 @@ If you want to generate html manual and programmers guide, install Sphinx::
 .. _Python: http://python.org/getit/
 .. _setuptools: http://pypi.python.org/pypi/setuptools
 .. _PyQt4: http://www.riverbankcomputing.co.uk/software/pyqt/intro
-
-Last step is to extract installation package to suitable folder.
-
-****************
-Running the game
-****************
-Run game by double clicking pyherc.bat or pyherc.sh in installation folder.
+.. _Microsoft: http://www.microsoft.com/en-us/download/details.aspx?id=29
