@@ -27,7 +27,7 @@ from PyQt4.QtGui import QGraphicsSimpleTextItem, QColor
 from PyQt4.QtGui import QFont
 from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
 from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
-from PyQt4.QtCore import QEasingCurve, pyqtSignal
+from PyQt4.QtCore import QEasingCurve, pyqtSignal, QEvent
 from herculeum.gui.eventdisplay import EventMessageWidget
 from herculeum.gui.widgets import HitPointsWidget, EffectsWidget
 from random import Random
@@ -39,7 +39,7 @@ class PlayMapWindow(QWidget):
     .. versionadded:: 0.5
     """
     def __init__(self, parent, model, surface_manager, action_factory, rng,
-                 rules_engine):
+                 rules_engine, configuration):
         """
         Default constructor
         """
@@ -50,14 +50,15 @@ class PlayMapWindow(QWidget):
         self.action_factory = action_factory
         self.rng = rng
         self.current_level = None
+        self.configuration = configuration
 
         self.__set_layout(model, surface_manager, action_factory, rng,
-                          rules_engine)
+                          rules_engine, configuration)
 
     MenuRequested = pyqtSignal(name='MenuRequested')
 
     def __set_layout(self, model, surface_manager, action_factory, rng,
-                     rules_engine):
+                     rules_engine, configuration):
         """
         Set layout of this window
         """
@@ -73,7 +74,8 @@ class PlayMapWindow(QWidget):
                                         surface_manager = surface_manager,
                                         action_factory = action_factory,
                                         rng = rng,
-                                        rules_engine = rules_engine)
+                                        rules_engine = rules_engine,
+                                        configuration = configuration)
         self.map_widget.MenuRequested.connect(self.on_menu_requested)
 
         self.message_widget = EventMessageWidget(parent = self)
@@ -111,7 +113,7 @@ class PlayMapWidget(QWidget):
     .. versionadded:: 0.5
     """
     def __init__(self, parent, model, surface_manager, action_factory, rng,
-                 rules_engine):
+                 rules_engine, configuration):
         """
         Default constructor
         """
@@ -123,16 +125,52 @@ class PlayMapWidget(QWidget):
         self.action_factory = action_factory
         self.rng = rng
         self.rules_engine = rules_engine
+        self.configuration = configuration
 
         self.animations = []
 
-        self.move_key_map = {Qt.Key_8:1, Qt.Key_9:2, Qt.Key_6:3, Qt.Key_3:4,
-                             Qt.Key_2:5, Qt.Key_1:6, Qt.Key_4:7, Qt.Key_7:8,
-                             Qt.Key_5:9}
-
         self.__set_layout()
+        self.keymap, self.move_key_map = self._construct_keymaps(
+                                                        configuration.controls)
 
     MenuRequested = pyqtSignal(name='MenuRequested')
+
+    def _construct_keymaps(self, config):
+        """
+        Construct keymaps for handling input
+        """
+        keymap = {}
+        move_keymap = {}
+        for key in config.move_left:
+            keymap[key] = self._move
+            move_keymap[key] = 7
+        for key in config.move_up_left:
+            keymap[key] = self._move
+            move_keymap[key] = 8
+        for key in config.move_up:
+            keymap[key] = self._move
+            move_keymap[key] = 1
+        for key in config.move_up_right:
+            keymap[key] = self._move
+            move_keymap[key] = 2
+        for key in config.move_right:
+            keymap[key] = self._move
+            move_keymap[key] = 3
+        for key in config.move_down_right:
+            keymap[key] = self._move
+            move_keymap[key] = 4
+        for key in config.move_down:
+            keymap[key] = self._move
+            move_keymap[key] = 5
+        for key in config.move_down_left:
+            keymap[key] = self._move
+            move_keymap[key] = 6
+        for key in config.start:
+            keymap[key] = self._menu
+        for key in config.action_a:
+            keymap[key] = self._action_a
+
+        return keymap, move_keymap
 
     def __set_layout(self):
         """
@@ -143,6 +181,8 @@ class PlayMapWidget(QWidget):
         layout = QHBoxLayout()
 
         self.view = QGraphicsView(self.scene)
+        self.view.setFocusPolicy(Qt.StrongFocus)
+        self.view.installEventFilter(self)
         layout.addWidget(self.view)
 
         self.setLayout(layout)
@@ -380,6 +420,22 @@ class PlayMapWidget(QWidget):
                 self.__construct_scene(self.model, self.scene)
             self.__center_view_on_character(self.model.player)
 
+    def eventFilter(self, qobject, event):
+        """
+        Filter events
+
+        .. Note:: This is done in order to process cursor keys
+        """
+        result = False
+
+        if event.type() == QEvent.KeyPress:
+            self.keyPressEvent(event)
+            result = True
+        else:
+            result = super(PlayMapWidget, self).eventFilter(qobject, event)
+
+        return result
+
     def keyPressEvent(self, event):
         """
         Handle key events
@@ -394,27 +450,8 @@ class PlayMapWidget(QWidget):
 
         if next_creature == player:
 
-            if key_code in self.move_key_map:
-                direction = self.move_key_map[key_code]
-
-                if player.is_move_legal(direction,
-                                        'walk',
-                                        self.action_factory):
-                    player.move(direction,
-                                self.action_factory)
-                elif direction != 9:
-                    player.perform_attack(direction,
-                                          self.action_factory,
-                                          self.rng)
-                elif direction == 9:
-                    level = player.level
-                    items = level.get_items_at(player.location)
-
-                    if items != None and len(items) == 1:
-                        player.pick_up(items[0],
-                                       self.action_factory)
-            elif key_code == Qt.Key_Space:
-                self.MenuRequested.emit()
+            if key_code in self.keymap:
+                self.keymap[key_code](key_code)
 
         next_creature = self.model.get_next_creature(self.rules_engine)
         while next_creature != player and next_creature != None:
@@ -422,6 +459,50 @@ class PlayMapWidget(QWidget):
                               action_factory = self.action_factory,
                               rng = self.rng)
             next_creature = self.model.get_next_creature(self.rules_engine)
+
+    def _move(self, key):
+        """
+        Process movement key
+
+        :param key: key triggering the processing
+        :type key: int
+        """
+        player = self.model.player
+        direction = self.move_key_map[key]
+
+        if player.is_move_legal(direction,
+                                'walk',
+                                self.action_factory):
+            player.move(direction,
+                        self.action_factory)
+        elif direction != 9:
+            player.perform_attack(direction,
+                                  self.action_factory,
+                                  self.rng)
+
+    def _menu(self, key):
+        """
+        Process menu key
+
+        :param key: key triggering the processing
+        :type key: int
+        """
+        self.MenuRequested.emit()
+
+    def _action_a(self, key):
+        """
+        Process action a key
+
+        :param key: key triggering the processing
+        :type key: int
+        """
+        player = self.model.player
+        level = player.level
+        items = level.get_items_at(player.location)
+
+        if items != None and len(items) > 0:
+            player.pick_up(items[0],
+                           self.action_factory)
 
 class DamageCounter(QGraphicsSimpleTextItem):
     """

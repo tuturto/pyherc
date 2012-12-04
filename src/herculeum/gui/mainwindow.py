@@ -88,7 +88,8 @@ class MainWindow(QMainWindow):
                                         surface_manager = self.surface_manager,
                                         action_factory = self.application.action_factory,
                                         rng = self.application.rng,
-                                        rules_engine = self.application.rules_engine)
+                                        rules_engine = self.application.rules_engine,
+                                        configuration = self.application.config)
         self.setCentralWidget(self.map_window)
 
         self.map_window.MenuRequested.connect(self.__show_menu)

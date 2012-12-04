@@ -23,6 +23,7 @@ Module for herculeum main configuration
 """
 import pyherc.config
 from herculeum.gui.surfaceManager import SurfaceManager
+from PyQt4.QtCore import Qt
 
 class Configuration(pyherc.config.Configuration):
     """
@@ -46,6 +47,8 @@ class Configuration(pyherc.config.Configuration):
         self.context = ConfigurationContext(config_package,
                                             base_path,
                                             self.surface_manager)
+
+        self.controls = ControlsConfiguration()
 
     def initialise(self):
         """
@@ -74,3 +77,37 @@ class ConfigurationContext(object):
         self.config_package = config_package
         self.base_path = base_path
         self.surface_manager = surface_manager
+
+class ControlsConfiguration(object):
+    """
+    Configuration for user interface controls
+
+    .. versionadded:: 0.8
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(ControlsConfiguration, self).__init__()
+
+        self.move_left = [Qt.Key_4, Qt.Key_Left, Qt.Key_H]
+        self.move_up_left = [Qt.Key_7, Qt.Key_Y]
+        self.move_up = [Qt.Key_8, Qt.Key_Up, Qt.Key_K]
+        self.move_up_right = [Qt.Key_9, Qt.Key_U]
+        self.move_right = [Qt.Key_6, Qt.Key_Right, Qt.Key_L]
+        self.move_down_right = [Qt.Key_3, Qt.Key_N]
+        self.move_down = [Qt.Key_2, Qt.Key_Down, Qt.Key_J]
+        self.move_down_left = [Qt.Key_1, Qt.Key_B]
+
+        self.action_a = [Qt.Key_5, Qt.Key_Z]
+        self.action_b = [Qt.Key_Enter, Qt.Key_X]
+        self.action_x = [Qt.Key_A]
+        self.action_y = [Qt.Key_S]
+
+        self.start = [Qt.Key_Space]
+        self.back = [Qt.Key_Escape]
+
+        self.left_shoulder = [Qt.Key_Insert, Qt.Key_Q]
+        self.right_shoulder = [Qt.Key_Delete, Qt.Key_W]
+        self.left_trigger = [Qt.Key_PageUp, Qt.Key_E]
+        self.right_trigger = [Qt.Key_PageDown, Qt.Key_R]
