@@ -24,6 +24,7 @@ Classes for generating square rooms
 
 import logging
 from pyherc.generators.level.room.corridor import CorridorGenerator
+from random import Random
 
 class SquareRoomGenerator(object):
     """
@@ -45,6 +46,7 @@ class SquareRoomGenerator(object):
         self.room_width = None
         self.room_height = None
         self.level_types = level_types
+        self.rng = Random()
         self.logger = logging.getLogger('pyherc.generators.level.room.squareroom.SquareRoomGenerator') #pylint disable=C0301
 
     def generate_room(self, section):
@@ -55,13 +57,15 @@ class SquareRoomGenerator(object):
         :type section: Section
         """
 
-        self.room_width = int(section.width * 0.50)
-        self.room_height = int(section.height * 0.50)
+        middle_height = section.height // 2
+        middle_width = section.width // 2
 
-        room_left_edge = (section.width - self.room_width) // 2
-        room_right_edge = room_left_edge + self.room_width
-        room_top_edge = (section.height - self.room_height) // 2
-        room_bottom_edge = room_top_edge + self.room_height
+        room_left_edge = self.rng.randint(2, middle_width - 2)
+        room_right_edge = self.rng.randint(middle_width + 2,
+                                           section.width - 2)
+        room_top_edge = self.rng.randint(2, middle_height - 2)
+        room_bottom_edge = self.rng.randint(middle_height + 2,
+                                            section.height - 2)
 
         for loc_y in range(room_top_edge + 1, room_bottom_edge):
             for loc_x in range(room_left_edge + 1, room_right_edge):
