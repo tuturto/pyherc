@@ -106,6 +106,7 @@ class MainWindow(QMainWindow):
         app = self.application
 
         start_dialog = StartGameWidget(generator = app.player_generator,
+                                       config = self.application.config.controls,
                                        parent = self,
                                        application = self.application,
                                        surface_manager = self.surface_manager,
@@ -156,6 +157,7 @@ class MainWindow(QMainWindow):
         menu_dialog = MenuDialog(self.surface_manager,
                                  self.application.world.player,
                                  self.application.action_factory,
+                                 self.application.config.controls,
                                  self,
                                  Qt.Dialog | Qt.CustomizeWindowHint)
         menu_dialog.exec_()

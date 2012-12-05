@@ -24,6 +24,7 @@ Package for start screen tests
 from herculeum.gui.startgame import StartGameWidget
 from pyherc.generators import CreatureConfiguration, CreatureGenerator
 from herculeum.gui.surfaceManager import SurfaceManager
+from herculeum.config.config import ControlsConfiguration
 
 from PyQt4.QtTest import QTest
 from PyQt4.QtGui import QApplication, QPixmap
@@ -46,6 +47,7 @@ class TestStartScreen(object):
         super(TestStartScreen, self).__init__()
         self.application = None
         self.surface_manager = None
+        self.controls_config = None
 
     def setup(self):
         """
@@ -54,6 +56,8 @@ class TestStartScreen(object):
         self.application = QApplication([])
         self.surface_manager = mock(SurfaceManager)
         when(self.surface_manager).get_icon(any()).thenReturn(QPixmap())
+
+        self.controls_config = ControlsConfiguration()
 
         config = {}
 
@@ -96,6 +100,7 @@ class TestStartScreen(object):
         self.dialog = StartGameWidget(generator = self.generator,
                                       parent = None,
                                       application = mock(),
+                                      config = self.controls_config,
                                       surface_manager = self.surface_manager,
                                       flags = Qt.Dialog)
 
@@ -166,9 +171,9 @@ class TestStartScreen(object):
 
     def test_generating_character(self):
         """
-        Pressing 5 should trigger character generation
+        Pressing space should trigger character generation
         """
         QTest.keyClick(self.dialog,
-                       Qt.Key_5)
+                       Qt.Key_Space)
 
         verify(self.generator).generate_creature(name = 'Adventurer')

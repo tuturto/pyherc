@@ -22,8 +22,9 @@
 Package for inventory tests
 """
 
-from herculeum.gui import InventoryDialog
+from herculeum.gui.inventory import InventoryWidget
 from herculeum.gui.surfaceManager import SurfaceManager
+from herculeum.config.config import ControlsConfiguration
 from pyherc.rules import ActionFactory
 import herculeum.gui.resources
 from herculeum.test.matchers import slot_with_item
@@ -40,7 +41,7 @@ from PyQt4.QtTest import QTest
 from PyQt4.QtGui import QApplication, QPixmap
 from PyQt4.QtCore import Qt
 
-class TestInventoryDialog(object):
+class TestInventoryWidget(object):
     """
     Tests for inventory dialog
     """
@@ -48,7 +49,7 @@ class TestInventoryDialog(object):
         """
         Default constructor
         """
-        super(TestInventoryDialog, self).__init__()
+        super(TestInventoryWidget, self).__init__()
         self.application = None
         self.action_factory = None
         self.level = None
@@ -88,11 +89,11 @@ class TestInventoryDialog(object):
                     .build())
         self.level.add_item(item, (5, 5))
 
-        dialog = InventoryDialog(surface_manager = self.surface_manager,
+        dialog = InventoryWidget(surface_manager = self.surface_manager,
                                  character = self.character,
                                  action_factory = self.action_factory,
-                                 parent = None,
-                                 flags = Qt.Dialog)
+                                 config = ControlsConfiguration(),
+                                 parent = None)
 
         QTest.mouseClick(satin.widget(dialog,
                                       slot_with_item('dagger')),
@@ -110,11 +111,11 @@ class TestInventoryDialog(object):
 
         self.character.inventory.append(item)
 
-        dialog = InventoryDialog(surface_manager = self.surface_manager,
+        dialog = InventoryWidget(surface_manager = self.surface_manager,
                                  character = self.character,
                                  action_factory = self.action_factory,
-                                 parent = None,
-                                 flags = Qt.Dialog)
+                                 config = ControlsConfiguration(),
+                                 parent = None)
 
         QTest.mouseClick(satin.widget(dialog,
                                       slot_with_item('dagger')),

@@ -504,6 +504,12 @@ class PlayMapWidget(QWidget):
             player.pick_up(items[0],
                            self.action_factory)
 
+        elif player.is_move_legal(9,
+                                  'walk',
+                                  self.action_factory):
+            player.move(9,
+                        self.action_factory)
+
 class DamageCounter(QGraphicsSimpleTextItem):
     """
     Counter for showing damage

@@ -32,56 +32,13 @@ import pyherc.rules.items
 
 from pyherc.data import Item
 
-class InventoryDialog(QDialog):
-    """
-    Dialog to show inventory
-
-    .. versionadded:: 0.6
-    """
-    def __init__(self, surface_manager, character, action_factory, parent,
-                 flags):
-        """
-        Default constructor
-        """
-        super(InventoryDialog, self).__init__(parent, flags)
-
-        self.__set_layout(surface_manager,
-                          character,
-                          action_factory,
-                          parent)
-
-    def __set_layout(self, surface_manager, character, action_factory, parent):
-        """
-        Set layout of this widget
-        """
-        self.setWindowTitle('Inventory')
-        self.inventory = InventoryWidget(surface_manager = surface_manager,
-                                         character = character,
-                                         action_factory = action_factory,
-                                         parent = parent)
-
-        layout = QVBoxLayout()
-        layout.addWidget(self.inventory)
-
-        self.setLayout(layout)
-        self.inventory.items_carried.items[0].setFocus()
-
-    def keyPressEvent(self, event):
-        """
-        Handle keyboard
-        """
-        if event.key() == Qt.Key_Space:
-            self.done(0)
-
-        super(InventoryDialog, self).keyPressEvent(event)
-
 class CharacterInventoryWidget(QWidget):
     """
     Widget to show inventory of a character
 
     .. versionadded:: 0.6
     """
-    def __init__(self, surface_manager, character, parent):
+    def __init__(self, surface_manager, character, config, parent):
         """
         Default constructor
         """
@@ -89,6 +46,7 @@ class CharacterInventoryWidget(QWidget):
 
         self.surface_manager = surface_manager
         self.character = character
+        self.config = config
         self.items = []
 
         self.__set_layout(surface_manager, character, parent)
@@ -312,7 +270,8 @@ class InventoryWidget(QWidget):
 
     .. versionadded:: 0.5
     """
-    def __init__(self, surface_manager, character, action_factory, parent):
+    def __init__(self, surface_manager, character, action_factory,
+                 config, parent):
         """
         Default constructor
         """
@@ -321,13 +280,14 @@ class InventoryWidget(QWidget):
         self.surface_manager = surface_manager
         self.character = character
         self.action_factory = action_factory
+        self.config = config
 
-        self.__set_layout(surface_manager, character)
+        self.__set_layout(surface_manager, character, config)
 
     ItemPickedUp = pyqtSignal(Item, name='ItemPickedUp')
     ItemDropped = pyqtSignal(Item, name='ItemDropped')
 
-    def __set_layout(self, surface_manager, character):
+    def __set_layout(self, surface_manager, character, config):
         """
         Set layout of this widget
         """
@@ -336,6 +296,7 @@ class InventoryWidget(QWidget):
         left_side = QVBoxLayout()
         self.character_inventory = CharacterInventoryWidget(surface_manager,
                                                             character,
+                                                            config,
                                                             self)
         self.character_inventory.ItemLeftSelected.connect(self.unwield_weapon)
         self.character_inventory.ItemRightSelected.connect(self.unwield_weapon)
@@ -346,6 +307,7 @@ class InventoryWidget(QWidget):
 
         right_side = QVBoxLayout()
         self.items_carried = ItemBox(surface_manager = surface_manager,
+                                     config = config,
                                      parent = self,
                                      width = 6,
                                      height = 6)
@@ -354,6 +316,7 @@ class InventoryWidget(QWidget):
         self.items_carried.ItemRightSelected.connect(self.drop_item)
 
         self.items_in_ground = ItemBox(surface_manager = surface_manager,
+                                       config = config,
                                        parent = self,
                                        width = 6,
                                        height = 2)
@@ -489,30 +452,70 @@ class ItemBox(QWidget):
 
     .. versionadded:: 0.5
     """
-    def __init__(self, surface_manager, parent, width, height):
+    def __init__(self, surface_manager, config, parent, width, height):
         """
         Default constructor
         """
         super(ItemBox, self).__init__(parent)
 
+        self.config = config
         self.surface_manager = surface_manager
         self.item_width = width
         self.item_height = height
 
         self.__set_layout(width, height)
 
-        self.move_keys = {Qt.Key_1: width - 1,
-                          Qt.Key_2: width,
-                          Qt.Key_3: width + 1,
-                          Qt.Key_4: -1,
-                          Qt.Key_6: 1,
-                          Qt.Key_7: -width - 1,
-                          Qt.Key_8: -width,
-                          Qt.Key_9: -width + 1}
+        self.keymap, self.move_keys = self._construct_keymaps(config, width)
 
     ItemFocused = pyqtSignal(Item, name='ItemFocused')
     ItemLeftSelected = pyqtSignal(Item, name='ItemLeftSelected')
     ItemRightSelected = pyqtSignal(Item, name='ItemRightSelected')
+
+    def _construct_keymaps(self, config, width):
+        """
+        Construct keymaps from configuration
+
+        :param config: controls configuration
+        :type config: ControlsConfiguration
+        :returns: keymap for widget and move keys
+        :rtype: {}, {}
+
+        .. versionadded:: 0.8
+        """
+        move_keys = {}
+        keymap = {}
+
+        for key in config.move_down_left:
+            move_keys[key] = width - 1
+            keymap[key] = self._move
+        for key in config.move_down:
+            move_keys[key] = width
+            keymap[key] = self._move
+        for key in config.move_down_right:
+            move_keys[key] = width + 1
+            keymap[key] = self._move
+        for key in config.move_left:
+            move_keys[key] = - 1
+            keymap[key] = self._move
+        for key in config.move_right:
+            move_keys[key] = 1
+            keymap[key] = self._move
+        for key in config.move_up_left:
+            move_keys[key] = -width - 1
+            keymap[key] = self._move
+        for key in config.move_up:
+            move_keys[key] = -width
+            keymap[key] = self._move
+        for key in config.move_up_right:
+            move_keys[key] = -width + 1
+            keymap[key] = self._move
+
+        for key in config.action_a:
+            keymap[key] = self._action
+        for key in config.action_b:
+            keymap[key] = self._action
+
+        return keymap, move_keys
 
     def __set_layout(self, width, height):
         """
@@ -545,32 +548,46 @@ class ItemBox(QWidget):
 
         .. versionadded:: 0.6
         """
-        if event.key() in (Qt.Key_1, Qt.Key_2, Qt.Key_3, Qt.Key_4, Qt.Key_6,
-                           Qt.Key_7, Qt.Key_8, Qt.Key_9):
-            current = self.get_current_slot()
+        key = event.key()
 
-            index = self.items.index(current)
-
-            new_index = index + self.move_keys[event.key()]
-
-            if new_index < len(self.items) and new_index >= 0:
-                new = self.items[new_index]
-                new.setFocus(Qt.OtherFocusReason)
-            else:
-                if new_index >= len(self.items):
-                    self.focusNextChild()
-                else:
-                    self.focusPreviousChild()
-
-        elif event.key() in (Qt.Key_5, Qt.Key_Enter):
-            item = self.get_current_slot().item
-            if item != None:
-                if event.key() == Qt.Key_5:
-                    self.ItemLeftSelected.emit(item)
-                else:
-                    self.ItemRightSelected.emit(item)
+        if key in self.keymap:
+            self.keymap[key](key)
         else:
             super(ItemBox, self).keyPressEvent(event)
+
+    def _action(self, key):
+        """
+        Handle action keys
+
+        .. versionadded:: 0.8
+        """
+        item = self.get_current_slot().item
+        if item != None:
+            if key in self.config.action_a:
+                self.ItemLeftSelected.emit(item)
+            elif key in self.config.action_b:
+                self.ItemRightSelected.emit(item)
+
+    def _move(self, key):
+        """
+        Handle move keys
+
+        .. versionadded:: 0.8
+        """
+        current = self.get_current_slot()
+
+        index = self.items.index(current)
+
+        new_index = index + self.move_keys[key]
+
+        if new_index < len(self.items) and new_index >= 0:
+            new = self.items[new_index]
+            new.setFocus(Qt.OtherFocusReason)
+        else:
+            if new_index >= len(self.items):
+                self.focusNextChild()
+            else:
+                self.focusPreviousChild()
 
     def show_items(self, items):
         """

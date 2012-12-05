@@ -32,8 +32,8 @@ class MenuDialog(QDialog):
 
     .. versionadded:: 0.7
     """
-    def __init__(self, surface_manager, character, action_factory, parent,
-                 flags):
+    def __init__(self, surface_manager, character, action_factory, config,
+                 parent, flags):
         """
         Default constructor
         """
@@ -42,9 +42,11 @@ class MenuDialog(QDialog):
         self.__set_layout(surface_manager,
                           character,
                           action_factory,
+                          config,
                           parent)
 
-    def __set_layout(self, surface_manager, character, action_factory, parent):
+    def __set_layout(self, surface_manager, character, action_factory,
+                     config, parent):
         """
         Set layout of this widget
         """
@@ -52,6 +54,7 @@ class MenuDialog(QDialog):
         self.inventory = InventoryWidget(surface_manager = surface_manager,
                                          character = character,
                                          action_factory = action_factory,
+                                         config = config,
                                          parent = parent)
 
         self.character = CharacterWidget(surface_manager = surface_manager,

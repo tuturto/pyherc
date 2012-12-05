@@ -36,7 +36,8 @@ class StartGameWidget(QDialog):
     .. versionadded:: 0.5
     """
 
-    def __init__(self, generator, parent, application, surface_manager, flags):
+    def __init__(self, generator, config,
+                 parent, application, surface_manager, flags):
         """
         Default constructor
         """
@@ -44,6 +45,7 @@ class StartGameWidget(QDialog):
 
         self.application = application
         self.surface_manager = surface_manager
+        self.config = config
 
         self.generator = generator
 
@@ -122,16 +124,16 @@ class StartGameWidget(QDialog):
         """
         Process keyboard events
         """
-        if event.key() == Qt.Key_5:
+        if event.key() in self.config.action_a:
             self.__generate_character()
             self.accept()
-        elif event.key() == Qt.Key_6:
+        elif event.key() in self.config.move_right:
             self.selected_index = self.selected_index + 1
             if self.selected_index >= len(self.class_names):
                 self.selected_index = 0
             self._show_character(
                     self.generator.configuration[self.class_names[self.selected_index]])
-        elif event.key() == Qt.Key_4:
+        elif event.key() in self.config.move_left:
             self.selected_index = self.selected_index - 1
             if self.selected_index < 0:
                 self.selected_index = len(self.class_names) - 1

@@ -110,15 +110,6 @@ class CharacterWidget(QWidget):
         skills_label = QLabel('Skills')
         skills_label.setObjectName('section_title')
         skills = ListView()
-        #skills.add_item(title = 'Adventuring',
-        #                description = 'Character has natural affinity to adventuring and enjoys immensly finding new locations.',
-        #                icon = surface_manager.get_icon(300))
-        #skills.add_item(title = 'Spelunking',
-        #                description = '+1 bonus to spelunking',
-        #                icon = surface_manager.get_icon(300))
-        #skills.add_item(title = 'Unarmed combat',
-        #                description = '+1 bonus to unarmed combat',
-        #                icon = surface_manager.get_icon(300))
 
         right_layout.addWidget(skills_label)
         right_layout.addWidget(skills)
