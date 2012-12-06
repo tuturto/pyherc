@@ -50,6 +50,7 @@ class MenuDialog(QDialog):
         """
         Set layout of this widget
         """
+        self.keymap = self._construct_keymap(config)
         self.setWindowTitle('Menu')
         self.inventory = InventoryWidget(surface_manager = surface_manager,
                                          character = character,
@@ -71,19 +72,58 @@ class MenuDialog(QDialog):
         self.setLayout(layout)
         self.inventory.items_carried.items[0].setFocus()
 
+    def _construct_keymap(self, config):
+        """
+        Construct key map
+
+        .. versionadded:: 0.8
+        """
+        keymap = {}
+
+        for key in config.left_shoulder:
+            keymap[key] = self._switch_left
+        for key in config.right_shoulder:
+            keymap[key] = self._switch_right
+        for key in config.start:
+            keymap[key] = self._menu
+
+        return keymap
+
+    def _switch_left(self):
+        """
+        Switch page to left
+
+        .. versionadded:: 0.8
+        """
+        current_tab = self.tabs.currentIndex()
+        if current_tab > 0:
+            self.tabs.setCurrentIndex(current_tab - 1)
+
+    def _switch_right(self):
+        """
+        Switch page to right
+
+        .. versionadded:: 0.8
+        """
+        current_tab = self.tabs.currentIndex()
+        if current_tab < self.tabs.count():
+            self.tabs.setCurrentIndex(current_tab + 1)
+
+    def _menu(self):
+        """
+        Process menu key
+
+        .. versionadded:: 0.8
+        """
+        self.done(0)
+
     def keyPressEvent(self, event):
         """
         Handle keyboard events
         """
-        if event.key() == (Qt.Key_PageUp):
-            current_tab = self.tabs.currentIndex()
-            if current_tab < self.tabs.count():
-                self.tabs.setCurrentIndex(current_tab + 1)
-        elif event.key() == (Qt.Key_PageDown):
-            current_tab = self.tabs.currentIndex()
-            if current_tab > 0:
-                self.tabs.setCurrentIndex(current_tab - 1)
-        elif event.key() == Qt.Key_Space:
-            self.done(0)
+        key = event.key()
+
+        if key in self.keymap:
+            self.keymap[key]()
         else:
             super(MenuDialog, self).keyPressEvent(event)

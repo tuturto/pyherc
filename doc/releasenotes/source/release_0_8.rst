@@ -9,6 +9,7 @@ New features
  - amount of damage done is reported more clearly
  - new area: Crimson Lair
  - weapons may have special effects that are triggered in combat
+ - 43_ feature: support for vi and cursor keys
  - 37_ feature: creating a new character
 
 **********
@@ -35,6 +36,7 @@ Other notes
  - 41_ player character configuration
  - Aspyct is no longer needed to run the game
 
+.. _43: https://github.com/tuturto/pyherc/issues/43
 .. _41: https://github.com/tuturto/pyherc/issues/41
 .. _37: https://github.com/tuturto/pyherc/issues/37
 .. _26: https://github.com/tuturto/pyherc/issues/26

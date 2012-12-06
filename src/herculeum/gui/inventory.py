@@ -50,19 +50,57 @@ class CharacterInventoryWidget(QWidget):
         self.items = []
 
         self.__set_layout(surface_manager, character, parent)
-
-        self.move_keys = {Qt.Key_1: 1,
-                          Qt.Key_2: 1,
-                          Qt.Key_3: 1,
-                          Qt.Key_4: -1,
-                          Qt.Key_6: 1,
-                          Qt.Key_7: -1,
-                          Qt.Key_8: -1,
-                          Qt.Key_9: -1}
+        self.keymap, self.move_keys = self._construct_keymaps(config)
 
     ItemFocused = pyqtSignal(Item, name='ItemFocused')
     ItemLeftSelected = pyqtSignal(Item, name='ItemLeftSelected')
     ItemRightSelected = pyqtSignal(Item, name='ItemRightSelected')
+
+    def _construct_keymaps(self, config):
+        """
+        Construct keymaps from configuration
+
+        :param config: controls configuration
+        :type config: ControlsConfiguration
+        :returns: keymap for widget and move keys
+        :rtype: {}, {}
+
+        .. versionadded:: 0.8
+        """
+        move_keys = {}
+        keymap = {}
+
+        for key in config.move_down_left:
+            move_keys[key] = 1
+            keymap[key] = self._move
+        for key in config.move_down:
+            move_keys[key] = 1
+            keymap[key] = self._move
+        for key in config.move_down_right:
+            move_keys[key] = 1
+            keymap[key] = self._move
+        for key in config.move_left:
+            move_keys[key] = -1
+            keymap[key] = self._move
+        for key in config.move_right:
+            move_keys[key] = 1
+            keymap[key] = self._move
+        for key in config.move_up_left:
+            move_keys[key] = -1
+            keymap[key] = self._move
+        for key in config.move_up:
+            move_keys[key] = -1
+            keymap[key] = self._move
+        for key in config.move_up_right:
+            move_keys[key] = -1
+            keymap[key] = self._move
+
+        for key in config.action_a:
+            keymap[key] = self._action
+        for key in config.action_b:
+            keymap[key] = self._action
+
+        return keymap, move_keys
 
     def __set_layout(self, surface_manager, character, parent):
         """
@@ -188,35 +226,49 @@ class CharacterInventoryWidget(QWidget):
         #   yes-> show icon of item
         #   no -> show default icon
 
+    def _move(self, key):
+        """
+        Handle move keys
+
+        .. versionadded:: 0.8
+        """
+        current = [x for x in self.items
+                   if x.display.objectName() == 'active_inventorybox'][0]
+
+        index = self.items.index(current)
+        new_index = index + self.move_keys[key]
+
+        if new_index < len(self.items) and new_index >= 0:
+            new = self.items[new_index]
+            new.setFocus(Qt.OtherFocusReason)
+        else:
+            if new_index < 0:
+                self.focusPreviousChild()
+            else:
+                self.focusNextChild()
+
+    def _action(self, key):
+        """
+        Handle action keys
+
+        .. versionadded:: 0.8
+        """
+        item = [x for x in self.items
+                if x.display.objectName() == 'active_inventorybox'][0].item
+        if item != None:
+            if key in self.config.action_a:
+                self.ItemLeftSelected.emit(item)
+            elif key in self.config.action_b:
+                self.ItemRightSelected.emit(item)
+
     def keyPressEvent(self, event):
         """
         Handle keyboard events
         """
-        if event.key() in (Qt.Key_1, Qt.Key_2, Qt.Key_3, Qt.Key_4, Qt.Key_6,
-                           Qt.Key_7, Qt.Key_8, Qt.Key_9):
-            current = [x for x in self.items
-                       if x.display.objectName() == 'active_inventorybox'][0]
+        key = event.key()
 
-            index = self.items.index(current)
-
-            new_index = index + self.move_keys[event.key()]
-
-            if new_index < len(self.items) and new_index >= 0:
-                new = self.items[new_index]
-                new.setFocus(Qt.OtherFocusReason)
-            else:
-                if new_index < 0:
-                    self.focusPreviousChild()
-                else:
-                    self.focusNextChild()
-        elif event.key() in (Qt.Key_5, Qt.Key_Enter):
-            item = [x for x in self.items
-                    if x.display.objectName() == 'active_inventorybox'][0].item
-            if item != None:
-                if event.key() == Qt.Key_5:
-                    self.ItemLeftSelected.emit(item)
-                else:
-                    self.ItemRightSelected.emit(item)
+        if key in self.keymap:
+            self.keymap[key](key)
         else:
             super(CharacterInventoryWidget, self).keyPressEvent(event)
 
