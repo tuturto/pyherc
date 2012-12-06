@@ -107,7 +107,5 @@ class ControlsConfiguration(object):
         self.start = [Qt.Key_Return]
         self.back = [Qt.Key_Escape]
 
-        self.left_shoulder = [Qt.Key_Insert, Qt.Key_Q]
-        self.right_shoulder = [Qt.Key_Delete, Qt.Key_W]
-        self.left_trigger = [Qt.Key_PageUp, Qt.Key_E]
-        self.right_trigger = [Qt.Key_PageDown, Qt.Key_R]
+        self.left_shoulder = [Qt.Key_Insert, Qt.Key_PageUp, Qt.Key_Q]
+        self.right_shoulder = [Qt.Key_Delete, Qt.Key_PageDown, Qt.Key_W]

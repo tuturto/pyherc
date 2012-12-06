@@ -49,6 +49,31 @@ Morning star
 Spiked club, guaranteed to pierce through armours and crush through bones.
 Difficult to use weapon that requires years of practice.
 
+Item tables
+===========
++--------------+--------+----------+----------+----------------+----------+------------+----------+
+| Weapon       | Damage | Critical | Critical | Damage Types   | Type     | Weight     | Rarity   |
+|              |        | Range    | Damage   |                |          | class      |          |
++==============+========+==========+==========+================+==========+============+==========+
+| Dagger       | 2      | 10       | 2        | pierce         |  simple  | light      | common   |
++--------------+--------+----------+----------+----------------+----------+------------+----------+
+| Sword        | 2 / 2  | 12       | 2        | slash / pierce |  martial | one-handed | uncommon |
++--------------+--------+----------+----------+----------------+----------+------------+----------+
+| Axe          | 2 / 2  | 12       | 2        | slash / crush  |  martial | two-handed | uncommon |
++--------------+--------+----------+----------+----------------+----------+------------+----------+
+| Club         | 3      | 11       | 3        | crush          |  simple  | one-handed | common   |
++--------------+--------+----------+----------+----------------+----------+------------+----------+
+| Warhammer    | 7      | 12       | 7        | crush          |  martial | two-handed | rare     |
++--------------+--------+----------+----------+----------------+----------+------------+----------+
+| Spear        | 5      | 11       | 5        | pierce         |  martial | one-handed | rare     |
++--------------+--------+----------+----------+----------------+----------+------------+----------+
+| Whip         | 3      | 11       | 3        | slash          |  exotic  | one-handed | common   |
++--------------+--------+----------+----------+----------------+----------+------------+----------+
+| Sickle       | 3      | 10       | 3        | slash          |  exotic  | light      | common   |
++--------------+--------+----------+----------+----------------+----------+------------+----------+
+| Morning star | 2 / 2  | 12       | 2        | crush/pierce   |  martial | one-handed | uncommon |
++--------------+--------+----------+----------+----------------+----------+------------+----------+
+
 ******
 Armour
 ******
@@ -66,6 +91,25 @@ Scale mail
 
 Plate mail
 ==========
+
+Armour tables
+=============
++--------------+--------+-----------+-------+---------+
+| Armour       | Bonus  | Damage    | Speed | Casting |
+|              |        | reduction |       |         |
++==============+========+===========+=======+=========+
+| Robes        |        |           | 1     | +1      |
++--------------+--------+-----------+-------+---------+
+| Leather      | +1     | 1         | 1     |         |
++--------------+--------+-----------+-------+---------+
+| Chainmail    | +2     | 2         | 0.9   | -1      |
++--------------+--------+-----------+-------+---------+
+| Scale mail   | +3     | 3         | 0.7   | -2      |
++--------------+--------+-----------+-------+---------+
+| Plate mail   | +4     | 5         | 0.5   | -3      |
++--------------+--------+-----------+-------+---------+
+| Shield       | +1     | 1         | 0.9   | -1      |
++--------------+--------+-----------+-------+---------+
 
 Shield
 ======
@@ -104,8 +148,8 @@ Whip of Ashmque
 ---------------
 From the Tome of Um'bano:
 
-  *The whip of Ashmque is horrendous weapon. Thong of the whip is made of 
-  blackened links of steel and eternal flame is burning around it. Only the
+  *The whip of Ashmque is a horrendous weapon. Thong of the whip is made of 
+  blackened links of steel and an eternal flame is burning around it. Only the
   strongest of men can even try to wield it because of the heavy construction.
   It is said that the whip of Ashmque was forged at the dawn of ages by 
   demon smith Ashmque.*
