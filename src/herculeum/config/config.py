@@ -99,7 +99,7 @@ class ControlsConfiguration(object):
         self.move_down = [Qt.Key_2, Qt.Key_Down, Qt.Key_J]
         self.move_down_left = [Qt.Key_1, Qt.Key_B]
 
-        self.action_a = [Qt.Key_Space, Qt.Key_Z]
+        self.action_a = [Qt.Key_Space, Qt.Key_Z, Qt.Key_5]
         self.action_b = [Qt.Key_Control, Qt.Key_X]
         self.action_x = [Qt.Key_Alt]
         self.action_y = [Qt.Key_Tab]
