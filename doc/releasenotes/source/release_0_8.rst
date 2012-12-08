@@ -11,6 +11,7 @@ New features
  - weapons may have special effects that are triggered in combat
  - 43_ feature: support for vi and cursor keys
  - 37_ feature: creating a new character
+ - 36_ feature: escaping the dungeon
 
 **********
 Fixed bugs
@@ -39,6 +40,7 @@ Other notes
 .. _43: https://github.com/tuturto/pyherc/issues/43
 .. _41: https://github.com/tuturto/pyherc/issues/41
 .. _37: https://github.com/tuturto/pyherc/issues/37
+.. _36: https://github.com/tuturto/pyherc/issues/36
 .. _26: https://github.com/tuturto/pyherc/issues/26
 .. _25: https://github.com/tuturto/pyherc/issues/25
 .. _21: https://github.com/tuturto/pyherc/issues/21

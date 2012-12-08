@@ -21,8 +21,9 @@
 """
 Module for displaying end screen
 """
-from PyQt4.QtGui import QDialog, QVBoxLayout
+from PyQt4.QtGui import QDialog, QVBoxLayout, QLabel
 from PyQt4.QtCore import Qt
+from datetime import date
 
 class EndScreen(QDialog):
     """
@@ -45,6 +46,26 @@ class EndScreen(QDialog):
         Set layout of this widget
         """
         self.keymap = self._construct_keymap(config)
+
+        layout = QVBoxLayout()
+        self.name_label = QLabel(model.player.name)
+        self.name_label.setObjectName('no_border')
+        self.date_label = QLabel(str(date.today()))
+        self.date_label.setObjectName('no_border')
+        self.score_label = QLabel('0')
+        self.score_label.setObjectName('no_border')
+        self.result_label = QLabel('Escaped the dungeon')
+        self.result_label.setObjectName('no_border')
+        self.instruction_label = QLabel('Press action A to continue')
+        self.instruction_label.setObjectName('no_border')
+
+        layout.addWidget(self.name_label)
+        layout.addWidget(self.date_label)
+        layout.addWidget(self.score_label)
+        layout.addWidget(self.result_label)
+        layout.addWidget(self.instruction_label)
+
+        self.setLayout(layout)
 
     def _construct_keymap(self, config):
         """
