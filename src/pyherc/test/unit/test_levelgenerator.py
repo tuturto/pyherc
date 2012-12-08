@@ -357,6 +357,7 @@ class TestLevelGenerator:
         portal_adder = PortalAdder((1, 2),
                                   'crypt',
                                   mock(),
+                                  False,
                                   self.rng)
         creature_adder = mock()
         item_adder = mock()
@@ -394,6 +395,7 @@ class TestLevelGenerator:
         portal_adder = PortalAdder((1, 2),
                                   'crypt',
                                   mock(),
+                                  False,
                                   self.rng)
         creature_adder = mock()
         item_adder = mock()

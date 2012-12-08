@@ -31,7 +31,7 @@ class PortalAdderConfiguration(object):
     """
     @logged
     def __init__(self, icons, level_type, location_type, chance,
-                 new_level, unique):
+                 new_level, unique, escape_stairs = False):
         """
         Default constructor
 
@@ -41,6 +41,7 @@ class PortalAdderConfiguration(object):
         :param chance: chance of portal being added 1 - 100
         :param new_level: name of new level
         :param unique: is more than one instance allowed
+        :param escape_stairs: are there stairs leading out of the dungeon
         """
         self.__icons = icons
         self.__level_type = level_type
@@ -48,6 +49,7 @@ class PortalAdderConfiguration(object):
         self.__chance = chance
         self.__new_level = new_level
         self.__unique = unique
+        self.__escape_stairs = escape_stairs
 
     def __get_level_type(self):
         """
@@ -85,12 +87,19 @@ class PortalAdderConfiguration(object):
         """
         return self.__icons
 
+    def __is_escape_stairs(self):
+        """
+        Do these stairs lead outside of dungeon
+        """
+        return self.__escape_stairs
+
     level_type = property(__get_level_type)
     location_type = property(__get_location_type)
     chance = property(__get_chance)
     new_level = property(__get_new_level)
     is_unique = property(__is_unique)
     icons = property(__get_icons)
+    is_escape_stairs = property(__is_escape_stairs)
 
 class PortalAdderFactory(object):
     """
@@ -129,6 +138,7 @@ class PortalAdderFactory(object):
             new_adder = PortalAdder(spec.icons,
                                     spec.location_type,
                                     spec.new_level,
+                                    spec.is_escape_stairs,
                                     self.rng)
             if spec.is_unique:
                 self.config.remove(spec)
@@ -141,7 +151,8 @@ class PortalAdder(object):
     Basic class for adding portals
     """
     @logged
-    def __init__(self, icons,  location_type, level_generator_name, rng):
+    def __init__(self, icons,  location_type, level_generator_name,
+                 escape_stairs, rng):
         """
         Default constructor
 
@@ -155,6 +166,7 @@ class PortalAdder(object):
         self.level_generator_name = level_generator_name
         self.rng = rng
         self.icons = icons
+        self.escape_stairs = escape_stairs
 
     @logged
     def add_portal(self, level):
@@ -170,4 +182,5 @@ class PortalAdder(object):
             location = self.rng.choice(locations)
             portal = Portal(icons = self.icons,
                             level_generator_name = self.level_generator_name)
+            portal.exits_dungeon = self.escape_stairs
             level.add_portal(portal, location)

@@ -129,6 +129,7 @@ class TestPathfindingInLevel(object):
         portal_adder = PortalAdder((1, 2),
                                   'crypt',
                                   mock(),
+                                  False,
                                   rng)
         creature_adder = mock()
         item_adder = mock()

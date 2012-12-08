@@ -32,6 +32,7 @@ from herculeum.gui.startgame import StartGameWidget
 from herculeum.gui.map import PlayMapWindow
 from herculeum.gui.eventdisplay import EventMessageDockWidget
 from herculeum.gui.menu import MenuDialog
+from herculeum.gui.endscreen import EndScreen
 from herculeum.config import tiles
 
 from random import Random
@@ -93,6 +94,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.map_window)
 
         self.map_window.MenuRequested.connect(self.__show_menu)
+        self.map_window.EndScreenRequested.connect(self.__show_end_screen)
 
         self.setGeometry(50, 50, 800, 600)
         self.setWindowTitle('Herculeum')
@@ -161,3 +163,17 @@ class MainWindow(QMainWindow):
                                  self,
                                  Qt.Dialog | Qt.CustomizeWindowHint)
         menu_dialog.exec_()
+
+    def __show_end_screen(self):
+        """
+        Show end screen
+
+        .. versionadded:: 0.8
+        """
+        end_screen = EndScreen(self.application.world,
+                               self.application.config.controls,
+                               self,
+                               Qt.Dialog | Qt.CustomizeWindowHint)
+
+        end_screen.exec_()
+        self.application.qt_app.quit()

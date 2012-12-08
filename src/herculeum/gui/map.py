@@ -56,6 +56,7 @@ class PlayMapWindow(QWidget):
                           rules_engine, configuration)
 
     MenuRequested = pyqtSignal(name='MenuRequested')
+    EndScreenRequested = pyqtSignal(name='EndScreenRequested')
 
     def __set_layout(self, model, surface_manager, action_factory, rng,
                      rules_engine, configuration):
@@ -77,6 +78,7 @@ class PlayMapWindow(QWidget):
                                         rules_engine = rules_engine,
                                         configuration = configuration)
         self.map_widget.MenuRequested.connect(self.on_menu_requested)
+        self.map_widget.EndScreenRequested.connect(self.on_end_screen_requested)
 
         self.message_widget = EventMessageWidget(parent = self)
         self.message_widget.setMaximumHeight(100)
@@ -106,6 +108,14 @@ class PlayMapWindow(QWidget):
         """
         self.MenuRequested.emit()
 
+    def on_end_screen_requested(self):
+        """
+        Handle requesting end screen
+
+        .. versionadded:: 0.8
+        """
+        self.EndScreenRequested.emit()
+
 class PlayMapWidget(QWidget):
     """
     Widget for displaying playing world
@@ -134,6 +144,7 @@ class PlayMapWidget(QWidget):
                                                         configuration.controls)
 
     MenuRequested = pyqtSignal(name='MenuRequested')
+    EndScreenRequested = pyqtSignal(name='EndScreenRequested')
 
     def _construct_keymaps(self, config):
         """
@@ -459,6 +470,9 @@ class PlayMapWidget(QWidget):
                               action_factory = self.action_factory,
                               rng = self.rng)
             next_creature = self.model.get_next_creature(self.rules_engine)
+
+        if self.model.end_condition != 0:
+            self.EndScreenRequested.emit()
 
     def _move(self, key):
         """

@@ -67,6 +67,7 @@ class TestPortalAdder():
         portal_adder = PortalAdder((1, 2),
                                    'room',
                                    mock(),
+                                   False,
                                    self.rng)
 
         portal_adder.add_portal(level)
@@ -94,6 +95,7 @@ class TestPortalAdder():
         portal_adder = PortalAdder((1, 2),
                                    'room',
                                    level_generator,
+                                   False,
                                    self.rng)
 
         portal_adder.add_portal(level)
