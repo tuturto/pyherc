@@ -28,6 +28,8 @@ class Model(object):
     """
     Represents playing world
     """
+    ESCAPED_DUNGEON = 1
+
     @logged
     def __init__(self):
         """

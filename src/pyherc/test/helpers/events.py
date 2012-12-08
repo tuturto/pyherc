@@ -23,10 +23,13 @@ Module for event helpers
 """
 from pyherc.aspects import logged
 from pyherc.data import Model
+from pyherc.test.builders import ActionFactoryBuilder
 
 def observed(fn):
     """
     Decorator to inject observer
+
+    .. versionadded:: 0.8
     """
     def observe(*args, **kwargs):
         """
@@ -45,6 +48,30 @@ def observed(fn):
         return fn(*args, **kwargs)
 
     return observe
+
+def with_action_factory(fn):
+    """
+    Decorator to inject action factory
+
+    .. versionadded:: 0.8
+    """
+    def action_factorize(*args, **kwargs):
+        """
+        Inject action factory
+        """
+        context = args[0]
+
+        if not hasattr(context, 'action_factory'):
+            context.action_factory = (ActionFactoryBuilder()
+                                            .with_move_factory()
+                                            .with_attack_factory()
+                                            .with_drink_factory()
+                                            .with_inventory_factory()
+                                            .with_dying_rules()
+                                            .build())
+        return fn(*args, **kwargs)
+
+    return action_factorize
 
 class EventListener(object):
     """

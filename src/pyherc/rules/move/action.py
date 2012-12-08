@@ -19,9 +19,8 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module defining classes related to MoveAttack
+Module defining classes related to Move
 """
-import logging
 from pyherc.events import MoveEvent
 from pyherc.aspects import logged
 
@@ -34,11 +33,13 @@ class MoveAction(object):
         """
         Default constructor
 
-        Args:
-            character: Character moving
-            new_location: Location to move
+        :param character: character moving
+        :type character: Character
+        :param new_location: location to move
+        :type new_location: (int, int)
+        :param new_level: level to move
+        :type new_level: Level
         """
-        self.logger = logging.getLogger('pyherc.rules.move.action.MoveAction')
         self.character = character
         self.new_location = new_location
         self.new_level = new_level
@@ -68,7 +69,6 @@ class MoveAction(object):
                                             affected_tiles = affected_tiles))
 
         else:
-            self.logger.warn('Tried to execute illegal move')
             self.character.add_to_tick(1)
 
     @logged
@@ -76,8 +76,8 @@ class MoveAction(object):
         """
         Check if the move is possible to perform
 
-        Returns:
-            True if move is possible, false otherwise
+        :returns: True if move is possible, false otherwise
+        :rtype: Boolean
         """
         location_ok = False
         if self.new_level != None:

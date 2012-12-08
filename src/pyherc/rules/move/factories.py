@@ -22,7 +22,7 @@
 Attack related factories are defined here
 """
 import types
-import logging
+from pyherc.aspects import logged
 from pyherc.rules.move.action import MoveAction
 from pyherc.rules.factory import SubActionFactory
 
@@ -30,6 +30,7 @@ class WalkFactory(SubActionFactory):
     """
     Factory for creating walk actions
     """
+    @logged
     def __init__(self, level_generator_factory):
         """
         Constructor for this factory
@@ -38,30 +39,31 @@ class WalkFactory(SubActionFactory):
         :type level_generator_factory: LevelGeneratorFactory
         """
         self.level_generator_factory = level_generator_factory
-        self.logger = logging.getLogger('pyherc.rules.move.factories.WalkFactory')
         self.movement_mode = 'walk'
 
     def __str__(self):
         return 'walk factory'
 
+    @logged
     def can_handle(self, parameters):
         """
         Can this factory process these parameters
 
-        Args:
-            parameters: Parameters to check
+        :param parameters: Parameters to check
+        :type parameters: MoveParameters
 
-        Returns:
-            True if factory is capable of handling parameters
+        :returns: True if factory is capable of handling parameters
+        :rtype: boolean
         """
         return self.movement_mode == parameters.movement_mode
 
+    @logged
     def get_action(self, parameters):
         """
         Create a walk action
 
-        Args:
-            parameters: Parameters used to control walk creation
+        :param parameters: Parameters used to control walk creation
+        :type parameters: MoveParameters
         """
         location = parameters.character.location
         new_level = parameters.character.level
@@ -92,11 +94,12 @@ class WalkFactory(SubActionFactory):
                     new_level = other_end.level
                     new_location = other_end.location
                 else:
-                    self.logger.error('Portal leads to void!')
                     raise RuntimeError('Portal leads to void!')
             else:
                 new_level = parameters.character.level
                 new_location = parameters.character.location
+        else:
+            raise RuntimeError('Character does not know where to go')
 
         #is new location blocked?
         if new_level.blocks_movement(new_location[0], new_location[1]):
@@ -108,14 +111,13 @@ class MoveFactory(SubActionFactory):
     """
     Factory for constructing move actions
     """
+    @logged
     def __init__(self, factories):
         """
         Constructor for this factory
 
-        Args:
-            factories: a single Factory or list of Factories to use
+        :param factories: a single Factory or list of Factories to use
         """
-        self.logger = logging.getLogger('pyherc.rules.move.factories.MoveFactory')
         self.action_type = 'move'
 
         if isinstance(factories, types.ListType):

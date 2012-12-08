@@ -21,7 +21,8 @@
 from pyherc.data.effects import DamageModifier
 from pyherc.test.cutesy import Adventurer, Goblin
 from pyherc.test.matchers import is_dead, is_not_in
-from pyherc.test.helpers import observed
+from pyherc.test.helpers import observed, with_action_factory
+from pyherc.ai.pathfinding import a_star
 from hamcrest import assert_that
 
 @given(u'{character_name} is Adventurer')
@@ -76,3 +77,78 @@ def impl(context, character_name, damage_type):
                               title = 'weak against {0}'.format(damage_type),
                               description = '{0} causes extra damage'.format(damage_type))
     character.add_effect(modifier)
+
+@given(u'{character_name} is Player')
+def impl(context, character_name):
+    characters = [x for x in context.characters
+                  if x.name == character_name]
+    character = characters[0]
+    
+    model = context.model
+    
+    model.player = character
+
+@when(u'{character_name} walks on {location_name}')
+@with_action_factory
+def impl(context, character_name, location_name):
+    characters = [x for x in context.characters
+                  if x.name == character_name]
+    character = characters[0]
+
+    places = [x for x in context.places
+              if x.name == location_name]
+    place = places[0]
+    
+    path, connections, updated = a_star(character.location,
+                                        place.location,
+                                        character.level)
+    for tile in path[1:]:
+        direction = find_direction(character.location,
+                                   tile)
+        character.move(direction,
+                       context.action_factory)
+
+@when(u'{character_name} enters {portal_name}')
+@with_action_factory
+def impl(context, character_name, portal_name):
+    characters = [x for x in context.characters
+                  if x.name == character_name]
+    character = characters[0]
+    
+    character.move(9,
+                   context.action_factory)
+    
+def find_direction(start, end):
+    direction = None
+    if start[0] < end[0]:
+        #right side
+        if start[1] < end[1]:
+            #right, below
+            direction = 4
+        elif start[1] > end[1]:
+            #right, above
+            direction = 2
+        else:
+            #right
+            direction = 3
+    elif start[0] > end[0]:
+        #left side
+        if start[1] < end[1]:
+            #left, below
+            direction = 6
+        elif start[1] > end[1]:
+            #left, above
+            direction = 8
+        else:
+            #left
+            direction = 7
+    else:
+        #up or down
+        if start[1] < end[1]:
+            #below
+            direction = 5
+        elif start[1] > end[1]:
+            #above
+            direction = 1
+
+    return direction

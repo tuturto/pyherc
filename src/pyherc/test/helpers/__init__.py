@@ -21,4 +21,4 @@
 """
 Package for test helpers
 """
-from .events import EventListener, observed
+from .events import EventListener, observed, with_action_factory
