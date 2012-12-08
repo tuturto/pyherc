@@ -25,6 +25,7 @@ Module for Model related classes
 from pyherc.aspects import logged
 
 ESCAPED_DUNGEON = 1
+DIED_IN_DUNGEON = 2
 
 class Model(object):
     """

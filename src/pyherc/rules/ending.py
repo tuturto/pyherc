@@ -24,6 +24,7 @@ Module for checking end conditions
 
 from pyherc.events import DeathEvent, DropEvent
 from pyherc.aspects import logged
+from pyherc.data.model import DIED_IN_DUNGEON
 
 class Dying(object):
     """
@@ -56,6 +57,9 @@ class Dying(object):
                 character.raise_event(DropEvent(character,
                                                 item))
                 character.inventory.weapon = None
+
+            if character == character.model.player:
+                character.model.end_condition = DIED_IN_DUNGEON
 
             character.raise_event(DeathEvent(deceased = character,
                                              affected_tiles = character.location))

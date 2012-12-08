@@ -284,6 +284,9 @@ class PlayMapWidget(QWidget):
 
             for glyph in glyphs:
                 self.view.scene().removeItem(glyph)
+
+            if event.deceased == self.model.player:
+                self.EndScreenRequested.emit()
         elif event.event_type == 'pick up':
             glyphs = [x for x in self.view.items()
                       if (hasattr(x, 'entity'))
