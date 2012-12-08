@@ -23,7 +23,7 @@ Attack related factories are defined here
 """
 import types
 from pyherc.aspects import logged
-from pyherc.rules.move.action import MoveAction
+from pyherc.rules.move.action import MoveAction, EscapeAction
 from pyherc.rules.factory import SubActionFactory
 
 class WalkFactory(SubActionFactory):
@@ -89,12 +89,15 @@ class WalkFactory(SubActionFactory):
         elif direction == 9:
             portal = new_level.get_portal_at(location)
             if portal != None:
-                other_end = portal.get_other_end(self.level_generator_factory)
-                if other_end != None:
-                    new_level = other_end.level
-                    new_location = other_end.location
+                if not portal.exits_dungeon:
+                    other_end = portal.get_other_end(self.level_generator_factory)
+                    if other_end != None:
+                        new_level = other_end.level
+                        new_location = other_end.location
+                    else:
+                        raise RuntimeError('Portal leads to void!')
                 else:
-                    raise RuntimeError('Portal leads to void!')
+                    return EscapeAction(parameters.character)
             else:
                 new_level = parameters.character.level
                 new_location = parameters.character.location

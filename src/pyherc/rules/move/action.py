@@ -23,6 +23,7 @@ Module defining classes related to Move
 """
 from pyherc.events import MoveEvent
 from pyherc.aspects import logged
+from pyherc.data.model import ESCAPED_DUNGEON
 
 class MoveAction(object):
     """
@@ -105,3 +106,39 @@ class WalkAction(MoveAction):
         Execute this move
         """
         MoveAction.execute(self)
+
+class EscapeAction(MoveAction):
+    """
+    Action for escaping the dungeon
+
+    .. versionadded:: 0.8
+    """
+    def __init__(self, character):
+        """
+        Default constructor
+        """
+        super(EscapeAction, self).__init__(character = character,
+                                           new_location = None,
+                                           new_level = None)
+
+    def execute(self):
+        """
+        Execute this move
+        """
+        model = self.character.model
+        model.end_condition = ESCAPED_DUNGEON
+
+    @logged
+    def is_legal(self):
+        """
+        Check if the move is possible to perform
+
+        :returns: True if move is possible, false otherwise
+        :rtype: Boolean
+        """
+        model = self.character.model
+
+        if model.player == self.character:
+            return True
+        else:
+            return False

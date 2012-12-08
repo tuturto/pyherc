@@ -43,6 +43,7 @@ class Portal(object):
         self.location = ()
         self.__icons = icons
         self.__other_end = None
+        self.exits_dungeon = False
         self.level_generator_name = level_generator_name
         self.model = None
         self.__update_listeners = []

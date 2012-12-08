@@ -24,12 +24,12 @@ Module for Model related classes
 
 from pyherc.aspects import logged
 
+ESCAPED_DUNGEON = 1
+
 class Model(object):
     """
     Represents playing world
     """
-    ESCAPED_DUNGEON = 1
-
     @logged
     def __init__(self):
         """

@@ -23,14 +23,17 @@ Module for testing moving
 """
 #pylint: disable=W0614
 from hamcrest import * #pylint: disable=W0401
-
+from mockito import mock
 from qc import forall, integers
 
+from pyherc.rules import MoveParameters
+from pyherc.rules.move.action import EscapeAction
 from pyherc.data import Portal
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import CharacterBuilder
 
 from pyherc.data import Model
+from pyherc.data.model import ESCAPED_DUNGEON
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.helpers import EventListener
 from pyherc.test.matchers import has_marked_for_redrawing
@@ -231,3 +234,57 @@ class TestMoving(object):
                             self.action_factory)
 
         assert self.character.tick > tick
+
+    def test_taking_escape_stairs_ends_game(self):
+        """
+        Test that player taking escape stairs will create escape
+        """
+        portal3 = Portal((None, None), None)
+        portal3.exits_dungeon = True
+        self.level1.add_portal(portal3, (2, 2))
+        self.character.location = (2, 2)
+
+        self.character.move(direction = 9,
+                            action_factory = self.action_factory)
+
+        model = self.character.model
+        assert_that(model.end_condition, is_(equal_to(ESCAPED_DUNGEON)))
+
+class TestEscapeAction(object):
+    """
+    Tests for escape action
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestEscapeAction, self).__init__()
+
+    def test_player_character_can_escape(self):
+        """
+        Test that escape action for player character is legal
+        """
+        model = mock()
+
+        character = (CharacterBuilder()
+                        .as_player_character()
+                        .with_model(model)
+                        .build())
+
+        action = EscapeAction(character = character)
+
+        assert_that(action.is_legal(), is_(equal_to(True)))
+
+    def test_non_player_character_can_not_escape(self):
+        """
+        Non player characters should not be able to escape
+        """
+        model = mock()
+
+        character = (CharacterBuilder()
+                        .with_model(model)
+                        .build())
+
+        action = EscapeAction(character = character)
+
+        assert_that(action.is_legal(), is_(equal_to(False)))

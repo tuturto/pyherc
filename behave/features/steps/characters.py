@@ -84,8 +84,7 @@ def impl(context, character_name):
                   if x.name == character_name]
     character = characters[0]
     
-    model = context.model
-    
+    model = context.model   
     model.player = character
 
 @when(u'{character_name} walks on {location_name}')

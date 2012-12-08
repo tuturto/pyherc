@@ -51,20 +51,17 @@ def impl(context, character_name, target_name):
 
     level.add_creature(character, location)
 
-@given(u'{location_name} is away from {character_name}')
-def impl(context, location_name, character_name):
+@given(u'{portal_name} is located in corner of {location_name}')
+def impl(context, portal_name, location_name):
     places = [x for x in context.places
               if x.name == location_name]
     place = places[0]
-    
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
 
-    if character.location != (2, 2):
-        place.location = (2, 2)
-    else:
-        place.location = (5, 5)
+    portals = [x for x in context.places
+               if x.name == portal_name]
+    portal = portals[0]
+
+    place.add_portal(portal, (2, 2), None)   
     
 @then(u'{character_name} is not in {place_name}')
 def impl(context, character_name, place_name):

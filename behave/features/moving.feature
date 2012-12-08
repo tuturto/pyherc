@@ -9,7 +9,7 @@ Feature: Moving around
        And Pete is standing in room
        And stairs is Portal
        And stairs leads outside
-       And stairs is away from Pete
+       And stairs is located in corner of room
 
   Scenario: Walking
        When Pete walks on stairs
