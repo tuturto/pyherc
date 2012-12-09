@@ -16,7 +16,13 @@ Combat
 ======
 To Hit: normally automatic
 
-Damage: Weapon damage + Modifiers
+Damage: 
+Modified damage: Weapon damage + weapon modifiers
+Modified armour: Armour protection + armour modifiers
+If modified armour is greater than twice the modified damage, no damage occurs, no critical chance
+If modified armour is equal or greater than modified damage, 1 point of damage occurs, no critical chance
+If modified armous is less than modified damage, the difference is amount of damage, critical chance
+
 Critical hit:
     chance as per weapon (separate roll)
     damage as per weapon
@@ -25,17 +31,17 @@ Critical hit:
 | Armour       | Bonus  | Damage    | Speed | Casting |
 |              |        | reduction |       |         |
 +==============+========+===========+=======+=========+
-| Robes        |  -     | -         | * 1   | +1      |
+| Robes        |        |           | 1     | +1      |
 +--------------+--------+-----------+-------+---------+
-| Leather      | +1     | 1         | * 1   | -       |
+| Leather      | +1     | 1         | 1     | -       |
 +--------------+--------+-----------+-------+---------+
-| Chainmail    | +2     | 2         | * 0.9 | -1      |
+| Chainmail    | +2     | 2         | 0.9   | -1      |
 +--------------+--------+-----------+-------+---------+
-| Scale mail   | +3     | 3         | * 0.7 | -2      |
+| Scale mail   | +3     | 3         | 0.7   | -2      |
 +--------------+--------+-----------+-------+---------+
-| Plate mail   | +4     | 5         | * 0.5 | -3      |
+| Plate mail   | +4     | 5         | 0.5   | -3      |
 +--------------+--------+-----------+-------+---------+
-| Shield       | +1     | 1         | * 1   | -1      |
+| Shield       | +1     | 1         | 1     | -1      |
 +--------------+--------+-----------+-------+---------+
 
 +--------------+--------+----------+----------+----------------+----------+------------+----------+
