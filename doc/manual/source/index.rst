@@ -13,6 +13,7 @@ Contents:
 
    intro
    commands
+   survival
    regions
    items
    background

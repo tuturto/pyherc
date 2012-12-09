@@ -30,3 +30,4 @@ from .death import DeathEvent
 from .inventory import PickUpEvent, DropEvent
 from .hitpoints import HitPointsChangedEvent
 from .damage import DamageAddedEvent, DamageTriggeredEvent, DamageEndedEvent
+from .perception import LoseFocusEvent, NoticeEvent

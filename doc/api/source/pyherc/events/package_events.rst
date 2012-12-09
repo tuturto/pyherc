@@ -14,5 +14,5 @@ pyherc.events
    module_hitpoints
    module_inventory
    module_move
+   module_perception
    module_poison
-   

@@ -25,6 +25,7 @@ AI routines for skeletons
 import pyherc
 from pyherc.aspects import logged
 from pyherc.ai.pathfinding import a_star
+from pyherc.events import NoticeEvent, LoseFocusEvent
 
 class SkeletonWarriorAI(object):
     """
@@ -69,8 +70,15 @@ class SkeletonWarriorAI(object):
                     (c_location[1] - p_location[1]) ** 2) ** 0.5
 
         if distance < 4:
+            if self.mode != 'combat':
+                self.character.raise_event(
+                                    NoticeEvent(character = self.character,
+                                                target = model.player))
             self.mode = 'combat'
         else:
+            if self.mode != 'patrol':
+                self.character.raise_event(
+                                LoseFocusEvent(character = self.character))
             self.mode = 'patrol'
 
         if self.mode == 'patrol':

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-12-08, 20:19:35 -->
+<!-- Saved: 2012-12-09, 08:00:18 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -208,6 +208,7 @@
     <Source>herculeum/test/ui/test_startscreen.py</Source>
     <Source>herculeum/config/levels/player_characters.py</Source>
     <Source>herculeum/gui/endscreen.py</Source>
+    <Source>pyherc/events/perception.py</Source>
   </Sources>
   <Forms>
   </Forms>
