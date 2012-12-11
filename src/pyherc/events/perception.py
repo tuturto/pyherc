@@ -50,7 +50,7 @@ class NoticeEvent(Event):
         :returns: description of the event
         :rtype: string
         """
-        if point_of_view == self.attacker:
+        if point_of_view == self.character:
             description = 'You notice {0}'.format(self.target.name)
         elif point_of_view == self.target:
             description = '{0} notices you'.format(self.character.name)
