@@ -4,8 +4,8 @@ cd api
 call make doctest
 cd ..
 cd ..
-cd behave
-behave --junit
-cd ..
+cd src\pyherc\test\bdd
+behave --junit --junit-directory ./../../../../behave/reports
+cd ..\..\..\..
 python xunit.py
 python run_pylint.py
