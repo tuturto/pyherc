@@ -419,6 +419,21 @@ class Level(object):
                     level_string = level_string + " "
         return level_string
 
+    def _repr_pretty_(self, p, cycle):
+        """
+        Pretty print for IPython
+        """
+        level_string = self.dump_string()
+
+        if cycle:
+            p.text('Level(...)')
+        else:
+            for char in level_string:
+                if char != '\n':
+                    p.text(char)
+                else:
+                    p.breakable()
+
     def heuristic_estimate_of_distance(self, start, goal):
         """
         This should be >= 0

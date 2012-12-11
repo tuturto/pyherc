@@ -21,9 +21,9 @@
 """
 package for configuring levels
 """
-import crimson_lair
-import configure_catacombs
-import configure_upper_crypt
-import configure_items
-import effects
-import player_characters
+import herculeum.config.levels.crimson_lair
+import herculeum.config.levels.configure_catacombs
+import herculeum.config.levels.configure_upper_crypt
+import herculeum.config.levels.configure_items
+import herculeum.config.levels.effects
+import herculeum.config.levels.player_characters
