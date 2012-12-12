@@ -181,3 +181,18 @@ class EffectsCollection(object):
             return min(charges)
         else:
             return None
+
+    def _repr_pretty_(self, p, cycle):
+        """
+        Pretty print for IPython
+
+        :param p: printer to write
+        :param cycle: has pretty print detected a cycle?
+        """
+        if cycle:
+            p.text('EffectsCollection(...)')
+        else:
+            p.text('Effects:')
+            for effect in self.effects:
+                p.pretty(effect)
+                p.breakable()

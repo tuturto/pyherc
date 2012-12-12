@@ -559,6 +559,34 @@ class Character(object):
         """
         self.tick = self.tick + (self.speed * cost)
 
+    def _repr_pretty_(self, p, cycle):
+        """
+        Pretty print for IPython
+
+        :param p: printer to write
+        :param cycle: has pretty print detected a cycle?
+        """
+        if cycle:
+            p.text('Character(...)')
+        else:
+            p.text('name: {0}'.format(self.name))
+            p.breakable()
+            p.text('hitpoints: {0}/{1}'.format(self.__hit_points,
+                                                    self.__max_hp))
+            p.breakable()
+            p.text('body: {0}'.format(self.__body))
+            p.breakable()
+            p.text('finesse: {0}'.format(self.__finesse))
+            p.breakable()
+            p.text('mind: {0}'.format(self.__mind))
+            p.breakable()
+            p.text('location: {0}'.format(self.location))
+            p.breakable()
+            p.pretty(self.inventory)
+            p.breakable()
+            p.pretty(self.__effects_collection)
+            p.breakable()
+
     hit_points = property(__get_hp, __set_hp)
     max_hp = property(__get_max_hp, __set_max_hp)
     body = property(__get_body, __set_body)

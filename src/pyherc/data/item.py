@@ -207,6 +207,21 @@ class Item(object):
         for listener in self.__update_listeners:
             listener.receive_update(event)
 
+    def _repr_pretty_(self, p, cycle):
+        """
+        Pretty print for IPython
+
+        :param p: printer to write
+        :param cycle: has pretty print detected a cycle?
+        """
+        if cycle:
+            p.text('Item(...)')
+        else:
+            p.text('name: {0}'.format(self.name))
+            p.breakable()
+            p.text('location: {0}'.format(self.location))
+            p.breakable()
+
 class WeaponData(object):
     """
     Class representing weapon data of items

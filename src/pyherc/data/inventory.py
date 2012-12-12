@@ -109,4 +109,19 @@ class Inventory(object):
         """
         self.__weapon = weapon
 
+    def _repr_pretty_(self, p, cycle):
+        """
+        Pretty print for IPython
+
+        :param p: printer to write
+        :param cycle: has pretty print detected a cycle?
+        """
+        if cycle:
+            p.text('Inventory(...)')
+        else:
+            p.text('Inventory:')
+            for item in self.__items:
+                p.pretty(item)
+                p.breakable()
+
     weapon = property(__get_weapon, __set_weapon)
