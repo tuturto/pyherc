@@ -18,14 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-@then(u'time should pass for {character_name}')
-def impl(context, character_name):
-
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
-
-    old_time = character.old_values['tick']
-    new_time = character.tick
-
-    assert new_time > old_time
+"""
+Package for BDD helpers
+"""
+from .context import default_context

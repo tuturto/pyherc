@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-12-11, 06:57:02 -->
+<!-- Saved: 2012-12-14, 21:26:04 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -222,6 +222,9 @@
     <Source>pyherc/test/bdd/features/dropping.feature</Source>
     <Source>pyherc/test/bdd/features/moving.feature</Source>
     <Source>pyherc/test/bdd/features/poison.feature</Source>
+    <Source>pyherc/test/bdd/features/__init__.py</Source>
+    <Source>pyherc/test/bdd/features/helpers/__init__.py</Source>
+    <Source>pyherc/test/bdd/features/helpers/context.py</Source>
   </Sources>
   <Forms>
   </Forms>

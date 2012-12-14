@@ -24,12 +24,12 @@ from pyherc.test.matchers import is_dead, is_not_in
 from pyherc.test.helpers import observed, with_action_factory
 from pyherc.ai.pathfinding import a_star
 from hamcrest import assert_that
+from pyherc.test.bdd.features.helpers import default_context
 
 @given(u'{character_name} is Adventurer')
 @observed
+@default_context
 def impl(context, character_name):
-    if not hasattr(context, 'characters'):
-        context.characters = []
     new_character = Adventurer()
     new_character.name = character_name
     new_character.model = context.model
@@ -37,9 +37,8 @@ def impl(context, character_name):
 
 @given(u'{character_name} is Goblin')
 @observed
+@default_context
 def impl(context, character_name):
-    if not hasattr(context, 'characters'):
-        context.characters = []
     new_character = Goblin()
     new_character.name = character_name
     new_character.model = context.model
@@ -59,7 +58,7 @@ def impl(context, character_name):
     characters = [x for x in context.characters
                   if x.name == character_name]
     character = characters[0]
-    
+
     character.hit_points = 1
 
 @given(u'{character_name} is suspectible against {damage_type}')
@@ -83,8 +82,8 @@ def impl(context, character_name):
     characters = [x for x in context.characters
                   if x.name == character_name]
     character = characters[0]
-    
-    model = context.model   
+
+    model = context.model
     model.player = character
 
 @when(u'{character_name} walks on {location_name}')
@@ -97,7 +96,7 @@ def impl(context, character_name, location_name):
     places = [x for x in context.places
               if x.name == location_name]
     place = places[0]
-    
+
     path, connections, updated = a_star(character.location,
                                         place.location,
                                         character.level)
@@ -113,10 +112,10 @@ def impl(context, character_name, portal_name):
     characters = [x for x in context.characters
                   if x.name == character_name]
     character = characters[0]
-    
+
     character.move(9,
                    context.action_factory)
-    
+
 def find_direction(start, end):
     direction = None
     if start[0] < end[0]:

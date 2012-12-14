@@ -18,14 +18,35 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-@then(u'time should pass for {character_name}')
-def impl(context, character_name):
+"""
+Module for general context helpers
+"""
+from pyherc.data import Model
 
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+def default_context(fn):
+    """
+    Decorator to set up context
 
-    old_time = character.old_values['tick']
-    new_time = character.tick
+    .. versionadded:: 0.8
+    """
+    def context_setup(*args, **kwargs):
+        """
+        Set up context
+        """
+        context = args[0]
 
-    assert new_time > old_time
+        if not hasattr(context, 'model'):
+            context.model = Model()
+
+        if not hasattr(context, 'items'):
+            context.items = []
+
+        if not hasattr(context, 'characters'):
+            context.characters = []
+
+        if not hasattr(context, 'places'):
+            context.places = []
+
+        return fn(*args, **kwargs)
+
+    return context_setup

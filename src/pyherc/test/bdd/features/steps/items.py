@@ -20,10 +20,11 @@
 
 from pyherc.test.cutesy import Dagger, Sword
 from pyherc.test.cutesy import make, drop
+from pyherc.test.bdd.features.helpers import default_context
 
 @given(u'{character_name} has dagger')
+@default_context
 def impl(context, character_name):
-    context.items = []
     dagger = Dagger()
     context.items.append(dagger)
 
@@ -34,8 +35,8 @@ def impl(context, character_name):
     character.inventory.append(dagger)
 
 @given(u'{character_name} has sword')
+@default_context
 def impl(context, character_name):
-    context.items = []
     sword = Sword()
     context.items.append(sword)
 
@@ -94,8 +95,8 @@ def impl(context, item_name, character_name):
     assert not item in character.inventory
 
 @given(u'{character_name} wields dagger')
+@default_context
 def impl(context, character_name):
-    context.items = []
     dagger = Dagger()
     context.items.append(dagger)
 
@@ -107,8 +108,8 @@ def impl(context, character_name):
     character.inventory.weapon = dagger
 
 @given(u'{character_name} wields sword')
+@default_context
 def impl(context, character_name):
-    context.items = []
     sword = Sword()
     context.items.append(sword)
 
@@ -120,9 +121,11 @@ def impl(context, character_name):
     character.inventory.weapon = sword
 
 @given(u'Pete wields club')
+@default_context
 def impl(context):
     assert False
 
 @given(u'{character_name} wears {armour_name}')
+@default_context
 def impl(context, character_name, armour_name):
     assert False
