@@ -24,25 +24,25 @@ from pyherc.test.cutesy import make, drop
 @given(u'{character_name} has dagger')
 def impl(context, character_name):
     context.items = []
-    dagger = Dagger()    
+    dagger = Dagger()
     context.items.append(dagger)
-    
+
     characters = [x for x in context.characters
                   if x.name == character_name]
     character = characters[0]
-    
+
     character.inventory.append(dagger)
 
 @given(u'{character_name} has sword')
 def impl(context, character_name):
     context.items = []
-    sword = Sword()    
+    sword = Sword()
     context.items.append(sword)
-    
+
     characters = [x for x in context.characters
                   if x.name == character_name]
     character = characters[0]
-    
+
     character.inventory.append(sword)
 
 @when(u'{character_name} drops {item_name}')
@@ -51,7 +51,7 @@ def impl(context, character_name, item_name):
     characters = [x for x in context.characters
                   if x.name == character_name]
     character = characters[0]
-    
+
     items = [x for x in context.items
              if x.name == item_name]
     item = items[0]
@@ -60,11 +60,11 @@ def impl(context, character_name, item_name):
 
 @then(u'{item_name} should be in room')
 def impl(context, item_name):
-    
+
     items = [x for x in context.items
              if x.name == item_name]
     item = items[0]
-    
+
     room = context.places[0]
 
     assert item.level == room
@@ -74,19 +74,19 @@ def impl(context, item_name, character_name):
     items = [x for x in context.items
              if x.name == item_name]
     item = items[0]
-    
+
     characters = [x for x in context.characters
                   if x.name == character_name]
     character = characters[0]
-    
+
     assert item.location == character.location
-    
+
 @then(u'{item_name} should not be in inventory of {character_name}')
 def impl(context, item_name, character_name):
     items = [x for x in context.items
              if x.name == item_name]
     item = items[0]
-    
+
     characters = [x for x in context.characters
                   if x.name == character_name]
     character = characters[0]
@@ -96,25 +96,33 @@ def impl(context, item_name, character_name):
 @given(u'{character_name} wields dagger')
 def impl(context, character_name):
     context.items = []
-    dagger = Dagger()    
+    dagger = Dagger()
     context.items.append(dagger)
 
     characters = [x for x in context.characters
                   if x.name == character_name]
     character = characters[0]
-    
+
     character.inventory.append(dagger)
     character.inventory.weapon = dagger
 
 @given(u'{character_name} wields sword')
 def impl(context, character_name):
     context.items = []
-    sword = Sword()    
+    sword = Sword()
     context.items.append(sword)
 
     characters = [x for x in context.characters
                   if x.name == character_name]
     character = characters[0]
-  
+
     character.inventory.append(sword)
     character.inventory.weapon = sword
+
+@given(u'Pete wields club')
+def impl(context):
+    assert False
+
+@given(u'{character_name} wears {armour_name}')
+def impl(context, character_name, armour_name):
+    assert False
