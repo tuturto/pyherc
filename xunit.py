@@ -66,7 +66,7 @@ f = open('doc/test_results.html', 'w')
 write_header(f)
 f.write('<table border="0">\n')
 
-files = os.listdir('./behave/reports/')
+files = os.listdir('./doc/behave/reports/')
 for file in files:
     #caption = 'TESTS-combat.xml'
     caption = file
@@ -74,7 +74,7 @@ for file in files:
     caption = caption[dash_location+1:-4]
     caption = caption.capitalize()
     
-    write_test_suite(os.path.join('./behave/reports/', file), caption, f)
+    write_test_suite(os.path.join('./doc/behave/reports/', file), caption, f)
 
 write_test_suite('nosetests.xml', 'Unit tests', f)
 
