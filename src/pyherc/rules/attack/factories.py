@@ -21,8 +21,6 @@
 """
 Attack related factories are defined here
 """
-
-import types
 from pyherc.aspects import logged
 from pyherc.rules.attack.action import AttackAction
 from pyherc.rules.attack.unarmed import UnarmedToHit
@@ -44,7 +42,7 @@ class AttackFactory(SubActionFactory):
         super(AttackFactory, self).__init__()
         self.action_type = 'attack'
 
-        if isinstance(factories, types.ListType):
+        if hasattr(factories, '__iter__'):
             self.factories = factories
         else:
             self.factories = []
