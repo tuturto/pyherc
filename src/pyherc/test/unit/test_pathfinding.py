@@ -35,8 +35,6 @@ from pyherc.generators.level.room.catacombs import CatacombsGenerator
 from pyherc.generators.level.portals import PortalAdder
 from pyherc.data import Portal
 
-from qc import forall
-
 from random import Random
 
 FLOOR_TILE = 100
@@ -149,7 +147,6 @@ class TestPathfindingInLevel(object):
 
         self.level = generator.generate_level(portal)
 
-    @forall(tries=10)
     def test_finding_path(self):
         """
         Test pathfinding in a level

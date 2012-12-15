@@ -441,7 +441,7 @@ class Level(object):
         let this return a constant 0.
         """
         l = len(goal)
-        return (sum([(start[i] - goal[i]) ** 2 for i in xrange(l)])) ** 0.5
+        return (sum([(start[i] - goal[i]) ** 2 for i in range(l)])) ** 0.5
 
     def neighbor_nodes(self, node):
         """
@@ -451,8 +451,8 @@ class Level(object):
         nodes = []
         loc_x = node[0]
         loc_y = node[1]
-        for x in xrange(loc_x - 1, loc_x + 2):
-            for y in xrange(loc_y -1, loc_y + 2):
+        for x in range(loc_x - 1, loc_x + 2):
+            for y in range(loc_y -1, loc_y + 2):
                 if (x != loc_x or y != loc_y) and not self.blocks_movement(x, y):
                     nodes.append((x, y))
 
@@ -464,4 +464,4 @@ class Level(object):
         This should be >= 0
         """
         l = len(goal)
-        return (sum([(start[i] - goal[i]) ** 2 for i in xrange(l)])) ** 0.5
+        return (sum([(start[i] - goal[i]) ** 2 for i in range(l)])) ** 0.5

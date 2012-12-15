@@ -77,12 +77,11 @@ If you want to run debug server, install web.py::
 
     easy_install -U web.py
     
-If you want to be able to run test cases, install mockito-python, pyHamcrest,
-qc and behave::
+If you want to be able to run test cases, install mockito-python, pyHamcrest 
+and behave::
 
     easy_install -U mockito
     easy_install -U pyhamcrest
-    pip install -e git://github.com/dbravender/qc.git#egg=qc
     easy_install -U behave
 
 If you want to generate html manual and programmers guide, install Sphinx::

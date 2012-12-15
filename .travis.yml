@@ -6,7 +6,5 @@ python:
 install: 
  - "easy_install -U mockito"
  - "easy_install -U pyhamcrest"
- - "pip install -e git://github.com/dbravender/qc.git#egg=qc"
- - "easy_install -U behave"
 # command to run tests, e.g. python setup.py test
 script: nosetests -w src/pyherc

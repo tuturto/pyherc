@@ -24,7 +24,6 @@ Module for testing moving
 #pylint: disable=W0614
 from hamcrest import * #pylint: disable=W0401
 from mockito import mock
-from qc import forall, integers
 
 from pyherc.rules import MoveParameters
 from pyherc.rules.move.action import EscapeAction
@@ -145,22 +144,17 @@ class TestMoving(object):
 
         self.level1.add_creature(self.character, (5, 5))
 
-    @forall(tries=5, direction=integers(low = 1, high = 8))
-    def test_simple_move(self, direction):
+    def test_simple_move(self):
         """
         Test that taking single step is possible
         """
         self.character.location = (5, 5)
 
-        expected_location = [(0, 0),
-                             (5, 4), (6, 4), (6, 5), (6, 6),
-                             (5, 6), (4, 6), (4, 5), (4, 4)]
-
-        self.character.move(direction,
+        self.character.move(3,
                             self.action_factory)
 
         assert_that(self.character.location,
-                    is_(equal_to(expected_location[direction])))
+                    is_(equal_to((6, 5))))
 
     def test_walking_to_walls(self):
         """

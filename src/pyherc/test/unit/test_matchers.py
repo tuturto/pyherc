@@ -131,9 +131,6 @@ class TestLevelConnectivity():
                                                 self.wall_empty,
                                                 [])
 
-        print 'all points: {0}'.format(all_points)
-        print 'connected points: {0}'.format(connected_points)
-
         assert_that(self.matcher._matches(self.level), is_(equal_to(False)))
 
 class TestContainsEffectHandle(object):
