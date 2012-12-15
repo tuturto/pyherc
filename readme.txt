@@ -1,3 +1,7 @@
+pyherc is built using Travis CI
+===============================
+"!https://travis-ci.org/tuturto/pyherc.png!":https://travis-ci.org/tuturto/pyherc
+
 Intro
 =====
 Herculeum is a dungeon adventuring game in a spirit of Rogue and Nethack.
