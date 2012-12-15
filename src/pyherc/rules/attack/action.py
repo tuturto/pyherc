@@ -190,8 +190,7 @@ class Damage(object):
         :returns: total damage caused
         :rtype: int
         """
-        return reduce(lambda x, y: x+y,
-                      [dmg[0] for dmg in self.__damage])
+        return sum(x[0] for x in self.__damage)
 
     def __get_damage_types(self):
         """

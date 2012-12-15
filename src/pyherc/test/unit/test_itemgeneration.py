@@ -110,10 +110,10 @@ class TestItemGeneration(object):
         """
         Test that configuration can be added
         """
-        apple_spec = filter(lambda x: x.name == 'apple',
-                            self.item_config.get_all_items())
+        specs = [x for x in self.item_config.get_all_items()
+                 if x.name == 'apple']
 
-        assert_that(len(apple_spec), is_(equal_to(1)))
+        assert_that(len(specs), is_(equal_to(1)))
 
     def test_generate_item_with_effect(self):
         """

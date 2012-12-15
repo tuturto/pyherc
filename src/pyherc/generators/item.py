@@ -174,11 +174,10 @@ class ItemConfigurations(object):
         :return: item specification
         :rtype: ItemConfiguration
         """
-        matching_specs = filter(lambda x: item_type in x.types,
-                                self.__items)
+        matching_specs = [x for x in self.__items
+                          if item_type in x.types]
 
-        max_score = reduce(lambda x, y: x + y.rarity,
-                           matching_specs, 0)
+        max_score = sum([x.rarity for x in matching_specs])
 
         score = self.rng.randint(1, max_score)
         current_score = 0
