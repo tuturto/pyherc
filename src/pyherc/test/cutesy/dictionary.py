@@ -119,6 +119,17 @@ def Sword():
 
     return item
 
+def Club():
+    """
+    Creates a club
+    """
+    item = (ItemBuilder()
+                .with_name('sword')
+                .with_damage(3, 'crushing')
+                .build())
+
+    return item
+
 def Level():
     """
     Creates a level
