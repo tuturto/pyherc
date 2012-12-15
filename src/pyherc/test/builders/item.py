@@ -23,7 +23,7 @@ Module for item builder
 """
 from pyherc.data import Item
 from pyherc.data.effects import EffectsCollection
-from pyherc.data.item import WeaponData
+from pyherc.data.item import WeaponData, ArmourData
 
 class ItemBuilder(object):
     """
@@ -40,17 +40,41 @@ class ItemBuilder(object):
         self.location = ()
         self.icon = 0
         self.weapon_data = None
+        self.armour_data = None
         self.tags = []
 
     def with_name(self, name):
+        """
+        Configure name of the item
+
+        :param name: name of the item
+        :type name: string
+        """
         self.name = name
         return self
 
     def with_appearance(self, appearance):
+        """
+        Configure appearance of the item
+
+        :param appearance: appearance of the item
+        :type appearance: string
+
+        .. note:: appearance is used as a name of the item if it is not familiar
+        to the person inspecting it
+        """
         self.appearance = appearance
         return self
 
     def with_effect(self, handle):
+        """
+        Add effect handle to the item
+
+        :param handle: effect handle to add
+        :type handle: {}
+
+        .. note:: can be called multiple times
+        """
         if hasattr(handle, 'build'):
             self.effect_handles.append(handle.build())
         else:
@@ -58,27 +82,84 @@ class ItemBuilder(object):
         return self
 
     def with_location(self, location):
+        """
+        Configure location of the item
+
+        :param location: location of the item
+        :type location: (int, int)
+        """
         self.location = location
         return self
 
     def with_icon(self, icon):
+        """
+        Configure icon of the item
+
+        :param icon: icon to use
+        :type icon: int
+        """
         self.icon = icon
         return self
 
     def with_damage(self, damage, damage_type):
+        """
+        Configure amount of damage done if used as weapon
+
+        :param damage: amount of damage
+        :type damage: int
+        :param damage_type:
+        """
         if self.weapon_data == None:
             self.weapon_data = WeaponData()
         self.weapon_data.damage.append((damage, damage_type))
         return self
 
     def with_tag(self, tag):
+        """
+        Add tag to the item
+
+        :param tag: tag to add
+        :type tag: string
+
+        .. note:: this can be called multiple times
+        """
         self.tags.append(tag)
         return self
 
     def with_weapon_type(self, weapon_type):
+        """
+        Set weapon type of the item
+
+        :param weapon_type: type of weapon
+        :type weapon_type: string
+        """
         if self.weapon_data == None:
             self.weapon_data = WeaponData()
         self.weapon_data.weapon_type = weapon_type
+        return self
+
+    def with_damage_reduction(self, damage_reduction):
+        """
+        Set damage reduction of the item
+
+        :param damage_reduction: amount of damage reduction
+        :type damage_reduction: int
+        """
+        if self.armour_data == None:
+            self.armour_data = ArmourData()
+        self.armour_data.damage_reduction = damage_reduction
+        return self
+
+    def with_speed_modifier(self, speed_modifier):
+        """
+        Set speed modifier of the item if used as an armour
+
+        :param speed_modifier: speed modifier to use
+        :type speed_modifier: double
+        """
+        if self.armour_data == None:
+            self.armour_data = ArmourData()
+        self.armour_data.speed_modifier = speed_modifier
         return self
 
     def build(self):

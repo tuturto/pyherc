@@ -18,7 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-from pyherc.test.cutesy import Dagger, Sword, Club
+from pyherc.test.cutesy import Dagger, Sword, Club, LeatherArmour
 from pyherc.test.cutesy import make, drop
 from pyherc.test.bdd.features.helpers import default_context
 from pyherc.test.bdd.features.helpers import get_character, get_item
@@ -108,4 +108,9 @@ def impl(context, character_name):
 @given(u'{character_name} wears {armour_name}')
 @default_context
 def impl(context, character_name, armour_name):
-    assert False
+    armour = LeatherArmour()
+    context.items.append(armour)
+
+    character = get_character(context, character_name)
+    character.inventory.append(armour)
+    character.inventory.armour = armour

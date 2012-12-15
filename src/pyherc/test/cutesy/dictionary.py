@@ -130,6 +130,18 @@ def Club():
 
     return item
 
+def LeatherArmour():
+    """
+    Creates a leather armour
+    """
+    item = (ItemBuilder()
+                .with_name('leather armour')
+                .with_damage_reduction(1)
+                .with_speed_modifier(1)
+                .build())
+
+    return item
+
 def Level():
     """
     Creates a level

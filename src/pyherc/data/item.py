@@ -50,6 +50,7 @@ class Item(object):
         #icon
         self.icon = None
         self.weapon_data = None
+        self.armour_data = None
         self.__effects_collection = effects_collection
         self.weight = None
         self.rarity = None
@@ -249,3 +250,23 @@ class WeaponData(object):
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.weapon_type = weapon_type
+
+class ArmourData(object):
+    """
+    Represents data of armours
+
+    .. versionadded:: 0.8
+    """
+    def __init__(self, damage_reduction = None, speed_modifier = None):
+        """
+        Default constructor
+
+        :param damage_reduction: amount of damage reduced
+        :type damage_reduction: int
+        :param speed_modifier: modifier for speed of wearer
+        :type speed_modifier: double
+        """
+        super(ArmourData, self).__init__()
+
+        self.damage_reduction = damage_reduction
+        self.speed_modifier = speed_modifier
