@@ -1,5 +1,3 @@
-pyherc is built using Travis CI
-===============================
 [![Build Status](https://travis-ci.org/tuturto/pyherc.png)](https://travis-ci.org/tuturto/pyherc)
 
 Intro
