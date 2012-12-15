@@ -21,7 +21,6 @@
 """
 Attack related factories are defined here
 """
-import types
 from pyherc.aspects import logged
 from pyherc.rules.move.action import MoveAction, EscapeAction
 from pyherc.rules.factory import SubActionFactory

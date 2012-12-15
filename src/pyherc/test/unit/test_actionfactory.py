@@ -45,7 +45,7 @@ class TestActionFactories():
         Test that action factory can be initialised with single sub factory
         """
         mock_model = mock(Model)
-        mock_attack_factory = mock(AttackFactory)
+        mock_attack_factory = AttackFactory([])
 
         factory = ActionFactory(mock_model,
                                 mock_attack_factory)

@@ -31,7 +31,6 @@ DrinkParameters - Class used to guide drinking related actions
 InventoryParameters - Class used to guide inventory related actions
 """
 
-import types
 from pyherc.aspects import logged
 
 class ActionFactory(object):
@@ -48,7 +47,7 @@ class ActionFactory(object):
             model: model to register for the factory
             factories: a single Factory or list of Factories to use
         """
-        if isinstance(factories, types.ListType):
+        if hasattr(factories, '__iter__'):
             self.factories = factories
         else:
             self.factories = []
