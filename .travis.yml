@@ -8,4 +8,4 @@ install:
  - "pip install -e git://github.com/dbravender/qc.git#egg=qc"
  - "easy_install -U behave"
 # command to run tests, e.g. python setup.py test
-script: nosetests
+script: nosetests -w src/pyherc
