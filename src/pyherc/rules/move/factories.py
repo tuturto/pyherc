@@ -123,7 +123,7 @@ class MoveFactory(SubActionFactory):
         """
         self.action_type = 'move'
 
-        if isinstance(factories, types.ListType):
+        if hasattr(factories, '__iter__'):
             self.factories = factories
         else:
             self.factories = []
