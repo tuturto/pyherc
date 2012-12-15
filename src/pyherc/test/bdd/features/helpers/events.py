@@ -18,13 +18,34 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-from pyherc.test.bdd.features.helpers import get_character
+"""
+Module for event helpers
+"""
+from pyherc.aspects import logged
+from pyherc.data import Model
+from pyherc.test.builders import ActionFactoryBuilder
+from pyherc.test.helpers import EventListener
 
-@then(u'time should pass for {character_name}')
-def impl(context, character_name):
-    character = get_character(context, character_name)
+def observed(fn):
+    """
+    Decorator to inject observer
 
-    old_time = character.old_values['tick']
-    new_time = character.tick
+    .. versionadded:: 0.8
+    """
+    def observe(*args, **kwargs):
+        """
+        Inject observer
+        """
+        context = args[0]
 
-    assert new_time > old_time
+        if not hasattr(context, 'observer'):
+            context.observer = EventListener()
+
+            if not hasattr(context, 'model'):
+                context.model = Model()
+
+            context.model.register_event_listener(context.observer)
+
+        return fn(*args, **kwargs)
+
+    return observe

@@ -21,6 +21,8 @@
 from pyherc.test.cutesy import Dagger, Sword
 from pyherc.test.cutesy import make, drop
 from pyherc.test.bdd.features.helpers import default_context
+from pyherc.test.bdd.features.helpers import get_character, get_item
+from pyherc.test.bdd.features.helpers import get_location
 
 @given(u'{character_name} has dagger')
 @default_context
@@ -28,9 +30,7 @@ def impl(context, character_name):
     dagger = Dagger()
     context.items.append(dagger)
 
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+    character = get_character(context, character_name)
 
     character.inventory.append(dagger)
 
@@ -40,57 +40,35 @@ def impl(context, character_name):
     sword = Sword()
     context.items.append(sword)
 
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+    character = get_character(context, character_name)
 
     character.inventory.append(sword)
 
 @when(u'{character_name} drops {item_name}')
 def impl(context, character_name, item_name):
-
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
-
-    items = [x for x in context.items
-             if x.name == item_name]
-    item = items[0]
+    character = get_character(context, character_name)
+    item = get_item(context, item_name)
 
     make(character, drop(item))
 
-@then(u'{item_name} should be in room')
-def impl(context, item_name):
-
-    items = [x for x in context.items
-             if x.name == item_name]
-    item = items[0]
-
-    room = context.places[0]
+@then(u'{item_name} should be in {location_name}')
+def impl(context, item_name, location_name):
+    item = get_item(context, item_name)
+    room = get_location(context, location_name)
 
     assert item.level == room
 
 @then(u'{item_name} should be at same place as {character_name}')
 def impl(context, item_name, character_name):
-    items = [x for x in context.items
-             if x.name == item_name]
-    item = items[0]
-
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+    item = get_item(context, item_name)
+    character = get_character(context, character_name)
 
     assert item.location == character.location
 
 @then(u'{item_name} should not be in inventory of {character_name}')
 def impl(context, item_name, character_name):
-    items = [x for x in context.items
-             if x.name == item_name]
-    item = items[0]
-
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+    item = get_item(context, item_name)
+    character = get_character(context, character_name)
 
     assert not item in character.inventory
 
@@ -100,9 +78,7 @@ def impl(context, character_name):
     dagger = Dagger()
     context.items.append(dagger)
 
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+    character = get_character(context, character_name)
 
     character.inventory.append(dagger)
     character.inventory.weapon = dagger
@@ -113,9 +89,7 @@ def impl(context, character_name):
     sword = Sword()
     context.items.append(sword)
 
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+    character = get_character(context, character_name)
 
     character.inventory.append(sword)
     character.inventory.weapon = sword

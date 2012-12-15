@@ -21,4 +21,6 @@
 """
 Package for BDD helpers
 """
-from .context import default_context
+from .context import default_context, with_action_factory, get_character
+from .context import get_location, get_item, get_entity
+from .events import observed

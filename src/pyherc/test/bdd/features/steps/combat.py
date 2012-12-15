@@ -19,36 +19,30 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 from pyherc.test.cutesy import make, hit
+from pyherc.test.bdd.features.helpers import get_character
 
 @when(u'{attacker_name} hits {target_name}')
 def impl(context, attacker_name, target_name):
-    attackers = [x for x in context.characters
-                 if x.name == attacker_name]
-    attacker = attackers[0]
-    
-    targets = [x for x in context.characters
-              if x.name == target_name]
-    target = targets[0]
+    attacker = get_character(context, attacker_name)
+    target = get_character(context, target_name)
 
     make(attacker, hit(target))
 
 @then(u'{character_name} should have less hitpoints')
 def impl(context, character_name):
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
-    
+    character = get_character(context, character_name)
+
     old_hit_points = character.old_values['hit points']
     new_hit_points = character.hit_points
-    
+
     assert new_hit_points < old_hit_points
 
 @then(u'Attack should deal {damage_type} damage')
 def impl(context, damage_type):
     observer = context.observer
-    
-    attack_hit_events = [x for x in context.observer.events
-                         if x.event_type == 'attack hit']
+
+    attack_hit_events = (x for x in context.observer.events
+                         if x.event_type == 'attack hit')
 
     matching_events = [x for x in attack_hit_events
                        if damage_type in x.damage.damage_types]
@@ -57,23 +51,19 @@ def impl(context, damage_type):
 
 @then(u'{character_name} should suffer extra damage')
 def impl(context, character_name):
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
-    
+    character = get_character(context, character_name)
+
     old_hit_points = character.old_values['hit points']
     new_hit_points = character.hit_points
     total_damage_suffered = old_hit_points - new_hit_points
-    
-    attack_hit_events = [x for x in context.observer.events
-                         if x.event_type == 'attack hit']
+
+    attack_hit_events = (x for x in context.observer.events
+                         if x.event_type == 'attack hit')
     matching_events = [x for x in attack_hit_events
                        if x.target.name == character_name]
     hit_event = matching_events[0]
     attacker = hit_event.attacker
-    
-    total_damage_from_weapon = reduce(lambda x, y: x+y[0],
-                                      attacker.inventory.weapon.weapon_data.damage,
-                                      0)
-    
+
+    total_damage_from_weapon = sum([x[0] for x in attacker.inventory.weapon.weapon_data.damage])
+
     assert(total_damage_suffered > total_damage_from_weapon)

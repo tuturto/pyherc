@@ -1,4 +1,5 @@
 from pyherc.test.cutesy import affect, weak_poison, potent_poison
+from pyherc.test.bdd.features.helpers import get_character
 
 @when(u'{character_name} suffers from {effect_name}')
 def impl(context, character_name, effect_name):
@@ -8,9 +9,7 @@ def impl(context, character_name, effect_name):
     elif effect_name == 'strong poison':
         poison_spec = potent_poison()
 
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+    character = get_character(context, character_name)
 
     affect(character, poison_spec)
 

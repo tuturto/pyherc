@@ -21,10 +21,11 @@
 from pyherc.data.effects import DamageModifier
 from pyherc.test.cutesy import Adventurer, Goblin
 from pyherc.test.matchers import is_dead, is_not_in
-from pyherc.test.helpers import observed, with_action_factory
 from pyherc.ai.pathfinding import a_star
 from hamcrest import assert_that
-from pyherc.test.bdd.features.helpers import default_context
+from pyherc.test.bdd.features.helpers import default_context, observed
+from pyherc.test.bdd.features.helpers import with_action_factory
+from pyherc.test.bdd.features.helpers import get_character, get_location
 
 @given(u'{character_name} is Adventurer')
 @observed
@@ -46,26 +47,19 @@ def impl(context, character_name):
 
 @then(u'{character_name} should be dead')
 def impl(context, character_name):
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
-
+    character = get_character(context, character_name)
     assert_that(character, is_dead())
 
 @given(u'{character_name} is almost dead')
 @observed
 def impl(context, character_name):
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+    character = get_character(context, character_name)
 
     character.hit_points = 1
 
 @given(u'{character_name} is suspectible against {damage_type}')
 def impl(context, character_name, damage_type):
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+    character = get_character(context, character_name)
 
     modifier = DamageModifier(modifier = 2,
                               damage_type = damage_type,
@@ -79,9 +73,7 @@ def impl(context, character_name, damage_type):
 
 @given(u'{character_name} is Player')
 def impl(context, character_name):
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+    character = get_character(context, character_name)
 
     model = context.model
     model.player = character
@@ -89,13 +81,8 @@ def impl(context, character_name):
 @when(u'{character_name} walks on {location_name}')
 @with_action_factory
 def impl(context, character_name, location_name):
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
-
-    places = [x for x in context.places
-              if x.name == location_name]
-    place = places[0]
+    character = get_character(context, character_name)
+    place = get_location(context, location_name)
 
     path, connections, updated = a_star(character.location,
                                         place.location,
@@ -109,9 +96,7 @@ def impl(context, character_name, location_name):
 @when(u'{character_name} enters {portal_name}')
 @with_action_factory
 def impl(context, character_name, portal_name):
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
+    character = get_character(context, character_name)
 
     character.move(9,
                    context.action_factory)

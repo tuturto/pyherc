@@ -20,85 +20,65 @@
 
 from pyherc.test.cutesy import Level, place, middle_of
 from pyherc.data import Portal
+from pyherc.test.bdd.features.helpers import default_context
+from pyherc.test.bdd.features.helpers import get_character, get_location
+from pyherc.test.bdd.features.helpers import get_entity
 from hamcrest import assert_that, is_in, is_not
 
 @given(u'{character_name} is standing in {location_name}')
+@default_context
 def impl(context, character_name, location_name):
-    context.places = []
     room = Level()
     room.name = location_name
     context.places.append(room)
-    
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
-    
+
+    character = get_character(context, character_name)
+
     place(character, middle_of(room))
 
 @given(u'{character_name} is standing next to {target_name}')
 def impl(context, character_name, target_name):
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
-    
-    characters = [x for x in context.characters
-                  if x.name == target_name]
-    target = characters[0]
-    
+    character = get_character(context, character_name)
+    target = get_character(context, target_name)
+
     level = target.level
-    location = (target.location[0] + 1, 
+    location = (target.location[0] + 1,
                 target.location[1])
 
     level.add_creature(character, location)
 
 @given(u'{portal_name} is located in corner of {location_name}')
 def impl(context, portal_name, location_name):
-    places = [x for x in context.places
-              if x.name == location_name]
-    place = places[0]
+    place = get_location(context, location_name)
+    portal = get_location(context, portal_name)
 
-    portals = [x for x in context.places
-               if x.name == portal_name]
-    portal = portals[0]
+    place.add_portal(portal, (2, 2), None)
 
-    place.add_portal(portal, (2, 2), None)   
-    
 @then(u'{character_name} is not in {place_name}')
 def impl(context, character_name, place_name):
-    characters = [x for x in context.characters
-                  if x.name == character_name]
-    character = characters[0]
-
-    places = [x for x in context.places
-              if x.name == place_name]
-    place = places[0]
+    character = get_character(context, character_name)
+    place = get_location(context, place_name)
 
     assert_that(character, is_not(is_in(place.creatures)))
 
 @given(u'{portal_name} is Portal')
+@default_context
 def impl(context, portal_name):
-    portal = Portal(icons = [100, 101], 
+    portal = Portal(icons = [100, 101],
                     level_generator_name = 'empty')
     portal.name = portal_name
-    
+
     context.places.append(portal)
 
 @given(u'{portal_name} leads outside')
 def impl(context, portal_name):
-    places = [x for x in context.places
-              if x.name == portal_name]
-    portal = places[0]
-    
+    portal = get_location(context, portal_name)
+
     portal.exits_dungeon = True
 
 @then(u'{entity1_name} and {entity2_name} are located at the same place')
 def impl(context, entity1_name, entity2_name):
-    characters = [x for x in context.characters
-                  if x.name == entity1_name]
-    character = characters[0]
-    
-    locations = [x for x in context.places
-                 if x.name == entity2_name]
-    place = locations[0]
-    
+    character = get_entity(context, entity1_name)
+    place = get_entity(context, entity2_name)
+
     assert character.location == place.location
