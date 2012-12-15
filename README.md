@@ -1,6 +1,6 @@
 pyherc is built using Travis CI
 ===============================
-https://travis-ci.org/tuturto/pyherc.png
+[![Build Status](https://travis-ci.org/tuturto/pyherc.png)](https://travis-ci.org/tuturto/pyherc)
 
 Intro
 =====
@@ -14,20 +14,19 @@ posses it.
 
 System Requirements
 ===================
-Python 2.6.5 (2.6.1 should be sufficient if you do not wish to run tests)
-PyQt4
-web.py 0.3 (only needed for running debug server)
-mockito-python 0.5.0 (only needed for running test cases)
-pyHamcrest 1.6 (only needed for running test cases)
-gc (only needed for running test cases)
-behave (only needed for running test cases)
-satin-python (only needed for running test cases)
-Sphinx 1.1.2 (only needed for generating documentation)
+* Python 2.6.5 (2.6.1 should be sufficient if you do not wish to run tests)
+* PyQt4
+* mockito-python 0.5.0 (only needed for running test cases)
+* pyHamcrest 1.6 (only needed for running test cases)
+* gc (only needed for running test cases)
+* behave (only needed for running test cases)
+* satin-python (only needed for running test cases)
+* Sphinx 1.1.2 (only needed for generating documentation)
 
 Manual
 ======
-Manual can be found at doc - directory
-Online manual is available at: http://tuturto.github.com/pyherc/index.html
+* Manual can be found at doc - directory
+* Online manual is available at: http://tuturto.github.com/pyherc/index.html
 
 Credits
 =======
