@@ -1,6 +1,6 @@
 pyherc is built using Travis CI
 ===============================
-"!https://travis-ci.org/tuturto/pyherc.png!":https://travis-ci.org/tuturto/pyherc
+https://travis-ci.org/tuturto/pyherc.png
 
 Intro
 =====
