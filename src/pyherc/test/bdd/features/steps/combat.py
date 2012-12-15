@@ -20,7 +20,7 @@
 
 from pyherc.test.cutesy import make, hit
 from pyherc.test.bdd.features.helpers import get_character
-from hamcrest import assert_that, is_, smaller_than
+from hamcrest import assert_that, is_, less_than
 
 @when(u'{attacker_name} hits {target_name}')
 def impl(context, attacker_name, target_name):
@@ -90,4 +90,4 @@ def impl(context):
     expected_damage = sum(x[0] for x in weapon.weapon_data.damage)
     realised_damage = hp_event.old_hit_points - hp_event.new_hit_points
 
-    assert_that(realised_damage, is_(smaller_than(expected_damage)))
+    assert_that(realised_damage, is_(less_than(expected_damage)))
