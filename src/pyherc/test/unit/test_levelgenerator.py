@@ -161,7 +161,7 @@ class TestLevelGeneratorFactoryConfiguration:
 
         try:
             generator = factory.get_generator('crypt')
-        except RuntimeError, err:
+        except RuntimeError as err:
             assert_that(str(err), contains_string("No room for type crypt"))
             exception_was_thrown = True
 
