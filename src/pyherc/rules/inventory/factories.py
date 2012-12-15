@@ -21,7 +21,6 @@
 """
 Inventory manipulation related factories are defined here
 """
-import types
 from pyherc.rules.inventory.action import PickUpAction, DropAction
 from pyherc.rules.factory import SubActionFactory
 from pyherc.aspects import logged
@@ -110,7 +109,7 @@ class InventoryFactory(SubActionFactory):
         """
         self.action_type = 'inventory'
 
-        if isinstance(factories, types.ListType):
+        if hasattr(factories, '__iter__'):
             self.factories = factories
         else:
             self.factories = []

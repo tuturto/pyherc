@@ -175,9 +175,8 @@ class Damage(object):
                                   and x.damage_type == damage_type]
 
             self.damage_inflicted = (self.damage_inflicted +
-                                     reduce(lambda x, y: x+y.modifier,
-                                            matching_modifiers,
-                                            damage[0]))
+                                     damage[0] +
+                                     sum(x.modifier for x in matching_modifiers))
 
             if self.damage_inflicted < 1:
                 self.damage_inflicted = 1
