@@ -61,6 +61,7 @@ class TestEffects(object):
 
         effect_spec.charges = 2
         when(potion).get_effect_handles('on drink').thenReturn([effect_spec])
+        potion.maximum_charges_left = 2
         when(effect_factory).create_effect(any(),
                                            target = any()).thenReturn(effect)
 
