@@ -29,7 +29,6 @@ import time
 INSTALL_PATH = os.path.abspath(".")
 sys.path.append(INSTALL_PATH)
 
-from pyherc.debug import get_debug_server
 from herculeum.application import APP
 from PyQt4.QtGui import QPixmap, QSplashScreen
 import herculeum.gui.resources
@@ -58,10 +57,6 @@ if __name__ == "__main__":
     APP.process_command_line()
     APP.start_logging()
     APP.load_configuration()
-
-    server = get_debug_server()
-    if server != None:
-        thread.start_new_thread(server.run, ())
 
     APP.run(splash_screen)
 

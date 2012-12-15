@@ -26,7 +26,6 @@ from herculeum.gui.inventory import InventoryWidget
 from herculeum.gui.surfaceManager import SurfaceManager
 from herculeum.config.config import ControlsConfiguration
 from pyherc.rules import ActionFactory
-import herculeum.gui.resources
 from herculeum.test.matchers import slot_with_item
 
 from mockito import mock, when, any

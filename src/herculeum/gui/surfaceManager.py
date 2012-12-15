@@ -32,6 +32,8 @@ from PyQt4.QtGui import QPixmap
 from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import QRect
 
+import herculeum.gui.resources
+
 class SurfaceManager:
     """
     Class for managing images and icons

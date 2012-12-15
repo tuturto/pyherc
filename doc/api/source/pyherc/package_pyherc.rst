@@ -10,7 +10,6 @@ pyherc
    ai/package_ai
    config/package_config   
    data/package_data
-   debug/module_debug
    events/package_events
    generators/package_generators
    rules/package_rules
