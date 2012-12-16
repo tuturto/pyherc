@@ -50,10 +50,8 @@ Dependencies
 ------------
 - Python 2.7.3 (2.6.1 should be sufficient if you do not wish to run tests)
 - PyQt4
-- web.py 0.3 (only needed for running debug server)
 - mockito-python 0.5.0 (only needed for running test cases)
 - pyHamcrest 1.6 (only needed for running test cases)
-- qc (only needed for running test cases)
 - behave (only needed for running test cases)
 - satin-python (only needed for running test cases)
 - Sphinx 1.1.2 (only needed for generating documentation)
@@ -66,16 +64,8 @@ Install setuptools, by following instructions at: setuptools_.
 
 Install PyQt4, by following instructions at: PyQt4_
 
-Install pip (only needed for installing qc)::
-
-    easy_install -U pip
-
 Rest of the dependencies can be automatically located and installed by following
 steps:
-
-If you want to run debug server, install web.py::
-
-    easy_install -U web.py
     
 If you want to be able to run test cases, install mockito-python, pyHamcrest 
 and behave::

@@ -6,46 +6,64 @@ Items
 Weapons
 *******
 
-Dagger
+Dagger 
 ======
+.. image:: images/dagger.png 
+
 Light and simple weapon that does not do much damage. Small size allows skilled
 wielder to do critical damage easily though.
 
 Sword
 =====
+.. image:: images/stiletto.png
+
 Staple tool for adventurers and soldiers alike. Swords do more damage than 
 daggers, but are harder to use effectively.
 
 Axe
 ===
+.. image:: images/battle-axe.png
+
 Heavy battle axes can cut through flesh and crush through bones. Not very 
 common weapon, because effective use requires years of training.
 
 Club
 ====
+.. image:: images/mace.png
+
 Simple and easy to use weapon, that can be used effectively with one hand.
 
 Warhammer
 =========
+.. image:: images/gavel.png
+
 Heavy two-handed weapon that crushes through but the strongest defences. Rare
 sight in the battle field, because of the huge weight.
 
 Spear
 =====
+.. image:: images/barbed-spear.png
+
 One handed piercing weapon that can be devastating in hands of skilled user.
 
 Whip
 ====
+.. image:: images/whip.png
+
 Weapon of choice for archeologists and vampire hunters. Not particularly
 strong, but very versatile.
 
 Sickle
 ======
+.. image:: images/scythe.png
+
 Farming implement repurposed on the battle field. Light and common weapon
 that requires very specifically trained user.
 
 Morning star
 ============
+.. image:: images/spiked-mace.png
+
 Spiked club, guaranteed to pierce through armours and crush through bones.
 Difficult to use weapon that requires years of practice.
 
@@ -79,37 +97,59 @@ Armour
 ******
 Robes
 =====
+.. image:: images/robes.png
+
+Simple robes are favoured by spell casters. They do not hinder magical
+abilities and strong wizards are more than capable of deflecting attacks
+anyway.
 
 Leather armour
 ==============
+.. image:: images/leather_armour.png
+
+Armour made of hardened leather. While it offers only meager protection, it
+allows the wearer to move very swiftly.
 
 Chainmail
 =========
+.. image:: images/chainmail.png
+
+Armour made of countless interlocking metal rings. Somewhat heavier than
+leather armour.
 
 Scale mail
 ==========
+.. image:: images/scale_mail.png
+
+Scale mail is made of interlocking scales, in a similar manner to chainmail.
+It offers better protection, while being heavier and harder to move around
+with.
 
 Plate mail
 ==========
+.. image:: images/plate_mail.png
+
+Ultimate solution for protection. Heavy plates cover wearer from head to toe,
+offering great protection against attacks.
 
 Armour tables
 =============
-+--------------+--------+-----------+-------+---------+
-| Armour       | Bonus  | Damage    | Speed | Casting |
-|              |        | reduction |       |         |
-+==============+========+===========+=======+=========+
-| Robes        |        |           | 1     | +1      |
-+--------------+--------+-----------+-------+---------+
-| Leather      | +1     | 1         | 1     |         |
-+--------------+--------+-----------+-------+---------+
-| Chainmail    | +2     | 2         | 0.9   | -1      |
-+--------------+--------+-----------+-------+---------+
-| Scale mail   | +3     | 3         | 0.7   | -2      |
-+--------------+--------+-----------+-------+---------+
-| Plate mail   | +4     | 5         | 0.5   | -3      |
-+--------------+--------+-----------+-------+---------+
-| Shield       | +1     | 1         | 0.9   | -1      |
-+--------------+--------+-----------+-------+---------+
++--------------+-----------+-------+---------+
+| Armour       | Damage    | Speed | Casting |
+|              | reduction |       |         |
++==============+===========+=======+=========+
+| Robes        |           | 1     | +1      |
++--------------+-----------+-------+---------+
+| Leather      | 1         | 1     |         |
++--------------+-----------+-------+---------+
+| Chainmail    | 2         | 0.9   | -1      |
++--------------+-----------+-------+---------+
+| Scale mail   | 3         | 0.7   | -2      |
++--------------+-----------+-------+---------+
+| Plate mail   | 5         | 0.5   | -3      |
++--------------+-----------+-------+---------+
+| Shield       | 1         | 0.9   | -1      |
++--------------+-----------+-------+---------+
 
 Shield
 ======
