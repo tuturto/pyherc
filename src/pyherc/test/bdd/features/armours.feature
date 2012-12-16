@@ -20,10 +20,10 @@ Feature: Armours
       Given Uglak wields dagger
         And Pete wears scale mail
        When Uglak hits Pete
-       Then Attack damage should be one
+       Then Attack damage should be 1
 
   Scenario: Completely protected
       Given Uglak wields dagger
         And Pete wears plate mail
        When Uglak hits Pete
-       Then Attack damage should be zero
+       Then Attack damage should be 0
