@@ -23,6 +23,7 @@ Module for general context helpers
 """
 from pyherc.data import Model
 from pyherc.test.builders import ActionFactoryBuilder
+from pyherc.test.cutesy import LeatherArmour, ScaleMail
 
 def default_context(fn):
     """
@@ -75,6 +76,27 @@ def with_action_factory(fn):
         return fn(*args, **kwargs)
 
     return action_factorize
+
+def armour_list(fn):
+    """
+    Decorator to set up armour list
+
+    .. versionadded:: 0.8
+    """
+    def armour_setup(*args, **kwargs):
+        """
+        Set up armour list
+        """
+        context = args[0]
+
+        if not hasattr(context, 'armour_list'):
+            context.armour_list = {}
+            context.armour_list['leather armour'] = LeatherArmour
+            context.armour_list['scale mail'] = ScaleMail
+
+        return fn(*args, **kwargs)
+
+    return armour_setup
 
 def get_character(context, character_name):
     """

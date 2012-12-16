@@ -137,7 +137,19 @@ def LeatherArmour():
     item = (ItemBuilder()
                 .with_name('leather armour')
                 .with_damage_reduction(1)
-                .with_speed_modifier(1)
+                .with_speed_modifier(1.0)
+                .build())
+
+    return item
+
+def ScaleMail():
+    """
+    Creates a scale mail
+    """
+    item = (ItemBuilder()
+                .with_name('scale mail')
+                .with_damage_reduction(3)
+                .with_speed_modifier(0.7)
                 .build())
 
     return item

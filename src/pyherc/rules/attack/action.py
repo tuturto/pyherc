@@ -179,7 +179,7 @@ class Damage(object):
                                      sum(x.modifier for x in matching_modifiers))
 
             if self.damage_inflicted < 1:
-                self.damage_inflicted = 1
+                self.damage_inflicted = 0
 
         if target.inventory.armour != None:
             armour = target.inventory.armour.armour_data.damage_reduction

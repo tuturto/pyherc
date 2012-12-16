@@ -20,7 +20,7 @@
 
 from pyherc.test.cutesy import Dagger, Sword, Club, LeatherArmour
 from pyherc.test.cutesy import make, drop
-from pyherc.test.bdd.features.helpers import default_context
+from pyherc.test.bdd.features.helpers import default_context, armour_list
 from pyherc.test.bdd.features.helpers import get_character, get_item
 from pyherc.test.bdd.features.helpers import get_location
 
@@ -107,8 +107,9 @@ def impl(context, character_name):
 
 @given(u'{character_name} wears {armour_name}')
 @default_context
+@armour_list
 def impl(context, character_name, armour_name):
-    armour = LeatherArmour()
+    armour = context.armour_list[armour_name]()
     context.items.append(armour)
 
     character = get_character(context, character_name)
