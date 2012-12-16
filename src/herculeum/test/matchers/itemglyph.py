@@ -43,7 +43,6 @@ class ItemGlyphMatcher(BaseMatcher):
         :returns: True if matching, otherwise False
         :rtype: Boolean
         """
-        print item
         if (item != None
                 and hasattr(item, 'item')
                 and item.item != None
