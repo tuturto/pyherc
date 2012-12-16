@@ -33,6 +33,7 @@ from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory
 from pyherc.rules.inventory.factories import InventoryFactory
 from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
+from pyherc.rules.inventory.factories import WearFactory
 from pyherc.generators import ItemGenerator, CreatureGenerator
 from pyherc.generators.level.portals import PortalAdderFactory
 
@@ -114,7 +115,8 @@ class Configuration(object):
                                      dying_rules)
 
         inventory_factory = InventoryFactory([PickUpFactory(),
-                                             DropFactory()])
+                                             DropFactory(),
+                                             WearFactory()])
 
         self.action_factory = ActionFactory(
                                             self.model,

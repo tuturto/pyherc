@@ -221,6 +221,7 @@ class CharacterInventoryWidget(QWidget):
         :type character: Character
         """
         self.weapon_slot.set_item(self.character.inventory.weapon)
+        self.armour_slot.set_item(self.character.inventory.armour)
         # for each slot
         #  does character have item there?
         #   yes-> show icon of item
@@ -482,6 +483,8 @@ class InventoryWidget(QWidget):
                                      self.character,
                                      item,
                                      False)
+        elif item.get_main_type() == 'armour':
+            self.character.wear(item, self.action_factory)
 
         self.update_inventory()
 
