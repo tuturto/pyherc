@@ -23,7 +23,7 @@ Module for general context helpers
 """
 from pyherc.data import Model
 from pyherc.test.builders import ActionFactoryBuilder
-from pyherc.test.cutesy import LeatherArmour, ScaleMail
+from pyherc.test.cutesy import LeatherArmour, ScaleMail, PlateMail
 
 def default_context(fn):
     """
@@ -93,6 +93,7 @@ def armour_list(fn):
             context.armour_list = {}
             context.armour_list['leather armour'] = LeatherArmour
             context.armour_list['scale mail'] = ScaleMail
+            context.armour_list['plate mail'] = PlateMail
 
         return fn(*args, **kwargs)
 

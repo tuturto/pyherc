@@ -1,4 +1,3 @@
-@wip
 Feature: Armours
   as an character
   in order to protect myself

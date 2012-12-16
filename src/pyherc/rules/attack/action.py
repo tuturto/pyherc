@@ -188,6 +188,11 @@ class Damage(object):
 
         if armour < self.damage_inflicted:
             self.damage_inflicted = self.damage_inflicted - armour
+        else:
+            if armour < self.damage_inflicted * 2:
+                self.damage_inflicted = 1
+            else:
+                self.damage_inflicted = 0
 
         target.hit_points = target.hit_points - self.damage_inflicted
 

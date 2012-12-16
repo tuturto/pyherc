@@ -154,6 +154,18 @@ def ScaleMail():
 
     return item
 
+def PlateMail():
+    """
+    Creates a plate mail
+    """
+    item = (ItemBuilder()
+                .with_name('plate mail')
+                .with_damage_reduction(5)
+                .with_speed_modifier(0.5)
+                .build())
+
+    return item
+
 def Level():
     """
     Creates a level
