@@ -23,6 +23,7 @@ module for configuring catacombs
 """
 from pyherc.generators import ItemConfigurations
 from pyherc.generators import ItemConfiguration, WeaponConfiguration
+from pyherc.generators import ArmourConfiguration
 from pyherc.data.effects import EffectHandle
 
 def init_items(context):
@@ -190,6 +191,56 @@ def init_items(context):
                                             critical_damage = 2,
                                             weapon_class = 'martial')))
 
+    config.append(
+                  ItemConfiguration(name = 'robes',
+                                    cost = 2,
+                                    weight = 4,
+                                    icons = [surface_manager.add_icon('robes', ':robes.png')],
+                                    types = ['armour'],
+                                    rarity = 'common',
+                                    armour_configuration = ArmourConfiguration(
+                                                damage_reduction = 0,
+                                                speed_modifier = 1.0)))
+    config.append(
+                  ItemConfiguration(name = 'leather armour',
+                                    cost = 4,
+                                    weight = 6,
+                                    icons = [surface_manager.add_icon('leather armour', ':leather_armour.png')],
+                                    types = ['armour'],
+                                    rarity = 'common',
+                                    armour_configuration = ArmourConfiguration(
+                                                damage_reduction = 1,
+                                                speed_modifier = 1.0)))
+    config.append(
+                  ItemConfiguration(name = 'chainmail',
+                                    cost = 8,
+                                    weight = 12,
+                                    icons = [surface_manager.add_icon('chainmail', ':chainmail.png')],
+                                    types = ['armour'],
+                                    rarity = 'uncommon',
+                                    armour_configuration = ArmourConfiguration(
+                                                damage_reduction = 2,
+                                                speed_modifier = 0.9)))
+    config.append(
+                  ItemConfiguration(name = 'scale mail',
+                                    cost = 12,
+                                    weight = 12,
+                                    icons = [surface_manager.add_icon('scale mail', ':scale_mail.png')],
+                                    types = ['armour'],
+                                    rarity = 'uncommon',
+                                    armour_configuration = ArmourConfiguration(
+                                                damage_reduction = 3,
+                                                speed_modifier = 0.7)))
+    config.append(
+                  ItemConfiguration(name = 'plate mail',
+                                    cost = 2,
+                                    weight = 4,
+                                    icons = [surface_manager.add_icon('plate mail', ':plate_mail.png')],
+                                    types = ['armour'],
+                                    rarity = 'rare',
+                                    armour_configuration = ArmourConfiguration(
+                                                damage_reduction = 5,
+                                                speed_modifier = 0.5)))
     config.append(
                   ItemConfiguration(name = 'healing potion',
                                     cost = 150,

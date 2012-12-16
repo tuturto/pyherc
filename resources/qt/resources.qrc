@@ -48,5 +48,10 @@
         <file>weapons.png</file>
         <file>whip.png</file>
         <file>wood-axe.png</file>
+        <file>scale_mail.png</file>
+        <file>plate_mail.png</file>
+        <file>leather_armour.png</file>
+        <file>chainmail.png</file>
+        <file>robes.png</file>
     </qresource>
 </RCC>

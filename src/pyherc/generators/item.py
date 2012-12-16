@@ -24,7 +24,7 @@ Classes needed for item generation
 
 import random
 from pyherc.data import Item
-from pyherc.data.item import WeaponData
+from pyherc.data.item import WeaponData, ArmourData
 from pyherc.data.effects import EffectsCollection, EffectHandle
 from pyherc.aspects import logged
 
@@ -107,6 +107,12 @@ class ItemGenerator(object):
                                     critical_range = weapon_spec.critical_range,
                                     critical_damage = weapon_spec.critical_damage,
                                     weapon_type = weapon_spec.weapon_class)
+
+        if not item_specification.armour_configuration is None:
+            armour_spec = item_specification.armour_configuration
+            item.armour_data = ArmourData(
+                                    damage_reduction = armour_spec.damage_reduction,
+                                    speed_modifier = armour_spec.speed_modifier)
 
         for spec in item_specification.effect_handles:
             new_handle = EffectHandle(trigger = spec.trigger,
@@ -202,7 +208,8 @@ class ItemConfiguration(object):
 
     @logged
     def __init__(self, name, cost, weight, icons, types, rarity,
-                 weapon_configration = None, effect_handles = None):
+                 weapon_configration = None, effect_handles = None,
+                 armour_configuration = None):
         """
         Default constructor
         """
@@ -213,6 +220,7 @@ class ItemConfiguration(object):
         self.types = types
         self.rarity = self.rarities[rarity]
         self.weapon_configration = weapon_configration
+        self.armour_configuration = armour_configuration
 
         if effect_handles is None:
             self.effect_handles = []
@@ -228,7 +236,23 @@ class WeaponConfiguration(object):
         """
         Default constructor
         """
+        super(WeaponConfiguration, self).__init__()
+
         self.damage = damage
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.weapon_class = weapon_class
+
+class ArmourConfiguration(object):
+    """
+    Class representing armour configuration
+    """
+    @logged
+    def __init__(self, damage_reduction, speed_modifier):
+        """
+        Default constructor
+        """
+        super(ArmourConfiguration, self).__init__()
+
+        self.damage_reduction = damage_reduction
+        self.speed_modifier = speed_modifier

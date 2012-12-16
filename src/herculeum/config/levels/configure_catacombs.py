@@ -97,7 +97,7 @@ def init_level(rng, item_generator, creature_generator, level_size):
 
     item_adder_config = ItemAdderConfiguration(['upper catacombs',
                                                'lower catacombs'])
-    item_adder_config.add_item(min_amount = 2,
+    item_adder_config.add_item(min_amount = 0,
                                max_amount = 4,
                                type = 'weapon',
                                location = 'room')
@@ -108,6 +108,10 @@ def init_level(rng, item_generator, creature_generator, level_size):
     item_adder_config.add_item(min_amount = 1,
                                max_amount = 3,
                                type = 'food',
+                               location = 'room')
+    item_adder_config.add_item(min_amount = 0,
+                               max_amount = 2,
+                               type = 'armour',
                                location = 'room')
     item_adders = [ItemAdder(item_generator,
                             item_adder_config,
