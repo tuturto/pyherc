@@ -178,6 +178,9 @@ class ItemBuilder(object):
         if self.weapon_data != None:
             item.weapon_data = self.weapon_data
 
+        if self.armour_data != None:
+            item.armour_data = self.armour_data
+
         for handle in self.effect_handles:
             item.add_effect_handle(handle)
 

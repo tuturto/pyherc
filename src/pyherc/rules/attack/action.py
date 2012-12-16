@@ -181,6 +181,14 @@ class Damage(object):
             if self.damage_inflicted < 1:
                 self.damage_inflicted = 1
 
+        if target.inventory.armour != None:
+            armour = target.inventory.armour.armour_data.damage_reduction
+        else:
+            armour = 0
+
+        if armour < self.damage_inflicted:
+            self.damage_inflicted = self.damage_inflicted - armour
+
         target.hit_points = target.hit_points - self.damage_inflicted
 
     def __get_damage(self):

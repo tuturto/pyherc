@@ -345,6 +345,8 @@ class TestEffectsInMelee(object):
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
 
+        print self.defender.inventory
+
         self.attacker.perform_attack(1,
                                      self.action_factory,
                                      rng)

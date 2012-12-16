@@ -37,16 +37,16 @@ class Inventory(object):
 
         self.__items = []
 
-        self.__ring = None
-        self.__weapon = None
-        self.__gloves = None
-        self.__boots = None
-        self.__belt = None
-        self.__helm = None
-        self.__necklace = None
-        self.__projectiles = None
-        self.__shield = None
-        self.__armour = None
+        self.ring = None
+        self.weapon = None
+        self.gloves = None
+        self.boots = None
+        self.belt = None
+        self.helm = None
+        self.necklace = None
+        self.projectiles = None
+        self.shield = None
+        self.armour = None
 
     def __len__(self):
         """
@@ -97,18 +97,6 @@ class Inventory(object):
         if item == self.weapon:
             self.weapon = None
 
-    def __get_weapon(self):
-        """
-        Weapon currently in use
-        """
-        return self.__weapon
-
-    def __set_weapon(self, weapon):
-        """
-        Weapon currently in use
-        """
-        self.__weapon = weapon
-
     def _repr_pretty_(self, p, cycle):
         """
         Pretty print for IPython
@@ -123,5 +111,3 @@ class Inventory(object):
             for item in self.__items:
                 p.pretty(item)
                 p.breakable()
-
-    weapon = property(__get_weapon, __set_weapon)
