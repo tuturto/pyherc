@@ -38,27 +38,20 @@ from pyherc.generators import InventoryConfiguration
 
 from pyherc.generators.level.portals import PortalAdderConfiguration
 
-from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
+from pyherc.generators.level.prototiles import FLOOR_NATURAL
 from pyherc.generators.level.prototiles import WALL_EMPTY, WALL_NATURAL
 from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
 
-from herculeum.config.tiles import FLOOR_ROCK, FLOOR_BRICK
+from herculeum.config.tiles import FLOOR_ROCK
 from herculeum.config.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
 from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
 
-from herculeum.config.tiles import CREATURE_RAT_1, CREATURE_RAT_2
-from herculeum.config.tiles import CREATURE_RAT_3, CREATURE_RAT_4
-from herculeum.config.tiles import CREATURE_BEETLE_1, CREATURE_BEETLE_2
-from herculeum.config.tiles import CREATURE_SKELETON_WARRIOR
-
-from pyherc.generators import ItemConfigurations
 from pyherc.generators import ItemConfiguration, WeaponConfiguration
 from pyherc.data.effects import EffectHandle
 
 from pyherc.config.dsl import LevelConfiguration
 from pyherc.generators import CreatureConfiguration
-from pyherc.ai import FlockingHerbivore, SkeletonWarriorAI
-from pyherc.data.effects import DamageModifier
+from pyherc.ai import SkeletonWarriorAI
 
 def init_level(rng, item_generator, creature_generator, level_size):
     """

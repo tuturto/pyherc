@@ -22,15 +22,12 @@
 Module for displaying character
 """
 from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
-from PyQt4.QtGui import QDockWidget, QGridLayout, QDrag, QDialog
-from PyQt4.QtGui import QTextEdit,  QIcon, QPixmap, QApplication
+from PyQt4.QtGui import QGridLayout
 from PyQt4.QtSvg import QSvgWidget
-from PyQt4.QtCore import Qt, QMimeData, pyqtSignal
+from PyQt4.QtCore import Qt
 import PyQt4.QtGui
-import pyherc
 import pyherc.rules.items
 
-from pyherc.data import Item
 from herculeum.gui.widgets import ListView
 
 class CharacterWidget(QWidget):
@@ -44,6 +41,13 @@ class CharacterWidget(QWidget):
         Default constructor
         """
         super(CharacterWidget, self).__init__(parent)
+
+        self.body = None
+        self.finesse = None
+        self.character_icon = None
+        self.hp = None
+        self.mind = None
+        self.mana = None
 
         self.__set_layout(surface_manager,
                           character)

@@ -22,7 +22,6 @@
 Module for displaying end screen
 """
 from PyQt4.QtGui import QDialog, QVBoxLayout, QLabel
-from PyQt4.QtCore import Qt
 from pyherc.data.model import ESCAPED_DUNGEON, DIED_IN_DUNGEON
 from datetime import date
 
@@ -37,6 +36,13 @@ class EndScreen(QDialog):
         Default constructor
         """
         super(EndScreen, self).__init__(parent, flags)
+
+        self.name_label = None
+        self.keymap = None
+        self.result_label = None
+        self.instruction_label = None
+        self.date_label = None
+        self.score_label = None
 
         self.__set_layout(model,
                           config,

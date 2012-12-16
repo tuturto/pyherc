@@ -22,10 +22,10 @@
 Module for displaying inventory
 """
 from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
-from PyQt4.QtGui import QDockWidget, QGridLayout, QDrag, QDialog
-from PyQt4.QtGui import QTextEdit,  QIcon, QPixmap, QApplication
+from PyQt4.QtGui import QGridLayout
+from PyQt4.QtGui import QTextEdit, QPixmap, QApplication
 from PyQt4.QtSvg import QSvgWidget
-from PyQt4.QtCore import Qt, QMimeData, pyqtSignal
+from PyQt4.QtCore import Qt, pyqtSignal
 import PyQt4.QtGui
 import pyherc
 import pyherc.rules.items
@@ -48,6 +48,18 @@ class CharacterInventoryWidget(QWidget):
         self.character = character
         self.config = config
         self.items = []
+        self.head_slot = None
+        self.boots_slot = None
+        self.shield_slot = None
+        self.weapon_slot = None
+        self.character_icon = None
+        self.gloves_slot = None
+        self.ring_slot = None
+        self.arrows_slot = None
+        self.necklace_slot = None
+        self.belt_slot = None
+        self.armour_slot = None
+
 
         self.__set_layout(surface_manager, character, parent)
         self.keymap, self.move_keys = self._construct_keymaps(config)
@@ -334,6 +346,10 @@ class InventoryWidget(QWidget):
         self.character = character
         self.action_factory = action_factory
         self.config = config
+        self.items_carried = None
+        self.items_in_ground = None
+        self.item_description = None
+        self.character_inventory = None
 
         self.__set_layout(surface_manager, character, config)
 

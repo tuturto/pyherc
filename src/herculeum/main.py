@@ -23,8 +23,6 @@ Main entry point for Herculeum - game
 """
 import sys
 import os.path
-import thread
-import time
 
 INSTALL_PATH = os.path.abspath(".")
 sys.path.append(INSTALL_PATH)
@@ -50,7 +48,7 @@ if __name__ == "__main__":
 
     APP.detect_resource_directory()
 
-    pixmap = QPixmap(':splash.png');
+    pixmap = QPixmap(':splash.png')
     splash_screen = QSplashScreen(pixmap)
     splash_screen.show()
 

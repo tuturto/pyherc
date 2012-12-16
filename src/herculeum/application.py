@@ -69,10 +69,10 @@ class Application(object):
         """
         Load configuration
         """
-        file = QFile(':herculeum.qss');
+        file = QFile(':herculeum.qss')
         file.open(QFile.ReadOnly)
-        styleSheet = QLatin1String(file.readAll());
-        self.qt_app.setStyleSheet(styleSheet);
+        styleSheet = QLatin1String(file.readAll())
+        self.qt_app.setStyleSheet(styleSheet)
 
         self.world = Model()
         self.config = Configuration(self.base_path,
@@ -109,16 +109,6 @@ class Application(object):
                             level=self.log_level)
         self.logger = logging.getLogger('pyherc.main.Application')
         self.logger.info("Logging started")
-
-    def change_state(self, state):
-        """
-        Change state of the gui
-
-        Args:
-            state: String specifying which state to display
-        """
-        #TODO: change state
-        #self.gui.change_state(state)
 
     def __get_action_factory(self):
         """

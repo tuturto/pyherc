@@ -22,12 +22,10 @@
 Module for start game window related functionality
 """
 
-from PyQt4.QtGui import QDialog, QPushButton, QSizePolicy, QVBoxLayout
-from PyQt4.QtGui import QHBoxLayout, QComboBox, QIcon, QLabel, QLineEdit
+from PyQt4.QtGui import QDialog, QSizePolicy, QVBoxLayout
+from PyQt4.QtGui import QHBoxLayout, QLabel
 from PyQt4.QtCore import Qt
 import PyQt4.QtCore
-import os
-import pyherc
 
 class StartGameWidget(QDialog):
     """
@@ -50,6 +48,11 @@ class StartGameWidget(QDialog):
         self.generator = generator
 
         self.player_character = None
+        self.class_description = None
+        self.class_name = None
+        self.class_icon = None
+        self.selected_index = None
+        self.class_names = None
 
         self.__set_layout()
 
