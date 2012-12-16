@@ -21,7 +21,7 @@
 """
 Inventory manipulation related factories are defined here
 """
-from pyherc.rules.inventory.action import PickUpAction, DropAction
+from pyherc.rules.inventory.action import PickUpAction, DropAction, WearAction
 from pyherc.rules.factory import SubActionFactory
 from pyherc.aspects import logged
 
@@ -92,6 +92,41 @@ class DropFactory(SubActionFactory):
         :type parameters: InventoryParameters
         """
         return DropAction(parameters.character, parameters.item)
+
+class WearFactory(SubActionFactory):
+    """
+    Factory for creating wearing actions
+
+    .. versionadded:: 0.8
+    """
+    @logged
+    def __init__(self):
+        """
+        Constructor for this factory
+        """
+        self.sub_action = 'wear'
+
+    @logged
+    def can_handle(self, parameters):
+        """
+        Can this factory process these parameters
+
+        :param parameters: parameters to check
+        :returns: True if factory is capable of handling parameters
+        :rtype: Boolean
+        """
+        return self.sub_action == parameters.sub_action
+
+    @logged
+    def get_action(self, parameters):
+        """
+        Create a wear action
+
+        :param parameters: parameters used to control creation
+        :type parameters: InventoryParameters
+        """
+        return WearAction(parameters.character, parameters.item)
+
 
 class InventoryFactory(SubActionFactory):
     """

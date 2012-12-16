@@ -455,6 +455,24 @@ class Character(object):
         action.execute()
 
     @logged
+    def wear(self, item, action_factory):
+        """
+        Wear item from inventory
+
+        :param item: item to wear
+        :type item: Item
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
+
+        .. versionadded:: 0.8
+        """
+        action = action_factory.get_action(
+                                InventoryParameters(self,
+                                                    item,
+                                                    'wear'))
+        action.execute()
+
+    @logged
     def raise_event(self, event):
         """
         Raise event for other creatures to see
