@@ -1,4 +1,4 @@
-nosetests --with-xunit --doctest-tests --with-coverage --cover-html --traverse-namespace --cover-html-dir=./cover --cover-package=pyherc --cover-package=herculeum
+nosetests --with-xunit --doctest-tests --with-coverage --cover-html --traverse-namespace --cover-html-dir=./doc/cover --cover-package=pyherc --cover-package=herculeum
 cd doc
 cd api
 call make doctest
