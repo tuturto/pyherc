@@ -3,9 +3,10 @@ python:
   - "2.6"
   - "2.7"
   - "3.2"
+before_install: ./before_install.sh
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install: 
  - "easy_install -U mockito"
  - "easy_install -U pyhamcrest"
 # command to run tests, e.g. python setup.py test
-script: nosetests -w src/pyherc
+script: nosetests
