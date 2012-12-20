@@ -64,6 +64,4 @@ def setup(app):
                  latex=(visit_itemdescription_node, depart_itemdescription_node),
                  text=(visit_itemdescription_node, depart_itemdescription_node))
 
-    app.add_directive('itemdescription',
-                      ItemDescriptionDirective)
-    #app.connect('env-purge-doc', purge_itemdescription)
+    app.add_directive('itemdescription', ItemDescriptionDirective)
