@@ -42,6 +42,7 @@ class Item(object):
         super(Item, self).__init__()
         #attributes
         self.name = 'prototype'
+        self.description = 'prototype'
         self.appearance = ''
         self.quest_item = 0
         #location

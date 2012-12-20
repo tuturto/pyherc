@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-12-16, 12:28:12 -->
+<!-- Saved: 2012-12-20, 06:40:53 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -226,6 +226,9 @@
     <Source>pyherc/test/unit/test_attack_action.py</Source>
     <Source>pyherc/test/unit/test_wear_action.py</Source>
     <Source>pyherc/test/matchers/inventory.py</Source>
+    <Source>herculeum/sphinx/__init__.py</Source>
+    <Source>herculeum/sphinx/items.py</Source>
+    <Source>herculeum/sphinx/helpers.py</Source>
   </Sources>
   <Forms>
   </Forms>

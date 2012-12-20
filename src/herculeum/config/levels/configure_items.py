@@ -46,6 +46,7 @@ def init_items(context):
 
     config.append(
                   ItemConfiguration(name = 'dagger',
+                                    description = 'Light and simple weapon that does not do much damage. Small size allows skilled wielder to do critical damage easily though.',
                                     cost = 2,
                                     weight = 1,
                                     icons = [surface_manager.add_icon('dagger', ':dagger.png')],
@@ -62,6 +63,7 @@ def init_items(context):
 
     config.append(
                   ItemConfiguration(name = 'sword',
+                                    description = 'Staple tool for adventurers and soldiers alike. Swords do more damage than daggers, but are harder to use effectively.',
                                     cost = 6,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('sword', ':stiletto.png')],
@@ -79,6 +81,7 @@ def init_items(context):
 
     config.append(
                   ItemConfiguration(name = 'axe',
+                                    description = 'Heavy battle axes can cut through flesh and crush through bones. Not very common weapon, because effective use requires years of training.',
                                     cost = 6,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('axe', ':battle-axe.png')],
@@ -96,6 +99,7 @@ def init_items(context):
 
     config.append(
                   ItemConfiguration(name = 'club',
+                                    description = 'Simple and easy to use weapon, that can be used effectively with one hand.',
                                     cost = 6,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('club', ':mace.png')],
@@ -112,6 +116,7 @@ def init_items(context):
 
     config.append(
                   ItemConfiguration(name = 'warhammer',
+                                    description = 'Heavy two-handed weapon that crushes through but the strongest defences. Rare sight in the battle field, because of the huge weight.',
                                     cost = 6,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('warhammer', ':gavel.png')],
@@ -128,6 +133,7 @@ def init_items(context):
 
     config.append(
                   ItemConfiguration(name = 'spear',
+                                    description = 'One handed piercing weapon that can be devastating in hands of skilled user.',
                                     cost = 6,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('spear', ':barbed-spear.png')],
@@ -144,6 +150,7 @@ def init_items(context):
 
     config.append(
                   ItemConfiguration(name = 'whip',
+                                    description = 'Weapon of choice for archeologists and vampire hunters. Not particularly strong, but very versatile.',
                                     cost = 6,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('whip', ':whip.png')],
@@ -160,6 +167,7 @@ def init_items(context):
 
     config.append(
                   ItemConfiguration(name = 'sickle',
+                                    description = 'Farming implement repurposed on the battle field. Light and common weapon that requires very specifically trained user.',
                                     cost = 6,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('sickle', ':scythe.png')],
@@ -176,6 +184,7 @@ def init_items(context):
 
     config.append(
                   ItemConfiguration(name = 'morning star',
+                                    description = 'Spiked club, guaranteed to pierce through armours and crush through bones. Difficult to use weapon that requires years of practice.',
                                     cost = 6,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('morning star', ':spiked-mace.png')],

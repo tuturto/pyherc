@@ -92,6 +92,7 @@ class ItemGenerator(object):
         item = Item(EffectsCollection())
 
         item.name = item_specification.name
+        item.description = item_specification.description
         item.icon = random.choice(item_specification.icons)
         item.cost = item_specification.cost
         item.weight = item_specification.weight
@@ -209,11 +210,12 @@ class ItemConfiguration(object):
     @logged
     def __init__(self, name, cost, weight, icons, types, rarity,
                  weapon_configration = None, effect_handles = None,
-                 armour_configuration = None):
+                 armour_configuration = None, description = ''):
         """
         Default constructor
         """
         self.name = name
+        self.description = description
         self.cost = cost
         self.weight = weight
         self.icons = icons
