@@ -22,9 +22,13 @@
 Module for item statistics
 """
 from docutils import nodes
-from docutils.parsers.rst import directives
-from docutils.parsers.rst import Directive
+from docutils.parsers.rst import directives, Directive
+from docutils.parsers.rst.directives.images import Image
 from herculeum.sphinx.helpers import with_config
+import os.path
+import re
+from PyQt4.QtGui import QImage
+from PyQt4.QtCore import Qt
 
 class ItemDescription(nodes.General, nodes.Element):
     pass
@@ -58,10 +62,32 @@ class ItemDescriptionDirective(Directive):
 
         return [para]
 
+class ItemImageDirective(Image):
+
+    @with_config
+    def run(self, config):
+        folder = os.path.abspath('./source/generated')
+
+        generator = config.item_generator
+        item = generator.generate_item(name = self.arguments[0])
+        file_name = item.name
+        file_name = file_name + '.png'
+        file_name = file_name.replace(' ', '')
+
+        surface_manager = config.surface_manager
+        icon = surface_manager.get_icon(item.icon)
+        img = icon.toImage()
+        new_image = img.convertToFormat(QImage.Format_RGB32,
+                                        Qt.DiffuseAlphaDither)
+
+        new_image.save(os.path.join(folder, file_name))
+
+        self.arguments[0] = os.path.join('generated/', file_name)
+
+        return super(ItemImageDirective, self).run()
+
 def setup(app):
-    app.add_node(ItemDescription,
-                 html=(visit_itemdescription_node, depart_itemdescription_node),
-                 latex=(visit_itemdescription_node, depart_itemdescription_node),
-                 text=(visit_itemdescription_node, depart_itemdescription_node))
+    app.add_node(ItemDescription)
 
     app.add_directive('itemdescription', ItemDescriptionDirective)
+    app.add_directive('itemimage', ItemImageDirective)

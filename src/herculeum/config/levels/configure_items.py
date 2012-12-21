@@ -202,6 +202,7 @@ def init_items(context):
 
     config.append(
                   ItemConfiguration(name = 'robes',
+                                    description = 'Simple robes are favoured by spell casters. They do not hinder magical abilities and strong wizards are more than capable of deflecting attacks anyway.',
                                     cost = 2,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('robes', ':robes.png')],
@@ -212,6 +213,7 @@ def init_items(context):
                                                 speed_modifier = 1.0)))
     config.append(
                   ItemConfiguration(name = 'leather armour',
+                                    description = 'Armour made of hardened leather. While it offers only meager protection, it allows the wearer to move very swiftly.',
                                     cost = 4,
                                     weight = 6,
                                     icons = [surface_manager.add_icon('leather armour', ':leather_armour.png')],
@@ -222,6 +224,7 @@ def init_items(context):
                                                 speed_modifier = 1.0)))
     config.append(
                   ItemConfiguration(name = 'chainmail',
+                                    description = 'Armour made of countless interlocking metal rings. Somewhat heavier than leather armour.',
                                     cost = 8,
                                     weight = 12,
                                     icons = [surface_manager.add_icon('chainmail', ':chainmail.png')],
@@ -232,6 +235,7 @@ def init_items(context):
                                                 speed_modifier = 0.9)))
     config.append(
                   ItemConfiguration(name = 'scale mail',
+                                    description = 'Scale mail is made of interlocking scales, in a similar manner to chainmail. It offers better protection, while being heavier and harder to move around with.',
                                     cost = 12,
                                     weight = 12,
                                     icons = [surface_manager.add_icon('scale mail', ':scale_mail.png')],
@@ -242,6 +246,7 @@ def init_items(context):
                                                 speed_modifier = 0.7)))
     config.append(
                   ItemConfiguration(name = 'plate mail',
+                                    description = 'Ultimate solution for protection. Heavy plates cover wearer from head to toe, offering great protection against attacks.',
                                     cost = 2,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('plate mail', ':plate_mail.png')],

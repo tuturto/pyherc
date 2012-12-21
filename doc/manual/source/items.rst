@@ -8,55 +8,55 @@ Weapons
 
 Dagger 
 ======
-.. image:: images/dagger.png 
+.. itemimage:: dagger
 
 .. itemdescription:: dagger
 
 Sword
 =====
-.. image:: images/stiletto.png
+.. itemimage:: sword
 
 .. itemdescription:: sword
 
 Axe
 ===
-.. image:: images/battle-axe.png
+.. itemimage:: axe
 
 .. itemdescription:: axe
 
 Club
 ====
-.. image:: images/mace.png
+.. itemimage:: club
 
 .. itemdescription:: club
 
 Warhammer
 =========
-.. image:: images/gavel.png
+.. itemimage:: warhammer
 
 .. itemdescription:: warhammer
 
 Spear
 =====
-.. image:: images/barbed-spear.png
+.. itemimage:: spear
 
 .. itemdescription:: spear
 
 Whip
 ====
-.. image:: images/whip.png
+.. itemimage:: whip
 
 .. itemdescription:: whip
 
 Sickle
 ======
-.. image:: images/scythe.png
+.. itemimage:: sickle
 
 .. itemdescription:: sickle
 
 Morning star
 ============
-.. image:: images/spiked-mace.png
+.. itemimage:: morning star
 
 .. itemdescription:: morning star
 
@@ -90,40 +90,33 @@ Armour
 ******
 Robes
 =====
-.. image:: images/robes.png
+.. itemimage:: robes
 
-Simple robes are favoured by spell casters. They do not hinder magical
-abilities and strong wizards are more than capable of deflecting attacks
-anyway.
+.. itemdescription:: robes
 
 Leather armour
 ==============
-.. image:: images/leather_armour.png
+.. itemimage:: leather armour
 
-Armour made of hardened leather. While it offers only meager protection, it
-allows the wearer to move very swiftly.
+.. itemdescription:: leather armour
 
 Chainmail
 =========
-.. image:: images/chainmail.png
+.. itemimage:: chainmail
 
-Armour made of countless interlocking metal rings. Somewhat heavier than
-leather armour.
+.. itemdescription:: chainmail
 
 Scale mail
 ==========
-.. image:: images/scale_mail.png
+.. itemimage:: scale mail
 
-Scale mail is made of interlocking scales, in a similar manner to chainmail.
-It offers better protection, while being heavier and harder to move around
-with.
+.. itemdescription:: scale mail
 
 Plate mail
 ==========
-.. image:: images/plate_mail.png
+.. itemimage:: plate mail
 
-Ultimate solution for protection. Heavy plates cover wearer from head to toe,
-offering great protection against attacks.
+.. itemdescription:: plate mail
 
 Armour tables
 =============
@@ -159,6 +152,8 @@ Holy water
 
 Healing potion
 --------------
+.. itemimage:: healing potion
+
 Potions of healing are used to soothe and heal pains and damage of their user.
 Effect of healing potion is usually gradual and it takes a while for the full
 benefit to be received.
@@ -179,6 +174,8 @@ Weapons
 
 Whip of Ashmque
 ---------------
+.. itemimage:: whip of ashmque
+
 From the Tome of Um'bano:
 
   *The whip of Ashmque is a horrendous weapon. Thong of the whip is made of 

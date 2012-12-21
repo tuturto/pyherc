@@ -37,6 +37,7 @@ Other notes
  - 41_ player character configuration
  - Aspyct is no longer needed to run the game
  - behave tests moved under src/pyherc/test/BDD
+ - parts of the manual are generated directly from game data
 
 .. _43: https://github.com/tuturto/pyherc/issues/43
 .. _41: https://github.com/tuturto/pyherc/issues/41
