@@ -32,35 +32,43 @@ from PyQt4.QtGui import QImage
 from PyQt4.QtCore import Qt
 
 class ItemDescription(nodes.General, nodes.Element):
+    """
+    Node for describing items
+    """
     pass
 
 class ItemTable(nodes.General, nodes.Element):
+    """
+    Node for presenting multiple items in a table
+    """
     pass
 
-def visit_itemdescription_node(self, node):
-    self.visit_admonition(node)
-
-def depart_itemdescription_node(self, node):
-    self.depart_admonition(node)
-
 def make_row(*args):
-        row_node = nodes.row()
+    """
+    Utility method to create a table row
 
-        for cell in args:
-            entry = nodes.entry()
-            para = nodes.paragraph()
-            para += nodes.Text(cell, cell)
-            entry += para
-            row_node += entry
+    .. note:: accepts multiple arguments, each argument is a text for a new cell
+    """
+    row_node = nodes.row()
 
-        return row_node
+    for cell in args:
+        entry = nodes.entry()
+        para = nodes.paragraph()
+        para += nodes.Text(cell, cell)
+        entry += para
+        row_node += entry
+
+    return row_node
 
 def make_armour_table(env, node):
+    """
+    Utility method to create a table for armours
+    """
     table = nodes.table()
     tgroup = nodes.tgroup(cols=3)
     table += tgroup
     for i in range(4):
-        colspec = nodes.colspec(colwidth = 10)
+        colspec = nodes.colspec(colwidth = 1)
         tgroup += colspec
 
     rows = []
@@ -90,11 +98,14 @@ def make_armour_table(env, node):
     return table
 
 def make_weapon_table(env, node):
+    """
+    Utility method to create a table for weapons
+    """
     table = nodes.table()
     tgroup = nodes.tgroup(cols=7)
     table += tgroup
     for i in range(7):
-        colspec = nodes.colspec(colwidth = 10)
+        colspec = nodes.colspec(colwidth = 1)
         tgroup += colspec
 
     rows = []
@@ -148,6 +159,9 @@ def make_weapon_table(env, node):
     return table
 
 def process_item_descriptions(app, doctree, fromdocname):
+    """
+    Process item descriptions after document tree has been built
+    """
     env = app.builder.env
 
     for node in doctree.traverse(ItemTable):
@@ -160,6 +174,9 @@ def process_item_descriptions(app, doctree, fromdocname):
         node.replace_self(table)
 
 class ItemTableDirective(Directive):
+    """
+    Directive to insert a table of items
+    """
     has_content = False
     final_argument_whitespace = True
     option_spec = {'type': unchanged}
@@ -171,8 +188,9 @@ class ItemTableDirective(Directive):
 
 
 class ItemDescriptionDirective(Directive):
-
-    # this enables content in the directive
+    """
+    Directive to insert item description
+    """
     has_content = False
     required_arguments = 1
     final_argument_whitespace = True
@@ -202,6 +220,9 @@ class ItemDescriptionDirective(Directive):
         return [para]
 
 class ItemImageDirective(Image):
+    """
+    Directive to insert image of an item
+    """
 
     @with_config
     def run(self, config):
@@ -226,12 +247,22 @@ class ItemImageDirective(Image):
         return super(ItemImageDirective, self).run()
 
 class DocumentationContext(object):
+    """
+    Context used to store data during doctree building
+    """
 
     def __init__(self):
+        """
+        Default constructor
+        """
         super(DocumentationContext, self).__init__()
         self.items = []
 
 def setup(app):
+    """
+    Setup integration with Sphinx
+    """
+
     app.add_node(ItemDescription)
     app.add_node(ItemTable)
 
