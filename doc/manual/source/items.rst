@@ -62,6 +62,9 @@ Morning star
 
 Item tables
 ===========
+.. itemtable::
+   :type: weapon
+
 +--------------+--------+----------+----------+----------------+----------+------------+----------+
 | Weapon       | Damage | Critical | Critical | Damage Types   | Type     | Weight     | Rarity   |
 |              |        | Range    | Damage   |                |          | class      |          |
@@ -120,6 +123,8 @@ Plate mail
 
 Armour tables
 =============
+
+
 +--------------+-----------+-------+---------+
 | Armour       | Damage    | Speed | Casting |
 |              | reduction |       |         |

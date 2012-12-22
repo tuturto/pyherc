@@ -24,6 +24,7 @@ Module for item statistics
 from docutils import nodes
 from docutils.parsers.rst import directives, Directive
 from docutils.parsers.rst.directives.images import Image
+from docutils.parsers.rst.directives import unchanged
 from herculeum.sphinx.helpers import with_config
 import os.path
 import re
@@ -33,11 +34,119 @@ from PyQt4.QtCore import Qt
 class ItemDescription(nodes.General, nodes.Element):
     pass
 
+class ItemTable(nodes.General, nodes.Element):
+    pass
+
 def visit_itemdescription_node(self, node):
     self.visit_admonition(node)
 
 def depart_itemdescription_node(self, node):
     self.depart_admonition(node)
+
+def process_item_descriptions(app, doctree, fromdocname):
+    env = app.builder.env
+
+    for node in doctree.traverse(ItemTable):
+
+        table = nodes.table()
+        tgroup = nodes.tgroup(cols=8)
+        table += tgroup
+        for i in range(8):
+            colspec = nodes.colspec(colwidth = 10)
+            tgroup += colspec
+
+        rows = []
+        for item_entry in (x for x in env.pyherc_context.items
+                           if node.options['type'] in x['item'].tags):
+            row_node = nodes.row()
+            item = item_entry['item']
+
+            entry = nodes.entry()
+            para = nodes.paragraph()
+            para += nodes.Text(item.name, item.name)
+            entry += para
+            row_node += entry
+
+            entry = nodes.entry()
+            para = nodes.paragraph()
+            damage_str = str.join(' / ', [str(x[0]) for x in item.weapon_data.damage])
+            para += nodes.Text(damage_str, damage_str)
+            entry += para
+            row_node += entry
+
+            entry = nodes.entry()
+            para = nodes.paragraph()
+            para += nodes.Text(item.weapon_data.critical_range, item.weapon_data.critical_range)
+            entry += para
+            row_node += entry
+
+            entry = nodes.entry()
+            para = nodes.paragraph()
+            para += nodes.Text(item.weapon_data.critical_damage, item.weapon_data.critical_damage)
+            entry += para
+            row_node += entry
+
+            entry = nodes.entry()
+            para = nodes.paragraph()
+            damage_str = str.join(' / ', [str(x[1]) for x in item.weapon_data.damage])
+            para += nodes.Text(damage_str, damage_str)
+            entry += para
+            row_node += entry
+
+            if 'simple weapon' in item.tags:
+                weapon_type = 'simple'
+            elif 'martial weapon' in item.tags:
+                weapon_type = 'martial'
+            elif 'exotic weapon' in item.tags:
+                weapon_type = 'exotic'
+            else:
+                weapon_type = ' '
+
+            entry = nodes.entry()
+            para = nodes.paragraph()
+            para += nodes.Text(weapon_type, weapon_type)
+            entry += para
+            row_node += entry
+
+            if 'light' in item.tags:
+                weapon_weight = 'light'
+            elif 'one-handed' in item.tags:
+                weapon_weight = 'one-handed'
+            elif 'two-handed' in item.tags:
+                weapon_weight = 'two-handed'
+            else:
+                weapon_weight = ' '
+
+            entry = nodes.entry()
+            para = nodes.paragraph()
+            para += nodes.Text(weapon_weight, weapon_weight)
+            entry += para
+            row_node += entry
+
+            entry = nodes.entry()
+            para = nodes.paragraph()
+            para += nodes.Text(item.rarity, item.rarity)
+            entry += para
+            row_node += entry
+
+            rows.append(row_node)
+
+        tbody = nodes.tbody()
+        tbody.extend(rows)
+        tgroup += tbody
+
+        node.replace_self(table)
+
+class ItemTableDirective(Directive):
+    has_content = False
+    final_argument_whitespace = True
+    option_spec = {'type': unchanged}
+
+    def run(self):
+        node = ItemTable('')
+        node.options = self.options
+        return [node]
+
 
 class ItemDescriptionDirective(Directive):
 
@@ -59,6 +168,14 @@ class ItemDescriptionDirective(Directive):
         item = generator.generate_item(name = self.arguments[0])
 
         para += nodes.Text(item.description, item.description)
+
+        if not hasattr(env, 'pyherc_context'):
+            env.pyherc_context = DocumentationContext()
+
+        env.pyherc_context.items.append({'docname': env.docname,
+                                         'lineno': self.lineno,
+                                         'item': item,
+                                         'target': targetnode})
 
         return [para]
 
@@ -86,8 +203,18 @@ class ItemImageDirective(Image):
 
         return super(ItemImageDirective, self).run()
 
+class DocumentationContext(object):
+
+    def __init__(self):
+        super(DocumentationContext, self).__init__()
+        self.items = []
+
 def setup(app):
     app.add_node(ItemDescription)
+    app.add_node(ItemTable)
 
     app.add_directive('itemdescription', ItemDescriptionDirective)
+    app.add_directive('itemtable', ItemTableDirective)
     app.add_directive('itemimage', ItemImageDirective)
+
+    app.connect('doctree-resolved', process_item_descriptions)
