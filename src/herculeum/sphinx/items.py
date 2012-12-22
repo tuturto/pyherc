@@ -43,97 +43,119 @@ def visit_itemdescription_node(self, node):
 def depart_itemdescription_node(self, node):
     self.depart_admonition(node)
 
+def make_row(*args):
+        row_node = nodes.row()
+
+        for cell in args:
+            entry = nodes.entry()
+            para = nodes.paragraph()
+            para += nodes.Text(cell, cell)
+            entry += para
+            row_node += entry
+
+        return row_node
+
+def make_armour_table(env, node):
+    table = nodes.table()
+    tgroup = nodes.tgroup(cols=3)
+    table += tgroup
+    for i in range(4):
+        colspec = nodes.colspec(colwidth = 10)
+        tgroup += colspec
+
+    rows = []
+
+    thead = nodes.thead()
+
+    row_node = make_row('armour', 'damage reduction', 'speed modifier')
+    thead += row_node
+
+    tgroup += thead
+
+    for item_entry in (x for x in env.pyherc_context.items
+                       if node.options['type'] in x['item'].tags):
+
+        item = item_entry['item']
+
+        row_node = make_row(item.name,
+                            item.armour_data.damage_reduction,
+                            item.armour_data.speed_modifier)
+
+        rows.append(row_node)
+
+    tbody = nodes.tbody()
+    tbody.extend(rows)
+    tgroup += tbody
+
+    return table
+
+def make_weapon_table(env, node):
+    table = nodes.table()
+    tgroup = nodes.tgroup(cols=7)
+    table += tgroup
+    for i in range(7):
+        colspec = nodes.colspec(colwidth = 10)
+        tgroup += colspec
+
+    rows = []
+
+    thead = nodes.thead()
+
+    row_node = make_row('weapon', 'damage', 'critical range',
+                        'critical damage', 'damage types', 'type',
+                        'weight class')
+    thead += row_node
+
+    tgroup += thead
+
+    for item_entry in (x for x in env.pyherc_context.items
+                       if node.options['type'] in x['item'].tags):
+
+        item = item_entry['item']
+
+        damage_str = str.join(' / ', [str(x[0]) for x in item.weapon_data.damage])
+        damage_types_str = str.join(' / ', [str(x[1]) for x in item.weapon_data.damage])
+
+        if 'simple weapon' in item.tags:
+            weapon_type = 'simple'
+        elif 'martial weapon' in item.tags:
+            weapon_type = 'martial'
+        elif 'exotic weapon' in item.tags:
+            weapon_type = 'exotic'
+        else:
+            weapon_type = ' '
+
+        if 'light weapon' in item.tags:
+            weapon_weight = 'light'
+        elif 'one-handed' in item.tags:
+                weapon_weight = 'one-handed'
+        elif 'two-handed' in item.tags:
+            weapon_weight = 'two-handed'
+        else:
+            weapon_weight = ' '
+
+        row_node = make_row(item.name, damage_str,
+                            item.weapon_data.critical_range,
+                            item.weapon_data.critical_damage,
+                            damage_types_str, weapon_type, weapon_weight)
+
+        rows.append(row_node)
+
+    tbody = nodes.tbody()
+    tbody.extend(rows)
+    tgroup += tbody
+
+    return table
+
 def process_item_descriptions(app, doctree, fromdocname):
     env = app.builder.env
 
     for node in doctree.traverse(ItemTable):
 
-        table = nodes.table()
-        tgroup = nodes.tgroup(cols=8)
-        table += tgroup
-        for i in range(8):
-            colspec = nodes.colspec(colwidth = 10)
-            tgroup += colspec
-
-        rows = []
-        for item_entry in (x for x in env.pyherc_context.items
-                           if node.options['type'] in x['item'].tags):
-            row_node = nodes.row()
-            item = item_entry['item']
-
-            entry = nodes.entry()
-            para = nodes.paragraph()
-            para += nodes.Text(item.name, item.name)
-            entry += para
-            row_node += entry
-
-            entry = nodes.entry()
-            para = nodes.paragraph()
-            damage_str = str.join(' / ', [str(x[0]) for x in item.weapon_data.damage])
-            para += nodes.Text(damage_str, damage_str)
-            entry += para
-            row_node += entry
-
-            entry = nodes.entry()
-            para = nodes.paragraph()
-            para += nodes.Text(item.weapon_data.critical_range, item.weapon_data.critical_range)
-            entry += para
-            row_node += entry
-
-            entry = nodes.entry()
-            para = nodes.paragraph()
-            para += nodes.Text(item.weapon_data.critical_damage, item.weapon_data.critical_damage)
-            entry += para
-            row_node += entry
-
-            entry = nodes.entry()
-            para = nodes.paragraph()
-            damage_str = str.join(' / ', [str(x[1]) for x in item.weapon_data.damage])
-            para += nodes.Text(damage_str, damage_str)
-            entry += para
-            row_node += entry
-
-            if 'simple weapon' in item.tags:
-                weapon_type = 'simple'
-            elif 'martial weapon' in item.tags:
-                weapon_type = 'martial'
-            elif 'exotic weapon' in item.tags:
-                weapon_type = 'exotic'
-            else:
-                weapon_type = ' '
-
-            entry = nodes.entry()
-            para = nodes.paragraph()
-            para += nodes.Text(weapon_type, weapon_type)
-            entry += para
-            row_node += entry
-
-            if 'light' in item.tags:
-                weapon_weight = 'light'
-            elif 'one-handed' in item.tags:
-                weapon_weight = 'one-handed'
-            elif 'two-handed' in item.tags:
-                weapon_weight = 'two-handed'
-            else:
-                weapon_weight = ' '
-
-            entry = nodes.entry()
-            para = nodes.paragraph()
-            para += nodes.Text(weapon_weight, weapon_weight)
-            entry += para
-            row_node += entry
-
-            entry = nodes.entry()
-            para = nodes.paragraph()
-            para += nodes.Text(item.rarity, item.rarity)
-            entry += para
-            row_node += entry
-
-            rows.append(row_node)
-
-        tbody = nodes.tbody()
-        tbody.extend(rows)
-        tgroup += tbody
+        if node.options['type'] == 'weapon':
+            table = make_weapon_table(env, node)
+        elif node.options['type'] == 'armour':
+            table = make_armour_table(env, node)
 
         node.replace_self(table)
 
