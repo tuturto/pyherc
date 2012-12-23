@@ -35,8 +35,14 @@ world = None
 config = None
 
 def with_config(fn):
+    """
+    Decorator to inject configuration
+    """
 
     def configured(*args, **kwargs):
+        """
+        Inject configuration
+        """
 
         if herculeum.sphinx.helpers.config == None:
            herculeum.sphinx.helpers.qt_app = QApplication([])
