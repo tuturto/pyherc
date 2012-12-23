@@ -27,7 +27,7 @@ from .combat import AttackHitEvent, AttackNothingEvent, AttackMissEvent
 from .poison import PoisonTriggeredEvent, PoisonAddedEvent, PoisonEndedEvent
 from .healing import HealTriggeredEvent, HealAddedEvent, HealEndedEvent
 from .death import DeathEvent
-from .inventory import PickUpEvent, DropEvent
+from .inventory import PickUpEvent, DropEvent, EquipEvent, UnEquipEvent
 from .hitpoints import HitPointsChangedEvent
 from .damage import DamageAddedEvent, DamageTriggeredEvent, DamageEndedEvent
 from .perception import LoseFocusEvent, NoticeEvent

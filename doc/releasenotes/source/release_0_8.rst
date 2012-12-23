@@ -9,9 +9,11 @@ New features
  - amount of damage done is reported more clearly
  - new area: Crimson Lair
  - weapons may have special effects that are triggered in combat
+ - 44_ feature: armours
  - 43_ feature: support for vi and cursor keys
  - 37_ feature: creating a new character
  - 36_ feature: escaping the dungeon
+ - equiping and unequiping raise events
 
 **********
 Fixed bugs
@@ -39,6 +41,7 @@ Other notes
  - behave tests moved under src/pyherc/test/BDD
  - parts of the manual are generated directly from game data
 
+.. _44: https://github.com/tuturto/pyherc/issues/44
 .. _43: https://github.com/tuturto/pyherc/issues/43
 .. _41: https://github.com/tuturto/pyherc/issues/41
 .. _37: https://github.com/tuturto/pyherc/issues/37

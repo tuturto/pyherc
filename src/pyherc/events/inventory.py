@@ -102,3 +102,83 @@ class DropEvent(Event):
                                                  self.item.name)
 
         return description
+
+class EquipEvent(Event):
+    """
+    Event that can be used to relay information about item being equiped
+
+    .. versionadded:: 0.8
+    """
+    def __init__(self, character, item):
+        """
+        Default constructor
+
+        :param character: character equiping the item
+        :type character: Character
+        :param item: item being equipped
+        :type item: Item
+        """
+        super(EquipEvent, self).__init__(event_type = 'equip',
+                                         level = character.level,
+                                         location = character.location,
+                                         affected_tiles = [])
+
+        self.character = character
+        self.item = item
+
+    def get_description(self, point_of_view):
+        """
+        Description of the event
+
+        :param point_of_view: point of view for description
+        :type point_of_view: Character
+        :returns: description of the event
+        :rtype: string
+        """
+        if point_of_view == self.character:
+            description = 'You equip {0}'.format(self.item.name)
+        else:
+            description = '{0} equips {1}'.format(self.character.name,
+                                                  self.item.name)
+
+        return description
+
+class UnEquipEvent(Event):
+    """
+    Event that can be used to relay information about item being unequiped
+
+    .. versionadded:: 0.8
+    """
+    def __init__(self, character, item):
+        """
+        Default constructor
+
+        :param character: character unequiping the item
+        :type character: Character
+        :param item: item being unequipped
+        :type item: Item
+        """
+        super(UnEquipEvent, self).__init__(event_type = 'unequip',
+                                           level = character.level,
+                                           location = character.location,
+                                           affected_tiles = [])
+
+        self.character = character
+        self.item = item
+
+    def get_description(self, point_of_view):
+        """
+        Description of the event
+
+        :param point_of_view: point of view for description
+        :type point_of_view: Character
+        :returns: description of the event
+        :rtype: string
+        """
+        if point_of_view == self.character:
+            description = 'You unequip {0}'.format(self.item.name)
+        else:
+            description = '{0} unequips {1}'.format(self.character.name,
+                                                    self.item.name)
+
+        return description
