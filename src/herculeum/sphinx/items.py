@@ -25,7 +25,7 @@ from docutils import nodes
 from docutils.parsers.rst import directives, Directive
 from docutils.parsers.rst.directives.images import Image
 from docutils.parsers.rst.directives import unchanged
-from herculeum.sphinx.helpers import with_config
+from herculeum.sphinx.helpers import with_config, shutdown_application
 import os.path
 import re
 from PyQt4.QtGui import QImage
@@ -271,3 +271,4 @@ def setup(app):
     app.add_directive('itemimage', ItemImageDirective)
 
     app.connect('doctree-resolved', process_item_descriptions)
+    app.connect('env-purge-doc', shutdown_application)

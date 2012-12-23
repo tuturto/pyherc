@@ -57,3 +57,10 @@ def with_config(fn):
         return fn(*args, **kwargs)
 
     return configured
+
+def shutdown_application(app, env, docname):
+    """
+    Shutdown qt application
+    """
+    if herculeum.sphinx.helpers.qt_app != None:
+        herculeum.sphinx.helpers.qt_app = None

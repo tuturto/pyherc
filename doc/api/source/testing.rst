@@ -12,7 +12,6 @@ Tools currently in use are:
  * behave_
  * mockito-python_
  * pyhamcrest_
- * qc_
 
 Nosetests are mainly used to help the design and development of the software.
 They form nice safety net that catches bugs that might otherwise go unnoticed
@@ -255,7 +254,6 @@ online tutorial_.
 .. _doctest: http://docs.python.org/library/doctest.html
 .. _behave: http://pypi.python.org/pypi/behave
 .. _mockito-python: http://code.google.com/p/mockito-python/
-.. _qc: https://github.com/dbravender/qc
 .. _pyhamcrest: http://pypi.python.org/pypi/PyHamcrest
 .. _nosy: http://pypi.python.org/pypi/nosy
 .. _tutorial: http://packages.python.org/behave/tutorial.html

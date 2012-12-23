@@ -27,7 +27,8 @@ import sys, os
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.doctest',
-              'sphinx.ext.graphviz']
+              'sphinx.ext.graphviz',
+              'herculeum.sphinx.items']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['.templates']
