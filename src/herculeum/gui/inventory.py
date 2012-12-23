@@ -605,6 +605,7 @@ class ItemBox(QWidget):
 
                 self.grid_layout.addWidget(new_item, y, x)
                 self.items.append(new_item)
+                new_item.ItemFocused.connect(self.on_item_focused)
 
 
         self.setLayout(self.grid_layout)
