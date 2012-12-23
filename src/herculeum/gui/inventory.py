@@ -421,8 +421,23 @@ class InventoryWidget(QWidget):
 
         .. versionadded:: 0.6
         """
-        self.item_description.set_text(item.get_name(self.character,
-                                                     True))
+        item_description = item.get_name(self.character,
+                                         True)
+        if item.weapon_data != None:
+            data = item.weapon_data
+            item_description += '\ndamage: '
+            item_description += ' / '.join((str(x[0]) for x in data.damage))
+            item_description += ' ('
+            item_description += ' / '.join((str(x[1]) for x in data.damage))
+            item_description += ')\n'
+        elif item.armour_data != None:
+            data = item.armour_data
+            item_description += '\ndamage reduction: {0}\n'.format(data.damage_reduction)
+            item_description += 'speed modifier: {0}\n'.format(data.speed_modifier)
+
+        item_description += '\n' + item.description
+
+        self.item_description.set_text(item_description)
 
     def pick_up_item(self, item):
         """
