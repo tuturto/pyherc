@@ -455,11 +455,11 @@ class Character(object):
         action.execute()
 
     @logged
-    def wear(self, item, action_factory):
+    def equip(self, item, action_factory):
         """
         Wear item from inventory
 
-        :param item: item to wear
+        :param item: item to equip
         :type item: Item
         :param action_factory: factory to create actions
         :type action_factory: ActionFactory
@@ -469,7 +469,7 @@ class Character(object):
         action = action_factory.get_action(
                                 InventoryParameters(self,
                                                     item,
-                                                    'wear'))
+                                                    'equip'))
         action.execute()
 
     @logged

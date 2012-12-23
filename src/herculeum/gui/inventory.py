@@ -502,7 +502,7 @@ class InventoryWidget(QWidget):
                                      item,
                                      False)
         elif item.get_main_type() == 'armour':
-            self.character.wear(item, self.action_factory)
+            self.character.equip(item, self.action_factory)
 
         self.update_inventory()
 

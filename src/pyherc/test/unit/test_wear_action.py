@@ -53,6 +53,6 @@ class TestWearingArmour(object):
                                 .with_inventory_factory()
                                 .build())
 
-        character.wear(armour, action_factory)
+        character.equip(armour, action_factory)
 
         assert_that(character, is_wearing(armour))
