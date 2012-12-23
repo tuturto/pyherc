@@ -28,20 +28,23 @@ import sys
 import logging
 import herculeum.config.levels
 import herculeum.gui.resources
-from herculeum.gui import MainWindow, HelpProvider
 from PyQt4.QtGui import QApplication
-from PyQt4.QtCore import QFile, QLatin1String, Qt
-import PyQt4.QtCore
 
-qt_app = QApplication([])
-
-world = Model()
-config = Configuration('', world, herculeum.config.levels)
-config.initialise()
+qt_app = None
+world = None
+config = None
 
 def with_config(fn):
 
     def configured(*args, **kwargs):
+
+        if herculeum.sphinx.helpers.config == None:
+           herculeum.sphinx.helpers.qt_app = QApplication([])
+           herculeum.sphinx.helpers.world = Model()
+           herculeum.sphinx.helpers.config = Configuration('',
+                                            herculeum.sphinx.helpers.world,
+                                            herculeum.config.levels)
+           herculeum.sphinx.helpers.config.initialise()
 
         kwargs['config'] = config
 
