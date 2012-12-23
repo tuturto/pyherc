@@ -61,7 +61,7 @@ class SkeletonWarriorAI(object):
         del self.character.short_term_memory[:]
 
         if self.character.inventory.weapon == None:
-            self._wield_weapon(model)
+            self._wield_weapon(action_factory)
 
         c_location = self.character.location
         p_location = model.player.location
@@ -87,7 +87,7 @@ class SkeletonWarriorAI(object):
             self._combat(model, action_factory, rng)
 
     @logged
-    def _wield_weapon(self, model):
+    def _wield_weapon(self, action_factory):
         """
         Check if it is possible to wield a weapon and do so
         """
@@ -95,10 +95,8 @@ class SkeletonWarriorAI(object):
                    self.character.inventory
                    if item.weapon_data != None]
 
-        pyherc.rules.items.wield(model = model,
-                                 character = self.character,
-                                 item = weapons[0],
-                                 dual_wield = False)
+        self.character.equip(weapons[0],
+                             action_factory)
 
     @logged
     def _patrol(self, model, action_factory, rng):

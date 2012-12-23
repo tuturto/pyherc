@@ -25,7 +25,6 @@ Module for classes testing Item related operations
 import pyherc
 import pyherc.generators.item
 import pyherc.data.dungeon
-import pyherc.rules.items
 from random import Random
 from pyherc.data import Level, Character
 from pyherc.test.builders import ItemBuilder
@@ -50,6 +49,7 @@ class TestItems(object):
         self.level = None
         self.dungeon = None
         self.character = None
+        self.action_factory = None
 
     def setup(self):
         """
@@ -68,30 +68,41 @@ class TestItems(object):
 
         self.level.add_item(self.item, (5, 5))
 
+        self.action_factory = (ActionFactoryBuilder()
+                                    .with_inventory_factory()
+                                    .build())
+
     #pylint: disable=E1103
     def test_wield_weapon(self):
         """
         Test that character can wield a weapon (dagger)
         """
-        item = ItemBuilder().build()
+        item = (ItemBuilder()
+                    .with_damage(2, 'piercing')
+                    .build())
 
         assert_that(item, is_not(equal_to(self.character.inventory.weapon)))
 
-        pyherc.rules.items.wield(mock(), self.character, item)
+        self.character.equip(item,
+                             self.action_factory)
 
-        assert_that(item, is_(equal_to(self.character.inventory.weapon)))
+        assert_that(self.character.inventory.weapon, is_(equal_to(item)))
 
     #pylint: disable=E1103
     def test_unwielding_item(self):
         """
         Test that wielded item can be unwielded
         """
-        item = ItemBuilder().build()
-        pyherc.rules.items.wield(mock(), self.character, item)
+        item = (ItemBuilder()
+                    .with_damage(2, 'piercing')
+                    .build())
+        self.character.equip(item,
+                             self.action_factory)
 
         assert_that(item, is_(equal_to(self.character.inventory.weapon)))
 
-        pyherc.rules.items.unwield(mock(), self.character, item)
+        self.character.unequip(item,
+                               self.action_factory)
 
         assert_that(item, is_not(equal_to(self.character.inventory.weapon)))
 

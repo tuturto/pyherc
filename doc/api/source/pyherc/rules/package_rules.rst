@@ -13,7 +13,6 @@ pyherc.rules
    module_ending
    module_engine
    module_factory
-   module_items
    module_los
    module_moving
    module_public

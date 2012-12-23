@@ -21,7 +21,6 @@
 """
 Inventory manipulation related factories are defined here
 """
-from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.action import PickUpAction, DropAction
 from pyherc.rules.factory import SubActionFactory
 from pyherc.aspects import logged

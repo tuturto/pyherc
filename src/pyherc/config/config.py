@@ -33,7 +33,8 @@ from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory
 from pyherc.rules.inventory.factories import InventoryFactory
 from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
-from pyherc.rules.inventory.factories import EquipFactory
+from pyherc.rules.inventory.equip import EquipFactory
+from pyherc.rules.inventory.unequip import UnEquipFactory
 from pyherc.generators import ItemGenerator, CreatureGenerator
 from pyherc.generators.level.portals import PortalAdderFactory
 
@@ -116,7 +117,8 @@ class Configuration(object):
 
         inventory_factory = InventoryFactory([PickUpFactory(),
                                              DropFactory(),
-                                             EquipFactory()])
+                                             EquipFactory(),
+                                             UnEquipFactory()])
 
         self.action_factory = ActionFactory(
                                             self.model,

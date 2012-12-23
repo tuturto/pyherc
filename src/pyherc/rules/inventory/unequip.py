@@ -24,9 +24,9 @@ Module defining classes related to inventory actions
 from pyherc.aspects import logged
 from pyherc.rules.factory import SubActionFactory
 
-class EquipFactory(SubActionFactory):
+class UnEquipFactory(SubActionFactory):
     """
-    Factory for creating equip actions
+    Factory for creating unequip actions
 
     .. versionadded:: 0.8
     """
@@ -35,7 +35,7 @@ class EquipFactory(SubActionFactory):
         """
         Constructor for this factory
         """
-        self.sub_action = 'equip'
+        self.sub_action = 'unequip'
 
     @logged
     def can_handle(self, parameters):
@@ -51,16 +51,16 @@ class EquipFactory(SubActionFactory):
     @logged
     def get_action(self, parameters):
         """
-        Create an equip action
+        Create an unequip action
 
         :param parameters: parameters used to control creation
         :type parameters: InventoryParameters
         """
-        return EquipAction(parameters.character, parameters.item)
+        return UnEquipAction(parameters.character, parameters.item)
 
-class EquipAction(object):
+class UnEquipAction(object):
     """
-    Action for equiping an item
+    Action for unequiping an item
 
     .. versionadded:: 0.8
     """
@@ -71,10 +71,10 @@ class EquipAction(object):
 
         :param character: character wearing the item
         :type character: Character
-        :param item: item to equip
+        :param item: item to unequip
         :type item: Item
         """
-        super(EquipAction, self).__init__()
+        super(UnEquipAction, self).__init__()
 
         self.character = character
         self.item = item
@@ -85,9 +85,9 @@ class EquipAction(object):
         Executes this action
         """
         if self.item.get_main_type() == 'armour':
-            self.character.inventory.armour = self.item
+            self.character.inventory.armour = None
         elif self.item.get_main_type() == 'weapon':
-            self.character.inventory.weapon = self.item
+            self.character.inventory.weapon = None
 
     @logged
     def is_legal(self):

@@ -28,7 +28,6 @@ from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import Qt, pyqtSignal
 import PyQt4.QtGui
 import pyherc
-import pyherc.rules.items
 
 from pyherc.data import Item
 
@@ -492,17 +491,16 @@ class InventoryWidget(QWidget):
             self.character.drink(item, self.action_factory)
         elif item.get_main_type() == 'weapon':
             if self.character.inventory.weapon != None:
-                pyherc.rules.items.unwield(None,
-                                           self.character,
-                                           self.character.inventory.weapon,
-                                           False)
-
-            pyherc.rules.items.wield(None,
-                                     self.character,
-                                     item,
-                                     False)
+                self.character.unequip(self.character.inventory.weapon,
+                                       self.action_factory)
+            self.character.equip(item,
+                                 self.action_factory)
         elif item.get_main_type() == 'armour':
-            self.character.equip(item, self.action_factory)
+            if self.character.inventory.armour != None:
+                self.character.unequip(self.character.inventory.armour,
+                                       self.action_factory)
+            self.character.equip(item,
+                                 self.action_factory)
 
         self.update_inventory()
 
@@ -512,12 +510,9 @@ class InventoryWidget(QWidget):
 
         .. versionadded:: 0.6
         """
-        if self.character_inventory.weapon_slot.item != None:
-            pyherc.rules.items.unwield(None,
-                                       self.character,
-                                       item,
-                                       False)
-            self.update_inventory()
+        self.character.unequip(item,
+                               self.action_factory)
+        self.update_inventory()
 
 class ItemBox(QWidget):
     """

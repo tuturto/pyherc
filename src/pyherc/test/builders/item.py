@@ -175,15 +175,16 @@ class ItemBuilder(object):
         item.appearance = self.appearance
         item.location = self.location
         item.icon = self.icon
+        item.tags = self.tags
         if self.weapon_data != None:
             item.weapon_data = self.weapon_data
+            item.tags.append('weapon')
 
         if self.armour_data != None:
             item.armour_data = self.armour_data
+            item.tags.append('armour')
 
         for handle in self.effect_handles:
             item.add_effect_handle(handle)
-
-        item.tags = self.tags
 
         return item

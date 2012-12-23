@@ -473,6 +473,24 @@ class Character(object):
         action.execute()
 
     @logged
+    def unequip(self, item, action_factory):
+        """
+        Unequip item
+
+        :param item: item to unequip
+        :type item: Item
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
+
+        .. versionadded:: 0.8
+        """
+        action = action_factory.get_action(
+                                InventoryParameters(self,
+                                                    item,
+                                                    'unequip'))
+        action.execute()
+
+    @logged
     def raise_event(self, event):
         """
         Raise event for other creatures to see

@@ -32,7 +32,8 @@ from pyherc.rules.attack.factories import MeleeCombatFactory
 from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.rules.inventory.factories import InventoryFactory
 from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
-from pyherc.rules.inventory.factories import EquipFactory
+from pyherc.rules.inventory.equip import EquipFactory
+from pyherc.rules.inventory.unequip import UnEquipFactory
 
 class ActionFactoryBuilder(object):
     """
@@ -151,10 +152,12 @@ class ActionFactoryBuilder(object):
             pick_up_factory = PickUpFactory()
             drop_factory = DropFactory()
             equip_factory = EquipFactory()
+            unequip_factory = UnEquipFactory()
             self.inventory_factory = InventoryFactory([
                                             pick_up_factory,
                                             drop_factory,
-                                            equip_factory])
+                                            equip_factory,
+                                            unequip_factory])
 
         if self.use_real_move_factory == True:
             walk_factory = WalkFactory(mock())

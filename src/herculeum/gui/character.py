@@ -26,7 +26,6 @@ from PyQt4.QtGui import QGridLayout
 from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import Qt
 import PyQt4.QtGui
-import pyherc.rules.items
 
 from herculeum.gui.widgets import ListView
 
