@@ -149,3 +149,15 @@ From the Tome of Um'bano:
   strongest of men can even try to wield it because of the heavy construction.
   It is said that the whip of Ashmque was forged at the dawn of ages by 
   demon smith Ashmque.*
+
+*****
+Tomes
+*****
+Mankind has had the urge to make sense of their surroundings and record their
+findings in writing. Numerous tomes exists, some more known that others.
+
+Tome of Um'bano
+===============
+History of Tome of Um'bano is shrouded in shadows and no complete copy of the
+tome exists. Pages of the tome are thin sheets of metal. Because no complete
+copy is known to exist, the exact number of pages is unknown.

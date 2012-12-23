@@ -15,6 +15,9 @@ of correct tools. Buttons used to control the game are:
  * switch to sub menu left: insert, page up, q
  * switch to sub menu right: delete, page down, w
 
+.. hint:: a tool like Xpadder_ enables you to use joypad for playing, thus
+   making the game more fun.
+ 
 *******************
 Starting a new game
 *******************
@@ -86,3 +89,5 @@ with switch buttons).
 
 Top of the screen shows his current statistics: body, mind, finesse, hit points
 and mana. Below of them are details of currently active effects.
+
+.. _Xpadder: http://www.xpadder.com/
