@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-12-20, 06:40:53 -->
+<!-- Saved: 2012-12-23, 11:05:07 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -174,7 +174,6 @@
     <Source>pyherc/data/inventory.py</Source>
     <Source>pyherc/test/unit/test_inventory.py</Source>
     <Source>herculeum/test/ui/__init__.py</Source>
-    <Source>herculeum/test/ui/test_inventory.py</Source>
     <Source>herculeum/gui/help.py</Source>
     <Source>pyherc/test/unit/test_damage_modifiers.py</Source>
     <Source>pyherc/data/effects/damagemodifier.py</Source>

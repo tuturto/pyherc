@@ -65,8 +65,10 @@ class CharacterInventoryWidget(QWidget):
         self.keymap, self.move_keys = self._construct_keymaps(config)
 
     ItemFocused = pyqtSignal(Item, name='ItemFocused')
-    ItemLeftSelected = pyqtSignal(Item, name='ItemLeftSelected')
-    ItemRightSelected = pyqtSignal(Item, name='ItemRightSelected')
+    ItemActionA = pyqtSignal(Item, name='ItemActionA')
+    ItemActionB = pyqtSignal(Item, name='ItemActionB')
+    ItemActionX = pyqtSignal(Item, name='ItemActionX')
+    ItemActionY = pyqtSignal(Item, name='ItemActionY')
 
     def _construct_keymaps(self, config):
         """
@@ -270,9 +272,9 @@ class CharacterInventoryWidget(QWidget):
                 if x.display.objectName() == 'active_inventorybox'][0].item
         if item != None:
             if key in self.config.action_a:
-                self.ItemLeftSelected.emit(item)
+                self.ItemActionA.emit(item)
             elif key in self.config.action_b:
-                self.ItemRightSelected.emit(item)
+                self.ItemActionB.emit(item)
 
     def keyPressEvent(self, event):
         """
@@ -367,8 +369,8 @@ class InventoryWidget(QWidget):
                                                             character,
                                                             config,
                                                             self)
-        self.character_inventory.ItemLeftSelected.connect(self.unwield_weapon)
-        self.character_inventory.ItemRightSelected.connect(self.unwield_weapon)
+        self.character_inventory.ItemActionA.connect(self.unwield_weapon)
+        self.character_inventory.ItemActionB.connect(self.unwield_weapon)
 
         self.item_description = ItemDescriptionWidget(self)
         left_side.addWidget(self.character_inventory)
@@ -381,8 +383,8 @@ class InventoryWidget(QWidget):
                                      width = 6,
                                      height = 6)
         self.items_carried.ItemFocused.connect(self.on_item_focused)
-        self.items_carried.ItemLeftSelected.connect(self.use_item)
-        self.items_carried.ItemRightSelected.connect(self.drop_item)
+        self.items_carried.ItemActionA.connect(self.use_item)
+        self.items_carried.ItemActionB.connect(self.drop_item)
 
         self.items_in_ground = ItemBox(surface_manager = surface_manager,
                                        config = config,
@@ -390,7 +392,7 @@ class InventoryWidget(QWidget):
                                        width = 6,
                                        height = 2)
         self.items_in_ground.ItemFocused.connect(self.on_item_focused)
-        self.items_in_ground.ItemLeftSelected.connect(self.pick_up_item)
+        self.items_in_ground.ItemActionA.connect(self.pick_up_item)
 
         right_side.addWidget(self.items_carried)
         right_side.addWidget(self.items_in_ground)
@@ -539,8 +541,10 @@ class ItemBox(QWidget):
         self.keymap, self.move_keys = self._construct_keymaps(config, width)
 
     ItemFocused = pyqtSignal(Item, name='ItemFocused')
-    ItemLeftSelected = pyqtSignal(Item, name='ItemLeftSelected')
-    ItemRightSelected = pyqtSignal(Item, name='ItemRightSelected')
+    ItemActionA = pyqtSignal(Item, name='ItemActionA')
+    ItemActionB = pyqtSignal(Item, name='ItemActionB')
+    ItemActionX = pyqtSignal(Item, name='ItemActionX')
+    ItemActionY = pyqtSignal(Item, name='ItemActionY')
 
     def _construct_keymaps(self, config, width):
         """
@@ -604,9 +608,6 @@ class ItemBox(QWidget):
                                      self.surface_manager,
                                      self)
 
-                new_item.ItemFocused.connect(self.on_item_focused)
-                new_item.ItemLeftSelected.connect(self.on_item_left_selected)
-                new_item.ItemRightSelected.connect(self.on_item_right_selected)
                 self.grid_layout.addWidget(new_item, y, x)
                 self.items.append(new_item)
 
@@ -635,9 +636,9 @@ class ItemBox(QWidget):
         item = self.get_current_slot().item
         if item != None:
             if key in self.config.action_a:
-                self.ItemLeftSelected.emit(item)
+                self.ItemActionA.emit(item)
             elif key in self.config.action_b:
-                self.ItemRightSelected.emit(item)
+                self.ItemActionB.emit(item)
 
     def _move(self, key):
         """
@@ -718,7 +719,7 @@ class ItemBox(QWidget):
 
         .. versionadded:: 0.6
         """
-        self.ItemLeftSelected.emit(item)
+        self.ItemActionA.emit(item)
 
     def on_item_right_selected(self, item):
         """
@@ -726,7 +727,7 @@ class ItemBox(QWidget):
 
         .. versionadded:: 0.6
         """
-        self.ItemRightSelected.emit(item)
+        self.ItemActionB.emit(item)
 
     def on_item_focused(self, item):
         """
@@ -757,8 +758,10 @@ class ItemGlyph(QWidget):
         self.__set_layout()
 
     ItemFocused = pyqtSignal(Item, name='ItemFocused')
-    ItemLeftSelected = pyqtSignal(Item, name='ItemLeftSelected')
-    ItemRightSelected = pyqtSignal(Item, name='ItemRightSelected')
+    ItemActionA = pyqtSignal(Item, name='ItemActionA')
+    ItemActionB = pyqtSignal(Item, name='ItemActionB')
+    ItemActionX = pyqtSignal(Item, name='ItemActionX')
+    ItemActionY = pyqtSignal(Item, name='ItemActionY')
 
     def __set_layout(self):
         """
@@ -795,21 +798,6 @@ class ItemGlyph(QWidget):
         """
         self.display.setObjectName('passive_inventorybox')
         self.display.setStyle(QApplication.style())
-
-    def mousePressEvent(self, event):
-        """
-        Handle mouse buttons
-
-        .. versionadded:: 0.6
-        """
-        if event.buttons() == Qt.LeftButton:
-            if self.item != None:
-                self.ItemLeftSelected.emit(self.item)
-            return
-        elif event.buttons() == Qt.RightButton:
-            if self.item != None:
-                self.ItemRightSelected.emit(self.item)
-            return
 
     def enabled(self, enabled):
         """
