@@ -229,7 +229,7 @@ def init_creatures(context):
                                        icon = 0,
                                        title = '',
                                        description = ''),
-                        DamageModifier(modifier = 2,
+                        DamageModifier(modifier = -2,
                                        damage_type = 'poison',
                                        duration = None,
                                        frequency = None,

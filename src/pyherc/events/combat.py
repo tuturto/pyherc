@@ -54,15 +54,15 @@ class AttackHitEvent(Event):
         """
         if point_of_view == self.attacker:
             description = 'You hit {0} ({1} points of damage)'.format(self.target.name,
-                                                     self.damage.damage)
+                                                     self.damage.damage_inflicted)
         elif point_of_view == self.target:
             description = '{0} hits you ({1} points of damage)'.format(self.attacker.name,
-                                                      self.damage.damage)
+                                                      self.damage.damage_inflicted)
         else:
             description = '{0} hits {1} ({2} points of damage)'.format(
                             self.attacker.name,
                             self.target.name,
-                            self.damage.damage)
+                            self.damage.damage_inflicted)
 
         return description
 
