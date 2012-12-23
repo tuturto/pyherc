@@ -53,5 +53,6 @@
         <file>leather_armour.png</file>
         <file>chainmail.png</file>
         <file>robes.png</file>
+        <file>tied-scroll.png</file>
     </qresource>
 </RCC>
