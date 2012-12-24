@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2012-12-23, 14:33:06 -->
+<!-- Saved: 2012-12-24, 12:02:26 -->
 <!-- Copyright (C) 2012 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -229,6 +229,7 @@
     <Source>herculeum/sphinx/helpers.py</Source>
     <Source>pyherc/rules/inventory/equip.py</Source>
     <Source>pyherc/rules/inventory/unequip.py</Source>
+    <Source>pyherc/generators/level/room/pillarroom.py</Source>
   </Sources>
   <Forms>
   </Forms>

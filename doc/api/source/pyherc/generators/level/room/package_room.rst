@@ -9,4 +9,5 @@ pyherc.generators.level.room
    module_catacombs
    module_corridor
    module_crimson_lair
+   module_pillarroom
    module_squareroom

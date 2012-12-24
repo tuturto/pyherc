@@ -47,6 +47,7 @@ class SquareRoomGenerator(object):
         self.room_height = None
         self.level_types = level_types
         self.rng = Random()
+        self.room_corners = None
         self.logger = logging.getLogger('pyherc.generators.level.room.squareroom.SquareRoomGenerator') #pylint disable=C0301
 
     def generate_room(self, section):
@@ -81,6 +82,12 @@ class SquareRoomGenerator(object):
         section.add_room_connection((room_right_edge, center_y), "right")
 
         self.add_corridors(section)
+
+        self.room_corners = []
+        self.room_corners.append((room_left_edge + 1, room_top_edge + 1))
+        self.room_corners.append((room_right_edge - 1, room_top_edge + 1))
+        self.room_corners.append((room_right_edge - 1, room_bottom_edge - 1))
+        self.room_corners.append((room_left_edge + 1, room_bottom_edge - 1))
 
     def add_corridors(self, section):
         """

@@ -22,7 +22,7 @@
 module for configuring upper crypt
 """
 from pyherc.generators.level.partitioners import GridPartitioner
-from pyherc.generators.level.room import SquareRoomGenerator
+from pyherc.generators.level.room import SquareRoomGenerator, PillarRoomGenerator
 
 from pyherc.generators.level.decorator import ReplacingDecorator
 from pyherc.generators.level.decorator import ReplacingDecoratorConfig
@@ -41,7 +41,7 @@ from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
 from pyherc.generators.level.prototiles import WALL_EMPTY, WALL_NATURAL
 from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
 
-from herculeum.config.tiles import FLOOR_ROCK, FLOOR_BRICK
+from herculeum.config.tiles import FLOOR_ROCK, FLOOR_BRICK, WALL_ROCK_DECO_1
 from herculeum.config.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
 from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
 
@@ -63,7 +63,12 @@ def init_level(rng, item_generator, creature_generator, level_size):
                                            ['upper crypt']),
                        SquareRoomGenerator(FLOOR_CONSTRUCTED,
                                            WALL_EMPTY,
-                                           ['upper crypt'])]
+                                           ['upper crypt']),
+                       PillarRoomGenerator(floor_tile = FLOOR_CONSTRUCTED,
+                                           empty_tile = WALL_EMPTY,
+                                           pillar_tile = WALL_ROCK_DECO_1,
+                                           level_types = ['upper crypt'])
+                                           ]
     level_partitioners = [GridPartitioner(['upper crypt'],
                                           4,
                                           3,

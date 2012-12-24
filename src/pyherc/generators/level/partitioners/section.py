@@ -333,6 +333,22 @@ class Section(object):
         if location_type != None:
             self.level.set_location_type((x_loc, y_loc), location_type)
 
+    def get_floor(self, location):
+        """
+        Get floor tile in given location
+
+        :param location: location to check
+        :type location: (int, int)
+        :returns: floor tile
+        :rtype: int
+
+        .. versionadded:: 0.8
+        """
+        x_loc = self.__get_left_edge() + location[0]
+        y_loc = self.__get_top_edge() + location[1]
+
+        return self.level.floor[x_loc][y_loc]
+
     def set_wall(self, location, tile, location_type):
         """
         Set wall at given location
@@ -351,7 +367,39 @@ class Section(object):
 
         self.level.walls[x_loc][y_loc] = tile
         if location_type != None:
-            self.level.set_location_type((x_loc, y_loc), location_type)
+            self.level.set_location_type(location, location_type)
+
+    def set_location_type(self, location, location_type):
+        """
+        Set type of location in level
+
+        :param location: location to set
+        :type location: (int, int)
+        :param location_type: type of location
+        :type location_type: string
+
+        .. versionadded:: 0.8
+        """
+        x_loc = self.__get_left_edge() + location[0]
+        y_loc = self.__get_top_edge() + location[1]
+
+        self.level.set_location_type((x_loc, y_loc), location_type)
+
+    def get_wall(self, location):
+        """
+        Get wall at given location
+
+        :param location: location to check
+        :type location: (int, int)
+        :returns: wall at given location
+        :rtype: int
+
+        .. versionadded:: 0.8
+        """
+        x_loc = self.__get_left_edge() + location[0]
+        y_loc = self.__get_top_edge() + location[1]
+
+        return self.level.walls[x_loc][y_loc]
 
     def find_room_connection(self, section_connection):
         """
