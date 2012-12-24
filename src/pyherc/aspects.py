@@ -23,11 +23,11 @@ Module for aspects
 """
 import logging
 
-def logged(fn):
+def logged(wrapped_function):
     """
     Decorator to perform logging
     """
-    logger_name = str(fn)
+    logger_name = str(wrapped_function)
     logger = logging.getLogger(logger_name)
 
     def log(*args, **kwargs):
@@ -42,7 +42,7 @@ def logged(fn):
 
         logger.debug(call_message)
 
-        result = fn(*args, **kwargs)
+        result = wrapped_function(*args, **kwargs)
 
         result_message = ' '.join([logger_name,
                                    'return',
