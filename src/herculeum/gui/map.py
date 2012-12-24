@@ -475,7 +475,7 @@ class PlayMapWidget(QWidget):
         if next_creature == player:
 
             if key_code in self.keymap:
-                self.keymap[key_code](key_code)
+                self.keymap[key_code](key_code, event.modifiers())
 
         next_creature = self.model.get_next_creature(self.rules_engine)
         while next_creature != player and next_creature != None:
@@ -487,7 +487,7 @@ class PlayMapWidget(QWidget):
         if self.model.end_condition != 0:
             self.EndScreenRequested.emit()
 
-    def _move(self, key):
+    def _move(self, key, modifiers):
         """
         Process movement key
 
@@ -497,17 +497,23 @@ class PlayMapWidget(QWidget):
         player = self.model.player
         direction = self.move_key_map[key]
 
-        if player.is_move_legal(direction,
-                                'walk',
-                                self.action_factory):
-            player.move(direction,
-                        self.action_factory)
-        elif direction != 9:
-            player.perform_attack(direction,
-                                  self.action_factory,
-                                  self.rng)
+        if modifiers & Qt.ControlModifier:
+            if direction != 9:
+                player.perform_attack(direction,
+                                      self.action_factory,
+                                      self.rng)
+        else:
+            if player.is_move_legal(direction,
+                                    'walk',
+                                    self.action_factory):
+                player.move(direction,
+                            self.action_factory)
+            elif direction != 9:
+                player.perform_attack(direction,
+                                      self.action_factory,
+                                      self.rng)
 
-    def _menu(self, key):
+    def _menu(self, key, modifiers):
         """
         Process menu key
 
@@ -516,7 +522,7 @@ class PlayMapWidget(QWidget):
         """
         self.MenuRequested.emit()
 
-    def _action_a(self, key):
+    def _action_a(self, key, modifiers):
         """
         Process action a key
 
