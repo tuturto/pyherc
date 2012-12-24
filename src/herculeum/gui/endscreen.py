@@ -31,7 +31,7 @@ class EndScreen(QDialog):
 
     .. versionadded:: 0.8
     """
-    def __init__(self, model, config, parent, flags):
+    def __init__(self, model, config, dying_rules, parent, flags):
         """
         Default constructor
         """
@@ -43,6 +43,7 @@ class EndScreen(QDialog):
         self.instruction_label = None
         self.date_label = None
         self.score_label = None
+        self.dying_rules = dying_rules
 
         self.__set_layout(model,
                           config,
@@ -55,11 +56,11 @@ class EndScreen(QDialog):
         self.keymap = self._construct_keymap(config)
 
         layout = QVBoxLayout()
-        self.name_label = QLabel(model.player.name)
+        self.name_label = QLabel('Name:' + model.player.name)
         self.name_label.setObjectName('no_border')
-        self.date_label = QLabel(str(date.today()))
+        self.date_label = QLabel('Date: ' + str(date.today()))
         self.date_label.setObjectName('no_border')
-        self.score_label = QLabel('0')
+        self.score_label = QLabel('Score: ' + str(self.dying_rules.calculate_score(model.player)))
         self.score_label.setObjectName('no_border')
         self.result_label = QLabel(self._get_end_description(model.end_condition))
         self.result_label.setObjectName('no_border')

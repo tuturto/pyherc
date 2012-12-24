@@ -24,7 +24,7 @@ Module for checking end conditions
 
 from pyherc.events import DeathEvent, DropEvent
 from pyherc.aspects import logged
-from pyherc.data.model import DIED_IN_DUNGEON
+from pyherc.data.model import DIED_IN_DUNGEON, ESCAPED_DUNGEON
 
 class Dying(object):
     """
@@ -64,3 +64,21 @@ class Dying(object):
             character.raise_event(DeathEvent(deceased = character,
                                              affected_tiles = character.location))
             character.level.remove_creature(character)
+
+    @logged
+    def calculate_score(self, character):
+        """
+        Calculate score for character
+
+        .. versionadded:: 0.8
+        """
+        end_condition = character.model.end_condition
+
+        score = sum((item.cost for item in character.inventory))
+
+        if end_condition == DIED_IN_DUNGEON:
+            score = int(score * 0.75)
+        elif end_condition == ESCAPED_DUNGEON:
+            score = int(score * 1.25)
+
+        return score
