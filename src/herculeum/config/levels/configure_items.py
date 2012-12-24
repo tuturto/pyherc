@@ -270,7 +270,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'Tome of Um\'bano - Page 326',
                                     description = 'In the ancient times, old evil ruled over the land and terrorized everything. Kingdoms were drowned in fire and destroyed by demon, Crimson Jaw. Only when seven sages combined their powers, they could overcome him. But Crimson Jaw was too strong to be destroyed completely and his spirit had to be bound and trapped. Crimson Lair is his final resting place, where seals of seven sages keep him imprisoned.',
-                                    cost = 150,
+                                    cost = 100,
                                     weight = 1,
                                     icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png')],
                                     types = ['tome'],
@@ -278,7 +278,31 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'Tome of Um\'bano - Page 485',
                                     description = 'The whip of Ashmque is a horrendous weapon. Thong of the whip is made of blackened links of steel and an eternal flame is burning around it. Only the strongest of men can even try to wield it because of the heavy construction. It is said that the whip of Ashmque was forged at the dawn of ages by demon smith Ashmque.',
-                                    cost = 150,
+                                    cost = 100,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png')],
+                                    types = ['tome'],
+                                    rarity = 'rare'))
+    config.append(
+                  ItemConfiguration(name = 'Tome of Um\'bano - Page 612',
+                                    description = 'Prince Razel was obsessed with alchemy and built a complex laboratory under city of Herculeum. Untold experiments were conducted there and it is rumoured that those experiments ultimately caused his death.',
+                                    cost = 100,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png')],
+                                    types = ['tome'],
+                                    rarity = 'rare'))
+    config.append(
+                  ItemConfiguration(name = 'Tome of Um\'bano - Page 615',
+                                    description = 'Tomb of Prince Razel is rumoured to have been filled with traps and experiments he conducted while he was still living. The exact location of the tomb has been lost in the mists of time, but I think it has to be near his hidden laboratory.',
+                                    cost = 100,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png')],
+                                    types = ['tome'],
+                                    rarity = 'rare'))
+    config.append(
+                  ItemConfiguration(name = 'Tome of Um\'bano - Page 621',
+                                    description = 'Prince Razel\'s greatest experiment was a staff that could shoot fire on command. He never revealed how he created it and guarded the staff jealously.',
+                                    cost = 100,
                                     weight = 1,
                                     icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png')],
                                     types = ['tome'],
