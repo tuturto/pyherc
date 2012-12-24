@@ -47,7 +47,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'dagger',
                                     description = 'Light and simple weapon that does not do much damage. Small size allows skilled wielder to do critical damage easily though.',
-                                    cost = 2,
+                                    cost = 10,
                                     weight = 1,
                                     icons = [surface_manager.add_icon('dagger', ':dagger.png')],
                                     types = ['weapon',
@@ -64,7 +64,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'sword',
                                     description = 'Staple tool for adventurers and soldiers alike. Swords do more damage than daggers, but are harder to use effectively.',
-                                    cost = 6,
+                                    cost = 20,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('sword', ':stiletto.png')],
                                     types = ['weapon',
@@ -82,7 +82,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'axe',
                                     description = 'Heavy battle axes can cut through flesh and crush through bones. Not very common weapon, because effective use requires years of training.',
-                                    cost = 6,
+                                    cost = 20,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('axe', ':battle-axe.png')],
                                     types = ['weapon',
@@ -117,7 +117,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'warhammer',
                                     description = 'Heavy two-handed weapon that crushes through but the strongest defences. Rare sight in the battle field, because of the huge weight.',
-                                    cost = 6,
+                                    cost = 50,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('warhammer', ':gavel.png')],
                                     types = ['weapon',
@@ -134,7 +134,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'spear',
                                     description = 'One handed piercing weapon that can be devastating in hands of skilled user.',
-                                    cost = 6,
+                                    cost = 25,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('spear', ':barbed-spear.png')],
                                     types = ['weapon',
@@ -151,7 +151,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'whip',
                                     description = 'Weapon of choice for archeologists and vampire hunters. Not particularly strong, but very versatile.',
-                                    cost = 6,
+                                    cost = 25,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('whip', ':whip.png')],
                                     types = ['weapon',
@@ -185,7 +185,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'morning star',
                                     description = 'Spiked club, guaranteed to pierce through armours and crush through bones. Difficult to use weapon that requires years of practice.',
-                                    cost = 6,
+                                    cost = 40,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('morning star', ':spiked-mace.png')],
                                     types = ['weapon',
@@ -203,7 +203,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'robes',
                                     description = 'Simple robes are favoured by spell casters. They do not hinder magical abilities and strong wizards are more than capable of deflecting attacks anyway.',
-                                    cost = 2,
+                                    cost = 5,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('robes', ':robes.png')],
                                     types = ['armour'],
@@ -214,7 +214,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'leather armour',
                                     description = 'Armour made of hardened leather. While it offers only meager protection, it allows the wearer to move very swiftly.',
-                                    cost = 4,
+                                    cost = 10,
                                     weight = 6,
                                     icons = [surface_manager.add_icon('leather armour', ':leather_armour.png')],
                                     types = ['armour'],
@@ -225,7 +225,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'chainmail',
                                     description = 'Armour made of countless interlocking metal rings. Somewhat heavier than leather armour.',
-                                    cost = 8,
+                                    cost = 20,
                                     weight = 12,
                                     icons = [surface_manager.add_icon('chainmail', ':chainmail.png')],
                                     types = ['armour'],
@@ -236,7 +236,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'scale mail',
                                     description = 'Scale mail is made of interlocking scales, in a similar manner to chainmail. It offers better protection, while being heavier and harder to move around with.',
-                                    cost = 12,
+                                    cost = 25,
                                     weight = 12,
                                     icons = [surface_manager.add_icon('scale mail', ':scale_mail.png')],
                                     types = ['armour'],
@@ -247,7 +247,7 @@ def init_items(context):
     config.append(
                   ItemConfiguration(name = 'plate mail',
                                     description = 'Ultimate solution for protection. Heavy plates cover wearer from head to toe, offering great protection against attacks.',
-                                    cost = 2,
+                                    cost = 50,
                                     weight = 4,
                                     icons = [surface_manager.add_icon('plate mail', ':plate_mail.png')],
                                     types = ['armour'],
@@ -267,6 +267,22 @@ def init_items(context):
                                             effect = 'cure medium wounds',
                                             parameters = None,
                                             charges = 1)]))
+    config.append(
+                  ItemConfiguration(name = 'Tome of Um\'bano - Page 150',
+                                    description = 'In crypt under Herculeum, I encountered giant spiders. These arachnids have poisoned bite and could easily take down unprepared adventurer. Dealing with them from distance seems to be the best approach, if cramped surroundings just allow for it.',
+                                    cost = 100,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png')],
+                                    types = ['tome'],
+                                    rarity = 'rare'))
+    config.append(
+                  ItemConfiguration(name = 'Tome of Um\'bano - Page 158',
+                                    description = 'Patrolling skeleton warriors have been easy to avoid so far. They patrol mindlessly around the catacombs and only turn to pursue if I approach too close. They lose interest soon after I retreat and return to their endless patrol.',
+                                    cost = 100,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png')],
+                                    types = ['tome'],
+                                    rarity = 'rare'))
     config.append(
                   ItemConfiguration(name = 'Tome of Um\'bano - Page 326',
                                     description = 'In the ancient times, old evil ruled over the land and terrorized everything. Kingdoms were drowned in fire and destroyed by demon, Crimson Jaw. Only when seven sages combined their powers, they could overcome him. But Crimson Jaw was too strong to be destroyed completely and his spirit had to be bound and trapped. Crimson Lair is his final resting place, where seals of seven sages keep him imprisoned.',
