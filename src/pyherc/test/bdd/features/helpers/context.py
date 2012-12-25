@@ -24,6 +24,7 @@ Module for general context helpers
 from pyherc.data import Model
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.cutesy import LeatherArmour, ScaleMail, PlateMail
+from pyherc.test.cutesy import Sword, Club, Dagger
 
 def default_context(fn):
     """
@@ -98,6 +99,28 @@ def armour_list(fn):
         return fn(*args, **kwargs)
 
     return armour_setup
+
+def weapon_list(fn):
+    """
+    Decorator to set up weapon list
+
+    .. versionadded:: 0.8
+    """
+    def weapon_setup(*args, **kwargs):
+        """
+        Setup weapon list
+        """
+        context = args[0]
+
+        if not hasattr(context, 'weapon_list'):
+            context.weapon_list = {}
+            context.weapon_list['sword'] = Sword
+            context.weapon_list['dagger'] = Dagger
+            context.weapon_list['club'] = Club
+
+        return fn(*args, **kwargs)
+
+    return weapon_setup
 
 def get_character(context, character_name):
     """

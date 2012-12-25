@@ -18,31 +18,27 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-from pyherc.test.cutesy import Dagger, Sword, Club, LeatherArmour
 from pyherc.test.cutesy import make, drop
 from pyherc.test.bdd.features.helpers import default_context, armour_list
+from pyherc.test.bdd.features.helpers import weapon_list
 from pyherc.test.bdd.features.helpers import get_character, get_item
 from pyherc.test.bdd.features.helpers import get_location
 
-@given(u'{character_name} has dagger')
+@given(u'{character_name} has {item_name}')
 @default_context
-def impl(context, character_name):
-    dagger = Dagger()
-    context.items.append(dagger)
+@weapon_list
+@armour_list
+def impl(context, character_name, item_name):
+    if item_name in context.armour_list:
+        item = context.armour_list[item_name]()
+    elif item_name in context.weapon_list:
+        item = context.weapon_list[item_name]()
+
+    context.items.append(item)
 
     character = get_character(context, character_name)
 
-    character.inventory.append(dagger)
-
-@given(u'{character_name} has sword')
-@default_context
-def impl(context, character_name):
-    sword = Sword()
-    context.items.append(sword)
-
-    character = get_character(context, character_name)
-
-    character.inventory.append(sword)
+    character.inventory.append(item)
 
 @when(u'{character_name} drops {item_name}')
 def impl(context, character_name, item_name):
@@ -72,38 +68,17 @@ def impl(context, item_name, character_name):
 
     assert not item in character.inventory
 
-@given(u'{character_name} wields dagger')
+@given(u'{character_name} wields {weapon_name}')
 @default_context
-def impl(context, character_name):
-    dagger = Dagger()
-    context.items.append(dagger)
+@weapon_list
+def impl(context, character_name, weapon_name):
+    weapon = context.weapon_list[weapon_name]()
+    context.items.append(weapon)
 
     character = get_character(context, character_name)
 
-    character.inventory.append(dagger)
-    character.inventory.weapon = dagger
-
-@given(u'{character_name} wields sword')
-@default_context
-def impl(context, character_name):
-    sword = Sword()
-    context.items.append(sword)
-
-    character = get_character(context, character_name)
-
-    character.inventory.append(sword)
-    character.inventory.weapon = sword
-
-@given(u'{character_name} wields club')
-@default_context
-def impl(context, character_name):
-    club = Club()
-    context.items.append(club)
-
-    character = get_character(context, character_name)
-
-    character.inventory.append(club)
-    character.inventory.weapon = club
+    character.inventory.append(weapon)
+    character.inventory.weapon = weapon
 
 @given(u'{character_name} wears {armour_name}')
 @default_context
