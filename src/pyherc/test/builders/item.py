@@ -39,6 +39,7 @@ class ItemBuilder(object):
         self.effect_handles = []
         self.location = ()
         self.icon = 0
+        self.count = 1
         self.weapon_data = None
         self.armour_data = None
         self.tags = []
@@ -114,6 +115,40 @@ class ItemBuilder(object):
         self.weapon_data.damage.append((damage, damage_type))
         return self
 
+    def with_required_ammunition_type(self, ammunition_type):
+        """
+        Configure type of ammunition this weapon requires
+
+        :param ammunition_type: type of ammunition this weapon requires
+        :type ammunition_type: string
+        """
+        if self.weapon_data == None:
+            self.weapon_data = WeaponData()
+        self.weapon_data.required_ammunition_type = ammunition_type
+        return self
+
+    def with_ammunition_type(self, ammunition_type):
+        """
+        Configure type of this ammunition
+
+        :param ammunition_type: type of ammunition
+        :type ammunition_type: string
+        """
+        if self.weapon_data == None:
+            self.weapon_data = WeaponData()
+        self.weapon_data.ammunition_type = ammunition_type
+        return self
+
+    def with_count(self, count):
+        """
+        Configure amount of itmes in countable stack
+
+        :param count: amount of items
+        :type count: int
+        """
+        self.count = count
+        return self
+
     def with_tag(self, tag):
         """
         Add tag to the item
@@ -176,6 +211,7 @@ class ItemBuilder(object):
         item.location = self.location
         item.icon = self.icon
         item.tags = self.tags
+        item.count = self.count
         if self.weapon_data != None:
             item.weapon_data = self.weapon_data
             item.tags.append('weapon')

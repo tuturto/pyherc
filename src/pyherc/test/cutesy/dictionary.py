@@ -96,6 +96,31 @@ def Goblin(action = None):
 
     return character
 
+def Bow():
+    """
+    Creates a bow
+    """
+    item = (ItemBuilder()
+                .with_name('bow')
+                .with_damage(1, 'crushing')
+                .with_required_ammunition_type('arrow')
+                .build())
+
+    return item
+
+def Arrows():
+    """
+    Creates a bundle of arrows
+    """
+    item = (ItemBuilder()
+                .with_name('arrow')
+                .with_damage(2, 'piercing')
+                .with_ammunition_type('arrow')
+                .with_count(10)
+                .build())
+
+    return item
+
 def Dagger():
     """
     Creates a dagger

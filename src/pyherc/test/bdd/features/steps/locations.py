@@ -47,6 +47,17 @@ def impl(context, character_name, target_name):
 
     level.add_creature(character, location)
 
+@given(u'{character_name} is standing away from {target_name}')
+def impl(context, character_name, target_name):
+    character = get_character(context, character_name)
+    target = get_character(context, target_name)
+
+    level = target.level
+    location = (target.location[0] + 3,
+                target.location[1])
+
+    level.add_creature(character, location)
+
 @given(u'{portal_name} is located in corner of {location_name}')
 def impl(context, portal_name, location_name):
     place = get_location(context, location_name)

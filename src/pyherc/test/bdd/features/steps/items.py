@@ -72,11 +72,20 @@ def impl(context, item_name, character_name):
 @default_context
 @weapon_list
 def impl(context, character_name, weapon_name):
-    weapon = context.weapon_list[weapon_name]()
-    context.items.append(weapon)
 
     character = get_character(context, character_name)
 
+    if 'and' in weapon_name:
+        weapons = weapon_name.split(' and ')
+        weapon = context.weapon_list[weapons[0]]()
+        ammunition = context.weapon_list[weapons[1]]()
+
+        character.inventory.append(ammunition)
+        character.inventory.projectiles = ammunition
+    else:
+        weapon = context.weapon_list[weapon_name]()
+
+    context.items.append(weapon)
     character.inventory.append(weapon)
     character.inventory.weapon = weapon
 

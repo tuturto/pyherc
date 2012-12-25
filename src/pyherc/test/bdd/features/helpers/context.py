@@ -24,7 +24,7 @@ Module for general context helpers
 from pyherc.data import Model
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.cutesy import LeatherArmour, ScaleMail, PlateMail
-from pyherc.test.cutesy import Sword, Club, Dagger
+from pyherc.test.cutesy import Sword, Club, Dagger, Bow, Arrows
 
 def default_context(fn):
     """
@@ -117,6 +117,8 @@ def weapon_list(fn):
             context.weapon_list['sword'] = Sword
             context.weapon_list['dagger'] = Dagger
             context.weapon_list['club'] = Club
+            context.weapon_list['bow'] = Bow
+            context.weapon_list['arrows'] = Arrows
 
         return fn(*args, **kwargs)
 

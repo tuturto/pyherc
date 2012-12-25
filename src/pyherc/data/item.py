@@ -58,6 +58,7 @@ class Item(object):
         self.cost = None
         self.tags = {}
         self.__update_listeners = []
+        self.count = 1
 
     def __str__(self):
         return self.name
@@ -233,7 +234,9 @@ class WeaponData(object):
     Class representing weapon data of items
     """
     def __init__(self, damage = None, critical_range = None,
-                 critical_damage = None, weapon_type = None):
+                 critical_damage = None, weapon_type = None,
+                 required_ammunition_type = None,
+                 ammunition_type = None):
         """
         Default constructor
 
@@ -255,6 +258,8 @@ class WeaponData(object):
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.weapon_type = weapon_type
+        self.required_ammunition_type = required_ammunition_type
+        self.ammunition_type = ammunition_type
 
 class ArmourData(object):
     """
