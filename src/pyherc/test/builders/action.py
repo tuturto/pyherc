@@ -29,6 +29,7 @@ from pyherc.rules.move.factories import MoveFactory, WalkFactory
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory
+from pyherc.rules.attack import RangedCombatFactory
 from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.rules.inventory.factories import InventoryFactory
 from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
@@ -138,9 +139,12 @@ class ActionFactoryBuilder(object):
                                                           self.dying_rules)
             melee_combat_factory = MeleeCombatFactory(self.effect_factory,
                                                       self.dying_rules)
+            ranged_combat_factory = RangedCombatFactory(self.effect_factory,
+                                                        self.dying_rules)
             self.attack_factory = AttackFactory([
                                         unarmed_combat_factory,
-                                        melee_combat_factory])
+                                        melee_combat_factory,
+                                        ranged_combat_factory])
 
         if self.use_real_drink_factory == True:
             self.drink_factory = (DrinkFactoryBuilder()

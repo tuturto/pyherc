@@ -25,4 +25,4 @@ Usually you do not need to create instance of anything defined here. Use
 classes defined in pyherc.rules.locals instead to access these functions.
 """
 
-pass
+from .ranged import RangedCombatFactory

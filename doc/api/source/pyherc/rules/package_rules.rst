@@ -6,7 +6,7 @@ pyherc.rules
 .. toctree::
    :maxdepth: 2
 
-   attack/module_attack
+   attack/package_attack
    consume/module_consume
    inventory/module_inventory
    move/module_move

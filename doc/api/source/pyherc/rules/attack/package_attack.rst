@@ -9,4 +9,5 @@ pyherc.rules.attack
    module_action
    module_factories
    module_melee
+   module_ranged
    module_unarmed
