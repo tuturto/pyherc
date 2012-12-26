@@ -21,9 +21,12 @@
 """
 Module for testing ranged combat related rules
 """
+from pyherc.rules.attack import RangedCombatFactory
+from pyherc.rules.public import AttackParameters
 from pyherc.test.matchers import AttackActionParameterMatcher
 from pyherc.test.builders import LevelBuilder, CharacterBuilder, ItemBuilder
 from mockito import verify, mock, when, any
+from hamcrest import assert_that, is_, equal_to
 from random import Random
 
 class TestRangedCombat(object):
@@ -45,7 +48,6 @@ class TestRangedCombat(object):
         """
         Setup test cases
         """
-
         self.character = (CharacterBuilder()
                             .with_location((2, 2))
                             .build())
@@ -102,3 +104,19 @@ class TestRangedCombat(object):
         verify(self.action_factory).get_action(
                             AttackActionParameterMatcher(
                                         attack_type = 'melee'))
+
+    def test_finding_target(self):
+        """
+        Test that factory can find the target
+        """
+        factory = RangedCombatFactory(effect_factory = mock(),
+                                      dying_rules = mock())
+
+        target = factory.get_target(
+                            AttackParameters(
+                                        attacker = self.character,
+                                        direction = 3,
+                                        attack_type = 'ranged',
+                                        random_number_generator = Random()))
+
+        assert_that(target, is_(equal_to(self.target)))

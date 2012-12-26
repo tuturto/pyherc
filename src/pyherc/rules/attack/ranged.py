@@ -21,9 +21,12 @@
 """
 Module for ranged combat
 """
+try:
+    from future_builtins import map, zip
+except:
+    pass
 from pyherc.aspects import logged
-from pyherc.rules.attack.action import ToHit
-from pyherc.rules.attack.action import Damage
+from pyherc.rules.attack.action import ToHit, Damage, AttackAction
 
 class RangedToHit(ToHit):
     """
@@ -125,4 +128,19 @@ class RangedCombatFactory(object):
         :returns: target character if found, otherwise None
         :rtype: Character
         """
-        return None
+        location = parameters.attacker.location
+        level = parameters.attacker.level
+        direction = parameters.direction
+        target = None
+        off_sets = [(0, 0),
+                    (0, -1), (1, -1), (1, 0), (1, 1),
+                    (0, 1), (-1, 1), (-1, 0), (-1, -1)]
+
+        counter = 0
+        while target == None and counter < 100:
+            location = tuple([x for x in
+                              map(sum, zip(location, off_sets[direction]))])
+            target = level.get_creature_at(location)
+            counter = counter + 1
+
+        return target
