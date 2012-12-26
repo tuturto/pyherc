@@ -36,3 +36,4 @@ from .inventory_parameters import DropActionParameterMatcher
 from .event_parameters import EventType
 from .path_finding import continuous_path
 from .inventory import is_wearing
+from .attack_parameters import AttackActionParameterMatcher

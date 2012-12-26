@@ -21,6 +21,11 @@
 """
 Module for Character related classes
 """
+try:
+    from future_builtins import map, zip
+except:
+    pass
+
 from pyherc.aspects import logged
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 from pyherc.rules import InventoryParameters
@@ -388,10 +393,27 @@ class Character(object):
         :param rng: random number generator
         :type rng: Random
         """
-        if self.inventory.weapon == None:
+        if self.inventory.weapon != None:
+            weapon = self.inventory.weapon.weapon_data
+            if self.inventory.projectiles != None:
+                ammunition = self.inventory.projectiles.weapon_data
+            else:
+                ammunition = None
+        else:
+            weapon = None
+
+        if weapon == None:
             attack_type = 'unarmed'
         else:
-            attack_type = 'melee'
+            if ammunition == None:
+                attack_type = 'melee'
+            elif weapon.required_ammunition_type == ammunition.ammunition_type:
+                target_loc = self.get_location_at_direction(direction)
+                if self.level.get_creature_at(target_loc) == None:
+                    attack_type = 'ranged'
+                else:
+                    attack_type = 'melee'
+
         action = action_factory.get_action(
                             AttackParameters(
                                 attacker = self,
@@ -594,6 +616,28 @@ class Character(object):
         :type cost: integer
         """
         self.tick = self.tick + (self.speed * cost)
+
+    @logged
+    def get_location_at_direction(self, direction):
+        """
+        Get location next to this character at given direction
+
+        :param direction: direction to check
+        :type direction: int
+        :returns: coordinates of location
+        :rtype: (int, int)
+
+        .. note:: values 1 to 8 are supported for direction
+        """
+        assert direction <= 8
+        assert direction >= 1
+
+        offset = [(0, 0),
+                  (0, 1), (1, -1), (1, 0), (1, 1),
+                  (0, 1), (-1, 1), (-1, 0), (-1, -1)]
+
+        return tuple(x for x in
+                     map(sum, zip(self.location, offset[direction])))
 
     def _repr_pretty_(self, p, cycle):
         """
