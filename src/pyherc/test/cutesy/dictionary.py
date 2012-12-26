@@ -297,11 +297,11 @@ class Hit(object):
         :param attacker: character attacking
         :type attacker: Character
         """
-        rng = mock()
-        when(rng).randint(1, 6).thenReturn(1)
-
         self.target.old_values = {}
         self.target.old_values['hit points'] = self.target.hit_points
+
+        rng = mock()
+        when(rng).randint(1, 6).thenReturn(1)
 
         if attacker.inventory.weapon == None:
             attack_type = 'unarmed'
@@ -316,14 +316,10 @@ class Hit(object):
                                     .with_dying_rules()
                                     .build())
 
-        params = AttackParameters(attacker = attacker,
-                                  direction = self.find_direction(attacker.location,
-                                                                  self.target.location),
-                                  attack_type = attack_type,
-                                  random_number_generator = rng)
-
-        attacker.execute_action(params,
-                                action_factory)
+        attacker.perform_attack(self.find_direction(attacker.location,
+                                                    self.target.location),
+                                action_factory,
+                                rng)
 
     def find_direction(self, start, end):
         """
