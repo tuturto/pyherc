@@ -2,19 +2,8 @@ pyherc.generators.level.items
 *****************************
 
 .. automodule:: pyherc.generators.level.items
+   :members:
    :show-inheritance:
-   
-   .. autoclass:: pyherc.generators.level.items.ItemAdderConfiguration(object)
-      :show-inheritance:
-      
-      .. automethod:: add_item(self, min_amount, max_amount, name = None, type = None, location = None)      
-   
-   .. autoclass:: pyherc.generators.level.items.ItemAdder(object)
-      :show-inheritance:
-
-      .. automethod:: add_items(self, level)
-      .. automethod:: generate_items(self, item_spec)
-      .. automethod:: place_items(self, items, level)
 
 Example of configuration
 ========================

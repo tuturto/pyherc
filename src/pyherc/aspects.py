@@ -22,6 +22,7 @@
 Module for aspects
 """
 import logging
+from functools import wraps
 
 def logged(wrapped_function):
     """
@@ -30,6 +31,7 @@ def logged(wrapped_function):
     logger_name = str(wrapped_function)
     logger = logging.getLogger(logger_name)
 
+    @wraps(wrapped_function)
     def log(*args, **kwargs):
         """
         Log function call
