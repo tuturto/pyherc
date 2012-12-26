@@ -23,6 +23,7 @@ module for configuring catacombs
 """
 from pyherc.generators import ItemConfigurations
 from pyherc.generators import ItemConfiguration, WeaponConfiguration
+from pyherc.generators import AmmunitionConfiguration
 from pyherc.generators import ArmourConfiguration
 from pyherc.data.effects import EffectHandle
 
@@ -199,6 +200,36 @@ def init_items(context):
                                             critical_range = 12,
                                             critical_damage = 2,
                                             weapon_class = 'martial')))
+    config.append(
+                  ItemConfiguration(name = 'bow',
+                                    description = 'Short bow, built from laminated bones and wood. Perfect for ranged combat.',
+                                    cost = 10,
+                                    weight = 3,
+                                    icons = [surface_manager.add_icon('bow', ':bow.png')],
+                                    types = ['weapon',
+                                             'two-handed',
+                                             'ranged',
+                                             'martial weapon'],
+                                    rarity = 'uncommon',
+                                    weapon_configration = WeaponConfiguration(
+                                            damage = [(1, 'crushing')],
+                                            critical_range = 12,
+                                            critical_damage = 2,
+                                            weapon_class = 'martial',
+                                            required_ammunition_type = 'arrow')))
+    config.append(
+                  ItemConfiguration(name = 'arrow',
+                                    description = 'Wooden arrows tipped with metal head.',
+                                    cost = 1,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('arrows', ':arrows.png')],
+                                    types = ['ammunition'],
+                                    rarity = 'uncommon',
+                                    ammunition_configuration = AmmunitionConfiguration(
+                                            damage = [(3, 'piercing')],
+                                            critical_range = 12,
+                                            critical_damage = 2,
+                                            ammunition_type = 'arrow')))
 
     config.append(
                   ItemConfiguration(name = 'robes',

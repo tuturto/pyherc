@@ -235,7 +235,6 @@ class WeaponData(object):
     """
     def __init__(self, damage = None, critical_range = None,
                  critical_damage = None, weapon_type = None,
-                 required_ammunition_type = None,
                  ammunition_type = None):
         """
         Default constructor
@@ -258,7 +257,6 @@ class WeaponData(object):
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.weapon_type = weapon_type
-        self.required_ammunition_type = required_ammunition_type
         self.ammunition_type = ammunition_type
 
 class ArmourData(object):
@@ -280,3 +278,26 @@ class ArmourData(object):
 
         self.damage_reduction = damage_reduction
         self.speed_modifier = speed_modifier
+
+class AmmunitionData(object):
+    """
+    Represents data of ammunition
+
+    .. versionadded:: 0.8
+    """
+    def __init__(self, damage = None, critical_range = None,
+                 critical_damage = None, ammunition_type = None, count = 1):
+        """
+        Default constructor
+        """
+        super(AmmunitionData, self).__init__()
+
+        if damage == None:
+            self.damage = []
+        else:
+            self.damage = damage
+
+        self.critical_range = critical_range
+        self.critical_damage = critical_damage
+        self.ammunition_type = ammunition_type
+        self.count = count

@@ -107,7 +107,8 @@ class ItemGenerator(object):
                                     damage = (damage),
                                     critical_range = weapon_spec.critical_range,
                                     critical_damage = weapon_spec.critical_damage,
-                                    weapon_type = weapon_spec.weapon_class)
+                                    weapon_type = weapon_spec.weapon_class,
+                                    ammunition_type = weapon_spec.ammunition_type)
 
         if not item_specification.armour_configuration is None:
             armour_spec = item_specification.armour_configuration
@@ -210,7 +211,8 @@ class ItemConfiguration(object):
     @logged
     def __init__(self, name, cost, weight, icons, types, rarity,
                  weapon_configration = None, effect_handles = None,
-                 armour_configuration = None, description = ''):
+                 armour_configuration = None,
+                 ammunition_configuration = None, description = ''):
         """
         Default constructor
         """
@@ -223,6 +225,7 @@ class ItemConfiguration(object):
         self.rarity = self.rarities[rarity]
         self.weapon_configration = weapon_configration
         self.armour_configuration = armour_configuration
+        self.ammunition_configuration = ammunition_configuration
 
         if effect_handles is None:
             self.effect_handles = []
@@ -234,7 +237,8 @@ class WeaponConfiguration(object):
     Class representing weapon configuration
     """
     @logged
-    def __init__(self, damage, critical_range, critical_damage, weapon_class):
+    def __init__(self, damage, critical_range, critical_damage, weapon_class,
+                 required_ammunition_type = None, ammunition_type = None):
         """
         Default constructor
         """
@@ -244,6 +248,8 @@ class WeaponConfiguration(object):
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.weapon_class = weapon_class
+        self.required_ammunition_type = required_ammunition_type
+        self.ammunition_type = ammunition_type
 
 class ArmourConfiguration(object):
     """
@@ -258,3 +264,22 @@ class ArmourConfiguration(object):
 
         self.damage_reduction = damage_reduction
         self.speed_modifier = speed_modifier
+
+class AmmunitionConfiguration(object):
+    """
+    Class representing ammunition configuration
+
+    .. versionadded:: 0.8
+    """
+    @logged
+    def __init__(self, damage, critical_range, critical_damage,
+                 ammunition_type):
+        """
+        Default constructor
+        """
+        super(AmmunitionConfiguration, self).__init__()
+
+        self.damage = damage
+        self.critical_range = critical_range
+        self.critical_damage = critical_damage
+        self.ammunition_type = ammunition_type

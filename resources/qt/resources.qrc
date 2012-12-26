@@ -54,5 +54,7 @@
         <file>chainmail.png</file>
         <file>robes.png</file>
         <file>tied-scroll.png</file>
+        <file>bow.png</file>
+        <file>arrows.png</file>
     </qresource>
 </RCC>

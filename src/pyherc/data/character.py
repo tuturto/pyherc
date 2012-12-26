@@ -396,7 +396,7 @@ class Character(object):
         if self.inventory.weapon != None:
             weapon = self.inventory.weapon.weapon_data
             if self.inventory.projectiles != None:
-                ammunition = self.inventory.projectiles.weapon_data
+                ammunition = self.inventory.projectiles.ammunition_data
             else:
                 ammunition = None
         else:
@@ -405,9 +405,10 @@ class Character(object):
         if weapon == None:
             attack_type = 'unarmed'
         else:
-            if ammunition == None:
+            if (ammunition == None or
+                    weapon.ammunition_type != ammunition.ammunition_type):
                 attack_type = 'melee'
-            elif weapon.required_ammunition_type == ammunition.ammunition_type:
+            else:
                 target_loc = self.get_location_at_direction(direction)
                 if self.level.get_creature_at(target_loc) == None:
                     attack_type = 'ranged'

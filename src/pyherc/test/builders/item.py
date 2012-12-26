@@ -23,7 +23,7 @@ Module for item builder
 """
 from pyherc.data import Item
 from pyherc.data.effects import EffectsCollection
-from pyherc.data.item import WeaponData, ArmourData
+from pyherc.data.item import WeaponData, ArmourData, AmmunitionData
 
 class ItemBuilder(object):
     """
@@ -39,9 +39,9 @@ class ItemBuilder(object):
         self.effect_handles = []
         self.location = ()
         self.icon = 0
-        self.count = 1
         self.weapon_data = None
         self.armour_data = None
+        self.ammunition_data = None
         self.tags = []
 
     def with_name(self, name):
@@ -124,7 +124,7 @@ class ItemBuilder(object):
         """
         if self.weapon_data == None:
             self.weapon_data = WeaponData()
-        self.weapon_data.required_ammunition_type = ammunition_type
+        self.weapon_data.ammunition_type = ammunition_type
         return self
 
     def with_ammunition_type(self, ammunition_type):
@@ -134,9 +134,9 @@ class ItemBuilder(object):
         :param ammunition_type: type of ammunition
         :type ammunition_type: string
         """
-        if self.weapon_data == None:
-            self.weapon_data = WeaponData()
-        self.weapon_data.ammunition_type = ammunition_type
+        if self.ammunition_data == None:
+            self.ammunition_data = AmmunitionData()
+        self.ammunition_data.ammunition_type = ammunition_type
         return self
 
     def with_count(self, count):
@@ -146,7 +146,9 @@ class ItemBuilder(object):
         :param count: amount of items
         :type count: int
         """
-        self.count = count
+        if self.ammunition_data == None:
+            self.ammunition_data = AmmunitionData()
+        self.ammunition_data.count = count
         return self
 
     def with_tag(self, tag):
@@ -211,7 +213,7 @@ class ItemBuilder(object):
         item.location = self.location
         item.icon = self.icon
         item.tags = self.tags
-        item.count = self.count
+
         if self.weapon_data != None:
             item.weapon_data = self.weapon_data
             item.tags.append('weapon')
@@ -219,6 +221,10 @@ class ItemBuilder(object):
         if self.armour_data != None:
             item.armour_data = self.armour_data
             item.tags.append('armour')
+
+        if self.ammunition_data != None:
+            item.ammunition_data = self.ammunition_data
+            item.tags.append('ammunition')
 
         for handle in self.effect_handles:
             item.add_effect_handle(handle)
