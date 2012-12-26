@@ -50,6 +50,7 @@ Dependencies
 ------------
 - Python 2.7.3 (2.6.1 should be sufficient if you do not wish to run tests)
 - PyQt4
+- decorator
 - mockito-python 0.5.0 (only needed for running test cases)
 - pyHamcrest 1.6 (only needed for running test cases)
 - behave (only needed for running test cases)
@@ -63,6 +64,10 @@ Install python 2.7 from Python_.
 Install setuptools, by following instructions at: setuptools_.
 
 Install PyQt4, by following instructions at: PyQt4_
+
+Install decorator library::
+
+    easy_install -U decorator
 
 Rest of the dependencies can be automatically located and installed by following
 steps:

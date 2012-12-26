@@ -14,6 +14,7 @@ System Requirements
 ===================
 * Python 2.6.5 (2.6.1 should be sufficient if you do not wish to run tests)
 * PyQt4
+* decorator
 * mockito-python 0.5.0 (only needed for running test cases)
 * pyHamcrest 1.6 (only needed for running test cases)
 * behave (only needed for running test cases)

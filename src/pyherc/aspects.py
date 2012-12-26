@@ -23,36 +23,31 @@ Module for aspects
 """
 import logging
 from functools import wraps
+from decorator import decorator
 
-def logged(wrapped_function):
+@decorator
+def logged(wrapped_function, *args, **kwargs):
     """
     Decorator to perform logging
     """
     logger_name = str(wrapped_function)
     logger = logging.getLogger(logger_name)
 
-    @wraps(wrapped_function)
-    def log(*args, **kwargs):
-        """
-        Log function call
-        """
-        call_message = ' '.join([logger_name,
-                                 'call',
-                                 ':',
-                                 str(args),
-                                 str(kwargs)])
+    call_message = ' '.join([logger_name,
+                             'call',
+                             ':',
+                             str(args),
+                             str(kwargs)])
 
-        logger.debug(call_message)
+    logger.debug(call_message)
 
-        result = wrapped_function(*args, **kwargs)
+    result = wrapped_function(*args, **kwargs)
 
-        result_message = ' '.join([logger_name,
+    result_message = ' '.join([logger_name,
                                    'return',
                                    ':',
                                    str(result)])
 
-        logger.debug(result_message)
+    logger.debug(result_message)
 
-        return result
-
-    return log
+    return result
