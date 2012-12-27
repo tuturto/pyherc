@@ -59,7 +59,7 @@ def init_items(context):
                                     rarity = 'common',
                                     weapon_configration = WeaponConfiguration(
                                             damage = [(2, 'piercing')],
-                                            critical_range = 11,
+                                            critical_range = 10,
                                             critical_damage = 2,
                                             weapon_class = 'simple')))
 
