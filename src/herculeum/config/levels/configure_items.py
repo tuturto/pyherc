@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2012 Tuukka Turto
@@ -214,7 +215,7 @@ def init_items(context):
                                     weapon_configration = WeaponConfiguration(
                                             damage = [(1, 'crushing')],
                                             critical_range = 12,
-                                            critical_damage = 2,
+                                            critical_damage = 1,
                                             weapon_class = 'martial',
                                             ammunition_type = 'arrow')))
     config.append(
@@ -228,7 +229,7 @@ def init_items(context):
                                     ammunition_configuration = AmmunitionConfiguration(
                                             damage = [(3, 'piercing')],
                                             critical_range = 12,
-                                            critical_damage = 2,
+                                            critical_damage = 3,
                                             ammunition_type = 'arrow',
                                             count = 1)))
 

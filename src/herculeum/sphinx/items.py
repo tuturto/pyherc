@@ -120,12 +120,16 @@ def make_weapon_table(env, node):
     tgroup += thead
 
     for item_entry in (x for x in env.pyherc_context.items
-                       if node.options['type'] in x['item'].tags):
+                       if any(z in x['item'].tags for z in ['weapon', 'ammunition'])):
 
         item = item_entry['item']
 
-        damage_str = str.join(' / ', [str(x[0]) for x in item.weapon_data.damage])
-        damage_types_str = str.join(' / ', [str(x[1]) for x in item.weapon_data.damage])
+        if item.weapon_data != None:
+            damage_str = str.join(' / ', [str(x[0]) for x in item.weapon_data.damage])
+            damage_types_str = str.join(' / ', [str(x[1]) for x in item.weapon_data.damage])
+        elif item.ammunition_data != None:
+            damage_str = str.join(' / ', [str(x[0]) for x in item.ammunition_data.damage])
+            damage_types_str = str.join(' / ', [str(x[1]) for x in item.ammunition_data.damage])
 
         if 'simple weapon' in item.tags:
             weapon_type = 'simple'
@@ -145,11 +149,16 @@ def make_weapon_table(env, node):
         else:
             weapon_weight = ' '
 
-        row_node = make_row(item.name, damage_str,
-                            item.weapon_data.critical_range,
-                            item.weapon_data.critical_damage,
-                            damage_types_str, weapon_type, weapon_weight)
-
+        if item.weapon_data != None:
+            row_node = make_row(item.name, damage_str,
+                                item.weapon_data.critical_range,
+                                item.weapon_data.critical_damage,
+                                damage_types_str, weapon_type, weapon_weight)
+        elif item.ammunition_data != None:
+            row_node = make_row(item.name, damage_str,
+                                item.ammunition_data.critical_range,
+                                item.ammunition_data.critical_damage,
+                                damage_types_str, weapon_type, weapon_weight)
         rows.append(row_node)
 
     tbody = nodes.tbody()

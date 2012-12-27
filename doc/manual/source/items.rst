@@ -60,6 +60,18 @@ Morning star
 
 .. itemdescription:: morning star
 
+Bow
+===
+.. itemimage:: bow
+
+.. itemdescription:: bow
+
+Arrows
+======
+.. itemimage:: arrow
+
+.. itemdescription:: arrow
+
 Weapon tables
 =============
 .. itemtable::
