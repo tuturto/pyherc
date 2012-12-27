@@ -516,6 +516,9 @@ class InventoryWidget(QWidget):
                                        self.action_factory)
             self.character.equip(item,
                                  self.action_factory)
+        elif item.get_main_type() == 'ammunition':
+            self.character.equip(item,
+                                 self.action_factory)
 
         self.update_inventory()
 

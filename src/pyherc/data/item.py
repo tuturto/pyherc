@@ -52,6 +52,7 @@ class Item(object):
         self.icon = None
         self.weapon_data = None
         self.armour_data = None
+        self.ammunition_data = None
         self.__effects_collection = effects_collection
         self.weight = None
         self.rarity = None
@@ -165,6 +166,8 @@ class Item(object):
             main_type = 'armour'
         elif 'potion' in self.tags:
             main_type = 'potion'
+        elif 'ammunition' in self.tags:
+            main_type = 'ammunition'
         elif 'food' in self.tags:
             main_type = 'food'
 

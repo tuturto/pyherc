@@ -93,6 +93,10 @@ class EquipAction(object):
             self.character.inventory.weapon = self.item
             self.character.raise_event(EquipEvent(self.character,
                                                   self.item))
+        elif self.item.get_main_type() == 'ammunition':
+            self.character.inventory.projectiles = self.item
+            self.character.raise_event(EquipEvent(self.character,
+                                                  self.item))
 
     @logged
     def is_legal(self):

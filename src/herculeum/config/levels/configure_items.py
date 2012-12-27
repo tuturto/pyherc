@@ -216,7 +216,7 @@ def init_items(context):
                                             critical_range = 12,
                                             critical_damage = 2,
                                             weapon_class = 'martial',
-                                            required_ammunition_type = 'arrow')))
+                                            ammunition_type = 'arrow')))
     config.append(
                   ItemConfiguration(name = 'arrow',
                                     description = 'Wooden arrows tipped with metal head.',
@@ -229,7 +229,8 @@ def init_items(context):
                                             damage = [(3, 'piercing')],
                                             critical_range = 12,
                                             critical_damage = 2,
-                                            ammunition_type = 'arrow')))
+                                            ammunition_type = 'arrow',
+                                            count = 1)))
 
     config.append(
                   ItemConfiguration(name = 'robes',

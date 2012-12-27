@@ -31,6 +31,7 @@ from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory
+from pyherc.rules.attack import RangedCombatFactory
 from pyherc.rules.inventory.factories import InventoryFactory
 from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
 from pyherc.rules.inventory.equip import EquipFactory
@@ -108,9 +109,12 @@ class Configuration(object):
                                                       dying_rules)
         melee_combat_factory = MeleeCombatFactory(effect_factory,
                                                   dying_rules)
+        ranged_combat_factory = RangedCombatFactory(effect_factory,
+                                                    dying_rules)
         attack_factory = AttackFactory([
                                         unarmed_combat_factory,
-                                        melee_combat_factory])
+                                        melee_combat_factory,
+                                        ranged_combat_factory])
 
         drink_factory = DrinkFactory(effect_factory,
                                      dying_rules)

@@ -24,7 +24,7 @@ Classes needed for item generation
 
 import random
 from pyherc.data import Item
-from pyherc.data.item import WeaponData, ArmourData
+from pyherc.data.item import WeaponData, ArmourData, AmmunitionData
 from pyherc.data.effects import EffectsCollection, EffectHandle
 from pyherc.aspects import logged
 
@@ -115,6 +115,15 @@ class ItemGenerator(object):
             item.armour_data = ArmourData(
                                     damage_reduction = armour_spec.damage_reduction,
                                     speed_modifier = armour_spec.speed_modifier)
+
+        if not item_specification.ammunition_configuration is None:
+            ammo_spec = item_specification.ammunition_configuration
+            item.ammunition_data = AmmunitionData(
+                                        damage = ammo_spec.damage,
+                                        critical_range = ammo_spec.critical_range,
+                                        critical_damage = ammo_spec.critical_damage,
+                                        ammunition_type = ammo_spec.ammunition_type,
+                                        count = ammo_spec.count)
 
         for spec in item_specification.effect_handles:
             new_handle = EffectHandle(trigger = spec.trigger,
@@ -238,7 +247,7 @@ class WeaponConfiguration(object):
     """
     @logged
     def __init__(self, damage, critical_range, critical_damage, weapon_class,
-                 required_ammunition_type = None, ammunition_type = None):
+                 ammunition_type = None):
         """
         Default constructor
         """
@@ -248,7 +257,6 @@ class WeaponConfiguration(object):
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.weapon_class = weapon_class
-        self.required_ammunition_type = required_ammunition_type
         self.ammunition_type = ammunition_type
 
 class ArmourConfiguration(object):
@@ -273,7 +281,7 @@ class AmmunitionConfiguration(object):
     """
     @logged
     def __init__(self, damage, critical_range, critical_damage,
-                 ammunition_type):
+                 ammunition_type, count):
         """
         Default constructor
         """
@@ -283,3 +291,4 @@ class AmmunitionConfiguration(object):
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.ammunition_type = ammunition_type
+        self.count = count
