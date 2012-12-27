@@ -235,10 +235,14 @@ class CharacterInventoryWidget(QWidget):
         """
         self.weapon_slot.set_item(self.character.inventory.weapon)
         self.armour_slot.set_item(self.character.inventory.armour)
-        # for each slot
-        #  does character have item there?
-        #   yes-> show icon of item
-        #   no -> show default icon
+        self.arrows_slot.set_item(self.character.inventory.projectiles)
+        self.head_slot.set_item(self.character.inventory.helm)
+        self.boots_slot.set_item(self.character.inventory.boots)
+        self.shield_slot.set_item(self.character.inventory.shield)
+        self.gloves_slot.set_item(self.character.inventory.gloves)
+        self.ring_slot.set_item(self.character.inventory.ring)
+        self.necklace_slot.set_item(self.character.inventory.necklace)
+        self.belt_slot.set_item(self.character.inventory.belt)
 
     def _move(self, key):
         """
