@@ -32,7 +32,8 @@ class AttackAction(object):
     """
     @logged
     def __init__(self, attack_type, to_hit, damage,
-                 attacker, target, effect_factory, dying_rules):
+                 attacker, target, effect_factory, dying_rules,
+                 additional_rules):
         """
         Default constructor
 
@@ -48,6 +49,9 @@ class AttackAction(object):
         :type target: Character
         :param effect_factory: Factory used for creating magic effects
         :type effect_factory: EffectFactory
+        :param dying_rules: rules for dying
+        :param additional_rules: additional rules
+        :type additional_rules: AdditionalRules
         """
         self.action_type = 'attack'
         self.attack_type = attack_type
@@ -57,6 +61,7 @@ class AttackAction(object):
         self.target = target
         self.effect_factory = effect_factory
         self.dying_rules = dying_rules
+        self.additional_rules = additional_rules
 
     @logged
     def is_legal(self):
@@ -80,30 +85,31 @@ class AttackAction(object):
             self.attacker.raise_event(AttackNothingEvent(
                                             attacker = self.attacker,
                                             affected_tiles = []))
-            return None
-
-        was_hit = self.to_hit.is_hit()
-
-        if was_hit:
-            self.damage.apply_damage(self.target)
-
-            self.attacker.raise_event(AttackHitEvent(
-                                        type = self.attack_type,
-                                        attacker = self.attacker,
-                                        target = self.target,
-                                        damage = self.damage,
-                                        affected_tiles = [self.target.location]))
-
-            self.__trigger_attack_effects()
         else:
-            self.attacker.raise_event(AttackMissEvent(
-                                        type = self.attack_type,
-                                        attacker = self.attacker,
-                                        target = self.target,
-                                        affected_tiles = [self.target.location]))
 
-        self.dying_rules.check_dying(self.target)
+            was_hit = self.to_hit.is_hit()
 
+            if was_hit:
+                self.damage.apply_damage(self.target)
+
+                self.attacker.raise_event(AttackHitEvent(
+                                          type = self.attack_type,
+                                          attacker = self.attacker,
+                                          target = self.target,
+                                          damage = self.damage,
+                                          affected_tiles = [self.target.location]))
+
+                self.__trigger_attack_effects()
+            else:
+                self.attacker.raise_event(AttackMissEvent(
+                                          type = self.attack_type,
+                                          attacker = self.attacker,
+                                          target = self.target,
+                                          affected_tiles = [self.target.location]))
+
+            self.dying_rules.check_dying(self.target)
+
+        self.additional_rules.after_attack()
         self.attacker.add_to_tick(3)
 
     @logged
@@ -217,3 +223,21 @@ class Damage(object):
 
     damage = property(__get_damage)
     damage_types = property(__get_damage_types)
+
+class AdditionalRules(object):
+    """
+    Additional rules for attacks
+
+    .. versionadded: 0.8
+    """
+    def __init__(self, attacker):
+        """
+        Default constructor
+        """
+        super(AdditionalRules, self).__init__()
+
+    def after_attack(self):
+        """
+        Processing happening after an attack
+        """
+        pass

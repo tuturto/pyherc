@@ -59,7 +59,6 @@ class Item(object):
         self.cost = None
         self.tags = {}
         self.__update_listeners = []
-        self.count = 1
 
     def __str__(self):
         return self.name

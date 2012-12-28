@@ -114,7 +114,7 @@ def Arrows():
     """
     item = (ItemBuilder()
                 .with_name('arrow')
-                .with_damage(2, 'piercing')
+                .with_range_damage(2, 'piercing')
                 .with_ammunition_type('arrow')
                 .with_count(10)
                 .build())
@@ -302,11 +302,6 @@ class Hit(object):
 
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
-
-        if attacker.inventory.weapon == None:
-            attack_type = 'unarmed'
-        else:
-            attack_type = 'melee'
 
         action_factory = (ActionFactoryBuilder()
                                     .with_move_factory()

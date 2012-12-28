@@ -540,7 +540,8 @@ class TestEffectsInCombat(object):
                               attacker = attacker,
                               target = mock(),
                               effect_factory = factory,
-                              dying_rules = mock())
+                              dying_rules = mock(),
+                              additional_rules = mock())
 
         action.execute()
 

@@ -22,7 +22,7 @@
 Attack related factories are defined here
 """
 from pyherc.aspects import logged
-from pyherc.rules.attack.action import AttackAction
+from pyherc.rules.attack.action import AttackAction, AdditionalRules
 from pyherc.rules.attack.unarmed import UnarmedToHit
 from pyherc.rules.attack.unarmed import UnarmedDamage
 from pyherc.rules.attack.melee import MeleeToHit
@@ -98,7 +98,8 @@ class UnarmedCombatFactory(object):
                     attacker = attacker,
                     target = target,
                     effect_factory = self.effect_factory,
-                    dying_rules = self.dying_rules)
+                    dying_rules = self.dying_rules,
+                    additional_rules = AdditionalRules(attacker))
 
         return attack
 
@@ -193,7 +194,8 @@ class MeleeCombatFactory(object):
                     attacker = attacker,
                     target = target,
                     effect_factory = self.effect_factory,
-                    dying_rules = self.dying_rules)
+                    dying_rules = self.dying_rules,
+                    additional_rules = AdditionalRules(attacker))
 
         return attack
 

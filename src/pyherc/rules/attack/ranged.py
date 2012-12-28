@@ -114,7 +114,8 @@ class RangedCombatFactory(object):
                     attacker = attacker,
                     target = target,
                     effect_factory = self.effect_factory,
-                    dying_rules = self.dying_rules)
+                    dying_rules = self.dying_rules,
+                    additional_rules = AdditionalRangedRules(attacker))
 
         return attack
 
@@ -144,3 +145,24 @@ class RangedCombatFactory(object):
             counter = counter + 1
 
         return target
+
+class AdditionalRangedRules(object):
+    """
+    Additional rules for ranged attack
+
+    .. versionadded:: 0.8
+    """
+    def __init__(self, attacker):
+        """
+        Default constructor
+        """
+        super(AdditionalRangedRules, self).__init__()
+
+        self.attacker = attacker
+
+    def after_attack(self):
+        """
+        Processing happening after an attack
+        """
+        ammunition = self.attacker.inventory.projectiles.ammunition_data
+        ammunition.count = ammunition.count - 1

@@ -69,14 +69,15 @@ class TestRangedCombat(object):
                     .with_required_ammunition_type('arrow')
                     .with_damage(1, 'crushing')
                     .build())
-        arrows = (ItemBuilder()
+        self.arrows = (ItemBuilder()
                         .with_name('arrows')
                         .with_ammunition_type('arrow')
                         .with_range_damage(3, 'piercing')
+                        .with_count(10)
                         .build())
 
         self.character.inventory.weapon = bow
-        self.character.inventory.projectiles = arrows
+        self.character.inventory.projectiles = self.arrows
 
         self.action_factory = mock()
         when(self.action_factory).get_action(any()).thenReturn(mock())
@@ -108,6 +109,19 @@ class TestRangedCombat(object):
 
         assert_that(self.target.hit_points, is_(equal_to(7)))
 
+    def test_ammunition_is_decreased(self):
+        """
+        Ranged attack should use ammunition
+        """
+        action_factory = (ActionFactoryBuilder()
+                            .with_attack_factory()
+                            .build())
+
+        self.character.perform_attack(3,
+                                      action_factory,
+                                      Random())
+
+        assert_that(self.arrows.ammunition_data.count, is_(equal_to(9)))
 
     def test_melee_attack_is_created_for_close_enemy(self):
         """
