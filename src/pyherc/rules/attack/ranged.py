@@ -103,14 +103,14 @@ class RangedCombatFactory(object):
         """
         attacker = parameters.attacker
         target = self.get_target(parameters)
-        weapon = attacker.inventory.weapon
-        weapon_data = weapon.weapon_data
+        weapon = attacker.inventory.projectiles
+        ammo_data = weapon.ammunition_data
 
         attack = AttackAction(
                     attack_type = 'ranged',
                     to_hit = RangedToHit(attacker, target,
                                          parameters.random_number_generator),
-                    damage = RangedDamage(damage = weapon_data.damage),
+                    damage = RangedDamage(damage = ammo_data.damage),
                     attacker = attacker,
                     target = target,
                     effect_factory = self.effect_factory,

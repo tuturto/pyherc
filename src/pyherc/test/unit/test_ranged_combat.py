@@ -25,6 +25,7 @@ from pyherc.rules.attack import RangedCombatFactory
 from pyherc.rules.public import AttackParameters
 from pyherc.test.matchers import AttackActionParameterMatcher
 from pyherc.test.builders import LevelBuilder, CharacterBuilder, ItemBuilder
+from pyherc.test.builders import ActionFactoryBuilder
 from mockito import verify, mock, when, any
 from hamcrest import assert_that, is_, equal_to
 from random import Random
@@ -50,10 +51,12 @@ class TestRangedCombat(object):
         """
         self.character = (CharacterBuilder()
                             .with_location((2, 2))
+                            .with_hit_points(10)
                             .build())
 
         self.target = (CharacterBuilder()
                             .with_location((5, 2))
+                            .with_hit_points(10)
                             .build())
 
         self.level = (LevelBuilder()
@@ -64,10 +67,12 @@ class TestRangedCombat(object):
         bow = (ItemBuilder()
                     .with_name('bow')
                     .with_required_ammunition_type('arrow')
+                    .with_damage(1, 'crushing')
                     .build())
         arrows = (ItemBuilder()
                         .with_name('arrows')
                         .with_ammunition_type('arrow')
+                        .with_range_damage(3, 'piercing')
                         .build())
 
         self.character.inventory.weapon = bow
@@ -88,6 +93,21 @@ class TestRangedCombat(object):
         verify(self.action_factory).get_action(
                             AttackActionParameterMatcher(
                                         attack_type = 'ranged'))
+
+    def test_damage_for_ranged_attack_is_from_arrow(self):
+        """
+        Damage for ranged attack comes from the arrow
+        """
+        action_factory = (ActionFactoryBuilder()
+                            .with_attack_factory()
+                            .build())
+
+        self.character.perform_attack(3,
+                                      action_factory,
+                                      Random())
+
+        assert_that(self.target.hit_points, is_(equal_to(7)))
+
 
     def test_melee_attack_is_created_for_close_enemy(self):
         """

@@ -139,6 +139,22 @@ class ItemBuilder(object):
         self.ammunition_data.ammunition_type = ammunition_type
         return self
 
+    def with_range_damage(self, damage, damage_type):
+        """
+        Configure damage of this ammunition
+
+        :param damage: amount of damage
+        :type damage: int
+        :param damage_type: type of damage
+        :type damage_type: string
+
+        .. note:: can be called multiple times
+        """
+        if self.ammunition_data == None:
+            self.ammunition_data = AmmunitionData()
+        self.ammunition_data.damage.append((damage, damage_type))
+        return self
+
     def with_count(self, count):
         """
         Configure amount of itmes in countable stack
