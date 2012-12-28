@@ -62,8 +62,48 @@ class IsWearingMatcher(BaseMatcher):
         mismatch_description.append('Character with inventory {0}'.format(
                 item.inventory))
 
+class IsInInventoryMatcher(BaseMatcher):
+    """
+    Matcher to check if character has item in inventory
+    """
+    def __init__(self, item):
+        """
+        Default constructor
+        """
+        super(IsInInventoryMatcher, self).__init__()
+        self.item = item
+
+    def _matches(self, item):
+        """
+        Check if matcher matches item
+
+        :param item: object to match against
+        :returns: True if matching, otherwise False
+        :rtype: Boolean
+        """
+        return self.item in item.inventory
+
+    def describe_to(self, description):
+        """
+        Describe this matcher
+        """
+        description.append('Character carrying item {0}'.format(self.item))
+
+    def describe_mismatch(self, item, mismatch_description):
+        """
+        Describe this mismatch
+        """
+        mismatch_description.append('Character with inventory {0}'.format(
+                item.inventory))
+
 def is_wearing(item):
     """
     Check if character is wearing an item
     """
     return IsWearingMatcher(item)
+
+def does_have(item):
+    """
+    Check if character has the item in inventory
+    """
+    return IsInInventoryMatcher(item)

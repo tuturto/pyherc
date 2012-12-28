@@ -164,5 +164,9 @@ class AdditionalRangedRules(object):
         """
         Processing happening after an attack
         """
-        ammunition = self.attacker.inventory.projectiles.ammunition_data
-        ammunition.count = ammunition.count - 1
+        ammunition = self.attacker.inventory.projectiles
+        ammunition.ammunition_data.count = ammunition.ammunition_data.count - 1
+
+        if ammunition.ammunition_data.count <= 0:
+            self.attacker.inventory.projectiles = None
+            self.attacker.inventory.remove(ammunition)

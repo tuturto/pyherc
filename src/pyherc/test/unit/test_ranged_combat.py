@@ -23,11 +23,11 @@ Module for testing ranged combat related rules
 """
 from pyherc.rules.attack import RangedCombatFactory
 from pyherc.rules.public import AttackParameters
-from pyherc.test.matchers import AttackActionParameterMatcher
+from pyherc.test.matchers import AttackActionParameterMatcher, does_have
 from pyherc.test.builders import LevelBuilder, CharacterBuilder, ItemBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from mockito import verify, mock, when, any
-from hamcrest import assert_that, is_, equal_to
+from hamcrest import assert_that, is_, equal_to, is_not
 from random import Random
 
 class TestRangedCombat(object):
@@ -76,6 +76,8 @@ class TestRangedCombat(object):
                         .with_count(10)
                         .build())
 
+        self.character.inventory.append(bow)
+        self.character.inventory.append(self.arrows)
         self.character.inventory.weapon = bow
         self.character.inventory.projectiles = self.arrows
 
@@ -122,6 +124,22 @@ class TestRangedCombat(object):
                                       Random())
 
         assert_that(self.arrows.ammunition_data.count, is_(equal_to(9)))
+
+    def test_depleted_ammunition_is_removed(self):
+        """
+        Completely spent ammunition should be removed from inventory
+        """
+        action_factory = (ActionFactoryBuilder()
+                            .with_attack_factory()
+                            .build())
+
+        self.arrows.ammunition_data.count = 1
+
+        self.character.perform_attack(3,
+                                      action_factory,
+                                      Random())
+
+        assert_that(self.character, is_not(does_have(self.arrows)))
 
     def test_melee_attack_is_created_for_close_enemy(self):
         """

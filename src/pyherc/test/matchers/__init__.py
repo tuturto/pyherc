@@ -35,5 +35,5 @@ from .character import is_dead
 from .inventory_parameters import DropActionParameterMatcher
 from .event_parameters import EventType
 from .path_finding import continuous_path
-from .inventory import is_wearing
+from .inventory import is_wearing, does_have
 from .attack_parameters import AttackActionParameterMatcher
