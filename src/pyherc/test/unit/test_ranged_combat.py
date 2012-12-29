@@ -172,3 +172,24 @@ class TestRangedCombat(object):
                                         random_number_generator = Random()))
 
         assert_that(target, is_(equal_to(self.target)))
+
+    def test_target_is_not_located_behind_wall(self):
+        """
+        Walls should block arrows
+        """
+        factory = RangedCombatFactory(effect_factory = mock(),
+                                      dying_rules = mock())
+
+        x_loc = self.character.location[0] + 1
+        y_loc = self.character.location[1]
+
+        self.level.walls[x_loc][y_loc] = 100
+
+        target = factory.get_target(
+                            AttackParameters(
+                                        attacker = self.character,
+                                        direction = 3,
+                                        attack_type = 'ranged',
+                                        random_number_generator = Random()))
+
+        assert_that(target, is_not(equal_to(self.target)))

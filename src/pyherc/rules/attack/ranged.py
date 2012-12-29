@@ -137,12 +137,10 @@ class RangedCombatFactory(object):
                     (0, -1), (1, -1), (1, 0), (1, 1),
                     (0, 1), (-1, 1), (-1, 0), (-1, -1)]
 
-        counter = 0
-        while target == None and counter < 100:
+        while target == None and not level.blocks_movement(location[0], location[1]):
             location = tuple([x for x in
                               map(sum, zip(location, off_sets[direction]))])
             target = level.get_creature_at(location)
-            counter = counter + 1
 
         return target
 
