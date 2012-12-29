@@ -54,6 +54,26 @@ def init_players(context):
                                                             max_amount = 1,
                                                             probability = 100),
                                                      InventoryConfiguration(
+                                                            item_name = 'bow',
+                                                            min_amount = 1,
+                                                            max_amount = 1,
+                                                            probability = 100),
+                                                     InventoryConfiguration(
+                                                            item_name = 'arrow',
+                                                            min_amount = 1,
+                                                            max_amount = 1,
+                                                            probability = 100),
+                                                     InventoryConfiguration(
+                                                            item_name = 'war arrow',
+                                                            min_amount = 1,
+                                                            max_amount = 1,
+                                                            probability = 100),
+                                                     InventoryConfiguration(
+                                                            item_name = 'blunt arrow',
+                                                            min_amount = 1,
+                                                            max_amount = 1,
+                                                            probability = 100),
+                                                     InventoryConfiguration(
                                                             item_name = 'healing potion',
                                                             min_amount = 1,
                                                             max_amount = 2,
@@ -75,6 +95,11 @@ def init_players(context):
                                         effect_handles = None,
                                         inventory = [InventoryConfiguration(
                                                             item_name = 'sword',
+                                                            min_amount = 1,
+                                                            max_amount = 1,
+                                                            probability = 100),
+                                                     InventoryConfiguration(
+                                                            item_name = 'warhammer',
                                                             min_amount = 1,
                                                             max_amount = 1,
                                                             probability = 100),

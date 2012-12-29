@@ -72,6 +72,18 @@ Arrows
 
 .. itemdescription:: arrow
 
+War arrows
+==========
+.. itemimage:: war arrow
+
+.. itemdescription:: war arrow
+
+Blunt arrows
+============
+.. itemimage:: blunt arrow
+
+.. itemdescription:: blunt arrow
+
 Weapon tables
 =============
 .. itemtable::

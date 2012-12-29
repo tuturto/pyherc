@@ -232,6 +232,35 @@ def init_items(context):
                                             critical_damage = 3,
                                             ammunition_type = 'arrow',
                                             count = 15)))
+    config.append(
+                  ItemConfiguration(name = 'war arrow',
+                                    description = 'Wooden arrows tipped with metal head that have cutting edge.',
+                                    cost = 1,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('arrows', ':arrows.png')],
+                                    types = ['ammunition'],
+                                    rarity = 'uncommon',
+                                    ammunition_configuration = AmmunitionConfiguration(
+                                            damage = [(1, 'piercing'),
+                                                      (2, 'slashing')],
+                                            critical_range = 12,
+                                            critical_damage = 3,
+                                            ammunition_type = 'arrow',
+                                            count = 15)))
+    config.append(
+                  ItemConfiguration(name = 'blunt arrow',
+                                    description = 'Wooden arrows with wide end, used to cause blunt trauma.',
+                                    cost = 1,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('arrows', ':arrows.png')],
+                                    types = ['ammunition'],
+                                    rarity = 'uncommon',
+                                    ammunition_configuration = AmmunitionConfiguration(
+                                            damage = [(3, 'crushing')],
+                                            critical_range = 12,
+                                            critical_damage = 3,
+                                            ammunition_type = 'arrow',
+                                            count = 15)))
 
     config.append(
                   ItemConfiguration(name = 'robes',
