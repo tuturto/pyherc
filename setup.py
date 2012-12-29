@@ -4,7 +4,7 @@ from distutils.core import setup
 import py2exe
 
 setup(name = 'herculeum',
-      version = '0.7',
+      version = '0.8',
       description = 'Small roguelike',
       author = 'Tuukka Turto',
       author_email = 'tuukka.turto@oktaeder.net',
