@@ -22,7 +22,7 @@
 Module for displaying inventory
 """
 from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
-from PyQt4.QtGui import QGridLayout
+from PyQt4.QtGui import QGridLayout, QPainter, QFont, QFontMetrics
 from PyQt4.QtGui import QTextEdit, QPixmap, QApplication
 from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import Qt, pyqtSignal
@@ -837,7 +837,26 @@ class ItemGlyph(QWidget):
         self.item = item
 
         if item != None:
-            self.icon = self.surface_manager.get_icon(item.icon)
+            if item.ammunition_data != None:
+                count = item.ammunition_data.count
+            else:
+                count = 1
+
+            icon = self.surface_manager.get_icon(item.icon)
+
+            if count != 1:
+                image = icon.toImage()
+                painter = QPainter(image)
+                painter.setPen(Qt.white)
+                font = QFont('Helvetica', 180, QFont.Bold)
+                painter.setFont(font)
+                painter.drawText(image.rect(),
+                                 Qt.AlignBottom | Qt.AlignRight,
+                                 str(count))
+                icon = icon.fromImage(image)
+                painter = None
+
+            self.icon = icon
         else:
             if self.default_icon == None:
                 self.icon = QPixmap(':transparent.png')
