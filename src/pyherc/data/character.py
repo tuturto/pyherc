@@ -637,7 +637,7 @@ class Character(object):
         assert direction >= 1
 
         offset = [(0, 0),
-                  (0, 1), (1, -1), (1, 0), (1, 1),
+                  (0, -1), (1, -1), (1, 0), (1, 1),
                   (0, 1), (-1, 1), (-1, 0), (-1, -1)]
 
         return tuple(x for x in
