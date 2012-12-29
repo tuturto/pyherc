@@ -495,6 +495,7 @@ class PlayMapWidget(QWidget):
         :type key: int
         """
         player = self.model.player
+        level = player.level
         direction = self.move_key_map[key]
 
         if modifiers & Qt.ControlModifier:
@@ -509,9 +510,11 @@ class PlayMapWidget(QWidget):
                 player.move(direction,
                             self.action_factory)
             elif direction != 9:
-                player.perform_attack(direction,
-                                      self.action_factory,
-                                      self.rng)
+                loc = player.get_location_at_direction(direction)
+                if level.get_creature_at(loc) != None:
+                    player.perform_attack(direction,
+                                          self.action_factory,
+                                          self.rng)
 
     def _menu(self, key, modifiers):
         """
