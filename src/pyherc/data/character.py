@@ -411,7 +411,10 @@ class Character(object):
             else:
                 target_loc = self.get_location_at_direction(direction)
                 if self.level.get_creature_at(target_loc) == None:
-                    attack_type = 'ranged'
+                    if self.level.blocks_movement(target_loc[0], target_loc[1]):
+                        attack_type = 'melee'
+                    else:
+                        attack_type = 'ranged'
                 else:
                     attack_type = 'melee'
 
