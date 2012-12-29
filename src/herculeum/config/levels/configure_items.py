@@ -231,7 +231,7 @@ def init_items(context):
                                             critical_range = 12,
                                             critical_damage = 3,
                                             ammunition_type = 'arrow',
-                                            count = 1)))
+                                            count = 15)))
 
     config.append(
                   ItemConfiguration(name = 'robes',
