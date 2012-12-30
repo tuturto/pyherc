@@ -50,13 +50,37 @@ class PickUpAction(object):
         """
         if self.is_legal():
             self.character.level.items.remove(self.item)
-            self.character.inventory.append(self.item)
-            self.item.location = ()
+
+            if not self._merge_similar_items():
+                self.character.inventory.append(self.item)
+                self.item.location = ()
 
             self.character.raise_event(PickUpEvent(self.character,
                                                    self.item))
 
         self.character.add_to_tick(2)
+
+    @logged
+    def _merge_similar_items(self):
+        """
+        Merge similar items in character inventory
+
+        :returns: True if item was merged, otherwise False
+        :rtype: boolean
+        """
+        if self.item.ammunition_data == None:
+            return False
+
+        items = [x for x in self.character.inventory
+                 if x.name == self.item.name]
+
+        if len(items) == 0:
+            return False
+
+        merged_data = items[0].ammunition_data
+        merged_data.count = merged_data.count + self.item.ammunition_data.count
+
+        return True
 
     @logged
     def is_legal(self):

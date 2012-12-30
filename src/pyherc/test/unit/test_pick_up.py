@@ -27,6 +27,7 @@ from pyherc.events import PickUpEvent
 from pyherc.data import Model
 
 from mockito import mock, verify, any
+from hamcrest import assert_that, is_, equal_to
 
 class TestPickingUp(object):
     """
@@ -104,3 +105,30 @@ class TestPickingUp(object):
 
         assert(not self.item in self.character.inventory)
         assert(self.item in self.level.items)
+
+    def test_merging_ammunition_in_pickup(self):
+        """
+        Same kind of ammunition should be merged when picked up
+        """
+        ammo_1 = (ItemBuilder()
+                    .with_name('arrow')
+                    .with_count(10)
+                    .build())
+        ammo_2 = (ItemBuilder()
+                    .with_name('arrow')
+                    .with_count(20)
+                    .build())
+
+        self.level.add_item(ammo_1, self.character.location)
+        self.level.add_item(ammo_2, self.character.location)
+
+        self.character.pick_up(ammo_1,
+                               self.action_factory)
+        self.character.pick_up(ammo_2,
+                               self.action_factory)
+
+        assert_that(len(self.character.inventory), is_(equal_to(1)))
+
+        item = self.character.inventory[0]
+
+        assert_that(item.ammunition_data.count, is_(equal_to(30)))
