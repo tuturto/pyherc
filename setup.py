@@ -9,7 +9,10 @@ setup(name = 'herculeum',
       author = 'Tuukka Turto',
       author_email = 'tuukka.turto@oktaeder.net',
       url = 'https://github.com/tuturto/pyherc/',
-      windows = ['src/herculeum/main.py'],
+      windows = [{'script': 'src/herculeum/main.py',
+                  'dest_base': 'herculeum',
+                  'icon_resources': [(0,'resources/herculeum.ico')]
+                  }],
       packages = ['herculeum', 
                  'herculeum.config', 'herculeum.config.levels',
                  'herculeum.gui', 
@@ -25,5 +28,7 @@ setup(name = 'herculeum',
                  'pyherc.rules.inventory', 'pyherc.rules.move'],
       options = {
                  "py2exe": {
-                            "dll_excludes": ["MSVCP90.dll"]}},
+                            "dll_excludes": ["MSVCP90.dll"],
+                            "includes": ["sip"]
+                            }},
       package_dir = {'': 'src'})
