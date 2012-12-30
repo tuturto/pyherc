@@ -181,48 +181,6 @@ class TestItemsInLevel:
                                     .with_inventory_factory()
                                     .build())
 
-    def test_picking_up(self):
-        """
-        Test that item can be picked up
-        """
-        assert(self.character.location == (5, 5))
-        assert(self.item.location == (5, 5))
-
-        self.character.pick_up(self.item,
-                               self.action_factory)
-
-        assert(self.item in self.character.inventory)
-        assert(not self.item in self.level.items)
-        assert(self.item.location == ())
-
-    def test_picking_up_raises_event(self):
-        """
-        Event should be raised when item is picked up
-        """
-        observer = mock(Character)
-
-        self.level.add_creature(observer, (1, 1))
-
-        self.character.pick_up(self.item,
-                               self.action_factory)
-
-        verify(observer).receive_event(any(PickUpEvent))
-
-    def test_picking_up_not_correct_location(self): #pylint: disable=C0103
-        """
-        Test that item is not picked up from wrong location
-        """
-        self.character.location = (6, 6)
-
-        assert(self.character.location == (6, 6))
-        assert(self.item.location == (5, 5))
-
-        self.character.pick_up(self.item,
-                               self.action_factory)
-
-        assert(not self.item in self.character.inventory)
-        assert(self.item in self.level.items)
-
     def test_finding_items(self):
         """
         Test that level can be queried for items on a certain location
