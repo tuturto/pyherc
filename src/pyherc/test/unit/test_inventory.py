@@ -140,3 +140,31 @@ class TestInventory(object):
         del inventory[0]
 
         assert_that(inventory.weapon, is_(none()))
+
+    def test_armour_in_use(self):
+        """
+        Test that removing armour in use removes it from use
+        """
+        inventory = Inventory()
+        item = mock()
+
+        inventory.append(item)
+        inventory.armour = item
+
+        inventory.remove(item)
+
+        assert_that(inventory.armour, is_(none()))
+
+    def test_projectiles_in_use(self):
+        """
+        Test that removing projectiles in use removes it from use
+        """
+        inventory = Inventory()
+        item = mock()
+
+        inventory.append(item)
+        inventory.projectiles = item
+
+        inventory.remove(item)
+
+        assert_that(inventory.projectiles, is_(none()))

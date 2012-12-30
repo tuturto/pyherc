@@ -98,6 +98,8 @@ class Inventory(object):
             self.weapon = None
         if item == self.armour:
             self.armour = None
+        if item == self.projectiles:
+            self.projectiles = None
 
     def _repr_pretty_(self, p, cycle):
         """
