@@ -4,7 +4,7 @@ from distutils.core import setup
 import py2exe
 
 setup(name = 'herculeum',
-      version = '0.8',
+      version = '0.9',
       description = 'Small roguelike game',
       long_description = 'Herculeum is a simple roguelike game, where player has to dwelve deep into a dungeon.',
       author = 'Tuukka Turto',
