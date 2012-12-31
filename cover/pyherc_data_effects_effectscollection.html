@@ -5,7 +5,7 @@
     
     
     <meta http-equiv='X-UA-Compatible' content='IE=emulateIE7' />
-    <title>Coverage for pyherc.data.effects.effectscollection: 91%</title>
+    <title>Coverage for pyherc.data.effects.effectscollection: 83%</title>
     <link rel='stylesheet' href='style.css' type='text/css'>
     
     <script type='text/javascript' src='jquery-1.4.3.min.js'></script>
@@ -21,13 +21,13 @@
 <div id='header'>
     <div class='content'>
         <h1>Coverage for <b>pyherc.data.effects.effectscollection</b> :
-            <span class='pc_cov'>91%</span>
+            <span class='pc_cov'>83%</span>
         </h1>
         <img id='keyboard_icon' src='keybd_closed.png'>
         <h2 class='stats'>
-            58 statements &nbsp;
-            <span class='run hide_run shortkey_r button_toggle_run'>53 run</span>
-            <span class='mis shortkey_m button_toggle_mis'>5 missing</span>
+            65 statements &nbsp;
+            <span class='run hide_run shortkey_r button_toggle_run'>54 run</span>
+            <span class='mis shortkey_m button_toggle_mis'>11 missing</span>
             <span class='exc shortkey_x button_toggle_exc'>0 excluded</span>
             
         </h2>
@@ -244,6 +244,21 @@
 <p id='n181' class='stm run hide_run'><a href='#n181'>181</a></p>
 <p id='n182' class='pln'><a href='#n182'>182</a></p>
 <p id='n183' class='stm mis'><a href='#n183'>183</a></p>
+<p id='n184' class='pln'><a href='#n184'>184</a></p>
+<p id='n185' class='stm run hide_run'><a href='#n185'>185</a></p>
+<p id='n186' class='pln'><a href='#n186'>186</a></p>
+<p id='n187' class='pln'><a href='#n187'>187</a></p>
+<p id='n188' class='pln'><a href='#n188'>188</a></p>
+<p id='n189' class='pln'><a href='#n189'>189</a></p>
+<p id='n190' class='pln'><a href='#n190'>190</a></p>
+<p id='n191' class='pln'><a href='#n191'>191</a></p>
+<p id='n192' class='stm mis'><a href='#n192'>192</a></p>
+<p id='n193' class='stm mis'><a href='#n193'>193</a></p>
+<p id='n194' class='pln'><a href='#n194'>194</a></p>
+<p id='n195' class='stm mis'><a href='#n195'>195</a></p>
+<p id='n196' class='stm mis'><a href='#n196'>196</a></p>
+<p id='n197' class='stm mis'><a href='#n197'>197</a></p>
+<p id='n198' class='stm mis'><a href='#n198'>198</a></p>
                 
             </td>
             <td class='text' valign='top'>
@@ -430,6 +445,21 @@
 <p id='t181' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>min</span><span class='op'>(</span><span class='nam'>charges</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
 <p id='t182' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>else</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
 <p id='t183' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>None</span><span class='strut'>&nbsp;</span></p>
+<p id='t184' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t185' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>_repr_pretty_</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>,</span> <span class='nam'>p</span><span class='op'>,</span> <span class='nam'>cycle</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t186' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
+<p id='t187' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; Pretty print for IPython</span><span class='strut'>&nbsp;</span></p>
+<p id='t188' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t189' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :param p: printer to write</span><span class='strut'>&nbsp;</span></p>
+<p id='t190' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; :param cycle: has pretty print detected a cycle?</span><span class='strut'>&nbsp;</span></p>
+<p id='t191' class='pln'><span class='str'>&nbsp; &nbsp; &nbsp; &nbsp; &quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
+<p id='t192' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>cycle</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t193' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>p</span><span class='op'>.</span><span class='nam'>text</span><span class='op'>(</span><span class='str'>&#39;EffectsCollection(...)&#39;</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t194' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>else</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t195' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>p</span><span class='op'>.</span><span class='nam'>text</span><span class='op'>(</span><span class='str'>&#39;Effects:&#39;</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t196' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>for</span> <span class='nam'>effect</span> <span class='key'>in</span> <span class='nam'>self</span><span class='op'>.</span><span class='nam'>effects</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t197' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>p</span><span class='op'>.</span><span class='nam'>pretty</span><span class='op'>(</span><span class='nam'>effect</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t198' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>p</span><span class='op'>.</span><span class='nam'>breakable</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
                 
             </td>
         </tr>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.generators.creature &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.generators.creature &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.generators" href="package_generators.html" />
     <link rel="next" title="pyherc.generators.dungeon" href="module_dungeon.html" />
     <link rel="prev" title="pyherc.generators" href="package_generators.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="package_generators.html" title="pyherc.generators"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_generators.html" accesskey="U">pyherc.generators</a> &raquo;</li> 
@@ -61,22 +61,18 @@
   <div class="section" id="module-pyherc.generators.creature">
 <span id="pyherc-generators-creature"></span><h1>pyherc.generators.creature<a class="headerlink" href="#module-pyherc.generators.creature" title="Permalink to this headline">¶</a></h1>
 <p>Module for creature generation related classes</p>
-<dl class="docutils">
-<dt>Classes:</dt>
-<dd>CreatureGenerator</dd>
-</dl>
 <dl class="class">
-<dt id="pyherc.generators.creature.CreatureGenerator">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.creature.</tt><tt class="descname">CreatureGenerator</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.creature.CreatureGenerator" title="Permalink to this definition">¶</a></dt>
+<dt id="pyherc.generators.creature.CreatureConfiguration">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.creature.</tt><tt class="descname">CreatureConfiguration</tt><big>(</big><em>name</em>, <em>body</em>, <em>finesse</em>, <em>mind</em>, <em>hp</em>, <em>speed</em>, <em>icons</em>, <em>attack</em>, <em>ai=None</em>, <em>effect_handles=None</em>, <em>effects=None</em>, <em>inventory=None</em>, <em>description=None</em><big>)</big><a class="headerlink" href="#pyherc.generators.creature.CreatureConfiguration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>Class used to generate creatures</p>
-<blockquote>
-<div><dl class="method">
-<dt id="pyherc.generators.creature.CreatureGenerator.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>configuration</em>, <em>model</em>, <em>action_factory</em>, <em>rng</em><big>)</big><a class="headerlink" href="#pyherc.generators.creature.CreatureGenerator.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default constructor</p>
+<p>Configuration for an creature</p>
 </dd></dl>
 
+<dl class="class">
+<dt id="pyherc.generators.creature.CreatureGenerator">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.creature.</tt><tt class="descname">CreatureGenerator</tt><big>(</big><em>configuration</em>, <em>model</em>, <em>item_generator</em>, <em>rng</em><big>)</big><a class="headerlink" href="#pyherc.generators.creature.CreatureGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class used to generate creatures</p>
 <dl class="method">
 <dt id="pyherc.generators.creature.CreatureGenerator.generate_creature">
 <tt class="descname">generate_creature</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#pyherc.generators.creature.CreatureGenerator.generate_creature" title="Permalink to this definition">¶</a></dt>
@@ -91,49 +87,15 @@
 </table>
 </dd></dl>
 
-</div></blockquote>
 </dd></dl>
 
 <dl class="class">
-<dt id="pyherc.generators.creature.CreatureConfigurations">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.creature.</tt><tt class="descname">CreatureConfigurations</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.creature.CreatureConfigurations" title="Permalink to this definition">¶</a></dt>
+<dt id="pyherc.generators.creature.InventoryConfiguration">
+<em class="property">class </em><tt class="descclassname">pyherc.generators.creature.</tt><tt class="descname">InventoryConfiguration</tt><big>(</big><em>item_name</em>, <em>min_amount</em>, <em>max_amount</em>, <em>probability</em><big>)</big><a class="headerlink" href="#pyherc.generators.creature.InventoryConfiguration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>Collection of creature configurations</p>
-<dl class="method">
-<dt id="pyherc.generators.creature.CreatureConfigurations.add_creature">
-<tt class="descname">add_creature</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.creature.CreatureConfigurations.add_creature" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add creature to configuration</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>specification</strong> (<em>CreatureConfiguration</em>) &#8211; specification of creature</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.generators.creature.CreatureConfigurations.get_by_name">
-<tt class="descname">get_by_name</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.creature.CreatureConfigurations.get_by_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get creature configuration</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>string</em>) &#8211; name of the creature</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="pyherc.generators.creature.CreatureConfiguration">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.creature.</tt><tt class="descname">CreatureConfiguration</tt><big>(</big><em>name</em>, <em>body</em>, <em>finesse</em>, <em>mind</em>, <em>hp</em>, <em>speed</em>, <em>icons</em>, <em>attack</em>, <em>ai=None</em>, <em>effect_handles=None</em>, <em>effects=None</em>, <em>inventory=None</em><big>)</big><a class="headerlink" href="#pyherc.generators.creature.CreatureConfiguration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>Configuration for an creature</p>
+<p>Configuration for inventory of a creature</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.6.</span></p>
 </dd></dl>
 
 </div>
@@ -187,7 +149,7 @@
         <li class="right" >
           <a href="package_generators.html" title="pyherc.generators"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_generators.html" >pyherc.generators</a> &raquo;</li> 

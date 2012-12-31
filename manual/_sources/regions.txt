@@ -43,3 +43,16 @@ Spider
 ======
 Spider of huge size. These monsters stand almost as tall as human. They are not
 particularly fast, but their poisoned attacks can quickly kill careless adventurer.
+
+************
+Crimson Lair
+************
+It is rumoured that very deep caverns under city of Herculeum hide Crimson Lair.
+The Tome of Um'bano reads:
+
+   *In the ancient times, old evil ruled over the land and terrorized everything.
+   Kingdoms were drowned in fire and destroyed by demon, Crimson Jaw. Only when
+   seven sages combined their powers, they could overcome him. But Crimson Jaw
+   was too strong to be destroyed completely and his spirit had to be bound and
+   trapped. Crimson Lair is his final resting place, where seals of seven sages
+   keep him imprisoned.*

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.data.portal &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.data.portal &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.data" href="package_data.html" />
-    <link rel="next" title="pyherc.debug" href="../debug/module_debug.html" />
+    <link rel="next" title="pyherc.events" href="../events/package_events.html" />
     <link rel="prev" title="pyherc.data.model" href="module_model.html" /> 
   </head>
   <body>
@@ -41,12 +41,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../debug/module_debug.html" title="pyherc.debug"
+          <a href="../events/package_events.html" title="pyherc.events"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="module_model.html" title="pyherc.data.model"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
@@ -63,12 +63,12 @@
 <p>Module containing classes to represent Portals</p>
 <dl class="class">
 <dt id="pyherc.data.portal.Portal">
-<em class="property">class </em><tt class="descclassname">pyherc.data.portal.</tt><tt class="descname">Portal</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.data.portal.</tt><tt class="descname">Portal</tt><big>(</big><em>icons</em>, <em>level_generator_name</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Portal linking two levels together</p>
 <dl class="method">
 <dt id="pyherc.data.portal.Portal.get_other_end">
-<tt class="descname">get_other_end</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.get_other_end" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_other_end</tt><big>(</big><em>level_generator_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.get_other_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the other end of the portal</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -102,7 +102,7 @@
 
 <dl class="method">
 <dt id="pyherc.data.portal.Portal.notify_update_listeners">
-<tt class="descname">notify_update_listeners</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.notify_update_listeners" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">notify_update_listeners</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.notify_update_listeners" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notify all listeners registered for update of this entity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -134,7 +134,7 @@
 
 <dl class="method">
 <dt id="pyherc.data.portal.Portal.register_for_updates">
-<tt class="descname">register_for_updates</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.register_for_updates" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">register_for_updates</tt><big>(</big><em>listener</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.register_for_updates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register listener to receive updates for this entity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -150,7 +150,7 @@
 
 <dl class="method">
 <dt id="pyherc.data.portal.Portal.remove_from_updates">
-<tt class="descname">remove_from_updates</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.remove_from_updates" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">remove_from_updates</tt><big>(</big><em>listener</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.remove_from_updates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove listener</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -166,7 +166,7 @@
 
 <dl class="method">
 <dt id="pyherc.data.portal.Portal.set_other_end">
-<tt class="descname">set_other_end</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.set_other_end" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_other_end</tt><big>(</big><em>portal</em><big>)</big><a class="headerlink" href="#pyherc.data.portal.Portal.set_other_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the other end of the portal</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -192,8 +192,8 @@
   <p class="topless"><a href="module_model.html"
                         title="previous chapter">pyherc.data.model</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../debug/module_debug.html"
-                        title="next chapter">pyherc.debug</a></p>
+  <p class="topless"><a href="../events/package_events.html"
+                        title="next chapter">pyherc.events</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../_sources/pyherc/data/module_portal.txt"
@@ -226,12 +226,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../debug/module_debug.html" title="pyherc.debug"
+          <a href="../events/package_events.html" title="pyherc.events"
              >next</a> |</li>
         <li class="right" >
           <a href="module_model.html" title="pyherc.data.model"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_data.html" >pyherc.data</a> &raquo;</li> 

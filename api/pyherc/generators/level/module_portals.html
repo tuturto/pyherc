@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.generators.level.portals &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.generators.level.portals &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.generators.level" href="module_level.html" />
     <link rel="next" title="pyherc.generators.level.decorator" href="decorator/module_decorator.html" />
     <link rel="prev" title="pyherc.generators.level.prototiles" href="module_prototiles.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_prototiles.html" title="pyherc.generators.level.prototiles"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_generators.html" >pyherc.generators</a> &raquo;</li>
@@ -64,12 +64,12 @@
 <p>Module for adding portals</p>
 <dl class="class">
 <dt id="pyherc.generators.level.portals.PortalAdder">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.level.portals.</tt><tt class="descname">PortalAdder</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.portals.</tt><tt class="descname">PortalAdder</tt><big>(</big><em>icons</em>, <em>location_type</em>, <em>level_generator_name</em>, <em>escape_stairs</em>, <em>rng</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Basic class for adding portals</p>
 <dl class="method">
 <dt id="pyherc.generators.level.portals.PortalAdder.add_portal">
-<tt class="descname">add_portal</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdder.add_portal" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_portal</tt><big>(</big><em>level</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdder.add_portal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add given stairs to the level</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -85,7 +85,7 @@
 
 <dl class="class">
 <dt id="pyherc.generators.level.portals.PortalAdderConfiguration">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.level.portals.</tt><tt class="descname">PortalAdderConfiguration</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderConfiguration" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.portals.</tt><tt class="descname">PortalAdderConfiguration</tt><big>(</big><em>icons</em>, <em>level_type</em>, <em>location_type</em>, <em>chance</em>, <em>new_level</em>, <em>unique</em>, <em>escape_stairs=False</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderConfiguration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Configuration class for adding portals</p>
 <dl class="attribute">
@@ -98,6 +98,12 @@
 <dt id="pyherc.generators.level.portals.PortalAdderConfiguration.icons">
 <tt class="descname">icons</tt><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderConfiguration.icons" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get pair of icons to use for portal and the other end</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.generators.level.portals.PortalAdderConfiguration.is_escape_stairs">
+<tt class="descname">is_escape_stairs</tt><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderConfiguration.is_escape_stairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do these stairs lead outside of dungeon</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -128,12 +134,12 @@
 
 <dl class="class">
 <dt id="pyherc.generators.level.portals.PortalAdderFactory">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.level.portals.</tt><tt class="descname">PortalAdderFactory</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderFactory" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.portals.</tt><tt class="descname">PortalAdderFactory</tt><big>(</big><em>config</em>, <em>rng</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Class for creating portal adders</p>
 <dl class="method">
 <dt id="pyherc.generators.level.portals.PortalAdderFactory.create_portal_adders">
-<tt class="descname">create_portal_adders</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderFactory.create_portal_adders" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">create_portal_adders</tt><big>(</big><em>level_type</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.portals.PortalAdderFactory.create_portal_adders" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create portal adders for level type</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -202,7 +208,7 @@
         <li class="right" >
           <a href="module_prototiles.html" title="pyherc.generators.level.prototiles"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_generators.html" >pyherc.generators</a> &raquo;</li>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.public &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.rules.public &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.rules" href="package_rules.html" />
     <link rel="next" title="pyherc.rules.utils" href="module_utils.html" />
     <link rel="prev" title="pyherc.rules.moving" href="module_moving.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_moving.html" title="pyherc.rules.moving"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_rules.html" accesskey="U">pyherc.rules</a> &raquo;</li> 
@@ -70,12 +70,12 @@ DrinkParameters - Class used to guide drinking related actions
 InventoryParameters - Class used to guide inventory related actions</p>
 <dl class="class">
 <dt id="pyherc.rules.public.ActionFactory">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">ActionFactory</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionFactory" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">ActionFactory</tt><big>(</big><em>model</em>, <em>factories</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Object for creating actions</p>
 <dl class="method">
 <dt id="pyherc.rules.public.ActionFactory.get_action">
-<tt class="descname">get_action</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionFactory.get_action" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_action</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionFactory.get_action" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an action</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -85,7 +85,7 @@ InventoryParameters - Class used to guide inventory related actions</p>
 
 <dl class="method">
 <dt id="pyherc.rules.public.ActionFactory.get_sub_factories">
-<tt class="descname">get_sub_factories</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionFactory.get_sub_factories" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_sub_factories</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionFactory.get_sub_factories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all sub factories</p>
 <dl class="docutils">
 <dt>Returns:</dt>
@@ -95,7 +95,7 @@ InventoryParameters - Class used to guide inventory related actions</p>
 
 <dl class="method">
 <dt id="pyherc.rules.public.ActionFactory.get_sub_factory">
-<tt class="descname">get_sub_factory</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionFactory.get_sub_factory" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_sub_factory</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionFactory.get_sub_factory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get sub factory to handle parameters</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -109,35 +109,35 @@ InventoryParameters - Class used to guide inventory related actions</p>
 
 <dl class="class">
 <dt id="pyherc.rules.public.ActionParameters">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">ActionParameters</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.ActionParameters" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">ActionParameters</tt><a class="headerlink" href="#pyherc.rules.public.ActionParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Object for controlling action creation</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="pyherc.rules.public.AttackParameters">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">AttackParameters</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.AttackParameters" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">AttackParameters</tt><big>(</big><em>attacker</em>, <em>direction</em>, <em>attack_type</em>, <em>random_number_generator</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.AttackParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pyherc.rules.public.ActionParameters" title="pyherc.rules.public.ActionParameters"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.public.ActionParameters</span></tt></a></p>
 <p>Object for controlling attack action creation</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="pyherc.rules.public.DrinkParameters">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">DrinkParameters</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.DrinkParameters" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">DrinkParameters</tt><big>(</big><em>character</em>, <em>item</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.DrinkParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pyherc.rules.public.ActionParameters" title="pyherc.rules.public.ActionParameters"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.public.ActionParameters</span></tt></a></p>
 <p>Object for controlling drink action creation</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="pyherc.rules.public.InventoryParameters">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">InventoryParameters</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.InventoryParameters" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">InventoryParameters</tt><big>(</big><em>character</em>, <em>item</em>, <em>sub_action</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.InventoryParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pyherc.rules.public.ActionParameters" title="pyherc.rules.public.ActionParameters"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.public.ActionParameters</span></tt></a></p>
 <p>Class for controlling inventory action creation</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="pyherc.rules.public.MoveParameters">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">MoveParameters</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.MoveParameters" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">MoveParameters</tt><big>(</big><em>character</em>, <em>direction</em>, <em>movement_mode</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.MoveParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pyherc.rules.public.ActionParameters" title="pyherc.rules.public.ActionParameters"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.public.ActionParameters</span></tt></a></p>
 <p>Object for controlling move action creation</p>
 </dd></dl>
@@ -193,7 +193,7 @@ InventoryParameters - Class used to guide inventory related actions</p>
         <li class="right" >
           <a href="module_moving.html" title="pyherc.rules.moving"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_rules.html" >pyherc.rules</a> &raquo;</li> 

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../index.html" />
     <link rel="up" title="API Reference" href="../api_reference.html" />
     <link rel="next" title="pyherc.aspects" href="module_aspects.html" />
     <link rel="prev" title="herculeum.main" href="../herculeum/module_main.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../herculeum/module_main.html" title="herculeum.main"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" accesskey="U">API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -85,19 +85,16 @@
 <li class="toctree-l2"><a class="reference internal" href="data/module_portal.html">pyherc.data.portal</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="debug/module_debug.html">pyherc.debug</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="debug/module_data.html">pyherc.debug.data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="debug/module_handlers.html">pyherc.debug.handlers</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="events/package_events.html">pyherc.events</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="events/module_combat.html">pyherc.events.combat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events/module_damage.html">pyherc.events.damage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_death.html">pyherc.events.death</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_event.html">pyherc.events.event</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_healing.html">pyherc.events.healing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_hitpoints.html">pyherc.events.hitpoints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_inventory.html">pyherc.events.inventory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_move.html">pyherc.events.move</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events/module_perception.html">pyherc.events.perception</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_poison.html">pyherc.events.poison</a></li>
 </ul>
 </li>
@@ -111,15 +108,13 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rules/package_rules.html">pyherc.rules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rules/attack/module_attack.html">pyherc.rules.attack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rules/attack/package_attack.html">pyherc.rules.attack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/consume/module_consume.html">pyherc.rules.consume</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/inventory/module_inventory.html">pyherc.rules.inventory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/move/module_move.html">pyherc.rules.move</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rules/module_character.html">pyherc.rules.character</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_ending.html">pyherc.rules.ending</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_engine.html">pyherc.rules.engine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_factory.html">pyherc.rules.factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rules/module_items.html">pyherc.rules.items</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_los.html">pyherc.rules.los</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_moving.html">pyherc.rules.moving</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_public.html">pyherc.rules.public</a></li>
@@ -189,7 +184,7 @@
         <li class="right" >
           <a href="../herculeum/module_main.html" title="herculeum.main"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li> 
       </ul>
     </div>

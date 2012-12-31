@@ -54,6 +54,15 @@ to perform configuration:
 This function should return a list of :class:`pyherc.generators.creature.CreatureConfiguration`
 objects.
 
+Player characters
+=================
+Player characters are configured almost identically to all the other character.
+The only difference is the function used:
+
+.. code-block:: python
+
+   def init_players(context):
+
 Effects configuration
 =====================
 The file containing effects configuration should contain following function to

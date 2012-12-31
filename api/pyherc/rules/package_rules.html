@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.rules &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../index.html" />
     <link rel="up" title="pyherc" href="../package_pyherc.html" />
-    <link rel="next" title="pyherc.rules.attack" href="attack/module_attack.html" />
-    <link rel="prev" title="pyherc.generators.level.room.corridor" href="../generators/level/room/module_corridor.html" /> 
+    <link rel="next" title="pyherc.rules.attack" href="attack/package_attack.html" />
+    <link rel="prev" title="pyherc.generators.level.room.squareroom" href="../generators/level/room/module_squareroom.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,12 +41,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="attack/module_attack.html" title="pyherc.rules.attack"
+          <a href="attack/package_attack.html" title="pyherc.rules.attack"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../generators/level/room/module_corridor.html" title="pyherc.generators.level.room.corridor"
+          <a href="../generators/level/room/module_squareroom.html" title="pyherc.generators.level.room.squareroom"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" accesskey="U">pyherc</a> &raquo;</li> 
       </ul>
@@ -62,10 +62,11 @@
 <p>Package for rules of the game</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="attack/module_attack.html">pyherc.rules.attack</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="attack/package_attack.html">pyherc.rules.attack</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="attack/module_action.html">pyherc.rules.attack.action</a></li>
 <li class="toctree-l2"><a class="reference internal" href="attack/module_factories.html">pyherc.rules.attack.factories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="attack/module_melee.html">pyherc.rules.attack.melee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="attack/module_ranged.html">pyherc.rules.attack.ranged</a></li>
 <li class="toctree-l2"><a class="reference internal" href="attack/module_unarmed.html">pyherc.rules.attack.unarmed</a></li>
 </ul>
 </li>
@@ -84,11 +85,9 @@
 <li class="toctree-l2"><a class="reference internal" href="move/module_factories.html">pyherc.rules.move.factories</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="module_character.html">pyherc.rules.character</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_ending.html">pyherc.rules.ending</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_engine.html">pyherc.rules.engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_factory.html">pyherc.rules.factory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_items.html">pyherc.rules.items</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_los.html">pyherc.rules.los</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_moving.html">pyherc.rules.moving</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_public.html">pyherc.rules.public</a></li>
@@ -104,10 +103,10 @@
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../generators/level/room/module_corridor.html"
-                        title="previous chapter">pyherc.generators.level.room.corridor</a></p>
+  <p class="topless"><a href="../generators/level/room/module_squareroom.html"
+                        title="previous chapter">pyherc.generators.level.room.squareroom</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="attack/module_attack.html"
+  <p class="topless"><a href="attack/package_attack.html"
                         title="next chapter">pyherc.rules.attack</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
@@ -141,12 +140,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="attack/module_attack.html" title="pyherc.rules.attack"
+          <a href="attack/package_attack.html" title="pyherc.rules.attack"
              >next</a> |</li>
         <li class="right" >
-          <a href="../generators/level/room/module_corridor.html" title="pyherc.generators.level.room.corridor"
+          <a href="../generators/level/room/module_squareroom.html" title="pyherc.generators.level.room.squareroom"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li> 
       </ul>

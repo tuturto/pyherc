@@ -21,6 +21,7 @@ Contents:
    effects
    configuration
    testing
+   documenting
    api_reference
 
 

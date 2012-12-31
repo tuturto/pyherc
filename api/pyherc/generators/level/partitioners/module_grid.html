@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.generators.level.partitioners.grid &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.generators.level.partitioners.grid &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../../../index.html" />
     <link rel="up" title="pyherc.generators.level.partitioners" href="module_partitioners.html" />
     <link rel="next" title="pyherc.generators.level.partitioners.section" href="module_section.html" />
     <link rel="prev" title="pyherc.generators.level.partitioners" href="module_partitioners.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_partitioners.html" title="pyherc.generators.level.partitioners"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../../package_generators.html" >pyherc.generators</a> &raquo;</li>
@@ -65,12 +65,12 @@
 <p>Module for partitioning level to equal grid</p>
 <dl class="class">
 <dt id="pyherc.generators.level.partitioners.grid.GridPartitioner">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.level.partitioners.grid.</tt><tt class="descname">GridPartitioner</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.GridPartitioner" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.partitioners.grid.</tt><tt class="descname">GridPartitioner</tt><big>(</big><em>level_types</em>, <em>x_sections</em>, <em>y_sections</em>, <em>random_generator</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.GridPartitioner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Class for partitioning level to equal grid</p>
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.grid.GridPartitioner.connect_new_section">
-<tt class="descname">connect_new_section</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.GridPartitioner.connect_new_section" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">connect_new_section</tt><big>(</big><em>section</em>, <em>location</em>, <em>sections</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.GridPartitioner.connect_new_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connects section in given location to its neighbours</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -89,7 +89,7 @@
 
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.grid.GridPartitioner.partition_level">
-<tt class="descname">partition_level</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.GridPartitioner.partition_level" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">partition_level</tt><big>(</big><em>level</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.GridPartitioner.partition_level" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates partitioning for a given level with connection points</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -107,7 +107,7 @@
 
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.grid.GridPartitioner.split_range_to_equals">
-<tt class="descname">split_range_to_equals</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.GridPartitioner.split_range_to_equals" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">split_range_to_equals</tt><big>(</big><em>length</em>, <em>sections</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.GridPartitioner.split_range_to_equals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Split range into equal sized chunks</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -133,12 +133,12 @@
 
 <dl class="class">
 <dt id="pyherc.generators.level.partitioners.grid.RandomConnector">
-<em class="property">class </em><tt class="descclassname">pyherc.generators.level.partitioners.grid.</tt><tt class="descname">RandomConnector</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.RandomConnector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.generators.level.partitioners.grid.</tt><tt class="descname">RandomConnector</tt><big>(</big><em>random_generator</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.RandomConnector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Class for building random connection network from sections</p>
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.grid.RandomConnector.connect_sections">
-<tt class="descname">connect_sections</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.RandomConnector.connect_sections" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">connect_sections</tt><big>(</big><em>sections</em>, <em>start_section=None</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.RandomConnector.connect_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connects sections together</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -156,7 +156,7 @@
 
 <dl class="method">
 <dt id="pyherc.generators.level.partitioners.grid.RandomConnector.form_path_from_sections">
-<tt class="descname">form_path_from_sections</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.RandomConnector.form_path_from_sections" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">form_path_from_sections</tt><big>(</big><em>start_section</em>, <em>sections</em><big>)</big><a class="headerlink" href="#pyherc.generators.level.partitioners.grid.RandomConnector.form_path_from_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>Builds path of connected sections</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -225,7 +225,7 @@
         <li class="right" >
           <a href="module_partitioners.html" title="pyherc.generators.level.partitioners"
              >previous</a> |</li>
-        <li><a href="../../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../../package_generators.html" >pyherc.generators</a> &raquo;</li>

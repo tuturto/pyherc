@@ -19,18 +19,32 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==herculeum.gui.character:23
-==herculeum.gui.inventory:23
-from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
-from PyQt4.QtGui import QDockWidget, QGridLayout, QDrag, QDialog
-from PyQt4.QtGui import QTextEdit,  QIcon, QPixmap, QApplication
-from PyQt4.QtSvg import QSvgWidget
-from PyQt4.QtCore import Qt, QMimeData, pyqtSignal
-import PyQt4.QtGui
-import pyherc
-import pyherc.rules.items
+==herculeum.config.levels.configure_catacombs:24
+==herculeum.config.levels.crimson_lair:24
+from pyherc.generators.level.partitioners import GridPartitioner
 
-from pyherc.data import Item</td>
+from pyherc.generators.level.decorator import ReplacingDecorator
+from pyherc.generators.level.decorator import ReplacingDecoratorConfig
+from pyherc.generators.level.decorator import WallBuilderDecorator
+from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
+from pyherc.generators.level.decorator import AggregateDecorator
+from pyherc.generators.level.decorator import AggregateDecoratorConfig
+
+from pyherc.generators.level.items import ItemAdderConfiguration, ItemAdder
+from pyherc.generators.level.creatures import CreatureAdderConfiguration
+from pyherc.generators.level.creatures import CreatureAdder
+from pyherc.generators import InventoryConfiguration
+
+from pyherc.generators.level.portals import PortalAdderConfiguration
+
+from pyherc.generators.level.prototiles import FLOOR_NATURAL
+from pyherc.generators.level.prototiles import WALL_EMPTY, WALL_NATURAL
+from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
+
+from herculeum.config.tiles import FLOOR_ROCK
+from herculeum.config.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
+from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
+</td>
 </tr>
 <tr class="odd">
 <td>R0801</td>
@@ -39,18 +53,29 @@ from pyherc.data import Item</td>
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==herculeum.config.levels.configure_catacombs:38
-==herculeum.config.levels.configure_upper_crypt:37
-from pyherc.generators.level.portals import PortalAdderConfiguration
+==herculeum.config.levels.configure_catacombs:162
+==herculeum.config.levels.crimson_lair:123
+                                        ]
 
-from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
-from pyherc.generators.level.prototiles import WALL_EMPTY, WALL_NATURAL
-from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
+    config = (LevelConfiguration()
+                    .with_rooms(room_generators)
+                    .with_partitioners(level_partitioners)
+                    .with_decorators(decorators)
+                    .with_items(item_adders)
+                    .with_creatures(creature_adders)
+                    .with_portals(portal_adder_configurations)
+                    .with_level_size(level_size)
+                    .build())
 
-from herculeum.config.tiles import FLOOR_ROCK, FLOOR_BRICK
-from herculeum.config.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
-from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
-</td>
+    return config
+
+def init_creatures(context):
+    """
+    Initialise creatures''
+
+    :returns: list of configuration items
+    :rtype: [CreatureConfiguration]
+    """</td>
 </tr>
 <tr class="even">
 <td>R0801</td>
@@ -59,8 +84,51 @@ from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
+==herculeum.gui.endscreen:107
+==herculeum.gui.menu:117
+        self.done(0)
+
+    def keyPressEvent(self, event):
+        """
+        Handle keyboard events
+        """
+        key = event.key()
+
+        if key in self.keymap:
+            self.keymap[key]()
+        else:</td>
+</tr>
+<tr class="odd">
+<td>R0801</td>
+<td>herculeum.test.unit.__init__</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Similar lines in 2 files
+==herculeum.config.levels.configure_catacombs:95
+==herculeum.config.levels.crimson_lair:91
+                               max_amount = 4,
+                               type = 'weapon',
+                               location = 'room')
+    item_adder_config.add_item(min_amount = 0,
+                               max_amount = 2,
+                               type = 'potion',
+                               location = 'room')
+    item_adder_config.add_item(min_amount = 1,
+                               max_amount = 3,
+                               type = 'food',
+                               location = 'room')</td>
+</tr>
+<tr class="even">
+<td>R0801</td>
+<td>herculeum.test.unit.__init__</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Similar lines in 3 files
 ==herculeum.config.levels.configure_catacombs:26
 ==herculeum.config.levels.configure_upper_crypt:26
+==herculeum.config.levels.crimson_lair:26
 from pyherc.generators.level.decorator import ReplacingDecorator
 from pyherc.generators.level.decorator import ReplacingDecoratorConfig
 from pyherc.generators.level.decorator import WallBuilderDecorator
@@ -78,28 +146,10 @@ from pyherc.generators.level.creatures import CreatureAdder</td>
 <td>&#160;</td>
 <td>1</td>
 <td>0</td>
-<td>Similar lines in 2 files
-==herculeum.gui.inventory:47
-==herculeum.gui.menu:41
-        self.__set_layout(surface_manager,
-                          character,
-                          action_factory,
-                          parent)
-
-    def __set_layout(self, surface_manager, character, action_factory, parent):
-        """
-        Set layout of this widget
-        """</td>
-</tr>
-<tr class="even">
-<td>R0801</td>
-<td>herculeum.test.unit.__init__</td>
-<td>&#160;</td>
-<td>1</td>
-<td>0</td>
-<td>Similar lines in 2 files
-==herculeum.config.levels.configure_catacombs:152
-==herculeum.config.levels.configure_upper_crypt:125
+<td>Similar lines in 3 files
+==herculeum.config.levels.configure_catacombs:164
+==herculeum.config.levels.configure_upper_crypt:134
+==herculeum.config.levels.crimson_lair:125
     config = (LevelConfiguration()
                     .with_rooms(room_generators)
                     .with_partitioners(level_partitioners)
@@ -110,7 +160,7 @@ from pyherc.generators.level.creatures import CreatureAdder</td>
                     .with_level_size(level_size)
                     .build())</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>R0801</td>
 <td>herculeum.test.unit.__init__</td>
 <td>&#160;</td>
@@ -118,13 +168,32 @@ from pyherc.generators.level.creatures import CreatureAdder</td>
 <td>0</td>
 <td>Similar lines in 2 files
 ==herculeum.config.levels.configure_catacombs:109
-==herculeum.config.levels.configure_upper_crypt:100
-                               type = 'food',
+==herculeum.config.levels.configure_upper_crypt:106
+                               location = 'room')
+    item_adder_config.add_item(min_amount = 0,
+                               max_amount = 1,
+                               type = 'tome',
                                location = 'room')
     item_adders = [ItemAdder(item_generator,
                             item_adder_config,
                             rng)]
 </td>
+</tr>
+<tr class="odd">
+<td>R0801</td>
+<td>herculeum.test.unit.__init__</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Similar lines in 2 files
+==herculeum.application:23
+==herculeum.sphinx.helpers:23
+import os.path
+from herculeum.config import Configuration
+from pyherc.data.model import Model
+import sys
+import logging
+import herculeum.config.levels</td>
 </tr>
 <tr class="even">
 <td>R0801</td>
@@ -133,8 +202,8 @@ from pyherc.generators.level.creatures import CreatureAdder</td>
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==herculeum.config.levels.configure_catacombs:142
-==herculeum.config.levels.configure_upper_crypt:116
+==herculeum.config.levels.configure_catacombs:145
+==herculeum.config.levels.configure_upper_crypt:125
     portal_adder_configurations = [PortalAdderConfiguration(
                                         icons = (PORTAL_STAIRS_DOWN,
                                                  PORTAL_STAIRS_UP),

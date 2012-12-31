@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.attack.unarmed &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.rules.attack.unarmed &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../../index.html" />
-    <link rel="up" title="pyherc.rules.attack" href="module_attack.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../../index.html" />
+    <link rel="up" title="pyherc.rules.attack" href="package_attack.html" />
     <link rel="next" title="pyherc.rules.consume" href="../consume/module_consume.html" />
-    <link rel="prev" title="pyherc.rules.attack.melee" href="module_melee.html" /> 
+    <link rel="prev" title="pyherc.rules.attack.ranged" href="module_ranged.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,13 +44,13 @@
           <a href="../consume/module_consume.html" title="pyherc.rules.consume"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="module_melee.html" title="pyherc.rules.attack.melee"
+          <a href="module_ranged.html" title="pyherc.rules.attack.ranged"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>
-          <li><a href="module_attack.html" accesskey="U">pyherc.rules.attack</a> &raquo;</li> 
+          <li><a href="package_attack.html" accesskey="U">pyherc.rules.attack</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -67,14 +67,14 @@ UnarmedToHit
 UnarmedDamage</p>
 <dl class="class">
 <dt id="pyherc.rules.attack.unarmed.UnarmedDamage">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.unarmed.</tt><tt class="descname">UnarmedDamage</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.unarmed.UnarmedDamage" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.unarmed.</tt><tt class="descname">UnarmedDamage</tt><big>(</big><em>damage</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.unarmed.UnarmedDamage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="module_action.html#pyherc.rules.attack.action.Damage" title="pyherc.rules.attack.action.Damage"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.attack.action.Damage</span></tt></a></p>
 <p>Damage done in unarmed attack</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="pyherc.rules.attack.unarmed.UnarmedToHit">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.unarmed.</tt><tt class="descname">UnarmedToHit</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.unarmed.UnarmedToHit" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.attack.unarmed.</tt><tt class="descname">UnarmedToHit</tt><big>(</big><em>attacker</em>, <em>target</em>, <em>random_number_generator</em><big>)</big><a class="headerlink" href="#pyherc.rules.attack.unarmed.UnarmedToHit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="module_action.html#pyherc.rules.attack.action.ToHit" title="pyherc.rules.attack.action.ToHit"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.attack.action.ToHit</span></tt></a></p>
 <p>Class to perform to hit calculations in unarmed combat</p>
 </dd></dl>
@@ -88,8 +88,8 @@ UnarmedDamage</p>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="module_melee.html"
-                        title="previous chapter">pyherc.rules.attack.melee</a></p>
+  <p class="topless"><a href="module_ranged.html"
+                        title="previous chapter">pyherc.rules.attack.ranged</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../consume/module_consume.html"
                         title="next chapter">pyherc.rules.consume</a></p>
@@ -128,13 +128,13 @@ UnarmedDamage</p>
           <a href="../consume/module_consume.html" title="pyherc.rules.consume"
              >next</a> |</li>
         <li class="right" >
-          <a href="module_melee.html" title="pyherc.rules.attack.melee"
+          <a href="module_ranged.html" title="pyherc.rules.attack.ranged"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>
-          <li><a href="module_attack.html" >pyherc.rules.attack</a> &raquo;</li> 
+          <li><a href="package_attack.html" >pyherc.rules.attack</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.data.item &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.data.item &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.data" href="package_data.html" />
     <link rel="next" title="pyherc.data.level" href="module_level.html" />
     <link rel="prev" title="pyherc.data.inventory" href="module_inventory.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_inventory.html" title="pyherc.data.inventory"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
@@ -66,6 +66,24 @@
 <dd>Item
 WeaponData</dd>
 </dl>
+<dl class="class">
+<dt id="pyherc.data.item.AmmunitionData">
+<em class="property">class </em><tt class="descclassname">pyherc.data.item.</tt><tt class="descname">AmmunitionData</tt><big>(</big><em>damage=None</em>, <em>critical_range=None</em>, <em>critical_damage=None</em>, <em>ammunition_type=None</em>, <em>count=1</em><big>)</big><a class="headerlink" href="#pyherc.data.item.AmmunitionData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Represents data of ammunition</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.8.</span></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.data.item.ArmourData">
+<em class="property">class </em><tt class="descclassname">pyherc.data.item.</tt><tt class="descname">ArmourData</tt><big>(</big><em>damage_reduction=None</em>, <em>speed_modifier=None</em><big>)</big><a class="headerlink" href="#pyherc.data.item.ArmourData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Represents data of armours</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.8.</span></p>
+</dd></dl>
+
 <dl class="class">
 <dt id="pyherc.data.item.Item">
 <em class="property">class </em><tt class="descclassname">pyherc.data.item.</tt><tt class="descname">Item</tt><big>(</big><em>effects_collection</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item" title="Permalink to this definition">¶</a></dt>
@@ -105,7 +123,7 @@ WeaponData</dd>
 
 <dl class="method">
 <dt id="pyherc.data.item.Item.get_effect_handles">
-<tt class="descname">get_effect_handles</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.get_effect_handles" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_effect_handles</tt><big>(</big><em>trigger=None</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.get_effect_handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieves effects handles the item has</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -125,7 +143,7 @@ WeaponData</dd>
 
 <dl class="method">
 <dt id="pyherc.data.item.Item.get_main_type">
-<tt class="descname">get_main_type</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.get_main_type" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_main_type</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.get_main_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return main type of the item</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -141,7 +159,7 @@ WeaponData</dd>
 
 <dl class="method">
 <dt id="pyherc.data.item.Item.get_name">
-<tt class="descname">get_name</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.get_name" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_name</tt><big>(</big><em>character</em>, <em>decorate=False</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.get_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get name of the item
 Name can be appearance or given name</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -160,7 +178,7 @@ Name can be appearance or given name</p>
 
 <dl class="method">
 <dt id="pyherc.data.item.Item.get_tags">
-<tt class="descname">get_tags</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.get_tags" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_tags</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.get_tags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return tags</p>
 </dd></dl>
 
@@ -198,7 +216,7 @@ Name can be appearance or given name</p>
 
 <dl class="method">
 <dt id="pyherc.data.item.Item.notify_update_listeners">
-<tt class="descname">notify_update_listeners</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.notify_update_listeners" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">notify_update_listeners</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.notify_update_listeners" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notify all listeners registered for update of this entity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -214,7 +232,7 @@ Name can be appearance or given name</p>
 
 <dl class="method">
 <dt id="pyherc.data.item.Item.register_for_updates">
-<tt class="descname">register_for_updates</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.register_for_updates" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">register_for_updates</tt><big>(</big><em>listener</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.register_for_updates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register listener to receive updates for this entity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -230,7 +248,7 @@ Name can be appearance or given name</p>
 
 <dl class="method">
 <dt id="pyherc.data.item.Item.remove_from_updates">
-<tt class="descname">remove_from_updates</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.remove_from_updates" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">remove_from_updates</tt><big>(</big><em>listener</em><big>)</big><a class="headerlink" href="#pyherc.data.item.Item.remove_from_updates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove listener</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -248,7 +266,7 @@ Name can be appearance or given name</p>
 
 <dl class="class">
 <dt id="pyherc.data.item.WeaponData">
-<em class="property">class </em><tt class="descclassname">pyherc.data.item.</tt><tt class="descname">WeaponData</tt><big>(</big><em>damage=None</em>, <em>critical_range=None</em>, <em>critical_damage=None</em>, <em>weapon_type=None</em><big>)</big><a class="headerlink" href="#pyherc.data.item.WeaponData" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.data.item.</tt><tt class="descname">WeaponData</tt><big>(</big><em>damage=None</em>, <em>critical_range=None</em>, <em>critical_damage=None</em>, <em>weapon_type=None</em>, <em>ammunition_type=None</em><big>)</big><a class="headerlink" href="#pyherc.data.item.WeaponData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Class representing weapon data of items</p>
 </dd></dl>
@@ -304,7 +322,7 @@ Name can be appearance or given name</p>
         <li class="right" >
           <a href="module_inventory.html" title="pyherc.data.inventory"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_data.html" >pyherc.data</a> &raquo;</li> 

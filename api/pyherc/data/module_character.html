@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.data.character &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.data.character &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.data" href="package_data.html" />
     <link rel="next" title="pyherc.data.dungeon" href="module_dungeon.html" />
     <link rel="prev" title="pyherc.data.effects.poison" href="effects/module_poison.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="effects/module_poison.html" title="pyherc.data.effects.poison"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
@@ -63,75 +63,12 @@
 <p>Module for Character related classes</p>
 <dl class="class">
 <dt id="pyherc.data.character.Character">
-<em class="property">class </em><tt class="descclassname">pyherc.data.character.</tt><tt class="descname">Character</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.data.character.</tt><tt class="descname">Character</tt><big>(</big><em>model</em>, <em>effects_collection</em>, <em>inventory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Represents a character in playing world</p>
 <dl class="method">
-<dt id="pyherc.data.character.Character.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>model</em>, <em>action_factory</em>, <em>effects_collection</em>, <em>rng</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default constructor</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>model</strong> (<em>Model</em>) &#8211; model where character acts</li>
-<li><strong>effects_collection</strong> (<em>EffectsCollection</em>) &#8211; collection for effects</li>
-<li><strong>inventory</strong> (<em>Inventory</em>) &#8211; inventory for character</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="pyherc.data.character.Character.hit_points">
-<tt class="descname">hit_points</tt><a class="headerlink" href="#pyherc.data.character.Character.hit_points" title="Permalink to this definition">¶</a></dt>
-<dd><p>Current hitpoints</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="pyherc.data.character.Character.max_hp">
-<tt class="descname">max_hp</tt><a class="headerlink" href="#pyherc.data.character.Character.max_hp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maximum HP this character can currently have</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="pyherc.data.character.Character.body">
-<tt class="descname">body</tt><a class="headerlink" href="#pyherc.data.character.Character.body" title="Permalink to this definition">¶</a></dt>
-<dd><p>Current body attribute</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="pyherc.data.character.Character.finesse">
-<tt class="descname">finesse</tt><a class="headerlink" href="#pyherc.data.character.Character.finesse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Current finesse attribute</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="pyherc.data.character.Character.mind">
-<tt class="descname">mind</tt><a class="headerlink" href="#pyherc.data.character.Character.mind" title="Permalink to this definition">¶</a></dt>
-<dd><p>Current mind attribute</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.receive_event">
-<tt class="descname">receive_event</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.receive_event" title="Permalink to this definition">¶</a></dt>
-<dd><p>Receives an event from world and enters it into short term memory</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<em>Event</em>) &#8211; event to receive</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
 <dt id="pyherc.data.character.Character.act">
-<tt class="descname">act</tt><big>(</big><em>model</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.act" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">act</tt><big>(</big><em>model</em>, <em>action_factory</em>, <em>rng</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Triggers AI of this character</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -149,240 +86,19 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pyherc.data.character.Character.get_attack">
-<tt class="descname">get_attack</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_attack" title="Permalink to this definition">¶</a></dt>
-<dd><p>Attack attribute of the character</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.set_attack">
-<tt class="descname">set_attack</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.set_attack" title="Permalink to this definition">¶</a></dt>
-<dd><p>Attack attribute of the character</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.identify_item">
-<tt class="descname">identify_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.identify_item" title="Permalink to this definition">¶</a></dt>
-<dd><p>Identify item</p>
+<dt id="pyherc.data.character.Character.add_effect">
+<tt class="descname">add_effect</tt><big>(</big><em>effect</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.add_effect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds effect to this character</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>Item</em>) &#8211; item to mark as identified</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>effect</strong> (<em>Effect</em>) &#8211; Effect to add</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.is_proficient">
-<tt class="descname">is_proficient</tt><big>(</big><em>weapon</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.is_proficient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if this character is proficient with a given weapon</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>weapon</strong> (<em>Item</em>) &#8211; weapon which proficient requirements should be checked</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if proficient, otherwise False</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Boolean</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.set_mimic_item">
-<tt class="descname">set_mimic_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.set_mimic_item" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets item this character can mimic or pretend to be</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>Item</em>) &#8211; item to mimic</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.get_mimic_item">
-<tt class="descname">get_mimic_item</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_mimic_item" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets item this character can mimic</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">item to mimic</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Item</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.get_location">
-<tt class="descname">get_location</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_location" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns location of this character</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">location</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(integer, integer)</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.set_location">
-<tt class="descname">set_location</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.set_location" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets location of this character</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>location</strong> (<em>(integer, integer)</em>) &#8211; location to set</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.execute_action">
-<tt class="descname">execute_action</tt><big>(</big><em>action_parameters</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.execute_action" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute action defined by action parameters</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>action_parameters</strong> (<em>ActionParameters</em>) &#8211; parameters controlling creation of the action</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.create_action">
-<tt class="descname">create_action</tt><big>(</big><em>action_parameters</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.create_action" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an action by defined by action parameters</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>action_parameters</strong> (<em>ActionParameters</em>) &#8211; parameters controlling creation of the action</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Action</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.move">
-<tt class="descname">move</tt><big>(</big><em>direction</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.move" title="Permalink to this definition">¶</a></dt>
-<dd><p>Move this character to specified direction</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>direction</strong> (<em>integer</em>) &#8211; direction to move</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.is_move_legal">
-<tt class="descname">is_move_legal</tt><big>(</big><em>direction</em>, <em>movement_mode</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.is_move_legal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if movement is legal</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>direction</strong> (<em>integer</em>) &#8211; direction to move</li>
-<li><strong>movement_mode</strong> (<em>string</em>) &#8211; mode of movement</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if move is legal, False otherwise</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Boolean</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.perform_attack">
-<tt class="descname">perform_attack</tt><big>(</big><em>direction</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.perform_attack" title="Permalink to this definition">¶</a></dt>
-<dd><p>Attack to given direction</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>direction</strong> (<em>integer</em>) &#8211; direction to attack</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-<li><strong>rng</strong> (<em>Random</em>) &#8211; random number generator</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.drink">
-<tt class="descname">drink</tt><big>(</big><em>potion</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.drink" title="Permalink to this definition">¶</a></dt>
-<dd><p>Drink potion</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>potion</strong> (<em>Item</em>) &#8211; potion to drink</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.raise_event">
-<tt class="descname">raise_event</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.raise_event" title="Permalink to this definition">¶</a></dt>
-<dd><p>Raise event for other creatures to see</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<em>Event</em>) &#8211; event to raise</td>
-</tr>
-</tbody>
-</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.4.</span></p>
 </dd></dl>
 
 <dl class="method">
@@ -402,8 +118,138 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="pyherc.data.character.Character.add_to_tick">
+<tt class="descname">add_to_tick</tt><big>(</big><em>cost</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.add_to_tick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add cost of action to characters tick,
+while taking characters speed into account</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cost</strong> (<em>integer</em>) &#8211; Cost of action in ticks</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.data.character.Character.body">
+<tt class="descname">body</tt><a class="headerlink" href="#pyherc.data.character.Character.body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current body attribute</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.create_action">
+<tt class="descname">create_action</tt><big>(</big><em>action_parameters</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.create_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an action by defined by action parameters</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>action_parameters</strong> (<em>ActionParameters</em>) &#8211; parameters controlling creation of the action</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Action</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.drink">
+<tt class="descname">drink</tt><big>(</big><em>potion</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.drink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drink potion</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>potion</strong> (<em>Item</em>) &#8211; potion to drink</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.drop_item">
+<tt class="descname">drop_item</tt><big>(</big><em>item</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.drop_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop item from inventory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>item</strong> (<em>Item</em>) &#8211; item to drop</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.5.</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.equip">
+<tt class="descname">equip</tt><big>(</big><em>item</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.equip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wear item from inventory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>item</strong> (<em>Item</em>) &#8211; item to equip</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.8.</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.execute_action">
+<tt class="descname">execute_action</tt><big>(</big><em>action_parameters</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.execute_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute action defined by action parameters</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>action_parameters</strong> (<em>ActionParameters</em>) &#8211; parameters controlling creation of the action</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.data.character.Character.finesse">
+<tt class="descname">finesse</tt><a class="headerlink" href="#pyherc.data.character.Character.finesse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current finesse attribute</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.get_attack">
+<tt class="descname">get_attack</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_attack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attack attribute of the character</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyherc.data.character.Character.get_effect_handles">
-<tt class="descname">get_effect_handles</tt><big>(</big><em>trigger = None</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_effect_handles" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_effect_handles</tt><big>(</big><em>trigger=None</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_effect_handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get effect handles</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -414,38 +260,6 @@
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">effect handles</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">[EffectHandle]</td>
-</tr>
-</tbody>
-</table>
-<p class="versionadded">
-<span class="versionmodified">New in version 0.4.</span></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.remove_effect_handle">
-<tt class="descname">remove_effect_handle</tt><big>(</big><em>handle</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.remove_effect_handle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove given handle</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>handle</strong> (<em>EffectHandle</em>) &#8211; handle to remove</td>
-</tr>
-</tbody>
-</table>
-<p class="versionadded">
-<span class="versionmodified">New in version 0.4.</span></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.add_effect">
-<tt class="descname">add_effect</tt><big>(</big><em>effect</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.add_effect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds effect to this character</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>effect</strong> (<em>Effect</em>) &#8211; Effect to add</td>
 </tr>
 </tbody>
 </table>
@@ -472,6 +286,284 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="pyherc.data.character.Character.get_location">
+<tt class="descname">get_location</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns location of this character</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">location</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(integer, integer)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.get_location_at_direction">
+<tt class="descname">get_location_at_direction</tt><big>(</big><em>direction</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_location_at_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get location next to this character at given direction</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>direction</strong> (<em>int</em>) &#8211; direction to check</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">coordinates of location</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(int, int)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">values 1 to 8 are supported for direction</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.get_mimic_item">
+<tt class="descname">get_mimic_item</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_mimic_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets item this character can mimic</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">item to mimic</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Item</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.data.character.Character.hit_points">
+<tt class="descname">hit_points</tt><a class="headerlink" href="#pyherc.data.character.Character.hit_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current hitpoints</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.identify_item">
+<tt class="descname">identify_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.identify_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identify item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>Item</em>) &#8211; item to mark as identified</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.is_move_legal">
+<tt class="descname">is_move_legal</tt><big>(</big><em>direction</em>, <em>movement_mode</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.is_move_legal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if movement is legal</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>direction</strong> (<em>integer</em>) &#8211; direction to move</li>
+<li><strong>movement_mode</strong> (<em>string</em>) &#8211; mode of movement</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if move is legal, False otherwise</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.is_proficient">
+<tt class="descname">is_proficient</tt><big>(</big><em>weapon</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.is_proficient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this character is proficient with a given weapon</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>weapon</strong> (<em>Item</em>) &#8211; weapon which proficient requirements should be checked</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if proficient, otherwise False</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.data.character.Character.max_hp">
+<tt class="descname">max_hp</tt><a class="headerlink" href="#pyherc.data.character.Character.max_hp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum HP this character can currently have</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.data.character.Character.mind">
+<tt class="descname">mind</tt><a class="headerlink" href="#pyherc.data.character.Character.mind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current mind attribute</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.move">
+<tt class="descname">move</tt><big>(</big><em>direction</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move this character to specified direction</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>direction</strong> (<em>integer</em>) &#8211; direction to move</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.notify_update_listeners">
+<tt class="descname">notify_update_listeners</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.notify_update_listeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify all listeners registered for update of this entity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<em>Event</em>) &#8211; event to relay to update listeners</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.5.</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.perform_attack">
+<tt class="descname">perform_attack</tt><big>(</big><em>direction</em>, <em>action_factory</em>, <em>rng</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.perform_attack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attack to given direction</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>direction</strong> (<em>integer</em>) &#8211; direction to attack</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+<li><strong>rng</strong> (<em>Random</em>) &#8211; random number generator</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.pick_up">
+<tt class="descname">pick_up</tt><big>(</big><em>item</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.pick_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pick up item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>item</strong> (<em>Item</em>) &#8211; item to pick up</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.4.</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.raise_event">
+<tt class="descname">raise_event</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.raise_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise event for other creatures to see</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<em>Event</em>) &#8211; event to raise</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.receive_event">
+<tt class="descname">receive_event</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.receive_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives an event from world and enters it into short term memory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<em>Event</em>) &#8211; event to receive</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.register_event_listener">
+<tt class="descname">register_event_listener</tt><big>(</big><em>listener</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.register_event_listener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register event listener</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>listener</strong> (<em>Listener</em>) &#8211; listener to add</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.4.</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.register_for_updates">
+<tt class="descname">register_for_updates</tt><big>(</big><em>listener</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.register_for_updates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register listener to receive updates for this entity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>listener</strong> (<em>Listener</em>) &#8211; listener to add</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.5.</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.remove_effect_handle">
+<tt class="descname">remove_effect_handle</tt><big>(</big><em>handle</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.remove_effect_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove given handle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>handle</strong> (<em>EffectHandle</em>) &#8211; handle to remove</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.4.</span></p>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyherc.data.character.Character.remove_expired_effects">
 <tt class="descname">remove_expired_effects</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.remove_expired_effects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove all effects that have expired</p>
@@ -480,20 +572,89 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pyherc.data.character.Character.add_to_tick">
-<tt class="descname">add_to_tick</tt><big>(</big><em>cost</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.add_to_tick" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add cost of action to characters tick,
-while taking characters speed into account</p>
+<dt id="pyherc.data.character.Character.remove_from_updates">
+<tt class="descname">remove_from_updates</tt><big>(</big><em>listener</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.remove_from_updates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove listener</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cost</strong> (<em>integer</em>) &#8211; Cost of action in ticks</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>listener</strong> (<em>Listener</em>) &#8211; listener to remove</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.5.</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.set_attack">
+<tt class="descname">set_attack</tt><big>(</big><em>attack</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.set_attack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attack attribute of the character</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.set_location">
+<tt class="descname">set_location</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.set_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets location of this character</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>location</strong> (<em>(integer, integer)</em>) &#8211; location to set</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="pyherc.data.character.Character.set_mimic_item">
+<tt class="descname">set_mimic_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.set_mimic_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets item this character can mimic or pretend to be</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>Item</em>) &#8211; item to mimic</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.unequip">
+<tt class="descname">unequip</tt><big>(</big><em>item</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.unequip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unequip item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>item</strong> (<em>Item</em>) &#8211; item to unequip</li>
+<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.8.</span></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.data.character.Feat">
+<em class="property">class </em><tt class="descclassname">pyherc.data.character.</tt><tt class="descname">Feat</tt><big>(</big><em>name=None</em>, <em>target=None</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Feat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Represents a feat that a character can have</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.data.character.WeaponProficiency">
+<em class="property">class </em><tt class="descclassname">pyherc.data.character.</tt><tt class="descname">WeaponProficiency</tt><big>(</big><em>weapon_type='simple'</em>, <em>weapon_name=None</em><big>)</big><a class="headerlink" href="#pyherc.data.character.WeaponProficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyherc.data.character.Feat" title="pyherc.data.character.Feat"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.data.character.Feat</span></tt></a></p>
+<p>Represents weapon proficiency feats (proficiency, focus, etc.)</p>
 </dd></dl>
 
 </div>
@@ -547,7 +708,7 @@ while taking characters speed into account</p>
         <li class="right" >
           <a href="effects/module_poison.html" title="pyherc.data.effects.poison"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_data.html" >pyherc.data</a> &raquo;</li> 

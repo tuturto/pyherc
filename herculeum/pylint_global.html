@@ -2,75 +2,7 @@
 <body>
 <div>
 <h1>Report</h1>
-<p>1618 statements analysed.</p><div>
-<h2>Statistics by type</h2>
-<table>
-<tr class="header">
-<th>type</th>
-<th>number</th>
-<th>old number</th>
-<th>difference</th>
-<th>%documented</th>
-<th>%badname</th>
-</tr>
-<tr class="even">
-<td>module</td>
-<td>34</td>
-<td>34</td>
-<td>=</td>
-<td>97.06</td>
-<td>2.94</td>
-</tr>
-<tr class="odd">
-<td>class</td>
-<td>35</td>
-<td>35</td>
-<td>=</td>
-<td>100.00</td>
-<td>0.00</td>
-</tr>
-<tr class="even">
-<td>method</td>
-<td>165</td>
-<td>165</td>
-<td>=</td>
-<td>92.73</td>
-<td>6.67</td>
-</tr>
-<tr class="odd">
-<td>function</td>
-<td>9</td>
-<td>9</td>
-<td>=</td>
-<td>77.78</td>
-<td>22.22</td>
-</tr>
-</table>
-</div>
-<div>
-<h2>Duplication</h2>
-<table>
-<tr class="header">
-<th>&#160;</th>
-<th>now</th>
-<th>previous</th>
-<th>difference</th>
-</tr>
-<tr class="even">
-<th>nb duplicated lines</th>
-<td>59</td>
-<td>59</td>
-<td>=</td>
-</tr>
-<tr class="odd">
-<th>percent duplicated lines</th>
-<td>0.800</td>
-<td>0.800</td>
-<td>=</td>
-</tr>
-</table>
-</div>
-<div>
+<p>2186 statements analysed.</p><div>
 <h2>Raw metrics</h2>
 <table>
 <tr class="header">
@@ -82,34 +14,187 @@
 </tr>
 <tr class="even">
 <td>code</td>
-<td>5165</td>
-<td>72.77</td>
-<td>5165</td>
-<td>=</td>
+<td>23518</td>
+<td>90.93</td>
+<td>23190</td>
+<td>+328.00</td>
 </tr>
 <tr class="odd">
 <td>docstring</td>
-<td>984</td>
-<td>13.86</td>
-<td>984</td>
-<td>=</td>
+<td>1229</td>
+<td>4.75</td>
+<td>1226</td>
+<td>+3.00</td>
 </tr>
 <tr class="even">
 <td>comment</td>
-<td>617</td>
-<td>8.69</td>
-<td>617</td>
-<td>=</td>
+<td>713</td>
+<td>2.76</td>
+<td>715</td>
+<td>-2.00</td>
 </tr>
 <tr class="odd">
 <td>empty</td>
-<td>332</td>
-<td>4.68</td>
-<td>332</td>
-<td>=</td>
+<td>404</td>
+<td>1.56</td>
+<td>406</td>
+<td>-2.00</td>
 </tr>
 </table>
 </div>
+<div>
+<h2>External dependencies</h2>
+<pre>PyQt4 
+  \-QtCore (herculeum.gui.startgame,herculeum.gui.resources)
+  | \-QAbstractAnimation (herculeum.gui.map)
+  | \-QEasingCurve (herculeum.gui.map)
+  | \-QEvent (herculeum.gui.map)
+  | \-QFile (herculeum.application)
+  | \-QLatin1String (herculeum.application)
+  | \-QObject (herculeum.gui.map)
+  | \-QPropertyAnimation (herculeum.gui.map)
+  | \-QRect (herculeum.gui.surfaceManager)
+  | \-QSequentialAnimationGroup (herculeum.gui.map)
+  | \-QSize (herculeum.gui.map)
+  | \-QString (herculeum.gui.help)
+  | \-QVariant (herculeum.gui.help)
+  | \-Qt (herculeum.test.ui.test_listview,herculeum.gui.menu,herculeum.gui.map,herculeum.gui.help,herculeum.test.ui.test_startscreen,herculeum.config.config,herculeum.gui.mainwindow,herculeum.application,herculeum.sphinx.items,herculeum.gui.character,herculeum.gui.startgame,herculeum.gui.inventory)
+  | \-SIGNAL (herculeum.gui.mainwindow)
+  | \-pyqtProperty (herculeum.gui.map)
+  | \-pyqtSignal (herculeum.gui.map,herculeum.gui.inventory)
+  \-QtGui (herculeum.gui.inventory,herculeum.gui.character,herculeum.gui.mainwindow,herculeum.gui.eventdisplay)
+  | \-QAction (herculeum.gui.mainwindow)
+  | \-QApplication (herculeum.test.ui.test_listview,herculeum.test.ui.test_startscreen,herculeum.test.integration.test_config,herculeum.application,herculeum.test.ui.test_characterwidget,herculeum.sphinx.helpers,herculeum.gui.inventory)
+  | \-QColor (herculeum.sphinx.items,herculeum.gui.map)
+  | \-QDialog (herculeum.gui.menu,herculeum.gui.startgame,herculeum.gui.mainwindow,herculeum.gui.help,herculeum.gui.endscreen)
+  | \-QDockWidget (herculeum.gui.widgets,herculeum.gui.eventdisplay)
+  | \-QFont (herculeum.gui.map,herculeum.gui.inventory)
+  | \-QFontMetrics (herculeum.gui.inventory)
+  | \-QFrame (herculeum.gui.widgets)
+  | \-QGraphicsPixmapItem (herculeum.gui.map)
+  | \-QGraphicsScene (herculeum.gui.map)
+  | \-QGraphicsSimpleTextItem (herculeum.gui.map)
+  | \-QGraphicsView (herculeum.gui.map)
+  | \-QGridLayout (herculeum.gui.widgets,herculeum.gui.inventory,herculeum.gui.character)
+  | \-QHBoxLayout (herculeum.gui.map,herculeum.gui.widgets,herculeum.gui.character,herculeum.gui.startgame,herculeum.gui.inventory,herculeum.gui.eventdisplay)
+  | \-QIcon (herculeum.gui.mainwindow)
+  | \-QImage (herculeum.sphinx.items)
+  | \-QLabel (herculeum.gui.widgets,herculeum.gui.startgame,herculeum.gui.inventory,herculeum.gui.character,herculeum.gui.endscreen)
+  | \-QMainWindow (herculeum.gui.mainwindow)
+  | \-QMdiArea (herculeum.gui.mainwindow)
+  | \-QMdiSubWindow (herculeum.gui.map)
+  | \-QPainter (herculeum.sphinx.items,herculeum.gui.inventory)
+  | \-QPixmap (herculeum.test.ui.test_startscreen,herculeum.test.ui.test_listview,herculeum.test.ui.test_characterwidget,herculeum.main,herculeum.gui.surfaceManager,herculeum.gui.inventory)
+  | \-QPushButton (herculeum.gui.mainwindow)
+  | \-QSizePolicy (herculeum.gui.startgame)
+  | \-QSplashScreen (herculeum.main)
+  | \-QSplitter (herculeum.gui.help)
+  | \-QTabWidget (herculeum.gui.menu)
+  | \-QTextBrowser (herculeum.gui.help)
+  | \-QTextEdit (herculeum.gui.inventory,herculeum.gui.eventdisplay)
+  | \-QVBoxLayout (herculeum.gui.menu,herculeum.gui.map,herculeum.gui.help,herculeum.gui.mainwindow,herculeum.gui.endscreen,herculeum.gui.widgets,herculeum.gui.character,herculeum.gui.startgame,herculeum.gui.inventory)
+  | \-QWidget (herculeum.gui.map,herculeum.gui.inventory,herculeum.gui.character,herculeum.gui.widgets,herculeum.gui.eventdisplay)
+  | \-QWorkspace (herculeum.gui.mainwindow)
+  \-QtHelp 
+  | \-QHelpEngine (herculeum.gui.help)
+  \-QtSvg 
+  | \-QSvgWidget (herculeum.gui.inventory,herculeum.gui.character,herculeum.gui.surfaceManager)
+  \-QtTest 
+    \-QTest (herculeum.test.ui.test_listview,herculeum.test.ui.test_startscreen)
+docutils 
+  \-nodes (herculeum.sphinx.items)
+  \-parsers 
+    \-rst 
+      \-Directive (herculeum.sphinx.items)
+      \-directives (herculeum.sphinx.items)
+        \-images 
+        | \-Image (herculeum.sphinx.items)
+        \-unchanged (herculeum.sphinx.items)
+hamcrest 
+  \-assert_that (herculeum.test.ui.test_characterwidget,herculeum.test.ui.test_listview,herculeum.test.ui.test_startscreen)
+  \-core 
+    \-base_matcher 
+      \-BaseMatcher (herculeum.test.matchers.itemglyph)
+logging (herculeum.sphinx.helpers,herculeum.application)
+mockito 
+  \-any (herculeum.test.ui.test_characterwidget,herculeum.test.ui.test_listview,herculeum.test.ui.test_startscreen)
+  \-mock (herculeum.test.ui.test_characterwidget,herculeum.test.integration.test_config,herculeum.test.ui.test_startscreen,herculeum.test.ui.test_listview)
+  \-verify (herculeum.test.ui.test_startscreen)
+  \-when (herculeum.test.ui.test_characterwidget,herculeum.test.ui.test_listview,herculeum.test.ui.test_startscreen)
+os (herculeum.gui.mainwindow,herculeum.gui.help,herculeum.gui.surfaceManager)
+  \-path (herculeum.sphinx.helpers,herculeum.main,herculeum.sphinx.items,herculeum.gui.surfaceManager,herculeum.application)
+pyherc (herculeum.gui.inventory,herculeum.gui.mainwindow,herculeum.gui.surfaceManager)
+  \-ai 
+  | \-FlockingHerbivore (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
+  | \-SkeletonWarriorAI (herculeum.config.levels.configure_catacombs,herculeum.config.levels.crimson_lair)
+  \-aspects 
+  | \-logged (herculeum.gui.surfaceManager)
+  \-config (herculeum.config.config)
+  | \-dsl 
+  |   \-LevelConfiguration (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  \-data 
+  | \-Item (herculeum.gui.inventory)
+  | \-effects 
+  | | \-Damage (herculeum.config.levels.effects)
+  | | \-DamageModifier (herculeum.config.levels.configure_catacombs)
+  | | \-EffectHandle (herculeum.config.levels.configure_items,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  | | \-Heal (herculeum.config.levels.effects)
+  | | \-Poison (herculeum.config.levels.effects)
+  | \-model 
+  |   \-DIED_IN_DUNGEON (herculeum.gui.endscreen)
+  |   \-ESCAPED_DUNGEON (herculeum.gui.endscreen)
+  |   \-Model (herculeum.sphinx.helpers,herculeum.application)
+  \-generators 
+  | \-AmmunitionConfiguration (herculeum.config.levels.configure_items)
+  | \-ArmourConfiguration (herculeum.config.levels.configure_items)
+  | \-CreatureConfiguration (herculeum.config.levels.configure_catacombs,herculeum.test.ui.test_startscreen,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.player_characters,herculeum.config.levels.crimson_lair)
+  | \-CreatureGenerator (herculeum.test.ui.test_startscreen)
+  | \-InventoryConfiguration (herculeum.config.levels.configure_catacombs,herculeum.config.levels.player_characters,herculeum.config.levels.crimson_lair)
+  | \-ItemConfiguration (herculeum.config.levels.configure_items,herculeum.config.levels.crimson_lair)
+  | \-ItemConfigurations (herculeum.config.levels.configure_items)
+  | \-WeaponConfiguration (herculeum.config.levels.configure_items,herculeum.config.levels.crimson_lair)
+  | \-level 
+  |   \-creatures 
+  |   | \-CreatureAdder (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   | \-CreatureAdderConfiguration (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   \-decorator 
+  |   | \-AggregateDecorator (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   | \-AggregateDecoratorConfig (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   | \-ReplacingDecorator (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   | \-ReplacingDecoratorConfig (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   | \-WallBuilderDecorator (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   | \-WallBuilderDecoratorConfig (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   \-items 
+  |   | \-ItemAdder (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   | \-ItemAdderConfiguration (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   \-partitioners 
+  |   | \-GridPartitioner (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   \-portals 
+  |   | \-PortalAdderConfiguration (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   \-prototiles 
+  |   | \-FLOOR_CONSTRUCTED (herculeum.config.levels.configure_upper_crypt)
+  |   | \-FLOOR_NATURAL (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   | \-WALL_CONSTRUCTED (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   | \-WALL_EMPTY (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   | \-WALL_NATURAL (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt,herculeum.config.levels.crimson_lair)
+  |   \-room 
+  |     \-CatacombsGenerator (herculeum.config.levels.configure_catacombs)
+  |     \-CrimsonLairGenerator (herculeum.config.levels.crimson_lair)
+  |     \-PillarRoomGenerator (herculeum.config.levels.configure_upper_crypt)
+  |     \-SquareRoomGenerator (herculeum.config.levels.configure_upper_crypt)
+  \-rules 
+  | \-InventoryParameters (herculeum.test.integration.test_config)
+  \-test 
+    \-builders 
+    | \-CharacterBuilder (herculeum.test.ui.test_characterwidget)
+    | \-EffectBuilder (herculeum.test.ui.test_characterwidget)
+    \-integration 
+      \-detect_base_path (herculeum.test.integration.test_config)
+random 
+  \-Random (herculeum.test.ui.test_startscreen,herculeum.gui.map,herculeum.gui.mainwindow)
+re (herculeum.sphinx.items)
+satin 
+  \-has_label (herculeum.test.ui.test_characterwidget,herculeum.test.ui.test_listview,herculeum.test.ui.test_startscreen)</pre></div>
 <div>
 <h2>Messages by category</h2>
 <table>
@@ -121,21 +206,21 @@
 </tr>
 <tr class="even">
 <td>convention</td>
-<td>85</td>
-<td>85</td>
-<td>=</td>
+<td>172</td>
+<td>151</td>
+<td>+21.00</td>
 </tr>
 <tr class="odd">
 <td>refactor</td>
-<td>22</td>
-<td>22</td>
-<td>=</td>
+<td>37</td>
+<td>36</td>
+<td>+1.00</td>
 </tr>
 <tr class="even">
 <td>warning</td>
-<td>145</td>
-<td>145</td>
-<td>=</td>
+<td>116</td>
+<td>110</td>
+<td>+6.00</td>
 </tr>
 <tr class="odd">
 <td>error</td>
@@ -156,137 +241,144 @@
 <th>convention</th>
 </tr>
 <tr class="even">
-<td>herculeum.gui.inventory</td>
-<td>0.00</td>
-<td>23.45</td>
-<td>13.64</td>
-<td>10.59</td>
-</tr>
-<tr class="odd">
-<td>herculeum.gui.character</td>
-<td>0.00</td>
-<td>13.10</td>
-<td>9.09</td>
-<td>2.35</td>
-</tr>
-<tr class="even">
 <td>herculeum.gui.map</td>
 <td>0.00</td>
-<td>8.97</td>
-<td>22.73</td>
-<td>9.41</td>
+<td>14.66</td>
+<td>16.22</td>
+<td>5.23</td>
 </tr>
 <tr class="odd">
-<td>herculeum.gui.startgame</td>
+<td>herculeum.gui.inventory</td>
 <td>0.00</td>
-<td>7.59</td>
-<td>4.55</td>
-<td>0.00</td>
+<td>13.79</td>
+<td>16.22</td>
+<td>5.23</td>
 </tr>
 <tr class="even">
-<td>herculeum.config.levels.configure_catacombs</td>
+<td>herculeum.sphinx.items</td>
 <td>0.00</td>
-<td>6.21</td>
-<td>4.55</td>
-<td>3.53</td>
+<td>10.34</td>
+<td>10.81</td>
+<td>2.91</td>
 </tr>
 <tr class="odd">
-<td>herculeum.gui.help</td>
+<td>herculeum.sphinx.helpers</td>
 <td>0.00</td>
-<td>6.21</td>
+<td>8.62</td>
 <td>0.00</td>
-<td>7.06</td>
+<td>2.91</td>
 </tr>
 <tr class="even">
 <td>herculeum.gui.mainwindow</td>
 <td>0.00</td>
-<td>5.52</td>
+<td>7.76</td>
 <td>0.00</td>
-<td>7.06</td>
+<td>4.07</td>
 </tr>
 <tr class="odd">
+<td>herculeum.gui.help</td>
+<td>0.00</td>
+<td>7.76</td>
+<td>0.00</td>
+<td>3.49</td>
+</tr>
+<tr class="even">
 <td>herculeum.gui.surfaceManager</td>
 <td>0.00</td>
-<td>4.14</td>
+<td>6.90</td>
 <td>0.00</td>
-<td>7.06</td>
-</tr>
-<tr class="even">
-<td>herculeum.gui.eventdisplay</td>
-<td>0.00</td>
-<td>4.14</td>
-<td>0.00</td>
-<td>0.00</td>
+<td>3.49</td>
 </tr>
 <tr class="odd">
-<td>herculeum.application</td>
+<td>herculeum.gui.eventdisplay</td>
 <td>0.00</td>
-<td>3.45</td>
-<td>4.55</td>
-<td>2.35</td>
+<td>5.17</td>
+<td>0.00</td>
+<td>0.00</td>
 </tr>
 <tr class="even">
+<td>herculeum.gui.menu</td>
+<td>0.00</td>
+<td>4.31</td>
+<td>5.41</td>
+<td>0.58</td>
+</tr>
+<tr class="odd">
 <td>herculeum.test.ui.test_listview</td>
+<td>0.00</td>
+<td>4.31</td>
+<td>0.00</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td>herculeum.test.ui.test_startscreen</td>
 <td>0.00</td>
 <td>3.45</td>
 <td>0.00</td>
-<td>0.00</td>
+<td>2.33</td>
 </tr>
 <tr class="odd">
 <td>herculeum.test.integration.test_config</td>
 <td>0.00</td>
-<td>2.76</td>
+<td>3.45</td>
 <td>0.00</td>
-<td>1.18</td>
+<td>1.16</td>
 </tr>
 <tr class="even">
-<td>herculeum.config.levels.__init__</td>
+<td>herculeum.gui.startgame</td>
 <td>0.00</td>
-<td>2.76</td>
-<td>0.00</td>
-<td>0.00</td>
+<td>2.59</td>
+<td>5.41</td>
+<td>2.91</td>
 </tr>
 <tr class="odd">
-<td>herculeum.gui.menu</td>
+<td>herculeum.gui.character</td>
 <td>0.00</td>
-<td>2.07</td>
-<td>4.55</td>
-<td>1.18</td>
+<td>1.72</td>
+<td>5.41</td>
+<td>0.58</td>
 </tr>
 <tr class="even">
-<td>herculeum.main</td>
+<td>herculeum.gui.endscreen</td>
 <td>0.00</td>
-<td>2.07</td>
-<td>0.00</td>
-<td>7.06</td>
+<td>0.86</td>
+<td>2.70</td>
+<td>1.74</td>
 </tr>
 <tr class="odd">
-<td>herculeum.test.ui.test_inventory</td>
+<td>herculeum.application</td>
 <td>0.00</td>
-<td>2.07</td>
-<td>0.00</td>
-<td>0.00</td>
-</tr>
-<tr class="even">
-<td>herculeum.config.levels.configure_items</td>
-<td>0.00</td>
-<td>0.69</td>
-<td>0.00</td>
-<td>12.94</td>
-</tr>
-<tr class="odd">
-<td>herculeum.test.ui.test_characterwidget</td>
-<td>0.00</td>
-<td>0.69</td>
-<td>0.00</td>
-<td>1.18</td>
+<td>0.86</td>
+<td>2.70</td>
+<td>1.16</td>
 </tr>
 <tr class="even">
 <td>herculeum.config.config</td>
 <td>0.00</td>
-<td>0.69</td>
+<td>0.86</td>
+<td>2.70</td>
 <td>0.00</td>
+</tr>
+<tr class="odd">
+<td>herculeum.config.levels.configure_items</td>
 <td>0.00</td>
+<td>0.86</td>
+<td>0.00</td>
+<td>31.98</td>
+</tr>
+<tr class="even">
+<td>herculeum.main</td>
+<td>0.00</td>
+<td>0.86</td>
+<td>0.00</td>
+<td>2.91</td>
+</tr>
+<tr class="odd">
+<td>herculeum.test.ui.test_characterwidget</td>
+<td>0.00</td>
+<td>0.86</td>
+<td>0.00</td>
+<td>0.58</td>
 </tr>
 </table>
 </div>
@@ -298,71 +390,79 @@
 <th>occurrences</th>
 </tr>
 <tr class="even">
-<td>W0201</td>
-<td>57</td>
+<td>C0301</td>
+<td>105</td>
 </tr>
 <tr class="odd">
-<td>W0611</td>
+<td>C0103</td>
 <td>51</td>
 </tr>
 <tr class="even">
-<td>C0103</td>
-<td>41</td>
+<td>W0611</td>
+<td>36</td>
 </tr>
 <tr class="odd">
-<td>C0301</td>
-<td>28</td>
+<td>W0201</td>
+<td>29</td>
 </tr>
 <tr class="even">
+<td>W0613</td>
+<td>21</td>
+</tr>
+<tr class="odd">
 <td>C0111</td>
 <td>15</td>
 </tr>
+<tr class="even">
+<td>R0913</td>
+<td>9</td>
+</tr>
 <tr class="odd">
-<td>W0613</td>
-<td>10</td>
+<td>R0801</td>
+<td>9</td>
 </tr>
 <tr class="even">
 <td>W0622</td>
 <td>8</td>
 </tr>
 <tr class="odd">
-<td>R0801</td>
-<td>7</td>
-</tr>
-<tr class="even">
-<td>W0301</td>
-<td>6</td>
-</tr>
-<tr class="odd">
-<td>W0403</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<td>R0913</td>
-<td>5</td>
-</tr>
-<tr class="odd">
-<td>R0902</td>
-<td>5</td>
-</tr>
-<tr class="even">
 <td>W0311</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td>R0914</td>
-<td>3</td>
+<td>8</td>
 </tr>
 <tr class="even">
+<td>R0902</td>
+<td>8</td>
+</tr>
+<tr class="odd">
 <td>W0612</td>
-<td>2</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>R0914</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>W0301</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>W0221</td>
+<td>3</td>
 </tr>
 <tr class="odd">
 <td>R0915</td>
 <td>2</td>
 </tr>
 <tr class="even">
-<td>W0511</td>
+<td>R0912</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>R0904</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>W0403</td>
 <td>1</td>
 </tr>
 <tr class="odd">
@@ -370,10 +470,6 @@
 <td>1</td>
 </tr>
 <tr class="even">
-<td>W0221</td>
-<td>1</td>
-</tr>
-<tr class="odd">
 <td>C0302</td>
 <td>1</td>
 </tr>
@@ -381,152 +477,75 @@
 </div>
 <div>
 <h2>Global evaluation</h2>
-Your code has been rated at 8.44/10 (previous run: 8.44/10)</div>
+Your code has been rated at 8.51/10 (previous run: 8.61/10)</div>
 <div>
-<h2>External dependencies</h2>
-<pre>PyQt4 
-  \-QtCore (herculeum.gui.startgame,herculeum.gui.resources)
-  | \-QAbstractAnimation (herculeum.gui.map)
-  | \-QEasingCurve (herculeum.gui.map)
-  | \-QFile (herculeum.application)
-  | \-QLatin1String (herculeum.application)
-  | \-QMimeData (herculeum.gui.inventory,herculeum.gui.character)
-  | \-QObject (herculeum.gui.map)
-  | \-QPropertyAnimation (herculeum.gui.map)
-  | \-QRect (herculeum.gui.surfaceManager)
-  | \-QSequentialAnimationGroup (herculeum.gui.map)
-  | \-QSize (herculeum.gui.map)
-  | \-QString (herculeum.gui.help)
-  | \-QVariant (herculeum.gui.help)
-  | \-Qt (herculeum.test.ui.test_listview,herculeum.gui.menu,herculeum.gui.map,herculeum.gui.help,herculeum.gui.mainwindow,herculeum.application,herculeum.test.ui.test_inventory,herculeum.gui.character,herculeum.gui.inventory)
-  | \-SIGNAL (herculeum.gui.mainwindow)
-  | \-pyqtProperty (herculeum.gui.map)
-  | \-pyqtSignal (herculeum.gui.map,herculeum.gui.inventory,herculeum.gui.character)
-  \-QtGui (herculeum.gui.inventory,herculeum.gui.character,herculeum.gui.mainwindow,herculeum.gui.eventdisplay)
-  | \-QAction (herculeum.gui.mainwindow)
-  | \-QApplication (herculeum.test.ui.test_listview,herculeum.test.integration.test_config,herculeum.application,herculeum.test.ui.test_characterwidget,herculeum.test.ui.test_inventory,herculeum.gui.character,herculeum.gui.inventory)
-  | \-QColor (herculeum.gui.map)
-  | \-QComboBox (herculeum.gui.startgame)
-  | \-QDialog (herculeum.gui.menu,herculeum.gui.help,herculeum.gui.mainwindow,herculeum.gui.character,herculeum.gui.startgame,herculeum.gui.inventory)
-  | \-QDockWidget (herculeum.gui.widgets,herculeum.gui.inventory,herculeum.gui.character,herculeum.gui.eventdisplay)
-  | \-QDrag (herculeum.gui.inventory,herculeum.gui.character)
-  | \-QFont (herculeum.gui.map)
-  | \-QFrame (herculeum.gui.widgets)
-  | \-QGraphicsPixmapItem (herculeum.gui.map)
-  | \-QGraphicsScene (herculeum.gui.map)
-  | \-QGraphicsSimpleTextItem (herculeum.gui.map)
-  | \-QGraphicsView (herculeum.gui.map)
-  | \-QGridLayout (herculeum.gui.widgets,herculeum.gui.inventory,herculeum.gui.character)
-  | \-QHBoxLayout (herculeum.gui.map,herculeum.gui.widgets,herculeum.gui.character,herculeum.gui.startgame,herculeum.gui.inventory,herculeum.gui.eventdisplay)
-  | \-QIcon (herculeum.gui.startgame,herculeum.gui.inventory,herculeum.gui.character,herculeum.gui.mainwindow)
-  | \-QLabel (herculeum.gui.widgets,herculeum.gui.startgame,herculeum.gui.inventory,herculeum.gui.character)
-  | \-QLineEdit (herculeum.gui.startgame)
-  | \-QMainWindow (herculeum.gui.mainwindow)
-  | \-QMdiArea (herculeum.gui.mainwindow)
-  | \-QMdiSubWindow (herculeum.gui.map)
-  | \-QPixmap (herculeum.test.ui.test_listview,herculeum.test.ui.test_characterwidget,herculeum.main,herculeum.test.ui.test_inventory,herculeum.gui.character,herculeum.gui.surfaceManager,herculeum.gui.inventory)
-  | \-QPushButton (herculeum.gui.startgame,herculeum.gui.mainwindow)
-  | \-QSizePolicy (herculeum.gui.startgame)
-  | \-QSplashScreen (herculeum.main)
-  | \-QSplitter (herculeum.gui.help)
-  | \-QTabWidget (herculeum.gui.menu)
-  | \-QTextBrowser (herculeum.gui.help)
-  | \-QTextEdit (herculeum.gui.inventory,herculeum.gui.character,herculeum.gui.eventdisplay)
-  | \-QVBoxLayout (herculeum.gui.menu,herculeum.gui.map,herculeum.gui.help,herculeum.gui.mainwindow,herculeum.gui.widgets,herculeum.gui.character,herculeum.gui.startgame,herculeum.gui.inventory)
-  | \-QWidget (herculeum.gui.map,herculeum.gui.inventory,herculeum.gui.character,herculeum.gui.widgets,herculeum.gui.eventdisplay)
-  | \-QWorkspace (herculeum.gui.mainwindow)
-  \-QtHelp 
-  | \-QHelpEngine (herculeum.gui.help)
-  \-QtSvg 
-  | \-QSvgWidget (herculeum.gui.inventory,herculeum.gui.character,herculeum.gui.surfaceManager)
-  \-QtTest 
-    \-QTest (herculeum.test.ui.test_listview,herculeum.test.ui.test_inventory)
-hamcrest 
-  \-assert_that (herculeum.test.ui.test_characterwidget,herculeum.test.ui.test_listview,herculeum.test.ui.test_inventory)
-  \-core 
-    \-base_matcher 
-      \-BaseMatcher (herculeum.test.matchers.itemglyph)
-logging (herculeum.application)
-mockito 
-  \-any (herculeum.test.ui.test_characterwidget,herculeum.test.ui.test_listview,herculeum.test.ui.test_inventory)
-  \-mock (herculeum.test.ui.test_characterwidget,herculeum.test.integration.test_config,herculeum.test.ui.test_inventory,herculeum.test.ui.test_listview)
-  \-when (herculeum.test.ui.test_characterwidget,herculeum.test.ui.test_listview,herculeum.test.ui.test_inventory)
-os (herculeum.gui.startgame,herculeum.gui.mainwindow,herculeum.gui.help,herculeum.gui.surfaceManager)
-  \-path (herculeum.main,herculeum.gui.surfaceManager,herculeum.application)
-pyherc (herculeum.gui.startgame,herculeum.gui.inventory,herculeum.gui.character,herculeum.gui.surfaceManager)
-  \-ai 
-  | \-FlockingHerbivore (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  | \-SkeletonWarriorAI (herculeum.config.levels.configure_catacombs)
-  \-aspects 
-  | \-Logged (herculeum.gui.surfaceManager)
-  \-config (herculeum.config.config)
-  | \-dsl 
-  |   \-LevelConfiguration (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  \-data 
-  | \-Item (herculeum.gui.inventory,herculeum.gui.character)
-  | \-effects 
-  | | \-DamageModifier (herculeum.config.levels.configure_catacombs)
-  | | \-EffectHandle (herculeum.config.levels.configure_items,herculeum.config.levels.configure_upper_crypt)
-  | | \-Heal (herculeum.config.levels.effects)
-  | | \-Poison (herculeum.config.levels.effects)
-  | \-model 
-  |   \-Model (herculeum.application)
-  \-debug 
-  | \-get_debug_server (herculeum.main)
-  \-generators 
-  | \-CreatureConfiguration (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  | \-InventoryConfiguration (herculeum.config.levels.configure_catacombs)
-  | \-ItemConfiguration (herculeum.config.levels.configure_items)
-  | \-ItemConfigurations (herculeum.config.levels.configure_items)
-  | \-WeaponConfiguration (herculeum.config.levels.configure_items)
-  | \-level 
-  |   \-creatures 
-  |   | \-CreatureAdder (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   | \-CreatureAdderConfiguration (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   \-decorator 
-  |   | \-AggregateDecorator (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   | \-AggregateDecoratorConfig (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   | \-ReplacingDecorator (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   | \-ReplacingDecoratorConfig (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   | \-WallBuilderDecorator (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   | \-WallBuilderDecoratorConfig (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   \-items 
-  |   | \-ItemAdder (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   | \-ItemAdderConfiguration (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   \-partitioners 
-  |   | \-GridPartitioner (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   \-portals 
-  |   | \-PortalAdderConfiguration (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   \-prototiles 
-  |   | \-FLOOR_CONSTRUCTED (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   | \-FLOOR_NATURAL (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   | \-WALL_CONSTRUCTED (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   | \-WALL_EMPTY (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   | \-WALL_NATURAL (herculeum.config.levels.configure_catacombs,herculeum.config.levels.configure_upper_crypt)
-  |   \-room 
-  |     \-CatacombsGenerator (herculeum.config.levels.configure_catacombs)
-  |     \-SquareRoomGenerator (herculeum.config.levels.configure_upper_crypt)
-  \-rules 
-  | \-ActionFactory (herculeum.test.ui.test_inventory)
-  | \-InventoryParameters (herculeum.test.integration.test_config)
-  | \-character (herculeum.gui.mainwindow)
-  | \-items (herculeum.gui.inventory,herculeum.gui.character)
-  \-test 
-    \-builders 
-    | \-ActionFactoryBuilder (herculeum.test.ui.test_inventory)
-    | \-CharacterBuilder (herculeum.test.ui.test_characterwidget,herculeum.test.ui.test_inventory)
-    | \-EffectBuilder (herculeum.test.ui.test_characterwidget)
-    | \-ItemBuilder (herculeum.test.ui.test_inventory)
-    | \-LevelBuilder (herculeum.test.ui.test_inventory)
-    \-integration 
-    | \-detect_base_path (herculeum.test.integration.test_config)
-    \-matchers 
-      \-does_have_item (herculeum.test.ui.test_inventory)
-      \-does_not_have_item (herculeum.test.ui.test_inventory)
-random 
-  \-Random (herculeum.gui.map)
-satin (herculeum.test.ui.test_inventory)
-  \-has_label (herculeum.test.ui.test_characterwidget,herculeum.test.ui.test_listview)</pre></div>
+<h2>Duplication</h2>
+<table>
+<tr class="header">
+<th>&#160;</th>
+<th>now</th>
+<th>previous</th>
+<th>difference</th>
+</tr>
+<tr class="even">
+<th>nb duplicated lines</th>
+<td>125</td>
+<td>125</td>
+<td>=</td>
+</tr>
+<tr class="odd">
+<th>percent duplicated lines</th>
+<td>0.476</td>
+<td>0.483</td>
+<td>-0.01</td>
+</tr>
+</table>
+</div>
+<div>
+<h2>Statistics by type</h2>
+<table>
+<tr class="header">
+<th>type</th>
+<th>number</th>
+<th>old number</th>
+<th>difference</th>
+<th>%documented</th>
+<th>%badname</th>
+</tr>
+<tr class="even">
+<td>module</td>
+<td>40</td>
+<td>40</td>
+<td>=</td>
+<td>97.50</td>
+<td>2.50</td>
+</tr>
+<tr class="odd">
+<td>class</td>
+<td>42</td>
+<td>42</td>
+<td>=</td>
+<td>100.00</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td>method</td>
+<td>197</td>
+<td>197</td>
+<td>=</td>
+<td>93.91</td>
+<td>8.63</td>
+</tr>
+<tr class="odd">
+<td>function</td>
+<td>21</td>
+<td>21</td>
+<td>=</td>
+<td>90.48</td>
+<td>9.52</td>
+</tr>
+</table>
+</div>
 </div>
 </body>
 </html>

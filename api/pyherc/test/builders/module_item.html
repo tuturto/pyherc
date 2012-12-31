@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.test.builders.item &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.test.builders.item &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.test.builders" href="package_builders.html" />
     <link rel="next" title="pyherc.test.builders.level" href="module_level.html" />
     <link rel="prev" title="pyherc.test.builders.effect" href="module_effect.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_effect.html" title="pyherc.test.builders.effect"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
@@ -75,6 +75,227 @@
 <dt>Returns:</dt>
 <dd>Item</dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_ammunition_type">
+<tt class="descname">with_ammunition_type</tt><big>(</big><em>ammunition_type</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_ammunition_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure type of this ammunition</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ammunition_type</strong> (<em>string</em>) &#8211; type of ammunition</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_appearance">
+<tt class="descname">with_appearance</tt><big>(</big><em>appearance</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_appearance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure appearance of the item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>appearance</strong> (<em>string</em>) &#8211; appearance of the item</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">appearance is used as a name of the item if it is not familiar</p>
+</div>
+<p>to the person inspecting it</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_count">
+<tt class="descname">with_count</tt><big>(</big><em>count</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure amount of itmes in countable stack</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>count</strong> (<em>int</em>) &#8211; amount of items</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_damage">
+<tt class="descname">with_damage</tt><big>(</big><em>damage</em>, <em>damage_type</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_damage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure amount of damage done if used as weapon</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>damage</strong> (<em>int</em>) &#8211; amount of damage</li>
+<li><strong>damage_type</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_damage_reduction">
+<tt class="descname">with_damage_reduction</tt><big>(</big><em>damage_reduction</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_damage_reduction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set damage reduction of the item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>damage_reduction</strong> (<em>int</em>) &#8211; amount of damage reduction</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_effect">
+<tt class="descname">with_effect</tt><big>(</big><em>handle</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_effect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add effect handle to the item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>handle</strong> (<em>{}</em>) &#8211; effect handle to add</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">can be called multiple times</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_icon">
+<tt class="descname">with_icon</tt><big>(</big><em>icon</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure icon of the item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>icon</strong> (<em>int</em>) &#8211; icon to use</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_location">
+<tt class="descname">with_location</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure location of the item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>location</strong> (<em>(int, int)</em>) &#8211; location of the item</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_name">
+<tt class="descname">with_name</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure name of the item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>string</em>) &#8211; name of the item</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_range_damage">
+<tt class="descname">with_range_damage</tt><big>(</big><em>damage</em>, <em>damage_type</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_range_damage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure damage of this ammunition</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>damage</strong> (<em>int</em>) &#8211; amount of damage</li>
+<li><strong>damage_type</strong> (<em>string</em>) &#8211; type of damage</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">can be called multiple times</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_required_ammunition_type">
+<tt class="descname">with_required_ammunition_type</tt><big>(</big><em>ammunition_type</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_required_ammunition_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure type of ammunition this weapon requires</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ammunition_type</strong> (<em>string</em>) &#8211; type of ammunition this weapon requires</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_speed_modifier">
+<tt class="descname">with_speed_modifier</tt><big>(</big><em>speed_modifier</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_speed_modifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set speed modifier of the item if used as an armour</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>speed_modifier</strong> (<em>double</em>) &#8211; speed modifier to use</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_tag">
+<tt class="descname">with_tag</tt><big>(</big><em>tag</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add tag to the item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tag</strong> (<em>string</em>) &#8211; tag to add</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">this can be called multiple times</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.item.ItemBuilder.with_weapon_type">
+<tt class="descname">with_weapon_type</tt><big>(</big><em>weapon_type</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.item.ItemBuilder.with_weapon_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set weapon type of the item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>weapon_type</strong> (<em>string</em>) &#8211; type of weapon</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -130,7 +351,7 @@
         <li class="right" >
           <a href="module_effect.html" title="pyherc.test.builders.effect"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>

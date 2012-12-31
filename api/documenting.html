@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Documentation help &mdash; Herculeum 0.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.8 documentation" href="index.html" />
+    <link rel="next" title="API Reference" href="api_reference.html" />
+    <link rel="prev" title="Testing" href="testing.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api_reference.html" title="API Reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="documentation-help">
+<h1>Documentation help<a class="headerlink" href="#documentation-help" title="Permalink to this headline">¶</a></h1>
+<p>This section will have a list of custom helpers for documentation.</p>
+<div class="section" id="intro">
+<h2>Intro<a class="headerlink" href="#intro" title="Permalink to this headline">¶</a></h2>
+<p>Documentation for both Herculeum and pyherc is written with <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a>. It has
+been extended with custom directives that are tailored specifically for this
+project. Files for documentation can be found in doc-directory.</p>
+<div class="section" id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>To take these extended directives into use, they have to be first included in
+conf.py found in source directory of document:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;sphinx.ext.autodoc&#39;</span><span class="p">,</span>
+              <span class="s">&#39;herculeum.sphinx.items&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="items">
+<h3>Items<a class="headerlink" href="#items" title="Permalink to this headline">¶</a></h3>
+<p>Items can be shown in manual easily. There are two directives for single items:
+itemimage and itemdescription. Both take single parameter which is name of the
+item to show:</p>
+<div class="highlight-python"><pre>.. itemimage:: warhammer
+
+.. itemdescription:: warhammer</pre>
+</div>
+<p>Resulting output:</p>
+<img alt="_images/warhammer.png" src="_images/warhammer.png" />
+<p>Heavy two-handed weapon that crushes through but the strongest defences. Rare sight in the battle field, because of the huge weight.</p>
+<p>Previous example renders icon of warhammer and short description. Both of these are
+loaded directly from configuration of the game, ensuring that they are always
+up to date.</p>
+<p>Showing list of certain type of items is easy:</p>
+<div class="highlight-python"><pre>.. itemtable::
+   :type: weapon</pre>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">weapon</th>
+<th class="head">damage</th>
+<th class="head">critical range</th>
+<th class="head">critical damage</th>
+<th class="head">damage types</th>
+<th class="head">type</th>
+<th class="head">weight class</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>warhammer</td>
+<td>7</td>
+<td>12</td>
+<td>7</td>
+<td>crushing</td>
+<td>martial</td>
+<td>two-handed</td>
+</tr>
+</tbody>
+</table>
+<p>This will show statistics of all weapons that have entry in documentation.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Documentation help</a><ul>
+<li><a class="reference internal" href="#intro">Intro</a><ul>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#items">Items</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="testing.html"
+                        title="previous chapter">Testing</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api_reference.html"
+                        title="next chapter">API Reference</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/documenting.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api_reference.html" title="API Reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing"
+             >previous</a> |</li>
+        <li><a href="index.html">Herculeum 0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2012, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

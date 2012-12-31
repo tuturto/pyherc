@@ -25,8 +25,8 @@
         </h1>
         <img id='keyboard_icon' src='keybd_closed.png'>
         <h2 class='stats'>
-            9 statements &nbsp;
-            <span class='run hide_run shortkey_r button_toggle_run'>9 run</span>
+            10 statements &nbsp;
+            <span class='run hide_run shortkey_r button_toggle_run'>10 run</span>
             <span class='mis shortkey_m button_toggle_mis'>0 missing</span>
             <span class='exc shortkey_x button_toggle_exc'>0 excluded</span>
             
@@ -129,6 +129,18 @@
 <p id='n66' class='pln'><a href='#n66'>66</a></p>
 <p id='n67' class='pln'><a href='#n67'>67</a></p>
 <p id='n68' class='stm run hide_run'><a href='#n68'>68</a></p>
+<p id='n69' class='pln'><a href='#n69'>69</a></p>
+<p id='n70' class='pln'><a href='#n70'>70</a></p>
+<p id='n71' class='pln'><a href='#n71'>71</a></p>
+<p id='n72' class='pln'><a href='#n72'>72</a></p>
+<p id='n73' class='pln'><a href='#n73'>73</a></p>
+<p id='n74' class='pln'><a href='#n74'>74</a></p>
+<p id='n75' class='pln'><a href='#n75'>75</a></p>
+<p id='n76' class='pln'><a href='#n76'>76</a></p>
+<p id='n77' class='pln'><a href='#n77'>77</a></p>
+<p id='n78' class='pln'><a href='#n78'>78</a></p>
+<p id='n79' class='pln'><a href='#n79'>79</a></p>
+<p id='n80' class='stm run hide_run'><a href='#n80'>80</a></p>
                 
             </td>
             <td class='text' valign='top'>
@@ -155,7 +167,7 @@
 <p id='t21' class='stm run hide_run'><span class='str'>&quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
 <p id='t22' class='pln'><span class='str'>module for configuring effects</span><span class='strut'>&nbsp;</span></p>
 <p id='t23' class='pln'><span class='str'>&quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
-<p id='t24' class='stm run hide_run'><span class='key'>from</span> <span class='nam'>pyherc</span><span class='op'>.</span><span class='nam'>data</span><span class='op'>.</span><span class='nam'>effects</span> <span class='key'>import</span> <span class='nam'>Heal</span><span class='op'>,</span> <span class='nam'>Poison</span><span class='strut'>&nbsp;</span></p>
+<p id='t24' class='stm run hide_run'><span class='key'>from</span> <span class='nam'>pyherc</span><span class='op'>.</span><span class='nam'>data</span><span class='op'>.</span><span class='nam'>effects</span> <span class='key'>import</span> <span class='nam'>Heal</span><span class='op'>,</span> <span class='nam'>Poison</span><span class='op'>,</span> <span class='nam'>Damage</span><span class='strut'>&nbsp;</span></p>
 <p id='t25' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t26' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>init_effects</span><span class='op'>(</span><span class='nam'>context</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
 <p id='t27' class='pln'>&nbsp; &nbsp; <span class='str'>&quot;&quot;&quot;</span><span class='strut'>&nbsp;</span></p>
@@ -173,7 +185,7 @@
 <p id='t39' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;tick&#39;</span><span class='op'>:</span> <span class='num'>2</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t40' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;healing&#39;</span><span class='op'>:</span> <span class='num'>1</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t41' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;icon&#39;</span><span class='op'>:</span> <span class='nam'>surface_manager</span><span class='op'>.</span><span class='nam'>add_icon</span><span class='op'>(</span><span class='str'>&#39;cure minor wounds&#39;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
-<p id='t42' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class='str'>&#39;minor_healing.png&#39;</span><span class='op'>)</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t42' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class='str'>&#39;:minor_healing.png&#39;</span><span class='op'>)</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t43' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;title&#39;</span><span class='op'>:</span> <span class='str'>&#39;Cure minor wounds&#39;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t44' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;description&#39;</span><span class='op'>:</span> <span class='str'>&#39;Cures small amount of damage&#39;</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
 <p id='t45' class='pln'><span class='strut'>&nbsp;</span></p>
@@ -184,7 +196,7 @@
 <p id='t50' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;tick&#39;</span><span class='op'>:</span> <span class='num'>2</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t51' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;healing&#39;</span><span class='op'>:</span> <span class='num'>2</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t52' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;icon&#39;</span><span class='op'>:</span> <span class='nam'>surface_manager</span><span class='op'>.</span><span class='nam'>add_icon</span><span class='op'>(</span><span class='str'>&#39;cure medium wounds&#39;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
-<p id='t53' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class='str'>&#39;moderate_healing.png&#39;</span><span class='op'>)</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t53' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class='str'>&#39;:moderate_healing.png&#39;</span><span class='op'>)</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t54' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;title&#39;</span><span class='op'>:</span> <span class='str'>&#39;Cure medium wounds&#39;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t55' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;description&#39;</span><span class='op'>:</span> <span class='str'>&#39;Cures medium amount of damage&#39;</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
 <p id='t56' class='pln'><span class='strut'>&nbsp;</span></p>
@@ -195,11 +207,23 @@
 <p id='t61' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;tick&#39;</span><span class='op'>:</span> <span class='num'>60</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t62' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;damage&#39;</span><span class='op'>:</span> <span class='num'>1</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t63' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;icon&#39;</span><span class='op'>:</span> <span class='nam'>surface_manager</span><span class='op'>.</span><span class='nam'>add_icon</span><span class='op'>(</span><span class='str'>&#39;minor poison&#39;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
-<p id='t64' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class='str'>&#39;minor_poison.png&#39;</span><span class='op'>)</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t64' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class='str'>&#39;:minor_poison.png&#39;</span><span class='op'>)</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t65' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;title&#39;</span><span class='op'>:</span> <span class='str'>&#39;Minor poison&#39;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
 <p id='t66' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;description&#39;</span><span class='op'>:</span> <span class='str'>&#39;Causes minor amount of damage&#39;</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
 <p id='t67' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t68' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>config</span><span class='strut'>&nbsp;</span></p>
+<p id='t68' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>config</span><span class='op'>.</span><span class='nam'>append</span><span class='op'>(</span><span class='op'>(</span><span class='str'>&#39;major fire damage&#39;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t69' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class='op'>{</span><span class='str'>&#39;type&#39;</span><span class='op'>:</span> <span class='nam'>Damage</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t70' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;duration&#39;</span><span class='op'>:</span> <span class='nam'>None</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t71' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;frequency&#39;</span><span class='op'>:</span> <span class='nam'>None</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t72' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;tick&#39;</span><span class='op'>:</span> <span class='nam'>None</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t73' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;damage&#39;</span><span class='op'>:</span> <span class='num'>12</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t74' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;damage_type&#39;</span><span class='op'>:</span> <span class='str'>&#39;fire&#39;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t75' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;icon&#39;</span><span class='op'>:</span> <span class='nam'>surface_manager</span><span class='op'>.</span><span class='nam'>add_icon</span><span class='op'>(</span><span class='str'>&#39;minor poison&#39;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t76' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class='str'>&#39;:minor_poison.png&#39;</span><span class='op'>)</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t77' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;title&#39;</span><span class='op'>:</span> <span class='str'>&#39;Major fire damage&#39;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t78' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&#39;description&#39;</span><span class='op'>:</span> <span class='str'>&#39;Causes major amount of fire damage&#39;</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t79' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t80' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>config</span><span class='strut'>&nbsp;</span></p>
                 
             </td>
         </tr>

@@ -14,4 +14,4 @@ pyherc.generators.level
    module_portals
    decorator/module_decorator
    partitioners/module_partitioners
-   room/module_room
+   room/package_room

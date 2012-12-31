@@ -19,9 +19,9 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==pyherc.ai.simple:116
-==pyherc.ai.skeleton:161
-            character.tick = character.tick + 10
+==pyherc.ai.simple:113
+==pyherc.ai.skeleton:164
+                character.tick = character.tick + 10
 
     @logged
     def find_direction(self, start, end):
@@ -80,11 +80,11 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==pyherc.test.builders.damage:44
+==pyherc.test.builders.damage:45
 ==pyherc.test.builders.poison:44
     def with_duration(self, duration):
         """
-        Set duration of damage
+        Set duration of poison
 
         :param duration: duration
         :type duration: int
@@ -94,36 +94,32 @@
 
     def with_frequency(self, frequency):
         """
-        Set frequency of damage
+        Set frequency of poison
         """
         self.frequency = frequency
         return self
 
     def with_tick(self, tick):
         """
-        Set internal clock of damage
+        Set internal clock of poison
         """
         self.tick = tick
         return self
 
     def with_damage(self, damage):
         """
-        Set damage amount
+        Set damage caused by poison
         """
         self.damage = damage
         return self
 
     def with_target(self, target):
         """
-        Set target of the damage
+        Set target of the poison
         """
         self.target = target
         return self
-
-    def build(self):
-        """
-        Builds damage object
-        """</td>
+</td>
 </tr>
 <tr class="even">
 <td>R0801</td>
@@ -132,9 +128,9 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 3 files
-==pyherc.data.character:107
-==pyherc.data.item:173
-==pyherc.data.portal:107
+==pyherc.data.character:110
+==pyherc.data.item:181
+==pyherc.data.portal:106
     @logged
     def register_for_updates(self, listener):
         """
@@ -180,12 +176,12 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 3 files
-==pyherc.test.builders.damage:44
+==pyherc.test.builders.damage:45
 ==pyherc.test.builders.heal:44
 ==pyherc.test.builders.poison:44
     def with_duration(self, duration):
         """
-        Set duration of damage
+        Set duration of heal
 
         :param duration: duration
         :type duration: int
@@ -195,18 +191,84 @@
 
     def with_frequency(self, frequency):
         """
-        Set frequency of damage
+        Set frequency of heal
         """
         self.frequency = frequency
         return self
 
     def with_tick(self, tick):
         """
-        Set internal clock of damage
+        Set internal clock of heal
         """
         self.tick = tick
         return self
 </td>
+</tr>
+<tr class="even">
+<td>R0801</td>
+<td>pyherc.test.unit.__init__</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Similar lines in 3 files
+==pyherc.rules.attack.factories:161
+==pyherc.rules.attack.factories:67
+==pyherc.rules.attack.ranged:81
+    @logged
+    def can_handle(self, parameters):
+        """
+        Can this factory process these parameters
+
+        :param parameters: parameters to check
+        :type parameters: UnarmedAttackParameters
+        :returns: true if factory is capable of handling parameters
+        :rtype: boolean
+        """
+        return self.attack_type == parameters.attack_type
+
+    @logged
+    def get_action(self, parameters):
+        """
+        Create a attack action
+
+        :param parameters: parameters used to control attack creation
+        :type parameters: UnarmedAttackParameters
+        :returns: action that can be executed
+        :rtype: AttackAction
+        """
+        attacker = parameters.attacker
+        target = self.get_target(parameters)</td>
+</tr>
+<tr class="odd">
+<td>R0801</td>
+<td>pyherc.test.unit.__init__</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Similar lines in 4 files
+==pyherc.rules.inventory.equip:40
+==pyherc.rules.inventory.factories:40
+==pyherc.rules.inventory.factories:74
+==pyherc.rules.inventory.unequip:40
+    @logged
+    def can_handle(self, parameters):
+        """
+        Can this factory process these parameters
+
+        :param parameters: parameters to check
+        :returns: True if factory is capable of handling parameters
+        :rtype: Boolean
+        """
+        return self.sub_action == parameters.sub_action
+
+    @logged
+    def get_action(self, parameters):
+        """
+        Create a drop action
+
+        :param parameters: parameters used to control creation
+        :type parameters: InventoryParameters
+        """</td>
 </tr>
 <tr class="even">
 <td>R0801</td>
@@ -241,14 +303,42 @@
 <td>&#160;</td>
 <td>1</td>
 <td>0</td>
-<td>Similar lines in 4 files
-==pyherc.events.healing:122
-==pyherc.events.healing:84
-==pyherc.events.poison:115
-==pyherc.events.poison:79
-                                             level = target.level,
-                                             location = target.location,
-                                             affected_tiles = [])
+<td>Similar lines in 2 files
+==pyherc.generators.level.room.catacombs:44
+==pyherc.generators.level.room.crimson_lair:45
+        self.floor_tile = floor_tile
+        self.empty_tile = empty_tile
+        self.room_width = None
+        self.room_height = None
+        self.level_types = level_types
+        self.rng = rng
+
+    @logged
+    def generate_room(self, section):
+        """
+        Generate room
+
+        :param section: section for generator to draw to
+        :type section: Section
+        """
+        level_size = (section.width, section.height)</td>
+</tr>
+<tr class="even">
+<td>R0801</td>
+<td>pyherc.test.unit.__init__</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Similar lines in 6 files
+==pyherc.events.damage:122
+==pyherc.events.damage:85
+==pyherc.events.healing:123
+==pyherc.events.healing:85
+==pyherc.events.poison:116
+==pyherc.events.poison:80
+                                               level = target.level,
+                                               location = target.location,
+                                               affected_tiles = [])
         self.target = target
         self.effect = effect
 
@@ -263,7 +353,7 @@
         """
         if point_of_view == self.target:</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>R0801</td>
 <td>pyherc.test.unit.__init__</td>
 <td>&#160;</td>
@@ -287,14 +377,13 @@
         self.rng = random.Random()
         self.floor_rock = 1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>R0801</td>
 <td>pyherc.test.unit.__init__</td>
 <td>&#160;</td>
 <td>1</td>
 <td>0</td>
-<td>Similar lines in 3 files
-==pyherc.test.builders.damage:73
+<td>Similar lines in 2 files
 ==pyherc.test.builders.heal:73
 ==pyherc.test.builders.poison:73
         return self
@@ -311,7 +400,7 @@
         Builds poison object
         """</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>R0801</td>
 <td>pyherc.test.unit.__init__</td>
 <td>&#160;</td>
@@ -332,7 +421,7 @@
                                             charges = 1)]))
 </td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>R0801</td>
 <td>pyherc.test.unit.__init__</td>
 <td>&#160;</td>
@@ -352,7 +441,7 @@
                                       rarity = 'common',
                                       weapon_configration = WeaponConfiguration(</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>R0801</td>
 <td>pyherc.test.unit.__init__</td>
 <td>&#160;</td>
@@ -372,16 +461,16 @@
         if self.amount == None:
             description.append(</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>R0801</td>
 <td>pyherc.test.unit.__init__</td>
 <td>&#160;</td>
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 3 files
-==pyherc.test.unit.test_levelgenerator:360
-==pyherc.test.unit.test_levelgenerator:397
-==pyherc.test.unit.test_pathfinding:132
+==pyherc.test.unit.test_levelgenerator:361
+==pyherc.test.unit.test_levelgenerator:399
+==pyherc.test.unit.test_pathfinding:131
         creature_adder = mock()
         item_adder = mock()
 
@@ -392,6 +481,25 @@
                                    item_adder,
                                    creature_adder,</td>
 </tr>
+<tr class="odd">
+<td>R0801</td>
+<td>pyherc.test.unit.__init__</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Similar lines in 2 files
+==pyherc.rules.inventory.equip:79
+==pyherc.rules.inventory.unequip:79
+        self.character = character
+        self.item = item
+
+    @logged
+    def execute(self):
+        """
+        Executes this action
+        """
+        if self.item.get_main_type() == 'armour':</td>
+</tr>
 <tr class="even">
 <td>R0801</td>
 <td>pyherc.test.unit.__init__</td>
@@ -399,15 +507,16 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==pyherc.test.builders.damage:87
-==pyherc.test.builders.poison:87
-                      frequency = self.frequency,
-                      tick = self.tick,
-                      damage = self.damage,
-                      target = self.target,
-                      icon = self.icon,
-                      title = self.title,
-                      description = self.description)</td>
+==pyherc.test.unit.test_item:165
+==pyherc.test.unit.test_pick_up:57
+        self.character = (CharacterBuilder()
+                            .with_location((5, 5))
+                            .with_level(self.level)
+                            .with_model(self.model)
+                            .build())
+
+        self.level.add_item(self.item, (5, 5))
+</td>
 </tr>
 <tr class="odd">
 <td>R0801</td>
@@ -416,14 +525,15 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==pyherc.rules.factory:48
-==pyherc.rules.public:93
-        subs = [x for x in self.factories if x.can_handle(parameters)]
+==pyherc.test.unit.test_item:66
+==pyherc.test.unit.test_pick_up:61
+                            .build())
 
-        if len(subs) == 1:
-            return subs[0]
-        else:
-            return None
+        self.level.add_item(self.item, (5, 5))
+
+        self.action_factory = (ActionFactoryBuilder()
+                                    .with_inventory_factory()
+                                    .build())
 </td>
 </tr>
 <tr class="even">
@@ -433,15 +543,15 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==pyherc.data.effects.damage:39
-==pyherc.data.effects.poison:41
-                                     frequency = frequency,
-                                     tick = tick,
-                                     icon = icon,
-                                     title = title,
-                                     description = description)
-        self.damage = damage
-        self.target = target</td>
+==pyherc.rules.factory:48
+==pyherc.rules.public:90
+        subs = [x for x in self.factories if x.can_handle(parameters)]
+
+        if len(subs) == 1:
+            return subs[0]
+        else:
+            return None
+</td>
 </tr>
 <tr class="odd">
 <td>R0801</td>
@@ -450,17 +560,17 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 4 files
-==pyherc.ai.simple:107
-==pyherc.ai.simple:91
-==pyherc.ai.skeleton:119
-==pyherc.ai.skeleton:155
-        if character.is_move_legal(direction,
-                                   'walk',
-                                   action_factory):
-            character.move(direction,
-                           action_factory)
-        else:
-            character.tick = character.tick + 10</td>
+==pyherc.ai.simple:104
+==pyherc.ai.simple:88
+==pyherc.ai.skeleton:122
+==pyherc.ai.skeleton:158
+                if character.is_move_legal(direction,
+                                           'walk',
+                                           action_factory):
+                    character.move(direction,
+                                   action_factory)
+                else:
+                    character.tick = character.tick + 10</td>
 </tr>
 <tr class="even">
 <td>R0801</td>
@@ -469,7 +579,7 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==pyherc.test.unit.test_creaturegeneration:98
+==pyherc.test.unit.test_creaturegeneration:95
 ==pyherc.test.unit.test_damage_modifiers:124
                                   damage_type = 'crushing',
                                   duration = None,
@@ -485,40 +595,8 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==pyherc.test.unit.test_creatureadder:59
-==pyherc.test.unit.test_creaturegeneration:61
-                        CreatureConfiguration(name = 'rat',
-                                              body = 4,
-                                              finesse = 12,
-                                              mind = 2,
-                                              hp = 2,
-                                              speed = 2,</td>
-</tr>
-<tr class="even">
-<td>R0801</td>
-<td>pyherc.test.unit.__init__</td>
-<td>&#160;</td>
-<td>1</td>
-<td>0</td>
-<td>Similar lines in 2 files
-==pyherc.test.builders.damage:35
-==pyherc.test.builders.poison:35
-        self.duration = 1
-        self.frequency = 1
-        self.tick = 0
-        self.damage = 5
-        self.target = mock()
-        self.icon = 101</td>
-</tr>
-<tr class="odd">
-<td>R0801</td>
-<td>pyherc.test.unit.__init__</td>
-<td>&#160;</td>
-<td>1</td>
-<td>0</td>
-<td>Similar lines in 2 files
-==pyherc.test.builders.character:87
-==pyherc.test.builders.item:53
+==pyherc.test.builders.character:88
+==pyherc.test.builders.item:78
         if hasattr(handle, 'build'):
             self.effect_handles.append(handle.build())
         else:
@@ -533,14 +611,14 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==pyherc.rules.attack.factories:46
-==pyherc.rules.public:52
-        if isinstance(factories, types.ListType):
-            self.factories = factories
-        else:
-            self.factories = []
-            self.factories.append(factories)
-</td>
+==pyherc.test.bdd.features.helpers.context:70
+==pyherc.test.cutesy.dictionary:306
+                                    .with_move_factory()
+                                    .with_attack_factory()
+                                    .with_drink_factory()
+                                    .with_inventory_factory()
+                                    .with_dying_rules()
+                                    .build())</td>
 </tr>
 <tr class="odd">
 <td>R0801</td>
@@ -549,13 +627,14 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==pyherc.test.unit.test_creaturegeneration:98
-==pyherc.test.unit.test_damage_modifiers:68
-                                     damage_type = 'crushing',
-                                     duration = None,
-                                     frequency = None,
-                                     tick = None,
-                                     icon = 101,</td>
+==pyherc.rules.attack.factories:44
+==pyherc.rules.public:49
+        if hasattr(factories, '__iter__'):
+            self.factories = factories
+        else:
+            self.factories = []
+            self.factories.append(factories)
+</td>
 </tr>
 <tr class="even">
 <td>R0801</td>
@@ -564,15 +643,63 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==pyherc.test.unit.test_creatureadder:71
-==pyherc.test.unit.test_creaturegeneration:62
+==pyherc.data.effects.damage:39
+==pyherc.data.effects.poison:39
+                                     frequency = frequency,
+                                     tick = tick,
+                                     icon = icon,
+                                     title = title,
+                                     description = description)
+        self.damage = damage</td>
+</tr>
+<tr class="odd">
+<td>R0801</td>
+<td>pyherc.test.unit.__init__</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Similar lines in 3 files
+==pyherc.test.unit.test_levelgenerator:355
+==pyherc.test.unit.test_levelgenerator:393
+==pyherc.test.unit.test_pathfinding:125
+        level_decorator = mock()
+        portal_adder = PortalAdder((1, 2),
+                                  'crypt',
+                                  mock(),
+                                  False,</td>
+</tr>
+<tr class="even">
+<td>R0801</td>
+<td>pyherc.test.unit.__init__</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Similar lines in 2 files
+==pyherc.test.unit.test_creaturegeneration:95
+==pyherc.test.unit.test_damage_modifiers:68
+                                     damage_type = 'crushing',
+                                     duration = None,
+                                     frequency = None,
+                                     tick = None,
+                                     icon = 101,</td>
+</tr>
+<tr class="odd">
+<td>R0801</td>
+<td>pyherc.test.unit.__init__</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Similar lines in 3 files
+==pyherc.test.unit.test_creatureadder:59
+==pyherc.test.unit.test_creatureadder:70
+==pyherc.test.unit.test_creaturegeneration:60
                                               body = 4,
                                               finesse = 12,
                                               mind = 2,
                                               hp = 2,
                                               speed = 2,</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>R0801</td>
 <td>pyherc.test.unit.__init__</td>
 <td>&#160;</td>
@@ -587,22 +714,38 @@
                                 .with_attack(3)
                                 .with_body(5)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>R0801</td>
 <td>pyherc.test.unit.__init__</td>
 <td>&#160;</td>
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 4 files
-==pyherc.rules.attack.factories:46
-==pyherc.rules.inventory.factories:118
-==pyherc.rules.move.factories:120
-==pyherc.rules.public:52
-        if isinstance(factories, types.ListType):
+==pyherc.rules.attack.factories:44
+==pyherc.rules.inventory.factories:111
+==pyherc.rules.move.factories:124
+==pyherc.rules.public:49
+        if hasattr(factories, '__iter__'):
             self.factories = factories
         else:
             self.factories = []
             self.factories.append(factories)</td>
+</tr>
+<tr class="even">
+<td>R0801</td>
+<td>pyherc.test.unit.__init__</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Similar lines in 3 files
+==pyherc.generators.level.room.catacombs:44
+==pyherc.generators.level.room.crimson_lair:45
+==pyherc.generators.level.room.squareroom:43
+        self.floor_tile = floor_tile
+        self.empty_tile = empty_tile
+        self.room_width = None
+        self.room_height = None
+        self.level_types = level_types</td>
 </tr>
 <tr class="odd">
 <td>R0801</td>
@@ -611,13 +754,13 @@
 <td>1</td>
 <td>0</td>
 <td>Similar lines in 2 files
-==pyherc.generators.level.room.catacombs:46
-==pyherc.generators.level.room.squareroom:42
-        self.floor_tile = floor_tile
-        self.empty_tile = empty_tile
-        self.room_width = None
-        self.room_height = None
-        self.level_types = level_types</td>
+==pyherc.events.damage:43
+==pyherc.events.poison:41
+                                                   level = target.level,
+                                                   location = target.location,
+                                                   affected_tiles = [])
+        self.target = target
+        self.damage = damage</td>
 </tr>
 <tr class="even">
 <td>R0801</td>
@@ -627,9 +770,9 @@
 <td>0</td>
 <td>Similar lines in 4 files
 ==pyherc.data.effects.damage:39
-==pyherc.data.effects.damagemodifier:41
-==pyherc.data.effects.heal:40
-==pyherc.data.effects.poison:41
+==pyherc.data.effects.damagemodifier:39
+==pyherc.data.effects.heal:38
+==pyherc.data.effects.poison:39
                                      frequency = frequency,
                                      tick = tick,
                                      icon = icon,

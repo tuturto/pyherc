@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>herculeum.gui.inventory &mdash; Herculeum 0.7 documentation</title>
+    <title>herculeum.gui.inventory &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../index.html" />
     <link rel="up" title="herculeum.gui" href="package_gui.html" />
     <link rel="next" title="herculeum.gui.mainwindow" href="module_mainwindow.html" />
     <link rel="prev" title="herculeum.gui.images" href="module_images.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_images.html" title="herculeum.gui.images"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_herculeum.html" >herculeum</a> &raquo;</li>
           <li><a href="package_gui.html" accesskey="U">herculeum.gui</a> &raquo;</li> 
@@ -63,7 +63,7 @@
 <p>Module for displaying inventory</p>
 <dl class="class">
 <dt id="herculeum.gui.inventory.CharacterInventoryWidget">
-<em class="property">class </em><tt class="descclassname">herculeum.gui.inventory.</tt><tt class="descname">CharacterInventoryWidget</tt><big>(</big><em>surface_manager</em>, <em>character</em>, <em>parent</em><big>)</big><a class="headerlink" href="#herculeum.gui.inventory.CharacterInventoryWidget" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">herculeum.gui.inventory.</tt><tt class="descname">CharacterInventoryWidget</tt><big>(</big><em>surface_manager</em>, <em>character</em>, <em>config</em>, <em>parent</em><big>)</big><a class="headerlink" href="#herculeum.gui.inventory.CharacterInventoryWidget" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QWidget</span></tt></p>
 <p>Widget to show inventory of a character</p>
 <p class="versionadded">
@@ -103,23 +103,8 @@
 </dd></dl>
 
 <dl class="class">
-<dt id="herculeum.gui.inventory.InventoryDialog">
-<em class="property">class </em><tt class="descclassname">herculeum.gui.inventory.</tt><tt class="descname">InventoryDialog</tt><big>(</big><em>surface_manager</em>, <em>character</em>, <em>action_factory</em>, <em>parent</em>, <em>flags</em><big>)</big><a class="headerlink" href="#herculeum.gui.inventory.InventoryDialog" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QDialog</span></tt></p>
-<p>Dialog to show inventory</p>
-<p class="versionadded">
-<span class="versionmodified">New in version 0.6.</span></p>
-<dl class="method">
-<dt id="herculeum.gui.inventory.InventoryDialog.keyPressEvent">
-<tt class="descname">keyPressEvent</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#herculeum.gui.inventory.InventoryDialog.keyPressEvent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handle keyboard</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="herculeum.gui.inventory.InventoryWidget">
-<em class="property">class </em><tt class="descclassname">herculeum.gui.inventory.</tt><tt class="descname">InventoryWidget</tt><big>(</big><em>surface_manager</em>, <em>character</em>, <em>action_factory</em>, <em>parent</em><big>)</big><a class="headerlink" href="#herculeum.gui.inventory.InventoryWidget" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">herculeum.gui.inventory.</tt><tt class="descname">InventoryWidget</tt><big>(</big><em>surface_manager</em>, <em>character</em>, <em>action_factory</em>, <em>config</em>, <em>parent</em><big>)</big><a class="headerlink" href="#herculeum.gui.inventory.InventoryWidget" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QWidget</span></tt></p>
 <p>Widget for showing inventory</p>
 <p class="versionadded">
@@ -184,7 +169,7 @@
 
 <dl class="class">
 <dt id="herculeum.gui.inventory.ItemBox">
-<em class="property">class </em><tt class="descclassname">herculeum.gui.inventory.</tt><tt class="descname">ItemBox</tt><big>(</big><em>surface_manager</em>, <em>parent</em>, <em>width</em>, <em>height</em><big>)</big><a class="headerlink" href="#herculeum.gui.inventory.ItemBox" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">herculeum.gui.inventory.</tt><tt class="descname">ItemBox</tt><big>(</big><em>surface_manager</em>, <em>config</em>, <em>parent</em>, <em>width</em>, <em>height</em><big>)</big><a class="headerlink" href="#herculeum.gui.inventory.ItemBox" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QWidget</span></tt></p>
 <p>Widget for displaying many items</p>
 <p class="versionadded">
@@ -302,14 +287,6 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="herculeum.gui.inventory.ItemGlyph.mousePressEvent">
-<tt class="descname">mousePressEvent</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#herculeum.gui.inventory.ItemGlyph.mousePressEvent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handle mouse buttons</p>
-<p class="versionadded">
-<span class="versionmodified">New in version 0.6.</span></p>
-</dd></dl>
-
-<dl class="method">
 <dt id="herculeum.gui.inventory.ItemGlyph.set_item">
 <tt class="descname">set_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#herculeum.gui.inventory.ItemGlyph.set_item" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set item to be displayed</p>
@@ -370,7 +347,7 @@
         <li class="right" >
           <a href="module_images.html" title="herculeum.gui.images"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_herculeum.html" >herculeum</a> &raquo;</li>
           <li><a href="package_gui.html" >herculeum.gui</a> &raquo;</li> 

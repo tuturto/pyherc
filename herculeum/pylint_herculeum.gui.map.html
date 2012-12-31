@@ -16,7 +16,7 @@
 <td>C0301</td>
 <td>herculeum.gui.map</td>
 <td>&#160;</td>
-<td>193</td>
+<td>244</td>
 <td>0</td>
 <td>Line too long (110/80)</td>
 </tr>
@@ -24,7 +24,7 @@
 <td>W0311</td>
 <td>herculeum.gui.map</td>
 <td>&#160;</td>
-<td>200</td>
+<td>251</td>
 <td>0</td>
 <td>Bad indentation. Found 16 spaces, expected 12</td>
 </tr>
@@ -32,7 +32,7 @@
 <td>W0311</td>
 <td>herculeum.gui.map</td>
 <td>&#160;</td>
-<td>203</td>
+<td>254</td>
 <td>0</td>
 <td>Bad indentation. Found 16 spaces, expected 12</td>
 </tr>
@@ -40,7 +40,7 @@
 <td>W0311</td>
 <td>herculeum.gui.map</td>
 <td>&#160;</td>
-<td>206</td>
+<td>257</td>
 <td>0</td>
 <td>Bad indentation. Found 16 spaces, expected 12</td>
 </tr>
@@ -48,7 +48,7 @@
 <td>W0301</td>
 <td>herculeum.gui.map</td>
 <td>&#160;</td>
-<td>266</td>
+<td>330</td>
 <td>0</td>
 <td>Unnecessary semicolon</td>
 </tr>
@@ -58,7 +58,7 @@
 <td>PlayMapWindow</td>
 <td>35</td>
 <td>0</td>
-<td>Too many instance attributes (9/7)</td>
+<td>Too many instance attributes (10/7)</td>
 </tr>
 <tr class="even">
 <td>R0913</td>
@@ -66,29 +66,29 @@
 <td>PlayMapWindow.__init__</td>
 <td>41</td>
 <td>4</td>
-<td>Too many arguments (7/5)</td>
+<td>Too many arguments (8/5)</td>
 </tr>
 <tr class="odd">
 <td>R0913</td>
 <td>herculeum.gui.map</td>
 <td>PlayMapWindow.__set_layout</td>
-<td>59</td>
+<td>61</td>
 <td>4</td>
-<td>Too many arguments (6/5)</td>
+<td>Too many arguments (7/5)</td>
 </tr>
 <tr class="even">
 <td>W0201</td>
 <td>herculeum.gui.map</td>
 <td>PlayMapWindow.__set_layout</td>
-<td>71</td>
+<td>69</td>
 <td>8</td>
-<td>Attribute 'map_widget' defined outside __init__</td>
+<td>Attribute 'hit_points_widget' defined outside __init__</td>
 </tr>
 <tr class="odd">
 <td>W0201</td>
 <td>herculeum.gui.map</td>
 <td>PlayMapWindow.__set_layout</td>
-<td>79</td>
+<td>83</td>
 <td>8</td>
 <td>Attribute 'message_widget' defined outside __init__</td>
 </tr>
@@ -96,47 +96,95 @@
 <td>W0201</td>
 <td>herculeum.gui.map</td>
 <td>PlayMapWindow.__set_layout</td>
-<td>68</td>
+<td>73</td>
 <td>8</td>
-<td>Attribute 'effects_widget' defined outside __init__</td>
+<td>Attribute 'map_widget' defined outside __init__</td>
 </tr>
 <tr class="odd">
 <td>W0201</td>
 <td>herculeum.gui.map</td>
 <td>PlayMapWindow.__set_layout</td>
-<td>67</td>
+<td>70</td>
 <td>8</td>
-<td>Attribute 'hit_points_widget' defined outside __init__</td>
+<td>Attribute 'effects_widget' defined outside __init__</td>
 </tr>
 <tr class="even">
 <td>R0902</td>
 <td>herculeum.gui.map</td>
 <td>PlayMapWidget</td>
-<td>107</td>
+<td>119</td>
 <td>0</td>
-<td>Too many instance attributes (10/7)</td>
+<td>Too many instance attributes (12/7)</td>
 </tr>
 <tr class="odd">
 <td>R0913</td>
 <td>herculeum.gui.map</td>
 <td>PlayMapWidget.__init__</td>
-<td>113</td>
+<td>125</td>
 <td>4</td>
-<td>Too many arguments (7/5)</td>
+<td>Too many arguments (8/5)</td>
+</tr>
+<tr class="even">
+<td>R0912</td>
+<td>herculeum.gui.map</td>
+<td>PlayMapWidget.receive_event</td>
+<td>276</td>
+<td>4</td>
+<td>Too many branches (14/12)</td>
+</tr>
+<tr class="odd">
+<td>C0103</td>
+<td>herculeum.gui.map</td>
+<td>PlayMapWidget.eventFilter</td>
+<td>447</td>
+<td>4</td>
+<td>Invalid name "eventFilter" (should match [a-z_][a-z0-9_]{2,30}$)</td>
 </tr>
 <tr class="even">
 <td>C0103</td>
 <td>herculeum.gui.map</td>
 <td>PlayMapWidget.keyPressEvent</td>
-<td>372</td>
+<td>463</td>
 <td>4</td>
 <td>Invalid name "keyPressEvent" (should match [a-z_][a-z0-9_]{2,30}$)</td>
+</tr>
+<tr class="odd">
+<td>W0613</td>
+<td>herculeum.gui.map</td>
+<td>PlayMapWidget._menu</td>
+<td>519</td>
+<td>25</td>
+<td>Unused argument 'modifiers'</td>
+</tr>
+<tr class="even">
+<td>W0613</td>
+<td>herculeum.gui.map</td>
+<td>PlayMapWidget._menu</td>
+<td>519</td>
+<td>20</td>
+<td>Unused argument 'key'</td>
+</tr>
+<tr class="odd">
+<td>W0613</td>
+<td>herculeum.gui.map</td>
+<td>PlayMapWidget._action_a</td>
+<td>528</td>
+<td>29</td>
+<td>Unused argument 'modifiers'</td>
+</tr>
+<tr class="even">
+<td>W0613</td>
+<td>herculeum.gui.map</td>
+<td>PlayMapWidget._action_a</td>
+<td>528</td>
+<td>24</td>
+<td>Unused argument 'key'</td>
 </tr>
 <tr class="odd">
 <td>W0201</td>
 <td>herculeum.gui.map</td>
 <td>PlayMapWidget.__construct_scene</td>
-<td>188</td>
+<td>239</td>
 <td>8</td>
 <td>Attribute 'current_level' defined outside __init__</td>
 </tr>
@@ -144,7 +192,7 @@
 <td>W0201</td>
 <td>herculeum.gui.map</td>
 <td>PlayMapWidget.__set_layout</td>
-<td>145</td>
+<td>194</td>
 <td>8</td>
 <td>Attribute 'view' defined outside __init__</td>
 </tr>
@@ -152,7 +200,7 @@
 <td>W0613</td>
 <td>herculeum.gui.map</td>
 <td>DamageCounter.__init__</td>
-<td>421</td>
+<td>555</td>
 <td>39</td>
 <td>Unused argument 'parent'</td>
 </tr>
@@ -160,7 +208,7 @@
 <td>W0613</td>
 <td>herculeum.gui.map</td>
 <td>DamageCounterAdapter.__init__</td>
-<td>444</td>
+<td>578</td>
 <td>23</td>
 <td>Unused argument 'parent'</td>
 </tr>
@@ -168,7 +216,7 @@
 <td>C0111</td>
 <td>herculeum.gui.map</td>
 <td>DamageCounterAdapter.__get_y_location</td>
-<td>451</td>
+<td>585</td>
 <td>4</td>
 <td>Missing docstring</td>
 </tr>
@@ -176,7 +224,7 @@
 <td>C0103</td>
 <td>herculeum.gui.map</td>
 <td>DamageCounterAdapter.__set_y_location</td>
-<td>454</td>
+<td>588</td>
 <td>4</td>
 <td>Invalid name "y" (should match [a-z_][a-z0-9_]{2,30}$)</td>
 </tr>
@@ -184,7 +232,7 @@
 <td>C0111</td>
 <td>herculeum.gui.map</td>
 <td>DamageCounterAdapter.__set_y_location</td>
-<td>454</td>
+<td>588</td>
 <td>4</td>
 <td>Missing docstring</td>
 </tr>
@@ -192,7 +240,7 @@
 <td>C0103</td>
 <td>herculeum.gui.map</td>
 <td>DamageCounterAdapter.__set_y_location</td>
-<td>454</td>
+<td>588</td>
 <td>31</td>
 <td>Invalid name "y" (should match [a-z_][a-z0-9_]{2,30}$)</td>
 </tr>
@@ -200,7 +248,7 @@
 <td>C0111</td>
 <td>herculeum.gui.map</td>
 <td>DamageCounterAdapter.__get_opacity</td>
-<td>457</td>
+<td>591</td>
 <td>4</td>
 <td>Missing docstring</td>
 </tr>
@@ -208,7 +256,7 @@
 <td>C0111</td>
 <td>herculeum.gui.map</td>
 <td>DamageCounterAdapter.__set_opacity</td>
-<td>460</td>
+<td>594</td>
 <td>4</td>
 <td>Missing docstring</td>
 </tr>

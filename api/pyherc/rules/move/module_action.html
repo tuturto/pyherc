@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.move.action &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.rules.move.action &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.rules.move" href="module_move.html" />
     <link rel="next" title="pyherc.rules.move.factories" href="module_factories.html" />
     <link rel="prev" title="pyherc.rules.move" href="module_move.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_move.html" title="pyherc.rules.move"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>
@@ -61,33 +61,70 @@
             
   <div class="section" id="module-pyherc.rules.move.action">
 <span id="pyherc-rules-move-action"></span><h1>pyherc.rules.move.action<a class="headerlink" href="#module-pyherc.rules.move.action" title="Permalink to this headline">¶</a></h1>
-<p>Module defining classes related to MoveAttack</p>
+<p>Module defining classes related to Move</p>
+<dl class="class">
+<dt id="pyherc.rules.move.action.EscapeAction">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.move.action.</tt><tt class="descname">EscapeAction</tt><big>(</big><em>character</em><big>)</big><a class="headerlink" href="#pyherc.rules.move.action.EscapeAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyherc.rules.move.action.MoveAction" title="pyherc.rules.move.action.MoveAction"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.move.action.MoveAction</span></tt></a></p>
+<p>Action for escaping the dungeon</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.8.</span></p>
+<dl class="method">
+<dt id="pyherc.rules.move.action.EscapeAction.execute">
+<tt class="descname">execute</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.move.action.EscapeAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute this move</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.move.action.EscapeAction.is_legal">
+<tt class="descname">is_legal</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.move.action.EscapeAction.is_legal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the move is possible to perform</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if move is possible, false otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="class">
 <dt id="pyherc.rules.move.action.MoveAction">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.move.action.</tt><tt class="descname">MoveAction</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.move.action.MoveAction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.move.action.</tt><tt class="descname">MoveAction</tt><big>(</big><em>character</em>, <em>new_location</em>, <em>new_level=None</em><big>)</big><a class="headerlink" href="#pyherc.rules.move.action.MoveAction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Action for moving</p>
 <dl class="method">
 <dt id="pyherc.rules.move.action.MoveAction.execute">
-<tt class="descname">execute</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.move.action.MoveAction.execute" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">execute</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.move.action.MoveAction.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Executes this Move</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pyherc.rules.move.action.MoveAction.is_legal">
-<tt class="descname">is_legal</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.move.action.MoveAction.is_legal" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">is_legal</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.move.action.MoveAction.is_legal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the move is possible to perform</p>
-<dl class="docutils">
-<dt>Returns:</dt>
-<dd>True if move is possible, false otherwise</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if move is possible, false otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Boolean</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="pyherc.rules.move.action.WalkAction">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.move.action.</tt><tt class="descname">WalkAction</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.move.action.WalkAction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.move.action.</tt><tt class="descname">WalkAction</tt><big>(</big><em>character</em>, <em>new_location</em>, <em>new_level=None</em><big>)</big><a class="headerlink" href="#pyherc.rules.move.action.WalkAction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pyherc.rules.move.action.MoveAction" title="pyherc.rules.move.action.MoveAction"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.move.action.MoveAction</span></tt></a></p>
 <p>Action for walking</p>
 <dl class="method">
@@ -149,7 +186,7 @@
         <li class="right" >
           <a href="module_move.html" title="pyherc.rules.move"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>

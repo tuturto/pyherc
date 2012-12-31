@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.ai.simple &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.ai.simple &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.ai" href="package_ai.html" />
     <link rel="next" title="pyherc.ai.skeleton" href="module_skeleton.html" />
     <link rel="prev" title="pyherc.ai.pyheapq" href="module_pyheapq.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_pyheapq.html" title="pyherc.ai.pyheapq"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_ai.html" accesskey="U">pyherc.ai</a> &raquo;</li> 
@@ -64,14 +64,14 @@
 <p>Creature will try to find friends, before attacking the player character</p>
 <dl class="class">
 <dt id="pyherc.ai.simple.FlockingHerbivore">
-<em class="property">class </em><tt class="descclassname">pyherc.ai.simple.</tt><tt class="descname">FlockingHerbivore</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.ai.simple.FlockingHerbivore" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.ai.simple.</tt><tt class="descname">FlockingHerbivore</tt><big>(</big><em>character</em><big>)</big><a class="headerlink" href="#pyherc.ai.simple.FlockingHerbivore" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>AI for flocking herbivore
 Tries to maintain close distance to other animals
 Seeks out player for combat</p>
 <dl class="method">
 <dt id="pyherc.ai.simple.FlockingHerbivore.act">
-<tt class="descname">act</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.ai.simple.FlockingHerbivore.act" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">act</tt><big>(</big><em>model</em>, <em>action_factory</em>, <em>rng</em><big>)</big><a class="headerlink" href="#pyherc.ai.simple.FlockingHerbivore.act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Trigger this AI to assess the situation and act accordingly</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -90,7 +90,7 @@ Seeks out player for combat</p>
 
 <dl class="method">
 <dt id="pyherc.ai.simple.FlockingHerbivore.find_direction">
-<tt class="descname">find_direction</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.ai.simple.FlockingHerbivore.find_direction" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">find_direction</tt><big>(</big><em>start</em>, <em>end</em><big>)</big><a class="headerlink" href="#pyherc.ai.simple.FlockingHerbivore.find_direction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find direction from start to end</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -165,7 +165,7 @@ Seeks out player for combat</p>
         <li class="right" >
           <a href="module_pyheapq.html" title="pyherc.ai.pyheapq"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_ai.html" >pyherc.ai</a> &raquo;</li> 

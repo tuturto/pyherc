@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.inventory.action &mdash; Herculeum 0.7 documentation</title>
+    <title>pyherc.rules.inventory.action &mdash; Herculeum 0.8 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.7',
+        VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.7 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.8 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.rules.inventory" href="module_inventory.html" />
     <link rel="next" title="pyherc.rules.inventory.factories" href="module_factories.html" />
     <link rel="prev" title="pyherc.rules.inventory" href="module_inventory.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="module_inventory.html" title="pyherc.rules.inventory"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>
@@ -63,29 +63,43 @@
 <span id="pyherc-rules-inventory-action"></span><h1>pyherc.rules.inventory.action<a class="headerlink" href="#module-pyherc.rules.inventory.action" title="Permalink to this headline">¶</a></h1>
 <p>Module defining classes related to inventory actions</p>
 <dl class="class">
-<dt id="pyherc.rules.inventory.action.PickUpAction">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.inventory.action.</tt><tt class="descname">PickUpAction</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.action.PickUpAction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Action for picking up item</p>
+<dt id="pyherc.rules.inventory.action.DropAction">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.inventory.action.</tt><tt class="descname">DropAction</tt><big>(</big><em>character</em>, <em>item</em><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.action.DropAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Action for dropping item</p>
 <p class="versionadded">
-<span class="versionmodified">New in version 0.4.</span></p>
+<span class="versionmodified">New in version 0.5.</span></p>
 <dl class="method">
-<dt id="pyherc.rules.inventory.action.PickUpAction.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>character</em>, <em>item</em><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.action.PickUpAction.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default constructor</p>
+<dt id="pyherc.rules.inventory.action.DropAction.execute">
+<tt class="descname">execute</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.action.DropAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes this action</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.inventory.action.DropAction.is_legal">
+<tt class="descname">is_legal</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.action.DropAction.is_legal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the action is possible to perform</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>character</strong> (<em>Character</em>) &#8211; character moving</li>
-<li><strong>item</strong> (<em>Item</em>) &#8211; item to pick up</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if move is possible, false otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Boolean</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.rules.inventory.action.PickUpAction">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.inventory.action.</tt><tt class="descname">PickUpAction</tt><big>(</big><em>character</em>, <em>item</em><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.action.PickUpAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Action for picking up item</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.4.</span></p>
 <dl class="method">
 <dt id="pyherc.rules.inventory.action.PickUpAction.execute">
 <tt class="descname">execute</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.action.PickUpAction.execute" title="Permalink to this definition">¶</a></dt>
@@ -161,7 +175,7 @@
         <li class="right" >
           <a href="module_inventory.html" title="pyherc.rules.inventory"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.7 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.8 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>
