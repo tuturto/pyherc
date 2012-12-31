@@ -1,1 +1,0 @@
-python pyherc\main.py
