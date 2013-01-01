@@ -102,6 +102,8 @@ class Application(object):
         .. versionadded:: 0.9
         """
         print('Cheat code activated')
+        for spec in self.level_generator_factory.portal_adder_configurations:
+            spec.chance = 100
 
     def __get_surface_manager(self):
         """

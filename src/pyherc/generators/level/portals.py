@@ -43,63 +43,13 @@ class PortalAdderConfiguration(object):
         :param unique: is more than one instance allowed
         :param escape_stairs: are there stairs leading out of the dungeon
         """
-        self.__icons = icons
-        self.__level_type = level_type
-        self.__location_type = location_type
-        self.__chance = chance
-        self.__new_level = new_level
-        self.__unique = unique
-        self.__escape_stairs = escape_stairs
-
-    def __get_level_type(self):
-        """
-        Type of level this portal can be added
-        """
-        return self.__level_type
-
-    def __get_location_type(self):
-        """
-        Type of location to add portal
-        """
-        return self.__location_type
-
-    def __get_chance(self):
-        """
-        Chance of portal being added
-        """
-        return self.__chance
-
-    def __get_new_level(self):
-        """
-        Name of the new level
-        """
-        return self.__new_level
-
-    def __is_unique(self):
-        """
-        Is more than one instance allowed
-        """
-        return self.__unique
-
-    def __get_icons(self):
-        """
-        Get pair of icons to use for portal and the other end
-        """
-        return self.__icons
-
-    def __is_escape_stairs(self):
-        """
-        Do these stairs lead outside of dungeon
-        """
-        return self.__escape_stairs
-
-    level_type = property(__get_level_type)
-    location_type = property(__get_location_type)
-    chance = property(__get_chance)
-    new_level = property(__get_new_level)
-    is_unique = property(__is_unique)
-    icons = property(__get_icons)
-    is_escape_stairs = property(__is_escape_stairs)
+        self.icons = icons
+        self.level_type = level_type
+        self.location_type = location_type
+        self.chance = chance
+        self.new_level = new_level
+        self.is_unique = unique
+        self.is_escape_stairs = escape_stairs
 
 class PortalAdderFactory(object):
     """
@@ -132,7 +82,8 @@ class PortalAdderFactory(object):
         """
         adders = []
         matches = [x for x in self.config
-                   if x.level_type == level_type]
+                   if x.level_type == level_type
+                   and self.rng.randint(0, 100) <= x.chance]
 
         for spec in matches:
             new_adder = PortalAdder(spec.icons,

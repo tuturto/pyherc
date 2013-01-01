@@ -128,7 +128,7 @@ def init_level(rng, item_generator, creature_generator, level_size):
                                                  PORTAL_STAIRS_UP),
                                         level_type = 'upper catacombs',
                                         location_type = 'room',
-                                        chance = 25,
+                                        chance = 10,
                                         new_level = 'upper crypt',
                                         unique = True)]
 
