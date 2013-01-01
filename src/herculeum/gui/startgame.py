@@ -54,6 +54,14 @@ class StartGameWidget(QDialog):
         self.selected_index = None
         self.class_names = None
 
+        cnf = self.config
+        self.konami = [cnf.move_up, cnf.move_up,
+                       cnf.move_down, cnf.move_down,
+                       cnf.move_left, cnf.move_right,
+                       cnf.move_left, cnf.move_right,
+                       cnf.action_b, cnf.action_a]
+        self.konami_index = 0
+
         self.__set_layout()
 
     def __set_layout(self):
@@ -127,6 +135,14 @@ class StartGameWidget(QDialog):
         """
         Process keyboard events
         """
+        if event.key() in self.konami[self.konami_index]:
+            self.konami_index = self.konami_index + 1
+        else:
+            self.konami_index = 0
+
+        if self.konami_index == len(self.konami):
+            self.application.enable_cheat()
+
         if event.key() in self.config.action_a:
             self.__generate_character()
             self.accept()

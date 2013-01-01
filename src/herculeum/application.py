@@ -95,6 +95,14 @@ class Application(object):
 
         sys.exit(self.qt_app.exec_())
 
+    def enable_cheat(self):
+        """
+        Enables cheat mode
+
+        .. versionadded:: 0.9
+        """
+        print('Cheat code activated')
+
     def __get_surface_manager(self):
         """
         Get surface manager
