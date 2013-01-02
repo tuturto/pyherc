@@ -29,6 +29,7 @@ sys.path.append(INSTALL_PATH)
 
 from herculeum.application import Application
 from herculeum.gui import QtUserInterface
+from herculeum.config.config import QtControlsConfiguration
 import herculeum.gui.resources
 
 if __name__ == "__main__":
@@ -53,7 +54,9 @@ if __name__ == "__main__":
     user_interface.show_splash_screen()
 
     app.start_logging()
-    app.load_configuration()
+
+    controls_configuration = QtControlsConfiguration()
+    app.load_configuration(controls_configuration)
 
     app.run(user_interface)
 

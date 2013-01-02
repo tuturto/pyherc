@@ -24,7 +24,7 @@ Package for start screen tests
 from herculeum.gui.startgame import StartGameWidget
 from pyherc.generators import CreatureConfiguration, CreatureGenerator
 from herculeum.gui.surfaceManager import SurfaceManager
-from herculeum.config.config import ControlsConfiguration
+from herculeum.config.config import QtControlsConfiguration
 
 from PyQt4.QtTest import QTest
 from PyQt4.QtGui import QApplication, QPixmap
@@ -57,7 +57,7 @@ class TestStartScreen(object):
         self.surface_manager = mock(SurfaceManager)
         when(self.surface_manager).get_icon(any()).thenReturn(QPixmap())
 
-        self.controls_config = ControlsConfiguration()
+        self.controls_config = QtControlsConfiguration()
 
         config = {}
 

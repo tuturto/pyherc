@@ -59,13 +59,14 @@ class Application(object):
             if argument in log_levels:
                 self.log_level = log_levels[argument]
 
-    def load_configuration(self):
+    def load_configuration(self, controls):
         """
         Load configuration
         """
         self.world = Model()
         self.config = Configuration(self.world,
-                                    herculeum.config.levels)
+                                    herculeum.config.levels,
+                                    controls)
 
         self.config.initialise()
 

@@ -75,6 +75,7 @@ class QtUserInterface(object):
         """
         main_window = MainWindow(self.application,
                                  self.application.surface_manager,
+                                 self.qt_app,
                                  None,
                                  Qt.FramelessWindowHint)
 
@@ -89,7 +90,7 @@ class MainWindow(QMainWindow):
 
     .. versionadded:: 0.5
     """
-    def __init__(self, application, surface_manager, parent, flags):
+    def __init__(self, application, surface_manager, qt_app, parent, flags):
         """
         Default constructor
         """
@@ -97,6 +98,7 @@ class MainWindow(QMainWindow):
 
         self.application = application
         self.surface_manager = surface_manager
+        self.qt_app = qt_app
 
         self.__set_layout()
 
@@ -223,4 +225,4 @@ class MainWindow(QMainWindow):
                                Qt.Dialog | Qt.CustomizeWindowHint)
 
         end_screen.exec_()
-        self.application.qt_app.quit()
+        self.qt_app.quit()

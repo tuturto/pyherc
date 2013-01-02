@@ -46,7 +46,8 @@ class TestMainConfiguration():
         """
         self.app = QApplication([])
         self.config = Configuration(mock(),
-                                    herculeum.config.levels)
+                                    herculeum.config.levels,
+                                    mock())
 
         self.config.initialise()
 

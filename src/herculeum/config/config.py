@@ -30,7 +30,7 @@ class Configuration(pyherc.config.Configuration):
     Configuration for herculeum
     """
 
-    def __init__(self, model, config_package):
+    def __init__(self, model, config_package, controls):
         """
         Default constructor
 
@@ -45,7 +45,7 @@ class Configuration(pyherc.config.Configuration):
         self.context = ConfigurationContext(config_package,
                                             self.surface_manager)
 
-        self.controls = ControlsConfiguration()
+        self.controls = controls
 
     def initialise(self):
         """
@@ -72,7 +72,7 @@ class ConfigurationContext(object):
         self.config_package = config_package
         self.surface_manager = surface_manager
 
-class ControlsConfiguration(object):
+class QtControlsConfiguration(object):
     """
     Configuration for user interface controls
 
@@ -82,7 +82,7 @@ class ControlsConfiguration(object):
         """
         Default constructor
         """
-        super(ControlsConfiguration, self).__init__()
+        super(QtControlsConfiguration, self).__init__()
 
         self.move_left = [Qt.Key_4, Qt.Key_Left, Qt.Key_H]
         self.move_up_left = [Qt.Key_7, Qt.Key_Y]
