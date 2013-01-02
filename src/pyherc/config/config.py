@@ -78,7 +78,7 @@ class Configuration(object):
         """
         Initialises configuration
         """
-        self.level_size = (80, 30)
+        self.level_size = (80, 21)
 
         self.initialise_generators(context)
         self.initialise_level_generators(context)

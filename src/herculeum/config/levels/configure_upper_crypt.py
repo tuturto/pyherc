@@ -71,7 +71,7 @@ def init_level(rng, item_generator, creature_generator, level_size):
                                            ]
     level_partitioners = [GridPartitioner(['upper crypt'],
                                           4,
-                                          3,
+                                          2,
                                           rng)]
 
     replacer_config = ReplacingDecoratorConfig(['upper crypt'],
