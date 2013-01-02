@@ -22,4 +22,4 @@
 Package for gui elements
 """
 
-from .mainwindow import MainWindow
+from .mainwindow import MainWindow, QtUserInterface

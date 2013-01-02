@@ -29,8 +29,6 @@ import logging
 import herculeum.config.levels
 
 from herculeum.gui import MainWindow
-from PyQt4.QtGui import QApplication
-from PyQt4.QtCore import QFile, QLatin1String, Qt
 
 class Application(object):
     """
@@ -46,8 +44,6 @@ class Application(object):
         self.logger = None
         self.screen = None
         self.log_level = None
-
-        self.qt_app = QApplication(sys.argv)
 
     def process_command_line(self):
         """
@@ -67,29 +63,17 @@ class Application(object):
         """
         Load configuration
         """
-        file = QFile(':herculeum.qss')
-        file.open(QFile.ReadOnly)
-        styleSheet = QLatin1String(file.readAll())
-        self.qt_app.setStyleSheet(styleSheet)
-
         self.world = Model()
         self.config = Configuration(self.world,
                                     herculeum.config.levels)
 
         self.config.initialise()
 
-    def run(self, splash_screen):
+    def run(self, user_interface):
         """
         Starts the application
         """
-        main_window = MainWindow(self,
-                                 self.surface_manager,
-                                 None,
-                                 Qt.FramelessWindowHint)
-        splash_screen.finish(main_window)
-        main_window.show_new_game()
-
-        sys.exit(self.qt_app.exec_())
+        user_interface.show_main_window()
 
     def enable_cheat(self):
         """

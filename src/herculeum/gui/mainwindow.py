@@ -24,7 +24,9 @@ Module for main window related functionality
 
 from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QMdiArea
 from PyQt4.QtGui import QDialog, QPushButton, QWorkspace
-from PyQt4.QtCore import SIGNAL, Qt
+from PyQt4.QtGui import QPixmap, QSplashScreen
+from PyQt4.QtCore import SIGNAL, Qt, QFile, QLatin1String
+from PyQt4.QtGui import QApplication
 import PyQt4.QtGui
 import os
 import pyherc
@@ -36,6 +38,50 @@ from herculeum.gui.endscreen import EndScreen
 from herculeum.config import tiles
 
 from random import Random
+
+class QtUserInterface(object):
+    """
+    Class for Qt User Interface
+
+    .. versionadded:: 0.9
+    """
+    def __init__(self, application):
+        """
+        Default constructor
+        """
+        super(QtUserInterface, self).__init__()
+
+        self.application = application
+        self.splash_screen = None
+
+        self.qt_app = QApplication([])
+
+    def show_splash_screen(self):
+        """
+        Show splash screen
+        """
+        file = QFile(':herculeum.qss')
+        file.open(QFile.ReadOnly)
+        styleSheet = QLatin1String(file.readAll())
+        self.qt_app.setStyleSheet(styleSheet)
+
+        pixmap = QPixmap(':splash.png')
+        self.splash_screen = QSplashScreen(pixmap)
+        self.splash_screen.show()
+
+    def show_main_window(self):
+        """
+        Show main window
+        """
+        main_window = MainWindow(self.application,
+                                 self.application.surface_manager,
+                                 None,
+                                 Qt.FramelessWindowHint)
+
+        self.splash_screen.finish(main_window)
+        main_window.show_new_game()
+
+        self.qt_app.exec_()
 
 class MainWindow(QMainWindow):
     """
