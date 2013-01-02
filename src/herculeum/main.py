@@ -27,7 +27,7 @@ import os.path
 INSTALL_PATH = os.path.abspath(".")
 sys.path.append(INSTALL_PATH)
 
-from herculeum.application import APP
+from herculeum.application import Application
 from PyQt4.QtGui import QPixmap, QSplashScreen
 import herculeum.gui.resources
 
@@ -46,13 +46,15 @@ if __name__ == "__main__":
     print('#   You should have received a copy of the GNU General Public License')
     print('#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.')
 
+    app = Application()
+
     pixmap = QPixmap(':splash.png')
     splash_screen = QSplashScreen(pixmap)
     splash_screen.show()
 
-    APP.process_command_line()
-    APP.start_logging()
-    APP.load_configuration()
+    app.process_command_line()
+    app.start_logging()
+    app.load_configuration()
 
-    APP.run(splash_screen)
+    app.run(splash_screen)
 

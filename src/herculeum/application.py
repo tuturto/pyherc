@@ -82,8 +82,8 @@ class Application(object):
         """
         Starts the application
         """
-        main_window = MainWindow(APP,
-                                 APP.surface_manager,
+        main_window = MainWindow(self,
+                                 self.surface_manager,
                                  None,
                                  Qt.FramelessWindowHint)
         splash_screen.finish(main_window)
@@ -175,6 +175,3 @@ class Application(object):
     level_generator_factory = property(__get_level_generator_factory)
     rng = property(__get_rng)
     rules_engine = property(__get_rules_engine)
-
-render = None
-APP = Application()
