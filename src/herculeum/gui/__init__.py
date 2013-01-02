@@ -23,3 +23,4 @@ Package for gui elements
 """
 
 from .mainwindow import MainWindow, QtUserInterface
+from .config import QtControlsConfiguration

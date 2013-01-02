@@ -28,8 +28,7 @@ INSTALL_PATH = os.path.abspath(".")
 sys.path.append(INSTALL_PATH)
 
 from herculeum.application import Application
-from herculeum.gui import QtUserInterface
-from herculeum.config.config import QtControlsConfiguration
+from herculeum.gui import QtUserInterface, QtControlsConfiguration
 import herculeum.gui.resources
 
 if __name__ == "__main__":
