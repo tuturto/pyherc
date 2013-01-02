@@ -43,7 +43,6 @@ class Application(object):
         self.gui = None
         self.world = None
         self.running = 1
-        self.base_path = None
         self.logger = None
         self.screen = None
         self.log_level = None
@@ -74,8 +73,7 @@ class Application(object):
         self.qt_app.setStyleSheet(styleSheet)
 
         self.world = Model()
-        self.config = Configuration(self.base_path,
-                                    self.world,
+        self.config = Configuration(self.world,
                                     herculeum.config.levels)
 
         self.config.initialise()
@@ -168,20 +166,6 @@ class Application(object):
         Get player generator
         """
         return self.config.player_generator
-
-    def detect_resource_directory(self):
-        """
-        Detects location of resources directory and updates self.base_path
-        """
-        search_directory = '.'
-        current = os.path.normpath(os.path.join(os.getcwd(), search_directory))
-
-        while not os.path.exists(os.path.join(current, 'resources')):
-            search_directory = search_directory +'/..'
-            current = os.path.normpath(os.path.join(os.getcwd(),
-                                                    search_directory))
-
-        self.base_path = os.path.join(current, 'resources')
 
     surface_manager = property(__get_surface_manager)
     action_factory = property(__get_action_factory)

@@ -19,6 +19,6 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for tests that access hard drive
+Package for curses user interface
 """
 pass

@@ -47,9 +47,9 @@ def with_config(fn):
         if herculeum.sphinx.helpers.config == None:
            herculeum.sphinx.helpers.qt_app = QApplication([])
            herculeum.sphinx.helpers.world = Model()
-           herculeum.sphinx.helpers.config = Configuration('',
-                                            herculeum.sphinx.helpers.world,
-                                            herculeum.config.levels)
+           herculeum.sphinx.helpers.config = Configuration(
+                                                herculeum.sphinx.helpers.world,
+                                                herculeum.config.levels)
            herculeum.sphinx.helpers.config.initialise()
 
         kwargs['config'] = config

@@ -39,21 +39,18 @@ class SurfaceManager:
     Class for managing images and icons
     """
     @logged
-    def __init__(self, base_path):
+    def __init__(self):
         """
         Default constructor
         """
         self.icons = {}
         self.images = {}
         self.resourcesLoaded = 0
-        self.base_path = base_path
 
-    def __load_image(self, base_path, image_name):
+    def __load_image(self, image_name):
         """
         Load a file and return corresponding surface object
 
-        :param base_path: directory of the file
-        :type base_path: string
         :param image_name: file name
         :type image_name: string
 
@@ -71,23 +68,21 @@ class SurfaceManager:
         Add icon to internal collection
         """
         if not key in self.icons:
-            surface = self.__load_image(self.base_path, filename)
+            surface = self.__load_image(filename)
             self.icons[key] = surface
 
         return key
 
     @logged
-    def load_resources(self, base_path):
+    def load_resources(self):
         """
         Load graphics from files
 
-        :param base_path: path to directory where resources are location
-        :type base_path: string
         """
-        surface = self.__load_image(base_path, ':transparent.png')
+        surface = self.__load_image(':transparent.png')
         self.icons[herculeum.config.tiles.TRANSPARENT] = surface
 
-        surface = self.__load_image(base_path, ':weapons.png')
+        surface = self.__load_image(':weapons.png')
 
         tiles = self.split_surface(surface, (32, 32))
 
@@ -103,12 +98,12 @@ class SurfaceManager:
         self.icons[herculeum.config.tiles.ITEM_LONGSPEAR] = tiles[34]
         self.icons[herculeum.config.tiles.ITEM_SPEAR] = tiles[30]
 
-        surface = self.__load_image(base_path, ':monsters.png')
+        surface = self.__load_image(':monsters.png')
         tiles = self.split_surface(surface, (32, 32))
 
         self.icons[herculeum.config.tiles.HUMAN_FIGHTER] = tiles[3]
 
-        surface = self.__load_image(base_path, ':dungeon.png')
+        surface = self.__load_image(':dungeon.png')
         tiles = self.split_surface(surface, (32, 32))
 
         self.icons[herculeum.config.tiles.FLOOR_ROCK] = tiles[9]
@@ -124,7 +119,7 @@ class SurfaceManager:
         self.icons[herculeum.config.tiles.PORTAL_STAIRS_DOWN] = tiles[260]
         self.icons[herculeum.config.tiles.PORTAL_STAIRS_UP] = tiles[261]
 
-        surface = self.__load_image(base_path, ':items.png')
+        surface = self.__load_image(':items.png')
         tiles = self.split_surface(surface, (32, 32))
         self.icons[herculeum.config.tiles.ITEM_APPLE] = tiles[0]
         self.icons[herculeum.config.tiles.ITEM_CRYSTAL_SKULL] = tiles[1]

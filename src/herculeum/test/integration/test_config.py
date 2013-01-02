@@ -25,7 +25,6 @@ Module for testing main configuration
 #pylint: disable=W0614
 from herculeum.config import Configuration
 from pyherc.rules import InventoryParameters
-from pyherc.test.integration import detect_base_path
 from mockito import mock
 from hamcrest import *
 from PyQt4.QtGui import QApplication
@@ -46,9 +45,7 @@ class TestMainConfiguration():
         Setup test case
         """
         self.app = QApplication([])
-        base_path = detect_base_path()
-        self.config = Configuration(base_path,
-                                    mock(),
+        self.config = Configuration(mock(),
                                     herculeum.config.levels)
 
         self.config.initialise()
@@ -69,12 +66,10 @@ class TestMainConfiguration():
         config = self.config
         assert_that(config.surface_manager, is_(not_none()))
         assert_that(config.action_factory, is_(not_none()))
-        assert_that(config.base_path, is_(not_none()))
         assert_that(config.item_generator, is_(not_none()))
         assert_that(config.creature_generator, is_(not_none()))
         assert_that(config.level_generator_factory, is_(not_none()))
         assert_that(config.level_size, is_(not_none()))
-        assert_that(config.base_path, is_(not_none()))
         assert_that(config.model, is_(not_none()))
         assert_that(config.rng, is_(not_none()))
 

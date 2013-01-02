@@ -46,8 +46,6 @@ if __name__ == "__main__":
     print('#   You should have received a copy of the GNU General Public License')
     print('#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.')
 
-    APP.detect_resource_directory()
-
     pixmap = QPixmap(':splash.png')
     splash_screen = QSplashScreen(pixmap)
     splash_screen.show()

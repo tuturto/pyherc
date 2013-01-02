@@ -30,22 +30,19 @@ class Configuration(pyherc.config.Configuration):
     Configuration for herculeum
     """
 
-    def __init__(self, base_path, model, config_package):
+    def __init__(self, model, config_package):
         """
         Default constructor
 
-        :param base_path: path to resources
-        :type base_path: string
         :param model: model to use in configuration
         :param type: Model
         """
-        super(Configuration, self).__init__(base_path, model)
+        super(Configuration, self).__init__(model)
 
-        self.surface_manager = SurfaceManager(base_path)
-        self.surface_manager.load_resources(base_path)
+        self.surface_manager = SurfaceManager()
+        self.surface_manager.load_resources()
 
         self.context = ConfigurationContext(config_package,
-                                            base_path,
                                             self.surface_manager)
 
         self.controls = ControlsConfiguration()
@@ -62,20 +59,17 @@ class ConfigurationContext(object):
 
     .. versionadded:: 0.6
     """
-    def __init__(self, config_package, base_path, surface_manager):
+    def __init__(self, config_package, surface_manager):
         """
         Default constructor
 
         :param config_package: package containing configurations
         :type config_package: Package
-        :param base_path: location of resource files
-        :type base_path: string
         :param surface_manager: manager to handle graphics
         :type surface_manager: SurfaceManager
         """
         super(ConfigurationContext, self).__init__()
         self.config_package = config_package
-        self.base_path = base_path
         self.surface_manager = surface_manager
 
 class ControlsConfiguration(object):

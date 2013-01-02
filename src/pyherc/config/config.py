@@ -50,12 +50,11 @@ class Configuration(object):
     """
     Configuration object for Herculeum
     """
-    def __init__(self, base_path, model):
+    def __init__(self, model):
         """
         Default constructor
 
         Args:
-            base_path: path to resources directory
             model: Model to register with factories
         """
         super(Configuration, self).__init__()
@@ -63,13 +62,11 @@ class Configuration(object):
         self.full_screen = None
         self.caption = None
         self.action_factory = None
-        self.base_path = None
         self.item_generator = None
         self.creature_generator = None
         self.player_generator = None
         self.level_generator_factory = None
         self.level_size = None
-        self.base_path = base_path
         self.model = model
         self.rng = random.Random()
         self.rules_engine = None
