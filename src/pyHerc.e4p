@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2013-01-02, 23:53:23 -->
+<!-- Saved: 2013-01-03, 00:28:22 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -239,6 +239,7 @@
     <Source>herculeum/text/config.py</Source>
     <Source>herculeum/text/interface.py</Source>
     <Source>herculeum/text/surface_manager.py</Source>
+    <Source>herculeum/text/main_window.py</Source>
   </Sources>
   <Forms>
   </Forms>

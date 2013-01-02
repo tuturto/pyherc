@@ -26,6 +26,8 @@ from pyherc.aspects import logged
 class CursesSurfaceManager(object):
     """
     Class for managing glyphs
+
+    .. versionadded:: 0.9
     """
     @logged
     def __init__(self):

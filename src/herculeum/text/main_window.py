@@ -19,42 +19,25 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for curses user interface
+Module for main window related functionality
 """
-import curses
-
-class CursesUserInterface(object):
+class MainWindow(object):
     """
-    Class for curses user interface
+    Main window of the interface
 
     .. versionadded:: 0.9
     """
-    def __init__(self, application):
+    def __init__(self, application, surface_manager):
         """
         Default constructor
         """
-        super(CursesUserInterface, self).__init__()
+        super(MainWindow, self).__init__()
 
         self.application = application
-        self.splash_screen = None
+        self.surface_manager = surface_manager
 
-        self.curses = curses.initscr()
-        self.screen = self.curses.subwin(23, 79, 0, 0)
-
-        self.screen.refresh()
-        curses.noecho()
-        curses.cbreak()
-
-    def show_splash_screen(self):
+    def show_new_game(self):
         """
-        Show splash screen
+        Show new game dialog
         """
         pass
-
-    def show_main_window(self):
-        """
-        Show main window
-        """
-        curses.echo()
-        curses.nocbreak()
-        curses.endwin()

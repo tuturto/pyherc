@@ -102,9 +102,6 @@ class MainWindow(QMainWindow):
 
         self.__set_layout()
 
-    def show_help(self):
-        self.application.help.show_help('test')
-
     def __set_layout(self):
 
         exit_action = QAction(QIcon(':exit-game.png'),

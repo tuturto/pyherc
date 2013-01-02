@@ -85,8 +85,6 @@ class Configuration(object):
         """
         Initialises action factory, sub factories and various generators
         """
-        print('Initialising action sub system')
-
         dying_rules = Dying()
 
         walk_factory = WalkFactory(self.level_generator_factory)
@@ -130,8 +128,6 @@ class Configuration(object):
 
         self.rules_engine = RulesEngine(self.action_factory,
                                         dying_rules)
-
-        print('Action sub system initialised')
 
     def get_creature_config(self, context):
         """
@@ -216,8 +212,6 @@ class Configuration(object):
         """
         Initialise generators
         """
-        print('Initialising generators')
-
         self.item_generator = ItemGenerator(
                                     self.get_item_config(context))
 
@@ -233,8 +227,6 @@ class Configuration(object):
                                         self.item_generator,
                                         self.rng)
 
-        print('Generators initialised')
-
     def initialise_level_generators(self, context):
         """
         Initialise level generators
@@ -242,8 +234,6 @@ class Configuration(object):
         :param level_config: module containing level configurations
         :type level_config: module
         """
-        print('Initialising level generators')
-
         config = LevelGeneratorFactoryConfig([],
                                              [],
                                              [],
@@ -270,8 +260,6 @@ class Configuration(object):
                                                     portal_adder_factory,
                                                     config,
                                                     self.rng)
-
-        print('Level generators initialised')
 
     def extend_configuration(self, config, new_config):
         """
