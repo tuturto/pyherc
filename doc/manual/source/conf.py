@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # pyherc documentation build configuration file, created by
-# sphinx-quickstart on Wed Feb 01 22:54:04 2012.
+# sphinx-quickstart on Wed Feb 01 22:54:04 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
 #
@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Herculeum'
-copyright = u'2010-2012, Tuukka Turto'
+copyright = u'2010-2013, Tuukka Turto'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
