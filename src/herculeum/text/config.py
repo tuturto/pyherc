@@ -19,9 +19,17 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for gui elements
+Module for UI Configuration
 """
 
-from .mainwindow import MainWindow, QtUserInterface
-from .config import QtControlsConfiguration
-from .surfaceManager import QtSurfaceManager
+class CursesControlsConfiguration(object):
+    """
+    Configuration for user interface controls
+
+    .. versionadded:: 0.9
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(CursesControlsConfiguration, self).__init__()

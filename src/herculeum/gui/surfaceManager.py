@@ -34,7 +34,7 @@ from PyQt4.QtCore import QRect
 
 import herculeum.gui.resources
 
-class SurfaceManager:
+class QtSurfaceManager(object):
     """
     Class for managing images and icons
     """
@@ -43,6 +43,7 @@ class SurfaceManager:
         """
         Default constructor
         """
+        super(QtSurfaceManager, self).__init__()
         self.icons = {}
         self.images = {}
         self.resourcesLoaded = 0

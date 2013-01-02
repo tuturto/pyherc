@@ -22,7 +22,7 @@
 Module for testing list view
 """
 
-from herculeum.gui.surfaceManager import SurfaceManager
+from herculeum.gui import QtSurfaceManager
 from herculeum.gui.widgets import ListView, ListViewItem
 import herculeum.gui.resources
 
@@ -51,7 +51,7 @@ class TestListViewItem(object):
         Setup test case
         """
         self.application = QApplication([])
-        self.surface_manager = mock(SurfaceManager)
+        self.surface_manager = mock(QtSurfaceManager)
         when(self.surface_manager).get_icon(any()).thenReturn(QPixmap())
 
     def teardown(self):

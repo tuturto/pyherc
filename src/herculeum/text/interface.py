@@ -19,9 +19,33 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for gui elements
+Module for curses user interface
 """
 
-from .mainwindow import MainWindow, QtUserInterface
-from .config import QtControlsConfiguration
-from .surfaceManager import QtSurfaceManager
+class CursesUserInterface(object):
+    """
+    Class for curses user interface
+
+    .. versionadded:: 0.9
+    """
+    def __init__(self, application):
+        """
+        Default constructor
+        """
+        super(CursesUserInterface, self).__init__()
+
+        self.application = application
+        self.splash_screen = None
+
+
+    def show_splash_screen(self):
+        """
+        Show splash screen
+        """
+        print('splash')
+
+    def show_main_window(self):
+        """
+        Show main window
+        """
+        print('main window')

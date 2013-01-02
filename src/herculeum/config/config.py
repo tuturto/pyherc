@@ -22,14 +22,13 @@
 Module for herculeum main configuration
 """
 import pyherc.config
-from herculeum.gui.surfaceManager import SurfaceManager
 
 class Configuration(pyherc.config.Configuration):
     """
     Configuration for herculeum
     """
 
-    def __init__(self, model, config_package, controls):
+    def __init__(self, model, config_package, controls, surface_manager):
         """
         Default constructor
 
@@ -38,7 +37,7 @@ class Configuration(pyherc.config.Configuration):
         """
         super(Configuration, self).__init__(model)
 
-        self.surface_manager = SurfaceManager()
+        self.surface_manager = surface_manager
         self.surface_manager.load_resources()
 
         self.context = ConfigurationContext(config_package,

@@ -19,9 +19,32 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for gui elements
+Module for handling loading of images and icons
 """
+from pyherc.aspects import logged
 
-from .mainwindow import MainWindow, QtUserInterface
-from .config import QtControlsConfiguration
-from .surfaceManager import QtSurfaceManager
+class CursesSurfaceManager(object):
+    """
+    Class for managing glyphs
+    """
+    @logged
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(CursesSurfaceManager, self).__init__()
+        self.resourcesLoaded = 0
+
+    @logged
+    def load_resources(self):
+        """
+        Load graphics from files
+        """
+        pass
+
+    @logged
+    def add_icon(self, key, filename):
+        """
+        Add icon to internal collection
+        """
+        pass

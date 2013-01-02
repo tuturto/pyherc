@@ -44,6 +44,7 @@ class Application(object):
         self.logger = None
         self.screen = None
         self.log_level = None
+        self.ui_mode = 'qt'
 
     def process_command_line(self):
         """
@@ -59,14 +60,20 @@ class Application(object):
             if argument in log_levels:
                 self.log_level = log_levels[argument]
 
-    def load_configuration(self, controls):
+        modes = ['qt', 'curses']
+        for argument in args:
+            if argument in modes:
+                self.ui_mode = argument
+
+    def load_configuration(self, controls, surface_manager):
         """
         Load configuration
         """
         self.world = Model()
         self.config = Configuration(self.world,
                                     herculeum.config.levels,
-                                    controls)
+                                    controls,
+                                    surface_manager)
 
         self.config.initialise()
 

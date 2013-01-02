@@ -29,6 +29,9 @@ sys.path.append(INSTALL_PATH)
 
 from herculeum.application import Application
 from herculeum.gui import QtUserInterface, QtControlsConfiguration
+from herculeum.gui import QtSurfaceManager
+from herculeum.text import CursesUserInterface, CursesControlsConfiguration
+from herculeum.text import CursesSurfaceManager
 import herculeum.gui.resources
 
 if __name__ == "__main__":
@@ -49,13 +52,19 @@ if __name__ == "__main__":
     app = Application()
     app.process_command_line()
 
-    user_interface = QtUserInterface(app)
+    if app.ui_mode == 'qt':
+        user_interface = QtUserInterface(app)
+        surface_manager = QtSurfaceManager()
+        controls_configuration = QtControlsConfiguration()
+    else:
+        user_interface = CursesUserInterface(app)
+        surface_manager = CursesSurfaceManager()
+        controls_configuration = CursesControlsConfiguration()
+
     user_interface.show_splash_screen()
-
     app.start_logging()
-
-    controls_configuration = QtControlsConfiguration()
-    app.load_configuration(controls_configuration)
+    app.load_configuration(controls_configuration,
+                           surface_manager)
 
     app.run(user_interface)
 
