@@ -54,7 +54,7 @@ class StartGameScreen(object):
             except ValueError:
                 selection = None
 
-            if selection < 0 or selection > len(self.class_names):
+            if selection < 0 or selection > len(self.class_names) - 1:
                 selection = None
 
         return self.generator.generate_creature(self.class_names[selection])
