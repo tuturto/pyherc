@@ -22,6 +22,7 @@
 Module for curses user interface
 """
 import curses
+from herculeum.text.main_window import MainWindow
 
 class CursesUserInterface(object):
     """
@@ -44,6 +45,7 @@ class CursesUserInterface(object):
         self.screen.refresh()
         curses.noecho()
         curses.cbreak()
+        curses.curs_set(0)
 
     def show_splash_screen(self):
         """
@@ -55,6 +57,13 @@ class CursesUserInterface(object):
         """
         Show main window
         """
+        main_window = MainWindow(self.application,
+                                 self.application.surface_manager,
+                                 self.screen)
+        main_window.show_new_game()
+        main_window.show_map_window()
+
         curses.echo()
         curses.nocbreak()
+        curses.curs_set(1)
         curses.endwin()
