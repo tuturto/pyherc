@@ -40,7 +40,7 @@ class CursesUserInterface(object):
         self.splash_screen = None
 
         self.curses = curses.initscr()
-        self.screen = self.curses.subwin(23, 79, 0, 0)
+        self.screen = self.curses.subwin(24, 80, 0, 0)
 
         self.screen.refresh()
         curses.noecho()

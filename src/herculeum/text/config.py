@@ -33,3 +33,12 @@ class CursesControlsConfiguration(object):
         Default constructor
         """
         super(CursesControlsConfiguration, self).__init__()
+
+        self.move_left = ['4']
+        self.move_up_left = ['7']
+        self.move_up = ['8']
+        self.move_up_right = ['9']
+        self.move_right = ['6']
+        self.move_down_right = ['3']
+        self.move_down = ['2']
+        self.move_down_left = ['1']

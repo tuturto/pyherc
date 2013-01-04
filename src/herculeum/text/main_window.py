@@ -22,6 +22,7 @@
 Module for main window related functionality
 """
 from herculeum.text.start_game import StartGameScreen
+from herculeum.text.map import MapScreen
 from pyherc.generators.dungeon import DungeonGenerator
 
 class MainWindow(object):
@@ -65,4 +66,13 @@ class MainWindow(object):
         """
         Show window for playing
         """
-        pass
+        map = MapScreen(model = self.application.world,
+                        surface_manager = self.application.surface_manager,
+                        action_factory = self.application.action_factory,
+                        rng = self.application.rng,
+                        rules_engine = self.application.rules_engine,
+                        configuration = self.application.config,
+                        screen = self.screen)
+
+        self.application.world.register_event_listener(map)
+        map.show()
