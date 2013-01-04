@@ -79,6 +79,8 @@ class MapScreen(object):
         for key in config.move_down_left:
             keymap[key] = self._move
             move_keymap[key] = 6
+        for key in config.action_a:
+            keymap[key] = self._action_a
 
         return keymap, move_keymap
 
@@ -137,6 +139,28 @@ class MapScreen(object):
                 player.perform_attack(direction,
                                       self.action_factory,
                                       self.rng)
+
+    @logged
+    def _action_a(self, key):
+        """
+        Process action a key
+
+        :param key: key triggering the processing
+        :type key: int
+        """
+        player = self.model.player
+        level = player.level
+        items = level.get_items_at(player.location)
+
+        if items != None and len(items) > 0:
+            player.pick_up(items[0],
+                           self.action_factory)
+
+        elif player.is_move_legal(9,
+                                  'walk',
+                                  self.action_factory):
+            player.move(9,
+                        self.action_factory)
 
     @logged
     def refresh_screen(self):
