@@ -189,16 +189,16 @@ class MapScreen(object):
         for item in level.items:
             self.screen.addch(item.location[1],
                               item.location[0],
-                              ord('!'))
+                              ord(self.surface_manager.get_icon(item.icon)))
 
         for monster in level.creatures:
             self.screen.addch(monster.location[1],
                               monster.location[0],
-                              ord('a'))
+                              ord(self.surface_manager.get_icon(monster.icon)))
 
         self.screen.addch(player.location[1],
                           player.location[0],
-                          ord('@'))
+                          ord(self.surface_manager.get_icon(player.icon)))
 
         self.screen.refresh()
 

@@ -190,7 +190,7 @@ def init_creatures(context):
                                         mind = 2,
                                         hp = 2,
                                         speed = 2,
-                                        icons = surface_manager.add_icon('rat', ':mouse.png'),
+                                        icons = surface_manager.add_icon('rat', ':mouse.png', 'r'),
                                         attack = 1,
                                         ai = FlockingHerbivore))
 
@@ -200,7 +200,7 @@ def init_creatures(context):
                                         mind = 0,
                                         hp = 4,
                                         speed = 3,
-                                        icons = surface_manager.add_icon('fire beetle', ':scarab-beetle.png'),
+                                        icons = surface_manager.add_icon('fire beetle', ':scarab-beetle.png', 'a'),
                                         attack = 2,
                                         ai = FlockingHerbivore))
 
@@ -248,7 +248,7 @@ def init_creatures(context):
                                         mind = 0,
                                         hp = 8,
                                         speed = 4,
-                                        icons = surface_manager.add_icon('skeleton warrior', ':blade-bite.png'),
+                                        icons = surface_manager.add_icon('skeleton warrior', ':blade-bite.png', 'Z'),
                                         attack = 1,
                                         ai = SkeletonWarriorAI,
                                         inventory = skeleton_inventory,

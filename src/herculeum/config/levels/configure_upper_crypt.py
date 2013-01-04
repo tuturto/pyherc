@@ -159,7 +159,7 @@ def init_creatures(context):
                                         mind = 8,
                                         hp = 6,
                                         speed = 1,
-                                        icons = surface_manager.add_icon('spider', ':masked-spider.png'),
+                                        icons = surface_manager.add_icon('spider', ':masked-spider.png', 's'),
                                         attack = 4,
                                         ai = FlockingHerbivore,
                                         effect_handles = [EffectHandle(

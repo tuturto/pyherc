@@ -64,7 +64,7 @@ class QtSurfaceManager(object):
         return image
 
     @logged
-    def add_icon(self, key, filename):
+    def add_icon(self, key, filename, ascii_char):
         """
         Add icon to internal collection
         """

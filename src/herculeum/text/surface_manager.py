@@ -36,6 +36,7 @@ class CursesSurfaceManager(object):
         """
         super(CursesSurfaceManager, self).__init__()
         self.resourcesLoaded = 0
+        self.icons = {}
 
     @logged
     def load_resources(self):
@@ -45,8 +46,25 @@ class CursesSurfaceManager(object):
         pass
 
     @logged
-    def add_icon(self, key, filename):
+    def add_icon(self, key, filename, ascii_char):
         """
         Add icon to internal collection
         """
-        pass
+        self.icons[key] = ascii_char
+
+        return key
+
+    @logged
+    def get_icon(self, id):
+        """
+        Get icon with ID
+
+        :param id: ID number of the icon to retrieve
+        :type id: int
+        :returns: icon if found, otherwise empty icon
+        :rtype: string
+        """
+        if id in self.icons:
+            return self.icons[id]
+        else:
+            return 'X'
