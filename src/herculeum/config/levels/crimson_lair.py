@@ -154,7 +154,8 @@ def init_creatures(context):
                                         speed = 3,
                                         icons = surface_manager.add_icon('crimson jaw',
                                                                          ':crimson-jaw.png',
-                                                                         '&'),
+                                                                         '&',
+                                                                         ['bold', 'red']),
                                         attack = 8,
                                         inventory = [InventoryConfiguration(
                                                             item_name = 'whip of ashmque',
@@ -179,7 +180,7 @@ def init_items(context):
                   ItemConfiguration(name = 'whip of ashmque',
                                     cost = 0,
                                     weight = 12,
-                                    icons = [surface_manager.add_icon('whip of ashmque', ':ashmque.png', ')')],
+                                    icons = [surface_manager.add_icon('whip of ashmque', ':ashmque.png', ')', ['bold', 'red'])],
                                     types = ['weapon',
                                              'one-handed',
                                              'melee',

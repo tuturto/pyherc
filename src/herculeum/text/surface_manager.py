@@ -22,6 +22,7 @@
 Module for handling loading of images and icons
 """
 from pyherc.aspects import logged
+import curses
 
 class CursesSurfaceManager(object):
     """
@@ -37,6 +38,7 @@ class CursesSurfaceManager(object):
         super(CursesSurfaceManager, self).__init__()
         self.resourcesLoaded = 0
         self.icons = {}
+        self.attributes = {}
 
     @logged
     def load_resources(self):
@@ -46,15 +48,57 @@ class CursesSurfaceManager(object):
         pass
 
     @logged
-    def add_icon(self, key, filename, ascii_char):
+    def add_icon(self, key, filename, ascii_char, attributes = None):
         """
         Add icon to internal collection
         """
         self.icons[key] = ascii_char
 
+        if attributes == None:
+            used_attributes = curses.A_NORMAL | self.get_attribute_by_name('white')
+        else:
+            used_attributes = curses.A_NORMAL
+            for elem in attributes:
+                used_attributes = used_attributes | self.get_attribute_by_name(elem)
+
+        self.attributes[key] = used_attributes
+
         return key
 
-    @logged
+    def get_attribute_by_name(self, attribute_name):
+        """
+        Get attribute based on name
+        """
+        if attribute_name == 'blue':
+            return curses.color_pair(1)
+        elif attribute_name == 'cyan':
+            return curses.color_pair(2)
+        elif attribute_name == 'green':
+            return curses.color_pair(3)
+        elif attribute_name == 'magenta':
+            return curses.color_pair(4)
+        elif attribute_name == 'red':
+            return curses.color_pair(5)
+        elif attribute_name == 'white':
+            return curses.color_pair(6)
+        elif attribute_name == 'yellow':
+            return curses.color_pair(7)
+        elif attribute_name == 'bold':
+            return curses.A_BOLD
+        elif attribute_name == 'normal':
+            return curses.A_NORMAL
+        elif attribute_name == 'dim':
+            return curses.A_DIM
+
+    def get_attribute(self, id):
+        """
+        Get attriutes with ID
+        """
+        if id in self.attributes:
+            return self.attributes[id]
+        else:
+            return curses.A_NORMAL | curses.color_pair(6)
+
     def get_icon(self, id):
         """
         Get icon with ID

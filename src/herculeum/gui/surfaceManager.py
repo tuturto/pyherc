@@ -64,7 +64,7 @@ class QtSurfaceManager(object):
         return image
 
     @logged
-    def add_icon(self, key, filename, ascii_char):
+    def add_icon(self, key, filename, ascii_char, attributes = None):
         """
         Add icon to internal collection
         """
@@ -83,27 +83,6 @@ class QtSurfaceManager(object):
         surface = self.__load_image(':transparent.png')
         self.icons[herculeum.config.tiles.TRANSPARENT] = surface
 
-        surface = self.__load_image(':weapons.png')
-
-        tiles = self.split_surface(surface, (32, 32))
-
-        self.icons[herculeum.config.tiles.ITEM_MORNING_STAR_1] = tiles[22]
-        self.icons[herculeum.config.tiles.ITEM_MORNING_STAR_2] = tiles[23]
-        self.icons[herculeum.config.tiles.ITEM_SHORT_SWORD_1] = tiles[6]
-        self.icons[herculeum.config.tiles.ITEM_SHORT_SWORD_2] = tiles[6]
-        self.icons[herculeum.config.tiles.ITEM_LIGHT_MACE] = tiles[20]
-        self.icons[herculeum.config.tiles.ITEM_SICKLE] = tiles[41]
-        self.icons[herculeum.config.tiles.ITEM_CLUB] = tiles[21]
-        self.icons[herculeum.config.tiles.ITEM_MACE] = tiles[24]
-        self.icons[herculeum.config.tiles.ITEM_SHORTSPEAR] = tiles[28]
-        self.icons[herculeum.config.tiles.ITEM_LONGSPEAR] = tiles[34]
-        self.icons[herculeum.config.tiles.ITEM_SPEAR] = tiles[30]
-
-        surface = self.__load_image(':monsters.png')
-        tiles = self.split_surface(surface, (32, 32))
-
-        self.icons[herculeum.config.tiles.HUMAN_FIGHTER] = tiles[3]
-
         surface = self.__load_image(':dungeon.png')
         tiles = self.split_surface(surface, (32, 32))
 
@@ -119,11 +98,6 @@ class QtSurfaceManager(object):
 
         self.icons[herculeum.config.tiles.PORTAL_STAIRS_DOWN] = tiles[260]
         self.icons[herculeum.config.tiles.PORTAL_STAIRS_UP] = tiles[261]
-
-        surface = self.__load_image(':items.png')
-        tiles = self.split_surface(surface, (32, 32))
-        self.icons[herculeum.config.tiles.ITEM_APPLE] = tiles[0]
-        self.icons[herculeum.config.tiles.ITEM_CRYSTAL_SKULL] = tiles[1]
 
     @logged
     def split_surface(self, image, tile_size):

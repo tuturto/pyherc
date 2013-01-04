@@ -175,11 +175,17 @@ class MapScreen(object):
                 if tile == level.empty_wall:
                     self.screen.addch(row_number,
                                       column_number,
-                                      ord('.'))
+                                      ord('.'),
+                                      self.surface_manager.get_attribute_by_name('dim'))
                 else:
-                    self.screen.addch(row_number,
-                                      column_number,
-                                      ord('#'))
+                    if tile == 101:
+                        self.screen.addch(row_number,
+                                          column_number,
+                                          ord(' '))
+                    else:
+                        self.screen.addch(row_number,
+                                          column_number,
+                                          ord('#'))
 
         for portal in level.portals:
             self.screen.addch(portal.location[1],
@@ -189,16 +195,19 @@ class MapScreen(object):
         for item in level.items:
             self.screen.addch(item.location[1],
                               item.location[0],
-                              ord(self.surface_manager.get_icon(item.icon)))
+                              ord(self.surface_manager.get_icon(item.icon)),
+                              self.surface_manager.get_attribute(item.icon))
 
         for monster in level.creatures:
             self.screen.addch(monster.location[1],
                               monster.location[0],
-                              ord(self.surface_manager.get_icon(monster.icon)))
+                              ord(self.surface_manager.get_icon(monster.icon)),
+                              self.surface_manager.get_attribute(monster.icon))
 
         self.screen.addch(player.location[1],
                           player.location[0],
-                          ord(self.surface_manager.get_icon(player.icon)))
+                          ord(self.surface_manager.get_icon(player.icon)),
+                          self.surface_manager.get_attribute(player.icon))
 
         self.screen.refresh()
 
