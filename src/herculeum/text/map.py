@@ -89,9 +89,18 @@ class MapScreen(object):
         Show the map
         """
         self.refresh_screen()
+        player = self.model.player
 
         while self.model.end_condition == 0:
-            self._handle_player_input()
+            next_creature = self.model.get_next_creature(self.rules_engine)
+
+            if next_creature == player:
+                self._handle_player_input()
+            else:
+                next_creature.act(model = self.model,
+                                  action_factory = self.action_factory,
+                                  rng = self.rng)
+            self.refresh_screen()
 
     @logged
     def _handle_player_input(self):
@@ -147,6 +156,11 @@ class MapScreen(object):
                     self.screen.addch(row_number,
                                       column_number,
                                       ord('#'))
+
+        for portal in level.portals:
+            self.screen.addch(portal.location[1],
+                              portal.location[0],
+                              ord('<'))
 
         for item in level.items:
             self.screen.addch(item.location[1],

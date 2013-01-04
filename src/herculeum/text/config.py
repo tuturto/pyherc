@@ -42,3 +42,5 @@ class CursesControlsConfiguration(object):
         self.move_down_right = ['3']
         self.move_down = ['2']
         self.move_down_left = ['1']
+
+        self.action_a = ['5']
