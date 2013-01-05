@@ -24,6 +24,7 @@ Module for map screen
 import curses
 import sys
 from pyherc.aspects import logged
+from herculeum.text.inventory import InventoryScreen
 
 class MapScreen(object):
     """
@@ -114,6 +115,20 @@ class MapScreen(object):
 
         if key in self.keymap:
             self.keymap[key](key)
+        elif key == 'u':
+            inv = InventoryScreen(self.model.player.inventory,
+                                  self.configuration,
+                                  self.screen)
+            item = inv.show()
+            if item != None:
+                self.model.player.equip(item, self.action_factory)
+        elif key == 'd':
+            inv = InventoryScreen(self.model.player.inventory,
+                                  self.configuration,
+                                  self.screen)
+            item = inv.show()
+            if item != None:
+                self.model.player.drop_item(item, self.action_factory)
         else:
             self.model.end_condition = 1
 
