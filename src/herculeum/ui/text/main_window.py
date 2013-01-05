@@ -21,8 +21,8 @@
 """
 Module for main window related functionality
 """
-from herculeum.text.start_game import StartGameScreen
-from herculeum.text.map import MapScreen
+from herculeum.ui.text.start_game import StartGameScreen
+from herculeum.ui.text.map import MapScreen
 from pyherc.generators.dungeon import DungeonGenerator
 
 class MainWindow(object):

@@ -27,7 +27,7 @@ from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import Qt
 import PyQt4.QtGui
 
-from herculeum.gui.widgets import ListView
+from herculeum.ui.gui.widgets import ListView
 
 class CharacterWidget(QWidget):
     """

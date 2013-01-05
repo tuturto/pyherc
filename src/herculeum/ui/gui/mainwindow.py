@@ -30,11 +30,11 @@ from PyQt4.QtGui import QApplication
 import PyQt4.QtGui
 import os
 import pyherc
-from herculeum.gui.startgame import StartGameWidget
-from herculeum.gui.map import PlayMapWindow
-from herculeum.gui.eventdisplay import EventMessageDockWidget
-from herculeum.gui.menu import MenuDialog
-from herculeum.gui.endscreen import EndScreen
+from herculeum.ui.gui.startgame import StartGameWidget
+from herculeum.ui.gui.map import PlayMapWindow
+from herculeum.ui.gui.eventdisplay import EventMessageDockWidget
+from herculeum.ui.gui.menu import MenuDialog
+from herculeum.ui.gui.endscreen import EndScreen
 from herculeum.config import tiles
 
 from random import Random

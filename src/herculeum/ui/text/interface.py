@@ -22,7 +22,7 @@
 Module for curses user interface
 """
 import curses
-from herculeum.text.main_window import MainWindow
+from herculeum.ui.text.main_window import MainWindow
 
 class CursesUserInterface(object):
     """

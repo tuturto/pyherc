@@ -22,9 +22,9 @@
 Module for testing list view
 """
 
-from herculeum.gui import QtSurfaceManager
-from herculeum.gui.widgets import ListView, ListViewItem
-import herculeum.gui.resources
+from herculeum.ui.gui import QtSurfaceManager
+from herculeum.ui.gui.widgets import ListView, ListViewItem
+import herculeum.ui.gui.resources
 
 from mockito import mock, when, any
 from hamcrest import assert_that

@@ -28,8 +28,6 @@ import sys
 import logging
 import herculeum.config.levels
 
-from herculeum.gui import MainWindow
-
 class Application(object):
     """
     This class represents main application

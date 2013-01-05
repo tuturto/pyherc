@@ -28,8 +28,8 @@ from PyQt4.QtGui import QFont
 from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
 from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
 from PyQt4.QtCore import QEasingCurve, pyqtSignal, QEvent
-from herculeum.gui.eventdisplay import EventMessageWidget
-from herculeum.gui.widgets import HitPointsWidget, EffectsWidget
+from herculeum.ui.gui.eventdisplay import EventMessageWidget
+from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
 from random import Random
 
 class PlayMapWindow(QWidget):

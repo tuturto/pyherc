@@ -32,7 +32,7 @@ from PyQt4.QtGui import QPixmap
 from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import QRect
 
-import herculeum.gui.resources
+import herculeum.ui.gui.resources
 
 class QtSurfaceManager(object):
     """

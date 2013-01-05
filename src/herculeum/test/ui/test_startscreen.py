@@ -21,9 +21,9 @@
 """
 Package for start screen tests
 """
-from herculeum.gui.startgame import StartGameWidget
+from herculeum.ui.gui.startgame import StartGameWidget
 from pyherc.generators import CreatureConfiguration, CreatureGenerator
-from herculeum.gui import QtControlsConfiguration, QtSurfaceManager
+from herculeum.ui.gui import QtControlsConfiguration, QtSurfaceManager
 
 from PyQt4.QtTest import QTest
 from PyQt4.QtGui import QApplication, QPixmap

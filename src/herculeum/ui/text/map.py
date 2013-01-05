@@ -21,10 +21,8 @@
 """
 Module for map screen
 """
-import curses
-import sys
 from pyherc.aspects import logged
-from herculeum.text.inventory import InventoryScreen
+from herculeum.ui.text.inventory import InventoryScreen
 
 class MapScreen(object):
     """

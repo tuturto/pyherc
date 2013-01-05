@@ -23,7 +23,7 @@ Module for testing character widget
 """
 from PyQt4.QtGui import QApplication, QPixmap
 from pyherc.test.builders import CharacterBuilder, EffectBuilder
-from herculeum.gui.character import CharacterWidget
+from herculeum.ui.gui.character import CharacterWidget
 
 from mockito import mock, when, any
 from hamcrest import assert_that
