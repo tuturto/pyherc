@@ -48,6 +48,7 @@ class MapScreen(object):
         self.screen = screen
         self.keymap, self.move_key_map = self._construct_keymaps(
                                                         configuration.controls)
+        self.messages = []
 
     def _construct_keymaps(self, config):
         """
@@ -173,41 +174,48 @@ class MapScreen(object):
         for column_number, column in enumerate(level.walls):
             for row_number, tile in enumerate(column):
                 if tile == level.empty_wall:
-                    self.screen.addch(row_number,
+                    self.screen.addch(row_number + 1,
                                       column_number,
                                       ord('.'),
                                       self.surface_manager.get_attribute_by_name('dim'))
                 else:
                     if tile == 101:
-                        self.screen.addch(row_number,
+                        self.screen.addch(row_number + 1,
                                           column_number,
                                           ord(' '))
                     else:
-                        self.screen.addch(row_number,
+                        self.screen.addch(row_number + 1,
                                           column_number,
                                           ord('#'))
 
         for portal in level.portals:
-            self.screen.addch(portal.location[1],
+            self.screen.addch(portal.location[1] + 1,
                               portal.location[0],
                               ord('<'))
 
         for item in level.items:
-            self.screen.addch(item.location[1],
+            self.screen.addch(item.location[1] + 1,
                               item.location[0],
                               ord(self.surface_manager.get_icon(item.icon)),
                               self.surface_manager.get_attribute(item.icon))
 
         for monster in level.creatures:
-            self.screen.addch(monster.location[1],
+            self.screen.addch(monster.location[1] + 1,
                               monster.location[0],
                               ord(self.surface_manager.get_icon(monster.icon)),
                               self.surface_manager.get_attribute(monster.icon))
 
-        self.screen.addch(player.location[1],
+        self.screen.addch(player.location[1] + 1,
                           player.location[0],
                           ord(self.surface_manager.get_icon(player.icon)),
                           self.surface_manager.get_attribute(player.icon))
+
+        stats = 'HP:{0}({1}) MG:{2}({3})'.format(player.hit_points,
+                                                 player.max_hp,
+                                                 0,
+                                                 0)
+        stats = stats.ljust(80)
+        self.screen.addstr(22, 0, stats)
 
         self.screen.refresh()
 
@@ -218,3 +226,31 @@ class MapScreen(object):
         if event.event_type == 'move':
             self.refresh_screen()
 
+            if event.mover == self.model.player:
+                self.messages = []
+                self.screen.addstr(0, 0, ' '.ljust(80))
+
+        if event.event_type in ['attack hit',
+                                    'attack miss',
+                                    'attack nothing',
+                                    'poison triggered',
+                                    'poison ended',
+                                    'poisoned',
+                                    'heal started',
+                                    'heal ended',
+                                    'heal triggered',
+                                    'death',
+                                    'pick up',
+                                    'drop',
+                                    'damage triggered',
+                                    'equip',
+                                    'unequip',
+                                    'notice',
+                                    'lose focus']:
+            message = event.get_description(self.model.player)
+            self.messages.append(message)
+            if len(self.messages) > 2:
+                self.messages = self.messages[-2:]
+            displayed_messages = ', '.join(self.messages)
+            displayed_messages = displayed_messages.ljust(80)
+            self.screen.addstr(0, 0, displayed_messages)
