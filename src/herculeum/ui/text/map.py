@@ -123,6 +123,13 @@ class MapScreen(object):
                                   action_factory = self.action_factory,
                                   parent = self.screen)
             item = inv.show()
+        elif key == 'a':
+            dir_key = chr(self.screen.getch())
+            if dir_key in self.move_key_map:
+                direction = self.move_key_map[dir_key]
+                self.model.player.perform_attack(direction,
+                                                 self.action_factory,
+                                                 self.rng)
         elif key == 'Q':
             self.model.end_condition = 1
 
