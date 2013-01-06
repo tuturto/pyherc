@@ -8,6 +8,9 @@ Main controls
 It is possible to run the game in text only mode, using library called curses.
 Most Unix distributions include this library, but for Windows it often has to
 be installed separately.
+
+To start the game in text mode, add command line switch 'curses' when starting
+the game.
  
 *******************
 Starting a new game
