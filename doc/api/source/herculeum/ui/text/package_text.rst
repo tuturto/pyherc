@@ -1,7 +1,7 @@
-herculeum.ui.gui
-****************
+herculeum.ui.text
+*****************
 
-.. automodule:: herculeum.ui.gui
+.. automodule:: herculeum.ui.text
 
 .. toctree::
    :maxdepth: 2

@@ -24,7 +24,8 @@ System Requirements
 Manual
 ======
 * Manual can be found at doc - directory
-* Online manual is available at: http://tuturto.github.com/pyherc/index.html
+* Online documentation for development version is available at: 
+  http://tuturto.github.com/pyherc/index.html
 
 Credits
 =======
