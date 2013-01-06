@@ -52,6 +52,7 @@ class MapScreen(object):
                                               rng)
         self.messages = []
 
+    @logged
     def _construct_keymaps(self, config):
         """
         Construct keymaps for handling input
@@ -223,6 +224,7 @@ class MapScreen(object):
 
         self.screen.refresh()
 
+    @logged
     def receive_event(self, event):
         """
         Receive event
