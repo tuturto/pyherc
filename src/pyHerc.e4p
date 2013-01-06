@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2013-01-05, 11:04:06 -->
+<!-- Saved: 2013-01-06, 06:54:19 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -131,9 +131,6 @@
     <Source>herculeum/config/levels/__init__.py</Source>
     <Source>herculeum/config/levels/configure_catacombs.py</Source>
     <Source>herculeum/config/levels/configure_upper_crypt.py</Source>
-    <Source>herculeum/gui/__init__.py</Source>
-    <Source>herculeum/gui/images.py</Source>
-    <Source>herculeum/gui/surfaceManager.py</Source>
     <Source>herculeum/test/__init__.py</Source>
     <Source>herculeum/test/unit/__init__.py</Source>
     <Source>herculeum/test/integration/__init__.py</Source>
@@ -154,12 +151,7 @@
     <Source>pyherc/generators/effects.py</Source>
     <Source>pyherc/data/effects/effectscollection.py</Source>
     <Source>pyherc/test/matchers/character.py</Source>
-    <Source>herculeum/gui/mainwindow.py</Source>
-    <Source>herculeum/gui/map.py</Source>
-    <Source>herculeum/gui/eventdisplay.py</Source>
     <Source>pyherc/events/death.py</Source>
-    <Source>herculeum/gui/startgame.py</Source>
-    <Source>herculeum/gui/inventory.py</Source>
     <Source>pyherc/events/inventory.py</Source>
     <Source>pyherc/test/bdd/test_inventory.py</Source>
     <Source>pyherc/test/unit/test_drop_actions.py</Source>
@@ -168,7 +160,6 @@
     <Source>pyherc/test/builders/poison.py</Source>
     <Source>pyherc/test/builders/heal.py</Source>
     <Source>pyherc/test/builders/rules_engine.py</Source>
-    <Source>herculeum/gui/resources.py</Source>
     <Source>pyherc/events/healing.py</Source>
     <Source>pyherc/data/inventory.py</Source>
     <Source>pyherc/test/unit/test_inventory.py</Source>
@@ -176,13 +167,10 @@
     <Source>pyherc/test/unit/test_damage_modifiers.py</Source>
     <Source>pyherc/data/effects/damagemodifier.py</Source>
     <Source>pyherc/test/unit/test_damage.py</Source>
-    <Source>herculeum/gui/widgets.py</Source>
     <Source>pyherc/test/unit/test_character.py</Source>
     <Source>pyherc/events/hitpoints.py</Source>
     <Source>pyherc/test/matchers/event_parameters.py</Source>
     <Source>pyherc/ai/skeleton.py</Source>
-    <Source>herculeum/gui/character.py</Source>
-    <Source>herculeum/gui/menu.py</Source>
     <Source>herculeum/test/ui/test_listview.py</Source>
     <Source>herculeum/test/matchers/__init__.py</Source>
     <Source>herculeum/test/ui/test_characterwidget.py</Source>
@@ -199,7 +187,6 @@
     <Source>pyherc/events/damage.py</Source>
     <Source>herculeum/test/ui/test_startscreen.py</Source>
     <Source>herculeum/config/levels/player_characters.py</Source>
-    <Source>herculeum/gui/endscreen.py</Source>
     <Source>pyherc/events/perception.py</Source>
     <Source>pyherc/test/bdd/features/steps/characters.py</Source>
     <Source>pyherc/test/bdd/features/steps/time.py</Source>
@@ -234,15 +221,31 @@
     <Source>pyherc/test/matchers/attack_parameters.py</Source>
     <Source>pyherc/rules/attack/ranged.py</Source>
     <Source>pyherc/test/unit/test_pick_up.py</Source>
-    <Source>herculeum/text/__init__.py</Source>
-    <Source>herculeum/gui/config.py</Source>
-    <Source>herculeum/text/config.py</Source>
-    <Source>herculeum/text/interface.py</Source>
-    <Source>herculeum/text/surface_manager.py</Source>
-    <Source>herculeum/text/main_window.py</Source>
-    <Source>herculeum/text/start_game.py</Source>
-    <Source>herculeum/text/map.py</Source>
-    <Source>herculeum/text/inventory.py</Source>
+    <Source>herculeum/ui/__init__.py</Source>
+    <Source>herculeum/ui/gui/__init__.py</Source>
+    <Source>herculeum/ui/gui/character.py</Source>
+    <Source>herculeum/ui/gui/config.py</Source>
+    <Source>herculeum/ui/gui/endscreen.py</Source>
+    <Source>herculeum/ui/gui/eventdisplay.py</Source>
+    <Source>herculeum/ui/gui/images.py</Source>
+    <Source>herculeum/ui/gui/inventory.py</Source>
+    <Source>herculeum/ui/gui/mainwindow.py</Source>
+    <Source>herculeum/ui/gui/map.py</Source>
+    <Source>herculeum/ui/gui/menu.py</Source>
+    <Source>herculeum/ui/gui/resources.py</Source>
+    <Source>herculeum/ui/gui/startgame.py</Source>
+    <Source>herculeum/ui/gui/surfaceManager.py</Source>
+    <Source>herculeum/ui/gui/widgets.py</Source>
+    <Source>herculeum/ui/text/__init__.py</Source>
+    <Source>herculeum/ui/text/config.py</Source>
+    <Source>herculeum/ui/text/interface.py</Source>
+    <Source>herculeum/ui/text/inventory.py</Source>
+    <Source>herculeum/ui/text/main_window.py</Source>
+    <Source>herculeum/ui/text/map.py</Source>
+    <Source>herculeum/ui/text/start_game.py</Source>
+    <Source>herculeum/ui/text/surface_manager.py</Source>
+    <Source>herculeum/ui/controllers/__init__.py</Source>
+    <Source>herculeum/ui/controllers/inventory.py</Source>
   </Sources>
   <Forms>
   </Forms>

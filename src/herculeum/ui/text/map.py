@@ -23,6 +23,7 @@ Module for map screen
 """
 from pyherc.aspects import logged
 from herculeum.ui.text.inventory import InventoryScreen
+from herculeum.ui.controllers import InventoryController
 
 class MapScreen(object):
     """
@@ -47,6 +48,8 @@ class MapScreen(object):
         self.screen = screen
         self.keymap, self.move_key_map = self._construct_keymaps(
                                                         configuration.controls)
+        self.inventory_controller = InventoryController(model.player,
+                                                        action_factory)
         self.messages = []
 
     def _construct_keymaps(self, config):
@@ -119,7 +122,7 @@ class MapScreen(object):
                                   self.screen)
             item = inv.show()
             if item != None:
-                self.model.player.equip(item, self.action_factory)
+                self.inventory_controller.use_item(item)
         elif key == 'd':
             inv = InventoryScreen(self.model.player.inventory,
                                   self.configuration,

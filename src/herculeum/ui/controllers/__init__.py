@@ -21,4 +21,4 @@
 """
 Package for user interface controllers
 """
-pass
+from .inventory import InventoryController

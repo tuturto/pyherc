@@ -28,6 +28,7 @@ from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import Qt, pyqtSignal
 import PyQt4.QtGui
 import pyherc
+from herculeum.ui.controllers import InventoryController
 
 from pyherc.data import Item
 
@@ -356,6 +357,9 @@ class InventoryWidget(QWidget):
         self.item_description = None
         self.character_inventory = None
 
+        self.inventory_controller = InventoryController(character,
+                                                        action_factory)
+
         self.__set_layout(surface_manager, character, config)
 
     ItemPickedUp = pyqtSignal(Item, name='ItemPickedUp')
@@ -506,23 +510,7 @@ class InventoryWidget(QWidget):
 
         .. versionadded:: 0.6
         """
-        if item.get_main_type() == 'potion':
-            self.character.drink(item, self.action_factory)
-        elif item.get_main_type() == 'weapon':
-            if self.character.inventory.weapon != None:
-                self.character.unequip(self.character.inventory.weapon,
-                                       self.action_factory)
-            self.character.equip(item,
-                                 self.action_factory)
-        elif item.get_main_type() == 'armour':
-            if self.character.inventory.armour != None:
-                self.character.unequip(self.character.inventory.armour,
-                                       self.action_factory)
-            self.character.equip(item,
-                                 self.action_factory)
-        elif item.get_main_type() == 'ammunition':
-            self.character.equip(item,
-                                 self.action_factory)
+        self.inventory_controller.use_item(item)
 
         self.update_inventory()
 
