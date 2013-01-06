@@ -89,6 +89,8 @@ class Item(object):
                 name = name + ' (weapon in hand)'
             elif character.inventory.armour == self:
                 name = name + ' (armour in use)'
+            elif character.inventory.projectiles == self:
+                name = name + ' (quivered)'
 
         return name
 

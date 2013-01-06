@@ -118,6 +118,7 @@ class MapScreen(object):
             self.keymap[key](key)
         elif key == 'u':
             inv = InventoryScreen(self.model.player.inventory,
+                                  self.model.player,
                                   self.configuration,
                                   self.screen)
             item = inv.show()

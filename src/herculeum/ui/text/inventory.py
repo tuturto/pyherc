@@ -31,13 +31,14 @@ class InventoryScreen(object):
     .. versionaddedd:: 0.9
     """
     @logged
-    def __init__(self, items, config, screen):
+    def __init__(self, items, character, config, screen):
         """
         Default constructor
         """
         super(InventoryScreen, self).__init__()
 
         self.items = items
+        self.character = character
         self.config = config
         self.screen = screen.subwin(20, 75, 2, 2)
 
@@ -63,7 +64,8 @@ class InventoryScreen(object):
 
             self.screen.addstr(1 + index, 1,
                                '{0} {1}'.format(self.keys[index],
-                                                item.name))
+                                                item.get_name(self.character,
+                                                              True)))
 
         self.screen.refresh()
 
