@@ -29,7 +29,7 @@ class InventoryScreen(object):
     """
     Class for displaying inventero screen
 
-    .. versionaddedd:: 0.9
+    .. versionadded:: 0.9
     """
     @logged
     def __init__(self, character, config, screen, action_factory,

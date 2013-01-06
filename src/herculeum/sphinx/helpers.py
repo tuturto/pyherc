@@ -28,6 +28,7 @@ import sys
 import logging
 import herculeum.config.levels
 import herculeum.ui.gui.resources
+from herculeum.ui.gui import QtControlsConfiguration, QtSurfaceManager
 from PyQt4.QtGui import QApplication
 
 qt_app = None
@@ -49,7 +50,9 @@ def with_config(fn):
            herculeum.sphinx.helpers.world = Model()
            herculeum.sphinx.helpers.config = Configuration(
                                                 herculeum.sphinx.helpers.world,
-                                                herculeum.config.levels)
+                                                herculeum.config.levels,
+                                                QtControlsConfiguration(),
+                                                QtSurfaceManager())
            herculeum.sphinx.helpers.config.initialise()
 
         kwargs['config'] = config

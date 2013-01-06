@@ -7,8 +7,8 @@ pyherc.rules
    :maxdepth: 2
 
    attack/package_attack
-   consume/module_consume
-   inventory/module_inventory
+   consume/package_consume
+   inventory/package_inventory
    move/module_move
    module_ending
    module_engine

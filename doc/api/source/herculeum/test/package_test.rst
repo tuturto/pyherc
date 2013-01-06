@@ -6,5 +6,7 @@ herculeum.test
 .. toctree::
    :maxdepth: 2
    
-   unit/package_unit
    integration/package_integration
+   matchers/package_matchers
+   ui/package_ui
+   unit/package_unit

@@ -62,7 +62,7 @@ class ItemBuilder(object):
         :type appearance: string
 
         .. note:: appearance is used as a name of the item if it is not familiar
-        to the person inspecting it
+                  to the person inspecting it
         """
         self.appearance = appearance
         return self

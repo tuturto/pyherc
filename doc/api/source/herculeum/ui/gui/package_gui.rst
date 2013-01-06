@@ -1,12 +1,13 @@
-herculeum.gui
-*************
+herculeum.ui.gui
+****************
 
-.. automodule:: herculeum.gui
+.. automodule:: herculeum.ui.gui
 
 .. toctree::
    :maxdepth: 2
    
    module_character
+   module_config
    module_endscreen
    module_eventdisplay
    module_images

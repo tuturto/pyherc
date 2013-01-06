@@ -3,6 +3,7 @@
 This is a slightly modified version of python 2.6's default heapq.py file:
  * added the updateheapvalue -function
  * removed the importing of the C implementation
+
  -- Pauli Rikula
 """
 

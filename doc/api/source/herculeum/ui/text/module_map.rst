@@ -1,6 +1,6 @@
-herculeum.gui.widgets
+herculeum.ui.text.map
 *********************
 
-.. automodule:: herculeum.gui.widgets
+.. automodule:: herculeum.ui.text.map
     :members:
     :show-inheritance:

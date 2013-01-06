@@ -7,4 +7,6 @@ pyherc.rules.inventory
    :maxdepth: 2
    
    module_action
+   module_equip
    module_factories
+   module_unequip
