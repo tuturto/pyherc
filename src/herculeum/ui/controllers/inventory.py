@@ -57,3 +57,22 @@ class InventoryController(object):
         elif item.get_main_type() == 'ammunition':
             self.character.equip(item,
                                  self.action_factory)
+
+    def unequip_item(self, item):
+        """
+        Unequip item
+        """
+        self.character.unequip(item,
+                               self.action_factory)
+
+    def pick_up_item(self, item):
+        """
+        Pick up item
+        """
+        self.character.pick_up(item, self.action_factory)
+
+    def drop_item(self, item):
+        """
+        Drop item
+        """
+        self.character.drop_item(item, self.action_factory)

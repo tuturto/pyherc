@@ -447,17 +447,6 @@ class InventoryWidget(QWidget):
 
         self.item_description.set_text(item_description)
 
-    def pick_up_item(self, item):
-        """
-        Pick up item
-
-        .. versionadded:: 0.6
-        """
-        self.character.pick_up(item, self.action_factory)
-
-        self.update_inventory()
-        self.ItemPickedUp.emit(item)
-
     def focusNextPrevChild(self, next):
         """
         Handle moving focus around the widget
@@ -493,14 +482,23 @@ class InventoryWidget(QWidget):
 
         return True
 
+    def pick_up_item(self, item):
+        """
+        Pick up item
+
+        .. versionadded:: 0.6
+        """
+        self.inventory_controller.pick_up_item(item)
+        self.update_inventory()
+        self.ItemPickedUp.emit(item)
+
     def drop_item(self, item):
         """
         Drop item
 
         .. versionadded:: 0.6
         """
-        self.character.drop_item(item, self.action_factory)
-
+        self.inventory_controller.drop_item(item)
         self.update_inventory()
         self.ItemDropped.emit(item)
 
@@ -511,7 +509,6 @@ class InventoryWidget(QWidget):
         .. versionadded:: 0.6
         """
         self.inventory_controller.use_item(item)
-
         self.update_inventory()
 
     def unwield_weapon(self, item):
@@ -520,8 +517,7 @@ class InventoryWidget(QWidget):
 
         .. versionadded:: 0.6
         """
-        self.character.unequip(item,
-                               self.action_factory)
+        self.inventory_controller.unequip_item(item)
         self.update_inventory()
 
 class ItemBox(QWidget):

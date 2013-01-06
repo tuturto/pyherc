@@ -123,14 +123,21 @@ class MapScreen(object):
             item = inv.show()
             if item != None:
                 self.inventory_controller.use_item(item)
+        elif key == 'r':
+            inv = InventoryScreen(self.model.player.inventory,
+                                  self.configuration,
+                                  self.screen)
+            item = inv.show()
+            if item != None:
+                self.inventory_controller.unequip_item(item)
         elif key == 'd':
             inv = InventoryScreen(self.model.player.inventory,
                                   self.configuration,
                                   self.screen)
             item = inv.show()
             if item != None:
-                self.model.player.drop_item(item, self.action_factory)
-        else:
+                self.inventory_controller.drop_item(item)
+        elif key == 'Q':
             self.model.end_condition = 1
 
     @logged
