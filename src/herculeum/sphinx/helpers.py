@@ -27,7 +27,7 @@ from pyherc.data.model import Model
 import sys
 import logging
 import herculeum.config.levels
-import herculeum.gui.resources
+import herculeum.ui.gui.resources
 from PyQt4.QtGui import QApplication
 
 qt_app = None
