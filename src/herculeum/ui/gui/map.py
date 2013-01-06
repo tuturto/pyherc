@@ -30,6 +30,7 @@ from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
 from PyQt4.QtCore import QEasingCurve, pyqtSignal, QEvent
 from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
+from herculeum.ui.controllers import MoveController
 from random import Random
 
 class PlayMapWindow(QWidget):
@@ -138,6 +139,8 @@ class PlayMapWidget(QWidget):
         self.configuration = configuration
 
         self.animations = []
+        self.move_controller = MoveController(action_factory = action_factory,
+                                              rng = rng)
 
         self.__set_layout()
         self.keymap, self.move_key_map = self._construct_keymaps(
@@ -504,17 +507,9 @@ class PlayMapWidget(QWidget):
                                       self.action_factory,
                                       self.rng)
         else:
-            if player.is_move_legal(direction,
-                                    'walk',
-                                    self.action_factory):
-                player.move(direction,
-                            self.action_factory)
-            elif direction != 9:
-                loc = player.get_location_at_direction(direction)
-                if level.get_creature_at(loc) != None:
-                    player.perform_attack(direction,
-                                          self.action_factory,
-                                          self.rng)
+            self.move_controller.move_or_attack(player,
+                                                direction,
+                                                'walk')
 
     def _menu(self, key, modifiers):
         """

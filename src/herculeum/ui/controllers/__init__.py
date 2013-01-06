@@ -22,3 +22,4 @@
 Package for user interface controllers
 """
 from .inventory import InventoryController
+from .moving import MoveController

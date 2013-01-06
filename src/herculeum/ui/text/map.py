@@ -23,7 +23,7 @@ Module for map screen
 """
 from pyherc.aspects import logged
 from herculeum.ui.text.inventory import InventoryScreen
-from herculeum.ui.controllers import InventoryController
+from herculeum.ui.controllers import MoveController
 
 class MapScreen(object):
     """
@@ -48,8 +48,8 @@ class MapScreen(object):
         self.screen = screen
         self.keymap, self.move_key_map = self._construct_keymaps(
                                                         configuration.controls)
-        self.inventory_controller = InventoryController(model.player,
-                                                        action_factory)
+        self.move_controller = MoveController(action_factory,
+                                              rng)
         self.messages = []
 
     def _construct_keymaps(self, config):
@@ -116,28 +116,13 @@ class MapScreen(object):
 
         if key in self.keymap:
             self.keymap[key](key)
-        elif key == 'u':
-            inv = InventoryScreen(self.model.player.inventory,
-                                  self.model.player,
-                                  self.configuration,
-                                  self.screen)
+        elif key == 'i':
+            inv = InventoryScreen(character = self.model.player,
+                                  config = self.configuration,
+                                  screen = self.screen,
+                                  action_factory = self.action_factory,
+                                  parent = self.screen)
             item = inv.show()
-            if item != None:
-                self.inventory_controller.use_item(item)
-        elif key == 'r':
-            inv = InventoryScreen(self.model.player.inventory,
-                                  self.configuration,
-                                  self.screen)
-            item = inv.show()
-            if item != None:
-                self.inventory_controller.unequip_item(item)
-        elif key == 'd':
-            inv = InventoryScreen(self.model.player.inventory,
-                                  self.configuration,
-                                  self.screen)
-            item = inv.show()
-            if item != None:
-                self.inventory_controller.drop_item(item)
         elif key == 'Q':
             self.model.end_condition = 1
 
@@ -149,22 +134,10 @@ class MapScreen(object):
         :param key: key triggering the processing
         :type key: string
         """
-        player = self.model.player
-        level = player.level
         direction = self.move_key_map[key]
-
-        if player.is_move_legal(direction,
-                                'walk',
-                                self.action_factory):
-            player.move(direction,
-                        self.action_factory)
-        elif direction != 9:
-            loc = player.get_location_at_direction(direction)
-            if level.get_creature_at(loc) != None:
-                player.perform_attack(direction,
-                                      self.action_factory,
-                                      self.rng)
-
+        self.move_controller.move_or_attack(self.model.player,
+                                            direction,
+                                            'walk')
     @logged
     def _action_a(self, key):
         """

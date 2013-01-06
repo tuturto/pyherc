@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2013-01-06, 06:54:19 -->
+<!-- Saved: 2013-01-06, 09:56:18 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -246,6 +246,7 @@
     <Source>herculeum/ui/text/surface_manager.py</Source>
     <Source>herculeum/ui/controllers/__init__.py</Source>
     <Source>herculeum/ui/controllers/inventory.py</Source>
+    <Source>herculeum/ui/controllers/moving.py</Source>
   </Sources>
   <Forms>
   </Forms>

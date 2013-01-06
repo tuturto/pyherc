@@ -23,6 +23,7 @@ Module for inventory screen
 """
 
 from pyherc.aspects import logged
+from herculeum.ui.controllers import InventoryController
 
 class InventoryScreen(object):
     """
@@ -31,30 +32,33 @@ class InventoryScreen(object):
     .. versionaddedd:: 0.9
     """
     @logged
-    def __init__(self, items, character, config, screen):
+    def __init__(self, character, config, screen, action_factory,
+                 parent):
         """
         Default constructor
         """
         super(InventoryScreen, self).__init__()
 
-        self.items = items
         self.character = character
         self.config = config
         self.screen = screen.subwin(20, 75, 2, 2)
+        self.inventory_controller = InventoryController(character,
+                                                        action_factory)
+        self.parent = parent
 
         self.keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
                      'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
                      'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D']
 
     @logged
-    def show(self):
+    def _draw_screen(self):
         """
-        Show inventory screen
+        Update the screen
         """
         self.screen.clear()
         self.screen.border()
 
-        for index, item in enumerate(self.items):
+        for index, item in enumerate(self.character.inventory):
             if index < 15:
                 column = 1
                 row = 1 + index
@@ -69,10 +73,34 @@ class InventoryScreen(object):
 
         self.screen.refresh()
 
-        key = chr(self.screen.getch())
-        if key in self.keys:
-            index = self.keys.index(key)
-            if index < len(self.items):
-                return self.items[index]
+    @logged
+    def show(self):
+        """
+        Show inventory screen
+        """
+        running = 1
+        self._draw_screen()
 
-        return None
+        while running == 1:
+            item = None
+            key = chr(self.screen.getch())
+            if key in ['u', 'r', 'd']:
+                self.screen.addstr(0, 2, 'select item')
+                item_key = chr(self.screen.getch())
+                if item_key in self.keys:
+                    index = self.keys.index(item_key)
+                    if index < len(self.character.inventory):
+                        item = self.character.inventory[index]
+
+                if item != None:
+                    if key == 'u':
+                        self.inventory_controller.use_item(item)
+                    elif key == 'r':
+                        self.inventory_controller.unequip_item(item)
+                    elif key == 'd':
+                        self.inventory_controller.drop_item(item)
+            elif key == ' ':
+                running = 0
+
+            self._draw_screen()
+            self.parent.refresh()
