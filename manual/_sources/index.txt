@@ -13,6 +13,7 @@ Contents:
 
    intro
    commands
+   text_commands
    survival
    regions
    items

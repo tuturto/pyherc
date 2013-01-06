@@ -2,155 +2,7 @@
 <body>
 <div>
 <h1>Report</h1>
-<p>7020 statements analysed.</p><div>
-<h2>Raw metrics</h2>
-<table>
-<tr class="header">
-<th>type</th>
-<th>number</th>
-<th>%</th>
-<th>previous</th>
-<th>difference</th>
-</tr>
-<tr class="even">
-<td>code</td>
-<td>9367</td>
-<td>44.17</td>
-<td>8945</td>
-<td>+422.00</td>
-</tr>
-<tr class="odd">
-<td>docstring</td>
-<td>6798</td>
-<td>32.06</td>
-<td>6547</td>
-<td>+251.00</td>
-</tr>
-<tr class="even">
-<td>comment</td>
-<td>3042</td>
-<td>14.34</td>
-<td>2970</td>
-<td>+72.00</td>
-</tr>
-<tr class="odd">
-<td>empty</td>
-<td>1999</td>
-<td>9.43</td>
-<td>1932</td>
-<td>+67.00</td>
-</tr>
-</table>
-</div>
-<div>
-<h2>External dependencies</h2>
-<pre>bisect (pyherc.ai.pyheapq)
-collections (pyherc.data.effects.effectscollection,pyherc.generators.utils)
-copy (pyherc.generators.effects)
-  \-copy (pyherc.ai.pathfinding)
-decorator 
-  \-decorator (pyherc.aspects)
-functools 
-  \-wraps (pyherc.aspects)
-hamcrest 
-  \-assert_that (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_pathfinding,pyherc.test.unit.test_inventory,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_ranged_combat,pyherc.test.bdd.test_combat,pyherc.test.unit.test_wear_action,pyherc.test.unit.test_attack_action,pyherc.test.unit.test_damage,pyherc.test.bdd.test_inventory,pyherc.test.unit.test_damage_modifiers)
-  \-contains (pyherc.test.unit.test_pathfinding)
-  \-core 
-  | \-anything (pyherc.test.matchers.items)
-  | \-base_matcher 
-  | | \-BaseMatcher (pyherc.test.matchers.path_finding,pyherc.test.matchers.character,pyherc.test.matchers.effect_collection,pyherc.test.matchers.items,pyherc.test.matchers.map_connectivity,pyherc.test.matchers.event,pyherc.test.matchers.event_listener,pyherc.test.matchers.contains_creature,pyherc.test.matchers.inventory,pyherc.test.matchers.active_effects,pyherc.test.cutesy.dictionary)
-  | \-helpers 
-  |   \-wrap_matcher 
-  |     \-wrap_matcher (pyherc.test.matchers.items,pyherc.test.matchers.active_effects,pyherc.test.matchers.contains_creature)
-  \-equal_to (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_inventory,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_attack_action,pyherc.test.unit.test_damage,pyherc.test.unit.test_damage_modifiers)
-  \-greater_than (pyherc.test.unit.test_drop_actions)
-  \-has_item (pyherc.test.unit.test_config_dsl)
-  \-is_ (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_pathfinding,pyherc.test.unit.test_inventory,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_attack_action,pyherc.test.unit.test_damage,pyherc.test.unit.test_damage_modifiers)
-  \-is_in (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_inventory)
-  \-is_not (pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_drop_actions,pyherc.test.matchers.contains_creature,pyherc.test.unit.test_inventory)
-  \-none (pyherc.test.unit.test_inventory)
-  \-not_none (pyherc.test.unit.test_inventory)
-  \-only_contains (pyherc.test.unit.test_damage)
-logging (pyherc.generators.level.partitioners.grid,pyherc.rules.moving,pyherc.generators.level.generator,pyherc.generators.utils,pyherc.generators.level.partitioners.section,pyherc.rules.factory,pyherc.generators.level.room.squareroom,pyherc.generators.level.decorator.basic,pyherc.rules.utils,pyherc.aspects)
-mockito 
-  \-any (pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_combat,pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_time,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_damage_effect,pyherc.test.unit.test_poison,pyherc.test.unit.test_item,pyherc.test.unit.test_character,pyherc.test.unit.test_potions)
-  \-mock (pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_events,pyherc.test.unit.test_section,pyherc.test.unit.test_combat,pyherc.test.unit.test_magic,pyherc.test.unit.test_portaladder,pyherc.test.unit.test_creatureadder,pyherc.test.unit.test_damage_effect,pyherc.test.unit.test_poison,pyherc.test.unit.test_attack_action,pyherc.test.cutesy.dictionary,pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.builders.poison,pyherc.test.unit.test_pathfinding,pyherc.test.unit.test_item,pyherc.test.unit.test_time,pyherc.test.unit.test_model,pyherc.test.builders.character,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_inventory,pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_ranged_combat,pyherc.test.builders.rules_engine,pyherc.test.unit.test_leveldecorator,pyherc.test.unit.test_character,pyherc.test.builders.heal,pyherc.test.unit.test_connection,pyherc.test.unit.test_potions,pyherc.test.unit.test_moving,pyherc.test.builders.damage,pyherc.test.unit.test_levelgenerator,pyherc.test.builders.action,pyherc.test.unit.test_dungeon,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_creaturegeneration,pyherc.test.unit.test_damage_modifiers)
-  \-never (pyherc.test.unit.test_effects)
-  \-verify (pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_combat,pyherc.test.unit.test_events,pyherc.test.unit.test_item,pyherc.test.unit.test_time,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_damage_effect,pyherc.test.unit.test_model,pyherc.test.unit.test_character,pyherc.test.unit.test_poison,pyherc.test.unit.test_leveldecorator,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_attack_action,pyherc.test.unit.test_creaturegeneration)
-  \-when (pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_effects,pyherc.test.unit.test_combat,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_potions,pyherc.test.unit.test_damage_modifiers,pyherc.test.cutesy.dictionary)
-os 
-  \-path (pyherc.test.integration)
-random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_connection,pyherc.rules.attack.melee,pyherc.config.config,pyherc.generators.item,pyherc.generators.utils,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_section,pyherc.rules.attack.action,pyherc.test.unit.test_creatureadder,pyherc.test.unit.test_squareroom,pyherc.test.unit.test_portaladder,pyherc.test.unit.test_corridor,pyherc.rules.utils)
-  \-Random (pyherc.test.unit.test_itemadder,pyherc.test.unit.test_potions,pyherc.test.unit.test_itemgeneration,pyherc.test.unit.test_pathfinding,pyherc.test.unit.test_item,pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_ranged_combat,pyherc.generators.level.room.squareroom,pyherc.config.dsl.roomgenerators,pyherc.generators.level.room.pillarroom,pyherc.test.unit.test_creaturegeneration)</pre></div>
-<div>
-<h2>Statistics by type</h2>
-<table>
-<tr class="header">
-<th>type</th>
-<th>number</th>
-<th>old number</th>
-<th>difference</th>
-<th>%documented</th>
-<th>%badname</th>
-</tr>
-<tr class="even">
-<td>module</td>
-<td>167</td>
-<td>163</td>
-<td>+4.00</td>
-<td>98.80</td>
-<td>0.00</td>
-</tr>
-<tr class="odd">
-<td>class</td>
-<td>240</td>
-<td>229</td>
-<td>+11.00</td>
-<td>99.17</td>
-<td>0.00</td>
-</tr>
-<tr class="even">
-<td>method</td>
-<td>1003</td>
-<td>964</td>
-<td>+39.00</td>
-<td>99.40</td>
-<td>6.78</td>
-</tr>
-<tr class="odd">
-<td>function</td>
-<td>84</td>
-<td>80</td>
-<td>+4.00</td>
-<td>95.24</td>
-<td>13.10</td>
-</tr>
-</table>
-</div>
-<div>
-<h2>Duplication</h2>
-<table>
-<tr class="header">
-<th>&#160;</th>
-<th>now</th>
-<th>previous</th>
-<th>difference</th>
-</tr>
-<tr class="even">
-<th>nb duplicated lines</th>
-<td>663</td>
-<td>599</td>
-<td>+64.00</td>
-</tr>
-<tr class="odd">
-<th>percent duplicated lines</th>
-<td>3.016</td>
-<td>2.836</td>
-<td>+0.18</td>
-</tr>
-</table>
-</div>
-<div>
+<p>6985 statements analysed.</p><div>
 <h2>Messages by category</h2>
 <table>
 <tr class="header">
@@ -161,21 +13,21 @@ random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit
 </tr>
 <tr class="even">
 <td>convention</td>
-<td>257</td>
-<td>247</td>
-<td>+10.00</td>
+<td>256</td>
+<td>256</td>
+<td>=</td>
 </tr>
 <tr class="odd">
 <td>refactor</td>
 <td>87</td>
-<td>79</td>
-<td>+8.00</td>
+<td>87</td>
+<td>=</td>
 </tr>
 <tr class="even">
 <td>warning</td>
 <td>153</td>
-<td>134</td>
-<td>+19.00</td>
+<td>153</td>
+<td>=</td>
 </tr>
 <tr class="odd">
 <td>error</td>
@@ -200,7 +52,7 @@ random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit
 <td>0.00</td>
 <td>5.88</td>
 <td>1.15</td>
-<td>10.89</td>
+<td>10.94</td>
 </tr>
 <tr class="odd">
 <td>pyherc.test.unit.test_pathfinding</td>
@@ -242,7 +94,7 @@ random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit
 <td>0.00</td>
 <td>3.27</td>
 <td>0.00</td>
-<td>7.39</td>
+<td>7.42</td>
 </tr>
 <tr class="odd">
 <td>pyherc.test.unit.test_character</td>
@@ -256,14 +108,14 @@ random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit
 <td>0.00</td>
 <td>2.61</td>
 <td>2.30</td>
-<td>10.51</td>
+<td>10.55</td>
 </tr>
 <tr class="odd">
 <td>pyherc.test.cutesy.dictionary</td>
 <td>0.00</td>
 <td>2.61</td>
 <td>0.00</td>
-<td>4.28</td>
+<td>4.30</td>
 </tr>
 <tr class="even">
 <td>pyherc.rules.utils</td>
@@ -291,7 +143,7 @@ random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit
 <td>0.00</td>
 <td>1.96</td>
 <td>3.45</td>
-<td>3.50</td>
+<td>3.52</td>
 </tr>
 <tr class="even">
 <td>pyherc.data.character</td>
@@ -305,7 +157,7 @@ random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit
 <td>0.00</td>
 <td>1.96</td>
 <td>0.00</td>
-<td>2.33</td>
+<td>2.34</td>
 </tr>
 <tr class="even">
 <td>pyherc.test.unit.test_portaladder</td>
@@ -347,7 +199,7 @@ random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit
 <td>0.00</td>
 <td>1.31</td>
 <td>2.30</td>
-<td>2.33</td>
+<td>2.34</td>
 </tr>
 <tr class="even">
 <td>pyherc.rules.attack.action</td>
@@ -389,7 +241,7 @@ random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit
 <td>0.00</td>
 <td>1.31</td>
 <td>0.00</td>
-<td>2.33</td>
+<td>2.34</td>
 </tr>
 <tr class="even">
 <td>pyherc.test.unit.test_ranged_combat</td>
@@ -466,7 +318,7 @@ random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit
 <td>0.00</td>
 <td>0.65</td>
 <td>0.00</td>
-<td>2.33</td>
+<td>2.34</td>
 </tr>
 <tr class="odd">
 <td>pyherc.test.unit.test_drop_actions</td>
@@ -685,11 +537,11 @@ random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit
 <td>21</td>
 </tr>
 <tr class="even">
-<td>C0111</td>
-<td>14</td>
+<td>W0201</td>
+<td>13</td>
 </tr>
 <tr class="odd">
-<td>W0201</td>
+<td>C0111</td>
 <td>13</td>
 </tr>
 <tr class="even">
@@ -752,7 +604,153 @@ random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit
 </div>
 <div>
 <h2>Global evaluation</h2>
-Your code has been rated at 9.29/10 (previous run: 9.32/10)</div>
+Your code has been rated at 9.29/10 (previous run: 9.29/10)</div>
+<div>
+<h2>Duplication</h2>
+<table>
+<tr class="header">
+<th>&#160;</th>
+<th>now</th>
+<th>previous</th>
+<th>difference</th>
+</tr>
+<tr class="even">
+<th>nb duplicated lines</th>
+<td>663</td>
+<td>663</td>
+<td>=</td>
+</tr>
+<tr class="odd">
+<th>percent duplicated lines</th>
+<td>3.027</td>
+<td>3.027</td>
+<td>=</td>
+</tr>
+</table>
+</div>
+<div>
+<h2>Raw metrics</h2>
+<table>
+<tr class="header">
+<th>type</th>
+<th>number</th>
+<th>%</th>
+<th>previous</th>
+<th>difference</th>
+</tr>
+<tr class="even">
+<td>code</td>
+<td>9332</td>
+<td>44.14</td>
+<td>9332</td>
+<td>=</td>
+</tr>
+<tr class="odd">
+<td>docstring</td>
+<td>6777</td>
+<td>32.06</td>
+<td>6777</td>
+<td>=</td>
+</tr>
+<tr class="even">
+<td>comment</td>
+<td>3042</td>
+<td>14.39</td>
+<td>3042</td>
+<td>=</td>
+</tr>
+<tr class="odd">
+<td>empty</td>
+<td>1990</td>
+<td>9.41</td>
+<td>1990</td>
+<td>=</td>
+</tr>
+</table>
+</div>
+<div>
+<h2>External dependencies</h2>
+<pre>bisect (pyherc.ai.pyheapq)
+collections (pyherc.data.effects.effectscollection,pyherc.generators.utils)
+copy (pyherc.generators.effects)
+  \-copy (pyherc.ai.pathfinding)
+decorator 
+  \-decorator (pyherc.aspects)
+functools 
+  \-wraps (pyherc.aspects)
+hamcrest 
+  \-assert_that (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_pathfinding,pyherc.test.unit.test_inventory,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_ranged_combat,pyherc.test.bdd.test_combat,pyherc.test.unit.test_wear_action,pyherc.test.unit.test_attack_action,pyherc.test.unit.test_damage,pyherc.test.bdd.test_inventory,pyherc.test.unit.test_damage_modifiers)
+  \-contains (pyherc.test.unit.test_pathfinding)
+  \-core 
+  | \-anything (pyherc.test.matchers.items)
+  | \-base_matcher 
+  | | \-BaseMatcher (pyherc.test.matchers.path_finding,pyherc.test.matchers.character,pyherc.test.matchers.effect_collection,pyherc.test.matchers.items,pyherc.test.matchers.map_connectivity,pyherc.test.matchers.event,pyherc.test.matchers.event_listener,pyherc.test.matchers.contains_creature,pyherc.test.matchers.inventory,pyherc.test.matchers.active_effects,pyherc.test.cutesy.dictionary)
+  | \-helpers 
+  |   \-wrap_matcher 
+  |     \-wrap_matcher (pyherc.test.matchers.items,pyherc.test.matchers.active_effects,pyherc.test.matchers.contains_creature)
+  \-equal_to (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_inventory,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_attack_action,pyherc.test.unit.test_damage,pyherc.test.unit.test_damage_modifiers)
+  \-greater_than (pyherc.test.unit.test_drop_actions)
+  \-has_item (pyherc.test.unit.test_config_dsl)
+  \-is_ (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_pathfinding,pyherc.test.unit.test_inventory,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_attack_action,pyherc.test.unit.test_damage,pyherc.test.unit.test_damage_modifiers)
+  \-is_in (pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_inventory)
+  \-is_not (pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_drop_actions,pyherc.test.matchers.contains_creature,pyherc.test.unit.test_inventory)
+  \-none (pyherc.test.unit.test_inventory)
+  \-not_none (pyherc.test.unit.test_inventory)
+  \-only_contains (pyherc.test.unit.test_damage)
+logging (pyherc.generators.level.partitioners.grid,pyherc.rules.moving,pyherc.generators.level.generator,pyherc.generators.utils,pyherc.generators.level.partitioners.section,pyherc.rules.factory,pyherc.generators.level.room.squareroom,pyherc.generators.level.decorator.basic,pyherc.rules.utils,pyherc.aspects)
+mockito 
+  \-any (pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_combat,pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_time,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_damage_effect,pyherc.test.unit.test_poison,pyherc.test.unit.test_item,pyherc.test.unit.test_character,pyherc.test.unit.test_potions)
+  \-mock (pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_events,pyherc.test.unit.test_section,pyherc.test.unit.test_combat,pyherc.test.unit.test_magic,pyherc.test.unit.test_portaladder,pyherc.test.unit.test_creatureadder,pyherc.test.unit.test_damage_effect,pyherc.test.unit.test_poison,pyherc.test.unit.test_attack_action,pyherc.test.cutesy.dictionary,pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.builders.poison,pyherc.test.unit.test_pathfinding,pyherc.test.unit.test_item,pyherc.test.unit.test_time,pyherc.test.unit.test_model,pyherc.test.builders.character,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_inventory,pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_ranged_combat,pyherc.test.builders.rules_engine,pyherc.test.unit.test_leveldecorator,pyherc.test.unit.test_character,pyherc.test.builders.heal,pyherc.test.unit.test_connection,pyherc.test.unit.test_potions,pyherc.test.unit.test_moving,pyherc.test.builders.damage,pyherc.test.unit.test_levelgenerator,pyherc.test.builders.action,pyherc.test.unit.test_dungeon,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_creaturegeneration,pyherc.test.unit.test_damage_modifiers)
+  \-never (pyherc.test.unit.test_effects)
+  \-verify (pyherc.test.unit.test_effects,pyherc.test.unit.test_drop_actions,pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_combat,pyherc.test.unit.test_events,pyherc.test.unit.test_item,pyherc.test.unit.test_time,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_damage_effect,pyherc.test.unit.test_model,pyherc.test.unit.test_character,pyherc.test.unit.test_poison,pyherc.test.unit.test_leveldecorator,pyherc.test.unit.test_pick_up,pyherc.test.unit.test_attack_action,pyherc.test.unit.test_creaturegeneration)
+  \-when (pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_effects,pyherc.test.unit.test_combat,pyherc.test.unit.test_actionfactory,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_ranged_combat,pyherc.test.unit.test_potions,pyherc.test.unit.test_damage_modifiers,pyherc.test.cutesy.dictionary)
+random (pyherc.data.level,pyherc.test.unit.test_gridpartitioner,pyherc.test.unit.test_connection,pyherc.rules.attack.melee,pyherc.config.config,pyherc.generators.item,pyherc.generators.utils,pyherc.test.unit.test_levelgenerator,pyherc.test.unit.test_section,pyherc.rules.attack.action,pyherc.test.unit.test_creatureadder,pyherc.test.unit.test_squareroom,pyherc.test.unit.test_portaladder,pyherc.test.unit.test_corridor,pyherc.rules.utils)
+  \-Random (pyherc.test.unit.test_itemadder,pyherc.test.unit.test_potions,pyherc.test.unit.test_itemgeneration,pyherc.test.unit.test_pathfinding,pyherc.test.unit.test_item,pyherc.test.unit.test_config_dsl,pyherc.test.unit.test_ranged_combat,pyherc.generators.level.room.squareroom,pyherc.config.dsl.roomgenerators,pyherc.generators.level.room.pillarroom,pyherc.test.unit.test_creaturegeneration)</pre></div>
+<div>
+<h2>Statistics by type</h2>
+<table>
+<tr class="header">
+<th>type</th>
+<th>number</th>
+<th>old number</th>
+<th>difference</th>
+<th>%documented</th>
+<th>%badname</th>
+</tr>
+<tr class="even">
+<td>module</td>
+<td>167</td>
+<td>167</td>
+<td>=</td>
+<td>98.80</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<td>class</td>
+<td>240</td>
+<td>240</td>
+<td>=</td>
+<td>99.17</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td>method</td>
+<td>996</td>
+<td>996</td>
+<td>=</td>
+<td>99.40</td>
+<td>6.83</td>
+</tr>
+<tr class="odd">
+<td>function</td>
+<td>83</td>
+<td>83</td>
+<td>=</td>
+<td>96.39</td>
+<td>13.25</td>
+</tr>
+</table>
+</div>
 </div>
 </body>
 </html>

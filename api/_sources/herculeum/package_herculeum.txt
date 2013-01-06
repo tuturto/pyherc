@@ -7,7 +7,7 @@ herculeum
    :maxdepth: 2
    
    config/package_config
-   gui/package_gui
+   ui/package_ui
    sphinx/package_sphinx
    test/package_test
    module_application

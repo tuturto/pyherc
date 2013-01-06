@@ -1,0 +1,200 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.rules.inventory.equip &mdash; Herculeum 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.9 documentation" href="../../../index.html" />
+    <link rel="up" title="pyherc.rules.inventory" href="package_inventory.html" />
+    <link rel="next" title="pyherc.rules.inventory.factories" href="module_factories.html" />
+    <link rel="prev" title="pyherc.rules.inventory.action" href="module_action.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_factories.html" title="pyherc.rules.inventory.factories"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_action.html" title="pyherc.rules.inventory.action"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>
+          <li><a href="package_inventory.html" accesskey="U">pyherc.rules.inventory</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.rules.inventory.equip">
+<span id="pyherc-rules-inventory-equip"></span><h1>pyherc.rules.inventory.equip<a class="headerlink" href="#module-pyherc.rules.inventory.equip" title="Permalink to this headline">¶</a></h1>
+<p>Module defining classes related to inventory actions</p>
+<dl class="class">
+<dt id="pyherc.rules.inventory.equip.EquipAction">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.inventory.equip.</tt><tt class="descname">EquipAction</tt><big>(</big><em>character</em>, <em>item</em><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.equip.EquipAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Action for equiping an item</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.8.</span></p>
+<dl class="method">
+<dt id="pyherc.rules.inventory.equip.EquipAction.execute">
+<tt class="descname">execute</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.equip.EquipAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes this action</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.inventory.equip.EquipAction.is_legal">
+<tt class="descname">is_legal</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.equip.EquipAction.is_legal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the action is possible to perform</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if move is possible, false otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.rules.inventory.equip.EquipFactory">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.inventory.equip.</tt><tt class="descname">EquipFactory</tt><a class="headerlink" href="#pyherc.rules.inventory.equip.EquipFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../module_factory.html#pyherc.rules.factory.SubActionFactory" title="pyherc.rules.factory.SubActionFactory"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.factory.SubActionFactory</span></tt></a></p>
+<p>Factory for creating equip actions</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 0.8.</span></p>
+<dl class="method">
+<dt id="pyherc.rules.inventory.equip.EquipFactory.can_handle">
+<tt class="descname">can_handle</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.equip.EquipFactory.can_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Can this factory process these parameters</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> &#8211; parameters to check</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if factory is capable of handling parameters</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.inventory.equip.EquipFactory.get_action">
+<tt class="descname">get_action</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#pyherc.rules.inventory.equip.EquipFactory.get_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an equip action</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> (<em>InventoryParameters</em>) &#8211; parameters used to control creation</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_action.html"
+                        title="previous chapter">pyherc.rules.inventory.action</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_factories.html"
+                        title="next chapter">pyherc.rules.inventory.factories</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/pyherc/rules/inventory/module_equip.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_factories.html" title="pyherc.rules.inventory.factories"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_action.html" title="pyherc.rules.inventory.action"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>
+          <li><a href="package_inventory.html" >pyherc.rules.inventory</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2013, Tuukka Turto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
