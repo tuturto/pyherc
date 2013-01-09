@@ -84,7 +84,7 @@ class InventoryScreen(object):
         while running == 1:
             item = None
             key = chr(self.screen.getch())
-            if key in ['u', 'r', 'd']:
+            if key in ['u', 'r', 'd', 'i']:
                 self.screen.addstr(0, 2, 'select item')
                 item_key = chr(self.screen.getch())
                 if item_key in self.keys:
@@ -99,8 +99,27 @@ class InventoryScreen(object):
                         self.inventory_controller.unequip_item(item)
                     elif key == 'd':
                         self.inventory_controller.drop_item(item)
+                    elif key == 'i':
+                        self._show_detailed_info(item, self.character)
             elif key == ' ':
                 running = 0
 
             self._draw_screen()
             self.parent.refresh()
+
+    @logged
+    def _show_detailed_info(self, item, character):
+        """
+        Show detailed information screen for item
+
+        :param item: item to show
+        :type item: Item
+        """
+        new_screen = self.screen.subwin(10, 70, 3, 3)
+        new_screen.clear()
+
+        new_screen.addstr(3, 1, self.inventory_controller.item_description(item))
+
+        new_screen.refresh()
+
+        chr(new_screen.getch())
