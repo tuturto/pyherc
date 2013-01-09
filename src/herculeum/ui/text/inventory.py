@@ -100,6 +100,9 @@ class InventoryScreen(object):
                     elif key == 'd':
                         self.inventory_controller.drop_item(item)
                     elif key == 'i':
+                        self.screen.border()
+                        self.screen.addstr(0, 2, 'press key to continue')
+                        self.screen.refresh()
                         self._show_detailed_info(item, self.character)
             elif key == ' ':
                 running = 0
@@ -115,10 +118,10 @@ class InventoryScreen(object):
         :param item: item to show
         :type item: Item
         """
-        new_screen = self.screen.subwin(10, 70, 3, 3)
+        new_screen = self.screen.derwin(18, 73, 1, 1)
         new_screen.clear()
 
-        new_screen.addstr(3, 1, self.inventory_controller.item_description(item))
+        new_screen.addstr(0, 0, self.inventory_controller.item_description(item))
 
         new_screen.refresh()
 
