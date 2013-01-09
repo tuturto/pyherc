@@ -66,7 +66,7 @@ class InventoryScreen(object):
                 column = 37
                 row = 1 + index - 15
 
-            self.screen.addstr(1 + index, 1,
+            self.screen.addstr(row, column,
                                '{0} {1}'.format(self.keys[index],
                                                 item.get_name(self.character,
                                                               True)))
