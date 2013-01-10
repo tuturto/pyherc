@@ -12,19 +12,19 @@ posses it.
 
 System Requirements
 ===================
-* Python 2.6.5 (2.6.1 should be sufficient if you do not wish to run tests)
-* PyQt4
-* decorator
-* mockito-python 0.5.0 (only needed for running test cases)
-* pyHamcrest 1.6 (only needed for running test cases)
-* behave (only needed for running test cases)
-* satin-python (only needed for running test cases)
-* Sphinx 1.1.2 (only needed for generating documentation)
+- Python 2.6.5 (2.6.1 should be sufficient if you do not wish to run tests)
+- PyQt4
+- decorator
+- mockito-python 0.5.0 (only needed for running test cases)
+- pyHamcrest 1.6 (only needed for running test cases)
+- behave (only needed for running test cases)
+- satin-python (only needed for running test cases)
+- Sphinx 1.1.2 (only needed for generating documentation)
 
 Manual
 ======
-* Manual can be found at doc - directory
-* Online documentation for development version is available at: 
+- Manual can be found at doc - directory
+- Online documentation for development version is available at: 
   http://tuturto.github.com/pyherc/index.html
 
 Credits
@@ -49,4 +49,4 @@ Other help
 ----------
 Following people have contributed to the code in a way or another, thank you!
 
-* Chiman
+- Chiman
