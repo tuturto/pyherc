@@ -44,15 +44,9 @@ by Henk Brouwer.
 Some graphics is from http://game-icons.net/
 
 A star implementation adapted from one by Pauli Henrikki Rikula
-
-Music score
------------
- - the Gathering of the Tribes - Demetrios Katis <http://www.BeatPick.com/>
-
-Music is licensed under Creative Common Attribution-NonCommercial-ShareAlike 3.0 <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  
 Other help
 ----------
 Following people have contributed to the code in a way or another, thank you!
 
- - Chiman
+* Chiman
