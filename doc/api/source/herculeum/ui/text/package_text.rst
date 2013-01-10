@@ -6,6 +6,7 @@ herculeum.ui.text
 .. toctree::
    :maxdepth: 2
    
+   module_character
    module_config
    module_interface
    module_inventory

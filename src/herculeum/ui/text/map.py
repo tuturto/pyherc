@@ -23,6 +23,7 @@ Module for map screen
 """
 from pyherc.aspects import logged
 from herculeum.ui.text.inventory import InventoryScreen
+from herculeum.ui.text.character import CharacterScreen
 from herculeum.ui.controllers import MoveController
 
 class MapScreen(object):
@@ -123,7 +124,11 @@ class MapScreen(object):
                                   screen = self.screen,
                                   action_factory = self.action_factory,
                                   parent = self.screen)
-            item = inv.show()
+            inv.show()
+        elif key == 'c':
+            dialog = CharacterScreen(character = self.model.player,
+                                     screen = self.screen)
+            dialog.show()
         elif key == 'a':
             dir_key = chr(self.screen.getch())
             if dir_key in self.move_key_map:
