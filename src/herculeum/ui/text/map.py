@@ -99,7 +99,7 @@ class MapScreen(object):
         self.refresh_screen()
         player = self.model.player
 
-        while self.model.end_condition == 0:
+        while self.model.end_condition == 0 and player.level != None:
             next_creature = self.model.get_next_creature(self.rules_engine)
 
             if next_creature == player:
@@ -186,6 +186,9 @@ class MapScreen(object):
         """
         player = self.model.player
         level = player.level
+
+        if level == None:
+            return
 
         for column_number, column in enumerate(level.walls):
             for row_number, tile in enumerate(column):
