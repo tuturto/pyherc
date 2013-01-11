@@ -24,6 +24,7 @@ Module for map screen
 from pyherc.aspects import logged
 from herculeum.ui.text.inventory import InventoryScreen
 from herculeum.ui.text.character import CharacterScreen
+from herculeum.ui.text.endscreen import EndScreen
 from herculeum.ui.controllers import MoveController
 
 class MapScreen(object):
@@ -108,6 +109,11 @@ class MapScreen(object):
                                   action_factory = self.action_factory,
                                   rng = self.rng)
             self.refresh_screen()
+
+        dialog = EndScreen(model = self.model,
+                           dying_rules = self.rules_engine.dying_rules,
+                           screen = self.screen)
+        dialog.show()
 
     @logged
     def _handle_player_input(self):

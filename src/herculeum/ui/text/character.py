@@ -24,6 +24,8 @@ Module for character screen
 class CharacterScreen(object):
     """
     Character screen
+
+    .. versionadded:: 0.9
     """
     def __init__(self, character, screen):
         """
