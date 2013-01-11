@@ -85,6 +85,8 @@ class Item(object):
             name = self.name
 
         if decorate == True:
+            if self.ammunition_data != None:
+                name = name + ' ({0})'.format(self.ammunition_data.count)
             if character.inventory.weapon == self:
                 name = name + ' (weapon in hand)'
             elif character.inventory.armour == self:
