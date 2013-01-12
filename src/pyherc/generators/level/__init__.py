@@ -22,4 +22,4 @@
 Package for various level generators
 """
 
-from .generator import LevelGeneratorFactory, LevelContext
+from .generator import LevelGeneratorFactory

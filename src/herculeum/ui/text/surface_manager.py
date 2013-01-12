@@ -111,4 +111,4 @@ class CursesSurfaceManager(object):
         if id in self.icons:
             return self.icons[id]
         else:
-            return 'X'
+            return 'x'

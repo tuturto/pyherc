@@ -190,27 +190,27 @@ class MapScreen(object):
         if level == None:
             return
 
+        for column_number, column in enumerate(level.floor):
+            for row_number, tile in enumerate(column):
+                self.screen.addch(row_number + 1,
+                                  column_number,
+                                  ord(self.surface_manager.get_icon(tile)),
+                                  self.surface_manager.get_attribute_by_name('dim'))
+
         for column_number, column in enumerate(level.walls):
             for row_number, tile in enumerate(column):
-                if tile == level.empty_wall:
+                glyph_number = self.surface_manager.get_icon(tile)
+                if glyph_number != None:
                     self.screen.addch(row_number + 1,
                                       column_number,
-                                      ord('.'),
+                                      ord(glyph_number),
                                       self.surface_manager.get_attribute_by_name('dim'))
-                else:
-                    if tile == 101:
-                        self.screen.addch(row_number + 1,
-                                          column_number,
-                                          ord(' '))
-                    else:
-                        self.screen.addch(row_number + 1,
-                                          column_number,
-                                          ord('#'))
 
         for portal in level.portals:
             self.screen.addch(portal.location[1] + 1,
                               portal.location[0],
-                              ord('<'))
+                              ord(self.surface_manager.get_icon(portal.icon)),
+                              self.surface_manager.get_attribute(portal.icon))
 
         for item in level.items:
             self.screen.addch(item.location[1] + 1,

@@ -158,4 +158,5 @@ class QtSurfaceManager(object):
         if id in self.icons:
             return self.icons[id]
         else:
+            print('unknown id: {0}'.format(id))
             return self.icons[herculeum.config.tiles.TRANSPARENT]

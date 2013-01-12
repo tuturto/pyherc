@@ -29,7 +29,7 @@ from hamcrest import assert_that, contains, is_
 from mockito import mock
 
 from pyherc.generators.level.generator import LevelGenerator
-from pyherc.generators.level import LevelContext
+from pyherc.config.dsl import LevelContext
 from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.room.catacombs import CatacombsGenerator
 from pyherc.generators.level.portals import PortalAdder
@@ -143,7 +143,8 @@ class TestPathfindingInLevel(object):
                                         floor_type = FLOOR_TILE,
                                         wall_type = WALL_TILE,
                                         empty_floor = EMPTY_TILE,
-                                        empty_wall = EMPTY_TILE))
+                                        empty_wall = EMPTY_TILE,
+                                        level_types = ['test']))
 
         self.level = generator.generate_level(portal)
 

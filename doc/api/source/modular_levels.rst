@@ -173,23 +173,15 @@ example defines an simple level:
     from pyherc.generators.level.creatures import CreatureAdder
     
     from pyherc.generators.level.portals import PortalAdderConfiguration
-    
-    from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
-    from pyherc.generators.level.prototiles import WALL_EMPTY, WALL_NATURAL
-    from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
 
-    from herculeum.config.tiles import FLOOR_ROCK, FLOOR_BRICK
-    from herculeum.config.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
-    from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
-
-    from pyherc.config.dsl import LevelConfiguration
+    from pyherc.config.dsl import LevelConfiguration, LevelContext
     
-    def init_level(rng, item_generator, creature_generator, level_size):
-        room_generators = [SquareRoomGenerator(FLOOR_NATURAL,
-                                               WALL_EMPTY,
+    def init_level(rng, item_generator, creature_generator, level_size, context):
+        room_generators = [SquareRoomGenerator('FLOOR_NATURAL',
+                                               'WALL_EMPTY',
                                                ['upper crypt']),
-                           SquareRoomGenerator(FLOOR_CONSTRUCTED,
-                                               WALL_EMPTY,
+                           SquareRoomGenerator('FLOOR_CONSTRUCTED',
+                                               'WALL_EMPTY',
                                                ['upper crypt'])]
         level_partitioners = [GridPartitioner(['upper crypt'],
                                               4,
@@ -197,15 +189,15 @@ example defines an simple level:
                                               rng)]
     
         replacer_config = ReplacingDecoratorConfig(['upper crypt'],
-                                        {FLOOR_NATURAL: FLOOR_ROCK,
-                                        FLOOR_CONSTRUCTED: FLOOR_BRICK},
-                                        {WALL_NATURAL: WALL_GROUND,
-                                        WALL_CONSTRUCTED: WALL_ROCK})
+                                        {'FLOOR_NATURAL': 'FLOOR_ROCK',
+                                        'FLOOR_CONSTRUCTED': 'FLOOR_BRICK'},
+                                        {'WALL_NATURAL': 'WALL_GROUND',
+                                        'WALL_CONSTRUCTED': 'WALL_ROCK'})
         replacer = ReplacingDecorator(replacer_config)
     
         wallbuilder_config = WallBuilderDecoratorConfig(['upper crypt'],
-                                            {WALL_NATURAL: WALL_CONSTRUCTED},
-                                            WALL_EMPTY)
+                                            {'WALL_NATURAL': 'WALL_CONSTRUCTED'},
+                                            'WALL_EMPTY')
         wallbuilder = WallBuilderDecorator(wallbuilder_config)
     
         aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
@@ -242,13 +234,20 @@ example defines an simple level:
                                         rng)]
     
         portal_adder_configurations = [PortalAdderConfiguration(
-                                            icons = (PORTAL_STAIRS_DOWN,
-                                                     PORTAL_STAIRS_UP),
+                                            icons = ('PORTAL_STAIRS_DOWN',
+                                                     'PORTAL_STAIRS_UP'),
                                             level_type = 'upper catacombs',
                                             location_type = 'room',
                                             chance = 25,
                                             new_level = 'upper crypt',
                                             unique = True)]
+    
+        level_context = LevelContext(size = level_size,
+                                    floor_type = 'FLOOR_NATURAL',
+                                    wall_type = 'WALL_NATURAL',
+                                    empty_floor = 0,
+                                    empty_wall = 'WALL_EMPTY',
+                                    level_types = ['upper crypt'])
     
         config = (LevelConfiguration()
                         .with_rooms(room_generators)
@@ -257,7 +256,7 @@ example defines an simple level:
                         .with_items(item_adders)
                         .with_creatures(creature_adders)
                         .with_portals(portal_adder_configurations)
-                        .with_level_size(level_size)
+                        .with_contexts([level_context])
                         .build())
         return config
 
@@ -265,8 +264,9 @@ example defines an simple level:
     item_generator = None
     creature_generator = None
     level_size = (80, 60)
+    config_context = object()
         
-    config = init_level(rng, item_generator, creature_generator, level_size)
+    config = init_level(rng, item_generator, creature_generator, level_size, config_context)
     
     print config
 
@@ -274,6 +274,10 @@ The example defines function to initialise a level configuration and executes
 it. In real life scenarion, item_generator and creature_generator objects would
 have been initialised before supplying them to configuration function, but it
 was omitted from the brevity's sake in this example.
+
+Parameters config_context is an extension hook that can be used to deliver
+application specific information that needs to be transfered between the 
+application and configuration.
     
 .. testoutput::
     

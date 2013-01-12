@@ -242,22 +242,30 @@ class PlayMapWidget(QWidget):
         self.current_level = model.player.level
         size = self.current_level.get_size()
 
-        for loc_x in xrange(0, size[0]):
-            for loc_y in xrange(0, size[1]):
-                new_glyph = MapGlyph(self.surface_manager.get_icon(self.current_level.get_tile(loc_x, loc_y)),
+        for loc_x, column in enumerate(self.current_level.floor):
+            for loc_y, tile in enumerate(column):
+                new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
                                      None)
                 new_glyph.setZValue(0)
                 new_glyph.setPos(loc_x * 32, loc_y * 32)
                 scene.addItem(new_glyph)
 
+        for loc_x, column in enumerate(self.current_level.walls):
+            for loc_y, tile in enumerate(column):
+                new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
+                                     None)
+                new_glyph.setZValue(1)
+                new_glyph.setPos(loc_x * 32, loc_y * 32)
+                scene.addItem(new_glyph)
+
         for portal in self.current_level.portals:
-                self.add_glyph(portal, scene, 1)
+                self.add_glyph(portal, scene, 10)
 
         for item in self.current_level.items:
-                self.add_glyph(item, scene, 2)
+                self.add_glyph(item, scene, 20)
 
         for creature in self.current_level.creatures:
-                self.add_glyph(creature, scene, 3)
+                self.add_glyph(creature, scene, 30)
 
     def add_glyph(self, entity, scene, z_order):
         """
@@ -299,7 +307,7 @@ class PlayMapWidget(QWidget):
                 self.view.scene().removeItem(glyph)
 
         elif event.event_type == 'drop':
-            self.add_glyph(event.item, self.scene, 2)
+            self.add_glyph(event.item, self.scene, 20)
         elif event.event_type == 'attack hit':
             damage = event.damage.damage_inflicted
             self.show_damage_counter(event.target.location,

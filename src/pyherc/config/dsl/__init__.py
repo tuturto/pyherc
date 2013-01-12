@@ -21,5 +21,5 @@
 """
 package for configuring language
 """
-from .levelgeneratorfactory import LevelConfiguration
+from .levelgeneratorfactory import LevelConfiguration, LevelContext
 from .roomgenerators import Catacombs, natural_floor

@@ -46,7 +46,7 @@ class TestConfigDSL(object):
         items = mock()
         creatures = mock()
         portals = mock()
-        size = mock()
+        context = mock()
 
         config = (LevelConfiguration()
                     .with_rooms(rooms)
@@ -55,7 +55,7 @@ class TestConfigDSL(object):
                     .with_items(items)
                     .with_creatures(creatures)
                     .with_portals(portals)
-                    .with_level_size(size)
+                    .with_contexts([context])
                     .build())
 
         assert_that(config.room_generators, is_(equal_to(rooms)))
@@ -64,7 +64,6 @@ class TestConfigDSL(object):
         assert_that(config.item_adders, is_(equal_to(items)))
         assert_that(config.creature_adders, is_(equal_to(creatures)))
         assert_that(config.portal_adder_configurations, is_(equal_to(portals)))
-        assert_that(config.size, is_(equal_to(size)))
 
     def test_catacombs_generator(self):
         """

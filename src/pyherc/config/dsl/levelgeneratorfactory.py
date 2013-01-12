@@ -39,7 +39,14 @@ class LevelConfiguration(object):
         self.item_adders = None
         self.creature_adders = None
         self.portal_adder_configurations = None
-        self.size = None
+        self.contexts = None
+
+    def with_contexts(self, contexts):
+        """
+        Set level contexts which specify size and tiles to be used
+        """
+        self.contexts = contexts
+        return self
 
     def with_rooms(self, rooms):
         """
@@ -101,16 +108,6 @@ class LevelConfiguration(object):
         self.portal_adder_configurations = portals
         return self
 
-    def with_level_size(self, level_size):
-        """
-        Set level size
-
-        :param level_size: size of level
-        :type level_size: (int, int)
-        """
-        self.size = level_size
-        return self
-
     def build(self):
         """
         Build configuration
@@ -125,4 +122,31 @@ class LevelConfiguration(object):
                 item_adders = self.item_adders,
                 creature_adders = self.creature_adders,
                 portal_adder_configurations = self.portal_adder_configurations,
-                size = self.size)
+                contexts = self.contexts)
+
+class LevelContext(object):
+    """
+    Context for level generation
+    """
+    def __init__(self, size, floor_type, wall_type, empty_floor, empty_wall,
+                 level_types):
+        """
+        Default constructor
+
+        :param size: size of the level
+        :type size: (int, int)
+        :param floor_type: initial floor type to use
+        :type floor_type: int
+        :param wall_type: initial wall type to use
+        :type wall_type: int
+        :param empty_floor: floor tile to be considered empty
+        :type empty_floor: int
+        :param empty_wall: wall tile to be considered empty
+        :type empty_wall: int
+        """
+        self.size = size
+        self.floor_type = floor_type
+        self.wall_type = wall_type
+        self.empty_floor = empty_floor
+        self.empty_wall = empty_wall
+        self.level_types = level_types
