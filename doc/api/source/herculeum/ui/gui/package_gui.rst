@@ -10,7 +10,6 @@ herculeum.ui.gui
    module_config
    module_endscreen
    module_eventdisplay
-   module_images
    module_inventory
    module_mainwindow
    module_map
