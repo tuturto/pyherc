@@ -8,5 +8,4 @@ herculeum.config
    
    levels/package_levels
    module_config
-   module_tiles
    

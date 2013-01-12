@@ -50,8 +50,8 @@ class LevelGeneratorFactory(object):
         self.portal_adder_factory.level_generator_factory = self
         self.item_adders = configuration.item_adders
         self.creature_adders = configuration.creature_adders
-        self.size = configuration.size
         self.random_generator = random_generator
+        self.level_infos = configuration.contexts
 
     @logged
     def get_generator(self, level_type):
@@ -83,14 +83,11 @@ class LevelGeneratorFactory(object):
                                                 self.creature_adders,
                                                 'creature adder')
 
-        portal_adders = self.portal_adder_factory.create_portal_adders(level_type)
+        level_info = self.get_sub_component(level_type,
+                                            self.level_infos,
+                                            'level info')
 
-        #TODO: configurable, break link
-        level_context = LevelContext(size = self.size,
-                                     floor_type = -2,
-                                     wall_type = -101,
-                                     empty_floor = 0,
-                                     empty_wall = 100)
+        portal_adders = self.portal_adder_factory.create_portal_adders(level_type)
 
         return LevelGenerator(partitioner,
                               rooms,
@@ -99,7 +96,7 @@ class LevelGeneratorFactory(object):
                               item_adder,
                               creature_adder,
                               self.random_generator,
-                              level_context)
+                              level_info)
 
     @logged
     def get_sub_components(self, level_type, component_list, component_type):
@@ -234,28 +231,3 @@ class LevelGenerator(object):
         self.logger.debug(new_level.dump_string())
 
         return new_level
-
-class LevelContext(object):
-    """
-    Context for level generation
-    """
-    def __init__(self, size, floor_type, wall_type, empty_floor, empty_wall):
-        """
-        Default constructor
-
-        :param size: size of the level
-        :type size: (int, int)
-        :param floor_type: initial floor type to use
-        :type floor_type: int
-        :param wall_type: initial wall type to use
-        :type wall_type: int
-        :param empty_floor: floor tile to be considered empty
-        :type empty_floor: int
-        :param empty_wall: wall tile to be considered empty
-        :type empty_wall: int
-        """
-        self.size = size
-        self.floor_type = floor_type
-        self.wall_type = wall_type
-        self.empty_floor = empty_floor
-        self.empty_wall = empty_wall

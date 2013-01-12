@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2013-01-11, 06:54:34 -->
+<!-- Saved: 2013-01-12, 12:04:56 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -135,7 +135,6 @@
     <Source>herculeum/test/unit/__init__.py</Source>
     <Source>herculeum/test/integration/__init__.py</Source>
     <Source>herculeum/test/integration/test_config.py</Source>
-    <Source>herculeum/config/tiles.py</Source>
     <Source>herculeum/application.py</Source>
     <Source>herculeum/config/config.py</Source>
     <Source>herculeum/config/levels/configure_items.py</Source>
@@ -227,7 +226,6 @@
     <Source>herculeum/ui/gui/config.py</Source>
     <Source>herculeum/ui/gui/endscreen.py</Source>
     <Source>herculeum/ui/gui/eventdisplay.py</Source>
-    <Source>herculeum/ui/gui/images.py</Source>
     <Source>herculeum/ui/gui/inventory.py</Source>
     <Source>herculeum/ui/gui/mainwindow.py</Source>
     <Source>herculeum/ui/gui/map.py</Source>

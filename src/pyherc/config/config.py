@@ -240,7 +240,7 @@ class Configuration(object):
                                              [],
                                              [],
                                              [],
-                                             self.level_size)
+                                             [])
 
         configurators = self.get_configurators(context.config_package,
                                                'init_level')
@@ -250,7 +250,8 @@ class Configuration(object):
                                       configurator(self.rng,
                                                    self.item_generator,
                                                    self.creature_generator,
-                                                   self.level_size))
+                                                   self.level_size,
+                                                   context))
 
         portal_adder_factory = PortalAdderFactory(
                                 config.portal_adder_configurations,
@@ -276,5 +277,4 @@ class Configuration(object):
         config.creature_adders.extend(new_config.creature_adders)
         config.portal_adder_configurations.extend(
                                     new_config.portal_adder_configurations)
-
-
+        config.contexts.extend(new_config.contexts)

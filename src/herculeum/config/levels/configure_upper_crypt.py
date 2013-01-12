@@ -37,36 +37,45 @@ from pyherc.generators.level.creatures import CreatureAdder
 
 from pyherc.generators.level.portals import PortalAdderConfiguration
 
-from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
-from pyherc.generators.level.prototiles import WALL_EMPTY, WALL_NATURAL
-from pyherc.generators.level.prototiles import WALL_CONSTRUCTED
-
-from herculeum.config.tiles import FLOOR_ROCK, FLOOR_BRICK, WALL_ROCK_DECO_1
-from herculeum.config.tiles import WALL_EMPTY, WALL_GROUND, WALL_ROCK
-from herculeum.config.tiles import PORTAL_STAIRS_UP, PORTAL_STAIRS_DOWN
-
 from pyherc.ai import FlockingHerbivore
 from pyherc.generators import CreatureConfiguration
 from pyherc.data.effects import EffectHandle
 
-from pyherc.config.dsl import LevelConfiguration
+from pyherc.config.dsl import LevelConfiguration, LevelContext
 
-def init_level(rng, item_generator, creature_generator, level_size):
+def init_level(rng, item_generator, creature_generator, level_size, context):
     """
     Initialise upper crypt levels
 
     :returns: level configuration
     :rtype: LevelConfiguration
     """
-    room_generators = [SquareRoomGenerator(FLOOR_NATURAL,
-                                           WALL_EMPTY,
+    surface_manager = context.surface_manager
+
+    floor_natural = 'natural floor'
+    floor_rock = surface_manager.add_icon('floor_rock', ':rock_floor.png', '.')
+    floor_constructed = 'constructed floor'
+    floor_tiled = surface_manager.add_icon('floor_tiled', ':tiled_floor.png', '.')
+
+    wall_empty = surface_manager.add_icon('empty wall', ':transparent.png', None)
+    wall_natural = 'natural wall'
+    wall_constructed = 'constructed wall'
+    wall_ground = surface_manager.add_icon('wall_ground', ':ground_wall.png', ' ')
+    wall_rock = surface_manager.add_icon('wall_rock', ':rock_wall.png', '#')
+    pillar = surface_manager.add_icon('pillar', ':pillar.png', '#')
+
+    stairs_down = surface_manager.add_icon('stairs_down', ':stairs_down.png', '>')
+    stairs_up = surface_manager.add_icon('stairs_up', ':stairs_up.png', '<')
+
+    room_generators = [SquareRoomGenerator(floor_natural,
+                                           wall_empty,
                                            ['upper crypt']),
-                       SquareRoomGenerator(FLOOR_CONSTRUCTED,
-                                           WALL_EMPTY,
+                       SquareRoomGenerator(floor_constructed,
+                                           wall_empty,
                                            ['upper crypt']),
-                       PillarRoomGenerator(floor_tile = FLOOR_CONSTRUCTED,
-                                           empty_tile = WALL_EMPTY,
-                                           pillar_tile = WALL_ROCK_DECO_1,
+                       PillarRoomGenerator(floor_tile = floor_constructed,
+                                           empty_tile = wall_empty,
+                                           pillar_tile = pillar,
                                            level_types = ['upper crypt'])
                                            ]
     level_partitioners = [GridPartitioner(['upper crypt'],
@@ -75,15 +84,15 @@ def init_level(rng, item_generator, creature_generator, level_size):
                                           rng)]
 
     replacer_config = ReplacingDecoratorConfig(['upper crypt'],
-                                    {FLOOR_NATURAL: FLOOR_ROCK,
-                                    FLOOR_CONSTRUCTED: FLOOR_BRICK},
-                                    {WALL_NATURAL: WALL_GROUND,
-                                    WALL_CONSTRUCTED: WALL_ROCK})
+                                    {floor_natural: floor_rock,
+                                    floor_constructed: floor_tiled},
+                                    {wall_natural: wall_ground,
+                                    wall_constructed: wall_rock})
     replacer = ReplacingDecorator(replacer_config)
 
     wallbuilder_config = WallBuilderDecoratorConfig(['upper crypt'],
-                                        {WALL_NATURAL: WALL_CONSTRUCTED},
-                                        WALL_EMPTY)
+                                        {wall_natural: wall_constructed},
+                                        wall_empty)
     wallbuilder = WallBuilderDecorator(wallbuilder_config)
 
     aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
@@ -124,13 +133,21 @@ def init_level(rng, item_generator, creature_generator, level_size):
                                     rng)]
 
     portal_adder_configurations = [PortalAdderConfiguration(
-                                        icons = (PORTAL_STAIRS_DOWN,
-                                                 PORTAL_STAIRS_UP),
+                                        icons = (stairs_down,
+                                                 stairs_up),
                                         level_type = 'upper catacombs',
                                         location_type = 'room',
                                         chance = 10,
                                         new_level = 'upper crypt',
                                         unique = True)]
+
+    level_context = LevelContext(size = level_size,
+                                 floor_type = floor_natural,
+                                 wall_type = wall_natural,
+                                 empty_floor = 0,
+                                 empty_wall = wall_empty,
+                                 level_types = ['upper crypt',
+                                                'lower crypt'])
 
     config = (LevelConfiguration()
                     .with_rooms(room_generators)
@@ -139,7 +156,7 @@ def init_level(rng, item_generator, creature_generator, level_size):
                     .with_items(item_adders)
                     .with_creatures(creature_adders)
                     .with_portals(portal_adder_configurations)
-                    .with_level_size(level_size)
+                    .with_contexts([level_context])
                     .build())
     return config
 

@@ -35,7 +35,6 @@ from herculeum.ui.gui.map import PlayMapWindow
 from herculeum.ui.gui.eventdisplay import EventMessageDockWidget
 from herculeum.ui.gui.menu import MenuDialog
 from herculeum.ui.gui.endscreen import EndScreen
-from herculeum.config import tiles
 
 from random import Random
 

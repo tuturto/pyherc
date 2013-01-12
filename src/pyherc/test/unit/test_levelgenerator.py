@@ -24,7 +24,7 @@ Tests for LevelGenerator
 #pylint: disable=W0614
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level import LevelGeneratorFactory
-from pyherc.generators.level import LevelContext
+from pyherc.config.dsl import LevelContext
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
@@ -73,6 +73,8 @@ class TestLeveltGeneratorFactory:
         self.mock_creature_adder.level_types = ['crypt']
         self.mock_portal_adder = mock()
         self.mock_portal_adder.level_types = ['crypt']
+        self.level_context = mock()
+        self.level_context.level_types = ['crypt']
         self.rng = random.Random()
 
         self.mock_config.level_partitioners = [self.mock_partitioner]
@@ -81,6 +83,7 @@ class TestLeveltGeneratorFactory:
         self.mock_config.item_adders = [self.mock_item_adder]
         self.mock_config.creature_adders = [self.mock_creature_adder]
         self.mock_config.portal_adders = [self.mock_portal_adder]
+        self.mock_config.contexts = [self.level_context]
 
         self.factory = LevelGeneratorFactory(mock(),
                                              self.mock_config,
@@ -120,6 +123,8 @@ class TestLevelGeneratorFactoryConfiguration:
         mock_creature_adder.level_types = ['crypt']
         mock_portal_adder = mock()
         mock_portal_adder.level_types = ['crypt']
+        level_context = mock()
+        level_context.level_types = ['crypt']
 
         mock_config = mock(LevelGeneratorFactoryConfig)
         mock_config.level_partitioners = [mock_partitioner]
@@ -128,6 +133,7 @@ class TestLevelGeneratorFactoryConfiguration:
         mock_config.item_adders = [mock_item_adder]
         mock_config.creature_adders = [mock_creature_adder]
         mock_config.portal_adders = [mock_portal_adder]
+        mock_config.contexts = [level_context]
 
         factory = LevelGeneratorFactory(mock(),
                                         mock_config,
@@ -218,6 +224,9 @@ class TestFactorySupportForLevelTypes:
         self.creature_adder_2 = mock(CreatureAdder)
         self.creature_adder_2.level_types = ['swamp']
 
+        level_context = mock()
+        level_context.level_types = ['crypt']
+
         mock_config = mock(LevelGeneratorFactoryConfig)
         mock_config.level_partitioners = [self.partitioner_1,
                                           self.partitioner_2]
@@ -230,6 +239,7 @@ class TestFactorySupportForLevelTypes:
         mock_config.creature_adders = [self.creature_adder_1,
                                        self.creature_adder_2]
         mock_config.portal_adder_configurations = []
+        mock_config.contexts = [level_context]
 
         self.random_generator = random.Random()
 
@@ -326,7 +336,8 @@ class TestLevelGenerator:
                                      floor_type = self.floor_rock,
                                      wall_type = -101,
                                      empty_floor = 0,
-                                     empty_wall = self.wall_empty)
+                                     empty_wall = self.wall_empty,
+                                     level_types = ['crypt'])
 
         generator = LevelGenerator(partitioner, [room_generator],
                                    level_decorator, [stair_adder],
@@ -373,7 +384,8 @@ class TestLevelGenerator:
                                         floor_type = -2,
                                         wall_type = -101,
                                         empty_floor = 0,
-                                        empty_wall = 100))
+                                        empty_wall = 100,
+                                        level_types = ['crypt']))
 
         new_level = generator.generate_level(portal)
 
@@ -411,7 +423,8 @@ class TestLevelGenerator:
                                         floor_type = -2,
                                         wall_type = -101,
                                         empty_floor = 0,
-                                        empty_wall = self.wall_empty))
+                                        empty_wall = self.wall_empty,
+                                        level_types = ['crypt']))
 
         new_level = generator.generate_level(portal)
 

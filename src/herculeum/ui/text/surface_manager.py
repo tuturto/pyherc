@@ -52,16 +52,17 @@ class CursesSurfaceManager(object):
         """
         Add icon to internal collection
         """
-        self.icons[key] = ascii_char
+        if not key in self.icons:
+            self.icons[key] = ascii_char
 
-        if attributes == None:
-            used_attributes = curses.A_NORMAL | self.get_attribute_by_name('white')
-        else:
-            used_attributes = curses.A_NORMAL
-            for elem in attributes:
-                used_attributes = used_attributes | self.get_attribute_by_name(elem)
+            if attributes == None:
+                used_attributes = curses.A_NORMAL | self.get_attribute_by_name('white')
+            else:
+                used_attributes = curses.A_NORMAL
+                for elem in attributes:
+                    used_attributes = used_attributes | self.get_attribute_by_name(elem)
 
-        self.attributes[key] = used_attributes
+            self.attributes[key] = used_attributes
 
         return key
 
@@ -111,4 +112,4 @@ class CursesSurfaceManager(object):
         if id in self.icons:
             return self.icons[id]
         else:
-            return 'X'
+            return 'x'

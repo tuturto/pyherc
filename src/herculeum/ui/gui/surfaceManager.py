@@ -24,7 +24,6 @@ Module for handling loading of images and icons
 
 import os, os.path
 import images
-import herculeum.config.tiles
 import pyherc
 
 from pyherc.aspects import logged
@@ -81,23 +80,7 @@ class QtSurfaceManager(object):
 
         """
         surface = self.__load_image(':transparent.png')
-        self.icons[herculeum.config.tiles.TRANSPARENT] = surface
-
-        surface = self.__load_image(':dungeon.png')
-        tiles = self.split_surface(surface, (32, 32))
-
-        self.icons[herculeum.config.tiles.FLOOR_ROCK] = tiles[9]
-        self.icons[herculeum.config.tiles.FLOOR_BRICK] = tiles[19]
-        self.icons[herculeum.config.tiles.FLOOR_EMPTY] = tiles[263]
-
-        self.icons[herculeum.config.tiles.WALL_ROCK] = tiles[120]
-        self.icons[herculeum.config.tiles.WALL_ROCK_DECO_1] = tiles[40]
-        self.icons[herculeum.config.tiles.WALL_ROCK_DECO_2] = tiles[46]
-
-        self.icons[herculeum.config.tiles.WALL_GROUND] = tiles[225]
-
-        self.icons[herculeum.config.tiles.PORTAL_STAIRS_DOWN] = tiles[260]
-        self.icons[herculeum.config.tiles.PORTAL_STAIRS_UP] = tiles[261]
+        self.icons['transparent'] = surface
 
     @logged
     def split_surface(self, image, tile_size):
@@ -158,4 +141,5 @@ class QtSurfaceManager(object):
         if id in self.icons:
             return self.icons[id]
         else:
-            return self.icons[herculeum.config.tiles.TRANSPARENT]
+            print('unknown id: {0}'.format(id))
+            return self.icons['transparent']

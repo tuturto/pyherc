@@ -21,4 +21,4 @@
 """
 package for configuring Herculeum
 """
-from .config import Configuration
+from .config import Configuration, ConfigurationContext
