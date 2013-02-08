@@ -49,10 +49,17 @@ def impl(context, character_name, item_name):
 
 @then(u'{item_name} should be in {location_name}')
 def impl(context, item_name, location_name):
-    item = get_item(context, item_name)
-    room = get_location(context, location_name)
+    if 'inventory' in location_name:
+        (word1, word2, character_name) = location_name.split(' ')
+        item = get_item(context, item_name)
+        character = get_character(context, character_name)
 
-    assert item.level == room
+        assert item in character.inventory
+    else:
+        item = get_item(context, item_name)
+        room = get_location(context, location_name)
+
+        assert item.level == room
 
 @then(u'{item_name} should be at same place as {character_name}')
 def impl(context, item_name, character_name):

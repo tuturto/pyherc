@@ -12,3 +12,15 @@ Feature: Dropping items
        And dagger should be at same place as Pete
        And dagger should not be in inventory of Pete
        And time should pass for Pete
+
+Scenario: drop one item, while retaining another
+     Given Pete is Adventurer
+       And Pete is standing in room
+       And Pete has dagger
+       And Pete has sword
+      When Pete drops dagger
+      Then dagger should be in room
+       And dagger should be at same place as Pete
+       And dagger should not be in inventory of Pete
+       And sword should be in inventory of Pete
+       And time should pass for Pete
