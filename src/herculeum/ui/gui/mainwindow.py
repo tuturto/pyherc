@@ -35,7 +35,7 @@ from herculeum.ui.gui.map import PlayMapWindow
 from herculeum.ui.gui.eventdisplay import EventMessageDockWidget
 from herculeum.ui.gui.menu import MenuDialog
 from herculeum.ui.gui.endscreen import EndScreen
-from herculeum.ui.controllers import EndScreenController
+from herculeum.ui.controllers import EndScreenController, StartGameController
 
 from random import Random
 
@@ -77,7 +77,10 @@ class QtUserInterface(object):
                                  self.application.surface_manager,
                                  self.qt_app,
                                  None,
-                                 Qt.FramelessWindowHint)
+                                 Qt.FramelessWindowHint,
+                                 StartGameController(self.application.level_generator_factory,
+                                                     self.application.creature_generator,
+                                                     self.application.item_generator))
 
         self.splash_screen.finish(main_window)
         main_window.show_new_game()
@@ -90,7 +93,8 @@ class MainWindow(QMainWindow):
 
     .. versionadded:: 0.5
     """
-    def __init__(self, application, surface_manager, qt_app, parent, flags):
+    def __init__(self, application, surface_manager, qt_app, parent, flags,
+                 controller):
         """
         Default constructor
         """
@@ -99,6 +103,7 @@ class MainWindow(QMainWindow):
         self.application = application
         self.surface_manager = surface_manager
         self.qt_app = qt_app
+        self.controller = controller
 
         self.__set_layout()
 
@@ -163,18 +168,12 @@ class MainWindow(QMainWindow):
 
         if result == QDialog.Accepted:
             player = start_dialog.player_character
-            self.application.world.player = player
+
+            self.controller.setup_world(self.application.world,
+                                        player)
+
             player.register_for_updates(self.map_window.hit_points_widget)
             self.map_window.hit_points_widget.show_hit_points(player)
-            level_generator = self.application.level_generator_factory.get_generator('upper catacombs')
-
-            generator = pyherc.generators.dungeon.DungeonGenerator(
-                                self.application.creature_generator,
-                                self.application.item_generator,
-                                level_generator)
-
-            generator.generate_dungeon(self.application.world)
-            self.application.world.level = self.application.world.dungeon.levels
 
             self.__show_map_window()
 

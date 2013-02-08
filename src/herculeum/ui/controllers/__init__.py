@@ -24,3 +24,4 @@ Package for user interface controllers
 from .inventory import InventoryController
 from .moving import MoveController
 from .endscreen import EndScreenController
+from .startgame import StartGameController

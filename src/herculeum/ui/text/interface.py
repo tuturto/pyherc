@@ -23,6 +23,7 @@ Module for curses user interface
 """
 import curses
 from herculeum.ui.text.main_window import MainWindow
+from herculeum.ui.controllers import StartGameController
 
 class CursesUserInterface(object):
     """
@@ -63,7 +64,10 @@ class CursesUserInterface(object):
         """
         main_window = MainWindow(self.application,
                                  self.application.surface_manager,
-                                 self.screen)
+                                 self.screen,
+                                 StartGameController(self.application.level_generator_factory,
+                                                     self.application.creature_generator,
+                                                     self.application.item_generator))
         main_window.show_new_game()
         main_window.show_map_window()
 

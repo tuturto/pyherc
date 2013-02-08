@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project pyherc -->
-<!-- Saved: 2013-02-08, 14:51:36 -->
+<!-- Saved: 2013-02-08, 16:56:19 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="4.6">
   <Language>en</Language>
@@ -249,6 +249,7 @@
     <Source>herculeum/ui/text/endscreen.py</Source>
     <Source>herculeum/test/ui/test_inventory.py</Source>
     <Source>herculeum/ui/controllers/endscreen.py</Source>
+    <Source>herculeum/ui/controllers/startgame.py</Source>
   </Sources>
   <Forms>
   </Forms>

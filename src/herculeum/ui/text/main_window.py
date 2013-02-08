@@ -23,7 +23,6 @@ Module for main window related functionality
 """
 from herculeum.ui.text.start_game import StartGameScreen
 from herculeum.ui.text.map import MapScreen
-from pyherc.generators.dungeon import DungeonGenerator
 
 class MainWindow(object):
     """
@@ -31,7 +30,8 @@ class MainWindow(object):
 
     .. versionadded:: 0.9
     """
-    def __init__(self, application, surface_manager, screen):
+    def __init__(self, application, surface_manager, screen,
+                 controller):
         """
         Default constructor
         """
@@ -40,6 +40,7 @@ class MainWindow(object):
         self.application = application
         self.surface_manager = surface_manager
         self.screen = screen
+        self.controller = controller
 
     def show_new_game(self):
         """
@@ -51,16 +52,8 @@ class MainWindow(object):
 
         player = start_screen.show()
 
-        #TODO: this is similar to Qt one, refactor
-        self.application.world.player = player
-        level_generator = self.application.level_generator_factory.get_generator('upper catacombs')
-
-        generator = DungeonGenerator(self.application.creature_generator,
-                                     self.application.item_generator,
-                                     level_generator)
-
-        generator.generate_dungeon(self.application.world)
-        self.application.world.level = self.application.world.dungeon.levels
+        self.controller.setup_world(self.application.world,
+                                    player)
 
     def show_map_window(self):
         """

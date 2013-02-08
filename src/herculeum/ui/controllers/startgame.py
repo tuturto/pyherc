@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#   Copyright 2010-2013 Tuukka Turto
+#
+#   This file is part of pyherc.
+#
+#   pyherc is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   pyherc is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
+
+"""
+Module for starting game
+"""
+from pyherc.generators import DungeonGenerator
+
+class StartGameController(object):
+    """
+    """
+    def __init__(self, level_generator_factory,
+                 creature_generator, item_generator):
+        """
+        Default constructor
+        """
+        super(StartGameController, self).__init__()
+
+        self.level_generator_factory = level_generator_factory
+        self.creature_generator = creature_generator
+        self.item_generator = item_generator
+
+    def setup_world(self, world, player):
+        """
+        Setup playing world
+        """
+        world.player = player
+        level_generator = self.level_generator_factory.get_generator('upper catacombs')
+
+        generator = DungeonGenerator(self.creature_generator,
+                                     self.item_generator,
+                                     level_generator)
+
+        generator.generate_dungeon(world)
+        world.level = world.dungeon.levels
