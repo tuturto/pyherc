@@ -21,7 +21,6 @@
 """
 Module for end screen
 """
-from pyherc.data.model import ESCAPED_DUNGEON, DIED_IN_DUNGEON
 from datetime import date
 
 class EndScreen(object):
@@ -30,7 +29,8 @@ class EndScreen(object):
 
     .. versionadded:: 0.9
     """
-    def __init__(self, model, dying_rules, screen):
+    def __init__(self, model, dying_rules, screen,
+                 controller):
         """
         Default constructor
         """
@@ -39,6 +39,7 @@ class EndScreen(object):
         self.model = model
         self.dying_rules = dying_rules
         self.screen = screen.derwin(18, 40, 5, 20)
+        self.controller = controller
 
     def show(self):
         """
@@ -51,21 +52,8 @@ class EndScreen(object):
         self.screen.addstr(3, 2, 'Score: {0}'.format(
                                         self.dying_rules.calculate_score(
                                                         self.model.player)))
-        self.screen.addstr(5, 2, self._get_end_description(
+        self.screen.addstr(5, 2, self.controller.get_end_description(
                                                     self.model.end_condition))
 
         self.screen.refresh()
         self.screen.getch()
-
-    def _get_end_description(self, code):
-        """
-        Get textual explanation of end
-        """
-        if code == ESCAPED_DUNGEON:
-            explanation = 'managed to escape alive'
-        elif code == DIED_IN_DUNGEON:
-            explanation = 'was killed in dungeon'
-        else:
-            explanation = 'got tired of living'
-
-        return explanation

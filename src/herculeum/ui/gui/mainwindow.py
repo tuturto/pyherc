@@ -35,6 +35,7 @@ from herculeum.ui.gui.map import PlayMapWindow
 from herculeum.ui.gui.eventdisplay import EventMessageDockWidget
 from herculeum.ui.gui.menu import MenuDialog
 from herculeum.ui.gui.endscreen import EndScreen
+from herculeum.ui.controllers import EndScreenController
 
 from random import Random
 
@@ -218,7 +219,8 @@ class MainWindow(QMainWindow):
                                self.application.config.controls,
                                self.application.rules_engine.dying_rules,
                                self,
-                               Qt.Dialog | Qt.CustomizeWindowHint)
+                               Qt.Dialog | Qt.CustomizeWindowHint,
+                               controller = EndScreenController())
 
         end_screen.exec_()
         self.qt_app.quit()

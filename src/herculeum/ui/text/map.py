@@ -25,7 +25,7 @@ from pyherc.aspects import logged
 from herculeum.ui.text.inventory import InventoryScreen
 from herculeum.ui.text.character import CharacterScreen
 from herculeum.ui.text.endscreen import EndScreen
-from herculeum.ui.controllers import MoveController
+from herculeum.ui.controllers import MoveController, EndScreenController
 
 class MapScreen(object):
     """
@@ -112,7 +112,8 @@ class MapScreen(object):
 
         dialog = EndScreen(model = self.model,
                            dying_rules = self.rules_engine.dying_rules,
-                           screen = self.screen)
+                           screen = self.screen,
+                           controller = EndScreenController())
         dialog.show()
 
     @logged

@@ -19,8 +19,31 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for user interface controllers
+Module for end screen actions
 """
-from .inventory import InventoryController
-from .moving import MoveController
-from .endscreen import EndScreenController
+from pyherc.data.model import ESCAPED_DUNGEON, DIED_IN_DUNGEON
+
+class EndScreenController(object):
+    """
+    Class for end screen actions
+
+    .. versionadded:: 0.9
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(EndScreenController, self).__init__()
+
+    def get_end_description(self, code):
+        """
+        Get textual explanation of end
+        """
+        if code == ESCAPED_DUNGEON:
+            explanation = 'managed to escape alive'
+        elif code == DIED_IN_DUNGEON:
+            explanation = 'was killed in dungeon'
+        else:
+            explanation = 'got tired of living'
+
+        return explanation

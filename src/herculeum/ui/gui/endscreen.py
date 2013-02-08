@@ -22,7 +22,6 @@
 Module for displaying end screen
 """
 from PyQt4.QtGui import QDialog, QVBoxLayout, QLabel
-from pyherc.data.model import ESCAPED_DUNGEON, DIED_IN_DUNGEON
 from datetime import date
 
 class EndScreen(QDialog):
@@ -31,7 +30,8 @@ class EndScreen(QDialog):
 
     .. versionadded:: 0.8
     """
-    def __init__(self, model, config, dying_rules, parent, flags):
+    def __init__(self, model, config, dying_rules, parent, flags,
+                 controller):
         """
         Default constructor
         """
@@ -44,6 +44,7 @@ class EndScreen(QDialog):
         self.date_label = None
         self.score_label = None
         self.dying_rules = dying_rules
+        self.controller = controller
 
         self.__set_layout(model,
                           config,
@@ -62,7 +63,7 @@ class EndScreen(QDialog):
         self.date_label.setObjectName('no_border')
         self.score_label = QLabel('Score: ' + str(self.dying_rules.calculate_score(model.player)))
         self.score_label.setObjectName('no_border')
-        self.result_label = QLabel(self._get_end_description(model.end_condition))
+        self.result_label = QLabel(self.controller.get_end_description(model.end_condition))
         self.result_label.setObjectName('no_border')
         self.instruction_label = QLabel('Press action A to continue')
         self.instruction_label.setObjectName('no_border')
@@ -74,19 +75,6 @@ class EndScreen(QDialog):
         layout.addWidget(self.instruction_label)
 
         self.setLayout(layout)
-
-    def _get_end_description(self, code):
-        """
-        Get textual explanation of end
-        """
-        if code == ESCAPED_DUNGEON:
-            explanation = 'managed to escape alive'
-        elif code == DIED_IN_DUNGEON:
-            explanation = 'was killed in dungeon'
-        else:
-            explanation = 'got tired of living'
-
-        return explanation
 
     def _construct_keymap(self, config):
         """
