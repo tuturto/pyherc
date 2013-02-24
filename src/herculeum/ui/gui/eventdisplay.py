@@ -21,11 +21,8 @@
 """
 Module displaying events on screen
 """
-try:
-    from PyQt4.QtGui import QTextEdit, QWidget, QHBoxLayout, QDockWidget
-    import PyQt4.QtGui
-except:
-    pass
+from PyQt4.QtGui import QTextEdit, QWidget, QHBoxLayout, QDockWidget
+import PyQt4.QtGui
 
 class EventMessageDockWidget(QDockWidget):
     """

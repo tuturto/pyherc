@@ -21,11 +21,8 @@
 """
 Module for small widgets
 """
-try:
-    from PyQt4.QtGui import QWidget, QLabel, QDockWidget, QHBoxLayout
-    from PyQt4.QtGui import QFrame, QGridLayout, QVBoxLayout
-except:
-    pass
+from PyQt4.QtGui import QWidget, QLabel, QDockWidget, QHBoxLayout
+from PyQt4.QtGui import QFrame, QGridLayout, QVBoxLayout
 
 class HitPointsWidget(QWidget):
     """

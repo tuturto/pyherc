@@ -25,15 +25,10 @@ Module for handling loading of images and icons
 import os, os.path
 import images
 import pyherc
-
 from pyherc.aspects import logged
-try:
-    from PyQt4.QtGui import QPixmap
-    from PyQt4.QtSvg import QSvgWidget
-    from PyQt4.QtCore import QRect
-except:
-    pass
-
+from PyQt4.QtGui import QPixmap
+from PyQt4.QtSvg import QSvgWidget
+from PyQt4.QtCore import QRect
 import herculeum.ui.gui.resources
 
 class QtSurfaceManager(object):

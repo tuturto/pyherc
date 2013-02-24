@@ -21,17 +21,13 @@
 """
 Module for main map related functionality
 """
-try:
-    from PyQt4.QtGui import QMdiSubWindow, QWidget, QHBoxLayout, QVBoxLayout
-    from PyQt4.QtGui import QGraphicsPixmapItem, QGraphicsView, QGraphicsScene
-    from PyQt4.QtGui import QGraphicsSimpleTextItem, QColor
-    from PyQt4.QtGui import QFont
-    from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
-    from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
-    from PyQt4.QtCore import QEasingCurve, pyqtSignal, QEvent
-except:
-    pass
-
+from PyQt4.QtGui import QMdiSubWindow, QWidget, QHBoxLayout, QVBoxLayout
+from PyQt4.QtGui import QGraphicsPixmapItem, QGraphicsView, QGraphicsScene
+from PyQt4.QtGui import QGraphicsSimpleTextItem, QColor
+from PyQt4.QtGui import QFont
+from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
+from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
+from PyQt4.QtCore import QEasingCurve, pyqtSignal, QEvent
 from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
 from herculeum.ui.controllers import MoveController

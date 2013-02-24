@@ -28,12 +28,8 @@ import sys
 import logging
 import herculeum.config.levels
 from herculeum.ui.gui import QtControlsConfiguration, QtSurfaceManager
-
-try:
-    from PyQt4.QtGui import QApplication
-    import herculeum.ui.gui.resources
-except:
-    pass
+from PyQt4.QtGui import QApplication
+import herculeum.ui.gui.resources
 
 qt_app = None
 world = None

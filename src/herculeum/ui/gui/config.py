@@ -21,10 +21,7 @@
 """
 Module for UI Configuration
 """
-try:
-    from PyQt4.QtCore import Qt
-except:
-    pass
+from PyQt4.QtCore import Qt
 
 class QtControlsConfiguration(object):
     """
