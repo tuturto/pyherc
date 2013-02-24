@@ -27,9 +27,12 @@ import images
 import pyherc
 
 from pyherc.aspects import logged
-from PyQt4.QtGui import QPixmap
-from PyQt4.QtSvg import QSvgWidget
-from PyQt4.QtCore import QRect
+try:
+    from PyQt4.QtGui import QPixmap
+    from PyQt4.QtSvg import QSvgWidget
+    from PyQt4.QtCore import QRect
+except:
+    pass
 
 import herculeum.ui.gui.resources
 

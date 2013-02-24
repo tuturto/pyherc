@@ -22,12 +22,6 @@
 Module for main window related functionality
 """
 
-from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QMdiArea
-from PyQt4.QtGui import QDialog, QPushButton, QWorkspace
-from PyQt4.QtGui import QPixmap, QSplashScreen
-from PyQt4.QtCore import SIGNAL, Qt, QFile, QLatin1String
-from PyQt4.QtGui import QApplication
-import PyQt4.QtGui
 import os
 import pyherc
 from herculeum.ui.gui.startgame import StartGameWidget
@@ -36,6 +30,16 @@ from herculeum.ui.gui.eventdisplay import EventMessageDockWidget
 from herculeum.ui.gui.menu import MenuDialog
 from herculeum.ui.gui.endscreen import EndScreen
 from herculeum.ui.controllers import EndScreenController, StartGameController
+
+try:
+    from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QMdiArea
+    from PyQt4.QtGui import QDialog, QPushButton, QWorkspace
+    from PyQt4.QtGui import QPixmap, QSplashScreen
+    from PyQt4.QtCore import SIGNAL, Qt, QFile, QLatin1String
+    from PyQt4.QtGui import QApplication
+    import PyQt4.QtGui
+except:
+    pass
 
 from random import Random
 

@@ -28,8 +28,12 @@ from docutils.parsers.rst.directives import unchanged
 from herculeum.sphinx.helpers import with_config, shutdown_application
 import os.path
 import re
-from PyQt4.QtGui import QImage, QPainter, QColor
-from PyQt4.QtCore import Qt
+
+try:
+    from PyQt4.QtGui import QImage, QPainter, QColor
+    from PyQt4.QtCore import Qt
+except:
+    pass
 
 class ItemDescription(nodes.General, nodes.Element):
     """
