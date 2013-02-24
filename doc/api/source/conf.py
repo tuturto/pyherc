@@ -17,6 +17,9 @@ import sys, os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('./../../../src'))
+sys.path.insert(0, os.path.abspath('./../../../src/herculeum'))
+sys.path.insert(0, os.path.abspath('./../../../src/pyherc'))
 
 # -- General configuration -----------------------------------------------------
 
@@ -27,8 +30,7 @@ import sys, os
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.doctest',
-              'sphinx.ext.graphviz',
-              'herculeum.sphinx.items']
+              'sphinx.ext.graphviz']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['.templates']
