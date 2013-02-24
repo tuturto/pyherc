@@ -21,12 +21,16 @@
 """
 Module for displaying inventory
 """
-from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
-from PyQt4.QtGui import QGridLayout, QPainter, QFont, QFontMetrics
-from PyQt4.QtGui import QTextEdit, QPixmap, QApplication
-from PyQt4.QtSvg import QSvgWidget
-from PyQt4.QtCore import Qt, pyqtSignal
-import PyQt4.QtGui
+try:
+    from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
+    from PyQt4.QtGui import QGridLayout, QPainter, QFont, QFontMetrics
+    from PyQt4.QtGui import QTextEdit, QPixmap, QApplication
+    from PyQt4.QtSvg import QSvgWidget
+    from PyQt4.QtCore import Qt, pyqtSignal
+    import PyQt4.QtGui
+except:
+    pass
+
 import pyherc
 from herculeum.ui.controllers import InventoryController
 

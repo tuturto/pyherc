@@ -21,11 +21,13 @@
 """
 Module for start game window related functionality
 """
-
-from PyQt4.QtGui import QDialog, QSizePolicy, QVBoxLayout
-from PyQt4.QtGui import QHBoxLayout, QLabel
-from PyQt4.QtCore import Qt
-import PyQt4.QtCore
+try:
+    from PyQt4.QtGui import QDialog, QSizePolicy, QVBoxLayout
+    from PyQt4.QtGui import QHBoxLayout, QLabel
+    from PyQt4.QtCore import Qt
+    import PyQt4.QtCore
+except:
+    pass
 
 class StartGameWidget(QDialog):
     """
