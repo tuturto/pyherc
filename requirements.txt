@@ -1,1 +1,2 @@
 decorator>=3.4.0
+PyHamcrest>=1.6
