@@ -14,7 +14,7 @@ System Requirements
 ===================
 - Python 2.6.5 (2.6.1 should be sufficient if you do not wish to run tests)
 - PyQt4
-- decorator
+- decorator 3.4.0
 - mockito-python 0.5.0 (only needed for running test cases)
 - pyHamcrest 1.6 (only needed for running test cases)
 - behave (only needed for running test cases)
@@ -26,6 +26,8 @@ Manual
 - Manual can be found at doc - directory
 - Online documentation for development version is available at: 
   http://tuturto.github.com/pyherc/index.html
+- Online documentation for pyherc API can be found at:
+  https://pyherc.readthedocs.org/
 
 Credits
 =======
