@@ -31,7 +31,7 @@ from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 from pyherc.rules import InventoryParameters
 from pyherc.events import HitPointsChangedEvent
 
-class Character(object):
+class Character():
     """
     Represents a character in playing world
     """
@@ -677,7 +677,7 @@ class Character(object):
     finesse = property(__get_finesse, __set_finesse)
     mind = property(__get_mind, __set_mind)
 
-class Feat(object):
+class Feat():
     """
     Represents a feat that a character can have
     """

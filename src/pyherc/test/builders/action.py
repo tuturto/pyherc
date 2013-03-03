@@ -36,7 +36,7 @@ from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
 from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.unequip import UnEquipFactory
 
-class ActionFactoryBuilder(object):
+class ActionFactoryBuilder():
     """
     Class for building action factories
     """
@@ -175,7 +175,7 @@ class ActionFactoryBuilder(object):
 
         return action_factory
 
-class DrinkFactoryBuilder(object):
+class DrinkFactoryBuilder():
     """
     Class to build drink factories
     """

@@ -24,7 +24,7 @@ Module for handling loading of images and icons
 from pyherc.aspects import logged
 import curses
 
-class CursesSurfaceManager(object):
+class CursesSurfaceManager():
     """
     Class for managing glyphs
 

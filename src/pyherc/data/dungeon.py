@@ -24,7 +24,7 @@ Module containing classes to represent dungeon
 
 from pyherc.aspects import logged
 
-class Dungeon(object):
+class Dungeon():
     """
     Represents the dungeon
     """

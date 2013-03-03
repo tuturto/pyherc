@@ -43,7 +43,7 @@ from PyQt4.QtCore import SIGNAL, Qt, QFile
 import time
 
 @satin_suite
-class TestInventory(object):
+class TestInventory():
     """
     Tests for inventory widget
     """

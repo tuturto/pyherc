@@ -64,7 +64,7 @@ class RangedDamage(Damage):
         """
         super(RangedDamage, self).__init__(damage)
 
-class RangedCombatFactory(object):
+class RangedCombatFactory():
     """
     Factory for producing ranged combat actions
 
@@ -144,7 +144,7 @@ class RangedCombatFactory(object):
 
         return target
 
-class AdditionalRangedRules(object):
+class AdditionalRangedRules():
     """
     Additional rules for ranged attack
 

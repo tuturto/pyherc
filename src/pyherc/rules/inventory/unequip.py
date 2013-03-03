@@ -59,7 +59,7 @@ class UnEquipFactory(SubActionFactory):
         """
         return UnEquipAction(parameters.character, parameters.item)
 
-class UnEquipAction(object):
+class UnEquipAction():
     """
     Action for unequiping an item
 

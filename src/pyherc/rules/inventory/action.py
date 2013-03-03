@@ -24,7 +24,7 @@ Module defining classes related to inventory actions
 from pyherc.aspects import logged
 from pyherc.events import PickUpEvent, DropEvent
 
-class PickUpAction(object):
+class PickUpAction():
     """
     Action for picking up item
 
@@ -98,7 +98,7 @@ class PickUpAction(object):
 
         return True
 
-class DropAction(object):
+class DropAction():
     """
     Action for dropping item
 

@@ -27,7 +27,7 @@ from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from random import Random
 from pyherc.aspects import logged
 
-class PillarRoomGenerator(object):
+class PillarRoomGenerator():
     """
     Class for generating a pillar room
 

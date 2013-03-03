@@ -21,7 +21,7 @@
 """
 Module for character screen
 """
-class CharacterScreen(object):
+class CharacterScreen():
     """
     Character screen
 

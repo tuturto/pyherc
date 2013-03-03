@@ -25,7 +25,7 @@ from pyherc.data import Character, Inventory
 from pyherc.data.effects import EffectHandle, EffectsCollection
 from pyherc.aspects import logged
 
-class CreatureGenerator(object):
+class CreatureGenerator():
     """
     Class used to generate creatures
     """
@@ -98,7 +98,7 @@ class CreatureGenerator(object):
         """
         return self.configuration[name]
 
-class CreatureConfiguration(object):
+class CreatureConfiguration():
     """
     Configuration for an creature
     """
@@ -135,7 +135,7 @@ class CreatureConfiguration(object):
         else:
             self.inventory = inventory
 
-class InventoryConfiguration(object):
+class InventoryConfiguration():
     """
     Configuration for inventory of a creature
 

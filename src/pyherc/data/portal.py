@@ -24,7 +24,7 @@ Module containing classes to represent Portals
 
 from pyherc.aspects import logged
 
-class Portal(object):
+class Portal():
     """
     Portal linking two levels together
     """

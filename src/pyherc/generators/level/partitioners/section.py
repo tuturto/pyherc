@@ -24,7 +24,7 @@ Classes to represent division of levels
 
 import logging
 
-class Section(object):
+class Section():
     """
     Class representing a single section in a level
     """
@@ -427,7 +427,7 @@ class Section(object):
 
         return connection
 
-class Connection(object):
+class Connection():
     """
     Connection between Sections or between Section and room
     """

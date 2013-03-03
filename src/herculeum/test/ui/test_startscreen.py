@@ -34,7 +34,7 @@ from hamcrest import assert_that #pylint: disable-msg=E0611
 from satin import has_label
 from random import Random
 
-class TestStartScreen(object):
+class TestStartScreen():
     """
     Tests for start screen
     """

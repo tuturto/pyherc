@@ -22,7 +22,7 @@
 Module defining rules engine
 """
 
-class RulesEngine(object):
+class RulesEngine():
     """
     Engine for rules of the game
 

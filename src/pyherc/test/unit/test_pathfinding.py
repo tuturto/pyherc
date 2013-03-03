@@ -41,7 +41,7 @@ FLOOR_TILE = 100
 WALL_TILE = 200
 EMPTY_TILE = 0
 
-class TestAStar(object):
+class TestAStar():
     """
     Tests for A* path finding
     """
@@ -97,7 +97,7 @@ class TestAStar(object):
                                               destination = (15, 10),
                                               level = level)))
 
-class TestPathfindingInLevel(object):
+class TestPathfindingInLevel():
     """
     Test pathfinding in a generated level
     """

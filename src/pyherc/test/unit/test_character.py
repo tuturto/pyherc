@@ -34,7 +34,7 @@ from hamcrest import assert_that, is_, same_instance, equal_to, none #pylint: di
 from pyherc.events import MoveEvent
 from mockito import mock, any, verify
 
-class TestCharacter(object):
+class TestCharacter():
     """
     Tests for character
     """
@@ -73,7 +73,7 @@ class TestCharacter(object):
 
         verify(model).raise_event(EventType('move'))
 
-class TestCreatures(object):
+class TestCreatures():
     """
     Tests for creatures that require generators to be working
     """
@@ -107,7 +107,7 @@ class TestCreatures(object):
         proficiency = creature.is_proficient(weapon)
         assert_that(proficiency, is_(equal_to(True)))
 
-class TestStatues(object):
+class TestStatues():
     """
     Test handling of statues (mainly mimicing items)
     """

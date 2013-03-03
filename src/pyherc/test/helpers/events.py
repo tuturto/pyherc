@@ -23,7 +23,7 @@ Module for event helpers
 """
 from pyherc.aspects import logged
 
-class EventListener(object):
+class EventListener():
     """
     Event listener that stores all events it receives
     """

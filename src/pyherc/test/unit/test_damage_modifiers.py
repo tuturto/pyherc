@@ -32,7 +32,7 @@ from mockito import mock, when
 
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 
-class TestDamageModifiers(object):
+class TestDamageModifiers():
     """
     Tests for damage modifier effect
     """

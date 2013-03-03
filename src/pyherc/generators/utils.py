@@ -28,7 +28,7 @@ import random
 import logging
 import collections
 
-class BSPSection(object):
+class BSPSection():
     """
     Class used to divide area in sections
     """

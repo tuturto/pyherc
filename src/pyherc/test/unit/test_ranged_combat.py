@@ -30,7 +30,7 @@ from mockito import verify, mock, when, any
 from hamcrest import assert_that, is_, equal_to, is_not #pylint: disable-msg=E0611
 from random import Random
 
-class TestRangedCombat(object):
+class TestRangedCombat():
     """
     Tests for ranged combat
     """

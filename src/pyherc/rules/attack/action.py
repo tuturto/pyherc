@@ -26,7 +26,7 @@ import random
 from pyherc.aspects import logged
 from pyherc.events import AttackHitEvent, AttackNothingEvent, AttackMissEvent
 
-class AttackAction(object):
+class AttackAction():
     """
     Action for attacking
     """
@@ -132,7 +132,7 @@ class AttackAction(object):
             else:
                 self.target.add_effect(effect)
 
-class ToHit(object):
+class ToHit():
     """
     Checks done for hitting
     """
@@ -154,7 +154,7 @@ class ToHit(object):
         """
         return True
 
-class Damage(object):
+class Damage():
     """
     Damage done in attack
     """
@@ -224,7 +224,7 @@ class Damage(object):
     damage = property(__get_damage)
     damage_types = property(__get_damage_types)
 
-class AdditionalRules(object):
+class AdditionalRules():
     """
     Additional rules for attacks
 

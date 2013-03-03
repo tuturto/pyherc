@@ -29,7 +29,7 @@ from hamcrest import assert_that #pylint: disable-msg=E0611
 from mockito import mock, verify
 from pyherc.events import MoveEvent
 
-class TestModel(object):
+class TestModel():
     """
     Class for testing Model
     """

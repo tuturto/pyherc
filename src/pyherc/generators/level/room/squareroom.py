@@ -26,7 +26,7 @@ import logging
 from pyherc.generators.level.room.corridor import CorridorGenerator
 from random import Random
 
-class SquareRoomGenerator(object):
+class SquareRoomGenerator():
     """
     Class for generating a square room
     """

@@ -51,7 +51,7 @@ class Configuration(pyherc.config.Configuration):
         """
         super(Configuration, self).initialise(self.context)
 
-class ConfigurationContext(object):
+class ConfigurationContext():
     """
     Class to relay information between different configuration phases
 

@@ -25,7 +25,7 @@ from pyherc.data import Character, Inventory
 from pyherc.data.effects import EffectsCollection
 from mockito import mock
 
-class CharacterBuilder(object):
+class CharacterBuilder():
     """
     Class for building Characters
     """

@@ -28,7 +28,7 @@ from pyherc.data.item import WeaponData, ArmourData, AmmunitionData
 from pyherc.data.effects import EffectsCollection, EffectHandle
 from pyherc.aspects import logged
 
-class ItemGenerator(object):
+class ItemGenerator():
     """
     Class used to generate items
     """
@@ -135,7 +135,7 @@ class ItemGenerator(object):
 
         return item
 
-class ItemConfigurations(object):
+class ItemConfigurations():
     """
     Class for configuring items
     """
@@ -206,7 +206,7 @@ class ItemConfigurations(object):
 
         return None
 
-class ItemConfiguration(object):
+class ItemConfiguration():
     """
     Class representing a single item
     """
@@ -241,7 +241,7 @@ class ItemConfiguration(object):
         else:
             self.effect_handles = effect_handles
 
-class WeaponConfiguration(object):
+class WeaponConfiguration():
     """
     Class representing weapon configuration
     """
@@ -259,7 +259,7 @@ class WeaponConfiguration(object):
         self.weapon_class = weapon_class
         self.ammunition_type = ammunition_type
 
-class ArmourConfiguration(object):
+class ArmourConfiguration():
     """
     Class representing armour configuration
     """
@@ -273,7 +273,7 @@ class ArmourConfiguration(object):
         self.damage_reduction = damage_reduction
         self.speed_modifier = speed_modifier
 
-class AmmunitionConfiguration(object):
+class AmmunitionConfiguration():
     """
     Class representing ammunition configuration
 

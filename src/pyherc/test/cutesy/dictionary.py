@@ -202,7 +202,7 @@ def Level():
                     .build())
     return level
 
-class LevelLocation(object):
+class LevelLocation():
     """
     Defines a location in game world
     """
@@ -277,7 +277,7 @@ def make(actor, action):
     """
     action(actor)
 
-class Hit(object):
+class Hit():
     """
     Class representing a hit in unarmed combat
     """
@@ -361,7 +361,7 @@ def hit(target):
     action = Hit(target)
     return action
 
-class WieldAction(object):
+class WieldAction():
     """
     Action to get chracter to wield something
     """
@@ -528,7 +528,7 @@ def weak_poison(target = None):
             'title': 'weak poison',
             'description': 'causes tiny amount of damage'}
 
-class CarryAction(object):
+class CarryAction():
     """
     Action to get chracter to carry something
     """
@@ -558,7 +558,7 @@ def carrying(item):
     action = CarryAction(item)
     return action
 
-class Drop(object):
+class Drop():
     """
     Class representing dropping an item
     """

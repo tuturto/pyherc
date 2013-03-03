@@ -25,7 +25,7 @@ from pyherc.events import MoveEvent
 from pyherc.aspects import logged
 from pyherc.data.model import ESCAPED_DUNGEON
 
-class MoveAction(object):
+class MoveAction():
     """
     Action for moving
     """

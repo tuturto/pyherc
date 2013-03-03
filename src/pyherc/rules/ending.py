@@ -26,7 +26,7 @@ from pyherc.events import DeathEvent, DropEvent
 from pyherc.aspects import logged
 from pyherc.data.model import DIED_IN_DUNGEON, ESCAPED_DUNGEON
 
-class Dying(object):
+class Dying():
     """
     Rules for actions happening when dying
 

@@ -23,7 +23,7 @@ Module for starting game
 """
 from pyherc.generators import DungeonGenerator
 
-class StartGameController(object):
+class StartGameController():
     """
     """
     def __init__(self, level_generator_factory,

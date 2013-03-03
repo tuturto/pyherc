@@ -24,7 +24,7 @@ Tests for damage effect
 from mockito import mock, verify, any
 from pyherc.test.builders import DamageBuilder
 
-class TestDamageEffect(object):
+class TestDamageEffect():
     """
     Tests for damage effect
     """

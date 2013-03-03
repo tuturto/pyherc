@@ -25,7 +25,7 @@ Module for inventory screen
 from pyherc.aspects import logged
 from herculeum.ui.controllers import InventoryController
 
-class InventoryScreen(object):
+class InventoryScreen():
     """
     Class for displaying inventero screen
 

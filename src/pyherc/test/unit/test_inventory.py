@@ -26,7 +26,7 @@ from mockito import mock
 """
 Tests for Inventory
 """
-class TestInventory(object):
+class TestInventory():
     """
     Tests for inventory
     """

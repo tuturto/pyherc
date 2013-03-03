@@ -23,7 +23,7 @@ Classes for configuring level generation
 """
 from pyherc.aspects import logged
 
-class LevelGeneratorFactoryConfig(object):
+class LevelGeneratorFactoryConfig():
     """
     Class to configure level generator
     """

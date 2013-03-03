@@ -34,7 +34,7 @@ from hamcrest import assert_that #pylint: disable-msg=E0611
 from pyherc.test.cutesy.dictionary import has_less_hit_points
 
 #pylint: disable=C0103
-class TestCombatBehaviour(object):
+class TestCombatBehaviour():
     """
     Combat related behaviour
     """

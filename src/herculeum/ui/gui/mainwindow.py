@@ -39,7 +39,7 @@ import PyQt4.QtGui
 
 from random import Random
 
-class QtUserInterface(object):
+class QtUserInterface():
     """
     Class for Qt User Interface
 

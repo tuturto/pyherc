@@ -21,7 +21,7 @@
 """
 Classes for events
 """
-class Event(object):
+class Event():
     """
     Super class for events
 

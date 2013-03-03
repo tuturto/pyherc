@@ -33,7 +33,7 @@ from pyherc.data.effects import EffectHandle, DamageModifier
 from pyherc.ai import FlockingHerbivore
 from random import Random
 
-class TestCreatureGeneration(object):
+class TestCreatureGeneration():
     """
     Tests for creature generator
     """
@@ -140,7 +140,7 @@ class TestCreatureGeneration(object):
         assert_that(creature.artificial_intelligence,
                     is_(not_none()))
 
-class TestItemsInCreatureGeneration(object):
+class TestItemsInCreatureGeneration():
     """
     Test that items can be handled in creature generation
     """

@@ -29,7 +29,7 @@ from mockito import mock, when, any
 from hamcrest import assert_that #pylint: disable-msg=E0611
 from satin import has_label
 
-class TestCharacterWidget(object):
+class TestCharacterWidget():
     """
     Tests for character widget
     """

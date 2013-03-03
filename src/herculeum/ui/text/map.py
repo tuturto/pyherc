@@ -27,7 +27,7 @@ from herculeum.ui.text.character import CharacterScreen
 from herculeum.ui.text.endscreen import EndScreen
 from herculeum.ui.controllers import MoveController, EndScreenController
 
-class MapScreen(object):
+class MapScreen():
     """
     Class for map screen
 

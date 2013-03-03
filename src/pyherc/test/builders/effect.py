@@ -23,7 +23,7 @@ Module for effect specification builder
 """
 from pyherc.data.effects import Effect, EffectHandle
 
-class EffectHandleBuilder(object):
+class EffectHandleBuilder():
     """
     Class for building effect specifications
     """
@@ -93,7 +93,7 @@ class EffectHandleBuilder(object):
 
         return effect
 
-class EffectBuilder(object):
+class EffectBuilder():
     """
     Class to build effects
     """

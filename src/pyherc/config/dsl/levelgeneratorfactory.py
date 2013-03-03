@@ -23,7 +23,7 @@ module for LevelGeneratorFactoryConfig
 """
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 
-class LevelConfiguration(object):
+class LevelConfiguration():
     """
     DSL for configuring levels
     """
@@ -124,7 +124,7 @@ class LevelConfiguration(object):
                 portal_adder_configurations = self.portal_adder_configurations,
                 contexts = self.contexts)
 
-class LevelContext(object):
+class LevelContext():
     """
     Context for level generation
     """

@@ -24,7 +24,7 @@ Module for Inventory related classes
 
 from pyherc.aspects import logged
 
-class Inventory(object):
+class Inventory():
     """
     Represents an inventory of items
     """

@@ -44,7 +44,7 @@ from pyherc.test.matchers import EventType
 from mockito import mock, when, any, verify, never
 from hamcrest import assert_that, is_, equal_to, is_not #pylint: disable-msg=E0611
 
-class TestEffects(object):
+class TestEffects():
     """
     Tests for effects in general
     """
@@ -267,7 +267,7 @@ class TestEffects(object):
 
         verify(model).raise_event(EventType('remove event'))
 
-class TestEffectsInMelee(object):
+class TestEffectsInMelee():
     """
     Test of effect creation and handling in melee
     """
@@ -367,7 +367,7 @@ class TestEffectsInMelee(object):
 
         verify(self.model).raise_event(any(PoisonAddedEvent))
 
-class TestEffectHandling(object):
+class TestEffectHandling():
     """
     Test for adding effects
     """
@@ -448,7 +448,7 @@ class TestEffectHandling(object):
         assert_that(self.character, has_effect(effect_1))
         assert_that(self.character, has_effect(effect_2))
 
-class TestEternalEffects(object):
+class TestEternalEffects():
     """
     Tests related to effects that do not time out
     """
@@ -510,7 +510,7 @@ class TestEternalEffects(object):
 
         assert_that(self.character2, has_effect(self.effect))
 
-class TestEffectsInCombat(object):
+class TestEffectsInCombat():
     """
     Test that effects are created correctly during combat
     """

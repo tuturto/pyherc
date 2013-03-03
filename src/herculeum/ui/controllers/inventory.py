@@ -21,7 +21,7 @@
 """
 Module for inventory actions
 """
-class InventoryController(object):
+class InventoryController():
     """
     Class for inventory actions
 

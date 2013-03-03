@@ -39,7 +39,7 @@ from pyherc.test.matchers import has_marked_for_redrawing
 
 import pyherc.rules.moving
 
-class TestEventDispatching(object):
+class TestEventDispatching():
     """
     Tests for event dispatching relating to moving
     """
@@ -101,7 +101,7 @@ class TestEventDispatching(object):
 
         assert_that(event, has_marked_for_redrawing(expected_redraws))
 
-class TestMoving(object):
+class TestMoving():
     """
     Tests for moving
     """
@@ -244,7 +244,7 @@ class TestMoving(object):
         model = self.character.model
         assert_that(model.end_condition, is_(equal_to(ESCAPED_DUNGEON)))
 
-class TestEscapeAction(object):
+class TestEscapeAction():
     """
     Tests for escape action
     """

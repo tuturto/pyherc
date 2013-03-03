@@ -23,7 +23,7 @@ Module for effects collection
 """
 import collections
 
-class EffectsCollection(object):
+class EffectsCollection():
     """
     Class for representing collection of effects
 

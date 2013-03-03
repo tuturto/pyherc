@@ -132,7 +132,7 @@ class TestLevelConnectivity():
 
         assert_that(self.matcher._matches(self.level), is_(equal_to(False)))
 
-class TestContainsEffectHandle(object):
+class TestContainsEffectHandle():
     """
     Tests for ContainsEffectHandle matcher
     """

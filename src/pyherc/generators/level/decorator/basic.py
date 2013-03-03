@@ -24,7 +24,7 @@ Module for basic decorators
 
 import logging
 
-class Decorator(object):
+class Decorator():
     """
     Super class for level decorators
     """
@@ -58,7 +58,7 @@ class Decorator(object):
         """
         pass
 
-class DecoratorConfig(object):
+class DecoratorConfig():
     """
     Super class for decorator configuration
     """

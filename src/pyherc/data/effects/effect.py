@@ -24,7 +24,7 @@ Module for baseclass of every Effect
 from pyherc.aspects import logged
 from pyherc.events import Event
 
-class Effect(object):
+class Effect():
     """
     Class representing effects
     """
@@ -103,7 +103,7 @@ class Effect(object):
                      location = None,
                      affected_tiles = [])
 
-class EffectHandle(object):
+class EffectHandle():
     """
     Handle that can be used to construct effects
     """

@@ -23,7 +23,7 @@ Factory related classes are defined here
 """
 import logging
 
-class SubActionFactory(object):
+class SubActionFactory():
     """
     Factory to handle concrete creation of actions
     """

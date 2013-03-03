@@ -24,7 +24,7 @@ Module for rules engine builder
 from pyherc.rules import RulesEngine
 from mockito import mock
 
-class RulesEngineBuilder(object):
+class RulesEngineBuilder():
     """
     Class to build rules engines
     """

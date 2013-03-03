@@ -21,7 +21,7 @@
 """
 Module for start game related functionality
 """
-class StartGameScreen(object):
+class StartGameScreen():
     """
     Screen to start game
 

@@ -29,7 +29,7 @@ from hamcrest import assert_that, is_in, is_not, is_, equal_to #pylint: disable-
 from pyherc.test.matchers import has_effect_handle, has_effect_handles
 from pyherc.test.matchers import has_effect
 
-class TestEffectsCollection(object):
+class TestEffectsCollection():
     """
     Class to test effects collection
     """

@@ -23,7 +23,7 @@ Module for level builder
 """
 from pyherc.data import Level
 
-class LevelBuilder(object):
+class LevelBuilder():
     """
     Class for building levels
     """

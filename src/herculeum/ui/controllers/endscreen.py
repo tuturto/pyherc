@@ -23,7 +23,7 @@ Module for end screen actions
 """
 from pyherc.data.model import ESCAPED_DUNGEON, DIED_IN_DUNGEON
 
-class EndScreenController(object):
+class EndScreenController():
     """
     Class for end screen actions
 

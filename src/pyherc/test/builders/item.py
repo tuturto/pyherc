@@ -25,7 +25,7 @@ from pyherc.data import Item
 from pyherc.data.effects import EffectsCollection
 from pyherc.data.item import WeaponData, ArmourData, AmmunitionData
 
-class ItemBuilder(object):
+class ItemBuilder():
     """
     Class for building Items
     """

@@ -27,7 +27,7 @@ Classes:
 """
 from pyherc.aspects import logged
 
-class Item(object):
+class Item():
     """
     Represents item
     """
@@ -235,7 +235,7 @@ class Item(object):
             p.text('location: {0}'.format(self.location))
             p.breakable()
 
-class WeaponData(object):
+class WeaponData():
     """
     Class representing weapon data of items
     """
@@ -265,7 +265,7 @@ class WeaponData(object):
         self.weapon_type = weapon_type
         self.ammunition_type = ammunition_type
 
-class ArmourData(object):
+class ArmourData():
     """
     Represents data of armours
 
@@ -285,7 +285,7 @@ class ArmourData(object):
         self.damage_reduction = damage_reduction
         self.speed_modifier = speed_modifier
 
-class AmmunitionData(object):
+class AmmunitionData():
     """
     Represents data of ammunition
 

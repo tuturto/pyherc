@@ -25,7 +25,7 @@ Module for dungeon generation
 from pyherc.data import Dungeon
 from pyherc.aspects import logged
 
-class DungeonGenerator(object):
+class DungeonGenerator():
     """
     This class is used to generate dungeon
     """

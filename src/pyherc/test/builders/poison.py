@@ -24,7 +24,7 @@ Module for building poison related objects
 from pyherc.data.effects import Poison
 from mockito import mock
 
-class PoisonBuilder(object):
+class PoisonBuilder():
     """
     Class for building poison
     """

@@ -21,7 +21,7 @@
 """
 Module for moving
 """
-class MoveController(object):
+class MoveController():
     """
     Controller for moving around
 

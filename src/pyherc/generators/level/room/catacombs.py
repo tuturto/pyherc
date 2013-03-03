@@ -24,7 +24,7 @@ Classes for generating catacombs
 from pyherc.aspects import logged
 from pyherc.generators.utils import BSPSection
 
-class CatacombsGenerator(object):
+class CatacombsGenerator():
     """
     Class for generating a catacomblike rooms
     """

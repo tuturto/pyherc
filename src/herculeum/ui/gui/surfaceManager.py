@@ -30,7 +30,7 @@ from PyQt4.QtSvg import QSvgWidget
 from PyQt4.QtCore import QRect
 import herculeum.ui.gui.resources
 
-class QtSurfaceManager(object):
+class QtSurfaceManager():
     """
     Class for managing images and icons
     """

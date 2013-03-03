@@ -25,7 +25,7 @@ Module containing classes to represent Level
 import random
 from pyherc.aspects import logged
 
-class Level(object):
+class Level():
     """
     Represents a level
     """

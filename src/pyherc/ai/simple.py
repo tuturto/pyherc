@@ -27,7 +27,7 @@ Creature will try to find friends, before attacking the player character
 import math
 from pyherc.aspects import logged
 
-class FlockingHerbivore(object):
+class FlockingHerbivore():
     """
     AI for flocking herbivore
     Tries to maintain close distance to other animals

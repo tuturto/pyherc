@@ -28,7 +28,7 @@ import sys
 import logging
 import herculeum.config.levels
 
-class Application(object):
+class Application():
     """
     This class represents main application
     """

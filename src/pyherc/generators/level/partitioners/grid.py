@@ -26,7 +26,7 @@ import logging
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.aspects import logged
 
-class RandomConnector(object):
+class RandomConnector():
     """
     Class for building random connection network from sections
     """
@@ -101,7 +101,7 @@ class RandomConnector(object):
                                                 if x.connected == False]
 
 
-class GridPartitioner(object):
+class GridPartitioner():
     """
     Class for partitioning level to equal grid
     """

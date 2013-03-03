@@ -38,7 +38,7 @@ from pyherc.test.cutesy import at_
 from mockito import mock, verify, when, any
 from hamcrest import assert_that, is_, instance_of, equal_to #pylint: disable-msg=E0611
 
-class TestMeleeCombat(object):
+class TestMeleeCombat():
     """
     Class for testing melee combat related rules
     """

@@ -27,7 +27,7 @@ from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.matchers import is_wearing
 from hamcrest import assert_that #pylint: disable-msg=E0611
 
-class TestWearingArmour(object):
+class TestWearingArmour():
     """
     Tests for wearing armour
     """

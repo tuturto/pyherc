@@ -258,7 +258,7 @@ class ItemImageDirective(Image):
 
         return super(ItemImageDirective, self).run()
 
-class DocumentationContext(object):
+class DocumentationContext():
     """
     Context used to store data during doctree building
     """

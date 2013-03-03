@@ -25,7 +25,7 @@ Module for testing generator utilities
 import pyherc
 import pyherc.generators.utils
 
-class TestGeneratorUtils(object):
+class TestGeneratorUtils():
     """
     Tests for generator utilities
     """

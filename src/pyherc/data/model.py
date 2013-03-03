@@ -27,7 +27,7 @@ from pyherc.aspects import logged
 ESCAPED_DUNGEON = 1
 DIED_IN_DUNGEON = 2
 
-class Model(object):
+class Model():
     """
     Represents playing world
     """
@@ -110,7 +110,7 @@ class Model(object):
                             effect.trigger(rules_engine.dying_rules)
                 creature.remove_expired_effects()
 
-class Damage(object):
+class Damage():
     """
     Damage done in combat
     """

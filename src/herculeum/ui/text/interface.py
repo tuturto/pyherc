@@ -25,7 +25,7 @@ import curses
 from herculeum.ui.text.main_window import MainWindow
 from herculeum.ui.controllers import StartGameController
 
-class CursesUserInterface(object):
+class CursesUserInterface():
     """
     Class for curses user interface
 

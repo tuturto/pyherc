@@ -59,7 +59,7 @@ class EquipFactory(SubActionFactory):
         """
         return EquipAction(parameters.character, parameters.item)
 
-class EquipAction(object):
+class EquipAction():
     """
     Action for equiping an item
 

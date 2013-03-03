@@ -27,7 +27,7 @@ from pyherc.aspects import logged
 from pyherc.ai.pathfinding import a_star
 from pyherc.events import NoticeEvent, LoseFocusEvent
 
-class SkeletonWarriorAI(object):
+class SkeletonWarriorAI():
     """
     AI for skeleton warrior
 

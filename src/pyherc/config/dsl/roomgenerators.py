@@ -25,7 +25,7 @@ from pyherc.generators.level.room.catacombs import CatacombsGenerator
 from pyherc.generators.level.prototiles import FLOOR_NATURAL
 from random import Random
 
-class Catacombs(object):
+class Catacombs():
     """
     Generator for catacombs
     """

@@ -25,7 +25,7 @@ Module for testing dice
 import pyherc
 import pyherc.rules.utils
 
-class TestDice(object):
+class TestDice():
     """
     Test rolling dice
     """

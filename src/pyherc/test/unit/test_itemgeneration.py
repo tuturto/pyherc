@@ -31,7 +31,7 @@ from pyherc.generators import ItemConfiguration, WeaponConfiguration
 from pyherc.data.effects import EffectHandle
 from random import Random
 
-class TestItemGeneration(object):
+class TestItemGeneration():
     """
     Tests for new item generator
     """

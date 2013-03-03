@@ -23,7 +23,7 @@ Classes for item generation
 """
 from pyherc.aspects import logged
 
-class ItemAdderConfiguration(object):
+class ItemAdderConfiguration():
     """
     Configuration for ItemAdder
     """
@@ -66,7 +66,7 @@ class ItemAdderConfiguration(object):
         self.items.append(item_spec)
 
 
-class ItemAdder(object):
+class ItemAdder():
     """
     Class for adding items
     """

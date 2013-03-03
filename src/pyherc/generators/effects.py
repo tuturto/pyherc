@@ -24,7 +24,7 @@ Module for Factory for creating effects
 from pyherc.aspects import logged
 import copy
 
-class EffectsFactory(object):
+class EffectsFactory():
     """
     Factory for creating effects
     """

@@ -36,7 +36,7 @@ from pyherc.events import PickUpEvent
 from hamcrest import assert_that, is_not, equal_to, is_, is_in #pylint: disable-msg=E0611
 from mockito import mock, verify, any
 
-class TestItems(object):
+class TestItems():
     """
     Tests for items
     """

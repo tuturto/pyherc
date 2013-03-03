@@ -22,7 +22,7 @@
 Module defining classes related to DrinkAction
 """
 
-class DrinkAction(object):
+class DrinkAction():
     """
     Action for drinking
     """

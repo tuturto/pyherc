@@ -25,7 +25,7 @@ Module for adding portals
 from pyherc.data import Portal
 from pyherc.aspects import logged
 
-class PortalAdderConfiguration(object):
+class PortalAdderConfiguration():
     """
     Configuration class for adding portals
     """
@@ -51,7 +51,7 @@ class PortalAdderConfiguration(object):
         self.is_unique = unique
         self.is_escape_stairs = escape_stairs
 
-class PortalAdderFactory(object):
+class PortalAdderFactory():
     """
     Class for creating portal adders
     """
@@ -97,7 +97,7 @@ class PortalAdderFactory(object):
 
         return adders
 
-class PortalAdder(object):
+class PortalAdder():
     """
     Basic class for adding portals
     """

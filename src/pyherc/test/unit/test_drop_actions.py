@@ -31,7 +31,7 @@ from pyherc.test.builders import ActionFactoryBuilder, LevelBuilder
 from mockito import mock, verify, any
 from hamcrest import assert_that, is_, equal_to, is_in, is_not, greater_than #pylint: disable-msg=E0611
 
-class TestDropFactory(object):
+class TestDropFactory():
     """
     Tests for drop action factory
     """
@@ -54,7 +54,7 @@ class TestDropFactory(object):
 
         assert_that(can_handle, is_(equal_to(True)))
 
-class TestDropAction(object):
+class TestDropAction():
     """
     Tests for dropping item
     """

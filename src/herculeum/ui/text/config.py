@@ -23,7 +23,7 @@ Module for UI Configuration
 """
 import curses
 
-class CursesControlsConfiguration(object):
+class CursesControlsConfiguration():
     """
     Configuration for user interface controls
 

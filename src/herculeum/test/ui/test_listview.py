@@ -35,7 +35,7 @@ from PyQt4.QtTest import QTest
 from PyQt4.QtGui import QApplication, QPixmap
 from PyQt4.QtCore import Qt
 
-class TestListViewItem(object):
+class TestListViewItem():
     """
     Tests for list view item
     """
@@ -73,7 +73,7 @@ class TestListViewItem(object):
         assert_that(item, has_label('Title'))
         assert_that(item, has_label('Here is description'))
 
-class TestListView(object):
+class TestListView():
     """
     Tests for list view
     """

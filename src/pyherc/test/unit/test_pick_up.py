@@ -29,7 +29,7 @@ from pyherc.data import Model
 from mockito import mock, verify, any
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 
-class TestPickingUp(object):
+class TestPickingUp():
     """
     Tests for picking up itmes
     """

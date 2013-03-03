@@ -24,7 +24,7 @@ Module for building damage related objects
 from pyherc.data.effects import Damage
 from mockito import mock
 
-class DamageBuilder(object):
+class DamageBuilder():
     """
     Class for building heal
     """

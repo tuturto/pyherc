@@ -29,7 +29,7 @@ from hamcrest import assert_that, is_, equal_to, is_not, contains_inanyorder #py
 from hamcrest import has_length, has_items #pylint: disable-msg=E0611
 import random
 
-class TestSectionCalculations(object):
+class TestSectionCalculations():
     """
     Tests for sections methods
     """
@@ -92,7 +92,7 @@ class TestSectionCalculations(object):
                             (20, 23, "left"), (20, 24, "left"),
                             ))
 
-class TestSectionConnections(object):
+class TestSectionConnections():
     """
     Class for testing Section
     """
@@ -208,7 +208,7 @@ class TestSectionConnections(object):
 
         assert_that(connection.direction, is_(equal_to("right")))
 
-class TestSectionLevelAccess(object):
+class TestSectionLevelAccess():
     """
     Tests to ensure that client has access to portion of level via Section
     """
@@ -261,7 +261,7 @@ class TestSectionLevelAccess(object):
         assert_that(self.level.get_location_type((2, 3)),
                                     is_(equal_to('corridor')))
 
-class TestSectionLevelAccessWithOffset(object):
+class TestSectionLevelAccessWithOffset():
     """
     Tests to ensure that client has access to portion of level via Section that
     has been offset from the level

@@ -11,15 +11,15 @@ msg_status_herculeum =  runner.linter.msg_status
 result = msg_status_pyherc | msg_status_herculeum
 
 if result == 0:
-    print 'no problems'
+    print('no problems')
 else:
     if result & 2 == 2:
-        print 'Error detected'
+        print('Error detected')
     if result & 4 == 4:
-        print 'Warning detected'
+        print('Warning detected')
     if result & 8 == 8:
-        print 'Need for refactoring detected'
+        print('Need for refactoring detected')
     if result & 16 == 16:
-        print 'Some conventions are violated'
+        print('Some conventions are violated')
         
 sys.exit(result)

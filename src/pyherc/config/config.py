@@ -46,7 +46,7 @@ from pyherc.generators import EffectsFactory
 
 from pyherc.generators import ItemConfigurations
 
-class Configuration(object):
+class Configuration():
     """
     Configuration object for Herculeum
     """

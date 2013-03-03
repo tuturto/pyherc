@@ -24,7 +24,7 @@ Classes for generating catacombs
 from pyherc.aspects import logged
 from pyherc.generators.utils import BSPSection
 
-class CrimsonLairGenerator(object):
+class CrimsonLairGenerator():
     """
     Class for generating a catacomblike rooms
     """

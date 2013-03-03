@@ -33,7 +33,7 @@ InventoryParameters - Class used to guide inventory related actions
 
 from pyherc.aspects import logged
 
-class ActionFactory(object):
+class ActionFactory():
     """
     Object for creating actions
     """
@@ -95,7 +95,7 @@ class ActionFactory(object):
         else:
             return None
 
-class ActionParameters(object):
+class ActionParameters():
     """
     Object for controlling action creation
     """
