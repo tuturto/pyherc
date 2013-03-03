@@ -24,7 +24,7 @@ Tests for creature generation
 #pylint: disable=W0614, W0401, C0103
 from pyherc.generators import CreatureGenerator
 from pyherc.test.matchers import has_effect_handle, has_effect
-from hamcrest import *
+from hamcrest import assert_that, is_, equal_to, not_none #pylint: disable-msg=E0611
 from mockito import mock, verify
 
 from pyherc.generators import CreatureConfiguration

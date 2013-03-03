@@ -23,7 +23,8 @@ Tests for CreatureAdder
 """
 #pylint: disable=W0614
 from mockito import mock
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, has_length, greater_than, less_than #pylint: disable-msg=E0611
+from hamcrest import greater_than_or_equal_to #pylint: disable-msg=E0611
 from pyherc.test.matchers import has_creature, located_in_room
 
 from pyherc.data import Level

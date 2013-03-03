@@ -1,6 +1,6 @@
 from pyherc.data.model import ESCAPED_DUNGEON
 
-@then(u'Game ends')
+@then('Game ends')
 def impl(context):
     model = context.model
 

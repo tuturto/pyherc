@@ -23,7 +23,7 @@ Module for testing attack action related classes
 """
 from pyherc.rules.attack.action import Damage
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
-from hamcrest import assert_that, is_, equal_to
+from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 from mockito import mock, verify
 
 class TestDamage(object):

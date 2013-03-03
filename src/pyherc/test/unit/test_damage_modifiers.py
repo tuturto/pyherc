@@ -30,7 +30,7 @@ from pyherc.test.cutesy import at_
 
 from mockito import mock, when
 
-from hamcrest import assert_that, is_, equal_to
+from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 
 class TestDamageModifiers(object):
     """

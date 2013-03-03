@@ -35,7 +35,7 @@ from pyherc.generators.level.creatures import CreatureAdder
 from pyherc.generators.level.items import ItemAdder
 from pyherc.data import Portal
 from mockito import mock, verify, when, any
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, is_, same_instance, contains_string, has_item #pylint: disable-msg=E0611
 from pyherc.test.matchers import is_fully_accessible_via
 import random
 

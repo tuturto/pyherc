@@ -19,8 +19,8 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 from pyherc.data import Inventory
-from hamcrest import assert_that, is_,  equal_to, is_in, not_none, is_not
-from hamcrest import none
+from hamcrest import assert_that, is_,  equal_to, is_in, not_none, is_not #pylint: disable-msg=E0611
+from hamcrest import none #pylint: disable-msg=E0611
 from mockito import mock
 
 """

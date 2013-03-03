@@ -20,7 +20,7 @@
 
 from pyherc.test.bdd.features.helpers import get_character
 
-@then(u'time should pass for {character_name}')
+@then('time should pass for {character_name}')
 def impl(context, character_name):
     character = get_character(context, character_name)
 

@@ -25,7 +25,7 @@ Module for testing Model
 from pyherc.data import Model
 from pyherc.test.matchers import has_event_listener
 from pyherc.test.builders import LevelBuilder, CharacterBuilder
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that #pylint: disable-msg=E0611
 from mockito import mock, verify
 from pyherc.events import MoveEvent
 

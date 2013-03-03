@@ -23,7 +23,6 @@ Module for handling loading of images and icons
 """
 
 import os, os.path
-import images
 import pyherc
 from pyherc.aspects import logged
 from PyQt4.QtGui import QPixmap

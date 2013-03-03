@@ -107,7 +107,7 @@ Following example creates an EffectHandle and adds it to the collection.
                          charges = 1)
    collection.add_effect_handle(handle)
    
-   print collection.get_effect_handles()
+   print(collection.get_effect_handles())
    
 The collection now contains a single EffectHandle object.
    
@@ -132,7 +132,7 @@ Following example creates an Effect and adds it to the collection.
                    description = 'Causes small amount of damage')
    collection.add_effect(effect)
    
-   print collection.get_effects()
+   print(collection.get_effects())
 
 The collection now contains a single Poison object.
    

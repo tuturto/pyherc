@@ -30,7 +30,7 @@ from pyherc.data.effects import Effect
 from pyherc.test.builders import CharacterBuilder, EffectBuilder
 from pyherc.test.builders import RulesEngineBuilder
 
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, is_, equal_to, is_not, has_item #pylint: disable-msg=E0611
 from mockito import mock, verify, any
 
 class TestTime:

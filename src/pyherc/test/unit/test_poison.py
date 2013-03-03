@@ -27,7 +27,7 @@ from pyherc.generators import EffectsFactory
 from pyherc.test.builders import CharacterBuilder, PoisonBuilder
 from pyherc.test.matchers import has_effect, EventType
 from mockito import mock, verify, any
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 
 class TestPoison():
     """

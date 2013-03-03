@@ -27,7 +27,7 @@ from pyherc.test.matchers import AttackActionParameterMatcher, does_have
 from pyherc.test.builders import LevelBuilder, CharacterBuilder, ItemBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from mockito import verify, mock, when, any
-from hamcrest import assert_that, is_, equal_to, is_not
+from hamcrest import assert_that, is_, equal_to, is_not #pylint: disable-msg=E0611
 from random import Random
 
 class TestRangedCombat(object):

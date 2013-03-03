@@ -26,7 +26,7 @@ from pyherc.test.builders import CharacterBuilder, EffectBuilder
 from herculeum.ui.gui.character import CharacterWidget
 
 from mockito import mock, when, any
-from hamcrest import assert_that
+from hamcrest import assert_that #pylint: disable-msg=E0611
 from satin import has_label
 
 class TestCharacterWidget(object):

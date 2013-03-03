@@ -31,7 +31,7 @@ from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder
 from pyherc.test.builders import HealBuilder
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, is_, equal_to, has_item, is_not, greater_than #pylint: disable-msg=E0611
 from mockito import mock, when, any
 
 class TestPotions():

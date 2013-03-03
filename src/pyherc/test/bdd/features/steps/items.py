@@ -24,7 +24,7 @@ from pyherc.test.bdd.features.helpers import weapon_list
 from pyherc.test.bdd.features.helpers import get_character, get_item
 from pyherc.test.bdd.features.helpers import get_location
 
-@given(u'{character_name} has {item_name}')
+@given('{character_name} has {item_name}')
 @default_context
 @weapon_list
 @armour_list
@@ -40,14 +40,14 @@ def impl(context, character_name, item_name):
 
     character.inventory.append(item)
 
-@when(u'{character_name} drops {item_name}')
+@when('{character_name} drops {item_name}')
 def impl(context, character_name, item_name):
     character = get_character(context, character_name)
     item = get_item(context, item_name)
 
     make(character, drop(item))
 
-@then(u'{item_name} should be in {location_name}')
+@then('{item_name} should be in {location_name}')
 def impl(context, item_name, location_name):
     if 'inventory' in location_name:
         (word1, word2, character_name) = location_name.split(' ')
@@ -61,21 +61,21 @@ def impl(context, item_name, location_name):
 
         assert item.level == room
 
-@then(u'{item_name} should be at same place as {character_name}')
+@then('{item_name} should be at same place as {character_name}')
 def impl(context, item_name, character_name):
     item = get_item(context, item_name)
     character = get_character(context, character_name)
 
     assert item.location == character.location
 
-@then(u'{item_name} should not be in inventory of {character_name}')
+@then('{item_name} should not be in inventory of {character_name}')
 def impl(context, item_name, character_name):
     item = get_item(context, item_name)
     character = get_character(context, character_name)
 
     assert not item in character.inventory
 
-@given(u'{character_name} wields {weapon_name}')
+@given('{character_name} wields {weapon_name}')
 @default_context
 @weapon_list
 def impl(context, character_name, weapon_name):
@@ -96,7 +96,7 @@ def impl(context, character_name, weapon_name):
     character.inventory.append(weapon)
     character.inventory.weapon = weapon
 
-@given(u'{character_name} wears {armour_name}')
+@given('{character_name} wears {armour_name}')
 @default_context
 @armour_list
 def impl(context, character_name, armour_name):

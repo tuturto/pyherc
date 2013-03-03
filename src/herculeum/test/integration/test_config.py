@@ -26,7 +26,7 @@ Module for testing main configuration
 from herculeum.config import Configuration
 from pyherc.rules import InventoryParameters
 from mockito import mock
-from hamcrest import *
+from hamcrest import assert_that, is_, not_none #pylint: disable-msg=E0611
 from PyQt4.QtGui import QApplication
 import herculeum.config.levels
 

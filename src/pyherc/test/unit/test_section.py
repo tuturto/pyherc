@@ -25,7 +25,8 @@ Tests for Section
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
 from mockito import mock
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, is_, equal_to, is_not, contains_inanyorder #pylint: disable-msg=E0611
+from hamcrest import has_length, has_items #pylint: disable-msg=E0611
 import random
 
 class TestSectionCalculations(object):

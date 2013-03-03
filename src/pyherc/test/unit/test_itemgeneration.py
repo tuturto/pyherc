@@ -24,7 +24,7 @@ Tests for item generation
 #pylint: disable=W0614
 from pyherc.generators import ItemGenerator
 from pyherc.test.matchers import has_effect_handle, has_damage
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, is_, equal_to, not_none #pylint: disable-msg=E0611
 
 from pyherc.generators import ItemConfigurations
 from pyherc.generators import ItemConfiguration, WeaponConfiguration

@@ -27,8 +27,7 @@ from pyherc.data import Level
 from pyherc.test.matchers.map_connectivity import MapConnectivity
 from pyherc.data.effects import EffectHandle, EffectsCollection
 from pyherc.test.matchers.effect_collection import ContainsEffectHandle
-from hamcrest import * #pylint: disable=W0401
-from mockito import *  #pylint: disable=W0401
+from hamcrest import assert_that, is_, equal_to, has_length #pylint: disable-msg=E0611
 
 class TestLevelConnectivity():
     """

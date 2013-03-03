@@ -30,7 +30,7 @@ from pyherc.generators.level.decorator import AggregateDecorator
 from pyherc.generators.level.decorator import AggregateDecoratorConfig
 from pyherc.data import Level
 from mockito import mock, verify
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
 from pyherc.generators.level.prototiles import WALL_NATURAL, WALL_CONSTRUCTED
 

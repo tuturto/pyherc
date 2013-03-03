@@ -23,7 +23,7 @@ Tests for damage
 """
 
 from pyherc.rules.attack.action import Damage
-from hamcrest import assert_that, is_, equal_to, only_contains
+from hamcrest import assert_that, is_, equal_to, only_contains #pylint: disable-msg=E0611
 
 class TestDamage(object):
     """

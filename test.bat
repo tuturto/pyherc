@@ -5,7 +5,7 @@ call make doctest
 cd ..
 cd ..
 cd src\pyherc\test\bdd
-behave --junit --junit-directory ./../../../../doc/behave/reports
+behave --logging-level INFO --junit --junit-directory ./../../../../doc/behave/reports
 cd ..\..\..\..
 python xunit.py
 python run_pylint.py

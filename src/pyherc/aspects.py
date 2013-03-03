@@ -22,7 +22,6 @@
 Module for aspects
 """
 import logging
-from functools import wraps
 from decorator import decorator
 
 @decorator

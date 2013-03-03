@@ -27,8 +27,8 @@ from pyherc.generators.level.portals import PortalAdder, PortalAdderFactory
 from pyherc.generators.level.portals import PortalAdderConfiguration
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.generator import LevelGeneratorFactory
-from hamcrest import * #pylint: disable=W0401
-from pyherc.test.matchers import * #pylint: disable=W0401
+from hamcrest import assert_that, has_length, is_, equal_to #pylint: disable-msg=E0611
+from pyherc.test.matchers import located_in_room
 from mockito import mock
 import random
 

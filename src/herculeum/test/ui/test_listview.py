@@ -27,7 +27,7 @@ from herculeum.ui.gui.widgets import ListView, ListViewItem
 import herculeum.ui.gui.resources
 
 from mockito import mock, when, any
-from hamcrest import assert_that
+from hamcrest import assert_that #pylint: disable-msg=E0611
 
 from satin import has_label
 

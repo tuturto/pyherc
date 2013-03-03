@@ -12,14 +12,14 @@ posses it.
 
 System Requirements
 ===================
-- Python 2.6.5 (2.6.1 should be sufficient if you do not wish to run tests)
+- Python 3.2
 - PyQt4
 - decorator 3.4.0
 - mockito-python 0.5.0 (only needed for running test cases)
 - pyHamcrest 1.6 (only needed for running test cases)
 - behave (only needed for running test cases)
 - satin-python (only needed for running test cases)
-- Sphinx 1.1.2 (only needed for generating documentation)
+- Sphinx 1.1.3 (only needed for generating documentation)
 
 Manual
 ======

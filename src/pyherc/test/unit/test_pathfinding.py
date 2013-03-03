@@ -25,7 +25,7 @@ from pyherc.test.builders import LevelBuilder
 from pyherc.test.matchers import continuous_path
 from pyherc.ai import a_star
 
-from hamcrest import assert_that, contains, is_
+from hamcrest import assert_that, contains, is_ #pylint: disable-msg=E0611
 from mockito import mock
 
 from pyherc.generators.level.generator import LevelGenerator

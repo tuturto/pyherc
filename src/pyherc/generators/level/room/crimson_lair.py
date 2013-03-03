@@ -59,8 +59,8 @@ class CrimsonLairGenerator(object):
         :type section: Section
         """
         level_size = (section.width, section.height)
-        for x_loc in xrange(1, level_size[0]):
-            for y_loc in xrange(1, level_size[1]):
+        for x_loc in range(1, level_size[0]):
+            for y_loc in range(1, level_size[1]):
                 section.set_floor((x_loc, y_loc),
                                    self.floor_tile,
                                    'room')

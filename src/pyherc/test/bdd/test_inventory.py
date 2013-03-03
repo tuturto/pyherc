@@ -25,7 +25,7 @@ from pyherc.test.cutesy import Dagger, Goblin, carrying
 from pyherc.test.cutesy import place, middle_of, Level
 from pyherc.test.cutesy import make, drop
 from pyherc.test.cutesy import has_dropped
-from hamcrest import assert_that
+from hamcrest import assert_that #pylint: disable-msg=E0611
 
 #pylint: disable=C0103
 class TestDroppingItems(object):

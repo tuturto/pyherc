@@ -20,16 +20,16 @@
 
 from pyherc.test.cutesy import make, hit
 from pyherc.test.bdd.features.helpers import get_character
-from hamcrest import assert_that, is_, less_than, equal_to
+from hamcrest import assert_that, is_, less_than, equal_to #pylint: disable-msg=E0611
 
-@when(u'{attacker_name} hits {target_name}')
+@when('{attacker_name} hits {target_name}')
 def impl(context, attacker_name, target_name):
     attacker = get_character(context, attacker_name)
     target = get_character(context, target_name)
 
     make(attacker, hit(target))
 
-@then(u'{character_name} should have less hitpoints')
+@then('{character_name} should have less hitpoints')
 def impl(context, character_name):
     character = get_character(context, character_name)
 
@@ -38,7 +38,7 @@ def impl(context, character_name):
 
     assert new_hit_points < old_hit_points
 
-@then(u'Attack should deal {damage_type} damage')
+@then('Attack should deal {damage_type} damage')
 def impl(context, damage_type):
     observer = context.observer
 
@@ -50,7 +50,7 @@ def impl(context, damage_type):
 
     assert len(matching_events) > 0
 
-@then(u'{character_name} should suffer extra damage')
+@then('{character_name} should suffer extra damage')
 def impl(context, character_name):
     character = get_character(context, character_name)
 
@@ -69,7 +69,7 @@ def impl(context, character_name):
 
     assert(total_damage_suffered > total_damage_from_weapon)
 
-@then(u'Attack damage should be reduced')
+@then('Attack damage should be reduced')
 def impl(context):
     observer = context.observer
 
@@ -92,7 +92,7 @@ def impl(context):
 
     assert_that(realised_damage, is_(less_than(expected_damage)))
 
-@then(u'Attack damage should be {damage_amount}')
+@then('Attack damage should be {damage_amount}')
 def impl(context, damage_amount):
     observer = context.observer
     damage = int(damage_amount)

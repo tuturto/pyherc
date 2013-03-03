@@ -30,7 +30,7 @@ from pyherc.test.builders import LevelBuilder
 from pyherc.data.dungeon import Dungeon
 from pyherc.rules.moving import deactivate
 from pyherc.test.matchers import EventType
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, is_, same_instance, equal_to, none #pylint: disable-msg=E0611
 from pyherc.events import MoveEvent
 from mockito import mock, any, verify
 

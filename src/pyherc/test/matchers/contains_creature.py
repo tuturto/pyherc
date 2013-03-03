@@ -22,7 +22,7 @@
 Module for customer matchers used in testing
 """
 
-from hamcrest import is_not
+from hamcrest import is_not #pylint: disable-msg=E0611
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 

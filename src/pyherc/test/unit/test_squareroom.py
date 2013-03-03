@@ -25,7 +25,7 @@ Tests for SquareRoomGenerator room generator
 from pyherc.data import Level
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room import SquareRoomGenerator
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, has_length, is_ #pylint: disable-msg=E0611
 import random
 
 class TestSquareRoom():

@@ -33,7 +33,7 @@ from herculeum.ui.controllers import EndScreenController, StartGameController
 from PyQt4.QtGui import QMainWindow, QAction, QIcon, QVBoxLayout, QMdiArea
 from PyQt4.QtGui import QDialog, QPushButton, QWorkspace
 from PyQt4.QtGui import QPixmap, QSplashScreen
-from PyQt4.QtCore import SIGNAL, Qt, QFile, QLatin1String
+from PyQt4.QtCore import SIGNAL, Qt, QFile
 from PyQt4.QtGui import QApplication
 import PyQt4.QtGui
 
@@ -62,7 +62,7 @@ class QtUserInterface(object):
         """
         file = QFile(':herculeum.qss')
         file.open(QFile.ReadOnly)
-        styleSheet = QLatin1String(file.readAll())
+        styleSheet = str(file.readAll().data())
         self.qt_app.setStyleSheet(styleSheet)
 
         pixmap = QPixmap(':splash.png')
@@ -223,3 +223,4 @@ class MainWindow(QMainWindow):
 
         end_screen.exec_()
         self.qt_app.quit()
+

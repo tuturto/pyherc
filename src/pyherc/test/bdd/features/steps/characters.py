@@ -22,12 +22,12 @@ from pyherc.data.effects import DamageModifier
 from pyherc.test.cutesy import Adventurer, Goblin
 from pyherc.test.matchers import is_dead, is_not_in
 from pyherc.ai.pathfinding import a_star
-from hamcrest import assert_that
+from hamcrest import assert_that #pylint: disable-msg=E0611
 from pyherc.test.bdd.features.helpers import default_context, observed
 from pyherc.test.bdd.features.helpers import with_action_factory
 from pyherc.test.bdd.features.helpers import get_character, get_location
 
-@given(u'{character_name} is Adventurer')
+@given('{character_name} is Adventurer')
 @observed
 @default_context
 def impl(context, character_name):
@@ -36,7 +36,7 @@ def impl(context, character_name):
     new_character.model = context.model
     context.characters.append(new_character)
 
-@given(u'{character_name} is Goblin')
+@given('{character_name} is Goblin')
 @observed
 @default_context
 def impl(context, character_name):
@@ -45,19 +45,19 @@ def impl(context, character_name):
     new_character.model = context.model
     context.characters.append(new_character)
 
-@then(u'{character_name} should be dead')
+@then('{character_name} should be dead')
 def impl(context, character_name):
     character = get_character(context, character_name)
     assert_that(character, is_dead())
 
-@given(u'{character_name} is almost dead')
+@given('{character_name} is almost dead')
 @observed
 def impl(context, character_name):
     character = get_character(context, character_name)
 
     character.hit_points = 1
 
-@given(u'{character_name} is suspectible against {damage_type}')
+@given('{character_name} is suspectible against {damage_type}')
 def impl(context, character_name, damage_type):
     character = get_character(context, character_name)
 
@@ -71,14 +71,14 @@ def impl(context, character_name, damage_type):
                               description = '{0} causes extra damage'.format(damage_type))
     character.add_effect(modifier)
 
-@given(u'{character_name} is Player')
+@given('{character_name} is Player')
 def impl(context, character_name):
     character = get_character(context, character_name)
 
     model = context.model
     model.player = character
 
-@when(u'{character_name} walks on {location_name}')
+@when('{character_name} walks on {location_name}')
 @with_action_factory
 def impl(context, character_name, location_name):
     character = get_character(context, character_name)
@@ -93,7 +93,7 @@ def impl(context, character_name, location_name):
         character.move(direction,
                        context.action_factory)
 
-@when(u'{character_name} enters {portal_name}')
+@when('{character_name} enters {portal_name}')
 @with_action_factory
 def impl(context, character_name, portal_name):
     character = get_character(context, character_name)

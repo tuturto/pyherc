@@ -48,14 +48,14 @@ folder.
 
 Dependencies
 ------------
-- Python 2.7.3 (2.6.1 should be sufficient if you do not wish to run tests)
+- Python 3.2
 - PyQt4
 - decorator
 - mockito-python 0.5.0 (only needed for running test cases)
 - pyHamcrest 1.6 (only needed for running test cases)
 - behave (only needed for running test cases)
 - satin-python (only needed for running test cases)
-- Sphinx 1.1.2 (only needed for generating documentation)
+- Sphinx 1.1.3 (only needed for generating documentation)
 
 Installing dependencies
 -----------------------
@@ -67,7 +67,7 @@ Install PyQt4, by following instructions at: PyQt4_
 
 Install decorator library::
 
-    easy_install -U decorator
+    pip install decorator
 
 Rest of the dependencies can be automatically located and installed by following
 steps:
@@ -75,13 +75,13 @@ steps:
 If you want to be able to run test cases, install mockito-python, pyHamcrest 
 and behave::
 
-    easy_install -U mockito
-    easy_install -U pyhamcrest
-    easy_install -U behave
+    pip install -U mockito
+    pip install -U pyhamcrest
+    pip install -U behave
 
 If you want to generate html manual and programmers guide, install Sphinx::
 
-    easy_install -U Sphinx
+    pip install -U Sphinx
 
 .. _Python: http://python.org/getit/
 .. _setuptools: http://pypi.python.org/pypi/setuptools

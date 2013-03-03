@@ -268,7 +268,7 @@ example defines an simple level:
         
     config = init_level(rng, item_generator, creature_generator, level_size, config_context)
     
-    print config
+    print(config)
 
 The example defines function to initialise a level configuration and executes 
 it. In real life scenarion, item_generator and creature_generator objects would

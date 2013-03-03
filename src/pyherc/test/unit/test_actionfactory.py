@@ -28,7 +28,7 @@ from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.move.factories import MoveFactory
 from pyherc.data.model import Model
 from mockito import mock, when, any
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, is_in, contains_inanyorder, is_, same_instance  #pylint: disable-msg=E0611
 
 class TestActionFactories():
     """

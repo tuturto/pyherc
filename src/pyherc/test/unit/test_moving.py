@@ -22,7 +22,7 @@
 Module for testing moving
 """
 #pylint: disable=W0614
-from hamcrest import * #pylint: disable=W0401
+from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 from mockito import mock
 
 from pyherc.rules import MoveParameters

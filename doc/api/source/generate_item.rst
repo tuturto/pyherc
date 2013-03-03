@@ -69,8 +69,8 @@ example defines an apple and dagger for configuration.
 
     config = init_items()
     
-    print len(config)
-    print config[0]
+    print(len(config))
+    print(config[0])
 
 Example creates a list containing two ItemConfiguration objects.
     

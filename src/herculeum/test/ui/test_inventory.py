@@ -34,12 +34,12 @@ from PyQt4.QtGui import QApplication, QPixmap
 from PyQt4.QtCore import Qt
 
 from mockito import mock, when, any, verify
-from hamcrest import *
+from hamcrest import assert_that, is_not, contains  #pylint: disable-msg=E0611
 from satin import has_label, satin_suite, all_widgets, widget
 from herculeum.test.matchers import slot_with_item
 from random import Random
 
-from PyQt4.QtCore import SIGNAL, Qt, QFile, QLatin1String
+from PyQt4.QtCore import SIGNAL, Qt, QFile
 import time
 
 @satin_suite

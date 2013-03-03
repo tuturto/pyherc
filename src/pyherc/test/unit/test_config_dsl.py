@@ -25,7 +25,7 @@ Module for testing configuration DSL
 from pyherc.generators.level.prototiles import FLOOR_NATURAL
 
 from mockito import mock
-from hamcrest import assert_that, is_, equal_to, has_item
+from hamcrest import assert_that, is_, equal_to, has_item #pylint: disable-msg=E0611
 from pyherc.config.dsl import LevelConfiguration, Catacombs, natural_floor
 from random import Random
 

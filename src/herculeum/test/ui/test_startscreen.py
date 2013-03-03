@@ -30,7 +30,7 @@ from PyQt4.QtGui import QApplication, QPixmap
 from PyQt4.QtCore import Qt
 
 from mockito import mock, when, any, verify
-from hamcrest import assert_that
+from hamcrest import assert_that #pylint: disable-msg=E0611
 from satin import has_label
 from random import Random
 

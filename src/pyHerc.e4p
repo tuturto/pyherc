@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-4.6.dtd">
-<!-- eric4 project file for project pyherc -->
-<!-- Saved: 2013-02-08, 16:56:19 -->
+<!DOCTYPE Project SYSTEM "Project-5.1.dtd">
+<!-- eric5 project file for project pyHerc -->
+<!-- Saved: 2013-03-03, 08:34:46 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
-<Project version="4.6">
+<Project version="5.1">
   <Language>en</Language>
-  <ProgLanguage mixed="0">Python</ProgLanguage>
+  <Hash>1b4023ded9782100fede1679fa75335aee997492</Hash>
+  <ProgLanguage mixed="0">Python2</ProgLanguage>
   <ProjectType>Console</ProjectType>
   <Description></Description>
   <Version>0.1</Version>
@@ -251,25 +252,20 @@
     <Source>herculeum/ui/controllers/endscreen.py</Source>
     <Source>herculeum/ui/controllers/startgame.py</Source>
   </Sources>
-  <Forms>
-  </Forms>
-  <Translations>
-  </Translations>
-  <Resources>
-  </Resources>
-  <Interfaces>
-  </Interfaces>
-  <Others>
-  </Others>
+  <Forms/>
+  <Translations/>
+  <Resources/>
+  <Interfaces/>
+  <Others/>
   <MainScript>herculeum/main.py</MainScript>
   <Vcs>
     <VcsType>None</VcsType>
   </Vcs>
   <FiletypeAssociations>
-    <FiletypeAssociation pattern="*.pyw" type="SOURCES" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES"/>
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.py" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.pyw" type="SOURCES"/>
   </FiletypeAssociations>
   <Documentation>
     <DocumentationParams>
@@ -283,14 +279,14 @@
               <string>basePackage</string>
             </key>
             <value>
-              <unicode>pyherc</unicode>
+              <string>pyherc</string>
             </value>
             <key>
               <string>ignoreFilePatterns</string>
             </key>
             <value>
               <list>
-                <unicode></unicode>
+                <string></string>
               </list>
             </value>
             <key>
@@ -304,14 +300,14 @@
             </key>
             <value>
               <list>
-                <unicode>Python</unicode>
+                <string>Python</string>
               </list>
             </value>
             <key>
               <string>outputFile</string>
             </key>
             <value>
-              <unicode>C:\programming\pyHack\doc\herculeum.api</unicode>
+              <string>C:\programming\pyHack\doc\herculeum.api</string>
             </value>
             <key>
               <string>useRecursion</string>
@@ -426,7 +422,7 @@
               <string>reportFile</string>
             </key>
             <value>
-              <unicode>C:\programming\pyHack\report.html</unicode>
+              <string>C:\programming\pyHack\report.html</string>
             </value>
             <key>
               <string>txtReport</string>
