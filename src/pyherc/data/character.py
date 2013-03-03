@@ -21,11 +21,6 @@
 """
 Module for Character related classes
 """
-try:
-    from future_builtins import map, zip
-except:
-    pass
-
 from pyherc.aspects import logged
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 from pyherc.rules import InventoryParameters

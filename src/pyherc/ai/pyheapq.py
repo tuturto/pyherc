@@ -141,11 +141,6 @@ from itertools import islice, repeat, count, tee
 from operator import itemgetter, neg
 import bisect
 
-try:
-    from future_builtins import map, zip
-except:
-    pass
-
 def heappush(heap, item):
     """Push item onto heap, maintaining the heap invariant."""
     heap.append(item)

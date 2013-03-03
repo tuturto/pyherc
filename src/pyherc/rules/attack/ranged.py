@@ -21,10 +21,6 @@
 """
 Module for ranged combat
 """
-try:
-    from future_builtins import map, zip
-except:
-    pass
 from pyherc.aspects import logged
 from pyherc.rules.attack.action import ToHit, Damage, AttackAction
 
