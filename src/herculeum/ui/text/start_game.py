@@ -57,7 +57,9 @@ class StartGameScreen():
             if selection < 0 or selection > len(self.class_names) - 1:
                 selection = None
 
-        return self.generator.generate_creature(self.class_names[selection])
+        for index, class_name in enumerate(self.class_names):
+            if index == selection:
+                return self.generator.generate_creature(class_name)
 
     def draw_screen(self):
         """
