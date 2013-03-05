@@ -1,2 +1,4 @@
 decorator>=3.4.0
 PyHamcrest>=1.6
+mockito>=0.5.0
+behave>=1.2.2
