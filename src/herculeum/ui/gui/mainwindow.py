@@ -62,7 +62,7 @@ class QtUserInterface():
         """
         file = QFile(':herculeum.qss')
         file.open(QFile.ReadOnly)
-        styleSheet = str(file.readAll().data())
+        styleSheet = str(file.readAll().data(), 'ascii')
         self.qt_app.setStyleSheet(styleSheet)
 
         pixmap = QPixmap(':splash.png')
