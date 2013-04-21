@@ -2,10 +2,10 @@
 import os, glob, sys
 from pylint.lint import Run
 
-runner = Run(['-E', '--files-output=no', '--output-format=text', '--rcfile=pylint.rc', 'src/pyherc'], exit = False)
+runner = Run(['-E', '--disable=E1002', '--files-output=no', '--output-format=text', '--rcfile=pylint.rc', 'src/pyherc'], exit = False)
 msg_status_pyherc =  runner.linter.msg_status
 
-runner = Run(['-E', '--files-output=no', '--output-format=text', '--rcfile=pylint.rc', 'src/herculeum'], exit = False)
+runner = Run(['-E', '--disable=E1002', '--files-output=no', '--output-format=text', '--rcfile=pylint.rc', 'src/herculeum'], exit = False)
 msg_status_herculeum =  runner.linter.msg_status
 
 result = msg_status_pyherc | msg_status_herculeum
