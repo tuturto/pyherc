@@ -21,7 +21,7 @@
 """
 Module for main map related functionality
 """
-from PyQt4.QtGui import QMdiSubWindow, QWidget, QHBoxLayout, QVBoxLayout
+from PyQt4.QtGui import QWidget, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QGraphicsPixmapItem, QGraphicsView, QGraphicsScene
 from PyQt4.QtGui import QGraphicsSimpleTextItem, QColor
 from PyQt4.QtGui import QFont
