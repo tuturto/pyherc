@@ -21,10 +21,11 @@
 """
 Module for testing attack action related classes
 """
-from pyherc.rules.attack.action import Damage
+from pyherc.rules.attack.action import Damage, AttackAction
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
+from pyherc.test.builders import EffectHandleBuilder
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
-from mockito import mock, verify
+from mockito import mock, when, any, verify
 
 class TestDamage():
     """
@@ -84,3 +85,39 @@ class TestDamage():
         damage.apply_damage(target = character)
 
         assert_that(damage.damage_inflicted, is_(equal_to(1)))
+
+    def test_effect_with_null_duration_is_triggered(self):
+        """
+        Effect with None duration should be triggered immediately when attack lands
+        """
+        effect = mock()
+        effect.duration = None
+        
+        attacker = (CharacterBuilder()
+                        .with_effect_handle(EffectHandleBuilder()
+                                                        .with_trigger('on attack hit')
+                                                        .build())
+                        .build())
+                        
+        defender = (CharacterBuilder()
+                        .build())
+                        
+        to_hit = mock()
+        when(to_hit).is_hit().thenReturn(True)
+        
+        effect_factory = mock()
+        when(effect_factory).create_effect(any(), 
+                                                         target = any()).thenReturn(effect)
+                        
+        action = AttackAction(attack_type = 'melee', 
+                                       to_hit = to_hit, 
+                                       damage = mock(),
+                                       attacker = attacker, 
+                                       target = defender, 
+                                       effect_factory = effect_factory, 
+                                       dying_rules = mock(),
+                                       additional_rules = mock())
+
+        action.execute()
+        
+        verify(effect).trigger(any())

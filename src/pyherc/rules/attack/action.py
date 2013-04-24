@@ -21,7 +21,6 @@
 """
 Module defining classes related to AttackAction
 """
-import pyherc.rules.ending
 import random
 from pyherc.aspects import logged
 from pyherc.events import AttackHitEvent, AttackNothingEvent, AttackMissEvent
@@ -121,13 +120,15 @@ class AttackAction():
         """
         weapon = self.attacker.inventory.weapon
         effects = self.attacker.get_effect_handles('on attack hit')
+
         if weapon != None:
             effects.extend(weapon.get_effect_handles('on attack hit'))
         for effect_spec in effects:
             effect = self.effect_factory.create_effect(
                                                     effect_spec.effect,
                                                     target = self.target)
-            if effect.duration <= 0:
+
+            if not effect.duration or effect.duration <= 0:
                 effect.trigger(self.dying_rules)
             else:
                 self.target.add_effect(effect)
