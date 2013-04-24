@@ -10,6 +10,8 @@ New features
 Fixed bugs
 **********
 
+ - 48_ bug: Effects with None as duration or frequency cause crash when triggered
+
 **********
 Known bugs
 **********
@@ -25,6 +27,7 @@ Known bugs
 Other notes
 ***********
 
+.. _48: https://github.com/tuturto/pyherc/issues/48
 .. _42: https://github.com/tuturto/pyherc/issues/42
 .. _38: https://github.com/tuturto/pyherc/issues/38
 .. _25: https://github.com/tuturto/pyherc/issues/25
