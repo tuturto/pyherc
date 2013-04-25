@@ -6,6 +6,8 @@ Release 0.9
 New features
 ************
 
+ - 46_ curses interface
+
 **********
 Fixed bugs
 **********
@@ -28,6 +30,7 @@ Other notes
 ***********
 
 .. _48: https://github.com/tuturto/pyherc/issues/48
+.. _46: https://github.com/tuturto/pyherc/issues/46
 .. _42: https://github.com/tuturto/pyherc/issues/42
 .. _38: https://github.com/tuturto/pyherc/issues/38
 .. _25: https://github.com/tuturto/pyherc/issues/25
