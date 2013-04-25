@@ -29,7 +29,10 @@ Known bugs
 Other notes
 ***********
 
+ - 47_ switch to Python 3
+
 .. _48: https://github.com/tuturto/pyherc/issues/48
+.. _47: https://github.com/tuturto/pyherc/issues/47
 .. _46: https://github.com/tuturto/pyherc/issues/46
 .. _42: https://github.com/tuturto/pyherc/issues/42
 .. _38: https://github.com/tuturto/pyherc/issues/38
