@@ -24,7 +24,7 @@ def write_results(f, top_element):
     sorted_cases = {}
     for case in cases:
         class_name = case.getAttribute('classname')
-        if sorted_cases.has_key(class_name):
+        if class_name in sorted_cases:
             sorted_cases[class_name].append(case)
         else:
             sorted_cases[class_name] = [case]
@@ -64,17 +64,17 @@ def write_test_suite(xunit_file_name, caption, report_file_name):
 
 f = open('doc/test_results.html', 'w')
 write_header(f)
-f.write('<table border="0">\n')
 
 files = os.listdir('./doc/behave/reports/')
 for file in files:
-    #caption = 'TESTS-combat.xml'
-    caption = file
-    dash_location = caption.find('-')
-    caption = caption[dash_location+1:-4]
-    caption = caption.capitalize()
-    
-    write_test_suite(os.path.join('./doc/behave/reports/', file), caption, f)
+    f.write('<pre>\n')
+    f2 = open('./doc/behave/reports/' + file)
+    for line in f2:
+        f.write(line)
+    f2.close()
+    f.write('</pre>\n')
+
+f.write('<table border="0">\n')
 
 write_test_suite('nosetests.xml', 'Unit tests', f)
 
