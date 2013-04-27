@@ -23,7 +23,7 @@ Module for Character related classes
 """
 from pyherc.aspects import logged
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
-from pyherc.rules import InventoryParameters
+from pyherc.rules import InventoryParameters, SpellCastingParameters
 from pyherc.events import HitPointsChangedEvent
 
 class Character():
@@ -511,6 +511,26 @@ class Character():
                                 InventoryParameters(self,
                                                     item,
                                                     'unequip'))
+        action.execute()
+
+    @logged
+    def cast(self, direction, spell_name, action_factory):
+        """
+        Cast a spell
+        
+        :param direction: direction to cast the spell
+        :type direction: int
+        :param spell: spell to cast
+        :type spell: string
+        :param action_factory: factory to create actions
+        :type action_factory: ActionFactory
+        
+        .. versionadded:: 0.9
+        """
+        action = action_factory.get_action(
+                                SpellCastingParameters(self,
+                                                       direction = direction, 
+                                                       spell_name = spell_name))
         action.execute()
 
     @logged

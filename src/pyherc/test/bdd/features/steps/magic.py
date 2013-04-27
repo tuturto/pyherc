@@ -18,15 +18,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-Package for rules of the game
-"""
-from .public import ActionFactory
-from .public import ActionParameters
-from .public import AttackParameters
-from .public import MoveParameters
-from .public import DrinkParameters
-from .public import InventoryParameters
-from .public import SpellCastingParameters
-from .ending import Dying
-from .engine import RulesEngine
+@when('{caster} casts {spell_and_target}')
+def impl(context, caster, spell_and_target):
+    # Simon casts magic missile on Uglak
+    # Simon casts healing wind
+    assert False
+

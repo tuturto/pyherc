@@ -54,6 +54,8 @@ class ActionFactoryBuilder():
         self.inventory_factory.action_type = 'inventory'
         self.move_factory = mock()
         self.move_factory.action_type = 'move'
+        self.magic_factory = mock()
+        self.magic_factory.action_type = 'cast spell'
         self.dying_rules = mock()
 
         self.effect_factory = mock()
@@ -61,7 +63,8 @@ class ActionFactoryBuilder():
         self.use_real_drink_factory = False
         self.use_real_inventory_factory = False
         self.use_real_move_factory = False
-        self.use_real_dying_rules = False
+        self.use_real_magic_factory = False
+        self.use_real_dying_rules = False        
 
     def with_model(self, model):
         """
@@ -98,6 +101,21 @@ class ActionFactoryBuilder():
                 self.drink_factory = drink_factory.build()
             else:
                 self.drink_factory = drink_factory
+        return self
+    
+    def with_magic_factory(self, magic_factory = None):
+        """
+        Configure action factory to use real magic factory
+        
+        .. versionadded:: 0.9
+        """
+        if magic_factory == None:
+            self.use_real_magic_factory = True
+        else:
+            if hasattr(magic_factory, 'build'):
+                self.magic_factory = magic_factory.build()
+            else:
+                self.magic_factory = magic_factory
         return self
 
     def with_inventory_factory(self):
@@ -166,12 +184,13 @@ class ActionFactoryBuilder():
         if self.use_real_move_factory == True:
             walk_factory = WalkFactory(mock())
             self.move_factory = MoveFactory(walk_factory)
-
+        
         action_factory = ActionFactory(self.model,
                                        [self.move_factory,
                                         self.drink_factory,
                                         self.attack_factory,
-                                        self.inventory_factory])
+                                        self.inventory_factory, 
+                                        self.magic_factory])
 
         return action_factory
 

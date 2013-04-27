@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project pyHerc -->
-<!-- Saved: 2013-04-27, 09:54:23 -->
+<!-- Saved: 2013-04-27, 16:34:12 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="5.1">
   <Language>en</Language>
@@ -252,6 +252,7 @@
     <Source>herculeum/ui/controllers/endscreen.py</Source>
     <Source>herculeum/ui/controllers/startgame.py</Source>
     <Source>pyherc/test/bdd/features/magic.feature</Source>
+    <Source>pyherc/test/bdd/features/steps/magic.py</Source>
   </Sources>
   <Forms/>
   <Translations/>

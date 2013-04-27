@@ -19,14 +19,30 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for rules of the game
+Spell casting related factories
 """
-from .public import ActionFactory
-from .public import ActionParameters
-from .public import AttackParameters
-from .public import MoveParameters
-from .public import DrinkParameters
-from .public import InventoryParameters
-from .public import SpellCastingParameters
-from .ending import Dying
-from .engine import RulesEngine
+from pyherc.rules.factory import SubActionFactory
+from pyherc.aspects import logged
+
+class MagicFactory(SubActionFactory):
+    """
+    Factory for creating spell casting actions
+
+    .. versionadded:: 0.9
+    """
+    @logged
+    def __init__(self):
+        """
+        Constructor for this factory
+        """
+        self.action_type = 'spell casting'
+
+    @logged
+    def get_action(self, parameters):
+        """
+        Create a spell casting action
+
+        :param parameters: parameters used to control creation
+        :type parameters: SpellCastingParameters
+        """
+        pass

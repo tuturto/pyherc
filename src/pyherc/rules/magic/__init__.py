@@ -19,14 +19,6 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for rules of the game
+Package for magic rules
 """
-from .public import ActionFactory
-from .public import ActionParameters
-from .public import AttackParameters
-from .public import MoveParameters
-from .public import DrinkParameters
-from .public import InventoryParameters
-from .public import SpellCastingParameters
-from .ending import Dying
-from .engine import RulesEngine
+from .factories import MagicFactory

@@ -29,6 +29,7 @@ AttackParameters - Class used to guide contruction of attack related actions
 MoveParameters - Class used to guide construction of move related actions
 DrinkParameters - Class used to guide drinking related actions
 InventoryParameters - Class used to guide inventory related actions
+SpellCastingParameteres - Class used to guide spell casting
 """
 
 from pyherc.aspects import logged
@@ -215,3 +216,29 @@ class InventoryParameters(ActionParameters):
         self.sub_action = sub_action
         self.character = character
         self.item = item
+
+class SpellCastingParameters(ActionParameters):
+    """
+    Class for controlling spell casting
+    
+    .. versionadded:: 0.9
+    """
+    
+    @logged
+    def __init__(self, caster, direction, spell_name):
+        """
+        Construct spell casting parameters
+
+        :param caster: character casting the spell
+        :type caster: Character
+        :param direction: direction to which the spell is cast
+        :type direction: int
+        :param spell_name: name of the spell
+        :type spell_name: string
+        """
+        ActionParameters.__init__(self)
+
+        self.action_type = 'spell casting'
+        self.caster = caster
+        self.direction = direction
+        self.spell = spell_name

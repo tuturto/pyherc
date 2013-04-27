@@ -11,7 +11,7 @@ Feature: Magic
        And Simon is standing away from Uglak
 
   Scenario: Magic missile
-       When Simon casts magic missile to Uglak
+       When Simon casts magic missile on Uglak
        Then Uglak should be dead
 
   Scenario: Fireball
@@ -19,7 +19,7 @@ Feature: Magic
         And Zhag is almost dead
         And Zhag is next to Uglak
         And Simon is standing away from Zhag
-       When Simon casts fireball to Zhag
+       When Simon casts fireball on Zhag
        Then Uglak should be dead
         And Zhag should be dead
 
@@ -36,5 +36,5 @@ Feature: Magic
 
   Scenario: Out of mana
       Given Simon has no mana left
-       When Simon casts magic missile to Uglak
+       When Simon casts magic missile on Uglak
        Then Uglak should be alive
