@@ -22,7 +22,7 @@
 Package for testing dsl
 """
 
-from .dictionary import Goblin, Adventurer
+from .dictionary import Goblin, Adventurer, Wizard
 from .dictionary import Dagger, Sword, Club, Bow, Arrows
 from .dictionary import LeatherArmour, ScaleMail, PlateMail
 from .dictionary import at_

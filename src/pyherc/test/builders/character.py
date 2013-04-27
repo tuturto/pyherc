@@ -36,6 +36,8 @@ class CharacterBuilder():
         super(CharacterBuilder, self).__init__()
         self.hit_points = 10
         self.max_hp = 10
+        self.spirit = 5
+        self.max_spirit = 5
         self.model = mock()
 
         self.speed = 1
@@ -123,6 +125,26 @@ class CharacterBuilder():
         :type max_hp: int
         """
         self.max_hp = max_hp
+        return self
+
+    def with_spirit(self, spirit):
+        """
+        Configure amount of spirit points
+        
+        :param spirit: spirit points
+        :type spirit: int
+        """
+        self.spirit = spirit
+        return self
+    
+    def with_max_spirit(self, max_spirit):
+        """
+        Confiugre maximum amount of spirit points
+        
+        :param max_spirit: maximum spirit points
+        :type max_spirit: int
+        """
+        self.max_spirit = max_spirit
         return self
 
     def with_speed(self, speed):
@@ -288,6 +310,8 @@ class CharacterBuilder():
 
         character.hit_points = self.hit_points
         character.max_hp = self.max_hp
+        character.spirit = self.spirit
+        character.max_spirit = self.max_spirit
 
         character.mind = self.mind
         character.body = self.body

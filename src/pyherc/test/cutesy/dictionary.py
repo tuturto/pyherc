@@ -75,6 +75,27 @@ def Adventurer():
                     )
     return character
 
+def Wizard():
+    """
+    Creates a wizardcharacter
+
+    :returns: fully initialised wizard
+    :rtype: Character
+    """
+    character = (CharacterBuilder()
+                    .with_hit_points(5)
+                    .with_max_hp(5)
+                    .with_spirit(20)
+                    .with_max_spirit(20)
+                    .with_speed(4)
+                    .with_body(4)
+                    .with_mind(8)
+                    .with_attack(1)
+                    .with_name('Wizard')
+                    .build()
+                    )
+    return character
+
 def Goblin(action = None):
     """
     Creates a goblin

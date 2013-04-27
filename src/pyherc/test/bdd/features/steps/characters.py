@@ -19,7 +19,7 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 from pyherc.data.effects import DamageModifier
-from pyherc.test.cutesy import Adventurer, Goblin
+from pyherc.test.cutesy import Adventurer, Wizard, Goblin
 from pyherc.test.matchers import is_dead, is_not_in
 from pyherc.ai.pathfinding import a_star
 from hamcrest import assert_that #pylint: disable-msg=E0611
@@ -32,6 +32,15 @@ from pyherc.test.bdd.features.helpers import get_character, get_location
 @default_context
 def impl(context, character_name):
     new_character = Adventurer()
+    new_character.name = character_name
+    new_character.model = context.model
+    context.characters.append(new_character)
+
+@given('{character_name} is Wizard')
+@observed
+@default_context
+def impl(context, character_name):
+    new_character = Wizard()
     new_character.name = character_name
     new_character.model = context.model
     context.characters.append(new_character)
