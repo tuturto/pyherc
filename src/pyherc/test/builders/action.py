@@ -35,6 +35,7 @@ from pyherc.rules.inventory.factories import InventoryFactory
 from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
 from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.unequip import UnEquipFactory
+from pyherc.rules.magic import SpellCastingFactory
 
 class ActionFactoryBuilder():
     """
@@ -54,8 +55,8 @@ class ActionFactoryBuilder():
         self.inventory_factory.action_type = 'inventory'
         self.move_factory = mock()
         self.move_factory.action_type = 'move'
-        self.magic_factory = mock()
-        self.magic_factory.action_type = 'cast spell'
+        self.spellcasting_factory = mock()
+        self.spellcasting_factory.action_type = 'cast spell'
         self.dying_rules = mock()
 
         self.effect_factory = mock()
@@ -63,7 +64,7 @@ class ActionFactoryBuilder():
         self.use_real_drink_factory = False
         self.use_real_inventory_factory = False
         self.use_real_move_factory = False
-        self.use_real_magic_factory = False
+        self.use_real_spellcasting_factory = False
         self.use_real_dying_rules = False        
 
     def with_model(self, model):
@@ -103,19 +104,19 @@ class ActionFactoryBuilder():
                 self.drink_factory = drink_factory
         return self
     
-    def with_magic_factory(self, magic_factory = None):
+    def with_spellcasting_factory(self, spellcasting_factory = None):
         """
         Configure action factory to use real magic factory
         
         .. versionadded:: 0.9
         """
-        if magic_factory == None:
-            self.use_real_magic_factory = True
+        if spellcasting_factory == None:
+            self.use_real_spellcasting_factory = True
         else:
-            if hasattr(magic_factory, 'build'):
-                self.magic_factory = magic_factory.build()
+            if hasattr(spellcasting_factory, 'build'):
+                self.spellcasting_factory = spellcasting_factory.build()
             else:
-                self.magic_factory = magic_factory
+                self.spellcasting_factory = spellcasting_factory
         return self
 
     def with_inventory_factory(self):
@@ -149,10 +150,10 @@ class ActionFactoryBuilder():
         :returns: action factory
         :rtype: ActionFactory
         """
-        if self.use_real_dying_rules == True:
+        if self.use_real_dying_rules:
             self.dying_rules = Dying()
 
-        if self.use_real_attack_factory == True:
+        if self.use_real_attack_factory:
             unarmed_combat_factory = UnarmedCombatFactory(self.effect_factory,
                                                           self.dying_rules)
             melee_combat_factory = MeleeCombatFactory(self.effect_factory,
@@ -164,13 +165,13 @@ class ActionFactoryBuilder():
                                         melee_combat_factory,
                                         ranged_combat_factory])
 
-        if self.use_real_drink_factory == True:
+        if self.use_real_drink_factory:
             self.drink_factory = (DrinkFactoryBuilder()
                                     .with_effect_factory(self.effect_factory)
                                     .with_dying_rules(self.dying_rules)
                                     .build())
 
-        if self.use_real_inventory_factory == True:
+        if self.use_real_inventory_factory:
             pick_up_factory = PickUpFactory()
             drop_factory = DropFactory()
             equip_factory = EquipFactory()
@@ -181,16 +182,19 @@ class ActionFactoryBuilder():
                                             equip_factory,
                                             unequip_factory])
 
-        if self.use_real_move_factory == True:
+        if self.use_real_move_factory:
             walk_factory = WalkFactory(mock())
             self.move_factory = MoveFactory(walk_factory)
+        
+        if self.use_real_spellcasting_factory:
+            self.spellcasting_factory = SpellCastingFactoryBuilder().build()
         
         action_factory = ActionFactory(self.model,
                                        [self.move_factory,
                                         self.drink_factory,
                                         self.attack_factory,
                                         self.inventory_factory, 
-                                        self.magic_factory])
+                                        self.spellcasting_factory])
 
         return action_factory
 
@@ -230,8 +234,26 @@ class DrinkFactoryBuilder():
         """
         Builds drink factory
         """
-        if self.use_real_dying_rules == True:
+        if self.use_real_dying_rules:
             self.dying_rules = Dying()
 
         return DrinkFactory(self.effect_factory,
                             self.dying_rules)
+
+class SpellCastingFactoryBuilder():
+    """
+    Builder for spell casting factory
+    
+    .. versionadded:: 0.9
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(SpellCastingFactoryBuilder, self).__init__()
+
+    def build(self):
+        """
+        Builds spell casting factory
+        """
+        return SpellCastingFactory()

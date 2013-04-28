@@ -22,5 +22,7 @@
 def impl(context, caster, spell_and_target):
     # Simon casts magic missile on Uglak
     # Simon casts healing wind
+    
+    
     assert False
 

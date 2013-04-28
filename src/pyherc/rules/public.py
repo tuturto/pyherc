@@ -241,4 +241,4 @@ class SpellCastingParameters(ActionParameters):
         self.action_type = 'spell casting'
         self.caster = caster
         self.direction = direction
-        self.spell = spell_name
+        self.spell_name = spell_name

@@ -19,33 +19,45 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Spell casting related factories
+Module defining spell casting actions
 """
-from pyherc.rules.factory import SubActionFactory
-from pyherc.rules.magic.action import SpellCastingAction
 from pyherc.aspects import logged
 
-class SpellCastingFactory(SubActionFactory):
+class SpellCastingAction():
     """
-    Factory for creating spell casting actions
+    Action for casting a spell
 
     .. versionadded:: 0.9
     """
     @logged
-    def __init__(self):
+    def __init__(self, caster, direction, spell):
         """
-        Constructor for this factory
+        Default constructor
+
+        :param caster: character casting the spell
+        :type caster: Character
+        :param direction: direction of the spell
+        :type direction: int
+        :param spell: spell to cast
+        :type spell_name: Spell
         """
-        self.action_type = 'spell casting'
+        self.caster = caster
+        self.direction = direction
+        self.spell = spell
 
     @logged
-    def get_action(self, parameters):
+    def execute(self):
         """
-        Create a spell casting action
+        Executes this action
+        """
+        pass
 
-        :param parameters: parameters used to control creation
-        :type parameters: SpellCastingParameters
+    @logged
+    def is_legal(self):
         """
-        return SpellCastingAction(caster = parameters.caster, 
-                                            direction = parameters.direction,
-                                            spell = None)
+        Check if the action is possible to perform
+
+        :returns: True if casting spell is possible, false otherwise
+        :rtype: Boolean
+        """
+        return False

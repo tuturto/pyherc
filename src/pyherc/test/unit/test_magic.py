@@ -122,7 +122,7 @@ class TestSpellCasting:
         when(magic_factory).get_action(any()).thenReturn(action)
         
         action_factory = (ActionFactoryBuilder()
-                                    .with_magic_factory(magic_factory)
+                                    .with_spellcasting_factory(magic_factory)
                                     .build())
                                     
         caster = (CharacterBuilder()
