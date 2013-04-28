@@ -9,6 +9,7 @@ pyherc.rules
    attack/package_attack
    consume/package_consume
    inventory/package_inventory
+   magic/package_magic
    move/module_move
    module_ending
    module_engine
