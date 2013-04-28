@@ -21,4 +21,4 @@
 """
 Package for magic rules
 """
-from .factories import MagicFactory
+from .factories import SpellCastingFactory

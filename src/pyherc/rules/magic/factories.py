@@ -24,7 +24,7 @@ Spell casting related factories
 from pyherc.rules.factory import SubActionFactory
 from pyherc.aspects import logged
 
-class MagicFactory(SubActionFactory):
+class SpellCastingFactory(SubActionFactory):
     """
     Factory for creating spell casting actions
 

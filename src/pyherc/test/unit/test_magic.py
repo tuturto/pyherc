@@ -24,7 +24,7 @@ Module for magic related tests
 #pylint: disable=W0614
 from pyherc.test.builders import CharacterBuilder, HealBuilder, DamageBuilder
 from pyherc.test.builders import ActionFactoryBuilder
-from pyherc.rules.magic import MagicFactory
+from pyherc.rules.magic import SpellCastingFactory
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 from mockito import mock, when, any, verify
 
@@ -116,7 +116,7 @@ class TestSpellCasting:
         """
         Casting a spell should activate the action
         """
-        magic_factory = MagicFactory()
+        magic_factory = SpellCastingFactory()
         action = mock()
 
         when(magic_factory).get_action(any()).thenReturn(action)
