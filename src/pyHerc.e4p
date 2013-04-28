@@ -6,7 +6,7 @@
 <Project version="5.1">
   <Language>en</Language>
   <Hash>1b4023ded9782100fede1679fa75335aee997492</Hash>
-  <ProgLanguage mixed="0">Python2</ProgLanguage>
+  <ProgLanguage mixed="0">Python3</ProgLanguage>
   <ProjectType>Console</ProjectType>
   <Description></Description>
   <Version>0.1</Version>
