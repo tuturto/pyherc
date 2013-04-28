@@ -73,7 +73,6 @@ class CreatureGenerator():
             new_creature.add_effect_handle(new_handle)
 
         for spec in config.effects:
-            #TODO: temporary hack for techday demo
             new_effect = spec.clone()
             new_creature.add_effect(new_effect)
 
