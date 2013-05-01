@@ -19,16 +19,24 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for test builders
+Module for SpellFactoryBuilder
 """
-from .character import CharacterBuilder
-from .item import ItemBuilder
-from .effect import EffectBuilder, EffectHandleBuilder
-from .level import LevelBuilder
-from .action import ActionFactoryBuilder, DrinkFactoryBuilder
-from .action import SpellCastingFactoryBuilder
-from .poison import PoisonBuilder
-from .heal import HealBuilder
-from .rules_engine import RulesEngineBuilder
-from .damage import DamageBuilder
-from .spells import SpellFactoryBuilder
+from pyherc.data.magic import SpellFactory
+
+class SpellFactoryBuilder():
+    """
+    Builder for SpellFactory
+    
+    .. versionadded:: 0.9
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        pass
+    
+    def build(self):
+        """
+        Builds the factory
+        """
+        return SpellFactory()

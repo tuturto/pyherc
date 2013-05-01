@@ -19,36 +19,30 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Spell casting related factories
+Module for spell factory
 """
-from pyherc.rules.factory import SubActionFactory
-from pyherc.rules.magic.action import SpellCastingAction
 from pyherc.aspects import logged
 
-class SpellCastingFactory(SubActionFactory):
+class SpellFactory():
     """
-    Factory for creating spell casting actions
-
+    Factory for creating spells
+    
     .. versionadded:: 0.9
     """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        pass
+    
     @logged
-    def __init__(self, spell_factory):
+    def create_spell(self, spell_name):
         """
-        Constructor for this factory
-        """
-        self.spell_factory = spell_factory
-        self.action_type = 'spell casting'
-
-    @logged
-    def get_action(self, parameters):
-        """
-        Create a spell casting action
-
-        :param parameters: parameters used to control creation
-        :type parameters: SpellCastingParameters
-        """
-        spell = self.spell_factory.create_spell(parameters.spell_name)
+        Create a spell
         
-        return SpellCastingAction(caster = parameters.caster, 
-                                            direction = parameters.direction,
-                                            spell = spell)
+        :param spell_name: name of the spell
+        :type spell_name: string
+        :returns: ready to use spell
+        :rtype: Spell
+        """
+        pass

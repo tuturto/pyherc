@@ -7,6 +7,7 @@ pyherc.data
    :maxdepth: 2
    
    effects/package_effects
+   magic/package_magic
    module_character
    module_dungeon
    module_inventory

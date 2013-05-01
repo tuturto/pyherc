@@ -251,9 +251,29 @@ class SpellCastingFactoryBuilder():
         Default constructor
         """
         super(SpellCastingFactoryBuilder, self).__init__()
+        
+        self.spell_factory = mock()
+        self.use_real_spell_factory = False
+
+    def with_spell_factory(self, spell_factory):
+        """
+        Configure spell factory to use
+        """
+        if spell_factory == None:
+            self.use_real_spell_factory = True
+        else:
+            if hasattr(spell_factory, 'build'):
+                self.spell_factory = spell_factory.build()
+            else:
+                self.spell_factory = spell_factory
+        return self        
+       
 
     def build(self):
         """
         Builds spell casting factory
         """
-        return SpellCastingFactory()
+        if self.use_real_spell_factory:
+            self.spell_factory = None
+            
+        return SpellCastingFactory(spell_factory = self.spell_factory)

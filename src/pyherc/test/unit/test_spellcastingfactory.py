@@ -21,9 +21,12 @@
 """
 Module for SpellCastingFactory related tests
 """
-from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.rules import SpellCastingParameters
 
+from pyherc.test.builders import ActionFactoryBuilder, SpellFactoryBuilder
+from pyherc.test.builders import SpellCastingFactoryBuilder
+
+from mockito import mock, when, verify
 from hamcrest import assert_that, is_not
 
 class TestSpellCastingFactory:
@@ -51,3 +54,20 @@ class TestSpellCastingFactory:
                                                                   spell_name = 'healing wind'))
         
         assert_that(action, is_not(None))
+
+    def test_spell_is_created_with_a_factory(self):
+        """
+        When creating a spell casting action, spell should be created
+        """
+        spell_factory = SpellFactoryBuilder().build()
+        when(spell_factory).create_spell('healing wind').thenReturn(mock())
+        spellcasting_factory = (SpellCastingFactoryBuilder()
+                                            .with_spell_factory(spell_factory)
+                                            .build())
+        
+        spellcasting_factory.get_action(
+                                  SpellCastingParameters(self,
+                                                                  direction = 1, 
+                                                                  spell_name = 'healing wind'))
+        
+        verify(spell_factory).create_spell('healing wind')
