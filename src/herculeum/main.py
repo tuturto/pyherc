@@ -34,13 +34,13 @@ try:
     from herculeum.ui.gui import QtSurfaceManager
     import herculeum.ui.gui.resources
 except:
-    pass
+    print('Qt user interface is not available')
 
 try:
     from herculeum.ui.text import CursesUserInterface, CursesControlsConfiguration
     from herculeum.ui.text import CursesSurfaceManager
 except:
-    pass
+    print('Curses user interface is not available')
 
 if __name__ == "__main__":
 
