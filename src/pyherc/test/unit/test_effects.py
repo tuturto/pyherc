@@ -32,7 +32,7 @@ from pyherc.data.effects import EffectHandle
 from pyherc.rules.attack.action import AttackAction
 from pyherc.data import Character
 
-from pyherc.events import PoisonAddedEvent, Event
+from pyherc.events import PoisonAddedEvent
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder, ActionFactoryBuilder
 from pyherc.test.builders import DrinkFactoryBuilder

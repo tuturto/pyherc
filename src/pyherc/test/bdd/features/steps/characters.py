@@ -20,7 +20,7 @@
 
 from pyherc.data.effects import DamageModifier
 from pyherc.test.cutesy import Adventurer, Wizard, Goblin
-from pyherc.test.matchers import is_dead, is_not_in
+from pyherc.test.matchers import is_dead
 from pyherc.ai.pathfinding import a_star
 from hamcrest import assert_that #pylint: disable-msg=E0611
 from pyherc.test.bdd.features.helpers import default_context, observed

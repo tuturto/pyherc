@@ -21,7 +21,6 @@
 """
 Module for application level objects
 """
-import os.path
 from herculeum.config import Configuration
 from pyherc.data.model import Model
 import sys

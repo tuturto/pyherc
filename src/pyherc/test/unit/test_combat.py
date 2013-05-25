@@ -27,7 +27,7 @@ from pyherc.data import Model
 
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.action import AttackAction
-from pyherc.events import AttackNothingEvent, AttackHitEvent, AttackMissEvent
+from pyherc.events import AttackNothingEvent, AttackHitEvent
 
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ActionFactoryBuilder

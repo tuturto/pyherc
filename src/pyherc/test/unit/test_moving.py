@@ -25,7 +25,6 @@ Module for testing moving
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 from mockito import mock
 
-from pyherc.rules import MoveParameters
 from pyherc.rules.move.action import EscapeAction
 from pyherc.data import Portal
 from pyherc.test.builders import LevelBuilder
@@ -36,8 +35,6 @@ from pyherc.data.model import ESCAPED_DUNGEON
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.helpers import EventListener
 from pyherc.test.matchers import has_marked_for_redrawing
-
-import pyherc.rules.moving
 
 class TestEventDispatching():
     """

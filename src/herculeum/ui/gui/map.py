@@ -240,7 +240,6 @@ class PlayMapWidget(QWidget):
         scene.clear()
 
         self.current_level = model.player.level
-        size = self.current_level.get_size()
 
         for loc_x, column in enumerate(self.current_level.floor):
             for loc_y, tile in enumerate(column):
@@ -506,7 +505,6 @@ class PlayMapWidget(QWidget):
         :type key: int
         """
         player = self.model.player
-        level = player.level
         direction = self.move_key_map[key]
 
         if modifiers & Qt.ControlModifier:

@@ -45,4 +45,5 @@ class SpellFactory():
         :returns: ready to use spell
         :rtype: Spell
         """
+
         pass

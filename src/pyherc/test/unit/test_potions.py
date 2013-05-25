@@ -24,7 +24,6 @@ Module for item effect tests
 #pylint: disable=W0614
 from pyherc.rules.consume import DrinkFactory
 from pyherc.rules import ActionFactory
-from pyherc.data.effects import Heal
 from random import Random
 
 from pyherc.test.builders import CharacterBuilder

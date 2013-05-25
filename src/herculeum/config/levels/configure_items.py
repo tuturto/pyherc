@@ -22,7 +22,6 @@
 """
 module for configuring catacombs
 """
-from pyherc.generators import ItemConfigurations
 from pyherc.generators import ItemConfiguration, WeaponConfiguration
 from pyherc.generators import AmmunitionConfiguration
 from pyherc.generators import ArmourConfiguration
