@@ -31,3 +31,4 @@ from .inventory import PickUpEvent, DropEvent, EquipEvent, UnEquipEvent
 from .hitpoints import HitPointsChangedEvent
 from .damage import DamageAddedEvent, DamageTriggeredEvent, DamageEndedEvent
 from .perception import LoseFocusEvent, NoticeEvent
+from .error import ErrorEvent

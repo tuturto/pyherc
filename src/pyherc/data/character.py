@@ -24,7 +24,21 @@ Module for Character related classes
 from pyherc.aspects import logged
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 from pyherc.rules import InventoryParameters, SpellCastingParameters
-from pyherc.events import HitPointsChangedEvent
+from pyherc.events import HitPointsChangedEvent, ErrorEvent
+from decorator import decorator
+
+@decorator
+def guarded_action(wrapped_function, *args, **kwargs):
+    """
+    Function to guard against exceptions in action functions
+    """
+    try:
+        result = wrapped_function(*args, **kwargs)
+        return result
+    except Exception:
+        self = args[0]
+        self.tick = 10
+        self.raise_event(ErrorEvent(self))
 
 class Character():
     """
@@ -142,6 +156,7 @@ class Character():
         for listener in self.__update_listeners:
             listener.receive_update(event)
 
+    @guarded_action
     @logged
     def act(self, model, action_factory, rng):
         """
@@ -309,6 +324,7 @@ class Character():
         """
         self.location = location
 
+    @guarded_action
     @logged
     def execute_action(self, action_parameters, action_factory):
         """
@@ -340,6 +356,7 @@ class Character():
 
         return action
 
+    @guarded_action
     @logged
     def move(self, direction, action_factory):
         """
@@ -378,6 +395,7 @@ class Character():
                                                           movement_mode))
         return action.is_legal()
 
+    @guarded_action
     @logged
     def perform_attack(self, direction, action_factory, rng):
         """
@@ -424,6 +442,7 @@ class Character():
 
         action.execute()
 
+    @guarded_action
     @logged
     def drink(self, potion, action_factory):
         """
@@ -440,6 +459,7 @@ class Character():
                                                            potion))
         action.execute()
 
+    @guarded_action
     @logged
     def pick_up(self, item, action_factory):
         """
@@ -459,6 +479,7 @@ class Character():
                                                         'pick up'))
         action.execute()
 
+    @guarded_action
     @logged
     def drop_item(self, item, action_factory):
         """
@@ -477,6 +498,7 @@ class Character():
                                                     'drop'))
         action.execute()
 
+    @guarded_action
     @logged
     def equip(self, item, action_factory):
         """
@@ -495,6 +517,7 @@ class Character():
                                                     'equip'))
         action.execute()
 
+    @guarded_action
     @logged
     def unequip(self, item, action_factory):
         """
@@ -513,6 +536,7 @@ class Character():
                                                     'unequip'))
         action.execute()
 
+    @guarded_action
     @logged
     def cast(self, direction, spell_name, action_factory):
         """

@@ -98,7 +98,8 @@ class EventMessageWidget(QWidget):
                                     'drop',
                                     'damage triggered',
                                     'equip',
-                                    'unequip']
+                                    'unequip', 
+                                    'error']
 
     def set_point_of_view(self, character):
         """

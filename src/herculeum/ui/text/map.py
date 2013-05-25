@@ -267,7 +267,8 @@ class MapScreen():
                                     'equip',
                                     'unequip',
                                     'notice',
-                                    'lose focus']:
+                                    'lose focus', 
+                                    'error']:
             message = event.get_description(self.model.player)
             self.messages.append(message)
             if len(self.messages) > 2:
