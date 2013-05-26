@@ -10,10 +10,12 @@ Feature: Magic
        And Uglak is standing in room
        And Simon is standing away from Uglak
 
+  @wip
   Scenario: Magic missile
        When Simon casts magic missile on Uglak
        Then Uglak should be dead
 
+  @wip
   Scenario: Fireball
       Given Zhagh is Goblin
         And Zhag is almost dead
@@ -23,17 +25,20 @@ Feature: Magic
        Then Uglak should be dead
         And Zhag should be dead
 
+  @wip
   Scenario: Healing
       Given Simon is almost dead
        When Simon casts healing wind
        Then Simon should be in full health
 
+  @wip
   Scenario: Domain specialization
       Given Simon has Rune
        When Simon uses rune for fire domain
        Then Simon should have more fire spells
         And Rune should not be in inventory of Simon
 
+  @wip
   Scenario: Out of mana
       Given Simon has no mana left
        When Simon casts magic missile on Uglak
