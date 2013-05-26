@@ -22,7 +22,6 @@
 Classes for generating pillar rooms
 """
 
-from pyherc.generators.level.room.corridor import CorridorGenerator
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from random import Random
 from pyherc.aspects import logged

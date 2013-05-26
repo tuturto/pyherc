@@ -22,7 +22,6 @@
 AI routines for skeletons
 """
 
-import pyherc
 from pyherc.aspects import logged
 from pyherc.ai.pathfinding import a_star
 from pyherc.events import NoticeEvent, LoseFocusEvent

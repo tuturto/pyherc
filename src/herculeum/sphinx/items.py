@@ -22,14 +22,12 @@
 Module for item statistics
 """
 from docutils import nodes
-from docutils.parsers.rst import directives, Directive
+from docutils.parsers.rst import Directive
 from docutils.parsers.rst.directives.images import Image
 from docutils.parsers.rst.directives import unchanged
 from herculeum.sphinx.helpers import with_config, shutdown_application
 import os.path
-import re
 from PyQt4.QtGui import QImage, QPainter, QColor
-from PyQt4.QtCore import Qt
 
 class ItemDescription(nodes.General, nodes.Element):
     """
@@ -245,7 +243,6 @@ class ItemImageDirective(Image):
 
         surface_manager = config.surface_manager
         icon = surface_manager.get_icon(item.icon)
-        img = icon.toImage()
         new_image = QImage(32, 32, QImage.Format_ARGB32)
         new_image.fill(QColor(200, 200, 200))
         painter = QPainter(new_image)

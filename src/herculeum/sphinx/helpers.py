@@ -21,11 +21,8 @@
 """
 Module for helpers
 """
-import os.path
 from herculeum.config import Configuration
 from pyherc.data.model import Model
-import sys
-import logging
 import herculeum.config.levels
 from herculeum.ui.gui import QtControlsConfiguration, QtSurfaceManager
 from PyQt4.QtGui import QApplication

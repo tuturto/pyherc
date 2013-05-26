@@ -102,7 +102,6 @@ class BSPSection():
         """
         Override __str__ to print meaningful string representation
         """
-        str = ''
         if self.corner1 != None:
             if self.corner2 != None:
                 return self.corner1.__str__() + ':' + self.corner2.__str__()
