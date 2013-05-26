@@ -11,4 +11,4 @@ herculeum
    sphinx/package_sphinx
    test/package_test
    module_application
-   module_main
+   module_herc

@@ -1,6 +1,6 @@
-herculeum.main
+herculeum.herc
 **************
 
-.. automodule:: herculeum.main
+.. automodule:: herculeum.herc
     :members:
     :show-inheritance:
