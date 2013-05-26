@@ -27,47 +27,51 @@ def write_index(title):
     f.write('</title></head><frameset cols="20%, 80%">')
     f.write('<frame src="content.html" name="content"><frame src="pylint_global.html" name="report">')
     f.write('</frameset></html>')
-    
-print('running static analysis')
 
-os.chdir('doc/pyherc')
-files = glob.glob('*')
-for f in files:
-    os.remove(f)
+def main():
+    print('running static analysis')
 
-runner = Run(['--rcfile=../../pylint.rc', '../../src/pyherc'], exit = False)
-msg_status_pyherc =  runner.linter.msg_status
+    os.chdir('doc/pyherc')
+    files = glob.glob('*')
+    for f in files:
+        os.remove(f)
 
-files = glob.glob('*')
-write_content(files)
-write_index('pyherc')
+    runner = Run(['--rcfile=../../pylint.rc', '../../src/pyherc'], exit = False)
+    msg_status_pyherc =  runner.linter.msg_status
 
-os.chdir('../herculeum')
-files = glob.glob('*')
-for f in files:
-    os.remove(f)
+    files = glob.glob('*')
+    write_content(files)
+    write_index('pyherc')
 
-runner = Run(['--rcfile=../../pylint.rc', '../../src/herculeum'], exit = False)
-msg_status_herculeum =  runner.linter.msg_status
+    os.chdir('../herculeum')
+    files = glob.glob('*')
+    for f in files:
+        os.remove(f)
 
-files = glob.glob('*')
-write_content(files)
-write_index('herculeum')
+    runner = Run(['--rcfile=../../pylint.rc', '../../src/herculeum'], exit = False)
+    msg_status_herculeum =  runner.linter.msg_status
 
-result = msg_status_pyherc | msg_status_herculeum
+    files = glob.glob('*')
+    write_content(files)
+    write_index('herculeum')
 
-if result == 0:
-    print('no problems')
-else:
-    if result & 2 == 2:
-        print('Error detected')
-    if result & 4 == 4:
-        print('Warning detected')
-    if result & 8 == 8:
-        print('Need for refactoring detected')
-    if result & 16 == 16:
-        print('Some conventions are violated')
+    result = msg_status_pyherc | msg_status_herculeum
 
-os.chdir('..')
+    if result == 0:
+        print('no problems')
+    else:
+        if result & 2 == 2:
+            print('Error detected')
+        if result & 4 == 4:
+            print('Warning detected')
+        if result & 8 == 8:
+            print('Need for refactoring detected')
+        if result & 16 == 16:
+            print('Some conventions are violated')
+
+    os.chdir('..')
         
-sys.exit(result)
+    return result
+
+if __name__ == "__main__":    
+    sys.exit(main())

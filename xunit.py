@@ -62,21 +62,25 @@ def write_test_suite(xunit_file_name, caption, report_file_name):
     write_summary(report_file_name, caption, top_element)
     write_results(report_file_name, top_element)
 
-f = open('doc/test_results.html', 'w')
-write_header(f)
+def main():
+    f = open('doc/test_results.html', 'w')
+    write_header(f)
 
-files = os.listdir('./doc/behave/reports/')
-for file in files:
-    f.write('<pre>\n')
-    f2 = open('./doc/behave/reports/' + file)
-    for line in f2:
-        f.write(line)
-    f2.close()
-    f.write('</pre>\n')
+    files = os.listdir('./doc/behave/reports/')
+    for file in files:
+        f.write('<pre>\n')
+        f2 = open('./doc/behave/reports/' + file)
+        for line in f2:
+            f.write(line)
+        f2.close()
+        f.write('</pre>\n')
 
-f.write('<table border="0">\n')
+    f.write('<table border="0">\n')
 
-write_test_suite('nosetests.xml', 'Unit tests', f)
+    write_test_suite('nosetests.xml', 'Unit tests', f)
 
-f.write('</tr>\n')
-f.close()
+    f.write('</tr>\n')
+    f.close()
+
+if __name__ == "__main__":
+    main()
