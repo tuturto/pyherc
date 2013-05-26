@@ -27,7 +27,7 @@ from pyherc.test.builders import ActionFactoryBuilder, SpellFactoryBuilder
 from pyherc.test.builders import SpellCastingFactoryBuilder
 
 from mockito import mock, when, verify
-from hamcrest import assert_that, is_not
+from hamcrest import assert_that, is_not #pylint: disable-msg=E0611
 
 class TestSpellCastingFactory:
     """

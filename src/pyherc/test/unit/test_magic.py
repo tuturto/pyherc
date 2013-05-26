@@ -120,7 +120,7 @@ class TestSpellCasting:
         magic_factory = SpellCastingFactoryBuilder().build()
         action = mock()
 
-        when(magic_factory).get_action(any()).thenReturn(action)
+        when(magic_factory).get_action(any()).thenReturn(action) #pylint: disable-msg=E1103
         
         action_factory = (ActionFactoryBuilder()
                                     .with_spellcasting_factory(magic_factory)
