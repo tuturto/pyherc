@@ -30,11 +30,10 @@ from decorator import decorator
 @decorator
 def guarded_action(wrapped_function, *args, **kwargs):
     """
-    Function to guard against exceptions in action functions
+    Decorator to guard against exceptions in action functions
     """
     try:
-        result = wrapped_function(*args, **kwargs)
-        return result
+        return wrapped_function(*args, **kwargs)
     except Exception:
         self = args[0]
         self.tick = 10
