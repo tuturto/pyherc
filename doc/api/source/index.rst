@@ -20,6 +20,7 @@ Contents:
    events
    effects
    configuration
+   error_handling
    testing
    api_reference
 
