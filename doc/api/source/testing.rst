@@ -73,7 +73,7 @@ Results are also saved into a file that is placed to build/doctest/ directory
 There is handy shortcut in main directory that will execute both and also
 gather test coverage metrics from nosetests::
 
-  test.bat
+  suite.py
 
 Coverage report is placed in cover - directory.
 
