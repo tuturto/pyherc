@@ -6,6 +6,11 @@ an overview on how runtime errors are handled.
 
 General idea
 ============
+The general idea is to avoid littering the code with error handling and only
+place it where it actually makes difference. Another goal is to keep the game
+running as long as possible and avoid error dialogs. Instead of displaying
+an error dialog, errors are masked as magical or mystical events. There should
+be enough logs though to be able to investigate the situation later.
 
 Specific cases
 ==============
