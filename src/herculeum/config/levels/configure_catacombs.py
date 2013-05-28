@@ -52,15 +52,27 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     surface_manager = context.surface_manager
 
     floor_natural = 'natural floor'
-    floor_rock = surface_manager.add_icon('floor_rock', ':rock_floor.png', '.')
+    floor_rock = surface_manager.add_icon('floor_rock',
+                                          ':rock_floor.png',
+                                          '.')
 
-    wall_empty = surface_manager.add_icon('empty wall', ':transparent.png', None)
+    wall_empty = surface_manager.add_icon('empty wall',
+                                          ':transparent.png',
+                                          None)
     wall_natural = 'natural wall'
     wall_constructed = 'constructed wall'
-    wall_ground = surface_manager.add_icon('wall_ground', ':ground_wall.png', ' ')
-    wall_rock = surface_manager.add_icon('wall_rock', ':rock_wall.png', '#')
-    stairs_down = surface_manager.add_icon('stairs_down', ':stairs_down.png', '>')
-    stairs_up = surface_manager.add_icon('stairs_up', ':stairs_up.png', '<')
+    wall_ground = surface_manager.add_icon('wall_ground',
+                                           ':ground_wall.png',
+                                           ' ')
+    wall_rock = surface_manager.add_icon('wall_rock', 
+                                         ':rock_wall.png',
+                                         '#')
+    stairs_down = surface_manager.add_icon('stairs_down',
+                                           ':stairs_down.png',
+                                           '>')
+    stairs_up = surface_manager.add_icon('stairs_up',
+                                         ':stairs_up.png',
+                                         '<')
 
     room_generators = [CatacombsGenerator(floor_natural,
                                            wall_empty,
@@ -202,7 +214,11 @@ def init_creatures(context):
                                         mind = 2,
                                         hp = 2,
                                         speed = 2,
-                                        icons = surface_manager.add_icon('rat', ':mouse.png', 'r', ['yellow', 'dim']),
+                                        icons = surface_manager.add_icon(
+                                                        'rat',
+                                                        ':mouse.png', 
+                                                        'r', 
+                                                        ['yellow', 'dim']),
                                         attack = 1,
                                         ai = FlockingHerbivore))
 
@@ -212,7 +228,11 @@ def init_creatures(context):
                                         mind = 0,
                                         hp = 4,
                                         speed = 3,
-                                        icons = surface_manager.add_icon('fire beetle', ':scarab-beetle.png', 'a', ['red']),
+                                        icons = surface_manager.add_icon(
+                                                        'fire beetle',
+                                                        ':scarab-beetle.png',
+                                                        'a',
+                                                        ['red']),
                                         attack = 2,
                                         ai = FlockingHerbivore))
 
@@ -260,7 +280,11 @@ def init_creatures(context):
                                         mind = 0,
                                         hp = 8,
                                         speed = 4,
-                                        icons = surface_manager.add_icon('skeleton warrior', ':blade-bite.png', 'Z', ['white', 'bold']),
+                                        icons = surface_manager.add_icon(
+                                                        'skeleton warrior',
+                                                        ':blade-bite.png',
+                                                        'Z',
+                                                        ['white', 'bold']),
                                         attack = 1,
                                         ai = SkeletonWarriorAI,
                                         inventory = skeleton_inventory,
