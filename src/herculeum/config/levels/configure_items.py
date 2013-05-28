@@ -41,7 +41,11 @@ def init_items(context):
                   ItemConfiguration(name = 'apple',
                                     cost = 1,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('apple', ':apple.png', '%', ['red'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'apple',
+                                                            ':apple.png',
+                                                            '%', 
+                                                            ['red'])],
                                     types = ['food'],
                                     rarity = 'common'))
 
@@ -50,7 +54,11 @@ def init_items(context):
                                     description = 'Light and simple weapon that does not do much damage. Small size allows skilled wielder to do critical damage easily though.',
                                     cost = 10,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('dagger', ':dagger.png', ')', ['dim', 'cyan'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'dagger',
+                                                            ':dagger.png',
+                                                            ')',
+                                                            ['dim', 'cyan'])],
                                     types = ['weapon',
                                                'light weapon',
                                                'melee',
@@ -67,7 +75,11 @@ def init_items(context):
                                     description = 'Staple tool for adventurers and soldiers alike. Swords do more damage than daggers, but are harder to use effectively.',
                                     cost = 20,
                                     weight = 4,
-                                    icons = [surface_manager.add_icon('sword', ':stiletto.png', ')', ['dim', 'cyan'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'sword',
+                                                            ':stiletto.png',
+                                                            ')',
+                                                            ['dim', 'cyan'])],
                                     types = ['weapon',
                                              'one-handed',
                                              'melee',
@@ -85,7 +97,11 @@ def init_items(context):
                                     description = 'Heavy battle axes can cut through flesh and crush through bones. Not very common weapon, because effective use requires years of training.',
                                     cost = 20,
                                     weight = 4,
-                                    icons = [surface_manager.add_icon('axe', ':battle-axe.png', ')', ['dim', 'cyan'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'axe',
+                                                            ':battle-axe.png',
+                                                            ')',
+                                                            ['dim', 'cyan'])],
                                     types = ['weapon',
                                              'two-handed',
                                              'melee',
@@ -103,7 +119,11 @@ def init_items(context):
                                     description = 'Simple and easy to use weapon, that can be used effectively with one hand.',
                                     cost = 6,
                                     weight = 4,
-                                    icons = [surface_manager.add_icon('club', ':mace.png', ')', ['dim', 'cyan'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'club',
+                                                            ':mace.png',
+                                                            ')',
+                                                            ['dim', 'cyan'])],
                                     types = ['weapon',
                                              'one-handed',
                                              'melee',
@@ -120,7 +140,11 @@ def init_items(context):
                                     description = 'Heavy two-handed weapon that crushes through but the strongest defences. Rare sight in the battle field, because of the huge weight.',
                                     cost = 50,
                                     weight = 4,
-                                    icons = [surface_manager.add_icon('warhammer', ':gavel.png', ')', ['dim', 'cyan'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'warhammer',
+                                                            ':gavel.png',
+                                                            ')',
+                                                            ['dim', 'cyan'])],
                                     types = ['weapon',
                                              'two-handed',
                                              'melee',
@@ -137,7 +161,11 @@ def init_items(context):
                                     description = 'One handed piercing weapon that can be devastating in hands of skilled user.',
                                     cost = 25,
                                     weight = 4,
-                                    icons = [surface_manager.add_icon('spear', ':barbed-spear.png', ')', ['dim', 'cyan'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'spear',
+                                                            ':barbed-spear.png',
+                                                            ')',
+                                                            ['dim', 'cyan'])],
                                     types = ['weapon',
                                              'one-handed',
                                              'melee',
@@ -154,7 +182,11 @@ def init_items(context):
                                     description = 'Weapon of choice for archeologists and vampire hunters. Not particularly strong, but very versatile.',
                                     cost = 25,
                                     weight = 4,
-                                    icons = [surface_manager.add_icon('whip', ':whip.png', ')', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'whip',
+                                                            ':whip.png',
+                                                            ')',
+                                                            ['dim', 'yellow'])],
                                     types = ['weapon',
                                              'one-handed',
                                              'melee',
@@ -171,7 +203,11 @@ def init_items(context):
                                     description = 'Farming implement repurposed on the battle field. Light and common weapon that requires very specifically trained user.',
                                     cost = 6,
                                     weight = 4,
-                                    icons = [surface_manager.add_icon('sickle', ':scythe.png', ')', ['dim', 'cyan'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'sickle',
+                                                            ':scythe.png',
+                                                            ')',
+                                                            ['dim', 'cyan'])],
                                     types = ['weapon',
                                              'light weapon',
                                              'melee',
@@ -188,7 +224,11 @@ def init_items(context):
                                     description = 'Spiked club, guaranteed to pierce through armours and crush through bones. Difficult to use weapon that requires years of practice.',
                                     cost = 40,
                                     weight = 4,
-                                    icons = [surface_manager.add_icon('morning star', ':spiked-mace.png', ')', ['dim', 'cyan'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'morning star',
+                                                            ':spiked-mace.png',
+                                                            ')',
+                                                            ['dim', 'cyan'])],
                                     types = ['weapon',
                                              'one-handed',
                                              'melee',
@@ -205,7 +245,11 @@ def init_items(context):
                                     description = 'Short bow, built from laminated bones and wood. Perfect for ranged combat.',
                                     cost = 10,
                                     weight = 3,
-                                    icons = [surface_manager.add_icon('bow', ':bow.png', ')', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'bow',
+                                                            ':bow.png',
+                                                            ')',
+                                                            ['dim', 'yellow'])],
                                     types = ['weapon',
                                              'two-handed',
                                              'ranged',
@@ -222,7 +266,11 @@ def init_items(context):
                                     description = 'Wooden arrows tipped with metal head.',
                                     cost = 1,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('arrows', ':arrows.png', ')', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'arrows',
+                                                            ':arrows.png',
+                                                            ')',
+                                                            ['dim', 'yellow'])],
                                     types = ['ammunition'],
                                     rarity = 'uncommon',
                                     ammunition_configuration = AmmunitionConfiguration(
@@ -236,7 +284,11 @@ def init_items(context):
                                     description = 'Wooden arrows tipped with metal head that have cutting edge.',
                                     cost = 1,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('arrows', ':arrows.png', ')', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'arrows',
+                                                            ':arrows.png',
+                                                            ')',
+                                                            ['dim', 'yellow'])],
                                     types = ['ammunition'],
                                     rarity = 'uncommon',
                                     ammunition_configuration = AmmunitionConfiguration(
@@ -251,7 +303,11 @@ def init_items(context):
                                     description = 'Wooden arrows with wide end, used to cause blunt trauma.',
                                     cost = 1,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('arrows', ':arrows.png', ')', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'arrows',
+                                                            ':arrows.png',
+                                                            ')',
+                                                            ['dim', 'yellow'])],
                                     types = ['ammunition'],
                                     rarity = 'uncommon',
                                     ammunition_configuration = AmmunitionConfiguration(
@@ -266,7 +322,11 @@ def init_items(context):
                                     description = 'Simple robes are favoured by spell casters. They do not hinder magical abilities and strong wizards are more than capable of deflecting attacks anyway.',
                                     cost = 5,
                                     weight = 4,
-                                    icons = [surface_manager.add_icon('robes', ':robes.png', '[', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'robes',
+                                                            ':robes.png',
+                                                            '[',
+                                                            ['dim', 'yellow'])],
                                     types = ['armour'],
                                     rarity = 'common',
                                     armour_configuration = ArmourConfiguration(
@@ -277,7 +337,11 @@ def init_items(context):
                                     description = 'Armour made of hardened leather. While it offers only meager protection, it allows the wearer to move very swiftly.',
                                     cost = 10,
                                     weight = 6,
-                                    icons = [surface_manager.add_icon('leather armour', ':leather_armour.png', '[', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'leather armour',
+                                                            ':leather_armour.png',
+                                                            '[',
+                                                            ['dim', 'yellow'])],
                                     types = ['armour'],
                                     rarity = 'common',
                                     armour_configuration = ArmourConfiguration(
@@ -288,7 +352,11 @@ def init_items(context):
                                     description = 'Armour made of countless interlocking metal rings. Somewhat heavier than leather armour.',
                                     cost = 20,
                                     weight = 12,
-                                    icons = [surface_manager.add_icon('chainmail', ':chainmail.png', '[', ['dim', 'cyan'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'chainmail',
+                                                            ':chainmail.png',
+                                                            '[',
+                                                            ['dim', 'cyan'])],
                                     types = ['armour'],
                                     rarity = 'uncommon',
                                     armour_configuration = ArmourConfiguration(
@@ -299,7 +367,11 @@ def init_items(context):
                                     description = 'Scale mail is made of interlocking scales, in a similar manner to chainmail. It offers better protection, while being heavier and harder to move around with.',
                                     cost = 25,
                                     weight = 12,
-                                    icons = [surface_manager.add_icon('scale mail', ':scale_mail.png', '[', ['dim', 'cyan'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'scale mail',
+                                                            ':scale_mail.png',
+                                                            '[',
+                                                            ['dim', 'cyan'])],
                                     types = ['armour'],
                                     rarity = 'uncommon',
                                     armour_configuration = ArmourConfiguration(
@@ -310,7 +382,11 @@ def init_items(context):
                                     description = 'Ultimate solution for protection. Heavy plates cover wearer from head to toe, offering great protection against attacks.',
                                     cost = 50,
                                     weight = 4,
-                                    icons = [surface_manager.add_icon('plate mail', ':plate_mail.png', '[', ['dim', 'cyan'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'plate mail',
+                                                            ':plate_mail.png',
+                                                            '[',
+                                                            ['dim', 'cyan'])],
                                     types = ['armour'],
                                     rarity = 'rare',
                                     armour_configuration = ArmourConfiguration(
@@ -320,7 +396,11 @@ def init_items(context):
                   ItemConfiguration(name = 'healing potion',
                                     cost = 150,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('plain_potion', ':plain_potion.png', '!', ['red'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'plain_potion',
+                                                            ':plain_potion.png',
+                                                            '!',
+                                                            ['red'])],
                                     types = ['potion'],
                                     rarity = 'rare',
                                     effect_handles = [EffectHandle(
@@ -333,7 +413,11 @@ def init_items(context):
                                     description = 'In crypt under Herculeum, I encountered giant spiders. These arachnids have poisoned bite and could easily take down unprepared adventurer. Dealing with them from distance seems to be the best approach, if cramped surroundings just allow for it.',
                                     cost = 100,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png', '?', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'tied-scroll',
+                                                            ':tied-scroll.png',
+                                                            '?',
+                                                            ['dim', 'yellow'])],
                                     types = ['tome'],
                                     rarity = 'rare'))
     config.append(
@@ -341,7 +425,11 @@ def init_items(context):
                                     description = 'Patrolling skeleton warriors have been easy to avoid so far. They patrol mindlessly around the catacombs and only turn to pursue if I approach too close. They lose interest soon after I retreat and return to their endless patrol.',
                                     cost = 100,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png', '?', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'tied-scroll',
+                                                            ':tied-scroll.png',
+                                                            '?',
+                                                            ['dim', 'yellow'])],
                                     types = ['tome'],
                                     rarity = 'rare'))
     config.append(
@@ -349,7 +437,11 @@ def init_items(context):
                                     description = 'In the ancient times, old evil ruled over the land and terrorized everything. Kingdoms were drowned in fire and destroyed by demon, Crimson Jaw. Only when seven sages combined their powers, they could overcome him. But Crimson Jaw was too strong to be destroyed completely and his spirit had to be bound and trapped. Crimson Lair is his final resting place, where seals of seven sages keep him imprisoned.',
                                     cost = 100,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png', '?', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'tied-scroll',
+                                                            ':tied-scroll.png',
+                                                            '?',
+                                                            ['dim', 'yellow'])],
                                     types = ['tome'],
                                     rarity = 'rare'))
     config.append(
@@ -357,7 +449,11 @@ def init_items(context):
                                     description = 'The whip of Ashmque is a horrendous weapon. Thong of the whip is made of blackened links of steel and an eternal flame is burning around it. Only the strongest of men can even try to wield it because of the heavy construction. It is said that the whip of Ashmque was forged at the dawn of ages by demon smith Ashmque.',
                                     cost = 100,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png', '?', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'tied-scroll',
+                                                            ':tied-scroll.png',
+                                                            '?',
+                                                            ['dim', 'yellow'])],
                                     types = ['tome'],
                                     rarity = 'rare'))
     config.append(
@@ -365,7 +461,11 @@ def init_items(context):
                                     description = 'Prince Razel was obsessed with alchemy and built a complex laboratory under city of Herculeum. Untold experiments were conducted there and it is rumoured that those experiments ultimately caused his death.',
                                     cost = 100,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png', '?', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'tied-scroll',
+                                                            ':tied-scroll.png',
+                                                            '?',
+                                                            ['dim', 'yellow'])],
                                     types = ['tome'],
                                     rarity = 'rare'))
     config.append(
@@ -373,7 +473,11 @@ def init_items(context):
                                     description = 'Tomb of Prince Razel is rumoured to have been filled with traps and experiments he conducted while he was still living. The exact location of the tomb has been lost in the mists of time, but I think it has to be near his hidden laboratory.',
                                     cost = 100,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png', '?', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'tied-scroll',
+                                                            ':tied-scroll.png',
+                                                            '?',
+                                                            ['dim', 'yellow'])],
                                     types = ['tome'],
                                     rarity = 'rare'))
     config.append(
@@ -381,7 +485,11 @@ def init_items(context):
                                     description = 'Prince Razel\'s greatest experiment was a staff that could shoot fire on command. He never revealed how he created it and guarded the staff jealously.',
                                     cost = 100,
                                     weight = 1,
-                                    icons = [surface_manager.add_icon('tied-scroll', ':tied-scroll.png', '?', ['dim', 'yellow'])],
+                                    icons = [surface_manager.add_icon(
+                                                            'tied-scroll',
+                                                            ':tied-scroll.png',
+                                                            '?',
+                                                            ['dim', 'yellow'])],
                                     types = ['tome'],
                                     rarity = 'rare'))
     return config
