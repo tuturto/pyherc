@@ -52,6 +52,11 @@ class PlayMapWindow(QWidget):
         self.rng = rng
         self.current_level = None
         self.configuration = configuration
+        
+        self.hit_points_widget = None
+        self.message_widget = None
+        self.map_widget = None
+        self.effects_widget = None
 
         self.__set_layout(model, surface_manager, action_factory, rng,
                           rules_engine, configuration)
@@ -137,6 +142,9 @@ class PlayMapWidget(QWidget):
         self.rng = rng
         self.rules_engine = rules_engine
         self.configuration = configuration
+        
+        self.current_level = None
+        self.view = None
 
         self.animations = []
         self.move_controller = MoveController(action_factory = action_factory,
@@ -258,13 +266,13 @@ class PlayMapWidget(QWidget):
                 scene.addItem(new_glyph)
 
         for portal in self.current_level.portals:
-                self.add_glyph(portal, scene, 10)
+            self.add_glyph(portal, scene, 10)
 
         for item in self.current_level.items:
-                self.add_glyph(item, scene, 20)
+            self.add_glyph(item, scene, 20)
 
         for creature in self.current_level.creatures:
-                self.add_glyph(creature, scene, 30)
+            self.add_glyph(creature, scene, 30)
 
     def add_glyph(self, entity, scene, z_order):
         """
@@ -337,7 +345,7 @@ class PlayMapWidget(QWidget):
             self.show_damage_counter(event.target.location,
                                      event.healing,
                                      'blue',
-                                     (0, 16));
+                                     (0, 16))
         elif event.event_type == 'notice':
             self.show_status_counter(event.character.location,
                                      '!',
@@ -454,7 +462,7 @@ class PlayMapWidget(QWidget):
                 self.__construct_scene(self.model, self.scene)
             self.__center_view_on_character(self.model.player)
 
-    def eventFilter(self, qobject, event):
+    def eventFilter(self, qobject, event): #pylint: disable-msg=C0103
         """
         Filter events
 
@@ -470,7 +478,7 @@ class PlayMapWidget(QWidget):
 
         return result
 
-    def keyPressEvent(self, event):
+    def keyPressEvent(self, event): #pylint: disable-msg=C0103
         """
         Handle key events
         """

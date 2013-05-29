@@ -23,24 +23,18 @@ Module for testing inventory widget
 """
 from herculeum.ui.gui.inventory import InventoryWidget
 
-from herculeum.ui.gui.startgame import StartGameWidget
-from pyherc.generators import CreatureConfiguration, CreatureGenerator
 from herculeum.ui.gui import QtControlsConfiguration, QtSurfaceManager
 from pyherc.test.builders import CharacterBuilder, ActionFactoryBuilder
 from pyherc.test.builders import LevelBuilder, ItemBuilder
 
 from PyQt4.QtTest import QTest
-from PyQt4.QtGui import QApplication, QPixmap
-from PyQt4.QtCore import Qt
+from PyQt4.QtGui import QPixmap
 
-from mockito import mock, when, any, verify
+from mockito import mock, when, any
 from hamcrest import assert_that, is_not, contains  #pylint: disable-msg=E0611
-from satin import has_label, satin_suite, all_widgets, widget
-from herculeum.test.matchers import slot_with_item
-from random import Random
+from satin import satin_suite
 
-from PyQt4.QtCore import SIGNAL, Qt, QFile
-import time
+from PyQt4.QtCore import Qt
 
 @satin_suite
 class TestInventory():
@@ -52,6 +46,13 @@ class TestInventory():
         Default constructor
         """
         super(TestInventory, self).__init__()
+        
+        self.surface_manager = None
+        self.level = None
+        self.character = None
+        self.item = None
+        self.action_factory = None
+        self.config = None
 
     def setup(self):
         """
