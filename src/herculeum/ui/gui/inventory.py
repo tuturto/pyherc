@@ -225,12 +225,9 @@ class CharacterInventoryWidget(QWidget):
 
         self.setLayout(main_layout)
 
-    def show_character(self, character):
+    def show_character(self):
         """
         Show character
-
-        :param character: character to show
-        :type character: Character
         """
         self.weapon_slot.set_item(self.character.inventory.weapon)
         self.armour_slot.set_item(self.character.inventory.armour)
@@ -278,7 +275,7 @@ class CharacterInventoryWidget(QWidget):
             elif key in self.config.action_b:
                 self.ItemActionB.emit(item)
 
-    def keyPressEvent(self, event):
+    def keyPressEvent(self, event): #pylint: disable-msg=C0103
         """
         Handle keyboard events
         """
@@ -313,6 +310,8 @@ class ItemDescriptionWidget(QWidget):
         """
         super(ItemDescriptionWidget, self).__init__(parent)
         self.setFocusPolicy(Qt.NoFocus)
+
+        self.text_edit = None
 
         self.__set_layout()
 
@@ -419,7 +418,7 @@ class InventoryWidget(QWidget):
         self.items_carried.show_items(self.character.inventory)
         items = self.character.level.get_items_at(self.character.location)
         self.items_in_ground.show_items(items)
-        self.character_inventory.show_character(self.character)
+        self.character_inventory.show_character()
 
     def on_item_focused(self, item):
         """
@@ -430,7 +429,7 @@ class InventoryWidget(QWidget):
         description = self.inventory_controller.item_description(item)
         self.item_description.set_text(description)
 
-    def focusNextPrevChild(self, next):
+    def focusNextPrevChild(self, next): #pylint: disable-msg=C0103
         """
         Handle moving focus around the widget
 
@@ -519,6 +518,10 @@ class ItemBox(QWidget):
         self.surface_manager = surface_manager
         self.item_width = width
         self.item_height = height
+        
+        self.rows = None
+        self.items = None
+        self.grid_layout = None
 
         self.__set_layout(width, height)
 
@@ -599,7 +602,7 @@ class ItemBox(QWidget):
 
         self.setLayout(self.grid_layout)
 
-    def keyPressEvent(self, event):
+    def keyPressEvent(self, event): #pylint: disable-msg=C0103
         """
         Handle keyboard events
 
@@ -738,6 +741,10 @@ class ItemGlyph(QWidget):
         self.surface_manager = surface_manager
         self.default_icon = default_icon
 
+        self.grid_layout = None
+        self.display = None
+        self.icon = None
+
         self.setFocusPolicy(Qt.StrongFocus)
 
         self.__set_layout()
@@ -764,7 +771,7 @@ class ItemGlyph(QWidget):
         self.grid_layout.addWidget(self.display)
         self.setLayout(self.grid_layout)
 
-    def focusInEvent(self, event):
+    def focusInEvent(self, event): #pylint: disable-msg=C0103
         """
         Handle focus in
 
