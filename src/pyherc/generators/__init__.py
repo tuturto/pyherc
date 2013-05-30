@@ -30,3 +30,4 @@ from .creature import CreatureGenerator
 from .creature import CreatureConfiguration
 from .creature import InventoryConfiguration
 from .effects import EffectsFactory
+from .spells import SpellGenerator

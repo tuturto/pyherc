@@ -21,4 +21,4 @@
 """
 Module for magical spells
 """
-from .spellfactory import SpellFactory
+pass

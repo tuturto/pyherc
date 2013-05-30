@@ -23,7 +23,7 @@ Module for SpellCastingFactory related tests
 """
 from pyherc.rules import SpellCastingParameters
 
-from pyherc.test.builders import ActionFactoryBuilder, SpellFactoryBuilder
+from pyherc.test.builders import ActionFactoryBuilder, SpellGeneratorBuilder
 from pyherc.test.builders import SpellCastingFactoryBuilder
 
 from mockito import mock, when, verify
@@ -59,7 +59,7 @@ class TestSpellCastingFactory:
         """
         When creating a spell casting action, spell should be created
         """
-        spell_factory = SpellFactoryBuilder().build()
+        spell_factory = SpellGeneratorBuilder().build()
         when(spell_factory).create_spell('healing wind').thenReturn(mock())
         spellcasting_factory = (SpellCastingFactoryBuilder()
                                             .with_spell_factory(spell_factory)

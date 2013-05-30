@@ -23,7 +23,7 @@ Module for spell factory
 """
 from pyherc.aspects import logged
 
-class SpellFactory():
+class SpellGenerator():
     """
     Factory for creating spells
     

@@ -21,9 +21,9 @@
 """
 Module for SpellFactoryBuilder
 """
-from pyherc.data.magic import SpellFactory
+from pyherc.generators import SpellGenerator
 
-class SpellFactoryBuilder():
+class SpellGeneratorBuilder():
     """
     Builder for SpellFactory
     
@@ -39,4 +39,4 @@ class SpellFactoryBuilder():
         """
         Builds the factory
         """
-        return SpellFactory()
+        return SpellGenerator()
