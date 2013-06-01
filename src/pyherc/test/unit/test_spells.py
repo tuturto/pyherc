@@ -25,7 +25,7 @@ Tests for magical spells
 from pyherc.test.builders import LevelBuilder, CharacterBuilder
 from pyherc.test.builders import SpellGeneratorBuilder
 
-from hamcrest import assert_that, is_in
+from hamcrest import assert_that, is_in #pylint: disable-msg=E0611
 
 class TestTargetingSingle():
     """

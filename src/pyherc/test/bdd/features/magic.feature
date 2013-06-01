@@ -18,12 +18,12 @@ Feature: Magic
   @wip
   Scenario: Fireball
       Given Zhagh is Goblin
-        And Zhag is almost dead
-        And Zhag is next to Uglak
-        And Simon is standing away from Zhag
-       When Simon casts fireball on Zhag
+        And Zhagh is almost dead
+        And Zhagh is next to Uglak
+        And Simon is standing away from Zhagh
+       When Simon casts fireball on Zhagh
        Then Uglak should be dead
-        And Zhag should be dead
+        And Zhagh should be dead
 
   @wip
   Scenario: Healing
