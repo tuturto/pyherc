@@ -31,3 +31,4 @@ from .dictionary import carrying
 from .dictionary import place, middle_of, Level
 from .dictionary import make, drop, hit
 from .dictionary import has_dropped
+from .dictionary import cast_spell

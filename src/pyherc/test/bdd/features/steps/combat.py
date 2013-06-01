@@ -105,3 +105,9 @@ def impl(context, damage_amount):
     realised_damage = hp_event.old_hit_points - hp_event.new_hit_points
 
     assert_that(realised_damage, is_(equal_to(damage)))
+
+@then('{character_name} should be in full health')
+def impl(context, character_name):
+    character = get_character(context, character_name)
+
+    assert_that(character.hit_points, equal_to(character.max_hp))

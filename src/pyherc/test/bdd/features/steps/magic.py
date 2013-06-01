@@ -18,11 +18,15 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-@when('{caster} casts {spell_and_target}')
-def impl(context, caster, spell_and_target):
+from pyherc.test.bdd.features.helpers import get_character
+from pyherc.test.cutesy import make, cast_spell
+
+@when('{caster_name} casts {spell_and_target}')
+def impl(context, caster_name, spell_and_target):
     # Simon casts magic missile on Uglak
     # Simon casts healing wind
-    
-    
-    assert False
+    caster = get_character(context, caster_name)
+    spell = spell_and_target
+
+    make(caster, cast_spell(spell_name = spell))
 

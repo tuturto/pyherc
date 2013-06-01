@@ -60,4 +60,4 @@ class SpellCastingAction():
         :returns: True if casting spell is possible, false otherwise
         :rtype: Boolean
         """
-        return False
+        return True

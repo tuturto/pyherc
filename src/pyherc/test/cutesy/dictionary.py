@@ -298,6 +298,53 @@ def make(actor, action):
     """
     action(actor)
 
+class CastSpell():
+    """
+    Class representing casting a spell
+    """
+    def __init__(self, spell_name):
+        """
+        Default constructor
+        
+        :param spell_name: name of the spell to cast
+        :type spell_name: string
+        """
+        super(CastSpell, self).__init__()
+        self.spell_name = spell_name
+    
+    def __call__(self, caster):
+        """
+        Performs the casting
+        
+        :param caster: character doing the casting
+        :type caster: Character
+        """
+        caster.old_values = {}
+        caster.old_values['hit points'] = caster.hit_points
+
+        action_factory = (ActionFactoryBuilder()
+                                    .with_move_factory()
+                                    .with_attack_factory()
+                                    .with_drink_factory()
+                                    .with_inventory_factory()
+                                    .with_dying_rules()
+                                    .with_spellcasting_factory()
+                                    .build())
+
+        caster.cast(direction = 1,
+                    spell_name = self.spell_name, 
+                    action_factory = action_factory)
+
+def cast_spell(spell_name):
+    """
+    Cast a spell
+
+    :param spell_name: name of the spell to cast
+    """
+    action = CastSpell(spell_name)
+    return action
+
+
 class Hit():
     """
     Class representing a hit in unarmed combat
