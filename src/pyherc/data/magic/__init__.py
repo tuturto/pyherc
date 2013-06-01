@@ -21,4 +21,5 @@
 """
 Module for magical spells
 """
-pass
+
+from .spell import Spell

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project pyHerc -->
-<!-- Saved: 2013-05-25, 20:36:55 -->
+<!-- Saved: 2013-06-01, 08:39:58 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="5.1">
   <Language>en</Language>
@@ -256,11 +256,13 @@
     <Source>pyherc/rules/magic/factories.py</Source>
     <Source>pyherc/test/unit/test_spellcastingfactory.py</Source>
     <Source>pyherc/rules/magic/action.py</Source>
-    <Source>pyherc/data/magic/__init__.py</Source>
-    <Source>pyherc/data/magic/spellfactory.py</Source>
     <Source>pyherc/test/builders/spells.py</Source>
     <Source>pyherc/events/error.py</Source>
     <Source>herculeum/herc.py</Source>
+    <Source>pyherc/generators/spells.py</Source>
+    <Source>pyherc/data/magic/__init__.py</Source>
+    <Source>pyherc/test/unit/test_spells.py</Source>
+    <Source>pyherc/data/magic/spell.py</Source>
   </Sources>
   <Forms/>
   <Translations/>

@@ -19,38 +19,18 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for spell factory
+Module for spell objects
 """
-from pyherc.aspects import logged
 
-from pyherc.data.magic import Spell
-
-class SpellGenerator():
+class Spell():
     """
-    Factory for creating spells
+    Class to represent spells
     
     .. versionadded:: 0.9
     """
-    @logged
+    
     def __init__(self):
         """
         Default constructor
         """
-        pass
-    
-    @logged
-    def create_spell(self, spell_name, target):
-        """
-        Create a spell
-        
-        :param spell_name: name of the spell
-        :type spell_name: string
-        :param target: target of the spell
-        :type target: Character
-        :returns: ready to use spell
-        :rtype: Spell
-        """
-        new_spell = Spell()
-        new_spell.target.append(target)
-
-        return new_spell
+        self.target = []

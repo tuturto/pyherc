@@ -19,38 +19,39 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for spell factory
+Tests for magical spells
 """
-from pyherc.aspects import logged
 
-from pyherc.data.magic import Spell
+from pyherc.test.builders import LevelBuilder, CharacterBuilder
+from pyherc.test.builders import SpellGeneratorBuilder
 
-class SpellGenerator():
+from hamcrest import assert_that, is_in
+
+class TestTargetingSingle():
     """
-    Factory for creating spells
-    
-    .. versionadded:: 0.9
+    Tests for spells targeting single character
     """
-    @logged
     def __init__(self):
         """
         Default constructor
         """
         pass
     
-    @logged
-    def create_spell(self, spell_name, target):
+    def test_target_single(self):
         """
-        Create a spell
+        Targeting a single character should be possible
+        """
+        level = LevelBuilder().build()
         
-        :param spell_name: name of the spell
-        :type spell_name: string
-        :param target: target of the spell
-        :type target: Character
-        :returns: ready to use spell
-        :rtype: Spell
-        """
-        new_spell = Spell()
-        new_spell.target.append(target)
+        character = (CharacterBuilder()
+                        .with_level(level)
+                        .with_location((5, 5))
+                        .build())
 
-        return new_spell
+        spell_generator = SpellGeneratorBuilder().build()
+
+        spell = spell_generator.create_spell(spell_name = 'healing wind', 
+                                             target = character)
+
+        assert_that(character, is_in(spell.target))
+        
