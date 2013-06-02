@@ -22,6 +22,7 @@
 Module for SpellFactoryBuilder
 """
 from pyherc.generators import SpellGenerator
+from pyherc.data.magic import Spell
 
 class SpellGeneratorBuilder():
     """
@@ -40,3 +41,57 @@ class SpellGeneratorBuilder():
         Builds the factory
         """
         return SpellGenerator()
+
+class SpellBuilder():
+    """
+    Builder for single spells
+
+    .. versionadded:: 0.9
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.handles = []
+        self.targets = []
+
+    def with_effect_handle(self, handle):
+        """
+        Configure spell to use an effect handle
+
+        :param handle: effect handle to add
+        :type handle: EffectHandle
+
+        .. note:: Can be called multiple times
+        """
+        self.handles.append(handle)
+        return self
+
+    def with_target(self, target):
+        """
+        Configure target of the spell
+
+        :param target: target of the spell
+        :type target: Character
+
+        .. note:: Can be called multiple times
+        """
+        self.targets.append(target)
+        return self
+
+    def build(self):
+        """
+        Builds a spell
+
+        :returns: a spell
+        :rtype: Spell
+        """
+        spell = Spell()
+
+        for handle in self.handles:
+            spell.add_effect_handle(handle)
+
+        for target in self.targets:
+            spell.target.append(target)
+
+        return spell

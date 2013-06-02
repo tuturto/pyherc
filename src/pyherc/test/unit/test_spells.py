@@ -23,9 +23,12 @@ Tests for magical spells
 """
 
 from pyherc.test.builders import LevelBuilder, CharacterBuilder
-from pyherc.test.builders import SpellGeneratorBuilder
+from pyherc.test.builders import SpellGeneratorBuilder, SpellBuilder
+from pyherc.generators import EffectsFactory
+from pyherc.data.effects import EffectHandle
 
 from hamcrest import assert_that, is_in #pylint: disable-msg=E0611
+from mockito import mock, verify
 
 class TestTargetingSingle():
     """
@@ -35,23 +38,49 @@ class TestTargetingSingle():
         """
         Default constructor
         """
-        pass
-    
+        self.level = None
+        self.character = None
+        self.spell_generator = None
+
+    def setup(self):
+        """
+        Setup test cases
+        """
+        self.level = LevelBuilder().build()
+
+        self.character = (CharacterBuilder()
+                                .with_level(self.level)
+                                .with_location((5, 5))
+                                .build())
+
+        self.spell_generator = SpellGeneratorBuilder().build()
+
     def test_target_single(self):
         """
         Targeting a single character should be possible
         """
-        level = LevelBuilder().build()
-        
-        character = (CharacterBuilder()
-                        .with_level(level)
-                        .with_location((5, 5))
-                        .build())
+        spell = self.spell_generator.create_spell(spell_name = 'healing wind',
+                                                  target = self.character)
 
-        spell_generator = SpellGeneratorBuilder().build()
+        assert_that(self.character, is_in(spell.target))
 
-        spell = spell_generator.create_spell(spell_name = 'healing wind', 
-                                             target = character)
+    def test_creating_effect(self):
+        """
+        Casting a spell should create effects it has
+        """
+        effects_factory = mock(EffectsFactory)
 
-        assert_that(character, is_in(spell.target))
-        
+        effect_handle = EffectHandle(trigger = 'on spell hit',
+                                     effect = 'healing wind',
+                                     parameters = {},
+                                     charges = 1)
+
+        spell = (SpellBuilder()
+                    .with_effect_handle(effect_handle)
+                    .with_target(self.character)
+                    .build())
+
+        spell.cast(effects_factory)
+
+        verify(effects_factory).create_effect(key = 'healing wind',
+                                              target = self.character)
