@@ -25,10 +25,11 @@ Tests for magical spells
 from pyherc.test.builders import LevelBuilder, CharacterBuilder
 from pyherc.test.builders import SpellGeneratorBuilder, SpellBuilder
 from pyherc.generators import EffectsFactory
-from pyherc.data.effects import EffectHandle
+from pyherc.data.effects import EffectHandle, Effect
+from pyherc.rules.ending import Dying
 
 from hamcrest import assert_that, is_in #pylint: disable-msg=E0611
-from mockito import mock, verify
+from mockito import mock, verify, when
 
 class TestTargetingSingle():
     """
@@ -69,6 +70,10 @@ class TestTargetingSingle():
         Casting a spell should create effects it has
         """
         effects_factory = mock(EffectsFactory)
+        effect = mock(Effect)
+        dying_rules = mock(Dying)
+        when(effects_factory).create_effect(key = 'healing wind',
+                                            target = self.character).thenReturn(effect)
 
         effect_handle = EffectHandle(trigger = 'on spell hit',
                                      effect = 'healing wind',
@@ -80,7 +85,33 @@ class TestTargetingSingle():
                     .with_target(self.character)
                     .build())
 
-        spell.cast(effects_factory)
+        spell.cast(effects_factory, 
+                   dying_rules)
 
         verify(effects_factory).create_effect(key = 'healing wind',
                                               target = self.character)
+
+    def test_triggering_effect(self):
+        """
+        Casting a spell should trigger the effect
+        """
+        effects_factory = mock(EffectsFactory)
+        effect = mock(Effect)
+        dying_rules = mock(Dying)
+        when(effects_factory).create_effect(key = 'healing wind',
+                                            target = self.character).thenReturn(effect)
+
+        effect_handle = EffectHandle(trigger = 'on spell hit',
+                                     effect = 'healing wind',
+                                     parameters = {},
+                                     charges = 1)
+
+        spell = (SpellBuilder()
+                    .with_effect_handle(effect_handle)
+                    .with_target(self.character)
+                    .build())
+
+        spell.cast(effects_factory, 
+                   dying_rules)
+        
+        verify(effect).trigger(dying_rules)

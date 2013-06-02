@@ -74,12 +74,14 @@ class Spell():
         self.effects.remove_effect_handle(handle)
 
     @logged
-    def cast(self, effects_factory):
+    def cast(self, effects_factory, dying_rules):
         """
         Cast the spell
 
         :param effects_factory: factory for creating effects
         :type effects_factory: EffectsFactory
+        :param dying_rules: rules for dying
+        :type dying_rules: Dying
         """
         handles = self.effects.get_effect_handles('on spell hit')
         effects = []
@@ -90,4 +92,5 @@ class Spell():
                                                 key = handle.effect,
                                                 target = target))
 
-        #TODO: process effects
+        for effect in effects:
+            effect.trigger(dying_rules)
