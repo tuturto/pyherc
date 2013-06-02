@@ -19,7 +19,7 @@ Feature: Magic
   Scenario: Fireball
       Given Zhagh is Goblin
         And Zhagh is almost dead
-        And Zhagh is next to Uglak
+        And Zhagh is standing next to Uglak
         And Simon is standing away from Zhagh
        When Simon casts fireball on Zhagh
        Then Uglak should be dead
