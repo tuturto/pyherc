@@ -31,7 +31,7 @@ from pyherc.rules.ending import Dying
 from hamcrest import assert_that, is_in #pylint: disable-msg=E0611
 from mockito import mock, verify, when
 
-class TestTargetingSingle():
+class TestSpellTargetingSingle():
     """
     Tests for spells targeting single character
     """
@@ -65,53 +65,59 @@ class TestTargetingSingle():
 
         assert_that(self.character, is_in(spell.target))
 
+class TestSpellEffects():
+    """
+    Tests for spell effects
+    """
+
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.effects_factory = None
+        self.effect = None
+        self.dying_rules = None
+        self.effect_handle = None
+        self.spell = None
+
+    def setup(self):
+        """
+        Setup test cases
+        """
+        self.character = (CharacterBuilder()
+                                .build())
+
+        self.effects_factory = mock(EffectsFactory)
+        self.effect = mock(Effect)
+        self.dying_rules = mock(Dying)
+        when(self.effects_factory).create_effect(key = 'healing wind',
+                                            target = self.character).thenReturn(self.effect)
+
+        self.effect_handle = EffectHandle(trigger = 'on spell hit',
+                                          effect = 'healing wind',
+                                          parameters = {},
+                                          charges = 1)
+
+        self.spell = (SpellBuilder()
+                        .with_effect_handle(self.effect_handle)
+                        .with_target(self.character)
+                        .build())
+
     def test_creating_effect(self):
         """
         Casting a spell should create effects it has
         """
-        effects_factory = mock(EffectsFactory)
-        effect = mock(Effect)
-        dying_rules = mock(Dying)
-        when(effects_factory).create_effect(key = 'healing wind',
-                                            target = self.character).thenReturn(effect)
+        self.spell.cast(self.effects_factory,
+                        self.dying_rules)
 
-        effect_handle = EffectHandle(trigger = 'on spell hit',
-                                     effect = 'healing wind',
-                                     parameters = {},
-                                     charges = 1)
-
-        spell = (SpellBuilder()
-                    .with_effect_handle(effect_handle)
-                    .with_target(self.character)
-                    .build())
-
-        spell.cast(effects_factory, 
-                   dying_rules)
-
-        verify(effects_factory).create_effect(key = 'healing wind',
-                                              target = self.character)
+        verify(self.effects_factory).create_effect(key = 'healing wind',
+                                                   target = self.character)
 
     def test_triggering_effect(self):
         """
         Casting a spell should trigger the effect
         """
-        effects_factory = mock(EffectsFactory)
-        effect = mock(Effect)
-        dying_rules = mock(Dying)
-        when(effects_factory).create_effect(key = 'healing wind',
-                                            target = self.character).thenReturn(effect)
-
-        effect_handle = EffectHandle(trigger = 'on spell hit',
-                                     effect = 'healing wind',
-                                     parameters = {},
-                                     charges = 1)
-
-        spell = (SpellBuilder()
-                    .with_effect_handle(effect_handle)
-                    .with_target(self.character)
-                    .build())
-
-        spell.cast(effects_factory, 
-                   dying_rules)
+        self.spell.cast(self.effects_factory, 
+                        self.dying_rules)
         
-        verify(effect).trigger(dying_rules)
+        verify(self.effect).trigger(self.dying_rules)
