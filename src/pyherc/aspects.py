@@ -39,14 +39,18 @@ def logged(wrapped_function, *args, **kwargs):
                              str(kwargs)])
 
     logger.debug(call_message)
+    
+    try:
+        result = wrapped_function(*args, **kwargs)
 
-    result = wrapped_function(*args, **kwargs)
-
-    result_message = ' '.join([logger_name,
+        result_message = ' '.join([logger_name,
                                    'return',
                                    ':',
                                    str(result)])
 
-    logger.debug(result_message)
+        logger.debug(result_message)
 
-    return result
+        return result
+    except Exception as err:
+        logger.critical(err)
+        raise
