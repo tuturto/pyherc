@@ -255,7 +255,7 @@ class SpellCastingFactoryBuilder():
         self.spell_factory = mock()
         self.use_real_spell_factory = False
 
-    def with_spell_factory(self, spell_factory):
+    def with_spell_factory(self, spell_factory = None):
         """
         Configure spell factory to use
         """

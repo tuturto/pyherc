@@ -24,6 +24,7 @@ Module for spell factory
 from pyherc.aspects import logged
 
 from pyherc.data.magic import Spell
+from pyherc.data.effects import EffectHandle
 
 class SpellGenerator():
     """
@@ -52,5 +53,9 @@ class SpellGenerator():
         """
         new_spell = Spell()
         new_spell.target.append(target)
+        new_spell.add_effect_handle(EffectHandle(trigger = 'on spell hit',
+                                                 effect = 'heal medium wounds',
+                                                 parameters = None,
+                                                 charges = 1))
 
         return new_spell

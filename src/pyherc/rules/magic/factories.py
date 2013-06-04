@@ -47,8 +47,9 @@ class SpellCastingFactory(SubActionFactory):
         :param parameters: parameters used to control creation
         :type parameters: SpellCastingParameters
         """
-        spell = self.spell_factory.create_spell(parameters.spell_name)
+        spell = self.spell_factory.create_spell(spell_name = parameters.spell_name,
+                                                target = parameters.caster)
         
         return SpellCastingAction(caster = parameters.caster, 
-                                            direction = parameters.direction,
-                                            spell = spell)
+                                  direction = parameters.direction,
+                                  spell = spell)

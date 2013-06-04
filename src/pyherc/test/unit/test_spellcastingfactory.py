@@ -59,6 +59,7 @@ class TestSpellCastingFactory:
         """
         When creating a spell casting action, spell should be created
         """
+        caster = mock()
         spell_factory = SpellGeneratorBuilder().build()
         when(spell_factory).create_spell('healing wind').thenReturn(mock())  #pylint: disable-msg=E1103
         spellcasting_factory = (SpellCastingFactoryBuilder()
@@ -66,8 +67,9 @@ class TestSpellCastingFactory:
                                             .build())
         
         spellcasting_factory.get_action(
-                                  SpellCastingParameters(self,
+                                  SpellCastingParameters(caster,
                                                          direction = 1, 
                                                          spell_name = 'healing wind'))
         
-        verify(spell_factory).create_spell('healing wind')
+        verify(spell_factory).create_spell(spell_name = 'healing wind',
+                                           target = caster)

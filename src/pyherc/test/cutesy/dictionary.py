@@ -25,8 +25,10 @@ from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import ItemBuilder
+from pyherc.test.builders import SpellCastingFactoryBuilder
+from pyherc.test.builders import SpellGeneratorBuilder
 
-from pyherc.rules import AttackParameters, Dying
+from pyherc.rules import Dying
 from pyherc.data.effects import Poison
 
 from hamcrest.core.base_matcher import BaseMatcher
@@ -323,12 +325,10 @@ class CastSpell():
         caster.old_values['hit points'] = caster.hit_points
 
         action_factory = (ActionFactoryBuilder()
-                                    .with_move_factory()
-                                    .with_attack_factory()
-                                    .with_drink_factory()
-                                    .with_inventory_factory()
                                     .with_dying_rules()
-                                    .with_spellcasting_factory()
+                                    .with_spellcasting_factory(SpellCastingFactoryBuilder()
+                                                                    .with_spell_factory(SpellGeneratorBuilder().build())
+                                                                    .build())
                                     .build())
 
         caster.cast(direction = 1,
