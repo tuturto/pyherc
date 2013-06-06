@@ -50,6 +50,5 @@ class SpellCastingFactory(SubActionFactory):
         spell = self.spell_factory.create_spell(spell_name = parameters.spell_name,
                                                 target = parameters.caster)
         
-        return SpellCastingAction(caster = parameters.caster, 
-                                  direction = parameters.direction,
+        return SpellCastingAction(caster = parameters.caster,
                                   spell = spell)

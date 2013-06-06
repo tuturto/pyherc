@@ -30,19 +30,11 @@ class SpellCastingAction():
     .. versionadded:: 0.9
     """
     @logged
-    def __init__(self, caster, direction, spell):
+    def __init__(self, caster, spell):
         """
         Default constructor
-
-        :param caster: character casting the spell
-        :type caster: Character
-        :param direction: direction of the spell
-        :type direction: int
-        :param spell: spell to cast
-        :type spell_name: Spell
         """
         self.caster = caster
-        self.direction = direction
         self.spell = spell
 
     @logged
