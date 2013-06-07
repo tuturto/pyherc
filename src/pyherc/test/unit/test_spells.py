@@ -26,7 +26,9 @@ from pyherc.test.builders import LevelBuilder, CharacterBuilder
 from pyherc.test.builders import SpellGeneratorBuilder, SpellBuilder
 from pyherc.generators import EffectsFactory
 from pyherc.data.effects import EffectHandle, Effect
+from pyherc.data.magic import Spell
 from pyherc.rules.ending import Dying
+from pyherc.rules.magic.action import SpellCastingAction
 
 from hamcrest import assert_that, is_in #pylint: disable-msg=E0611
 from mockito import mock, verify, when
@@ -121,3 +123,31 @@ class TestSpellEffects():
                         self.dying_rules)
         
         verify(self.effect).trigger(self.dying_rules)
+
+class TestSpellCastingAction():
+    """
+    Tests for spell casting action
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        pass
+
+    def test_spell_is_cast(self):
+        """
+        When spell casting action is executed, the linked spell should be cast
+        """
+        spell = mock(Spell)
+        caster = CharacterBuilder().build()
+        effects_factory = mock()
+        dying_rules = mock()
+
+        action = SpellCastingAction(caster = caster,
+                                    spell = spell,
+                                    effects_factory = effects_factory,
+                                    dying_rules = dying_rules)
+        action.execute()
+
+        verify(spell).cast(effects_factory = effects_factory,
+                           dying_rules = dying_rules)

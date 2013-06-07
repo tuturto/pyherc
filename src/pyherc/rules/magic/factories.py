@@ -51,4 +51,6 @@ class SpellCastingFactory(SubActionFactory):
                                                 target = parameters.caster)
         
         return SpellCastingAction(caster = parameters.caster,
-                                  spell = spell)
+                                  spell = spell,
+                                  effects_factory = None,
+                                  dying_rules = None)

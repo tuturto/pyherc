@@ -30,19 +30,31 @@ class SpellCastingAction():
     .. versionadded:: 0.9
     """
     @logged
-    def __init__(self, caster, spell):
+    def __init__(self, caster, spell, effects_factory, dying_rules):
         """
         Default constructor
+
+        :param caster: character casting the spell
+        :type caster: Character
+        :param spell: spell being cast
+        :type spell: Spell
+        :param effects_factory: factory for creating effects
+        :type effects_factory: EffectsFactory
+        :param dying_rules: rules for dying
+        :type dying_rules: DyingRules
         """
         self.caster = caster
         self.spell = spell
+        self.effects_factory = effects_factory
+        self.dying_rules = dying_rules
 
     @logged
     def execute(self):
         """
         Executes this action
         """
-        pass
+        self.spell.cast(effects_factory = self.effects_factory,
+                        dying_rules = self.dying_rules)
 
     @logged
     def is_legal(self):
