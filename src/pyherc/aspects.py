@@ -25,7 +25,7 @@ import logging
 from decorator import decorator
 
 @decorator
-def logged(wrapped_function, *args, **kwargs):
+def info_logger(wrapped_function, *args, **kwargs):
     """
     Decorator to perform logging
     """
@@ -54,3 +54,35 @@ def logged(wrapped_function, *args, **kwargs):
     except Exception as err:
         logger.critical(err)
         raise
+
+@decorator
+def fatal_logger(wrapped_function, *args, **kwargs):
+    """
+    Decorator to perform logging of exceptions
+    """
+    
+    try:
+        return wrapped_function(*args, **kwargs)
+
+    except Exception as err:
+        
+        logger_name = str(wrapped_function)
+        logger = logging.getLogger(logger_name)
+
+        call_message = ' '.join([logger_name,
+                                 'call',
+                                 ':',
+                                 str(args),
+                                 str(kwargs)])
+        logger.debug(call_message)        
+        logger.critical(err)
+        raise
+
+def no_logger(wrapped_function):
+    """
+    Decorator to perform no logging at all
+    """
+    
+    return wrapped_function
+
+logged = info_logger
