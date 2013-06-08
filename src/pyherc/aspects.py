@@ -21,7 +21,7 @@
 """
 Module for aspects
 """
-import logging
+import logging, sys
 from decorator import decorator
 
 @decorator
@@ -85,4 +85,15 @@ def no_logger(wrapped_function):
     
     return wrapped_function
 
+
+
+log_levels = {'no_log': no_logger,
+              'error_log': fatal_logger,
+              'full_log': info_logger}
+
 logged = info_logger
+
+args = sys.argv
+for argument in args:
+    if argument in log_levels:
+        logged = log_levels[argument]
