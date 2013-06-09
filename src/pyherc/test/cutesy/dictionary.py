@@ -27,7 +27,9 @@ from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import ItemBuilder
 from pyherc.test.builders import SpellCastingFactoryBuilder
 from pyherc.test.builders import SpellGeneratorBuilder
+from pyherc.test.builders import EffectsFactoryBuilder
 
+from pyherc.data.effects import Heal
 from pyherc.rules import Dying
 from pyherc.data.effects import Poison
 
@@ -324,11 +326,28 @@ class CastSpell():
         caster.old_values = {}
         caster.old_values['hit points'] = caster.hit_points
 
+        spell_factory = SpellGeneratorBuilder().build()
+        
+        effects_factory = (EffectsFactoryBuilder()
+                                .with_effect('heal medium wounds',
+                                             {'type': Heal,
+                                                'duration': None,
+                                                'frequency': None,
+                                                'tick': 0,
+                                                'healing': 10,
+                                                'icon': None,
+                                                'title': 'Heal medium wounds',
+                                                'description': 'Heals medium amount of damage'})
+                                .build())
+
+        spell_casting_factory = (SpellCastingFactoryBuilder()
+                                    .with_spell_factory(spell_factory)
+                                    .with_effects_factory(effects_factory)
+                                    .build())
+
         action_factory = (ActionFactoryBuilder()
                                     .with_dying_rules()
-                                    .with_spellcasting_factory(SpellCastingFactoryBuilder()
-                                                                    .with_spell_factory(SpellGeneratorBuilder().build())
-                                                                    .build())
+                                    .with_spellcasting_factory(spell_casting_factory)
                                     .build())
 
         caster.cast(direction = 1,

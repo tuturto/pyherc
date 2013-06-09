@@ -211,10 +211,24 @@ class EffectsFactoryBuilder():
         """
         Default constructor
         """
-        pass
-    
+        self.effects = {}
+
+    def with_effect(self, key, type):
+        """
+        Configure factory with an effect
+        
+        .. note: Can be called multiple times
+        """
+        self.effects[key] = type
+        return self
+
     def build(self):
         """
         Build the configured factory
         """
-        return EffectsFactory()
+        factory = EffectsFactory()
+        
+        for k, v in self.effects.items():
+            factory.add_effect(key = k, type = v)
+        
+        return factory

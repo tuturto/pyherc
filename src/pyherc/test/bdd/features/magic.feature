@@ -25,7 +25,6 @@ Feature: Magic
        Then Uglak should be dead
         And Zhagh should be dead
 
-  @wip
   Scenario: Healing
       Given Simon is almost dead
        When Simon casts healing wind
