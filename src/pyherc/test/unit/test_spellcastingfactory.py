@@ -24,7 +24,7 @@ Module for SpellCastingFactory related tests
 from pyherc.rules import SpellCastingParameters
 
 from pyherc.test.builders import ActionFactoryBuilder, SpellGeneratorBuilder
-from pyherc.test.builders import SpellCastingFactoryBuilder
+from pyherc.test.builders import SpellCastingFactoryBuilder, EffectsFactoryBuilder
 
 from mockito import mock, when, verify
 from hamcrest import assert_that, is_not #pylint: disable-msg=E0611
@@ -61,9 +61,11 @@ class TestSpellCastingFactory:
         """
         caster = mock()
         spell_factory = SpellGeneratorBuilder().build()
+        effects_factory = EffectsFactoryBuilder().build()
         when(spell_factory).create_spell('healing wind').thenReturn(mock())  #pylint: disable-msg=E1103
         spellcasting_factory = (SpellCastingFactoryBuilder()
                                             .with_spell_factory(spell_factory)
+                                            .with_effects_factory(effects_factory)
                                             .build())
         
         spellcasting_factory.get_action(

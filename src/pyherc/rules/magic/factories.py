@@ -32,11 +32,12 @@ class SpellCastingFactory(SubActionFactory):
     .. versionadded:: 0.9
     """
     @logged
-    def __init__(self, spell_factory):
+    def __init__(self, spell_factory, effects_factory):
         """
         Constructor for this factory
         """
         self.spell_factory = spell_factory
+        self.effects_factory = effects_factory
         self.action_type = 'spell casting'
 
     @logged
@@ -52,5 +53,5 @@ class SpellCastingFactory(SubActionFactory):
         
         return SpellCastingAction(caster = parameters.caster,
                                   spell = spell,
-                                  effects_factory = None,
+                                  effects_factory = self.effects_factory,
                                   dying_rules = None)

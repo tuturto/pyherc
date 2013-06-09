@@ -254,6 +254,8 @@ class SpellCastingFactoryBuilder():
         
         self.spell_factory = mock()
         self.use_real_spell_factory = False
+        self.effects_factory = mock()
+        self.use_real_effects_factory = False
 
     def with_spell_factory(self, spell_factory = None):
         """
@@ -268,6 +270,18 @@ class SpellCastingFactoryBuilder():
                 self.spell_factory = spell_factory
         return self        
        
+    def with_effects_factory(self, effects_factory = None):
+        """
+        Configure effects factory to use
+        """
+        if effects_factory:
+            if hasattr(effects_factory, 'build'):
+                self.effects_factory = effects_factory.build()
+            else:
+                self.effects_factory = effects_factory
+        else:
+            self.use_real_effects_factory = True
+        return self
 
     def build(self):
         """
@@ -275,5 +289,9 @@ class SpellCastingFactoryBuilder():
         """
         if self.use_real_spell_factory:
             self.spell_factory = None
+        
+        if self.use_real_effects_factory:
+            self.effects_factory = None
             
-        return SpellCastingFactory(spell_factory = self.spell_factory)
+        return SpellCastingFactory(spell_factory = self.spell_factory,
+                                   effects_factory = self.effects_factory)
