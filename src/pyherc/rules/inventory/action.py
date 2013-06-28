@@ -40,6 +40,7 @@ class PickUpAction():
         :param item: item to pick up
         :type item: Item
         """
+        super(PickUpAction, self).__init__()
         self.character = character
         self.item = item
 

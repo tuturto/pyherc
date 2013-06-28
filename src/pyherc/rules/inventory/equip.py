@@ -36,6 +36,7 @@ class EquipFactory(SubActionFactory):
         """
         Constructor for this factory
         """
+        super(EquipFactory, self).__init__()
         self.sub_action = 'equip'
 
     @logged

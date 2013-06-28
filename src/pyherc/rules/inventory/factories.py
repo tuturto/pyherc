@@ -36,6 +36,7 @@ class PickUpFactory(SubActionFactory):
         """
         Constructor for this factory
         """
+        super(PickUpFactory, self).__init__()
         self.sub_action = 'pick up'
 
     @logged
@@ -70,6 +71,7 @@ class DropFactory(SubActionFactory):
         """
         Constructor for this factory
         """
+        super(DropFactory, self).__init__()
         self.sub_action = 'drop'
 
     @logged
@@ -107,6 +109,7 @@ class InventoryFactory(SubActionFactory):
         :param factories: a single Factory or list of Factories to use
         :type factories: SubActionFactory or [SubActionFactory]
         """
+        super(InventoryFactory, self).__init__()
         self.action_type = 'inventory'
 
         if hasattr(factories, '__iter__'):
