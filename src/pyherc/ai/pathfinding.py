@@ -36,14 +36,14 @@ def reconstruct_path(came_from, current_node):
     current_node : the last node of the path
     """
     if current_node in came_from:
-        p = reconstruct_path(came_from,came_from[current_node])
+        p = reconstruct_path(came_from, came_from[current_node])
         return p + [current_node]
     else:
         return []
 
 
 class HeapItem:
-    def __init__(self,y,goal, a_map, g_score):
+    def __init__(self, y, goal, a_map, g_score):
 
         self.node = y
 
@@ -60,12 +60,12 @@ class HeapItem:
         return (self.f_score, self.g_score, self.h_score, self.node)
 
     def __hash__(self):
-         return self.as_tuple().__hash__()
+        return self.as_tuple().__hash__()
 
     def __repr__(self):
         return str(self.as_tuple())
 
-    def type_check(self,other):
+    def type_check(self, other):
         return type(self) == type(other)
     def __lt__(self, other):
         return self.type_check(other) and self.as_tuple().__lt__(other.as_tuple())
@@ -102,7 +102,7 @@ def a_star(start, goal, a_map):
     closedset = set([])
 
 
-    firstItem = HeapItem(start,goal, a_map, 0.0)
+    firstItem = HeapItem(start, goal, a_map, 0.0)
 
     lastItem = None
 
@@ -136,7 +136,7 @@ def a_star(start, goal, a_map):
                 lastItem = x
 
             if not any(scoreHeap) or scoreHeap[0].f_score > lastItem.g_score:
-                return [start] + reconstruct_path(came_from,goal), came_from, updateset
+                return [start] + reconstruct_path(came_from, goal), came_from, updateset
 
         del openDict[x.node]
         closedset.add(x.node)
@@ -155,7 +155,7 @@ def a_star(start, goal, a_map):
                 continue
 
 
-            oldy = openDict.get(node_y,None)
+            oldy = openDict.get(node_y, None)
             y = copy(oldy)
 
             y = HeapItem(node_y, goal, a_map, tentative_g_score)

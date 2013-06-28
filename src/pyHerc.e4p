@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project pyHerc -->
-<!-- Saved: 2013-06-09, 11:34:58 -->
+<!-- Saved: 2013-06-28, 06:22:55 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="5.1">
   <Language>en</Language>
@@ -28,7 +28,6 @@
     <Source>pyherc/ai/__init__.py</Source>
     <Source>pyherc/ai/simple.py</Source>
     <Source>pyherc/background.txt</Source>
-    <Source>pyherc/rules/utils.py</Source>
     <Source>pyherc/generators/utils.py</Source>
     <Source>pyherc/test/__init__.py</Source>
     <Source>pyherc/data/item.py</Source>
@@ -97,7 +96,6 @@
     <Source>pyherc/test/unit/test_connection.py</Source>
     <Source>pyherc/test/unit/test_corridor.py</Source>
     <Source>pyherc/test/unit/test_creatureadder.py</Source>
-    <Source>pyherc/test/unit/test_dice.py</Source>
     <Source>pyherc/test/unit/test_dungeon.py</Source>
     <Source>pyherc/test/unit/test_effects.py</Source>
     <Source>pyherc/test/unit/test_effectscollection.py</Source>

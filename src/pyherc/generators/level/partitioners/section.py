@@ -43,6 +43,8 @@ class Section():
 
         .. note:: Coordinates are given relative to level origo
         """
+        super(Section, self).__init__()
+        
         self.__corners = []
         self.__corners.append(corner1)
         self.__corners.append(corner2)
@@ -445,7 +447,8 @@ class Connection():
         :param section: section where connection is located
         :type section: Section
         """
-        object.__init__(self)
+        super(Connection, self).__init__()
+
         self.connection = connection
         self.location = location
         self.direction = direction
