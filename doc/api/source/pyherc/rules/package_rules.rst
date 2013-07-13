@@ -17,4 +17,3 @@ pyherc.rules
    module_los
    module_moving
    module_public
-   module_utils
