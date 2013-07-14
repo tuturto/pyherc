@@ -59,29 +59,19 @@ Dependencies
 
 Installing dependencies
 -----------------------
-Install python 2.7 from Python_.
+Install python 3.2 from Python_.
 
 Install setuptools, by following instructions at: setuptools_.
 
 Install PyQt4, by following instructions at: PyQt4_
 
-Install decorator library::
+Install libraries::
 
-    pip install decorator
+    pip install -U -r dependencies
 
-Rest of the dependencies can be automatically located and installed by following
-steps:
-    
-If you want to be able to run test cases, install mockito-python, pyHamcrest 
-and behave::
+Install more libraries for playing around with the code::
 
-    pip install -U mockito
-    pip install -U pyhamcrest
-    pip install -U behave
-
-If you want to generate html manual and programmers guide, install Sphinx::
-
-    pip install -U Sphinx
+    pip install -U -r dependencies-dev
 
 .. _Python: http://python.org/getit/
 .. _setuptools: http://pypi.python.org/pypi/setuptools
