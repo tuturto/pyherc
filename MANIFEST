@@ -2,7 +2,6 @@
 setup.py
 src/herculeum/__init__.py
 src/herculeum/application.py
-src/herculeum/herc.py
 src/herculeum/config/__init__.py
 src/herculeum/config/config.py
 src/herculeum/config/levels/__init__.py
@@ -70,6 +69,8 @@ src/pyherc/data/effects/effect.py
 src/pyherc/data/effects/effectscollection.py
 src/pyherc/data/effects/heal.py
 src/pyherc/data/effects/poison.py
+src/pyherc/data/magic/__init__.py
+src/pyherc/data/magic/spell.py
 src/pyherc/events/__init__.py
 src/pyherc/events/combat.py
 src/pyherc/events/damage.py
@@ -131,3 +132,4 @@ src/pyherc/rules/inventory/unequip.py
 src/pyherc/rules/move/__init__.py
 src/pyherc/rules/move/action.py
 src/pyherc/rules/move/factories.py
+src/scripts/herculeum
