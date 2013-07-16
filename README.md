@@ -23,7 +23,6 @@ System Requirements
 
 Manual
 ======
-- Manual can be found at doc - directory
 - Online documentation for development version is available at: 
   http://tuturto.github.com/pyherc/index.html
 - Online documentation for pyherc API can be found at:
@@ -32,8 +31,7 @@ Manual
 Credits
 =======
 The game is copyrighted by Tuukka Turto and is placed under 
-GNU General Public License. For more information, please refer to license.txt
-found in the main folder.
+GNU General Public License.
 
 Game uses graphics downloaded from TomeTik <http://pousse.rapiere.free.fr/tome/>
 
