@@ -10,7 +10,7 @@ Feature: Magic
        And Uglak is standing in room
        And Simon is standing away from Uglak
 
-  @wip
+  @active
   Scenario: Magic missile
        When Simon casts magic missile on Uglak
        Then Uglak should be dead

@@ -26,7 +26,21 @@ def impl(context, caster_name, spell_and_target):
     # Simon casts magic missile on Uglak
     # Simon casts healing wind
     caster = get_character(context, caster_name)
-    spell = spell_and_target
+    split_text = spell_and_target.split()
 
-    make(caster, cast_spell(spell_name = spell))
+    if 'on' in split_text:
+        on_index = split_text.index('on')
+        spell = " ".join(split_text[:on_index])
+        target_name = " ".join(split_text[on_index + 1:])
+    else:
+        spell = spell_and_target
+        target_name = None
+
+    if target_name:
+        target = get_character(context = context,
+                               character_name = target_name)
+
+    make(caster, cast_spell(spell_name = spell,
+                            target = target))
+
 

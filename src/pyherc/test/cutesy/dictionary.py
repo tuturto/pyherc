@@ -163,15 +163,18 @@ class CastSpell():
     """
     Class representing casting a spell
     """
-    def __init__(self, spell_name):
+    def __init__(self, spell_name, target = None):
         """
         Default constructor
         
         :param spell_name: name of the spell to cast
         :type spell_name: string
+        :param target: target of the spell
+        :type target: Character
         """
         super(CastSpell, self).__init__()
         self.spell_name = spell_name
+        self.target = target
     
     def __call__(self, caster):
         """
@@ -188,13 +191,13 @@ class CastSpell():
         effects_factory = (EffectsFactoryBuilder()
                                 .with_effect('heal medium wounds',
                                              {'type': Heal,
-                                                'duration': None,
-                                                'frequency': None,
-                                                'tick': 0,
-                                                'healing': 10,
-                                                'icon': None,
-                                                'title': 'Heal medium wounds',
-                                                'description': 'Heals medium amount of damage'})
+                                              'duration': None,
+                                              'frequency': None,
+                                              'tick': 0,
+                                              'healing': 10,
+                                              'icon': None,
+                                              'title': 'Heal medium wounds',
+                                              'description': 'Heals medium amount of damage'})
                                 .build())
 
         spell_casting_factory = (SpellCastingFactoryBuilder()
@@ -207,17 +210,49 @@ class CastSpell():
                                     .with_spellcasting_factory(spell_casting_factory)
                                     .build())
 
-        caster.cast(direction = 1,
+        caster.cast(direction = _find_direction(caster, self.target),
                     spell_name = self.spell_name, 
                     action_factory = action_factory)
 
-def cast_spell(spell_name):
+def _find_direction(caster, target):
+    """
+    Find direction from caster to target
+    """
+    if target == None:
+        return 1
+
+    c_loc = caster.location
+    t_loc = target.location
+
+    if c_loc[0] == t_loc[0]:
+        if c_loc[1] < t_loc[1]:
+            return 1
+        else:
+            return 5
+    elif c_loc[1] == t_loc[1]:
+        if c_loc[0] < t_loc[0]:
+            return 3
+        else:
+            return 7
+
+    if c_loc[1] < t_loc[1]:
+        if c_loc[0] < t_loc[1]:
+            return 2
+        else:
+            return 8
+    else:
+        if c_loc[0] < t_loc[1]:
+            return 4
+        else:
+            return 6
+
+def cast_spell(spell_name, target = None):
     """
     Cast a spell
 
     :param spell_name: name of the spell to cast
     """
-    action = CastSpell(spell_name)
+    action = CastSpell(spell_name, target)
     return action
 
 
