@@ -1,1 +1,0 @@
-python herculeum\main.py

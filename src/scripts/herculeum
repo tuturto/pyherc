@@ -24,9 +24,6 @@ Main entry point for Herculeum - game
 import sys
 import os.path
 
-INSTALL_PATH = os.path.abspath(".")
-sys.path.append(INSTALL_PATH)
-
 from herculeum.application import Application
 
 try:
