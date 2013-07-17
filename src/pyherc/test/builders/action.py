@@ -110,7 +110,7 @@ class ActionFactoryBuilder():
         
         .. versionadded:: 0.9
         """
-        if spellcasting_factory == None:
+        if not spellcasting_factory:
             self.use_real_spellcasting_factory = True
         else:
             if hasattr(spellcasting_factory, 'build'):
@@ -188,7 +188,6 @@ class ActionFactoryBuilder():
         
         if self.use_real_spellcasting_factory:
             self.spellcasting_factory = SpellCastingFactoryBuilder().build()
-        
         action_factory = ActionFactory(self.model,
                                        [self.move_factory,
                                         self.drink_factory,
@@ -261,14 +260,14 @@ class SpellCastingFactoryBuilder():
         """
         Configure spell factory to use
         """
-        if spell_factory == None:
+        if not spell_factory:
             self.use_real_spell_factory = True
         else:
             if hasattr(spell_factory, 'build'):
                 self.spell_factory = spell_factory.build()
             else:
                 self.spell_factory = spell_factory
-        return self        
+        return self
        
     def with_effects_factory(self, effects_factory = None):
         """
@@ -288,10 +287,12 @@ class SpellCastingFactoryBuilder():
         Builds spell casting factory
         """
         if self.use_real_spell_factory:
-            self.spell_factory = None
+            #self.spell_factory = None
+            pass
         
         if self.use_real_effects_factory:
-            self.effects_factory = None
+            #self.effects_factory = None
+            pass
             
         return SpellCastingFactory(spell_factory = self.spell_factory,
                                    effects_factory = self.effects_factory)

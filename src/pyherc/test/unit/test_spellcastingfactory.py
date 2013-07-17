@@ -26,7 +26,7 @@ from pyherc.rules import SpellCastingParameters
 from pyherc.test.builders import ActionFactoryBuilder, SpellGeneratorBuilder
 from pyherc.test.builders import SpellCastingFactoryBuilder, EffectsFactoryBuilder
 
-from mockito import mock, when, verify
+from mockito import mock, when, verify, any
 from hamcrest import assert_that, is_not #pylint: disable-msg=E0611
 
 class TestSpellCastingFactory:
@@ -44,12 +44,18 @@ class TestSpellCastingFactory:
         """
         Test that action can be created
         """
+        spell_factory = mock()
+        when(spell_factory).build().thenReturn(spell_factory)
+        when(spell_factory).create_spell(any(), any()).thenReturn([mock()])
+        spell_factory.spell_list = {'healing wind': mock()}
         action_factory = (ActionFactoryBuilder()
-                                    .with_spellcasting_factory()
+                                    .with_spellcasting_factory(
+                                        SpellCastingFactoryBuilder()
+                                            .with_spell_factory(spell_factory)
+                                            .build())
                                     .build())
         
-        action = action_factory.get_action(
-                                           SpellCastingParameters(self,
+        action = action_factory.get_action(SpellCastingParameters(self,
                                                                   direction = 1, 
                                                                   spell_name = 'healing wind'))
         

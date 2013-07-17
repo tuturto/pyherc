@@ -47,12 +47,12 @@ class SpellGenerator():
         Temporary implementation for spell loading
         """
 
-        healing_spell = []        
-
-        healing_spell.append(EffectHandle(trigger = 'on spell hit',
-                                          effect = 'heal medium wounds',
-                                          parameters = None,
-                                          charges = 1))
+        healing_spell = SpellSpecification([
+                              EffectHandle(trigger = 'on spell hit',
+                                           effect = 'heal medium wounds',
+                                           parameters = None,
+                                           charges = 1)],
+                              targeting_caster)
 
         self.spell_list['healing wind'] = healing_spell       
     
@@ -71,9 +71,28 @@ class SpellGenerator():
         new_spell = Spell()
         new_spell.targets.extend(targets)
 
-        effects = self.spell_list[spell_name]
+        spec = self.spell_list[spell_name]
+        handles = spec.effect_handles
 
-        for effect_handle in effects:
+        for effect_handle in handles:
             new_spell.add_effect_handle(effect_handle)
 
         return new_spell
+
+class SpellSpecification():
+    """
+    Class to specify spell configuration
+
+    .. versionadded:: 0.9
+    """
+    def __init__(self, effect_handles, targeter):
+        self.effect_handles = effect_handles
+        self.targeter = targeter
+    
+def targeting_caster(parameters):
+    """
+    Function to target the caster
+
+    .. versionadded:: 0.9
+    """
+    return [parameters.caster]

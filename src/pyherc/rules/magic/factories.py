@@ -56,6 +56,7 @@ class SpellCastingFactory(SubActionFactory):
                                   effects_factory = self.effects_factory,
                                   dying_rules = None)
 
+    @logged
     def _get_spell_targets(self, parameters):
         """
         Get targets for spell
@@ -63,4 +64,5 @@ class SpellCastingFactory(SubActionFactory):
         :returns: targets of a spell
         :rtype: [Character]
         """
-        return [parameters.caster]
+        spec = self.spell_factory.spell_list[parameters.spell_name]
+        return spec.targeter(parameters)
