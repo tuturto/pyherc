@@ -39,6 +39,8 @@ def impl(context, caster_name, spell_and_target):
     if target_name:
         target = get_character(context = context,
                                character_name = target_name)
+    else:
+        target = None
 
     make(caster, cast_spell(spell_name = spell,
                             target = target))

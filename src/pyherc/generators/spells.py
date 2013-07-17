@@ -37,10 +37,27 @@ class SpellGenerator():
         """
         Default constructor
         """
-        pass
+        self.spell_list = {}
+
+        self.__init_spells()
+
+    @logged
+    def __init_spells(self):
+        """
+        Temporary implementation for spell loading
+        """
+
+        healing_spell = []        
+
+        healing_spell.append(EffectHandle(trigger = 'on spell hit',
+                                          effect = 'heal medium wounds',
+                                          parameters = None,
+                                          charges = 1))
+
+        self.spell_list['healing wind'] = healing_spell       
     
     @logged
-    def create_spell(self, spell_name, target):
+    def create_spell(self, spell_name, targets):
         """
         Create a spell
         
@@ -52,10 +69,11 @@ class SpellGenerator():
         :rtype: Spell
         """
         new_spell = Spell()
-        new_spell.target.append(target)
-        new_spell.add_effect_handle(EffectHandle(trigger = 'on spell hit',
-                                                 effect = 'heal medium wounds',
-                                                 parameters = None,
-                                                 charges = 1))
+        new_spell.targets.extend(targets)
+
+        effects = self.spell_list[spell_name]
+
+        for effect_handle in effects:
+            new_spell.add_effect_handle(effect_handle)
 
         return new_spell

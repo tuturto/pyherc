@@ -49,9 +49,18 @@ class SpellCastingFactory(SubActionFactory):
         :type parameters: SpellCastingParameters
         """
         spell = self.spell_factory.create_spell(spell_name = parameters.spell_name,
-                                                target = parameters.caster)
+                                                targets = self._get_spell_targets(parameters))
         
         return SpellCastingAction(caster = parameters.caster,
                                   spell = spell,
                                   effects_factory = self.effects_factory,
                                   dying_rules = None)
+
+    def _get_spell_targets(self, parameters):
+        """
+        Get targets for spell
+        
+        :returns: targets of a spell
+        :rtype: [Character]
+        """
+        return [parameters.caster]

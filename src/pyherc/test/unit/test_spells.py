@@ -63,9 +63,9 @@ class TestSpellTargetingSingle():
         Targeting a single character should be possible
         """
         spell = self.spell_generator.create_spell(spell_name = 'healing wind',
-                                                  target = self.character)
+                                                  targets = [self.character])
 
-        assert_that(self.character, is_in(spell.target))
+        assert_that(self.character, is_in(spell.targets))
 
 class TestSpellEffects():
     """

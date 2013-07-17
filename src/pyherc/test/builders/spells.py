@@ -91,7 +91,6 @@ class SpellBuilder():
         for handle in self.handles:
             spell.add_effect_handle(handle)
 
-        for target in self.targets:
-            spell.target.append(target)
+        spell.targets.extend(self.targets)
 
         return spell

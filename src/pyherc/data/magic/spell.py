@@ -37,7 +37,7 @@ class Spell():
         """
         Default constructor
         """
-        self.target = []
+        self.targets = []
         self.effects = EffectsCollection()
 
     @logged
@@ -86,7 +86,7 @@ class Spell():
         handles = self.effects.get_effect_handles('on spell hit')
         effects = []
 
-        for target in self.target:
+        for target in self.targets:
             for handle in handles:
                 effects.append(effects_factory.create_effect(
                                                 key = handle.effect,
