@@ -54,7 +54,15 @@ class SpellGenerator():
                                            charges = 1)],
                               targeting_caster)
 
-        self.spell_list['healing wind'] = healing_spell       
+        magic_missile = SpellSpecification([
+                            EffectHandle(trigger = 'on spell hit',
+                                         effect = 'cause wound',
+                                         parameters = None,
+                                         charges = 1)],
+                            targeting_single_target)
+
+        self.spell_list['healing wind'] = healing_spell
+        self.spell_list['magic missile'] = magic_missile
     
     @logged
     def create_spell(self, spell_name, targets):
@@ -96,3 +104,12 @@ def targeting_caster(parameters):
     .. versionadded:: 0.9
     """
     return [parameters.caster]
+
+def targeting_single_target(parameters):
+    """
+    Function to target a single character in direction
+
+    .. versionadded:: 0.9
+    """
+    return None
+
