@@ -36,43 +36,6 @@ from pyherc.data.effects import Poison
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
 
-
-def LeatherArmour():
-    """
-    Creates a leather armour
-    """
-    item = (ItemBuilder()
-                .with_name('leather armour')
-                .with_damage_reduction(1)
-                .with_speed_modifier(1.0)
-                .build())
-
-    return item
-
-def ScaleMail():
-    """
-    Creates a scale mail
-    """
-    item = (ItemBuilder()
-                .with_name('scale mail')
-                .with_damage_reduction(3)
-                .with_speed_modifier(0.7)
-                .build())
-
-    return item
-
-def PlateMail():
-    """
-    Creates a plate mail
-    """
-    item = (ItemBuilder()
-                .with_name('plate mail')
-                .with_damage_reduction(5)
-                .with_speed_modifier(0.5)
-                .build())
-
-    return item
-
 def Level():
     """
     Creates a level
