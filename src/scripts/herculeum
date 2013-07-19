@@ -23,6 +23,7 @@ Main entry point for Herculeum - game
 """
 import sys
 import os.path
+import hy
 
 from herculeum.application import Application
 

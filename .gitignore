@@ -2,6 +2,8 @@
 *.e4q
 *.e4t
 *.html~
+*.hy~
+*.py~
 report.html
 pyherc.log
 setup.cfg
