@@ -17,11 +17,8 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-Simple AI for flocking creature
+(setv __doc__ "module for AI routines for rats")
 
-Creature will try to find friends, before attacking the player character
-"""
 (import [pyherc.aspects [logged]])
 
 (defclass RatAI []
@@ -31,25 +28,28 @@ Creature will try to find friends, before attacking the player character
    [__init__ (fn [self character]
 	       "default constructor"
 	       (setv self.character character) None)]
-   [act (fn [self model action_factory rng] 
+   [act (fn [self model action-factory rng] 
 	  "check the situation and act accordingly"
-	  (rat-act self model action_factory rng))]])
+	  (rat-act self model action-factory rng))]])
 
 (with-decorator logged 
-  (defn rat-act [ai model action_factory rng]
+  (defn rat-act [ai model action-factory rng]
     "main routine for rat AI"
     (let [[func (get mode-bindings (get ai.mode 0))]]
-      (func ai model action_factory rng))))
+      (func ai model action-factory rng))))
 
 (with-decorator logged 
-  (defn wander [ai model action_factory rng]
+  (defn wander [ai model action-factory rng]
     "routine to make character to wander around"
     (let [[wall-info (next-to-wall? ai.character)]]
       (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info)])
 	  (setv ai.mode [:find-wall])))))
 
-(defn find-wall [ai model action_factory rng]
+(defn find-wall [ai model action-factory rng]
   "routine to make character to find a wall")
+
+(defn follow-wall [ai model action-factory rng]
+  "routine to make character to follow a wall")
 
 ;; wall-mapping
 ;; first two elements are offsets for required walls
@@ -94,4 +94,5 @@ Creature will try to find friends, before attacking the player character
   None)
 
 (def mode-bindings {:wander wander
-		    :find-wall find-wall})
+		    :find-wall find-wall
+		    :follow-wall follow-wall})
