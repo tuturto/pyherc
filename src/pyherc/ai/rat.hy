@@ -31,18 +31,53 @@ Creature will try to find friends, before attacking the player character
    [__init__ (fn [self character] (setv self.character character) None)]
    [act (fn [self model action_factory rng] (rat-act self model action_factory rng))]])
 
-(with-decorator logged (defn rat-act [ai model action_factory rng]
-			  (let [[func (get mode-bindings (get ai.mode 0))]]
-			    (func ai model action_factory rng))))
+(with-decorator logged 
+  (defn rat-act [ai model action_factory rng]
+    (let [[func (get mode-bindings (get ai.mode 0))]]
+      (func ai model action_factory rng))))
 
-(with-decorator logged (defn wander [ai model action_factory rng]
-  (let [[wall-info (next-to-wall? ai.character)]]
-    (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info)])
-        (setv ai.mode [:find-wall])))))
+(with-decorator logged 
+  (defn wander [ai model action_factory rng]
+    (let [[wall-info (next-to-wall? ai.character)]]
+      (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info)])
+	  (setv ai.mode [:find-wall])))))
 
 (defn find-wall [ai model action_factory rng])
 
-(defn next-to-wall? [character] None)
+;; wall-mapping
+;; first two elements are offsets for required walls
+;; third element is offset for required empty space
+;; fourth element is resulting direction
+(def wall-mapping [[[-1 1]  [0 1]  [-1 0] :west]
+		   [[-1 -1] [0 -1] [-1 0] :west]
+		   [[1 1]   [0 1]  [1 0]  :east]
+		   [[1 -1]  [0 -1] [1 0]  :east]
+		   [[-1 1]  [-1 0] [0 1]  :south]
+		   [[1 1]   [1 0]  [0 1]  :south]
+		   [[-1 -1] [-1 0] [0 -1] :north]
+		   [[1 -1]  [1 0]  [0 -1] :north]])
+
+(defn next-to-wall? [character]
+  (let [[possible-directions (list-comp (check-wall-mapping character x) [x wall-mapping])]
+	[directions (list-comp direction [direction possible-directions] (not (= direction None)))]]
+    (if (> (len directions) 1) {:wall-direction directions} None)))
+
+(defn check-wall-mapping [character wall-mapping]
+  (let [[level character.level]
+	[point-1 (map-coordinates character (get wall-mapping 0))]
+	[point-2 (map-coordinates character (get wall-mapping 1))]
+	[point-3 (map-coordinates character (get wall-mapping 2))]]
+    (if (.blocks-movement level (get point-1 0) (get point-1 1))
+      (if (.blocks-movement level (get point-2 0) (get point-2 1))
+	(if (not (.blocks-movement level (get point-3 0) (get point-3 1)))
+	  (get wall-mapping 3))))))
+
+(defn map-coordinates [character offset]
+  (let [[character-x (get character.location 0)]
+	[character-y (get character.location 1)]
+	[offset-x (get offset 0)]
+	[offset-y (get offset 1)]]
+    (, (+ character-x offset-x) (+ character-y offset-y))))
 
 (defn get-random-wall-direction [wall-info] None)
 
