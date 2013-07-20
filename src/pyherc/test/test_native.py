@@ -19,7 +19,8 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for tests
+Package for native tests
 """
+import hy
 
-pass
+from pyherc.test.native.test_ai_helpers import *

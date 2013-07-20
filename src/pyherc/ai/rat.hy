@@ -22,12 +22,29 @@ Simple AI for flocking creature
 
 Creature will try to find friends, before attacking the player character
 """
+(import [pyherc.aspects [logged]])
 
 (defclass RatAI []
-  [[character None]
-  [__init__ (fn [self character] (setv self.character character) None)]
-  [act (fn [self model action_factory rng] (rat-act self model action_factory rng))]
-  ]
-)
+  [[__doc__ "AI routine for rats"]
+   [character None]
+   [mode [:wander]]
+   [__init__ (fn [self character] (setv self.character character) None)]
+   [act (fn [self model action_factory rng] (rat-act self model action_factory rng))]])
 
-(defn rat-act [ai model action_factory rng] (setv ai.character.tick 50))
+(with-decorator logged (defn rat-act [ai model action_factory rng]
+			  (let [[func (get mode-bindings (get ai.mode 0))]]
+			    (func ai model action_factory rng))))
+
+(with-decorator logged (defn wander [ai model action_factory rng]
+  (let [[wall-info (next-to-wall? ai.character)]]
+    (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info)])
+        (setv ai.mode [:find-wall])))))
+
+(defn find-wall [ai model action_factory rng])
+
+(defn next-to-wall? [character] None)
+
+(defn get-random-wall-direction [wall-info] None)
+
+(def mode-bindings {:wander wander
+		    :find-wall find-wall})
