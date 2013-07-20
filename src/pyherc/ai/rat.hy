@@ -76,10 +76,10 @@ Creature will try to find friends, before attacking the player character
 	[point-1 (map-coordinates character (get wall-mapping 0))]
 	[point-2 (map-coordinates character (get wall-mapping 1))]
 	[point-3 (map-coordinates character (get wall-mapping 2))]]
-    (if (.blocks-movement level (get point-1 0) (get point-1 1))
-      (if (.blocks-movement level (get point-2 0) (get point-2 1))
-	(if (not (.blocks-movement level (get point-3 0) (get point-3 1)))
-	  (get wall-mapping 3))))))
+    (if (and (.blocks-movement level (get point-1 0) (get point-1 1))
+             (.blocks-movement level (get point-2 0) (get point-2 1))
+	     (not (.blocks-movement level (get point-3 0) (get point-3 1))))
+	  (get wall-mapping 3))))
 
 (defn map-coordinates [character offset]
   "calculate new coordinates from character and offset"
