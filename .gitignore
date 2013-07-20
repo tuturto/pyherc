@@ -4,6 +4,7 @@
 *.html~
 *.hy~
 *.py~
+*.rst~
 report.html
 pyherc.log
 setup.cfg

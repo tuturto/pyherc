@@ -28,21 +28,28 @@ Creature will try to find friends, before attacking the player character
   [[__doc__ "AI routine for rats"]
    [character None]
    [mode [:wander]]
-   [__init__ (fn [self character] (setv self.character character) None)]
-   [act (fn [self model action_factory rng] (rat-act self model action_factory rng))]])
+   [__init__ (fn [self character]
+	       "default constructor"
+	       (setv self.character character) None)]
+   [act (fn [self model action_factory rng] 
+	  "check the situation and act accordingly"
+	  (rat-act self model action_factory rng))]])
 
 (with-decorator logged 
   (defn rat-act [ai model action_factory rng]
+    "main routine for rat AI"
     (let [[func (get mode-bindings (get ai.mode 0))]]
       (func ai model action_factory rng))))
 
 (with-decorator logged 
   (defn wander [ai model action_factory rng]
+    "routine to make character to wander around"
     (let [[wall-info (next-to-wall? ai.character)]]
       (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info)])
 	  (setv ai.mode [:find-wall])))))
 
-(defn find-wall [ai model action_factory rng])
+(defn find-wall [ai model action_factory rng]
+  "routine to make character to find a wall")
 
 ;; wall-mapping
 ;; first two elements are offsets for required walls
@@ -58,11 +65,13 @@ Creature will try to find friends, before attacking the player character
 		   [[1 -1]  [1 0]  [0 -1] :north]])
 
 (defn next-to-wall? [character]
+  "check if character is standing next to a wall"
   (let [[possible-directions (list-comp (check-wall-mapping character x) [x wall-mapping])]
 	[directions (list-comp direction [direction possible-directions] (not (= direction None)))]]
     (if (> (len directions) 1) {:wall-direction directions} None)))
 
 (defn check-wall-mapping [character wall-mapping]
+  "build a list of directions where a wall leads from given location"
   (let [[level character.level]
 	[point-1 (map-coordinates character (get wall-mapping 0))]
 	[point-2 (map-coordinates character (get wall-mapping 1))]
@@ -73,13 +82,16 @@ Creature will try to find friends, before attacking the player character
 	  (get wall-mapping 3))))))
 
 (defn map-coordinates [character offset]
+  "calculate new coordinates from character and offset"
   (let [[character-x (get character.location 0)]
 	[character-y (get character.location 1)]
 	[offset-x (get offset 0)]
 	[offset-y (get offset 1)]]
     (, (+ character-x offset-x) (+ character-y offset-y))))
 
-(defn get-random-wall-direction [wall-info] None)
+(defn get-random-wall-direction [wall-info]
+  "select a random direction from the given list"
+  None)
 
 (def mode-bindings {:wander wander
 		    :find-wall find-wall})
