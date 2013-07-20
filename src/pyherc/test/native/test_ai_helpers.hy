@@ -17,5 +17,39 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(import [pyherc.test.builders [LevelBuilder CharacterBuilder]]
+	[pyherc.ai.rat [next-to-wall?]]
+	[hamcrest [assert-that is- is-not :as is-not- none has-items]])
+
+(defn test-empty-space-is-detected [] 
+  "test that an empty space is not reported as wall"
+  (let [[character (-> (CharacterBuilder)
+		       (.build))]
+	[level (-> (LevelBuilder)
+                   (.with-floor-tile :floor)
+		   (.with-wall-tile :empty-wall)
+		   (.with-empty-wall-tile :empty-wall)
+		   (.with-solid-wall-tile :solid-wall)
+		   (.with-character character (, 5 9))
+		   (.build))]
+	[wall-info (next-to-wall? character)]]
+    (assert-that wall-info (is- (none)))))
+
 (defn test-wall-is-detected [] 
-  "test that a wall can be detected next to a given point")
+  "test that a wall can be detected next to a given point"
+  (let [[character (-> (CharacterBuilder)
+		       (.build))]
+	[level (-> (LevelBuilder)
+                   (.with-floor-tile :floor)
+		   (.with-wall-tile :empty-wall)
+		   (.with-empty-wall-tile :empty-wall)
+		   (.with-solid-wall-tile :solid-wall)
+		   (.with-wall-at (, 4 10))
+		   (.with-wall-at (, 5 10))
+		   (.with-wall-at (, 6 10))
+		   (.with-character character (, 5 9))
+		   (.build))]
+	[wall-info (next-to-wall? character)]]
+    (assert-that wall-info (is-not- (none)))
+    (let [[wall-direction (get wall-info :wall-direction)]]
+      (assert-that wall-direction has-items [:east :west]))))
