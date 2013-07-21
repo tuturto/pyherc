@@ -18,8 +18,9 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.test.builders [LevelBuilder CharacterBuilder]]
-	[pyherc.ai.rat [next-to-wall?]]
-	[hamcrest [assert-that is- is-not :as is-not- none has-items]])
+	[pyherc.ai.rat [next-to-wall? get-random-wall-direction]]
+	[hamcrest [assert-that is- is-not :as is-not- none has-items is-in]]
+	[random [Random]])
 
 (defn test-empty-space-is-detected [] 
   "test that an empty space is not reported as wall"
@@ -53,3 +54,10 @@
     (assert-that wall-info (is-not- (none)))
     (let [[wall-direction (get wall-info :wall-direction)]]
       (assert-that wall-direction has-items [:east :west]))))
+
+(defn test-picking-random-wall-direction []
+  "test that a random wall direction can be selected"
+  (let [[wall-info {:wall-direction [:east :west]}]
+	[rng (Random)]
+	[direction (get-random-wall-direction wall-info rng)]]
+    (assert-that direction (is-in [:east :west]))))

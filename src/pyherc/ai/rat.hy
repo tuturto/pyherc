@@ -42,7 +42,7 @@
   (defn wander [ai model action-factory rng]
     "routine to make character to wander around"
     (let [[wall-info (next-to-wall? ai.character)]]
-      (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info)])
+      (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
 	  (setv ai.mode [:find-wall])))))
 
 (defn find-wall [ai model action-factory rng]
@@ -89,9 +89,9 @@
 	[offset-y (get offset 1)]]
     (, (+ character-x offset-x) (+ character-y offset-y))))
 
-(defn get-random-wall-direction [wall-info]
+(defn get-random-wall-direction [wall-info rng]
   "select a random direction from the given list"
-  None)
+  (.choice rng (get wall-info :wall-direction)))
 
 (def mode-bindings {:wander wander
 		    :find-wall find-wall
