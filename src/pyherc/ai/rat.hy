@@ -90,7 +90,7 @@
     (, (+ character-x offset-x) (+ character-y offset-y))))
 
 (defn get-random-wall-direction [wall-info rng]
-  "select a random direction from the given list"
+  "select a random direction from the given wall-info"
   (.choice rng (get wall-info :wall-direction)))
 
 (def mode-bindings {:wander wander

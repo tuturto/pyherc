@@ -18,8 +18,9 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.test.builders [LevelBuilder CharacterBuilder]]
-	[pyherc.ai.rat [next-to-wall? get-random-wall-direction]]
+	[pyherc.ai.rat [next-to-wall? get-random-wall-direction map-coordinates]]
 	[hamcrest [assert-that is- is-not :as is-not- none has-items is-in]]
+	[hamcrest [equal-to]]
 	[random [Random]])
 
 (defn test-empty-space-is-detected [] 
@@ -53,7 +54,8 @@
 	[wall-info (next-to-wall? character)]]
     (assert-that wall-info (is-not- (none)))
     (let [[wall-direction (get wall-info :wall-direction)]]
-      (assert-that wall-direction has-items [:east :west]))))
+      (print wall-direction)
+      (assert-that wall-direction (has-items :east :west)))))
 
 (defn test-picking-random-wall-direction []
   "test that a random wall direction can be selected"
@@ -61,3 +63,13 @@
 	[rng (Random)]
 	[direction (get-random-wall-direction wall-info rng)]]
     (assert-that direction (is-in [:east :west]))))
+
+(defn test-mapping-coordinates []
+  "test that coordinates can be offset correctly"
+  (let [[character (-> (CharacterBuilder)
+		       (.with-location (, 10 10))
+		       (.build))]
+	[offset-1 (, -1 -1)]
+	[offset-2 (, 2 4)]]
+    (assert-that (map-coordinates character offset-1) (is- (equal-to (, 9 9))))
+    (assert-that (map-coordinates character offset-2) (is- (equal-to (, 12 14))))))
