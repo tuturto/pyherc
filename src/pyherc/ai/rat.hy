@@ -91,7 +91,7 @@
 
 (defn get-random-wall-direction [wall-info rng]
   "select a random direction from the given wall-info"
-  (.choice rng (get wall-info :wall-direction)))
+  (.choice rng (:wall-direction wall-info)))
 
 (def mode-bindings {:wander wander
 		    :find-wall find-wall

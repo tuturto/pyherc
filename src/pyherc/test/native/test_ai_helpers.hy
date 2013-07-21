@@ -53,7 +53,7 @@
 		   (.build))]
 	[wall-info (next-to-wall? character)]]
     (assert-that wall-info (is-not- (none)))
-    (let [[wall-direction (get wall-info :wall-direction)]]
+    (let [[wall-direction (:wall-direction wall-info)]]
       (print wall-direction)
       (assert-that wall-direction (has-items :east :west)))))
 
