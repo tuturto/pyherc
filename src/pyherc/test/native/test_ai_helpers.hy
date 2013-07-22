@@ -18,7 +18,8 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.test.builders [LevelBuilder CharacterBuilder]]
-	[pyherc.ai.rat [next-to-wall? get-random-wall-direction map-coordinates]]
+	[pyherc.ai.rat [next-to-wall? get-random-wall-direction]]
+	[pyherc.ai.rat [map-coordinates map-direction]]
 	[hamcrest [assert-that is- is-not :as is-not- none has-items is-in]]
 	[hamcrest [equal-to]]
 	[random [Random]])
@@ -73,3 +74,10 @@
 	[offset-2 (, 2 4)]]
     (assert-that (map-coordinates character offset-1) (is- (equal-to (, 9 9))))
     (assert-that (map-coordinates character offset-2) (is- (equal-to (, 12 14))))))
+
+(defn test-mapping-directions []
+  "test that keyword directions can be mapped to integers and back"
+  (assert-that (map-direction :north) (is- (equal-to 1)))
+  (assert-that (map-direction :south-west) (is- (equal-to 6)))
+  (assert-that (map-direction 3) (is- (equal-to :east)))
+  (assert-that (map-direction 9) (is- (equal-to :enter))))

@@ -24,7 +24,7 @@
 (defclass RatAI []
   [[__doc__ "AI routine for rats"]
    [character None]
-   [mode [:wander]]
+   [mode [:find-wall :north]]
    [__init__ (fn [self character]
 	       "default constructor"
 	       (setv self.character character) None)]
@@ -38,15 +38,13 @@
     (let [[func (get mode-bindings (get ai.mode 0))]]
       (func ai model action-factory rng))))
 
-(with-decorator logged 
-  (defn wander [ai model action-factory rng]
-    "routine to make character to wander around"
+(defn find-wall [ai model action-factory rng]
+  "routine to make character to find a wall"
     (let [[wall-info (next-to-wall? ai.character)]]
       (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
-	  (setv ai.mode [:find-wall])))))
+	  (setv ai.character.tick 25))))
 
-(defn find-wall [ai model action-factory rng]
-  "routine to make character to find a wall")
+;; is_move_legal(self, direction, movement_mode, action_factory)
 
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall")
@@ -93,6 +91,14 @@
   "select a random direction from the given wall-info"
   (.choice rng (:wall-direction wall-info)))
 
-(def mode-bindings {:wander wander
-		    :find-wall find-wall
+(def mode-bindings {:find-wall find-wall
 		    :follow-wall follow-wall})
+
+(def direction-mapping {1 :north 2 :north-east 3 :east 4 :south-east 5 :south
+			6 :south-west 7 :west 8 :north-west 9 :enter
+			:north 1 :north-east 2 :east 3 :south-east 4 :south 5
+			:south-west 6 :west 7 :north-west 8 :enter 9})
+
+(defn map-direction [direction]
+  "map between keyword and integer directions"
+  (get direction-mapping direction))
