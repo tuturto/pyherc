@@ -21,6 +21,12 @@
 
 (import [pyherc.aspects [logged]])
 
+(defmacro second [collection]
+  (quasiquote (get (unquote collection) 1)))
+
+(defmacro third [collection]
+  (quasiquote (get (unquote collection) 2)))
+
 (defclass RatAI []
   [[__doc__ "AI routine for rats"]
    [character None]
@@ -36,7 +42,7 @@
 (with-decorator logged 
   (defn rat-act [ai model action-factory rng]
     "main routine for rat AI"
-    (let [[func (get mode-bindings (get ai.mode 0))]]
+    (let [[func (get mode-bindings (first ai.mode))]]
       (func ai model action-factory rng))))
 
 (defn find-wall [ai model action-factory rng]
@@ -44,16 +50,16 @@
     (let [[character ai.character]
 	  [wall-info (next-to-wall? character)]]
       (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
-	  (if (.is-move-legal character (map-direction (get ai.mode 1)) "walk" action-factory)
-	    (.move character (map-direction (get ai.mode 1)) action-factory)
+	  (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
+	    (.move character (map-direction (second ai.mode)) action-factory)
 	    (do (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
 		(setv ai.character.tick 5))))))
 
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall"
   (let [[character ai.character]]
-    (if (.is-move-legal character (map-direction (get ai.mode 1)) "walk" action-factory)
-      (.move character (map-direction (get ai.mode 1)) action-factory)
+    (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
+      (.move character (map-direction (second ai.mode)) action-factory)
       (let [[wall-info (next-to-wall? character)]]
 	(if wall-info (do (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
 			  (setv ai.character.tick 5))
@@ -81,20 +87,20 @@
 (defn check-wall-mapping [character wall-mapping]
   "build a list of directions where a wall leads from given location"
   (let [[level character.level]
-	[point-1 (map-coordinates character (get wall-mapping 0))]
-	[point-2 (map-coordinates character (get wall-mapping 1))]
-	[point-3 (map-coordinates character (get wall-mapping 2))]]
-    (if (and (.blocks-movement level (get point-1 0) (get point-1 1))
-             (.blocks-movement level (get point-2 0) (get point-2 1))
-	     (not (.blocks-movement level (get point-3 0) (get point-3 1))))
+	[point-1 (map-coordinates character (first wall-mapping))]
+	[point-2 (map-coordinates character (second wall-mapping))]
+	[point-3 (map-coordinates character (third wall-mapping))]]
+    (if (and (.blocks-movement level (first point-1) (second point-1))
+             (.blocks-movement level (first point-2) (second point-2))
+	     (not (.blocks-movement level (first point-3) (second point-3))))
 	  (get wall-mapping 3))))
 
 (defn map-coordinates [character offset]
   "calculate new coordinates from character and offset"
-  (let [[character-x (get character.location 0)]
-	[character-y (get character.location 1)]
-	[offset-x (get offset 0)]
-	[offset-y (get offset 1)]]
+  (let [[character-x (first character.location)]
+	[character-y (second character.location)]
+	[offset-x (first offset)]
+	[offset-y (second offset)]]
     (, (+ character-x offset-x) (+ character-y offset-y))))
 
 (defn get-random-wall-direction [wall-info rng]
@@ -112,3 +118,4 @@
 (defn map-direction [direction]
   "map between keyword and integer directions"
   (get direction-mapping direction))
+
