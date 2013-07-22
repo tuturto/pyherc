@@ -51,7 +51,13 @@
 
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall"
-  (setv ai.character.tick 50))
+  (let [[character ai.character]]
+    (if (.is-move-legal character (map-direction (get ai.mode 1)) "walk" action-factory)
+      (.move character (map-direction (get ai.mode 1)) action-factory)
+      (let [[wall-info (next-to-wall? character)]]
+	(if wall-info (do (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
+			  (follow-wall ai model action-factory rng))
+	   (setv ai.character.tick 50))))))
 
 ;; wall-mapping
 ;; first two elements are offsets for required walls
