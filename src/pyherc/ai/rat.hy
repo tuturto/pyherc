@@ -49,8 +49,6 @@
 	    (do (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
 		(setv ai.character.tick 5))))))
 
-;; is_move_legal(self, direction, movement_mode, action_factory)
-
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall"
   (setv ai.character.tick 50))
