@@ -25,8 +25,9 @@
   [[__doc__ "AI routine for rats"]
    [character None]
    [mode [:find-wall :north]]
-   [__init__ (fn [self character]
+   [--init-- (fn [self character]
 	       "default constructor"
+	       (.--init-- (super RatAI self))
 	       (setv self.character character) None)]
    [act (fn [self model action-factory rng] 
 	  "check the situation and act accordingly"
@@ -40,14 +41,19 @@
 
 (defn find-wall [ai model action-factory rng]
   "routine to make character to find a wall"
-    (let [[wall-info (next-to-wall? ai.character)]]
+    (let [[character ai.character]
+	  [wall-info (next-to-wall? character)]]
       (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
-	  (setv ai.character.tick 25))))
+	  (if (.is-move-legal character (map-direction (get ai.mode 1)) "walk" action-factory)
+	    (.move character (map-direction (get ai.mode 1)) action-factory)
+	    (do (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
+		(setv ai.character.tick 5))))))
 
 ;; is_move_legal(self, direction, movement_mode, action_factory)
 
 (defn follow-wall [ai model action-factory rng]
-  "routine to make character to follow a wall")
+  "routine to make character to follow a wall"
+  (setv ai.character.tick 50))
 
 ;; wall-mapping
 ;; first two elements are offsets for required walls
