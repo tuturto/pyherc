@@ -55,8 +55,26 @@
 	[wall-info (next-to-wall? character)]]
     (assert-that wall-info (is-not- (none)))
     (let [[wall-direction (:wall-direction wall-info)]]
-      (print wall-direction)
       (assert-that wall-direction (has-items :east :west)))))
+
+(defn test-picking-wall-direction-in-lip []
+  "test that wall direction can be picked when a corridor is about to end"
+  (let [[character (-> (CharacterBuilder)
+		       (.build))]
+	[level (-> (LevelBuilder)
+                   (.with-floor-tile :floor)
+		   (.with-wall-tile :empty-wall)
+		   (.with-empty-wall-tile :empty-wall)
+		   (.with-solid-wall-tile :solid-wall)
+		   (.with-wall-at (, 3 2))
+		   (.with-wall-at (, 1 3))
+		   (.with-wall-at (, 3 3))
+		   (.with-character character (, 2 2))
+		   (.build))]
+	[wall-info (next-to-wall? character)]]
+    (assert-that wall-info (is-not- (none)))
+    (let [[wall-direction (:wall-direction wall-info)]]
+      (assert-that wall-direction (has-items :south)))))
 
 (defn test-picking-random-wall-direction []
   "test that a random wall direction can be selected"

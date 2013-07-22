@@ -56,7 +56,7 @@
       (.move character (map-direction (get ai.mode 1)) action-factory)
       (let [[wall-info (next-to-wall? character)]]
 	(if wall-info (do (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
-			  (follow-wall ai model action-factory rng))
+			  (setv ai.character.tick 5))
 	   (setv ai.character.tick 50))))))
 
 ;; wall-mapping
@@ -76,7 +76,7 @@
   "check if character is standing next to a wall"
   (let [[possible-directions (list-comp (check-wall-mapping character x) [x wall-mapping])]
 	[directions (list-comp direction [direction possible-directions] (not (= direction None)))]]
-    (if (> (len directions) 1) {:wall-direction directions} None)))
+    (if (> (len directions) 0) {:wall-direction directions} None)))
 
 (defn check-wall-mapping [character wall-mapping]
   "build a list of directions where a wall leads from given location"
