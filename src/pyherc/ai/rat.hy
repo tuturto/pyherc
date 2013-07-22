@@ -19,13 +19,22 @@
 
 (setv __doc__ "module for AI routines for rats")
 
-(import [pyherc.aspects [logged]])
+(import [pyherc.aspects [logged]]
+	[pyherc.ai.helpers [map-direction]])
 
-(defmacro second [collection]
-  (quasiquote (get (unquote collection) 1)))
+(require pyherc.ai.helpers)
 
-(defmacro third [collection]
-  (quasiquote (get (unquote collection) 2)))
+(defmacro diagonal-wall [info]
+  (quasiquote (get (unquote info) 0)))
+
+(defmacro adjacent-wall [info]
+  (quasiquote (get (unquote info) 1)))
+
+(defmacro empty-corridor [info]
+  (quasiquote (get (unquote info) 2)))
+
+(defmacro wall-direction [info]
+  (quasiquote (get (unquote info) 3)))
 
 (defclass RatAI []
   [[__doc__ "AI routine for rats"]
@@ -59,7 +68,7 @@
   "routine to make character to follow a wall"
   (let [[character ai.character]]
     (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
-      (.move character (map-direction (second ai.mode)) action-factory)
+      (.move character (pmap-direction (second ai.mode)) action-factory)
       (let [[wall-info (next-to-wall? character)]]
 	(if wall-info (do (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
 			  (setv ai.character.tick 5))
@@ -87,13 +96,13 @@
 (defn check-wall-mapping [character wall-mapping]
   "build a list of directions where a wall leads from given location"
   (let [[level character.level]
-	[point-1 (map-coordinates character (first wall-mapping))]
-	[point-2 (map-coordinates character (second wall-mapping))]
-	[point-3 (map-coordinates character (third wall-mapping))]]
+	[point-1 (map-coordinates character (diagonal-wall wall-mapping))]
+	[point-2 (map-coordinates character (adjacent-wall wall-mapping))]
+	[point-3 (map-coordinates character (empty-corridor wall-mapping))]]
     (if (and (.blocks-movement level (first point-1) (second point-1))
              (.blocks-movement level (first point-2) (second point-2))
 	     (not (.blocks-movement level (first point-3) (second point-3))))
-	  (get wall-mapping 3))))
+	  (wall-direction wall-mapping))))
 
 (defn map-coordinates [character offset]
   "calculate new coordinates from character and offset"
@@ -110,12 +119,4 @@
 (def mode-bindings {:find-wall find-wall
 		    :follow-wall follow-wall})
 
-(def direction-mapping {1 :north 2 :north-east 3 :east 4 :south-east 5 :south
-			6 :south-west 7 :west 8 :north-west 9 :enter
-			:north 1 :north-east 2 :east 3 :south-east 4 :south 5
-			:south-west 6 :west 7 :north-west 8 :enter 9})
-
-(defn map-direction [direction]
-  "map between keyword and integer directions"
-  (get direction-mapping direction))
 
