@@ -68,7 +68,7 @@
 			    action-factory)
 	  (.move character (map-direction (second ai.mode)) action-factory)
 	  (sometimes (walk-random-direction ai model action-factory rng)
-		     (setv character.tick 5))))))
+		     (wait character))))))
 
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall"
@@ -82,9 +82,9 @@
 	       (if wall-info (do (setv ai.mode [:follow-wall 
 						(get-random-wall-direction 
 						 wall-info rng)])
-				 (setv character.tick 5))
+				 (wait character))
 		   (walk-random-direction ai model action-factory rng))))
-	   (setv character.tick 5))))
+	   (wait character))))
 
 (defn walk-random-direction [ai model action-factory rng]
   "take a random step without changing mode"
@@ -95,7 +95,11 @@
 			"walk" 
 			action-factory)
       (.move character (map-direction (second ai.mode)) action-factory)
-      (setv character.tick 5))))
+      (wait character))))
+
+(defn wait [character]
+  "make character to wait a little bit"
+  (setv character.tick 5))
 
 ;; wall-mapping
 ;; first two elements are offsets for required walls
