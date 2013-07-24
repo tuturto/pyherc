@@ -56,23 +56,28 @@
 
 (defn find-wall [ai model action-factory rng]
   "routine to make character to find a wall"
-    (let [[character ai.character]
-	  [wall-info (next-to-wall? character)]]
-      (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
-	  (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
-	    (.move character (map-direction (second ai.mode)) action-factory)
-	    (do (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
-		(setv ai.character.tick 5))))))
+  (let [[character ai.character]
+	[wall-info (next-to-wall? character)]]
+    (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
+	(if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
+	  (.move character (map-direction (second ai.mode)) action-factory)
+	  (do (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
+	      (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
+		(.move character (map-direction (second ai.mode)) action-factory)
+		(setv ai.character.tick 5)))))))
 
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall"
   (let [[character ai.character]]
     (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
-      (.move character (pmap-direction (second ai.mode)) action-factory)
+      (.move character (map-direction (second ai.mode)) action-factory)
       (let [[wall-info (next-to-wall? character)]]
 	(if wall-info (do (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
 			  (setv ai.character.tick 5))
-	   (setv ai.character.tick 50))))))
+	    (do (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
+		(if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
+		  (.move character (map-direction (second ai.mode)) action-factory)
+		  (setv ai.character.tick 5))))))))
 
 ;; wall-mapping
 ;; first two elements are offsets for required walls
