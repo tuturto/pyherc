@@ -58,8 +58,12 @@
   "routine to make character to find a wall"
   (let [[character ai.character]
 	[wall-info (next-to-wall? character)]]
-    (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
-	(if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
+    (if wall-info (setv ai.mode [:follow-wall 
+				 (get-random-wall-direction wall-info rng)])
+	(if (.is-move-legal character 
+			    (map-direction (second ai.mode)) 
+			    "walk" 
+			    action-factory)
 	  (.move character (map-direction (second ai.mode)) action-factory)
 	  (sometimes (walk-random-direction ai model action-factory rng)
 		     (setv character.tick 5))))))
@@ -67,10 +71,15 @@
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall"
   (let [[character ai.character]]
-    (often (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
+    (often (if (.is-move-legal character 
+			       (map-direction (second ai.mode)) 
+			       "walk" 
+			       action-factory)
 	     (.move character (map-direction (second ai.mode)) action-factory)
 	     (let [[wall-info (next-to-wall? character)]]
-	       (if wall-info (do (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
+	       (if wall-info (do (setv ai.mode [:follow-wall 
+						(get-random-wall-direction 
+						 wall-info rng)])
 				 (setv character.tick 5))
 		   (walk-random-direction ai model action-factory rng))))
 	   (setv character.tick 5))))
@@ -79,7 +88,10 @@
   "take a random step without changing mode"
   (let [[character ai.character]]
     (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
-    (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
+    (if (.is-move-legal character 
+			(map-direction (second ai.mode)) 
+			"walk" 
+			action-factory)
       (.move character (map-direction (second ai.mode)) action-factory)
       (setv character.tick 5))))
 
@@ -98,8 +110,10 @@
 
 (defn next-to-wall? [character]
   "check if character is standing next to a wall"
-  (let [[possible-directions (list-comp (check-wall-mapping character x) [x wall-mapping])]
-	[directions (list-comp direction [direction possible-directions] (not (= direction None)))]]
+  (let [[possible-directions (list-comp (check-wall-mapping character x) 
+					[x wall-mapping])]
+	[directions (list-comp direction [direction possible-directions] 
+			       (not (= direction None)))]]
     (if (> (len directions) 0) {:wall-direction directions} None)))
 
 (defn check-wall-mapping [character wall-mapping]
@@ -111,7 +125,7 @@
     (if (and (.blocks-movement level (first point-1) (second point-1))
              (.blocks-movement level (first point-2) (second point-2))
 	     (not (.blocks-movement level (first point-3) (second point-3))))
-	  (wall-direction wall-mapping))))
+      (wall-direction wall-mapping))))
 
 (defn map-coordinates [character offset]
   "calculate new coordinates from character and offset"
