@@ -19,8 +19,7 @@
 
 (setv __doc__ "module for AI routines for rats")
 
-(import [pyherc.aspects [logged]]
-	[pyherc.ai.helpers [map-direction]])
+(import [pyherc.aspects [logged]])
 
 (require pyherc.ai.helpers)
 
@@ -122,6 +121,15 @@
 (defn get-random-wall-direction [wall-info rng]
   "select a random direction from the given wall-info"
   (.choice rng (:wall-direction wall-info)))
+
+(def direction-mapping {1 :north 2 :north-east 3 :east 4 :south-east 5 :south
+			6 :south-west 7 :west 8 :north-west 9 :enter
+			:north 1 :north-east 2 :east 3 :south-east 4 :south 5
+			:south-west 6 :west 7 :north-west 8 :enter 9})
+
+(defn map-direction [direction]
+  "map between keyword and integer directions"
+  (get direction-mapping direction))
 
 (def mode-bindings {:find-wall find-wall
 		    :follow-wall follow-wall})
