@@ -46,41 +46,40 @@
 	       (setv self.character character) None)]
    [act (fn [self model action-factory rng] 
 	  "check the situation and act accordingly"
-	  (rat-act self model action-factory rng))]])
+	  (rat-act self model action-factory))]])
 
 (with-decorator logged 
-  (defn rat-act [ai model action-factory rng]
+  (defn rat-act [ai model action-factory]
     "main routine for rat AI"
     (let [[func (get mode-bindings (first ai.mode))]]
-      (func ai model action-factory rng))))
+      (func ai model action-factory))))
 
-(defn find-wall [ai model action-factory rng]
+(defn find-wall [ai model action-factory]
   "routine to make character to find a wall"
   (let [[wall-info (next-to-wall? ai)]]
     (if wall-info (do (setv ai.mode [:follow-wall 
-				     (get-random-wall-direction wall-info 
-								rng)])
-		      (follow-wall ai model action-factory rng))
+				     (get-random-wall-direction wall-info)])
+		      (follow-wall ai model action-factory))
 	(if (can-walk? ai action-factory)
 	  (walk ai action-factory)
-	  (sometimes (walk-random-direction ai action-factory rng)
+	  (sometimes (walk-random-direction ai action-factory)
 		     (wait ai))))))
 
-(defn follow-wall [ai model action-factory rng]
+(defn follow-wall [ai model action-factory]
   "routine to make character to follow a wall"
   (often (if (can-walk? ai action-factory)
 	   (walk ai action-factory)
 	   (let [[wall-info (next-to-wall? ai)]]
 	     (if wall-info (do (setv ai.mode [:follow-wall 
 					      (get-random-wall-direction 
-					       wall-info rng)])
+					       wall-info)])
 			       (wait ai))
-		 (walk-random-direction ai action-factory rng))))
+		 (walk-random-direction ai action-factory))))
 	 (wait ai)))
 
-(defn walk-random-direction [ai action-factory rng]
+(defn walk-random-direction [ai action-factory]
   "take a random step without changing mode"
-    (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
+    (assoc ai.mode 1 (map-direction (.randint random 1 8)))
     (if (can-walk? ai action-factory)
       (walk ai action-factory)
       (wait ai)))
@@ -141,9 +140,9 @@
 	[offset-y (second offset)]]
     (, (+ character-x offset-x) (+ character-y offset-y))))
 
-(defn get-random-wall-direction [wall-info rng]
+(defn get-random-wall-direction [wall-info]
   "select a random direction from the given wall-info"
-  (.choice rng (:wall-direction wall-info)))
+  (.choice random (:wall-direction wall-info)))
 
 (def direction-mapping {1 :north 2 :north-east 3 :east 4 :south-east 5 :south
 			6 :south-west 7 :west 8 :north-west 9 :enter

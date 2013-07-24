@@ -18,7 +18,7 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.test.builders [LevelBuilder CharacterBuilder]]
-	[pyherc.ai.rat [next-to-wall? get-random-wall-direction]]
+	[pyherc.ai.rat [next-to-wall? get-random-wall-direction RatAI]]
 	[pyherc.ai.rat [map-coordinates map-direction]]
 	[hamcrest [assert-that is- is-not :as is-not- none has-items is-in]]
 	[hamcrest [equal-to]]
@@ -28,6 +28,7 @@
   "test that an empty space is not reported as wall"
   (let [[character (-> (CharacterBuilder)
 		       (.build))]
+	[ai (RatAI character)]
 	[level (-> (LevelBuilder)
                    (.with-floor-tile :floor)
 		   (.with-wall-tile :empty-wall)
@@ -35,13 +36,14 @@
 		   (.with-solid-wall-tile :solid-wall)
 		   (.with-character character (, 5 9))
 		   (.build))]
-	[wall-info (next-to-wall? character)]]
+	[wall-info (next-to-wall? ai)]]
     (assert-that wall-info (is- (none)))))
 
 (defn test-wall-is-detected [] 
   "test that a wall can be detected next to a given point"
   (let [[character (-> (CharacterBuilder)
 		       (.build))]
+	[ai (RatAI character)]
 	[level (-> (LevelBuilder)
                    (.with-floor-tile :floor)
 		   (.with-wall-tile :empty-wall)
@@ -52,7 +54,7 @@
 		   (.with-wall-at (, 6 10))
 		   (.with-character character (, 5 9))
 		   (.build))]
-	[wall-info (next-to-wall? character)]]
+	[wall-info (next-to-wall? ai)]]
     (assert-that wall-info (is-not- (none)))
     (let [[wall-direction (:wall-direction wall-info)]]
       (assert-that wall-direction (has-items :east :west)))))
@@ -61,6 +63,7 @@
   "test that wall direction can be picked when a corridor is about to end"
   (let [[character (-> (CharacterBuilder)
 		       (.build))]
+	[ai (RatAI character)]
 	[level (-> (LevelBuilder)
                    (.with-floor-tile :floor)
 		   (.with-wall-tile :empty-wall)
@@ -71,7 +74,7 @@
 		   (.with-wall-at (, 3 3))
 		   (.with-character character (, 2 2))
 		   (.build))]
-	[wall-info (next-to-wall? character)]]
+	[wall-info (next-to-wall? ai)]]
     (assert-that wall-info (is-not- (none)))
     (let [[wall-direction (:wall-direction wall-info)]]
       (assert-that wall-direction (has-items :south)))))
@@ -80,7 +83,7 @@
   "test that a random wall direction can be selected"
   (let [[wall-info {:wall-direction [:east :west]}]
 	[rng (Random)]
-	[direction (get-random-wall-direction wall-info rng)]]
+	[direction (get-random-wall-direction wall-info)]]
     (assert-that direction (is-in [:east :west]))))
 
 (defn test-mapping-coordinates []
