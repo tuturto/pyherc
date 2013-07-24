@@ -56,8 +56,7 @@
 
 (defn find-wall [ai model action-factory rng]
   "routine to make character to find a wall"
-  (let [[character ai.character]
-	[wall-info (next-to-wall? character)]]
+  (let [[wall-info (next-to-wall? ai)]]
     (if wall-info (do (setv ai.mode [:follow-wall 
 				     (get-random-wall-direction wall-info 
 								rng)])
@@ -69,16 +68,15 @@
 
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall"
-  (let [[character ai.character]]
-    (often (if (can-walk? ai action-factory)
-	     (walk ai action-factory)
-	     (let [[wall-info (next-to-wall? character)]]
-	       (if wall-info (do (setv ai.mode [:follow-wall 
-						(get-random-wall-direction 
-						 wall-info rng)])
-				 (wait ai))
-		   (walk-random-direction ai action-factory rng))))
-	   (wait ai))))
+  (often (if (can-walk? ai action-factory)
+	   (walk ai action-factory)
+	   (let [[wall-info (next-to-wall? ai)]]
+	     (if wall-info (do (setv ai.mode [:follow-wall 
+					      (get-random-wall-direction 
+					       wall-info rng)])
+			       (wait ai))
+		 (walk-random-direction ai action-factory rng))))
+	 (wait ai)))
 
 (defn walk-random-direction [ai action-factory rng]
   "take a random step without changing mode"
@@ -115,9 +113,10 @@
 		   [[-1 -1] [-1 0] [0 -1] :north]
 		   [[1 -1]  [1 0]  [0 -1] :north]])
 
-(defn next-to-wall? [character]
-  "check if character is standing next to a wall"
-  (let [[possible-directions (list-comp (check-wall-mapping character x) 
+(defn next-to-wall? [ai]
+  "check if ai is standing next to a wall"
+  (let [[character ai.character]
+	[possible-directions (list-comp (check-wall-mapping character x) 
 					[x wall-mapping])]
 	[directions (list-comp direction [direction possible-directions] 
 			       (not (= direction None)))]]
