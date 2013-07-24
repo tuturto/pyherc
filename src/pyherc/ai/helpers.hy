@@ -27,3 +27,15 @@
 
 (defmacro fourth [collection]
   (quasiquote (get (unquote collection) 3)))
+
+(defmacro rarely [code else-code]
+  (quasiquote (if (< (.randint random 1 100) 25) (unquote code)
+		  (unquote else-code))))
+
+(defmacro sometimes [code else-code]
+  (quasiquote (if (< (.randint random 1 100) 50) (unquote code)
+		  (unquote else-code))))
+
+(defmacro often [code else-code]
+  (quasiquote (if (< (.randint random 1 100) 75) (unquote code)
+		  (unquote else-code))))

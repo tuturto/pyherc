@@ -19,7 +19,8 @@
 
 (setv __doc__ "module for AI routines for rats")
 
-(import [pyherc.aspects [logged]])
+(import [pyherc.aspects [logged]]
+	[random])
 
 (require pyherc.ai.helpers)
 
@@ -60,17 +61,19 @@
     (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
 	(if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
 	  (.move character (map-direction (second ai.mode)) action-factory)
-	  (walk-random-direction ai model action-factory rng)))))
+	  (sometimes (walk-random-direction ai model action-factory rng)
+		     (setv character.tick 5))))))
 
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall"
   (let [[character ai.character]]
-    (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
-      (.move character (map-direction (second ai.mode)) action-factory)
-      (let [[wall-info (next-to-wall? character)]]
-	(if wall-info (do (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
-			  (setv ai.character.tick 5))
-	    (walk-random-direction ai model action-factory rng))))))
+    (often (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
+	     (.move character (map-direction (second ai.mode)) action-factory)
+	     (let [[wall-info (next-to-wall? character)]]
+	       (if wall-info (do (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
+				 (setv character.tick 5))
+		   (walk-random-direction ai model action-factory rng))))
+	   (setv character.tick 5))))
 
 (defn walk-random-direction [ai model action-factory rng]
   "take a random step without changing mode"
