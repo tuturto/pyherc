@@ -61,10 +61,7 @@
     (if wall-info (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
 	(if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
 	  (.move character (map-direction (second ai.mode)) action-factory)
-	  (do (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
-	      (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
-		(.move character (map-direction (second ai.mode)) action-factory)
-		(setv ai.character.tick 5)))))))
+	  (walk-random-direction ai model action-factory rng)))))
 
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall"
@@ -74,10 +71,15 @@
       (let [[wall-info (next-to-wall? character)]]
 	(if wall-info (do (setv ai.mode [:follow-wall (get-random-wall-direction wall-info rng)])
 			  (setv ai.character.tick 5))
-	    (do (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
-		(if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
-		  (.move character (map-direction (second ai.mode)) action-factory)
-		  (setv ai.character.tick 5))))))))
+	    (walk-random-direction ai model action-factory rng))))))
+
+(defn walk-random-direction [ai model action-factory rng]
+  "take a random step without changing mode"
+  (let [[character ai.character]]
+    (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
+    (if (.is-move-legal character (map-direction (second ai.mode)) "walk" action-factory)
+      (.move character (map-direction (second ai.mode)) action-factory)
+      (setv character.tick 5))))
 
 ;; wall-mapping
 ;; first two elements are offsets for required walls
