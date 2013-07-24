@@ -62,10 +62,7 @@
 				     (get-random-wall-direction wall-info 
 								rng)])
 		      (follow-wall ai model action-factory rng))
-	(if (.is-move-legal character 
-			    (map-direction (second ai.mode)) 
-			    "walk" 
-			    action-factory)
+	(if (can-walk? ai action-factory)
 	  (.move character (map-direction (second ai.mode)) action-factory)
 	  (sometimes (walk-random-direction ai model action-factory rng)
 		     (wait character))))))
@@ -73,10 +70,7 @@
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall"
   (let [[character ai.character]]
-    (often (if (.is-move-legal character 
-			       (map-direction (second ai.mode)) 
-			       "walk" 
-			       action-factory)
+    (often (if (can-walk? ai action-factory)
 	     (.move character (map-direction (second ai.mode)) action-factory)
 	     (let [[wall-info (next-to-wall? character)]]
 	       (if wall-info (do (setv ai.mode [:follow-wall 
@@ -90,12 +84,16 @@
   "take a random step without changing mode"
   (let [[character ai.character]]
     (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
-    (if (.is-move-legal character 
-			(map-direction (second ai.mode)) 
-			"walk" 
-			action-factory)
+    (if (can-walk? ai action-factory)
       (.move character (map-direction (second ai.mode)) action-factory)
       (wait character))))
+
+(defn can-walk? [ai action-factory]
+  "check if character can walk to given direction"
+  (.is-move-legal ai.character
+		  (map-direction (second ai.mode))
+		  "walk"
+		  action-factory))
 
 (defn wait [character]
   "make character to wait a little bit"
