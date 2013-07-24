@@ -58,8 +58,10 @@
   "routine to make character to find a wall"
   (let [[character ai.character]
 	[wall-info (next-to-wall? character)]]
-    (if wall-info (setv ai.mode [:follow-wall 
-				 (get-random-wall-direction wall-info rng)])
+    (if wall-info (do (setv ai.mode [:follow-wall 
+				     (get-random-wall-direction wall-info 
+								rng)])
+		      (follow-wall ai model action-factory rng))
 	(if (.is-move-legal character 
 			    (map-direction (second ai.mode)) 
 			    "walk" 
