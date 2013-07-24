@@ -63,30 +63,29 @@
 								rng)])
 		      (follow-wall ai model action-factory rng))
 	(if (can-walk? ai action-factory)
-	  (.move character (map-direction (second ai.mode)) action-factory)
-	  (sometimes (walk-random-direction ai model action-factory rng)
-		     (wait character))))))
+	  (walk ai action-factory)
+	  (sometimes (walk-random-direction ai action-factory rng)
+		     (wait ai))))))
 
 (defn follow-wall [ai model action-factory rng]
   "routine to make character to follow a wall"
   (let [[character ai.character]]
     (often (if (can-walk? ai action-factory)
-	     (.move character (map-direction (second ai.mode)) action-factory)
+	     (walk ai action-factory)
 	     (let [[wall-info (next-to-wall? character)]]
 	       (if wall-info (do (setv ai.mode [:follow-wall 
 						(get-random-wall-direction 
 						 wall-info rng)])
-				 (wait character))
-		   (walk-random-direction ai model action-factory rng))))
-	   (wait character))))
+				 (wait ai))
+		   (walk-random-direction ai action-factory rng))))
+	   (wait ai))))
 
-(defn walk-random-direction [ai model action-factory rng]
+(defn walk-random-direction [ai action-factory rng]
   "take a random step without changing mode"
-  (let [[character ai.character]]
     (assoc ai.mode 1 (map-direction (.randint rng 1 8)))
     (if (can-walk? ai action-factory)
-      (.move character (map-direction (second ai.mode)) action-factory)
-      (wait character))))
+      (walk ai action-factory)
+      (wait ai)))
 
 (defn can-walk? [ai action-factory]
   "check if character can walk to given direction"
@@ -95,9 +94,13 @@
 		  "walk"
 		  action-factory))
 
-(defn wait [character]
+(defn walk [ai action-factory]
+  "take a step to direction the ai is currently moving"
+  (.move ai.character (map-direction (second ai.mode)) action-factory))
+
+(defn wait [ai]
   "make character to wait a little bit"
-  (setv character.tick 5))
+  (setv ai.character.tick 5))
 
 ;; wall-mapping
 ;; first two elements are offsets for required walls
