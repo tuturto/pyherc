@@ -82,7 +82,22 @@
 (with-decorator logged
   (defn fight [ai action-factory]
     "routine to make character to fight"
-    (setv ai.character.tick 50)))
+    (let [[own-location ai.character.location]
+	  [enemy (second ai.mode)]
+	  [enemy-location enemy.location]
+	  [distance (distance-between own-location enemy-location)]]
+      (if (< distance 2)
+	(attack ai enemy)
+	(close-in ai enemy)
+      ))))
+
+(defn attack [ai enemy]
+  "attack an enemy"
+  (setv ai.character.tick 50))
+
+(defn close-in [ai enemy]
+  "get closer to enemy"
+  (setv ai.character.tick 50))
 
 (defn enemy-close? [ai]
   "check if there is an enemy close by, returns preferred enemy"
@@ -117,7 +132,7 @@
 						     action-factory))]]
     (if (len legal-directions) (assoc ai.mode 1
 				      (map-direction (.choice random 
-							      direction)))
+							      legal-directions)))
 	(assoc ai.mode 1 (map-direction (.randint random 1 8))))
     (if (can-walk? ai action-factory) (walk ai action-factory)
 	(wait ai))))
