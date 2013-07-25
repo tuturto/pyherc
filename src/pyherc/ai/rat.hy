@@ -20,7 +20,8 @@
 (setv __doc__ "module for AI routines for rats")
 
 (import [pyherc.aspects [logged]]
-	[random])
+	[random]
+	[math [sqrt]])
 
 (require pyherc.ai.helpers)
 
@@ -51,6 +52,8 @@
 (with-decorator logged 
   (defn rat-act [ai model action-factory]
     "main routine for rat AI"
+    (let [[enemy (enemy-close? ai)]]
+      (if enemy (start-fighting ai enemy)))
     (let [[func (get mode-bindings (first ai.mode))]]
       (func ai action-factory))))
 
@@ -74,16 +77,46 @@
 		 (walk-random-direction ai action-factory))))
 	 (wait ai)))
 
+(defn fight [ai action-factory]
+  "routine to make character to fight"
+  (setv ai.character.tick 50))
+
+(defn enemy-close? [ai]
+  "check if there is an enemy close by, returns preferred enemy"
+  (let [[level ai.character.level]
+	[player ai.character.model.player]]
+    (if (< (distance-between player.location ai.character.location) 4) player)))
+
+(defn distance-between [start end]
+  "calculate distance between two locations"
+  (let [[dist-x (- (first start) (first end))]
+	[dist-y (- (second start) (second end))]]
+    (sqrt (+ (pow dist-x 2)
+          (pow dist-y 2)))))
+
+(defn start-fighting [ai enemy]
+  "pick start fighting again enemy"
+  (setv ai.mode [:fight
+		enemy]))
+
 (defn start-following-wall [ai wall-info]
   (setv ai.mode [:follow-wall 
 		 (get-random-wall-direction wall-info)]))
 
 (defn walk-random-direction [ai action-factory]
   "take a random step without changing mode"
-    (assoc ai.mode 1 (map-direction (.randint random 1 8)))
-    (if (can-walk? ai action-factory)
-      (walk ai action-factory)
-      (wait ai)))
+  (let [[legal-directions (list-comp direction 
+				     [direction (range 1 9)] 
+				     (.is-move-legal ai.character
+						     (map-direction direction)
+						     "walk"
+						     action-factory))]]
+    (if (len legal-directions) (assoc ai.mode 1
+				      (map-direction (.choice random 
+							      direction)))
+	(assoc ai.mode 1 (map-direction (.randint random 1 8))))
+    (if (can-walk? ai action-factory) (walk ai action-factory)
+	(wait ai))))
 
 (defn can-walk? [ai action-factory]
   "check if character can walk to given direction"
@@ -155,6 +188,7 @@
   (get direction-mapping direction))
 
 (def mode-bindings {:find-wall find-wall
-		    :follow-wall follow-wall})
+		    :follow-wall follow-wall
+		    :fight fight})
 
 
