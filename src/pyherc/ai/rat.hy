@@ -57,35 +57,39 @@
     (let [[func (get mode-bindings (first ai.mode))]]
       (func ai action-factory))))
 
-(defn find-wall [ai action-factory]
-  "routine to make character to find a wall"
-  (let [[wall-info (next-to-wall? ai)]]
-    (if wall-info (do (start-following-wall ai wall-info)
-		      (follow-wall ai action-factory))
-	(if (can-walk? ai action-factory)
-	  (walk ai action-factory)
-	  (sometimes (walk-random-direction ai action-factory)
-		     (wait ai))))))
+(with-decorator logged
+  (defn find-wall [ai action-factory]
+    "routine to make character to find a wall"
+    (let [[wall-info (next-to-wall? ai)]]
+      (if wall-info (do (start-following-wall ai wall-info)
+			(follow-wall ai action-factory))
+	  (if (can-walk? ai action-factory)
+	    (walk ai action-factory)
+	    (sometimes (walk-random-direction ai action-factory)
+		       (wait ai)))))))
 
-(defn follow-wall [ai action-factory]
-  "routine to make character to follow a wall"
-  (often (if (can-walk? ai action-factory)
-	   (walk ai action-factory)
-	   (let [[wall-info (next-to-wall? ai)]]
-	     (if wall-info (do (start-following-wall ai wall-info)
-			       (wait ai))
-		 (walk-random-direction ai action-factory))))
-	 (wait ai)))
+(with-decorator logged
+  (defn follow-wall [ai action-factory]
+    "routine to make character to follow a wall"
+    (often (if (can-walk? ai action-factory)
+	     (walk ai action-factory)
+	     (let [[wall-info (next-to-wall? ai)]]
+	       (if wall-info (do (start-following-wall ai wall-info)
+				 (wait ai))
+		   (walk-random-direction ai action-factory))))
+	   (wait ai))))
 
-(defn fight [ai action-factory]
-  "routine to make character to fight"
-  (setv ai.character.tick 50))
+(with-decorator logged
+  (defn fight [ai action-factory]
+    "routine to make character to fight"
+    (setv ai.character.tick 50)))
 
 (defn enemy-close? [ai]
   "check if there is an enemy close by, returns preferred enemy"
   (let [[level ai.character.level]
 	[player ai.character.model.player]]
-    (if (< (distance-between player.location ai.character.location) 4) player)))
+    (if (< (distance-between player.location ai.character.location) 4) 
+      player)))
 
 (defn distance-between [start end]
   "calculate distance between two locations"
