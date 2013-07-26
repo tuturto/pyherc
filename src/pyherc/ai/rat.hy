@@ -25,7 +25,7 @@
 	[random]
 	[math [sqrt]])
 
-(require pyherc.ai.helpers)
+(require pyherc.ai.macros)
 
 (defmacro diagonal-wall [info]
   (quasiquote (get (unquote info) 0)))
