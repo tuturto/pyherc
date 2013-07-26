@@ -21,6 +21,7 @@
 
 (import [pyherc.aspects [logged]]
 	[pyherc.ai.pathfinding [a-star]]
+	[pyherc.events [NoticeEvent]]
 	[random]
 	[math [sqrt]])
 
@@ -53,8 +54,9 @@
 (with-decorator logged 
   (defn rat-act [ai model action-factory]
     "main routine for rat AI"
-    (let [[enemy (enemy-close? ai)]]
-      (if enemy (start-fighting ai enemy)))
+    (if (not (= (first ai.mode) :fight))
+      (let [[enemy (enemy-close? ai)]]
+	(if enemy (start-fighting ai enemy))))
     (let [[func (get mode-bindings (first ai.mode))]]
       (func ai action-factory))))
 
@@ -127,7 +129,7 @@
   "check if there is an enemy close by, returns preferred enemy"
   (let [[level ai.character.level]
 	[player ai.character.model.player]]
-    (if (< (distance-between player.location ai.character.location) 4) 
+    (if (< (distance-between player.location ai.character.location) 4)
       player)))
 
 (defn distance-between [start end]
@@ -139,6 +141,7 @@
 
 (defn start-fighting [ai enemy]
   "pick start fighting again enemy"
+  (focus-enemy ai enemy)
   (setv ai.mode [:fight
 		enemy]))
 
@@ -231,6 +234,12 @@
 (defn map-direction [direction]
   "map between keyword and integer directions"
   (get direction-mapping direction))
+
+(defn focus-enemy [ai enemy]
+  "focus on enemy and start tracking it"
+  (let [[character ai.character]
+	[event (NoticeEvent character enemy)]]
+    (.raise-event character event)))
 
 (def mode-bindings {:find-wall find-wall
 		    :follow-wall follow-wall
