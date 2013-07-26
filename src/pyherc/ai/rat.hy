@@ -20,6 +20,7 @@
 (setv __doc__ "module for AI routines for rats")
 
 (import [pyherc.aspects [logged]]
+	[pyherc.ai.pathfinding [a-star]]
 	[random]
 	[math [sqrt]])
 
@@ -87,17 +88,40 @@
 	  [enemy-location enemy.location]
 	  [distance (distance-between own-location enemy-location)]]
       (if (< distance 2)
-	(attack ai enemy)
-	(close-in ai enemy)
-      ))))
+	(attack ai enemy action-factory (.Random random))
+	(close-in ai enemy action-factory)))))
 
-(defn attack [ai enemy]
+(defn attack [ai enemy action-factory rng]
   "attack an enemy"
-  (setv ai.character.tick 50))
+  (let [[attacker ai.character]
+	[attacker-location attacker.location]
+	[target-location enemy.location]	
+	[attack-direction (map-direction (find-direction attacker-location 
+							 target-location))]]
+    (.perform-attack attacker attack-direction action-factory rng)))
 
-(defn close-in [ai enemy]
+(defn find-direction [start destination]
+  "calculate direction from start to destination"
+  (let [[start-x (first start)]
+	[start-y (second start)]
+	[end-x (first destination)]
+	[end-y (second destination)]]
+    (if (= start-x end-x)
+      (if (< start-y end-y) :south :north)
+      (if (= start-y end-y)
+	(if (< start-x end-x) :east :west)
+	(if (< start-y end-y)
+	  (if (< start-x end-x) :south-east :south-west)
+	  (if (< start-x end-x) :north-east :north-west))))))
+
+(defn close-in [ai enemy action-factory]
   "get closer to enemy"
-  (setv ai.character.tick 50))
+  (let [[start-location ai.character.location]
+	[end-location enemy.location]
+	[(, path connections uptated) (a-star start-location
+					      end-location
+					      ai.character.level)]]
+    (walk ai action-factory (find-direction start-location (second path)))))
 
 (defn enemy-close? [ai]
   "check if there is an enemy close by, returns preferred enemy"
@@ -144,9 +168,11 @@
 		  "walk"
 		  action-factory))
 
-(defn walk [ai action-factory]
+(defn walk [ai action-factory &optional direction]
   "take a step to direction the ai is currently moving"
-  (.move ai.character (map-direction (second ai.mode)) action-factory))
+  (if direction
+    (.move ai.character (map-direction direction) action-factory)
+    (.move ai.character (map-direction (second ai.mode)) action-factory)))
 
 (defn wait [ai]
   "make character to wait a little bit"
