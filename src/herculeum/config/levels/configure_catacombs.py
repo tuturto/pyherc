@@ -40,6 +40,7 @@ from pyherc.generators.level.portals import PortalAdderConfiguration
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.generators import CreatureConfiguration
 from pyherc.ai import FlockingHerbivore, SkeletonWarriorAI
+from pyherc.ai.rat import RatAI
 from pyherc.data.effects import DamageModifier
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
@@ -220,7 +221,7 @@ def init_creatures(context):
                                                         'r', 
                                                         ['yellow', 'dim']),
                                         attack = 1,
-                                        ai = FlockingHerbivore))
+                                        ai = RatAI))
 
     config.append(CreatureConfiguration(name = 'fire beetle',
                                         body = 10,
