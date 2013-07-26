@@ -84,17 +84,6 @@
 		   (walk-random-direction ai action-factory))))
 	   (wait ai))))
 
-(with-decorator logged
-  (defn fight [ai action-factory]
-    "routine to make character to fight"
-    (let [[own-location ai.character.location]
-	  [enemy (second ai.mode)]
-	  [enemy-location enemy.location]
-	  [distance (distance-between own-location enemy-location)]]
-      (if (< distance 2)
-	(attack ai enemy action-factory (.Random random))
-	(close-in ai enemy action-factory)))))
-
 (defn attack [ai enemy action-factory rng]
   "attack an enemy"
   (let [[attacker ai.character]
