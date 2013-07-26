@@ -26,6 +26,7 @@ from pyherc.data.model import Model
 import sys
 import logging
 import herculeum.config.levels
+import hy
 
 class Application():
     """
