@@ -21,9 +21,11 @@
 
 (import [pyherc.aspects [logged]]
 	[pyherc.ai.pathfinding [a-star]]
+	[pyherc.ai.common [distance-between fight-in-melee]]
 	[pyherc.events [NoticeEvent]]
 	[random]
-	[math [sqrt]])
+	[math [sqrt]]
+	[functools [partial]])
 
 (require pyherc.ai.macros)
 
@@ -132,13 +134,6 @@
     (if (< (distance-between player.location ai.character.location) 4)
       player)))
 
-(defn distance-between [start end]
-  "calculate distance between two locations"
-  (let [[dist-x (- (first start) (first end))]
-	[dist-y (- (second start) (second end))]]
-    (sqrt (+ (pow dist-x 2)
-          (pow dist-y 2)))))
-
 (defn start-fighting [ai enemy]
   "pick start fighting again enemy"
   (focus-enemy ai enemy)
@@ -240,6 +235,8 @@
   (let [[character ai.character]
 	[event (NoticeEvent character enemy)]]
     (.raise-event character event)))
+
+(def fight (partial fight-in-melee attack close-in))
 
 (def mode-bindings {:find-wall find-wall
 		    :follow-wall follow-wall
