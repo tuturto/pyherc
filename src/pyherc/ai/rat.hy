@@ -21,7 +21,8 @@
 
 (import [pyherc.aspects [logged]]
 	[pyherc.ai.pathfinding [a-star]]
-	[pyherc.ai.common [distance-between fight-in-melee]]
+	[pyherc.ai.common [distance-between fight-in-melee find-direction]]
+	[pyherc.ai.common [close-in-enemy walk can-walk? map-direction direction-mapping]]
 	[pyherc.events [NoticeEvent]]
 	[random]
 	[math [sqrt]]
@@ -93,28 +94,6 @@
 							 target-location))]]
     (.perform-attack attacker attack-direction action-factory rng)))
 
-(defn find-direction [start destination]
-  "calculate direction from start to destination"
-  (let [[start-x (first start)]
-	[start-y (second start)]
-	[end-x (first destination)]
-	[end-y (second destination)]]
-    (if (= start-x end-x)
-      (if (< start-y end-y) :south :north)
-      (if (= start-y end-y)
-	(if (< start-x end-x) :east :west)
-	(if (< start-y end-y)
-	  (if (< start-x end-x) :south-east :south-west)
-	  (if (< start-x end-x) :north-east :north-west))))))
-
-(defn close-in [ai enemy action-factory]
-  "get closer to enemy"
-  (let [[start-location ai.character.location]
-	[end-location enemy.location]
-	[(, path connections uptated) (a-star start-location
-					      end-location
-					      ai.character.level)]]
-    (walk ai action-factory (find-direction start-location (second path)))))
 
 (defn enemy-close? [ai]
   "check if there is an enemy close by, returns preferred enemy"
@@ -138,7 +117,7 @@
   (let [[legal-directions (list-comp direction 
 				     [direction (range 1 9)] 
 				     (.is-move-legal ai.character
-						     (map-direction direction)
+						     direction
 						     "walk"
 						     action-factory))]]
     (if (len legal-directions) (assoc ai.mode 1
@@ -147,19 +126,6 @@
 	(assoc ai.mode 1 (map-direction (.randint random 1 8))))
     (if (can-walk? ai action-factory) (walk ai action-factory)
 	(wait ai))))
-
-(defn can-walk? [ai action-factory]
-  "check if character can walk to given direction"
-  (.is-move-legal ai.character
-		  (map-direction (second ai.mode))
-		  "walk"
-		  action-factory))
-
-(defn walk [ai action-factory &optional direction]
-  "take a step to direction the ai is currently moving"
-  (if direction
-    (.move ai.character (map-direction direction) action-factory)
-    (.move ai.character (map-direction (second ai.mode)) action-factory)))
 
 (defn wait [ai]
   "make character to wait a little bit"
@@ -210,21 +176,16 @@
   "select a random direction from the given wall-info"
   (.choice random (:wall-direction wall-info)))
 
-(def direction-mapping {1 :north 2 :north-east 3 :east 4 :south-east 5 :south
-			6 :south-west 7 :west 8 :north-west 9 :enter
-			:north 1 :north-east 2 :east 3 :south-east 4 :south 5
-			:south-west 6 :west 7 :north-west 8 :enter 9})
-
-(defn map-direction [direction]
-  "map between keyword and integer directions"
-  (get direction-mapping direction))
-
 (defn focus-enemy [ai enemy]
   "focus on enemy and start tracking it"
   (let [[character ai.character]
 	[event (NoticeEvent character enemy)]]
     (.raise-event character event)))
 
+(def close-in (partial close-in-enemy 
+		       (fn [start end level] (first (a-star start
+							    end 
+							    level)))))
 (def fight (partial fight-in-melee attack close-in))
 
 (def mode-bindings {:find-wall find-wall

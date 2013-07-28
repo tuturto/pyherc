@@ -36,9 +36,57 @@
 	(attack-routine ai enemy action-factory (.Random random))
 	(close-in-routine ai enemy action-factory)))))
 
+(defn close-in-enemy [routing-function ai enemy action-factory]
+  "get closer to enemy"
+  (let [[start-location ai.character.location]
+	[end-location enemy.location]
+	[path (routing-function start-location
+				end-location
+				ai.character.level)]]
+    (walk ai action-factory (find-direction start-location (second path)))))
+
+(defn can-walk? [ai action-factory]
+  "check if character can walk to given direction"
+  (.is-move-legal ai.character
+		  (map-direction (second ai.mode))
+		  "walk"
+		  action-factory))
+
+(with-decorator logged
+(defn walk [ai action-factory &optional direction]
+  "take a step to direction the ai is currently moving"
+  (if direction
+    (.move ai.character (map-direction direction) action-factory)
+    (.move ai.character (map-direction (second ai.mode)) action-factory)))
+)
+
 (defn distance-between [start end]
   "calculate distance between two locations"
   (let [[dist-x (- (first start) (first end))]
 	[dist-y (- (second start) (second end))]]
     (sqrt (+ (pow dist-x 2)
           (pow dist-y 2)))))
+
+(defn find-direction [start destination]
+  "calculate direction from start to destination"
+  (assert (not (= start destination )))
+  (let [[start-x (first start)]
+	[start-y (second start)]
+	[end-x (first destination)]
+	[end-y (second destination)]]
+    (if (= start-x end-x)
+      (if (< start-y end-y) :south :north)
+      (if (= start-y end-y)
+	(if (< start-x end-x) :east :west)
+	(if (< start-y end-y)
+	  (if (< start-x end-x) :south-east :south-west)
+	  (if (< start-x end-x) :north-east :north-west))))))
+
+(def direction-mapping {1 :north 2 :north-east 3 :east 4 :south-east 5 :south
+			6 :south-west 7 :west 8 :north-west 9 :enter
+			:north 1 :north-east 2 :east 3 :south-east 4 :south 5
+			:south-west 6 :west 7 :north-west 8 :enter 9})
+
+(defn map-direction [direction]
+  "map between keyword and integer directions"
+  (get direction-mapping direction))
