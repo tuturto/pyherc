@@ -45,7 +45,7 @@
 (defclass RatAI []
   [[__doc__ "AI routine for rats"]
    [character None]
-   [mode [:find-wall :north]]
+   [mode [:find-wall None]]
    [--init-- (fn [self character]
 	       "default constructor"
 	       (.--init-- (super RatAI self))
@@ -63,16 +63,48 @@
     (let [[func (get mode-bindings (first ai.mode))]]
       (func ai action-factory))))
 
+(defn is-patrol-area? [level x y]
+  "check if given location is within patrol area"
+  (and (or (.blocks-movement level (+ x 1) y)
+	   (.blocks-movement level (- x 1) y)
+	   (.blocks-movement level x (+ y 1))
+	   (.blocks-movement level x (- y 1)))
+       (not (and (.blocks-movement level (+ x 1) y)
+		 (.blocks-movement level (- x 1) y)))
+       (not (and (.blocks-movement level x (+ y 1))
+		 (.blocks-movement level x (- y 1))))))
+
+(with-decorator logged
+  (defn patrollable-area-in-level [ai]
+    "routine to find area to patrol in level"
+    (let [[level ai.character.level]
+	  [patrol-area []]]
+      (foreach [x (range (len level.walls))]
+	(foreach [y (range (len (first level.walls)))]
+	  (if (is-patrol-area? level x y)
+	    (.append patrol-area (, x y)))))
+      patrol-area)))
+
 (with-decorator logged
   (defn find-wall [ai action-factory]
     "routine to make character to find a wall"
-    (let [[wall-info (next-to-wall? ai)]]
+    (let [[wall-info (next-to-wall? ai)]
+	  [start-location ai.character.location]]
       (if wall-info (do (start-following-wall ai wall-info)
 			(follow-wall ai action-factory))
-	  (if (can-walk? ai action-factory)
-	    (walk ai action-factory)
-	    (sometimes (walk-random-direction ai action-factory)
-		       (wait ai)))))))
+	  (if (second ai.mode)
+	    (let [[path (first (a-star start-location
+				       (second ai.mode)
+				       ai.character.level))]]
+	      (walk ai action-factory (find-direction start-location (second path))))
+	    (let [[patrol-area (patrollable-area-in-level ai)]
+		  [target (.choice random patrol-area)]]
+	      (assoc ai.mode 1 target)))))))
+
+;;	  (if (can-walk? ai action-factory)
+;;	    (walk ai action-factory)
+;;	    (sometimes (walk-random-direction ai action-factory)
+;;		       (wait ai)))))))
 
 (with-decorator logged
   (defn follow-wall [ai action-factory]
