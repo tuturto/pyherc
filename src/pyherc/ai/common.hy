@@ -45,10 +45,10 @@
 				ai.character.level)]]
     (walk ai action-factory (find-direction start-location (second path)))))
 
-(defn can-walk? [ai action-factory]
+(defn can-walk? [ai action-factory direction]
   "check if character can walk to given direction"
   (.is-move-legal ai.character
-		  (map-direction (second ai.mode))
+		  (map-direction direction)
 		  "walk"
 		  action-factory))
 

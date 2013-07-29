@@ -104,7 +104,7 @@
 (with-decorator logged
   (defn follow-wall [ai action-factory]
     "routine to make character to follow a wall"
-    (often (if (can-walk? ai action-factory)
+    (often (if (can-walk? ai action-factory (second ai.mode))
 	     (walk ai action-factory)
 	     (let [[wall-info (next-to-wall? ai)]]
 	       (if wall-info (do (start-following-wall ai wall-info)
@@ -151,7 +151,7 @@
 				      (map-direction (.choice random 
 							      legal-directions)))
 	(assoc ai.mode 1 (map-direction (.randint random 1 8))))
-    (if (can-walk? ai action-factory) (walk ai action-factory)
+    (if (can-walk? ai action-factory (second ai.mode)) (walk ai action-factory)
 	(wait ai))))
 
 (defn wait [ai]
