@@ -101,11 +101,6 @@
 		  [target (.choice random patrol-area)]]
 	      (assoc ai.mode 1 target)))))))
 
-;;	  (if (can-walk? ai action-factory)
-;;	    (walk ai action-factory)
-;;	    (sometimes (walk-random-direction ai action-factory)
-;;		       (wait ai)))))))
-
 (with-decorator logged
   (defn follow-wall [ai action-factory]
     "routine to make character to follow a wall"
