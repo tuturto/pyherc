@@ -89,7 +89,6 @@
 	(select-patrol-area ai)))))
 
 ; move this to common
-(with-decorator logged
 (defn move-towards-patrol-area [ai action-factory]
   (let [[start-location ai.character.location]
 	[path (first (a-star start-location
@@ -98,15 +97,12 @@
     (if path
       (walk ai action-factory (find-direction start-location (second path)))
       (wait ai))))
-)
 
 ; move this to common
-(with-decorator logged
 (defn select-patrol-area [ai]
   (let [[patrol-area (patrollable-area-in-level ai)]
 	[target (.choice random patrol-area)]]
     (assoc ai.mode 1 target)))
-)
 
 (defn attack [ai enemy action-factory rng]
   "attack an enemy"
