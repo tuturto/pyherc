@@ -79,22 +79,12 @@
     (let [[wall-direction (:wall-direction wall-info)]]
       (assert-that wall-direction (has-items :south)))))
 
-(defn test-picking-random-wall-direction []
-  "test that a random wall direction can be selected"
-  (let [[wall-info {:wall-direction [:east :west]}]
-	[rng (Random)]
-	[direction (get-random-wall-direction wall-info)]]
-    (assert-that direction (is-in [:east :west]))))
-
 (defn test-mapping-coordinates []
   "test that coordinates can be offset correctly"
-  (let [[character (-> (CharacterBuilder)
-		       (.with-location (, 10 10))
-		       (.build))]
-	[offset-1 (, -1 -1)]
+  (let [[offset-1 (, -1 -1)]
 	[offset-2 (, 2 4)]]
-    (assert-that (map-coordinates character offset-1) (is- (equal-to (, 9 9))))
-    (assert-that (map-coordinates character offset-2) (is- (equal-to (, 12 14))))))
+    (assert-that (map-coordinates (, 10 10) offset-1) (is- (equal-to (, 9 9))))
+    (assert-that (map-coordinates (, 10 10) offset-2) (is- (equal-to (, 12 14))))))
 
 (defn test-mapping-directions []
   "test that keyword directions can be mapped to integers and back"

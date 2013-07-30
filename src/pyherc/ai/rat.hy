@@ -116,11 +116,13 @@
     "routine to make character to follow a wall"
     (often (if (can-walk? ai action-factory (second ai.mode))
 	     (walk ai action-factory)
-	     (let [[wall-info (next-to-wall? ai)]]
-	       (if wall-info (do (start-following-wall ai)
-				 (wait ai))
-		   (walk-random-direction ai action-factory))))
-	   (wait ai))))
+	     (if (is-patrol-area? ai.character.level
+				  (first ai.character.location)
+				  (second ai.character.location))
+	       (do (start-following-wall ai)
+		   (wait ai))
+	       (walk-random-direction ai action-factory)))
+    (wait ai))))
 
 (defn attack [ai enemy action-factory rng]
   "attack an enemy"
