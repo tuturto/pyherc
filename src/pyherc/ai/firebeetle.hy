@@ -17,7 +17,7 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(setv __doc__ "module for AI routines for rats")
+(setv __doc__ "module for AI routines for firebeetles")
 
 (import [pyherc.aspects [logged]]
 	[pyherc.ai.pathfinding [a-star]]
@@ -31,50 +31,39 @@
 
 (require pyherc.ai.macros)
 
-(defmacro diagonal-wall [info]
-  (quasiquote (get (unquote info) 0)))
-
-(defmacro adjacent-wall [info]
-  (quasiquote (get (unquote info) 1)))
-
-(defmacro empty-corridor [info]
-  (quasiquote (get (unquote info) 2)))
-
-(defmacro wall-direction [info]
-  (quasiquote (get (unquote info) 3)))
-
-(defclass RatAI []
-  [[__doc__ "AI routine for rats"]
+(defclass FireBeetleAI []
+  [[__doc__ "AI routine for fire beetles"]
    [character None]
-   [mode [:find-wall None]]
+   [mode [:find-room None]]
    [--init-- (fn [self character]
 	       "default constructor"
-	       (.--init-- (super RatAI self))
+	       (.--init-- (super FireBeetleAI self))
 	       (setv self.character character) None)]
    [act (fn [self model action-factory rng] 
 	  "check the situation and act accordingly"
-	  (rat-act self model action-factory))]])
+	  (beetle-act self model action-factory))]])
 
 (with-decorator logged 
-  (defn rat-act [ai model action-factory]
-    "main routine for rat AI"
+  (defn beetle-act [ai model action-factory]
+    "main routine for beetle AI"
     (if (not (= (first ai.mode) :fight))
       (let [[enemy (enemy-close? ai)]]
 	(if enemy (start-fighting ai enemy))))
     (let [[func (get mode-bindings (first ai.mode))]]
       (func ai action-factory))))
 
-(defn is-next-to-wall? [level x y]
+(defn is-open-space? [level x y]
   "check if given location is within patrol area"
-  (and (or (.blocks-movement level (+ x 1) y)
-	   (.blocks-movement level (- x 1) y)
-	   (.blocks-movement level x (+ y 1))
-	   (.blocks-movement level x (- y 1)))
-       (not (and (.blocks-movement level (+ x 1) y)
-		 (.blocks-movement level (- x 1) y)))
-       (not (and (.blocks-movement level x (+ y 1))
-		 (.blocks-movement level x (- y 1))))))
+  (and (not (.blocks-movement level (+ x 1) y))
+       (not (.blocks-movement level (- x 1) y))
+       (not (.blocks-movement level x (+ y 1)))
+       (not (.blocks-movement level x (- y 1)))
+       (not (.blocks-movement level (+ x 1) (+ y 1)))
+       (not (.blocks-movement level (+ x 1) (- y 1)))
+       (not (.blocks-movement level (- x 1) (+ y 1)))
+       (not (.blocks-movement level (- x 1) (- y 1)))))
 
+;; move this to common
 (with-decorator logged
   (defn patrollable-area-in-level [ai]
     "routine to find area to patrol in level"
@@ -82,22 +71,24 @@
 	  [patrol-area []]]
       (foreach [x (range (len level.walls))]
 	(foreach [y (range (len (first level.walls)))]
-	  (if (is-next-to-wall? level x y)
+	  (if (is-open-space? level x y)
 	    (.append patrol-area (, x y)))))
       patrol-area)))
 
+; move this to common
 (with-decorator logged
-  (defn find-wall [ai action-factory]
-    "routine to make character to find a wall"
-    (if (is-next-to-wall? ai.character.level
-			 (first ai.character.location)
-			 (second ai.character.location))
-      (do (start-following-wall ai)
-	  (follow-wall ai action-factory))
+  (defn find-open-space [ai action-factory]
+    "routine to make character to find an open space"
+    (if (is-open-space? ai.character.level
+			(first ai.character.location)
+			(second ai.character.location))
+      (do (start-patrolling-room ai)
+	  (patrol-room ai action-factory))
       (if (second ai.mode)
 	(move-towards-patrol-area ai action-factory)
 	(select-patrol-area ai)))))
 
+; move this to common
 (defn move-towards-patrol-area [ai action-factory]
   (let [[start-location ai.character.location]
 	[path (first (a-star start-location
@@ -107,6 +98,7 @@
       (walk ai action-factory (find-direction start-location (second path)))
       (wait ai))))
 
+; move this to common
 (defn select-patrol-area [ai]
   (let [[patrol-area (patrollable-area-in-level ai)]
 	[target (.choice random patrol-area)]]
@@ -134,24 +126,26 @@
   (setv ai.mode [:fight
 		enemy]))
 
-(defn start-following-wall [ai]
-  (setv ai.mode [:follow-wall 
-		 (get-random-wall-direction ai)]))
+(defn start-patrolling-room [ai]
+  (let [[patrol-direction get-random-patrol-direction]]
+    (if patrol-direction
+      (setv ai.mode [:patrol-room
+		     (patrol-direction ai)])
+      (wait ai))))
 
-(defn get-random-wall-direction [ai]
-  "select a random wall direction to follow"
+(defn get-random-patrol-direction [ai]
+  "select a random direction to follow"
   (let [[possible-directions []]
 	[character-x (first ai.character.location)]
 	[character-y (second ai.character.location)]
 	[level ai.character.level]]
     (for [x (range (- character-x 1) (+ character-x 2)) 
 	  y (range (- character-y 1) (+ character-y 2))]
-      (if (and (is-next-to-wall? level x y)
+      (if (and (is-open-space? level x y)
 	       (not (= (, x y) ai.character.location)))
 	(.append possible-directions (, x y))))
     (if possible-directions 
-      (find-direction ai.character.location (.choice random possible-directions))
-      :north)))
+      (find-direction ai.character.location (.choice random possible-directions)))))
 
 (defn focus-enemy [ai enemy]
   "focus on enemy and start tracking it"
@@ -165,10 +159,10 @@
 							    level)))))
 (def fight (partial fight-in-melee attack close-in))
 
-(def follow-wall (partial patrol is-next-to-wall? start-following-wall))
+(def patrol-room (partial patrol is-open-space? start-patrolling-room))
 
-(def mode-bindings {:find-wall find-wall
-		    :follow-wall follow-wall
+(def mode-bindings {:find-room find-open-space
+		    :patrol-room patrol-room
 		    :fight fight})
 
 
