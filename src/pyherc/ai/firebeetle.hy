@@ -57,7 +57,11 @@
   (and (not (.blocks-movement level (+ x 1) y))
        (not (.blocks-movement level (- x 1) y))
        (not (.blocks-movement level x (+ y 1)))
-       (not (.blocks-movement level x (- y 1)))))
+       (not (.blocks-movement level x (- y 1)))
+       (not (.blocks-movement level (+ x 1) (+ y 1)))
+       (not (.blocks-movement level (+ x 1) (- y 1)))
+       (not (.blocks-movement level (- x 1) (+ y 1)))
+       (not (.blocks-movement level (- x 1) (- y 1)))))
 
 ;; move this to common
 (with-decorator logged
@@ -85,6 +89,7 @@
 	(select-patrol-area ai)))))
 
 ; move this to common
+(with-decorator logged
 (defn move-towards-patrol-area [ai action-factory]
   (let [[start-location ai.character.location]
 	[path (first (a-star start-location
@@ -93,12 +98,15 @@
     (if path
       (walk ai action-factory (find-direction start-location (second path)))
       (wait ai))))
+)
 
 ; move this to common
+(with-decorator logged
 (defn select-patrol-area [ai]
   (let [[patrol-area (patrollable-area-in-level ai)]
 	[target (.choice random patrol-area)]]
     (assoc ai.mode 1 target)))
+)
 
 (defn attack [ai enemy action-factory rng]
   "attack an enemy"
@@ -123,8 +131,11 @@
 		enemy]))
 
 (defn start-patrolling-room [ai]
-  (setv ai.mode [:patrol-room
-		 (get-random-patrol-direction ai)]))
+  (let [[patrol-direction get-random-patrol-direction]]
+    (if patrol-direction
+      (setv ai.mode [:patrol-room
+		     (patrol-direction ai)])
+      (wait ai))))
 
 (defn get-random-patrol-direction [ai]
   "select a random direction to follow"
@@ -138,8 +149,7 @@
 	       (not (= (, x y) ai.character.location)))
 	(.append possible-directions (, x y))))
     (if possible-directions 
-      (find-direction ai.character.location (.choice random possible-directions))
-      :north)))
+      (find-direction ai.character.location (.choice random possible-directions)))))
 
 (defn focus-enemy [ai enemy]
   "focus on enemy and start tracking it"

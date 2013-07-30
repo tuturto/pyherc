@@ -48,7 +48,11 @@
 (with-decorator logged
   (defn patrol [is-patrol-area start-patrol ai action-factory]
     "routine to make character to patrol area"
-    (often (if (can-walk? ai action-factory (second ai.mode))
+    (let [[future-location (new-location ai.character (second ai.mode))]]
+    (often (if (and (can-walk? ai action-factory (second ai.mode))
+		    (is-patrol-area ai.character.level 
+				    (first future-location)
+				    (second future-location)))
 	     (walk ai action-factory)
 	     (if (is-patrol-area ai.character.level
 				  (first ai.character.location)
@@ -56,7 +60,7 @@
 	       (do (start-patrol ai)
 		   (wait ai))
 	       (walk-random-direction ai action-factory)))
-    (wait ai))))
+    (wait ai)))))
 
 (defn wait [ai]
   "make character to wait a little bit"
@@ -122,3 +126,7 @@
 (defn map-direction [direction]
   "map between keyword and integer directions"
   (get direction-mapping direction))
+
+(defn new-location [character direction]
+  "get next location if going to given direction"
+  (.get-location-at-direction character (map-direction direction)))
