@@ -23,6 +23,7 @@
 	[pyherc.ai.pathfinding [a-star]]
 	[pyherc.ai.common [distance-between fight-in-melee find-direction]]
 	[pyherc.ai.common [close-in-enemy walk can-walk? map-direction direction-mapping]]
+	[pyherc.ai.common [patrol wait]]
 	[pyherc.events [NoticeEvent]]
 	[random]
 	[math [sqrt]]
@@ -63,7 +64,7 @@
     (let [[func (get mode-bindings (first ai.mode))]]
       (func ai action-factory))))
 
-(defn is-patrol-area? [level x y]
+(defn is-next-to-wall? [level x y]
   "check if given location is within patrol area"
   (and (or (.blocks-movement level (+ x 1) y)
 	   (.blocks-movement level (- x 1) y)
@@ -81,14 +82,14 @@
 	  [patrol-area []]]
       (foreach [x (range (len level.walls))]
 	(foreach [y (range (len (first level.walls)))]
-	  (if (is-patrol-area? level x y)
+	  (if (is-next-to-wall? level x y)
 	    (.append patrol-area (, x y)))))
       patrol-area)))
 
 (with-decorator logged
   (defn find-wall [ai action-factory]
     "routine to make character to find a wall"
-    (if (is-patrol-area? ai.character.level
+    (if (is-next-to-wall? ai.character.level
 			 (first ai.character.location)
 			 (second ai.character.location))
       (do (start-following-wall ai)
@@ -111,18 +112,6 @@
 	[target (.choice random patrol-area)]]
     (assoc ai.mode 1 target)))
 
-(with-decorator logged
-  (defn follow-wall [ai action-factory]
-    "routine to make character to follow a wall"
-    (often (if (can-walk? ai action-factory (second ai.mode))
-	     (walk ai action-factory)
-	     (if (is-patrol-area? ai.character.level
-				  (first ai.character.location)
-				  (second ai.character.location))
-	       (do (start-following-wall ai)
-		   (wait ai))
-	       (walk-random-direction ai action-factory)))
-    (wait ai))))
 
 (defn attack [ai enemy action-factory rng]
   "attack an enemy"
@@ -150,25 +139,6 @@
 (defn start-following-wall [ai]
   (setv ai.mode [:follow-wall 
 		 (get-random-wall-direction ai)]))
-
-(defn walk-random-direction [ai action-factory]
-  "take a random step without changing mode"
-  (let [[legal-directions (list-comp direction 
-				     [direction (range 1 9)] 
-				     (.is-move-legal ai.character
-						     direction
-						     "walk"
-						     action-factory))]]
-    (if (len legal-directions) (assoc ai.mode 1
-				      (map-direction (.choice random 
-							      legal-directions)))
-	(assoc ai.mode 1 (map-direction (.randint random 1 8))))
-    (if (can-walk? ai action-factory (second ai.mode)) (walk ai action-factory)
-	(wait ai))))
-
-(defn wait [ai]
-  "make character to wait a little bit"
-  (setv ai.character.tick 5))
 
 ;; wall-mapping
 ;; first two elements are offsets for required walls
@@ -219,7 +189,7 @@
 	[level ai.character.level]]
     (for [x (range (- character-x 1) (+ character-x 2)) 
 	  y (range (- character-y 1) (+ character-y 2))]
-      (if (and (is-patrol-area? level x y)
+      (if (and (is-next-to-wall? level x y)
 	       (not (= (, x y) ai.character.location)))
 	(.append possible-directions (, x y))))
     (if possible-directions 
@@ -237,6 +207,8 @@
 							    end 
 							    level)))))
 (def fight (partial fight-in-melee attack close-in))
+
+(def follow-wall (partial patrol is-next-to-wall? start-following-wall))
 
 (def mode-bindings {:find-wall find-wall
 		    :follow-wall follow-wall

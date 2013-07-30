@@ -45,6 +45,38 @@
 				ai.character.level)]]
     (walk ai action-factory (find-direction start-location (second path)))))
 
+(with-decorator logged
+  (defn patrol [is-patrol-area start-patrol ai action-factory]
+    "routine to make character to patrol area"
+    (often (if (can-walk? ai action-factory (second ai.mode))
+	     (walk ai action-factory)
+	     (if (is-patrol-area ai.character.level
+				  (first ai.character.location)
+				  (second ai.character.location))
+	       (do (start-patrol ai)
+		   (wait ai))
+	       (walk-random-direction ai action-factory)))
+    (wait ai))))
+
+(defn wait [ai]
+  "make character to wait a little bit"
+  (setv ai.character.tick 5))
+
+(defn walk-random-direction [ai action-factory]
+  "take a random step without changing mode"
+  (let [[legal-directions (list-comp direction 
+				     [direction (range 1 9)] 
+				     (.is-move-legal ai.character
+						     direction
+						     "walk"
+						     action-factory))]]
+    (if (len legal-directions) (assoc ai.mode 1
+				      (map-direction (.choice random 
+							      legal-directions)))
+	(assoc ai.mode 1 (map-direction (.randint random 1 8))))
+    (if (can-walk? ai action-factory (second ai.mode)) (walk ai action-factory)
+	(wait ai))))
+
 (defn can-walk? [ai action-factory direction]
   "check if character can walk to given direction"
   (.is-move-legal ai.character
