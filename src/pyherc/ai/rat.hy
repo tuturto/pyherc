@@ -88,18 +88,25 @@
 (with-decorator logged
   (defn find-wall [ai action-factory]
     "routine to make character to find a wall"
-    (let [[wall-info (next-to-wall? ai)]
-	  [start-location ai.character.location]]
+    (let [[wall-info (next-to-wall? ai)]]
       (if wall-info (do (start-following-wall ai wall-info)
 			(follow-wall ai action-factory))
 	  (if (second ai.mode)
-	    (let [[path (first (a-star start-location
-				       (second ai.mode)
-				       ai.character.level))]]
-	      (walk ai action-factory (find-direction start-location (second path))))
-	    (let [[patrol-area (patrollable-area-in-level ai)]
-		  [target (.choice random patrol-area)]]
-	      (assoc ai.mode 1 target)))))))
+	    (move-towards-patrol-area ai action-factory)
+	    (select-patrol-area ai))))))
+
+(defn move-towards-patrol-area [ai action-factory]
+  (let [[start-location ai.character.location]
+	[path (first (a-star start-location
+			     (second ai.mode)
+			     ai.character.level))]]
+    (walk ai action-factory (find-direction start-location (second path)))))
+	
+(defn select-patrol-area [ai]
+  (let [[patrol-area (patrollable-area-in-level ai)]
+	[target (.choice random patrol-area)]]
+    (assoc ai.mode 1 target)))
+
 
 (with-decorator logged
   (defn follow-wall [ai action-factory]
