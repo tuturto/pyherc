@@ -81,3 +81,12 @@
       (if (can-walk? ai action-factory (second ai.mode)) (walk ai action-factory)
 	  (wait ai)))))
 
+(with-decorator logged
+  (defn patrollable-area-in-level [can-patrol level]
+    "routine to find area to patrol in level"
+    (let [[patrol-area []]]
+      (foreach [x (range (len level.walls))]
+	(foreach [y (range (len (first level.walls)))]
+	  (if (can-patrol level x y)
+	    (.append patrol-area (, x y)))))
+      patrol-area)))

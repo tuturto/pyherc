@@ -22,6 +22,7 @@
 (import [pyherc.aspects [logged]]
 	[pyherc.ai.pathfinding [a-star]]
 	[pyherc.ai.common [patrol close-in-enemy fight-in-melee]]
+	[pyherc.ai.common [patrollable-area-in-level]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
 	[pyherc.ai.basic [map-direction direction-mapping]]
 	[pyherc.events [NoticeEvent]]
@@ -30,18 +31,6 @@
 	[functools [partial]])
 
 (require pyherc.ai.macros)
-
-(defmacro diagonal-wall [info]
-  (quasiquote (get (unquote info) 0)))
-
-(defmacro adjacent-wall [info]
-  (quasiquote (get (unquote info) 1)))
-
-(defmacro empty-corridor [info]
-  (quasiquote (get (unquote info) 2)))
-
-(defmacro wall-direction [info]
-  (quasiquote (get (unquote info) 3)))
 
 (defclass RatAI []
   [[__doc__ "AI routine for rats"]
@@ -76,17 +65,6 @@
 		 (.blocks-movement level x (- y 1))))))
 
 (with-decorator logged
-  (defn patrollable-area-in-level [ai]
-    "routine to find area to patrol in level"
-    (let [[level ai.character.level]
-	  [patrol-area []]]
-      (foreach [x (range (len level.walls))]
-	(foreach [y (range (len (first level.walls)))]
-	  (if (is-next-to-wall? level x y)
-	    (.append patrol-area (, x y)))))
-      patrol-area)))
-
-(with-decorator logged
   (defn find-wall [ai action-factory]
     "routine to make character to find a wall"
     (if (is-next-to-wall? ai.character.level
@@ -108,7 +86,7 @@
       (wait ai))))
 
 (defn select-patrol-area [ai]
-  (let [[patrol-area (patrollable-area-in-level ai)]
+  (let [[patrol-area (wall-space ai.character.level)]
 	[target (.choice random patrol-area)]]
     (assoc ai.mode 1 target)))
 
@@ -158,6 +136,8 @@
   (let [[character ai.character]
 	[event (NoticeEvent character enemy)]]
     (.raise-event character event)))
+
+(def wall-space (partial patrollable-area-in-level is-next-to-wall?))
 
 (def close-in (partial close-in-enemy 
 		       (fn [start end level] (first (a-star start
