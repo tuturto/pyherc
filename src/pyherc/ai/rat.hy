@@ -140,39 +140,6 @@
   (setv ai.mode [:follow-wall 
 		 (get-random-wall-direction ai)]))
 
-;; wall-mapping
-;; first two elements are offsets for required walls
-;; third element is offset for required empty space
-;; fourth element is resulting direction
-(def wall-mapping [[[-1 1]  [0 1]  [-1 0] :west]
-		   [[-1 -1] [0 -1] [-1 0] :west]
-		   [[1 1]   [0 1]  [1 0]  :east]
-		   [[1 -1]  [0 -1] [1 0]  :east]
-		   [[-1 1]  [-1 0] [0 1]  :south]
-		   [[1 1]   [1 0]  [0 1]  :south]
-		   [[-1 -1] [-1 0] [0 -1] :north]
-		   [[1 -1]  [1 0]  [0 -1] :north]])
-
-(defn next-to-wall? [ai]
-  "check if ai is standing next to a wall"
-  (let [[character ai.character]
-	[possible-directions (list-comp (check-wall-mapping character x) 
-					[x wall-mapping])]
-	[directions (list-comp direction [direction possible-directions] 
-			       (not (= direction None)))]]
-    (if (> (len directions) 0) {:wall-direction directions} None)))
-
-(defn check-wall-mapping [character wall-mapping]
-  "build a list of directions where a wall leads from given location"
-  (let [[level character.level]
-	[point-1 (map-coordinates character.location (diagonal-wall wall-mapping))]
-	[point-2 (map-coordinates character.location (adjacent-wall wall-mapping))]
-	[point-3 (map-coordinates character.location (empty-corridor wall-mapping))]]
-    (if (and (.blocks-movement level (first point-1) (second point-1))
-             (.blocks-movement level (first point-2) (second point-2))
-	     (not (.blocks-movement level (first point-3) (second point-3))))
-      (wall-direction wall-mapping))))
-
 (defn map-coordinates [location offset]
   "calculate new coordinates from character and offset"
   (let [[start-x (first location)]
