@@ -112,7 +112,6 @@
 	[target (.choice random patrol-area)]]
     (assoc ai.mode 1 target)))
 
-
 (defn attack [ai enemy action-factory rng]
   "attack an enemy"
   (let [[attacker ai.character]
@@ -121,7 +120,6 @@
 	[attack-direction (map-direction (find-direction attacker-location 
 							 target-location))]]
     (.perform-attack attacker attack-direction action-factory rng)))
-
 
 (defn enemy-close? [ai]
   "check if there is an enemy close by, returns preferred enemy"
@@ -139,14 +137,6 @@
 (defn start-following-wall [ai]
   (setv ai.mode [:follow-wall 
 		 (get-random-wall-direction ai)]))
-
-(defn map-coordinates [location offset]
-  "calculate new coordinates from character and offset"
-  (let [[start-x (first location)]
-	[start-y (second location)]
-	[offset-x (first offset)]
-	[offset-y (second offset)]]
-    (, (+ start-x offset-x) (+ start-y offset-y))))
 
 (defn get-random-wall-direction [ai]
   "select a random wall direction to follow"
