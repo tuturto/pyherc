@@ -88,12 +88,14 @@
 (with-decorator logged
   (defn find-wall [ai action-factory]
     "routine to make character to find a wall"
-    (let [[wall-info (next-to-wall? ai)]]
-      (if wall-info (do (start-following-wall ai wall-info)
-			(follow-wall ai action-factory))
-	  (if (second ai.mode)
-	    (move-towards-patrol-area ai action-factory)
-	    (select-patrol-area ai))))))
+    (if (is-patrol-area? ai.character.level
+			 (first ai.character.location)
+			 (second ai.character.location))
+      (do (start-following-wall ai)
+	  (follow-wall ai action-factory))
+      (if (second ai.mode)
+	(move-towards-patrol-area ai action-factory)
+	(select-patrol-area ai)))))
 
 (defn move-towards-patrol-area [ai action-factory]
   (let [[start-location ai.character.location]
@@ -115,7 +117,7 @@
     (often (if (can-walk? ai action-factory (second ai.mode))
 	     (walk ai action-factory)
 	     (let [[wall-info (next-to-wall? ai)]]
-	       (if wall-info (do (start-following-wall ai wall-info)
+	       (if wall-info (do (start-following-wall ai)
 				 (wait ai))
 		   (walk-random-direction ai action-factory))))
 	   (wait ai))))
@@ -143,7 +145,7 @@
   (setv ai.mode [:fight
 		enemy]))
 
-(defn start-following-wall [ai wall-info]
+(defn start-following-wall [ai]
   (setv ai.mode [:follow-wall 
 		 (get-random-wall-direction ai)]))
 
@@ -208,7 +210,7 @@
     (, (+ start-x offset-x) (+ start-y offset-y))))
 
 (defn get-random-wall-direction [ai]
-  "select a random direction from the given wall-info"
+  "select a random wall direction to follow"
   (let [[possible-directions []]
 	[character-x (first ai.character.location)]
 	[character-y (second ai.character.location)]
