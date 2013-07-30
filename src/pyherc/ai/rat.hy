@@ -21,9 +21,9 @@
 
 (import [pyherc.aspects [logged]]
 	[pyherc.ai.pathfinding [a-star]]
-	[pyherc.ai.common [distance-between fight-in-melee find-direction]]
-	[pyherc.ai.common [close-in-enemy walk can-walk? map-direction direction-mapping]]
-	[pyherc.ai.common [patrol wait]]
+	[pyherc.ai.common [patrol close-in-enemy fight-in-melee]]
+	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
+	[pyherc.ai.basic [map-direction direction-mapping]]
 	[pyherc.events [NoticeEvent]]
 	[random]
 	[math [sqrt]]
