@@ -190,24 +190,28 @@
 (defn check-wall-mapping [character wall-mapping]
   "build a list of directions where a wall leads from given location"
   (let [[level character.level]
-	[point-1 (map-coordinates character (diagonal-wall wall-mapping))]
-	[point-2 (map-coordinates character (adjacent-wall wall-mapping))]
-	[point-3 (map-coordinates character (empty-corridor wall-mapping))]]
+	[point-1 (map-coordinates character.location (diagonal-wall wall-mapping))]
+	[point-2 (map-coordinates character.location (adjacent-wall wall-mapping))]
+	[point-3 (map-coordinates character.location (empty-corridor wall-mapping))]]
     (if (and (.blocks-movement level (first point-1) (second point-1))
              (.blocks-movement level (first point-2) (second point-2))
 	     (not (.blocks-movement level (first point-3) (second point-3))))
       (wall-direction wall-mapping))))
 
-(defn map-coordinates [character offset]
+(defn map-coordinates [location offset]
   "calculate new coordinates from character and offset"
-  (let [[character-x (first character.location)]
-	[character-y (second character.location)]
+  (let [[start-x (first location)]
+	[start-y (second location)]
 	[offset-x (first offset)]
 	[offset-y (second offset)]]
-    (, (+ character-x offset-x) (+ character-y offset-y))))
+    (, (+ start-x offset-x) (+ start-y offset-y))))
 
 (defn get-random-wall-direction [wall-info]
   "select a random direction from the given wall-info"
+;  (let [[possible-direction]]
+;    (for [x (list (range -1 2)) y (list (range -1 2))]
+;      (if (is-patrol-area? (map-coordinates
+    
   (.choice random (:wall-direction wall-info)))
 
 (defn focus-enemy [ai enemy]
