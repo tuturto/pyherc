@@ -100,13 +100,14 @@
 	[path (first (a-star start-location
 			     (second ai.mode)
 			     ai.character.level))]]
-    (walk ai action-factory (find-direction start-location (second path)))))
-	
+    (if path
+      (walk ai action-factory (find-direction start-location (second path)))
+      (wait ai))))
+
 (defn select-patrol-area [ai]
   (let [[patrol-area (patrollable-area-in-level ai)]
 	[target (.choice random patrol-area)]]
     (assoc ai.mode 1 target)))
-
 
 (with-decorator logged
   (defn follow-wall [ai action-factory]
@@ -144,7 +145,7 @@
 
 (defn start-following-wall [ai wall-info]
   (setv ai.mode [:follow-wall 
-		 (get-random-wall-direction wall-info)]))
+		 (get-random-wall-direction ai)]))
 
 (defn walk-random-direction [ai action-factory]
   "take a random step without changing mode"
@@ -206,13 +207,20 @@
 	[offset-y (second offset)]]
     (, (+ start-x offset-x) (+ start-y offset-y))))
 
-(defn get-random-wall-direction [wall-info]
+(defn get-random-wall-direction [ai]
   "select a random direction from the given wall-info"
-;  (let [[possible-direction]]
-;    (for [x (list (range -1 2)) y (list (range -1 2))]
-;      (if (is-patrol-area? (map-coordinates
-    
-  (.choice random (:wall-direction wall-info)))
+  (let [[possible-directions []]
+	[character-x (first ai.character.location)]
+	[character-y (second ai.character.location)]
+	[level ai.character.level]]
+    (for [x (range (- character-x 1) (+ character-x 2)) 
+	  y (range (- character-y 1) (+ character-y 2))]
+      (if (and (is-patrol-area? level x y)
+	       (not (= (, x y) ai.character.location)))
+	(.append possible-directions (, x y))))
+    (if possible-directions 
+      (find-direction ai.character.location (.choice random possible-directions))
+      :north)))
 
 (defn focus-enemy [ai enemy]
   "focus on enemy and start tracking it"
