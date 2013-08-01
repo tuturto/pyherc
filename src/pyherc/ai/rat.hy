@@ -26,7 +26,7 @@
 	[pyherc.ai.common [move-towards-patrol-area get-random-patrol-direction]]
 	[pyherc.ai.common [find-patrol-area enemy-close?]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
-	[pyherc.ai.basic [map-direction direction-mapping]]
+	[pyherc.ai.basic [map-direction direction-mapping attack]]
 	[pyherc.events [NoticeEvent]]
 	[random]
 	[math [sqrt]]
@@ -65,15 +65,6 @@
 		 (.blocks-movement level (- x 1) y)))
        (not (and (.blocks-movement level x (+ y 1))
 		 (.blocks-movement level x (- y 1))))))
-
-(defn attack [ai enemy action-factory rng]
-  "attack an enemy"
-  (let [[attacker ai.character]
-	[attacker-location attacker.location]
-	[target-location enemy.location]	
-	[attack-direction (map-direction (find-direction attacker-location 
-							 target-location))]]
-    (.perform-attack attacker attack-direction action-factory rng)))
 
 (defn start-fighting [ai enemy]
   "pick start fighting again enemy"
