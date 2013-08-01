@@ -49,6 +49,12 @@
       (walk ai action-factory (find-direction start-location (second path))))))
 
 (with-decorator logged
+  (defn select-patrol-area [patrol-area-locator ai]
+    (let [[patrol-area (patrol-area-locator ai.character.level)]
+	  [target (.choice random patrol-area)]]
+      (assoc ai.mode 1 target))))
+
+(with-decorator logged
   (defn patrol [is-patrol-area start-patrol ai action-factory]
     "routine to make character to patrol area"
     (let [[future-location (new-location ai.character (second ai.mode))]]

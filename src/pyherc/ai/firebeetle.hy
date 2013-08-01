@@ -22,6 +22,7 @@
 (import [pyherc.aspects [logged]]
 	[pyherc.ai.pathfinding [a-star]]
 	[pyherc.ai.common [patrol close-in-enemy fight-in-melee]]
+	[pyherc.ai.common [select-patrol-area patrollable-area-in-level]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
 	[pyherc.ai.basic [map-direction direction-mapping]]
 	[pyherc.events [NoticeEvent]]
@@ -63,18 +64,6 @@
        (not (.blocks-movement level (- x 1) (+ y 1)))
        (not (.blocks-movement level (- x 1) (- y 1)))))
 
-;; move this to common
-(with-decorator logged
-  (defn patrollable-area-in-level [ai]
-    "routine to find area to patrol in level"
-    (let [[level ai.character.level]
-	  [patrol-area []]]
-      (foreach [x (range (len level.walls))]
-	(foreach [y (range (len (first level.walls)))]
-	  (if (is-open-space? level x y)
-	    (.append patrol-area (, x y)))))
-      patrol-area)))
-
 ; move this to common
 (with-decorator logged
   (defn find-open-space [ai action-factory]
@@ -86,7 +75,7 @@
 	  (patrol-room ai action-factory))
       (if (second ai.mode)
 	(move-towards-patrol-area ai action-factory)
-	(select-patrol-area ai)))))
+	(select-room-to-patrol ai)))))
 
 ; move this to common
 (defn move-towards-patrol-area [ai action-factory]
@@ -97,12 +86,6 @@
     (if path
       (walk ai action-factory (find-direction start-location (second path)))
       (wait ai))))
-
-; move this to common
-(defn select-patrol-area [ai]
-  (let [[patrol-area (patrollable-area-in-level ai)]
-	[target (.choice random patrol-area)]]
-    (assoc ai.mode 1 target)))
 
 (defn attack [ai enemy action-factory rng]
   "attack an enemy"
@@ -158,6 +141,10 @@
 							    end 
 							    level)))))
 (def fight (partial fight-in-melee attack close-in))
+
+(def open-space (partial patrollable-area-in-level is-open-space?))
+
+(def select-room-to-patrol (partial select-patrol-area open-space))
 
 (def patrol-room (partial patrol is-open-space? start-patrolling-room))
 
