@@ -89,6 +89,20 @@
 	  (wait ai)))))
 
 (with-decorator logged
+  (defn find-patrol-area [is-patrollable start-patrolling patrol
+			  move-towards-patrol-area select-patrol-area
+			  ai action-factory]
+    "routine to make character to find a patrol area"
+    (if (is-patrollable ai.character.level
+			(first ai.character.location)
+			(second ai.character.location))
+      (do (start-patrolling ai)
+	  (patrol ai action-factory))
+      (if (second ai.mode)
+	(move-towards-patrol-area ai action-factory)
+	(select-patrol-area ai)))))
+
+(with-decorator logged
   (defn patrollable-area-in-level [can-patrol level]
     "routine to find area to patrol in level"
     (let [[patrol-area []]]

@@ -24,6 +24,7 @@
 	[pyherc.ai.common [patrol close-in-enemy fight-in-melee]]
 	[pyherc.ai.common [patrollable-area-in-level select-patrol-area]]
 	[pyherc.ai.common [move-towards-patrol-area get-random-patrol-direction]]
+	[pyherc.ai.common [find-patrol-area]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
 	[pyherc.ai.basic [map-direction direction-mapping]]
 	[pyherc.events [NoticeEvent]]
@@ -65,18 +66,6 @@
        (not (and (.blocks-movement level x (+ y 1))
 		 (.blocks-movement level x (- y 1))))))
 
-(with-decorator logged
-  (defn find-wall [ai action-factory]
-    "routine to make character to find a wall"
-    (if (is-next-to-wall? ai.character.level
-			 (first ai.character.location)
-			 (second ai.character.location))
-      (do (start-following-wall ai)
-	  (follow-wall ai action-factory))
-      (if (second ai.mode)
-	(move-towards-patrol-area ai action-factory)
-	(select-wall-to-patrol ai)))))
-
 (defn attack [ai enemy action-factory rng]
   "attack an enemy"
   (let [[attacker ai.character]
@@ -97,7 +86,7 @@
   "pick start fighting again enemy"
   (focus-enemy ai enemy)
   (setv ai.mode [:fight
-		enemy]))
+		 enemy]))
 
 (defn start-following-wall [ai]
   (setv ai.mode [:follow-wall 
@@ -108,6 +97,7 @@
   (let [[character ai.character]
 	[event (NoticeEvent character enemy)]]
     (.raise-event character event)))
+
 
 (def get-random-wall-direction (partial get-random-patrol-direction is-next-to-wall?))
 
@@ -122,6 +112,10 @@
 (def fight (partial fight-in-melee attack close-in))
 
 (def follow-wall (partial patrol is-next-to-wall? start-following-wall))
+
+(def find-wall (partial find-patrol-area is-next-to-wall? start-following-wall
+			follow-wall move-towards-patrol-area
+			select-wall-to-patrol))
 
 (def mode-bindings {:find-wall find-wall
 		    :follow-wall follow-wall
