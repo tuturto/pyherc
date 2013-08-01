@@ -23,6 +23,7 @@
 	[pyherc.ai.pathfinding [a-star]]
 	[pyherc.ai.common [patrol close-in-enemy fight-in-melee]]
 	[pyherc.ai.common [patrollable-area-in-level select-patrol-area]]
+	[pyherc.ai.common [move-towards-patrol-area]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
 	[pyherc.ai.basic [map-direction direction-mapping]]
 	[pyherc.events [NoticeEvent]]
@@ -75,15 +76,6 @@
       (if (second ai.mode)
 	(move-towards-patrol-area ai action-factory)
 	(select-wall-to-patrol ai)))))
-
-(defn move-towards-patrol-area [ai action-factory]
-  (let [[start-location ai.character.location]
-	[path (first (a-star start-location
-			     (second ai.mode)
-			     ai.character.level))]]
-    (if path
-      (walk ai action-factory (find-direction start-location (second path)))
-      (wait ai))))
 
 (defn attack [ai enemy action-factory rng]
   "attack an enemy"

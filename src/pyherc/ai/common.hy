@@ -20,6 +20,7 @@
 (setv __doc__ "module for common AI routines")
 
 (import [pyherc.aspects [logged]]
+	[pyherc.ai.pathfinding [a-star]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between new-location]]
 	[pyherc.ai.basic [find-direction]]
 	[random]
@@ -96,3 +97,12 @@
 	  (if (can-patrol level x y)
 	    (.append patrol-area (, x y)))))
       patrol-area)))
+
+(defn move-towards-patrol-area [ai action-factory]
+  (let [[start-location ai.character.location]
+	[path (first (a-star start-location
+			     (second ai.mode)
+			     ai.character.level))]]
+    (if path
+      (walk ai action-factory (find-direction start-location (second path)))
+      (wait ai))))
