@@ -106,3 +106,17 @@
     (if path
       (walk ai action-factory (find-direction start-location (second path)))
       (wait ai))))
+
+(defn get-random-patrol-direction [is-patrollable ai]
+  "select a random direction to follow"
+  (let [[possible-directions []]
+	[character-x (first ai.character.location)]
+	[character-y (second ai.character.location)]
+	[level ai.character.level]]
+    (for [x (range (- character-x 1) (+ character-x 2)) 
+	  y (range (- character-y 1) (+ character-y 2))]
+      (if (and (is-patrollable level x y)
+	       (not (= (, x y) ai.character.location)))
+	(.append possible-directions (, x y))))
+    (if possible-directions 
+      (find-direction ai.character.location (.choice random possible-directions)))))

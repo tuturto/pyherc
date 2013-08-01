@@ -23,7 +23,7 @@
 	[pyherc.ai.pathfinding [a-star]]
 	[pyherc.ai.common [patrol close-in-enemy fight-in-melee]]
 	[pyherc.ai.common [select-patrol-area patrollable-area-in-level]]
-	[pyherc.ai.common [move-towards-patrol-area]]
+	[pyherc.ai.common [move-towards-patrol-area get-random-patrol-direction]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
 	[pyherc.ai.basic [map-direction direction-mapping]]
 	[pyherc.events [NoticeEvent]]
@@ -101,31 +101,19 @@
 		enemy]))
 
 (defn start-patrolling-room [ai]
-  (let [[patrol-direction get-random-patrol-direction]]
+  (let [[patrol-direction random-patrol-direction]]
     (if patrol-direction
       (setv ai.mode [:patrol-room
 		     (patrol-direction ai)])
       (wait ai))))
-
-(defn get-random-patrol-direction [ai]
-  "select a random direction to follow"
-  (let [[possible-directions []]
-	[character-x (first ai.character.location)]
-	[character-y (second ai.character.location)]
-	[level ai.character.level]]
-    (for [x (range (- character-x 1) (+ character-x 2)) 
-	  y (range (- character-y 1) (+ character-y 2))]
-      (if (and (is-open-space? level x y)
-	       (not (= (, x y) ai.character.location)))
-	(.append possible-directions (, x y))))
-    (if possible-directions 
-      (find-direction ai.character.location (.choice random possible-directions)))))
 
 (defn focus-enemy [ai enemy]
   "focus on enemy and start tracking it"
   (let [[character ai.character]
 	[event (NoticeEvent character enemy)]]
     (.raise-event character event)))
+
+(def random-patrol-direction (partial get-random-patrol-direction is-open-space?))
 
 (def close-in (partial close-in-enemy 
 		       (fn [start end level] (first (a-star start

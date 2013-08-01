@@ -23,7 +23,7 @@
 	[pyherc.ai.pathfinding [a-star]]
 	[pyherc.ai.common [patrol close-in-enemy fight-in-melee]]
 	[pyherc.ai.common [patrollable-area-in-level select-patrol-area]]
-	[pyherc.ai.common [move-towards-patrol-area]]
+	[pyherc.ai.common [move-towards-patrol-area get-random-patrol-direction]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
 	[pyherc.ai.basic [map-direction direction-mapping]]
 	[pyherc.events [NoticeEvent]]
@@ -103,27 +103,13 @@
   (setv ai.mode [:follow-wall 
 		 (get-random-wall-direction ai)]))
 
-(defn get-random-wall-direction [ai]
-  "select a random wall direction to follow"
-  (let [[possible-directions []]
-	[character-x (first ai.character.location)]
-	[character-y (second ai.character.location)]
-	[level ai.character.level]]
-    (for [x (range (- character-x 1) (+ character-x 2)) 
-	  y (range (- character-y 1) (+ character-y 2))]
-      (if (and (is-next-to-wall? level x y)
-	       (not (= (, x y) ai.character.location)))
-	(.append possible-directions (, x y))))
-    (if possible-directions 
-      (find-direction ai.character.location (.choice random possible-directions))
-      :north)))
-
 (defn focus-enemy [ai enemy]
   "focus on enemy and start tracking it"
   (let [[character ai.character]
 	[event (NoticeEvent character enemy)]]
     (.raise-event character event)))
 
+(def get-random-wall-direction (partial get-random-patrol-direction is-next-to-wall?))
 
 (def wall-space (partial patrollable-area-in-level is-next-to-wall?))
 
