@@ -134,3 +134,10 @@
 	(.append possible-directions (, x y))))
     (if possible-directions 
       (find-direction ai.character.location (.choice random possible-directions)))))
+
+(defn enemy-close? [max-distance ai]
+  "check if there is an enemy close by, returns preferred enemy"
+  (let [[level ai.character.level]
+	[player ai.character.model.player]]
+    (if (< (distance-between player.location ai.character.location) max-distance)
+      player)))

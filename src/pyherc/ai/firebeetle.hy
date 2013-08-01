@@ -24,7 +24,7 @@
 	[pyherc.ai.common [patrol close-in-enemy fight-in-melee]]
 	[pyherc.ai.common [select-patrol-area patrollable-area-in-level]]
 	[pyherc.ai.common [move-towards-patrol-area get-random-patrol-direction]]
-	[pyherc.ai.common [find-patrol-area]]
+	[pyherc.ai.common [find-patrol-area enemy-close?]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
 	[pyherc.ai.basic [map-direction direction-mapping]]
 	[pyherc.events [NoticeEvent]]
@@ -75,13 +75,6 @@
 							 target-location))]]
     (.perform-attack attacker attack-direction action-factory rng)))
 
-(defn enemy-close? [ai]
-  "check if there is an enemy close by, returns preferred enemy"
-  (let [[level ai.character.level]
-	[player ai.character.model.player]]
-    (if (< (distance-between player.location ai.character.location) 4)
-      player)))
-
 (defn start-fighting [ai enemy]
   "pick start fighting again enemy"
   (focus-enemy ai enemy)
@@ -100,6 +93,8 @@
   (let [[character ai.character]
 	[event (NoticeEvent character enemy)]]
     (.raise-event character event)))
+
+(def enemy-close? (partial enemy-close? 3))
 
 (def random-patrol-direction (partial get-random-patrol-direction is-open-space?))
 
