@@ -20,6 +20,7 @@
 (setv __doc__ "module for actions")
 
 (import [pyherc.aspects [logged]]
+	[pyherc.events [NoticeEvent]]
 	[math [sqrt]])
 
 (require pyherc.ai.macros)
@@ -86,3 +87,9 @@
 	[attack-direction (map-direction (find-direction attacker-location 
 							 target-location))]]
     (.perform-attack attacker attack-direction action-factory rng)))
+
+(defn focus-enemy [ai enemy]
+  "focus on enemy and start tracking it"
+  (let [[character ai.character]
+	[event (NoticeEvent character enemy)]]
+    (.raise-event character event)))

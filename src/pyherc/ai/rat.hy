@@ -26,8 +26,7 @@
 	[pyherc.ai.common [move-towards-patrol-area get-random-patrol-direction]]
 	[pyherc.ai.common [find-patrol-area enemy-close?]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
-	[pyherc.ai.basic [map-direction direction-mapping attack]]
-	[pyherc.events [NoticeEvent]]
+	[pyherc.ai.basic [map-direction direction-mapping attack focus-enemy]]
 	[random]
 	[math [sqrt]]
 	[functools [partial]])
@@ -75,12 +74,6 @@
 (defn start-following-wall [ai]
   (setv ai.mode [:follow-wall 
 		 (get-random-wall-direction ai)]))
-
-(defn focus-enemy [ai enemy]
-  "focus on enemy and start tracking it"
-  (let [[character ai.character]
-	[event (NoticeEvent character enemy)]]
-    (.raise-event character event)))
 
 (def enemy-close? (partial enemy-close? 4))
 
