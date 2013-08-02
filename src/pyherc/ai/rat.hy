@@ -67,6 +67,7 @@
 		 (get-random-wall-direction ai)]))
 
 (defn patrol-ai [is-patrol-area detection-distance]
+  "factory function for creating patrolling ai"
   (let [[is-enemy-close? (partial enemy-close? 4)]
 	[get-random-wall-direction (partial get-random-patrol-direction is-next-to-wall?)]
 	[wall-space (partial patrollable-area-in-level is-next-to-wall?)]
@@ -81,7 +82,7 @@
 			follow-wall move-towards-patrol-area
 			select-wall-to-patrol)]
 	[act (fn [transit patrol fight ai model action-factory]
-	  "main routine for rat AI"
+	  "main routine for patrol AI"
 	  (if (not (= (first ai.mode) :fight))
 	    (let [[enemy (is-enemy-close? ai)]]
 	      (if enemy (start-fighting ai enemy))))
