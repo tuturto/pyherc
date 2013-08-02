@@ -36,7 +36,7 @@
 (defclass RatAI []
   [[__doc__ "AI routine for rats"]
    [character None]
-   [mode [:find-wall None]]
+   [mode [:transit None]]
    [--init-- (fn [self character]
 	       "default constructor"
 	       (.--init-- (super RatAI self))
@@ -44,15 +44,6 @@
    [act (fn [self model action-factory rng] 
 	  "check the situation and act accordingly"
 	  (rat-act self model action-factory))]])
-
-(with-decorator logged 
-  (defn rat-act [ai model action-factory]
-    "main routine for rat AI"
-    (if (not (= (first ai.mode) :fight))
-      (let [[enemy (enemy-close? ai)]]
-	(if enemy (start-fighting ai enemy))))
-    (let [[func (get mode-bindings (first ai.mode))]]
-      (func ai action-factory))))
 
 (defn is-next-to-wall? [level x y]
   "check if given location is within patrol area"
@@ -66,37 +57,38 @@
 		 (.blocks-movement level x (- y 1))))))
 
 (defn start-fighting [ai enemy]
-  "pick start fighting again enemy"
+  "start fighting against enemy"
   (focus-enemy ai enemy)
   (setv ai.mode [:fight
 		 enemy]))
 
-(defn start-following-wall [ai]
-  (setv ai.mode [:follow-wall 
+(defn start-following-wall [get-random-wall-direction ai]
+  (setv ai.mode [:patrol
 		 (get-random-wall-direction ai)]))
 
-(def enemy-close? (partial enemy-close? 4))
-
-(def get-random-wall-direction (partial get-random-patrol-direction is-next-to-wall?))
-
-(def wall-space (partial patrollable-area-in-level is-next-to-wall?))
-
-(def select-wall-to-patrol (partial select-patrol-area wall-space))
-
-(def close-in (partial close-in-enemy 
+(defn patrol-ai [is-patrol-area detection-distance]
+  (let [[is-enemy-close? (partial enemy-close? 4)]
+	[get-random-wall-direction (partial get-random-patrol-direction is-next-to-wall?)]
+	[wall-space (partial patrollable-area-in-level is-next-to-wall?)]
+	[select-wall-to-patrol (partial select-patrol-area wall-space)]
+	[close-in (partial close-in-enemy 
 		       (fn [start end level] (first (a-star start
 							    end 
-							    level)))))
-(def fight (partial fight-in-melee attack close-in))
-
-(def follow-wall (partial patrol is-next-to-wall? start-following-wall))
-
-(def find-wall (partial find-patrol-area is-next-to-wall? start-following-wall
+							    level))))]
+	[fight (partial fight-in-melee attack close-in)]
+	[follow-wall (partial patrol is-next-to-wall? (partial start-following-wall get-random-wall-direction))]
+	[find-wall (partial find-patrol-area is-next-to-wall? (partial start-following-wall get-random-wall-direction)
 			follow-wall move-towards-patrol-area
-			select-wall-to-patrol))
+			select-wall-to-patrol)]
+	[act (fn [transit patrol fight ai model action-factory]
+	  "main routine for rat AI"
+	  (if (not (= (first ai.mode) :fight))
+	    (let [[enemy (is-enemy-close? ai)]]
+	      (if enemy (start-fighting ai enemy))))
+	  (cond 
+	   ((= (first ai.mode) :transit) (transit ai action-factory))
+	   ((= (first ai.mode) :patrol) (patrol ai action-factory))
+	   ((= (first ai.mode) :fight) (fight ai action-factory))))]]
+    (partial act find-wall follow-wall fight)))
 
-(def mode-bindings {:find-wall find-wall
-		    :follow-wall follow-wall
-		    :fight fight})
-
-
+(def rat-act (patrol-ai is-next-to-wall? 4))
