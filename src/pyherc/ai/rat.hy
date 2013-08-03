@@ -25,8 +25,9 @@
 	[pyherc.ai.common [patrollable-area-in-level select-patrol-area]]
 	[pyherc.ai.common [move-towards-patrol-area get-random-patrol-direction]]
 	[pyherc.ai.common [find-patrol-area enemy-close?]]
+	[pyherc.ai.common [start-fighting]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
-	[pyherc.ai.basic [map-direction direction-mapping attack focus-enemy]]
+	[pyherc.ai.basic [map-direction direction-mapping attack]]
 	[random]
 	[math [sqrt]]
 	[functools [partial]])
@@ -55,12 +56,6 @@
 		 (.blocks-movement level (- x 1) y)))
        (not (and (.blocks-movement level x (+ y 1))
 		 (.blocks-movement level x (- y 1))))))
-
-(defn start-fighting [ai enemy]
-  "start fighting against enemy"
-  (focus-enemy ai enemy)
-  (setv ai.mode [:fight
-		 enemy]))
 
 (defn start-following-wall [get-random-wall-direction ai]
   (setv ai.mode [:patrol

@@ -23,6 +23,7 @@
 	[pyherc.ai.pathfinding [a-star]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between new-location]]
 	[pyherc.ai.basic [find-direction]]
+	[pyherc.ai.basic [focus-enemy]]
 	[random]
 	[math [sqrt]])
 
@@ -141,3 +142,9 @@
 	[player ai.character.model.player]]
     (if (< (distance-between player.location ai.character.location) max-distance)
       player)))
+
+(defn start-fighting [ai enemy]
+  "start fighting against enemy"
+  (focus-enemy ai enemy)
+  (setv ai.mode [:fight
+		 enemy]))
