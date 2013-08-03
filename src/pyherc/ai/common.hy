@@ -23,9 +23,10 @@
 	[pyherc.ai.pathfinding [a-star]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between new-location]]
 	[pyherc.ai.basic [find-direction]]
-	[pyherc.ai.basic [focus-enemy]]
+	[pyherc.ai.basic [focus-enemy attack]]
 	[random]
-	[math [sqrt]])
+	[math [sqrt]]
+	[functools [partial]])
 
 (require pyherc.ai.macros)
 
@@ -152,3 +153,29 @@
 (defn start-patrolling [get-random-patrol-direction ai]
   (setv ai.mode [:patrol
 		 (get-random-patrol-direction ai)]))
+
+(defn patrol-ai [is-patrol-area detection-distance]
+  "factory function for creating patrolling ai"
+  (let [[is-enemy-close? (partial enemy-close? detection-distance)]
+	[get-random-wall-direction (partial get-random-patrol-direction is-patrol-area)]
+	[patrol-space (partial patrollable-area-in-level is-patrol-area)]
+	[select-area-to-patrol (partial select-patrol-area patrol-space)]
+	[close-in (partial close-in-enemy 
+		       (fn [start end level] (first (a-star start
+							    end 
+							    level))))]
+	[fight (partial fight-in-melee attack close-in)]
+	[follow-wall (partial patrol is-patrol-area (partial start-patrolling get-random-wall-direction))]
+	[find-wall (partial find-patrol-area is-patrol-area (partial start-patrolling get-random-wall-direction)
+			follow-wall move-towards-patrol-area
+			select-area-to-patrol)]
+	[act (fn [transit patrol fight ai model action-factory]
+	  "main routine for patrol AI"
+	  (if (not (= (first ai.mode) :fight))
+	    (let [[enemy (is-enemy-close? ai)]]
+	      (if enemy (start-fighting ai enemy))))
+	  (cond 
+	   ((= (first ai.mode) :transit) (transit ai action-factory))
+	   ((= (first ai.mode) :patrol) (patrol ai action-factory))
+	   ((= (first ai.mode) :fight) (fight ai action-factory))))]]
+    (partial act find-wall follow-wall fight)))

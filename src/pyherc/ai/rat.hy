@@ -20,17 +20,7 @@
 (setv __doc__ "module for AI routines for rats")
 
 (import [pyherc.aspects [logged]]
-	[pyherc.ai.pathfinding [a-star]]
-	[pyherc.ai.common [patrol close-in-enemy fight-in-melee]]
-	[pyherc.ai.common [patrollable-area-in-level select-patrol-area]]
-	[pyherc.ai.common [move-towards-patrol-area get-random-patrol-direction]]
-	[pyherc.ai.common [find-patrol-area enemy-close?]]
-	[pyherc.ai.common [start-fighting start-patrolling]]
-	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
-	[pyherc.ai.basic [map-direction direction-mapping attack]]
-	[random]
-	[math [sqrt]]
-	[functools [partial]])
+	[pyherc.ai.common [patrol-ai]])
 
 (require pyherc.ai.macros)
 
@@ -56,31 +46,5 @@
 		 (.blocks-movement level (- x 1) y)))
        (not (and (.blocks-movement level x (+ y 1))
 		 (.blocks-movement level x (- y 1))))))
-
-(defn patrol-ai [is-patrol-area detection-distance]
-  "factory function for creating patrolling ai"
-  (let [[is-enemy-close? (partial enemy-close? 4)]
-	[get-random-wall-direction (partial get-random-patrol-direction is-next-to-wall?)]
-	[wall-space (partial patrollable-area-in-level is-next-to-wall?)]
-	[select-wall-to-patrol (partial select-patrol-area wall-space)]
-	[close-in (partial close-in-enemy 
-		       (fn [start end level] (first (a-star start
-							    end 
-							    level))))]
-	[fight (partial fight-in-melee attack close-in)]
-	[follow-wall (partial patrol is-next-to-wall? (partial start-patrolling get-random-wall-direction))]
-	[find-wall (partial find-patrol-area is-next-to-wall? (partial start-patrolling get-random-wall-direction)
-			follow-wall move-towards-patrol-area
-			select-wall-to-patrol)]
-	[act (fn [transit patrol fight ai model action-factory]
-	  "main routine for patrol AI"
-	  (if (not (= (first ai.mode) :fight))
-	    (let [[enemy (is-enemy-close? ai)]]
-	      (if enemy (start-fighting ai enemy))))
-	  (cond 
-	   ((= (first ai.mode) :transit) (transit ai action-factory))
-	   ((= (first ai.mode) :patrol) (patrol ai action-factory))
-	   ((= (first ai.mode) :fight) (fight ai action-factory))))]]
-    (partial act find-wall follow-wall fight)))
 
 (def rat-act (patrol-ai is-next-to-wall? 4))
