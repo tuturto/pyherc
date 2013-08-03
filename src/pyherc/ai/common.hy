@@ -31,7 +31,7 @@
 (require pyherc.ai.macros)
 
 (with-decorator logged
-  (defn fight-in-melee [attack-routine close-in-routine ai action-factory]
+  (defn -fight-in-melee [attack-routine close-in-routine ai action-factory]
     "routine to make character to fight"
     (let [[own-location ai.character.location]
 	  [enemy (second ai.mode)]
@@ -42,7 +42,7 @@
 	(close-in-routine ai enemy action-factory)))))
 
 (with-decorator
-  (defn close-in-enemy [routing-function ai enemy action-factory]
+  (defn -close-in-enemy [routing-function ai enemy action-factory]
     "get closer to enemy"
     (let [[start-location ai.character.location]
 	  [end-location enemy.location]
@@ -52,13 +52,13 @@
       (walk ai action-factory (find-direction start-location (second path))))))
 
 (with-decorator logged
-  (defn select-patrol-area [patrol-area-locator ai]
+  (defn -select-patrol-area [patrol-area-locator ai]
     (let [[patrol-area (patrol-area-locator ai.character.level)]
 	  [target (.choice random patrol-area)]]
       (assoc ai.mode 1 target))))
 
 (with-decorator logged
-  (defn patrol [is-patrol-area start-patrol ai action-factory]
+  (defn -patrol [is-patrol-area start-patrol ai action-factory]
     "routine to make character to patrol area"
     (let [[future-location (new-location ai.character (second ai.mode))]]
     (often (if (and (can-walk? ai action-factory (second ai.mode))
@@ -75,7 +75,7 @@
     (wait ai)))))
 
 (with-decorator logged
-  (defn walk-random-direction [ai action-factory]
+  (defn -walk-random-direction [ai action-factory]
     "take a random step without changing mode"
     (let [[legal-directions (list-comp direction 
 				       [direction (range 1 9)] 
@@ -91,7 +91,7 @@
 	  (wait ai)))))
 
 (with-decorator logged
-  (defn find-patrol-area [is-patrollable start-patrolling patrol
+  (defn -find-patrol-area [is-patrollable start-patrolling patrol
 			  move-towards-patrol-area select-patrol-area
 			  ai action-factory]
     "routine to make character to find a patrol area"
@@ -105,7 +105,7 @@
 	(select-patrol-area ai)))))
 
 (with-decorator logged
-  (defn patrollable-area-in-level [can-patrol level]
+  (defn -patrollable-area-in-level [can-patrol level]
     "routine to find area to patrol in level"
     (let [[patrol-area []]]
       (foreach [x (range (len level.walls))]
@@ -114,7 +114,7 @@
 	    (.append patrol-area (, x y)))))
       patrol-area)))
 
-(defn move-towards-patrol-area [ai action-factory]
+(defn -move-towards-patrol-area [ai action-factory]
   (let [[start-location ai.character.location]
 	[path (first (a-star start-location
 			     (second ai.mode)
@@ -123,7 +123,7 @@
       (walk ai action-factory (find-direction start-location (second path)))
       (wait ai))))
 
-(defn get-random-patrol-direction [is-patrollable ai]
+(defn -get-random-patrol-direction [is-patrollable ai]
   "select a random direction to follow"
   (let [[possible-directions []]
 	[character-x (first ai.character.location)]
@@ -137,45 +137,45 @@
     (if possible-directions 
       (find-direction ai.character.location (.choice random possible-directions)))))
 
-(defn enemy-close? [max-distance ai]
+(defn -enemy-close? [max-distance ai]
   "check if there is an enemy close by, returns preferred enemy"
   (let [[level ai.character.level]
 	[player ai.character.model.player]]
     (if (< (distance-between player.location ai.character.location) max-distance)
       player)))
 
-(defn start-fighting [ai enemy]
+(defn -start-fighting [ai enemy]
   "start fighting against enemy"
   (focus-enemy ai enemy)
   (setv ai.mode [:fight
 		 enemy]))
 
-(defn start-patrolling [get-random-patrol-direction ai]
+(defn -start-patrolling [get-random-patrol-direction ai]
   (setv ai.mode [:patrol
 		 (get-random-patrol-direction ai)]))
 
 (defn patrol-ai [is-patrol-area detection-distance]
   "factory function for creating patrolling ai"
-  (let [[is-enemy-close? (partial enemy-close? detection-distance)]
-	[get-random-wall-direction (partial get-random-patrol-direction is-patrol-area)]
-	[patrol-space (partial patrollable-area-in-level is-patrol-area)]
-	[select-area-to-patrol (partial select-patrol-area patrol-space)]
-	[close-in (partial close-in-enemy 
+  (let [[enemy-close? (partial -enemy-close? detection-distance)]
+	[random-patrol-direction (partial -get-random-patrol-direction is-patrol-area)]
+	[patrol-space (partial -patrollable-area-in-level is-patrol-area)]
+	[select-area-to-patrol (partial -select-patrol-area patrol-space)]
+	[close-in (partial -close-in-enemy 
 		       (fn [start end level] (first (a-star start
 							    end 
 							    level))))]
-	[fight (partial fight-in-melee attack close-in)]
-	[follow-wall (partial patrol is-patrol-area (partial start-patrolling get-random-wall-direction))]
-	[find-wall (partial find-patrol-area is-patrol-area (partial start-patrolling get-random-wall-direction)
-			follow-wall move-towards-patrol-area
+	[fight (partial -fight-in-melee attack close-in)]
+	[patrol (partial -patrol is-patrol-area (partial -start-patrolling random-patrol-direction))]
+	[find-wall (partial -find-patrol-area is-patrol-area (partial -start-patrolling random-patrol-direction)
+			patrol -move-towards-patrol-area
 			select-area-to-patrol)]
 	[act (fn [transit patrol fight ai model action-factory]
 	  "main routine for patrol AI"
 	  (if (not (= (first ai.mode) :fight))
-	    (let [[enemy (is-enemy-close? ai)]]
-	      (if enemy (start-fighting ai enemy))))
+	    (let [[enemy (enemy-close? ai)]]
+	      (if enemy (-start-fighting ai enemy))))
 	  (cond 
 	   ((= (first ai.mode) :transit) (transit ai action-factory))
 	   ((= (first ai.mode) :patrol) (patrol ai action-factory))
 	   ((= (first ai.mode) :fight) (fight ai action-factory))))]]
-    (partial act find-wall follow-wall fight)))
+    (partial act find-wall patrol fight)))

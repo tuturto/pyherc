@@ -20,23 +20,14 @@
 (setv __doc__ "module for AI routines for firebeetles")
 
 (import [pyherc.aspects [logged]]
-	[pyherc.ai.pathfinding [a-star]]
-	[pyherc.ai.common [patrol close-in-enemy fight-in-melee]]
-	[pyherc.ai.common [select-patrol-area patrollable-area-in-level]]
-	[pyherc.ai.common [move-towards-patrol-area get-random-patrol-direction]]
-	[pyherc.ai.common [find-patrol-area enemy-close?]]
-	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
-	[pyherc.ai.basic [map-direction direction-mapping attack focus-enemy]]
-	[random]
-	[math [sqrt]]
-	[functools [partial]])
+	[pyherc.ai.common [patrol-ai]])
 
 (require pyherc.ai.macros)
 
 (defclass FireBeetleAI []
   [[__doc__ "AI routine for fire beetles"]
    [character None]
-   [mode [:find-room None]]
+   [mode [:transit None]]
    [--init-- (fn [self character]
 	       "default constructor"
 	       (.--init-- (super FireBeetleAI self))
@@ -44,15 +35,6 @@
    [act (fn [self model action-factory rng] 
 	  "check the situation and act accordingly"
 	  (beetle-act self model action-factory))]])
-
-(with-decorator logged 
-  (defn beetle-act [ai model action-factory]
-    "main routine for beetle AI"
-    (if (not (= (first ai.mode) :fight))
-      (let [[enemy (enemy-close? ai)]]
-	(if enemy (start-fighting ai enemy))))
-    (let [[func (get mode-bindings (first ai.mode))]]
-      (func ai action-factory))))
 
 (defn is-open-space? [level x y]
   "check if given location is within patrol area"
@@ -65,41 +47,4 @@
        (not (.blocks-movement level (- x 1) (+ y 1)))
        (not (.blocks-movement level (- x 1) (- y 1)))))
 
-(defn start-fighting [ai enemy]
-  "pick start fighting again enemy"
-  (focus-enemy ai enemy)
-  (setv ai.mode [:fight
-		enemy]))
-
-(defn start-patrolling-room [ai]
-  (let [[patrol-direction random-patrol-direction]]
-    (if patrol-direction
-      (setv ai.mode [:patrol-room
-		     (patrol-direction ai)])
-      (wait ai))))
-
-(def enemy-close? (partial enemy-close? 3))
-
-(def random-patrol-direction (partial get-random-patrol-direction is-open-space?))
-
-(def close-in (partial close-in-enemy 
-		       (fn [start end level] (first (a-star start
-							    end 
-							    level)))))
-(def fight (partial fight-in-melee attack close-in))
-
-(def open-space (partial patrollable-area-in-level is-open-space?))
-
-(def select-room-to-patrol (partial select-patrol-area open-space))
-
-(def patrol-room (partial patrol is-open-space? start-patrolling-room))
-
-(def find-open-space (partial find-patrol-area is-open-space? start-patrolling-room
-			      patrol-room move-towards-patrol-area
-			      select-room-to-patrol))
-
-(def mode-bindings {:find-room find-open-space
-		    :patrol-room patrol-room
-		    :fight fight})
-
-
+(def beetle-act (patrol-ai is-open-space? 3))
