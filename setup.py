@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name = 'herculeum',
-      version = '0.9',
+      version = '0.9.1',
       description = 'Small roguelike game',
       author = 'Tuukka Turto',
       author_email = 'tuukka.turto@oktaeder.net',
@@ -34,7 +34,8 @@ setup(name = 'herculeum',
                  'pyherc.rules', 'pyherc.rules.attack', 'pyherc.rules.consume',
                  'pyherc.rules.inventory', 'pyherc.rules.move'],
       scripts = ['src/scripts/herculeum'],
-      package_data={'pyherc': ['ai/*.hy']},
+      package_data={'pyherc': ['*.hy',
+                               'ai/*.hy']},
       requires = ['decorator (>=3.4.0)',
                   'hy (>=0.9.10)'],
       package_dir = {'herculeum': 'src/herculeum',

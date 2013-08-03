@@ -41,6 +41,7 @@ src/herculeum/ui/text/main_window.py
 src/herculeum/ui/text/map.py
 src/herculeum/ui/text/start_game.py
 src/herculeum/ui/text/surface_manager.py
+src/pyherc/__init__.hy
 src/pyherc/__init__.py
 src/pyherc/aspects.py
 src/pyherc/ai/__init__.hy
