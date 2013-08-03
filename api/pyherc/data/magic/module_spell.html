@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.data.magic.spell &mdash; Herculeum 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.9 documentation" href="../../../index.html" />
+    <link rel="up" title="pyherc.data.magic" href="package_magic.html" />
+    <link rel="next" title="pyherc.data.character" href="../module_character.html" />
+    <link rel="prev" title="pyherc.data.magic" href="package_magic.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../module_character.html" title="pyherc.data.character"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="package_magic.html" title="pyherc.data.magic"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../package_data.html" >pyherc.data</a> &raquo;</li>
+          <li><a href="package_magic.html" accesskey="U">pyherc.data.magic</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.data.magic.spell">
+<span id="pyherc-data-magic-spell"></span><h1>pyherc.data.magic.spell<a class="headerlink" href="#module-pyherc.data.magic.spell" title="Permalink to this headline">¶</a></h1>
+<p>Module for spell objects</p>
+<dl class="class">
+<dt id="pyherc.data.magic.spell.Spell">
+<em class="property">class </em><tt class="descclassname">pyherc.data.magic.spell.</tt><tt class="descname">Spell</tt><a class="headerlink" href="#pyherc.data.magic.spell.Spell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Class to represent spells</p>
+<div class="versionadded">
+<p><span>New in version 0.9.</span></p>
+</div>
+<dl class="method">
+<dt id="pyherc.data.magic.spell.Spell.add_effect_handle">
+<tt class="descname">add_effect_handle</tt><big>(</big><em>handle</em><big>)</big><a class="headerlink" href="#pyherc.data.magic.spell.Spell.add_effect_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add effect handle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>handle</strong> (<em>EffectHandle</em>) &#8211; effect handle to add</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.magic.spell.Spell.cast">
+<tt class="descname">cast</tt><big>(</big><em>effects_factory</em>, <em>dying_rules</em><big>)</big><a class="headerlink" href="#pyherc.data.magic.spell.Spell.cast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast the spell</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>effects_factory</strong> (<em>EffectsFactory</em>) &#8211; factory for creating effects</li>
+<li><strong>dying_rules</strong> (<em>Dying</em>) &#8211; rules for dying</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.magic.spell.Spell.get_effect_handles">
+<tt class="descname">get_effect_handles</tt><big>(</big><em>trigger=None</em><big>)</big><a class="headerlink" href="#pyherc.data.magic.spell.Spell.get_effect_handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get effect handles</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>trigger</strong> (<em>string</em>) &#8211; optional trigger type</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">effect handles</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">[EffectHandle]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.magic.spell.Spell.remove_effect_handle">
+<tt class="descname">remove_effect_handle</tt><big>(</big><em>handle</em><big>)</big><a class="headerlink" href="#pyherc.data.magic.spell.Spell.remove_effect_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove given handle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>handle</strong> (<em>EffectHandle</em>) &#8211; handle to remove</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="package_magic.html"
+                        title="previous chapter">pyherc.data.magic</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../module_character.html"
+                        title="next chapter">pyherc.data.character</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/pyherc/data/magic/module_spell.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../module_character.html" title="pyherc.data.character"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="package_magic.html" title="pyherc.data.magic"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../package_data.html" >pyherc.data</a> &raquo;</li>
+          <li><a href="package_magic.html" >pyherc.data.magic</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2013, Tuukka Turto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

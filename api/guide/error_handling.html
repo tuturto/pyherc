@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Error Handling &mdash; Herculeum 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.9 documentation" href="../index.html" />
+    <link rel="next" title="Testing" href="testing.html" />
+    <link rel="prev" title="Configuration" href="configuration.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="configuration.html" title="Configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="error-handling">
+<h1>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
+<p>Pyherc, like any other software contains errors and bugs. Some of them are
+so fatal that they could potentially crash the program. This chapter gives
+an overview on how runtime errors are handled.</p>
+<div class="section" id="general-idea">
+<h2>General idea<a class="headerlink" href="#general-idea" title="Permalink to this headline">¶</a></h2>
+<p>The general idea is to avoid littering the code with error handling and only
+place it where it actually makes difference. Another goal is to keep the game
+running as long as possible and avoid error dialogs. Instead of displaying
+an error dialog, errors are masked as magical or mystical events. There should
+be enough logs though to be able to investigate the situation later.</p>
+</div>
+<div class="section" id="specific-cases">
+<h2>Specific cases<a class="headerlink" href="#specific-cases" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="character">
+<h3>Character<a class="headerlink" href="#character" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../pyherc/data/module_character.html#pyherc.data.character.Character" title="pyherc.data.character.Character"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.data.character.Character</span></tt></a> is a central location in code.
+Majority actions performed by the characters flow through there after they
+have been initiated either by a user interface or artificial intelligence
+routine.</p>
+<p><a class="reference internal" href="../pyherc/data/module_character.html#pyherc.data.character.guarded_action" title="pyherc.data.character.guarded_action"><tt class="xref py py-func docutils literal"><span class="pre">pyherc.data.character.guarded_action()</span></tt></a> is a decorator that should
+only be used in Character class. In the following example a move method has
+been decorated with both logged and guarded_action decorators:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@guarded_action</span>
+<span class="nd">@logged</span>
+<span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">action_factory</span><span class="p">):</span>
+   <span class="o">...</span>
+</pre></div>
+</div>
+<p>In case an exception is thrown, guarded_action will catch and handle it. The
+game might be in inconsistent state after this, but at least it did not crash.
+The decorator will set tick of the character to suitable value, so that other
+characters have a chance to act before this one is given another try. It will
+also emit <a class="reference internal" href="../pyherc/events/module_error.html#pyherc.events.error.ErrorEvent" title="pyherc.events.error.ErrorEvent"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.events.error.ErrorEvent</span></tt></a> that can be processed to
+inform the player that there is something wrong in the game.</p>
+<p>Since the decorator is emitting an event, it should not be used for methods
+that are integral to event handling. This might cause an infinite recursion
+that ultimately will crash the program. It is best suited for those methods
+that are used to execute actions, like
+<a class="reference internal" href="../pyherc/data/module_character.html#pyherc.data.character.Character.move" title="pyherc.data.character.Character.move"><tt class="xref py py-meth docutils literal"><span class="pre">pyherc.data.character.Character.move()</span></tt></a>
+and <a class="reference internal" href="../pyherc/data/module_character.html#pyherc.data.character.Character.pick_up" title="pyherc.data.character.Character.pick_up"><tt class="xref py py-meth docutils literal"><span class="pre">pyherc.data.character.Character.pick_up()</span></tt></a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Error Handling</a><ul>
+<li><a class="reference internal" href="#general-idea">General idea</a></li>
+<li><a class="reference internal" href="#specific-cases">Specific cases</a><ul>
+<li><a class="reference internal" href="#character">Character</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="configuration.html"
+                        title="previous chapter">Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="testing.html"
+                        title="next chapter">Testing</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/guide/error_handling.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="configuration.html" title="Configuration"
+             >previous</a> |</li>
+        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2013, Tuukka Turto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

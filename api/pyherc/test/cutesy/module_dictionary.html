@@ -1,0 +1,504 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.test.cutesy.dictionary &mdash; Herculeum 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.9 documentation" href="../../../index.html" />
+    <link rel="up" title="pyherc.test.cutesy" href="package_cutesy.html" />
+    <link rel="next" title="pyherc.test.cutesy.weapons" href="module_weapons.html" />
+    <link rel="prev" title="pyherc.test.cutesy.characters" href="module_characters.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_weapons.html" title="pyherc.test.cutesy.weapons"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module_characters.html" title="pyherc.test.cutesy.characters"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
+          <li><a href="package_cutesy.html" accesskey="U">pyherc.test.cutesy</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.test.cutesy.dictionary">
+<span id="pyherc-test-cutesy-dictionary"></span><h1>pyherc.test.cutesy.dictionary<a class="headerlink" href="#module-pyherc.test.cutesy.dictionary" title="Permalink to this headline">¶</a></h1>
+<p>Dictionary for behaviour driven tests</p>
+<dl class="class">
+<dt id="pyherc.test.cutesy.dictionary.CarryAction">
+<em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">CarryAction</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.CarryAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Action to get chracter to carry something</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.cutesy.dictionary.CastSpell">
+<em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">CastSpell</tt><big>(</big><em>spell_name</em>, <em>target=None</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.CastSpell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Class representing casting a spell</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.cutesy.dictionary.Drop">
+<em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">Drop</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.Drop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Class representing dropping an item</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.cutesy.dictionary.HasDropped">
+<em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">HasDropped</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.HasDropped" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">hamcrest.core.base_matcher.BaseMatcher</span></tt></p>
+<p>Matcher for checking that item has been dropped</p>
+<dl class="method">
+<dt id="pyherc.test.cutesy.dictionary.HasDropped.describe_mismatch">
+<tt class="descname">describe_mismatch</tt><big>(</big><em>item</em>, <em>mismatch_description</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.HasDropped.describe_mismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Descripe the mismatch</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Item :</th><td class="field-body">mismatching item</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mismatch_description</strong> (<em>string</em>) &#8211; description text to append</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.cutesy.dictionary.HasDropped.describe_to">
+<tt class="descname">describe_to</tt><big>(</big><em>description</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.HasDropped.describe_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Descripe the match</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>description</strong> (<em>string</em>) &#8211; description text to append</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.cutesy.dictionary.HasLessHitPoints">
+<em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">HasLessHitPoints</tt><a class="headerlink" href="#pyherc.test.cutesy.dictionary.HasLessHitPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">hamcrest.core.base_matcher.BaseMatcher</span></tt></p>
+<p>Matcher for checking that hit points have gone down</p>
+<dl class="method">
+<dt id="pyherc.test.cutesy.dictionary.HasLessHitPoints.describe_mismatch">
+<tt class="descname">describe_mismatch</tt><big>(</big><em>item</em>, <em>mismatch_description</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.HasLessHitPoints.describe_mismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Descripe the mismatch</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Item :</th><td class="field-body">mismatching item</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mismatch_description</strong> (<em>string</em>) &#8211; description text to append</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.cutesy.dictionary.HasLessHitPoints.describe_to">
+<tt class="descname">describe_to</tt><big>(</big><em>description</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.HasLessHitPoints.describe_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Descripe the match</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>description</strong> (<em>string</em>) &#8211; description text to append</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.cutesy.dictionary.Hit">
+<em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">Hit</tt><big>(</big><em>target</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.Hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Class representing a hit in unarmed combat</p>
+<dl class="method">
+<dt id="pyherc.test.cutesy.dictionary.Hit.find_direction">
+<tt class="descname">find_direction</tt><big>(</big><em>start</em>, <em>end</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.Hit.find_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find direction from one point to another</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>start</strong> (<em>(int, int)</em>) &#8211; start location</li>
+<li><strong>end</strong> (<em>(int, int)</em>) &#8211; end location</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.Level">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">Level</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.Level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a level</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">fully initialised level</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Level</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.cutesy.dictionary.LevelLocation">
+<em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">LevelLocation</tt><big>(</big><em>level</em>, <em>location</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.LevelLocation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Defines a location in game world</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.cutesy.dictionary.WieldAction">
+<em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">WieldAction</tt><big>(</big><em>weapon</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.WieldAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Action to get chracter to wield something</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.affect">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">affect</tt><big>(</big><em>target</em>, <em>effect_spec</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.affect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Triggers an effect on target</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>target</strong> (<em>Character</em>) &#8211; target of the effect</li>
+<li><strong>effect_spec</strong> (<em>{}</em>) &#8211; effect specification</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.at_">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">at_</tt><big>(</big><em>loc_x</em>, <em>loc_y</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.at_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new location entity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>loc_x</strong> (<em>int</em>) &#8211; x-coordinate of location</li>
+<li><strong>loc_y</strong> (<em>int</em>) &#8211; y-coordinate of location</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">location</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(int, int)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.carrying">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">carrying</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.carrying" title="Permalink to this definition">¶</a></dt>
+<dd><p>make character to carry an item</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.cast_spell">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">cast_spell</tt><big>(</big><em>spell_name</em>, <em>target=None</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.cast_spell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast a spell</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>spell_name</strong> &#8211; name of the spell to cast</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.drop">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">drop</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.drop" title="Permalink to this definition">¶</a></dt>
+<dd><p>make chracter to drop an item</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.has_dropped">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">has_dropped</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.has_dropped" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if character has dropped item</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.has_less_hit_points">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">has_less_hit_points</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.has_less_hit_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that hit points have gone down</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.hit">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">hit</tt><big>(</big><em>target</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hit target</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>target</strong> &#8211; target to hit</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">callable action</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.make">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">make</tt><big>(</big><em>actor</em>, <em>action</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.make" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trigger an action</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>actor</strong> (<em>Character</em>) &#8211; actor doing the action</li>
+<li><strong>action</strong> &#8211; action to perfrom</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.middle_of">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">middle_of</tt><big>(</big><em>level</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.middle_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find out middle point of level</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>level</strong> (<em>Level</em>) &#8211; level to inspect</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">middle point of level</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(int, int)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.place">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">place</tt><big>(</big><em>character</em>, <em>location</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.place" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place character to given location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>character</strong> (<em>Character</em>) &#8211; character to place</li>
+<li><strong>location</strong> (<em>LevelLocation</em>) &#8211; location to place the character</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.potent_poison">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">potent_poison</tt><big>(</big><em>target=None</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.potent_poison" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates effect specification for poison</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>target</strong> (<em>Character</em>) &#8211; target of the effect</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">effect specification</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">{}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.right_of">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">right_of</tt><big>(</big><em>object</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.right_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find location on the right side of something</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>object</strong> (<em>Item or Creature</em>) &#8211; entity on map</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">point right of the entity</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(int, int)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.weak_poison">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">weak_poison</tt><big>(</big><em>target=None</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.weak_poison" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates effect specification for poison</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>target</strong> (<em>Character</em>) &#8211; target of the effect</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">effect specification</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">{}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.wielding">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">wielding</tt><big>(</big><em>weapon</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.wielding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a character to wield a weapon</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.with_">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">with_</tt><big>(</big><em>effect_spec</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.with_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Syntactic sugar</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>effect_spec</strong> (<em>{}</em>) &#8211; effect specification</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">effect specification</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">{}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module_characters.html"
+                        title="previous chapter">pyherc.test.cutesy.characters</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_weapons.html"
+                        title="next chapter">pyherc.test.cutesy.weapons</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/pyherc/test/cutesy/module_dictionary.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_weapons.html" title="pyherc.test.cutesy.weapons"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module_characters.html" title="pyherc.test.cutesy.characters"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
+          <li><a href="package_cutesy.html" >pyherc.test.cutesy</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2013, Tuukka Turto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

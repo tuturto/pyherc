@@ -40,7 +40,7 @@ For brewity, creation of ItemGenerator has been left out from the example.
                            item_adder_config,
                            Random())
 
-    print item_adder
+    print(item_adder)
     
 item_adder now contains a fully configured ItemAdder object.
     

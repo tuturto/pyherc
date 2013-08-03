@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Events &mdash; Herculeum 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.9 documentation" href="../index.html" />
+    <link rel="next" title="Effects" href="effects.html" />
+    <link rel="prev" title="Actions" href="actions.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="effects.html" title="Effects"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="actions.html" title="Actions"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="events">
+<h1>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h1>
+<p>Events, in the context of this article, are used in relaying information of
+what is happening in the game world. They should not be confused with UI events
+that are created when buttons of UI are pressed.</p>
+<div class="section" id="overview-of-event-system">
+<h2>Overview of event system<a class="headerlink" href="#overview-of-event-system" title="Permalink to this headline">¶</a></h2>
+<p>Events are represented by classes found at <a class="reference internal" href="../pyherc/events/package_events.html#module-pyherc.events" title="pyherc.events"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.events</span></tt></a> and they all
+inherit from <a class="reference internal" href="../pyherc/events/module_event.html#pyherc.events.event.Event" title="pyherc.events.event.Event"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.events.event.Event</span></tt></a>.</p>
+<p>Events are usually created as a result of an action, but nothing prevents
+them from being raised from somewhere else too.</p>
+<p>Events are relayed by <a class="reference internal" href="../pyherc/data/module_model.html#pyherc.data.model.Model.raise_event" title="pyherc.data.model.Model.raise_event"><tt class="xref py py-meth docutils literal"><span class="pre">pyherc.data.model.Model.raise_event()</span></tt></a> and there
+exists convenient <a class="reference internal" href="../pyherc/data/module_character.html#pyherc.data.character.Character.raise_event" title="pyherc.data.character.Character.raise_event"><tt class="xref py py-meth docutils literal"><span class="pre">pyherc.data.character.Character.raise_event()</span></tt></a> too.</p>
+<p><a class="reference internal" href="../pyherc/data/module_character.html#pyherc.data.character.Character.receive_event" title="pyherc.data.character.Character.receive_event"><tt class="xref py py-meth docutils literal"><span class="pre">pyherc.data.character.Character.receive_event()</span></tt></a> method receives an
+event that has been raised somewhere else in the system. The default
+implementation is to store it in internal array and process when it is
+character&#8217;s turn to act. The character can use this list of events to remember
+what happened between this and his last turn and react accordingly.</p>
+</div>
+<div class="section" id="events-and-ui">
+<h2>Events and UI<a class="headerlink" href="#events-and-ui" title="Permalink to this headline">¶</a></h2>
+<p>One important factor of events are their ability to tell UI what pieces of map
+were affected and should be redrawn next time the screen is updated. This is
+done by passing a list of coordinates (int, int) in affected_tiles parameter
+that each and every event has in constructor.</p>
+<p>Events that modify location of characters, shape of the map or otherwise affect
+to the world visible to the player should list the affected tiles for fast UI
+update. For example, move action will usually have two tiles in the list: the
+original location of character and the new location. If character were carrying
+a lightsource when moving, appropriate squares should be listed too (those that
+were lighted, but are now in darkness and vice versa).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Events</a><ul>
+<li><a class="reference internal" href="#overview-of-event-system">Overview of event system</a></li>
+<li><a class="reference internal" href="#events-and-ui">Events and UI</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="actions.html"
+                        title="previous chapter">Actions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="effects.html"
+                        title="next chapter">Effects</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/guide/events.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="effects.html" title="Effects"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="actions.html" title="Actions"
+             >previous</a> |</li>
+        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2013, Tuukka Turto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

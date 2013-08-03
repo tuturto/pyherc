@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.9',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -27,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Herculeum 0.9 documentation" href="index.html" />
     <link rel="next" title="herculeum" href="herculeum/package_herculeum.html" />
-    <link rel="prev" title="Documentation help" href="documenting.html" /> 
+    <link rel="prev" title="Testing" href="guide/testing.html" /> 
   </head>
   <body>
     <div class="related">
@@ -43,7 +41,7 @@
           <a href="herculeum/package_herculeum.html" title="herculeum"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="documenting.html" title="Documentation help"
+          <a href="guide/testing.html" title="Testing"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Herculeum 0.9 documentation</a> &raquo;</li> 
       </ul>
@@ -71,13 +69,14 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="herculeum/config/module_config.html">herculeum.config.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="herculeum/config/module_tiles.html">herculeum.config.tiles</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="herculeum/ui/package_ui.html">herculeum.ui</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="herculeum/ui/controllers/package_controllers.html">herculeum.ui.controllers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="herculeum/ui/controllers/module_endscreen.html">herculeum.ui.controllers.endscreen</a></li>
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/controllers/module_inventory.html">herculeum.ui.controllers.inventory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/controllers/module_moving.html">herculeum.ui.controllers.moving</a></li>
+<li class="toctree-l4"><a class="reference internal" href="herculeum/ui/controllers/module_startgame.html">herculeum.ui.controllers.startgame</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="herculeum/ui/gui/package_gui.html">herculeum.ui.gui</a><ul>
@@ -85,7 +84,6 @@
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/gui/module_config.html">herculeum.ui.gui.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/gui/module_endscreen.html">herculeum.ui.gui.endscreen</a></li>
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/gui/module_eventdisplay.html">herculeum.ui.gui.eventdisplay</a></li>
-<li class="toctree-l4"><a class="reference internal" href="herculeum/ui/gui/module_images.html">herculeum.ui.gui.images</a></li>
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/gui/module_inventory.html">herculeum.ui.gui.inventory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/gui/module_mainwindow.html">herculeum.ui.gui.mainwindow</a></li>
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/gui/module_map.html">herculeum.ui.gui.map</a></li>
@@ -95,8 +93,10 @@
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/gui/module_widgets.html">herculeum.ui.gui.widgets</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="herculeum/ui/text/package_text.html">herculeum.ui.gui</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="herculeum/ui/text/package_text.html">herculeum.ui.text</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="herculeum/ui/text/module_character.html">herculeum.ui.text.character</a></li>
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/text/module_config.html">herculeum.ui.text.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="herculeum/ui/text/module_endscreen.html">herculeum.ui.text.endscreen</a></li>
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/text/module_interface.html">herculeum.ui.text.interface</a></li>
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/text/module_inventory.html">herculeum.ui.text.inventory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="herculeum/ui/text/module_main_window.html">herculeum.ui.text.main_window</a></li>
@@ -123,7 +123,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="herculeum/module_application.html">herculeum.application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="herculeum/module_main.html">herculeum.main</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pyherc/package_pyherc.html">pyherc</a><ul>
@@ -132,6 +131,7 @@
 <li class="toctree-l3"><a class="reference internal" href="pyherc/ai/module_heapset.html">pyherc.ai.heapset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/ai/module_pathfinding.html">pyherc.ai.pathfinding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/ai/module_pyheapq.html">pyherc.ai.pyheapq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyherc/ai/module_rat.html">pyherc.ai.rat</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/ai/module_simple.html">pyherc.ai.simple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/ai/module_skeleton.html">pyherc.ai.skeleton</a></li>
 </ul>
@@ -155,6 +155,10 @@
 <li class="toctree-l4"><a class="reference internal" href="pyherc/data/effects/module_poison.html">pyherc.data.effects.poison</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="pyherc/data/magic/package_magic.html">pyherc.data.magic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyherc/data/magic/module_spell.html">pyherc.data.magic.spell</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/data/module_character.html">pyherc.data.character</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/data/module_dungeon.html">pyherc.data.dungeon</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/data/module_inventory.html">pyherc.data.inventory</a></li>
@@ -169,6 +173,7 @@
 <li class="toctree-l3"><a class="reference internal" href="pyherc/events/module_damage.html">pyherc.events.damage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/events/module_death.html">pyherc.events.death</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/events/module_event.html">pyherc.events.event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyherc/events/module_error.html">pyherc.events.error</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/events/module_healing.html">pyherc.events.healing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/events/module_hitpoints.html">pyherc.events.hitpoints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/events/module_inventory.html">pyherc.events.inventory</a></li>
@@ -240,6 +245,11 @@
 <li class="toctree-l4"><a class="reference internal" href="pyherc/rules/inventory/module_unequip.html">pyherc.rules.inventory.unequip</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="pyherc/rules/magic/package_magic.html">pyherc.rules.magic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyherc/rules/magic/module_action.html">pyherc.rules.magic.action</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyherc/rules/magic/module_factories.html">pyherc.rules.magic.factories</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/rules/move/module_move.html">pyherc.rules.move</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="pyherc/rules/move/module_action.html">pyherc.rules.move.action</a></li>
 <li class="toctree-l4"><a class="reference internal" href="pyherc/rules/move/module_factories.html">pyherc.rules.move.factories</a></li>
@@ -251,7 +261,6 @@
 <li class="toctree-l3"><a class="reference internal" href="pyherc/rules/module_los.html">pyherc.rules.los</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/rules/module_moving.html">pyherc.rules.moving</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/rules/module_public.html">pyherc.rules.public</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pyherc/rules/module_utils.html">pyherc.rules.utils</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="pyherc/test/package_test.html">pyherc.test</a><ul>
@@ -266,7 +275,10 @@
 <li class="toctree-l4"><a class="reference internal" href="pyherc/test/builders/module_level.html">pyherc.test.builders.level</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="pyherc/test/cutesy/package_cutesy.html">pyherc.test.cutesy</a><ul class="simple">
+<li class="toctree-l3"><a class="reference internal" href="pyherc/test/cutesy/package_cutesy.html">pyherc.test.cutesy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyherc/test/cutesy/module_characters.html">pyherc.test.cutesy.characters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyherc/test/cutesy/module_dictionary.html">pyherc.test.cutesy.dictionary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyherc/test/cutesy/module_weapons.html">pyherc.test.cutesy.weapons</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="pyherc/test/helpers/package_helpers.html">pyherc.test.helpers</a><ul>
@@ -317,8 +329,8 @@
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="documenting.html"
-                        title="previous chapter">Documentation help</a></p>
+  <p class="topless"><a href="guide/testing.html"
+                        title="previous chapter">Testing</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="herculeum/package_herculeum.html"
                         title="next chapter">herculeum</a></p>
@@ -357,14 +369,14 @@
           <a href="herculeum/package_herculeum.html" title="herculeum"
              >next</a> |</li>
         <li class="right" >
-          <a href="documenting.html" title="Documentation help"
+          <a href="guide/testing.html" title="Testing"
              >previous</a> |</li>
         <li><a href="index.html">Herculeum 0.9 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2010-2013, Tuukka Turto.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -65,7 +63,7 @@
 <dl class="class">
 <dt id="pyherc.test.builders.action.ActionFactoryBuilder">
 <em class="property">class </em><tt class="descclassname">pyherc.test.builders.action.</tt><tt class="descname">ActionFactoryBuilder</tt><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Class for building action factories</p>
 <dl class="method">
 <dt id="pyherc.test.builders.action.ActionFactoryBuilder.build">
@@ -141,12 +139,21 @@
 <dd><p>Configure action factory to use real move factory</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="pyherc.test.builders.action.ActionFactoryBuilder.with_spellcasting_factory">
+<tt class="descname">with_spellcasting_factory</tt><big>(</big><em>spellcasting_factory=None</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder.with_spellcasting_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure action factory to use real magic factory</p>
+<div class="versionadded">
+<p><span>New in version 0.9.</span></p>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="pyherc.test.builders.action.DrinkFactoryBuilder">
 <em class="property">class </em><tt class="descclassname">pyherc.test.builders.action.</tt><tt class="descname">DrinkFactoryBuilder</tt><a class="headerlink" href="#pyherc.test.builders.action.DrinkFactoryBuilder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Class to build drink factories</p>
 <dl class="method">
 <dt id="pyherc.test.builders.action.DrinkFactoryBuilder.build">
@@ -164,6 +171,34 @@
 <dt id="pyherc.test.builders.action.DrinkFactoryBuilder.with_effect_factory">
 <tt class="descname">with_effect_factory</tt><big>(</big><em>effect_factory</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.DrinkFactoryBuilder.with_effect_factory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set effect factory to use</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.builders.action.SpellCastingFactoryBuilder">
+<em class="property">class </em><tt class="descclassname">pyherc.test.builders.action.</tt><tt class="descname">SpellCastingFactoryBuilder</tt><a class="headerlink" href="#pyherc.test.builders.action.SpellCastingFactoryBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Builder for spell casting factory</p>
+<div class="versionadded">
+<p><span>New in version 0.9.</span></p>
+</div>
+<dl class="method">
+<dt id="pyherc.test.builders.action.SpellCastingFactoryBuilder.build">
+<tt class="descname">build</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.SpellCastingFactoryBuilder.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds spell casting factory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.action.SpellCastingFactoryBuilder.with_effects_factory">
+<tt class="descname">with_effects_factory</tt><big>(</big><em>effects_factory=None</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.SpellCastingFactoryBuilder.with_effects_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure effects factory to use</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.action.SpellCastingFactoryBuilder.with_spell_factory">
+<tt class="descname">with_spell_factory</tt><big>(</big><em>spell_factory=None</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.SpellCastingFactoryBuilder.with_spell_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure spell factory to use</p>
 </dd></dl>
 
 </dd></dl>
@@ -228,7 +263,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2010-2013, Tuukka Turto.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -65,7 +63,7 @@
 <dl class="class">
 <dt id="pyherc.config.dsl.levelgeneratorfactory.LevelConfiguration">
 <em class="property">class </em><tt class="descclassname">pyherc.config.dsl.levelgeneratorfactory.</tt><tt class="descname">LevelConfiguration</tt><a class="headerlink" href="#pyherc.config.dsl.levelgeneratorfactory.LevelConfiguration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>DSL for configuring levels</p>
 <dl class="method">
 <dt id="pyherc.config.dsl.levelgeneratorfactory.LevelConfiguration.build">
@@ -81,6 +79,12 @@
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.config.dsl.levelgeneratorfactory.LevelConfiguration.with_contexts">
+<tt class="descname">with_contexts</tt><big>(</big><em>contexts</em><big>)</big><a class="headerlink" href="#pyherc.config.dsl.levelgeneratorfactory.LevelConfiguration.with_contexts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set level contexts which specify size and tiles to be used</p>
 </dd></dl>
 
 <dl class="method">
@@ -120,20 +124,6 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>items</strong> (<em>[ItemAdder]</em>) &#8211; items to use</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.config.dsl.levelgeneratorfactory.LevelConfiguration.with_level_size">
-<tt class="descname">with_level_size</tt><big>(</big><em>level_size</em><big>)</big><a class="headerlink" href="#pyherc.config.dsl.levelgeneratorfactory.LevelConfiguration.with_level_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set level size</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>level_size</strong> (<em>(int, int)</em>) &#8211; size of level</td>
 </tr>
 </tbody>
 </table>
@@ -181,6 +171,13 @@
 </table>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.config.dsl.levelgeneratorfactory.LevelContext">
+<em class="property">class </em><tt class="descclassname">pyherc.config.dsl.levelgeneratorfactory.</tt><tt class="descname">LevelContext</tt><big>(</big><em>size</em>, <em>floor_type</em>, <em>wall_type</em>, <em>empty_floor</em>, <em>empty_wall</em>, <em>level_types</em><big>)</big><a class="headerlink" href="#pyherc.config.dsl.levelgeneratorfactory.LevelContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Context for level generation</p>
 </dd></dl>
 
 </div>
@@ -243,7 +240,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2010-2013, Tuukka Turto.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

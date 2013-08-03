@@ -11,17 +11,17 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   intro
-   module_descriptions
-   generate_level
-   modular_levels
-   generate_item
-   actions
-   events
-   effects
-   configuration
-   testing
-   documenting
+   guide/intro
+   guide/module_descriptions
+   guide/generate_level
+   guide/modular_levels
+   guide/generate_item
+   guide/actions
+   guide/events
+   guide/effects
+   guide/configuration
+   guide/error_handling
+   guide/testing
    api_reference
 
 

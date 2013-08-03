@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -28,7 +26,7 @@
     <link rel="top" title="Herculeum 0.9 documentation" href="../index.html" />
     <link rel="up" title="API Reference" href="../api_reference.html" />
     <link rel="next" title="pyherc.aspects" href="module_aspects.html" />
-    <link rel="prev" title="herculeum.main" href="../herculeum/module_main.html" /> 
+    <link rel="prev" title="herculeum.application" href="../herculeum/module_application.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,7 +42,7 @@
           <a href="module_aspects.html" title="pyherc.aspects"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../herculeum/module_main.html" title="herculeum.main"
+          <a href="../herculeum/module_application.html" title="herculeum.application"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" accesskey="U">API Reference</a> &raquo;</li> 
@@ -66,6 +64,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ai/module_heapset.html">pyherc.ai.heapset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ai/module_pathfinding.html">pyherc.ai.pathfinding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ai/module_pyheapq.html">pyherc.ai.pyheapq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ai/module_rat.html">pyherc.ai.rat</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ai/module_simple.html">pyherc.ai.simple</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ai/module_skeleton.html">pyherc.ai.skeleton</a></li>
 </ul>
@@ -77,6 +76,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="data/package_data.html">pyherc.data</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="data/effects/package_effects.html">pyherc.data.effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data/magic/package_magic.html">pyherc.data.magic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data/module_character.html">pyherc.data.character</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data/module_dungeon.html">pyherc.data.dungeon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data/module_inventory.html">pyherc.data.inventory</a></li>
@@ -91,6 +91,7 @@
 <li class="toctree-l2"><a class="reference internal" href="events/module_damage.html">pyherc.events.damage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_death.html">pyherc.events.death</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_event.html">pyherc.events.event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events/module_error.html">pyherc.events.error</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_healing.html">pyherc.events.healing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_hitpoints.html">pyherc.events.hitpoints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_inventory.html">pyherc.events.inventory</a></li>
@@ -112,6 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="rules/attack/package_attack.html">pyherc.rules.attack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/consume/package_consume.html">pyherc.rules.consume</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/inventory/package_inventory.html">pyherc.rules.inventory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rules/magic/package_magic.html">pyherc.rules.magic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/move/module_move.html">pyherc.rules.move</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_ending.html">pyherc.rules.ending</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_engine.html">pyherc.rules.engine</a></li>
@@ -119,7 +121,6 @@
 <li class="toctree-l2"><a class="reference internal" href="rules/module_los.html">pyherc.rules.los</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_moving.html">pyherc.rules.moving</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_public.html">pyherc.rules.public</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rules/module_utils.html">pyherc.rules.utils</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="test/package_test.html">pyherc.test</a><ul>
@@ -143,8 +144,8 @@
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../herculeum/module_main.html"
-                        title="previous chapter">herculeum.main</a></p>
+  <p class="topless"><a href="../herculeum/module_application.html"
+                        title="previous chapter">herculeum.application</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="module_aspects.html"
                         title="next chapter">pyherc.aspects</a></p>
@@ -183,7 +184,7 @@
           <a href="module_aspects.html" title="pyherc.aspects"
              >next</a> |</li>
         <li class="right" >
-          <a href="../herculeum/module_main.html" title="herculeum.main"
+          <a href="../herculeum/module_application.html" title="herculeum.application"
              >previous</a> |</li>
         <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li> 
@@ -191,7 +192,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2010-2013, Tuukka Turto.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

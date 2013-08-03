@@ -1,0 +1,284 @@
+Modular level generator
+***********************
+Now that we are aware how level generation works in general, we can have
+a look at more modular approach. 
+:class:`pyherc.generators.level.generator.LevelGenerator` is a high level
+generator that can be used to create different kinds of levels. Usually
+the system does not directly use it, but queries a fully setup generator
+from :class:`pyherc.generators.level.generator.LevelGeneratorFactory`
+
+Overview of LevelGenerator
+==========================
+.. code-block:: python
+
+    def generate_level(self, portal, model, new_portals = 0, level=1, room_min_size = (2, 2)):
+
+LevelGenerator has same generate_level - method as other level generators and
+calling it functions in the same way. Difference is in the internals of the
+generator. Instead of performing all the level generation by itself, 
+LevelGenerator breaks it into steps and delegates each step to a sub component.
+
+First new level is created and sent to a partitioner. This component will
+divide level into sections and link them to each other randomly. Partitioners
+are required to ensure that all sections are reachable.
+
+A room is generated within each section and corridors are used to link rooms
+to neighbouring sections. Linking is done according to links set up in the
+previous phase. This in turn ensures that each room is reachable.
+
+In decoration step details are added into the level. Walls are built where
+empty space meets solid ground and floors are detailed.
+
+Portals are added by portal adders. These portals will lead deeper in the dungeon
+and cause new levels generated when player walks down to them. One special portal
+is also created, that links generated level to the higher level.
+
+Adding of creatures is done by creature adders. These contains information of the
+type of creatures to add and their placement.
+
+Items are added in the same way as the portals, but item adders are used.
+
+.. graphviz:: 
+
+    digraph hierarchy {
+    splines=false
+    size="9,9"
+    node[shape=record,style=filled,fillcolor=gray95]
+    edge[dir=forward, arrowtail=empty]
+    LevelGenerator [label = "{LevelGenerator|...|+ generate_level(portal)}"]
+    Partitioner [label = "{Partitioner|...| + partition_level(level)}"]
+    RoomGenerator [label = "{RoomGenerator|...|+ generate_room(section)}"]
+    Decorator [label = "{Decorator|...|+ decorate_level(level)}"]
+    PortalAdder [label = "{PortalAdder|...|+ add_portal(level)}"]
+    ItemAdder [label = "{ItemAdder|...| + add_items(level)}"]
+    CreatureAdder [label = "{CreatureAdder|...| + add_creatures(level)}"]
+    Connector [label = "{Connector|...|+ connect_sections(...)}"]
+    DecoratorConfig [label = "{DecoratorConfig|...|...}"]
+    ItemAdderConfiguration [label = "{ItemAdderConfiguration|...|+ add_item(...)}"]
+    CreatureAdderConfiguration [label = "{CreatureAdderConfiguration|...|+ add_creature(...)}"]
+
+    LevelGenerator->Partitioner [tailport=s, headport=n]
+    LevelGenerator->RoomGenerator [headlabel="*", tailport=s, headport=n]
+    LevelGenerator->Decorator [headlabel="*", tailport=s, headport=n]
+    LevelGenerator->PortalAdder [tailport=s, headport=n] 
+    LevelGenerator->ItemAdder [tailport=s, headport=n]
+    LevelGenerator->CreatureAdder [tailport=s, headport=n]
+    
+    Partitioner->Connector [headlabel="*", tailport=s, headport=n]
+    Decorator->DecoratorConfig [tailport=s, headport=n]
+    ItemAdder->ItemAdderConfiguration [tailport=s, headport=n]
+    CreatureAdder->CreatureAdderConfiguration [tailport=s, headport=n]
+    }
+
+Partitioners
+============
+:class:`pyherc.generators.level.partitioners.grid.GridPartitioner` is basic partitioner,
+which knows how to divide level into a grid with equal sized sections.
+
+GridPartitioner has method:
+
+.. code-block:: python
+
+    def partition_level(self, level,  x_sections = 3,  y_sections = 3):
+    
+Calling this method will partition level to sections, link sections to each other
+and return them in a list.
+
+:class:`pyherc.generators.level.partitioners.section.Section` is used to represent
+section. It defines a rectangular area in level, links to neighbouring areas and
+information how they should connect to each other. It also defines connections
+for rooms.
+
+Room generators
+===============
+Room generators are used to create rooms inside of sections created by partitioner.
+Each section has information how they link together and these connection points must
+be linked together by room generator.
+
+Room generator only needs a single method:
+
+.. code-block:: python
+
+    def generate_room(self, section):
+
+Calling this method should create a room inside section and connect all connection
+points together.
+
+Simple example can be found from :class:`pyherc.generators.level.room.squareroom.SquareRoomGenerator`
+
+Decorators
+==========
+Decorators can be used to add theme to level. Simple ones can be used to change
+appearance of the floor to something different than what was generated by room 
+generator. More complex usage is to detect where walls are located and change 
+their appearance.
+
+New decorator can be created by subclassing :class:`pyherc.generators.level.decorator.basic.Decorator`
+and overriding method:
+
+.. code-block:: python
+
+    def decorate_level(self, level):
+
+Portal adders
+=============
+:class:`pyherc.generators.level.portals.PortalAdder` is responsible class for
+generating portals. the class itself is pretty simple. It contains information 
+of what kind of icons to use, where to place the portal (room, corridor, 
+treasure chamber and so on) and what kind of level it will lead to.
+
+Method:
+
+.. code-block:: python
+
+    def add_portal(self, level):
+
+Will create a proxy portal at a random location. This portal will contain 
+name of the level, instead of direct link. When player enters the portal,
+a new level generator is created and used to generate the new level.
+    
+Creature adder
+==============
+Creatures are added with :class:`pyherc.generators.level.creatures.CreatureAdder`.
+Usually there is no reason to subclass this class, but simple configuration is
+enough.
+
+Item adder
+==========
+Items  are added with :class:`pyherc.generators.level.items.ItemAdder`.
+Usually there is no reason to subclass this class, but simple configuration is
+enough.
+
+Defining levels
+===============
+Levels are defined in configuration scripts that are fed to 
+:class:`pyherc.config.config.Configuration` during system startup. Following 
+example defines an simple level:
+
+.. testcode::
+
+    from random import Random
+    from pyherc.generators.level.partitioners import GridPartitioner
+    from pyherc.generators.level.room import SquareRoomGenerator
+    
+    from pyherc.generators.level.decorator import ReplacingDecorator
+    from pyherc.generators.level.decorator import ReplacingDecoratorConfig
+    from pyherc.generators.level.decorator import WallBuilderDecorator
+    from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
+    from pyherc.generators.level.decorator import AggregateDecorator
+    from pyherc.generators.level.decorator import AggregateDecoratorConfig
+    
+    from pyherc.generators.level.items import ItemAdderConfiguration, ItemAdder
+    from pyherc.generators.level.creatures import CreatureAdderConfiguration
+    from pyherc.generators.level.creatures import CreatureAdder
+    
+    from pyherc.generators.level.portals import PortalAdderConfiguration
+
+    from pyherc.config.dsl import LevelConfiguration, LevelContext
+    
+    def init_level(rng, item_generator, creature_generator, level_size, context):
+        room_generators = [SquareRoomGenerator('FLOOR_NATURAL',
+                                               'WALL_EMPTY',
+                                               ['upper crypt']),
+                           SquareRoomGenerator('FLOOR_CONSTRUCTED',
+                                               'WALL_EMPTY',
+                                               ['upper crypt'])]
+        level_partitioners = [GridPartitioner(['upper crypt'],
+                                              4,
+                                              3,
+                                              rng)]
+    
+        replacer_config = ReplacingDecoratorConfig(['upper crypt'],
+                                        {'FLOOR_NATURAL': 'FLOOR_ROCK',
+                                        'FLOOR_CONSTRUCTED': 'FLOOR_BRICK'},
+                                        {'WALL_NATURAL': 'WALL_GROUND',
+                                        'WALL_CONSTRUCTED': 'WALL_ROCK'})
+        replacer = ReplacingDecorator(replacer_config)
+    
+        wallbuilder_config = WallBuilderDecoratorConfig(['upper crypt'],
+                                            {'WALL_NATURAL': 'WALL_CONSTRUCTED'},
+                                            'WALL_EMPTY')
+        wallbuilder = WallBuilderDecorator(wallbuilder_config)
+    
+        aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
+                                                              [wallbuilder,
+                                                              replacer])
+    
+        decorators = [AggregateDecorator(aggregate_decorator_config)]
+    
+        item_adder_config = ItemAdderConfiguration(['upper crypt'])
+        item_adder_config.add_item(min_amount = 2,
+                                   max_amount = 4,
+                                   type = 'weapon',
+                                   location = 'room')
+        item_adder_config.add_item(min_amount = 2,
+                                   max_amount = 4,
+                                   type = 'potion',
+                                   location = 'room')
+        item_adder_config.add_item(min_amount = 0,
+                                   max_amount = 5,
+                                   type = 'food',
+                                   location = 'room')
+        item_adders = [ItemAdder(item_generator,
+                                item_adder_config,
+                                rng)]
+    
+        creature_adder_config = CreatureAdderConfiguration(['upper crypt'])
+
+        creature_adder_config.add_creature(min_amount = 4,
+                                           max_amount = 8,
+                                           name = 'spider')
+    
+        creature_adders = [CreatureAdder(creature_generator,
+                                        creature_adder_config,
+                                        rng)]
+    
+        portal_adder_configurations = [PortalAdderConfiguration(
+                                            icons = ('PORTAL_STAIRS_DOWN',
+                                                     'PORTAL_STAIRS_UP'),
+                                            level_type = 'upper catacombs',
+                                            location_type = 'room',
+                                            chance = 25,
+                                            new_level = 'upper crypt',
+                                            unique = True)]
+    
+        level_context = LevelContext(size = level_size,
+                                    floor_type = 'FLOOR_NATURAL',
+                                    wall_type = 'WALL_NATURAL',
+                                    empty_floor = 0,
+                                    empty_wall = 'WALL_EMPTY',
+                                    level_types = ['upper crypt'])
+    
+        config = (LevelConfiguration()
+                        .with_rooms(room_generators)
+                        .with_partitioners(level_partitioners)
+                        .with_decorators(decorators)
+                        .with_items(item_adders)
+                        .with_creatures(creature_adders)
+                        .with_portals(portal_adder_configurations)
+                        .with_contexts([level_context])
+                        .build())
+        return config
+
+    rng = Random()
+    item_generator = None
+    creature_generator = None
+    level_size = (80, 60)
+    config_context = object()
+        
+    config = init_level(rng, item_generator, creature_generator, level_size, config_context)
+    
+    print(config)
+
+The example defines function to initialise a level configuration and executes 
+it. In real life scenarion, item_generator and creature_generator objects would
+have been initialised before supplying them to configuration function, but it
+was omitted from the brevity's sake in this example.
+
+Parameters config_context is an extension hook that can be used to deliver
+application specific information that needs to be transfered between the 
+application and configuration.
+    
+.. testoutput::
+    
+    <pyherc.generators.level.config.LevelGeneratorFactoryConfig object at 0x...>
