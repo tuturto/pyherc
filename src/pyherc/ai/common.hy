@@ -148,3 +148,7 @@
   (focus-enemy ai enemy)
   (setv ai.mode [:fight
 		 enemy]))
+
+(defn start-patrolling [get-random-patrol-direction ai]
+  (setv ai.mode [:patrol
+		 (get-random-patrol-direction ai)]))

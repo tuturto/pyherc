@@ -25,7 +25,7 @@
 	[pyherc.ai.common [patrollable-area-in-level select-patrol-area]]
 	[pyherc.ai.common [move-towards-patrol-area get-random-patrol-direction]]
 	[pyherc.ai.common [find-patrol-area enemy-close?]]
-	[pyherc.ai.common [start-fighting]]
+	[pyherc.ai.common [start-fighting start-patrolling]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
 	[pyherc.ai.basic [map-direction direction-mapping attack]]
 	[random]
@@ -57,10 +57,6 @@
        (not (and (.blocks-movement level x (+ y 1))
 		 (.blocks-movement level x (- y 1))))))
 
-(defn start-following-wall [get-random-wall-direction ai]
-  (setv ai.mode [:patrol
-		 (get-random-wall-direction ai)]))
-
 (defn patrol-ai [is-patrol-area detection-distance]
   "factory function for creating patrolling ai"
   (let [[is-enemy-close? (partial enemy-close? 4)]
@@ -72,8 +68,8 @@
 							    end 
 							    level))))]
 	[fight (partial fight-in-melee attack close-in)]
-	[follow-wall (partial patrol is-next-to-wall? (partial start-following-wall get-random-wall-direction))]
-	[find-wall (partial find-patrol-area is-next-to-wall? (partial start-following-wall get-random-wall-direction)
+	[follow-wall (partial patrol is-next-to-wall? (partial start-patrolling get-random-wall-direction))]
+	[find-wall (partial find-patrol-area is-next-to-wall? (partial start-patrolling get-random-wall-direction)
 			follow-wall move-towards-patrol-area
 			select-wall-to-patrol)]
 	[act (fn [transit patrol fight ai model action-factory]
