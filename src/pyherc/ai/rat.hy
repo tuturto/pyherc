@@ -19,34 +19,12 @@
 
 (setv __doc__ "module for AI routines for rats")
 
-(import [pyherc.aspects [logged]]
-	[pyherc.ai.pathfinding [a-star]]
-	[pyherc.ai.common [patrol close-in-enemy fight-in-melee]]
-	[pyherc.ai.basic [can-walk? walk wait distance-between find-direction]]
-	[pyherc.ai.basic [map-direction direction-mapping]]
-	[pyherc.events [NoticeEvent]]
-	[random]
-	[math [sqrt]]
-	[functools [partial]])
-
-(require pyherc.ai.macros)
-
-(defmacro diagonal-wall [info]
-  (quasiquote (get (unquote info) 0)))
-
-(defmacro adjacent-wall [info]
-  (quasiquote (get (unquote info) 1)))
-
-(defmacro empty-corridor [info]
-  (quasiquote (get (unquote info) 2)))
-
-(defmacro wall-direction [info]
-  (quasiquote (get (unquote info) 3)))
+(import [pyherc.ai.patrol [patrol-ai]])
 
 (defclass RatAI []
   [[__doc__ "AI routine for rats"]
    [character None]
-   [mode [:find-wall None]]
+   [mode [:transit None]]
    [--init-- (fn [self character]
 	       "default constructor"
 	       (.--init-- (super RatAI self))
@@ -54,15 +32,6 @@
    [act (fn [self model action-factory rng] 
 	  "check the situation and act accordingly"
 	  (rat-act self model action-factory))]])
-
-(with-decorator logged 
-  (defn rat-act [ai model action-factory]
-    "main routine for rat AI"
-    (if (not (= (first ai.mode) :fight))
-      (let [[enemy (enemy-close? ai)]]
-	(if enemy (start-fighting ai enemy))))
-    (let [[func (get mode-bindings (first ai.mode))]]
-      (func ai action-factory))))
 
 (defn is-next-to-wall? [level x y]
   "check if given location is within patrol area"
@@ -75,100 +44,4 @@
        (not (and (.blocks-movement level x (+ y 1))
 		 (.blocks-movement level x (- y 1))))))
 
-(with-decorator logged
-  (defn patrollable-area-in-level [ai]
-    "routine to find area to patrol in level"
-    (let [[level ai.character.level]
-	  [patrol-area []]]
-      (foreach [x (range (len level.walls))]
-	(foreach [y (range (len (first level.walls)))]
-	  (if (is-next-to-wall? level x y)
-	    (.append patrol-area (, x y)))))
-      patrol-area)))
-
-(with-decorator logged
-  (defn find-wall [ai action-factory]
-    "routine to make character to find a wall"
-    (if (is-next-to-wall? ai.character.level
-			 (first ai.character.location)
-			 (second ai.character.location))
-      (do (start-following-wall ai)
-	  (follow-wall ai action-factory))
-      (if (second ai.mode)
-	(move-towards-patrol-area ai action-factory)
-	(select-patrol-area ai)))))
-
-(defn move-towards-patrol-area [ai action-factory]
-  (let [[start-location ai.character.location]
-	[path (first (a-star start-location
-			     (second ai.mode)
-			     ai.character.level))]]
-    (if path
-      (walk ai action-factory (find-direction start-location (second path)))
-      (wait ai))))
-
-(defn select-patrol-area [ai]
-  (let [[patrol-area (patrollable-area-in-level ai)]
-	[target (.choice random patrol-area)]]
-    (assoc ai.mode 1 target)))
-
-(defn attack [ai enemy action-factory rng]
-  "attack an enemy"
-  (let [[attacker ai.character]
-	[attacker-location attacker.location]
-	[target-location enemy.location]	
-	[attack-direction (map-direction (find-direction attacker-location 
-							 target-location))]]
-    (.perform-attack attacker attack-direction action-factory rng)))
-
-(defn enemy-close? [ai]
-  "check if there is an enemy close by, returns preferred enemy"
-  (let [[level ai.character.level]
-	[player ai.character.model.player]]
-    (if (< (distance-between player.location ai.character.location) 4)
-      player)))
-
-(defn start-fighting [ai enemy]
-  "pick start fighting again enemy"
-  (focus-enemy ai enemy)
-  (setv ai.mode [:fight
-		enemy]))
-
-(defn start-following-wall [ai]
-  (setv ai.mode [:follow-wall 
-		 (get-random-wall-direction ai)]))
-
-(defn get-random-wall-direction [ai]
-  "select a random wall direction to follow"
-  (let [[possible-directions []]
-	[character-x (first ai.character.location)]
-	[character-y (second ai.character.location)]
-	[level ai.character.level]]
-    (for [x (range (- character-x 1) (+ character-x 2)) 
-	  y (range (- character-y 1) (+ character-y 2))]
-      (if (and (is-next-to-wall? level x y)
-	       (not (= (, x y) ai.character.location)))
-	(.append possible-directions (, x y))))
-    (if possible-directions 
-      (find-direction ai.character.location (.choice random possible-directions))
-      :north)))
-
-(defn focus-enemy [ai enemy]
-  "focus on enemy and start tracking it"
-  (let [[character ai.character]
-	[event (NoticeEvent character enemy)]]
-    (.raise-event character event)))
-
-(def close-in (partial close-in-enemy 
-		       (fn [start end level] (first (a-star start
-							    end 
-							    level)))))
-(def fight (partial fight-in-melee attack close-in))
-
-(def follow-wall (partial patrol is-next-to-wall? start-following-wall))
-
-(def mode-bindings {:find-wall find-wall
-		    :follow-wall follow-wall
-		    :fight fight})
-
-
+(def rat-act (patrol-ai is-next-to-wall? 4))

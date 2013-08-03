@@ -18,8 +18,8 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.test.builders [LevelBuilder CharacterBuilder]]
-	[pyherc.ai.rat [is-next-to-wall? get-random-wall-direction RatAI]]
-	[pyherc.ai.rat [map-direction]]
+	[pyherc.ai.rat [is-next-to-wall?]]
+	[pyherc.ai.basic [map-direction]]
 	[hamcrest [assert-that is- is-not :as is-not- none has-items is-in]]
 	[hamcrest [equal-to]]
 	[random [Random]])
