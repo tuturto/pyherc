@@ -43,10 +43,16 @@ src/herculeum/ui/text/start_game.py
 src/herculeum/ui/text/surface_manager.py
 src/pyherc/__init__.py
 src/pyherc/aspects.py
+src/pyherc/ai/__init__.hy
 src/pyherc/ai/__init__.py
+src/pyherc/ai/basic.hy
+src/pyherc/ai/firebeetle.hy
 src/pyherc/ai/heapset.py
+src/pyherc/ai/macros.hy
 src/pyherc/ai/pathfinding.py
+src/pyherc/ai/patrol.hy
 src/pyherc/ai/pyheapq.py
+src/pyherc/ai/rat.hy
 src/pyherc/ai/simple.py
 src/pyherc/ai/skeleton.py
 src/pyherc/config/__init__.py
