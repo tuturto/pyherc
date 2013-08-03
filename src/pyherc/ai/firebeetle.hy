@@ -19,10 +19,7 @@
 
 (setv __doc__ "module for AI routines for firebeetles")
 
-(import [pyherc.aspects [logged]]
-	[pyherc.ai.common [patrol-ai]])
-
-(require pyherc.ai.macros)
+(import [pyherc.ai.patrol [patrol-ai]])
 
 (defclass FireBeetleAI []
   [[__doc__ "AI routine for fire beetles"]

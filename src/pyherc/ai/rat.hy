@@ -19,10 +19,7 @@
 
 (setv __doc__ "module for AI routines for rats")
 
-(import [pyherc.aspects [logged]]
-	[pyherc.ai.common [patrol-ai]])
-
-(require pyherc.ai.macros)
+(import [pyherc.ai.patrol [patrol-ai]])
 
 (defclass RatAI []
   [[__doc__ "AI routine for rats"]
