@@ -34,5 +34,6 @@ setup(name = 'herculeum',
                  'pyherc.rules', 'pyherc.rules.attack', 'pyherc.rules.consume',
                  'pyherc.rules.inventory', 'pyherc.rules.move'],
       scripts = ['src/scripts/herculeum'],
-      requires = ['decorator (>=3.4.0)'],
+      requires = ['decorator (>=3.4.0)'
+                  'hy (>=0.9.10)'],
       package_dir = {'': 'src'})
