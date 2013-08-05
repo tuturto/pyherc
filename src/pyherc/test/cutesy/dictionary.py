@@ -29,7 +29,7 @@ from pyherc.test.builders import SpellCastingFactoryBuilder
 from pyherc.test.builders import SpellGeneratorBuilder
 from pyherc.test.builders import EffectsFactoryBuilder
 
-from pyherc.data.effects import Heal
+from pyherc.data.effects import Heal, Damage
 from pyherc.rules import Dying
 from pyherc.data.effects import Poison
 
@@ -161,6 +161,16 @@ class CastSpell():
                                               'icon': None,
                                               'title': 'Heal medium wounds',
                                               'description': 'Heals medium amount of damage'})
+                                .with_effect('cause wound',                                             
+                                             {'type': Damage,
+                                              'duration': None,
+                                              'frequency': None,
+                                              'tick': 0,
+                                              'damage': 5,
+                                              'damage_type': 'magic',
+                                              'icon': None,
+                                              'title': 'Cause minor wound',
+                                              'description': 'Causes minor amount of damage'})
                                 .build())
 
         spell_casting_factory = (SpellCastingFactoryBuilder()

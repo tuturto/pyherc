@@ -25,6 +25,7 @@ from pyherc.aspects import logged
 
 from pyherc.data.magic import Spell
 from pyherc.data.effects import EffectHandle
+from pyherc.data.geometry import get_target_in_direction
 
 class SpellGenerator():
     """
@@ -81,7 +82,7 @@ class SpellGenerator():
 
         spec = self.spell_list[spell_name]
         handles = spec.effect_handles
-
+        
         for effect_handle in handles:
             new_spell.add_effect_handle(effect_handle)
 
@@ -111,5 +112,7 @@ def targeting_single_target(parameters):
 
     .. versionadded:: 0.9
     """
-    return None
-
+    target = get_target_in_direction(level = parameters.caster.level,
+                                     location = parameters.caster.location,
+                                     direction = parameters.direction)
+    return [target]

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -23,6 +22,7 @@ Module for ranged combat
 """
 from pyherc.aspects import logged
 from pyherc.rules.attack.action import ToHit, Damage, AttackAction
+from pyherc.data.geometry import get_target_in_direction
 
 class RangedToHit(ToHit):
     """
@@ -128,17 +128,10 @@ class RangedCombatFactory():
         location = parameters.attacker.location
         level = parameters.attacker.level
         direction = parameters.direction
-        target = None
-        off_sets = [(0, 0),
-                    (0, -1), (1, -1), (1, 0), (1, 1),
-                    (0, 1), (-1, 1), (-1, 0), (-1, -1)]
 
-        while target == None and not level.blocks_movement(location[0], location[1]):
-            location = tuple([x for x in
-                              map(sum, zip(location, off_sets[direction]))])
-            target = level.get_creature_at(location)
-
-        return target
+        return get_target_in_direction(level,
+                                       location,
+                                       direction)
 
 class AdditionalRangedRules():
     """
