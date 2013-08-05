@@ -10,12 +10,11 @@ Feature: Magic
        And Uglak is standing in room
        And Simon is standing away from Uglak
 
-  @active
   Scenario: Magic missile
        When Simon casts magic missile on Uglak
        Then Uglak should be dead
 
-  @wip
+  @active
   Scenario: Fireball
       Given Zhagh is Goblin
         And Zhagh is almost dead
