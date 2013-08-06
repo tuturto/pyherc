@@ -171,6 +171,16 @@ class CastSpell():
                                               'icon': None,
                                               'title': 'Cause minor wound',
                                               'description': 'Causes minor amount of damage'})
+                                .with_effect('fire',
+                                             {'type': Damage,
+                                              'duration': 30,
+                                              'frequency': 10,
+                                              'tick': 0,
+                                              'damage': 5,
+                                              'damage_type': 'fire',
+                                              'icon': None,
+                                              'title': 'Fire',
+                                              'description': 'You are on fire!'})
                                 .build())
 
         spell_casting_factory = (SpellCastingFactoryBuilder()
