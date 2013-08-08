@@ -25,7 +25,7 @@ from functools import partial
 
 from pyherc.data.magic import Spell
 from pyherc.data.effects import EffectHandle
-from pyherc.data.geometry import get_target_in_direction
+from pyherc.data.geometry import get_target_in_direction, distance_between
 
 class SpellGenerator():
     """
@@ -153,8 +153,10 @@ def targeting_spherical_area(parameters, radius):
 
         for x in x_range:
             for y in y_range:
-                creature = level.get_creature_at((x, y))
-                if creature:
-                    targets.append(creature)
+                if distance_between(splash_center,
+                                    (x, y)) <= radius:
+                    creature = level.get_creature_at((x, y))
+                    if creature:
+                        targets.append(creature)
 
     return targets

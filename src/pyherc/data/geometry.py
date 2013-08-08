@@ -21,6 +21,7 @@
 Module for various helpers
 """
 from pyherc.aspects import logged
+from math import sqrt
 
 @logged
 def get_target_in_direction(level, location, direction):
@@ -47,3 +48,13 @@ def get_target_in_direction(level, location, direction):
         target = level.get_creature_at(location)
 
     return target
+
+@logged
+def distance_between(location1, location2):
+    """
+    calculate distance between two points
+    """
+    x_difference = location2[0] - location1[0]
+    y_difference = location2[1] - location1[1]
+
+    return sqrt(x_difference**2 + y_difference**2)

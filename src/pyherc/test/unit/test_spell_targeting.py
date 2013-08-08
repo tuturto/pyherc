@@ -131,8 +131,7 @@ class TestSphericalAreaTargetting():
         self.level = (LevelBuilder()
                           .with_character(self.caster, (10, 5))
                           .with_character(self.target1, (5, 5))
-                          .with_character(self.target2, (5, 6))
-                          .with_character(self.target3, (10, 10))
+                          .with_character(self.target2, (5, 6))                          
                           .build())
 
     def test_area_effect_is_calculated(self):
@@ -148,3 +147,19 @@ class TestSphericalAreaTargetting():
 
         assert_that(targets, contains_inanyorder(self.target1,
                                                  self.target2))
+
+    def test_corners_are_rounded(self):
+        """
+        Spells with spherical area of effect should not target to square area
+        """
+        self.level.add_creature(self.target3,
+                                (7, 7))
+        
+        params = SpellCastingParameters(caster = self.caster,
+                                        direction = 7,
+                                        spell_name = 'proto')
+
+        targets = targeting_spherical_area(params,
+                                           radius = 2)
+
+        assert_that(self.target3, is_not(is_in(targets)))
