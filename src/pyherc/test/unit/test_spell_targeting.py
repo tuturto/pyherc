@@ -25,6 +25,11 @@ from pyherc.generators.spells import targeting_single_target
 from pyherc.generators.spells import targeting_spherical_area
 from pyherc.rules import SpellCastingParameters
 from hamcrest import assert_that, is_in, is_not, contains_inanyorder
+from hamcrest import has_length
+
+FLOOR = 1
+SOLID_WALL = 2
+EMPTY_WALL = 3
 
 class TestSingleCharacterTargeting():
     """
@@ -129,9 +134,13 @@ class TestSphericalAreaTargetting():
                             .build())
 
         self.level = (LevelBuilder()
-                          .with_character(self.caster, (10, 5))
+                          .with_character(self.caster, (15, 5))
                           .with_character(self.target1, (5, 5))
-                          .with_character(self.target2, (5, 6))                          
+                          .with_character(self.target2, (5, 6))
+                          .with_floor_tile(FLOOR)
+                          .with_wall_tile(EMPTY_WALL)
+                          .with_empty_wall_tile(EMPTY_WALL)
+                          .with_solid_wall_tile(SOLID_WALL)
                           .build())
 
     def test_area_effect_is_calculated(self):
@@ -163,3 +172,21 @@ class TestSphericalAreaTargetting():
                                            radius = 2)
 
         assert_that(self.target3, is_not(is_in(targets)))
+
+    def test_splash_does_not_penetrate_walls(self):
+        """
+        In normal situations, splash should be stopped by walls
+        """
+        self.level.walls[6][4] = SOLID_WALL
+        self.level.walls[6][5] = SOLID_WALL
+        self.level.walls[6][6] = SOLID_WALL
+
+        params = SpellCastingParameters(caster = self.caster,
+                                        direction = 7,
+                                        spell_name = 'proto')
+
+        targets = targeting_spherical_area(params,
+                                           radius = 4)
+
+        assert_that(targets, has_length(0))
+        assert False

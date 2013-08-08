@@ -68,7 +68,7 @@ class SpellGenerator():
                                          parameters = None,
                                          charges = 1)],
                             partial(targeting_spherical_area,
-                                    radius = 1.5))
+                                    radius = 2))
 
         self.spell_list['healing wind'] = healing_spell
         self.spell_list['magic missile'] = magic_missile
