@@ -62,8 +62,16 @@ class SpellGenerator():
                                          charges = 1)],
                             targeting_single_target)
 
+        fireball = SpellSpecification([
+                            EffectHandle(trigger = 'on spell hit',
+                                         effect = 'fire',
+                                         parameters = None,
+                                         charges = 1)],
+                            targeting_spherical_area)
+
         self.spell_list['healing wind'] = healing_spell
         self.spell_list['magic missile'] = magic_missile
+        self.spell_list['fireball'] = fireball
     
     @logged
     def create_spell(self, spell_name, targets):
@@ -116,3 +124,11 @@ def targeting_single_target(parameters):
                                      location = parameters.caster.location,
                                      direction = parameters.direction)
     return [target]
+
+def targeting_spherical_area(parameters):
+    """
+    Function to target a spherical area
+
+    .. versionadded:: 0.10
+    """
+    return []
