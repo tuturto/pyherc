@@ -22,8 +22,9 @@ Tests for spell targeting
 """
 from pyherc.test.builders import LevelBuilder, CharacterBuilder
 from pyherc.generators.spells import targeting_single_target
+from pyherc.generators.spells import targeting_spherical_area
 from pyherc.rules import SpellCastingParameters
-from hamcrest import assert_that, is_in, is_not
+from hamcrest import assert_that, is_in, is_not, contains_inanyorder
 
 class TestSingleCharacterTargeting():
     """
@@ -34,7 +35,7 @@ class TestSingleCharacterTargeting():
         """
         Default constructor
         """
-        super(TestSingleCharacterTargeting, self).__init__()
+        super().__init__()
 
         self.level = None
         self.caster = None
@@ -92,3 +93,58 @@ class TestSingleCharacterTargeting():
         targets = targeting_single_target(params)
 
         assert_that(self.caster, is_not(is_in(targets)))
+
+class TestSphericalAreaTargetting():
+    """
+    Tests for targeting spherical area
+    """
+
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super().__init__()
+
+        self.caster = None
+        self.target1 = None
+        self.target2 = None
+        self.target3 = None
+
+    def setup(self):
+        """
+        Setup test cases
+        """
+        self.caster = (CharacterBuilder()
+                           .with_name('Carth the Caster')
+                           .build())
+        
+        self.target1 = (CharacterBuilder()
+                            .with_name('Tammy the Target1')
+                            .build())
+        self.target2 = (CharacterBuilder()
+                            .with_name('Tim the Target2')
+                            .build())
+        self.target3 = (CharacterBuilder()
+                            .with_name('Tebathine the Target3')
+                            .build())
+
+        self.level = (LevelBuilder()
+                          .with_character(self.caster, (10, 5))
+                          .with_character(self.target1, (5, 5))
+                          .with_character(self.target2, (5, 6))
+                          .with_character(self.target3, (10, 10))
+                          .build())
+
+    def test_area_effect_is_calculated(self):
+        """
+        Spells with area effect should be able to target multiple targets
+        """
+        params = SpellCastingParameters(caster = self.caster,
+                                        direction = 7,
+                                        spell_name = 'proto')
+
+        targets = targeting_spherical_area(params,
+                                           radius = 2)
+
+        assert_that(targets, contains_inanyorder(self.target1,
+                                                 self.target2))

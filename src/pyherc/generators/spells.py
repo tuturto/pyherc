@@ -21,6 +21,7 @@
 Module for spell factory
 """
 from pyherc.aspects import logged
+from functools import partial
 
 from pyherc.data.magic import Spell
 from pyherc.data.effects import EffectHandle
@@ -66,7 +67,8 @@ class SpellGenerator():
                                          effect = 'fire',
                                          parameters = None,
                                          charges = 1)],
-                            targeting_spherical_area)
+                            partial(targeting_spherical_area,
+                                    radius = 1.5))
 
         self.spell_list['healing wind'] = healing_spell
         self.spell_list['magic missile'] = magic_missile
@@ -122,12 +124,37 @@ def targeting_single_target(parameters):
     target = get_target_in_direction(level = parameters.caster.level,
                                      location = parameters.caster.location,
                                      direction = parameters.direction)
-    return [target]
+    if target:
+        return [target]
+    else:
+        return []
 
-def targeting_spherical_area(parameters):
+@logged
+def targeting_spherical_area(parameters, radius):
     """
     Function to target a spherical area
 
     .. versionadded:: 0.10
     """
-    return []
+    targets = []
+    initial = get_target_in_direction(level = parameters.caster.level,
+                                      location = parameters.caster.location,
+                                      direction = parameters.direction)
+
+    if initial:
+        splash_center = initial.location
+        level = parameters.caster.level
+        
+        x_range = range(splash_center[0] - radius,
+                        splash_center[0] + radius + 1)
+
+        y_range = range(splash_center[1] - radius,
+                        splash_center[1] + radius + 1)
+
+        for x in x_range:
+            for y in y_range:
+                creature = level.get_creature_at((x, y))
+                if creature:
+                    targets.append(creature)
+
+    return targets
