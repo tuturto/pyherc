@@ -24,6 +24,7 @@ Module for testing moving
 #pylint: disable=W0614
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 from mockito import mock
+from nose.tools import with_setup
 
 from pyherc.rules.move.action import EscapeAction
 from pyherc.data import Portal
@@ -141,17 +142,34 @@ class TestMoving():
 
         self.level1.add_creature(self.character, (5, 5))
 
+    def check_move_result(self, start, direction, expected_location):
+        """
+        Test that taking single step is possible
+        """
+        self.character.location = start
+
+        self.character.move(direction,
+                            self.action_factory)
+
+        assert_that(self.character.location,
+                    is_(equal_to(expected_location)))
+        
+    
     def test_simple_move(self):
         """
         Test that taking single step is possible
         """
-        self.character.location = (5, 5)
+        test_data = [(1, (5, 4)),
+                     (2, (6, 4)),
+                     (3, (6, 5)),
+                     (4, (6, 6)),
+                     (5, (5, 6)),
+                     (6, (4, 6)),
+                     (7, (4, 5)),
+                     (8, (4, 4))]
 
-        self.character.move(3,
-                            self.action_factory)
-
-        assert_that(self.character.location,
-                    is_(equal_to((6, 5))))
+        for row in test_data:
+            yield (self.check_move_result, (5, 5), row[0], row[1])
 
     def test_walking_to_walls(self):
         """
