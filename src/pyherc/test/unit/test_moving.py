@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -22,7 +21,7 @@
 Module for testing moving
 """
 #pylint: disable=W0614
-from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, is_not, equal_to #pylint: disable-msg=E0611
 from mockito import mock
 from nose.tools import with_setup
 
@@ -30,6 +29,7 @@ from pyherc.rules.move.action import EscapeAction
 from pyherc.data import Portal
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import CharacterBuilder
+from pyherc.test.matchers import is_legal, is_illegal
 
 from pyherc.data import Model
 from pyherc.data.model import ESCAPED_DUNGEON
@@ -282,7 +282,7 @@ class TestEscapeAction():
 
         action = EscapeAction(character = character)
 
-        assert_that(action.is_legal(), is_(equal_to(True)))
+        assert_that(action, is_legal())
 
     def test_non_player_character_can_not_escape(self):
         """
@@ -296,4 +296,4 @@ class TestEscapeAction():
 
         action = EscapeAction(character = character)
 
-        assert_that(action.is_legal(), is_(equal_to(False)))
+        assert_that(action, is_illegal())

@@ -37,3 +37,4 @@ from .event_parameters import EventType
 from .path_finding import continuous_path
 from .inventory import is_wearing, does_have
 from .attack_parameters import AttackActionParameterMatcher
+from .action import is_legal, is_illegal
