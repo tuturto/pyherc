@@ -21,6 +21,7 @@
 Tests for spell targeting
 """
 from pyherc.test.builders import LevelBuilder, CharacterBuilder
+from pyherc.test.matchers import wall_target_at
 from pyherc.generators.spells import targeting_single_target
 from pyherc.generators.spells import targeting_spherical_area
 from pyherc.rules import SpellCastingParameters
@@ -61,6 +62,10 @@ class TestSingleCharacterTargeting():
         self.level = (LevelBuilder()
                           .with_character(self.caster, (10, 5))
                           .with_character(self.target1, (5, 5))
+                          .with_wall_tile(EMPTY_WALL)
+                          .with_empty_wall_tile(EMPTY_WALL)
+                          .with_solid_wall_tile(SOLID_WALL)
+                          .with_floor_tile(FLOOR)
                           .build())
 
     def test_targeting_correct_direction(self):
@@ -98,6 +103,21 @@ class TestSingleCharacterTargeting():
         targets = targeting_single_target(params)
 
         assert_that(self.caster, is_not(is_in(targets)))
+
+    def test_targeting_wall(self):
+        """
+        When targeting wall, it should be reported
+        """
+        self.level.walls[10][0] = SOLID_WALL
+
+        params = SpellCastingParameters(caster = self.caster,
+                                        direction = 1,
+                                        spell_name = 'proto')
+
+        targets = targeting_single_target(params)
+        target = targets[0]
+
+        assert_that(target, is_(wall_target_at((10, 0))))
 
 class TestSphericalAreaTargetting():
     """
