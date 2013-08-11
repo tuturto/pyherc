@@ -171,7 +171,7 @@ class TestRangedCombat():
                                         attack_type = 'ranged',
                                         random_number_generator = Random()))
 
-        assert_that(target, is_(equal_to(self.target)))
+        assert_that(target.target, is_(equal_to(self.target)))
 
     def test_target_is_not_located_behind_wall(self):
         """

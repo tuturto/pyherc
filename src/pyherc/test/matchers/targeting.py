@@ -21,8 +21,60 @@
 Matchers for targeting
 """
 
+from hamcrest.core.base_matcher import BaseMatcher
+
+class TargetMatcher(BaseMatcher):
+    """
+    Class for checking target data
+    """
+    def __init__(self, target_type, location):
+        """
+        Default constructor
+        """
+        super().__init__()
+        self.target_type = target_type
+        self.location = location
+
+    def _matches(self, item):
+        """
+        Check if matcher matches item
+
+        :param item: object to match against
+        :returns: True if matching, otherwise False
+        :rtype: Boolean
+        """
+        if item.location != self.location:
+            return False
+
+        if item.target_type != self.target_type:
+            return False
+
+        return True
+
+    def describe_to(self, description):
+        """
+        Describe this match
+        """
+        description.append('Targeting {0} at location {1}'
+                           .format(self.target_type,
+                                   self.location))
+
+    def describe_mismatch(self, item, mismatch_description):
+        """
+        Describe this mismatch
+        """
+        mismatch_description.append('Was target of type {0} at location {1}'
+                                    .format(item.target_type,
+                                            item.location))
+
 def wall_target_at(location):
     """
     Check that given target is at wanted wall
     """
-    assert False
+    return TargetMatcher('wall', location)
+
+def void_target():
+    """
+    Check that given target is nothing at all
+    """
+    return TargetMatcher('void', None)

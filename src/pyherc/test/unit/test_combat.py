@@ -32,6 +32,7 @@ from pyherc.events import AttackNothingEvent, AttackHitEvent
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.builders import LevelBuilder
+from pyherc.test.matchers import void_target
 
 from pyherc.test.cutesy import at_
 
@@ -141,4 +142,4 @@ class TestMeleeCombat():
                                                       'unarmed',
                                                       mock()))
 
-        assert_that(action.target, is_(equal_to(None)))
+        assert_that(action.target, is_(void_target()))

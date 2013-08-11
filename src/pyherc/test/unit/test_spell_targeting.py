@@ -76,7 +76,7 @@ class TestSingleCharacterTargeting():
                                         direction = 7,
                                         spell_name = 'proto')
 
-        targets = targeting_single_target(params)
+        targets = [data.target for data in targeting_single_target(params)]
 
         assert_that(self.target1, is_in(targets))
 

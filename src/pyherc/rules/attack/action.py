@@ -80,7 +80,9 @@ class AttackAction():
         """
         Executes this Attack
         """
-        if self.target == None:
+        target = self.target.target
+        
+        if target == None:
             self.attacker.raise_event(AttackNothingEvent(
                                             attacker = self.attacker,
                                             affected_tiles = []))
@@ -89,24 +91,24 @@ class AttackAction():
             was_hit = self.to_hit.is_hit()
 
             if was_hit:
-                self.damage.apply_damage(self.target)
+                self.damage.apply_damage(target)
 
                 self.attacker.raise_event(AttackHitEvent(
                                           type = self.attack_type,
                                           attacker = self.attacker,
-                                          target = self.target,
+                                          target = target,
                                           damage = self.damage,
-                                          affected_tiles = [self.target.location]))
+                                          affected_tiles = [target.location]))
 
                 self.__trigger_attack_effects()
             else:
                 self.attacker.raise_event(AttackMissEvent(
                                           type = self.attack_type,
                                           attacker = self.attacker,
-                                          target = self.target,
-                                          affected_tiles = [self.target.location]))
+                                          target = target,
+                                          affected_tiles = [target.location]))
 
-            self.dying_rules.check_dying(self.target)
+            self.dying_rules.check_dying(target)
 
         self.additional_rules.after_attack()
         self.attacker.add_to_tick(3)
@@ -118,6 +120,8 @@ class AttackAction():
 
         .. versionadded:: 0.4
         """
+        target = self.target.target
+        
         weapon = self.attacker.inventory.weapon
         effects = self.attacker.get_effect_handles('on attack hit')
 
@@ -126,19 +130,19 @@ class AttackAction():
         for effect_spec in effects:
             effect = self.effect_factory.create_effect(
                                                     effect_spec.effect,
-                                                    target = self.target)
+                                                    target = target)
 
             if not effect.duration or effect.duration <= 0:
                 effect.trigger(self.dying_rules)
             else:
-                self.target.add_effect(effect)
+                target.add_effect(effect)
 
 class ToHit():
     """
     Checks done for hitting
     """
     @logged
-    def __init__(self, attacker,  target,
+    def __init__(self, attacker, target,
                         random_number_generator = random.Random()):
         """
         Default constructor

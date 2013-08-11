@@ -28,6 +28,7 @@ from pyherc.rules.attack.unarmed import UnarmedDamage
 from pyherc.rules.attack.melee import MeleeToHit
 from pyherc.rules.attack.melee import MeleeDamage
 from pyherc.rules.factory import SubActionFactory
+from pyherc.data.geometry import get_adjacent_target_in_direction
 
 class AttackFactory(SubActionFactory):
     """
@@ -118,30 +119,9 @@ class UnarmedCombatFactory():
         direction = parameters.direction
         level = attacker.level
 
-        if direction == 1:
-            target_location = (location[0], location[1] - 1)
-        elif direction == 2:
-            target_location = (location[0] + 1, location[1] - 1)
-        elif direction == 3:
-            target_location = (location[0] + 1, location[1])
-        elif direction == 4:
-            target_location = (location[0] + 1, location[1] + 1)
-        elif direction == 5:
-            target_location = (location[0], location[1] + 1)
-        elif direction == 6:
-            target_location = (location[0] - 1, location[1] + 1)
-        elif direction == 7:
-            target_location = (location[0] - 1, location[1])
-        elif direction == 8:
-            target_location = (location[0] - 1, location[1] - 1)
-        else:
-            target_location = None
-
-        if target_location != None:
-            target = level.get_creature_at(target_location)
-            return target
-        else:
-            return None
+        return get_adjacent_target_in_direction(level,
+                                                attacker.location,
+                                                direction)
 
 class MeleeCombatFactory():
     """

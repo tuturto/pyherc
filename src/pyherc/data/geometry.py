@@ -22,9 +22,10 @@ Module for various helpers
 """
 from pyherc.aspects import logged
 from math import sqrt
+from functools import partial
 
 @logged
-def get_target_in_direction(level, location, direction):
+def get_target_in_direction(level, location, direction, attack_range = 100):
     """
     Get target of the attack
 
@@ -38,16 +39,38 @@ def get_target_in_direction(level, location, direction):
     :rtype: Character
     """
     target = None
+    target_location = location
+    range_covered = 1
+
+    if direction == 9:
+        return TargetData('void',
+                          None,
+                          None)
+    
     off_sets = [(0, 0),
                 (0, -1), (1, -1), (1, 0), (1, 1),
                 (0, 1), (-1, 1), (-1, 0), (-1, -1)]
 
-    while target == None and not level.blocks_movement(location[0], location[1]):
-        location = tuple([x for x in
-                          map(sum, zip(location, off_sets[direction]))])
-        target = level.get_creature_at(location)
+    while (target == None
+           and not level.blocks_movement(location[0], location[1])
+           and range_covered <= attack_range):
+        target_location = tuple([x for x in
+                                 map(sum,
+                                     zip(target_location,
+                                         off_sets[direction]))])
+        target = level.get_creature_at(target_location)
+        range_covered = range_covered + 1
 
-    return target
+    if target:
+        if distance_between(location, target_location) > attack_range:
+            target = None
+
+    return TargetData('character',
+                      location,
+                      target)
+
+get_adjacent_target_in_direction = partial(get_target_in_direction,
+                                           attack_range = 1.5)
 
 @logged
 def distance_between(location1, location2):
@@ -58,3 +81,18 @@ def distance_between(location1, location2):
     y_difference = location2[1] - location1[1]
 
     return sqrt(x_difference**2 + y_difference**2)
+
+class TargetData():
+    """
+    Represents target
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self, target_type, location, target):
+        """
+        Default constructor
+        """
+        super().__init__()
+        self.target_type = target_type
+        self.location = location
+        self.target = target

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -20,10 +19,6 @@
 
 """
 Module defining Melee Attack related objcts
-
-Classes:
-    MeleeToHit
-    MeleeDamage
 """
 import random
 from pyherc.aspects import logged
@@ -41,11 +36,14 @@ class MeleeToHit(ToHit):
         """
         Default constructor
 
-        Args:
-            attacker: Character doing the attack
-            target: Character being attacked
-            rng: Random number generator
+        :param attacker: character doing the attack
+        :type attacker: Character
+        :param target: character being attacked
+        :type target: Character
+        :param rng: random number generator
+        :type rng: Random
         """
+        super().__init__()
         self.attacker = attacker
         self.target = target
         self.rng = random_number_generator
@@ -60,4 +58,4 @@ class MeleeDamage(Damage):
         """
         Default constructor
         """
-        super(MeleeDamage, self).__init__(damage)
+        super().__init__(damage)
