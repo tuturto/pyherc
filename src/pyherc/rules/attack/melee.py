@@ -43,7 +43,9 @@ class MeleeToHit(ToHit):
         :param rng: random number generator
         :type rng: Random
         """
-        super().__init__()
+        super().__init__(attacker,
+                         target,
+                         random_number_generator)
         self.attacker = attacker
         self.target = target
         self.rng = random_number_generator

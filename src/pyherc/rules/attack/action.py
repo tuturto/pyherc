@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -45,7 +44,7 @@ class AttackAction():
         :param attacker: Character doing attack
         :type attacker: Character
         :param target: Character being attacked
-        :type target: Character
+        :type target: TargetData
         :param effect_factory: Factory used for creating magic effects
         :type effect_factory: EffectFactory
         :param dying_rules: rules for dying
@@ -147,6 +146,7 @@ class ToHit():
         """
         Default constructor
         """
+        super().__init__()
         self.attacker = attacker
         self.target = target
         self.rng = random_number_generator
@@ -239,7 +239,7 @@ class AdditionalRules():
         """
         Default constructor
         """
-        super(AdditionalRules, self).__init__()
+        super().__init__()
 
     def after_attack(self):
         """

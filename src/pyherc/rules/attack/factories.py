@@ -112,7 +112,7 @@ class UnarmedCombatFactory():
         :param parameters: attack parameters
         :type parameters: UnarmedAttackParameters
         :returns: target character if found, otherwise None
-        :rtype: Character
+        :rtype: AttackData
         """
         attacker = parameters.attacker
         location = attacker.location
@@ -187,36 +187,13 @@ class MeleeCombatFactory():
         :param parameters: parameters to control attack
         :type parameters: MeleeAttackParameters
         :returns: target character if found, otherwise None
-        :rtype: Character
+        :rtype: AttackData
         """
         attacker = parameters.attacker
         location = attacker.location
         direction = parameters.direction
         level = attacker.level
 
-        if direction == 1:
-            target_location = (location[0], location[1] - 1)
-        elif direction == 2:
-            target_location = (location[0] + 1, location[1] - 1)
-        elif direction == 3:
-            target_location = (location[0] + 1, location[1])
-        elif direction == 4:
-            target_location = (location[0] + 1, location[1] + 1)
-        elif direction == 5:
-            target_location = (location[0], location[1] + 1)
-        elif direction == 6:
-            target_location = (location[0] - 1, location[1] + 1)
-        elif direction == 7:
-            target_location = (location[0] - 1, location[1])
-        elif direction == 8:
-            target_location = (location[0] - 1, location[1] - 1)
-        else:
-            target_location = None
-
-        target = level.get_creature_at(target_location)
-
-        if target_location != None:
-            target = level.get_creature_at(target_location)
-            return target
-        else:
-            return None
+        return get_adjacent_target_in_direction(level,
+                                                attacker.location,
+                                                direction)
