@@ -25,7 +25,7 @@ from pyherc.test.matchers import wall_target_at
 from pyherc.generators.spells import targeting_single_target
 from pyherc.generators.spells import targeting_spherical_area
 from pyherc.rules import SpellCastingParameters
-from hamcrest import assert_that, is_in, is_not, contains_inanyorder
+from hamcrest import assert_that, is_, is_in, is_not, contains_inanyorder
 from hamcrest import has_length
 
 FLOOR = 1
