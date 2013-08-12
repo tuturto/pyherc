@@ -42,9 +42,11 @@ def get_target_in_direction(level, location, direction, attack_range = 100):
     target_type = 'void'
     target_location = location
     range_covered = 1
+    target_data = None
 
     if direction == 9:
         return TargetData('void',
+                          None,
                           None,
                           None)
 
@@ -53,31 +55,33 @@ def get_target_in_direction(level, location, direction, attack_range = 100):
                 (0, 1), (-1, 1), (-1, 0), (-1, -1)]
 
     while (target == None
-           and range_covered <= attack_range):
+           and distance_between(location, target_location) <= attack_range):
         target_location = tuple([x for x in
                                  map(sum,
                                      zip(target_location,
                                          off_sets[direction]))])
 
         if level.blocks_movement(target_location[0], target_location[1]):
-            target = target_location
-            target_type = 'wall'
+            target_data = TargetData('wall',
+                                     target_location,
+                                     None,
+                                     target_data)
+            target = target_data
         else:
             target = level.get_creature_at(target_location)
             if target:
-                target_type = 'character'
-            
-        range_covered = range_covered + 1
+                target_data = TargetData('character',
+                                         target_location,
+                                         target,
+                                         target_data)
+                target = target_data
+            else:
+                target_data = TargetData('void',
+                                         target_location,
+                                         None,
+                                         target_data)
 
-    if target:
-        if distance_between(location, target_location) > attack_range:
-            target = None
-            target_location = None
-            target_type = 'void'
-
-    return TargetData(target_type,
-                      target_location,
-                      target)
+    return target_data
 
 get_adjacent_target_in_direction = partial(get_target_in_direction,
                                            attack_range = 1.5)
@@ -97,7 +101,7 @@ class TargetData():
 
     .. versionadded:: 0.10
     """
-    def __init__(self, target_type, location, target):
+    def __init__(self, target_type, location, target, previous_target):
         """
         Default constructor
         """
@@ -105,3 +109,4 @@ class TargetData():
         self.target_type = target_type
         self.location = location
         self.target = target
+        self.previous_target = previous_target

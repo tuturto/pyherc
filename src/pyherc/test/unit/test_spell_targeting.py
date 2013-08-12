@@ -21,7 +21,7 @@
 Tests for spell targeting
 """
 from pyherc.test.builders import LevelBuilder, CharacterBuilder
-from pyherc.test.matchers import wall_target_at
+from pyherc.test.matchers import wall_target_at, void_target_at
 from pyherc.generators.spells import targeting_single_target
 from pyherc.generators.spells import targeting_spherical_area
 from pyherc.rules import SpellCastingParameters
@@ -118,6 +118,22 @@ class TestSingleCharacterTargeting():
         target = targets[0]
 
         assert_that(target, is_(wall_target_at((10, 20))))
+
+    def test_retrieving_previous_tile(self):
+        """
+        When reporting target, the previous tile should be reported too
+        """
+        self.level.walls[10][20] = SOLID_WALL
+
+        params = SpellCastingParameters(caster = self.caster,
+                                        direction = 5,
+                                        spell_name = 'proto')
+
+        targets = targeting_single_target(params)
+        target = targets[0].previous_target
+
+        assert_that(target, is_(void_target_at((10, 19))))
+
 
 class TestSphericalAreaTargetting():
     """

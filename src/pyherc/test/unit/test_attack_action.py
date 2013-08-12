@@ -117,7 +117,8 @@ class TestDamage():
                                        attacker = attacker, 
                                        target = TargetData('character',
                                                            (1, 1),
-                                                           defender),
+                                                           defender,
+                                                           None),
                                        effect_factory = effect_factory, 
                                        dying_rules = mock(),
                                        additional_rules = mock())

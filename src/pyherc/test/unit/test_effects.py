@@ -541,7 +541,8 @@ class TestEffectsInCombat():
                               attacker = attacker,
                               target = TargetData('character',
                                                   (0,0),
-                                                  mock()),
+                                                  mock(),
+                                                  None),
                               effect_factory = factory,
                               dying_rules = mock(),
                               additional_rules = mock())

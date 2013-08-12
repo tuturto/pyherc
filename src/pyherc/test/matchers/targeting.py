@@ -78,3 +78,9 @@ def void_target():
     Check that given target is nothing at all
     """
     return TargetMatcher('void', None)
+
+def void_target_at(location):
+    """
+    Check that given target is nothign at all, but in given location
+    """
+    return TargetMatcher('void', location)
