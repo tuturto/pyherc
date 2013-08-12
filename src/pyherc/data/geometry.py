@@ -59,8 +59,8 @@ def get_target_in_direction(level, location, direction, attack_range = 100):
                                      zip(target_location,
                                          off_sets[direction]))])
 
-        if level.blocks_movement(target_location[0], location[1]):
-            target = None
+        if level.blocks_movement(target_location[0], target_location[1]):
+            target = target_location
             target_type = 'wall'
         else:
             target = level.get_creature_at(target_location)

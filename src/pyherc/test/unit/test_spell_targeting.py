@@ -62,10 +62,10 @@ class TestSingleCharacterTargeting():
         self.level = (LevelBuilder()
                           .with_character(self.caster, (10, 5))
                           .with_character(self.target1, (5, 5))
+                          .with_floor_tile(FLOOR)
                           .with_wall_tile(EMPTY_WALL)
                           .with_empty_wall_tile(EMPTY_WALL)
                           .with_solid_wall_tile(SOLID_WALL)
-                          .with_floor_tile(FLOOR)
                           .build())
 
     def test_targeting_correct_direction(self):
@@ -117,7 +117,7 @@ class TestSingleCharacterTargeting():
         targets = targeting_single_target(params)
         target = targets[0]
 
-        assert_that(target, is_(wall_target_at((10, 0))))
+        assert_that(target, is_(wall_target_at((10, 20))))
 
 class TestSphericalAreaTargetting():
     """
