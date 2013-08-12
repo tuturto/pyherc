@@ -108,10 +108,10 @@ class TestSingleCharacterTargeting():
         """
         When targeting wall, it should be reported
         """
-        self.level.walls[10][0] = SOLID_WALL
+        self.level.walls[10][20] = SOLID_WALL
 
         params = SpellCastingParameters(caster = self.caster,
-                                        direction = 1,
+                                        direction = 5,
                                         spell_name = 'proto')
 
         targets = targeting_single_target(params)

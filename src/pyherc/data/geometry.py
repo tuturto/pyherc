@@ -39,6 +39,7 @@ def get_target_in_direction(level, location, direction, attack_range = 100):
     :rtype: Character
     """
     target = None
+    target_type = 'void'
     target_location = location
     range_covered = 1
 
@@ -46,27 +47,36 @@ def get_target_in_direction(level, location, direction, attack_range = 100):
         return TargetData('void',
                           None,
                           None)
-    
+
     off_sets = [(0, 0),
                 (0, -1), (1, -1), (1, 0), (1, 1),
                 (0, 1), (-1, 1), (-1, 0), (-1, -1)]
 
     while (target == None
-           and not level.blocks_movement(location[0], location[1])
            and range_covered <= attack_range):
         target_location = tuple([x for x in
                                  map(sum,
                                      zip(target_location,
                                          off_sets[direction]))])
-        target = level.get_creature_at(target_location)
+
+        if level.blocks_movement(target_location[0], location[1]):
+            target = None
+            target_type = 'wall'
+        else:
+            target = level.get_creature_at(target_location)
+            if target:
+                target_type = 'character'
+            
         range_covered = range_covered + 1
 
     if target:
         if distance_between(location, target_location) > attack_range:
             target = None
+            target_location = None
+            target_type = 'void'
 
-    return TargetData('character',
-                      location,
+    return TargetData(target_type,
+                      target_location,
                       target)
 
 get_adjacent_target_in_direction = partial(get_target_in_direction,
