@@ -82,7 +82,6 @@ def get_target_in_direction(level, location, direction, attack_range = 100):
 get_adjacent_target_in_direction = partial(get_target_in_direction,
                                            attack_range = 1.5)
 
-@logged
 def distance_between(location1, location2):
     """
     calculate distance between two points
