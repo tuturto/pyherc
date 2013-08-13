@@ -23,6 +23,7 @@ Module for SpellFactoryBuilder
 """
 from pyherc.generators import SpellGenerator
 from pyherc.data.magic import Spell
+from pyherc.data.geometry import TargetData
 
 class SpellGeneratorBuilder():
     """
@@ -91,6 +92,10 @@ class SpellBuilder():
         for handle in self.handles:
             spell.add_effect_handle(handle)
 
-        spell.targets.extend(self.targets)
+        for target in self.targets:
+            spell.targets.append(TargetData('character',
+                                            target.location,
+                                            target,
+                                            None))
 
         return spell

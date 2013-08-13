@@ -80,4 +80,4 @@ class TestSpellCastingFactory:
                                                          spell_name = 'healing wind'))
         
         verify(spell_factory).create_spell(spell_name = 'healing wind',
-                                           targets = [caster])
+                                           targets = any())

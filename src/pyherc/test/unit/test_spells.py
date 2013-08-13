@@ -31,7 +31,7 @@ from pyherc.rules.ending import Dying
 from pyherc.rules.magic.action import SpellCastingAction
 
 from hamcrest import assert_that, is_in #pylint: disable-msg=E0611
-from mockito import mock, verify, when
+from mockito import mock, verify, when, any
 
 class TestSpellTargetingSingle():
     """
@@ -93,7 +93,7 @@ class TestSpellEffects():
         self.effect = mock(Effect)
         self.dying_rules = mock(Dying)
         when(self.effects_factory).create_effect(key = 'healing wind',
-                                            target = self.character).thenReturn(self.effect)
+                                                 target = any()).thenReturn(self.effect)
 
         self.effect_handle = EffectHandle(trigger = 'on spell hit',
                                           effect = 'healing wind',
