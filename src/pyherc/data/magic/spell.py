@@ -86,7 +86,10 @@ class Spell():
         handles = self.effects.get_effect_handles('on spell hit')
         effects = []
 
-        for target in self.targets:
+        targets = (x.target for x in self.targets
+                   if x.target)
+
+        for target in targets:
             for handle in handles:
                 effects.append(effects_factory.create_effect(
                                                 key = handle.effect,

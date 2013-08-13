@@ -70,7 +70,7 @@ class SpellGenerator():
                                          parameters = None,
                                          charges = 1)],
                             partial(targeting_spherical_area,
-                                    radius = 2))
+                                    radius = 3))
 
         self.spell_list['healing wind'] = healing_spell
         self.spell_list['magic missile'] = magic_missile
@@ -115,7 +115,10 @@ def targeting_caster(parameters):
 
     .. versionadded:: 0.9
     """
-    return [parameters.caster]
+    return [TargetData('character',
+                       parameters.caster.location,
+                       parameters.caster,
+                       None)]
 
 def targeting_single_target(parameters):
     """
