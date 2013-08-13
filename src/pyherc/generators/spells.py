@@ -26,6 +26,8 @@ from functools import partial
 from pyherc.data.magic import Spell
 from pyherc.data.effects import EffectHandle
 from pyherc.data.geometry import get_target_in_direction, distance_between
+from pyherc.data.geometry import TargetData
+from pyherc.rules.los import get_fov_matrix
 
 class SpellGenerator():
     """
@@ -141,10 +143,14 @@ def targeting_spherical_area(parameters, radius):
                                       location = parameters.caster.location,
                                       direction = parameters.direction)
 
-    if initial:
-        splash_center = initial.location
+    if initial and initial.previous_target:
+        splash_center = initial.previous_target.location
         level = parameters.caster.level
-        
+
+        matrix = get_fov_matrix(splash_center,
+                                level,
+                                radius)
+       
         x_range = range(splash_center[0] - radius,
                         splash_center[0] + radius + 1)
 
@@ -152,11 +158,23 @@ def targeting_spherical_area(parameters, radius):
                         splash_center[1] + radius + 1)
 
         for x in x_range:
-            for y in y_range:
-                if distance_between(splash_center,
-                                    (x, y)) <= radius:
+            for y in y_range:                
+                if matrix[x][y]:
                     creature = level.get_creature_at((x, y))
                     if creature:
-                        targets.append(creature)
+                        targets.append(TargetData('character',
+                                                  (x, y),
+                                                  creature,
+                                                  None))
+                    elif level.blocks_los(x, y):
+                        targets.append(TargetData('wall',
+                                                  (x, y),
+                                                  None,
+                                                  None))
+                    else:
+                        targets.append(TargetData('void',
+                                                  (x, y),
+                                                  None,
+                                                  None))
 
     return targets

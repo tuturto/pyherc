@@ -187,8 +187,10 @@ class TestSphericalAreaTargetting():
                                         direction = 7,
                                         spell_name = 'proto')
 
-        targets = targeting_spherical_area(params,
-                                           radius = 2)
+        data = targeting_spherical_area(params,
+                                        radius = 2)
+        targets = [x.target for x in data
+                   if x.target]
 
         assert_that(targets, contains_inanyorder(self.target1,
                                                  self.target2))
@@ -221,8 +223,10 @@ class TestSphericalAreaTargetting():
                                         direction = 7,
                                         spell_name = 'proto')
 
-        targets = targeting_spherical_area(params,
-                                           radius = 4)
+        data = targeting_spherical_area(params,
+                                        radius = 6)
 
+        targets = [x.target for x in data
+                   if x.target]
+        
         assert_that(targets, has_length(0))
-        assert False
