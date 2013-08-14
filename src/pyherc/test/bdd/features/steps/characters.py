@@ -22,7 +22,7 @@ from pyherc.data.effects import DamageModifier
 from pyherc.test.cutesy import Adventurer, Wizard, Goblin
 from pyherc.test.matchers import is_dead
 from pyherc.ai.pathfinding import a_star
-from hamcrest import assert_that #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_not #pylint: disable-msg=E0611
 from pyherc.test.bdd.features.helpers import default_context, observed
 from pyherc.test.bdd.features.helpers import with_action_factory
 from pyherc.test.bdd.features.helpers import get_character, get_location
@@ -58,6 +58,11 @@ def impl(context, character_name):
 def impl(context, character_name):
     character = get_character(context, character_name)
     assert_that(character, is_dead())
+
+@then('{character_name} should be alive')
+def step_impl(context, character_name):
+    character = get_character(context, character_name)
+    assert_that(character, is_not(is_dead()))
 
 @given('{character_name} is almost dead')
 @observed

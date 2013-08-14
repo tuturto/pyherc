@@ -10,12 +10,10 @@ Feature: Magic
        And Uglak is standing in room
        And Simon is standing away from Uglak
 
-  @active
   Scenario: Magic missile
        When Simon casts magic missile on Uglak
        Then Uglak should be dead
 
-  @wip
   Scenario: Fireball
       Given Zhagh is Goblin
         And Zhagh is almost dead
@@ -37,7 +35,7 @@ Feature: Magic
        Then Simon should have more fire spells
         And Rune should not be in inventory of Simon
 
-  @wip
+  @active
   Scenario: Out of mana
       Given Simon has no mana left
        When Simon casts magic missile on Uglak

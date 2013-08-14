@@ -10,6 +10,7 @@ pyherc.data
    magic/package_magic
    module_character
    module_dungeon
+   module_geometry
    module_inventory
    module_item
    module_level   

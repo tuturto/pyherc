@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -112,28 +111,28 @@ def do_fov(x, y, radius, fov_matrix, level):
 
     return fov_matrix
 
-def get_fov_matrix(model, character, distance = 7):
+def get_fov_matrix(location, level, distance):
     """
     Calculate field of vision matrix
 
-    Args:
-        model: Model to use
-        character: Character to calculate matrix for
-        distance: maximum view distance
-
-    Returns:
-        Matrix defining which parts are visible and which not
+    :param location: center of fov calculation
+    :type location: (int, int)
+    :param level: level where fov is calculated
+    :type level: Level
+    :param distance: distance of vision
+    :type distance: int
+    :returns: matrix of True / False
     """
     fov_matrix = []
 
-    width = len(character.level.walls[0])
-    height = len(character.level.walls)
+    width = len(level.walls[0])
+    height = len(level.walls)
 
     for i in range(height):
         fov_matrix.append([False] * width)
 
-    fov_matrix[character.location[0]][character.location[1]] = True
+    fov_matrix[location[0]][location[1]] = True
 
-    return do_fov(character.location[0],
-                  character.location[1], distance,
-                  fov_matrix, character.level)
+    return do_fov(location[0],
+                  location[1], distance,
+                  fov_matrix, level)

@@ -31,6 +31,7 @@ from pyherc.generators import EffectsFactory
 from pyherc.data.effects import EffectHandle
 from pyherc.rules.attack.action import AttackAction
 from pyherc.data import Character
+from pyherc.data.geometry import TargetData
 
 from pyherc.events import PoisonAddedEvent
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
@@ -538,7 +539,10 @@ class TestEffectsInCombat():
                               to_hit = to_hit,
                               damage = mock(),
                               attacker = attacker,
-                              target = mock(),
+                              target = TargetData('character',
+                                                  (0,0),
+                                                  mock(),
+                                                  None),
                               effect_factory = factory,
                               dying_rules = mock(),
                               additional_rules = mock())

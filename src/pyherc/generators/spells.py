@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -22,9 +21,13 @@
 Module for spell factory
 """
 from pyherc.aspects import logged
+from functools import partial
 
 from pyherc.data.magic import Spell
 from pyherc.data.effects import EffectHandle
+from pyherc.data.geometry import get_target_in_direction, distance_between
+from pyherc.data.geometry import TargetData
+from pyherc.rules.los import get_fov_matrix
 
 class SpellGenerator():
     """
@@ -61,8 +64,17 @@ class SpellGenerator():
                                          charges = 1)],
                             targeting_single_target)
 
+        fireball = SpellSpecification([
+                            EffectHandle(trigger = 'on spell hit',
+                                         effect = 'fire',
+                                         parameters = None,
+                                         charges = 1)],
+                            partial(targeting_spherical_area,
+                                    radius = 3))
+
         self.spell_list['healing wind'] = healing_spell
         self.spell_list['magic missile'] = magic_missile
+        self.spell_list['fireball'] = fireball
     
     @logged
     def create_spell(self, spell_name, targets):
@@ -81,7 +93,7 @@ class SpellGenerator():
 
         spec = self.spell_list[spell_name]
         handles = spec.effect_handles
-
+        
         for effect_handle in handles:
             new_spell.add_effect_handle(effect_handle)
 
@@ -103,7 +115,10 @@ def targeting_caster(parameters):
 
     .. versionadded:: 0.9
     """
-    return [parameters.caster]
+    return [TargetData('character',
+                       parameters.caster.location,
+                       parameters.caster,
+                       None)]
 
 def targeting_single_target(parameters):
     """
@@ -111,5 +126,58 @@ def targeting_single_target(parameters):
 
     .. versionadded:: 0.9
     """
-    return None
+    target = get_target_in_direction(level = parameters.caster.level,
+                                     location = parameters.caster.location,
+                                     direction = parameters.direction)
+    if target:
+        return [target]
+    else:
+        return []
 
+@logged
+def targeting_spherical_area(parameters, radius):
+    """
+    Function to target a spherical area
+
+    .. versionadded:: 0.10
+    """
+    targets = []
+    initial = get_target_in_direction(level = parameters.caster.level,
+                                      location = parameters.caster.location,
+                                      direction = parameters.direction)
+
+    if initial and initial.previous_target:
+        splash_center = initial.previous_target.location
+        level = parameters.caster.level
+
+        matrix = get_fov_matrix(splash_center,
+                                level,
+                                radius)
+       
+        x_range = range(splash_center[0] - radius,
+                        splash_center[0] + radius + 1)
+
+        y_range = range(splash_center[1] - radius,
+                        splash_center[1] + radius + 1)
+
+        for x in x_range:
+            for y in y_range:                
+                if matrix[x][y]:
+                    creature = level.get_creature_at((x, y))
+                    if creature:
+                        targets.append(TargetData('character',
+                                                  (x, y),
+                                                  creature,
+                                                  None))
+                    elif level.blocks_los(x, y):
+                        targets.append(TargetData('wall',
+                                                  (x, y),
+                                                  None,
+                                                  None))
+                    else:
+                        targets.append(TargetData('void',
+                                                  (x, y),
+                                                  None,
+                                                  None))
+
+    return targets

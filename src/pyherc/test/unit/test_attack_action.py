@@ -26,6 +26,7 @@ from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 from mockito import mock, when, any, verify
+from pyherc.data.geometry import TargetData
 
 class TestDamage():
     """
@@ -88,15 +89,16 @@ class TestDamage():
 
     def test_effect_with_null_duration_is_triggered(self):
         """
-        Effect with None duration should be triggered immediately when attack lands
+        Effect with None duration should be triggered immediately when
+        attack lands
         """
         effect = mock()
         effect.duration = None
         
         attacker = (CharacterBuilder()
                         .with_effect_handle(EffectHandleBuilder()
-                                                        .with_trigger('on attack hit')
-                                                        .build())
+                                                .with_trigger('on attack hit')
+                                                .build())
                         .build())
                         
         defender = (CharacterBuilder()
@@ -106,14 +108,17 @@ class TestDamage():
         when(to_hit).is_hit().thenReturn(True)
         
         effect_factory = mock()
-        when(effect_factory).create_effect(any(), 
-                                                         target = any()).thenReturn(effect)
+        when(effect_factory).create_effect(any(),
+                                           target = any()).thenReturn(effect)
                         
         action = AttackAction(attack_type = 'melee', 
                                        to_hit = to_hit, 
                                        damage = mock(),
                                        attacker = attacker, 
-                                       target = defender, 
+                                       target = TargetData('character',
+                                                           (1, 1),
+                                                           defender,
+                                                           None),
                                        effect_factory = effect_factory, 
                                        dying_rules = mock(),
                                        additional_rules = mock())
