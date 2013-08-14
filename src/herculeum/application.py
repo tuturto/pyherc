@@ -21,6 +21,7 @@
 """
 Module for application level objects
 """
+from pyherc.aspects import set_logger
 from herculeum.config import Configuration
 from pyherc.data.model import Model
 import sys
@@ -42,26 +43,25 @@ class Application():
         self.logger = None
         self.screen = None
         self.log_level = None
+        self.silent = False
         self.ui_mode = 'qt'
 
-    def process_command_line(self):
+    def process_command_line(self, arguments):
         """
         Process command line options
-        """
+        """       
         log_levels = {'debug': logging.DEBUG,
                       'info': logging.INFO,
                       'warning': logging.WARNING,
                       'error': logging.ERROR,
                       'critical': logging.CRITICAL}
-        args = sys.argv
-        for argument in args:
-            if argument in log_levels:
-                self.log_level = log_levels[argument]
 
-        modes = ['qt', 'curses']
-        for argument in args:
-            if argument in modes:
-                self.ui_mode = argument
+        self.log_level = log_levels[arguments['--log-level']]
+        self.silent = arguments['--silent']
+        self.ui_mode = arguments['--ui']
+
+        #set_logger(arguments['--log-level'],
+        #           self.silent)
 
     def load_configuration(self, controls, surface_manager):
         """

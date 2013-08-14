@@ -19,8 +19,30 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Main entry point for Herculeum - game
+Herculeum is a dungeon adventure in the spirit of Nethack and Rogue.
+
+Usage:
+  herculeum [--ui=MODE] [--log-level=LEVEL] [--silent]
+  herculeum (-l | --license)
+  herculeum (-h | --help)
+  herculeum (-v | --version)
+
+Options:
+  -h --help            Show this screen.
+  -l --license         Show license.
+  -v --version         Show version.
+  --ui=<mode>          User interface to use (qt or curses) [default: curses]
+  --log-level=<level>  Log level to use [default: warning]
+  --silent             Turns off logging completely
+
 """
+from pyherc.aspects import set_logger
+from docopt import docopt
+
+arguments = docopt(__doc__, version='Herculeum 0.10')
+set_logger(arguments['--log-level'],
+           arguments['--silent'])
+
 import sys
 import os.path
 import hy
@@ -41,36 +63,37 @@ except:
     print('Curses user interface is not available')
 
 if __name__ == "__main__":
+    app = Application()    
 
-    print('#   pyherc is free software: you can redistribute it and/or modify')
-    print('#   it under the terms of the GNU General Public License as published by')
-    print('#   the Free Software Foundation, either version 3 of the License, or')
-    print('#   (at your option) any later version.')
-    print('#')
-    print('#   pyherc is distributed in the hope that it will be useful,')
-    print('#   but WITHOUT ANY WARRANTY; without even the implied warranty of')
-    print('#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the')
-    print('#   GNU General Public License for more details.')
-    print('#')
-    print('#   You should have received a copy of the GNU General Public License')
-    print('#   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.')
-
-    app = Application()
-    app.process_command_line()
-
-    if app.ui_mode == 'qt':
-        user_interface = QtUserInterface(app)
-        surface_manager = QtSurfaceManager()
-        controls_configuration = QtControlsConfiguration()
+    if arguments['--license']:
+        print('#   Herculeum is free software: you can redistribute it and/or modify')
+        print('#   it under the terms of the GNU General Public License as published by')
+        print('#   the Free Software Foundation, either version 3 of the License, or')
+        print('#   (at your option) any later version.')
+        print('#')
+        print('#   Herculeum is distributed in the hope that it will be useful,')
+        print('#   but WITHOUT ANY WARRANTY; without even the implied warranty of')
+        print('#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the')
+        print('#   GNU General Public License for more details.')
+        print('#')
+        print('#   You should have received a copy of the GNU General Public License')
+        print('#   along with Herculeum.  If not, see <http://www.gnu.org/licenses/>.')            
     else:
-        user_interface = CursesUserInterface(app)
-        surface_manager = CursesSurfaceManager()
-        controls_configuration = CursesControlsConfiguration()
+    
+        app.process_command_line(arguments)
 
-    user_interface.show_splash_screen()
-    app.start_logging()
-    app.load_configuration(controls_configuration,
-                           surface_manager)
+        if app.ui_mode == 'qt':
+            user_interface = QtUserInterface(app)
+            surface_manager = QtSurfaceManager()
+            controls_configuration = QtControlsConfiguration()
+        else:
+            user_interface = CursesUserInterface(app)
+            surface_manager = CursesSurfaceManager()
+            controls_configuration = CursesControlsConfiguration()
 
-    app.run(user_interface)
+        user_interface.show_splash_screen()
+        app.start_logging()
+        app.load_configuration(controls_configuration,
+                               surface_manager)
 
+        app.run(user_interface)

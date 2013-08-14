@@ -37,6 +37,7 @@ setup(name = 'herculeum',
       package_data={'pyherc': ['*.hy',
                                'ai/*.hy']},
       requires = ['decorator (>=3.4.0)',
-                  'hy (>=0.9.10)'],
+                  'hy (>=0.9.10)',
+                  'docopt (>=0.6.1)'],
       package_dir = {'herculeum': 'src/herculeum',
                      'pyherc': 'src/pyherc'})

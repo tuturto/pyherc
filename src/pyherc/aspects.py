@@ -24,48 +24,13 @@ Module for aspects
 import logging, sys
 from decorator import decorator
 
-@decorator
-def info_logger(wrapped_function, *args, **kwargs):
-    """
-    Decorator to perform logging
-    """
-    logger_name = str(wrapped_function)
-    logger = logging.getLogger(logger_name)
+def create_logger(log_level):
 
-    call_message = ' '.join([logger_name,
-                             'call',
-                             ':',
-                             str(args),
-                             str(kwargs)])
-
-    logger.debug(call_message)
-    
-    try:
-        result = wrapped_function(*args, **kwargs)
-
-        result_message = ' '.join([logger_name,
-                                   'return',
-                                   ':',
-                                   str(result)])
-
-        logger.debug(result_message)
-
-        return result
-    except Exception as err:
-        logger.critical(err)
-        raise
-
-@decorator
-def fatal_logger(wrapped_function, *args, **kwargs):
-    """
-    Decorator to perform logging of exceptions
-    """
-    
-    try:
-        return wrapped_function(*args, **kwargs)
-
-    except Exception as err:
-        
+    @decorator
+    def level_logger(wrapped_function, *args, **kwargs):
+        """
+        Decorator to perform logging
+        """
         logger_name = str(wrapped_function)
         logger = logging.getLogger(logger_name)
 
@@ -74,26 +39,78 @@ def fatal_logger(wrapped_function, *args, **kwargs):
                                  ':',
                                  str(args),
                                  str(kwargs)])
-        logger.debug(call_message)        
-        logger.critical(err)
-        raise
+
+        logger.log(log_level, call_message)
+    
+        try:
+            result = wrapped_function(*args, **kwargs)
+
+            result_message = ' '.join([logger_name,
+                                       'return',
+                                       ':',
+                                       str(result)])
+
+            logger.log(log_level, result_message)
+
+            return result
+        except Exception as err:
+            logger.critical(err)
+            raise
+
+    return level_logger
+
+log_debug = create_logger(logging.DEBUG)
+
+log_info = create_logger(logging.INFO)
+
+log_warning = create_logger(logging.WARNING)
+
+log_error = create_logger(logging.ERROR)
+
+log_critical = create_logger(logging.CRITICAL)
 
 def no_logger(wrapped_function):
     """
     Decorator to perform no logging at all
-    """
-    
+    """    
     return wrapped_function
 
+logged = log_critical
 
+def set_logger(log_level, silent):
+    """
+    Set application-wide log level
+    """
+    global log_debug
+    global log_info
+    global log_warning
+    global log_error
+    global log_critical
+    global logged
+    
+    if log_level == 'debug':
+        pass
+    elif log_level == 'info':
+        log_debug = no_logger
+    elif log_level == 'warning':
+        log_debug = no_logger
+        log_info = no_logger
+    elif log_level == 'error':
+        log_debug = no_logger
+        log_info = no_logger
+        log_warning = no_logger
+    elif log_level == 'critical':
+        log_debug = no_logger
+        log_info = no_logger
+        log_warning = no_logger
+        log_error = no_logger
+    else:
+        assert False
 
-log_levels = {'no_log': no_logger,
-              'error_log': fatal_logger,
-              'full_log': info_logger}
-
-logged = info_logger
-
-args = sys.argv
-for argument in args:
-    if argument in log_levels:
-        logged = log_levels[argument]
+    if silent:
+        log_debug = no_logger
+        log_info = no_logger
+        log_warning = no_logger
+        log_error = no_logger
+        log_critical = no_logger
+        logged = no_logger        

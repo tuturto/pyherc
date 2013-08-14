@@ -16,6 +16,7 @@ System Requirements
 - PyQt4
 - decorator 3.4.0
 - hy 0.9.10
+- docopt 0.6.1
 - mockito-python 0.5.0 (only needed for running test cases)
 - pyHamcrest 1.6 (only needed for running test cases)
 - behave (only needed for running test cases)
