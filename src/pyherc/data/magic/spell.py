@@ -39,6 +39,7 @@ class Spell():
         """
         self.targets = []
         self.effects = EffectsCollection()
+        self.spirit = 0
 
     @logged
     def add_effect_handle(self, handle):

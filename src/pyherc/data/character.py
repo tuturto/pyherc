@@ -554,7 +554,8 @@ class Character():
                                 SpellCastingParameters(self,
                                                        direction = direction, 
                                                        spell_name = spell_name))
-        action.execute()
+        if action.is_legal():
+            action.execute()
 
     @logged
     def raise_event(self, event):

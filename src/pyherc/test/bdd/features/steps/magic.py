@@ -18,6 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+from behave import step_matcher
 from pyherc.test.bdd.features.helpers import get_character
 from pyherc.test.cutesy import make, cast_spell
 
@@ -45,4 +46,11 @@ def impl(context, caster_name, spell_and_target):
     make(caster, cast_spell(spell_name = spell,
                             target = target))
 
+step_matcher('re')
 
+@given('^(?P<caster_name>[A-Za-z]+) has no spirit left$')
+def impl(context, caster_name):
+    caster = get_character(context, caster_name)
+    caster.spirit = 0
+
+step_matcher('parse')

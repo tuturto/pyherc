@@ -18,13 +18,16 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+from behave import step_matcher
 from pyherc.test.cutesy import make, drop
 from pyherc.test.bdd.features.helpers import default_context, armour_list
 from pyherc.test.bdd.features.helpers import weapon_list
 from pyherc.test.bdd.features.helpers import get_character, get_item
 from pyherc.test.bdd.features.helpers import get_location
 
-@given('{character_name} has {item_name}')
+step_matcher('re')
+
+@given('^(?P<character_name>[A-Za-z]+) has (?P<item_name>[A-Za-z]+)$')
 @default_context
 @weapon_list
 @armour_list
@@ -39,6 +42,8 @@ def impl(context, character_name, item_name):
     character = get_character(context, character_name)
 
     character.inventory.append(item)
+
+step_matcher('parse')
 
 @when('{character_name} drops {item_name}')
 def impl(context, character_name, item_name):

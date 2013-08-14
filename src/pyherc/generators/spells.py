@@ -55,14 +55,16 @@ class SpellGenerator():
                                            effect = 'heal medium wounds',
                                            parameters = None,
                                            charges = 1)],
-                              targeting_caster)
+                              targeting_caster,
+                              spirit = 5)
 
         magic_missile = SpellSpecification([
                             EffectHandle(trigger = 'on spell hit',
                                          effect = 'cause wound',
                                          parameters = None,
                                          charges = 1)],
-                            targeting_single_target)
+                            targeting_single_target,
+                            spirit = 7)
 
         fireball = SpellSpecification([
                             EffectHandle(trigger = 'on spell hit',
@@ -70,7 +72,8 @@ class SpellGenerator():
                                          parameters = None,
                                          charges = 1)],
                             partial(targeting_spherical_area,
-                                    radius = 3))
+                                    radius = 3),
+                            spirit = 10)
 
         self.spell_list['healing wind'] = healing_spell
         self.spell_list['magic missile'] = magic_missile
@@ -88,11 +91,12 @@ class SpellGenerator():
         :returns: ready to use spell
         :rtype: Spell
         """
-        new_spell = Spell()
+        new_spell = Spell()        
         new_spell.targets.extend(targets)
 
         spec = self.spell_list[spell_name]
-        handles = spec.effect_handles
+        new_spell.spirit = spec.spirit
+        handles = spec.effect_handles        
         
         for effect_handle in handles:
             new_spell.add_effect_handle(effect_handle)
@@ -105,9 +109,10 @@ class SpellSpecification():
 
     .. versionadded:: 0.9
     """
-    def __init__(self, effect_handles, targeter):
+    def __init__(self, effect_handles, targeter, spirit):
         self.effect_handles = effect_handles
         self.targeter = targeter
+        self.spirit = spirit
     
 def targeting_caster(parameters):
     """

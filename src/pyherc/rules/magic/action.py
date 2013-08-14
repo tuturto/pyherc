@@ -64,4 +64,4 @@ class SpellCastingAction():
         :returns: True if casting spell is possible, false otherwise
         :rtype: Boolean
         """
-        return True
+        return self.caster.spirit - self.spell.spirit >= 0

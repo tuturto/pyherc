@@ -119,6 +119,7 @@ class TestSpellCasting:
         """
         magic_factory = SpellCastingFactoryBuilder().build()
         action = mock()
+        when(action).is_legal().thenReturn(True)
 
         when(magic_factory).get_action(any()).thenReturn(action) #pylint: disable-msg=E1103
         
