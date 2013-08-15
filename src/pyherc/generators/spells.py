@@ -20,7 +20,7 @@
 """
 Module for spell factory
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from functools import partial
 
 from pyherc.data.magic import Spell
@@ -35,7 +35,7 @@ class SpellGenerator():
     
     .. versionadded:: 0.9
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Default constructor
@@ -44,7 +44,7 @@ class SpellGenerator():
 
         self.__init_spells()
 
-    @logged
+    @log_debug
     def __init_spells(self):
         """
         Temporary implementation for spell loading
@@ -76,7 +76,7 @@ class SpellGenerator():
         self.spell_list['magic missile'] = magic_missile
         self.spell_list['fireball'] = fireball
     
-    @logged
+    @log_info
     def create_spell(self, spell_name, targets):
         """
         Create a spell
@@ -105,10 +105,12 @@ class SpellSpecification():
 
     .. versionadded:: 0.9
     """
+    @log_debug
     def __init__(self, effect_handles, targeter):
         self.effect_handles = effect_handles
         self.targeter = targeter
-    
+
+@log_info    
 def targeting_caster(parameters):
     """
     Function to target the caster
@@ -120,6 +122,7 @@ def targeting_caster(parameters):
                        parameters.caster,
                        None)]
 
+@log_info
 def targeting_single_target(parameters):
     """
     Function to target a single character in direction
@@ -134,7 +137,7 @@ def targeting_single_target(parameters):
     else:
         return []
 
-@logged
+@log_info
 def targeting_spherical_area(parameters, radius):
     """
     Function to target a spherical area

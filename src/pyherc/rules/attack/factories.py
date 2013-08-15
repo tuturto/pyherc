@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Attack related factories are defined here
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from pyherc.rules.attack.action import AttackAction, AdditionalRules
 from pyherc.rules.attack.unarmed import UnarmedToHit
 from pyherc.rules.attack.unarmed import UnarmedDamage
@@ -35,7 +34,7 @@ class AttackFactory(SubActionFactory):
     Factory for constructing attack actions
     """
 
-    @logged
+    @log_debug
     def __init__(self, factories):
         """
         Constructor for this factory
@@ -54,7 +53,7 @@ class UnarmedCombatFactory():
     """
     Factory for producing unarmed combat actions
     """
-    @logged
+    @log_debug
     def __init__(self, effect_factory, dying_rules):
         """
         Constructor for this factory
@@ -66,7 +65,7 @@ class UnarmedCombatFactory():
     def __str__(self):
         return 'unarmed combat factory'
 
-    @logged
+    @log_debug
     def can_handle(self, parameters):
         """
         Can this factory process these parameters
@@ -78,7 +77,7 @@ class UnarmedCombatFactory():
         """
         return self.attack_type == parameters.attack_type
 
-    @logged
+    @log_info
     def get_action(self, parameters):
         """
         Create a attack action
@@ -104,7 +103,7 @@ class UnarmedCombatFactory():
 
         return attack
 
-    @logged
+    @log_debug
     def get_target(self, parameters):
         """
         Get target of the attack
@@ -127,7 +126,7 @@ class MeleeCombatFactory():
     """
     Factory for producing melee combat actions
     """
-    @logged
+    @log_debug
     def __init__(self, effect_factory, dying_rules):
         """
         Constructor for this factory
@@ -139,7 +138,7 @@ class MeleeCombatFactory():
     def __str__(self):
         return 'melee combat factory'
 
-    @logged
+    @log_debug
     def can_handle(self, parameters):
         """
         Can this factory process these parameters
@@ -151,7 +150,7 @@ class MeleeCombatFactory():
         """
         return self.attack_type == parameters.attack_type
 
-    @logged
+    @log_info
     def get_action(self, parameters):
         """
         Create a attack action
@@ -179,7 +178,7 @@ class MeleeCombatFactory():
 
         return attack
 
-    @logged
+    @log_debug
     def get_target(self, parameters):
         """
         Get target of the attack

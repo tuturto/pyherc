@@ -21,7 +21,7 @@
 """
 Attack related factories are defined here
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from pyherc.rules.move.action import MoveAction, EscapeAction
 from pyherc.rules.factory import SubActionFactory
 
@@ -29,7 +29,7 @@ class WalkFactory(SubActionFactory):
     """
     Factory for creating walk actions
     """
-    @logged
+    @log_debug
     def __init__(self, level_generator_factory):
         """
         Constructor for this factory
@@ -40,10 +40,11 @@ class WalkFactory(SubActionFactory):
         self.level_generator_factory = level_generator_factory
         self.movement_mode = 'walk'
 
+    @log_debug
     def __str__(self):
         return 'walk factory'
 
-    @logged
+    @log_debug
     def can_handle(self, parameters):
         """
         Can this factory process these parameters
@@ -56,7 +57,7 @@ class WalkFactory(SubActionFactory):
         """
         return self.movement_mode == parameters.movement_mode
 
-    @logged
+    @log_info
     def get_action(self, parameters):
         """
         Create a walk action
@@ -113,7 +114,7 @@ class MoveFactory(SubActionFactory):
     """
     Factory for constructing move actions
     """
-    @logged
+    @log_debug
     def __init__(self, factories):
         """
         Constructor for this factory

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -32,14 +31,14 @@ InventoryParameters - Class used to guide inventory related actions
 SpellCastingParameteres - Class used to guide spell casting
 """
 
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 
 class ActionFactory():
     """
     Object for creating actions
     """
 
-    @logged
+    @log_debug
     def __init__(self, model, factories):
         """
         Construct ActionFactory
@@ -56,7 +55,7 @@ class ActionFactory():
 
         self.model = model
 
-    @logged
+    @log_info
     def get_action(self, parameters):
         """
         Create an action
@@ -68,7 +67,7 @@ class ActionFactory():
         assert factory != None, 'suitable factory not configured'
         return factory.get_action(parameters)
 
-    @logged
+    @log_debug
     def get_sub_factories(self):
         """
         Get all sub factories
@@ -78,7 +77,7 @@ class ActionFactory():
         """
         return self.factories
 
-    @logged
+    @log_debug
     def get_sub_factory(self, parameters):
         """
         Get sub factory to handle parameters
@@ -101,7 +100,7 @@ class ActionParameters():
     Object for controlling action creation
     """
 
-    @logged
+    @log_debug
     def __init__(self):
         """
         Default constructor
@@ -113,7 +112,7 @@ class AttackParameters(ActionParameters):
     Object for controlling attack action creation
     """
 
-    @logged
+    @log_debug
     def __init__(self, attacker, direction, attack_type,
                  random_number_generator):
         """
@@ -134,6 +133,7 @@ class AttackParameters(ActionParameters):
         self.random_number_generator = random_number_generator
         self.model = None
 
+    @log_debug
     def __str__(self):
         """
         Get string representation of this object
@@ -144,7 +144,7 @@ class MoveParameters(ActionParameters):
     """
     Object for controlling move action creation
     """
-    @logged
+    @log_debug
     def __init__(self, character, direction, movement_mode):
         """
         Construct move parameters
@@ -162,6 +162,7 @@ class MoveParameters(ActionParameters):
         self.movement_mode = movement_mode
         self.model = None
 
+    @log_debug
     def __str__(self):
         """
         Get string representation of this object
@@ -172,7 +173,7 @@ class DrinkParameters(ActionParameters):
     """
     Object for controlling drink action creation
     """
-    @logged
+    @log_debug
     def __init__(self, character, item):
         """
         Construct drink parameters
@@ -188,6 +189,7 @@ class DrinkParameters(ActionParameters):
         self.item = item
         self.model = None
 
+    @log_debug
     def __str__(self):
         """
         Get string representation of this object
@@ -198,7 +200,7 @@ class InventoryParameters(ActionParameters):
     """
     Class for controlling inventory action creation
     """
-    @logged
+    @log_debug
     def __init__(self, character, item, sub_action):
         """
         Construct inventory parameters
@@ -224,7 +226,7 @@ class SpellCastingParameters(ActionParameters):
     .. versionadded:: 0.9
     """
     
-    @logged
+    @log_debug
     def __init__(self, caster, direction, spell_name):
         """
         Construct spell casting parameters

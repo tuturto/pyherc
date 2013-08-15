@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -26,7 +25,7 @@ UnarmedToHit
 UnarmedDamage
 """
 
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 from pyherc.rules.attack.action import ToHit
 from pyherc.rules.attack.action import Damage
 
@@ -34,7 +33,7 @@ class UnarmedToHit(ToHit):
     """
     Class to perform to hit calculations in unarmed combat
     """
-    @logged
+    @log_debug
     def __init__(self, attacker, target, random_number_generator):
         """
         Default constructor
@@ -52,7 +51,7 @@ class UnarmedDamage(Damage):
     """
     Damage done in unarmed attack
     """
-    @logged
+    @log_debug
     def __init__(self, damage):
         """
         Default constructor

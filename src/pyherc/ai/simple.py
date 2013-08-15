@@ -25,7 +25,7 @@ Creature will try to find friends, before attacking the player character
 """
 
 import math
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 
 class FlockingHerbivore():
     """
@@ -33,7 +33,7 @@ class FlockingHerbivore():
     Tries to maintain close distance to other animals
     Seeks out player for combat
     """
-    @logged
+    @log_debug
     def __init__(self, character):
         """
         Default constructor
@@ -43,7 +43,7 @@ class FlockingHerbivore():
         """
         self.character = character
 
-    @logged
+    @log_debug
     def act(self, model, action_factory, rng):
         """
         Trigger this AI to assess the situation and act accordingly
@@ -113,7 +113,7 @@ class FlockingHerbivore():
             #we're all alone here
             character.tick = character.tick + 10
 
-    @logged
+    @log_debug
     def find_direction(self, start, end):
         """
         Find direction from start to end

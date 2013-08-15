@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Module for map screen
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from herculeum.ui.text.inventory import InventoryScreen
 from herculeum.ui.text.character import CharacterScreen
 from herculeum.ui.text.endscreen import EndScreen
@@ -33,7 +32,7 @@ class MapScreen():
 
     .. versionadded:: 0.9
     """
-    @logged
+    @log_debug
     def __init__(self, model, surface_manager, action_factory, rng,
                  rules_engine, configuration, screen):
         """
@@ -54,7 +53,7 @@ class MapScreen():
                                               rng)
         self.messages = []
 
-    @logged
+    @log_debug
     def _construct_keymaps(self, config):
         """
         Construct keymaps for handling input
@@ -91,7 +90,7 @@ class MapScreen():
         return keymap, move_keymap
 
 
-    @logged
+    @log_info
     def show(self):
         """
         Show the map
@@ -116,7 +115,7 @@ class MapScreen():
                            controller = EndScreenController())
         dialog.show()
 
-    @logged
+    @log_debug
     def _handle_player_input(self):
         """
         Handle input from player
@@ -146,7 +145,7 @@ class MapScreen():
         elif key == 'Q':
             self.model.end_condition = 1
 
-    @logged
+    @log_debug
     def _move(self, key):
         """
         Process movement key
@@ -158,7 +157,7 @@ class MapScreen():
         self.move_controller.move_or_attack(self.model.player,
                                             direction,
                                             'walk')
-    @logged
+    @log_debug
     def _action_a(self, key):
         """
         Process action a key
@@ -180,7 +179,7 @@ class MapScreen():
             player.move(9,
                         self.action_factory)
 
-    @logged
+    @log_debug
     def refresh_screen(self):
         """
         Draw whole screen
@@ -239,7 +238,7 @@ class MapScreen():
 
         self.screen.refresh()
 
-    @logged
+    @log_debug
     def receive_event(self, event):
         """
         Receive event

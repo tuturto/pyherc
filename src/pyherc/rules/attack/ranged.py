@@ -20,7 +20,7 @@
 """
 Module for ranged combat
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from pyherc.rules.attack.action import ToHit, Damage, AttackAction
 from pyherc.data.geometry import get_target_in_direction
 
@@ -31,7 +31,7 @@ class RangedToHit(ToHit):
     .. versionadded:: 0.8
     """
 
-    @logged
+    @log_debug
     def __init__(self, attacker, target, rng):
         """
         Default constructor
@@ -53,7 +53,7 @@ class RangedDamage(Damage):
     .. versionadded:: 0.8
     """
 
-    @logged
+    @log_debug
     def __init__(self, damage):
         """
         Default constructor
@@ -66,7 +66,7 @@ class RangedCombatFactory():
 
     .. versionadded:: 0.8
     """
-    @logged
+    @log_debug
     def __init__(self, effect_factory, dying_rules):
         """
         Constructor for this factory
@@ -75,7 +75,7 @@ class RangedCombatFactory():
         self.effect_factory = effect_factory
         self.dying_rules = dying_rules
 
-    @logged
+    @log_debug
     def can_handle(self, parameters):
         """
         Can this factory process these parameters
@@ -87,7 +87,7 @@ class RangedCombatFactory():
         """
         return self.attack_type == parameters.attack_type
 
-    @logged
+    @log_info
     def get_action(self, parameters):
         """
         Create a attack action
@@ -115,7 +115,7 @@ class RangedCombatFactory():
 
         return attack
 
-    @logged
+    @log_debug
     def get_target(self, parameters):
         """
         Get target of the attack
@@ -139,6 +139,7 @@ class AdditionalRangedRules():
 
     .. versionadded:: 0.8
     """
+    @log_debug
     def __init__(self, attacker):
         """
         Default constructor
@@ -147,6 +148,7 @@ class AdditionalRangedRules():
 
         self.attacker = attacker
 
+    @log_debug
     def after_attack(self):
         """
         Processing happening after an attack

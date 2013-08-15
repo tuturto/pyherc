@@ -21,7 +21,7 @@
 """
 Module defining spell casting actions
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 
 class SpellCastingAction():
     """
@@ -29,7 +29,7 @@ class SpellCastingAction():
 
     .. versionadded:: 0.9
     """
-    @logged
+    @log_debug
     def __init__(self, caster, spell, effects_factory, dying_rules):
         """
         Default constructor
@@ -48,7 +48,7 @@ class SpellCastingAction():
         self.effects_factory = effects_factory
         self.dying_rules = dying_rules
 
-    @logged
+    @log_info
     def execute(self):
         """
         Executes this action
@@ -56,7 +56,7 @@ class SpellCastingAction():
         self.spell.cast(effects_factory = self.effects_factory,
                         dying_rules = self.dying_rules)
 
-    @logged
+    @log_debug
     def is_legal(self):
         """
         Check if the action is possible to perform

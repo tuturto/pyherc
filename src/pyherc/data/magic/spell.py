@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -23,7 +22,7 @@ Module for spell objects
 """
 
 from pyherc.data.effects import EffectsCollection
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 
 class Spell():
     """
@@ -32,7 +31,7 @@ class Spell():
     .. versionadded:: 0.9
     """
     
-    @logged
+    @log_debug
     def __init__(self):
         """
         Default constructor
@@ -40,7 +39,7 @@ class Spell():
         self.targets = []
         self.effects = EffectsCollection()
 
-    @logged
+    @log_debug
     def add_effect_handle(self, handle):
         """
         Add effect handle
@@ -50,7 +49,7 @@ class Spell():
         """
         self.effects.add_effect_handle(handle)
 
-    @logged
+    @log_debug
     def get_effect_handles(self, trigger = None):
         """
         Get effect handles
@@ -63,7 +62,7 @@ class Spell():
         """
         return self.effects.get_effect_handles(trigger)
 
-    @logged
+    @log_debug
     def remove_effect_handle(self, handle):
         """
         Remove given handle
@@ -73,7 +72,7 @@ class Spell():
         """
         self.effects.remove_effect_handle(handle)
 
-    @logged
+    @log_info
     def cast(self, effects_factory, dying_rules):
         """
         Cast the spell

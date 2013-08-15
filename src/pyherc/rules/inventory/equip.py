@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Module defining classes related to inventory actions
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from pyherc.rules.factory import SubActionFactory
 from pyherc.events import EquipEvent
 
@@ -31,7 +30,7 @@ class EquipFactory(SubActionFactory):
 
     .. versionadded:: 0.8
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Constructor for this factory
@@ -39,7 +38,7 @@ class EquipFactory(SubActionFactory):
         super(EquipFactory, self).__init__()
         self.sub_action = 'equip'
 
-    @logged
+    @log_debug
     def can_handle(self, parameters):
         """
         Can this factory process these parameters
@@ -50,7 +49,7 @@ class EquipFactory(SubActionFactory):
         """
         return self.sub_action == parameters.sub_action
 
-    @logged
+    @log_info
     def get_action(self, parameters):
         """
         Create an equip action
@@ -66,7 +65,7 @@ class EquipAction():
 
     .. versionadded:: 0.8
     """
-    @logged
+    @log_debug
     def __init__(self, character, item):
         """
         Default constructor
@@ -81,7 +80,7 @@ class EquipAction():
         self.character = character
         self.item = item
 
-    @logged
+    @log_info
     def execute(self):
         """
         Executes this action
@@ -99,7 +98,7 @@ class EquipAction():
             self.character.raise_event(EquipEvent(self.character,
                                                   self.item))
 
-    @logged
+    @log_debug
     def is_legal(self):
         """
         Check if the action is possible to perform

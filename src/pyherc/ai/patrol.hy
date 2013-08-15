@@ -19,7 +19,7 @@
 
 (setv __doc__ "module for common AI routines")
 
-(import [pyherc.aspects [logged]]
+(import [pyherc.aspects [log_debug]]
 	[pyherc.ai.pathfinding [a-star]]
 	[pyherc.ai.basic [can-walk? walk wait distance-between new-location]]
 	[pyherc.ai.basic [find-direction]]
@@ -30,7 +30,7 @@
 
 (require pyherc.ai.macros)
 
-(with-decorator logged
+(with-decorator log_debug
   (defn -fight-in-melee [attack-routine close-in-routine ai action-factory]
     "routine to make character to fight"
     (let [[own-location ai.character.location]
@@ -41,7 +41,7 @@
 	(attack-routine ai enemy action-factory (.Random random))
 	(close-in-routine ai enemy action-factory)))))
 
-(with-decorator
+(with-decorator log_debug
   (defn -close-in-enemy [routing-function ai enemy action-factory]
     "get closer to enemy"
     (let [[start-location ai.character.location]
@@ -51,13 +51,13 @@
 				  ai.character.level)]]
       (walk ai action-factory (find-direction start-location (second path))))))
 
-(with-decorator logged
+(with-decorator log_debug
   (defn -select-patrol-area [patrol-area-locator ai]
     (let [[patrol-area (patrol-area-locator ai.character.level)]
 	  [target (.choice random patrol-area)]]
       (assoc ai.mode 1 target))))
 
-(with-decorator logged
+(with-decorator log_debug
   (defn -patrol [is-patrol-area start-patrol ai action-factory]
     "routine to make character to patrol area"
     (let [[future-location (new-location ai.character (second ai.mode))]]
@@ -74,7 +74,7 @@
 	       (walk-random-direction ai action-factory)))
     (wait ai)))))
 
-(with-decorator logged
+(with-decorator log_debug
   (defn -walk-random-direction [ai action-factory]
     "take a random step without changing mode"
     (let [[legal-directions (list-comp direction 
@@ -90,7 +90,7 @@
       (if (can-walk? ai action-factory (second ai.mode)) (walk ai action-factory)
 	  (wait ai)))))
 
-(with-decorator logged
+(with-decorator log_debug
   (defn -find-patrol-area [is-patrollable start-patrolling patrol
 			  move-towards-patrol-area select-patrol-area
 			  ai action-factory]
@@ -104,7 +104,7 @@
 	(move-towards-patrol-area ai action-factory)
 	(select-patrol-area ai)))))
 
-(with-decorator logged
+(with-decorator log_debug
   (defn -patrollable-area-in-level [can-patrol level]
     "routine to find area to patrol in level"
     (let [[patrol-area []]]

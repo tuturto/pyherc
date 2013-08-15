@@ -21,13 +21,13 @@
 """
 Classes for generating catacombs
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 
 class CrimsonLairGenerator():
     """
     Class for generating a catacomblike rooms
     """
-    @logged
+    @log_debug
     def __init__(self, floor_tile, empty_tile, level_types, rng):
         """
         Default constructor
@@ -49,7 +49,7 @@ class CrimsonLairGenerator():
         self.level_types = level_types
         self.rng = rng
 
-    @logged
+    @log_debug
     def generate_room(self, section):
         """
         Generate room

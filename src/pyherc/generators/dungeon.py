@@ -23,13 +23,13 @@ Module for dungeon generation
 """
 
 from pyherc.data import Dungeon
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 
 class DungeonGenerator():
     """
     This class is used to generate dungeon
     """
-    @logged
+    @log_debug
     def __init__(self, creature_generator, item_generator,
                  level_generator):
         """
@@ -43,7 +43,7 @@ class DungeonGenerator():
         self.item_generator = item_generator
         self.level_generator = level_generator
 
-    @logged
+    @log_info
     def generate_dungeon(self, model):
         """
         Generates start of the dungeon

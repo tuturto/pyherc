@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,6 @@
 """
 Module for event helpers
 """
-from pyherc.aspects import logged
 from pyherc.data import Model
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.helpers import EventListener

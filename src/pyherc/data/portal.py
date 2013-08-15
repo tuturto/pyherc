@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -22,13 +21,13 @@
 Module containing classes to represent Portals
 """
 
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 
 class Portal():
     """
     Portal linking two levels together
     """
-    @logged
+    @log_debug
     def __init__(self, icons, level_generator_name):
         """
         Default constructor
@@ -48,7 +47,7 @@ class Portal():
         self.model = None
         self.__update_listeners = []
 
-    @logged
+    @log_debug
     def get_other_end(self, level_generator_factory):
         """
         Returns the other end of the portal
@@ -65,7 +64,7 @@ class Portal():
 
         return self.__other_end
 
-    @logged
+    @log_debug
     def set_other_end(self, portal):
         """
         Set the other end of the portal
@@ -75,6 +74,7 @@ class Portal():
         """
         self.__other_end = portal
 
+    @log_debug
     def __get_icon(self):
         """
         Get icon to display this portal
@@ -84,6 +84,7 @@ class Portal():
         """
         return self.__icons[0]
 
+    @log_debug
     def __set_icon(self, icon):
         """
         Set icon to display this portal
@@ -95,6 +96,7 @@ class Portal():
             self.__icons = (None, None)
         self.__icons = (icon, self.__icons[1])
 
+    @log_debug
     def __get_other_end_icon(self):
         """
         Get icon used for other end of this portal
@@ -104,7 +106,7 @@ class Portal():
         """
         return self.__icons[1]
 
-    @logged
+    @log_debug
     def register_for_updates(self, listener):
         """
         Register listener to receive updates for this entity
@@ -116,7 +118,7 @@ class Portal():
         """
         self.__update_listeners.append(listener)
 
-    @logged
+    @log_debug
     def remove_from_updates(self, listener):
         """
         Remove listener
@@ -128,7 +130,7 @@ class Portal():
         """
         self.__update_listeners.remove(listener)
 
-    @logged
+    @log_debug
     def notify_update_listeners(self, event):
         """
         Notify all listeners registered for update of this entity

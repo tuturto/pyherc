@@ -21,13 +21,13 @@
 """
 Classes for item generation
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 
 class ItemAdderConfiguration():
     """
     Configuration for ItemAdder
     """
-    @logged
+    @log_debug
     def __init__(self, level_types):
         """
         Default constructor
@@ -39,7 +39,7 @@ class ItemAdderConfiguration():
         self.level_types = level_types
         self.items = []
 
-    @logged
+    @log_info
     def add_item(self, min_amount, max_amount, name = None, type = None,
                  location = None):
         """
@@ -70,7 +70,7 @@ class ItemAdder():
     """
     Class for adding items
     """
-    @logged
+    @log_debug
     def __init__(self, item_generator, configuration, rng):
         """
         Default constructor
@@ -87,14 +87,14 @@ class ItemAdder():
         self.configuration = configuration
         self.rng = rng
 
-    @logged
+    @log_debug
     def __get_level_types(self):
         """
         Get level types this item adder can be used at
         """
         return self.configuration.level_types
 
-    @logged
+    @log_info
     def add_items(self, level):
         """
         Add items
@@ -110,7 +110,7 @@ class ItemAdder():
 
         self.place_items(items, level)
 
-    @logged
+    @log_info
     def generate_items(self, item_spec):
         """
         Generate items according to specification
@@ -131,7 +131,7 @@ class ItemAdder():
 
         return items
 
-    @logged
+    @log_info
     def place_items(self, items, level):
         """
         Place items to level

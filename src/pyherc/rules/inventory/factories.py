@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -23,7 +22,7 @@ Inventory manipulation related factories are defined here
 """
 from pyherc.rules.inventory.action import PickUpAction, DropAction
 from pyherc.rules.factory import SubActionFactory
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 
 class PickUpFactory(SubActionFactory):
     """
@@ -31,7 +30,7 @@ class PickUpFactory(SubActionFactory):
 
     .. versionadded:: 0.4
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Constructor for this factory
@@ -39,7 +38,7 @@ class PickUpFactory(SubActionFactory):
         super(PickUpFactory, self).__init__()
         self.sub_action = 'pick up'
 
-    @logged
+    @log_debug
     def can_handle(self, parameters):
         """
         Can this factory process these parameters
@@ -50,7 +49,7 @@ class PickUpFactory(SubActionFactory):
         """
         return self.sub_action == parameters.sub_action
 
-    @logged
+    @log_info
     def get_action(self, parameters):
         """
         Create a pick up action
@@ -66,7 +65,7 @@ class DropFactory(SubActionFactory):
 
     .. versionadded:: 0.5
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Constructor for this factory
@@ -74,7 +73,7 @@ class DropFactory(SubActionFactory):
         super(DropFactory, self).__init__()
         self.sub_action = 'drop'
 
-    @logged
+    @log_debug
     def can_handle(self, parameters):
         """
         Can this factory process these parameters
@@ -85,7 +84,7 @@ class DropFactory(SubActionFactory):
         """
         return self.sub_action == parameters.sub_action
 
-    @logged
+    @log_info
     def get_action(self, parameters):
         """
         Create a drop action
@@ -101,7 +100,7 @@ class InventoryFactory(SubActionFactory):
 
     .. versionadded:: 0.4
     """
-    @logged
+    @log_debug
     def __init__(self, factories):
         """
         Constructor for this factory

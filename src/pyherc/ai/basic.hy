@@ -19,13 +19,13 @@
 
 (setv __doc__ "module for actions")
 
-(import [pyherc.aspects [logged]]
+(import [pyherc.aspects [log_debug]]
 	[pyherc.events [NoticeEvent]]
 	[math [sqrt]])
 
 (require pyherc.ai.macros)
 
-(with-decorator logged
+(with-decorator log_debug
   (defn wait [ai]
     "make character to wait a little bit"
     (setv ai.character.tick 5)))
@@ -37,7 +37,7 @@
 		  "walk"
 		  action-factory))
 
-(with-decorator logged
+(with-decorator log_debug
   (defn walk [ai action-factory &optional direction]
     "take a step to direction the ai is currently moving"
     (if direction

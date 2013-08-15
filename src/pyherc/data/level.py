@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -23,13 +22,13 @@ Module containing classes to represent Level
 """
 
 import random
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 
 class Level():
     """
     Represents a level
     """
-    @logged
+    @log_debug
     def __init__(self, size = (0, 0), floor_type = None, wall_type = None,
                  empty_floor = 0, empty_wall = 0):
         """
@@ -46,7 +45,7 @@ class Level():
         :empty_wall: type of wall for empty
         :type empty_wall: integer
         """
-        super(Level, self).__init__()
+        super().__init__()
 
         self.floor = []
         self.walls = []
@@ -121,7 +120,7 @@ class Level():
 
         return self.walls[loc_x][loc_y]
 
-    @logged
+    @log_debug
     def add_item(self, item, location):
         """
         Add an item to this level
@@ -154,7 +153,7 @@ class Level():
                 items.append(item)
         return items
 
-    @logged
+    @log_debug
     def add_portal(self, portal, location, other_end = None):
         """
         Adds precreated portal on level at given location
@@ -208,7 +207,7 @@ class Level():
 
         return None
 
-    @logged
+    @log_debug
     def add_creature(self, creature, location = None):
         """
         Add a creature to level
@@ -225,7 +224,7 @@ class Level():
         if location != None:
             creature.location = location
 
-    @logged
+    @log_debug
     def remove_creature(self, creature):
         """
         Remove creature from level
@@ -256,7 +255,7 @@ class Level():
 
         return None
 
-    @logged
+    @log_debug
     def find_free_space(self):
         """
         Finds free space where stuff can be placed
@@ -332,7 +331,7 @@ class Level():
         else:
             return True
 
-    @logged
+    @log_debug
     def get_size(self):
         """
         Gets size of level
@@ -345,7 +344,7 @@ class Level():
 
         return (x_size, y_size)
 
-    @logged
+    @log_debug
     def set_location_type(self, location, location_type):
         """
         Set type of location
@@ -357,7 +356,6 @@ class Level():
         """
         self.__location_type[location[0]][location[1]] = location_type
 
-    @logged
     def get_location_type(self, location):
         """
         Get type of location
@@ -369,7 +367,6 @@ class Level():
         """
         return self.__location_type[location[0]][location[1]]
 
-    @logged
     def get_locations_by_type(self, location_type):
         """
         Get locations marked as rooms

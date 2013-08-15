@@ -21,14 +21,14 @@
 """
 Module for Factory for creating effects
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 import copy
 
 class EffectsFactory():
     """
     Factory for creating effects
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Default constructor
@@ -36,7 +36,7 @@ class EffectsFactory():
         super(EffectsFactory, self).__init__()
         self.effects = {}
 
-    @logged
+    @log_info
     def add_effect(self, key, type):
         """
         Add effect to internal dictionary
@@ -47,7 +47,7 @@ class EffectsFactory():
         """
         self.effects[key] = type
 
-    @logged
+    @log_info
     def create_effect(self, key, **kwargs):
         """
         Instantiates new effect with given parameters

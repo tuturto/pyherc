@@ -22,7 +22,7 @@
 AI routines for skeletons
 """
 
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 from pyherc.ai.pathfinding import a_star
 from pyherc.events import NoticeEvent, LoseFocusEvent
 
@@ -32,7 +32,7 @@ class SkeletonWarriorAI():
 
     ..versionadded:: 0.7
     """
-    @logged
+    @log_debug
     def __init__(self, character):
         """
         Default constructor
@@ -45,7 +45,7 @@ class SkeletonWarriorAI():
         self.mode = 'patrol'
         self.destination = None
 
-    @logged
+    @log_debug
     def act(self, model, action_factory, rng):
         """
         Trigger this AI to assess the situation and act accordingly
@@ -85,7 +85,7 @@ class SkeletonWarriorAI():
         else:
             self._combat(model, action_factory, rng)
 
-    @logged
+    @log_debug
     def _wield_weapon(self, action_factory):
         """
         Check if it is possible to wield a weapon and do so
@@ -97,7 +97,7 @@ class SkeletonWarriorAI():
         self.character.equip(weapons[0],
                              action_factory)
 
-    @logged
+    @log_debug
     def _patrol(self, model, action_factory, rng):
         """
         Patrol around the level
@@ -127,7 +127,7 @@ class SkeletonWarriorAI():
         else:
             character.tick = character.tick + 10
 
-    @logged
+    @log_debug
     def _combat(self, model, action_factory, rng):
         """
         Attack enemies
@@ -163,7 +163,7 @@ class SkeletonWarriorAI():
             else:
                 character.tick = character.tick + 10
 
-    @logged
+    @log_debug
     def find_direction(self, start, end):
         """
         Find direction from start to end

@@ -21,7 +21,7 @@
 """
 Module defining classes related to inventory actions
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from pyherc.rules.factory import SubActionFactory
 from pyherc.events import UnEquipEvent
 
@@ -31,7 +31,7 @@ class UnEquipFactory(SubActionFactory):
 
     .. versionadded:: 0.8
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Constructor for this factory
@@ -39,7 +39,7 @@ class UnEquipFactory(SubActionFactory):
         super(UnEquipFactory, self).__init__()
         self.sub_action = 'unequip'
 
-    @logged
+    @log_debug
     def can_handle(self, parameters):
         """
         Can this factory process these parameters
@@ -50,7 +50,7 @@ class UnEquipFactory(SubActionFactory):
         """
         return self.sub_action == parameters.sub_action
 
-    @logged
+    @log_info
     def get_action(self, parameters):
         """
         Create an unequip action
@@ -66,7 +66,7 @@ class UnEquipAction():
 
     .. versionadded:: 0.8
     """
-    @logged
+    @log_debug
     def __init__(self, character, item):
         """
         Default constructor
@@ -81,7 +81,7 @@ class UnEquipAction():
         self.character = character
         self.item = item
 
-    @logged
+    @log_info
     def execute(self):
         """
         Executes this action
@@ -95,7 +95,7 @@ class UnEquipAction():
             self.character.raise_event(UnEquipEvent(self.character,
                                                     self.item))
 
-    @logged
+    @log_debug
     def is_legal(self):
         """
         Check if the action is possible to perform

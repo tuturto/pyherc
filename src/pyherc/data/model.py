@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -22,7 +21,7 @@
 Module for Model related classes
 """
 
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 
 ESCAPED_DUNGEON = 1
 DIED_IN_DUNGEON = 2
@@ -31,7 +30,7 @@ class Model():
     """
     Represents playing world
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Default constructor
@@ -43,7 +42,7 @@ class Model():
         self.__event_listeners = []
         self.end_condition = 0
 
-    @logged
+    @log_debug
     def register_event_listener(self, listener):
         """
         Registers event listener on this model
@@ -53,14 +52,14 @@ class Model():
         assert listener != None
         self.__event_listeners.append(listener)
 
-    @logged
+    @log_debug
     def get_event_listeners(self):
         """
         Retrieve registered event listeners
         """
         return self.__event_listeners[:]
 
-    @logged
+    @log_debug
     def raise_event(self, event):
         """
         Relays event to creatures
@@ -114,6 +113,7 @@ class Damage():
     """
     Damage done in combat
     """
+    @log_debug
     def __init__(self, amount = 0, damage_type = 'bludgeoning',
                         magic_bonus = 0):
         self.amount = amount
@@ -124,10 +124,12 @@ class MimicData():
     """
     Represents mimicing character
     """
+    @log_debug
     def __init__(self, character):
         self.fov_matrix = []
         self.character = character
 
+    @log_debug
     def get_character(self):
         """
         Get mimicing character
@@ -137,6 +139,7 @@ class MimicData():
         """
         return self.character
 
+    @log_debug
     def set_character(self, character):
         """
         Set character mimicing this item

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -22,13 +21,13 @@
 Module for Inventory related classes
 """
 
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 
 class Inventory():
     """
     Represents an inventory of items
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Default constructor
@@ -48,24 +47,28 @@ class Inventory():
         self.shield = None
         self.armour = None
 
+    @log_debug
     def __len__(self):
         """
         Length of the container
         """
         return len(self.__items)
 
+    @log_debug
     def __getitem__(self, key):
         """
         Access an item in Inventory
         """
         return self.__items.__getitem__(key)
 
+    @log_debug
     def __setitem__(self, key, value):
         """
         Set item in inventory
         """
         self.__items.__setitem__(key, value)
 
+    @log_debug
     def __delitem__(self, key):
         """
         Delete item from inventory
@@ -73,18 +76,21 @@ class Inventory():
         item = self.__items[key]
         self.remove(item)
 
+    @log_debug
     def __iter__(self):
         """
         Get iterator for content of inventory
         """
         return self.__items.__iter__()
 
+    @log_debug
     def append(self, item):
         """
         Append an item into inventory
         """
         self.__items.append(item)
 
+    @log_debug
     def remove(self, item):
         """
         Remove item from inventory

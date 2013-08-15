@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Module for handling loading of images and icons
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 import curses
 
 class CursesSurfaceManager():
@@ -30,24 +29,24 @@ class CursesSurfaceManager():
 
     .. versionadded:: 0.9
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Default constructor
         """
-        super(CursesSurfaceManager, self).__init__()
+        super().__init__()
         self.resourcesLoaded = 0
         self.icons = {}
         self.attributes = {}
 
-    @logged
+    @log_debug
     def load_resources(self):
         """
         Load graphics from files
         """
         pass
 
-    @logged
+    @log_debug
     def add_icon(self, key, filename, ascii_char, attributes = None):
         """
         Add icon to internal collection

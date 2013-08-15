@@ -22,14 +22,14 @@
 Module defining classes related to Move
 """
 from pyherc.events import MoveEvent
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import ESCAPED_DUNGEON
 
 class MoveAction():
     """
     Action for moving
     """
-    @logged
+    @log_debug
     def __init__(self, character, new_location, new_level = None):
         """
         Default constructor
@@ -46,7 +46,7 @@ class MoveAction():
         self.new_level = new_level
         self.model = None
 
-    @logged
+    @log_info
     def execute(self):
         """
         Executes this Move
@@ -72,7 +72,7 @@ class MoveAction():
         else:
             self.character.add_to_tick(1)
 
-    @logged
+    @log_debug
     def is_legal(self):
         """
         Check if the move is possible to perform
@@ -101,6 +101,7 @@ class WalkAction(MoveAction):
     """
     Action for walking
     """
+    @log_info
     def execute(self):
         """
         Execute this move
@@ -113,6 +114,7 @@ class EscapeAction(MoveAction):
 
     .. versionadded:: 0.8
     """
+    @log_debug
     def __init__(self, character):
         """
         Default constructor
@@ -121,6 +123,7 @@ class EscapeAction(MoveAction):
                                            new_location = None,
                                            new_level = None)
 
+    @log_info
     def execute(self):
         """
         Execute this move
@@ -128,7 +131,7 @@ class EscapeAction(MoveAction):
         model = self.character.model
         model.end_condition = ESCAPED_DUNGEON
 
-    @logged
+    @log_debug
     def is_legal(self):
         """
         Check if the move is possible to perform

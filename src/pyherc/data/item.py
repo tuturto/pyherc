@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -25,13 +24,13 @@ Classes:
     Item
     WeaponData
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 
 class Item():
     """
     Represents item
     """
-    @logged
+    @log_debug
     def __init__(self, effects_collection):
         """
         Default constructor
@@ -63,7 +62,7 @@ class Item():
     def __str__(self):
         return self.name
 
-    @logged
+    @log_debug
     def get_name(self, character, decorate = False):
         """
         Get name of the item
@@ -96,6 +95,7 @@ class Item():
 
         return name
 
+    @log_debug
     def add_effect_handle(self, handle):
         """
         Adds an effect handle to an item
@@ -107,7 +107,7 @@ class Item():
         """
         self.__effects_collection.add_effect_handle(handle)
 
-    @logged
+    @log_debug
     def get_effect_handles(self, trigger = None):
         """
         Retrieves effects handles the item has
@@ -122,6 +122,7 @@ class Item():
         """
         return self.__effects_collection.get_effect_handles(trigger)
 
+    @log_debug
     def __get_charges_left(self):
         """
         Amount of charges left in collection
@@ -131,6 +132,7 @@ class Item():
         """
         return self.__effects_collection.get_charges_left()
 
+    @log_debug
     def __get_maximum_charges_left(self):
         """
         Return highest amount of charges left in collection
@@ -140,6 +142,7 @@ class Item():
         """
         return self.__effects_collection.get_maximum_charges_left()
 
+    @log_debug
     def __get_minimum_charges_left(self):
         """
         Return smallest amount of charges left in item
@@ -153,7 +156,7 @@ class Item():
     maximum_charges_left = property(__get_maximum_charges_left)
     minimum_charges_left = property(__get_minimum_charges_left)
 
-    @logged
+    @log_debug
     def get_main_type(self):
         """
         Return main type of the item
@@ -176,14 +179,14 @@ class Item():
 
         return main_type
 
-    @logged
+    @log_debug
     def get_tags(self):
         """
         Return tags
         """
         return self.tags
 
-    @logged
+    @log_debug
     def register_for_updates(self, listener):
         """
         Register listener to receive updates for this entity
@@ -195,7 +198,7 @@ class Item():
         """
         self.__update_listeners.append(listener)
 
-    @logged
+    @log_debug
     def remove_from_updates(self, listener):
         """
         Remove listener
@@ -207,7 +210,7 @@ class Item():
         """
         self.__update_listeners.remove(listener)
 
-    @logged
+    @log_debug
     def notify_update_listeners(self, event):
         """
         Notify all listeners registered for update of this entity
@@ -239,6 +242,7 @@ class WeaponData():
     """
     Class representing weapon data of items
     """
+    @log_debug
     def __init__(self, damage = None, critical_range = None,
                  critical_damage = None, weapon_type = None,
                  ammunition_type = None):
@@ -271,6 +275,7 @@ class ArmourData():
 
     .. versionadded:: 0.8
     """
+    @log_debug
     def __init__(self, damage_reduction = None, speed_modifier = None):
         """
         Default constructor
@@ -291,6 +296,7 @@ class AmmunitionData():
 
     .. versionadded:: 0.8
     """
+    @log_debug
     def __init__(self, damage = None, critical_range = None,
                  critical_damage = None, ammunition_type = None, count = 1):
         """

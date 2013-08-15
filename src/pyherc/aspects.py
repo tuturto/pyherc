@@ -75,8 +75,6 @@ def no_logger(wrapped_function):
     """    
     return wrapped_function
 
-logged = log_critical
-
 def set_logger(log_level, silent):
     """
     Set application-wide log level
@@ -86,7 +84,6 @@ def set_logger(log_level, silent):
     global log_warning
     global log_error
     global log_critical
-    global logged
     
     if log_level == 'debug':
         pass
@@ -113,4 +110,3 @@ def set_logger(log_level, silent):
         log_warning = no_logger
         log_error = no_logger
         log_critical = no_logger
-        logged = no_logger        

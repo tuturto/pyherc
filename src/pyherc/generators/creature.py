@@ -23,13 +23,13 @@ Module for creature generation related classes
 """
 from pyherc.data import Character, Inventory
 from pyherc.data.effects import EffectHandle, EffectsCollection
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 
 class CreatureGenerator():
     """
     Class used to generate creatures
     """
-    @logged
+    @log_debug
     def __init__(self, configuration, model, item_generator, rng):
         """
         Default constructor
@@ -40,7 +40,7 @@ class CreatureGenerator():
         self.rng = rng
         self.item_generator = item_generator
 
-    @logged
+    @log_info
     def generate_creature(self, name):
         """
         Generate creature
@@ -87,7 +87,7 @@ class CreatureGenerator():
 
         return new_creature
 
-    @logged
+    @log_debug
     def __get_creature_config(self, name):
         """
         Get creature config
@@ -102,6 +102,7 @@ class CreatureConfiguration():
     Configuration for an creature
     """
 
+    @log_debug
     def __init__(self, name, body, finesse, mind, hp, speed, icons, attack,
                  ai = None, effect_handles = None, effects = None,
                  inventory = None, description = None):
@@ -140,6 +141,7 @@ class InventoryConfiguration():
 
     .. versionadded:: 0.6
     """
+    @log_debug
     def __init__(self, item_name, min_amount, max_amount, probability):
         """
         Default constructor

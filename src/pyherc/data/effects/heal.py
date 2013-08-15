@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Module for healing
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 from pyherc.data.effects.effect import Effect
 from pyherc.events import HealTriggeredEvent, HealAddedEvent, HealEndedEvent
 
@@ -29,7 +28,7 @@ class Heal(Effect):
     """
     Class representing effects of healing
     """
-    @logged
+    @log_debug
     def __init__(self, duration, frequency, tick, healing, target,
                  icon, title, description):
         """
@@ -45,7 +44,7 @@ class Heal(Effect):
         self.target = target
         self.effect_name = 'heal'
 
-    @logged
+    @log_debug
     def do_trigger(self, dying_rules):
         """
         Triggers effects of the healing
@@ -59,7 +58,7 @@ class Heal(Effect):
                         HealTriggeredEvent(target = self.target,
                                            healing = self.healing))
 
-    @logged
+    @log_debug
     def get_add_event(self):
         """
         Get event describing adding of this effect
@@ -70,7 +69,7 @@ class Heal(Effect):
         return HealAddedEvent(target = self.target,
                               effect = self)
 
-    @logged
+    @log_debug
     def get_removal_event(self):
         """
         Get event describing removal of this event

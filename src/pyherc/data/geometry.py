@@ -20,11 +20,11 @@
 """
 Module for various helpers
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 from math import sqrt
 from functools import partial
 
-@logged
+@log_debug
 def get_target_in_direction(level, location, direction, attack_range = 100):
     """
     Get target of the attack
@@ -86,6 +86,7 @@ def get_target_in_direction(level, location, direction, attack_range = 100):
 get_adjacent_target_in_direction = partial(get_target_in_direction,
                                            attack_range = 1.5)
 
+@log_debug
 def distance_between(location1, location2):
     """
     calculate distance between two points
@@ -101,6 +102,7 @@ class TargetData():
 
     .. versionadded:: 0.10
     """
+    @log_debug
     def __init__(self, target_type, location, target, previous_target):
         """
         Default constructor

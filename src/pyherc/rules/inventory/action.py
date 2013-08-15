@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Module defining classes related to inventory actions
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from pyherc.events import PickUpEvent, DropEvent
 
 class PickUpAction():
@@ -30,7 +29,7 @@ class PickUpAction():
 
     .. versionadded:: 0.4
     """
-    @logged
+    @log_debug
     def __init__(self, character, item):
         """
         Default constructor
@@ -44,7 +43,7 @@ class PickUpAction():
         self.character = character
         self.item = item
 
-    @logged
+    @log_info
     def execute(self):
         """
         Executes this action
@@ -61,7 +60,7 @@ class PickUpAction():
 
         self.character.add_to_tick(2)
 
-    @logged
+    @log_debug
     def _merge_similar_items(self):
         """
         Merge similar items in character inventory
@@ -83,7 +82,7 @@ class PickUpAction():
 
         return True
 
-    @logged
+    @log_debug
     def is_legal(self):
         """
         Check if the action is possible to perform
@@ -105,7 +104,7 @@ class DropAction():
 
     .. versionadded:: 0.5
     """
-    @logged
+    @log_debug
     def __init__(self, character, item):
         """
         Default constructor
@@ -120,7 +119,7 @@ class DropAction():
         self.character = character
         self.item = item
 
-    @logged
+    @log_info
     def execute(self):
         """
         Executes this action
@@ -133,7 +132,7 @@ class DropAction():
         self.character.raise_event(DropEvent(self.character,
                                              self.item))
 
-    @logged
+    @log_debug
     def is_legal(self):
         """
         Check if the action is possible to perform

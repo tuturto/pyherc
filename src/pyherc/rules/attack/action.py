@@ -21,14 +21,14 @@
 Module defining classes related to AttackAction
 """
 import random
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from pyherc.events import AttackHitEvent, AttackNothingEvent, AttackMissEvent
 
 class AttackAction():
     """
     Action for attacking
     """
-    @logged
+    @log_debug
     def __init__(self, attack_type, to_hit, damage,
                  attacker, target, effect_factory, dying_rules,
                  additional_rules):
@@ -61,7 +61,7 @@ class AttackAction():
         self.dying_rules = dying_rules
         self.additional_rules = additional_rules
 
-    @logged
+    @log_debug
     def is_legal(self):
         """
         Check if the attack is possible to perform
@@ -74,7 +74,7 @@ class AttackAction():
 
         return True
 
-    @logged
+    @log_info
     def execute(self):
         """
         Executes this Attack
@@ -112,7 +112,7 @@ class AttackAction():
         self.additional_rules.after_attack()
         self.attacker.add_to_tick(3)
 
-    @logged
+    @log_debug
     def __trigger_attack_effects(self):
         """
         Trigger effects
@@ -140,7 +140,7 @@ class ToHit():
     """
     Checks done for hitting
     """
-    @logged
+    @log_debug
     def __init__(self, attacker, target,
                         random_number_generator = random.Random()):
         """
@@ -151,7 +151,7 @@ class ToHit():
         self.target = target
         self.rng = random_number_generator
 
-    @logged
+    @log_debug
     def is_hit(self):
         """
         Checks if the hit lands
@@ -163,7 +163,7 @@ class Damage():
     """
     Damage done in attack
     """
-    @logged
+    @log_debug
     def __init__(self, damage):
         """
         Default constructor
@@ -171,7 +171,7 @@ class Damage():
         self.__damage = damage
         self.damage_inflicted = 0
 
-    @logged
+    @log_debug
     def apply_damage(self, target):
         """
         Applies damage to target
@@ -207,6 +207,7 @@ class Damage():
 
         target.hit_points = target.hit_points - self.damage_inflicted
 
+    @log_debug
     def __get_damage(self):
         """
         Total damage caused
@@ -216,6 +217,7 @@ class Damage():
         """
         return sum(x[0] for x in self.__damage)
 
+    @log_debug
     def __get_damage_types(self):
         """
         Types of damage caused
@@ -235,12 +237,14 @@ class AdditionalRules():
 
     .. versionadded: 0.8
     """
+    @log_debug
     def __init__(self, attacker):
         """
         Default constructor
         """
         super().__init__()
 
+    @log_debug
     def after_attack(self):
         """
         Processing happening after an attack

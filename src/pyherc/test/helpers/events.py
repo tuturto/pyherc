@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,13 +20,13 @@
 """
 Module for event helpers
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 
 class EventListener():
     """
     Event listener that stores all events it receives
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Default constructor
@@ -35,7 +34,7 @@ class EventListener():
         super(EventListener, self).__init__()
         self.events = []
 
-    @logged
+    @log_debug
     def receive_event(self, event):
         """
         Receive event

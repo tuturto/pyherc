@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,14 +20,14 @@
 """
 Module for baseclass of every Effect
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from pyherc.events import Event
 
 class Effect():
     """
     Class representing effects
     """
-    @logged
+    @log_debug
     def __init__(self, duration, frequency, tick,
                  icon, title, description):
         """
@@ -51,7 +50,7 @@ class Effect():
         self.description = description
         self.multiple_allowed = False
 
-    @logged
+    @log_info
     def trigger(self, dying_rules):
         """
         Trigger the effect
@@ -61,14 +60,14 @@ class Effect():
         self.do_trigger(dying_rules)
         self.post_trigger()
 
-    @logged
+    @log_debug
     def do_trigger(self, dying_rules):
         """
         Override this method to contain logic of the effect
         """
         pass
 
-    @logged
+    @log_debug
     def post_trigger(self):
         """
         Do house keeping after effect has been triggered
@@ -77,7 +76,7 @@ class Effect():
             self.tick = self.frequency
             self.duration = self.duration - self.frequency
 
-    @logged
+    @log_debug
     def get_add_event(self):
         """
         Get event describing adding of this effect
@@ -90,7 +89,7 @@ class Effect():
                      location = None,
                      affected_tiles = [])
 
-    @logged
+    @log_debug
     def get_removal_event(self):
         """
         Get event describing removal of this event
@@ -107,6 +106,7 @@ class EffectHandle():
     """
     Handle that can be used to construct effects
     """
+    @log_debug
     def __init__(self, trigger, effect, parameters, charges):
         """
         Default constructor

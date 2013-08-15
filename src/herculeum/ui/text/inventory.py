@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -22,7 +21,7 @@
 Module for inventory screen
 """
 
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from herculeum.ui.controllers import InventoryController
 
 class InventoryScreen():
@@ -31,7 +30,7 @@ class InventoryScreen():
 
     .. versionadded:: 0.9
     """
-    @logged
+    @log_debug
     def __init__(self, character, config, screen, action_factory,
                  parent):
         """
@@ -50,7 +49,7 @@ class InventoryScreen():
                      'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
                      'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D']
 
-    @logged
+    @log_debug
     def _draw_screen(self):
         """
         Update the screen
@@ -73,7 +72,7 @@ class InventoryScreen():
 
         self.screen.refresh()
 
-    @logged
+    @log_info
     def show(self):
         """
         Show inventory screen
@@ -110,7 +109,7 @@ class InventoryScreen():
             self._draw_screen()
             self.parent.refresh()
 
-    @logged
+    @log_debug
     def _show_detailed_info(self, item, character):
         """
         Show detailed information screen for item

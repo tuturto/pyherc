@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Module for poison
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 from pyherc.events import PoisonTriggeredEvent, PoisonAddedEvent
 from pyherc.events import PoisonEndedEvent
 from pyherc.data.effects.effect import Effect
@@ -30,7 +29,7 @@ class Poison(Effect):
     """
     Class representing effects of poison
     """
-    @logged
+    @log_debug
     def __init__(self, duration, frequency, tick, damage, target,
                  icon, title, description):
         """
@@ -46,7 +45,7 @@ class Poison(Effect):
         self.target = target
         self.effect_name = 'poison'
 
-    @logged
+    @log_debug
     def do_trigger(self, dying_rules):
         """
         Triggers effects of the poison
@@ -59,7 +58,7 @@ class Poison(Effect):
 
         dying_rules.check_dying(self.target)
 
-    @logged
+    @log_debug
     def get_add_event(self):
         """
         Get event describing adding of this effect
@@ -70,7 +69,7 @@ class Poison(Effect):
         return PoisonAddedEvent(target = self.target,
                                 effect = self)
 
-    @logged
+    @log_debug
     def get_removal_event(self):
         """
         Get event describing removal of this event

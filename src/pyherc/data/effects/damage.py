@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Module for damage
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 from pyherc.data.effects.effect import Effect
 from pyherc.events import DamageTriggeredEvent
 
@@ -29,7 +28,7 @@ class Damage(Effect):
     """
     Class representing effects of damage
     """
-    @logged
+    @log_debug
     def __init__(self, duration, frequency, tick, damage, target,
                  damage_type,
                  icon, title, description):
@@ -46,7 +45,7 @@ class Damage(Effect):
         self.damage_type = damage_type
         self.target = target
 
-    @logged
+    @log_debug
     def do_trigger(self, dying_rules):
         """
         Triggers effects of the damage

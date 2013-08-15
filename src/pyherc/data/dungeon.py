@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -22,13 +21,13 @@
 Module containing classes to represent dungeon
 """
 
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 
 class Dungeon():
     """
     Represents the dungeon
     """
-    @logged
+    @log_debug
     def __init__(self):
-        super(Dungeon, self).__init__()
+        super().__init__()
         self.levels = None

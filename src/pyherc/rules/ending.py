@@ -23,7 +23,7 @@ Module for checking end conditions
 """
 
 from pyherc.events import DeathEvent, DropEvent
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import DIED_IN_DUNGEON, ESCAPED_DUNGEON
 
 class Dying():
@@ -32,14 +32,14 @@ class Dying():
 
     .. versionadded:: 0.6
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Default constructor
         """
         super(Dying, self).__init__()
 
-    @logged
+    @log_debug
     def check_dying(self, character):
         """
         Check if character dies and process it
@@ -65,7 +65,7 @@ class Dying():
                                              affected_tiles = character.location))
             character.level.remove_creature(character)
 
-    @logged
+    @log_info
     def calculate_score(self, character):
         """
         Calculate score for character

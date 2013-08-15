@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Module for Character related classes
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 from pyherc.rules import InventoryParameters, SpellCastingParameters
 from pyherc.events import HitPointsChangedEvent, ErrorEvent
@@ -43,7 +42,7 @@ class Character():
     """
     Represents a character in playing world
     """
-    @logged
+    @log_debug
     def __init__(self, model, effects_collection, inventory):
         """
         Default constructor
@@ -93,7 +92,7 @@ class Character():
     def __str__(self):
         return self.name
 
-    @logged
+    @log_debug
     def receive_event(self, event):
         """
         Receives an event from world and enters it into short term memory
@@ -106,7 +105,7 @@ class Character():
         for listener in self.__event_listeners:
             listener.receive_event(event)
 
-    @logged
+    @log_debug
     def register_event_listener(self, listener):
         """
         Register event listener
@@ -118,7 +117,7 @@ class Character():
         """
         self.__event_listeners.append(listener)
 
-    @logged
+    @log_debug
     def register_for_updates(self, listener):
         """
         Register listener to receive updates for this entity
@@ -130,7 +129,7 @@ class Character():
         """
         self.__update_listeners.append(listener)
 
-    @logged
+    @log_debug
     def remove_from_updates(self, listener):
         """
         Remove listener
@@ -142,7 +141,7 @@ class Character():
         """
         self.__update_listeners.remove(listener)
 
-    @logged
+    @log_debug
     def notify_update_listeners(self, event):
         """
         Notify all listeners registered for update of this entity
@@ -156,7 +155,7 @@ class Character():
             listener.receive_update(event)
 
     @guarded_action
-    @logged
+    @log_info
     def act(self, model, action_factory, rng):
         """
         Triggers AI of this character
@@ -252,7 +251,7 @@ class Character():
         """
         self.__max_hp = max_hp
 
-    @logged
+    @log_debug
     def identify_item(self, item):
         """
         Identify item
@@ -263,7 +262,7 @@ class Character():
         assert (item != None)
         self.item_memory[item.name] = item.name
 
-    @logged
+    @log_debug
     def is_proficient(self, weapon):
         """
         Check if this character is proficient with a given weapon
@@ -287,6 +286,7 @@ class Character():
         else:
             return False
 
+    @log_debug
     def set_mimic_item(self, item):
         """
         Sets item this character can mimic or pretend to be
@@ -296,6 +296,7 @@ class Character():
         """
         self.mimic_item = item
 
+    @log_debug
     def get_mimic_item(self):
         """
         Gets item this character can mimic
@@ -324,7 +325,7 @@ class Character():
         self.location = location
 
     @guarded_action
-    @logged
+    @log_info
     def execute_action(self, action_parameters, action_factory):
         """
         Execute action defined by action parameters
@@ -338,7 +339,7 @@ class Character():
                                     action_factory)
         action.execute()
 
-    @logged
+    @log_debug
     def create_action(self, action_parameters, action_factory):
         """
         Create an action by defined by action parameters
@@ -356,7 +357,7 @@ class Character():
         return action
 
     @guarded_action
-    @logged
+    @log_info
     def move(self, direction, action_factory):
         """
         Move this character to specified direction
@@ -373,7 +374,7 @@ class Character():
                                                           'walk'))
         action.execute()
 
-    @logged
+    @log_debug
     def is_move_legal(self, direction, movement_mode, action_factory):
         """
         Check if movement is legal
@@ -395,7 +396,7 @@ class Character():
         return action.is_legal()
 
     @guarded_action
-    @logged
+    @log_info
     def perform_attack(self, direction, action_factory, rng):
         """
         Attack to given direction
@@ -442,7 +443,7 @@ class Character():
         action.execute()
 
     @guarded_action
-    @logged
+    @log_info
     def drink(self, potion, action_factory):
         """
         Drink potion
@@ -459,7 +460,7 @@ class Character():
         action.execute()
 
     @guarded_action
-    @logged
+    @log_info
     def pick_up(self, item, action_factory):
         """
         Pick up item
@@ -479,7 +480,7 @@ class Character():
         action.execute()
 
     @guarded_action
-    @logged
+    @log_info
     def drop_item(self, item, action_factory):
         """
         Drop item from inventory
@@ -498,7 +499,7 @@ class Character():
         action.execute()
 
     @guarded_action
-    @logged
+    @log_info
     def equip(self, item, action_factory):
         """
         Wear item from inventory
@@ -517,7 +518,7 @@ class Character():
         action.execute()
 
     @guarded_action
-    @logged
+    @log_info
     def unequip(self, item, action_factory):
         """
         Unequip item
@@ -536,7 +537,7 @@ class Character():
         action.execute()
 
     @guarded_action
-    @logged
+    @log_info
     def cast(self, direction, spell_name, action_factory):
         """
         Cast a spell
@@ -556,7 +557,7 @@ class Character():
                                                        spell_name = spell_name))
         action.execute()
 
-    @logged
+    @log_debug
     def raise_event(self, event):
         """
         Raise event for other creatures to see
@@ -567,7 +568,7 @@ class Character():
         self.model.raise_event(event)
         self.notify_update_listeners(event)
 
-    @logged
+    @log_debug
     def add_effect_handle(self, effect):
         """
         Adds an effect handle to an character
@@ -579,7 +580,7 @@ class Character():
         """
         self.__effects_collection.add_effect_handle(effect)
 
-    @logged
+    @log_debug
     def get_effect_handles(self, trigger = None):
         """
         Get effect handles
@@ -594,7 +595,7 @@ class Character():
         """
         return self.__effects_collection.get_effect_handles(trigger)
 
-    @logged
+    @log_debug
     def remove_effect_handle(self, handle):
         """
         Remove given handle
@@ -606,7 +607,7 @@ class Character():
         """
         self.__effects_collection.remove_effect_handle(handle)
 
-    @logged
+    @log_debug
     def add_effect(self, effect):
         """
         Adds effect to this character
@@ -625,7 +626,7 @@ class Character():
             self.__effects_collection.add_effect(effect)
             self.raise_event(effect.get_add_event())
 
-    @logged
+    @log_debug
     def get_effects(self):
         """
         Get effects of the character
@@ -637,7 +638,7 @@ class Character():
         """
         return self.__effects_collection.get_effects()
 
-    @logged
+    @log_debug
     def remove_expired_effects(self):
         """
         Remove all effects that have expired
@@ -661,7 +662,7 @@ class Character():
         """
         self.tick = self.tick + (self.speed * cost)
 
-    @logged
+    @log_debug
     def get_location_at_direction(self, direction):
         """
         Get location next to this character at given direction
@@ -721,6 +722,7 @@ class Feat():
     """
     Represents a feat that a character can have
     """
+    @log_debug
     def __init__(self, name = None, target = None):
         self.name = name
         self.target = target
@@ -729,6 +731,7 @@ class WeaponProficiency(Feat):
     """
     Represents weapon proficiency feats (proficiency, focus, etc.)
     """
+    @log_debug
     def __init__(self, weapon_type = 'simple', weapon_name = None):
         Feat.__init__(self, weapon_type, weapon_name)
 

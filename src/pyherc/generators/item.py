@@ -26,13 +26,13 @@ import random
 from pyherc.data import Item
 from pyherc.data.item import WeaponData, ArmourData, AmmunitionData
 from pyherc.data.effects import EffectsCollection, EffectHandle
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 
 class ItemGenerator():
     """
     Class used to generate items
     """
-    @logged
+    @log_debug
     def __init__(self, config):
         """
         Default constructor
@@ -43,7 +43,7 @@ class ItemGenerator():
         super(ItemGenerator, self).__init__()
         self.config = config
 
-    @logged
+    @log_info
     def generate_item(self, name = None, item_type = None):
         """
         Generate an item
@@ -62,7 +62,7 @@ class ItemGenerator():
 
         return item
 
-    @logged
+    @log_debug
     def find_item_specification(self, name = None, item_type = None):
         """
         Find item specification by given parameters
@@ -79,7 +79,7 @@ class ItemGenerator():
         else:
             return self.config.get_by_type(item_type)
 
-    @logged
+    @log_debug
     def create_item(self, item_specification):
         """
         Create new item based on specification
@@ -139,6 +139,7 @@ class ItemConfigurations():
     """
     Class for configuring items
     """
+    @log_debug
     def __init__(self, rng):
         """
         Default constructor
@@ -151,7 +152,7 @@ class ItemConfigurations():
         self.__items_by_name = {}
         self.rng = rng
 
-    @logged
+    @log_debug
     def add_item(self, item_config):
         """
         Add item to internal configuration
@@ -159,7 +160,7 @@ class ItemConfigurations():
         self.__items.append(item_config)
         self.__items_by_name[item_config.name] = item_config
 
-    @logged
+    @log_debug
     def get_all_items(self):
         """
         Returns all items
@@ -169,7 +170,7 @@ class ItemConfigurations():
         """
         return self.__items
 
-    @logged
+    @log_debug
     def get_by_name(self, name):
         """
         Retrieve specification of item by name
@@ -181,7 +182,7 @@ class ItemConfigurations():
         """
         return self.__items_by_name[name]
 
-    @logged
+    @log_debug
     def get_by_type(self, item_type):
         """
         Retrieve a random specification of item by type
@@ -217,7 +218,7 @@ class ItemConfiguration():
                 'uncommon': 256,
                 'common': 1024}
 
-    @logged
+    @log_debug
     def __init__(self, name, cost, weight, icons, types, rarity,
                  weapon_configration = None, effect_handles = None,
                  armour_configuration = None,
@@ -245,7 +246,7 @@ class WeaponConfiguration():
     """
     Class representing weapon configuration
     """
-    @logged
+    @log_debug
     def __init__(self, damage, critical_range, critical_damage, weapon_class,
                  ammunition_type = None):
         """
@@ -263,7 +264,7 @@ class ArmourConfiguration():
     """
     Class representing armour configuration
     """
-    @logged
+    @log_debug
     def __init__(self, damage_reduction, speed_modifier):
         """
         Default constructor
@@ -279,7 +280,7 @@ class AmmunitionConfiguration():
 
     .. versionadded:: 0.8
     """
-    @logged
+    @log_debug
     def __init__(self, damage, critical_range, critical_damage,
                  ammunition_type, count):
         """

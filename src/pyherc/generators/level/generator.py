@@ -24,13 +24,13 @@ Classs needed for generating levels
 
 import logging
 from pyherc.data import Level, Portal
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 
 class LevelGeneratorFactory():
     """
     Class used to contruct different kinds of level generators
     """
-    @logged
+    @log_debug
     def __init__(self, portal_adder_factory, configuration,
                  random_generator):
         """
@@ -53,7 +53,7 @@ class LevelGeneratorFactory():
         self.random_generator = random_generator
         self.level_infos = configuration.contexts
 
-    @logged
+    @log_info
     def get_generator(self, level_type):
         """
         Get LevelGenerator for given level
@@ -98,7 +98,7 @@ class LevelGeneratorFactory():
                               self.random_generator,
                               level_info)
 
-    @logged
+    @log_debug
     def get_sub_components(self, level_type, component_list, component_type):
         """
         Get subcomponent
@@ -125,7 +125,7 @@ class LevelGeneratorFactory():
 
         return components
 
-    @logged
+    @log_debug
     def get_sub_component(self, level_type, component_list, component_type):
         """
         Get subcomponent
@@ -158,7 +158,7 @@ class LevelGenerator():
     """
     Class used to generate levels
     """
-    @logged
+    @log_debug
     def __init__(self, partitioner, room_generators,
                  decorator, portal_adders,
                  item_adder, creature_adder,
@@ -187,7 +187,7 @@ class LevelGenerator():
         self.portal_adders = portal_adders
         self.level_context = level_context
 
-    @logged
+    @log_info
     def generate_level(self, portal):
         """
         Generate level

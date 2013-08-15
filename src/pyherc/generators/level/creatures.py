@@ -22,13 +22,13 @@
 Classes for creature generation
 """
 
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 
 class CreatureAdderConfiguration():
     """
     Class used to configure CreatureAdder
     """
-    @logged
+    @log_debug
     def __init__(self, level_types):
         """
         Default constructor
@@ -40,7 +40,7 @@ class CreatureAdderConfiguration():
         self.level_types = level_types
         self.creature_list = []
 
-    @logged
+    @log_info
     def add_creature(self, min_amount, max_amount, name, location = None):
         """
         Adds creature specification
@@ -66,7 +66,7 @@ class CreatureAdder():
     """
     Class used to add creatures during level generation
     """
-    @logged
+    @log_debug
     def __init__(self, creature_generator, configuration, rng):
         """
         Default constructor
@@ -83,7 +83,7 @@ class CreatureAdder():
         self.configuration = configuration
         self.rng = rng
 
-    @logged
+    @log_debug
     def __get_level_types(self):
         """
         Get level types this adder can be used at
@@ -93,7 +93,7 @@ class CreatureAdder():
         """
         return self.configuration.level_types
 
-    @logged
+    @log_info
     def add_creatures(self, level):
         """
         Add creatures to level according to configuration
@@ -112,7 +112,7 @@ class CreatureAdder():
 
         self.place_creatures(creatures, creature_list, level)
 
-    @logged
+    @log_debug
     def generate_creatures(self, name, amount):
         """
         Generate creatures
@@ -131,7 +131,7 @@ class CreatureAdder():
 
         return creatures
 
-    @logged
+    @log_debug
     def place_creatures(self, creatures, creature_list, level):
         """
         Place creatures into a level

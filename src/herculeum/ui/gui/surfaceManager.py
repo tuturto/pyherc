@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -22,7 +21,7 @@
 Module for handling loading of images and icons
 """
 
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 from PyQt4.QtGui import QPixmap
 from PyQt4.QtCore import QRect
 import herculeum.ui.gui.resources
@@ -31,7 +30,7 @@ class QtSurfaceManager():
     """
     Class for managing images and icons
     """
-    @logged
+    @log_debug
     def __init__(self):
         """
         Default constructor
@@ -41,6 +40,7 @@ class QtSurfaceManager():
         self.images = {}
         self.resourcesLoaded = 0
 
+    @log_debug
     def __load_image(self, image_name):
         """
         Load a file and return corresponding surface object
@@ -56,7 +56,7 @@ class QtSurfaceManager():
 
         return image
 
-    @logged
+    @log_debug
     def add_icon(self, key, filename, ascii_char, attributes = None):
         """
         Add icon to internal collection
@@ -67,7 +67,7 @@ class QtSurfaceManager():
 
         return key
 
-    @logged
+    @log_debug
     def load_resources(self):
         """
         Load graphics from files
@@ -76,7 +76,7 @@ class QtSurfaceManager():
         surface = self.__load_image(':transparent.png')
         self.icons['transparent'] = surface
 
-    @logged
+    @log_debug
     def split_surface(self, image, tile_size):
         """
         Split image to tiles
@@ -110,7 +110,6 @@ class QtSurfaceManager():
 
         return tiles
 
-    @logged
     def get_image(self, id):
         """
         Get image with ID
@@ -122,7 +121,6 @@ class QtSurfaceManager():
         """
         return self.images[id]
 
-    @logged
     def get_icon(self, id):
         """
         Get icon with ID

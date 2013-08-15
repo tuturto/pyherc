@@ -24,7 +24,7 @@ Classes for generating pillar rooms
 
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from random import Random
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 
 class PillarRoomGenerator():
     """
@@ -32,7 +32,7 @@ class PillarRoomGenerator():
 
     .. versionadded:: 0.8
     """
-    @logged
+    @log_debug
     def __init__(self, floor_tile, empty_tile, pillar_tile, level_types):
         """
         Default constructor
@@ -53,7 +53,7 @@ class PillarRoomGenerator():
         self.pillar_tile = pillar_tile
         self.rng = Random()
 
-    @logged
+    @log_debug
     def generate_room(self, section):
         """
         Generate room
@@ -68,7 +68,7 @@ class PillarRoomGenerator():
         for index, corner in enumerate(self.square_generator.room_corners):
             self.add_pillar(section, corner, offset[index])
 
-    @logged
+    @log_debug
     def add_pillar(self, section, corner, pillar):
         """
         Add pillar if location is free

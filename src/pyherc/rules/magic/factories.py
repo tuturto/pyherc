@@ -23,7 +23,7 @@ Spell casting related factories
 """
 from pyherc.rules.factory import SubActionFactory
 from pyherc.rules.magic.action import SpellCastingAction
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug, log_info
 
 class SpellCastingFactory(SubActionFactory):
     """
@@ -31,7 +31,7 @@ class SpellCastingFactory(SubActionFactory):
 
     .. versionadded:: 0.9
     """
-    @logged
+    @log_debug
     def __init__(self, spell_factory, effects_factory):
         """
         Constructor for this factory
@@ -40,7 +40,7 @@ class SpellCastingFactory(SubActionFactory):
         self.effects_factory = effects_factory
         self.action_type = 'spell casting'
 
-    @logged
+    @log_info
     def get_action(self, parameters):
         """
         Create a spell casting action
@@ -56,7 +56,7 @@ class SpellCastingFactory(SubActionFactory):
                                   effects_factory = self.effects_factory,
                                   dying_rules = None)
 
-    @logged
+    @log_debug
     def _get_spell_targets(self, parameters):
         """
         Get targets for spell

@@ -24,13 +24,13 @@ Module for partitioning level to equal grid
 
 import logging
 from pyherc.generators.level.partitioners.section import Section
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 
 class RandomConnector():
     """
     Class for building random connection network from sections
     """
-    @logged
+    @log_debug
     def __init__(self, random_generator):
         """
         Default constructor
@@ -41,7 +41,7 @@ class RandomConnector():
         self.random_generator = random_generator
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.grid.RandomConnector') #pylint: disable=C0301
 
-    @logged
+    @log_debug
     def connect_sections(self, sections, start_section = None):
         """
         Connects sections together
@@ -76,7 +76,7 @@ class RandomConnector():
 
         return sections
 
-    @logged
+    @log_debug
     def form_path_from_sections(self, start_section, sections):
         """
         Builds path of connected sections
@@ -105,7 +105,7 @@ class GridPartitioner():
     """
     Class for partitioning level to equal grid
     """
-    @logged
+    @log_debug
     def __init__(self, level_types, x_sections,  y_sections, random_generator):
         """
         Default constructor
@@ -125,7 +125,7 @@ class GridPartitioner():
         self.y_sections = y_sections
         self.random_generator = random_generator
 
-    @logged
+    @log_debug
     def partition_level(self, level):
         """
         Creates partitioning for a given level with connection points
@@ -166,7 +166,7 @@ class GridPartitioner():
 
         return connected_sections
 
-    @logged
+    @log_debug
     def connect_new_section(self, section, location, sections):
         """
         Connects section in given location to its neighbours
@@ -187,7 +187,7 @@ class GridPartitioner():
             up_section.neighbours.append(section)
             section.neighbours.append(up_section)
 
-    @logged
+    @log_debug
     def split_range_to_equals(self, length, sections):
         """
         Split range into equal sized chunks

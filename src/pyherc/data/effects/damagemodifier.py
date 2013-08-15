@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Module for damage modifiers
 """
-from pyherc.aspects import logged
+from pyherc.aspects import log_debug
 from pyherc.data.effects.effect import Effect
 
 class DamageModifier(Effect):
@@ -30,7 +29,7 @@ class DamageModifier(Effect):
 
     .. versionadded:: 0.7
     """
-    @logged
+    @log_debug
     def __init__(self, modifier, damage_type, duration, frequency, tick,
                  icon, title, description):
         """
@@ -47,6 +46,7 @@ class DamageModifier(Effect):
         self.effect_name = 'damage modifier'
         self.multiple_allowed = True
 
+    @log_debug
     def clone(self):
         """
         Temporary hack for tech day
