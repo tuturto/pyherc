@@ -36,6 +36,7 @@ Install game and dependencies::
 
     pip install -U hy
     pip install -U decorator
+    pip install -U docopts
     pip install -U herculeum
 
 After this the game can be run by executing script herculeum from command line.
@@ -51,6 +52,7 @@ Dependencies
 ------------
 - Python 3.3
 - Hy 0.9.10
+- docopts 0.6.1
 - PyQt4
 - decorator
 - mockito-python 0.5.0 (only needed for running test cases)
