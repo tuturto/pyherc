@@ -32,6 +32,7 @@ from pyherc.test.builders import EffectsFactoryBuilder
 from pyherc.data.effects import Heal, Damage
 from pyherc.rules import Dying
 from pyherc.data.effects import Poison
+from pyherc.data.geometry import find_direction
 
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
@@ -193,41 +194,10 @@ class CastSpell():
                                     .with_spellcasting_factory(spell_casting_factory)
                                     .build())
 
-        caster.cast(direction = _find_direction(caster, self.target),
+        caster.cast(direction = find_direction(caster.location,
+                                               self.target.location),
                     spell_name = self.spell_name, 
                     action_factory = action_factory)
-
-def _find_direction(caster, target):
-    """
-    Find direction from caster to target
-    """
-    if target == None:
-        return 1
-
-    c_loc = caster.location
-    t_loc = target.location
-
-    if c_loc[0] == t_loc[0]:
-        if c_loc[1] < t_loc[1]:
-            return 1
-        else:
-            return 5
-    elif c_loc[1] == t_loc[1]:
-        if c_loc[0] < t_loc[0]:
-            return 3
-        else:
-            return 7
-
-    if c_loc[1] < t_loc[1]:
-        if c_loc[0] < t_loc[1]:
-            return 2
-        else:
-            return 8
-    else:
-        if c_loc[0] < t_loc[1]:
-            return 4
-        else:
-            return 6
 
 def cast_spell(spell_name, target = None):
     """
@@ -273,45 +243,10 @@ class Hit():
                                     .with_dying_rules()
                                     .build())
 
-        attacker.perform_attack(self.find_direction(attacker.location,
-                                                    self.target.location),
+        attacker.perform_attack(find_direction(attacker.location,
+                                               self.target.location),
                                 action_factory,
                                 rng)
-
-    def find_direction(self, start, end):
-        """
-        Find direction from one point to another
-
-        :param start: start location
-        :type start: (int, int)
-        :param end: end location
-        :type end: (int, int)
-        """
-        direction = 0
-        if start[0] > end[0]:
-            #to left
-            if start[1] < end[1]:
-                direction = 8
-            elif start[1] > end[1]:
-                direction = 6
-            else:
-                direction = 7
-        elif start[0] < end[0]:
-            #to right
-            if start[1] < end[1]:
-                direction = 2
-            elif start[1] > end[1]:
-                direction = 4
-            else:
-                direction = 3
-        elif start[1] < end[1]:
-            #down
-            direction = 5
-        else:
-            #up
-            direction = 1
-        return direction
-
 
 def hit(target):
     """

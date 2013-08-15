@@ -37,7 +37,7 @@
 	  [enemy (second ai.mode)]
 	  [enemy-location enemy.location]
 	  [distance (distance-between own-location enemy-location)]]
-      (if (< distance 2)
+      (if (= distance 1)
 	(attack-routine ai enemy action-factory (.Random random))
 	(close-in-routine ai enemy action-factory)))))
 

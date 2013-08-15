@@ -96,6 +96,21 @@ def distance_between(location1, location2):
 
     return sqrt(x_difference**2 + y_difference**2)
 
+def find_direction(start, end):
+    """
+    Find direction from start to end
+    """
+    if start[0] == end[0]:
+        if start[1] < end[1]:
+            return 5
+        else:
+            return 1
+    elif start[1] == end[1]:
+        if start[0] < end[0]:
+            return 3
+        else:
+            return 7
+
 class TargetData():
     """
     Represents target

@@ -448,10 +448,18 @@ class Level():
         nodes = []
         loc_x = node[0]
         loc_y = node[1]
-        for x in range(loc_x - 1, loc_x + 2):
-            for y in range(loc_y -1, loc_y + 2):
-                if (x != loc_x or y != loc_y) and not self.blocks_movement(x, y):
-                    nodes.append((x, y))
+
+        if not self.blocks_movement(loc_x - 1, loc_y):
+            nodes.append((loc_x - 1, loc_y))
+
+        if not self.blocks_movement(loc_x + 1, loc_y):
+            nodes.append((loc_x + 1, loc_y))
+
+        if not self.blocks_movement(loc_x, loc_y - 1):
+            nodes.append((loc_x, loc_y - 1))
+
+        if not self.blocks_movement(loc_x, loc_y + 1):
+            nodes.append((loc_x, loc_y + 1))
 
         return nodes
 
