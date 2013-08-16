@@ -166,27 +166,15 @@ class PlayMapWidget(QWidget):
         for key in config.move_left:
             keymap[key] = self._move
             move_keymap[key] = 7
-        for key in config.move_up_left:
-            keymap[key] = self._move
-            move_keymap[key] = 8
         for key in config.move_up:
             keymap[key] = self._move
             move_keymap[key] = 1
-        for key in config.move_up_right:
-            keymap[key] = self._move
-            move_keymap[key] = 2
         for key in config.move_right:
             keymap[key] = self._move
             move_keymap[key] = 3
-        for key in config.move_down_right:
-            keymap[key] = self._move
-            move_keymap[key] = 4
         for key in config.move_down:
             keymap[key] = self._move
             move_keymap[key] = 5
-        for key in config.move_down_left:
-            keymap[key] = self._move
-            move_keymap[key] = 6
         for key in config.start:
             keymap[key] = self._menu
         for key in config.action_a:
