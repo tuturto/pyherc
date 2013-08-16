@@ -54,7 +54,7 @@ def create_logger(log_level):
 
             return result
         except Exception as err:
-            logger.critical(err)
+            logger.exception('{0} has thrown an exception'.format(logger_name))
             raise
 
     return level_logger
