@@ -16,9 +16,12 @@ of correct tools. Buttons used to control the game are:
  * switch to sub menu left: |lb|, insert, page up, q
  * switch to sub menu right: |rb|, delete, page down, w
  * attack: |rt|, control
+ * spirit skill: |lt|, alt
+ * select next spirit skill: |rb|, delete, page down, w
+ * select previous spirit skill: |lb|, delete, page down, w
 
-.. hint:: a tool like Xpadder_ enables you to use joypad for playing, thus
-   making the game more enjoyable.
+.. hint:: a tool like Xpadder_ or qjoypad_ enables you to use joypad for
+   playing, thus making the game more enjoyable.
  
 *******************
 Starting a new game
@@ -103,6 +106,8 @@ Top of the screen shows his current statistics: body, mind, finesse, hit points
 and mana. Below of them are details of currently active effects.
 
 .. _Xpadder: http://www.xpadder.com/
+
+.. _qjoypad: http://qjoypad.sourceforge.net/
 
 .. |action_a| image:: images/action_a.png
               :alt: Action A

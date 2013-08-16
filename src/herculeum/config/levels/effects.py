@@ -81,4 +81,15 @@ def init_effects(context):
                     'title': 'Major fire damage',
                     'description': 'Causes major amount of fire damage'}))
 
+    config.append(('fire',
+                   {'type': Damage,
+                   'duration': 30,
+                   'frequency': 10,
+                   'tick': 0,
+                   'damage': 5,
+                   'damage_type': 'fire',
+                   'icon': None,
+                   'title': 'Fire',
+                   'description': 'You are on fire!'}))
+
     return config

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -33,7 +32,7 @@ class QtControlsConfiguration():
         """
         Default constructor
         """
-        super(QtControlsConfiguration, self).__init__()
+        super().__init__()
 
         self.move_left = [Qt.Key_4, Qt.Key_Left, Qt.Key_H]
         self.move_up_left = [Qt.Key_7, Qt.Key_Y]

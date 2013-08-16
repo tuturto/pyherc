@@ -510,6 +510,12 @@ class PlayMapWidget(QWidget):
                 player.perform_attack(direction,
                                       self.action_factory,
                                       self.rng)
+        elif modifiers & Qt.AltModifier:
+            if direction != 9:
+                player.cast(direction,
+                            'fireball',
+                            self.action_factory)
+            
         else:
             self.move_controller.move_or_attack(player,
                                                 direction,

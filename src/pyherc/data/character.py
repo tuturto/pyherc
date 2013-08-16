@@ -67,8 +67,8 @@ class Character():
         self.kit = None
         self.__hit_points = None
         self.__max_hp = None
-        self.spirit = None
-        self.max_spirit = None
+        self.spirit = 100
+        self.max_spirit = 100
         self.speed = None
         self.inventory = inventory
         self.feats = []

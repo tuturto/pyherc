@@ -37,6 +37,7 @@ from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
 from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.unequip import UnEquipFactory
 from pyherc.rules.wait import WaitFactory
+from pyherc.rules.magic import SpellCastingFactory
 from pyherc.generators import ItemGenerator, CreatureGenerator
 from pyherc.generators.level.portals import PortalAdderFactory
 
@@ -44,6 +45,7 @@ from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 
 from pyherc.generators import EffectsFactory
+from pyherc.generators import SpellGenerator
 
 from pyherc.generators import ItemConfigurations
 
@@ -121,6 +123,11 @@ class Configuration():
                                              UnEquipFactory()])
 
         wait_factory = WaitFactory()
+        
+        spell_factory = SpellGenerator()
+
+        spell_casting_factory = SpellCastingFactory(spell_factory,
+                                                    effect_factory)
 
         self.action_factory = ActionFactory(
                                             self.model,
@@ -128,7 +135,8 @@ class Configuration():
                                             attack_factory,
                                             drink_factory,
                                             inventory_factory,
-                                            wait_factory])
+                                            wait_factory,
+                                            spell_casting_factory])
 
         self.rules_engine = RulesEngine(self.action_factory,
                                         dying_rules)
