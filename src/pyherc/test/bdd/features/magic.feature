@@ -36,7 +36,7 @@ Feature: Magic
         And Rune should not be in inventory of Simon
 
   @active
-  Scenario: Out of mana
-      Given Simon has no mana left
+  Scenario: Out of spirit
+      Given Simon has no spirit left
        When Simon casts magic missile on Uglak
        Then Uglak should be alive
