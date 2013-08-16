@@ -194,8 +194,13 @@ class CastSpell():
                                     .with_spellcasting_factory(spell_casting_factory)
                                     .build())
 
-        caster.cast(direction = find_direction(caster.location,
-                                               self.target.location),
+        if self.target:
+            direction = find_direction(caster.location,
+                                       self.target.location)
+        else:
+            direction = 1
+            
+        caster.cast(direction = direction,
                     spell_name = self.spell_name, 
                     action_factory = action_factory)
 
