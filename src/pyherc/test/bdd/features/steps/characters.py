@@ -22,6 +22,7 @@ from pyherc.data.effects import DamageModifier
 from pyherc.test.cutesy import Adventurer, Wizard, Goblin
 from pyherc.test.matchers import is_dead
 from pyherc.ai.pathfinding import a_star
+from pyherc.data.geometry import find_direction
 from hamcrest import assert_that, is_not #pylint: disable-msg=E0611
 from pyherc.test.bdd.features.helpers import default_context, observed
 from pyherc.test.bdd.features.helpers import with_action_factory
@@ -114,38 +115,3 @@ def impl(context, character_name, portal_name):
 
     character.move(9,
                    context.action_factory)
-
-def find_direction(start, end):
-    direction = None
-    if start[0] < end[0]:
-        #right side
-        if start[1] < end[1]:
-            #right, below
-            direction = 4
-        elif start[1] > end[1]:
-            #right, above
-            direction = 2
-        else:
-            #right
-            direction = 3
-    elif start[0] > end[0]:
-        #left side
-        if start[1] < end[1]:
-            #left, below
-            direction = 6
-        elif start[1] > end[1]:
-            #left, above
-            direction = 8
-        else:
-            #left
-            direction = 7
-    else:
-        #up or down
-        if start[1] < end[1]:
-            #below
-            direction = 5
-        elif start[1] > end[1]:
-            #above
-            direction = 1
-
-    return direction

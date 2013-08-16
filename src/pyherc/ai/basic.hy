@@ -61,10 +61,7 @@
     (if (= start-x end-x)
       (if (< start-y end-y) :south :north)
       (if (= start-y end-y)
-	(if (< start-x end-x) :east :west)
-	(if (< start-y end-y)
-	  (if (< start-x end-x) :south-east :south-west)
-	  (if (< start-x end-x) :north-east :north-west))))))
+	(if (< start-x end-x) :east :west)))))
 
 (def direction-mapping {1 :north 2 :north-east 3 :east 4 :south-east 5 :south
 			6 :south-west 7 :west 8 :north-west 9 :enter

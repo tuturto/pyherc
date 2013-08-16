@@ -6,7 +6,7 @@ Release 0.10
 New features
 ************
 
-
+ - regular movement and attack can be done only to cardinal directions
 
 **********
 Fixed bugs
