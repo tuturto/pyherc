@@ -74,6 +74,8 @@ class MapScreen():
             move_keymap[key] = 5
         for key in config.action_a:
             keymap[key] = self._action_a
+        for key in config.back:
+            keymap[key] = self._back
 
         return keymap, move_keymap
 
@@ -145,6 +147,20 @@ class MapScreen():
         self.move_controller.move_or_attack(self.model.player,
                                             direction,
                                             'walk')
+
+    @log_debug
+    def _back(self, key):
+        """
+        Process back key        
+
+        :param key: key triggering the processing
+        :type key: int
+        
+        .. versionadded:: 0.10
+        """
+        player = self.model.player
+        player.wait(self.action_factory)
+    
     @log_debug
     def _action_a(self, key):
         """

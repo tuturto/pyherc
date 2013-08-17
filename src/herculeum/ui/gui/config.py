@@ -50,7 +50,7 @@ class QtControlsConfiguration():
         self.action_y = [Qt.Key_Tab]
 
         self.start = [Qt.Key_Return]
-        self.back = [Qt.Key_Escape]
+        self.back = [Qt.Key_Escape, Qt.Key_C]
 
         self.left_shoulder = [Qt.Key_Insert, Qt.Key_PageUp, Qt.Key_Q]
         self.right_shoulder = [Qt.Key_Delete, Qt.Key_PageDown, Qt.Key_W]

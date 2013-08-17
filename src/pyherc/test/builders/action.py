@@ -36,6 +36,7 @@ from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
 from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.unequip import UnEquipFactory
 from pyherc.rules.magic import SpellCastingFactory
+from pyherc.rules.wait.factories import WaitFactory
 
 class ActionFactoryBuilder():
     """
@@ -57,6 +58,8 @@ class ActionFactoryBuilder():
         self.move_factory.action_type = 'move'
         self.spellcasting_factory = mock()
         self.spellcasting_factory.action_type = 'cast spell'
+        self.wait_factory = mock()
+        self.wait_factory.action_type = 'wait'
         self.dying_rules = mock()
 
         self.effect_factory = mock()
@@ -65,6 +68,7 @@ class ActionFactoryBuilder():
         self.use_real_inventory_factory = False
         self.use_real_move_factory = False
         self.use_real_spellcasting_factory = False
+        self.use_real_wait_factory = False
         self.use_real_dying_rules = False        
 
     def with_model(self, model):
@@ -117,6 +121,21 @@ class ActionFactoryBuilder():
                 self.spellcasting_factory = spellcasting_factory.build()
             else:
                 self.spellcasting_factory = spellcasting_factory
+        return self
+
+    def with_wait_factory(self, wait_factory = None):
+        """
+        Configure wait factory to use
+
+        .. versionadded:: 0.10
+        """
+        if not wait_factory:
+            self.use_real_wait_factory = True
+        else:
+            if hasattr(wait_factory, 'build'):
+                self.wait_factory = wait_factory.build()
+            else:
+                self.wait_factory = wait_factory
         return self
 
     def with_inventory_factory(self):
@@ -188,12 +207,17 @@ class ActionFactoryBuilder():
         
         if self.use_real_spellcasting_factory:
             self.spellcasting_factory = SpellCastingFactoryBuilder().build()
+
+        if self.use_real_wait_factory:
+            self.wait_factory = WaitFactoryBuilder().build()
+            
         action_factory = ActionFactory(self.model,
                                        [self.move_factory,
                                         self.drink_factory,
                                         self.attack_factory,
                                         self.inventory_factory, 
-                                        self.spellcasting_factory])
+                                        self.spellcasting_factory,
+                                        self.wait_factory])
 
         return action_factory
 
@@ -239,6 +263,24 @@ class DrinkFactoryBuilder():
         return DrinkFactory(self.effect_factory,
                             self.dying_rules)
 
+class WaitFactoryBuilder():
+    """
+    Builder for wait factory
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super().__init__()
+
+    def build(self):
+        """
+        Build wait factory
+        """
+        return WaitFactory()
+
 class SpellCastingFactoryBuilder():
     """
     Builder for spell casting factory
@@ -249,7 +291,7 @@ class SpellCastingFactoryBuilder():
         """
         Default constructor
         """
-        super(SpellCastingFactoryBuilder, self).__init__()
+        super().__init__()
         
         self.spell_factory = mock()
         self.use_real_spell_factory = False

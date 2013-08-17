@@ -179,6 +179,8 @@ class PlayMapWidget(QWidget):
             keymap[key] = self._menu
         for key in config.action_a:
             keymap[key] = self._action_a
+        for key in config.back:
+            keymap[key] = self._back
 
         return keymap, move_keymap
 
@@ -521,6 +523,16 @@ class PlayMapWidget(QWidget):
         :type key: int
         """
         self.MenuRequested.emit()
+
+    def _back(self, key, modifiers):
+        """
+        Process back key
+
+        :param key: key triggering the processing
+        :type key: int
+        """
+        player = self.model.player
+        player.wait(self.action_factory)
 
     def _action_a(self, key, modifiers):
         """

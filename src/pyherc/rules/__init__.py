@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -28,5 +27,6 @@ from .public import MoveParameters
 from .public import DrinkParameters
 from .public import InventoryParameters
 from .public import SpellCastingParameters
+from .public import WaitParameters
 from .ending import Dying
 from .engine import RulesEngine

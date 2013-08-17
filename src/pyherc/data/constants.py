@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -19,17 +18,11 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for testing dsl
+Module for common constants
 """
+INSTANT_ACTION = 1
+FAST_ACTION = 2
+NORMAL_ACTION = 4
+SLOW_ACTION = 8
+LONG_ACTION = 16
 
-from .characters import Goblin, Adventurer, Wizard
-from .characters import strong, weak
-from .weapons import Dagger, Sword, Club, Bow, Arrows
-from .armours import LeatherArmour, ScaleMail, PlateMail
-from .dictionary import at_
-from .dictionary import affect, with_, potent_poison, weak_poison
-from .dictionary import carrying
-from .dictionary import place, middle_of, Level
-from .dictionary import make, drop, hit, wait
-from .dictionary import has_dropped
-from .dictionary import cast_spell

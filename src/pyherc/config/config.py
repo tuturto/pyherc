@@ -36,6 +36,7 @@ from pyherc.rules.inventory.factories import InventoryFactory
 from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
 from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.unequip import UnEquipFactory
+from pyherc.rules.wait import WaitFactory
 from pyherc.generators import ItemGenerator, CreatureGenerator
 from pyherc.generators.level.portals import PortalAdderFactory
 
@@ -119,12 +120,15 @@ class Configuration():
                                              EquipFactory(),
                                              UnEquipFactory()])
 
+        wait_factory = WaitFactory()
+
         self.action_factory = ActionFactory(
                                             self.model,
                                             [move_factory,
                                             attack_factory,
                                             drink_factory,
-                                            inventory_factory])
+                                            inventory_factory,
+                                            wait_factory])
 
         self.rules_engine = RulesEngine(self.action_factory,
                                         dying_rules)

@@ -11,6 +11,7 @@ of correct tools. Buttons used to control the game are:
  * move: |directions|, keypad, cursor keys, vi keys
  * action a: |action_a|, space, z, keypad 5
  * action b: |action_b|, control, x
+ * wait: |back|, q
  * menu: |start|, return
  * switch to sub menu left: |lb|, insert, page up, q
  * switch to sub menu right: |rb|, delete, page down, w
@@ -62,6 +63,12 @@ one can make quite a difference.
 For ranged attack you need to have a weapon and suitable ammunition for it.
 Attack enemies in distance by pressing |rt| and |directions| together.
 
+*******
+Waiting
+*******
+Sometimes it is better to wait the monsters to move out of your way and sneak
+past them than to attack them headlong. Press |back| to wait for a little bit.
+
 ****
 Menu
 ****
@@ -111,5 +118,8 @@ and mana. Below of them are details of currently active effects.
         :alt: Right Bumber
 .. |start| image:: images/start.png
            :alt: Start
+.. |back| image:: images/back.png
+          :alt: Wait
+
 .. |directions| image:: images/directions.png
                 :alt: Directions Pad

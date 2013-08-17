@@ -9,6 +9,7 @@ pyherc.data
    effects/package_effects
    magic/package_magic
    module_character
+   module_constants
    module_dungeon
    module_geometry
    module_inventory

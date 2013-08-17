@@ -123,6 +123,39 @@ def make(actor, action):
     """
     action(actor)
 
+class Wait():
+    """
+    Class representing waiting a bit
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super().__init__()
+
+    def __call__(self, character):
+        """
+        Performs waiting
+
+        :param character: character waiting
+        :type character: Character
+        """
+        character.old_values = {}
+        character.old_values['tick'] = character.tick
+        
+        action_factory = (ActionFactoryBuilder()
+                                    .with_wait_factory()                                    
+                                    .build())
+
+        character.wait(action_factory)
+
+def wait():
+    """
+    Wait a bit
+    """
+    action = Wait()
+    return action
+        
 class CastSpell():
     """
     Class representing casting a spell
@@ -136,7 +169,7 @@ class CastSpell():
         :param target: target of the spell
         :type target: Character
         """
-        super(CastSpell, self).__init__()
+        super().__init__()
         self.spell_name = spell_name
         self.target = target
     

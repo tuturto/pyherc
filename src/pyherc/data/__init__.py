@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -33,3 +32,6 @@ from .character import WeaponProficiency
 
 from .item import Item
 from .inventory import Inventory
+
+from .constants import INSTANT_ACTION, FAST_ACTION, NORMAL_ACTION, SLOW_ACTION
+from .constants import LONG_ACTION

@@ -244,3 +244,25 @@ class SpellCastingParameters(ActionParameters):
         self.caster = caster
         self.direction = direction
         self.spell_name = spell_name
+
+class WaitParameters(ActionParameters):
+    """
+    Class for controlling waiting
+
+    .. versionadded:: 0.10
+    """
+    @log_debug
+    def __init__(self, character, time_to_wait):
+        """
+        Construct wait parameters
+
+        :param character: character to wait
+        :type character: Character
+        :param time_to_wait: amount of ticks to wait
+        :type time_to_wait: int
+        """
+        super().__init__()
+
+        self.action_type = 'wait'
+        self.character = character
+        self.time_to_wait = time_to_wait

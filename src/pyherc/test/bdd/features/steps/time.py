@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -19,6 +18,7 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 from pyherc.test.bdd.features.helpers import get_character
+from pyherc.test.cutesy import make, wait
 
 @then('time should pass for {character_name}')
 def impl(context, character_name):
@@ -28,3 +28,9 @@ def impl(context, character_name):
     new_time = character.tick
 
     assert new_time > old_time
+
+@when('{character_name} waits')
+def step_impl(context, character_name):
+    character = get_character(context, character_name)
+
+    make(character, wait())
