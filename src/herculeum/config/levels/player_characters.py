@@ -117,4 +117,35 @@ def init_players(context):
                                                                 'Warrior is armed to teeth and tends to solve his problems with brute force.',
                                                                 'Warrior has nice selection of weapons to use but very little of anything else.'])))
 
+    config.append(CreatureConfiguration(name = 'Mage',
+                                        body = 3,
+                                        finesse = 5,
+                                        mind = 11,
+                                        hp = 6,
+                                        speed = 2.5,
+                                        icons = surface_manager.add_icon('mage', ':strong-2.png', '@', ['white', 'bold']),
+                                        attack = 1,
+                                        ai = None,
+                                        effect_handles = None,
+                                        inventory = [InventoryConfiguration(
+                                                            item_name = 'dagger',
+                                                            min_amount = 1,
+                                                            max_amount = 1,
+                                                            probability = 100),
+                                                     InventoryConfiguration(
+                                                            item_name = 'robes',
+                                                            min_amount = 1,
+                                                            max_amount = 1,
+                                                            probability = 100),
+                                                     InventoryConfiguration(
+                                                            item_name = 'healing potion',
+                                                            min_amount = 1,
+                                                            max_amount = 2,
+                                                            probability = 50)],
+                                        description = '\n'.join(['A wise mage.',
+                                                                '',
+                                                                'A mage is physically weak and mentally strong. He should avoid combat at all cost and deal with the enemies by using his spells.',
+                                                                'Mage also carries some potions that will help him on his journey.'])))
+
+
     return config
