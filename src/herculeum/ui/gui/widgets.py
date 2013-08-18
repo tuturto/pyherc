@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -37,12 +36,12 @@ class HitPointsWidget(QWidget):
         :param parent: parent of this widget
         :type parent: QWidget
         """
-        super(HitPointsWidget, self).__init__(parent)
+        super().__init__(parent)
 
         self.hp = None
         self.hp_label = None
-        self.mana = None
-        self.mana_label = None
+        self.spirit = None
+        self.spirit_label = None
         self.__set_layout()
 
     def __set_layout(self):
@@ -58,17 +57,17 @@ class HitPointsWidget(QWidget):
         self.hp.setText('0 / 0')
         self.hp.setObjectName('no_border')
 
-        self.mana_label = QLabel()
-        self.mana_label.setText('mana: ')
-        self.mana_label.setObjectName('no_border')
-        self.mana = QLabel()
-        self.mana.setText('0 / 0')
-        self.mana.setObjectName('no_border')
+        self.spirit_label = QLabel()
+        self.spirit_label.setText('spirit: ')
+        self.spirit_label.setObjectName('no_border')
+        self.spirit = QLabel()
+        self.spirit.setText('0 / 0')
+        self.spirit.setObjectName('no_border')
 
         layout.addWidget(self.hp_label, 0, 0)
         layout.addWidget(self.hp, 0, 1)
-        layout.addWidget(self.mana_label, 1, 0)
-        layout.addWidget(self.mana, 1, 1)
+        layout.addWidget(self.spirit_label, 1, 0)
+        layout.addWidget(self.spirit, 1, 1)
 
         self.setLayout(layout)
 
@@ -78,6 +77,8 @@ class HitPointsWidget(QWidget):
         """
         if event.event_type == 'hit points changed':
             self.show_hit_points(event.character)
+        elif event.event_type == 'spirit points changed':
+            self.show_spirit_points(event.character)
 
     def show_hit_points(self, character):
         """
@@ -89,6 +90,19 @@ class HitPointsWidget(QWidget):
         current_hp = character.hit_points
         max_hp = character.max_hp
         self.hp.setText(str(current_hp) + '/' + str(max_hp))
+
+    def show_spirit_points(self, character):
+        """
+        Show spirit points of given character
+
+        :param character: character whose spirit points to show
+        :type character: Character
+
+        .. versionadded:: 0.10
+        """
+        self.spirit.setText(str(character.spirit) +
+                            '/' +
+                            str(character.max_spirit))
 
 class DockingHitPointsWidget(QDockWidget):
     """

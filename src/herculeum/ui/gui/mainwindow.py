@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -170,6 +169,7 @@ class MainWindow(QMainWindow):
 
             player.register_for_updates(self.map_window.hit_points_widget)
             self.map_window.hit_points_widget.show_hit_points(player)
+            self.map_window.hit_points_widget.show_spirit_points(player)
 
             self.__show_map_window()
 
