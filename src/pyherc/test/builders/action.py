@@ -337,4 +337,5 @@ class SpellCastingFactoryBuilder():
             pass
             
         return SpellCastingFactory(spell_factory = self.spell_factory,
-                                   effects_factory = self.effects_factory)
+                                   effects_factory = self.effects_factory,
+                                   dying_rules = Dying())

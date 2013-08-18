@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -127,7 +126,8 @@ class Configuration():
         spell_factory = SpellGenerator()
 
         spell_casting_factory = SpellCastingFactory(spell_factory,
-                                                    effect_factory)
+                                                    effect_factory,
+                                                    dying_rules)
 
         self.action_factory = ActionFactory(
                                             self.model,

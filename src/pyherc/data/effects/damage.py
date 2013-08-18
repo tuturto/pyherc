@@ -56,3 +56,5 @@ class Damage(Effect):
                         DamageTriggeredEvent(target = self.target,
                                              damage = self.damage,
                                              damage_type = self.damage_type))
+
+        dying_rules.check_dying(self.target)
