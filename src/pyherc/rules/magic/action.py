@@ -53,6 +53,8 @@ class SpellCastingAction():
         """
         Executes this action
         """
+        self.caster.spirit = self.caster.spirit - self.spell.spirit
+        
         self.spell.cast(effects_factory = self.effects_factory,
                         dying_rules = self.dying_rules)
 

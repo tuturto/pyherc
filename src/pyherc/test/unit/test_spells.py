@@ -30,7 +30,7 @@ from pyherc.data.magic import Spell
 from pyherc.rules.ending import Dying
 from pyherc.rules.magic.action import SpellCastingAction
 
-from hamcrest import assert_that, is_in #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_in, is_, equal_to  #pylint: disable-msg=E0611
 from mockito import mock, verify, when, any
 
 class TestSpellTargetingSingle():
@@ -139,7 +139,12 @@ class TestSpellCastingAction():
         When spell casting action is executed, the linked spell should be cast
         """
         spell = mock(Spell)
-        caster = CharacterBuilder().build()
+        spell.spirit = 2
+        
+        caster = (CharacterBuilder()
+                      .with_spirit(10)
+                      .build())
+        
         effects_factory = mock()
         dying_rules = mock()
 
@@ -151,3 +156,25 @@ class TestSpellCastingAction():
 
         verify(spell).cast(effects_factory = effects_factory,
                            dying_rules = dying_rules)
+
+    def test_casting_spell_uses_spirit(self):
+        """
+        Casting a spell should use spirit energy
+        """
+        spell = (SpellBuilder()
+                     .with_spirit(10)
+                     .build())
+
+        caster = (CharacterBuilder()
+                      .with_spirit(20)
+                      .build())
+        effects_factory = mock()
+        dying_rules = mock()
+
+        action = SpellCastingAction(caster = caster,
+                                    spell = spell,
+                                    effects_factory = effects_factory,
+                                    dying_rules = dying_rules)
+        action.execute()
+
+        assert_that(caster.spirit, is_(equal_to(10)))

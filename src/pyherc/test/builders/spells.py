@@ -53,6 +53,7 @@ class SpellBuilder():
         """
         Default constructor
         """
+        self.spirit = 5
         self.handles = []
         self.targets = []
 
@@ -80,6 +81,18 @@ class SpellBuilder():
         self.targets.append(target)
         return self
 
+    def with_spirit(self, spirit):
+        """
+        Configure amount of spirit this spell takes
+
+        :param spirit: amount of spirit the spell requires
+        :type spirit: int
+
+        .. versionadded:: 0.10
+        """
+        self.spirit = spirit
+        return self
+
     def build(self):
         """
         Builds a spell
@@ -88,6 +101,7 @@ class SpellBuilder():
         :rtype: Spell
         """
         spell = Spell()
+        spell.spirit = self.spirit
 
         for handle in self.handles:
             spell.add_effect_handle(handle)
