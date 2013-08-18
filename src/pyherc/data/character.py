@@ -24,7 +24,8 @@ from pyherc.aspects import log_debug, log_info
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 from pyherc.rules import InventoryParameters, SpellCastingParameters
 from pyherc.rules import WaitParameters
-from pyherc.events import HitPointsChangedEvent, ErrorEvent
+from pyherc.events import HitPointsChangedEvent, SpiritPointsChangedEvent
+from pyherc.events import ErrorEvent
 from pyherc.data.constants import NORMAL_ACTION
 from decorator import decorator
 
@@ -67,7 +68,7 @@ class Character():
         self.kit = None
         self.__hit_points = None
         self.__max_hp = None
-        self.spirit = 100
+        self.__spirit = 100
         self.max_spirit = 100
         self.speed = None
         self.inventory = inventory
@@ -192,6 +193,23 @@ class Character():
             HitPointsChangedEvent(character = self,
                                   old_hit_points = old_hit_points,
                                   new_hit_points = new_hit_points))
+
+    def __get_spirit(self):
+        """
+        Current spirit points
+        """
+        return self.__spirit
+
+    def __set_spirit(self, spirit):
+        old_spirit = self.__spirit
+        new_spirit = spirit
+
+        self.__spirit = spirit
+
+        self.raise_event(
+            SpiritPointsChangedEvent(character = self,
+                                     old_spirit = old_spirit,
+                                     new_spirit = new_spirit))
 
     def __get_body(self):
         """
@@ -733,6 +751,7 @@ class Character():
             p.breakable()
 
     hit_points = property(__get_hp, __set_hp)
+    spirit = property(__get_spirit, __set_spirit)
     max_hp = property(__get_max_hp, __set_max_hp)
     body = property(__get_body, __set_body)
     finesse = property(__get_finesse, __set_finesse)

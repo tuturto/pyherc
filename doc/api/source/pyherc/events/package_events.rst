@@ -17,3 +17,4 @@ pyherc.events
    module_move
    module_perception
    module_poison
+   module_spirit

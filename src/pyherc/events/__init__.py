@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -32,3 +31,4 @@ from .hitpoints import HitPointsChangedEvent
 from .damage import DamageAddedEvent, DamageTriggeredEvent, DamageEndedEvent
 from .perception import LoseFocusEvent, NoticeEvent
 from .error import ErrorEvent
+from .spirit import SpiritPointsChangedEvent

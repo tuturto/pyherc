@@ -24,6 +24,7 @@ Tests for magical spells
 
 from pyherc.test.builders import LevelBuilder, CharacterBuilder
 from pyherc.test.builders import SpellGeneratorBuilder, SpellBuilder
+from pyherc.test.helpers import EventListener
 from pyherc.generators import EffectsFactory
 from pyherc.data.effects import EffectHandle, Effect
 from pyherc.data.magic import Spell
@@ -178,3 +179,32 @@ class TestSpellCastingAction():
         action.execute()
 
         assert_that(caster.spirit, is_(equal_to(10)))
+
+    def test_casting_spell_raises_spirit_changed_event(self):
+        """
+        Since casting spells uses spirit, an appropriate event should be raised
+        """
+        spell = (SpellBuilder()
+                     .with_spirit(10)
+                     .build())
+
+        caster = (CharacterBuilder()
+                      .with_spirit(20)
+                      .build())
+
+        listener = EventListener()
+        caster.register_for_updates(listener)
+        
+        effects_factory = mock()
+        dying_rules = mock()
+
+        action = SpellCastingAction(caster = caster,
+                                    spell = spell,
+                                    effects_factory = effects_factory,
+                                    dying_rules = dying_rules)
+        action.execute()
+
+        events = [event for event in listener.events
+                  if event.event_type == 'spirit points changed']
+
+        assert_that(len(events), is_(equal_to(1)))

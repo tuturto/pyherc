@@ -18,40 +18,25 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for event helpers
+Events for spirit points
 """
-from pyherc.aspects import log_debug
+from pyherc.events.event import Event
 
-class EventListener():
+class SpiritPointsChangedEvent(Event):
     """
-    Event listener that stores all events it receives
+    Event to raise when spirit points change
+
+    .. versionadded:: 0.10
     """
-    @log_debug
-    def __init__(self):
+    def __init__(self, character, old_spirit, new_spirit):
         """
         Default constructor
         """
-        super(EventListener, self).__init__()
-        self.events = []
+        super().__init__(event_type = 'spirit points changed',
+                         level = character.level,
+                         location = character.location,
+                         affected_tiles = [])
 
-    @log_debug
-    def receive_event(self, event):
-        """
-        Receive event
-
-        :param event: event to receive
-        :type event: Event
-        """
-        self.events.append(event)
-
-    @log_debug
-    def receive_update(self, event):
-        """
-        Receive event
-
-        :param event: event to receive
-        :type event: Event
-
-        .. versionadded:: 0.10
-        """
-        self.events.append(event)
+        self.character = character
+        self.spirit = old_spirit
+        self.spirit = new_spirit
