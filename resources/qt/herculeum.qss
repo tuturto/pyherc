@@ -73,23 +73,20 @@ QLabel#passive_inventorybox {
 }
 
 QDialog {
-    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                      stop:0 darkgray, stop:1 black);
+    background-color: black;
     padding: 0;
     margin: 0;
 }
 
 /* The background of the tab bar */
 QMainWindow {
-    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                      stop:0 darkgray, stop:1 black);
+    background-color: black;
     padding: 0;
     margin: 0;
 }
 
 QAbstractScrollArea {
-    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                      stop:0 darkgray, stop:1 black);
+    background-color: black;
     color: white;
     border-width: 1px;
     padding: 0px;
@@ -100,11 +97,13 @@ QAbstractScrollArea {
 }
 
 QMenuBar  {
-    background-color: darkgray;
+    background-color: black;
+    color: white;
 }
 
 QFrame {
     color: white;
+    background-color: black;
     border-width: 1px;
     padding: 0px;
     spacing: 0px;
