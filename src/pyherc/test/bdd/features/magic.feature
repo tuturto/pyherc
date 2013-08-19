@@ -35,8 +35,15 @@ Feature: Magic
        Then Simon should have more fire spells
         And Rune should not be in inventory of Simon
 
-  @active
   Scenario: Out of spirit
       Given Simon has no spirit left
        When Simon casts magic missile on Uglak
        Then Uglak should be alive
+
+  @active
+  Scenario: Effects
+      Given Pete is Adventurer
+        And Pete is standing next to Uglak
+       When Simon casts fireball on Uglak
+       Then Pete should have less hitpoints
+        And Pete should be on fire

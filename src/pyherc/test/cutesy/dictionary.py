@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -140,7 +139,6 @@ class Wait():
         :param character: character waiting
         :type character: Character
         """
-        character.old_values = {}
         character.old_values['tick'] = character.tick
         
         action_factory = (ActionFactoryBuilder()
@@ -180,7 +178,6 @@ class CastSpell():
         :param caster: character doing the casting
         :type caster: Character
         """
-        caster.old_values = {}
         caster.old_values['hit points'] = caster.hit_points
 
         spell_factory = SpellGeneratorBuilder().build()
@@ -267,7 +264,6 @@ class Hit():
         :param attacker: character attacking
         :type attacker: Character
         """
-        self.target.old_values = {}
         self.target.old_values['hit points'] = self.target.hit_points
 
         rng = mock()
@@ -343,12 +339,9 @@ class HasLessHitPoints(BaseMatcher):
 
         :param item: match against this item
         """
-        if hasattr(item, 'old_values'):
-            self.old_hit_points = item.old_values['hit points']
-            if self.old_hit_points > item.hit_points:
-                return True
-            else:
-                return False
+        self.old_hit_points = item.old_values['hit points']
+        if self.old_hit_points > item.hit_points:
+            return True
         else:
             return False
 
@@ -409,7 +402,6 @@ def affect(target, effect_spec):
 
     new_effect = effect_type(**effect_spec)
 
-    target.old_values = {}
     target.old_values['hit points'] = target.hit_points
 
     new_effect.trigger(Dying())
@@ -513,11 +505,9 @@ class Drop():
         :param actor: character dropping the item
         :type actor: Character
         """
-        self.item.old_values = {}
         self.item.old_values['location'] = self.item.location
         self.item.old_values['level'] = self.item.level
 
-        actor.old_values = {}
         actor.old_values['inventory'] = []
         actor.old_values['inventory'].append(self.item)
         actor.old_values['tick'] = actor.tick

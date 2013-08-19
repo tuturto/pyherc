@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -64,6 +63,8 @@ def Adventurer():
                     .with_name('Adventurer')
                     .build()
                     )
+    character.old_values = {}
+    character.old_values['hit points'] = character.hit_points
     return character
 
 def Wizard():
@@ -85,6 +86,7 @@ def Wizard():
                     .with_name('Wizard')
                     .build()
                     )
+    character.old_values = {}
     return character
 
 def Goblin(action = None):
@@ -103,6 +105,7 @@ def Goblin(action = None):
                     .with_name('Goblin')
                     .build()
                     )
+    character.old_values = {}
     if action != None:
         action(character)
 
