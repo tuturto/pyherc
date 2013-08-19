@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -32,7 +31,7 @@ class DamageBuilder():
         """
         Default constructor
         """
-        super(DamageBuilder, self).__init__()
+        super().__init__()
         self.duration = 1
         self.frequency = 1
         self.tick = 0

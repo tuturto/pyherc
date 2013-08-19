@@ -68,6 +68,20 @@ def init_effects(context):
                     'title': 'Minor poison',
                     'description': 'Causes minor amount of damage'}))
 
+    config.append(('cause wound',
+                   {'type': Damage,
+                    'duration': None,
+                    'frequency': None,
+                    'tick': None,
+                    'damage': 5,
+                    'damage_type': 'magic',
+                    'icon': surface_manager.add_icon('minor poison',
+                                                     ':minor_poison.png',
+                                                     ''),
+                    'title': 'Wound',
+                    'description': 'Instant magical damage'}))
+
+
     config.append(('major fire damage',
                    {'type': Damage,
                     'duration': None,
@@ -83,10 +97,10 @@ def init_effects(context):
 
     config.append(('fire',
                    {'type': Damage,
-                   'duration': 30,
-                   'frequency': 10,
-                   'tick': 0,
-                   'damage': 5,
+                   'duration': 20,
+                   'frequency': 5,
+                   'tick': 5,
+                   'damage': 2,
                    'damage_type': 'fire',
                    'icon': None,
                    'title': 'Fire',

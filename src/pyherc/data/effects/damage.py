@@ -35,12 +35,12 @@ class Damage(Effect):
         """
         Default constructor
         """
-        super(Damage, self).__init__(duration = duration,
-                                     frequency = frequency,
-                                     tick = tick,
-                                     icon = icon,
-                                     title = title,
-                                     description = description)
+        super().__init__(duration = duration,
+                         frequency = frequency,
+                         tick = tick,
+                         icon = icon,
+                         title = title,
+                         description = description)
         self.damage = damage
         self.damage_type = damage_type
         self.target = target
