@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -98,11 +97,13 @@ def init_effects(context):
     config.append(('fire',
                    {'type': Damage,
                    'duration': 20,
-                   'frequency': 5,
+                   'frequency': 2,
                    'tick': 5,
-                   'damage': 2,
+                   'damage': 1,
                    'damage_type': 'fire',
-                   'icon': None,
+                   'icon': surface_manager.add_icon('fire effect',
+                                                    ':fire_effect.png',
+                                                    ''),
                    'title': 'Fire',
                    'description': 'You are on fire!'}))
 

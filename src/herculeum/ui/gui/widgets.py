@@ -290,7 +290,8 @@ class EffectsWidget(QWidget):
         Receive update from entity
         """
         if event.event_type in ('heal started', 'poisoned',
-                                'heal ended', 'poison ended'):
+                                'heal ended', 'poison ended',
+                                'damage started', 'damage ended'):
             for i in range(self.layout().count()):
                 self.layout().itemAt(i).widget().close()
 

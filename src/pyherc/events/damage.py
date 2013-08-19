@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -82,10 +81,10 @@ class DamageAddedEvent(Event):
         :param effect: effect being added
         :type effect: Damage
         """
-        super(DamageAddedEvent, self).__init__(event_type = 'damage added',
-                                               level = target.level,
-                                               location = target.location,
-                                               affected_tiles = [])
+        super().__init__(event_type = 'damage started',
+                         level = target.level,
+                         location = target.location,
+                         affected_tiles = [])
         self.target = target
         self.effect = effect
 

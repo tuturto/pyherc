@@ -22,7 +22,8 @@ Module for damage
 """
 from pyherc.aspects import log_debug
 from pyherc.data.effects.effect import Effect
-from pyherc.events import DamageTriggeredEvent
+from pyherc.events import DamageTriggeredEvent, DamageAddedEvent
+from pyherc.events import DamageEndedEvent
 
 class Damage(Effect):
     """
@@ -58,3 +59,26 @@ class Damage(Effect):
                                              damage_type = self.damage_type))
 
         dying_rules.check_dying(self.target)
+
+    @log_debug
+    def get_add_event(self):
+        """
+        Get event describing adding of this effect
+
+        :returns: event describing adding of this effect
+        :rtype: Event
+        """
+        return DamageAddedEvent(target = self.target,
+                                effect = self)
+
+    @log_debug
+    def get_removal_event(self):
+        """
+        Get event describing removal of this event
+
+        :return: event describing removal of this event
+        :rtype: Event
+        """
+        return DamageEndedEvent(target = self.target,
+                                effect = self)
+

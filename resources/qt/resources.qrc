@@ -63,5 +63,6 @@
         <file>rock_floor.png</file>
         <file>pillar.png</file>
         <file>tiled_floor.png</file>
+	<file>fire_effect.png</file>
     </qresource>
 </RCC>
