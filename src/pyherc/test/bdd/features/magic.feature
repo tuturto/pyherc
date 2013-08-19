@@ -45,5 +45,5 @@ Feature: Magic
       Given Pete is Adventurer
         And Pete is standing next to Uglak
        When Simon casts fireball on Uglak
-       Then Pete should have less hitpoints
-        And Pete should be on fire
+       Then Pete should be on fire
+        And Pete should have less hitpoints

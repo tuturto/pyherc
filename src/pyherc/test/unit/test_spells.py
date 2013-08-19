@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -42,6 +41,7 @@ class TestSpellTargetingSingle():
         """
         Default constructor
         """
+        super().__init__()
         self.level = None
         self.character = None
         self.spell_generator = None
@@ -92,6 +92,7 @@ class TestSpellEffects():
 
         self.effects_factory = mock(EffectsFactory)
         self.effect = mock(Effect)
+        self.effect.duration = 0
         self.dying_rules = mock(Dying)
         when(self.effects_factory).create_effect(key = 'healing wind',
                                                  target = any()).thenReturn(self.effect)

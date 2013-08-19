@@ -33,7 +33,7 @@ def LeatherArmour():
                 .with_speed_modifier(1.0)
                 .build())
 
-    character.old_values = {}
+    item.old_values = {}
     return item
 
 def ScaleMail():
@@ -46,7 +46,7 @@ def ScaleMail():
                 .with_speed_modifier(0.7)
                 .build())
 
-    character.old_values = {}
+    item.old_values = {}
     return item
 
 def PlateMail():
@@ -59,5 +59,5 @@ def PlateMail():
                 .with_speed_modifier(0.5)
                 .build())
 
-    character.old_values = {}
+    item.old_values = {}
     return item

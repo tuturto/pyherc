@@ -19,10 +19,13 @@
 
 from pyherc.test.bdd.features.helpers import get_character
 
+from hamcrest import assert_that, has_length #pylint: disable-msg=E0611
+
 @then('{character_name} should be on fire')
 def step_impl(context, character_name):
     character = get_character(context, character_name)
 
+    effects = [effect for effect in character.get_effects()
+               if effect.damage_type == 'fire']
 
-    
-    assert False
+    assert_that(effects, has_length(1))

@@ -96,4 +96,7 @@ class Spell():
                                                 target = target))
 
         for effect in effects:
-            effect.trigger(dying_rules)
+            if not effect.duration or effect.duration <= 0:
+                effect.trigger(dying_rules)
+            else:
+                effect.target.add_effect(effect)
