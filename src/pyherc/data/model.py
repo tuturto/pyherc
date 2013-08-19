@@ -105,7 +105,7 @@ class Model():
                 for effect in creature.get_effects():
                     if effect.tick != None:
                         effect.tick = effect.tick - 1
-                        if effect.tick == 0:
+                        if effect.tick <= 0:
                             effect.trigger(rules_engine.dying_rules)
                 creature.remove_expired_effects()
 
