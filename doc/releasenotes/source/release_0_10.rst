@@ -8,6 +8,7 @@ New features
 
  - regular movement and attack can be done only to cardinal directions
  - characters can wait for a bit without doing anything
+ - new player character, mage
 
 **********
 Fixed bugs
