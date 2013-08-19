@@ -37,9 +37,10 @@ Options:
 
 """
 from pyherc.aspects import set_logger
+from pyherc.version import PYHERC_VERSION
 from docopt import docopt
 
-arguments = docopt(__doc__, version='Herculeum 0.10')
+arguments = docopt(__doc__, version='Herculeum ' + PYHERC_VERSION)
 set_logger(arguments['--log-level'],
            arguments['--silent'])
 
