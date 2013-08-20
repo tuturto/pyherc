@@ -12,6 +12,7 @@ pyherc.rules
    magic/package_magic
    move/module_move
    wait/package_wait
+   module_constants
    module_ending
    module_engine
    module_factory

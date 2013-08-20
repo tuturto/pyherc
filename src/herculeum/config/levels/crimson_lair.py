@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -44,6 +43,8 @@ from pyherc.data.effects import EffectHandle
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.generators import CreatureConfiguration
 from pyherc.ai import SkeletonWarriorAI
+
+from pyherc.rules.constants import SLASHING_DAMAGE
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
     """
@@ -204,7 +205,7 @@ def init_items(context):
                                             parameters = None,
                                             charges = 999999)],
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(12, 'slashing')],
+                                            damage = [(12, 'SLASHING_DAMAGE')],
                                             critical_range = 10,
                                             critical_damage = 12,
                                             weapon_class = 'exotic')))

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -43,6 +42,9 @@ from pyherc.ai import FlockingHerbivore, SkeletonWarriorAI
 from pyherc.ai.rat import RatAI
 from pyherc.ai.firebeetle import FireBeetleAI
 from pyherc.data.effects import DamageModifier
+
+from pyherc.rules.constants import PIERCING_DAMAGE, CRUSHING_DAMAGE
+from pyherc.rules.constants import LIGHT_DAMAGE, POISON_DAMAGE
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
     """
@@ -244,7 +246,7 @@ def init_creatures(context):
                                                 probability = 100)]
 
     skeleton_effects = [DamageModifier(modifier = 2,
-                                       damage_type = 'crushing',
+                                       damage_type = CRUSHING_DAMAGE,
                                        duration = None,
                                        frequency = None,
                                        tick = None,
@@ -252,7 +254,7 @@ def init_creatures(context):
                                        title = '',
                                        description = ''),
                         DamageModifier(modifier = 2,
-                                       damage_type = 'holy',
+                                       damage_type = LIGHT_DAMAGE,
                                        duration = None,
                                        frequency = None,
                                        tick = None,
@@ -260,7 +262,7 @@ def init_creatures(context):
                                        title = '',
                                        description = ''),
                         DamageModifier(modifier = -2,
-                                       damage_type = 'piercing',
+                                       damage_type = PIERCING_DAMAGE,
                                        duration = None,
                                        frequency = None,
                                        tick = None,
@@ -268,7 +270,7 @@ def init_creatures(context):
                                        title = '',
                                        description = ''),
                         DamageModifier(modifier = -2,
-                                       damage_type = 'poison',
+                                       damage_type = POISON_DAMAGE,
                                        duration = None,
                                        frequency = None,
                                        tick = None,

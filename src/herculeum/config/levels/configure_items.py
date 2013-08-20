@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -26,6 +24,9 @@ from pyherc.generators import ItemConfiguration, WeaponConfiguration
 from pyherc.generators import AmmunitionConfiguration
 from pyherc.generators import ArmourConfiguration
 from pyherc.data.effects import EffectHandle
+
+from pyherc.rules.constants import PIERCING_DAMAGE, CRUSHING_DAMAGE
+from pyherc.rules.constants import SLASHING_DAMAGE
 
 def init_items(context):
     """
@@ -65,7 +66,7 @@ def init_items(context):
                                                'simple weapon'],
                                     rarity = 'common',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(2, 'piercing')],
+                                            damage = [(2, PIERCING_DAMAGE)],
                                             critical_range = 10,
                                             critical_damage = 2,
                                             weapon_class = 'simple')))
@@ -86,8 +87,8 @@ def init_items(context):
                                              'martial weapon'],
                                     rarity = 'uncommon',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(2, 'piercing'),
-                                                      (2, 'slashing')],
+                                            damage = [(2, PIERCING_DAMAGE),
+                                                      (2, SLASHING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 2,
                                             weapon_class = 'martial')))
@@ -108,8 +109,8 @@ def init_items(context):
                                              'martial weapon'],
                                     rarity = 'uncommon',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(2, 'crushing'),
-                                                      (2, 'slashing')],
+                                            damage = [(2, CRUSHING_DAMAGE),
+                                                      (2, SLASHING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 2,
                                             weapon_class = 'martial')))
@@ -130,7 +131,7 @@ def init_items(context):
                                              'simple weapon'],
                                     rarity = 'common',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(3, 'crushing')],
+                                            damage = [(3, CRUSHING_DAMAGE)],
                                             critical_range = 11,
                                             critical_damage = 3,
                                             weapon_class = 'simple')))
@@ -151,7 +152,7 @@ def init_items(context):
                                              'martial weapon'],
                                     rarity = 'rare',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(7, 'crushing')],
+                                            damage = [(7, CRUSHING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 7,
                                             weapon_class = 'martial')))
@@ -172,7 +173,7 @@ def init_items(context):
                                              'martial weapon'],
                                     rarity = 'rare',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(5, 'piercing')],
+                                            damage = [(5, PIERCING_DAMAGE)],
                                             critical_range = 11,
                                             critical_damage = 5,
                                             weapon_class = 'martial')))
@@ -193,7 +194,7 @@ def init_items(context):
                                              'exotic weapon'],
                                     rarity = 'common',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(3, 'slashing')],
+                                            damage = [(3, SLASHING_DAMAGE)],
                                             critical_range = 11,
                                             critical_damage = 3,
                                             weapon_class = 'exotic')))
@@ -214,7 +215,7 @@ def init_items(context):
                                              'exotic weapon'],
                                     rarity = 'common',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(3, 'slashing')],
+                                            damage = [(3, SLASHING_DAMAGE)],
                                             critical_range = 10,
                                             critical_damage = 3,
                                             weapon_class = 'exotic')))
@@ -235,8 +236,8 @@ def init_items(context):
                                              'martial weapon'],
                                     rarity = 'uncommon',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(2, 'crushing'),
-                                                      (2, 'piercing')],
+                                            damage = [(2, CRUSHING_DAMAGE),
+                                                      (2, PIERCING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 2,
                                             weapon_class = 'martial')))
@@ -256,7 +257,7 @@ def init_items(context):
                                              'martial weapon'],
                                     rarity = 'uncommon',
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(1, 'crushing')],
+                                            damage = [(1, CRUSHING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 1,
                                             weapon_class = 'martial',
@@ -274,7 +275,7 @@ def init_items(context):
                                     types = ['ammunition'],
                                     rarity = 'uncommon',
                                     ammunition_configuration = AmmunitionConfiguration(
-                                            damage = [(3, 'piercing')],
+                                            damage = [(3, PIERCING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 3,
                                             ammunition_type = 'arrow',
@@ -292,8 +293,8 @@ def init_items(context):
                                     types = ['ammunition'],
                                     rarity = 'uncommon',
                                     ammunition_configuration = AmmunitionConfiguration(
-                                            damage = [(1, 'piercing'),
-                                                      (2, 'slashing')],
+                                            damage = [(1, PIERCING_DAMAGE),
+                                                      (2, SLASHING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 3,
                                             ammunition_type = 'arrow',
@@ -311,7 +312,7 @@ def init_items(context):
                                     types = ['ammunition'],
                                     rarity = 'uncommon',
                                     ammunition_configuration = AmmunitionConfiguration(
-                                            damage = [(3, 'crushing')],
+                                            damage = [(3, CRUSHING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 3,
                                             ammunition_type = 'arrow',
