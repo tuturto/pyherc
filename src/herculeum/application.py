@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -59,9 +58,6 @@ class Application():
         self.log_level = log_levels[arguments['--log-level']]
         self.silent = arguments['--silent']
         self.ui_mode = arguments['--ui']
-
-        #set_logger(arguments['--log-level'],
-        #           self.silent)
 
     def load_configuration(self, controls, surface_manager):
         """

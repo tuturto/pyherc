@@ -301,3 +301,48 @@ class EffectsWidget(QWidget):
                 new_icon.setPixmap(self.surface_manager.get_icon(effect.icon))
                 self.layout().insertWidget(self.layout().count() - 1,
                                        new_icon)
+
+class SpellSelectorWidget(QWidget):
+    """
+    Widget for selecting spell
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self, parent, surface_manager):
+        """
+        Default constructor
+        """
+        super().__init__(parent)
+        self.surface_manager = surface_manager
+        self._set_layout()
+
+    def _set_layout(self):
+        """
+        Set layout of this widget
+        """
+        self.main_layout = QHBoxLayout()
+        self.icon = QLabel()        
+        self.main_layout.addWidget(self.icon)
+        self.icon.setPixmap(self.surface_manager.get_icon('transparent'))        
+        self.setLayout(self.main_layout)
+
+    def next_spell(self):
+        """
+        Select next spell
+        """
+        self.icon.setPixmap(self.surface_manager.get_icon('fire effect'))
+
+    def previous_spell(self):
+        """
+        Select previous spell
+        """
+        self.icon.setPixmap(self.surface_manager.get_icon('minor poison'))
+
+    def current_spell(self):
+        """
+        Currently selected spell
+
+        :returns: currently selected spell
+        :rtype: String
+        """
+        return "fireball"

@@ -29,6 +29,7 @@ from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
 from PyQt4.QtCore import QEasingCurve, pyqtSignal, QEvent
 from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
+from herculeum.ui.gui.widgets import SpellSelectorWidget
 from herculeum.ui.controllers import MoveController
 from random import Random
 
@@ -43,7 +44,7 @@ class PlayMapWindow(QWidget):
         """
         Default constructor
         """
-        super(PlayMapWindow, self).__init__(parent)
+        super().__init__(parent)
 
         self.model = model
         self.surface_manager = surface_manager
@@ -56,6 +57,7 @@ class PlayMapWindow(QWidget):
         self.message_widget = None
         self.map_widget = None
         self.effects_widget = None
+        self.spell_selector = None
 
         self.__set_layout(model, surface_manager, action_factory, rng,
                           rules_engine, configuration)
@@ -75,6 +77,9 @@ class PlayMapWindow(QWidget):
         self.effects_widget = EffectsWidget(parent = self,
                                             surface_manager = surface_manager)
 
+        self.spell_selector = SpellSelectorWidget(parent = self,
+                                                  surface_manager = surface_manager)
+
         self.map_widget = PlayMapWidget(parent = self,
                                         model = model,
                                         surface_manager = surface_manager,
@@ -84,11 +89,14 @@ class PlayMapWindow(QWidget):
                                         configuration = configuration)
         self.map_widget.MenuRequested.connect(self.on_menu_requested)
         self.map_widget.EndScreenRequested.connect(self.on_end_screen_requested)
+        self.map_widget.NextSpellRequested.connect(self.on_next_spell)
+        self.map_widget.PreviousSpellRequested.connect(self.on_previous_spell)
 
         self.message_widget = EventMessageWidget(parent = self)
         self.message_widget.setMaximumHeight(100)
 
         status_layout.addWidget(self.hit_points_widget)
+        status_layout.addWidget(self.spell_selector)
         status_layout.addWidget(self.effects_widget)
         status_layout.addStretch()
 
@@ -121,6 +129,23 @@ class PlayMapWindow(QWidget):
         """
         self.EndScreenRequested.emit()
 
+    def on_next_spell(self):
+        """
+        Handle selecting next spell
+
+        .. versionadded:: 0.10
+        """
+        self.spell_selector.next_spell()
+
+    def on_previous_spell(self):
+        """
+        Handle selecting previous spell
+
+        .. versionadded:: 0.10
+        """
+        self.spell_selector.previous_spell()
+
+
 class PlayMapWidget(QWidget):
     """
     Widget for displaying playing world
@@ -132,7 +157,7 @@ class PlayMapWidget(QWidget):
         """
         Default constructor
         """
-        super(PlayMapWidget, self).__init__(parent)
+        super().__init__(parent)
 
         self.model = model
         self.scene = None
@@ -155,6 +180,9 @@ class PlayMapWidget(QWidget):
 
     MenuRequested = pyqtSignal(name='MenuRequested')
     EndScreenRequested = pyqtSignal(name='EndScreenRequested')
+    NextSpellRequested = pyqtSignal(name='NextSpellRequested')
+    PreviousSpellRequested = pyqtSignal(name='PreviousSpellRequested')
+
 
     def _construct_keymaps(self, config):
         """
@@ -180,6 +208,10 @@ class PlayMapWidget(QWidget):
             keymap[key] = self._action_a
         for key in config.back:
             keymap[key] = self._back
+        for key in config.left_shoulder:
+            keymap[key] = self._shoulder_left
+        for key in config.right_shoulder:
+            keymap[key] = self._shoulder_right
 
         return keymap, move_keymap
 
@@ -538,6 +570,28 @@ class PlayMapWidget(QWidget):
         """
         player = self.model.player
         player.wait(self.action_factory)
+
+    def _shoulder_right(self, key, modifiers):
+        """
+        Process right shoulder button
+
+        :param key: key triggering the processing
+        :type key: int
+
+        .. versionadded:: 0.10
+        """
+        self.NextSpellRequested.emit()        
+
+    def _shoulder_left(self, key, modifiers):
+        """
+        Process left shoulder button
+
+        :param key: key triggering the processing
+        :type key: int
+
+        .. versionadded:: 0.10
+        """
+        self.PreviousSpellRequested.emit()   
 
     def _action_a(self, key, modifiers):
         """
