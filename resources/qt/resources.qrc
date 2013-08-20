@@ -64,5 +64,8 @@
         <file>pillar.png</file>
         <file>tiled_floor.png</file>
 	<file>fire_effect.png</file>
+	<file>fireball.png</file>
+	<file>healing-wind.png</file>
+	<file>force-bolt.png</file>
     </qresource>
 </RCC>

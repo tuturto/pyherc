@@ -1,0 +1,2 @@
+pyrcc4 resources.qrc -py3 -o resources.rcc
+cp -f resources.rcc ../../src/herculeum/ui/gui/resources.py
