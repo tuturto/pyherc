@@ -7,3 +7,4 @@ pyherc.data.magic
    :maxdepth: 2
    
    module_spell
+   module_spellbook

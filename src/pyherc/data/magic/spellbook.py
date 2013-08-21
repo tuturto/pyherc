@@ -18,8 +18,31 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for magical spells
+Module for spell book related classes
 """
 
-from .spell import Spell
-from .spellbook import SpellBook, SpellEntry
+class SpellBook():
+    """
+    List of known spells
+
+    .. versionadded:: 0.10
+    """
+    def __init__():
+        """
+        Default constructor
+        """
+        super().__init__()
+
+
+class SpellEntry()
+    """
+    Entry in a spell book
+
+    .. versionadded:: 0.10
+    """
+    def __init__():
+        """
+        Default constructor
+        """
+        super().__init__()
+
