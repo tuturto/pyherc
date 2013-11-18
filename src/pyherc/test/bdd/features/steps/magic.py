@@ -53,3 +53,11 @@ def impl(context, caster_name):
     caster.spirit = 0
 
 step_matcher('parse')
+
+@when('{caster_name} uses rune for {domain_name} domain')
+def step_impl(context, caster_name, domain_name):
+    assert False
+
+@then('{caster_name} should have more {domain_name} spells')
+def step_impl(context, caster_name, domain_name):
+    assert False
