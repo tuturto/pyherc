@@ -34,7 +34,7 @@ class SpellBook():
         super().__init__()
 
 
-class SpellEntry()
+class SpellEntry():
     """
     Entry in a spell book
 
