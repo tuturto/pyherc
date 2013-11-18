@@ -28,7 +28,7 @@ Feature: Magic
        When Simon casts healing wind
        Then Simon should be in full health
 
-  @wip
+  @active
   Scenario: Domain specialization
       Given Simon has Rune
        When Simon uses rune for fire domain
@@ -40,7 +40,6 @@ Feature: Magic
        When Simon casts magic missile on Uglak
        Then Uglak should be alive
 
-  @active
   Scenario: Effects
       Given Pete is Adventurer
         And Pete is standing next to Uglak
