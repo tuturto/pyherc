@@ -20,6 +20,7 @@ Contents:
    guide/events
    guide/effects
    guide/configuration
+   guide/magic
    guide/error_handling
    guide/testing
    api_reference
