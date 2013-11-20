@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -19,18 +18,17 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for testing dsl
+Module for magic items
 """
+from pyherc.test.builders import ItemBuilder
 
-from .characters import Goblin, Adventurer, Wizard
-from .characters import strong, weak
-from .weapons import Dagger, Sword, Club, Bow, Arrows
-from .armours import LeatherArmour, ScaleMail, PlateMail
-from .items import Rune
-from .dictionary import at_
-from .dictionary import affect, with_, potent_poison, weak_poison
-from .dictionary import carrying
-from .dictionary import place, middle_of, Level
-from .dictionary import make, drop, hit, wait
-from .dictionary import has_dropped
-from .dictionary import cast_spell
+def Rune():
+    """
+    Creates a rune
+    """
+    item = (ItemBuilder()
+                .with_name('rune')
+                .build())
+
+    item.old_values = {}
+    return item

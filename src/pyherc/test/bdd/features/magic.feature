@@ -30,7 +30,7 @@ Feature: Magic
 
   @active
   Scenario: Domain specialization
-      Given Simon has Rune
+      Given Simon has rune
        When Simon uses rune for fire domain
        Then Simon should have more fire spells
         And Rune should not be in inventory of Simon

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 from behave import step_matcher
 from pyherc.test.cutesy import make, drop
 from pyherc.test.bdd.features.helpers import default_context, armour_list
-from pyherc.test.bdd.features.helpers import weapon_list
+from pyherc.test.bdd.features.helpers import weapon_list, misc_item_list
 from pyherc.test.bdd.features.helpers import get_character, get_item
 from pyherc.test.bdd.features.helpers import get_location
 
@@ -31,11 +30,14 @@ step_matcher('re')
 @default_context
 @weapon_list
 @armour_list
+@misc_item_list
 def impl(context, character_name, item_name):
     if item_name in context.armour_list:
         item = context.armour_list[item_name]()
     elif item_name in context.weapon_list:
         item = context.weapon_list[item_name]()
+    elif item_name in context.misc_item_list:
+        item = context.misc_item_list[item_name]()
 
     context.items.append(item)
 

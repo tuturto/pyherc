@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -23,5 +22,6 @@ Package for BDD helpers
 """
 from .context import default_context, with_action_factory, get_character
 from .context import get_location, get_item, get_entity, armour_list
+from .context import misc_item_list
 from .context import weapon_list
 from .events import observed

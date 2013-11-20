@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -25,6 +24,7 @@ from pyherc.data import Model
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.cutesy import LeatherArmour, ScaleMail, PlateMail
 from pyherc.test.cutesy import Sword, Club, Dagger, Bow, Arrows
+from pyherc.test.cutesy import Rune
 
 def default_context(fn):
     """
@@ -123,6 +123,26 @@ def weapon_list(fn):
         return fn(*args, **kwargs)
 
     return weapon_setup
+
+def misc_item_list(fn):
+    """
+    Decorator to set up misc items list
+
+    .. versionadded:: 0.10
+    """
+    def misc_item_setup(*args, **kwargs):
+        """
+        Setup misc items list
+        """
+        context = args[0]
+
+        if not hasattr(context, 'misc_item_list'):
+            context.misc_item_list = {}
+            context.misc_item_list['rune'] = Rune
+
+        return fn(*args, **kwargs)
+
+    return misc_item_setup
 
 def get_character(context, character_name):
     """
