@@ -18,13 +18,11 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 from behave import step_matcher
-from pyherc.test.bdd.features.helpers import get_character
-from pyherc.test.cutesy import make, cast_spell
+from pyherc.test.bdd.features.helpers import get_character, get_item
+from pyherc.test.cutesy import make, cast_spell, gain_domain
 
 @when('{caster_name} casts {spell_and_target}')
 def impl(context, caster_name, spell_and_target):
-    # Simon casts magic missile on Uglak
-    # Simon casts healing wind
     caster = get_character(context, caster_name)
     split_text = spell_and_target.split()
 
@@ -54,9 +52,13 @@ def impl(context, caster_name):
 
 step_matcher('parse')
 
-@when('{caster_name} uses rune for {domain_name} domain')
-def step_impl(context, caster_name, domain_name):
-    assert False
+@when('{caster_name} uses {item_name} for {domain_name} domain')
+def step_impl(context, caster_name, item_name, domain_name):
+    caster = get_character(context, caster_name)
+    item = get_item(context, item_name)
+
+    make(caster, gain_domain(item = item,
+                             domain = domain_name))
 
 @then('{caster_name} should have more {domain_name} spells')
 def step_impl(context, caster_name, domain_name):

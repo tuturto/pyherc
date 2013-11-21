@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -31,6 +30,6 @@ from .dictionary import at_
 from .dictionary import affect, with_, potent_poison, weak_poison
 from .dictionary import carrying
 from .dictionary import place, middle_of, Level
-from .dictionary import make, drop, hit, wait
+from .dictionary import make, drop, hit, wait, gain_domain
 from .dictionary import has_dropped
 from .dictionary import cast_spell

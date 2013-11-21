@@ -140,9 +140,9 @@ class Wait():
         :type character: Character
         """
         character.old_values['tick'] = character.tick
-        
+
         action_factory = (ActionFactoryBuilder()
-                                    .with_wait_factory()                                    
+                                    .with_wait_factory()
                                     .build())
 
         character.wait(action_factory)
@@ -153,7 +153,7 @@ def wait():
     """
     action = Wait()
     return action
-        
+
 class CastSpell():
     """
     Class representing casting a spell
@@ -161,7 +161,7 @@ class CastSpell():
     def __init__(self, spell_name, target = None):
         """
         Default constructor
-        
+
         :param spell_name: name of the spell to cast
         :type spell_name: string
         :param target: target of the spell
@@ -170,18 +170,18 @@ class CastSpell():
         super().__init__()
         self.spell_name = spell_name
         self.target = target
-    
+
     def __call__(self, caster):
         """
         Performs the casting
-        
+
         :param caster: character doing the casting
         :type caster: Character
         """
         caster.old_values['hit points'] = caster.hit_points
 
         spell_factory = SpellGeneratorBuilder().build()
-        
+
         effects_factory = (EffectsFactoryBuilder()
                                 .with_effect('heal medium wounds',
                                              {'type': Heal,
@@ -192,7 +192,7 @@ class CastSpell():
                                               'icon': None,
                                               'title': 'Heal medium wounds',
                                               'description': 'Heals medium amount of damage'})
-                                .with_effect('cause wound',                                             
+                                .with_effect('cause wound',
                                              {'type': Damage,
                                               'duration': None,
                                               'frequency': None,
@@ -229,9 +229,9 @@ class CastSpell():
                                        self.target.location)
         else:
             direction = 1
-            
+
         caster.cast(direction = direction,
-                    spell_name = self.spell_name, 
+                    spell_name = self.spell_name,
                     action_factory = action_factory)
 
 def cast_spell(spell_name, target = None):
@@ -321,6 +321,31 @@ def wielding(weapon):
     """
     action = WieldAction(weapon)
     return action
+
+class GainDomainAction():
+    """
+    Action to gain a domain
+    """
+
+    def __init__(self, item, domain):
+        """
+        Default constructor
+        """
+        self.item = item
+        self.domain = domain
+
+    def __call__(self, character):
+        """
+        Execute the action
+        """
+        assert False
+
+def gain_domain(item, domain):
+    """
+    Gain domain
+    """
+    return GainDomainAction(item = item,
+                            domain = domain)
 
 class HasLessHitPoints(BaseMatcher):
     """
