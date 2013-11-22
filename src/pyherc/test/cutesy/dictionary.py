@@ -338,7 +338,14 @@ class GainDomainAction():
         """
         Execute the action
         """
-        assert False
+        action_factory = (ActionFactoryBuilder()
+                                    .with_gain_domain_factory()
+                                    .with_dying_rules()
+                                    .build())
+
+        character.gain_domain(item = self.item,
+                              domain = self.domain,
+                              action_factory = action_factory)
 
 def gain_domain(item, domain):
     """

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -60,6 +59,8 @@ class ActionFactoryBuilder():
         self.spellcasting_factory.action_type = 'cast spell'
         self.wait_factory = mock()
         self.wait_factory.action_type = 'wait'
+        self.gain_domain_factory = mock()
+        self.gain_domain_factory.action_type = 'gain domain'
         self.dying_rules = mock()
 
         self.effect_factory = mock()
@@ -69,7 +70,8 @@ class ActionFactoryBuilder():
         self.use_real_move_factory = False
         self.use_real_spellcasting_factory = False
         self.use_real_wait_factory = False
-        self.use_real_dying_rules = False        
+        self.use_real_gain_domain_factory = False
+        self.use_real_dying_rules = False
 
     def with_model(self, model):
         """
@@ -107,11 +109,11 @@ class ActionFactoryBuilder():
             else:
                 self.drink_factory = drink_factory
         return self
-    
+
     def with_spellcasting_factory(self, spellcasting_factory = None):
         """
         Configure action factory to use real magic factory
-        
+
         .. versionadded:: 0.9
         """
         if not spellcasting_factory:
@@ -162,6 +164,23 @@ class ActionFactoryBuilder():
         self.use_real_dying_rules = True
         return self
 
+    def with_gain_domain_factory(self, gain_domain_factory = None):
+        """
+        Configure action factory to use gain domain factory
+
+        :param gain_domain_factory: gain domain factory to use
+        :type gain_domain_factory: GainDomainFactory
+
+        .. versionadded:: 0.10
+        """
+        if gain_domain_factory:
+            self.gain_domain_factory = gain_domain_factory
+        else:
+            self.use_real_domain_factory = True
+
+        return self
+
+
     def build(self):
         """
         Build action factory
@@ -204,18 +223,18 @@ class ActionFactoryBuilder():
         if self.use_real_move_factory:
             walk_factory = WalkFactory(mock())
             self.move_factory = MoveFactory(walk_factory)
-        
+
         if self.use_real_spellcasting_factory:
             self.spellcasting_factory = SpellCastingFactoryBuilder().build()
 
         if self.use_real_wait_factory:
             self.wait_factory = WaitFactoryBuilder().build()
-            
+
         action_factory = ActionFactory(self.model,
                                        [self.move_factory,
                                         self.drink_factory,
                                         self.attack_factory,
-                                        self.inventory_factory, 
+                                        self.inventory_factory,
                                         self.spellcasting_factory,
                                         self.wait_factory])
 
@@ -281,10 +300,28 @@ class WaitFactoryBuilder():
         """
         return WaitFactory()
 
+class GainDomainFactoryBuilder():
+    """
+    Builder for gain domain factory
+
+    ..versionadded:: 0.10
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super().__init__()
+
+    def build(self):
+        """
+        Builds the factory
+        """
+        pass
+
 class SpellCastingFactoryBuilder():
     """
     Builder for spell casting factory
-    
+
     .. versionadded:: 0.9
     """
     def __init__(self):
@@ -292,7 +329,7 @@ class SpellCastingFactoryBuilder():
         Default constructor
         """
         super().__init__()
-        
+
         self.spell_factory = mock()
         self.use_real_spell_factory = False
         self.effects_factory = mock()
@@ -310,7 +347,7 @@ class SpellCastingFactoryBuilder():
             else:
                 self.spell_factory = spell_factory
         return self
-       
+
     def with_effects_factory(self, effects_factory = None):
         """
         Configure effects factory to use
@@ -331,11 +368,11 @@ class SpellCastingFactoryBuilder():
         if self.use_real_spell_factory:
             #self.spell_factory = None
             pass
-        
+
         if self.use_real_effects_factory:
             #self.effects_factory = None
             pass
-            
+
         return SpellCastingFactory(spell_factory = self.spell_factory,
                                    effects_factory = self.effects_factory,
                                    dying_rules = Dying())
