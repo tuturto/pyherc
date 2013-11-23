@@ -53,7 +53,7 @@ class SpellCastingAction():
         Executes this action
         """
         self.caster.spirit = self.caster.spirit - self.spell.spirit
-        
+
         self.spell.cast(effects_factory = self.effects_factory,
                         dying_rules = self.dying_rules)
 
@@ -66,3 +66,42 @@ class SpellCastingAction():
         :rtype: Boolean
         """
         return self.caster.spirit - self.spell.spirit >= 0
+
+class GainDomainAction():
+    """
+    Action for gaining a domain
+
+    .. versionadded:: 0.10
+    """
+    @log_debug
+    def __init__(self, caster, item, domain):
+        """
+        Default constructor
+
+        :param caster: character gaining a domain
+        :type caster: Character
+        :param item: item to sacrifice
+        :type item: Item
+        :param domain: domain to gain
+        :type domain: string
+        """
+        self.caster = caster
+        self.item = item
+        self.domain = domain
+
+    @log_info
+    def execute(self):
+        """
+        Executes this action
+        """
+        pass
+
+    @log_debug
+    def is_legal(self):
+        """
+        Check if the action is possible to perform
+
+        :returns: True if gaining a domain is possible
+        :rtype: Boolean
+        """
+        return True

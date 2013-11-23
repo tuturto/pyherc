@@ -50,7 +50,7 @@ class SpellCastingFactory(SubActionFactory):
         """
         spell = self.spell_factory.create_spell(spell_name = parameters.spell_name,
                                                 targets = self._get_spell_targets(parameters))
-        
+
         return SpellCastingAction(caster = parameters.caster,
                                   spell = spell,
                                   effects_factory = self.effects_factory,
@@ -60,9 +60,34 @@ class SpellCastingFactory(SubActionFactory):
     def _get_spell_targets(self, parameters):
         """
         Get targets for spell
-        
+
         :returns: targets of a spell
         :rtype: [Character]
         """
         spec = self.spell_factory.spell_list[parameters.spell_name]
         return spec.targeter(parameters)
+
+class GainDomainFactory(SubActionFactory):
+    """
+    Factory for creating gain domain actions
+
+    .. versionadded:: 0.10
+    """
+    @log_debug
+    def __init__(self):
+        """
+        Constructor for this factory
+        """
+        self.action_type = 'gain domain'
+
+    @log_info
+    def get_action(self, parameters):
+        """
+        Create a gain domain action
+
+        :param parameters: parameters used to control creation
+        :type parameters: GainDomainParameters
+        """
+        return GainDomainAction(caster = parameters.caster,
+                                item = parameters.item,
+                                domain = parameters.domain)

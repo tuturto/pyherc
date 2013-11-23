@@ -34,7 +34,7 @@ from pyherc.rules.inventory.factories import InventoryFactory
 from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
 from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.unequip import UnEquipFactory
-from pyherc.rules.magic import SpellCastingFactory
+from pyherc.rules.magic import SpellCastingFactory, GainDomainFactory
 from pyherc.rules.wait.factories import WaitFactory
 
 class ActionFactoryBuilder():
@@ -176,7 +176,7 @@ class ActionFactoryBuilder():
         if gain_domain_factory:
             self.gain_domain_factory = gain_domain_factory
         else:
-            self.use_real_domain_factory = True
+            self.use_real_gain_domain_factory = True
 
         return self
 
@@ -230,13 +230,17 @@ class ActionFactoryBuilder():
         if self.use_real_wait_factory:
             self.wait_factory = WaitFactoryBuilder().build()
 
+        if self.use_real_gain_domain_factory:
+            self.gain_domain_factory = GainDomainFactoryBuilder().build()
+
         action_factory = ActionFactory(self.model,
                                        [self.move_factory,
                                         self.drink_factory,
                                         self.attack_factory,
                                         self.inventory_factory,
                                         self.spellcasting_factory,
-                                        self.wait_factory])
+                                        self.wait_factory,
+                                        self.gain_domain_factory])
 
         return action_factory
 
@@ -316,7 +320,7 @@ class GainDomainFactoryBuilder():
         """
         Builds the factory
         """
-        pass
+        return GainDomainFactory()
 
 class SpellCastingFactoryBuilder():
     """
