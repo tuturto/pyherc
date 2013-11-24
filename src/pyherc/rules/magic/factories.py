@@ -21,7 +21,7 @@
 Spell casting related factories
 """
 from pyherc.rules.factory import SubActionFactory
-from pyherc.rules.magic.action import SpellCastingAction
+from pyherc.rules.magic.action import SpellCastingAction, GainDomainAction
 from pyherc.aspects import log_debug, log_info
 
 class SpellCastingFactory(SubActionFactory):
@@ -88,6 +88,6 @@ class GainDomainFactory(SubActionFactory):
         :param parameters: parameters used to control creation
         :type parameters: GainDomainParameters
         """
-        return GainDomainAction(caster = parameters.caster,
+        return GainDomainAction(character = parameters.character,
                                 item = parameters.item,
                                 domain = parameters.domain)

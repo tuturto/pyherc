@@ -74,18 +74,18 @@ class GainDomainAction():
     .. versionadded:: 0.10
     """
     @log_debug
-    def __init__(self, caster, item, domain):
+    def __init__(self, character, item, domain):
         """
         Default constructor
 
-        :param caster: character gaining a domain
-        :type caster: Character
+        :param character: character gaining a domain
+        :type character: Character
         :param item: item to sacrifice
         :type item: Item
         :param domain: domain to gain
         :type domain: string
         """
-        self.caster = caster
+        self.character = character
         self.item = item
         self.domain = domain
 
@@ -94,7 +94,7 @@ class GainDomainAction():
         """
         Executes this action
         """
-        pass
+        self.character.add_spell_level(domain = self.domain)
 
     @log_debug
     def is_legal(self):

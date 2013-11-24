@@ -23,6 +23,7 @@ Module for Character related classes
 from pyherc.aspects import log_debug, log_info
 from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
 from pyherc.rules import InventoryParameters, SpellCastingParameters
+from pyherc.rules import GainDomainParameters
 from pyherc.rules import WaitParameters
 from pyherc.events import HitPointsChangedEvent, SpiritPointsChangedEvent
 from pyherc.events import ErrorEvent
@@ -610,7 +611,13 @@ class Character():
 
         .. versionadded:: 0.10
         """
-        pass
+        action = action_factory.get_action(
+                            GainDomainParameters(character = self,
+                                                 domain = domain,
+                                                 item = item))
+
+        if action.is_legal():
+            action.execute()
 
     @log_debug
     def raise_event(self, event):

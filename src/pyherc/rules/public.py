@@ -222,10 +222,10 @@ class InventoryParameters(ActionParameters):
 class SpellCastingParameters(ActionParameters):
     """
     Class for controlling spell casting
-    
+
     .. versionadded:: 0.9
     """
-    
+
     @log_debug
     def __init__(self, caster, direction, spell_name):
         """
@@ -266,3 +266,28 @@ class WaitParameters(ActionParameters):
         self.action_type = 'wait'
         self.character = character
         self.time_to_wait = time_to_wait
+
+class GainDomainParameters(ActionParameters):
+    """
+    Class for controlling gaining a domain
+
+    .. versionadded:: 0.10
+    """
+    @log_debug
+    def __init__(self, character, item, domain):
+        """
+        Construct gain domain parameter
+
+        :param character: character to gain a domain
+        :type character: Character
+        :param item: item to sacrifice
+        :type item: Item
+        :param domain: domain to gain
+        :type domain: String
+        """
+        super().__init__()
+
+        self.action_type = 'gain domain'
+        self.character = character
+        self.item = item
+        self.domain = domain
