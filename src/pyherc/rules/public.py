@@ -140,6 +140,24 @@ class AttackParameters(ActionParameters):
         """
         return 'attack with attack type of ' + self.attack_type
 
+# @guarded_action
+@log_info
+def move(character, direction, action_factory):
+    """
+    Move character to specified direction
+
+    :param character: character moving
+    :type character: Character
+    :param direction: direction to move
+    :type direction: integer
+    :param action_factory: factory to create actions
+    :type action_factory: ActionFactory
+    """
+    action = action_factory.get_action(MoveParameters(character,
+                                                      direction,
+                                                      'walk'))
+    action.execute()
+
 class MoveParameters(ActionParameters):
     """
     Object for controlling move action creation

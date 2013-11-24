@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,6 +20,8 @@
 """
 Module for moving
 """
+from pyherc.rules.public import move
+
 class MoveController():
     """
     Controller for moving around
@@ -31,7 +32,7 @@ class MoveController():
         """
         Default constructor
         """
-        super(MoveController, self).__init__()
+        super().__init__()
 
         self.action_factory = action_factory
         self.rng = rng
@@ -45,8 +46,7 @@ class MoveController():
         if character.is_move_legal(direction,
                                    movement_mode,
                                    self.action_factory):
-            character.move(direction,
-                           self.action_factory)
+            move(character, direction, self.action_factory)
         elif direction != 9:
             loc = character.get_location_at_direction(direction)
             if level.get_creature_at(loc) != None:

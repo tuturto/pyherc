@@ -31,6 +31,7 @@ from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
 from herculeum.ui.gui.widgets import SpellSelectorWidget
 from herculeum.ui.controllers import MoveController
+from pyherc.rules.public import move
 from random import Random
 
 class PlayMapWindow(QWidget):
@@ -52,7 +53,7 @@ class PlayMapWindow(QWidget):
         self.rng = rng
         self.current_level = None
         self.configuration = configuration
-        
+
         self.hit_points_widget = None
         self.message_widget = None
         self.map_widget = None
@@ -166,7 +167,7 @@ class PlayMapWidget(QWidget):
         self.rng = rng
         self.rules_engine = rules_engine
         self.configuration = configuration
-        
+
         self.current_level = None
         self.view = None
 
@@ -546,7 +547,7 @@ class PlayMapWidget(QWidget):
                 player.cast(direction,
                             'fireball',
                             self.action_factory)
-            
+
         else:
             self.move_controller.move_or_attack(player,
                                                 direction,
@@ -580,7 +581,7 @@ class PlayMapWidget(QWidget):
 
         .. versionadded:: 0.10
         """
-        self.NextSpellRequested.emit()        
+        self.NextSpellRequested.emit()
 
     def _shoulder_left(self, key, modifiers):
         """
@@ -591,7 +592,7 @@ class PlayMapWidget(QWidget):
 
         .. versionadded:: 0.10
         """
-        self.PreviousSpellRequested.emit()   
+        self.PreviousSpellRequested.emit()
 
     def _action_a(self, key, modifiers):
         """
@@ -611,8 +612,7 @@ class PlayMapWidget(QWidget):
         elif player.is_move_legal(9,
                                   'walk',
                                   self.action_factory):
-            player.move(9,
-                        self.action_factory)
+            move(player, 9, self.action_factory)
 
 class DamageCounter(QGraphicsSimpleTextItem):
     """

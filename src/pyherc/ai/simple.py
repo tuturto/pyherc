@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -27,6 +26,7 @@ Creature will try to find friends, before attacking the player character
 import math
 from pyherc.aspects import log_debug
 from pyherc.data.geometry import find_direction
+from pyherc.rules.public import move
 
 class FlockingHerbivore():
     """
@@ -90,8 +90,7 @@ class FlockingHerbivore():
                     if character.is_move_legal(direction,
                                                'walk',
                                                action_factory):
-                        character.move(direction,
-                                       action_factory)
+                        move(character, direction, action_factory)
                     else:
                         character.tick = character.tick + 10
                 else:
@@ -106,8 +105,7 @@ class FlockingHerbivore():
                 if character.is_move_legal(direction,
                                            'walk',
                                            action_factory):
-                    character.move(direction,
-                                   action_factory)
+                    move(character, direction, action_factory)
                 else:
                     character.tick = character.tick + 10
         else:

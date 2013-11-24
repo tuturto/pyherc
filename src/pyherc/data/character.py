@@ -377,24 +377,6 @@ class Character():
 
         return action
 
-    @guarded_action
-    @log_info
-    def move(self, direction, action_factory):
-        """
-        Move this character to specified direction
-
-        :param direction: direction to move
-        :type direction: integer
-        :param action_factory: factory to create actions
-        :type action_factory: ActionFactory
-        """
-        action = action_factory.get_action(
-                                           MoveParameters(
-                                                          self,
-                                                          direction,
-                                                          'walk'))
-        action.execute()
-
     @log_debug
     def is_move_legal(self, direction, movement_mode, action_factory):
         """

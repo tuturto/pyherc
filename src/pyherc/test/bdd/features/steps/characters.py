@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -23,6 +22,7 @@ from pyherc.test.cutesy import Adventurer, Wizard, Goblin
 from pyherc.test.matchers import is_dead
 from pyherc.ai.pathfinding import a_star
 from pyherc.data.geometry import find_direction
+from pyherc.rules.public import move
 from hamcrest import assert_that, is_not #pylint: disable-msg=E0611
 from pyherc.test.bdd.features.helpers import default_context, observed
 from pyherc.test.bdd.features.helpers import with_action_factory
@@ -105,13 +105,11 @@ def impl(context, character_name, location_name):
     for tile in path[1:]:
         direction = find_direction(character.location,
                                    tile)
-        character.move(direction,
-                       context.action_factory)
+        move(character, direction, context.action_factory)
 
 @when('{character_name} enters {portal_name}')
 @with_action_factory
 def impl(context, character_name, portal_name):
     character = get_character(context, character_name)
 
-    character.move(9,
-                   context.action_factory)
+    move(character, 9, context.action_factory)

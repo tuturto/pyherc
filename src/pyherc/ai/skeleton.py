@@ -25,6 +25,7 @@ from pyherc.aspects import log_debug
 from pyherc.ai.pathfinding import a_star
 from pyherc.data.geometry import find_direction
 from pyherc.events import NoticeEvent, LoseFocusEvent
+from pyherc.rules.public import move
 
 class SkeletonWarriorAI():
     """
@@ -122,8 +123,7 @@ class SkeletonWarriorAI():
         if character.is_move_legal(direction,
                                    'walk',
                                    action_factory):
-            character.move(direction,
-                           action_factory)
+            move(character, direction, action_factory)
         else:
             character.tick = character.tick + 10
 
@@ -158,7 +158,6 @@ class SkeletonWarriorAI():
             if character.is_move_legal(direction,
                                        'walk',
                                        action_factory):
-                character.move(direction,
-                               action_factory)
+                move(character, direction, action_factory)
             else:
                 character.tick = character.tick + 10

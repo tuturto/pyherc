@@ -21,6 +21,7 @@
 Module for map screen
 """
 from pyherc.aspects import log_debug, log_info
+from pyherc.rules.public import move
 from herculeum.ui.text.inventory import InventoryScreen
 from herculeum.ui.text.character import CharacterScreen
 from herculeum.ui.text.endscreen import EndScreen
@@ -151,16 +152,16 @@ class MapScreen():
     @log_debug
     def _back(self, key):
         """
-        Process back key        
+        Process back key
 
         :param key: key triggering the processing
         :type key: int
-        
+
         .. versionadded:: 0.10
         """
         player = self.model.player
         player.wait(self.action_factory)
-    
+
     @log_debug
     def _action_a(self, key):
         """
@@ -180,8 +181,7 @@ class MapScreen():
         elif player.is_move_legal(9,
                                   'walk',
                                   self.action_factory):
-            player.move(9,
-                        self.action_factory)
+            move(player, 9, self.action_factory)
 
     @log_debug
     def refresh_screen(self):
@@ -270,7 +270,7 @@ class MapScreen():
                                     'equip',
                                     'unequip',
                                     'notice',
-                                    'lose focus', 
+                                    'lose focus',
                                     'error']:
             message = event.get_description(self.model.player)
             self.messages.append(message)
