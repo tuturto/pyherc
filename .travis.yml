@@ -1,8 +1,10 @@
 language: python
 python:
   - "3.2"
-  - "3.3"
 # command to install dependencies
 install: "pip install -r requirements-dev --use-mirrors"
 # command to run tests, e.g. python setup.py test
-script: nosetests -w ./src/pyherc
+script:
+  - nosetests --with-coverage --cover-package=pyherc -w ./src/pyherc
+after_success:
+  - coveralls

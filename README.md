@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/tuturto/pyherc.png)](https://travis-ci.org/tuturto/pyherc)
+[![Coverage Status](https://coveralls.io/repos/tuturto/pyherc/badge.png)](https://coveralls.io/r/tuturto/pyherc)
 
 Intro
 =====
