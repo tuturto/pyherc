@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/tuturto/pyherc.png)](https://travis-ci.org/tuturto/pyherc)
+[![Downloads](https://pypip.in/d/herculeum/badge.png)](https://crate.io/packages/herculeum)
+[![version](https://pypip.in/v/herculeum/badge.png)](https://crate.io/packages/herculeum)
 [![Coverage Status](https://coveralls.io/repos/tuturto/pyherc/badge.png)](https://coveralls.io/r/tuturto/pyherc)
 
 Intro
