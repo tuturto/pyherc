@@ -20,10 +20,10 @@
 (setv __doc__ "module for actions")
 
 (import [pyherc.aspects [log_debug]]
-	[pyherc.events [NoticeEvent]]
-	[math [sqrt]])
+    [pyherc.events [NoticeEvent]]
+    [math [sqrt]])
 
-(require pyherc.ai.macros)
+(require herculeum.ai.macros)
 
 (with-decorator log_debug
   (defn wait [ai]
@@ -33,9 +33,9 @@
 (defn can-walk? [ai action-factory direction]
   "check if character can walk to given direction"
   (.is-move-legal ai.character
-		  (map-direction direction)
-		  "walk"
-		  action-factory))
+          (map-direction direction)
+          "walk"
+          action-factory))
 
 (with-decorator log_debug
   (defn walk [ai action-factory &optional direction]
@@ -47,7 +47,7 @@
 (defn distance-between [start end]
   "calculate distance between two locations"
   (let [[dist-x (- (first start) (first end))]
-	[dist-y (- (second start) (second end))]]
+    [dist-y (- (second start) (second end))]]
     (sqrt (+ (pow dist-x 2)
           (pow dist-y 2)))))
 
@@ -55,18 +55,18 @@
   "calculate direction from start to destination"
   (assert (not (= start destination )))
   (let [[start-x (first start)]
-	[start-y (second start)]
-	[end-x (first destination)]
-	[end-y (second destination)]]
+    [start-y (second start)]
+    [end-x (first destination)]
+    [end-y (second destination)]]
     (if (= start-x end-x)
       (if (< start-y end-y) :south :north)
       (if (= start-y end-y)
-	(if (< start-x end-x) :east :west)))))
+    (if (< start-x end-x) :east :west)))))
 
 (def direction-mapping {1 :north 2 :north-east 3 :east 4 :south-east 5 :south
-			6 :south-west 7 :west 8 :north-west 9 :enter
-			:north 1 :north-east 2 :east 3 :south-east 4 :south 5
-			:south-west 6 :west 7 :north-west 8 :enter 9})
+            6 :south-west 7 :west 8 :north-west 9 :enter
+            :north 1 :north-east 2 :east 3 :south-east 4 :south 5
+            :south-west 6 :west 7 :north-west 8 :enter 9})
 
 (defn map-direction [direction]
   "map between keyword and integer directions"
@@ -79,14 +79,14 @@
 (defn attack [ai enemy action-factory rng]
   "attack an enemy"
   (let [[attacker ai.character]
-	[attacker-location attacker.location]
-	[target-location enemy.location]	
-	[attack-direction (map-direction (find-direction attacker-location 
-							 target-location))]]
+    [attacker-location attacker.location]
+    [target-location enemy.location]
+    [attack-direction (map-direction (find-direction attacker-location
+                             target-location))]]
     (.perform-attack attacker attack-direction action-factory rng)))
 
 (defn focus-enemy [ai enemy]
   "focus on enemy and start tracking it"
   (let [[character ai.character]
-	[event (NoticeEvent character enemy)]]
+    [event (NoticeEvent character enemy)]]
     (.raise-event character event)))

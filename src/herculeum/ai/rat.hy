@@ -19,29 +19,29 @@
 
 (setv __doc__ "module for AI routines for rats")
 
-(import [pyherc.ai.patrol [patrol-ai]])
+(import [herculeum.ai.patrol [patrol-ai]])
 
 (defclass RatAI []
   [[__doc__ "AI routine for rats"]
    [character None]
    [mode [:transit None]]
    [--init-- (fn [self character]
-	       "default constructor"
-	       (.--init-- (super RatAI self))
-	       (setv self.character character) None)]
-   [act (fn [self model action-factory rng] 
-	  "check the situation and act accordingly"
-	  (rat-act self model action-factory))]])
+           "default constructor"
+           (.--init-- (super RatAI self))
+           (setv self.character character) None)]
+   [act (fn [self model action-factory rng]
+      "check the situation and act accordingly"
+      (rat-act self model action-factory))]])
 
 (defn is-next-to-wall? [level x y]
   "check if given location is within patrol area"
   (and (or (.blocks-movement level (+ x 1) y)
-	   (.blocks-movement level (- x 1) y)
-	   (.blocks-movement level x (+ y 1))
-	   (.blocks-movement level x (- y 1)))
+       (.blocks-movement level (- x 1) y)
+       (.blocks-movement level x (+ y 1))
+       (.blocks-movement level x (- y 1)))
        (not (and (.blocks-movement level (+ x 1) y)
-		 (.blocks-movement level (- x 1) y)))
+         (.blocks-movement level (- x 1) y)))
        (not (and (.blocks-movement level x (+ y 1))
-		 (.blocks-movement level x (- y 1))))))
+         (.blocks-movement level x (- y 1))))))
 
 (def rat-act (patrol-ai is-next-to-wall? 4))

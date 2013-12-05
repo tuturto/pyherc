@@ -20,6 +20,7 @@
 """
 module for configuring catacombs
 """
+import hy
 from pyherc.generators.level.room import CatacombsGenerator
 from pyherc.generators.level.partitioners import GridPartitioner
 
