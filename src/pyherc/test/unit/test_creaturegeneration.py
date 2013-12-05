@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -30,7 +29,6 @@ from mockito import mock, verify
 from pyherc.generators import CreatureConfiguration
 from pyherc.generators import InventoryConfiguration
 from pyherc.data.effects import EffectHandle, DamageModifier
-from pyherc.ai import FlockingHerbivore
 from random import Random
 
 class TestCreatureGeneration():
@@ -65,7 +63,7 @@ class TestCreatureGeneration():
                                               speed = 2,
                                               icons = [100, 101],
                                               attack = 2,
-                                              ai = FlockingHerbivore)
+                                              ai = mock())
 
         self.creature_config['spider'] = CreatureConfiguration(name = 'spider',
                                               body = 6,
@@ -75,7 +73,7 @@ class TestCreatureGeneration():
                                               speed = 1,
                                               icons = [102],
                                               attack = 4,
-                                              ai = FlockingHerbivore,
+                                              ai = mock(),
                                               effect_handles = [EffectHandle(
                                                     trigger = 'on attack hit',
                                                     effect = 'minor poison',
@@ -91,7 +89,7 @@ class TestCreatureGeneration():
                                                     speed = 2.5,
                                                     icons = [110],
                                                     attack = 2,
-                                                    ai = FlockingHerbivore,
+                                                    ai = mock(),
                                                     effects = [DamageModifier(modifier = 2,
                                                                   damage_type = 'crushing',
                                                                   duration = None,
@@ -178,7 +176,7 @@ class TestItemsInCreatureGeneration():
                                       speed = 2.5,
                                       icons = [405],
                                       attack = 2,
-                                      ai = FlockingHerbivore,
+                                      ai = mock(),
                                       inventory = inventory_config)
 
         self.creature_config = {}

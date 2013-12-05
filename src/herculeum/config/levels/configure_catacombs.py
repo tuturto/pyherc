@@ -38,9 +38,9 @@ from pyherc.generators.level.portals import PortalAdderConfiguration
 
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.generators import CreatureConfiguration
-from pyherc.ai import FlockingHerbivore, SkeletonWarriorAI
-from pyherc.ai.rat import RatAI
-from pyherc.ai.firebeetle import FireBeetleAI
+from herculeum.ai import FlockingHerbivore, SkeletonWarriorAI
+from herculeum.ai.rat import RatAI
+from herculeum.ai.firebeetle import FireBeetleAI
 from pyherc.data.effects import DamageModifier
 
 from pyherc.rules.constants import PIERCING_DAMAGE, CRUSHING_DAMAGE
@@ -68,7 +68,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     wall_ground = surface_manager.add_icon('wall_ground',
                                            ':ground_wall.png',
                                            ' ')
-    wall_rock = surface_manager.add_icon('wall_rock', 
+    wall_rock = surface_manager.add_icon('wall_rock',
                                          ':rock_wall.png',
                                          '#')
     stairs_down = surface_manager.add_icon('stairs_down',
@@ -220,8 +220,8 @@ def init_creatures(context):
                                         speed = 2,
                                         icons = surface_manager.add_icon(
                                                         'rat',
-                                                        ':mouse.png', 
-                                                        'r', 
+                                                        ':mouse.png',
+                                                        'r',
                                                         ['yellow', 'dim']),
                                         attack = 1,
                                         ai = RatAI))

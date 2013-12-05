@@ -42,7 +42,7 @@ from pyherc.data.effects import EffectHandle
 
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.generators import CreatureConfiguration
-from pyherc.ai import SkeletonWarriorAI
+from herculeum.ai import SkeletonWarriorAI
 
 from pyherc.rules.constants import SLASHING_DAMAGE
 
