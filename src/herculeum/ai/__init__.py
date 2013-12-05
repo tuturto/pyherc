@@ -18,7 +18,8 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module containing AI routines for pyherc
+Module containing AI routines for herculeum
 """
 
-from .pathfinding import a_star
+from .simple import FlockingHerbivore
+from .skeleton import SkeletonWarriorAI

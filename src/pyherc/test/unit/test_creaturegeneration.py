@@ -31,6 +31,17 @@ from pyherc.generators import InventoryConfiguration
 from pyherc.data.effects import EffectHandle, DamageModifier
 from random import Random
 
+class MockAI():
+    """
+    Simple class to fake an AI class
+    """
+
+    def __init__(self, character):
+        """
+        Default constructor
+        """
+        pass
+
 class TestCreatureGeneration():
     """
     Tests for creature generator
@@ -63,7 +74,7 @@ class TestCreatureGeneration():
                                               speed = 2,
                                               icons = [100, 101],
                                               attack = 2,
-                                              ai = mock())
+                                              ai = MockAI)
 
         self.creature_config['spider'] = CreatureConfiguration(name = 'spider',
                                               body = 6,
@@ -73,7 +84,7 @@ class TestCreatureGeneration():
                                               speed = 1,
                                               icons = [102],
                                               attack = 4,
-                                              ai = mock(),
+                                              ai = MockAI,
                                               effect_handles = [EffectHandle(
                                                     trigger = 'on attack hit',
                                                     effect = 'minor poison',
@@ -89,7 +100,7 @@ class TestCreatureGeneration():
                                                     speed = 2.5,
                                                     icons = [110],
                                                     attack = 2,
-                                                    ai = mock(),
+                                                    ai = MockAI,
                                                     effects = [DamageModifier(modifier = 2,
                                                                   damage_type = 'crushing',
                                                                   duration = None,
@@ -176,7 +187,7 @@ class TestItemsInCreatureGeneration():
                                       speed = 2.5,
                                       icons = [405],
                                       attack = 2,
-                                      ai = mock(),
+                                      ai = MockAI,
                                       inventory = inventory_config)
 
         self.creature_config = {}
