@@ -5,6 +5,7 @@ python:
 install: "pip install -r requirements-dev --use-mirrors"
 # command to run tests, e.g. python setup.py test
 script:
-  - nosetests --with-coverage --cover-package=pyherc -w ./src/pyherc
+  - cd src/pyherc
+  - nosetests --with-coverage --cover-package=pyherc
 after_success:
   - coveralls
