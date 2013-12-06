@@ -8,4 +8,4 @@ script:
   - cd src/pyherc
   - nosetests --with-coverage --cover-package=pyherc
 after_success:
-  - coveralls
+  - coveralls --config_file .coveragerc
