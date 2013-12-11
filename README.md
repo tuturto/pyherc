@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/tuturto/pyherc.png)](https://travis-ci.org/tuturto/pyherc)
 [![Coverage Status](https://coveralls.io/repos/tuturto/pyherc/badge.png)](https://coveralls.io/r/tuturto/pyherc)
-
 [![version](https://pypip.in/v/herculeum/badge.png)](https://crate.io/packages/herculeum)
 [![Downloads](https://pypip.in/d/herculeum/badge.png)](https://crate.io/packages/herculeum)
 
@@ -29,14 +28,14 @@ System Requirements
 
 Manual
 ======
-- Online documentation for development version is available at: 
+- Online documentation for development version is available at:
   http://tuturto.github.com/pyherc/index.html
 - Online documentation for pyherc API can be found at:
   https://pyherc.readthedocs.org/
 
 Credits
 =======
-The game is copyrighted by Tuukka Turto and is placed under 
+The game is copyrighted by Tuukka Turto and is placed under
 GNU General Public License.
 
 Game uses graphics downloaded from TomeTik <http://pousse.rapiere.free.fr/tome/>
@@ -44,13 +43,13 @@ Game uses graphics downloaded from TomeTik <http://pousse.rapiere.free.fr/tome/>
 All tiles except "Xerathul's Revenge" tiles have been drawn by David E. Gervais
 and are published under the Creative Commons licence.
 
-Some tiles, in Dungeon Odyssey "Xerathul's Revenge" module have been drawn 
+Some tiles, in Dungeon Odyssey "Xerathul's Revenge" module have been drawn
 by Henk Brouwer.
 
 Some graphics is from http://game-icons.net/
 
 A star implementation adapted from one by Pauli Henrikki Rikula
- 
+
 Other help
 ----------
 Following people have contributed to the code in a way or another, thank you!
