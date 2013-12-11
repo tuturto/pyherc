@@ -1,6 +1,6 @@
-pyherc.ai.simple
+herculeum.ai.rat
 ****************
 
-.. automodule:: pyherc.ai.simple
+.. automodule:: herculeum.ai.rat
     :members:
     :show-inheritance:

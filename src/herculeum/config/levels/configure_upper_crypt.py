@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -37,7 +36,7 @@ from pyherc.generators.level.creatures import CreatureAdder
 
 from pyherc.generators.level.portals import PortalAdderConfiguration
 
-from pyherc.ai import FlockingHerbivore
+from herculeum.ai import FlockingHerbivore
 from pyherc.generators import CreatureConfiguration
 from pyherc.data.effects import EffectHandle
 

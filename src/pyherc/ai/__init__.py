@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -22,6 +21,4 @@
 Module containing AI routines for pyherc
 """
 
-from .simple import FlockingHerbivore
-from .skeleton import SkeletonWarriorAI
 from .pathfinding import a_star

@@ -19,19 +19,19 @@
 
 (setv __doc__ "module for AI routines for firebeetles")
 
-(import [pyherc.ai.patrol [patrol-ai]])
+(import [herculeum.ai.patrol [patrol-ai]])
 
 (defclass FireBeetleAI []
   [[__doc__ "AI routine for fire beetles"]
    [character None]
    [mode [:transit None]]
    [--init-- (fn [self character]
-	       "default constructor"
-	       (.--init-- (super FireBeetleAI self))
-	       (setv self.character character) None)]
-   [act (fn [self model action-factory rng] 
-	  "check the situation and act accordingly"
-	  (beetle-act self model action-factory))]])
+           "default constructor"
+           (.--init-- (super FireBeetleAI self))
+           (setv self.character character) None)]
+   [act (fn [self model action-factory rng]
+      "check the situation and act accordingly"
+      (beetle-act self model action-factory))]])
 
 (defn is-open-space? [level x y]
   "check if given location is within patrol area"

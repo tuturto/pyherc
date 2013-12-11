@@ -21,14 +21,14 @@
 
 (import [pyherc.aspects [log_debug]]
     [pyherc.ai.pathfinding [a-star]]
-    [pyherc.ai.basic [can-walk? walk wait distance-between new-location]]
-    [pyherc.ai.basic [find-direction]]
-    [pyherc.ai.basic [focus-enemy attack]]
+    [herculeum.ai.basic [can-walk? walk wait distance-between new-location]]
+    [herculeum.ai.basic [find-direction]]
+    [herculeum.ai.basic [focus-enemy attack]]
     [random]
     [math [sqrt]]
     [functools [partial]])
 
-(require pyherc.ai.macros)
+(require herculeum.ai.macros)
 
 (with-decorator log_debug
   (defn -fight-in-melee [attack-routine close-in-routine ai action-factory]

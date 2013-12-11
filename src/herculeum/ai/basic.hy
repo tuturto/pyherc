@@ -24,7 +24,7 @@
     [pyherc.events [NoticeEvent]]
     [math [sqrt]])
 
-(require pyherc.ai.macros)
+(require herculeum.ai.macros)
 
 (with-decorator log_debug
   (defn wait [ai]

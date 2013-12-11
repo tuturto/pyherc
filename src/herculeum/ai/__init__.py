@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -19,8 +18,8 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for native tests
+Module containing AI routines for herculeum
 """
-import hy
 
-from pyherc.test.native.test_ai_helpers import *
+from .simple import FlockingHerbivore
+from .skeleton import SkeletonWarriorAI
