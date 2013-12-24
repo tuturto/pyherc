@@ -25,7 +25,6 @@ ActionFactory - Class used to contruct Action objects
 ActionParameters - Class used to guide Action construction
 
 AttackParameters - Class used to guide contruction of attack related actions
-MoveParameters - Class used to guide construction of move related actions
 DrinkParameters - Class used to guide drinking related actions
 InventoryParameters - Class used to guide inventory related actions
 SpellCastingParameteres - Class used to guide spell casting
@@ -139,53 +138,6 @@ class AttackParameters(ActionParameters):
         Get string representation of this object
         """
         return 'attack with attack type of ' + self.attack_type
-
-# @guarded_action
-@log_info
-def move(character, direction, action_factory):
-    """
-    Move character to specified direction
-
-    :param character: character moving
-    :type character: Character
-    :param direction: direction to move
-    :type direction: integer
-    :param action_factory: factory to create actions
-    :type action_factory: ActionFactory
-    """
-    action = action_factory.get_action(MoveParameters(character,
-                                                      direction,
-                                                      'walk'))
-    action.execute()
-
-class MoveParameters(ActionParameters):
-    """
-    Object for controlling move action creation
-    """
-    @log_debug
-    def __init__(self, character, direction, movement_mode):
-        """
-        Construct move parameters
-
-        Args:
-            character: Character moving
-            direction: Direction of the move
-            movement_mode: Mode of movement
-        """
-        ActionParameters.__init__(self)
-
-        self.action_type = 'move'
-        self.character = character
-        self.direction = direction
-        self.movement_mode = movement_mode
-        self.model = None
-
-    @log_debug
-    def __str__(self):
-        """
-        Get string representation of this object
-        """
-        return 'move with movement mode of ' + self.movement_mode
 
 class DrinkParameters(ActionParameters):
     """

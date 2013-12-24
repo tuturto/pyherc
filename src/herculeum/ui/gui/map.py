@@ -31,7 +31,7 @@ from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
 from herculeum.ui.gui.widgets import SpellSelectorWidget
 from herculeum.ui.controllers import MoveController
-from pyherc.rules.public import move
+from pyherc.rules import move, is_move_legal
 from random import Random
 
 class PlayMapWindow(QWidget):
@@ -609,9 +609,7 @@ class PlayMapWidget(QWidget):
             player.pick_up(items[0],
                            self.action_factory)
 
-        elif player.is_move_legal(9,
-                                  'walk',
-                                  self.action_factory):
+        elif is_move_legal(player, 9, 'walk', self.action_factory):
             move(player, 9, self.action_factory)
 
 class DamageCounter(QGraphicsSimpleTextItem):

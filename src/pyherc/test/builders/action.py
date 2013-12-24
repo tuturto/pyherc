@@ -24,7 +24,7 @@ from mockito import mock
 
 from pyherc.rules.public import ActionFactory
 from pyherc.rules import Dying
-from pyherc.rules.move.factories import MoveFactory, WalkFactory
+from pyherc.rules.moving.factories import MoveFactory, WalkFactory
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
 from pyherc.rules.attack.factories import MeleeCombatFactory

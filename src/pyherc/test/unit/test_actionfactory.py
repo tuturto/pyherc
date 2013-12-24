@@ -25,7 +25,7 @@ Module for testing combat related rules
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.public import AttackParameters
 from pyherc.rules.attack.factories import AttackFactory
-from pyherc.rules.move.factories import MoveFactory
+from pyherc.rules.moving.factories import MoveFactory
 from pyherc.data.model import Model
 from mockito import mock, when, any
 from hamcrest import assert_that, is_in, contains_inanyorder, is_, same_instance  #pylint: disable-msg=E0611

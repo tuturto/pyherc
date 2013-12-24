@@ -25,8 +25,8 @@ from hamcrest import assert_that, is_, is_not, equal_to #pylint: disable-msg=E06
 from mockito import mock
 from nose.tools import with_setup
 
-from pyherc.rules.move.action import EscapeAction
-from pyherc.rules.public import move
+from pyherc.rules.moving.action import EscapeAction
+from pyherc.rules import move
 from pyherc.data import Portal
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import CharacterBuilder

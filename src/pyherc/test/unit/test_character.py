@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -28,7 +27,6 @@ from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ItemBuilder
 from pyherc.test.builders import LevelBuilder
 from pyherc.data.dungeon import Dungeon
-from pyherc.rules.moving import deactivate
 from pyherc.test.matchers import EventType
 from hamcrest import assert_that, is_, same_instance, equal_to, none #pylint: disable-msg=E0611
 from pyherc.events import MoveEvent
@@ -117,41 +115,3 @@ class TestStatues():
         Default constructor
         """
         super(TestStatues, self).__init__()
-
-    def test_deactivating_creature(self):
-        """
-        Test that activated character can deactivate
-        """
-        self.model = Model()
-
-        creature = (CharacterBuilder()
-                        .with_model(self.model)
-                        .with_name('Mimic')
-                        .build())
-
-        item = (ItemBuilder()
-                    .with_name('Chest')
-                    .build())
-
-        creature.set_mimic_item(item)
-
-        self.model.dungeon = Dungeon()
-
-        self.level1 = LevelBuilder().build()
-        self.model.dungeon.levels = self.level1
-
-        self.level1.add_creature(creature, self.level1.find_free_space())
-
-        location = creature.location
-
-        creatures = self.level1.get_creature_at(location)
-        items = self.level1.get_items_at(location)
-        assert_that(creatures, is_(same_instance(creature)))
-        assert_that(len(items), is_(equal_to(0)))
-
-        deactivate(self.model, creature)
-
-        creatures = self.level1.get_creature_at(location)
-        items = self.level1.get_items_at(location)
-        assert_that(creatures, is_(none()))
-        assert_that(len(items), is_(equal_to(1)))

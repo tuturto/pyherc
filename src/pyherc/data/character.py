@@ -21,7 +21,7 @@
 Module for Character related classes
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules import MoveParameters, AttackParameters, DrinkParameters
+from pyherc.rules import AttackParameters, DrinkParameters
 from pyherc.rules import InventoryParameters, SpellCastingParameters
 from pyherc.rules import GainDomainParameters
 from pyherc.rules import WaitParameters
@@ -376,27 +376,6 @@ class Character():
         assert action != None
 
         return action
-
-    @log_debug
-    def is_move_legal(self, direction, movement_mode, action_factory):
-        """
-        Check if movement is legal
-
-        :param direction: direction to move
-        :type direction: integer
-        :param movement_mode: mode of movement
-        :type movement_mode: string
-        :param action_factory: factory to create actions
-        :type action_factory: ActionFactory
-        :returns: True if move is legal, False otherwise
-        :rtype: Boolean
-        """
-        action = action_factory.get_action(
-                                           MoveParameters(
-                                                          self,
-                                                          direction,
-                                                          movement_mode))
-        return action.is_legal()
 
     @guarded_action
     @log_info

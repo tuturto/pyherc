@@ -22,7 +22,7 @@
 Attack related factories are defined here
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules.move.action import MoveAction, EscapeAction
+from pyherc.rules.moving.action import MoveAction, EscapeAction
 from pyherc.rules.factory import SubActionFactory
 
 class WalkFactory(SubActionFactory):

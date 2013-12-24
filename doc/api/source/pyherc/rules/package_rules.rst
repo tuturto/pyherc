@@ -10,7 +10,7 @@ pyherc.rules
    consume/package_consume
    inventory/package_inventory
    magic/package_magic
-   move/module_move
+   moving/package_moving
    wait/package_wait
    module_constants
    module_ending

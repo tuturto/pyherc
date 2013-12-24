@@ -26,7 +26,7 @@ Creature will try to find friends, before attacking the player character
 import math
 from pyherc.aspects import log_debug
 from pyherc.data.geometry import find_direction
-from pyherc.rules.public import move
+from pyherc.rules import move, is_move_legal
 
 class FlockingHerbivore():
     """
@@ -87,9 +87,10 @@ class FlockingHerbivore():
                                            player.location)
 
                 if distance > 1.42:
-                    if character.is_move_legal(direction,
-                                               'walk',
-                                               action_factory):
+                    if is_move_legal(character,
+                                     direction,
+                                     'walk',
+                                     action_factory):
                         move(character, direction, action_factory)
                     else:
                         character.tick = character.tick + 10
@@ -102,9 +103,10 @@ class FlockingHerbivore():
                 #find direction
                 direction = find_direction(character.location,
                                            closest_creature.location)
-                if character.is_move_legal(direction,
-                                           'walk',
-                                           action_factory):
+                if is_move_legal(character,
+                                 direction,
+                                 'walk',
+                                 action_factory):
                     move(character, direction, action_factory)
                 else:
                     character.tick = character.tick + 10

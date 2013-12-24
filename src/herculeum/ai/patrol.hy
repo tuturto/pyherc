@@ -21,6 +21,7 @@
 
 (import [pyherc.aspects [log_debug]]
     [pyherc.ai.pathfinding [a-star]]
+    [pyherc.rules [is-move-legal]]
     [herculeum.ai.basic [can-walk? walk wait distance-between new-location]]
     [herculeum.ai.basic [find-direction]]
     [herculeum.ai.basic [focus-enemy attack]]
@@ -80,7 +81,7 @@
     "take a random step without changing mode"
     (let [[legal-directions (list-comp direction
                        [direction (, 1 3 5 7)]
-                       (.is-move-legal ai.character
+                       (is-move-legal ai.character
                                direction
                                "walk"
                                action-factory))]]

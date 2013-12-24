@@ -22,7 +22,7 @@ from pyherc.test.cutesy import Adventurer, Wizard, Goblin
 from pyherc.test.matchers import is_dead
 from pyherc.ai.pathfinding import a_star
 from pyherc.data.geometry import find_direction
-from pyherc.rules.public import move
+from pyherc.rules import move
 from hamcrest import assert_that, is_not #pylint: disable-msg=E0611
 from pyherc.test.bdd.features.helpers import default_context, observed
 from pyherc.test.bdd.features.helpers import with_action_factory

@@ -20,10 +20,11 @@
 """
 Package for rules of the game
 """
+from pyherc.rules.moving.interface import move, is_move_legal
+
 from .public import ActionFactory
 from .public import ActionParameters
 from .public import AttackParameters
-from .public import MoveParameters
 from .public import DrinkParameters
 from .public import InventoryParameters
 from .public import SpellCastingParameters

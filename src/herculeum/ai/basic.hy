@@ -20,7 +20,7 @@
 (setv __doc__ "module for actions")
 
 (import [pyherc.aspects [log_debug]]
-    [pyherc.rules.public [move]]
+    [pyherc.rules [move is-move-legal]]
     [pyherc.events [NoticeEvent]]
     [math [sqrt]])
 
@@ -33,7 +33,7 @@
 
 (defn can-walk? [ai action-factory direction]
   "check if character can walk to given direction"
-  (.is-move-legal ai.character
+  (is-move-legal ai.character
           (map-direction direction)
           "walk"
           action-factory))

@@ -24,8 +24,8 @@ import random
 from pyherc.rules.public import ActionFactory
 from pyherc.rules import RulesEngine
 from pyherc.rules import Dying
-from pyherc.rules.move.factories import MoveFactory
-from pyherc.rules.move.factories import WalkFactory
+from pyherc.rules.moving.factories import MoveFactory
+from pyherc.rules.moving.factories import WalkFactory
 from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.rules.attack.factories import AttackFactory
 from pyherc.rules.attack.factories import UnarmedCombatFactory
@@ -122,7 +122,7 @@ class Configuration():
                                              UnEquipFactory()])
 
         wait_factory = WaitFactory()
-        
+
         spell_factory = SpellGenerator()
 
         spell_casting_factory = SpellCastingFactory(spell_factory,
