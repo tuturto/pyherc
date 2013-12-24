@@ -18,12 +18,25 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for common constants
+Tests for calendar
 """
-INSTANT_ACTION = 1
-FAST_ACTION = 2
-NORMAL_ACTION = 4
-SLOW_ACTION = 8
-LONG_ACTION = 16
 
-TIME_CHRISTMAS = 1
+from pyherc.rules.calendar import get_special_events
+import pyherc.data.constants
+from hamcrest import assert_that, has_item
+
+class TestCalendar():
+    """
+    Tests for calendar
+    """
+    def __init__(self):
+        super().__init__()
+
+    def test_chrismas(self):
+        """
+        24th, 25th and 26th of December should be christmas
+        """
+        events = get_special_events(2013, 12, 24)
+
+        assert_that(events, has_item(pyherc.data.constants.TIME_CHRISTMAS))
+

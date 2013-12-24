@@ -20,7 +20,10 @@
 """
 module for configuring player characters
 """
+import datetime
+import pyherc.data.constants
 from pyherc.generators import CreatureConfiguration, InventoryConfiguration
+from pyherc.rules.calendar import get_special_events
 
 def init_players(context):
     """
@@ -147,5 +150,14 @@ def init_players(context):
                                                                 'A mage is physically weak and mentally strong. He should avoid combat at all cost and deal with the enemies by using his spells.',
                                                                 'Mage also carries some potions that will help him on his journey.'])))
 
+    date = datetime.date.today()
+    events = get_special_events(date.year, date.month, date.day)
+
+    if pyherc.data.constants.TIME_CHRISTMAS in events:
+        for character in config:
+            character.inventory.append(InventoryConfiguration(item_name = 'Snowman',
+                                                              min_amount = 1,
+                                                              max_amount = 1,
+                                                              probability = 100))
 
     return config

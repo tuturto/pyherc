@@ -482,4 +482,17 @@ def init_items(context):
                                                             ['dim', 'yellow'])],
                                     types = ['tome'],
                                     rarity = 'rare'))
+
+    config.append(ItemConfiguration(name = 'Snowman',
+                                    description = 'A statue of snowman, walking in the air',
+                                    cost = 0,
+                                    weight = 0,
+                                    icons = [surface_manager.add_icon(
+                                                            'snowman',
+                                                            ':snowman.png',
+                                                            '`',
+                                                            ['dim', 'white'])],
+                                    types = ['event item'],
+                                    rarity = 'artifact'))
+
     return config

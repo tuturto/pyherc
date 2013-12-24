@@ -18,12 +18,20 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for common constants
+Calendar for special dates
 """
-INSTANT_ACTION = 1
-FAST_ACTION = 2
-NORMAL_ACTION = 4
-SLOW_ACTION = 8
-LONG_ACTION = 16
 
-TIME_CHRISTMAS = 1
+from pyherc.data.constants import TIME_CHRISTMAS
+
+def get_special_events(year, month, day):
+    """
+    Get special events of a given date
+    """
+    events = []
+
+    if month == 12:
+        if day in [24, 25, 26]:
+            events.append(TIME_CHRISTMAS)
+
+    return events
+
