@@ -20,7 +20,7 @@
 """
 Public interface of move package
 
-.. versionadded:: 0.6
+.. versionadded:: 0.10
 """
 
 from pyherc.aspects import log_info, log_debug
