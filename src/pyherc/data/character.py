@@ -87,8 +87,7 @@ class Character():
         self.item_memory = {}
         self.size = 'medium'
         self.attack = None
-        #mimic
-        self.mimic_item = None
+
         self.__active_effects = [] # active effects
         self.artificial_intelligence = None
         self.__effects_collection = effects_collection
