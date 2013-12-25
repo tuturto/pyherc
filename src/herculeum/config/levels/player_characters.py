@@ -155,7 +155,7 @@ def init_players(context):
 
     if pyherc.data.constants.TIME_CHRISTMAS in events:
         for character in config:
-            character.inventory.append(InventoryConfiguration(item_name = 'Snowman',
+            character.inventory.append(InventoryConfiguration(item_name = 'idol of snowman',
                                                               min_amount = 1,
                                                               max_amount = 1,
                                                               probability = 100))
