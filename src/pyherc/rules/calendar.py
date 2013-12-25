@@ -26,6 +26,8 @@ from pyherc.data.constants import TIME_CHRISTMAS
 def get_special_events(year, month, day):
     """
     Get special events of a given date
+
+    .. versionadded:: 0.10
     """
     events = []
 
