@@ -32,6 +32,7 @@ from pyherc.data.effects import Heal, Damage
 from pyherc.rules import Dying
 from pyherc.data.effects import Poison
 from pyherc.data.geometry import find_direction
+from pyherc.rules import cast
 
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
@@ -230,9 +231,10 @@ class CastSpell():
         else:
             direction = 1
 
-        caster.cast(direction = direction,
-                    spell_name = self.spell_name,
-                    action_factory = action_factory)
+        cast(caster,
+             direction = direction,
+             spell_name = self.spell_name,
+             action_factory = action_factory)
 
 def cast_spell(spell_name, target = None):
     """

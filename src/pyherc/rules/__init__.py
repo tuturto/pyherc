@@ -21,14 +21,13 @@
 Package for rules of the game
 """
 from pyherc.rules.moving.interface import move, is_move_legal
+from pyherc.rules.magic.interface import cast, gain_domain
 
 from .public import ActionFactory
 from .public import ActionParameters
 from .public import AttackParameters
 from .public import DrinkParameters
 from .public import InventoryParameters
-from .public import SpellCastingParameters
 from .public import WaitParameters
-from .public import GainDomainParameters
 from .ending import Dying
 from .engine import RulesEngine

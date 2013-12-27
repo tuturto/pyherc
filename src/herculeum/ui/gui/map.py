@@ -31,7 +31,7 @@ from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
 from herculeum.ui.gui.widgets import SpellSelectorWidget
 from herculeum.ui.controllers import MoveController
-from pyherc.rules import move, is_move_legal
+from pyherc.rules import move, is_move_legal, cast
 from random import Random
 
 class PlayMapWindow(QWidget):
@@ -544,9 +544,10 @@ class PlayMapWidget(QWidget):
                                       self.rng)
         elif modifiers & Qt.AltModifier:
             if direction != 9:
-                player.cast(direction,
-                            'fireball',
-                            self.action_factory)
+                cast(player,
+                     direction,
+                     'fireball',
+                     self.action_factory)
 
         else:
             self.move_controller.move_or_attack(player,

@@ -22,8 +22,7 @@ Module for Character related classes
 """
 from pyherc.aspects import log_debug, log_info
 from pyherc.rules import AttackParameters, DrinkParameters
-from pyherc.rules import InventoryParameters, SpellCastingParameters
-from pyherc.rules import GainDomainParameters
+from pyherc.rules import InventoryParameters
 from pyherc.rules import WaitParameters
 from pyherc.events import HitPointsChangedEvent, SpiritPointsChangedEvent
 from pyherc.events import ErrorEvent
@@ -519,28 +518,6 @@ class Character():
 
     @guarded_action
     @log_info
-    def cast(self, direction, spell_name, action_factory):
-        """
-        Cast a spell
-
-        :param direction: direction to cast the spell
-        :type direction: int
-        :param spell: spell to cast
-        :type spell: string
-        :param action_factory: factory to create actions
-        :type action_factory: ActionFactory
-
-        .. versionadded:: 0.9
-        """
-        action = action_factory.get_action(
-                                SpellCastingParameters(self,
-                                                       direction = direction,
-                                                       spell_name = spell_name))
-        if action.is_legal():
-            action.execute()
-
-    @guarded_action
-    @log_info
     def wait(self, action_factory):
         """
         Wait for a bit
@@ -553,29 +530,6 @@ class Character():
         action = action_factory.get_action(
                                     WaitParameters(self,
                                                    NORMAL_ACTION))
-        if action.is_legal():
-            action.execute()
-
-    @guarded_action
-    @log_info
-    def gain_domain(self, action_factory, domain, item):
-        """
-        Sacrifice an item to gain a domain
-
-        :param action_factory: factory to create actions
-        :type action_factory: ActionFactory
-        :param domain: name of the domain to gain
-        :type domain: String
-        :param item: item to sacrifice
-        :type item: Item
-
-        .. versionadded:: 0.10
-        """
-        action = action_factory.get_action(
-                            GainDomainParameters(character = self,
-                                                 domain = domain,
-                                                 item = item))
-
         if action.is_legal():
             action.execute()
 

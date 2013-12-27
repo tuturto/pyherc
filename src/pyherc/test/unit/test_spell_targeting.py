@@ -24,7 +24,7 @@ from pyherc.test.builders import LevelBuilder, CharacterBuilder
 from pyherc.test.matchers import wall_target_at, void_target_at
 from pyherc.generators.spells import targeting_single_target
 from pyherc.generators.spells import targeting_spherical_area
-from pyherc.rules import SpellCastingParameters
+from pyherc.rules.magic.interface import SpellCastingParameters
 from hamcrest import assert_that, is_, is_in, is_not, contains_inanyorder
 from hamcrest import has_length
 
@@ -54,11 +54,11 @@ class TestSingleCharacterTargeting():
         self.caster = (CharacterBuilder()
                            .with_name('Carth the Caster')
                            .build())
-        
+
         self.target1 = (CharacterBuilder()
                             .with_name('Tammy the Target1')
                             .build())
-        
+
         self.level = (LevelBuilder()
                           .with_character(self.caster, (10, 5))
                           .with_character(self.target1, (5, 5))
@@ -158,7 +158,7 @@ class TestSphericalAreaTargetting():
         self.caster = (CharacterBuilder()
                            .with_name('Carth the Caster')
                            .build())
-        
+
         self.target1 = (CharacterBuilder()
                             .with_name('Tammy the Target1')
                             .build())
@@ -201,7 +201,7 @@ class TestSphericalAreaTargetting():
         """
         self.level.add_creature(self.target3,
                                 (7, 7))
-        
+
         params = SpellCastingParameters(caster = self.caster,
                                         direction = 7,
                                         spell_name = 'proto')
@@ -228,5 +228,5 @@ class TestSphericalAreaTargetting():
 
         targets = [x.target for x in data
                    if x.target]
-        
+
         assert_that(targets, has_length(0))

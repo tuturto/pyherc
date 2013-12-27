@@ -24,6 +24,7 @@ Module for magic related tests
 from pyherc.test.builders import CharacterBuilder, HealBuilder, DamageBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.builders import SpellCastingFactoryBuilder
+from pyherc.rules import cast
 
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 from mockito import mock, when, any, verify
@@ -101,7 +102,7 @@ class TestMagic:
         effect.trigger(mock())
 
         assert_that(character.hit_points, is_(equal_to(5)))
-    
+
 class TestSpellCasting:
     """
     Test spell casting
@@ -111,7 +112,7 @@ class TestSpellCasting:
         Default constructor
         """
         pass
-    
+
     def test_spell_casting_executes_action(self):
         """
         Casting a spell should activate the action
@@ -121,16 +122,17 @@ class TestSpellCasting:
         when(action).is_legal().thenReturn(True)
 
         when(magic_factory).get_action(any()).thenReturn(action) #pylint: disable-msg=E1103
-        
+
         action_factory = (ActionFactoryBuilder()
                                     .with_spellcasting_factory(magic_factory)
                                     .build())
-                                    
+
         caster = (CharacterBuilder()
                         .build())
-        
-        caster.cast(direction = 1, 
-                    spell_name = 'healing wind', 
-                    action_factory = action_factory)
+
+        cast(caster,
+             direction = 1,
+             spell_name = 'healing wind',
+             action_factory = action_factory)
 
         verify(action).execute()

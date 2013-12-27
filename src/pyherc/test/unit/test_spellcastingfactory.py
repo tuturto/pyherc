@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Module for SpellCastingFactory related tests
 """
-from pyherc.rules import SpellCastingParameters
+from pyherc.rules.magic.interface import SpellCastingParameters
 
 from pyherc.test.builders import ActionFactoryBuilder, SpellGeneratorBuilder
 from pyherc.test.builders import SpellCastingFactoryBuilder, EffectsFactoryBuilder
@@ -54,11 +53,11 @@ class TestSpellCastingFactory:
                                             .with_spell_factory(spell_factory)
                                             .build())
                                     .build())
-        
+
         action = action_factory.get_action(SpellCastingParameters(self,
-                                                                  direction = 1, 
+                                                                  direction = 1,
                                                                   spell_name = 'healing wind'))
-        
+
         assert_that(action, is_not(None))
 
     def test_spell_is_created_with_a_factory(self):
@@ -73,11 +72,11 @@ class TestSpellCastingFactory:
                                             .with_spell_factory(spell_factory)
                                             .with_effects_factory(effects_factory)
                                             .build())
-        
+
         spellcasting_factory.get_action(
                                   SpellCastingParameters(caster,
-                                                         direction = 1, 
+                                                         direction = 1,
                                                          spell_name = 'healing wind'))
-        
+
         verify(spell_factory).create_spell(spell_name = 'healing wind',
                                            targets = any())
