@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -22,6 +21,7 @@
 Module for testing wearing armour
 """
 
+from pyherc.rules import equip
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.matchers import is_wearing
@@ -53,6 +53,8 @@ class TestWearingArmour():
                                 .with_inventory_factory()
                                 .build())
 
-        character.equip(armour, action_factory)
+        equip(character,
+              armour,
+              action_factory)
 
         assert_that(character, is_wearing(armour))

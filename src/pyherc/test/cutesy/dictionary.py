@@ -32,7 +32,7 @@ from pyherc.data.effects import Heal, Damage
 from pyherc.rules import Dying
 from pyherc.data.effects import Poison
 from pyherc.data.geometry import find_direction
-from pyherc.rules import cast
+from pyherc.rules import cast, drop_item
 
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
@@ -553,8 +553,9 @@ class Drop():
                                     .with_inventory_factory()
                                     .build())
 
-        actor.drop_item(self.item,
-                        action_factory)
+        drop_item(actor,
+                  self.item,
+                  action_factory)
 
 def drop(item):
     """

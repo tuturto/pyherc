@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,6 +20,8 @@
 """
 Module for inventory actions
 """
+from pyherc.rules import pick_up, drop_item, equip, unequip
+
 class InventoryController():
     """
     Class for inventory actions
@@ -31,7 +32,7 @@ class InventoryController():
         """
         Default constructor
         """
-        super(InventoryController, self).__init__()
+        super().__init__()
 
         self.character = character
         self.action_factory = action_factory
@@ -44,38 +45,48 @@ class InventoryController():
             self.character.drink(item, self.action_factory)
         elif item.get_main_type() == 'weapon':
             if self.character.inventory.weapon != None:
-                self.character.unequip(self.character.inventory.weapon,
-                                       self.action_factory)
-            self.character.equip(item,
-                                 self.action_factory)
+                unequip(self.character,
+                        self.character.inventory.weapon,
+                        self.action_factory)
+            equip(self.character,
+                  item,
+                  self.action_factory)
         elif item.get_main_type() == 'armour':
             if self.character.inventory.armour != None:
-                self.character.unequip(self.character.inventory.armour,
-                                       self.action_factory)
-            self.character.equip(item,
-                                 self.action_factory)
+                unequip(self.character,
+                        self.character.inventory.armour,
+                        self.action_factory)
+            equip(self.character,
+                  item,
+                  self.action_factory)
         elif item.get_main_type() == 'ammunition':
-            self.character.equip(item,
-                                 self.action_factory)
+            equip(self.character,
+                  item,
+                  self.action_factory)
 
     def unequip_item(self, item):
         """
         Unequip item
         """
-        self.character.unequip(item,
-                               self.action_factory)
+        unequip(self.character,
+                item,
+                self.action_factory)
 
     def pick_up_item(self, item):
         """
         Pick up item
         """
-        self.character.pick_up(item, self.action_factory)
+        pick_up(self.character,
+                item,
+                self.action_factory)
 
     def drop_item(self, item):
         """
         Drop item
         """
-        self.character.drop_item(item, self.action_factory)
+        drop_item(self.character,
+                  item,
+                  self.action_factory)
 
     def item_description(self, item):
         """

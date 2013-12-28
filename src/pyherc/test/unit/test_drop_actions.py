@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -22,7 +21,8 @@
 Module for testing drop action factory
 """
 from pyherc.rules.inventory.factories import DropFactory
-from pyherc.rules import InventoryParameters
+from pyherc.rules.inventory.interface import InventoryParameters
+from pyherc.rules import drop_item
 from pyherc.events import DropEvent
 from pyherc.data import Model
 from pyherc.test.builders import ItemBuilder, CharacterBuilder
@@ -93,8 +93,9 @@ class TestDropAction():
         """
         Test that dropped item is removed from inventory
         """
-        self.character.drop_item(self.item,
-                                 self.action_factory)
+        drop_item(self.character,
+                  self.item,
+                  self.action_factory)
 
         assert_that(self.item,
                     is_not(is_in(self.character.inventory)))
@@ -103,8 +104,9 @@ class TestDropAction():
         """
         Test that dropped item ends up on level
         """
-        self.character.drop_item(self.item,
-                                 self.action_factory)
+        drop_item(self.character,
+                  self.item,
+                  self.action_factory)
 
         assert_that(self.item.level,
                     is_(equal_to(self.level)))
@@ -113,8 +115,9 @@ class TestDropAction():
         """
         Test that dropped item is added to correct location
         """
-        self.character.drop_item(self.item,
-                                 self.action_factory)
+        drop_item(self.character,
+                  self.item,
+                  self.action_factory)
 
         assert_that(self.item.location,
                     is_(equal_to(self.character.location)))
@@ -125,8 +128,9 @@ class TestDropAction():
         """
         old_time = self.character.tick
 
-        self.character.drop_item(self.item,
-                                 self.action_factory)
+        drop_item(self.character,
+                  self.item,
+                  self.action_factory)
         new_time = self.character.tick
 
         assert_that(new_time, is_(greater_than(old_time)))
@@ -135,7 +139,8 @@ class TestDropAction():
         """
         Dropping an item should raise an event
         """
-        self.character.drop_item(self.item,
-                                 self.action_factory)
+        drop_item(self.character,
+                  self.item,
+                  self.action_factory)
 
         verify(self.model).raise_event(any(DropEvent))

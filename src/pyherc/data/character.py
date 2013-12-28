@@ -22,7 +22,6 @@ Module for Character related classes
 """
 from pyherc.aspects import log_debug, log_info
 from pyherc.rules import AttackParameters, DrinkParameters
-from pyherc.rules import InventoryParameters
 from pyherc.rules import WaitParameters
 from pyherc.events import HitPointsChangedEvent, SpiritPointsChangedEvent
 from pyherc.events import ErrorEvent
@@ -305,26 +304,6 @@ class Character():
         else:
             return False
 
-    @log_debug
-    def set_mimic_item(self, item):
-        """
-        Sets item this character can mimic or pretend to be
-
-        :param item: item to mimic
-        :type item: Item
-        """
-        self.mimic_item = item
-
-    @log_debug
-    def get_mimic_item(self):
-        """
-        Gets item this character can mimic
-
-        :returns: item to mimic
-        :rtype: Item
-        """
-        return self.mimic_item
-
     def get_location(self):
         """
         Returns location of this character
@@ -437,83 +416,6 @@ class Character():
                                            DrinkParameters(
                                                            self,
                                                            potion))
-        action.execute()
-
-    @guarded_action
-    @log_info
-    def pick_up(self, item, action_factory):
-        """
-        Pick up item
-
-        :param item: item to pick up
-        :type item: Item
-        :param action_factory: factory to create actions
-        :type action_factory: ActionFactory
-
-        .. versionadded:: 0.4
-        """
-        action = action_factory.get_action(
-                                    InventoryParameters(
-                                                        self,
-                                                        item,
-                                                        'pick up'))
-        action.execute()
-
-    @guarded_action
-    @log_info
-    def drop_item(self, item, action_factory):
-        """
-        Drop item from inventory
-
-        :param item: item to drop
-        :type item: Item
-        :param action_factory: factory to create actions
-        :type action_factory: ActionFactory
-
-        .. versionadded:: 0.5
-        """
-        action = action_factory.get_action(
-                                InventoryParameters(self,
-                                                    item,
-                                                    'drop'))
-        action.execute()
-
-    @guarded_action
-    @log_info
-    def equip(self, item, action_factory):
-        """
-        Wear item from inventory
-
-        :param item: item to equip
-        :type item: Item
-        :param action_factory: factory to create actions
-        :type action_factory: ActionFactory
-
-        .. versionadded:: 0.8
-        """
-        action = action_factory.get_action(
-                                InventoryParameters(self,
-                                                    item,
-                                                    'equip'))
-        action.execute()
-
-    @guarded_action
-    @log_info
-    def unequip(self, item, action_factory):
-        """
-        Unequip item
-
-        :param item: item to unequip
-        :type item: Item
-        :param action_factory: factory to create actions
-        :type action_factory: ActionFactory
-
-        .. versionadded:: 0.8
-        """
-        action = action_factory.get_action(
-                                InventoryParameters(self,
-                                                    item,
-                                                    'unequip'))
         action.execute()
 
     @guarded_action

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -32,6 +31,7 @@ from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import EffectHandleBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.events import PickUpEvent
+from pyherc.rules import equip, unequip
 
 from hamcrest import assert_that, is_not, equal_to, is_, is_in #pylint: disable-msg=E0611
 from mockito import mock, verify, any
@@ -83,8 +83,9 @@ class TestItems():
 
         assert_that(item, is_not(equal_to(self.character.inventory.weapon)))
 
-        self.character.equip(item,
-                             self.action_factory)
+        equip(self.character,
+              item,
+              self.action_factory)
 
         assert_that(self.character.inventory.weapon, is_(equal_to(item)))
 
@@ -96,13 +97,15 @@ class TestItems():
         item = (ItemBuilder()
                     .with_damage(2, 'piercing')
                     .build())
-        self.character.equip(item,
-                             self.action_factory)
+        equip(self.character,
+              item,
+              self.action_factory)
 
         assert_that(item, is_(equal_to(self.character.inventory.weapon)))
 
-        self.character.unequip(item,
-                               self.action_factory)
+        unequip(self.character,
+                item,
+                self.action_factory)
 
         assert_that(item, is_not(equal_to(self.character.inventory.weapon)))
 

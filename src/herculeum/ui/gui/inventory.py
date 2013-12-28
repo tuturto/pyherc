@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -518,7 +517,7 @@ class ItemBox(QWidget):
         self.surface_manager = surface_manager
         self.item_width = width
         self.item_height = height
-        
+
         self.rows = None
         self.items = None
         self.grid_layout = None

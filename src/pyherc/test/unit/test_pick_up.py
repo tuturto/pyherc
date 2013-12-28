@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -25,6 +24,7 @@ from pyherc.test.builders import ItemBuilder, LevelBuilder, CharacterBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.events import PickUpEvent
 from pyherc.data import Model
+from pyherc.rules import pick_up
 
 from mockito import mock, verify, any
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
@@ -71,8 +71,9 @@ class TestPickingUp():
         """
         Test that item can be picked up
         """
-        self.character.pick_up(self.item,
-                               self.action_factory)
+        pick_up(self.character,
+                self.item,
+                self.action_factory)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in self.level.items)
@@ -86,8 +87,9 @@ class TestPickingUp():
 
         self.level.add_creature(observer, (1, 1))
 
-        self.character.pick_up(self.item,
-                               self.action_factory)
+        pick_up(self.character,
+                self.item,
+                self.action_factory)
 
         verify(observer).receive_event(any(PickUpEvent))
 
@@ -100,8 +102,9 @@ class TestPickingUp():
         assert(self.character.location == (6, 6))
         assert(self.item.location == (5, 5))
 
-        self.character.pick_up(self.item,
-                               self.action_factory)
+        pick_up(self.character,
+                self.item,
+                self.action_factory)
 
         assert(not self.item in self.character.inventory)
         assert(self.item in self.level.items)
@@ -122,10 +125,12 @@ class TestPickingUp():
         self.level.add_item(ammo_1, self.character.location)
         self.level.add_item(ammo_2, self.character.location)
 
-        self.character.pick_up(ammo_1,
-                               self.action_factory)
-        self.character.pick_up(ammo_2,
-                               self.action_factory)
+        pick_up(self.character,
+                ammo_1,
+                self.action_factory)
+        pick_up(self.character,
+                ammo_2,
+                self.action_factory)
 
         assert_that(len(self.character.inventory), is_(equal_to(1)))
 

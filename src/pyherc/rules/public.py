@@ -166,29 +166,6 @@ class DrinkParameters(ActionParameters):
         """
         return 'drink parameters'
 
-class InventoryParameters(ActionParameters):
-    """
-    Class for controlling inventory action creation
-    """
-    @log_debug
-    def __init__(self, character, item, sub_action):
-        """
-        Construct inventory parameters
-
-        :param character: character manipulating the item
-        :type character: Character
-        :param item: item to manipulate
-        :type item: Item
-        :param sub_action: type of action to perform
-        :type sub_action: string
-        """
-        ActionParameters.__init__(self)
-
-        self.action_type = 'inventory'
-        self.sub_action = sub_action
-        self.character = character
-        self.item = item
-
 class WaitParameters(ActionParameters):
     """
     Class for controlling waiting

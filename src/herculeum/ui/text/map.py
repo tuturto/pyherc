@@ -21,7 +21,7 @@
 Module for map screen
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules import move, is_move_legal
+from pyherc.rules import move, is_move_legal, pick_up
 from herculeum.ui.text.inventory import InventoryScreen
 from herculeum.ui.text.character import CharacterScreen
 from herculeum.ui.text.endscreen import EndScreen
@@ -175,8 +175,9 @@ class MapScreen():
         items = level.get_items_at(player.location)
 
         if items != None and len(items) > 0:
-            player.pick_up(items[0],
-                           self.action_factory)
+            pick_up(player,
+                    items[0],
+                    self.action_factory)
 
         elif is_move_legal(player, 9, 'walk', self.action_factory):
             move(player, 9, self.action_factory)

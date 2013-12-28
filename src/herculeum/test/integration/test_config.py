@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -24,7 +23,7 @@ Module for testing main configuration
 
 #pylint: disable=W0614
 from herculeum.config import Configuration
-from pyherc.rules import InventoryParameters
+from pyherc.rules.inventory.interface import InventoryParameters
 from mockito import mock
 from hamcrest import assert_that, is_, not_none #pylint: disable-msg=E0611
 from PyQt4.QtGui import QApplication

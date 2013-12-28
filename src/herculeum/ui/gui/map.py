@@ -31,7 +31,7 @@ from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
 from herculeum.ui.gui.widgets import SpellSelectorWidget
 from herculeum.ui.controllers import MoveController
-from pyherc.rules import move, is_move_legal, cast
+from pyherc.rules import move, is_move_legal, cast, pick_up
 from random import Random
 
 class PlayMapWindow(QWidget):
@@ -607,8 +607,9 @@ class PlayMapWidget(QWidget):
         items = level.get_items_at(player.location)
 
         if items != None and len(items) > 0:
-            player.pick_up(items[0],
-                           self.action_factory)
+            pick_up(player,
+                    items[0],
+                    self.action_factory)
 
         elif is_move_legal(player, 9, 'walk', self.action_factory):
             move(player, 9, self.action_factory)

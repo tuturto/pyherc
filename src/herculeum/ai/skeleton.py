@@ -25,7 +25,7 @@ from pyherc.aspects import log_debug
 from pyherc.ai.pathfinding import a_star
 from pyherc.data.geometry import find_direction
 from pyherc.events import NoticeEvent, LoseFocusEvent
-from pyherc.rules import move, is_move_legal
+from pyherc.rules import move, is_move_legal, equip
 
 class SkeletonWarriorAI():
     """
@@ -95,8 +95,9 @@ class SkeletonWarriorAI():
                    self.character.inventory
                    if item.weapon_data != None]
 
-        self.character.equip(weapons[0],
-                             action_factory)
+        equip(self.character,
+              weapons[0],
+              action_factory)
 
     @log_debug
     def _patrol(self, model, action_factory, rng):
