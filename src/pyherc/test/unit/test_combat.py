@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -25,8 +24,9 @@ Module for testing combat related rules
 from pyherc.data import Dungeon
 from pyherc.data import Model
 
-from pyherc.rules.public import AttackParameters
-from pyherc.rules.attack.action import AttackAction
+from pyherc.rules.combat.interface import AttackParameters
+from pyherc.rules.combat.action import AttackAction
+from pyherc.rules import attack
 from pyherc.events import AttackNothingEvent, AttackHitEvent
 
 from pyherc.test.builders import CharacterBuilder
@@ -113,9 +113,10 @@ class TestMeleeCombat():
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
 
-        self.character1.perform_attack(3,
-                                       self.action_factory,
-                                       rng)
+        attack(self.character1,
+               3,
+               self.action_factory,
+               rng)
 
         verify(self.observer).receive_event(any(AttackHitEvent))
 
@@ -126,9 +127,10 @@ class TestMeleeCombat():
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
 
-        self.character1.perform_attack(1,
-                                       self.action_factory,
-                                       rng)
+        attack(self.character1,
+               1,
+               self.action_factory,
+               rng)
 
         verify(self.observer).receive_event(any(AttackNothingEvent))
 

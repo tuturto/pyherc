@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -29,9 +28,10 @@ from pyherc.data.effects import Effect
 from pyherc.data import Level, Model
 from pyherc.generators import EffectsFactory
 from pyherc.data.effects import EffectHandle
-from pyherc.rules.attack.action import AttackAction
+from pyherc.rules.combat.action import AttackAction
 from pyherc.data import Character
 from pyherc.data.geometry import TargetData
+from pyherc.rules import attack
 
 from pyherc.events import PoisonAddedEvent
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
@@ -118,9 +118,10 @@ class TestEffects():
                     .with_character(defender)
                     .build())
 
-        attacker.perform_attack(3,
-                                action_factory,
-                                rng)
+        attack(attacker,
+               3,
+               action_factory,
+               rng)
 
         verify(effect).trigger(any())
 
@@ -163,9 +164,10 @@ class TestEffects():
                     .with_character(defender)
                     .build())
 
-        attacker.perform_attack(3,
-                                action_factory,
-                                rng)
+        attack(attacker,
+               3,
+               action_factory,
+               rng)
 
         verify(effect).trigger(any())
 
@@ -333,9 +335,10 @@ class TestEffectsInMelee():
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
 
-        self.attacker.perform_attack(1,
-                                     self.action_factory,
-                                     rng)
+        attack(self.attacker,
+               1,
+               self.action_factory,
+               rng)
 
         assert_that(self.defender, has_effect())
 
@@ -346,12 +349,14 @@ class TestEffectsInMelee():
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
 
-        self.attacker.perform_attack(1,
-                                     self.action_factory,
-                                     rng)
-        self.attacker.perform_attack(1,
-                                     self.action_factory,
-                                     rng)
+        attack(self.attacker,
+               1,
+               self.action_factory,
+               rng)
+        attack(self.attacker,
+               1,
+               self.action_factory,
+               rng)
 
         assert_that(self.defender, has_effects(1))
 
@@ -362,9 +367,10 @@ class TestEffectsInMelee():
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
 
-        self.attacker.perform_attack(1,
-                                     self.action_factory,
-                                     rng)
+        attack(self.attacker,
+               1,
+               self.action_factory,
+               rng)
 
         verify(self.model).raise_event(any(PoisonAddedEvent))
 

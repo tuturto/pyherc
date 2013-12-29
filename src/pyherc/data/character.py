@@ -21,8 +21,8 @@
 Module for Character related classes
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules import AttackParameters, DrinkParameters
-from pyherc.rules import WaitParameters
+from pyherc.rules.public import DrinkParameters
+from pyherc.rules.public import WaitParameters
 from pyherc.events import HitPointsChangedEvent, SpiritPointsChangedEvent
 from pyherc.events import ErrorEvent
 from pyherc.data.constants import NORMAL_ACTION
@@ -353,53 +353,6 @@ class Character():
         assert action != None
 
         return action
-
-    @guarded_action
-    @log_info
-    def perform_attack(self, direction, action_factory, rng):
-        """
-        Attack to given direction
-
-        :param direction: direction to attack
-        :type direction: integer
-        :param action_factory: factory to create actions
-        :type action_factory: ActionFactory
-        :param rng: random number generator
-        :type rng: Random
-        """
-        if self.inventory.weapon != None:
-            weapon = self.inventory.weapon.weapon_data
-            if self.inventory.projectiles != None:
-                ammunition = self.inventory.projectiles.ammunition_data
-            else:
-                ammunition = None
-        else:
-            weapon = None
-
-        if weapon == None:
-            attack_type = 'unarmed'
-        else:
-            if (ammunition == None or
-                    weapon.ammunition_type != ammunition.ammunition_type):
-                attack_type = 'melee'
-            else:
-                target_loc = self.get_location_at_direction(direction)
-                if self.level.get_creature_at(target_loc) == None:
-                    if self.level.blocks_movement(target_loc[0], target_loc[1]):
-                        attack_type = 'melee'
-                    else:
-                        attack_type = 'ranged'
-                else:
-                    attack_type = 'melee'
-
-        action = action_factory.get_action(
-                            AttackParameters(
-                                attacker = self,
-                                direction = direction,
-                                attack_type = attack_type,
-                                random_number_generator = rng))
-
-        action.execute()
 
     @guarded_action
     @log_info

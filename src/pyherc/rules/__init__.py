@@ -24,10 +24,10 @@ from pyherc.rules.moving.interface import move, is_move_legal
 from pyherc.rules.magic.interface import cast, gain_domain
 from pyherc.rules.inventory.interface import pick_up, drop_item
 from pyherc.rules.inventory.interface import equip, unequip
+from pyherc.rules.combat.interface import attack
 
 from .public import ActionFactory
 from .public import ActionParameters
-from .public import AttackParameters
 from .public import DrinkParameters
 from .public import WaitParameters
 from .ending import Dying

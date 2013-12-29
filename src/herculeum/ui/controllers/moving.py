@@ -20,7 +20,7 @@
 """
 Module for moving
 """
-from pyherc.rules import move, is_move_legal
+from pyherc.rules import move, is_move_legal, attack
 
 class MoveController():
     """
@@ -51,6 +51,7 @@ class MoveController():
         elif direction != 9:
             loc = character.get_location_at_direction(direction)
             if level.get_creature_at(loc) != None:
-                character.perform_attack(direction,
-                                         self.action_factory,
-                                         self.rng)
+                attack(character,
+                       direction,
+                       self.action_factory,
+                       self.rng)

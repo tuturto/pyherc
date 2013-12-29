@@ -25,7 +25,7 @@ from pyherc.aspects import log_debug
 from pyherc.ai.pathfinding import a_star
 from pyherc.data.geometry import find_direction
 from pyherc.events import NoticeEvent, LoseFocusEvent
-from pyherc.rules import move, is_move_legal, equip
+from pyherc.rules import move, is_move_legal, equip, attack
 
 class SkeletonWarriorAI():
     """
@@ -145,9 +145,10 @@ class SkeletonWarriorAI():
         if distance == 1:
             direction = find_direction(c_location,
                                        p_location)
-            character.perform_attack(direction,
-                                     action_factory,
-                                     rng)
+            attack(character,
+                   direction,
+                   action_factory,
+                   rng)
         else:
             path, connections, updated = a_star(c_location,
                                                 p_location,

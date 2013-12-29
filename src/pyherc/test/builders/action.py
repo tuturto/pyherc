@@ -25,10 +25,10 @@ from mockito import mock
 from pyherc.rules.public import ActionFactory
 from pyherc.rules import Dying
 from pyherc.rules.moving.factories import MoveFactory, WalkFactory
-from pyherc.rules.attack.factories import AttackFactory
-from pyherc.rules.attack.factories import UnarmedCombatFactory
-from pyherc.rules.attack.factories import MeleeCombatFactory
-from pyherc.rules.attack import RangedCombatFactory
+from pyherc.rules.combat.factories import AttackFactory
+from pyherc.rules.combat.factories import UnarmedCombatFactory
+from pyherc.rules.combat.factories import MeleeCombatFactory
+from pyherc.rules.combat import RangedCombatFactory
 from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.rules.inventory.factories import InventoryFactory
 from pyherc.rules.inventory.factories import PickUpFactory, DropFactory

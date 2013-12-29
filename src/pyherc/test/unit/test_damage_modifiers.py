@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -25,6 +24,7 @@ from pyherc.data import Model,  Dungeon
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.builders import CharacterBuilder, LevelBuilder, ItemBuilder
 from pyherc.data.effects import DamageModifier
+from pyherc.rules import attack
 
 from pyherc.test.cutesy import at_
 
@@ -98,9 +98,10 @@ class TestDamageModifiers():
         """
         Test that suffered damage can be modified
         """
-        self.character1.perform_attack(3,
-                                       self.action_factory,
-                                       self.rng)
+        attack(self.character1,
+               3,
+               self.action_factory,
+               self.rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(6)))
 
@@ -111,9 +112,10 @@ class TestDamageModifiers():
         """
         self.effect.damage_type = 'slashing'
 
-        self.character1.perform_attack(3,
-                                       self.action_factory,
-                                       self.rng)
+        attack(self.character1,
+               3,
+               self.action_factory,
+               self.rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(7)))
 
@@ -132,9 +134,10 @@ class TestDamageModifiers():
         effect_2.multiple_allowed = True
         self.character2.add_effect(effect_2)
 
-        self.character1.perform_attack(3,
-                                       self.action_factory,
-                                       self.rng)
+        attack(self.character1,
+               3,
+               self.action_factory,
+               self.rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(3)))
 
@@ -149,8 +152,9 @@ class TestDamageModifiers():
 
         self.character1.inventory.weapon = weapon
 
-        self.character1.perform_attack(3,
-                                       self.action_factory,
-                                       self.rng)
+        attack(self.character1,
+               3,
+               self.action_factory,
+               self.rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(7)))

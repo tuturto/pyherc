@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,7 +20,7 @@
 """
 Module for testing attack action related classes
 """
-from pyherc.rules.attack.action import Damage, AttackAction
+from pyherc.rules.combat.action import Damage, AttackAction
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611

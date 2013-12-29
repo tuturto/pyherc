@@ -21,7 +21,7 @@
 Module for map screen
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules import move, is_move_legal, pick_up
+from pyherc.rules import move, is_move_legal, pick_up, attack
 from herculeum.ui.text.inventory import InventoryScreen
 from herculeum.ui.text.character import CharacterScreen
 from herculeum.ui.text.endscreen import EndScreen
@@ -130,9 +130,10 @@ class MapScreen():
             dir_key = chr(self.screen.getch())
             if dir_key in self.move_key_map:
                 direction = self.move_key_map[dir_key]
-                self.model.player.perform_attack(direction,
-                                                 self.action_factory,
-                                                 self.rng)
+                attack(self.model.player,
+                       direction,
+                       self.action_factory,
+                       self.rng)
         elif key == 'Q':
             self.model.end_condition = 1
 

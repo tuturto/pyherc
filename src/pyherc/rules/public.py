@@ -106,39 +106,6 @@ class ActionParameters():
         """
         self.action_type = 'default'
 
-class AttackParameters(ActionParameters):
-    """
-    Object for controlling attack action creation
-    """
-
-    @log_debug
-    def __init__(self, attacker, direction, attack_type,
-                 random_number_generator):
-        """
-        Construct AttackParameters
-
-        Args:
-            attacker: Character doing an attack
-            direction: Direction to attack to
-            attack_type: type of attack to perform
-            random_number_generator: Random number generator to use
-        """
-        ActionParameters.__init__(self)
-
-        self.action_type = 'attack'
-        self.attacker = attacker
-        self.direction = direction
-        self.attack_type = attack_type
-        self.random_number_generator = random_number_generator
-        self.model = None
-
-    @log_debug
-    def __str__(self):
-        """
-        Get string representation of this object
-        """
-        return 'attack with attack type of ' + self.attack_type
-
 class DrinkParameters(ActionParameters):
     """
     Object for controlling drink action creation

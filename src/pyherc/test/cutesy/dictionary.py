@@ -32,7 +32,7 @@ from pyherc.data.effects import Heal, Damage
 from pyherc.rules import Dying
 from pyherc.data.effects import Poison
 from pyherc.data.geometry import find_direction
-from pyherc.rules import cast, drop_item
+from pyherc.rules import cast, drop_item, attack
 
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
@@ -256,7 +256,7 @@ class Hit():
 
         :param target: target to attack
         """
-        super(Hit, self).__init__()
+        super().__init__()
         self.target = target
 
     def __call__(self, attacker):
@@ -279,10 +279,11 @@ class Hit():
                                     .with_dying_rules()
                                     .build())
 
-        attacker.perform_attack(find_direction(attacker.location,
-                                               self.target.location),
-                                action_factory,
-                                rng)
+        attack(attacker,
+               find_direction(attacker.location,
+                              self.target.location),
+               action_factory,
+               rng)
 
 def hit(target):
     """

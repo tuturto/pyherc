@@ -6,7 +6,7 @@ pyherc.rules
 .. toctree::
    :maxdepth: 2
 
-   attack/package_attack
+   combat/package_combat
    consume/package_consume
    inventory/package_inventory
    magic/package_magic

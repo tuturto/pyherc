@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -21,8 +20,9 @@
 """
 Module for testing ranged combat related rules
 """
-from pyherc.rules.attack import RangedCombatFactory
-from pyherc.rules.public import AttackParameters
+from pyherc.rules.combat import RangedCombatFactory
+from pyherc.rules.combat.interface import AttackParameters
+from pyherc.rules import attack
 from pyherc.test.matchers import AttackActionParameterMatcher, does_have
 from pyherc.test.builders import LevelBuilder, CharacterBuilder, ItemBuilder
 from pyherc.test.builders import ActionFactoryBuilder
@@ -38,7 +38,7 @@ class TestRangedCombat():
         """
         Default constructor
         """
-        super(TestRangedCombat, self).__init__()
+        super().__init__()
 
         self.level = None
         self.character = None
@@ -89,9 +89,10 @@ class TestRangedCombat():
         When attacking enemy in distance, a ranged attack should
         be created
         """
-        self.character.perform_attack(3,
-                                      self.action_factory,
-                                      Random())
+        attack(self.character,
+               3,
+               self.action_factory,
+               Random())
 
         verify(self.action_factory).get_action(
                             AttackActionParameterMatcher(
@@ -105,9 +106,10 @@ class TestRangedCombat():
                             .with_attack_factory()
                             .build())
 
-        self.character.perform_attack(3,
-                                      action_factory,
-                                      Random())
+        attack(self.character,
+               3,
+               action_factory,
+               Random())
 
         assert_that(self.target.hit_points, is_(equal_to(7)))
 
@@ -119,9 +121,10 @@ class TestRangedCombat():
                             .with_attack_factory()
                             .build())
 
-        self.character.perform_attack(3,
-                                      action_factory,
-                                      Random())
+        attack(self.character,
+               3,
+               action_factory,
+               Random())
 
         assert_that(self.arrows.ammunition_data.count, is_(equal_to(9)))
 
@@ -135,9 +138,10 @@ class TestRangedCombat():
 
         self.arrows.ammunition_data.count = 1
 
-        self.character.perform_attack(3,
-                                      action_factory,
-                                      Random())
+        attack(self.character,
+               3,
+               action_factory,
+               Random())
 
         assert_that(self.character, is_not(does_have(self.arrows)))
 
@@ -149,9 +153,10 @@ class TestRangedCombat():
         self.target.location = (self.character.location[0] + 1,
                                 self.character.location[1])
 
-        self.character.perform_attack(3,
-                                      self.action_factory,
-                                      Random())
+        attack(self.character,
+               3,
+               self.action_factory,
+               Random())
 
         verify(self.action_factory).get_action(
                             AttackActionParameterMatcher(

@@ -21,7 +21,7 @@
 Module for ranged combat
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules.attack.action import ToHit, Damage, AttackAction
+from pyherc.rules.combat.action import ToHit, Damage, AttackAction
 from pyherc.data.geometry import get_target_in_direction
 
 class RangedToHit(ToHit):

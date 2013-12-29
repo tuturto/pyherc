@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -23,8 +22,8 @@ Module for testing combat related rules
 """
 #pylint: disable=W0614
 from pyherc.rules.public import ActionFactory
-from pyherc.rules.public import AttackParameters
-from pyherc.rules.attack.factories import AttackFactory
+from pyherc.rules.combat.interface import AttackParameters
+from pyherc.rules.combat.factories import AttackFactory
 from pyherc.rules.moving.factories import MoveFactory
 from pyherc.data.model import Model
 from mockito import mock, when, any
