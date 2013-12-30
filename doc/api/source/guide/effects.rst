@@ -48,7 +48,7 @@ that links names of effects to concrete Effect subclasses and their parameters.
 
     from pyherc.generators import EffectsFactory
     from pyherc.data.effects import Poison
-    from pyherc.test.cutesy.dictionary import Adventurer
+    from pyherc.test.cutesy import Adventurer
     from pyherc.rules import Dying
 
     effect_factory = EffectsFactory()

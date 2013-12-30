@@ -165,16 +165,16 @@ down.
 
 .. testcode::
 
-    from pyherc.test.cutesy.dictionary import strong, Adventurer
-    from pyherc.test.cutesy.dictionary import weak, Goblin
-    from pyherc.test.cutesy.dictionary import Level
+    from pyherc.test.cutesy import strong, Adventurer
+    from pyherc.test.cutesy import weak, Goblin
+    from pyherc.test.cutesy import Level
 
-    from pyherc.test.cutesy.dictionary import place, middle_of
-    from pyherc.test.cutesy.dictionary import right_of
-    from pyherc.test.cutesy.dictionary import make,  hit
+    from pyherc.test.cutesy import place, middle_of
+    from pyherc.test.cutesy import right_of
+    from pyherc.test.cutesy import make,  hit
 
     from hamcrest import assert_that
-    from pyherc.test.cutesy.dictionary import has_less_hit_points
+    from pyherc.test.cutesy import has_less_hit_points
 
     class TestCombatBehaviour():
     
