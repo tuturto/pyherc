@@ -18,7 +18,11 @@ import sys, os, hy
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 
-PYHERC_VERSION = '0.10.0'
+sys.path.insert(0, os.path.abspath('./../../../src'))
+sys.path.insert(0, os.path.abspath('./../../../src/herculeum'))
+sys.path.insert(0, os.path.abspath('./../../../src/pyherc'))
+
+from pyherc.version import PYHERC_VERSION
 
 # -- General configuration -----------------------------------------------------
 
