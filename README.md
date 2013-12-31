@@ -6,12 +6,9 @@
 Intro
 =====
 Herculeum is a dungeon adventuring game in a spirit of Rogue and Nethack.
-Player assumes the role of adventurer who has made perilous journey through
-jungles of Thynian and finally reached ruins of Herculeum. His tasks is to
-descent into deep caverns found underneath of the ruins and gather as much loot
-as possible before returning back to the surface. Rumours are that there is
-an ancient artifact hidden somewhere in the ruins and the adventurer wishes to
-posses it.
+Player assumes the role of an adventurer whose people have been trapped inside
+of the labyrinth under city of Herculeum. The adventurer has been preparing for
+the escape for a long time and now it is finally time to start the journey.
 
 System Requirements
 ===================
