@@ -12,7 +12,6 @@
 # serve to show the default.
 
 import sys, os, hy
-from pyherc.version import PYHERC_VERSION
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -21,6 +20,8 @@ from pyherc.version import PYHERC_VERSION
 sys.path.insert(0, os.path.abspath('./../../../src'))
 sys.path.insert(0, os.path.abspath('./../../../src/herculeum'))
 sys.path.insert(0, os.path.abspath('./../../../src/pyherc'))
+
+from pyherc.version import PYHERC_VERSION
 
 # -- General configuration -----------------------------------------------------
 
