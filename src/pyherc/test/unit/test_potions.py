@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -23,6 +22,7 @@ Module for item effect tests
 """
 #pylint: disable=W0614
 from pyherc.rules.consume import DrinkFactory
+from pyherc.rules import drink
 from pyherc.rules import ActionFactory
 from random import Random
 
@@ -96,8 +96,9 @@ class TestPotions():
         self.potion = (ItemBuilder()
                             .with_name('empty potion')
                             .build())
-        self.character.drink(self.potion,
-                             self.action_factory)
+        drink(self.character,
+              self.potion,
+              self.action_factory)
 
         assert_that(self.character.hit_points, is_(equal_to(1)))
 
@@ -105,8 +106,9 @@ class TestPotions():
         """
         Test that character drinking a healing potion gets healed
         """
-        self.character.drink(self.potion,
-                             self.action_factory)
+        drink(self.character,
+              self.potion,
+              self.action_factory)
 
         assert_that(self.character.hit_points, is_(greater_than(1)))
         assert_that(self.potion.maximum_charges_left, is_(equal_to(0)))
@@ -115,8 +117,9 @@ class TestPotions():
         """
         Test that drinking a potion correctly identifies it
         """
-        self.character.drink(self.potion,
-                             self.action_factory)
+        drink(self.character,
+              self.potion,
+              self.action_factory)
 
         name = self.potion.get_name(self.character)
         assert_that(name, is_(equal_to('healing potion')))
@@ -126,8 +129,9 @@ class TestPotions():
         Test that empty potion is discarded from character inventory
         """
         assert_that(self.character.inventory, has_item(self.potion))
-        self.character.drink(self.potion,
-                             self.action_factory)
+        drink(self.character,
+              self.potion,
+              self.action_factory)
         assert_that(self.character.inventory, is_not(has_item(self.potion)))
 
     def test_drinking_potion_does_not_discard_it(self):
@@ -145,8 +149,9 @@ class TestPotions():
         self.character.inventory.append(self.potion)
 
         assert_that(self.character.inventory, has_item(self.potion))
-        self.character.drink(self.potion,
-                             self.action_factory)
+        drink(self.character,
+              self.potion,
+              self.action_factory)
         assert_that(self.character.inventory, has_item(self.potion))
 
     def test_drinking_non_potion(self):
@@ -158,5 +163,6 @@ class TestPotions():
                     .build())
 
         self.character.inventory.append(self.potion)
-        self.character.drink(item,
-                             self.action_factory)
+        drink(self.character,
+              item,
+              self.action_factory)

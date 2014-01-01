@@ -29,6 +29,7 @@ from pyherc.data import Level, Model
 from pyherc.generators import EffectsFactory
 from pyherc.data.effects import EffectHandle
 from pyherc.rules.combat.action import AttackAction
+from pyherc.rules import drink
 from pyherc.data import Character
 from pyherc.data.geometry import TargetData
 from pyherc.rules import attack
@@ -76,8 +77,9 @@ class TestEffects():
         character = (CharacterBuilder()
                         .with_model(model)
                         .build())
-        character.drink(potion,
-                        action_factory)
+        drink(character,
+              potion,
+              action_factory)
 
         verify(effect).trigger(any())
 
@@ -206,8 +208,9 @@ class TestEffects():
                         .with_max_hp(10)
                         .build())
 
-        character.drink(potion,
-                        action_factory)
+        drink(character,
+              potion,
+              action_factory)
 
         assert_that(character.hit_points, is_(equal_to(10)))
         assert_that(character, has_no_effects())
@@ -247,8 +250,9 @@ class TestEffects():
                         .with_max_hp(10)
                         .build())
 
-        character.drink(potion,
-                        action_factory)
+        drink(character,
+              potion,
+              action_factory)
 
         assert_that(character, has_effects(1))
 

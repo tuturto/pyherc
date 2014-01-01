@@ -25,10 +25,10 @@ from pyherc.rules.magic.interface import cast, gain_domain
 from pyherc.rules.inventory.interface import pick_up, drop_item
 from pyherc.rules.inventory.interface import equip, unequip
 from pyherc.rules.combat.interface import attack
+from pyherc.rules.consume.interface import drink
 
 from .public import ActionFactory
 from .public import ActionParameters
-from .public import DrinkParameters
 from .public import WaitParameters
 from .ending import Dying
 from .engine import RulesEngine

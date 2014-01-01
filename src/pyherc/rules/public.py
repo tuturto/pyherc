@@ -106,26 +106,6 @@ class ActionParameters():
         """
         self.action_type = 'default'
 
-class DrinkParameters(ActionParameters):
-    """
-    Object for controlling drink action creation
-    """
-    @log_debug
-    def __init__(self, character, item):
-        """
-        Construct drink parameters
-
-        Args:
-            character: Character moving
-            item: Item to drink
-        """
-        ActionParameters.__init__(self)
-
-        self.action_type = 'drink'
-        self.character = character
-        self.item = item
-        self.model = None
-
     @log_debug
     def __str__(self):
         """

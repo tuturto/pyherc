@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2013 Tuukka Turto
@@ -20,10 +19,6 @@
 
 """
 Module for eating and drinking related actions, factories and such
-
-Usually you do not need to create instance of anything defined here. Use
-classes defined in pyherc.rules.locals instead to access these functions.
 """
 
 from .factories import DrinkFactory
-from .factories import DrinkAction

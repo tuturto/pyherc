@@ -21,7 +21,6 @@
 Module for Character related classes
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules.public import DrinkParameters
 from pyherc.rules.public import WaitParameters
 from pyherc.events import HitPointsChangedEvent, SpiritPointsChangedEvent
 from pyherc.events import ErrorEvent
@@ -353,23 +352,6 @@ class Character():
         assert action != None
 
         return action
-
-    @guarded_action
-    @log_info
-    def drink(self, potion, action_factory):
-        """
-        Drink potion
-
-        :param potion: potion to drink
-        :type potion: Item
-        :param action_factory: factory to create actions
-        :type action_factory: ActionFactory
-        """
-        action = action_factory.get_action(
-                                           DrinkParameters(
-                                                           self,
-                                                           potion))
-        action.execute()
 
     @guarded_action
     @log_info
