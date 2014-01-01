@@ -55,6 +55,7 @@ class TestMainConfiguration():
         """
         Teardown the test case
         """
+        self.app.deleteLater()
         self.app = None
 
     def test_initialisation(self):
