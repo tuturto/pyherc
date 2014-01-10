@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;;  Copyright 2010-2013 Tuukka Turto
+;;  Copyright 2010-2014 Tuukka Turto
 ;;
 ;;  This file is part of pyherc.
 ;;
