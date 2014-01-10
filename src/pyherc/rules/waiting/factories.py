@@ -21,7 +21,7 @@
 Wait related factories
 """
 from pyherc.rules.factory import SubActionFactory
-from pyherc.rules.wait.action import WaitAction
+from pyherc.rules.waiting.action import WaitAction
 from pyherc.aspects import log_debug, log_info
 
 class WaitFactory(SubActionFactory):

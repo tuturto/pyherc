@@ -21,10 +21,8 @@
 Module for Character related classes
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules.public import WaitParameters
 from pyherc.events import HitPointsChangedEvent, SpiritPointsChangedEvent
 from pyherc.events import ErrorEvent
-from pyherc.data.constants import NORMAL_ACTION
 from decorator import decorator
 
 @decorator
@@ -352,23 +350,6 @@ class Character():
         assert action != None
 
         return action
-
-    @guarded_action
-    @log_info
-    def wait(self, action_factory):
-        """
-        Wait for a bit
-
-        :param action_factory: factory to create actions
-        :type action_factory: ActionFactory
-
-        .. versionadded:: 0.10
-        """
-        action = action_factory.get_action(
-                                    WaitParameters(self,
-                                                   NORMAL_ACTION))
-        if action.is_legal():
-            action.execute()
 
     @log_debug
     def raise_event(self, event):
