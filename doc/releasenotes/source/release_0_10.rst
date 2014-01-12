@@ -31,8 +31,9 @@ Known bugs
 Other notes
 ***********
 
+ - 53_: moved many actions (moving, combat, etc) from Character class to separate functions
 
-
+.. _53: https://github.com/tuturto/pyherc/issues/53
 .. _42: https://github.com/tuturto/pyherc/issues/42
 .. _38: https://github.com/tuturto/pyherc/issues/38
 .. _25: https://github.com/tuturto/pyherc/issues/25
