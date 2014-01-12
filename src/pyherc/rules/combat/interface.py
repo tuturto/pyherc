@@ -24,7 +24,6 @@ Public interface for combat rules
 from pyherc.aspects import log_info, log_debug
 from pyherc.rules.public import ActionParameters
 
-#@guarded_action
 @log_info
 def attack(self, direction, action_factory, rng):
     """

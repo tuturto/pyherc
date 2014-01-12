@@ -26,7 +26,6 @@ Public interface of move package
 from pyherc.aspects import log_info, log_debug
 from pyherc.rules.public import ActionParameters
 
-# @guarded_action
 @log_info
 def move(character, direction, action_factory):
     """

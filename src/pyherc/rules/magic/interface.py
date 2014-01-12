@@ -24,7 +24,6 @@ Public interface for magic rules package
 from pyherc.aspects import log_info, log_debug
 from pyherc.rules.public import ActionParameters
 
-#@guarded_action
 @log_info
 def cast(character, direction, spell_name, action_factory):
     """
@@ -48,9 +47,8 @@ def cast(character, direction, spell_name, action_factory):
     if action.is_legal():
         action.execute()
 
-#@guarded_action
 @log_info
-def gain_domain(self, action_factory, domain, item):
+def gain_domain(character, action_factory, domain, item):
     """
     Sacrifice an item to gain a domain
 
@@ -63,9 +61,9 @@ def gain_domain(self, action_factory, domain, item):
 
     .. versionadded:: 0.10
     """
-    action = action_factory.get_action(GainDomainParameters(character = self,
-                                                            domain = domain,
-                                                            item = item))
+    action = action_factory.get_action(GainDomainParameters(character,
+                                                            domain,
+                                                            item))
 
     if action.is_legal():
         action.execute()

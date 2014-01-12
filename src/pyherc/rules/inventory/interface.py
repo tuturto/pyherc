@@ -24,7 +24,6 @@ Public interface for inventory rules package
 from pyherc.aspects import log_info, log_debug
 from pyherc.rules.public import ActionParameters
 
-#@guarded_action
 @log_info
 def pick_up(character, item, action_factory):
     """
@@ -44,7 +43,6 @@ def pick_up(character, item, action_factory):
                                                            'pick up'))
     action.execute()
 
-#@guarded_action
 @log_info
 def drop_item(character, item, action_factory):
     """
@@ -64,7 +62,6 @@ def drop_item(character, item, action_factory):
                                                            'drop'))
     action.execute()
 
-#@guarded_action
 @log_info
 def equip(character, item, action_factory):
     """
@@ -84,7 +81,6 @@ def equip(character, item, action_factory):
                                                            'equip'))
     action.execute()
 
-#@guarded_action
 @log_info
 def unequip(character, item, action_factory):
     """
