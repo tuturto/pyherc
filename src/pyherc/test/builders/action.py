@@ -35,7 +35,7 @@ from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
 from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.unequip import UnEquipFactory
 from pyherc.rules.magic import SpellCastingFactory, GainDomainFactory
-from pyherc.rules.wait.factories import WaitFactory
+from pyherc.rules.waiting.factories import WaitFactory
 
 class ActionFactoryBuilder():
     """

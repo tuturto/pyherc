@@ -35,7 +35,7 @@ from pyherc.rules.inventory.factories import InventoryFactory
 from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
 from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.unequip import UnEquipFactory
-from pyherc.rules.wait import WaitFactory
+from pyherc.rules.waiting import WaitFactory
 from pyherc.rules.magic import SpellCastingFactory
 from pyherc.generators import ItemGenerator, CreatureGenerator
 from pyherc.generators.level.portals import PortalAdderFactory
