@@ -32,7 +32,7 @@ from pyherc.data.effects import Heal, Damage
 from pyherc.rules import Dying
 from pyherc.data.effects import Poison
 from pyherc.data.geometry import find_direction
-from pyherc.rules import cast, drop_item, attack
+from pyherc.rules import cast, drop_item, attack, wait
 
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
@@ -146,9 +146,9 @@ class Wait():
                                     .with_wait_factory()
                                     .build())
 
-        character.wait(action_factory)
+        wait(character, action_factory)
 
-def wait():
+def wait_():
     """
     Wait a bit
     """

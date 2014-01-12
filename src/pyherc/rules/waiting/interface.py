@@ -37,7 +37,7 @@ def wait(character, action_factory):
 
     .. versionadded:: 0.10
     """
-    action = action_factory.get_action(WaitParameters(self,
+    action = action_factory.get_action(WaitParameters(character,
                                                       NORMAL_ACTION))
     if action.is_legal():
         action.execute()

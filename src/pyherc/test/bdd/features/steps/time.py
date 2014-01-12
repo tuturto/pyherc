@@ -18,7 +18,7 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 from pyherc.test.bdd.features.helpers import get_character
-from pyherc.test.cutesy import make, wait
+from pyherc.test.cutesy import make, wait_
 
 @then('time should pass for {character_name}')
 def impl(context, character_name):
@@ -33,4 +33,4 @@ def impl(context, character_name):
 def step_impl(context, character_name):
     character = get_character(context, character_name)
 
-    make(character, wait())
+    make(character, wait_())
