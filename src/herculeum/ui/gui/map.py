@@ -31,7 +31,7 @@ from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
 from herculeum.ui.gui.widgets import SpellSelectorWidget
 from herculeum.ui.controllers import MoveController
-from pyherc.rules import move, is_move_legal, cast, pick_up, attack
+from pyherc.rules import move, is_move_legal, cast, pick_up, attack, wait
 from random import Random
 
 class PlayMapWindow(QWidget):
@@ -571,8 +571,8 @@ class PlayMapWidget(QWidget):
         :param key: key triggering the processing
         :type key: int
         """
-        player = self.model.player
-        player.wait(self.action_factory)
+        wait(self.model.player,
+             self.action_factory)
 
     def _shoulder_right(self, key, modifiers):
         """

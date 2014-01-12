@@ -21,7 +21,7 @@
 Module for map screen
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules import move, is_move_legal, pick_up, attack
+from pyherc.rules import move, is_move_legal, pick_up, attack, wait
 from herculeum.ui.text.inventory import InventoryScreen
 from herculeum.ui.text.character import CharacterScreen
 from herculeum.ui.text.endscreen import EndScreen
@@ -160,8 +160,8 @@ class MapScreen():
 
         .. versionadded:: 0.10
         """
-        player = self.model.player
-        player.wait(self.action_factory)
+        wait(self.model.player,
+             self.action_factory)
 
     @log_debug
     def _action_a(self, key):
