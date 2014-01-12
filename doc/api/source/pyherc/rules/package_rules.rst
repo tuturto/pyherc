@@ -11,7 +11,7 @@ pyherc.rules
    inventory/package_inventory
    magic/package_magic
    moving/package_moving
-   wait/package_wait
+   waiting/package_waiting
    module_constants
    module_ending
    module_engine
