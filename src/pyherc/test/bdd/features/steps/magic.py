@@ -19,7 +19,7 @@
 
 from behave import step_matcher
 from pyherc.test.bdd.features.helpers import get_character, get_item
-from pyherc.test.cutesy import make, cast_spell, gain_domain
+from pyherc.test.cutesy import make, cast_spell, gain_domain_
 
 @when('{caster_name} casts {spell_and_target}')
 def impl(context, caster_name, spell_and_target):
@@ -57,8 +57,8 @@ def step_impl(context, caster_name, item_name, domain_name):
     caster = get_character(context, caster_name)
     item = get_item(context, item_name)
 
-    make(caster, gain_domain(item = item,
-                             domain = domain_name))
+    make(caster, gain_domain_(item = item,
+                              domain = domain_name))
 
 @then('{caster_name} should have more {domain_name} spells')
 def step_impl(context, caster_name, domain_name):

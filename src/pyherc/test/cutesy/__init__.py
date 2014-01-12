@@ -30,6 +30,6 @@ from .dictionary import at_
 from .dictionary import affect, with_, potent_poison, weak_poison
 from .dictionary import carrying
 from .dictionary import place, middle_of, right_of, Level
-from .dictionary import make, drop, hit, wait_, gain_domain
+from .dictionary import make, drop, hit, wait_, gain_domain_
 from .dictionary import has_dropped, has_less_hit_points
 from .dictionary import cast_spell

@@ -32,7 +32,7 @@ from pyherc.data.effects import Heal, Damage
 from pyherc.rules import Dying
 from pyherc.data.effects import Poison
 from pyherc.data.geometry import find_direction
-from pyherc.rules import cast, drop_item, attack, wait
+from pyherc.rules import cast, drop_item, attack, wait, gain_domain
 
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
@@ -346,11 +346,12 @@ class GainDomainAction():
                                     .with_dying_rules()
                                     .build())
 
-        character.gain_domain(item = self.item,
-                              domain = self.domain,
-                              action_factory = action_factory)
+        gain_domain(character = character,
+                    item = self.item,
+                    domain = self.domain,
+                    action_factory = action_factory)
 
-def gain_domain(item, domain):
+def gain_domain_(item, domain):
     """
     Gain domain
     """
