@@ -30,11 +30,10 @@ def create_logger(log_level):
         """
         Decorator to perform logging
         """
-        logger_name = str(wrapped_function)
+        logger_name = wrapped_function.__qualname__
         logger = logging.getLogger(logger_name)
 
-        call_message = ' '.join([logger_name,
-                                 'call',
+        call_message = ' '.join(['call',
                                  ':',
                                  str(args),
                                  str(kwargs)])
@@ -44,8 +43,7 @@ def create_logger(log_level):
         try:
             result = wrapped_function(*args, **kwargs)
 
-            result_message = ' '.join([logger_name,
-                                       'return',
+            result_message = ' '.join(['return',
                                        ':',
                                        str(result)])
 
