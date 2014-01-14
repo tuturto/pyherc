@@ -136,3 +136,25 @@ class TestSpellCasting:
              action_factory = action_factory)
 
         verify(action).execute()
+
+class TestDomains():
+    """
+    Tests for gaining domains
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super().__init__()
+
+    def test_add_spell_level(self):
+        """
+        Test that a spell level can be added
+        """
+        caster = (CharacterBuilder()
+                        .with_domain('fire', 1)
+                        .build())
+
+        caster.add_spell_level('fire')
+
+        assert_that(caster.get_spell_level('fire'), is_(equal_to(2)))

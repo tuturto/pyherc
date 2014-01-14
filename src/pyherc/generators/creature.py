@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -22,6 +21,7 @@
 Module for creature generation related classes
 """
 from pyherc.data import Character, Inventory
+from pyherc.data.magic import SpellBook
 from pyherc.data.effects import EffectHandle, EffectsCollection
 from pyherc.aspects import log_debug, log_info
 
@@ -52,7 +52,8 @@ class CreatureGenerator():
 
         new_creature = Character(self.model,
                                  EffectsCollection(),
-                                 Inventory())
+                                 Inventory(),
+                                 SpellBook())
 
         new_creature.name = config.name
         new_creature.body = config.body

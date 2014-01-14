@@ -42,7 +42,7 @@ class Character():
     Represents a character in playing world
     """
     @log_debug
-    def __init__(self, model, effects_collection, inventory):
+    def __init__(self, model, effects_collection, inventory, spellbook):
         """
         Default constructor
 
@@ -52,6 +52,8 @@ class Character():
         :type effects_collection: EffectsCollection
         :param inventory: inventory for character
         :type inventory: Inventory
+        :param spellbook: spells this character knows or can know
+        :type spellbook: SpellBook
         """
         super(Character, self).__init__()
         # attributes
@@ -86,6 +88,7 @@ class Character():
         self.__active_effects = [] # active effects
         self.artificial_intelligence = None
         self.__effects_collection = effects_collection
+        self.__spellbook = spellbook
 
     def __str__(self):
         return self.name
@@ -409,7 +412,7 @@ class Character():
         :param effect: Effect to add
         :type effect: Effect
 
-        .. note: Multiples of same type of effect are not added
+        .. note:: Multiples of same type of effect are not added
         .. versionadded:: 0.4
         """
         if effect.multiple_allowed == False:
@@ -446,6 +449,7 @@ class Character():
             for effect in removed:
                 self.raise_event(effect.get_removal_event())
 
+    @log_debug
     def add_to_tick(self, cost):
         """
         Add cost of action to characters tick,
@@ -455,6 +459,36 @@ class Character():
         :type cost: integer
         """
         self.tick = self.tick + (self.speed * cost)
+
+    @log_debug
+    def add_spell_level(self, domain, level = None):
+        """
+        Add level to a spell domain
+
+        :param domain: name of domain to learn
+        :type domain: string
+        :param level: new level of domain
+        :type level: int
+
+        .. note:: if level is None, current level is incremented by one
+
+        .. versionadded:: 0.10
+        """
+        self.__spellbook.add_spell_level(domain, level)
+
+    @log_debug
+    def get_spell_level(self, domain):
+        """
+        Get current spell level of a given domain
+
+        :param domain: name of the domain
+        :type domain: String
+        :returns: current level, 0 if character does not know the domain
+        :rtype: int
+
+        .. versionadded:: 0.10
+        """
+        return self.__spellbook.get_spell_level(domain)
 
     @log_debug
     def get_location_at_direction(self, direction):

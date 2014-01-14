@@ -21,18 +21,60 @@
 Module for spell book related classes
 """
 
+from pyherc.aspects import log_debug, log_info
+
 class SpellBook():
     """
     List of known spells
 
     .. versionadded:: 0.10
     """
-    def __init__():
+
+    @log_info
+    def __init__(self):
         """
         Default constructor
         """
         super().__init__()
 
+        self.domains = {}
+
+    @log_debug
+    def add_spell_level(self, domain, level=None):
+        """
+        Add level to a spell domain
+
+        :param domain: name of domain to learn
+        :type domain: string
+        :param level: new level of domain
+        :type level: int
+
+        .. note:: if level is None, current level is incremented by one
+        """
+        if not level:
+            level = 1
+
+        if domain in self.domains:
+            self.domains[domain] = self.domains[domain] + level
+        else:
+            self.domains[domain] = level
+
+    @log_debug
+    def get_spell_level(self, domain):
+        """
+        Get current spell level of a given domain
+
+        :param domain: name of the domain
+        :type domain: String
+        :returns: current level, 0 if domain is unknown
+        :rtype: int
+
+        .. versionadded:: 0.10
+        """
+        if domain in self.domains:
+            return self.domains[domain]
+        else:
+            return 0
 
 class SpellEntry():
     """

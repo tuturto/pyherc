@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -22,6 +21,7 @@
 Module for character builder
 """
 from pyherc.data import Character, Inventory
+from pyherc.data.magic import SpellBook
 from pyherc.data.effects import EffectsCollection
 from mockito import mock
 
@@ -33,7 +33,7 @@ class CharacterBuilder():
         """
         Default constructor
         """
-        super(CharacterBuilder, self).__init__()
+        super().__init__()
         self.hit_points = 10
         self.max_hp = 10
         self.spirit = 5
@@ -63,6 +63,8 @@ class CharacterBuilder():
 
         self.listeners = []
         self.update_listeners = []
+
+        self.domains = {}
 
     def as_player_character(self):
         """
@@ -130,17 +132,17 @@ class CharacterBuilder():
     def with_spirit(self, spirit):
         """
         Configure amount of spirit points
-        
+
         :param spirit: spirit points
         :type spirit: int
         """
         self.spirit = spirit
         return self
-    
+
     def with_max_spirit(self, max_spirit):
         """
         Confiugre maximum amount of spirit points
-        
+
         :param max_spirit: maximum spirit points
         :type max_spirit: int
         """
@@ -292,6 +294,20 @@ class CharacterBuilder():
         self.finesse = finesse
         return self
 
+    def with_domain(self, domain, level):
+        """
+        Set spell domain for character
+
+        :param domain: name of the domain
+        :type domain: string
+        :param level: level of the domain
+        :type level: int
+
+        .. note:: Can be called multiple times
+        """
+        self.domains[domain] = level
+        return self
+
     def build(self):
         """
         Build character
@@ -301,7 +317,8 @@ class CharacterBuilder():
         """
         character = Character(model = self.model,
                               effects_collection = self.effects_collection,
-                              inventory = self.inventory)
+                              inventory = self.inventory,
+                              spellbook = SpellBook())
 
         if self.player_character:
             self.model.player = character
@@ -338,5 +355,8 @@ class CharacterBuilder():
 
         for listener in self.update_listeners:
             character.register_for_updates(listener)
+
+        for domain, level in self.domains.items():
+            character.add_spell_level(domain, level)
 
         return character
