@@ -158,3 +158,15 @@ class TestDomains():
         caster.add_spell_level('fire')
 
         assert_that(caster.get_spell_level('fire'), is_(equal_to(2)))
+
+    def test_add_multiple_levels(self):
+        """
+        Adding more than one level should be possible with a single call
+        """
+        caster = (CharacterBuilder()
+                        .with_domain('fire', 1)
+                        .build())
+
+        caster.add_spell_level('fire', 5)
+
+        assert_that(caster.get_spell_level('fire'), is_(equal_to(6)))
