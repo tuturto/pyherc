@@ -46,7 +46,7 @@ class SpellBook():
 
         :param domain: name of domain to learn
         :type domain: string
-        :param level: new level of domain
+        :param level: amount to increment the level
         :type level: int
 
         .. note:: if level is None, current level is incremented by one
