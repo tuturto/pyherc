@@ -162,6 +162,7 @@ changes value in character's internal clock.
 .. testcode::
 
     from pyherc.data import Character, Model, Inventory
+    from pyherc.data.magic import SpellBook
     from pyherc.data.effects import EffectsCollection
     from pyherc.rules import ActionFactory, ActionParameters
     from pyherc.rules.factory import SubActionFactory
@@ -202,7 +203,8 @@ changes value in character's internal clock.
                                    factories = [wait_factory])
     character = Character(model = model, 
                           effects_collection = EffectsCollection(),
-                          inventory = Inventory())
+                          inventory = Inventory(),
+                          spellbook = SpellBook())
     action = character.create_action(WaitParameters(character, 5),
                                      action_factory)
     
