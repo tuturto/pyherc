@@ -31,4 +31,4 @@ from .poison import PoisonBuilder
 from .heal import HealBuilder
 from .rules_engine import RulesEngineBuilder
 from .damage import DamageBuilder
-from .spells import SpellGeneratorBuilder, SpellBuilder
+from .spells import SpellGeneratorBuilder, SpellBuilder, SpellEntryBuilder

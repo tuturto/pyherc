@@ -461,7 +461,7 @@ class Character():
         self.tick = self.tick + (self.speed * cost)
 
     @log_debug
-    def add_spell_level(self, domain, level = None):
+    def add_domain_level(self, domain, level = None):
         """
         Add level to a spell domain
 
@@ -474,12 +474,12 @@ class Character():
 
         .. versionadded:: 0.10
         """
-        self.__spellbook.add_spell_level(domain, level)
+        self.__spellbook.add_domain_level(domain, level)
 
     @log_debug
-    def get_spell_level(self, domain):
+    def get_domain_level(self, domain):
         """
-        Get current spell level of a given domain
+        Get current level of a given domain
 
         :param domain: name of the domain
         :type domain: String
@@ -488,7 +488,29 @@ class Character():
 
         .. versionadded:: 0.10
         """
-        return self.__spellbook.get_spell_level(domain)
+        return self.__spellbook.get_domain_level(domain)
+
+    @log_debug
+    def add_spell_entry(self, entry):
+        """
+        Add spell entry into characters spellbook
+
+        :param entry: entry to add
+        :type entry: SpellEntry
+
+        .. versionadded:: 0.10
+        """
+        self.__spellbook.add_spell_entry(entry)
+
+    @log_debug
+    def get_known_spells(self):
+        """
+        Get a list of known spells
+
+        :returns: list of known spells
+        :rtype: [SpellEntry]
+        """
+        return self.__spellbook.get_known_spells()
 
     @log_debug
     def get_location_at_direction(self, direction):

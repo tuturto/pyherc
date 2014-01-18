@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -22,13 +21,13 @@
 Module for SpellFactoryBuilder
 """
 from pyherc.generators import SpellGenerator
-from pyherc.data.magic import Spell
+from pyherc.data.magic import Spell, SpellEntry
 from pyherc.data.geometry import TargetData
 
 class SpellGeneratorBuilder():
     """
     Builder for SpellFactory
-    
+
     .. versionadded:: 0.9
     """
     def __init__(self):
@@ -36,7 +35,7 @@ class SpellGeneratorBuilder():
         Default constructor
         """
         pass
-    
+
     def build(self):
         """
         Builds the factory
@@ -113,3 +112,54 @@ class SpellBuilder():
                                             None))
 
         return spell
+
+class SpellEntryBuilder():
+    """
+    Builder for making spell entries for spell book
+
+    .. versionadded:: 0.10
+    """
+
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.spell_name = 'prototype'
+        self.level = 1
+        self.domain = 'prototype'
+
+    def with_name(self, name):
+        """
+        Configure name of the spell
+
+        :param name: name of the spell
+        :type name: String
+        """
+        self.spell_name = name
+        return self
+
+    def with_domain(self, domain, level):
+        """
+        Configure domain of the spell
+
+        :param domain: name of the domain
+        :type domain: String
+        :param level: required level
+        :type level: int
+        """
+        self.level = level
+        self.domain = domain
+        return self
+
+    def build(self):
+        """
+        Build this spell entry
+
+        :returns: fully configured spell entry
+        :rtype: SpellEntry
+        """
+        new_entry = SpellEntry()
+        new_entry.domain = self.domain
+        new_entry.level = self.level
+
+        return new_entry

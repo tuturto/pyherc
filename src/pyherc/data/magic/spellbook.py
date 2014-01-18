@@ -38,9 +38,10 @@ class SpellBook():
         super().__init__()
 
         self.domains = {}
+        self.spells = []
 
     @log_debug
-    def add_spell_level(self, domain, level=None):
+    def add_domain_level(self, domain, level=None):
         """
         Add level to a spell domain
 
@@ -60,7 +61,7 @@ class SpellBook():
             self.domains[domain] = level
 
     @log_debug
-    def get_spell_level(self, domain):
+    def get_domain_level(self, domain):
         """
         Get current spell level of a given domain
 
@@ -76,15 +77,45 @@ class SpellBook():
         else:
             return 0
 
+    @log_debug
+    def add_spell_entry(self, entry):
+        """
+        Add spell entry into spellbook
+
+        :param entry: entry to add
+        :type entry: SpellEntry
+
+        .. versionadded:: 0.10
+        """
+        self.spells.append(entry)
+
+    @log_debug
+    def get_known_spells(self):
+        """
+        Get a list of known spells
+
+        :returns: list of known spells
+        :rtype: [SpellEntry]
+        """
+        known_spells = []
+
+        for domain, level in self.domains.items():
+            known_spells.extend([spell for spell in self.spells
+                                    if spell.level <= level])
+
+        return known_spells
+
 class SpellEntry():
     """
     Entry in a spell book
 
     .. versionadded:: 0.10
     """
-    def __init__():
+    def __init__(self):
         """
         Default constructor
         """
         super().__init__()
 
+        self.domain = None
+        self.level = None

@@ -65,6 +65,7 @@ class CharacterBuilder():
         self.update_listeners = []
 
         self.domains = {}
+        self.spell_entries = []
 
     def as_player_character(self):
         """
@@ -308,6 +309,16 @@ class CharacterBuilder():
         self.domains[domain] = level
         return self
 
+    def with_spell_entry(self, entry):
+        """
+        Add spell entry
+
+        :param entry: entry to add
+        :type entry: SpellEntry
+        """
+        self.spell_entries.append(entry)
+        return self
+
     def build(self):
         """
         Build character
@@ -357,6 +368,9 @@ class CharacterBuilder():
             character.register_for_updates(listener)
 
         for domain, level in self.domains.items():
-            character.add_spell_level(domain, level)
+            character.add_domain_level(domain, level)
+
+        for entry in self.spell_entries:
+            character.add_spell_entry(entry)
 
         return character

@@ -24,9 +24,11 @@ Module for magic related tests
 from pyherc.test.builders import CharacterBuilder, HealBuilder, DamageBuilder
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.builders import SpellCastingFactoryBuilder
+from pyherc.test.builders import SpellEntryBuilder
 from pyherc.rules import cast
 
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
+from hamcrest import has_item #pylint: disable-msg=E0611
 from mockito import mock, when, any, verify
 
 class TestMagic:
@@ -147,17 +149,17 @@ class TestDomains():
         """
         super().__init__()
 
-    def test_add_spell_level(self):
+    def test_add_domain_level(self):
         """
-        Test that a spell level can be added
+        Test that a domain level can be added
         """
         caster = (CharacterBuilder()
                         .with_domain('fire', 1)
                         .build())
 
-        caster.add_spell_level('fire')
+        caster.add_domain_level('fire')
 
-        assert_that(caster.get_spell_level('fire'), is_(equal_to(2)))
+        assert_that(caster.get_domain_level('fire'), is_(equal_to(2)))
 
     def test_add_multiple_levels(self):
         """
@@ -167,6 +169,24 @@ class TestDomains():
                         .with_domain('fire', 1)
                         .build())
 
-        caster.add_spell_level('fire', 5)
+        caster.add_domain_level('fire', 5)
 
-        assert_that(caster.get_spell_level('fire'), is_(equal_to(6)))
+        assert_that(caster.get_domain_level('fire'), is_(equal_to(6)))
+
+    def test_getting_spell_list(self):
+        """
+        It should be possible to get a list of known spells
+        """
+        fireball = (SpellEntryBuilder()
+                        .with_name('fireball')
+                        .with_domain('fire', 1)
+                        .build())
+
+        caster = (CharacterBuilder()
+                        .with_domain('fire', 1)
+                        .with_spell_entry(fireball)
+                        .build())
+
+        spells = caster.get_known_spells()
+
+        assert_that(spells, has_item(fireball))

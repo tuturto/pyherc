@@ -94,7 +94,7 @@ class GainDomainAction():
         """
         Executes this action
         """
-        self.character.add_spell_level(domain = self.domain)
+        self.character.add_domain_level(domain = self.domain)
 
     @log_debug
     def is_legal(self):
