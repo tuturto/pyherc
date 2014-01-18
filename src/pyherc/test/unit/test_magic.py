@@ -28,7 +28,7 @@ from pyherc.test.builders import SpellEntryBuilder
 from pyherc.rules import cast
 
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
-from hamcrest import has_item #pylint: disable-msg=E0611
+from hamcrest import has_item, contains_inanyorder #pylint: disable-msg=E0611
 from mockito import mock, when, any, verify
 
 class TestMagic:
@@ -190,3 +190,27 @@ class TestDomains():
         spells = caster.get_known_spells()
 
         assert_that(spells, has_item(fireball))
+
+    def test_domains_are_respected(self):
+        """
+        Domains should not be mixed when listing known spells
+        """
+        fireball = (SpellEntryBuilder()
+                        .with_name('fireball')
+                        .with_domain('fire', 1)
+                        .build())
+
+        healing_wind = (SpellEntryBuilder()
+                            .with_name('healing wind')
+                            .with_domain('air', 1)
+                            .build())
+
+        caster = (CharacterBuilder()
+                        .with_domain('fire', 1)
+                        .with_spell_entry(fireball)
+                        .with_spell_entry(healing_wind)
+                        .build())
+
+        spells = caster.get_known_spells()
+
+        assert_that(spells, contains_inanyorder(fireball, ))

@@ -159,6 +159,7 @@ class SpellEntryBuilder():
         :rtype: SpellEntry
         """
         new_entry = SpellEntry()
+        new_entry.spell_name = self.spell_name
         new_entry.domain = self.domain
         new_entry.level = self.level
 

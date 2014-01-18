@@ -101,7 +101,8 @@ class SpellBook():
 
         for domain, level in self.domains.items():
             known_spells.extend([spell for spell in self.spells
-                                    if spell.level <= level])
+                                    if spell.level <= level
+                                    and spell.domain == domain])
 
         return known_spells
 
@@ -119,3 +120,18 @@ class SpellEntry():
 
         self.domain = None
         self.level = None
+        self.spell_name = None
+
+    def __str__(self):
+        """
+        String representation of this spell entry
+        """
+        return '{0} ({1}:{2})'.format(self.spell_name,
+                                      self.domain,
+                                      self.level)
+
+    def __repr__(self):
+        """
+        String representation of this spell entry
+        """
+        return self.__str__()
