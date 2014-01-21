@@ -21,6 +21,7 @@
 Package for characters
 """
 from pyherc.test.builders import CharacterBuilder
+from pyherc.test.cutesy.dictionary import add_history_value
 
 def strong(character):
     """
@@ -63,8 +64,8 @@ def Adventurer():
                     .with_name('Adventurer')
                     .build()
                     )
-    character.old_values = {}
-    character.old_values['hit points'] = character.hit_points
+    add_history_value(character, 'hit_points')
+
     return character
 
 def Wizard():
@@ -86,7 +87,7 @@ def Wizard():
                     .with_name('Wizard')
                     .build()
                     )
-    character.old_values = {}
+
     return character
 
 def Goblin(action = None):
@@ -105,7 +106,7 @@ def Goblin(action = None):
                     .with_name('Goblin')
                     .build()
                     )
-    character.old_values = {}
+
     if action != None:
         action(character)
 

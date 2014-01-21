@@ -19,12 +19,13 @@
 
 from pyherc.test.bdd.features.helpers import get_character
 from pyherc.test.cutesy import make, wait_
+from pyherc.test.cutesy.dictionary import get_history_value
 
 @then('time should pass for {character_name}')
 def impl(context, character_name):
     character = get_character(context, character_name)
 
-    old_time = character.old_values['tick']
+    old_time = get_history_value(character, 'tick')
     new_time = character.tick
 
     assert new_time > old_time

@@ -32,7 +32,6 @@ def Bow():
                 .with_required_ammunition_type('arrow')
                 .build())
 
-    item.old_values = {}
     return item
 
 def Arrows():
@@ -46,7 +45,6 @@ def Arrows():
                 .with_count(10)
                 .build())
 
-    item.old_values = {}
     return item
 
 def Dagger():
@@ -58,7 +56,6 @@ def Dagger():
                 .with_damage(2, 'piercing')
                 .build())
 
-    item.old_values = {}
     return item
 
 def Sword():
@@ -71,7 +68,6 @@ def Sword():
                 .with_damage(2, 'slashing')
                 .build())
 
-    item.old_values = {}
     return item
 
 def Club():
@@ -83,5 +79,4 @@ def Club():
                 .with_damage(3, 'crushing')
                 .build())
 
-    item.old_values = {}
     return item

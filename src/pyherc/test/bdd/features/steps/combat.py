@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -20,6 +19,7 @@
 
 from pyherc.test.cutesy import make, hit
 from pyherc.test.bdd.features.helpers import get_character
+from pyherc.test.cutesy.dictionary import add_history_value, get_history_value
 from hamcrest import assert_that, is_, less_than, equal_to #pylint: disable-msg=E0611
 
 @when('{attacker_name} hits {target_name}')
@@ -33,7 +33,7 @@ def impl(context, attacker_name, target_name):
 def impl(context, character_name):
     character = get_character(context, character_name)
 
-    old_hit_points = character.old_values['hit points']
+    old_hit_points = get_history_value(character, 'hit_points')
     new_hit_points = character.hit_points
 
     assert new_hit_points < old_hit_points
@@ -54,7 +54,7 @@ def impl(context, damage_type):
 def impl(context, character_name):
     character = get_character(context, character_name)
 
-    old_hit_points = character.old_values['hit points']
+    old_hit_points = get_history_value(character, 'hit_points')
     new_hit_points = character.hit_points
     total_damage_suffered = old_hit_points - new_hit_points
 

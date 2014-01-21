@@ -37,6 +37,39 @@ from pyherc.rules import cast, drop_item, attack, wait, gain_domain
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
 
+def add_history_value(character, attribute):
+    """
+    Add given value into history data of the character
+
+    :param character: Character to modify
+    :type character: Character
+    :param attribute: name of the attribute to store
+    :type attribute: String
+
+    .. versionadded:: 0.10
+    """
+    if not hasattr(character, 'old_values'):
+        character.old_values = {}
+
+    if hasattr(getattr(character, attribute), 'copy'):
+        character.old_values[attribute] = getattr(character, attribute).copy()
+    else:
+        character.old_values[attribute] = getattr(character, attribute)
+
+def get_history_value(character, attribute):
+    """
+    Get given history value
+
+    :param character: character whose history value to get
+    :type character: Character
+    :param attribute: name of the attribute
+    :type attribute: String
+    :returns: old value of the attribute
+
+    .. versionadded:: 0.10
+    """
+    return character.old_values[attribute]
+
 def Level():
     """
     Creates a level
@@ -140,7 +173,7 @@ class Wait():
         :param character: character waiting
         :type character: Character
         """
-        character.old_values['tick'] = character.tick
+        add_history_value(character, 'tick')
 
         action_factory = (ActionFactoryBuilder()
                                     .with_wait_factory()
@@ -179,7 +212,7 @@ class CastSpell():
         :param caster: character doing the casting
         :type caster: Character
         """
-        caster.old_values['hit points'] = caster.hit_points
+        add_history_value(caster, 'hit_points')
 
         spell_factory = SpellGeneratorBuilder().build()
 
@@ -266,7 +299,7 @@ class Hit():
         :param attacker: character attacking
         :type attacker: Character
         """
-        self.target.old_values['hit points'] = self.target.hit_points
+        add_history_value(self.target, 'hit_points')
 
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
@@ -375,7 +408,8 @@ class HasLessHitPoints(BaseMatcher):
 
         :param item: match against this item
         """
-        self.old_hit_points = item.old_values['hit points']
+        self.old_hit_points = get_history_value(item, 'hit_points')
+
         if self.old_hit_points > item.hit_points:
             return True
         else:
@@ -438,7 +472,7 @@ def affect(target, effect_spec):
 
     new_effect = effect_type(**effect_spec)
 
-    target.old_values['hit points'] = target.hit_points
+    add_history_value(target, 'hit_points')
 
     new_effect.trigger(Dying())
 
@@ -541,12 +575,10 @@ class Drop():
         :param actor: character dropping the item
         :type actor: Character
         """
-        self.item.old_values['location'] = self.item.location
-        self.item.old_values['level'] = self.item.level
-
-        actor.old_values['inventory'] = []
-        actor.old_values['inventory'].append(self.item)
-        actor.old_values['tick'] = actor.tick
+        add_history_value(actor, 'location')
+        add_history_value(actor, 'level')
+        add_history_value(actor, 'inventory')
+        add_history_value(actor, 'tick')
 
         action_factory = (ActionFactoryBuilder()
                                     .with_move_factory()
@@ -600,7 +632,7 @@ class HasDropped(BaseMatcher):
             self.fail_reason = 'item not in level'
             return False
 
-        self.old_time = item.old_values['tick']
+        self.old_time = get_history_value(item, 'tick')
         self.new_time = item.tick
         if not self.old_time < self.new_time:
             self.fail_reason = 'time did not pass'
