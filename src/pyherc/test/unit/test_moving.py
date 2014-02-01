@@ -25,6 +25,7 @@ from hamcrest import assert_that, is_, is_not, equal_to #pylint: disable-msg=E06
 from mockito import mock
 from nose.tools import with_setup
 
+from pyherc.ports import ActionsPort
 from pyherc.rules.moving.action import EscapeAction
 from pyherc.rules import move
 from pyherc.data import Portal
@@ -46,23 +47,19 @@ class TestEventDispatching():
         """
         Default constructor
         """
-        super(TestEventDispatching, self).__init__()
+        super().__init__()
 
         self.model = None
         self.character = None
-        self.action_factory = None
         self.level = None
         self.listener = None
+        self.actions = None
 
     def setup(self):
         """
         Setup test case
         """
         self.model = Model()
-
-        self.action_factory = (ActionFactoryBuilder()
-                                    .with_move_factory()
-                                    .build())
 
         self.character = (CharacterBuilder()
                                 .with_model(self.model)
@@ -77,11 +74,16 @@ class TestEventDispatching():
 
         self.model.register_event_listener(self.listener)
 
+        self.actions = ActionsPort(ActionFactoryBuilder()
+                                        .with_move_factory()
+                                        .build())
+
     def test_event_is_relayed(self):
         """
         Test that moving will create an event and send it forward
         """
-        move(self.character, 3, self.action_factory)
+        self.actions.move_character(character = self.character,
+                                    direction = 3)
 
         assert_that(len(self.listener.events), is_(equal_to(1)))
 
@@ -92,7 +94,8 @@ class TestEventDispatching():
         expected_redraws = [(10, 10),
                             (10, 11)]
 
-        move(self.character, 5, self.action_factory)
+        self.actions.move_character(character = self.character,
+                                    direction = 5)
 
         event = self.listener.events[0]
 
