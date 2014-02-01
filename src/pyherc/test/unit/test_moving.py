@@ -27,7 +27,6 @@ from nose.tools import with_setup
 
 from pyherc.ports import ActionsPort
 from pyherc.rules.moving.action import EscapeAction
-from pyherc.rules import move
 from pyherc.data import Portal
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.builders import CharacterBuilder
@@ -66,9 +65,9 @@ class TestEventDispatching():
                                 .with_location((10, 10))
                                 .build())
 
-        self.level = (LevelBuilder()
-                            .with_character(self.character)
-                            .build())
+        self.model.dungeon = (LevelBuilder()
+                                .with_character(self.character)
+                                .build())
 
         self.listener = EventListener()
 
@@ -111,7 +110,7 @@ class TestMoving():
         Default constructor
         """
         super(TestMoving, self).__init__()
-        self.action_factory = None
+        self.actions = None
         self.character = None
         self.level1 = None
         self.level2 = None
@@ -123,8 +122,6 @@ class TestMoving():
         """
         Setup the test case
         """
-        self.action_factory = ActionFactoryBuilder().with_move_factory().build()
-
         self.character = (CharacterBuilder()
                                 .build())
 
@@ -144,13 +141,18 @@ class TestMoving():
 
         self.level1.add_creature(self.character, (5, 5))
 
+        self.actions = ActionsPort(ActionFactoryBuilder()
+                                        .with_move_factory()
+                                        .build())
+
     def check_move_result(self, start, direction, expected_location):
         """
         Test that taking single step is possible
         """
         self.character.location = start
 
-        move(self.character, direction, self.action_factory)
+        self.actions.move_character(character = self.character,
+                                    direction = direction)
 
         assert_that(self.character.location,
                     is_(equal_to(expected_location)))
@@ -178,7 +180,8 @@ class TestMoving():
         """
         self.character.location = (1, 1)
 
-        move(self.character, 1, self.action_factory)
+        self.actions.move_character(character = self.character,
+                                    direction = 1)
 
         assert(self.character.location == (1, 1))
 
@@ -189,7 +192,8 @@ class TestMoving():
         assert(self.character.location == (5, 5))
         assert(self.character.level == self.level1)
 
-        move(self.character, 9, self.action_factory)
+        self.actions.move_character(character = self.character,
+                                    direction = 9)
 
         assert(self.character.location == (10, 10))
         assert(self.character.level == self.level2)
@@ -201,7 +205,8 @@ class TestMoving():
         assert self.character.level == self.level1
         assert self.character in self.level1.creatures
 
-        move(self.character, 9, self.action_factory)
+        self.actions.move_character(character = self.character,
+                                    direction = 9)
 
         assert self.character.level == self.level2
         assert self.character in self.level2.creatures
@@ -213,7 +218,8 @@ class TestMoving():
         assert self.character.level == self.level1
         assert self.character in self.level1.creatures
 
-        move(self.character, 9, self.action_factory)
+        self.actions.move_character(character = self.character,
+                                    direction = 9)
 
         assert self.character not in self.level1.creatures
 
@@ -224,7 +230,8 @@ class TestMoving():
         self.character.location = (6, 3)
         assert(self.character.level == self.level1)
 
-        move(self.character, 9, self.action_factory)
+        self.actions.move_character(character = self.character,
+                                    direction = 9)
 
         assert(self.character.location == (6, 3))
         assert(self.character.level == self.level1)
@@ -235,7 +242,8 @@ class TestMoving():
         """
         tick = self.character.tick
 
-        move(self.character, 3, self.action_factory)
+        self.actions.move_character(character = self.character,
+                                    direction = 3)
 
         assert self.character.tick > tick
 
@@ -248,9 +256,8 @@ class TestMoving():
         self.level1.add_portal(portal3, (2, 2))
         self.character.location = (2, 2)
 
-        move(character = self.character,
-             direction = 9,
-             action_factory = self.action_factory)
+        self.actions.move_character(character = self.character,
+                                    direction = 9)
 
         model = self.character.model
         assert_that(model.end_condition, is_(equal_to(ESCAPED_DUNGEON)))
