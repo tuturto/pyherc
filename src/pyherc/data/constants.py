@@ -27,3 +27,14 @@ SLOW_ACTION = 8
 LONG_ACTION = 16
 
 TIME_CHRISTMAS = 1
+
+north = 1
+north_east = 2
+east = 3
+south_east = 4
+south = 5
+south_west = 6
+west = 7
+north_west = 8
+enter = 9
+
