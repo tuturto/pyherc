@@ -33,5 +33,4 @@ from .character import WeaponProficiency
 from .item import Item
 from .inventory import Inventory
 
-from .constants import INSTANT_ACTION, FAST_ACTION, NORMAL_ACTION, SLOW_ACTION
-from .constants import LONG_ACTION
+from .constants import Duration, SpecialTime, Direction

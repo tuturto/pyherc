@@ -26,7 +26,7 @@ from mockito import mock
 from nose.tools import with_setup
 
 from pyherc.ports import ActionsPort
-from pyherc.data.constants import north, east, south, enter
+from pyherc.data.constants import Direction
 from pyherc.rules.moving.action import EscapeAction
 from pyherc.data import Portal
 from pyherc.test.builders import LevelBuilder
@@ -83,7 +83,7 @@ class TestEventDispatching():
         Test that moving will create an event and send it forward
         """
         self.actions.move_character(character = self.character,
-                                    direction = east)
+                                    direction = Direction.east)
 
         assert_that(len(self.listener.events), is_(equal_to(1)))
 
@@ -95,7 +95,7 @@ class TestEventDispatching():
                             (10, 11)]
 
         self.actions.move_character(character = self.character,
-                                    direction = south)
+                                    direction = Direction.south)
 
         event = self.listener.events[0]
 
@@ -182,7 +182,7 @@ class TestMoving():
         self.character.location = (1, 1)
 
         self.actions.move_character(character = self.character,
-                                    direction = north)
+                                    direction = Direction.north)
 
         assert(self.character.location == (1, 1))
 
@@ -194,7 +194,7 @@ class TestMoving():
         assert(self.character.level == self.level1)
 
         self.actions.move_character(character = self.character,
-                                    direction = enter)
+                                    direction = Direction.enter)
 
         assert(self.character.location == (10, 10))
         assert(self.character.level == self.level2)
@@ -207,7 +207,7 @@ class TestMoving():
         assert self.character in self.level1.creatures
 
         self.actions.move_character(character = self.character,
-                                    direction = enter)
+                                    direction = Direction.enter)
 
         assert self.character.level == self.level2
         assert self.character in self.level2.creatures
@@ -220,7 +220,7 @@ class TestMoving():
         assert self.character in self.level1.creatures
 
         self.actions.move_character(character = self.character,
-                                    direction = enter)
+                                    direction = Direction.enter)
 
         assert self.character not in self.level1.creatures
 
@@ -232,7 +232,7 @@ class TestMoving():
         assert(self.character.level == self.level1)
 
         self.actions.move_character(character = self.character,
-                                    direction = enter)
+                                    direction = Direction.enter)
 
         assert(self.character.location == (6, 3))
         assert(self.character.level == self.level1)
@@ -244,7 +244,7 @@ class TestMoving():
         tick = self.character.tick
 
         self.actions.move_character(character = self.character,
-                                    direction = east)
+                                    direction = Direction.east)
 
         assert self.character.tick > tick
 
@@ -258,7 +258,7 @@ class TestMoving():
         self.character.location = (2, 2)
 
         self.actions.move_character(character = self.character,
-                                    direction = enter)
+                                    direction = Direction.enter)
 
         model = self.character.model
         assert_that(model.end_condition, is_(equal_to(ESCAPED_DUNGEON)))

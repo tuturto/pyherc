@@ -20,21 +20,39 @@
 """
 Module for common constants
 """
-INSTANT_ACTION = 1
-FAST_ACTION = 2
-NORMAL_ACTION = 4
-SLOW_ACTION = 8
-LONG_ACTION = 16
 
-TIME_CHRISTMAS = 1
+class Duration():
+    """
+    Constants for time durations
 
-north = 1
-north_east = 2
-east = 3
-south_east = 4
-south = 5
-south_west = 6
-west = 7
-north_west = 8
-enter = 9
+    .. versionadded:: 0.10
+    """
+    instant = 1
+    fast = 2
+    normal = 4
+    slow = 8
+    very_slow = 16
 
+class SpecialTime():
+    """
+    Constants for special occasions
+
+    .. versionadded:: 0.10
+    """
+    christmas = 1
+
+class Direction():
+    """
+    Constants for directions
+
+    .. versionadded:: 0.10
+    """
+    north = 1
+    north_east = 2
+    east = 3
+    south_east = 4
+    south = 5
+    south_west = 6
+    west = 7
+    north_west = 8
+    enter = 9

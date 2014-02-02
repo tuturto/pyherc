@@ -21,7 +21,7 @@
 module for configuring player characters
 """
 import datetime
-import pyherc.data.constants
+from pyherc.data import SpecialTime
 from pyherc.generators import CreatureConfiguration, InventoryConfiguration
 from pyherc.rules.calendar import get_special_events
 
@@ -153,7 +153,7 @@ def init_players(context):
     date = datetime.date.today()
     events = get_special_events(date.year, date.month, date.day)
 
-    if pyherc.data.constants.TIME_CHRISTMAS in events:
+    if SpecialTime.christmas in events:
         for character in config:
             character.inventory.append(InventoryConfiguration(item_name = 'idol of snowman',
                                                               min_amount = 1,

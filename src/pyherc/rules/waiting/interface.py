@@ -23,7 +23,7 @@ Public interface for wait actions
 
 from pyherc.aspects import log_debug, log_info
 from pyherc.rules.public import ActionParameters
-from pyherc.data.constants import NORMAL_ACTION
+from pyherc.data import Duration
 
 @log_info
 def wait(character, action_factory):
@@ -38,7 +38,7 @@ def wait(character, action_factory):
     .. versionadded:: 0.10
     """
     action = action_factory.get_action(WaitParameters(character,
-                                                      NORMAL_ACTION))
+                                                      Duration.normal))
     if action.is_legal():
         action.execute()
 
