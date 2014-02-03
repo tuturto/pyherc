@@ -39,6 +39,7 @@ Options:
 from pyherc.aspects import set_logger
 from pyherc.version import PYHERC_VERSION
 from docopt import docopt
+import logging
 
 arguments = docopt(__doc__, version='Herculeum ' + PYHERC_VERSION)
 set_logger(arguments['--log-level'],
@@ -63,8 +64,24 @@ try:
 except:
     print('Curses user interface is not available')
 
+def process_command_line(arguments):
+    """
+    Process command line options
+    """
+    log_levels = {'debug': logging.DEBUG,
+                  'info': logging.INFO,
+                  'warning': logging.WARNING,
+                  'error': logging.ERROR,
+                  'critical': logging.CRITICAL}
+
+    log_level = log_levels[arguments['--log-level']]
+    silent = arguments['--silent']
+    ui_mode = arguments['--ui']
+
+    return (log_level, silent, ui_mode)
+
 if __name__ == "__main__":
-    app = Application()    
+    app = Application()
 
     if arguments['--license']:
         print('#   Herculeum is free software: you can redistribute it and/or modify')
@@ -78,12 +95,15 @@ if __name__ == "__main__":
         print('#   GNU General Public License for more details.')
         print('#')
         print('#   You should have received a copy of the GNU General Public License')
-        print('#   along with Herculeum.  If not, see <http://www.gnu.org/licenses/>.')            
+        print('#   along with Herculeum.  If not, see <http://www.gnu.org/licenses/>.')
     else:
-    
-        app.process_command_line(arguments)
 
-        if app.ui_mode == 'qt':
+        log_level, silent, ui_mode = process_command_line(arguments)
+
+        app.log_level = log_level
+        app.silent = silent
+
+        if ui_mode == 'qt':
             user_interface = QtUserInterface(app)
             surface_manager = QtSurfaceManager()
             controls_configuration = QtControlsConfiguration()

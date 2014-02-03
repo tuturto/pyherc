@@ -34,7 +34,7 @@ class Application():
     """
 
     def __init__(self):
-        super(Application, self).__init__()
+        super().__init__()
         self.config = None
         self.gui = None
         self.world = None
@@ -43,21 +43,6 @@ class Application():
         self.screen = None
         self.log_level = None
         self.silent = False
-        self.ui_mode = 'qt'
-
-    def process_command_line(self, arguments):
-        """
-        Process command line options
-        """       
-        log_levels = {'debug': logging.DEBUG,
-                      'info': logging.INFO,
-                      'warning': logging.WARNING,
-                      'error': logging.ERROR,
-                      'critical': logging.CRITICAL}
-
-        self.log_level = log_levels[arguments['--log-level']]
-        self.silent = arguments['--silent']
-        self.ui_mode = arguments['--ui']
 
     def load_configuration(self, controls, surface_manager):
         """
