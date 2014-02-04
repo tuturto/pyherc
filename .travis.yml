@@ -2,7 +2,7 @@ language: python
 python:
   - "3.3"
 # command to install dependencies
-install: "pip install -r requirements-dev --use-mirrors"
+install: "pip install -r requirements-dev"
 # command to run tests, e.g. python setup.py test
 script:
   - cd src/pyherc
