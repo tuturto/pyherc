@@ -30,7 +30,7 @@ def create_logger(log_level):
         """
         Decorator to perform logging
         """
-        logger_name = wrapped_function.__qualname__
+        logger_name = wrapped_function.__name__
         logger = logging.getLogger(logger_name)
 
         call_message = ' '.join(['call',
