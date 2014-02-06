@@ -25,6 +25,11 @@ from pyherc.events import HitPointsChangedEvent, SpiritPointsChangedEvent
 from pyherc.events import ErrorEvent
 from decorator import decorator
 
+from pyherc.data.model import Model
+from pyherc.data.inventory import Inventory
+from pyherc.data.magic.spellbook import SpellBook
+from pyherc.data.effects.effectscollection import EffectsCollection
+
 @decorator
 def guarded_action(wrapped_function, *args, **kwargs):
     """
@@ -55,9 +60,9 @@ class Character():
         :param spellbook: spells this character knows or can know
         :type spellbook: SpellBook
         """
-        super(Character, self).__init__()
+        super().__init__()
         # attributes
-        self.model = model
+        self.model = Model()
         self.__body = None
         self.__finesse = None
         self.__mind = None
@@ -69,7 +74,7 @@ class Character():
         self.__spirit = 100
         self.max_spirit = 100
         self.speed = None
-        self.inventory = inventory
+        self.inventory = Inventory()
         self.feats = []
         #location
         self.level = None
@@ -87,8 +92,8 @@ class Character():
 
         self.__active_effects = [] # active effects
         self.artificial_intelligence = None
-        self.__effects_collection = effects_collection
-        self.__spellbook = spellbook
+        self.__effects_collection = EffectsCollection()
+        self.__spellbook = SpellBook()
 
     def __str__(self):
         return self.name
