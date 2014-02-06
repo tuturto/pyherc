@@ -331,6 +331,8 @@ class CharacterBuilder():
                               inventory = self.inventory,
                               spellbook = SpellBook())
 
+        character.model = self.model
+
         if self.player_character:
             self.model.player = character
 
