@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -18,7 +17,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-from pyherc.data import Inventory
+from pyherc.test.builders import CharacterBuilder
 from hamcrest import assert_that, is_,  equal_to, is_in, not_none, is_not #pylint: disable-msg=E0611
 from hamcrest import none #pylint: disable-msg=E0611
 from mockito import mock
@@ -34,82 +33,76 @@ class TestInventory():
         """
         Default constructor
         """
-        super(TestInventory, self).__init__()
+        super().__init__()
+
+        self.character = CharacterBuilder().build()
 
     def test_lenght_of_empty_inventory(self):
         """
         Test that length of empty inventory is reported correctly
         """
-        inventory = Inventory()
-
-        assert_that(len(inventory), is_(equal_to(0)))
+        assert_that(len(self.character.inventory), is_(equal_to(0)))
 
     def test_lenght_of_one_item_inventory(self):
         """
         Test that length of one item inventory is reported correctly
         """
-        inventory = Inventory()
+        self.character.inventory.append(mock())
 
-        inventory.append(mock())
-
-        assert_that(len(inventory), is_(equal_to(1)))
+        assert_that(len(self.character.inventory), is_(equal_to(1)))
 
     def test_accessing_items(self):
         """
         Test that items can be added and retrieved from inventory
         """
-        inventory = Inventory()
         item_1 = mock()
         item_2 = mock()
 
-        inventory.append(item_1)
+        self.character.inventory.append(item_1)
 
-        assert_that(inventory[0], is_(equal_to(item_1)))
+        assert_that(self.character.inventory[0], is_(equal_to(item_1)))
 
-        inventory[0] = item_2
+        self.character.inventory[0] = item_2
 
-        assert_that(inventory[0], is_(equal_to(item_2)))
+        assert_that(self.character.inventory[0], is_(equal_to(item_2)))
 
     def test_deleting_items(self):
         """
         Test that item can be deleted from inventory
         """
-        inventory = Inventory()
         item = mock()
 
-        inventory.append(item)
+        self.character.inventory.append(item)
 
-        assert_that(item, is_in(inventory))
+        assert_that(item, is_in(self.character.inventory))
 
-        del inventory[0]
+        del self.character.inventory[0]
 
-        assert_that(item, is_not(is_in(inventory)))
+        assert_that(item, is_not(is_in(self.character.inventory)))
 
     def test_removing_items(self):
         """
         Test that item can be removed from inventory
         """
-        inventory = Inventory()
         item = mock()
 
-        inventory.append(item)
+        self.character.inventory.append(item)
 
-        assert_that(item, is_in(inventory))
+        assert_that(item, is_in(self.character.inventory))
 
-        inventory.remove(item)
+        self.character.inventory.remove(item)
 
-        assert_that(item, is_not(is_in(inventory)))
+        assert_that(item, is_not(is_in(self.character.inventory)))
 
     def test_getting_iterator(self):
         """
         Test that iterator can be produced
         """
-        inventory = Inventory()
         item = mock()
 
-        inventory.append(item)
+        self.character.inventory.append(item)
 
-        iterator = inventory.__iter__()
+        iterator = self.character.inventory.__iter__()
 
         assert_that(iterator, is_(not_none()))
 
@@ -117,54 +110,51 @@ class TestInventory():
         """
         Test that weapon in use is removed when dropped
         """
-        inventory = Inventory()
         item = mock()
 
-        inventory.append(item)
-        inventory.weapon = item
+        self.character.inventory.append(item)
+        self.character.inventory.weapon = item
 
-        inventory.remove(item)
+        self.character.inventory.remove(item)
 
-        assert_that(inventory.weapon, is_(none()))
+        assert_that(self.character.inventory.weapon, is_(none()))
 
     def test_deleting_weapon_in_use(self):
         """
         Test that deleting weapon in use from inventory removes it from use
         """
-        inventory = Inventory()
         item = mock()
 
-        inventory.append(item)
-        inventory.weapon = item
+        self.character.inventory.append(item)
+        self.character.inventory.weapon = item
 
-        del inventory[0]
+        del self.character.inventory[0]
 
-        assert_that(inventory.weapon, is_(none()))
+        assert_that(self.character.inventory.weapon, is_(none()))
 
     def test_armour_in_use(self):
         """
         Test that removing armour in use removes it from use
         """
-        inventory = Inventory()
         item = mock()
 
-        inventory.append(item)
-        inventory.armour = item
+        self.character.inventory.append(item)
+        self.character.inventory.armour = item
 
-        inventory.remove(item)
+        self.character.inventory.remove(item)
 
-        assert_that(inventory.armour, is_(none()))
+        assert_that(self.character.inventory.armour, is_(none()))
 
     def test_projectiles_in_use(self):
         """
         Test that removing projectiles in use removes it from use
         """
-        inventory = Inventory()
         item = mock()
 
-        inventory.append(item)
-        inventory.projectiles = item
+        self.character.inventory.append(item)
+        self.character.inventory.projectiles = item
 
-        inventory.remove(item)
+        self.character.inventory.remove(item)
 
-        assert_that(inventory.projectiles, is_(none()))
+        assert_that(self.character.inventory.projectiles, is_(none()))
+

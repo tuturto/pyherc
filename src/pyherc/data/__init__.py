@@ -31,6 +31,6 @@ from .character import Character
 from .character import WeaponProficiency
 
 from .item import Item
-from .inventory import Inventory
 
 from .constants import Duration, SpecialTime, Direction
+

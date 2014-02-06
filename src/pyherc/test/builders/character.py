@@ -20,7 +20,7 @@
 """
 Module for character builder
 """
-from pyherc.data import Character, Inventory
+from pyherc.data import Character
 from pyherc.data.magic import SpellBook
 from pyherc.data.effects import EffectsCollection
 from mockito import mock
@@ -58,7 +58,6 @@ class CharacterBuilder():
         self.effect_handles = []
         self.effects = []
         self.effects_collection = EffectsCollection()
-        self.inventory = Inventory()
         self.player_character = False
 
         self.listeners = []
