@@ -20,9 +20,8 @@
 """
 Module for creature generation related classes
 """
-from pyherc.data import Character, Inventory
-from pyherc.data.magic import SpellBook
-from pyherc.data.effects import EffectHandle, EffectsCollection
+from pyherc.data import Character
+from pyherc.data.effects import EffectHandle
 from pyherc.aspects import log_debug, log_info
 
 class CreatureGenerator():
@@ -34,7 +33,7 @@ class CreatureGenerator():
         """
         Default constructor
         """
-        super(CreatureGenerator, self).__init__()
+        super().__init__()
         self.configuration = configuration
         self.model = model
         self.rng = rng
@@ -50,10 +49,7 @@ class CreatureGenerator():
         """
         config = self.__get_creature_config(name)
 
-        new_creature = Character(self.model,
-                                 EffectsCollection(),
-                                 Inventory(),
-                                 SpellBook())
+        new_creature = Character(self.model)
 
         new_creature.name = config.name
         new_creature.body = config.body

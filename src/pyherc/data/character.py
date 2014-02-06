@@ -25,7 +25,6 @@ from pyherc.events import HitPointsChangedEvent, SpiritPointsChangedEvent
 from pyherc.events import ErrorEvent
 from decorator import decorator
 
-from pyherc.data.model import Model
 from pyherc.data.inventory import Inventory
 from pyherc.data.magic.spellbook import SpellBook
 from pyherc.data.effects.effectscollection import EffectsCollection
@@ -47,22 +46,16 @@ class Character():
     Represents a character in playing world
     """
     @log_debug
-    def __init__(self, model, effects_collection, inventory, spellbook):
+    def __init__(self, model):
         """
         Default constructor
 
         :param model: model where character acts
         :type model: Model
-        :param effects_collection: collection for effects
-        :type effects_collection: EffectsCollection
-        :param inventory: inventory for character
-        :type inventory: Inventory
-        :param spellbook: spells this character knows or can know
-        :type spellbook: SpellBook
         """
         super().__init__()
         # attributes
-        self.model = Model()
+        self.model = model
         self.__body = None
         self.__finesse = None
         self.__mind = None

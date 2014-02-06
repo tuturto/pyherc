@@ -326,12 +326,7 @@ class CharacterBuilder():
         :returns: character
         :rtype: Character
         """
-        character = Character(model = self.model,
-                              effects_collection = self.effects_collection,
-                              inventory = self.inventory,
-                              spellbook = SpellBook())
-
-        character.model = self.model
+        character = Character(self.model)
 
         if self.player_character:
             self.model.player = character
