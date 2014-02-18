@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -22,8 +21,6 @@
 Module for basic decorators
 """
 
-import logging
-
 class Decorator():
     """
     Super class for level decorators
@@ -34,9 +31,8 @@ class Decorator():
 
         :param configuration: configuration for decorator
         """
-        super(Decorator, self).__init__()
+        super().__init__()
         self.configuration = configuration
-        self.logger = logging.getLogger('pyherc.generators.level.decorator.basic.Decorator')
 
     def __get_level_types(self):
         """
@@ -69,7 +65,7 @@ class DecoratorConfig():
         :param level_types: level types to handle
         :type level_types: [string]
         """
-        super(DecoratorConfig, self).__init__()
+        super().__init__()
         self.level_types = level_types
 
 class ReplacingDecorator(Decorator):
@@ -83,8 +79,7 @@ class ReplacingDecorator(Decorator):
         :param configuration: configuration specifying tiles to replace
         :type configuration: ReplacingDecoratorConfig
         """
-        super(ReplacingDecorator, self).__init__(configuration)
-        self.logger = logging.getLogger('pyherc.generators.level.decorator.basic.ReplacingDecorator')
+        super().__init__(configuration)
 
     def decorate_level(self, level):
         """
@@ -120,7 +115,7 @@ class ReplacingDecoratorConfig(DecoratorConfig):
         :param ground_config: configuration for ground
         :param wall_config: configuration for walls
         """
-        super(ReplacingDecoratorConfig, self).__init__(level_types)
+        super().__init__(level_types)
         self.ground_config = ground_config
         self.wall_config = wall_config
 
@@ -138,8 +133,7 @@ class WallBuilderDecorator(Decorator):
         :param configuration: configuration
         :type configuration: WallBuilderDecoratorConfig
         """
-        super(WallBuilderDecorator, self).__init__(configuration)
-        self.logger = logging.getLogger('pyherc.generators.level.decorator.basic.WallBuilderDecorator')
+        super().__init__(configuration)
 
     def decorate_level(self, level):
         """
@@ -191,7 +185,7 @@ class WallBuilderDecoratorConfig(DecoratorConfig):
         :param empty_tile: tile ID to use for empty spaces
         :type empty_tile: integer
         """
-        super(WallBuilderDecoratorConfig, self).__init__(level_types)
+        super().__init__(level_types)
         self.wall_config = wall_config
         self.empty_tile = empty_tile
 
@@ -206,8 +200,7 @@ class AggregateDecorator(Decorator):
         :param configuration: configuration
         :type configuration: AggregateDecoratorConfig
         """
-        super(AggregateDecorator, self).__init__(configuration)
-        self.logger = logging.getLogger('pyherc.generators.level.decorator.basic.AggregateDecorator')
+        super().__init__(configuration)
 
     def decorate_level(self, level):
         """
@@ -232,5 +225,117 @@ class AggregateDecoratorConfig(DecoratorConfig):
         :decorators: decorators to group
         :type decorators: [Decorator]
         """
-        super(AggregateDecoratorConfig, self).__init__(level_types)
+        super().__init__(level_types)
         self.decorators = decorators
+
+class DirectionalWallDecoratorConfig(DecoratorConfig):
+    """
+    Configuration for DirectionalWallDecorator
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self, level_types, east_west, east_north, east_south,
+                 west_north, west_south, north_south,
+                 east_west_north, east_west_south,
+                 east_north_south, west_north_south,
+                 four_way, wall):
+        """
+        Default constructor
+        """
+        super().__init__(level_types)
+        self.east_west = east_west
+        self.east_north = east_north
+        self.east_south = east_south
+        self.west_north = west_north
+        self.west_south = west_south
+        self.north_south = north_south
+
+        self.east_west_north = east_west_north
+        self.east_west_south = east_west_south
+        self.east_north_south = east_north_south
+        self.west_north_south = west_north_south
+        self.four_way = four_way
+
+        self.wall = wall
+
+        self.tiles = [east_west, east_north, east_south,
+                      west_north, west_south, north_south,
+                      east_west_north, east_west_south,
+                      east_north_south, west_north_south,
+                      four_way, wall]
+
+class DirectionalWallDecorator(Decorator):
+    """
+    Decorator to build directional walls
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self, configuration):
+        """
+        Default constructor
+
+        :param configuration: configuration
+        :type configuration: DirectionalWallDecoratorConfig
+        """
+        super().__init__(configuration)
+
+        self.tiles = {'1': configuration.north_south,
+                      '13': configuration.east_north,
+                      '15': configuration.north_south,
+                      '17': configuration.west_north,
+                      '135': configuration.east_north_south,
+                      '137': configuration.east_west_north,
+                      '157': configuration.west_north_south,
+                      '1357': configuration.four_way,
+                      '3': configuration.east_west,
+                      '35': configuration.east_south,
+                      '37': configuration.east_west,
+                      '357': configuration.east_west_south,
+                      '5': configuration.north_south,
+                      '57': configuration.west_south,
+                      '7': configuration.east_west}
+
+    def decorate_level(self, level):
+        """
+        Decorate level
+
+        :param level: level to decorate
+        :type level: Level
+        """
+        for loc_y in range(0, len(level.floor[0]) - 1):
+            for loc_x in range(0, len(level.floor) - 1):
+                if level.walls[loc_x][loc_y] == self.configuration.wall:
+                    level.walls[loc_x][loc_y] = self.get_wall_tile(level,
+                                                                   loc_x,
+                                                                   loc_y)
+
+    def get_wall_tile(self, level, loc_x, loc_y):
+        """
+        Calculate correct wall tile
+
+        :param level: level to decorate
+        :type level: Level
+        :param loc_x: x-coordinate
+        :type loc_x: int
+        :param loc_y: y-coordinate
+        :type loc_y: int
+        :returns: new wall tile
+        :rtype: int
+        """
+
+        directions = []
+        if level.walls[loc_x][loc_y - 1] in self.configuration.tiles:
+            directions.append('1')
+        if level.walls[loc_x + 1][loc_y] in self.configuration.tiles:
+            directions.append('3')
+        if level.walls[loc_x][loc_y + 1] in self.configuration.tiles:
+            directions.append('5')
+        if level.walls[loc_x - 1][loc_y] in self.configuration.tiles:
+            directions.append('7')
+
+        key = ''.join(directions)
+
+        if key in self.tiles:
+            return self.tiles[''.join(directions)]
+        else:
+            return self.configuration.east_west

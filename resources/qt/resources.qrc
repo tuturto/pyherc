@@ -63,10 +63,21 @@
         <file>rock_floor.png</file>
         <file>pillar.png</file>
         <file>tiled_floor.png</file>
-	<file>fire_effect.png</file>
-	<file>fireball.png</file>
-	<file>healing-wind.png</file>
-	<file>force-bolt.png</file>
+        <file>fire_effect.png</file>
+        <file>fireball.png</file>
+        <file>healing-wind.png</file>
+        <file>force-bolt.png</file>
         <file>snowman.png</file>
+        <file>crypt_wall_2_4.png</file>
+        <file>crypt_wall_2_6.png</file>
+        <file>crypt_wall_2_8.png</file>
+        <file>crypt_wall_4_6.png</file>
+        <file>crypt_wall_8_4.png</file>
+        <file>crypt_wall_8_6.png</file>
+        <file>crypt_wall_2_6_8.png</file>
+        <file>crypt_wall_2_4_6.png</file>
+        <file>crypt_wall_2_4_6_8.png</file>
+        <file>crypt_wall_4_6_8.png</file>
+        <file>crypt_wall_2_4_8.png</file>
     </qresource>
 </RCC>

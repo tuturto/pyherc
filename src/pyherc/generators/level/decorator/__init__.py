@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -25,3 +24,4 @@ Module for level decorators
 from .basic import ReplacingDecorator, ReplacingDecoratorConfig
 from .basic import WallBuilderDecorator, WallBuilderDecoratorConfig
 from .basic import AggregateDecorator, AggregateDecoratorConfig
+from .basic import DirectionalWallDecorator, DirectionalWallDecoratorConfig

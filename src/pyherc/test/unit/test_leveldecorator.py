@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -28,6 +27,8 @@ from pyherc.generators.level.decorator import WallBuilderDecorator
 from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
 from pyherc.generators.level.decorator import AggregateDecorator
 from pyherc.generators.level.decorator import AggregateDecoratorConfig
+from pyherc.generators.level.decorator import DirectionalWallDecoratorConfig
+from pyherc.generators.level.decorator import DirectionalWallDecorator
 from pyherc.data import Level
 from mockito import mock, verify
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
@@ -190,3 +191,63 @@ class TestAggregateDecorator():
 
         verify(self.mock_decorator_1).decorate_level(self.level)
         verify(self.mock_decorator_2).decorate_level(self.level)
+
+class TestDirectionalWallDecorator():
+    """
+    Test that directional walls can be decorated
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.level = None
+        self.config = None
+        self.decorator = None
+
+        self.empty_wall = None
+        self.wall = 'wall'
+
+    def setup(self):
+        """
+        Setup the test case
+        """
+        self.empty_wall = 'empty space'
+        self.level = Level((10, 10),
+                           floor_type = 'floor',
+                           wall_type = self.empty_wall)
+
+        self.level.walls[1][1] = self.wall
+        self.level.walls[2][1] = self.wall
+        self.level.walls[3][1] = self.wall
+
+        self.level.walls[1][2] = self.wall
+        self.level.walls[1][3] = self.wall
+
+        self.level.walls[2][3] = self.wall
+        self.level.walls[3][3] = self.wall
+
+        self.level.walls[3][2] = self.wall
+
+        self.config = DirectionalWallDecoratorConfig(level_types = ['crypt'],
+                                                   east_west = 'east-west',
+                                                   east_north = 'east-north',
+                                                   east_south = 'east-south',
+                                                   west_north = 'west-north',
+                                                   west_south = 'west-south',
+                                                   north_south = 'north-south',
+                                                   wall = self.wall)
+
+        self.decorator = DirectionalWallDecorator(self.config)
+
+    def test_building_basic_walls(self):
+        """
+        Test that basic wall can be built
+        """
+        self.decorator.decorate_level(self.level)
+
+        assert_that(self.level.walls[1][1], is_(equal_to('east-south')))
+        assert_that(self.level.walls[2][1], is_(equal_to('east-west')))
+        assert_that(self.level.walls[3][1], is_(equal_to('west-south')))
+        assert_that(self.level.walls[1][2], is_(equal_to('north-south')))
+        assert_that(self.level.walls[1][3], is_(equal_to('east-north')))
+        assert_that(self.level.walls[3][3], is_(equal_to('west-north')))

@@ -27,6 +27,8 @@ from pyherc.generators.level.decorator import ReplacingDecorator
 from pyherc.generators.level.decorator import ReplacingDecoratorConfig
 from pyherc.generators.level.decorator import WallBuilderDecorator
 from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
+from pyherc.generators.level.decorator import DirectionalWallDecoratorConfig
+from pyherc.generators.level.decorator import DirectionalWallDecorator
 from pyherc.generators.level.decorator import AggregateDecorator
 from pyherc.generators.level.decorator import AggregateDecoratorConfig
 
@@ -96,7 +98,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
                                                           [wallbuilder,
-                                                          replacer])
+                                                           replacer])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]
 

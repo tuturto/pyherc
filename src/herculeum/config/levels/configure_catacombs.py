@@ -28,6 +28,8 @@ from pyherc.generators.level.decorator import ReplacingDecorator
 from pyherc.generators.level.decorator import ReplacingDecoratorConfig
 from pyherc.generators.level.decorator import WallBuilderDecorator
 from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
+from pyherc.generators.level.decorator import DirectionalWallDecoratorConfig
+from pyherc.generators.level.decorator import DirectionalWallDecorator
 from pyherc.generators.level.decorator import AggregateDecorator
 from pyherc.generators.level.decorator import AggregateDecoratorConfig
 
@@ -79,6 +81,19 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                          ':stairs_up.png',
                                          '<')
 
+    wall_15 = surface_manager.add_icon('crypt_wall_15', ':crypt_wall_2_8.png', '#')
+    wall_57 = surface_manager.add_icon('crypt_wall_57', ':crypt_wall_2_4.png', '#')
+    wall_35 = surface_manager.add_icon('crypt_wall_35', ':crypt_wall_2_6.png', '#')
+    wall_37 = surface_manager.add_icon('crypt_wall_37', ':crypt_wall_4_6.png', '#')
+    wall_17 = surface_manager.add_icon('crypt_wall_17', ':crypt_wall_8_4.png', '#')
+    wall_13 = surface_manager.add_icon('crypt_wall_13', ':crypt_wall_8_6.png', '#')
+
+    wall_135 = surface_manager.add_icon('crypt_wall_135', ':crypt_wall_2_6_8.png', '#')
+    wall_357 = surface_manager.add_icon('crypt_wall_357', ':crypt_wall_2_4_6.png', '#')
+    wall_1357 = surface_manager.add_icon('crypt_wall_1357', ':crypt_wall_2_4_6_8.png', '#')
+    wall_137 = surface_manager.add_icon('crypt_wall_137', ':crypt_wall_4_6_8.png', '#')
+    wall_157 = surface_manager.add_icon('crypt_wall_157', ':crypt_wall_2_4_8.png', '#')
+
     room_generators = [CatacombsGenerator(floor_natural,
                                            wall_empty,
                                            ['upper catacombs',
@@ -100,14 +115,31 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     wallbuilder_config = WallBuilderDecoratorConfig(['upper catacombs',
                                                     'lower catacombs'],
                                         {wall_natural: wall_constructed},
-                                        wall_empty)
+                                         wall_empty)
     wallbuilder = WallBuilderDecorator(wallbuilder_config)
+
+    wall_direction_config = DirectionalWallDecoratorConfig(['upper catacombs'],
+                                                   east_west = wall_37,
+                                                   east_north = wall_13,
+                                                   east_south = wall_35,
+                                                   west_north = wall_17,
+                                                   west_south = wall_57,
+                                                   north_south = wall_15,
+                                                   east_west_north = wall_137,
+                                                   east_west_south = wall_357,
+                                                   east_north_south = wall_135,
+                                                   west_north_south = wall_157,
+                                                   four_way = wall_1357,
+                                                   wall = wall_constructed)
+
+    wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
     aggregate_decorator_config = AggregateDecoratorConfig(
                                                 ['upper catacombs',
                                                 'lower catacombs'],
                                                 [wallbuilder,
-                                                replacer])
+                                                 wall_direction_builder,
+                                                 replacer])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]
 
