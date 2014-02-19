@@ -142,8 +142,8 @@ class WallBuilderDecorator(Decorator):
         :param level: level to decorate
         :type level: Level
         """
-        for loc_y in range(1, len(level.floor[0]) - 1):
-            for loc_x in range(1, len(level.floor) - 1):
+        for loc_y in range(0, len(level.floor[0]) - 1):
+            for loc_x in range(0, len(level.floor) - 1):
                 if level.walls[loc_x][loc_y] == self.configuration.empty_tile:
                     self.check_and_replace((loc_x - 1, loc_y), level)
                     self.check_and_replace((loc_x + 1, loc_y), level)
