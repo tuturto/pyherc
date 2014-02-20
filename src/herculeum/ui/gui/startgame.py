@@ -81,15 +81,16 @@ class StartGameWidget(QDialog):
         self.class_name = QLabel('')
         self.class_name.setMinimumSize(200, 50)
         self.class_name.setMaximumSize(200, 50)
-        self.class_name.setAlignment(Qt.AlignCenter);
+        self.class_name.setAlignment(Qt.AlignCenter)
         self.class_icon = QLabel('')
-        self.class_icon.setMinimumSize(100, 100)
-        self.class_icon.setMaximumSize(100, 100)
+        self.class_icon.setMinimumSize(64, 64)
+        self.class_icon.setMaximumSize(64, 64)
+        self.class_icon.setAlignment(Qt.AlignCenter)
         self.class_description = QLabel('')
         self.class_description.setWordWrap(True)
         self.class_description.setMinimumSize(600, 300)
         self.class_description.setMaximumSize(600, 300)
-        self.class_description.setAlignment(Qt.AlignTop);
+        self.class_description.setAlignment(Qt.AlignTop)
 
         top_layout.addStretch()
         top_layout.addWidget(self.class_name)
@@ -116,6 +117,7 @@ class StartGameWidget(QDialog):
 
         .. versionadded:: 0.8
         """
+        self.class_icon.setPixmap(self.surface_manager.get_icon(character.icons))
         self.class_name.setText(character.name)
         self.class_description.setText(character.description)
 
