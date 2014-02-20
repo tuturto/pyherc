@@ -126,8 +126,6 @@ class MainWindow(QMainWindow):
         character_action.setStatusTip('Show character')
 
         menubar = self.menuBar()
-        file_menu = menubar.addMenu('&File')
-        file_menu.addAction(exit_action)
 
         self.map_window = PlayMapWindow(parent = None,
                                         model = self.application.world,
