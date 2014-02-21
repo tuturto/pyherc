@@ -82,5 +82,21 @@
         <file>pc_adventurer.png</file>
         <file>pc_warrior.png</file>
         <file>pc_mage.png</file>
+        <file>catacombs_floor.png</file>
+        <file>catacombs_floor_1.png</file>
+        <file>catacombs_floor_3.png</file>
+        <file>catacombs_floor_5.png</file>
+        <file>catacombs_floor_7.png</file>
+        <file>catacombs_floor_13.png</file>
+        <file>catacombs_floor_15.png</file>
+        <file>catacombs_floor_17.png</file>
+        <file>catacombs_floor_35.png</file>
+        <file>catacombs_floor_37.png</file>
+        <file>catacombs_floor_57.png</file>
+        <file>catacombs_floor_135.png</file>
+        <file>catacombs_floor_137.png</file>
+        <file>catacombs_floor_157.png</file>
+        <file>catacombs_floor_357.png</file>
+        <file>catacombs_floor_1357.png</file>
     </qresource>
 </RCC>
