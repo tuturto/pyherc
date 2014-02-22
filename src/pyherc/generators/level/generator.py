@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -196,7 +195,7 @@ class LevelGenerator():
         :type portal: Portal
         """
         new_level = Level(size = self.level_context.size,
-                          floor_type = self.level_context.floor_type,
+                          floor_type = 'transparent',
                           wall_type = self.level_context.wall_type,
                           empty_floor = self.level_context.empty_floor,
                           empty_wall = self.level_context.empty_wall)

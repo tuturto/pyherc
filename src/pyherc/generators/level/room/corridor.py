@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -39,7 +38,6 @@ class CorridorGenerator():
         :param tile: ID of tile to place
         :type tile: integer
         """
-        object.__init__(self)
         self.start_point = start_point
         self.end_point = end_point
         self.tile = tile

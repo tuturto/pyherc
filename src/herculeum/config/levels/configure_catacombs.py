@@ -30,6 +30,8 @@ from pyherc.generators.level.decorator import WallBuilderDecorator
 from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
 from pyherc.generators.level.decorator import DirectionalWallDecoratorConfig
 from pyherc.generators.level.decorator import DirectionalWallDecorator
+from pyherc.generators.level.decorator import FloorBuilderDecoratorConfig
+from pyherc.generators.level.decorator import FloorBuilderDecorator
 from pyherc.generators.level.decorator import AggregateDecorator
 from pyherc.generators.level.decorator import AggregateDecoratorConfig
 
@@ -134,11 +136,49 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
+    floor = surface_manager.add_icon('catacombs_floor', ':catacombs_floor.png', ' ')
+    floor1 = surface_manager.add_icon('catacombs_floor_1', ':catacombs_floor_1.png', ' ')
+    floor3 = surface_manager.add_icon('catacombs_floor_3', ':catacombs_floor_3.png', ' ')
+    floor5 = surface_manager.add_icon('catacombs_floor_5', ':catacombs_floor_5.png', ' ')
+    floor7 = surface_manager.add_icon('catacombs_floor_7', ':catacombs_floor_7.png', ' ')
+    floor13 = surface_manager.add_icon('catacombs_floor_13', ':catacombs_floor_13.png', ' ')
+    floor15 = surface_manager.add_icon('catacombs_floor_15', ':catacombs_floor_15.png', ' ')
+    floor17 = surface_manager.add_icon('catacombs_floor_17', ':catacombs_floor_17.png', ' ')
+    floor35 = surface_manager.add_icon('catacombs_floor_35', ':catacombs_floor_35.png', ' ')
+    floor37 = surface_manager.add_icon('catacombs_floor_37', ':catacombs_floor_37.png', ' ')
+    floor57 = surface_manager.add_icon('catacombs_floor_57', ':catacombs_floor_57.png', ' ')
+    floor135 = surface_manager.add_icon('catacombs_floor_135', ':catacombs_floor_135.png', ' ')
+    floor137 = surface_manager.add_icon('catacombs_floor_137', ':catacombs_floor_137.png', ' ')
+    floor157 = surface_manager.add_icon('catacombs_floor_157', ':catacombs_floor_157.png', ' ')
+    floor357 = surface_manager.add_icon('catacombs_floor_357', ':catacombs_floor_357.png', ' ')
+    floor1357 = surface_manager.add_icon('catacombs_floor_1357', ':catacombs_floor_1357.png', ' ')
+
+    floor_config = FloorBuilderDecoratorConfig([],
+                                               single = floor,
+                                               north = floor1,
+                                               east = floor3,
+                                               south = floor5,
+                                               west = floor7,
+                                               north_east = floor13,
+                                               north_south = floor15,
+                                               north_west = floor17,
+                                               east_south = floor35,
+                                               east_west = floor37,
+                                               south_west = floor57,
+                                               north_east_south = floor135,
+                                               north_east_west = floor137,
+                                               north_south_west = floor157,
+                                               east_south_west = floor357,
+                                               fourway = floor1357,
+                                               floor = floor_natural)
+    floor_builder = FloorBuilderDecorator(floor_config)
+
     aggregate_decorator_config = AggregateDecoratorConfig(
                                                 ['upper catacombs',
                                                 'lower catacombs'],
                                                 [wallbuilder,
                                                  wall_direction_builder,
+                                                 floor_builder,
                                                  replacer])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]

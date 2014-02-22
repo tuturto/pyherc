@@ -339,3 +339,119 @@ class DirectionalWallDecorator(Decorator):
             return self.tiles[''.join(directions)]
         else:
             return self.configuration.east_west
+
+class FloorBuilderDecoratorConfig(DecoratorConfig):
+    """
+    Configuration for FloorBuilderDecorator
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self, level_types,
+                 single, north, east, south, west, north_east, north_south,
+                 north_west, east_south, east_west, south_west,
+                 north_east_south, north_east_west, north_south_west,
+                 east_south_west, fourway, floor):
+        """
+        Default constructor
+        """
+        super().__init__(level_types)
+
+        self.single = single
+        self.north = north
+        self.east = east
+        self.south = south
+        self.west = west
+        self.north_east = north_east
+        self.north_south = north_south
+        self.north_west = north_west
+        self.east_south = east_south
+        self.east_west = east_west
+        self.south_west = south_west
+        self.north_east_south = north_east_south
+        self.north_east_west = north_east_west
+        self.east_south_west = east_south_west
+        self.north_south_west = north_south_west
+        self.fourway = fourway
+        self.floor = floor
+
+        self.tiles = [single, north, east, south, west, north_east,
+                      north_south, north_west, east_south, east_west,
+                      south_west, north_east_south, north_east_west,
+                      north_south_west, east_south_west, fourway, floor]
+
+class FloorBuilderDecorator(Decorator):
+    """
+    Decorator to build floors
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self, configuration):
+        """
+        Default constructor
+
+        :param configuration: configuration
+        :type configuration: FloorBuilderDecoratorConfig
+        """
+        super().__init__(configuration)
+
+        self.tiles = {'': configuration.single,
+                      '1': configuration.north,
+                      '3': configuration.east,
+                      '5': configuration.south,
+                      '7': configuration.west,
+                      '13': configuration.north_east,
+                      '15': configuration.north_south,
+                      '17': configuration.north_west,
+                      '35': configuration.east_south,
+                      '37': configuration.east_west,
+                      '57': configuration.south_west,
+                      '135': configuration.north_east_south,
+                      '137': configuration.north_east_west,
+                      '157': configuration.north_south_west,
+                      '357': configuration.east_south_west,
+                      '1357': configuration.fourway}
+
+    def decorate_level(self, level):
+        """
+        Decorate level
+
+        :param level: level to decorate
+        :type level: Level
+        """
+        for loc_y in range(0, len(level.floor[0]) - 1):
+            for loc_x in range(0, len(level.floor) - 1):
+                if level.floor[loc_x][loc_y] == self.configuration.floor:
+                    level.floor[loc_x][loc_y] = self.get_floor_tile(level,
+                                                                    loc_x,
+                                                                    loc_y)
+
+    def get_floor_tile(self, level, loc_x, loc_y):
+        """
+        Calculate correct floor tile
+
+        :param level: level to decorate
+        :type level: Level
+        :param loc_x: x-coordinate
+        :type loc_x: int
+        :param loc_y: y-coordinate
+        :type loc_y: int
+        :returns: new floor tile
+        :rtype: int
+        """
+
+        directions = []
+        if level.floor[loc_x][loc_y - 1] in self.configuration.tiles:
+            directions.append('1')
+        if level.floor[loc_x + 1][loc_y] in self.configuration.tiles:
+            directions.append('3')
+        if level.floor[loc_x][loc_y + 1] in self.configuration.tiles:
+            directions.append('5')
+        if level.floor[loc_x - 1][loc_y] in self.configuration.tiles:
+            directions.append('7')
+
+        key = ''.join(directions)
+
+        if key in self.tiles:
+            return self.tiles[''.join(directions)]
+        else:
+            return self.configuration.east_west
