@@ -256,7 +256,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         ]
 
     level_context = LevelContext(size = level_size,
-                                 floor_type = floor_natural,
+                                 floor_type = floor_rock,
                                  wall_type = wall_natural,
                                  empty_floor = 0,
                                  empty_wall = wall_empty,
