@@ -83,18 +83,18 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                          ':stairs_up.png',
                                          '<')
 
-    wall_15 = surface_manager.add_icon('crypt_wall_15', ':crypt_wall_2_8.png', '#')
-    wall_57 = surface_manager.add_icon('crypt_wall_57', ':crypt_wall_2_4.png', '#')
-    wall_35 = surface_manager.add_icon('crypt_wall_35', ':crypt_wall_2_6.png', '#')
-    wall_37 = surface_manager.add_icon('crypt_wall_37', ':crypt_wall_4_6.png', '#')
-    wall_17 = surface_manager.add_icon('crypt_wall_17', ':crypt_wall_8_4.png', '#')
-    wall_13 = surface_manager.add_icon('crypt_wall_13', ':crypt_wall_8_6.png', '#')
+    wall_15 = surface_manager.add_icon('catacombs_wall_15', ':catacombs_wall_2_8.png', '#')
+    wall_57 = surface_manager.add_icon('catacombs_wall_57', ':catacombs_wall_2_4.png', '#')
+    wall_35 = surface_manager.add_icon('catacombs_wall_35', ':catacombs_wall_2_6.png', '#')
+    wall_37 = surface_manager.add_icon('catacombs_wall_37', ':catacombs_wall_4_6.png', '#')
+    wall_17 = surface_manager.add_icon('catacombs_wall_17', ':catacombs_wall_8_4.png', '#')
+    wall_13 = surface_manager.add_icon('catacombs_wall_13', ':catacombs_wall_8_6.png', '#')
 
-    wall_135 = surface_manager.add_icon('crypt_wall_135', ':crypt_wall_2_6_8.png', '#')
-    wall_357 = surface_manager.add_icon('crypt_wall_357', ':crypt_wall_2_4_6.png', '#')
-    wall_1357 = surface_manager.add_icon('crypt_wall_1357', ':crypt_wall_2_4_6_8.png', '#')
-    wall_137 = surface_manager.add_icon('crypt_wall_137', ':crypt_wall_4_6_8.png', '#')
-    wall_157 = surface_manager.add_icon('crypt_wall_157', ':crypt_wall_2_4_8.png', '#')
+    wall_135 = surface_manager.add_icon('catacombs_wall_135', ':catacombs_wall_2_6_8.png', '#')
+    wall_357 = surface_manager.add_icon('catacombs_wall_357', ':catacombs_wall_2_4_6.png', '#')
+    wall_1357 = surface_manager.add_icon('catacombs_wall_1357', ':catacombs_wall_2_4_6_8.png', '#')
+    wall_137 = surface_manager.add_icon('catacombs_wall_137', ':catacombs_wall_4_6_8.png', '#')
+    wall_157 = surface_manager.add_icon('catacombs_wall_157', ':catacombs_wall_2_4_8.png', '#')
 
     room_generators = [CatacombsGenerator(floor_natural,
                                            wall_empty,

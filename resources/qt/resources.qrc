@@ -68,17 +68,17 @@
         <file>healing-wind.png</file>
         <file>force-bolt.png</file>
         <file>snowman.png</file>
-        <file>crypt_wall_2_4.png</file>
-        <file>crypt_wall_2_6.png</file>
-        <file>crypt_wall_2_8.png</file>
-        <file>crypt_wall_4_6.png</file>
-        <file>crypt_wall_8_4.png</file>
-        <file>crypt_wall_8_6.png</file>
-        <file>crypt_wall_2_6_8.png</file>
-        <file>crypt_wall_2_4_6.png</file>
-        <file>crypt_wall_2_4_6_8.png</file>
-        <file>crypt_wall_4_6_8.png</file>
-        <file>crypt_wall_2_4_8.png</file>
+        <file>catacombs_wall_2_4.png</file>
+        <file>catacombs_wall_2_6.png</file>
+        <file>catacombs_wall_2_8.png</file>
+        <file>catacombs_wall_4_6.png</file>
+        <file>catacombs_wall_8_4.png</file>
+        <file>catacombs_wall_8_6.png</file>
+        <file>catacombs_wall_2_6_8.png</file>
+        <file>catacombs_wall_2_4_6.png</file>
+        <file>catacombs_wall_2_4_6_8.png</file>
+        <file>catacombs_wall_4_6_8.png</file>
+        <file>catacombs_wall_2_4_8.png</file>
         <file>pc_adventurer.png</file>
         <file>pc_warrior.png</file>
         <file>pc_mage.png</file>
