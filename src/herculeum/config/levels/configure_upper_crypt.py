@@ -68,6 +68,19 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     stairs_down = surface_manager.add_icon('stairs_down', ':stairs_down.png', '>')
     stairs_up = surface_manager.add_icon('stairs_up', ':stairs_up.png', '<')
 
+    wall = surface_manager.add_icon('crypt_wall', ':crypt_wall.png', '#')
+    wall_15 = surface_manager.add_icon('crypt_wall_15', ':crypt_wall_15.png', '#')
+    wall_57 = surface_manager.add_icon('crypt_wall_57', ':crypt_wall_57.png', '#')
+    wall_35 = surface_manager.add_icon('crypt_wall_35', ':crypt_wall_35.png', '#')
+    wall_37 = surface_manager.add_icon('crypt_wall_37', ':crypt_wall_37.png', '#')
+    wall_17 = surface_manager.add_icon('crypt_wall_17', ':crypt_wall_17.png', '#')
+    wall_13 = surface_manager.add_icon('crypt_wall_13', ':crypt_wall_13.png', '#')
+    wall_135 = surface_manager.add_icon('crypt_wall_135', ':crypt_wall_135.png', '#')
+    wall_357 = surface_manager.add_icon('crypt_wall_357', ':crypt_wall_357.png', '#')
+    wall_1357 = surface_manager.add_icon('crypt_wall_1357', ':crypt_wall_1357.png', '#')
+    wall_137 = surface_manager.add_icon('crypt_wall_137', ':crypt_wall_137.png', '#')
+    wall_157 = surface_manager.add_icon('crypt_wall_157', ':crypt_wall_157.png', '#')
+
     room_generators = [SquareRoomGenerator(floor_natural,
                                            wall_empty,
                                            ['upper crypt']),
@@ -76,7 +89,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            ['upper crypt']),
                        PillarRoomGenerator(floor_tile = floor_constructed,
                                            empty_tile = wall_empty,
-                                           pillar_tile = pillar,
+                                           pillar_tile = wall,
                                            level_types = ['upper crypt'])
                                            ]
     level_partitioners = [GridPartitioner(['upper crypt'],
@@ -96,8 +109,25 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         wall_empty)
     wallbuilder = WallBuilderDecorator(wallbuilder_config)
 
+    wall_direction_config = DirectionalWallDecoratorConfig(['upper crypt'],
+                                                   east_west = wall_37,
+                                                   east_north = wall_13,
+                                                   east_south = wall_35,
+                                                   west_north = wall_17,
+                                                   west_south = wall_57,
+                                                   north_south = wall_15,
+                                                   east_west_north = wall_137,
+                                                   east_west_south = wall_357,
+                                                   east_north_south = wall_135,
+                                                   west_north_south = wall_157,
+                                                   four_way = wall_1357,
+                                                   wall = wall_constructed)
+
+    wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
+
     aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
                                                           [wallbuilder,
+                                                           wall_direction_builder,
                                                            replacer])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]

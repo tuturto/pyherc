@@ -68,6 +68,9 @@
         <file>healing-wind.png</file>
         <file>force-bolt.png</file>
         <file>snowman.png</file>
+        <file>pc_adventurer.png</file>
+        <file>pc_warrior.png</file>
+        <file>pc_mage.png</file>
         <file>catacombs_wall_2_4.png</file>
         <file>catacombs_wall_2_6.png</file>
         <file>catacombs_wall_2_8.png</file>
@@ -79,9 +82,6 @@
         <file>catacombs_wall_2_4_6_8.png</file>
         <file>catacombs_wall_4_6_8.png</file>
         <file>catacombs_wall_2_4_8.png</file>
-        <file>pc_adventurer.png</file>
-        <file>pc_warrior.png</file>
-        <file>pc_mage.png</file>
         <file>catacombs_floor.png</file>
         <file>catacombs_floor_1.png</file>
         <file>catacombs_floor_3.png</file>
@@ -98,5 +98,17 @@
         <file>catacombs_floor_157.png</file>
         <file>catacombs_floor_357.png</file>
         <file>catacombs_floor_1357.png</file>
+        <file>crypt_wall.png</file>
+        <file>crypt_wall_13.png</file>
+        <file>crypt_wall_15.png</file>
+        <file>crypt_wall_17.png</file>
+        <file>crypt_wall_35.png</file>
+        <file>crypt_wall_37.png</file>
+        <file>crypt_wall_57.png</file>
+        <file>crypt_wall_135.png</file>
+        <file>crypt_wall_137.png</file>
+        <file>crypt_wall_157.png</file>
+        <file>crypt_wall_357.png</file>
+        <file>crypt_wall_1357.png</file>
     </qresource>
 </RCC>
