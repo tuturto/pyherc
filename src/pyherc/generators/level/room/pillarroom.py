@@ -32,12 +32,15 @@ class PillarRoomGenerator():
     .. versionadded:: 0.8
     """
     @log_debug
-    def __init__(self, floor_tile, empty_tile, pillar_tile, level_types):
+    def __init__(self, floor_tile, corridor_tile, empty_tile, pillar_tile,
+                 level_types):
         """
         Default constructor
 
         :param floor_tile: id of the tile to use for floors
         :type floor_tile: integer
+        :param corridor_tile: id of the tile to use for corridor floors
+        :type corridor_tile: integer
         :param empty_tile: id of the empty wall tile
         :type empty_tile: integer
         :param level_types: types of level this generator can be used
@@ -45,8 +48,10 @@ class PillarRoomGenerator():
         """
         self.square_generator = SquareRoomGenerator(floor_tile,
                                                     empty_tile,
+                                                    corridor_tile,
                                                     level_types)
         self.floor_tile = floor_tile
+        self.corridor_tile = corridor_tile
         self.empty_tile = empty_tile
         self.level_types = level_types
         self.pillar_tile = pillar_tile

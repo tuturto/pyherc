@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -363,6 +362,7 @@ class TestLevelGenerator:
                                       self.rng)
         room_generator = SquareRoomGenerator(self.floor_rock,
                                              self.wall_empty,
+                                             self.floor_rock,
                                              ['crypt'])
         level_decorator = mock()
         portal_adder = PortalAdder((1, 2),

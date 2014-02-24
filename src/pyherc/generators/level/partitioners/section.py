@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -44,7 +43,7 @@ class Section():
         .. note:: Coordinates are given relative to level origo
         """
         super(Section, self).__init__()
-        
+
         self.__corners = []
         self.__corners.append(corner1)
         self.__corners.append(corner2)

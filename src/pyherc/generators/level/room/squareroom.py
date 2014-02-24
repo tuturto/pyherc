@@ -29,7 +29,7 @@ class SquareRoomGenerator():
     """
     Class for generating a square room
     """
-    def __init__(self, floor_tile, empty_tile, level_types):
+    def __init__(self, floor_tile, empty_tile, corridor_tile, level_types):
         """
         Default constructor
 
@@ -37,10 +37,13 @@ class SquareRoomGenerator():
         :type floor_tile: integer
         :param empty_tile: id of the empty wall tile
         :type empty_tile: integer
+        :param corridor_tile: id of corridor floor tile
+        :type corridor_tile: integer
         :param level_types: types of level this generator can be used
         :type level_types: [string]
         """
         self.floor_tile = floor_tile
+        self.corridor_tile = corridor_tile
         self.empty_tile = empty_tile
         self.room_width = None
         self.room_height = None
@@ -101,7 +104,8 @@ class SquareRoomGenerator():
             corridor = CorridorGenerator(
                                 room_connection,
                                 section_connection.translate_to_section(),
-                                self.empty_tile)
+                                self.empty_tile,
+                                self.corridor_tile)
             corridor.generate()
 
     def find_room_connection(self, section, section_connection):

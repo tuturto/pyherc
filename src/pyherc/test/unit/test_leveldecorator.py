@@ -235,6 +235,11 @@ class TestDirectionalWallDecorator():
                                                    west_north = 'west-north',
                                                    west_south = 'west-south',
                                                    north_south = 'north-south',
+                                                   east_west_north = 'east-west-north',
+                                                   east_west_south = 'east-west-south',
+                                                   east_north_south = 'east-north-south',
+                                                   west_north_south = 'west-north-south',
+                                                   four_way = 'four-way',
                                                    wall = self.wall)
 
         self.decorator = DirectionalWallDecorator(self.config)

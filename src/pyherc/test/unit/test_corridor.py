@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -83,7 +82,8 @@ class TestCorridor():
 
         generator = CorridorGenerator(start_point = edge_connection,
                                       end_point = room_connection,
-                                      tile = self.wall_empty)
+                                      wall_tile = self.wall_empty,
+                                      floor_tile = self.floor_rock)
 
         generator.generate()
 
@@ -109,7 +109,8 @@ class TestCorridor():
 
         generator = CorridorGenerator(start_point = edge_connection,
                                       end_point = room_connection,
-                                      tile = self.wall_empty)
+                                      wall_tile = self.wall_empty,
+                                      floor_tile = self.floor_rock)
 
         generator.generate()
 
@@ -135,7 +136,8 @@ class TestCorridor():
 
         generator = CorridorGenerator(start_point = edge_connection,
                                       end_point = room_connection,
-                                      tile = self.wall_empty)
+                                      wall_tile = self.wall_empty,
+                                      floor_tile = self.floor_rock)
 
         generator.generate()
 
@@ -162,7 +164,8 @@ class TestCorridor():
 
         generator = CorridorGenerator(start_point = edge_connection,
                                       end_point = room_connection,
-                                      tile = self.wall_empty)
+                                      wall_tile = self.wall_empty,
+                                      floor_tile = self.floor_rock)
 
         generator.generate()
 

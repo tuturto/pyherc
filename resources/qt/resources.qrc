@@ -110,5 +110,21 @@
         <file>crypt_wall_157.png</file>
         <file>crypt_wall_357.png</file>
         <file>crypt_wall_1357.png</file>
+        <file>crypt_floor.png</file>
+        <file>crypt_floor_1.png</file>
+        <file>crypt_floor_3.png</file>
+        <file>crypt_floor_5.png</file>
+        <file>crypt_floor_7.png</file>
+        <file>crypt_floor_13.png</file>
+        <file>crypt_floor_15.png</file>
+        <file>crypt_floor_17.png</file>
+        <file>crypt_floor_35.png</file>
+        <file>crypt_floor_37.png</file>
+        <file>crypt_floor_57.png</file>
+        <file>crypt_floor_135.png</file>
+        <file>crypt_floor_137.png</file>
+        <file>crypt_floor_157.png</file>
+        <file>crypt_floor_357.png</file>
+        <file>crypt_floor_1357.png</file>
     </qresource>
 </RCC>

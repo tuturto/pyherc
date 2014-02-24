@@ -179,9 +179,11 @@ example defines an simple level:
     def init_level(rng, item_generator, creature_generator, level_size, context):
         room_generators = [SquareRoomGenerator('FLOOR_NATURAL',
                                                'WALL_EMPTY',
+                                               'FLOOR_NATURAL',
                                                ['upper crypt']),
                            SquareRoomGenerator('FLOOR_CONSTRUCTED',
                                                'WALL_EMPTY',
+                                               'FLOOR_CONSTRUCTED',
                                                ['upper crypt'])]
         level_partitioners = [GridPartitioner(['upper crypt'],
                                               4,

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -53,6 +52,7 @@ class TestSquareRoom():
         self.section = Section((5, 5), (15, 15), self.level, self.rng)
         self.generator = SquareRoomGenerator(self.floor_rock,
                                              self.wall_empty,
+                                             self.floor_rock,
                                              ['crypt'])
 
     def test_generate_simple_room(self):

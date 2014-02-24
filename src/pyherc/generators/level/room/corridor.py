@@ -27,7 +27,7 @@ class CorridorGenerator():
     """
     Class for making simple corridors
     """
-    def __init__(self, start_point, end_point, tile):
+    def __init__(self, start_point, end_point, wall_tile, floor_tile):
         """
         Default constructor
 
@@ -35,12 +35,15 @@ class CorridorGenerator():
         :type start_point: Connection
         :param end_point: ending connection
         :type end_point: Connection
-        :param tile: ID of tile to place
-        :type tile: integer
+        :param wall_tile: ID of wall tile to place
+        :type wall_tile: integer
+        :param floor_tile: ID of floor tile to place
+        :type floor_tile: integer
         """
         self.start_point = start_point
         self.end_point = end_point
-        self.tile = tile
+        self.wall_tile = wall_tile
+        self.floor_tile = floor_tile
 
     def generate(self):
         """
@@ -75,10 +78,13 @@ class CorridorGenerator():
         section = start_point.section
 
         for x_loc in range(start_x, end_x):
-            section.set_wall((x_loc, y_loc), self.tile, 'corridor')
+            section.set_wall((x_loc, y_loc), self.wall_tile, 'corridor')
+            section.set_floor((x_loc, y_loc), self.floor_tile, None)
 
-        section.set_wall(end_point.location, self.tile, 'corridor')
-        section.set_wall(start_point.location, self.tile, 'corridor')
+        section.set_wall(end_point.location, self.wall_tile, 'corridor')
+        section.set_wall(start_point.location, self.wall_tile, 'corridor')
+        section.set_floor(end_point.location, self.floor_tile, None)
+        section.set_floor(start_point.location, self.floor_tile, None)
 
     def __carve_horizontal_bend(self, start_point, end_point):
         """
@@ -130,10 +136,13 @@ class CorridorGenerator():
         section = start_point.section
 
         for y_loc in range(start_y, end_y):
-            section.set_wall((x_loc, y_loc), self.tile, 'corridor')
+            section.set_wall((x_loc, y_loc), self.wall_tile, 'corridor')
+            section.set_floor((x_loc, y_loc), self.floor_tile, None)
 
-        section.set_wall(end_point.location, self.tile, 'corridor')
-        section.set_wall(start_point.location, self.tile, 'corridor')
+        section.set_wall(end_point.location, self.wall_tile, 'corridor')
+        section.set_wall(start_point.location, self.wall_tile, 'corridor')
+        section.set_floor(end_point.location, self.floor_tile, None)
+        section.set_floor(start_point.location, self.floor_tile, None)
 
     def __carve_vertical_bend(self, start_point, end_point):
         """
