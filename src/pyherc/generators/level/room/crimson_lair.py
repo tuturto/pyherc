@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -41,7 +40,7 @@ class CrimsonLairGenerator():
         :param rng: random number generator
         :type rng: Random
         """
-        super(CrimsonLairGenerator, self).__init__()
+        super().__init__()
         self.floor_tile = floor_tile
         self.empty_tile = empty_tile
         self.room_width = None
