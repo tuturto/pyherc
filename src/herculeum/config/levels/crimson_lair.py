@@ -27,6 +27,10 @@ from pyherc.generators.level.decorator import ReplacingDecorator
 from pyherc.generators.level.decorator import ReplacingDecoratorConfig
 from pyherc.generators.level.decorator import WallBuilderDecorator
 from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
+from pyherc.generators.level.decorator import DirectionalWallDecoratorConfig
+from pyherc.generators.level.decorator import DirectionalWallDecorator
+from pyherc.generators.level.decorator import FloorBuilderDecoratorConfig
+from pyherc.generators.level.decorator import FloorBuilderDecorator
 from pyherc.generators.level.decorator import AggregateDecorator
 from pyherc.generators.level.decorator import AggregateDecoratorConfig
 
@@ -78,17 +82,85 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     replacer_config = ReplacingDecoratorConfig(['crimson lair'],
                                     {floor_natural: floor_rock},
                                     {wall_natural: wall_ground,
-                                    wall_constructed: wall_rock})
+                                     wall_constructed: wall_rock})
     replacer = ReplacingDecorator(replacer_config)
 
     wallbuilder_config = WallBuilderDecoratorConfig(['crimson lair'],
                                         {wall_natural: wall_constructed},
-                                        wall_empty)
+                                         wall_empty)
     wallbuilder = WallBuilderDecorator(wallbuilder_config)
+
+    wall = surface_manager.add_icon('abyss_wall', ':abyss_wall.png', '#')
+    wall_15 = surface_manager.add_icon('abyss_wall_15', ':abyss_wall_15.png', '#')
+    wall_57 = surface_manager.add_icon('abyss_wall_57', ':abyss_wall_57.png', '#')
+    wall_35 = surface_manager.add_icon('abyss_wall_35', ':abyss_wall_35.png', '#')
+    wall_37 = surface_manager.add_icon('abyss_wall_37', ':abyss_wall_37.png', '#')
+    wall_17 = surface_manager.add_icon('abyss_wall_17', ':abyss_wall_17.png', '#')
+    wall_13 = surface_manager.add_icon('abyss_wall_13', ':abyss_wall_13.png', '#')
+    wall_135 = surface_manager.add_icon('abyss_wall_135', ':abyss_wall_135.png', '#')
+    wall_357 = surface_manager.add_icon('abyss_wall_357', ':abyss_wall_357.png', '#')
+    wall_1357 = surface_manager.add_icon('abyss_wall_1357', ':abyss_wall_1357.png', '#')
+    wall_137 = surface_manager.add_icon('abyss_wall_137', ':abyss_wall_137.png', '#')
+    wall_157 = surface_manager.add_icon('abyss_wall_157', ':abyss_wall_157.png', '#')
+
+    floor = surface_manager.add_icon('abyss_floor', ':abyss_floor.png', ' ')
+    floor1 = surface_manager.add_icon('abyss_floor_1', ':abyss_floor_1.png', ' ')
+    floor3 = surface_manager.add_icon('abyss_floor_3', ':abyss_floor_3.png', ' ')
+    floor5 = surface_manager.add_icon('abyss_floor_5', ':abyss_floor_5.png', ' ')
+    floor7 = surface_manager.add_icon('abyss_floor_7', ':abyss_floor_7.png', ' ')
+    floor13 = surface_manager.add_icon('abyss_floor_13', ':abyss_floor_13.png', ' ')
+    floor15 = surface_manager.add_icon('abyss_floor_15', ':abyss_floor_15.png', ' ')
+    floor17 = surface_manager.add_icon('abyss_floor_17', ':abyss_floor_17.png', ' ')
+    floor35 = surface_manager.add_icon('abyss_floor_35', ':abyss_floor_35.png', ' ')
+    floor37 = surface_manager.add_icon('abyss_floor_37', ':abyss_floor_37.png', ' ')
+    floor57 = surface_manager.add_icon('abyss_floor_57', ':abyss_floor_57.png', ' ')
+    floor135 = surface_manager.add_icon('abyss_floor_135', ':abyss_floor_135.png', ' ')
+    floor137 = surface_manager.add_icon('abyss_floor_137', ':abyss_floor_137.png', ' ')
+    floor157 = surface_manager.add_icon('abyss_floor_157', ':abyss_floor_157.png', ' ')
+    floor357 = surface_manager.add_icon('abyss_floor_357', ':abyss_floor_357.png', ' ')
+    floor1357 = surface_manager.add_icon('abyss_floor_1357', ':abyss_floor_1357.png', ' ')
+
+    floor_config = FloorBuilderDecoratorConfig([],
+                                               single = floor,
+                                               north = floor1,
+                                               east = floor3,
+                                               south = floor5,
+                                               west = floor7,
+                                               north_east = floor13,
+                                               north_south = floor15,
+                                               north_west = floor17,
+                                               east_south = floor35,
+                                               east_west = floor37,
+                                               south_west = floor57,
+                                               north_east_south = floor135,
+                                               north_east_west = floor137,
+                                               north_south_west = floor157,
+                                               east_south_west = floor357,
+                                               fourway = floor1357,
+                                               floor = floor_natural)
+    floor_builder = FloorBuilderDecorator(floor_config)
+
+    wall_direction_config = DirectionalWallDecoratorConfig(['upper crypt'],
+                                                   east_west = wall_37,
+                                                   east_north = wall_13,
+                                                   east_south = wall_35,
+                                                   west_north = wall_17,
+                                                   west_south = wall_57,
+                                                   north_south = wall_15,
+                                                   east_west_north = wall_137,
+                                                   east_west_south = wall_357,
+                                                   east_north_south = wall_135,
+                                                   west_north_south = wall_157,
+                                                   four_way = wall_1357,
+                                                   wall = wall_constructed)
+
+    wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
     aggregate_decorator_config = AggregateDecoratorConfig(
                                                 ['crimson lair'],
                                                 [wallbuilder,
+                                                wall_direction_builder,
+                                                floor_builder,
                                                 replacer])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]

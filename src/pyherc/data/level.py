@@ -115,10 +115,73 @@ class Level():
         if loc_x < 0 or loc_y < 0:
             return self.empty_wall #?
 
-        if loc_x > len(self.floor) or loc_y > len(self.floor[0]):
+        if loc_x >= len(self.floor) or loc_y >= len(self.floor[0]):
             return self.empty_wall
 
         return self.walls[loc_x][loc_y]
+
+    def set_wall_tile(self, loc_x, loc_y, tile):
+        """
+        Set wall tile at given location
+
+        :param loc_x: x-coordinate of the location
+        :type loc_x: integer
+        :param loc_y: y-coordinate of the location
+        :type loc_y: integer
+        :param tile: tile to set
+        :type tile: integer
+
+        .. versionadded:: 0.10
+        """
+        if loc_x < 0 or loc_y < 0:
+            return
+
+        if loc_x >= len(self.floor) or loc_y >= len(self.floor[0]):
+            return
+
+        self.walls[loc_x][loc_y] = tile
+
+    def get_floor_tile(self, loc_x, loc_y):
+        """
+        Get floor tile at given location
+
+        :param loc_x: x-coordinate of the location
+        :type loc_x: integer
+        :param loc_y: y-coordinate of the location
+        :type loc_y: integer
+        :returns: floor tile ID at given location
+        :rtype: int
+
+        .. versionadded:: 0.10
+        """
+        if loc_x < 0 or loc_y < 0:
+            return None #?
+
+        if loc_x >= len(self.floor) or loc_y >= len(self.floor[0]):
+            return None #?
+
+        return self.floor[loc_x][loc_y]
+
+    def set_floor_tile(self, loc_x, loc_y, tile):
+        """
+        Set floor tile at given location
+
+        :param loc_x: x-coordinate of the location
+        :type loc_x: integer
+        :param loc_y: y-coordinate of the location
+        :type loc_y: integer
+        :param tile: tile to set
+        :type tile: integer
+
+        .. versionadded:: 0.10
+        """
+        if loc_x < 0 or loc_y < 0:
+            return
+
+        if loc_x >= len(self.floor) or loc_y >= len(self.floor[0]):
+            return
+
+        self.floor[loc_x][loc_y] = tile
 
     @log_debug
     def add_item(self, item, location):

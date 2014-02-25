@@ -126,5 +126,33 @@
         <file>crypt_floor_157.png</file>
         <file>crypt_floor_357.png</file>
         <file>crypt_floor_1357.png</file>
+        <file>abyss_wall.png</file>
+        <file>abyss_wall_13.png</file>
+        <file>abyss_wall_15.png</file>
+        <file>abyss_wall_17.png</file>
+        <file>abyss_wall_35.png</file>
+        <file>abyss_wall_37.png</file>
+        <file>abyss_wall_57.png</file>
+        <file>abyss_wall_135.png</file>
+        <file>abyss_wall_137.png</file>
+        <file>abyss_wall_157.png</file>
+        <file>abyss_wall_357.png</file>
+        <file>abyss_wall_1357.png</file>
+        <file>abyss_floor.png</file>
+        <file>abyss_floor_1.png</file>
+        <file>abyss_floor_3.png</file>
+        <file>abyss_floor_5.png</file>
+        <file>abyss_floor_7.png</file>
+        <file>abyss_floor_13.png</file>
+        <file>abyss_floor_15.png</file>
+        <file>abyss_floor_17.png</file>
+        <file>abyss_floor_35.png</file>
+        <file>abyss_floor_37.png</file>
+        <file>abyss_floor_57.png</file>
+        <file>abyss_floor_135.png</file>
+        <file>abyss_floor_137.png</file>
+        <file>abyss_floor_157.png</file>
+        <file>abyss_floor_357.png</file>
+        <file>abyss_floor_1357.png</file>
     </qresource>
 </RCC>

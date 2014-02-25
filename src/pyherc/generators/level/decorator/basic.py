@@ -95,11 +95,11 @@ class ReplacingDecorator(Decorator):
             for loc_x in range(len(level.floor)):
                 proto_tile = level.floor[loc_x][loc_y]
                 if proto_tile in ground_tiles:
-                    level.floor[loc_x][loc_y] = ground_tiles[proto_tile]
+                    level.set_floor_tile(loc_x, loc_y, ground_tiles[proto_tile])
 
-                proto_tile = level.walls[loc_x][loc_y]
+                proto_tile = level.get_wall_tile(loc_x, loc_y)
                 if proto_tile in wall_tiles:
-                    level.walls[loc_x][loc_y] = wall_tiles[proto_tile]
+                    level.set_wall_tile(loc_x, loc_y, wall_tiles[proto_tile])
 
 
 class ReplacingDecoratorConfig(DecoratorConfig):
@@ -142,9 +142,9 @@ class WallBuilderDecorator(Decorator):
         :param level: level to decorate
         :type level: Level
         """
-        for loc_y in range(0, len(level.floor[0]) - 1):
-            for loc_x in range(0, len(level.floor) - 1):
-                if level.walls[loc_x][loc_y] == self.configuration.empty_tile:
+        for loc_y in range(len(level.floor[0])):
+            for loc_x in range(len(level.floor)):
+                if level.get_wall_tile(loc_x, loc_y) == self.configuration.empty_tile:
                     self.check_and_replace((loc_x - 1, loc_y), level)
                     self.check_and_replace((loc_x + 1, loc_y), level)
                     self.check_and_replace((loc_x, loc_y - 1), level)
@@ -165,11 +165,11 @@ class WallBuilderDecorator(Decorator):
         """
         loc_x = location[0]
         loc_y = location[1]
-        proto_tile = level.walls[loc_x][loc_y]
+        proto_tile = level.get_wall_tile(loc_x, loc_y)
 
         if proto_tile in self.configuration.wall_config:
             tile = self.configuration.wall_config[proto_tile]
-            level.walls[loc_x][loc_y] = tile
+            level.set_wall_tile(loc_x, loc_y, tile)
 
 class WallBuilderDecoratorConfig(DecoratorConfig):
     """
@@ -302,12 +302,14 @@ class DirectionalWallDecorator(Decorator):
         :param level: level to decorate
         :type level: Level
         """
-        for loc_y in range(0, len(level.floor[0]) - 1):
-            for loc_x in range(0, len(level.floor) - 1):
-                if level.walls[loc_x][loc_y] == self.configuration.wall:
-                    level.walls[loc_x][loc_y] = self.get_wall_tile(level,
-                                                                   loc_x,
-                                                                   loc_y)
+        for loc_y in range(len(level.floor[0])):
+            for loc_x in range(len(level.floor)):
+                if level.get_wall_tile(loc_x, loc_y) == self.configuration.wall:
+                    level.set_wall_tile(loc_x,
+                                        loc_y,
+                                        self.get_wall_tile(level,
+                                                           loc_x,
+                                                           loc_y))
 
     def get_wall_tile(self, level, loc_x, loc_y):
         """
@@ -324,13 +326,13 @@ class DirectionalWallDecorator(Decorator):
         """
 
         directions = []
-        if level.walls[loc_x][loc_y - 1] in self.configuration.tiles:
+        if level.get_wall_tile(loc_x, loc_y - 1) in self.configuration.tiles:
             directions.append('1')
-        if level.walls[loc_x + 1][loc_y] in self.configuration.tiles:
+        if level.get_wall_tile(loc_x + 1, loc_y) in self.configuration.tiles:
             directions.append('3')
-        if level.walls[loc_x][loc_y + 1] in self.configuration.tiles:
+        if level.get_wall_tile(loc_x, loc_y + 1) in self.configuration.tiles:
             directions.append('5')
-        if level.walls[loc_x - 1][loc_y] in self.configuration.tiles:
+        if level.get_wall_tile(loc_x - 1, loc_y) in self.configuration.tiles:
             directions.append('7')
 
         key = ''.join(directions)
@@ -418,12 +420,14 @@ class FloorBuilderDecorator(Decorator):
         :param level: level to decorate
         :type level: Level
         """
-        for loc_y in range(0, len(level.floor[0]) - 1):
-            for loc_x in range(0, len(level.floor) - 1):
-                if level.floor[loc_x][loc_y] == self.configuration.floor:
-                    level.floor[loc_x][loc_y] = self.get_floor_tile(level,
-                                                                    loc_x,
-                                                                    loc_y)
+        for loc_y in range(len(level.floor[0])):
+            for loc_x in range(len(level.floor)):
+                if level.get_floor_tile(loc_x, loc_y) == self.configuration.floor:
+                    level.set_floor_tile(loc_x,
+                                         loc_y,
+                                         self.get_floor_tile(level,
+                                                             loc_x,
+                                                             loc_y))
 
     def get_floor_tile(self, level, loc_x, loc_y):
         """
@@ -440,13 +444,13 @@ class FloorBuilderDecorator(Decorator):
         """
 
         directions = []
-        if level.floor[loc_x][loc_y - 1] in self.configuration.tiles:
+        if level.get_floor_tile(loc_x, loc_y - 1) in self.configuration.tiles:
             directions.append('1')
-        if level.floor[loc_x + 1][loc_y] in self.configuration.tiles:
+        if level.get_floor_tile(loc_x + 1, loc_y) in self.configuration.tiles:
             directions.append('3')
-        if level.floor[loc_x][loc_y + 1] in self.configuration.tiles:
+        if level.get_floor_tile(loc_x, loc_y + 1) in self.configuration.tiles:
             directions.append('5')
-        if level.floor[loc_x - 1][loc_y] in self.configuration.tiles:
+        if level.get_floor_tile(loc_x - 1, loc_y) in self.configuration.tiles:
             directions.append('7')
 
         key = ''.join(directions)
