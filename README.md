@@ -37,13 +37,16 @@ GNU General Public License.
 
 Game uses graphics downloaded from TomeTik <http://pousse.rapiere.free.fr/tome/>
 
-All tiles except "Xerathul's Revenge" tiles have been drawn by David E. Gervais
+Some tiles have been drawn by David E. Gervais
 and are published under the Creative Commons licence.
 
 Some tiles, in Dungeon Odyssey "Xerathul's Revenge" module have been drawn
 by Henk Brouwer.
 
 Some graphics is from http://game-icons.net/
+
+Some graphics is from http://opengameart.org/content/dawnlike-16x16-universal-rogue-like-tileset-v10
+and are distributed under a CC-BY-SA 3.0 license. Great palette by DawnBringer.
 
 A star implementation adapted from one by Pauli Henrikki Rikula
 
