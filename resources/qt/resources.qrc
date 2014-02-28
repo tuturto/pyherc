@@ -154,5 +154,16 @@
         <file>abyss_floor_157.png</file>
         <file>abyss_floor_357.png</file>
         <file>abyss_floor_1357.png</file>
+        <file>brick_pit_01.png</file>
+        <file>brick_pit_02.png</file>
+        <file>brick_pit_03.png</file>
+        <file>brick_pit_04.png</file>
+        <file>brick_pit_05.png</file>
+        <file>brick_pit_06.png</file>
+        <file>brick_pit_07.png</file>
+        <file>brick_pit_08.png</file>
+        <file>brick_pit_09.png</file>
+        <file>brick_pit_10.png</file>
+        <file>brick_pit_11.png</file>
     </qresource>
 </RCC>
