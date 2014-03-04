@@ -234,6 +234,10 @@ class Level():
 
         portal.level = self
         portal.location = location
+        self.set_floor_tile(portal.location[0],
+                            portal.location[1],
+                            portal.icon)
+
         self.portals.append(portal)
 
         if other_end != None:

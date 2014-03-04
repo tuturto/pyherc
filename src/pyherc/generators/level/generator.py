@@ -206,8 +206,6 @@ class LevelGenerator():
             generator = self.random_generator.choice(self.room_generators)
             generator.generate_room(section)
 
-        self.decorator.decorate_level(new_level)
-
         for adder in self.portal_adders:
             adder.add_portal(new_level)
 
@@ -222,10 +220,11 @@ class LevelGenerator():
             else:
                 self.logger.warn('no location found, skipping')
 
-
         self.creature_adder.add_creatures(new_level)
 
         self.item_adder.add_items(new_level)
+
+        self.decorator.decorate_level(new_level)
 
         self.logger.debug(new_level.dump_string())
 

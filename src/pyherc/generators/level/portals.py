@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -65,7 +64,7 @@ class PortalAdderFactory():
         :param rng: random number generator
         :type rng: Random
         """
-        super(PortalAdderFactory, self).__init__()
+        super().__init__()
         self.config = config
         self.level_generator_factory = None
         self.rng = rng
@@ -112,7 +111,7 @@ class PortalAdder():
         :param level_generator_name: name of level generator
         :param rng: Randon number generator
         """
-        super(PortalAdder, self).__init__()
+        super().__init__()
         self.location_type = location_type
         self.level_generator_name = level_generator_name
         self.rng = rng
