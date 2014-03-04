@@ -287,9 +287,6 @@ class PlayMapWidget(QWidget):
                 new_glyph.setPos(loc_x * 32, loc_y * 32)
                 scene.addItem(new_glyph)
 
-        #for portal in self.current_level.portals:
-        #    self.add_glyph(portal, scene, 10)
-
         for item in self.current_level.items:
             self.add_glyph(item, scene, 20)
 
