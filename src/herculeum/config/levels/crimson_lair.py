@@ -277,9 +277,10 @@ def init_items(context):
                                             parameters = None,
                                             charges = 999999)],
                                     weapon_configration = WeaponConfiguration(
-                                            damage = [(12, 'SLASHING_DAMAGE')],
+                                            damage = [(12, SLASHING_DAMAGE)],
                                             critical_range = 10,
                                             critical_damage = 12,
                                             weapon_class = 'exotic')))
 
     return config
+
