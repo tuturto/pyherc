@@ -281,14 +281,14 @@ class TestDecoratingWallOrnaments():
         """
         Setup test cases
         """
-        self.empty_wall = 'empty wall'
-        self.empty_floor = 'empty floor'
+        self.empty_wall = None
+        self.empty_floor = None
         self.wall = 'wall'
         self.floor = 'floor'
         self.ornamentation = 'candles'
 
         self.level = Level((10, 10),
-                           floor_type = self.empty_floor,
+                           floor_type = self.floor,
                            wall_type = self.empty_wall)
 
     def test_walls_can_be_ornamented(self):
@@ -342,3 +342,42 @@ class TestDecoratingWallOrnaments():
                     is_(equal_to(None)))
         assert_that(self.level.ornamentations[4][2],
                     is_(equal_to(self.ornamentation)))
+
+    def test_only_northern_wall_is_decorated(self):
+        """
+        Ornamentations should be placed only on northern walls
+        """
+        self.level.set_wall_tile(2, 2, self.wall)
+        self.level.set_wall_tile(3, 2, self.wall)
+        self.level.set_wall_tile(4, 2, self.wall)
+
+        self.level.set_floor_tile(2, 3, self.floor)
+        self.level.set_floor_tile(3, 3, self.floor)
+        self.level.set_floor_tile(4, 3, self.floor)
+
+        self.level.set_wall_tile(2, 4, self.wall)
+        self.level.set_wall_tile(3, 4, self.wall)
+        self.level.set_wall_tile(4, 4, self.wall)
+
+        self.level.set_floor_tile(2, 5, self.empty_floor)
+        self.level.set_floor_tile(3, 5, self.empty_floor)
+        self.level.set_floor_tile(4, 5, self.empty_floor)
+
+        rng = mock()
+        when(rng).randint(any(), any()).thenReturn(0)
+
+        self.config = WallOrnamentDecoratorConfig(
+                                        ['any level'],
+                                        wall_tile = self.wall,
+                                        ornamentation = self.ornamentation,
+                                        rng = rng,
+                                        rate = 100)
+
+        self.decorator = WallOrnamentDecorator(self.config)
+
+        self.decorator.decorate_level(self.level)
+
+        assert_that(self.level.ornamentations[2][2],
+                    is_(equal_to(self.ornamentation)))
+        assert_that(self.level.ornamentations[2][4],
+                    is_(equal_to(None)))

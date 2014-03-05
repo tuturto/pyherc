@@ -67,9 +67,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                           ':rock_floor.png',
                                           '.')
 
-    wall_empty = surface_manager.add_icon('empty wall',
-                                          ':transparent.png',
-                                          None)
+    wall_empty = None
+    floor_empty = None
+
     wall_natural = 'natural wall'
     wall_constructed = 'constructed wall'
     wall_ground = surface_manager.add_icon('wall_ground',
@@ -270,9 +270,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         ]
 
     level_context = LevelContext(size = level_size,
-                                 floor_type = floor_rock,
+                                 floor_type = floor_empty,
                                  wall_type = wall_natural,
-                                 empty_floor = 0,
+                                 empty_floor = floor_empty,
                                  empty_wall = wall_empty,
                                  level_types = ['upper catacombs',
                                                 'lower catacombs'])
