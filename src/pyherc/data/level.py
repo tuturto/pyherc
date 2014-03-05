@@ -49,6 +49,7 @@ class Level():
 
         self.floor = []
         self.walls = []
+        self.ornamentations = []
         self.empty_floor = empty_floor
         self.empty_wall = empty_wall
         self.__location_type = []
@@ -72,6 +73,12 @@ class Level():
                 for loc_y in range(0, size[1] + 1):
                     temp_row.append(None)
                 self.__location_type.append(temp_row)
+
+            for loc_x in range(0, size[0] + 1):
+                temp_row = []
+                for loc_y in range(0, size[1] + 1):
+                    temp_row.append(None)
+                self.ornamentations.append(temp_row)
 
         self.items = []
         self.portals = []

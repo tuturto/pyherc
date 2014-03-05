@@ -459,3 +459,51 @@ class FloorBuilderDecorator(Decorator):
             return self.tiles[''.join(directions)]
         else:
             return self.configuration.east_west
+
+class WallOrnamentDecorator(Decorator):
+    """
+    Decorator to place ornaments of walls
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self, configuration):
+        """
+        Default constructor
+
+        :param configuration: configuration to use
+        :type configuration: WallOrnamentDecoratorConfig
+        """
+        super().__init__(configuration)
+
+    def decorate_level(self, level):
+        """
+        Decorate level
+
+        :param level: level to decorate
+        :type level: Level
+        """
+        for loc_y in range(len(level.floor[0])):
+            for loc_x in range(len(level.floor)):
+                if level.get_wall_tile(loc_x, loc_y) == self.configuration.wall_tile:
+                    level.ornamentations[loc_x][loc_y] = self.configuration.ornamentation
+
+class WallOrnamentDecoratorConfig(DecoratorConfig):
+    """
+    Configuration for WallOrnamentDecorator
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self, level_types, wall_tile, ornamentation):
+        """
+        Default constructor
+
+        :param level_types: types of levels to decorate
+        :type level_types: [string]
+        :param wall_tile: wall to decorate
+        :type wall_tile: string
+        :param ornamentation: ornamentation to place
+        :type ornamentation: string
+        """
+        super().__init__(level_types)
+        self.wall_tile = wall_tile
+        self.ornamentation = ornamentation

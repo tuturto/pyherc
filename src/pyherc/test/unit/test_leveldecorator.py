@@ -29,6 +29,8 @@ from pyherc.generators.level.decorator import AggregateDecorator
 from pyherc.generators.level.decorator import AggregateDecoratorConfig
 from pyherc.generators.level.decorator import DirectionalWallDecoratorConfig
 from pyherc.generators.level.decorator import DirectionalWallDecorator
+from pyherc.generators.level.decorator import WallOrnamentDecorator
+from pyherc.generators.level.decorator import WallOrnamentDecoratorConfig
 from pyherc.data import Level
 from mockito import mock, verify
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
@@ -256,3 +258,54 @@ class TestDirectionalWallDecorator():
         assert_that(self.level.walls[1][2], is_(equal_to('north-south')))
         assert_that(self.level.walls[1][3], is_(equal_to('east-north')))
         assert_that(self.level.walls[3][3], is_(equal_to('west-north')))
+
+class TestDecoratingWallOrnaments():
+    """
+    Test that walls can be ornamented
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.level = None
+        self.config = None
+        self.decorator = None
+
+        self.empty_wall = None
+        self.empty_floor = None
+        self.wall = None
+        self.floor = None
+        self.ornament = None
+
+    def setup(self):
+        """
+        Setup test cases
+        """
+        self.empty_wall = 'empty wall'
+        self.empty_floor = 'empty floor'
+        self.wall = 'wall'
+        self.floor = 'floor'
+        self.ornamentation = 'candles'
+
+        self.level = Level((10, 10),
+                           floor_type = self.empty_floor,
+                           wall_type = self.empty_wall)
+
+    def test_walls_can_be_ornamented(self):
+        """
+        Ornaments should be placed only on walls
+        """
+        self.level.set_wall_tile(2, 2, self.wall)
+        self.level.set_wall_tile(3, 2, self.wall)
+        self.level.set_wall_tile(4, 2, self.wall)
+
+        self.config = WallOrnamentDecoratorConfig(
+                                        ['any level'],
+                                        wall_tile = self.wall,
+                                        ornamentation = self.ornamentation)
+        self.decorator = WallOrnamentDecorator(self.config)
+
+        self.decorator.decorate_level(self.level)
+
+        assert_that(self.level.ornamentations[2][2],
+                    is_(equal_to(self.ornamentation)))
