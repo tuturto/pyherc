@@ -287,6 +287,15 @@ class PlayMapWidget(QWidget):
                 new_glyph.setPos(loc_x * 32, loc_y * 32)
                 scene.addItem(new_glyph)
 
+        for loc_x, column in enumerate(self.current_level.ornamentations):
+            for loc_y, tile in enumerate(column):
+                if tile:
+                    new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
+                                         None)
+                    new_glyph.setZValue(2)
+                    new_glyph.setPos(loc_x * 32, loc_y * 32)
+                    scene.addItem(new_glyph)
+
         for item in self.current_level.items:
             self.add_glyph(item, scene, 20)
 
