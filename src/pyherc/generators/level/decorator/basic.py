@@ -484,8 +484,9 @@ class WallOrnamentDecorator(Decorator):
         """
         for loc_y in range(len(level.floor[0])):
             for loc_x in range(len(level.floor)):
-                if level.get_wall_tile(loc_x, loc_y) == self.configuration.wall_tile:
-                    level.ornamentations[loc_x][loc_y] = self.configuration.ornamentation
+                if (level.get_wall_tile(loc_x, loc_y) == self.configuration.wall_tile
+                    and self.configuration.rng.randint(0, 100) < self.configuration.rate):
+                        level.ornamentations[loc_x][loc_y] = self.configuration.ornamentation
 
 class WallOrnamentDecoratorConfig(DecoratorConfig):
     """
@@ -493,7 +494,7 @@ class WallOrnamentDecoratorConfig(DecoratorConfig):
 
     .. versionadded:: 0.10
     """
-    def __init__(self, level_types, wall_tile, ornamentation):
+    def __init__(self, level_types, wall_tile, ornamentation, rng, rate):
         """
         Default constructor
 
@@ -503,7 +504,13 @@ class WallOrnamentDecoratorConfig(DecoratorConfig):
         :type wall_tile: string
         :param ornamentation: ornamentation to place
         :type ornamentation: string
+        :param rng: random number generator
+        :type rng: Random
+        :param rate: rate of ornamentation
+        :type rate: integer 0 <= rate <= 100
         """
         super().__init__(level_types)
         self.wall_tile = wall_tile
         self.ornamentation = ornamentation
+        self.rng = rng
+        self.rate = rate

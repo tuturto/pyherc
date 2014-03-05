@@ -181,7 +181,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                 ['upper catacombs',
                                                  'lower catacombs'],
                                                 wall_tile = wall_37,
-                                                ornamentation = torches_tile)
+                                                ornamentation = torches_tile,
+                                                rng = rng,
+                                                rate = 10)
     wall_ornamenter = WallOrnamentDecorator(wall_ornamenter_config)
 
     aggregate_decorator_config = AggregateDecoratorConfig(

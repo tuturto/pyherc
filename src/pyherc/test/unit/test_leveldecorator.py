@@ -32,7 +32,7 @@ from pyherc.generators.level.decorator import DirectionalWallDecorator
 from pyherc.generators.level.decorator import WallOrnamentDecorator
 from pyherc.generators.level.decorator import WallOrnamentDecoratorConfig
 from pyherc.data import Level
-from mockito import mock, verify
+from mockito import mock, verify, any, when
 from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
 from pyherc.generators.level.prototiles import WALL_NATURAL, WALL_CONSTRUCTED
@@ -299,13 +299,46 @@ class TestDecoratingWallOrnaments():
         self.level.set_wall_tile(3, 2, self.wall)
         self.level.set_wall_tile(4, 2, self.wall)
 
+        rng = mock()
+        when(rng).randint(any(), any()).thenReturn(0)
+
         self.config = WallOrnamentDecoratorConfig(
                                         ['any level'],
                                         wall_tile = self.wall,
-                                        ornamentation = self.ornamentation)
+                                        ornamentation = self.ornamentation,
+                                        rng = rng,
+                                        rate = 100)
         self.decorator = WallOrnamentDecorator(self.config)
 
         self.decorator.decorate_level(self.level)
 
         assert_that(self.level.ornamentations[2][2],
+                    is_(equal_to(self.ornamentation)))
+
+    def test_ornamentation_rate_can_be_controlled(self):
+        """
+        There should be way to control how frequently walls are ornamented
+        """
+        self.level.set_wall_tile(2, 2, self.wall)
+        self.level.set_wall_tile(3, 2, self.wall)
+        self.level.set_wall_tile(4, 2, self.wall)
+
+        rng = mock()
+        when(rng).randint(any(), any()).thenReturn(0).thenReturn(100).thenReturn(0)
+
+        self.config = WallOrnamentDecoratorConfig(
+                                        ['any level'],
+                                        wall_tile = self.wall,
+                                        ornamentation = self.ornamentation,
+                                        rng = rng,
+                                        rate = 50)
+        self.decorator = WallOrnamentDecorator(self.config)
+
+        self.decorator.decorate_level(self.level)
+
+        assert_that(self.level.ornamentations[2][2],
+                    is_(equal_to(self.ornamentation)))
+        assert_that(self.level.ornamentations[3][2],
+                    is_(equal_to(None)))
+        assert_that(self.level.ornamentations[4][2],
                     is_(equal_to(self.ornamentation)))
