@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -29,7 +28,7 @@ class MoveEvent(Event):
 
     .. versionadded:: 0.4
     """
-    def __init__(self, mover, affected_tiles):
+    def __init__(self, mover, old_location, direction, affected_tiles):
         """
         Default constructor
 
@@ -38,12 +37,14 @@ class MoveEvent(Event):
         :param affected_tiles: tiles affected by event
         :type affected_tiles: [(int, int)]
         """
-        super(MoveEvent, self).__init__(event_type = 'move',
-                                        level = mover.level,
-                                        location = mover.location,
-                                        affected_tiles = affected_tiles)
+        super().__init__(event_type = 'move',
+                         level = mover.level,
+                         location = mover.location,
+                         affected_tiles = affected_tiles)
 
         self.mover = mover
+        self.old_location = old_location
+        self.direction = direction
 
     def get_description(self, point_of_view):
         """

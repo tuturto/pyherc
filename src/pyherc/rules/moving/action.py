@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Module defining classes related to Move
 from pyherc.events import MoveEvent
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import ESCAPED_DUNGEON
+from pyherc.data.geometry import find_direction
 
 class MoveAction():
     """
@@ -56,7 +56,10 @@ class MoveAction():
             affected_tiles = [self.character.location,
                               self.new_location]
 
+            old_location = self.character.location
             self.character.location = self.new_location
+            direction = find_direction(old_location, self.new_location)
+
             if self.new_level != None:
                 if self.character.level != self.new_level:
                     self.character.level.remove_creature(self.character)
@@ -67,6 +70,8 @@ class MoveAction():
 
             self.character.raise_event(MoveEvent(
                                             mover = self.character,
+                                            old_location = old_location,
+                                            direction = direction,
                                             affected_tiles = affected_tiles))
 
         else:

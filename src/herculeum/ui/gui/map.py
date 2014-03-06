@@ -23,7 +23,7 @@ Module for main map related functionality
 from PyQt4.QtGui import QWidget, QHBoxLayout, QVBoxLayout
 from PyQt4.QtGui import QGraphicsPixmapItem, QGraphicsView, QGraphicsScene
 from PyQt4.QtGui import QGraphicsSimpleTextItem, QColor
-from PyQt4.QtGui import QFont
+from PyQt4.QtGui import QFont, QTransform
 from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
 from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
 from PyQt4.QtCore import QEasingCurve, pyqtSignal, QEvent
@@ -502,7 +502,7 @@ class PlayMapWidget(QWidget):
             self.keyPressEvent(event)
             result = True
         else:
-            result = super(PlayMapWidget, self).eventFilter(qobject, event)
+            result = super().eventFilter(qobject, event)
 
         return result
 
@@ -683,9 +683,12 @@ class MapGlyph(QGraphicsPixmapItem):
         """
         Default constructor
         """
-        super(MapGlyph, self).__init__(pixmap, None)
+        super().__init__(pixmap, None)
 
         self.entity = entity
+
+        self.flipped = False
+        self.offset = 0
 
         if entity != None:
             entity.register_for_updates(self)
@@ -696,9 +699,24 @@ class MapGlyph(QGraphicsPixmapItem):
         """
         if event.event_type == 'move':
             location = event.mover.location
+            direction = event.direction
+
+            if direction in (2, 3, 4):
+                self.flipped = True
+                self.offset = 32
+
+            if direction in (6, 7, 8):
+                self.flipped = False
+                self.offset = 0
+
             if location != None:
-                self.setPos(location[0] * 32,
+                self.setPos(location[0] * 32 + self.offset,
                             location[1] * 32)
+
+            if self.flipped:
+                self.setTransform(QTransform.fromScale(-1, 1))
+            else:
+                self.setTransform(QTransform.fromScale(1, 1))
 
     def clear_update_registration(self):
         """

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -66,7 +65,9 @@ class TestModel():
         event = MoveEvent(mover = (CharacterBuilder()
                                         .with_model(self.model)
                                         .build()),
-                          affected_tiles = [])
+                          affected_tiles = [],
+                          old_location = (5, 5),
+                          direction = 1)
 
         self.model.raise_event(event)
 
