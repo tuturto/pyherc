@@ -176,15 +176,18 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     floor_builder = FloorBuilderDecorator(floor_config)
 
     torches_tile = surface_manager.add_icon('catacombs_torches', ':wall_torches.png', '¤')
+    torch_tile = surface_manager.add_icon('catacombs_torch', ':wall_torch.png', '¤')
+    moss_tile = surface_manager.add_icon('catacombs_wall_moss', ':wall_moss.png', '¤')
 
-    wall_ornamenter_config = WallOrnamentDecoratorConfig(
+    torch_ornamenter_config = WallOrnamentDecoratorConfig(
                                                 ['upper catacombs',
                                                  'lower catacombs'],
                                                 wall_tile = wall_37,
-                                                ornamentation = torches_tile,
+                                                ornamentation = [torch_tile,
+                                                                 torches_tile],
                                                 rng = rng,
                                                 rate = 10)
-    wall_ornamenter = WallOrnamentDecorator(wall_ornamenter_config)
+    torch_ornamenter = WallOrnamentDecorator(torch_ornamenter_config)
 
     aggregate_decorator_config = AggregateDecoratorConfig(
                                                 ['upper catacombs',
@@ -192,7 +195,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                 [wallbuilder,
                                                  wall_direction_builder,
                                                  floor_builder,
-                                                 wall_ornamenter,
+                                                 torch_ornamenter,
                                                  replacer])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]

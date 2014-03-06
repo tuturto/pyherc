@@ -301,11 +301,12 @@ class TestDecoratingWallOrnaments():
 
         rng = mock()
         when(rng).randint(any(), any()).thenReturn(0)
+        when(rng).choice(any()).thenReturn(self.ornamentation)
 
         self.config = WallOrnamentDecoratorConfig(
                                         ['any level'],
                                         wall_tile = self.wall,
-                                        ornamentation = self.ornamentation,
+                                        ornamentation = [self.ornamentation],
                                         rng = rng,
                                         rate = 100)
         self.decorator = WallOrnamentDecorator(self.config)
@@ -325,11 +326,12 @@ class TestDecoratingWallOrnaments():
 
         rng = mock()
         when(rng).randint(any(), any()).thenReturn(0).thenReturn(100).thenReturn(0)
+        when(rng).choice(any()).thenReturn(self.ornamentation)
 
         self.config = WallOrnamentDecoratorConfig(
                                         ['any level'],
                                         wall_tile = self.wall,
-                                        ornamentation = self.ornamentation,
+                                        ornamentation = [self.ornamentation],
                                         rng = rng,
                                         rate = 50)
         self.decorator = WallOrnamentDecorator(self.config)
@@ -365,11 +367,12 @@ class TestDecoratingWallOrnaments():
 
         rng = mock()
         when(rng).randint(any(), any()).thenReturn(0)
+        when(rng).choice(any()).thenReturn(self.ornamentation)
 
         self.config = WallOrnamentDecoratorConfig(
                                         ['any level'],
                                         wall_tile = self.wall,
-                                        ornamentation = self.ornamentation,
+                                        ornamentation = [self.ornamentation],
                                         rng = rng,
                                         rate = 100)
 

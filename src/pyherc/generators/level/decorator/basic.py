@@ -487,7 +487,7 @@ class WallOrnamentDecorator(Decorator):
                 if (level.get_wall_tile(loc_x, loc_y) == self.configuration.wall_tile
                     and self.configuration.rng.randint(0, 100) < self.configuration.rate
                     and level.get_floor_tile(loc_x, loc_y + 1)):
-                        level.ornamentations[loc_x][loc_y] = self.configuration.ornamentation
+                        level.ornamentations[loc_x][loc_y] = self.configuration.rng.choice(self.configuration.ornamentation)
 
 class WallOrnamentDecoratorConfig(DecoratorConfig):
     """
