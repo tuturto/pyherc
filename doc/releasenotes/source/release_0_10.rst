@@ -9,17 +9,19 @@ New features
  - regular movement and attack can be done only to cardinal directions
  - characters can wait for a bit without doing anything
  - new player character, mage
+ - 68_ feaeture: change direction of character when walking
 
 **********
 Fixed bugs
 **********
 
-
+ - 69_ bug: layering of icons
 
 **********
 Known bugs
 **********
 
+ - 54_ bug: weapons with multiple damage types cause attacker to move
  - 42_ bug: character generator generates incorrect amount of items in inventory
  - 38_ bug: damage effect does not take damage modifiers into account
  - 25_ bug: dying should make game to return to main screen
@@ -33,6 +35,9 @@ Other notes
 
  - 53_: moved many actions (moving, combat, etc) from Character class to separate functions
 
+.. _69: https://github.com/tuturto/pyherc/issues/69
+.. _68: https://github.com/tuturto/pyherc/issues/68
+.. _54: https://github.com/tuturto/pyherc/issues/54
 .. _53: https://github.com/tuturto/pyherc/issues/53
 .. _42: https://github.com/tuturto/pyherc/issues/42
 .. _38: https://github.com/tuturto/pyherc/issues/38
