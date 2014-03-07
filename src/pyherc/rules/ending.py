@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -44,6 +43,9 @@ class Dying():
         """
         Check if character dies and process it
         """
+        if not character.level:
+            return
+
         if character.hit_points <= 0:
             for item in character.inventory:
                 character.inventory.remove(item)
