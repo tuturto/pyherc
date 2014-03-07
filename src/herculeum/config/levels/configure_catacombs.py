@@ -177,7 +177,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     torches_tile = surface_manager.add_icon('catacombs_torches', ':wall_torches.png', '¤')
     torch_tile = surface_manager.add_icon('catacombs_torch', ':wall_torch.png', '¤')
-    moss_tile = surface_manager.add_icon('catacombs_wall_moss', ':wall_moss.png', '¤')
 
     torch_ornamenter_config = WallOrnamentDecoratorConfig(
                                                 ['upper catacombs',

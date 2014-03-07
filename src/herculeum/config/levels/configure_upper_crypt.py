@@ -33,6 +33,8 @@ from pyherc.generators.level.decorator import FloorBuilderDecoratorConfig
 from pyherc.generators.level.decorator import FloorBuilderDecorator
 from pyherc.generators.level.decorator import AggregateDecorator
 from pyherc.generators.level.decorator import AggregateDecoratorConfig
+from pyherc.generators.level.decorator import WallOrnamentDecorator
+from pyherc.generators.level.decorator import WallOrnamentDecoratorConfig
 
 from pyherc.generators.level.items import ItemAdderConfiguration, ItemAdder
 from pyherc.generators.level.creatures import CreatureAdderConfiguration
@@ -167,10 +169,23 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                floor = floor_natural)
     floor_builder = FloorBuilderDecorator(floor_config)
 
+    torches_tile = surface_manager.add_icon('crypt_torches', ':wall_torches.png', '¤')
+    torch_tile = surface_manager.add_icon('crypt_torch', ':wall_torch.png', '¤')
+
+    torch_ornamenter_config = WallOrnamentDecoratorConfig(
+                                                ['upper crypt'],
+                                                wall_tile = wall_37,
+                                                ornamentation = [torch_tile,
+                                                                 torches_tile],
+                                                rng = rng,
+                                                rate = 13)
+    torch_ornamenter = WallOrnamentDecorator(torch_ornamenter_config)
+
     aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
                                                           [wallbuilder,
                                                            wall_direction_builder,
                                                            floor_builder,
+                                                           torch_ornamenter,
                                                            replacer])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]
