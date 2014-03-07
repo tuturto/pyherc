@@ -146,6 +146,13 @@ class PlayMapWindow(QWidget):
         """
         self.spell_selector.previous_spell()
 
+zorder_floor = 0
+zorder_item = 2
+zorder_character = 5
+zorder_wall = 10
+zorder_ornament = 20
+
+zorder_counter = 30
 
 class PlayMapWidget(QWidget):
     """
@@ -275,7 +282,7 @@ class PlayMapWidget(QWidget):
             for loc_y, tile in enumerate(column):
                 new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
                                      None)
-                new_glyph.setZValue(0)
+                new_glyph.setZValue(zorder_floor)
                 new_glyph.setPos(loc_x * 32, loc_y * 32)
                 scene.addItem(new_glyph)
 
@@ -283,7 +290,7 @@ class PlayMapWidget(QWidget):
             for loc_y, tile in enumerate(column):
                 new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
                                      None)
-                new_glyph.setZValue(1)
+                new_glyph.setZValue(zorder_wall)
                 new_glyph.setPos(loc_x * 32, loc_y * 32)
                 scene.addItem(new_glyph)
 
@@ -292,15 +299,15 @@ class PlayMapWidget(QWidget):
                 if tile:
                     new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
                                          None)
-                    new_glyph.setZValue(2)
+                    new_glyph.setZValue(zorder_ornament)
                     new_glyph.setPos(loc_x * 32, loc_y * 32)
                     scene.addItem(new_glyph)
 
         for item in self.current_level.items:
-            self.add_glyph(item, scene, 20)
+            self.add_glyph(item, scene, zorder_item)
 
         for creature in self.current_level.creatures:
-            self.add_glyph(creature, scene, 30)
+            self.add_glyph(creature, scene, zorder_character)
 
     def add_glyph(self, entity, scene, z_order):
         """
@@ -342,7 +349,7 @@ class PlayMapWidget(QWidget):
                 self.view.scene().removeItem(glyph)
 
         elif event.event_type == 'drop':
-            self.add_glyph(event.item, self.scene, 20)
+            self.add_glyph(event.item, self.scene, zorder_item)
         elif event.event_type == 'attack hit':
             damage = event.damage.damage_inflicted
             self.show_damage_counter(event.target.location,
@@ -393,6 +400,7 @@ class PlayMapWidget(QWidget):
                                        colour = colour,
                                        parent = self)
         self.view.scene().addItem(damage_counter)
+        damage_counter.setZValue(zorder_counter)
 
         bounds = damage_counter.boundingRect()
         width = bounds.width()
@@ -430,6 +438,7 @@ class PlayMapWidget(QWidget):
                                        colour = colour,
                                        parent = self)
         self.view.scene().addItem(damage_counter)
+        damage_counter.setZValue(zorder_counter)
 
         bounds = damage_counter.boundingRect()
         width = bounds.width()
@@ -631,7 +640,7 @@ class DamageCounter(QGraphicsSimpleTextItem):
         """
         Default constructor
         """
-        super(DamageCounter, self).__init__()
+        super().__init__()
 
         font = QFont('Helvetica',
                      12,
@@ -654,7 +663,7 @@ class DamageCounterAdapter(QObject):
         """
         Default constructor
         """
-        super(DamageCounterAdapter, self).__init__()
+        super().__init__()
         self.object_to_animate = object_to_animate
 
     def __get_y_location(self):
