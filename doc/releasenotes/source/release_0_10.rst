@@ -16,12 +16,12 @@ Fixed bugs
 **********
 
  - 69_ bug: layering of icons
+ - 54_ bug: weapons with multiple damage types cause attacker to move
 
 **********
 Known bugs
 **********
 
- - 54_ bug: weapons with multiple damage types cause attacker to move
  - 42_ bug: character generator generates incorrect amount of items in inventory
  - 38_ bug: damage effect does not take damage modifiers into account
  - 25_ bug: dying should make game to return to main screen
