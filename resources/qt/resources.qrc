@@ -166,6 +166,10 @@
         <file>brick_pit_10.png</file>
         <file>brick_pit_11.png</file>
         <file>wall_torch.png</file>
+        <file>wall_torch_f0.png</file>
+        <file>wall_torch_f1.png</file>
         <file>wall_torches.png</file>
+        <file>wall_torches_f0.png</file>
+        <file>wall_torches_f1.png</file>
     </qresource>
 </RCC>

@@ -130,7 +130,17 @@ class QtSurfaceManager():
         :returns: icon if found, otherwise empty icon
         :rtype: QPixmap
         """
-        if id in self.icons:
-            return self.icons[id]
-        else:
+        if not id:
             return self.icons['transparent']
+
+        if not hasattr(id, 'upper'):
+            tiles = []
+            for sub_id in id:
+                if sub_id in self.icons:
+                    tiles.append(self.icons[sub_id])
+            return tiles
+        else:
+            if id in self.icons:
+                return self.icons[id]
+            else:
+                return self.icons['transparent']

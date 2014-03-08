@@ -321,9 +321,9 @@ class SpellSelectorWidget(QWidget):
         Set layout of this widget
         """
         self.main_layout = QHBoxLayout()
-        self.icon = QLabel()        
+        self.icon = QLabel()
         self.main_layout.addWidget(self.icon)
-        self.icon.setPixmap(self.surface_manager.get_icon('transparent'))        
+        self.icon.setPixmap(self.surface_manager.get_icon('transparent'))
         self.setLayout(self.main_layout)
 
     def next_spell(self):

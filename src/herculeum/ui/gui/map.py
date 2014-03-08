@@ -26,7 +26,7 @@ from PyQt4.QtGui import QGraphicsSimpleTextItem, QColor
 from PyQt4.QtGui import QFont, QTransform
 from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
 from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
-from PyQt4.QtCore import QEasingCurve, pyqtSignal, QEvent
+from PyQt4.QtCore import QEasingCurve, pyqtSignal, QEvent, QTimer
 from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
 from herculeum.ui.gui.widgets import SpellSelectorWidget
@@ -177,6 +177,10 @@ class PlayMapWidget(QWidget):
 
         self.current_level = None
         self.view = None
+        self.animations_adapter = TimerAdapter()
+        self.animations_timer = QTimer(self)
+        self.animations_timer.timeout.connect(self.animations_adapter.trigger_animations)
+        self.animations_timer.start(500)
 
         self.animations = []
         self.move_controller = MoveController(action_factory = action_factory,
@@ -298,7 +302,8 @@ class PlayMapWidget(QWidget):
             for loc_y, tile in enumerate(column):
                 if tile:
                     new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
-                                         None)
+                                         None,
+                                         self.animations_adapter)
                     new_glyph.setZValue(zorder_ornament)
                     new_glyph.setPos(loc_x * 32, loc_y * 32)
                     scene.addItem(new_glyph)
@@ -681,6 +686,35 @@ class DamageCounterAdapter(QObject):
     y_location = pyqtProperty(int, __get_y_location, __set_y_location)
     opacity = pyqtProperty(float, __get_opacity, __set_opacity)
 
+class TimerAdapter():
+    """
+    Class to trigger animations on glyphs
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.glyphs = []
+        self.frame = 0
+
+    def register(self, glyph):
+        """
+        Register glyph to internal list
+        """
+        self.glyphs.append(glyph)
+
+    def trigger_animations(self):
+        """
+        Process timer event
+        """
+        self.frame = self.frame + 1
+        if self.frame > 1:
+            self.frame = 0
+
+        for glyph in self.glyphs:
+            glyph.animate(self.frame)
 
 class MapGlyph(QGraphicsPixmapItem):
     """
@@ -688,11 +722,19 @@ class MapGlyph(QGraphicsPixmapItem):
 
     .. versionadded:: 0.5
     """
-    def __init__(self, pixmap, entity):
+    def __init__(self, pixmap, entity, timer = None):
         """
         Default constructor
         """
-        super().__init__(pixmap, None)
+        self.tiles = []
+
+        if hasattr(pixmap, 'alphaChannel'):
+            super().__init__(pixmap, None)
+        else:
+            if timer:
+                timer.register(self)
+            super().__init__(pixmap[0], None)
+            self.tiles = pixmap
 
         self.entity = entity
 
@@ -701,6 +743,14 @@ class MapGlyph(QGraphicsPixmapItem):
 
         if entity != None:
             entity.register_for_updates(self)
+
+    def animate(self, frame):
+        """
+        Move animation to given frame
+
+        .. versionadded:: 0.10
+        """
+        self.setPixmap(self.tiles[frame])
 
     def receive_update(self, event):
         """

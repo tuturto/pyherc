@@ -175,15 +175,17 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                floor = floor_natural)
     floor_builder = FloorBuilderDecorator(floor_config)
 
-    torches_tile = surface_manager.add_icon('catacombs_torches', ':wall_torches.png', '¤')
-    torch_tile = surface_manager.add_icon('catacombs_torch', ':wall_torch.png', '¤')
+    torches_tile_f0 = surface_manager.add_icon('catacombs_torches_f0', ':wall_torches_f0.png', '¤')
+    torches_tile_f1 = surface_manager.add_icon('catacombs_torches_f1', ':wall_torches_f1.png', '¤')
+    torch_tile_f0 = surface_manager.add_icon('catacombs_torch_f0', ':wall_torch_f0.png', '¤')
+    torch_tile_f1 = surface_manager.add_icon('catacombs_torch_f1', ':wall_torch_f1.png', '¤')
 
     torch_ornamenter_config = WallOrnamentDecoratorConfig(
                                                 ['upper catacombs',
                                                  'lower catacombs'],
                                                 wall_tile = wall_37,
-                                                ornamentation = [torch_tile,
-                                                                 torches_tile],
+                                                ornamentation = [(torch_tile_f0, torch_tile_f1),
+                                                                 (torches_tile_f0, torches_tile_f1)],
                                                 rng = rng,
                                                 rate = 10)
     torch_ornamenter = WallOrnamentDecorator(torch_ornamenter_config)
