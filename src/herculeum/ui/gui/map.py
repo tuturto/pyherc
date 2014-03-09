@@ -177,10 +177,14 @@ class PlayMapWidget(QWidget):
 
         self.current_level = None
         self.view = None
-        self.animations_adapter = TimerAdapter()
-        self.animations_timer = QTimer(self)
-        self.animations_timer.timeout.connect(self.animations_adapter.trigger_animations)
-        self.animations_timer.start(500)
+        self.animation_adapters = []
+        self.animation_timers = []
+
+        for adapter in range(10):
+            self.animation_adapters.append(TimerAdapter())
+            self.animation_timers.append(QTimer(self))
+            self.animation_timers[adapter].timeout.connect(self.animation_adapters[adapter].trigger_animations)
+            self.animation_timers[adapter].start(450 + adapter * 10)
 
         self.animations = []
         self.move_controller = MoveController(action_factory = action_factory,
@@ -273,7 +277,8 @@ class PlayMapWidget(QWidget):
                      if hasattr(item, 'clear_update_registration')):
             item.clear_update_registration()
 
-        self.animations_adapter.glyphs.clear()
+        for adapter in self.animation_adapters:
+            adapter.glyphs.clear()
 
         for anim in [x for x in self.animations]:
             anim.clear()
@@ -305,7 +310,7 @@ class PlayMapWidget(QWidget):
                 if tile:
                     new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
                                          None,
-                                         self.animations_adapter)
+                                         self.rng.choice(self.animation_adapters))
                     new_glyph.setZValue(zorder_ornament)
                     new_glyph.setPos(loc_x * 32, loc_y * 32)
                     scene.addItem(new_glyph)
@@ -317,9 +322,9 @@ class PlayMapWidget(QWidget):
             self.add_glyph(creature,
                            scene,
                            zorder_character,
-                           self.animations_adapter)
+                           self.rng.choice(self.animation_adapters))
 
-    def add_glyph(self, entity, scene, z_order, animations_adapter = None):
+    def add_glyph(self, entity, scene, z_order, animation_adapter = None):
         """
         Add graphical representation of an entity
 
@@ -328,11 +333,11 @@ class PlayMapWidget(QWidget):
         :type scene: QGraphicsScene
         :param z_order: z-order of entity being displayed
         :type z_order: int
-        :param animations_adapter: adapter to register for animations
-        :type animations_adapter: TimerAdapter
+        :param animation_adapter: adapter to register for animations
+        :type animation_adapter: TimerAdapter
         """
         new_glyph = MapGlyph(self.surface_manager.get_icon(entity.icon),
-                             entity, animations_adapter)
+                             entity, animation_adapter)
         new_glyph.setZValue(z_order)
         new_glyph.setPos(entity.location[0] * 32,
                          entity.location[1] * 32)
