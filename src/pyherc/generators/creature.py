@@ -58,7 +58,7 @@ class CreatureGenerator():
         new_creature.hit_points = config.hp
         new_creature.max_hp = config.hp
         new_creature.speed = config.speed
-        new_creature.icon = config.icons #TODO: pick random
+        new_creature.icon = config.icons
         new_creature.attack = config.attack
 
         for spec in config.effect_handles:

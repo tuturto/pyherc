@@ -303,17 +303,15 @@ def init_creatures(context):
     surface_manager = context.surface_manager
     config = []
 
+    mouse_f0 = surface_manager.add_icon('rat_f0', ':mouse_f0.png', 'r', ['yellow', 'dim'])
+    mouse_f1 = surface_manager.add_icon('rat_f1', ':mouse_f1.png', 'r', ['yellow', 'dim'])
     config.append(CreatureConfiguration(name = 'rat',
                                         body = 4,
                                         finesse = 12,
                                         mind = 2,
                                         hp = 2,
                                         speed = 2,
-                                        icons = surface_manager.add_icon(
-                                                        'rat',
-                                                        ':mouse.png',
-                                                        'r',
-                                                        ['yellow', 'dim']),
+                                        icons = (mouse_f0, mouse_f1),
                                         attack = 1,
                                         ai = RatAI))
 
