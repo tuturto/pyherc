@@ -366,7 +366,7 @@ def init_creatures(context):
                                        description = '')]
 
     skeleton_f0 = surface_manager.add_icon('skeleton warrior_f0', ':blade-bite_f0.png', 'Z', ['white', 'bold'])
-    skeleton_f1 = surface_manager.add_icon('skeleton warrior_f1', ':blade-bite_f0.png', 'Z', ['white', 'bold'])
+    skeleton_f1 = surface_manager.add_icon('skeleton warrior_f1', ':blade-bite_f1.png', 'Z', ['white', 'bold'])
     config.append(CreatureConfiguration(name = 'skeleton warrior',
                                         body = 8,
                                         finesse = 11,

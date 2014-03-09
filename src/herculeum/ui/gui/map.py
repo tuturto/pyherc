@@ -273,6 +273,8 @@ class PlayMapWidget(QWidget):
                      if hasattr(item, 'clear_update_registration')):
             item.clear_update_registration()
 
+        self.animations_adapter.glyphs.clear()
+
         for anim in [x for x in self.animations]:
             anim.clear()
 
