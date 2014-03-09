@@ -35,13 +35,15 @@ def init_players(context):
     config = []
     surface_manager = context.surface_manager
 
+    adventurer_f0 = surface_manager.add_icon('adventurer_f0', ':pc_adventurer_f0.png', '@', ['white', 'bold'])
+    adventurer_f1 = surface_manager.add_icon('adventurer_f1', ':pc_adventurer_f1.png', '@', ['white', 'bold'])
     config.append(CreatureConfiguration(name = 'Adventurer',
                                         body = 6,
                                         finesse = 7,
                                         mind = 8,
                                         hp = 9,
                                         speed = 2.5,
-                                        icons = surface_manager.add_icon('adventurer', ':pc_adventurer.png', '@', ['white', 'bold']),
+                                        icons = (adventurer_f0, adventurer_f1),
                                         attack = 1,
                                         ai = None,
                                         effect_handles = None,
@@ -85,13 +87,15 @@ def init_players(context):
                                                                 'Adventurer is armed and ready to explore any dungeon he sees. He is strong enough to survive combat with some of the dangers, while some he definitely should avoid',
                                                                 'Adventurer also carries some potions that will help him on his journey.'])))
 
+    warrior_f0 = surface_manager.add_icon('warrior_f0', ':pc_warrior_f0.png', '@', ['white', 'bold'])
+    warrior_f1 = surface_manager.add_icon('warrior_f1', ':pc_warrior_f1.png', '@', ['white', 'bold'])
     config.append(CreatureConfiguration(name = 'Warrior',
                                         body = 8,
                                         finesse = 7,
                                         mind = 6,
                                         hp = 12,
                                         speed = 2.5,
-                                        icons = surface_manager.add_icon('warrior', ':pc_warrior.png', '@', ['white', 'bold']),
+                                        icons = (warrior_f0, warrior_f1),
                                         attack = 2,
                                         ai = None,
                                         effect_handles = None,
@@ -120,13 +124,15 @@ def init_players(context):
                                                                 'Warrior is armed to teeth and tends to solve his problems with brute force.',
                                                                 'Warrior has nice selection of weapons to use but very little of anything else.'])))
 
+    mage_f0 = surface_manager.add_icon('mage_f0', ':pc_mage_f0.png', '@', ['white', 'bold'])
+    mage_f1 = surface_manager.add_icon('mage_f1', ':pc_mage_f1.png', '@', ['white', 'bold'])
     config.append(CreatureConfiguration(name = 'Mage',
                                         body = 3,
                                         finesse = 5,
                                         mind = 11,
                                         hp = 6,
                                         speed = 2.5,
-                                        icons = surface_manager.add_icon('mage', ':pc_mage.png', '@', ['white', 'bold']),
+                                        icons = (mage_f0, mage_f1),
                                         attack = 1,
                                         ai = None,
                                         effect_handles = None,

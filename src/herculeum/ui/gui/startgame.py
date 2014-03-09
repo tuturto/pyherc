@@ -117,7 +117,12 @@ class StartGameWidget(QDialog):
 
         .. versionadded:: 0.8
         """
-        self.class_icon.setPixmap(self.surface_manager.get_icon(character.icons))
+        icon = self.surface_manager.get_icon(character.icons)
+
+        if hasattr(icon, 'alphaChannel'):
+            self.class_icon.setPixmap(icon)
+        else:
+            self.class_icon.setPixmap(icon[0])
         self.class_name.setText(character.name)
         self.class_description.setText(character.description)
 
