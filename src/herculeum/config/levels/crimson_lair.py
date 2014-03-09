@@ -231,16 +231,15 @@ def init_creatures(context):
     surface_manager = context.surface_manager
 
 
+    crimson_jaw_f0 = surface_manager.add_icon('crimson jaw_f0', ':crimson-jaw_f0.png', '&', ['bold', 'red'])
+    crimson_jaw_f1 = surface_manager.add_icon('crimson jaw_f1', ':crimson-jaw_f1.png', '&', ['bold', 'red'])
     config.append(CreatureConfiguration(name = 'crimson jaw',
                                         body = 12,
                                         finesse = 9,
                                         mind = 12,
                                         hp = 30,
                                         speed = 3,
-                                        icons = surface_manager.add_icon('crimson jaw',
-                                                                         ':crimson-jaw.png',
-                                                                         '&',
-                                                                         ['bold', 'red']),
+                                        icons = (crimson_jaw_f0, crimson_jaw_f1),
                                         attack = 8,
                                         inventory = [InventoryConfiguration(
                                                             item_name = 'whip of ashmque',

@@ -1,6 +1,24 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
     <qresource>
+        <file>blade-bite_f0.png</file>
+        <file>blade-bite_f1.png</file>
+        <file>crimson-jaw_f0.png</file>
+        <file>crimson-jaw_f1.png</file>
+        <file>masked-spider_f0.png</file>
+        <file>masked-spider_f1.png</file>
+        <file>mouse_f0.png</file>
+        <file>mouse_f1.png</file>
+        <file>scarab-beetle_f0.png</file>
+        <file>scarab-beetle_f1.png</file>
+
+        <file>pc_adventurer_f0.png</file>
+        <file>pc_adventurer_f1.png</file>
+        <file>pc_warrior_f0.png</file>
+        <file>pc_warrior_f1.png</file>
+        <file>pc_mage_f0.png</file>
+        <file>pc_mage_f1.png</file>
+
         <file>arrow-cluster.png</file>
         <file>belts.png</file>
         <file>boots.png</file>
@@ -23,26 +41,22 @@
         <file>ashmque.png</file>
         <file>barbed-spear.png</file>
         <file>battle-axe.png</file>
-        <file>blade-bite.png</file>
         <file>characters.png</file>
-        <file>crimson-jaw.png</file>
         <file>dagger.png</file>
         <file>dungeon.png</file>
         <file>gavel.png</file>
         <file>herculeum.qss</file>
         <file>items.png</file>
         <file>mace.png</file>
-        <file>masked-spider.png</file>
+
         <file>minor_healing.png</file>
         <file>minor_poison.png</file>
         <file>moderate_healing.png</file>
         <file>monsters.png</file>
-        <file>mouse.png</file>
-        <file>mouse_f0.png</file>
-        <file>mouse_f1.png</file>
+
         <file>plain_potion.png</file>
         <file>potions.png</file>
-        <file>scarab-beetle.png</file>
+
         <file>scythe.png</file>
         <file>spiked-mace.png</file>
         <file>stiletto.png</file>
@@ -70,15 +84,7 @@
         <file>healing-wind.png</file>
         <file>force-bolt.png</file>
         <file>snowman.png</file>
-        <file>pc_adventurer.png</file>
-        <file>pc_adventurer_f0.png</file>
-        <file>pc_adventurer_f1.png</file>
-        <file>pc_warrior.png</file>
-        <file>pc_warrior_f0.png</file>
-        <file>pc_warrior_f1.png</file>
-        <file>pc_mage.png</file>
-        <file>pc_mage_f0.png</file>
-        <file>pc_mage_f1.png</file>
+
         <file>catacombs_wall_2_4.png</file>
         <file>catacombs_wall_2_6.png</file>
         <file>catacombs_wall_2_8.png</file>
@@ -173,10 +179,8 @@
         <file>brick_pit_09.png</file>
         <file>brick_pit_10.png</file>
         <file>brick_pit_11.png</file>
-        <file>wall_torch.png</file>
         <file>wall_torch_f0.png</file>
         <file>wall_torch_f1.png</file>
-        <file>wall_torches.png</file>
         <file>wall_torches_f0.png</file>
         <file>wall_torches_f1.png</file>
     </qresource>

@@ -315,17 +315,15 @@ def init_creatures(context):
                                         attack = 1,
                                         ai = RatAI))
 
+    firebeetle_f0 = surface_manager.add_icon('fire beetle_f0', ':scarab-beetle_f0.png', 'a', ['red'])
+    firebeetle_f1 = surface_manager.add_icon('fire beetle_f1', ':scarab-beetle_f1.png', 'a', ['red'])
     config.append(CreatureConfiguration(name = 'fire beetle',
                                         body = 10,
                                         finesse = 11,
                                         mind = 0,
                                         hp = 4,
                                         speed = 3,
-                                        icons = surface_manager.add_icon(
-                                                        'fire beetle',
-                                                        ':scarab-beetle.png',
-                                                        'a',
-                                                        ['red']),
+                                        icons = (firebeetle_f0, firebeetle_f1),
                                         attack = 2,
                                         ai = FireBeetleAI))
 
@@ -367,17 +365,15 @@ def init_creatures(context):
                                        title = '',
                                        description = '')]
 
+    skeleton_f0 = surface_manager.add_icon('skeleton warrior_f0', ':blade-bite_f0.png', 'Z', ['white', 'bold'])
+    skeleton_f1 = surface_manager.add_icon('skeleton warrior_f1', ':blade-bite_f0.png', 'Z', ['white', 'bold'])
     config.append(CreatureConfiguration(name = 'skeleton warrior',
                                         body = 8,
                                         finesse = 11,
                                         mind = 0,
                                         hp = 8,
                                         speed = 4,
-                                        icons = surface_manager.add_icon(
-                                                        'skeleton warrior',
-                                                        ':blade-bite.png',
-                                                        'Z',
-                                                        ['white', 'bold']),
+                                        icons = (skeleton_f0, skeleton_f1),
                                         attack = 1,
                                         ai = SkeletonWarriorAI,
                                         inventory = skeleton_inventory,

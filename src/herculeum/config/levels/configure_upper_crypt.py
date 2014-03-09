@@ -259,13 +259,15 @@ def init_creatures(context):
     config = []
     surface_manager = context.surface_manager
 
+    spider_f0 = surface_manager.add_icon('spider_f0', ':masked-spider_f0.png', 's', ['white', 'dim'])
+    spider_f1 = surface_manager.add_icon('spider_f1', ':masked-spider_f1.png', 's', ['white', 'dim'])
     config.append(CreatureConfiguration(name = 'spider',
                                         body = 6,
                                         finesse = 12,
                                         mind = 8,
                                         hp = 6,
                                         speed = 1,
-                                        icons = surface_manager.add_icon('spider', ':masked-spider.png', 's', ['white', 'dim']),
+                                        icons = (spider_f0, spider_f1),
                                         attack = 4,
                                         ai = FlockingHerbivore,
                                         effect_handles = [EffectHandle(
