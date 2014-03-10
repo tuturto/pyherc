@@ -84,4 +84,6 @@ class PillarRoomGenerator():
             section.set_wall(location = location,
                              tile = self.pillar_tile,
                              location_type = None)
-            section.set_location_type(location, None)
+            section.set_floor(location = location,
+                              tile = None,
+                              location_type = None)

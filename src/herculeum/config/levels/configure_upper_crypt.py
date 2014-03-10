@@ -169,14 +169,55 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                floor = floor_natural)
     floor_builder = FloorBuilderDecorator(floor_config)
 
-    torches_tile = surface_manager.add_icon('crypt_torches', ':wall_torches.png', '¤')
-    torch_tile = surface_manager.add_icon('crypt_torch', ':wall_torch.png', '¤')
+    board_floor = surface_manager.add_icon('crypt_floor_2', ':crypt_floor_2.png', ' ')
+    board_floor1 = surface_manager.add_icon('crypt_floor_2_1', ':crypt_floor_2_1.png', ' ')
+    board_floor3 = surface_manager.add_icon('crypt_floor_2_3', ':crypt_floor_2_3.png', ' ')
+    board_floor5 = surface_manager.add_icon('crypt_floor_2_5', ':crypt_floor_2_5.png', ' ')
+    board_floor7 = surface_manager.add_icon('crypt_floor_2_7', ':crypt_floor_2_7.png', ' ')
+    board_floor13 = surface_manager.add_icon('crypt_floor_2_13', ':crypt_floor_2_13.png', ' ')
+    board_floor15 = surface_manager.add_icon('crypt_floor_2_15', ':crypt_floor_2_15.png', ' ')
+    board_floor17 = surface_manager.add_icon('crypt_floor_2_17', ':crypt_floor_2_17.png', ' ')
+    board_floor35 = surface_manager.add_icon('crypt_floor_2_35', ':crypt_floor_2_35.png', ' ')
+    board_floor37 = surface_manager.add_icon('crypt_floor_2_37', ':crypt_floor_2_37.png', ' ')
+    board_floor57 = surface_manager.add_icon('crypt_floor_2_57', ':crypt_floor_2_57.png', ' ')
+    board_floor135 = surface_manager.add_icon('crypt_floor_2_135', ':crypt_floor_2_135.png', ' ')
+    board_floor137 = surface_manager.add_icon('crypt_floor_2_137', ':crypt_floor_2_137.png', ' ')
+    board_floor157 = surface_manager.add_icon('crypt_floor_2_157', ':crypt_floor_2_157.png', ' ')
+    board_floor357 = surface_manager.add_icon('crypt_floor_2_357', ':crypt_floor_2_357.png', ' ')
+    board_floor1357 = surface_manager.add_icon('crypt_floor_2_1357', ':crypt_floor_2_1357.png', ' ')
+
+    board_floor_config = FloorBuilderDecoratorConfig([],
+                                               single = board_floor,
+                                               north = board_floor1,
+                                               east = board_floor3,
+                                               south = board_floor5,
+                                               west = board_floor7,
+                                               north_east = board_floor13,
+                                               north_south = board_floor15,
+                                               north_west = board_floor17,
+                                               east_south = board_floor35,
+                                               east_west = board_floor37,
+                                               south_west = board_floor57,
+                                               north_east_south = board_floor135,
+                                               north_east_west = board_floor137,
+                                               north_south_west = board_floor157,
+                                               east_south_west = board_floor357,
+                                               fourway = board_floor1357,
+                                               floor = floor_constructed)
+    board_floor_builder = FloorBuilderDecorator(board_floor_config)
+
+    torches_tile_f0 = surface_manager.add_icon('crypt_torches_f0', ':wall_torches_f0.png', '¤')
+    torches_tile_f1 = surface_manager.add_icon('crypt_torches_f1', ':wall_torches_f1.png', '¤')
+    torch_tile_f0 = surface_manager.add_icon('crypt_torch_f0', ':wall_torch_f0.png', '¤')
+    torch_tile_f1 = surface_manager.add_icon('crypt_torch_f1', ':wall_torch_f1.png', '¤')
 
     torch_ornamenter_config = WallOrnamentDecoratorConfig(
                                                 ['upper crypt'],
                                                 wall_tile = wall_37,
-                                                ornamentation = [torch_tile,
-                                                                 torches_tile],
+                                                ornamentation = [(torch_tile_f0,
+                                                                  torch_tile_f1),
+                                                                 (torches_tile_f0,
+                                                                  torches_tile_f1)],
                                                 rng = rng,
                                                 rate = 13)
     torch_ornamenter = WallOrnamentDecorator(torch_ornamenter_config)
@@ -185,6 +226,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                           [wallbuilder,
                                                            wall_direction_builder,
                                                            floor_builder,
+                                                           board_floor_builder,
                                                            torch_ornamenter,
                                                            replacer])
 

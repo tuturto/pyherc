@@ -124,6 +124,7 @@
         <file>crypt_wall_157.png</file>
         <file>crypt_wall_357.png</file>
         <file>crypt_wall_1357.png</file>
+
         <file>crypt_floor.png</file>
         <file>crypt_floor_1.png</file>
         <file>crypt_floor_3.png</file>
@@ -140,6 +141,24 @@
         <file>crypt_floor_157.png</file>
         <file>crypt_floor_357.png</file>
         <file>crypt_floor_1357.png</file>
+
+        <file>crypt_floor_2.png</file>
+        <file>crypt_floor_2_1.png</file>
+        <file>crypt_floor_2_3.png</file>
+        <file>crypt_floor_2_5.png</file>
+        <file>crypt_floor_2_7.png</file>
+        <file>crypt_floor_2_13.png</file>
+        <file>crypt_floor_2_15.png</file>
+        <file>crypt_floor_2_17.png</file>
+        <file>crypt_floor_2_35.png</file>
+        <file>crypt_floor_2_37.png</file>
+        <file>crypt_floor_2_57.png</file>
+        <file>crypt_floor_2_135.png</file>
+        <file>crypt_floor_2_137.png</file>
+        <file>crypt_floor_2_157.png</file>
+        <file>crypt_floor_2_357.png</file>
+        <file>crypt_floor_2_1357.png</file>
+
         <file>abyss_wall.png</file>
         <file>abyss_wall_13.png</file>
         <file>abyss_wall_15.png</file>
