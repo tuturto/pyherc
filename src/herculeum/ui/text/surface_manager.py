@@ -51,6 +51,9 @@ class CursesSurfaceManager():
         """
         Add icon to internal collection
         """
+        if not (hasattr(key, 'upper') or hasattr(key, 'real')):
+            key = key[0]
+
         if not key in self.icons:
             self.icons[key] = ascii_char
 
@@ -108,6 +111,12 @@ class CursesSurfaceManager():
         :returns: icon if found, otherwise empty icon
         :rtype: string
         """
+        if not id:
+            return ' '
+
+        if not (hasattr(id, 'upper') or hasattr(id, 'real')):
+            id = id[0]
+
         if id in self.icons:
             return self.icons[id]
         else:
