@@ -117,7 +117,7 @@ class DockingHitPointsWidget(QDockWidget):
         :param parent: parent of this widget
         :type parent: QWidget
         """
-        super(DockingHitPointsWidget, self).__init__(parent)
+        super().__init__(parent)
         self.counter = None
 
         self.__set_layout()
@@ -161,7 +161,7 @@ class ListViewItem(QWidget):
         :param description: description to show
         :type description: string
         """
-        super(ListViewItem, self).__init__()
+        super().__init__()
 
         self._icon = None
         self._title = None
@@ -235,7 +235,7 @@ class ListView(QWidget):
         """
         Default constructor
         """
-        super(ListView, self).__init__()
+        super().__init__()
         self._set_layout()
 
     def _set_layout(self):
@@ -273,7 +273,7 @@ class EffectsWidget(QWidget):
         """
         Default constructor
         """
-        super(EffectsWidget, self).__init__(parent)
+        super().__init__(parent)
         self.main_layout = None
         self.surface_manager = surface_manager
         self._set_layout()
@@ -346,3 +346,67 @@ class SpellSelectorWidget(QWidget):
         :rtype: String
         """
         return "fireball"
+
+class AnimatedLabel(QLabel):
+    """
+    Label to display an animated icon
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self, timer = None):
+        """
+        Default constructor
+        """
+        super().__init__()
+        self.tiles = []
+        if timer:
+            timer.register(self)
+
+    def setPixmap(self, icon):
+        """
+        Set picture shown in this label
+        """
+        if hasattr(icon, 'alphaChannel'):
+            super().setPixmap(icon)
+        else:
+            super().setPixmap(icon[0])
+            self.tiles = icon
+
+    def animate(self, frame):
+        """
+        Move animation to given frame
+
+        .. versionadded:: 0.10
+        """
+        self.setPixmap(self.tiles[frame])
+
+class TimerAdapter():
+    """
+    Class to trigger animations on glyphs
+
+    .. versionadded:: 0.10
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.glyphs = []
+        self.frame = 0
+
+    def register(self, glyph):
+        """
+        Register glyph to internal list
+        """
+        self.glyphs.append(glyph)
+
+    def trigger_animations(self):
+        """
+        Process timer event
+        """
+        self.frame = self.frame + 1
+        if self.frame > 1:
+            self.frame = 0
+
+        for glyph in self.glyphs:
+            glyph.animate(self.frame)
+

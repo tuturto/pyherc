@@ -29,7 +29,7 @@ from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
 from PyQt4.QtCore import QEasingCurve, pyqtSignal, QEvent, QTimer
 from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
-from herculeum.ui.gui.widgets import SpellSelectorWidget
+from herculeum.ui.gui.widgets import SpellSelectorWidget, TimerAdapter
 from herculeum.ui.controllers import MoveController
 from pyherc.rules import move, is_move_legal, cast, pick_up, attack, wait
 from random import Random
@@ -697,36 +697,6 @@ class DamageCounterAdapter(QObject):
 
     y_location = pyqtProperty(int, __get_y_location, __set_y_location)
     opacity = pyqtProperty(float, __get_opacity, __set_opacity)
-
-class TimerAdapter():
-    """
-    Class to trigger animations on glyphs
-
-    .. versionadded:: 0.10
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        self.glyphs = []
-        self.frame = 0
-
-    def register(self, glyph):
-        """
-        Register glyph to internal list
-        """
-        self.glyphs.append(glyph)
-
-    def trigger_animations(self):
-        """
-        Process timer event
-        """
-        self.frame = self.frame + 1
-        if self.frame > 1:
-            self.frame = 0
-
-        for glyph in self.glyphs:
-            glyph.animate(self.frame)
 
 class MapGlyph(QGraphicsPixmapItem):
     """

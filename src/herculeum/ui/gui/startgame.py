@@ -20,9 +20,10 @@
 """
 Module for start game window related functionality
 """
+from herculeum.ui.gui.widgets import AnimatedLabel, TimerAdapter
 from PyQt4.QtGui import QDialog, QSizePolicy, QVBoxLayout
 from PyQt4.QtGui import QHBoxLayout, QLabel
-from PyQt4.QtCore import Qt
+from PyQt4.QtCore import Qt, QTimer
 
 class StartGameWidget(QDialog):
     """
@@ -36,7 +37,7 @@ class StartGameWidget(QDialog):
         """
         Default constructor
         """
-        super(StartGameWidget, self).__init__(parent, flags)
+        super().__init__(parent, flags)
 
         self.application = application
         self.surface_manager = surface_manager
@@ -50,6 +51,9 @@ class StartGameWidget(QDialog):
         self.class_icon = None
         self.selected_index = None
         self.class_names = None
+
+        self.animation_adapter = None
+        self.animation_timer = None
 
         cnf = self.config
         self.konami = [cnf.move_up, cnf.move_up,
@@ -82,7 +86,13 @@ class StartGameWidget(QDialog):
         self.class_name.setMinimumSize(200, 50)
         self.class_name.setMaximumSize(200, 50)
         self.class_name.setAlignment(Qt.AlignCenter)
-        self.class_icon = QLabel('')
+
+        self.animation_adapter = TimerAdapter()
+        self.animation_timer = QTimer(self)
+        self.animation_timer.timeout.connect(self.animation_adapter.trigger_animations)
+        self.animation_timer.start(500)
+
+        self.class_icon = AnimatedLabel(self.animation_adapter)
         self.class_icon.setMinimumSize(64, 64)
         self.class_icon.setMaximumSize(64, 64)
         self.class_icon.setAlignment(Qt.AlignCenter)
@@ -119,10 +129,7 @@ class StartGameWidget(QDialog):
         """
         icon = self.surface_manager.get_icon(character.icons)
 
-        if hasattr(icon, 'alphaChannel'):
-            self.class_icon.setPixmap(icon)
-        else:
-            self.class_icon.setPixmap(icon[0])
+        self.class_icon.setPixmap(icon)
         self.class_name.setText(character.name)
         self.class_description.setText(character.description)
 
@@ -148,6 +155,7 @@ class StartGameWidget(QDialog):
 
         if event.key() in self.config.action_a:
             self.__generate_character()
+            self.animation_adapter.glyphs.clear()
             self.accept()
         elif event.key() in self.config.move_right:
             self.selected_index = self.selected_index + 1
@@ -162,4 +170,4 @@ class StartGameWidget(QDialog):
             self._show_character(
                     self.generator.configuration[self.class_names[self.selected_index]])
         else:
-            super(StartGameWidget, self).keyPressEvent(event)
+            super().keyPressEvent(event)
