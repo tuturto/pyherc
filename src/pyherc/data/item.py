@@ -38,7 +38,7 @@ class Item():
         :param effects_collection: collection for effects
         :type effects_collection: EffectsCollection
         """
-        super(Item, self).__init__()
+        super().__init__()
         #attributes
         self.name = 'prototype'
         self.description = 'prototype'
@@ -285,7 +285,7 @@ class ArmourData():
         :param speed_modifier: modifier for speed of wearer
         :type speed_modifier: double
         """
-        super(ArmourData, self).__init__()
+        super().__init__()
 
         self.damage_reduction = damage_reduction
         self.speed_modifier = speed_modifier
@@ -302,7 +302,7 @@ class AmmunitionData():
         """
         Default constructor
         """
-        super(AmmunitionData, self).__init__()
+        super().__init__()
 
         if damage == None:
             self.damage = []

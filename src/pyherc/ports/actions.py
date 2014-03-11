@@ -20,7 +20,7 @@
 """
 Port to issue actions
 """
-from pyherc.rules import move
+from pyherc.rules import move, is_move_legal
 
 class ActionsPort():
     """
@@ -53,3 +53,16 @@ class ActionsPort():
              direction = direction,
              action_factory = self.action_factory)
 
+    def is_move_legal(self, character, direction):
+        """
+        Check if character is allowed to move to given direction
+
+        :param character: character to move
+        :type character: Character
+        :param direction: direction to move to
+        :type direction: int (1-8)
+        """
+        return is_move_legal(character = character,
+                             direction = direction,
+                             movement_mode = 'walk',
+                             action_factory = self.action_factory)

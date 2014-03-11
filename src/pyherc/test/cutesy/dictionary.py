@@ -29,7 +29,7 @@ from pyherc.test.builders import SpellGeneratorBuilder
 from pyherc.test.builders import EffectsFactoryBuilder
 
 from pyherc.data.effects import Heal, Damage
-from pyherc.rules import Dying
+from pyherc.rules import Dying, move, is_move_legal
 from pyherc.data.effects import Poison
 from pyherc.data.geometry import find_direction
 from pyherc.rules import cast, drop_item, attack, wait, gain_domain
@@ -94,7 +94,7 @@ class LevelLocation():
         :param location: location within level
         :type location: (int, int)
         """
-        super(LevelLocation, self).__init__()
+        super().__init__()
         self.level = level
         self.location = location
 
@@ -187,6 +187,48 @@ def wait_():
     """
     action = Wait()
     return action
+
+class TakeRandomStep():
+    """
+    Class representing taking a random step
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super().__init__()
+
+    def __call__(self, character):
+        """
+        Performs taking a single step
+
+        :param character: character walking
+        :type character: Character
+        """
+        add_history_value(character, 'tick')
+
+        action_factory = (ActionFactoryBuilder()
+                                    .with_move_factory()
+                                    .build())
+
+        directions = [direction for direction in range(1, 9)
+                      if is_move_legal(character,
+                                       direction,
+                                       'walk',
+                                       action_factory)]
+
+        assert len(directions) > 0
+
+        move(character = character,
+             direction = directions[0],
+             action_factory = action_factory)
+
+
+def take_random_step():
+    """
+    Take a single step
+    """
+    return TakeRandomStep()
 
 class CastSpell():
     """
@@ -399,7 +441,7 @@ class HasLessHitPoints(BaseMatcher):
         """
         Default constructor
         """
-        super(HasLessHitPoints, self).__init__()
+        super().__init__()
         self.old_hit_points = None
 
     def _matches(self, item):
@@ -565,7 +607,7 @@ class Drop():
 
         :param item: item to drop
         """
-        super(Drop, self).__init__()
+        super().__init__()
         self.item = item
 
     def __call__(self, actor):
@@ -606,7 +648,7 @@ class HasDropped(BaseMatcher):
         """
         Default constructor
         """
-        super(HasDropped, self).__init__()
+        super().__init__()
         self.item = item
         self.fail_reason = ''
 

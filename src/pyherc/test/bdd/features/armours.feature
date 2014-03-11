@@ -26,3 +26,8 @@ Feature: Armours
         And Pete wears plate mail
        When Uglak hits Pete
        Then Attack damage should be 0
+
+  Scenario: Moving in heavy armour is slow
+      Given Pete wears scale mail
+       When Pete takes a step
+       Then Pete should move slower than without scale mail

@@ -24,6 +24,7 @@ from pyherc.events import MoveEvent
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import ESCAPED_DUNGEON
 from pyherc.data.geometry import find_direction
+from pyherc.data.constants import Duration
 
 class MoveAction():
     """
@@ -66,7 +67,14 @@ class MoveAction():
                     self.character.level = self.new_level
                     self.new_level.add_creature(self.character,
                                                 self.new_location)
-            self.character.add_to_tick(2)
+
+            armour = self.character.inventory.armour
+            if armour:
+                speed_modifier = armour.armour_data.speed_modifier
+            else:
+                speed_modifier = 1
+
+            self.character.add_to_tick(Duration.fast / speed_modifier)
 
             self.character.raise_event(MoveEvent(
                                             mover = self.character,
@@ -75,7 +83,7 @@ class MoveAction():
                                             affected_tiles = affected_tiles))
 
         else:
-            self.character.add_to_tick(1)
+            self.character.add_to_tick(Duration.instant)
 
     @log_debug
     def is_legal(self):
@@ -124,9 +132,9 @@ class EscapeAction(MoveAction):
         """
         Default constructor
         """
-        super(EscapeAction, self).__init__(character = character,
-                                           new_location = None,
-                                           new_level = None)
+        super().__init__(character = character,
+                         new_location = None,
+                         new_level = None)
 
     @log_info
     def execute(self):

@@ -18,15 +18,15 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 from pyherc.data.effects import DamageModifier
-from pyherc.data.constants import Direction
+from pyherc.data.constants import Direction, Duration
 from pyherc.test.cutesy import Adventurer, Wizard, Goblin
+from pyherc.test.cutesy import take_random_step
 from pyherc.test.matchers import is_dead
 from pyherc.ai.pathfinding import a_star
-from pyherc.data.geometry import find_direction
-from hamcrest import assert_that, is_not #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_not, greater_than #pylint: disable-msg=E0611
 from pyherc.test.bdd.features.helpers import default_context, observed
 from pyherc.test.bdd.features.helpers import with_action_factory
-from pyherc.test.bdd.features.helpers import get_character, get_location
+from pyherc.test.bdd.features.helpers import get_character, get_location, get_item
 
 @given('{character_name} is Adventurer')
 @observed
@@ -114,3 +114,18 @@ def impl(context, character_name, portal_name):
     character = get_character(context, character_name)
 
     context.actions_port.move_character(character, Direction.enter)
+
+@when('{character_name} takes a step')
+@with_action_factory
+def impl(context, character_name):
+    character = get_character(context, character_name)
+    make(character, take_random_step())
+
+@then('{character_name} should move slower than without {armour_name}')
+@with_action_factory
+def impl(context, character_name, armour_name):
+    character = get_character(context, character_name)
+    armour = get_item(context, armour_name)
+
+    assert_that(character.tick,
+                is_(greater_than(character.speed * Duration.fast)))
