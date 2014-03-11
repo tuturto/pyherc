@@ -6,15 +6,17 @@ Release 0.10
 New features
 ************
 
+ - new set of graphics and animations
  - regular movement and attack can be done only to cardinal directions
  - characters can wait for a bit without doing anything
  - new player character, mage
- - 68_ feaeture: change direction of character when walking
+ - 68_ feature: change direction of character when walking
 
 **********
 Fixed bugs
 **********
 
+ - 72_ bug: moving does not take armour into account
  - 69_ bug: layering of icons
  - 54_ bug: weapons with multiple damage types cause attacker to move
 
@@ -35,6 +37,7 @@ Other notes
 
  - 53_: moved many actions (moving, combat, etc) from Character class to separate functions
 
+.. _72: https://github.com/tuturto/pyherc/issues/72
 .. _69: https://github.com/tuturto/pyherc/issues/69
 .. _68: https://github.com/tuturto/pyherc/issues/68
 .. _54: https://github.com/tuturto/pyherc/issues/54
