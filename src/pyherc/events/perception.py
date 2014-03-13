@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Classes for perception events
 """
 from pyherc.events.event import Event
 
+
 class NoticeEvent(Event):
     """
     Event that can be used to indicate character noticing something interesting
@@ -33,10 +33,10 @@ class NoticeEvent(Event):
         """
         Default constructor
         """
-        super(NoticeEvent, self).__init__(event_type = 'notice',
-                                          level = character.level,
-                                          location = character.location,
-                                          affected_tiles = [])
+        super().__init__(event_type='notice',
+                         level=character.level,
+                         location=character.location,
+                         affected_tiles=[])
 
         self.character = character
         self.target = target
@@ -60,6 +60,7 @@ class NoticeEvent(Event):
 
         return description
 
+
 class LoseFocusEvent(Event):
     """
     Event that can be used to indicate losing focus
@@ -70,10 +71,10 @@ class LoseFocusEvent(Event):
         """
         Default constructor
         """
-        super(LoseFocusEvent, self).__init__(event_type = 'lose focus',
-                                             level = character.level,
-                                             location = character.location,
-                                             affected_tiles = [])
+        super().__init__(event_type='lose focus',
+                         level=character.level,
+                         location=character.location,
+                         affected_tiles=[])
 
         self.character = character
 

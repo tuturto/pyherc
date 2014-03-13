@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Classes for poison events
 """
 from pyherc.events.event import Event
 
+
 class PoisonTriggeredEvent(Event):
     """
     Event that can be used to relay information about poison being triggered
@@ -38,10 +38,11 @@ class PoisonTriggeredEvent(Event):
         :param damage: amount of damage suffered
         :type damage: int
         """
-        super(PoisonTriggeredEvent, self).__init__(event_type = 'poison triggered',
-                                                   level = target.level,
-                                                   location = target.location,
-                                                   affected_tiles = [])
+        super().__init__(event_type='poison triggered',
+                         level=target.level,
+                         location=target.location,
+                         affected_tiles=[])
+
         self.target = target
         self.damage = damage
 
@@ -55,12 +56,13 @@ class PoisonTriggeredEvent(Event):
         :rtype: string
         """
         if point_of_view == self.target:
-            description = 'You suffer from poison ({0} points of damage)'.format(self.damage)
+            description = 'You suffer from poison ({0} points of damage)'.format(self.damage)  # noqa
         else:
-            description = '{0} suffers from poison ({1} points of damage)'.format(self.target.name,
-                                                                                  self.damage)
+            description = '{0} suffers from poison ({1} points of damage)'.format(self.target.name,  # noqa
+                                                                                  self.damage)  # noqa
 
         return description
+
 
 class PoisonAddedEvent(Event):
     """
@@ -77,10 +79,11 @@ class PoisonAddedEvent(Event):
         :param effect: effect being added
         :type effect: Poison
         """
-        super(PoisonAddedEvent, self).__init__(event_type = 'poisoned',
-                                               level = target.level,
-                                               location = target.location,
-                                               affected_tiles = [])
+        super().__init__(event_type='poisoned',
+                         level=target.level,
+                         location=target.location,
+                         affected_tiles=[])
+
         self.target = target
         self.effect = effect
 
@@ -100,6 +103,7 @@ class PoisonAddedEvent(Event):
 
         return description
 
+
 class PoisonEndedEvent(Event):
     """
     Event to signal that poisoning is over
@@ -113,10 +117,11 @@ class PoisonEndedEvent(Event):
         :param effect: effect being removed
         :type effect: Poison
         """
-        super(PoisonEndedEvent, self).__init__(event_type = 'poison ended',
-                                               level = target.level,
-                                               location = target.location,
-                                               affected_tiles = [])
+        super().__init__(event_type='poison ended',
+                         level=target.level,
+                         location=target.location,
+                         affected_tiles=[])
+
         self.target = target
         self.effect = effect
 

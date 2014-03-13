@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Classes for death events
 """
 from pyherc.events.event import Event
 
+
 class DeathEvent(Event):
     """
     Event that can be used to relay information about dying
@@ -38,10 +38,10 @@ class DeathEvent(Event):
         :param affected_tiles: tiles affected by event
         :type affected_tiles: [(int, int)]
         """
-        super(DeathEvent, self).__init__(event_type = 'death',
-                                         level = deceased.level,
-                                         location = deceased.location,
-                                         affected_tiles = affected_tiles)
+        super().__init__(event_type='death',
+                         level=deceased.level,
+                         location=deceased.location,
+                         affected_tiles=affected_tiles)
 
         self.deceased = deceased
 

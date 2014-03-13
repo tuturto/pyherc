@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -21,6 +20,8 @@
 """
 Classes for events
 """
+
+
 class Event():
     """
     Super class for events
@@ -40,7 +41,7 @@ class Event():
         :param affected_tiles: tiles affected by the event
         :type affected_tiles: [(int, int)]
         """
-        super(Event, self).__init__()
+        super().__init__()
         self.__level = level
         self.__location = location
         self.__affected_tiles = affected_tiles

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Classes for move events
 """
 from pyherc.events.event import Event
 
+
 class AttackHitEvent(Event):
     """
     Event that can be used to indicate attacking hitting
@@ -33,10 +33,10 @@ class AttackHitEvent(Event):
         """
         Default constructor
         """
-        super(AttackHitEvent, self).__init__(event_type = 'attack hit',
-                                             level = attacker.level,
-                                             location = attacker.location,
-                                             affected_tiles = affected_tiles)
+        super().__init__(event_type='attack hit',
+                         level=attacker.level,
+                         location=attacker.location,
+                         affected_tiles=affected_tiles)
 
         self.type = type
         self.attacker = attacker
@@ -53,18 +53,19 @@ class AttackHitEvent(Event):
         :rtype: string
         """
         if point_of_view == self.attacker:
-            description = 'You hit {0} ({1} points of damage)'.format(self.target.name,
-                                                     self.damage.damage_inflicted)
+            description = 'You hit {0} ({1} points of damage)'.format(self.target.name,  # noqa
+                                                     self.damage.damage_inflicted)  # noqa
         elif point_of_view == self.target:
-            description = '{0} hits you ({1} points of damage)'.format(self.attacker.name,
-                                                      self.damage.damage_inflicted)
+            description = '{0} hits you ({1} points of damage)'.format(self.attacker.name,  # noqa
+                                                      self.damage.damage_inflicted)  # noqa
         else:
             description = '{0} hits {1} ({2} points of damage)'.format(
-                            self.attacker.name,
-                            self.target.name,
-                            self.damage.damage_inflicted)
+                self.attacker.name,
+                self.target.name,
+                self.damage.damage_inflicted)
 
         return description
+
 
 class AttackMissEvent(Event):
     """
@@ -76,10 +77,10 @@ class AttackMissEvent(Event):
         """
         Default constructor
         """
-        super(AttackMissEvent, self).__init__(event_type = 'attack miss',
-                                              level = attacker.level,
-                                              location = attacker.location,
-                                              affected_tiles = affected_tiles)
+        super().__init__(event_type='attack miss',
+                         level=attacker.level,
+                         location=attacker.location,
+                         affected_tiles=affected_tiles)
 
         self.type = type
         self.attacker = attacker
@@ -104,6 +105,7 @@ class AttackMissEvent(Event):
 
         return description
 
+
 class AttackNothingEvent(Event):
     """
     Event describing attack that targets nothing at all
@@ -114,11 +116,11 @@ class AttackNothingEvent(Event):
         """
         Default constructor
         """
-        super(AttackNothingEvent, self).__init__(
-                                        event_type = 'attack nothing',
-                                        level = attacker.level,
-                                        location = attacker.location,
-                                        affected_tiles = affected_tiles)
+        super().__init__(event_type='attack nothing',
+                         level=attacker.level,
+                         location=attacker.location,
+                         affected_tiles=affected_tiles)
+
         self.attacker = attacker
 
     def get_description(self, point_of_view):
@@ -134,6 +136,6 @@ class AttackNothingEvent(Event):
             description = 'You flail around, hitting nothing'
         else:
             description = '{0} flails around, hitting nothing'.format(
-                                                            self.attacker.name)
+                self.attacker.name)
 
         return description

@@ -22,6 +22,7 @@ Events for hit points
 """
 from pyherc.events.event import Event
 
+
 class HitPointsChangedEvent(Event):
     """
     Event to raise when hit points change
@@ -32,11 +33,10 @@ class HitPointsChangedEvent(Event):
         """
         Default constructor
         """
-        super(HitPointsChangedEvent, self).__init__(
-                                event_type = 'hit points changed',
-                                level = character.level,
-                                location = character.location,
-                                affected_tiles = [])
+        super().__init__(event_type='hit points changed',
+                         level=character.level,
+                         location=character.location,
+                         affected_tiles=[])
 
         self.character = character
         self.old_hit_points = old_hit_points

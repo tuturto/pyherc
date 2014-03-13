@@ -22,6 +22,7 @@ Classes for poison events
 """
 from pyherc.events.event import Event
 
+
 class DamageTriggeredEvent(Event):
     """
     Event that can be used to relay information about damage being triggered
@@ -39,10 +40,11 @@ class DamageTriggeredEvent(Event):
         :param damage_type: type of damage
         :type damage_type: string
         """
-        super(DamageTriggeredEvent, self).__init__(event_type = 'damage triggered',
-                                                   level = target.level,
-                                                   location = target.location,
-                                                   affected_tiles = [])
+        super().__init__(event_type='damage triggered',
+                         level=target.level,
+                         location=target.location,
+                         affected_tiles=[])
+
         self.target = target
         self.damage = damage
         self.damage_type = damage_type
@@ -57,14 +59,15 @@ class DamageTriggeredEvent(Event):
         :rtype: string
         """
         if point_of_view == self.target:
-            description = 'You suffer from {0} damage ({1} points of damage)'.format(self.damage_type,
-                                                                                     self.damage)
+            description = 'You suffer from {0} damage ({1} points of damage)'.format(self.damage_type,  # noqa
+                                                                                     self.damage)  # noqa
         else:
-            description = '{0} suffers from {1} damage ({2} points of damage)'.format(self.target.name,
-                                                                               self.damage_type,
-                                                                               self.damage)
+            description = '{0} suffers from {1} damage ({2} points of damage)'.format(self.target.name,  # noqa
+                                                                               self.damage_type,  # noqa
+                                                                               self.damage)  # noqa
 
         return description
+
 
 class DamageAddedEvent(Event):
     """
@@ -81,10 +84,11 @@ class DamageAddedEvent(Event):
         :param effect: effect being added
         :type effect: Damage
         """
-        super().__init__(event_type = 'damage started',
-                         level = target.level,
-                         location = target.location,
-                         affected_tiles = [])
+        super().__init__(event_type='damage started',
+                         level=target.level,
+                         location=target.location,
+                         affected_tiles=[])
+
         self.target = target
         self.effect = effect
 
@@ -98,12 +102,13 @@ class DamageAddedEvent(Event):
         :rtype: string
         """
         if point_of_view == self.target:
-            description = 'You got hit by {0} damage'.format(self.effect.damage_type)
+            description = 'You got hit by {0} damage'.format(self.effect.damage_type)  # noqa
         else:
             description = '{0} got hit by {1} damage'.format(self.target.name,
-                                                             self.effect.damage_type)
+                                                             self.effect.damage_type)  # noqa
 
         return description
+
 
 class DamageEndedEvent(Event):
     """
@@ -118,10 +123,11 @@ class DamageEndedEvent(Event):
         :param effect: effect being removed
         :type effect: Damage
         """
-        super(DamageEndedEvent, self).__init__(event_type = 'damage ended',
-                                               level = target.level,
-                                               location = target.location,
-                                               affected_tiles = [])
+        super().__init__(event_type='damage ended',
+                         level=target.level,
+                         location=target.location,
+                         affected_tiles=[])
+
         self.target = target
         self.effect = effect
 
@@ -135,9 +141,9 @@ class DamageEndedEvent(Event):
         :rtype: string
         """
         if point_of_view == self.target:
-            description = 'You are no longer suffering of {0} damage'.format(self.effect.damage_type)
+            description = 'You are no longer suffering of {0} damage'.format(self.effect.damage_type)  # noqa
         else:
-            description = '{0} is no longer suffering {1} damage'.format(self.target.name,
-                                                                         self.effect.damage_type)
+            description = '{0} is no longer suffering {1} damage'.format(self.target.name,  # noqa
+                                                                         self.effect.damage_type)  # noqa
 
         return description

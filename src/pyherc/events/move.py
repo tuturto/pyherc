@@ -22,6 +22,7 @@ Classes for move events
 """
 from pyherc.events.event import Event
 
+
 class MoveEvent(Event):
     """
     Event that can be used to relay information about moving
@@ -37,10 +38,10 @@ class MoveEvent(Event):
         :param affected_tiles: tiles affected by event
         :type affected_tiles: [(int, int)]
         """
-        super().__init__(event_type = 'move',
-                         level = mover.level,
-                         location = mover.location,
-                         affected_tiles = affected_tiles)
+        super().__init__(event_type='move',
+                         level=mover.level,
+                         location=mover.location,
+                         affected_tiles=affected_tiles)
 
         self.mover = mover
         self.old_location = old_location

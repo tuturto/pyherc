@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Classes for events signifying an error
 """
 from pyherc.events.event import Event
 
+
 class ErrorEvent(Event):
     """
     Event that can be used to relay information about error
@@ -36,10 +36,10 @@ class ErrorEvent(Event):
         :param character: character performing the erroneus action
         :type character: Character
         """
-        super(ErrorEvent, self).__init__(event_type = 'error',
-                                         level = character.level,
-                                         location = character.location,
-                                         affected_tiles = None)
+        super().__init__(event_type='error',
+                         level=character.level,
+                         location=character.location,
+                         affected_tiles=None)
 
         self.character = character
 
@@ -55,6 +55,6 @@ class ErrorEvent(Event):
         if point_of_view == self.character:
             description = 'World phases out around you for a second'
         else:
-            description = '{0} is unsure about existence of world'.format(self.character.name)
+            description = '{0} is unsure about existence of world'.format(self.character.name)  # noqa
 
         return description

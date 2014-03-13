@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Classes for heal events
 from pyherc.events.event import Event
 from pyherc.aspects import log_debug
 
+
 class HealTriggeredEvent(Event):
     """
     Event that can be used to relay information about heal being triggered
@@ -41,10 +41,11 @@ class HealTriggeredEvent(Event):
         :param healing: amount of healing
         :type healing: int
         """
-        super(HealTriggeredEvent, self).__init__(event_type = 'heal triggered',
-                                                 level = target.level,
-                                                 location = target.location,
-                                                 affected_tiles = [])
+        super().__init__(event_type='heal triggered',
+                         level=target.level,
+                         location=target.location,
+                         affected_tiles=[])
+
         self.target = target
         self.healing = healing
 
@@ -59,12 +60,13 @@ class HealTriggeredEvent(Event):
         :rtype: string
         """
         if point_of_view == self.target:
-            description = 'You feel better ({0} points healed)'.format(self.healing)
+            description = 'You feel better ({0} points healed)'.format(self.healing)  # noqa
         else:
-            description = '{0} feels better ({1} points healed)'.format(self.target.name,
-                                                                        self.healing)
+            description = '{0} feels better ({1} points healed)'.format(self.target.name,  # noqa
+                                                                        self.healing)  # noqa
 
         return description
+
 
 class HealAddedEvent(Event):
     """
@@ -83,10 +85,11 @@ class HealAddedEvent(Event):
         :param effect: healing effect added
         :type effect: Heal
         """
-        super(HealAddedEvent, self).__init__(event_type = 'heal started',
-                                             level = target.level,
-                                             location = target.location,
-                                             affected_tiles = [])
+        super().__init__(event_type='heal started',
+                         level=target.level,
+                         location=target.location,
+                         affected_tiles=[])
+
         self.target = target
         self.effect = effect
 
@@ -107,6 +110,7 @@ class HealAddedEvent(Event):
 
         return description
 
+
 class HealEndedEvent(Event):
     """
     Event to signal that healing is over
@@ -122,10 +126,11 @@ class HealEndedEvent(Event):
         :param effect: heal effect being removed
         :type effect: Heal
         """
-        super(HealEndedEvent, self).__init__(event_type = 'heal ended',
-                                             level = target.level,
-                                             location = target.location,
-                                             affected_tiles = [])
+        super().__init__(event_type='heal ended',
+                         level=target.level,
+                         location=target.location,
+                         affected_tiles=[])
+
         self.target = target
         self.effect = effect
 
@@ -142,6 +147,6 @@ class HealEndedEvent(Event):
         if point_of_view == self.target:
             description = 'You are no longer being healed'
         else:
-            description = '{0} is no longer being healed'.format(self.target.name)
+            description = '{0} is no longer being healed'.format(self.target.name)  # noqa
 
         return description

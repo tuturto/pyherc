@@ -22,6 +22,7 @@ Events for spirit points
 """
 from pyherc.events.event import Event
 
+
 class SpiritPointsChangedEvent(Event):
     """
     Event to raise when spirit points change
@@ -32,10 +33,10 @@ class SpiritPointsChangedEvent(Event):
         """
         Default constructor
         """
-        super().__init__(event_type = 'spirit points changed',
-                         level = character.level,
-                         location = character.location,
-                         affected_tiles = [])
+        super().__init__(event_type='spirit points changed',
+                         level=character.level,
+                         location=character.location,
+                         affected_tiles=[])
 
         self.character = character
         self.spirit = old_spirit

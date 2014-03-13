@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Classes for inventory events
 """
 from pyherc.events.event import Event
 
+
 class PickUpEvent(Event):
     """
     Event that can be used to relay information about item being picked up
@@ -38,10 +38,10 @@ class PickUpEvent(Event):
         :param item: item being picked up
         :type item: Item
         """
-        super(PickUpEvent, self).__init__(event_type = 'pick up',
-                                          level = character.level,
-                                          location = character.location,
-                                          affected_tiles = [])
+        super().__init__(event_type='pick up',
+                         level=character.level,
+                         location=character.location,
+                         affected_tiles=[])
 
         self.character = character
         self.item = item
@@ -63,6 +63,7 @@ class PickUpEvent(Event):
 
         return description
 
+
 class DropEvent(Event):
     """
     Event that can be used to relay information about item being dropped
@@ -78,10 +79,10 @@ class DropEvent(Event):
         :param item: item being dropped
         :type item: Item
         """
-        super(DropEvent, self).__init__(event_type = 'drop',
-                                        level = character.level,
-                                        location = character.location,
-                                        affected_tiles = [])
+        super().__init__(event_type='drop',
+                         level=character.level,
+                         location=character.location,
+                         affected_tiles=[])
 
         self.character = character
         self.item = item
@@ -103,6 +104,7 @@ class DropEvent(Event):
 
         return description
 
+
 class EquipEvent(Event):
     """
     Event that can be used to relay information about item being equiped
@@ -118,10 +120,10 @@ class EquipEvent(Event):
         :param item: item being equipped
         :type item: Item
         """
-        super(EquipEvent, self).__init__(event_type = 'equip',
-                                         level = character.level,
-                                         location = character.location,
-                                         affected_tiles = [])
+        super().__init__(event_type='equip',
+                         level=character.level,
+                         location=character.location,
+                         affected_tiles=[])
 
         self.character = character
         self.item = item
@@ -143,6 +145,7 @@ class EquipEvent(Event):
 
         return description
 
+
 class UnEquipEvent(Event):
     """
     Event that can be used to relay information about item being unequiped
@@ -158,10 +161,10 @@ class UnEquipEvent(Event):
         :param item: item being unequipped
         :type item: Item
         """
-        super(UnEquipEvent, self).__init__(event_type = 'unequip',
-                                           level = character.level,
-                                           location = character.location,
-                                           affected_tiles = [])
+        super().__init__(event_type='unequip',
+                         level=character.level,
+                         location=character.location,
+                         affected_tiles=[])
 
         self.character = character
         self.item = item
