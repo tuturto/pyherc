@@ -25,6 +25,7 @@ from pyherc.data.effects.effect import Effect
 from pyherc.events import DamageTriggeredEvent, DamageAddedEvent
 from pyherc.events import DamageEndedEvent
 
+
 class Damage(Effect):
     """
     Class representing effects of damage
@@ -36,12 +37,13 @@ class Damage(Effect):
         """
         Default constructor
         """
-        super().__init__(duration = duration,
-                         frequency = frequency,
-                         tick = tick,
-                         icon = icon,
-                         title = title,
-                         description = description)
+        super().__init__(duration=duration,
+                         frequency=frequency,
+                         tick=tick,
+                         icon=icon,
+                         title=title,
+                         description=description)
+
         self.damage = damage
         self.damage_type = damage_type
         self.target = target
@@ -54,9 +56,9 @@ class Damage(Effect):
         self.target.hit_points = self.target.hit_points - self.damage
 
         self.target.raise_event(
-                        DamageTriggeredEvent(target = self.target,
-                                             damage = self.damage,
-                                             damage_type = self.damage_type))
+            DamageTriggeredEvent(target=self.target,
+                                 damage=self.damage,
+                                 damage_type=self.damage_type))
 
         dying_rules.check_dying(self.target)
 
@@ -68,8 +70,8 @@ class Damage(Effect):
         :returns: event describing adding of this effect
         :rtype: Event
         """
-        return DamageAddedEvent(target = self.target,
-                                effect = self)
+        return DamageAddedEvent(target=self.target,
+                                effect=self)
 
     @log_debug
     def get_removal_event(self):
@@ -79,6 +81,5 @@ class Damage(Effect):
         :return: event describing removal of this event
         :rtype: Event
         """
-        return DamageEndedEvent(target = self.target,
-                                effect = self)
-
+        return DamageEndedEvent(target=self.target,
+                                effect=self)

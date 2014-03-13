@@ -25,6 +25,7 @@ from pyherc.events import PoisonTriggeredEvent, PoisonAddedEvent
 from pyherc.events import PoisonEndedEvent
 from pyherc.data.effects.effect import Effect
 
+
 class Poison(Effect):
     """
     Class representing effects of poison
@@ -35,12 +36,13 @@ class Poison(Effect):
         """
         Default constructor
         """
-        super(Poison, self).__init__(duration = duration,
-                                     frequency = frequency,
-                                     tick = tick,
-                                     icon = icon,
-                                     title = title,
-                                     description = description)
+        super().__init__(duration=duration,
+                         frequency=frequency,
+                         tick=tick,
+                         icon=icon,
+                         title=title,
+                         description=description)
+
         self.damage = damage
         self.target = target
         self.effect_name = 'poison'
@@ -52,9 +54,8 @@ class Poison(Effect):
         """
         self.target.hit_points = self.target.hit_points - self.damage
 
-        self.target.raise_event(
-                        PoisonTriggeredEvent(target = self.target,
-                                             damage = self.damage))
+        self.target.raise_event(PoisonTriggeredEvent(target=self.target,
+                                                     damage=self.damage))
 
         dying_rules.check_dying(self.target)
 
@@ -66,8 +67,8 @@ class Poison(Effect):
         :returns: event describing adding of this effect
         :rtype: Event
         """
-        return PoisonAddedEvent(target = self.target,
-                                effect = self)
+        return PoisonAddedEvent(target=self.target,
+                                effect=self)
 
     @log_debug
     def get_removal_event(self):
@@ -77,5 +78,5 @@ class Poison(Effect):
         :return: event describing removal of this event
         :rtype: Event
         """
-        return PoisonEndedEvent(target = self.target,
-                                effect = self)
+        return PoisonEndedEvent(target=self.target,
+                                effect=self)

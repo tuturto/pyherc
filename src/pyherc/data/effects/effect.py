@@ -23,6 +23,7 @@ Module for baseclass of every Effect
 from pyherc.aspects import log_debug, log_info
 from pyherc.events import Event
 
+
 class Effect():
     """
     Class representing effects
@@ -40,7 +41,7 @@ class Effect():
         :param tick: initial value for timer
         :type tick: int
         """
-        super(Effect, self).__init__()
+        super().__init__()
         self.duration = duration
         self.frequency = frequency
         self.tick = tick
@@ -72,7 +73,7 @@ class Effect():
         """
         Do house keeping after effect has been triggered
         """
-        if self.duration != None:
+        if self.duration is not None:
             self.tick = self.frequency
             self.duration = self.duration - self.frequency
 
@@ -84,10 +85,10 @@ class Effect():
         :returns: event describing adding of this effect
         :rtype: Event
         """
-        return Event(event_type = 'add event',
-                     level = None,
-                     location = None,
-                     affected_tiles = [])
+        return Event(event_type='add event',
+                     level=None,
+                     location=None,
+                     affected_tiles=[])
 
     @log_debug
     def get_removal_event(self):
@@ -97,10 +98,11 @@ class Effect():
         :return: event describing removal of this event
         :rtype: Event
         """
-        return Event(event_type = 'remove event',
-                     level = None,
-                     location = None,
-                     affected_tiles = [])
+        return Event(event_type='remove event',
+                     level=None,
+                     location=None,
+                     affected_tiles=[])
+
 
 class EffectHandle():
     """
@@ -130,5 +132,5 @@ class EffectHandle():
         """
         String representation of this object
         """
-        return "trigger: {0}, effect: {1}, parameters: {2}, charges: {3}".format(
+        return "trigger: {0}, effect: {1}, parameters: {2}, charges: {3}".format(  # noqa
             self.trigger, self.effect, self.parameters, self.charges)

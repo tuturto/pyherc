@@ -24,6 +24,7 @@ from pyherc.aspects import log_debug
 from pyherc.data.effects.effect import Effect
 from pyherc.events import HealTriggeredEvent, HealAddedEvent, HealEndedEvent
 
+
 class Heal(Effect):
     """
     Class representing effects of healing
@@ -34,12 +35,13 @@ class Heal(Effect):
         """
         Default constructor
         """
-        super(Heal, self).__init__(duration = duration,
-                                   frequency = frequency,
-                                   tick = tick,
-                                   icon = icon,
-                                   title = title,
-                                   description = description)
+        super().__init__(duration=duration,
+                         frequency=frequency,
+                         tick=tick,
+                         icon=icon,
+                         title=title,
+                         description=description)
+
         self.healing = healing
         self.target = target
         self.effect_name = 'heal'
@@ -54,9 +56,8 @@ class Heal(Effect):
         if self.target.hit_points > self.target.max_hp:
             self.target.hit_points = self.target.max_hp
 
-        self.target.raise_event(
-                        HealTriggeredEvent(target = self.target,
-                                           healing = self.healing))
+        self.target.raise_event(HealTriggeredEvent(target=self.target,
+                                                   healing=self.healing))
 
     @log_debug
     def get_add_event(self):
@@ -66,8 +67,8 @@ class Heal(Effect):
         :returns: event describing adding of this effect
         :rtype: Event
         """
-        return HealAddedEvent(target = self.target,
-                              effect = self)
+        return HealAddedEvent(target=self.target,
+                              effect=self)
 
     @log_debug
     def get_removal_event(self):
@@ -77,5 +78,5 @@ class Heal(Effect):
         :return: event describing removal of this event
         :rtype: Event
         """
-        return HealEndedEvent(target = self.target,
-                              effect = self)
+        return HealEndedEvent(target=self.target,
+                              effect=self)

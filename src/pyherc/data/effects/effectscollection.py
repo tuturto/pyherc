@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Module for effects collection
 """
 import collections
 
+
 class EffectsCollection():
     """
     Class for representing collection of effects
@@ -33,7 +33,7 @@ class EffectsCollection():
         """
         Default constructor
         """
-        super(EffectsCollection, self).__init__()
+        super().__init__()
         self.handles = {}
         self.effects = []
 
@@ -44,7 +44,7 @@ class EffectsCollection():
         :param handle: effect handle to add
         :type handle: EffectHandle
         """
-        assert handle != None
+        assert handle is not None
 
         handles = self.handles
         trigger = handle.trigger
@@ -53,7 +53,7 @@ class EffectsCollection():
             handles[trigger] = []
         handles[trigger].append(handle)
 
-    def get_effect_handles(self, trigger = None):
+    def get_effect_handles(self, trigger=None):
         """
         Get effect handles
 
@@ -83,7 +83,7 @@ class EffectsCollection():
         :param handle: handle to remove
         :type handle: EffectHandle
         """
-        assert handle != None
+        assert handle is not None
 
         for key, value in self.handles.items():
             if handle in value:
@@ -105,7 +105,7 @@ class EffectsCollection():
         :param effect: effect to add
         :type effect: Effect
         """
-        assert effect != None
+        assert effect is not None
 
         self.effects.append(effect)
 
@@ -126,15 +126,15 @@ class EffectsCollection():
         :rtype: [Effect]
         """
         return [x for x in self.effects
-                        if x.duration != None
-                        and x.duration <= 0]
+                if x.duration is not None
+                and x.duration <= 0]
 
     def remove_expired_effects(self):
         """
         Remove expired effects from collection
         """
         self.effects = [x for x in self.effects
-                                if x.duration > 0]
+                        if x.duration > 0]
 
     def get_charges_left(self):
         """
@@ -157,7 +157,7 @@ class EffectsCollection():
         """
         charges = self.get_charges_left()
 
-        if charges != None:
+        if charges is not None:
             if isinstance(charges, collections.Sequence):
                 if len(charges) > 0:
                     return max(charges)
@@ -177,7 +177,7 @@ class EffectsCollection():
         """
         charges = self.get_charges_left()
 
-        if charges != None:
+        if charges is not None:
             return min(charges)
         else:
             return None

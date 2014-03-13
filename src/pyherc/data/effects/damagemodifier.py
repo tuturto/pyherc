@@ -23,6 +23,7 @@ Module for damage modifiers
 from pyherc.aspects import log_debug
 from pyherc.data.effects.effect import Effect
 
+
 class DamageModifier(Effect):
     """
     Class representing damage modifier
@@ -35,12 +36,13 @@ class DamageModifier(Effect):
         """
         Default constructor
         """
-        super(DamageModifier, self).__init__(duration = duration,
-                                             frequency = frequency,
-                                             tick = tick,
-                                             icon = icon,
-                                             title = title,
-                                             description = description)
+        super().__init__(duration=duration,
+                         frequency=frequency,
+                         tick=tick,
+                         icon=icon,
+                         title=title,
+                         description=description)
+
         self.modifier = modifier
         self.damage_type = damage_type
         self.effect_name = 'damage modifier'
