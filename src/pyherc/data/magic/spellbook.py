@@ -23,6 +23,7 @@ Module for spell book related classes
 
 from pyherc.aspects import log_debug, log_info
 
+
 class SpellBook():
     """
     List of known spells
@@ -101,10 +102,11 @@ class SpellBook():
 
         for domain, level in self.domains.items():
             known_spells.extend([spell for spell in self.spells
-                                    if spell.level <= level
-                                    and spell.domain == domain])
+                                 if spell.level <= level
+                                 and spell.domain == domain])
 
         return known_spells
+
 
 class SpellEntry():
     """

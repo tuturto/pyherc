@@ -17,9 +17,11 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+# flake8: noqa
 """
 Module for magical spells
 """
+
 
 from .spell import Spell
 from .spellbook import SpellBook, SpellEntry

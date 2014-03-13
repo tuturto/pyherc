@@ -24,13 +24,14 @@ Module for spell objects
 from pyherc.data.effects import EffectsCollection
 from pyherc.aspects import log_debug, log_info
 
+
 class Spell():
     """
     Class to represent spells
-    
+
     .. versionadded:: 0.9
     """
-    
+
     @log_debug
     def __init__(self):
         """
@@ -51,7 +52,7 @@ class Spell():
         self.effects.add_effect_handle(handle)
 
     @log_debug
-    def get_effect_handles(self, trigger = None):
+    def get_effect_handles(self, trigger=None):
         """
         Get effect handles
 
@@ -91,9 +92,8 @@ class Spell():
 
         for target in targets:
             for handle in handles:
-                effects.append(effects_factory.create_effect(
-                                                key = handle.effect,
-                                                target = target))
+                effects.append(effects_factory.create_effect(key=handle.effect,
+                                                             target=target))
 
         for effect in effects:
             if not effect.duration or effect.duration <= 0:
