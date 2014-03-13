@@ -29,6 +29,7 @@ from pyherc.data.inventory import Inventory
 from pyherc.data.magic.spellbook import SpellBook
 from pyherc.data.effects.effectscollection import EffectsCollection
 
+
 @decorator
 def guarded_action(wrapped_function, *args, **kwargs):
     """
@@ -40,6 +41,7 @@ def guarded_action(wrapped_function, *args, **kwargs):
         self = args[0]
         self.tick = 10
         self.raise_event(ErrorEvent(self))
+
 
 class Character():
     """
@@ -83,7 +85,7 @@ class Character():
         self.size = 'medium'
         self.attack = None
 
-        self.__active_effects = [] # active effects
+        self.__active_effects = []
         self.artificial_intelligence = None
         self.__effects_collection = EffectsCollection()
         self.__spellbook = SpellBook()
@@ -186,9 +188,9 @@ class Character():
         self.__hit_points = hit_points
 
         self.raise_event(
-            HitPointsChangedEvent(character = self,
-                                  old_hit_points = old_hit_points,
-                                  new_hit_points = new_hit_points))
+            HitPointsChangedEvent(character=self,
+                                  old_hit_points=old_hit_points,
+                                  new_hit_points=new_hit_points))
 
     def __get_spirit(self):
         """
@@ -203,9 +205,9 @@ class Character():
         self.__spirit = spirit
 
         self.raise_event(
-            SpiritPointsChangedEvent(character = self,
-                                     old_spirit = old_spirit,
-                                     new_spirit = new_spirit))
+            SpiritPointsChangedEvent(character=self,
+                                     old_spirit=old_spirit,
+                                     new_spirit=new_spirit))
 
     def __get_body(self):
         """
@@ -275,7 +277,7 @@ class Character():
         :param item: item to mark as identified
         :type item: Item
         """
-        assert (item != None)
+        assert item is not None
         self.item_memory[item.name] = item.name
 
     @log_debug
@@ -288,14 +290,14 @@ class Character():
         :returns: True if proficient, otherwise False
         :rtype: Boolean
         """
-        assert weapon != None
+        assert weapon is not None
 
-        if weapon.weapon_data == None:
+        if weapon.weapon_data is None:
             return True
 
         if True in [(x.name == 'weapon proficiency'
                     and x.weapon_type == weapon.weapon_data.weapon_type)
-                    and (x.weapon_name == None
+                    and (x.weapon_name is None
                          or x.weapon_name == weapon.weapon_data.name)
                     for x in self.feats]:
             return True
@@ -348,7 +350,7 @@ class Character():
         """
         action = action_factory.get_action(action_parameters)
 
-        assert action != None
+        assert action is not None
 
         return action
 
@@ -376,7 +378,7 @@ class Character():
         self.__effects_collection.add_effect_handle(effect)
 
     @log_debug
-    def get_effect_handles(self, trigger = None):
+    def get_effect_handles(self, trigger=None):
         """
         Get effect handles
 
@@ -413,7 +415,7 @@ class Character():
         .. note:: Multiples of same type of effect are not added
         .. versionadded:: 0.4
         """
-        if effect.multiple_allowed == False:
+        if not effect.multiple_allowed:
             if not self.__effects_collection.has_effect(effect):
                 self.__effects_collection.add_effect(effect)
                 self.raise_event(effect.get_add_event())
@@ -459,7 +461,7 @@ class Character():
         self.tick = self.tick + (self.speed * cost)
 
     @log_debug
-    def add_domain_level(self, domain, level = None):
+    def add_domain_level(self, domain, level=None):
         """
         Add level to a spell domain
 
@@ -545,7 +547,7 @@ class Character():
             p.text('name: {0}'.format(self.name))
             p.breakable()
             p.text('hitpoints: {0}/{1}'.format(self.__hit_points,
-                                                    self.__max_hp))
+                                               self.__max_hp))
             p.breakable()
             p.text('body: {0}'.format(self.__body))
             p.breakable()
@@ -567,22 +569,27 @@ class Character():
     finesse = property(__get_finesse, __set_finesse)
     mind = property(__get_mind, __set_mind)
 
+
 class Feat():
     """
     Represents a feat that a character can have
     """
     @log_debug
-    def __init__(self, name = None, target = None):
+    def __init__(self, name=None, target=None):
+
+        super().__init__()
         self.name = name
         self.target = target
+
 
 class WeaponProficiency(Feat):
     """
     Represents weapon proficiency feats (proficiency, focus, etc.)
     """
     @log_debug
-    def __init__(self, weapon_type = 'simple', weapon_name = None):
-        Feat.__init__(self, weapon_type, weapon_name)
+    def __init__(self, weapon_type='simple', weapon_name=None):
+
+        super().__init__(weapon_type, weapon_name)
 
         self.name = 'weapon proficiency'
         self.weapon_type = weapon_type

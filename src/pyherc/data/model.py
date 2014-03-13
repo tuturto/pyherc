@@ -26,6 +26,7 @@ from pyherc.aspects import log_debug
 ESCAPED_DUNGEON = 1
 DIED_IN_DUNGEON = 2
 
+
 class Model():
     """
     Represents playing world
@@ -35,6 +36,8 @@ class Model():
         """
         Default constructor
         """
+        super().__init__()
+
         self.dungeon = None
         self.player = None
         self.config = None
@@ -49,7 +52,7 @@ class Model():
 
         :param listener: Listener to register
         """
-        assert listener != None
+        assert listener is not None
         self.__event_listeners.append(listener)
 
     @log_debug
@@ -69,7 +72,7 @@ class Model():
         """
         level = event.level
 
-        if level != None:
+        if level is not None:
             for creature in level.creatures:
                 creature.receive_event(event)
 
@@ -87,7 +90,7 @@ class Model():
         """
         level = self.player.level
 
-        if level == None:
+        if level is None:
             return None
 
         creatures = level.creatures
@@ -103,22 +106,25 @@ class Model():
             for creature in creatures:
                 creature.tick = creature.tick - 1
                 for effect in creature.get_effects():
-                    if effect.tick != None:
+                    if effect.tick is not None:
                         effect.tick = effect.tick - 1
                         if effect.tick <= 0:
                             effect.trigger(rules_engine.dying_rules)
                 creature.remove_expired_effects()
+
 
 class Damage():
     """
     Damage done in combat
     """
     @log_debug
-    def __init__(self, amount = 0, damage_type = 'bludgeoning',
-                        magic_bonus = 0):
+    def __init__(self, amount=0, damage_type='bludgeoning', magic_bonus=0):
+        super().__init__()
+
         self.amount = amount
         self.damage_type = damage_type
         self.magic_bonus = magic_bonus
+
 
 class MimicData():
     """
@@ -126,6 +132,8 @@ class MimicData():
     """
     @log_debug
     def __init__(self, character):
+        super().__init__()
+
         self.fov_matrix = []
         self.character = character
 

@@ -24,15 +24,17 @@ Module containing classes to represent Level
 import random
 from pyherc.aspects import log_debug
 
+
 class Level():
     """
     Represents a level
     """
     @log_debug
-    def __init__(self, size = (0, 0), floor_type = None, wall_type = None,
-                 empty_floor = 0, empty_wall = 0):
+    def __init__(self, size=(0, 0), floor_type=None, wall_type=None,
+                 empty_floor=0, empty_wall=0):
         """
-        Initialises a level of certain size and fill floor and walls with given types
+        Initialises a level of certain size and fills floor and walls with
+        given types
 
         :param size: optional size of the level
         :type size: (integer, integer)
@@ -120,7 +122,7 @@ class Level():
         :rtype: int
         """
         if loc_x < 0 or loc_y < 0:
-            return self.empty_wall #?
+            return self.empty_wall
 
         if loc_x >= len(self.floor) or loc_y >= len(self.floor[0]):
             return self.empty_wall
@@ -162,10 +164,10 @@ class Level():
         .. versionadded:: 0.10
         """
         if loc_x < 0 or loc_y < 0:
-            return None #?
+            return self.empty_floor
 
         if loc_x >= len(self.floor) or loc_y >= len(self.floor[0]):
-            return None #?
+            return self.empty_floor
 
         return self.floor[loc_x][loc_y]
 
@@ -200,8 +202,8 @@ class Level():
         :param location: location where to put the item
         :type location: (integer, integer)
         """
-        assert(not item == None)
-        assert(not location == None)
+        assert item is not None
+        assert location is not None
 
         self.items.append(item)
         item.location = location
@@ -216,7 +218,7 @@ class Level():
         :returns: items at given location
         :rtype: [Item]
         """
-        assert(location != None)
+        assert location is not None
         items = []
         for item in self.items:
             if item.location == location:
@@ -224,7 +226,7 @@ class Level():
         return items
 
     @log_debug
-    def add_portal(self, portal, location, other_end = None):
+    def add_portal(self, portal, location, other_end=None):
         """
         Adds precreated portal on level at given location
         If secondary portal is specified, link them together
@@ -236,8 +238,8 @@ class Level():
         :param other_end: optional other end of the portal
         :type other_end: Portal
         """
-        assert(portal != None)
-        assert(location != None)
+        assert portal is not None
+        assert location is not None
 
         portal.level = self
         portal.location = location
@@ -247,15 +249,15 @@ class Level():
 
         self.portals.append(portal)
 
-        if other_end != None:
-            assert(other_end.icon != None or portal.icon != None)
+        if other_end is not None:
+            assert(other_end.icon is not None or portal.icon is not None)
 
             portal.set_other_end(other_end)
             other_end.set_other_end(portal)
 
             #TODO: remove link
-            if portal.icon != None:
-                if other_end.icon == None:
+            if portal.icon is not None:
+                if other_end.icon is None:
                     if portal.icon == 201:
                         other_end.icon = 200
                     else:
@@ -282,7 +284,7 @@ class Level():
         return None
 
     @log_debug
-    def add_creature(self, creature, location = None):
+    def add_creature(self, creature, location=None):
         """
         Add a creature to level
 
@@ -291,11 +293,11 @@ class Level():
         :param location: optional location for the creature
         :type location: (integer, integer)
         """
-        assert(creature != None)
+        assert creature is not None
 
         self.creatures.append(creature)
         creature.level = self
-        if location != None:
+        if location is not None:
             creature.location = location
 
     @log_debug
@@ -306,8 +308,8 @@ class Level():
         :param creature: creature to remove
         :type creature: Creature
         """
-        assert(creature != None)
-        assert(creature in self.creatures)
+        assert creature is not None
+        assert creature in self.creatures
 
         self.creatures.remove(creature)
         creature.level = None
@@ -322,7 +324,7 @@ class Level():
         :returns: creature if found
         :rtype: Creature
         """
-        assert(location != None)
+        assert location is not None
         for creature in self.creatures:
             if creature.location == location:
                 return creature
@@ -339,9 +341,11 @@ class Level():
         """
         width = len(self.floor)
         height = len(self.floor[0])
-        location = (random.randint(2, width - 1), random.randint(2, height - 1))
+        location = (random.randint(2, width - 1),
+                    random.randint(2, height - 1))
         while self.walls[location[0]][location[1]] != self.empty_wall:
-            location = (random.randint(2, width - 1), random.randint(2, height - 1))
+            location = (random.randint(2, width - 1),
+                        random.randint(2, height - 1))
         return location
 
     def get_square(self, x_coordinate, y_coordinate):
@@ -397,7 +401,8 @@ class Level():
         if x_coordinate < 0 or y_coordinate < 0:
             return True
 
-        if x_coordinate >= len(self.walls) or y_coordinate >= len(self.walls[0]):
+        if (x_coordinate >= len(self.walls) or
+                y_coordinate >= len(self.walls[0])):
             return True
 
         if self.walls[x_coordinate][y_coordinate] == self.empty_wall:
@@ -454,7 +459,7 @@ class Level():
         for loc_x in range(len(self.__location_type)):
             for loc_y in range(len(self.__location_type[0])):
                 if (self.__location_type[loc_x][loc_y] == location_type or
-                        self.__location_type[loc_x][loc_y] != None
+                        self.__location_type[loc_x][loc_y] is not None
                         and location_type == 'any'):
                     rooms.append((loc_x, loc_y))
 
@@ -476,9 +481,9 @@ class Level():
                 portal = self.get_portal_at((loc_x, loc_y))
                 items = self.get_items_at((loc_x, loc_y))
 
-                if creature != None:
+                if creature is not None:
                     level_string = level_string + "X"
-                elif portal != None:
+                elif portal is not None:
                     level_string = level_string + "<"
                 elif len(items) > 0:
                     level_string = level_string + "*"

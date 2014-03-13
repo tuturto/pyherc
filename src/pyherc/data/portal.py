@@ -23,6 +23,7 @@ Module containing classes to represent Portals
 
 from pyherc.aspects import log_debug
 
+
 class Portal():
     """
     Portal linking two levels together
@@ -37,7 +38,7 @@ class Portal():
         :param level_generator_name: name of level generator for proxy portals
         :type level_generator_name: String
         """
-        super(Portal, self).__init__()
+        super().__init__()
         self.level = None
         self.location = ()
         self.__icons = icons
@@ -57,9 +58,9 @@ class Portal():
         :returns: other end of the portal
         :rtype: Portal
         """
-        if self.__other_end == None:
+        if self.__other_end is None:
             level_generator = level_generator_factory.get_generator(
-                                                    self.level_generator_name)
+                self.level_generator_name)
             level_generator.generate_level(self)
 
         return self.__other_end
@@ -92,7 +93,7 @@ class Portal():
         :param icon: icon to use for the portal
         :type icon: integer
         """
-        if self.__icons == None:
+        if self.__icons is None:
             self.__icons = (None, None)
         self.__icons = (icon, self.__icons[1])
 

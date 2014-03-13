@@ -24,8 +24,9 @@ from pyherc.aspects import log_debug
 from math import sqrt
 from functools import partial
 
+
 @log_debug
-def get_target_in_direction(level, location, direction, attack_range = 100):
+def get_target_in_direction(level, location, direction, attack_range=100):
     """
     Get target of the attack
 
@@ -39,9 +40,7 @@ def get_target_in_direction(level, location, direction, attack_range = 100):
     :rtype: Character
     """
     target = None
-    target_type = 'void'
     target_location = location
-    range_covered = 1
     target_data = None
 
     if direction == 9:
@@ -54,7 +53,7 @@ def get_target_in_direction(level, location, direction, attack_range = 100):
                 (0, -1), (1, -1), (1, 0), (1, 1),
                 (0, 1), (-1, 1), (-1, 0), (-1, -1)]
 
-    while (target == None
+    while (target is None
            and distance_between(location, target_location) <= attack_range):
         target_location = tuple([x for x in
                                  map(sum,
@@ -84,7 +83,8 @@ def get_target_in_direction(level, location, direction, attack_range = 100):
     return target_data
 
 get_adjacent_target_in_direction = partial(get_target_in_direction,
-                                           attack_range = 1.5)
+                                           attack_range=1.5)
+
 
 @log_debug
 def distance_between(location1, location2):
@@ -95,6 +95,7 @@ def distance_between(location1, location2):
     y_difference = location2[1] - location1[1]
 
     return sqrt(x_difference**2 + y_difference**2)
+
 
 def find_direction(start, end):
     """
@@ -110,6 +111,7 @@ def find_direction(start, end):
             return 3
         else:
             return 7
+
 
 class TargetData():
     """

@@ -26,6 +26,7 @@ Classes:
 """
 from pyherc.aspects import log_debug
 
+
 class Item():
     """
     Represents item
@@ -63,17 +64,17 @@ class Item():
         return self.name
 
     @log_debug
-    def get_name(self, character, decorate = False):
+    def get_name(self, character, decorate=False):
         """
         Get name of the item
         Name can be appearance or given name
 
         :param character: character handling the item
         :type character: Character
-        :param decorate: should name be decorated with status info, default False
+        :param decorate: should name be decorated with status info
         :type decorate: Boolean
         """
-        assert character != None
+        assert character is not None
 
         if self.appearance != '':
             if self.name in character.item_memory:
@@ -83,8 +84,8 @@ class Item():
         else:
             name = self.name
 
-        if decorate == True:
-            if self.ammunition_data != None:
+        if decorate:
+            if self.ammunition_data is not None:
                 name = name + ' ({0})'.format(self.ammunition_data.count)
             if character.inventory.weapon == self:
                 name = name + ' (weapon in hand)'
@@ -108,7 +109,7 @@ class Item():
         self.__effects_collection.add_effect_handle(handle)
 
     @log_debug
-    def get_effect_handles(self, trigger = None):
+    def get_effect_handles(self, trigger=None):
         """
         Retrieves effects handles the item has
 
@@ -238,14 +239,15 @@ class Item():
             p.text('location: {0}'.format(self.location))
             p.breakable()
 
+
 class WeaponData():
     """
     Class representing weapon data of items
     """
     @log_debug
-    def __init__(self, damage = None, critical_range = None,
-                 critical_damage = None, weapon_type = None,
-                 ammunition_type = None):
+    def __init__(self, damage=None, critical_range=None,
+                 critical_damage=None, weapon_type=None,
+                 ammunition_type=None):
         """
         Default constructor
 
@@ -259,7 +261,9 @@ class WeaponData():
         :type weapon_type: string
         """
 
-        if damage == None:
+        super().__init__()
+
+        if damage is None:
             self.damage = []
         else:
             self.damage = damage
@@ -269,6 +273,7 @@ class WeaponData():
         self.weapon_type = weapon_type
         self.ammunition_type = ammunition_type
 
+
 class ArmourData():
     """
     Represents data of armours
@@ -276,7 +281,7 @@ class ArmourData():
     .. versionadded:: 0.8
     """
     @log_debug
-    def __init__(self, damage_reduction = None, speed_modifier = None):
+    def __init__(self, damage_reduction=None, speed_modifier=None):
         """
         Default constructor
 
@@ -290,6 +295,7 @@ class ArmourData():
         self.damage_reduction = damage_reduction
         self.speed_modifier = speed_modifier
 
+
 class AmmunitionData():
     """
     Represents data of ammunition
@@ -297,14 +303,14 @@ class AmmunitionData():
     .. versionadded:: 0.8
     """
     @log_debug
-    def __init__(self, damage = None, critical_range = None,
-                 critical_damage = None, ammunition_type = None, count = 1):
+    def __init__(self, damage=None, critical_range=None,
+                 critical_damage=None, ammunition_type=None, count=1):
         """
         Default constructor
         """
         super().__init__()
 
-        if damage == None:
+        if damage is None:
             self.damage = []
         else:
             self.damage = damage

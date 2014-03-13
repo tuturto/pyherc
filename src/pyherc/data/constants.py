@@ -21,6 +21,7 @@
 Module for common constants
 """
 
+
 class Duration():
     """
     Constants for time durations
@@ -33,6 +34,7 @@ class Duration():
     slow = 8
     very_slow = 16
 
+
 class SpecialTime():
     """
     Constants for special occasions
@@ -40,6 +42,7 @@ class SpecialTime():
     .. versionadded:: 0.10
     """
     christmas = 1
+
 
 class Direction():
     """

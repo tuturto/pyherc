@@ -23,6 +23,7 @@ Module for Inventory related classes
 
 from pyherc.aspects import log_debug
 
+
 class Inventory():
     """
     Represents an inventory of items
@@ -32,7 +33,7 @@ class Inventory():
         """
         Default constructor
         """
-        super(Inventory, self).__init__()
+        super().__init__()
 
         self.__items = []
 
