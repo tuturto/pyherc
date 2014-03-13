@@ -45,24 +45,24 @@ arguments = docopt(__doc__, version='Herculeum ' + PYHERC_VERSION)
 set_logger(arguments['--log-level'],
            arguments['--silent'])
 
-import sys
-import os.path
-import hy
+import hy  # noqa
 
 from herculeum.application import Application
 
 try:
     from herculeum.ui.gui import QtUserInterface, QtControlsConfiguration
     from herculeum.ui.gui import QtSurfaceManager
-    import herculeum.ui.gui.resources
+    import herculeum.ui.gui.resources  # noqa
 except:
     print('Qt user interface is not available')
 
 try:
-    from herculeum.ui.text import CursesUserInterface, CursesControlsConfiguration
+    from herculeum.ui.text import CursesUserInterface
+    from herculeum.ui.text import CursesControlsConfiguration
     from herculeum.ui.text import CursesSurfaceManager
 except:
     print('Curses user interface is not available')
+
 
 def process_command_line(arguments):
     """
@@ -84,18 +84,18 @@ if __name__ == "__main__":
     app = Application()
 
     if arguments['--license']:
-        print('#   Herculeum is free software: you can redistribute it and/or modify')
-        print('#   it under the terms of the GNU General Public License as published by')
-        print('#   the Free Software Foundation, either version 3 of the License, or')
-        print('#   (at your option) any later version.')
-        print('#')
-        print('#   Herculeum is distributed in the hope that it will be useful,')
-        print('#   but WITHOUT ANY WARRANTY; without even the implied warranty of')
-        print('#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the')
-        print('#   GNU General Public License for more details.')
-        print('#')
-        print('#   You should have received a copy of the GNU General Public License')
-        print('#   along with Herculeum.  If not, see <http://www.gnu.org/licenses/>.')
+        print('Herculeum is free software: you can redistribute it and/or modify')  # noqa
+        print('it under the terms of the GNU General Public License as published by')  # noqa
+        print('the Free Software Foundation, either version 3 of the License, or')  # noqa
+        print('(at your option) any later version.')
+        print('')
+        print('Herculeum is distributed in the hope that it will be useful,')
+        print('but WITHOUT ANY WARRANTY; without even the implied warranty of')
+        print('MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the')
+        print('GNU General Public License for more details.')
+        print('')
+        print('You should have received a copy of the GNU General Public License')  # noqa
+        print('along with Herculeum.  If not, see <http://www.gnu.org/licenses/>.')  # noqa
     else:
 
         log_level, silent, ui_mode = process_command_line(arguments)

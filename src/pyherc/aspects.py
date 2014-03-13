@@ -20,8 +20,9 @@
 """
 Module for aspects
 """
-import logging, sys
+import logging
 from decorator import decorator
+
 
 def create_logger(log_level):
 
@@ -39,7 +40,7 @@ def create_logger(log_level):
                                  str(kwargs)])
 
         logger.log(log_level, call_message)
-    
+
         try:
             result = wrapped_function(*args, **kwargs)
 
@@ -50,7 +51,7 @@ def create_logger(log_level):
             logger.log(log_level, result_message)
 
             return result
-        except Exception as err:
+        except Exception:
             logger.exception('{0} has thrown an exception'.format(logger_name))
             raise
 
@@ -66,11 +67,13 @@ log_error = create_logger(logging.ERROR)
 
 log_critical = create_logger(logging.CRITICAL)
 
+
 def no_logger(wrapped_function):
     """
     Decorator to perform no logging at all
-    """    
+    """
     return wrapped_function
+
 
 def set_logger(log_level, silent):
     """
@@ -81,7 +84,7 @@ def set_logger(log_level, silent):
     global log_warning
     global log_error
     global log_critical
-    
+
     if log_level == 'debug':
         pass
     elif log_level == 'info':
