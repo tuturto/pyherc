@@ -17,6 +17,8 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+# flake8: noqa
+
 from pyherc.data.effects import DamageModifier
 from pyherc.data.constants import Direction, Duration
 from pyherc.test.cutesy import Adventurer, Wizard, Goblin
@@ -24,10 +26,11 @@ from pyherc.test.cutesy import take_random_step
 from pyherc.test.matchers import is_dead
 from pyherc.ai.pathfinding import a_star
 from pyherc.data.geometry import find_direction
-from hamcrest import assert_that, is_not, greater_than #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_not, greater_than
 from pyherc.test.bdd.features.helpers import default_context, observed
 from pyherc.test.bdd.features.helpers import with_action_factory
-from pyherc.test.bdd.features.helpers import get_character, get_location, get_item
+from pyherc.test.bdd.features.helpers import get_character
+from pyherc.test.bdd.features.helpers import get_location, get_item
 
 @given('{character_name} is Adventurer')
 @observed
@@ -77,14 +80,14 @@ def impl(context, character_name):
 def impl(context, character_name, damage_type):
     character = get_character(context, character_name)
 
-    modifier = DamageModifier(modifier = 2,
-                              damage_type = damage_type,
-                              duration = None,
-                              frequency = None,
-                              tick = None,
-                              icon = 101,
-                              title = 'weak against {0}'.format(damage_type),
-                              description = '{0} causes extra damage'.format(damage_type))
+    modifier = DamageModifier(modifier=2,
+                              damage_type=damage_type,
+                              duration=None,
+                              frequency=None,
+                              tick=None,
+                              icon=101,
+                              title='weak against {0}'.format(damage_type),
+                              description='{0} causes extra damage'.format(damage_type))
     character.add_effect(modifier)
 
 @given('{character_name} is Player')

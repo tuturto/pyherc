@@ -17,12 +17,14 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+# flake8: noqa
+
 from pyherc.test.cutesy import Level, place, middle_of
 from pyherc.data import Portal
 from pyherc.test.bdd.features.helpers import default_context
 from pyherc.test.bdd.features.helpers import get_character, get_location
 from pyherc.test.bdd.features.helpers import get_entity
-from hamcrest import assert_that, is_in, is_not #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_in, is_not
 
 @given('{character_name} is standing in {location_name}')
 @default_context
@@ -74,8 +76,8 @@ def impl(context, character_name, place_name):
 @given('{portal_name} is Portal')
 @default_context
 def impl(context, portal_name):
-    portal = Portal(icons = [100, 101],
-                    level_generator_name = 'empty')
+    portal = Portal(icons=[100, 101],
+                    level_generator_name='empty')
     portal.name = portal_name
 
     context.places.append(portal)

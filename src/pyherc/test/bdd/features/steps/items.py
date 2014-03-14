@@ -17,6 +17,8 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+# flake8: noqa
+
 from behave import step_matcher
 from pyherc.test.cutesy import make, drop
 from pyherc.test.bdd.features.helpers import default_context, armour_list

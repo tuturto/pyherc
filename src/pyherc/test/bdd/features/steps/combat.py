@@ -17,10 +17,12 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+# flake8: noqa
+
 from pyherc.test.cutesy import make, hit
 from pyherc.test.bdd.features.helpers import get_character
 from pyherc.test.cutesy.dictionary import add_history_value, get_history_value
-from hamcrest import assert_that, is_, less_than, equal_to #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, less_than, equal_to
 
 @when('{attacker_name} hits {target_name}')
 def impl(context, attacker_name, target_name):
@@ -65,7 +67,8 @@ def impl(context, character_name):
     hit_event = matching_events[0]
     attacker = hit_event.attacker
 
-    total_damage_from_weapon = sum([x[0] for x in attacker.inventory.weapon.weapon_data.damage])
+    total_damage_from_weapon = sum([x[0] for x
+                                   in attacker.inventory.weapon.weapon_data.damage])
 
     assert(total_damage_suffered > total_damage_from_weapon)
 

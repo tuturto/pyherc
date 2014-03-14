@@ -17,9 +17,11 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+# flake8: noqa
+
 from pyherc.test.bdd.features.helpers import get_character
 
-from hamcrest import assert_that, has_length #pylint: disable-msg=E0611
+from hamcrest import assert_that, has_length
 
 @then('{character_name} should be on fire')
 def step_impl(context, character_name):

@@ -17,6 +17,8 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+# flake8: noqa
+
 from behave import step_matcher
 from pyherc.test.bdd.features.helpers import get_character, get_item
 from pyherc.test.cutesy import make, cast_spell, gain_domain_
@@ -35,13 +37,13 @@ def impl(context, caster_name, spell_and_target):
         target_name = None
 
     if target_name:
-        target = get_character(context = context,
-                               character_name = target_name)
+        target = get_character(context=context,
+                               character_name=target_name)
     else:
         target = None
 
-    make(caster, cast_spell(spell_name = spell,
-                            target = target))
+    make(caster, cast_spell(spell_name=spell,
+                            target=target))
 
 step_matcher('re')
 
@@ -57,8 +59,8 @@ def step_impl(context, caster_name, item_name, domain_name):
     caster = get_character(context, caster_name)
     item = get_item(context, item_name)
 
-    make(caster, gain_domain_(item = item,
-                              domain = domain_name))
+    make(caster, gain_domain_(item=item,
+                              domain=domain_name))
 
 @then('{caster_name} should have more {domain_name} spells')
 def step_impl(context, caster_name, domain_name):

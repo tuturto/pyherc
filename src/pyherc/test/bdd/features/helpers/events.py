@@ -21,8 +21,8 @@
 Module for event helpers
 """
 from pyherc.data import Model
-from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.helpers import EventListener
+
 
 def observed(fn):
     """

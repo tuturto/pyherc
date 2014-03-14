@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -32,10 +31,10 @@ from pyherc.test.cutesy.dictionary import right_of
 from pyherc.test.cutesy.dictionary import make,  hit
 from pyherc.test.cutesy.dictionary import wielding
 
-from hamcrest import assert_that #pylint: disable-msg=E0611
+from hamcrest import assert_that
 from pyherc.test.cutesy.dictionary import has_less_hit_points
 
-#pylint: disable=C0103
+
 class TestCombatBehaviour():
     """
     Combat related behaviour
@@ -44,7 +43,7 @@ class TestCombatBehaviour():
         """
         Default constructor
         """
-        super(TestCombatBehaviour, self).__init__()
+        super().__init__()
 
     def test_hitting_reduces_hit_points(self):
         """

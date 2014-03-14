@@ -27,6 +27,7 @@ from pyherc.test.cutesy import LeatherArmour, ScaleMail, PlateMail
 from pyherc.test.cutesy import Sword, Club, Dagger, Bow, Arrows
 from pyherc.test.cutesy import Rune
 
+
 def default_context(fn):
     """
     Decorator to set up context
@@ -55,6 +56,7 @@ def default_context(fn):
 
     return context_setup
 
+
 def with_action_factory(fn):
     """
     Decorator to inject action factory
@@ -69,12 +71,12 @@ def with_action_factory(fn):
 
         if not hasattr(context, 'action_factory'):
             context.action_factory = (ActionFactoryBuilder()
-                                            .with_move_factory()
-                                            .with_attack_factory()
-                                            .with_drink_factory()
-                                            .with_inventory_factory()
-                                            .with_dying_rules()
-                                            .build())
+                                      .with_move_factory()
+                                      .with_attack_factory()
+                                      .with_drink_factory()
+                                      .with_inventory_factory()
+                                      .with_dying_rules()
+                                      .build())
 
         if not hasattr(context, 'actions_port'):
             context.actions_port = ActionsPort(context.action_factory)
@@ -82,6 +84,7 @@ def with_action_factory(fn):
         return fn(*args, **kwargs)
 
     return action_factorize
+
 
 def armour_list(fn):
     """
@@ -104,6 +107,7 @@ def armour_list(fn):
         return fn(*args, **kwargs)
 
     return armour_setup
+
 
 def weapon_list(fn):
     """
@@ -129,6 +133,7 @@ def weapon_list(fn):
 
     return weapon_setup
 
+
 def misc_item_list(fn):
     """
     Decorator to set up misc items list
@@ -149,6 +154,7 @@ def misc_item_list(fn):
 
     return misc_item_setup
 
+
 def get_character(context, character_name):
     """
     Get character from context
@@ -162,6 +168,7 @@ def get_character(context, character_name):
     characters = [x for x in context.characters
                   if x.name == character_name]
     return characters[0]
+
 
 def get_location(context, location_name):
     """
@@ -177,6 +184,7 @@ def get_location(context, location_name):
                  if x.name == location_name]
     return locations[0]
 
+
 def get_item(context, item_name):
     """
     Get item from context
@@ -190,6 +198,7 @@ def get_item(context, item_name):
     items = [x for x in context.items
              if x.name == item_name]
     return items[0]
+
 
 def get_entity(context, entity_name):
     """

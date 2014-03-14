@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -25,9 +24,9 @@ from pyherc.test.cutesy import Dagger, Goblin, carrying
 from pyherc.test.cutesy import place, middle_of, Level
 from pyherc.test.cutesy import make, drop
 from pyherc.test.cutesy import has_dropped
-from hamcrest import assert_that #pylint: disable-msg=E0611
+from hamcrest import assert_that
 
-#pylint: disable=C0103
+
 class TestDroppingItems():
     """
     Tests for dropping items
@@ -36,7 +35,7 @@ class TestDroppingItems():
         """
         Default constructor
         """
-        super(TestDroppingItems, self).__init__()
+        super().__init__()
 
     def test_dropping_item(self):
         """
