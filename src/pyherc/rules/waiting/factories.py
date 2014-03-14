@@ -24,6 +24,7 @@ from pyherc.rules.factory import SubActionFactory
 from pyherc.rules.waiting.action import WaitAction
 from pyherc.aspects import log_debug, log_info
 
+
 class WaitFactory(SubActionFactory):
     """
     Factory for creating wait actions
@@ -45,6 +46,6 @@ class WaitFactory(SubActionFactory):
 
         :param parameters: parameters used to control creation
         :type parameters: WaitParameters
-        """       
-        return WaitAction(character = parameters.character,
-                          time_to_wait = parameters.time_to_wait)
+        """
+        return WaitAction(character=parameters.character,
+                          time_to_wait=parameters.time_to_wait)

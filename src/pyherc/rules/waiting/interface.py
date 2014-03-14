@@ -25,6 +25,7 @@ from pyherc.aspects import log_debug, log_info
 from pyherc.rules.public import ActionParameters
 from pyherc.data import Duration
 
+
 @log_info
 def wait(character, action_factory):
     """
@@ -41,6 +42,7 @@ def wait(character, action_factory):
                                                       Duration.normal))
     if action.is_legal():
         action.execute()
+
 
 class WaitParameters(ActionParameters):
     """

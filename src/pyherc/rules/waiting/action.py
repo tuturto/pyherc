@@ -22,6 +22,7 @@ Module defining wait related actions
 """
 from pyherc.aspects import log_debug, log_info
 
+
 class WaitAction():
     """
     Action for waiting
@@ -38,9 +39,9 @@ class WaitAction():
         :param time_to_wait: amount of ticks to wait
         :type time_to_wait: int
         """
+        super().__init__()
         self.character = character
         self.time_to_wait = time_to_wait
-        
 
     @log_info
     def execute(self):
