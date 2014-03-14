@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -28,12 +27,13 @@ import random
 import logging
 import collections
 
+
 class BSPSection():
     """
     Class used to divide area in sections
     """
-    def __init__(self, corner1 = None, corner2 = None, parent = None,
-                 direction = None):
+    def __init__(self, corner1=None, corner2=None, parent=None,
+                 direction=None):
         """
         Default constructor
         """
@@ -45,21 +45,21 @@ class BSPSection():
         self.direction = direction
         self.logger = logging.getLogger('pyherc.generators.utils.BSPSection')
 
-    def split(self, min_size = (6, 6), direction = None):
+    def split(self, min_size=(6, 6), direction=None):
         """
         Split BSPSection in two
         Links two new BSPSections into this one
         :param min_size: minimum size to split into
         :param direction: horizontal (1) / vertical split (2)
         """
-        assert(self.corner1 != None)
-        assert(self.corner2 != None)
+        assert self.corner1 is not None
+        assert self.corner2 is not None
 
         size = (abs(self.corner1[0] - self.corner2[0]),
-                    abs(self.corner1[1] - self.corner2[1]))
+                abs(self.corner1[1] - self.corner2[1]))
 
-        if direction == None:
-            # 1 split horisontal, 2 split vertical
+        if direction is None:
+            # 1 split horizontal, 2 split vertical
             direction = random.randint(1, 2)
         assert(direction in (1, 2))
 
@@ -82,16 +82,15 @@ class BSPSection():
                                     (self.corner2[0],
                                         self.corner1[1] + split_location),
                                     self, direction)
-            self.node2 = BSPSection(
-                                    (self.corner1[0],
-                                    self.corner1[1] + split_location + 1),
+            self.node2 = BSPSection((self.corner1[0],
+                                     self.corner1[1] + split_location + 1),
                                     self.corner2,
                                     self, direction)
         else:
             split_location = random.randint(min_size[0], size[0] - min_size[0])
             self.node1 = BSPSection(self.corner1,
                                     (self.corner1[0] + split_location,
-                                    self.corner2[1]),
+                                     self.corner2[1]),
                                     self, direction)
             self.node2 = BSPSection((self.corner1[0] + split_location + 1,
                                     self.corner1[1]),
@@ -102,20 +101,20 @@ class BSPSection():
         """
         Override __str__ to print meaningful string representation
         """
-        if self.corner1 != None:
-            if self.corner2 != None:
+        if self.corner1 is not None:
+            if self.corner2 is not None:
                 return self.corner1.__str__() + ':' + self.corner2.__str__()
             else:
                 return self.corner1.__str__() + ':None'
         else:
-            if self.corner2 != None:
+            if self.corner2 is not None:
                 return 'None:' + self.corner2.__str__()
             else:
                 return 'None:None'
 
     def get_area_queue(self):
         """
-        Gets list of BSPSections, starting from leaves and progressing towards root
+        Gets list of BSPSections, starting from leaves and moving towards root
         """
         queue = collections.deque()
         list = []
@@ -124,9 +123,9 @@ class BSPSection():
         while len(queue) > 0:
             item = queue.pop()
             list.append(item)
-            if item.node1 != None:
+            if item.node1 is not None:
                 queue.appendleft(item.node1)
-            if item.node2 != None:
+            if item.node2 is not None:
                 queue.appendleft(item.node2)
 
         list.reverse()
@@ -138,11 +137,11 @@ class BSPSection():
         Calculates center of the BSPSection
         :returns: center point
         """
-        assert(self.corner1 != None)
-        assert(self.corner2 != None)
+        assert self.corner1 is not None
+        assert self.corner2 is not None
         center = (int(self.corner1[0] +
-                        ((self.corner2[0] - self.corner1[0]) / 2)),
-                        int(self.corner1[1] +
-                            ((self.corner2[1] - self.corner1[1]) / 2)))
+                  ((self.corner2[0] - self.corner1[0]) / 2)),
+                  int(self.corner1[1] +
+                      ((self.corner2[1] - self.corner1[1]) / 2)))
 
         return center
