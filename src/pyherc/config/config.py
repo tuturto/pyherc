@@ -48,6 +48,7 @@ from pyherc.generators import SpellGenerator
 
 from pyherc.generators import ItemConfigurations
 
+
 class Configuration():
     """
     Configuration object for Herculeum
@@ -59,7 +60,7 @@ class Configuration():
         Args:
             model: Model to register with factories
         """
-        super(Configuration, self).__init__()
+        super().__init__()
         self.resolution = None
         self.full_screen = None
         self.caption = None
@@ -108,8 +109,7 @@ class Configuration():
                                                   dying_rules)
         ranged_combat_factory = RangedCombatFactory(effect_factory,
                                                     dying_rules)
-        attack_factory = AttackFactory([
-                                        unarmed_combat_factory,
+        attack_factory = AttackFactory([unarmed_combat_factory,
                                         melee_combat_factory,
                                         ranged_combat_factory])
 
@@ -117,9 +117,9 @@ class Configuration():
                                      dying_rules)
 
         inventory_factory = InventoryFactory([PickUpFactory(),
-                                             DropFactory(),
-                                             EquipFactory(),
-                                             UnEquipFactory()])
+                                              DropFactory(),
+                                              EquipFactory(),
+                                              UnEquipFactory()])
 
         wait_factory = WaitFactory()
 
@@ -129,14 +129,13 @@ class Configuration():
                                                     effect_factory,
                                                     dying_rules)
 
-        self.action_factory = ActionFactory(
-                                            self.model,
+        self.action_factory = ActionFactory(self.model,
                                             [move_factory,
-                                            attack_factory,
-                                            drink_factory,
-                                            inventory_factory,
-                                            wait_factory,
-                                            spell_casting_factory])
+                                             attack_factory,
+                                             drink_factory,
+                                             inventory_factory,
+                                             wait_factory,
+                                             spell_casting_factory])
 
         self.rules_engine = RulesEngine(self.action_factory,
                                         dying_rules)
@@ -224,20 +223,19 @@ class Configuration():
         """
         Initialise generators
         """
-        self.item_generator = ItemGenerator(
-                                    self.get_item_config(context))
+        self.item_generator = ItemGenerator(self.get_item_config(context))
 
         self.creature_generator = CreatureGenerator(
-                                        self.get_creature_config(context),
-                                        self.model,
-                                        self.item_generator,
-                                        self.rng)
+            self.get_creature_config(context),
+            self.model,
+            self.item_generator,
+            self.rng)
 
         self.player_generator = CreatureGenerator(
-                                        self.get_player_config(context),
-                                        self.model,
-                                        self.item_generator,
-                                        self.rng)
+            self.get_player_config(context),
+            self.model,
+            self.item_generator,
+            self.rng)
 
     def initialise_level_generators(self, context):
         """
@@ -266,13 +264,13 @@ class Configuration():
                                                    context))
 
         portal_adder_factory = PortalAdderFactory(
-                                config.portal_adder_configurations,
-                                self.rng)
+            config.portal_adder_configurations,
+            self.rng)
 
         self.level_generator_factory = LevelGeneratorFactory(
-                                                    portal_adder_factory,
-                                                    config,
-                                                    self.rng)
+            portal_adder_factory,
+            config,
+            self.rng)
 
     def extend_configuration(self, config, new_config):
         """
@@ -288,5 +286,5 @@ class Configuration():
         config.item_adders.extend(new_config.item_adders)
         config.creature_adders.extend(new_config.creature_adders)
         config.portal_adder_configurations.extend(
-                                    new_config.portal_adder_configurations)
+            new_config.portal_adder_configurations)
         config.contexts.extend(new_config.contexts)
