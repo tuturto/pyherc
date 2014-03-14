@@ -26,12 +26,13 @@ from pyherc.data.model import ESCAPED_DUNGEON
 from pyherc.data.geometry import find_direction
 from pyherc.data.constants import Duration
 
+
 class MoveAction():
     """
     Action for moving
     """
     @log_debug
-    def __init__(self, character, new_location, new_level = None):
+    def __init__(self, character, new_location, new_level=None):
         """
         Default constructor
 
@@ -42,6 +43,8 @@ class MoveAction():
         :param new_level: level to move
         :type new_level: Level
         """
+        super().__init__()
+
         self.character = character
         self.new_location = new_location
         self.new_level = new_level
@@ -61,7 +64,7 @@ class MoveAction():
             self.character.location = self.new_location
             direction = find_direction(old_location, self.new_location)
 
-            if self.new_level != None:
+            if self.new_level is not None:
                 if self.character.level != self.new_level:
                     self.character.level.remove_creature(self.character)
                     self.character.level = self.new_level
@@ -77,10 +80,10 @@ class MoveAction():
             self.character.add_to_tick(Duration.fast / speed_modifier)
 
             self.character.raise_event(MoveEvent(
-                                            mover = self.character,
-                                            old_location = old_location,
-                                            direction = direction,
-                                            affected_tiles = affected_tiles))
+                mover=self.character,
+                old_location=old_location,
+                direction=direction,
+                affected_tiles=affected_tiles))
 
         else:
             self.character.add_to_tick(Duration.instant)
@@ -94,7 +97,7 @@ class MoveAction():
         :rtype: Boolean
         """
         location_ok = False
-        if self.new_level != None:
+        if self.new_level is not None:
             if not self.new_level.blocks_movement(self.new_location[0],
                                                   self.new_location[1]):
                 #check for other creatures and such
@@ -110,6 +113,7 @@ class MoveAction():
 
         return location_ok
 
+
 class WalkAction(MoveAction):
     """
     Action for walking
@@ -119,7 +123,8 @@ class WalkAction(MoveAction):
         """
         Execute this move
         """
-        MoveAction.execute(self)
+        super().execute(self)
+
 
 class EscapeAction(MoveAction):
     """
@@ -132,9 +137,9 @@ class EscapeAction(MoveAction):
         """
         Default constructor
         """
-        super().__init__(character = character,
-                         new_location = None,
-                         new_level = None)
+        super().__init__(character=character,
+                         new_location=None,
+                         new_level=None)
 
     @log_info
     def execute(self):

@@ -26,6 +26,7 @@ Public interface of move package
 from pyherc.aspects import log_info, log_debug
 from pyherc.rules.public import ActionParameters
 
+
 @log_info
 def move(character, direction, action_factory):
     """
@@ -65,6 +66,7 @@ def is_move_legal(character, direction, movement_mode, action_factory):
                                                       movement_mode))
     return action.is_legal()
 
+
 class MoveParameters(ActionParameters):
     """
     Object for controlling move action creation
@@ -79,7 +81,7 @@ class MoveParameters(ActionParameters):
             direction: Direction of the move
             movement_mode: Mode of movement
         """
-        ActionParameters.__init__(self)
+        super().__init__()
 
         self.action_type = 'move'
         self.character = character

@@ -24,6 +24,7 @@ from pyherc.aspects import log_debug, log_info
 from pyherc.rules.moving.action import MoveAction, EscapeAction
 from pyherc.rules.factory import SubActionFactory
 
+
 class WalkFactory(SubActionFactory):
     """
     Factory for creating walk actions
@@ -36,6 +37,7 @@ class WalkFactory(SubActionFactory):
         :param level_generator_factory: Factory for generating level generators
         :type level_generator_factory: LevelGeneratorFactory
         """
+        super().__init__()
         self.level_generator_factory = level_generator_factory
         self.movement_mode = 'walk'
 
@@ -87,10 +89,10 @@ class WalkFactory(SubActionFactory):
             new_location = (location[0] - 1, location[1] - 1)
         elif direction == 9:
             portal = new_level.get_portal_at(location)
-            if portal != None:
+            if portal is not None:
                 if not portal.exits_dungeon:
-                    other_end = portal.get_other_end(self.level_generator_factory)
-                    if other_end != None:
+                    other_end = portal.get_other_end(self.level_generator_factory)  # noqa
+                    if other_end is not None:
                         new_level = other_end.level
                         new_location = other_end.location
                     else:
@@ -109,6 +111,7 @@ class WalkFactory(SubActionFactory):
 
         return MoveAction(parameters.character, new_location, new_level)
 
+
 class MoveFactory(SubActionFactory):
     """
     Factory for constructing move actions
@@ -120,6 +123,7 @@ class MoveFactory(SubActionFactory):
 
         :param factories: a single Factory or list of Factories to use
         """
+        super().__init__()
         self.action_type = 'move'
 
         if hasattr(factories, '__iter__'):
