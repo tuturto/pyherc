@@ -21,6 +21,7 @@
 Module for basic decorators
 """
 
+
 class Decorator():
     """
     Super class for level decorators
@@ -54,6 +55,7 @@ class Decorator():
         """
         pass
 
+
 class DecoratorConfig():
     """
     Super class for decorator configuration
@@ -67,6 +69,7 @@ class DecoratorConfig():
         """
         super().__init__()
         self.level_types = level_types
+
 
 class ReplacingDecorator(Decorator):
     """
@@ -95,7 +98,8 @@ class ReplacingDecorator(Decorator):
             for loc_x in range(len(level.floor)):
                 proto_tile = level.floor[loc_x][loc_y]
                 if proto_tile in ground_tiles:
-                    level.set_floor_tile(loc_x, loc_y, ground_tiles[proto_tile])
+                    level.set_floor_tile(loc_x, loc_y,
+                                         ground_tiles[proto_tile])
 
                 proto_tile = level.get_wall_tile(loc_x, loc_y)
                 if proto_tile in wall_tiles:
@@ -119,12 +123,13 @@ class ReplacingDecoratorConfig(DecoratorConfig):
         self.ground_config = ground_config
         self.wall_config = wall_config
 
+
 class WallBuilderDecorator(Decorator):
     """
     Decorator used to build walls
 
-    This decorator will search all positions where there are walls next to empty
-    space and replace tiles there with specified ones
+    This decorator will search all positions where there are walls next to
+    empty space and replace tiles there with specified ones
     """
     def __init__(self, configuration):
         """
@@ -142,9 +147,11 @@ class WallBuilderDecorator(Decorator):
         :param level: level to decorate
         :type level: Level
         """
+        empty_tile = self.configuration.empty_tile
+
         for loc_y in range(len(level.floor[0])):
             for loc_x in range(len(level.floor)):
-                if level.get_wall_tile(loc_x, loc_y) == self.configuration.empty_tile:
+                if level.get_wall_tile(loc_x, loc_y) == empty_tile:
                     self.check_and_replace((loc_x - 1, loc_y), level)
                     self.check_and_replace((loc_x + 1, loc_y), level)
                     self.check_and_replace((loc_x, loc_y - 1), level)
@@ -171,6 +178,7 @@ class WallBuilderDecorator(Decorator):
             tile = self.configuration.wall_config[proto_tile]
             level.set_wall_tile(loc_x, loc_y, tile)
 
+
 class WallBuilderDecoratorConfig(DecoratorConfig):
     """
     Configuration for WallBuilderDecorator
@@ -188,6 +196,7 @@ class WallBuilderDecoratorConfig(DecoratorConfig):
         super().__init__(level_types)
         self.wall_config = wall_config
         self.empty_tile = empty_tile
+
 
 class AggregateDecorator(Decorator):
     """
@@ -212,6 +221,7 @@ class AggregateDecorator(Decorator):
         for decorator in self.configuration.decorators:
             decorator.decorate_level(level)
 
+
 class AggregateDecoratorConfig(DecoratorConfig):
     """
     Configuration for AggregateDecorator
@@ -227,6 +237,7 @@ class AggregateDecoratorConfig(DecoratorConfig):
         """
         super().__init__(level_types)
         self.decorators = decorators
+
 
 class DirectionalWallDecoratorConfig(DecoratorConfig):
     """
@@ -263,6 +274,7 @@ class DirectionalWallDecoratorConfig(DecoratorConfig):
                       east_west_north, east_west_south,
                       east_north_south, west_north_south,
                       four_way, wall]
+
 
 class DirectionalWallDecorator(Decorator):
     """
@@ -302,9 +314,10 @@ class DirectionalWallDecorator(Decorator):
         :param level: level to decorate
         :type level: Level
         """
+        wall = self.configuration.wall
         for loc_y in range(len(level.floor[0])):
             for loc_x in range(len(level.floor)):
-                if level.get_wall_tile(loc_x, loc_y) == self.configuration.wall:
+                if level.get_wall_tile(loc_x, loc_y) == wall:
                     level.set_wall_tile(loc_x,
                                         loc_y,
                                         self.get_wall_tile(level,
@@ -341,6 +354,7 @@ class DirectionalWallDecorator(Decorator):
             return self.tiles[''.join(directions)]
         else:
             return self.configuration.east_west
+
 
 class FloorBuilderDecoratorConfig(DecoratorConfig):
     """
@@ -381,6 +395,7 @@ class FloorBuilderDecoratorConfig(DecoratorConfig):
                       south_west, north_east_south, north_east_west,
                       north_south_west, east_south_west, fourway, floor]
 
+
 class FloorBuilderDecorator(Decorator):
     """
     Decorator to build floors
@@ -420,9 +435,10 @@ class FloorBuilderDecorator(Decorator):
         :param level: level to decorate
         :type level: Level
         """
+        floor = self.configuration.floor
         for loc_y in range(len(level.floor[0])):
             for loc_x in range(len(level.floor)):
-                if level.get_floor_tile(loc_x, loc_y) == self.configuration.floor:
+                if level.get_floor_tile(loc_x, loc_y) == floor:
                     level.set_floor_tile(loc_x,
                                          loc_y,
                                          self.get_floor_tile(level,
@@ -460,6 +476,7 @@ class FloorBuilderDecorator(Decorator):
         else:
             return self.configuration.east_west
 
+
 class WallOrnamentDecorator(Decorator):
     """
     Decorator to place ornaments of walls
@@ -488,6 +505,7 @@ class WallOrnamentDecorator(Decorator):
                     and self.configuration.rng.randint(0, 100) < self.configuration.rate
                     and level.get_floor_tile(loc_x, loc_y + 1)):
                         level.ornamentations[loc_x][loc_y] = self.configuration.rng.choice(self.configuration.ornamentation)
+
 
 class WallOrnamentDecoratorConfig(DecoratorConfig):
     """
