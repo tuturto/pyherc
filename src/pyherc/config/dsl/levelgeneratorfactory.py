@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ module for LevelGeneratorFactoryConfig
 """
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 
+
 class LevelConfiguration():
     """
     DSL for configuring levels
@@ -32,7 +32,7 @@ class LevelConfiguration():
         """
         Default constructor
         """
-        super(LevelConfiguration, self).__init__()
+        super().__init__()
         self.room_generators = None
         self.level_partitioners = None
         self.decorators = None
@@ -116,13 +116,14 @@ class LevelConfiguration():
         :rtype: LevelGeneratorFactoryConfig
         """
         return LevelGeneratorFactoryConfig(
-                room_generators = self.room_generators,
-                level_partitioners = self.level_partitioners,
-                decorators = self.decorators,
-                item_adders = self.item_adders,
-                creature_adders = self.creature_adders,
-                portal_adder_configurations = self.portal_adder_configurations,
-                contexts = self.contexts)
+            room_generators=self.room_generators,
+            level_partitioners=self.level_partitioners,
+            decorators=self.decorators,
+            item_adders=self.item_adders,
+            creature_adders=self.creature_adders,
+            portal_adder_configurations=self.portal_adder_configurations,
+            contexts=self.contexts)
+
 
 class LevelContext():
     """

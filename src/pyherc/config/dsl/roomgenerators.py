@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ module for RoomGenerators
 from pyherc.generators.level.room.catacombs import CatacombsGenerator
 from pyherc.generators.level.prototiles import FLOOR_NATURAL
 from random import Random
+
 
 class Catacombs():
     """
@@ -72,10 +72,11 @@ class Catacombs():
         :returns: configured generator
         :rtype: CatacombsGenerator
         """
-        return CatacombsGenerator(floor_tile = self.floor_tile,
-                                  empty_tile = self.empty_tile,
-                                  level_types = self.locations,
-                                  rng = self.rng)
+        return CatacombsGenerator(floor_tile=self.floor_tile,
+                                  empty_tile=self.empty_tile,
+                                  level_types=self.locations,
+                                  rng=self.rng)
+
 
 def natural_floor():
     """
