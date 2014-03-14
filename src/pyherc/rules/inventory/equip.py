@@ -24,6 +24,7 @@ from pyherc.aspects import log_debug, log_info
 from pyherc.rules.factory import SubActionFactory
 from pyherc.events import EquipEvent
 
+
 class EquipFactory(SubActionFactory):
     """
     Factory for creating equip actions
@@ -35,7 +36,7 @@ class EquipFactory(SubActionFactory):
         """
         Constructor for this factory
         """
-        super(EquipFactory, self).__init__()
+        super().__init__()
         self.sub_action = 'equip'
 
     @log_debug
@@ -59,6 +60,7 @@ class EquipFactory(SubActionFactory):
         """
         return EquipAction(parameters.character, parameters.item)
 
+
 class EquipAction():
     """
     Action for equiping an item
@@ -75,7 +77,7 @@ class EquipAction():
         :param item: item to equip
         :type item: Item
         """
-        super(EquipAction, self).__init__()
+        super().__init__()
 
         self.character = character
         self.item = item

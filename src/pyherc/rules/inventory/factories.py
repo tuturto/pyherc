@@ -24,6 +24,7 @@ from pyherc.rules.inventory.action import PickUpAction, DropAction
 from pyherc.rules.factory import SubActionFactory
 from pyherc.aspects import log_debug, log_info
 
+
 class PickUpFactory(SubActionFactory):
     """
     Factory for creating pick up actions
@@ -35,7 +36,7 @@ class PickUpFactory(SubActionFactory):
         """
         Constructor for this factory
         """
-        super(PickUpFactory, self).__init__()
+        super().__init__()
         self.sub_action = 'pick up'
 
     @log_debug
@@ -59,6 +60,7 @@ class PickUpFactory(SubActionFactory):
         """
         return PickUpAction(parameters.character, parameters.item)
 
+
 class DropFactory(SubActionFactory):
     """
     Factory for creating drop actions
@@ -70,7 +72,7 @@ class DropFactory(SubActionFactory):
         """
         Constructor for this factory
         """
-        super(DropFactory, self).__init__()
+        super().__init__()
         self.sub_action = 'drop'
 
     @log_debug
@@ -94,6 +96,7 @@ class DropFactory(SubActionFactory):
         """
         return DropAction(parameters.character, parameters.item)
 
+
 class InventoryFactory(SubActionFactory):
     """
     Factory for constructing inventory actions
@@ -108,7 +111,7 @@ class InventoryFactory(SubActionFactory):
         :param factories: a single Factory or list of Factories to use
         :type factories: SubActionFactory or [SubActionFactory]
         """
-        super(InventoryFactory, self).__init__()
+        super().__init__()
         self.action_type = 'inventory'
 
         if hasattr(factories, '__iter__'):

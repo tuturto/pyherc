@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -25,6 +24,7 @@ from pyherc.aspects import log_debug, log_info
 from pyherc.rules.factory import SubActionFactory
 from pyherc.events import UnEquipEvent
 
+
 class UnEquipFactory(SubActionFactory):
     """
     Factory for creating unequip actions
@@ -36,7 +36,7 @@ class UnEquipFactory(SubActionFactory):
         """
         Constructor for this factory
         """
-        super(UnEquipFactory, self).__init__()
+        super().__init__()
         self.sub_action = 'unequip'
 
     @log_debug
@@ -60,6 +60,7 @@ class UnEquipFactory(SubActionFactory):
         """
         return UnEquipAction(parameters.character, parameters.item)
 
+
 class UnEquipAction():
     """
     Action for unequiping an item
@@ -76,7 +77,7 @@ class UnEquipAction():
         :param item: item to unequip
         :type item: Item
         """
-        super(UnEquipAction, self).__init__()
+        super().__init__()
 
         self.character = character
         self.item = item

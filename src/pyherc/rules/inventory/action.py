@@ -23,6 +23,7 @@ Module defining classes related to inventory actions
 from pyherc.aspects import log_debug, log_info
 from pyherc.events import PickUpEvent, DropEvent
 
+
 class PickUpAction():
     """
     Action for picking up item
@@ -39,7 +40,7 @@ class PickUpAction():
         :param item: item to pick up
         :type item: Item
         """
-        super(PickUpAction, self).__init__()
+        super().__init__()
         self.character = character
         self.item = item
 
@@ -68,7 +69,7 @@ class PickUpAction():
         :returns: True if item was merged, otherwise False
         :rtype: boolean
         """
-        if self.item.ammunition_data == None:
+        if self.item.ammunition_data is None:
             return False
 
         items = [x for x in self.character.inventory
@@ -98,6 +99,7 @@ class PickUpAction():
 
         return True
 
+
 class DropAction():
     """
     Action for dropping item
@@ -114,7 +116,7 @@ class DropAction():
         :param item: item to drop
         :type item: Item
         """
-        super(DropAction, self).__init__()
+        super().__init__()
 
         self.character = character
         self.item = item
@@ -125,9 +127,9 @@ class DropAction():
         Executes this action
         """
         self.character.inventory.remove(self.item)
-        self.character.level.add_item(item = self.item,
-                                      location = (self.character.location[0],
-                                                  self.character.location[1]))
+        self.character.level.add_item(item=self.item,
+                                      location=(self.character.location[0],
+                                                self.character.location[1]))
         self.character.add_to_tick(2)
         self.character.raise_event(DropEvent(self.character,
                                              self.item))
