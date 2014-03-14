@@ -24,6 +24,7 @@ Public interface for combat rules
 from pyherc.aspects import log_info, log_debug
 from pyherc.rules.public import ActionParameters
 
+
 @log_info
 def attack(self, direction, action_factory, rng):
     """
@@ -36,24 +37,24 @@ def attack(self, direction, action_factory, rng):
     :param rng: random number generator
     :type rng: Random
     """
-    if self.inventory.weapon != None:
+    if self.inventory.weapon is not None:
         weapon = self.inventory.weapon.weapon_data
-        if self.inventory.projectiles != None:
+        if self.inventory.projectiles is not None:
             ammunition = self.inventory.projectiles.ammunition_data
         else:
             ammunition = None
     else:
         weapon = None
 
-    if weapon == None:
+    if weapon is None:
         attack_type = 'unarmed'
     else:
-        if (ammunition == None or
+        if (ammunition is None or
                 weapon.ammunition_type != ammunition.ammunition_type):
             attack_type = 'melee'
         else:
             target_loc = self.get_location_at_direction(direction)
-            if self.level.get_creature_at(target_loc) == None:
+            if self.level.get_creature_at(target_loc) is None:
                 if self.level.blocks_movement(target_loc[0], target_loc[1]):
                     attack_type = 'melee'
                 else:
@@ -62,13 +63,13 @@ def attack(self, direction, action_factory, rng):
                 attack_type = 'melee'
 
     action = action_factory.get_action(
-                        AttackParameters(
-                            attacker = self,
-                            direction = direction,
-                            attack_type = attack_type,
-                            random_number_generator = rng))
+        AttackParameters(attacker=self,
+                         direction=direction,
+                         attack_type=attack_type,
+                         random_number_generator=rng))
 
     action.execute()
+
 
 class AttackParameters(ActionParameters):
     """
@@ -87,7 +88,7 @@ class AttackParameters(ActionParameters):
             attack_type: type of attack to perform
             random_number_generator: Random number generator to use
         """
-        ActionParameters.__init__(self)
+        super().__init__()
 
         self.action_type = 'attack'
         self.attacker = attacker

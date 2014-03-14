@@ -29,6 +29,7 @@ from pyherc.rules.combat.melee import MeleeDamage
 from pyherc.rules.factory import SubActionFactory
 from pyherc.data.geometry import get_adjacent_target_in_direction
 
+
 class AttackFactory(SubActionFactory):
     """
     Factory for constructing attack actions
@@ -39,7 +40,7 @@ class AttackFactory(SubActionFactory):
         """
         Constructor for this factory
         """
-        super(AttackFactory, self).__init__()
+        super().__init__()
         self.action_type = 'attack'
 
         if hasattr(factories, '__iter__'):
@@ -58,6 +59,7 @@ class UnarmedCombatFactory():
         """
         Constructor for this factory
         """
+        super().__init__()
         self.attack_type = 'unarmed'
         self.effect_factory = effect_factory
         self.dying_rules = dying_rules
@@ -91,15 +93,17 @@ class UnarmedCombatFactory():
         target = self.get_target(parameters)
         damage = [(attacker.get_attack(), 'crushing')]
 
-        attack = AttackAction('unarmed',
-                    to_hit = UnarmedToHit(attacker, target,
-                                          parameters.random_number_generator),
-                    damage = UnarmedDamage(damage = damage),
-                    attacker = attacker,
-                    target = target,
-                    effect_factory = self.effect_factory,
-                    dying_rules = self.dying_rules,
-                    additional_rules = AdditionalRules(attacker))
+        attack = AttackAction(
+            attack_type='unarmed',
+            to_hit=UnarmedToHit(attacker,
+                                target,
+                                parameters.random_number_generator),
+            damage=UnarmedDamage(damage=damage),
+            attacker=attacker,
+            target=target,
+            effect_factory=self.effect_factory,
+            dying_rules=self.dying_rules,
+            additional_rules=AdditionalRules(attacker))
 
         return attack
 
@@ -114,13 +118,13 @@ class UnarmedCombatFactory():
         :rtype: AttackData
         """
         attacker = parameters.attacker
-        location = attacker.location
         direction = parameters.direction
         level = attacker.level
 
         return get_adjacent_target_in_direction(level,
                                                 attacker.location,
                                                 direction)
+
 
 class MeleeCombatFactory():
     """
@@ -131,6 +135,7 @@ class MeleeCombatFactory():
         """
         Constructor for this factory
         """
+        super().__init__()
         self.attack_type = 'melee'
         self.effect_factory = effect_factory
         self.dying_rules = dying_rules
@@ -166,15 +171,16 @@ class MeleeCombatFactory():
         weapon_data = weapon.weapon_data
 
         attack = AttackAction(
-                    attack_type = 'melee',
-                    to_hit = MeleeToHit(attacker, target,
-                                        parameters.random_number_generator),
-                    damage = MeleeDamage(damage = weapon_data.damage),
-                    attacker = attacker,
-                    target = target,
-                    effect_factory = self.effect_factory,
-                    dying_rules = self.dying_rules,
-                    additional_rules = AdditionalRules(attacker))
+            attack_type='melee',
+            to_hit=MeleeToHit(attacker,
+                              target,
+                              parameters.random_number_generator),
+            damage=MeleeDamage(damage=weapon_data.damage),
+            attacker=attacker,
+            target=target,
+            effect_factory=self.effect_factory,
+            dying_rules=self.dying_rules,
+            additional_rules=AdditionalRules(attacker))
 
         return attack
 
@@ -189,7 +195,6 @@ class MeleeCombatFactory():
         :rtype: AttackData
         """
         attacker = parameters.attacker
-        location = attacker.location
         direction = parameters.direction
         level = attacker.level
 

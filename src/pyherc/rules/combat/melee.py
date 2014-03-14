@@ -20,10 +20,10 @@
 """
 Module defining Melee Attack related objcts
 """
-import random
-from pyherc.aspects import log_debug, log_info
+from pyherc.aspects import log_debug
 from pyherc.rules.combat.action import ToHit
 from pyherc.rules.combat.action import Damage
+
 
 class MeleeToHit(ToHit):
     """
@@ -31,8 +31,7 @@ class MeleeToHit(ToHit):
     """
 
     @log_debug
-    def __init__(self, attacker,  target,
-                        random_number_generator = random.Random()):
+    def __init__(self, attacker, target, random_number_generator):
         """
         Default constructor
 
@@ -46,9 +45,7 @@ class MeleeToHit(ToHit):
         super().__init__(attacker,
                          target,
                          random_number_generator)
-        self.attacker = attacker
-        self.target = target
-        self.rng = random_number_generator
+
 
 class MeleeDamage(Damage):
     """

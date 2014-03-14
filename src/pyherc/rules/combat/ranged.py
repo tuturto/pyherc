@@ -24,6 +24,7 @@ from pyherc.aspects import log_debug, log_info
 from pyherc.rules.combat.action import ToHit, Damage, AttackAction
 from pyherc.data.geometry import get_target_in_direction
 
+
 class RangedToHit(ToHit):
     """
     Class to perform to hit calculations in ranged combat
@@ -42,9 +43,8 @@ class RangedToHit(ToHit):
         :type target: Character
         :rng: random number generator
         """
-        self.attacker = attacker
-        self.target = target
-        self.rng = rng
+        super().__init__(attacker, target, rng)
+
 
 class RangedDamage(Damage):
     """
@@ -58,7 +58,8 @@ class RangedDamage(Damage):
         """
         Default constructor
         """
-        super(RangedDamage, self).__init__(damage)
+        super().__init__(damage)
+
 
 class RangedCombatFactory():
     """
@@ -71,6 +72,7 @@ class RangedCombatFactory():
         """
         Constructor for this factory
         """
+        super().__init__()
         self.attack_type = 'ranged'
         self.effect_factory = effect_factory
         self.dying_rules = dying_rules
@@ -103,15 +105,16 @@ class RangedCombatFactory():
         ammo_data = weapon.ammunition_data
 
         attack = AttackAction(
-                    attack_type = 'ranged',
-                    to_hit = RangedToHit(attacker, target,
-                                         parameters.random_number_generator),
-                    damage = RangedDamage(damage = ammo_data.damage),
-                    attacker = attacker,
-                    target = target,
-                    effect_factory = self.effect_factory,
-                    dying_rules = self.dying_rules,
-                    additional_rules = AdditionalRangedRules(attacker))
+            attack_type='ranged',
+            to_hit=RangedToHit(attacker,
+                               target,
+                               parameters.random_number_generator),
+            damage=RangedDamage(damage=ammo_data.damage),
+            attacker=attacker,
+            target=target,
+            effect_factory=self.effect_factory,
+            dying_rules=self.dying_rules,
+            additional_rules=AdditionalRangedRules(attacker))
 
         return attack
 
@@ -133,6 +136,7 @@ class RangedCombatFactory():
                                        location,
                                        direction)
 
+
 class AdditionalRangedRules():
     """
     Additional rules for ranged attack
@@ -144,7 +148,7 @@ class AdditionalRangedRules():
         """
         Default constructor
         """
-        super(AdditionalRangedRules, self).__init__()
+        super().__init__()
 
         self.attacker = attacker
 

@@ -24,6 +24,7 @@ import random
 from pyherc.aspects import log_debug, log_info
 from pyherc.events import AttackHitEvent, AttackNothingEvent, AttackMissEvent
 
+
 class AttackAction():
     """
     Action for attacking
@@ -51,6 +52,7 @@ class AttackAction():
         :param additional_rules: additional rules
         :type additional_rules: AdditionalRules
         """
+        super().__init__()
         self.action_type = 'attack'
         self.attack_type = attack_type
         self.to_hit = to_hit
@@ -69,7 +71,7 @@ class AttackAction():
         :returns: true if attackis possible, false otherwise
         :rtype: Boolean
         """
-        if self.attacker == None:
+        if self.attacker is None:
             return False
 
         return True
@@ -80,11 +82,11 @@ class AttackAction():
         Executes this Attack
         """
         target = self.target.target
-        
-        if target == None:
-            self.attacker.raise_event(AttackNothingEvent(
-                                            attacker = self.attacker,
-                                            affected_tiles = []))
+
+        if target is None:
+            self.attacker.raise_event(
+                AttackNothingEvent(attacker=self.attacker,
+                                   affected_tiles=[]))
         else:
 
             was_hit = self.to_hit.is_hit()
@@ -93,19 +95,19 @@ class AttackAction():
                 self.damage.apply_damage(target)
 
                 self.attacker.raise_event(AttackHitEvent(
-                                          type = self.attack_type,
-                                          attacker = self.attacker,
-                                          target = target,
-                                          damage = self.damage,
-                                          affected_tiles = [target.location]))
+                    type=self.attack_type,
+                    attacker=self.attacker,
+                    target=target,
+                    damage=self.damage,
+                    affected_tiles=[target.location]))
 
                 self.__trigger_attack_effects()
             else:
                 self.attacker.raise_event(AttackMissEvent(
-                                          type = self.attack_type,
-                                          attacker = self.attacker,
-                                          target = target,
-                                          affected_tiles = [target.location]))
+                    type=self.attack_type,
+                    attacker=self.attacker,
+                    target=target,
+                    affected_tiles=[target.location]))
 
             self.dying_rules.check_dying(target)
 
@@ -120,21 +122,22 @@ class AttackAction():
         .. versionadded:: 0.4
         """
         target = self.target.target
-        
+
         weapon = self.attacker.inventory.weapon
         effects = self.attacker.get_effect_handles('on attack hit')
 
-        if weapon != None:
+        if weapon is not None:
             effects.extend(weapon.get_effect_handles('on attack hit'))
         for effect_spec in effects:
             effect = self.effect_factory.create_effect(
-                                                    effect_spec.effect,
-                                                    target = target)
+                effect_spec.effect,
+                target=target)
 
             if not effect.duration or effect.duration <= 0:
                 effect.trigger(self.dying_rules)
             else:
                 target.add_effect(effect)
+
 
 class ToHit():
     """
@@ -142,7 +145,7 @@ class ToHit():
     """
     @log_debug
     def __init__(self, attacker, target,
-                        random_number_generator = random.Random()):
+                 random_number_generator=random.Random()):
         """
         Default constructor
         """
@@ -159,6 +162,7 @@ class ToHit():
         """
         return True
 
+
 class Damage():
     """
     Damage done in attack
@@ -168,6 +172,7 @@ class Damage():
         """
         Default constructor
         """
+        super().__init__()
         self.__damage = damage
         self.damage_inflicted = 0
 
@@ -187,12 +192,13 @@ class Damage():
 
             self.damage_inflicted = (self.damage_inflicted +
                                      damage[0] +
-                                     sum(x.modifier for x in matching_modifiers))
+                                     sum(x.modifier for x
+                                         in matching_modifiers))
 
             if self.damage_inflicted < 1:
                 self.damage_inflicted = 0
 
-        if target.inventory.armour != None:
+        if target.inventory.armour is not None:
             armour = target.inventory.armour.armour_data.damage_reduction
         else:
             armour = 0
@@ -230,6 +236,7 @@ class Damage():
 
     damage = property(__get_damage)
     damage_types = property(__get_damage_types)
+
 
 class AdditionalRules():
     """
