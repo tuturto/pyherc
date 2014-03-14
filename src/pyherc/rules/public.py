@@ -32,6 +32,7 @@ SpellCastingParameteres - Class used to guide spell casting
 
 from pyherc.aspects import log_debug, log_info
 
+
 class ActionFactory():
     """
     Object for creating actions
@@ -46,6 +47,8 @@ class ActionFactory():
             model: model to register for the factory
             factories: a single Factory or list of Factories to use
         """
+        super().__init__()
+
         if hasattr(factories, '__iter__'):
             self.factories = factories
         else:
@@ -63,7 +66,7 @@ class ActionFactory():
             parameters: Parameters used to control action creation
         """
         factory = self.get_sub_factory(parameters)
-        assert factory != None, 'suitable factory not configured'
+        assert factory is not None, 'suitable factory not configured'
         return factory.get_action(parameters)
 
     @log_debug
@@ -94,6 +97,7 @@ class ActionFactory():
         else:
             return None
 
+
 class ActionParameters():
     """
     Object for controlling action creation
@@ -104,6 +108,7 @@ class ActionParameters():
         """
         Default constructor
         """
+        super().__init__()
         self.action_type = 'default'
 
     @log_debug

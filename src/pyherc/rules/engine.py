@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -22,6 +21,7 @@
 Module defining rules engine
 """
 
+
 class RulesEngine():
     """
     Engine for rules of the game
@@ -37,7 +37,7 @@ class RulesEngine():
         :param dying: rules for dying
         :type dying: Dying
         """
-        super(RulesEngine, self).__init__()
+        super().__init__()
 
         self.__action_factory = action_factory
         self.__dying_rules = dying_rules

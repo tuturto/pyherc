@@ -25,6 +25,7 @@ from pyherc.events import DeathEvent, DropEvent
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import DIED_IN_DUNGEON, ESCAPED_DUNGEON
 
+
 class Dying():
     """
     Rules for actions happening when dying
@@ -36,7 +37,7 @@ class Dying():
         """
         Default constructor
         """
-        super(Dying, self).__init__()
+        super().__init__()
 
     @log_debug
     def check_dying(self, character):
@@ -53,7 +54,7 @@ class Dying():
                 character.raise_event(DropEvent(character,
                                                 item))
 
-            if not character.inventory.weapon == None:
+            if character.inventory.weapon is not None:
                 character.level.add_item(character.inventory.weapon,
                                          character.location)
                 character.raise_event(DropEvent(character,
@@ -63,8 +64,9 @@ class Dying():
             if character == character.model.player:
                 character.model.end_condition = DIED_IN_DUNGEON
 
-            character.raise_event(DeathEvent(deceased = character,
-                                             affected_tiles = character.location))
+            character.raise_event(
+                DeathEvent(deceased=character,
+                           affected_tiles=character.location))
             character.level.remove_creature(character)
 
     @log_info

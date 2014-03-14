@@ -17,23 +17,25 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-#   explanation written by Björn Bergström of the FOV algorithm used here can be found from:
-#   http://roguebasin.roguelikedevelopment.org/index.php/FOV_using_recursive_shadowcasting
+#   explanation written by Björn Bergström of the FOV algorithm used here can
+#   be found from:
+#   http://roguebasin.roguelikedevelopment.org/index.php/
+#   FOV_using_recursive_shadowcasting
 #
 #   original implementation by Eric D. Burgess is from:
-#   http://roguebasin.roguelikedevelopment.org/index.php/Python_shadowcasting_implementation
+#   http://roguebasin.roguelikedevelopment.org/index.php/
+#   Python_shadowcasting_implementation
 
 """
 Line of sight implementation
 """
-mult = [
-                [1,  0,  0, -1, -1,  0,  0,  1],
-                [0,  1, -1,  0,  0, -1,  1,  0],
-                [0,  1,  1,  0,  0, -1, -1,  0],
-                [1,  0,  0,  1, -1,  0,  0, -1]
-            ]
+mult = [[1,  0,  0, -1, -1,  0,  0,  1],
+        [0,  1, -1,  0,  0, -1,  1,  0],
+        [0,  1,  1,  0,  0, -1, -1,  0],
+        [1,  0,  0,  1, -1,  0,  0, -1]]
 
-def is_blocked(loc_x, loc_y, level, character = None):
+
+def is_blocked(loc_x, loc_y, level, character=None):
     """
     Checks if given location should be considered blocking for character
 
@@ -46,11 +48,13 @@ def is_blocked(loc_x, loc_y, level, character = None):
     Returns:
         False if not blocking, otherwise True
     """
-    assert level != None
+    assert level is not None
 
     return level.blocks_los(loc_x, loc_y)
 
-def cast_light(cx, cy, row, start, end, radius, xx, xy, yx, yy, fov_matrix, level):
+
+def cast_light(cx, cy, row, start, end, radius, xx, xy, yx, yy, fov_matrix,
+               level):
     """
     Recursive lightcasting function
 
@@ -92,7 +96,7 @@ def cast_light(cx, cy, row, start, end, radius, xx, xy, yx, yy, fov_matrix, leve
                         # This is a blocking square, start a child scan:
                         blocked = True
                         cast_light(cx, cy, j+1, start, l_slope,
-                                            radius, xx, xy, yx, yy, fov_matrix, level)
+                                   radius, xx, xy, yx, yy, fov_matrix, level)
                         new_start = r_slope
         # Row is scanned; do next row unless last square was blocked:
         if blocked:
@@ -100,16 +104,18 @@ def cast_light(cx, cy, row, start, end, radius, xx, xy, yx, yy, fov_matrix, leve
 
     return fov_matrix
 
+
 def do_fov(x, y, radius, fov_matrix, level):
     """
     Calculate lit squares from the given location and radius
     """
     for oct in range(8):
         cast_light(x, y, 1, 1.0, 0.0, radius,
-                            mult[0][oct], mult[1][oct],
-                            mult[2][oct], mult[3][oct], fov_matrix, level)
+                   mult[0][oct], mult[1][oct],
+                   mult[2][oct], mult[3][oct], fov_matrix, level)
 
     return fov_matrix
+
 
 def get_fov_matrix(location, level, distance):
     """

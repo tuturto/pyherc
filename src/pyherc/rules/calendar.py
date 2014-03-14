@@ -23,6 +23,7 @@ Calendar for special dates
 
 from pyherc.data.constants import SpecialTime
 
+
 def get_special_events(year, month, day):
     """
     Get special events of a given date
@@ -36,4 +37,3 @@ def get_special_events(year, month, day):
             events.append(SpecialTime.christmas)
 
     return events
-

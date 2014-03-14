@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,19 +22,21 @@ Factory related classes are defined here
 """
 import logging
 
+
 class SubActionFactory():
     """
     Factory to handle concrete creation of actions
     """
-    def __init__(self, effect_factory = None):
+    def __init__(self, effect_factory=None):
         """
         Constructor for this factory
 
         Args:
             effect_factory: Initialised EffectsFactory
         """
+        super().__init__()
         self.action_type = 'default'
-        self.logger = logging.getLogger('pyherc.rules.factory.SubActionFactory')
+        self.logger = logging.getLogger('pyherc.rules.factory.SubActionFactory')  # noqa
         self.factories = []
         self.effect_factory = effect_factory
 
@@ -64,7 +65,6 @@ class SubActionFactory():
             True if factory is capable of handling parameters
         """
         return self.action_type == parameters.action_type
-
 
     def get_action(self, parameters):
         """
