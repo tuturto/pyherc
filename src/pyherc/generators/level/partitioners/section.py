@@ -23,6 +23,7 @@ Classes to represent division of levels
 
 import logging
 
+
 class Section():
     """
     Class representing a single section in a level
@@ -42,7 +43,7 @@ class Section():
 
         .. note:: Coordinates are given relative to level origo
         """
-        super(Section, self).__init__()
+        super().__init__()
 
         self.__corners = []
         self.__corners.append(corner1)
@@ -53,7 +54,7 @@ class Section():
         self.__room_connections = []
         self.__neighbours = []
         self.random_generator = random_generator
-        self.logger = logging.getLogger('pyherc.generators.level.partitioners.section.Section') #pylint: disable=C0301
+        self.logger = logging.getLogger('pyherc.generators.level.partitioners.section.Section')  # noqa
 
     def __get_corners(self):
         """
@@ -158,34 +159,34 @@ class Section():
         return abs(self.__corners[0][1] - self.__corners[1][1])
 
     corners = property(__get_corners, __set_corners)
-    """Corners of this Section.""" #pylint: disable=W0105
+    """Corners of this Section."""
 
     connections = property(__get_connections)
-    """Readonly property to access connections of the section""" #pylint: disable=W0105
+    """Readonly property to access connections of the section"""
 
     room_connections = property(__get_room_connections)
-    """Readonly property to access connections to the room""" #pylint: disable=W0105
+    """Readonly property to access connections to the room"""
 
     neighbours = property(__get_neighbours)
-    """Readonly property to access neighbours of the section""" #pylint: disable=W0105
+    """Readonly property to access neighbours of the section"""
 
     connected = property(__get_connected)
     """Readonly property for connection status of the section
 
         :returns: True if section is connected, otherwise False
-        :rtype: Boolean""" #pylint: disable=W0105
+        :rtype: Boolean"""
 
     left_edge = property(__get_left_edge)
-    """Readonly property to find leftmost point of the section""" #pylint: disable=W0105
+    """Readonly property to find leftmost point of the section"""
 
     width = property(__get_width)
-    """Readonly property to calculate width of the section""" #pylint: disable=W0105
+    """Readonly property to calculate width of the section"""
 
     top_edge = property(__get_top_edge)
-    """Readonly property to find topmost point of the section""" #pylint: disable=W0105
+    """Readonly property to find topmost point of the section"""
 
     height = property(__get_height)
-    """Readonly property to find height of the section""" #pylint: disable=W0105
+    """Readonly property to find height of the section"""
 
     def connect_to(self, section):
         """
@@ -196,17 +197,18 @@ class Section():
         """
         my_side_of_border = self.get_common_border(section)
         my_side = self.random_generator.choice(my_side_of_border)
-        my_connection = Connection(connection = section,
-                                   location = (my_side[0], my_side[1]),
-                                   direction = my_side[2],
-                                   section = self)
+        my_connection = Connection(connection=section,
+                                   location=(my_side[0], my_side[1]),
+                                   direction=my_side[2],
+                                   section=self)
         self.connections.append(my_connection)
 
         other_side = section.get_opposing_point(my_side)
-        other_connection = Connection(connection = self,
-                                   location = (other_side[0], other_side[1]),
-                                   direction = other_side[2],
-                                   section = section)
+        other_connection = Connection(connection=self,
+                                      location=(other_side[0],
+                                                other_side[1]),
+                                      direction=other_side[2],
+                                      section=section)
         section.connections.append(other_connection)
 
     def unconnected_neighbours(self):
@@ -217,7 +219,7 @@ class Section():
         :rtype: [Section]
         """
         return [x for x in self.neighbours
-                        if x.connected == False]
+                if not x.connected]
 
     def has_unconnected_neighbours(self):
         """
@@ -239,9 +241,9 @@ class Section():
         """
         border = []
 
-        assert(len(self.__corners) == 2)
-        assert(len(self.__corners[0]) == 2)
-        assert(len(self.__corners[1]) == 2)
+        assert len(self.__corners) == 2
+        assert len(self.__corners[0]) == 2
+        assert len(self.__corners[1]) == 2
 
         for loc_x in range(self.__corners[0][0] + 1, self.__corners[1][0]):
             border.append((loc_x, self.__corners[0][1], "down"))
@@ -281,10 +283,11 @@ class Section():
 
         :param location: (loc_x, loc_y) defining point on the other side
         :type location: (integer, integer)
-        :returns: (loc_x, loc_y) if corresponding point is found, False otherwise
+        :returns: (loc_x, loc_y) if corresponding point is found
         :rtype: (integer, integer) or Boolean
 
         .. note:: Coordinates are given relative to level origo
+        .. note:: if not match is found, False is returned
         """
         my_side = None
         my_border = self.get_border()
@@ -308,11 +311,10 @@ class Section():
 
         .. note:: Coordinates are given relative to section origo
         """
-        self.__room_connections.append(
-                        Connection(connection = None,
-                                   location = location,
-                                   direction = direction,
-                                   section = self))
+        self.__room_connections.append(Connection(connection=None,
+                                                  location=location,
+                                                  direction=direction,
+                                                  section=self))
 
     def set_floor(self, location, tile, location_type):
         """
@@ -331,7 +333,7 @@ class Section():
         y_loc = self.__get_top_edge() + location[1]
 
         self.level.floor[x_loc][y_loc] = tile
-        if location_type != None:
+        if location_type is not None:
             self.level.set_location_type((x_loc, y_loc), location_type)
 
     def get_floor(self, location):
@@ -367,7 +369,7 @@ class Section():
         y_loc = self.__get_top_edge() + location[1]
 
         self.level.walls[x_loc][y_loc] = tile
-        if location_type != None:
+        if location_type is not None:
             self.level.set_location_type(location, location_type)
 
     def set_location_type(self, location, location_type):
@@ -428,6 +430,7 @@ class Section():
 
         return connection
 
+
 class Connection():
     """
     Connection between Sections or between Section and room
@@ -446,7 +449,7 @@ class Connection():
         :param section: section where connection is located
         :type section: Section
         """
-        super(Connection, self).__init__()
+        super().__init__()
 
         self.connection = connection
         self.location = location
@@ -469,4 +472,3 @@ class Connection():
                                     self.section)
 
         return new_connection
-
