@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -26,6 +25,7 @@ import logging
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.aspects import log_debug
 
+
 class RandomConnector():
     """
     Class for building random connection network from sections
@@ -39,10 +39,10 @@ class RandomConnector():
         :type random_generator: Random
         """
         self.random_generator = random_generator
-        self.logger = logging.getLogger('pyherc.generators.level.partitioners.grid.RandomConnector') #pylint: disable=C0301
+        self.logger = logging.getLogger('pyherc.generators.level.partitioners.grid.RandomConnector')  # noqa
 
     @log_debug
-    def connect_sections(self, sections, start_section = None):
+    def connect_sections(self, sections, start_section=None):
         """
         Connects sections together
 
@@ -51,7 +51,7 @@ class RandomConnector():
         :param start_section: optional parameter specifying starting section
         :type start_section: Section
         """
-        if start_section == None:
+        if not start_section:
             start_location = self.random_generator.choice(sections)
         else:
             start_location = start_section
@@ -60,19 +60,19 @@ class RandomConnector():
 
         if len(sections) > 1:
             unconnected_sections = [x for x in sections
-                                if x.connected == False]
+                                    if not x.connected]
 
             while len(unconnected_sections) > 0:
                 edge_sections = [x for x in sections
-                                if x.connected == True
-                                and x.has_unconnected_neighbours()]
+                                 if x.connected
+                                 and x.has_unconnected_neighbours()]
 
                 start_location = self.random_generator.choice(edge_sections)
 
                 self.form_path_from_sections(start_location, sections)
 
                 unconnected_sections = [x for x in sections
-                                        if x.connected == False]
+                                        if not x.connected]
 
         return sections
 
@@ -88,17 +88,17 @@ class RandomConnector():
         """
         current_section = start_section
         unconnected_neighbours = [x for x in current_section.neighbours
-                                                if x.connected == False]
+                                  if not x.connected]
 
         while len(unconnected_neighbours) > 0:
             next_section = self.random_generator.choice(
-                                                unconnected_neighbours)
+                unconnected_neighbours)
 
             current_section.connect_to(next_section)
 
             current_section = next_section
             unconnected_neighbours = [x for x in current_section.neighbours
-                                                if x.connected == False]
+                                      if not x.connected]
 
 
 class GridPartitioner():
@@ -106,7 +106,8 @@ class GridPartitioner():
     Class for partitioning level to equal grid
     """
     @log_debug
-    def __init__(self, level_types, x_sections,  y_sections, random_generator):
+    def __init__(self, level_types, x_sections,  y_sections,
+                 random_generator):
         """
         Default constructor
 
@@ -137,7 +138,7 @@ class GridPartitioner():
         """
         sections = []
         section_matrix = [[None for i in range(self.y_sections)]
-                                               for j in range(self.x_sections)]
+                          for j in range(self.x_sections)]
         size_of_level = level.get_size()
 
         x_sections = self.split_range_to_equals(size_of_level[0],
@@ -147,13 +148,12 @@ class GridPartitioner():
 
         for y_block in range(len(y_sections)):
             for x_block in range(len(x_sections)):
-                temp_section = Section(
-                                       (x_sections[x_block][0],
+                temp_section = Section((x_sections[x_block][0],
                                         y_sections[y_block][0]),
-                                        (x_sections[x_block][1],
+                                       (x_sections[x_block][1],
                                         y_sections[y_block][1]),
-                                        level,
-                                        self.random_generator)
+                                       level,
+                                       self.random_generator)
 
                 self.connect_new_section(temp_section,
                                          (x_block, y_block),
