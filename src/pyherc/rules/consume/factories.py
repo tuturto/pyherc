@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Drinking and eating related factories are defined here
 from pyherc.rules.consume.action import DrinkAction
 from pyherc.rules.factory import SubActionFactory
 
+
 class DrinkFactory(SubActionFactory):
     """
     Factory for creating drink actions
@@ -32,7 +32,7 @@ class DrinkFactory(SubActionFactory):
         """
         Constructor for this factory
         """
-        super(DrinkFactory, self).__init__(effect_factory)
+        super().__init__(effect_factory)
         self.action_type = 'drink'
         self.dying_rules = dying_rules
 

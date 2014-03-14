@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -21,6 +20,7 @@
 """
 Module defining classes related to DrinkAction
 """
+
 
 class DrinkAction():
     """
@@ -53,8 +53,9 @@ class DrinkAction():
             if len(drink_effects) > 0:
                 for effect_spec in drink_effects:
                     effect = self.effect_factory.create_effect(
-                                                    effect_spec.effect,
-                                                    target = self.character)
+                        effect_spec.effect,
+                        target=self.character)
+
                     if effect.duration == 0:
                         effect.trigger(self.dying_rules)
                     else:

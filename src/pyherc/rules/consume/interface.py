@@ -24,6 +24,7 @@ Public interface for consuming actions
 from pyherc.aspects import log_debug, log_info
 from pyherc.rules.public import ActionParameters
 
+
 @log_info
 def drink(character, potion, action_factory):
     """
@@ -39,6 +40,7 @@ def drink(character, potion, action_factory):
     action = action_factory.get_action(DrinkParameters(character,
                                                        potion))
     action.execute()
+
 
 class DrinkParameters(ActionParameters):
     """
