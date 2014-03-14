@@ -25,6 +25,7 @@ import logging
 from pyherc.generators.level.room.corridor import CorridorGenerator
 from random import Random
 
+
 class SquareRoomGenerator():
     """
     Class for generating a square room
@@ -50,7 +51,7 @@ class SquareRoomGenerator():
         self.level_types = level_types
         self.rng = Random()
         self.room_corners = None
-        self.logger = logging.getLogger('pyherc.generators.level.room.squareroom.SquareRoomGenerator') #pylint disable=C0301
+        self.logger = logging.getLogger('pyherc.generators.level.room.squareroom.SquareRoomGenerator')  # noqa
 
     def generate_room(self, section):
         """
@@ -102,10 +103,10 @@ class SquareRoomGenerator():
             room_connection = self.find_room_connection(section,
                                                         section_connection)
             corridor = CorridorGenerator(
-                                room_connection,
-                                section_connection.translate_to_section(),
-                                self.empty_tile,
-                                self.corridor_tile)
+                room_connection,
+                section_connection.translate_to_section(),
+                self.empty_tile,
+                self.corridor_tile)
             corridor.generate()
 
     def find_room_connection(self, section, section_connection):

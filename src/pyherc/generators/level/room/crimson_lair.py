@@ -22,6 +22,7 @@ Classes for generating catacombs
 """
 from pyherc.aspects import log_debug
 
+
 class CrimsonLairGenerator():
     """
     Class for generating a catacomblike rooms
@@ -60,8 +61,8 @@ class CrimsonLairGenerator():
         for x_loc in range(1, level_size[0]):
             for y_loc in range(1, level_size[1]):
                 section.set_floor((x_loc, y_loc),
-                                   self.floor_tile,
-                                   'room')
+                                  self.floor_tile,
+                                  'room')
                 section.set_wall((x_loc, y_loc),
                                  self.empty_tile,
                                  None)

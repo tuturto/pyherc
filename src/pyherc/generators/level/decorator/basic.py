@@ -499,12 +499,31 @@ class WallOrnamentDecorator(Decorator):
         :param level: level to decorate
         :type level: Level
         """
+        wall_tile = self.configuration.wall_tile
+        rate = self.configuration.rate
+
         for loc_y in range(len(level.floor[0])):
             for loc_x in range(len(level.floor)):
-                if (level.get_wall_tile(loc_x, loc_y) == self.configuration.wall_tile
-                    and self.configuration.rng.randint(0, 100) < self.configuration.rate
-                    and level.get_floor_tile(loc_x, loc_y + 1)):
-                        level.ornamentations[loc_x][loc_y] = self.configuration.rng.choice(self.configuration.ornamentation)
+                if (level.get_wall_tile(loc_x, loc_y) == wall_tile
+                        and self.configuration.rng.randint(0, 100) < rate
+                        and level.get_floor_tile(loc_x, loc_y + 1)):
+                    self._randomize_ornament(level, loc_x, loc_y)
+
+    def _randomize_ornament(self, level, loc_x, loc_y):
+        """
+        Set random ornament to given location
+
+        :param level: level to ornament
+        :type level: Level
+        :param loc_x: x-coordinate
+        :type loc_x: int
+        :param loc_y: y-coordinate
+        :type loc_y: int
+        """
+        rng = self.configuration.rng
+        ornaments = self.configuration.ornamentation
+
+        level.ornamentations[loc_x][loc_y] = rng.choice(ornaments)
 
 
 class WallOrnamentDecoratorConfig(DecoratorConfig):

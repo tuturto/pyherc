@@ -23,6 +23,7 @@ Classes for generating corridors
 
 from pyherc.generators.level.partitioners.section import Connection
 
+
 class CorridorGenerator():
     """
     Class for making simple corridors
@@ -103,14 +104,14 @@ class CorridorGenerator():
             middle_x = middle_x + end_point.location[0]
 
         middle_start = Connection(None,
-                                 (middle_x, start_point.location[1]),
-                                 None,
-                                 self.start_point.section)
+                                  (middle_x, start_point.location[1]),
+                                  None,
+                                  self.start_point.section)
 
         middle_end = Connection(None,
-                                 (middle_x, end_point.location[1]),
-                                 None,
-                                 self.start_point.section)
+                                (middle_x, end_point.location[1]),
+                                None,
+                                self.start_point.section)
 
         self.__carve_horizontal(start_point, middle_start)
         self.__carve_vertical(middle_start, middle_end)
@@ -161,14 +162,14 @@ class CorridorGenerator():
             middle_y = middle_y + end_point.location[1]
 
         middle_start = Connection(None,
-                                 (start_point.location[0], middle_y),
-                                 None,
-                                 self.start_point.section)
+                                  (start_point.location[0], middle_y),
+                                  None,
+                                  self.start_point.section)
 
         middle_end = Connection(None,
-                                 (end_point.location[0], middle_y),
-                                 None,
-                                 self.start_point.section)
+                                (end_point.location[0], middle_y),
+                                None,
+                                self.start_point.section)
 
         self.__carve_vertical(start_point, middle_start)
         self.__carve_horizontal(middle_start, middle_end)

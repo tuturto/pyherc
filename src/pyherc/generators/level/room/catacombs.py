@@ -23,6 +23,7 @@ Classes for generating catacombs
 from pyherc.aspects import log_debug
 from pyherc.generators.utils import BSPSection
 
+
 class CatacombsGenerator():
     """
     Class for generating a catacomblike rooms
@@ -60,20 +61,21 @@ class CatacombsGenerator():
         room_min_size = (3, 3)
         BSPStack = []
         BSP = BSPSection((0, 0),
-                            (level_size[0] - 2,
-                            level_size[1] - 2), None)
+                         (level_size[0] - 2,
+                          level_size[1] - 2),
+                         None)
         BSPStack.append(BSP)
         room_stack = []
 
         while len(BSPStack) > 0:
             tempBSP = BSPStack.pop()
-            tempBSP.split(min_size = (room_min_size[0] + 4,
-                                      room_min_size[1] + 4))
-            if tempBSP.node1 != None:
+            tempBSP.split(min_size=(room_min_size[0] + 4,
+                                    room_min_size[1] + 4))
+            if tempBSP.node1 is not None:
                 BSPStack.append(tempBSP.node1)
-            if tempBSP.node2 != None:
+            if tempBSP.node2 is not None:
                 BSPStack.append(tempBSP.node2)
-            if tempBSP.node1 == None and tempBSP.node2 == None:
+            if tempBSP.node1 is None and tempBSP.node2 is None:
                 #leaf
                 room_stack.append(tempBSP)
 
@@ -86,11 +88,11 @@ class CatacombsGenerator():
             for y in range(corner1[1], corner2[1] + 1):
                 for x in range(corner1[0], corner2[0] + 1):
                     section.set_floor((x, y),
-                                       self.floor_tile,
-                                       'room')
+                                      self.floor_tile,
+                                      'room')
                     section.set_wall((x, y),
-                                      self.empty_tile,
-                                      None)
+                                     self.empty_tile,
+                                     None)
 
         area_queue = BSP.get_area_queue()
         area_queue.reverse()
@@ -109,16 +111,16 @@ class CatacombsGenerator():
                                           self.floor_tile,
                                           'corridor')
                         section.set_wall((center1[0], y),
-                                          self.empty_tile,
-                                          None)
+                                         self.empty_tile,
+                                         None)
                 else:
                     for y in range(center2[1], center1[1] + 1):
                         section.set_floor((center1[0], y),
                                           self.floor_tile,
                                           'corridor')
                         section.set_wall((center1[0], y),
-                                          self.empty_tile,
-                                          None)
+                                         self.empty_tile,
+                                         None)
             else:
                 #areas next to each other
                 if center1[0] < center2[0]:
@@ -127,13 +129,13 @@ class CatacombsGenerator():
                                           self.floor_tile,
                                           'corridor')
                         section.set_wall((x, center1[1]),
-                                          self.empty_tile,
-                                          None)
+                                         self.empty_tile,
+                                         None)
                 else:
                     for x in range(center2[0], center1[0] + 1):
                         section.set_floor((x, center1[1]),
                                           self.floor_tile,
                                           'corridor')
                         section.set_wall((x, center1[1]),
-                                          self.empty_tile,
-                                          None)
+                                         self.empty_tile,
+                                         None)
