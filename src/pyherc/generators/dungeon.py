@@ -24,6 +24,7 @@ Module for dungeon generation
 from pyherc.data import Dungeon
 from pyherc.aspects import log_debug, log_info
 
+
 class DungeonGenerator():
     """
     This class is used to generate dungeon
@@ -38,6 +39,7 @@ class DungeonGenerator():
         :param item_generator: generator for items
         :param level_generator: level generator for the first level
         """
+        super().__init__()
         self.creature_generator = creature_generator
         self.item_generator = item_generator
         self.level_generator = level_generator

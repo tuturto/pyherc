@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Module for Factory for creating effects
 from pyherc.aspects import log_debug, log_info
 import copy
 
+
 class EffectsFactory():
     """
     Factory for creating effects
@@ -33,7 +33,7 @@ class EffectsFactory():
         """
         Default constructor
         """
-        super(EffectsFactory, self).__init__()
+        super().__init__()
         self.effects = {}
 
     @log_info
@@ -61,7 +61,7 @@ class EffectsFactory():
         params = copy.deepcopy(config)
 
         type = params.pop('type')
-        if params != None:
+        if params is not None:
             for kw_key in kwargs:
                 if kw_key in params:
                     params.pop(kw_key)

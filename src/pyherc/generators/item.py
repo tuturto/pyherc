@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -28,6 +27,7 @@ from pyherc.data.item import WeaponData, ArmourData, AmmunitionData
 from pyherc.data.effects import EffectsCollection, EffectHandle
 from pyherc.aspects import log_debug, log_info
 
+
 class ItemGenerator():
     """
     Class used to generate items
@@ -40,11 +40,11 @@ class ItemGenerator():
         :param config: configuration for items
         :type config: ItemConfiguration
         """
-        super(ItemGenerator, self).__init__()
+        super().__init__()
         self.config = config
 
     @log_info
-    def generate_item(self, name = None, item_type = None):
+    def generate_item(self, name=None, item_type=None):
         """
         Generate an item
 
@@ -55,15 +55,15 @@ class ItemGenerator():
         :return: Generated item
         :rtype: Item
         """
-        item_specification = self.find_item_specification(name = name,
-                                                          item_type = item_type)
+        item_specification = self.find_item_specification(name=name,
+                                                          item_type=item_type)
 
         item = self.create_item(item_specification)
 
         return item
 
     @log_debug
-    def find_item_specification(self, name = None, item_type = None):
+    def find_item_specification(self, name=None, item_type=None):
         """
         Find item specification by given parameters
 
@@ -74,7 +74,7 @@ class ItemGenerator():
         :return: item specification
         :rtype: ItemConfiguration
         """
-        if not name is None:
+        if name is not None:
             return self.config.get_by_name(name)
         else:
             return self.config.get_by_type(item_type)
@@ -104,36 +104,37 @@ class ItemGenerator():
             damage = []
             damage.extend(weapon_spec.damage)
             item.weapon_data = WeaponData(
-                                    damage = (damage),
-                                    critical_range = weapon_spec.critical_range,
-                                    critical_damage = weapon_spec.critical_damage,
-                                    weapon_type = weapon_spec.weapon_class,
-                                    ammunition_type = weapon_spec.ammunition_type)
+                damage=(damage),
+                critical_range=weapon_spec.critical_range,
+                critical_damage=weapon_spec.critical_damage,
+                weapon_type=weapon_spec.weapon_class,
+                ammunition_type=weapon_spec.ammunition_type)
 
-        if not item_specification.armour_configuration is None:
+        if item_specification.armour_configuration is not None:
             armour_spec = item_specification.armour_configuration
             item.armour_data = ArmourData(
-                                    damage_reduction = armour_spec.damage_reduction,
-                                    speed_modifier = armour_spec.speed_modifier)
+                damage_reduction=armour_spec.damage_reduction,
+                speed_modifier=armour_spec.speed_modifier)
 
-        if not item_specification.ammunition_configuration is None:
+        if item_specification.ammunition_configuration is not None:
             ammo_spec = item_specification.ammunition_configuration
             item.ammunition_data = AmmunitionData(
-                                        damage = ammo_spec.damage,
-                                        critical_range = ammo_spec.critical_range,
-                                        critical_damage = ammo_spec.critical_damage,
-                                        ammunition_type = ammo_spec.ammunition_type,
-                                        count = ammo_spec.count)
+                damage=ammo_spec.damage,
+                critical_range=ammo_spec.critical_range,
+                critical_damage=ammo_spec.critical_damage,
+                ammunition_type=ammo_spec.ammunition_type,
+                count=ammo_spec.count)
 
         for spec in item_specification.effect_handles:
-            new_handle = EffectHandle(trigger = spec.trigger,
-                                       effect = spec.effect,
-                                       parameters = spec.parameters,
-                                       charges = spec.charges)
+            new_handle = EffectHandle(trigger=spec.trigger,
+                                      effect=spec.effect,
+                                      parameters=spec.parameters,
+                                      charges=spec.charges)
 
             item.add_effect_handle(new_handle)
 
         return item
+
 
 class ItemConfigurations():
     """
@@ -147,7 +148,7 @@ class ItemConfigurations():
         :param rng: random number generator
         :type rng: Random
         """
-        super(ItemConfigurations, self).__init__()
+        super().__init__()
         self.__items = []
         self.__items_by_name = {}
         self.rng = rng
@@ -207,6 +208,7 @@ class ItemConfigurations():
 
         return None
 
+
 class ItemConfiguration():
     """
     Class representing a single item
@@ -220,12 +222,13 @@ class ItemConfiguration():
 
     @log_debug
     def __init__(self, name, cost, weight, icons, types, rarity,
-                 weapon_configration = None, effect_handles = None,
-                 armour_configuration = None,
-                 ammunition_configuration = None, description = ''):
+                 weapon_configration=None, effect_handles=None,
+                 armour_configuration=None,
+                 ammunition_configuration=None, description=''):
         """
         Default constructor
         """
+        super().__init__()
         self.name = name
         self.description = description
         self.cost = cost
@@ -242,23 +245,25 @@ class ItemConfiguration():
         else:
             self.effect_handles = effect_handles
 
+
 class WeaponConfiguration():
     """
     Class representing weapon configuration
     """
     @log_debug
     def __init__(self, damage, critical_range, critical_damage, weapon_class,
-                 ammunition_type = None):
+                 ammunition_type=None):
         """
         Default constructor
         """
-        super(WeaponConfiguration, self).__init__()
+        super().__init__()
 
         self.damage = damage
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.weapon_class = weapon_class
         self.ammunition_type = ammunition_type
+
 
 class ArmourConfiguration():
     """
@@ -269,10 +274,11 @@ class ArmourConfiguration():
         """
         Default constructor
         """
-        super(ArmourConfiguration, self).__init__()
+        super().__init__()
 
         self.damage_reduction = damage_reduction
         self.speed_modifier = speed_modifier
+
 
 class AmmunitionConfiguration():
     """
@@ -286,7 +292,7 @@ class AmmunitionConfiguration():
         """
         Default constructor
         """
-        super(AmmunitionConfiguration, self).__init__()
+        super().__init__()
 
         self.damage = damage
         self.critical_range = critical_range

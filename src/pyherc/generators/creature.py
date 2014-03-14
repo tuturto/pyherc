@@ -24,6 +24,7 @@ from pyherc.data import Character
 from pyherc.data.effects import EffectHandle
 from pyherc.aspects import log_debug, log_info
 
+
 class CreatureGenerator():
     """
     Class used to generate creatures
@@ -62,10 +63,10 @@ class CreatureGenerator():
         new_creature.attack = config.attack
 
         for spec in config.effect_handles:
-            new_handle = EffectHandle(trigger = spec.trigger,
-                                       effect = spec.effect,
-                                       parameters = spec.parameters,
-                                       charges = spec.charges)
+            new_handle = EffectHandle(trigger=spec.trigger,
+                                      effect=spec.effect,
+                                      parameters=spec.parameters,
+                                      charges=spec.charges)
 
             new_creature.add_effect_handle(new_handle)
 
@@ -73,13 +74,11 @@ class CreatureGenerator():
             new_effect = spec.clone()
             new_creature.add_effect(new_effect)
 
-
         for spec in config.inventory:
             new_creature.inventory.append(
-                                self.item_generator.generate_item(
-                                                        name = spec.item_name))
+                self.item_generator.generate_item(name=spec.item_name))
 
-        if not config.ai == None:
+        if config.ai is not None:
             new_creature.artificial_intelligence = config.ai(new_creature)
 
         return new_creature
@@ -94,6 +93,7 @@ class CreatureGenerator():
         """
         return self.configuration[name]
 
+
 class CreatureConfiguration():
     """
     Configuration for an creature
@@ -101,11 +101,12 @@ class CreatureConfiguration():
 
     @log_debug
     def __init__(self, name, body, finesse, mind, hp, speed, icons, attack,
-                 ai = None, effect_handles = None, effects = None,
-                 inventory = None, description = None):
+                 ai=None, effect_handles=None, effects=None,
+                 inventory=None, description=None):
         """
         Default constructor
         """
+        super().__init__()
         self.name = name
         self.body = body
         self.finesse = finesse
@@ -117,20 +118,21 @@ class CreatureConfiguration():
         self.ai = ai
         self.description = description
 
-        if effect_handles == None:
+        if effect_handles is None:
             self.effect_handles = []
         else:
             self.effect_handles = effect_handles
 
-        if effects == None:
+        if effects is None:
             self.effects = []
         else:
             self.effects = effects
 
-        if inventory == None:
+        if inventory is None:
             self.inventory = []
         else:
             self.inventory = inventory
+
 
 class InventoryConfiguration():
     """
@@ -143,6 +145,7 @@ class InventoryConfiguration():
         """
         Default constructor
         """
+        super().__init__()
         self.item_name = item_name
         self.min_amount = min_amount
         self.max_amount = max_amount
