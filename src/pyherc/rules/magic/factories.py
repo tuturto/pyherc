@@ -24,6 +24,7 @@ from pyherc.rules.factory import SubActionFactory
 from pyherc.rules.magic.action import SpellCastingAction, GainDomainAction
 from pyherc.aspects import log_debug, log_info
 
+
 class SpellCastingFactory(SubActionFactory):
     """
     Factory for creating spell casting actions
@@ -35,6 +36,7 @@ class SpellCastingFactory(SubActionFactory):
         """
         Constructor for this factory
         """
+        super().__init__()
         self.spell_factory = spell_factory
         self.effects_factory = effects_factory
         self.dying_rules = dying_rules
@@ -48,13 +50,14 @@ class SpellCastingFactory(SubActionFactory):
         :param parameters: parameters used to control creation
         :type parameters: SpellCastingParameters
         """
-        spell = self.spell_factory.create_spell(spell_name = parameters.spell_name,
-                                                targets = self._get_spell_targets(parameters))
+        spell = self.spell_factory.create_spell(
+            spell_name=parameters.spell_name,
+            targets=self._get_spell_targets(parameters))
 
-        return SpellCastingAction(caster = parameters.caster,
-                                  spell = spell,
-                                  effects_factory = self.effects_factory,
-                                  dying_rules = self.dying_rules)
+        return SpellCastingAction(caster=parameters.caster,
+                                  spell=spell,
+                                  effects_factory=self.effects_factory,
+                                  dying_rules=self.dying_rules)
 
     @log_debug
     def _get_spell_targets(self, parameters):
@@ -67,6 +70,7 @@ class SpellCastingFactory(SubActionFactory):
         spec = self.spell_factory.spell_list[parameters.spell_name]
         return spec.targeter(parameters)
 
+
 class GainDomainFactory(SubActionFactory):
     """
     Factory for creating gain domain actions
@@ -78,6 +82,7 @@ class GainDomainFactory(SubActionFactory):
         """
         Constructor for this factory
         """
+        super().__init__()
         self.action_type = 'gain domain'
 
     @log_info
@@ -88,6 +93,6 @@ class GainDomainFactory(SubActionFactory):
         :param parameters: parameters used to control creation
         :type parameters: GainDomainParameters
         """
-        return GainDomainAction(character = parameters.character,
-                                item = parameters.item,
-                                domain = parameters.domain)
+        return GainDomainAction(character=parameters.character,
+                                item=parameters.item,
+                                domain=parameters.domain)

@@ -24,6 +24,7 @@ Public interface for magic rules package
 from pyherc.aspects import log_info, log_debug
 from pyherc.rules.public import ActionParameters
 
+
 @log_info
 def cast(character, direction, spell_name, action_factory):
     """
@@ -40,12 +41,14 @@ def cast(character, direction, spell_name, action_factory):
 
     .. versionadded:: 0.9
     """
-    action = action_factory.get_action(SpellCastingParameters(
-                                                    caster = character,
-                                                    direction = direction,
-                                                    spell_name = spell_name))
+    action = action_factory.get_action(
+        SpellCastingParameters(caster=character,
+                               direction=direction,
+                               spell_name=spell_name))
+
     if action.is_legal():
         action.execute()
+
 
 @log_info
 def gain_domain(character, action_factory, domain, item):
@@ -67,6 +70,7 @@ def gain_domain(character, action_factory, domain, item):
 
     if action.is_legal():
         action.execute()
+
 
 class SpellCastingParameters(ActionParameters):
     """
@@ -93,6 +97,7 @@ class SpellCastingParameters(ActionParameters):
         self.caster = caster
         self.direction = direction
         self.spell_name = spell_name
+
 
 class GainDomainParameters(ActionParameters):
     """

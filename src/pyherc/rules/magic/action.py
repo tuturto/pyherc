@@ -22,6 +22,7 @@ Module defining spell casting actions
 """
 from pyherc.aspects import log_debug, log_info
 
+
 class SpellCastingAction():
     """
     Action for casting a spell
@@ -42,6 +43,7 @@ class SpellCastingAction():
         :param dying_rules: rules for dying
         :type dying_rules: DyingRules
         """
+        super().__init__()
         self.caster = caster
         self.spell = spell
         self.effects_factory = effects_factory
@@ -54,8 +56,8 @@ class SpellCastingAction():
         """
         self.caster.spirit = self.caster.spirit - self.spell.spirit
 
-        self.spell.cast(effects_factory = self.effects_factory,
-                        dying_rules = self.dying_rules)
+        self.spell.cast(effects_factory=self.effects_factory,
+                        dying_rules=self.dying_rules)
 
     @log_debug
     def is_legal(self):
@@ -66,6 +68,7 @@ class SpellCastingAction():
         :rtype: Boolean
         """
         return self.caster.spirit - self.spell.spirit >= 0
+
 
 class GainDomainAction():
     """
@@ -85,6 +88,7 @@ class GainDomainAction():
         :param domain: domain to gain
         :type domain: string
         """
+        super().__init__()
         self.character = character
         self.item = item
         self.domain = domain
@@ -94,7 +98,7 @@ class GainDomainAction():
         """
         Executes this action
         """
-        self.character.add_domain_level(domain = self.domain)
+        self.character.add_domain_level(domain=self.domain)
 
     @log_debug
     def is_legal(self):
