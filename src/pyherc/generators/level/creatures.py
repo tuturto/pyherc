@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Classes for creature generation
 
 from pyherc.aspects import log_debug, log_info
 
+
 class CreatureAdderConfiguration():
     """
     Class used to configure CreatureAdder
@@ -36,12 +36,12 @@ class CreatureAdderConfiguration():
         :param level_types: types of levels adder can be used at
         :type level_types: [string]
         """
-        super(CreatureAdderConfiguration, self).__init__()
+        super().__init__()
         self.level_types = level_types
         self.creature_list = []
 
     @log_info
-    def add_creature(self, min_amount, max_amount, name, location = None):
+    def add_creature(self, min_amount, max_amount, name, location=None):
         """
         Adds creature specification
 
@@ -62,6 +62,7 @@ class CreatureAdderConfiguration():
 
         self.creature_list.append(config_item)
 
+
 class CreatureAdder():
     """
     Class used to add creatures during level generation
@@ -78,7 +79,7 @@ class CreatureAdder():
         :param rng: random number generator
         :type rng: Random
         """
-        super(CreatureAdder, self).__init__()
+        super().__init__()
         self.creature_generator = creature_generator
         self.configuration = configuration
         self.rng = rng
@@ -147,7 +148,7 @@ class CreatureAdder():
             location_type = [x['location'] for x in creature_list
                              if x['name'] == creature.name]
 
-            if location_type == None:
+            if location_type is None:
                 location_type = 'any'
 
             locations = level.get_locations_by_type('room')
@@ -157,4 +158,3 @@ class CreatureAdder():
             level.add_creature(creature, location)
 
     level_types = property(__get_level_types)
-

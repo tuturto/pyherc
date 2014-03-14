@@ -25,6 +25,7 @@ import logging
 from pyherc.data import Level, Portal
 from pyherc.aspects import log_debug, log_info
 
+
 class LevelGeneratorFactory():
     """
     Class used to contruct different kinds of level generators
@@ -40,11 +41,11 @@ class LevelGeneratorFactory():
         :param random_generator: random number generator
         :type random_generator: Random
         """
-        self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGeneratorFactory') #pylint: disable=c0301
+        self.logger = logging.getLogger('pyherc.generators.level.LevelGeneratorFactory')  # noqa
         self.level_partitioners = configuration.level_partitioners
         self.room_generators = configuration.room_generators
         self.decorators = configuration.decorators
-        self.portal_adder_configurations = configuration.portal_adder_configurations
+        self.portal_adder_configurations = configuration.portal_adder_configurations  # noqa
         self.portal_adder_factory = portal_adder_factory
         self.portal_adder_factory.level_generator_factory = self
         self.item_adders = configuration.item_adders
@@ -67,8 +68,8 @@ class LevelGeneratorFactory():
                                              'partitioner')
 
         rooms = self.get_sub_components(level_type,
-                                      self.room_generators,
-                                      'room')
+                                        self.room_generators,
+                                        'room')
 
         decorator = self.get_sub_component(level_type,
                                            self.decorators,
@@ -86,7 +87,8 @@ class LevelGeneratorFactory():
                                             self.level_infos,
                                             'level info')
 
-        portal_adders = self.portal_adder_factory.create_portal_adders(level_type)
+        factory = self.portal_adder_factory
+        portal_adders = factory.create_portal_adders(level_type)
 
         return LevelGenerator(partitioner,
                               rooms,
@@ -116,9 +118,9 @@ class LevelGeneratorFactory():
 
         if len(components) == 0:
             error_message = "No {0} for type {1} in {2}".format(
-                                                            component_type,
-                                                            level_type,
-                                                            component_list)
+                component_type,
+                level_type,
+                component_list)
             self.logger.error(error_message)
             raise RuntimeError(error_message)
 
@@ -145,13 +147,14 @@ class LevelGeneratorFactory():
             component = self.random_generator.choice(matches)
         else:
             error_message = "No {0} for type {1} in {2}".format(
-                                                            component_type,
-                                                            level_type,
-                                                            component_list)
+                component_type,
+                level_type,
+                component_list)
             self.logger.error(error_message)
             raise RuntimeError(error_message)
 
         return component
+
 
 class LevelGenerator():
     """
@@ -175,7 +178,7 @@ class LevelGenerator():
         :param level_context: Context for level
         :param size: Size of the level to create
         """
-        self.logger = logging.getLogger('pyherc.generators.level.crypt.LevelGenerator') #pylint: disable=C0301
+        self.logger = logging.getLogger('pyherc.generators.level.LevelGenerator')  # noqa
         self.item_adder = item_adder
         self.creature_adder = creature_adder
         self.random_generator = random_generator
@@ -194,11 +197,11 @@ class LevelGenerator():
         :param portal: portal to link to this level
         :type portal: Portal
         """
-        new_level = Level(size = self.level_context.size,
-                          floor_type = self.level_context.floor_type,
-                          wall_type = self.level_context.wall_type,
-                          empty_floor = self.level_context.empty_floor,
-                          empty_wall = self.level_context.empty_wall)
+        new_level = Level(size=self.level_context.size,
+                          floor_type=self.level_context.floor_type,
+                          wall_type=self.level_context.wall_type,
+                          empty_floor=self.level_context.empty_floor,
+                          empty_wall=self.level_context.empty_wall)
 
         sections = self.partitioner.partition_level(new_level)
 
@@ -210,11 +213,11 @@ class LevelGenerator():
             adder.add_portal(new_level)
 
         # all this needs to be cleaned up
-        if portal != None:
+        if portal is not None:
             rooms = new_level.get_locations_by_type('room')
             if len(rooms) > 0:
-                new_portal = Portal(icons = (portal.other_end_icon, None),
-                                    level_generator_name = None)
+                new_portal = Portal(icons=(portal.other_end_icon, None),
+                                    level_generator_name=None)
                 location = self.random_generator.choice(rooms)
                 new_level.add_portal(new_portal, location, portal)
             else:

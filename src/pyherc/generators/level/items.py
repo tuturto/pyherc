@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Classes for item generation
 """
 from pyherc.aspects import log_debug, log_info
 
+
 class ItemAdderConfiguration():
     """
     Configuration for ItemAdder
@@ -35,13 +35,13 @@ class ItemAdderConfiguration():
         :param level_types: types of level adder can be used at
         :type level_types: [string]
         """
-        super(ItemAdderConfiguration, self).__init__()
+        super().__init__()
         self.level_types = level_types
         self.items = []
 
     @log_info
-    def add_item(self, min_amount, max_amount, name = None, type = None,
-                 location = None):
+    def add_item(self, min_amount, max_amount, name=None, type=None,
+                 location=None):
         """
         Adds item to configuration
 
@@ -125,8 +125,8 @@ class ItemAdder():
 
         for i in range(amount):
             new_item = self.item_generator.generate_item(
-                                                name = item_spec['name'],
-                                                item_type = item_spec['type'])
+                name=item_spec['name'],
+                item_type=item_spec['type'])
             items.append((item_spec, new_item))
 
         return items
@@ -143,7 +143,7 @@ class ItemAdder():
         for item in items:
             location_type = item[0]['location']
 
-            if location_type == None:
+            if location_type is None:
                 location_type = 'any'
 
             locations = level.get_locations_by_type(location_type)

@@ -24,13 +24,14 @@ Module for adding portals
 from pyherc.data import Portal
 from pyherc.aspects import log_debug, log_info
 
+
 class PortalAdderConfiguration():
     """
     Configuration class for adding portals
     """
     @log_debug
     def __init__(self, icons, level_type, location_type, chance,
-                 new_level, unique, escape_stairs = False):
+                 new_level, unique, escape_stairs=False):
         """
         Default constructor
 
@@ -49,6 +50,7 @@ class PortalAdderConfiguration():
         self.new_level = new_level
         self.is_unique = unique
         self.is_escape_stairs = escape_stairs
+
 
 class PortalAdderFactory():
     """
@@ -96,6 +98,7 @@ class PortalAdderFactory():
 
         return adders
 
+
 class PortalAdder():
     """
     Basic class for adding portals
@@ -130,7 +133,7 @@ class PortalAdder():
 
         if len(locations) > 0:
             location = self.rng.choice(locations)
-            portal = Portal(icons = self.icons,
-                            level_generator_name = self.level_generator_name)
+            portal = Portal(icons=self.icons,
+                            level_generator_name=self.level_generator_name)
             portal.exits_dungeon = self.escape_stairs
             level.add_portal(portal, location)

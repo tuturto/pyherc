@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Classes for configuring level generation
 """
 from pyherc.aspects import log_debug
 
+
 class LevelGeneratorFactoryConfig():
     """
     Class to configure level generator
@@ -34,7 +34,7 @@ class LevelGeneratorFactoryConfig():
         """
         Default constructor
         """
-        super(LevelGeneratorFactoryConfig, self).__init__()
+        super().__init__()
         self.room_generators = room_generators
         self.level_partitioners = level_partitioners
         self.decorators = decorators
