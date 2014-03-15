@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Testing &mdash; Herculeum 0.9 documentation</title>
+    <title>Testing &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../index.html" />
     <link rel="next" title="API Reference" href="../api_reference.html" />
     <link rel="prev" title="Error Handling" href="error_handling.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="error_handling.html" title="Error Handling"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -203,16 +203,16 @@ is supposed to be doing on a high level, without making things complicated
 with all the technical details.</p>
 <p>Here&#8217;s an example, how to test that getting hit will cause hit points to go
 down.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.test.cutesy.dictionary</span> <span class="kn">import</span> <span class="n">strong</span><span class="p">,</span> <span class="n">Adventurer</span>
-<span class="kn">from</span> <span class="nn">pyherc.test.cutesy.dictionary</span> <span class="kn">import</span> <span class="n">weak</span><span class="p">,</span> <span class="n">Goblin</span>
-<span class="kn">from</span> <span class="nn">pyherc.test.cutesy.dictionary</span> <span class="kn">import</span> <span class="n">Level</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.test.cutesy</span> <span class="kn">import</span> <span class="n">strong</span><span class="p">,</span> <span class="n">Adventurer</span>
+<span class="kn">from</span> <span class="nn">pyherc.test.cutesy</span> <span class="kn">import</span> <span class="n">weak</span><span class="p">,</span> <span class="n">Goblin</span>
+<span class="kn">from</span> <span class="nn">pyherc.test.cutesy</span> <span class="kn">import</span> <span class="n">Level</span>
 
-<span class="kn">from</span> <span class="nn">pyherc.test.cutesy.dictionary</span> <span class="kn">import</span> <span class="n">place</span><span class="p">,</span> <span class="n">middle_of</span>
-<span class="kn">from</span> <span class="nn">pyherc.test.cutesy.dictionary</span> <span class="kn">import</span> <span class="n">right_of</span>
-<span class="kn">from</span> <span class="nn">pyherc.test.cutesy.dictionary</span> <span class="kn">import</span> <span class="n">make</span><span class="p">,</span>  <span class="n">hit</span>
+<span class="kn">from</span> <span class="nn">pyherc.test.cutesy</span> <span class="kn">import</span> <span class="n">place</span><span class="p">,</span> <span class="n">middle_of</span>
+<span class="kn">from</span> <span class="nn">pyherc.test.cutesy</span> <span class="kn">import</span> <span class="n">right_of</span>
+<span class="kn">from</span> <span class="nn">pyherc.test.cutesy</span> <span class="kn">import</span> <span class="n">make</span><span class="p">,</span>  <span class="n">hit</span>
 
 <span class="kn">from</span> <span class="nn">hamcrest</span> <span class="kn">import</span> <span class="n">assert_that</span>
-<span class="kn">from</span> <span class="nn">pyherc.test.cutesy.dictionary</span> <span class="kn">import</span> <span class="n">has_less_hit_points</span>
+<span class="kn">from</span> <span class="nn">pyherc.test.cutesy</span> <span class="kn">import</span> <span class="n">has_less_hit_points</span>
 
 <span class="k">class</span> <span class="nc">TestCombatBehaviour</span><span class="p">():</span>
 
@@ -356,11 +356,11 @@ online <a class="reference external" href="http://packages.python.org/behave/tut
         <li class="right" >
           <a href="error_handling.html" title="Error Handling"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>

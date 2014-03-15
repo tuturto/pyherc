@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Modular level generator &mdash; Herculeum 0.9 documentation</title>
+    <title>Modular level generator &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../index.html" />
     <link rel="next" title="Generating an item" href="generate_item.html" />
     <link rel="prev" title="Generating a level" href="generate_level.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="generate_level.html" title="Generating a level"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -208,9 +208,11 @@ example defines an simple level:</p>
 <span class="k">def</span> <span class="nf">init_level</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">item_generator</span><span class="p">,</span> <span class="n">creature_generator</span><span class="p">,</span> <span class="n">level_size</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
     <span class="n">room_generators</span> <span class="o">=</span> <span class="p">[</span><span class="n">SquareRoomGenerator</span><span class="p">(</span><span class="s">&#39;FLOOR_NATURAL&#39;</span><span class="p">,</span>
                                            <span class="s">&#39;WALL_EMPTY&#39;</span><span class="p">,</span>
+                                           <span class="s">&#39;FLOOR_NATURAL&#39;</span><span class="p">,</span>
                                            <span class="p">[</span><span class="s">&#39;upper crypt&#39;</span><span class="p">]),</span>
                        <span class="n">SquareRoomGenerator</span><span class="p">(</span><span class="s">&#39;FLOOR_CONSTRUCTED&#39;</span><span class="p">,</span>
                                            <span class="s">&#39;WALL_EMPTY&#39;</span><span class="p">,</span>
+                                           <span class="s">&#39;FLOOR_CONSTRUCTED&#39;</span><span class="p">,</span>
                                            <span class="p">[</span><span class="s">&#39;upper crypt&#39;</span><span class="p">])]</span>
     <span class="n">level_partitioners</span> <span class="o">=</span> <span class="p">[</span><span class="n">GridPartitioner</span><span class="p">([</span><span class="s">&#39;upper crypt&#39;</span><span class="p">],</span>
                                           <span class="mi">4</span><span class="p">,</span>
@@ -377,11 +379,11 @@ application and configuration.</p>
         <li class="right" >
           <a href="generate_level.html" title="Generating a level"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>

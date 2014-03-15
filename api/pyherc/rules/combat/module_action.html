@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.rules.combat.action &mdash; Herculeum 0.10.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.10.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../../../index.html" />
+    <link rel="up" title="pyherc.rules.combat" href="package_combat.html" />
+    <link rel="next" title="pyherc.rules.combat.factories" href="module_factories.html" />
+    <link rel="prev" title="pyherc.rules.combat" href="package_combat.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_factories.html" title="pyherc.rules.combat.factories"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="package_combat.html" title="pyherc.rules.combat"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>
+          <li><a href="package_combat.html" accesskey="U">pyherc.rules.combat</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.rules.combat.action">
+<span id="pyherc-rules-combat-action"></span><h1>pyherc.rules.combat.action<a class="headerlink" href="#module-pyherc.rules.combat.action" title="Permalink to this headline">¶</a></h1>
+<p>Module defining classes related to AttackAction</p>
+<dl class="class">
+<dt id="pyherc.rules.combat.action.AdditionalRules">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.combat.action.</tt><tt class="descname">AdditionalRules</tt><big>(</big><em>attacker</em><big>)</big><a class="headerlink" href="#pyherc.rules.combat.action.AdditionalRules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Additional rules for attacks</p>
+<dl class="method">
+<dt id="pyherc.rules.combat.action.AdditionalRules.after_attack">
+<tt class="descname">after_attack</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.combat.action.AdditionalRules.after_attack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Processing happening after an attack</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.rules.combat.action.AttackAction">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.combat.action.</tt><tt class="descname">AttackAction</tt><big>(</big><em>attack_type</em>, <em>to_hit</em>, <em>damage</em>, <em>attacker</em>, <em>target</em>, <em>effect_factory</em>, <em>dying_rules</em>, <em>additional_rules</em><big>)</big><a class="headerlink" href="#pyherc.rules.combat.action.AttackAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Action for attacking</p>
+<dl class="method">
+<dt id="pyherc.rules.combat.action.AttackAction.execute">
+<tt class="descname">execute</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.combat.action.AttackAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes this Attack</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.combat.action.AttackAction.is_legal">
+<tt class="descname">is_legal</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.combat.action.AttackAction.is_legal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the attack is possible to perform</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true if attackis possible, false otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.rules.combat.action.Damage">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.combat.action.</tt><tt class="descname">Damage</tt><big>(</big><em>damage</em><big>)</big><a class="headerlink" href="#pyherc.rules.combat.action.Damage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Damage done in attack</p>
+<dl class="method">
+<dt id="pyherc.rules.combat.action.Damage.apply_damage">
+<tt class="descname">apply_damage</tt><big>(</big><em>target</em><big>)</big><a class="headerlink" href="#pyherc.rules.combat.action.Damage.apply_damage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies damage to target
+:param target: target to damage
+:type target: Character</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.rules.combat.action.Damage.damage">
+<tt class="descname">damage</tt><a class="headerlink" href="#pyherc.rules.combat.action.Damage.damage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total damage caused</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">total damage caused</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyherc.rules.combat.action.Damage.damage_types">
+<tt class="descname">damage_types</tt><a class="headerlink" href="#pyherc.rules.combat.action.Damage.damage_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Types of damage caused</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">types of damage caused</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[string]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.rules.combat.action.ToHit">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.combat.action.</tt><tt class="descname">ToHit</tt><big>(</big><em>attacker</em>, <em>target</em>, <em>random_number_generator=&lt;random.Random object at 0xa41cecc&gt;</em><big>)</big><a class="headerlink" href="#pyherc.rules.combat.action.ToHit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Checks done for hitting</p>
+<dl class="method">
+<dt id="pyherc.rules.combat.action.ToHit.is_hit">
+<tt class="descname">is_hit</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.combat.action.ToHit.is_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the hit lands
+&#64;returns: True if hit is successful, False otherwise</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="package_combat.html"
+                        title="previous chapter">pyherc.rules.combat</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_factories.html"
+                        title="next chapter">pyherc.rules.combat.factories</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/pyherc/rules/combat/module_action.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="module_factories.html" title="pyherc.rules.combat.factories"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="package_combat.html" title="pyherc.rules.combat"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
+          <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>
+          <li><a href="package_combat.html" >pyherc.rules.combat</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2014, Tuukka Turto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

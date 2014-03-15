@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.public &mdash; Herculeum 0.9 documentation</title>
+    <title>pyherc.rules.public &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.rules" href="package_rules.html" />
     <link rel="next" title="pyherc.test" href="../test/package_test.html" />
     <link rel="prev" title="pyherc.rules.moving" href="module_moving.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="module_moving.html" title="pyherc.rules.moving"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_rules.html" accesskey="U">pyherc.rules</a> &raquo;</li> 
@@ -63,7 +63,6 @@
 ActionFactory - Class used to contruct Action objects
 ActionParameters - Class used to guide Action construction</p>
 <p>AttackParameters - Class used to guide contruction of attack related actions
-MoveParameters - Class used to guide construction of move related actions
 DrinkParameters - Class used to guide drinking related actions
 InventoryParameters - Class used to guide inventory related actions
 SpellCastingParameteres - Class used to guide spell casting</p>
@@ -111,44 +110,6 @@ SpellCastingParameteres - Class used to guide spell casting</p>
 <em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">ActionParameters</tt><a class="headerlink" href="#pyherc.rules.public.ActionParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Object for controlling action creation</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="pyherc.rules.public.AttackParameters">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">AttackParameters</tt><big>(</big><em>attacker</em>, <em>direction</em>, <em>attack_type</em>, <em>random_number_generator</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.AttackParameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pyherc.rules.public.ActionParameters" title="pyherc.rules.public.ActionParameters"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.public.ActionParameters</span></tt></a></p>
-<p>Object for controlling attack action creation</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="pyherc.rules.public.DrinkParameters">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">DrinkParameters</tt><big>(</big><em>character</em>, <em>item</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.DrinkParameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pyherc.rules.public.ActionParameters" title="pyherc.rules.public.ActionParameters"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.public.ActionParameters</span></tt></a></p>
-<p>Object for controlling drink action creation</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="pyherc.rules.public.InventoryParameters">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">InventoryParameters</tt><big>(</big><em>character</em>, <em>item</em>, <em>sub_action</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.InventoryParameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pyherc.rules.public.ActionParameters" title="pyherc.rules.public.ActionParameters"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.public.ActionParameters</span></tt></a></p>
-<p>Class for controlling inventory action creation</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="pyherc.rules.public.MoveParameters">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">MoveParameters</tt><big>(</big><em>character</em>, <em>direction</em>, <em>movement_mode</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.MoveParameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pyherc.rules.public.ActionParameters" title="pyherc.rules.public.ActionParameters"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.public.ActionParameters</span></tt></a></p>
-<p>Object for controlling move action creation</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="pyherc.rules.public.SpellCastingParameters">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.public.</tt><tt class="descname">SpellCastingParameters</tt><big>(</big><em>caster</em>, <em>direction</em>, <em>spell_name</em><big>)</big><a class="headerlink" href="#pyherc.rules.public.SpellCastingParameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pyherc.rules.public.ActionParameters" title="pyherc.rules.public.ActionParameters"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.public.ActionParameters</span></tt></a></p>
-<p>Class for controlling spell casting</p>
-<div class="versionadded">
-<p><span>New in version 0.9.</span></p>
-</div>
 </dd></dl>
 
 </div>
@@ -202,14 +163,14 @@ SpellCastingParameteres - Class used to guide spell casting</p>
         <li class="right" >
           <a href="module_moving.html" title="pyherc.rules.moving"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_rules.html" >pyherc.rules</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>

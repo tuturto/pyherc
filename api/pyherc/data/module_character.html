@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.data.character &mdash; Herculeum 0.9 documentation</title>
+    <title>pyherc.data.character &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,10 +23,10 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.data" href="package_data.html" />
-    <link rel="next" title="pyherc.data.dungeon" href="module_dungeon.html" />
-    <link rel="prev" title="pyherc.data.magic.spell" href="magic/module_spell.html" /> 
+    <link rel="next" title="pyherc.data.constants" href="module_constants.html" />
+    <link rel="prev" title="pyherc.data.magic.spellbook" href="magic/module_spellbook.html" /> 
   </head>
   <body>
     <div class="related">
@@ -39,12 +39,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_dungeon.html" title="pyherc.data.dungeon"
+          <a href="module_constants.html" title="pyherc.data.constants"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="magic/module_spell.html" title="pyherc.data.magic.spell"
+          <a href="magic/module_spellbook.html" title="pyherc.data.magic.spellbook"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
@@ -61,7 +61,7 @@
 <p>Module for Character related classes</p>
 <dl class="class">
 <dt id="pyherc.data.character.Character">
-<em class="property">class </em><tt class="descclassname">pyherc.data.character.</tt><tt class="descname">Character</tt><big>(</big><em>model</em>, <em>effects_collection</em>, <em>inventory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.data.character.</tt><tt class="descname">Character</tt><big>(</big><em>model</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Represents a character in playing world</p>
 <dl class="method">
@@ -84,6 +84,31 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="pyherc.data.character.Character.add_domain_level">
+<tt class="descname">add_domain_level</tt><big>(</big><em>domain</em>, <em>level=None</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.add_domain_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add level to a spell domain</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>domain</strong> (<em>string</em>) &#8211; name of domain to learn</li>
+<li><strong>level</strong> (<em>int</em>) &#8211; amount to increment the level</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">if level is None, current level is incremented by one</p>
+</div>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyherc.data.character.Character.add_effect">
 <tt class="descname">add_effect</tt><big>(</big><em>effect</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.add_effect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds effect to this character</p>
@@ -95,6 +120,10 @@
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Multiples of same type of effect are not added</p>
+</div>
 <div class="versionadded">
 <p><span>New in version 0.4.</span></p>
 </div>
@@ -114,6 +143,23 @@
 </table>
 <div class="versionadded">
 <p><span>New in version 0.4.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.add_spell_entry">
+<tt class="descname">add_spell_entry</tt><big>(</big><em>entry</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.add_spell_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add spell entry into characters spellbook</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>entry</strong> (<em>SpellEntry</em>) &#8211; entry to add</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
 </div>
 </dd></dl>
 
@@ -139,28 +185,6 @@ while taking characters speed into account</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pyherc.data.character.Character.cast">
-<tt class="descname">cast</tt><big>(</big><em>direction</em>, <em>spell_name</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.cast" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cast a spell</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>direction</strong> (<em>int</em>) &#8211; direction to cast the spell</li>
-<li><strong>spell</strong> (<em>string</em>) &#8211; spell to cast</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="versionadded">
-<p><span>New in version 0.9.</span></p>
-</div>
-</dd></dl>
-
-<dl class="method">
 <dt id="pyherc.data.character.Character.create_action">
 <tt class="descname">create_action</tt><big>(</big><em>action_parameters</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.create_action" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an action by defined by action parameters</p>
@@ -179,66 +203,6 @@ while taking characters speed into account</p>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.drink">
-<tt class="descname">drink</tt><big>(</big><em>potion</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.drink" title="Permalink to this definition">¶</a></dt>
-<dd><p>Drink potion</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>potion</strong> (<em>Item</em>) &#8211; potion to drink</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.drop_item">
-<tt class="descname">drop_item</tt><big>(</big><em>item</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.drop_item" title="Permalink to this definition">¶</a></dt>
-<dd><p>Drop item from inventory</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>item</strong> (<em>Item</em>) &#8211; item to drop</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="versionadded">
-<p><span>New in version 0.5.</span></p>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.equip">
-<tt class="descname">equip</tt><big>(</big><em>item</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.equip" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wear item from inventory</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>item</strong> (<em>Item</em>) &#8211; item to equip</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="versionadded">
-<p><span>New in version 0.8.</span></p>
-</div>
 </dd></dl>
 
 <dl class="method">
@@ -269,6 +233,27 @@ while taking characters speed into account</p>
 <dt id="pyherc.data.character.Character.get_attack">
 <tt class="descname">get_attack</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_attack" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attack attribute of the character</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.character.Character.get_domain_level">
+<tt class="descname">get_domain_level</tt><big>(</big><em>domain</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_domain_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current level of a given domain</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>domain</strong> (<em>String</em>) &#8211; name of the domain</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">current level, 0 if character does not know the domain</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -312,6 +297,22 @@ while taking characters speed into account</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pyherc.data.character.Character.get_known_spells">
+<tt class="descname">get_known_spells</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_known_spells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of known spells</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of known spells</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[SpellEntry]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyherc.data.character.Character.get_location">
 <tt class="descname">get_location</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_location" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns location of this character</p>
@@ -349,22 +350,6 @@ while taking characters speed into account</p>
 </div>
 </dd></dl>
 
-<dl class="method">
-<dt id="pyherc.data.character.Character.get_mimic_item">
-<tt class="descname">get_mimic_item</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.get_mimic_item" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets item this character can mimic</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">item to mimic</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Item</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="attribute">
 <dt id="pyherc.data.character.Character.hit_points">
 <tt class="descname">hit_points</tt><a class="headerlink" href="#pyherc.data.character.Character.hit_points" title="Permalink to this definition">¶</a></dt>
@@ -380,31 +365,6 @@ while taking characters speed into account</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>Item</em>) &#8211; item to mark as identified</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.is_move_legal">
-<tt class="descname">is_move_legal</tt><big>(</big><em>direction</em>, <em>movement_mode</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.is_move_legal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if movement is legal</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>direction</strong> (<em>integer</em>) &#8211; direction to move</li>
-<li><strong>movement_mode</strong> (<em>string</em>) &#8211; mode of movement</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if move is legal, False otherwise</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Boolean</p>
-</td>
 </tr>
 </tbody>
 </table>
@@ -441,24 +401,6 @@ while taking characters speed into account</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pyherc.data.character.Character.move">
-<tt class="descname">move</tt><big>(</big><em>direction</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.move" title="Permalink to this definition">¶</a></dt>
-<dd><p>Move this character to specified direction</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>direction</strong> (<em>integer</em>) &#8211; direction to move</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
 <dt id="pyherc.data.character.Character.notify_update_listeners">
 <tt class="descname">notify_update_listeners</tt><big>(</big><em>event</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.notify_update_listeners" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notify all listeners registered for update of this entity</p>
@@ -472,46 +414,6 @@ while taking characters speed into account</p>
 </table>
 <div class="versionadded">
 <p><span>New in version 0.5.</span></p>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.perform_attack">
-<tt class="descname">perform_attack</tt><big>(</big><em>direction</em>, <em>action_factory</em>, <em>rng</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.perform_attack" title="Permalink to this definition">¶</a></dt>
-<dd><p>Attack to given direction</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>direction</strong> (<em>integer</em>) &#8211; direction to attack</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-<li><strong>rng</strong> (<em>Random</em>) &#8211; random number generator</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.pick_up">
-<tt class="descname">pick_up</tt><big>(</big><em>item</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.pick_up" title="Permalink to this definition">¶</a></dt>
-<dd><p>Pick up item</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>item</strong> (<em>Item</em>) &#8211; item to pick up</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="versionadded">
-<p><span>New in version 0.4.</span></p>
 </div>
 </dd></dl>
 
@@ -640,39 +542,10 @@ while taking characters speed into account</p>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="pyherc.data.character.Character.set_mimic_item">
-<tt class="descname">set_mimic_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.set_mimic_item" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets item this character can mimic or pretend to be</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>Item</em>) &#8211; item to mimic</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyherc.data.character.Character.unequip">
-<tt class="descname">unequip</tt><big>(</big><em>item</em>, <em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.data.character.Character.unequip" title="Permalink to this definition">¶</a></dt>
-<dd><p>Unequip item</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>item</strong> (<em>Item</em>) &#8211; item to unequip</li>
-<li><strong>action_factory</strong> (<em>ActionFactory</em>) &#8211; factory to create actions</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="versionadded">
-<p><span>New in version 0.8.</span></p>
-</div>
+<dl class="attribute">
+<dt id="pyherc.data.character.Character.spirit">
+<tt class="descname">spirit</tt><a class="headerlink" href="#pyherc.data.character.Character.spirit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current spirit points</p>
 </dd></dl>
 
 </dd></dl>
@@ -706,11 +579,11 @@ while taking characters speed into account</p>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="magic/module_spell.html"
-                        title="previous chapter">pyherc.data.magic.spell</a></p>
+  <p class="topless"><a href="magic/module_spellbook.html"
+                        title="previous chapter">pyherc.data.magic.spellbook</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="module_dungeon.html"
-                        title="next chapter">pyherc.data.dungeon</a></p>
+  <p class="topless"><a href="module_constants.html"
+                        title="next chapter">pyherc.data.constants</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../_sources/pyherc/data/module_character.txt"
@@ -743,19 +616,19 @@ while taking characters speed into account</p>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_dungeon.html" title="pyherc.data.dungeon"
+          <a href="module_constants.html" title="pyherc.data.constants"
              >next</a> |</li>
         <li class="right" >
-          <a href="magic/module_spell.html" title="pyherc.data.magic.spell"
+          <a href="magic/module_spellbook.html" title="pyherc.data.magic.spellbook"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_data.html" >pyherc.data</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>

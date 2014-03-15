@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyherc.ports.actions &mdash; Herculeum 0.10.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.10.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../../index.html" />
+    <link rel="up" title="pyherc.ports" href="package_ports.html" />
+    <link rel="next" title="pyherc.rules" href="../rules/package_rules.html" />
+    <link rel="prev" title="pyherc.ports" href="package_ports.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../rules/package_rules.html" title="pyherc.rules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="package_ports.html" title="pyherc.ports"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="package_ports.html" accesskey="U">pyherc.ports</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyherc.ports.actions">
+<span id="pyherc-ports-actions"></span><h1>pyherc.ports.actions<a class="headerlink" href="#module-pyherc.ports.actions" title="Permalink to this headline">¶</a></h1>
+<p>Port to issue actions</p>
+<dl class="class">
+<dt id="pyherc.ports.actions.ActionsPort">
+<em class="property">class </em><tt class="descclassname">pyherc.ports.actions.</tt><tt class="descname">ActionsPort</tt><big>(</big><em>action_factory</em><big>)</big><a class="headerlink" href="#pyherc.ports.actions.ActionsPort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Port to issue actions with</p>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
+<dl class="method">
+<dt id="pyherc.ports.actions.ActionsPort.is_move_legal">
+<tt class="descname">is_move_legal</tt><big>(</big><em>character</em>, <em>direction</em><big>)</big><a class="headerlink" href="#pyherc.ports.actions.ActionsPort.is_move_legal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if character is allowed to move to given direction</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>character</strong> (<em>Character</em>) &#8211; character to move</li>
+<li><strong>direction</strong> (<em>int (1-8)</em>) &#8211; direction to move to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.ports.actions.ActionsPort.move_character">
+<tt class="descname">move_character</tt><big>(</big><em>character</em>, <em>direction</em><big>)</big><a class="headerlink" href="#pyherc.ports.actions.ActionsPort.move_character" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move a character to given direction</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>character</strong> (<em>Character</em>) &#8211; character to move</li>
+<li><strong>direction</strong> (<em>int (1-8)</em>) &#8211; direction to move to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="package_ports.html"
+                        title="previous chapter">pyherc.ports</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../rules/package_rules.html"
+                        title="next chapter">pyherc.rules</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/pyherc/ports/module_actions.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../rules/package_rules.html" title="pyherc.rules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="package_ports.html" title="pyherc.ports"
+             >previous</a> |</li>
+        <li><a href="../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
+          <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
+          <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
+          <li><a href="package_ports.html" >pyherc.ports</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2014, Tuukka Turto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

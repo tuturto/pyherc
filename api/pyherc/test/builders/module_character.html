@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.test.builders.character &mdash; Herculeum 0.9 documentation</title>
+    <title>pyherc.test.builders.character &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.test.builders" href="package_builders.html" />
     <link rel="next" title="pyherc.test.builders.effect" href="module_effect.html" />
     <link rel="prev" title="pyherc.test.builders.action" href="module_action.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="module_action.html" title="pyherc.test.builders.action"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
@@ -113,6 +113,28 @@
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.test.builders.character.CharacterBuilder.with_domain">
+<tt class="descname">with_domain</tt><big>(</big><em>domain</em>, <em>level</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.character.CharacterBuilder.with_domain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set spell domain for character</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>domain</strong> (<em>string</em>) &#8211; name of the domain</li>
+<li><strong>level</strong> (<em>int</em>) &#8211; level of the domain</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Can be called multiple times</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -320,6 +342,20 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="pyherc.test.builders.character.CharacterBuilder.with_spell_entry">
+<tt class="descname">with_spell_entry</tt><big>(</big><em>entry</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.character.CharacterBuilder.with_spell_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add spell entry</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>entry</strong> (<em>SpellEntry</em>) &#8211; entry to add</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyherc.test.builders.character.CharacterBuilder.with_spirit">
 <tt class="descname">with_spirit</tt><big>(</big><em>spirit</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.character.CharacterBuilder.with_spirit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Configure amount of spirit points</p>
@@ -432,7 +468,7 @@
         <li class="right" >
           <a href="module_action.html" title="pyherc.test.builders.action"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
@@ -440,7 +476,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.test.builders.action &mdash; Herculeum 0.9 documentation</title>
+    <title>pyherc.test.builders.action &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.test.builders" href="package_builders.html" />
     <link rel="next" title="pyherc.test.builders.character" href="module_character.html" />
     <link rel="prev" title="pyherc.test.builders" href="package_builders.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="package_builders.html" title="pyherc.test.builders"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
@@ -114,6 +114,23 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="pyherc.test.builders.action.ActionFactoryBuilder.with_gain_domain_factory">
+<tt class="descname">with_gain_domain_factory</tt><big>(</big><em>gain_domain_factory=None</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder.with_gain_domain_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure action factory to use gain domain factory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>gain_domain_factory</strong> (<em>GainDomainFactory</em>) &#8211; gain domain factory to use</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyherc.test.builders.action.ActionFactoryBuilder.with_inventory_factory">
 <tt class="descname">with_inventory_factory</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder.with_inventory_factory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Configure action factory to use real inventory factory</p>
@@ -148,6 +165,15 @@
 </div>
 </dd></dl>
 
+<dl class="method">
+<dt id="pyherc.test.builders.action.ActionFactoryBuilder.with_wait_factory">
+<tt class="descname">with_wait_factory</tt><big>(</big><em>wait_factory=None</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.ActionFactoryBuilder.with_wait_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure wait factory to use</p>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -176,6 +202,20 @@
 </dd></dl>
 
 <dl class="class">
+<dt id="pyherc.test.builders.action.GainDomainFactoryBuilder">
+<em class="property">class </em><tt class="descclassname">pyherc.test.builders.action.</tt><tt class="descname">GainDomainFactoryBuilder</tt><a class="headerlink" href="#pyherc.test.builders.action.GainDomainFactoryBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Builder for gain domain factory</p>
+<p>..versionadded:: 0.10</p>
+<dl class="method">
+<dt id="pyherc.test.builders.action.GainDomainFactoryBuilder.build">
+<tt class="descname">build</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.GainDomainFactoryBuilder.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds the factory</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="pyherc.test.builders.action.SpellCastingFactoryBuilder">
 <em class="property">class </em><tt class="descclassname">pyherc.test.builders.action.</tt><tt class="descname">SpellCastingFactoryBuilder</tt><a class="headerlink" href="#pyherc.test.builders.action.SpellCastingFactoryBuilder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
@@ -199,6 +239,22 @@
 <dt id="pyherc.test.builders.action.SpellCastingFactoryBuilder.with_spell_factory">
 <tt class="descname">with_spell_factory</tt><big>(</big><em>spell_factory=None</em><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.SpellCastingFactoryBuilder.with_spell_factory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Configure spell factory to use</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.builders.action.WaitFactoryBuilder">
+<em class="property">class </em><tt class="descclassname">pyherc.test.builders.action.</tt><tt class="descname">WaitFactoryBuilder</tt><a class="headerlink" href="#pyherc.test.builders.action.WaitFactoryBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Builder for wait factory</p>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
+<dl class="method">
+<dt id="pyherc.test.builders.action.WaitFactoryBuilder.build">
+<tt class="descname">build</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.builders.action.WaitFactoryBuilder.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build wait factory</p>
 </dd></dl>
 
 </dd></dl>
@@ -254,7 +310,7 @@
         <li class="right" >
           <a href="package_builders.html" title="pyherc.test.builders"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
@@ -262,7 +318,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>

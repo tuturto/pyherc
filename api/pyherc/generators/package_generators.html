@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.generators &mdash; Herculeum 0.9 documentation</title>
+    <title>pyherc.generators &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,10 +23,10 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../../index.html" />
     <link rel="up" title="pyherc" href="../package_pyherc.html" />
     <link rel="next" title="pyherc.generators.creature" href="module_creature.html" />
-    <link rel="prev" title="pyherc.events.poison" href="../events/module_poison.html" /> 
+    <link rel="prev" title="pyherc.events.spirit" href="../events/module_spirit.html" /> 
   </head>
   <body>
     <div class="related">
@@ -42,9 +42,9 @@
           <a href="module_creature.html" title="pyherc.generators.creature"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../events/module_poison.html" title="pyherc.events.poison"
+          <a href="../events/module_spirit.html" title="pyherc.events.spirit"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" accesskey="U">pyherc</a> &raquo;</li> 
       </ul>
@@ -64,16 +64,17 @@
 <li class="toctree-l1"><a class="reference internal" href="module_dungeon.html">pyherc.generators.dungeon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_effects.html">pyherc.generators.effects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_item.html">pyherc.generators.item</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_spells.html">pyherc.generators.spells</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_utils.html">pyherc.generators.utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="level/module_level.html">pyherc.generators.level</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="level/package_level.html">pyherc.generators.level</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="level/module_config.html">pyherc.generators.level.config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="level/module_creatures.html">pyherc.generators.level.creatures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="level/module_items.html">pyherc.generators.level.items</a></li>
 <li class="toctree-l2"><a class="reference internal" href="level/module_generator.html">pyherc.generators.level.generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="level/module_prototiles.html">pyherc.generators.level.prototiles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="level/module_portals.html">pyherc.generators.level.portals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="level/decorator/module_decorator.html">pyherc.generators.level.decorator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="level/partitioners/module_partitioners.html">pyherc.generators.level.partitioners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="level/decorator/package_decorator.html">pyherc.generators.level.decorator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="level/partitioners/package_partitioners.html">pyherc.generators.level.partitioners</a></li>
 <li class="toctree-l2"><a class="reference internal" href="level/room/package_room.html">pyherc.generators.level.room</a></li>
 </ul>
 </li>
@@ -88,8 +89,8 @@
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../events/module_poison.html"
-                        title="previous chapter">pyherc.events.poison</a></p>
+  <p class="topless"><a href="../events/module_spirit.html"
+                        title="previous chapter">pyherc.events.spirit</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="module_creature.html"
                         title="next chapter">pyherc.generators.creature</a></p>
@@ -128,15 +129,15 @@
           <a href="module_creature.html" title="pyherc.generators.creature"
              >next</a> |</li>
         <li class="right" >
-          <a href="../events/module_poison.html" title="pyherc.events.poison"
+          <a href="../events/module_spirit.html" title="pyherc.events.spirit"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>

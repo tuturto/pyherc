@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.test.cutesy.dictionary &mdash; Herculeum 0.9 documentation</title>
+    <title>pyherc.test.cutesy.dictionary &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.test.cutesy" href="package_cutesy.html" />
     <link rel="next" title="pyherc.test.cutesy.weapons" href="module_weapons.html" />
     <link rel="prev" title="pyherc.test.cutesy.characters" href="module_characters.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="module_characters.html" title="pyherc.test.cutesy.characters"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
@@ -79,6 +79,13 @@
 <em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">Drop</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.Drop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Class representing dropping an item</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.cutesy.dictionary.GainDomainAction">
+<em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">GainDomainAction</tt><big>(</big><em>item</em>, <em>domain</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.GainDomainAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Action to gain a domain</p>
 </dd></dl>
 
 <dl class="class">
@@ -160,24 +167,6 @@
 <em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">Hit</tt><big>(</big><em>target</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.Hit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Class representing a hit in unarmed combat</p>
-<dl class="method">
-<dt id="pyherc.test.cutesy.dictionary.Hit.find_direction">
-<tt class="descname">find_direction</tt><big>(</big><em>start</em>, <em>end</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.Hit.find_direction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find direction from one point to another</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>start</strong> (<em>(int, int)</em>) &#8211; start location</li>
-<li><strong>end</strong> (<em>(int, int)</em>) &#8211; end location</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="function">
@@ -204,10 +193,45 @@
 </dd></dl>
 
 <dl class="class">
+<dt id="pyherc.test.cutesy.dictionary.TakeRandomStep">
+<em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">TakeRandomStep</tt><a class="headerlink" href="#pyherc.test.cutesy.dictionary.TakeRandomStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Class representing taking a random step</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyherc.test.cutesy.dictionary.Wait">
+<em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">Wait</tt><a class="headerlink" href="#pyherc.test.cutesy.dictionary.Wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Class representing waiting a bit</p>
+</dd></dl>
+
+<dl class="class">
 <dt id="pyherc.test.cutesy.dictionary.WieldAction">
 <em class="property">class </em><tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">WieldAction</tt><big>(</big><em>weapon</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.WieldAction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Action to get chracter to wield something</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.add_history_value">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">add_history_value</tt><big>(</big><em>character</em>, <em>attribute</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.add_history_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add given value into history data of the character</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>character</strong> (<em>Character</em>) &#8211; Character to modify</li>
+<li><strong>attribute</strong> (<em>String</em>) &#8211; name of the attribute to store</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -276,6 +300,36 @@
 <dt id="pyherc.test.cutesy.dictionary.drop">
 <tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">drop</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.drop" title="Permalink to this definition">¶</a></dt>
 <dd><p>make chracter to drop an item</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.gain_domain_">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">gain_domain_</tt><big>(</big><em>item</em>, <em>domain</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.gain_domain_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gain domain</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.get_history_value">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">get_history_value</tt><big>(</big><em>character</em>, <em>attribute</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.get_history_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get given history value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>character</strong> (<em>Character</em>) &#8211; character whose history value to get</li>
+<li><strong>attribute</strong> (<em>String</em>) &#8211; name of the attribute</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">old value of the attribute</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -397,6 +451,18 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.take_random_step">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">take_random_step</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.take_random_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a single step</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.test.cutesy.dictionary.wait_">
+<tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">wait_</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.wait_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait a bit</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="pyherc.test.cutesy.dictionary.weak_poison">
 <tt class="descclassname">pyherc.test.cutesy.dictionary.</tt><tt class="descname">weak_poison</tt><big>(</big><em>target=None</em><big>)</big><a class="headerlink" href="#pyherc.test.cutesy.dictionary.weak_poison" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates effect specification for poison</p>
@@ -489,7 +555,7 @@
         <li class="right" >
           <a href="module_characters.html" title="pyherc.test.cutesy.characters"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_test.html" >pyherc.test</a> &raquo;</li>
@@ -497,7 +563,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>

@@ -10,5 +10,6 @@ pyherc.generators
    module_dungeon
    module_effects
    module_item
+   module_spells
    module_utils
-   level/module_level
+   level/package_level

@@ -25,13 +25,10 @@ and are published under the Creative Commons licence.
 Some tiles, in Dungeon Odyssey "Xerathul's Revenge" module have been drawn 
 by Henk Brouwer.
 
+Some graphics is from http://opengameart.org/content/dawnlike-16x16-universal-rogue-like-tileset-v10
+and are distributed under a CC-BY-SA 3.0 license. Great palette by DawnBringer.
+
 A star implementation adapted from one by Pauli Henrikki Rikula
-
-Music score
------------
- - the Gathering of the Tribes - Demetrios Katis <http://www.BeatPick.com/>
-
-Music is licensed under Creative Common Attribution-NonCommercial-ShareAlike 3.0 <http://creativecommons.org/licenses/by-nc-sa/3.0/>
  
 Other help
 ----------

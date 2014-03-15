@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>herculeum.ui.gui.map &mdash; Herculeum 0.9 documentation</title>
+    <title>herculeum.ui.gui.map &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../../../index.html" />
     <link rel="up" title="herculeum.ui.gui" href="package_gui.html" />
     <link rel="next" title="herculeum.ui.gui.menu" href="module_menu.html" />
     <link rel="prev" title="herculeum.ui.gui.mainwindow" href="module_mainwindow.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="module_mainwindow.html" title="herculeum.ui.gui.mainwindow"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_herculeum.html" >herculeum</a> &raquo;</li>
           <li><a href="../package_ui.html" >herculeum.ui</a> &raquo;</li>
@@ -82,12 +82,21 @@
 
 <dl class="class">
 <dt id="herculeum.ui.gui.map.MapGlyph">
-<em class="property">class </em><tt class="descclassname">herculeum.ui.gui.map.</tt><tt class="descname">MapGlyph</tt><big>(</big><em>pixmap</em>, <em>entity</em><big>)</big><a class="headerlink" href="#herculeum.ui.gui.map.MapGlyph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">herculeum.ui.gui.map.</tt><tt class="descname">MapGlyph</tt><big>(</big><em>pixmap</em>, <em>entity</em>, <em>timer=None</em><big>)</big><a class="headerlink" href="#herculeum.ui.gui.map.MapGlyph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QGraphicsPixmapItem</span></tt></p>
 <p>Widget to represent a glyph on map</p>
 <div class="versionadded">
 <p><span>New in version 0.5.</span></p>
 </div>
+<dl class="method">
+<dt id="herculeum.ui.gui.map.MapGlyph.animate">
+<tt class="descname">animate</tt><big>(</big><em>frame</em><big>)</big><a class="headerlink" href="#herculeum.ui.gui.map.MapGlyph.animate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move animation to given frame</p>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
+</dd></dl>
+
 <dl class="method">
 <dt id="herculeum.ui.gui.map.MapGlyph.clear_update_registration">
 <tt class="descname">clear_update_registration</tt><big>(</big><big>)</big><a class="headerlink" href="#herculeum.ui.gui.map.MapGlyph.clear_update_registration" title="Permalink to this definition">¶</a></dt>
@@ -112,7 +121,7 @@
 </div>
 <dl class="method">
 <dt id="herculeum.ui.gui.map.PlayMapWidget.add_glyph">
-<tt class="descname">add_glyph</tt><big>(</big><em>entity</em>, <em>scene</em>, <em>z_order</em><big>)</big><a class="headerlink" href="#herculeum.ui.gui.map.PlayMapWidget.add_glyph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_glyph</tt><big>(</big><em>entity</em>, <em>scene</em>, <em>z_order</em>, <em>animation_adapter=None</em><big>)</big><a class="headerlink" href="#herculeum.ui.gui.map.PlayMapWidget.add_glyph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add graphical representation of an entity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -122,6 +131,7 @@
 <li><strong>entity</strong> &#8211; entity to display</li>
 <li><strong>scene</strong> (<em>QGraphicsScene</em>) &#8211; scene where glyph will be added</li>
 <li><strong>z_order</strong> (<em>int</em>) &#8211; z-order of entity being displayed</li>
+<li><strong>animation_adapter</strong> (<em>TimerAdapter</em>) &#8211; adapter to register for animations</li>
 </ul>
 </td>
 </tr>
@@ -212,6 +222,24 @@
 <dd><p>Handle requesting menu window</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="herculeum.ui.gui.map.PlayMapWindow.on_next_spell">
+<tt class="descname">on_next_spell</tt><big>(</big><big>)</big><a class="headerlink" href="#herculeum.ui.gui.map.PlayMapWindow.on_next_spell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle selecting next spell</p>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="herculeum.ui.gui.map.PlayMapWindow.on_previous_spell">
+<tt class="descname">on_previous_spell</tt><big>(</big><big>)</big><a class="headerlink" href="#herculeum.ui.gui.map.PlayMapWindow.on_previous_spell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle selecting previous spell</p>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -265,7 +293,7 @@
         <li class="right" >
           <a href="module_mainwindow.html" title="herculeum.ui.gui.mainwindow"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_herculeum.html" >herculeum</a> &raquo;</li>
           <li><a href="../package_ui.html" >herculeum.ui</a> &raquo;</li>
@@ -273,7 +301,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>

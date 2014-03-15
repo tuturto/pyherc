@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.data.level &mdash; Herculeum 0.9 documentation</title>
+    <title>pyherc.data.level &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../../index.html" />
     <link rel="up" title="pyherc.data" href="package_data.html" />
     <link rel="next" title="pyherc.data.model" href="module_model.html" />
     <link rel="prev" title="pyherc.data.item" href="module_item.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="module_item.html" title="pyherc.data.item"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_data.html" accesskey="U">pyherc.data</a> &raquo;</li> 
@@ -223,6 +223,33 @@ This should be &gt;= 0</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.get_floor_tile">
+<tt class="descname">get_floor_tile</tt><big>(</big><em>loc_x</em>, <em>loc_y</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.get_floor_tile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get floor tile at given location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>loc_x</strong> (<em>integer</em>) &#8211; x-coordinate of the location</li>
+<li><strong>loc_y</strong> (<em>integer</em>) &#8211; y-coordinate of the location</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">floor tile ID at given location</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -415,6 +442,28 @@ It might also be a good choise to implement a class for the node</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pyherc.data.level.Level.set_floor_tile">
+<tt class="descname">set_floor_tile</tt><big>(</big><em>loc_x</em>, <em>loc_y</em>, <em>tile</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.set_floor_tile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set floor tile at given location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>loc_x</strong> (<em>integer</em>) &#8211; x-coordinate of the location</li>
+<li><strong>loc_y</strong> (<em>integer</em>) &#8211; y-coordinate of the location</li>
+<li><strong>tile</strong> (<em>integer</em>) &#8211; tile to set</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyherc.data.level.Level.set_location_type">
 <tt class="descname">set_location_type</tt><big>(</big><em>location</em>, <em>location_type</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.set_location_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set type of location</p>
@@ -430,6 +479,28 @@ It might also be a good choise to implement a class for the node</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.data.level.Level.set_wall_tile">
+<tt class="descname">set_wall_tile</tt><big>(</big><em>loc_x</em>, <em>loc_y</em>, <em>tile</em><big>)</big><a class="headerlink" href="#pyherc.data.level.Level.set_wall_tile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set wall tile at given location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>loc_x</strong> (<em>integer</em>) &#8211; x-coordinate of the location</li>
+<li><strong>loc_y</strong> (<em>integer</em>) &#8211; y-coordinate of the location</li>
+<li><strong>tile</strong> (<em>integer</em>) &#8211; tile to set</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span>New in version 0.10.</span></p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -485,14 +556,14 @@ It might also be a good choise to implement a class for the node</p>
         <li class="right" >
           <a href="module_item.html" title="pyherc.data.item"
              >previous</a> |</li>
-        <li><a href="../../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="package_data.html" >pyherc.data</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>

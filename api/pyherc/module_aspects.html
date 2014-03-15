@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.aspects &mdash; Herculeum 0.9 documentation</title>
+    <title>pyherc.aspects &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../index.html" />
     <link rel="up" title="pyherc" href="package_pyherc.html" />
+    <link rel="next" title="pyherc.version" href="module_version.html" />
     <link rel="prev" title="pyherc.test.unit" href="test/unit/package_unit.html" /> 
   </head>
   <body>
@@ -38,9 +39,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
+          <a href="module_version.html" title="pyherc.version"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="test/unit/package_unit.html" title="pyherc.test.unit"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="package_pyherc.html" accesskey="U">pyherc</a> &raquo;</li> 
       </ul>
@@ -55,20 +59,32 @@
 <span id="pyherc-aspects"></span><h1>pyherc.aspects<a class="headerlink" href="#module-pyherc.aspects" title="Permalink to this headline">¶</a></h1>
 <p>Module for aspects</p>
 <dl class="function">
-<dt id="pyherc.aspects.fatal_logger">
-<tt class="descclassname">pyherc.aspects.</tt><tt class="descname">fatal_logger</tt><big>(</big><em>wrapped_function</em><big>)</big><a class="headerlink" href="#pyherc.aspects.fatal_logger" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decorator to perform logging of exceptions</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="pyherc.aspects.info_logger">
-<tt class="descclassname">pyherc.aspects.</tt><tt class="descname">info_logger</tt><big>(</big><em>wrapped_function</em><big>)</big><a class="headerlink" href="#pyherc.aspects.info_logger" title="Permalink to this definition">¶</a></dt>
+<dt id="pyherc.aspects.log_critical">
+<tt class="descclassname">pyherc.aspects.</tt><tt class="descname">log_critical</tt><big>(</big><em>wrapped_function</em><big>)</big><a class="headerlink" href="#pyherc.aspects.log_critical" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator to perform logging</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pyherc.aspects.logged">
-<tt class="descclassname">pyherc.aspects.</tt><tt class="descname">logged</tt><big>(</big><em>wrapped_function</em><big>)</big><a class="headerlink" href="#pyherc.aspects.logged" title="Permalink to this definition">¶</a></dt>
+<dt id="pyherc.aspects.log_debug">
+<tt class="descclassname">pyherc.aspects.</tt><tt class="descname">log_debug</tt><big>(</big><em>wrapped_function</em><big>)</big><a class="headerlink" href="#pyherc.aspects.log_debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to perform logging</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.aspects.log_error">
+<tt class="descclassname">pyherc.aspects.</tt><tt class="descname">log_error</tt><big>(</big><em>wrapped_function</em><big>)</big><a class="headerlink" href="#pyherc.aspects.log_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to perform logging</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.aspects.log_info">
+<tt class="descclassname">pyherc.aspects.</tt><tt class="descname">log_info</tt><big>(</big><em>wrapped_function</em><big>)</big><a class="headerlink" href="#pyherc.aspects.log_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to perform logging</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.aspects.log_warning">
+<tt class="descclassname">pyherc.aspects.</tt><tt class="descname">log_warning</tt><big>(</big><em>wrapped_function</em><big>)</big><a class="headerlink" href="#pyherc.aspects.log_warning" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator to perform logging</p>
 </dd></dl>
 
@@ -76,6 +92,12 @@
 <dt id="pyherc.aspects.no_logger">
 <tt class="descclassname">pyherc.aspects.</tt><tt class="descname">no_logger</tt><big>(</big><em>wrapped_function</em><big>)</big><a class="headerlink" href="#pyherc.aspects.no_logger" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator to perform no logging at all</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyherc.aspects.set_logger">
+<tt class="descclassname">pyherc.aspects.</tt><tt class="descname">set_logger</tt><big>(</big><em>log_level</em>, <em>silent</em><big>)</big><a class="headerlink" href="#pyherc.aspects.set_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set application-wide log level</p>
 </dd></dl>
 
 </div>
@@ -89,6 +111,9 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="test/unit/package_unit.html"
                         title="previous chapter">pyherc.test.unit</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module_version.html"
+                        title="next chapter">pyherc.version</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/pyherc/module_aspects.txt"
@@ -121,15 +146,18 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
+          <a href="module_version.html" title="pyherc.version"
+             >next</a> |</li>
+        <li class="right" >
           <a href="test/unit/package_unit.html" title="pyherc.test.unit"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="package_pyherc.html" >pyherc</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>

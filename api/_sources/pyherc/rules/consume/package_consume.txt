@@ -8,3 +8,4 @@ pyherc.rules.consume
    
    module_action
    module_factories
+   module_interface

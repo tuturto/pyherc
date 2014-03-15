@@ -9,4 +9,5 @@ pyherc.rules.inventory
    module_action
    module_equip
    module_factories
+   module_interface
    module_unequip

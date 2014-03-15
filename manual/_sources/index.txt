@@ -14,6 +14,7 @@ Contents:
    intro
    commands
    text_commands
+   characters
    survival
    regions
    items

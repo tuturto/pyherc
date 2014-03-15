@@ -6,11 +6,13 @@ pyherc.rules
 .. toctree::
    :maxdepth: 2
 
-   attack/package_attack
+   combat/package_combat
    consume/package_consume
    inventory/package_inventory
    magic/package_magic
-   move/module_move
+   moving/package_moving
+   waiting/package_waiting
+   module_constants
    module_ending
    module_engine
    module_factory

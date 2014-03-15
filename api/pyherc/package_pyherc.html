@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc &mdash; Herculeum 0.9 documentation</title>
+    <title>pyherc &mdash; Herculeum 0.10.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.9',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,9 +23,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.9 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.10.0 documentation" href="../index.html" />
     <link rel="up" title="API Reference" href="../api_reference.html" />
-    <link rel="next" title="pyherc.aspects" href="module_aspects.html" />
+    <link rel="next" title="pyherc.ai" href="ai/package_ai.html" />
     <link rel="prev" title="herculeum.application" href="../herculeum/module_application.html" /> 
   </head>
   <body>
@@ -39,12 +39,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_aspects.html" title="pyherc.aspects"
+          <a href="ai/package_ai.html" title="pyherc.ai"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../herculeum/module_application.html" title="herculeum.application"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" accesskey="U">API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -59,14 +59,10 @@
 <p>pyherc is a rogue clone</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="module_aspects.html">pyherc.aspects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ai/package_ai.html">pyherc.ai</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ai/module_heapset.html">pyherc.ai.heapset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ai/module_pathfinding.html">pyherc.ai.pathfinding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ai/module_pyheapq.html">pyherc.ai.pyheapq</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ai/module_rat.html">pyherc.ai.rat</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ai/module_simple.html">pyherc.ai.simple</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ai/module_skeleton.html">pyherc.ai.skeleton</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="config/package_config.html">pyherc.config</a><ul>
@@ -78,7 +74,9 @@
 <li class="toctree-l2"><a class="reference internal" href="data/effects/package_effects.html">pyherc.data.effects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data/magic/package_magic.html">pyherc.data.magic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data/module_character.html">pyherc.data.character</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data/module_constants.html">pyherc.data.constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data/module_dungeon.html">pyherc.data.dungeon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data/module_geometry.html">pyherc.data.geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data/module_inventory.html">pyherc.data.inventory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data/module_item.html">pyherc.data.item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data/module_level.html">pyherc.data.level</a></li>
@@ -98,6 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="events/module_move.html">pyherc.events.move</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_perception.html">pyherc.events.perception</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events/module_poison.html">pyherc.events.poison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events/module_spirit.html">pyherc.events.spirit</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="generators/package_generators.html">pyherc.generators</a><ul>
@@ -105,16 +104,23 @@
 <li class="toctree-l2"><a class="reference internal" href="generators/module_dungeon.html">pyherc.generators.dungeon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators/module_effects.html">pyherc.generators.effects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators/module_item.html">pyherc.generators.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators/module_spells.html">pyherc.generators.spells</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators/module_utils.html">pyherc.generators.utils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generators/level/module_level.html">pyherc.generators.level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators/level/package_level.html">pyherc.generators.level</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ports/package_ports.html">pyherc.ports</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ports/module_actions.html">pyherc.ports.actions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rules/package_rules.html">pyherc.rules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rules/attack/package_attack.html">pyherc.rules.attack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rules/combat/package_combat.html">pyherc.rules.combat</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/consume/package_consume.html">pyherc.rules.consume</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/inventory/package_inventory.html">pyherc.rules.inventory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/magic/package_magic.html">pyherc.rules.magic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rules/move/module_move.html">pyherc.rules.move</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rules/moving/package_moving.html">pyherc.rules.moving</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rules/waiting/package_waiting.html">pyherc.rules.waiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rules/module_constants.html">pyherc.rules.constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_ending.html">pyherc.rules.ending</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_engine.html">pyherc.rules.engine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rules/module_factory.html">pyherc.rules.factory</a></li>
@@ -133,6 +139,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="module_aspects.html">pyherc.aspects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_version.html">pyherc.version</a></li>
 </ul>
 </div>
 </div>
@@ -147,8 +154,8 @@
   <p class="topless"><a href="../herculeum/module_application.html"
                         title="previous chapter">herculeum.application</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="module_aspects.html"
-                        title="next chapter">pyherc.aspects</a></p>
+  <p class="topless"><a href="ai/package_ai.html"
+                        title="next chapter">pyherc.ai</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/pyherc/package_pyherc.txt"
@@ -181,17 +188,17 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="module_aspects.html" title="pyherc.aspects"
+          <a href="ai/package_ai.html" title="pyherc.ai"
              >next</a> |</li>
         <li class="right" >
           <a href="../herculeum/module_application.html" title="herculeum.application"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.9 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
           <li><a href="../api_reference.html" >API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010-2013, Tuukka Turto.
+        &copy; Copyright 2010-2014, Tuukka Turto.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
