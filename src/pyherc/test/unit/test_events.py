@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -25,12 +24,13 @@ from pyherc.test.builders import CharacterBuilder
 
 from mockito import mock, verify
 
+
 class TestCharacterEvents():
     """
     Tests for Character's event handling
     """
     def __init__(self):
-        pass
+        super().__init__()
 
     def test_that_character_relays_events(self):
         """
@@ -40,8 +40,8 @@ class TestCharacterEvents():
         event = mock()
 
         character = (CharacterBuilder()
-                            .with_event_listener(listener)
-                            .build())
+                     .with_event_listener(listener)
+                     .build())
 
         character.receive_event(event)
 

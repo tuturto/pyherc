@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -25,9 +24,10 @@ Module for testing effects collection
 from pyherc.data.effects import EffectsCollection
 from pyherc.test.builders import EffectHandleBuilder
 from pyherc.test.builders import EffectBuilder
-from hamcrest import assert_that, is_in, is_not, is_, equal_to #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_in, is_not, is_, equal_to
 from pyherc.test.matchers import has_effect_handle, has_effect_handles
 from pyherc.test.matchers import has_effect
+
 
 class TestEffectsCollection():
     """
@@ -37,7 +37,7 @@ class TestEffectsCollection():
         """
         Default constructor
         """
-        super(TestEffectsCollection, self).__init__()
+        super().__init__()
         self.collection = None
 
     def setup(self):
@@ -61,11 +61,11 @@ class TestEffectsCollection():
         Test that adding two handles don't create key collisions
         """
         handle1 = (EffectHandleBuilder()
-                        .with_effect('heal')
-                        .build())
+                   .with_effect('heal')
+                   .build())
         handle2 = (EffectHandleBuilder()
-                        .with_effect('bless')
-                        .build())
+                   .with_effect('bless')
+                   .build())
 
         self.collection.add_effect_handle(handle1)
         self.collection.add_effect_handle(handle2)
@@ -77,11 +77,11 @@ class TestEffectsCollection():
         Test that handles can be retrieved by their trigger
         """
         handle1 = (EffectHandleBuilder()
-                        .with_trigger('on drink')
-                        .build())
+                   .with_trigger('on drink')
+                   .build())
         handle2 = (EffectHandleBuilder()
-                        .with_trigger('on bash')
-                        .build())
+                   .with_trigger('on bash')
+                   .build())
         self.collection.add_effect_handle(handle1)
         self.collection.add_effect_handle(handle2)
 
@@ -94,8 +94,8 @@ class TestEffectsCollection():
         Test that collection returns an empty list when trigger does not match
         """
         handle1 = (EffectHandleBuilder()
-                        .with_trigger('on sleep')
-                        .build())
+                   .with_trigger('on sleep')
+                   .build())
         self.collection.add_effect_handle(handle1)
 
         handles = self.collection.get_effect_handles('on kick')
@@ -128,8 +128,8 @@ class TestEffectsCollection():
         Test that expired effects are removed
         """
         effect = (EffectBuilder()
-                    .with_duration(0)
-                    .build())
+                  .with_duration(0)
+                  .build())
 
         self.collection.add_effect(effect)
         self.collection.remove_expired_effects()
