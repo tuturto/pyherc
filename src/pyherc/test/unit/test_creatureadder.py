@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -21,10 +20,10 @@
 """
 Tests for CreatureAdder
 """
-#pylint: disable=W0614
+
 from mockito import mock
-from hamcrest import assert_that, has_length, greater_than, less_than #pylint: disable-msg=E0611
-from hamcrest import greater_than_or_equal_to #pylint: disable-msg=E0611
+from hamcrest import assert_that, has_length, greater_than, less_than
+from hamcrest import greater_than_or_equal_to
 from pyherc.test.matchers import has_creature, located_in_room
 
 from pyherc.data import Level
@@ -33,6 +32,7 @@ from pyherc.generators.level.creatures import CreatureAdder
 from pyherc.generators.level.creatures import CreatureAdderConfiguration
 from pyherc.generators import CreatureConfiguration
 import random
+
 
 class TestCreatureAdder():
     """
@@ -57,26 +57,25 @@ class TestCreatureAdder():
         self.level.set_location_type((10, 10), 'room')
 
         creature_config = {}
-        creature_config['rat'] = CreatureConfiguration(name = 'rat',
-                                                       body = 4,
-                                                       finesse = 12,
-                                                       mind = 2,
-                                                       hp = 2,
-                                                       speed = 2,
-                                                       icons = 1,
-                                                       attack = 2,
-                                                       ai = None)
+        creature_config['rat'] = CreatureConfiguration(name='rat',
+                                                       body=4,
+                                                       finesse=12,
+                                                       mind=2,
+                                                       hp=2,
+                                                       speed=2,
+                                                       icons=1,
+                                                       attack=2,
+                                                       ai=None)
 
-        creature_config['dragon'] = CreatureConfiguration(
-                                              name = 'dragon',
-                                              body = 4,
-                                              finesse = 12,
-                                              mind = 2,
-                                              hp = 2,
-                                              speed = 2,
-                                              icons = 1,
-                                              attack = 2,
-                                              ai = None)
+        creature_config['dragon'] = CreatureConfiguration(name='dragon',
+                                                          body=4,
+                                                          finesse=12,
+                                                          mind=2,
+                                                          hp=2,
+                                                          speed=2,
+                                                          icons=1,
+                                                          attack=2,
+                                                          ai=None)
 
         self.model = mock()
         self.creature_generator = CreatureGenerator(creature_config,
@@ -85,13 +84,13 @@ class TestCreatureAdder():
                                                     self.rng)
 
         self.configuration = CreatureAdderConfiguration(['crypt'])
-        self.configuration.add_creature(min_amount = 3,
-                                        max_amount = 4,
-                                        name = 'rat')
-        self.configuration.add_creature(min_amount = 1,
-                                        max_amount = 1,
-                                        name = 'dragon',
-                                        location = 'room')
+        self.configuration.add_creature(min_amount=3,
+                                        max_amount=4,
+                                        name='rat')
+        self.configuration.add_creature(min_amount=1,
+                                        max_amount=1,
+                                        name='dragon',
+                                        location='room')
         self.creature_adder = CreatureAdder(self.creature_generator,
                                             self.configuration,
                                             self.rng)
@@ -115,7 +114,5 @@ class TestCreatureAdder():
         """
         dragon = [x for x in self.level.creatures
                   if x.name == 'dragon'][0]
-
-        location = dragon.location
 
         assert_that(located_in_room(dragon))

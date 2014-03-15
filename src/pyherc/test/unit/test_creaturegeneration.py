@@ -20,16 +20,17 @@
 """
 Tests for creature generation
 """
-#pylint: disable=W0614, W0401, C0103
+
 from pyherc.generators import CreatureGenerator
 from pyherc.test.matchers import has_effect_handle, has_effect
-from hamcrest import assert_that, is_, equal_to, not_none #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, equal_to, not_none
 from mockito import mock, verify
 
 from pyherc.generators import CreatureConfiguration
 from pyherc.generators import InventoryConfiguration
 from pyherc.data.effects import EffectHandle, DamageModifier
 from random import Random
+
 
 class MockAI():
     """
@@ -42,6 +43,7 @@ class MockAI():
         """
         pass
 
+
 class TestCreatureGeneration():
     """
     Tests for creature generator
@@ -50,7 +52,7 @@ class TestCreatureGeneration():
         """
         Default constructor
         """
-        super(TestCreatureGeneration, self).__init__()
+        super().__init__()
         self.creature_config = None
         self.generator = None
 
@@ -66,61 +68,61 @@ class TestCreatureGeneration():
         self.model = mock()
         self.rng = Random()
 
-        self.creature_config['rat'] = CreatureConfiguration(name = 'rat',
-                                              body = 4,
-                                              finesse = 12,
-                                              mind = 2,
-                                              hp = 2,
-                                              speed = 2,
-                                              icons = [100, 101],
-                                              attack = 2,
-                                              ai = MockAI)
+        self.creature_config['rat'] = CreatureConfiguration(name='rat',
+                                                            body=4,
+                                                            finesse=12,
+                                                            mind=2,
+                                                            hp=2,
+                                                            speed=2,
+                                                            icons=[100, 101],
+                                                            attack=2,
+                                                            ai=MockAI)
 
-        self.creature_config['spider'] = CreatureConfiguration(name = 'spider',
-                                              body = 6,
-                                              finesse = 12,
-                                              mind = 8,
-                                              hp = 6,
-                                              speed = 1,
-                                              icons = [102],
-                                              attack = 4,
-                                              ai = MockAI,
-                                              effect_handles = [EffectHandle(
-                                                    trigger = 'on attack hit',
-                                                    effect = 'minor poison',
-                                                    parameters = None,
-                                                    charges = 100)])
+        self.creature_config['spider'] = CreatureConfiguration(
+            name='spider',
+            body=6,
+            finesse=12,
+            mind=8,
+            hp=6,
+            speed=1,
+            icons=[102],
+            attack=4,
+            ai=MockAI,
+            effect_handles=[EffectHandle(trigger='on attack hit',
+                                         effect='minor poison',
+                                         parameters=None,
+                                         charges=100)])
 
         self.creature_config['skeleton warrior'] = CreatureConfiguration(
-                                                    name = 'skeleton warrior',
-                                                    body = 8,
-                                                    finesse = 11,
-                                                    mind = 0,
-                                                    hp = 8,
-                                                    speed = 2.5,
-                                                    icons = [110],
-                                                    attack = 2,
-                                                    ai = MockAI,
-                                                    effects = [DamageModifier(modifier = 2,
-                                                                  damage_type = 'crushing',
-                                                                  duration = None,
-                                                                  frequency = None,
-                                                                  tick = None,
-                                                                  icon = 101,
-                                                                  title = 'title',
-                                                                  description = 'description')])
+            name='skeleton warrior',
+            body=8,
+            finesse=11,
+            mind=0,
+            hp=8,
+            speed=2.5,
+            icons=[110],
+            attack=2,
+            ai=MockAI,
+            effects=[DamageModifier(modifier=2,
+                                    damage_type='crushing',
+                                    duration=None,
+                                    frequency=None,
+                                    tick=None,
+                                    icon=101,
+                                    title='title',
+                                    description='description')])
 
-        self.generator = CreatureGenerator(configuration = self.creature_config,
-                                           model = self.model,
-                                           rng = self.rng,
-                                           item_generator = mock(),
+        self.generator = CreatureGenerator(configuration=self.creature_config,
+                                           model=self.model,
+                                           rng=self.rng,
+                                           item_generator=mock(),
                                            )
 
     def test_creating_simple_creature(self):
         """
         Test that simple creature can be created by name
         """
-        creature = self.generator.generate_creature(name = 'rat')
+        creature = self.generator.generate_creature(name='rat')
 
         assert_that(creature.name, is_(equal_to('rat')))
 
@@ -128,7 +130,7 @@ class TestCreatureGeneration():
         """
         Test that creature with effect handle can be created
         """
-        creature = self.generator.generate_creature(name = 'spider')
+        creature = self.generator.generate_creature(name='spider')
 
         assert_that(creature, has_effect_handle())
 
@@ -136,7 +138,7 @@ class TestCreatureGeneration():
         """
         Test that creature with effect can be created
         """
-        creature = self.generator.generate_creature(name = 'skeleton warrior')
+        creature = self.generator.generate_creature(name='skeleton warrior')
 
         assert_that(creature, has_effect())
 
@@ -144,10 +146,11 @@ class TestCreatureGeneration():
         """
         Test that creature can have AI created
         """
-        creature = self.generator.generate_creature(name = 'rat')
+        creature = self.generator.generate_creature(name='rat')
 
         assert_that(creature.artificial_intelligence,
                     is_(not_none()))
+
 
 class TestItemsInCreatureGeneration():
     """
@@ -157,7 +160,7 @@ class TestItemsInCreatureGeneration():
         """
         Default constructor
         """
-        super(TestItemsInCreatureGeneration, self).__init__()
+        super().__init__()
 
         self.model = None
         self.rng = None
@@ -171,24 +174,22 @@ class TestItemsInCreatureGeneration():
         self.model = mock()
         self.rng = Random()
 
-        inventory_config = [InventoryConfiguration(
-                                item_name = 'dagger',
-                                min_amount = 1,
-                                max_amount = 1,
-                                probability = 100
-                                )]
+        inventory_config = [InventoryConfiguration(item_name='dagger',
+                                                   min_amount=1,
+                                                   max_amount=1,
+                                                   probability=100)]
 
         self.skeleton_config = CreatureConfiguration(
-                                      name = 'skeleton warrior',
-                                      body = 8,
-                                      finesse = 11,
-                                      mind = 0,
-                                      hp = 8,
-                                      speed = 2.5,
-                                      icons = [405],
-                                      attack = 2,
-                                      ai = MockAI,
-                                      inventory = inventory_config)
+            name='skeleton warrior',
+            body=8,
+            finesse=11,
+            mind=0,
+            hp=8,
+            speed=2.5,
+            icons=[405],
+            attack=2,
+            ai=MockAI,
+            inventory=inventory_config)
 
         self.creature_config = {}
 
@@ -200,13 +201,11 @@ class TestItemsInCreatureGeneration():
 
         item_generator = mock()
 
-        self.generator = CreatureGenerator(
-                                    configuration = self.creature_config,
-                                    model = self.model,
-                                    item_generator = item_generator,
-                                    rng = self.rng)
+        self.generator = CreatureGenerator(configuration=self.creature_config,
+                                           model=self.model,
+                                           item_generator=item_generator,
+                                           rng=self.rng)
 
-        self.generator.generate_creature(name = 'skeleton warrior')
+        self.generator.generate_creature(name='skeleton warrior')
 
-        verify(item_generator).generate_item(name = 'dagger')
-
+        verify(item_generator).generate_item(name='dagger')

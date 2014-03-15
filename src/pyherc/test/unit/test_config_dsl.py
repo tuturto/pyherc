@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -25,16 +24,17 @@ Module for testing configuration DSL
 from pyherc.generators.level.prototiles import FLOOR_NATURAL
 
 from mockito import mock
-from hamcrest import assert_that, is_, equal_to, has_item #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, equal_to, has_item
 from pyherc.config.dsl import LevelConfiguration, Catacombs, natural_floor
 from random import Random
+
 
 class TestConfigDSL():
     """
     Tests for configuration DSL
     """
     def __init__(self):
-        super(TestConfigDSL, self).__init__()
+        super().__init__()
 
     def test_level_generator_factory_config_creation(self):
         """
@@ -49,14 +49,14 @@ class TestConfigDSL():
         context = mock()
 
         config = (LevelConfiguration()
-                    .with_rooms(rooms)
-                    .with_partitioners(partitioners)
-                    .with_decorators(decorators)
-                    .with_items(items)
-                    .with_creatures(creatures)
-                    .with_portals(portals)
-                    .with_contexts([context])
-                    .build())
+                  .with_rooms(rooms)
+                  .with_partitioners(partitioners)
+                  .with_decorators(decorators)
+                  .with_items(items)
+                  .with_creatures(creatures)
+                  .with_portals(portals)
+                  .with_contexts([context])
+                  .build())
 
         assert_that(config.room_generators, is_(equal_to(rooms)))
         assert_that(config.level_partitioners, is_(equal_to(partitioners)))
@@ -72,11 +72,11 @@ class TestConfigDSL():
         rng = Random()
 
         generator = (Catacombs()
-                        .with_(natural_floor())
-                        .located_at('upper catacombs')
-                        .located_at('lower catacombs')
-                        .with_(rng)
-                        .build())
+                     .with_(natural_floor())
+                     .located_at('upper catacombs')
+                     .located_at('lower catacombs')
+                     .with_(rng)
+                     .build())
 
         assert_that(generator.floor_tile, is_(equal_to(FLOOR_NATURAL)))
         assert_that(generator.level_types, has_item('upper catacombs'))

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -21,12 +20,12 @@
 """
 Tests for Connection
 """
-#pylint: disable=W0614
 from pyherc.generators.level.partitioners.section import Section, Connection
 from pyherc.data import Level
 from mockito import mock
-from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, equal_to
 import random
+
 
 class TestConnection():
     """
@@ -38,15 +37,15 @@ class TestConnection():
         Test that Connection can be translated to section coordinates
         """
         level = mock(Level)
-        section = Section(corner1 = (10, 10),
-                          corner2 = (20, 20),
-                          level = level,
-                          random_generator = random.Random())
+        section = Section(corner1=(10, 10),
+                          corner2=(20, 20),
+                          level=level,
+                          random_generator=random.Random())
 
-        connection = Connection(connection = None,
-                             location = (20, 20),
-                             direction = "right",
-                             section = section)
+        connection = Connection(connection=None,
+                                location=(20, 20),
+                                direction="right",
+                                section=section)
 
         translated_connection = connection.translate_to_section()
 

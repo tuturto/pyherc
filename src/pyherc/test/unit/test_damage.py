@@ -22,7 +22,8 @@ Tests for damage
 """
 
 from pyherc.rules.combat.action import Damage
-from hamcrest import assert_that, is_, equal_to, only_contains #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, equal_to, only_contains
+
 
 class TestDamage():
     """
@@ -32,7 +33,7 @@ class TestDamage():
         """
         Default constructor
         """
-        super(TestDamage, self).__init__()
+        super().__init__()
 
         self.damage = None
 
