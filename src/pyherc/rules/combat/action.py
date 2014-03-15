@@ -21,6 +21,7 @@
 Module defining classes related to AttackAction
 """
 import random
+from pyherc.data.constants import Duration
 from pyherc.aspects import log_debug, log_info
 from pyherc.events import AttackHitEvent, AttackNothingEvent, AttackMissEvent
 
@@ -112,7 +113,21 @@ class AttackAction():
             self.dying_rules.check_dying(target)
 
         self.additional_rules.after_attack()
-        self.attacker.add_to_tick(3)
+        self.attacker.add_to_tick(self.__get_duration())
+
+    @log_debug
+    def __get_duration(self):
+        """
+        Get duration of the attack
+
+        .. versionadded:: 0.10
+        """
+        weapon = self.attacker.inventory.weapon
+
+        if weapon:
+            return Duration.normal / weapon.weapon_data.speed
+        else:
+            return Duration.normal
 
     @log_debug
     def __trigger_attack_effects(self):

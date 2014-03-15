@@ -19,6 +19,7 @@ Fixed bugs
  - 72_ bug: moving does not take armour into account
  - 69_ bug: layering of icons
  - 54_ bug: weapons with multiple damage types cause attacker to move
+ - 9_ bug: Attacks use hard coded time
 
 **********
 Known bugs
@@ -28,7 +29,6 @@ Known bugs
  - 38_ bug: damage effect does not take damage modifiers into account
  - 25_ bug: dying should make game to return to main screen
  - 21_ bug: PyQt user interface does not support line of sight
- - 9_ bug: Attacks use hard coded time
  - 5_ bug: Raised events are not filtered, but delivered to all creatures
  
 ***********

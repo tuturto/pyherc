@@ -29,7 +29,6 @@ from pyherc.generators import EffectsFactory
 from pyherc.data.effects import EffectHandle
 from pyherc.rules.combat.action import AttackAction
 from pyherc.rules import drink
-from pyherc.data import Character
 from pyherc.data.geometry import TargetData
 from pyherc.rules import attack
 
@@ -529,7 +528,7 @@ class TestEffectsInCombat():
         to_hit = mock()
         when(to_hit).is_hit().thenReturn(False)
 
-        attacker = mock(Character)
+        attacker = CharacterBuilder().build()
         when(attacker).get_effect_handles('on attack hit').thenReturn([mock()])
 
         factory = mock()
