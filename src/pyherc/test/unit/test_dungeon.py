@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -25,6 +24,7 @@ Module for testing dungeon
 from pyherc.data import Level
 from pyherc.data import Portal
 from mockito import mock
+
 
 class TestDungeon:
     """

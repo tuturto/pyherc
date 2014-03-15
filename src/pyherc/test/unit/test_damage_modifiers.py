@@ -30,7 +30,8 @@ from pyherc.test.cutesy import at_
 
 from mockito import mock, when
 
-from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, equal_to
+
 
 class TestDamageModifiers():
     """
@@ -40,7 +41,7 @@ class TestDamageModifiers():
         """
         Default constructor
         """
-        super(TestDamageModifiers, self).__init__()
+        super().__init__()
         self.level = None
         self.modle = None
         self.character1 = None
@@ -55,39 +56,39 @@ class TestDamageModifiers():
         self.model = Model()
 
         self.action_factory = (ActionFactoryBuilder()
-                                    .with_attack_factory()
-                                    .build())
+                               .with_attack_factory()
+                               .build())
 
         self.character1 = (CharacterBuilder()
-                                .with_model(self.model)
-                                .with_hit_points(10)
-                                .with_attack(3)
-                                .with_body(5)
-                                .build())
+                           .with_model(self.model)
+                           .with_hit_points(10)
+                           .with_attack(3)
+                           .with_body(5)
+                           .build())
 
-        self.effect = DamageModifier(modifier = 1,
-                                     damage_type = 'crushing',
-                                     duration = None,
-                                     frequency = None,
-                                     tick = None,
-                                     icon = 101,
-                                     title = 'Weakness against crushing',
-                                     description = 'This character is weak')
+        self.effect = DamageModifier(modifier=1,
+                                     damage_type='crushing',
+                                     duration=None,
+                                     frequency=None,
+                                     tick=None,
+                                     icon=101,
+                                     title='Weakness against crushing',
+                                     description='This character is weak')
         self.effect.multiple_allowed = True
 
         self.character2 = (CharacterBuilder()
-                                .with_model(self.model)
-                                .with_hit_points(10)
-                                .with_attack(3)
-                                .with_body(5)
-                                .with_effect(self.effect)
-                                .build())
+                           .with_model(self.model)
+                           .with_hit_points(10)
+                           .with_attack(3)
+                           .with_body(5)
+                           .with_effect(self.effect)
+                           .build())
 
         self.model.dungeon = Dungeon()
         self.level = (LevelBuilder()
-                        .with_character(self.character1, at_(5, 5))
-                        .with_character(self.character2, at_(6, 5))
-                        .build())
+                      .with_character(self.character1, at_(5, 5))
+                      .with_character(self.character2, at_(6, 5))
+                      .build())
 
         self.model.dungeon.levels = self.level
 
@@ -123,14 +124,14 @@ class TestDamageModifiers():
         """
         Test that multiple modifier are taken into account and not skipped
         """
-        effect_2 = DamageModifier(modifier = 3,
-                                  damage_type = 'crushing',
-                                  duration = None,
-                                  frequency = None,
-                                  tick = None,
-                                  icon = 101,
-                                  title = 'title',
-                                  description = 'description')
+        effect_2 = DamageModifier(modifier=3,
+                                  damage_type='crushing',
+                                  duration=None,
+                                  frequency=None,
+                                  tick=None,
+                                  icon=101,
+                                  title='title',
+                                  description='description')
         effect_2.multiple_allowed = True
         self.character2.add_effect(effect_2)
 
@@ -146,9 +147,9 @@ class TestDamageModifiers():
         Damage modifiers should be handled in melee combat too
         """
         weapon = (ItemBuilder()
-                        .with_name('hammer')
-                        .with_damage(2, 'crushing')
-                        .build())
+                  .with_name('hammer')
+                  .with_damage(2, 'crushing')
+                  .build())
 
         self.character1.inventory.weapon = weapon
 

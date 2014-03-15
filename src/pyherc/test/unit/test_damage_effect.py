@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Tests for damage effect
 from mockito import mock, verify, any
 from pyherc.test.builders import DamageBuilder
 
+
 class TestDamageEffect():
     """
     Tests for damage effect
@@ -32,7 +32,7 @@ class TestDamageEffect():
         """
         Default constructor
         """
-        super(TestDamageEffect, self).__init__()
+        super().__init__()
 
     def test_triggering_damage_raises_event(self):
         """
@@ -41,9 +41,9 @@ class TestDamageEffect():
         target = mock()
         target.hit_points = 10
         effect = (DamageBuilder()
-                    .with_target(target)
-                    .build())
+                  .with_target(target)
+                  .build())
 
-        effect.trigger(dying_rules = mock())
+        effect.trigger(dying_rules=mock())
 
         verify(target).raise_event(any())

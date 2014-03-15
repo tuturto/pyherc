@@ -29,7 +29,8 @@ from pyherc.test.builders import ItemBuilder, CharacterBuilder
 from pyherc.test.builders import ActionFactoryBuilder, LevelBuilder
 
 from mockito import mock, verify, any
-from hamcrest import assert_that, is_, equal_to, is_in, is_not, greater_than #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, equal_to, is_in, is_not, greater_than
+
 
 class TestDropFactory():
     """
@@ -39,20 +40,21 @@ class TestDropFactory():
         """
         Default constructor
         """
-        super(TestDropFactory, self).__init__()
+        super().__init__()
 
     def test_can_handle_parameters(self):
         """
         Test that drop factory can handle parameter class
         """
-        parameters = InventoryParameters(character = mock(),
-                                         item = mock(),
-                                         sub_action = 'drop')
+        parameters = InventoryParameters(character=mock(),
+                                         item=mock(),
+                                         sub_action='drop')
         factory = DropFactory()
 
         can_handle = factory.can_handle(parameters)
 
         assert_that(can_handle, is_(equal_to(True)))
+
 
 class TestDropAction():
     """
@@ -62,7 +64,7 @@ class TestDropAction():
         """
         Default constructor
         """
-        super(TestDropAction, self).__init__()
+        super().__init__()
 
         self.item = None
         self.level = None
@@ -79,15 +81,15 @@ class TestDropAction():
         self.item = ItemBuilder().build()
 
         self.character = (CharacterBuilder()
-                                .with_item(self.item)
-                                .with_level(self.level)
-                                .with_location((5, 5))
-                                .with_model(self.model)
-                                .build())
+                          .with_item(self.item)
+                          .with_level(self.level)
+                          .with_location((5, 5))
+                          .with_model(self.model)
+                          .build())
 
         self.action_factory = (ActionFactoryBuilder()
-                                    .with_inventory_factory()
-                                    .build())
+                               .with_inventory_factory()
+                               .build())
 
     def test_dropped_item_is_removed_from_inventory(self):
         """

@@ -21,11 +21,10 @@
 Module for testing effects
 """
 
-#pylint: disable=W0614, C0103
 from pyherc.data.effects import Heal
 from pyherc.data.effects import Poison
 from pyherc.data.effects import Effect
-from pyherc.data import Level, Model
+from pyherc.data import Model
 from pyherc.generators import EffectsFactory
 from pyherc.data.effects import EffectHandle
 from pyherc.rules.combat.action import AttackAction
@@ -44,7 +43,8 @@ from pyherc.test.matchers import has_effect, has_effects, has_no_effects
 from pyherc.test.matchers import EventType
 
 from mockito import mock, when, any, verify, never
-from hamcrest import assert_that, is_, equal_to, is_not #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, equal_to, is_not
+
 
 class TestEffects():
     """
@@ -57,7 +57,7 @@ class TestEffects():
         """
         effect_factory = mock(EffectsFactory)
         effect_spec = mock(EffectHandle)
-        effect = mock (Effect)
+        effect = mock(Effect)
         effect.duration = 0
         potion = mock()
 
@@ -65,18 +65,18 @@ class TestEffects():
         when(potion).get_effect_handles('on drink').thenReturn([effect_spec])
         potion.maximum_charges_left = 2
         when(effect_factory).create_effect(any(),
-                                           target = any()).thenReturn(effect)
+                                           target=any()).thenReturn(effect)
 
         model = mock()
         action_factory = (ActionFactoryBuilder()
-                            .with_model(model)
-                            .with_drink_factory(DrinkFactoryBuilder()
-                                                    .with_effect_factory(effect_factory))
-                            .build())
+                          .with_model(model)
+                          .with_drink_factory(DrinkFactoryBuilder()
+                                              .with_effect_factory(effect_factory))  # noqa
+                          .build())
 
         character = (CharacterBuilder()
-                        .with_model(model)
-                        .build())
+                     .with_model(model)
+                     .build())
         drink(character,
               potion,
               action_factory)
@@ -96,29 +96,27 @@ class TestEffects():
 
         effect_factory = mock(EffectsFactory)
         when(effect_factory).create_effect(any(),
-                                           target = any()).thenReturn(effect)
+                                           target=any()).thenReturn(effect)
 
         action_factory = (ActionFactoryBuilder()
-                            .with_model(model)
-                            .with_attack_factory()
-                            .with_effect_factory(effect_factory)
-                            .build())
+                          .with_model(model)
+                          .with_attack_factory()
+                          .with_effect_factory(effect_factory)
+                          .build())
 
         attacker = (CharacterBuilder()
-                        .with_effect_handle(
-                                EffectHandleBuilder()
-                                    .with_trigger('on attack hit'))
-                        .with_location((5, 5))
-                        .build())
+                    .with_effect_handle(EffectHandleBuilder()
+                                        .with_trigger('on attack hit'))
+                    .with_location((5, 5))
+                    .build())
 
         defender = (CharacterBuilder()
-                        .with_location((6, 5))
-                        .build())
-
-        level = (LevelBuilder()
-                    .with_character(attacker)
-                    .with_character(defender)
+                    .with_location((6, 5))
                     .build())
+
+        (LevelBuilder().with_character(attacker)
+                       .with_character(defender)
+                       .build())
 
         attack(attacker,
                3,
@@ -140,31 +138,29 @@ class TestEffects():
 
         effect_factory = mock(EffectsFactory)
         when(effect_factory).create_effect(any(),
-                                           target = any()).thenReturn(effect)
+                                           target=any()).thenReturn(effect)
 
         action_factory = (ActionFactoryBuilder()
-                            .with_model(model)
-                            .with_attack_factory()
-                            .with_effect_factory(effect_factory)
-                            .build())
+                          .with_model(model)
+                          .with_attack_factory()
+                          .with_effect_factory(effect_factory)
+                          .build())
 
         attacker = (CharacterBuilder()
-                        .with_weapon(ItemBuilder()
-                                        .with_damage(2, 'piercing')
-                                        .with_effect(
-                                            EffectHandleBuilder()
-                                                .with_trigger('on attack hit')))
-                        .with_location((5, 5))
-                        .build())
+                    .with_weapon(ItemBuilder()
+                                 .with_damage(2, 'piercing')
+                                 .with_effect(EffectHandleBuilder()
+                                              .with_trigger('on attack hit')))
+                    .with_location((5, 5))
+                    .build())
 
         defender = (CharacterBuilder()
-                        .with_location((6, 5))
-                        .build())
-
-        level = (LevelBuilder()
-                    .with_character(attacker)
-                    .with_character(defender)
+                    .with_location((6, 5))
                     .build())
+
+        (LevelBuilder().with_character(attacker)
+                       .with_character(defender)
+                       .build())
 
         attack(attacker,
                3,
@@ -173,40 +169,37 @@ class TestEffects():
 
         verify(effect).trigger(any())
 
-
     def test_creating_effect(self):
         """
         Test that effect can be created and triggered immediately
         """
         effect_factory = EffectsFactory()
-        effect_factory.add_effect(
-                            'major heal',
-                            {'type': Heal,
-                            'duration': 0,
-                            'frequency': 0,
-                            'tick': 0,
-                            'healing': 10,
-                            'icon': 101,
-                            'title': 'title',
-                            'description': 'major heal'})
+        effect_factory.add_effect('major heal',
+                                  {'type': Heal,
+                                   'duration': 0,
+                                   'frequency': 0,
+                                   'tick': 0,
+                                   'healing': 10,
+                                   'icon': 101,
+                                   'title': 'title',
+                                   'description': 'major heal'})
 
         potion = (ItemBuilder()
-                        .with_effect(
-                            EffectHandleBuilder()
-                                .with_trigger('on drink')
-                                .with_effect('major heal')
-                                .with_charges(2))
-                        .build())
+                  .with_effect(EffectHandleBuilder()
+                               .with_trigger('on drink')
+                               .with_effect('major heal')
+                               .with_charges(2))
+                  .build())
 
         action_factory = (ActionFactoryBuilder()
-                            .with_drink_factory(DrinkFactoryBuilder()
-                                                    .with_effect_factory(effect_factory))
+                          .with_drink_factory(DrinkFactoryBuilder()
+                                              .with_effect_factory(effect_factory))  # noqa
                          .build())
 
         character = (CharacterBuilder()
-                        .with_hit_points(1)
-                        .with_max_hp(10)
-                        .build())
+                     .with_hit_points(1)
+                     .with_max_hp(10)
+                     .build())
 
         drink(character,
               potion,
@@ -221,34 +214,32 @@ class TestEffects():
         has passed
         """
         effect_factory = EffectsFactory()
-        effect_factory.add_effect(
-                            'major heal',
-                            {'type': Heal,
-                            'duration': 12,
-                            'frequency': 3,
-                            'tick': 3,
-                            'healing': 10,
-                            'icon': 100,
-                            'title': 'healig',
-                            'description': 'healing'})
+        effect_factory.add_effect('major heal',
+                                  {'type': Heal,
+                                   'duration': 12,
+                                   'frequency': 3,
+                                   'tick': 3,
+                                   'healing': 10,
+                                   'icon': 100,
+                                   'title': 'healig',
+                                   'description': 'healing'})
 
         potion = (ItemBuilder()
-                        .with_effect(
-                            EffectHandleBuilder()
-                                .with_trigger('on drink')
-                                .with_effect('major heal')
-                                .with_charges(2))
-                        .build())
+                  .with_effect(EffectHandleBuilder()
+                               .with_trigger('on drink')
+                               .with_effect('major heal')
+                               .with_charges(2))
+                  .build())
 
         action_factory = (ActionFactoryBuilder()
-                            .with_drink_factory(DrinkFactoryBuilder()
-                                                    .with_effect_factory(effect_factory))
+                          .with_drink_factory(DrinkFactoryBuilder()
+                                              .with_effect_factory(effect_factory))  # noqa
                             .build())
 
         character = (CharacterBuilder()
-                        .with_hit_points(1)
-                        .with_max_hp(10)
-                        .build())
+                     .with_hit_points(1)
+                     .with_max_hp(10)
+                     .build())
 
         drink(character,
               potion,
@@ -263,16 +254,17 @@ class TestEffects():
         model = mock()
 
         character = (CharacterBuilder()
-                        .with_effect(EffectBuilder()
-                                        .with_duration(0)
-                                        .with_tick(10)
-                                        .with_frequency(10))
-                        .with_model(model)
-                        .build())
+                     .with_effect(EffectBuilder()
+                                  .with_duration(0)
+                                  .with_tick(10)
+                                  .with_frequency(10))
+                     .with_model(model)
+                     .build())
 
         character.remove_expired_effects()
 
         verify(model).raise_event(EventType('remove event'))
+
 
 class TestEffectsInMelee():
     """
@@ -283,7 +275,7 @@ class TestEffectsInMelee():
         """
         Default constructor
         """
-        super(TestEffectsInMelee, self).__init__()
+        super().__init__()
 
         self.attacker = None
         self.defender = None
@@ -297,40 +289,38 @@ class TestEffectsInMelee():
         self.model = mock()
 
         effect_factory = EffectsFactory()
-        effect_factory.add_effect(
-                            'poison',
-                            {'type': Poison,
-                            'duration': 12,
-                            'frequency': 3,
-                            'tick': 3,
-                            'damage': 5,
-                            'icon': 101,
-                            'title': 'poison',
-                            'description': 'Causes damage'})
+        effect_factory.add_effect('poison',
+                                  {'type': Poison,
+                                   'duration': 12,
+                                   'frequency': 3,
+                                   'tick': 3,
+                                   'damage': 5,
+                                   'icon': 101,
+                                   'title': 'poison',
+                                   'description': 'Causes damage'})
 
         self.action_factory = (ActionFactoryBuilder()
-                                    .with_attack_factory()
-                                    .with_effect_factory(effect_factory)
-                                    .build())
+                               .with_attack_factory()
+                               .with_effect_factory(effect_factory)
+                               .build())
 
         self.attacker = (CharacterBuilder()
-                            .with_location((5, 5))
-                            .with_effect_handle(EffectHandleBuilder()
-                                                 .with_trigger('on attack hit')
-                                                 .with_effect('poison'))
-                            .with_model(self.model)
-                            .build())
+                         .with_location((5, 5))
+                         .with_effect_handle(EffectHandleBuilder()
+                                             .with_trigger('on attack hit')
+                                             .with_effect('poison'))
+                         .with_model(self.model)
+                         .build())
 
         self.defender = (CharacterBuilder()
-                            .with_location((5, 4))
-                            .with_hit_points(50)
-                            .with_model(self.model)
-                            .build())
+                         .with_location((5, 4))
+                         .with_hit_points(50)
+                         .with_model(self.model)
+                         .build())
 
-        level = (LevelBuilder()
-                    .with_character(self.attacker)
-                    .with_character(self.defender)
-                    .build())
+        (LevelBuilder().with_character(self.attacker)
+                       .with_character(self.defender)
+                       .build())
 
     def test_add_effect_in_melee(self):
         """
@@ -378,6 +368,7 @@ class TestEffectsInMelee():
 
         verify(self.model).raise_event(any(PoisonAddedEvent))
 
+
 class TestEffectHandling():
     """
     Test for adding effects
@@ -386,7 +377,7 @@ class TestEffectHandling():
         """
         Default constructor
         """
-        super(TestEffectHandling, self).__init__()
+        super().__init__()
 
         self.character = None
 
@@ -411,11 +402,11 @@ class TestEffectHandling():
         It should be possible to add multiple effects of different type
         """
         effect_1 = (EffectBuilder()
-                        .with_effect_name('spell')
-                        .build())
+                    .with_effect_name('spell')
+                    .build())
         effect_2 = (EffectBuilder()
-                        .with_effect_name('curse')
-                        .build())
+                    .with_effect_name('curse')
+                    .build())
 
         self.character.add_effect(effect_1)
         self.character.add_effect(effect_2)
@@ -428,11 +419,11 @@ class TestEffectHandling():
         Adding multiple effects of same type should not be possible
         """
         effect_1 = (EffectBuilder()
-                        .with_effect_name('spell')
-                        .build())
+                    .with_effect_name('spell')
+                    .build())
         effect_2 = (EffectBuilder()
-                        .with_effect_name('spell')
-                        .build())
+                    .with_effect_name('spell')
+                    .build())
 
         self.character.add_effect(effect_1)
         self.character.add_effect(effect_2)
@@ -445,19 +436,20 @@ class TestEffectHandling():
         In special cases, adding multiple effects of same type is allowed
         """
         effect_1 = (EffectBuilder()
-                        .with_effect_name('spell')
-                        .with_multiple_allowed()
-                        .build())
+                    .with_effect_name('spell')
+                    .with_multiple_allowed()
+                    .build())
         effect_2 = (EffectBuilder()
-                        .with_effect_name('spell')
-                        .with_multiple_allowed()
-                        .build())
+                    .with_effect_name('spell')
+                    .with_multiple_allowed()
+                    .build())
 
         self.character.add_effect(effect_1)
         self.character.add_effect(effect_2)
 
         assert_that(self.character, has_effect(effect_1))
         assert_that(self.character, has_effect(effect_2))
+
 
 class TestEternalEffects():
     """
@@ -467,7 +459,7 @@ class TestEternalEffects():
         """
         Default constructor
         """
-        super(TestEternalEffects, self).__init__()
+        super().__init__()
 
         self.model = None
         self.character1 = None
@@ -479,30 +471,28 @@ class TestEternalEffects():
         Setup test case
         """
         self.effect = (EffectBuilder()
-                            .with_duration(None)
-                            .with_frequency(None)
-                            .with_tick(None)
-                            .build())
+                       .with_duration(None)
+                       .with_frequency(None)
+                       .with_tick(None)
+                       .build())
 
         self.model = Model()
-        level = Level()
 
         self.character1 = (CharacterBuilder()
-                            .as_player_character()
-                            .with_model(self.model)
-                            .with_tick(10)
-                            .build())
+                           .as_player_character()
+                           .with_model(self.model)
+                           .with_tick(10)
+                           .build())
 
         self.character2 = (CharacterBuilder()
-                            .with_model(self.model)
-                            .with_tick(8)
-                            .with_effect(self.effect)
-                            .build())
+                           .with_model(self.model)
+                           .with_tick(8)
+                           .with_effect(self.effect)
+                           .build())
 
-        level = (LevelBuilder()
-                    .with_character(self.character1, (2, 2))
-                    .with_character(self.character2, (5, 5))
-                    .build())
+        (LevelBuilder().with_character(self.character1, (2, 2))
+                       .with_character(self.character2, (5, 5))
+                       .build())
 
         self.model.player = self.character1
 
@@ -521,6 +511,7 @@ class TestEternalEffects():
 
         assert_that(self.character2, has_effect(self.effect))
 
+
 class TestEffectsInCombat():
     """
     Test that effects are created correctly during combat
@@ -529,7 +520,7 @@ class TestEffectsInCombat():
         """
         Default constructor
         """
-        super(TestEffectsInCombat, self).__init__()
+        super().__init__()
 
     def test_effect_is_not_created_on_miss(self):
         """
@@ -543,22 +534,21 @@ class TestEffectsInCombat():
 
         factory = mock()
         when(factory).create_effect(any(),
-                                    target = any()).thenReturn(mock())
+                                    target=any()).thenReturn(mock())
 
-        action = AttackAction(attack_type = '',
-                              to_hit = to_hit,
-                              damage = mock(),
-                              attacker = attacker,
-                              target = TargetData('character',
-                                                  (0,0),
-                                                  mock(),
-                                                  None),
-                              effect_factory = factory,
-                              dying_rules = mock(),
-                              additional_rules = mock())
+        action = AttackAction(attack_type='',
+                              to_hit=to_hit,
+                              damage=mock(),
+                              attacker=attacker,
+                              target=TargetData('character',
+                                                (0, 0),
+                                                mock(),
+                                                None),
+                              effect_factory=factory,
+                              dying_rules=mock(),
+                              additional_rules=mock())
 
         action.execute()
 
         verify(factory, never).create_effect(any(),
-                                             target = any())
-
+                                             target=any())
