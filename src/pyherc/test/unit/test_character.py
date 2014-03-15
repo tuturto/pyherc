@@ -20,24 +20,21 @@
 """
 Module for testing characters
 """
-#pylint: disable=W0614
-from pyherc.data import Model
 from pyherc.data import WeaponProficiency
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.builders import ItemBuilder
-from pyherc.test.builders import LevelBuilder
-from pyherc.data.dungeon import Dungeon
 from pyherc.test.matchers import EventType
-from hamcrest import assert_that, is_, same_instance, equal_to, none #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, equal_to
 from pyherc.events import MoveEvent
 from mockito import mock, verify
+
 
 class TestCharacter():
     """
     Tests for character
     """
     def __init__(self):
-        super(TestCharacter, self).__init__()
+        super().__init__()
 
     def test_event_is_raised_for_hp_change(self):
         """
@@ -46,8 +43,8 @@ class TestCharacter():
         listener = mock()
 
         character = (CharacterBuilder()
-                        .with_update_listener(listener)
-                        .build())
+                     .with_update_listener(listener)
+                     .build())
 
         character.hit_points = 20
 
@@ -59,19 +56,16 @@ class TestCharacter():
         """
         model = mock()
         character = (CharacterBuilder()
-                        .with_model(model)
-                        .build())
+                     .with_model(model)
+                     .build())
 
-        level = (LevelBuilder()
-                    .with_character(character)
-                    .build())
-
-        character.raise_event(MoveEvent(mover = character,
-                                        affected_tiles = [],
-                                        old_location = character.location,
-                                        direction = 1))
+        character.raise_event(MoveEvent(mover=character,
+                                        affected_tiles=[],
+                                        old_location=character.location,
+                                        direction=1))
 
         verify(model).raise_event(EventType('move'))
+
 
 class TestCreatures():
     """
@@ -81,7 +75,7 @@ class TestCreatures():
         """
         Default constructor
         """
-        super(TestCreatures, self).__init__()
+        super().__init__()
 
     def test_is_proficient(self):
         """
@@ -90,14 +84,14 @@ class TestCreatures():
         creature = CharacterBuilder().build()
 
         weapon = (ItemBuilder()
-                        .with_name('club')
-                        .with_tag('weapon')
-                        .with_tag('one-handed weapon')
-                        .with_tag('melee')
-                        .with_tag('simple weapon')
-                        .with_damage(2, 'bashing')
-                        .with_weapon_type('simple')
-                        .build())
+                  .with_name('club')
+                  .with_tag('weapon')
+                  .with_tag('one-handed weapon')
+                  .with_tag('melee')
+                  .with_tag('simple weapon')
+                  .with_damage(2, 'bashing')
+                  .with_weapon_type('simple')
+                  .build())
 
         proficiency = creature.is_proficient(weapon)
         assert_that(proficiency, is_(equal_to(False)))
@@ -106,14 +100,3 @@ class TestCreatures():
 
         proficiency = creature.is_proficient(weapon)
         assert_that(proficiency, is_(equal_to(True)))
-
-class TestStatues():
-    """
-    Test handling of statues (mainly mimicing items)
-    """
-
-    def __init__(self):
-        """
-        Default constructor
-        """
-        super(TestStatues, self).__init__()

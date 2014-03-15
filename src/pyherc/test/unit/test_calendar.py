@@ -25,6 +25,7 @@ from pyherc.rules.calendar import get_special_events
 from pyherc.data import SpecialTime
 from hamcrest import assert_that, has_item
 
+
 class TestCalendar():
     """
     Tests for calendar
@@ -39,4 +40,3 @@ class TestCalendar():
         events = get_special_events(2013, 12, 24)
 
         assert_that(events, has_item(SpecialTime.christmas))
-

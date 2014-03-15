@@ -23,9 +23,10 @@ Module for testing attack action related classes
 from pyherc.rules.combat.action import Damage, AttackAction
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.builders import EffectHandleBuilder
-from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, equal_to
 from mockito import mock, when, any, verify
 from pyherc.data.geometry import TargetData
+
 
 class TestDamage():
     """
@@ -41,11 +42,10 @@ class TestDamage():
         """
         Test that damage below zero is zeroed
         """
-        character = (CharacterBuilder()
-                        .build())
+        character = CharacterBuilder().build()
         damage = Damage([(-1, 'negative damage')])
 
-        damage.apply_damage(target = character)
+        damage.apply_damage(target=character)
 
         assert_that(damage.damage_inflicted, is_(equal_to(0)))
 
@@ -53,8 +53,7 @@ class TestDamage():
         """
         Test that armoud used by target is used
         """
-        character = (CharacterBuilder()
-                        .build())
+        character = CharacterBuilder().build()
 
         armour = ItemBuilder().build()
         armour.armour_data = mock()
@@ -63,7 +62,7 @@ class TestDamage():
 
         damage = Damage([(5, 'crushing')])
 
-        damage.apply_damage(target = character)
+        damage.apply_damage(target=character)
 
         assert_that(damage.damage_inflicted, is_(equal_to(4)))
 
@@ -72,8 +71,7 @@ class TestDamage():
         Damage that is less than protection, but higher than
         half of the protection should deal 1 point of damage
         """
-        character = (CharacterBuilder()
-                        .build())
+        character = CharacterBuilder().build()
 
         armour = ItemBuilder().build()
         armour.armour_data = mock()
@@ -82,7 +80,7 @@ class TestDamage():
 
         damage = Damage([(2, 'crushing')])
 
-        damage.apply_damage(target = character)
+        damage.apply_damage(target=character)
 
         assert_that(damage.damage_inflicted, is_(equal_to(1)))
 
@@ -93,35 +91,34 @@ class TestDamage():
         """
         effect = mock()
         effect.duration = None
-        
+
         attacker = (CharacterBuilder()
-                        .with_effect_handle(EffectHandleBuilder()
-                                                .with_trigger('on attack hit')
-                                                .build())
-                        .build())
-                        
-        defender = (CharacterBuilder()
-                        .build())
-                        
+                    .with_effect_handle(EffectHandleBuilder()
+                                        .with_trigger('on attack hit')
+                                        .build())
+                    .build())
+
+        defender = CharacterBuilder().build()
+
         to_hit = mock()
         when(to_hit).is_hit().thenReturn(True)
-        
+
         effect_factory = mock()
         when(effect_factory).create_effect(any(),
-                                           target = any()).thenReturn(effect)
-                        
-        action = AttackAction(attack_type = 'melee', 
-                                       to_hit = to_hit, 
-                                       damage = mock(),
-                                       attacker = attacker, 
-                                       target = TargetData('character',
-                                                           (1, 1),
-                                                           defender,
-                                                           None),
-                                       effect_factory = effect_factory, 
-                                       dying_rules = mock(),
-                                       additional_rules = mock())
+                                           target=any()).thenReturn(effect)
+
+        action = AttackAction(attack_type='melee',
+                              to_hit=to_hit,
+                              damage=mock(),
+                              attacker=attacker,
+                              target=TargetData('character',
+                                                (1, 1),
+                                                defender,
+                                                None),
+                              effect_factory=effect_factory,
+                              dying_rules=mock(),
+                              additional_rules=mock())
 
         action.execute()
-        
+
         verify(effect).trigger(any())

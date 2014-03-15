@@ -20,14 +20,16 @@
 """
 Module for testing combat related rules
 """
-#pylint: disable=W0614
+
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.combat.interface import AttackParameters
 from pyherc.rules.combat.factories import AttackFactory
 from pyherc.rules.moving.factories import MoveFactory
 from pyherc.data.model import Model
 from mockito import mock, when, any
-from hamcrest import assert_that, is_in, contains_inanyorder, is_, same_instance  #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_in, contains_inanyorder, is_
+from hamcrest import same_instance
+
 
 class TestActionFactories():
     """
@@ -81,7 +83,7 @@ class TestActionFactories():
 
         factory = ActionFactory(mock_model,
                                 [mock_attack_factory,
-                                mock_move_factory])
+                                 mock_move_factory])
 
         mock_parameters = mock(AttackParameters)
 
