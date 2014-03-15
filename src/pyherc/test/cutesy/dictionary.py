@@ -23,7 +23,6 @@ Dictionary for behaviour driven tests
 
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.builders import LevelBuilder
-from pyherc.test.builders import ItemBuilder
 from pyherc.test.builders import SpellCastingFactoryBuilder
 from pyherc.test.builders import SpellGeneratorBuilder
 from pyherc.test.builders import EffectsFactoryBuilder
@@ -36,6 +35,7 @@ from pyherc.rules import cast, drop_item, attack, wait, gain_domain
 
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
+
 
 def add_history_value(character, attribute):
     """
@@ -56,6 +56,7 @@ def add_history_value(character, attribute):
     else:
         character.old_values[attribute] = getattr(character, attribute)
 
+
 def get_history_value(character, attribute):
     """
     Get given history value
@@ -70,6 +71,7 @@ def get_history_value(character, attribute):
     """
     return character.old_values[attribute]
 
+
 def Level():
     """
     Creates a level
@@ -78,8 +80,9 @@ def Level():
     :rtype: Level
     """
     level = (LevelBuilder()
-                    .build())
+             .build())
     return level
+
 
 class LevelLocation():
     """
@@ -105,6 +108,7 @@ class LevelLocation():
         return 'level: {0}, location: {1}'.format(self.level,
                                                   self.location)
 
+
 def place(character, location):
     """
     Place character to given location
@@ -115,6 +119,7 @@ def place(character, location):
     :type location: LevelLocation
     """
     location.level.add_creature(character, location.location)
+
 
 def middle_of(level):
     """
@@ -131,6 +136,7 @@ def middle_of(level):
 
     return location
 
+
 def right_of(object):
     """
     Find location on the right side of something
@@ -146,6 +152,7 @@ def right_of(object):
 
     return location
 
+
 def make(actor, action):
     """
     Trigger an action
@@ -155,6 +162,7 @@ def make(actor, action):
     :param action: action to perfrom
     """
     action(actor)
+
 
 class Wait():
     """
@@ -176,10 +184,11 @@ class Wait():
         add_history_value(character, 'tick')
 
         action_factory = (ActionFactoryBuilder()
-                                    .with_wait_factory()
-                                    .build())
+                          .with_wait_factory()
+                          .build())
 
         wait(character, action_factory)
+
 
 def wait_():
     """
@@ -187,6 +196,7 @@ def wait_():
     """
     action = Wait()
     return action
+
 
 class TakeRandomStep():
     """
@@ -208,8 +218,8 @@ class TakeRandomStep():
         add_history_value(character, 'tick')
 
         action_factory = (ActionFactoryBuilder()
-                                    .with_move_factory()
-                                    .build())
+                          .with_move_factory()
+                          .build())
 
         directions = [direction for direction in range(1, 9)
                       if is_move_legal(character,
@@ -219,9 +229,9 @@ class TakeRandomStep():
 
         assert len(directions) > 0
 
-        move(character = character,
-             direction = directions[0],
-             action_factory = action_factory)
+        move(character=character,
+             direction=directions[0],
+             action_factory=action_factory)
 
 
 def take_random_step():
@@ -230,11 +240,12 @@ def take_random_step():
     """
     return TakeRandomStep()
 
+
 class CastSpell():
     """
     Class representing casting a spell
     """
-    def __init__(self, spell_name, target = None):
+    def __init__(self, spell_name, target=None):
         """
         Default constructor
 
@@ -259,46 +270,46 @@ class CastSpell():
         spell_factory = SpellGeneratorBuilder().build()
 
         effects_factory = (EffectsFactoryBuilder()
-                                .with_effect('heal medium wounds',
-                                             {'type': Heal,
-                                              'duration': None,
-                                              'frequency': None,
-                                              'tick': 0,
-                                              'healing': 10,
-                                              'icon': None,
-                                              'title': 'Heal medium wounds',
-                                              'description': 'Heals medium amount of damage'})
-                                .with_effect('cause wound',
-                                             {'type': Damage,
-                                              'duration': None,
-                                              'frequency': None,
-                                              'tick': 0,
-                                              'damage': 5,
-                                              'damage_type': 'magic',
-                                              'icon': None,
-                                              'title': 'Cause minor wound',
-                                              'description': 'Causes minor amount of damage'})
-                                .with_effect('fire',
-                                             {'type': Damage,
-                                              'duration': 30,
-                                              'frequency': 5,
-                                              'tick': 0,
-                                              'damage': 3,
-                                              'damage_type': 'fire',
-                                              'icon': None,
-                                              'title': 'Fire',
-                                              'description': 'You are on fire!'})
-                                .build())
+                           .with_effect('heal medium wounds',
+                                        {'type': Heal,
+                                         'duration': None,
+                                         'frequency': None,
+                                         'tick': 0,
+                                         'healing': 10,
+                                         'icon': None,
+                                         'title': 'Heal medium wounds',
+                                         'description': 'Heals medium amount of damage'})  # noqa
+                           .with_effect('cause wound',
+                                        {'type': Damage,
+                                         'duration': None,
+                                         'frequency': None,
+                                         'tick': 0,
+                                         'damage': 5,
+                                         'damage_type': 'magic',
+                                         'icon': None,
+                                         'title': 'Cause minor wound',
+                                         'description': 'Causes minor amount of damage'})  # noqa
+                           .with_effect('fire',
+                                        {'type': Damage,
+                                         'duration': 30,
+                                         'frequency': 5,
+                                         'tick': 0,
+                                         'damage': 3,
+                                         'damage_type': 'fire',
+                                         'icon': None,
+                                         'title': 'Fire',
+                                         'description': 'You are on fire!'})
+                           .build())
 
         spell_casting_factory = (SpellCastingFactoryBuilder()
-                                    .with_spell_factory(spell_factory)
-                                    .with_effects_factory(effects_factory)
-                                    .build())
+                                 .with_spell_factory(spell_factory)
+                                 .with_effects_factory(effects_factory)
+                                 .build())
 
         action_factory = (ActionFactoryBuilder()
-                                    .with_dying_rules()
-                                    .with_spellcasting_factory(spell_casting_factory)
-                                    .build())
+                          .with_dying_rules()
+                          .with_spellcasting_factory(spell_casting_factory)
+                          .build())
 
         if self.target:
             direction = find_direction(caster.location,
@@ -307,11 +318,12 @@ class CastSpell():
             direction = 1
 
         cast(caster,
-             direction = direction,
-             spell_name = self.spell_name,
-             action_factory = action_factory)
+             direction=direction,
+             spell_name=self.spell_name,
+             action_factory=action_factory)
 
-def cast_spell(spell_name, target = None):
+
+def cast_spell(spell_name, target=None):
     """
     Cast a spell
 
@@ -347,18 +359,19 @@ class Hit():
         when(rng).randint(1, 6).thenReturn(1)
 
         action_factory = (ActionFactoryBuilder()
-                                    .with_move_factory()
-                                    .with_attack_factory()
-                                    .with_drink_factory()
-                                    .with_inventory_factory()
-                                    .with_dying_rules()
-                                    .build())
+                          .with_move_factory()
+                          .with_attack_factory()
+                          .with_drink_factory()
+                          .with_inventory_factory()
+                          .with_dying_rules()
+                          .build())
 
         attack(attacker,
                find_direction(attacker.location,
                               self.target.location),
                action_factory,
                rng)
+
 
 def hit(target):
     """
@@ -369,6 +382,7 @@ def hit(target):
     """
     action = Hit(target)
     return action
+
 
 class WieldAction():
     """
@@ -381,6 +395,7 @@ class WieldAction():
         :param weapon: weapon to wield
         :type weapon: Item
         """
+        super().__init__()
         self.weapon = weapon
 
     def __call__(self, character):
@@ -393,12 +408,14 @@ class WieldAction():
         character.inventory.weapon = self.weapon
         return character
 
+
 def wielding(weapon):
     """
     Make a character to wield a weapon
     """
     action = WieldAction(weapon)
     return action
+
 
 class GainDomainAction():
     """
@@ -409,6 +426,7 @@ class GainDomainAction():
         """
         Default constructor
         """
+        super().__init__()
         self.item = item
         self.domain = domain
 
@@ -417,21 +435,23 @@ class GainDomainAction():
         Execute the action
         """
         action_factory = (ActionFactoryBuilder()
-                                    .with_gain_domain_factory()
-                                    .with_dying_rules()
-                                    .build())
+                          .with_gain_domain_factory()
+                          .with_dying_rules()
+                          .build())
 
-        gain_domain(character = character,
-                    item = self.item,
-                    domain = self.domain,
-                    action_factory = action_factory)
+        gain_domain(character=character,
+                    item=self.item,
+                    domain=self.domain,
+                    action_factory=action_factory)
+
 
 def gain_domain_(item, domain):
     """
     Gain domain
     """
-    return GainDomainAction(item = item,
-                            domain = domain)
+    return GainDomainAction(item=item,
+                            domain=domain)
+
 
 class HasLessHitPoints(BaseMatcher):
     """
@@ -465,8 +485,8 @@ class HasLessHitPoints(BaseMatcher):
         :type description: string
         """
         description.append(
-                    'Character with less than {0} hitpoints'.format(
-                                                        self.old_hit_points))
+            'Character with less than {0} hitpoints'.format(
+                self.old_hit_points))
 
     def describe_mismatch(self, item, mismatch_description):
         """
@@ -477,14 +497,15 @@ class HasLessHitPoints(BaseMatcher):
         :type mismatch_description: string
         """
         mismatch_description.append(
-                        'Character has {0} hit points'.format(
-                                                        item.hit_points))
+            'Character has {0} hit points'.format(item.hit_points))
+
 
 def has_less_hit_points():
     """
     Check that hit points have gone down
     """
     return HasLessHitPoints()
+
 
 def at_(loc_x, loc_y):
     """
@@ -498,6 +519,7 @@ def at_(loc_x, loc_y):
     :rtype: (int, int)
     """
     return (loc_x, loc_y)
+
 
 def affect(target, effect_spec):
     """
@@ -518,6 +540,7 @@ def affect(target, effect_spec):
 
     new_effect.trigger(Dying())
 
+
 def with_(effect_spec):
     """
     Syntactic sugar
@@ -529,7 +552,8 @@ def with_(effect_spec):
     """
     return effect_spec
 
-def potent_poison(target = None):
+
+def potent_poison(target=None):
     """
     Creates effect specification for poison
 
@@ -548,7 +572,8 @@ def potent_poison(target = None):
             'title': 'potent poison',
             'description': 'causes huge amount of damage'}
 
-def weak_poison(target = None):
+
+def weak_poison(target=None):
     """
     Creates effect specification for poison
 
@@ -567,6 +592,7 @@ def weak_poison(target = None):
             'title': 'weak poison',
             'description': 'causes tiny amount of damage'}
 
+
 class CarryAction():
     """
     Action to get chracter to carry something
@@ -578,6 +604,7 @@ class CarryAction():
         :param item: item to carry
         :type item: Item
         """
+        super().__init__()
         self.item = item
 
     def __call__(self, character):
@@ -590,12 +617,14 @@ class CarryAction():
         character.inventory.append(self.item)
         return character
 
+
 def carrying(item):
     """
     make character to carry an item
     """
     action = CarryAction(item)
     return action
+
 
 class Drop():
     """
@@ -623,15 +652,16 @@ class Drop():
         add_history_value(actor, 'tick')
 
         action_factory = (ActionFactoryBuilder()
-                                    .with_move_factory()
-                                    .with_attack_factory()
-                                    .with_drink_factory()
-                                    .with_inventory_factory()
-                                    .build())
+                          .with_move_factory()
+                          .with_attack_factory()
+                          .with_drink_factory()
+                          .with_inventory_factory()
+                          .build())
 
         drop_item(actor,
                   self.item,
                   action_factory)
+
 
 def drop(item):
     """
@@ -639,6 +669,7 @@ def drop(item):
     """
     action = Drop(item)
     return action
+
 
 class HasDropped(BaseMatcher):
     """
@@ -662,7 +693,7 @@ class HasDropped(BaseMatcher):
             self.fail_reason = 'item not dropped'
             return False
 
-        if self.item.level == None:
+        if self.item.level is None:
             self.fail_reason = 'item in limbo'
             return False
 
@@ -718,11 +749,12 @@ class HasDropped(BaseMatcher):
                                                 self.item.level))
         elif self.fail_reason == 'time did not pass':
             mismatch_description.append(
-                        'Flow of time is incorrect. Before: {0}, after: {1}'
-                                .format(self.old_time,
-                                        self.new_time))
+                'Flow of time is incorrect. Before: {0}, after: {1}'
+                .format(self.old_time,
+                        self.new_time))
         else:
             mismatch_description.append('Unimplemented matcher')
+
 
 def has_dropped(item):
     """

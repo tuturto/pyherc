@@ -23,6 +23,7 @@ Package for characters
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.cutesy.dictionary import add_history_value
 
+
 def strong(character):
     """
     Modifies character to be strong
@@ -34,6 +35,7 @@ def strong(character):
     character.hit_points = 20
     character.maximum_hit_points = 20
     return character
+
 
 def weak(character):
     """
@@ -47,6 +49,7 @@ def weak(character):
     character.maximum_hit_points = 5
     return character
 
+
 def Adventurer():
     """
     Creates a adventurer character
@@ -55,18 +58,18 @@ def Adventurer():
     :rtype: Character
     """
     character = (CharacterBuilder()
-                    .with_hit_points(10)
-                    .with_max_hp(10)
-                    .with_speed(5)
-                    .with_body(5)
-                    .with_mind(5)
-                    .with_attack(1)
-                    .with_name('Adventurer')
-                    .build()
-                    )
+                 .with_hit_points(10)
+                 .with_max_hp(10)
+                 .with_speed(5)
+                 .with_body(5)
+                 .with_mind(5)
+                 .with_attack(1)
+                 .with_name('Adventurer')
+                 .build())
     add_history_value(character, 'hit_points')
 
     return character
+
 
 def Wizard():
     """
@@ -76,21 +79,21 @@ def Wizard():
     :rtype: Character
     """
     character = (CharacterBuilder()
-                    .with_hit_points(5)
-                    .with_max_hp(5)
-                    .with_spirit(20)
-                    .with_max_spirit(20)
-                    .with_speed(4)
-                    .with_body(4)
-                    .with_mind(8)
-                    .with_attack(1)
-                    .with_name('Wizard')
-                    .build()
-                    )
+                 .with_hit_points(5)
+                 .with_max_hp(5)
+                 .with_spirit(20)
+                 .with_max_spirit(20)
+                 .with_speed(4)
+                 .with_body(4)
+                 .with_mind(8)
+                 .with_attack(1)
+                 .with_name('Wizard')
+                 .build())
 
     return character
 
-def Goblin(action = None):
+
+def Goblin(action=None):
     """
     Creates a goblin
 
@@ -98,16 +101,15 @@ def Goblin(action = None):
     :rtype: Character
     """
     character = (CharacterBuilder()
-                    .with_hit_points(5)
-                    .with_max_hp(5)
-                    .with_speed(3)
-                    .with_body(3)
-                    .with_attack(1)
-                    .with_name('Goblin')
-                    .build()
-                    )
+                 .with_hit_points(5)
+                 .with_max_hp(5)
+                 .with_speed(3)
+                 .with_body(3)
+                 .with_attack(1)
+                 .with_name('Goblin')
+                 .build())
 
-    if action != None:
+    if action is not None:
         action(character)
 
     return character

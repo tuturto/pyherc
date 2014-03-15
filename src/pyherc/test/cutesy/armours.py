@@ -23,41 +23,44 @@ Armours for behaviour driven tests
 
 from pyherc.test.builders import ItemBuilder
 
+
 def LeatherArmour():
     """
     Creates a leather armour
     """
     item = (ItemBuilder()
-                .with_name('leather armour')
-                .with_damage_reduction(1)
-                .with_speed_modifier(1.0)
-                .build())
+            .with_name('leather armour')
+            .with_damage_reduction(1)
+            .with_speed_modifier(1.0)
+            .build())
 
     item.old_values = {}
     return item
+
 
 def ScaleMail():
     """
     Creates a scale mail
     """
     item = (ItemBuilder()
-                .with_name('scale mail')
-                .with_damage_reduction(3)
-                .with_speed_modifier(0.7)
-                .build())
+            .with_name('scale mail')
+            .with_damage_reduction(3)
+            .with_speed_modifier(0.7)
+            .build())
 
     item.old_values = {}
     return item
+
 
 def PlateMail():
     """
     Creates a plate mail
     """
     item = (ItemBuilder()
-                .with_name('plate mail')
-                .with_damage_reduction(5)
-                .with_speed_modifier(0.5)
-                .build())
+            .with_name('plate mail')
+            .with_damage_reduction(5)
+            .with_speed_modifier(0.5)
+            .build())
 
     item.old_values = {}
     return item

@@ -22,13 +22,14 @@ Module for magic items
 """
 from pyherc.test.builders import ItemBuilder
 
+
 def Rune():
     """
     Creates a rune
     """
     item = (ItemBuilder()
-                .with_name('rune')
-                .build())
+            .with_name('rune')
+            .build())
 
     item.old_values = {}
     return item

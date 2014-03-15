@@ -22,61 +22,66 @@ Module for weapons
 """
 from pyherc.test.builders import ItemBuilder
 
+
 def Bow():
     """
     Creates a bow
     """
     item = (ItemBuilder()
-                .with_name('bow')
-                .with_damage(1, 'crushing')
-                .with_required_ammunition_type('arrow')
-                .build())
+            .with_name('bow')
+            .with_damage(1, 'crushing')
+            .with_required_ammunition_type('arrow')
+            .build())
 
     return item
+
 
 def Arrows():
     """
     Creates a bundle of arrows
     """
     item = (ItemBuilder()
-                .with_name('arrow')
-                .with_range_damage(2, 'piercing')
-                .with_ammunition_type('arrow')
-                .with_count(10)
-                .build())
+            .with_name('arrow')
+            .with_range_damage(2, 'piercing')
+            .with_ammunition_type('arrow')
+            .with_count(10)
+            .build())
 
     return item
+
 
 def Dagger():
     """
     Creates a dagger
     """
     item = (ItemBuilder()
-                .with_name('dagger')
-                .with_damage(2, 'piercing')
-                .build())
+            .with_name('dagger')
+            .with_damage(2, 'piercing')
+            .build())
 
     return item
+
 
 def Sword():
     """
     Creates a sword
     """
     item = (ItemBuilder()
-                .with_name('sword')
-                .with_damage(2, 'piercing')
-                .with_damage(2, 'slashing')
-                .build())
+            .with_name('sword')
+            .with_damage(2, 'piercing')
+            .with_damage(2, 'slashing')
+            .build())
 
     return item
+
 
 def Club():
     """
     Creates a club
     """
     item = (ItemBuilder()
-                .with_name('sword')
-                .with_damage(3, 'crushing')
-                .build())
+            .with_name('club')
+            .with_damage(3, 'crushing')
+            .build())
 
     return item
