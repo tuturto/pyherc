@@ -121,6 +121,8 @@ src/pyherc/generators/level/room/corridor.py
 src/pyherc/generators/level/room/crimson_lair.py
 src/pyherc/generators/level/room/pillarroom.py
 src/pyherc/generators/level/room/squareroom.py
+src/pyherc/ports/__init__.py
+src/pyherc/ports/actions.py
 src/pyherc/rules/__init__.py
 src/pyherc/rules/calendar.py
 src/pyherc/rules/constants.py
@@ -139,6 +141,7 @@ src/pyherc/rules/combat/unarmed.py
 src/pyherc/rules/consume/__init__.py
 src/pyherc/rules/consume/action.py
 src/pyherc/rules/consume/factories.py
+src/pyherc/rules/consume/interface.py
 src/pyherc/rules/inventory/__init__.py
 src/pyherc/rules/inventory/action.py
 src/pyherc/rules/inventory/equip.py
@@ -153,7 +156,8 @@ src/pyherc/rules/moving/__init__.py
 src/pyherc/rules/moving/action.py
 src/pyherc/rules/moving/factories.py
 src/pyherc/rules/moving/interface.py
-src/pyherc/rules/wait/__init__.py
-src/pyherc/rules/wait/action.py
-src/pyherc/rules/wait/factories.py
+src/pyherc/rules/waiting/__init__.py
+src/pyherc/rules/waiting/action.py
+src/pyherc/rules/waiting/factories.py
+src/pyherc/rules/waiting/interface.py
 src/scripts/herculeum
