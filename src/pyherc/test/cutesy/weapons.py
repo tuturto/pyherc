@@ -85,3 +85,16 @@ def Club():
             .build())
 
     return item
+
+
+def Warhammer():
+    """
+    Creates a warhammer
+    """
+    item = (ItemBuilder()
+            .with_name('warhammer')
+            .with_damage(7, 'crushing')
+            .with_speed(0.7)
+            .build())
+
+    return item

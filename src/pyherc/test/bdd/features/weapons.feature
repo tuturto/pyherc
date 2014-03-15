@@ -19,3 +19,8 @@ Feature: Weapons
        When Uglak hits Pete
        Then Attack should deal piercing damage
         And Attack should deal slashing damage
+
+  Scenario: Hitting with heavy weapon is slow
+      Given Pete wields warhammer
+       When Pete hits Uglak
+       Then Pete should attack slower than without warhammer

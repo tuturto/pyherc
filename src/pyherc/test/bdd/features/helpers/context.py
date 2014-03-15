@@ -24,7 +24,7 @@ from pyherc.data import Model
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.ports import ActionsPort
 from pyherc.test.cutesy import LeatherArmour, ScaleMail, PlateMail
-from pyherc.test.cutesy import Sword, Club, Dagger, Bow, Arrows
+from pyherc.test.cutesy import Sword, Club, Dagger, Bow, Arrows, Warhammer
 from pyherc.test.cutesy import Rune
 
 
@@ -123,6 +123,7 @@ def weapon_list(fn):
 
         if not hasattr(context, 'weapon_list'):
             context.weapon_list = {}
+            context.weapon_list['warhammer'] = Warhammer
             context.weapon_list['sword'] = Sword
             context.weapon_list['dagger'] = Dagger
             context.weapon_list['club'] = Club

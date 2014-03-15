@@ -133,3 +133,12 @@ def impl(context, character_name, armour_name):
 
     assert_that(character.tick,
                 is_(greater_than(character.speed * Duration.fast)))
+
+@then('{character_name} should attack slower than without {weapon_name}')
+@with_action_factory
+def impl(context, character_name, weapon_name):
+    character = get_character(context, character_name)
+    weapon = get_item(context, weapon_name)
+
+    assert_that(character.tick,
+                is_(greater_than(character.speed * Duration.normal)))

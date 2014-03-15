@@ -61,7 +61,13 @@ class Item():
         self.__update_listeners = []
 
     def __str__(self):
-        return self.name
+        if hasattr(self, 'name'):
+            return self.name
+        else:
+            return 'uninitialized item'
+
+    def __repr__(self):
+        return str(self)
 
     @log_debug
     def get_name(self, character, decorate=False):
@@ -247,7 +253,7 @@ class WeaponData():
     @log_debug
     def __init__(self, damage=None, critical_range=None,
                  critical_damage=None, weapon_type=None,
-                 ammunition_type=None):
+                 ammunition_type=None, speed=1.0):
         """
         Default constructor
 
@@ -259,6 +265,8 @@ class WeaponData():
         :type critical_damage: integer
         :param weapon_type: type of weapon
         :type weapon_type: string
+        :param speed: speed of the weapon
+        :type speed: double
         """
 
         super().__init__()
@@ -272,6 +280,7 @@ class WeaponData():
         self.critical_damage = critical_damage
         self.weapon_type = weapon_type
         self.ammunition_type = ammunition_type
+        self.speed = speed
 
 
 class ArmourData():

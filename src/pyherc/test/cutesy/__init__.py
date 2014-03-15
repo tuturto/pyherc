@@ -25,7 +25,7 @@ Package for testing dsl
 
 from .characters import Goblin, Adventurer, Wizard
 from .characters import strong, weak
-from .weapons import Dagger, Sword, Club, Bow, Arrows
+from .weapons import Dagger, Sword, Club, Bow, Arrows, Warhammer
 from .armours import LeatherArmour, ScaleMail, PlateMail
 from .items import Rune
 from .dictionary import at_

@@ -203,6 +203,18 @@ class ItemBuilder():
         self.armour_data.damage_reduction = damage_reduction
         return self
 
+    def with_speed(self, speed):
+        """
+        Set speed modifier of the item if used as a weapon
+
+        :param speed: speed modifier to use
+        :type speed: double
+        """
+        if self.weapon_data is None:
+            self.weapon_data = WeaponData()
+        self.weapon_data.speed = speed
+        return self
+
     def with_speed_modifier(self, speed_modifier):
         """
         Set speed modifier of the item if used as an armour
