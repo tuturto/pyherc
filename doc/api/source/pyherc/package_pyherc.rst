@@ -11,6 +11,7 @@ pyherc
    data/package_data
    events/package_events
    generators/package_generators
+   ports/package_ports
    rules/package_rules
    test/package_test
 

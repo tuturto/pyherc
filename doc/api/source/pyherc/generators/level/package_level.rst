@@ -12,6 +12,6 @@ pyherc.generators.level
    module_generator
    module_prototiles
    module_portals
-   decorator/module_decorator
-   partitioners/module_partitioners
+   decorator/package_decorator
+   partitioners/package_partitioners
    room/package_room
