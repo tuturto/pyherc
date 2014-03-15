@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,8 +22,9 @@ Module for customer matchers used in testing
 """
 
 from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core import anything #pylint: disable-msg=E0611
+from hamcrest.core import anything
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+
 
 class ContainsItem(BaseMatcher):
     """
@@ -34,7 +34,7 @@ class ContainsItem(BaseMatcher):
         """
         Default constructor
         """
-        super(ContainsItem, self).__init__()
+        super().__init__()
         self.item = item
         self.amount = amount
 
@@ -58,14 +58,12 @@ class ContainsItem(BaseMatcher):
         """
         Describe this matcher
         """
-        if self.amount == None:
-            description.append(
-                    'Level with item named {0}'
-                    .format(self.item))
+        if self.amount is None:
+            description.append('Level with item named {0}'
+                               .format(self.item))
         else:
-            description.append(
-                    'Level with {0} items named {1}'
-                    .format(self.amount, self.item))
+            description.append('Level with {0} items named {1}'
+                               .format(self.amount, self.item))
 
     def describe_mismatch(self, item, mismatch_description):
         """
@@ -76,6 +74,7 @@ class ContainsItem(BaseMatcher):
         mismatch_description.append('Was level with items {0}'
                                     .format(names))
 
+
 class HasDamage(BaseMatcher):
     """
     Class to check if item makes specific amount of specific damage
@@ -84,7 +83,7 @@ class HasDamage(BaseMatcher):
         """
         Default constructor
         """
-        super(HasDamage, self).__init__()
+        super().__init__()
         self.damage_amount = damage_amount
         self.damage_type = damage_type
 
@@ -118,10 +117,11 @@ class HasDamage(BaseMatcher):
         """
         Describe this mismatch
         """
-        mismatch_description.append('Was weapon with damage: {0}'.format(
-                item.weapon_data.damage))
+        mismatch_description.append('Was weapon with damage: {0}'
+                                    .format(item.weapon_data.damage))
 
-def does_have_item(item, amount = 1):
+
+def does_have_item(item, amount=1):
     """
     Check if level has given item
 
@@ -132,6 +132,7 @@ def does_have_item(item, amount = 1):
     """
     return ContainsItem(item, wrap_matcher(amount))
 
+
 def does_not_have_item(item):
     """
     Check that level does not have given item
@@ -141,7 +142,8 @@ def does_not_have_item(item):
     """
     return ContainsItem(item, wrap_matcher(0))
 
-def has_damage(damage_amount = None, damage_type = None):
+
+def has_damage(damage_amount=None, damage_type=None):
     """
     Check if weapon makes specific amount and type of damage
     Both parameters support using matchers
@@ -152,9 +154,10 @@ def has_damage(damage_amount = None, damage_type = None):
     :param damage_type: type of damage
     :type damage_type: string
     """
-    if damage_amount != None and damage_type != None:
-        return HasDamage(wrap_matcher(damage_amount), wrap_matcher(damage_type))
-    elif damage_amount == None:
+    if damage_amount is not None and damage_type is not None:
+        return HasDamage(wrap_matcher(damage_amount),
+                         wrap_matcher(damage_type))
+    elif damage_amount is None:
         return HasDamage(anything(), wrap_matcher(damage_type))
     else:
         return HasDamage(wrap_matcher(damage_amount), anything())

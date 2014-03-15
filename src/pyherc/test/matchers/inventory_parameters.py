@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -21,7 +20,8 @@
 """
 Module for matching inventory action arguments
 """
-from mockito.matchers import Matcher # pylint: disable=E0611
+from mockito.matchers import Matcher
+
 
 class DropActionParameterMatcher(Matcher):
     """
@@ -34,6 +34,7 @@ class DropActionParameterMatcher(Matcher):
         :param item: item to check
         :type item: Item
         """
+        super().__init__()
         self.item = item
 
     def matches(self, arg):

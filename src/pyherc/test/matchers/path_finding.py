@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Module for customer matchers used in testing
 """
 from hamcrest.core.base_matcher import BaseMatcher
 
+
 class PathFinding(BaseMatcher):
     """
     Helper class used to verify if generated path is connected and does
@@ -32,7 +32,7 @@ class PathFinding(BaseMatcher):
         """
         Initialise this matcher
         """
-        super(PathFinding, self).__init__()
+        super().__init__()
         self.start = start
         self.destination = destination
         self.level = level
@@ -70,16 +70,16 @@ class PathFinding(BaseMatcher):
         """
         Describe this matcher
         """
-        description.append(
-                'Path going starting from {0} and ending to {1}'.format(
-                                                    self.start,
-                                                    self.destination))
+        description.append('Path going starting from {0} and ending to {1}'
+                           .format(self.start,
+                                   self.destination))
 
     def describe_mismatch(self, item, mismatch_description):
         """
         Describe this mismatch
         """
         mismatch_description.append(self.fail_reason)
+
 
 def continuous_path(start, destination, level):
     """

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Module for customer matchers used in testing
 
 from hamcrest.core.base_matcher import BaseMatcher
 
+
 class MapConnectivity(BaseMatcher):
     """
     Helper class used to verify if generated level is fully connected
@@ -32,7 +32,7 @@ class MapConnectivity(BaseMatcher):
         """
         Initialise this matcher
         """
-        super(MapConnectivity, self).__init__()
+        super().__init__()
         self.open_tile = open_tile
 
     def _matches(self, item):
@@ -63,8 +63,7 @@ class MapConnectivity(BaseMatcher):
         """
         Describe this matcher
         """
-        description.append(
-                'Level')
+        description.append('Level')
 
     def describe_mismatch(self, item, mismatch_description):
         """
@@ -145,6 +144,7 @@ class MapConnectivity(BaseMatcher):
 
         return connected_points
 
+
 def is_fully_accessible_via(open_tile):
     """
     Check if level is fully connected
@@ -153,6 +153,7 @@ def is_fully_accessible_via(open_tile):
     :type open_tile: int
     """
     return MapConnectivity(open_tile)
+
 
 def located_in_room(entity):
     """

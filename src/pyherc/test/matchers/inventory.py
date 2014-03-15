@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Module for custom matchers used in testing
 """
 from hamcrest.core.base_matcher import BaseMatcher
 
+
 class IsWearingMatcher(BaseMatcher):
     """
     Matcher to check if character is wearing an item
@@ -31,7 +31,7 @@ class IsWearingMatcher(BaseMatcher):
         """
         Default constructor
         """
-        super(IsWearingMatcher, self).__init__()
+        super().__init__()
         self.item = item
 
     def _matches(self, item):
@@ -59,8 +59,9 @@ class IsWearingMatcher(BaseMatcher):
         """
         Describe this mismatch
         """
-        mismatch_description.append('Character with inventory {0}'.format(
-                item.inventory))
+        mismatch_description.append('Character with inventory {0}'
+                                    .format(item.inventory))
+
 
 class IsInInventoryMatcher(BaseMatcher):
     """
@@ -70,7 +71,7 @@ class IsInInventoryMatcher(BaseMatcher):
         """
         Default constructor
         """
-        super(IsInInventoryMatcher, self).__init__()
+        super().__init__()
         self.item = item
 
     def _matches(self, item):
@@ -93,14 +94,16 @@ class IsInInventoryMatcher(BaseMatcher):
         """
         Describe this mismatch
         """
-        mismatch_description.append('Character with inventory {0}'.format(
-                item.inventory))
+        mismatch_description.append('Character with inventory {0}'
+                                    .format(item.inventory))
+
 
 def is_wearing(item):
     """
     Check if character is wearing an item
     """
     return IsWearingMatcher(item)
+
 
 def does_have(item):
     """

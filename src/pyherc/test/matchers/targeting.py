@@ -23,6 +23,7 @@ Matchers for targeting
 
 from hamcrest.core.base_matcher import BaseMatcher
 
+
 class TargetMatcher(BaseMatcher):
     """
     Class for checking target data
@@ -67,17 +68,20 @@ class TargetMatcher(BaseMatcher):
                                     .format(item.target_type,
                                             item.location))
 
+
 def wall_target_at(location):
     """
     Check that given target is at wanted wall
     """
     return TargetMatcher('wall', location)
 
+
 def void_target():
     """
     Check that given target is nothing at all
     """
     return TargetMatcher('void', None)
+
 
 def void_target_at(location):
     """
