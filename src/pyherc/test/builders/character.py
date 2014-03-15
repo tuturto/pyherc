@@ -21,9 +21,9 @@
 Module for character builder
 """
 from pyherc.data import Character
-from pyherc.data.magic import SpellBook
 from pyherc.data.effects import EffectsCollection
 from mockito import mock
+
 
 class CharacterBuilder():
     """
@@ -282,7 +282,6 @@ class CharacterBuilder():
             self.weapon = weapon
 
         return self
-
 
     def with_finesse(self, finesse):
         """

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Module for rules engine builder
 from pyherc.rules import RulesEngine
 from mockito import mock
 
+
 class RulesEngineBuilder():
     """
     Class to build rules engines
@@ -32,7 +32,7 @@ class RulesEngineBuilder():
         """
         Default constructor
         """
-        super(RulesEngineBuilder, self).__init__()
+        super().__init__()
 
         self.action_factory = mock()
         self.dying_rules = mock()
@@ -41,5 +41,5 @@ class RulesEngineBuilder():
         """
         Builds rules engine
         """
-        return RulesEngine(action_factory = self.action_factory,
-                           dying_rules = self.dying_rules)
+        return RulesEngine(action_factory=self.action_factory,
+                           dying_rules=self.dying_rules)

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Module for building poison related objects
 from pyherc.data.effects import Poison
 from mockito import mock
 
+
 class PoisonBuilder():
     """
     Class for building poison
@@ -32,7 +32,7 @@ class PoisonBuilder():
         """
         Default constructor
         """
-        super(PoisonBuilder, self).__init__()
+        super().__init__()
         self.duration = 1
         self.frequency = 1
         self.tick = 0
@@ -84,11 +84,11 @@ class PoisonBuilder():
         """
         Builds poison object
         """
-        return Poison(duration = self.duration,
-                      frequency = self.frequency,
-                      tick = self.tick,
-                      damage = self.damage,
-                      target = self.target,
-                      icon = self.icon,
-                      title = self.title,
-                      description = self.description)
+        return Poison(duration=self.duration,
+                      frequency=self.frequency,
+                      tick=self.tick,
+                      damage=self.damage,
+                      target=self.target,
+                      icon=self.icon,
+                      title=self.title,
+                      description=self.description)

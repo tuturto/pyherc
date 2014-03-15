@@ -37,6 +37,7 @@ from pyherc.rules.inventory.unequip import UnEquipFactory
 from pyherc.rules.magic import SpellCastingFactory, GainDomainFactory
 from pyherc.rules.waiting.factories import WaitFactory
 
+
 class ActionFactoryBuilder():
     """
     Class for building action factories
@@ -45,6 +46,7 @@ class ActionFactoryBuilder():
         """
         Default constructor
         """
+        super().__init__()
         self.model = mock()
 
         self.attack_factory = mock()
@@ -97,11 +99,11 @@ class ActionFactoryBuilder():
         self.use_real_attack_factory = True
         return self
 
-    def with_drink_factory(self, drink_factory = None):
+    def with_drink_factory(self, drink_factory=None):
         """
         Configure action factory to use real drink factory
         """
-        if drink_factory == None:
+        if drink_factory is None:
             self.use_real_drink_factory = True
         else:
             if hasattr(drink_factory, 'build'):
@@ -110,7 +112,7 @@ class ActionFactoryBuilder():
                 self.drink_factory = drink_factory
         return self
 
-    def with_spellcasting_factory(self, spellcasting_factory = None):
+    def with_spellcasting_factory(self, spellcasting_factory=None):
         """
         Configure action factory to use real magic factory
 
@@ -125,7 +127,7 @@ class ActionFactoryBuilder():
                 self.spellcasting_factory = spellcasting_factory
         return self
 
-    def with_wait_factory(self, wait_factory = None):
+    def with_wait_factory(self, wait_factory=None):
         """
         Configure wait factory to use
 
@@ -164,7 +166,7 @@ class ActionFactoryBuilder():
         self.use_real_dying_rules = True
         return self
 
-    def with_gain_domain_factory(self, gain_domain_factory = None):
+    def with_gain_domain_factory(self, gain_domain_factory=None):
         """
         Configure action factory to use gain domain factory
 
@@ -179,7 +181,6 @@ class ActionFactoryBuilder():
             self.use_real_gain_domain_factory = True
 
         return self
-
 
     def build(self):
         """
@@ -198,27 +199,25 @@ class ActionFactoryBuilder():
                                                       self.dying_rules)
             ranged_combat_factory = RangedCombatFactory(self.effect_factory,
                                                         self.dying_rules)
-            self.attack_factory = AttackFactory([
-                                        unarmed_combat_factory,
-                                        melee_combat_factory,
-                                        ranged_combat_factory])
+            self.attack_factory = AttackFactory([unarmed_combat_factory,
+                                                 melee_combat_factory,
+                                                 ranged_combat_factory])
 
         if self.use_real_drink_factory:
             self.drink_factory = (DrinkFactoryBuilder()
-                                    .with_effect_factory(self.effect_factory)
-                                    .with_dying_rules(self.dying_rules)
-                                    .build())
+                                  .with_effect_factory(self.effect_factory)
+                                  .with_dying_rules(self.dying_rules)
+                                  .build())
 
         if self.use_real_inventory_factory:
             pick_up_factory = PickUpFactory()
             drop_factory = DropFactory()
             equip_factory = EquipFactory()
             unequip_factory = UnEquipFactory()
-            self.inventory_factory = InventoryFactory([
-                                            pick_up_factory,
-                                            drop_factory,
-                                            equip_factory,
-                                            unequip_factory])
+            self.inventory_factory = InventoryFactory([pick_up_factory,
+                                                       drop_factory,
+                                                       equip_factory,
+                                                       unequip_factory])
 
         if self.use_real_move_factory:
             walk_factory = WalkFactory(mock())
@@ -244,6 +243,7 @@ class ActionFactoryBuilder():
 
         return action_factory
 
+
 class DrinkFactoryBuilder():
     """
     Class to build drink factories
@@ -252,7 +252,7 @@ class DrinkFactoryBuilder():
         """
         Default constructor
         """
-        super(DrinkFactoryBuilder, self).__init__()
+        super().__init__()
 
         self.effect_factory = mock()
         self.dying_rules = mock()
@@ -266,11 +266,11 @@ class DrinkFactoryBuilder():
         self.effect_factory = effect_factory
         return self
 
-    def with_dying_rules(self, dying_rules = None):
+    def with_dying_rules(self, dying_rules=None):
         """
         Set dying rules to use
         """
-        if dying_rules != None:
+        if dying_rules is not None:
             self.dying_rules = dying_rules
         else:
             self.use_real_dying_rules = True
@@ -285,6 +285,7 @@ class DrinkFactoryBuilder():
 
         return DrinkFactory(self.effect_factory,
                             self.dying_rules)
+
 
 class WaitFactoryBuilder():
     """
@@ -304,6 +305,7 @@ class WaitFactoryBuilder():
         """
         return WaitFactory()
 
+
 class GainDomainFactoryBuilder():
     """
     Builder for gain domain factory
@@ -322,6 +324,7 @@ class GainDomainFactoryBuilder():
         """
         return GainDomainFactory()
 
+
 class SpellCastingFactoryBuilder():
     """
     Builder for spell casting factory
@@ -339,7 +342,7 @@ class SpellCastingFactoryBuilder():
         self.effects_factory = mock()
         self.use_real_effects_factory = False
 
-    def with_spell_factory(self, spell_factory = None):
+    def with_spell_factory(self, spell_factory=None):
         """
         Configure spell factory to use
         """
@@ -352,7 +355,7 @@ class SpellCastingFactoryBuilder():
                 self.spell_factory = spell_factory
         return self
 
-    def with_effects_factory(self, effects_factory = None):
+    def with_effects_factory(self, effects_factory=None):
         """
         Configure effects factory to use
         """
@@ -377,6 +380,6 @@ class SpellCastingFactoryBuilder():
             #self.effects_factory = None
             pass
 
-        return SpellCastingFactory(spell_factory = self.spell_factory,
-                                   effects_factory = self.effects_factory,
-                                   dying_rules = Dying())
+        return SpellCastingFactory(spell_factory=self.spell_factory,
+                                   effects_factory=self.effects_factory,
+                                   dying_rules=Dying())

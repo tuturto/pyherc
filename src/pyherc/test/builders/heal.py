@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Module for building heal related objects
 from pyherc.data.effects import Heal
 from mockito import mock
 
+
 class HealBuilder():
     """
     Class for building heal
@@ -32,7 +32,7 @@ class HealBuilder():
         """
         Default constructor
         """
-        super(HealBuilder, self).__init__()
+        super().__init__()
         self.duration = 1
         self.frequency = 1
         self.tick = 0
@@ -84,11 +84,11 @@ class HealBuilder():
         """
         Builds heal object
         """
-        return Heal(duration = self.duration,
-                    frequency = self.frequency,
-                    tick = self.tick,
-                    healing = self.healing,
-                    target = self.target,
-                    icon = self.icon,
-                    title = self.title,
-                    description = self.description)
+        return Heal(duration=self.duration,
+                    frequency=self.frequency,
+                    tick=self.tick,
+                    healing=self.healing,
+                    target=self.target,
+                    icon=self.icon,
+                    title=self.title,
+                    description=self.description)

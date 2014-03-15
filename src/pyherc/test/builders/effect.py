@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Module for effect specification builder
 from pyherc.data.effects import Effect, EffectHandle
 from pyherc.generators import EffectsFactory
 
+
 class EffectHandleBuilder():
     """
     Class for building effect specifications
@@ -32,7 +32,7 @@ class EffectHandleBuilder():
         """
         Default constructor
         """
-        super(EffectHandleBuilder, self).__init__()
+        super().__init__()
         self.trigger = 'on drink'
         self.effect = 'heal'
         self.parameters = None
@@ -87,19 +87,20 @@ class EffectHandleBuilder():
         Returns:
             EffectHandle
         """
-        effect = EffectHandle(trigger = self.trigger,
-                                effect = self.effect,
-                                parameters = self.parameters,
-                                charges = self.charges)
+        effect = EffectHandle(trigger=self.trigger,
+                              effect=self.effect,
+                              parameters=self.parameters,
+                              charges=self.charges)
 
         return effect
+
 
 class EffectBuilder():
     """
     Class to build effects
     """
     def __init__(self):
-        super(EffectBuilder, self).__init__()
+        super().__init__()
         self.duration = 0
         self.frequency = 0
         self.tick = 0
@@ -193,15 +194,16 @@ class EffectBuilder():
         :returns: fully configured effect
         :rtype: Effect
         """
-        effect = Effect(duration = self.duration,
-                        frequency = self.frequency,
-                        tick = self.tick,
-                        icon = self.icon,
-                        title = self.title,
-                        description = self.description)
+        effect = Effect(duration=self.duration,
+                        frequency=self.frequency,
+                        tick=self.tick,
+                        icon=self.icon,
+                        title=self.title,
+                        description=self.description)
         effect.effect_name = self.effect_name
         effect.multiple_allowed = self.multiple_allowed
         return effect
+
 
 class EffectsFactoryBuilder():
     """
@@ -211,12 +213,13 @@ class EffectsFactoryBuilder():
         """
         Default constructor
         """
+        super().__init__()
         self.effects = {}
 
     def with_effect(self, key, type):
         """
         Configure factory with an effect
-        
+
         .. note: Can be called multiple times
         """
         self.effects[key] = type
@@ -227,8 +230,8 @@ class EffectsFactoryBuilder():
         Build the configured factory
         """
         factory = EffectsFactory()
-        
+
         for k, v in self.effects.items():
-            factory.add_effect(key = k, type = v)
-        
+            factory.add_effect(key=k, type=v)
+
         return factory

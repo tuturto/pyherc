@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,6 +22,7 @@ Module for level builder
 """
 from pyherc.data import Level
 
+
 class LevelBuilder():
     """
     Class for building levels
@@ -31,7 +31,7 @@ class LevelBuilder():
         """
         Default constructor
         """
-        super(LevelBuilder, self).__init__()
+        super().__init__()
         self.characters = []
         self.level_size = (80, 40)
         self.floor_tile = 1
@@ -56,7 +56,7 @@ class LevelBuilder():
         self.solid_wall_tile = tile
         return self
 
-    def with_character(self, character, location = None):
+    def with_character(self, character, location=None):
         """
         Place given character to level
 
@@ -68,7 +68,7 @@ class LevelBuilder():
         else:
             new_character = character
 
-        if location != None:
+        if location is not None:
             new_character.location = location
 
         self.characters.append(new_character)
@@ -91,10 +91,10 @@ class LevelBuilder():
         Returns:
             Level
         """
-        level = Level(size = self.level_size,
-                      floor_type = self.floor_tile,
-                      wall_type = self.wall_tile,
-                      empty_wall = self.empty_wall_tile)
+        level = Level(size=self.level_size,
+                      floor_type=self.floor_tile,
+                      wall_type=self.wall_tile,
+                      empty_wall=self.empty_wall_tile)
 
         for wall in self.walls:
             level.walls[wall[0]][wall[1]] = self.solid_wall_tile

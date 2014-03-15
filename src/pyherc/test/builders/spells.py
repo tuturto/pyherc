@@ -24,6 +24,7 @@ from pyherc.generators import SpellGenerator
 from pyherc.data.magic import Spell, SpellEntry
 from pyherc.data.geometry import TargetData
 
+
 class SpellGeneratorBuilder():
     """
     Builder for SpellFactory
@@ -34,13 +35,14 @@ class SpellGeneratorBuilder():
         """
         Default constructor
         """
-        pass
+        super().__init__()
 
     def build(self):
         """
         Builds the factory
         """
         return SpellGenerator()
+
 
 class SpellBuilder():
     """
@@ -52,6 +54,7 @@ class SpellBuilder():
         """
         Default constructor
         """
+        super().__init__()
         self.spirit = 5
         self.handles = []
         self.targets = []
@@ -113,6 +116,7 @@ class SpellBuilder():
 
         return spell
 
+
 class SpellEntryBuilder():
     """
     Builder for making spell entries for spell book
@@ -124,6 +128,7 @@ class SpellEntryBuilder():
         """
         Default constructor
         """
+        super().__init__()
         self.spell_name = 'prototype'
         self.level = 1
         self.domain = 'prototype'

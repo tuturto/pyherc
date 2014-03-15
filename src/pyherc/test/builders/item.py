@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -25,6 +24,7 @@ from pyherc.data import Item
 from pyherc.data.effects import EffectsCollection
 from pyherc.data.item import WeaponData, ArmourData, AmmunitionData
 
+
 class ItemBuilder():
     """
     Class for building Items
@@ -33,7 +33,7 @@ class ItemBuilder():
         """
         Default constructor
         """
-        super(ItemBuilder, self).__init__()
+        super().__init__()
         self.name = 'prototype'
         self.appearance = ''
         self.effect_handles = []
@@ -61,8 +61,8 @@ class ItemBuilder():
         :param appearance: appearance of the item
         :type appearance: string
 
-        .. note:: appearance is used as a name of the item if it is not familiar
-                  to the person inspecting it
+        .. note:: appearance is used as a name of the item if it is not
+                  familiar to the person inspecting it
         """
         self.appearance = appearance
         return self
@@ -110,7 +110,7 @@ class ItemBuilder():
         :type damage: int
         :param damage_type:
         """
-        if self.weapon_data == None:
+        if self.weapon_data is None:
             self.weapon_data = WeaponData()
         self.weapon_data.damage.append((damage, damage_type))
         return self
@@ -122,7 +122,7 @@ class ItemBuilder():
         :param ammunition_type: type of ammunition this weapon requires
         :type ammunition_type: string
         """
-        if self.weapon_data == None:
+        if self.weapon_data is None:
             self.weapon_data = WeaponData()
         self.weapon_data.ammunition_type = ammunition_type
         return self
@@ -134,7 +134,7 @@ class ItemBuilder():
         :param ammunition_type: type of ammunition
         :type ammunition_type: string
         """
-        if self.ammunition_data == None:
+        if self.ammunition_data is None:
             self.ammunition_data = AmmunitionData()
         self.ammunition_data.ammunition_type = ammunition_type
         return self
@@ -150,7 +150,7 @@ class ItemBuilder():
 
         .. note:: can be called multiple times
         """
-        if self.ammunition_data == None:
+        if self.ammunition_data is None:
             self.ammunition_data = AmmunitionData()
         self.ammunition_data.damage.append((damage, damage_type))
         return self
@@ -162,7 +162,7 @@ class ItemBuilder():
         :param count: amount of items
         :type count: int
         """
-        if self.ammunition_data == None:
+        if self.ammunition_data is None:
             self.ammunition_data = AmmunitionData()
         self.ammunition_data.count = count
         return self
@@ -186,7 +186,7 @@ class ItemBuilder():
         :param weapon_type: type of weapon
         :type weapon_type: string
         """
-        if self.weapon_data == None:
+        if self.weapon_data is None:
             self.weapon_data = WeaponData()
         self.weapon_data.weapon_type = weapon_type
         return self
@@ -198,7 +198,7 @@ class ItemBuilder():
         :param damage_reduction: amount of damage reduction
         :type damage_reduction: int
         """
-        if self.armour_data == None:
+        if self.armour_data is None:
             self.armour_data = ArmourData()
         self.armour_data.damage_reduction = damage_reduction
         return self
@@ -210,7 +210,7 @@ class ItemBuilder():
         :param speed_modifier: speed modifier to use
         :type speed_modifier: double
         """
-        if self.armour_data == None:
+        if self.armour_data is None:
             self.armour_data = ArmourData()
         self.armour_data.speed_modifier = speed_modifier
         return self
@@ -222,7 +222,7 @@ class ItemBuilder():
         Returns:
             Item
         """
-        item = Item(effects_collection = EffectsCollection())
+        item = Item(effects_collection=EffectsCollection())
 
         item.name = self.name
         item.appearance = self.appearance
@@ -230,15 +230,15 @@ class ItemBuilder():
         item.icon = self.icon
         item.tags = self.tags
 
-        if self.weapon_data != None:
+        if self.weapon_data is not None:
             item.weapon_data = self.weapon_data
             item.tags.append('weapon')
 
-        if self.armour_data != None:
+        if self.armour_data is not None:
             item.armour_data = self.armour_data
             item.tags.append('armour')
 
-        if self.ammunition_data != None:
+        if self.ammunition_data is not None:
             item.ammunition_data = self.ammunition_data
             item.tags.append('ammunition')
 
