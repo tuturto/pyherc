@@ -22,6 +22,7 @@ Module for event helpers
 """
 from pyherc.aspects import log_debug
 
+
 class EventListener():
     """
     Event listener that stores all events it receives
@@ -31,7 +32,7 @@ class EventListener():
         """
         Default constructor
         """
-        super(EventListener, self).__init__()
+        super().__init__()
         self.events = []
 
     @log_debug
