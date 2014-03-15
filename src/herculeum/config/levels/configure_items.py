@@ -67,7 +67,8 @@ def init_items(context):
                                             damage = [(2, PIERCING_DAMAGE)],
                                             critical_range = 10,
                                             critical_damage = 2,
-                                            weapon_class = 'simple')))
+                                            weapon_class = 'simple',
+                                            speed = 1.5)))
 
     config.append(ItemConfiguration(name = 'sword',
                                     description = 'Staple tool for adventurers and soldiers alike. Swords do more damage than daggers, but are harder to use effectively.',
@@ -88,7 +89,8 @@ def init_items(context):
                                                       (2, SLASHING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 2,
-                                            weapon_class = 'martial')))
+                                            weapon_class = 'martial',
+                                            speed = 1.0)))
 
     config.append(ItemConfiguration(name = 'axe',
                                     description = 'Heavy battle axes can cut through flesh and crush through bones. Not very common weapon, because effective use requires years of training.',
@@ -109,7 +111,8 @@ def init_items(context):
                                                       (2, SLASHING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 2,
-                                            weapon_class = 'martial')))
+                                            weapon_class = 'martial',
+                                            speed = 1.0)))
 
     config.append(ItemConfiguration(name = 'club',
                                     description = 'Simple and easy to use weapon, that can be used effectively with one hand.',
@@ -129,7 +132,8 @@ def init_items(context):
                                             damage = [(3, CRUSHING_DAMAGE)],
                                             critical_range = 11,
                                             critical_damage = 3,
-                                            weapon_class = 'simple')))
+                                            weapon_class = 'simple',
+                                            speed = 0.8)))
 
     config.append(ItemConfiguration(name = 'warhammer',
                                     description = 'Heavy two-handed weapon that crushes through but the strongest defences. Rare sight in the battle field, because of the huge weight.',
@@ -149,7 +153,8 @@ def init_items(context):
                                             damage = [(7, CRUSHING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 7,
-                                            weapon_class = 'martial')))
+                                            weapon_class = 'martial',
+                                            speed = 0.5)))
 
     config.append(ItemConfiguration(name = 'spear',
                                     description = 'One handed piercing weapon that can be devastating in hands of skilled user.',
@@ -169,7 +174,8 @@ def init_items(context):
                                             damage = [(5, PIERCING_DAMAGE)],
                                             critical_range = 11,
                                             critical_damage = 5,
-                                            weapon_class = 'martial')))
+                                            weapon_class = 'martial',
+                                            speed = 0.6)))
 
     config.append(ItemConfiguration(name = 'whip',
                                     description = 'Weapon of choice for archeologists and vampire hunters. Not particularly strong, but very versatile.',
@@ -189,7 +195,8 @@ def init_items(context):
                                             damage = [(3, SLASHING_DAMAGE)],
                                             critical_range = 11,
                                             critical_damage = 3,
-                                            weapon_class = 'exotic')))
+                                            weapon_class = 'exotic',
+                                            speed = 0.8)))
 
     config.append(ItemConfiguration(name = 'sickle',
                                     description = 'Farming implement repurposed on the battle field. Light and common weapon that requires very specifically trained user.',
@@ -209,7 +216,8 @@ def init_items(context):
                                             damage = [(3, SLASHING_DAMAGE)],
                                             critical_range = 10,
                                             critical_damage = 3,
-                                            weapon_class = 'exotic')))
+                                            weapon_class = 'exotic',
+                                            speed = 1.2)))
 
     config.append(ItemConfiguration(name = 'morning star',
                                     description = 'Spiked club, guaranteed to pierce through armours and crush through bones. Difficult to use weapon that requires years of practice.',
@@ -230,7 +238,8 @@ def init_items(context):
                                                       (2, PIERCING_DAMAGE)],
                                             critical_range = 12,
                                             critical_damage = 2,
-                                            weapon_class = 'martial')))
+                                            weapon_class = 'martial',
+                                            speed = 1.0)))
 
     config.append(ItemConfiguration(name = 'bow',
                                     description = 'Short bow, built from laminated bones and wood. Perfect for ranged combat.',
@@ -251,7 +260,8 @@ def init_items(context):
                                             critical_range = 12,
                                             critical_damage = 1,
                                             weapon_class = 'martial',
-                                            ammunition_type = 'arrow')))
+                                            ammunition_type = 'arrow',
+                                            speed = 1.0)))
 
     config.append(ItemConfiguration(name = 'arrow',
                                     description = 'Wooden arrows tipped with metal head.',

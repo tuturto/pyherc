@@ -108,7 +108,8 @@ class ItemGenerator():
                 critical_range=weapon_spec.critical_range,
                 critical_damage=weapon_spec.critical_damage,
                 weapon_type=weapon_spec.weapon_class,
-                ammunition_type=weapon_spec.ammunition_type)
+                ammunition_type=weapon_spec.ammunition_type,
+                speed=weapon_spec.speed)
 
         if item_specification.armour_configuration is not None:
             armour_spec = item_specification.armour_configuration
@@ -252,7 +253,7 @@ class WeaponConfiguration():
     """
     @log_debug
     def __init__(self, damage, critical_range, critical_damage, weapon_class,
-                 ammunition_type=None):
+                 ammunition_type=None, speed=1):
         """
         Default constructor
         """
@@ -263,6 +264,7 @@ class WeaponConfiguration():
         self.critical_damage = critical_damage
         self.weapon_class = weapon_class
         self.ammunition_type = ammunition_type
+        self.speed = speed
 
 
 class ArmourConfiguration():
