@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Module for event listener matchers used in testing
 
 from hamcrest.core.base_matcher import BaseMatcher
 
+
 class EventListeners(BaseMatcher):
     """
     Class to event listeners
@@ -32,7 +32,7 @@ class EventListeners(BaseMatcher):
         """
         Default constructor
         """
-        super(EventListeners, self).__init__()
+        super().__init__()
         self.listener = listener
 
     def _matches(self, item):
@@ -49,9 +49,8 @@ class EventListeners(BaseMatcher):
         """
         Describe this match
         """
-        description.append(
-                    'Object with event listener {0}'
-                    .format(self.listener))
+        description.append('Object with event listener {0}'
+                           .format(self.listener))
 
     def describe_mismatch(self, item, mismatch_description):
         """
@@ -59,6 +58,7 @@ class EventListeners(BaseMatcher):
         """
         mismatch_description.append('Was object with listeners {0}'
                                     .format(item.get_event_listeners()))
+
 
 def has_event_listener(listener):
     """

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -22,9 +21,10 @@
 Module for customer matchers used in testing
 """
 
-from hamcrest import is_not #pylint: disable-msg=E0611
+from hamcrest import is_not
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+
 
 class ContainsCreature(BaseMatcher):
     """
@@ -34,7 +34,7 @@ class ContainsCreature(BaseMatcher):
         """
         Default constructor
         """
-        super(ContainsCreature, self).__init__()
+        super().__init__()
         self.creature = creature
         self.amount = amount
 
@@ -58,14 +58,12 @@ class ContainsCreature(BaseMatcher):
         """
         Describe this matcher
         """
-        if self.amount == None:
-            description.append(
-                    'Level with creature named {0}'
-                    .format(self.creature))
+        if self.amount is None:
+            description.append('Level with creature named {0}'
+                               .format(self.creature))
         else:
-            description.append(
-                    'Level with {0} creatures named {1}'
-                    .format(self.amount, self.creature))
+            description.append('Level with {0} creatures named {1}'
+                               .format(self.amount, self.creature))
 
     def describe_mismatch(self, item, mismatch_description):
         """
@@ -75,6 +73,7 @@ class ContainsCreature(BaseMatcher):
 
         mismatch_description.append('Was level with creatures {0}'
                                     .format(names))
+
 
 def has_creature(creature, amount):
     """
@@ -87,6 +86,7 @@ def has_creature(creature, amount):
     """
     return ContainsCreature(creature, wrap_matcher(amount))
 
+
 class IsLocatedIn(BaseMatcher):
     """
     Class to check if given level has creatures
@@ -95,7 +95,7 @@ class IsLocatedIn(BaseMatcher):
         """
         Default constructor
         """
-        super(IsLocatedIn, self).__init__()
+        super().__init__()
         self.level = level
         self.item = None
 
@@ -107,7 +107,6 @@ class IsLocatedIn(BaseMatcher):
         :returns: True if matching, otherwise False
         :rtype: Boolean
         """
-        count = 0
         self.item = item
 
         if item in self.level.creatures:
@@ -119,9 +118,8 @@ class IsLocatedIn(BaseMatcher):
         """
         Describe this matcher
         """
-        description.append(
-                'Level with monster named {0}'
-                .format(self.item))
+        description.append('Level with monster named {0}'
+                           .format(self.item))
 
     def describe_mismatch(self, item, mismatch_description):
         """
@@ -130,11 +128,13 @@ class IsLocatedIn(BaseMatcher):
         mismatch_description.append('Was level with creatures {0}'
                                     .format(self.level.creatures))
 
+
 def is_in(level):
     """
     Check that level does have given creature
     """
     return IsLocatedIn(level)
+
 
 def is_not_in(level):
     """

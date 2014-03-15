@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -25,6 +24,7 @@ Module for customer matchers used in testing
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
+
 class Effects(BaseMatcher):
     """
     Class to check amount of active effects
@@ -33,7 +33,7 @@ class Effects(BaseMatcher):
         """
         Default constructor
         """
-        super(Effects, self).__init__()
+        super().__init__()
         self.amount_of_effects = amount_of_effects
 
     def _matches(self, item):
@@ -50,9 +50,8 @@ class Effects(BaseMatcher):
         """
         Describe this matcher
         """
-        description.append(
-                    'Object with {0} effects'
-                    .format(self.amount_of_effects))
+        description.append('Object with {0} effects'
+                           .format(self.amount_of_effects))
 
     def describe_mismatch(self, item, mismatch_description):
         """
@@ -60,6 +59,7 @@ class Effects(BaseMatcher):
         """
         mismatch_description.append('Was object with {0} effects'
                                     .format(len(item.get_effects())))
+
 
 class EffectInstance(BaseMatcher):
     """
@@ -69,9 +69,9 @@ class EffectInstance(BaseMatcher):
         """
         Default constructor
         """
-        super(EffectInstance, self).__init__()
+        super().__init__()
         self.effect = effect
-        if effect == None:
+        if effect is None:
             self.match_any = True
         else:
             self.match_any = False
@@ -102,9 +102,8 @@ class EffectInstance(BaseMatcher):
         if self.match_any:
             description.append('Object with any effect')
         else:
-            description.append(
-                    'Object with effects containing {0}'
-                    .format(self.effect))
+            description.append('Object with effects containing {0}'
+                               .format(self.effect))
 
     def describe_mismatch(self, item, mismatch_description):
         """
@@ -112,6 +111,7 @@ class EffectInstance(BaseMatcher):
         """
         mismatch_description.append('Was object with effects {0}'
                                     .format(item.get_effects()))
+
 
 def has_effects(amount_of_effects):
     """
@@ -121,13 +121,15 @@ def has_effects(amount_of_effects):
     """
     return Effects(wrap_matcher(amount_of_effects))
 
+
 def has_no_effects():
     """
     Check that item has no effects
     """
     return Effects(wrap_matcher(0))
 
-def has_effect(effect = None):
+
+def has_effect(effect=None):
     """
     Check that item has given effect
 

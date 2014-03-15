@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -21,7 +20,8 @@
 """
 Module for matching inventory action arguments
 """
-from mockito.matchers import Matcher # pylint: disable=E0611
+from mockito.matchers import Matcher
+
 
 class EventType(Matcher):
     """
@@ -36,6 +36,7 @@ class EventType(Matcher):
         :param type: type of event
         :type type: string
         """
+        super().__init__()
         self.event_type = type
 
     def matches(self, arg):

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Module for customer matchers used in testing
 
 from hamcrest.core.base_matcher import BaseMatcher
 
+
 class AliveStatus(BaseMatcher):
     """
     Class to check if character is alive or not
@@ -32,7 +32,7 @@ class AliveStatus(BaseMatcher):
         """
         Default constructor
         """
-        super(AliveStatus, self).__init__()
+        super().__init__()
         self.alive = alive
 
     def _matches(self, item):
@@ -54,7 +54,7 @@ class AliveStatus(BaseMatcher):
         """
         Describe this matcher
         """
-        if self.alive == True:
+        if self.alive is True:
             description.append('Character who is alive')
         else:
             description.append('Character who is dead')
@@ -65,6 +65,7 @@ class AliveStatus(BaseMatcher):
         """
         mismatch_description.append('Was character with {0} hit points'
                                     .format(item.hit_points))
+
 
 def is_dead():
     """

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Module for event listener matchers used in testing
 
 from hamcrest.core.base_matcher import BaseMatcher
 
+
 class EventRedraws(BaseMatcher):
     """
     Class for checking redraws in event
@@ -32,7 +32,7 @@ class EventRedraws(BaseMatcher):
         """
         Default constructor
         """
-        super(EventRedraws, self).__init__()
+        super().__init__()
         self.redraws = redraws
 
     def _matches(self, item):
@@ -53,9 +53,8 @@ class EventRedraws(BaseMatcher):
         """
         Describe this match
         """
-        description.append(
-                    'Event with affected tiles {0}'
-                    .format(self.redraws))
+        description.append('Event with affected tiles {0}'
+                           .format(self.redraws))
 
     def describe_mismatch(self, item, mismatch_description):
         """
@@ -63,6 +62,7 @@ class EventRedraws(BaseMatcher):
         """
         mismatch_description.append('Was event with affected tiles {0}'
                                     .format(item.affected_tiles))
+
 
 def has_marked_for_redrawing(redraws):
     """

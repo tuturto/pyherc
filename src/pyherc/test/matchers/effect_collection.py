@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,6 +23,7 @@ Module for customer matchers used in testing
 
 from hamcrest.core.base_matcher import BaseMatcher
 
+
 class ContainsEffectHandle(BaseMatcher):
     """
     Class to check if given collection has effect handles
@@ -32,8 +32,8 @@ class ContainsEffectHandle(BaseMatcher):
         """
         Default constructor
         """
-        super(ContainsEffectHandle, self).__init__()
-        if handle != None:
+        super().__init__()
+        if handle is not None:
             self.match_any = False
             if hasattr(handle, '__iter__'):
                 self.handles = handle
@@ -84,7 +84,8 @@ class ContainsEffectHandle(BaseMatcher):
         mismatch_description.append('Was collection with handles {0}'
                                     .format(handles))
 
-def has_effect_handle(handle = None):
+
+def has_effect_handle(handle=None):
     """
     Check if collection has the handle
 
@@ -94,6 +95,7 @@ def has_effect_handle(handle = None):
     .. note:: If left empty, any handle will match
     """
     return ContainsEffectHandle(handle)
+
 
 def has_effect_handles(handle):
     """

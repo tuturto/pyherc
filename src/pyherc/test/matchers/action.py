@@ -22,6 +22,7 @@ Module for general action related matchers
 """
 from hamcrest.core.base_matcher import BaseMatcher
 
+
 class ActionLegalityMatcher(BaseMatcher):
     """
     Matcher to check if action is legal
@@ -65,11 +66,13 @@ class ActionLegalityMatcher(BaseMatcher):
         else:
             mismatch_description.append('Illegal action: {0}'.format(item))
 
+
 def is_legal():
     """
     Check if action is legal
     """
     return ActionLegalityMatcher(True)
+
 
 def is_illegal():
     """
