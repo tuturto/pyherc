@@ -177,7 +177,7 @@
         (let [[enemy (enemy-close? ai)]]
           (if enemy (-start-fighting ai enemy))))
       (cond
-       ((= (first ai.mode) :transit) (transit ai action-factory))
-       ((= (first ai.mode) :patrol) (patrol ai action-factory))
-       ((= (first ai.mode) :fight) (fight ai action-factory))))]]
+       [(= (first ai.mode) :transit) (transit ai action-factory)]
+       [(= (first ai.mode) :patrol) (patrol ai action-factory)]
+       [(= (first ai.mode) :fight) (fight ai action-factory)]))]]
     (partial act find-wall patrol fight)))
