@@ -20,7 +20,7 @@
 (setv __doc__ "module for actions")
 
 (import [pyherc.aspects [log_debug]]
-    [pyherc.rules [move is-move-legal]]
+    [pyherc.rules [move is-move-legal attack]]
     [pyherc.events [NoticeEvent]]
     [math [sqrt]])
 
@@ -33,17 +33,14 @@
 
 (defn can-walk? [ai action-factory direction]
   "check if character can walk to given direction"
-  (is-move-legal ai.character
-          (map-direction direction)
-          "walk"
-          action-factory))
+  (is-move-legal ai.character direction "walk" action-factory))
 
 (with-decorator log_debug
   (defn walk [ai action-factory &optional direction]
     "take a step to direction the ai is currently moving"
     (if direction
-      (move ai.character (map-direction direction) action-factory)
-      (move ai.character (map-direction (second ai.mode)) action-factory))))
+      (move ai.character direction action-factory)
+      (move ai.character (second ai.mode) action-factory))))
 
 (defn distance-between [start end]
   "calculate distance between two locations"
@@ -60,31 +57,21 @@
     [end-x (first destination)]
     [end-y (second destination)]]
     (if (= start-x end-x)
-      (if (< start-y end-y) :south :north)
+      (if (< start-y end-y) 5 1)
       (if (= start-y end-y)
-    (if (< start-x end-x) :east :west)))))
-
-(def direction-mapping {1 :north 2 :north-east 3 :east 4 :south-east 5 :south
-            6 :south-west 7 :west 8 :north-west 9 :enter
-            :north 1 :north-east 2 :east 3 :south-east 4 :south 5
-            :south-west 6 :west 7 :north-west 8 :enter 9})
-
-(defn map-direction [direction]
-  "map between keyword and integer directions"
-  (get direction-mapping direction))
+    (if (< start-x end-x) 3 7)))))
 
 (defn new-location [character direction]
   "get next location if going to given direction"
-  (.get-location-at-direction character (map-direction direction)))
+  (.get-location-at-direction character direction))
 
-(defn attack [ai enemy action-factory rng]
+(defn attack-enemy [ai enemy action-factory rng]
   "attack an enemy"
   (let [[attacker ai.character]
     [attacker-location attacker.location]
     [target-location enemy.location]
-    [attack-direction (map-direction (find-direction attacker-location
-                             target-location))]]
-    (.perform-attack attacker attack-direction action-factory rng)))
+    [attack-direction (find-direction attacker-location target-location)]]
+    (attack attacker attack-direction action-factory rng)))
 
 (defn focus-enemy [ai enemy]
   "focus on enemy and start tracking it"

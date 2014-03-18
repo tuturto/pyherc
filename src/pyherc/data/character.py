@@ -155,7 +155,6 @@ class Character():
         for listener in self.__update_listeners:
             listener.receive_update(event)
 
-    @guarded_action
     @log_info
     def act(self, model, action_factory, rng):
         """

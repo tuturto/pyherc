@@ -26,7 +26,7 @@ from pyherc.rules.public import ActionParameters
 
 
 @log_info
-def attack(self, direction, action_factory, rng):
+def attack(character, direction, action_factory, rng):
     """
     Attack to given direction
 
@@ -37,10 +37,10 @@ def attack(self, direction, action_factory, rng):
     :param rng: random number generator
     :type rng: Random
     """
-    if self.inventory.weapon is not None:
-        weapon = self.inventory.weapon.weapon_data
-        if self.inventory.projectiles is not None:
-            ammunition = self.inventory.projectiles.ammunition_data
+    if character.inventory.weapon is not None:
+        weapon = character.inventory.weapon.weapon_data
+        if character.inventory.projectiles is not None:
+            ammunition = character.inventory.projectiles.ammunition_data
         else:
             ammunition = None
     else:
@@ -53,9 +53,9 @@ def attack(self, direction, action_factory, rng):
                 weapon.ammunition_type != ammunition.ammunition_type):
             attack_type = 'melee'
         else:
-            target_loc = self.get_location_at_direction(direction)
-            if self.level.get_creature_at(target_loc) is None:
-                if self.level.blocks_movement(target_loc[0], target_loc[1]):
+            target_loc = character.get_location_at_direction(direction)
+            if character.level.get_creature_at(target_loc) is None:
+                if character.level.blocks_movement(target_loc[0], target_loc[1]):
                     attack_type = 'melee'
                 else:
                     attack_type = 'ranged'
@@ -63,7 +63,7 @@ def attack(self, direction, action_factory, rng):
                 attack_type = 'melee'
 
     action = action_factory.get_action(
-        AttackParameters(attacker=self,
+        AttackParameters(attacker=character,
                          direction=direction,
                          attack_type=attack_type,
                          random_number_generator=rng))

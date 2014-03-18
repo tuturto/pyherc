@@ -24,7 +24,7 @@
     [pyherc.rules [is-move-legal]]
     [herculeum.ai.basic [can-walk? walk wait distance-between new-location]]
     [herculeum.ai.basic [find-direction]]
-    [herculeum.ai.basic [focus-enemy attack]]
+    [herculeum.ai.basic [focus-enemy attack-enemy]]
     [random]
     [math [sqrt]]
     [functools [partial]])
@@ -86,8 +86,7 @@
                                "walk"
                                action-factory))]]
       (if (len legal-directions) (assoc ai.mode 1
-                    (map-direction (.choice random
-                                legal-directions)))
+                     (.choice random legal-directions))
       (wait ai)))))
 
 (with-decorator log_debug
@@ -108,8 +107,8 @@
   (defn -patrollable-area-in-level [can-patrol level]
     "routine to find area to patrol in level"
     (let [[patrol-area []]]
-      (foreach [x (range (len level.walls))]
-    (foreach [y (range (len (first level.walls)))]
+      (for [x (range (len level.walls))]
+    (for [y (range (len (first level.walls)))]
       (if (can-patrol level x y)
         (.append patrol-area (, x y)))))
       patrol-area)))
@@ -129,7 +128,7 @@
     [character-x (first ai.character.location)]
     [character-y (second ai.character.location)]
     [level ai.character.level]]
-    (foreach [offset [(, 0 1) (, 0 -1) (, 1 0) (, -1 0)]]
+    (for [offset [(, 0 1) (, 0 -1) (, 1 0) (, -1 0)]]
       (let [[x (+ character-x (first offset))]
         [y (+ character-y (second offset))]]
       (if (is-patrollable level x y)
@@ -166,9 +165,9 @@
                (fn [start end level] (first (a-star start
                                 end
                                 level))))]
-    [fight (partial -fight-in-melee attack close-in)]
+    [fight (partial -fight-in-melee attack-enemy close-in)]
     [patrol (partial -patrol is-patrol-area (partial -start-patrolling random-patrol-direction))]
-    [find-wall (partial -find-patrol-area is-patrol-area (partial -start-patrolling random-patrol-direction)
+    [find-patrol-area (partial -find-patrol-area is-patrol-area (partial -start-patrolling random-patrol-direction)
             patrol -move-towards-patrol-area
             select-area-to-patrol)]
     [act (fn [transit patrol fight ai model action-factory]
@@ -180,4 +179,4 @@
        [(= (first ai.mode) :transit) (transit ai action-factory)]
        [(= (first ai.mode) :patrol) (patrol ai action-factory)]
        [(= (first ai.mode) :fight) (fight ai action-factory)]))]]
-    (partial act find-wall patrol fight)))
+    (partial act find-patrol-area patrol fight)))
