@@ -21,9 +21,8 @@
 Module for testing moving
 """
 #pylint: disable=W0614
-from hamcrest import assert_that, is_, is_not, equal_to #pylint: disable-msg=E0611
+from hamcrest import assert_that, is_, equal_to
 from mockito import mock
-from nose.tools import with_setup
 
 from pyherc.ports import ActionsPort
 from pyherc.data.constants import Direction
@@ -38,6 +37,7 @@ from pyherc.data.model import ESCAPED_DUNGEON
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.helpers import EventListener
 from pyherc.test.matchers import has_marked_for_redrawing
+
 
 class TestEventDispatching():
     """
@@ -62,28 +62,28 @@ class TestEventDispatching():
         self.model = Model()
 
         self.character = (CharacterBuilder()
-                                .with_model(self.model)
-                                .with_location((10, 10))
-                                .build())
+                          .with_model(self.model)
+                          .with_location((10, 10))
+                          .build())
 
         self.model.dungeon = (LevelBuilder()
-                                .with_character(self.character)
-                                .build())
+                              .with_character(self.character)
+                              .build())
 
         self.listener = EventListener()
 
         self.model.register_event_listener(self.listener)
 
         self.actions = ActionsPort(ActionFactoryBuilder()
-                                        .with_move_factory()
-                                        .build())
+                                   .with_move_factory()
+                                   .build())
 
     def test_event_is_relayed(self):
         """
         Test that moving will create an event and send it forward
         """
-        self.actions.move_character(character = self.character,
-                                    direction = Direction.east)
+        self.actions.move_character(character=self.character,
+                                    direction=Direction.east)
 
         assert_that(len(self.listener.events), is_(equal_to(1)))
 
@@ -94,12 +94,13 @@ class TestEventDispatching():
         expected_redraws = [(10, 10),
                             (10, 11)]
 
-        self.actions.move_character(character = self.character,
-                                    direction = Direction.south)
+        self.actions.move_character(character=self.character,
+                                    direction=Direction.south)
 
         event = self.listener.events[0]
 
         assert_that(event, has_marked_for_redrawing(expected_redraws))
+
 
 class TestMoving():
     """
@@ -124,11 +125,11 @@ class TestMoving():
         Setup the test case
         """
         self.character = (CharacterBuilder()
-                                .build())
+                          .build())
 
         self.level1 = (LevelBuilder()
-                            .with_wall_at((1, 0))
-                            .build())
+                       .with_wall_at((1, 0))
+                       .build())
 
         self.level2 = LevelBuilder().build()
         self.portal1 = Portal((None, None), None)
@@ -143,8 +144,8 @@ class TestMoving():
         self.level1.add_creature(self.character, (5, 5))
 
         self.actions = ActionsPort(ActionFactoryBuilder()
-                                        .with_move_factory()
-                                        .build())
+                                   .with_move_factory()
+                                   .build())
 
     def check_move_result(self, start, direction, expected_location):
         """
@@ -152,12 +153,11 @@ class TestMoving():
         """
         self.character.location = start
 
-        self.actions.move_character(character = self.character,
-                                    direction = direction)
+        self.actions.move_character(character=self.character,
+                                    direction=direction)
 
         assert_that(self.character.location,
                     is_(equal_to(expected_location)))
-
 
     def test_simple_move(self):
         """
@@ -181,8 +181,8 @@ class TestMoving():
         """
         self.character.location = (1, 1)
 
-        self.actions.move_character(character = self.character,
-                                    direction = Direction.north)
+        self.actions.move_character(character=self.character,
+                                    direction=Direction.north)
 
         assert(self.character.location == (1, 1))
 
@@ -193,8 +193,8 @@ class TestMoving():
         assert(self.character.location == (5, 5))
         assert(self.character.level == self.level1)
 
-        self.actions.move_character(character = self.character,
-                                    direction = Direction.enter)
+        self.actions.move_character(character=self.character,
+                                    direction=Direction.enter)
 
         assert(self.character.location == (10, 10))
         assert(self.character.level == self.level2)
@@ -206,8 +206,8 @@ class TestMoving():
         assert self.character.level == self.level1
         assert self.character in self.level1.creatures
 
-        self.actions.move_character(character = self.character,
-                                    direction = Direction.enter)
+        self.actions.move_character(character=self.character,
+                                    direction=Direction.enter)
 
         assert self.character.level == self.level2
         assert self.character in self.level2.creatures
@@ -219,8 +219,8 @@ class TestMoving():
         assert self.character.level == self.level1
         assert self.character in self.level1.creatures
 
-        self.actions.move_character(character = self.character,
-                                    direction = Direction.enter)
+        self.actions.move_character(character=self.character,
+                                    direction=Direction.enter)
 
         assert self.character not in self.level1.creatures
 
@@ -231,8 +231,8 @@ class TestMoving():
         self.character.location = (6, 3)
         assert(self.character.level == self.level1)
 
-        self.actions.move_character(character = self.character,
-                                    direction = Direction.enter)
+        self.actions.move_character(character=self.character,
+                                    direction=Direction.enter)
 
         assert(self.character.location == (6, 3))
         assert(self.character.level == self.level1)
@@ -243,8 +243,8 @@ class TestMoving():
         """
         tick = self.character.tick
 
-        self.actions.move_character(character = self.character,
-                                    direction = Direction.east)
+        self.actions.move_character(character=self.character,
+                                    direction=Direction.east)
 
         assert self.character.tick > tick
 
@@ -257,11 +257,12 @@ class TestMoving():
         self.level1.add_portal(portal3, (2, 2))
         self.character.location = (2, 2)
 
-        self.actions.move_character(character = self.character,
-                                    direction = Direction.enter)
+        self.actions.move_character(character=self.character,
+                                    direction=Direction.enter)
 
         model = self.character.model
         assert_that(model.end_condition, is_(equal_to(ESCAPED_DUNGEON)))
+
 
 class TestEscapeAction():
     """
@@ -280,11 +281,11 @@ class TestEscapeAction():
         model = mock()
 
         character = (CharacterBuilder()
-                        .as_player_character()
-                        .with_model(model)
-                        .build())
+                     .as_player_character()
+                     .with_model(model)
+                     .build())
 
-        action = EscapeAction(character = character)
+        action = EscapeAction(character=character)
 
         assert_that(action, is_legal())
 
@@ -295,9 +296,9 @@ class TestEscapeAction():
         model = mock()
 
         character = (CharacterBuilder()
-                        .with_model(model)
-                        .build())
+                     .with_model(model)
+                     .build())
 
-        action = EscapeAction(character = character)
+        action = EscapeAction(character=character)
 
         assert_that(action, is_illegal())
