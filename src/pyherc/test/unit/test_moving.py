@@ -147,6 +147,20 @@ class TestMoving():
                                    .with_move_factory()
                                    .build())
 
+    def test_moving_when_stairs_are_blocked(self):
+        """
+        Moving should be possible, even if stairs other end is blocked
+        """
+        blocker = CharacterBuilder().build()
+
+        self.level2.add_creature(blocker, (10, 10))
+
+        self.actions.move_character(character=self.character,
+                                    direction=Direction.enter)
+
+        assert_that(blocker.level, is_(equal_to(self.level2)))
+        assert_that(self.character.level, is_(equal_to(self.level2)))
+
     def check_move_result(self, start, direction, expected_location):
         """
         Test that taking single step is possible

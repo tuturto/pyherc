@@ -113,6 +113,14 @@ class MoveAction():
 
         return location_ok
 
+    def __str__(self):
+        """
+        String representation of this action
+        """
+        return '{0} at {1}:{2}'.format(self.character,
+                                       self.new_location,
+                                       self.new_level)
+
 
 class WalkAction(MoveAction):
     """

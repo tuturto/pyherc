@@ -23,6 +23,7 @@ Attack related factories are defined here
 from pyherc.aspects import log_debug, log_info
 from pyherc.rules.moving.action import MoveAction, EscapeAction
 from pyherc.rules.factory import SubActionFactory
+import random
 
 
 class WalkFactory(SubActionFactory):
@@ -88,20 +89,7 @@ class WalkFactory(SubActionFactory):
         elif direction == 8:
             new_location = (location[0] - 1, location[1] - 1)
         elif direction == 9:
-            portal = new_level.get_portal_at(location)
-            if portal is not None:
-                if not portal.exits_dungeon:
-                    other_end = portal.get_other_end(self.level_generator_factory)  # noqa
-                    if other_end is not None:
-                        new_level = other_end.level
-                        new_location = other_end.location
-                    else:
-                        raise RuntimeError('Portal leads to void!')
-                else:
-                    return EscapeAction(parameters.character)
-            else:
-                new_level = parameters.character.level
-                new_location = parameters.character.location
+            return self._get_action_for_portal(parameters.character)
         else:
             raise RuntimeError('Character does not know where to go')
 
@@ -110,6 +98,60 @@ class WalkFactory(SubActionFactory):
             new_location = parameters.character.location
 
         return MoveAction(parameters.character, new_location, new_level)
+
+    @log_debug
+    def _get_action_for_portal(self, character):
+        """
+        Get location after entering a portal
+
+        :returns: action for entering portal
+        :rtype: Action
+
+        .. note:: Entering portal may lead player next to other end if it is
+                  blocked by other character
+        """
+        location = character.location
+        new_level = character.level
+        new_location = None
+
+        portal = new_level.get_portal_at(location)
+        if portal is not None:
+            if not portal.exits_dungeon:
+                other_end = portal.get_other_end(self.level_generator_factory)
+                if other_end is not None:
+                    new_level = other_end.level
+                    new_location = self._area_around_portal(other_end)
+                else:
+                    raise RuntimeError('Portal leads to void!')
+            else:
+                return EscapeAction(character)
+        else:
+            new_level = character.level
+            new_location = character.location
+
+        return MoveAction(character, new_location, new_level)
+
+    @log_debug
+    def _area_around_portal(self, portal):
+        """
+        Get passable tiles in 3x3 area around a portal
+        """
+        level = portal.level
+        location = portal.location
+
+        if not (level.blocks_movement(location[0], location[1]) or
+                level.get_creature_at(location)):
+            return location
+
+        passables = []
+
+        for loc_x in range(location[0]-1, location[1]+1):
+            for loc_y in range(location[1]-1, location[1]+1):
+                if not (level.blocks_movement(loc_x, loc_y) or
+                        level.get_creature_at((loc_x, loc_y))):
+                    passables.append((loc_x, loc_y))
+
+        return random.choice(passables)
 
 
 class MoveFactory(SubActionFactory):
