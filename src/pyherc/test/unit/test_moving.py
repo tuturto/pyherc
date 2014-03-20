@@ -312,3 +312,39 @@ class TestEscapeAction():
         action = EscapeAction(character=character)
 
         assert_that(action, is_illegal())
+
+
+class TestSwitchingPlaces():
+    """
+    Sometimes characters can switch places with each other
+    """
+
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super().__init__()
+
+    def test_switch_places(self):
+        """
+        Two monsters can switch places
+        """
+        level = LevelBuilder().build()
+
+        monster_1 = (CharacterBuilder()
+                     .build())
+
+        monster_2 = (CharacterBuilder()
+                     .build())
+
+        level.add_creature(monster_1, (5, 5))
+        level.add_creature(monster_2, (6, 5))
+
+        actions = ActionsPort(ActionFactoryBuilder()
+                              .with_move_factory()
+                              .build())
+
+        actions.move_character(monster_1, Direction.east)
+
+        assert_that(monster_1.location, is_(equal_to((6, 5))))
+        assert_that(monster_2.location, is_(equal_to((5, 5))))

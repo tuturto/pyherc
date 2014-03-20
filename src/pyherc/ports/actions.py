@@ -22,6 +22,7 @@ Port to issue actions
 """
 from pyherc.rules import move, is_move_legal
 
+
 class ActionsPort():
     """
     Port to issue actions with
@@ -49,9 +50,9 @@ class ActionsPort():
         :param direction: direction to move to
         :type direction: int (1-8)
         """
-        move(character = character,
-             direction = direction,
-             action_factory = self.action_factory)
+        move(character=character,
+             direction=direction,
+             action_factory=self.action_factory)
 
     def is_move_legal(self, character, direction):
         """
@@ -62,7 +63,7 @@ class ActionsPort():
         :param direction: direction to move to
         :type direction: int (1-8)
         """
-        return is_move_legal(character = character,
-                             direction = direction,
-                             movement_mode = 'walk',
-                             action_factory = self.action_factory)
+        return is_move_legal(character=character,
+                             direction=direction,
+                             movement_mode='walk',
+                             action_factory=self.action_factory)

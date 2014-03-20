@@ -51,11 +51,11 @@ class MoveAction():
         self.model = None
 
     @log_info
-    def execute(self):
+    def execute(self, skip_checks=False):
         """
         Executes this Move
         """
-        if self.is_legal():
+        if self.is_legal() or skip_checks:
 
             affected_tiles = [self.character.location,
                               self.new_location]
@@ -127,11 +127,11 @@ class WalkAction(MoveAction):
     Action for walking
     """
     @log_info
-    def execute(self):
+    def execute(self, skip_checks=False):
         """
         Execute this move
         """
-        super().execute(self)
+        super().execute(skip_checks=skip_checks)
 
 
 class EscapeAction(MoveAction):
@@ -171,3 +171,61 @@ class EscapeAction(MoveAction):
             return True
         else:
             return False
+
+
+class SwitchPlacesAction():
+    """
+    Action for switching places with another creature
+
+    .. versionadded:: 0.11
+    """
+
+    @log_debug
+    def __init__(self, character, other_character):
+        """
+        Default constructor
+
+        :param character: character to move
+        :type character: Character
+        :param other_character: other character to move
+        :type other_character: Character
+        """
+        assert character is not None
+        assert other_character is not None
+
+        self.character = character
+        self.other_character = other_character
+
+    @log_info
+    def execute(self):
+        """
+        Execute this move
+        """
+        if self.is_legal():
+            move_action_1 = WalkAction(self.character,
+                                       self.other_character.location,
+                                       self.other_character.level)
+
+            move_action_2 = WalkAction(self.other_character,
+                                       self.character.location,
+                                       self.character.level)
+
+            move_action_1.execute(skip_checks=True)
+            move_action_2.execute(skip_checks=True)
+        else:
+            self.character.add_to_tick(Duration.instant)
+
+    @log_debug
+    def is_legal(self):
+        """
+        Check if the move is possible to perform
+
+        :returns: True if move is possible, false otherwise
+        :rtype: Boolean
+        """
+        model = self.character.model
+
+        if model.player in (self.character, self.other_character):
+            return False
+        else:
+            return True

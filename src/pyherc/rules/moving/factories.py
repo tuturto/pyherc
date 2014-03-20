@@ -22,6 +22,7 @@ Attack related factories are defined here
 """
 from pyherc.aspects import log_debug, log_info
 from pyherc.rules.moving.action import MoveAction, EscapeAction
+from pyherc.rules.moving.action import SwitchPlacesAction
 from pyherc.rules.factory import SubActionFactory
 import random
 
@@ -93,11 +94,24 @@ class WalkFactory(SubActionFactory):
         else:
             raise RuntimeError('Character does not know where to go')
 
-        #is new location blocked?
         if new_level.blocks_movement(new_location[0], new_location[1]):
             new_location = parameters.character.location
+        elif new_level.get_creature_at(new_location):
+            return self.get_place_switch_action(parameters.character,
+                                                new_location)
 
         return MoveAction(parameters.character, new_location, new_level)
+
+    @log_debug
+    def get_place_switch_action(self, character, new_location):
+        """
+        Get action for two character switching places
+
+        .. versionadded:: 0.11
+        """
+        other_character = character.level.get_creature_at(new_location)
+
+        return SwitchPlacesAction(character, other_character)
 
     @log_debug
     def _get_action_for_portal(self, character):
@@ -106,6 +120,8 @@ class WalkFactory(SubActionFactory):
 
         :returns: action for entering portal
         :rtype: Action
+
+        .. versionadded:: 0.11
 
         .. note:: Entering portal may lead player next to other end if it is
                   blocked by other character

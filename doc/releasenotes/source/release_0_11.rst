@@ -6,6 +6,7 @@ Release 0.11
 New features
 ************
 
+ - 77_ feature: swapping places
  - 73_ update to latest version of Hy
  - 65_ feature: cleaner AI
 
@@ -29,7 +30,7 @@ Known bugs
 Other notes
 ***********
 
-
+.. _77: https://github.com/tuturto/pyherc/issues/76
 .. _76: https://github.com/tuturto/pyherc/issues/76
 .. _73: https://github.com/tuturto/pyherc/issues/73
 .. _65: https://github.com/tuturto/pyherc/issues/65
