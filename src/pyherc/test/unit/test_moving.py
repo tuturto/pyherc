@@ -20,7 +20,7 @@
 """
 Module for testing moving
 """
-#pylint: disable=W0614
+
 from hamcrest import assert_that, is_, equal_to
 from mockito import mock
 
@@ -198,20 +198,17 @@ class TestMoving():
         self.actions.move_character(character=self.character,
                                     direction=Direction.north)
 
-        assert(self.character.location == (1, 1))
+        assert_that(self.character.location, is_(equal_to((1, 1))))
 
     def test_entering_portal(self):
         """
         Test that character can change level via portal
         """
-        assert(self.character.location == (5, 5))
-        assert(self.character.level == self.level1)
-
         self.actions.move_character(character=self.character,
                                     direction=Direction.enter)
 
-        assert(self.character.location == (10, 10))
-        assert(self.character.level == self.level2)
+        assert_that(self.character.location, is_(equal_to((10, 10))))
+        assert_that(self.character.level, is_(equal_to(self.level2)))
 
     def test_entering_portal_adds_character_to_creatures(self):
         """
@@ -243,13 +240,12 @@ class TestMoving():
         Test that character can not walk through floor
         """
         self.character.location = (6, 3)
-        assert(self.character.level == self.level1)
 
         self.actions.move_character(character=self.character,
                                     direction=Direction.enter)
 
-        assert(self.character.location == (6, 3))
-        assert(self.character.level == self.level1)
+        assert_that(self.character.location, is_(equal_to((6, 3))))
+        assert_that(self.character.level, is_(equal_to(self.level1)))
 
     def test_moving_uses_time(self):
         """
