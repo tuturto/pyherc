@@ -31,8 +31,9 @@ from PyQt4.QtGui import QMainWindow, QAction, QIcon
 from PyQt4.QtGui import QDialog
 from PyQt4.QtGui import QPixmap, QSplashScreen
 from PyQt4.QtCore import Qt, QFile
-from PyQt4.QtGui import QApplication
+from PyQt4.QtGui import QApplication, QCursor
 import PyQt4.QtGui
+
 
 class QtUserInterface():
     """
@@ -44,12 +45,13 @@ class QtUserInterface():
         """
         Default constructor
         """
-        super(QtUserInterface, self).__init__()
+        super().__init__()
 
         self.application = application
         self.splash_screen = None
 
         self.qt_app = QApplication([])
+        self.qt_app.setOverrideCursor(QCursor(Qt.BlankCursor))
 
     def show_splash_screen(self):
         """
@@ -82,6 +84,7 @@ class QtUserInterface():
 
         self.qt_app.exec_()
 
+
 class MainWindow(QMainWindow):
     """
     Class for displaying main window
@@ -93,7 +96,7 @@ class MainWindow(QMainWindow):
         """
         Default constructor
         """
-        super(MainWindow, self).__init__(parent, flags)
+        super().__init__(parent, flags)
 
         self.application = application
         self.surface_manager = surface_manager
@@ -105,35 +108,33 @@ class MainWindow(QMainWindow):
     def __set_layout(self):
 
         exit_action = QAction(QIcon(':exit-game.png'),
-                             '&Quit',
-                             self)
+                              '&Quit',
+                              self)
 
         exit_action.setShortcut('Ctrl+Q')
         exit_action.setStatusTip('Quit game')
         exit_action.triggered.connect(PyQt4.QtGui.qApp.quit)
 
         inventory_action = QAction(QIcon(':inventory.png'),
-                                         'Inventory',
-                                         self)
+                                   'Inventory',
+                                   self)
         inventory_action.setShortcut('Ctrl+I')
         inventory_action.setStatusTip('Show inventory')
         inventory_action.triggered.connect(self.__show_menu)
 
         character_action = QAction(QIcon(':character.png'),
-                                         'Character',
-                                         self)
+                                   'Character',
+                                   self)
         character_action.setShortcut('Ctrl+C')
         character_action.setStatusTip('Show character')
 
-        menubar = self.menuBar()
-
-        self.map_window = PlayMapWindow(parent = None,
-                                        model = self.application.world,
-                                        surface_manager = self.surface_manager,
-                                        action_factory = self.application.action_factory,
-                                        rng = self.application.rng,
-                                        rules_engine = self.application.rules_engine,
-                                        configuration = self.application.config)
+        self.map_window = PlayMapWindow(parent=None,
+                                        model=self.application.world,
+                                        surface_manager=self.surface_manager,
+                                        action_factory=self.application.action_factory,
+                                        rng=self.application.rng,
+                                        rules_engine=self.application.rules_engine,
+                                        configuration=self.application.config)
         self.setCentralWidget(self.map_window)
 
         self.map_window.MenuRequested.connect(self.__show_menu)
@@ -150,12 +151,12 @@ class MainWindow(QMainWindow):
         """
         app = self.application
 
-        start_dialog = StartGameWidget(generator = app.player_generator,
-                                       config = self.application.config.controls,
-                                       parent = self,
-                                       application = self.application,
-                                       surface_manager = self.surface_manager,
-                                       flags = Qt.Dialog | Qt.CustomizeWindowHint)
+        start_dialog = StartGameWidget(generator=app.player_generator,
+                                       config=self.application.config.controls,
+                                       parent=self,
+                                       application=self.application,
+                                       surface_manager=self.surface_manager,
+                                       flags=Qt.Dialog | Qt.CustomizeWindowHint)
 
         result = start_dialog.exec_()
 
@@ -189,7 +190,6 @@ class MainWindow(QMainWindow):
         self.addDockWidget(Qt.BottomDockWidgetArea,
                            messages_display)
 
-
     def __show_menu(self):
         """
         Show menu
@@ -213,8 +213,7 @@ class MainWindow(QMainWindow):
                                self.application.rules_engine.dying_rules,
                                self,
                                Qt.Dialog | Qt.CustomizeWindowHint,
-                               controller = EndScreenController())
+                               controller=EndScreenController())
 
         end_screen.exec_()
         self.qt_app.quit()
-
