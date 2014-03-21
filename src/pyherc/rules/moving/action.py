@@ -32,7 +32,8 @@ class MoveAction():
     Action for moving
     """
     @log_debug
-    def __init__(self, character, new_location, new_level=None):
+    def __init__(self, character, new_location, new_level=None,
+                 skip_creature_check=False):
         """
         Default constructor
 
@@ -42,6 +43,8 @@ class MoveAction():
         :type new_location: (int, int)
         :param new_level: level to move
         :type new_level: Level
+        :param skip_creature_check: bypass checking if other creature blocks
+        :type skip_creature_check: boolean
         """
         super().__init__()
 
@@ -49,13 +52,14 @@ class MoveAction():
         self.new_location = new_location
         self.new_level = new_level
         self.model = None
+        self.skip_creature_check = skip_creature_check
 
     @log_info
-    def execute(self, skip_checks=False):
+    def execute(self):
         """
         Executes this Move
         """
-        if self.is_legal() or skip_checks:
+        if self.is_legal():
 
             affected_tiles = [self.character.location,
                               self.new_location]
@@ -96,20 +100,17 @@ class MoveAction():
         :returns: True if move is possible, false otherwise
         :rtype: Boolean
         """
-        location_ok = False
+        location_ok = True
         if self.new_level is not None:
             if not self.new_level.blocks_movement(self.new_location[0],
                                                   self.new_location[1]):
-                #check for other creatures and such
-                location_ok = True
-                creatures = self.new_level.creatures
-                for creature in creatures:
-                    if creature.location == self.new_location:
-                        location_ok = False
+                if (not self.skip_creature_check and
+                        self.new_level.get_creature_at(self.new_location)):
+                    location_ok = False
             else:
                 location_ok = False
         else:
-            pass
+            location_ok = False
 
         return location_ok
 
@@ -127,11 +128,11 @@ class WalkAction(MoveAction):
     Action for walking
     """
     @log_info
-    def execute(self, skip_checks=False):
+    def execute(self):
         """
         Execute this move
         """
-        super().execute(skip_checks=skip_checks)
+        super().execute()
 
 
 class EscapeAction(MoveAction):
@@ -196,22 +197,24 @@ class SwitchPlacesAction():
         self.character = character
         self.other_character = other_character
 
+        self.move_action_1 = WalkAction(self.character,
+                                        self.other_character.location,
+                                        self.other_character.level,
+                                        True)
+
+        self.move_action_2 = WalkAction(self.other_character,
+                                        self.character.location,
+                                        self.character.level,
+                                        True)
+
     @log_info
     def execute(self):
         """
         Execute this move
         """
         if self.is_legal():
-            move_action_1 = WalkAction(self.character,
-                                       self.other_character.location,
-                                       self.other_character.level)
-
-            move_action_2 = WalkAction(self.other_character,
-                                       self.character.location,
-                                       self.character.level)
-
-            move_action_1.execute(skip_checks=True)
-            move_action_2.execute(skip_checks=True)
+            self.move_action_1.execute()
+            self.move_action_2.execute()
         else:
             self.character.add_to_tick(Duration.instant)
 
@@ -228,4 +231,5 @@ class SwitchPlacesAction():
         if model.player in (self.character, self.other_character):
             return False
         else:
-            return True
+            return (self.move_action_1.is_legal() and
+                    self.move_action_2.is_legal())
