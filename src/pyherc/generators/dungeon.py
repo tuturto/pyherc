@@ -57,6 +57,9 @@ class DungeonGenerator():
 
         portals = [x for x in level.portals
                    if x.exits_dungeon]
-        exit = portals[0]
 
-        level.add_creature(model.player, exit.location)
+        if portals:
+            exit = portals[0]
+            level.add_creature(model.player, exit.location)
+        else:
+            level.add_creature(model.player, level.find_free_space())

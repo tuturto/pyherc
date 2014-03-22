@@ -22,6 +22,7 @@ Module for herculeum main configuration
 """
 import pyherc.config
 
+
 class Configuration(pyherc.config.Configuration):
     """
     Configuration for herculeum
@@ -34,7 +35,7 @@ class Configuration(pyherc.config.Configuration):
         :param model: model to use in configuration
         :param type: Model
         """
-        super(Configuration, self).__init__(model)
+        super().__init__(model)
 
         self.surface_manager = surface_manager
         self.surface_manager.load_resources()
@@ -44,11 +45,14 @@ class Configuration(pyherc.config.Configuration):
 
         self.controls = controls
 
+        self.start_level = 'upper catacombs'
+
     def initialise(self):
         """
         Initialise configuration
         """
-        super(Configuration, self).initialise(self.context)
+        super().initialise(self.context)
+
 
 class ConfigurationContext():
     """
@@ -65,6 +69,6 @@ class ConfigurationContext():
         :param surface_manager: manager to handle graphics
         :type surface_manager: SurfaceManager
         """
-        super(ConfigurationContext, self).__init__()
+        super().__init__()
         self.config_package = config_package
         self.surface_manager = surface_manager

@@ -22,7 +22,7 @@
 Herculeum is a dungeon adventure in the spirit of Nethack and Rogue.
 
 Usage:
-  herculeum [--ui=MODE] [--log-level=LEVEL] [--silent]
+  herculeum [--ui=MODE] [--log-level=LEVEL] [--silent] [--start-level=NAME]
   herculeum (-l | --license)
   herculeum (-h | --help)
   herculeum (-v | --version)
@@ -31,9 +31,10 @@ Options:
   -h --help            Show this screen.
   -l --license         Show license.
   -v --version         Show version.
-  --ui=<mode>          User interface to use (qt or curses) [default: curses]
+  --ui=<mode>          User interface to use (qt or curses) [default: qt]
   --log-level=<level>  Log level to use [default: warning]
   --silent             Turns off logging completely
+  --start-level=<name> Starting level [default: upper catacombs]
 
 """
 from pyherc.aspects import set_logger
@@ -77,8 +78,11 @@ def process_command_line(arguments):
     log_level = log_levels[arguments['--log-level']]
     silent = arguments['--silent']
     ui_mode = arguments['--ui']
+    start_level = arguments['--start-level']
+    if not start_level:
+        start_level = 'upper catacombs'
 
-    return (log_level, silent, ui_mode)
+    return (log_level, silent, ui_mode, start_level)
 
 if __name__ == "__main__":
     app = Application()
@@ -98,7 +102,7 @@ if __name__ == "__main__":
         print('along with Herculeum.  If not, see <http://www.gnu.org/licenses/>.')  # noqa
     else:
 
-        log_level, silent, ui_mode = process_command_line(arguments)
+        log_level, silent, ui_mode, start_level = process_command_line(arguments)
 
         app.log_level = log_level
         app.silent = silent
@@ -116,5 +120,6 @@ if __name__ == "__main__":
         app.start_logging()
         app.load_configuration(controls_configuration,
                                surface_manager)
+        app.config.start_level = start_level
 
         app.run(user_interface)

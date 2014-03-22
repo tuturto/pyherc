@@ -9,6 +9,7 @@ New features
  - 77_ feature: swapping places
  - 73_ update to latest version of Hy
  - 65_ feature: cleaner AI
+ - ability to specify starting level on command line
 
 **********
 Fixed bugs

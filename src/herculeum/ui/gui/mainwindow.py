@@ -77,7 +77,8 @@ class QtUserInterface():
                                  Qt.FramelessWindowHint,
                                  StartGameController(self.application.level_generator_factory,
                                                      self.application.creature_generator,
-                                                     self.application.item_generator))
+                                                     self.application.item_generator,
+                                                     self.application.config.start_level))
 
         self.splash_screen.finish(main_window)
         main_window.show_new_game()

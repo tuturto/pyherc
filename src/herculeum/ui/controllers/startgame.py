@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,26 +22,28 @@ Module for starting game
 """
 from pyherc.generators import DungeonGenerator
 
+
 class StartGameController():
     """
     """
     def __init__(self, level_generator_factory,
-                 creature_generator, item_generator):
+                 creature_generator, item_generator, start_level):
         """
         Default constructor
         """
-        super(StartGameController, self).__init__()
+        super().__init__()
 
         self.level_generator_factory = level_generator_factory
         self.creature_generator = creature_generator
         self.item_generator = item_generator
+        self.start_level = start_level
 
     def setup_world(self, world, player):
         """
         Setup playing world
         """
         world.player = player
-        level_generator = self.level_generator_factory.get_generator('upper catacombs')
+        level_generator = self.level_generator_factory.get_generator(self.start_level)
 
         generator = DungeonGenerator(self.creature_generator,
                                      self.item_generator,
