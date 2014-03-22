@@ -21,7 +21,9 @@
 module for configuring upper crypt
 """
 from pyherc.generators.level.partitioners import GridPartitioner
-from pyherc.generators.level.room import SquareRoomGenerator, PillarRoomGenerator
+from pyherc.generators.level.room import SquareRoomGenerator
+from pyherc.generators.level.room import PillarRoomGenerator
+from pyherc.generators.level.room import PitRoomGenerator
 
 from pyherc.generators.level.decorator import ReplacingDecorator
 from pyherc.generators.level.decorator import ReplacingDecoratorConfig
@@ -85,6 +87,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     wall_137 = surface_manager.add_icon('crypt_wall_137', ':crypt_wall_137.png', '#')
     wall_157 = surface_manager.add_icon('crypt_wall_157', ':crypt_wall_157.png', '#')
 
+    pit_tile = 'pit'
+
     room_generators = [SquareRoomGenerator(floor_natural,
                                            wall_empty,
                                            floor_natural,
@@ -97,8 +101,19 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            corridor_tile = floor_natural,
                                            empty_tile = wall_empty,
                                            pillar_tile = wall,
-                                           level_types = ['upper crypt'])
-                                           ]
+                                           level_types = ['upper crypt']),
+                       PillarRoomGenerator(floor_tile = floor_natural,
+                                           corridor_tile = floor_natural,
+                                           empty_tile = wall_empty,
+                                           pillar_tile = wall,
+                                           level_types = ['upper crypt']),
+                       PitRoomGenerator(floor_tile = floor_natural,
+                                        corridor_tile = floor_natural,
+                                        empty_tile = wall_empty,
+                                        pit_tile = pit_tile,
+                                        level_types = ['upper crypt'])
+                                        ]
+
     level_partitioners = [GridPartitioner(['upper crypt'],
                                           4,
                                           2,
@@ -206,6 +221,43 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                floor = floor_constructed)
     board_floor_builder = FloorBuilderDecorator(board_floor_config)
 
+    pit = surface_manager.add_icon('brick_pit_07', ':brick_pit_07.png', '^')
+    pit1 = surface_manager.add_icon('brick_pit_08', ':brick_pit_08.png', '^')
+    pit3 = surface_manager.add_icon('brick_pit_01', ':brick_pit_01.png', '^')
+    pit5 = surface_manager.add_icon('brick_pit_07', ':brick_pit_07.png', '^')
+    pit7 = surface_manager.add_icon('brick_pit_03', ':brick_pit_03.png', '^')
+    pit13 = surface_manager.add_icon('brick_pit_04', ':brick_pit_04.png', '^')
+    pit15 = surface_manager.add_icon('brick_pit_08', ':brick_pit_08.png', '^')
+    pit17 = surface_manager.add_icon('brick_pit_06', ':brick_pit_06.png', '^')
+    pit35 = surface_manager.add_icon('brick_pit_01', ':brick_pit_01.png', '^')
+    pit37 = surface_manager.add_icon('brick_pit_02', ':brick_pit_02.png', '^')
+    pit57 = surface_manager.add_icon('brick_pit_03', ':brick_pit_03.png', '^')
+    pit135 = surface_manager.add_icon('brick_pit_04', ':brick_pit_04.png', '^')
+    pit137 = surface_manager.add_icon('brick_pit_05', ':brick_pit_05.png', '^')
+    pit157 = surface_manager.add_icon('brick_pit_06', ':brick_pit_06.png', '^')
+    pit357 = surface_manager.add_icon('brick_pit_02', ':brick_pit_02.png', '^')
+    pit1357 = surface_manager.add_icon('brick_pit_05', ':brick_pit_05.png', '^')
+
+    pit_config = FloorBuilderDecoratorConfig([],
+                                             single = pit,
+                                             north = pit1,
+                                             east = pit3,
+                                             south = pit5,
+                                             west = pit7,
+                                             north_east = pit13,
+                                             north_south = pit15,
+                                             north_west = pit17,
+                                             east_south = pit35,
+                                             east_west = pit37,
+                                             south_west = pit57,
+                                             north_east_south = pit135,
+                                             north_east_west = pit137,
+                                             north_south_west = pit157,
+                                             east_south_west = pit357,
+                                             fourway = pit1357,
+                                             floor = pit_tile)
+    pit_builder = FloorBuilderDecorator(pit_config)
+
     torches_tile_f0 = surface_manager.add_icon('crypt_torches_f0', ':wall_torches_f0.png', '¤')
     torches_tile_f1 = surface_manager.add_icon('crypt_torches_f1', ':wall_torches_f1.png', '¤')
     torch_tile_f0 = surface_manager.add_icon('crypt_torch_f0', ':wall_torch_f0.png', '¤')
@@ -227,6 +279,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                            wall_direction_builder,
                                                            floor_builder,
                                                            board_floor_builder,
+                                                           pit_builder,
                                                            torch_ornamenter,
                                                            replacer])
 

@@ -27,3 +27,4 @@ from .squareroom import SquareRoomGenerator
 from .pillarroom import PillarRoomGenerator
 from .catacombs import CatacombsGenerator
 from .crimson_lair import CrimsonLairGenerator
+from .pitroom import PitRoomGenerator
