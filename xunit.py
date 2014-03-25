@@ -66,10 +66,10 @@ def main():
     f = open('doc/test_results.html', 'w')
     write_header(f)
 
-    files = os.listdir('./doc/behave/reports/')
+    files = os.listdir('./doc/behave/')
     for file in files:
         f.write('<pre>\n')
-        f2 = open('./doc/behave/reports/' + file)
+        f2 = open('./doc/behave/' + file)
         for line in f2:
             f.write(line)
         f2.close()

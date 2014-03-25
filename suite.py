@@ -5,7 +5,7 @@ from os import chdir, listdir
 from shutil import rmtree
 from platform import system
 
-import xunit, run_pylint
+import xunit
 
 call(['nosetests', '--with-xunit',
                    '--doctest-tests',
@@ -23,10 +23,12 @@ if 'Windows' in system():
 else:
     call(['make', 'doctest'])
 
-chdir('../../src/pyherc/test/bdd')
-call(['behave'])
-
-chdir('../../../..')
+chdir('../../')
+call(['behave',
+      'src/pyherc/test/bdd/features/',
+      '--no-source',
+      '--no-logcapture',
+      '--no-color',
+      '--outfile=doc/behave/report.txt'])
 
 xunit.main()
-run_pylint.main()

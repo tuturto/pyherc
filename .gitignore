@@ -16,4 +16,5 @@ herculeum.qhc
 build/
 dist/
 pyherc.geany
+doc/behave/report.txt
 
