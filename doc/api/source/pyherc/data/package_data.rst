@@ -8,6 +8,7 @@ pyherc.data
    
    effects/package_effects
    magic/package_magic
+   traps/package_traps
    module_character
    module_constants
    module_dungeon

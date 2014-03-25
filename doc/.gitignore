@@ -2,3 +2,4 @@ herculeum/*.html
 pyherc/*.html
 test_results.html
 cover/
+behave_report.txt

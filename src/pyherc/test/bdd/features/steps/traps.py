@@ -19,21 +19,17 @@
 
 # flake8: noqa
 
-"""
-Package for testing dsl
-"""
+from pyherc.test.bdd.features.helpers import default_context
+from pyherc.test.bdd.features.helpers import get_entity
+from pyherc.test.cutesy import pit_trap
 
-from .characters import Goblin, Adventurer, Wizard
-from .characters import strong, weak
-from .weapons import Dagger, Sword, Club, Bow, Arrows, Warhammer
-from .armours import LeatherArmour, ScaleMail, PlateMail
-from .items import Rune
-from .dictionary import at_
-from .dictionary import affect, with_, potent_poison, weak_poison
-from .dictionary import carrying
-from .dictionary import place, middle_of, right_of, Level
-from .dictionary import make, drop, hit, wait_, gain_domain_
-from .dictionary import has_dropped, has_less_hit_points
-from .dictionary import cast_spell
-from .dictionary import take_random_step
-from .traps import pit_trap
+@given('{trap_name} is next to {entity_name}')
+@default_context
+def impl(context, trap_name, entity_name):
+    trap = pit_trap()
+    trap.name = trap_name
+
+    entity = get_entity(context, entity_name)
+    entity.level.add_trap(trap,
+                          (entity.location[0] + 1, entity.location[1]))
+    context.places.append(trap)

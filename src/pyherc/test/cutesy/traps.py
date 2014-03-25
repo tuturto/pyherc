@@ -17,23 +17,17 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-# flake8: noqa
-
 """
-Package for testing dsl
+Package for traps
 """
+from pyherc.data.traps import PitTrap
 
-from .characters import Goblin, Adventurer, Wizard
-from .characters import strong, weak
-from .weapons import Dagger, Sword, Club, Bow, Arrows, Warhammer
-from .armours import LeatherArmour, ScaleMail, PlateMail
-from .items import Rune
-from .dictionary import at_
-from .dictionary import affect, with_, potent_poison, weak_poison
-from .dictionary import carrying
-from .dictionary import place, middle_of, right_of, Level
-from .dictionary import make, drop, hit, wait_, gain_domain_
-from .dictionary import has_dropped, has_less_hit_points
-from .dictionary import cast_spell
-from .dictionary import take_random_step
-from .traps import pit_trap
+
+def pit_trap():
+    """
+    Creates a pit trap
+
+    :returns: fully initialised pit
+    :rtype: PitTrap
+    """
+    return PitTrap()

@@ -52,6 +52,7 @@ class Level():
         self.floor = []
         self.walls = []
         self.ornamentations = []
+        self.traps = []
         self.empty_floor = empty_floor
         self.empty_wall = empty_wall
         self.__location_type = []
@@ -81,6 +82,12 @@ class Level():
                 for loc_y in range(0, size[1] + 1):
                     temp_row.append(None)
                 self.ornamentations.append(temp_row)
+
+            for loc_x in range(0, size[0] + 1):
+                temp_row = []
+                for loc_y in range(0, size[1] + 1):
+                    temp_row.append([])
+                self.traps.append(temp_row)
 
         self.items = []
         self.portals = []
@@ -330,6 +337,20 @@ class Level():
                 return creature
 
         return None
+
+    def add_trap(self, trap, location):
+        """
+        Add a trap to level
+
+        :param trap: trap to add
+        :type trap: Trap
+        :param location: location to add the trap
+        :type location: (int, int)
+
+        .. versionadded:: 0.11
+        """
+        self.traps[location[0]][location[1]].append(trap)
+        trap.location = location
 
     @log_debug
     def find_free_space(self):
