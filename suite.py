@@ -29,6 +29,6 @@ call(['behave',
       '--no-source',
       '--no-logcapture',
       '--no-color',
-      '--outfile=doc/behave/report.txt'])
+      '--outfile=doc/behave_report.txt'])
 
 xunit.main()
