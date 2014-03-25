@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/tuturto/pyherc.png)](https://travis-ci.org/tuturto/pyherc)
+[![Build Status](https://travis-ci.org/tuturto/pyherc.svg)](https://travis-ci.org/tuturto/pyherc)
 [![Coverage Status](https://coveralls.io/repos/tuturto/pyherc/badge.png)](https://coveralls.io/r/tuturto/pyherc)
 [![version](https://pypip.in/v/herculeum/badge.png)](https://crate.io/packages/herculeum)
 [![Downloads](https://pypip.in/d/herculeum/badge.png)](https://crate.io/packages/herculeum)
@@ -15,7 +15,7 @@ System Requirements
 - Python 3.2
 - PyQt4
 - decorator 3.4.0
-- hy 0.9.10
+- hy 0.9.12
 - docopt 0.6.1
 - mockito-python 0.5.0 (only needed for running test cases)
 - pyHamcrest 1.6 (only needed for running test cases)
