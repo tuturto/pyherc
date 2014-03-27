@@ -92,6 +92,11 @@ class MoveAction():
         else:
             self.character.add_to_tick(Duration.instant)
 
+        traps = self.character.level.get_traps(self.character.location)
+
+        for trap in traps:
+            trap.on_enter(self.character)
+
     @log_debug
     def is_legal(self):
         """

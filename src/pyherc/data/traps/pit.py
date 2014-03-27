@@ -35,3 +35,12 @@ class PitTrap():
         Default constructor
         """
         self.location = ( )
+
+    def on_enter(self, character):
+        """
+        Called when a character enter the trap
+
+        :param character: character who just stepped on the trap
+        :type character: Character
+        """
+        character.hit_points = -1

@@ -352,6 +352,19 @@ class Level():
         self.traps[location[0]][location[1]].append(trap)
         trap.location = location
 
+    def get_traps(self, location):
+        """
+        Get traps at given location
+
+        :param location: location to get traps from
+        :type location: (int, int)
+        :returns: list of traps
+        :rtype: [Trap]
+
+        .. versionadded:: 0.11
+        """
+        return self.traps[location[0]][location[1]]
+
     @log_debug
     def find_free_space(self):
         """
