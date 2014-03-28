@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyherc.rules.moving.action &mdash; Herculeum 0.10.0 documentation</title>
+    <title>pyherc.rules.moving.action &mdash; Herculeum 0.11.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.10.0',
+        VERSION:     '0.11.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.10.0 documentation" href="../../../index.html" />
+    <link rel="top" title="Herculeum 0.11.0 documentation" href="../../../index.html" />
     <link rel="up" title="pyherc.rules.moving" href="package_moving.html" />
     <link rel="next" title="pyherc.rules.moving.factories" href="module_factories.html" />
     <link rel="prev" title="pyherc.rules.moving" href="package_moving.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="package_moving.html" title="pyherc.rules.moving"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>
@@ -94,7 +94,7 @@
 
 <dl class="class">
 <dt id="pyherc.rules.moving.action.MoveAction">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.moving.action.</tt><tt class="descname">MoveAction</tt><big>(</big><em>character</em>, <em>new_location</em>, <em>new_level=None</em><big>)</big><a class="headerlink" href="#pyherc.rules.moving.action.MoveAction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.moving.action.</tt><tt class="descname">MoveAction</tt><big>(</big><em>character</em>, <em>new_location</em>, <em>new_level</em>, <em>skip_creature_check</em>, <em>dying_rules</em><big>)</big><a class="headerlink" href="#pyherc.rules.moving.action.MoveAction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Action for moving</p>
 <dl class="method">
@@ -122,8 +122,40 @@
 </dd></dl>
 
 <dl class="class">
+<dt id="pyherc.rules.moving.action.SwitchPlacesAction">
+<em class="property">class </em><tt class="descclassname">pyherc.rules.moving.action.</tt><tt class="descname">SwitchPlacesAction</tt><big>(</big><em>character</em>, <em>other_character</em>, <em>dying_rules</em><big>)</big><a class="headerlink" href="#pyherc.rules.moving.action.SwitchPlacesAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Action for switching places with another creature</p>
+<div class="versionadded">
+<p><span>New in version 0.11.</span></p>
+</div>
+<dl class="method">
+<dt id="pyherc.rules.moving.action.SwitchPlacesAction.execute">
+<tt class="descname">execute</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.moving.action.SwitchPlacesAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute this move</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyherc.rules.moving.action.SwitchPlacesAction.is_legal">
+<tt class="descname">is_legal</tt><big>(</big><big>)</big><a class="headerlink" href="#pyherc.rules.moving.action.SwitchPlacesAction.is_legal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the move is possible to perform</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if move is possible, false otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="pyherc.rules.moving.action.WalkAction">
-<em class="property">class </em><tt class="descclassname">pyherc.rules.moving.action.</tt><tt class="descname">WalkAction</tt><big>(</big><em>character</em>, <em>new_location</em>, <em>new_level=None</em><big>)</big><a class="headerlink" href="#pyherc.rules.moving.action.WalkAction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pyherc.rules.moving.action.</tt><tt class="descname">WalkAction</tt><big>(</big><em>character</em>, <em>new_location</em>, <em>new_level</em>, <em>skip_creature_check</em>, <em>dying_rules</em><big>)</big><a class="headerlink" href="#pyherc.rules.moving.action.WalkAction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pyherc.rules.moving.action.MoveAction" title="pyherc.rules.moving.action.MoveAction"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.moving.action.MoveAction</span></tt></a></p>
 <p>Action for walking</p>
 <dl class="method">
@@ -185,7 +217,7 @@
         <li class="right" >
           <a href="package_moving.html" title="pyherc.rules.moving"
              >previous</a> |</li>
-        <li><a href="../../../index.html">Herculeum 0.10.0 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li>
           <li><a href="../../../api_reference.html" >API Reference</a> &raquo;</li>
           <li><a href="../../package_pyherc.html" >pyherc</a> &raquo;</li>
           <li><a href="../package_rules.html" >pyherc.rules</a> &raquo;</li>
