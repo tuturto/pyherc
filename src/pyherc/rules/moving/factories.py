@@ -32,7 +32,7 @@ class WalkFactory(SubActionFactory):
     Factory for creating walk actions
     """
     @log_debug
-    def __init__(self, level_generator_factory):
+    def __init__(self, level_generator_factory, dying_rules):
         """
         Constructor for this factory
 
@@ -41,6 +41,7 @@ class WalkFactory(SubActionFactory):
         """
         super().__init__()
         self.level_generator_factory = level_generator_factory
+        self.dying_rules = dying_rules
         self.movement_mode = 'walk'
 
     @log_debug
@@ -100,7 +101,11 @@ class WalkFactory(SubActionFactory):
             return self.get_place_switch_action(parameters.character,
                                                 new_location)
 
-        return MoveAction(parameters.character, new_location, new_level)
+        return MoveAction(character=parameters.character,
+                          new_location=new_location,
+                          new_level=new_level,
+                          skip_creature_check=False,
+                          dying_rules=self.dying_rules)
 
     @log_debug
     def get_place_switch_action(self, character, new_location):
@@ -111,7 +116,9 @@ class WalkFactory(SubActionFactory):
         """
         other_character = character.level.get_creature_at(new_location)
 
-        return SwitchPlacesAction(character, other_character)
+        return SwitchPlacesAction(character,
+                                  other_character,
+                                  self.dying_rules)
 
     @log_debug
     def _get_action_for_portal(self, character):
@@ -145,7 +152,11 @@ class WalkFactory(SubActionFactory):
             new_level = character.level
             new_location = character.location
 
-        return MoveAction(character, new_location, new_level)
+        return MoveAction(character,
+                          new_location,
+                          new_level,
+                          False,
+                          self.dying_rules)
 
     @log_debug
     def _area_around_portal(self, portal):

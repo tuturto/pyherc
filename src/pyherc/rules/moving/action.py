@@ -32,8 +32,8 @@ class MoveAction():
     Action for moving
     """
     @log_debug
-    def __init__(self, character, new_location, new_level=None,
-                 skip_creature_check=False):
+    def __init__(self, character, new_location, new_level,
+                 skip_creature_check, dying_rules):
         """
         Default constructor
 
@@ -45,6 +45,7 @@ class MoveAction():
         :type new_level: Level
         :param skip_creature_check: bypass checking if other creature blocks
         :type skip_creature_check: boolean
+        :param dying_rules: rules for dying
         """
         super().__init__()
 
@@ -53,6 +54,7 @@ class MoveAction():
         self.new_level = new_level
         self.model = None
         self.skip_creature_check = skip_creature_check
+        self.dying_rules = dying_rules
 
     @log_info
     def execute(self):
@@ -96,6 +98,8 @@ class MoveAction():
 
         for trap in traps:
             trap.on_enter(self.character)
+
+        self.dying_rules.check_dying(self.character)
 
     @log_debug
     def is_legal(self):
@@ -153,7 +157,9 @@ class EscapeAction(MoveAction):
         """
         super().__init__(character=character,
                          new_location=None,
-                         new_level=None)
+                         new_level=None,
+                         skip_creature_check=False,
+                         dying_rules=None)
 
     @log_info
     def execute(self):
@@ -187,7 +193,7 @@ class SwitchPlacesAction():
     """
 
     @log_debug
-    def __init__(self, character, other_character):
+    def __init__(self, character, other_character, dying_rules):
         """
         Default constructor
 
@@ -205,12 +211,14 @@ class SwitchPlacesAction():
         self.move_action_1 = WalkAction(self.character,
                                         self.other_character.location,
                                         self.other_character.level,
-                                        True)
+                                        True,
+                                        dying_rules)
 
         self.move_action_2 = WalkAction(self.other_character,
                                         self.character.location,
                                         self.character.level,
-                                        True)
+                                        True,
+                                        dying_rules)
 
     @log_info
     def execute(self):

@@ -90,7 +90,8 @@ class Configuration():
         """
         dying_rules = Dying()
 
-        walk_factory = WalkFactory(self.level_generator_factory)
+        walk_factory = WalkFactory(self.level_generator_factory,
+                                   dying_rules)
         move_factory = MoveFactory(walk_factory)
 
         effect_factory = EffectsFactory()

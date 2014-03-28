@@ -220,7 +220,7 @@ class ActionFactoryBuilder():
                                                        unequip_factory])
 
         if self.use_real_move_factory:
-            walk_factory = WalkFactory(mock())
+            walk_factory = WalkFactory(mock(), mock())
             self.move_factory = MoveFactory(walk_factory)
 
         if self.use_real_spellcasting_factory:
