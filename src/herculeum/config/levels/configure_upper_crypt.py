@@ -24,6 +24,7 @@ from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.room import SquareRoomGenerator
 from pyherc.generators.level.room import PillarRoomGenerator
 from pyherc.generators.level.room import PitRoomGenerator
+from pyherc.data.traps import PitTrap
 
 from pyherc.generators.level.decorator import ReplacingDecorator
 from pyherc.generators.level.decorator import ReplacingDecoratorConfig
@@ -111,6 +112,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         corridor_tile = floor_natural,
                                         empty_tile = wall_empty,
                                         pit_tile = pit_tile,
+                                        trap_type=PitTrap,
                                         level_types = ['upper crypt'])
                                         ]
 

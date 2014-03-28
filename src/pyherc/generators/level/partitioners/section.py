@@ -430,6 +430,24 @@ class Section():
 
         return connection
 
+    def add_trap(self, trap, location):
+        """
+        Add a trap to level
+
+        :param trap: trap to add
+        :type trap: Trap
+        :param location: location to add the trap
+        :type location: (int, int)
+
+        .. versionadded:: 0.11
+
+        .. note:: Coordinates are given relative to section origo
+        """
+        x_loc = self.__get_left_edge() + location[0]
+        y_loc = self.__get_top_edge() + location[1]
+
+        self.level.add_trap(trap, (x_loc, y_loc))
+
 
 class Connection():
     """

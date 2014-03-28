@@ -33,7 +33,7 @@ class PitRoomGenerator():
     """
     @log_debug
     def __init__(self, floor_tile, corridor_tile, empty_tile, pit_tile,
-                 level_types):
+                 trap_type, level_types):
         """
         Default constructor
 
@@ -45,6 +45,8 @@ class PitRoomGenerator():
         :type empty_tile: icon key
         :param pit_tile: id of the pit tile
         :type pit_tile: icon key
+        :param trap_type: type of trap to use
+        :type trap_type: Type
         :param level_types: types of level this generator can be used
         :type level_types: [string]
         """
@@ -57,6 +59,7 @@ class PitRoomGenerator():
         self.empty_tile = empty_tile
         self.level_types = level_types
         self.pit_tile = pit_tile
+        self.trap_type = trap_type
 
     @log_debug
     def generate_room(self, section):
@@ -76,3 +79,5 @@ class PitRoomGenerator():
                 section.set_floor(location=(loc_x, loc_y),
                                   tile=self.pit_tile,
                                   location_type='pit')
+                section.add_trap(self.trap_type(),
+                                 (loc_x, loc_y))
