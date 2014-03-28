@@ -9,6 +9,7 @@ New features
  - 77_ feature: swapping places
  - 73_ update to latest version of Hy
  - 65_ feature: cleaner AI
+ - 62_ feature: pits
  - ability to specify starting level on command line
 
 **********
@@ -35,6 +36,7 @@ Other notes
 .. _76: https://github.com/tuturto/pyherc/issues/76
 .. _73: https://github.com/tuturto/pyherc/issues/73
 .. _65: https://github.com/tuturto/pyherc/issues/65
+.. _62: https://github.com/tuturto/pyherc/issues/62
 .. _42: https://github.com/tuturto/pyherc/issues/42
 .. _38: https://github.com/tuturto/pyherc/issues/38
 .. _25: https://github.com/tuturto/pyherc/issues/25
