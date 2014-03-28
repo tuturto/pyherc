@@ -83,6 +83,8 @@ src/pyherc/data/effects/poison.py
 src/pyherc/data/magic/__init__.py
 src/pyherc/data/magic/spell.py
 src/pyherc/data/magic/spellbook.py
+src/pyherc/data/traps/__init__.py
+src/pyherc/data/traps/pit.py
 src/pyherc/events/__init__.py
 src/pyherc/events/combat.py
 src/pyherc/events/damage.py
@@ -120,6 +122,7 @@ src/pyherc/generators/level/room/catacombs.py
 src/pyherc/generators/level/room/corridor.py
 src/pyherc/generators/level/room/crimson_lair.py
 src/pyherc/generators/level/room/pillarroom.py
+src/pyherc/generators/level/room/pitroom.py
 src/pyherc/generators/level/room/squareroom.py
 src/pyherc/ports/__init__.py
 src/pyherc/ports/actions.py

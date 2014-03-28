@@ -11,6 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
+   release_0_12
    release_0_11
    release_0_10
    release_0_9

@@ -20,4 +20,4 @@
 """
 Module for version information
 """
-PYHERC_VERSION = "0.11.0"
+PYHERC_VERSION = "0.12.0"
