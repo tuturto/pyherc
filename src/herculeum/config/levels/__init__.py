@@ -21,6 +21,7 @@
 """
 package for configuring levels
 """
+import herculeum.config.levels.first_gate
 import herculeum.config.levels.crimson_lair
 import herculeum.config.levels.configure_catacombs
 import herculeum.config.levels.configure_upper_crypt

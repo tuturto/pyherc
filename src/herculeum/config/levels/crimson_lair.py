@@ -196,7 +196,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                  stairs_up),
                                         level_type = 'lower catacombs',
                                         location_type = 'room',
-                                        chance = 100,
+                                        chance = 10,
                                         new_level = 'crimson lair',
                                         unique = True)
                                         ]

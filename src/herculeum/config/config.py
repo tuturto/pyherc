@@ -45,7 +45,7 @@ class Configuration(pyherc.config.Configuration):
 
         self.controls = controls
 
-        self.start_level = 'upper catacombs'
+        self.start_level = 'first gate'
 
     def initialise(self):
         """

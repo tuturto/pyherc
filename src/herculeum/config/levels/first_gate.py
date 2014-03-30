@@ -18,10 +18,11 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-module for configuring catacombs
+module for configuring first gate
 """
 import hy
-from pyherc.generators.level.room import CatacombsGenerator
+from pyherc.generators.level.room import SquareRoomGenerator
+from pyherc.generators.level.room import PillarRoomGenerator
 from pyherc.generators.level.partitioners import GridPartitioner
 
 from pyherc.generators.level.decorator import ReplacingDecorator
@@ -62,28 +63,22 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     """
     surface_manager = context.surface_manager
 
-    floor_natural = 'natural floor'
-    floor_rock = surface_manager.add_icon('floor_rock',
-                                          ':rock_floor.png',
-                                          '.')
+    tile_floor = 'tile floor'
 
     wall_empty = None
     floor_empty = None
-
     wall_natural = 'natural wall'
     wall_constructed = 'constructed wall'
-    wall_ground = surface_manager.add_icon('wall_ground',
-                                           ':ground_wall.png',
-                                           ' ')
-    wall_rock = surface_manager.add_icon('wall_rock',
-                                         ':rock_wall.png',
-                                         '#')
+    wall = 'wall'
+
     stairs_down = surface_manager.add_icon('stairs_down',
                                            ':stairs_down.png',
                                            '>')
     stairs_up = surface_manager.add_icon('stairs_up',
                                          ':stairs_up.png',
                                          '<')
+
+    pillar = surface_manager.add_icon('pillar', ':pillar.png', '#')
 
     wall_15 = surface_manager.add_icon('catacombs_wall_15', ':catacombs_wall_2_8.png', '#')
     wall_57 = surface_manager.add_icon('catacombs_wall_57', ':catacombs_wall_2_4.png', '#')
@@ -98,31 +93,27 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     wall_137 = surface_manager.add_icon('catacombs_wall_137', ':catacombs_wall_4_6_8.png', '#')
     wall_157 = surface_manager.add_icon('catacombs_wall_157', ':catacombs_wall_2_4_8.png', '#')
 
-    room_generators = [CatacombsGenerator(floor_natural,
+    room_generators = [SquareRoomGenerator(tile_floor,
                                            wall_empty,
-                                           ['upper catacombs',
-                                           'lower catacombs'],
-                                           rng)]
-    level_partitioners = [GridPartitioner(['upper catacombs',
-                                           'lower catacombs'],
-                                           1,
-                                           1,
+                                           tile_floor,
+                                           ['first gate']),
+                       PillarRoomGenerator(floor_tile = tile_floor,
+                                           corridor_tile = tile_floor,
+                                           empty_tile = wall_empty,
+                                           pillar_tile = pillar,
+                                           level_types = ['first gate'])]
+
+    level_partitioners = [GridPartitioner(['first gate'],
+                                           3,
+                                           2,
                                            rng)]
 
-    replacer_config = ReplacingDecoratorConfig(['upper catacombs',
-                                                'lower catacombs'],
-                                    {floor_natural: floor_rock},
-                                    {wall_natural: wall_ground,
-                                    wall_constructed: wall_rock})
-    replacer = ReplacingDecorator(replacer_config)
-
-    wallbuilder_config = WallBuilderDecoratorConfig(['upper catacombs',
-                                                    'lower catacombs'],
+    wallbuilder_config = WallBuilderDecoratorConfig(['first gate'],
                                         {wall_natural: wall_constructed},
                                          wall_empty)
     wallbuilder = WallBuilderDecorator(wallbuilder_config)
 
-    wall_direction_config = DirectionalWallDecoratorConfig(['upper catacombs'],
+    wall_direction_config = DirectionalWallDecoratorConfig(['first gate'],
                                                    east_west = wall_37,
                                                    east_north = wall_13,
                                                    east_south = wall_35,
@@ -172,7 +163,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                north_south_west = floor157,
                                                east_south_west = floor357,
                                                fourway = floor1357,
-                                               floor = floor_natural)
+                                               floor = tile_floor)
     floor_builder = FloorBuilderDecorator(floor_config)
 
     torches_tile_f0 = surface_manager.add_icon('catacombs_torches_f0', ':wall_torches_f0.png', '¤')
@@ -181,8 +172,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     torch_tile_f1 = surface_manager.add_icon('catacombs_torch_f1', ':wall_torch_f1.png', '¤')
 
     torch_ornamenter_config = WallOrnamentDecoratorConfig(
-                                                ['upper catacombs',
-                                                 'lower catacombs'],
+                                                ['first gate'],
                                                 wall_tile = wall_37,
                                                 ornamentation = [(torch_tile_f0, torch_tile_f1),
                                                                  (torches_tile_f0, torches_tile_f1)],
@@ -191,95 +181,41 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     torch_ornamenter = WallOrnamentDecorator(torch_ornamenter_config)
 
     aggregate_decorator_config = AggregateDecoratorConfig(
-                                                ['upper catacombs',
-                                                'lower catacombs'],
+                                                ['first gate'],
                                                 [wallbuilder,
                                                  wall_direction_builder,
                                                  floor_builder,
-                                                 torch_ornamenter,
-                                                 replacer])
+                                                 torch_ornamenter])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]
 
-    item_adder_config = ItemAdderConfiguration(['upper catacombs',
-                                               'lower catacombs'])
-    item_adder_config.add_item(min_amount = 0,
-                               max_amount = 4,
-                               type = 'weapon',
-                               location = 'room')
-    item_adder_config.add_item(min_amount = 0,
-                               max_amount = 2,
-                               type = 'potion',
-                               location = 'room')
-    item_adder_config.add_item(min_amount = 1,
-                               max_amount = 3,
-                               type = 'food',
-                               location = 'room')
-    item_adder_config.add_item(min_amount = 0,
-                               max_amount = 2,
-                               type = 'armour',
-                               location = 'room')
-    item_adder_config.add_item(min_amount = 0,
-                               max_amount = 1,
-                               type = 'tome',
-                               location = 'room')
+    item_adder_config = ItemAdderConfiguration(['first gate'])
+
     item_adders = [ItemAdder(item_generator,
                             item_adder_config,
                             rng)]
 
-    creatures_upper = CreatureAdderConfiguration(['upper catacombs'])
-    creatures_upper.add_creature(min_amount = 6,
-                                 max_amount = 12,
-                                 name = 'rat')
-    creatures_upper.add_creature(min_amount = 0,
-                                 max_amount = 1,
-                                 name = 'skeleton warrior')
-
-    creatures_lower = CreatureAdderConfiguration(['lower catacombs'])
-    creatures_lower.add_creature(min_amount = 6,
-                                 max_amount = 12,
-                                 name = 'rat')
-    creatures_lower.add_creature(min_amount = 2,
-                                 max_amount = 5,
-                                 name = 'fire beetle')
-    creatures_lower.add_creature(min_amount = 1,
-                                 max_amount = 3,
-                                 name = 'skeleton warrior')
+    creatures_upper = CreatureAdderConfiguration(['first gate'])
 
     creature_adders = [CreatureAdder(creature_generator,
                                     creatures_upper,
-                                    rng),
-                       CreatureAdder(creature_generator,
-                                    creatures_lower,
-                                    rng)
-                                    ]
+                                    rng)]
 
     portal_adder_configurations = [PortalAdderConfiguration(
                                         icons = (stairs_up,
                                                  stairs_down),
-                                        level_type = 'lower catacombs',
+                                        level_type = 'first gate',
                                         location_type = 'room',
                                         chance = 100,
-                                        new_level = 'upper catacombs',
-                                        unique = True),
-                                    PortalAdderConfiguration(
-                                        icons = (stairs_up,
-                                                 stairs_down),
-                                        level_type = 'upper catacombs',
-                                        location_type = 'room',
-                                        chance = 100,
-                                        new_level = '',
-                                        unique = True,
-                                        escape_stairs = True)
-                                        ]
+                                        new_level = 'lower catacombs',
+                                        unique = True)]
 
     level_context = LevelContext(size = level_size,
                                  floor_type = floor_empty,
                                  wall_type = wall_natural,
                                  empty_floor = floor_empty,
                                  empty_wall = wall_empty,
-                                 level_types = ['upper catacombs',
-                                                'lower catacombs'])
+                                 level_types = ['first gate'])
 
     config = (LevelConfiguration()
                     .with_rooms(room_generators)
@@ -302,81 +238,5 @@ def init_creatures(context):
     """
     surface_manager = context.surface_manager
     config = []
-
-    mouse_f0 = surface_manager.add_icon('rat_f0', ':mouse_f0.png', 'r', ['yellow', 'dim'])
-    mouse_f1 = surface_manager.add_icon('rat_f1', ':mouse_f1.png', 'r', ['yellow', 'dim'])
-    config.append(CreatureConfiguration(name = 'rat',
-                                        body = 4,
-                                        finesse = 12,
-                                        mind = 2,
-                                        hp = 2,
-                                        speed = 2,
-                                        icons = (mouse_f0, mouse_f1),
-                                        attack = 1,
-                                        ai = RatAI))
-
-    firebeetle_f0 = surface_manager.add_icon('fire beetle_f0', ':scarab-beetle_f0.png', 'a', ['red'])
-    firebeetle_f1 = surface_manager.add_icon('fire beetle_f1', ':scarab-beetle_f1.png', 'a', ['red'])
-    config.append(CreatureConfiguration(name = 'fire beetle',
-                                        body = 10,
-                                        finesse = 11,
-                                        mind = 0,
-                                        hp = 4,
-                                        speed = 3,
-                                        icons = (firebeetle_f0, firebeetle_f1),
-                                        attack = 2,
-                                        ai = FireBeetleAI))
-
-    skeleton_inventory = [InventoryConfiguration(item_name = 'sword',
-                                                min_amount = 0,
-                                                max_amount = 1,
-                                                probability = 100)]
-
-    skeleton_effects = [DamageModifier(modifier = 2,
-                                       damage_type = CRUSHING_DAMAGE,
-                                       duration = None,
-                                       frequency = None,
-                                       tick = None,
-                                       icon = 0,
-                                       title = '',
-                                       description = ''),
-                        DamageModifier(modifier = 2,
-                                       damage_type = LIGHT_DAMAGE,
-                                       duration = None,
-                                       frequency = None,
-                                       tick = None,
-                                       icon = 0,
-                                       title = '',
-                                       description = ''),
-                        DamageModifier(modifier = -2,
-                                       damage_type = PIERCING_DAMAGE,
-                                       duration = None,
-                                       frequency = None,
-                                       tick = None,
-                                       icon = 0,
-                                       title = '',
-                                       description = ''),
-                        DamageModifier(modifier = -2,
-                                       damage_type = POISON_DAMAGE,
-                                       duration = None,
-                                       frequency = None,
-                                       tick = None,
-                                       icon = 0,
-                                       title = '',
-                                       description = '')]
-
-    skeleton_f0 = surface_manager.add_icon('skeleton warrior_f0', ':blade-bite_f0.png', 'Z', ['white', 'bold'])
-    skeleton_f1 = surface_manager.add_icon('skeleton warrior_f1', ':blade-bite_f1.png', 'Z', ['white', 'bold'])
-    config.append(CreatureConfiguration(name = 'skeleton warrior',
-                                        body = 8,
-                                        finesse = 11,
-                                        mind = 0,
-                                        hp = 8,
-                                        speed = 4,
-                                        icons = (skeleton_f0, skeleton_f1),
-                                        attack = 1,
-                                        ai = SkeletonWarriorAI,
-                                        inventory = skeleton_inventory,
-                                        effects = skeleton_effects))
 
     return config

@@ -80,7 +80,7 @@ def process_command_line(arguments):
     ui_mode = arguments['--ui']
     start_level = arguments['--start-level']
     if not start_level:
-        start_level = 'upper catacombs'
+        start_level = 'first gate'
 
     return (log_level, silent, ui_mode, start_level)
 
@@ -102,7 +102,7 @@ if __name__ == "__main__":
         print('along with Herculeum.  If not, see <http://www.gnu.org/licenses/>.')  # noqa
     else:
 
-        log_level, silent, ui_mode, start_level = process_command_line(arguments)
+        log_level, silent, ui_mode, start_level = process_command_line(arguments)  # noqa
 
         app.log_level = log_level
         app.silent = silent

@@ -21,11 +21,13 @@
 Module for starting game
 """
 from pyherc.generators import DungeonGenerator
+from pyherc.aspects import log_debug
 
 
 class StartGameController():
     """
     """
+    @log_debug
     def __init__(self, level_generator_factory,
                  creature_generator, item_generator, start_level):
         """
@@ -38,12 +40,13 @@ class StartGameController():
         self.item_generator = item_generator
         self.start_level = start_level
 
+    @log_debug
     def setup_world(self, world, player):
         """
         Setup playing world
         """
         world.player = player
-        level_generator = self.level_generator_factory.get_generator(self.start_level)
+        level_generator = self.level_generator_factory.get_generator(self.start_level)  # noqa
 
         generator = DungeonGenerator(self.creature_generator,
                                      self.item_generator,
