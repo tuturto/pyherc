@@ -196,6 +196,15 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                             rng)]
 
     creatures_upper = CreatureAdderConfiguration(['first gate'])
+    creatures_upper.add_creature(min_amount = 6,
+                                 max_amount = 12,
+                                 name = 'rat')
+    creatures_upper.add_creature(min_amount = 0,
+                                 max_amount = 2,
+                                 name = 'fire beetle')
+    creatures_upper.add_creature(min_amount = 0,
+                                 max_amount = 1,
+                                 name = 'skeleton warrior')
 
     creature_adders = [CreatureAdder(creature_generator,
                                     creatures_upper,
