@@ -199,10 +199,11 @@ class GridPartitioner():
         :returns: list containing end points of chunks
         :rtype: [integer]
         """
-        section_length = length // sections
+        section_length = length / sections
         ranges = []
 
         for i in range(sections):
-            ranges.append((i * section_length, (i + 1) * section_length - 1))
+            ranges.append((int(i * section_length),
+                           int((i + 1) * section_length - 1)))
 
         return ranges

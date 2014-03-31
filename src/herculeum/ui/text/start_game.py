@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -31,7 +30,7 @@ class StartGameScreen():
         """
         Default constructor
         """
-        super(StartGameScreen, self).__init__()
+        super().__init__()
 
         self.generator = generator
         self.class_names = self.generator.configuration.keys()

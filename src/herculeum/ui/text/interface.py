@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -35,7 +34,7 @@ class CursesUserInterface():
         """
         Default constructor
         """
-        super(CursesUserInterface, self).__init__()
+        super().__init__()
 
         self.application = application
         self.splash_screen = None
@@ -67,7 +66,9 @@ class CursesUserInterface():
                                  self.screen,
                                  StartGameController(self.application.level_generator_factory,
                                                      self.application.creature_generator,
-                                                     self.application.item_generator))
+                                                     self.application.item_generator,
+                                                     self.application.config.start_level))
+
         main_window.show_new_game()
         main_window.show_map_window()
 

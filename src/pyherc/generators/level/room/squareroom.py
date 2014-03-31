@@ -64,12 +64,31 @@ class SquareRoomGenerator():
         middle_height = section.height // 2
         middle_width = section.width // 2
 
-        room_left_edge = self.rng.randint(2, middle_width - 2)
-        room_right_edge = self.rng.randint(middle_width + 2,
-                                           section.width - 2)
-        room_top_edge = self.rng.randint(2, middle_height - 2)
-        room_bottom_edge = self.rng.randint(middle_height + 2,
-                                            section.height - 2)
+        if len([x for x in section.connections
+                if x.direction == 'right']) > 0:
+            room_left_edge = self.rng.randint(2, middle_width - 2)
+        else:
+            room_left_edge = 1
+
+        if len([x for x in section.connections
+                if x.direction == 'left']) > 0:
+            room_right_edge = self.rng.randint(middle_width + 2,
+                                               section.width - 2)
+        else:
+            room_right_edge = section.width - 1
+
+        if len([x for x in section.connections
+                if x.direction == 'down']) > 0:
+            room_top_edge = self.rng.randint(2, middle_height - 2)
+        else:
+            room_top_edge = 1
+
+        if len([x for x in section.connections
+                if x.direction == 'up']) > 0:
+            room_bottom_edge = self.rng.randint(middle_height + 2,
+                                                section.height - 2)
+        else:
+            room_bottom_edge = section.height - 1
 
         for loc_y in range(room_top_edge + 1, room_bottom_edge):
             for loc_x in range(room_left_edge + 1, room_right_edge):

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -27,8 +26,10 @@ from pyherc.generators.level.partitioners.grid import RandomConnector
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import Level
 from mockito import mock, when
-from hamcrest import assert_that, has_length, is_, same_instance, greater_than, equal_to #pylint: disable-msg=E0611
+from hamcrest import assert_that, has_length, is_, same_instance, greater_than
+from hamcrest import equal_to
 import random
+
 
 class TestGridPartitioner:
     """
@@ -54,7 +55,7 @@ class TestGridPartitioner:
                                            1,
                                            self.rng)
 
-    def test_partitioning_returns_sections(self): # pylint: disable=C0103
+    def test_partitioning_returns_sections(self):
         """
         Test that partitioning level returns default amount of sections
         """
@@ -75,7 +76,7 @@ class TestGridPartitioner:
 
         assert_that(sections[0].neighbours, has_length(1))
 
-    def test_partitioned_sections_are_linked(self): # pylint: disable=C0103
+    def test_partitioned_sections_are_linked(self):
         """
         Partitioned sections should be linked together
         """
@@ -96,6 +97,7 @@ class TestGridPartitioner:
 
         for section in sections:
             assert_that(section.level, is_(same_instance(self.mock_level)))
+
 
 class TestGridPartitionerUtilities:
     """
@@ -122,7 +124,8 @@ class TestGridPartitionerUtilities:
 
         assert_that(ranges[0], is_(equal_to((0, 2))))
         assert_that(ranges[1], is_(equal_to((3, 5))))
-        assert_that(ranges[2], is_(equal_to((6, 8))))
+        assert_that(ranges[2], is_(equal_to((6, 9))))
+
 
 class TestRandomConnector:
     """
@@ -158,8 +161,7 @@ class TestRandomConnector:
 
         connected_sections = self.connector.connect_sections(sections)
 
-        assert_that(
-                    connected_sections[1],
+        assert_that(connected_sections[1],
                     is_(equal_to(
                         connected_sections[0].connections[0].connection)))
 
@@ -215,7 +217,7 @@ class TestRandomConnector:
 
         sections = [section0, section1, section2, section3, section4]
 
-        connected_sections = self.connector.connect_sections(sections, section2)
+        connected_sections = self.connector.connect_sections(sections, section2)  # noqa
 
         for section in connected_sections:
             assert_that(section.connections, has_length(greater_than(0)))
