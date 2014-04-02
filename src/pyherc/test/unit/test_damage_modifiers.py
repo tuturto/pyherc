@@ -20,17 +20,14 @@
 """
 Module for testing damage modification rules
 """
-from pyherc.data import Model,  Dungeon
-from pyherc.test.builders import ActionFactoryBuilder
-from pyherc.test.builders import CharacterBuilder, LevelBuilder, ItemBuilder
+from hamcrest import assert_that, equal_to, is_
+from mockito import mock, when
+from pyherc.data import Dungeon, Model
 from pyherc.data.effects import DamageModifier
 from pyherc.rules import attack
-
+from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
+                                  ItemBuilder, LevelBuilder)
 from pyherc.test.cutesy import at_
-
-from mockito import mock, when
-
-from hamcrest import assert_that, is_, equal_to
 
 
 class TestDamageModifiers():

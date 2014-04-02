@@ -24,10 +24,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 -}"""
 
 
-from pyherc.ai import pyheapq
-
-from pyherc.ai.heapset import HeapSet
 from copy import copy
+
+from pyherc.ai import pyheapq
+from pyherc.ai.heapset import HeapSet
 
 
 def reconstruct_path(came_from, current_node):

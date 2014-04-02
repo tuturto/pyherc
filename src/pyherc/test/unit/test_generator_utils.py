@@ -25,6 +25,7 @@ Module for testing generator utilities
 import pyherc
 import pyherc.generators.utils
 
+
 class TestGeneratorUtils():
     """
     Tests for generator utilities
@@ -117,4 +118,3 @@ class TestGeneratorUtils():
         assert(queue.pop() in (section2, section3))
         assert(queue.pop() in (section4, section5))
         assert(queue.pop() in (section4, section5))
-

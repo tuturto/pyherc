@@ -21,9 +21,9 @@
 Module for checking end conditions
 """
 
-from pyherc.events import DeathEvent, DropEvent
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import DIED_IN_DUNGEON, ESCAPED_DUNGEON
+from pyherc.events import DeathEvent, DropEvent
 
 
 class Dying():

@@ -20,12 +20,12 @@
 """
 Module for spell factory
 """
-from pyherc.aspects import log_debug, log_info
 from functools import partial
 
-from pyherc.data.magic import Spell
+from pyherc.aspects import log_debug, log_info
 from pyherc.data.effects import EffectHandle
 from pyherc.data.geometry import get_target_in_direction, TargetData
+from pyherc.data.magic import Spell
 from pyherc.rules.los import get_fov_matrix
 
 

@@ -21,12 +21,12 @@
 """
 Module for testing configuration DSL
 """
-from pyherc.generators.level.prototiles import FLOOR_NATURAL
-
-from mockito import mock
-from hamcrest import assert_that, is_, equal_to, has_item
-from pyherc.config.dsl import LevelConfiguration, Catacombs, natural_floor
 from random import Random
+
+from hamcrest import assert_that, equal_to, has_item, is_
+from mockito import mock
+from pyherc.config.dsl import Catacombs, LevelConfiguration, natural_floor
+from pyherc.generators.level.prototiles import FLOOR_NATURAL
 
 
 class TestConfigDSL():

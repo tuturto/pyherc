@@ -20,7 +20,7 @@
 """
 Port to issue actions
 """
-from pyherc.rules import move, is_move_legal
+from pyherc.rules import is_move_legal, move
 
 
 class ActionsPort():

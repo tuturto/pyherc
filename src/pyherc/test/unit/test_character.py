@@ -20,13 +20,12 @@
 """
 Module for testing characters
 """
-from pyherc.data import WeaponProficiency
-from pyherc.test.builders import CharacterBuilder
-from pyherc.test.builders import ItemBuilder
-from pyherc.test.matchers import EventType
-from hamcrest import assert_that, is_, equal_to
-from pyherc.events import MoveEvent
+from hamcrest import assert_that, equal_to, is_
 from mockito import mock, verify
+from pyherc.data import WeaponProficiency
+from pyherc.events import MoveEvent
+from pyherc.test.builders import CharacterBuilder, ItemBuilder
+from pyherc.test.matchers import EventType
 
 
 class TestCharacter():

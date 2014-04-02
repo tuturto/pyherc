@@ -22,7 +22,7 @@ Module for healing
 """
 from pyherc.aspects import log_debug
 from pyherc.data.effects.effect import Effect
-from pyherc.events import HealTriggeredEvent, HealAddedEvent, HealEndedEvent
+from pyherc.events import HealAddedEvent, HealEndedEvent, HealTriggeredEvent
 
 
 class Heal(Effect):

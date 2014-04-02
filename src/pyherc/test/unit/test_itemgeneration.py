@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -22,14 +21,14 @@
 Tests for item generation
 """
 #pylint: disable=W0614
-from pyherc.generators import ItemGenerator
-from pyherc.test.matchers import has_effect_handle, has_damage
-from hamcrest import assert_that, is_, equal_to, not_none #pylint: disable-msg=E0611
-
-from pyherc.generators import ItemConfigurations
-from pyherc.generators import ItemConfiguration, WeaponConfiguration
-from pyherc.data.effects import EffectHandle
 from random import Random
+
+from hamcrest import assert_that, equal_to, is_, not_none
+from pyherc.data.effects import EffectHandle
+from pyherc.generators import (ItemConfiguration, ItemConfigurations,
+                               ItemGenerator, WeaponConfiguration)
+from pyherc.test.matchers import has_damage, has_effect_handle
+
 
 class TestItemGeneration():
     """

@@ -20,14 +20,13 @@
 """
 Module for Character related classes
 """
-from pyherc.aspects import log_debug, log_info
-from pyherc.events import HitPointsChangedEvent, SpiritPointsChangedEvent
-from pyherc.events import ErrorEvent
 from decorator import decorator
-
+from pyherc.aspects import log_debug, log_info
+from pyherc.data.effects.effectscollection import EffectsCollection
 from pyherc.data.inventory import Inventory
 from pyherc.data.magic.spellbook import SpellBook
-from pyherc.data.effects.effectscollection import EffectsCollection
+from pyherc.events import (ErrorEvent, HitPointsChangedEvent,
+                           SpiritPointsChangedEvent)
 
 
 @decorator

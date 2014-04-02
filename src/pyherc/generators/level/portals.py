@@ -21,8 +21,8 @@
 Module for adding portals
 """
 
-from pyherc.data import Portal
 from pyherc.aspects import log_debug, log_info
+from pyherc.data import Portal
 
 
 class PortalAdderConfiguration():

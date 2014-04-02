@@ -20,11 +20,11 @@
 # flake8: noqa
 
 from behave import step_matcher
-from pyherc.test.cutesy import make, drop
-from pyherc.test.bdd.features.helpers import default_context, armour_list
-from pyherc.test.bdd.features.helpers import weapon_list, misc_item_list
-from pyherc.test.bdd.features.helpers import get_character, get_item
-from pyherc.test.bdd.features.helpers import get_location
+from pyherc.test.bdd.features.helpers import (armour_list, default_context,
+                                              get_character, get_item,
+                                              get_location, misc_item_list,
+                                              weapon_list)
+from pyherc.test.cutesy import drop, make
 
 step_matcher('re')
 

@@ -21,7 +21,8 @@
 
 from behave import step_matcher
 from pyherc.test.bdd.features.helpers import get_character, get_item
-from pyherc.test.cutesy import make, cast_spell, gain_domain_
+from pyherc.test.cutesy import cast_spell, gain_domain_, make
+
 
 @when('{caster_name} casts {spell_and_target}')
 def impl(context, caster_name, spell_and_target):

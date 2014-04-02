@@ -20,11 +20,12 @@
 """
 Tests for Connection
 """
-from pyherc.generators.level.partitioners.section import Section, Connection
-from pyherc.data import Level
-from mockito import mock
-from hamcrest import assert_that, is_, equal_to
 import random
+
+from hamcrest import assert_that, equal_to, is_
+from mockito import mock
+from pyherc.data import Level
+from pyherc.generators.level.partitioners.section import Connection, Section
 
 
 class TestConnection():

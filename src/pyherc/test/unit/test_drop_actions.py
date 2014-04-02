@@ -20,16 +20,15 @@
 """
 Module for testing drop action factory
 """
+from hamcrest import assert_that, equal_to, greater_than, is_, is_in, is_not
+from mockito import any, mock, verify
+from pyherc.data import Model
+from pyherc.events import DropEvent
+from pyherc.rules import drop_item
 from pyherc.rules.inventory.factories import DropFactory
 from pyherc.rules.inventory.interface import InventoryParameters
-from pyherc.rules import drop_item
-from pyherc.events import DropEvent
-from pyherc.data import Model
-from pyherc.test.builders import ItemBuilder, CharacterBuilder
-from pyherc.test.builders import ActionFactoryBuilder, LevelBuilder
-
-from mockito import mock, verify, any
-from hamcrest import assert_that, is_, equal_to, is_in, is_not, greater_than
+from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
+                                  ItemBuilder, LevelBuilder)
 
 
 class TestDropFactory():

@@ -21,13 +21,11 @@
 Attack related factories are defined here
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules.combat.action import AttackAction, AdditionalRules
-from pyherc.rules.combat.unarmed import UnarmedToHit
-from pyherc.rules.combat.unarmed import UnarmedDamage
-from pyherc.rules.combat.melee import MeleeToHit
-from pyherc.rules.combat.melee import MeleeDamage
-from pyherc.rules.factory import SubActionFactory
 from pyherc.data.geometry import get_adjacent_target_in_direction
+from pyherc.rules.combat.action import AdditionalRules, AttackAction
+from pyherc.rules.combat.melee import MeleeDamage, MeleeToHit
+from pyherc.rules.combat.unarmed import UnarmedDamage, UnarmedToHit
+from pyherc.rules.factory import SubActionFactory
 
 
 class AttackFactory(SubActionFactory):

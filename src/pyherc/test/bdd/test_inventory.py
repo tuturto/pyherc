@@ -20,11 +20,9 @@
 """
 Module for inventory management tests
 """
-from pyherc.test.cutesy import Dagger, Goblin, carrying
-from pyherc.test.cutesy import place, middle_of, Level
-from pyherc.test.cutesy import make, drop
-from pyherc.test.cutesy import has_dropped
 from hamcrest import assert_that
+from pyherc.test.cutesy import (carrying, Dagger, drop, Goblin, has_dropped,
+                                Level, make, middle_of, place)
 
 
 class TestDroppingItems():

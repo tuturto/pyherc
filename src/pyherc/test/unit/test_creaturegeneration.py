@@ -21,15 +21,14 @@
 Tests for creature generation
 """
 
-from pyherc.generators import CreatureGenerator
-from pyherc.test.matchers import has_effect_handle, has_effect
-from hamcrest import assert_that, is_, equal_to, not_none
-from mockito import mock, verify
-
-from pyherc.generators import CreatureConfiguration
-from pyherc.generators import InventoryConfiguration
-from pyherc.data.effects import EffectHandle, DamageModifier
 from random import Random
+
+from hamcrest import assert_that, equal_to, is_, not_none
+from mockito import mock, verify
+from pyherc.data.effects import DamageModifier, EffectHandle
+from pyherc.generators import (CreatureConfiguration, CreatureGenerator,
+                               InventoryConfiguration)
+from pyherc.test.matchers import has_effect, has_effect_handle
 
 
 class MockAI():

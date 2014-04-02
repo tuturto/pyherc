@@ -21,9 +21,10 @@
 Module defining classes related to AttackAction
 """
 import random
-from pyherc.data.constants import Duration
+
 from pyherc.aspects import log_debug, log_info
-from pyherc.events import AttackHitEvent, AttackNothingEvent, AttackMissEvent
+from pyherc.data.constants import Duration
+from pyherc.events import AttackHitEvent, AttackMissEvent, AttackNothingEvent
 
 
 class AttackAction():

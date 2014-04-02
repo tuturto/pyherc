@@ -21,9 +21,9 @@
 Tests for calendar
 """
 
-from pyherc.rules.calendar import get_special_events
-from pyherc.data import SpecialTime
 from hamcrest import assert_that, has_item
+from pyherc.data import SpecialTime
+from pyherc.rules.calendar import get_special_events
 
 
 class TestCalendar():

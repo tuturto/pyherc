@@ -21,15 +21,14 @@
 Module for magic related tests
 """
 #pylint: disable=W0614
-from pyherc.test.builders import CharacterBuilder, HealBuilder, DamageBuilder
-from pyherc.test.builders import ActionFactoryBuilder
-from pyherc.test.builders import SpellCastingFactoryBuilder
-from pyherc.test.builders import SpellEntryBuilder
+from hamcrest import (assert_that,  # pylint: disable-msg=E0611; pylint: disable-msg=E0611
+                      contains_inanyorder, equal_to, has_item, is_)
+from mockito import any, mock, verify, when
 from pyherc.rules import cast
+from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
+                                  DamageBuilder, HealBuilder,
+                                  SpellCastingFactoryBuilder, SpellEntryBuilder)
 
-from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
-from hamcrest import has_item, contains_inanyorder #pylint: disable-msg=E0611
-from mockito import mock, when, any, verify
 
 class TestMagic:
     """

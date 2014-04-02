@@ -21,20 +21,18 @@
 Module for action factory builders
 """
 from mockito import mock
-
-from pyherc.rules.public import ActionFactory
 from pyherc.rules import Dying
-from pyherc.rules.moving.factories import MoveFactory, WalkFactory
-from pyherc.rules.combat.factories import AttackFactory
-from pyherc.rules.combat.factories import UnarmedCombatFactory
-from pyherc.rules.combat.factories import MeleeCombatFactory
 from pyherc.rules.combat import RangedCombatFactory
+from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,
+                                           UnarmedCombatFactory)
 from pyherc.rules.consume.factories import DrinkFactory
-from pyherc.rules.inventory.factories import InventoryFactory
-from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
 from pyherc.rules.inventory.equip import EquipFactory
+from pyherc.rules.inventory.factories import (DropFactory, InventoryFactory,
+                                              PickUpFactory)
 from pyherc.rules.inventory.unequip import UnEquipFactory
-from pyherc.rules.magic import SpellCastingFactory, GainDomainFactory
+from pyherc.rules.magic import GainDomainFactory, SpellCastingFactory
+from pyherc.rules.moving.factories import MoveFactory, WalkFactory
+from pyherc.rules.public import ActionFactory
 from pyherc.rules.waiting.factories import WaitFactory
 
 

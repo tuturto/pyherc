@@ -19,8 +19,9 @@
 
 # flake8: noqa
 
-from pyherc.test.cutesy import affect, weak_poison, potent_poison
 from pyherc.test.bdd.features.helpers import get_character
+from pyherc.test.cutesy import affect, potent_poison, weak_poison
+
 
 @when('{character_name} suffers from {effect_name}')
 def impl(context, character_name, effect_name):

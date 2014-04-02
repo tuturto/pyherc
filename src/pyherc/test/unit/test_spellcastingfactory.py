@@ -20,13 +20,13 @@
 """
 Module for SpellCastingFactory related tests
 """
+from hamcrest import assert_that, is_not  # pylint: disable-msg=E0611
+from mockito import any, mock, verify, when
 from pyherc.rules.magic.interface import SpellCastingParameters
+from pyherc.test.builders import (ActionFactoryBuilder, EffectsFactoryBuilder,
+                                  SpellCastingFactoryBuilder,
+                                  SpellGeneratorBuilder)
 
-from pyherc.test.builders import ActionFactoryBuilder, SpellGeneratorBuilder
-from pyherc.test.builders import SpellCastingFactoryBuilder, EffectsFactoryBuilder
-
-from mockito import mock, when, verify, any
-from hamcrest import assert_that, is_not #pylint: disable-msg=E0611
 
 class TestSpellCastingFactory:
     """

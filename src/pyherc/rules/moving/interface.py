@@ -23,7 +23,7 @@ Public interface of move package
 .. versionadded:: 0.10
 """
 
-from pyherc.aspects import log_info, log_debug
+from pyherc.aspects import log_debug, log_info
 from pyherc.rules.public import ActionParameters
 
 

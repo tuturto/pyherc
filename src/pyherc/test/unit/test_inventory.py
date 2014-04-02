@@ -17,10 +17,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-from pyherc.test.builders import CharacterBuilder
-from hamcrest import assert_that, is_,  equal_to, is_in, not_none, is_not #pylint: disable-msg=E0611
-from hamcrest import none #pylint: disable-msg=E0611
+from hamcrest import (assert_that,  # pylint: disable-msg=E0611; pylint: disable-msg=E0611
+                      equal_to, is_, is_in, is_not, none, not_none)
 from mockito import mock
+from pyherc.test.builders import CharacterBuilder
 
 """
 Tests for Inventory
@@ -157,4 +157,3 @@ class TestInventory():
         self.character.inventory.remove(item)
 
         assert_that(self.character.inventory.projectiles, is_(none()))
-

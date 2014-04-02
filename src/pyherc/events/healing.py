@@ -20,8 +20,8 @@
 """
 Classes for heal events
 """
-from pyherc.events.event import Event
 from pyherc.aspects import log_debug
+from pyherc.events.event import Event
 
 
 class HealTriggeredEvent(Event):

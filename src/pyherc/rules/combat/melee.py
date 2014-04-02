@@ -21,8 +21,7 @@
 Module defining Melee Attack related objcts
 """
 from pyherc.aspects import log_debug
-from pyherc.rules.combat.action import ToHit
-from pyherc.rules.combat.action import Damage
+from pyherc.rules.combat.action import Damage, ToHit
 
 
 class MeleeToHit(ToHit):

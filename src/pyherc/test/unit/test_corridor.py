@@ -21,13 +21,13 @@
 Tests for Corridor
 """
 
-from hamcrest import assert_that, is_, equal_to
-from pyherc.test.matchers import is_fully_accessible_via
-
-from pyherc.data import Level
-from pyherc.generators.level.partitioners.section import Section, Connection
-from pyherc.generators.level.room.corridor import CorridorGenerator
 import random
+
+from hamcrest import assert_that, equal_to, is_
+from pyherc.data import Level
+from pyherc.generators.level.partitioners.section import Connection, Section
+from pyherc.generators.level.room.corridor import CorridorGenerator
+from pyherc.test.matchers import is_fully_accessible_via
 
 
 class TestCorridor():

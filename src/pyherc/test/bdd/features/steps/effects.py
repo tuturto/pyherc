@@ -19,9 +19,9 @@
 
 # flake8: noqa
 
+from hamcrest import assert_that, has_length
 from pyherc.test.bdd.features.helpers import get_character
 
-from hamcrest import assert_that, has_length
 
 @then('{character_name} should be on fire')
 def step_impl(context, character_name):

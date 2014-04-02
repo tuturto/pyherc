@@ -20,13 +20,13 @@
 """
 Tests for spell targeting
 """
-from pyherc.test.builders import LevelBuilder, CharacterBuilder
-from pyherc.test.matchers import wall_target_at, void_target_at
-from pyherc.generators.spells import targeting_single_target
-from pyherc.generators.spells import targeting_spherical_area
+from hamcrest import (assert_that, contains_inanyorder, has_length, is_, is_in,
+                      is_not)
+from pyherc.generators.spells import (targeting_single_target,
+                                      targeting_spherical_area)
 from pyherc.rules.magic.interface import SpellCastingParameters
-from hamcrest import assert_that, is_, is_in, is_not, contains_inanyorder
-from hamcrest import has_length
+from pyherc.test.builders import CharacterBuilder, LevelBuilder
+from pyherc.test.matchers import void_target_at, wall_target_at
 
 FLOOR = 1
 SOLID_WALL = 2

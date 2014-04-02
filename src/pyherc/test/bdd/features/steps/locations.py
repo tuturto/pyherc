@@ -19,12 +19,12 @@
 
 # flake8: noqa
 
-from pyherc.test.cutesy import Level, place, middle_of
-from pyherc.data import Portal
-from pyherc.test.bdd.features.helpers import default_context
-from pyherc.test.bdd.features.helpers import get_character, get_location
-from pyherc.test.bdd.features.helpers import get_entity
 from hamcrest import assert_that, is_in, is_not
+from pyherc.data import Portal
+from pyherc.test.bdd.features.helpers import (default_context, get_character,
+                                              get_entity, get_location)
+from pyherc.test.cutesy import Level, middle_of, place
+
 
 @given('{character_name} is standing in {location_name}')
 @default_context

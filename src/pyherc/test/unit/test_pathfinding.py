@@ -21,21 +21,19 @@
 """
 tests for path finding
 """
+from random import Random
+
+from hamcrest import assert_that, contains, is_  # pylint: disable-msg=E0611
+from mockito import mock
+from pyherc.ai import a_star
+from pyherc.config.dsl import LevelContext
+from pyherc.data import Portal
+from pyherc.generators.level.generator import LevelGenerator
+from pyherc.generators.level.partitioners import GridPartitioner
+from pyherc.generators.level.portals import PortalAdder
+from pyherc.generators.level.room.catacombs import CatacombsGenerator
 from pyherc.test.builders import LevelBuilder
 from pyherc.test.matchers import continuous_path
-from pyherc.ai import a_star
-
-from hamcrest import assert_that, contains, is_ #pylint: disable-msg=E0611
-from mockito import mock
-
-from pyherc.generators.level.generator import LevelGenerator
-from pyherc.config.dsl import LevelContext
-from pyherc.generators.level.partitioners import GridPartitioner
-from pyherc.generators.level.room.catacombs import CatacombsGenerator
-from pyherc.generators.level.portals import PortalAdder
-from pyherc.data import Portal
-
-from random import Random
 
 FLOOR_TILE = 100
 WALL_TILE = 200

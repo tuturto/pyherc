@@ -22,10 +22,11 @@ Classes needed for item generation
 """
 
 import random
-from pyherc.data import Item
-from pyherc.data.item import WeaponData, ArmourData, AmmunitionData
-from pyherc.data.effects import EffectsCollection, EffectHandle
+
 from pyherc.aspects import log_debug, log_info
+from pyherc.data import Item
+from pyherc.data.effects import EffectHandle, EffectsCollection
+from pyherc.data.item import AmmunitionData, ArmourData, WeaponData
 
 
 class ItemGenerator():

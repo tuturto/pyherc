@@ -23,8 +23,10 @@ Tests for Level
 """
 
 #pylint: disable=W0614
+from hamcrest import (assert_that,  # pylint: disable-msg=E0611
+                      contains_inanyorder)
 from pyherc.data import Level
-from hamcrest import assert_that, contains_inanyorder #pylint: disable-msg=E0611
+
 
 class TestLevel:
     """

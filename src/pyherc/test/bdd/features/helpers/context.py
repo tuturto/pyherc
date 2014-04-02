@@ -21,11 +21,10 @@
 Module for general context helpers
 """
 from pyherc.data import Model
-from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.ports import ActionsPort
-from pyherc.test.cutesy import LeatherArmour, ScaleMail, PlateMail
-from pyherc.test.cutesy import Sword, Club, Dagger, Bow, Arrows, Warhammer
-from pyherc.test.cutesy import Rune
+from pyherc.test.builders import ActionFactoryBuilder
+from pyherc.test.cutesy import (Arrows, Bow, Club, Dagger, LeatherArmour,
+                                PlateMail, Rune, ScaleMail, Sword, Warhammer)
 
 
 def default_context(fn):

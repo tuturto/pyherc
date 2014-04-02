@@ -22,8 +22,8 @@ Module for damage
 """
 from pyherc.aspects import log_debug
 from pyherc.data.effects.effect import Effect
-from pyherc.events import DamageTriggeredEvent, DamageAddedEvent
-from pyherc.events import DamageEndedEvent
+from pyherc.events import (DamageAddedEvent, DamageEndedEvent,
+                           DamageTriggeredEvent)
 
 
 class Damage(Effect):

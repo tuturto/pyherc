@@ -21,17 +21,17 @@
 Tests for CreatureAdder
 """
 
-from mockito import mock
-from hamcrest import assert_that, has_length, greater_than, less_than
-from hamcrest import greater_than_or_equal_to
-from pyherc.test.matchers import has_creature, located_in_room
-
-from pyherc.data import Level
-from pyherc.generators.creature import CreatureGenerator
-from pyherc.generators.level.creatures import CreatureAdder
-from pyherc.generators.level.creatures import CreatureAdderConfiguration
-from pyherc.generators import CreatureConfiguration
 import random
+
+from hamcrest import (assert_that, greater_than, greater_than_or_equal_to,
+                      has_length, less_than)
+from mockito import mock
+from pyherc.data import Level
+from pyherc.generators import CreatureConfiguration
+from pyherc.generators.creature import CreatureGenerator
+from pyherc.generators.level.creatures import (CreatureAdder,
+                                               CreatureAdderConfiguration)
+from pyherc.test.matchers import has_creature, located_in_room
 
 
 class TestCreatureAdder():

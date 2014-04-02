@@ -21,6 +21,7 @@
 
 from pyherc.data.model import ESCAPED_DUNGEON
 
+
 @then('Game ends')
 def impl(context):
     model = context.model

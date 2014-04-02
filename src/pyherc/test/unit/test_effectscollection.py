@@ -21,12 +21,11 @@
 Module for testing effects collection
 """
 #pylint: disable=W0614
+from hamcrest import assert_that, equal_to, is_, is_in, is_not
 from pyherc.data.effects import EffectsCollection
-from pyherc.test.builders import EffectHandleBuilder
-from pyherc.test.builders import EffectBuilder
-from hamcrest import assert_that, is_in, is_not, is_, equal_to
-from pyherc.test.matchers import has_effect_handle, has_effect_handles
-from pyherc.test.matchers import has_effect
+from pyherc.test.builders import EffectBuilder, EffectHandleBuilder
+from pyherc.test.matchers import (has_effect, has_effect_handle,
+                                  has_effect_handles)
 
 
 class TestEffectsCollection():

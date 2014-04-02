@@ -21,20 +21,15 @@
 Dictionary for behaviour driven tests
 """
 
-from pyherc.test.builders import ActionFactoryBuilder
-from pyherc.test.builders import LevelBuilder
-from pyherc.test.builders import SpellCastingFactoryBuilder
-from pyherc.test.builders import SpellGeneratorBuilder
-from pyherc.test.builders import EffectsFactoryBuilder
-
-from pyherc.data.effects import Heal, Damage
-from pyherc.rules import Dying, move, is_move_legal
-from pyherc.data.effects import Poison
-from pyherc.data.geometry import find_direction
-from pyherc.rules import cast, drop_item, attack, wait, gain_domain
-
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
+from pyherc.data.effects import Damage, Heal, Poison
+from pyherc.data.geometry import find_direction
+from pyherc.rules import (attack, cast, drop_item, Dying, gain_domain,
+                          is_move_legal, move, wait)
+from pyherc.test.builders import (ActionFactoryBuilder, EffectsFactoryBuilder,
+                                  LevelBuilder, SpellCastingFactoryBuilder,
+                                  SpellGeneratorBuilder)
 
 
 def add_history_value(character, attribute):

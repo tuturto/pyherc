@@ -21,8 +21,8 @@
 Tests for damage
 """
 
+from hamcrest import assert_that, equal_to, is_, only_contains
 from pyherc.rules.combat.action import Damage
-from hamcrest import assert_that, is_, equal_to, only_contains
 
 
 class TestDamage():

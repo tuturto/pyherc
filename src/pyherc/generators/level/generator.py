@@ -22,8 +22,9 @@ Classs needed for generating levels
 """
 
 import logging
-from pyherc.data import Level, Portal
+
 from pyherc.aspects import log_debug, log_info
+from pyherc.data import Level, Portal
 
 
 class LevelGeneratorFactory():

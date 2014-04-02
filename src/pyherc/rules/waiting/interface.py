@@ -22,8 +22,8 @@ Public interface for wait actions
 """
 
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules.public import ActionParameters
 from pyherc.data import Duration
+from pyherc.rules.public import ActionParameters
 
 
 @log_info

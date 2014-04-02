@@ -22,7 +22,7 @@ Module for item builder
 """
 from pyherc.data import Item
 from pyherc.data.effects import EffectsCollection
-from pyherc.data.item import WeaponData, ArmourData, AmmunitionData
+from pyherc.data.item import AmmunitionData, ArmourData, WeaponData
 
 
 class ItemBuilder():

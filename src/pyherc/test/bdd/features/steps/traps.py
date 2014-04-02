@@ -19,9 +19,9 @@
 
 # flake8: noqa
 
-from pyherc.test.bdd.features.helpers import default_context
-from pyherc.test.bdd.features.helpers import get_entity
+from pyherc.test.bdd.features.helpers import default_context, get_entity
 from pyherc.test.cutesy import pit_trap
+
 
 @given('{trap_name} is next to {entity_name}')
 @default_context

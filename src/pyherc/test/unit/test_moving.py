@@ -21,22 +21,17 @@
 Module for testing moving
 """
 
-from hamcrest import assert_that, is_, equal_to
+from hamcrest import assert_that, equal_to, is_
 from mockito import mock
-
-from pyherc.ports import ActionsPort
+from pyherc.data import Model, Portal
 from pyherc.data.constants import Direction
-from pyherc.rules.moving.action import EscapeAction
-from pyherc.data import Portal
-from pyherc.test.builders import LevelBuilder
-from pyherc.test.builders import CharacterBuilder
-from pyherc.test.matchers import is_legal, is_illegal
-
-from pyherc.data import Model
 from pyherc.data.model import ESCAPED_DUNGEON
-from pyherc.test.builders import ActionFactoryBuilder
+from pyherc.ports import ActionsPort
+from pyherc.rules.moving.action import EscapeAction
+from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
+                                  LevelBuilder)
 from pyherc.test.helpers import EventListener
-from pyherc.test.matchers import has_marked_for_redrawing
+from pyherc.test.matchers import has_marked_for_redrawing, is_illegal, is_legal
 
 
 class TestEventDispatching():

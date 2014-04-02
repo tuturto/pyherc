@@ -21,14 +21,15 @@
 Tests for GridPartitioner
 """
 #pylint: disable=W0614
-from pyherc.generators.level.partitioners.grid import GridPartitioner
-from pyherc.generators.level.partitioners.grid import RandomConnector
-from pyherc.generators.level.partitioners.section import Section
-from pyherc.data import Level
-from mockito import mock, when
-from hamcrest import assert_that, has_length, is_, same_instance, greater_than
-from hamcrest import equal_to
 import random
+
+from hamcrest import (assert_that, equal_to, greater_than, has_length, is_,
+                      same_instance)
+from mockito import mock, when
+from pyherc.data import Level
+from pyherc.generators.level.partitioners.grid import (GridPartitioner,
+                                                       RandomConnector)
+from pyherc.generators.level.partitioners.section import Section
 
 
 class TestGridPartitioner:

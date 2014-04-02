@@ -20,23 +20,17 @@
 """
 Module for testing combat related rules
 """
-from pyherc.data import Dungeon
-from pyherc.data import Model
-
-from pyherc.rules.combat.interface import AttackParameters
-from pyherc.rules.combat.action import AttackAction
+from hamcrest import assert_that, equal_to, instance_of, is_
+from mockito import any, mock, verify, when
+from pyherc.data import Dungeon, Model
+from pyherc.events import AttackHitEvent, AttackNothingEvent
 from pyherc.rules import attack
-from pyherc.events import AttackNothingEvent, AttackHitEvent
-
-from pyherc.test.builders import CharacterBuilder
-from pyherc.test.builders import ActionFactoryBuilder
-from pyherc.test.builders import LevelBuilder
-from pyherc.test.matchers import void_target
-
+from pyherc.rules.combat.action import AttackAction
+from pyherc.rules.combat.interface import AttackParameters
+from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
+                                  LevelBuilder)
 from pyherc.test.cutesy import at_
-
-from mockito import mock, verify, when, any
-from hamcrest import assert_that, is_, instance_of, equal_to
+from pyherc.test.matchers import void_target
 
 
 class TestMeleeCombat():

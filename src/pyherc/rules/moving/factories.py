@@ -20,11 +20,12 @@
 """
 Attack related factories are defined here
 """
-from pyherc.aspects import log_debug, log_info
-from pyherc.rules.moving.action import MoveAction, EscapeAction
-from pyherc.rules.moving.action import SwitchPlacesAction
-from pyherc.rules.factory import SubActionFactory
 import random
+
+from pyherc.aspects import log_debug, log_info
+from pyherc.rules.factory import SubActionFactory
+from pyherc.rules.moving.action import (EscapeAction, MoveAction,
+                                        SwitchPlacesAction)
 
 
 class WalkFactory(SubActionFactory):

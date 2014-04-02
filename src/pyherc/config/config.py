@@ -21,32 +21,26 @@
 Configuration for pyherc
 """
 import random
-from pyherc.rules.public import ActionFactory
-from pyherc.rules import RulesEngine
-from pyherc.rules import Dying
-from pyherc.rules.moving.factories import MoveFactory
-from pyherc.rules.moving.factories import WalkFactory
-from pyherc.rules.consume.factories import DrinkFactory
-from pyherc.rules.combat.factories import AttackFactory
-from pyherc.rules.combat.factories import UnarmedCombatFactory
-from pyherc.rules.combat.factories import MeleeCombatFactory
-from pyherc.rules.combat import RangedCombatFactory
-from pyherc.rules.inventory.factories import InventoryFactory
-from pyherc.rules.inventory.factories import PickUpFactory, DropFactory
-from pyherc.rules.inventory.equip import EquipFactory
-from pyherc.rules.inventory.unequip import UnEquipFactory
-from pyherc.rules.waiting import WaitFactory
-from pyherc.rules.magic import SpellCastingFactory
-from pyherc.generators import ItemGenerator, CreatureGenerator
-from pyherc.generators.level.portals import PortalAdderFactory
 
-from pyherc.generators.level.generator import LevelGeneratorFactory
+from pyherc.generators import (CreatureGenerator, EffectsFactory,
+                               ItemConfigurations, ItemGenerator,
+                               SpellGenerator)
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
-
-from pyherc.generators import EffectsFactory
-from pyherc.generators import SpellGenerator
-
-from pyherc.generators import ItemConfigurations
+from pyherc.generators.level.generator import LevelGeneratorFactory
+from pyherc.generators.level.portals import PortalAdderFactory
+from pyherc.rules import Dying, RulesEngine
+from pyherc.rules.combat import RangedCombatFactory
+from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,
+                                           UnarmedCombatFactory)
+from pyherc.rules.consume.factories import DrinkFactory
+from pyherc.rules.inventory.equip import EquipFactory
+from pyherc.rules.inventory.factories import (DropFactory, InventoryFactory,
+                                              PickUpFactory)
+from pyherc.rules.inventory.unequip import UnEquipFactory
+from pyherc.rules.magic import SpellCastingFactory
+from pyherc.rules.moving.factories import MoveFactory, WalkFactory
+from pyherc.rules.public import ActionFactory
+from pyherc.rules.waiting import WaitFactory
 
 
 class Configuration():

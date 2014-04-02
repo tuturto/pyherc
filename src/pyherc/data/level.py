@@ -22,6 +22,7 @@ Module containing classes to represent Level
 """
 
 import random
+
 from pyherc.aspects import log_debug
 
 

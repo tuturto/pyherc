@@ -22,8 +22,9 @@ Module for partitioning level to equal grid
 """
 
 import logging
-from pyherc.generators.level.partitioners.section import Section
+
 from pyherc.aspects import log_debug
+from pyherc.generators.level.partitioners.section import Section
 
 
 class RandomConnector():

@@ -21,11 +21,12 @@
 Module for testing wearing armour
 """
 
+from hamcrest import assert_that  # pylint: disable-msg=E0611
 from pyherc.rules import equip
-from pyherc.test.builders import CharacterBuilder, ItemBuilder
-from pyherc.test.builders import ActionFactoryBuilder
+from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
+                                  ItemBuilder)
 from pyherc.test.matchers import is_wearing
-from hamcrest import assert_that #pylint: disable-msg=E0611
+
 
 class TestWearingArmour():
     """

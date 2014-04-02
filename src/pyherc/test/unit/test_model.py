@@ -21,12 +21,13 @@
 Module for testing Model
 """
 #pylint: disable=W0614
-from pyherc.data import Model
-from pyherc.test.matchers import has_event_listener
-from pyherc.test.builders import LevelBuilder, CharacterBuilder
-from hamcrest import assert_that #pylint: disable-msg=E0611
+from hamcrest import assert_that  # pylint: disable-msg=E0611
 from mockito import mock, verify
+from pyherc.data import Model
 from pyherc.events import MoveEvent
+from pyherc.test.builders import CharacterBuilder, LevelBuilder
+from pyherc.test.matchers import has_event_listener
+
 
 class TestModel():
     """

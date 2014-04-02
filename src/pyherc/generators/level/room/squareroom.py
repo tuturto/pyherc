@@ -22,8 +22,9 @@ Classes for generating square rooms
 """
 
 import logging
-from pyherc.generators.level.room.corridor import CorridorGenerator
 from random import Random
+
+from pyherc.generators.level.room.corridor import CorridorGenerator
 
 
 class SquareRoomGenerator():

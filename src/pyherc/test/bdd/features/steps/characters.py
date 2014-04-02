@@ -19,18 +19,17 @@
 
 # flake8: noqa
 
-from pyherc.data.effects import DamageModifier
-from pyherc.data.constants import Direction, Duration
-from pyherc.test.cutesy import Adventurer, Wizard, Goblin
-from pyherc.test.cutesy import take_random_step
-from pyherc.test.matchers import is_dead
+from hamcrest import assert_that, greater_than, is_not
 from pyherc.ai.pathfinding import a_star
+from pyherc.data.constants import Direction, Duration
+from pyherc.data.effects import DamageModifier
 from pyherc.data.geometry import find_direction
-from hamcrest import assert_that, is_not, greater_than
-from pyherc.test.bdd.features.helpers import default_context, observed
-from pyherc.test.bdd.features.helpers import with_action_factory
-from pyherc.test.bdd.features.helpers import get_character
-from pyherc.test.bdd.features.helpers import get_location, get_item
+from pyherc.test.bdd.features.helpers import (default_context, get_character,
+                                              get_item, get_location, observed,
+                                              with_action_factory)
+from pyherc.test.cutesy import Adventurer, Goblin, take_random_step, Wizard
+from pyherc.test.matchers import is_dead
+
 
 @given('{character_name} is Adventurer')
 @observed

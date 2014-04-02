@@ -20,21 +20,19 @@
 """
 Module for classes testing Item related operations
 """
-#pylint: disable=W0614
-import pyherc
-import pyherc.generators.item
-import pyherc.data.dungeon
 from random import Random
-from pyherc.data import Level, Character
-from pyherc.test.builders import ItemBuilder
-from pyherc.test.builders import CharacterBuilder
-from pyherc.test.builders import EffectHandleBuilder
-from pyherc.test.builders import ActionFactoryBuilder
+
+import pyherc
+import pyherc.data.dungeon
+import pyherc.generators.item
+from hamcrest import assert_that, equal_to, is_, is_in, is_not
+from mockito import any, mock, verify
+from pyherc.data import Character, Level
 from pyherc.events import PickUpEvent
 from pyherc.rules import equip, unequip
+from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
+                                  EffectHandleBuilder, ItemBuilder)
 
-from hamcrest import assert_that, is_not, equal_to, is_, is_in #pylint: disable-msg=E0611
-from mockito import mock, verify, any
 
 class TestItems():
     """

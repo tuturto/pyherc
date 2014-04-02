@@ -20,9 +20,9 @@
 """
 Module for character builder
 """
+from mockito import mock
 from pyherc.data import Character
 from pyherc.data.effects import EffectsCollection
-from mockito import mock
 
 
 class CharacterBuilder():

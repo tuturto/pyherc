@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -21,17 +20,14 @@
 """
 Module for testing time related functions
 """
-#pylint: disable=W0614, C0103
-from pyherc.data.model import Model
-from pyherc.data import Dungeon
-from pyherc.data import Level
+from hamcrest import (assert_that, equal_to, has_item, is_, is_not)
+from mockito import any, mock, verify
+from pyherc.data import Dungeon, Level
 from pyherc.data.effects import Effect
+from pyherc.data.model import Model
+from pyherc.test.builders import (CharacterBuilder, EffectBuilder,
+                                  RulesEngineBuilder)
 
-from pyherc.test.builders import CharacterBuilder, EffectBuilder
-from pyherc.test.builders import RulesEngineBuilder
-
-from hamcrest import assert_that, is_, equal_to, is_not, has_item #pylint: disable-msg=E0611
-from mockito import mock, verify, any
 
 class TestTime:
     """

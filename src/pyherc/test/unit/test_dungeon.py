@@ -21,9 +21,8 @@
 Module for testing dungeon
 """
 
-from pyherc.data import Level
-from pyherc.data import Portal
 from mockito import mock
+from pyherc.data import Level, Portal
 
 
 class TestDungeon:

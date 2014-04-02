@@ -20,9 +20,8 @@
 """
 Tests for events
 """
-from pyherc.test.builders import CharacterBuilder
-
 from mockito import mock, verify
+from pyherc.test.builders import CharacterBuilder
 
 
 class TestCharacterEvents():

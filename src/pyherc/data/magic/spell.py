@@ -21,8 +21,8 @@
 Module for spell objects
 """
 
-from pyherc.data.effects import EffectsCollection
 from pyherc.aspects import log_debug, log_info
+from pyherc.data.effects import EffectsCollection
 
 
 class Spell():

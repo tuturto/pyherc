@@ -21,21 +21,23 @@
 Tests for LevelDecorator
 """
 #pylint: disable=W0614
-from pyherc.generators.level.decorator import ReplacingDecorator
-from pyherc.generators.level.decorator import ReplacingDecoratorConfig
-from pyherc.generators.level.decorator import WallBuilderDecorator
-from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
-from pyherc.generators.level.decorator import AggregateDecorator
-from pyherc.generators.level.decorator import AggregateDecoratorConfig
-from pyherc.generators.level.decorator import DirectionalWallDecoratorConfig
-from pyherc.generators.level.decorator import DirectionalWallDecorator
-from pyherc.generators.level.decorator import WallOrnamentDecorator
-from pyherc.generators.level.decorator import WallOrnamentDecoratorConfig
+from hamcrest import assert_that, equal_to, is_  # pylint: disable-msg=E0611
+from mockito import any, mock, verify, when
 from pyherc.data import Level
-from mockito import mock, verify, any, when
-from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
-from pyherc.generators.level.prototiles import FLOOR_NATURAL, FLOOR_CONSTRUCTED
-from pyherc.generators.level.prototiles import WALL_NATURAL, WALL_CONSTRUCTED
+from pyherc.generators.level.decorator import (AggregateDecorator,
+                                               AggregateDecoratorConfig,
+                                               DirectionalWallDecorator,
+                                               DirectionalWallDecoratorConfig,
+                                               ReplacingDecorator,
+                                               ReplacingDecoratorConfig,
+                                               WallBuilderDecorator,
+                                               WallBuilderDecoratorConfig,
+                                               WallOrnamentDecorator,
+                                               WallOrnamentDecoratorConfig)
+from pyherc.generators.level.prototiles import (FLOOR_CONSTRUCTED,
+                                                FLOOR_NATURAL, WALL_CONSTRUCTED,
+                                                WALL_NATURAL)
+
 
 class TestLevelDecorator():
     """

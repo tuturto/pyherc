@@ -20,7 +20,7 @@
 """
 Tests for damage effect
 """
-from mockito import mock, verify, any
+from mockito import any, mock, verify
 from pyherc.test.builders import DamageBuilder
 
 

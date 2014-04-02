@@ -21,8 +21,8 @@
 Classes for generating pit rooms
 """
 
-from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 from pyherc.aspects import log_debug
+from pyherc.generators.level.room.squareroom import SquareRoomGenerator
 
 
 class PitRoomGenerator():

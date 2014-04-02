@@ -20,14 +20,14 @@
 """
 Tests for pick up action
 """
-from pyherc.test.builders import ItemBuilder, LevelBuilder, CharacterBuilder
-from pyherc.test.builders import ActionFactoryBuilder
-from pyherc.events import PickUpEvent
+from hamcrest import assert_that, equal_to, is_  # pylint: disable-msg=E0611
+from mockito import any, mock, verify
 from pyherc.data import Model
+from pyherc.events import PickUpEvent
 from pyherc.rules import pick_up
+from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
+                                  ItemBuilder, LevelBuilder)
 
-from mockito import mock, verify, any
-from hamcrest import assert_that, is_, equal_to #pylint: disable-msg=E0611
 
 class TestPickingUp():
     """

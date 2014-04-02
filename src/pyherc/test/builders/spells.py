@@ -20,9 +20,9 @@
 """
 Module for SpellFactoryBuilder
 """
-from pyherc.generators import SpellGenerator
-from pyherc.data.magic import Spell, SpellEntry
 from pyherc.data.geometry import TargetData
+from pyherc.data.magic import Spell, SpellEntry
+from pyherc.generators import SpellGenerator
 
 
 class SpellGeneratorBuilder():

@@ -20,23 +20,25 @@
 """
 Tests for LevelGenerator
 """
-#pylint: disable=W0614
-from pyherc.generators.level.generator import LevelGenerator
-from pyherc.generators.level import LevelGeneratorFactory
-from pyherc.config.dsl import LevelContext
-from pyherc.generators.level.config import LevelGeneratorFactoryConfig
-from pyherc.generators.level.partitioners import GridPartitioner
-from pyherc.generators.level.room.squareroom import SquareRoomGenerator
-from pyherc.generators.level.room.catacombs import CatacombsGenerator
-from pyherc.generators.level.decorator import ReplacingDecorator
-from pyherc.generators.level.portals import PortalAdder
-from pyherc.generators.level.creatures import CreatureAdder
-from pyherc.generators.level.items import ItemAdder
-from pyherc.data import Portal
-from mockito import mock, verify, when, any
-from hamcrest import assert_that, is_, same_instance, contains_string, has_item #pylint: disable-msg=E0611
-from pyherc.test.matchers import is_fully_accessible_via
 import random
+
+from hamcrest import (assert_that, contains_string, has_item, is_, 
+                      same_instance)
+from mockito import any, mock, verify, when
+from pyherc.config.dsl import LevelContext
+from pyherc.data import Portal
+from pyherc.generators.level import LevelGeneratorFactory
+from pyherc.generators.level.config import LevelGeneratorFactoryConfig
+from pyherc.generators.level.creatures import CreatureAdder
+from pyherc.generators.level.decorator import ReplacingDecorator
+from pyherc.generators.level.generator import LevelGenerator
+from pyherc.generators.level.items import ItemAdder
+from pyherc.generators.level.partitioners import GridPartitioner
+from pyherc.generators.level.portals import PortalAdder
+from pyherc.generators.level.room.catacombs import CatacombsGenerator
+from pyherc.generators.level.room.squareroom import SquareRoomGenerator
+from pyherc.test.matchers import is_fully_accessible_via
+
 
 class TestLeveltGeneratorFactory:
     """

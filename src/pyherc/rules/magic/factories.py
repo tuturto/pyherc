@@ -20,9 +20,9 @@
 """
 Spell casting related factories
 """
-from pyherc.rules.factory import SubActionFactory
-from pyherc.rules.magic.action import SpellCastingAction, GainDomainAction
 from pyherc.aspects import log_debug, log_info
+from pyherc.rules.factory import SubActionFactory
+from pyherc.rules.magic.action import GainDomainAction, SpellCastingAction
 
 
 class SpellCastingFactory(SubActionFactory):

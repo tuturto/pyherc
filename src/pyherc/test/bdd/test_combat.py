@@ -20,19 +20,11 @@
 """
 Package for combat tests
 """
-from pyherc.test.cutesy import strong, Adventurer
-from pyherc.test.cutesy import weak, Goblin
-from pyherc.test.cutesy import Dagger
-
-from pyherc.test.cutesy.dictionary import Level
-
-from pyherc.test.cutesy.dictionary import place, middle_of
-from pyherc.test.cutesy.dictionary import right_of
-from pyherc.test.cutesy.dictionary import make,  hit
-from pyherc.test.cutesy.dictionary import wielding
-
 from hamcrest import assert_that
-from pyherc.test.cutesy.dictionary import has_less_hit_points
+from pyherc.test.cutesy import Adventurer, Dagger, Goblin, strong, weak
+from pyherc.test.cutesy.dictionary import (has_less_hit_points, hit, Level,
+                                           make, middle_of, place, right_of,
+                                           wielding)
 
 
 class TestCombatBehaviour():

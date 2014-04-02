@@ -20,9 +20,9 @@
 """
 Inventory manipulation related factories are defined here
 """
-from pyherc.rules.inventory.action import PickUpAction, DropAction
-from pyherc.rules.factory import SubActionFactory
 from pyherc.aspects import log_debug, log_info
+from pyherc.rules.factory import SubActionFactory
+from pyherc.rules.inventory.action import DropAction, PickUpAction
 
 
 class PickUpFactory(SubActionFactory):

@@ -20,8 +20,8 @@
 """
 Module for building damage related objects
 """
-from pyherc.data.effects import Damage
 from mockito import mock
+from pyherc.data.effects import Damage
 
 
 class DamageBuilder():

@@ -137,9 +137,10 @@ From all times, sorting has always been a Great Art! :-)
 __all__ = ['heappush', 'heappop', 'heapify', 'heapreplace', 'nlargest',
            'nsmallest']
 
-from itertools import islice, repeat, count, tee
-from operator import itemgetter, neg
 import bisect
+from itertools import count, islice, repeat, tee
+from operator import itemgetter, neg
+
 
 def heappush(heap, item):
     """Push item onto heap, maintaining the heap invariant."""

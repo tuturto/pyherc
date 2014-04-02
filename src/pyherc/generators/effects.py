@@ -20,8 +20,9 @@
 """
 Module for Factory for creating effects
 """
-from pyherc.aspects import log_debug, log_info
 import copy
+
+from pyherc.aspects import log_debug, log_info
 
 
 class EffectsFactory():

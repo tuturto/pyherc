@@ -19,10 +19,11 @@
 
 # flake8: noqa
 
-from pyherc.test.cutesy import make, hit
+from hamcrest import assert_that, equal_to, is_, less_than
 from pyherc.test.bdd.features.helpers import get_character
+from pyherc.test.cutesy import hit, make
 from pyherc.test.cutesy.dictionary import add_history_value, get_history_value
-from hamcrest import assert_that, is_, less_than, equal_to
+
 
 @when('{attacker_name} hits {target_name}')
 def impl(context, attacker_name, target_name):

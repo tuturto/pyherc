@@ -21,17 +21,16 @@
 Module for item effect tests
 """
 #pylint: disable=W0614
-from pyherc.rules.consume import DrinkFactory
-from pyherc.rules import drink
-from pyherc.rules import ActionFactory
 from random import Random
 
-from pyherc.test.builders import CharacterBuilder
-from pyherc.test.builders import ItemBuilder
-from pyherc.test.builders import EffectHandleBuilder
-from pyherc.test.builders import HealBuilder
-from hamcrest import assert_that, is_, equal_to, has_item, is_not, greater_than #pylint: disable-msg=E0611
-from mockito import mock, when, any
+from hamcrest import (assert_that, equal_to, greater_than, has_item, is_, 
+                      is_not)
+from mockito import any, mock, when
+from pyherc.rules import ActionFactory, drink
+from pyherc.rules.consume import DrinkFactory
+from pyherc.test.builders import (CharacterBuilder, EffectHandleBuilder,
+                                  HealBuilder, ItemBuilder)
+
 
 class TestPotions():
     """

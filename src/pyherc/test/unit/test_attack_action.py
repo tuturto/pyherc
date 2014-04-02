@@ -20,12 +20,12 @@
 """
 Module for testing attack action related classes
 """
-from pyherc.rules.combat.action import Damage, AttackAction
-from pyherc.test.builders import CharacterBuilder, ItemBuilder
-from pyherc.test.builders import EffectHandleBuilder
-from hamcrest import assert_that, is_, equal_to
-from mockito import mock, when, any, verify
+from hamcrest import assert_that, equal_to, is_
+from mockito import any, mock, verify, when
 from pyherc.data.geometry import TargetData
+from pyherc.rules.combat.action import AttackAction, Damage
+from pyherc.test.builders import (CharacterBuilder, EffectHandleBuilder,
+                                  ItemBuilder)
 
 
 class TestDamage():

@@ -20,9 +20,10 @@
 """
 Module for various helpers
 """
-from pyherc.aspects import log_debug
-from math import sqrt
 from functools import partial
+from math import sqrt
+
+from pyherc.aspects import log_debug
 
 
 @log_debug

@@ -20,15 +20,17 @@
 """
 Module for testing ranged combat related rules
 """
+from random import Random
+
+from hamcrest import assert_that, equal_to, is_, is_not
+from mockito import any, mock, verify, when
+from pyherc.rules import attack
 from pyherc.rules.combat import RangedCombatFactory
 from pyherc.rules.combat.interface import AttackParameters
-from pyherc.rules import attack
+from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
+                                  ItemBuilder, LevelBuilder)
 from pyherc.test.matchers import AttackActionParameterMatcher, does_have
-from pyherc.test.builders import LevelBuilder, CharacterBuilder, ItemBuilder
-from pyherc.test.builders import ActionFactoryBuilder
-from mockito import verify, mock, when, any
-from hamcrest import assert_that, is_, equal_to, is_not #pylint: disable-msg=E0611
-from random import Random
+
 
 class TestRangedCombat():
     """

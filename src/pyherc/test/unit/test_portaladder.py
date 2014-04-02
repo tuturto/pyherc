@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -21,15 +20,17 @@
 """
 Module for testing PortalAdder functionality
 """
-#pylint: disable=W0614
-from pyherc.data import Level
-from pyherc.generators.level.portals import PortalAdder, PortalAdderFactory
-from pyherc.generators.level.portals import PortalAdderConfiguration
-from pyherc.generators.level.generator import LevelGenerator
-from hamcrest import assert_that, has_length, is_, equal_to #pylint: disable-msg=E0611
-from pyherc.test.matchers import located_in_room
-from mockito import mock
 import random
+
+from hamcrest import assert_that, equal_to, is_, has_length
+from mockito import mock
+from pyherc.data import Level
+from pyherc.generators.level.generator import LevelGenerator
+from pyherc.generators.level.portals import (PortalAdder,
+                                             PortalAdderConfiguration,
+                                             PortalAdderFactory)
+from pyherc.test.matchers import located_in_room
+
 
 class TestPortalAdder():
     """

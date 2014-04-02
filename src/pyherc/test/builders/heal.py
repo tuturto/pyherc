@@ -20,8 +20,8 @@
 """
 Module for building heal related objects
 """
-from pyherc.data.effects import Heal
 from mockito import mock
+from pyherc.data.effects import Heal
 
 
 class HealBuilder():

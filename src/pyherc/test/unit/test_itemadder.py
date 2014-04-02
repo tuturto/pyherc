@@ -22,18 +22,18 @@
 Tests for ItemAdder
 """
 #pylint: disable=W0614
-from hamcrest import assert_that, has_length, greater_than, less_than #pylint: disable-msg=E0611
-from hamcrest import greater_than_or_equal_to #pylint: disable-msg=E0611
-from pyherc.test.matchers import located_in_room, does_have_item
-
-from pyherc.data import Level
-from pyherc.generators.item import ItemGenerator
-from pyherc.generators.item import ItemConfiguration, ItemConfigurations
-from pyherc.generators.item import WeaponConfiguration
-from pyherc.data.effects import EffectHandle
-from pyherc.generators.level.items import ItemAdder
-from pyherc.generators.level.items import ItemAdderConfiguration
 from random import Random
+
+from hamcrest import (assert_that,  # pylint: disable-msg=E0611; pylint: disable-msg=E0611
+                      greater_than, greater_than_or_equal_to, has_length,
+                      less_than)
+from pyherc.data import Level
+from pyherc.data.effects import EffectHandle
+from pyherc.generators.item import (ItemConfiguration, ItemConfigurations,
+                                    ItemGenerator, WeaponConfiguration)
+from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
+from pyherc.test.matchers import does_have_item, located_in_room
+
 
 class TestItemAdder():
     """

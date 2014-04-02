@@ -21,28 +21,21 @@
 Module for testing effects
 """
 
-from pyherc.data.effects import Heal
-from pyherc.data.effects import Poison
-from pyherc.data.effects import Effect
+from hamcrest import assert_that, equal_to, is_, is_not
+from mockito import any, mock, never, verify, when
 from pyherc.data import Model
-from pyherc.generators import EffectsFactory
-from pyherc.data.effects import EffectHandle
-from pyherc.rules.combat.action import AttackAction
-from pyherc.rules import drink
+from pyherc.data.effects import Effect, EffectHandle, Heal, Poison
 from pyherc.data.geometry import TargetData
-from pyherc.rules import attack
-
 from pyherc.events import PoisonAddedEvent
-from pyherc.test.builders import CharacterBuilder, ItemBuilder
-from pyherc.test.builders import EffectHandleBuilder, ActionFactoryBuilder
-from pyherc.test.builders import DrinkFactoryBuilder
-from pyherc.test.builders import EffectBuilder
-from pyherc.test.builders import LevelBuilder
-from pyherc.test.matchers import has_effect, has_effects, has_no_effects
-from pyherc.test.matchers import EventType
-
-from mockito import mock, when, any, verify, never
-from hamcrest import assert_that, is_, equal_to, is_not
+from pyherc.generators import EffectsFactory
+from pyherc.rules import attack, drink
+from pyherc.rules.combat.action import AttackAction
+from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
+                                  DrinkFactoryBuilder, EffectBuilder,
+                                  EffectHandleBuilder, ItemBuilder,
+                                  LevelBuilder)
+from pyherc.test.matchers import (EventType, has_effect, has_effects,
+                                  has_no_effects)
 
 
 class TestEffects():

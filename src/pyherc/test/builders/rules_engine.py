@@ -20,8 +20,8 @@
 """
 Module for rules engine builder
 """
-from pyherc.rules import RulesEngine
 from mockito import mock
+from pyherc.rules import RulesEngine
 
 
 class RulesEngineBuilder():

@@ -21,17 +21,17 @@
 Tests for magical spells
 """
 
-from pyherc.test.builders import LevelBuilder, CharacterBuilder
-from pyherc.test.builders import SpellGeneratorBuilder, SpellBuilder
-from pyherc.test.helpers import EventListener
-from pyherc.generators import EffectsFactory
-from pyherc.data.effects import EffectHandle, Effect
+from hamcrest import assert_that, equal_to, is_, is_in
+from mockito import any, mock, verify, when
+from pyherc.data.effects import Effect, EffectHandle
 from pyherc.data.magic import Spell
+from pyherc.generators import EffectsFactory
 from pyherc.rules.ending import Dying
 from pyherc.rules.magic.action import SpellCastingAction
+from pyherc.test.builders import (CharacterBuilder, LevelBuilder, SpellBuilder,
+                                  SpellGeneratorBuilder)
+from pyherc.test.helpers import EventListener
 
-from hamcrest import assert_that, is_in, is_, equal_to  #pylint: disable-msg=E0611
-from mockito import mock, verify, when, any
 
 class TestSpellTargetingSingle():
     """

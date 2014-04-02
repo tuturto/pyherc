@@ -21,8 +21,8 @@
 Module defining classes related to inventory actions
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.rules.factory import SubActionFactory
 from pyherc.events import EquipEvent
+from pyherc.rules.factory import SubActionFactory
 
 
 class EquipFactory(SubActionFactory):

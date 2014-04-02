@@ -21,8 +21,8 @@
 Module for dungeon generation
 """
 
-from pyherc.data import Dungeon
 from pyherc.aspects import log_debug, log_info
+from pyherc.data import Dungeon
 
 
 class DungeonGenerator():

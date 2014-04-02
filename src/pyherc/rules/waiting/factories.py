@@ -20,9 +20,9 @@
 """
 Wait related factories
 """
+from pyherc.aspects import log_debug, log_info
 from pyherc.rules.factory import SubActionFactory
 from pyherc.rules.waiting.action import WaitAction
-from pyherc.aspects import log_debug, log_info
 
 
 class WaitFactory(SubActionFactory):

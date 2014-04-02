@@ -20,8 +20,8 @@
 """
 Module for building poison related objects
 """
-from pyherc.data.effects import Poison
 from mockito import mock
+from pyherc.data.effects import Poison
 
 
 class PoisonBuilder():

@@ -23,9 +23,9 @@ Utility classes
 BSPSection
 """
 
-import random
-import logging
 import collections
+import logging
+import random
 
 
 class BSPSection():

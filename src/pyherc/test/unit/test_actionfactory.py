@@ -21,14 +21,13 @@
 Module for testing combat related rules
 """
 
-from pyherc.rules.public import ActionFactory
-from pyherc.rules.combat.interface import AttackParameters
-from pyherc.rules.combat.factories import AttackFactory
-from pyherc.rules.moving.factories import MoveFactory
+from hamcrest import assert_that, contains_inanyorder, is_, is_in, same_instance
+from mockito import any, mock, when
 from pyherc.data.model import Model
-from mockito import mock, when, any
-from hamcrest import assert_that, is_in, contains_inanyorder, is_
-from hamcrest import same_instance
+from pyherc.rules.combat.factories import AttackFactory
+from pyherc.rules.combat.interface import AttackParameters
+from pyherc.rules.moving.factories import MoveFactory
+from pyherc.rules.public import ActionFactory
 
 
 class TestActionFactories():

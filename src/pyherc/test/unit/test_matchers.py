@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -21,13 +20,13 @@
 """
 Module for testing customer matchers
 """
-#pylint: disable=W0614, W0212, C0103
 
+from hamcrest import assert_that, equal_to, has_length, is_
 from pyherc.data import Level
-from pyherc.test.matchers.map_connectivity import MapConnectivity
 from pyherc.data.effects import EffectHandle, EffectsCollection
 from pyherc.test.matchers.effect_collection import ContainsEffectHandle
-from hamcrest import assert_that, is_, equal_to, has_length #pylint: disable-msg=E0611
+from pyherc.test.matchers.map_connectivity import MapConnectivity
+
 
 class TestLevelConnectivity():
     """

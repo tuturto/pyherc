@@ -20,11 +20,11 @@
 """
 Module defining classes related to Move
 """
-from pyherc.events import MoveEvent
 from pyherc.aspects import log_debug, log_info
-from pyherc.data.model import ESCAPED_DUNGEON
-from pyherc.data.geometry import find_direction
 from pyherc.data.constants import Duration
+from pyherc.data.geometry import find_direction
+from pyherc.data.model import ESCAPED_DUNGEON
+from pyherc.events import MoveEvent
 
 
 class MoveAction():

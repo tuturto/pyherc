@@ -21,9 +21,9 @@
 Module for poison
 """
 from pyherc.aspects import log_debug
-from pyherc.events import PoisonTriggeredEvent, PoisonAddedEvent
-from pyherc.events import PoisonEndedEvent
 from pyherc.data.effects.effect import Effect
+from pyherc.events import (PoisonAddedEvent, PoisonEndedEvent,
+                           PoisonTriggeredEvent)
 
 
 class Poison(Effect):

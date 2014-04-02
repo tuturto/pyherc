@@ -20,9 +20,9 @@
 """
 Module for creature generation related classes
 """
+from pyherc.aspects import log_debug, log_info
 from pyherc.data import Character
 from pyherc.data.effects import EffectHandle
-from pyherc.aspects import log_debug, log_info
 
 
 class CreatureGenerator():
