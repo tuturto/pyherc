@@ -3,6 +3,7 @@
 [![version](https://pypip.in/v/herculeum/badge.png)](https://crate.io/packages/herculeum)
 [![Downloads](https://pypip.in/d/herculeum/badge.png)](https://crate.io/packages/herculeum)
 [![Dependency Status](https://gemnasium.com/tuturto/pyherc.svg)](https://gemnasium.com/tuturto/pyherc)
+[![License](https://pypip.in/license/herculeum/badge.png)](https://pypi.python.org/pypi/herculeum/)
 Intro
 =====
 Herculeum is a dungeon adventuring game in a spirit of Rogue and Nethack.
