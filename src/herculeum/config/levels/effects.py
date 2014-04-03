@@ -20,7 +20,8 @@
 """
 module for configuring effects
 """
-from pyherc.data.effects import Heal, Poison, Damage
+from pyherc.data.effects import Damage, Heal, Poison
+
 
 def init_effects(context):
     """

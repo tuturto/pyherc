@@ -22,7 +22,7 @@ Module for testing PortalAdder functionality
 """
 import random
 
-from hamcrest import assert_that, equal_to, is_, has_length
+from hamcrest import assert_that, equal_to, has_length, is_
 from mockito import mock
 from pyherc.data import Level
 from pyherc.generators.level.generator import LevelGenerator

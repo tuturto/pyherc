@@ -20,7 +20,8 @@
 """
 Module for inventory actions
 """
-from pyherc.rules import pick_up, drop_item, equip, unequip, drink
+from pyherc.rules import drink, drop_item, equip, pick_up, unequip
+
 
 class InventoryController():
     """

@@ -20,12 +20,13 @@
 """
 Module for map screen
 """
-from pyherc.aspects import log_debug, log_info
-from pyherc.rules import move, is_move_legal, pick_up, attack, wait
-from herculeum.ui.text.inventory import InventoryScreen
+from herculeum.ui.controllers import EndScreenController, MoveController
 from herculeum.ui.text.character import CharacterScreen
 from herculeum.ui.text.endscreen import EndScreen
-from herculeum.ui.controllers import MoveController, EndScreenController
+from herculeum.ui.text.inventory import InventoryScreen
+from pyherc.aspects import log_debug, log_info
+from pyherc.rules import attack, is_move_legal, move, pick_up, wait
+
 
 class MapScreen():
     """

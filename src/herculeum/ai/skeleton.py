@@ -21,11 +21,12 @@
 AI routines for skeletons
 """
 
-from pyherc.aspects import log_debug
 from pyherc.ai.pathfinding import a_star
+from pyherc.aspects import log_debug
 from pyherc.data.geometry import find_direction
-from pyherc.events import NoticeEvent, LoseFocusEvent
-from pyherc.rules import move, is_move_legal, equip, attack
+from pyherc.events import LoseFocusEvent, NoticeEvent
+from pyherc.rules import attack, equip, is_move_legal, move
+
 
 class SkeletonWarriorAI():
     """

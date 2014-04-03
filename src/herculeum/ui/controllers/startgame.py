@@ -20,8 +20,8 @@
 """
 Module for starting game
 """
-from pyherc.generators import DungeonGenerator
 from pyherc.aspects import log_debug
+from pyherc.generators import DungeonGenerator
 
 
 class StartGameController():

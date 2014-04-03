@@ -22,6 +22,7 @@ Module for UI Configuration
 """
 from PyQt4.QtCore import Qt
 
+
 class QtControlsConfiguration():
     """
     Configuration for user interface controls

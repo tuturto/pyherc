@@ -21,9 +21,11 @@
 module for configuring player characters
 """
 import datetime
+
 from pyherc.data import SpecialTime
 from pyherc.generators import CreatureConfiguration, InventoryConfiguration
 from pyherc.rules.calendar import get_special_events
+
 
 def init_players(context):
     """

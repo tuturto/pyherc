@@ -20,13 +20,15 @@
 """
 Module for application level objects
 """
-from pyherc.aspects import set_logger
-from herculeum.config import Configuration
-from pyherc.data.model import Model
-import sys
 import logging
+import sys
+
 import herculeum.config.levels
 import hy
+from herculeum.config import Configuration
+from pyherc.aspects import set_logger
+from pyherc.data.model import Model
+
 
 class Application():
     """

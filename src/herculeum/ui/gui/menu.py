@@ -21,9 +21,10 @@
 """
 Module for displaying menu
 """
-from herculeum.ui.gui.inventory import InventoryWidget
 from herculeum.ui.gui.character import CharacterWidget
+from herculeum.ui.gui.inventory import InventoryWidget
 from PyQt4.QtGui import QDialog, QTabWidget, QVBoxLayout
+
 
 class MenuDialog(QDialog):
     """

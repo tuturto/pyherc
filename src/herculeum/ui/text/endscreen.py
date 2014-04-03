@@ -23,6 +23,7 @@ Module for end screen
 """
 from datetime import date
 
+
 class EndScreen():
     """
     Screen for displaying end of the game results

@@ -20,8 +20,9 @@
 """
 Module for small widgets
 """
-from PyQt4.QtGui import QWidget, QLabel, QDockWidget, QHBoxLayout
-from PyQt4.QtGui import QFrame, QGridLayout, QVBoxLayout
+from PyQt4.QtGui import (QDockWidget, QFrame, QGridLayout, QHBoxLayout, QLabel,
+                         QVBoxLayout, QWidget)
+
 
 class HitPointsWidget(QWidget):
     """
@@ -409,4 +410,3 @@ class TimerAdapter():
 
         for glyph in self.glyphs:
             glyph.animate(self.frame)
-

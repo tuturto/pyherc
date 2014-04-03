@@ -21,38 +21,34 @@
 module for configuring first gate
 """
 import hy
-from pyherc.generators.level.room import SquareRoomGenerator
-from pyherc.generators.level.room import PillarRoomGenerator
-from pyherc.generators.level.partitioners import GridPartitioner
-
-from pyherc.generators.level.decorator import ReplacingDecorator
-from pyherc.generators.level.decorator import ReplacingDecoratorConfig
-from pyherc.generators.level.decorator import WallBuilderDecorator
-from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
-from pyherc.generators.level.decorator import DirectionalWallDecoratorConfig
-from pyherc.generators.level.decorator import DirectionalWallDecorator
-from pyherc.generators.level.decorator import FloorBuilderDecoratorConfig
-from pyherc.generators.level.decorator import FloorBuilderDecorator
-from pyherc.generators.level.decorator import AggregateDecorator
-from pyherc.generators.level.decorator import AggregateDecoratorConfig
-from pyherc.generators.level.decorator import WallOrnamentDecorator
-from pyherc.generators.level.decorator import WallOrnamentDecoratorConfig
-
-from pyherc.generators.level.items import ItemAdderConfiguration, ItemAdder
-from pyherc.generators.level.creatures import CreatureAdderConfiguration
-from pyherc.generators.level.creatures import CreatureAdder
-from pyherc.generators import InventoryConfiguration
-from pyherc.generators.level.portals import PortalAdderConfiguration
-
-from pyherc.config.dsl import LevelConfiguration, LevelContext
-from pyherc.generators import CreatureConfiguration
 from herculeum.ai import FlockingHerbivore, SkeletonWarriorAI
-from herculeum.ai.rat import RatAI
 from herculeum.ai.firebeetle import FireBeetleAI
+from herculeum.ai.rat import RatAI
+from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data.effects import DamageModifier
+from pyherc.generators import CreatureConfiguration, InventoryConfiguration
+from pyherc.generators.level.creatures import (CreatureAdder,
+                                               CreatureAdderConfiguration)
+from pyherc.generators.level.decorator import (AggregateDecorator,
+                                               AggregateDecoratorConfig,
+                                               DirectionalWallDecorator,
+                                               DirectionalWallDecoratorConfig,
+                                               FloorBuilderDecorator,
+                                               FloorBuilderDecoratorConfig,
+                                               ReplacingDecorator,
+                                               ReplacingDecoratorConfig,
+                                               WallBuilderDecorator,
+                                               WallBuilderDecoratorConfig,
+                                               WallOrnamentDecorator,
+                                               WallOrnamentDecoratorConfig)
+from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
+from pyherc.generators.level.partitioners import GridPartitioner
+from pyherc.generators.level.portals import PortalAdderConfiguration
+from pyherc.generators.level.room import (PillarRoomGenerator,
+                                          SquareRoomGenerator)
+from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
+                                    PIERCING_DAMAGE, POISON_DAMAGE)
 
-from pyherc.rules.constants import PIERCING_DAMAGE, CRUSHING_DAMAGE
-from pyherc.rules.constants import LIGHT_DAMAGE, POISON_DAMAGE
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
     """

@@ -20,7 +20,7 @@
 """
 Module for moving
 """
-from pyherc.rules import move, is_move_legal, attack
+from pyherc.rules import attack, is_move_legal, move
 
 
 class MoveController():

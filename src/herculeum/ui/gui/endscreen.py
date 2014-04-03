@@ -21,8 +21,10 @@
 """
 Module for displaying end screen
 """
-from PyQt4.QtGui import QDialog, QVBoxLayout, QLabel
 from datetime import date
+
+from PyQt4.QtGui import QDialog, QLabel, QVBoxLayout
+
 
 class EndScreen(QDialog):
     """

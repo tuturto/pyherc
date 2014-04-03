@@ -21,8 +21,10 @@
 Module for curses user interface
 """
 import curses
-from herculeum.ui.text.main_window import MainWindow
+
 from herculeum.ui.controllers import StartGameController
+from herculeum.ui.text.main_window import MainWindow
+
 
 class CursesUserInterface():
     """

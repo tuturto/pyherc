@@ -20,19 +20,20 @@
 """
 Module for main map related functionality
 """
-from PyQt4.QtGui import QWidget, QHBoxLayout, QVBoxLayout
-from PyQt4.QtGui import QGraphicsPixmapItem, QGraphicsView, QGraphicsScene
-from PyQt4.QtGui import QGraphicsSimpleTextItem, QColor
-from PyQt4.QtGui import QFont, QTransform
-from PyQt4.QtCore import QSize, Qt, QPropertyAnimation, QObject, pyqtProperty
-from PyQt4.QtCore import QAbstractAnimation, QSequentialAnimationGroup
-from PyQt4.QtCore import QEasingCurve, pyqtSignal, QEvent, QTimer
-from herculeum.ui.gui.eventdisplay import EventMessageWidget
-from herculeum.ui.gui.widgets import HitPointsWidget, EffectsWidget
-from herculeum.ui.gui.widgets import SpellSelectorWidget, TimerAdapter
-from herculeum.ui.controllers import MoveController
-from pyherc.rules import move, is_move_legal, cast, pick_up, attack, wait
 from random import Random
+
+from herculeum.ui.controllers import MoveController
+from herculeum.ui.gui.eventdisplay import EventMessageWidget
+from herculeum.ui.gui.widgets import (EffectsWidget, HitPointsWidget,
+                                      SpellSelectorWidget, TimerAdapter)
+from pyherc.rules import attack, cast, is_move_legal, move, pick_up, wait
+from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
+                          QEasingCurve, QEvent, QObject, QPropertyAnimation,
+                          QSequentialAnimationGroup, QSize, Qt, QTimer)
+from PyQt4.QtGui import (QColor, QFont, QGraphicsPixmapItem, QGraphicsScene,
+                         QGraphicsSimpleTextItem, QGraphicsView, QHBoxLayout,
+                         QTransform, QVBoxLayout, QWidget)
+
 
 class PlayMapWindow(QWidget):
     """

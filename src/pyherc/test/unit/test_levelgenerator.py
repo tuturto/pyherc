@@ -22,8 +22,7 @@ Tests for LevelGenerator
 """
 import random
 
-from hamcrest import (assert_that, contains_string, has_item, is_, 
-                      same_instance)
+from hamcrest import assert_that, contains_string, has_item, is_, same_instance
 from mockito import any, mock, verify, when
 from pyherc.config.dsl import LevelContext
 from pyherc.data import Portal

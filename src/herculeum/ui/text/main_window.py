@@ -21,8 +21,9 @@
 """
 Module for main window related functionality
 """
-from herculeum.ui.text.start_game import StartGameScreen
 from herculeum.ui.text.map import MapScreen
+from herculeum.ui.text.start_game import StartGameScreen
+
 
 class MainWindow():
     """

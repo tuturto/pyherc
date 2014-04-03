@@ -21,9 +21,9 @@
 Module for start game window related functionality
 """
 from herculeum.ui.gui.widgets import AnimatedLabel, TimerAdapter
-from PyQt4.QtGui import QDialog, QSizePolicy, QVBoxLayout
-from PyQt4.QtGui import QHBoxLayout, QLabel
 from PyQt4.QtCore import Qt, QTimer
+from PyQt4.QtGui import QDialog, QHBoxLayout, QLabel, QSizePolicy, QVBoxLayout
+
 
 class StartGameWidget(QDialog):
     """

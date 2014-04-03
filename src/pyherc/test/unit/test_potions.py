@@ -23,8 +23,7 @@ Module for item effect tests
 #pylint: disable=W0614
 from random import Random
 
-from hamcrest import (assert_that, equal_to, greater_than, has_item, is_, 
-                      is_not)
+from hamcrest import assert_that, equal_to, greater_than, has_item, is_, is_not
 from mockito import any, mock, when
 from pyherc.rules import ActionFactory, drink
 from pyherc.rules.consume import DrinkFactory

@@ -21,11 +21,10 @@
 """
 Module for displaying character
 """
-from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
-from PyQt4.QtGui import QGridLayout
+from herculeum.ui.gui.widgets import ListView
+from PyQt4.QtGui import QGridLayout, QHBoxLayout, QLabel, QVBoxLayout, QWidget
 from PyQt4.QtSvg import QSvgWidget
 
-from herculeum.ui.gui.widgets import ListView
 
 class CharacterWidget(QWidget):
     """

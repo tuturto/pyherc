@@ -21,12 +21,12 @@
 """
 Module for helpers
 """
-from herculeum.config import Configuration
-from pyherc.data.model import Model
 import herculeum.config.levels
-from herculeum.ui.gui import QtControlsConfiguration, QtSurfaceManager
-from PyQt4.QtGui import QApplication
 import herculeum.ui.gui.resources
+from herculeum.config import Configuration
+from herculeum.ui.gui import QtControlsConfiguration, QtSurfaceManager
+from pyherc.data.model import Model
+from PyQt4.QtGui import QApplication
 
 qt_app = None
 world = None

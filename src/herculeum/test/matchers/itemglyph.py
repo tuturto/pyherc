@@ -24,6 +24,7 @@ Package for custom hamcrest matchers for ItemGlyph
 
 from hamcrest.core.base_matcher import BaseMatcher
 
+
 class ItemGlyphMatcher(BaseMatcher):
     """
     Class to check ItemGlyph

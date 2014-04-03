@@ -20,14 +20,13 @@
 """
 Module for displaying inventory
 """
-from PyQt4.QtGui import QWidget, QLabel, QHBoxLayout, QVBoxLayout
-from PyQt4.QtGui import QGridLayout, QPainter, QFont
-from PyQt4.QtGui import QTextEdit, QPixmap, QApplication
-from PyQt4.QtSvg import QSvgWidget
-from PyQt4.QtCore import Qt, pyqtSignal
-
 from herculeum.ui.controllers import InventoryController
 from pyherc.data import Item
+from PyQt4.QtCore import pyqtSignal, Qt
+from PyQt4.QtGui import (QApplication, QFont, QGridLayout, QHBoxLayout, QLabel,
+                         QPainter, QPixmap, QTextEdit, QVBoxLayout, QWidget)
+from PyQt4.QtSvg import QSvgWidget
+
 
 class CharacterInventoryWidget(QWidget):
     """

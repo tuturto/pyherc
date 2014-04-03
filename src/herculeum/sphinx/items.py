@@ -21,13 +21,15 @@
 """
 Module for item statistics
 """
+import os.path
+
 from docutils import nodes
 from docutils.parsers.rst import Directive
-from docutils.parsers.rst.directives.images import Image
 from docutils.parsers.rst.directives import unchanged
-from herculeum.sphinx.helpers import with_config, shutdown_application
-import os.path
-from PyQt4.QtGui import QImage, QPainter, QColor
+from docutils.parsers.rst.directives.images import Image
+from herculeum.sphinx.helpers import shutdown_application, with_config
+from PyQt4.QtGui import QColor, QImage, QPainter
+
 
 class ItemDescription(nodes.General, nodes.Element):
     """

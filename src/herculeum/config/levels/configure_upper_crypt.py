@@ -20,36 +20,31 @@
 """
 module for configuring upper crypt
 """
-from pyherc.generators.level.partitioners import GridPartitioner
-from pyherc.generators.level.room import SquareRoomGenerator
-from pyherc.generators.level.room import PillarRoomGenerator
-from pyherc.generators.level.room import PitRoomGenerator
-from pyherc.data.traps import PitTrap
-
-from pyherc.generators.level.decorator import ReplacingDecorator
-from pyherc.generators.level.decorator import ReplacingDecoratorConfig
-from pyherc.generators.level.decorator import WallBuilderDecorator
-from pyherc.generators.level.decorator import WallBuilderDecoratorConfig
-from pyherc.generators.level.decorator import DirectionalWallDecoratorConfig
-from pyherc.generators.level.decorator import DirectionalWallDecorator
-from pyherc.generators.level.decorator import FloorBuilderDecoratorConfig
-from pyherc.generators.level.decorator import FloorBuilderDecorator
-from pyherc.generators.level.decorator import AggregateDecorator
-from pyherc.generators.level.decorator import AggregateDecoratorConfig
-from pyherc.generators.level.decorator import WallOrnamentDecorator
-from pyherc.generators.level.decorator import WallOrnamentDecoratorConfig
-
-from pyherc.generators.level.items import ItemAdderConfiguration, ItemAdder
-from pyherc.generators.level.creatures import CreatureAdderConfiguration
-from pyherc.generators.level.creatures import CreatureAdder
-
-from pyherc.generators.level.portals import PortalAdderConfiguration
-
 from herculeum.ai import FlockingHerbivore
-from pyherc.generators import CreatureConfiguration
-from pyherc.data.effects import EffectHandle
-
 from pyherc.config.dsl import LevelConfiguration, LevelContext
+from pyherc.data.effects import EffectHandle
+from pyherc.data.traps import PitTrap
+from pyherc.generators import CreatureConfiguration
+from pyherc.generators.level.creatures import (CreatureAdder,
+                                               CreatureAdderConfiguration)
+from pyherc.generators.level.decorator import (AggregateDecorator,
+                                               AggregateDecoratorConfig,
+                                               DirectionalWallDecorator,
+                                               DirectionalWallDecoratorConfig,
+                                               FloorBuilderDecorator,
+                                               FloorBuilderDecoratorConfig,
+                                               ReplacingDecorator,
+                                               ReplacingDecoratorConfig,
+                                               WallBuilderDecorator,
+                                               WallBuilderDecoratorConfig,
+                                               WallOrnamentDecorator,
+                                               WallOrnamentDecoratorConfig)
+from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
+from pyherc.generators.level.partitioners import GridPartitioner
+from pyherc.generators.level.portals import PortalAdderConfiguration
+from pyherc.generators.level.room import (PillarRoomGenerator, PitRoomGenerator,
+                                          SquareRoomGenerator)
+
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
     """

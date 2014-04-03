@@ -24,9 +24,11 @@ Creature will try to find friends, before attacking the player character
 """
 
 import math
+
 from pyherc.aspects import log_debug
 from pyherc.data.geometry import find_direction
-from pyherc.rules import move, is_move_legal, attack
+from pyherc.rules import attack, is_move_legal, move
+
 
 class FlockingHerbivore():
     """

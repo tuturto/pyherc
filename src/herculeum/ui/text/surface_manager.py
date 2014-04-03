@@ -20,8 +20,10 @@
 """
 Module for handling loading of images and icons
 """
-from pyherc.aspects import log_debug
 import curses
+
+from pyherc.aspects import log_debug
+
 
 class CursesSurfaceManager():
     """

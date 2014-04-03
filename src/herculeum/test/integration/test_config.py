@@ -22,12 +22,13 @@ Module for testing main configuration
 """
 
 #pylint: disable=W0614
-from herculeum.config import Configuration
-from pyherc.rules.inventory.interface import InventoryParameters
-from mockito import mock
-from hamcrest import assert_that, is_, not_none #pylint: disable-msg=E0611
-from PyQt4.QtGui import QApplication
 import herculeum.config.levels
+from hamcrest import assert_that, is_, not_none  # pylint: disable-msg=E0611
+from herculeum.config import Configuration
+from mockito import mock
+from pyherc.rules.inventory.interface import InventoryParameters
+from PyQt4.QtGui import QApplication
+
 
 class TestMainConfiguration():
     """

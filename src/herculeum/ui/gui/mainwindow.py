@@ -21,18 +21,16 @@
 Module for main window related functionality
 """
 
-from herculeum.ui.gui.startgame import StartGameWidget
-from herculeum.ui.gui.map import PlayMapWindow
-from herculeum.ui.gui.eventdisplay import EventMessageDockWidget
-from herculeum.ui.gui.menu import MenuDialog
-from herculeum.ui.gui.endscreen import EndScreen
-from herculeum.ui.controllers import EndScreenController, StartGameController
-from PyQt4.QtGui import QMainWindow, QAction, QIcon
-from PyQt4.QtGui import QDialog
-from PyQt4.QtGui import QPixmap, QSplashScreen
-from PyQt4.QtCore import Qt, QFile
-from PyQt4.QtGui import QApplication, QCursor
 import PyQt4.QtGui
+from herculeum.ui.controllers import EndScreenController, StartGameController
+from herculeum.ui.gui.endscreen import EndScreen
+from herculeum.ui.gui.eventdisplay import EventMessageDockWidget
+from herculeum.ui.gui.map import PlayMapWindow
+from herculeum.ui.gui.menu import MenuDialog
+from herculeum.ui.gui.startgame import StartGameWidget
+from PyQt4.QtCore import QFile, Qt
+from PyQt4.QtGui import (QAction, QApplication, QCursor, QDialog, QIcon,
+                         QMainWindow, QPixmap, QSplashScreen)
 
 
 class QtUserInterface():

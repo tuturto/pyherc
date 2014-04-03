@@ -20,13 +20,12 @@
 """
 module for configuring catacombs
 """
-from pyherc.generators import ItemConfiguration, WeaponConfiguration
-from pyherc.generators import AmmunitionConfiguration
-from pyherc.generators import ArmourConfiguration
 from pyherc.data.effects import EffectHandle
+from pyherc.generators import (AmmunitionConfiguration, ArmourConfiguration,
+                               ItemConfiguration, WeaponConfiguration)
+from pyherc.rules.constants import (CRUSHING_DAMAGE, PIERCING_DAMAGE,
+                                    SLASHING_DAMAGE)
 
-from pyherc.rules.constants import PIERCING_DAMAGE, CRUSHING_DAMAGE
-from pyherc.rules.constants import SLASHING_DAMAGE
 
 def init_items(context):
     """
