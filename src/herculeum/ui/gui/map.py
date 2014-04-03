@@ -23,6 +23,7 @@ Module for main map related functionality
 from random import Random
 
 from herculeum.ui.controllers import MoveController
+from herculeum.ui.gui.animations import AnimationFactory
 from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import (EffectsWidget, HitPointsWidget,
                                       SpellSelectorWidget, TimerAdapter)
@@ -194,6 +195,8 @@ class PlayMapWidget(QWidget):
         self.__set_layout()
         self.keymap, self.move_key_map = self._construct_keymaps(
                                                         configuration.controls)
+
+        self.animation_factory = AnimationFactory()
 
     MenuRequested = pyqtSignal(name='MenuRequested')
     EndScreenRequested = pyqtSignal(name='EndScreenRequested')
@@ -369,10 +372,10 @@ class PlayMapWidget(QWidget):
         elif event.event_type == 'drop':
             self.add_glyph(event.item, self.scene, zorder_item)
         elif event.event_type == 'attack hit':
-            damage = event.damage.damage_inflicted
-            self.show_damage_counter(event.target.location,
-                                     -damage,
-                                     'white')
+            anim = self.animation_factory.create_animation(event)
+            anim.trigger(self.view,
+                         self.animations,
+                         self.remove_finished_animation)
         elif event.event_type == 'damage triggered':
             damage = event.damage
             self.show_damage_counter(event.target.location,
