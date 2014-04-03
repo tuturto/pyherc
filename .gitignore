@@ -1,20 +1,7 @@
-*.pyc
 *.e4q
 *.e4t
-*.html~
-*.hy~
-*.py~
-*.rst~
-report.html
-pyherc.log
 setup.cfg
-.coverage
-test_results.html
-nosetests.xml
 manual.qch
 herculeum.qhc
-build/
-dist/
 pyherc.geany
-doc/behave/report.txt
 
