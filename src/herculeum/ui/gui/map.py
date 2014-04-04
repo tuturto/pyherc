@@ -354,27 +354,7 @@ class PlayMapWidget(QWidget):
         anim = self.animation_factory.create_animation(event)
         anim.trigger(self)
 
-        if event.event_type == 'death':
-            glyphs = [x for x in self.view.items()
-                      if (hasattr(x, 'entity'))
-                      and (x.entity == event.deceased)]
-
-            for glyph in glyphs:
-                self.view.scene().removeItem(glyph)
-
-            if event.deceased == self.model.player:
-                self.EndScreenRequested.emit()
-        elif event.event_type == 'pick up':
-            glyphs = [x for x in self.view.items()
-                      if (hasattr(x, 'entity'))
-                      and (x.entity == event.item)]
-
-            for glyph in glyphs:
-                self.view.scene().removeItem(glyph)
-
-        elif event.event_type == 'drop':
-            self.add_glyph(event.item, self.scene, zorder_item)
-        elif event.event_type == 'poisoned':
+        if event.event_type == 'poisoned':
             self.show_status_counter(event.target.location,
                                      'poisoned',
                                      'green',

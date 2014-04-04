@@ -39,7 +39,10 @@ class AnimationFactory():
         """
         self.animations = {
             'attack hit': AttackHitAnimation,
-            'damage triggered': DamageTriggeredAnimation
+            'damage triggered': DamageTriggeredAnimation,
+            'death': DeathAnimation,
+            'drop': DropAnimation,
+            'pick up': PickUpAnimation,
         }
 
     def create_animation(self, event):
@@ -76,6 +79,82 @@ class Animation():
         pass
 
 
+class DropAnimation(Animation):
+    """
+    Generic animation for dropping item
+
+    .. versionadded:: 0.12
+    """
+    def __init__(self, event):
+        """
+        Default constructor
+        """
+        super().__init__(event)
+
+        self.item = event.item
+
+    def trigger(self, ui):
+        """
+        Trigger this animation
+        """
+        ui.add_glyph(self.item, ui.scene, zorder_item)
+
+
+class PickUpAnimation(Animation):
+    """
+    Generic animation for picking up an item
+
+    .. versionadded:: 0.12
+    """
+    def __init__(self, event):
+        """
+        Default constructor
+        """
+        super().__init__(event)
+
+        self.item = event.item
+
+    def trigger(self, ui):
+        """
+        Trigger this animation
+        """
+        glyphs = [x for x in ui.view.items()
+                  if (hasattr(x, 'entity'))
+                  and (x.entity == self.item)]
+
+        for glyph in glyphs:
+            ui.view.scene().removeItem(glyph)
+
+
+class DeathAnimation(Animation):
+    """
+    Generic dying animation
+
+    .. versionadded:: 0.12
+    """
+    def __init__(self, event):
+        """
+        Default constructor
+        """
+        super().__init__(event)
+
+        self.deceased = event.deceased
+
+    def trigger(self, ui):
+        """
+        Trigger this animation
+        """
+        glyphs = [x for x in ui.view.items()
+                  if (hasattr(x, 'entity'))
+                  and (x.entity == self.deceased)]
+
+        for glyph in glyphs:
+            ui.view.scene().removeItem(glyph)
+
+        if self.deceased == ui.model.player:
+            ui.EndScreenRequested.emit()
+
+
 class AttackHitAnimation(Animation):
     """
     Animation for attack hit
@@ -87,6 +166,7 @@ class AttackHitAnimation(Animation):
         Default constructor
         """
         super().__init__(event)
+
         self.location = event.target.location
         self.damage = -event.damage.damage_inflicted
         self.colour = 'white'
@@ -197,6 +277,7 @@ class DamageTriggeredAnimation(Animation):
         animation.start()
 
 
+zorder_item = 2
 zorder_counter = 30
 
 
