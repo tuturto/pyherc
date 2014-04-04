@@ -37,7 +37,10 @@ class AnimationFactory():
         """
         Default constructor
         """
-        pass
+        self.animations = {
+            'attack hit': AttackHitAnimation,
+            'damage triggered': DamageTriggeredAnimation
+        }
 
     def create_animation(self, event):
         """
@@ -48,12 +51,15 @@ class AnimationFactory():
         :returns: animation
         :rtype: Animation
         """
-        return DamageCounterAnimation(event)
+        if event.event_type in self.animations:
+            return self.animations[event.event_type](event)
+        else:
+            return Animation(event)
 
 
-class DamageCounterAnimation():
+class Animation():
     """
-    Animation for damage counter
+    Default animation that does nothing
 
     .. versionadded:: 0.12
     """
@@ -61,10 +67,91 @@ class DamageCounterAnimation():
         """
         Default constructor
         """
+        pass
+
+    def trigger(self, ui):
+        """
+        Trigger this animation
+        """
+        pass
+
+
+class AttackHitAnimation(Animation):
+    """
+    Animation for attack hit
+
+    .. versionadded:: 0.12
+    """
+    def __init__(self, event):
+        """
+        Default constructor
+        """
+        super().__init__(event)
         self.location = event.target.location
         self.damage = -event.damage.damage_inflicted
         self.colour = 'white'
         self.offset = (0, 0)
+
+    def trigger(self, ui):
+        """
+        Trigger this animation
+        """
+        damage_counter = DamageCounter(damage=str(self.damage),
+                                       colour=self.colour,
+                                       parent=ui)
+        ui.view.scene().addItem(damage_counter)
+        damage_counter.setZValue(zorder_counter)
+
+        bounds = damage_counter.boundingRect()
+        width = bounds.width()
+
+        rand = Random()
+
+        damage_counter.setPos((self.location[0] * 32
+                               + 16 - (width / 2)
+                               + rand.randint(-16, 16)) + self.offset[0],
+                              self.location[1] * 32 + self.offset[1])
+
+        animation = QSequentialAnimationGroup()
+
+        moving = QPropertyAnimation(damage_counter.adapter,
+                                    'y_location')
+        moving.setDuration(750)
+        moving.setStartValue(self.location[1] * 32 + self.offset[1])
+        moving.setEndValue(self.location[1] * 32 - 32 + self.offset[1])
+        curve = QEasingCurve(QEasingCurve.OutElastic)
+        moving.setEasingCurve(curve)
+        animation.addAnimation(moving)
+
+        fading = QPropertyAnimation(damage_counter.adapter,
+                                    'opacity')
+        fading.setDuration(750)
+        fading.setStartValue(1.0)
+        fading.setEndValue(0.0)
+        animation.addAnimation(fading)
+
+        animation.finished.connect(ui.remove_finished_animation)
+        ui.animations.append(animation)
+
+        animation.start()
+
+
+class DamageTriggeredAnimation(Animation):
+    """
+    Animation for damage triggering
+
+    .. versionadded:: 0.12
+    """
+    def __init__(self, event):
+        """
+        Default constructor
+        """
+        super().__init__(event)
+
+        self.location = event.target.location
+        self.damage = -event.damage
+        self.colour = 'red'
+        self.offset = (0, 16)
 
     def trigger(self, ui):
         """

@@ -351,6 +351,9 @@ class PlayMapWidget(QWidget):
         """
         Receive event from model
         """
+        anim = self.animation_factory.create_animation(event)
+        anim.trigger(self)
+
         if event.event_type == 'death':
             glyphs = [x for x in self.view.items()
                       if (hasattr(x, 'entity'))
@@ -371,15 +374,6 @@ class PlayMapWidget(QWidget):
 
         elif event.event_type == 'drop':
             self.add_glyph(event.item, self.scene, zorder_item)
-        elif event.event_type == 'attack hit':
-            anim = self.animation_factory.create_animation(event)
-            anim.trigger(self)
-        elif event.event_type == 'damage triggered':
-            damage = event.damage
-            self.show_damage_counter(event.target.location,
-                                     -damage,
-                                     'red',
-                                     (0, 16))
         elif event.event_type == 'poisoned':
             self.show_status_counter(event.target.location,
                                      'poisoned',
