@@ -66,14 +66,14 @@ class DamageCounterAnimation():
         self.colour = 'white'
         self.offset = (0, 0)
 
-    def trigger(self, view, animations, remove_finished_animation):
+    def trigger(self, ui):
         """
         Trigger this animation
         """
         damage_counter = DamageCounter(damage=str(self.damage),
                                        colour=self.colour,
-                                       parent=self)
-        view.scene().addItem(damage_counter)
+                                       parent=ui)
+        ui.view.scene().addItem(damage_counter)
         damage_counter.setZValue(zorder_counter)
 
         bounds = damage_counter.boundingRect()
@@ -104,8 +104,8 @@ class DamageCounterAnimation():
         fading.setEndValue(0.0)
         animation.addAnimation(fading)
 
-        animation.finished.connect(remove_finished_animation)
-        animations.append(animation)
+        animation.finished.connect(ui.remove_finished_animation)
+        ui.animations.append(animation)
 
         animation.start()
 

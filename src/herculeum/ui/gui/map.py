@@ -373,9 +373,7 @@ class PlayMapWidget(QWidget):
             self.add_glyph(event.item, self.scene, zorder_item)
         elif event.event_type == 'attack hit':
             anim = self.animation_factory.create_animation(event)
-            anim.trigger(self.view,
-                         self.animations,
-                         self.remove_finished_animation)
+            anim.trigger(self)
         elif event.event_type == 'damage triggered':
             damage = event.damage
             self.show_damage_counter(event.target.location,
