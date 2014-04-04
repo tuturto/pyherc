@@ -18,9 +18,14 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for gui elements
+Module for defining ui layering order
 """
 
-from .mainwindow import MainWindow, QtUserInterface
-from .config import QtControlsConfiguration
-from .surfaceManager import QtSurfaceManager
+
+zorder_floor = 0
+zorder_item = 2
+zorder_character = 5
+zorder_wall = 10
+zorder_ornament = 20
+
+zorder_counter = 30

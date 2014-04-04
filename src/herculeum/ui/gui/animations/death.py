@@ -18,9 +18,35 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for gui elements
+Classes for death animations
 """
+from .animation import Animation
 
-from .mainwindow import MainWindow, QtUserInterface
-from .config import QtControlsConfiguration
-from .surfaceManager import QtSurfaceManager
+
+class DeathAnimation(Animation):
+    """
+    Generic dying animation
+
+    .. versionadded:: 0.12
+    """
+    def __init__(self, event):
+        """
+        Default constructor
+        """
+        super().__init__(event)
+
+        self.deceased = event.deceased
+
+    def trigger(self, ui):
+        """
+        Trigger this animation
+        """
+        glyphs = [x for x in ui.view.items()
+                  if (hasattr(x, 'entity'))
+                  and (x.entity == self.deceased)]
+
+        for glyph in glyphs:
+            ui.view.scene().removeItem(glyph)
+
+        if self.deceased == ui.model.player:
+            ui.EndScreenRequested.emit()

@@ -18,9 +18,23 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for gui elements
+Base class for animations
 """
 
-from .mainwindow import MainWindow, QtUserInterface
-from .config import QtControlsConfiguration
-from .surfaceManager import QtSurfaceManager
+class Animation():
+    """
+    Default animation that does nothing
+
+    .. versionadded:: 0.12
+    """
+    def __init__(self, event):
+        """
+        Default constructor
+        """
+        pass
+
+    def trigger(self, ui):
+        """
+        Trigger this animation
+        """
+        pass
