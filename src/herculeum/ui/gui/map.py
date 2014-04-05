@@ -354,44 +354,6 @@ class PlayMapWidget(QWidget):
         anim = self.animation_factory.create_animation(event)
         anim.trigger(self)
 
-    def show_status_counter(self, location, status, colour, offset = (0, 0)):
-        """
-        Show status counter
-        """
-        damage_counter = DamageCounter(damage = str(status),
-                                       colour = colour,
-                                       parent = self)
-        self.view.scene().addItem(damage_counter)
-        damage_counter.setZValue(zorder_counter)
-
-        bounds = damage_counter.boundingRect()
-        width = bounds.width()
-
-        damage_counter.setPos(location[0] * 32 + 16 - (width / 2) + offset[0],
-                              location[1] * 32 + offset[1])
-
-        animation = QSequentialAnimationGroup()
-
-        moving = QPropertyAnimation(damage_counter.adapter,
-                                    'y_location')
-        moving.setDuration(750)
-        moving.setStartValue(location[1] * 32)
-        moving.setEndValue(location[1] * 32 - 32)
-
-        animation.addAnimation(moving)
-
-        fading = QPropertyAnimation(damage_counter.adapter,
-                                    'opacity')
-        fading.setDuration(750)
-        fading.setStartValue(1.0)
-        fading.setEndValue(0.0)
-        animation.addAnimation(fading)
-
-        animation.finished.connect(self.remove_finished_animation)
-        self.animations.append(animation)
-
-        animation.start()
-
     def remove_finished_animation(self):
         """
         Remove finished animation
