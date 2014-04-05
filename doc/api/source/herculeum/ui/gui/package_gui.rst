@@ -6,6 +6,7 @@ herculeum.ui.gui
 .. toctree::
    :maxdepth: 2
    
+   animations/package_animations
    module_character
    module_config
    module_endscreen
