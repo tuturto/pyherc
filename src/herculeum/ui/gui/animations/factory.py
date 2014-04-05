@@ -25,7 +25,9 @@ from .animation import Animation
 from .attack import AttackHitAnimation
 from .damage import DamageTriggeredAnimation
 from .death import DeathAnimation
+from .healing import HealTriggeredAnimation
 from .inventory import DropAnimation, PickUpAnimation
+from .poison import PoisonTriggeredAnimation
 
 
 class AnimationFactory():
@@ -43,7 +45,9 @@ class AnimationFactory():
             'damage triggered': DamageTriggeredAnimation,
             'death': DeathAnimation,
             'drop': DropAnimation,
+            'heal triggered': HealTriggeredAnimation,
             'pick up': PickUpAnimation,
+            'poison triggered': PoisonTriggeredAnimation
         }
 
     def create_animation(self, event):

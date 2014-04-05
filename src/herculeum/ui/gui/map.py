@@ -359,19 +359,9 @@ class PlayMapWidget(QWidget):
                                      'poisoned',
                                      'green',
                                      (0, 16))
-        elif event.event_type == 'poison triggered':
-            self.show_damage_counter(event.target.location,
-                                     -event.damage,
-                                     'green',
-                                     (0, 16))
         elif event.event_type == 'heal started':
             self.show_status_counter(event.target.location,
                                      'healing',
-                                     'blue',
-                                     (0, 16))
-        elif event.event_type == 'heal triggered':
-            self.show_damage_counter(event.target.location,
-                                     event.healing,
                                      'blue',
                                      (0, 16))
         elif event.event_type == 'notice':
@@ -409,50 +399,6 @@ class PlayMapWidget(QWidget):
         moving.setStartValue(location[1] * 32)
         moving.setEndValue(location[1] * 32 - 32)
 
-        animation.addAnimation(moving)
-
-        fading = QPropertyAnimation(damage_counter.adapter,
-                                    'opacity')
-        fading.setDuration(750)
-        fading.setStartValue(1.0)
-        fading.setEndValue(0.0)
-        animation.addAnimation(fading)
-
-        animation.finished.connect(self.remove_finished_animation)
-        self.animations.append(animation)
-
-        animation.start()
-
-    def show_damage_counter(self, location, damage, colour, offset = (0, 0)):
-        """
-        Show damage counter
-        """
-        damage_counter = DamageCounter(damage = str(damage),
-                                       colour = colour,
-                                       parent = self)
-        self.view.scene().addItem(damage_counter)
-        damage_counter.setZValue(zorder_counter)
-
-        bounds = damage_counter.boundingRect()
-        width = bounds.width()
-
-        rand = Random()
-
-        damage_counter.setPos((location[0] * 32
-                                    + 16 - (width / 2)
-                                    + rand.randint(-16, 16))
-                                    + offset[0],
-                              location[1] * 32 + offset[1])
-
-        animation = QSequentialAnimationGroup()
-
-        moving = QPropertyAnimation(damage_counter.adapter,
-                                    'y_location')
-        moving.setDuration(750)
-        moving.setStartValue(location[1] * 32 + offset[1])
-        moving.setEndValue(location[1] * 32 - 32 + offset[1])
-        curve = QEasingCurve(QEasingCurve.OutElastic)
-        moving.setEasingCurve(curve)
         animation.addAnimation(moving)
 
         fading = QPropertyAnimation(damage_counter.adapter,
