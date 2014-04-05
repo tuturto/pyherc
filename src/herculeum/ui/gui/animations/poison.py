@@ -28,6 +28,62 @@ from PyQt4.QtCore import (QEasingCurve, QPropertyAnimation,
 from herculeum.ui.gui.layers import zorder_counter
 
 
+class PoisonAddedAnimation(Animation):
+    """
+    Animation for adding poison
+
+    .. versionadded:: 0.12
+    """
+    def __init__(self, event):
+        """
+        Default constructor
+        """
+        super().__init__(event)
+
+        self.location = event.target.location
+        self.text = 'poisoned'
+        self.colour = 'green'
+        self.offset = (0, 16)
+
+    def trigger(self, ui):
+        """
+        Trigger this animation
+        """
+        damage_counter = DamageCounter(damage=self.text,
+                                       colour=self.colour,
+                                       parent=ui)
+        ui.view.scene().addItem(damage_counter)
+        damage_counter.setZValue(zorder_counter)
+
+        bounds = damage_counter.boundingRect()
+        width = bounds.width()
+
+        damage_counter.setPos(self.location[0] * 32 + 16 - (width / 2) + self.offset[0],
+                              self.location[1] * 32 + self.offset[1])
+
+        animation = QSequentialAnimationGroup()
+
+        moving = QPropertyAnimation(damage_counter.adapter,
+                                    'y_location')
+        moving.setDuration(750)
+        moving.setStartValue(self.location[1] * 32)
+        moving.setEndValue(self.location[1] * 32 - 32)
+
+        animation.addAnimation(moving)
+
+        fading = QPropertyAnimation(damage_counter.adapter,
+                                    'opacity')
+        fading.setDuration(750)
+        fading.setStartValue(1.0)
+        fading.setEndValue(0.0)
+        animation.addAnimation(fading)
+
+        animation.finished.connect(ui.remove_finished_animation)
+        ui.animations.append(animation)
+
+        animation.start()
+
+
 class PoisonTriggeredAnimation(Animation):
     """
     Animation for poison triggering
