@@ -354,22 +354,6 @@ class PlayMapWidget(QWidget):
         anim = self.animation_factory.create_animation(event)
         anim.trigger(self)
 
-        if event.event_type == 'heal started':
-            self.show_status_counter(event.target.location,
-                                     'healing',
-                                     'blue',
-                                     (0, 16))
-        elif event.event_type == 'notice':
-            self.show_status_counter(event.character.location,
-                                     '!',
-                                     'red',
-                                     (0, 16))
-        elif event.event_type == 'lose focus':
-            self.show_status_counter(event.character.location,
-                                     '?',
-                                     'yellow',
-                                     (0, 16))
-
     def show_status_counter(self, location, status, colour, offset = (0, 0)):
         """
         Show status counter

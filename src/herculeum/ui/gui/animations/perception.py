@@ -28,9 +28,9 @@ from PyQt4.QtCore import (QEasingCurve, QPropertyAnimation,
 from herculeum.ui.gui.layers import zorder_counter
 
 
-class HealAddedAnimation(Animation):
+class NoticeAnimation(Animation):
     """
-    Animation for adding healing
+    Animation for character noticing something interesting
 
     .. versionadded:: 0.12
     """
@@ -40,9 +40,9 @@ class HealAddedAnimation(Animation):
         """
         super().__init__(event)
 
-        self.location = event.target.location
-        self.text = 'healing'
-        self.colour = 'blue'
+        self.location = event.character.location
+        self.text = '!'
+        self.colour = 'red'
         self.offset = (0, 16)
 
     def trigger(self, ui):
@@ -85,9 +85,9 @@ class HealAddedAnimation(Animation):
         animation.start()
 
 
-class HealTriggeredAnimation(Animation):
+class LoseFocusAnimation(Animation):
     """
-    Animation for heal triggering
+    Animation for character losing focus
 
     .. versionadded:: 0.12
     """
@@ -97,16 +97,16 @@ class HealTriggeredAnimation(Animation):
         """
         super().__init__(event)
 
-        self.location = event.target.location
-        self.damage = event.healing
-        self.colour = 'blue'
+        self.location = event.character.location
+        self.text = '?'
+        self.colour = 'yellow'
         self.offset = (0, 16)
 
     def trigger(self, ui):
         """
         Trigger this animation
         """
-        damage_counter = DamageCounter(damage=str(self.damage),
+        damage_counter = DamageCounter(damage=self.text,
                                        colour=self.colour,
                                        parent=ui)
         ui.view.scene().addItem(damage_counter)
@@ -115,11 +115,8 @@ class HealTriggeredAnimation(Animation):
         bounds = damage_counter.boundingRect()
         width = bounds.width()
 
-        rand = Random()
-
-        damage_counter.setPos((self.location[0] * 32
-                               + 16 - (width / 2)
-                               + rand.randint(-16, 16)) + self.offset[0],
+        damage_counter.setPos(self.location[0] * 32 + 16
+                              - (width / 2) + self.offset[0],
                               self.location[1] * 32 + self.offset[1])
 
         animation = QSequentialAnimationGroup()
@@ -127,10 +124,9 @@ class HealTriggeredAnimation(Animation):
         moving = QPropertyAnimation(damage_counter.adapter,
                                     'y_location')
         moving.setDuration(750)
-        moving.setStartValue(self.location[1] * 32 + self.offset[1])
-        moving.setEndValue(self.location[1] * 32 - 32 + self.offset[1])
-        curve = QEasingCurve(QEasingCurve.OutElastic)
-        moving.setEasingCurve(curve)
+        moving.setStartValue(self.location[1] * 32)
+        moving.setEndValue(self.location[1] * 32 - 32)
+
         animation.addAnimation(moving)
 
         fading = QPropertyAnimation(damage_counter.adapter,

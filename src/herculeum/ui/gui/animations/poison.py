@@ -58,7 +58,8 @@ class PoisonAddedAnimation(Animation):
         bounds = damage_counter.boundingRect()
         width = bounds.width()
 
-        damage_counter.setPos(self.location[0] * 32 + 16 - (width / 2) + self.offset[0],
+        damage_counter.setPos(self.location[0] * 32 + 16
+                              - (width / 2) + self.offset[0],
                               self.location[1] * 32 + self.offset[1])
 
         animation = QSequentialAnimationGroup()
