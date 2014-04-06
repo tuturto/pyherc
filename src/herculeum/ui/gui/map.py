@@ -377,7 +377,7 @@ class PlayMapWidget(QWidget):
         if event.event_type == 'move':
             if self.model.player.level != self.current_level:
                 self.__construct_scene(self.model, self.scene)
-            self.__center_view_on_character(self.model.player)
+                self.__center_view_on_character(self.model.player)
 
     def eventFilter(self, qobject, event): #pylint: disable-msg=C0103
         """
@@ -585,9 +585,6 @@ class MapGlyph(QGraphicsPixmapItem):
 
         self.flipped = False
         self.offset = 0
-
-        if entity != None:
-            entity.register_for_updates(self)
 
     def animate(self, frame):
         """

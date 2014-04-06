@@ -139,7 +139,8 @@ class Character():
 
         .. versionadded:: 0.5
         """
-        self.__update_listeners.remove(listener)
+        if listener in self.__update_listeners:
+            self.__update_listeners.remove(listener)
 
     @log_debug
     def notify_update_listeners(self, event):

@@ -50,12 +50,9 @@ import hy  # noqa
 
 from herculeum.application import Application
 
-try:
-    from herculeum.ui.gui import QtUserInterface, QtControlsConfiguration
-    from herculeum.ui.gui import QtSurfaceManager
-    import herculeum.ui.gui.resources  # noqa
-except:
-    print('Qt user interface is not available')
+from herculeum.ui.gui import QtUserInterface, QtControlsConfiguration
+from herculeum.ui.gui import QtSurfaceManager
+import herculeum.ui.gui.resources  # noqa
 
 try:
     from herculeum.ui.text import CursesUserInterface
