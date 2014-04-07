@@ -73,7 +73,7 @@
                   (second ai.character.location))
            (do (start-patrol ai)
            (wait ai))
-           (walk-random-direction ai action-factory)))
+           (-walk-random-direction ai action-factory)))
     (wait ai)))))
 
 (with-decorator log_debug
