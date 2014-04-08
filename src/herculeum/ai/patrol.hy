@@ -113,14 +113,14 @@
         (.append patrol-area (, x y)))))
       patrol-area)))
 
-(defn -move-towards-patrol-area [ai action-factory]
+(defn -move-towards-patrol-area [select-area-to-patrol ai action-factory]
   (let [[start-location ai.character.location]
     [path (first (a-star start-location
                  (second ai.mode)
                  ai.character.level))]]
     (if path
       (walk ai action-factory (find-direction start-location (second path)))
-      (wait ai))))
+      (select-area-to-patrol ai))))
 
 (defn -get-random-patrol-direction [is-patrollable ai]
   "select a random direction to follow"
@@ -168,7 +168,7 @@
     [fight (partial -fight-in-melee attack-enemy close-in)]
     [patrol (partial -patrol is-patrol-area (partial -start-patrolling random-patrol-direction))]
     [find-patrol-area (partial -find-patrol-area is-patrol-area (partial -start-patrolling random-patrol-direction)
-            patrol -move-towards-patrol-area
+            patrol (partial -move-towards-patrol-area select-area-to-patrol)
             select-area-to-patrol)]
     [act (fn [transit patrol fight ai model action-factory]
       "main routine for patrol AI"
