@@ -15,12 +15,12 @@ Fixed bugs
 
  - 86_ bug: patrol AI sometimes gets very confused
  - 82_ bug: bug: if player is the last character in level, dying will put game into an infinite loop
+ - 42_ bug: character generator generates incorrect amount of items in inventory
 
 **********
 Known bugs
 **********
 
- - 42_ bug: character generator generates incorrect amount of items in inventory
  - 38_ bug: damage effect does not take damage modifiers into account
  - 25_ bug: dying should make game to return to main screen
  - 21_ bug: PyQt user interface does not support line of sight

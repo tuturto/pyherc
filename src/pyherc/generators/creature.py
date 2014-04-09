@@ -75,8 +75,10 @@ class CreatureGenerator():
             new_creature.add_effect(new_effect)
 
         for spec in config.inventory:
-            new_creature.inventory.append(
-                self.item_generator.generate_item(name=spec.item_name))
+            item_count = self.rng.randint(spec.min_amount, spec.max_amount)
+            for item in range(item_count):
+                new_creature.inventory.append(
+                    self.item_generator.generate_item(name=spec.item_name))
 
         if config.ai is not None:
             new_creature.artificial_intelligence = config.ai(new_creature)
