@@ -42,6 +42,7 @@
        (not (and (.blocks-movement level (+ x 1) y)
          (.blocks-movement level (- x 1) y)))
        (not (and (.blocks-movement level x (+ y 1))
-         (.blocks-movement level x (- y 1))))))
+         (.blocks-movement level x (- y 1))))
+       (.get_floor_tile level x y)))
 
 (def rat-act (patrol-ai is-next-to-wall? 4))
