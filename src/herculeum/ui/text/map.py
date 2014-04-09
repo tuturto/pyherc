@@ -25,6 +25,7 @@ from herculeum.ui.text.character import CharacterScreen
 from herculeum.ui.text.endscreen import EndScreen
 from herculeum.ui.text.inventory import InventoryScreen
 from pyherc.aspects import log_debug, log_info
+from pyherc.data.model import DIED_IN_DUNGEON
 from pyherc.rules import attack, is_move_legal, move, pick_up, wait
 
 
@@ -95,10 +96,13 @@ class MapScreen():
 
             if next_creature == player:
                 self._handle_player_input()
-            else:
+            elif next_creature is not None:
                 next_creature.act(model = self.model,
                                   action_factory = self.action_factory,
                                   rng = self.rng)
+            else:
+                self.model.end_condition = DIED_IN_DUNGEON
+
             self.refresh_screen()
 
         dialog = EndScreen(model = self.model,

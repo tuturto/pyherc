@@ -27,6 +27,7 @@ from herculeum.ui.gui.animations import AnimationFactory
 from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import (EffectsWidget, HitPointsWidget,
                                       SpellSelectorWidget, TimerAdapter)
+from pyherc.data.model import DIED_IN_DUNGEON
 from pyherc.rules import attack, cast, is_move_legal, move, pick_up, wait
 from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
                           QEasingCurve, QEvent, QObject, QPropertyAnimation,
@@ -413,11 +414,20 @@ class PlayMapWidget(QWidget):
                 self.keymap[key_code](key_code, event.modifiers())
 
         next_creature = self.model.get_next_creature(self.rules_engine)
-        while next_creature != player and next_creature != None:
+
+        if next_creature is None:
+            self.model.end_condition = DIED_IN_DUNGEON
+
+        while (next_creature != player
+                and next_creature != None
+                and self.model.end_condition == 0):
             next_creature.act(model = self.model,
                               action_factory = self.action_factory,
                               rng = self.rng)
             next_creature = self.model.get_next_creature(self.rules_engine)
+
+            if next_creature is None:
+                self.model.end_condition = DIED_IN_DUNGEON
 
         if self.model.end_condition != 0:
             self.EndScreenRequested.emit()
