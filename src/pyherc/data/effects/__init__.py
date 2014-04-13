@@ -26,5 +26,5 @@ from .effectscollection import EffectsCollection
 from .effect import Effect, EffectHandle
 from .poison import Poison
 from .heal import Heal
-from .damage import Damage
+from .damage import DamageEffect
 from .damagemodifier import DamageModifier

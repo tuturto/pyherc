@@ -23,7 +23,7 @@ Dictionary for behaviour driven tests
 
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
-from pyherc.data.effects import Damage, Heal, Poison
+from pyherc.data.effects import DamageEffect, Heal, Poison
 from pyherc.data.geometry import find_direction
 from pyherc.rules import (attack, cast, drop_item, Dying, gain_domain,
                           is_move_legal, move, wait)
@@ -275,7 +275,7 @@ class CastSpell():
                                          'title': 'Heal medium wounds',
                                          'description': 'Heals medium amount of damage'})  # noqa
                            .with_effect('cause wound',
-                                        {'type': Damage,
+                                        {'type': DamageEffect,
                                          'duration': None,
                                          'frequency': None,
                                          'tick': 0,
@@ -285,7 +285,7 @@ class CastSpell():
                                          'title': 'Cause minor wound',
                                          'description': 'Causes minor amount of damage'})  # noqa
                            .with_effect('fire',
-                                        {'type': Damage,
+                                        {'type': DamageEffect,
                                          'duration': 30,
                                          'frequency': 5,
                                          'tick': 0,

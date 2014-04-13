@@ -20,7 +20,7 @@
 """
 module for configuring effects
 """
-from pyherc.data.effects import Damage, Heal, Poison
+from pyherc.data.effects import DamageEffect, Heal, Poison
 
 
 def init_effects(context):
@@ -69,7 +69,7 @@ def init_effects(context):
                     'description': 'Causes minor amount of damage'}))
 
     config.append(('cause wound',
-                   {'type': Damage,
+                   {'type': DamageEffect,
                     'duration': None,
                     'frequency': None,
                     'tick': None,
@@ -83,7 +83,7 @@ def init_effects(context):
 
 
     config.append(('major fire damage',
-                   {'type': Damage,
+                   {'type': DamageEffect,
                     'duration': None,
                     'frequency': None,
                     'tick': None,
@@ -96,7 +96,7 @@ def init_effects(context):
                     'description': 'Causes major amount of fire damage'}))
 
     config.append(('fire',
-                   {'type': Damage,
+                   {'type': DamageEffect,
                    'duration': 20,
                    'frequency': 2,
                    'tick': 5,

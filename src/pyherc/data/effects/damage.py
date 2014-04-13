@@ -26,7 +26,7 @@ from pyherc.events import (DamageAddedEvent, DamageEndedEvent,
                            DamageTriggeredEvent)
 
 
-class Damage(Effect):
+class DamageEffect(Effect):
     """
     Class representing effects of damage
     """
