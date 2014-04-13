@@ -96,9 +96,10 @@ class SkeletonWarriorAI():
                    self.character.inventory
                    if item.weapon_data != None]
 
-        equip(self.character,
-              weapons[0],
-              action_factory)
+        if weapons:
+            equip(self.character,
+                  weapons[0],
+                  action_factory)
 
     @log_debug
     def _patrol(self, model, action_factory, rng):
