@@ -49,17 +49,17 @@
     (sqrt (+ (pow dist-x 2)
           (pow dist-y 2)))))
 
-(defn find-direction [start destination]
+(defn find_direction [start destination]
   "calculate direction from start to destination"
-  (assert (not (= start destination )))
-  (let [[start-x (first start)]
-    [start-y (second start)]
-    [end-x (first destination)]
-    [end-y (second destination)]]
-    (if (= start-x end-x)
-      (if (< start-y end-y) 5 1)
-      (if (= start-y end-y)
-    (if (< start-x end-x) 3 7)))))
+  (assert (!= start destination))
+  (let [[start_x (first start)]
+        [start_y (second start)]
+        [end_x (first destination)]
+        [end_y (second destination)]]
+    (if (= start_x end_x)
+      (if (< start_y end_y) 5 1)
+      (when (= start_y end_y)
+    (if (< start_x end_x) 3 7)))))
 
 (defn new-location [character direction]
   "get next location if going to given direction"

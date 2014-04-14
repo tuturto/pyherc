@@ -33,15 +33,15 @@
       "check the situation and act accordingly"
       (beetle-act self model action-factory))]])
 
-(defn is-open-space? [level x y]
+(defn is_is_open_space [level x y]
   "check if given location is within patrol area"
-  (and (not (.blocks-movement level (+ x 1) y))
-       (not (.blocks-movement level (- x 1) y))
-       (not (.blocks-movement level x (+ y 1)))
-       (not (.blocks-movement level x (- y 1)))
-       (not (.blocks-movement level (+ x 1) (+ y 1)))
-       (not (.blocks-movement level (+ x 1) (- y 1)))
-       (not (.blocks-movement level (- x 1) (+ y 1)))
-       (not (.blocks-movement level (- x 1) (- y 1)))))
+  (and (not (.blocks_movement level (inc x) y))
+       (not (.blocks_movement level (dec x) y))
+       (not (.blocks_movement level x (inc y)))
+       (not (.blocks_movement level x (dec y)))
+       (not (.blocks_movement level (inc x) (inc y)))
+       (not (.blocks_movement level (inc x) (dec y)))
+       (not (.blocks_movement level (dec x) (inc y)))
+       (not (.blocks_movement level (dec x) (dec y)))))
 
 (def beetle-act (patrol-ai is-open-space? 3))

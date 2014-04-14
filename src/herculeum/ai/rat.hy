@@ -33,16 +33,16 @@
       "check the situation and act accordingly"
       (rat-act self model action-factory))]])
 
-(defn is-next-to-wall? [level x y]
+(defn next-to-wall? [level x y]
   "check if given location is within patrol area"
-  (and (or (.blocks-movement level (+ x 1) y)
-       (.blocks-movement level (- x 1) y)
-       (.blocks-movement level x (+ y 1))
-       (.blocks-movement level x (- y 1)))
-       (not (and (.blocks-movement level (+ x 1) y)
-         (.blocks-movement level (- x 1) y)))
-       (not (and (.blocks-movement level x (+ y 1))
-         (.blocks-movement level x (- y 1))))
-       (.get_floor_tile level x y)))
+  (and (or (.blocks-movement level (inc x) y)
+	   (.blocks-movement level (dec x) y)
+	   (.blocks-movement level x (inc y))
+	   (.blocks-movement level x (dec y)))
+       (not (and (.blocks-movement level (inc x) y)
+		 (.blocks-movement level (dec x) y)))
+       (not (and (.blocks-movement level x (inc y))
+		 (.blocks-movement level x (dec y))))
+       (.get-floor-tile level x y)))
 
-(def rat-act (patrol-ai is-next-to-wall? 4))
+(def rat-act (patrol-ai next-to-wall? 4))

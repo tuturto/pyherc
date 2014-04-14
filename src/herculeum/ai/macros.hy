@@ -19,23 +19,21 @@
 
 (setv __doc__ "helper macros AIs")
 
-(defmacro second [collection]
-  (quasiquote (get (unquote collection) 1)))
-
 (defmacro third [collection]
-  (quasiquote (get (unquote collection) 2)))
+  `(get ~collection 2))
 
 (defmacro fourth [collection]
-  (quasiquote (get (unquote collection) 3)))
+  `(get ~collection 3))
 
 (defmacro rarely [code else-code]
-  (quasiquote (if (< (.randint random 1 100) 25) (unquote code)
-		  (unquote else-code))))
+  `(if (< (.randint random 1 100) 25) ~code
+		  ~else-code))
 
 (defmacro sometimes [code else-code]
-  (quasiquote (if (< (.randint random 1 100) 50) (unquote code)
-		  (unquote else-code))))
+  `(if (< (.randint random 1 100) 50) ~code
+		  ~else-code))
 
 (defmacro often [code else-code]
-  (quasiquote (if (< (.randint random 1 100) 75) (unquote code)
-		  (unquote else-code))))
+  `(if (< (.randint random 1 100) 75) ~code
+		  ~else-code))
+
