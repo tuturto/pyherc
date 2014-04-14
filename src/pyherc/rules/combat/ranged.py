@@ -21,8 +21,9 @@
 Module for ranged combat
 """
 from pyherc.aspects import log_debug, log_info
+from pyherc.data.damage import Damage
 from pyherc.data.geometry import get_target_in_direction
-from pyherc.rules.combat.action import AttackAction, Damage, ToHit
+from pyherc.rules.combat.action import AttackAction, ToHit
 
 
 class RangedToHit(ToHit):
@@ -44,21 +45,6 @@ class RangedToHit(ToHit):
         :rng: random number generator
         """
         super().__init__(attacker, target, rng)
-
-
-class RangedDamage(Damage):
-    """
-    Damage done with ranged attack
-
-    .. versionadded:: 0.8
-    """
-
-    @log_debug
-    def __init__(self, damage):
-        """
-        Default constructor
-        """
-        super().__init__(damage)
 
 
 class RangedCombatFactory():
@@ -109,7 +95,7 @@ class RangedCombatFactory():
             to_hit=RangedToHit(attacker,
                                target,
                                parameters.random_number_generator),
-            damage=RangedDamage(damage=ammo_data.damage),
+            damage=Damage(damage=ammo_data.damage),
             attacker=attacker,
             target=target,
             effect_factory=self.effect_factory,

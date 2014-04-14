@@ -24,6 +24,7 @@ import random
 
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.constants import Duration
+from pyherc.data.damage import Damage
 from pyherc.events import AttackHitEvent, AttackMissEvent, AttackNothingEvent
 
 
@@ -177,81 +178,6 @@ class ToHit():
         @returns: True if hit is successful, False otherwise
         """
         return True
-
-
-class Damage():
-    """
-    Damage done in attack
-    """
-    @log_debug
-    def __init__(self, damage):
-        """
-        Default constructor
-        """
-        super().__init__()
-        self.__damage = damage
-        self.damage_inflicted = 0
-
-    @log_debug
-    def apply_damage(self, target):
-        """
-        Applies damage to target
-        :param target: target to damage
-        :type target: Character
-        """
-        for damage in self.__damage:
-            damage_type = damage[1]
-
-            matching_modifiers = [x for x in target.get_effects()
-                                  if x.effect_name == 'damage modifier'
-                                  and x.damage_type == damage_type]
-
-            self.damage_inflicted = (self.damage_inflicted +
-                                     damage[0] +
-                                     sum(x.modifier for x
-                                         in matching_modifiers))
-
-            if self.damage_inflicted < 1:
-                self.damage_inflicted = 0
-
-        if target.inventory.armour is not None:
-            armour = target.inventory.armour.armour_data.damage_reduction
-        else:
-            armour = 0
-
-        if armour < self.damage_inflicted:
-            self.damage_inflicted = self.damage_inflicted - armour
-        else:
-            if armour < self.damage_inflicted * 2:
-                self.damage_inflicted = 1
-            else:
-                self.damage_inflicted = 0
-
-        target.hit_points = target.hit_points - self.damage_inflicted
-
-    @log_debug
-    def __get_damage(self):
-        """
-        Total damage caused
-
-        :returns: total damage caused
-        :rtype: int
-        """
-        return sum(x[0] for x in self.__damage)
-
-    @log_debug
-    def __get_damage_types(self):
-        """
-        Types of damage caused
-
-        :return: types of damage caused
-        :rtype: [string]
-        """
-        return [x[1] for x
-                in self.__damage]
-
-    damage = property(__get_damage)
-    damage_types = property(__get_damage_types)
 
 
 class AdditionalRules():

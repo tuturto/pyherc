@@ -26,7 +26,7 @@ UnarmedDamage
 """
 
 from pyherc.aspects import log_debug
-from pyherc.rules.combat.action import Damage, ToHit
+from pyherc.rules.combat.action import ToHit
 
 
 class UnarmedToHit(ToHit):
@@ -44,15 +44,3 @@ class UnarmedToHit(ToHit):
             random_number_generator: Random number generator
         """
         super().__init__(attacker, target, random_number_generator)
-
-
-class UnarmedDamage(Damage):
-    """
-    Damage done in unarmed attack
-    """
-    @log_debug
-    def __init__(self, damage):
-        """
-        Default constructor
-        """
-        super().__init__(damage)
