@@ -4,4 +4,5 @@ setup.cfg
 manual.qch
 herculeum.qhc
 pyherc.geany
+__pycache__
 
