@@ -1,5 +1,5 @@
 decorator==3.4.0
-hy==0.9.12
+hy==0.10.0
 docopts==0.6.1
 PyHamcrest==1.6
 mockito-without-hardcoded-distribute-version==0.5.2
