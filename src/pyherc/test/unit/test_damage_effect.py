@@ -20,8 +20,12 @@
 """
 Tests for damage effect
 """
-from mockito import any, mock, verify
-from pyherc.test.builders import DamageBuilder
+from mockito import any, mock, verify, when
+from hamcrest import assert_that, is_, equal_to
+from pyherc.data import Character
+from pyherc.data.effects import DamageModifier
+from pyherc.events import DamageTriggeredEvent
+from pyherc.test.builders import CharacterBuilder, DamageBuilder
 
 
 class TestDamageEffect():
@@ -38,12 +42,43 @@ class TestDamageEffect():
         """
         Triggering damage effect should raise a proper event
         """
-        target = mock()
-        target.hit_points = 10
+        model = mock()
+        target = (CharacterBuilder()
+                  .with_model(model)
+                  .build())
+
         effect = (DamageBuilder()
                   .with_target(target)
                   .build())
 
         effect.trigger(dying_rules=mock())
 
-        verify(target).raise_event(any())
+        verify(model).raise_event(any(DamageTriggeredEvent))
+
+    def test_triggering_damage_respects_damage_modifier(self):
+        """
+        Damage modifier should be respected
+        """
+        model = mock()
+
+        target = (CharacterBuilder()
+                  .with_model(model)
+                  .with_hit_points(10)
+                  .with_effect(DamageModifier(modifier=-5,
+                                              damage_type='magical',
+                                              duration=0,
+                                              frequency=0,
+                                              tick=0,
+                                              icon=0,
+                                              title='resistance',
+                                              description='resistance'))
+                  .build())
+
+        effect = (DamageBuilder()
+                  .with_target(target)
+                  .with_damage(5)
+                  .build())
+
+        effect.trigger(dying_rules=mock())
+
+        assert_that(target.hit_points, is_(equal_to(10)))
