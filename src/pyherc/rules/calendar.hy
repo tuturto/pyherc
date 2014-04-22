@@ -19,9 +19,10 @@
 (import [pyherc.data.constants [SpecialTime]])
 
 (defmacro date-rules [&rest rule-specs]
-  `(let [[events []]]
-    ~@(map (fn [x] `(date-rule ~@x)) rule-specs)
-  events))
+  `(defn get-special-events [year month day]
+     (let [[events []]]
+       ~@(map (fn [x] `(date-rule ~@x)) rule-specs)
+       events)))
 
 (defmacro date-rule [date-name &rest rules]
   (if (> (len rules) 1)
@@ -29,7 +30,6 @@
     `(when ~@rules (.append events ~date-name))))
 
 
-(defn get-special-events [year month day]
-  (date-rules
-   (SpecialTime.christmas (= month 12) (in day [24 25 26]))
-   (SpecialTime.aprilfools (= month 4) (= day 1))))
+(date-rules
+ (SpecialTime.christmas (= month 12) (in day [24 25 26]))
+ (SpecialTime.aprilfools (= month 4) (= day 1)))
