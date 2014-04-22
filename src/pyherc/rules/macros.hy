@@ -16,10 +16,13 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(import [pyherc.data.constants [SpecialTime]])
-(require pyherc.rules.macros)
+(defmacro date-rules [&rest rule-specs]
+  `(defn get-special-events [year month day]
+     (let [[events []]]
+       ~@(map (fn [x] `(date-rule ~@x)) rule-specs)
+       events)))
 
-
-(date-rules
- (SpecialTime.christmas (= month 12) (in day [24 25 26]))
- (SpecialTime.aprilfools (= month 4) (= day 1)))
+(defmacro date-rule [date-name &rest rules]
+  (if (> (len rules) 1)
+    `(when (and ~@rules) (.append events ~date-name))
+    `(when ~@rules (.append events ~date-name))))
