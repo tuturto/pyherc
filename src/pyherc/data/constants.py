@@ -41,7 +41,8 @@ class SpecialTime():
 
     .. versionadded:: 0.10
     """
-    christmas = 1
+    aprilfools = 1
+    christmas = 2
 
 
 class Direction():
