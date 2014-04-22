@@ -22,6 +22,7 @@
 """
 Module for data related modules and classes that represent state of the game
 """
+import hy
 
 from .level import Level
 from .dungeon import Dungeon

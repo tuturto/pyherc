@@ -22,6 +22,7 @@
 """
 Package for generation related activities
 """
+import hy
 
 from .dungeon import DungeonGenerator
 from .item import ItemGenerator, ItemConfigurations, ItemConfiguration

@@ -37,6 +37,8 @@ Options:
   --start-level=<name> Starting level [default: upper catacombs]
 
 """
+import hy  # noqa
+
 from pyherc.aspects import set_logger
 from pyherc.version import PYHERC_VERSION
 from docopt import docopt
@@ -45,8 +47,6 @@ import logging
 arguments = docopt(__doc__, version='Herculeum ' + PYHERC_VERSION)
 set_logger(arguments['--log-level'],
            arguments['--silent'])
-
-import hy  # noqa
 
 from herculeum.application import Application
 
