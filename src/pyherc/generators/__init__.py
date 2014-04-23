@@ -28,8 +28,8 @@ from .dungeon import DungeonGenerator
 from .item import ItemGenerator, ItemConfigurations, ItemConfiguration
 from .item import WeaponConfiguration, ArmourConfiguration
 from .item import AmmunitionConfiguration
-from .creature import CreatureGenerator
-from .creature import CreatureConfiguration
-from .creature import InventoryConfiguration
+from .creature import generate_creature
+from .creature import creature_config
+from .creature import inventory_config
 from .effects import EffectsFactory
 from .spells import SpellGenerator

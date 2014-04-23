@@ -21,13 +21,15 @@
 Tests for creature generation
 """
 
+from functools import partial
 from random import Random
 
 from hamcrest import assert_that, equal_to, is_, not_none
 from mockito import mock, verify
 from pyherc.data.effects import DamageModifier, EffectHandle
-from pyherc.generators import (CreatureConfiguration, CreatureGenerator,
-                               InventoryConfiguration)
+from pyherc.generators import (creature_config, generate_creature,
+                               inventory_config, ItemGenerator,
+                               ItemConfiguration, ItemConfigurations)
 from pyherc.test.matchers import has_effect, has_effect_handle
 
 
@@ -173,12 +175,9 @@ class TestItemsInCreatureGeneration():
         self.model = mock()
         self.rng = Random()
 
-        inventory_config = [InventoryConfiguration(item_name='dagger',
-                                                   min_amount=1,
-                                                   max_amount=1,
-                                                   probability=100)]
+        inventory = [inventory_config('dagger', 1, 1, 100)]
 
-        self.skeleton_config = CreatureConfiguration(
+        self.skeleton_config = creature_config(
             name='skeleton warrior',
             body=8,
             finesse=11,
@@ -188,7 +187,7 @@ class TestItemsInCreatureGeneration():
             icons=[405],
             attack=2,
             ai=MockAI,
-            inventory=inventory_config)
+            inventory=inventory)
 
         self.creature_config = {}
 
@@ -198,13 +197,20 @@ class TestItemsInCreatureGeneration():
         """
         self.creature_config['skeleton warrior'] = self.skeleton_config
 
-        item_generator = mock()
+        item_config = ItemConfigurations(self.rng)
+        item_config.add_item(ItemConfiguration(name='dagger',
+                                               cost=2,
+                                               weight=2,
+                                               icons='foo',
+                                               types=['item'],
+                                               rarity='common'))
+        items = ItemGenerator(item_config)
 
-        self.generator = CreatureGenerator(configuration=self.creature_config,
-                                           model=self.model,
-                                           item_generator=item_generator,
-                                           rng=self.rng)
+        creatures = partial(generate_creature, self.creature_config,
+                                               self.model,
+                                               items,
+                                               self.rng)
 
-        self.generator.generate_creature(name='skeleton warrior')
+        skeleton = creatures('skeleton warrior')
 
-        verify(item_generator).generate_item(name='dagger')
+        assert_that(len(skeleton.inventory), is_(equal_to(1)))

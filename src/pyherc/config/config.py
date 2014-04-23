@@ -22,7 +22,7 @@ Configuration for pyherc
 """
 import random
 
-from pyherc.generators import (CreatureGenerator, EffectsFactory,
+from pyherc.generators import (generate_creature, EffectsFactory,
                                ItemConfigurations, ItemGenerator,
                                SpellGenerator)
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
