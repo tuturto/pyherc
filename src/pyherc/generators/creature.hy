@@ -27,28 +27,15 @@
   "Generate creature"
   (let [[config (get configuration name)]
 	[creature (Character model)]
-	[item-adder (partial add-item creature rng item-generator)]]
-    (setv creature.name (:name config))
-    (setv creature.body (:body config))
-    (setv creature.finesse (:finesse config))
-    (setv creature.mind (:mind config))
-    (setv creature.hit_points (:hp config))
-    (setv creature.max_hp (:hp config))
-    (setv creature.speed (:speed config))
-    (setv creature.icon (:icons config))
-    (setv creature.attack (:attack config))
-    (map (fn [handle] (.add-effect creature (EffectHandle handle.trigger
-							  handle.effect
-							  handle.parameters
-							  handle.charges))) 
-	 (:effect-handles config))
-    (ap-each (:effects config) (.add-effect creature (.clone it)))
-    ;;(map (fn [effect] (.add-effect creature (.clone effect))) (:effects config))
+	[item-adder (partial add-item creature rng item-generator)]
+	[effect-handle-adder (partial add-effect creature)]
+	[effect-adder (partial add-effect creature)]]
+    (set-creature-attributes creature config)
+    (ap-each (:effect-handles config) (effect-handle-adder it))
+    (ap-each (:effects config) (effect-adder it))
     (ap-each (:inventory config) (item-adder it))
-
-    (when (:ai config)
-      (setv creature.artificial-intelligence ((:ai config) creature)))
     creature))
+
 
 (defn creature-config [name body finesse mind hp speed icons attack 
 		       &optional [ai nil] [effect-handles nil] [effects nil]
@@ -60,13 +47,36 @@
    :effects (if effects effects [])
    :inventory (if inventory inventory [])})
 
+(defn inventory-config [item-name min-amount max-amount probability]
+  "Create configuration for inventory item"
+  {:item-name item-name :min-amount min-amount :max-amount max-amount
+   :probability probability})
+
+(defn set-creature-attributes [creature config]
+  (setv creature.name (:name config))
+  (setv creature.body (:body config))
+  (setv creature.finesse (:finesse config))
+  (setv creature.mind (:mind config))
+  (setv creature.hit_points (:hp config))
+  (setv creature.max_hp (:hp config))
+  (setv creature.speed (:speed config))
+  (setv creature.icon (:icons config))
+  (setv creature.attack (:attack config))
+  (when (:ai config)
+    (setv creature.artificial-intelligence ((:ai config) creature))))
+
+(defn add-effect [creature effect]
+  (.add-effect creature (.clone effect)))
+
+(defn add-effect-handle [creature handle-spec]
+  (.add-effect creature (EffectHandle handle-spec.trigger
+				      handle-spec.effect
+				      handle-spec.parameters
+				      handle-spec.charges)))
+
+
 (defn add-item [creature rng item-generator item-spec]
   (let [[item-count (.randint rng (:min-amount item-spec) (:max-amount item-spec))]]
     (for [item (range item-count)]
       (.append creature.inventory
 	       (.generate-item item-generator (:item-name item-spec))))))
-
-(defn inventory-config [item-name min-amount max-amount probability]
-  "Create configuration for inventory item"
-  {:item-name item-name :min-amount min-amount :max-amount max-amount
-   :probability probability})
