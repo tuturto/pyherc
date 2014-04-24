@@ -29,7 +29,7 @@
   (let [[config (get configuration name)]
 	[creature (Character model)]
 	[item-adder (partial add-item creature rng item-generator)]
-	[effect-handle-adder (partial add-effect creature)]
+	[effect-handle-adder (partial add-effect-handle creature)]
 	[effect-adder (partial add-effect creature)]]
     (set-creature-attributes creature config)
     (ap-each (:effect-handles config) (effect-handle-adder it))
@@ -70,10 +70,10 @@
   (.add-effect creature (copy effect)))
 
 (defn add-effect-handle [creature handle-spec]
-  (.add-effect creature (EffectHandle handle-spec.trigger
-				      handle-spec.effect
-				      handle-spec.parameters
-				      handle-spec.charges)))
+  (.add-effect-handle creature (EffectHandle handle-spec.trigger
+					     handle-spec.effect
+					     handle-spec.parameters
+					     handle-spec.charges)))
 
 
 (defn add-item [creature rng item-generator item-spec]
