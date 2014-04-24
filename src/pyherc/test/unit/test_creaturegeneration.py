@@ -69,17 +69,17 @@ class TestCreatureGeneration():
         self.model = mock()
         self.rng = Random()
 
-        self.creature_config['rat'] = CreatureConfiguration(name='rat',
-                                                            body=4,
-                                                            finesse=12,
-                                                            mind=2,
-                                                            hp=2,
-                                                            speed=2,
-                                                            icons=[100, 101],
-                                                            attack=2,
-                                                            ai=MockAI)
+        self.creature_config['rat'] = creature_config(name='rat',
+                                                      body=4,
+                                                      finesse=12,
+                                                      mind=2,
+                                                      hp=2,
+                                                      speed=2,
+                                                      icons=[100, 101],
+                                                      attack=2,
+                                                      ai=MockAI)
 
-        self.creature_config['spider'] = CreatureConfiguration(
+        self.creature_config['spider'] = creature_config(
             name='spider',
             body=6,
             finesse=12,
@@ -94,7 +94,7 @@ class TestCreatureGeneration():
                                          parameters=None,
                                          charges=100)])
 
-        self.creature_config['skeleton warrior'] = CreatureConfiguration(
+        self.creature_config['skeleton warrior'] = creature_config(
             name='skeleton warrior',
             body=8,
             finesse=11,
@@ -113,17 +113,17 @@ class TestCreatureGeneration():
                                     title='title',
                                     description='description')])
 
-        self.generator = CreatureGenerator(configuration=self.creature_config,
-                                           model=self.model,
-                                           rng=self.rng,
-                                           item_generator=mock(),
-                                           )
+        self.creatures = partial(generate_creature,
+                                 configuration=self.creature_config,
+                                 model=self.model,
+                                 rng=self.rng,
+                                 item_generator=mock())
 
     def test_creating_simple_creature(self):
         """
         Test that simple creature can be created by name
         """
-        creature = self.generator.generate_creature(name='rat')
+        creature = self.creatures(name='rat')
 
         assert_that(creature.name, is_(equal_to('rat')))
 
@@ -131,7 +131,7 @@ class TestCreatureGeneration():
         """
         Test that creature with effect handle can be created
         """
-        creature = self.generator.generate_creature(name='spider')
+        creature = self.creatures(name='spider')
 
         assert_that(creature, has_effect_handle())
 
@@ -139,7 +139,7 @@ class TestCreatureGeneration():
         """
         Test that creature with effect can be created
         """
-        creature = self.generator.generate_creature(name='skeleton warrior')
+        creature = self.creatures(name='skeleton warrior')
 
         assert_that(creature, has_effect())
 
@@ -147,7 +147,7 @@ class TestCreatureGeneration():
         """
         Test that creature can have AI created
         """
-        creature = self.generator.generate_creature(name='rat')
+        creature = self.creatures(name='rat')
 
         assert_that(creature.artificial_intelligence,
                     is_(not_none()))
@@ -191,10 +191,6 @@ class TestItemsInCreatureGeneration():
 
         self.creature_config = {}
 
-    def test_creating_creature_with_item_calls_itemgenerator(self):
-        """
-        Test that generating creature with item calls item generator
-        """
         self.creature_config['skeleton warrior'] = self.skeleton_config
 
         item_config = ItemConfigurations(self.rng)
@@ -206,11 +202,16 @@ class TestItemsInCreatureGeneration():
                                                rarity='common'))
         items = ItemGenerator(item_config)
 
-        creatures = partial(generate_creature, self.creature_config,
-                                               self.model,
-                                               items,
-                                               self.rng)
+        self.creatures = partial(generate_creature,
+                                 self.creature_config,
+                                 self.model,
+                                 items,
+                                 self.rng)
 
-        skeleton = creatures('skeleton warrior')
+    def test_creating_creature_with_item_calls_itemgenerator(self):
+        """
+        Test that generating creature with item calls item generator
+        """
+        skeleton = self.creatures('skeleton warrior')
 
         assert_that(len(skeleton.inventory), is_(equal_to(1)))
