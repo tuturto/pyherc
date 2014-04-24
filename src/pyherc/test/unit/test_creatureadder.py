@@ -23,12 +23,13 @@ Tests for CreatureAdder
 
 import random
 
+from functools import partial
 from hamcrest import (assert_that, greater_than, greater_than_or_equal_to,
                       has_length, less_than)
 from mockito import mock
 from pyherc.data import Level
-from pyherc.generators import CreatureConfiguration
-from pyherc.generators.creature import CreatureGenerator
+from pyherc.generators import creature_config
+from pyherc.generators.creature import generate_creature
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
 from pyherc.test.matchers import has_creature, located_in_room
@@ -44,7 +45,7 @@ class TestCreatureAdder():
         """
         self.rng = None
         self.level = None
-        self.creature_generator = None
+        self.creatures = None
         self.configuration = None
         self.creature_adder = None
 
@@ -56,33 +57,34 @@ class TestCreatureAdder():
         self.level = Level((60, 40))
         self.level.set_location_type((10, 10), 'room')
 
-        creature_config = {}
-        creature_config['rat'] = CreatureConfiguration(name='rat',
-                                                       body=4,
-                                                       finesse=12,
-                                                       mind=2,
-                                                       hp=2,
-                                                       speed=2,
-                                                       icons=1,
-                                                       attack=2,
-                                                       ai=None)
+        config = {}
+        config['rat'] = creature_config(name='rat',
+                                        body=4,
+                                        finesse=12,
+                                        mind=2,
+                                        hp=2,
+                                        speed=2,
+                                        icons=1,
+                                        attack=2,
+                                        ai=None)
 
-        creature_config['dragon'] = CreatureConfiguration(name='dragon',
-                                                          body=4,
-                                                          finesse=12,
-                                                          mind=2,
-                                                          hp=2,
-                                                          speed=2,
-                                                          icons=1,
-                                                          attack=2,
-                                                          ai=None)
+        config['dragon'] = creature_config(name='dragon',
+                                           body=4,
+                                           finesse=12,
+                                           mind=2,
+                                           hp=2,
+                                           speed=2,
+                                           icons=1,
+                                           attack=2,
+                                           ai=None)
 
         self.model = mock()
-        self.creature_generator = CreatureGenerator(creature_config,
-                                                    self.model,
-                                                    mock(),
-                                                    self.rng)
-
+        self.creatures = partial(generate_creature,
+                                 config,
+                                 self.model,
+                                 mock(),
+                                 self.rng)
+        
         self.configuration = CreatureAdderConfiguration(['crypt'])
         self.configuration.add_creature(min_amount=3,
                                         max_amount=4,
@@ -91,7 +93,7 @@ class TestCreatureAdder():
                                         max_amount=1,
                                         name='dragon',
                                         location='room')
-        self.creature_adder = CreatureAdder(self.creature_generator,
+        self.creature_adder = CreatureAdder(self.creatures,
                                             self.configuration,
                                             self.rng)
 

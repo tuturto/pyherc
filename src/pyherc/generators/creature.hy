@@ -22,6 +22,7 @@
 (import [pyherc.data [Character]])
 (import [pyherc.data.effects [EffectHandle]])
 (import [functools [partial]])
+(import [copy [copy]])
 
 (defn generate-creature [configuration model item-generator rng name]
   "Generate creature"
@@ -66,7 +67,7 @@
     (setv creature.artificial-intelligence ((:ai config) creature))))
 
 (defn add-effect [creature effect]
-  (.add-effect creature (.clone effect)))
+  (.add-effect creature (copy effect)))
 
 (defn add-effect-handle [creature handle-spec]
   (.add-effect creature (EffectHandle handle-spec.trigger

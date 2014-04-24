@@ -68,7 +68,7 @@ class CreatureAdder():
     Class used to add creatures during level generation
     """
     @log_debug
-    def __init__(self, creature_generator, configuration, rng):
+    def __init__(self, creatures, configuration, rng):
         """
         Default constructor
 
@@ -80,7 +80,7 @@ class CreatureAdder():
         :type rng: Random
         """
         super().__init__()
-        self.creature_generator = creature_generator
+        self.creatures = creatures
         self.configuration = configuration
         self.rng = rng
 
@@ -127,7 +127,7 @@ class CreatureAdder():
         """
         creatures = []
         for i in range(amount):
-            new_creature = self.creature_generator.generate_creature(name)
+            new_creature = self.creatures(name)
             creatures.append(new_creature)
 
         return creatures
