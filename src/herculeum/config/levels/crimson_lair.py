@@ -23,7 +23,7 @@ module for configuring lair of crimson jaw
 from herculeum.ai import SkeletonWarriorAI
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data.effects import EffectHandle
-from pyherc.generators import (CreatureConfiguration, InventoryConfiguration,
+from pyherc.generators import (creature_config, inventory_config,
                                ItemConfiguration, WeaponConfiguration)
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
@@ -227,20 +227,20 @@ def init_creatures(context):
 
     crimson_jaw_f0 = surface_manager.add_icon('crimson jaw_f0', ':crimson-jaw_f0.png', '&', ['bold', 'red'])
     crimson_jaw_f1 = surface_manager.add_icon('crimson jaw_f1', ':crimson-jaw_f1.png', '&', ['bold', 'red'])
-    config.append(CreatureConfiguration(name = 'crimson jaw',
-                                        body = 12,
-                                        finesse = 9,
-                                        mind = 12,
-                                        hp = 30,
-                                        speed = 3,
-                                        icons = (crimson_jaw_f0, crimson_jaw_f1),
-                                        attack = 8,
-                                        inventory = [InventoryConfiguration(
-                                                            item_name = 'whip of ashmque',
-                                                            min_amount = 0,
-                                                            max_amount = 1,
-                                                            probability = 100)],
-                                        ai = SkeletonWarriorAI))
+    config.append(creature_config(name = 'crimson jaw',
+                                  body = 12,
+                                  finesse = 9,
+                                  mind = 12,
+                                  hp = 30,
+                                  speed = 3,
+                                  icons = (crimson_jaw_f0, crimson_jaw_f1),
+                                  attack = 8,
+                                  inventory = [inventory_config(
+                                      item_name = 'whip of ashmque',
+                                      min_amount = 0,
+                                      max_amount = 1,
+                                      probability = 100)],
+                                  ai = SkeletonWarriorAI))
 
     return config
 

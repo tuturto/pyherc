@@ -21,6 +21,7 @@
 Configuration for pyherc
 """
 import random
+from functools import partial
 
 from pyherc.generators import (generate_creature, EffectsFactory,
                                ItemConfigurations, ItemGenerator,
@@ -152,7 +153,7 @@ class Configuration():
         for configurator in configurators:
             creatures = configurator(context)
             for creature in creatures:
-                config[creature.name] = creature
+                config[creature['\ufdd0:name']] = creature
 
         return config
 
@@ -175,7 +176,7 @@ class Configuration():
         for configurator in configurators:
             creatures = configurator(context)
             for creature in creatures:
-                config[creature.name] = creature
+                config[creature['\ufdd0:name']] = creature
 
         return config
 
@@ -220,17 +221,17 @@ class Configuration():
         """
         self.item_generator = ItemGenerator(self.get_item_config(context))
 
-        self.creature_generator = CreatureGenerator(
-            self.get_creature_config(context),
-            self.model,
-            self.item_generator,
-            self.rng)
+        self.creature_generator = partial(generate_creature,
+                                          self.get_creature_config(context),
+                                          self.model,
+                                          self.item_generator,
+                                          self.rng)
 
-        self.player_generator = CreatureGenerator(
-            self.get_player_config(context),
-            self.model,
-            self.item_generator,
-            self.rng)
+        self.player_generator = partial(generate_creature,
+                                        self.get_player_config(context),
+                                        self.model,
+                                        self.item_generator,
+                                        self.rng)
 
     def initialise_level_generators(self, context):
         """

@@ -26,7 +26,7 @@ from herculeum.ai.firebeetle import FireBeetleAI
 from herculeum.ai.rat import RatAI
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data.effects import DamageModifier
-from pyherc.generators import CreatureConfiguration, InventoryConfiguration
+from pyherc.generators import creature_config, inventory_config
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
 from pyherc.generators.level.decorator import (AggregateDecorator,

@@ -26,7 +26,7 @@ from herculeum.ai.firebeetle import FireBeetleAI
 from herculeum.ai.rat import RatAI
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data.effects import DamageModifier
-from pyherc.generators import CreatureConfiguration, InventoryConfiguration
+from pyherc.generators import creature_config, inventory_config
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
 from pyherc.generators.level.decorator import (AggregateDecorator,
@@ -301,32 +301,32 @@ def init_creatures(context):
 
     mouse_f0 = surface_manager.add_icon('rat_f0', ':mouse_f0.png', 'r', ['yellow', 'dim'])
     mouse_f1 = surface_manager.add_icon('rat_f1', ':mouse_f1.png', 'r', ['yellow', 'dim'])
-    config.append(CreatureConfiguration(name = 'rat',
-                                        body = 4,
-                                        finesse = 12,
-                                        mind = 2,
-                                        hp = 2,
-                                        speed = 2,
-                                        icons = (mouse_f0, mouse_f1),
-                                        attack = 1,
-                                        ai = RatAI))
+    config.append(creature_config(name = 'rat',
+                                  body = 4,
+                                  finesse = 12,
+                                  mind = 2,
+                                  hp = 2,
+                                  speed = 2,
+                                  icons = (mouse_f0, mouse_f1),
+                                  attack = 1,
+                                  ai = RatAI))
 
     firebeetle_f0 = surface_manager.add_icon('fire beetle_f0', ':scarab-beetle_f0.png', 'a', ['red'])
     firebeetle_f1 = surface_manager.add_icon('fire beetle_f1', ':scarab-beetle_f1.png', 'a', ['red'])
-    config.append(CreatureConfiguration(name = 'fire beetle',
-                                        body = 10,
-                                        finesse = 11,
-                                        mind = 0,
-                                        hp = 4,
-                                        speed = 3,
-                                        icons = (firebeetle_f0, firebeetle_f1),
-                                        attack = 2,
-                                        ai = FireBeetleAI))
+    config.append(creature_config(name = 'fire beetle',
+                                  body = 10,
+                                  finesse = 11,
+                                  mind = 0,
+                                  hp = 4,
+                                  speed = 3,
+                                  icons = (firebeetle_f0, firebeetle_f1),
+                                  attack = 2,
+                                  ai = FireBeetleAI))
 
-    skeleton_inventory = [InventoryConfiguration(item_name = 'sword',
-                                                min_amount = 0,
-                                                max_amount = 1,
-                                                probability = 100)]
+    skeleton_inventory = [inventory_config(item_name = 'sword',
+                                           min_amount = 0,
+                                           max_amount = 1,
+                                           probability = 100)]
 
     skeleton_effects = [DamageModifier(modifier = 2,
                                        damage_type = CRUSHING_DAMAGE,
@@ -363,16 +363,16 @@ def init_creatures(context):
 
     skeleton_f0 = surface_manager.add_icon('skeleton warrior_f0', ':blade-bite_f0.png', 'Z', ['white', 'bold'])
     skeleton_f1 = surface_manager.add_icon('skeleton warrior_f1', ':blade-bite_f1.png', 'Z', ['white', 'bold'])
-    config.append(CreatureConfiguration(name = 'skeleton warrior',
-                                        body = 8,
-                                        finesse = 11,
-                                        mind = 0,
-                                        hp = 8,
-                                        speed = 4,
-                                        icons = (skeleton_f0, skeleton_f1),
-                                        attack = 1,
-                                        ai = SkeletonWarriorAI,
-                                        inventory = skeleton_inventory,
-                                        effects = skeleton_effects))
+    config.append(creature_config(name = 'skeleton warrior',
+                                  body = 8,
+                                  finesse = 11,
+                                  mind = 0,
+                                  hp = 8,
+                                  speed = 4,
+                                  icons = (skeleton_f0, skeleton_f1),
+                                  attack = 1,
+                                  ai = SkeletonWarriorAI,
+                                  inventory = skeleton_inventory,
+                                  effects = skeleton_effects))
 
     return config

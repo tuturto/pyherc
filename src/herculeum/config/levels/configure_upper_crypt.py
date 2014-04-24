@@ -24,7 +24,7 @@ from herculeum.ai import FlockingHerbivore
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data.effects import EffectHandle
 from pyherc.data.traps import PitTrap
-from pyherc.generators import CreatureConfiguration
+from pyherc.generators import creature_config
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
 from pyherc.generators.level.decorator import (AggregateDecorator,
@@ -353,19 +353,19 @@ def init_creatures(context):
 
     spider_f0 = surface_manager.add_icon('spider_f0', ':masked-spider_f0.png', 's', ['white', 'dim'])
     spider_f1 = surface_manager.add_icon('spider_f1', ':masked-spider_f1.png', 's', ['white', 'dim'])
-    config.append(CreatureConfiguration(name = 'spider',
-                                        body = 6,
-                                        finesse = 12,
-                                        mind = 8,
-                                        hp = 6,
-                                        speed = 1,
-                                        icons = (spider_f0, spider_f1),
-                                        attack = 4,
-                                        ai = FlockingHerbivore,
-                                        effect_handles = [EffectHandle(
-                                                    trigger = 'on attack hit',
-                                                    effect = 'minor poison',
-                                                    parameters = None,
-                                                    charges = 100)]))
+    config.append(creature_config(name = 'spider',
+                                  body = 6,
+                                  finesse = 12,
+                                  mind = 8,
+                                  hp = 6,
+                                  speed = 1,
+                                  icons = (spider_f0, spider_f1),
+                                  attack = 4,
+                                  ai = FlockingHerbivore,
+                                  effect_handles = [EffectHandle(
+                                      trigger = 'on attack hit',
+                                      effect = 'minor poison',
+                                      parameters = None,
+                                      charges = 100)]))
 
     return config
