@@ -233,6 +233,8 @@ class Configuration():
                                         self.item_generator,
                                         self.rng)
 
+        self.player_classes = self.get_player_config(context)
+
     def initialise_level_generators(self, context):
         """
         Initialise level generators

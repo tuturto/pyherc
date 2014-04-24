@@ -50,7 +50,8 @@ class StartGameWidget(QDialog):
         self.class_name = None
         self.class_icon = None
         self.selected_index = None
-        self.class_names = None
+        self.class_names = sorted(application.config.player_classes)
+        self.class_config = application.config.player_classes
 
         self.animation_adapter = None
         self.animation_timer = None
@@ -114,12 +115,10 @@ class StartGameWidget(QDialog):
 
         self.setLayout(main_layout)
 
-        self.class_names = sorted(self.generator.configuration)
-
         self.selected_index = 0
         if len(self.class_names) > 0:
             self._show_character(
-                    self.generator.configuration[self.class_names[self.selected_index]])
+                    self.class_config[self.class_names[self.selected_index]])
 
     def _show_character(self, character):
         """
@@ -127,19 +126,18 @@ class StartGameWidget(QDialog):
 
         .. versionadded:: 0.8
         """
-        icon = self.surface_manager.get_icon(character.icons)
+        icon = self.surface_manager.get_icon(character['\ufdd0:icons'])
 
         self.class_icon.setPixmap(icon)
-        self.class_name.setText(character.name)
-        self.class_description.setText(character.description)
+        self.class_name.setText(character['\ufdd0:name'])
+        self.class_description.setText(character['\ufdd0:description'])
 
     def __generate_character(self):
         """
         Generate player character based on selected settings
         """
         self.player_character = None
-        self.player_character = self.generator.generate_creature(
-                                            name = self.class_names[self.selected_index])
+        self.player_character = self.generator(self.class_names[self.selected_index])
 
     def keyPressEvent(self, event):
         """
@@ -162,12 +160,12 @@ class StartGameWidget(QDialog):
             if self.selected_index >= len(self.class_names):
                 self.selected_index = 0
             self._show_character(
-                    self.generator.configuration[self.class_names[self.selected_index]])
+                    self.class_config[self.class_names[self.selected_index]])
         elif event.key() in self.config.move_left:
             self.selected_index = self.selected_index - 1
             if self.selected_index < 0:
                 self.selected_index = len(self.class_names) - 1
             self._show_character(
-                    self.generator.configuration[self.class_names[self.selected_index]])
+                    self.class_config[self.class_names[self.selected_index]])
         else:
             super().keyPressEvent(event)
