@@ -20,6 +20,7 @@ src/herculeum/config/levels/configure_items.py
 src/herculeum/config/levels/configure_upper_crypt.py
 src/herculeum/config/levels/crimson_lair.py
 src/herculeum/config/levels/effects.py
+src/herculeum/config/levels/first_gate.py
 src/herculeum/config/levels/player_characters.py
 src/herculeum/ui/__init__.py
 src/herculeum/ui/controllers/__init__.py
@@ -34,6 +35,7 @@ src/herculeum/ui/gui/endscreen.py
 src/herculeum/ui/gui/eventdisplay.py
 src/herculeum/ui/gui/images.py
 src/herculeum/ui/gui/inventory.py
+src/herculeum/ui/gui/layers.py
 src/herculeum/ui/gui/mainwindow.py
 src/herculeum/ui/gui/map.py
 src/herculeum/ui/gui/menu.py
@@ -41,6 +43,18 @@ src/herculeum/ui/gui/resources.py
 src/herculeum/ui/gui/startgame.py
 src/herculeum/ui/gui/surfaceManager.py
 src/herculeum/ui/gui/widgets.py
+src/herculeum/ui/gui/animations/__init__.py
+src/herculeum/ui/gui/animations/animation.py
+src/herculeum/ui/gui/animations/attack.py
+src/herculeum/ui/gui/animations/counters.py
+src/herculeum/ui/gui/animations/damage.py
+src/herculeum/ui/gui/animations/death.py
+src/herculeum/ui/gui/animations/factory.py
+src/herculeum/ui/gui/animations/healing.py
+src/herculeum/ui/gui/animations/inventory.py
+src/herculeum/ui/gui/animations/moving.py
+src/herculeum/ui/gui/animations/perception.py
+src/herculeum/ui/gui/animations/poison.py
 src/herculeum/ui/text/__init__.py
 src/herculeum/ui/text/character.py
 src/herculeum/ui/text/config.py
@@ -51,9 +65,10 @@ src/herculeum/ui/text/main_window.py
 src/herculeum/ui/text/map.py
 src/herculeum/ui/text/start_game.py
 src/herculeum/ui/text/surface_manager.py
+src/pyherc/__init__.hy
 src/pyherc/__init__.py
-src/pyherc/aspects.py
-src/pyherc/version.py
+src/pyherc/aspects.hy
+src/pyherc/version.hy
 src/pyherc/ai/__init__.py
 src/pyherc/ai/heapset.py
 src/pyherc/ai/pathfinding.py
@@ -66,6 +81,7 @@ src/pyherc/config/dsl/roomgenerators.py
 src/pyherc/data/__init__.py
 src/pyherc/data/character.py
 src/pyherc/data/constants.py
+src/pyherc/data/damage.py
 src/pyherc/data/dungeon.py
 src/pyherc/data/geometry.py
 src/pyherc/data/inventory.py
@@ -98,9 +114,10 @@ src/pyherc/events/move.py
 src/pyherc/events/perception.py
 src/pyherc/events/poison.py
 src/pyherc/events/spirit.py
+src/pyherc/generators/__init__.hy
 src/pyherc/generators/__init__.py
-src/pyherc/generators/creature.py
-src/pyherc/generators/dungeon.py
+src/pyherc/generators/creature.hy
+src/pyherc/generators/dungeon.hy
 src/pyherc/generators/effects.py
 src/pyherc/generators/item.py
 src/pyherc/generators/spells.py
@@ -127,7 +144,6 @@ src/pyherc/generators/level/room/squareroom.py
 src/pyherc/ports/__init__.py
 src/pyherc/ports/actions.py
 src/pyherc/rules/__init__.py
-src/pyherc/rules/calendar.py
 src/pyherc/rules/constants.py
 src/pyherc/rules/ending.py
 src/pyherc/rules/engine.py
