@@ -5,4 +5,6 @@ manual.qch
 herculeum.qhc
 pyherc.geany
 __pycache__
+resources.py
+resources.rcc
 
