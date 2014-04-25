@@ -18,40 +18,41 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (require hy.contrib.anaphoric)
+(require pyherc.aspects)
 (import [pyherc.aspects [log_debug log_info]])
 (import [pyherc.data [Character]])
 (import [pyherc.data.effects [EffectHandle]])
 (import [functools [partial]])
 (import [copy [copy]])
 
-(defn generate-creature [configuration model item-generator rng name]
-  "Generate creature"
-  (let [[config (get configuration name)]
-	[creature (Character model)]
-	[item-adder (partial add-item creature rng item-generator)]
-	[effect-handle-adder (partial add-effect-handle creature)]
-	[effect-adder (partial add-effect creature)]]
-    (set-creature-attributes creature config)
-    (ap-each (:effect-handles config) (effect-handle-adder it))
-    (ap-each (:effects config) (effect-adder it))
-    (ap-each (:inventory config) (item-adder it))
-    creature))
+#d(defn generate-creature [configuration model item-generator rng name]
+    "Generate creature"
+    (let [[config (get configuration name)]
+	  [creature (Character model)]
+	  [item-adder (partial add-item creature rng item-generator)]
+	  [effect-handle-adder (partial add-effect-handle creature)]
+	  [effect-adder (partial add-effect creature)]]
+      (set-creature-attributes creature config)
+      (ap-each (:effect-handles config) (effect-handle-adder it))
+      (ap-each (:effects config) (effect-adder it))
+      (ap-each (:inventory config) (item-adder it))
+      creature))
 
 
-(defn creature-config [name body finesse mind hp speed icons attack 
-		       &optional [ai nil] [effect-handles nil] [effects nil]
-		       [inventory nil] [description nil]]
-  "Create configuration for a creature"
-  {:name name :body body :finesse finesse :mind mind :hp hp :speed speed
-   :icons icons :attack attack :ai ai :description description
-   :effect-handles (if effect-handles effect-handles [])
-   :effects (if effects effects [])
-   :inventory (if inventory inventory [])})
+#d(defn creature-config [name body finesse mind hp speed icons attack 
+			 &optional [ai nil] [effect-handles nil] [effects nil]
+			 [inventory nil] [description nil]]
+    "Create configuration for a creature"
+    {:name name :body body :finesse finesse :mind mind :hp hp :speed speed
+     :icons icons :attack attack :ai ai :description description
+     :effect-handles (if effect-handles effect-handles [])
+     :effects (if effects effects [])
+     :inventory (if inventory inventory [])})
 
-(defn inventory-config [item-name min-amount max-amount probability]
-  "Create configuration for inventory item"
-  {:item-name item-name :min-amount min-amount :max-amount max-amount
-   :probability probability})
+#d(defn inventory-config [item-name min-amount max-amount probability]
+    "Create configuration for inventory item"
+    {:item-name item-name :min-amount min-amount :max-amount max-amount
+     :probability probability})
 
 (defn set-creature-attributes [creature config]
   (setv creature.name (:name config))
@@ -74,7 +75,6 @@
 					     handle-spec.effect
 					     handle-spec.parameters
 					     handle-spec.charges)))
-
 
 (defn add-item [creature rng item-generator item-spec]
   (let [[item-count (.randint rng (:min-amount item-spec) (:max-amount item-spec))]]

@@ -19,6 +19,10 @@
 (import logging)
 (import [decorator [decorator]])
 
+(defreader d [expr] `(with-decorator log-debug ~expr))
+
+(defreader i [expr] `(with-decorator log-info ~expr))
+
 (defn create-logger [log-level]
   "create a logger with specific log level"
   (with-decorator decorator
