@@ -21,7 +21,6 @@
 Module for effect specification builder
 """
 from pyherc.data.effects import Effect, EffectHandle
-from pyherc.generators import EffectsFactory
 
 
 class EffectHandleBuilder():
@@ -203,35 +202,3 @@ class EffectBuilder():
         effect.effect_name = self.effect_name
         effect.multiple_allowed = self.multiple_allowed
         return effect
-
-
-class EffectsFactoryBuilder():
-    """
-    Class to build effect factories
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        super().__init__()
-        self.effects = {}
-
-    def with_effect(self, key, type):
-        """
-        Configure factory with an effect
-
-        .. note: Can be called multiple times
-        """
-        self.effects[key] = type
-        return self
-
-    def build(self):
-        """
-        Build the configured factory
-        """
-        factory = EffectsFactory()
-
-        for k, v in self.effects.items():
-            factory.add_effect(key=k, type=v)
-
-        return factory

@@ -92,8 +92,8 @@ class Spell():
 
         for target in targets:
             for handle in handles:
-                effects.append(effects_factory.create_effect(key=handle.effect,
-                                                             target=target))
+                effects.append(effects_factory(key=handle.effect,
+                                               target=target))
 
         for effect in effects:
             if not effect.duration or effect.duration <= 0:

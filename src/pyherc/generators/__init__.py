@@ -31,5 +31,5 @@ from .item import AmmunitionConfiguration
 from .creature import generate_creature
 from .creature import creature_config
 from .creature import inventory_config
-from .effects import EffectsFactory
+from .effects import create_effect, get_effect_creator
 from .spells import SpellGenerator

@@ -21,11 +21,11 @@
 Tests for magical spells
 """
 
-from hamcrest import assert_that, equal_to, is_, is_in
+from hamcrest import assert_that, equal_to, is_, is_in, greater_than
 from mockito import any, mock, verify, when
-from pyherc.data.effects import Effect, EffectHandle
+from pyherc.data.effects import Effect, EffectHandle, Heal
 from pyherc.data.magic import Spell
-from pyherc.generators import EffectsFactory
+from pyherc.generators import create_effect, get_effect_creator
 from pyherc.rules.ending import Dying
 from pyherc.rules.magic.action import SpellCastingAction
 from pyherc.test.builders import (CharacterBuilder, LevelBuilder, SpellBuilder,
@@ -77,25 +77,34 @@ class TestSpellEffects():
         """
         Default constructor
         """
-        self.effects_factory = None
         self.effect = None
         self.dying_rules = None
         self.effect_handle = None
         self.spell = None
+        self.effects = None
 
     def setup(self):
         """
         Setup test cases
         """
         self.character = (CharacterBuilder()
-                                .build())
+                          .with_hit_points(10)
+                          .with_max_hp(20)
+                          .build())
 
-        self.effects_factory = mock(EffectsFactory)
-        self.effect = mock(Effect)
-        self.effect.duration = 0
+        effect_config = {'healing wind':
+                            {'type': Heal,
+                             'duration': 0,
+                             'frequency': 0,
+                             'tick': 0,
+                             'healing': 1,
+                             'icon': 'icon',
+                             'title': 'Cure minor wounds',
+                             'description': 'Cures small amount of damage'}}
+
+        self.effects = get_effect_creator(effect_config)
+
         self.dying_rules = mock(Dying)
-        when(self.effects_factory).create_effect(key = 'healing wind',
-                                                 target = any()).thenReturn(self.effect)
 
         self.effect_handle = EffectHandle(trigger = 'on spell hit',
                                           effect = 'healing wind',
@@ -107,24 +116,14 @@ class TestSpellEffects():
                         .with_target(self.character)
                         .build())
 
-    def test_creating_effect(self):
-        """
-        Casting a spell should create effects it has
-        """
-        self.spell.cast(self.effects_factory,
-                        self.dying_rules)
-
-        verify(self.effects_factory).create_effect(key = 'healing wind',
-                                                   target = self.character)
-
     def test_triggering_effect(self):
         """
         Casting a spell should trigger the effect
         """
-        self.spell.cast(self.effects_factory, 
+        self.spell.cast(self.effects,
                         self.dying_rules)
-        
-        verify(self.effect).trigger(self.dying_rules)
+
+        assert_that(self.character.hit_points, is_(greater_than(10)))
 
 class TestSpellCastingAction():
     """
@@ -142,11 +141,11 @@ class TestSpellCastingAction():
         """
         spell = mock(Spell)
         spell.spirit = 2
-        
+
         caster = (CharacterBuilder()
                       .with_spirit(10)
                       .build())
-        
+
         effects_factory = mock()
         dying_rules = mock()
 
@@ -195,7 +194,7 @@ class TestSpellCastingAction():
 
         listener = EventListener()
         caster.register_for_updates(listener)
-        
+
         effects_factory = mock()
         dying_rules = mock()
 
