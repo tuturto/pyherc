@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name = 'herculeum',
-      version = '0.12',
+      version = '0.13',
       description = 'Small roguelike game',
       author = 'Tuukka Turto',
       author_email = 'tuukka.turto@oktaeder.net',
