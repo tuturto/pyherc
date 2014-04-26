@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuration &mdash; Herculeum 0.11.0 documentation</title>
+    <title>Configuration &mdash; Herculeum 0.12.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.11.0',
+        VERSION:     '0.12.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.11.0 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.12.0 documentation" href="../index.html" />
     <link rel="next" title="Magic" href="magic.html" />
     <link rel="prev" title="Effects" href="effects.html" /> 
   </head>
@@ -35,15 +35,12 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="magic.html" title="Magic"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="effects.html" title="Effects"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,7 +53,7 @@
 <h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
 <p>Configuration of pyherc is driven by external files and internal scripts.
 External files are located in resources directory and internal scripts
-in package <a class="reference internal" href="../pyherc/config/package_config.html#module-pyherc.config" title="pyherc.config"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.config</span></tt></a>.</p>
+in package <tt class="xref py py-mod docutils literal"><span class="pre">pyherc.config</span></tt>.</p>
 <div class="section" id="configuration-scripts">
 <h2>Configuration scripts<a class="headerlink" href="#configuration-scripts" title="Permalink to this headline">¶</a></h2>
 <p>pyherc supports dynamic detection of configuration scripts. The system can be
@@ -75,9 +72,9 @@ perform configuration.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">init_level</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">item_generator</span><span class="p">,</span> <span class="n">creature_generator</span><span class="p">,</span> <span class="n">level_size</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This function should create <a class="reference internal" href="../pyherc/generators/level/module_config.html#pyherc.generators.level.config.LevelGeneratorFactoryConfig" title="pyherc.generators.level.config.LevelGeneratorFactoryConfig"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.config.LevelGeneratorFactoryConfig</span></tt></a>
+<p>This function should create <tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.config.LevelGeneratorFactoryConfig</span></tt>
 with appropriate values and return it. This configuration is eventually fed to
-<a class="reference internal" href="../pyherc/generators/level/module_generator.html#pyherc.generators.level.generator.LevelGeneratorFactory" title="pyherc.generators.level.generator.LevelGeneratorFactory"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.generator.LevelGeneratorFactory</span></tt></a> when new level
+<tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.generator.LevelGeneratorFactory</span></tt> when new level
 is requested.</p>
 </div>
 <div class="section" id="item-configuration">
@@ -87,7 +84,7 @@ perform configuration</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">init_items</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
 </pre></div>
 </div>
-<p>This function should return a list of <a class="reference internal" href="../pyherc/generators/module_item.html#pyherc.generators.item.ItemConfiguration" title="pyherc.generators.item.ItemConfiguration"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.item.ItemConfiguration</span></tt></a>
+<p>This function should return a list of <tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.item.ItemConfiguration</span></tt>
 objects.</p>
 </div>
 <div class="section" id="character-configuration">
@@ -97,7 +94,7 @@ to perform configuration:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">init_creatures</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
 </pre></div>
 </div>
-<p>This function should return a list of <a class="reference internal" href="../pyherc/generators/module_creature.html#pyherc.generators.creature.CreatureConfiguration" title="pyherc.generators.creature.CreatureConfiguration"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.creature.CreatureConfiguration</span></tt></a>
+<p>This function should return a list of <tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.creature.CreatureConfiguration</span></tt>
 objects.</p>
 </div>
 <div class="section" id="player-characters">
@@ -122,7 +119,7 @@ perform configuration</p>
 <p>Each of the configurators shown above take single parameter, context. This
 context is set by client application and can be used to relay information that
 is needed in configuration process. One such an example is loading icons.</p>
-<p>Example of context can be found at <a class="reference internal" href="../herculeum/config/module_config.html#herculeum.config.config.ConfigurationContext" title="herculeum.config.config.ConfigurationContext"><tt class="xref py py-class docutils literal"><span class="pre">herculeum.config.config.ConfigurationContext</span></tt></a>.</p>
+<p>Example of context can be found at <tt class="xref py py-class docutils literal"><span class="pre">herculeum.config.config.ConfigurationContext</span></tt>.</p>
 </div>
 </div>
 
@@ -181,15 +178,12 @@ is needed in configuration process. One such an example is loading icons.</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="magic.html" title="Magic"
              >next</a> |</li>
         <li class="right" >
           <a href="effects.html" title="Effects"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Actions &mdash; Herculeum 0.11.0 documentation</title>
+    <title>Actions &mdash; Herculeum 0.12.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.11.0',
+        VERSION:     '0.12.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.11.0 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.12.0 documentation" href="../index.html" />
     <link rel="next" title="Events" href="events.html" />
     <link rel="prev" title="Generating an item" href="generate_item.html" /> 
   </head>
@@ -35,15 +35,12 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="events.html" title="Events"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="generate_item.html" title="Generating an item"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -82,11 +79,11 @@ single step to given direction.</p>
 specific amount of ticks.</p>
 <div class="section" id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
-<p>Actions are located in <a class="reference internal" href="../pyherc/rules/package_rules.html#module-pyherc.rules" title="pyherc.rules"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules</span></tt></a>. Custom is to have own package for
+<p>Actions are located in <tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules</span></tt>. Custom is to have own package for
 each type of action. For example, code related to moving is placed in
 <tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules.move</span></tt> while code for various attacks is in
 <tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules.attack</span></tt>. Parameter classes are placed to
-<a class="reference internal" href="../pyherc/rules/module_public.html#module-pyherc.rules.public" title="pyherc.rules.public"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules.public</span></tt></a> and imported to top level for ease of use.</p>
+<tt class="xref py py-mod docutils literal"><span class="pre">pyherc.rules.public</span></tt> and imported to top level for ease of use.</p>
 <p>Last important piece is factory that knows how to read parameter class and
 construct action class based on it. Factories are placed in the same location
 as the actions.</p>
@@ -156,7 +153,7 @@ future.</p>
 </div>
 <div class="section" id="configuring-actionfactory">
 <h3>Configuring ActionFactory<a class="headerlink" href="#configuring-actionfactory" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="../pyherc/rules/module_public.html#pyherc.rules.public.ActionFactory" title="pyherc.rules.public.ActionFactory"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.public.ActionFactory</span></tt></a> needs to be configured in order it
+<p><tt class="xref py py-class docutils literal"><span class="pre">pyherc.rules.public.ActionFactory</span></tt> needs to be configured in order it
 to be able to create our new WaitAction. This is done in
 <tt class="xref py py-class docutils literal"><span class="pre">pyherc.config.Configuration</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">wait_factory</span> <span class="o">=</span> <span class="n">WaitFactory</span><span class="p">()</span>
@@ -309,15 +306,12 @@ Ticks after waiting 5
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="events.html" title="Events"
              >next</a> |</li>
         <li class="right" >
           <a href="generate_item.html" title="Generating an item"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

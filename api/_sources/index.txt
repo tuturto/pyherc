@@ -23,7 +23,6 @@ Contents:
    guide/magic
    guide/error_handling
    guide/testing
-   api_reference
 
 
 Indices and tables

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Testing &mdash; Herculeum 0.11.0 documentation</title>
+    <title>Testing &mdash; Herculeum 0.12.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.11.0',
+        VERSION:     '0.12.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.11.0 documentation" href="../index.html" />
-    <link rel="next" title="API Reference" href="../api_reference.html" />
+    <link rel="top" title="Herculeum 0.12.0 documentation" href="../index.html" />
     <link rel="prev" title="Error Handling" href="error_handling.html" /> 
   </head>
   <body>
@@ -35,15 +34,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../api_reference.html" title="API Reference"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
           <a href="error_handling.html" title="Error Handling"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -144,7 +137,7 @@ Took 0m0.0s</pre>
 <h2>Writing tests<a class="headerlink" href="#writing-tests" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="unit-tests">
 <h3>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h3>
-<p>Unit tests are placed in package <a class="reference internal" href="../pyherc/test/unit/package_unit.html#module-pyherc.test.unit" title="pyherc.test.unit"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.test.unit</span></tt></a> Any module that is
+<p>Unit tests are placed in package <tt class="xref py py-mod docutils literal"><span class="pre">pyherc.test.unit</span></tt> Any module that is
 named as &#8220;test_*&#8221; will be inspected automatically by Nose when it is gathering
 tests to run. It will search for classes named &#8220;Test*&#8221; and methods named
 &#8220;test_*&#8221;.</p>
@@ -187,12 +180,12 @@ added there.</p>
 to create the EffectHandle object and the customer has_effect_handle matcher.</p>
 <p>Builders are used because they make setting up objects easy, especially when
 dealing with very complex objects (Character for example). They are placed
-at <a class="reference internal" href="../pyherc/test/builders/package_builders.html#module-pyherc.test.builders" title="pyherc.test.builders"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.test.builders</span></tt></a> module.</p>
+at <tt class="xref py py-mod docutils literal"><span class="pre">pyherc.test.builders</span></tt> module.</p>
 <p>Custom matchers are used because they make dealing with verification somewhat
 cleaner. If the internal implementation of class changes, we need to only
 change how builders construct it and how matchers match it and tests should not
 need any modifications. Custom matchers can be found at
-<a class="reference internal" href="../pyherc/test/matchers/package_matchers.html#module-pyherc.test.matchers" title="pyherc.test.matchers"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.test.matchers</span></tt></a> module.</p>
+<tt class="xref py py-mod docutils literal"><span class="pre">pyherc.test.matchers</span></tt> module.</p>
 </div>
 <div class="section" id="cutesy">
 <h3>Cutesy<a class="headerlink" href="#cutesy" title="Permalink to this headline">¶</a></h3>
@@ -232,7 +225,7 @@ down.</p>
 </pre></div>
 </div>
 <p>Tests written with Cutesy follow same guidelines as regular unit tests. However
-they are placed in package <a class="reference internal" href="../pyherc/test/bdd/package_bdd.html#module-pyherc.test.bdd" title="pyherc.test.bdd"><tt class="xref py py-mod docutils literal"><span class="pre">pyherc.test.bdd</span></tt></a></p>
+they are placed in package <tt class="xref py py-mod docutils literal"><span class="pre">pyherc.test.bdd</span></tt></p>
 </div>
 <div class="section" id="id1">
 <h3>Doctest<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
@@ -316,9 +309,6 @@ online <a class="reference external" href="http://packages.python.org/behave/tut
   <h4>Previous topic</h4>
   <p class="topless"><a href="error_handling.html"
                         title="previous chapter">Error Handling</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../api_reference.html"
-                        title="next chapter">API Reference</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/guide/testing.txt"
@@ -348,15 +338,9 @@ online <a class="reference external" href="http://packages.python.org/behave/tut
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../api_reference.html" title="API Reference"
-             >next</a> |</li>
-        <li class="right" >
           <a href="error_handling.html" title="Error Handling"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

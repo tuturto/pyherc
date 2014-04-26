@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Modular level generator &mdash; Herculeum 0.11.0 documentation</title>
+    <title>Modular level generator &mdash; Herculeum 0.12.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.11.0',
+        VERSION:     '0.12.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.11.0 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.12.0 documentation" href="../index.html" />
     <link rel="next" title="Generating an item" href="generate_item.html" />
     <link rel="prev" title="Generating a level" href="generate_level.html" /> 
   </head>
@@ -35,15 +35,12 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="generate_item.html" title="Generating an item"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="generate_level.html" title="Generating a level"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,10 +53,10 @@
 <h1>Modular level generator<a class="headerlink" href="#modular-level-generator" title="Permalink to this headline">¶</a></h1>
 <p>Now that we are aware how level generation works in general, we can have
 a look at more modular approach.
-<a class="reference internal" href="../pyherc/generators/level/module_generator.html#pyherc.generators.level.generator.LevelGenerator" title="pyherc.generators.level.generator.LevelGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.generator.LevelGenerator</span></tt></a> is a high level
+<tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.generator.LevelGenerator</span></tt> is a high level
 generator that can be used to create different kinds of levels. Usually
 the system does not directly use it, but queries a fully setup generator
-from <a class="reference internal" href="../pyherc/generators/level/module_generator.html#pyherc.generators.level.generator.LevelGeneratorFactory" title="pyherc.generators.level.generator.LevelGeneratorFactory"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.generator.LevelGeneratorFactory</span></tt></a></p>
+from <tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.generator.LevelGeneratorFactory</span></tt></p>
 <div class="section" id="overview-of-levelgenerator">
 <h2>Overview of LevelGenerator<a class="headerlink" href="#overview-of-levelgenerator" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">generate_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">portal</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">new_portals</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">room_min_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
@@ -117,7 +114,7 @@ CreatureAdder-&gt;CreatureAdderConfiguration [tailport=s, headport=n]
 </div>
 <div class="section" id="partitioners">
 <h2>Partitioners<a class="headerlink" href="#partitioners" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="../pyherc/generators/level/partitioners/module_grid.html#pyherc.generators.level.partitioners.grid.GridPartitioner" title="pyherc.generators.level.partitioners.grid.GridPartitioner"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.partitioners.grid.GridPartitioner</span></tt></a> is basic partitioner,
+<p><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.partitioners.grid.GridPartitioner</span></tt> is basic partitioner,
 which knows how to divide level into a grid with equal sized sections.</p>
 <p>GridPartitioner has method:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">partition_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span>  <span class="n">x_sections</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>  <span class="n">y_sections</span> <span class="o">=</span> <span class="mi">3</span><span class="p">):</span>
@@ -125,7 +122,7 @@ which knows how to divide level into a grid with equal sized sections.</p>
 </div>
 <p>Calling this method will partition level to sections, link sections to each other
 and return them in a list.</p>
-<p><a class="reference internal" href="../pyherc/generators/level/partitioners/module_section.html#pyherc.generators.level.partitioners.section.Section" title="pyherc.generators.level.partitioners.section.Section"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.partitioners.section.Section</span></tt></a> is used to represent
+<p><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.partitioners.section.Section</span></tt> is used to represent
 section. It defines a rectangular area in level, links to neighbouring areas and
 information how they should connect to each other. It also defines connections
 for rooms.</p>
@@ -141,7 +138,7 @@ be linked together by room generator.</p>
 </div>
 <p>Calling this method should create a room inside section and connect all connection
 points together.</p>
-<p>Simple example can be found from <a class="reference internal" href="../pyherc/generators/level/room/module_squareroom.html#pyherc.generators.level.room.squareroom.SquareRoomGenerator" title="pyherc.generators.level.room.squareroom.SquareRoomGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.room.squareroom.SquareRoomGenerator</span></tt></a></p>
+<p>Simple example can be found from <tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.room.squareroom.SquareRoomGenerator</span></tt></p>
 </div>
 <div class="section" id="decorators">
 <h2>Decorators<a class="headerlink" href="#decorators" title="Permalink to this headline">¶</a></h2>
@@ -149,7 +146,7 @@ points together.</p>
 appearance of the floor to something different than what was generated by room
 generator. More complex usage is to detect where walls are located and change
 their appearance.</p>
-<p>New decorator can be created by subclassing <a class="reference internal" href="../pyherc/generators/level/decorator/module_basic.html#pyherc.generators.level.decorator.basic.Decorator" title="pyherc.generators.level.decorator.basic.Decorator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.decorator.basic.Decorator</span></tt></a>
+<p>New decorator can be created by subclassing <tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.decorator.basic.Decorator</span></tt>
 and overriding method:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">decorate_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
 </pre></div>
@@ -157,7 +154,7 @@ and overriding method:</p>
 </div>
 <div class="section" id="portal-adders">
 <h2>Portal adders<a class="headerlink" href="#portal-adders" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="../pyherc/generators/level/module_portals.html#pyherc.generators.level.portals.PortalAdder" title="pyherc.generators.level.portals.PortalAdder"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.portals.PortalAdder</span></tt></a> is responsible class for
+<p><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.portals.PortalAdder</span></tt> is responsible class for
 generating portals. the class itself is pretty simple. It contains information
 of what kind of icons to use, where to place the portal (room, corridor,
 treasure chamber and so on) and what kind of level it will lead to.</p>
@@ -171,20 +168,20 @@ a new level generator is created and used to generate the new level.</p>
 </div>
 <div class="section" id="creature-adder">
 <h2>Creature adder<a class="headerlink" href="#creature-adder" title="Permalink to this headline">¶</a></h2>
-<p>Creatures are added with <a class="reference internal" href="../pyherc/generators/level/module_creatures.html#pyherc.generators.level.creatures.CreatureAdder" title="pyherc.generators.level.creatures.CreatureAdder"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.creatures.CreatureAdder</span></tt></a>.
+<p>Creatures are added with <tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.creatures.CreatureAdder</span></tt>.
 Usually there is no reason to subclass this class, but simple configuration is
 enough.</p>
 </div>
 <div class="section" id="item-adder">
 <h2>Item adder<a class="headerlink" href="#item-adder" title="Permalink to this headline">¶</a></h2>
-<p>Items  are added with <a class="reference internal" href="../pyherc/generators/level/module_items.html#pyherc.generators.level.items.ItemAdder" title="pyherc.generators.level.items.ItemAdder"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.items.ItemAdder</span></tt></a>.
+<p>Items  are added with <tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.level.items.ItemAdder</span></tt>.
 Usually there is no reason to subclass this class, but simple configuration is
 enough.</p>
 </div>
 <div class="section" id="defining-levels">
 <h2>Defining levels<a class="headerlink" href="#defining-levels" title="Permalink to this headline">¶</a></h2>
 <p>Levels are defined in configuration scripts that are fed to
-<a class="reference internal" href="../pyherc/config/module_config.html#pyherc.config.config.Configuration" title="pyherc.config.config.Configuration"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.config.config.Configuration</span></tt></a> during system startup. Following
+<tt class="xref py py-class docutils literal"><span class="pre">pyherc.config.config.Configuration</span></tt> during system startup. Following
 example defines an simple level:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">Random</span>
 <span class="kn">from</span> <span class="nn">pyherc.generators.level.partitioners</span> <span class="kn">import</span> <span class="n">GridPartitioner</span>
@@ -371,15 +368,12 @@ application and configuration.</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="generate_item.html" title="Generating an item"
              >next</a> |</li>
         <li class="right" >
           <a href="generate_level.html" title="Generating a level"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

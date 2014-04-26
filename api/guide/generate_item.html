@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Generating an item &mdash; Herculeum 0.11.0 documentation</title>
+    <title>Generating an item &mdash; Herculeum 0.12.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.11.0',
+        VERSION:     '0.12.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.11.0 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.12.0 documentation" href="../index.html" />
     <link rel="next" title="Actions" href="actions.html" />
     <link rel="prev" title="Modular level generator" href="modular_levels.html" /> 
   </head>
@@ -35,15 +35,12 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="actions.html" title="Actions"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="modular_levels.html" title="Modular level generator"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,7 +55,7 @@
 the game.</p>
 <div class="section" id="overview-of-generating-item">
 <h2>Overview of generating item<a class="headerlink" href="#overview-of-generating-item" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="../pyherc/generators/module_item.html#pyherc.generators.item.ItemGenerator" title="pyherc.generators.item.ItemGenerator"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.item.ItemGenerator</span></tt></a> is used to generate items.</p>
+<p><tt class="xref py py-class docutils literal"><span class="pre">pyherc.generators.item.ItemGenerator</span></tt> is used to generate items.</p>
 <p>To generate item, following code can be used:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">new_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_generator</span><span class="o">.</span><span class="n">generate_item</span><span class="p">(</span><span class="n">item_type</span> <span class="o">=</span> <span class="s">&#39;food&#39;</span><span class="p">)</span>
 </pre></div>
@@ -73,7 +70,7 @@ following code can be used:</p>
 <div class="section" id="defining-items">
 <h2>Defining items<a class="headerlink" href="#defining-items" title="Permalink to this headline">¶</a></h2>
 <p>Items are defined in configuration scripts that are fed to
-<a class="reference internal" href="../pyherc/config/module_config.html#pyherc.config.config.Configuration" title="pyherc.config.config.Configuration"><tt class="xref py py-class docutils literal"><span class="pre">pyherc.config.config.Configuration</span></tt></a> during system startup. Following
+<tt class="xref py py-class docutils literal"><span class="pre">pyherc.config.config.Configuration</span></tt> during system startup. Following
 example defines an apple and dagger for configuration.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyherc.generators</span> <span class="kn">import</span> <span class="n">ItemConfigurations</span>
 <span class="kn">from</span> <span class="nn">pyherc.generators</span> <span class="kn">import</span> <span class="n">ItemConfiguration</span><span class="p">,</span> <span class="n">WeaponConfiguration</span>
@@ -178,15 +175,12 @@ page.</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="actions.html" title="Actions"
              >next</a> |</li>
         <li class="right" >
           <a href="modular_levels.html" title="Modular level generator"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.11.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
