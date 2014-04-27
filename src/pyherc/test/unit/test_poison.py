@@ -24,7 +24,7 @@ Module for testing poison related rules
 from hamcrest import assert_that, equal_to, is_  # pylint: disable-msg=E0611
 from mockito import mock, verify
 from pyherc.data.effects import Poison
-from pyherc.generators import EffectsFactory
+from pyherc.generators import get_effect_creator
 from pyherc.test.builders import CharacterBuilder, PoisonBuilder
 from pyherc.test.matchers import EventType, has_effect
 
@@ -73,19 +73,17 @@ class TestEffectsFactory():
         Test that poison effect can be created
         """
         character = CharacterBuilder().build()
-        factory = EffectsFactory()
-        factory.add_effect('poison',
-                            {'type': Poison,
-                            'duration': 150,
-                            'frequency': 30,
-                            'tick': 10,
-                            'damage': 5,
-                            'icon': 101,
-                            'title': 'Moderate poison',
-                            'description': 'Causes damage'})
+        effects = get_effect_creator({'poison':
+                                        {'type': Poison,
+                                         'duration': 150,
+                                         'frequency': 30,
+                                         'tick': 10,
+                                         'damage': 5,
+                                         'icon': 101,
+                                         'title': 'Moderate poison',
+                                         'description': 'Causes damage'}})
 
-        effect = factory.create_effect('poison',
-                                       target = character)
+        effect = effects('poison', target = character)
 
         assert_that(effect.duration, is_(equal_to(150)))
         assert_that(effect.frequency, is_(equal_to(30)))

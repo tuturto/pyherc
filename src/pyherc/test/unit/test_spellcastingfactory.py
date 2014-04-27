@@ -20,10 +20,11 @@
 """
 Module for SpellCastingFactory related tests
 """
+import hy
 from hamcrest import assert_that, is_not  # pylint: disable-msg=E0611
 from mockito import any, mock, verify, when
 from pyherc.rules.magic.interface import SpellCastingParameters
-from pyherc.test.builders import (ActionFactoryBuilder, EffectsFactoryBuilder,
+from pyherc.test.builders import (ActionFactoryBuilder,
                                   SpellCastingFactoryBuilder,
                                   SpellGeneratorBuilder)
 
@@ -59,24 +60,3 @@ class TestSpellCastingFactory:
                                                                   spell_name = 'healing wind'))
 
         assert_that(action, is_not(None))
-
-    def test_spell_is_created_with_a_factory(self):
-        """
-        When creating a spell casting action, spell should be created
-        """
-        caster = mock()
-        spell_factory = SpellGeneratorBuilder().build()
-        effects_factory = EffectsFactoryBuilder().build()
-        when(spell_factory).create_spell('healing wind').thenReturn(mock())  #pylint: disable-msg=E1103
-        spellcasting_factory = (SpellCastingFactoryBuilder()
-                                            .with_spell_factory(spell_factory)
-                                            .with_effects_factory(effects_factory)
-                                            .build())
-
-        spellcasting_factory.get_action(
-                                  SpellCastingParameters(caster,
-                                                         direction = 1,
-                                                         spell_name = 'healing wind'))
-
-        verify(spell_factory).create_spell(spell_name = 'healing wind',
-                                           targets = any())

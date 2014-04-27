@@ -20,11 +20,13 @@
 """
 Module for item effect tests
 """
-#pylint: disable=W0614
+import hy
 from random import Random
 
 from hamcrest import assert_that, equal_to, greater_than, has_item, is_, is_not
 from mockito import any, mock, when
+from pyherc.generators import get_effect_creator
+from pyherc.data.effects import Heal
 from pyherc.rules import ActionFactory, drink
 from pyherc.rules.consume import DrinkFactory
 from pyherc.test.builders import (CharacterBuilder, EffectHandleBuilder,
@@ -54,7 +56,17 @@ class TestPotions():
         """
         self.rng = Random()
         self.model = mock()
-        self.effect_factory = mock()
+
+        self.effect_factory = get_effect_creator({'heal':
+                                  {'type': Heal,
+                                   'duration': 0,
+                                   'frequency': 0,
+                                   'tick': 0,
+                                   'healing': 10,
+                                   'icon': 101,
+                                   'title': 'title',
+                                   'description': 'major heal'}})
+
         self.dying_rules = mock()
 
         drink_factory = DrinkFactory(self.effect_factory,
@@ -73,9 +85,6 @@ class TestPotions():
                     .with_healing(5)
                     .with_target(self.character)
                     .build())
-
-        when(self.effect_factory).create_effect(any(),
-                                                target = any()).thenReturn(effect)
 
         self.potion = (ItemBuilder()
                             .with_name('healing potion')

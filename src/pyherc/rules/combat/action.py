@@ -146,9 +146,7 @@ class AttackAction():
         if weapon is not None:
             effects.extend(weapon.get_effect_handles('on attack hit'))
         for effect_spec in effects:
-            effect = self.effect_factory.create_effect(
-                effect_spec.effect,
-                target=target)
+            effect = self.effect_factory(effect_spec.effect, target=target)
 
             if not effect.duration or effect.duration <= 0:
                 effect.trigger(self.dying_rules)

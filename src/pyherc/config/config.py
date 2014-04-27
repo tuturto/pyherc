@@ -23,7 +23,7 @@ Configuration for pyherc
 import random
 from functools import partial
 
-from pyherc.generators import (generate_creature, EffectsFactory,
+from pyherc.generators import (generate_creature, get_effect_creator,
                                ItemConfigurations, ItemGenerator,
                                SpellGenerator)
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
@@ -89,15 +89,16 @@ class Configuration():
                                    dying_rules)
         move_factory = MoveFactory(walk_factory)
 
-        effect_factory = EffectsFactory()
-
+        effect_config = {}
         configurators = self.get_configurators(context.config_package,
                                                'init_effects')
 
         for configurator in configurators:
             effects = configurator(context)
             for effect in effects:
-                effect_factory.add_effect(effect[0], effect[1])
+                effect_config[effect[0]] = effect[1]
+
+        effect_factory = EffectsFactory(effect_config)
 
         unarmed_combat_factory = UnarmedCombatFactory(effect_factory,
                                                       dying_rules)

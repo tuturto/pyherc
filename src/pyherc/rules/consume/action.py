@@ -52,9 +52,8 @@ class DrinkAction():
 
             if len(drink_effects) > 0:
                 for effect_spec in drink_effects:
-                    effect = self.effect_factory.create_effect(
-                        effect_spec.effect,
-                        target=self.character)
+                    effect = self.effect_factory(effect_spec.effect,
+                                                 target=self.character)
 
                     if effect.duration == 0:
                         effect.trigger(self.dying_rules)
