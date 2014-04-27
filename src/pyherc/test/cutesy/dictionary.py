@@ -20,14 +20,15 @@
 """
 Dictionary for behaviour driven tests
 """
-
+import hy
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
+from pyherc.generators import get_effect_creator
 from pyherc.data.effects import DamageEffect, Heal, Poison
 from pyherc.data.geometry import find_direction
 from pyherc.rules import (attack, cast, drop_item, Dying, gain_domain,
                           is_move_legal, move, wait)
-from pyherc.test.builders import (ActionFactoryBuilder, EffectsFactoryBuilder,
+from pyherc.test.builders import (ActionFactoryBuilder,
                                   LevelBuilder, SpellCastingFactoryBuilder,
                                   SpellGeneratorBuilder)
 
@@ -264,8 +265,7 @@ class CastSpell():
 
         spell_factory = SpellGeneratorBuilder().build()
 
-        effects_factory = (EffectsFactoryBuilder()
-                           .with_effect('heal medium wounds',
+        effects_factory = get_effect_creator({'heal medium wounds':
                                         {'type': Heal,
                                          'duration': None,
                                          'frequency': None,
@@ -273,8 +273,8 @@ class CastSpell():
                                          'healing': 10,
                                          'icon': None,
                                          'title': 'Heal medium wounds',
-                                         'description': 'Heals medium amount of damage'})  # noqa
-                           .with_effect('cause wound',
+                                         'description': 'Heals medium amount of damage'},  # noqa
+                                    'cause wound':
                                         {'type': DamageEffect,
                                          'duration': None,
                                          'frequency': None,
@@ -283,8 +283,8 @@ class CastSpell():
                                          'damage_type': 'magic',
                                          'icon': None,
                                          'title': 'Cause minor wound',
-                                         'description': 'Causes minor amount of damage'})  # noqa
-                           .with_effect('fire',
+                                         'description': 'Causes minor amount of damage'},  # noqa
+                                    'fire':
                                         {'type': DamageEffect,
                                          'duration': 30,
                                          'frequency': 5,
@@ -293,8 +293,7 @@ class CastSpell():
                                          'damage_type': 'fire',
                                          'icon': None,
                                          'title': 'Fire',
-                                         'description': 'You are on fire!'})
-                           .build())
+                                         'description': 'You are on fire!'}})
 
         spell_casting_factory = (SpellCastingFactoryBuilder()
                                  .with_spell_factory(spell_factory)

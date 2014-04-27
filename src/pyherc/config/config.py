@@ -98,7 +98,7 @@ class Configuration():
             for effect in effects:
                 effect_config[effect[0]] = effect[1]
 
-        effect_factory = EffectsFactory(effect_config)
+        effect_factory = get_effect_creator(effect_config)
 
         unarmed_combat_factory = UnarmedCombatFactory(effect_factory,
                                                       dying_rules)
