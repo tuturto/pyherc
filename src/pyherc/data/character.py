@@ -93,18 +93,6 @@ class Character():
         return self.name
 
     @log_debug
-    def register_event_listener(self, listener):
-        """
-        Register event listener
-
-        :param listener: listener to add
-        :type listener: Listener
-
-        .. versionadded:: 0.4
-        """
-        self.event_listeners.append(listener)
-
-    @log_debug
     def register_for_updates(self, listener):
         """
         Register listener to receive updates for this entity

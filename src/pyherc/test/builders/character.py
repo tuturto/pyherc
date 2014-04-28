@@ -23,7 +23,7 @@ Module for character builder
 from mockito import mock
 from pyherc.data import Character
 from pyherc.data.effects import EffectsCollection
-from pyherc.data.new_character import set_hit_points
+from pyherc.data.new_character import set_hit_points, register_event_listener
 
 
 class CharacterBuilder():
@@ -358,7 +358,7 @@ class CharacterBuilder():
             character.add_effect(effect)
 
         for listener in self.listeners:
-            character.register_event_listener(listener)
+            register_event_listener(character, listener)
 
         for listener in self.update_listeners:
             character.register_for_updates(listener)

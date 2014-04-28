@@ -28,6 +28,7 @@ from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import (EffectsWidget, HitPointsWidget,
                                       SpellSelectorWidget, TimerAdapter)
 from pyherc.data.model import DIED_IN_DUNGEON
+from pyherc.data.new_character import register_event_listener
 from pyherc.rules import attack, cast, is_move_legal, move, pick_up, wait
 from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
                           QEasingCurve, QEvent, QObject, QPropertyAnimation,
@@ -115,7 +116,7 @@ class PlayMapWindow(QWidget):
         Create scene to display
         """
         self.map_widget.construct_scene()
-        self.model.player.register_event_listener(self.message_widget)
+        register_event_listener(self.model.player, self.message_widget)
         self.message_widget.set_point_of_view(self.model.player)
         self.model.player.register_for_updates(self.effects_widget)
 
