@@ -43,23 +43,32 @@
     (setv character.hit_points hit-points)
     (raise-event character (HitPointsChangedEvent character old-hit-points new-hit-points))))
 
+(defn body [character]
+  "body attribute of character"
+  character.body)
+
+(defn set-body [character body]
+  "set body attribute of character"
+  (setv character.body body))
+
 #d(defn proficient-with? [character weapon]
     "check if this character is proficient with a given weapon"
     (assert weapon)
     (when (not weapon.weapon-data) true)
-    (if (len (filter-matching-profincies (weapon-profincies character)
-					 weapon))
-      true
-      false))
+    (try
+     (when (next (filter-matching-profincies (weapon-profincies character)
+					     weapon))
+       true)
+     (catch [e StopIteration] false)))
 
 (defn weapon-profincies [character]
   "get weapon profincies of a character"
-  (list-comp tag [tag character.feats] (= tag.name "weapon proficiency")))
+  (genexpr tag [tag character.feats] (= tag.name "weapon proficiency")))
 
 (defn filter-matching-profincies [profincies weapon]
   "get weapon profincies that match the weapon"
   (let [[weapon-data weapon.weapon-data]]
-  (list-comp tag [tag profincies] 
+  (genexpr tag [tag profincies] 
 	     (and (= tag.weapon-type weapon-data.weapon-type)
 		  (or (is tag.weapon-name nil)
 		      (= tag.weapon-name weapon-data.weapon-name))))))
