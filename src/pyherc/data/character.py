@@ -247,30 +247,6 @@ class Character():
         assert item is not None
         self.item_memory[item.name] = item.name
 
-    @log_debug
-    def is_proficient(self, weapon):
-        """
-        Check if this character is proficient with a given weapon
-
-        :param weapon: weapon which proficient requirements should be checked
-        :type weapon: Item
-        :returns: True if proficient, otherwise False
-        :rtype: Boolean
-        """
-        assert weapon is not None
-
-        if weapon.weapon_data is None:
-            return True
-
-        if True in [(x.name == 'weapon proficiency'
-                    and x.weapon_type == weapon.weapon_data.weapon_type)
-                    and (x.weapon_name is None
-                         or x.weapon_name == weapon.weapon_data.name)
-                    for x in self.feats]:
-            return True
-        else:
-            return False
-
     def get_location(self):
         """
         Returns location of this character
