@@ -23,6 +23,7 @@ Module for checking end conditions
 
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import DIED_IN_DUNGEON, ESCAPED_DUNGEON
+from pyherc.data.new_character import hit_points
 from pyherc.events import DeathEvent, DropEvent
 
 
@@ -47,7 +48,7 @@ class Dying():
         if not character.level:
             return
 
-        if character.hit_points <= 0:
+        if hit_points(character) <= 0:
             for item in character.inventory:
                 character.inventory.remove(item)
                 character.level.add_item(item, character.location)

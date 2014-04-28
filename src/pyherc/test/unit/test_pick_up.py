@@ -79,20 +79,6 @@ class TestPickingUp():
         assert(not self.item in self.level.items)
         assert(self.item.location == ())
 
-    def test_picking_up_raises_event(self):
-        """
-        Event should be raised when item is picked up
-        """
-        observer = mock()
-
-        self.level.add_creature(observer, (1, 1))
-
-        pick_up(self.character,
-                self.item,
-                self.action_factory)
-
-        verify(observer).receive_event(any(PickUpEvent))
-
     def test_picking_up_not_correct_location(self): #pylint: disable=C0103
         """
         Test that item is not picked up from wrong location

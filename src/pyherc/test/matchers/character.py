@@ -21,6 +21,7 @@
 Module for customer matchers used in testing
 """
 
+from pyherc.data.new_character import hit_points
 from hamcrest.core.base_matcher import BaseMatcher
 
 
@@ -43,7 +44,7 @@ class AliveStatus(BaseMatcher):
         :returns: True if matching, otherwise False
         :rtype: Boolean
         """
-        if item.hit_points > 0:
+        if hit_points(item) > 0:
             is_alive = True
         else:
             is_alive = False
@@ -64,7 +65,7 @@ class AliveStatus(BaseMatcher):
         Describe this mismatch
         """
         mismatch_description.append('Was character with {0} hit points'
-                                    .format(item.hit_points))
+                                    .format(hit_points(item)))
 
 
 def is_dead():

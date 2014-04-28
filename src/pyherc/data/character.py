@@ -63,7 +63,7 @@ class Character():
         self.name = 'prototype'
         self.race = None
         self.kit = None
-        self.__hit_points = None
+        self.hit_points = None
         self.__max_hp = None
         self.__spirit = 100
         self.max_spirit = 100
@@ -78,7 +78,7 @@ class Character():
         #internal
         self.tick = 0
         self.short_term_memory = []
-        self.__event_listeners = []
+        self.event_listeners = []
         self.__update_listeners = []
         self.item_memory = {}
         self.size = 'medium'
@@ -93,19 +93,6 @@ class Character():
         return self.name
 
     @log_debug
-    def receive_event(self, event):
-        """
-        Receives an event from world and enters it into short term memory
-
-        :param event: event to receive
-        :type event: Event
-        """
-        self.short_term_memory.append(event)
-
-        for listener in self.__event_listeners:
-            listener.receive_event(event)
-
-    @log_debug
     def register_event_listener(self, listener):
         """
         Register event listener
@@ -115,7 +102,7 @@ class Character():
 
         .. versionadded:: 0.4
         """
-        self.__event_listeners.append(listener)
+        self.event_listeners.append(listener)
 
     @log_debug
     def register_for_updates(self, listener):
@@ -171,26 +158,6 @@ class Character():
         self.artificial_intelligence.act(model,
                                          action_factory,
                                          rng)
-
-    def __get_hp(self):
-        """
-        Current hitpoints
-        """
-        return self.__hit_points
-
-    def __set_hp(self, hit_points):
-        """
-        Current hitpoints
-        """
-        old_hit_points = self.__hit_points
-        new_hit_points = hit_points
-
-        self.__hit_points = hit_points
-
-        self.raise_event(
-            HitPointsChangedEvent(character=self,
-                                  old_hit_points=old_hit_points,
-                                  new_hit_points=new_hit_points))
 
     def __get_spirit(self):
         """
@@ -562,7 +529,6 @@ class Character():
             p.pretty(self.__effects_collection)
             p.breakable()
 
-    hit_points = property(__get_hp, __set_hp)
     spirit = property(__get_spirit, __set_spirit)
     max_hp = property(__get_max_hp, __set_max_hp)
     body = property(__get_body, __set_body)

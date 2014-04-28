@@ -21,6 +21,7 @@
 Module defining classes related to damage
 """
 from pyherc.aspects import log_debug
+from pyherc.data.new_character import hit_points, set_hit_points
 
 
 class Damage():
@@ -71,7 +72,7 @@ class Damage():
             else:
                 self.damage_inflicted = 0
 
-        target.hit_points = target.hit_points - self.damage_inflicted
+        set_hit_points(target, hit_points(target) - self.damage_inflicted)
 
     @log_debug
     def __get_damage(self):

@@ -23,6 +23,7 @@ Module for testing damage modification rules
 from hamcrest import assert_that, equal_to, is_
 from mockito import mock, when
 from pyherc.data import Dungeon, Model
+from pyherc.data.new_character import hit_points
 from pyherc.data.effects import DamageModifier
 from pyherc.rules import attack
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
@@ -101,7 +102,7 @@ class TestDamageModifiers():
                self.action_factory,
                self.rng)
 
-        assert_that(self.character2.hit_points, is_(equal_to(6)))
+        assert_that(hit_points(self.character2), is_(equal_to(6)))
 
     def test_non_matching_damage_increase_is_not_done(self):
         """
@@ -115,7 +116,7 @@ class TestDamageModifiers():
                self.action_factory,
                self.rng)
 
-        assert_that(self.character2.hit_points, is_(equal_to(7)))
+        assert_that(hit_points(self.character2), is_(equal_to(7)))
 
     def test_multiple_modifiers_are_handled(self):
         """
@@ -137,7 +138,7 @@ class TestDamageModifiers():
                self.action_factory,
                self.rng)
 
-        assert_that(self.character2.hit_points, is_(equal_to(3)))
+        assert_that(hit_points(self.character2), is_(equal_to(3)))
 
     def test_melee_combat_is_handled(self):
         """
@@ -155,4 +156,4 @@ class TestDamageModifiers():
                self.action_factory,
                self.rng)
 
-        assert_that(self.character2.hit_points, is_(equal_to(7)))
+        assert_that(hit_points(self.character2), is_(equal_to(7)))

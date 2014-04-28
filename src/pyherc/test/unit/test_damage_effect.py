@@ -23,6 +23,7 @@ Tests for damage effect
 from mockito import any, mock, verify, when
 from hamcrest import assert_that, is_, equal_to
 from pyherc.data import Character
+from pyherc.data.new_character import hit_points
 from pyherc.data.effects import DamageModifier
 from pyherc.events import DamageTriggeredEvent
 from pyherc.test.builders import CharacterBuilder, DamageBuilder
@@ -81,4 +82,4 @@ class TestDamageEffect():
 
         effect.trigger(dying_rules=mock())
 
-        assert_that(target.hit_points, is_(equal_to(10)))
+        assert_that(hit_points(target), is_(equal_to(10)))

@@ -5,7 +5,7 @@ during the play and how to add new effects.
 
 Overview of effects system
 ==========================
-Effects can be understood as on-going statuses that have an effect to an 
+Effects can be understood as on-going statuses that have an effect to an
 character. Good example would be poisoning. When character has poison effect
 active, he periodically takes small amount of damage, until the effect is
 removed or it expires.
@@ -38,7 +38,7 @@ effect has not been expired.
 
 EffectsFactory
 ==============
-Effects are cread by :class:`pyherc.generators.effects.EffectsFactory`. It can 
+Effects are cread by :class:`pyherc.generators.effects.EffectsFactory`. It can
 take EffectHandle, some parameters and create a correctly instantiated Effect.
 
 EffectsFactory is configured during the start up of the system with information
@@ -64,15 +64,15 @@ that links names of effects to concrete Effect subclasses and their parameters.
 
     Pete = Adventurer()
     print('Hit points before poisoning: {0}'.format(Pete.hit_points))
-    
+
     poisoning = effect_factory.create_effect('minor poison', target = Pete)
     poisoning.trigger(Dying())
-    
+
     print('Hit points after poisoning: {0}'.format(Pete.hit_points))
 
-Pete the adventurer gets affected by minor poison and as a result loses 
+Pete the adventurer gets affected by minor poison and as a result loses
 1 hit point.
-    
+
 .. testoutput::
 
     Hit points before poisoning: 10
@@ -97,20 +97,20 @@ Character objects use it to interact with effects sub system.
 Following example creates an EffectHandle and adds it to the collection.
 
 .. testcode::
-   
+
    from pyherc.data.effects import EffectsCollection,EffectHandle
-   
+
    collection = EffectsCollection()
    handle = EffectHandle(trigger = 'on kick',
                          effect = 'explosion',
                          parameters = None,
                          charges = 1)
    collection.add_effect_handle(handle)
-   
+
    print(collection.get_effect_handles())
-   
+
 The collection now contains a single EffectHandle object.
-   
+
 .. testoutput::
 
    [<pyherc.data.effects.effect.EffectHandle object at 0x...>]
@@ -122,20 +122,20 @@ Following example creates an Effect and adds it to the collection.
    from pyherc.data.effects import EffectsCollection, Poison
 
    collection = EffectsCollection()
-   effect = Poison(duration = 200, 
-                   frequency = 10, 
-                   tick = 0, 
-                   damage = 1, 
+   effect = Poison(duration = 200,
+                   frequency = 10,
+                   tick = 0,
+                   damage = 1,
                    target = None,
                    icon = 101,
                    title = 'minor poison',
                    description = 'Causes small amount of damage')
    collection.add_effect(effect)
-   
+
    print(collection.get_effects())
 
 The collection now contains a single Poison object.
-   
+
 .. testoutput::
 
    [<pyherc.data.effects.poison.Poison object at 0x...>]

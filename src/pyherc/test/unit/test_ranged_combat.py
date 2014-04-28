@@ -24,6 +24,7 @@ from random import Random
 
 from hamcrest import assert_that, equal_to, is_, is_not
 from mockito import any, mock, verify, when
+from pyherc.data.new_character import hit_points
 from pyherc.rules import attack
 from pyherc.rules.combat import RangedCombatFactory
 from pyherc.rules.combat.interface import AttackParameters
@@ -113,7 +114,7 @@ class TestRangedCombat():
                action_factory,
                Random())
 
-        assert_that(self.target.hit_points, is_(equal_to(7)))
+        assert_that(hit_points(self.target), is_(equal_to(7)))
 
     def test_ammunition_is_decreased(self):
         """

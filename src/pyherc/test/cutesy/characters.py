@@ -22,6 +22,7 @@ Package for characters
 """
 from pyherc.test.builders import CharacterBuilder
 from pyherc.test.cutesy.dictionary import add_history_value
+from pyherc.data.new_character import set_hit_points
 
 
 def strong(character):
@@ -32,7 +33,7 @@ def strong(character):
     :type character: Character
     """
     character.body = 10
-    character.hit_points = 20
+    set_hit_points(character, 20)
     character.maximum_hit_points = 20
     return character
 
@@ -45,7 +46,7 @@ def weak(character):
     :type character: Character
     """
     character.body = 2
-    character.hit_points = 5
+    set_hit_points(character, 5)
     character.maximum_hit_points = 5
     return character
 

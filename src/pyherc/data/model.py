@@ -22,6 +22,7 @@ Module for Model related classes
 """
 
 from pyherc.aspects import log_debug
+from pyherc.data.new_character import receive_event
 
 ESCAPED_DUNGEON = 1
 DIED_IN_DUNGEON = 2
@@ -74,7 +75,7 @@ class Model():
 
         if level is not None:
             for creature in level.creatures:
-                creature.receive_event(event)
+                receive_event(creature, event)
 
         for listener in self.__event_listeners:
             listener.receive_event(event)

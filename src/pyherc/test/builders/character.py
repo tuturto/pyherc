@@ -23,6 +23,7 @@ Module for character builder
 from mockito import mock
 from pyherc.data import Character
 from pyherc.data.effects import EffectsCollection
+from pyherc.data.new_character import set_hit_points
 
 
 class CharacterBuilder():
@@ -331,7 +332,7 @@ class CharacterBuilder():
 
         character.name = self.name
 
-        character.hit_points = self.hit_points
+        set_hit_points(character, self.hit_points)
         character.max_hp = self.max_hp
         character.spirit = self.spirit
         character.max_spirit = self.max_spirit
