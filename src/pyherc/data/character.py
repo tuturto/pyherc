@@ -57,14 +57,14 @@ class Character():
         super().__init__()
         # attributes
         self.model = model
-        self.__body = None
-        self.__finesse = None
-        self.__mind = None
+        self.body = None
+        self.finesse = None
+        self.mind = None
         self.name = 'prototype'
         self.race = None
         self.kit = None
         self.hit_points = None
-        self.__max_hp = None
+        self.max_hp = None
         self.__spirit = 100
         self.max_spirit = 100
         self.speed = None
@@ -163,66 +163,6 @@ class Character():
             SpiritPointsChangedEvent(character=self,
                                      old_spirit=old_spirit,
                                      new_spirit=new_spirit))
-
-    def __get_body(self):
-        """
-        Current body attribute
-        """
-        return self.__body
-
-    def __set_body(self, body):
-        """
-        Current body attribute
-        """
-        self.__body = body
-
-    def __get_finesse(self):
-        """
-        Current finesse attribute
-        """
-        return self.__finesse
-
-    def __set_finesse(self, finesse):
-        """
-        Current finesse attribute
-        """
-        self.__finesse = finesse
-
-    def __get_mind(self):
-        """
-        Current mind attribute
-        """
-        return self.__mind
-
-    def __set_mind(self, mind):
-        """
-        Current mind attribute
-        """
-        self.__mind = mind
-
-    def get_attack(self):
-        """
-        Attack attribute of the character
-        """
-        return self.attack
-
-    def set_attack(self, attack):
-        """
-        Attack attribute of the character
-        """
-        self.attack = attack
-
-    def __get_max_hp(self):
-        """
-        Maximum HP this character can currently have
-        """
-        return self.__max_hp
-
-    def __set_max_hp(self, max_hp):
-        """
-        Maximum HP this character can currently have
-        """
-        self.__max_hp = max_hp
 
     @log_debug
     def identify_item(self, item):
@@ -465,39 +405,7 @@ class Character():
         return tuple(x for x in
                      map(sum, zip(self.location, offset[direction])))
 
-    def _repr_pretty_(self, p, cycle):
-        """
-        Pretty print for IPython
-
-        :param p: printer to write
-        :param cycle: has pretty print detected a cycle?
-        """
-        if cycle:
-            p.text('Character(...)')
-        else:
-            p.text('name: {0}'.format(self.name))
-            p.breakable()
-            p.text('hitpoints: {0}/{1}'.format(self.__hit_points,
-                                               self.__max_hp))
-            p.breakable()
-            p.text('body: {0}'.format(self.__body))
-            p.breakable()
-            p.text('finesse: {0}'.format(self.__finesse))
-            p.breakable()
-            p.text('mind: {0}'.format(self.__mind))
-            p.breakable()
-            p.text('location: {0}'.format(self.location))
-            p.breakable()
-            p.pretty(self.inventory)
-            p.breakable()
-            p.pretty(self.__effects_collection)
-            p.breakable()
-
     spirit = property(__get_spirit, __set_spirit)
-    max_hp = property(__get_max_hp, __set_max_hp)
-    body = property(__get_body, __set_body)
-    finesse = property(__get_finesse, __set_finesse)
-    mind = property(__get_mind, __set_mind)
 
 
 class Feat():
