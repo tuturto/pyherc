@@ -22,6 +22,7 @@ Module defining classes related to Move
 """
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.constants import Duration
+from pyherc.data.new_character import raise_event
 from pyherc.data.geometry import find_direction
 from pyherc.data.model import ESCAPED_DUNGEON
 from pyherc.events import MoveEvent
@@ -85,11 +86,11 @@ class MoveAction():
 
             self.character.add_to_tick(Duration.fast / speed_modifier)
 
-            self.character.raise_event(MoveEvent(
-                mover=self.character,
-                old_location=old_location,
-                direction=direction,
-                affected_tiles=affected_tiles))
+            raise_event(self.character,
+                        MoveEvent(mover=self.character,
+                                  old_location=old_location,
+                                  direction=direction,
+                                  affected_tiles=affected_tiles))
 
         else:
             self.character.add_to_tick(Duration.instant)

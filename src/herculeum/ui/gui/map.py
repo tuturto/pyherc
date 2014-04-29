@@ -29,6 +29,7 @@ from herculeum.ui.gui.widgets import (EffectsWidget, HitPointsWidget,
                                       SpellSelectorWidget, TimerAdapter)
 from pyherc.data.model import DIED_IN_DUNGEON
 from pyherc.data.new_character import register_event_listener
+from pyherc.data.new_character import register_for_updates, remove_from_updates
 from pyherc.rules import attack, cast, is_move_legal, move, pick_up, wait
 from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
                           QEasingCurve, QEvent, QObject, QPropertyAnimation,
@@ -118,7 +119,7 @@ class PlayMapWindow(QWidget):
         self.map_widget.construct_scene()
         register_event_listener(self.model.player, self.message_widget)
         self.message_widget.set_point_of_view(self.model.player)
-        self.model.player.register_for_updates(self.effects_widget)
+        register_for_updates(self.model.player, self.effects_widget)
 
     def on_menu_requested(self):
         """
@@ -258,7 +259,7 @@ class PlayMapWidget(QWidget):
         """
         self.__construct_scene(self.model, self.scene)
 
-        self.model.player.register_for_updates(self)
+        register_for_updates(self.model.player, self)
         self.model.register_event_listener(self)
         self.__center_view_on_character(self.model.player)
 
@@ -635,4 +636,4 @@ class MapGlyph(QGraphicsPixmapItem):
         Clear update registrations
         """
         if self.entity != None:
-            self.entity.remove_from_updates(self)
+            remove_from_updates(self.entity, self)

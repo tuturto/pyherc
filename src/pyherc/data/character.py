@@ -22,6 +22,7 @@ Module for Character related classes
 """
 from decorator import decorator
 from pyherc.aspects import log_debug, log_info
+from pyherc.data.new_character import raise_event
 from pyherc.data.effects.effectscollection import EffectsCollection
 from pyherc.data.inventory import Inventory
 from pyherc.data.magic.spellbook import SpellBook
@@ -39,7 +40,7 @@ def guarded_action(wrapped_function, *args, **kwargs):
     except Exception:
         self = args[0]
         self.tick = 10
-        self.raise_event(ErrorEvent(self))
+        raise_event(self, ErrorEvent(self))
 
 
 class Character():
@@ -79,7 +80,7 @@ class Character():
         self.tick = 0
         self.short_term_memory = []
         self.event_listeners = []
-        self.__update_listeners = []
+        self.update_listeners = []
         self.item_memory = {}
         self.size = 'medium'
         self.attack = None
@@ -91,44 +92,6 @@ class Character():
 
     def __str__(self):
         return self.name
-
-    @log_debug
-    def register_for_updates(self, listener):
-        """
-        Register listener to receive updates for this entity
-
-        :param listener: listener to add
-        :type listener: Listener
-
-        .. versionadded:: 0.5
-        """
-        self.__update_listeners.append(listener)
-
-    @log_debug
-    def remove_from_updates(self, listener):
-        """
-        Remove listener
-
-        :param listener: listener to remove
-        :type listener: Listener
-
-        .. versionadded:: 0.5
-        """
-        if listener in self.__update_listeners:
-            self.__update_listeners.remove(listener)
-
-    @log_debug
-    def notify_update_listeners(self, event):
-        """
-        Notify all listeners registered for update of this entity
-
-        :param event: event to relay to update listeners
-        :type event: Event
-
-        .. versionadded:: 0.5
-        """
-        for listener in self.__update_listeners:
-            listener.receive_update(event)
 
     @guarded_action
     @log_info
@@ -159,10 +122,10 @@ class Character():
 
         self.__spirit = spirit
 
-        self.raise_event(
-            SpiritPointsChangedEvent(character=self,
-                                     old_spirit=old_spirit,
-                                     new_spirit=new_spirit))
+        raise_event(self,
+                    SpiritPointsChangedEvent(character=self,
+                                             old_spirit=old_spirit,
+                                             new_spirit=new_spirit))
 
     @log_debug
     def identify_item(self, item):
@@ -226,17 +189,6 @@ class Character():
         return action
 
     @log_debug
-    def raise_event(self, event):
-        """
-        Raise event for other creatures to see
-
-        :param event: event to raise
-        :type event: Event
-        """
-        self.model.raise_event(event)
-        self.notify_update_listeners(event)
-
-    @log_debug
     def add_effect_handle(self, effect):
         """
         Adds an effect handle to an character
@@ -289,10 +241,10 @@ class Character():
         if not effect.multiple_allowed:
             if not self.__effects_collection.has_effect(effect):
                 self.__effects_collection.add_effect(effect)
-                self.raise_event(effect.get_add_event())
+                raise_event(self, effect.get_add_event())
         else:
             self.__effects_collection.add_effect(effect)
-            self.raise_event(effect.get_add_event())
+            raise_event(self, effect.get_add_event())
 
     @log_debug
     def get_effects(self):
@@ -318,7 +270,7 @@ class Character():
         if len(removed) > 0:
             self.__effects_collection.remove_expired_effects()
             for effect in removed:
-                self.raise_event(effect.get_removal_event())
+                raise_event(self, effect.get_removal_event())
 
     @log_debug
     def add_to_tick(self, cost):

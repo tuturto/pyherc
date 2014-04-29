@@ -20,6 +20,7 @@
 (setv __doc__ "module for actions")
 
 (import [pyherc.aspects [log_debug]]
+    [pyherc.data.new_character [raise-event]]
     [pyherc.rules [move is-move-legal attack]]
     [pyherc.events [NoticeEvent]]
     [math [sqrt]])
@@ -77,4 +78,4 @@
   "focus on enemy and start tracking it"
   (let [[character ai.character]
     [event (NoticeEvent character enemy)]]
-    (.raise-event character event)))
+    (raise-event character event)))

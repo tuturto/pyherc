@@ -23,7 +23,7 @@ Module for checking end conditions
 
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import DIED_IN_DUNGEON, ESCAPED_DUNGEON
-from pyherc.data.new_character import hit_points
+from pyherc.data.new_character import hit_points, raise_event
 from pyherc.events import DeathEvent, DropEvent
 
 
@@ -52,22 +52,21 @@ class Dying():
             for item in character.inventory:
                 character.inventory.remove(item)
                 character.level.add_item(item, character.location)
-                character.raise_event(DropEvent(character,
-                                                item))
+                raise_event(character,
+                            DropEvent(character, item))
 
             if character.inventory.weapon is not None:
                 character.level.add_item(character.inventory.weapon,
                                          character.location)
-                character.raise_event(DropEvent(character,
-                                                item))
+                raise_event(character, DropEvent(character, item))
                 character.inventory.weapon = None
 
             if character == character.model.player:
                 character.model.end_condition = DIED_IN_DUNGEON
 
-            character.raise_event(
-                DeathEvent(deceased=character,
-                           affected_tiles=character.location))
+            raise_event(character,
+                        DeathEvent(deceased=character,
+                                   affected_tiles=character.location))
             character.level.remove_creature(character)
 
     @log_info

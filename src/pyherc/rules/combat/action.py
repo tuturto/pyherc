@@ -24,6 +24,7 @@ import random
 
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.constants import Duration
+from pyherc.data.new_character import raise_event
 from pyherc.data.damage import Damage
 from pyherc.events import AttackHitEvent, AttackMissEvent, AttackNothingEvent
 
@@ -87,9 +88,9 @@ class AttackAction():
         target = self.target.target
 
         if target is None:
-            self.attacker.raise_event(
-                AttackNothingEvent(attacker=self.attacker,
-                                   affected_tiles=[]))
+            raise_event(self.attacker,
+                        AttackNothingEvent(attacker=self.attacker,
+                                           affected_tiles=[]))
         else:
 
             was_hit = self.to_hit.is_hit()
@@ -97,20 +98,20 @@ class AttackAction():
             if was_hit:
                 self.damage.apply_damage(target)
 
-                self.attacker.raise_event(AttackHitEvent(
-                    type=self.attack_type,
-                    attacker=self.attacker,
-                    target=target,
-                    damage=self.damage,
-                    affected_tiles=[target.location]))
+                raise_event(self.attacker,
+                            AttackHitEvent(type=self.attack_type,
+                                           attacker=self.attacker,
+                                           target=target,
+                                           damage=self.damage,
+                                           affected_tiles=[target.location]))
 
                 self.__trigger_attack_effects()
             else:
-                self.attacker.raise_event(AttackMissEvent(
-                    type=self.attack_type,
-                    attacker=self.attacker,
-                    target=target,
-                    affected_tiles=[target.location]))
+                raise_event(self.attacker,
+                            AttackMissEvent(type=self.attack_type,
+                                            attacker=self.attacker,
+                                            target=target,
+                                            affected_tiles=[target.location]))
 
             self.dying_rules.check_dying(target)
 
