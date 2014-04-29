@@ -23,7 +23,7 @@ Module for testing characters
 from hamcrest import assert_that, equal_to, is_
 from mockito import mock, verify
 from pyherc.data import WeaponProficiency
-from pyherc.data.new_character import set_hit_points, is_proficient_with
+from pyherc.data.new_character import hit_points, is_proficient_with
 from pyherc.data.new_character import raise_event
 from pyherc.events import MoveEvent
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
@@ -47,7 +47,7 @@ class TestCharacter():
                      .with_update_listener(listener)
                      .build())
 
-        set_hit_points(character, 20)
+        hit_points(character, 20)
 
         verify(listener).receive_update(EventType('hit points changed'))
 

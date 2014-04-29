@@ -22,7 +22,7 @@
 """
 Package for traps
 """
-from pyherc.data.new_character import set_hit_points
+from pyherc.data.new_character import hit_points
 
 class PitTrap():
     """
@@ -43,4 +43,4 @@ class PitTrap():
         :param character: character who just stepped on the trap
         :type character: Character
         """
-        set_hit_points(character, -1)
+        hit_points(character, -1)

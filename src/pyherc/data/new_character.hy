@@ -36,16 +36,14 @@
     "register event listener"
     (.append character.event-listeners listener))
 
-(defn hit-points [character]
+(defn hit-points [character &optional hit-points]
   "amount of hit points a character has"
+  (when hit-points
+    (let [[old-hit-points character.hit_points]
+	  [new-hit-points hit-points]]
+      (setv character.hit_points hit-points)
+      (raise-event character (HitPointsChangedEvent character old-hit-points new-hit-points))))
   character.hit_points)
-
-(defn set-hit-points [character hit-points]
-  "set amount of hit points a character has"
-  (let [[old-hit-points character.hit_points]
-	[new-hit-points hit-points]]
-    (setv character.hit_points hit-points)
-    (raise-event character (HitPointsChangedEvent character old-hit-points new-hit-points))))
 
 (defn max-hp [character]
   "maximum hit points of character"

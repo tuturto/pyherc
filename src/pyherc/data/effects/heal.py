@@ -21,7 +21,7 @@
 Module for healing
 """
 from pyherc.aspects import log_debug
-from pyherc.data.new_character import hit_points, set_hit_points, max_hp
+from pyherc.data.new_character import hit_points, max_hp
 from pyherc.data.new_character import raise_event
 from pyherc.data.effects.effect import Effect
 from pyherc.events import HealAddedEvent, HealEndedEvent, HealTriggeredEvent
@@ -53,10 +53,10 @@ class Heal(Effect):
         """
         Triggers effects of the healing
         """
-        set_hit_points(self.target, hit_points(self.target) + self.healing)
+        hit_points(self.target, hit_points(self.target) + self.healing)
 
         if hit_points(self.target) > max_hp(self.target):
-            set_hit_points(self.target, max_hp(self.target))
+            hit_points(self.target, max_hp(self.target))
 
         raise_event(self.target,
                     HealTriggeredEvent(target=self.target,

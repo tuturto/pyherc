@@ -23,7 +23,7 @@ Module for character builder
 from mockito import mock
 from pyherc.data import Character
 from pyherc.data.effects import EffectsCollection
-from pyherc.data.new_character import set_hit_points, register_event_listener
+from pyherc.data.new_character import hit_points, register_event_listener
 from pyherc.data.new_character import set_max_hp, set_body, set_finesse
 from pyherc.data.new_character import set_mind, register_for_updates
 
@@ -334,7 +334,7 @@ class CharacterBuilder():
 
         character.name = self.name
 
-        set_hit_points(character, self.hit_points)
+        hit_points(character, self.hit_points)
         set_max_hp(character, self.max_hp)
         character.spirit = self.spirit
         character.max_spirit = self.max_spirit
