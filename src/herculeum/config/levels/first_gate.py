@@ -21,9 +21,7 @@
 module for configuring first gate
 """
 import hy
-from herculeum.ai import FlockingHerbivore, SkeletonWarriorAI
-from herculeum.ai.firebeetle import FireBeetleAI
-from herculeum.ai.rat import RatAI
+from herculeum.ai.fungus import FungusAI
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data.effects import DamageModifier
 from pyherc.generators import creature_config, inventory_config
@@ -192,15 +190,18 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                             rng)]
 
     creatures_upper = CreatureAdderConfiguration(['first gate'])
-    creatures_upper.add_creature(min_amount = 6,
-                                 max_amount = 12,
+    creatures_upper.add_creature(min_amount = 3,
+                                 max_amount = 6,
                                  name = 'rat')
     creatures_upper.add_creature(min_amount = 0,
-                                 max_amount = 2,
+                                 max_amount = 1,
                                  name = 'fire beetle')
     creatures_upper.add_creature(min_amount = 0,
                                  max_amount = 1,
                                  name = 'skeleton warrior')
+    creatures_upper.add_creature(min_amount = 3,
+                                 max_amount = 6,
+                                 name = 'fungus')
 
     creature_adders = [CreatureAdder(creature_generator,
                                     creatures_upper,
@@ -243,5 +244,17 @@ def init_creatures(context):
     """
     surface_manager = context.surface_manager
     config = []
+
+    fungus_f0 = surface_manager.add_icon('fungus_f0', ':fungus_f0.png', 'F', ['yellow', 'dim'])
+    fungus_f1 = surface_manager.add_icon('fungus_f1', ':fungus_f1.png', 'F', ['yellow', 'dim'])
+    config.append(creature_config(name = 'fungus',
+                                  body = 4,
+                                  finesse = 2,
+                                  mind = 1,
+                                  hp = 7,
+                                  speed = 8,
+                                  icons = (fungus_f0, fungus_f1),
+                                  attack = 3,
+                                  ai = FungusAI))
 
     return config
