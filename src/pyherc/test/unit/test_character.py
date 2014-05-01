@@ -23,7 +23,7 @@ Module for testing characters
 from hamcrest import assert_that, equal_to, is_
 from mockito import mock, verify
 from pyherc.data import WeaponProficiency
-from pyherc.data.new_character import set_hit_points, is_proficient_with
+from pyherc.data.new_character import set_hit_points
 from pyherc.events import MoveEvent
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.matchers import EventType
@@ -93,10 +93,10 @@ class TestCreatures():
                   .with_weapon_type('simple')
                   .build())
 
-        proficiency = is_proficient_with(creature, weapon)
+        proficiency = creature.is_proficient(weapon)
         assert_that(proficiency, is_(equal_to(False)))
 
         creature.feats.append(WeaponProficiency('simple'))
 
-        proficiency = is_proficient_with(creature, weapon)
+        proficiency = creature.is_proficient(weapon)
         assert_that(proficiency, is_(equal_to(True)))
