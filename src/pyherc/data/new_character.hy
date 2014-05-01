@@ -47,14 +47,6 @@
     (setv character.hit_points hit-points)
     (raise-event character (HitPointsChangedEvent character old-hit-points new-hit-points))))
 
-(defn max-hp [character]
-  "maximum hit points of character"
-  character.max-hp)
-
-(defn set-max-hp [character max-hp]
-  "set maximum hit points of character"
-  (setv character.max-hp max-hp))
-
 (defn body [character]
   "body attribute of character"
   character.body)
@@ -62,30 +54,6 @@
 (defn set-body [character body]
   "set body attribute of character"
   (setv character.body body))
-
-(defn finesse [character]
-  "finesse attribute of character"
-  character.finesse)
-
-(defn set-finesse [character finesse]
-  "set finesse attribute of character"
-  (setv character.finesse finesse))
-
-(defn mind [character]
-  "mind attribute of character"
-  character.mind)
-
-(defn set-mind [character mind]
-  "set mind attribute of character"
-  (setv character.mind mind))
-
-(defn attack-value [character]
-  "attack value of character"
-  character.attack)
-
-(defn set-attack-value [character attack-value]
-  "set attack value of character"
-  (setv character.attack attack-value))
 
 #d(defn proficient-with? [character weapon]
     "check if this character is proficient with a given weapon"

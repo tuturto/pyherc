@@ -22,7 +22,6 @@ Attack related factories are defined here
 """
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.damage import Damage
-from pyherc.data.new_character import attack_value
 from pyherc.data.geometry import get_adjacent_target_in_direction
 from pyherc.rules.combat.action import AdditionalRules, AttackAction
 from pyherc.rules.combat.melee import MeleeToHit
@@ -91,7 +90,7 @@ class UnarmedCombatFactory():
         """
         attacker = parameters.attacker
         target = self.get_target(parameters)
-        damage = [(attack_value(attacker), 'crushing')]
+        damage = [(attacker.get_attack(), 'crushing')]
 
         attack = AttackAction(
             attack_type='unarmed',

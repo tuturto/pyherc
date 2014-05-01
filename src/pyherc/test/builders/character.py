@@ -24,8 +24,6 @@ from mockito import mock
 from pyherc.data import Character
 from pyherc.data.effects import EffectsCollection
 from pyherc.data.new_character import set_hit_points, register_event_listener
-from pyherc.data.new_character import set_max_hp, set_body, set_finesse
-from pyherc.data.new_character import set_mind
 
 
 class CharacterBuilder():
@@ -335,13 +333,13 @@ class CharacterBuilder():
         character.name = self.name
 
         set_hit_points(character, self.hit_points)
-        set_max_hp(character, self.max_hp)
+        character.max_hp = self.max_hp
         character.spirit = self.spirit
         character.max_spirit = self.max_spirit
 
-        set_mind(character, self.mind)
-        set_body(character, self.body)
-        set_finesse(character, self.finesse)
+        character.mind = self.mind
+        character.body = self.body
+        character.finesse = self.finesse
         character.attack = self.attack
 
         character.speed = self.speed

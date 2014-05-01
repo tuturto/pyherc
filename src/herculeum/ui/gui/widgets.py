@@ -20,7 +20,7 @@
 """
 Module for small widgets
 """
-from pyherc.data.new_character import hit_points, max_hp
+from pyherc.data.new_character import hit_points
 from PyQt4.QtGui import (QDockWidget, QFrame, QGridLayout, QHBoxLayout, QLabel,
                          QVBoxLayout, QWidget)
 
@@ -89,7 +89,9 @@ class HitPointsWidget(QWidget):
         :param character: character whose hit points to show
         :type character: Character
         """
-        self.hp.setText(str(hit_points(character)) + '/' + str(max_hp(character)))
+        current_hp = hit_points(character)
+        max_hp = character.max_hp
+        self.hp.setText(str(current_hp) + '/' + str(max_hp))
 
     def show_spirit_points(self, character):
         """
