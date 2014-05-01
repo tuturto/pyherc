@@ -30,7 +30,7 @@
 #d(defn raise-event [character event]
     "raise event for other characters to see"
     (.raise-event character.model event)
-    (notify-update-listeners character event))
+    (.notify-update-listeners character event))
 
 #d(defn register-event-listener [character listener]
     "register event listener"
@@ -108,16 +108,3 @@
 	     (and (= tag.weapon-type weapon-data.weapon-type)
 		  (or (is tag.weapon-name nil)
 		      (= tag.weapon-name weapon-data.weapon-name))))))
-
-#d(defn register-for-updates [character listener]
-    "register listener to receive updates for this entity"
-    (.append character.update-listeners listener))
-
-#d(defn remove-from-updates [character listener]
-    "remove listener"
-    (when (in listener character.update-listeners)
-      (.remove character.update-listeners listener)))
-
-#d(defn notify-update-listeners [character event]
-    "notify all listeners registered for update of this entity"
-    (ap-each character.update-listeners (.receive-update it event)))

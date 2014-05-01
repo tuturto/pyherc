@@ -21,7 +21,6 @@
 Module defining classes related to inventory actions
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.data.new_character import raise_event
 from pyherc.events import UnEquipEvent
 from pyherc.rules.factory import SubActionFactory
 
@@ -90,14 +89,12 @@ class UnEquipAction():
         """
         if self.item.get_main_type() == 'armour':
             self.character.inventory.armour = None
-            raise_event(self.character,
-                        UnEquipEvent(self.character,
-                                     self.item))
+            self.character.raise_event(UnEquipEvent(self.character,
+                                                    self.item))
         elif self.item.get_main_type() == 'weapon':
             self.character.inventory.weapon = None
-            raise_event(self.character,
-                        UnEquipEvent(self.character,
-                                     self.item))
+            self.character.raise_event(UnEquipEvent(self.character,
+                                                    self.item))
 
     @log_debug
     def is_legal(self):

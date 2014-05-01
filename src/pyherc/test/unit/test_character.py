@@ -24,7 +24,6 @@ from hamcrest import assert_that, equal_to, is_
 from mockito import mock, verify
 from pyherc.data import WeaponProficiency
 from pyherc.data.new_character import set_hit_points, is_proficient_with
-from pyherc.data.new_character import raise_event
 from pyherc.events import MoveEvent
 from pyherc.test.builders import CharacterBuilder, ItemBuilder
 from pyherc.test.matchers import EventType
@@ -60,11 +59,10 @@ class TestCharacter():
                      .with_model(model)
                      .build())
 
-        raise_event(character,
-                    MoveEvent(mover=character,
-                              affected_tiles=[],
-                              old_location=character.location,
-                              direction=1))
+        character.raise_event(MoveEvent(mover=character,
+                                        affected_tiles=[],
+                                        old_location=character.location,
+                                        direction=1))
 
         verify(model).raise_event(EventType('move'))
 

@@ -25,7 +25,7 @@ from pyherc.data import Character
 from pyherc.data.effects import EffectsCollection
 from pyherc.data.new_character import set_hit_points, register_event_listener
 from pyherc.data.new_character import set_max_hp, set_body, set_finesse
-from pyherc.data.new_character import set_mind, register_for_updates
+from pyherc.data.new_character import set_mind
 
 
 class CharacterBuilder():
@@ -363,7 +363,7 @@ class CharacterBuilder():
             register_event_listener(character, listener)
 
         for listener in self.update_listeners:
-            register_for_updates(character, listener)
+            character.register_for_updates(listener)
 
         for domain, level in self.domains.items():
             character.add_domain_level(domain, level)

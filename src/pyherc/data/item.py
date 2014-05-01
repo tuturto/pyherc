@@ -58,7 +58,7 @@ class Item():
         self.rarity = None
         self.cost = None
         self.tags = {}
-        self.update_listeners = []
+        self.__update_listeners = []
 
     def __str__(self):
         if hasattr(self, 'name'):
@@ -192,6 +192,59 @@ class Item():
         Return tags
         """
         return self.tags
+
+    @log_debug
+    def register_for_updates(self, listener):
+        """
+        Register listener to receive updates for this entity
+
+        :param listener: listener to add
+        :type listener: Listener
+
+        .. versionadded:: 0.5
+        """
+        self.__update_listeners.append(listener)
+
+    @log_debug
+    def remove_from_updates(self, listener):
+        """
+        Remove listener
+
+        :param listener: listener to remove
+        :type listener: Listener
+
+        .. versionadded:: 0.5
+        """
+        if listener in self.__update_listeners:
+            self.__update_listeners.remove(listener)
+
+    @log_debug
+    def notify_update_listeners(self, event):
+        """
+        Notify all listeners registered for update of this entity
+
+        :param event: event to relay to update listeners
+        :type event: Event
+
+        .. versionadded:: 0.5
+        """
+        for listener in self.__update_listeners:
+            listener.receive_update(event)
+
+    def _repr_pretty_(self, p, cycle):
+        """
+        Pretty print for IPython
+
+        :param p: printer to write
+        :param cycle: has pretty print detected a cycle?
+        """
+        if cycle:
+            p.text('Item(...)')
+        else:
+            p.text('name: {0}'.format(self.name))
+            p.breakable()
+            p.text('location: {0}'.format(self.location))
+            p.breakable()
 
 
 class WeaponData():

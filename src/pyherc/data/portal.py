@@ -46,7 +46,7 @@ class Portal():
         self.exits_dungeon = False
         self.level_generator_name = level_generator_name
         self.model = None
-        self.update_listeners = []
+        self.__update_listeners = []
 
     @log_debug
     def get_other_end(self, level_generator_factory):
@@ -106,6 +106,43 @@ class Portal():
         :rtype: integer
         """
         return self.__icons[1]
+
+    @log_debug
+    def register_for_updates(self, listener):
+        """
+        Register listener to receive updates for this entity
+
+        :param listener: listener to add
+        :type listener: Listener
+
+        .. versionadded:: 0.5
+        """
+        self.__update_listeners.append(listener)
+
+    @log_debug
+    def remove_from_updates(self, listener):
+        """
+        Remove listener
+
+        :param listener: listener to remove
+        :type listener: Listener
+
+        .. versionadded:: 0.5
+        """
+        self.__update_listeners.remove(listener)
+
+    @log_debug
+    def notify_update_listeners(self, event):
+        """
+        Notify all listeners registered for update of this entity
+
+        :param event: event to relay to update listeners
+        :type event: Event
+
+        .. versionadded:: 0.5
+        """
+        for listener in self.__update_listeners:
+            listener.receive_update(event)
 
     icon = property(__get_icon, __set_icon)
     other_end_icon = property(__get_other_end_icon)

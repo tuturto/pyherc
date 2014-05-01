@@ -23,7 +23,6 @@ Module for damage
 from pyherc.aspects import log_debug
 from pyherc.data.damage import Damage
 from pyherc.data.effects.effect import Effect
-from pyherc.data.new_character import raise_event
 from pyherc.events import (DamageAddedEvent, DamageEndedEvent,
                            DamageTriggeredEvent)
 
@@ -58,10 +57,10 @@ class DamageEffect(Effect):
         damage = Damage([(self.damage, self.damage_type)])
         damage.apply_damage(self.target)
 
-        raise_event(self.target,
-                    DamageTriggeredEvent(target=self.target,
-                                         damage=self.damage,
-                                         damage_type=self.damage_type))
+        self.target.raise_event(
+            DamageTriggeredEvent(target=self.target,
+                                 damage=self.damage,
+                                 damage_type=self.damage_type))
 
         dying_rules.check_dying(self.target)
 

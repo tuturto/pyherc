@@ -21,7 +21,6 @@
 Module defining classes related to inventory actions
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.data.new_character import raise_event
 from pyherc.events import EquipEvent
 from pyherc.rules.factory import SubActionFactory
 
@@ -90,19 +89,16 @@ class EquipAction():
         """
         if self.item.get_main_type() == 'armour':
             self.character.inventory.armour = self.item
-            raise_event(self.character,
-                         EquipEvent(self.character,
-                                    self.item))
+            self.character.raise_event(EquipEvent(self.character,
+                                                  self.item))
         elif self.item.get_main_type() == 'weapon':
             self.character.inventory.weapon = self.item
-            raise_event(self.character,
-                        EquipEvent(self.character,
-                                   self.item))
+            self.character.raise_event(EquipEvent(self.character,
+                                                  self.item))
         elif self.item.get_main_type() == 'ammunition':
             self.character.inventory.projectiles = self.item
-            raise_event(self.character,
-                        EquipEvent(self.character,
-                                   self.item))
+            self.character.raise_event(EquipEvent(self.character,
+                                                  self.item))
 
     @log_debug
     def is_legal(self):

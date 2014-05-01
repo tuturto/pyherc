@@ -28,7 +28,6 @@ from herculeum.ui.gui.eventdisplay import EventMessageDockWidget
 from herculeum.ui.gui.map import PlayMapWindow
 from herculeum.ui.gui.menu import MenuDialog
 from herculeum.ui.gui.startgame import StartGameWidget
-from pyherc.data.new_character import register_for_updates
 from PyQt4.QtCore import QFile, Qt
 from PyQt4.QtGui import (QAction, QApplication, QCursor, QDialog, QIcon,
                          QMainWindow, QPixmap, QSplashScreen)
@@ -166,7 +165,7 @@ class MainWindow(QMainWindow):
             self.controller.setup_world(self.application.world,
                                         player)
 
-            register_for_updates(player, self.map_window.hit_points_widget)
+            player.register_for_updates(self.map_window.hit_points_widget)
             self.map_window.hit_points_widget.show_hit_points(player)
             self.map_window.hit_points_widget.show_spirit_points(player)
 
