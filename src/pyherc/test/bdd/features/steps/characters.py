@@ -24,7 +24,7 @@ from pyherc.ai.pathfinding import a_star
 from pyherc.data.constants import Direction, Duration
 from pyherc.data.effects import DamageModifier
 from pyherc.data.geometry import find_direction
-from pyherc.data.new_character import hit_points
+from pyherc.data.new_character import set_hit_points
 from pyherc.test.bdd.features.helpers import (default_context, get_character,
                                               get_item, get_location, observed,
                                               with_action_factory)
@@ -74,7 +74,7 @@ def step_impl(context, character_name):
 def impl(context, character_name):
     character = get_character(context, character_name)
 
-    hit_points(character, 1)
+    set_hit_points(character, 1)
 
 @given('{character_name} is suspectible against {damage_type}')
 def impl(context, character_name, damage_type):
