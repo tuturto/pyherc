@@ -20,21 +20,9 @@
 """
 Tests for events
 """
-from mockito import mock
-from hamcrest import assert_that, is_in
+from mockito import mock, verify
 from pyherc.test.builders import CharacterBuilder
-from pyherc.data.new_character import receive_event
 
-
-class Listener():
-    """
-    Helper class to listen events
-    """
-    def __init__(self):
-        self.events = []
-
-    def receive_event(self, event):
-        self.events.append(event)
 
 class TestCharacterEvents():
     """
@@ -47,13 +35,13 @@ class TestCharacterEvents():
         """
         Test that events relayed to the character are relayed forward
         """
-        listener = Listener()
+        listener = mock()
         event = mock()
 
         character = (CharacterBuilder()
                      .with_event_listener(listener)
                      .build())
 
-        receive_event(character, event)
+        character.receive_event(event)
 
-        assert_that(event, is_in(listener.events))
+        verify(listener).receive_event(event)

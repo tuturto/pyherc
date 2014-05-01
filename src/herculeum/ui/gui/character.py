@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -21,7 +22,6 @@
 Module for displaying character
 """
 from herculeum.ui.gui.widgets import ListView
-from pyherc.data.new_character import hit_points
 from PyQt4.QtGui import QGridLayout, QHBoxLayout, QLabel, QVBoxLayout, QWidget
 from PyQt4.QtSvg import QSvgWidget
 
@@ -72,7 +72,7 @@ class CharacterWidget(QWidget):
         self.finesse.setText(str(character.finesse))
         self.finesse.setObjectName('no_border')
         self.hp = QLabel()
-        self.hp.setText('{0}/{1}'.format(hit_points(character),
+        self.hp.setText('{0}/{1}'.format(character.hit_points,
                                          character.max_hp))
         self.hp.setObjectName('no_border')
         self.mana = QLabel()

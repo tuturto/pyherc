@@ -100,6 +100,34 @@ class TestMeleeCombat():
         assert_that(action, is_(instance_of(AttackAction)))
         assert_that(action.attack_type, is_(equal_to('unarmed')))
 
+    def test_unarmed_attack_hit_event(self):
+        """
+        Test that landing an unarmed hit will raise correct event
+        """
+        rng = mock()
+        when(rng).randint(1, 6).thenReturn(1)
+
+        attack(self.character1,
+               3,
+               self.action_factory,
+               rng)
+
+        verify(self.observer).receive_event(any(AttackHitEvent))
+
+    def test_attack_into_air_raises_event(self):
+        """
+        Attacks into thin air should raise correct event
+        """
+        rng = mock()
+        when(rng).randint(1, 6).thenReturn(1)
+
+        attack(self.character1,
+               1,
+               self.action_factory,
+               rng)
+
+        verify(self.observer).receive_event(any(AttackNothingEvent))
+
     def test_attacking_to_enter_direction_is_treated_like_attacking_air(self):
         """
         Attacking through portal should be treated like attacking into air

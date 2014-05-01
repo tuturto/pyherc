@@ -24,7 +24,6 @@ Module for magic related tests
 from hamcrest import (assert_that,  # pylint: disable-msg=E0611; pylint: disable-msg=E0611
                       contains_inanyorder, equal_to, has_item, is_)
 from mockito import any, mock, verify, when
-from pyherc.data.new_character import hit_points
 from pyherc.rules import cast
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   DamageBuilder, HealBuilder,
@@ -61,7 +60,7 @@ class TestMagic:
 
         effect.trigger(mock())
 
-        assert_that(hit_points(character), is_(equal_to(5)))
+        assert_that(character.hit_points, is_(equal_to(5)))
 
     def test_healing_effect(self):
         """
@@ -82,7 +81,7 @@ class TestMagic:
 
         effect.trigger(mock())
 
-        assert_that(hit_points(character), is_(equal_to(11)))
+        assert_that(character.hit_points, is_(equal_to(11)))
 
     def test_healing_does_not_heal_over_max_hp(self):
         """
@@ -103,7 +102,7 @@ class TestMagic:
 
         effect.trigger(mock())
 
-        assert_that(hit_points(character), is_(equal_to(5)))
+        assert_that(character.hit_points, is_(equal_to(5)))
 
 class TestSpellCasting:
     """

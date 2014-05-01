@@ -25,7 +25,6 @@ from hamcrest import assert_that, equal_to, is_, is_in, greater_than
 from mockito import any, mock, verify, when
 from pyherc.data.effects import Effect, EffectHandle, Heal
 from pyherc.data.magic import Spell
-from pyherc.data.new_character import hit_points
 from pyherc.generators import create_effect, get_effect_creator
 from pyherc.rules.ending import Dying
 from pyherc.rules.magic.action import SpellCastingAction
@@ -124,7 +123,7 @@ class TestSpellEffects():
         self.spell.cast(self.effects,
                         self.dying_rules)
 
-        assert_that(hit_points(self.character), is_(greater_than(10)))
+        assert_that(self.character.hit_points, is_(greater_than(10)))
 
 class TestSpellCastingAction():
     """

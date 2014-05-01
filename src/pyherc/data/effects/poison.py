@@ -21,7 +21,6 @@
 Module for poison
 """
 from pyherc.aspects import log_debug
-from pyherc.data.new_character import hit_points, set_hit_points
 from pyherc.data.effects.effect import Effect
 from pyherc.events import (PoisonAddedEvent, PoisonEndedEvent,
                            PoisonTriggeredEvent)
@@ -53,7 +52,7 @@ class Poison(Effect):
         """
         Triggers effects of the poison
         """
-        set_hit_points(self.target, hit_points(self.target) - self.damage)
+        self.target.hit_points = self.target.hit_points - self.damage
 
         self.target.raise_event(PoisonTriggeredEvent(target=self.target,
                                                      damage=self.damage))

@@ -20,7 +20,6 @@
 # flake8: noqa
 
 from hamcrest import assert_that, equal_to, is_, less_than
-from pyherc.data.new_character import hit_points
 from pyherc.test.bdd.features.helpers import get_character
 from pyherc.test.cutesy import hit, make
 from pyherc.test.cutesy.dictionary import add_history_value, get_history_value
@@ -38,7 +37,7 @@ def impl(context, character_name):
     character = get_character(context, character_name)
 
     old_hit_points = get_history_value(character, 'hit_points')
-    new_hit_points = hit_points(character)
+    new_hit_points = character.hit_points
 
     assert new_hit_points < old_hit_points
 
@@ -59,7 +58,7 @@ def impl(context, character_name):
     character = get_character(context, character_name)
 
     old_hit_points = get_history_value(character, 'hit_points')
-    new_hit_points = hit_points(character)
+    new_hit_points = character.hit_points
     total_damage_suffered = old_hit_points - new_hit_points
 
     attack_hit_events = (x for x in context.observer.events
@@ -115,4 +114,4 @@ def impl(context, damage_amount):
 def impl(context, character_name):
     character = get_character(context, character_name)
 
-    assert_that(hit_points(character), equal_to(character.max_hp))
+    assert_that(character.hit_points, equal_to(character.max_hp))

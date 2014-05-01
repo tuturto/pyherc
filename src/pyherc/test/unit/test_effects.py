@@ -24,7 +24,6 @@ Module for testing effects
 from hamcrest import assert_that, equal_to, is_, is_not
 from mockito import any, mock, never, verify, when
 from pyherc.data import Model
-from pyherc.data.new_character import hit_points
 from pyherc.data.effects import Effect, EffectHandle, Heal, Poison
 from pyherc.data.geometry import TargetData
 from pyherc.events import PoisonAddedEvent
@@ -79,7 +78,7 @@ class TestEffects():
               potion,
               action_factory)
 
-        assert_that(hit_points(character), is_(equal_to(10)))
+        assert_that(character.hit_points, is_(equal_to(10)))
         assert_that(character, has_no_effects())
 
     def test_drinking_triggers_effect(self):
