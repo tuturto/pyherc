@@ -22,7 +22,6 @@
 Module displaying events on screen
 """
 from PyQt4.QtGui import QDockWidget, QHBoxLayout, QTextEdit, QWidget
-from pyherc.data.new_character import register_event_listener
 
 
 class EventMessageDockWidget(QDockWidget):
@@ -49,7 +48,7 @@ class EventMessageDockWidget(QDockWidget):
         self.setWidget(self.message_display)
         self.setWindowTitle('Messages')
 
-        register_event_listener(character, self.message_display)
+        character.register_event_listener(self.message_display)
         self.message_display.set_point_of_view(character)
 
 
@@ -100,7 +99,7 @@ class EventMessageWidget(QWidget):
                                     'drop',
                                     'damage triggered',
                                     'equip',
-                                    'unequip',
+                                    'unequip', 
                                     'error']
 
     def set_point_of_view(self, character):

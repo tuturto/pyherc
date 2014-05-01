@@ -32,10 +32,6 @@
     (.raise-event character.model event)
     (.notify-update-listeners character event))
 
-#d(defn register-event-listener [character listener]
-    "register event listener"
-    (.append character.event-listeners listener))
-
 (defn hit-points [character]
   "amount of hit points a character has"
   character.hit_points)
