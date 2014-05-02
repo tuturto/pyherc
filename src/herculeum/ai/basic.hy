@@ -19,6 +19,8 @@
 
 (setv __doc__ "module for actions")
 
+(require pyherc.aspects)
+
 (import [pyherc.aspects [log_debug]]
     [pyherc.rules [move is-move-legal attack]]
     [pyherc.events [NoticeEvent]]
@@ -26,55 +28,53 @@
 
 (require herculeum.ai.macros)
 
-(with-decorator log_debug
-  (defn wait [ai]
+#d(defn wait [ai]
     "make character to wait a little bit"
-    (setv ai.character.tick 5)))
+    (setv ai.character.tick 5))
 
-(defn can-walk? [ai action-factory direction]
-  "check if character can walk to given direction"
-  (is-move-legal ai.character direction "walk" action-factory))
+#d(defn can-walk? [ai action-factory direction]
+    "check if character can walk to given direction"
+    (is-move-legal ai.character direction "walk" action-factory))
 
-(with-decorator log_debug
-  (defn walk [ai action-factory &optional direction]
+#d(defn walk [ai action-factory &optional direction]
     "take a step to direction the ai is currently moving"
     (if direction
       (move ai.character direction action-factory)
-      (move ai.character (second ai.mode) action-factory))))
+      (move ai.character (second ai.mode) action-factory)))
 
 (defn distance-between [start end]
   "calculate distance between two locations"
   (let [[dist-x (- (first start) (first end))]
-    [dist-y (- (second start) (second end))]]
+	[dist-y (- (second start) (second end))]]
     (sqrt (+ (pow dist-x 2)
-          (pow dist-y 2)))))
+	     (pow dist-y 2)))))
 
-(defn find_direction [start destination]
-  "calculate direction from start to destination"
-  (assert (!= start destination))
-  (let [[start_x (first start)]
-        [start_y (second start)]
-        [end_x (first destination)]
-        [end_y (second destination)]]
-    (if (= start_x end_x)
-      (if (< start_y end_y) 5 1)
-      (when (= start_y end_y)
-    (if (< start_x end_x) 3 7)))))
+#d(defn find_direction [start destination]
+    "calculate direction from start to destination"
+    (assert (!= start destination))
+    (let [[start_x (first start)]
+	  [start_y (second start)]
+	  [end_x (first destination)]
+	  [end_y (second destination)]]
+      (if (= start_x end_x)
+	(if (< start_y end_y) 5 1)
+	(when (= start_y end_y)
+	  (if (< start_x end_x) 3 7)))))
 
-(defn new-location [character direction]
-  "get next location if going to given direction"
-  (.get-location-at-direction character direction))
+#d(defn new-location [character direction]
+    "get next location if going to given direction"
+    (.get-location-at-direction character direction))
 
-(defn attack-enemy [ai enemy action-factory rng]
-  "attack an enemy"
-  (let [[attacker ai.character]
-    [attacker-location attacker.location]
-    [target-location enemy.location]
-    [attack-direction (find-direction attacker-location target-location)]]
-    (attack attacker attack-direction action-factory rng)))
+#d(defn attack-enemy [ai enemy action-factory rng]
+    "attack an enemy"
+    (let [[attacker ai.character]
+	  [attacker-location attacker.location]
+	  [target-location enemy.location]
+	  [attack-direction (find-direction attacker-location target-location)]]
+      (attack attacker attack-direction action-factory rng)))
 
-(defn focus-enemy [ai enemy]
-  "focus on enemy and start tracking it"
-  (let [[character ai.character]
-    [event (NoticeEvent character enemy)]]
-    (.raise-event character event)))
+#d(defn focus-enemy [ai enemy]
+    "focus on enemy and start tracking it"
+    (let [[character ai.character]
+	  [event (NoticeEvent character enemy)]]
+      (.raise-event character event)))

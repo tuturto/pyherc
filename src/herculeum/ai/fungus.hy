@@ -17,9 +17,12 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(setv __doc__ "module for AI routines for rats")
+(require pyherc.aspects)
+(import [pyherc.aspects [log-debug]])
+(import [herculeum.ai.basic [attack-enemy wait]])
+(import [random [choice]])
 
-(import [herculeum.ai.patrol [patrol-ai]])
+(setv __doc__ "module for AI routines for fungus")
 
 (defclass FungusAI []
   [[__doc__ "AI routine for fungus"]
@@ -28,21 +31,18 @@
    [--init-- (fn [self character]
            "default constructor"
            (.--init-- (super FungusAI self))
-           (setv self.character character) None)]
+           (setv self.character character)
+	   None)]
    [act (fn [self model action-factory rng]
       "check the situation and act accordingly"
-      (rat-act self model action-factory))]])
+      (fungus-act self model action-factory rng))]])
 
-(defn next-to-wall? [level x y]
-  "check if given location is within patrol area"
-  (and (or (.blocks-movement level (inc x) y)
-       (.blocks-movement level (dec x) y)
-       (.blocks-movement level x (inc y))
-       (.blocks-movement level x (dec y)))
-       (not (and (.blocks-movement level (inc x) y)
-         (.blocks-movement level (dec x) y)))
-       (not (and (.blocks-movement level x (inc y))
-         (.blocks-movement level x (dec y))))
-       (.get-floor-tile level x y)))
+#d(defn fungus-act [ai model action-factory rng]
+    (let [[enemies (adjacent-enemies ai)]]
+      (if enemies
+	(attack-enemy ai (choice enemies) action-factory rng)
+	(wait ai))))
 
-(def rat-act (patrol-ai next-to-wall? 4))
+#d(defn adjacent-enemies [ai]
+    "get list of enemies adjacent to given ai"
+    [])
