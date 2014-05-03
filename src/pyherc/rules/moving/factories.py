@@ -173,8 +173,8 @@ class WalkFactory(SubActionFactory):
 
         passables = []
 
-        for loc_x in range(location[0]-1, location[1]+1):
-            for loc_y in range(location[1]-1, location[1]+1):
+        for loc_x in range(location[0]-1, location[1]+2):
+            for loc_y in range(location[1]-1, location[1]+2):
                 if not (level.blocks_movement(loc_x, loc_y) or
                         level.get_creature_at((loc_x, loc_y))):
                     passables.append((loc_x, loc_y))

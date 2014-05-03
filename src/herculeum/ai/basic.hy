@@ -22,6 +22,7 @@
 (require pyherc.aspects)
 
 (import [pyherc.aspects [log_debug]]
+    [pyherc.data.geometry [find-direction]]
     [pyherc.rules [move is-move-legal attack]]
     [pyherc.events [NoticeEvent]]
     [math [sqrt]])
@@ -48,18 +49,6 @@
 	[dist-y (- (second start) (second end))]]
     (sqrt (+ (pow dist-x 2)
 	     (pow dist-y 2)))))
-
-#d(defn find_direction [start destination]
-    "calculate direction from start to destination"
-    (assert (!= start destination))
-    (let [[start_x (first start)]
-	  [start_y (second start)]
-	  [end_x (first destination)]
-	  [end_y (second destination)]]
-      (if (= start_x end_x)
-	(if (< start_y end_y) 5 1)
-	(when (= start_y end_y)
-	  (if (< start_x end_x) 3 7)))))
 
 #d(defn new-location [character direction]
     "get next location if going to given direction"

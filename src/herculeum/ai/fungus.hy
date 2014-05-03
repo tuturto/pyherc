@@ -18,9 +18,10 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (require pyherc.aspects)
-(import [pyherc.aspects [log-debug]])
-(import [herculeum.ai.basic [attack-enemy wait]])
-(import [random [choice]])
+(require pyherc.macros)
+(import [pyherc.aspects [log-debug]]
+	[herculeum.ai.basic [attack-enemy wait]]
+	[random [choice]])
 
 (setv __doc__ "module for AI routines for fungus")
 
@@ -45,4 +46,13 @@
 
 #d(defn adjacent-enemies [ai]
     "get list of enemies adjacent to given ai"
-    [])
+    (let [[loc ai.character.location]
+	  [level ai.character.level]
+	  [monsters []]]
+      (for [x (range (- (x-coordinate loc) 1) (+ (x-coordinate loc) 2))]
+	(for [y (range (- (y-coordinate loc) 1) (+ (y-coordinate loc) 2))]
+	  (let [[creature (.get-creature-at level #t(x y))]]
+	    (when (and creature
+		       (!= creature ai.character))
+	      (.append monsters creature)))))
+      monsters))

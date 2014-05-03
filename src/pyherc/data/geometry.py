@@ -112,7 +112,16 @@ def find_direction(start, end):
             return 3
         else:
             return 7
-
+    elif start[0] < end[0]:
+        if start[1] < end[1]:
+            return 4
+        else:
+            return 2
+    elif start[0] > end[0]:
+        if start[1] < end[1]:
+            return 6
+        else:
+            return 8
 
 class TargetData():
     """
