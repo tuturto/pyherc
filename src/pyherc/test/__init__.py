@@ -22,4 +22,5 @@
 Package for tests
 """
 
-pass
+from pyherc.test.unit.test_calendar import *
+
