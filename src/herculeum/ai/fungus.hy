@@ -53,6 +53,7 @@
 	(for [y (range (- (y-coordinate loc) 1) (+ (y-coordinate loc) 2))]
 	  (let [[creature (.get-creature-at level #t(x y))]]
 	    (when (and creature
-		       (!= creature ai.character))
+		       (!= creature ai.character)
+		       (!= creature.name ai.character.name))
 	      (.append monsters creature)))))
       monsters))
