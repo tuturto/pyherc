@@ -27,6 +27,7 @@ from .damage import DamageTriggeredAnimation
 from .death import DeathAnimation
 from .healing import HealAddedAnimation, HealTriggeredAnimation
 from .inventory import DropAnimation, PickUpAnimation
+from .mitosis import MitosisAnimation
 from .moving import MoveAnimation
 from .perception import NoticeAnimation, LoseFocusAnimation
 from .poison import PoisonAddedAnimation, PoisonTriggeredAnimation
@@ -50,6 +51,7 @@ class AnimationFactory():
             'heal started': HealAddedAnimation,
             'heal triggered': HealTriggeredAnimation,
             'lose focus': LoseFocusAnimation,
+            'mitosis': MitosisAnimation,
             'move': MoveAnimation,
             'notice': NoticeAnimation,
             'pick up': PickUpAnimation,

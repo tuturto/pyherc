@@ -17,23 +17,16 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(require pyherc.aspects)
-(import [pyherc.aspects [log-debug]]
-	[pyherc.events.event [Event]])
+(import [herculeum.ui.gui.animations.animation [Animation]]
+	[herculeum.ui.gui [layers]])
 
-(defclass MitosisEvent [Event]
-  "event to indicate that a mitosis has occurred"
-  [[--init-- #d(fn [self character new-character]
-		 "default constructor"
-		 (-> (super) (.--init-- "mitosis"
-					character.level
-					character.location
-					[]))
-		 (setv self.character character)
-		 (setv self.new-character new-character)
-		 nil)]
-   [get-description (fn [self point-of-view]
-		      "get description of this event"
-		      (if (= point-of-view self.character)
-			"You have split in two"
-			(-> "{0} has split in two" (.format self.character))))]])
+(defclass MitosisAnimation [Animation]
+  "animation for mitosis"
+  [[--init-- (fn [self event]
+	       (-> (super) (.--init-- event))
+	       (setv self.character event.character)
+	       (setv self.new-character event.new-character)
+	       nil)]
+   [trigger (fn [self ui]
+	      (.add-glyph ui self.new-character ui.scene
+			  layers.zorder-character))]])
