@@ -412,6 +412,7 @@ class MitosisFactoryBuilder():
         """
         super().__init__()
         self.character_generator = mock()
+        self.rng = Random()
 
     def with_character_generator(self, generator):
         """
@@ -420,9 +421,16 @@ class MitosisFactoryBuilder():
         self.character_generator = generator
         return self
 
+    def with_random_number_generator(self, rng):
+        """
+        Configure random number generator to use
+        """
+        self.rng = rng
+        return self
+
     def build(self):
         """
         Builds mitosis factory
         """
         return MitosisFactory(character_generator=self.character_generator,
-                              rng=Random())
+                              rng=self.rng)
