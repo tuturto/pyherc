@@ -19,14 +19,16 @@
 
 (require pyherc.aspects)
 (require pyherc.macros)
-(import [pyherc.aspects [log-debug]])
+(import [pyherc.aspects [log-debug]]
+	[pyherc.data.geometry [area-around]])
 
 (defclass MitosisAction []
-  [[--init-- #d(fn [self character character-generator]
+  [[--init-- #d(fn [self character character-generator rng]
 		 "default constructor"
 		 (-> (super) (.--init--))
 		 (setv self.character character)
 		 (setv self.character-generator character-generator)
+		 (setv self.rng rng)
 		 nil)]
    [legal? #d(fn [self]
 	       "check if action is possible to perform"
@@ -34,5 +36,7 @@
    [execute #d(fn [self]
 		"execute the action"
 		(let [[new-character (self.character-generator self.character.name)]
-		      [level self.character.level]]
-		  (.add-creature level new-character #t(5 5))))]])
+		      [location self.character.location]
+		      [level self.character.level]
+		      [tiles (list (genexpr tile [tile (area-around location)]))]]
+		  (.add-creature level new-character (.choice self.rng tiles))))]])

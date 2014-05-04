@@ -23,6 +23,7 @@ Attack related factories are defined here
 import random
 
 from pyherc.aspects import log_debug, log_info
+from pyherc.data.geometry import area_around
 from pyherc.rules.factory import SubActionFactory
 from pyherc.rules.moving.action import (EscapeAction, MoveAction,
                                         SwitchPlacesAction)
@@ -173,11 +174,10 @@ class WalkFactory(SubActionFactory):
 
         passables = []
 
-        for loc_x in range(location[0]-1, location[1]+2):
-            for loc_y in range(location[1]-1, location[1]+2):
-                if not (level.blocks_movement(loc_x, loc_y) or
-                        level.get_creature_at((loc_x, loc_y))):
-                    passables.append((loc_x, loc_y))
+        for coords in area_around(location):
+            if not (level.blocks_movement(coords[0], coords[1]) or
+                    level.get_creature_at(coords)):
+                passables.append(coords)
 
         return random.choice(passables)
 

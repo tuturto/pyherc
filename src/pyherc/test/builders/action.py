@@ -35,6 +35,7 @@ from pyherc.rules.mitosis.factory import MitosisFactory
 from pyherc.rules.moving.factories import MoveFactory, WalkFactory
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.waiting.factories import WaitFactory
+from random import Random
 
 
 class ActionFactoryBuilder():
@@ -423,4 +424,5 @@ class MitosisFactoryBuilder():
         """
         Builds mitosis factory
         """
-        return MitosisFactory(character_generator=self.character_generator)
+        return MitosisFactory(character_generator=self.character_generator,
+                              rng=Random())
