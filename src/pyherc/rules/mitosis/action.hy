@@ -18,19 +18,18 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (require pyherc.aspects)
-(import [pyherc.aspects [log-debug log-info]]
-	[pyherc.rules.mitosis.action [MitosisAction]])
+(import [pyherc.aspects [log-debug]])
 
-(defclass MitosisFactory []
-  [[--init-- #i(fn [self character-generator]
+(defclass MitosisAction []
+  [[--init-- #d(fn [self character character-generator]
 		 "default constructor"
 		 (-> (super) (.--init--))
+		 (setv self.character character)
 		 (setv self.character-generator character-generator)
-		 (setv self.action-type "mitosis")
 		 nil)]
-   [can-handle #d(fn [self parameters]
-		   "can this factory handle a given action"
-		   (= self.action-type parameters.action-type))]
-   [get-action #d(fn [self parameters]
-		   "create mitosis action"
-		   (MitosisAction parameters.character self.character-generator))]])
+   [legal? #d(fn [self]
+	       "check if action is possible to perform"
+	       true)]
+   [execute #d(fn [self]
+		"execute the action"
+		)]])

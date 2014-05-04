@@ -23,11 +23,15 @@
 
 (defn perform-mitosis [character action-factory]
   "perform mitosis on a character"
-)
+  (let [[action (.get-action action-factory
+				(MitosisParameters character))]]
+    (when (.legal? action)
+      (.execute action))))
 
 (defclass MitosisParameters [ActionParameters]
   "Class controlling creation of MitosisAction"
   [[--init-- #d(fn [self character]
-		 (super --init--)
+		 (-> (super) (.--init--))
 		 (setv self.action-type "mitosis")
-		 (setv self.character character))]])
+		 (setv self.character character)
+		 nil)]])
