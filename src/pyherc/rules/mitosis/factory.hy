@@ -17,20 +17,12 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(require pyherc.macros)
-(import [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
-			       LevelBuilder]]
-	[pyherc.rules.mitosis.interface [perform-mitosis]]
-	[hamcrest [assert-that is- equal-to]])
+(require pyherc.aspects)
+(import [pyherc.aspects [log-debug log-info]])
 
-(defn test-character-can-duplicate []
-  (let [[level (-> (LevelBuilder)
-		   (.build))]
-	[character (-> (CharacterBuilder)
-		       (.build))]
-	[action-factory (-> (ActionFactoryBuilder)
-			    (.with-mitosis-factory)
-			    (.build))]]
-    (.add-creature level character #t(5 5))
-    (perform-mitosis character action-factory)
-    (assert-that (len level.creatures) (is- (equal-to 2)))))
+(defclass MitosisFactory []
+  [[--init-- #i(fn [self character-generator]
+		 (-> (super) (.--init--))
+		 (setv self.character-generator character-generator)
+		 (setv self.action-type "mitosis")
+		 nil)]])

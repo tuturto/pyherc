@@ -17,6 +17,17 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn perform-mitosis [character]
+(require pyherc.aspects)
+(import [pyherc.rules.public [ActionParameters]]
+	[pyherc.aspects [log-debug log-info]])
+
+(defn perform-mitosis [character action-factory]
   "perform mitosis on a character"
 )
+
+(defclass MitosisParameters [ActionParameters]
+  "Class controlling creation of MitosisAction"
+  [[--init-- #d(fn [self character]
+		 (super --init--)
+		 (setv self.action-type "mitosis")
+		 (setv self.character character))]])
