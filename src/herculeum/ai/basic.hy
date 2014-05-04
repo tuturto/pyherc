@@ -24,6 +24,7 @@
 (import [pyherc.aspects [log_debug]]
     [pyherc.data.geometry [find-direction]]
     [pyherc.rules [move is-move-legal attack]]
+    [pyherc.rules.mitosis.interface [MitosisParameters]]
     [pyherc.events [NoticeEvent]]
     [math [sqrt]])
 
@@ -67,3 +68,8 @@
     (let [[character ai.character]
 	  [event (NoticeEvent character enemy)]]
       (.raise-event character event)))
+
+#d(defn mitosis [ai action-factory]
+    "perform mitosis"
+    (let [[action (.get-action action-factory (MitosisParameters ai.character))]]
+      (.execute action)))

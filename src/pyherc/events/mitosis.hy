@@ -18,29 +18,22 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (require pyherc.aspects)
-(require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
-	[pyherc.data.geometry [area-around]]
-	[pyherc.events.mitosis [MitosisEvent]])
+	[pyherc.events.event [Event]])
 
-(defclass MitosisAction []
-  [[--init-- #d(fn [self character character-generator rng]
+(defclass MitosisEvent [Event]
+  "event to indicate that a mitosis has occurred"
+  [[--init-- #d(fn [self character new-character]
 		 "default constructor"
-		 (-> (super) (.--init--))
+		 (-> (super) (.--init-- "mitosis"
+					character.level
+					character.location
+					[]))
 		 (setv self.character character)
-		 (setv self.character-generator character-generator)
-		 (setv self.rng rng)
+		 (setv self.new-character new-character)
 		 nil)]
-   [legal? #d(fn [self]
-	       "check if action is possible to perform"
-	       true)]
-   [execute #d(fn [self]
-		"execute the action"
-		(let [[new-character (self.character-generator self.character.name)]
-		      [location self.character.location]
-		      [level self.character.level]
-		      [tiles (list (genexpr tile [tile (area-around location)]))]]
-		  (.add-creature level new-character (.choice self.rng tiles))
-		  (.raise-event self.character (MitosisEvent self.character
-							     new-character))))]])
-
+   [get-description (fn [self point-of-view]
+		      "get description of this event"
+		      (if (= point-of-view character)
+			"You have split in two"
+			(-> "{0} has split in two" (.format self.character))))]])

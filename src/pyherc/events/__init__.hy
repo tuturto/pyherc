@@ -16,29 +16,3 @@
 ;;
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
-
-(setv __doc__ "helper macros AIs")
-
-(defmacro third [collection]
-  `(get ~collection 2))
-
-(defmacro fourth [collection]
-  `(get ~collection 3))
-
-(defmacro very-rarely [code else-code]
-  `(do (import random)
-       (if (< (.randint random 1 100) 10) ~code
-	   ~else-code)))
-
-(defmacro rarely [code else-code]
-  `(if (< (.randint random 1 100) 25) ~code
-		  ~else-code))
-
-(defmacro sometimes [code else-code]
-  `(if (< (.randint random 1 100) 50) ~code
-		  ~else-code))
-
-(defmacro often [code else-code]
-  `(if (< (.randint random 1 100) 75) ~code
-		  ~else-code))
-

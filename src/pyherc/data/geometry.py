@@ -128,9 +128,9 @@ def area_around(location):
     """
     Get coordinates for area around given location
     """
-    for loc_x in range(location[0]-1, location[1]+2):
+    for loc_x in range(location[0]-1, location[0]+2):
         for loc_y in range(location[1]-1, location[1]+2):
-            if loc_x != location[0] and loc_y != location[1]:
+            if loc_x != location[0] or loc_y != location[1]:
                 yield (loc_x, loc_y)
 
 class TargetData():

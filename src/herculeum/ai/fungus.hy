@@ -19,8 +19,9 @@
 
 (require pyherc.aspects)
 (require pyherc.macros)
+(require herculeum.ai.macros)
 (import [pyherc.aspects [log-debug]]
-	[herculeum.ai.basic [attack-enemy wait]]
+	[herculeum.ai.basic [attack-enemy wait mitosis]]
 	[random [choice]])
 
 (setv __doc__ "module for AI routines for fungus")
@@ -42,7 +43,8 @@
     (let [[enemies (adjacent-enemies ai)]]
       (if enemies
 	(attack-enemy ai (choice enemies) action-factory rng)
-	(wait ai))))
+	(very-rarely (mitosis ai action-factory)
+		     (wait ai)))))
 
 #d(defn adjacent-enemies [ai]
     "get list of enemies adjacent to given ai"

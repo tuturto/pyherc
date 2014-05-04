@@ -38,6 +38,7 @@ from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.factories import (DropFactory, InventoryFactory,
                                               PickUpFactory)
 from pyherc.rules.inventory.unequip import UnEquipFactory
+from pyherc.rules.mitosis.factory import MitosisFactory
 from pyherc.rules.magic import SpellCastingFactory
 from pyherc.rules.moving.factories import MoveFactory, WalkFactory
 from pyherc.rules.public import ActionFactory
@@ -126,13 +127,17 @@ class Configuration():
                                                     effect_factory,
                                                     dying_rules)
 
+        mitosis_factory = MitosisFactory(self.creature_generator,
+                                         self.rng)
+
         self.action_factory = ActionFactory(self.model,
                                             [move_factory,
                                              attack_factory,
                                              drink_factory,
                                              inventory_factory,
                                              wait_factory,
-                                             spell_casting_factory])
+                                             spell_casting_factory,
+                                             mitosis_factory])
 
         self.rules_engine = RulesEngine(self.action_factory,
                                         dying_rules)
