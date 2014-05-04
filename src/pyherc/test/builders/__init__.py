@@ -27,6 +27,7 @@ from .item import ItemBuilder
 from .effect import EffectBuilder, EffectHandleBuilder
 from .level import LevelBuilder
 from .action import ActionFactoryBuilder, DrinkFactoryBuilder
+from .action import MitosisFactoryBuilder
 from .action import SpellCastingFactoryBuilder
 from .poison import PoisonBuilder
 from .heal import HealBuilder

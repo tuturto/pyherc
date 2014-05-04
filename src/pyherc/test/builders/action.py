@@ -417,6 +417,7 @@ class MitosisFactoryBuilder():
         Configure character generator to use
         """
         self.character_generator = generator
+        return self
 
     def build(self):
         """

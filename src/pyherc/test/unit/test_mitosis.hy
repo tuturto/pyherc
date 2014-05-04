@@ -19,18 +19,43 @@
 
 (require pyherc.macros)
 (import [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
-			       LevelBuilder]]
+			       LevelBuilder MitosisFactoryBuilder]]
+	[pyherc.data [Model]]
 	[pyherc.rules.mitosis.interface [perform-mitosis]]
-	[hamcrest [assert-that is- equal-to]])
+	[pyherc.generators [generate-creature creature-config]]
+	[hamcrest [assert-that is- equal-to]]
+	[functools [partial]]
+	[random [Random]])
 
-(defn test-character-can-duplicate []
-  (let [[level (-> (LevelBuilder)
+(defn setup []
+  (let [[model (Model)]
+	[config {"fungi" (creature-config "fungi" 7 2 1 12 2 nil 2)}]
+	[generator (partial generate-creature
+			    config
+			    model
+			    nil
+			    (Random))]
+	[level (-> (LevelBuilder)
 		   (.build))]
-	[character (-> (CharacterBuilder)
-		       (.build))]
+	[character (generator "fungi")]
 	[action-factory (-> (ActionFactoryBuilder)
-			    (.with-mitosis-factory)
+			    (.with-mitosis-factory
+			     (-> (MitosisFactoryBuilder)
+				 (.with-character-generator generator)
+				 (.build)))
 			    (.build))]]
     (.add-creature level character #t(5 5))
+    {:model model
+     :config config
+     :generator generator
+     :level level
+     :character character
+     :action-factory action-factory}))
+
+(defn test-character-can-duplicate []
+  (let [[context (setup)]
+	[level (:level context)]
+	[character (:character context)]
+	[action-factory (:action-factory context)]]
     (perform-mitosis character action-factory)
     (assert-that (len level.creatures) (is- (equal-to 2)))))

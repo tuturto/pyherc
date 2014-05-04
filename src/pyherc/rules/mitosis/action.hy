@@ -18,6 +18,7 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (require pyherc.aspects)
+(require pyherc.macros)
 (import [pyherc.aspects [log-debug]])
 
 (defclass MitosisAction []
@@ -32,4 +33,6 @@
 	       true)]
    [execute #d(fn [self]
 		"execute the action"
-		)]])
+		(let [[new-character (self.character-generator self.character.name)]
+		      [level self.character.level]]
+		  (.add-creature level new-character #t(5 5))))]])
