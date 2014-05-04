@@ -21,9 +21,11 @@
 (import [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
 			       LevelBuilder MitosisFactoryBuilder]]
 	[pyherc.data [Model]]
+	[pyherc.data.geometry [distance-between]]
 	[pyherc.rules.mitosis.interface [perform-mitosis]]
 	[pyherc.generators [generate-creature creature-config]]
-	[hamcrest [assert-that is- equal-to]]
+	[hamcrest [assert-that is- equal-to less-than greater-than-or-equal-to
+		   all-of]]
 	[functools [partial]]
 	[random [Random]])
 
@@ -59,3 +61,16 @@
 	[action-factory (:action-factory context)]]
     (perform-mitosis character action-factory)
     (assert-that (len level.creatures) (is- (equal-to 2)))))
+
+(defn test-new-character-is-generated-next-to-old-one []
+  (let [[context (setup)]
+	[level (:level context)]
+	[character (:character context)]
+	[action-factory (:action-factory context)]]
+    (perform-mitosis character action-factory)
+    (let [[character₀ (first level.creatures)]
+	  [character₁ (second level.creatures)]
+	  [distance (distance-between character₀.location
+				      character₁.location)]]
+      (assert-that distance (is- (less-than 2)))
+      (assert-that distance (is- (greater-than-or-equal-to 1))))))
