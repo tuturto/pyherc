@@ -92,8 +92,18 @@ def distance_between(location1, location2):
     """
     calculate distance between two points
     """
-    x_difference = location2[0] - location1[0]
-    y_difference = location2[1] - location1[1]
+    if hasattr(location1, 'location'):
+        loc1 = location1.location
+    else:
+        loc1 = location1
+
+    if hasattr(location2, 'location'):
+        loc2 = location2.location
+    else:
+        loc2 = location2
+
+    x_difference = loc2[0] - loc1[0]
+    y_difference = loc2[1] - loc1[1]
 
     return sqrt(x_difference**2 + y_difference**2)
 

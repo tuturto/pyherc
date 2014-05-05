@@ -70,7 +70,6 @@
     (perform-mitosis character action-factory)
     (let [[character₀ (first level.creatures)]
 	  [character₁ (second level.creatures)]
-	  [distance (distance-between character₀.location
-				      character₁.location)]]
+	  [distance (distance-between character₀ character₁)]]
       (assert-that distance (is- (less-than 2)))
       (assert-that distance (is- (greater-than-or-equal-to 1))))))
