@@ -35,12 +35,9 @@
    [legal? #d(fn [self]
 	       "check if action is possible to perform"
 	       (let [[location self.character.location]
-		     [level self.character.level]
-		     [tiles (area-around location)]]
+		     [level self.character.level]]
 		 (if
-		     (list (ap-filter (not 
-				       (or (.blocks-movement level (first it) (second it))
-					   (.get-creature-at level it))) tiles))
+		     (list (free-tiles level location))
 		   true false)))]
    [execute #d(fn [self]
 		"execute the action"
@@ -48,8 +45,14 @@
 		  (let [[new-character (self.character-generator self.character.name)]
 			[location self.character.location]
 			[level self.character.level]
-			[tiles (list (genexpr tile [tile (area-around location)]))]]
+			[tiles (list (free-tiles level location))]]
 		    (.add-creature level new-character (.choice self.rng tiles))
 		    (.raise-event self.character (MitosisEvent self.character
 							       new-character)))))]])
 
+#d(defn free-tiles [level location]
+    (ap-filter (not (or
+		     (= (.get-floor-tile level (first it) (second it)) nil)
+		     (.blocks-movement level (first it) (second it))
+		     (.get-creature-at level it)))
+	       (area-around location)))
