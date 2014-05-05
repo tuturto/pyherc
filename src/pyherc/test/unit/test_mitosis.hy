@@ -17,11 +17,12 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(require hy.contrib.anaphoric)
 (require pyherc.macros)
 (import [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
 			       LevelBuilder MitosisFactoryBuilder]]
 	[pyherc.data [Model]]
-	[pyherc.data.geometry [distance-between]]
+	[pyherc.data.geometry [distance-between area-around]]
 	[pyherc.rules.mitosis.interface [perform-mitosis]]
 	[pyherc.generators [generate-creature creature-config]]
 	[hamcrest [assert-that is- equal-to less-than greater-than-or-equal-to
@@ -73,3 +74,15 @@
 	  [distance (distance-between character₀ character₁)]]
       (assert-that distance (is- (less-than 2)))
       (assert-that distance (is- (greater-than-or-equal-to 1))))))
+
+(defn test-new-character-is-not-generated-on-top-of-old-ones []
+  (let [[context (setup)]
+	[level (:level context)]
+	[character (:character context)]
+	[action-factory (:action-factory context)]
+	[generator (:generator context)]
+	[surrounding-tiles (area-around character.location)]]
+    (ap-each surrounding-tiles (let [[new-character (generator "fungi")]]
+				 (.add-creature level new-character it)))
+    (perform-mitosis character action-factory)
+    (assert-that (len level.creatures) (is- (equal-to 9)))))
