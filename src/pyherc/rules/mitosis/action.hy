@@ -37,7 +37,7 @@
 	       (let [[location self.character.location]
 		     [level self.character.level]]
 		 (if
-		     (list (free-tiles level location))
+		     (list (free-tiles level (area-around location)))
 		   true false)))]
    [execute #d(fn [self]
 		"execute the action"
@@ -45,14 +45,14 @@
 		  (let [[new-character (self.character-generator self.character.name)]
 			[location self.character.location]
 			[level self.character.level]
-			[tiles (list (free-tiles level location))]]
+			[tiles (list (free-tiles level (area-around location)))]]
 		    (.add-creature level new-character (.choice self.rng tiles))
 		    (.raise-event self.character (MitosisEvent self.character
 							       new-character)))))]])
 
-#d(defn free-tiles [level location]
+#d(defn free-tiles [level tiles]
     (ap-filter (not (or
 		     (= (.get-floor-tile level (first it) (second it)) nil)
 		     (.blocks-movement level (first it) (second it))
 		     (.get-creature-at level it)))
-	       (area-around location)))
+	       tiles))
