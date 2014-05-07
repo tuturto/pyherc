@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -24,3 +23,4 @@ Package for tests
 
 from pyherc.test.unit.test_calendar import *
 from pyherc.test.unit.test_mitosis import *
+from pyherc.test.unit.test_metamorphosis import *

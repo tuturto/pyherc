@@ -32,6 +32,7 @@ from pyherc.rules.inventory.factories import (DropFactory, InventoryFactory,
 from pyherc.rules.inventory.unequip import UnEquipFactory
 from pyherc.rules.magic import GainDomainFactory, SpellCastingFactory
 from pyherc.rules.mitosis.factory import MitosisFactory
+from pyherc.rules.metamorphosis.factory import MetamorphosisFactory
 from pyherc.rules.moving.factories import MoveFactory, WalkFactory
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.waiting.factories import WaitFactory
@@ -66,6 +67,8 @@ class ActionFactoryBuilder():
         self.dying_rules = mock()
         self.mitosis_factory = mock()
         self.mitosis_factory.action_type = 'mitosis'
+        self.metamorphosis_factory = mock()
+        self.metamorphosis_factory.action_type = 'metamorphosis'
 
         self.effect_factory = mock()
         self.use_real_attack_factory = False
@@ -77,6 +80,7 @@ class ActionFactoryBuilder():
         self.use_real_gain_domain_factory = False
         self.use_real_dying_rules = False
         self.use_real_mitosis_factory = False
+        self.use_real_metamorphosis_factory = False
 
     def with_model(self, model):
         """
@@ -196,6 +200,17 @@ class ActionFactoryBuilder():
 
         return self
 
+    def with_metamorphosis_factory(self, metamorphosis_factory=None):
+        """
+        Configure metamorphosis factory to use
+        """
+        if metamorphosis_factory:
+            self.metamorphosis_factory = metamorphosis_factory
+        else:
+            self.use_real_metamorphosis_factory = True
+
+        return self
+
     def build(self):
         """
         Build action factory
@@ -249,6 +264,9 @@ class ActionFactoryBuilder():
         if self.use_real_mitosis_factory:
             self.mitosis_factory = MitosisFactoryBuilder().build()
 
+        if self.use_real_metamorphosis_factory:
+            self.metamorphosis_factory = MetamorphosisFactoryBuilder().build()
+
         action_factory = ActionFactory(self.model,
                                        [self.move_factory,
                                         self.drink_factory,
@@ -257,7 +275,8 @@ class ActionFactoryBuilder():
                                         self.spellcasting_factory,
                                         self.wait_factory,
                                         self.gain_domain_factory,
-                                        self.mitosis_factory])
+                                        self.mitosis_factory,
+                                        self.metamorphosis_factory])
 
         return action_factory
 
@@ -434,3 +453,36 @@ class MitosisFactoryBuilder():
         """
         return MitosisFactory(character_generator=self.character_generator,
                               rng=self.rng)
+
+class MetamorphosisFactoryBuilder():
+    """
+    Builder for metamorphosis factory
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super().__init__()
+        self.character_generator = mock()
+        self.rng = Random()
+
+    def with_character_generator(self, generator):
+        """
+        Configure character generator to use
+        """
+        self.character_generator = generator
+        return self
+
+    def with_random_number_generator(self, rng):
+        """
+        Configure random number generator to use
+        """
+        self.rng = rng
+        return self
+
+    def build(self):
+        """
+        Builds metamorphosis factory
+        """
+        return MetamorphosisFactory(character_generator=self.character_generator,
+                                    rng=self.rng)
