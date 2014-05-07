@@ -23,17 +23,18 @@
 
 (defclass MetamorphosisFactory []
   [[--init-- #i(fn [self character-generator rng]
-		 "default constructor"
-		 (-> (super) (.--init--))
-		 (setv self.character-generator character-generator)
-		 (setv self.rng rng)
-		 (setv self.action-type "metamorphosis")
-		 nil)]
+                 "default constructor"
+                 (-> (super) (.--init--))
+                 (setv self.character-generator character-generator)
+                 (setv self.rng rng)
+                 (setv self.action-type "metamorphosis")
+                 nil)]
    [can-handle #d(fn [self parameters]
-		   "can this factory handle a given action"
-		   (= self.action-type parameters.action-type))]
+                   "can this factory handle a given action"
+                   (= self.action-type parameters.action-type))]
    [get-action #d(fn [self parameters]
-		   "create metamorphosis action"
-		   (MetamorphosisAction parameters.character
+                   "create metamorphosis action"
+                   (MetamorphosisAction parameters.character
+                                        parameters.new-character-name
                                         self.character-generator
                                         self.rng))]])

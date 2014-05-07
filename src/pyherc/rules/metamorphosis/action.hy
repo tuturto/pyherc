@@ -21,14 +21,14 @@
 (require pyherc.aspects)
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
-	[pyherc.data.geometry [area-around]]
 	[pyherc.events.metamorphosis [MetamorphosisEvent]])
 
 (defclass MetamorphosisAction []
-  [[--init-- #d(fn [self character character-generator rng]
+  [[--init-- #d(fn [self character new-character-name character-generator rng]
 		 "default constructor"
 		 (-> (super) (.--init--))
 		 (setv self.character character)
+                 (setv self.new-character-name new-character-name)
 		 (setv self.character-generator character-generator)
 		 (setv self.rng rng)
 		 nil)]
@@ -36,4 +36,9 @@
 	       "check if action is possible to perform"
                true)]
    [execute #d(fn [self]
-		"execute the action")]])
+		"execute the action"
+                (let [[new-character (self.character-generator self.new-character-name)]
+                      [location self.character.location]
+                      [level self.character.level]]
+                  (.remove-creature level self.character)
+                  (.add-creature level new-character location)))]])
