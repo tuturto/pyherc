@@ -28,6 +28,12 @@
     (when (.legal? action)
       (.execute action))))
 
+(defn mitosis-legal? [character action-factory]
+  "check if mitosis is legal"
+  (let [[action (.get-action action-factory
+                             (MitosisParameters character))]]
+    (.legal? action)))
+
 (defclass MitosisParameters [ActionParameters]
   "Class controlling creation of MitosisAction"
   [[--init-- #d(fn [self character]

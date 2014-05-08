@@ -22,6 +22,7 @@
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
 	[pyherc.data.geometry [area-around]]
+        [pyherc.data.constants [Duration]]
 	[pyherc.events.mitosis [MitosisEvent]])
 
 (defclass MitosisAction []
@@ -47,6 +48,8 @@
 			[level self.character.level]
 			[tiles (list (free-tiles level (area-around location)))]]
 		    (.add-creature level new-character (.choice self.rng tiles))
+                    (.add-to-tick self.character Duration.slow)
+                    (.add-to-tick new-character Duration.slow)
 		    (.raise-event self.character (MitosisEvent self.character
 							       new-character)))))]])
 

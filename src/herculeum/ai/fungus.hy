@@ -21,7 +21,9 @@
 (require pyherc.macros)
 (require herculeum.ai.macros)
 (import [pyherc.aspects [log-debug]]
-	[herculeum.ai.basic [attack-enemy wait mitosis]]
+	[herculeum.ai.basic [attack-enemy wait]]
+        [pyherc.rules.mitosis.interface [perform-mitosis mitosis-legal?]]
+        [pyherc.rules.metamorphosis.interface [morph morph-legal?]]
 	[random [choice]])
 
 (setv __doc__ "module for AI routines for fungus")
@@ -43,8 +45,17 @@
     (let [[enemies (adjacent-enemies ai)]]
       (if enemies
 	(attack-enemy ai (choice enemies) action-factory rng)
-	(very-rarely (mitosis ai action-factory)
-		     (wait ai)))))
+        (very-rarely
+         (cond [(mitosis-legal? ai.character action-factory)
+                (perform-mitosis ai.character action-factory)]
+               [(morph-legal? ai.character "great fungi" action-factory)
+                (morph-great-fungi ai action-factory)]
+               [true (wait ai)])
+         (wait ai)))))
+
+#d(defn morph-great-fungi [ai action-factory]
+    "morph character into a great fungi"
+    (morph ai.character "great fungi" action-factory))
 
 #d(defn adjacent-enemies [ai]
     "get list of enemies adjacent to given ai"
