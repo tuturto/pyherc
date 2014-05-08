@@ -29,6 +29,13 @@
     (when (.legal? action)
       (.execute action))))
 
+(defn morph-legal? [character new-character-name action-factory]
+  "can morph be performed"
+  (let [[action (.get-action action-factory
+                             (MetamorphosisParameters character
+                                                      new-character-name))]]
+    (.legal? action)))
+
 (defclass MetamorphosisParameters [ActionParameters]
   "Class controlling creation of MorphAction"
   [[--init-- #d(fn [self character new-character-name]
