@@ -64,9 +64,4 @@ class PickUpAnimation(Animation):
         """
         Trigger this animation
         """
-        glyphs = [x for x in ui.view.items()
-                  if (hasattr(x, 'entity'))
-                  and (x.entity == self.item)]
-
-        for glyph in glyphs:
-            ui.view.scene().removeItem(glyph)
+        ui.remove_glyph(self.item)

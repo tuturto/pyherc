@@ -48,14 +48,14 @@
         (very-rarely
          (cond [(mitosis-legal? ai.character action-factory)
                 (perform-mitosis ai.character action-factory)]
-               [(morph-legal? ai.character "great fungi" action-factory)
+               [(morph-legal? ai.character "great fungus" action-factory)
                 (morph-great-fungi ai action-factory)]
                [true (wait ai)])
          (wait ai)))))
 
 #d(defn morph-great-fungi [ai action-factory]
     "morph character into a great fungi"
-    (morph ai.character "great fungi" action-factory))
+    (morph ai.character "great fungus" action-factory))
 
 #d(defn adjacent-enemies [ai]
     "get list of enemies adjacent to given ai"

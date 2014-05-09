@@ -43,4 +43,6 @@
                       [level self.character.level]]
                   (.remove-creature level self.character)
                   (.add-creature level new-character location)
-                  (.add-to-tick new-character Duration.slow)))]])
+                  (.add-to-tick new-character Duration.slow)
+                  (.raise-event self.character (MetamorphosisEvent self.character
+                                                                   new-character))))]])

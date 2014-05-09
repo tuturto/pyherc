@@ -348,6 +348,17 @@ class PlayMapWidget(QWidget):
                          entity.location[1] * 32)
         scene.addItem(new_glyph)
 
+    def remove_glyph(self, entity):
+        """
+        Remove graphical representation of an entity
+        """
+        glyphs = [x for x in self.view.items()
+                  if (hasattr(x, 'entity'))
+                  and (x.entity == entity)]
+
+        for glyph in glyphs:
+            self.view.scene().removeItem(glyph)
+
     def receive_event(self, event):
         """
         Receive event from model
