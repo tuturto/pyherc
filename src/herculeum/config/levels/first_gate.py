@@ -257,4 +257,15 @@ def init_creatures(context):
                                   attack = 3,
                                   ai = FungusAI))
 
+    great_fungus_f0 = surface_manager.add_icon('great_fungus_f0', ':great_fungus_f0.png', 'F', ['white', 'bold'])
+    great_fungus_f1 = surface_manager.add_icon('great_fungus_f1', ':great_fungus_f1.png', 'F', ['white', 'bold'])
+    config.append(creature_config(name = 'great fungus',
+                                  body = 6,
+                                  finesse = 1,
+                                  mind = 3,
+                                  hp = 12,
+                                  speed = 8,
+                                  icons = (great_fungus_f0, great_fungus_f1),
+                                  attack = 5,
+                                  ai = FungusAI))
     return config

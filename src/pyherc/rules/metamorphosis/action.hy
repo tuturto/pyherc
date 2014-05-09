@@ -21,6 +21,7 @@
 (require pyherc.aspects)
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
+        [pyherc.data.constants [Duration]]
 	[pyherc.events.metamorphosis [MetamorphosisEvent]])
 
 (defclass MetamorphosisAction []
@@ -41,4 +42,5 @@
                       [location self.character.location]
                       [level self.character.level]]
                   (.remove-creature level self.character)
-                  (.add-creature level new-character location)))]])
+                  (.add-creature level new-character location)
+                  (.add-to-tick new-character Duration.slow)))]])

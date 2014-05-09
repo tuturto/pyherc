@@ -13,6 +13,8 @@
         <file>scarab-beetle_f1.png</file>
         <file>fungus_f0.png</file>
         <file>fungus_f1.png</file>
+        <file>great_fungus_f0.png</file>
+        <file>great_fungus_f1.png</file>
 
         <file>pc_adventurer_f0.png</file>
         <file>pc_adventurer_f1.png</file>
@@ -43,7 +45,6 @@
         <file>ashmque.png</file>
         <file>barbed-spear.png</file>
         <file>battle-axe.png</file>
-        <file>characters.png</file>
         <file>dagger.png</file>
         <file>dungeon.png</file>
         <file>gavel.png</file>
@@ -57,7 +58,6 @@
         <file>monsters.png</file>
 
         <file>plain_potion.png</file>
-        <file>potions.png</file>
 
         <file>scythe.png</file>
         <file>spiked-mace.png</file>
