@@ -21,41 +21,41 @@
 (require pyherc.aspects)
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
-	[pyherc.data.geometry [area-around]]
+    [pyherc.data.geometry [area-around]]
         [pyherc.data.constants [Duration]]
-	[pyherc.events.mitosis [MitosisEvent]])
+    [pyherc.events.mitosis [MitosisEvent]])
 
 (defclass MitosisAction []
   [[--init-- #d(fn [self character character-generator rng]
-		 "default constructor"
-		 (-> (super) (.--init--))
-		 (setv self.character character)
-		 (setv self.character-generator character-generator)
-		 (setv self.rng rng)
-		 nil)]
+         "default constructor"
+         (-> (super) (.--init--))
+         (setv self.character character)
+         (setv self.character-generator character-generator)
+         (setv self.rng rng)
+         nil)]
    [legal? #d(fn [self]
-	       "check if action is possible to perform"
-	       (let [[location self.character.location]
-		     [level self.character.level]]
-		 (if
-		     (list (free-tiles level (area-around location)))
-		   true false)))]
+           "check if action is possible to perform"
+           (let [[location self.character.location]
+             [level self.character.level]]
+         (if
+             (list (free-tiles level (area-around location)))
+           true false)))]
    [execute #d(fn [self]
-		"execute the action"
-		(when (.legal? self)
-		  (let [[new-character (self.character-generator self.character.name)]
-			[location self.character.location]
-			[level self.character.level]
-			[tiles (list (free-tiles level (area-around location)))]]
-		    (.add-creature level new-character (.choice self.rng tiles))
-                    (.add-to-tick self.character Duration.slow)
-                    (.add-to-tick new-character Duration.slow)
-		    (.raise-event self.character (MitosisEvent self.character
-							       new-character)))))]])
+        "execute the action"
+        (when (.legal? self)
+          (let [[new-character (self.character-generator self.character.name)]
+            [location self.character.location]
+            [level self.character.level]
+            [tiles (list (free-tiles level (area-around location)))]]
+            (.add-creature level new-character (.choice self.rng tiles))
+                    (.add-to-tick self.character Duration.very-slow)
+                    (.add-to-tick new-character Duration.very-slow)
+            (.raise-event self.character (MitosisEvent self.character
+                                   new-character)))))]])
 
 #d(defn free-tiles [level tiles]
     (ap-filter (not (or
-		     (= (.get-floor-tile level (first it) (second it)) nil)
-		     (.blocks-movement level (first it) (second it))
-		     (.get-creature-at level it)))
-	       tiles))
+             (= (.get-floor-tile level (first it) (second it)) nil)
+             (.blocks-movement level (first it) (second it))
+             (.get-creature-at level it)))
+           tiles))

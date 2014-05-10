@@ -20,8 +20,10 @@
 (require pyherc.aspects)
 (require pyherc.macros)
 (require herculeum.ai.macros)
+(require hy.contrib.anaphoric)
 (import [pyherc.aspects [log-debug]]
 	[herculeum.ai.basic [attack-enemy wait]]
+        [pyherc.data.geometry [area-around]]
         [pyherc.rules.mitosis.interface [perform-mitosis mitosis-legal?]]
         [pyherc.rules.metamorphosis.interface [morph morph-legal?]]
 	[random [choice]])
@@ -55,7 +57,29 @@
 
 #d(defn morph-great-fungi [ai action-factory]
     "morph character into a great fungi"
+    (let [[level ai.character.level]]
+      (ap-each (adjacent-friends ai)
+               (.remove-creature level it)))             
     (morph ai.character "great fungus" action-factory))
+
+#d(defn adjacent-friends [ai]
+    "get list of friends adjacent to given ai"
+    (let [[character ai.character]
+          [level character.level]
+          [location character.location]
+          [characters (ap-map (.get-creature-at level it) (area-around location))]]
+      (ap-filter (friend? character it) characters)))
+
+#d(defn characters-around [level location]
+    "get characters around given location"
+    (ap-filter it
+               (ap-map (.get-creature-at level it)
+                       (area-around location))))
+
+#d(defn friend? [character-0 character-1]
+    "are two characters friends"
+    (and character-0 character-1
+         (= character-0.name character-1.name)))
 
 #d(defn adjacent-enemies [ai]
     "get list of enemies adjacent to given ai"
