@@ -236,7 +236,7 @@ class TestSectionLevelAccess():
         self.floor_rock = 1
         self.wall_empty = 10
         self.wall_ground = 11
-        self.level = Level((10, 10), self.floor_empty, self.wall_empty)
+        self.level = Level(mock(), (10, 10), self.floor_empty, self.wall_empty)
         self.section = Section((0, 0), (10, 10), self.level, self.rng)
 
     def test_setting_floor(self):
@@ -290,7 +290,7 @@ class TestSectionLevelAccessWithOffset():
         self.floor_rock = 1
         self.wall_empty = 10
         self.wall_ground = 11
-        self.level = Level((10, 10), self.floor_empty, self.wall_empty)
+        self.level = Level(mock(), (10, 10), self.floor_empty, self.wall_empty)
         self.section = Section((5, 5), (10, 10), self.level, self.rng)
 
     def test_setting_floor_with_offset(self):

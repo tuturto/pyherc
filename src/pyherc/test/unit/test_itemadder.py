@@ -27,12 +27,13 @@ from random import Random
 from hamcrest import (assert_that,  # pylint: disable-msg=E0611; pylint: disable-msg=E0611
                       greater_than, greater_than_or_equal_to, has_length,
                       less_than)
-from pyherc.data import Level
+from pyherc.data import Level, Model
 from pyherc.data.effects import EffectHandle
 from pyherc.generators.item import (ItemConfiguration, ItemConfigurations,
                                     ItemGenerator, WeaponConfiguration)
 from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
 from pyherc.test.matchers import does_have_item, located_in_room
+from pyherc.test.builders import LevelBuilder
 
 
 class TestItemAdder():
@@ -58,7 +59,12 @@ class TestItemAdder():
         self.floor_rock = 1
         self.wall_empty = 2
         self.rng = Random()
-        self.level = Level((60, 40), self.floor_rock, self.wall_empty)
+        self.level = (LevelBuilder()
+                      .with_size((60, 40))
+                      .with_floor_tile(self.floor_rock)
+                      .with_wall_tile(self.wall_empty)
+                      .with_empty_wall_tile(self.wall_empty)
+                      .build())
         self.level.set_location_type((10, 10), 'room')
 
         for x_loc in range(11, 30):

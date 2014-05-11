@@ -31,12 +31,14 @@ class Level():
     Represents a level
     """
     @log_debug
-    def __init__(self, size=(0, 0), floor_type=None, wall_type=None,
+    def __init__(self, model, size=(0, 0), floor_type=None, wall_type=None,
                  empty_floor=0, empty_wall=0):
         """
         Initialises a level of certain size and fills floor and walls with
         given types
 
+        :param model: model to use
+        :type model: Model
         :param size: optional size of the level
         :type size: (integer, integer)
         :param floor_type: type of floor to fill level
@@ -50,6 +52,7 @@ class Level():
         """
         super().__init__()
 
+        self.model = model
         self.floor = []
         self.walls = []
         self.ornamentations = []

@@ -26,6 +26,7 @@ import herculeum.config.levels
 from hamcrest import assert_that, is_, not_none  # pylint: disable-msg=E0611
 from herculeum.config import Configuration
 from mockito import mock
+from pyherc.data import Model
 from pyherc.rules.inventory.interface import InventoryParameters
 from PyQt4.QtGui import QApplication
 
@@ -45,7 +46,7 @@ class TestMainConfiguration():
         Setup test case
         """
         self.app = QApplication([])
-        self.config = Configuration(mock(),
+        self.config = Configuration(Model(),
                                     herculeum.config.levels,
                                     mock(),
                                     mock())

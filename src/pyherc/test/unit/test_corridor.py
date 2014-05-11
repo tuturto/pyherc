@@ -24,10 +24,10 @@ Tests for Corridor
 import random
 
 from hamcrest import assert_that, equal_to, is_
-from pyherc.data import Level
 from pyherc.generators.level.partitioners.section import Connection, Section
 from pyherc.generators.level.room.corridor import CorridorGenerator
 from pyherc.test.matchers import is_fully_accessible_via
+from pyherc.test.builders import LevelBuilder
 
 
 class TestCorridor():
@@ -53,10 +53,12 @@ class TestCorridor():
         self.wall_ground = 2
         self.wall_empty = 3
 
-        self.level = Level(size=(10, 10),
-                           floor_type=self.floor_rock,
-                           wall_type=self.wall_ground,
-                           empty_wall=self.wall_empty)
+        self.level = (LevelBuilder()
+                        .with_size((10, 10))
+                        .with_floor_tile(self.floor_rock)
+                        .with_wall_tile(self.wall_ground)
+                        .with_empty_wall_tile(self.wall_empty)
+                        .build())
 
         self.rng = random.Random()
         self.section = Section(corner1=(0, 0),

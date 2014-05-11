@@ -40,7 +40,7 @@ class TestDungeon:
         """
         Test that simple level creation works
         """
-        level = Level([20, 20], self.floor_rock, self.wall_empty)
+        level = Level(mock(), [20, 20], self.floor_rock, self.wall_empty)
         assert not (level is None)
         assert(level.floor[5][5] == self.floor_rock)
         assert(level.walls[0][0] == self.wall_empty)
@@ -49,12 +49,12 @@ class TestDungeon:
         """
         Test that stairs can be linked
         """
-        level1 = Level([20, 20], self.floor_rock, self.wall_empty)
-        level2 = Level([20, 20], self.floor_rock, self.wall_empty)
+        level1 = Level(mock(), [20, 20], self.floor_rock, self.wall_empty)
+        level2 = Level(mock(), [20, 20], self.floor_rock, self.wall_empty)
 
         stairs1 = Portal((None, None), None)
-        #TODO: beak link
-        stairs1.icon = 200
+
+        stairs1.icon = 'stairs'
         level1.add_portal(stairs1, (10, 10))
 
         stairs2 = Portal((None, None), None)

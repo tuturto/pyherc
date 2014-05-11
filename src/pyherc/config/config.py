@@ -259,7 +259,8 @@ class Configuration():
                                              [],
                                              [],
                                              [],
-                                             [])
+                                             [],
+                                             self.model)
 
         configurators = self.get_configurators(context.config_package,
                                                'init_level')

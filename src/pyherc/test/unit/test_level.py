@@ -25,7 +25,7 @@ Tests for Level
 #pylint: disable=W0614
 from hamcrest import (assert_that,  # pylint: disable-msg=E0611
                       contains_inanyorder)
-from pyherc.data import Level
+from pyherc.data import Level, Model
 
 
 class TestLevel:
@@ -42,7 +42,7 @@ class TestLevel:
         """
         Setup test case
         """
-        self.level = Level(size = (20, 10))
+        self.level = Level(Model(), size = (20, 10))
 
     def test_get_size(self):
         """

@@ -20,7 +20,7 @@
 """
 Module for level builder
 """
-from pyherc.data import Level
+from pyherc.data import Level, Model
 
 
 class LevelBuilder():
@@ -39,6 +39,11 @@ class LevelBuilder():
         self.empty_wall_tile = 10
         self.solid_wall_tile = 11
         self.walls = []
+        self.model = Model()
+
+    def with_model(self, model):
+        self.model = model
+        return self
 
     def with_floor_tile(self, tile):
         self.floor_tile = tile
@@ -84,6 +89,13 @@ class LevelBuilder():
         self.walls.append(location)
         return self
 
+    def with_size(self, size):
+        """
+        Configure size
+        """
+        self.level_size = size
+        return self
+
     def build(self):
         """
         Build level
@@ -91,7 +103,8 @@ class LevelBuilder():
         Returns:
             Level
         """
-        level = Level(size=self.level_size,
+        level = Level(model=self.model,
+                      size=self.level_size,
                       floor_type=self.floor_tile,
                       wall_type=self.wall_tile,
                       empty_wall=self.empty_wall_tile)

@@ -30,7 +30,7 @@ class LevelGeneratorFactoryConfig():
     @log_debug
     def __init__(self, room_generators, level_partitioners,
                  decorators, item_adders, creature_adders,
-                 portal_adder_configurations, contexts):
+                 portal_adder_configurations, contexts, model):
         """
         Default constructor
         """
@@ -42,3 +42,4 @@ class LevelGeneratorFactoryConfig():
         self.creature_adders = creature_adders
         self.portal_adder_configurations = portal_adder_configurations
         self.contexts = contexts
+        self.model = model

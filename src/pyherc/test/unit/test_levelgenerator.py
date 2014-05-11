@@ -25,7 +25,7 @@ import random
 from hamcrest import assert_that, contains_string, has_item, is_, same_instance
 from mockito import any, mock, verify, when
 from pyherc.config.dsl import LevelContext
-from pyherc.data import Portal
+from pyherc.data import Portal, Model
 from pyherc.generators.level import LevelGeneratorFactory
 from pyherc.generators.level.config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.creatures import CreatureAdder
@@ -339,7 +339,8 @@ class TestLevelGenerator:
                                      empty_wall = self.wall_empty,
                                      level_types = ['crypt'])
 
-        generator = LevelGenerator(partitioner, [room_generator],
+        generator = LevelGenerator(Model(),
+                                   partitioner, [room_generator],
                                    level_decorator, [stair_adder],
                                    item_adder, creature_adder,
                                    self.rng,
@@ -376,7 +377,8 @@ class TestLevelGenerator:
 
         portal = mock(Portal)
 
-        generator = LevelGenerator(partitioner, [room_generator],
+        generator = LevelGenerator(Model(),
+                                   partitioner, [room_generator],
                                    level_decorator, [portal_adder],
                                    item_adder,
                                    creature_adder,
@@ -415,7 +417,8 @@ class TestLevelGenerator:
 
         portal = mock(Portal)
 
-        generator = LevelGenerator(partitioner, [room_generator],
+        generator = LevelGenerator(Model(),
+                                   partitioner, [room_generator],
                                    level_decorator, [portal_adder],
                                    item_adder,
                                    creature_adder,

@@ -27,12 +27,12 @@ from functools import partial
 from hamcrest import (assert_that, greater_than, greater_than_or_equal_to,
                       has_length, less_than)
 from mockito import mock
-from pyherc.data import Level
 from pyherc.generators import creature_config
 from pyherc.generators.creature import generate_creature
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
 from pyherc.test.matchers import has_creature, located_in_room
+from pyherc.test.builders import LevelBuilder
 
 
 class TestCreatureAdder():
@@ -54,7 +54,9 @@ class TestCreatureAdder():
         Setup the test case
         """
         self.rng = random.Random()
-        self.level = Level((60, 40))
+        self.level = (LevelBuilder()
+                        .with_size((60, 40))
+                        .build())
         self.level.set_location_type((10, 10), 'room')
 
         config = {}
@@ -84,7 +86,7 @@ class TestCreatureAdder():
                                  self.model,
                                  mock(),
                                  self.rng)
-        
+
         self.configuration = CreatureAdderConfiguration(['crypt'])
         self.configuration.add_creature(min_amount=3,
                                         max_amount=4,

@@ -40,6 +40,14 @@ class LevelConfiguration():
         self.creature_adders = None
         self.portal_adder_configurations = None
         self.contexts = None
+        self.model = None
+
+    def with_model(self, model):
+        """
+        set model to use
+        """
+        self.model = model
+        return self
 
     def with_contexts(self, contexts):
         """
@@ -116,6 +124,7 @@ class LevelConfiguration():
         :rtype: LevelGeneratorFactoryConfig
         """
         return LevelGeneratorFactoryConfig(
+            model=self.model,
             room_generators=self.room_generators,
             level_partitioners=self.level_partitioners,
             decorators=self.decorators,

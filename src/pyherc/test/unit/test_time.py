@@ -68,7 +68,7 @@ class TestTime:
 
         self.model = Model()
         self.model.dungeon = Dungeon()
-        self.model.dungeon.levels = Level((20, 20), 0, 0)
+        self.model.dungeon.levels = Level(mock(), (20, 20), 0, 0)
 
         self.model.dungeon.levels.add_creature(self.creature1)
         self.model.dungeon.levels.add_creature(self.creature2)

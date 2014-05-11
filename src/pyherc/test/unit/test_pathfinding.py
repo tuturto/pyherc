@@ -27,7 +27,7 @@ from hamcrest import assert_that, contains, is_  # pylint: disable-msg=E0611
 from mockito import mock
 from pyherc.ai import a_star
 from pyherc.config.dsl import LevelContext
-from pyherc.data import Portal
+from pyherc.data import Portal, Model
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.portals import PortalAdder
@@ -47,7 +47,7 @@ class TestAStar():
         """
         Default constructor
         """
-        super(TestAStar, self).__init__()
+        super().__init__()
 
     def test_simple_path(self):
         """
@@ -132,7 +132,8 @@ class TestPathfindingInLevel():
 
         portal = mock(Portal)
 
-        generator = LevelGenerator(partitioner, [room_generator],
+        generator = LevelGenerator(Model(),
+                                   partitioner, [room_generator],
                                    level_decorator, [portal_adder],
                                    item_adder,
                                    creature_adder,

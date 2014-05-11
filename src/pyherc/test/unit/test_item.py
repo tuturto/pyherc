@@ -27,11 +27,12 @@ import pyherc.data.dungeon
 import pyherc.generators.item
 from hamcrest import assert_that, equal_to, is_, is_in, is_not
 from mockito import any, mock, verify
-from pyherc.data import Character, Level
+from pyherc.data import Character
 from pyherc.events import PickUpEvent
 from pyherc.rules import equip, unequip
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
-                                  EffectHandleBuilder, ItemBuilder)
+                                  EffectHandleBuilder, ItemBuilder,
+                                  LevelBuilder)
 
 
 class TestItems():
@@ -57,7 +58,9 @@ class TestItems():
                         .with_name('banana')
                         .build())
 
-        self.level = Level([20, 20])
+        self.level = (LevelBuilder()
+                      .with_size((20, 20))
+                      .build())
 
         self.character = (CharacterBuilder()
                             .with_level(self.level)
@@ -160,9 +163,12 @@ class TestItemsInLevel:
         self.item = (ItemBuilder()
                         .build())
 
-        self.level = Level([20, 20])
-
         self.model = pyherc.data.model.Model()
+
+        self.level = (LevelBuilder()
+                      .with_size((20, 20))
+                      .with_model(self.model)
+                      .build())
 
         self.character = (CharacterBuilder()
                             .with_location((5, 5))

@@ -56,7 +56,8 @@ class TestPortalAdder():
         """
         Test that stairs can be added to a room
         """
-        level = Level(size = (20, 20),
+        level = Level(model=mock(),
+                      size = (20, 20),
                       floor_type = self.floor_rock,
                       wall_type = self.wall_empty)
 
@@ -82,7 +83,8 @@ class TestPortalAdder():
         Test that portal created by adder has two icons set
         One to display and another to be used by opposite end
         """
-        level = Level(size = (20, 20),
+        level = Level(model=mock(),
+                      size = (20, 20),
                       floor_type = self.floor_rock,
                       wall_type = self.wall_empty)
 

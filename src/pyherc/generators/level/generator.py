@@ -43,6 +43,7 @@ class LevelGeneratorFactory():
         :type random_generator: Random
         """
         self.logger = logging.getLogger('pyherc.generators.level.LevelGeneratorFactory')  # noqa
+        self.model = configuration.model
         self.level_partitioners = configuration.level_partitioners
         self.room_generators = configuration.room_generators
         self.decorators = configuration.decorators
@@ -91,7 +92,8 @@ class LevelGeneratorFactory():
         factory = self.portal_adder_factory
         portal_adders = factory.create_portal_adders(level_type)
 
-        return LevelGenerator(partitioner,
+        return LevelGenerator(self.model,
+                              partitioner,
                               rooms,
                               decorator,
                               portal_adders,
@@ -162,7 +164,7 @@ class LevelGenerator():
     Class used to generate levels
     """
     @log_debug
-    def __init__(self, partitioner, room_generators,
+    def __init__(self, model, partitioner, room_generators,
                  decorator, portal_adders,
                  item_adder, creature_adder,
                  random_generator, level_context):
@@ -180,6 +182,7 @@ class LevelGenerator():
         :param size: Size of the level to create
         """
         self.logger = logging.getLogger('pyherc.generators.level.LevelGenerator')  # noqa
+        self.model = model
         self.item_adder = item_adder
         self.creature_adder = creature_adder
         self.random_generator = random_generator
@@ -198,7 +201,8 @@ class LevelGenerator():
         :param portal: portal to link to this level
         :type portal: Portal
         """
-        new_level = Level(size=self.level_context.size,
+        new_level = Level(model=self.model,
+                          size=self.level_context.size,
                           floor_type=self.level_context.floor_type,
                           wall_type=self.level_context.wall_type,
                           empty_floor=self.level_context.empty_floor,

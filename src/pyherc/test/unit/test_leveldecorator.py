@@ -63,7 +63,7 @@ class TestLevelDecorator():
         self.floor_brick = 2
         self.wall_empty = 3
         self.wall_ground = 4
-        self.level = Level((10, 15),
+        self.level = Level(mock(), (10, 15),
                       floor_type = FLOOR_NATURAL,
                       wall_type = self.wall_empty)
 
@@ -128,7 +128,7 @@ class TestWallBuilderDecorator():
         Setup the test case
         """
         self.wall_empty = 1
-        self.level = Level((10, 15),
+        self.level = Level(mock(), (10, 15),
                       floor_type = FLOOR_NATURAL,
                       wall_type = WALL_NATURAL)
 
@@ -216,7 +216,7 @@ class TestDirectionalWallDecorator():
         Setup the test case
         """
         self.empty_wall = 'empty space'
-        self.level = Level((10, 10),
+        self.level = Level(mock(), (10, 10),
                            floor_type = 'floor',
                            wall_type = self.empty_wall)
 
@@ -289,7 +289,7 @@ class TestDecoratingWallOrnaments():
         self.floor = 'floor'
         self.ornamentation = 'candles'
 
-        self.level = Level((10, 10),
+        self.level = Level(mock(), (10, 10),
                            floor_type = self.floor,
                            wall_type = self.empty_wall)
 
