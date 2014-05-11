@@ -23,7 +23,7 @@
 
 (defclass MetamorphosisEvent [Event]
   "event to indicate that a metamorphosis has occurred"
-  [[--init-- #d(fn [self character new-character]
+  [[--init-- #d(fn [self character new-character &optional destroyed-characters]
 		 "default constructor"
 		 (-> (super) (.--init-- "metamorphosis"
 					character.level
@@ -31,6 +31,7 @@
 					[]))
 		 (setv self.character character)
 		 (setv self.new-character new-character)
+                 (setv self.destroyed-characters destroyed-characters)
 		 nil)]
    [get-description (fn [self point-of-view]
 		      "get description of this event"

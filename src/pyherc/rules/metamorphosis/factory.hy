@@ -37,4 +37,5 @@
                    (MetamorphosisAction parameters.character
                                         parameters.new-character-name
                                         self.character-generator
-                                        self.rng))]])
+                                        self.rng
+                                        parameters.destroyed-characters))]])

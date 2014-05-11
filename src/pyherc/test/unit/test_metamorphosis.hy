@@ -22,6 +22,7 @@
 (import [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
                                LevelBuilder MetamorphosisFactoryBuilder]]
         [pyherc.data [Model]]
+        [pyherc.data.geometry [area-around]]
         [pyherc.rules.metamorphosis.interface [morph]]
         [pyherc.generators [generate-creature creature-config]]
         [hamcrest [assert-that is- equal-to]]
@@ -69,3 +70,17 @@
     (let [[morphed-character (first level.creatures)]]
       (assert-that (len level.creatures) (is- (equal-to 1)))
       (assert-that morphed-character.name (is- (equal-to "fire fungi"))))))
+
+(defn test-destroying-characters-in-metamorphosis []
+  "sometimes characters around morphee are destroyed"
+  (let [[context (setup)]
+        [level (:level context)]
+        [character (:character context)]
+        [action-factory (:action-factory context)]
+        [generator (:generator context)]]
+    (ap-each (area-around character.location)
+             (.add-creature level (generator "fungi") it))
+    (assert-that (len level.creatures) (is- (equal-to 9)))
+    (let [[destroyed (ap-filter (!= it character) level.creatures)]]
+      (morph character "fire fungi" action-factory destroyed))
+    (assert-that (len level.creatures) (is- (equal-to 1)))))

@@ -57,10 +57,8 @@
 
 #d(defn morph-great-fungi [ai action-factory]
     "morph character into a great fungi"
-    (let [[level ai.character.level]]
-      (ap-each (adjacent-friends ai)
-               (.remove-creature level it)))             
-    (morph ai.character "great fungus" action-factory))
+    (morph ai.character "great fungus" action-factory 
+           (adjacent-friends ai)))
 
 #d(defn adjacent-friends [ai]
     "get list of friends adjacent to given ai"

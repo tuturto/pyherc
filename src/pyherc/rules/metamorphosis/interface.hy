@@ -18,29 +18,35 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (require pyherc.aspects)
+(require pyherc.macros)
 (import [pyherc.rules.public [ActionParameters]]
 	[pyherc.aspects [log-debug log-info]])
 
-(defn morph [character new-character-name action-factory]
+(defn morph [character new-character-name action-factory
+             &optional [destroyed-characters #t()]]
   "perform morph on a character"
   (let [[action (.get-action action-factory
 				(MetamorphosisParameters character 
-                                                         new-character-name))]]
+                                                         new-character-name
+                                                         destroyed-characters))]]
     (when (.legal? action)
       (.execute action))))
 
-(defn morph-legal? [character new-character-name action-factory]
+(defn morph-legal? [character new-character-name action-factory
+                    &optional [destroyed-characters #t()]]
   "can morph be performed"
   (let [[action (.get-action action-factory
                              (MetamorphosisParameters character
-                                                      new-character-name))]]
+                                                      new-character-name
+                                                      destroyed-characters))]]
     (.legal? action)))
 
 (defclass MetamorphosisParameters [ActionParameters]
   "Class controlling creation of MorphAction"
-  [[--init-- #d(fn [self character new-character-name]
+  [[--init-- #d(fn [self character new-character-name destroyed-characters]
 		 (-> (super) (.--init--))
 		 (setv self.action-type "metamorphosis")
 		 (setv self.character character)
                  (setv self.new-character-name new-character-name)
+                 (setv self.destroyed-characters destroyed-characters)
 		 nil)]])

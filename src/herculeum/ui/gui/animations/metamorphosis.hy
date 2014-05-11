@@ -17,6 +17,7 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(require hy.contrib.anaphoric)
 (import [herculeum.ui.gui.animations.animation [Animation]]
         [herculeum.ui.gui [layers]])
 
@@ -26,8 +27,11 @@
                (-> (super) (.--init-- event))
                (setv self.character event.character)
                (setv self.new-character event.new-character)
+               (setv self.destroyed-characters event.destroyed-characters)
                nil)]
    [trigger (fn [self ui]
+              (ap-each self.destroyed-characters
+                       (.remove-glyph ui it))
               (.remove-glyph ui self.character)
               (.add-glyph ui self.new-character ui.scene
                           layers.zorder-character))]])

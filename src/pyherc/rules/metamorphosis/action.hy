@@ -25,13 +25,15 @@
 	[pyherc.events.metamorphosis [MetamorphosisEvent]])
 
 (defclass MetamorphosisAction []
-  [[--init-- #d(fn [self character new-character-name character-generator rng]
+  [[--init-- #d(fn [self character new-character-name character-generator rng
+                    destroyed-characters]
 		 "default constructor"
 		 (-> (super) (.--init--))
 		 (setv self.character character)
                  (setv self.new-character-name new-character-name)
 		 (setv self.character-generator character-generator)
 		 (setv self.rng rng)
+                 (setv self.destroyed-characters (list destroyed-characters))
 		 nil)]
    [legal? #d(fn [self]
 	       "check if action is possible to perform"
@@ -44,5 +46,8 @@
                   (.remove-creature level self.character)
                   (.add-creature level new-character location)
                   (.add-to-tick new-character Duration.slow)
+                  (ap-each self.destroyed-characters
+                           (.remove-creature level it))
                   (.raise-event self.character (MetamorphosisEvent self.character
-                                                                   new-character))))]])
+                                                                   new-character
+                                                                   self.destroyed-characters))))]])
