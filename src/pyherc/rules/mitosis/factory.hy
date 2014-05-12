@@ -22,11 +22,12 @@
 	[pyherc.rules.mitosis.action [MitosisAction]])
 
 (defclass MitosisFactory []
-  [[--init-- #i(fn [self character-generator rng]
+  [[--init-- #i(fn [self character-generator rng character-limit]
 		 "default constructor"
 		 (-> (super) (.--init--))
 		 (setv self.character-generator character-generator)
 		 (setv self.rng rng)
+                 (setv self.character-limit character-limit)
 		 (setv self.action-type "mitosis")
 		 nil)]
    [can-handle #d(fn [self parameters]
@@ -36,4 +37,5 @@
 		   "create mitosis action"
 		   (MitosisAction parameters.character
 				  self.character-generator
-				  self.rng))]])
+				  self.rng
+                                  self.character-limit))]])

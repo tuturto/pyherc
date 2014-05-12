@@ -23,7 +23,7 @@
                                LevelBuilder MitosisFactoryBuilder]]
         [pyherc.data [Model]]
         [pyherc.data.geometry [distance-between area-around]]
-        [pyherc.rules.mitosis.interface [perform-mitosis]]
+        [pyherc.rules.mitosis.interface [perform-mitosis mitosis-legal?]]
         [pyherc.generators [generate-creature creature-config]]
         [hamcrest [assert-that is- equal-to less-than greater-than-or-equal-to
                    all-of]]
@@ -48,6 +48,7 @@
                             (.with-mitosis-factory
                              (-> (MitosisFactoryBuilder)
                                  (.with-character-generator generator)
+                                 (.with-character-limit 10)
                                  (.build)))
                             (.build))]]
     (.add-creature level character #t(5 5))
@@ -89,3 +90,13 @@
                                  (.add-creature level new-character it)))
     (perform-mitosis character action-factory)
     (assert-that (len level.creatures) (is- (equal-to 9)))))
+
+(defn test-character-limit-is-observed []
+  (let [[context (setup)]
+        [level (:level context)]
+        [character (:character context)]
+        [action-factory (:action-factory context)]
+        [generator (:generator context)]
+        [surrounding-tiles (area-around character.location)]]
+    (ap-dotimes 9 (.add-creature level (generator "fungi") #t(it 2)))
+    (assert-that (mitosis-legal? character action-factory) (is- (equal-to false)))))

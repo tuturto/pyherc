@@ -26,12 +26,13 @@
     [pyherc.events.mitosis [MitosisEvent]])
 
 (defclass MitosisAction []
-  [[--init-- #d(fn [self character character-generator rng]
+  [[--init-- #d(fn [self character character-generator rng character-limit]
          "default constructor"
          (-> (super) (.--init--))
          (setv self.character character)
          (setv self.character-generator character-generator)
          (setv self.rng rng)
+         (setv self.character-limit character-limit)
          nil)]
    [legal? #d(fn [self]
            "check if action is possible to perform"

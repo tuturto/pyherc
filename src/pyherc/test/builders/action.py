@@ -431,7 +431,15 @@ class MitosisFactoryBuilder():
         """
         super().__init__()
         self.character_generator = mock()
+        self.character_limit = 30
         self.rng = Random()
+
+    def with_character_limit(self, character_limit):
+        """
+        Configure maximum amount of character at any given time
+        """
+        self.character_limit = character_limit
+        return self
 
     def with_character_generator(self, generator):
         """
@@ -452,6 +460,7 @@ class MitosisFactoryBuilder():
         Builds mitosis factory
         """
         return MitosisFactory(character_generator=self.character_generator,
+                              character_limit=self.character_limit,
                               rng=self.rng)
 
 class MetamorphosisFactoryBuilder():
