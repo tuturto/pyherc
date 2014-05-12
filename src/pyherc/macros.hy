@@ -21,3 +21,9 @@
 
 (defmacro x-coordinate [location] `(first ~location))
 (defmacro y-coordinate [location] `(second ~location))
+
+(defmacro count [seq]
+  (with-gensyms [counter]
+    `(let [[~counter 0]]
+      (ap-each ~seq (setv ~counter (+ 1 ~counter)))
+      ~counter)))
