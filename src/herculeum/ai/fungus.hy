@@ -33,7 +33,6 @@
 (defclass FungusAI []
   [[__doc__ "AI routine for fungus"]
    [character None]
-   [mode [:transit None]]
    [--init-- (fn [self character]
            "default constructor"
            (.--init-- (super FungusAI self))
@@ -42,6 +41,19 @@
    [act (fn [self model action-factory rng]
       "check the situation and act accordingly"
       (fungus-act self model action-factory rng))]])
+
+(defclass GreatFungusAI []
+  [[__doc__ "AI routine for great fungus"]
+   [character None]
+   [--init-- (fn [self character]
+           "default constructor"
+           (.--init-- (super GreatFungusAI self))
+           (setv self.character character)
+	   None)]
+   [act (fn [self model action-factory rng]
+      "check the situation and act accordingly"
+      (great-fungus-act self model action-factory rng))]])
+
 
 #d(defn fungus-act [ai model action-factory rng]
     (let [[enemies (adjacent-enemies ai)]]
@@ -54,6 +66,12 @@
                 (morph-great-fungi ai action-factory)]
                [true (wait ai)])
          (wait ai)))))
+
+#d(defn great-fungus-act [ai model action-factory rng]
+    (let [[enemies (adjacent-enemies ai)]]
+      (if enemies
+	(attack-enemy ai (choice enemies) action-factory rng)
+        (wait ai))))
 
 #d(defn morph-great-fungi [ai action-factory]
     "morph character into a great fungi"

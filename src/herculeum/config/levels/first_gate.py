@@ -21,7 +21,7 @@
 module for configuring first gate
 """
 import hy
-from herculeum.ai.fungus import FungusAI
+from herculeum.ai.fungus import FungusAI, GreatFungusAI
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data.effects import DamageModifier
 from pyherc.generators import creature_config, inventory_config
@@ -267,5 +267,5 @@ def init_creatures(context):
                                   speed = 8,
                                   icons = (great_fungus_f0, great_fungus_f1),
                                   attack = 5,
-                                  ai = FungusAI))
+                                  ai = GreatFungusAI))
     return config
