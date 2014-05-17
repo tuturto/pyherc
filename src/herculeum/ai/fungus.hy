@@ -59,7 +59,7 @@
     (let [[enemies (adjacent-enemies ai)]]
       (if enemies
 	(attack-enemy ai (choice enemies) action-factory rng)
-        (very-rarely
+        (rarely
          (cond [(mitosis-legal? ai.character action-factory)
                 (perform-mitosis ai.character action-factory)]
                [(and (morph-legal? ai.character "great fungus" action-factory)

@@ -55,8 +55,8 @@
                     (.add-creature level new-character (.choice self.rng tiles))
                     (.add-to-tick self.character Duration.very-slow)
                     (.add-to-tick new-character Duration.very-slow)
-                    (cooldown self.character :mitosis (* 4 Duration.very-slow))
-                    (cooldown new-character :mitosis (* 4 Duration.very-slow))
+                    (cooldown self.character :mitosis (* 6 Duration.very-slow))
+                    (cooldown new-character :mitosis (* 6 Duration.very-slow))
                     (.raise-event self.character (MitosisEvent self.character
                                                                new-character)))))]])
 

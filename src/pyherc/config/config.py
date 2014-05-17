@@ -130,7 +130,7 @@ class Configuration():
 
         mitosis_factory = MitosisFactory(self.creature_generator,
                                          self.rng,
-                                         30)
+                                         60)
 
         metamorphosis_factory = MetamorphosisFactory(self.creature_generator,
                                                      self.rng)

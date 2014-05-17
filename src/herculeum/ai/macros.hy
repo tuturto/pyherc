@@ -31,14 +31,17 @@
 	   ~else-code)))
 
 (defmacro rarely [code else-code]
-  `(if (< (.randint random 1 100) 25) ~code
-		  ~else-code))
+  `(do (import random)
+       (if (< (.randint random 1 100) 25) ~code
+           ~else-code)))
 
 (defmacro sometimes [code else-code]
-  `(if (< (.randint random 1 100) 50) ~code
-		  ~else-code))
+  `(do (import random)
+       (if (< (.randint random 1 100) 50) ~code
+           ~else-code)))
 
 (defmacro often [code else-code]
-  `(if (< (.randint random 1 100) 75) ~code
-		  ~else-code))
+  `(do (import random)
+       (if (< (.randint random 1 100) 75) ~code
+           ~else-code)))
 
