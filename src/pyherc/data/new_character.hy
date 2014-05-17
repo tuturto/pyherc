@@ -19,4 +19,12 @@
 
 (defn skill-ready? [character skill]
   "check if the cooldown of a skill has passed"
-  true)
+  (<= (cooldown character skill) 0))
+
+(defn cooldown [character skill &optional limit]
+  "cooldown of a specific skill for a character"
+  (when limit
+    (assoc character.cooldowns skill limit))
+  (when (not (in skill character.cooldowns))
+    (assoc character.cooldowns skill 0))
+  (get character.cooldowns skill))

@@ -21,7 +21,7 @@
 Module for character builder
 """
 from mockito import mock
-from pyherc.data import Character
+from pyherc.data import Character, cooldown
 from pyherc.data.effects import EffectsCollection
 
 
@@ -65,6 +65,8 @@ class CharacterBuilder():
 
         self.domains = {}
         self.spell_entries = []
+
+        self.cooldowns = {}
 
     def as_player_character(self):
         """
@@ -317,6 +319,13 @@ class CharacterBuilder():
         self.spell_entries.append(entry)
         return self
 
+    def with_cooldown(self, skill, cooldown):
+        """
+        Configure cooldown of a skill
+        """
+        self.cooldowns[skill] = cooldown
+        return self
+
     def build(self):
         """
         Build character
@@ -367,5 +376,8 @@ class CharacterBuilder():
 
         for entry in self.spell_entries:
             character.add_spell_entry(entry)
+
+        for skill, limit in self.cooldowns.items():
+            cooldown(character, skill, limit)
 
         return character

@@ -37,4 +37,4 @@ from .item import Item
 
 from .constants import Duration, SpecialTime, Direction
 
-from .new_character import is_skill_ready
+from .new_character import is_skill_ready, cooldown

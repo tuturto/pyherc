@@ -89,6 +89,8 @@ class Character():
         self.__effects_collection = EffectsCollection()
         self.__spellbook = SpellBook()
 
+        self.cooldowns = {}
+
     def __str__(self):
         return self.name
 
