@@ -111,6 +111,9 @@ class Model():
                         if effect.tick <= 0:
                             effect.trigger(rules_engine.dying_rules)
                 creature.remove_expired_effects()
+                for skill, limit in creature.cooldowns.items():
+                    if limit > 0:
+                        creature.cooldowns[skill] = limit - 1
 
 
 class Damage():

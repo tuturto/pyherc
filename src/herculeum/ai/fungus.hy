@@ -62,7 +62,8 @@
         (very-rarely
          (cond [(mitosis-legal? ai.character action-factory)
                 (perform-mitosis ai.character action-factory)]
-               [(morph-legal? ai.character "great fungus" action-factory)
+               [(and (morph-legal? ai.character "great fungus" action-factory)
+                     (>= (count (adjacent-friends ai)) 6))
                 (morph-great-fungi ai action-factory)]
                [true (wait ai)])
          (wait ai)))))

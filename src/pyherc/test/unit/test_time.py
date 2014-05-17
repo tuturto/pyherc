@@ -22,7 +22,7 @@ Module for testing time related functions
 """
 from hamcrest import assert_that, equal_to, has_item, is_, is_not
 from mockito import any, mock, verify
-from pyherc.data import Dungeon, Level
+from pyherc.data import Dungeon, Level, cooldown
 from pyherc.data.effects import Effect
 from pyherc.data.model import Model
 from pyherc.test.builders import (CharacterBuilder, EffectBuilder,
@@ -95,6 +95,19 @@ class TestTime:
         self.creature3.tick = 3
         creature = self.model.get_next_creature(self.rules_engine)
         assert_that(creature, is_(equal_to(self.creature3)))
+
+    def test_cooldowns_go_down(self):
+        """
+        Cooldowns of skills should go down by tick
+        """
+        self.creature1.tick = 50
+        self.creature2.tick = 100
+        self.creature3.tick = 30
+        cooldown(self.creature3, 'shoryuken', 20)
+
+        creature = self.model.get_next_creature(self.rules_engine)
+
+        assert_that(cooldown(creature, 'shoryuken'), is_(equal_to(0)))
 
 class TestEffectsAndTime:
     """

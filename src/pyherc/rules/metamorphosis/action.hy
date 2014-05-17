@@ -21,6 +21,7 @@
 (require pyherc.aspects)
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
+        [pyherc.data [skill-ready? cooldown]]
         [pyherc.data.constants [Duration]]
 	[pyherc.events.metamorphosis [MetamorphosisEvent]])
 
@@ -37,7 +38,7 @@
 		 nil)]
    [legal? #d(fn [self]
 	       "check if action is possible to perform"
-               true)]
+               (skill-ready? self.character :metamorphosis))]
    [execute #d(fn [self]
 		"execute the action"
                 (let [[new-character (self.character-generator self.new-character-name)]
@@ -46,6 +47,7 @@
                   (.remove-creature level self.character)
                   (.add-creature level new-character location)
                   (.add-to-tick new-character Duration.slow)
+                  (cooldown new-character :metamorphosis (* 2 Duration.very-slow))
                   (ap-each self.destroyed-characters
                            (.remove-creature level it))
                   (.raise-event self.character (MetamorphosisEvent self.character
