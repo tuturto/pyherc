@@ -161,6 +161,25 @@ def init_players(context):
     date = datetime.date.today()
     events = get_special_events(date.year, date.month, date.day)
 
+    if SpecialTime.aprilfools in events:
+
+        platino_f0 = surface_manager.add_icon('platino_f0', ':platino_f0.png', '@', ['white', 'bold'])
+        platino_f1 = surface_manager.add_icon('platino_f1', ':platino_f1.png', '@', ['white', 'bold'])
+        config.append(creature_config(name = 'Dragon de Platino',
+                                      body = 6,
+                                      finesse = 7,
+                                      mind = 8,
+                                      hp = 9,
+                                      speed = 2.5,
+                                      icons = (platino_f0, platino_f1),
+                                      attack = 1,
+                                      ai = None,
+                                      effect_handles = None,
+                                      inventory = [],
+                                      description = '\n'.join(['Dragon de Platino',
+                                                               '',
+                                                               'Mysterious dragon who comes and goes as he wishes...'])))
+
     if SpecialTime.christmas in events:
         for character in config:
             character.inventory.append(inventory_config(item_name = 'idol of snowman',
