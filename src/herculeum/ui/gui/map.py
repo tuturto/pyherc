@@ -360,6 +360,7 @@ class PlayMapWidget(QWidget):
         """
         Receive event from model
         """
+
         anim = self.animation_factory.create_animation(event)
         anim.trigger(self)
 

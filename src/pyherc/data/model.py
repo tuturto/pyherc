@@ -72,9 +72,8 @@ class Model():
         """
         level = event.level
 
-        if level is not None:
-            for creature in level.creatures:
-                creature.receive_event(event)
+        if self.player:
+            self.player.receive_event(event)
 
         for listener in self.__event_listeners:
             listener.receive_event(event)
