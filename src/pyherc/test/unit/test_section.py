@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -28,7 +27,7 @@ from hamcrest import (assert_that,  # pylint: disable-msg=E0611; pylint: disable
                       contains_inanyorder, equal_to, has_items, has_length, is_,
                       is_not)
 from mockito import mock
-from pyherc.data import Level
+from pyherc.data import Level, floor_tile
 from pyherc.generators.level.partitioners.section import Section
 
 
@@ -245,7 +244,8 @@ class TestSectionLevelAccess():
         """
         self.section.set_floor((5, 5), self.floor_rock, None)
 
-        assert_that(self.level.floor[5][5], is_(equal_to(self.floor_rock)))
+        assert_that(floor_tile(self.level, (5, 5)),
+                    is_(equal_to(self.floor_rock)))
 
     def test_setting_wall(self):
         """
@@ -299,7 +299,8 @@ class TestSectionLevelAccessWithOffset():
         """
         self.section.set_floor((2, 2), self.floor_rock, None)
 
-        assert_that(self.level.floor[7][7], is_(equal_to(self.floor_rock)))
+        assert_that(floor_tile(self.level, (7, 7)),
+                    is_(equal_to(self.floor_rock)))
 
     def test_setting_wall_with_offset(self):
         """

@@ -24,7 +24,7 @@ Module containing classes to represent Level
 import random
 
 from pyherc.aspects import log_debug
-
+from pyherc.data.new_level import get_tile, floor_tile
 
 class Level():
     """
@@ -53,7 +53,8 @@ class Level():
         super().__init__()
 
         self.model = model
-        self.floor = []
+        self.tiles = {}
+        # self.floor = []
         self.walls = []
         self.ornamentations = []
         self.traps = []
@@ -64,10 +65,8 @@ class Level():
 
         if size[0] != 0 and size[1] != 0:
             for loc_x in range(0, size[0] + 1):
-                temp_row = []
                 for loc_y in range(0, size[1] + 1):
-                    temp_row.append(floor_type)
-                self.floor.append(temp_row)
+                    floor_tile(self, (loc_x, loc_y), floor_type)
 
             for loc_x in range(0, size[0] + 1):
                 temp_row = []
@@ -265,19 +264,6 @@ class Level():
 
             portal.set_other_end(other_end)
             other_end.set_other_end(portal)
-
-            #TODO: remove link
-            if portal.icon is not None:
-                if other_end.icon is None:
-                    if portal.icon == 201:
-                        other_end.icon = 200
-                    else:
-                        other_end.icon = 201
-            else:
-                if other_end.icon == 201:
-                    portal.icon = 200
-                else:
-                    portal.icon = 201
 
     def get_portal_at(self, location):
         """
@@ -588,19 +574,3 @@ class Level():
         l = len(goal)
         return (sum([(start[i] - goal[i]) ** 2 for i in range(l)])) ** 0.5
 
-class Tile():
-    """
-    Class representing a single location in game
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        self.floor = None
-        self.wall = None
-        self.ornamentations = []
-        self.trap = None
-        self.location_types = []
-
-        self.items = []
-        self.creatures = []

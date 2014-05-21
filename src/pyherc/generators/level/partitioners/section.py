@@ -22,6 +22,7 @@ Classes to represent division of levels
 """
 
 import logging
+from pyherc.data import floor_tile
 
 
 class Section():
@@ -332,7 +333,8 @@ class Section():
         x_loc = self.__get_left_edge() + location[0]
         y_loc = self.__get_top_edge() + location[1]
 
-        self.level.floor[x_loc][y_loc] = tile
+        floor_tile(self.level, (x_loc, y_loc), tile)
+
         if location_type is not None:
             self.level.set_location_type((x_loc, y_loc), location_type)
 

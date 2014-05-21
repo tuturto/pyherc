@@ -66,7 +66,7 @@ class TestSquareRoom():
         room_found = False
         for y_loc in range(20):
             for x_loc in range(20):
-                if self.level.get_tile(x_loc, y_loc) != self.wall_empty:
+                if self.level.walls[x_loc][y_loc] != self.wall_empty:
                     room_found = True
 
         assert_that(room_found, is_(True))
