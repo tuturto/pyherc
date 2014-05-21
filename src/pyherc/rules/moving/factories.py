@@ -23,6 +23,7 @@ Attack related factories are defined here
 import random
 
 from pyherc.aspects import log_debug, log_info
+from pyherc.data import get_portal
 from pyherc.data.geometry import area_around
 from pyherc.rules.factory import SubActionFactory
 from pyherc.rules.moving.action import (EscapeAction, MoveAction,
@@ -139,7 +140,7 @@ class WalkFactory(SubActionFactory):
         new_level = character.level
         new_location = None
 
-        portal = new_level.get_portal_at(location)
+        portal = get_portal(new_level, location)
         if portal is not None:
             if not portal.exits_dungeon:
                 other_end = portal.get_other_end(self.level_generator_factory)

@@ -24,7 +24,7 @@ Module containing classes to represent Level
 import random
 
 from pyherc.aspects import log_debug
-from pyherc.data.new_level import get_tile, floor_tile
+from pyherc.data.new_level import get_tile, floor_tile, get_portal
 
 class Level():
     """
@@ -234,51 +234,6 @@ class Level():
             if item.location == location:
                 items.append(item)
         return items
-
-    @log_debug
-    def add_portal(self, portal, location, other_end=None):
-        """
-        Adds precreated portal on level at given location
-        If secondary portal is specified, link them together
-
-        :param portal: portal to add
-        :type portal: Portal
-        :param location: location where to add portal
-        :type location: (integer, integer)
-        :param other_end: optional other end of the portal
-        :type other_end: Portal
-        """
-        assert portal is not None
-        assert location is not None
-
-        portal.level = self
-        portal.location = location
-        self.set_floor_tile(portal.location[0],
-                            portal.location[1],
-                            portal.icon)
-
-        self.portals.append(portal)
-
-        if other_end is not None:
-            assert(other_end.icon is not None or portal.icon is not None)
-
-            portal.set_other_end(other_end)
-            other_end.set_other_end(portal)
-
-    def get_portal_at(self, location):
-        """
-        Check if there is a portal at given location
-
-        :param location: location of portal
-        :type location: (integer, integer)
-        :returns: Portal if found, otherwise None
-        :rtype: Portal
-        """
-        for portal in self.portals:
-            if portal.location == location:
-                return portal
-
-        return None
 
     @log_debug
     def add_creature(self, creature, location=None):
@@ -502,7 +457,7 @@ class Level():
             level_string = level_string + '\n'
             for loc_x in range(size[0]):
                 creature = self.get_creature_at((loc_x, loc_y))
-                portal = self.get_portal_at((loc_x, loc_y))
+                portal = get_portal(self, (loc_x, loc_y))
                 items = self.get_items_at((loc_x, loc_y))
 
                 if creature is not None:

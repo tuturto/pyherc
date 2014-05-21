@@ -53,3 +53,7 @@
     (when other-end
       (.set-other-end portal other-end)
       (.set-other-end other-end portal)))
+
+#d(defn get-portal [level location]
+    "get portal at given location"
+    (:portal (get-tile level location)))

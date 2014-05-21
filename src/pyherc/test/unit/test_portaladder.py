@@ -24,7 +24,7 @@ import random
 
 from hamcrest import assert_that, equal_to, has_length, is_
 from mockito import mock
-from pyherc.data import Level
+from pyherc.data import Level, get_portal
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.portals import (PortalAdder,
                                              PortalAdderConfiguration,
@@ -73,9 +73,15 @@ class TestPortalAdder():
 
         portal_adder.add_portal(level)
 
-        portals = level.portals
+        portals = []
+        for loc_y in range(8, 12):
+            for loc_x in range(8, 12):
+                temp = get_portal(level, (loc_x, loc_y))
+                if temp:
+                    portals.append(temp)
+
         assert_that(portals, has_length(1))
-        portal = level.portals[0]
+        portal = portals[0]
         assert_that(located_in_room(portal), is_(True))
 
     def test_portal_has_icons(self):
@@ -102,8 +108,13 @@ class TestPortalAdder():
 
         portal_adder.add_portal(level)
 
-        portals = level.portals
-        portal = level.portals[0]
+        portals = []
+        for loc_y in range(8, 12):
+            for loc_x in range(8, 12):
+                temp = get_portal(level, (loc_x, loc_y))
+                if temp:
+                    portals.append(temp)
+        portal = portals[0]
 
         assert_that(portal.icon, is_(equal_to(1)))
         assert_that(portal.other_end_icon, is_(equal_to(2)))
