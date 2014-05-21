@@ -587,3 +587,20 @@ class Level():
         """
         l = len(goal)
         return (sum([(start[i] - goal[i]) ** 2 for i in range(l)])) ** 0.5
+
+class Tile():
+    """
+    Class representing a single location in game
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.floor = None
+        self.wall = None
+        self.ornamentations = []
+        self.trap = None
+        self.location_types = []
+
+        self.items = []
+        self.creatures = []
