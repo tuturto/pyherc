@@ -39,3 +39,4 @@ from .constants import Duration, SpecialTime, Direction
 
 from .new_character import is_skill_ready, cooldown
 from .new_level import get_tile, new_tile, floor_tile, add_portal, get_portal
+from .new_level import level_size

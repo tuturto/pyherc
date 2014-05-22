@@ -444,51 +444,6 @@ class Level():
 
         return rooms
 
-    def dump_string(self):
-        """
-        Dump this level into a string
-
-        :returns: ascii representation of level
-        :rtype: list of list
-        """
-        level_string = ""
-        size = self.get_size()
-        for loc_y in range(size[1]):
-            level_string = level_string + '\n'
-            for loc_x in range(size[0]):
-                creature = self.get_creature_at((loc_x, loc_y))
-                portal = get_portal(self, (loc_x, loc_y))
-                items = self.get_items_at((loc_x, loc_y))
-
-                if creature is not None:
-                    level_string = level_string + "X"
-                elif portal is not None:
-                    level_string = level_string + "<"
-                elif len(items) > 0:
-                    level_string = level_string + "*"
-                elif self.walls[loc_x][loc_y] != self.empty_wall:
-                    level_string = level_string + "#"
-                elif self.walls[loc_x][loc_y] != self.empty_floor:
-                    level_string = level_string + "."
-                else:
-                    level_string = level_string + " "
-        return level_string
-
-    def _repr_pretty_(self, p, cycle):
-        """
-        Pretty print for IPython
-        """
-        level_string = self.dump_string()
-
-        if cycle:
-            p.text('Level(...)')
-        else:
-            for char in level_string:
-                if char != '\n':
-                    p.text(char)
-                else:
-                    p.breakable()
-
     def heuristic_estimate_of_distance(self, start, goal):
         """
         This should be >= 0

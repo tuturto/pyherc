@@ -25,6 +25,7 @@ import logging
 
 from pyherc.aspects import log_debug
 from pyherc.generators.level.partitioners.section import Section
+from pyherc.data import level_size
 
 
 class RandomConnector():
@@ -140,11 +141,13 @@ class GridPartitioner():
         sections = []
         section_matrix = [[None for i in range(self.y_sections)]
                           for j in range(self.x_sections)]
-        size_of_level = level.get_size()
+        size_of_level = level_size(level)
 
         x_sections = self.split_range_to_equals(size_of_level[0],
+                                                size_of_level[1],
                                                 self.x_sections)
-        y_sections = self.split_range_to_equals(size_of_level[1],
+        y_sections = self.split_range_to_equals(size_of_level[2],
+                                                size_of_level[3],
                                                 self.y_sections)
 
         for y_block in range(len(y_sections)):
@@ -189,22 +192,15 @@ class GridPartitioner():
             section.neighbours.append(up_section)
 
     @log_debug
-    def split_range_to_equals(self, length, sections):
+    def split_range_to_equals(self, start, end, sections):
         """
         Split range into equal sized chunks
-
-        :param length: range to split
-        :type length: integer
-        :param sections: amount of sections to split
-        :type sections: integer
-        :returns: list containing end points of chunks
-        :rtype: [integer]
         """
-        section_length = length / sections
+        section_length = (abs(start) + abs(end)) / sections
         ranges = []
 
         for i in range(sections):
-            ranges.append((int(i * section_length),
-                           int((i + 1) * section_length - 1)))
+            ranges.append((int(i * section_length + start),
+                           int((i + 1) * section_length - 1 + start)))
 
         return ranges
