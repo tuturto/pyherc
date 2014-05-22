@@ -93,7 +93,7 @@ class Level():
                 self.traps.append(temp_row)
 
         self.items = []
-        self.portals = []
+        # self.portals = []
         self.creatures = []
         self.full_update_needed = True
         self.dirty_rectangles = []
@@ -134,7 +134,7 @@ class Level():
         if loc_x < 0 or loc_y < 0:
             return self.empty_wall
 
-        if loc_x >= len(self.floor) or loc_y >= len(self.floor[0]):
+        if loc_x >= len(self.walls) or loc_y >= len(self.walls[0]):
             return self.empty_wall
 
         return self.walls[loc_x][loc_y]

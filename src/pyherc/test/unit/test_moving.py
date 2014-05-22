@@ -23,7 +23,7 @@ Module for testing moving
 
 from hamcrest import assert_that, equal_to, is_
 from mockito import mock
-from pyherc.data import Model, Portal
+from pyherc.data import Model, Portal, add_portal
 from pyherc.data.constants import Direction
 from pyherc.data.model import ESCAPED_DUNGEON
 from pyherc.ports import ActionsPort
@@ -133,8 +133,8 @@ class TestMoving():
         self.portal2 = Portal((None, None), None)
         self.portal2 = Portal((None, None), None)
 
-        self.level1.add_portal(self.portal1, (5, 5))
-        self.level2.add_portal(self.portal2, (10, 10), self.portal1)
+        add_portal(self.level1, (5, 5), self.portal1)
+        add_portal(self.level2, (10, 10), self.portal2, self.portal1)
 
         self.level1.add_creature(self.character, (5, 5))
 
@@ -259,7 +259,7 @@ class TestMoving():
         """
         portal3 = Portal((None, None), None)
         portal3.exits_dungeon = True
-        self.level1.add_portal(portal3, (2, 2))
+        add_portal(self.level1, (2, 2), portal3)
         self.character.location = (2, 2)
 
         self.actions.move_character(character=self.character,
