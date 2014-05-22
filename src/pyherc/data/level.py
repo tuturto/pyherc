@@ -25,6 +25,7 @@ import random
 
 from pyherc.aspects import log_debug
 from pyherc.data.new_level import get_tile, floor_tile, get_portal
+from pyherc.data.new_level import blocks_movement
 
 class Level():
     """
@@ -310,23 +311,6 @@ class Level():
         """
         return self.traps[location[0]][location[1]]
 
-    @log_debug
-    def find_free_space(self):
-        """
-        Finds free space where stuff can be placed
-
-        :returns: Location where space is free
-        :rtype: (int, int)
-        """
-        width = len(self.floor)
-        height = len(self.floor[0])
-        location = (random.randint(2, width - 1),
-                    random.randint(2, height - 1))
-        while self.walls[location[0]][location[1]] != self.empty_wall:
-            location = (random.randint(2, width - 1),
-                        random.randint(2, height - 1))
-        return location
-
     def get_square(self, x_coordinate, y_coordinate):
         """
         Get square at given coordinates
@@ -342,28 +326,6 @@ class Level():
             return self.walls[x_coordinate][y_coordinate]
         else:
             return self.floor[x_coordinate][y_coordinate]
-
-    def blocks_movement(self, loc_x, loc_y):
-        """
-        Checks if there's movement blocking wall at given coordinates
-
-        :param loc_x: x-coordinate of the location
-        :type loc_x: integer
-        :param loc_Y: y-coordinate of the location
-        :type loc_y: integer
-        :returns: True if location blocks regular movement, otherwise False
-        :rtype: Boolean
-        """
-        if loc_x < 0 or loc_y < 0:
-            return True
-
-        if loc_x >= len(self.walls) or loc_y >= len(self.walls[0]):
-            return True
-
-        if self.walls[loc_x][loc_y] == self.empty_wall:
-            return False
-        else:
-            return True
 
     def blocks_los(self, x_coordinate, y_coordinate):
         """
@@ -462,16 +424,16 @@ class Level():
         loc_x = node[0]
         loc_y = node[1]
 
-        if not self.blocks_movement(loc_x - 1, loc_y):
+        if not blocks_movement(self, (loc_x - 1, loc_y)):
             nodes.append((loc_x - 1, loc_y))
 
-        if not self.blocks_movement(loc_x + 1, loc_y):
+        if not blocks_movement(self, (loc_x + 1, loc_y)):
             nodes.append((loc_x + 1, loc_y))
 
-        if not self.blocks_movement(loc_x, loc_y - 1):
+        if not blocks_movement(self, (loc_x, loc_y - 1)):
             nodes.append((loc_x, loc_y - 1))
 
-        if not self.blocks_movement(loc_x, loc_y + 1):
+        if not blocks_movement(self, (loc_x, loc_y + 1)):
             nodes.append((loc_x, loc_y + 1))
 
         return nodes

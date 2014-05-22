@@ -24,6 +24,7 @@ from functools import partial
 from math import sqrt
 
 from pyherc.aspects import log_debug
+from pyherc.data.new_level import blocks_movement
 
 
 @log_debug
@@ -61,7 +62,7 @@ def get_target_in_direction(level, location, direction, attack_range=100):
                                      zip(target_location,
                                          off_sets[direction]))])
 
-        if level.blocks_movement(target_location[0], target_location[1]):
+        if blocks_movement(level, target_location):
             target_data = TargetData('wall',
                                      target_location,
                                      None,

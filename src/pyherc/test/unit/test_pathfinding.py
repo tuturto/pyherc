@@ -27,7 +27,7 @@ from hamcrest import assert_that, contains, is_  # pylint: disable-msg=E0611
 from mockito import mock
 from pyherc.ai import a_star
 from pyherc.config.dsl import LevelContext
-from pyherc.data import Portal, Model
+from pyherc.data import Portal, Model, find_free_space
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.portals import PortalAdder
@@ -151,8 +151,8 @@ class TestPathfindingInLevel():
         """
         Test pathfinding in a level
         """
-        start = self.level.find_free_space()
-        destination = self.level.find_free_space()
+        start = find_free_space(self.level)
+        destination = find_free_space(self.level)
 
         path, connections, updated = a_star(start = start,
                                             goal = destination,

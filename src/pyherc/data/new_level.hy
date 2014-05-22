@@ -17,7 +17,8 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(import [pyherc.aspects [log_debug]])
+(import [pyherc.aspects [log_debug]]
+        [random])
 (require hy.contrib.anaphoric)
 (require pyherc.aspects)
 (require pyherc.macros)
@@ -86,3 +87,17 @@
                 (when (< (second it) y₀) (setv y₀ (second it)))
                 (when (> (second it) y₁) (setv y₁ (second it)))))
       #t(x₀ x₁ y₀ y₁)))
+
+#d(defn find-free-space [level]
+    "find a free location within level"
+    (let [[free-tiles (list-comp (first pair)
+                                 [pair (.items level.tiles)] 
+                                 (:floor (second pair)))]]
+      (.choice random free-tiles)))
+
+#d(defn blocks-movement [level location]
+    "check if given location blocks movement"
+    (let [[map-tile (get-tile level location)]]
+      (if map-tile
+        (:wall map-tile)
+        true)))
