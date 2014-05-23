@@ -65,7 +65,6 @@ class TestSingleCharacterTargeting():
                           .with_character(self.target1, (5, 5))
                           .with_floor_tile(FLOOR)
                           .with_wall_tile(EMPTY_WALL)
-                          .with_empty_wall_tile(EMPTY_WALL)
                           .with_solid_wall_tile(SOLID_WALL)
                           .build())
 
@@ -176,7 +175,6 @@ class TestSphericalAreaTargetting():
                           .with_character(self.target2, (5, 6))
                           .with_floor_tile(FLOOR)
                           .with_wall_tile(EMPTY_WALL)
-                          .with_empty_wall_tile(EMPTY_WALL)
                           .with_solid_wall_tile(SOLID_WALL)
                           .build())
 
@@ -216,9 +214,9 @@ class TestSphericalAreaTargetting():
         """
         In normal situations, splash should be stopped by walls
         """
-        wall_tile(self.level (6, 4), SOLID_WALL)
-        wall_tile(self.level (6, 5), SOLID_WALL)
-        wall_tile(self.level (6, 6), SOLID_WALL)
+        wall_tile(self.level, (6, 4), SOLID_WALL)
+        wall_tile(self.level, (6, 5), SOLID_WALL)
+        wall_tile(self.level, (6, 6), SOLID_WALL)
 
         params = SpellCastingParameters(caster = self.caster,
                                         direction = 7,

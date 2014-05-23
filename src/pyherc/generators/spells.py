@@ -25,6 +25,7 @@ from functools import partial
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.effects import EffectHandle
 from pyherc.data.geometry import get_target_in_direction, TargetData
+from pyherc.data import blocks_los
 from pyherc.data.magic import Spell
 from pyherc.rules.los import get_fov_matrix
 
@@ -186,7 +187,7 @@ def targeting_spherical_area(parameters, radius):
                                                   (x, y),
                                                   creature,
                                                   None))
-                    elif level.blocks_los(x, y):
+                    elif blocks_los(level, (x, y)):
                         targets.append(TargetData('wall',
                                                   (x, y),
                                                   None,

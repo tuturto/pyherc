@@ -29,6 +29,9 @@
 """
 Line of sight implementation
 """
+
+from pyherc.data import level_size, blocks_los
+
 mult = [[1,  0,  0, -1, -1,  0,  0,  1],
         [0,  1, -1,  0,  0, -1,  1,  0],
         [0,  1,  1,  0,  0, -1, -1,  0],
@@ -50,7 +53,7 @@ def is_blocked(loc_x, loc_y, level, character=None):
     """
     assert level is not None
 
-    return level.blocks_los(loc_x, loc_y)
+    return blocks_los(level, (loc_x, loc_y))
 
 
 def cast_light(cx, cy, row, start, end, radius, xx, xy, yx, yy, fov_matrix,
@@ -131,8 +134,10 @@ def get_fov_matrix(location, level, distance):
     """
     fov_matrix = []
 
-    width = len(level.walls[0])
-    height = len(level.walls)
+    # TODO: handle negative coordinates
+    size = level_size(level)
+    width = size[1]
+    height = size[3]
 
     for i in range(height):
         fov_matrix.append([False] * width)

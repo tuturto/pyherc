@@ -108,3 +108,7 @@
       (if map-tile
          (:wall map-tile)
         true)))
+
+#d(defn blocks-los [level location]
+    "check if given location blocks line of sight"
+    (wall-tile level location))

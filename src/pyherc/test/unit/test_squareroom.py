@@ -20,11 +20,11 @@
 """
 Tests for SquareRoomGenerator room generator
 """
-#pylint: disable=W0614
+
 import random
 
-from hamcrest import assert_that, has_length, is_  # pylint: disable-msg=E0611
-from pyherc.data import Level, Model
+from hamcrest import assert_that, has_length, is_ 
+from pyherc.data import Level, Model, wall_tile
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.room import SquareRoomGenerator
 
@@ -66,7 +66,7 @@ class TestSquareRoom():
         room_found = False
         for y_loc in range(20):
             for x_loc in range(20):
-                if self.level.walls[x_loc][y_loc] != self.wall_empty:
+                if wall_tile(self.level, (x_loc, y_loc)) != self.wall_empty:
                     room_found = True
 
         assert_that(room_found, is_(True))

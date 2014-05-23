@@ -26,10 +26,10 @@ import random
 from hamcrest import (assert_that, equal_to, greater_than, has_length, is_,
                       same_instance)
 from mockito import mock, when
-from pyherc.data import Level
 from pyherc.generators.level.partitioners.grid import (GridPartitioner,
                                                        RandomConnector)
 from pyherc.generators.level.partitioners.section import Section
+from pyherc.test.builders import LevelBuilder
 
 
 class TestGridPartitioner:
@@ -40,7 +40,7 @@ class TestGridPartitioner:
         """
         Default constructor
         """
-        self.mock_level = None
+        self.level = None
         self.partitioner = None
         self.rng = None
 
@@ -48,8 +48,9 @@ class TestGridPartitioner:
         """
         Setup tests
         """
-        self.mock_level = mock(Level)
-        when(self.mock_level).get_size().thenReturn((20, 20))
+        self.level = (LevelBuilder()
+                      .with_size((20, 20))
+                      .build())
         self.rng = random.Random()
         self.partitioner = GridPartitioner('crypt',
                                            2,
@@ -65,7 +66,7 @@ class TestGridPartitioner:
                                       3,
                                       self.rng)
 
-        sections = partitioner.partition_level(self.mock_level)
+        sections = partitioner.partition_level(self.level)
 
         assert_that(sections, has_length(9))
 
@@ -73,7 +74,7 @@ class TestGridPartitioner:
         """
         Test that sections are marked being neighbours
         """
-        sections = self.partitioner.partition_level(self.mock_level)
+        sections = self.partitioner.partition_level(self.level)
 
         assert_that(sections[0].neighbours, has_length(1))
 
@@ -85,7 +86,7 @@ class TestGridPartitioner:
                                       2,
                                       2,
                                       self.rng)
-        sections = partitioner.partition_level(self.mock_level)
+        sections = partitioner.partition_level(self.level)
 
         assert_that(sections, has_length(4))
         assert_that(sections[0].connections, has_length(greater_than(0)))
@@ -94,10 +95,10 @@ class TestGridPartitioner:
         """
         Test that created sections are linked to level
         """
-        sections = self.partitioner.partition_level(self.mock_level)
+        sections = self.partitioner.partition_level(self.level)
 
         for section in sections:
-            assert_that(section.level, is_(same_instance(self.mock_level)))
+            assert_that(section.level, is_(same_instance(self.level)))
 
 
 class TestGridPartitionerUtilities:
@@ -119,7 +120,7 @@ class TestGridPartitionerUtilities:
                                       3,
                                       random.Random())
 
-        ranges = partitioner.split_range_to_equals(10, 3)
+        ranges = partitioner.split_range_to_equals(0, 10, 3)
 
         assert_that(ranges, has_length(3))
 
@@ -137,7 +138,7 @@ class TestRandomConnector:
         Default constructor
         """
         self.connector = None
-        self.mock_level = None
+        self.level = None
         self.rng = None
 
     def setup(self):
@@ -146,14 +147,14 @@ class TestRandomConnector:
         """
         self.rng = random.Random()
         self.connector = RandomConnector(self.rng)
-        self.mock_level = mock(Level)
+        self.level = (LevelBuilder().build())
 
     def test_connect_two_sections(self):
         """
         Test that two adjacent sections can be connected
         """
-        section1 = Section((0, 0), (10, 5), self.mock_level, self.rng)
-        section2 = Section((0, 6), (10, 10), self.mock_level, self.rng)
+        section1 = Section((0, 0), (10, 5), self.level, self.rng)
+        section2 = Section((0, 6), (10, 10), self.level, self.rng)
 
         section1.neighbours.append(section2)
         section2.neighbours.append(section1)
@@ -170,10 +171,10 @@ class TestRandomConnector:
         """
         Test that 2x2 grid is fully connected
         """
-        section00 = Section((0, 0), (5, 5), self.mock_level, self.rng)
-        section10 = Section((6, 0), (10, 5), self.mock_level, self.rng)
-        section01 = Section((0, 6), (5, 10), self.mock_level, self.rng)
-        section11 = Section((6, 6), (10, 10), self.mock_level, self.rng)
+        section00 = Section((0, 0), (5, 5), self.level, self.rng)
+        section10 = Section((6, 0), (10, 5), self.level, self.rng)
+        section01 = Section((0, 6), (5, 10), self.level, self.rng)
+        section11 = Section((6, 6), (10, 10), self.level, self.rng)
 
         section00.neighbours.append(section10)
         section00.neighbours.append(section01)
@@ -201,11 +202,11 @@ class TestRandomConnector:
         Row of Sections is connected, starting from the middle
         RandomConnector can not connect this in one path, but has to branch
         """
-        section0 = Section((0, 0), (10, 10), self.mock_level, self.rng)
-        section1 = Section((11, 0), (20, 10), self.mock_level, self.rng)
-        section2 = Section((21, 0), (30, 10), self.mock_level, self.rng)
-        section3 = Section((31, 0), (40, 10), self.mock_level, self.rng)
-        section4 = Section((41, 0), (50, 10), self.mock_level, self.rng)
+        section0 = Section((0, 0), (10, 10), self.level, self.rng)
+        section1 = Section((11, 0), (20, 10), self.level, self.rng)
+        section2 = Section((21, 0), (30, 10), self.level, self.rng)
+        section3 = Section((31, 0), (40, 10), self.level, self.rng)
+        section4 = Section((41, 0), (50, 10), self.level, self.rng)
 
         section0.neighbours.append(section1)
         section1.neighbours.append(section0)
