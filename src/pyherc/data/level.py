@@ -24,7 +24,7 @@ Module containing classes to represent Level
 import random
 
 from pyherc.aspects import log_debug
-from pyherc.data.new_level import get_tile, floor_tile, get_portal
+from pyherc.data.new_level import get_tile, floor_tile, wall_tile, get_portal
 from pyherc.data.new_level import blocks_movement
 
 class Level():
@@ -55,8 +55,6 @@ class Level():
 
         self.model = model
         self.tiles = {}
-        # self.floor = []
-        self.walls = []
         self.ornamentations = []
         self.traps = []
         self.empty_floor = empty_floor
@@ -68,12 +66,7 @@ class Level():
             for loc_x in range(0, size[0] + 1):
                 for loc_y in range(0, size[1] + 1):
                     floor_tile(self, (loc_x, loc_y), floor_type)
-
-            for loc_x in range(0, size[0] + 1):
-                temp_row = []
-                for loc_y in range(0, size[1] + 1):
-                    temp_row.append(wall_type)
-                self.walls.append(temp_row)
+                    wall_tile(self, (loc_x, loc_y), wall_type)
 
             for loc_x in range(0, size[0] + 1):
                 temp_row = []
@@ -94,7 +87,6 @@ class Level():
                 self.traps.append(temp_row)
 
         self.items = []
-        # self.portals = []
         self.creatures = []
         self.full_update_needed = True
         self.dirty_rectangles = []
@@ -350,19 +342,6 @@ class Level():
             return False
         else:
             return True
-
-    @log_debug
-    def get_size(self):
-        """
-        Gets size of level
-
-        :returns: tupple, with width and length of level
-        :rtype: (int, int)
-        """
-        x_size = len(self.floor)
-        y_size = len(self.floor[0])
-
-        return (x_size, y_size)
 
     @log_debug
     def set_location_type(self, location, location_type):

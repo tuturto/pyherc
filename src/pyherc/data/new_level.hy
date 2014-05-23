@@ -47,7 +47,7 @@
 
 (defn floor-tile [level location &optional tile-id]
   "get/set floor tile at given location"
-  (if tile-id
+  (if (!= tile-id nil)
     (do (let [[map-tile (get-or-create-tile level location)]]
           (assoc map-tile :floor tile-id)
           (:floor map-tile)))
@@ -56,7 +56,7 @@
 
 (defn wall-tile [level location &optional tile-id]
   "get/set wall tile at given location"
-  (if tile-id
+  (if (!= tile-id nil)
     (do (let [[map-tile (get-or-create-tile level location)]]
           (assoc map-tile :wall tile-id)
           (:wall map-tile)))

@@ -27,10 +27,11 @@ from pyherc.generators.spells import (targeting_single_target,
 from pyherc.rules.magic.interface import SpellCastingParameters
 from pyherc.test.builders import CharacterBuilder, LevelBuilder
 from pyherc.test.matchers import void_target_at, wall_target_at
+from pyherc.data import wall_tile
 
 FLOOR = 1
 SOLID_WALL = 2
-EMPTY_WALL = 3
+EMPTY_WALL = None
 
 class TestSingleCharacterTargeting():
     """
@@ -123,7 +124,7 @@ class TestSingleCharacterTargeting():
         """
         When reporting target, the previous tile should be reported too
         """
-        self.level.walls[10][20] = SOLID_WALL
+        wall_tile(self.level (10, 20), SOLID_WALL)
 
         params = SpellCastingParameters(caster = self.caster,
                                         direction = 5,
@@ -215,9 +216,9 @@ class TestSphericalAreaTargetting():
         """
         In normal situations, splash should be stopped by walls
         """
-        self.level.walls[6][4] = SOLID_WALL
-        self.level.walls[6][5] = SOLID_WALL
-        self.level.walls[6][6] = SOLID_WALL
+        wall_tile(self.level (6, 4), SOLID_WALL)
+        wall_tile(self.level (6, 5), SOLID_WALL)
+        wall_tile(self.level (6, 6), SOLID_WALL)
 
         params = SpellCastingParameters(caster = self.caster,
                                         direction = 7,

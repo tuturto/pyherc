@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -22,10 +21,9 @@
 Tests for Level
 """
 
-#pylint: disable=W0614
-from hamcrest import (assert_that,  # pylint: disable-msg=E0611
+from hamcrest import (assert_that, is_, equal_to,
                       contains_inanyorder)
-from pyherc.data import Level, Model
+from pyherc.data import Level, Model, level_size
 
 
 class TestLevel:
@@ -42,15 +40,13 @@ class TestLevel:
         """
         Setup test case
         """
-        self.level = Level(Model(), size = (20, 10))
+        self.level = Level(Model(), size = (20, 10), floor_type = 0)
 
     def test_get_size(self):
         """
         Test that Level can report size
         """
-        size = self.level.get_size()
-
-        assert size == (21, 11)
+        assert_that(level_size(self.level), is_(equal_to((0, 20, 0, 10))))
 
     def test_get_rooms(self):
         """
