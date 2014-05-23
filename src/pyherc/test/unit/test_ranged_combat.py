@@ -30,6 +30,7 @@ from pyherc.rules.combat.interface import AttackParameters
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder, LevelBuilder)
 from pyherc.test.matchers import AttackActionParameterMatcher, does_have
+from pyherc.data import wall_tile
 
 
 class TestRangedCombat():
@@ -190,7 +191,7 @@ class TestRangedCombat():
         x_loc = self.character.location[0] + 1
         y_loc = self.character.location[1]
 
-        self.level.walls[x_loc][y_loc] = 100
+        wall_tile(self.level, (x_loc, y_loc), 100)
 
         target = factory.get_target(
                             AttackParameters(

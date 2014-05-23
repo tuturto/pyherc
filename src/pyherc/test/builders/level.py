@@ -35,7 +35,7 @@ class LevelBuilder():
         self.characters = []
         self.level_size = (80, 40)
         self.floor_tile = 1
-        self.wall_tile = 10
+        self.wall_tile = None
         self.empty_wall_tile = None
         self.solid_wall_tile = 11
         self.walls = []
@@ -51,10 +51,6 @@ class LevelBuilder():
 
     def with_wall_tile(self, tile):
         self.wall_tile = tile
-        return self
-
-    def with_empty_wall_tile(self, tile):
-        self.empty_wall_tile = tile
         return self
 
     def with_solid_wall_tile(self, tile):
@@ -106,8 +102,7 @@ class LevelBuilder():
         level = Level(model=self.model,
                       size=self.level_size,
                       floor_type=self.floor_tile,
-                      wall_type=self.wall_tile,
-                      empty_wall=self.empty_wall_tile)
+                      wall_type=self.wall_tile)
 
         for wall in self.walls:
             wall_tile(level, wall, self.solid_wall_tile)

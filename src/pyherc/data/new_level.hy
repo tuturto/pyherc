@@ -45,23 +45,30 @@
     (assoc level.tiles location (new-tile)))
   (get level.tiles location))
 
-(defn floor-tile [level location &optional tile-id]
+(defn floor-tile [level location &optional [tile-id :no-tile]]
   "get/set floor tile at given location"
-  (if (!= tile-id nil)
+  (if (!= tile-id :no-tile)
     (do (let [[map-tile (get-or-create-tile level location)]]
           (assoc map-tile :floor tile-id)
           (:floor map-tile)))
     (do (let [[map-tile (get-tile level location)]]
           (when map-tile (:floor map-tile))))))
 
-(defn wall-tile [level location &optional tile-id]
+(defn wall-tile [level location &optional [tile-id :no-tile]]
   "get/set wall tile at given location"
-  (if (!= tile-id nil)
+  (if (!= tile-id :no-tile)
     (do (let [[map-tile (get-or-create-tile level location)]]
           (assoc map-tile :wall tile-id)
           (:wall map-tile)))
     (do (let [[map-tile (get-tile level location)]]
           (when map-tile (:wall map-tile))))))
+
+(defn tile [level location]
+  "get tile at given location, may be floor or wall"
+  (let [[map-tile (get-tile level location)]]
+    (when map-tile
+      (when :wall map-tile (:wall map-tile))
+      (when :floor map-tile (:floor map-tile)))))
 
 #d(defn add-portal [level location portal &optional other-end]
     "add a new portal"
@@ -99,5 +106,5 @@
     "check if given location blocks movement"
     (let [[map-tile (get-tile level location)]]
       (if map-tile
-        (:wall map-tile)
+         (:wall map-tile)
         true)))

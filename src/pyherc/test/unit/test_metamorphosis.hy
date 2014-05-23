@@ -43,7 +43,6 @@
         [level (-> (LevelBuilder)
                    (.with-floor-tile :floor)
                    (.with-wall-tile nil)
-                   (.with-empty-wall-tile nil)
                    (.build))]
         [character (generator "fungi")]
         [action-factory (-> (ActionFactoryBuilder)
@@ -66,7 +65,7 @@
         [level (:level context)]
         [character (:character context)]
         [action-factory (:action-factory context)]]
-    (morph character "fire fungi" action-factory)    
+    (morph character "fire fungi" action-factory)
     (let [[morphed-character (first level.creatures)]]
       (assert-that (len level.creatures) (is- (equal-to 1)))
       (assert-that morphed-character.name (is- (equal-to "fire fungi"))))))

@@ -32,8 +32,7 @@ class Level():
     Represents a level
     """
     @log_debug
-    def __init__(self, model, size=(0, 0), floor_type=None, wall_type=None,
-                 empty_floor=0, empty_wall=0):
+    def __init__(self, model, size=(0, 0), floor_type=None, wall_type=None):
         """
         Initialises a level of certain size and fills floor and walls with
         given types
@@ -57,8 +56,6 @@ class Level():
         self.tiles = {}
         self.ornamentations = []
         self.traps = []
-        self.empty_floor = empty_floor
-        self.empty_wall = empty_wall
         self.__location_type = []
         self.lit = []
 

@@ -40,7 +40,7 @@ class TestLevel:
         """
         Setup test case
         """
-        self.level = Level(Model(), size = (20, 10), floor_type = 0)
+        self.level = Level(Model(), size = (20, 10))
 
     def test_get_size(self):
         """

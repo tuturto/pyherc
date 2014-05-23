@@ -23,6 +23,7 @@ Tests for Corridor
 
 import random
 
+from pyherc.data import tile
 from hamcrest import assert_that, equal_to, is_
 from pyherc.generators.level.partitioners.section import Connection, Section
 from pyherc.generators.level.room.corridor import CorridorGenerator
@@ -43,7 +44,6 @@ class TestCorridor():
         self.rng = None
         self.floor_rock = None
         self.wall_ground = None
-        self.wall_empty = None
 
     def setup(self):
         """
@@ -51,13 +51,11 @@ class TestCorridor():
         """
         self.floor_rock = 1
         self.wall_ground = 2
-        self.wall_empty = 3
 
         self.level = (LevelBuilder()
                         .with_size((10, 10))
                         .with_floor_tile(self.floor_rock)
                         .with_wall_tile(self.wall_ground)
-                        .with_empty_wall_tile(self.wall_empty)
                         .build())
 
         self.rng = random.Random()
@@ -85,13 +83,13 @@ class TestCorridor():
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,
-                                      wall_tile=self.wall_empty,
+                                      wall_tile=None,
                                       floor_tile=self.floor_rock)
 
         generator.generate()
 
         for x_loc in range(5, 11):
-            assert_that(self.level.get_tile(x_loc, 5),
+            assert_that(tile(self.level, (x_loc, 5)),
                         is_(equal_to(self.floor_rock)))
 
     def test_straight_vertical(self):
@@ -113,13 +111,13 @@ class TestCorridor():
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,
-                                      wall_tile=self.wall_empty,
+                                      wall_tile=None,
                                       floor_tile=self.floor_rock)
 
         generator.generate()
 
         for y_loc in range(0, 6):
-            assert_that(self.level.get_tile(5, y_loc),
+            assert_that(tile(self.level, (5, y_loc)),
                         is_(equal_to(self.floor_rock)))
 
     def test_bent_horizontal(self):
@@ -141,16 +139,16 @@ class TestCorridor():
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,
-                                      wall_tile=self.wall_empty,
+                                      wall_tile=None,
                                       floor_tile=self.floor_rock)
 
         generator.generate()
 
         assert_that(self.level.get_wall_tile(10, 2),
-                    is_(equal_to(self.wall_empty)))
+                    is_(equal_to(None)))
         assert_that(self.level.get_wall_tile(5, 8),
-                    is_(equal_to(self.wall_empty)))
-        assert_that(self.level, is_fully_accessible_via(self.wall_empty))
+                    is_(equal_to(None)))
+        assert_that(self.level, is_fully_accessible_via(None))
 
     def test_bent_vertical(self):
         """
@@ -171,13 +169,13 @@ class TestCorridor():
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,
-                                      wall_tile=self.wall_empty,
+                                      wall_tile=None,
                                       floor_tile=self.floor_rock)
 
         generator.generate()
 
         assert_that(self.level.get_wall_tile(9, 0),
-                    is_(equal_to(self.wall_empty)))
+                    is_(equal_to(None)))
         assert_that(self.level.get_wall_tile(2, 9),
-                    is_(equal_to(self.wall_empty)))
-        assert_that(self.level, is_fully_accessible_via(self.wall_empty))
+                    is_(equal_to(None)))
+        assert_that(self.level, is_fully_accessible_via(None))
