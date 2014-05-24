@@ -204,9 +204,7 @@ class LevelGenerator():
         new_level = Level(model=self.model,
                           size=self.level_context.size,
                           floor_type=self.level_context.floor_type,
-                          wall_type=self.level_context.wall_type,
-                          empty_floor=self.level_context.empty_floor,
-                          empty_wall=self.level_context.empty_wall)
+                          wall_type=self.level_context.wall_type)
 
         sections = self.partitioner.partition_level(new_level)
 

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -23,7 +22,7 @@ tests for path finding
 """
 from random import Random
 
-from hamcrest import assert_that, contains, is_  # pylint: disable-msg=E0611
+from hamcrest import assert_that, contains, is_
 from mockito import mock
 from pyherc.ai import a_star
 from pyherc.config.dsl import LevelContext
@@ -37,7 +36,7 @@ from pyherc.test.matchers import continuous_path
 
 FLOOR_TILE = 100
 WALL_TILE = 200
-EMPTY_TILE = 0
+EMPTY_TILE = None
 
 class TestAStar():
     """
@@ -56,7 +55,6 @@ class TestAStar():
         level = (LevelBuilder()
                     .with_floor_tile(FLOOR_TILE)
                     .with_wall_tile(EMPTY_TILE)
-                    .with_empty_wall_tile(EMPTY_TILE)
                     .with_solid_wall_tile(WALL_TILE)
                     .build())
 
@@ -78,7 +76,6 @@ class TestAStar():
         level = (LevelBuilder()
                     .with_floor_tile(FLOOR_TILE)
                     .with_wall_tile(EMPTY_TILE)
-                    .with_empty_wall_tile(EMPTY_TILE)
                     .with_solid_wall_tile(WALL_TILE)
                     .with_wall_at((12, 8))
                     .with_wall_at((12, 9))
@@ -103,7 +100,7 @@ class TestPathfindingInLevel():
         """
         Default constructor
         """
-        super(TestPathfindingInLevel, self).__init__()
+        super().__init__()
 
         self.new_level = None
 
@@ -118,15 +115,15 @@ class TestPathfindingInLevel():
                                       1,
                                       rng)
         room_generator = CatacombsGenerator(FLOOR_TILE,
-                                             EMPTY_TILE,
-                                             ['crypt'],
-                                             rng)
+                                            EMPTY_TILE,
+                                            ['crypt'],
+                                            rng)
         level_decorator = mock()
         portal_adder = PortalAdder((1, 2),
-                                  'crypt',
-                                  mock(),
-                                  False,
-                                  rng)
+                                   'crypt',
+                                   mock(),
+                                   False,
+                                   rng)
         creature_adder = mock()
         item_adder = mock()
 
@@ -139,11 +136,9 @@ class TestPathfindingInLevel():
                                    creature_adder,
                                    rng,
                                    LevelContext(size = (60, 40),
-                                        floor_type = FLOOR_TILE,
-                                        wall_type = WALL_TILE,
-                                        empty_floor = EMPTY_TILE,
-                                        empty_wall = EMPTY_TILE,
-                                        level_types = ['test']))
+                                                floor_type = FLOOR_TILE,
+                                                wall_type = WALL_TILE,
+                                                level_types = ['test']))
 
         self.level = generator.generate_level(portal)
 

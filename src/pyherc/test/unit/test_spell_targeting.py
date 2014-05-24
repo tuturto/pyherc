@@ -108,7 +108,7 @@ class TestSingleCharacterTargeting():
         """
         When targeting wall, it should be reported
         """
-        self.level.walls[10][20] = SOLID_WALL
+        wall_tile(self.level, (10, 20), SOLID_WALL)
 
         params = SpellCastingParameters(caster = self.caster,
                                         direction = 5,
@@ -123,7 +123,7 @@ class TestSingleCharacterTargeting():
         """
         When reporting target, the previous tile should be reported too
         """
-        wall_tile(self.level (10, 20), SOLID_WALL)
+        wall_tile(self.level, (10, 20), SOLID_WALL)
 
         params = SpellCastingParameters(caster = self.caster,
                                         direction = 5,

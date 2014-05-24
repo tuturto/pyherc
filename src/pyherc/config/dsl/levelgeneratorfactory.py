@@ -138,8 +138,7 @@ class LevelContext():
     """
     Context for level generation
     """
-    def __init__(self, size, floor_type, wall_type, empty_floor, empty_wall,
-                 level_types):
+    def __init__(self, size, floor_type, wall_type, level_types):
         """
         Default constructor
 
@@ -149,14 +148,8 @@ class LevelContext():
         :type floor_type: int
         :param wall_type: initial wall type to use
         :type wall_type: int
-        :param empty_floor: floor tile to be considered empty
-        :type empty_floor: int
-        :param empty_wall: wall tile to be considered empty
-        :type empty_wall: int
         """
         self.size = size
         self.floor_type = floor_type
         self.wall_type = wall_type
-        self.empty_floor = empty_floor
-        self.empty_wall = empty_wall
         self.level_types = level_types

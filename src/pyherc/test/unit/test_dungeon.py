@@ -22,7 +22,7 @@ Module for testing dungeon
 """
 
 from mockito import mock
-from pyherc.data import Level, Portal
+from pyherc.data import Level, Portal, floor_tile, wall_tile
 
 
 class TestDungeon:
@@ -34,7 +34,7 @@ class TestDungeon:
         Default constructor
         """
         self.floor_rock = 1
-        self.wall_empty = 2
+        self.wall_empty = None
 
     def test_simple_level_creation(self):
         """
@@ -42,8 +42,8 @@ class TestDungeon:
         """
         level = Level(mock(), [20, 20], self.floor_rock, self.wall_empty)
         assert not (level is None)
-        assert(level.floor[5][5] == self.floor_rock)
-        assert(level.walls[0][0] == self.wall_empty)
+        assert(floor_tile(level, (5, 5)) == self.floor_rock)
+        assert(wall_tile(level, (0, 0)) == self.wall_empty)
 
     def test_stair_linking(self):
         """

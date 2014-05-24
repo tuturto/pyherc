@@ -20,14 +20,14 @@
 """
 Tests for Section
 """
-#pylint: disable=W0614
+
 import random
 
-from hamcrest import (assert_that,  # pylint: disable-msg=E0611; pylint: disable-msg=E0611
+from hamcrest import (assert_that,
                       contains_inanyorder, equal_to, has_items, has_length, is_,
                       is_not)
 from mockito import mock
-from pyherc.data import Level, floor_tile
+from pyherc.data import Level, floor_tile, wall_tile
 from pyherc.generators.level.partitioners.section import Section
 
 
@@ -253,7 +253,8 @@ class TestSectionLevelAccess():
         """
         self.section.set_wall((2, 2), self.wall_ground, None)
 
-        assert_that(self.level.walls[2][2], is_(equal_to(self.wall_ground)))
+        assert_that(wall_tile(self.level, (2, 2)),
+                    is_(equal_to(self.wall_ground)))
 
     def test_setting_location_type(self):
         """
@@ -308,4 +309,5 @@ class TestSectionLevelAccessWithOffset():
         """
         self.section.set_wall((3, 2), self.wall_ground, None)
 
-        assert_that(self.level.walls[8][7], is_(equal_to(self.wall_ground)))
+        assert_that(wall_tile(self.level, (8, 7)),
+                    is_(equal_to(self.wall_ground)))

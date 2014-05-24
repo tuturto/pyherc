@@ -219,8 +219,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     level_context = LevelContext(size = level_size,
                                  floor_type = floor_empty,
                                  wall_type = wall_natural,
-                                 empty_floor = floor_empty,
-                                 empty_wall = wall_empty,
                                  level_types = ['first gate'])
 
     config = (LevelConfiguration()
