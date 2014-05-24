@@ -20,7 +20,7 @@
 """
 Module for basic decorators
 """
-
+from pyherc.data import floor_tile, wall_tile
 
 class Decorator():
     """
@@ -94,17 +94,14 @@ class ReplacingDecorator(Decorator):
         ground_tiles = self.configuration.ground_config
         wall_tiles = self.configuration.wall_config
 
-        for loc_y in range(len(level.floor[0])):
-            for loc_x in range(len(level.floor)):
-                proto_tile = level.floor[loc_x][loc_y]
-                if proto_tile in ground_tiles:
-                    level.set_floor_tile(loc_x, loc_y,
-                                         ground_tiles[proto_tile])
+        for tile in level.tiles.values():
+            proto_tile = tile['\ufdd0:floor']
+            if proto_tile in ground_tiles:
+                tile['\ufdd0:floor'] = ground_tiles[proto_tile]
 
-                proto_tile = level.get_wall_tile(loc_x, loc_y)
-                if proto_tile in wall_tiles:
-                    level.set_wall_tile(loc_x, loc_y, wall_tiles[proto_tile])
-
+            proto_tile = tile['\ufdd0:wall']
+            if proto_tile in wall_tiles:
+                tile['\ufdd0:wall'] = wall_tiles[proto_tile]
 
 class ReplacingDecoratorConfig(DecoratorConfig):
     """
@@ -149,17 +146,16 @@ class WallBuilderDecorator(Decorator):
         """
         empty_tile = self.configuration.empty_tile
 
-        for loc_y in range(len(level.floor[0])):
-            for loc_x in range(len(level.floor)):
-                if level.get_wall_tile(loc_x, loc_y) == empty_tile:
-                    self.check_and_replace((loc_x - 1, loc_y), level)
-                    self.check_and_replace((loc_x + 1, loc_y), level)
-                    self.check_and_replace((loc_x, loc_y - 1), level)
-                    self.check_and_replace((loc_x, loc_y + 1), level)
-                    self.check_and_replace((loc_x - 1, loc_y - 1), level)
-                    self.check_and_replace((loc_x - 1, loc_y + 1), level)
-                    self.check_and_replace((loc_x + 1, loc_y - 1), level)
-                    self.check_and_replace((loc_x + 1, loc_y + 1), level)
+        for loc, tile in level.tiles.items():
+            if tile['\ufdd0:wall'] == empty_tile:
+                self.check_and_replace((loc[0] - 1, loc[1]), level)
+                self.check_and_replace((loc[0] + 1, loc[1]), level)
+                self.check_and_replace((loc[0], loc[1] - 1), level)
+                self.check_and_replace((loc[0], loc[1] + 1), level)
+                self.check_and_replace((loc[0] - 1, loc[1] - 1), level)
+                self.check_and_replace((loc[0] - 1, loc[1] + 1), level)
+                self.check_and_replace((loc[0] + 1, loc[1] - 1), level)
+                self.check_and_replace((loc[0] + 1, loc[1] + 1), level)
 
     def check_and_replace(self, location, level):
         """
@@ -170,13 +166,11 @@ class WallBuilderDecorator(Decorator):
         :param level: level to use
         :type level: Level
         """
-        loc_x = location[0]
-        loc_y = location[1]
-        proto_tile = level.get_wall_tile(loc_x, loc_y)
+        proto_tile = wall_tile(level, location)
 
         if proto_tile in self.configuration.wall_config:
             tile = self.configuration.wall_config[proto_tile]
-            level.set_wall_tile(loc_x, loc_y, tile)
+            wall_tile(level, location, tile)
 
 
 class WallBuilderDecoratorConfig(DecoratorConfig):
@@ -315,37 +309,32 @@ class DirectionalWallDecorator(Decorator):
         :type level: Level
         """
         wall = self.configuration.wall
-        for loc_y in range(len(level.floor[0])):
-            for loc_x in range(len(level.floor)):
-                if level.get_wall_tile(loc_x, loc_y) == wall:
-                    level.set_wall_tile(loc_x,
-                                        loc_y,
-                                        self.get_wall_tile(level,
-                                                           loc_x,
-                                                           loc_y))
 
-    def get_wall_tile(self, level, loc_x, loc_y):
+        for location, tile in level.tiles.items():
+            if tile['\ufdd0:wall'] == wall:
+                tile['\ufdd0:wall'] = self.get_wall_tile(level, location)
+
+    def get_wall_tile(self, level, location):
         """
         Calculate correct wall tile
 
         :param level: level to decorate
         :type level: Level
-        :param loc_x: x-coordinate
-        :type loc_x: int
-        :param loc_y: y-coordinate
-        :type loc_y: int
-        :returns: new wall tile
+        :param location: location in level
+        :type location: (int, int)
         :rtype: int
         """
 
         directions = []
-        if level.get_wall_tile(loc_x, loc_y - 1) in self.configuration.tiles:
+        loc_x, loc_y = location
+
+        if wall_tile(level, (loc_x, loc_y - 1)) in self.configuration.tiles:
             directions.append('1')
-        if level.get_wall_tile(loc_x + 1, loc_y) in self.configuration.tiles:
+        if wall_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles:
             directions.append('3')
-        if level.get_wall_tile(loc_x, loc_y + 1) in self.configuration.tiles:
+        if wall_tile(level, (loc_x, loc_y + 1)) in self.configuration.tiles:
             directions.append('5')
-        if level.get_wall_tile(loc_x - 1, loc_y) in self.configuration.tiles:
+        if wall_tile(level, (loc_x - 1, loc_y)) in self.configuration.tiles:
             directions.append('7')
 
         key = ''.join(directions)
@@ -436,37 +425,30 @@ class FloorBuilderDecorator(Decorator):
         :type level: Level
         """
         floor = self.configuration.floor
-        for loc_y in range(len(level.floor[0])):
-            for loc_x in range(len(level.floor)):
-                if level.get_floor_tile(loc_x, loc_y) == floor:
-                    level.set_floor_tile(loc_x,
-                                         loc_y,
-                                         self.get_floor_tile(level,
-                                                             loc_x,
-                                                             loc_y))
+        for location, tile in level.tiles.items():
+            if tile['\ufdd0:floor'] == floor:
+                level.set_floor_tile(location,
+                                     self.get_floor_tile(level, location))
 
-    def get_floor_tile(self, level, loc_x, loc_y):
+    def get_floor_tile(self, level, location):
         """
         Calculate correct floor tile
 
         :param level: level to decorate
         :type level: Level
-        :param loc_x: x-coordinate
-        :type loc_x: int
-        :param loc_y: y-coordinate
-        :type loc_y: int
         :returns: new floor tile
         :rtype: int
         """
 
+        loc_x, loc_y = location
         directions = []
-        if level.get_floor_tile(loc_x, loc_y - 1) in self.configuration.tiles:
+        if floor_tile(level, (loc_x, loc_y - 1)) in self.configuration.tiles:
             directions.append('1')
-        if level.get_floor_tile(loc_x + 1, loc_y) in self.configuration.tiles:
+        if floor_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles:
             directions.append('3')
-        if level.get_floor_tile(loc_x, loc_y + 1) in self.configuration.tiles:
+        if floor_tile(level, (loc_x, loc_y + 1)) in self.configuration.tiles:
             directions.append('5')
-        if level.get_floor_tile(loc_x - 1, loc_y) in self.configuration.tiles:
+        if floor_tile(level, (loc_x - 1, loc_y)) in self.configuration.tiles:
             directions.append('7')
 
         key = ''.join(directions)
@@ -499,29 +481,26 @@ class WallOrnamentDecorator(Decorator):
         :param level: level to decorate
         :type level: Level
         """
-        wall_tile = self.configuration.wall_tile
+        wall = self.configuration.wall_tile
         rate = self.configuration.rate
 
-        for loc_y in range(len(level.floor[0])):
-            for loc_x in range(len(level.floor)):
-                if (level.get_wall_tile(loc_x, loc_y) == wall_tile
-                        and self.configuration.rng.randint(0, 100) < rate
-                        and level.get_floor_tile(loc_x, loc_y + 1)):
-                    self._randomize_ornament(level, loc_x, loc_y)
+        for location, tile in level.tiles.items():
+            if tile['\ufdd0:wall'] == wall:
+                if self.configuration.rng.randint(0, 100) < rate:
+                    if floor_tile(level, (location[0], location[1] + 1)):
+                        self._randomize_ornament(level, location)
 
-    def _randomize_ornament(self, level, loc_x, loc_y):
+    def _randomize_ornament(self, level, location):
         """
         Set random ornament to given location
 
         :param level: level to ornament
         :type level: Level
-        :param loc_x: x-coordinate
-        :type loc_x: int
-        :param loc_y: y-coordinate
-        :type loc_y: int
         """
         rng = self.configuration.rng
         ornaments = self.configuration.ornamentation
+
+        loc_x, loc_y = location
 
         level.ornamentations[loc_x][loc_y] = rng.choice(ornaments)
 

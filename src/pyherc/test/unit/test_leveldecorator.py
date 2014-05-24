@@ -217,22 +217,21 @@ class TestDirectionalWallDecorator():
         """
         Setup the test case
         """
-        self.empty_wall = 'empty space'
         self.level = Level(mock(), (10, 10),
                            floor_type = 'floor',
                            wall_type = self.empty_wall)
 
-        self.level.walls[1][1] = self.wall
-        self.level.walls[2][1] = self.wall
-        self.level.walls[3][1] = self.wall
+        wall_tile(self.level, (1, 1), self.wall)
+        wall_tile(self.level, (2, 1), self.wall)
+        wall_tile(self.level, (3, 1), self.wall)
 
-        self.level.walls[1][2] = self.wall
-        self.level.walls[1][3] = self.wall
+        wall_tile(self.level, (1, 2), self.wall)
+        wall_tile(self.level, (1, 3), self.wall)
 
-        self.level.walls[2][3] = self.wall
-        self.level.walls[3][3] = self.wall
+        wall_tile(self.level, (2, 3), self.wall)
+        wall_tile(self.level, (3, 3), self.wall)
 
-        self.level.walls[3][2] = self.wall
+        wall_tile(self.level, (3, 2), self.wall)
 
         self.config = DirectionalWallDecoratorConfig(level_types = ['crypt'],
                                                    east_west = 'east-west',
@@ -256,12 +255,12 @@ class TestDirectionalWallDecorator():
         """
         self.decorator.decorate_level(self.level)
 
-        assert_that(self.level.walls[1][1], is_(equal_to('east-south')))
-        assert_that(self.level.walls[2][1], is_(equal_to('east-west')))
-        assert_that(self.level.walls[3][1], is_(equal_to('west-south')))
-        assert_that(self.level.walls[1][2], is_(equal_to('north-south')))
-        assert_that(self.level.walls[1][3], is_(equal_to('east-north')))
-        assert_that(self.level.walls[3][3], is_(equal_to('west-north')))
+        assert_that(wall_tile(self.level, (1, 1)), is_(equal_to('east-south')))
+        assert_that(wall_tile(self.level, (2, 1)), is_(equal_to('east-west')))
+        assert_that(wall_tile(self.level, (3, 1)), is_(equal_to('west-south')))
+        assert_that(wall_tile(self.level, (1, 2)), is_(equal_to('north-south')))
+        assert_that(wall_tile(self.level, (1, 3)), is_(equal_to('east-north')))
+        assert_that(wall_tile(self.level, (3, 3)), is_(equal_to('west-north')))
 
 class TestDecoratingWallOrnaments():
     """
@@ -299,9 +298,9 @@ class TestDecoratingWallOrnaments():
         """
         Ornaments should be placed only on walls
         """
-        self.level.set_wall_tile(2, 2, self.wall)
-        self.level.set_wall_tile(3, 2, self.wall)
-        self.level.set_wall_tile(4, 2, self.wall)
+        wall_tile(self.level, (2, 2), self.wall)
+        wall_tile(self.level, (3, 2), self.wall)
+        wall_tile(self.level, (3, 2), self.wall)
 
         rng = mock()
         when(rng).randint(any(), any()).thenReturn(0)
@@ -324,9 +323,9 @@ class TestDecoratingWallOrnaments():
         """
         There should be way to control how frequently walls are ornamented
         """
-        self.level.set_wall_tile(2, 2, self.wall)
-        self.level.set_wall_tile(3, 2, self.wall)
-        self.level.set_wall_tile(4, 2, self.wall)
+        wall_tile(self.level, (2, 2), self.wall)
+        wall_tile(self.level, (3, 2), self.wall)
+        wall_tile(self.level, (4, 2), self.wall)
 
         rng = mock()
         when(rng).randint(any(), any()).thenReturn(0).thenReturn(100).thenReturn(0)
@@ -342,32 +341,32 @@ class TestDecoratingWallOrnaments():
 
         self.decorator.decorate_level(self.level)
 
-        assert_that(self.level.ornamentations[2][2],
-                    is_(equal_to(self.ornamentation)))
-        assert_that(self.level.ornamentations[3][2],
-                    is_(equal_to(None)))
-        assert_that(self.level.ornamentations[4][2],
-                    is_(equal_to(self.ornamentation)))
+        candle_count = 0
+        for x in range(2, 5):
+            if self.level.ornamentations[x][2] == self.ornamentation:
+                candle_count = candle_count + 1
+
+        assert_that(candle_count, is_(equal_to(2)))
 
     def test_only_northern_wall_is_decorated(self):
         """
         Ornamentations should be placed only on northern walls
         """
-        self.level.set_wall_tile(2, 2, self.wall)
-        self.level.set_wall_tile(3, 2, self.wall)
-        self.level.set_wall_tile(4, 2, self.wall)
+        wall_tile(self.level, (2, 2), self.wall)
+        wall_tile(self.level, (3, 2), self.wall)
+        wall_tile(self.level, (4, 2), self.wall)
 
-        self.level.set_floor_tile(2, 3, self.floor)
-        self.level.set_floor_tile(3, 3, self.floor)
-        self.level.set_floor_tile(4, 3, self.floor)
+        floor_tile(self.level, (2, 3), self.floor)
+        floor_tile(self.level, (3, 3), self.floor)
+        floor_tile(self.level, (4, 3), self.floor)
 
-        self.level.set_wall_tile(2, 4, self.wall)
-        self.level.set_wall_tile(3, 4, self.wall)
-        self.level.set_wall_tile(4, 4, self.wall)
+        wall_tile(self.level, (2, 4), self.wall)
+        wall_tile(self.level, (3, 4), self.wall)
+        wall_tile(self.level, (4, 4), self.wall)
 
-        self.level.set_floor_tile(2, 5, self.empty_floor)
-        self.level.set_floor_tile(3, 5, self.empty_floor)
-        self.level.set_floor_tile(4, 5, self.empty_floor)
+        floor_tile(self.level, (2, 5), self.empty_floor)
+        floor_tile(self.level, (4, 5), self.empty_floor)
+        floor_tile(self.level, (4, 5), self.empty_floor)
 
         rng = mock()
         when(rng).randint(any(), any()).thenReturn(0)
