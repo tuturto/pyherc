@@ -29,12 +29,11 @@ class MapConnectivity(BaseMatcher):
     """
     Helper class used to verify if generated level is fully connected
     """
-    def __init__(self, open_tile):
+    def __init__(self):
         """
         Initialise this matcher
         """
         super().__init__()
-        self.open_tile = open_tile
 
     def _matches(self, item):
         """
@@ -44,12 +43,12 @@ class MapConnectivity(BaseMatcher):
         :returns: True if matching, otherwise False
         :rtype: Boolean
         """
-        all_points = self.get_all_points(item, self.open_tile)
+        all_points = self.get_all_points(item, None)
 
         if len(all_points) > 0:
             connected_points = self.get_connected_points(item,
                                                          all_points[0],
-                                                         self.open_tile,
+                                                         None,
                                                          [])
             connected = True
             for point in all_points:
@@ -84,9 +83,8 @@ class MapConnectivity(BaseMatcher):
         """
         points = []
 
-        #TODO: generator
         for location, tile in level.tiles.items():
-            if tile['\ufdd0:wall'] == null:
+            if tile['\ufdd0:wall'] == None:
                 points.append(location)
 
         return points
@@ -143,14 +141,14 @@ class MapConnectivity(BaseMatcher):
         return connected_points
 
 
-def is_fully_accessible_via(open_tile):
+def is_fully_accessible():
     """
     Check if level is fully connected
 
     :param open_tile: tile_id to use for empty walls
     :type open_tile: int
     """
-    return MapConnectivity(open_tile)
+    return MapConnectivity()
 
 
 def located_in_room(entity):

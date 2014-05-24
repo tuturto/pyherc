@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2014 Tuukka Turto
@@ -57,13 +56,12 @@ class TestItemAdder():
         Setup the test case
         """
         self.floor_rock = 1
-        self.wall_empty = 2
+        self.wall_empty = None
         self.rng = Random()
         self.level = (LevelBuilder()
                       .with_size((60, 40))
                       .with_floor_tile(self.floor_rock)
                       .with_wall_tile(self.wall_empty)
-                      .with_empty_wall_tile(self.wall_empty)
                       .build())
         self.level.set_location_type((10, 10), 'room')
 

@@ -22,7 +22,7 @@ Module for testing customer matchers
 """
 
 from hamcrest import assert_that, equal_to, has_length, is_
-from pyherc.data import Level, Model
+from pyherc.data import Level, Model, wall_tile
 from pyherc.data.effects import EffectHandle, EffectsCollection
 from pyherc.test.matchers.effect_collection import ContainsEffectHandle
 from pyherc.test.matchers.map_connectivity import MapConnectivity
@@ -46,22 +46,22 @@ class TestLevelConnectivity():
         """
         Setup the tests
         """
-        self.wall_empty = 1
+        self.wall_empty = None
         self.floor_rock = 2
         self.wall_ground = 3
         self.level = Level(Model(),
                            size = (20, 10),
                            floor_type = self.floor_rock,
                            wall_type = self.wall_ground)
-        self.matcher = MapConnectivity(self.wall_empty)
+        self.matcher = MapConnectivity()
 
     def test_unconnected_level(self):
         """
         Test that unconnected level is reported correctly
         """
         for loc_x in range(2, 5):
-            self.level.walls[loc_x][2] = self.wall_empty
-            self.level.walls[loc_x][5] = self.wall_empty
+            wall_tile(self.level, (loc_x, 2), self.wall_empty)
+            wall_tile(self.level, (loc_x, 5), self.wall_empty)
 
         assert_that(self.matcher._matches(self.level), is_(equal_to(False)))
 
@@ -70,9 +70,9 @@ class TestLevelConnectivity():
         Test that connected level is reported correctly
         """
         for loc_x in range(2, 8):
-            self.level.walls[loc_x][3] = self.wall_empty
-            self.level.walls[loc_x][5] = self.wall_empty
-            self.level.walls[5][loc_x] = self.wall_empty
+            wall_tile(self.level, (loc_x, 3), self.wall_empty)
+            wall_tile(self.level, (loc_x, 6), self.wall_empty)
+            wall_tile(self.level, (5, loc_x), self.wall_empty)
 
         assert_that(self.matcher._matches(self.level), is_(equal_to(True)))
 
@@ -80,9 +80,9 @@ class TestLevelConnectivity():
         """
         Test that connectivity can find all open points
         """
-        self.level.walls[0][0] = self.wall_empty
-        self.level.walls[5][5] = self.wall_empty
-        self.level.walls[20][10] = self.wall_empty
+        wall_tile(self.level, (0, 0), self.wall_empty)
+        wall_tile(self.level, (5, 5), self.wall_empty)
+        wall_tile(self.level, (20, 10), self.wall_empty)
 
         points = self.matcher.get_all_points(self.level, self.wall_empty)
 
@@ -92,10 +92,10 @@ class TestLevelConnectivity():
         """
         Test that finding connectivity with open corners work
         """
-        self.level.walls[0][0] = self.wall_empty
-        self.level.walls[20][0] = self.wall_empty
-        self.level.walls[0][10] = self.wall_empty
-        self.level.walls[20][10] = self.wall_empty
+        wall_tile(self.level, (0, 0), self.wall_empty)
+        wall_tile(self.level, (20, 0), self.wall_empty)
+        wall_tile(self.level, (0, 10), self.wall_empty)
+        wall_tile(self.level, (20, 10), self.wall_empty)
 
         assert_that(self.matcher._matches(self.level), is_(equal_to(False)))
 
@@ -108,21 +108,21 @@ class TestLevelConnectivity():
                       floor_type = self.floor_rock,
                       wall_type = self.wall_ground)
 
-        self.level.walls[2][5] = self.wall_empty
-        self.level.walls[2][6] = self.wall_empty
-        self.level.walls[2][7] = self.wall_empty
-        self.level.walls[2][8] = self.wall_empty
-        self.level.walls[2][9] = self.wall_empty
-        self.level.walls[2][10] = self.wall_empty
+        wall_tile(self.level, (2, 5), self.wall_empty)
+        wall_tile(self.level, (2, 6), self.wall_empty)
+        wall_tile(self.level, (2, 7), self.wall_empty)
+        wall_tile(self.level, (2, 8), self.wall_empty)
+        wall_tile(self.level, (2, 9), self.wall_empty)
+        wall_tile(self.level, (2, 10), self.wall_empty)
 
-        self.level.walls[5][8] = self.wall_empty
+        wall_tile(self.level, (5, 8), self.wall_empty)
 
-        self.level.walls[5][2] = self.wall_empty
-        self.level.walls[6][2] = self.wall_empty
-        self.level.walls[7][2] = self.wall_empty
-        self.level.walls[8][2] = self.wall_empty
-        self.level.walls[9][2] = self.wall_empty
-        self.level.walls[10][2] = self.wall_empty
+        wall_tile(self.level, (5, 2), self.wall_empty)
+        wall_tile(self.level, (6, 2), self.wall_empty)
+        wall_tile(self.level, (7, 2), self.wall_empty)
+        wall_tile(self.level, (8, 2), self.wall_empty)
+        wall_tile(self.level, (9, 2), self.wall_empty)
+        wall_tile(self.level, (10, 2), self.wall_empty)
 
         all_points = self.matcher.get_all_points(self.level, self.wall_empty)
         connected_points = self.matcher.get_connected_points(self.level,
@@ -140,7 +140,7 @@ class TestContainsEffectHandle():
         """
         Default constructor
         """
-        super(TestContainsEffectHandle, self).__init__()
+        super().__init__()
 
     def test_match_single_handle(self):
         """

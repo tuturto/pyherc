@@ -36,7 +36,7 @@ from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.portals import PortalAdder
 from pyherc.generators.level.room.catacombs import CatacombsGenerator
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
-from pyherc.test.matchers import is_fully_accessible_via
+from pyherc.test.matchers import is_fully_accessible
 
 
 class TestLeveltGeneratorFactory:
@@ -335,8 +335,6 @@ class TestLevelGenerator:
         level_context = LevelContext(size = (60, 40),
                                      floor_type = self.floor_rock,
                                      wall_type = -101,
-                                     empty_floor = 0,
-                                     empty_wall = self.wall_empty,
                                      level_types = ['crypt'])
 
         generator = LevelGenerator(Model(),
@@ -386,13 +384,11 @@ class TestLevelGenerator:
                                    LevelContext(size = (60, 40),
                                         floor_type = -2,
                                         wall_type = -101,
-                                        empty_floor = 0,
-                                        empty_wall = 100,
                                         level_types = ['crypt']))
 
         new_level = generator.generate_level(portal)
 
-        assert_that(new_level, is_fully_accessible_via(self.wall_empty))
+        assert_that(new_level, is_fully_accessible())
 
     def test_catacombs_generation(self):
         """
@@ -426,10 +422,8 @@ class TestLevelGenerator:
                                    LevelContext(size = (60, 40),
                                         floor_type = -2,
                                         wall_type = -101,
-                                        empty_floor = 0,
-                                        empty_wall = self.wall_empty,
                                         level_types = ['crypt']))
 
         new_level = generator.generate_level(portal)
 
-        assert_that(new_level, is_fully_accessible_via(self.wall_empty))
+        assert_that(new_level, is_fully_accessible())
