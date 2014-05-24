@@ -22,6 +22,7 @@ Module for customer matchers used in testing
 """
 
 from hamcrest.core.base_matcher import BaseMatcher
+from pyherc.data import wall_tile, get_tile
 
 
 class MapConnectivity(BaseMatcher):
@@ -83,10 +84,10 @@ class MapConnectivity(BaseMatcher):
         """
         points = []
 
-        for loc_y in range(len(level.walls[0])):
-            for loc_x in range(len(level.walls)):
-                if level.walls[loc_x][loc_y] == open_tile:
-                    points.append((loc_x, loc_y))
+        #TODO: generator
+        for location, tile in level.tiles.items():
+            if tile['\ufdd0:wall'] == null:
+                points.append(location)
 
         return points
 
@@ -108,13 +109,10 @@ class MapConnectivity(BaseMatcher):
         if start in connected_points:
             return None
 
-        if x_loc < 0 or x_loc > len(level.walls) - 1:
+        if get_tile(level, start) is None:
             return None
 
-        if y_loc < 0 or y_loc > len(level.walls[0]) - 1:
-            return None
-
-        if level.get_wall_tile(x_loc, y_loc) == open_tile:
+        if wall_tile(level, start) == None:
             connected_points.append(start)
             self.get_connected_points(level, (x_loc, y_loc - 1),
                                       open_tile,

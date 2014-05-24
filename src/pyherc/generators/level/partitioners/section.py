@@ -352,7 +352,7 @@ class Section():
         x_loc = self.__get_left_edge() + location[0]
         y_loc = self.__get_top_edge() + location[1]
 
-        return self.level.floor[x_loc][y_loc]
+        return floor_tile(self.level, (x_loc, y_loc))
 
     def set_wall(self, location, tile, location_type):
         """

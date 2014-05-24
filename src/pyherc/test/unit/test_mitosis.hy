@@ -41,7 +41,6 @@
         [level (-> (LevelBuilder)
                    (.with-floor-tile :floor)
                    (.with-wall-tile nil)
-                   (.with-empty-wall-tile nil)
                    (.build))]
         [character (generator "fungi")]
         [action-factory (-> (ActionFactoryBuilder)
