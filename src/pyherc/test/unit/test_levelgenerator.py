@@ -310,7 +310,7 @@ class TestLevelGenerator:
         """
         self.rng = random.Random()
         self.floor_rock = 1
-        self.wall_empty = 2
+        self.wall_empty = None
 
     def test_level_generation_steps(self):
         """

@@ -23,11 +23,11 @@ Tests for Corridor
 
 import random
 
-from pyherc.data import tile
+from pyherc.data import tile, wall_tile, floor_tile
 from hamcrest import assert_that, equal_to, is_
 from pyherc.generators.level.partitioners.section import Connection, Section
 from pyherc.generators.level.room.corridor import CorridorGenerator
-from pyherc.test.matchers import is_fully_accessible_via
+from pyherc.test.matchers import is_fully_accessible
 from pyherc.test.builders import LevelBuilder
 
 
@@ -89,7 +89,7 @@ class TestCorridor():
         generator.generate()
 
         for x_loc in range(5, 11):
-            assert_that(tile(self.level, (x_loc, 5)),
+            assert_that(floor_tile(self.level, (x_loc, 5)),
                         is_(equal_to(self.floor_rock)))
 
     def test_straight_vertical(self):
@@ -117,7 +117,7 @@ class TestCorridor():
         generator.generate()
 
         for y_loc in range(0, 6):
-            assert_that(tile(self.level, (5, y_loc)),
+            assert_that(floor_tile(self.level, (5, y_loc)),
                         is_(equal_to(self.floor_rock)))
 
     def test_bent_horizontal(self):
@@ -144,11 +144,11 @@ class TestCorridor():
 
         generator.generate()
 
-        assert_that(self.level.get_wall_tile(10, 2),
+        assert_that(wall_tile(self.level, (10, 2)),
                     is_(equal_to(None)))
-        assert_that(self.level.get_wall_tile(5, 8),
+        assert_that(wall_tile(self.level, (5, 8)),
                     is_(equal_to(None)))
-        assert_that(self.level, is_fully_accessible_via(None))
+        assert_that(self.level, is_fully_accessible())
 
     def test_bent_vertical(self):
         """
@@ -174,8 +174,8 @@ class TestCorridor():
 
         generator.generate()
 
-        assert_that(self.level.get_wall_tile(9, 0),
+        assert_that(wall_tile(self.level, (9, 0)),
                     is_(equal_to(None)))
-        assert_that(self.level.get_wall_tile(2, 9),
+        assert_that(wall_tile(self.level, (2, 9)),
                     is_(equal_to(None)))
-        assert_that(self.level, is_fully_accessible_via(None))
+        assert_that(self.level, is_fully_accessible())

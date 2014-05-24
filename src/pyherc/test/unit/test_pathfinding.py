@@ -26,7 +26,7 @@ from hamcrest import assert_that, contains, is_
 from mockito import mock
 from pyherc.ai import a_star
 from pyherc.config.dsl import LevelContext
-from pyherc.data import Portal, Model, find_free_space
+from pyherc.data import Portal, Model, find_free_space, wall_tile
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.portals import PortalAdder

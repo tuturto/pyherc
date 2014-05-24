@@ -21,7 +21,7 @@
 (require pyherc.aspects)
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
-        [pyherc.data [skill-ready? cooldown]]
+        [pyherc.data [skill-ready? cooldown blocks-movement]]
         [pyherc.data.geometry [area-around]]
         [pyherc.data.constants [Duration]]
         [pyherc.events.mitosis [MitosisEvent]])
@@ -62,7 +62,6 @@
 
 #d(defn free-tiles [level tiles]
     (ap-filter (not (or
-                     (= (.get-floor-tile level (first it) (second it)) nil)
-                     (.blocks-movement level (first it) (second it))
+                     (blocks-movement level it)
                      (.get-creature-at level it)))
                tiles))

@@ -25,6 +25,7 @@ from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
 from pyherc.generators import get_effect_creator
 from pyherc.data.effects import DamageEffect, Heal, Poison
+from pyherc.data import level_size
 from pyherc.data.geometry import find_direction
 from pyherc.rules import (attack, cast, drop_item, Dying, gain_domain,
                           is_move_legal, move, wait)
@@ -126,8 +127,9 @@ def middle_of(level):
     :returns: middle point of level
     :rtype: (int, int)
     """
-    x_loc = level.get_size()[0] // 2
-    y_loc = level.get_size()[1] // 2
+    size = level_size(level)
+    x_loc = size[1] // 2
+    y_loc = size[3] // 2
     location = LevelLocation(level, (x_loc, y_loc))
 
     return location

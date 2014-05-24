@@ -22,7 +22,8 @@ Module for testing dungeon
 """
 
 from mockito import mock
-from pyherc.data import Level, Portal, floor_tile, wall_tile
+from pyherc.data import Level, Portal, floor_tile, wall_tile, add_portal
+from pyherc.data import get_portal
 
 
 class TestDungeon:
@@ -55,10 +56,10 @@ class TestDungeon:
         stairs1 = Portal((None, None), None)
 
         stairs1.icon = 'stairs'
-        level1.add_portal(stairs1, (10, 10))
+        add_portal(level1, (10, 10), stairs1)
 
         stairs2 = Portal((None, None), None)
-        level2.add_portal(stairs2, (5, 5), stairs1)
+        add_portal(level2, (5, 5), stairs2, stairs1)
 
         assert(stairs1.level == level1)
         assert(stairs1.location == (10, 10))
@@ -68,5 +69,5 @@ class TestDungeon:
         assert(stairs2.location == (5, 5))
         assert(stairs2.get_other_end(mock()) == stairs1)
 
-        assert(stairs1 in level1.portals)
-        assert(stairs2 in level2.portals)
+        assert get_portal(level1, (10, 10)) == stairs1
+        assert get_portal(level2, (5, 5)) == stairs2
