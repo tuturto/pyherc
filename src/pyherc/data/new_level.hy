@@ -84,16 +84,16 @@
     "get portal at given location"
     (:portal (get-tile level location)))
 
-#d(defn level-size [level]
-    "get size of level (x₀, x₁, y₀, y₁)"
-    (let [[x₀ 0] [x₁ 0] [y₀ 0] [y₁ 0]]
-      (ap-each level.tiles
-               (do
-                (when (< (first it) x₀) (setv x₀ (first it)))
-                (when (> (first it) x₁) (setv x₁ (first it)))
-                (when (< (second it) y₀) (setv y₀ (second it)))
-                (when (> (second it) y₁) (setv y₁ (second it)))))
-      #t(x₀ x₁ y₀ y₁)))
+(defn level-size [level]
+  "get size of level (x₀, x₁, y₀, y₁)"
+  (let [[x₀ 0] [x₁ 0] [y₀ 0] [y₁ 0]]
+    (ap-each level.tiles
+             (do
+              (when (< (first it) x₀) (setv x₀ (first it)))
+              (when (> (first it) x₁) (setv x₁ (first it)))
+              (when (< (second it) y₀) (setv y₀ (second it)))
+              (when (> (second it) y₁) (setv y₁ (second it)))))
+    #t(x₀ x₁ y₀ y₁)))
 
 #d(defn find-free-space [level]
     "find a free location within level"
@@ -103,13 +103,13 @@
                                       (:floor (second pair))))]]
       (.choice random free-tiles)))
 
-#d(defn blocks-movement [level location]
-    "check if given location blocks movement"
-    (let [[map-tile (get-tile level location)]]
-      (if map-tile
-         (:wall map-tile)
-        true)))
+(defn blocks-movement [level location]
+  "check if given location blocks movement"
+  (let [[map-tile (get-tile level location)]]
+    (if map-tile
+      (:wall map-tile)
+      true)))
 
-#d(defn blocks-los [level location]
-    "check if given location blocks line of sight"
-    (wall-tile level location))
+(defn blocks-los [level location]
+  "check if given location blocks line of sight"
+  (wall-tile level location))

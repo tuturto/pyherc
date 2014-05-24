@@ -101,10 +101,9 @@
 #d(defn -patrollable-area-in-level [can-patrol level]
     "routine to find area to patrol in level"
     (let [[patrol-area []]]
-      (for [x (range (len level.walls))]
-	(for [y (range (len (first level.walls)))]
-	  (if (can-patrol level x y)
-	    (.append patrol-area (, x y)))))
+      (for [location level.tiles]
+        (if (can-patrol level (first location) (second location))
+          (.append patrol-area location)))
       patrol-area))
 
 #d(defn -move-towards-patrol-area [select-area-to-patrol ai action-factory]

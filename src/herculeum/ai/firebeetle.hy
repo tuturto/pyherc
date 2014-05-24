@@ -19,7 +19,9 @@
 
 (setv __doc__ "module for AI routines for firebeetles")
 
-(import [herculeum.ai.patrol [patrol-ai]])
+(require pyherc.macros)
+(import [herculeum.ai.patrol [patrol-ai]]
+        [pyherc.data [blocks-movement]])
 
 (defclass FireBeetleAI []
   [[__doc__ "AI routine for fire beetles"]
@@ -35,13 +37,13 @@
 
 (defn is_is_open_space [level x y]
   "check if given location is within patrol area"
-  (and (not (.blocks_movement level (inc x) y))
-       (not (.blocks_movement level (dec x) y))
-       (not (.blocks_movement level x (inc y)))
-       (not (.blocks_movement level x (dec y)))
-       (not (.blocks_movement level (inc x) (inc y)))
-       (not (.blocks_movement level (inc x) (dec y)))
-       (not (.blocks_movement level (dec x) (inc y)))
-       (not (.blocks_movement level (dec x) (dec y)))))
+  (and (not (blocks_movement level #t((inc x) y)))
+       (not (blocks_movement level #t((dec x) y)))
+       (not (blocks_movement level #t(x (inc y))))
+       (not (blocks_movement level #t(x (dec y))))
+       (not (blocks_movement level #t((inc x) (inc y))))
+       (not (blocks_movement level #t((inc x) (dec y))))
+       (not (blocks_movement level #t((dec x) (inc y))))
+       (not (blocks_movement level #t((dec x) (dec y))))))
 
 (def beetle-act (patrol-ai is-open-space? 3))
