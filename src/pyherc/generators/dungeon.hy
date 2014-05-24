@@ -19,11 +19,11 @@
 
 (require pyherc.aspects)
 (import [pyherc.aspects [log-info]])
-(import [pyherc.data [Dungeon]])
+(import [pyherc.data [Dungeon find-free-space]])
 
 #i(defn generate-dungeon [model level-generator]
     "generate start of the dungeon"
     (let [[dungeon (Dungeon)]
       [level (.generate-level level-generator nil)]]
-      (.add-creature level model.player (.find-free-space level))
+      (.add-creature level model.player (find-free-space level))
       dungeon))

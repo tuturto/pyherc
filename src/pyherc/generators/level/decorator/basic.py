@@ -427,8 +427,8 @@ class FloorBuilderDecorator(Decorator):
         floor = self.configuration.floor
         for location, tile in level.tiles.items():
             if tile['\ufdd0:floor'] == floor:
-                level.set_floor_tile(location,
-                                     self.get_floor_tile(level, location))
+                floor_tile(level, location,
+                           self.get_floor_tile(level, location))
 
     def get_floor_tile(self, level, location):
         """

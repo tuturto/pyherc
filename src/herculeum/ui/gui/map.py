@@ -294,31 +294,29 @@ class PlayMapWidget(QWidget):
 
         self.current_level = model.player.level
 
-        for loc_x, column in enumerate(self.current_level.floor):
-            for loc_y, tile in enumerate(column):
-                new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
+        for location, tile in self.current_level.tiles.items():
+            if tile['\ufdd0:floor']:
+                new_glyph = MapGlyph(self.surface_manager.get_icon(tile['\ufdd0:floor']),
                                      None)
                 new_glyph.setZValue(zorder_floor)
-                new_glyph.setPos(loc_x * 32, loc_y * 32)
+                new_glyph.setPos(location[0] * 32, location[1] * 32)
                 scene.addItem(new_glyph)
-
-        for loc_x, column in enumerate(self.current_level.walls):
-            for loc_y, tile in enumerate(column):
-                new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
+            if tile['\ufdd0:wall']:
+                new_glyph = MapGlyph(self.surface_manager.get_icon(tile['\ufdd0:wall']),
                                      None)
                 new_glyph.setZValue(zorder_wall)
-                new_glyph.setPos(loc_x * 32, loc_y * 32)
+                new_glyph.setPos(location[0] * 32, location[1] * 32)
                 scene.addItem(new_glyph)
 
-        for loc_x, column in enumerate(self.current_level.ornamentations):
-            for loc_y, tile in enumerate(column):
-                if tile:
-                    new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
-                                         None,
-                                         self.rng.choice(self.animation_adapters))
-                    new_glyph.setZValue(zorder_ornament)
-                    new_glyph.setPos(loc_x * 32, loc_y * 32)
-                    scene.addItem(new_glyph)
+        #for loc_x, column in enumerate(self.current_level.ornamentations):
+        #    for loc_y, tile in enumerate(column):
+        #        if tile:
+        #            new_glyph = MapGlyph(self.surface_manager.get_icon(tile),
+        #                                 None,
+        #                                 self.rng.choice(self.animation_adapters))
+        #            new_glyph.setZValue(zorder_ornament)
+        #            new_glyph.setPos(loc_x * 32, loc_y * 32)
+        #            scene.addItem(new_glyph)
 
         for item in self.current_level.items:
             self.add_glyph(item, scene, zorder_item)
