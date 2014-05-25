@@ -23,7 +23,7 @@ Tests for LevelDecorator
 
 from hamcrest import assert_that, equal_to, is_
 from mockito import any, mock, verify, when
-from pyherc.data import Level, floor_tile, wall_tile
+from pyherc.data import Level, floor_tile, wall_tile, ornamentation
 from pyherc.generators.level.decorator import (AggregateDecorator,
                                                AggregateDecoratorConfig,
                                                DirectionalWallDecorator,
@@ -316,7 +316,7 @@ class TestDecoratingWallOrnaments():
 
         self.decorator.decorate_level(self.level)
 
-        assert_that(self.level.ornamentations[2][2],
+        assert_that(ornamentation(self.level, (2, 2)),
                     is_(equal_to(self.ornamentation)))
 
     def test_ornamentation_rate_can_be_controlled(self):
@@ -342,8 +342,8 @@ class TestDecoratingWallOrnaments():
         self.decorator.decorate_level(self.level)
 
         candle_count = 0
-        for x in range(2, 5):
-            if self.level.ornamentations[x][2] == self.ornamentation:
+        for location in self.level.tiles:
+            if ornamentation(self.level, location) == self.ornamentation:
                 candle_count = candle_count + 1
 
         assert_that(candle_count, is_(equal_to(2)))
@@ -383,7 +383,7 @@ class TestDecoratingWallOrnaments():
 
         self.decorator.decorate_level(self.level)
 
-        assert_that(self.level.ornamentations[2][2],
+        assert_that(ornamentation(self.level, (2, 2)),
                     is_(equal_to(self.ornamentation)))
-        assert_that(self.level.ornamentations[2][4],
+        assert_that(ornamentation(self.level, (2, 4)),
                     is_(equal_to(None)))

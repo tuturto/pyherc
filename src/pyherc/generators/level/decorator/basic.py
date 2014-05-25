@@ -20,7 +20,7 @@
 """
 Module for basic decorators
 """
-from pyherc.data import floor_tile, wall_tile
+from pyherc.data import floor_tile, wall_tile, ornamentation
 
 class Decorator():
     """
@@ -500,9 +500,7 @@ class WallOrnamentDecorator(Decorator):
         rng = self.configuration.rng
         ornaments = self.configuration.ornamentation
 
-        loc_x, loc_y = location
-
-        level.ornamentations[loc_x][loc_y] = rng.choice(ornaments)
+        ornamentation(level, location, rng.choice(ornaments))
 
 
 class WallOrnamentDecoratorConfig(DecoratorConfig):

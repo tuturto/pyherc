@@ -27,7 +27,7 @@
   "create a tile with default values"
   {:floor nil
    :wall nil
-   :ornamentations []
+   :ornamentation nil
    :trap nil
    :location_types []
    :items []
@@ -113,3 +113,11 @@
 (defn blocks-los [level location]
   "check if given location blocks line of sight"
   (wall-tile level location))
+
+(defn ornamentation [level location &optional [tile-id :no-tile]]
+  (if (!= tile-id :no-tile)
+    (do (let [[map-tile (get-or-create-tile level location)]]
+          (assoc map-tile :ornamentation tile-id)
+          (:ornamentation map-tile)))
+    (do (let [[map-tile (get-tile level location)]]
+          (when map-tile (:ornamentation map-tile))))))
