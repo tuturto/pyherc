@@ -20,7 +20,7 @@
 # flake8: noqa
 
 from hamcrest import assert_that, is_in, is_not
-from pyherc.data import Portal
+from pyherc.data import Portal, add_portal
 from pyherc.test.bdd.features.helpers import (default_context, get_character,
                                               get_entity, get_location)
 from pyherc.test.cutesy import Level, middle_of, place
@@ -64,7 +64,7 @@ def impl(context, portal_name, location_name):
     place = get_location(context, location_name)
     portal = get_location(context, portal_name)
 
-    place.add_portal(portal, (2, 2), None)
+    add_portal(place, (2, 2), portal, None)
 
 @then('{character_name} is not in {place_name}')
 def impl(context, character_name, place_name):
