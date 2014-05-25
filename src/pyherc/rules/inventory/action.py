@@ -22,7 +22,8 @@ Module defining classes related to inventory actions
 """
 from pyherc.aspects import log_debug, log_info
 from pyherc.events import DropEvent, PickUpEvent
-
+from pyherc.data import remove_item
+from pyherc.data.constants import Duration
 
 class PickUpAction():
     """
@@ -50,7 +51,7 @@ class PickUpAction():
         Executes this action
         """
         if self.is_legal():
-            self.character.level.items.remove(self.item)
+            remove_item(self.character.level, self.item)
 
             if not self._merge_similar_items():
                 self.character.inventory.append(self.item)
@@ -59,7 +60,7 @@ class PickUpAction():
             self.character.raise_event(PickUpEvent(self.character,
                                                    self.item))
 
-        self.character.add_to_tick(2)
+        self.character.add_to_tick(Duration.fast)
 
     @log_debug
     def _merge_similar_items(self):
@@ -127,10 +128,9 @@ class DropAction():
         Executes this action
         """
         self.character.inventory.remove(self.item)
-        self.character.level.add_item(item=self.item,
-                                      location=(self.character.location[0],
-                                                self.character.location[1]))
-        self.character.add_to_tick(2)
+        add_item(self.character.level, self.character.location, self.item)
+
+        self.character.add_to_tick(Duration.fast)
         self.character.raise_event(DropEvent(self.character,
                                              self.item))
 

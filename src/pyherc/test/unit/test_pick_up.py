@@ -22,7 +22,7 @@ Tests for pick up action
 """
 from hamcrest import assert_that, equal_to, is_  # pylint: disable-msg=E0611
 from mockito import any, mock, verify
-from pyherc.data import Model
+from pyherc.data import Model, add_item, get_items
 from pyherc.events import PickUpEvent
 from pyherc.rules import pick_up
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
@@ -61,7 +61,7 @@ class TestPickingUp():
                             .with_model(self.model)
                             .build())
 
-        self.level.add_item(self.item, (5, 5))
+        add_item(self.level, (5, 5), self.item)
 
         self.action_factory = (ActionFactoryBuilder()
                                     .with_inventory_factory()
@@ -76,7 +76,7 @@ class TestPickingUp():
                 self.action_factory)
 
         assert(self.item in self.character.inventory)
-        assert(not self.item in self.level.items)
+        assert(not self.item in get_items(self.level))
         assert(self.item.location == ())
 
     def test_picking_up_not_correct_location(self): #pylint: disable=C0103
@@ -93,7 +93,7 @@ class TestPickingUp():
                 self.action_factory)
 
         assert(not self.item in self.character.inventory)
-        assert(self.item in self.level.items)
+        assert(self.item in get_items(self.level))
 
     def test_merging_ammunition_in_pickup(self):
         """
@@ -108,8 +108,8 @@ class TestPickingUp():
                     .with_count(20)
                     .build())
 
-        self.level.add_item(ammo_1, self.character.location)
-        self.level.add_item(ammo_2, self.character.location)
+        add_item(self.level, self.character.location, ammo_1)
+        add_item(self.level, self.character.location, ammo_2)
 
         pick_up(self.character,
                 ammo_1,

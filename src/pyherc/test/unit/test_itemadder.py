@@ -20,13 +20,12 @@
 """
 Tests for ItemAdder
 """
-#pylint: disable=W0614
 from random import Random
 
-from hamcrest import (assert_that,  # pylint: disable-msg=E0611; pylint: disable-msg=E0611
+from hamcrest import (assert_that,
                       greater_than, greater_than_or_equal_to, has_length,
                       less_than)
-from pyherc.data import Level, Model
+from pyherc.data import Level, Model, get_items
 from pyherc.data.effects import EffectHandle
 from pyherc.generators.item import (ItemConfiguration, ItemConfigurations,
                                     ItemGenerator, WeaponConfiguration)
@@ -120,18 +119,18 @@ class TestItemAdder():
         """
         Test basic case of adding items on the level
         """
-        assert_that(self.level.items, has_length(greater_than(3)))
-        assert_that(self.level.items, has_length(less_than(6)))
+        assert_that(get_items(self.level), has_length(greater_than(3)))
+        assert_that(get_items(self.level), has_length(less_than(6)))
 
         assert_that(self.level, does_have_item('dagger',
-                                        greater_than_or_equal_to(3)))
+                                               greater_than_or_equal_to(3)))
         assert_that(self.level, does_have_item('red potion', 1))
 
     def test_adding_to_location(self):
         """
         Test that ItemAdder will use location types passed to it
         """
-        potion = [x for x in self.level.items
+        potion = [x for x in get_items(self.level)
                   if x.name == 'red potion'][0]
 
         location = potion.location

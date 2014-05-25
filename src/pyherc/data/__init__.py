@@ -41,3 +41,4 @@ from .new_character import is_skill_ready, cooldown
 from .new_level import get_tile, new_tile, floor_tile, add_portal, get_portal
 from .new_level import wall_tile, tile, blocks_los, ornamentation
 from .new_level import level_size, find_free_space, blocks_movement
+from .new_level import add_item, get_items, remove_item

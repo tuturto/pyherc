@@ -27,7 +27,7 @@ import pyherc.data.dungeon
 import pyherc.generators.item
 from hamcrest import assert_that, equal_to, is_, is_in, is_not
 from mockito import any, mock, verify
-from pyherc.data import Character
+from pyherc.data import Character, add_item, get_items
 from pyherc.events import PickUpEvent
 from pyherc.rules import equip, unequip
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
@@ -67,7 +67,7 @@ class TestItems():
                             .with_location((5, 5))
                             .build())
 
-        self.level.add_item(self.item, (5, 5))
+        add_item(self.leve, (5, 5), self.item)
 
         self.action_factory = (ActionFactoryBuilder()
                                     .with_inventory_factory()
@@ -176,7 +176,7 @@ class TestItemsInLevel:
                             .with_model(self.model)
                             .build())
 
-        self.level.add_item(self.item, (5, 5))
+        add_item(self.level, (5, 5), self.item)
 
         self.dungeon = pyherc.data.dungeon.Dungeon()
         self.dungeon.levels = self.level
@@ -195,20 +195,20 @@ class TestItemsInLevel:
         item = (ItemBuilder()
                     .with_name('apple')
                     .build())
-        self.level.add_item(item, (5, 5))
+        add_item(self.level, (5, 5), item)
 
         item = (ItemBuilder()
                     .with_name('kiwi')
                     .build())
-        self.level.add_item(item, (3, 3))
+        add_item(self.level, (3, 3), item)
 
-        items = self.level.get_items_at((5, 5))
+        items = get_items(self.level, (5, 5))
         assert(len(items) == 2)
 
-        items = self.level.get_items_at((3, 3))
+        items = get_items(self.level, (3, 3))
         assert(len(items) == 1)
 
-        items = self.level.get_items_at((12, 0))
+        items = get_items(self.level, (12, 0))
         assert(len(items) == 0)
 
 class TestItemAdvanced():
@@ -242,7 +242,7 @@ class TestItemAdvanced():
 
         assert(name == 'blue potion')
 
-    def test_appearance_of_generic_named_item(self): #pylint: disable=C0103
+    def test_appearance_of_generic_named_item(self):
         """
         Test that given name is reported for a generally named item
         """

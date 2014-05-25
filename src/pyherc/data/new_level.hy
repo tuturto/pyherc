@@ -121,3 +121,26 @@
           (:ornamentation map-tile)))
     (do (let [[map-tile (get-tile level location)]]
           (when map-tile (:ornamentation map-tile))))))
+
+#d(defn add-item [level location item]
+    "add item to level"
+    (.append level.-items item)
+    (setv item.location location)
+    (setv item.level level)
+    (.append (:items (get-or-create-tile level location)) item))
+
+(defn get-items [level &optional [location :no-location]]
+  "get items in a given tile or in level in general"
+  (if (= location :no-location)
+    (list-comp item [item level.-items])
+    (do
+     (let [[map-tile (get-tile level location)]]
+       (if (= map-tile nil)
+         []
+         (list-comp item [item (:items map-tile)]))))))
+
+#d(defn remove-item [level item]
+    "removes item from level"
+    (let [[map-tile (get-tile level item.location)]]
+      (.remove (:items map-tile) item)
+      (.remove level.-items item)))

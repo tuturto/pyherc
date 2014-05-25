@@ -76,43 +76,10 @@ class Level():
                     temp_row.append([])
                 self.traps.append(temp_row)
 
-        self.items = []
+        self._items = []
         self.creatures = []
         self.full_update_needed = True
         self.dirty_rectangles = []
-
-    @log_debug
-    def add_item(self, item, location):
-        """
-        Add an item to this level
-
-        :param item: item to add
-        :type item: Item
-        :param location: location where to put the item
-        :type location: (integer, integer)
-        """
-        assert item is not None
-        assert location is not None
-
-        self.items.append(item)
-        item.location = location
-        item.level = self
-
-    def get_items_at(self, location):
-        """
-        Get list of items at location
-
-        :param location: location to check
-        :type location: (integer, integer)
-        :returns: items at given location
-        :rtype: [Item]
-        """
-        assert location is not None
-        items = []
-        for item in self.items:
-            if item.location == location:
-                items.append(item)
-        return items
 
     @log_debug
     def add_creature(self, creature, location=None):
