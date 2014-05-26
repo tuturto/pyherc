@@ -24,7 +24,7 @@ from functools import partial
 from math import sqrt
 
 from pyherc.aspects import log_debug
-from pyherc.data.new_level import blocks_movement
+from pyherc.data.new_level import blocks_movement, get_character
 
 
 @log_debug
@@ -69,7 +69,7 @@ def get_target_in_direction(level, location, direction, attack_range=100):
                                      target_data)
             target = target_data
         else:
-            target = level.get_creature_at(target_location)
+            target = get_character(level, target_location)
             if target:
                 target_data = TargetData('character',
                                          target_location,

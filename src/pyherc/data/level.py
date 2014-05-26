@@ -77,57 +77,9 @@ class Level():
                 self.traps.append(temp_row)
 
         self._items = []
-        self.creatures = []
+        self._characters = []
         self.full_update_needed = True
         self.dirty_rectangles = []
-
-    @log_debug
-    def add_creature(self, creature, location=None):
-        """
-        Add a creature to level
-
-        :param creature: creature to add
-        :type creature: Creature
-        :param location: optional location for the creature
-        :type location: (integer, integer)
-        """
-        assert creature is not None
-
-        self.creatures.append(creature)
-        creature.level = self
-        if location is not None:
-            creature.location = location
-
-    @log_debug
-    def remove_creature(self, creature):
-        """
-        Remove creature from level
-
-        :param creature: creature to remove
-        :type creature: Creature
-        """
-        assert creature is not None
-        assert creature in self.creatures
-
-        self.creatures.remove(creature)
-        creature.level = None
-        creature.location = ()
-
-    def get_creature_at(self, location):
-        """
-        Get list of creatures at given location
-
-        :param location: location to check
-        :type location: (integer, integer)
-        :returns: creature if found
-        :rtype: Creature
-        """
-        assert location is not None
-        for creature in self.creatures:
-            if creature.location == location:
-                return creature
-
-        return None
 
     def add_trap(self, trap, location):
         """

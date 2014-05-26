@@ -20,7 +20,7 @@
 """
 Module for level builder
 """
-from pyherc.data import Level, Model, wall_tile
+from pyherc.data import Level, Model, wall_tile, add_character
 
 
 class LevelBuilder():
@@ -108,6 +108,6 @@ class LevelBuilder():
             wall_tile(level, wall, self.solid_wall_tile)
 
         for creature in self.characters:
-            level.add_creature(creature)
+            add_character(level, creature.location, creature)
 
         return level

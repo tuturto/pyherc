@@ -21,7 +21,7 @@
 (require pyherc.macros)
 (import [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
                                LevelBuilder MetamorphosisFactoryBuilder]]
-        [pyherc.data [Model]]
+        [pyherc.data [Model add-character]]
         [pyherc.data.geometry [area-around]]
         [pyherc.rules.metamorphosis.interface [morph]]
         [pyherc.generators [generate-creature creature-config]]
@@ -51,7 +51,7 @@
                                  (.with-character-generator generator)
                                  (.build)))
                             (.build))]]
-    (.add-creature level character #t(5 5))
+    (add-character level #t(5 5) character)
     {:model model
      :config config
      :generator generator

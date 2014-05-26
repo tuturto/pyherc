@@ -22,6 +22,7 @@ Module for Model related classes
 """
 
 from pyherc.aspects import log_debug
+from pyherc.data.new_level import get_characters
 
 ESCAPED_DUNGEON = 1
 DIED_IN_DUNGEON = 2
@@ -92,10 +93,9 @@ class Model():
         if level is None:
             return None
 
-        creatures = level.creatures
+        creatures = get_characters(level)
 
-        assert len(creatures) != 0
-        assert self.player in level.creatures
+        assert(len(creatures) > 0)
 
         while 1:
             for creature in creatures:

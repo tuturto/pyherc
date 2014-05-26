@@ -31,7 +31,7 @@
    :trap nil
    :location_types []
    :items []
-   :creatures []
+   :character nil
    :portal nil})
 
 (defn get-tile [level location]
@@ -143,4 +143,29 @@
     "removes item from level"
     (let [[map-tile (get-tile level item.location)]]
       (.remove (:items map-tile) item)
+      (setv item.location #t())
       (.remove level.-items item)))
+
+#d(defn add-character [level location character]
+    "add character to level"
+    (.append level.-characters character)
+    (setv character.location location)
+    (setv character.level level)
+    (assoc (get-or-create-tile level location) :character character))
+
+(defn get-character [level location]
+  "get characters in a given tile"
+  (let  [[map-tile (get-tile level location)]]
+    (when map-tile
+      (:character map-tile))))
+
+(defn get-characters [level]
+  "get all characters in level"
+  (genexpr character [character level.-characters]))
+
+#d(defn remove-character [level character]
+    "remove character from level"
+    (let [[map-tile (get-tile level character.location)]]
+      (.remove (:character map-tile) character)
+      (setv character.location #t())
+      (.remove level.-characters character)))

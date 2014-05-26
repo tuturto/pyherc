@@ -22,11 +22,11 @@ Module for testing time related functions
 """
 from hamcrest import assert_that, equal_to, has_item, is_, is_not
 from mockito import any, mock, verify
-from pyherc.data import Dungeon, Level, cooldown
+from pyherc.data import Dungeon, Level, cooldown, add_character
 from pyherc.data.effects import Effect
 from pyherc.data.model import Model
 from pyherc.test.builders import (CharacterBuilder, EffectBuilder,
-                                  RulesEngineBuilder)
+                                  RulesEngineBuilder, LevelBuilder)
 
 
 class TestTime:
@@ -67,13 +67,17 @@ class TestTime:
                             .build())
 
         self.model = Model()
+        level = (LevelBuilder()
+                 .with_model(self.model)
+                 .with_size((20, 20))
+                 .build())
         self.model.dungeon = Dungeon()
-        self.model.dungeon.levels = Level(mock(), (20, 20), 0, 0)
-
-        self.model.dungeon.levels.add_creature(self.creature1)
-        self.model.dungeon.levels.add_creature(self.creature2)
+        self.model.dungeon.levels = level
+        
+        add_character(level, (5, 5), self.creature1)
+        add_character(level, (6, 6), self.creature2)
+        add_character(level, (7, 7), self.creature3)
         self.model.player = self.creature3
-        self.model.dungeon.levels.add_creature(self.creature3)
 
         self.rules_engine = RulesEngineBuilder().build()
 
@@ -134,9 +138,10 @@ class TestEffectsAndTime:
 
         self.model = Model()
         self.model.player = self.creature
-        self.level = mock(Level)
-        self.level.creatures = [self.creature]
-        self.creature.level = self.level
+        self.level = (LevelBuilder()
+                      .with_model(self.model)
+                      .build())
+        add_character(self.level, (5, 5), self.creature)
         self.rules_engine = RulesEngineBuilder().build()
 
     def test_trigger_effect_on_time(self):
