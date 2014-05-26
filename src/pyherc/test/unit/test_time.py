@@ -233,11 +233,11 @@ class TestEffectsAndTime:
         """
         creature = (CharacterBuilder()
                         .with_tick(5)
-                        .with_level(self.level)
                         .build())
 
         self.model.player = creature
-        self.level.creatures = [creature]
+
+        add_character(self.level, (5, 5), creature)
 
         effect = (EffectBuilder()
                     .with_duration(5)
