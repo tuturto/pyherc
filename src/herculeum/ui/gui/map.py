@@ -314,9 +314,8 @@ class PlayMapWidget(QWidget):
                 new_glyph.setZValue(zorder_ornament)
                 new_glyph.setPos(location[0] * 32, location[1] * 32)
                 scene.addItem(new_glyph)
-
-        for item in self.current_level.items:
-            self.add_glyph(item, scene, zorder_item)
+            for item in tile['\ufdd0:items']:
+                self.add_glyph(item, scene, zorder_item)
 
         for creature in self.current_level.creatures:
             self.add_glyph(creature,
