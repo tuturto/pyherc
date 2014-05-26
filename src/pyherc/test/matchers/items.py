@@ -24,6 +24,7 @@ Module for customer matchers used in testing
 from hamcrest.core import anything
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+from pyherc.data import get_items
 
 
 class ContainsItem(BaseMatcher):
@@ -48,7 +49,7 @@ class ContainsItem(BaseMatcher):
         """
         count = 0
 
-        for item in item.items:
+        for item in get_items(item):
             if item.name == self.item:
                 count = count + 1
 

@@ -67,7 +67,7 @@ class TestItems():
                             .with_location((5, 5))
                             .build())
 
-        add_item(self.leve, (5, 5), self.item)
+        add_item(self.level, (5, 5), self.item)
 
         self.action_factory = (ActionFactoryBuilder()
                                     .with_inventory_factory()

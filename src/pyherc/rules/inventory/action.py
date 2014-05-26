@@ -22,7 +22,7 @@ Module defining classes related to inventory actions
 """
 from pyherc.aspects import log_debug, log_info
 from pyherc.events import DropEvent, PickUpEvent
-from pyherc.data import remove_item
+from pyherc.data import remove_item, add_item
 from pyherc.data.constants import Duration
 
 class PickUpAction():

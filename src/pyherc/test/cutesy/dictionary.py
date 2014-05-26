@@ -25,7 +25,7 @@ from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
 from pyherc.generators import get_effect_creator
 from pyherc.data.effects import DamageEffect, Heal, Poison
-from pyherc.data import level_size
+from pyherc.data import level_size, get_items
 from pyherc.data.geometry import find_direction
 from pyherc.rules import (attack, cast, drop_item, Dying, gain_domain,
                           is_move_legal, move, wait)
@@ -697,7 +697,7 @@ class HasDropped(BaseMatcher):
             self.fail_reason = 'item dropped to incorrect location'
             return False
 
-        if not self.item in self.item.level.items:
+        if not self.item in get_items(self.item.level):
             self.fail_reason = 'item not in level'
             return False
 
