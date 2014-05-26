@@ -169,3 +169,8 @@
       (assoc map-tile :character nil)
       (setv character.location #t())
       (.remove level.-characters character)))
+
+#d(defn move-character [level location character]
+    "move character to a new location"
+    (remove-character level character)
+    (add-character level location character))

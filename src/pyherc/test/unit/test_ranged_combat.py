@@ -31,6 +31,7 @@ from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder, LevelBuilder)
 from pyherc.test.matchers import AttackActionParameterMatcher, does_have
 from pyherc.data import wall_tile, add_character, remove_character
+from pyherc.data import move_character
 
 
 class TestRangedCombat():
@@ -152,10 +153,9 @@ class TestRangedCombat():
         Even when character is armed with ranged weapon, he can not use
         ranged attack against enemy that is standing right next to him
         """
-        remove_character(self.level, self.target)
-        add_character(self.level, (self.character.location[0] + 1,
-                                   self.character.location[1]),
-                      self.target)
+        move_character(self.level, (self.character.location[0] + 1,
+                                    self.character.location[1]),
+                       self.target)
 
         attack(self.character,
                3,

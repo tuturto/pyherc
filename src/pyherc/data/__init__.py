@@ -43,5 +43,4 @@ from .new_level import wall_tile, tile, blocks_los, ornamentation
 from .new_level import level_size, find_free_space, blocks_movement
 from .new_level import add_item, get_items, remove_item
 from .new_level import add_character, remove_character, get_character, get_characters
-        
-
+from .new_level import move_character        
