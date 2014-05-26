@@ -22,6 +22,7 @@ Classes for creature generation
 """
 
 from pyherc.aspects import log_debug, log_info
+from pyherc.data import add_character
 
 
 class CreatureAdderConfiguration():
@@ -155,6 +156,6 @@ class CreatureAdder():
 
             location = self.rng.choice(locations)
 
-            level.add_creature(creature, location)
+            add_character(level, location, creature)
 
     level_types = property(__get_level_types)

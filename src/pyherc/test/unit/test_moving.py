@@ -23,7 +23,7 @@ Module for testing moving
 
 from hamcrest import assert_that, equal_to, is_
 from mockito import mock
-from pyherc.data import Model, Portal, add_portal
+from pyherc.data import Model, Portal, add_portal, add_character, get_characters
 from pyherc.data.constants import Direction
 from pyherc.data.model import ESCAPED_DUNGEON
 from pyherc.ports import ActionsPort
@@ -136,7 +136,7 @@ class TestMoving():
         add_portal(self.level1, (5, 5), self.portal1)
         add_portal(self.level2, (10, 10), self.portal2, self.portal1)
 
-        self.level1.add_creature(self.character, (5, 5))
+        add_character(self.level1, (5, 5), self.character)
 
         self.actions = ActionsPort(ActionFactoryBuilder()
                                    .with_move_factory()
@@ -148,7 +148,7 @@ class TestMoving():
         """
         blocker = CharacterBuilder().build()
 
-        self.level2.add_creature(blocker, (10, 10))
+        add_character(self.level2, (10, 10), blocker)
 
         self.actions.move_character(character=self.character,
                                     direction=Direction.enter)
@@ -210,7 +210,7 @@ class TestMoving():
         Test that entering portal will add character to the creatures list
         """
         assert self.character.level == self.level1
-        assert self.character in self.level1.creatures
+        assert self.character in get_characters(self.level1)
 
         self.actions.move_character(character=self.character,
                                     direction=Direction.enter)
@@ -223,7 +223,7 @@ class TestMoving():
         Test that entering portal will remove character from level
         """
         assert self.character.level == self.level1
-        assert self.character in self.level1.creatures
+        assert self.character in get_characters(self.level1)
 
         self.actions.move_character(character=self.character,
                                     direction=Direction.enter)
@@ -332,8 +332,8 @@ class TestSwitchingPlaces():
         monster_2 = (CharacterBuilder()
                      .build())
 
-        level.add_creature(monster_1, (5, 5))
-        level.add_creature(monster_2, (6, 5))
+        add_character(level, (5, 5), monster_1)
+        add_character(level, (6, 5), monster_2)
 
         actions = ActionsPort(ActionFactoryBuilder()
                               .with_move_factory()

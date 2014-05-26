@@ -27,7 +27,7 @@ from pyherc.generators.spells import (targeting_single_target,
 from pyherc.rules.magic.interface import SpellCastingParameters
 from pyherc.test.builders import CharacterBuilder, LevelBuilder
 from pyherc.test.matchers import void_target_at, wall_target_at
-from pyherc.data import wall_tile
+from pyherc.data import wall_tile, add_character
 
 FLOOR = 1
 SOLID_WALL = 2
@@ -198,8 +198,7 @@ class TestSphericalAreaTargetting():
         """
         Spells with spherical area of effect should not target to square area
         """
-        self.level.add_creature(self.target3,
-                                (7, 7))
+        add_character(self.level, (7, 7), self.target3)
 
         params = SpellCastingParameters(caster = self.caster,
                                         direction = 7,

@@ -23,7 +23,7 @@ Public interface for combat rules
 
 from pyherc.aspects import log_debug, log_info
 from pyherc.rules.public import ActionParameters
-from pyherc.data import blocks_movement
+from pyherc.data import blocks_movement, get_character
 
 
 @log_info
@@ -55,7 +55,7 @@ def attack(character, direction, action_factory, rng):
             attack_type = 'melee'
         else:
             target_loc = character.get_location_at_direction(direction)
-            if character.level.get_creature_at(target_loc) is None:
+            if get_character(character.level, target_loc) is None:
                 if blocks_movement(character.level, target_loc):
                     attack_type = 'melee'
                 else:

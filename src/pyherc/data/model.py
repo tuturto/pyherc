@@ -93,9 +93,7 @@ class Model():
         if level is None:
             return None
 
-        creatures = get_characters(level)
-
-        assert(len(creatures) > 0)
+        creatures = list(get_characters(level))
 
         while 1:
             for creature in creatures:

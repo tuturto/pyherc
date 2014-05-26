@@ -21,7 +21,8 @@
 Module defining classes related to Move
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.data import blocks_movement
+from pyherc.data import blocks_movement, get_character, remove_character
+from pyherc.data import add_character
 from pyherc.data.constants import Duration
 from pyherc.data.geometry import find_direction
 from pyherc.data.model import ESCAPED_DUNGEON
@@ -73,10 +74,10 @@ class MoveAction():
 
             if self.new_level is not None:
                 if self.character.level != self.new_level:
-                    self.character.level.remove_creature(self.character)
-                    self.character.level = self.new_level
-                    self.new_level.add_creature(self.character,
-                                                self.new_location)
+                    remove_character(self.character.level, self.character)
+                    add_character(self.new_level,
+                                  self.new_location,
+                                  self.character)
 
             armour = self.character.inventory.armour
             if armour:
@@ -115,7 +116,7 @@ class MoveAction():
             if not blocks_movement(self.new_level,
                                    self.new_location):
                 if (not self.skip_creature_check and
-                        self.new_level.get_creature_at(self.new_location)):
+                        get_character(self.new_level, self.new_location)):
                     location_ok = False
             else:
                 location_ok = False

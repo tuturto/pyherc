@@ -33,6 +33,7 @@ from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
 from pyherc.test.matchers import has_creature, located_in_room
 from pyherc.test.builders import LevelBuilder
+from pyherc.data import get_characters
 
 
 class TestCreatureAdder():
@@ -105,8 +106,8 @@ class TestCreatureAdder():
         """
         Test basic case of adding creatures on the level
         """
-        assert_that(self.level.creatures, has_length(greater_than(3)))
-        assert_that(self.level.creatures, has_length(less_than(6)))
+        assert_that(get_characters(self.level), has_length(greater_than(3)))
+        assert_that(get_characters(self.level), has_length(less_than(6)))
 
         assert_that(self.level, has_creature('rat',
                                              greater_than_or_equal_to(3)))
@@ -116,7 +117,7 @@ class TestCreatureAdder():
         """
         Test that CreatureAdder will use location types passed to it
         """
-        dragon = [x for x in self.level.creatures
+        dragon = [x for x in get_characters(self.level)
                   if x.name == 'dragon'][0]
 
         assert_that(located_in_room(dragon))

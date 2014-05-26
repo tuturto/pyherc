@@ -25,7 +25,7 @@ from functools import partial
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.effects import EffectHandle
 from pyherc.data.geometry import get_target_in_direction, TargetData
-from pyherc.data import blocks_los
+from pyherc.data import blocks_los, get_character
 from pyherc.data.magic import Spell
 from pyherc.rules.los import get_fov_matrix
 
@@ -181,7 +181,7 @@ def targeting_spherical_area(parameters, radius):
         for x in x_range:
             for y in y_range:
                 if matrix[x][y]:
-                    creature = level.get_creature_at((x, y))
+                    creature = get_character(level, (x, y))
                     if creature:
                         targets.append(TargetData('character',
                                                   (x, y),
