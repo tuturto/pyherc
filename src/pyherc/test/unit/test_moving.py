@@ -216,7 +216,7 @@ class TestMoving():
                                     direction=Direction.enter)
 
         assert self.character.level == self.level2
-        assert self.character in self.level2.creatures
+        assert self.character in get_characters(self.level2)
 
     def test_entering_portal_removes_character_from_old_level(self):
         """
@@ -228,7 +228,7 @@ class TestMoving():
         self.actions.move_character(character=self.character,
                                     direction=Direction.enter)
 
-        assert self.character not in self.level1.creatures
+        assert self.character not in get_characters(self.level1)
 
     def test_entering_non_existent_portal(self):
         """

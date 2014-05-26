@@ -25,7 +25,7 @@ from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
 from pyherc.generators import get_effect_creator
 from pyherc.data.effects import DamageEffect, Heal, Poison
-from pyherc.data import level_size, get_items
+from pyherc.data import level_size, get_items, add_character
 from pyherc.data.geometry import find_direction
 from pyherc.rules import (attack, cast, drop_item, Dying, gain_domain,
                           is_move_legal, move, wait)
@@ -115,7 +115,7 @@ def place(character, location):
     :param location: location to place the character
     :type location: LevelLocation
     """
-    location.level.add_creature(character, location.location)
+    add_character(location.level, location.location, character)
 
 
 def middle_of(level):

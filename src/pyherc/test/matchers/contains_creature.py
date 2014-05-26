@@ -24,6 +24,7 @@ Module for customer matchers used in testing
 from hamcrest import is_not
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+from pyherc.data import get_characters
 
 
 class ContainsCreature(BaseMatcher):
@@ -48,7 +49,7 @@ class ContainsCreature(BaseMatcher):
         """
         count = 0
 
-        for creature in item.creatures:
+        for creature in get_characters(item):
             if creature.name == self.creature:
                 count = count + 1
 

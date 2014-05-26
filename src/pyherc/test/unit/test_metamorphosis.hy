@@ -21,7 +21,7 @@
 (require pyherc.macros)
 (import [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
                                LevelBuilder MetamorphosisFactoryBuilder]]
-        [pyherc.data [Model add-character]]
+        [pyherc.data [Model add-character get-characters]]
         [pyherc.data.geometry [area-around]]
         [pyherc.rules.metamorphosis.interface [morph]]
         [pyherc.generators [generate-creature creature-config]]
@@ -66,8 +66,8 @@
         [character (:character context)]
         [action-factory (:action-factory context)]]
     (morph character "fire fungi" action-factory)
-    (let [[morphed-character (first level.creatures)]]
-      (assert-that (len level.creatures) (is- (equal-to 1)))
+    (let [[morphed-character (first (list (get-characters level)))]]
+      (assert-that (count (get-characters level)) (is- (equal-to 1)))
       (assert-that morphed-character.name (is- (equal-to "fire fungi"))))))
 
 (defn test-destroying-characters-in-metamorphosis []
@@ -78,8 +78,8 @@
         [action-factory (:action-factory context)]
         [generator (:generator context)]]
     (ap-each (area-around character.location)
-             (.add-creature level (generator "fungi") it))
-    (assert-that (len level.creatures) (is- (equal-to 9)))
-    (let [[destroyed (ap-filter (!= it character) level.creatures)]]
+             (add-character level it (generator "fungi")))
+    (assert-that (count (get-characters level)) (is- (equal-to 9)))
+    (let [[destroyed (ap-filter (!= it character) (get-characters level))]]
       (morph character "fire fungi" action-factory destroyed))
-    (assert-that (len level.creatures) (is- (equal-to 1)))))
+    (assert-that (count (get-characters level)) (is- (equal-to 1)))))

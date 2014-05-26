@@ -21,7 +21,7 @@
 (require pyherc.aspects)
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
-        [pyherc.data [skill-ready? cooldown]]
+        [pyherc.data [skill-ready? cooldown add-character remove-character]]
         [pyherc.data.constants [Duration]]
 	[pyherc.events.metamorphosis [MetamorphosisEvent]])
 
@@ -44,12 +44,12 @@
                 (let [[new-character (self.character-generator self.new-character-name)]
                       [location self.character.location]
                       [level self.character.level]]
-                  (.remove-creature level self.character)
-                  (.add-creature level new-character location)
+                  (remove-character level self.character)
+                  (add-character level location new-character)
                   (.add-to-tick new-character Duration.slow)
                   (cooldown new-character :metamorphosis (* 2 Duration.very-slow))
                   (ap-each self.destroyed-characters
-                           (.remove-creature level it))
+                           (remove-character level it))
                   (.raise-event self.character (MetamorphosisEvent self.character
                                                                    new-character
                                                                    self.destroyed-characters))))]])

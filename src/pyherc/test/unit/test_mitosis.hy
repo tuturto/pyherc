@@ -21,7 +21,7 @@
 (require pyherc.macros)
 (import [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
                                LevelBuilder MitosisFactoryBuilder]]
-        [pyherc.data [Model]]
+        [pyherc.data [Model add-character get-characters]]
         [pyherc.data.geometry [distance-between area-around]]
         [pyherc.rules.mitosis.interface [perform-mitosis mitosis-legal?]]
         [pyherc.generators [generate-creature creature-config]]
@@ -50,7 +50,7 @@
                                  (.with-character-limit 10)
                                  (.build)))
                             (.build))]]
-    (.add-creature level character #t(5 5))
+    (add-character level #t(5 5) character)
     {:model model
      :config config
      :generator generator
@@ -64,7 +64,7 @@
         [character (:character context)]
         [action-factory (:action-factory context)]]
     (perform-mitosis character action-factory)
-    (assert-that (len level.creatures) (is- (equal-to 2)))))
+    (assert-that (count (get-characters level)) (is- (equal-to 2)))))
 
 (defn test-new-character-is-generated-next-to-old-one []
   (let [[context (setup)]
@@ -72,8 +72,8 @@
         [character (:character context)]
         [action-factory (:action-factory context)]]
     (perform-mitosis character action-factory)
-    (let [[character₀ (first level.creatures)]
-          [character₁ (second level.creatures)]
+    (let [[character₀ (first (list (get-characters level)))]
+          [character₁ (second (list (get-characters level)))]
           [distance (distance-between character₀ character₁)]]
       (assert-that distance (is- (less-than 2)))
       (assert-that distance (is- (greater-than-or-equal-to 1))))))
@@ -86,9 +86,9 @@
         [generator (:generator context)]
         [surrounding-tiles (area-around character.location)]]
     (ap-each surrounding-tiles (let [[new-character (generator "fungi")]]
-                                 (.add-creature level new-character it)))
+                                 (add-character level it new-character)))
     (perform-mitosis character action-factory)
-    (assert-that (len level.creatures) (is- (equal-to 9)))))
+    (assert-that (count (get-characters level)) (is- (equal-to 9)))))
 
 (defn test-character-limit-is-observed []
   (let [[context (setup)]
@@ -97,5 +97,5 @@
         [action-factory (:action-factory context)]
         [generator (:generator context)]
         [surrounding-tiles (area-around character.location)]]
-    (ap-dotimes 9 (.add-creature level (generator "fungi") #t(it 2)))
+    (ap-dotimes 9 (add-character level #t(it 2) (generator "fungi")))
     (assert-that (mitosis-legal? character action-factory) (is- (equal-to false)))))

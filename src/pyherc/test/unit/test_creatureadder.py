@@ -106,8 +106,8 @@ class TestCreatureAdder():
         """
         Test basic case of adding creatures on the level
         """
-        assert_that(get_characters(self.level), has_length(greater_than(3)))
-        assert_that(get_characters(self.level), has_length(less_than(6)))
+        assert_that(list(get_characters(self.level)), has_length(greater_than(3)))
+        assert_that(list(get_characters(self.level)), has_length(less_than(6)))
 
         assert_that(self.level, has_creature('rat',
                                              greater_than_or_equal_to(3)))

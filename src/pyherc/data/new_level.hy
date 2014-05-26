@@ -166,6 +166,6 @@
 #d(defn remove-character [level character]
     "remove character from level"
     (let [[map-tile (get-tile level character.location)]]
-      (.remove (:character map-tile) character)
+      (assoc map-tile :character nil)
       (setv character.location #t())
       (.remove level.-characters character)))
