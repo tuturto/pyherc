@@ -35,6 +35,7 @@ from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
 from PyQt4.QtGui import (QColor, QFont, QGraphicsPixmapItem, QGraphicsScene,
                          QGraphicsSimpleTextItem, QGraphicsView, QHBoxLayout,
                          QTransform, QVBoxLayout, QWidget)
+from pyherc.data import get_characters
 
 
 class PlayMapWindow(QWidget):
@@ -317,7 +318,7 @@ class PlayMapWidget(QWidget):
             for item in tile['\ufdd0:items']:
                 self.add_glyph(item, scene, zorder_item)
 
-        for creature in self.current_level.creatures:
+        for creature in get_characters(self.current_level):
             self.add_glyph(creature,
                            scene,
                            zorder_character)

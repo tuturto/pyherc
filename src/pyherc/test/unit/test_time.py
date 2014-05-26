@@ -73,7 +73,7 @@ class TestTime:
                  .build())
         self.model.dungeon = Dungeon()
         self.model.dungeon.levels = level
-        
+
         add_character(level, (5, 5), self.creature1)
         add_character(level, (6, 6), self.creature2)
         add_character(level, (7, 7), self.creature3)
@@ -201,8 +201,7 @@ class TestEffectsAndTime:
                         )
 
 
-        self.level.creatures = [self.creature,
-                                creature2]
+        add_character(self.level, (6, 6), creature2)
 
         next_creature = self.model.get_next_creature(self.rules_engine)
         assert_that(effect1.tick, is_(equal_to(effect2.tick)))

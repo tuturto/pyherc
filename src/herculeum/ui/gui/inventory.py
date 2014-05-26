@@ -21,7 +21,7 @@
 Module for displaying inventory
 """
 from herculeum.ui.controllers import InventoryController
-from pyherc.data import Item
+from pyherc.data import Item, get_items
 from PyQt4.QtCore import pyqtSignal, Qt
 from PyQt4.QtGui import (QApplication, QFont, QGridLayout, QHBoxLayout, QLabel,
                          QPainter, QPixmap, QTextEdit, QVBoxLayout, QWidget)
@@ -414,7 +414,7 @@ class InventoryWidget(QWidget):
         .. versionadded:: 0.6
         """
         self.items_carried.show_items(self.character.inventory)
-        items = self.character.level.get_items_at(self.character.location)
+        items = get_items(self.character.level, self.character.location)
         self.items_in_ground.show_items(items)
         self.character_inventory.show_character()
 

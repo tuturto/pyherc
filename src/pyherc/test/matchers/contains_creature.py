@@ -110,7 +110,7 @@ class IsLocatedIn(BaseMatcher):
         """
         self.item = item
 
-        if item in self.level.creatures:
+        if item in get_characters(self.level):
             return True
         else:
             return False
@@ -127,7 +127,7 @@ class IsLocatedIn(BaseMatcher):
         Describe this mismatch
         """
         mismatch_description.append('Was level with creatures {0}'
-                                    .format(self.level.creatures))
+                                    .format(get_characters(self.level)))
 
 
 def is_in(level):
