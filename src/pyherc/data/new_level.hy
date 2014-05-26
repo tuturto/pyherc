@@ -165,10 +165,9 @@
 
 #d(defn remove-character [level character]
     "remove character from level"
-    (let [[map-tile (get-tile level character.location)]]
-      (assoc map-tile :character nil)
-      (setv character.location #t())
-      (.remove level.-characters character)))
+    (assoc (get-tile level character.location) :character nil)
+    (setv character.location #t())
+    (.remove level.-characters character))
 
 #d(defn move-character [level location character]
     "move character to a new location"

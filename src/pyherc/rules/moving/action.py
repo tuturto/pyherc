@@ -71,15 +71,9 @@ class MoveAction():
             old_location = self.character.location
             direction = find_direction(old_location, self.new_location)
 
-            if self.new_level is not None:
-                if self.character.level != self.new_level:
-                    move_character(self.character.level,
-                                   self.new_location,
-                                   self.character)
-            else:
-                move_character(self.character.level,
-                               self.new_location,
-                               self.character)
+            move_character(self.new_level,
+                           self.new_location,
+                           self.character)
 
             armour = self.character.inventory.armour
             if armour:

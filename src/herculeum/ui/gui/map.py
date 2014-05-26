@@ -35,7 +35,7 @@ from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
 from PyQt4.QtGui import (QColor, QFont, QGraphicsPixmapItem, QGraphicsScene,
                          QGraphicsSimpleTextItem, QGraphicsView, QHBoxLayout,
                          QTransform, QVBoxLayout, QWidget)
-from pyherc.data import get_characters
+from pyherc.data import get_characters, get_items
 
 
 class PlayMapWindow(QWidget):
@@ -514,7 +514,7 @@ class PlayMapWidget(QWidget):
         """
         player = self.model.player
         level = player.level
-        items = level.get_items_at(player.location)
+        items = get_items(level, player.location)
 
         if items != None and len(items) > 0:
             pick_up(player,

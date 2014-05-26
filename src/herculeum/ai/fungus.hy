@@ -23,6 +23,7 @@
 (require hy.contrib.anaphoric)
 (import [pyherc.aspects [log-debug]]
 	[herculeum.ai.basic [attack-enemy wait]]
+        [pyherc.data [get-character]]
         [pyherc.data.geometry [area-around]]
         [pyherc.rules.mitosis.interface [perform-mitosis mitosis-legal?]]
         [pyherc.rules.metamorphosis.interface [morph morph-legal?]]
@@ -84,13 +85,13 @@
     (let [[character ai.character]
           [level character.level]
           [location character.location]
-          [characters (ap-map (.get-creature-at level it) (area-around location))]]
+          [characters (ap-map (get-character level it) (area-around location))]]
       (ap-filter (friend? character it) characters)))
 
 #d(defn characters-around [level location]
     "get characters around given location"
     (ap-filter it
-               (ap-map (.get-creature-at level it)
+               (ap-map (get-character level it)
                        (area-around location))))
 
 #d(defn friend? [character-0 character-1]
@@ -105,7 +106,7 @@
 	  [monsters []]]
       (for [x (range (- (x-coordinate loc) 1) (+ (x-coordinate loc) 2))]
 	(for [y (range (- (y-coordinate loc) 1) (+ (y-coordinate loc) 2))]
-	  (let [[creature (.get-creature-at level #t(x y))]]
+	  (let [[creature (get-character level #t(x y))]]
 	    (when (and creature
 		       (!= creature ai.character)
 		       (!= creature.name ai.character.name))
