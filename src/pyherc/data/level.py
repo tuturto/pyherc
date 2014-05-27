@@ -54,7 +54,6 @@ class Level():
 
         self.model = model
         self.tiles = {}
-        self.traps = []
         self.__location_type = []
         self.lit = []
 
@@ -70,43 +69,10 @@ class Level():
                     temp_row.append(None)
                 self.__location_type.append(temp_row)
 
-            for loc_x in range(0, size[0] + 1):
-                temp_row = []
-                for loc_y in range(0, size[1] + 1):
-                    temp_row.append([])
-                self.traps.append(temp_row)
-
         self._items = []
         self._characters = []
         self.full_update_needed = True
         self.dirty_rectangles = []
-
-    def add_trap(self, trap, location):
-        """
-        Add a trap to level
-
-        :param trap: trap to add
-        :type trap: Trap
-        :param location: location to add the trap
-        :type location: (int, int)
-
-        .. versionadded:: 0.11
-        """
-        self.traps[location[0]][location[1]].append(trap)
-        trap.location = location
-
-    def get_traps(self, location):
-        """
-        Get traps at given location
-
-        :param location: location to get traps from
-        :type location: (int, int)
-        :returns: list of traps
-        :rtype: [Trap]
-
-        .. versionadded:: 0.11
-        """
-        return self.traps[location[0]][location[1]]
 
     @log_debug
     def set_location_type(self, location, location_type):

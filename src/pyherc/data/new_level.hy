@@ -173,3 +173,13 @@
     "move character to a new location"
     (remove-character character.level character)
     (add-character level location character))
+
+#d(defn add-trap [level location trap]
+    "add trap to level"
+    (assoc (get-or-create-tile level location) :trap trap))
+
+(defn get-trap [level location]
+  "get trap in a given tile"
+  (let  [[map-tile (get-tile level location)]]
+    (when map-tile
+      (:trap map-tile))))
