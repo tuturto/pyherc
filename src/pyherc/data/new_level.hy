@@ -171,5 +171,5 @@
 
 #d(defn move-character [level location character]
     "move character to a new location"
-    (remove-character level character)
+    (remove-character character.level character)
     (add-character level location character))
