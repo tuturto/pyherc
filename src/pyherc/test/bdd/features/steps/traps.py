@@ -21,6 +21,7 @@
 
 from pyherc.test.bdd.features.helpers import default_context, get_entity
 from pyherc.test.cutesy import pit_trap
+from pyherc.data import add_trap
 
 
 @given('{trap_name} is next to {entity_name}')
@@ -30,6 +31,8 @@ def impl(context, trap_name, entity_name):
     trap.name = trap_name
 
     entity = get_entity(context, entity_name)
-    entity.level.add_trap(trap,
-                          (entity.location[0] + 1, entity.location[1]))
+    add_trap(entity.level,
+             (entity.location[0] + 1, entity.location[1]),
+             trap)
+
     context.places.append(trap)

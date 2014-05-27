@@ -29,7 +29,7 @@
    :wall nil
    :ornamentation nil
    :trap nil
-   :location_types []
+   :tags []
    :items []
    :character nil
    :portal nil})
@@ -183,3 +183,14 @@
   (let  [[map-tile (get-tile level location)]]
     (when map-tile
       (:trap map-tile))))
+
+(defn add-location-tag [level location tag]
+  "add tag to given location")
+
+(defn get-location-tags [level location]
+  "get tags in given location")
+
+(defn get-locations-by-tag [level tag]
+  "get locations by tag"
+  (genexpr location [#t(location tile) (.items level.tiles)] 
+           (in tag (:tags tile))))

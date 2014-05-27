@@ -22,7 +22,7 @@ Classes to represent division of levels
 """
 
 import logging
-from pyherc.data import floor_tile, wall_tile
+from pyherc.data import floor_tile, wall_tile, add_trap
 
 
 class Section():
@@ -448,7 +448,7 @@ class Section():
         x_loc = self.__get_left_edge() + location[0]
         y_loc = self.__get_top_edge() + location[1]
 
-        self.level.add_trap(trap, (x_loc, y_loc))
+        add_trap(self.level, (x_loc, y_loc), trap)
 
 
 class Connection():

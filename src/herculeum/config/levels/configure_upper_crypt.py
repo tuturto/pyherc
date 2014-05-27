@@ -60,7 +60,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     floor_constructed = 'constructed floor'
     floor_tiled = surface_manager.add_icon('floor_tiled', ':tiled_floor.png', '.')
 
-    wall_empty = surface_manager.add_icon('empty wall', ':transparent.png', None)
+    wall_empty = None
     wall_natural = 'natural wall'
     wall_constructed = 'constructed wall'
     wall_ground = surface_manager.add_icon('wall_ground', ':ground_wall.png', ' ')
