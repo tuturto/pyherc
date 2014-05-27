@@ -23,8 +23,8 @@ Tests for Level
 
 from hamcrest import (assert_that, is_, equal_to,
                       contains_inanyorder)
-from pyherc.data import Level, Model, level_size
-
+from pyherc.data import Level, Model, level_size, get_locations_by_tag
+from pyherc.data import add_location_tag
 
 class TestLevel:
     """
@@ -52,12 +52,12 @@ class TestLevel:
         """
         Test that level can report what areas of it are marked as being room
         """
-        self.level.set_location_type((5, 5), 'room')
-        self.level.set_location_type((5, 6), 'room')
-        self.level.set_location_type((8, 8), 'room')
-        self.level.set_location_type((9, 8), 'room')
+        add_location_tag(self.level, (5, 5), 'room')
+        add_location_tag(self.level, (5, 6), 'room')
+        add_location_tag(self.level, (8, 8), 'room')
+        add_location_tag(self.level, (9, 8), 'room')
 
-        rooms = self.level.get_locations_by_type('room')
+        rooms = get_locations_by_tag(self.level, 'room')
 
         assert_that(rooms, contains_inanyorder((5, 5), (5, 6),
                                                (8, 8), (9, 8)))
@@ -66,17 +66,17 @@ class TestLevel:
         """
         Test that getting locations by type does not return all locations
         """
-        self.level.set_location_type((5, 5), 'room')
-        self.level.set_location_type((5, 6), 'room')
-        self.level.set_location_type((8, 8), 'room')
-        self.level.set_location_type((9, 8), 'room')
+        add_location_tag(self.level, (5, 5), 'room')
+        add_location_tag(self.level, (5, 6), 'room')
+        add_location_tag(self.level, (8, 8), 'room')
+        add_location_tag(self.level, (9, 8), 'room')
 
-        self.level.set_location_type((6, 5), 'corridor')
-        self.level.set_location_type((6, 6), 'corridor')
-        self.level.set_location_type((6, 7), 'corridor')
-        self.level.set_location_type((6, 8), 'corridor')
+        add_location_tag(self.level, (6, 5), 'corridor')
+        add_location_tag(self.level, (6, 6), 'corridor')
+        add_location_tag(self.level, (6, 7), 'corridor')
+        add_location_tag(self.level, (6, 8), 'corridor')
 
-        rooms = self.level.get_locations_by_type('room')
+        rooms = get_locations_by_tag(self.level, 'room')
 
         assert_that(rooms, contains_inanyorder((5, 5), (5, 6),
                                                (8, 8), (9, 8)))

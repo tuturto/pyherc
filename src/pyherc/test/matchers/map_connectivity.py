@@ -22,7 +22,7 @@ Module for customer matchers used in testing
 """
 
 from hamcrest.core.base_matcher import BaseMatcher
-from pyherc.data import wall_tile, get_tile
+from pyherc.data import wall_tile, get_tile, get_location_tags
 
 
 class MapConnectivity(BaseMatcher):
@@ -161,7 +161,7 @@ def located_in_room(entity):
     """
     level = entity.level
 
-    if level.get_location_type(entity.location) == 'room':
+    if 'room' in get_location_tags(level, entity.location):
         return True
     else:
         return False

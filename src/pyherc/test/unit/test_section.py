@@ -25,9 +25,9 @@ import random
 
 from hamcrest import (assert_that,
                       contains_inanyorder, equal_to, has_items, has_length, is_,
-                      is_not)
+                      is_not, has_item)
 from mockito import mock
-from pyherc.data import Level, floor_tile, wall_tile
+from pyherc.data import Level, floor_tile, wall_tile, get_location_tags
 from pyherc.generators.level.partitioners.section import Section
 
 
@@ -262,8 +262,7 @@ class TestSectionLevelAccess():
         """
         self.section.set_floor((2, 3), self.floor_rock, 'corridor')
 
-        assert_that(self.level.get_location_type((2, 3)),
-                                    is_(equal_to('corridor')))
+        assert_that(get_location_tags(self.level, (2, 3)), has_item('corridor'))
 
 class TestSectionLevelAccessWithOffset():
     """

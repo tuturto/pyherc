@@ -185,12 +185,19 @@
       (:trap map-tile))))
 
 (defn add-location-tag [level location tag]
-  "add tag to given location")
+  "add tag to given location"
+  (let [[map-tile (get-or-create-tile level location)]]
+    (.append (:tags map-tile) tag)))
 
 (defn get-location-tags [level location]
-  "get tags in given location")
+  "get tags in given location"
+  (let [[map-tile (get-tile level location)]]
+    (if map-tile
+      (genexpr tag [tag (:tags map-tile)])
+      (genexpr tag [tag []]))))
 
 (defn get-locations-by-tag [level tag]
   "get locations by tag"
   (genexpr location [#t(location tile) (.items level.tiles)] 
-           (in tag (:tags tile))))
+           (or (in tag (:tags tile))
+               (= tag "any"))))

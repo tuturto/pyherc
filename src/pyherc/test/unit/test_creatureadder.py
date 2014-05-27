@@ -33,7 +33,7 @@ from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
 from pyherc.test.matchers import has_creature, located_in_room
 from pyherc.test.builders import LevelBuilder
-from pyherc.data import get_characters
+from pyherc.data import get_characters, add_location_tag
 
 
 class TestCreatureAdder():
@@ -58,7 +58,7 @@ class TestCreatureAdder():
         self.level = (LevelBuilder()
                         .with_size((60, 40))
                         .build())
-        self.level.set_location_type((10, 10), 'room')
+        add_location_tag(self.level, (10, 10), 'room')
 
         config = {}
         config['rat'] = creature_config(name='rat',

@@ -24,7 +24,7 @@ Classs needed for generating levels
 import logging
 
 from pyherc.aspects import log_debug, log_info
-from pyherc.data import Level, Portal, add_portal
+from pyherc.data import Level, Portal, add_portal, get_locations_by_tag
 
 
 class LevelGeneratorFactory():
@@ -217,7 +217,7 @@ class LevelGenerator():
 
         # all this needs to be cleaned up
         if portal is not None:
-            rooms = new_level.get_locations_by_type('room')
+            rooms = list(get_locations_by_tag(new_level, 'room'))
             if len(rooms) > 0:
                 new_portal = Portal(icons=(portal.other_end_icon, None),
                                     level_generator_name=None)

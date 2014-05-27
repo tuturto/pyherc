@@ -22,7 +22,7 @@ Classes to represent division of levels
 """
 
 import logging
-from pyherc.data import floor_tile, wall_tile, add_trap
+from pyherc.data import floor_tile, wall_tile, add_trap, add_location_tag
 
 
 class Section():
@@ -336,7 +336,7 @@ class Section():
         floor_tile(self.level, (x_loc, y_loc), tile)
 
         if location_type is not None:
-            self.level.set_location_type((x_loc, y_loc), location_type)
+            add_location_tag(self.level, (x_loc, y_loc), location_type)
 
     def get_floor(self, location):
         """
@@ -372,7 +372,7 @@ class Section():
 
         wall_tile(self.level, (x_loc, y_loc), tile)
         if location_type is not None:
-            self.level.set_location_type(location, location_type)
+            add_location_tag(self.level, location, location_type)
 
     def set_location_type(self, location, location_type):
         """
@@ -388,7 +388,7 @@ class Section():
         x_loc = self.__get_left_edge() + location[0]
         y_loc = self.__get_top_edge() + location[1]
 
-        self.level.set_location_type((x_loc, y_loc), location_type)
+        add_location_tag(self.level, (x_loc, y_loc), location_type)
 
     def get_wall(self, location):
         """

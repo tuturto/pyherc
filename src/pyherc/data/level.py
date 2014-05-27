@@ -54,7 +54,6 @@ class Level():
 
         self.model = model
         self.tiles = {}
-        self.__location_type = []
         self.lit = []
 
         if size[0] != 0 and size[1] != 0:
@@ -63,58 +62,10 @@ class Level():
                     floor_tile(self, (loc_x, loc_y), floor_type)
                     wall_tile(self, (loc_x, loc_y), wall_type)
 
-            for loc_x in range(0, size[0] + 1):
-                temp_row = []
-                for loc_y in range(0, size[1] + 1):
-                    temp_row.append(None)
-                self.__location_type.append(temp_row)
-
         self._items = []
         self._characters = []
         self.full_update_needed = True
         self.dirty_rectangles = []
-
-    @log_debug
-    def set_location_type(self, location, location_type):
-        """
-        Set type of location
-
-        :param  location: location to set
-        :type location: (integer, integer)
-        :param location_type: type of location
-        :type location_type: int
-        """
-        self.__location_type[location[0]][location[1]] = location_type
-
-    def get_location_type(self, location):
-        """
-        Get type of location
-
-        :param location: location to get
-        :type location: (integer, integer)
-        :returns: Type of location
-        :rtype: int
-        """
-        return self.__location_type[location[0]][location[1]]
-
-    def get_locations_by_type(self, location_type):
-        """
-        Get locations marked as rooms
-
-        :param location_type: Type of location to search.
-        :type location_type: string
-        :returns: locations identifying rooms
-        :rtype: [(int, int)]
-        """
-        rooms = []
-        for loc_x in range(len(self.__location_type)):
-            for loc_y in range(len(self.__location_type[0])):
-                if (self.__location_type[loc_x][loc_y] == location_type or
-                        self.__location_type[loc_x][loc_y] is not None
-                        and location_type == 'any'):
-                    rooms.append((loc_x, loc_y))
-
-        return rooms
 
     def heuristic_estimate_of_distance(self, start, goal):
         """

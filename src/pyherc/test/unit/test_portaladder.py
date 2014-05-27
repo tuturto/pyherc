@@ -24,7 +24,7 @@ import random
 
 from hamcrest import assert_that, equal_to, has_length, is_
 from mockito import mock
-from pyherc.data import Level, get_portal
+from pyherc.data import Level, get_portal, add_location_tag
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.portals import (PortalAdder,
                                              PortalAdderConfiguration,
@@ -63,7 +63,7 @@ class TestPortalAdder():
 
         for loc_y in range(8, 12):
             for loc_x in range(8, 12):
-                level.set_location_type((loc_x, loc_y), 'room')
+                add_location_tag(level, (loc_x, loc_y), 'room')
 
         portal_adder = PortalAdder((1, 2),
                                    'room',
@@ -98,7 +98,7 @@ class TestPortalAdder():
 
         for loc_y in range(8, 12):
             for loc_x in range(8, 12):
-                level.set_location_type((loc_x, loc_y), 'room')
+                add_location_tag(level, (loc_x, loc_y), 'room')
 
         portal_adder = PortalAdder((1, 2),
                                    'room',

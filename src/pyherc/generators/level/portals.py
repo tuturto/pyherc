@@ -22,7 +22,7 @@ Module for adding portals
 """
 
 from pyherc.aspects import log_debug, log_info
-from pyherc.data import Portal, add_portal
+from pyherc.data import Portal, add_portal, get_locations_by_tag
 
 
 class PortalAdderConfiguration():
@@ -129,7 +129,7 @@ class PortalAdder():
         :param level: level to modify
         :type level: Level
         """
-        locations = level.get_locations_by_type(self.location_type)
+        locations = list(get_locations_by_tag(level, self.location_type))
 
         if len(locations) > 0:
             location = self.rng.choice(locations)

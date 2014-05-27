@@ -22,7 +22,7 @@ Classes for creature generation
 """
 
 from pyherc.aspects import log_debug, log_info
-from pyherc.data import add_character
+from pyherc.data import add_character, get_locations_by_tag
 
 
 class CreatureAdderConfiguration():
@@ -152,7 +152,7 @@ class CreatureAdder():
             if location_type is None:
                 location_type = 'any'
 
-            locations = level.get_locations_by_type('room')
+            locations = list(get_locations_by_tag(level, 'room'))
 
             location = self.rng.choice(locations)
 

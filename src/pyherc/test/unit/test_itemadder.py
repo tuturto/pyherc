@@ -25,7 +25,7 @@ from random import Random
 from hamcrest import (assert_that,
                       greater_than, greater_than_or_equal_to, has_length,
                       less_than)
-from pyherc.data import Level, Model, get_items
+from pyherc.data import Level, Model, get_items, add_location_tag
 from pyherc.data.effects import EffectHandle
 from pyherc.generators.item import (ItemConfiguration, ItemConfigurations,
                                     ItemGenerator, WeaponConfiguration)
@@ -62,10 +62,10 @@ class TestItemAdder():
                       .with_floor_tile(self.floor_rock)
                       .with_wall_tile(self.wall_empty)
                       .build())
-        self.level.set_location_type((10, 10), 'room')
+        add_location_tag(self.level, (10, 10), 'room')
 
         for x_loc in range(11, 30):
-            self.level.set_location_type((x_loc, 10), 'corridor')
+            add_location_tag(self.level, (x_loc, 10), 'corridor')
 
         item_config = ItemConfigurations(Random())
 
