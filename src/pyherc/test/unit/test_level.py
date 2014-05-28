@@ -23,8 +23,9 @@ Tests for Level
 
 from hamcrest import (assert_that, is_, equal_to,
                       contains_inanyorder)
-from pyherc.data import Level, Model, level_size, get_locations_by_tag
+from pyherc.data import Model, level_size, get_locations_by_tag
 from pyherc.data import add_location_tag
+from pyherc.test.builders import LevelBuilder
 
 class TestLevel:
     """
@@ -40,13 +41,15 @@ class TestLevel:
         """
         Setup test case
         """
-        self.level = Level(Model(), size = (20, 10))
+        self.level = (LevelBuilder()
+                      .with_size((20, 10))
+                      .build())
 
     def test_get_size(self):
         """
         Test that Level can report size
         """
-        assert_that(level_size(self.level), is_(equal_to((0, 20, 0, 10))))
+        assert_that(level_size(self.level), is_(equal_to((0, 19, 0, 9))))
 
     def test_get_rooms(self):
         """

@@ -20,7 +20,7 @@
 """
 Module for basic decorators
 """
-from pyherc.data import floor_tile, wall_tile, ornamentation
+from pyherc.data import floor_tile, wall_tile, ornamentation, get_tiles
 
 class Decorator():
     """
@@ -94,7 +94,7 @@ class ReplacingDecorator(Decorator):
         ground_tiles = self.configuration.ground_config
         wall_tiles = self.configuration.wall_config
 
-        for tile in level.tiles.values():
+        for location, tile in get_tiles(level):
             proto_tile = tile['\ufdd0:floor']
             if proto_tile in ground_tiles:
                 tile['\ufdd0:floor'] = ground_tiles[proto_tile]
@@ -146,7 +146,7 @@ class WallBuilderDecorator(Decorator):
         """
         empty_tile = self.configuration.empty_tile
 
-        for loc, tile in level.tiles.items():
+        for loc, tile in get_tiles(level):
             if tile['\ufdd0:wall'] == empty_tile:
                 self.check_and_replace((loc[0] - 1, loc[1]), level)
                 self.check_and_replace((loc[0] + 1, loc[1]), level)
@@ -310,7 +310,7 @@ class DirectionalWallDecorator(Decorator):
         """
         wall = self.configuration.wall
 
-        for location, tile in level.tiles.items():
+        for location, tile in get_tiles(level):
             if tile['\ufdd0:wall'] == wall:
                 tile['\ufdd0:wall'] = self.get_wall_tile(level, location)
 
@@ -425,7 +425,7 @@ class FloorBuilderDecorator(Decorator):
         :type level: Level
         """
         floor = self.configuration.floor
-        for location, tile in level.tiles.items():
+        for location, tile in get_tiles(level):
             if tile['\ufdd0:floor'] == floor:
                 floor_tile(level, location,
                            self.get_floor_tile(level, location))
@@ -484,7 +484,7 @@ class WallOrnamentDecorator(Decorator):
         wall = self.configuration.wall_tile
         rate = self.configuration.rate
 
-        for location, tile in level.tiles.items():
+        for location, tile in get_tiles(level):
             if tile['\ufdd0:wall'] == wall:
                 if self.configuration.rng.randint(0, 100) < rate:
                     if floor_tile(level, (location[0], location[1] + 1)):

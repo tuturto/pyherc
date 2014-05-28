@@ -25,7 +25,7 @@ from random import Random
 from hamcrest import (assert_that,
                       greater_than, greater_than_or_equal_to, has_length,
                       less_than)
-from pyherc.data import Level, Model, get_items, add_location_tag
+from pyherc.data import Model, get_items, add_location_tag
 from pyherc.data.effects import EffectHandle
 from pyherc.generators.item import (ItemConfiguration, ItemConfigurations,
                                     ItemGenerator, WeaponConfiguration)

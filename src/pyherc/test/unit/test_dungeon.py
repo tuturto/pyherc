@@ -22,8 +22,9 @@ Module for testing dungeon
 """
 
 from mockito import mock
-from pyherc.data import Level, Portal, floor_tile, wall_tile, add_portal
+from pyherc.data import Portal, floor_tile, wall_tile, add_portal
 from pyherc.data import get_portal
+from pyherc.test.builders import LevelBuilder
 
 
 class TestDungeon:
@@ -41,7 +42,12 @@ class TestDungeon:
         """
         Test that simple level creation works
         """
-        level = Level(mock(), [20, 20], self.floor_rock, self.wall_empty)
+        level = (LevelBuilder()
+                 .with_size((20, 20))
+                 .with_floor_tile(self.floor_rock)
+                 .with_wall_tile(self.wall_empty)
+                 .build())
+
         assert not (level is None)
         assert(floor_tile(level, (5, 5)) == self.floor_rock)
         assert(wall_tile(level, (0, 0)) == self.wall_empty)
@@ -50,8 +56,17 @@ class TestDungeon:
         """
         Test that stairs can be linked
         """
-        level1 = Level(mock(), [20, 20], self.floor_rock, self.wall_empty)
-        level2 = Level(mock(), [20, 20], self.floor_rock, self.wall_empty)
+        level1 = (LevelBuilder()
+                  .with_size((20, 20))
+                  .with_floor_tile(self.floor_rock)
+                  .with_wall_tile(self.wall_empty)
+                  .build())
+
+        level2 = (LevelBuilder()
+                  .with_size((20, 20))
+                  .with_floor_tile(self.floor_rock)
+                  .with_wall_tile(self.wall_empty)
+                  .build())
 
         stairs1 = Portal((None, None), None)
 

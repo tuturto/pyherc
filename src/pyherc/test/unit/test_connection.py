@@ -23,8 +23,7 @@ Tests for Connection
 import random
 
 from hamcrest import assert_that, equal_to, is_
-from mockito import mock
-from pyherc.data import Level
+from pyherc.test.builders import LevelBuilder
 from pyherc.generators.level.partitioners.section import Connection, Section
 
 
@@ -37,7 +36,7 @@ class TestConnection():
         """
         Test that Connection can be translated to section coordinates
         """
-        level = mock(Level)
+        level = LevelBuilder().build()
         section = Section(corner1=(10, 10),
                           corner2=(20, 20),
                           level=level,

@@ -23,7 +23,7 @@ Tests for LevelDecorator
 
 from hamcrest import assert_that, equal_to, is_
 from mockito import any, mock, verify, when
-from pyherc.data import Level, floor_tile, wall_tile, ornamentation
+from pyherc.data import floor_tile, wall_tile, ornamentation, get_tiles
 from pyherc.generators.level.decorator import (AggregateDecorator,
                                                AggregateDecoratorConfig,
                                                DirectionalWallDecorator,
@@ -37,6 +37,7 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
 from pyherc.generators.level.prototiles import (FLOOR_CONSTRUCTED,
                                                 FLOOR_NATURAL, WALL_CONSTRUCTED,
                                                 WALL_NATURAL)
+from pyherc.test.builders import LevelBuilder
 
 
 class TestLevelDecorator():
@@ -63,9 +64,11 @@ class TestLevelDecorator():
         self.floor_brick = 2
         self.wall_empty = None
         self.wall_ground = 4
-        self.level = Level(mock(), (10, 15),
-                      floor_type = FLOOR_NATURAL,
-                      wall_type = self.wall_empty)
+        self.level = (LevelBuilder()
+                      .with_size((10, 15))
+                      .with_floor_tile(FLOOR_NATURAL)
+                      .with_wall_tile(self.wall_empty)
+                      .build())
 
         floor_tile(self.level, (5, 5), FLOOR_CONSTRUCTED)
         floor_tile(self.level, (6, 5), FLOOR_CONSTRUCTED)
@@ -129,9 +132,11 @@ class TestWallBuilderDecorator():
         Setup the test case
         """
         self.wall_empty = 1
-        self.level = Level(mock(), (10, 15),
-                      floor_type = FLOOR_NATURAL,
-                      wall_type = WALL_NATURAL)
+        self.level = (LevelBuilder()
+                      .with_size((10, 15))
+                      .with_floor_tile(FLOOR_NATURAL)
+                      .with_wall_tile(WALL_NATURAL)
+                      .build())
 
         for loc_y in range(2, 8):
             for loc_x in range(2, 8):
@@ -180,7 +185,8 @@ class TestAggregateDecorator():
         """
         Setup the testcase
         """
-        self.level = mock(Level)
+        self.level = LevelBuilder().build()
+
         self.mock_decorator_1 = mock(WallBuilderDecorator)
         self.mock_decorator_2 = mock(ReplacingDecorator)
 
@@ -217,9 +223,11 @@ class TestDirectionalWallDecorator():
         """
         Setup the test case
         """
-        self.level = Level(mock(), (10, 10),
-                           floor_type = 'floor',
-                           wall_type = self.empty_wall)
+        self.level = (LevelBuilder()
+                      .with_size((10, 10))
+                      .with_floor_tile('floor')
+                      .with_wall_tile(self.empty_wall)
+                      .build())
 
         wall_tile(self.level, (1, 1), self.wall)
         wall_tile(self.level, (2, 1), self.wall)
@@ -290,9 +298,11 @@ class TestDecoratingWallOrnaments():
         self.floor = 'floor'
         self.ornamentation = 'candles'
 
-        self.level = Level(mock(), (10, 10),
-                           floor_type = self.floor,
-                           wall_type = self.empty_wall)
+        self.level = (LevelBuilder()
+                      .with_size((10, 10))
+                      .with_floor_tile(self.floor)
+                      .with_wall_tile(self.empty_wall)
+                      .build())
 
     def test_walls_can_be_ornamented(self):
         """
@@ -342,8 +352,8 @@ class TestDecoratingWallOrnaments():
         self.decorator.decorate_level(self.level)
 
         candle_count = 0
-        for location in self.level.tiles:
-            if ornamentation(self.level, location) == self.ornamentation:
+        for location, tile in get_tiles(self.level):
+            if tile['\ufdd0:ornamentation'] == self.ornamentation:
                 candle_count = candle_count + 1
 
         assert_that(candle_count, is_(equal_to(2)))
