@@ -35,7 +35,7 @@ from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
 from PyQt4.QtGui import (QColor, QFont, QGraphicsPixmapItem, QGraphicsScene,
                          QGraphicsSimpleTextItem, QGraphicsView, QHBoxLayout,
                          QTransform, QVBoxLayout, QWidget)
-from pyherc.data import get_characters, get_items
+from pyherc.data import get_characters, get_items, get_tiles
 
 
 class PlayMapWindow(QWidget):
@@ -295,7 +295,7 @@ class PlayMapWidget(QWidget):
 
         self.current_level = model.player.level
 
-        for location, tile in self.current_level.tiles.items():
+        for location, tile in get_tiles(self.current_level):
             if tile['\ufdd0:floor']:
                 new_glyph = MapGlyph(self.surface_manager.get_icon(tile['\ufdd0:floor']),
                                      None)
