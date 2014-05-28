@@ -24,7 +24,7 @@ from functools import partial
 from math import sqrt
 
 from pyherc.aspects import log_debug
-from pyherc.data.new_level import blocks_movement, get_character
+from pyherc.data.level import blocks_movement, get_character
 
 
 @log_debug
@@ -149,6 +149,17 @@ def area_around(location):
         for loc_y in range(location[1]-1, location[1]+2):
             if loc_x != location[0] or loc_y != location[1]:
                 yield (loc_x, loc_y)
+
+
+def area_4_around(location):
+    """
+    Get coordinates in cardinal directions around location
+    """
+    loc_x, loc_y = location
+    yield (loc_x, loc_y - 1)
+    yield (loc_x + 1, loc_y)
+    yield (loc_x, loc_y + 1)
+    yield (loc_x - 1, loc_y)
 
 class TargetData():
     """

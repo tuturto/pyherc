@@ -24,7 +24,8 @@ Classs needed for generating levels
 import logging
 
 from pyherc.aspects import log_debug, log_info
-from pyherc.data import Level, Portal, add_portal, get_locations_by_tag
+from pyherc.data import new_level, Portal, add_portal, get_locations_by_tag
+from pyherc.data import wall_tile
 
 
 class LevelGeneratorFactory():
@@ -201,35 +202,36 @@ class LevelGenerator():
         :param portal: portal to link to this level
         :type portal: Portal
         """
-        new_level = Level(model=self.model,
-                          size=self.level_context.size,
-                          floor_type=self.level_context.floor_type,
-                          wall_type=self.level_context.wall_type)
+        level = new_level(self.model)
 
-        sections = self.partitioner.partition_level(new_level)
+        #TODO: remove when new sections have been implemented
+        wall_tile(level, (0, 0), self.level_context.wall_type)
+        wall_tile(level, self.level_context.size, self.level_context.wall_type)
+
+        sections = self.partitioner.partition_level(level)
 
         for section in sections:
             generator = self.random_generator.choice(self.room_generators)
             generator.generate_room(section)
 
         for adder in self.portal_adders:
-            adder.add_portal(new_level)
+            adder.add_portal(level)
 
         # all this needs to be cleaned up
         if portal is not None:
-            rooms = list(get_locations_by_tag(new_level, 'room'))
+            rooms = list(get_locations_by_tag(level, 'room'))
             if len(rooms) > 0:
                 new_portal = Portal(icons=(portal.other_end_icon, None),
                                     level_generator_name=None)
                 location = self.random_generator.choice(rooms)
-                add_portal(new_level, location, new_portal, portal)
+                add_portal(level, location, new_portal, portal)
             else:
                 self.logger.warn('no location found, skipping')
 
-        self.creature_adder.add_creatures(new_level)
+        self.creature_adder.add_creatures(level)
 
-        self.item_adder.add_items(new_level)
+        self.item_adder.add_items(level)
 
-        self.decorator.decorate_level(new_level)
+        self.decorator.decorate_level(level)
 
-        return new_level
+        return level

@@ -23,6 +23,13 @@
 (require pyherc.aspects)
 (require pyherc.macros)
 
+(defn new-level [model]
+  "create a new level"
+  {:model model
+   :tiles {}
+   :items []
+   :characters []})
+
 (defn new-tile []
   "create a tile with default values"
   {:floor nil
@@ -36,14 +43,14 @@
 
 (defn get-tile [level location]
   "get tile at given location"
-  (when (in location level.tiles)
-    (get level.tiles location)))
+  (when (in location (:tiles level))
+    (get (:tiles level) location)))
 
 (defn get-or-create-tile [level location]
   "get tile at given location"
-  (when (not (in location level.tiles))
-    (assoc level.tiles location (new-tile)))
-  (get level.tiles location))
+  (when (not (in location (:tiles level)))
+    (assoc (:tiles level) location (new-tile)))
+  (get (:tiles level) location))
 
 (defn floor-tile [level location &optional [tile-id :no-tile]]
   "get/set floor tile at given location"
@@ -87,7 +94,7 @@
 (defn level-size [level]
   "get size of level (x₀, x₁, y₀, y₁)"
   (let [[x₀ 0] [x₁ 0] [y₀ 0] [y₁ 0]]
-    (ap-each level.tiles
+    (ap-each (:tiles level)
              (do
               (when (< (first it) x₀) (setv x₀ (first it)))
               (when (> (first it) x₁) (setv x₁ (first it)))
@@ -98,7 +105,7 @@
 #d(defn find-free-space [level]
     "find a free location within level"
     (let [[free-tiles (list-comp (first pair)
-                                 [pair (.items level.tiles)] 
+                                 [pair (.items (:tiles level))] 
                                  (and (= (:wall (second pair)) nil)
                                       (:floor (second pair))))]]
       (.choice random free-tiles)))
@@ -124,7 +131,7 @@
 
 #d(defn add-item [level location item]
     "add item to level"
-    (.append level.-items item)
+    (.append (:items level) item)
     (setv item.location location)
     (setv item.level level)
     (.append (:items (get-or-create-tile level location)) item))
@@ -132,7 +139,7 @@
 (defn get-items [level &optional [location :no-location]]
   "get items in a given tile or in level in general"
   (if (= location :no-location)
-    (list-comp item [item level.-items])
+    (list-comp item [item (:items level)])
     (do
      (let [[map-tile (get-tile level location)]]
        (if (= map-tile nil)
@@ -144,11 +151,11 @@
     (let [[map-tile (get-tile level item.location)]]
       (.remove (:items map-tile) item)
       (setv item.location #t())
-      (.remove level.-items item)))
+      (.remove (:items level) item)))
 
 #d(defn add-character [level location character]
     "add character to level"
-    (.append level.-characters character)
+    (.append (:characters level) character)
     (setv character.location location)
     (setv character.level level)
     (assoc (get-or-create-tile level location) :character character))
@@ -161,13 +168,13 @@
 
 (defn get-characters [level]
   "get all characters in level"
-  (genexpr character [character level.-characters]))
+  (genexpr character [character (:characters level)]))
 
 #d(defn remove-character [level character]
     "remove character from level"
     (assoc (get-tile level character.location) :character nil)
     (setv character.location #t())
-    (.remove level.-characters character))
+    (.remove (:characters level) character))
 
 #d(defn move-character [level location character]
     "move character to a new location"
@@ -198,6 +205,6 @@
 
 (defn get-locations-by-tag [level tag]
   "get locations by tag"
-  (genexpr location [#t(location tile) (.items level.tiles)] 
+  (genexpr location [#t(location tile) (.items (:tiles level))] 
            (or (in tag (:tags tile))
                (= tag "any"))))

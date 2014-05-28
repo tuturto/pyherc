@@ -22,7 +22,7 @@ Module for testing time related functions
 """
 from hamcrest import assert_that, equal_to, has_item, is_, is_not
 from mockito import any, mock, verify
-from pyherc.data import Dungeon, Level, cooldown, add_character
+from pyherc.data import Dungeon, cooldown, add_character
 from pyherc.data.effects import Effect
 from pyherc.data.model import Model
 from pyherc.test.builders import (CharacterBuilder, EffectBuilder,

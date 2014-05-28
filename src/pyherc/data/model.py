@@ -22,7 +22,7 @@ Module for Model related classes
 """
 
 from pyherc.aspects import log_debug
-from pyherc.data.new_level import get_characters
+from pyherc.data.level import get_characters
 
 ESCAPED_DUNGEON = 1
 DIED_IN_DUNGEON = 2

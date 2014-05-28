@@ -24,7 +24,6 @@ Module for data related modules and classes that represent state of the game
 """
 import hy
 
-from .level import Level
 from .dungeon import Dungeon
 from .portal import Portal
 
@@ -38,12 +37,14 @@ from .item import Item
 from .constants import Duration, SpecialTime, Direction
 
 from .geometry import distance_between, heuristic_estimate_of_distance
+from .geometry import area_4_around
 
 from .new_character import is_skill_ready, cooldown
-from .new_level import get_tile, new_tile, floor_tile, add_portal, get_portal
-from .new_level import wall_tile, tile, blocks_los, ornamentation
-from .new_level import level_size, find_free_space, blocks_movement
-from .new_level import add_item, get_items, remove_item
-from .new_level import add_character, remove_character, get_character, get_characters
-from .new_level import move_character, add_trap, get_trap
-from .new_level import add_location_tag, get_location_tags, get_locations_by_tag
+from .level import get_tile, new_tile, floor_tile, add_portal, get_portal
+from .level import wall_tile, tile, blocks_los, ornamentation
+from .level import level_size, find_free_space, blocks_movement
+from .level import add_item, get_items, remove_item
+from .level import add_character, remove_character, get_character, get_characters
+from .level import move_character, add_trap, get_trap
+from .level import add_location_tag, get_location_tags, get_locations_by_tag
+from .level import new_level

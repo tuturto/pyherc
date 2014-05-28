@@ -29,6 +29,7 @@ from copy import copy
 from pyherc.ai import pyheapq
 from pyherc.ai.heapset import HeapSet
 from pyherc.data import distance_between, heuristic_estimate_of_distance
+from pyherc.data import area_4_around, blocks_movement
 
 
 def reconstruct_path(came_from, current_node):
@@ -82,6 +83,12 @@ class HeapItem:
         return self.type_check(other) and self.as_tuple().__ge__(other.as_tuple())
 
 
+def adjacent_nodes(level, location):
+    """
+    Get passable nodes around given location
+    """
+    return (node for node in area_4_around(location)
+            if not blocks_movement(level, location))
 
 
 def a_star(start, goal, a_map):
@@ -144,7 +151,7 @@ def a_star(start, goal, a_map):
 
         neighbornodes =  [
             (x.g_score + distance_between(x.node, node_y),node_y )
-            for node_y in a_map.neighbor_nodes(x.node)
+            for node_y in adjacent_nodes(a_map, x.node)
             ]
         #better sort here than update the heap ..
         neighbornodes.sort()
