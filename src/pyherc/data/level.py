@@ -54,7 +54,6 @@ class Level():
 
         self.model = model
         self.tiles = {}
-        self.lit = []
 
         if size[0] != 0 and size[1] != 0:
             for loc_x in range(0, size[0] + 1):
@@ -64,17 +63,6 @@ class Level():
 
         self._items = []
         self._characters = []
-        self.full_update_needed = True
-        self.dirty_rectangles = []
-
-    def heuristic_estimate_of_distance(self, start, goal):
-        """
-        This should be >= 0
-        If you want to be sure, that the found path is the sortest one,
-        let this return a constant 0.
-        """
-        l = len(goal)
-        return (sum([(start[i] - goal[i]) ** 2 for i in range(l)])) ** 0.5
 
     def neighbor_nodes(self, node):
         """
@@ -98,12 +86,3 @@ class Level():
             nodes.append((loc_x, loc_y + 1))
 
         return nodes
-
-    def dist_between(self, start, goal):
-        """
-        The real distance between two adjacent nodes.
-        This should be >= 0
-        """
-        l = len(goal)
-        return (sum([(start[i] - goal[i]) ** 2 for i in range(l)])) ** 0.5
-

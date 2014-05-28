@@ -87,8 +87,6 @@ def get_target_in_direction(level, location, direction, attack_range=100):
 get_adjacent_target_in_direction = partial(get_target_in_direction,
                                            attack_range=1.5)
 
-
-@log_debug
 def distance_between(location1, location2):
     """
     calculate distance between two points
@@ -108,6 +106,14 @@ def distance_between(location1, location2):
 
     return sqrt(x_difference**2 + y_difference**2)
 
+def heuristic_estimate_of_distance(start, goal):
+    """
+    This should be >= 0
+    If you want to be sure, that the found path is the sortest one,
+    let this return a constant 0.
+    """
+    l = len(goal)
+    return (sum([(start[i] - goal[i]) ** 2 for i in range(l)])) ** 0.5
 
 def find_direction(start, end):
     """

@@ -28,6 +28,7 @@ from copy import copy
 
 from pyherc.ai import pyheapq
 from pyherc.ai.heapset import HeapSet
+from pyherc.data import distance_between, heuristic_estimate_of_distance
 
 
 def reconstruct_path(came_from, current_node):
@@ -51,7 +52,7 @@ class HeapItem:
         self.g_score = g_score
 
         """h_score the heuristic estimates of the distances to goal"""
-        self.h_score = a_map.heuristic_estimate_of_distance(y, goal)
+        self.h_score = heuristic_estimate_of_distance(y, goal)
 
         """f_score Estimated total distance from start to goal through y."""
         self.f_score = self.h_score + self.g_score
@@ -142,7 +143,7 @@ def a_star(start, goal, a_map):
         closedset.add(x.node)
 
         neighbornodes =  [
-            (x.g_score + a_map.dist_between(x.node, node_y),node_y )
+            (x.g_score + distance_between(x.node, node_y),node_y )
             for node_y in a_map.neighbor_nodes(x.node)
             ]
         #better sort here than update the heap ..

@@ -37,6 +37,8 @@ from .item import Item
 
 from .constants import Duration, SpecialTime, Direction
 
+from .geometry import distance_between, heuristic_estimate_of_distance
+
 from .new_character import is_skill_ready, cooldown
 from .new_level import get_tile, new_tile, floor_tile, add_portal, get_portal
 from .new_level import wall_tile, tile, blocks_los, ornamentation
