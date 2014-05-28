@@ -22,10 +22,11 @@ Module for testing customer matchers
 """
 
 from hamcrest import assert_that, equal_to, has_length, is_
-from pyherc.data import Level, Model, wall_tile
+from pyherc.data import Model, wall_tile
 from pyherc.data.effects import EffectHandle, EffectsCollection
 from pyherc.test.matchers.effect_collection import ContainsEffectHandle
 from pyherc.test.matchers.map_connectivity import MapConnectivity
+from pyherc.test.builders import LevelBuilder
 
 
 class TestLevelConnectivity():
@@ -49,10 +50,11 @@ class TestLevelConnectivity():
         self.wall_empty = None
         self.floor_rock = 2
         self.wall_ground = 3
-        self.level = Level(Model(),
-                           size = (20, 10),
-                           floor_type = self.floor_rock,
-                           wall_type = self.wall_ground)
+        self.level = (LevelBuilder()
+                      .with_size((20, 10))
+                      .with_floor_tile(self.floor_rock)
+                      .with_wall_tile(self.wall_ground)
+                      .build())
         self.matcher = MapConnectivity()
 
     def test_unconnected_level(self):
@@ -104,9 +106,11 @@ class TestLevelConnectivity():
         Test a convoluted case with 3 open areas and 2 of them being connected
         to border
         """
-        self.level = Level(Model(), size = (10, 10),
-                      floor_type = self.floor_rock,
-                      wall_type = self.wall_ground)
+        self.level = (LevelBuilder()
+                      .with_size((10, 10))
+                      .with_floor_tile(self.floor_rock)
+                      .with_wall_tile(self.wall_ground)
+                      .build())
 
         wall_tile(self.level, (2, 5), self.wall_empty)
         wall_tile(self.level, (2, 6), self.wall_empty)

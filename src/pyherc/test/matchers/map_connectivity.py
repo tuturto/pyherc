@@ -22,7 +22,7 @@ Module for customer matchers used in testing
 """
 
 from hamcrest.core.base_matcher import BaseMatcher
-from pyherc.data import wall_tile, get_tile, get_location_tags
+from pyherc.data import wall_tile, get_tile, get_tiles, get_location_tags
 
 
 class MapConnectivity(BaseMatcher):
@@ -83,7 +83,7 @@ class MapConnectivity(BaseMatcher):
         """
         points = []
 
-        for location, tile in level.tiles.items():
+        for location, tile in get_tiles(level):
             if tile['\ufdd0:wall'] == None:
                 points.append(location)
 

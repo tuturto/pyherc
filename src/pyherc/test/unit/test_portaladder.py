@@ -24,12 +24,13 @@ import random
 
 from hamcrest import assert_that, equal_to, has_length, is_
 from mockito import mock
-from pyherc.data import Level, get_portal, add_location_tag
+from pyherc.data import get_portal, add_location_tag
 from pyherc.generators.level.generator import LevelGenerator
 from pyherc.generators.level.portals import (PortalAdder,
                                              PortalAdderConfiguration,
                                              PortalAdderFactory)
 from pyherc.test.matchers import located_in_room
+from pyherc.test.builders import LevelBuilder
 
 
 class TestPortalAdder():
@@ -56,10 +57,11 @@ class TestPortalAdder():
         """
         Test that stairs can be added to a room
         """
-        level = Level(model=mock(),
-                      size = (20, 20),
-                      floor_type = self.floor_rock,
-                      wall_type = self.wall_empty)
+        level = (LevelBuilder()
+                 .with_size((20, 20))
+                 .with_floor_tile(self.floor_rock)
+                 .with_wall_tile(self.wall_empty)
+                 .build())
 
         for loc_y in range(8, 12):
             for loc_x in range(8, 12):
@@ -89,10 +91,11 @@ class TestPortalAdder():
         Test that portal created by adder has two icons set
         One to display and another to be used by opposite end
         """
-        level = Level(model=mock(),
-                      size = (20, 20),
-                      floor_type = self.floor_rock,
-                      wall_type = self.wall_empty)
+        level = (LevelBuilder()
+                 .with_size((20, 20))
+                 .with_floor_tile(self.floor_rock)
+                 .with_wall_tile(self.wall_empty)
+                 .build())
 
         level_generator = mock(LevelGenerator)
 

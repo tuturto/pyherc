@@ -47,4 +47,4 @@ from .level import add_item, get_items, remove_item
 from .level import add_character, remove_character, get_character, get_characters
 from .level import move_character, add_trap, get_trap
 from .level import add_location_tag, get_location_tags, get_locations_by_tag
-from .level import new_level
+from .level import new_level, get_tiles

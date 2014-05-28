@@ -26,8 +26,9 @@ import random
 from hamcrest import (assert_that,
                       contains_inanyorder, equal_to, has_items, has_length, is_,
                       is_not, has_item)
-from mockito import mock
-from pyherc.data import Level, floor_tile, wall_tile, get_location_tags
+
+from pyherc.test.builders import LevelBuilder
+from pyherc.data import floor_tile, wall_tile, get_location_tags
 from pyherc.generators.level.partitioners.section import Section
 
 
@@ -46,9 +47,9 @@ class TestSectionCalculations():
         """
         Setup test case
         """
-        mock_level = mock(Level)
+        level = LevelBuilder().build()
         self.rng = random.Random()
-        self.section = Section((10, 10), (20, 25), mock_level, self.rng)
+        self.section = Section((10, 10), (20, 25), level, self.rng)
 
     def test_left_edge(self):
         """
@@ -110,9 +111,10 @@ class TestSectionConnections():
         """
         Setup test case
         """
-        mock_level = mock(Level)
-        self.section1 = Section((0, 0), (10, 20), mock_level, self.rng)
-        self.section2 = Section((11, 0), (20, 20), mock_level, self.rng)
+        level = LevelBuilder().build()
+
+        self.section1 = Section((0, 0), (10, 20), level, self.rng)
+        self.section2 = Section((11, 0), (20, 20), level, self.rng)
 
         self.section1.neighbours.append(self.section2)
         self.section2.neighbours.append(self.section1)
@@ -235,7 +237,12 @@ class TestSectionLevelAccess():
         self.floor_rock = 1
         self.wall_empty = 10
         self.wall_ground = 11
-        self.level = Level(mock(), (10, 10), self.floor_empty, self.wall_empty)
+        self.level = (LevelBuilder()
+                      .with_size((10, 10))
+                      .with_floor_tile(self.floor_empty)
+                      .with_wall_tile(self.wall_empty)
+                      .build())
+
         self.section = Section((0, 0), (10, 10), self.level, self.rng)
 
     def test_setting_floor(self):
@@ -290,7 +297,12 @@ class TestSectionLevelAccessWithOffset():
         self.floor_rock = 1
         self.wall_empty = 10
         self.wall_ground = 11
-        self.level = Level(mock(), (10, 10), self.floor_empty, self.wall_empty)
+        self.level = (LevelBuilder()
+                      .with_size((10, 10))
+                      .with_floor_tile(self.floor_empty)
+                      .with_wall_tile(self.wall_empty)
+                      .build())
+
         self.section = Section((5, 5), (10, 10), self.level, self.rng)
 
     def test_setting_floor_with_offset(self):

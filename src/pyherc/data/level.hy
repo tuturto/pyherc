@@ -46,6 +46,10 @@
   (when (in location (:tiles level))
     (get (:tiles level) location)))
 
+(defn get-tiles [level]
+  "get all tiles in level"
+  (genexpr #t(location tile) [#t(location tile) (.items (:tiles level))]))
+
 (defn get-or-create-tile [level location]
   "get tile at given location"
   (when (not (in location (:tiles level)))
