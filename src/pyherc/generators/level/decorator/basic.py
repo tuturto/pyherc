@@ -166,9 +166,6 @@ class WallBuilderDecorator(Decorator):
         :param level: level to use
         :type level: Level
         """
-        if floor_tile(level, location):
-            return
-
         proto_tile = wall_tile(level, location)
 
         if proto_tile in self.configuration.wall_config:

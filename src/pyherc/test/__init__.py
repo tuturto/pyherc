@@ -26,3 +26,4 @@ from pyherc.test.unit.test_calendar import *
 from pyherc.test.unit.test_mitosis import *
 from pyherc.test.unit.test_metamorphosis import *
 from pyherc.test.unit.test_skills import *
+from pyherc.test.unit.test_surround_decorator import *

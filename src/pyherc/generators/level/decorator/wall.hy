@@ -18,17 +18,22 @@
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.generators.level.decorator.basic [Decorator DecoratorConfig]])
+(import [pyherc.aspects [log-debug log-info]])
+(require pyherc.aspects)
 
 (defclass SurroundingDecorator [Decorator]
-  [[--init-- (fn [self configuration]
-               "default constructor"
-               (-> (super) (.--init-- configuration))
-               (setv self.wall-tile configuration.wall-tile))]
-   [decorate-level (fn [self level]
-                     "decorate a level")]])
+  [[--init-- #d(fn [self configuration]
+                 "default constructor"
+                 (-> (super) (.--init-- configuration))
+                 (setv self.wall-tile configuration.wall-tile)
+                 nil)]
+   [decorate-level #i(fn [self level]
+                       "decorate a level"
+                       )]])
 
 (defclass SurroundingDecoratorConfig [DecoratorConfig]
-  [[--init-- (fn [self level_types wall_tile]
-               "default constructor"
-               (-> (super) (.--init-- level_types))
-               (setv self.wall-tile wall-tile))]])
+  [[--init-- #d(fn [self level_types wall_tile]
+                 "default constructor"
+                 (-> (super) (.--init-- level_types))
+                 (setv self.wall-tile wall-tile)
+                 nil)]])

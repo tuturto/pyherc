@@ -110,7 +110,7 @@ class MapConnectivity(BaseMatcher):
         if get_tile(level, start) is None:
             return None
 
-        if wall_tile(level, start) is None and floor_tile(level, start) is not None:
+        if wall_tile(level, start) is None:
             connected_points.append(start)
             self.get_connected_points(level, (x_loc, y_loc - 1),
                                       open_tile,

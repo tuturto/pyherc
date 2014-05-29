@@ -114,7 +114,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     wallbuilder_config = WallBuilderDecoratorConfig(['upper catacombs',
                                                     'lower catacombs'],
-                                        {wall_empty: wall_constructed},
+                                        {wall_natural: wall_constructed},
                                          wall_empty)
     wallbuilder = WallBuilderDecorator(wallbuilder_config)
 
