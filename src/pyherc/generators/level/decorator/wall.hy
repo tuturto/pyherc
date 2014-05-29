@@ -17,9 +17,12 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(import [pyherc.generators.level.decorator.basic [Decorator DecoratorConfig]])
-(import [pyherc.aspects [log-debug log-info]])
+(import [pyherc.generators.level.decorator.basic [Decorator DecoratorConfig]]
+        [pyherc.aspects [log-debug log-info]]
+        [pyherc.data [wall-tile floor-tile get-tiles area-around]])
+(require pyherc.macros)
 (require pyherc.aspects)
+(require hy.contrib.anaphoric)
 
 (defclass SurroundingDecorator [Decorator]
   [[--init-- #d(fn [self configuration]
@@ -29,11 +32,22 @@
                  nil)]
    [decorate-level #i(fn [self level]
                        "decorate a level"
-                       )]])
+                       (let [[loc-tiles (list (get-tiles level))]]
+                         (ap-each loc-tiles (decorate-tile level it self.wall-tile))
+                       ))]])
+
+(defn decorate-tile [level loc-tile replacement]
+  "decorate single tile"
+  (let [[#t(location tile) loc-tile]
+        [surrounding-tiles (area-around location)]]
+        (ap-each (ap-filter (and (= (wall-tile level it) null)
+                                 (= (floor-tile level it) null))
+                            surrounding-tiles)
+                 (wall-tile level it replacement))))
 
 (defclass SurroundingDecoratorConfig [DecoratorConfig]
-  [[--init-- #d(fn [self level_types wall_tile]
+  [[--init-- #d(fn [self level-types wall-tile]
                  "default constructor"
-                 (-> (super) (.--init-- level_types))
+                 (-> (super) (.--init-- level-types))
                  (setv self.wall-tile wall-tile)
                  nil)]])
