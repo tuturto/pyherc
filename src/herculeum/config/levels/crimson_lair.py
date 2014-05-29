@@ -35,6 +35,8 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                FloorBuilderDecoratorConfig,
                                                ReplacingDecorator,
                                                ReplacingDecoratorConfig,
+                                               SurroundingDecorator,
+                                               SurroundingDecoratorConfig,
                                                WallBuilderDecorator,
                                                WallBuilderDecoratorConfig)
 from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
@@ -72,6 +74,10 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            1,
                                            1,
                                            rng)]
+
+    surrounder_config = SurroundingDecoratorConfig(['crimson lair'],
+                                                   wall_natural)
+    surrounder = SurroundingDecorator(surrounder_config)
 
     replacer_config = ReplacingDecoratorConfig(['crimson lair'],
                                     {floor_natural: floor_rock},
@@ -152,10 +158,11 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     aggregate_decorator_config = AggregateDecoratorConfig(
                                                 ['crimson lair'],
-                                                [wallbuilder,
-                                                wall_direction_builder,
-                                                floor_builder,
-                                                replacer])
+                                                [surrounder,
+                                                 wallbuilder,
+                                                 wall_direction_builder,
+                                                 floor_builder,
+                                                 replacer])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]
 

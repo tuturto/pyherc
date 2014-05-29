@@ -35,6 +35,8 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                FloorBuilderDecoratorConfig,
                                                ReplacingDecorator,
                                                ReplacingDecoratorConfig,
+                                               SurroundingDecorator,
+                                               SurroundingDecoratorConfig,
                                                WallBuilderDecorator,
                                                WallBuilderDecoratorConfig,
                                                WallOrnamentDecorator,
@@ -101,6 +103,10 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            3,
                                            2,
                                            rng)]
+
+    surrounder_config = SurroundingDecoratorConfig(['first gate'],
+                                                   wall_natural)
+    surrounder = SurroundingDecorator(surrounder_config)
 
     wallbuilder_config = WallBuilderDecoratorConfig(['first gate'],
                                         {wall_natural: wall_constructed},
@@ -176,7 +182,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     aggregate_decorator_config = AggregateDecoratorConfig(
                                                 ['first gate'],
-                                                [wallbuilder,
+                                                [surrounder,
+                                                 wallbuilder,
                                                  wall_direction_builder,
                                                  floor_builder,
                                                  torch_ornamenter])

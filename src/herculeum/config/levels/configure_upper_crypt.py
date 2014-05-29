@@ -35,6 +35,8 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                FloorBuilderDecoratorConfig,
                                                ReplacingDecorator,
                                                ReplacingDecoratorConfig,
+                                               SurroundingDecorator,
+                                               SurroundingDecoratorConfig,
                                                WallBuilderDecorator,
                                                WallBuilderDecoratorConfig,
                                                WallOrnamentDecorator,
@@ -122,6 +124,10 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                     {wall_natural: wall_ground,
                                     wall_constructed: wall_rock})
     replacer = ReplacingDecorator(replacer_config)
+
+    surrounder_config = SurroundingDecoratorConfig(['upper crypt'],
+                                                   wall_natural)
+    surrounder = SurroundingDecorator(surrounder_config)
 
     wallbuilder_config = WallBuilderDecoratorConfig(['upper crypt'],
                                         {wall_natural: wall_constructed},
@@ -272,7 +278,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     torch_ornamenter = WallOrnamentDecorator(torch_ornamenter_config)
 
     aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
-                                                          [wallbuilder,
+                                                          [surrounder,
+                                                           wallbuilder,
                                                            wall_direction_builder,
                                                            floor_builder,
                                                            board_floor_builder,

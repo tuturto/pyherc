@@ -37,6 +37,8 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                FloorBuilderDecoratorConfig,
                                                ReplacingDecorator,
                                                ReplacingDecoratorConfig,
+                                               SurroundingDecorator,
+                                               SurroundingDecoratorConfig,
                                                WallBuilderDecorator,
                                                WallBuilderDecoratorConfig,
                                                WallOrnamentDecorator,
@@ -111,6 +113,11 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                     {wall_natural: wall_ground,
                                     wall_constructed: wall_rock})
     replacer = ReplacingDecorator(replacer_config)
+
+    surrounder_config = SurroundingDecoratorConfig(['upper catacombs',
+                                                    'lower catacombs'],
+                                                   wall_natural)
+    surrounder = SurroundingDecorator(surrounder_config)
 
     wallbuilder_config = WallBuilderDecoratorConfig(['upper catacombs',
                                                     'lower catacombs'],
@@ -189,7 +196,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     aggregate_decorator_config = AggregateDecoratorConfig(
                                                 ['upper catacombs',
                                                 'lower catacombs'],
-                                                [wallbuilder,
+                                                [surrounder,
+                                                 wallbuilder,
                                                  wall_direction_builder,
                                                  floor_builder,
                                                  torch_ornamenter,
