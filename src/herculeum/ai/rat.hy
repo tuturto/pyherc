@@ -21,7 +21,7 @@
 
 (require pyherc.macros)
 (import [herculeum.ai.patrol [patrol-ai]]
-        [pyherc.data [blocks-movement floor-tile]])
+        [pyherc.data [next-to-wall? corridor?]])
 
 (defclass RatAI []
   [[__doc__ "AI routine for rats"]
@@ -35,16 +35,9 @@
       "check the situation and act accordingly"
       (rat-act self model action-factory))]])
 
-(defn next-to-wall? [level x y]
-  "check if given location is within patrol area"
-  (and (or (blocks-movement level #t((inc x) y))
-	   (blocks-movement level #t((dec x) y))
-	   (blocks-movement level #t(x (inc y)))
-	   (blocks-movement level #t(x (dec y))))
-       (not (and (blocks-movement level #t((inc x) y))
-		 (blocks-movement level #t((dec x) y))))
-       (not (and (blocks-movement level #t(x (inc y)))
-		 (blocks-movement level #t(x (dec y)))))
-       (floor-tile level #t(x y))))
+(defn patrol-area? [level location]
+  "rats prefer rooms"
+  (and (next-to-wall? level location)
+       (not (corridor? level location))))
 
-(def rat-act (patrol-ai next-to-wall? 4))
+(def rat-act (patrol-ai patrol-area? 4))

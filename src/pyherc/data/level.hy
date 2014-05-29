@@ -18,6 +18,7 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.aspects [log_debug]]
+        [functools [reduce]]
         [random])
 (require hy.contrib.anaphoric)
 (require pyherc.aspects)
@@ -212,3 +213,43 @@
   (genexpr location [#t(location tile) (.items (:tiles level))] 
            (or (in tag (:tags tile))
                (= tag "any"))))
+
+(defn corridor? [level location]
+  "check if given location is surrounded from two sides"
+  (let [[#t(x y) location]
+        [north #t(x (- y 1))]
+        [south #t(x (+ y 1))]
+        [east #t((+ x 1) y)]
+        [west #t((- x 1) y)]]
+    (and (not (blocks-movement level location))
+         (or (and (blocks-movement level north)
+                  (blocks-movement level south)
+                  (not (blocks-movement level east))
+                  (not (blocks-movement level west)))
+             (and (blocks-movement level east)
+                  (blocks-movement level west)
+                  (not (blocks-movement level north))
+                  (not (blocks-movement level south)))))))
+
+(defn next-to-wall? [level location]
+  "check if given location is next to wall"
+  (let [[#t(x y) location]
+        [north #t(x (- y 1))]
+        [south #t(x (+ y 1))]
+        [east #t((+ x 1) y)]
+        [west #t((- x 1) y)]]
+    (and (not (blocks-movement level location))
+         (or (blocks-movement level north)
+             (blocks-movement level south)
+             (blocks-movement level east)
+             (blocks-movement level west))
+         (not (and (blocks-movement level north)
+                   (blocks-movement level south)))
+         (not (and (blocks-movement level east)
+                   (blocks-movement level west))))))
+
+(defn open-area? [level location]
+  "check if given location is in open area"
+  (and (not (blocks-movement level location))
+       (reduce (fn [a b] (and (not a) (not b)))
+               (ap-map (blocks-movement level it) (area-around level location)))))
