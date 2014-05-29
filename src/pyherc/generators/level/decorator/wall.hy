@@ -32,18 +32,17 @@
                  nil)]
    [decorate-level #i(fn [self level]
                        "decorate a level"
-                       (let [[loc-tiles (list (get-tiles level))]]
-                         (ap-each loc-tiles (decorate-tile level it self.wall-tile))
-                       ))]])
+                       (ap-each (list (get-tiles level))
+                                (decorate-tile level it self.wall-tile)))]])
 
 (defn decorate-tile [level loc-tile replacement]
   "decorate single tile"
   (let [[#t(location tile) loc-tile]
         [surrounding-tiles (area-around location)]]
-        (ap-each (ap-filter (and (= (wall-tile level it) null)
-                                 (= (floor-tile level it) null))
-                            surrounding-tiles)
-                 (wall-tile level it replacement))))
+    (ap-each (ap-filter (and (= (wall-tile level it) null)
+                             (= (floor-tile level it) null))
+                        surrounding-tiles)
+             (wall-tile level it replacement))))
 
 (defclass SurroundingDecoratorConfig [DecoratorConfig]
   [[--init-- #d(fn [self level-types wall-tile]
