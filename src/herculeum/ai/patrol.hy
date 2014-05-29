@@ -20,10 +20,11 @@
 (setv __doc__ "module for common AI routines")
 
 (require pyherc.aspects)
+(require pyherc.macros)
 (import [pyherc.aspects [log_debug]]
     [pyherc.ai.pathfinding [a-star]]
     [pyherc.rules [is-move-legal]]
-    [pyherc.data.geometry [find-direction]]
+    [pyherc.data [find-direction get-tiles]]
     [herculeum.ai.basic [can-walk? walk wait distance-between new-location]]
     [herculeum.ai.basic [focus-enemy attack-enemy]]
     [random]
@@ -61,13 +62,9 @@
     (assert (second ai.mode))
     (let [[future-location (new-location ai.character (second ai.mode))]]
       (often (if (and (can-walk? ai action-factory (second ai.mode))
-		      (is-patrol-area ai.character.level
-				      (first future-location)
-				      (second future-location)))
+		      (is-patrol-area ai.character.level future-location))
 	       (walk ai action-factory)
-	       (if (is-patrol-area ai.character.level
-				   (first ai.character.location)
-				   (second ai.character.location))
+	       (if (is-patrol-area ai.character.level ai.character.location)
 		 (do (start-patrol ai)
 		     (wait ai))
 		 (-walk-random-direction ai action-factory)))
@@ -76,7 +73,7 @@
 #d(defn -walk-random-direction [ai action-factory]
     "take a random step without changing mode"
     (let [[legal-directions (list-comp direction
-				       [direction (, 1 3 5 7)]
+				       [direction #t(1 3 5 7)]
 				       (is-move-legal ai.character
 						      direction
 						      "walk"
@@ -89,9 +86,7 @@
 			   move-towards-patrol-area select-patrol-area
 			   ai action-factory]
     "routine to make character to find a patrol area"
-    (if (is-patrollable ai.character.level
-			(first ai.character.location)
-			(second ai.character.location))
+    (if (is-patrollable ai.character.level ai.character.location)
       (do (start-patrolling ai)
 	  (patrol ai action-factory))
       (if (second ai.mode)
@@ -101,8 +96,8 @@
 #d(defn -patrollable-area-in-level [can-patrol level]
     "routine to find area to patrol in level"
     (let [[patrol-area []]]
-      (for [location level.tiles]
-        (if (can-patrol level (first location) (second location))
+      (for [#t(location tile) (get-tiles level)]
+        (if (can-patrol level location)
           (.append patrol-area location)))
       patrol-area))
 
@@ -121,11 +116,11 @@
 	  [character-x (first ai.character.location)]
 	  [character-y (second ai.character.location)]
 	  [level ai.character.level]]
-      (for [offset [(, 0 1) (, 0 -1) (, 1 0) (, -1 0)]]
+      (for [offset [#t(0 1) #t(0 -1) #t(1 0) #t(-1 0)]]
 	(let [[x (+ character-x (first offset))]
 	      [y (+ character-y (second offset))]]
-	  (if (is-patrollable level x y)
-	    (.append possible-directions (, x y)))))
+	  (if (is-patrollable level #t(x y))
+	    (.append possible-directions #t(x y)))))
       (if possible-directions
 	(find-direction ai.character.location (.choice random possible-directions))
 	(wait ai))))
