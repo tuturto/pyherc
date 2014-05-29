@@ -18,7 +18,7 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.test.builders [LevelBuilder]]
-        [pyherc.data [wall-tile next-to-wall?]]
+        [pyherc.data [wall-tile next-to-wall? open-area?]]
         [hamcrest [assert-that is- equal-to]])
 (require pyherc.macros)
 
@@ -38,6 +38,14 @@
     (wall-tile level #t(6 5) :wall)
     (assert-that (next-to-wall? level #t(6 6)) (is- (equal-to true)))))
 
+(defn test-blocked-is-not-wall []
+  "blocked tile is not next to wall"
+  (let [[context (setup)]
+        [level (:level context)]]
+    (wall-tile level #t(6 5) :wall)
+    (wall-tile level #t(6 6) :wall)
+    (assert-that (next-to-wall? level #t(6 6)) (is- (equal-to false)))))
+
 (defn test-empty-space-is-not-wall []
   "empty space is not reported as next to wall"
   (let [[context (setup)]
@@ -51,3 +59,20 @@
     (wall-tile level #t(6 5))
     (wall-tile level #t(6 7))
     (assert-that (next-to-wall? level #t(6 6)) (is- (equal-to nil)))))
+
+(defn test-corner.is-reported-next-to-wall []
+  "corner should be considered next to wall"
+  (let [[context (setup)]
+        [level (:level context)]]
+    (wall-tile level #t(6 5) :wall)
+    (wall-tile level #t(7 5) :wall)
+    (wall-tile level #t(7 6) :wall)
+    (assert-that (next-to-wall? level #t(6 6)) (is- (equal-to true)))))
+
+(defn test-empty-space-is-recognized []
+  "empty space is recognized as empty space"
+  (let [[context (setup)]
+        [level (:level context)]]
+    (assert-that (open-area? level #t(5 5)) (is- (equal-to true)))))
+
+;; (defn test-blocked-location

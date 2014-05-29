@@ -22,9 +22,8 @@ Module for various helpers
 """
 from functools import partial
 from math import sqrt
-
-from pyherc.aspects import log_debug
 from pyherc.data.level import blocks_movement, get_character
+from pyherc.aspects import log_debug
 
 
 @log_debug
