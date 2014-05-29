@@ -205,8 +205,8 @@ class LevelGenerator():
         level = new_level(self.model)
 
         #TODO: remove when new sections have been implemented
-        wall_tile(level, (0, 0), self.level_context.wall_type)
-        wall_tile(level, self.level_context.size, self.level_context.wall_type)
+        wall_tile(level, (0, 0), None)
+        wall_tile(level, self.level_context.size, None)
 
         sections = self.partitioner.partition_level(level)
 

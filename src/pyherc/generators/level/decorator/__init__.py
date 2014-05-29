@@ -22,6 +22,7 @@
 """
 Module for level decorators
 """
+import hy
 
 from .basic import ReplacingDecorator, ReplacingDecoratorConfig
 from .basic import WallBuilderDecorator, WallBuilderDecoratorConfig
@@ -29,3 +30,5 @@ from .basic import AggregateDecorator, AggregateDecoratorConfig
 from .basic import DirectionalWallDecorator, DirectionalWallDecoratorConfig
 from .basic import FloorBuilderDecorator, FloorBuilderDecoratorConfig
 from .basic import WallOrnamentDecorator, WallOrnamentDecoratorConfig
+
+from .wall import SurroundingDecorator, SurroundingDecoratorConfig

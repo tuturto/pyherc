@@ -146,7 +146,7 @@ class WallBuilderDecorator(Decorator):
         """
         empty_tile = self.configuration.empty_tile
 
-        for loc, tile in get_tiles(level):
+        for loc, tile in list(get_tiles(level)):
             if tile['\ufdd0:wall'] == empty_tile:
                 self.check_and_replace((loc[0] - 1, loc[1]), level)
                 self.check_and_replace((loc[0] + 1, loc[1]), level)
@@ -166,6 +166,9 @@ class WallBuilderDecorator(Decorator):
         :param level: level to use
         :type level: Level
         """
+        if floor_tile(level, location):
+            return
+
         proto_tile = wall_tile(level, location)
 
         if proto_tile in self.configuration.wall_config:

@@ -124,7 +124,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     replacer = ReplacingDecorator(replacer_config)
 
     wallbuilder_config = WallBuilderDecoratorConfig(['upper crypt'],
-                                        {wall_natural: wall_constructed},
+                                        {wall_empty: wall_constructed},
                                         wall_empty)
     wallbuilder = WallBuilderDecorator(wallbuilder_config)
 

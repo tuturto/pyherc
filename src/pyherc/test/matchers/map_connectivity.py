@@ -23,7 +23,7 @@ Module for customer matchers used in testing
 
 from hamcrest.core.base_matcher import BaseMatcher
 from pyherc.data import wall_tile, get_tile, get_tiles, get_location_tags
-
+from pyherc.data import floor_tile
 
 class MapConnectivity(BaseMatcher):
     """
@@ -110,7 +110,7 @@ class MapConnectivity(BaseMatcher):
         if get_tile(level, start) is None:
             return None
 
-        if wall_tile(level, start) == None:
+        if wall_tile(level, start) is None and floor_tile(level, start) is not None:
             connected_points.append(start)
             self.get_connected_points(level, (x_loc, y_loc - 1),
                                       open_tile,
