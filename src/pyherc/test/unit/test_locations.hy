@@ -18,7 +18,7 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.test.builders [LevelBuilder]]
-        [pyherc.data [wall-tile next-to-wall? open-area?]]
+        [pyherc.data [wall-tile next-to-wall? open-area? corridor?]]
         [hamcrest [assert-that is- equal-to]])
 (require pyherc.macros)
 
@@ -75,4 +75,46 @@
         [level (:level context)]]
     (assert-that (open-area? level #t(5 5)) (is- (equal-to true)))))
 
-;; (defn test-blocked-location
+(defn test-blocked-location-is-not-empty []
+  "blocked location is not recognized as empty area"
+  (let [[context (setup)]
+        [level (:level context)]]
+    (wall-tile level #t(6 6) :wall)
+    (assert-that (open-area? level #t(6 6)) (is- (equal-to false)))))
+
+(defn test-next-to-wall-is-not-open-space []
+  "area next to wall is not open space"
+  (let [[context (setup)]
+        [level (:level context)]]
+    (wall-tile level #t(6 6) :wall)
+    (assert-that (open-area? level #t(6 7)) (is- (equal-to false)))))
+
+(defn test-open-area-is-not-corridor []
+  "open area is not recognized as corridor"
+  (let [[context (setup)]
+        [level (:level context)]]
+    (assert-that (corridor? level #t(6 6)) (is- (equal-to nil)))))
+
+(defn test-next-to-wall-is-not-corridor []
+  "area next to wall is not considered a corridor"
+  (let [[context (setup)]
+        [level (:level context)]]
+    (wall-tile level #t(5 5) :wall)
+    (assert-that (corridor? level #t(6 5)) (is- (equal-to nil)))))
+
+(defn test-corner-is-not-corridor []
+  "corner is not recognized as corridor"
+  (let [[context (setup)]
+        [level (:level context)]]
+    (wall-tile level #t(5 5) :wall)
+    (wall-tile level #t(6 5) :wall)
+    (wall-tile level #t(6 6) :wall)
+    (assert-that (corridor? level #t(5 6)) (is- (equal-to nil)))))
+
+(defn test-corridor-is-detected []
+  "area between two walls is corridor"
+  (let [[context (setup)]
+        [level (:level context)]]
+    (wall-tile level #t(5 5) :wall)
+    (wall-tile level #t(5 7) :wall)
+    (assert-that (corridor? level #t(5 6)) (is- (equal-to true)))))
