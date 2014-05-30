@@ -192,14 +192,14 @@ example defines an simple level:
     
         replacer_config = ReplacingDecoratorConfig(['upper crypt'],
                                         {'FLOOR_NATURAL': 'FLOOR_ROCK',
-                                        'FLOOR_CONSTRUCTED': 'FLOOR_BRICK'},
+                                         'FLOOR_CONSTRUCTED': 'FLOOR_BRICK'},
                                         {'WALL_NATURAL': 'WALL_GROUND',
-                                        'WALL_CONSTRUCTED': 'WALL_ROCK'})
+                                         'WALL_CONSTRUCTED': 'WALL_ROCK'})
         replacer = ReplacingDecorator(replacer_config)
     
         wallbuilder_config = WallBuilderDecoratorConfig(['upper crypt'],
                                             {'WALL_NATURAL': 'WALL_CONSTRUCTED'},
-                                            'WALL_EMPTY')
+                                             'WALL_EMPTY')
         wallbuilder = WallBuilderDecorator(wallbuilder_config)
     
         aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
@@ -247,8 +247,6 @@ example defines an simple level:
         level_context = LevelContext(size = level_size,
                                     floor_type = 'FLOOR_NATURAL',
                                     wall_type = 'WALL_NATURAL',
-                                    empty_floor = 0,
-                                    empty_wall = 'WALL_EMPTY',
                                     level_types = ['upper crypt'])
     
         config = (LevelConfiguration()
