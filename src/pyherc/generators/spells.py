@@ -178,24 +178,23 @@ def targeting_spherical_area(parameters, radius):
         y_range = range(splash_center[1] - radius,
                         splash_center[1] + radius + 1)
 
-        for x in x_range:
-            for y in y_range:
-                if matrix[x][y]:
-                    creature = get_character(level, (x, y))
-                    if creature:
-                        targets.append(TargetData('character',
-                                                  (x, y),
-                                                  creature,
-                                                  None))
-                    elif blocks_los(level, (x, y)):
-                        targets.append(TargetData('wall',
-                                                  (x, y),
-                                                  None,
-                                                  None))
-                    else:
-                        targets.append(TargetData('void',
-                                                  (x, y),
-                                                  None,
-                                                  None))
+        for location, is_visible in matrix.items():
+            if is_visible:
+                creature = get_character(level, location)
+                if creature:
+                    targets.append(TargetData('character',
+                                              location,
+                                              creature,
+                                              None))
+                elif blocks_los(level, location):
+                    targets.append(TargetData('wall',
+                                              location,
+                                              None,
+                                              None))
+                else:
+                    targets.append(TargetData('void',
+                                              location,
+                                              None,
+                                              None))
 
     return targets

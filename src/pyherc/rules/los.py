@@ -37,25 +37,7 @@ mult = [[1,  0,  0, -1, -1,  0,  0,  1],
         [0,  1,  1,  0,  0, -1, -1,  0],
         [1,  0,  0,  1, -1,  0,  0, -1]]
 
-
-def is_blocked(loc_x, loc_y, level, character=None):
-    """
-    Checks if given location should be considered blocking for character
-
-    Args:
-        loc_x: x-coordinate on the map
-        loc_y: y-coordinate on the map
-        level: level
-        character: character
-
-    Returns:
-        False if not blocking, otherwise True
-    """
-    assert level is not None
-
-    return blocks_los(level, (loc_x, loc_y))
-
-
+#TODO: parametrize for vision and movement
 def cast_light(cx, cy, row, start, end, radius, xx, xy, yx, yy, fov_matrix,
                level):
     """
@@ -85,17 +67,17 @@ def cast_light(cx, cy, row, start, end, radius, xx, xy, yx, yy, fov_matrix,
                 # Our light beam is touching this square; light it:
                 if dx*dx + dy*dy < radius_squared:
                     #transform from map to light_matrix
-                    fov_matrix[X][Y] = True
+                    fov_matrix[(X, Y)] = True
                 if blocked:
                     # we're scanning a row of blocked squares:
-                    if is_blocked(X, Y, level):
+                    if blocks_los(level, (X, Y)):
                         new_start = r_slope
                         continue
                     else:
                         blocked = False
                         start = new_start
                 else:
-                    if is_blocked(X, Y, level) and j < radius:
+                    if blocks_los(level, (X, Y)) and j < radius:
                         # This is a blocking square, start a child scan:
                         blocked = True
                         cast_light(cx, cy, j+1, start, l_slope,
@@ -132,17 +114,9 @@ def get_fov_matrix(location, level, distance):
     :type distance: int
     :returns: matrix of True / False
     """
-    fov_matrix = []
+    fov_matrix = {}
 
-    # TODO: handle negative coordinates
-    size = level_size(level)
-    width = size[1]
-    height = size[3]
-
-    for i in range(height):
-        fov_matrix.append([False] * width)
-
-    fov_matrix[location[0]][location[1]] = True
+    fov_matrix[location] = True
 
     return do_fov(location[0],
                   location[1], distance,
