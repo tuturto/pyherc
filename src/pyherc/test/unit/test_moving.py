@@ -58,7 +58,7 @@ class TestEventDispatching():
 
         self.character = (CharacterBuilder()
                           .with_model(self.model)
-                          .with_location((10, 10))
+                          .with_location((1, 1))
                           .build())
 
         self.model.dungeon = (LevelBuilder()
@@ -86,8 +86,8 @@ class TestEventDispatching():
         """
         Test that moving marks tiles for redrawing
         """
-        expected_redraws = [(10, 10),
-                            (10, 11)]
+        expected_redraws = [(1, 1),
+                            (1, 2)]
 
         self.actions.move_character(character=self.character,
                                     direction=Direction.south)

@@ -66,6 +66,7 @@ class TestSingleCharacterTargeting():
                           .with_floor_tile(FLOOR)
                           .with_wall_tile(EMPTY_WALL)
                           .with_solid_wall_tile(SOLID_WALL)
+                          .with_size((20, 20))
                           .build())
 
     def test_targeting_correct_direction(self):
@@ -176,6 +177,7 @@ class TestSphericalAreaTargetting():
                           .with_floor_tile(FLOOR)
                           .with_wall_tile(EMPTY_WALL)
                           .with_solid_wall_tile(SOLID_WALL)
+                          .with_size((20, 20))
                           .build())
 
     def test_area_effect_is_calculated(self):

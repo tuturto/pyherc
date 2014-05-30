@@ -58,16 +58,15 @@ class TestAStar():
                     .with_solid_wall_tile(WALL_TILE)
                     .build())
 
-        path, connections, updated = a_star(start = (10, 10),
-                                            goal = (15, 10),
+        path, connections, updated = a_star(start = (1, 1),
+                                            goal = (5, 1),
                                             a_map = level)
 
-        assert_that(path, contains((10, 10),
-                                   (11, 10),
-                                   (12, 10),
-                                   (13, 10),
-                                   (14, 10),
-                                   (15, 10)))
+        assert_that(path, contains((1, 1),
+                                   (2, 1),
+                                   (3, 1),
+                                   (4, 1),
+                                   (5, 1)))
 
     def test_going_around_wall(self):
         """
@@ -82,6 +81,7 @@ class TestAStar():
                     .with_wall_at((12, 10))
                     .with_wall_at((12, 11))
                     .with_wall_at((12, 12))
+                    .with_size((20, 20))
                     .build())
 
         path, connections, updated = a_star(start = (10, 10),

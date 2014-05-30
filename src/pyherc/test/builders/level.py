@@ -33,7 +33,7 @@ class LevelBuilder():
         """
         super().__init__()
         self.characters = []
-        self.level_size = (80, 40)
+        self.level_size = (10, 10)
         self.floor_tile = 1
         self.wall_tile = None
         self.empty_wall_tile = None
