@@ -36,36 +36,35 @@ Do trigger method is automatically triggered when effect's internal counter
 reaches zero. After the method has been executed, counter will be reset if the
 effect has not been expired.
 
-EffectsFactory
-==============
-Effects are cread by :class:`pyherc.generators.effects.EffectsFactory`. It can 
-take EffectHandle, some parameters and create a correctly instantiated Effect.
+Creating Effects
+================
+Effects are cread by :func:`pyherc.generators.effects.create_effect`. It
+takes configuration that defines effects and named arguments that are effect
+specific to create an effect.
 
 EffectsFactory is configured during the start up of the system with information
 that links names of effects to concrete Effect subclasses and their parameters.
 
 .. testcode::
 
-    from pyherc.generators import EffectsFactory
+    from pyherc.generators import create_effect, get_effect_creator
     from pyherc.data.effects import Poison
     from pyherc.test.cutesy import Adventurer
     from pyherc.rules import Dying
 
-    effect_factory = EffectsFactory()
-    effect_factory.add_effect('minor poison',
-                                        {'type': Poison,
-                                        'duration': 240,
-                                        'frequency': 60,
-                                        'tick': 60,
-                                        'damage': 1,
-                                        'icon': 101,
-                                        'title': 'Minor poison',
-                                        'description': 'Causes minor amount of damage'})
+    effect_creator = get_effect_creator({'minor poison': {'type': Poison,
+                                                          'duration': 240,
+                                                          'frequency': 60,
+                                                          'tick': 60,
+                                                          'damage': 1,
+                                                          'icon': 101,
+                                                          'title': 'Minor poison',
+                                                          'description': 'Causes minor amount of damage'}})
 
     Pete = Adventurer()
     print('Hit points before poisoning: {0}'.format(Pete.hit_points))
     
-    poisoning = effect_factory.create_effect('minor poison', target = Pete)
+    poisoning = effect_creator('minor poison', target = Pete)
     poisoning.trigger(Dying())
     
     print('Hit points after poisoning: {0}'.format(Pete.hit_points))

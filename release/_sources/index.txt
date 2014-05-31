@@ -11,18 +11,19 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
-   release_0_12
-   release_0_11
-   release_0_10
-   release_0_9
-   release_0_8
-   release_0_7
-   release_0_6
-   release_0_5
-   release_0_4
-   release_0_3
-   release_0_2
    release_0_1
+   release_0_2
+   release_0_3
+   release_0_4
+   release_0_5
+   release_0_6
+   release_0_7
+   release_0_8
+   release_0_9
+   release_0_10
+   release_0_11
+   release_0_12
+   release_0_13
 
 Indices and tables
 ==================

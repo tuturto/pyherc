@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Modular level generator &mdash; Herculeum 0.12.0 documentation</title>
+    <title>Modular level generator &mdash; Herculeum 0.13.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.12.0',
+        VERSION:     '0.13.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Herculeum 0.12.0 documentation" href="../index.html" />
+    <link rel="top" title="Herculeum 0.13.0 documentation" href="../index.html" />
     <link rel="next" title="Generating an item" href="generate_item.html" />
     <link rel="prev" title="Generating a level" href="generate_level.html" /> 
   </head>
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="generate_level.html" title="Generating a level"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.13.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -218,14 +218,14 @@ example defines an simple level:</p>
 
     <span class="n">replacer_config</span> <span class="o">=</span> <span class="n">ReplacingDecoratorConfig</span><span class="p">([</span><span class="s">&#39;upper crypt&#39;</span><span class="p">],</span>
                                     <span class="p">{</span><span class="s">&#39;FLOOR_NATURAL&#39;</span><span class="p">:</span> <span class="s">&#39;FLOOR_ROCK&#39;</span><span class="p">,</span>
-                                    <span class="s">&#39;FLOOR_CONSTRUCTED&#39;</span><span class="p">:</span> <span class="s">&#39;FLOOR_BRICK&#39;</span><span class="p">},</span>
+                                     <span class="s">&#39;FLOOR_CONSTRUCTED&#39;</span><span class="p">:</span> <span class="s">&#39;FLOOR_BRICK&#39;</span><span class="p">},</span>
                                     <span class="p">{</span><span class="s">&#39;WALL_NATURAL&#39;</span><span class="p">:</span> <span class="s">&#39;WALL_GROUND&#39;</span><span class="p">,</span>
-                                    <span class="s">&#39;WALL_CONSTRUCTED&#39;</span><span class="p">:</span> <span class="s">&#39;WALL_ROCK&#39;</span><span class="p">})</span>
+                                     <span class="s">&#39;WALL_CONSTRUCTED&#39;</span><span class="p">:</span> <span class="s">&#39;WALL_ROCK&#39;</span><span class="p">})</span>
     <span class="n">replacer</span> <span class="o">=</span> <span class="n">ReplacingDecorator</span><span class="p">(</span><span class="n">replacer_config</span><span class="p">)</span>
 
     <span class="n">wallbuilder_config</span> <span class="o">=</span> <span class="n">WallBuilderDecoratorConfig</span><span class="p">([</span><span class="s">&#39;upper crypt&#39;</span><span class="p">],</span>
                                         <span class="p">{</span><span class="s">&#39;WALL_NATURAL&#39;</span><span class="p">:</span> <span class="s">&#39;WALL_CONSTRUCTED&#39;</span><span class="p">},</span>
-                                        <span class="s">&#39;WALL_EMPTY&#39;</span><span class="p">)</span>
+                                         <span class="s">&#39;WALL_EMPTY&#39;</span><span class="p">)</span>
     <span class="n">wallbuilder</span> <span class="o">=</span> <span class="n">WallBuilderDecorator</span><span class="p">(</span><span class="n">wallbuilder_config</span><span class="p">)</span>
 
     <span class="n">aggregate_decorator_config</span> <span class="o">=</span> <span class="n">AggregateDecoratorConfig</span><span class="p">([</span><span class="s">&#39;upper crypt&#39;</span><span class="p">],</span>
@@ -273,8 +273,6 @@ example defines an simple level:</p>
     <span class="n">level_context</span> <span class="o">=</span> <span class="n">LevelContext</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">level_size</span><span class="p">,</span>
                                 <span class="n">floor_type</span> <span class="o">=</span> <span class="s">&#39;FLOOR_NATURAL&#39;</span><span class="p">,</span>
                                 <span class="n">wall_type</span> <span class="o">=</span> <span class="s">&#39;WALL_NATURAL&#39;</span><span class="p">,</span>
-                                <span class="n">empty_floor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-                                <span class="n">empty_wall</span> <span class="o">=</span> <span class="s">&#39;WALL_EMPTY&#39;</span><span class="p">,</span>
                                 <span class="n">level_types</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;upper crypt&#39;</span><span class="p">])</span>
 
     <span class="n">config</span> <span class="o">=</span> <span class="p">(</span><span class="n">LevelConfiguration</span><span class="p">()</span>
@@ -373,7 +371,7 @@ application and configuration.</p>
         <li class="right" >
           <a href="generate_level.html" title="Generating a level"
              >previous</a> |</li>
-        <li><a href="../index.html">Herculeum 0.12.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Herculeum 0.13.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
