@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name = 'herculeum',
-      version = '0.13',
+      version = '0.13.1',
       description = 'Small roguelike game',
       author = 'Tuukka Turto',
       author_email = 'tuukka.turto@oktaeder.net',
@@ -51,6 +51,7 @@ setup(name = 'herculeum',
                                'events/*.hy',
                                'generators/*.hy',
                                'generators/level/*.hy',
+                               'generators/level/decorator/*.hy',
                                'rules/*.hy',
                                'rules/metamorphosis/*.hy',
                                'rules/mitosis/*.hy']},
