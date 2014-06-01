@@ -45,7 +45,8 @@ from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
 from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.portals import PortalAdderConfiguration
 from pyherc.generators.level.room import (PillarRoomGenerator,
-                                          SquareRoomGenerator)
+                                          SquareRoomGenerator,
+                                          CircularRoomGenerator)
 from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
@@ -98,6 +99,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            empty_tile = wall_empty,
                                            pillar_tile = pillar,
                                            level_types = ['first gate'])]
+
+    room_generators = [CircularRoomGenerator(tile_floor,
+                                             ['first gate'])]
 
     level_partitioners = [GridPartitioner(['first gate'],
                                            3,

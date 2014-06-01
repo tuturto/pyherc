@@ -154,8 +154,8 @@ class CreatureAdder():
 
             locations = list(get_locations_by_tag(level, 'room'))
 
-            location = self.rng.choice(locations)
-
-            add_character(level, location, creature)
+            if locations:
+                location = self.rng.choice(locations)
+                add_character(level, location, creature)
 
     level_types = property(__get_level_types)

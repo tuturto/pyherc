@@ -23,6 +23,7 @@ Classes to represent division of levels
 
 import logging
 from pyherc.data import floor_tile, wall_tile, add_trap, add_location_tag
+from pyherc.data import get_tile
 
 
 class Section():
