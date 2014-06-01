@@ -57,3 +57,24 @@
                                                                 nil
                                                                 self.corridor-tile)]]
                                (.generate corridor))))]])
+
+(defclass TempleRoomGenerator []
+  "generator for temple rooms"
+  [[--init-- (fn [self floor-tile corridor-tile temple-tile level-types &optional candle-tile]
+               "default constructor"
+               (setv self.center-point nil)
+               (setv self.floor-tile floor-tile)
+               (setv self.corridor-tile corridor-tile)
+               (setv self.temple-tile temple-tile)
+               (setv self.candle-tile candle-tile)
+               (setv self.level-types level-types)
+               (setv self.base-generator (CircularRoomGenerator floor-tile corridor-tile level-types))
+               nil)]
+   [generate-room (fn [self section]
+                    "generate a new room"
+                    (.generate-room self.base-generator section)
+                    (let [[#t(x-loc y-loc) self.base-generator.center-point]]
+                      (.set-ornamentation section #t(x-loc y-loc) self.temple-tile)
+                      (when self.candle-tile
+                        (.set-ornamentation section #t((+ x-loc 1) y-loc) self.candle-tile)
+                        (.set-ornamentation section #t((- x-loc 1) y-loc) self.candle-tile))))]])

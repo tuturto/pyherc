@@ -206,5 +206,10 @@
         <file>wall_torch_f1.png</file>
         <file>wall_torches_f0.png</file>
         <file>wall_torches_f1.png</file>
+        <file>altar.png</file>
+        <file>fountain_f0.png</file>
+        <file>fountain_f1.png</file>
+        <file>standing_candle_f0.png</file>
+        <file>standing_candle_f1.png</file>
     </qresource>
 </RCC>

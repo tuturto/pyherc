@@ -27,6 +27,9 @@ from herculeum.ui.gui.animations import AnimationFactory
 from herculeum.ui.gui.eventdisplay import EventMessageWidget
 from herculeum.ui.gui.widgets import (EffectsWidget, HitPointsWidget,
                                       SpellSelectorWidget, TimerAdapter)
+from herculeum.ui.gui.layers import (zorder_floor, zorder_wall, zorder_ornament,
+                                     zorder_item, zorder_character,
+                                     zorder_counter)
 from pyherc.data.model import DIED_IN_DUNGEON
 from pyherc.rules import attack, cast, is_move_legal, move, pick_up, wait
 from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
@@ -149,14 +152,6 @@ class PlayMapWindow(QWidget):
         .. versionadded:: 0.10
         """
         self.spell_selector.previous_spell()
-
-zorder_floor = 0
-zorder_item = 2
-zorder_character = 5
-zorder_wall = 10
-zorder_ornament = 20
-
-zorder_counter = 30
 
 class PlayMapWidget(QWidget):
     """

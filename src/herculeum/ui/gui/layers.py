@@ -23,9 +23,8 @@ Module for defining ui layering order
 
 
 zorder_floor = 0
-zorder_item = 2
-zorder_character = 5
 zorder_wall = 10
 zorder_ornament = 20
-
-zorder_counter = 30
+zorder_item = 30
+zorder_character = 40
+zorder_counter = 50

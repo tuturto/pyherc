@@ -23,7 +23,7 @@ Classes to represent division of levels
 
 import logging
 from pyherc.data import floor_tile, wall_tile, add_trap, add_location_tag
-from pyherc.data import get_tile
+from pyherc.data import get_tile, ornamentation
 
 
 class Section():
@@ -354,6 +354,15 @@ class Section():
         y_loc = self.__get_top_edge() + location[1]
 
         return floor_tile(self.level, (x_loc, y_loc))
+
+    def set_ornamentation(self, location, tile):
+        """
+        Set ornamentation at given location
+        """
+        x_loc = self.__get_left_edge() + location[0]
+        y_loc = self.__get_top_edge() + location[1]
+
+        ornamentation(self.level, (x_loc, y_loc), tile)
 
     def set_wall(self, location, tile, location_type):
         """

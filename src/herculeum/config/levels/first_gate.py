@@ -46,7 +46,8 @@ from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.portals import PortalAdderConfiguration
 from pyherc.generators.level.room import (PillarRoomGenerator,
                                           SquareRoomGenerator,
-                                          CircularRoomGenerator)
+                                          CircularRoomGenerator,
+                                          TempleRoomGenerator)
 from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
@@ -90,6 +91,12 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     wall_137 = surface_manager.add_icon('catacombs_wall_137', ':catacombs_wall_4_6_8.png', '#')
     wall_157 = surface_manager.add_icon('catacombs_wall_157', ':catacombs_wall_2_4_8.png', '#')
 
+    altar = surface_manager.add_icon('altar', ':altar.png', '_')
+    standing_candle_f0 = surface_manager.add_icon('standing candle f0', ':standing_candle_f0.png', '|')
+    standing_candle_f1 = surface_manager.add_icon('standing candle f1', ':standing_candle_f1.png', '|')
+    fountain_f0 = surface_manager.add_icon('fountain f0', ':fountain_f0.png', '{')
+    fountain_f1 = surface_manager.add_icon('fountain f1', ':fountain_f1.png', '{')
+
     room_generators = [SquareRoomGenerator(tile_floor,
                                            wall_empty,
                                            tile_floor,
@@ -101,7 +108,18 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            level_types = ['first gate']),
                        CircularRoomGenerator(tile_floor,
                                              tile_floor,
-                                             ['first gate'])]
+                                             ['first gate']),
+                       TempleRoomGenerator(tile_floor,
+                                           tile_floor,
+                                           altar,
+                                           ['first gate'],
+                                           [standing_candle_f0,
+                                            standing_candle_f1]),
+                       TempleRoomGenerator(tile_floor,
+                                           tile_floor,
+                                           [fountain_f0,
+                                            fountain_f1],
+                                           ['first gate'])]
 
     level_partitioners = [GridPartitioner(['first gate'],
                                            4,
