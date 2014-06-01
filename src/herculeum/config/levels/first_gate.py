@@ -98,13 +98,13 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            corridor_tile = tile_floor,
                                            empty_tile = wall_empty,
                                            pillar_tile = pillar,
-                                           level_types = ['first gate'])]
-
-    room_generators = [CircularRoomGenerator(tile_floor,
+                                           level_types = ['first gate']),
+                       CircularRoomGenerator(tile_floor,
+                                             tile_floor,
                                              ['first gate'])]
 
     level_partitioners = [GridPartitioner(['first gate'],
-                                           3,
+                                           4,
                                            2,
                                            rng)]
 
@@ -210,9 +210,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     creatures_upper.add_creature(min_amount = 0,
                                  max_amount = 1,
                                  name = 'skeleton warrior')
-    creatures_upper.add_creature(min_amount = 3,
-                                 max_amount = 6,
-                                 name = 'fungus')
 
     creature_adders = [CreatureAdder(creature_generator,
                                     creatures_upper,

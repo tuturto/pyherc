@@ -25,25 +25,29 @@
 
 (defclass CircularRoomGenerator []
   "generator for circular rooms"
-  [[--init-- (fn [self floor-tile level-types]
+  [[--init-- (fn [self floor-tile corridor-tile level-types]
                "default constructor"
+               (setv self.center-point nil)
                (setv self.floor-tile floor-tile)
+               (setv self.corridor-tile corridor-tile)
                (setv self.level-types level-types)
                nil)]
    [generate-room (fn [self section]
                     "generate a new room"
                     (let [[center-x (// section.width 2)]
                           [center-y (// section.height 2)]
-                          [center-point #t(center-x center-y)]]
+                          [center-point #t(center-x center-y)]
+                          [radius (min [(- center-x 2) (- center-y 2)])]]
                       (for [x_loc (range section.width)]
                         (for [y_loc (range section.height)]
-                          (when (<= (distance-between #t(x_loc y_loc) center-point) 2)
+                          (when (<= (distance-between #t(x_loc y_loc) center-point) radius)
                             (.set-floor section #t(x_loc y_loc) self.floor-tile "room"))))
-                      (.add-room-connection section #t(center-x (- center-y 2)) "up")
-                      (.add-room-connection section #t(center-x (+ center-y 2)) "down")
-                      (.add-room-connection section #t((- center-x 2) center-y) "left")
-                      (.add-room-connection section #t((+ center-x 2) center-y) "right")
-                      (.add-corridors self section)))]
+                      (.add-room-connection section #t(center-x (- center-y radius)) "up")
+                      (.add-room-connection section #t(center-x (+ center-y radius)) "down")
+                      (.add-room-connection section #t((- center-x radius) center-y) "left")
+                      (.add-room-connection section #t((+ center-x radius) center-y) "right")
+                      (.add-corridors self section)
+                      (setv self.center-point center-point)))]
    [add-corridors (fn [self section]
                     "add corridors"
                     (ap-each section.connections
@@ -51,5 +55,5 @@
                                    [corridor (CorridorGenerator room-connection
                                                                 (.translate-to-section it)
                                                                 nil
-                                                                self.floor-tile)]]
+                                                                self.corridor-tile)]]
                                (.generate corridor))))]])
