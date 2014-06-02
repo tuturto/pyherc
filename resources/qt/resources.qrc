@@ -211,5 +211,17 @@
         <file>fountain_f1.png</file>
         <file>standing_candle_f0.png</file>
         <file>standing_candle_f1.png</file>
+        <file>shelf_empty.png</file>
+        <file>shelf_book_1.png</file>
+        <file>shelf_book_2.png</file>
+        <file>tomb_1.png</file>
+        <file>tomb_2.png</file>
+        <file>tomb_3.png</file>
+        <file>tomb_4.png</file>
+        <file>tomb_5.png</file>
+        <file>tomb_6.png</file>
+        <file>tomb_7.png</file>
+        <file>tomb_8.png</file>
+        <file>tomb_9.png</file>
     </qresource>
 </RCC>

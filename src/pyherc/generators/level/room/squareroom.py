@@ -51,7 +51,8 @@ class SquareRoomGenerator():
         self.room_height = None
         self.level_types = level_types
         self.rng = Random()
-        self.room_corners = None
+        self.room_corners = []
+        self.rows = []
         self.logger = logging.getLogger('pyherc.generators.level.room.squareroom.SquareRoomGenerator')  # noqa
 
     def generate_room(self, section):
@@ -111,6 +112,26 @@ class SquareRoomGenerator():
         self.room_corners.append((room_right_edge - 1, room_top_edge + 1))
         self.room_corners.append((room_right_edge - 1, room_bottom_edge - 1))
         self.room_corners.append((room_left_edge + 1, room_bottom_edge - 1))
+
+        self.add_rows()
+
+    def add_rows(self):
+        """
+        Add extra info detailing rows that can be used for bookshelves and such
+        """
+        self.rows = []
+
+        top_left = self.room_corners[0]
+        top_right = self.room_corners[1]
+        bottom_right = self.room_corners[2]
+        bottom_left = self.room_corners[3]
+
+        rows = range(top_left[1] + 1, bottom_left[1], 2)
+        cols = range(top_left[0] + 1, top_right[0])
+
+        for y in rows:
+            for x in cols:
+                self.rows.append((x, y))
 
     def add_corridors(self, section):
         """

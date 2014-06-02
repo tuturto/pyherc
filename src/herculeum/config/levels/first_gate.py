@@ -47,7 +47,8 @@ from pyherc.generators.level.portals import PortalAdderConfiguration
 from pyherc.generators.level.room import (PillarRoomGenerator,
                                           SquareRoomGenerator,
                                           CircularRoomGenerator,
-                                          TempleRoomGenerator)
+                                          TempleRoomGenerator,
+                                          LibraryRoomGenerator)
 from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
@@ -97,6 +98,20 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     fountain_f0 = surface_manager.add_icon('fountain f0', ':fountain_f0.png', '{')
     fountain_f1 = surface_manager.add_icon('fountain f1', ':fountain_f1.png', '{')
 
+    shelf_1 = surface_manager.add_icon('empty shelf', ':shelf_empty.png', '+')
+    shelf_2 = surface_manager.add_icon('bookshelf 1', ':shelf_book_1.png', '+')
+    shelf_3 = surface_manager.add_icon('bookshelf 2', ':shelf_book_2.png', '+')
+
+    tomb_1 = surface_manager.add_icon('tomb 1', ':tomb_1.png', '|')
+    tomb_2 = surface_manager.add_icon('tomb 2', ':tomb_2.png', '|')
+    tomb_3 = surface_manager.add_icon('tomb 3', ':tomb_3.png', '|')
+    tomb_4 = surface_manager.add_icon('tomb 4', ':tomb_4.png', '|')
+    tomb_5 = surface_manager.add_icon('tomb 5', ':tomb_5.png', '|')
+    tomb_6 = surface_manager.add_icon('tomb 6', ':tomb_6.png', '|')
+    tomb_7 = surface_manager.add_icon('tomb 7', ':tomb_7.png', '|')
+    tomb_8 = surface_manager.add_icon('tomb 8', ':tomb_8.png', '|')
+    tomb_9 = surface_manager.add_icon('tomb 9', ':tomb_9.png', '|')
+
     room_generators = [SquareRoomGenerator(tile_floor,
                                            wall_empty,
                                            tile_floor,
@@ -119,7 +134,21 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            tile_floor,
                                            [fountain_f0,
                                             fountain_f1],
-                                           ['first gate'])]
+                                           ['first gate']),
+                       LibraryRoomGenerator(tile_floor,
+                                            tile_floor,
+                                            [shelf_1, shelf_2, shelf_3],
+                                            None,
+                                            75,
+                                            ['first gate']),
+                       LibraryRoomGenerator(tile_floor,
+                                            tile_floor,
+                                            None,
+                                            [tomb_1, tomb_2, tomb_3,
+                                             tomb_4, tomb_5, tomb_6,
+                                             tomb_7, tomb_8, tomb_9],
+                                            25,
+                                            ['first gate'])]
 
     level_partitioners = [GridPartitioner(['first gate'],
                                            4,

@@ -22,7 +22,8 @@
 (import [pyherc.generators.level.room [SquareRoomGenerator PillarRoomGenerator
                                        CatacombsGenerator CrimsonLairGenerator
                                        CircularRoomGenerator
-                                       TempleRoomGenerator]]
+                                       TempleRoomGenerator
+                                       LibraryRoomGenerator]]
         [pyherc.generators.level.partitioners [GridPartitioner]]
         [pyherc.test.builders [LevelBuilder]]
         [random [Random]])
@@ -58,3 +59,7 @@
 (defn test-temple-generation []
   "test generating temple"
   (run-generator (TempleRoomGenerator :floor :corridor :temple ["test"] :candle)))
+
+(defn test-library-generation []
+  "test generating library"
+  (run-generator (LibraryRoomGenerator :floor :corridor [:shelf1 :shelf2] 50 ["test"])))
