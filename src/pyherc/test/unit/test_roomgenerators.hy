@@ -62,4 +62,4 @@
 
 (defn test-library-generation []
   "test generating library"
-  (run-generator (LibraryRoomGenerator :floor :corridor [:shelf1 :shelf2] 50 ["test"])))
+  (run-generator (LibraryRoomGenerator :floor :corridor [:shelf1 :shelf2] nil 50 ["test"])))
