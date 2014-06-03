@@ -19,7 +19,7 @@
 
 (require pyherc.macros)
 
-(import [pyherc.data [add-location-tag floor-tile]])
+(import [pyherc.data [add-location-tag floor-tile wall-tile]])
 
 (defn new-section [corner0 corner1 level]
   "create a new section"
@@ -46,27 +46,27 @@
 
 (defn left-edge [section]
   "get left edge of the section"
-  (let [[point0 (x-coordinate (first section.-corners))]
-        [point1 (x-coordinate (second section.-corners))]]
-    (if (< point0 point1) point0 point1)))
+  (let [[point₀ (x-coordinate (first section.-corners))]
+        [point₁ (x-coordinate (second section.-corners))]]
+    (if (< point₀ point₁) point₀ point₁)))
 
 (defn right-edge [section]
   "get right edge of the section"
-  (let [[point0 (x-coordinate (first section.-corners))]
-        [point1 (x-coordinate (second section.-corners))]]
-    (if (> point0 point1) point0 point1)))
+  (let [[point₀ (x-coordinate (first section.-corners))]
+        [point₁ (x-coordinate (second section.-corners))]]
+    (if (> point₀ point₁) point₀ point₁)))
 
 (defn top-edge [section]
   "get top edge of the section"
-  (let [[point0 (y-coordinate (first section.-corners))]
-        [point1 (y-coordinate (second section.-corners))]]
-    (if (< point0 point1) point0 point1)))
+  (let [[point₀ (y-coordinate (first section.-corners))]
+        [point₁ (y-coordinate (second section.-corners))]]
+    (if (< point₀ point₁) point₀ point₁)))
 
 (defn bottom-edge [section]
   "get bottom edge of the section"
-  (let [[point0 (y-coordinate (first section.-corners))]
-        [point1 (y-coordinate (second section.-corners))]]
-    (if (> point0 point1) point0 point1)))
+  (let [[point₀ (y-coordinate (first section.-corners))]
+        [point₁ (y-coordinate (second section.-corners))]]
+    (if (> point₀ point₁) point₀ point₁)))
 
 (defn section-to-map [section location]
   "map section coordinates to map coordinates"
@@ -80,3 +80,11 @@
     (when (!= tile-id :no-tile) (floor-tile level loc tile-id))
     (when location-type (add-location-tag level loc location-type))
     (floor-tile level loc tile-id)))
+
+(defn section-wall [section location &optional [tile-id :no-tile] location-type]
+  "get/set wall tile in section"
+  (let [[loc (section-to-map section location)]
+        [level section.level]]
+    (when (!= tile-id :no-tile) (wall-tile level loc tile-id))
+    (when location-type (add-location-tag level loc location-type))
+    (wall-tile level loc tile-id)))

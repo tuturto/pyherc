@@ -244,25 +244,6 @@ class Section():
         """
         ornamentation(self.level, section_to_map(self, location), tile)
 
-    def set_wall(self, location, tile, location_type):
-        """
-        Set wall at given location
-
-        :param location: location to set the tile
-        :type location: (integer, integer)
-        :param tile: ID of the tile to use
-        :type tile: integer
-        :param location_type: type of location, None to not change
-        :type location_type: string
-
-        .. note:: Coordinates are given relative to section origo
-        """
-        location = section_to_map(self, location)
-
-        wall_tile(self.level, location, tile)
-        if location_type is not None:
-            add_location_tag(self.level, location, location_type)
-
     def set_location_type(self, location, location_type):
         """
         Set type of location in level
@@ -275,19 +256,6 @@ class Section():
         .. versionadded:: 0.8
         """
         add_location_tag(self.level, section_to_map(self, location), location_type)
-
-    def get_wall(self, location):
-        """
-        Get wall at given location
-
-        :param location: location to check
-        :type location: (int, int)
-        :returns: wall at given location
-        :rtype: int
-
-        .. versionadded:: 0.8
-        """
-        return wall_tile(self.level, section_to_map(self, location))
 
     def find_room_connection(self, section_connection):
         """

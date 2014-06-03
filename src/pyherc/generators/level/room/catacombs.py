@@ -23,7 +23,7 @@ Classes for generating catacombs
 from pyherc.aspects import log_debug
 from pyherc.generators.utils import BSPSection
 from pyherc.generators.level.partitioners import (section_width, section_height,
-                                                  section_floor)
+                                                  section_floor, section_wall)
 
 class CatacombsGenerator():
     """
@@ -92,9 +92,10 @@ class CatacombsGenerator():
                                   (x, y),
                                   self.floor_tile,
                                   'room')
-                    section.set_wall((x, y),
-                                     self.empty_tile,
-                                     None)
+                    section_wall(section,
+                                 (x, y),
+                                 self.empty_tile,
+                                 None)
 
         area_queue = BSP.get_area_queue()
         area_queue.reverse()
@@ -113,18 +114,20 @@ class CatacombsGenerator():
                                       (center1[0], y),
                                       self.floor_tile,
                                       'corridor')
-                        section.set_wall((center1[0], y),
-                                         self.empty_tile,
-                                         None)
+                        section_wall(section,
+                                     (center1[0], y),
+                                     self.empty_tile,
+                                     None)
                 else:
                     for y in range(center2[1], center1[1] + 1):
                         section_floor(section, 
                                       (center1[0], y),
                                       self.floor_tile,
                                       'corridor')
-                        section.set_wall((center1[0], y),
-                                         self.empty_tile,
-                                         None)
+                        section_wall(section,
+                                     (center1[0], y),
+                                     self.empty_tile,
+                                     None)
             else:
                 #areas next to each other
                 if center1[0] < center2[0]:
@@ -133,15 +136,17 @@ class CatacombsGenerator():
                                       (x, center1[1]),
                                       self.floor_tile,
                                       'corridor')
-                        section.set_wall((x, center1[1]),
-                                         self.empty_tile,
-                                         None)
+                        section_wall(section,
+                                     (x, center1[1]),
+                                     self.empty_tile,
+                                     None)
                 else:
                     for x in range(center2[0], center1[0] + 1):
                         section_floor(section,
                                       (x, center1[1]),
                                       self.floor_tile,
                                       'corridor')
-                        section.set_wall((x, center1[1]),
-                                         self.empty_tile,
-                                         None)
+                        section_wall(section,
+                                     (x, center1[1]),
+                                     self.empty_tile,
+                                     None)

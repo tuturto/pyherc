@@ -31,7 +31,8 @@ from pyherc.test.builders import LevelBuilder
 from pyherc.data import floor_tile, wall_tile, get_location_tags
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.generators.level.partitioners import (section_width, section_height,
-                                                  left_edge, top_edge, section_floor)
+                                                  left_edge, top_edge, section_floor,
+                                                  section_wall)
 
 
 class TestSectionCalculations():
@@ -258,7 +259,7 @@ class TestSectionLevelAccess():
         """
         Test that walls can be set
         """
-        self.section.set_wall((2, 2), self.wall_ground, None)
+        section_wall(self.section, (2, 2), self.wall_ground, None)
 
         assert_that(wall_tile(self.level, (2, 2)),
                     is_(equal_to(self.wall_ground)))
@@ -318,7 +319,7 @@ class TestSectionLevelAccessWithOffset():
         """
         Test that offset Section is correctly mapped to the level
         """
-        self.section.set_wall((3, 2), self.wall_ground, None)
+        section_wall(self.section, (3, 2), self.wall_ground, None)
 
         assert_that(wall_tile(self.level, (8, 7)),
                     is_(equal_to(self.wall_ground)))

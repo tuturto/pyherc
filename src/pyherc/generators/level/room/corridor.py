@@ -22,7 +22,7 @@ Classes for generating corridors
 """
 
 from pyherc.generators.level.partitioners.section import Connection
-from pyherc.generators.level.partitioners import  section_floor
+from pyherc.generators.level.partitioners import  section_floor, section_wall
 
 
 class CorridorGenerator():
@@ -80,11 +80,11 @@ class CorridorGenerator():
         section = start_point.section
 
         for x_loc in range(start_x, end_x):
-            section.set_wall((x_loc, y_loc), self.wall_tile, 'corridor')
+            section_wall(section, (x_loc, y_loc), self.wall_tile, 'corridor')
             section_floor(section, (x_loc, y_loc), self.floor_tile, None)
 
-        section.set_wall(end_point.location, self.wall_tile, 'corridor')
-        section.set_wall(start_point.location, self.wall_tile, 'corridor')
+        section_wall(section, end_point.location, self.wall_tile, 'corridor')
+        section_wall(section, start_point.location, self.wall_tile, 'corridor')
         section_floor(section, end_point.location, self.floor_tile, None)
         section_floor(section, start_point.location, self.floor_tile, None)
 
@@ -138,11 +138,11 @@ class CorridorGenerator():
         section = start_point.section
 
         for y_loc in range(start_y, end_y):
-            section.set_wall((x_loc, y_loc), self.wall_tile, 'corridor')
+            section_wall(section, (x_loc, y_loc), self.wall_tile, 'corridor')
             section_floor(section, (x_loc, y_loc), self.floor_tile, None)
 
-        section.set_wall(end_point.location, self.wall_tile, 'corridor')
-        section.set_wall(start_point.location, self.wall_tile, 'corridor')
+        section_wall(section, end_point.location, self.wall_tile, 'corridor')
+        section_wall(section, start_point.location, self.wall_tile, 'corridor')
         section_floor(section, end_point.location, self.floor_tile, None)
         section_floor(section, start_point.location, self.floor_tile, None)
 
