@@ -24,3 +24,6 @@ Package for level partitioners and related classes
 """
 
 from .grid import GridPartitioner, RandomConnector
+from .new_section import section_corners, section_width, section_height
+from .new_section import left_edge, right_edge, top_edge, bottom_edge
+from .new_section import section_to_map, section_floor

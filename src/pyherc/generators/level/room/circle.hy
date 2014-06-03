@@ -21,7 +21,9 @@
 (require hy.contrib.anaphoric)
 
 (import [pyherc.data [distance-between]]
-        [pyherc.generators.level.room.corridor [CorridorGenerator]])
+        [pyherc.generators.level.room.corridor [CorridorGenerator]]
+        [pyherc.generators.level.partitioners [section-width section-height
+                                               section-floor]])
 
 (defclass CircularRoomGenerator []
   "generator for circular rooms"
@@ -34,14 +36,14 @@
                nil)]
    [generate-room (fn [self section]
                     "generate a new room"
-                    (let [[center-x (// section.width 2)]
-                          [center-y (// section.height 2)]
+                    (let [[center-x (// (section-width section) 2)]
+                          [center-y (// (section-height section) 2)]
                           [center-point #t(center-x center-y)]
                           [radius (min [(- center-x 2) (- center-y 2)])]]
-                      (for [x_loc (range section.width)]
-                        (for [y_loc (range section.height)]
+                      (for [x_loc (range (section-width section))]
+                        (for [y_loc (range (section-height section))]
                           (when (<= (distance-between #t(x_loc y_loc) center-point) radius)
-                            (.set-floor section #t(x_loc y_loc) self.floor-tile "room"))))
+                            (section-floor section #t(x_loc y_loc) self.floor-tile "room"))))
                       (.add-room-connection section #t(center-x (- center-y radius)) "up")
                       (.add-room-connection section #t(center-x (+ center-y radius)) "down")
                       (.add-room-connection section #t((- center-x radius) center-y) "left")
@@ -58,22 +60,18 @@
                                                                 self.corridor-tile)]]
                                (.generate corridor))))]])
 
-(defclass TempleRoomGenerator []
+(defclass TempleRoomGenerator [CircularRoomGenerator]
   "generator for temple rooms"
   [[--init-- (fn [self floor-tile corridor-tile temple-tile level-types &optional candle-tile]
                "default constructor"
-               (setv self.center-point nil)
-               (setv self.floor-tile floor-tile)
-               (setv self.corridor-tile corridor-tile)
+               (-> (super) (.--init-- floor-tile corridor-tile level-types))
                (setv self.temple-tile temple-tile)
                (setv self.candle-tile candle-tile)
-               (setv self.level-types level-types)
-               (setv self.base-generator (CircularRoomGenerator floor-tile corridor-tile level-types))
                nil)]
    [generate-room (fn [self section]
                     "generate a new room"
-                    (.generate-room self.base-generator section)
-                    (let [[#t(x-loc y-loc) self.base-generator.center-point]]
+                    (-> (super) (.generate-room section))
+                    (let [[#t(x-loc y-loc) self.center-point]]
                       (.set-ornamentation section #t(x-loc y-loc) self.temple-tile)
                       (when self.candle-tile
                         (.set-ornamentation section #t((+ x-loc 1) y-loc) self.candle-tile)

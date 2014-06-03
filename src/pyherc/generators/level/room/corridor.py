@@ -22,6 +22,7 @@ Classes for generating corridors
 """
 
 from pyherc.generators.level.partitioners.section import Connection
+from pyherc.generators.level.partitioners import  section_floor
 
 
 class CorridorGenerator():
@@ -80,12 +81,12 @@ class CorridorGenerator():
 
         for x_loc in range(start_x, end_x):
             section.set_wall((x_loc, y_loc), self.wall_tile, 'corridor')
-            section.set_floor((x_loc, y_loc), self.floor_tile, None)
+            section_floor(section, (x_loc, y_loc), self.floor_tile, None)
 
         section.set_wall(end_point.location, self.wall_tile, 'corridor')
         section.set_wall(start_point.location, self.wall_tile, 'corridor')
-        section.set_floor(end_point.location, self.floor_tile, None)
-        section.set_floor(start_point.location, self.floor_tile, None)
+        section_floor(section, end_point.location, self.floor_tile, None)
+        section_floor(section, start_point.location, self.floor_tile, None)
 
     def __carve_horizontal_bend(self, start_point, end_point):
         """
@@ -138,12 +139,12 @@ class CorridorGenerator():
 
         for y_loc in range(start_y, end_y):
             section.set_wall((x_loc, y_loc), self.wall_tile, 'corridor')
-            section.set_floor((x_loc, y_loc), self.floor_tile, None)
+            section_floor(section, (x_loc, y_loc), self.floor_tile, None)
 
         section.set_wall(end_point.location, self.wall_tile, 'corridor')
         section.set_wall(start_point.location, self.wall_tile, 'corridor')
-        section.set_floor(end_point.location, self.floor_tile, None)
-        section.set_floor(start_point.location, self.floor_tile, None)
+        section_floor(section, end_point.location, self.floor_tile, None)
+        section_floor(section, start_point.location, self.floor_tile, None)
 
     def __carve_vertical_bend(self, start_point, end_point):
         """

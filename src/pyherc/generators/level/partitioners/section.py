@@ -24,7 +24,8 @@ Classes to represent division of levels
 import logging
 from pyherc.data import floor_tile, wall_tile, add_trap, add_location_tag
 from pyherc.data import get_tile, ornamentation
-
+from pyherc.generators.level.partitioners.new_section import (section_to_map,
+                                                              left_edge, top_edge)
 
 class Section():
     """
@@ -47,9 +48,9 @@ class Section():
         """
         super().__init__()
 
-        self.__corners = []
-        self.__corners.append(corner1)
-        self.__corners.append(corner2)
+        self._corners = []
+        self._corners.append(corner1)
+        self._corners.append(corner2)
         self.level = level
 
         self.__connections = []
@@ -57,24 +58,6 @@ class Section():
         self.__neighbours = []
         self.random_generator = random_generator
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.section.Section')  # noqa
-
-    def __get_corners(self):
-        """
-        Get corners of this section
-
-        :returns: corners of the section
-        :rtype: [(integer, integer), (integer, integer)]
-        """
-        return self.__corners
-
-    def __set_corners(self, corners):
-        """
-        Set corners of this section
-
-        :param corners: Corners to set
-        :type corners: [(integer, integer), (integer, integer)]
-        """
-        self.__corners = corners
 
     def __get_connections(self):
         """
@@ -112,57 +95,6 @@ class Section():
         """
         return len(self.__connections) > 0
 
-    def __get_left_edge(self):
-        """
-        Get leftmost point of the section
-
-        :returns: leftmost point of the section
-        :rtype: (integer, integer)
-        """
-        point1 = self.__corners[0][0]
-        point2 = self.__corners[1][0]
-
-        if point1 < point2:
-            return point1
-        else:
-            return point2
-
-    def __get_width(self):
-        """
-        Get width of the section
-
-        :returns: width of the section
-        :rtype: integer
-        """
-        return abs(self.__corners[0][0] - self.__corners[1][0])
-
-    def __get_top_edge(self):
-        """
-        Get top edge of the section
-
-        :returns: highest point of the section
-        :rtype: (integer, integer)
-        """
-        point1 = self.__corners[0][1]
-        point2 = self.__corners[1][1]
-
-        if point1 < point2:
-            return point1
-        else:
-            return point2
-
-    def __get_height(self):
-        """
-        Get height of the section
-
-        :returns: height of the section
-        :rtype: integer
-        """
-        return abs(self.__corners[0][1] - self.__corners[1][1])
-
-    corners = property(__get_corners, __set_corners)
-    """Corners of this Section."""
-
     connections = property(__get_connections)
     """Readonly property to access connections of the section"""
 
@@ -177,18 +109,6 @@ class Section():
 
         :returns: True if section is connected, otherwise False
         :rtype: Boolean"""
-
-    left_edge = property(__get_left_edge)
-    """Readonly property to find leftmost point of the section"""
-
-    width = property(__get_width)
-    """Readonly property to calculate width of the section"""
-
-    top_edge = property(__get_top_edge)
-    """Readonly property to find topmost point of the section"""
-
-    height = property(__get_height)
-    """Readonly property to find height of the section"""
 
     def connect_to(self, section):
         """
@@ -243,17 +163,17 @@ class Section():
         """
         border = []
 
-        assert len(self.__corners) == 2
-        assert len(self.__corners[0]) == 2
-        assert len(self.__corners[1]) == 2
+        assert len(self._corners) == 2
+        assert len(self._corners[0]) == 2
+        assert len(self._corners[1]) == 2
 
-        for loc_x in range(self.__corners[0][0] + 1, self.__corners[1][0]):
-            border.append((loc_x, self.__corners[0][1], "down"))
-            border.append((loc_x, self.__corners[1][1], "up"))
+        for loc_x in range(self._corners[0][0] + 1, self._corners[1][0]):
+            border.append((loc_x, self._corners[0][1], "down"))
+            border.append((loc_x, self._corners[1][1], "up"))
 
-        for loc_y in range(self.__corners[0][1] + 1, self.__corners[1][1]):
-            border.append((self.__corners[0][0], loc_y, "right"))
-            border.append((self.__corners[1][0], loc_y, "left"))
+        for loc_y in range(self._corners[0][1] + 1, self._corners[1][1]):
+            border.append((self._corners[0][0], loc_y, "right"))
+            border.append((self._corners[1][0], loc_y, "left"))
 
         return border
 
@@ -318,51 +238,11 @@ class Section():
                                                   direction=direction,
                                                   section=self))
 
-    def set_floor(self, location, tile, location_type):
-        """
-        Set floor at given location
-
-        :param location: location to set the tile
-        :type location: (integer, integer)
-        :param tile: ID of the tile to use
-        :type tile: integer
-        :param location_type: type of location, None to not change
-        :type location_type: string
-
-        .. note:: Coordinates are given relative to section origo
-        """
-        x_loc = self.__get_left_edge() + location[0]
-        y_loc = self.__get_top_edge() + location[1]
-
-        floor_tile(self.level, (x_loc, y_loc), tile)
-
-        if location_type is not None:
-            add_location_tag(self.level, (x_loc, y_loc), location_type)
-
-    def get_floor(self, location):
-        """
-        Get floor tile in given location
-
-        :param location: location to check
-        :type location: (int, int)
-        :returns: floor tile
-        :rtype: int
-
-        .. versionadded:: 0.8
-        """
-        x_loc = self.__get_left_edge() + location[0]
-        y_loc = self.__get_top_edge() + location[1]
-
-        return floor_tile(self.level, (x_loc, y_loc))
-
     def set_ornamentation(self, location, tile):
         """
         Set ornamentation at given location
         """
-        x_loc = self.__get_left_edge() + location[0]
-        y_loc = self.__get_top_edge() + location[1]
-
-        ornamentation(self.level, (x_loc, y_loc), tile)
+        ornamentation(self.level, section_to_map(self, location), tile)
 
     def set_wall(self, location, tile, location_type):
         """
@@ -377,10 +257,9 @@ class Section():
 
         .. note:: Coordinates are given relative to section origo
         """
-        x_loc = self.__get_left_edge() + location[0]
-        y_loc = self.__get_top_edge() + location[1]
+        location = section_to_map(self, location)
 
-        wall_tile(self.level, (x_loc, y_loc), tile)
+        wall_tile(self.level, location, tile)
         if location_type is not None:
             add_location_tag(self.level, location, location_type)
 
@@ -395,10 +274,7 @@ class Section():
 
         .. versionadded:: 0.8
         """
-        x_loc = self.__get_left_edge() + location[0]
-        y_loc = self.__get_top_edge() + location[1]
-
-        add_location_tag(self.level, (x_loc, y_loc), location_type)
+        add_location_tag(self.level, section_to_map(self, location), location_type)
 
     def get_wall(self, location):
         """
@@ -411,10 +287,7 @@ class Section():
 
         .. versionadded:: 0.8
         """
-        x_loc = self.__get_left_edge() + location[0]
-        y_loc = self.__get_top_edge() + location[1]
-
-        return wall_tile(self.level, (x_loc, y_loc))
+        return wall_tile(self.level, section_to_map(self, location))
 
     def find_room_connection(self, section_connection):
         """
@@ -455,10 +328,7 @@ class Section():
 
         .. note:: Coordinates are given relative to section origo
         """
-        x_loc = self.__get_left_edge() + location[0]
-        y_loc = self.__get_top_edge() + location[1]
-
-        add_trap(self.level, (x_loc, y_loc), trap)
+        add_trap(self.level, section_to_location(self, location), trap)
 
 
 class Connection():
@@ -493,8 +363,8 @@ class Connection():
         :returns: new connection
         :rtype: Connection
         """
-        new_location = (self.location[0] - self.section.left_edge,
-                        self.location[1] - self.section.top_edge)
+        new_location = (self.location[0] - left_edge(self.section),
+                        self.location[1] - top_edge(self.section))
 
         new_connection = Connection(self.connection,
                                     new_location,

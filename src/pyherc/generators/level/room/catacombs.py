@@ -22,7 +22,8 @@ Classes for generating catacombs
 """
 from pyherc.aspects import log_debug
 from pyherc.generators.utils import BSPSection
-
+from pyherc.generators.level.partitioners import (section_width, section_height,
+                                                  section_floor)
 
 class CatacombsGenerator():
     """
@@ -57,7 +58,7 @@ class CatacombsGenerator():
         :param section: section for generator to draw to
         :type section: Section
         """
-        level_size = (section.width, section.height)
+        level_size = (section_width(section), section_height(section))
         room_min_size = (3, 3)
         BSPStack = []
         BSP = BSPSection((0, 0),
@@ -87,9 +88,10 @@ class CatacombsGenerator():
 
             for y in range(corner1[1], corner2[1] + 1):
                 for x in range(corner1[0], corner2[0] + 1):
-                    section.set_floor((x, y),
-                                      self.floor_tile,
-                                      'room')
+                    section_floor(section, 
+                                  (x, y),
+                                  self.floor_tile,
+                                  'room')
                     section.set_wall((x, y),
                                      self.empty_tile,
                                      None)
@@ -107,17 +109,19 @@ class CatacombsGenerator():
                 #areas on top of each other
                 if center1[1] < center2[1]:
                     for y in range(center1[1], center2[1] + 1):
-                        section.set_floor((center1[0], y),
-                                          self.floor_tile,
-                                          'corridor')
+                        section_floor(section,
+                                      (center1[0], y),
+                                      self.floor_tile,
+                                      'corridor')
                         section.set_wall((center1[0], y),
                                          self.empty_tile,
                                          None)
                 else:
                     for y in range(center2[1], center1[1] + 1):
-                        section.set_floor((center1[0], y),
-                                          self.floor_tile,
-                                          'corridor')
+                        section_floor(section, 
+                                      (center1[0], y),
+                                      self.floor_tile,
+                                      'corridor')
                         section.set_wall((center1[0], y),
                                          self.empty_tile,
                                          None)
@@ -125,17 +129,19 @@ class CatacombsGenerator():
                 #areas next to each other
                 if center1[0] < center2[0]:
                     for x in range(center1[0], center2[0] + 1):
-                        section.set_floor((x, center1[1]),
-                                          self.floor_tile,
-                                          'corridor')
+                        section_floor(section,
+                                      (x, center1[1]),
+                                      self.floor_tile,
+                                      'corridor')
                         section.set_wall((x, center1[1]),
                                          self.empty_tile,
                                          None)
                 else:
                     for x in range(center2[0], center1[0] + 1):
-                        section.set_floor((x, center1[1]),
-                                          self.floor_tile,
-                                          'corridor')
+                        section_floor(section,
+                                      (x, center1[1]),
+                                      self.floor_tile,
+                                      'corridor')
                         section.set_wall((x, center1[1]),
                                          self.empty_tile,
                                          None)

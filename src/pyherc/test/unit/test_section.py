@@ -30,6 +30,8 @@ from hamcrest import (assert_that,
 from pyherc.test.builders import LevelBuilder
 from pyherc.data import floor_tile, wall_tile, get_location_tags
 from pyherc.generators.level.partitioners.section import Section
+from pyherc.generators.level.partitioners import (section_width, section_height,
+                                                  left_edge, top_edge, section_floor)
 
 
 class TestSectionCalculations():
@@ -55,28 +57,26 @@ class TestSectionCalculations():
         """
         Test that left edge can be calculated correctly
         """
-        left_edge = self.section.left_edge
-        assert_that(left_edge, is_(equal_to(10)))
+        assert_that(left_edge(self.section), is_(equal_to(10)))
 
     def test_top_edge(self):
         """
         Test that top edge can be calculated correctly
         """
-        top_edge = self.section.top_edge
-        assert_that(top_edge, is_(equal_to(10)))
+        assert_that(top_edge(self.section), is_(equal_to(10)))
 
     def test_width(self):
         """
         Test that width can be calculated correctly
         """
-        width = self.section.width
+        width = section_width(self.section)
         assert_that(width, is_(equal_to(10)))
 
     def test_height(self):
         """
         Test that height can be calculated correctly
         """
-        height = self.section.height
+        height = section_height(self.section)
         assert_that(height, is_(equal_to(15)))
 
     def test_border(self):
@@ -249,7 +249,7 @@ class TestSectionLevelAccess():
         """
         Test that floor can be set
         """
-        self.section.set_floor((5, 5), self.floor_rock, None)
+        section_floor(self.section, (5, 5), self.floor_rock, None)
 
         assert_that(floor_tile(self.level, (5, 5)),
                     is_(equal_to(self.floor_rock)))
@@ -267,7 +267,7 @@ class TestSectionLevelAccess():
         """
         Test that location type can be set correctly
         """
-        self.section.set_floor((2, 3), self.floor_rock, 'corridor')
+        section_floor(self.section, (2, 3), self.floor_rock, 'corridor')
 
         assert_that(get_location_tags(self.level, (2, 3)), has_item('corridor'))
 
@@ -309,7 +309,7 @@ class TestSectionLevelAccessWithOffset():
         """
         Test that off set Section is correctly mapped to the level
         """
-        self.section.set_floor((2, 2), self.floor_rock, None)
+        section_floor(self.section, (2, 2), self.floor_rock, None)
 
         assert_that(floor_tile(self.level, (7, 7)),
                     is_(equal_to(self.floor_rock)))

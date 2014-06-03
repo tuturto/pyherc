@@ -25,6 +25,7 @@ from random import Random
 
 from pyherc.aspects import log_debug
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
+from pyherc.generators.level.partitioners import section_floor
 
 
 class PillarRoomGenerator():
@@ -86,6 +87,7 @@ class PillarRoomGenerator():
             section.set_wall(location=location,
                              tile=self.pillar_tile,
                              location_type=None)
-            section.set_floor(location=location,
-                              tile=None,
-                              location_type=None)
+            section_floor(section,
+                          location,
+                          None,
+                          None)
