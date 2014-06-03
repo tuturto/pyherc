@@ -19,7 +19,8 @@
 
 (require pyherc.macros)
 
-(import [pyherc.data [add-location-tag floor-tile wall-tile]])
+(import [pyherc.data [add-location-tag add-trap floor-tile wall-tile
+                      ornamentation]])
 
 (defn new-section [corner0 corner1 level]
   "create a new section"
@@ -88,3 +89,14 @@
     (when (!= tile-id :no-tile) (wall-tile level loc tile-id))
     (when location-type (add-location-tag level loc location-type))
     (wall-tile level loc tile-id)))
+
+(defn section-ornamentation [section location &optional [tile-id :no-tile]]
+  "get/set ornament in section"
+  (let [[loc (section-to-map section location)]
+        [level section.level]]
+    (when (!= tile-id :no-tile) (ornamentation level loc tile-id))
+    (ornamentation level loc tile-id)))
+
+(defn section-trap [section location trap]
+  "set trap in section"
+  (add-trap section.level (section-to-map section location) trap))

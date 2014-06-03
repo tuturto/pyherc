@@ -23,7 +23,8 @@
 (import [pyherc.data [distance-between]]
         [pyherc.generators.level.room.corridor [CorridorGenerator]]
         [pyherc.generators.level.partitioners [section-width section-height
-                                               section-floor]])
+                                               section-floor
+                                               section-ornamentation]])
 
 (defclass CircularRoomGenerator []
   "generator for circular rooms"
@@ -72,7 +73,7 @@
                     "generate a new room"
                     (-> (super) (.generate-room section))
                     (let [[#t(x-loc y-loc) self.center-point]]
-                      (.set-ornamentation section #t(x-loc y-loc) self.temple-tile)
+                      (section-ornamentation section #t(x-loc y-loc) self.temple-tile)
                       (when self.candle-tile
-                        (.set-ornamentation section #t((+ x-loc 1) y-loc) self.candle-tile)
-                        (.set-ornamentation section #t((- x-loc 1) y-loc) self.candle-tile))))]])
+                        (section-ornamentation section #t((+ x-loc 1) y-loc) self.candle-tile)
+                        (section-ornamentation section #t((- x-loc 1) y-loc) self.candle-tile))))]])

@@ -23,6 +23,7 @@ Classes for generating pit rooms
 
 from pyherc.aspects import log_debug
 from pyherc.generators.level.room.squareroom import SquareRoomGenerator
+from pyherc.generators.level.partitioners import section_floor, section_trap
 
 
 class PitRoomGenerator():
@@ -76,8 +77,10 @@ class PitRoomGenerator():
 
         for loc_x in range(top_left[0]+1, bottom_right[0]):
             for loc_y in range(top_left[1]+1, bottom_right[1]):
-                section.set_floor(location=(loc_x, loc_y),
-                                  tile=self.pit_tile,
-                                  location_type='pit')
-                section.add_trap(self.trap_type(),
-                                 (loc_x, loc_y))
+                section_floor(section,
+                              (loc_x, loc_y),
+                              self.pit_tile,
+                              'pit')
+                section_trap(section,
+                             (loc_x, loc_y),
+                             self.trap_type())

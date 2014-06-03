@@ -238,12 +238,6 @@ class Section():
                                                   direction=direction,
                                                   section=self))
 
-    def set_ornamentation(self, location, tile):
-        """
-        Set ornamentation at given location
-        """
-        ornamentation(self.level, section_to_map(self, location), tile)
-
     def set_location_type(self, location, location_type):
         """
         Set type of location in level
@@ -282,22 +276,6 @@ class Section():
         connection = self.random_generator.choice(possible_connections)
 
         return connection
-
-    def add_trap(self, trap, location):
-        """
-        Add a trap to level
-
-        :param trap: trap to add
-        :type trap: Trap
-        :param location: location to add the trap
-        :type location: (int, int)
-
-        .. versionadded:: 0.11
-
-        .. note:: Coordinates are given relative to section origo
-        """
-        add_trap(self.level, section_to_location(self, location), trap)
-
 
 class Connection():
     """
