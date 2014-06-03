@@ -49,25 +49,25 @@
   "get left edge of the section"
   (let [[point₀ (x-coordinate (first section.-corners))]
         [point₁ (x-coordinate (second section.-corners))]]
-    (if (< point₀ point₁) point₀ point₁)))
+    (min point₀ point₁)))
 
 (defn right-edge [section]
   "get right edge of the section"
   (let [[point₀ (x-coordinate (first section.-corners))]
         [point₁ (x-coordinate (second section.-corners))]]
-    (if (> point₀ point₁) point₀ point₁)))
+    (max point₀ point₁)))
 
 (defn top-edge [section]
   "get top edge of the section"
   (let [[point₀ (y-coordinate (first section.-corners))]
         [point₁ (y-coordinate (second section.-corners))]]
-    (if (< point₀ point₁) point₀ point₁)))
+    (min point₀ point₁)))
 
 (defn bottom-edge [section]
   "get bottom edge of the section"
   (let [[point₀ (y-coordinate (first section.-corners))]
         [point₁ (y-coordinate (second section.-corners))]]
-    (if (> point₀ point₁) point₀ point₁)))
+    (max point₀ point₁)))
 
 (defn section-to-map [section location]
   "map section coordinates to map coordinates"
