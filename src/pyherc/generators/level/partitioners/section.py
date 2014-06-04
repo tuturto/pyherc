@@ -27,7 +27,8 @@ from pyherc.data import get_tile, ornamentation
 from pyherc.generators.level.partitioners.new_section import (section_to_map,
                                                               left_edge,
                                                               top_edge,
-                                                              is_connected)
+                                                              is_connected,
+                                                              section_border)
 
 class Section():
     """
@@ -84,31 +85,6 @@ class Section():
                                       section=section)
         section._connections.append(other_connection)
 
-    def get_border(self):
-        """
-        Get list of locations, defining borders of this Section
-
-        :returns: List of (loc_x, loc_y, direction) defining borders
-        :rtype: [(integer, integer, string)
-
-        .. note:: coordinates are given relative to level origo
-        """
-        border = []
-
-        assert len(self._corners) == 2
-        assert len(self._corners[0]) == 2
-        assert len(self._corners[1]) == 2
-
-        for loc_x in range(self._corners[0][0] + 1, self._corners[1][0]):
-            border.append((loc_x, self._corners[0][1], "down"))
-            border.append((loc_x, self._corners[1][1], "up"))
-
-        for loc_y in range(self._corners[0][1] + 1, self._corners[1][1]):
-            border.append((self._corners[0][0], loc_y, "right"))
-            border.append((self._corners[1][0], loc_y, "left"))
-
-        return border
-
     def get_common_border(self, another_section):
         """
         Get list of locations that define common border between two Sections
@@ -119,12 +95,10 @@ class Section():
 
         .. note:: Coordinates are given relative to level origo
         """
-        my_border = self.get_border()
-        other_border = another_section.get_border()
         common_border = []
 
-        for loc_1 in my_border:
-            for loc_2 in other_border:
+        for loc_1 in section_border(self):
+            for loc_2 in section_border(another_section):
                 if (loc_1[0] - loc_2[0])**2 + (loc_1[1] - loc_2[1])**2 == 1:
                     common_border.append(loc_1)
 
@@ -144,9 +118,8 @@ class Section():
         .. note:: if not match is found, False is returned
         """
         my_side = None
-        my_border = self.get_border()
 
-        for loc_1 in my_border:
+        for loc_1 in section_border(self):
             if (loc_1[0] - location[0])**2 + (loc_1[1] - location[1])**2 == 1:
                 my_side = loc_1
 

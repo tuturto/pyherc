@@ -138,3 +138,13 @@
 (defn unconnected-neighbours? [section]
   "check if this section has unconnected neighbours"
   (count (unconnected-neighbours section)))
+
+(defn section-border [section]
+  "get border locations of a section"
+  (let [[#t(corner0 corner1) (section-corners section)]]
+    (for [loc (range (+ (x-coordinate corner0) 1) (x-coordinate corner1))]
+      (do (yield #t(loc (y-coordinate corner0) "down"))
+          (yield #t(loc (y-coordinate corner1) "up"))))
+    (for [loc (range (+ (y-coordinate corner0) 1) (y-coordinate corner1))]
+      (do (yield #t((x-coordinate corner0) loc "right"))
+          (yield #t((x-coordinate corner1) loc "left"))))))

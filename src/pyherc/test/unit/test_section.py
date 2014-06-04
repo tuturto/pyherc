@@ -38,7 +38,8 @@ from pyherc.generators.level.partitioners import (section_width,
                                                   section_connections,
                                                   room_connections,
                                                   mark_neighbours,
-                                                  is_unconnected_neighbours)
+                                                  is_unconnected_neighbours,
+                                                  section_border)
 
 
 class TestSectionCalculations():
@@ -90,7 +91,7 @@ class TestSectionCalculations():
         """
         Test that Section can report border
         """
-        border = self.section.get_border()
+        border = list(section_border(self.section))
         assert_that(border, has_items(
                             (11, 10, "down"), (12, 10, "down"),
                             (18, 10, "down"), (19, 10, "down"),
