@@ -29,7 +29,8 @@ from pyherc.generators.level.partitioners import (section_width,
                                                   section_height,
                                                   section_floor, section_wall,
                                                   section_connections,
-                                                  add_room_connection)
+                                                  add_room_connection,
+                                                  match_section_to_room)
 
 
 class SquareRoomGenerator():
@@ -146,24 +147,11 @@ class SquareRoomGenerator():
         :type section: Section
         """
         for section_connection in section_connections(section):
-            room_connection = self.find_room_connection(section,
-                                                        section_connection)
+            room_connection = match_section_to_room(section,
+                                                    section_connection)
             corridor = CorridorGenerator(
                 room_connection,
                 section_connection.translate_to_section(),
                 self.empty_tile,
                 self.corridor_tile)
             corridor.generate()
-
-    def find_room_connection(self, section, section_connection):
-        """
-        Find room connection that matches to given section connection
-
-        :param section: section to handle
-        :type section: Section
-        :param section_connection: connection at the edge of section
-        :type section_connection: Connection
-        :returns: matching room connection
-        :rtype: Connection
-        """
-        return section.find_room_connection(section_connection)

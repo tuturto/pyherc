@@ -26,7 +26,8 @@
                                                section-floor
                                                section-ornamentation
                                                section-connections
-                                               add-room-connection]])
+                                               add-room-connection
+                                               match-section-to-room]])
 
 (defclass CircularRoomGenerator []
   "generator for circular rooms"
@@ -56,7 +57,7 @@
    [add-corridors (fn [self section]
                     "add corridors"
                     (ap-each (section-connections section)
-                             (let [[room-connection (.find-room-connection section it)]
+                             (let [[room-connection (match-section-to-room section it)]
                                    [corridor (CorridorGenerator room-connection
                                                                 (.translate-to-section it)
                                                                 nil

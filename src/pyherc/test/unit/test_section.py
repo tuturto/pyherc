@@ -41,7 +41,8 @@ from pyherc.generators.level.partitioners import (section_width,
                                                   is_unconnected_neighbours,
                                                   section_border,
                                                   common_border, opposing_point,
-                                                  add_room_connection)
+                                                  add_room_connection,
+                                                  match_section_to_room)
 
 
 class TestSectionCalculations():
@@ -216,7 +217,7 @@ class TestSectionConnections():
         self.section1.connect_to(self.section2)
         edge_connection = list(section_connections(self.section1))[0]
 
-        connection = self.section1.find_room_connection(edge_connection)
+        connection = match_section_to_room(self.section1, edge_connection)
 
         assert_that(connection.direction, is_(equal_to("right")))
 

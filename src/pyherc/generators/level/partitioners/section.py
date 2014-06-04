@@ -100,29 +100,3 @@ class Section():
         .. versionadded:: 0.8
         """
         add_location_tag(self.level, section_to_map(self, location), location_type)
-
-    def find_room_connection(self, section_connection):
-        """
-        Find room connection that matches to given section connection
-
-        :param section_connection: connection at the edge of section
-        :type section_connection: Section
-        :returns: matching room connection
-        :rtype: Connection
-        """
-        wanted = None
-        if section_connection.direction == "left":
-            wanted = "right"
-        elif section_connection.direction == "right":
-            wanted = "left"
-        elif section_connection.direction == "up":
-            wanted = "down"
-        else:
-            wanted = "up"
-
-        possible_connections = [x for x in self._room_connections
-                                if x.direction == wanted]
-
-        connection = self.random_generator.choice(possible_connections)
-
-        return connection

@@ -163,6 +163,17 @@
   "get point on border that is next to given location"
   (ap-first (= (distance-between it location) 1) (section-border section)))
 
+(defn match-section-to-room [section section-connection]
+  "find room connection that matches given section connection"
+  (let [[direction section-connection.direction]
+        [wanted (cond [(= direction "right") "left"]
+                      [(= direction "left") "right"]
+                      [(= direction "up") "down"]
+                      [(= direction "down") "up"])]
+        [possible (list-comp x [x section._room_connections]
+                             (= x.direction wanted))]]
+    (.choice section.random-generator possible)))
+
 (defclass Connection []
   "connection between sections or section and room"
   [[--init-- (fn [self connection location direction section]
