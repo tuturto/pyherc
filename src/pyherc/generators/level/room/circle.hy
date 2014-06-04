@@ -24,7 +24,8 @@
         [pyherc.generators.level.room.corridor [CorridorGenerator]]
         [pyherc.generators.level.partitioners [section-width section-height
                                                section-floor
-                                               section-ornamentation]])
+                                               section-ornamentation
+                                               section-connections]])
 
 (defclass CircularRoomGenerator []
   "generator for circular rooms"
@@ -53,7 +54,7 @@
                       (setv self.center-point center-point)))]
    [add-corridors (fn [self section]
                     "add corridors"
-                    (ap-each section.connections
+                    (ap-each (section-connections section)
                              (let [[room-connection (.find-room-connection section it)]
                                    [corridor (CorridorGenerator room-connection
                                                                 (.translate-to-section it)

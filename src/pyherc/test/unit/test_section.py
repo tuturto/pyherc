@@ -24,15 +24,19 @@ Tests for Section
 import random
 
 from hamcrest import (assert_that,
-                      contains_inanyorder, equal_to, has_items, has_length, is_,
-                      is_not, has_item)
+                      contains_inanyorder, equal_to, has_items, has_length,
+                      is_, is_not, has_item)
 
 from pyherc.test.builders import LevelBuilder
 from pyherc.data import floor_tile, wall_tile, get_location_tags
 from pyherc.generators.level.partitioners.section import Section
-from pyherc.generators.level.partitioners import (section_width, section_height,
-                                                  left_edge, top_edge, section_floor,
-                                                  section_wall)
+from pyherc.generators.level.partitioners import (section_width,
+                                                  section_height,
+                                                  left_edge, top_edge,
+                                                  section_floor,
+                                                  section_wall,
+                                                  section_connections,
+                                                  room_connections)
 
 
 class TestSectionCalculations():
@@ -141,8 +145,8 @@ class TestSectionConnections():
         """
         self.section1.connect_to(self.section2)
 
-        point1 = self.section1.connections[0]
-        point2 = self.section2.connections[0]
+        point1 = list(section_connections(self.section1))[0]
+        point2 = list(section_connections(self.section2))[0]
 
         assert_that(point1.location[0], is_(equal_to(10)))
         assert_that(point2.location[0], is_(equal_to(11)))
@@ -154,8 +158,8 @@ class TestSectionConnections():
         """
         self.section1.connect_to(self.section2)
 
-        point1 = self.section1.connections[0]
-        point2 = self.section2.connections[0]
+        point1 = list(section_connections(self.section1))[0]
+        point2 = list(section_connections(self.section2))[0]
 
         assert_that(point1.direction, is_(equal_to("left")))
         assert_that(point2.direction, is_(equal_to("right")))
@@ -195,7 +199,7 @@ class TestSectionConnections():
         """
         self.section1.add_room_connection((5, 5), "right")
 
-        assert_that(self.section1.room_connections, has_length(1))
+        assert_that(list(room_connections(self.section1)), has_length(1))
 
     def test_finding_room_connection(self):
         """
@@ -207,7 +211,7 @@ class TestSectionConnections():
         self.section1.add_room_connection((5, 3), "right")
 
         self.section1.connect_to(self.section2)
-        edge_connection = self.section1.connections[0]
+        edge_connection = list(section_connections(self.section1))[0]
 
         connection = self.section1.find_room_connection(edge_connection)
 

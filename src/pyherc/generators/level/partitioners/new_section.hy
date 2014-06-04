@@ -100,3 +100,19 @@
 (defn section-trap [section location trap]
   "set trap in section"
   (add-trap section.level (section-to-map section location) trap))
+
+(defn section-connections [section]
+  "get connections of a section"
+  (genexpr con [con section._connections]))
+
+(defn add-section-connection [section connection]
+  "add a new connection to a section"
+  (.append section._connections connection))
+
+(defn room-connections [section]
+  "get room connections of a section"
+  (genexpr con [con section._room_connections]))
+
+(defn add-room-connection [section connection]
+  "add a new room connection to a section"
+  (.append section._room_connections connection))

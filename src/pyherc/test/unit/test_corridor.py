@@ -23,8 +23,12 @@ Tests for Corridor
 
 import random
 
-from pyherc.data import tile, wall_tile, floor_tile
 from hamcrest import assert_that, equal_to, is_
+
+from pyherc.data import tile, wall_tile, floor_tile
+from pyherc.generators.level.partitioners import (section_connections,
+                                                  add_room_connection,
+                                                  add_section_connection)
 from pyherc.generators.level.partitioners.section import Connection, Section
 from pyherc.generators.level.room.corridor import CorridorGenerator
 from pyherc.test.matchers import is_fully_accessible
@@ -78,8 +82,8 @@ class TestCorridor():
                                      direction="right",
                                      section=self.section)
 
-        self.section.connections.append(edge_connection)
-        self.section.room_connections.append(room_connection)
+        add_section_connection(self.section, edge_connection)
+        add_room_connection(self.section, room_connection)
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,
@@ -106,8 +110,8 @@ class TestCorridor():
                                      direction="up",
                                      section=self.section)
 
-        self.section.connections.append(edge_connection)
-        self.section.room_connections.append(room_connection)
+        add_section_connection(self.section, edge_connection)
+        add_room_connection(self.section, room_connection)
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,
@@ -134,8 +138,8 @@ class TestCorridor():
                                      direction="right",
                                      section=self.section)
 
-        self.section.connections.append(edge_connection)
-        self.section.room_connections.append(room_connection)
+        add_section_connection(self.section, edge_connection)
+        add_room_connection(self.section, room_connection)
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,
@@ -164,8 +168,8 @@ class TestCorridor():
                                      direction="up",
                                      section=self.section)
 
-        self.section.connections.append(edge_connection)
-        self.section.room_connections.append(room_connection)
+        add_section_connection(self.section, edge_connection)
+        add_room_connection(self.section, room_connection)
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,

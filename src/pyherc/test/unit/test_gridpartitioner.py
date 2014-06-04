@@ -26,8 +26,10 @@ import random
 from hamcrest import (assert_that, equal_to, greater_than, has_length, is_,
                       same_instance)
 from mockito import mock, when
+
 from pyherc.generators.level.partitioners.grid import (GridPartitioner,
                                                        RandomConnector)
+from pyherc.generators.level.partitioners import section_connections
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.test.builders import LevelBuilder
 
@@ -89,7 +91,8 @@ class TestGridPartitioner:
         sections = partitioner.partition_level(self.level)
 
         assert_that(sections, has_length(4))
-        assert_that(sections[0].connections, has_length(greater_than(0)))
+        assert_that(list(section_connections(sections[0])),
+                    has_length(greater_than(0)))
 
     def test_new_sections_are_on_level(self):
         """
@@ -165,7 +168,7 @@ class TestRandomConnector:
 
         assert_that(connected_sections[1],
                     is_(equal_to(
-                        connected_sections[0].connections[0].connection)))
+                        list(section_connections(connected_sections[0]))[0].connection)))
 
     def test_connecting_2x2_grid(self):
         """
@@ -192,7 +195,8 @@ class TestRandomConnector:
         assert_that(connected_sections, has_length(4))
 
         for section in connected_sections:
-            assert_that(section.connections, has_length(greater_than(0)))
+            assert_that(list(section_connections(section)),
+                        has_length(greater_than(0)))
             assert_that(section.connected)
 
     def test_connect_row_of_sections(self):
@@ -222,5 +226,6 @@ class TestRandomConnector:
         connected_sections = self.connector.connect_sections(sections, section2)  # noqa
 
         for section in connected_sections:
-            assert_that(section.connections, has_length(greater_than(0)))
+            assert_that(list(section_connections(section)),
+                        has_length(greater_than(0)))
             assert_that(section.connected)

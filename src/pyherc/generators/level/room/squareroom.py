@@ -25,8 +25,10 @@ import logging
 from random import Random
 
 from pyherc.generators.level.room.corridor import CorridorGenerator
-from pyherc.generators.level.partitioners import (section_width, section_height,
-                                                  section_floor, section_wall)
+from pyherc.generators.level.partitioners import (section_width,
+                                                  section_height,
+                                                  section_floor, section_wall,
+                                                  section_connections)
 
 
 class SquareRoomGenerator():
@@ -68,26 +70,26 @@ class SquareRoomGenerator():
         middle_height = section_height(section) // 2
         middle_width = section_width(section) // 2
 
-        if len([x for x in section.connections
+        if len([x for x in section_connections(section)
                 if x.direction == 'right']) > 0:
             room_left_edge = self.rng.randint(2, middle_width - 2)
         else:
             room_left_edge = 1
 
-        if len([x for x in section.connections
+        if len([x for x in section_connections(section)
                 if x.direction == 'left']) > 0:
             room_right_edge = self.rng.randint(middle_width + 2,
                                                section_width(section) - 2)
         else:
             room_right_edge = section_width(section) - 1
 
-        if len([x for x in section.connections
+        if len([x for x in section_connections(section)
                 if x.direction == 'down']) > 0:
             room_top_edge = self.rng.randint(2, middle_height - 2)
         else:
             room_top_edge = 1
 
-        if len([x for x in section.connections
+        if len([x for x in section_connections(section)
                 if x.direction == 'up']) > 0:
             room_bottom_edge = self.rng.randint(middle_height + 2,
                                                 section_height(section) - 2)
@@ -142,7 +144,7 @@ class SquareRoomGenerator():
         :param section: section to add corridors
         :type section: Section
         """
-        for section_connection in section.connections:
+        for section_connection in section_connections(section):
             room_connection = self.find_room_connection(section,
                                                         section_connection)
             corridor = CorridorGenerator(

@@ -25,7 +25,8 @@ import logging
 from pyherc.data import floor_tile, wall_tile, add_trap, add_location_tag
 from pyherc.data import get_tile, ornamentation
 from pyherc.generators.level.partitioners.new_section import (section_to_map,
-                                                              left_edge, top_edge)
+                                                              left_edge,
+                                                              top_edge)
 
 class Section():
     """
@@ -53,29 +54,11 @@ class Section():
         self._corners.append(corner2)
         self.level = level
 
-        self.__connections = []
-        self.__room_connections = []
+        self._connections = []
+        self._room_connections = []
         self.__neighbours = []
         self.random_generator = random_generator
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.section.Section')  # noqa
-
-    def __get_connections(self):
-        """
-        List of connections this section has
-
-        :returns: connections of section
-        :rtype: [Connection]
-        """
-        return self.__connections
-
-    def __get_room_connections(self):
-        """
-        List of connections leading to the room
-
-        :returns: connections
-        :rtype: [Connection]
-        """
-        return self.__room_connections
 
     def __get_neighbours(self):
         """
@@ -93,13 +76,7 @@ class Section():
         :returns: True if connected, otherwise False
         :rtype: Boolean
         """
-        return len(self.__connections) > 0
-
-    connections = property(__get_connections)
-    """Readonly property to access connections of the section"""
-
-    room_connections = property(__get_room_connections)
-    """Readonly property to access connections to the room"""
+        return len(self._connections) > 0
 
     neighbours = property(__get_neighbours)
     """Readonly property to access neighbours of the section"""
@@ -123,7 +100,7 @@ class Section():
                                    location=(my_side[0], my_side[1]),
                                    direction=my_side[2],
                                    section=self)
-        self.connections.append(my_connection)
+        self._connections.append(my_connection)
 
         other_side = section.get_opposing_point(my_side)
         other_connection = Connection(connection=self,
@@ -131,7 +108,7 @@ class Section():
                                                 other_side[1]),
                                       direction=other_side[2],
                                       section=section)
-        section.connections.append(other_connection)
+        section._connections.append(other_connection)
 
     def unconnected_neighbours(self):
         """
@@ -233,10 +210,10 @@ class Section():
 
         .. note:: Coordinates are given relative to section origo
         """
-        self.__room_connections.append(Connection(connection=None,
-                                                  location=location,
-                                                  direction=direction,
-                                                  section=self))
+        self._room_connections.append(Connection(connection=None,
+                                                 location=location,
+                                                 direction=direction,
+                                                 section=self))
 
     def set_location_type(self, location, location_type):
         """
@@ -270,7 +247,7 @@ class Section():
         else:
             wanted = "up"
 
-        possible_connections = [x for x in self.room_connections
+        possible_connections = [x for x in self._room_connections
                                 if x.direction == wanted]
 
         connection = self.random_generator.choice(possible_connections)
