@@ -21,8 +21,8 @@
 Classes for generating corridors
 """
 
-from pyherc.generators.level.partitioners.section import Connection
-from pyherc.generators.level.partitioners import  section_floor, section_wall
+from pyherc.generators.level.partitioners import (Connection, section_floor,
+                                                  section_wall)
 
 
 class CorridorGenerator():

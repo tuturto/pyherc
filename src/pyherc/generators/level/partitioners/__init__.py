@@ -34,3 +34,5 @@ from .new_section import is_connected, neighbour_sections
 from .new_section import mark_neighbours, unconnected_neighbours
 from .new_section import is_unconnected_neighbours
 from .new_section import section_border, common_border, opposing_point
+from .new_section import Connection
+from .section import Section

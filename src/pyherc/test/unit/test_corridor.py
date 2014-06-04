@@ -83,7 +83,7 @@ class TestCorridor():
                                      section=self.section)
 
         add_section_connection(self.section, edge_connection)
-        add_room_connection(self.section, room_connection)
+        add_room_connection(self.section, (5, 5), "right")
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,
@@ -111,7 +111,7 @@ class TestCorridor():
                                      section=self.section)
 
         add_section_connection(self.section, edge_connection)
-        add_room_connection(self.section, room_connection)
+        add_room_connection(self.section, (5, 5), "up")
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,
@@ -139,7 +139,7 @@ class TestCorridor():
                                      section=self.section)
 
         add_section_connection(self.section, edge_connection)
-        add_room_connection(self.section, room_connection)
+        add_room_connection(self.section, (5, 8), "right")
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,
@@ -169,7 +169,7 @@ class TestCorridor():
                                      section=self.section)
 
         add_section_connection(self.section, edge_connection)
-        add_room_connection(self.section, room_connection)
+        add_room_connection(self.section, (2, 9), "up")
 
         generator = CorridorGenerator(start_point=edge_connection,
                                       end_point=room_connection,

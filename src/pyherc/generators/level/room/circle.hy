@@ -25,7 +25,8 @@
         [pyherc.generators.level.partitioners [section-width section-height
                                                section-floor
                                                section-ornamentation
-                                               section-connections]])
+                                               section-connections
+                                               add-room-connection]])
 
 (defclass CircularRoomGenerator []
   "generator for circular rooms"
@@ -46,10 +47,10 @@
                         (for [y_loc (range (section-height section))]
                           (when (<= (distance-between #t(x_loc y_loc) center-point) radius)
                             (section-floor section #t(x_loc y_loc) self.floor-tile "room"))))
-                      (.add-room-connection section #t(center-x (- center-y radius)) "up")
-                      (.add-room-connection section #t(center-x (+ center-y radius)) "down")
-                      (.add-room-connection section #t((- center-x radius) center-y) "left")
-                      (.add-room-connection section #t((+ center-x radius) center-y) "right")
+                      (add-room-connection section #t(center-x (- center-y radius)) "up")
+                      (add-room-connection section #t(center-x (+ center-y radius)) "down")
+                      (add-room-connection section #t((- center-x radius) center-y) "left")
+                      (add-room-connection section #t((+ center-x radius) center-y) "right")
                       (.add-corridors self section)
                       (setv self.center-point center-point)))]
    [add-corridors (fn [self section]

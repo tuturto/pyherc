@@ -40,7 +40,8 @@ from pyherc.generators.level.partitioners import (section_width,
                                                   mark_neighbours,
                                                   is_unconnected_neighbours,
                                                   section_border,
-                                                  common_border, opposing_point)
+                                                  common_border, opposing_point,
+                                                  add_room_connection)
 
 
 class TestSectionCalculations():
@@ -199,7 +200,7 @@ class TestSectionConnections():
         """
         Test that added room connections are kept track
         """
-        self.section1.add_room_connection((5, 5), "right")
+        add_room_connection(self.section1, (5, 5), "right")
 
         assert_that(list(room_connections(self.section1)), has_length(1))
 
@@ -207,10 +208,10 @@ class TestSectionConnections():
         """
         Test that room connection can be found for given section connection
         """
-        self.section1.add_room_connection((7, 5), "right")
-        self.section1.add_room_connection((3, 5), "left")
-        self.section1.add_room_connection((5, 7), "down")
-        self.section1.add_room_connection((5, 3), "right")
+        add_room_connection(self.section1, (7, 5), "right")
+        add_room_connection(self.section1, (3, 5), "left")
+        add_room_connection(self.section1, (5, 7), "down")
+        add_room_connection(self.section1, (5, 3), "right")
 
         self.section1.connect_to(self.section2)
         edge_connection = list(section_connections(self.section1))[0]

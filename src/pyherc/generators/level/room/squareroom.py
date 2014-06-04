@@ -28,7 +28,8 @@ from pyherc.generators.level.room.corridor import CorridorGenerator
 from pyherc.generators.level.partitioners import (section_width,
                                                   section_height,
                                                   section_floor, section_wall,
-                                                  section_connections)
+                                                  section_connections,
+                                                  add_room_connection)
 
 
 class SquareRoomGenerator():
@@ -104,10 +105,10 @@ class SquareRoomGenerator():
         center_x = (room_right_edge - room_left_edge) // 2 + room_left_edge
         center_y = (room_bottom_edge - room_top_edge) // 2 + room_top_edge
 
-        section.add_room_connection((center_x, room_top_edge), "up")
-        section.add_room_connection((center_x, room_bottom_edge), "down")
-        section.add_room_connection((room_left_edge, center_y), "left")
-        section.add_room_connection((room_right_edge, center_y), "right")
+        add_room_connection(section, (center_x, room_top_edge), "up")
+        add_room_connection(section, (center_x, room_bottom_edge), "down")
+        add_room_connection(section, (room_left_edge, center_y), "left")
+        add_room_connection(section, (room_right_edge, center_y), "right")
 
         self.add_corridors(section)
 

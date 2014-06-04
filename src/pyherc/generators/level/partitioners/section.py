@@ -30,7 +30,8 @@ from pyherc.generators.level.partitioners.new_section import (section_to_map,
                                                               is_connected,
                                                               section_border,
                                                               common_border,
-                                                              opposing_point)
+                                                              opposing_point,
+                                                              Connection)
 
 class Section():
     """
@@ -87,24 +88,6 @@ class Section():
                                       section=section)
         section._connections.append(other_connection)
 
-    def add_room_connection(self, location, direction):
-        """
-        Adds connection to the room
-
-        Room connections are used to connect rooms to edge of Sections
-
-        :param location: location where to add the Connection
-        :type location: (integer, integer)
-        :direction: direction where this connections leads
-        :type direction: string
-
-        .. note:: Coordinates are given relative to section origo
-        """
-        self._room_connections.append(Connection(connection=None,
-                                                 location=location,
-                                                 direction=direction,
-                                                 section=self))
-
     def set_location_type(self, location, location_type):
         """
         Set type of location in level
@@ -143,45 +126,3 @@ class Section():
         connection = self.random_generator.choice(possible_connections)
 
         return connection
-
-class Connection():
-    """
-    Connection between Sections or between Section and room
-    """
-    def __init__(self, connection, location, direction, section):
-        """
-        Default constructor
-
-        :param connection: Connection on another Section,
-                           if connecting between sections
-        :type connection: Connection
-        :param location: location of this connection
-        :type location: (integer, integer)
-        :param direction: direction where corridor should start from here
-        :type direction: string
-        :param section: section where connection is located
-        :type section: Section
-        """
-        super().__init__()
-
-        self.connection = connection
-        self.location = location
-        self.direction = direction
-        self.section = section
-
-    def translate_to_section(self):
-        """
-        Create a new Connection with coordinates translated to section
-
-        :returns: new connection
-        :rtype: Connection
-        """
-        new_location = (self.location[0] - left_edge(self.section),
-                        self.location[1] - top_edge(self.section))
-
-        new_connection = Connection(self.connection,
-                                    new_location,
-                                    self.direction,
-                                    self.section)
-
-        return new_connection

@@ -118,9 +118,12 @@
   "is this section connected"
   (count (section-connections section)))
 
-(defn add-room-connection [section connection]
+(defn add-room-connection [section location direction]
   "add a new room connection to a section"
-  (.append section._room_connections connection))
+  (.append section._room_connections (Connection nil 
+                                                 location 
+                                                 direction 
+                                                 section)))
 
 (defn neighbour-sections [section]
   "get sections next to this one"
@@ -159,3 +162,23 @@
 (defn opposing-point [section location]
   "get point on border that is next to given location"
   (ap-first (= (distance-between it location) 1) (section-border section)))
+
+(defclass Connection []
+  "connection between sections or section and room"
+  [[--init-- (fn [self connection location direction section]
+               "default constructor"
+               (-> (super) (.--init--))
+               (setv self.connection connection)
+               (setv self.location location)
+               (setv self.direction direction)
+               (setv self.section section)
+               nil)]
+   [translate-to-section (fn [self]
+                           "create a new connection with coordinates translated to section"
+                           (Connection self.connection
+                                       #t((- (x-coordinate self.location)
+                                             (left-edge self.section))
+                                          (- (y-coordinate self.location)
+                                             (top-edge self.section)))
+                                       self.direction
+                                       self.section))]])
