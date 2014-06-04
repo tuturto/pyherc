@@ -28,7 +28,9 @@ from pyherc.generators.level.partitioners.new_section import (section_to_map,
                                                               left_edge,
                                                               top_edge,
                                                               is_connected,
-                                                              section_border)
+                                                              section_border,
+                                                              common_border,
+                                                              opposing_point)
 
 class Section():
     """
@@ -69,7 +71,7 @@ class Section():
         :param section: section to connect to
         :type section: Section
         """
-        my_side_of_border = self.get_common_border(section)
+        my_side_of_border = list(common_border(self, section))
         my_side = self.random_generator.choice(my_side_of_border)
         my_connection = Connection(connection=section,
                                    location=(my_side[0], my_side[1]),
@@ -77,53 +79,13 @@ class Section():
                                    section=self)
         self._connections.append(my_connection)
 
-        other_side = section.get_opposing_point(my_side)
+        other_side = opposing_point(section, my_side)
         other_connection = Connection(connection=self,
                                       location=(other_side[0],
                                                 other_side[1]),
                                       direction=other_side[2],
                                       section=section)
         section._connections.append(other_connection)
-
-    def get_common_border(self, another_section):
-        """
-        Get list of locations that define common border between two Sections
-        Border is placed on the edge of this Section
-
-        :returns: List of (loc_x, loc_y, direction) defining common border
-        :rtype: [(integer, integer, string)]
-
-        .. note:: Coordinates are given relative to level origo
-        """
-        common_border = []
-
-        for loc_1 in section_border(self):
-            for loc_2 in section_border(another_section):
-                if (loc_1[0] - loc_2[0])**2 + (loc_1[1] - loc_2[1])**2 == 1:
-                    common_border.append(loc_1)
-
-        return common_border
-
-    def get_opposing_point(self, location):
-        """
-        Calculate which of this Section's points corresponds to the point given
-        on the other side of the common border
-
-        :param location: (loc_x, loc_y) defining point on the other side
-        :type location: (integer, integer)
-        :returns: (loc_x, loc_y) if corresponding point is found
-        :rtype: (integer, integer) or Boolean
-
-        .. note:: Coordinates are given relative to level origo
-        .. note:: if not match is found, False is returned
-        """
-        my_side = None
-
-        for loc_1 in section_border(self):
-            if (loc_1[0] - location[0])**2 + (loc_1[1] - location[1])**2 == 1:
-                my_side = loc_1
-
-        return my_side
 
     def add_room_connection(self, location, direction):
         """

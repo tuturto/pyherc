@@ -21,7 +21,7 @@
 (require pyherc.macros)
 
 (import [pyherc.data [add-location-tag add-trap floor-tile wall-tile
-                      ornamentation]])
+                      ornamentation distance-between]])
 
 (defn new-section [corner0 corner1 level]
   "create a new section"
@@ -141,10 +141,21 @@
 
 (defn section-border [section]
   "get border locations of a section"
-  (let [[#t(corner0 corner1) (section-corners section)]]
-    (for [loc (range (+ (x-coordinate corner0) 1) (x-coordinate corner1))]
-      (do (yield #t(loc (y-coordinate corner0) "down"))
-          (yield #t(loc (y-coordinate corner1) "up"))))
-    (for [loc (range (+ (y-coordinate corner0) 1) (y-coordinate corner1))]
-      (do (yield #t((x-coordinate corner0) loc "right"))
-          (yield #t((x-coordinate corner1) loc "left"))))))
+  (let [[#t(corner₀ corner₁) (section-corners section)]]
+    (for [loc (range (+ (x-coordinate corner₀) 1) (x-coordinate corner₁))]
+      (do (yield #t(loc (y-coordinate corner₀) "down"))
+          (yield #t(loc (y-coordinate corner₁) "up"))))
+    (for [loc (range (+ (y-coordinate corner₀) 1) (y-coordinate corner₁))]
+      (do (yield #t((x-coordinate corner₀) loc "right"))
+          (yield #t((x-coordinate corner₁) loc "left"))))))
+
+(defn common-border [section neighbour]
+  "get common border between two sections"
+  (for [point₀ (section-border section)]
+    (for [point₁ (section-border neighbour)]
+      (when (= (distance-between point₀ point₁) 1)
+        (yield point₀)))))
+
+(defn opposing-point [section location]
+  "get point on border that is next to given location"
+  (ap-first (= (distance-between it location) 1) (section-border section)))

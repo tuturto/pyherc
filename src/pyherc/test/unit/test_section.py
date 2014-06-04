@@ -39,7 +39,8 @@ from pyherc.generators.level.partitioners import (section_width,
                                                   room_connections,
                                                   mark_neighbours,
                                                   is_unconnected_neighbours,
-                                                  section_border)
+                                                  section_border,
+                                                  common_border, opposing_point)
 
 
 class TestSectionCalculations():
@@ -170,20 +171,19 @@ class TestSectionConnections():
         """
         Test that Section can calculate common border with another Section
         """
-        common_border = self.section1.get_common_border(self.section2)
+        border = list(common_border(self.section1, self.section2))
 
-        assert_that(common_border, contains_inanyorder(
-                                        (10, 1, "left"), (10, 2, "left"),
-                                        (10, 3, "left"), (10, 4, "left"),
-                                        (10, 5, "left"), (10, 6, "left"),
-                                        (10, 7, "left"), (10, 8, "left"),
-                                        (10, 9, "left"), (10, 10, "left"),
-                                        (10, 11, "left"), (10, 12, "left"),
-                                        (10, 13, "left"), (10, 14, "left"),
-                                        (10, 15, "left"), (10, 16, "left"),
-                                        (10, 17, "left"), (10, 18, "left"),
-                                        (10, 19, "left"),
-                                        ))
+        assert_that(border, contains_inanyorder(
+            (10, 1, "left"), (10, 2, "left"),
+            (10, 3, "left"), (10, 4, "left"),
+            (10, 5, "left"), (10, 6, "left"),
+            (10, 7, "left"), (10, 8, "left"),
+            (10, 9, "left"), (10, 10, "left"),
+            (10, 11, "left"), (10, 12, "left"),
+            (10, 13, "left"), (10, 14, "left"),
+            (10, 15, "left"), (10, 16, "left"),
+            (10, 17, "left"), (10, 18, "left"),
+            (10, 19, "left")))
 
     def test_get_opposing_point(self):
         """
@@ -191,7 +191,7 @@ class TestSectionConnections():
         point given on the other side of the border
         """
         my_point = (10, 9)
-        other_point = self.section2.get_opposing_point(my_point)
+        other_point = opposing_point(self.section2, my_point)
 
         assert_that(other_point, is_(equal_to((11, 9, "right"))))
 
