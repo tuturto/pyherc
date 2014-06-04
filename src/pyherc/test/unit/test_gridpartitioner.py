@@ -29,7 +29,10 @@ from mockito import mock, when
 
 from pyherc.generators.level.partitioners.grid import (GridPartitioner,
                                                        RandomConnector)
-from pyherc.generators.level.partitioners import section_connections
+from pyherc.generators.level.partitioners import (is_connected,
+                                                  section_connections,
+                                                  mark_neighbours,
+                                                  neighbour_sections)
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.test.builders import LevelBuilder
 
@@ -78,7 +81,8 @@ class TestGridPartitioner:
         """
         sections = self.partitioner.partition_level(self.level)
 
-        assert_that(sections[0].neighbours, has_length(1))
+        assert_that(list(neighbour_sections(sections[0])), 
+                    has_length(1))
 
     def test_partitioned_sections_are_linked(self):
         """
@@ -159,8 +163,7 @@ class TestRandomConnector:
         section1 = Section((0, 0), (10, 5), self.level, self.rng)
         section2 = Section((0, 6), (10, 10), self.level, self.rng)
 
-        section1.neighbours.append(section2)
-        section2.neighbours.append(section1)
+        mark_neighbours(section1, section2)
 
         sections = [section1, section2]
 
@@ -179,14 +182,10 @@ class TestRandomConnector:
         section01 = Section((0, 6), (5, 10), self.level, self.rng)
         section11 = Section((6, 6), (10, 10), self.level, self.rng)
 
-        section00.neighbours.append(section10)
-        section00.neighbours.append(section01)
-        section10.neighbours.append(section00)
-        section10.neighbours.append(section11)
-        section01.neighbours.append(section00)
-        section01.neighbours.append(section11)
-        section11.neighbours.append(section10)
-        section11.neighbours.append(section01)
+        mark_neighbours(section00, section10)
+        mark_neighbours(section00, section01)
+        mark_neighbours(section10, section11)
+        mark_neighbours(section01, section11)
 
         sections = [section00, section10, section01, section11]
 
@@ -197,7 +196,7 @@ class TestRandomConnector:
         for section in connected_sections:
             assert_that(list(section_connections(section)),
                         has_length(greater_than(0)))
-            assert_that(section.connected)
+            assert_that(is_connected(section))
 
     def test_connect_row_of_sections(self):
         """
@@ -212,14 +211,10 @@ class TestRandomConnector:
         section3 = Section((31, 0), (40, 10), self.level, self.rng)
         section4 = Section((41, 0), (50, 10), self.level, self.rng)
 
-        section0.neighbours.append(section1)
-        section1.neighbours.append(section0)
-        section1.neighbours.append(section2)
-        section2.neighbours.append(section1)
-        section2.neighbours.append(section3)
-        section3.neighbours.append(section2)
-        section3.neighbours.append(section4)
-        section4.neighbours.append(section3)
+        mark_neighbours(section0, section1)
+        mark_neighbours(section1, section2)
+        mark_neighbours(section2, section3)
+        mark_neighbours(section3, section4)
 
         sections = [section0, section1, section2, section3, section4]
 
@@ -228,4 +223,4 @@ class TestRandomConnector:
         for section in connected_sections:
             assert_that(list(section_connections(section)),
                         has_length(greater_than(0)))
-            assert_that(section.connected)
+            assert_that(is_connected(section))

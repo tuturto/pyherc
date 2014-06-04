@@ -17,6 +17,7 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(require hy.contrib.anaphoric)
 (require pyherc.macros)
 
 (import [pyherc.data [add-location-tag add-trap floor-tile wall-tile
@@ -113,6 +114,27 @@
   "get room connections of a section"
   (genexpr con [con section._room_connections]))
 
+(defn connected? [section]
+  "is this section connected"
+  (count (section-connections section)))
+
 (defn add-room-connection [section connection]
   "add a new room connection to a section"
   (.append section._room_connections connection))
+
+(defn neighbour-sections [section]
+  "get sections next to this one"
+  (genexpr sec [sec section._neighbours]))
+
+(defn mark-neighbours [section neighbour]
+  "mark two sections as neighbours"
+  (.append section._neighbours neighbour)
+  (.append neighbour._neighbours section))
+
+(defn unconnected-neighbours [section]
+  "get unconnected neighbours of a section"
+  (ap-filter (not (connected? it)) (neighbour-sections section)))
+
+(defn unconnected-neighbours? [section]
+  "check if this section has unconnected neighbours"
+  (count (unconnected-neighbours section)))

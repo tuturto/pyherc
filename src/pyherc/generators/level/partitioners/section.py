@@ -26,7 +26,8 @@ from pyherc.data import floor_tile, wall_tile, add_trap, add_location_tag
 from pyherc.data import get_tile, ornamentation
 from pyherc.generators.level.partitioners.new_section import (section_to_map,
                                                               left_edge,
-                                                              top_edge)
+                                                              top_edge,
+                                                              is_connected)
 
 class Section():
     """
@@ -56,36 +57,9 @@ class Section():
 
         self._connections = []
         self._room_connections = []
-        self.__neighbours = []
+        self._neighbours = []
         self.random_generator = random_generator
         self.logger = logging.getLogger('pyherc.generators.level.partitioners.section.Section')  # noqa
-
-    def __get_neighbours(self):
-        """
-        List of sections next to this one
-
-        :returns: sections next to this one
-        :rtype: [Section]
-        """
-        return self.__neighbours
-
-    def __get_connected(self):
-        """
-        Is this section connected to a neighbour
-
-        :returns: True if connected, otherwise False
-        :rtype: Boolean
-        """
-        return len(self._connections) > 0
-
-    neighbours = property(__get_neighbours)
-    """Readonly property to access neighbours of the section"""
-
-    connected = property(__get_connected)
-    """Readonly property for connection status of the section
-
-        :returns: True if section is connected, otherwise False
-        :rtype: Boolean"""
 
     def connect_to(self, section):
         """
@@ -109,25 +83,6 @@ class Section():
                                       direction=other_side[2],
                                       section=section)
         section._connections.append(other_connection)
-
-    def unconnected_neighbours(self):
-        """
-        Get list of unconnected neighbours
-
-        :returns: unconnected neighbours
-        :rtype: [Section]
-        """
-        return [x for x in self.neighbours
-                if not x.connected]
-
-    def has_unconnected_neighbours(self):
-        """
-        Check if any of this Sections neighbours is unconnected
-
-        :returns: True if unconnected neighbour is found, otherwise false
-        :rtype: Boolean
-        """
-        return len(self.unconnected_neighbours()) > 0
 
     def get_border(self):
         """

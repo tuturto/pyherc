@@ -24,6 +24,10 @@ Module for partitioning level to equal grid
 import logging
 
 from pyherc.aspects import log_debug
+from pyherc.generators.level.partitioners.new_section import (is_connected,
+                                                              unconnected_neighbours,
+                                                              is_unconnected_neighbours,
+                                                              mark_neighbours)
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import level_size
 
@@ -61,20 +65,20 @@ class RandomConnector():
         self.form_path_from_sections(start_location, sections)
 
         if len(sections) > 1:
-            unconnected_sections = [x for x in sections
-                                    if not x.connected]
+            unconnected = [x for x in sections
+                           if not is_connected(x)]
 
-            while len(unconnected_sections) > 0:
+            while len(unconnected) > 0:
                 edge_sections = [x for x in sections
-                                 if x.connected
-                                 and x.has_unconnected_neighbours()]
+                                 if is_connected(x)
+                                 and is_unconnected_neighbours(x)]
 
                 start_location = self.random_generator.choice(edge_sections)
 
                 self.form_path_from_sections(start_location, sections)
 
-                unconnected_sections = [x for x in sections
-                                        if not x.connected]
+                unconnected = [x for x in sections
+                               if not is_connected(x)]
 
         return sections
 
@@ -89,18 +93,14 @@ class RandomConnector():
         :type sections: [Section]
         """
         current_section = start_section
-        unconnected_neighbours = [x for x in current_section.neighbours
-                                  if not x.connected]
 
-        while len(unconnected_neighbours) > 0:
+        while is_unconnected_neighbours(current_section):
             next_section = self.random_generator.choice(
-                unconnected_neighbours)
+                list(unconnected_neighbours(current_section)))
 
             current_section.connect_to(next_section)
 
             current_section = next_section
-            unconnected_neighbours = [x for x in current_section.neighbours
-                                      if not x.connected]
 
 
 class GridPartitioner():
@@ -183,13 +183,11 @@ class GridPartitioner():
         """
         if location[0] > 0:
             left_section = sections[location[0]-1][location[1]]
-            left_section.neighbours.append(section)
-            section.neighbours.append(left_section)
+            mark_neighbours(section, left_section)
 
         if location[1] > 0:
             up_section = sections[location[0]][location[1]-1]
-            up_section.neighbours.append(section)
-            section.neighbours.append(up_section)
+            mark_neighbours(section, up_section)
 
     @log_debug
     def split_range_to_equals(self, start, end, sections):

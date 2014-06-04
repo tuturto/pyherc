@@ -30,3 +30,6 @@ from .new_section import section_to_map, section_floor, section_wall
 from .new_section import section_ornamentation, section_trap
 from .new_section import section_connections, room_connections
 from .new_section import add_section_connection, add_room_connection
+from .new_section import is_connected, neighbour_sections
+from .new_section import mark_neighbours, unconnected_neighbours
+from .new_section import is_unconnected_neighbours

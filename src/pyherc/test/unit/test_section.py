@@ -36,7 +36,9 @@ from pyherc.generators.level.partitioners import (section_width,
                                                   section_floor,
                                                   section_wall,
                                                   section_connections,
-                                                  room_connections)
+                                                  room_connections,
+                                                  mark_neighbours,
+                                                  is_unconnected_neighbours)
 
 
 class TestSectionCalculations():
@@ -121,22 +123,21 @@ class TestSectionConnections():
         self.section1 = Section((0, 0), (10, 20), level, self.rng)
         self.section2 = Section((11, 0), (20, 20), level, self.rng)
 
-        self.section1.neighbours.append(self.section2)
-        self.section2.neighbours.append(self.section1)
+        mark_neighbours(self.section1, self.section2)
 
     def test_unconnected_neighbours(self):
         """
         Test that unconnected neighbours can be detected
         """
-        assert_that(self.section1.has_unconnected_neighbours())
+        assert_that(is_unconnected_neighbours(self.section1))
 
-    def test_connected_neighbours_are_not_reported(self): #pylint: disable=C0103
+    def test_connected_neighbours_are_not_reported(self):
         """
         Test that connected neighbours are not reported as unconnected
         """
         self.section1.connect_to(self.section2)
 
-        assert_that(is_not(self.section1.has_unconnected_neighbours()))
+        assert_that(is_not(is_unconnected_neighbours(self.section1)))
 
     def test_section_connection_points(self):
         """
