@@ -21,7 +21,7 @@
 (require pyherc.macros)
 
 (import [pyherc.data [add-location-tag add-trap floor-tile wall-tile
-                      ornamentation distance-between]])
+                      ornamentation distance-between get-location-tags]])
 
 (defn new-section [corner0 corner1 level]
   "create a new section"
@@ -102,6 +102,13 @@
   "set trap in section"
   (add-trap section.level (section-to-map section location) trap))
 
+(defn section-location-tag [section location &optional [location-tag :no-tag]]
+  "get/set location type in section"
+  (let [[loc (section-to-map section location)]
+        [level section.level]]
+    (when (!= location-tag :no-tag) (add-location-tag level loc location-tag))
+    (get-location-tags level loc)))
+
 (defn section-connections [section]
   "get connections of a section"
   (genexpr con [con section._connections]))
@@ -120,7 +127,7 @@
 
 (defn add-room-connection [section location direction]
   "add a new room connection to a section"
-  (.append section._room_connections (Connection nil 
+  (.append section._room_connections (Connection nil
                                                  location 
                                                  direction 
                                                  section)))
@@ -173,6 +180,25 @@
         [possible (list-comp x [x section._room_connections]
                              (= x.direction wanted))]]
     (.choice section.random-generator possible)))
+
+(defn connect-sections [section neighbour]
+  "connect two sections"
+  (let [[my-side-of-border (list (common-border section neighbour))]
+        [my-side (.choice section.random-generator my-side-of-border)]
+        [my-connection (Connection neighbour 
+                                   #t((x-coordinate my-side)
+                                      (y-coordinate my-side))
+                                   (get my-side 2)
+                                   section)]
+        [other-side (opposing-point neighbour my-side)]
+        [other-connection (Connection section
+                                      #t((x-coordinate other-side)
+                                         (y-coordinate other-side))
+                                      (get other-side 2)
+                                      neighbour)]]
+
+    (add-section-connection section my-connection)
+    (add-section-connection neighbour other-connection)))
 
 (defclass Connection []
   "connection between sections or section and room"

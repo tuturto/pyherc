@@ -42,7 +42,8 @@ from pyherc.generators.level.partitioners import (section_width,
                                                   section_border,
                                                   common_border, opposing_point,
                                                   add_room_connection,
-                                                  match_section_to_room)
+                                                  match_section_to_room,
+                                                  connect_sections)
 
 
 class TestSectionCalculations():
@@ -139,7 +140,7 @@ class TestSectionConnections():
         """
         Test that connected neighbours are not reported as unconnected
         """
-        self.section1.connect_to(self.section2)
+        connect_sections(self.section1, self.section2)
 
         assert_that(is_not(is_unconnected_neighbours(self.section1)))
 
@@ -148,7 +149,7 @@ class TestSectionConnections():
         Test that linked sections have their connection points set up
         so that they line up in the border
         """
-        self.section1.connect_to(self.section2)
+        connect_sections(self.section1, self.section2)
 
         point1 = list(section_connections(self.section1))[0]
         point2 = list(section_connections(self.section2))[0]
@@ -161,7 +162,7 @@ class TestSectionConnections():
         """
         Test that connections between sections have their directions set up
         """
-        self.section1.connect_to(self.section2)
+        connect_sections(self.section1, self.section2)
 
         point1 = list(section_connections(self.section1))[0]
         point2 = list(section_connections(self.section2))[0]
@@ -214,7 +215,8 @@ class TestSectionConnections():
         add_room_connection(self.section1, (5, 7), "down")
         add_room_connection(self.section1, (5, 3), "right")
 
-        self.section1.connect_to(self.section2)
+        connect_sections(self.section1, self.section2)
+
         edge_connection = list(section_connections(self.section1))[0]
 
         connection = match_section_to_room(self.section1, edge_connection)

@@ -24,7 +24,7 @@ import random
 
 from hamcrest import assert_that, equal_to, is_
 from pyherc.test.builders import LevelBuilder
-from pyherc.generators.level.partitioners.section import Connection, Section
+from pyherc.generators.level.partitioners import Connection, Section
 
 
 class TestConnection():

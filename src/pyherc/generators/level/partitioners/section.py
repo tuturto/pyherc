@@ -21,18 +21,6 @@
 Classes to represent division of levels
 """
 
-import logging
-from pyherc.data import floor_tile, wall_tile, add_trap, add_location_tag
-from pyherc.data import get_tile, ornamentation
-from pyherc.generators.level.partitioners.new_section import (section_to_map,
-                                                              left_edge,
-                                                              top_edge,
-                                                              is_connected,
-                                                              section_border,
-                                                              common_border,
-                                                              opposing_point,
-                                                              Connection)
-
 class Section():
     """
     Class representing a single section in a level
@@ -63,40 +51,3 @@ class Section():
         self._room_connections = []
         self._neighbours = []
         self.random_generator = random_generator
-        self.logger = logging.getLogger('pyherc.generators.level.partitioners.section.Section')  # noqa
-
-    def connect_to(self, section):
-        """
-        Connect this Section to another
-
-        :param section: section to connect to
-        :type section: Section
-        """
-        my_side_of_border = list(common_border(self, section))
-        my_side = self.random_generator.choice(my_side_of_border)
-        my_connection = Connection(connection=section,
-                                   location=(my_side[0], my_side[1]),
-                                   direction=my_side[2],
-                                   section=self)
-        self._connections.append(my_connection)
-
-        other_side = opposing_point(section, my_side)
-        other_connection = Connection(connection=self,
-                                      location=(other_side[0],
-                                                other_side[1]),
-                                      direction=other_side[2],
-                                      section=section)
-        section._connections.append(other_connection)
-
-    def set_location_type(self, location, location_type):
-        """
-        Set type of location in level
-
-        :param location: location to set
-        :type location: (int, int)
-        :param location_type: type of location
-        :type location_type: string
-
-        .. versionadded:: 0.8
-        """
-        add_location_tag(self.level, section_to_map(self, location), location_type)

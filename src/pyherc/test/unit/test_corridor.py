@@ -29,7 +29,7 @@ from pyherc.data import tile, wall_tile, floor_tile
 from pyherc.generators.level.partitioners import (section_connections,
                                                   add_room_connection,
                                                   add_section_connection)
-from pyherc.generators.level.partitioners.section import Connection, Section
+from pyherc.generators.level.partitioners import Connection, Section
 from pyherc.generators.level.room.corridor import CorridorGenerator
 from pyherc.test.matchers import is_fully_accessible
 from pyherc.test.builders import LevelBuilder

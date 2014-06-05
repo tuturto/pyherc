@@ -27,7 +27,8 @@ from pyherc.aspects import log_debug
 from pyherc.generators.level.partitioners.new_section import (is_connected,
                                                               unconnected_neighbours,
                                                               is_unconnected_neighbours,
-                                                              mark_neighbours)
+                                                              mark_neighbours,
+                                                              connect_sections)
 from pyherc.generators.level.partitioners.section import Section
 from pyherc.data import level_size
 
@@ -98,7 +99,7 @@ class RandomConnector():
             next_section = self.random_generator.choice(
                 list(unconnected_neighbours(current_section)))
 
-            current_section.connect_to(next_section)
+            connect_sections(current_section, next_section)
 
             current_section = next_section
 
