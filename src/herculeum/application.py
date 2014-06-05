@@ -44,7 +44,6 @@ class Application():
         self.logger = None
         self.screen = None
         self.log_level = None
-        self.silent = False
 
     def load_configuration(self, controls, surface_manager):
         """
@@ -84,8 +83,9 @@ class Application():
         """
         Start logging for the system
         """
-        logging.basicConfig(filename='pyherc.log',
-                            level=self.log_level)
+        if self.log_level != 'none':
+            logging.basicConfig(filename='pyherc.log',
+                                level=self.log_level)
         self.logger = logging.getLogger('pyherc.main.Application')
         self.logger.info("Logging started")
 

@@ -40,12 +40,6 @@
                  (.exception logger (.format "{0} has thrown an exception" logger-name))
                  (raise))))))))
 
-(setv log-debug (create-logger logging.DEBUG))
-(setv log-info (create-logger logging.INFO))
-(setv log-warning (create-logger logging.WARNING))
-(setv log-error (create-logger logging.ERROR))
-(setv log-critical (create-logger logging.CRITICAL))
-
 (defn no-logger [wrapped-function]
   "logger that does nothing"
   wrapped-function)
@@ -56,29 +50,30 @@
 (setv log-error no-logger)
 (setv log-critical no-logger)
 
-(defn set-logger [log-level silent]
+(defn set-logger [log-level]
   "set application wide logging level"
   (global log-debug)
   (global log-info)
   (global log-warning)
   (global log-error)
   (global log-critical)
-  (cond [(= log-level "info") (setv log-debug no-logger)]
-    [(= log-level "warning") (do
-                  (setv log-debug no-logger)
-                  (setv log-info no-logger))]
-    [(= log-level "error") (do
-                (setv log-debug no-logger)
-                (setv log-info no-logger)
-                (setv log-warning no-logger))]
-    [(= log-level "critical") (do
-                   (setv log-debug no-logger)
-                   (setv log-info no-logger)
-                   (setv log-warning no-logger)
-                   (setv log-error no-logger))])
-  (when silent
-    (do (setv log-debug no-logger)
-    (setv log-info no-logger)
-    (setv log-warning no-logger)
-    (setv log-error no-logger)
-    (setv log-critical no-logger))))
+  (cond [(= log-level "debug") (do
+                                (setv log-debug (create-logger logging.DEBUG))
+                                (setv log-info (create-logger logging.INFO))
+                                (setv log-warning (create-logger logging.WARNING))
+                                (setv log-error (create-logger logging.ERROR))
+                                (setv log-critical (create-logger logging.CRITICAL)))]
+         [(= log-level "info") (do
+                                (setv log-info (create-logger logging.INFO))
+                                (setv log-warning (create-logger logging.WARNING))
+                                (setv log-error (create-logger logging.ERROR))
+                                (setv log-critical (create-logger logging.CRITICAL)))]
+         [(= log-level "warning") (do
+                                   (setv log-warning (create-logger logging.WARNING))
+                                   (setv log-error (create-logger logging.ERROR))
+                                   (setv log-critical (create-logger logging.CRITICAL)))]
+         [(= log-level "error") (do
+                                 (setv log-error (create-logger logging.ERROR))
+                                 (setv log-critical (create-logger logging.CRITICAL)))]
+         [(= log-level "critical") (do
+                                    (setv log-critical (create-logger logging.CRITICAL)))]))

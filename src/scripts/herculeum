@@ -22,7 +22,7 @@
 Herculeum is a dungeon adventure in the spirit of Nethack and Rogue.
 
 Usage:
-  herculeum [--ui=MODE] [--log-level=LEVEL] [--silent] [--start-level=NAME]
+  herculeum [--ui=MODE] [--log-level=LEVEL] [--start-level=NAME]
   herculeum (-l | --license)
   herculeum (-h | --help)
   herculeum (-v | --version)
@@ -32,8 +32,7 @@ Options:
   -l --license         Show license.
   -v --version         Show version.
   --ui=<mode>          User interface to use (qt or curses) [default: qt]
-  --log-level=<level>  Log level to use [default: warning]
-  --silent             Turns off logging completely
+  --log-level=<level>  Log level to use [default: none]
   --start-level=<name> Starting level [default: upper catacombs]
 
 """
@@ -45,8 +44,7 @@ from docopt import docopt
 import logging
 
 arguments = docopt(__doc__, version='Herculeum ' + PYHERC_VERSION)
-set_logger(arguments['--log-level'],
-           arguments['--silent'])
+set_logger(arguments['--log-level'])
 
 from herculeum.application import Application
 
@@ -66,20 +64,20 @@ def process_command_line(arguments):
     """
     Process command line options
     """
-    log_levels = {'debug': logging.DEBUG,
+    log_levels = {'none': 'none',
+                  'debug': logging.DEBUG,
                   'info': logging.INFO,
                   'warning': logging.WARNING,
                   'error': logging.ERROR,
                   'critical': logging.CRITICAL}
 
     log_level = log_levels[arguments['--log-level']]
-    silent = arguments['--silent']
     ui_mode = arguments['--ui']
     start_level = arguments['--start-level']
     if not start_level:
         start_level = 'first gate'
 
-    return (log_level, silent, ui_mode, start_level)
+    return (log_level, ui_mode, start_level)
 
 if __name__ == "__main__":
     app = Application()
@@ -99,10 +97,9 @@ if __name__ == "__main__":
         print('along with Herculeum.  If not, see <http://www.gnu.org/licenses/>.')  # noqa
     else:
 
-        log_level, silent, ui_mode, start_level = process_command_line(arguments)  # noqa
+        log_level, ui_mode, start_level = process_command_line(arguments)
 
         app.log_level = log_level
-        app.silent = silent
 
         if ui_mode == 'qt':
             user_interface = QtUserInterface(app)
