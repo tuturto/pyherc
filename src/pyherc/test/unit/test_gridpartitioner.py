@@ -33,7 +33,7 @@ from pyherc.generators.level.partitioners import (is_connected,
                                                   section_connections,
                                                   mark_neighbours,
                                                   neighbour_sections)
-from pyherc.generators.level.partitioners.section import Section
+from pyherc.generators.level.partitioners.section import new_section
 from pyherc.test.builders import LevelBuilder
 
 
@@ -160,8 +160,8 @@ class TestRandomConnector:
         """
         Test that two adjacent sections can be connected
         """
-        section1 = Section((0, 0), (10, 5), self.level, self.rng)
-        section2 = Section((0, 6), (10, 10), self.level, self.rng)
+        section1 = new_section((0, 0), (10, 5), self.level, self.rng)
+        section2 = new_section((0, 6), (10, 10), self.level, self.rng)
 
         mark_neighbours(section1, section2)
 
@@ -177,10 +177,10 @@ class TestRandomConnector:
         """
         Test that 2x2 grid is fully connected
         """
-        section00 = Section((0, 0), (5, 5), self.level, self.rng)
-        section10 = Section((6, 0), (10, 5), self.level, self.rng)
-        section01 = Section((0, 6), (5, 10), self.level, self.rng)
-        section11 = Section((6, 6), (10, 10), self.level, self.rng)
+        section00 = new_section((0, 0), (5, 5), self.level, self.rng)
+        section10 = new_section((6, 0), (10, 5), self.level, self.rng)
+        section01 = new_section((0, 6), (5, 10), self.level, self.rng)
+        section11 = new_section((6, 6), (10, 10), self.level, self.rng)
 
         mark_neighbours(section00, section10)
         mark_neighbours(section00, section01)
@@ -205,11 +205,11 @@ class TestRandomConnector:
         Row of Sections is connected, starting from the middle
         RandomConnector can not connect this in one path, but has to branch
         """
-        section0 = Section((0, 0), (10, 10), self.level, self.rng)
-        section1 = Section((11, 0), (20, 10), self.level, self.rng)
-        section2 = Section((21, 0), (30, 10), self.level, self.rng)
-        section3 = Section((31, 0), (40, 10), self.level, self.rng)
-        section4 = Section((41, 0), (50, 10), self.level, self.rng)
+        section0 = new_section((0, 0), (10, 10), self.level, self.rng)
+        section1 = new_section((11, 0), (20, 10), self.level, self.rng)
+        section2 = new_section((21, 0), (30, 10), self.level, self.rng)
+        section3 = new_section((31, 0), (40, 10), self.level, self.rng)
+        section4 = new_section((41, 0), (50, 10), self.level, self.rng)
 
         mark_neighbours(section0, section1)
         mark_neighbours(section1, section2)

@@ -24,12 +24,12 @@ Module for partitioning level to equal grid
 import logging
 
 from pyherc.aspects import log_debug
-from pyherc.generators.level.partitioners.new_section import (is_connected,
-                                                              unconnected_neighbours,
-                                                              is_unconnected_neighbours,
-                                                              mark_neighbours,
-                                                              connect_sections)
-from pyherc.generators.level.partitioners.section import Section
+from pyherc.generators.level.partitioners.section import (is_connected,
+                                                          unconnected_neighbours,
+                                                          is_unconnected_neighbours,
+                                                          mark_neighbours,
+                                                          connect_sections)
+from pyherc.generators.level.partitioners.section import new_section
 from pyherc.data import level_size
 
 
@@ -153,12 +153,12 @@ class GridPartitioner():
 
         for y_block in range(len(y_sections)):
             for x_block in range(len(x_sections)):
-                temp_section = Section((x_sections[x_block][0],
-                                        y_sections[y_block][0]),
-                                       (x_sections[x_block][1],
-                                        y_sections[y_block][1]),
-                                       level,
-                                       self.random_generator)
+                temp_section = new_section((x_sections[x_block][0],
+                                            y_sections[y_block][0]),
+                                           (x_sections[x_block][1],
+                                            y_sections[y_block][1]),
+                                           level,
+                                           self.random_generator)
 
                 self.connect_new_section(temp_section,
                                          (x_block, y_block),

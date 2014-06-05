@@ -29,7 +29,7 @@ from hamcrest import (assert_that,
 
 from pyherc.test.builders import LevelBuilder
 from pyherc.data import floor_tile, wall_tile, get_location_tags
-from pyherc.generators.level.partitioners.section import Section
+from pyherc.generators.level.partitioners.section import new_section
 from pyherc.generators.level.partitioners import (section_width,
                                                   section_height,
                                                   left_edge, top_edge,
@@ -63,7 +63,7 @@ class TestSectionCalculations():
         """
         level = LevelBuilder().build()
         self.rng = random.Random()
-        self.section = Section((10, 10), (20, 25), level, self.rng)
+        self.section = new_section((10, 10), (20, 25), level, self.rng)
 
     def test_left_edge(self):
         """
@@ -125,8 +125,8 @@ class TestSectionConnections():
         """
         level = LevelBuilder().build()
 
-        self.section1 = Section((0, 0), (10, 20), level, self.rng)
-        self.section2 = Section((11, 0), (20, 20), level, self.rng)
+        self.section1 = new_section((0, 0), (10, 20), level, self.rng)
+        self.section2 = new_section((11, 0), (20, 20), level, self.rng)
 
         mark_neighbours(self.section1, self.section2)
 
@@ -254,7 +254,7 @@ class TestSectionLevelAccess():
                       .with_wall_tile(self.wall_empty)
                       .build())
 
-        self.section = Section((0, 0), (10, 10), self.level, self.rng)
+        self.section = new_section((0, 0), (10, 10), self.level, self.rng)
 
     def test_setting_floor(self):
         """
@@ -314,7 +314,7 @@ class TestSectionLevelAccessWithOffset():
                       .with_wall_tile(self.wall_empty)
                       .build())
 
-        self.section = Section((5, 5), (10, 10), self.level, self.rng)
+        self.section = new_section((5, 5), (10, 10), self.level, self.rng)
 
     def test_setting_floor_with_offset(self):
         """

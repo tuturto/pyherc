@@ -23,13 +23,28 @@
 (import [pyherc.data [add-location-tag add-trap floor-tile wall-tile
                       ornamentation distance-between get-location-tags]])
 
-(defn new-section [corner0 corner1 level]
+(defclass Section []
+  [[--init-- (fn [self corner1 corner2 level random-generator]
+               (-> (super) (.--init--))
+               (setv self.-corners [corner1 corner2])
+               (setv self.level level)
+               (setv self.-connections [])
+               (setv self.-room-connections [])
+               (setv self.-neighbours [])
+               (setv self.random-generator random-generator)
+               nil)]])
+
+(defn new-section [corner1 corner2 level random-generator]
+  (ASection corner1 corner2 level random-generator))
+
+(defn --new-section [corner0 corner1 level rng]
   "create a new section"
   {:corners [corner0 corner1]
    :level level
    :connections []
    :room-connections []
-   :neighbours []})
+   :neighbours []
+   :rng rng})
 
 (defn section-corners [section &optional [corners :no-corners]]
   "get/set corners of this section"

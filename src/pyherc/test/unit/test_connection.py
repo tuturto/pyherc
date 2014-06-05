@@ -24,7 +24,7 @@ import random
 
 from hamcrest import assert_that, equal_to, is_
 from pyherc.test.builders import LevelBuilder
-from pyherc.generators.level.partitioners import Connection, Section
+from pyherc.generators.level.partitioners import Connection, new_section
 
 
 class TestConnection():
@@ -37,10 +37,10 @@ class TestConnection():
         Test that Connection can be translated to section coordinates
         """
         level = LevelBuilder().build()
-        section = Section(corner1=(10, 10),
-                          corner2=(20, 20),
-                          level=level,
-                          random_generator=random.Random())
+        section = new_section(corner1=(10, 10),
+                              corner2=(20, 20),
+                              level=level,
+                              random_generator=random.Random())
 
         connection = Connection(connection=None,
                                 location=(20, 20),

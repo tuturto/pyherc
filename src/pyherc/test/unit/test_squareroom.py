@@ -22,7 +22,7 @@ Tests for SquareRoomGenerator room generator
 """
 
 from pyherc.data import Model, wall_tile
-from pyherc.generators.level.partitioners import Section, room_connections
+from pyherc.generators.level.partitioners import new_section, room_connections
 from pyherc.generators.level.room import SquareRoomGenerator
 from pyherc.test.builders import LevelBuilder
 from hamcrest import assert_that, has_length, is_ 
@@ -55,7 +55,7 @@ class TestSquareRoom():
                       .with_wall_tile(self.wall_ground)
                       .build())
 
-        self.section = Section((5, 5), (15, 15), self.level, self.rng)
+        self.section = new_section((5, 5), (15, 15), self.level, self.rng)
         self.generator = SquareRoomGenerator(self.floor_rock,
                                              self.wall_empty,
                                              self.floor_rock,
