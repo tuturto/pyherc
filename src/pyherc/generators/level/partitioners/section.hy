@@ -35,7 +35,7 @@
                nil)]])
 
 (defn new-section [corner1 corner2 level random-generator]
-  (ASection corner1 corner2 level random-generator))
+  (Section corner1 corner2 level random-generator))
 
 (defn --new-section [corner0 corner1 level rng]
   "create a new section"
