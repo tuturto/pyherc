@@ -23,66 +23,52 @@
 (import [pyherc.data [add-location-tag add-trap floor-tile wall-tile
                       ornamentation distance-between get-location-tags]])
 
-(defclass Section []
-  [[--init-- (fn [self corner1 corner2 level random-generator]
-               (-> (super) (.--init--))
-               (setv self.-corners [corner1 corner2])
-               (setv self.level level)
-               (setv self.-connections [])
-               (setv self.-room-connections [])
-               (setv self.-neighbours [])
-               (setv self.random-generator random-generator)
-               nil)]])
-
-(defn new-section [corner1 corner2 level random-generator]
-  (Section corner1 corner2 level random-generator))
-
-(defn --new-section [corner0 corner1 level rng]
+(defn new-section [corner0 corner1 level random-generator]
   "create a new section"
   {:corners [corner0 corner1]
    :level level
    :connections []
    :room-connections []
    :neighbours []
-   :rng rng})
+   :random-generator random-generator})
 
 (defn section-corners [section &optional [corners :no-corners]]
   "get/set corners of this section"
-  (when (!= corners :no-corners) (setv section._corners corners))
-  section._corners)
+  (when (!= corners :no-corners) (setv (:corners section) corners))
+  (:corners section))
 
 (defn section-height [section]
   "get height of a section"
-  (abs (- (y-coordinate (first section.-corners))
-          (y-coordinate (second section.-corners)))))
+  (abs (- (y-coordinate (first (:corners section)))
+          (y-coordinate (second (:corners section))))))
 
 (defn section-width [section]
   "get width of a section"
-  (abs (- (x-coordinate (first section.-corners))
-          (x-coordinate (second section.-corners)))))
+  (abs (- (x-coordinate (first (:corners section)))
+          (x-coordinate (second (:corners section))))))
 
 (defn left-edge [section]
   "get left edge of the section"
-  (let [[point₀ (x-coordinate (first section.-corners))]
-        [point₁ (x-coordinate (second section.-corners))]]
+  (let [[point₀ (x-coordinate (first (:corners section)))]
+        [point₁ (x-coordinate (second (:corners section)))]]
     (min point₀ point₁)))
 
 (defn right-edge [section]
   "get right edge of the section"
-  (let [[point₀ (x-coordinate (first section.-corners))]
-        [point₁ (x-coordinate (second section.-corners))]]
+  (let [[point₀ (x-coordinate (first (:corners section)))]
+        [point₁ (x-coordinate (second (:corners section)))]]
     (max point₀ point₁)))
 
 (defn top-edge [section]
   "get top edge of the section"
-  (let [[point₀ (y-coordinate (first section.-corners))]
-        [point₁ (y-coordinate (second section.-corners))]]
+  (let [[point₀ (y-coordinate (first (:corners section)))]
+        [point₁ (y-coordinate (second (:corners section)))]]
     (min point₀ point₁)))
 
 (defn bottom-edge [section]
   "get bottom edge of the section"
-  (let [[point₀ (y-coordinate (first section.-corners))]
-        [point₁ (y-coordinate (second section.-corners))]]
+  (let [[point₀ (y-coordinate (first (:corners section)))]
+        [point₁ (y-coordinate (second (:corners section)))]]
     (max point₀ point₁)))
 
 (defn section-to-map [section location]
@@ -93,7 +79,7 @@
 (defn section-floor [section location &optional [tile-id :no-tile] location-type]
   "get/set floor tile in section"
   (let [[loc (section-to-map section location)]
-        [level section.level]]
+        [level (:level section)]]
     (when (!= tile-id :no-tile) (floor-tile level loc tile-id))
     (when location-type (add-location-tag level loc location-type))
     (floor-tile level loc tile-id)))
@@ -101,7 +87,7 @@
 (defn section-wall [section location &optional [tile-id :no-tile] location-type]
   "get/set wall tile in section"
   (let [[loc (section-to-map section location)]
-        [level section.level]]
+        [level (:level section)]]
     (when (!= tile-id :no-tile) (wall-tile level loc tile-id))
     (when location-type (add-location-tag level loc location-type))
     (wall-tile level loc tile-id)))
@@ -109,32 +95,32 @@
 (defn section-ornamentation [section location &optional [tile-id :no-tile]]
   "get/set ornament in section"
   (let [[loc (section-to-map section location)]
-        [level section.level]]
+        [level (:level section)]]
     (when (!= tile-id :no-tile) (ornamentation level loc tile-id))
     (ornamentation level loc tile-id)))
 
 (defn section-trap [section location trap]
   "set trap in section"
-  (add-trap section.level (section-to-map section location) trap))
+  (add-trap (:level section) (section-to-map section location) trap))
 
 (defn section-location-tag [section location &optional [location-tag :no-tag]]
   "get/set location type in section"
   (let [[loc (section-to-map section location)]
-        [level section.level]]
+        [level (:level section)]]
     (when (!= location-tag :no-tag) (add-location-tag level loc location-tag))
     (get-location-tags level loc)))
 
 (defn section-connections [section]
   "get connections of a section"
-  (genexpr con [con section._connections]))
+  (genexpr con [con (:connections section)]))
 
 (defn add-section-connection [section connection]
   "add a new connection to a section"
-  (.append section._connections connection))
+  (.append (:connections section) connection))
 
 (defn room-connections [section]
   "get room connections of a section"
-  (genexpr con [con section._room_connections]))
+  (genexpr con [con (:room-connections section)]))
 
 (defn connected? [section]
   "is this section connected"
@@ -142,19 +128,19 @@
 
 (defn add-room-connection [section location direction]
   "add a new room connection to a section"
-  (.append section._room_connections (Connection nil
-                                                 location 
-                                                 direction 
-                                                 section)))
+  (.append (:room-connections section) (Connection nil
+                                                   location 
+                                                   direction 
+                                                   section)))
 
 (defn neighbour-sections [section]
   "get sections next to this one"
-  (genexpr sec [sec section._neighbours]))
+  (genexpr sec [sec (:neighbours section)]))
 
 (defn mark-neighbours [section neighbour]
   "mark two sections as neighbours"
-  (.append section._neighbours neighbour)
-  (.append neighbour._neighbours section))
+  (.append (:neighbours section) neighbour)
+  (.append (:neighbours neighbour) section))
 
 (defn unconnected-neighbours [section]
   "get unconnected neighbours of a section"
@@ -192,14 +178,14 @@
                       [(= direction "left") "right"]
                       [(= direction "up") "down"]
                       [(= direction "down") "up"])]
-        [possible (list-comp x [x section._room_connections]
+        [possible (list-comp x [x (:room-connections section)]
                              (= x.direction wanted))]]
-    (.choice section.random-generator possible)))
+    (.choice (:random-generator section) possible)))
 
 (defn connect-sections [section neighbour]
   "connect two sections"
   (let [[my-side-of-border (list (common-border section neighbour))]
-        [my-side (.choice section.random-generator my-side-of-border)]
+        [my-side (.choice (:random-generator section) my-side-of-border)]
         [my-connection (Connection neighbour 
                                    #t((x-coordinate my-side)
                                       (y-coordinate my-side))

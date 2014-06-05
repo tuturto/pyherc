@@ -19,7 +19,8 @@
 
 (require pyherc.macros)
 (require hy.contrib.anaphoric)
-(import [pyherc.generators.level.partitioners [section-wall]]
+(import [pyherc.generators.level.partitioners [section-wall
+                                               section-ornamentation]]
         [pyherc.generators.level.room.squareroom [SquareRoomGenerator]]
         random)
 
@@ -41,4 +42,4 @@
                                (when self.walls 
                                  (section-wall section it (.choice random self.walls) "wall"))
                                (when self.decos
-                                 (.set-ornamentation section it (.choice random self.decos))))))]])
+                                 (section-ornamentation section it (.choice random self.decos))))))]])

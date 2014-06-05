@@ -50,6 +50,12 @@
   "logger that does nothing"
   wrapped-function)
 
+(setv log-debug no-logger)
+(setv log-info no-logger)
+(setv log-warning no-logger)
+(setv log-error no-logger)
+(setv log-critical no-logger)
+
 (defn set-logger [log-level silent]
   "set application wide logging level"
   (global log-debug)

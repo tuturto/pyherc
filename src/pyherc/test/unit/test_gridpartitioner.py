@@ -105,7 +105,7 @@ class TestGridPartitioner:
         sections = self.partitioner.partition_level(self.level)
 
         for section in sections:
-            assert_that(section.level, is_(same_instance(self.level)))
+            assert_that(section['\ufdd0:level'], is_(same_instance(self.level)))
 
 
 class TestGridPartitionerUtilities:

@@ -37,10 +37,10 @@ class TestConnection():
         Test that Connection can be translated to section coordinates
         """
         level = LevelBuilder().build()
-        section = new_section(corner1=(10, 10),
-                              corner2=(20, 20),
-                              level=level,
-                              random_generator=random.Random())
+        section = new_section((10, 10),
+                              (20, 20),
+                              level,
+                              random.Random())
 
         connection = Connection(connection=None,
                                 location=(20, 20),

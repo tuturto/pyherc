@@ -63,10 +63,10 @@ class TestCorridor():
                         .build())
 
         self.rng = random.Random()
-        self.section = new_section(corner1=(0, 0),
-                                   corner2=(10, 10),
-                                   level=self.level,
-                                   random_generator=self.rng)
+        self.section = new_section((0, 0),
+                                   (10, 10),
+                                   self.level,
+                                   self.rng)
 
     def test_straight_horizontal(self):
         """
