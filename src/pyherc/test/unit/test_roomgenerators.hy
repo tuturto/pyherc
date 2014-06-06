@@ -19,7 +19,8 @@
 
 (require pyherc.macros)
 (require hy.contrib.anaphoric)
-(import [pyherc.generators.level.room [SquareRoomGenerator PillarRoomGenerator
+(import [pyherc.data.traps [PitTrap]]
+        [pyherc.generators.level.room [SquareRoomGenerator PillarRoomGenerator
                                        CatacombsGenerator CrimsonLairGenerator
                                        CircularRoomGenerator
                                        TempleRoomGenerator
@@ -63,8 +64,8 @@
 
 (defn test-library-generation []
   "test generating library"
-  (run-generator (LibraryRoomGenerator :floor :corridor [:shelf1 :shelf2] nil 50 ["test"])))
+  (run-generator (LibraryRoomGenerator :floor :corridor [:shelf1 :shelf2] nil 50 nil ["test"])))
 
 (defn test-pitroom-generation []
   "test generating pit room"
-  (run-generator (PitRoomGenerator :floor :corridor nil :pit (fn [] :trap) ["test"])))
+  (run-generator (PitRoomGenerator :floor :corridor nil :pit PitTrap ["test"])))

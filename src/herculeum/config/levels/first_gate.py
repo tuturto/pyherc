@@ -23,7 +23,9 @@ module for configuring first gate
 import hy
 from herculeum.ai.fungus import FungusAI, GreatFungusAI
 from pyherc.config.dsl import LevelConfiguration, LevelContext
+from pyherc.data import add_location_feature
 from pyherc.data.effects import DamageModifier
+from pyherc.data.features import new_grave
 from pyherc.generators import creature_config, inventory_config
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
@@ -52,6 +54,12 @@ from pyherc.generators.level.room import (PillarRoomGenerator,
 from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
+
+def tomb_creator(level, location):
+    """
+    create a tomb at given location
+    """
+    add_location_feature(level, location, new_grave(level, location, [], []))
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
     """
@@ -140,6 +148,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                             [shelf_1, shelf_2, shelf_3],
                                             None,
                                             75,
+                                            None,
                                             ['first gate']),
                        LibraryRoomGenerator(tile_floor,
                                             tile_floor,
@@ -148,6 +157,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                              tomb_4, tomb_5, tomb_6,
                                              tomb_7, tomb_8, tomb_9],
                                             25,
+                                            tomb_creator,
                                             ['first gate'])]
 
     level_partitioners = [GridPartitioner(['first gate'],

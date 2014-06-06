@@ -48,4 +48,6 @@ from .level import add_character, remove_character, get_character, get_character
 from .level import move_character, add_trap, get_trap
 from .level import add_location_tag, get_location_tags, get_locations_by_tag
 from .level import new_level, get_tiles
+from .level import location_features, add_location_feature
+from .level import remove_location_feature
 from .locations import is_next_to_wall, is_corridor, is_open_area

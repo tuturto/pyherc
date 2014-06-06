@@ -40,7 +40,8 @@
    :tags []
    :items []
    :character nil
-   :portal nil})
+   :portal nil
+   :features []})
 
 (defn get-tile [level location]
   "get tile at given location"
@@ -188,7 +189,8 @@
 
 #d(defn add-trap [level location trap]
     "add trap to level"
-    (assoc (get-or-create-tile level location) :trap trap))
+    (assoc (get-or-create-tile level location) :trap trap)
+    (setv trap.location location))
 
 (defn get-trap [level location]
   "get trap in a given tile"
@@ -213,3 +215,20 @@
   (genexpr location [#t(location tile) (.items (:tiles level))] 
            (or (in tag (:tags tile))
                (= tag "any"))))
+
+(defn location-features [level location]
+  "get features in a given location"
+  (let [[map-tile (get-tile level location)]]
+    (if map-tile
+      (genexpr feature [feature (:features map-tile)])
+      (genexpr feature [feature []]))))
+
+(defn add-location-feature [level location feature]
+  "add location feature"
+  (let [[map-tile (get-tile level location)]]
+    (.append (:features map-tile) feature)))
+
+(defn remove-location-feature [level location feature]
+  "remove a location feature"
+  (let [[map-tile (get-tile level location)]]
+    (.remove (:features map-tile) feature)))

@@ -20,19 +20,21 @@
 (require pyherc.macros)
 (require hy.contrib.anaphoric)
 (import [pyherc.generators.level.partitioners [section-wall
-                                               section-ornamentation]]
+                                               section-ornamentation
+                                               section-to-map]]
         [pyherc.generators.level.room.squareroom [SquareRoomGenerator]]
         random)
 
 (defclass LibraryRoomGenerator [SquareRoomGenerator]
   "generator for library rooms"
-  [[--init-- (fn [self floor-tile corridor-tile walls decos rate level-types]
+  [[--init-- (fn [self floor-tile corridor-tile walls decos rate feature-creator level-types]
                "default constructor"
                (-> (super)
                    (.--init-- floor-tile nil corridor-tile level-types))
                (setv self.walls walls)
                (setv self.decos decos)
                (setv self.rate rate)
+               (setv self.feature-creator feature-creator)
                nil)]
    [generate-room (fn [self section]
                     (-> (super)
@@ -42,4 +44,7 @@
                                (when self.walls 
                                  (section-wall section it (.choice random self.walls) "wall"))
                                (when self.decos
-                                 (section-ornamentation section it (.choice random self.decos))))))]])
+                                 (section-ornamentation section it (.choice random self.decos)))
+                               (when self.feature-creator
+                                 (self.feature-creator (:level section) 
+                                                       (section-to-map section it))))))]])

@@ -24,7 +24,8 @@ Tests for Level
 from hamcrest import (assert_that, is_, equal_to,
                       contains_inanyorder)
 from pyherc.data import Model, level_size, get_locations_by_tag
-from pyherc.data import add_location_tag
+from pyherc.data import add_location_tag, add_location_feature, location_features
+from pyherc.data.features import new_grave, feature_type
 from pyherc.test.builders import LevelBuilder
 
 class TestLevel:
@@ -50,6 +51,17 @@ class TestLevel:
         Test that Level can report size
         """
         assert_that(level_size(self.level), is_(equal_to((0, 19, 0, 9))))
+
+    def test_manipulating_features(self):
+        """
+        Teset that features can be manipulated
+        """
+        add_location_feature(self.level, (5, 5),
+                             new_grave(self.level, (5, 5), ['coin'], ['skeleton']))
+        feature = list(location_features(self.level, (5, 5)))[0]
+
+        assert_that(feature_type(feature), is_(equal_to('\ufdd0:grave')))
+
 
     def test_get_rooms(self):
         """
