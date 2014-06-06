@@ -37,10 +37,10 @@
     {:level level
      :sections sections}))
 
-;; TODO: fix finding a feature tile
-(defn find-feature [level feature]
-  "find first feature of given type in level"
-  (first (list (location-features level #t(5 5)))))
+(defn find-feature [level]
+  "find a grave"
+  (for [#t(location tile) (get-tiles level)]
+    (yield-from (location-features level location))))
 
 (defn test-adding-special-feature[]
   "library generator can add special features"
@@ -53,6 +53,6 @@
                                                  (new-grave level location [:coin] [:skeleton])))]
         [generator (LibraryRoomGenerator :floor :corridor nil :grave 100 feature-creator ["test"])]]
     (ap-each sections (.generate-room generator it))
-    (let [[grave (find-feature level :grave)]]
+    (let [[grave (first (list (find-feature level)))]]
       (assert-that (items-in-grave grave) (has-item :coin))
       (assert-that (characters-in-grave grave) (has-item :skeleton)))))

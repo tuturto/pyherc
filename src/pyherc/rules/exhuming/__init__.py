@@ -17,17 +17,6 @@
 #   You should have received a copy of the GNU General Public License
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-Package for tests
-"""
-import hy
+# flake8: noqa
 
-from pyherc.test.unit.test_calendar import *
-from pyherc.test.unit.test_mitosis import *
-from pyherc.test.unit.test_metamorphosis import *
-from pyherc.test.unit.test_skills import *
-from pyherc.test.unit.test_surround_decorator import *
-from pyherc.test.unit.test_locations import *
-from pyherc.test.unit.test_roomgenerators import *
-from pyherc.test.unit.test_library_generator import *
-from pyherc.test.unit.test_graves import *
+from .interface import exhume
