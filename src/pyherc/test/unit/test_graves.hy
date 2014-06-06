@@ -27,7 +27,9 @@
         [pyherc.data.features [new-grave items-in-grave characters-in-grave]]
         [pyherc.generators.level.partitioners [GridPartitioner]]
         [pyherc.generators.level.room [LibraryRoomGenerator]]
-        [pyherc.test.builders [LevelBuilder ItemBuilder CharacterBuilder]]
+        [pyherc.test.builders [ActionFactoryBuilder LevelBuilder ItemBuilder
+                               CharacterBuilder]]
+        [pyherc.rules.inventory.interface [equip]]
         [pyherc.rules.exhuming [exhume]])
 
 (defn full-grave [level location]
@@ -57,11 +59,15 @@
         [sections (.partition-level partitioner level)]
         [generator (LibraryRoomGenerator :floor :corridor nil :grave 100 
                                          full-grave
-                                         ["test"])]]
+                                         ["test"])]
+        [action-factory (-> (ActionFactoryBuilder)
+                            (.with-inventory-factory)
+                            (.build))]]
     (ap-each sections (.generate-room generator it))
     {:level level
      :sections sections
-     :grave (first (list (find-feature level)))}))
+     :grave (first (list (find-feature level)))
+     :action-factory action-factory}))
 
 (defn test-looting-without-implement []
   "looting a grave without implement is not possible"
@@ -73,4 +79,24 @@
                        (.build))]]
     (add-character level (:location grave) character)
     (exhume character)
-    (assert-that (count (get-characters level)) (is- (equal-to 1)))))
+    (assert-that (count (items-in-grave grave)) (is- (equal-to 1)))
+    (assert-that (count (characters-in-grave grave)) (is- (equal-to 1)))))
+
+(defn test-looting-with-spade []
+  "looting grave with spade empties it"
+  (let [[context (setup)]
+        [level (:level context)]
+        [grave (:grave context)]
+        [action-factory (:action-factory context)]
+        [character (-> (CharacterBuilder)
+                       (.with-name "Pete")
+                       (.build))]
+        [spade (-> (ItemBuilder)
+                   (.with-name "spade")
+                   (.with-tag :spade)
+                   (.build))]]
+    (add-character level (:location grave) character)
+    (equip character spade action-factory)
+    (exhume character)
+    (assert-that (count (items-in-grave grave)) (is- (equal-to 0)))
+    (assert-that (count (characters-in-grave grave)) (is- (equal-to 0)))))
