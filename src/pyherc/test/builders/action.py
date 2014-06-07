@@ -26,6 +26,7 @@ from pyherc.rules.combat import RangedCombatFactory
 from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,
                                            UnarmedCombatFactory)
 from pyherc.rules.consume.factories import DrinkFactory
+from pyherc.rules.exhuming.factories import ExhumeFactory
 from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.factories import (DropFactory, InventoryFactory,
                                               PickUpFactory)
@@ -69,6 +70,8 @@ class ActionFactoryBuilder():
         self.mitosis_factory.action_type = 'mitosis'
         self.metamorphosis_factory = mock()
         self.metamorphosis_factory.action_type = 'metamorphosis'
+        self.exhume_factory = mock()
+        self.exhume_factory.action_type = 'exhume'
 
         self.effect_factory = mock()
         self.use_real_attack_factory = False
@@ -81,6 +84,7 @@ class ActionFactoryBuilder():
         self.use_real_dying_rules = False
         self.use_real_mitosis_factory = False
         self.use_real_metamorphosis_factory = False
+        self.use_real_exhume_factory = False
 
     def with_model(self, model):
         """
@@ -211,6 +215,14 @@ class ActionFactoryBuilder():
 
         return self
 
+    def with_exhume_factory(self, exhume_factory=None):
+        if exhume_factory:
+            self.exhume_factory = exhume_factory
+        else:
+            self.use_real_exhume_factory = True
+
+        return self
+
     def build(self):
         """
         Build action factory
@@ -267,6 +279,9 @@ class ActionFactoryBuilder():
         if self.use_real_metamorphosis_factory:
             self.metamorphosis_factory = MetamorphosisFactoryBuilder().build()
 
+        if self.use_real_exhume_factory:
+            self.exhume_factory = ExhumeFactoryBuilder().build()
+
         action_factory = ActionFactory(self.model,
                                        [self.move_factory,
                                         self.drink_factory,
@@ -276,7 +291,8 @@ class ActionFactoryBuilder():
                                         self.wait_factory,
                                         self.gain_domain_factory,
                                         self.mitosis_factory,
-                                        self.metamorphosis_factory])
+                                        self.metamorphosis_factory,
+                                        self.exhume_factory])
 
         return action_factory
 
@@ -495,3 +511,19 @@ class MetamorphosisFactoryBuilder():
         """
         return MetamorphosisFactory(character_generator=self.character_generator,
                                     rng=self.rng)
+
+class ExhumeFactoryBuilder():
+    """
+    Builder for exhume factory
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super().__init__()
+
+    def build(self):
+        """
+        Builds exhume factory
+        """
+        return ExhumeFactory()

@@ -17,6 +17,26 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn exhume [character]
-  "perform exhuming"
-  nil)
+(require pyherc.aspects)
+(import [pyherc.rules.public [ActionParameters]]
+	[pyherc.aspects [log-debug log-info]])
+
+#d(defn exhume [character action-factory]
+    "perform exhuming"
+    (let [[action (.get-action action-factory (ExhumeParameters character))]]
+      (when (.legal? action)
+        (.execute action))))
+
+(defn mexhume-legal? [character action-factory]
+  "check if exhuming is legal"
+  (let [[action (.get-action action-factory
+                             (ExhumeParameters character))]]
+    (.legal? action)))
+
+(defclass ExhumeParameters [ActionParameters]
+  "Class controlling creation of ExhumeAction"
+  [[--init-- #d(fn [self character]
+		 (-> (super) (.--init--))
+		 (setv self.action-type "exhume")
+		 (setv self.character character)
+		 nil)]])

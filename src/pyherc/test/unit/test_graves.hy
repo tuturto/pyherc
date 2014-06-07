@@ -62,6 +62,7 @@
                                          ["test"])]
         [action-factory (-> (ActionFactoryBuilder)
                             (.with-inventory-factory)
+                            (.with_exhume-factory)
                             (.build))]]
     (ap-each sections (.generate-room generator it))
     {:level level
@@ -74,11 +75,12 @@
   (let [[context (setup)]
         [level (:level context)]
         [grave (:grave context)]
+        [action-factory (:action-factory context)]
         [character (-> (CharacterBuilder)
                        (.with-name "Pete")
                        (.build))]]
     (add-character level (:location grave) character)
-    (exhume character)
+    (exhume character action-factory)
     (assert-that (count (items-in-grave grave)) (is- (equal-to 1)))
     (assert-that (count (characters-in-grave grave)) (is- (equal-to 1)))))
 
@@ -97,6 +99,6 @@
                    (.build))]]
     (add-character level (:location grave) character)
     (equip character spade action-factory)
-    (exhume character)
+    (exhume character action-factory)
     (assert-that (count (items-in-grave grave)) (is- (equal-to 0)))
     (assert-that (count (characters-in-grave grave)) (is- (equal-to 0)))))
