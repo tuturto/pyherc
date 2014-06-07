@@ -63,12 +63,29 @@
         [action-factory (-> (ActionFactoryBuilder)
                             (.with-inventory-factory)
                             (.with_exhume-factory)
-                            (.build))]]
+                            (.build))]
+        [character (-> (CharacterBuilder)
+                       (.with-name "Pete")
+                       (.build))]
+        [spade (-> (ItemBuilder)
+                   (.with-name "spade")
+                   (.with_damage 1 "crushing")
+                   (.with-tag :spade)
+                   (.build))]
+        [dagger (-> (ItemBuilder)
+                    (.with-name "dagger")
+                    (.with_damage 1 "piercing")
+                    (.build))]]
     (ap-each sections (.generate-room generator it))
+    (.append character.inventory spade)
+    (.append character.inventory dagger)
     {:level level
      :sections sections
      :grave (first (list (find-feature level)))
-     :action-factory action-factory}))
+     :action-factory action-factory
+     :character character
+     :spade spade
+     :dagger dagger}))
 
 (defn test-looting-without-implement []
   "looting a grave without implement is not possible"
@@ -76,9 +93,7 @@
         [level (:level context)]
         [grave (:grave context)]
         [action-factory (:action-factory context)]
-        [character (-> (CharacterBuilder)
-                       (.with-name "Pete")
-                       (.build))]]
+        [character (:character context)]]
     (add-character level (:location grave) character)
     (exhume character action-factory)
     (assert-that (count (items-in-grave grave)) (is- (equal-to 1)))
@@ -90,16 +105,9 @@
         [level (:level context)]
         [grave (:grave context)]
         [action-factory (:action-factory context)]
-        [character (-> (CharacterBuilder)
-                       (.with-name "Pete")
-                       (.build))]
-        [spade (-> (ItemBuilder)
-                   (.with-name "spade")
-                   (.with_damage 1 "crushing")
-                   (.with-tag :spade)
-                   (.build))]]
+        [character (:character context)]
+        [spade (:spade context)]]
     (add-character level (:location grave) character)
-    (.append character.inventory spade)
     (equip character spade action-factory)
     (exhume character action-factory)
     (assert-that (count (items-in-grave grave)) (is- (equal-to 0)))
@@ -111,15 +119,9 @@
         [level (:level context)]
         [grave (:grave context)]
         [action-factory (:action-factory context)]
-        [character (-> (CharacterBuilder)
-                       (.with-name "Pete")
-                       (.build))]
-        [dagger (-> (ItemBuilder)
-                    (.with-name "dagger")
-                    (.with_damage 1 "piercing")
-                    (.build))]]
+        [character (:character context)]
+        [dagger (:dagger context)]]
     (add-character level (:location grave) character)
-    (.append character.inventory dagger)
     (equip character dagger action-factory)
     (exhume character action-factory)
     (assert-that (count (items-in-grave grave)) (is- (equal-to 1)))
