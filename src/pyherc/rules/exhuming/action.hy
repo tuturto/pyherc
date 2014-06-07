@@ -42,4 +42,5 @@
 (defn using-spade? [character]
   "check if this character is currently using a spade"
   (let [[weapon character.inventory.weapon]]
-    (if (= weapon nil) false true)))
+    (if (= weapon nil) false
+        (when (in :spade weapon.tags) true))))

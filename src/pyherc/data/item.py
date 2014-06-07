@@ -57,7 +57,7 @@ class Item():
         self.weight = None
         self.rarity = None
         self.cost = None
-        self.tags = {}
+        self.tags = ()
         self.__update_listeners = []
 
     def __str__(self):

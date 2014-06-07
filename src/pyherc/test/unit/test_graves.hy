@@ -104,3 +104,23 @@
     (exhume character action-factory)
     (assert-that (count (items-in-grave grave)) (is- (equal-to 0)))
     (assert-that (count (characters-in-grave grave)) (is- (equal-to 0)))))
+
+(defn test-looting-with-dagger []
+  "looting is not possible with a regular weapon"
+  (let [[context (setup)]
+        [level (:level context)]
+        [grave (:grave context)]
+        [action-factory (:action-factory context)]
+        [character (-> (CharacterBuilder)
+                       (.with-name "Pete")
+                       (.build))]
+        [dagger (-> (ItemBuilder)
+                    (.with-name "dagger")
+                    (.with_damage 1 "piercing")
+                    (.build))]]
+    (add-character level (:location grave) character)
+    (.append character.inventory dagger)
+    (equip character dagger action-factory)
+    (exhume character action-factory)
+    (assert-that (count (items-in-grave grave)) (is- (equal-to 1)))
+    (assert-that (count (characters-in-grave grave)) (is- (equal-to 1)))))
