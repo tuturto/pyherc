@@ -139,3 +139,16 @@
     (equip character spade action-factory)
     (exhume character action-factory)
     (assert-that (count (get-items level)) (is- (equal-to 1)))))
+
+(defn test-character-are-unearthed []
+  "characters from grave are unearthed after succesfull exhuming"
+  (let [[context (setup)]
+        [level (:level context)]
+        [grave (:grave context)]
+        [action-factory (:action-factory context)]
+        [character (:character context)]
+        [spade (:spade context)]]
+    (add-character level (:location grave) character)
+    (equip character spade action-factory)
+    (exhume character action-factory)
+    (assert-that (count (get-characters level)) (is- (equal-to 2)))))

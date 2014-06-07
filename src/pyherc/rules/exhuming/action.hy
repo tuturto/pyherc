@@ -21,9 +21,9 @@
 (require pyherc.aspects)
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
-        [pyherc.data [area-around add-item blocks-movement]]
+        [pyherc.data [area-around add-item add-character blocks-movement]]
         [pyherc.data.features [clear-grave feature-level feature-location
-                               items-in-grave]])
+                               items-in-grave characters-in-grave]])
 
 (defclass ExhumeAction []
   [[--init-- #d(fn [self character grave rng]
@@ -43,6 +43,7 @@
                         [location (feature-location self.grave)]
                         [grave self.grave]]
                     (distribute-items level location (items-in-grave grave) self.rng)
+                    (distribute-characters level location (characters-in-grave grave) self.rng)
                     (clear-grave self.grave))))]])
 
 (defn using-spade? [character]
@@ -56,6 +57,12 @@
   (ap-each items (add-item level
                            (free-location level location rng)
                            it)))
+
+(defn distribute-characters [level location characters rng]
+  "distribute characters around given spot"
+  (ap-each characters (add-character level
+                                     (free-location level location rng)
+                                     it)))
 
 (defn free-location [level location rng]
   "find a free location around given spot"
