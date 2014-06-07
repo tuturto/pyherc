@@ -20,7 +20,8 @@
 (require hy.contrib.anaphoric)
 (require pyherc.aspects)
 (require pyherc.macros)
-(import [pyherc.aspects [log-debug]])
+(import [pyherc.aspects [log-debug]]
+        [pyherc.data.features [clear-grave]])
 
 (defclass ExhumeAction []
   [[--init-- #d(fn [self character grave]
@@ -31,8 +32,14 @@
                  nil)]
    [legal? #d(fn [self]
                "check if action is possible to perform"
-               true)]
+               (using-spade? self.character))]
    [execute #d(fn [self]
                 "execute the action"
-                )]])
+                (when (.legal? self)
+                  (clear-grave self.grave)
+                  ))]])
 
+(defn using-spade? [character]
+  "check if this character is currently using a spade"
+  (let [[weapon character.inventory.weapon]]
+    (if (= weapon nil) false true)))

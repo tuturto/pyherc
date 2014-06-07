@@ -95,9 +95,11 @@
                        (.build))]
         [spade (-> (ItemBuilder)
                    (.with-name "spade")
+                   (.with_damage 1 "crushing")
                    (.with-tag :spade)
                    (.build))]]
     (add-character level (:location grave) character)
+    (.append character.inventory spade)
     (equip character spade action-factory)
     (exhume character action-factory)
     (assert-that (count (items-in-grave grave)) (is- (equal-to 0)))
