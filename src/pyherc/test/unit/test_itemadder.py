@@ -119,8 +119,8 @@ class TestItemAdder():
         """
         Test basic case of adding items on the level
         """
-        assert_that(get_items(self.level), has_length(greater_than(3)))
-        assert_that(get_items(self.level), has_length(less_than(6)))
+        assert_that(list(get_items(self.level)), has_length(greater_than(3)))
+        assert_that(list(get_items(self.level)), has_length(less_than(6)))
 
         assert_that(self.level, does_have_item('dagger',
                                                greater_than_or_equal_to(3)))

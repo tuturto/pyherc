@@ -203,13 +203,13 @@ class TestItemsInLevel:
         add_item(self.level, (3, 3), item)
 
         items = get_items(self.level, (5, 5))
-        assert(len(items) == 2)
+        assert(len(list(items)) == 2)
 
         items = get_items(self.level, (3, 3))
-        assert(len(items) == 1)
+        assert(len(list(items)) == 1)
 
         items = get_items(self.level, (12, 0))
-        assert(len(items) == 0)
+        assert(len(list(items)) == 0)
 
 class TestItemAdvanced():
     """

@@ -23,7 +23,7 @@
 (import [random [Random]])
 (import [hamcrest [assert-that is- equal-to]])
 (import [pyherc.data [add-location-feature get-tiles location-features
-                      add-character get-characters]]
+                      add-character get-characters get-items]]
         [pyherc.data.features [new-grave items-in-grave characters-in-grave]]
         [pyherc.generators.level.partitioners [GridPartitioner]]
         [pyherc.generators.level.room [LibraryRoomGenerator]]
@@ -126,3 +126,16 @@
     (exhume character action-factory)
     (assert-that (count (items-in-grave grave)) (is- (equal-to 1)))
     (assert-that (count (characters-in-grave grave)) (is- (equal-to 1)))))
+
+(defn test-items-are-unearthed []
+  "items from grave are unearthed after succesfull exhuming"
+  (let [[context (setup)]
+        [level (:level context)]
+        [grave (:grave context)]
+        [action-factory (:action-factory context)]
+        [character (:character context)]
+        [spade (:spade context)]]
+    (add-character level (:location grave) character)
+    (equip character spade action-factory)
+    (exhume character action-factory)
+    (assert-that (count (get-items level)) (is- (equal-to 1)))))

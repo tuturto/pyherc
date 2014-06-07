@@ -521,9 +521,17 @@ class ExhumeFactoryBuilder():
         Default constructor
         """
         super().__init__()
+        self.rng = Random()
+
+    def with_random_number_generator(rng):
+        """
+        Configure random number generator to use
+        """
+        self.rng = rng
+        return self
 
     def build(self):
         """
         Builds exhume factory
         """
-        return ExhumeFactory()
+        return ExhumeFactory(self.rng)

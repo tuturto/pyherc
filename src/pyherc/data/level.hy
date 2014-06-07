@@ -145,12 +145,12 @@
 (defn get-items [level &optional [location :no-location]]
   "get items in a given tile or in level in general"
   (if (= location :no-location)
-    (list-comp item [item (:items level)])
+    (genexpr item [item (:items level)])
     (do
      (let [[map-tile (get-tile level location)]]
        (if (= map-tile nil)
-         []
-         (list-comp item [item (:items map-tile)]))))))
+         (genexpr item [item []])
+         (genexpr item [item (:items map-tile)]))))))
 
 #d(defn remove-item [level item]
     "removes item from level"

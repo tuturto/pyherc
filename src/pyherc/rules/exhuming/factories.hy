@@ -28,10 +28,11 @@
 	[pyherc.rules.exhuming.action [ExhumeAction]])
 
 (defclass ExhumeFactory []
-  [[--init-- #i(fn [self]
+  [[--init-- #i(fn [self rng]
 		 "default constructor"
 		 (-> (super) (.--init--))
 		 (setv self.action-type "exhume")
+                 (setv self.rng rng)
 		 nil)]
    [can-handle #d(fn [self parameters]
 		   "can this factory handle a given action"
@@ -42,7 +43,7 @@
                          [location character.location]
                          [level character.level]
                          [grave (get-grave level location)]]
-                     (ExhumeAction character grave)))]])
+                     (ExhumeAction character grave self.rng)))]])
 
 (defn get-grave [level location]
   (let [[graves (list-comp feature 

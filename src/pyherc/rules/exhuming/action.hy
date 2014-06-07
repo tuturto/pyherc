@@ -21,14 +21,17 @@
 (require pyherc.aspects)
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
-        [pyherc.data.features [clear-grave]])
+        [pyherc.data [area-around add-item blocks-movement]]
+        [pyherc.data.features [clear-grave feature-level feature-location
+                               items-in-grave]])
 
 (defclass ExhumeAction []
-  [[--init-- #d(fn [self character grave]
+  [[--init-- #d(fn [self character grave rng]
                  "default constructor"
                  (-> (super) (.--init--))
                  (setv self.character character)
                  (setv self.grave grave)
+                 (setv self.rng rng)
                  nil)]
    [legal? #d(fn [self]
                "check if action is possible to perform"
@@ -36,11 +39,26 @@
    [execute #d(fn [self]
                 "execute the action"
                 (when (.legal? self)
-                  (clear-grave self.grave)
-                  ))]])
+                  (let [[level (feature-level self.grave)]
+                        [location (feature-location self.grave)]
+                        [grave self.grave]]
+                    (distribute-items level location (items-in-grave grave) self.rng)
+                    (clear-grave self.grave))))]])
 
 (defn using-spade? [character]
   "check if this character is currently using a spade"
   (let [[weapon character.inventory.weapon]]
     (if (= weapon nil) false
         (when (in :spade weapon.tags) true))))
+
+(defn distribute-items [level location items rng]
+  "distribute items around given spot"
+  (ap-each items (add-item level
+                           (free-location level location rng)
+                           it)))
+
+(defn free-location [level location rng]
+  "find a free location around given spot"
+  (let [[free-spots (list-comp loc [loc (area-around location)]
+                               (not (blocks-movement level loc)))]]
+    (when free-spots (.choice rng free-spots))))
