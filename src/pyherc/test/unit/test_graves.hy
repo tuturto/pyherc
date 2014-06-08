@@ -25,6 +25,7 @@
 (import [pyherc.data [add-location-feature get-tiles location-features
                       add-character get-characters get-items]]
         [pyherc.data.features [new-grave items-in-grave characters-in-grave]]
+        [pyherc.generators [ItemGenerator ItemConfiguration ItemConfigurations]]
         [pyherc.generators.level.partitioners [GridPartitioner]]
         [pyherc.generators.level.room [LibraryRoomGenerator]]
         [pyherc.test.builders [ActionFactoryBuilder LevelBuilder ItemBuilder
@@ -32,22 +33,30 @@
         [pyherc.rules.inventory.interface [equip]]
         [pyherc.rules.exhuming [exhume]])
 
-(defn full-grave [level location]
+(defn full-grave [item-generator character-generator]
   "creates a full grave in given location"
-  (add-location-feature level
-                        location
-                        (new-grave level location 
-                                   [(-> (ItemBuilder)
-                                        (.with-name "coin")
-                                        (.build))] 
-                                   [(-> (CharacterBuilder)
-                                        (.with-name "skeleton")
-                                        (.build))])))
+  
+  (fn [level location]
+    (add-location-feature level
+                          location
+                          (new-grave level location 
+                                     [(.generate-item item-generator "coin")] 
+                                     [(-> (CharacterBuilder)
+                                          (.with-name "skeleton")
+                                          (.build))]))))
 
 (defn find-feature [level]
   "find a grave"
   (for [#t(location tile) (get-tiles level)]
     (yield-from (location-features level location))))
+
+(defn configure-items []
+  "create item configuration for this test"
+  (let [[configs (ItemConfigurations (Random))]]
+    (.add-item configs (ItemConfiguration "dagger" 1 1 [:dagger] ["weapon"] "common"))
+    (.add-item configs (ItemConfiguration "coin" 1 1 [:coin] [] "common"))
+    (.add-item configs (ItemConfiguration "spade" 1 1 [:spade] [:spade "weapon"] "common"))
+    (ItemGenerator configs)))
 
 (defn setup[]
   (let [[level (-> (LevelBuilder)
@@ -57,8 +66,9 @@
                    (.build))]
         [partitioner (GridPartitioner ["test"] 2 1 (Random))]
         [sections (.partition-level partitioner level)]
+        [item-generator (configure-items)]
         [generator (LibraryRoomGenerator :floor :corridor nil :grave 100 
-                                         full-grave
+                                         (full-grave item-generator nil)
                                          ["test"])]
         [action-factory (-> (ActionFactoryBuilder)
                             (.with-inventory-factory)
@@ -67,15 +77,8 @@
         [character (-> (CharacterBuilder)
                        (.with-name "Pete")
                        (.build))]
-        [spade (-> (ItemBuilder)
-                   (.with-name "spade")
-                   (.with_damage 1 "crushing")
-                   (.with-tag :spade)
-                   (.build))]
-        [dagger (-> (ItemBuilder)
-                    (.with-name "dagger")
-                    (.with_damage 1 "piercing")
-                    (.build))]]
+        [spade (.generate-item item-generator "spade")]
+        [dagger (.generate-item item-generator "dagger")]]
     (ap-each sections (.generate-room generator it))
     (.append character.inventory spade)
     (.append character.inventory dagger)
@@ -109,6 +112,7 @@
         [spade (:spade context)]]
     (add-character level (:location grave) character)
     (equip character spade action-factory)
+    (assert character.inventory.weapon)
     (exhume character action-factory)
     (assert-that (count (items-in-grave grave)) (is- (equal-to 0)))
     (assert-that (count (characters-in-grave grave)) (is- (equal-to 0)))))
@@ -152,3 +156,16 @@
     (equip character spade action-factory)
     (exhume character action-factory)
     (assert-that (count (get-characters level)) (is- (equal-to 2)))))
+
+(defn test-trying-to-exhume-without-grave []
+  "digging somewhere else than on grave doesn't crash"
+  (let [[context (setup)]
+        [level (:level context)]
+        [grave (:grave context)]
+        [action-factory (:action-factory context)]
+        [character (:character context)]
+        [spade (:spade context)]
+        [#t(loc_x loc_y) (:location grave)]]
+    (add-character level #t((+ loc_x 1) loc_y) character)
+    (equip character spade action-factory)
+    (exhume character action-factory)))

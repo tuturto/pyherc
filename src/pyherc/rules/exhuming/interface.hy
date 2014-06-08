@@ -27,7 +27,7 @@
       (when (.legal? action)
         (.execute action))))
 
-(defn mexhume-legal? [character action-factory]
+(defn exhume-legal? [character action-factory]
   "check if exhuming is legal"
   (let [[action (.get-action action-factory
                              (ExhumeParameters character))]]

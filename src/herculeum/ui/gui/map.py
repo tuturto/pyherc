@@ -31,7 +31,8 @@ from herculeum.ui.gui.layers import (zorder_floor, zorder_wall, zorder_ornament,
                                      zorder_item, zorder_character,
                                      zorder_counter)
 from pyherc.data.model import DIED_IN_DUNGEON
-from pyherc.rules import attack, cast, is_move_legal, move, pick_up, wait
+from pyherc.rules import (attack, cast, is_move_legal, move, pick_up, wait,
+                          is_exhume_legal, exhume)
 from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
                           QEasingCurve, QEvent, QObject, QPropertyAnimation,
                           QSequentialAnimationGroup, QSize, Qt, QTimer)
@@ -509,7 +510,7 @@ class PlayMapWidget(QWidget):
         """
         player = self.model.player
         level = player.level
-        items = get_items(level, player.location)
+        items = list(get_items(level, player.location))
 
         if items != None and len(items) > 0:
             pick_up(player,
@@ -518,6 +519,9 @@ class PlayMapWidget(QWidget):
 
         elif is_move_legal(player, 9, 'walk', self.action_factory):
             move(player, 9, self.action_factory)
+
+        elif is_exhume_legal(player, self.action_factory):
+            exhume(player, self.action_factory)
 
 class DamageCounter(QGraphicsSimpleTextItem):
     """

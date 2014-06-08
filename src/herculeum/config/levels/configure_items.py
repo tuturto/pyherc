@@ -317,6 +317,28 @@ def init_items(context):
                                             ammunition_type = 'arrow',
                                             count = 15)))
 
+    config.append(ItemConfiguration(name = 'spade',
+                                    description = 'Simple, but effective tool for digging holes.',
+                                    cost = 5,
+                                    weight = 4,
+                                    icons = [surface_manager.add_icon(
+                                                            'spade',
+                                                            ':spade.png',
+                                                            '(',
+                                                            ['dim', 'cyan'])],
+                                    types = ['weapon',
+                                             'melee',
+                                             'simple weapon',
+                                             '\ufdd0:spade'],
+                                    rarity = 'common',
+                                    weapon_configration = WeaponConfiguration(
+                                            damage = [(1, CRUSHING_DAMAGE)],
+                                            critical_range = 12,
+                                            critical_damage = 1,
+                                            weapon_class = 'simple',
+                                            speed = 0.9)))
+
+
     config.append(ItemConfiguration(name = 'robes',
                                     description = 'Simple robes are favoured by spell casters. They do not hinder magical abilities and strong wizards are more than capable of deflecting attacks anyway.',
                                     cost = 5,

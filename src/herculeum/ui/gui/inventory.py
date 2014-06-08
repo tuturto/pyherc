@@ -414,7 +414,7 @@ class InventoryWidget(QWidget):
         .. versionadded:: 0.6
         """
         self.items_carried.show_items(self.character.inventory)
-        items = get_items(self.character.level, self.character.location)
+        items = list(get_items(self.character.level, self.character.location))
         self.items_in_ground.show_items(items)
         self.character_inventory.show_character()
 

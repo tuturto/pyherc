@@ -35,7 +35,8 @@
                  nil)]
    [legal? #d(fn [self]
                "check if action is possible to perform"
-               (using-spade? self.character))]
+               (when self.grave
+                 (using-spade? self.character)))]
    [execute #d(fn [self]
                 "execute the action"
                 (when (.legal? self)

@@ -50,10 +50,15 @@ def init_players(context):
                                   ai = None,
                                   effect_handles = None,
                                   inventory = [inventory_config(
-                                      item_name = 'sword',
+                                      item_name = 'spade',
                                       min_amount = 1,
                                       max_amount = 1,
                                       probability = 100),
+                                               inventory_config(
+                                                   item_name = 'sword',
+                                                   min_amount = 1,
+                                                   max_amount = 1,
+                                                   probability = 100),
                                                inventory_config(
                                                    item_name = 'leather armour',
                                                    min_amount = 1,
