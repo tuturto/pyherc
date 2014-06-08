@@ -35,7 +35,7 @@
         [pyherc.rules.inventory.interface [equip]]
         [pyherc.rules.exhuming [exhume]])
 
-(defn full-grave [item-generator character-generator model]
+(defn full-grave [item-generator character-generator]
   "creates a full grave in given location"
   (fn [level location]
     (add-location-feature level
@@ -59,7 +59,9 @@
 
 (defn configure-characters [model item-generator]
   "create character configuration for this test"
-  (partial generate-creature {"skeleton" (creature-config "skeleton" 1 1 1 1 1 [:icons] 1)} model item-generator (Random)))
+  (partial generate-creature {"skeleton" (creature-config "skeleton" 1 1 1 1 1 [:icons] 1)
+                              "pete" (creature-config "pete" 1 1 1 1 1 [:icons] 1)}
+           model item-generator (Random)))
 
 (defn setup[]
   (let [[model (Model)]
@@ -74,15 +76,13 @@
         [item-generator (configure-items)]
         [character-generator (configure-characters model item-generator)]
         [generator (LibraryRoomGenerator :floor :corridor nil :grave 100 
-                                         (full-grave item-generator character-generator model)
+                                         (full-grave item-generator character-generator)
                                          ["test"])]
         [action-factory (-> (ActionFactoryBuilder)
                             (.with-inventory-factory)
                             (.with_exhume-factory)
                             (.build))]
-        [character (-> (CharacterBuilder)
-                       (.with-name "Pete")
-                       (.build))]
+        [character (character-generator "pete")]
         [spade (.generate-item item-generator "spade")]
         [dagger (.generate-item item-generator "dagger")]]
     (ap-each sections (.generate-room generator it))

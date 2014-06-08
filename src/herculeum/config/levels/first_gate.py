@@ -55,11 +55,33 @@ from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
 
-def tomb_creator(level, location):
+def tomb_creator(item_generator, character_generator, rng):
     """
-    create a tomb at given location
+    create a function for creating tombs
     """
-    add_location_feature(level, location, new_grave(level, location, [], []))
+    def create_tomb(level, location):
+        "create a tomb at given location"
+
+        selection = rng.randint(1, 10)
+        if selection > 8:
+            character = [character_generator('skeleton warrior')]
+        elif selection > 5:
+            character = [character_generator('rat')]
+        else:
+            character = []
+
+        selection = rng.randint(1, 10)
+        if selection > 9:
+            item = [item_generator.generate_item(name=None, item_type='martial weapon')]
+        elif selection > 4:
+            item = [item_generator.generate_item(name=None, item_type='simple weapon')]
+        else:
+            item = []
+
+        add_location_feature(level, location, 
+                             new_grave(level, location, item, character))
+
+    return create_tomb
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
     """
@@ -157,7 +179,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                              tomb_4, tomb_5, tomb_6,
                                              tomb_7, tomb_8, tomb_9],
                                             25,
-                                            tomb_creator,
+                                            tomb_creator(item_generator, creature_generator, rng),
                                             ['first gate'])]
 
     level_partitioners = [GridPartitioner(['first gate'],
