@@ -22,6 +22,7 @@
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
         [pyherc.data [area-around add-item add-character blocks-movement]]
+        [pyherc.data.constants [Duration]]
         [pyherc.data.features [clear-grave feature-level feature-location
                                items-in-grave characters-in-grave]]
         [pyherc.events [ExhumeEvent]])
@@ -46,6 +47,7 @@
                         [grave self.grave]
                         [items (list (items-in-grave grave))]
                         [characters (list (characters-in-grave grave))]]
+                    (.add-to-tick self.character Duration.very-slow)
                     (distribute-items level location items self.rng)
                     (distribute-characters level location characters self.rng)
                     (clear-grave self.grave)
@@ -66,9 +68,11 @@
 
 (defn distribute-characters [level location characters rng]
   "distribute characters around given spot"
-  (ap-each characters (add-character level
-                                     (free-location level location rng)
-                                     it)))
+  (ap-each characters (do
+                       (.add-to-tick it Duration.very-slow)
+                       (add-character level
+                                      (free-location level location rng)
+                                      it))))
 
 (defn free-location [level location rng]
   "find a free location around given spot"
