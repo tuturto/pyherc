@@ -23,7 +23,8 @@
 (import [pyherc.aspects [log-debug]]
         [pyherc.data [area-around add-item add-character blocks-movement]]
         [pyherc.data.features [clear-grave feature-level feature-location
-                               items-in-grave characters-in-grave]])
+                               items-in-grave characters-in-grave]]
+        [pyherc.events [ExhumeEvent]])
 
 (defclass ExhumeAction []
   [[--init-- #d(fn [self character grave rng]
@@ -42,10 +43,14 @@
                 (when (.legal? self)
                   (let [[level (feature-level self.grave)]
                         [location (feature-location self.grave)]
-                        [grave self.grave]]
-                    (distribute-items level location (items-in-grave grave) self.rng)
-                    (distribute-characters level location (characters-in-grave grave) self.rng)
-                    (clear-grave self.grave))))]])
+                        [grave self.grave]
+                        [items (list (items-in-grave grave))]
+                        [characters (list (characters-in-grave grave))]]
+                    (distribute-items level location items self.rng)
+                    (distribute-characters level location characters self.rng)
+                    (clear-grave self.grave)
+                    (.raise-event self.character (ExhumeEvent self.character
+                                                              grave items characters)))))]])
 
 (defn using-spade? [character]
   "check if this character is currently using a spade"

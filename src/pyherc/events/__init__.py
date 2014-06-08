@@ -34,3 +34,4 @@ from .damage import DamageAddedEvent, DamageTriggeredEvent, DamageEndedEvent
 from .perception import LoseFocusEvent, NoticeEvent
 from .error import ErrorEvent
 from .spirit import SpiritPointsChangedEvent
+from .exhume import ExhumeEvent

@@ -101,7 +101,8 @@ class EventMessageWidget(QWidget):
                                     'equip',
                                     'unequip',
                                     'error',
-                                    'mitosis']
+                                    'mitosis',
+                                    'exhume']
 
     def set_point_of_view(self, character):
         """

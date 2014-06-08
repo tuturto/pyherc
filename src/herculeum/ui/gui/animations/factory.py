@@ -25,6 +25,7 @@ from .animation import Animation
 from .attack import AttackHitAnimation
 from .damage import DamageTriggeredAnimation
 from .death import DeathAnimation
+from .exhume import ExhumeAnimation
 from .healing import HealAddedAnimation, HealTriggeredAnimation
 from .inventory import DropAnimation, PickUpAnimation
 from .metamorphosis import MetamorphosisAnimation
@@ -49,6 +50,7 @@ class AnimationFactory():
             'damage triggered': DamageTriggeredAnimation,
             'death': DeathAnimation,
             'drop': DropAnimation,
+            'exhume': ExhumeAnimation,
             'heal started': HealAddedAnimation,
             'heal triggered': HealTriggeredAnimation,
             'lose focus': LoseFocusAnimation,
