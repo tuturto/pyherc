@@ -60,3 +60,4 @@
 (defn empty-grave? [event]
   "check if the grave was completely empty"
   (and (not event.new-items) (not event.new-characters)))
+
