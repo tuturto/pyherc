@@ -178,7 +178,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                             [tomb_1, tomb_2, tomb_3,
                                              tomb_4, tomb_5, tomb_6,
                                              tomb_7, tomb_8, tomb_9],
-                                            25,
+                                            50,
                                             tomb_creator(item_generator, creature_generator, rng),
                                             ['first gate'])]
 
