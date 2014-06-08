@@ -20,12 +20,14 @@
 (require hy.contrib.anaphoric)
 (require pyherc.macros)
 
-(import [random [Random]])
+(import [functools [partial]]
+        [random [Random]])
 (import [hamcrest [assert-that is- equal-to]])
 (import [pyherc.data [add-location-feature get-tiles location-features
-                      add-character get-characters get-items]]
+                      add-character get-characters get-items Model]]
         [pyherc.data.features [new-grave items-in-grave characters-in-grave]]
-        [pyherc.generators [ItemGenerator ItemConfiguration ItemConfigurations]]
+        [pyherc.generators [ItemGenerator ItemConfiguration ItemConfigurations
+                            creature-config generate-creature]]
         [pyherc.generators.level.partitioners [GridPartitioner]]
         [pyherc.generators.level.room [LibraryRoomGenerator]]
         [pyherc.test.builders [ActionFactoryBuilder LevelBuilder ItemBuilder
@@ -33,17 +35,14 @@
         [pyherc.rules.inventory.interface [equip]]
         [pyherc.rules.exhuming [exhume]])
 
-(defn full-grave [item-generator character-generator]
+(defn full-grave [item-generator character-generator model]
   "creates a full grave in given location"
-  
   (fn [level location]
     (add-location-feature level
                           location
                           (new-grave level location 
                                      [(.generate-item item-generator "coin")] 
-                                     [(-> (CharacterBuilder)
-                                          (.with-name "skeleton")
-                                          (.build))]))))
+                                     [(character-generator "skeleton")]))))
 
 (defn find-feature [level]
   "find a grave"
@@ -58,17 +57,24 @@
     (.add-item configs (ItemConfiguration "spade" 1 1 [:spade] [:spade "weapon"] "common"))
     (ItemGenerator configs)))
 
+(defn configure-characters [model item-generator]
+  "create character configuration for this test"
+  (partial generate-creature {"skeleton" (creature-config "skeleton" 1 1 1 1 1 [:icons] 1)} model item-generator (Random)))
+
 (defn setup[]
-  (let [[level (-> (LevelBuilder)
+  (let [[model (Model)]
+        [level (-> (LevelBuilder)
                    (.with-size #t(30 20))
                    (.with-floor-tile :floor)
                    (.with-wall-tile nil)
+                   (.with-model model)
                    (.build))]
         [partitioner (GridPartitioner ["test"] 2 1 (Random))]
         [sections (.partition-level partitioner level)]
         [item-generator (configure-items)]
+        [character-generator (configure-characters model item-generator)]
         [generator (LibraryRoomGenerator :floor :corridor nil :grave 100 
-                                         (full-grave item-generator nil)
+                                         (full-grave item-generator character-generator model)
                                          ["test"])]
         [action-factory (-> (ActionFactoryBuilder)
                             (.with-inventory-factory)
