@@ -23,36 +23,36 @@
 (import [pyherc.aspects [log-debug]]
         [pyherc.data [area-around add-item add-character blocks-movement]]
         [pyherc.data.constants [Duration]]
-        [pyherc.data.features [clear-grave feature-level feature-location
-                               items-in-grave characters-in-grave]]
-        [pyherc.events [ExhumeEvent]])
+        [pyherc.data.features [clear-cache feature-level feature-location
+                               items-in-cache characters-in-cache]]
+        [pyherc.events [DigEvent]])
 
-(defclass ExhumeAction []
-  [[--init-- #d(fn [self character grave rng]
+(defclass DigAction []
+  [[--init-- #d(fn [self character cache rng]
                  "default constructor"
                  (-> (super) (.--init--))
                  (setv self.character character)
-                 (setv self.grave grave)
+                 (setv self.cache cache)
                  (setv self.rng rng)
                  nil)]
    [legal? #d(fn [self]
                "check if action is possible to perform"
-               (when self.grave
+               (when self.cache
                  (using-spade? self.character)))]
    [execute #d(fn [self]
                 "execute the action"
                 (when (.legal? self)
-                  (let [[level (feature-level self.grave)]
-                        [location (feature-location self.grave)]
-                        [grave self.grave]
-                        [items (list (items-in-grave grave))]
-                        [characters (list (characters-in-grave grave))]]
+                  (let [[level (feature-level self.cache)]
+                        [location (feature-location self.cache)]
+                        [cache self.cache]
+                        [items (list (items-in-cache cache))]
+                        [characters (list (characters-in-cache cache))]]
                     (.add-to-tick self.character Duration.very-slow)
                     (distribute-items level location items self.rng)
                     (distribute-characters level location characters self.rng)
-                    (clear-grave self.grave)
-                    (.raise-event self.character (ExhumeEvent self.character
-                                                              grave items characters)))))]])
+                    (clear-cache self.cache)
+                    (.raise-event self.character (DigEvent self.character
+                                                           cache items characters)))))]])
 
 (defn using-spade? [character]
   "check if this character is currently using a spade"

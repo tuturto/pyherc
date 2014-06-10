@@ -60,7 +60,7 @@ class TestLevel:
                              new_grave(self.level, (5, 5), ['coin'], ['skeleton']))
         feature = list(location_features(self.level, (5, 5)))[0]
 
-        assert_that(feature_type(feature), is_(equal_to('\ufdd0:grave')))
+        assert_that(feature_type(feature), is_(equal_to('\ufdd0:cache')))
 
 
     def test_get_rooms(self):

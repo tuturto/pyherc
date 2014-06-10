@@ -25,7 +25,7 @@
 (import [hamcrest [assert-that is- equal-to]])
 (import [pyherc.data [add-location-feature get-tiles location-features
                       add-character get-characters get-items Model]]
-        [pyherc.data.features [new-grave items-in-grave characters-in-grave]]
+        [pyherc.data.features [new-grave items-in-cache characters-in-cache]]
         [pyherc.generators [ItemGenerator ItemConfiguration ItemConfigurations
                             creature-config generate-creature]]
         [pyherc.generators.level.partitioners [GridPartitioner]]
@@ -105,8 +105,8 @@
         [character (:character context)]]
     (add-character level (:location grave) character)
     (exhume character action-factory)
-    (assert-that (count (items-in-grave grave)) (is- (equal-to 1)))
-    (assert-that (count (characters-in-grave grave)) (is- (equal-to 1)))))
+    (assert-that (count (items-in-cache grave)) (is- (equal-to 1)))
+    (assert-that (count (characters-in-cache grave)) (is- (equal-to 1)))))
 
 (defn test-looting-with-spade []
   "looting grave with spade empties it"
@@ -120,8 +120,8 @@
     (equip character spade action-factory)
     (assert character.inventory.weapon)
     (exhume character action-factory)
-    (assert-that (count (items-in-grave grave)) (is- (equal-to 0)))
-    (assert-that (count (characters-in-grave grave)) (is- (equal-to 0)))))
+    (assert-that (count (items-in-cache grave)) (is- (equal-to 0)))
+    (assert-that (count (characters-in-cache grave)) (is- (equal-to 0)))))
 
 (defn test-looting-with-dagger []
   "looting is not possible with a regular weapon"
@@ -134,8 +134,8 @@
     (add-character level (:location grave) character)
     (equip character dagger action-factory)
     (exhume character action-factory)
-    (assert-that (count (items-in-grave grave)) (is- (equal-to 1)))
-    (assert-that (count (characters-in-grave grave)) (is- (equal-to 1)))))
+    (assert-that (count (items-in-cache grave)) (is- (equal-to 1)))
+    (assert-that (count (characters-in-cache grave)) (is- (equal-to 1)))))
 
 (defn test-items-are-unearthed []
   "items from grave are unearthed after succesfull exhuming"

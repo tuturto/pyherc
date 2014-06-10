@@ -19,4 +19,4 @@
 
 # flake8: noqa
 
-from .interface import exhume
+from .interface import dig

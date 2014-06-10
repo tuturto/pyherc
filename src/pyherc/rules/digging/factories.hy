@@ -25,29 +25,29 @@
 (import [pyherc.aspects [log-debug log-info]]
         [pyherc.data [location-features]]
         [pyherc.data.features [feature-type]]
-	[pyherc.rules.exhuming.action [ExhumeAction]])
+	[pyherc.rules.exhuming.action [DigAction]])
 
-(defclass ExhumeFactory []
+(defclass DigFactory []
   [[--init-- #i(fn [self rng]
 		 "default constructor"
 		 (-> (super) (.--init--))
-		 (setv self.action-type "exhume")
+		 (setv self.action-type "dig")
                  (setv self.rng rng)
 		 nil)]
    [can-handle #d(fn [self parameters]
 		   "can this factory handle a given action"
 		   (= self.action-type parameters.action-type))]
    [get-action #d(fn [self parameters]
-		   "create exhuming action"
+		   "create digging action"
                    (let [[character parameters.character]
                          [location character.location]
                          [level character.level]
-                         [grave (get-grave level location)]]
-                     (ExhumeAction character grave self.rng)))]])
+                         [cache (get-cache level location)]]
+                     (DigAction character cache self.rng)))]])
 
-(defn get-grave [level location]
-  (let [[graves (list-comp feature 
-                         [feature (location-features level location)]
-                         (= (feature-type feature) :grave))]]
-    (when (> (count graves) 0)
-      (first (list graves)))))
+(defn get-cache [level location]
+  (let [[caches (list-comp feature 
+                           [feature (location-features level location)]
+                           (= (feature-type feature) :cache))]]
+    (when (> (count caches) 0)
+      (first (list caches)))))

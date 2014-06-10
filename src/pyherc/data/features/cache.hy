@@ -17,13 +17,20 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn new-grave [level location items characters]
-  "create a new grave"
-  {:type :grave
+(defn new-cache [level location items characters]
+  "create a new cache"
+  {:type :cache
+   :sub-type :cache
    :location location
    :level level
    :items items
    :characters characters})
+
+(defn new-grave [level location items characters]
+  "create a new grave"
+  (let [[grave (new-cache level location items characters)]]
+    (assoc grave :sub-type :grave)
+    grave))
 
 (defn feature-type [feature]
   "type of the special feature"
@@ -39,15 +46,19 @@
   (when (!= level :no-level) (assoc entity :level level))
   (:level entity))
 
-(defn items-in-grave [grave]
-  "get items in grave"
-  (genexpr item [item (:items grave)]))
+(defn cache-type [cache]
+  "type of cache"
+  (:sub-type cache))
 
-(defn characters-in-grave [grave]
-  "get characters in grave"
-  (genexpr character [character (:characters grave)]))
+(defn items-in-cache [cache]
+  "get items in cache"
+  (genexpr item [item (:items cache)]))
 
-(defn clear-grave [grave]
-  "empties this grave completely"
-  (assoc grave :items [])
-  (assoc grave :characters []))
+(defn characters-in-cache [cache]
+  "get characters in cache"
+  (genexpr character [character (:characters cache)]))
+
+(defn clear-cache [cache]
+  "empties this cache completely"
+  (assoc cache :items [])
+  (assoc cache :characters []))

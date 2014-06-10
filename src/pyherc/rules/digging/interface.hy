@@ -21,22 +21,22 @@
 (import [pyherc.rules.public [ActionParameters]]
 	[pyherc.aspects [log-debug log-info]])
 
-#d(defn exhume [character action-factory]
-    "perform exhuming"
-    (let [[action (.get-action action-factory (ExhumeParameters character))]]
+#d(defn dig [character action-factory]
+    "perform digging"
+    (let [[action (.get-action action-factory (DigParameters character))]]
       (when (.legal? action)
         (.execute action))))
 
-(defn exhume-legal? [character action-factory]
-  "check if exhuming is legal"
+(defn dig-legal? [character action-factory]
+  "check if digging is legal"
   (let [[action (.get-action action-factory
-                             (ExhumeParameters character))]]
+                             (DigParameters character))]]
     (.legal? action)))
 
-(defclass ExhumeParameters [ActionParameters]
-  "Class controlling creation of ExhumeAction"
+(defclass DigParameters [ActionParameters]
+  "Class controlling creation of DigAction"
   [[--init-- #d(fn [self character]
 		 (-> (super) (.--init--))
-		 (setv self.action-type "exhume")
+		 (setv self.action-type "dig")
 		 (setv self.character character)
 		 nil)]])

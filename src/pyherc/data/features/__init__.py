@@ -24,5 +24,6 @@ Module for special features on map
 """
 import hy
 
-from .grave import new_grave, feature_type, feature_location, feature_level
-from .grave import items_in_grave, characters_in_grave, clear_grave
+from .cache import new_cache, new_grave, feature_type, feature_location
+from .cache import feature_level, items_in_cache, characters_in_cache
+from .cache import clear_cache
