@@ -28,7 +28,6 @@ from herculeum.config import Configuration
 from mockito import mock
 from pyherc.data import Model
 from pyherc.rules.inventory.interface import InventoryParameters
-from PyQt4.QtGui import QApplication
 
 
 class TestMainConfiguration():
@@ -45,20 +44,12 @@ class TestMainConfiguration():
         """
         Setup test case
         """
-        self.app = QApplication([])
         self.config = Configuration(Model(),
                                     herculeum.config.levels,
                                     mock(),
                                     mock())
 
         self.config.initialise()
-
-    def teardown(self):
-        """
-        Teardown the test case
-        """
-        self.app.deleteLater()
-        self.app = None
 
     def test_initialisation(self):
         """
