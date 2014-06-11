@@ -22,8 +22,8 @@
 (import [herculeum.ui.gui.animations.animation [Animation]]
 	[herculeum.ui.gui [layers]])
 
-(defclass ExhumeAnimation [Animation]
-  "animation for exhuming a grave"
+(defclass DigAnimation [Animation]
+  "animation for digging"
   [[--init-- (fn [self event]
 	       (-> (super) (.--init-- event))
 	       (setv self.character event.character)

@@ -34,7 +34,7 @@ from pyherc.rules.combat import RangedCombatFactory
 from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,
                                            UnarmedCombatFactory)
 from pyherc.rules.consume.factories import DrinkFactory
-from pyherc.rules.exhuming.factories import ExhumeFactory
+from pyherc.rules.digging.factories import DigFactory
 from pyherc.rules.inventory.equip import EquipFactory
 from pyherc.rules.inventory.factories import (DropFactory, InventoryFactory,
                                               PickUpFactory)
@@ -136,7 +136,7 @@ class Configuration():
         metamorphosis_factory = MetamorphosisFactory(self.creature_generator,
                                                      self.rng)
 
-        exhume_factory = ExhumeFactory(self.rng)
+        dig_factory = DigFactory(self.rng)
 
         self.action_factory = ActionFactory(self.model,
                                             [move_factory,
@@ -147,7 +147,7 @@ class Configuration():
                                              spell_casting_factory,
                                              mitosis_factory,
                                              metamorphosis_factory,
-                                             exhume_factory])
+                                             dig_factory])
 
         self.rules_engine = RulesEngine(self.action_factory,
                                         dying_rules)

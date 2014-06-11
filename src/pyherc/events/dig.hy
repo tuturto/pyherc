@@ -21,16 +21,16 @@
 (import [pyherc.aspects [log-debug]]
 	[pyherc.events.event [Event]])
 
-(defclass ExhumeEvent [Event]
-  "event to indicate that a somebody looted a grave"
-  [[--init-- #d(fn [self character grave new-items new-characters]
+(defclass DigEvent [Event]
+  "event to indicate that a somebody looted a cache"
+  [[--init-- #d(fn [self character cache new-items new-characters]
 		 "default constructor"
-		 (-> (super) (.--init-- "exhume"
+		 (-> (super) (.--init-- "dig"
 					character.level
 					character.location
 					[]))
 		 (setv self.character character)
-                 (setv self.grave grave)
+                 (setv self.cache cache)
                  (setv self.new-items new-items)
                  (setv self.new-characters new-characters)
 		 nil)]
@@ -44,20 +44,20 @@
                              (if (= point-of-view self.character)
                                "There were something in grave"
                                (-> "{0} has unearthed something" (.format self.character)))]
-                            [(empty-grave? self)
+                            [(empty-cache? self)
                                (if (= point-of-view self.character)
                                  "The grave is empty.."
                                  (-> "{0} has tried to loot an empty grave" (.format self.character)))]))]])
 
 (defn monster? [event]
-  "check if the grave contained a monster"
+  "check if the cache contained a monster"
   event.new-characters)
 
 (defn only-items? [event]
   "check if only items were present"
   (and event.new-items (not event.new-characters)))
 
-(defn empty-grave? [event]
-  "check if the grave was completely empty"
+(defn empty-cache? [event]
+  "check if the cache was completely empty"
   (and (not event.new-items) (not event.new-characters)))
 

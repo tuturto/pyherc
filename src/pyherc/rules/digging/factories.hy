@@ -25,7 +25,7 @@
 (import [pyherc.aspects [log-debug log-info]]
         [pyherc.data [location-features]]
         [pyherc.data.features [feature-type]]
-	[pyherc.rules.exhuming.action [DigAction]])
+	[pyherc.rules.digging.action [DigAction]])
 
 (defclass DigFactory []
   [[--init-- #i(fn [self rng]
