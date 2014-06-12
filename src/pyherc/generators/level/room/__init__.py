@@ -23,10 +23,11 @@
 Package for room generators
 """
 
+from .cache import CacheRoomGenerator
+from .circle import CircularRoomGenerator, TempleRoomGenerator
 from .squareroom import SquareRoomGenerator
 from .pillarroom import PillarRoomGenerator
 from .catacombs import CatacombsGenerator
 from .crimson_lair import CrimsonLairGenerator
 from .pitroom import PitRoomGenerator
-from .circle import CircularRoomGenerator, TempleRoomGenerator
 from .library import LibraryRoomGenerator

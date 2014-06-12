@@ -23,7 +23,7 @@ module for configuring first gate
 import hy
 from herculeum.ai.fungus import FungusAI, GreatFungusAI
 from pyherc.config.dsl import LevelConfiguration, LevelContext
-from pyherc.data import add_location_feature
+from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
 from pyherc.data.features import new_grave
 from pyherc.generators import creature_config, inventory_config
@@ -46,11 +46,12 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
 from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
 from pyherc.generators.level.partitioners import GridPartitioner
 from pyherc.generators.level.portals import PortalAdderConfiguration
-from pyherc.generators.level.room import (PillarRoomGenerator,
-                                          SquareRoomGenerator,
+from pyherc.generators.level.room import (CacheRoomGenerator,
                                           CircularRoomGenerator,
-                                          TempleRoomGenerator,
-                                          LibraryRoomGenerator)
+                                          LibraryRoomGenerator,
+                                          PillarRoomGenerator,
+                                          SquareRoomGenerator,                                          
+                                          TempleRoomGenerator)
 from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
@@ -82,6 +83,17 @@ def tomb_creator(item_generator, character_generator, rng):
                              new_grave(level, location, item, character))
 
     return create_tomb
+
+def cache_creator(cache_tile, item_generator, rng):
+    """
+    create a function for creating caches
+    """
+    def create_cache(level, location):
+        """
+        """
+        floor_tile(level, location, cache_tile)
+
+    return create_cache
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
     """
@@ -180,7 +192,16 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                              tomb_7, tomb_8, tomb_9],
                                             50,
                                             tomb_creator(item_generator, creature_generator, rng),
-                                            ['first gate'])]
+                                            ['first gate']),
+                       CacheRoomGenerator(tile_floor,
+                                          tile_floor,
+                                          cache_creator(altar, item_generator, rng),
+                                          ['first gate'])]
+
+    room_generators = [CacheRoomGenerator(tile_floor,
+                                          tile_floor,
+                                          cache_creator('crypt_floor', item_generator, rng),
+                                          ['first gate'])]
 
     level_partitioners = [GridPartitioner(['first gate'],
                                            4,

@@ -37,6 +37,10 @@
   (when (!= corners :no-corners) (setv (:corners section) corners))
   (:corners section))
 
+(defn section-level [section]
+  "get level where section is placed"
+  (:level section))
+
 (defn section-height [section]
   "get height of a section"
   (abs (- (y-coordinate (first (:corners section)))

@@ -21,6 +21,7 @@
 (require hy.contrib.anaphoric)
 (import [pyherc.data.traps [PitTrap]]
         [pyherc.generators.level.room [SquareRoomGenerator PillarRoomGenerator
+                                       CacheRoomGenerator
                                        CatacombsGenerator CrimsonLairGenerator
                                        CircularRoomGenerator
                                        TempleRoomGenerator
@@ -69,3 +70,7 @@
 (defn test-pitroom-generation []
   "test generating pit room"
   (run-generator (PitRoomGenerator :floor :corridor nil :pit PitTrap ["test"])))
+
+(defn test-cacheroom-generation []
+  "test generating cache room"
+  (run-generator (CacheRoomGenerator :floor :corridor (fn [level center-point]) ["test"])))
