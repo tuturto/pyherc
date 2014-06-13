@@ -25,7 +25,7 @@ from herculeum.ai.fungus import FungusAI, GreatFungusAI
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
-from pyherc.data.features import new_grave
+from pyherc.data.features import new_grave, new_cache
 from pyherc.generators import creature_config, inventory_config
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
@@ -91,7 +91,23 @@ def cache_creator(cache_tile, item_generator, rng):
     def create_cache(level, location):
         """
         """
-        floor_tile(level, location, cache_tile)
+        selection = rng.randint(1, 10)
+
+        if selection > 9:
+            floor_tile(level, location, cache_tile)
+
+        selection = rng.randint(1, 10)
+
+        items = []
+        if selection > 9:
+            for i in range(1, rng.randint(2, 5)):
+                items.append(item_generator.generate_item(name=None, item_type='tome'))
+        elif selection > 7:
+            for i in range(1, rng.randint(2, 5)):
+                items.append(item_generator.generate_item(name=None, item_type='potion'))
+
+        add_location_feature(level, location, 
+                             new_cache(level, location, items, []))
 
     return create_cache
 
