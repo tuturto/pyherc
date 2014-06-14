@@ -70,9 +70,12 @@ class LevelGeneratorFactory():
                                              self.level_partitioners,
                                              'partitioner')
 
-        rooms = self.get_sub_components(level_type,
-                                        self.room_generators,
-                                        'room')
+        #rooms = self.get_sub_components(level_type,
+        #                                self.room_generators,
+        #                                'room')
+
+        rooms = [x for x in self.room_generators
+                 if hasattr(x, "__name__")]
 
         decorator = self.get_sub_component(level_type,
                                            self.decorators,
@@ -212,7 +215,7 @@ class LevelGenerator():
 
         for section in sections:
             generator = self.random_generator.choice(self.room_generators)
-            generator.generate_room(section)
+            generator(section)
 
         for adder in self.portal_adders:
             adder.add_portal(level)

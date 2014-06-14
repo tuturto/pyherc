@@ -24,6 +24,22 @@ Classes for generating corridors
 from pyherc.generators.level.partitioners import (Connection, section_floor,
                                                   section_wall)
 
+def new_corridor(floor_tile):
+
+    def corridor(section):
+        #figure out start_point and end_point
+
+        if start_point.location[1] == end_point.location[1]:
+            carve_horizontal(start_point, end_point)
+        elif start_point.location[0] == end_point.location[0]:
+            carve_vertical(start_point, end_point)
+        elif start_point.direction in ("left", "right"):
+            carve_horizontal_bend(start_point, end_point)
+        elif start_point.direction in ("up", "down"):
+            carve_vertical_bend(start_point, end_point)
+
+    return corridor
+
 
 class CorridorGenerator():
     """
