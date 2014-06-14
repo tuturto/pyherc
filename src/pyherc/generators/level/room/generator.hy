@@ -26,29 +26,13 @@
                                                section-connections
                                                match-section-to-room
                                                section-floor]]
-        [pyherc.generators.level.room.corridor [CorridorGenerator]])
+        [pyherc.generators.level.room.corridor [CorridorGenerator]]
+        [pyherc.generators.level.room.shapes [circular-shape]])
 
 (defn new-room-generator [&rest creators]
   "create a room generator"
   (fn [section]
     (ap-each creators (it section))))
-
-(defn circular-shape [floor-tile]
-  "create a circular shape"
-  (fn [section]
-    (let [[center-x (// (section-width section) 2)]
-          [center-y (// (section-height section) 2)]
-          [center-point #t(center-x center-y)]
-          [radius (min [(- center-x 2) (- center-y 2)])]]
-      (for [x_loc (range (section-width section))]
-        (for [y_loc (range (section-height section))]
-          (when (<= (distance-between #t(x_loc y_loc) center-point) radius)
-            (section-floor section #t(x_loc y_loc) floor-tile "room"))))
-      (assoc section :center-point center-point)
-      (add-room-connection section #t(center-x (- center-y radius)) "up")
-      (add-room-connection section #t(center-x (+ center-y radius)) "down")
-      (add-room-connection section #t((- center-x radius) center-y) "left")
-      (add-room-connection section #t((+ center-x radius) center-y) "right"))))
 
 (defn corridors [floor-tile]
   "create corridors"
