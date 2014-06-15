@@ -22,7 +22,8 @@
 
 (import [pyherc.data [distance-between]]
         [pyherc.generators.level.partitioners [section-floor
-                                               section-floor]]
+                                               section-floor
+                                               section-data]]
         [pyherc.generators.level.room.corridor [corridors]]
         [pyherc.generators.level.room.shapes [circular-shape]])
 
@@ -35,7 +36,7 @@
   "create cache creator"
   (fn [section]
     "fill cache with items and characters"
-    (section-floor section (:center-point section) cache-tile)))
+    (section-floor section (section-data section :center-point) cache-tile)))
 
 (defn tomes-and-potions-cache [item-generator]
   "create cache content creator"

@@ -21,7 +21,8 @@
 
 (import [pyherc.data [distance-between]]
         [pyherc.generators.level.partitioners [section-floor section-height
-                                               section-width add-room-connection]])
+                                               section-width add-room-connection
+                                               section-data]])
 
 (defn circular-shape [floor-tile]
   "create a circular shape"
@@ -34,7 +35,7 @@
         (for [y_loc (range (section-height section))]
           (when (<= (distance-between #t(x_loc y_loc) center-point) radius)
             (section-floor section #t(x_loc y_loc) floor-tile "room"))))
-      (assoc section :center-point center-point)
+      (section-data section :center-point center-point)
       (add-room-connection section #t(center-x (- center-y radius)) "up")
       (add-room-connection section #t(center-x (+ center-y radius)) "down")
       (add-room-connection section #t((- center-x radius) center-y) "left")

@@ -30,7 +30,14 @@
    :connections []
    :room-connections []
    :neighbours []
+   :data {}
    :random-generator random-generator})
+
+(defn section-data [section key &optional [value :no-data]]
+  "get/set section custom data"
+  (when (!= value :no-data)
+    (assoc (:data section) key value))
+  (get (:data section) key))
 
 (defn section-corners [section &optional [corners :no-corners]]
   "get/set corners of this section"
