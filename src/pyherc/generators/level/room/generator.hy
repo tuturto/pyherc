@@ -21,30 +21,15 @@
 (require pyherc.macros)
 
 (import [pyherc.data [distance-between]]
-        [pyherc.generators.level.partitioners [section-width section-height
-                                               section-floor add-room-connection
-                                               section-connections
-                                               match-section-to-room
+        [pyherc.generators.level.partitioners [section-floor
                                                section-floor]]
-        [pyherc.generators.level.room.corridor [CorridorGenerator]]
+        [pyherc.generators.level.room.corridor [corridors]]
         [pyherc.generators.level.room.shapes [circular-shape]])
 
 (defn new-room-generator [&rest creators]
   "create a room generator"
   (fn [section]
     (ap-each creators (it section))))
-
-(defn corridors [floor-tile]
-  "create corridors"
-    (fn [section]
-      "carve corridors"
-      (ap-each (section-connections section)
-               (let [[room-connection (match-section-to-room section it)]
-                     [corridor (CorridorGenerator room-connection
-                                                  (.translate-to-section it)
-                                                  nil
-                                                  floor-tile)]]
-                 (.generate corridor)))))
 
 (defn cache-creator [cache-tile item-selector character-selector]
   "create cache creator"

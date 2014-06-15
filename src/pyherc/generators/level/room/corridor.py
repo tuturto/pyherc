@@ -22,24 +22,23 @@ Classes for generating corridors
 """
 
 from pyherc.generators.level.partitioners import (Connection, section_floor,
-                                                  section_wall)
+                                                  section_wall, section_connections,
+                                                  match_section_to_room)
 
-def new_corridor(floor_tile):
+def corridors(floor_tile):
+    "create corridors"
 
     def corridor(section):
-        #figure out start_point and end_point
-
-        if start_point.location[1] == end_point.location[1]:
-            carve_horizontal(start_point, end_point)
-        elif start_point.location[0] == end_point.location[0]:
-            carve_vertical(start_point, end_point)
-        elif start_point.direction in ("left", "right"):
-            carve_horizontal_bend(start_point, end_point)
-        elif start_point.direction in ("up", "down"):
-            carve_vertical_bend(start_point, end_point)
+        "carve corridors"
+        for it in section_connections(section):
+            room_connection = match_section_to_room(section, it)
+            corridor = CorridorGenerator(room_connection,
+                                         it.translate_to_section(),
+                                         None,
+                                         floor_tile)
+            corridor.generate()
 
     return corridor
-
 
 class CorridorGenerator():
     """
