@@ -22,7 +22,7 @@
 (import [pyherc.data [distance-between]]
         [pyherc.generators.level.partitioners [section-floor section-height
                                                section-width add-room-connection
-                                               section-data]])
+                                               section-data section-connections]])
 
 (defn circular-shape [floor-tile]
   "create a circular shape"
@@ -40,3 +40,56 @@
       (add-room-connection section #t(center-x (+ center-y radius)) "down")
       (add-room-connection section #t((- center-x radius) center-y) "left")
       (add-room-connection section #t((+ center-x radius) center-y) "right"))))
+
+(defn square-shape [floor-tile rng]
+  "create square shape"
+  (fn [section]
+    (let [[middle-height (// (section-height section) 2)]
+          [middle-width (// (section-width section) 2)]
+          [room-left-edge (if (connected-left section)
+                            (.randint rng 2 (- middle-width 2))
+                            1)]
+          [room-right-edge (if (connected-right section)
+                             (.randint rng 
+                                       (+ middle-width 2)
+                                       (- (section-width section) 2))
+                             (- (section-width section) 1))]
+          [room-top-edge (if (connected-up section)
+                           (.randint rng 2 (- middle-height 2))
+                           1)]
+          [room-bottom-edge (if (connected-down section)
+                              (.randint rng 
+                                        (+ middle-height 2)
+                                        (- (section-height section) 2))
+                              (- (section-height section) 1))]
+          [center-x (+ (// (- room-right-edge room-left-edge) 2) room-left-edge)]
+          [center-y (+ (// (- room-bottom-edge room-top-edge) 2) room-top-edge)]]
+      (for [loc-y (range (+ room-top-edge 1) room-bottom-edge)]
+        (for [loc-x (range (+ room-left-edge 1) room-right-edge)]
+          (section-floor section #t(loc-x loc-y) floor-tile "room")))
+      (add-room-connection section #t(center-x room-top-edge) "up")
+      (add-room-connection section #t(center-x room-bottom-edge) "down")
+      (add-room-connection section #t(room-left-edge center-y) "left")
+      (add-room-connection section #t(room-right-edge center-y) "right")
+      (section-data section :corners [#t((+ room-left-edge 1) (+ room-top-edge 1))
+                                      #t((- room-right-edge 1) (+ room-top-edge 1))
+                                      #t((- room-right-edge 1) (- room-bottom-edge 1))
+                                      #t((+ room-left-edge 1) (- room-bottom-edge 1))]))))
+
+(defn connected-left [section]
+  (list-comp x [x (section-connections section)]
+             (= x.direction "right")))
+
+(defn connected-right [section]
+  (list-comp x [x (section-connections section)]
+             (= x.direction "left")))
+
+(defn connected-up [section]
+  (list-comp x [x (section-connections section)]
+                   (= x.direction "down")))
+
+(defn connected-down [section]
+   (list-comp x [x (section-connections section)]
+                   (= x.direction "up")))
+
+;;        self.add_rows()

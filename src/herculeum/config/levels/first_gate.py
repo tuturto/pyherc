@@ -52,7 +52,7 @@ from pyherc.generators.level.room import (CacheRoomGenerator,
                                           PillarRoomGenerator,
                                           SquareRoomGenerator,                                          
                                           TempleRoomGenerator)
-from pyherc.generators.level.room.generator import demo
+from pyherc.generators.level.room.generator import demo, demo2
 from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
@@ -220,7 +220,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                           cache_creator('crypt_floor', item_generator, rng),
                                           ['first gate'])]
 
-    room_generators = [demo(tile_floor, tile_floor, 'crypt_floor', None, None)]
+    room_generators = [demo(tile_floor, tile_floor, 'crypt_floor', None, None),
+                       demo2(tile_floor, tile_floor)]
 
     level_partitioners = [GridPartitioner(['first gate'],
                                            4,

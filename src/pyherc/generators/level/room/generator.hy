@@ -20,12 +20,14 @@
 (require hy.contrib.anaphoric)
 (require pyherc.macros)
 
+(import [random])
 (import [pyherc.data [distance-between]]
         [pyherc.generators.level.partitioners [section-floor
                                                section-floor
                                                section-data]]
         [pyherc.generators.level.room.corridor [corridors]]
-        [pyherc.generators.level.room.shapes [circular-shape]])
+        [pyherc.generators.level.room.shapes [circular-shape
+                                              square-shape]])
 
 (defn new-room-generator [&rest creators]
   "create a room generator"
@@ -55,3 +57,6 @@
                                      (tomes-and-potions-cache item-generator)
                                      (no-characters-cache character-generator))))
 
+(defn demo2 [floor-tile corridor-tile ] 
+  (new-room-generator (square-shape floor-tile random)
+                      (corridors corridor-tile)))
