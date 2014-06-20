@@ -22,7 +22,9 @@
 (import [pyherc.data [distance-between]]
         [pyherc.generators.level.partitioners [section-floor section-height
                                                section-width add-room-connection
-                                               section-data section-connections]])
+                                               section-data section-connections
+                                               connected-left connected-right
+                                               connected-up connected-down]])
 
 (defn circular-shape [floor-tile]
   "create a circular shape"
@@ -75,21 +77,3 @@
                                       #t((- room-right-edge 1) (+ room-top-edge 1))
                                       #t((- room-right-edge 1) (- room-bottom-edge 1))
                                       #t((+ room-left-edge 1) (- room-bottom-edge 1))]))))
-
-(defn connected-left [section]
-  (list-comp x [x (section-connections section)]
-             (= x.direction "right")))
-
-(defn connected-right [section]
-  (list-comp x [x (section-connections section)]
-             (= x.direction "left")))
-
-(defn connected-up [section]
-  (list-comp x [x (section-connections section)]
-                   (= x.direction "down")))
-
-(defn connected-down [section]
-   (list-comp x [x (section-connections section)]
-                   (= x.direction "up")))
-
-;;        self.add_rows()

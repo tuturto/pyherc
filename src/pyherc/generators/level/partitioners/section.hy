@@ -212,6 +212,23 @@
     (add-section-connection section my-connection)
     (add-section-connection neighbour other-connection)))
 
+(defn connected-left [section]
+  (list-comp x [x (section-connections section)]
+             (= x.direction "right")))
+
+(defn connected-right [section]
+  (list-comp x [x (section-connections section)]
+             (= x.direction "left")))
+
+(defn connected-up [section]
+  (list-comp x [x (section-connections section)]
+                   (= x.direction "down")))
+
+(defn connected-down [section]
+   (list-comp x [x (section-connections section)]
+                   (= x.direction "up")))
+
+
 (defclass Connection []
   "connection between sections or section and room"
   [[--init-- (fn [self connection location direction section]

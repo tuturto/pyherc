@@ -38,3 +38,5 @@ from .section import match_section_to_room, section_location_tag
 from .section import connect_sections, section_level, section_data
 from .section import Connection
 from .section import new_section
+from .section import connected_left, connected_right, connected_up
+from .section import connected_down
