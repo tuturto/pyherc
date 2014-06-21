@@ -23,11 +23,12 @@
 (import [random])
 (import [pyherc.data [distance-between]]
         [pyherc.generators.level.partitioners [section-floor
-                                               section-floor
-                                               section-data]]
+                                                section-data]]
         [pyherc.generators.level.room.corridor [corridors]]
         [pyherc.generators.level.room.shapes [circular-shape
-                                              square-shape]])
+                                              square-shape]]
+        [pyherc.generators.level.room.overlays [add-rows
+                                                add-columns]])
 
 (defn new-room-generator [&rest creators]
   "create a room generator"
@@ -50,13 +51,22 @@
   (fn []
     []))
 
-(defn demo [floor-tile corridor-tile cache-tile item-generator character-generator] 
-  (new-room-generator (circular-shape floor-tile)
-                      (corridors corridor-tile)
-                      (cache-creator cache-tile
-                                     (tomes-and-potions-cache item-generator)
-                                     (no-characters-cache character-generator))))
+(defn demo [floor-tile corridor-tile ] 
+  (new-room-generator (square-shape floor-tile random)
+                      add-rows
+                      (fill-rows "pillar")
+                      (corridors corridor-tile)))
+
+(defn fill-columns [tile]
+  (fn [section]
+    (ap-each (section-data section :columns) (section-floor section it tile))))
+
+(defn fill-rows [tile]
+  (fn [section]
+    (ap-each (section-data section :rows) (section-floor section it tile))))
 
 (defn demo2 [floor-tile corridor-tile ] 
   (new-room-generator (square-shape floor-tile random)
+                      add-columns
+                      (fill-columns "pillar")
                       (corridors corridor-tile)))

@@ -220,7 +220,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                           cache_creator('crypt_floor', item_generator, rng),
                                           ['first gate'])]
 
-    room_generators = [demo(tile_floor, tile_floor, 'crypt_floor', None, None),
+    room_generators = [demo(tile_floor, tile_floor),
                        demo2(tile_floor, tile_floor)]
 
     level_partitioners = [GridPartitioner(['first gate'],

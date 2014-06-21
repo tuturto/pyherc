@@ -32,11 +32,14 @@
     (let [[center-x (// (section-width section) 2)]
           [center-y (// (section-height section) 2)]
           [center-point #t(center-x center-y)]
-          [radius (min [(- center-x 2) (- center-y 2)])]]
-      (for [x_loc (range (section-width section))]
-        (for [y_loc (range (section-height section))]
-          (when (<= (distance-between #t(x_loc y_loc) center-point) radius)
-            (section-floor section #t(x_loc y_loc) floor-tile "room"))))
+          [radius (min [(- center-x 2) (- center-y 2)])]
+          [room-tiles []]]
+      (for [x-loc (range (section-width section))]
+        (for [y-loc (range (section-height section))]
+          (when (<= (distance-between #t(x-loc y-loc) center-point) radius)
+            (.append room-tiles #t(x-loc y-loc))
+            (section-floor section #t(x-loc y-loc) floor-tile "room"))))
+      (section-data section :room-tiles room-tiles)
       (section-data section :center-point center-point)
       (add-room-connection section #t(center-x (- center-y radius)) "up")
       (add-room-connection section #t(center-x (+ center-y radius)) "down")
@@ -65,10 +68,13 @@
                                         (- (section-height section) 2))
                               (- (section-height section) 1))]
           [center-x (+ (// (- room-right-edge room-left-edge) 2) room-left-edge)]
-          [center-y (+ (// (- room-bottom-edge room-top-edge) 2) room-top-edge)]]
+          [center-y (+ (// (- room-bottom-edge room-top-edge) 2) room-top-edge)]
+          [room-tiles []]]
       (for [loc-y (range (+ room-top-edge 1) room-bottom-edge)]
         (for [loc-x (range (+ room-left-edge 1) room-right-edge)]
+          (.append room-tiles #t(loc-x loc-y))
           (section-floor section #t(loc-x loc-y) floor-tile "room")))
+      (section-data section :room-tiles room-tiles)
       (add-room-connection section #t(center-x room-top-edge) "up")
       (add-room-connection section #t(center-x room-bottom-edge) "down")
       (add-room-connection section #t(room-left-edge center-y) "left")
