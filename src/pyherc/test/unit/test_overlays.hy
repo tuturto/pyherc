@@ -52,9 +52,6 @@
         [level (:level context)]
         [section (:section context)]]
     (add-columns section)
-    (ap-each (section-data section :columns) 
-             (do
-              (assert-that it (isnot (equal-to #t(3 5))))
-              (assert-that it (isnot (equal-to #t(4 5))))
-              (assert-that it (isnot (equal-to #t(5 5))))))))
-
+    (assert-that (section-data section :columns) (isnot (has-item #t(3 5))))
+    (assert-that (section-data section :columns) (isnot (has-item #t(4 5))))
+    (assert-that (section-data section :columns) (isnot (has-item #t(5 5))))))
