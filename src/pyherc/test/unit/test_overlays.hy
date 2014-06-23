@@ -21,7 +21,8 @@
 (require pyherc.macros)
 
 (import [random]
-        [hamcrest [assert-that has-item is-not is-in]]
+        [hamcrest [assert-that has-item is-in equal-to]]
+        [hamcrest [is-not :as isnot]]
         [pyherc.data [floor-tile]]
         [pyherc.generators.level.partitioners [new-section section-data
                                                section-floor]]
@@ -51,6 +52,9 @@
         [level (:level context)]
         [section (:section context)]]
     (add-columns section)
-    (ap-each (section-data section :columns) (assert (and (!= it #t(3 5))
-                                                          (!= it #t(4 5))
-                                                          (!= it #t(5 5)))))))
+    (ap-each (section-data section :columns) 
+             (do
+              (assert-that it (isnot (equal-to #t(3 5))))
+              (assert-that it (isnot (equal-to #t(4 5))))
+              (assert-that it (isnot (equal-to #t(5 5))))))))
+
