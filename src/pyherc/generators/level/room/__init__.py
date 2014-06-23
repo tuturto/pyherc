@@ -31,3 +31,4 @@ from .catacombs import CatacombsGenerator
 from .crimson_lair import CrimsonLairGenerator
 from .pitroom import PitRoomGenerator
 from .library import LibraryRoomGenerator
+from .overlays import add_rows, add_columns

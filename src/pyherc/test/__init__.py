@@ -31,3 +31,4 @@ from pyherc.test.unit.test_locations import *
 from pyherc.test.unit.test_roomgenerators import *
 from pyherc.test.unit.test_library_generator import *
 from pyherc.test.unit.test_graves import *
+from pyherc.test.unit.test_overlays import *
