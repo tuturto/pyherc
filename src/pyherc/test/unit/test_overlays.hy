@@ -21,12 +21,13 @@
 (require pyherc.macros)
 
 (import [random]
-        [hamcrest [assert-that has-item is-in equal-to]]
+        [hamcrest [assert-that has-item is-in is- equal-to]]
         [hamcrest [is-not :as isnot]]
-        [pyherc.data [floor-tile]]
+        [pyherc.data [floor-tile blocks-movement wall-tile get-tile]]
         [pyherc.generators.level.partitioners [new-section section-data
                                                section-floor]]
         [pyherc.generators.level.room [add-columns]]
+        [pyherc.generators.level.room.overlays [free-around?]]
         [pyherc.test.builders [LevelBuilder]])
 
 (defn setup []
@@ -55,3 +56,19 @@
     (assert-that (section-data section :columns) (isnot (has-item #t(3 5))))
     (assert-that (section-data section :columns) (isnot (has-item #t(4 5))))
     (assert-that (section-data section :columns) (isnot (has-item #t(5 5))))))
+
+(defn test-free-around []
+  "free around should report if area is free around given location"
+  (let [[context (setup)]
+        [level (:level context)]
+        [section (:section context)]]
+    (add-columns section)
+    (assert-that (free-around? section #t(3 4)) (is- (equal-to true)))
+    (assert-that (free-around? section #t(3 5)) (is- (equal-to false)))))
+
+(defn test-blocks-movement []
+  "test that blocks movement works as expected"
+  (let [[context (setup)]
+        [level (:level context)]]
+    (assert-that (blocks-movement level #t(3 5)) (is- (equal-to false)))
+    (assert-that (blocks-movement level #t(3 6)) (is- (equal-to true)))))

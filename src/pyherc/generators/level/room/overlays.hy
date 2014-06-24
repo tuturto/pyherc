@@ -53,5 +53,5 @@
   "are tiles around given section location free?"
   (let [[tiles (list (area-around (section-to-map section location)))]
         [level (section-level section)]
-        [non-blocking (ap-map (not (blocks-movement level it)) tiles)]]
+        [non-blocking (list (ap-map (not (blocks-movement level it)) tiles))]]
     (ap-reduce (and it acc) (list non-blocking))))

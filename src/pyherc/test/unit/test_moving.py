@@ -123,15 +123,18 @@ class TestMoving():
                           .build())
 
         self.level1 = (LevelBuilder()
+                       .with_floor_tile("floor")
                        .with_wall_at((1, 0))
                        .build())
 
-        self.level2 = LevelBuilder().build()
+        self.level2 = (LevelBuilder()
+                       .with_floor_tile("floor")
+                       .build())
         self.portal1 = Portal((None, None), None)
 
         self.portal1.icon = 1
-        self.portal2 = Portal((None, None), None)
-        self.portal2 = Portal((None, None), None)
+        self.portal2 = Portal(("stairs", "stairs"), None)
+        self.portal2 = Portal(("stairs", "stairs"), None)
 
         add_portal(self.level1, (5, 5), self.portal1)
         add_portal(self.level2, (10, 10), self.portal2, self.portal1)
@@ -202,8 +205,8 @@ class TestMoving():
         self.actions.move_character(character=self.character,
                                     direction=Direction.enter)
 
-        assert_that(self.character.location, is_(equal_to((10, 10))))
         assert_that(self.character.level, is_(equal_to(self.level2)))
+        assert_that(self.character.location, is_(equal_to((10, 10))))
 
     def test_entering_portal_adds_character_to_creatures(self):
         """

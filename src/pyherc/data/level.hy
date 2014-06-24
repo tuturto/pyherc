@@ -120,7 +120,9 @@
   "check if given location blocks movement"
   (let [[map-tile (get-tile level location)]]
     (if map-tile
-      (:wall map-tile)
+      (if (:wall map-tile)
+        true
+        (if (:floor map-tile) false true))
       true)))
 
 (defn  blocks-los [level location]
