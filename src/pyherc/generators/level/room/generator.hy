@@ -35,12 +35,6 @@
   (fn [section]
     (ap-each creators (it section))))
 
-(defn cache-creator [cache-tile item-selector character-selector]
-  "create cache creator"
-  (fn [section]
-    "fill cache with items and characters"
-    (section-floor section (section-data section :center-point) cache-tile)))
-
 (defn tomes-and-potions-cache [item-generator]
   "create cache content creator"
   (fn []
@@ -51,12 +45,6 @@
   (fn []
     []))
 
-(defn demo [floor-tile corridor-tile ] 
-  (new-room-generator (square-shape floor-tile random)
-                      add-rows
-                      (fill-rows "pillar")
-                      (corridors corridor-tile)))
-
 (defn fill-columns [tile]
   (fn [section]
     (ap-each (section-data section :columns) (section-floor section it tile))))
@@ -64,9 +52,3 @@
 (defn fill-rows [tile]
   (fn [section]
     (ap-each (section-data section :rows) (section-floor section it tile))))
-
-(defn demo2 [floor-tile corridor-tile ] 
-  (new-room-generator (square-shape floor-tile random)
-                      add-columns
-                      (fill-columns "pillar")
-                      (corridors corridor-tile)))

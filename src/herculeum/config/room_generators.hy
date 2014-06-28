@@ -18,7 +18,9 @@
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.generators.level.room [new-room-generator square-shape
-                                       circular-shape corridors]])
+                                       circular-shape corridors
+                                       add-rows cache-creator
+                                       random-rows]])
 
 (defn square-room [floor-tile corridor-tile rng] 
   "create room generator for square rooms"

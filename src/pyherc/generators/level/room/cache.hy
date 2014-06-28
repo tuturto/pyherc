@@ -19,8 +19,17 @@
 
 (require pyherc.macros)
 
-(import [pyherc.generators.level.partitioners [section-to-map section-level]]
+(import [pyherc.generators.level.partitioners [section-to-map section-level
+                                               section-floor section-data]]
         [pyherc.generators.level.room.circle [CircularRoomGenerator]])
+
+(defn cache-creator [cache-tile position-selector item-selector
+                     character-selector]
+  "create cache creator"
+  (fn [section]
+    "fill cache with items and characters"
+    (assert false) ;; continue from here, use position-selector
+    (section-floor section (section-data section :center-point) cache-tile)))
 
 (defclass CacheRoomGenerator [CircularRoomGenerator]
   "generator for cache rooms"

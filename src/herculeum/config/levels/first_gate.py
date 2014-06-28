@@ -23,7 +23,8 @@ module for configuring first gate
 import hy
 
 from herculeum.ai.fungus import FungusAI, GreatFungusAI
-from herculeum.config.room_generators import square_room, circular_room
+from herculeum.config.room_generators import (square_room, circular_room,
+                                              square_graveyard)
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
@@ -75,9 +76,11 @@ def tomb_creator(item_generator, character_generator, rng):
 
         selection = rng.randint(1, 10)
         if selection > 9:
-            item = [item_generator.generate_item(name=None, item_type='martial weapon')]
+            item = [item_generator.generate_item(name=None,
+                                                 item_type='martial weapon')]
         elif selection > 4:
-            item = [item_generator.generate_item(name=None, item_type='simple weapon')]
+            item = [item_generator.generate_item(name=None,
+                                                 item_type='simple weapon')]
         else:
             item = []
 
@@ -103,10 +106,12 @@ def cache_creator(cache_tile, item_generator, rng):
         items = []
         if selection > 9:
             for i in range(1, rng.randint(2, 5)):
-                items.append(item_generator.generate_item(name=None, item_type='tome'))
+                items.append(item_generator.generate_item(name=None,
+                                                          item_type='tome'))
         elif selection > 7:
             for i in range(1, rng.randint(2, 5)):
-                items.append(item_generator.generate_item(name=None, item_type='potion'))
+                items.append(item_generator.generate_item(name=None,
+                                                          item_type='potion'))
 
         add_location_feature(level, location,
                              new_cache(level, location, items, []))
@@ -139,24 +144,41 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     pillar = surface_manager.add_icon('pillar', ':pillar.png', '#')
 
-    wall_15 = surface_manager.add_icon('catacombs_wall_15', ':catacombs_wall_2_8.png', '#')
-    wall_57 = surface_manager.add_icon('catacombs_wall_57', ':catacombs_wall_2_4.png', '#')
-    wall_35 = surface_manager.add_icon('catacombs_wall_35', ':catacombs_wall_2_6.png', '#')
-    wall_37 = surface_manager.add_icon('catacombs_wall_37', ':catacombs_wall_4_6.png', '#')
-    wall_17 = surface_manager.add_icon('catacombs_wall_17', ':catacombs_wall_8_4.png', '#')
-    wall_13 = surface_manager.add_icon('catacombs_wall_13', ':catacombs_wall_8_6.png', '#')
+    wall_15 = surface_manager.add_icon('catacombs_wall_15',
+                                       ':catacombs_wall_2_8.png', '#')
+    wall_57 = surface_manager.add_icon('catacombs_wall_57',
+                                       ':catacombs_wall_2_4.png', '#')
+    wall_35 = surface_manager.add_icon('catacombs_wall_35',
+                                       ':catacombs_wall_2_6.png', '#')
+    wall_37 = surface_manager.add_icon('catacombs_wall_37',
+                                       ':catacombs_wall_4_6.png', '#')
+    wall_17 = surface_manager.add_icon('catacombs_wall_17',
+                                       ':catacombs_wall_8_4.png', '#')
+    wall_13 = surface_manager.add_icon('catacombs_wall_13',
+                                       ':catacombs_wall_8_6.png', '#')
 
-    wall_135 = surface_manager.add_icon('catacombs_wall_135', ':catacombs_wall_2_6_8.png', '#')
-    wall_357 = surface_manager.add_icon('catacombs_wall_357', ':catacombs_wall_2_4_6.png', '#')
-    wall_1357 = surface_manager.add_icon('catacombs_wall_1357', ':catacombs_wall_2_4_6_8.png', '#')
-    wall_137 = surface_manager.add_icon('catacombs_wall_137', ':catacombs_wall_4_6_8.png', '#')
-    wall_157 = surface_manager.add_icon('catacombs_wall_157', ':catacombs_wall_2_4_8.png', '#')
+    wall_135 = surface_manager.add_icon('catacombs_wall_135',
+                                        ':catacombs_wall_2_6_8.png', '#')
+    wall_357 = surface_manager.add_icon('catacombs_wall_357',
+                                        ':catacombs_wall_2_4_6.png', '#')
+    wall_1357 = surface_manager.add_icon('catacombs_wall_1357',
+                                         ':catacombs_wall_2_4_6_8.png', '#')
+    wall_137 = surface_manager.add_icon('catacombs_wall_137',
+                                        ':catacombs_wall_4_6_8.png', '#')
+    wall_157 = surface_manager.add_icon('catacombs_wall_157',
+                                        ':catacombs_wall_2_4_8.png', '#')
 
     altar = surface_manager.add_icon('altar', ':altar.png', '_')
-    standing_candle_f0 = surface_manager.add_icon('standing candle f0', ':standing_candle_f0.png', '|')
-    standing_candle_f1 = surface_manager.add_icon('standing candle f1', ':standing_candle_f1.png', '|')
-    fountain_f0 = surface_manager.add_icon('fountain f0', ':fountain_f0.png', '{')
-    fountain_f1 = surface_manager.add_icon('fountain f1', ':fountain_f1.png', '{')
+    standing_candle_f0 = surface_manager.add_icon('standing candle f0',
+                                                  ':standing_candle_f0.png',
+                                                  '|')
+    standing_candle_f1 = surface_manager.add_icon('standing candle f1',
+                                                  ':standing_candle_f1.png',
+                                                  '|')
+    fountain_f0 = surface_manager.add_icon('fountain f0',
+                                           ':fountain_f0.png', '{')
+    fountain_f1 = surface_manager.add_icon('fountain f1',
+                                           ':fountain_f1.png', '{')
 
     shelf_1 = surface_manager.add_icon('empty shelf', ':shelf_empty.png', '+')
     shelf_2 = surface_manager.add_icon('bookshelf 1', ':shelf_book_1.png', '+')
@@ -230,6 +252,18 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     room_generators = [square_room(tile_floor, tile_floor, rng),
                        circular_room(tile_floor, tile_floor, rng)]
 
+    # floor-tile corridor-tile grave-tiles item-selector character-selector rng
+
+    def item_selector():
+        return []
+
+    def character_selector():
+        return []
+
+    room_generators = [square_graveyard(tile_floor, tile_floor,
+                                        [tomb_1, tomb_2], item_selector,
+                                        character_selector, rng)]
+
     level_partitioners = [GridPartitioner(['first gate'],
                                            4,
                                            2,
@@ -260,22 +294,38 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
-    floor = surface_manager.add_icon('catacombs_floor', ':catacombs_floor.png', ' ')
-    floor1 = surface_manager.add_icon('catacombs_floor_1', ':catacombs_floor_1.png', ' ')
-    floor3 = surface_manager.add_icon('catacombs_floor_3', ':catacombs_floor_3.png', ' ')
-    floor5 = surface_manager.add_icon('catacombs_floor_5', ':catacombs_floor_5.png', ' ')
-    floor7 = surface_manager.add_icon('catacombs_floor_7', ':catacombs_floor_7.png', ' ')
-    floor13 = surface_manager.add_icon('catacombs_floor_13', ':catacombs_floor_13.png', ' ')
-    floor15 = surface_manager.add_icon('catacombs_floor_15', ':catacombs_floor_15.png', ' ')
-    floor17 = surface_manager.add_icon('catacombs_floor_17', ':catacombs_floor_17.png', ' ')
-    floor35 = surface_manager.add_icon('catacombs_floor_35', ':catacombs_floor_35.png', ' ')
-    floor37 = surface_manager.add_icon('catacombs_floor_37', ':catacombs_floor_37.png', ' ')
-    floor57 = surface_manager.add_icon('catacombs_floor_57', ':catacombs_floor_57.png', ' ')
-    floor135 = surface_manager.add_icon('catacombs_floor_135', ':catacombs_floor_135.png', ' ')
-    floor137 = surface_manager.add_icon('catacombs_floor_137', ':catacombs_floor_137.png', ' ')
-    floor157 = surface_manager.add_icon('catacombs_floor_157', ':catacombs_floor_157.png', ' ')
-    floor357 = surface_manager.add_icon('catacombs_floor_357', ':catacombs_floor_357.png', ' ')
-    floor1357 = surface_manager.add_icon('catacombs_floor_1357', ':catacombs_floor_1357.png', ' ')
+    floor = surface_manager.add_icon('catacombs_floor',
+                                     ':catacombs_floor.png', ' ')
+    floor1 = surface_manager.add_icon('catacombs_floor_1',
+                                      ':catacombs_floor_1.png', ' ')
+    floor3 = surface_manager.add_icon('catacombs_floor_3',
+                                      ':catacombs_floor_3.png', ' ')
+    floor5 = surface_manager.add_icon('catacombs_floor_5',
+                                      ':catacombs_floor_5.png', ' ')
+    floor7 = surface_manager.add_icon('catacombs_floor_7',
+                                      ':catacombs_floor_7.png', ' ')
+    floor13 = surface_manager.add_icon('catacombs_floor_13',
+                                       ':catacombs_floor_13.png', ' ')
+    floor15 = surface_manager.add_icon('catacombs_floor_15',
+                                       ':catacombs_floor_15.png', ' ')
+    floor17 = surface_manager.add_icon('catacombs_floor_17',
+                                       ':catacombs_floor_17.png', ' ')
+    floor35 = surface_manager.add_icon('catacombs_floor_35',
+                                       ':catacombs_floor_35.png', ' ')
+    floor37 = surface_manager.add_icon('catacombs_floor_37',
+                                       ':catacombs_floor_37.png', ' ')
+    floor57 = surface_manager.add_icon('catacombs_floor_57',
+                                       ':catacombs_floor_57.png', ' ')
+    floor135 = surface_manager.add_icon('catacombs_floor_135',
+                                        ':catacombs_floor_135.png', ' ')
+    floor137 = surface_manager.add_icon('catacombs_floor_137',
+                                        ':catacombs_floor_137.png', ' ')
+    floor157 = surface_manager.add_icon('catacombs_floor_157',
+                                        ':catacombs_floor_157.png', ' ')
+    floor357 = surface_manager.add_icon('catacombs_floor_357',
+                                        ':catacombs_floor_357.png', ' ')
+    floor1357 = surface_manager.add_icon('catacombs_floor_1357',
+                                         ':catacombs_floor_1357.png', ' ')
 
     floor_config = FloorBuilderDecoratorConfig([],
                                                single = floor,
@@ -297,10 +347,14 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                floor = tile_floor)
     floor_builder = FloorBuilderDecorator(floor_config)
 
-    torches_tile_f0 = surface_manager.add_icon('catacombs_torches_f0', ':wall_torches_f0.png', '¤')
-    torches_tile_f1 = surface_manager.add_icon('catacombs_torches_f1', ':wall_torches_f1.png', '¤')
-    torch_tile_f0 = surface_manager.add_icon('catacombs_torch_f0', ':wall_torch_f0.png', '¤')
-    torch_tile_f1 = surface_manager.add_icon('catacombs_torch_f1', ':wall_torch_f1.png', '¤')
+    torches_tile_f0 = surface_manager.add_icon('catacombs_torches_f0',
+                                               ':wall_torches_f0.png', '¤')
+    torches_tile_f1 = surface_manager.add_icon('catacombs_torches_f1',
+                                               ':wall_torches_f1.png', '¤')
+    torch_tile_f0 = surface_manager.add_icon('catacombs_torch_f0',
+                                             ':wall_torch_f0.png', '¤')
+    torch_tile_f1 = surface_manager.add_icon('catacombs_torch_f1',
+                                             ':wall_torch_f1.png', '¤')
 
     torch_ornamenter_config = WallOrnamentDecoratorConfig(
                                                 ['first gate'],
@@ -378,8 +432,12 @@ def init_creatures(context):
     surface_manager = context.surface_manager
     config = []
 
-    fungus_f0 = surface_manager.add_icon('fungus_f0', ':fungus_f0.png', 'F', ['yellow', 'dim'])
-    fungus_f1 = surface_manager.add_icon('fungus_f1', ':fungus_f1.png', 'F', ['yellow', 'dim'])
+    fungus_f0 = surface_manager.add_icon('fungus_f0',
+                                         ':fungus_f0.png',
+                                         'F', ['yellow', 'dim'])
+    fungus_f1 = surface_manager.add_icon('fungus_f1',
+                                         ':fungus_f1.png',
+                                         'F', ['yellow', 'dim'])
     config.append(creature_config(name = 'fungus',
                                   body = 4,
                                   finesse = 2,
@@ -390,8 +448,12 @@ def init_creatures(context):
                                   attack = 3,
                                   ai = FungusAI))
 
-    great_fungus_f0 = surface_manager.add_icon('great_fungus_f0', ':great_fungus_f0.png', 'F', ['white', 'bold'])
-    great_fungus_f1 = surface_manager.add_icon('great_fungus_f1', ':great_fungus_f1.png', 'F', ['white', 'bold'])
+    great_fungus_f0 = surface_manager.add_icon('great_fungus_f0',
+                                               ':great_fungus_f0.png', 
+                                               'F', ['white', 'bold'])
+    great_fungus_f1 = surface_manager.add_icon('great_fungus_f1',
+                                               ':great_fungus_f1.png',
+                                               'F', ['white', 'bold'])
     config.append(creature_config(name = 'great fungus',
                                   body = 6,
                                   finesse = 1,

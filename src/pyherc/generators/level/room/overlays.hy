@@ -25,33 +25,39 @@
                                                section-data section-connections
                                                section-to-map section-level]])
 
-(defn add-rows [section]
-  "adds rows to section data"
-  (let [[even-tiles []]
-        [odd-tiles []]]
-    (ap-each (section-data section :room-tiles)
-             (when (free-around? section it)
-               (if (odd? (second it)) (.append odd-tiles it)
-                   (.append even-tiles it))))
-    (section-data section :even-rows even-tiles)
-    (section-data section :odd-rows odd-tiles)
-    (if (> (len even-tiles) (len odd-tiles))
-      (section-data section :rows even-tiles)
-      (section-data section :rows odd-tiles))))
+(defn add-rows []
+  "create generator for pre-placing rows"
+  (fn [section]
+    (let [[even-tiles []]
+          [odd-tiles []]]
+      (ap-each (section-data section :room-tiles)
+               (when (free-around? section it)
+                 (if (odd? (second it)) (.append odd-tiles it)
+                     (.append even-tiles it))))
+      (section-data section :even-rows even-tiles)
+      (section-data section :odd-rows odd-tiles)
+      (if (> (len even-tiles) (len odd-tiles))
+        (section-data section :rows even-tiles)
+        (section-data section :rows odd-tiles)))))
 
-(defn add-columns [section]
-  "add columns to section data"
-  (let [[even-tiles []]
-        [odd-tiles []]]
-    (ap-each (section-data section :room-tiles)
-             (when (free-around? section it)
-               (if (odd? (first it)) (.append odd-tiles it)
-                   (.append even-tiles it))))
-    (section-data section :even-columns even-tiles)
-    (section-data section :odd-columns odd-tiles)
-    (if (> (len even-tiles) (len odd-tiles))
-      (section-data section :columns even-tiles)
-      (section-data section :columns odd-tiles))))
+(defn add-columns []
+  "create generator for pre-placing columns"
+  (fn [section]
+    (let [[even-tiles []]
+          [odd-tiles []]]
+      (ap-each (section-data section :room-tiles)
+               (when (free-around? section it)
+                 (if (odd? (first it)) (.append odd-tiles it)
+                     (.append even-tiles it))))
+      (section-data section :even-columns even-tiles)
+      (section-data section :odd-columns odd-tiles)
+      (if (> (len even-tiles) (len odd-tiles))
+        (section-data section :columns even-tiles)
+        (section-data section :columns odd-tiles)))))
+
+(defn random-rows [percentage rng]
+  "create selector to pick random tiles from rows"
+  (fn [section]))
 
 (defn free-around? [section location]
   "are tiles around given section location free?"
