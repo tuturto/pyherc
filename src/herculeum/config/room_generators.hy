@@ -43,10 +43,10 @@
 (defn circular-graveyard [floor-tile corridor-tile grave-tiles
                           item-selector character-selector rng]
   "create generator for circular graveyard"
-  (new-room-generator (circular-shape floor-tile rng)
+  (new-room-generator (circular-shape floor-tile)
                       (add-rows)
                       (cache-creator grave-tiles (random-rows 75 rng)
-                                     item-selector character-selector)
+                                     item-selector character-selector rng)
                       (corridors corridor-tile)))
 
 (defn square-graveyard [floor-tile corridor-tile grave-tiles
@@ -55,5 +55,5 @@
   (new-room-generator (square-shape floor-tile rng)
                       (add-rows)
                       (cache-creator grave-tiles (random-rows 75 rng)
-                                     item-selector character-selector)
+                                     item-selector character-selector rng)
                       (corridors corridor-tile)))

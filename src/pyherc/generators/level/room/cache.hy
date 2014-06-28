@@ -17,19 +17,21 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(require hy.contrib.anaphoric)
 (require pyherc.macros)
 
 (import [pyherc.generators.level.partitioners [section-to-map section-level
-                                               section-floor section-data]]
+                                               section-floor section-data
+                                               section-ornamentation]]
         [pyherc.generators.level.room.circle [CircularRoomGenerator]])
 
-(defn cache-creator [cache-tile position-selector item-selector
-                     character-selector]
+(defn cache-creator [cache-tiles position-selector item-selector
+                     character-selector rng]
   "create cache creator"
   (fn [section]
     "fill cache with items and characters"
-    (assert false) ;; continue from here, use position-selector
-    (section-floor section (section-data section :center-point) cache-tile)))
+    (ap-each (position-selector section)
+             (section-ornamentation section it (.choice rng cache-tiles)))))
 
 (defclass CacheRoomGenerator [CircularRoomGenerator]
   "generator for cache rooms"

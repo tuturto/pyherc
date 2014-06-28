@@ -57,7 +57,10 @@
 
 (defn random-rows [percentage rng]
   "create selector to pick random tiles from rows"
-  (fn [section]))
+  (fn [section]
+    (ap-each (section-data section :rows)
+             (when (>= percentage (.randint rng 1 100))
+               (yield it)))))
 
 (defn free-around? [section location]
   "are tiles around given section location free?"
