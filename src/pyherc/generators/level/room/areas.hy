@@ -17,6 +17,10 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(require hy.contrib.anaphoric)
+
+(import [pyherc.generators.level.partitioners [section-data]])
+
 (defn center-tile [section]
   "select center tile of section"
   (section-data section :center-point))
