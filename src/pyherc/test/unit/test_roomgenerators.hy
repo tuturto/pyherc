@@ -27,7 +27,6 @@
                                        TempleRoomGenerator
                                        LibraryRoomGenerator
                                        PitRoomGenerator]]
-        [pyherc.generators.level.room.generator [demo]]
         [pyherc.generators.level.partitioners [GridPartitioner]]
         [pyherc.test.builders [LevelBuilder]]
         [random [Random]])
@@ -39,16 +38,6 @@
         [partitioner (GridPartitioner ["test"] 2 1 (Random))]
         [sections (.partition-level partitioner level)]]
     (ap-each sections (.generate-room generator it))))
-
-(defn test-new-generator []
-  "test the brand new system"
-  (let [[level (-> (LevelBuilder)
-                   (.with-size #t(30 20))
-                   (.build))]
-        [partitioner (GridPartitioner ["test"] 2 1 (Random))]
-        [sections (.partition-level partitioner level)]
-        [generator (demo nil nil)]]
-    (ap-each sections (generator it))))
 
 (defn test-catacombs-generator []
   "test generating catacombs"
@@ -72,11 +61,13 @@
 
 (defn test-temple-generation []
   "test generating temple"
-  (run-generator (TempleRoomGenerator :floor :corridor :temple ["test"] :candle)))
+  (run-generator (TempleRoomGenerator :floor :corridor :temple ["test"]
+                                      :candle)))
 
 (defn test-library-generation []
   "test generating library"
-  (run-generator (LibraryRoomGenerator :floor :corridor [:shelf1 :shelf2] nil 50 nil ["test"])))
+  (run-generator (LibraryRoomGenerator :floor :corridor [:shelf1 :shelf2] nil 50
+                                       nil ["test"])))
 
 (defn test-pitroom-generation []
   "test generating pit room"
@@ -84,4 +75,5 @@
 
 (defn test-cacheroom-generation []
   "test generating cache room"
-  (run-generator (CacheRoomGenerator :floor :corridor (fn [level center-point]) ["test"])))
+  (run-generator (CacheRoomGenerator :floor :corridor (fn [level center-point])
+                                     ["test"])))

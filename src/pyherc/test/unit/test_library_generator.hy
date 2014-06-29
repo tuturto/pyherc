@@ -23,7 +23,7 @@
 (import [random [Random]])
 (import [hamcrest [assert-that has-item]])
 (import [pyherc.data [add-location-feature get-tiles location-features]]
-        [pyherc.data.features [new-grave items-in-cache characters-in-cache]]
+        [pyherc.data.features [new-cache items-in-cache characters-in-cache]]
         [pyherc.generators.level.partitioners [GridPartitioner]]
         [pyherc.generators.level.room [LibraryRoomGenerator]]
         [pyherc.test.builders [LevelBuilder]])
@@ -50,8 +50,12 @@
         [feature-creator (fn [level location]
                            (add-location-feature level
                                                  location
-                                                 (new-grave level location [:coin] [:skeleton])))]
-        [generator (LibraryRoomGenerator :floor :corridor nil :grave 100 feature-creator ["test"])]]
+                                                 (new-cache level
+                                                            location
+                                                            [:coin]
+                                                            [:skeleton])))]
+        [generator (LibraryRoomGenerator :floor :corridor nil :grave 100
+                                         feature-creator ["test"])]]
     (ap-each sections (.generate-room generator it))
     (let [[grave (first (list (find-feature level)))]]
       (assert-that (items-in-cache grave) (has-item :coin))

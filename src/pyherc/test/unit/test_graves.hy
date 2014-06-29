@@ -25,7 +25,7 @@
 (import [hamcrest [assert-that is- equal-to]])
 (import [pyherc.data [add-location-feature get-tiles location-features
                       add-character get-characters get-items Model]]
-        [pyherc.data.features [new-grave items-in-cache characters-in-cache]]
+        [pyherc.data.features [new-cache items-in-cache characters-in-cache]]
         [pyherc.generators [ItemGenerator ItemConfiguration ItemConfigurations
                             creature-config generate-creature]]
         [pyherc.generators.level.partitioners [GridPartitioner]]
@@ -40,7 +40,7 @@
   (fn [level location]
     (add-location-feature level
                           location
-                          (new-grave level location 
+                          (new-cache level location 
                                      [(.generate-item item-generator "coin")] 
                                      [(character-generator "skeleton")]))))
 
@@ -52,15 +52,19 @@
 (defn configure-items []
   "create item configuration for this test"
   (let [[configs (ItemConfigurations (Random))]]
-    (.add-item configs (ItemConfiguration "dagger" 1 1 [:dagger] ["weapon"] "common"))
+    (.add-item configs (ItemConfiguration "dagger" 1 1 [:dagger] ["weapon"]
+                                          "common"))
     (.add-item configs (ItemConfiguration "coin" 1 1 [:coin] [] "common"))
-    (.add-item configs (ItemConfiguration "spade" 1 1 [:spade] [:spade "weapon"] "common"))
+    (.add-item configs (ItemConfiguration "spade" 1 1 [:spade] [:spade "weapon"]
+                                          "common"))
     (ItemGenerator configs)))
 
 (defn configure-characters [model item-generator]
   "create character configuration for this test"
-  (partial generate-creature {"skeleton" (creature-config "skeleton" 1 1 1 1 1 [:icons] 1)
-                              "pete" (creature-config "pete" 1 1 1 1 1 [:icons] 1)}
+  (partial generate-creature {"skeleton" (creature-config "skeleton" 1 1 1 1 1
+                                                          [:icons] 1)
+                              "pete" (creature-config "pete" 1 1 1 1 1 [:icons]
+                                                      1)}
            model item-generator (Random)))
 
 (defn setup[]
@@ -76,7 +80,8 @@
         [item-generator (configure-items)]
         [character-generator (configure-characters model item-generator)]
         [generator (LibraryRoomGenerator :floor :corridor nil :grave 100 
-                                         (full-grave item-generator character-generator)
+                                         (full-grave item-generator
+                                                     character-generator)
                                          ["test"])]
         [action-factory (-> (ActionFactoryBuilder)
                             (.with-inventory-factory)
