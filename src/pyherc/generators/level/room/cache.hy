@@ -20,7 +20,8 @@
 (require hy.contrib.anaphoric)
 (require pyherc.macros)
 
-(import [pyherc.generators.level.partitioners [section-to-map section-level
+(import [pyherc.data.features [new-cache]]
+        [pyherc.generators.level.partitioners [section-to-map section-level
                                                section-floor section-data
                                                section-ornamentation]]
         [pyherc.generators.level.room.circle [CircularRoomGenerator]])
@@ -30,8 +31,12 @@
   "create cache creator"
   (fn [section]
     "fill cache with items and characters"
-    (ap-each (position-selector section)
-             (section-ornamentation section it (.choice rng cache-tiles)))))
+    (let [[level (section-level section)]]
+          (ap-each (position-selector section)
+                   (do
+                    (section-ornamentation section it (.choice rng cache-tiles))
+                    (new-cache level (section-to-map section it)
+                               [] (character-selector)))))))
 
 (defclass CacheRoomGenerator [CircularRoomGenerator]
   "generator for cache rooms"
@@ -44,4 +49,5 @@
                     "generate a new room"
                     (-> (super) (.generate-room section))
                     (self.cache-creator (section-level section)
-                                        (section-to-map section self.center-point)))]])
+                                        (section-to-map section
+                                                        self.center-point)))]])

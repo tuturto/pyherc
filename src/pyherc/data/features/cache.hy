@@ -20,17 +20,10 @@
 (defn new-cache [level location items characters]
   "create a new cache"
   {:type :cache
-   :sub-type :cache
    :location location
    :level level
    :items items
    :characters characters})
-
-(defn new-grave [level location items characters]
-  "create a new grave"
-  (let [[grave (new-cache level location items characters)]]
-    (assoc grave :sub-type :grave)
-    grave))
 
 (defn feature-type [feature]
   "type of the special feature"
@@ -45,10 +38,6 @@
   "get/set level of an entity"
   (when (!= level :no-level) (assoc entity :level level))
   (:level entity))
-
-(defn cache-type [cache]
-  "type of cache"
-  (:sub-type cache))
 
 (defn items-in-cache [cache]
   "get items in cache"

@@ -25,11 +25,12 @@ import hy
 from herculeum.ai.fungus import FungusAI, GreatFungusAI
 from herculeum.config.room_generators import (square_room, circular_room,
                                               square_graveyard,
-                                              circular_graveyard)
+                                              circular_graveyard,
+                                              skeletons)
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
-from pyherc.data.features import new_grave, new_cache
+from pyherc.data.features import new_cache
 from pyherc.generators import creature_config, inventory_config
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
@@ -84,9 +85,6 @@ def tomb_creator(item_generator, character_generator, rng):
                                                  item_type='simple weapon')]
         else:
             item = []
-
-        add_location_feature(level, location,
-                             new_grave(level, location, item, character))
 
     return create_tomb
 
@@ -253,20 +251,18 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     room_generators = [square_room(tile_floor, tile_floor, rng),
                        circular_room(tile_floor, tile_floor, rng)]
 
-    # floor-tile corridor-tile grave-tiles item-selector character-selector rng
-
     def item_selector():
         return []
-
-    def character_selector():
-        return []
-
+        
     room_generators = [square_graveyard(tile_floor, tile_floor,
                                         [tomb_1, tomb_2], item_selector,
-                                        character_selector, rng),
+                                        skeletons(50, creature_generator, rng),
+                                        rng),
                        circular_graveyard(tile_floor, tile_floor,
                                           [tomb_1, tomb_2], item_selector,
-                                          character_selector, rng)]
+                                          skeletons(90, creature_generator,
+                                                    rng),
+                                          rng)]
 
     level_partitioners = [GridPartitioner(['first gate'],
                                            4,

@@ -40,14 +40,15 @@ from .geometry import distance_between, heuristic_estimate_of_distance
 from .geometry import area_4_around, area_around, find_direction
 
 from .new_character import is_skill_ready, cooldown
-from .level import get_tile, new_tile, floor_tile, add_portal, get_portal
-from .level import wall_tile, tile, blocks_los, ornamentation
-from .level import level_size, find_free_space, blocks_movement
-from .level import add_item, get_items, remove_item
-from .level import add_character, remove_character, get_character, get_characters
-from .level import move_character, add_trap, get_trap
-from .level import add_location_tag, get_location_tags, get_locations_by_tag
-from .level import new_level, get_tiles
-from .level import location_features, add_location_feature
-from .level import remove_location_feature
+from .level import (get_tile, new_tile, floor_tile, add_portal, get_portal,
+                    wall_tile, tile, blocks_los, ornamentation,
+                    level_size, find_free_space, blocks_movement,
+                    add_item, get_items, remove_item,
+                    add_character, remove_character, get_character,
+                    get_characters,
+                    move_character, add_trap, get_trap,
+                    add_location_tag, get_location_tags, get_locations_by_tag,
+                    new_level, get_tiles,
+                    location_features, add_location_feature,
+                    remove_location_feature)
 from .locations import is_next_to_wall, is_corridor, is_open_area

@@ -57,3 +57,10 @@
                       (cache-creator grave-tiles (random-rows 75 rng)
                                      item-selector character-selector rng)
                       (corridors corridor-tile)))
+
+(defn skeletons [percentage character-generator rng]
+  "create character selector for skeletons"
+  (fn []
+    (if (>= percentage (.randint rng 1 100))
+      [(character-generator "skeleton warrior")]
+      [])))
