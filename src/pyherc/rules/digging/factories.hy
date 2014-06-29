@@ -23,7 +23,7 @@
 (require pyherc.macros)
 
 (import [pyherc.aspects [log-debug log-info]]
-        [pyherc.data [location-features]]
+        [pyherc.data [location-features get-tile]]
         [pyherc.data.features [feature-type]]
 	[pyherc.rules.digging.action [DigAction]])
 
@@ -49,5 +49,5 @@
   (let [[caches (list-comp feature 
                            [feature (location-features level location)]
                            (= (feature-type feature) :cache))]]
-    (when (> (count caches) 0)
-      (first (list caches)))))
+    (when (> (len caches) 0)
+      (first caches))))
