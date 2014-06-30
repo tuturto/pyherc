@@ -26,7 +26,7 @@ from herculeum.ai.fungus import FungusAI, GreatFungusAI
 from herculeum.config.room_generators import (square_room, circular_room,
                                               square_graveyard,
                                               circular_graveyard,
-                                              skeletons)
+                                              skeletons, mundane_items)
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
@@ -250,17 +250,17 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     room_generators = [square_room(tile_floor, tile_floor, rng),
                        circular_room(tile_floor, tile_floor, rng)]
-
-    def item_selector():
-        return []
         
     room_generators = [square_graveyard(tile_floor, tile_floor,
-                                        [tomb_1, tomb_2], item_selector,
-                                        skeletons(50, creature_generator, rng),
+                                        [tomb_1, tomb_2], 
+                                        mundane_items(0, item_generator, rng),
+                                        skeletons(100, creature_generator, rng),
                                         rng),
                        circular_graveyard(tile_floor, tile_floor,
-                                          [tomb_1, tomb_2], item_selector,
-                                          skeletons(90, creature_generator,
+                                          [tomb_1, tomb_2],
+                                          mundane_items(0, item_generator,
+                                                        rng),
+                                          skeletons(100, creature_generator,
                                                     rng),
                                           rng)]
 

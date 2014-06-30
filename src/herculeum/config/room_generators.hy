@@ -58,9 +58,23 @@
                                      item-selector character-selector rng)
                       (corridors corridor-tile)))
 
-(defn skeletons [percentage character-generator rng]
+(defn skeletons [empty-pct character-generator rng]
   "create character selector for skeletons"
   (fn []
-    (if (>= percentage (.randint rng 1 100))
-      [(character-generator "skeleton warrior")]
-      [])))
+    (let [[roll (.randint rng 1 100)]]
+      (cond 
+       [(scored? empty-pct 100 roll) [(character-generator "skeleton warrior")]]
+       [true []]))))
+
+(defn mundane-items [empty-pct item-generator rng]
+  "create item selector for mundane items"
+  (fn []
+    (let [[roll (.randint rng 1 100)]]
+      (cond 
+       [(scored? empty-pct 25 roll) [(.generate-item item-generator "sword")]]
+       [(scored? empty-pct 75 roll) [(.generate-item item-generator "dagger")]]
+       [(scored? empty-pct 100 roll) [(.generate-item item-generator "club")]]
+       [true []]))))
+
+(defn scored? [empty-pct limit-pct roll]
+  (>= (* (- 100 empty-pct) (/ limit-pct 100)) roll))

@@ -36,15 +36,17 @@
                             (section-level section)
                             (section-to-map section it)
                             character-selector
+                            item-selector
                             rng))))
 
-(defn add-new-cache [cache-tiles level location character-selector rng]
+(defn add-new-cache [cache-tiles level location character-selector item-selector
+                     rng]
   "add new cache"
   (ornamentation level location (.choice rng cache-tiles))
   (add-location-feature level location
                         (new-cache level
                                    location
-                                   []
+                                   (item-selector)
                                    (character-selector))))
 
 (defclass CacheRoomGenerator [CircularRoomGenerator]
