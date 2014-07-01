@@ -22,12 +22,12 @@
                                        add-rows cache-creator
                                        random-rows]])
 
-(defn square-room [floor-tile corridor-tile rng] 
+(defn square-room [floor-tile corridor-tile rng]
   "create room generator for square rooms"
   (new-room-generator (square-shape floor-tile rng)
                       (corridors corridor-tile)))
 
-(defn circular-room [floor-tile corridor-tile rng] 
+(defn circular-room [floor-tile corridor-tile rng]
   "create room generator for circular rooms"
   (new-room-generator (circular-shape floor-tile)
                       (corridors corridor-tile)))
@@ -61,20 +61,20 @@
 (defn skeletons [empty-pct character-generator rng]
   "create character selector for skeletons"
   (fn []
-    (let [[roll (.randint rng 1 100)]]
-      (cond 
-       [(scored? empty-pct 100 roll) [(character-generator "skeleton warrior")]]
-       [true []]))))
+    (if (> (.randint rng 1 100) empty-pct)
+      (let [[roll (.randint rng 1 100)]]
+        (cond
+         [true [(character-generator "skeleton warrior")]]))
+      [])))
 
 (defn mundane-items [empty-pct item-generator rng]
   "create item selector for mundane items"
   (fn []
-    (let [[roll (.randint rng 1 100)]]
-      (cond 
-       [(scored? empty-pct 25 roll) [(.generate-item item-generator "sword")]]
-       [(scored? empty-pct 75 roll) [(.generate-item item-generator "dagger")]]
-       [(scored? empty-pct 100 roll) [(.generate-item item-generator "club")]]
-       [true []]))))
-
-(defn scored? [empty-pct limit-pct roll]
-  (>= (* (- 100 empty-pct) (/ limit-pct 100)) roll))
+    (if (> (.randint rng 1 100) empty-pct)
+      (let [[roll (.randint rng 1 100)]]
+        (cond
+         [(> roll 40) [(.generate-item item-generator "club")]]
+         [(> roll 20) [(.generate-item item-generator "dagger")]]
+         [(> roll 10) [(.generate-item item-generator "axe")]]
+         [true [(.generate-item item-generator "sword")]]))
+      [])))

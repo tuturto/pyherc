@@ -254,13 +254,13 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     room_generators = [square_graveyard(tile_floor, tile_floor,
                                         [tomb_1, tomb_2], 
                                         mundane_items(0, item_generator, rng),
-                                        skeletons(100, creature_generator, rng),
+                                        skeletons(50, creature_generator, rng),
                                         rng),
                        circular_graveyard(tile_floor, tile_floor,
                                           [tomb_1, tomb_2],
                                           mundane_items(0, item_generator,
                                                         rng),
-                                          skeletons(100, creature_generator,
+                                          skeletons(50, creature_generator,
                                                     rng),
                                           rng)]
 
