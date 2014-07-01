@@ -55,12 +55,14 @@
         (section-data section :columns even-tiles)
         (section-data section :columns odd-tiles)))))
 
-(defn random-rows [percentage rng]
-  "create selector to pick random tiles from rows"
+(defn mark-center-area []
+  "create generator to mark center area of room"
   (fn [section]
-    (ap-each (section-data section :rows)
-             (when (>= percentage (.randint rng 1 100))
-               (yield it)))))
+    (let [[center-tiles []]]
+      (ap-each (section-data section :room-tiles)
+               (when (free-around? section it)
+                 (.append center-tiles it)))
+      (section-data section :center-area center-tiles))))
 
 (defn free-around? [section location]
   "are tiles around given section location free?"

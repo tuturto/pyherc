@@ -19,7 +19,7 @@
 
 (import [pyherc.generators.level.room [new-room-generator square-shape
                                        circular-shape corridors
-                                       add-rows cache-creator
+                                       add-rows cache-creator mark-center-area
                                        random-rows]])
 
 (defn square-room [floor-tile corridor-tile rng]
@@ -56,6 +56,13 @@
                       (add-rows)
                       (cache-creator grave-tiles (random-rows 75 rng)
                                      item-selector character-selector rng)
+                      (corridors corridor-tile)))
+
+(defn square-pitroom [floor-tile corridor-tile pit-tile rng]
+  "create generator for a square room with large pit in the middle"
+  (new-room-generator (square-shape floor-tile rng)
+                      (mark-center-area)
+                      (trap-creator [pit-tile] (center-area))
                       (corridors corridor-tile)))
 
 (defn skeletons [empty-pct character-generator rng]

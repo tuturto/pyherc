@@ -38,3 +38,9 @@
     (ap-each (section-data section :columns)
              (when (<= (.randint rng 1 100) percentage)
                (yield it)))))
+
+(defn center-area []
+  "create selector for picking center area of room"
+  (fn [section]
+    (ap-each (section-data section :center-area)
+             (yield it))))
