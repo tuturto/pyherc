@@ -17,10 +17,12 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(import [pyherc.generators.level.room [new-room-generator square-shape
+(import [pyherc.data.traps [PitTrap]]
+        [pyherc.generators.level.room [new-room-generator square-shape
                                        circular-shape corridors
                                        add-rows cache-creator mark-center-area
-                                       random-rows]])
+                                       random-rows trap-creator
+                                       center-area]])
 
 (defn square-room [floor-tile corridor-tile rng]
   "create room generator for square rooms"
@@ -62,7 +64,7 @@
   "create generator for a square room with large pit in the middle"
   (new-room-generator (square-shape floor-tile rng)
                       (mark-center-area)
-                      (trap-creator [pit-tile] (center-area))
+                      (trap-creator [pit-tile] PitTrap (center-area) rng)
                       (corridors corridor-tile)))
 
 (defn skeletons [empty-pct character-generator rng]

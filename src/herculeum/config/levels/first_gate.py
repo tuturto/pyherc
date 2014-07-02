@@ -26,6 +26,7 @@ from herculeum.ai.fungus import FungusAI, GreatFungusAI
 from herculeum.config.room_generators import (square_room, circular_room,
                                               square_graveyard,
                                               circular_graveyard,
+                                              square_pitroom,
                                               skeletons, mundane_items)
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
@@ -263,6 +264,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                           skeletons(50, creature_generator,
                                                     rng),
                                           rng)]
+
+    room_generators = [square_pitroom(tile_floor, tile_floor, 'brick_pit', rng)]
 
     level_partitioners = [GridPartitioner(['first gate'],
                                            4,

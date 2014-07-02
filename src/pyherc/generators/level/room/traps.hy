@@ -17,6 +17,13 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn trap-creator [trap-tiles area-selector]
-  "create a trap generator"
-  (fn [section]))
+(require hy.contrib.anaphoric)
+
+(import [pyherc.generators.level.partitioners [section-trap section-floor]])
+
+(defn trap-creator [trap-tiles trap-type area-selector rng]
+  "create a trap creator"
+  (fn [section]
+    (ap-each (area-selector section)
+             (do (section-trap section it (trap-type))
+                 (section-floor section it (.choice rng trap-tiles))))))
