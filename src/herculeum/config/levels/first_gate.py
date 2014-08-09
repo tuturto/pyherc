@@ -242,30 +242,12 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                         rng),
                                           ['first gate'])]
 
-    room_generators = [CacheRoomGenerator(tile_floor,
-                                          tile_floor,
-                                          cache_creator('crypt_floor',
-                                                        item_generator,
-                                                        rng),
-                                          ['first gate'])]
-
-    room_generators = [square_room(tile_floor, tile_floor, rng),
-                       circular_room(tile_floor, tile_floor, rng)]
-        
-    room_generators = [square_graveyard(tile_floor, tile_floor,
-                                        [tomb_1, tomb_2], 
-                                        mundane_items(0, item_generator, rng),
-                                        skeletons(50, creature_generator, rng),
-                                        rng),
-                       circular_graveyard(tile_floor, tile_floor,
-                                          [tomb_1, tomb_2],
-                                          mundane_items(0, item_generator,
-                                                        rng),
-                                          skeletons(50, creature_generator,
-                                                    rng),
-                                          rng)]
-
-    room_generators = [square_pitroom(tile_floor, tile_floor, 'brick_pit', rng)]
+    #rooms = room_configuration('first gate',
+    #                           square_room(tile_floor, tile_floor, rng),
+    #                           circular_room(tile_floor, tile_floor, rng))
+    
+    rooms = [square_room(tile_floor, tile_floor, rng),
+             circular_room(tile_floor, tile_floor, rng)]       
 
     level_partitioners = [GridPartitioner(['first gate'],
                                            4,
@@ -414,7 +396,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                  level_types = ['first gate'])
 
     config = (LevelConfiguration()
-                    .with_rooms(room_generators)
+                    .with_rooms(rooms)
                     .with_partitioners(level_partitioners)
                     .with_decorators(decorators)
                     .with_items(item_adders)
