@@ -52,7 +52,7 @@
   (let [[context (setup)]
         [level (:level context)]
         [section (:section context)]]
-    (add-columns section)
+    ((add-columns) section)
     (assert-that (section-data section :columns) (isnot (has-item #t(3 5))))
     (assert-that (section-data section :columns) (isnot (has-item #t(4 5))))
     (assert-that (section-data section :columns) (isnot (has-item #t(5 5))))))
@@ -62,7 +62,7 @@
   (let [[context (setup)]
         [level (:level context)]
         [section (:section context)]]
-    (add-columns section)
+    ((add-columns) section)
     (assert-that (free-around? section #t(3 4)) (is- (equal-to true)))
     (assert-that (free-around? section #t(3 5)) (is- (equal-to false)))))
 
