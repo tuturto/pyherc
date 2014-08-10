@@ -30,8 +30,21 @@
         [room-min-size #t(21 21)]
         [level (-> (LevelBuilder)
                    (.build))]
-        [partitioner (binary-space-partitioning level-size room-min-size random)]
+        [partitioner (binary-space-partitioning level-size
+                                                room-min-size
+                                                random)]
         [sections (partitioner level)]]
-    (assert-that sections (has-length 1))))
+    (assert-that (list sections) (has-length 1))))
   
-;; (defn binary-space-partitioning [level-size room-min-size rng]
+(defn test-partition-horizontally []
+  "wide and low section should be partitioned horizontally"
+  (let [[level-size #t(25 10)]
+        [room-min-size #t(10 10)]
+        [level (-> (LevelBuilder)
+                   (.build))]
+        [partitioner (binary-space-partitioning level-size
+                                                room-min-size
+                                                random)]
+        [sections (partitioner level)]]
+    (assert-that (list sections) (has-length 2))
+    (assert-that sections (are-not-overlapping))))

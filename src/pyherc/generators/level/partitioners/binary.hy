@@ -17,6 +17,7 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(require hy.contrib.anaphoric)
 (require pyherc.macros)
 
 (import [functools [partial]]
@@ -33,12 +34,26 @@
 
 (defn partition-section [level-size room-min-size rng section]
   "recursively partition a section"
-  (let [[split-directions (possible-splits level-size room-min-size section)]]
+  (let [[split-directions (possible-splits room-min-size section)]]
     (if (= (len split-directions) 0)
       [section]
-      (let [[direction (.choice rng split-directions)]]
-))))
+      (let [[direction (.choice rng split-directions)]
+            [new-sections (split-section section direction)]]
+        (ap-map (partition-section level-size
+                                   room-min-size
+                                   rng
+                                   it)
+                new-sections)))))
 
-(defn possible-splits [level-size room-min-size section]
+(defn possible-splits [room-min-size section]
   "produce list of possible ways to split a section"
+  (let [[directions []]]
+    (if (< (* 2 (first room-min-size)) (section-width section))
+      (.append directions :horizontal))
+    (if (< (* 2 (second room-min-size)) (section-height section))
+      (.append directions :vertical))
+    directions))
+
+(defn split-section [section direction]
+  "split section to a given direction"
   [])
