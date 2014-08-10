@@ -19,9 +19,8 @@
 
 (require pyherc.macros)
 
-(import [functools [partial]])
-
-(import [pyherc.generators.level.partitioners.section [new-section
+(import [functools [partial]]
+        [pyherc.generators.level.partitioners.section [new-section
                                                        section-width
                                                        section-height]])
 
