@@ -22,21 +22,23 @@
 """
 Package for customer pyHamcrest matchers used in testing
 """
+import hy
 
-from .map_connectivity import is_fully_accessible
-from .map_connectivity import located_in_room
-from .contains_creature import has_creature, is_in, is_not_in
+from .action import is_legal, is_illegal
 from .active_effects import has_effects, has_no_effects
 from .active_effects import has_effect
-from .items import does_have_item, does_not_have_item, has_damage
+from .attack_parameters import AttackActionParameterMatcher
+from .character import is_dead
+from .contains_creature import has_creature, is_in, is_not_in
 from .effect_collection import has_effect_handle, has_effect_handles
 from .event_listener import has_event_listener
 from .event import has_marked_for_redrawing
-from .character import is_dead
-from .inventory_parameters import DropActionParameterMatcher
 from .event_parameters import EventType
-from .path_finding import continuous_path
+from .inventory_parameters import DropActionParameterMatcher
 from .inventory import is_wearing, does_have
-from .attack_parameters import AttackActionParameterMatcher
-from .action import is_legal, is_illegal
+from .items import does_have_item, does_not_have_item, has_damage
+from .map_connectivity import is_fully_accessible
+from .map_connectivity import located_in_room
+from .path_finding import continuous_path
+from .sections import are_not_overlapping
 from .targeting import wall_target_at, void_target, void_target_at

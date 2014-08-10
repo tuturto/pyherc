@@ -22,7 +22,8 @@
 (import [random]
         [hamcrest [assert-that has-length]]
         [pyherc.generators.level.partitioners [binary-space-partitioning]]
-        [pyherc.test.builders [LevelBuilder]])
+        [pyherc.test.builders [LevelBuilder]]
+        [pyherc.test.matchers [are-not-overlapping]])
 
 (defn test-too-small-area-is-not-partitioned []
   "when section is too small, it should not be partitioned further"
