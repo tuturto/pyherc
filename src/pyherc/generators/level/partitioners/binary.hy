@@ -17,7 +17,29 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn binary-space-partitioning [level-size room-min-size room-max-size rng]
+(require pyherc.macros)
+
+(import [functools [partial]])
+
+(import [pyherc.generators.level.partitioners.section [new-section
+                                                       section-width
+                                                       section-height]])
+
+(defn binary-space-partitioning [level-size room-min-size rng]
   "create a new partitioner"
   (fn [level]
-    "partition a level"))
+    "partition a level"
+    (let [[section (new-section #t(0 0) level-size level rng)]]
+      (partition-section level-size room-min-size rng section))))
+
+(defn partition-section [level-size room-min-size rng section]
+  "recursively partition a section"
+  (let [[split-directions (possible-splits level-size room-min-size section)]]
+    (if (= (len split-directions) 0)
+      [section]
+      (let [[direction (.choice rng split-directions)]]
+))))
+
+(defn possible-splits [level-size room-min-size section]
+  "produce list of possible ways to split a section"
+  [])
