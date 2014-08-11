@@ -17,5 +17,21 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(import [hamcrest.core.base_matcher [BaseMatcher]])
+
+(defclass SectionOverLapMatcher [BaseMatcher]
+  [[--init-- (fn [self]
+               "default constructor"
+               (-> (super) (.--init--)))]
+   [-matches (fn [self item]
+               "check if given item matches"
+               false)]
+   [describe-to (fn [self description]
+                  "describe matcher"
+                  (.append description "unfinished matcher"))]
+   [describe-mismatch (fn [self item mismatch-description]
+                        "describe why item does not match"
+                        (.append mismatch-description "mismatch"))]])
+
 (defn are-not-overlapping []
-  (assert false))
+  (SectionOverLapMatcher))
