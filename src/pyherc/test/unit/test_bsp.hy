@@ -46,6 +46,6 @@
         [partitioner (binary-space-partitioning level-size
                                                 room-min-size
                                                 random)]
-        [sections (partitioner level)]]
-    (assert-that (list sections) (has-length 2))
+        [sections (list (partitioner level))]]
+    (assert-that sections (has-length 2))
     (assert-that sections (are-not-overlapping))))

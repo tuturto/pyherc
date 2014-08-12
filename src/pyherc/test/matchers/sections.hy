@@ -17,7 +17,11 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(import [hamcrest.core.base_matcher [BaseMatcher]])
+(require hy.contrib.anaphoric)
+(require pyherc.macros)
+
+(import [hamcrest.core.base_matcher [BaseMatcher]]
+        [pyherc.generators.level.partitioners [section-corners]])
 
 (defclass SectionOverLapMatcher [BaseMatcher]
   [[--init-- (fn [self]
@@ -25,13 +29,34 @@
                (-> (super) (.--init--)))]
    [-matches (fn [self item]
                "check if given item matches"
-               false)]
+               (not (ap-first (overlapping? it item) item)))]
    [describe-to (fn [self description]
                   "describe matcher"
                   (.append description "unfinished matcher"))]
    [describe-mismatch (fn [self item mismatch-description]
                         "describe why item does not match"
                         (.append mismatch-description "mismatch"))]])
+
+(defn overlapping? [section sections]
+  (ap-first (let [[another-section it]]
+              (and (!= section another-section)
+                   (ap-first (inside-section? it another-section)
+                             (all-corners section))))
+              sections))
+
+(defn inside-square? [point section]
+  "is given point inside of a section?"
+  (let [[#t(point₀ point₁) (section-corners section)]]
+    (and
+     (<= (x-coordinate point₀) (x-coordinate point) (x-coordinate point₁))
+     (<= (y-coordinate point₀) (y-coordinate point) (y-coordinate point₁)))))
+
+(defn all-corners [section]
+  "get list containing all corners of a section"
+  (let [[#t(corner₀ corner₁) (section-corners section)]]
+    [corner₀ corner₁
+     #t((x-coordinate corner₀) (y-coordinate corner₁))
+     #t((x-coordinate corner₁) (y-coordinate corner₀))]))
 
 (defn are-not-overlapping []
   (SectionOverLapMatcher))
