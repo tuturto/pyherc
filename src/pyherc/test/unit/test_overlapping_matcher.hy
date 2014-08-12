@@ -20,10 +20,10 @@
 (require pyherc.macros)
 
 (import [random]
-        [hamcrest [assert-that has-items]]
+        [hamcrest [assert-that has-items is- equal-to]]
         [pyherc.generators.level.partitioners [new-section]]
         [pyherc.test.builders [LevelBuilder]]
-        [pyherc.test.matchers.sections [all-corners]])
+        [pyherc.test.matchers.sections [all-corners inside-square?]])
 
 (defn test-all-corners-reported []
   "a section has 4 different corners"
@@ -32,3 +32,21 @@
         [corners (all-corners section)]]
     (assert-that corners (has-items #t(0 0) #t(10 10) #t(0 10) #t(10 0)))))
 
+(defn test-point-inside-square []
+  "test that points inside of a square are detected correctly"
+  (let [[level (-> (LevelBuilder) (.build))]
+        [section (new-section #t(0 0) #t(10 10) level random)]]
+    (assert-that (inside-square? #t(0 0) section) (is- (equal-to true)))
+    (assert-that (inside-square? #t(10 10) section) (is- (equal-to true)))
+    (assert-that (inside-square? #t(0 10) section) (is- (equal-to true)))
+    (assert-that (inside-square? #t(10 0) section) (is- (equal-to true)))
+    (assert-that (inside-square? #t(5 5) section) (is- (equal-to true)))))
+
+(defn test-point-outside-square []
+  "points outside of section should not reported being inside"
+  (let [[level (-> (LevelBuilder) (.build))]
+        [section (new-section #t(0 0) #t(10 10) level random)]]
+    (assert-that (inside-square? #t(5 -5) section) (is- (equal-to false)))
+    (assert-that (inside-square? #t(15 5) section) (is- (equal-to false)))
+    (assert-that (inside-square? #t(5 15) section) (is- (equal-to false)))
+    (assert-that (inside-square? #t(-5 5) section) (is- (equal-to false)))))
