@@ -23,7 +23,8 @@
         [hamcrest [assert-that has-items is- equal-to]]
         [pyherc.generators.level.partitioners [new-section]]
         [pyherc.test.builders [LevelBuilder]]
-        [pyherc.test.matchers.sections [all-corners inside-square?]])
+        [pyherc.test.matchers.sections [all-corners inside-square?
+                                        overlapping?]])
 
 (defn test-all-corners-reported []
   "a section has 4 different corners"
@@ -50,3 +51,12 @@
     (assert-that (inside-square? #t(15 5) section) (is- (equal-to false)))
     (assert-that (inside-square? #t(5 15) section) (is- (equal-to false)))
     (assert-that (inside-square? #t(-5 5) section) (is- (equal-to false)))))
+
+(defn test-overlapping-sections-are-detected []
+  "two overlapping sections are detected"
+  (let [[level (-> (LevelBuilder) (.build))]
+        [section₀ (new-section #t(0 0) #t(10 10) level random)]
+        [section₁ (new-section #t(8 0) #t(20 10) level random)]
+        [sections [section₀ section₁]]]
+    (assert-that (overlapping? section₀ sections) (is- (equal-to true)))))
+

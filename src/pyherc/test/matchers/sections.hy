@@ -29,7 +29,9 @@
                (-> (super) (.--init--)))]
    [-matches (fn [self item]
                "check if given item matches"
-               (not (ap-first (overlapping? it item) item)))]
+               (if (ap-first (overlapping? it item) item)
+                 false
+                 true))]
    [describe-to (fn [self description]
                   "describe matcher"
                   (.append description "unfinished matcher"))]
@@ -38,11 +40,13 @@
                         (.append mismatch-description "mismatch"))]])
 
 (defn overlapping? [section sections]
-  (ap-first (let [[another-section it]]
-              (and (!= section another-section)
-                   (ap-first (inside-section? it another-section)
-                             (all-corners section))))
-              sections))
+  (if (ap-first (let [[another-section it]]
+                  (and (!= section another-section)
+                       (ap-first (inside-square? it another-section)
+                                 (all-corners section))))
+                sections)
+    true
+    false))
 
 (defn inside-square? [point section]
   "is given point inside of a section?"
