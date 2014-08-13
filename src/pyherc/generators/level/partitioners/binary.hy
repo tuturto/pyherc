@@ -21,6 +21,7 @@
 (require pyherc.macros)
 
 (import [functools [partial]]
+        [itertools [chain]]
         [pyherc.generators.level.partitioners.section [new-section
                                                        left-edge right-edge
                                                        section-corners
@@ -42,11 +43,11 @@
       [section]
       (let [[direction (.choice rng split-directions)]
             [new-sections (split-section section direction room-min-size rng)]]
-        (ap-map (partition-section level-size
-                                   room-min-size
-                                   rng
-                                   it)
-                new-sections)))))
+        (.from-iterable chain (ap-map (partition-section level-size
+                                                         room-min-size
+                                                         rng
+                                                         it)               
+                                      new-sections))))))
 
 (defn possible-splits [room-min-size section]
   "produce list of possible ways to split a section"
@@ -59,21 +60,30 @@
 
 (defn split-section [section direction room-min-size rng]
   "split section to a given direction"
-  (cond [(= direction :horizontal)
-         (let [[level (section-level section)]
-               [corners (section-corners section)]
-               [cut-point (.randint rng
-                                    (+ (left-edge section) 
-                                       (first room-min-size))
-                                    (- (right-edge section) 
-                                       (first room-min-size)))]
-               [section₀ (new-section (first corners) 
-                                      #t(cut-point 
-                                         (y-coordinate (second corners)))
-                                      level rng)]
-               [section₁ (new-section #t(cut-point
-                                         (y-coordinate (first corners)))
-                                      (second corners)
-                                      level rng)]]
-           [section₀ section₁])]
-        [(= direction :vertical) result]))
+  (cond [(= direction :horizontal) (split-horizontally section 
+                                                       room-min-size 
+                                                       rng)]
+        [(= direction :vertical) (split-vertically section
+                                                   room-min-size
+                                                   rng)]))
+
+(defn split-horizontally [section room-min-size rng]
+  (let [[level (section-level section)]
+        [corners (section-corners section)]
+        [cut-point (.randint rng
+                             (+ (left-edge section) 
+                                (first room-min-size))
+                             (- (right-edge section) 
+                                (first room-min-size)))]
+        [section₀ (new-section (first corners) 
+                               #t(cut-point 
+                                  (y-coordinate (second corners)))
+                               level rng)]
+        [section₁ (new-section #t((+ cut-point 1)
+                                  (y-coordinate (first corners)))
+                               (second corners)
+                               level rng)]]
+    [section₀ section₁]))
+
+(defn split-vertically [section room-min-size rng]
+  (assert false))

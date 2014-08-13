@@ -34,10 +34,11 @@
                  true))]
    [describe-to (fn [self description]
                   "describe matcher"
-                  (.append description "unfinished matcher"))]
+                  (.append description "list of not overlapping sections"))]
    [describe-mismatch (fn [self item mismatch-description]
                         "describe why item does not match"
-                        (.append mismatch-description "mismatch"))]])
+                        (.append mismatch-description 
+                                 (describe-sections item)))]])
 
 (defn overlapping? [section sections]
   (if (ap-first (let [[another-section it]]
@@ -61,6 +62,10 @@
     [corner₀ corner₁
      #t((x-coordinate corner₀) (y-coordinate corner₁))
      #t((x-coordinate corner₁) (y-coordinate corner₀))]))
+
+(defn describe-sections [sections]
+  (.format "sections with corners: {0}"
+           (.join " " (ap-map (str (section-corners it)) sections)))) 
 
 (defn are-not-overlapping []
   (SectionOverLapMatcher))
