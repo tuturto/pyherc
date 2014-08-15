@@ -86,4 +86,19 @@
     [section₀ section₁]))
 
 (defn split-vertically [section room-min-size rng]
-  (assert false))
+  (let [[level (section-level section)]
+        [corners (section-corners section)]
+        [cut-point (.randint rng
+                             (+ (top-edge section) 
+                                (second room-min-size))
+                             (- (bottom-edge section) 
+                                (second room-min-size)))]
+        [section₀ (new-section (first corners) 
+                               #t((x-coordinate (second corners))
+                                  cut-point)
+                               level rng)]
+        [section₁ (new-section #t((x-coordinate (first corners))
+                                  (+ cut-point 1))
+                               (second corners)
+                               level rng)]]
+    [section₀ section₁]))
