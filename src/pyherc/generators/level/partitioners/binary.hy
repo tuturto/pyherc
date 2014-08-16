@@ -68,14 +68,18 @@
                                                    room-min-size
                                                    rng)]))
 
+(defn random-cut-point [start end size rng]
+  "select a random point between start and end, while leaving enough
+   space for size in the middle"
+  (.randint rng (+ start size) (- end size)))
+
 (defn split-horizontally [section room-min-size rng]
   (let [[level (section-level section)]
         [corners (section-corners section)]
-        [cut-point (.randint rng
-                             (+ (left-edge section) 
-                                (first room-min-size))
-                             (- (right-edge section) 
-                                (first room-min-size)))]
+        [cut-point (random-cut-point (left-edge section)
+                                     (right-edge section)
+                                     (first room-min-size)
+                                     rng)]        
         [section₀ (new-section (first corners) 
                                #t(cut-point 
                                   (y-coordinate (second corners)))
@@ -89,11 +93,10 @@
 (defn split-vertically [section room-min-size rng]
   (let [[level (section-level section)]
         [corners (section-corners section)]
-        [cut-point (.randint rng
-                             (+ (top-edge section) 
-                                (second room-min-size))
-                             (- (bottom-edge section) 
-                                (second room-min-size)))]
+        [cut-point (random-cut-point (top-edge section)
+                                     (bottom-edge section)
+                                     (second room-min-size)
+                                     rng)]        
         [section₀ (new-section (first corners) 
                                #t((x-coordinate (second corners))
                                   cut-point)
