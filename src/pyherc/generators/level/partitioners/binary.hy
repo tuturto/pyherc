@@ -24,6 +24,7 @@
         [itertools [chain]]
         [pyherc.generators.level.partitioners.section [new-section
                                                        left-edge right-edge
+                                                       top-edge bottom-edge
                                                        section-corners
                                                        section-level
                                                        section-width

@@ -49,3 +49,29 @@
         [sections (list (partitioner level))]]
     (assert-that sections (has-length 2))
     (assert-that sections (are-not-overlapping))))
+
+(defn test-partition-vertically []
+  "high and and narrow section should be partitioned vertically"
+  (let [[level-size #t(10 25)]
+        [room-min-size #t(10 10)]
+        [level (-> (LevelBuilder)
+                   (.build))]
+        [partitioner (binary-space-partitioning level-size
+                                                room-min-size
+                                                random)]
+        [sections (list (partitioner level))]]
+    (assert-that sections (has-length 2))
+    (assert-that sections (are-not-overlapping))))
+
+(defn test-partition-multiple []
+  "large section should have partitions both directions"
+  (let [[level-size #t(25 25)]
+        [room-min-size #t(10 10)]
+        [level (-> (LevelBuilder)
+                   (.build))]
+        [partitioner (binary-space-partitioning level-size
+                                                room-min-size
+                                                random)]
+        [sections (list (partitioner level))]]
+    (assert-that sections (has-length 4))
+    (assert-that sections (are-not-overlapping))))
