@@ -148,6 +148,10 @@
   "get sections next to this one"
   (genexpr sec [sec (:neighbours section)]))
 
+(defn mark-all-neighbours [sections]
+  "process list of sections and mark all neighbours"
+  pass)
+
 (defn mark-neighbours [section neighbour]
   "mark two sections as neighbours"
   (.append (:neighbours section) neighbour)
