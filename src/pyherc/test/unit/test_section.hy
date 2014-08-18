@@ -31,6 +31,7 @@
                                                section-connections
                                                room-connections
                                                mark-neighbours
+                                               mark-all-neighbours
                                                unconnected-neighbours?
                                                section-border common-border
                                                opposing-point
@@ -249,3 +250,13 @@
     (section-wall section #t(3 2) :wall-ground nil)
     (assert-that (wall-tile level #t(8 7))
                  (is- (equal-to :wall-ground)))))
+
+(defn test-marking-neighbours []
+  "test that list of sections can be marked neighbours"
+  (let [[level (-> (LevelBuilder)
+                   (.build))]
+        [section₀ (new-section #t(0 0) #t(10 15) level random)]
+        [section₁ (new-section #t(11 0) #t(20 15) level random)]
+        [section₂ (new-section #t(21 0) #t(30 15) level random)]]
+    (mark-all-neighbours [section₀ section₁ section₂])
+))

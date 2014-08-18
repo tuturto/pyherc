@@ -150,7 +150,7 @@
 
 (defn mark-all-neighbours [sections]
   "process list of sections and mark all neighbours"
-  pass)
+  (assert false))
 
 (defn mark-neighbours [section neighbour]
   "mark two sections as neighbours"
