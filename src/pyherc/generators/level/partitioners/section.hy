@@ -150,7 +150,12 @@
 
 (defn mark-all-neighbours [sections]
   "process list of sections and mark all neighbours"
-  (assert false))
+  (for [#t(id₀ section₀) (enumerate sections)]
+    (for [#t(id₁ section₁) (enumerate sections)]
+      (when (and (!= id₀ id₁)
+                 (not (in section₀ (neighbour-sections section₁)))
+                 (>= (len (list (common-border section₀ section₁))) 1))
+        (mark-neighbours section₀ section₁)))))
 
 (defn mark-neighbours [section neighbour]
   "mark two sections as neighbours"
