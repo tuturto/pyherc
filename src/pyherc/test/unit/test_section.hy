@@ -32,6 +32,7 @@
                                                room-connections
                                                mark-neighbours
                                                mark-all-neighbours
+                                               neighbour-sections
                                                unconnected-neighbours?
                                                section-border common-border
                                                opposing-point
@@ -259,4 +260,11 @@
         [section₁ (new-section #t(11 0) #t(20 15) level random)]
         [section₂ (new-section #t(21 0) #t(30 15) level random)]]
     (mark-all-neighbours [section₀ section₁ section₂])
-))
+    (assert-that (len (list (neighbour-sections section₀)))
+                 (is- (equal-to 1)))
+    (assert-that (neighbour-sections section₀)
+                 (contains-inanyorder section₁))
+    (assert-that (neighbour-sections section₁)
+                 (contains-inanyorder section₀ section₂))
+    (assert-that (neighbour-sections section₂)
+                 (contains-inanyorder section₁))))
