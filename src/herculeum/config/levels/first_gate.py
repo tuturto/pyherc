@@ -194,7 +194,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     tomb_8 = surface_manager.add_icon('tomb 8', ':tomb_8.png', '|')
     tomb_9 = surface_manager.add_icon('tomb 9', ':tomb_9.png', '|')
 
-    room_generators = [SquareRoomGenerator(tile_floor,
+    rooms = [SquareRoomGenerator(tile_floor,
                                            wall_empty,
                                            tile_floor,
                                            ['first gate']),
@@ -247,7 +247,18 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     #                           circular_room(tile_floor, tile_floor, rng))
     
     rooms = [square_room(tile_floor, tile_floor, rng),
-             circular_room(tile_floor, tile_floor, rng)]       
+             circular_room(tile_floor, tile_floor, rng),
+             circular_graveyard(tile_floor, tile_floor,
+                                [tomb_1, tomb_2, tomb_3, tomb_4, tomb_5,
+                                 tomb_6, tomb_7, tomb_8, tomb_9],
+                                mundane_items(50, item_generator, rng), 
+                                skeletons(50, creature_generator, rng), rng),
+             square_graveyard(tile_floor, tile_floor,
+                              [tomb_1, tomb_2, tomb_3, tomb_4, tomb_5,
+                               tomb_6, tomb_7, tomb_8, tomb_9],
+                              mundane_items(50, item_generator, rng), 
+                              skeletons(50, creature_generator, rng), rng)
+            ]
 
     level_partitioners = [GridPartitioner(['first gate'],
                                            4,

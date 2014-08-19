@@ -28,6 +28,7 @@ from pyherc.data import new_level, Portal, add_portal, get_locations_by_tag
 from pyherc.data import wall_tile
 
 from pyherc.generators.level.partitioners.binary import binary_space_partitioning
+from pyherc.generators.level.partitioners.grid import RandomConnector
 
 class LevelGeneratorFactory():
     """
@@ -212,10 +213,12 @@ class LevelGenerator():
         wall_tile(level, (0, 0), self.level_context.wall_type)
         wall_tile(level, self.level_context.size, self.level_context.wall_type)
 
-        partitioner = binary_space_partitioning((80, 25), 
-                                                (10, 10),
+        partitioner = binary_space_partitioning((80, 40), 
+                                                (9, 9),
                                                  self.random_generator)
-        sections = partitioner(level)
+        # sections = partitioner(level)
+        connector = RandomConnector(self.random_generator)
+        sections = connector.connect_sections(partitioner(level))
         # sections = self.partitioner.partition_level(level)
 
         for section in sections:
