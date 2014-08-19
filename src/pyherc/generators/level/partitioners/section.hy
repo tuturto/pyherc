@@ -33,6 +33,14 @@
    :data {}
    :random-generator random-generator})
 
+(defn equal-sections? [section1 section2]
+  "two sections are considered equal when they occupy the same area"
+  (= (section-corners section1) (section-corners section2)))
+
+(defn section-in? [section sections]
+  "check if given section is in a list of sections"
+  (any (ap-map (equal-sections? section it) sections)))
+
 (defn section-data [section key &optional [value :no-data]]
   "get/set section custom data"
   (when (!= value :no-data)
@@ -153,7 +161,7 @@
   (for [#t(id₀ section₀) (enumerate sections)]
     (for [#t(id₁ section₁) (enumerate sections)]
       (when (and (!= id₀ id₁)
-                 (not (in section₀ (neighbour-sections section₁)))
+                 (not (section-in? section₀ (neighbour-sections section₁)))
                  (>= (len (list (common-border section₀ section₁))) 1))
         (mark-neighbours section₀ section₁)))))
 

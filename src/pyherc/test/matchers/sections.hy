@@ -21,7 +21,8 @@
 (require pyherc.macros)
 
 (import [hamcrest.core.base_matcher [BaseMatcher]]
-        [pyherc.generators.level.partitioners [section-corners]])
+        [pyherc.generators.level.partitioners [section-corners
+                                               equal-sections?]])
 
 (defclass SectionOverLapMatcher [BaseMatcher]
   [[--init-- (fn [self]
@@ -42,7 +43,7 @@
 
 (defn overlapping? [section sections]
   (any (ap-map (let [[another-section it]]
-                 (and (!= section another-section)
+                 (and (not (equal-sections? section another-section))
                       (any (ap-map (inside-square? it
                                                    another-section)
                                    (all-corners section)))))

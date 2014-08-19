@@ -28,14 +28,21 @@
                                                        section-corners
                                                        section-level
                                                        section-width
-                                                       section-height]])
+                                                       section-height
+                                                       mark-all-neighbours]])
 
 (defn binary-space-partitioning [level-size room-min-size rng]
   "create a new partitioner"
   (fn [level]
     "partition a level"
-    (let [[section (new-section #t(0 0) level-size level rng)]]
-      (partition-section level-size room-min-size rng section))))
+    (let [[section (new-section #t(0 0) level-size level rng)]
+          [sections (list (partition-section level-size 
+                                             room-min-size 
+                                             rng 
+                                             section))]]
+      (mark-all-neighbours sections)
+      sections
+      )))
 
 (defn partition-section [level-size room-min-size rng section]
   "recursively partition a section"
