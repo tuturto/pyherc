@@ -162,8 +162,33 @@
   (for [#t(id₀ section₀) (enumerate sections)]
     (for [#t(id₁ section₁) (enumerate sections)]
       (when (and (> id₁ id₀)
-                 (>= (len (list (common-border section₀ section₁))) 1))
+                 (adjacent-sections? section₀ section₁))
         (mark-neighbours section₀ section₁)))))
+
+(defn adjacent-sections? [section another-section]
+  "check if two sections are adjacent to each other"
+  (let [[#t(corner₀₀ corner₀₁) (section-corners section)]
+        [#t(corner₁₀ corner₁₁) (section-corners another-section)]]
+    (or (and (or (= (- (x-coordinate corner₀₀)
+                       (x-coordinate corner₁₁)) 1)
+                 (= (- (x-coordinate corner₁₀)
+                       (x-coordinate corner₀₁)) 1))
+             (or (<= (y-coordinate corner₀₀)
+                     (y-coordinate corner₁₀)
+                     (y-coordinate corner₀₁))
+                 (<= (y-coordinate corner₀₀)
+                     (y-coordinate corner₁₁)
+                     (y-coordinate corner₀₁))))
+        (and (or (= (- (y-coordinate corner₁₀)
+                       (y-coordinate corner₀₁)) 1)
+                 (= (- (y-coordinate corner₀₀)
+                       (y-coordinate corner₁₁)) 1))
+             (or (<= (x-coordinate corner₀₀)
+                     (x-coordinate corner₁₀)
+                     (x-coordinate corner₀₁))
+                 (<= (x-coordinate corner₀₀)
+                     (x-coordinate corner₁₁)
+                     (x-coordinate corner₀₁)))))))
 
 (defn mark-neighbours [section neighbour]
   "mark two sections as neighbours"
