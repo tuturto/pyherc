@@ -169,8 +169,8 @@
   "check if two sections are adjacent to each other"
   (let [[#t(corner₀₀ corner₀₁) (section-corners section)]
         [#t(corner₁₀ corner₁₁) (section-corners another-section)]]
-    (or (and (or (= (- (x-coordinate corner₀₀)
-                       (x-coordinate corner₁₁)) 1)
+    (or (and (or (= (- (x-coordinate corner₁₁)
+                       (x-coordinate corner₀₀)) 1)
                  (= (- (x-coordinate corner₁₀)
                        (x-coordinate corner₀₁)) 1))
              (or (<= (y-coordinate corner₀₀)
