@@ -26,6 +26,7 @@
 (defn new-section [corner0 corner1 level random-generator]
   "create a new section"
   {:corners [corner0 corner1]
+   :border nil
    :level level
    :connections []
    :room-connections []
@@ -180,13 +181,17 @@
 
 (defn section-border [section]
   "get border locations of a section"
-  (let [[#t(corner₀ corner₁) (section-corners section)]]
-    (for [loc (range (+ (x-coordinate corner₀) 1) (x-coordinate corner₁))]
-      (do (yield #t(loc (y-coordinate corner₀) "down"))
-          (yield #t(loc (y-coordinate corner₁) "up"))))
-    (for [loc (range (+ (y-coordinate corner₀) 1) (y-coordinate corner₁))]
-      (do (yield #t((x-coordinate corner₀) loc "right"))
-          (yield #t((x-coordinate corner₁) loc "left"))))))
+  (when (not (:border section))
+    (let [[#t(corner₀ corner₁) (section-corners section)]
+          [temp-border []]]
+      (for [loc (range (+ (x-coordinate corner₀) 1) (x-coordinate corner₁))]
+        (do (.append temp-border #t(loc (y-coordinate corner₀) "down"))
+            (.append temp-border #t(loc (y-coordinate corner₁) "up"))))
+      (for [loc (range (+ (y-coordinate corner₀) 1) (y-coordinate corner₁))]
+        (do (.append temp-border #t((x-coordinate corner₀) loc "right"))
+            (.append temp-border #t((x-coordinate corner₁) loc "left"))))
+      (assoc section :border temp-border)))
+  (:border section))
 
 (defn common-border [section neighbour]
   "get common border between two sections"
