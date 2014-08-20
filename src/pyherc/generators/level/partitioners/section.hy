@@ -161,8 +161,7 @@
   "process list of sections and mark all neighbours"
   (for [#t(id₀ section₀) (enumerate sections)]
     (for [#t(id₁ section₁) (enumerate sections)]
-      (when (and (!= id₀ id₁)
-                 (not (section-in? section₀ (neighbour-sections section₁)))
+      (when (and (> id₁ id₀)
                  (>= (len (list (common-border section₀ section₁))) 1))
         (mark-neighbours section₀ section₁)))))
 
