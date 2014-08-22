@@ -24,7 +24,7 @@ Package for level partitioners and related classes
 """
 
 from .binary import binary_space_partitioning
-from .grid import GridPartitioner, RandomConnector
+from .grid import RandomConnector, GridPartitioner
 from .section import section_corners, section_width, section_height
 from .section import left_edge, right_edge, top_edge, bottom_edge
 from .section import section_to_map, section_floor, section_wall
@@ -41,4 +41,4 @@ from .section import mark_all_neighbours, is_equal_sections, is_section_in
 from .section import Connection
 from .section import new_section
 from .section import connected_left, connected_right, connected_up
-from .section import connected_down
+from .section import connected_down, is_adjacent_sections

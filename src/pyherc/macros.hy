@@ -27,3 +27,5 @@
     `(let [[~counter 0]]
       (ap-each ~seq (setv ~counter (+ 1 ~counter)))
       ~counter)))
+
+(defmacro ylet [&rest args] `(yield-from (let ~@args)))

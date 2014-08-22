@@ -21,7 +21,7 @@
 
 (import random
         [hamcrest [assert-that contains-inanyorder equal-to has-items
-                   has-length is- has-item is-not :as -is-not]]        
+                   has-length is- has-item is-not :as -is-not]]
         [pyherc.test.builders [LevelBuilder]]
         [pyherc.data [floor-tile wall-tile get-location-tags]]
         [pyherc.generators.level.partitioners.section [new-section]]
@@ -38,7 +38,8 @@
                                                opposing-point
                                                add-room-connection
                                                match-section-to-room
-                                               connect-sections]])
+                                               connect-sections
+                                               adjacent-sections?]])
 
 
 (defn setup-calculation []
@@ -266,3 +267,28 @@
                  (contains-inanyorder section₀ section₂))
     (assert-that (neighbour-sections section₂)
                  (contains-inanyorder section₁))))
+
+(defn test-adjacent-sections []
+  (ylet [[level (-> (LevelBuilder)
+                    (.build))]
+         [section (new-section #t(10 10) #t(13 13) level random)]
+         [check (fn [a b] (assert-that (adjacent-sections? a b)
+                                       (equal-to true)))]]
+        (for [x (range 7 14)]
+          (yield #t(check section (new-section #t(x 0)
+                                               #t((+ x 3) 9)
+                                               level
+                                               random)))
+          (yield #t(check section (new-section #t(x 14)
+                                               #t((+ x 3) 18)
+                                               level
+                                               random))))
+        (for [y (range 7 14)]
+          (yield #t(check section (new-section #t(0 y)
+                                               #t(9 (+ y 3))
+                                               level
+                                               random)))
+          (yield #t(check section (new-section #t(14 y)
+                                               #t(18 (+ y 3))
+                                               level
+                                               random))))))

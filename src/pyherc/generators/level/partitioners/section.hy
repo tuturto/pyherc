@@ -23,16 +23,21 @@
 (import [pyherc.data [add-location-tag add-trap floor-tile wall-tile
                       ornamentation distance-between get-location-tags]])
 
+(defclass Section [dict]
+  [[--repr-- (fn [self] (str (:corners self)))]])
+
 (defn new-section [corner0 corner1 level random-generator]
   "create a new section"
-  {:corners [corner0 corner1]
-   :border nil
-   :level level
-   :connections []
-   :room-connections []
-   :neighbours []
-   :data {}
-   :random-generator random-generator})
+  (let [[temp (Section)]]
+    (assoc temp :corners [corner0 corner1])
+    (assoc temp :border nil)
+    (assoc temp :level level)
+    (assoc temp :connections [])
+    (assoc temp :room-connections [])
+    (assoc temp :neighbours [])
+    (assoc temp :data {})
+    (assoc temp :random-generator random-generator)
+    temp))
 
 (defn equal-sections? [section1 section2]
   "two sections are considered equal when they occupy the same area"
@@ -169,20 +174,20 @@
   "check if two sections are adjacent to each other"
   (let [[#t(corner₀₀ corner₀₁) (section-corners section)]
         [#t(corner₁₀ corner₁₁) (section-corners another-section)]]
-    (or (and (or (= (- (x-coordinate corner₁₁)
-                       (x-coordinate corner₀₀)) 1)
-                 (= (- (x-coordinate corner₁₀)
-                       (x-coordinate corner₀₁)) 1))
+    (or (and (or (= (abs (- (x-coordinate corner₁₁)
+                            (x-coordinate corner₀₀))) 1)
+                 (= (abs (- (x-coordinate corner₁₀)
+                            (x-coordinate corner₀₁))) 1))
              (or (<= (y-coordinate corner₀₀)
                      (y-coordinate corner₁₀)
                      (y-coordinate corner₀₁))
                  (<= (y-coordinate corner₀₀)
                      (y-coordinate corner₁₁)
                      (y-coordinate corner₀₁))))
-        (and (or (= (- (y-coordinate corner₁₀)
-                       (y-coordinate corner₀₁)) 1)
-                 (= (- (y-coordinate corner₀₀)
-                       (y-coordinate corner₁₁)) 1))
+        (and (or (= (abs (- (y-coordinate corner₁₀)
+                            (y-coordinate corner₀₁))) 1)
+                 (= (abs (- (y-coordinate corner₀₀)
+                            (y-coordinate corner₁₁))) 1))
              (or (<= (x-coordinate corner₀₀)
                      (x-coordinate corner₁₀)
                      (x-coordinate corner₀₁))

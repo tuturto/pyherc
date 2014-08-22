@@ -68,9 +68,13 @@ class LevelGeneratorFactory():
         :returns: configured level generator
         :rtype: LevelGenerator
         """
-        partitioner = self.get_sub_component(level_type,
-                                             self.level_partitioners,
-                                             'partitioner')
+        #partitioner = self.get_sub_component(level_type,
+        #                                     self.level_partitioners,
+        #                                     'partitioner')
+
+        partitioner = binary_space_partitioning((80, 40), 
+                                                (9, 9),
+                                                 self.random_generator)
 
         #rooms = self.get_sub_components(level_type,
         #                                self.room_generators,
@@ -209,17 +213,12 @@ class LevelGenerator():
         """
         level = new_level(self.model)
 
-        #TODO: remove when new sections have been implemented
-        wall_tile(level, (0, 0), self.level_context.wall_type)
-        wall_tile(level, self.level_context.size, self.level_context.wall_type)
-
         partitioner = binary_space_partitioning((80, 40), 
                                                 (9, 9),
-                                                 self.random_generator)
-        # sections = partitioner(level)
+                                                self.random_generator)
+
         connector = RandomConnector(self.random_generator)
         sections = connector.connect_sections(partitioner(level))
-        # sections = self.partitioner.partition_level(level)
 
         for section in sections:
             generator = self.random_generator.choice(self.room_generators)
