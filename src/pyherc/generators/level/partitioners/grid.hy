@@ -17,20 +17,22 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(require pyherc.macros)
+
+(import [pyherc.generators.level.partitioners.section [new-section]])
 
 (defn grid-partitioning [room-size horizontal-repeats vertical-repeats rng]
   "create a new partitioner"
   (fn [level]
-    "partition a level"
-    (let [[sections (list (partition-secttion level
-                                              room-size
-                                              horizontal-repeats
-                                              vertical-repeats
-                                              rng))]]
+    "partition a level"    
+    (let [[sections []]
+          [#t(width height) room-size]] 
+      (for [x (range horizontal-repeats)]
+        (for [y (range vertical-repeats)]
+          (.append sections 
+                   (new-section #t((* width x) (* height y)) 
+                                #t((* width (+ x 1)) (* height (+ y 1))) 
+                                level 
+                                rng))))
       (mark-all-neighbours sections)
       sections)))
-
-(defn partition-section [level room-size horizontal-repeats vertical-repeats
-                         rng]
-  []
-  )
