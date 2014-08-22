@@ -269,6 +269,7 @@
                  (contains-inanyorder section₁))))
 
 (defn test-adjacent-sections []
+  "adjacent sections should be detected"
   (ylet [[level (-> (LevelBuilder)
                     (.build))]
          [section (new-section #t(10 10) #t(13 13) level random)]
@@ -289,6 +290,32 @@
                                                level
                                                random)))
           (yield #t(check section (new-section #t(14 y)
+                                               #t(18 (+ y 3))
+                                               level
+                                               random))))))
+
+(defn test-non-adjacent-sections []
+  "non-adjacent sections should not be marked as adjacent"
+  (ylet [[level (-> (LevelBuilder)
+                    (.build))]
+         [section (new-section #t(10 10) #t(13 13) level random)]
+         [check (fn [a b] (assert-that (adjacent-sections? a b)
+                                       (equal-to false)))]]
+        (for [x (range 4 18)]
+          (yield #t(check section (new-section #t(x 0)
+                                               #t((+ x 3) 8)
+                                               level
+                                               random)))
+          (yield #t(check section (new-section #t(x 15)
+                                               #t((+ x 3) 18)
+                                               level
+                                               random))))
+        (for [y (range 4 18)]
+          (yield #t(check section (new-section #t(0 y)
+                                               #t(8 (+ y 3))
+                                               level
+                                               random)))
+          (yield #t(check section (new-section #t(15 y)
                                                #t(18 (+ y 3))
                                                level
                                                random))))))
