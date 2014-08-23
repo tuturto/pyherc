@@ -91,12 +91,6 @@ class RandomConnector():
             else:
                 break
 
-        duds = [x for x in sections
-                if not is_connected(x)]
-
-        for dud in duds:
-            sections.remove(dud)
-
         return sections
 
 
