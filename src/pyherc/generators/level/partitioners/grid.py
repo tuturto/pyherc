@@ -28,7 +28,10 @@ from pyherc.generators.level.partitioners.section import (is_connected,
                                                           unconnected_neighbours,
                                                           is_unconnected_neighbours,
                                                           mark_neighbours,
-                                                          connect_sections)
+                                                          connect_sections,
+                                                          neighbour_sections,
+                                                          is_section_in,
+                                                          section_connections)
 from pyherc.generators.level.partitioners.section import new_section
 from pyherc.data import level_size
 
@@ -58,50 +61,37 @@ class RandomConnector():
         :param start_section: optional parameter specifying starting section
         :type start_section: Section
         """
+        rng = self.random_generator
+
         if not start_section:
-            start_location = self.random_generator.choice(sections)
+            current_section = rng.choice(sections)
         else:
-            start_location = start_section
+            current_section = start_section
 
-        self.form_path_from_sections(start_location, sections)
+        path = [current_section]
 
-        if len(sections) > 1:
-            unconnected = [x for x in sections
-                           if not is_connected(x)]
+        while True:
+            possible_neighbours = list(unconnected_neighbours(current_section))
 
-            while len(unconnected) > 0:
-                edge_sections = [x for x in sections
-                                 if is_connected(x)
-                                 and is_unconnected_neighbours(x)]
+            while possible_neighbours:
 
-                start_location = self.random_generator.choice(edge_sections)
+                new_section = rng.choice(possible_neighbours)
 
-                self.form_path_from_sections(start_location, sections)
+                connect_sections(current_section, new_section)
+                current_section = new_section
+                path.append(current_section)
 
-                unconnected = [x for x in sections
-                               if not is_connected(x)]
+                possible_neighbours = list(unconnected_neighbours(current_section))
+                
+            branches = [x for x in path
+                        if len(list(unconnected_neighbours(x))) > 0]
+
+            if branches:
+                current_section = rng.choice(branches)
+            else:
+                break
 
         return sections
-
-    @log_debug
-    def form_path_from_sections(self, start_section, sections):
-        """
-        Builds path of connected sections
-
-        :param start_section: section to start connecting from
-        :type start_section: Section
-        :param sections: sections to connect
-        :type sections: [Section]
-        """
-        current_section = start_section
-
-        while is_unconnected_neighbours(current_section):
-            next_section = self.random_generator.choice(
-                list(unconnected_neighbours(current_section)))
-
-            connect_sections(current_section, next_section)
-
-            current_section = next_section
 
 
 class GridPartitioner():
