@@ -143,29 +143,29 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     pillar = surface_manager.add_icon('pillar', ':pillar.png', '#')
 
-    wall_15 = surface_manager.add_icon('catacombs_wall_15',
-                                       ':catacombs_wall_2_8.png', '#')
-    wall_57 = surface_manager.add_icon('catacombs_wall_57',
-                                       ':catacombs_wall_2_4.png', '#')
-    wall_35 = surface_manager.add_icon('catacombs_wall_35',
-                                       ':catacombs_wall_2_6.png', '#')
-    wall_37 = surface_manager.add_icon('catacombs_wall_37',
-                                       ':catacombs_wall_4_6.png', '#')
-    wall_17 = surface_manager.add_icon('catacombs_wall_17',
-                                       ':catacombs_wall_8_4.png', '#')
-    wall_13 = surface_manager.add_icon('catacombs_wall_13',
-                                       ':catacombs_wall_8_6.png', '#')
+    wall_15 = surface_manager.add_icon('wall_rubble6_15',
+                                       ':walls/wall_rubble6_15.png', '#')
+    wall_57 = surface_manager.add_icon('wall_rubble6_57',
+                                       ':walls/wall_rubble6_57.png', '#')
+    wall_35 = surface_manager.add_icon('wall_rubble6_35',
+                                       ':walls/wall_rubble6_35.png', '#')
+    wall_37 = surface_manager.add_icon('wall_rubble6_37',
+                                       ':walls/wall_rubble6_37.png', '#')
+    wall_17 = surface_manager.add_icon('wall_rubble6_17',
+                                       ':walls/wall_rubble6_17.png', '#')
+    wall_13 = surface_manager.add_icon('wall_rubble6_13',
+                                       ':walls/wall_rubble6_13.png', '#')
 
-    wall_135 = surface_manager.add_icon('catacombs_wall_135',
-                                        ':catacombs_wall_2_6_8.png', '#')
-    wall_357 = surface_manager.add_icon('catacombs_wall_357',
-                                        ':catacombs_wall_2_4_6.png', '#')
-    wall_1357 = surface_manager.add_icon('catacombs_wall_1357',
-                                         ':catacombs_wall_2_4_6_8.png', '#')
-    wall_137 = surface_manager.add_icon('catacombs_wall_137',
-                                        ':catacombs_wall_4_6_8.png', '#')
-    wall_157 = surface_manager.add_icon('catacombs_wall_157',
-                                        ':catacombs_wall_2_4_8.png', '#')
+    wall_135 = surface_manager.add_icon('wall_rubble6_135',
+                                        ':walls/wall_rubble6_135.png', '#')
+    wall_357 = surface_manager.add_icon('wall_rubble6_357',
+                                        ':walls/wall_rubble6_357.png', '#')
+    wall_1357 = surface_manager.add_icon('wall_rubble6_1357',
+                                         ':walls/wall_rubble6_1357.png', '#')
+    wall_137 = surface_manager.add_icon('wall_rubble6_137',
+                                        ':walls/wall_rubble6_137.png', '#')
+    wall_157 = surface_manager.add_icon('wall_rubble6_157',
+                                        ':walls/wall_rubble6_157.png', '#')
 
     altar = surface_manager.add_icon('altar', ':altar.png', '_')
     standing_candle_f0 = surface_manager.add_icon('standing candle f0',
@@ -286,38 +286,38 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
-    floor = surface_manager.add_icon('catacombs_floor',
-                                     ':catacombs_floor.png', ' ')
-    floor1 = surface_manager.add_icon('catacombs_floor_1',
-                                      ':catacombs_floor_1.png', ' ')
-    floor3 = surface_manager.add_icon('catacombs_floor_3',
-                                      ':catacombs_floor_3.png', ' ')
-    floor5 = surface_manager.add_icon('catacombs_floor_5',
-                                      ':catacombs_floor_5.png', ' ')
-    floor7 = surface_manager.add_icon('catacombs_floor_7',
-                                      ':catacombs_floor_7.png', ' ')
-    floor13 = surface_manager.add_icon('catacombs_floor_13',
-                                       ':catacombs_floor_13.png', ' ')
-    floor15 = surface_manager.add_icon('catacombs_floor_15',
-                                       ':catacombs_floor_15.png', ' ')
-    floor17 = surface_manager.add_icon('catacombs_floor_17',
-                                       ':catacombs_floor_17.png', ' ')
-    floor35 = surface_manager.add_icon('catacombs_floor_35',
-                                       ':catacombs_floor_35.png', ' ')
-    floor37 = surface_manager.add_icon('catacombs_floor_37',
-                                       ':catacombs_floor_37.png', ' ')
-    floor57 = surface_manager.add_icon('catacombs_floor_57',
-                                       ':catacombs_floor_57.png', ' ')
-    floor135 = surface_manager.add_icon('catacombs_floor_135',
-                                        ':catacombs_floor_135.png', ' ')
-    floor137 = surface_manager.add_icon('catacombs_floor_137',
-                                        ':catacombs_floor_137.png', ' ')
-    floor157 = surface_manager.add_icon('catacombs_floor_157',
-                                        ':catacombs_floor_157.png', ' ')
-    floor357 = surface_manager.add_icon('catacombs_floor_357',
-                                        ':catacombs_floor_357.png', ' ')
-    floor1357 = surface_manager.add_icon('catacombs_floor_1357',
-                                         ':catacombs_floor_1357.png', ' ')
+    floor = surface_manager.add_icon('ground_rock4',
+                                     ':ground/ground_rock4.png', ' ')
+    floor1 = surface_manager.add_icon('ground_rock4_1',
+                                      ':ground/ground_rock4_1.png', ' ')
+    floor3 = surface_manager.add_icon('ground_rock4_3',
+                                      ':ground/ground_rock4_3.png', ' ')
+    floor5 = surface_manager.add_icon('ground_rock4_5',
+                                      ':ground/ground_rock4_5.png', ' ')
+    floor7 = surface_manager.add_icon('ground_rock4_7',
+                                      ':ground/ground_rock4_7.png', ' ')
+    floor13 = surface_manager.add_icon('ground_rock4_13',
+                                       ':ground/ground_rock4_13.png', ' ')
+    floor15 = surface_manager.add_icon('ground_rock4_15',
+                                       ':ground/ground_rock4_15.png', ' ')
+    floor17 = surface_manager.add_icon('ground_rock4_17',
+                                       ':ground/ground_rock4_17.png', ' ')
+    floor35 = surface_manager.add_icon('ground_rock4_35',
+                                       ':ground/ground_rock4_35.png', ' ')
+    floor37 = surface_manager.add_icon('ground_rock4_37',
+                                       ':ground/ground_rock4_37.png', ' ')
+    floor57 = surface_manager.add_icon('ground_rock4_57',
+                                       ':ground/ground_rock4_57.png', ' ')
+    floor135 = surface_manager.add_icon('ground_rock4_135',
+                                        ':ground/ground_rock4_135.png', ' ')
+    floor137 = surface_manager.add_icon('ground_rock4_137',
+                                        ':ground/ground_rock4_137.png', ' ')
+    floor157 = surface_manager.add_icon('ground_rock4_157',
+                                        ':ground/ground_rock4_157.png', ' ')
+    floor357 = surface_manager.add_icon('ground_rock4_357',
+                                        ':ground/ground_rock4_357.png', ' ')
+    floor1357 = surface_manager.add_icon('ground_rock4_1357',
+                                         ':ground/ground_rock4_1357.png', ' ')
 
     floor_config = FloorBuilderDecoratorConfig([],
                                                single = floor,
