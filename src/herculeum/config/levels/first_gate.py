@@ -286,38 +286,38 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
-    floor = surface_manager.add_icon('ground_rock4',
-                                     ':ground/ground_rock4.png', ' ')
-    floor1 = surface_manager.add_icon('ground_rock4_1',
-                                      ':ground/ground_rock4_1.png', ' ')
-    floor3 = surface_manager.add_icon('ground_rock4_3',
-                                      ':ground/ground_rock4_3.png', ' ')
-    floor5 = surface_manager.add_icon('ground_rock4_5',
-                                      ':ground/ground_rock4_5.png', ' ')
-    floor7 = surface_manager.add_icon('ground_rock4_7',
-                                      ':ground/ground_rock4_7.png', ' ')
-    floor13 = surface_manager.add_icon('ground_rock4_13',
-                                       ':ground/ground_rock4_13.png', ' ')
-    floor15 = surface_manager.add_icon('ground_rock4_15',
-                                       ':ground/ground_rock4_15.png', ' ')
-    floor17 = surface_manager.add_icon('ground_rock4_17',
-                                       ':ground/ground_rock4_17.png', ' ')
-    floor35 = surface_manager.add_icon('ground_rock4_35',
-                                       ':ground/ground_rock4_35.png', ' ')
-    floor37 = surface_manager.add_icon('ground_rock4_37',
-                                       ':ground/ground_rock4_37.png', ' ')
-    floor57 = surface_manager.add_icon('ground_rock4_57',
-                                       ':ground/ground_rock4_57.png', ' ')
-    floor135 = surface_manager.add_icon('ground_rock4_135',
-                                        ':ground/ground_rock4_135.png', ' ')
-    floor137 = surface_manager.add_icon('ground_rock4_137',
-                                        ':ground/ground_rock4_137.png', ' ')
-    floor157 = surface_manager.add_icon('ground_rock4_157',
-                                        ':ground/ground_rock4_157.png', ' ')
-    floor357 = surface_manager.add_icon('ground_rock4_357',
-                                        ':ground/ground_rock4_357.png', ' ')
-    floor1357 = surface_manager.add_icon('ground_rock4_1357',
-                                         ':ground/ground_rock4_1357.png', ' ')
+    floor = surface_manager.add_icon('ground_soil4',
+                                     ':ground/ground_soil.png', ' ')
+    floor1 = surface_manager.add_icon('ground_soil4_1',
+                                      ':ground/ground_soil4_1.png', ' ')
+    floor3 = surface_manager.add_icon('ground_soil4_3',
+                                      ':ground/ground_soil4_3.png', ' ')
+    floor5 = surface_manager.add_icon('ground_soil4_5',
+                                      ':ground/ground_soil4_5.png', ' ')
+    floor7 = surface_manager.add_icon('ground_soil4_7',
+                                      ':ground/ground_soil4_7.png', ' ')
+    floor13 = surface_manager.add_icon('ground_soil4_13',
+                                       ':ground/ground_soil4_13.png', ' ')
+    floor15 = surface_manager.add_icon('ground_soil4_15',
+                                       ':ground/ground_soil4_15.png', ' ')
+    floor17 = surface_manager.add_icon('ground_soil4_17',
+                                       ':ground/ground_soil4_17.png', ' ')
+    floor35 = surface_manager.add_icon('ground_soil4_35',
+                                       ':ground/ground_soil4_35.png', ' ')
+    floor37 = surface_manager.add_icon('ground_soil4_37',
+                                       ':ground/ground_soil4_37.png', ' ')
+    floor57 = surface_manager.add_icon('ground_soil4_57',
+                                       ':ground/ground_soil4_57.png', ' ')
+    floor135 = surface_manager.add_icon('ground_soil4_135',
+                                        ':ground/ground_soil4_135.png', ' ')
+    floor137 = surface_manager.add_icon('ground_soil4_137',
+                                        ':ground/ground_soil4_137.png', ' ')
+    floor157 = surface_manager.add_icon('ground_soil4_157',
+                                        ':ground/ground_soil4_157.png', ' ')
+    floor357 = surface_manager.add_icon('ground_soil4_357',
+                                        ':ground/ground_soil4_357.png', ' ')
+    floor1357 = surface_manager.add_icon('ground_soil4_1357',
+                                         ':ground/ground_soil4_1357.png', ' ')
 
     floor_config = FloorBuilderDecoratorConfig([],
                                                single = floor,
