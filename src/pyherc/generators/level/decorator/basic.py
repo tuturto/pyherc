@@ -20,7 +20,9 @@
 """
 Module for basic decorators
 """
-from pyherc.data import floor_tile, wall_tile, ornamentation, get_tiles
+from pyherc.data import (floor_tile, wall_tile, ornamentation, get_tiles,
+                         get_tile)
+
 
 class Decorator():
     """
@@ -332,28 +334,28 @@ class DirectionalWallDecorator(Decorator):
         wall_tiles.extend(self.tiles.values())
 
         if wall_tile(level, (loc_x, loc_y - 1)) in self.configuration.tiles:
-            if not (wall_tile(level, (loc_x - 1, loc_y - 1)) in wall_tiles
-                    and wall_tile(level, (loc_x + 1, loc_y - 1)) in wall_tiles
-                    and wall_tile(level, (loc_x - 1, loc_y)) in wall_tiles
-                    and wall_tile(level, (loc_x + 1, loc_y)) in wall_tiles):
+            if not (is_wall(level, (loc_x - 1, loc_y - 1), wall_tiles)
+                    and is_wall(level, (loc_x + 1, loc_y - 1), wall_tiles)
+                    and is_wall(level, (loc_x - 1, loc_y), wall_tiles)
+                    and is_wall(level, (loc_x + 1, loc_y), wall_tiles)):
                 directions.append('1')
         if wall_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles:
-            if not (wall_tile(level, (loc_x + 1, loc_y - 1)) in wall_tiles
-                    and wall_tile(level, (loc_x + 1, loc_y + 1)) in wall_tiles
-                    and wall_tile(level, (loc_x, loc_y - 1)) in wall_tiles
-                    and wall_tile(level, (loc_x, loc_y + 1)) in wall_tiles):
+            if not (is_wall(level, (loc_x + 1, loc_y - 1), wall_tiles)
+                    and is_wall(level, (loc_x + 1, loc_y + 1), wall_tiles)
+                    and is_wall(level, (loc_x, loc_y - 1), wall_tiles)
+                    and is_wall(level, (loc_x, loc_y + 1), wall_tiles)):
                 directions.append('3')
         if wall_tile(level, (loc_x, loc_y + 1)) in self.configuration.tiles:
-            if not (wall_tile(level, (loc_x - 1, loc_y + 1)) in wall_tiles
-                    and wall_tile(level, (loc_x + 1, loc_y + 1)) in wall_tiles
-                    and wall_tile(level, (loc_x - 1, loc_y)) in wall_tiles
-                    and wall_tile(level, (loc_x + 1, loc_y)) in wall_tiles):
+            if not (is_wall(level, (loc_x - 1, loc_y + 1), wall_tiles)
+                    and is_wall(level, (loc_x + 1, loc_y + 1), wall_tiles)
+                    and is_wall(level, (loc_x - 1, loc_y), wall_tiles)
+                    and is_wall(level, (loc_x + 1, loc_y), wall_tiles)):
                 directions.append('5')
         if wall_tile(level, (loc_x - 1, loc_y)) in self.configuration.tiles:
-            if not (wall_tile(level, (loc_x - 1, loc_y - 1)) in wall_tiles
-                    and wall_tile(level, (loc_x - 1, loc_y + 1)) in wall_tiles
-                    and wall_tile(level, (loc_x, loc_y - 1)) in wall_tiles
-                    and wall_tile(level, (loc_x, loc_y + 1)) in wall_tiles):
+            if not (is_wall(level, (loc_x - 1, loc_y - 1), wall_tiles)
+                    and is_wall(level, (loc_x - 1, loc_y + 1), wall_tiles)
+                    and is_wall(level, (loc_x, loc_y - 1), wall_tiles)
+                    and is_wall(level, (loc_x, loc_y + 1), wall_tiles)):
                 directions.append('7')
 
         key = ''.join(directions)
@@ -363,6 +365,10 @@ class DirectionalWallDecorator(Decorator):
         else:
             return self.configuration.east_west
 
+def is_wall(level, location, wall_tiles):
+    "check if given location is considered as a wall"
+    return (get_tile(level, location) is None 
+            or wall_tile(level, location) in wall_tiles)
 
 class FloorBuilderDecoratorConfig(DecoratorConfig):
     """
