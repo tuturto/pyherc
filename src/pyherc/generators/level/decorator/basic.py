@@ -327,15 +327,34 @@ class DirectionalWallDecorator(Decorator):
 
         directions = []
         loc_x, loc_y = location
+        wall_tiles = []
+        wall_tiles.append(self.configuration.wall)
+        wall_tiles.extend(self.tiles.values())
 
         if wall_tile(level, (loc_x, loc_y - 1)) in self.configuration.tiles:
-            directions.append('1')
+            if not (wall_tile(level, (loc_x - 1, loc_y - 1)) in wall_tiles
+                    and wall_tile(level, (loc_x + 1, loc_y - 1)) in wall_tiles
+                    and wall_tile(level, (loc_x - 1, loc_y)) in wall_tiles
+                    and wall_tile(level, (loc_x + 1, loc_y)) in wall_tiles):
+                directions.append('1')
         if wall_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles:
-            directions.append('3')
+            if not (wall_tile(level, (loc_x + 1, loc_y - 1)) in wall_tiles
+                    and wall_tile(level, (loc_x + 1, loc_y + 1)) in wall_tiles
+                    and wall_tile(level, (loc_x, loc_y - 1)) in wall_tiles
+                    and wall_tile(level, (loc_x, loc_y + 1)) in wall_tiles):
+                directions.append('3')
         if wall_tile(level, (loc_x, loc_y + 1)) in self.configuration.tiles:
-            directions.append('5')
+            if not (wall_tile(level, (loc_x - 1, loc_y + 1)) in wall_tiles
+                    and wall_tile(level, (loc_x + 1, loc_y + 1)) in wall_tiles
+                    and wall_tile(level, (loc_x - 1, loc_y)) in wall_tiles
+                    and wall_tile(level, (loc_x + 1, loc_y)) in wall_tiles):
+                directions.append('5')
         if wall_tile(level, (loc_x - 1, loc_y)) in self.configuration.tiles:
-            directions.append('7')
+            if not (wall_tile(level, (loc_x - 1, loc_y - 1)) in wall_tiles
+                    and wall_tile(level, (loc_x - 1, loc_y + 1)) in wall_tiles
+                    and wall_tile(level, (loc_x, loc_y - 1)) in wall_tiles
+                    and wall_tile(level, (loc_x, loc_y + 1)) in wall_tiles):
+                directions.append('7')
 
         key = ''.join(directions)
 
