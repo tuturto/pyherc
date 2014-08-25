@@ -19,7 +19,8 @@
 
 (require pyherc.macros)
 
-(import [pyherc.generators.level.partitioners.section [new-section]])
+(import [pyherc.generators.level.partitioners.section [new-section
+                                                       mark-all-neighbours]])
 
 (defn grid-partitioning [room-size horizontal-repeats vertical-repeats rng]
   "create a new partitioner"

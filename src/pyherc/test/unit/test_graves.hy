@@ -28,7 +28,7 @@
         [pyherc.data.features [new-cache items-in-cache characters-in-cache]]
         [pyherc.generators [ItemGenerator ItemConfiguration ItemConfigurations
                             creature-config generate-creature]]
-        [pyherc.generators.level.partitioners [GridPartitioner]]
+        [pyherc.generators.level.partitioners [grid-partitioning]]
         [pyherc.generators.level.room [LibraryRoomGenerator]]
         [pyherc.test.builders [ActionFactoryBuilder LevelBuilder ItemBuilder
                                CharacterBuilder]]
@@ -75,8 +75,8 @@
                    (.with-wall-tile nil)
                    (.with-model model)
                    (.build))]
-        [partitioner (GridPartitioner ["test"] 2 1 (Random))]
-        [sections (.partition-level partitioner level)]
+        [partitioner (grid-partitioning #t(10 10) 2 1 (Random))]
+        [sections (partitioner level)]
         [item-generator (configure-items)]
         [character-generator (configure-characters model item-generator)]
         [generator (LibraryRoomGenerator :floor :corridor nil :grave 100 

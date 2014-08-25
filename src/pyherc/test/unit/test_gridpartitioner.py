@@ -27,8 +27,8 @@ from hamcrest import (assert_that, equal_to, greater_than, has_length, is_,
                       same_instance)
 from mockito import mock, when
 
-from pyherc.generators.level.partitioners.grid import (GridPartitioner,
-                                                       RandomConnector)
+from pyherc.generators.level.partitioners import (grid_partitioning,
+                                                  RandomConnector)
 from pyherc.generators.level.partitioners import (is_connected,
                                                   section_connections,
                                                   mark_neighbours,
@@ -57,21 +57,15 @@ class TestGridPartitioner:
                       .with_size((20, 20))
                       .build())
         self.rng = random.Random()
-        self.partitioner = GridPartitioner('crypt',
-                                           2,
-                                           1,
-                                           self.rng)
+        self.partitioner = grid_partitioning((20, 20), 2, 1, self.rng)
 
     def test_partitioning_returns_sections(self):
         """
         Test that partitioning level returns default amount of sections
         """
-        partitioner = GridPartitioner('crypt',
-                                      3,
-                                      3,
-                                      self.rng)
+        partitioner = grid_partitioning((20, 20), 3, 3, self.rng)
 
-        sections = partitioner.partition_level(self.level)
+        sections = partitioner(self.level)
 
         assert_that(sections, has_length(9))
 
@@ -79,7 +73,7 @@ class TestGridPartitioner:
         """
         Test that sections are marked being neighbours
         """
-        sections = self.partitioner.partition_level(self.level)
+        sections = self.partitioner(self.level)
 
         assert_that(list(neighbour_sections(sections[0])), 
                     has_length(1))
@@ -88,11 +82,8 @@ class TestGridPartitioner:
         """
         Partitioned sections should be linked together
         """
-        partitioner = GridPartitioner('crypt',
-                                      2,
-                                      2,
-                                      self.rng)
-        sections = partitioner.partition_level(self.level)
+        partitioner = grid_partitioning((20, 20), 2, 2, self.rng)
+        sections = partitioner(self.level)
 
         assert_that(sections, has_length(4))
         assert_that(list(section_connections(sections[0])),
@@ -102,38 +93,10 @@ class TestGridPartitioner:
         """
         Test that created sections are linked to level
         """
-        sections = self.partitioner.partition_level(self.level)
+        sections = self.partitioner(self.level)
 
         for section in sections:
             assert_that(section['\ufdd0:level'], is_(same_instance(self.level)))
-
-
-class TestGridPartitionerUtilities:
-    """
-    Tests for various utility methods
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        pass
-
-    def test_splitting_range(self):
-        """
-        Test that a line can be split into equal parts
-        """
-        partitioner = GridPartitioner(['crypt'],
-                                      4,
-                                      3,
-                                      random.Random())
-
-        ranges = partitioner.split_range_to_equals(0, 10, 3)
-
-        assert_that(ranges, has_length(3))
-
-        assert_that(ranges[0], is_(equal_to((0, 2))))
-        assert_that(ranges[1], is_(equal_to((3, 5))))
-        assert_that(ranges[2], is_(equal_to((6, 9))))
 
 
 class TestRandomConnector:

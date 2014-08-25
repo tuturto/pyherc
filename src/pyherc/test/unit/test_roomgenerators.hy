@@ -27,7 +27,7 @@
                                        TempleRoomGenerator
                                        LibraryRoomGenerator
                                        PitRoomGenerator]]
-        [pyherc.generators.level.partitioners [GridPartitioner]]
+        [pyherc.generators.level.partitioners [grid-partitioning]]
         [pyherc.test.builders [LevelBuilder]]
         [random [Random]])
 
@@ -35,7 +35,7 @@
   (let [[level (-> (LevelBuilder)
                    (.with-size #t(30 20))
                    (.build))]
-        [partitioner (GridPartitioner ["test"] 2 1 (Random))]
+        [partitioner (grid-partitioning #t(10 10) 2 1 (Random))]
         [sections (.partition-level partitioner level)]]
     (ap-each sections (.generate-room generator it))))
 

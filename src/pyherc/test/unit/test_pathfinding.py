@@ -28,7 +28,7 @@ from pyherc.ai import a_star
 from pyherc.config.dsl import LevelContext
 from pyherc.data import Portal, Model, find_free_space, wall_tile
 from pyherc.generators.level.generator import LevelGenerator
-from pyherc.generators.level.partitioners import GridPartitioner
+from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level.portals import PortalAdder
 from pyherc.generators.level.room.catacombs import CatacombsGenerator
 from pyherc.test.builders import LevelBuilder
@@ -111,10 +111,7 @@ class FooTestPathfindingInLevel():
         """
         rng = Random()
 
-        partitioner = GridPartitioner(['crypt'],
-                                      1,
-                                      1,
-                                      rng)
+        partitioner = grid_partitioning((60, 40), 1, 1, rng)
         room_generator = CatacombsGenerator(FLOOR_TILE,
                                             EMPTY_TILE,
                                             ['crypt'],

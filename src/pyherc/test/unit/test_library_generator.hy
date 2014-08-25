@@ -24,7 +24,7 @@
 (import [hamcrest [assert-that has-item]])
 (import [pyherc.data [add-location-feature get-tiles location-features]]
         [pyherc.data.features [new-cache items-in-cache characters-in-cache]]
-        [pyherc.generators.level.partitioners [GridPartitioner]]
+        [pyherc.generators.level.partitioners [grid-partitioning]]
         [pyherc.generators.level.room [LibraryRoomGenerator]]
         [pyherc.test.builders [LevelBuilder]])
 
@@ -32,8 +32,8 @@
   (let [[level (-> (LevelBuilder)
                    (.with-size #t(30 20))
                    (.build))]
-        [partitioner (GridPartitioner ["test"] 2 1 (Random))]
-        [sections (.partition-level partitioner level)]]
+        [partitioner (grid-partitioning #t(10 10) 2 1 (Random))]
+        [sections (partitioner level)]]
     {:level level
      :sections sections}))
 

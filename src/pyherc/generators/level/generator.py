@@ -28,7 +28,7 @@ from pyherc.data import new_level, Portal, add_portal, get_locations_by_tag
 from pyherc.data import wall_tile
 
 from pyherc.generators.level.partitioners.binary import binary_space_partitioning
-from pyherc.generators.level.partitioners.grid import RandomConnector
+from pyherc.generators.level.partitioners.old_grid import RandomConnector
 
 class LevelGeneratorFactory():
     """
