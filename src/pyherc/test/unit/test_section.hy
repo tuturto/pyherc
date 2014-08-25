@@ -273,9 +273,11 @@
   (ylet [[level (-> (LevelBuilder)
                     (.build))]
          [section (new-section #t(10 10) #t(13 13) level random)]
-         [check (fn [a b] (assert-that (adjacent-sections? a b)
-                                       (equal-to true)))]]
-        (for [x (range 7 14)]
+         [check (fn [a b] (do
+                           (print a b)
+                           (assert-that (adjacent-sections? a b)
+                                        (equal-to true))))]]
+        (for [x (range 9 12)]
           (yield #t(check section (new-section #t(x 0)
                                                #t((+ x 3) 9)
                                                level
@@ -284,7 +286,7 @@
                                                #t((+ x 3) 18)
                                                level
                                                random))))
-        (for [y (range 7 14)]
+        (for [y (range 9 12)]
           (yield #t(check section (new-section #t(0 y)
                                                #t(9 (+ y 3))
                                                level
