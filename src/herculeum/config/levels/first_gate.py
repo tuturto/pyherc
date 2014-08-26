@@ -287,7 +287,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
     floor = surface_manager.add_icon('ground_soil4',
-                                     ':ground/ground_soil.png', ' ')
+                                     ':ground/ground_soil4.png', ' ')
     floor1 = surface_manager.add_icon('ground_soil4_1',
                                       ':ground/ground_soil4_1.png', ' ')
     floor3 = surface_manager.add_icon('ground_soil4_3',

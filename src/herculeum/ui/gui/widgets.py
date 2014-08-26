@@ -99,6 +99,8 @@ class HitPointsWidget(QWidget):
                     label.setPixmap(self.surface_manager.get_icon('heart_red_0'))
             elif count < current_hp // 4:
                 label.setPixmap(self.surface_manager.get_icon('heart_red_4'))
+            else:
+                label.setPixmap(self.surface_manager.get_icon('heart_red_0'))
 
     def show_spirit_points(self, character):
         """
@@ -125,6 +127,8 @@ class HitPointsWidget(QWidget):
                     label.setPixmap(self.surface_manager.get_icon('heart_blue_0'))
             elif count < current_spirit // 4:
                 label.setPixmap(self.surface_manager.get_icon('heart_blue_4'))
+            else:
+                label.setPixmap(self.surface_manager.get_icon('heart_blue_0'))
 
 class DockingHitPointsWidget(QDockWidget):
     """
