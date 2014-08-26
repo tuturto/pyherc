@@ -44,7 +44,7 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig)
 from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
-from pyherc.generators.level.partitioners import GridPartitioner
+from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level.portals import PortalAdderConfiguration
 from pyherc.generators.level.room import CatacombsGenerator
 from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
@@ -101,11 +101,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            ['upper catacombs',
                                            'lower catacombs'],
                                            rng)]
-    level_partitioners = [GridPartitioner(['upper catacombs',
-                                           'lower catacombs'],
-                                           1,
-                                           1,
-                                           rng)]
+    level_partitioners = [grid_partitioning((80, 25), 1, 1, rng)]
 
     replacer_config = ReplacingDecoratorConfig(['upper catacombs',
                                                 'lower catacombs'],

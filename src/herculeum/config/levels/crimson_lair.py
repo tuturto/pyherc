@@ -40,7 +40,7 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                WallBuilderDecorator,
                                                WallBuilderDecoratorConfig)
 from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
-from pyherc.generators.level.partitioners import GridPartitioner
+from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level.portals import PortalAdderConfiguration
 from pyherc.generators.level.room import CrimsonLairGenerator
 from pyherc.rules.constants import SLASHING_DAMAGE
@@ -70,10 +70,10 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            wall_empty,
                                            ['crimson lair'],
                                            rng)]
-    level_partitioners = [GridPartitioner(['crimson lair'],
-                                           1,
-                                           1,
-                                           rng)]
+    level_partitioners = [grid_partitioning((80, 25),
+                                            1,
+                                            1,
+                                            rng)]
 
     surrounder_config = SurroundingDecoratorConfig(['crimson lair'],
                                                    wall_natural)

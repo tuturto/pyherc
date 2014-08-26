@@ -32,7 +32,8 @@
         (for [y (range vertical-repeats)]
           (.append sections 
                    (new-section #t((* width x) (* height y)) 
-                                #t((* width (+ x 1)) (* height (+ y 1))) 
+                                #t((+ 1 (* width (+ x 1)))
+                                   (+ 1 (* height (+ y 1)))) 
                                 level 
                                 rng))))
       (mark-all-neighbours sections)

@@ -36,7 +36,7 @@
                    (.with-size #t(30 20))
                    (.build))]
         [partitioner (grid-partitioning #t(10 10) 2 1 (Random))]
-        [sections (.partition-level partitioner level)]]
+        [sections (partitioner level)]]
     (ap-each sections (.generate-room generator it))))
 
 (defn test-catacombs-generator []

@@ -78,17 +78,6 @@ class TestGridPartitioner:
         assert_that(list(neighbour_sections(sections[0])), 
                     has_length(1))
 
-    def test_partitioned_sections_are_linked(self):
-        """
-        Partitioned sections should be linked together
-        """
-        partitioner = grid_partitioning((20, 20), 2, 2, self.rng)
-        sections = partitioner(self.level)
-
-        assert_that(sections, has_length(4))
-        assert_that(list(section_connections(sections[0])),
-                    has_length(greater_than(0)))
-
     def test_new_sections_are_on_level(self):
         """
         Test that created sections are linked to level
