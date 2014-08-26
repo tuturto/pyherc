@@ -77,6 +77,19 @@ class QtSurfaceManager():
         surface = self.__load_image(':transparent.png')
         self.icons['transparent'] = surface
 
+        self.icons['heart_red_0'] = self.__load_image(':ui/heart_red_0.png')
+        self.icons['heart_red_1'] = self.__load_image(':ui/heart_red_1.png')
+        self.icons['heart_red_2'] = self.__load_image(':ui/heart_red_2.png')
+        self.icons['heart_red_3'] = self.__load_image(':ui/heart_red_3.png')
+        self.icons['heart_red_4'] = self.__load_image(':ui/heart_red_4.png')
+
+        self.icons['heart_blue_0'] = self.__load_image(':ui/heart_blue_0.png')
+        self.icons['heart_blue_1'] = self.__load_image(':ui/heart_blue_1.png')
+        self.icons['heart_blue_2'] = self.__load_image(':ui/heart_blue_2.png')
+        self.icons['heart_blue_3'] = self.__load_image(':ui/heart_blue_3.png')
+        self.icons['heart_blue_4'] = self.__load_image(':ui/heart_blue_4.png')
+
+
     @log_debug
     def split_surface(self, image, tile_size):
         """

@@ -82,7 +82,8 @@ class PlayMapWindow(QWidget):
         layout = QVBoxLayout()
         status_layout = QHBoxLayout()
 
-        self.hit_points_widget = HitPointsWidget(parent = self)
+        self.hit_points_widget = HitPointsWidget(parent = self,
+                                                 surface_manager = surface_manager)
         self.effects_widget = EffectsWidget(parent = self,
                                             surface_manager = surface_manager)
 

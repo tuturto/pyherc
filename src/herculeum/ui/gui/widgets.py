@@ -30,7 +30,7 @@ class HitPointsWidget(QWidget):
 
     .. versionadded:: 0.7
     """
-    def __init__(self, parent):
+    def __init__(self, parent, surface_manager):
         """
         Default constructor
 
@@ -39,36 +39,31 @@ class HitPointsWidget(QWidget):
         """
         super().__init__(parent)
 
-        self.hp = None
-        self.hp_label = None
-        self.spirit = None
-        self.spirit_label = None
+        self.surface_manager = surface_manager
+        self.hp = []
+        self.spirit = []
         self.__set_layout()
+        
 
     def __set_layout(self):
         """
         Set layout of this widget
         """
         layout = QGridLayout()
+        
+        for count in range(10):
+            temp_hp = QLabel()
+            temp_hp.setObjectName('no_border')
+            temp_hp.setPixmap(self.surface_manager.get_icon('heart_red_4'))
+            self.hp.append(temp_hp)
 
-        self.hp_label = QLabel()
-        self.hp_label.setText('hp: ')
-        self.hp_label.setObjectName('no_border')
-        self.hp = QLabel()
-        self.hp.setText('0 / 0')
-        self.hp.setObjectName('no_border')
+            temp_spirit = QLabel()
+            temp_spirit.setObjectName('no_border')
+            temp_spirit.setPixmap(self.surface_manager.get_icon('heart_blue_4'))
+            self.spirit.append(temp_spirit)
 
-        self.spirit_label = QLabel()
-        self.spirit_label.setText('spirit: ')
-        self.spirit_label.setObjectName('no_border')
-        self.spirit = QLabel()
-        self.spirit.setText('0 / 0')
-        self.spirit.setObjectName('no_border')
-
-        layout.addWidget(self.hp_label, 0, 0)
-        layout.addWidget(self.hp, 0, 1)
-        layout.addWidget(self.spirit_label, 1, 0)
-        layout.addWidget(self.spirit, 1, 1)
+            layout.addWidget(temp_hp, 0, count)
+            layout.addWidget(temp_spirit, 0, 10 + count)
 
         self.setLayout(layout)
 
@@ -90,7 +85,20 @@ class HitPointsWidget(QWidget):
         """
         current_hp = character.hit_points
         max_hp = character.max_hp
-        self.hp.setText(str(current_hp) + '/' + str(max_hp))
+        for count, label in enumerate(self.hp):
+            if count >= max_hp // 4:
+                label.setPixmap(self.surface_manager.get_icon('transparent'))
+            elif count == current_hp // 4:
+                if current_hp % 4 == 1:
+                    label.setPixmap(self.surface_manager.get_icon('heart_red_1'))
+                elif current_hp % 4 == 2:
+                    label.setPixmap(self.surface_manager.get_icon('heart_red_2'))
+                elif current_hp % 4 == 3:
+                    label.setPixmap(self.surface_manager.get_icon('heart_red_3'))
+                elif current_hp % 4 == 0:
+                    label.setPixmap(self.surface_manager.get_icon('heart_red_0'))
+            elif count < current_hp // 4:
+                label.setPixmap(self.surface_manager.get_icon('heart_red_4'))
 
     def show_spirit_points(self, character):
         """
@@ -101,9 +109,22 @@ class HitPointsWidget(QWidget):
 
         .. versionadded:: 0.10
         """
-        self.spirit.setText(str(character.spirit) +
-                            '/' +
-                            str(character.max_spirit))
+        current_spirit = character.spirit
+        max_spirit = character.max_spirit
+        for count, label in enumerate(self.spirit):
+            if count >= max_spirit // 4:
+                label.setPixmap(self.surface_manager.get_icon('transparent'))
+            elif count == current_spirit // 4:
+                if current_spirit % 4 == 1:
+                    label.setPixmap(self.surface_manager.get_icon('heart_blue_1'))
+                elif current_spirit % 4 == 2:
+                    label.setPixmap(self.surface_manager.get_icon('heart_blue_2'))
+                elif current_spirit % 4 == 3:
+                    label.setPixmap(self.surface_manager.get_icon('heart_blue_3'))
+                elif current_spirit % 4 == 0:
+                    label.setPixmap(self.surface_manager.get_icon('heart_blue_0'))
+            elif count < current_spirit // 4:
+                label.setPixmap(self.surface_manager.get_icon('heart_blue_4'))
 
 class DockingHitPointsWidget(QDockWidget):
     """

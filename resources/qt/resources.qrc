@@ -450,5 +450,16 @@
 	<file>walls/wall_rubble8_37.png</file>
 	<file>walls/wall_rubble8_57.png</file>
 	<file>walls/wall_rubble8.png</file>
+
+	<file>ui/heart_blue_0.png</file>
+	<file>ui/heart_blue_1.png</file>
+	<file>ui/heart_blue_2.png</file>
+	<file>ui/heart_blue_3.png</file>
+	<file>ui/heart_blue_4.png</file>
+	<file>ui/heart_red_0.png</file>
+	<file>ui/heart_red_1.png</file>
+	<file>ui/heart_red_2.png</file>
+	<file>ui/heart_red_3.png</file>
+	<file>ui/heart_red_4.png</file>
     </qresource>
 </RCC>
