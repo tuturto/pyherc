@@ -488,17 +488,13 @@ class PlayMapWidget(QWidget):
         """
         Zoom map in
         """
-        trans = QTransform()
-        trans.scale(1.0, 1.0)
-        self.view.setTransform(trans, False)
+        self.view.scale(1.1, 1.1)
 
     def _zoom_out(self, key, modifiers):
         """
         Zoom map out
         """
-        trans = QTransform()
-        trans.scale(0.5, 0.5)
-        self.view.setTransform(trans, False)
+        self.view.scale(0.9, 0.9)
 
     def _shoulder_right(self, key, modifiers):
         """
