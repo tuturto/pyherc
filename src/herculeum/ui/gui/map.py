@@ -231,6 +231,10 @@ class PlayMapWidget(QWidget):
             keymap[key] = self._shoulder_left
         for key in config.right_shoulder:
             keymap[key] = self._shoulder_right
+        for key in config.mode_1:
+            keymap[key] = self._zoom_out
+        for key in config.mode_2:
+            keymap[key] = self._zoom_in
 
         return keymap, move_keymap
 
@@ -479,6 +483,22 @@ class PlayMapWidget(QWidget):
         """
         wait(self.model.player,
              self.action_factory)
+
+    def _zoom_in(self, key, modifiers):
+        """
+        Zoom map in
+        """
+        trans = QTransform()
+        trans.scale(1.0, 1.0)
+        self.view.setTransform(trans, False)
+
+    def _zoom_out(self, key, modifiers):
+        """
+        Zoom map out
+        """
+        trans = QTransform()
+        trans.scale(0.5, 0.5)
+        self.view.setTransform(trans, False)
 
     def _shoulder_right(self, key, modifiers):
         """

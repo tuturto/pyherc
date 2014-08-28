@@ -54,3 +54,6 @@ class QtControlsConfiguration():
 
         self.left_shoulder = [Qt.Key_Insert, Qt.Key_PageUp, Qt.Key_Q]
         self.right_shoulder = [Qt.Key_Delete, Qt.Key_PageDown, Qt.Key_W]
+
+        self.mode_1 = [Qt.Key_Home]
+        self.mode_2 = [Qt.Key_End]
