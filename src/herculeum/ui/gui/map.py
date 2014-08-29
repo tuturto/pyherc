@@ -249,6 +249,9 @@ class PlayMapWidget(QWidget):
         self.view = QGraphicsView(self.scene)
         self.view.setFocusPolicy(Qt.StrongFocus)
         self.view.installEventFilter(self)
+        self.view.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.view.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+
         layout.addWidget(self.view)
 
         self.setLayout(layout)
@@ -268,8 +271,8 @@ class PlayMapWidget(QWidget):
         Center view on given entity
         """
         location = entity.location
-        width = 320
-        height = 320
+        width = 32
+        height = 32
 
         self.view.setSceneRect((location[0] * 32) - width // 2,
                               (location[1] * 32) - height // 2,
