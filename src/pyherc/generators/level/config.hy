@@ -18,8 +18,16 @@
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 
-(defn new-level-config [level-name room-generators partitioners decorators
-                        item-adders portal-config context model]
+(defn new-dungeon []
+  "create new instance of dungeon config"
+  {})
+
+(defn add-level [dungeon level]
+  "add new level config into dungeon config"
+  (assoc dungeon-config (:level-name level-config) level-config))
+
+(defn new-level [level-name room-generators partitioners decorators
+                 item-adders portal-config context model]
   "create new instance of level config"
   {:level-name level-name
    :room-generators room-generators

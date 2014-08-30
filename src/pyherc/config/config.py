@@ -26,7 +26,7 @@ from functools import partial
 from pyherc.generators import (generate_creature, get_effect_creator,
                                ItemConfigurations, ItemGenerator,
                                SpellGenerator)
-from pyherc.generators.level.config import LevelGeneratorFactoryConfig
+from pyherc.generators.level.old_config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level.portals import PortalAdderFactory
 from pyherc.rules import Dying, RulesEngine

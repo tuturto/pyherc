@@ -20,7 +20,7 @@
 """
 module for LevelGeneratorFactoryConfig
 """
-from pyherc.generators.level.config import LevelGeneratorFactoryConfig
+from pyherc.generators.level.old_config import LevelGeneratorFactoryConfig
 
 
 class LevelConfiguration():
