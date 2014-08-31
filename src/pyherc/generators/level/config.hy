@@ -24,7 +24,10 @@
 
 (defn add-level [dungeon level]
   "add new level config into dungeon config"
-  (assoc dungeon-config (:level-name level-config) level-config))
+  (assoc dungeon (:level-name level) level))
+
+(defn merge-level [dungeon level]
+  "merge new level config into existing dungeon data")
 
 (defn new-level [level-name room-generators partitioners decorators
                  item-adders portal-config context model]
@@ -37,3 +40,34 @@
    :portal-config portal-config
    :context context
    :model model})
+
+(defmacro level-config [component-name dungeon level-name]
+ `(genexpr x [x (~component-name (get ~dungeon ~level-name))]))
+
+(defn room-generators [dungeon level-name]
+  "get room generators for given level"
+  (level-config :room-generators dungeon level-name))
+
+(defn partitioners [dungeon level-name]
+  "get level partitioners for given level"
+  (level-config :partitioners dungeon level-name))
+
+(defn decorators [dungeon level-name]
+  "get level decorators for given level"
+  (level-config :decorators dungeon level-name))
+
+(defn item-adders [dungeon level-name]
+  "get item adders for given level"
+  (level-config :item-adders dungeon level-name))
+
+(defn portals [dungeon level-name]
+  "get portal configs"
+  (level-config :portal-config dungeon level-name))
+
+(defn context [dungeon level-name]
+  "get configuration context"
+  (:context (get dungeon level-name)))
+
+(defn model [dungeon level-name]
+  "get model"
+  (:model (get dungeon level-name)))
