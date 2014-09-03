@@ -25,8 +25,6 @@ Manual
 ======
 - Online documentation for development version is available at:
   http://tuturto.github.com/pyherc/index.html
-- Online documentation for pyherc API can be found at:
-  https://pyherc.readthedocs.org/
 
 Credits
 =======
