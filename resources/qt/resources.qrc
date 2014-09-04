@@ -225,6 +225,29 @@
         <file>tomb_8.png</file>
         <file>tomb_9.png</file>
 
+        <file>characters/blade-bite_f0.png</file>
+        <file>characters/blade-bite_f1.png</file>
+        <file>characters/crimson-jaw_f0.png</file>
+        <file>characters/crimson-jaw_f1.png</file>
+        <file>characters/fungus_f0.png</file>
+        <file>characters/fungus_f1.png</file>
+        <file>characters/great_fungus_f0.png</file>
+        <file>characters/great_fungus_f1.png</file>
+        <file>characters/masked-spider_f0.png</file>
+        <file>characters/masked-spider_f1.png</file>
+        <file>characters/mouse_f0.png</file>
+        <file>characters/mouse_f1.png</file>
+        <file>characters/pc_adventurer_f0.png</file>
+        <file>characters/pc_adventurer_f1.png</file>
+        <file>characters/pc_mage_f0.png</file>
+        <file>characters/pc_mage_f1.png</file>
+        <file>characters/pc_warrior_f0.png</file>
+        <file>characters/pc_warrior_f1.png</file>
+        <file>characters/platino_f0.png</file>
+        <file>characters/platino_f1.png</file>
+        <file>characters/scarab-beetle_f0.png</file>
+        <file>characters/scarab-beetle_f1.png</file>
+
 	<file>ground/ground_rock1_1357.png</file>
 	<file>ground/ground_rock1_135.png</file>
 	<file>ground/ground_rock1_137.png</file>
