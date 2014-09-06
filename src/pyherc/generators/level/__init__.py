@@ -23,4 +23,5 @@
 Package for various level generators
 """
 
+from .config import new_dungeon, new_level, add_level, room_generators
 from .generator import LevelGeneratorFactory
