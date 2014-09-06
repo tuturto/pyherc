@@ -41,7 +41,7 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                WallBuilderDecoratorConfig,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig)
-from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
+from pyherc.generators.level import ItemAdder, ItemAdderConfiguration
 from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import (PillarRoomGenerator, PitRoomGenerator,

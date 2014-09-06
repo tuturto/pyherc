@@ -20,7 +20,7 @@
 (import [hamcrest [assert-that contains-inanyorder]]
         [pyherc.generators.level [new-dungeon new-level add-level
                                   room-generators level-partitioners
-                                  decorators item-adders portals]])
+                                  decorators items characters portals]])
 
 (defn setup-context []
   "setup test dungeon configuration"
@@ -29,13 +29,15 @@
                            [:room₀ :room₁]
                            [:partitioner₀]
                            [:decorator₀ :decorator₁]
-                           [:items₀]
+                           [:item₀]
+                           [:character₀ :character₁]
                            [:portal₀])]
         [level₁ (new-level "level₁"
                            [:room₁ :room₂]
                            [:partitioner₁]
                            [:decorator₂ :decorator₃]
-                           [:items₁]
+                           [:item₁]
+                           [:character₁ :character₂]
                            [:portal₁])]]
     (add-level dungeon level₀)
     (add-level dungeon level₁)
@@ -70,14 +72,23 @@
     (assert-that (decorators dungeon "level₁")
                  (contains-inanyorder :decorator₂ :decorator₃))))
 
-(defn test-item-adders []
-  "test that item adders can be retrieved"
+(defn test-items []
+  "test that items can be retrieved"
   (let [[context (setup-context)]
         [dungeon (:dungeon context)]]
-    (assert-that (item-adders dungeon "level₀")
-                 (contains-inanyorder :items₀))
-    (assert-that (item-adders dungeon "level₁")
-                 (contains-inanyorder :items₁))))
+    (assert-that (items dungeon "level₀")
+                 (contains-inanyorder :item₀))
+    (assert-that (items dungeon "level₁")
+                 (contains-inanyorder :item₁))))
+
+(defn test-characters []
+  "test that characters can be retrieved"
+  (let [[context (setup-context)]
+        [dungeon (:dungeon context)]]
+    (assert-that (characters dungeon "level₀")
+                 (contains-inanyorder :character₀ :character₁))
+    (assert-that (characters dungeon "level₁")
+                 (contains-inanyorder :character₁ :character₂))))
 
 (defn test-portals []
   "test that portals can be retrieved"

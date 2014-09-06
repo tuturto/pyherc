@@ -30,13 +30,14 @@
   "merge new level config into existing dungeon data")
 
 (defn new-level [level-name room-generators partitioners decorators
-                 item-adders portal-config]
+                 items characters portal-config]
   "create new instance of level config"
   {:level-name level-name
    :room-generators room-generators
    :partitioners partitioners
    :decorators decorators
-   :item-adders item-adders
+   :items items
+   :characters characters
    :portal-config portal-config})
 
 (defmacro level-config [component-name dungeon level-name]
@@ -54,9 +55,13 @@
   "get level decorators for given level"
   (level-config :decorators dungeon level-name))
 
-(defn item-adders [dungeon level-name]
-  "get item adders for given level"
-  (level-config :item-adders dungeon level-name))
+(defn items [dungeon level-name]
+  "get items for given level"
+  (level-config :items dungeon level-name))
+
+(defn characters [dungeon level-name]
+  "get characters for given level"
+  (level-config :characters dungeon level-name))
 
 (defn portals [dungeon level-name]
   "get portal configs"
