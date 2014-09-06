@@ -28,7 +28,7 @@ from pyherc.generators import (generate_creature, get_effect_creator,
                                SpellGenerator)
 from pyherc.generators.level.old_config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.generator import LevelGeneratorFactory
-from pyherc.generators.level.portals import PortalAdderFactory
+from pyherc.generators.level import PortalAdderFactory
 from pyherc.rules import Dying, RulesEngine
 from pyherc.rules.combat import RangedCombatFactory
 from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,

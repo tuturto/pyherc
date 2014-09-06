@@ -19,7 +19,8 @@
 
 (import [hamcrest [assert-that contains-inanyorder]]
         [pyherc.generators.level [new-dungeon new-level add-level
-                                  room-generators level-partitioners]])
+                                  room-generators level-partitioners
+                                  decorators item-adders portals]])
 
 (defn setup-context []
   "setup test dungeon configuration"
@@ -29,13 +30,13 @@
                            [:partitioner₀]
                            [:decorator₀ :decorator₁]
                            [:items₀]
-                           :portal-config₀)]
+                           [:portal₀])]
         [level₁ (new-level "level₁"
                            [:room₁ :room₂]
                            [:partitioner₁]
                            [:decorator₂ :decorator₃]
                            [:items₁]
-                           :portal-config₁)]]
+                           [:portal₁])]]
     (add-level dungeon level₀)
     (add-level dungeon level₁)
     {:dungeon dungeon
@@ -59,3 +60,30 @@
                  (contains-inanyorder :partitioner₀))
     (assert-that (level-partitioners dungeon "level₁")
                  (contains-inanyorder :partitioner₁))))
+
+(defn test-decorators []
+  "test that decorators can be retrieved"
+  (let [[context (setup-context)]
+        [dungeon (:dungeon context)]]
+    (assert-that (decorators dungeon "level₀")
+                 (contains-inanyorder :decorator₀ :decorator₁))
+    (assert-that (decorators dungeon "level₁")
+                 (contains-inanyorder :decorator₂ :decorator₃))))
+
+(defn test-item-adders []
+  "test that item adders can be retrieved"
+  (let [[context (setup-context)]
+        [dungeon (:dungeon context)]]
+    (assert-that (item-adders dungeon "level₀")
+                 (contains-inanyorder :items₀))
+    (assert-that (item-adders dungeon "level₁")
+                 (contains-inanyorder :items₁))))
+
+(defn test-portals []
+  "test that portals can be retrieved"
+  (let [[context (setup-context)]
+        [dungeon (:dungeon context)]]
+    (assert-that (portals dungeon "level₀")
+                 (contains-inanyorder :portal₀))
+    (assert-that (portals dungeon "level₁")
+                 (contains-inanyorder :portal₁))))

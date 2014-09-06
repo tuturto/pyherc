@@ -50,7 +50,7 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig)
 from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
-from pyherc.generators.level.portals import PortalAdderConfiguration
+from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import (CacheRoomGenerator,
                                           CircularRoomGenerator,
                                           LibraryRoomGenerator,

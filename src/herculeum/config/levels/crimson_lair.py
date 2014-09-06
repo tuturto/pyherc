@@ -41,7 +41,7 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                WallBuilderDecoratorConfig)
 from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
 from pyherc.generators.level.partitioners import grid_partitioning
-from pyherc.generators.level.portals import PortalAdderConfiguration
+from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import CrimsonLairGenerator
 from pyherc.rules.constants import SLASHING_DAMAGE
 

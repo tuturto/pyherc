@@ -45,7 +45,7 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                WallOrnamentDecoratorConfig)
 from pyherc.generators.level.items import ItemAdder, ItemAdderConfiguration
 from pyherc.generators.level.partitioners import grid_partitioning
-from pyherc.generators.level.portals import PortalAdderConfiguration
+from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import CatacombsGenerator
 from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)

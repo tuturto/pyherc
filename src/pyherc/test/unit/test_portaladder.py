@@ -26,9 +26,9 @@ from hamcrest import assert_that, equal_to, has_length, is_
 from mockito import mock
 from pyherc.data import get_portal, add_location_tag
 from pyherc.generators.level.generator import LevelGenerator
-from pyherc.generators.level.portals import (PortalAdder,
-                                             PortalAdderConfiguration,
-                                             PortalAdderFactory)
+from pyherc.generators.level.portal import (PortalAdder,
+                                            PortalAdderConfiguration,
+                                            PortalAdderFactory)
 from pyherc.test.matchers import located_in_room
 from pyherc.test.builders import LevelBuilder
 

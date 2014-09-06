@@ -25,4 +25,5 @@ Package for various level generators
 
 from .config import (new_dungeon, new_level, add_level, room_generators,
                      level_partitioners, decorators, item_adders, portals)
+from .portal import PortalAdderFactory, PortalAdderConfiguration
 from .generator import LevelGeneratorFactory
