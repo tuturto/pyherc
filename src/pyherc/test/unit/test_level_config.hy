@@ -19,7 +19,7 @@
 
 (import [hamcrest [assert-that contains-inanyorder]]
         [pyherc.generators.level [new-dungeon new-level add-level
-                                  room-generators]])
+                                  room-generators level-partitioners]])
 
 (defn setup-context []
   "setup test dungeon configuration"
@@ -50,3 +50,12 @@
                  (contains-inanyorder :room₀ :room₁))
     (assert-that (room-generators dungeon "level₁")
                  (contains-inanyorder :room₁ :room₂))))
+
+(defn test-partitioners []
+  "test that partitioners can be retrieved"
+  (let [[context (setup-context)]
+        [dungeon (:dungeon context)]]
+    (assert-that (level-partitioners dungeon "level₀")
+                 (contains-inanyorder :partitioner₀))
+    (assert-that (level-partitioners dungeon "level₁")
+                 (contains-inanyorder :partitioner₁))))

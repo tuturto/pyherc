@@ -46,7 +46,7 @@
   "get room generators for given level"
   (level-config :room-generators dungeon level-name))
 
-(defn partitioners [dungeon level-name]
+(defn level-partitioners [dungeon level-name]
   "get level partitioners for given level"
   (level-config :partitioners dungeon level-name))
 
