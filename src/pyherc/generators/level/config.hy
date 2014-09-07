@@ -43,8 +43,7 @@
         (merge-component-list :items dungeon level)
         (merge-component-list :characters dungeon level)
         (merge-component-list :portal-config dungeon level))
-    (assert false)
-    ))
+    (assoc dungeon (:level-name level) level)))
 
 (defn new-level [level-name room-generators partitioners decorators
                  items characters portal-config]

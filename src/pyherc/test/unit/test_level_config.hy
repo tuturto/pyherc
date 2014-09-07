@@ -165,3 +165,12 @@
     (merge-level dungeon part₁)
     (assert-that (len (list (items dungeon "level")))
                  (is- (equal-to 0)))))
+
+(defn test-merging-completely-new-level []
+  "test merging a completely new level into dungeon"
+  (let [[context (setup-merging-context)]
+        [dungeon (:dungeon context)]
+        [another-level (:part₃ context)]]
+    (merge-level dungeon another-level)
+    (assert-that (room-generators dungeon "another level")
+                 (contains-inanyorder :room))))
