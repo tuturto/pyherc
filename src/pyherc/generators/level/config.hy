@@ -36,7 +36,9 @@
 (defn merge-level [dungeon level]
   "merge new level config into existing dungeon data"
   (if (in (:level-name level) dungeon)
-    (merge-component-list :room-generators dungeon level)
+    (do (merge-component-list :room-generators dungeon level)
+        (merge-component-list :partitioners dungeon level)
+        (merge-component-list :decorators dungeon level))
     (assert false)
     ))
 

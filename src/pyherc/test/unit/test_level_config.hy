@@ -138,3 +138,21 @@
     (merge-level dungeon part₁)
     (assert-that (room-generators dungeon "level")
                  (contains-inanyorder :room₀ :room₁ :room₂ :room₃))))
+
+(defn test-merging-empty []
+  "test that merging into an empty list works"
+  (let [[context (setup-merging-context)]
+        [dungeon (:dungeon context)]
+        [part₁ (:part₁ context)]]
+    (merge-level dungeon part₁)
+    (assert-that (level-partitioners dungeon "level")
+                 (contains-inanyorder :partitioner₀))))
+
+(defn test-merging-into-empty []
+  "test that merging into an empty list works"
+  (let [[context (setup-merging-context)]
+        [dungeon (:dungeon context)]
+        [part₁ (:part₁ context)]]
+    (merge-level dungeon part₁)
+    (assert-that (decorators dungeon "level")
+                 (contains-inanyorder :decorator₂ :decorator₃))))
