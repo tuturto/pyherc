@@ -27,7 +27,15 @@
   (assoc dungeon (:level-name level) level))
 
 (defn merge-level [dungeon level]
-  "merge new level config into existing dungeon data")
+  "merge new level config into existing dungeon data"
+  (if (in (:level-name level) dungeon)
+    (merge-rooms dungeon level)
+    (assert false)
+    ))
+
+(defn merge-rooms [dungeon level]
+  (.extend (get (get dungeon (:level-name level)) :room-generators)
+           (:room-generators level)))
 
 (defn new-level [level-name room-generators partitioners decorators
                  items characters portal-config]

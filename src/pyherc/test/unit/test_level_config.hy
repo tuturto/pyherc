@@ -106,24 +106,32 @@
         [part₀ (new-level "level"
                           [:room₀ :room₁]
                           [:partitioner₀]
-                          [:decorator₀ :decorator₁]
-                          [:item₀]
+                          []
+                          []
                           [:character₀ :character₁]
                           [:portal₀])]
         [part₁ (new-level "level"
                           [:room₂ :room₃]
-                          [:partitioner₁]
+                          []
                           [:decorator₂ :decorator₃]
-                          [:item₁]
+                          []
                           [:character₂ :character₃]
-                          [:portal₁])]]
+                          [:portal₁])]
+        [part₃ (new-level "another level"
+                          [:room]
+                          [:partitioner]
+                          [:decorator]
+                          [:item]
+                          [:character]
+                          [:portal])]]
     (add-level dungeon part₀)
     {:dungeon dungeon
      :part₀ part₀
-     :part₁ part₁}))
+     :part₁ part₁
+     :part₃ part₃}))
 
-(defn test-merging-rooms []
-  "test that room config can be merged"
+(defn test-merging-two-lists []
+  "test that two lists can be merged"
   (let [[context (setup-merging-context)]
         [dungeon (:dungeon context)]
         [part₁ (:part₁ context)]]
