@@ -20,7 +20,8 @@
 (import [hamcrest [assert-that contains-inanyorder]]
         [pyherc.generators.level [new-dungeon new-level add-level
                                   room-generators level-partitioners
-                                  decorators items characters portals]])
+                                  decorators items characters portals
+                                  merge-level]])
 
 (defn setup-context []
   "setup test dungeon configuration"
@@ -98,3 +99,34 @@
                  (contains-inanyorder :portal₀))
     (assert-that (portals dungeon "level₁")
                  (contains-inanyorder :portal₁))))
+
+(defn setup-merging-context []
+  "setup testing context for merging tests"
+  (let [[dungeon (new-dungeon)]
+        [part₀ (new-level "level"
+                          [:room₀ :room₁]
+                          [:partitioner₀]
+                          [:decorator₀ :decorator₁]
+                          [:item₀]
+                          [:character₀ :character₁]
+                          [:portal₀])]
+        [part₁ (new-level "level"
+                          [:room₂ :room₃]
+                          [:partitioner₁]
+                          [:decorator₂ :decorator₃]
+                          [:item₁]
+                          [:character₂ :character₃]
+                          [:portal₁])]]
+    (add-level dungeon part₀)
+    {:dungeon dungeon
+     :part₀ part₀
+     :part₁ part₁}))
+
+(defn test-merging-rooms []
+  "test that room config can be merged"
+  (let [[context (setup-merging-context)]
+        [dungeon (:dungeon context)]
+        [part₁ (:part₁ context)]]
+    (merge-level dungeon part₁)
+    (assert-that (room-generators dungeon "level")
+                 (contains-inanyorder :room₀ :room₁ :room₂ :room₃))))
