@@ -17,7 +17,7 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(import [hamcrest [assert-that contains-inanyorder]]
+(import [hamcrest [assert-that contains-inanyorder is- equal-to]]
         [pyherc.generators.level [new-dungeon new-level add-level
                                   room-generators level-partitioners
                                   decorators items characters portals
@@ -156,3 +156,12 @@
     (merge-level dungeon part₁)
     (assert-that (decorators dungeon "level")
                  (contains-inanyorder :decorator₂ :decorator₃))))
+
+(defn test-merging-empty-lists []
+  "test that merging two empty lists works"
+  (let [[context (setup-merging-context)]
+        [dungeon (:dungeon context)]
+        [part₁ (:part₁ context)]]
+    (merge-level dungeon part₁)
+    (assert-that (len (list (items dungeon "level")))
+                 (is- (equal-to 0)))))

@@ -38,7 +38,10 @@
   (if (in (:level-name level) dungeon)
     (do (merge-component-list :room-generators dungeon level)
         (merge-component-list :partitioners dungeon level)
-        (merge-component-list :decorators dungeon level))
+        (merge-component-list :decorators dungeon level)
+        (merge-component-list :items dungeon level)
+        (merge-component-list :characters dungeon level)
+        (merge-component-list :portal-config dungeon level))
     (assert false)
     ))
 
