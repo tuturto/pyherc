@@ -26,16 +26,19 @@
   "add new level config into dungeon config"
   (assoc dungeon (:level-name level) level))
 
+(defmacro merge-component-list [component-name dungeon level]
+  `(.extend (get (get ~dungeon (:level-name level)) ~component-name)
+            (~component-name ~level)))
+
+(defmacro level-config [component-name dungeon level-name]
+ `(genexpr x [x (~component-name (get ~dungeon ~level-name))]))
+
 (defn merge-level [dungeon level]
   "merge new level config into existing dungeon data"
   (if (in (:level-name level) dungeon)
-    (merge-rooms dungeon level)
+    (merge-component-list :room-generators dungeon level)
     (assert false)
     ))
-
-(defn merge-rooms [dungeon level]
-  (.extend (get (get dungeon (:level-name level)) :room-generators)
-           (:room-generators level)))
 
 (defn new-level [level-name room-generators partitioners decorators
                  items characters portal-config]
@@ -47,9 +50,6 @@
    :items items
    :characters characters
    :portal-config portal-config})
-
-(defmacro level-config [component-name dungeon level-name]
- `(genexpr x [x (~component-name (get ~dungeon ~level-name))]))
 
 (defn room-generators [dungeon level-name]
   "get room generators for given level"
