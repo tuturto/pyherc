@@ -17,6 +17,7 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(require hy.contrib.anaphoric)
 
 (defn new-dungeon []
   "create new instance of dungeon config"
