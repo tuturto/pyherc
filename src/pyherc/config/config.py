@@ -28,7 +28,7 @@ from pyherc.generators import (generate_creature, get_effect_creator,
                                SpellGenerator)
 from pyherc.generators.level.old_config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.generator import LevelGeneratorFactory
-from pyherc.generators.level import PortalAdderFactory
+from pyherc.generators.level import PortalAdderFactory, new_dungeon, merge_level
 from pyherc.rules import Dying, RulesEngine
 from pyherc.rules.combat import RangedCombatFactory
 from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,
@@ -258,29 +258,24 @@ class Configuration():
         :param level_config: module containing level configurations
         :type level_config: module
         """
-        config = LevelGeneratorFactoryConfig([],
-                                             [],
-                                             [],
-                                             [],
-                                             [],
-                                             [],
-                                             [],
-                                             self.model)
-
+        config = new_dungeon()
+ 
         configurators = self.get_configurators(context.config_package,
                                                'init_level')
 
         for configurator in configurators:
-            self.extend_configuration(config,
-                                      configurator(self.rng,
-                                                   self.item_generator,
-                                                   self.creature_generator,
-                                                   self.level_size,
-                                                   context))
+            for level in configurator(self.rng,
+                                      self.item_generator,
+                                      self.creature_generator,
+                                      self.level_size,
+                                      context):
+                merge_level(config, level)
 
-        portal_adder_factory = PortalAdderFactory(
-            config.portal_adder_configurations,
-            self.rng)
+        #TODO: fix config
+        # portal_adder_factory = PortalAdderFactory(
+        #    config.portal_adder_configurations,
+        #    self.rng)
+        portal_adder_factory = None
 
         self.level_generator_factory = LevelGeneratorFactory(
             portal_adder_factory,

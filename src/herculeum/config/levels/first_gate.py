@@ -51,6 +51,7 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                WallOrnamentDecoratorConfig)
 from pyherc.generators.level import ItemAdder, ItemAdderConfiguration
 from pyherc.generators.level import PortalAdderConfiguration
+from pyherc.generators.level import new_dungeon, new_level, add_level
 from pyherc.generators.level.room import (CacheRoomGenerator,
                                           CircularRoomGenerator,
                                           LibraryRoomGenerator,
@@ -402,15 +403,19 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                  wall_type = wall_natural,
                                  level_types = ['first gate'])
 
-    config = (LevelConfiguration()
-                    .with_rooms(rooms)
-                    .with_partitioners(level_partitioners)
-                    .with_decorators(decorators)
-                    .with_items(item_adders)
-                    .with_creatures(creature_adders)
-                    .with_portals(portal_adder_configurations)
-                    .with_contexts([level_context])
-                    .build())
+    return [new_level('first gate', rooms, level_partitioners,
+                      decorators, item_adders, creature_adders,
+                      portal_adder_configurations)]
+
+    # config = (LevelConfiguration()
+    #                .with_rooms(rooms)
+    #                .with_partitioners(level_partitioners)
+    #                .with_decorators(decorators)
+    #                .with_items(item_adders)
+    #                .with_creatures(creature_adders)
+    #                .with_portals(portal_adder_configurations)
+    #                .with_contexts([level_context])
+    #                .build())
 
     return config
 

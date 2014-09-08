@@ -46,7 +46,7 @@ from pyherc.generators.level.room import CrimsonLairGenerator
 from pyherc.rules.constants import SLASHING_DAMAGE
 
 
-def init_level(rng, item_generator, creature_generator, level_size, context):
+def _init_level(rng, item_generator, creature_generator, level_size, context):
     """
     Initialise lair of crimson jaw
 

@@ -48,7 +48,7 @@ from pyherc.generators.level.room import (PillarRoomGenerator, PitRoomGenerator,
                                           SquareRoomGenerator)
 
 
-def init_level(rng, item_generator, creature_generator, level_size, context):
+def _init_level(rng, item_generator, creature_generator, level_size, context):
     """
     Initialise upper crypt levels
 

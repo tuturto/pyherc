@@ -46,17 +46,12 @@ class LevelGeneratorFactory():
         :type random_generator: Random
         """
         self.logger = logging.getLogger('pyherc.generators.level.LevelGeneratorFactory')  # noqa
-        self.model = configuration.model
-        self.level_partitioners = configuration.level_partitioners
-        self.room_generators = configuration.room_generators
-        self.decorators = configuration.decorators
-        self.portal_adder_configurations = configuration.portal_adder_configurations  # noqa
+
         self.portal_adder_factory = portal_adder_factory
-        self.portal_adder_factory.level_generator_factory = self
-        self.item_adders = configuration.item_adders
-        self.creature_adders = configuration.creature_adders
+        #self.portal_adder_factory.level_generator_factory = self
+
         self.random_generator = random_generator
-        self.level_infos = configuration.contexts
+
 
     @log_info
     def get_generator(self, level_type):

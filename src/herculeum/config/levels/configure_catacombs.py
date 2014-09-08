@@ -51,7 +51,7 @@ from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
 
-def init_level(rng, item_generator, creature_generator, level_size, context):
+def _init_level(rng, item_generator, creature_generator, level_size, context):
     """
     Initialise upper catacombs
 
