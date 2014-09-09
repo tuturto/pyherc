@@ -27,8 +27,10 @@ from pyherc.aspects import log_debug, log_info
 from pyherc.data import new_level, Portal, add_portal, get_locations_by_tag
 from pyherc.data import wall_tile
 
-from pyherc.generators.level.partitioners.binary import binary_space_partitioning
+
 from pyherc.generators.level.partitioners.old_grid import RandomConnector
+from pyherc.generators.level import (level_partitioners, room_generators,
+                                     decorators, items, characters)
 
 class LevelGeneratorFactory():
     """
@@ -46,7 +48,7 @@ class LevelGeneratorFactory():
         :type random_generator: Random
         """
         self.logger = logging.getLogger('pyherc.generators.level.LevelGeneratorFactory')  # noqa
-
+        self.config = configuration
         self.portal_adder_factory = portal_adder_factory
         #self.portal_adder_factory.level_generator_factory = self
 
@@ -63,32 +65,11 @@ class LevelGeneratorFactory():
         :returns: configured level generator
         :rtype: LevelGenerator
         """
-        #partitioner = self.get_sub_component(level_type,
-        #                                     self.level_partitioners,
-        #                                     'partitioner')
-
-        partitioner = binary_space_partitioning((80, 40), 
-                                                (9, 9),
-                                                 self.random_generator)
-
-        #rooms = self.get_sub_components(level_type,
-        #                                self.room_generators,
-        #                                'room')
-
-        rooms = [x for x in self.room_generators
-                 if hasattr(x, "__name__")]
-
-        decorator = self.get_sub_component(level_type,
-                                           self.decorators,
-                                           'decorator')
-
-        item_adder = self.get_sub_component(level_type,
-                                            self.item_adders,
-                                            'item adder')
-
-        creature_adder = self.get_sub_component(level_type,
-                                                self.creature_adders,
-                                                'creature adder')
+        partitioners = level_partitioners(self.config, level_type)
+        rooms = room_generators(self.config, level_type)
+        decos = decorators(self.config, level_type)
+        item_adders = items(self.config, level_type)
+        creature_adders = characters(self.config, level_type)
 
         level_info = self.get_sub_component(level_type,
                                             self.level_infos,
@@ -98,7 +79,7 @@ class LevelGeneratorFactory():
         portal_adders = factory.create_portal_adders(level_type)
 
         return LevelGenerator(self.model,
-                              partitioner,
+                              partitioners,
                               rooms,
                               decorator,
                               portal_adders,
