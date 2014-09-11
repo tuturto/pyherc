@@ -71,10 +71,6 @@ class LevelGeneratorFactory():
         item_adders = items(self.config, level_type)
         creature_adders = characters(self.config, level_type)
 
-        level_info = self.get_sub_component(level_type,
-                                            self.level_infos,
-                                            'level info')
-
         factory = self.portal_adder_factory
         portal_adders = factory.create_portal_adders(level_type)
 
@@ -85,8 +81,7 @@ class LevelGeneratorFactory():
                               portal_adders,
                               item_adder,
                               creature_adder,
-                              self.random_generator,
-                              level_info)
+                              self.random_generator)
 
     @log_debug
     def get_sub_components(self, level_type, component_list, component_type):

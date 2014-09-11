@@ -43,7 +43,7 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                WallBuilderDecoratorConfig,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig)
-from pyherc.generators.level import ItemAdder, ItemAdderConfiguration
+from pyherc.generators.level import ItemAdder, ItemAdderConfiguration, new_level
 from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import CatacombsGenerator
@@ -51,7 +51,7 @@ from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
 
-def _init_level(rng, item_generator, creature_generator, level_size, context):
+def init_level(rng, item_generator, creature_generator, level_size, context):
     """
     Initialise upper catacombs
 
@@ -279,17 +279,13 @@ def _init_level(rng, item_generator, creature_generator, level_size, context):
                                  level_types = ['upper catacombs',
                                                 'lower catacombs'])
 
-    config = (LevelConfiguration()
-                    .with_rooms(room_generators)
-                    .with_partitioners(level_partitioners)
-                    .with_decorators(decorators)
-                    .with_items(item_adders)
-                    .with_creatures(creature_adders)
-                    .with_portals(portal_adder_configurations)
-                    .with_contexts([level_context])
-                    .build())
+    return [new_level('upper catacombs', room_generators, level_partitioners,
+                      decorators, item_adders, creature_adders,
+                      portal_adder_configurations),
+            new_level('lower catacombs', room_generators, level_partitioners,
+                      decorators, item_adders, creature_adders,
+                      portal_adder_configurations)]
 
-    return config
 
 def init_creatures(context):
     """
