@@ -271,11 +271,9 @@ class Configuration():
                                       context):
                 merge_level(config, level)
 
-        #TODO: fix config
-        # portal_adder_factory = PortalAdderFactory(
-        #    config.portal_adder_configurations,
-        #    self.rng)
-        portal_adder_factory = None
+        portal_adder_factory = PortalAdderFactory(
+            config,
+            self.rng)
 
         self.level_generator_factory = LevelGeneratorFactory(
             portal_adder_factory,

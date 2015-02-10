@@ -74,14 +74,16 @@ class LevelGeneratorFactory():
         factory = self.portal_adder_factory
         portal_adders = factory.create_portal_adders(level_type)
 
-        return LevelGenerator(self.model,
+        #TODO: what about the None for model and level context?
+        return LevelGenerator(None,
                               partitioners,
                               rooms,
-                              decorator,
+                              decos,
                               portal_adders,
-                              item_adder,
-                              creature_adder,
-                              self.random_generator)
+                              item_adders,
+                              creature_adders,
+                              self.random_generator,
+                              None)
 
     @log_debug
     def get_sub_components(self, level_type, component_list, component_type):

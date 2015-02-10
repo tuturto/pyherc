@@ -82,6 +82,13 @@ class TestMainConfiguration():
         factory = self.config.level_generator_factory
         generator = factory.get_generator('upper crypt')
 
+    def test_crimson_lair_generator(self):
+        """
+        Test that crimson lair level generator can be retrieved
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('crimson lair')
+
     def test_inventory_factory_has_been_initialised(self):
         """
         Test that inventory action factory has been initialised

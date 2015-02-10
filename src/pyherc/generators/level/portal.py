@@ -23,6 +23,7 @@ Module for adding portals
 
 from pyherc.aspects import log_debug, log_info
 from pyherc.data import Portal, add_portal, get_locations_by_tag
+from pyherc.generators.level import portals
 
 
 class PortalAdderConfiguration():
@@ -67,7 +68,10 @@ class PortalAdderFactory():
         :type rng: Random
         """
         super().__init__()
-        self.config = config
+        self.config = []
+        for key in config.keys():
+            self.config.extend(list(portals(config, key)))
+
         self.level_generator_factory = None
         self.rng = rng
 

@@ -39,14 +39,14 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                SurroundingDecoratorConfig,
                                                WallBuilderDecorator,
                                                WallBuilderDecoratorConfig)
-from pyherc.generators.level import ItemAdder, ItemAdderConfiguration
+from pyherc.generators.level import ItemAdder, ItemAdderConfiguration, new_level
 from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import CrimsonLairGenerator
 from pyherc.rules.constants import SLASHING_DAMAGE
 
 
-def _init_level(rng, item_generator, creature_generator, level_size, context):
+def init_level(rng, item_generator, creature_generator, level_size, context):
     """
     Initialise lair of crimson jaw
 
@@ -207,17 +207,21 @@ def _init_level(rng, item_generator, creature_generator, level_size, context):
                                  wall_type = wall_natural,
                                  level_types = ['crimson lair'])
 
-    config = (LevelConfiguration()
-                    .with_rooms(room_generators)
-                    .with_partitioners(level_partitioners)
-                    .with_decorators(decorators)
-                    .with_items(item_adders)
-                    .with_creatures(creature_adders)
-                    .with_portals(portal_adder_configurations)
-                    .with_contexts([level_context])
-                    .build())
+    return [new_level('crimson lair', room_generators, level_partitioners,
+                      decorators, item_adders, creature_adders,
+                      portal_adder_configurations)]    
 
-    return config
+    # config = (LevelConfiguration()
+    #                 .with_rooms(room_generators)
+    #                 .with_partitioners(level_partitioners)
+    #                 .with_decorators(decorators)
+    #                 .with_items(item_adders)
+    #                 .with_creatures(creature_adders)
+    #                 .with_portals(portal_adder_configurations)
+    #                 .with_contexts([level_context])
+    #                 .build())
+
+    # return config
 
 def init_creatures(context):
     """

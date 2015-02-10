@@ -41,14 +41,14 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                WallBuilderDecoratorConfig,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig)
-from pyherc.generators.level import ItemAdder, ItemAdderConfiguration
+from pyherc.generators.level import ItemAdder, ItemAdderConfiguration, new_level
 from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import (PillarRoomGenerator, PitRoomGenerator,
                                           SquareRoomGenerator)
 
 
-def _init_level(rng, item_generator, creature_generator, level_size, context):
+def init_level(rng, item_generator, creature_generator, level_size, context):
     """
     Initialise upper crypt levels
 
@@ -332,7 +332,7 @@ def _init_level(rng, item_generator, creature_generator, level_size, context):
                                  level_types = ['upper crypt',
                                                 'lower crypt'])
 
-    return [new_level('upper crypt', room_generator, level_partitioners,
+    return [new_level('upper crypt', room_generators, level_partitioners,
                       decorators, item_adders, creature_adders,
                       portal_adder_configurations)]
 
