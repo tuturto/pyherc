@@ -332,16 +332,20 @@ def _init_level(rng, item_generator, creature_generator, level_size, context):
                                  level_types = ['upper crypt',
                                                 'lower crypt'])
 
-    config = (LevelConfiguration()
-                    .with_rooms(room_generators)
-                    .with_partitioners(level_partitioners)
-                    .with_decorators(decorators)
-                    .with_items(item_adders)
-                    .with_creatures(creature_adders)
-                    .with_portals(portal_adder_configurations)
-                    .with_contexts([level_context])
-                    .build())
-    return config
+    return [new_level('upper crypt', room_generator, level_partitioners,
+                      decorators, item_adders, creature_adders,
+                      portal_adder_configurations)]
+
+    # config = (LevelConfiguration()
+    #                 .with_rooms(room_generators)
+    #                 .with_partitioners(level_partitioners)
+    #                 .with_decorators(decorators)
+    #                 .with_items(item_adders)
+    #                 .with_creatures(creature_adders)
+    #                 .with_portals(portal_adder_configurations)
+    #                 .with_contexts([level_context])
+    #                 .build())
+    # return config
 
 def init_creatures(context):
     """
