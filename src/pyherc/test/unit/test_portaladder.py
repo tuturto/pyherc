@@ -31,7 +31,7 @@ from pyherc.generators.level.portal import (PortalAdder,
                                             PortalAdderFactory)
 from pyherc.test.matchers import located_in_room
 from pyherc.test.builders import LevelBuilder
-from pyherc.generators.level import new_dungeon, add_level, new_level
+
 
 class TestPortalAdder():
     """
@@ -142,16 +142,14 @@ class TestPortalAdderFactory():
         """
         Test that factory can create a portal adder
         """
-        config = new_dungeon()
-        add_level(config, new_level('catacombs', [], [], [], [], [],
-                            [PortalAdderConfiguration(icons = (1, 2),
-                                                      level_type = 'catacombs',
-                                                      location_type = 'room',
-                                                      chance = 100,
-                                                      new_level = 'upper crypt',
-                                                      unique = False)]))
+        portal_config = [PortalAdderConfiguration(icons = (1, 2),
+                                                  level_type = 'catacombs',
+                                                  location_type = 'room',
+                                                  chance = 100,
+                                                  new_level = 'upper crypt',
+                                                  unique = False)]
 
-        factory = PortalAdderFactory(config,
+        factory = PortalAdderFactory(portal_config,
                                      self.rng)
         factory.level_generator_factory = mock()
 
@@ -163,22 +161,21 @@ class TestPortalAdderFactory():
         """
         Test that portal adder factory respects level type
         """
-        config = new_dungeon()
-        add_level(config, new_level('catacombs', [], [], [], [], [],
-                            [PortalAdderConfiguration(icons = (1, 2),
-                                                      level_type = 'catacombs',
-                                                      location_type = 'room',
-                                                      chance = 100,
-                                                      new_level = 'upper crypt',
-                                                      unique = False),
-                             PortalAdderConfiguration(icons = (1, 2),
-                                                      level_type = 'catacombs',
-                                                      location_type = 'room',
-                                                      chance = 100,
-                                                      new_level = 'dungeon',
-                                                      unique = False)]))
+        portal_config = [PortalAdderConfiguration(icons = (1, 2),
+                                                  level_type = 'catacombs',
+                                                  location_type = 'room',
+                                                  chance = 100,
+                                                  new_level = 'upper crypt',
+                                                  unique = False),
+                         PortalAdderConfiguration(icons = (1, 2),
+                                                  level_type = 'catacombs',
+                                                  location_type = 'room',
+                                                  chance = 100,
+                                                  new_level = 'dungeon',
+                                                  unique = False)
+                                                 ]
 
-        factory = PortalAdderFactory(config,
+        factory = PortalAdderFactory(portal_config,
                                      self.rng)
         factory.level_generator_factory = mock()
 
@@ -190,23 +187,21 @@ class TestPortalAdderFactory():
         """
         Test that portal adder factory respects level type
         """
-        config = new_dungeon()
-        add_level(config, new_level('catacombs', [], [], [], [], [],
-                            [PortalAdderConfiguration(icons = (1, 2),
-                                                      level_type = 'catacombs',
-                                                      location_type = 'room',
-                                                      chance = 100,
-                                                      new_level = 'upper crypt',
-                                                      unique = False)]))
-        add_level(config, new_level('upper crypt', [], [], [], [], [],
-                        [PortalAdderConfiguration(icons = (1, 2),
+        portal_config = [PortalAdderConfiguration(icons = (1, 2),
+                                                  level_type = 'catacombs',
+                                                  location_type = 'room',
+                                                  chance = 100,
+                                                  new_level = 'upper crypt',
+                                                  unique = False),
+                         PortalAdderConfiguration(icons = (1, 2),
                                                   level_type = 'upper crypt',
                                                   location_type = 'room',
                                                   chance = 100,
                                                   new_level = 'lower crypt',
-                                                  unique = False)]))
+                                                  unique = False)
+                                                 ]
 
-        factory = PortalAdderFactory(config,
+        factory = PortalAdderFactory(portal_config,
                                      self.rng)
         factory.level_generator_factory = mock()
 
@@ -219,23 +214,21 @@ class TestPortalAdderFactory():
         Test that portal adder factory graciously returns empty list when
         no match has been found
         """
-        config = new_dungeon()
-        add_level(config, new_level('catacombs', [], [], [], [], [],
-                            [PortalAdderConfiguration(icons = (1, 2),
-                                                      level_type = 'catacombs',
-                                                      location_type = 'room',
-                                                      chance = 100,
-                                                      new_level = 'upper crypt',
-                                                      unique = False)]))
-        add_level(config, new_level('upper crypt', [], [], [], [], [],
-                        [PortalAdderConfiguration(icons = (1, 2),
+        portal_config = [PortalAdderConfiguration(icons = (1, 2),
+                                                  level_type = 'catacombs',
+                                                  location_type = 'room',
+                                                  chance = 100,
+                                                  new_level = 'upper crypt',
+                                                  unique = False),
+                         PortalAdderConfiguration(icons = (1, 2),
                                                   level_type = 'upper crypt',
                                                   location_type = 'room',
                                                   chance = 100,
                                                   new_level = 'lower crypt',
-                                                  unique = False)]))
+                                                  unique = False)
+                                                 ]
 
-        factory = PortalAdderFactory(config,
+        factory = PortalAdderFactory(portal_config,
                                      self.rng)
 
         portal_adders = factory.create_portal_adders('castle')
@@ -247,23 +240,21 @@ class TestPortalAdderFactory():
         Test that unique portal adder specificatin is removed from configuration
         after it has been used first time
         """
-        config = new_dungeon()
-        add_level(config, new_level('catacombs', [], [], [], [], [],
-                            [PortalAdderConfiguration(icons = (1, 2),
-                                                      level_type = 'catacombs',
-                                                      location_type = 'room',
-                                                      chance = 100,
-                                                      new_level = 'upper crypt',
-                                                      unique = True)]))
-        add_level(config, new_level('upper crypt', [], [], [], [], [],
-                        [PortalAdderConfiguration(icons = (1, 2),
+        portal_config = [PortalAdderConfiguration(icons = (1, 2),
+                                                  level_type = 'catacombs',
+                                                  location_type = 'room',
+                                                  chance = 100,
+                                                  new_level = 'upper crypt',
+                                                  unique = True),
+                         PortalAdderConfiguration(icons = (1, 2),
                                                   level_type = 'upper crypt',
                                                   location_type = 'room',
                                                   chance = 100,
                                                   new_level = 'lower crypt',
-                                                  unique = False)]))
+                                                  unique = False)
+                                                 ]
 
-        factory = PortalAdderFactory(config,
+        factory = PortalAdderFactory(portal_config,
                                      self.rng)
         factory.level_generator_factory = mock()
 
@@ -275,16 +266,14 @@ class TestPortalAdderFactory():
         """
         Test that portal adder has level generator set to it
         """
-        config = new_dungeon()
-        add_level(config, new_level('catacombs', [], [], [], [], [],
-                            [PortalAdderConfiguration(icons = (1, 2),
-                                                      level_type = 'catacombs',
-                                                      location_type = 'room',
-                                                      chance = 100,
-                                                      new_level = 'upper crypt',
-                                                      unique = False)]))
+        portal_config = [PortalAdderConfiguration(icons = (1, 2),
+                                                  level_type = 'catacombs',
+                                                  location_type = 'room',
+                                                  chance = 100,
+                                                  new_level = 'upper crypt',
+                                                  unique = False)]
 
-        factory = PortalAdderFactory(config,
+        factory = PortalAdderFactory(portal_config,
                                      self.rng)
 
         portal_adders = factory.create_portal_adders('catacombs')
