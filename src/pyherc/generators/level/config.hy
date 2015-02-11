@@ -32,7 +32,7 @@
             (get ~level ~component-name)))
 
 (defmacro level-config [component-name dungeon level-name]
-  `(genexpr x [x (~component-name (get ~dungeon ~level-name))]))
+  `(list-comp x [x (~component-name (get ~dungeon ~level-name))]))
 
 (defn merge-level [dungeon level]
   "merge new level config into existing dungeon data"

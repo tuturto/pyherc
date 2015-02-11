@@ -52,7 +52,7 @@ class LevelGeneratorFactory():
         self.portal_adder_factory = portal_adder_factory
         #self.portal_adder_factory.level_generator_factory = self
 
-        self.random_generator = random_generator
+        self.rng = random_generator
 
 
     @log_info
@@ -82,7 +82,7 @@ class LevelGeneratorFactory():
                               portal_adders,
                               item_adders,
                               creature_adders,
-                              self.random_generator,
+                              self.rng,
                               None)
 
     @log_debug
@@ -130,7 +130,7 @@ class LevelGeneratorFactory():
                    if level_type in x.level_types]
 
         if len(matches) > 0:
-            component = self.random_generator.choice(matches)
+            component = self.rng.choice(matches)
         else:
             error_message = "No {0} for type {1} in {2}".format(
                 component_type,
@@ -147,14 +147,14 @@ class LevelGenerator():
     Class used to generate levels
     """
     @log_debug
-    def __init__(self, model, partitioner, room_generators,
+    def __init__(self, model, partitioners, room_generators,
                  decorator, portal_adders,
                  item_adder, creature_adder,
                  random_generator, level_context):
         """
         Default constructor
 
-        :param partitioner: LevelPartitioner to use
+        :param partitioners: LevelPartitioners to use
         :param room_generators: RoomGenerators to use
         :param decorator: LevelDecorator to use
         :param portal_adder: PortalAdder to use
@@ -168,9 +168,9 @@ class LevelGenerator():
         self.model = model
         self.item_adder = item_adder
         self.creature_adder = creature_adder
-        self.random_generator = random_generator
+        self.rng = random_generator
 
-        self.partitioner = partitioner
+        self.partitioners = partitioners
         self.room_generators = room_generators
         self.decorator = decorator
         self.portal_adders = portal_adders
@@ -186,15 +186,13 @@ class LevelGenerator():
         """
         level = new_level(self.model)
 
-        partitioner = binary_space_partitioning((80, 40), 
-                                                (9, 9),
-                                                self.random_generator)
+        partitioner = self.rng.choice(self.partitioners)
 
-        connector = RandomConnector(self.random_generator)
+        connector = RandomConnector(self.rng)
         sections = connector.connect_sections(partitioner(level))
 
         for section in sections:
-            generator = self.random_generator.choice(self.room_generators)
+            generator = self.rng.choice(self.room_generators)
             generator(section)
 
         for adder in self.portal_adders:
@@ -206,15 +204,18 @@ class LevelGenerator():
             if len(rooms) > 0:
                 new_portal = Portal(icons=(portal.other_end_icon, None),
                                     level_generator_name=None)
-                location = self.random_generator.choice(rooms)
+                location = self.rng.choice(rooms)
                 add_portal(level, location, new_portal, portal)
             else:
                 self.logger.warn('no location found, skipping')
 
-        self.creature_adder.add_creatures(level)
+        for adder in self.creature_adder:
+            adder.add_creatures(level)
 
-        self.item_adder.add_items(level)
+        for adder in self.item_adder:
+            adder.add_items(level)
 
-        self.decorator.decorate_level(level)
+        for decorator in self.decorator:
+            decorator.decorate_level(level)
 
         return level

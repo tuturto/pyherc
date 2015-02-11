@@ -52,6 +52,7 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
 from pyherc.generators.level import ItemAdder, ItemAdderConfiguration
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level import new_dungeon, new_level, add_level
+from pyherc.generators.level.partitioners import binary_space_partitioning
 from pyherc.generators.level.room import (CacheRoomGenerator,
                                           CircularRoomGenerator,
                                           LibraryRoomGenerator,
@@ -260,7 +261,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                               skeletons(50, creature_generator, rng), rng)
             ]
 
-    level_partitioners = []
+    level_partitioners = [binary_space_partitioning((80, 40), (9, 9), rng)]
 
     surrounder_config = SurroundingDecoratorConfig(['first gate'],
                                                    wall_natural)
