@@ -24,6 +24,6 @@
 #i(defn generate-dungeon [model level-generator]
     "generate start of the dungeon"
     (let [[dungeon (Dungeon)]
-      [level (.generate-level level-generator nil)]]
+      [level (level-generator nil)]]
       (add-character level (find-free-space level) model.player)
       dungeon))

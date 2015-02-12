@@ -61,7 +61,7 @@ class Portal():
         if self.__other_end is None:
             level_generator = level_generator_factory.get_generator(
                 self.level_generator_name)
-            level_generator.generate_level(self)
+            level_generator(self)
 
         return self.__other_end
 
