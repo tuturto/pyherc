@@ -36,12 +36,10 @@
       (ap-each sections ((.choice rng room-generators) it))
       (ap-each portal-adders (.add-portal it level))
       (when portal (let [[rooms (list (get-locations-by-tag level "room"))]]
-                     (when rooms (let [[new-portal (Portal #t (portal.other-end-icon nil)
-                                                           nil)]]
-                                   (add-portal level
-                                               (.choice rng rooms)
-                                               new-portal
-                                               portal)))))
+                     (when rooms (add-portal level
+                                             (.choice rng rooms)
+                                             (Portal #t(portal.other-end-icon nil) nil)
+                                             portal))))
       (ap-each creature-adders (.add-creatures it level))
       (ap-each item-adders (.add-items it level))
       (ap-each decorators (.decorate-level it level))
