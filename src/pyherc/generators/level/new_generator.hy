@@ -35,7 +35,7 @@
           [sections (.connect-sections connector (partitioner level))]]
       (ap-each sections ((.choice rng room-generators) it))
       (ap-each portal-adders (.add-portal it level))
-      (when portal (let [[rooms (list (get-location-by-tag level "room"))]]
+      (when portal (let [[rooms (list (get-locations-by-tag level "room"))]]
                      (when rooms (let [[new-portal (Portal #t (portal.other-end-icon nil)
                                                            nil)]]
                                    (add-portal level
