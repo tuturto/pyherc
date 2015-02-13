@@ -48,6 +48,12 @@ class Decorator():
 
     level_types = property(__get_level_types)
 
+    def __call__(self, level):
+        """
+        decorate level
+        """
+        self.decorate_level(level)
+
     def decorate_level(self, level):
         """
         Decorate level

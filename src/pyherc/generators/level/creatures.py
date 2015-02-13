@@ -95,6 +95,12 @@ class CreatureAdder():
         """
         return self.configuration.level_types
 
+    def __call__(self, level):
+        """
+        Add creatures to level according to configuration
+        """
+        self.add_creatures(level)
+
     @log_info
     def add_creatures(self, level):
         """

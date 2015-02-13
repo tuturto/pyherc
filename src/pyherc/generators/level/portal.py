@@ -121,6 +121,12 @@ class PortalAdder():
         self.icons = icons
         self.escape_stairs = escape_stairs
 
+    def __call__(self, level):
+        """
+        Add given stairs to the level
+        """
+        self.add_portal(level)
+
     @log_info
     def add_portal(self, level):
         """

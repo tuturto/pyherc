@@ -94,6 +94,12 @@ class ItemAdder():
         """
         return self.configuration.level_types
 
+    def __call__(self, level):
+        """
+        Add items
+        """
+        self.add_items(level)
+
     @log_info
     def add_items(self, level):
         """
