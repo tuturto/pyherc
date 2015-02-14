@@ -27,7 +27,8 @@ from herculeum.config.room_generators import (square_room, circular_room,
                                               square_graveyard,
                                               circular_graveyard,
                                               square_pitroom,
-                                              skeletons, mundane_items)
+                                              skeletons, mundane_items,
+                                              square_library)
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
@@ -55,7 +56,6 @@ from pyherc.generators.level import new_dungeon, new_level, add_level
 from pyherc.generators.level.partitioners import binary_space_partitioning
 from pyherc.generators.level.room import (CacheRoomGenerator,
                                           CircularRoomGenerator,
-                                          LibraryRoomGenerator,
                                           PillarRoomGenerator,
                                           SquareRoomGenerator,
                                           TempleRoomGenerator)
@@ -218,36 +218,14 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            [fountain_f0,
                                             fountain_f1],
                                            ['first gate']),
-                       LibraryRoomGenerator(tile_floor,
-                                            tile_floor,
-                                            [shelf_1, shelf_2, shelf_3],
-                                            None,
-                                            75,
-                                            None,
-                                            ['first gate']),
-                       LibraryRoomGenerator(tile_floor,
-                                            tile_floor,
-                                            None,
-                                            [tomb_1, tomb_2, tomb_3,
-                                             tomb_4, tomb_5, tomb_6,
-                                             tomb_7, tomb_8, tomb_9],
-                                            50,
-                                            tomb_creator(item_generator,
-                                                         creature_generator,
-                                                         rng),
-                                            ['first gate']),
                        CacheRoomGenerator(tile_floor,
                                           tile_floor,
                                           cache_creator(altar,
                                                         item_generator,
                                                         rng),
                                           ['first gate'])]
-
-    #rooms = room_configuration('first gate',
-    #                           square_room(tile_floor, tile_floor, rng),
-    #                           circular_room(tile_floor, tile_floor, rng))
     
-    rooms = [square_room(tile_floor, tile_floor, rng),
+    rooms = [square_room(tile_floor, tile_floor, rng),             
              circular_room(tile_floor, tile_floor, rng),
              circular_graveyard(tile_floor, tile_floor,
                                 [tomb_1, tomb_2, tomb_3, tomb_4, tomb_5,
@@ -258,7 +236,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                               [tomb_1, tomb_2, tomb_3, tomb_4, tomb_5,
                                tomb_6, tomb_7, tomb_8, tomb_9],
                               mundane_items(50, item_generator, rng), 
-                              skeletons(50, creature_generator, rng), rng)
+                              skeletons(50, creature_generator, rng), rng),
+             square_library(tile_floor, tile_floor, 
+                            [shelf_1, shelf_2, shelf_3], rng)
             ]
 
     level_partitioners = [binary_space_partitioning((80, 40), (9, 9), rng)]

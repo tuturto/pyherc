@@ -37,3 +37,4 @@ from .overlays import add_rows, add_columns, mark_center_area
 from .generator import new_room_generator
 from .shapes import square_shape, circular_shape
 from .traps import trap_creator
+from .walls import wall_creator

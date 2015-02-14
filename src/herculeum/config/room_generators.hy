@@ -22,6 +22,7 @@
                                        circular-shape corridors
                                        add-rows cache-creator mark-center-area
                                        random-rows trap-creator
+                                       wall-creator
                                        center-area]])
 
 (defn square-room [floor-tile corridor-tile rng]
@@ -53,11 +54,18 @@
 
 (defn square-graveyard [floor-tile corridor-tile grave-tiles
                         item-selector character-selector rng]
-  "create generator for circular graveyard"
+  "create generator for square graveyard"
   (new-room-generator (square-shape floor-tile rng)
                       (add-rows)
                       (cache-creator grave-tiles (random-rows 75 rng)
                                      item-selector character-selector rng)
+                      (corridors corridor-tile)))
+
+(defn square-library [floor-tile corridor-tile bookshelf-tiles rng]
+  "create generator for square library"
+  (new-room-generator (square-shape floor-tile rng)
+                      (add-rows)
+                      (wall-creator bookshelf-tiles (random-rows 75 rng) rng)
                       (corridors corridor-tile)))
 
 (defn square-pitroom [floor-tile corridor-tile pit-tile rng]
