@@ -60,6 +60,12 @@ class PillarRoomGenerator():
         self.pillar_tile = pillar_tile
         self.rng = Random()
 
+    def __call__(self, section):
+        """
+        Generate room
+        """
+        self.generate_room(section)
+
     @log_debug
     def generate_room(self, section):
         """

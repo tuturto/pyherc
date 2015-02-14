@@ -50,6 +50,12 @@ class CatacombsGenerator():
         self.level_types = level_types
         self.rng = rng
 
+    def __call__(self, section):
+        """
+        Generate room
+        """
+        self.generate_room(section)
+
     @log_debug
     def generate_room(self, section):
         """

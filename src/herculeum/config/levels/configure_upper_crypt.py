@@ -113,7 +113,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         level_types = ['upper crypt'])
                                         ]
 
-    level_partitioners = [grid_partitioning((80, 25), 4, 2, rng)]
+    level_partitioners = [grid_partitioning((15, 15), 4, 4, rng)]
 
     replacer_config = ReplacingDecoratorConfig(['upper crypt'],
                                     {floor_natural: floor_rock,

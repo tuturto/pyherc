@@ -68,12 +68,21 @@ class TestMainConfiguration():
         assert_that(config.model, is_(not_none()))
         assert_that(config.rng, is_(not_none()))
 
+    def test_first_gate_generator(self):
+        """
+        Test that first gate level generator can be retrieved and used
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('first gate')
+        level = generator(None)
+
     def test_upper_catacombs_generator(self):
         """
         Test that upper catacombs level generator can be retrieved
         """
         factory = self.config.level_generator_factory
         generator = factory.get_generator('upper catacombs')
+        level = generator(None)
 
     def test_lower_catacombs_generator(self):
         """
@@ -81,6 +90,7 @@ class TestMainConfiguration():
         """
         factory = self.config.level_generator_factory
         generator = factory.get_generator('lower catacombs')
+        level = generator(None)
 
     def test_upper_crypt_generator(self):
         """
@@ -88,6 +98,7 @@ class TestMainConfiguration():
         """
         factory = self.config.level_generator_factory
         generator = factory.get_generator('upper crypt')
+        level = generator(None)
 
     def test_crimson_lair_generator(self):
         """
@@ -95,6 +106,7 @@ class TestMainConfiguration():
         """
         factory = self.config.level_generator_factory
         generator = factory.get_generator('crimson lair')
+        level = generator(None)
 
     def test_inventory_factory_has_been_initialised(self):
         """

@@ -61,6 +61,12 @@ class SquareRoomGenerator():
         self.rows = []
         self.logger = logging.getLogger('pyherc.generators.level.room.squareroom.SquareRoomGenerator')  # noqa
 
+    def __call__(self, section):
+        """
+        Generate room
+        """
+        self.generate_room(section)
+
     def generate_room(self, section):
         """
         Generate room

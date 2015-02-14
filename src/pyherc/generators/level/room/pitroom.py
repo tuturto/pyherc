@@ -62,6 +62,12 @@ class PitRoomGenerator():
         self.pit_tile = pit_tile
         self.trap_type = trap_type
 
+    def __call__(self, section):
+        """
+        Generate room
+        """
+        self.generate_room(section)
+
     @log_debug
     def generate_room(self, section):
         """
