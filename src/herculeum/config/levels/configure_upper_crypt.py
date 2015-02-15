@@ -44,9 +44,10 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
 from pyherc.generators.level import ItemAdder, ItemAdderConfiguration, new_level
 from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level import PortalAdderConfiguration
-from pyherc.generators.level.room import (PillarRoomGenerator, PitRoomGenerator,
+from pyherc.generators.level.room import (PillarRoomGenerator,
                                           SquareRoomGenerator)
-from herculeum.config.room_generators import circular_pitroom, square_pitroom
+from herculeum.config.room_generators import (circular_pitroom, square_pitroom,
+                                              square_room)
 
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
@@ -88,15 +89,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     pit_tile = 'pit'
 
-    room_generators = [SquareRoomGenerator(floor_natural,
-                                           wall_empty,
-                                           floor_natural,
-                                           ['upper crypt']),
-                       SquareRoomGenerator(floor_constructed,
-                                           wall_empty,
-                                           floor_natural,
-                                           ['upper crypt']),
-                       PillarRoomGenerator(floor_tile = floor_constructed,
+    room_generators = [PillarRoomGenerator(floor_tile = floor_constructed,
                                            corridor_tile = floor_natural,
                                            empty_tile = wall_empty,
                                            pillar_tile = wall,
@@ -106,24 +99,32 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            empty_tile = wall_empty,
                                            pillar_tile = wall,
                                            level_types = ['upper crypt']),
-                       PitRoomGenerator(floor_tile = floor_natural,
-                                        corridor_tile = floor_natural,
-                                        empty_tile = wall_empty,
-                                        pit_tile = pit_tile,
-                                        trap_type=PitTrap,
-                                        level_types = ['upper crypt'])
                                         ]
 
     room_generators = [circular_pitroom(floor_natural, 
                                         floor_natural, 
                                         pit_tile, 
                                         rng),
+                       circular_pitroom(floor_constructed,
+                                        floor_natural,
+                                        pit_tile,
+                                        rng),
                        square_pitroom(floor_natural, 
                                       floor_natural, 
                                       pit_tile, 
-                                      rng)]
+                                      rng),
+                       square_pitroom(floor_constructed,
+                                      floor_natural,
+                                      pit_tile,
+                                      rng),
+                       square_room(floor_natural,
+                                   floor_natural,
+                                   rng),
+                       square_room(floor_constructed,
+                                   floor_natural,
+                                   rng)]
 
-    level_partitioners = [grid_partitioning((15, 15), 4, 4, rng)]
+    level_partitioners = [grid_partitioning((15, 15), 4, 6, rng)]
 
     replacer_config = ReplacingDecoratorConfig(['upper crypt'],
                                     {floor_natural: floor_rock,
