@@ -21,4 +21,7 @@
 """
 Package for tests
 """
-pass
+import hy
+
+from herculeum.test.unit.test_room_generators import *
+

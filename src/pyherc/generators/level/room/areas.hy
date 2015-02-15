@@ -23,7 +23,7 @@
 
 (defn center-tile [section]
   "select center tile of section"
-  (section-data section :center-point))
+  [(section-data section :center-point)])
 
 (defn random-rows [percentage rng]
   "create selector for picking random row tiles"
