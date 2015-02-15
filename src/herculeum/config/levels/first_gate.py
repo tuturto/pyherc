@@ -28,7 +28,7 @@ from herculeum.config.room_generators import (square_room, circular_room,
                                               circular_graveyard,
                                               square_pitroom,
                                               skeletons, mundane_items,
-                                              square_library)
+                                              square_library, circular_library)
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
@@ -238,7 +238,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                               mundane_items(50, item_generator, rng), 
                               skeletons(50, creature_generator, rng), rng),
              square_library(tile_floor, tile_floor, 
-                            [shelf_1, shelf_2, shelf_3], rng)
+                            [shelf_1, shelf_2, shelf_3], rng),
+             circular_library(tile_floor, tile_floor, 
+                              [shelf_1, shelf_2, shelf_3], rng)
             ]
 
     level_partitioners = [binary_space_partitioning((80, 40), (9, 9), rng)]
