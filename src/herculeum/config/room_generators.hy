@@ -68,6 +68,13 @@
                       (wall-creator bookshelf-tiles (random-rows 75 rng) rng)
                       (corridors corridor-tile)))
 
+(defn circular-library [floor-tile corridor-tile bookshelf-tiles rng]
+  "create generator for circular library"
+  (new-room-generator (circular-shape floor-tile rng)
+                      (add-rows)
+                      (wall-creator bookshelf-tiles (random-rows 75 rng) rng)
+                      (corridors corridor-tile)))
+
 (defn square-pitroom [floor-tile corridor-tile pit-tile rng]
   "create generator for a square room with large pit in the middle"
   (new-room-generator (square-shape floor-tile rng)
