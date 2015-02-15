@@ -23,5 +23,5 @@ Package for tests
 """
 import hy
 
-from herculeum.test.unit.test_room_generators import *
+from herculeum.test.integration.test_room_generators import *
 
