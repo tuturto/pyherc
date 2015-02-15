@@ -25,8 +25,7 @@
                                        CatacombsGenerator CrimsonLairGenerator
                                        CircularRoomGenerator
                                        TempleRoomGenerator
-                                       LibraryRoomGenerator
-                                       PitRoomGenerator]]
+                                       LibraryRoomGenerator]]
         [pyherc.generators.level.partitioners [grid-partitioning]]
         [pyherc.test.builders [LevelBuilder]]
         [random [Random]])
@@ -68,10 +67,6 @@
   "test generating library"
   (run-generator (LibraryRoomGenerator :floor :corridor [:shelf1 :shelf2] nil 50
                                        nil ["test"])))
-
-(defn test-pitroom-generation []
-  "test generating pit room"
-  (run-generator (PitRoomGenerator :floor :corridor nil :pit PitTrap ["test"])))
 
 (defn test-cacheroom-generation []
   "test generating cache room"
