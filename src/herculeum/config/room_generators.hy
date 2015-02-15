@@ -82,6 +82,13 @@
                       (trap-creator [pit-tile] PitTrap (center-area) rng)
                       (corridors corridor-tile)))
 
+(defn circular-pitroom [floor-tile corridor-tile pit-tile rng]
+  "create generator for a circular room with large pit in the middle"
+  (new-room-generator (circular-shape floor-tile)
+                      (mark-center-area)
+                      (trap-creator [pit-tile] PitTrap (center-area) rng)
+                      (corridors corridor-tile)))
+
 (defn skeletons [empty-pct character-generator rng]
   "create character selector for skeletons"
   (fn []

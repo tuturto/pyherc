@@ -46,6 +46,7 @@ from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import (PillarRoomGenerator, PitRoomGenerator,
                                           SquareRoomGenerator)
+from herculeum.config.room_generators import circular_pitroom, square_pitroom
 
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
@@ -112,6 +113,15 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         trap_type=PitTrap,
                                         level_types = ['upper crypt'])
                                         ]
+
+    room_generators = [circular_pitroom(floor_natural, 
+                                        floor_natural, 
+                                        pit_tile, 
+                                        rng),
+                       square_pitroom(floor_natural, 
+                                      floor_natural, 
+                                      pit_tile, 
+                                      rng)]
 
     level_partitioners = [grid_partitioning((15, 15), 4, 4, rng)]
 
