@@ -89,6 +89,11 @@
                       (trap-creator [pit-tile] PitTrap (center-area) rng)
                       (corridors corridor-tile)))
 
+(defn no-characters []
+  "create character selector for nothing"
+  (fn []
+    []))
+
 (defn skeletons [empty-pct character-generator rng]
   "create character selector for skeletons"
   (fn []
@@ -96,6 +101,21 @@
       (let [[roll (.randint rng 1 100)]]
         (cond
          [true [(character-generator "skeleton warrior")]]))
+      [])))
+
+(defn no-items []
+  "create item selector for nothing"
+  (fn []
+    []))
+
+(defn altar-items [empty-pct item-generator rng]
+  "create item selector for items found on common altars"
+  (fn []
+    (if (> (.randint rng 1 100) empty-pct)
+      (let [[roll (.randint rng 1 100)]]
+        (cond
+         [(> roll 50) [(.generate-item item-generator "robes")]]
+         [true [(.generate-item item-generator nil "tome")]]))
       [])))
 
 (defn mundane-items [empty-pct item-generator rng]

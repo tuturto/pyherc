@@ -28,7 +28,10 @@ from herculeum.config.room_generators import (square_room, circular_room,
                                               circular_graveyard,
                                               square_pitroom,
                                               skeletons, mundane_items,
-                                              square_library, circular_library)
+                                              no_characters, no_items,
+                                              altar_items,
+                                              square_library, circular_library,
+                                              circular_cache_room)
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
@@ -54,70 +57,11 @@ from pyherc.generators.level import ItemAdder, ItemAdderConfiguration
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level import new_dungeon, new_level, add_level
 from pyherc.generators.level.partitioners import binary_space_partitioning
-from pyherc.generators.level.room import (CacheRoomGenerator,
-                                          CircularRoomGenerator,
-                                          PillarRoomGenerator,
-                                          SquareRoomGenerator,
+from pyherc.generators.level.room import (PillarRoomGenerator,
                                           TempleRoomGenerator)
 from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
-
-def tomb_creator(item_generator, character_generator, rng):
-    """
-    create a function for creating tombs
-    """
-    def create_tomb(level, location):
-        "create a tomb at given location"
-
-        selection = rng.randint(1, 10)
-        if selection > 8:
-            character = [character_generator('skeleton warrior')]
-        elif selection > 5:
-            character = [character_generator('rat')]
-        else:
-            character = []
-
-        selection = rng.randint(1, 10)
-        if selection > 9:
-            item = [item_generator.generate_item(name=None,
-                                                 item_type='martial weapon')]
-        elif selection > 4:
-            item = [item_generator.generate_item(name=None,
-                                                 item_type='simple weapon')]
-        else:
-            item = []
-
-    return create_tomb
-
-def cache_creator(cache_tile, item_generator, rng):
-    """
-    create a function for creating caches
-    """
-    def create_cache(level, location):
-        """
-        """
-        selection = rng.randint(1, 10)
-
-        if selection > 9:
-            floor_tile(level, location, cache_tile)
-
-        selection = rng.randint(1, 10)
-
-        items = []
-        if selection > 9:
-            for i in range(1, rng.randint(2, 5)):
-                items.append(item_generator.generate_item(name=None,
-                                                          item_type='tome'))
-        elif selection > 7:
-            for i in range(1, rng.randint(2, 5)):
-                items.append(item_generator.generate_item(name=None,
-                                                          item_type='potion'))
-
-        add_location_feature(level, location,
-                             new_cache(level, location, items, []))
-
-    return create_cache
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
     """
@@ -195,18 +139,11 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     tomb_8 = surface_manager.add_icon('tomb 8', ':tomb_8.png', '|')
     tomb_9 = surface_manager.add_icon('tomb 9', ':tomb_9.png', '|')
 
-    rooms = [SquareRoomGenerator(tile_floor,
-                                           wall_empty,
-                                           tile_floor,
-                                           ['first gate']),
-                       PillarRoomGenerator(floor_tile = tile_floor,
+    rooms = [          PillarRoomGenerator(floor_tile = tile_floor,
                                            corridor_tile = tile_floor,
                                            empty_tile = wall_empty,
                                            pillar_tile = pillar,
                                            level_types = ['first gate']),
-                       CircularRoomGenerator(tile_floor,
-                                             tile_floor,
-                                             ['first gate']),
                        TempleRoomGenerator(tile_floor,
                                            tile_floor,
                                            altar,
@@ -217,13 +154,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            tile_floor,
                                            [fountain_f0,
                                             fountain_f1],
-                                           ['first gate']),
-                       CacheRoomGenerator(tile_floor,
-                                          tile_floor,
-                                          cache_creator(altar,
-                                                        item_generator,
-                                                        rng),
-                                          ['first gate'])]
+                                           ['first gate'])]
     
     rooms = [square_room(tile_floor, tile_floor, rng),             
              circular_room(tile_floor, tile_floor, rng),
@@ -240,7 +171,10 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
              square_library(tile_floor, tile_floor, 
                             [shelf_1, shelf_2, shelf_3], rng),
              circular_library(tile_floor, tile_floor, 
-                              [shelf_1, shelf_2, shelf_3], rng)
+                              [shelf_1, shelf_2, shelf_3], rng),
+             circular_cache_room(tile_floor, tile_floor, [altar], 
+                                 altar_items(50, item_generator, rng),
+                                 no_characters(), rng)
             ]
 
     level_partitioners = [binary_space_partitioning((80, 40), (9, 9), rng)]
