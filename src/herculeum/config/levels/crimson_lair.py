@@ -137,7 +137,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                north_south_west = floor157,
                                                east_south_west = floor357,
                                                fourway = floor1357,
-                                               floor = floor_natural)
+                                               floor = floor_natural,
+                                               nook_west = floor1357,
+                                               nook_east = floor1357)
     floor_builder = FloorBuilderDecorator(floor_config)
 
     wall_direction_config = DirectionalWallDecoratorConfig(['upper crypt'],

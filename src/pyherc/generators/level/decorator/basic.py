@@ -386,7 +386,8 @@ class FloorBuilderDecoratorConfig(DecoratorConfig):
                  single, north, east, south, west, north_east, north_south,
                  north_west, east_south, east_west, south_west,
                  north_east_south, north_east_west, north_south_west,
-                 east_south_west, fourway, floor):
+                 east_south_west, fourway, floor,
+                 nook_west, nook_east):
         """
         Default constructor
         """
@@ -409,11 +410,14 @@ class FloorBuilderDecoratorConfig(DecoratorConfig):
         self.north_south_west = north_south_west
         self.fourway = fourway
         self.floor = floor
+        self.nook_west = nook_west
+        self.nook_east = nook_east
 
         self.tiles = [single, north, east, south, west, north_east,
                       north_south, north_west, east_south, east_west,
                       south_west, north_east_south, north_east_west,
-                      north_south_west, east_south_west, fourway, floor]
+                      north_south_west, east_south_west, fourway, floor,
+                      nook_west, nook_east]
 
 
 class FloorBuilderDecorator(Decorator):
@@ -448,6 +452,11 @@ class FloorBuilderDecorator(Decorator):
                       '357': configuration.east_south_west,
                       '1357': configuration.fourway}
 
+        self.nook_west = configuration.nook_west
+        self.nook_east = configuration.nook_east
+
+        self.second_pass = []
+
     def decorate_level(self, level):
         """
         Decorate level
@@ -461,6 +470,31 @@ class FloorBuilderDecorator(Decorator):
                 floor_tile(level, location,
                            self.get_floor_tile(level, location))
 
+        for location in self.second_pass:
+            if get_tile(level, location):
+                floor_tile(level, location,
+                           self.check_nook(level, location))
+                
+
+    def check_nook(self, level, location):
+        loc_x, loc_y = location
+
+        if (floor_tile(level, (loc_x, loc_y - 1)) in [self.tiles['15'],
+                                                      self.tiles['35']]
+            and floor_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles
+            and floor_tile(level, (loc_x - 1, loc_y)) in [self.tiles['37'],
+                                                          self.tiles['35']]):
+            return self.nook_west
+
+        if (floor_tile(level, (loc_x, loc_y - 1)) in [self.tiles['15'],
+                                                      self.tiles['57']]
+            and floor_tile(level, (loc_x - 1, loc_y)) in self.configuration.tiles
+            and floor_tile(level, (loc_x + 1, loc_y)) in [self.tiles['37'],
+                                                          self.tiles['57']]):
+            return self.nook_east
+
+        return self.tiles['1357']
+
     def get_floor_tile(self, level, location):
         """
         Calculate correct floor tile
@@ -470,9 +504,23 @@ class FloorBuilderDecorator(Decorator):
         :returns: new floor tile
         :rtype: int
         """
-
         loc_x, loc_y = location
         directions = []
+
+        if (floor_tile(level, (loc_x - 1, loc_y - 1)) not in self.configuration.tiles
+            and floor_tile(level, (loc_x, loc_y - 1)) in self.configuration.tiles
+            and floor_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles
+            and floor_tile(level, (loc_x - 1, loc_y)) in self.configuration.tiles):
+            self.second_pass.append(location)
+            return self.tiles['']
+
+        if (floor_tile(level, (loc_x + 1, loc_y - 1)) not in self.configuration.tiles
+            and floor_tile(level, (loc_x, loc_y - 1)) in self.configuration.tiles
+            and floor_tile(level, (loc_x - 1, loc_y)) in self.configuration.tiles
+            and floor_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles):
+            self.second_pass.append(location)
+            return self.tiles['']
+
         if floor_tile(level, (loc_x, loc_y - 1)) in self.configuration.tiles:
             directions.append('1')
         if floor_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles:

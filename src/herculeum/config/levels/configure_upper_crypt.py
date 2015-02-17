@@ -192,7 +192,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                north_south_west = floor157,
                                                east_south_west = floor357,
                                                fourway = floor1357,
-                                               floor = floor_natural)
+                                               floor = floor_natural,
+                                               nook_west = floor1357,
+                                               nook_east = floor1357)
     floor_builder = FloorBuilderDecorator(floor_config)
 
     board_floor = surface_manager.add_icon('crypt_floor_2', ':crypt_floor_2.png', ' ')
@@ -213,23 +215,25 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     board_floor1357 = surface_manager.add_icon('crypt_floor_2_1357', ':crypt_floor_2_1357.png', ' ')
 
     board_floor_config = FloorBuilderDecoratorConfig([],
-                                               single = board_floor,
-                                               north = board_floor1,
-                                               east = board_floor3,
-                                               south = board_floor5,
-                                               west = board_floor7,
-                                               north_east = board_floor13,
-                                               north_south = board_floor15,
-                                               north_west = board_floor17,
-                                               east_south = board_floor35,
-                                               east_west = board_floor37,
-                                               south_west = board_floor57,
-                                               north_east_south = board_floor135,
-                                               north_east_west = board_floor137,
-                                               north_south_west = board_floor157,
-                                               east_south_west = board_floor357,
-                                               fourway = board_floor1357,
-                                               floor = floor_constructed)
+                                                     single = board_floor,
+                                                     north = board_floor1,
+                                                     east = board_floor3,
+                                                     south = board_floor5,
+                                                     west = board_floor7,
+                                                     north_east = board_floor13,
+                                                     north_south = board_floor15,
+                                                     north_west = board_floor17,
+                                                     east_south = board_floor35,
+                                                     east_west = board_floor37,
+                                                     south_west = board_floor57,
+                                                     north_east_south = board_floor135,
+                                                     north_east_west = board_floor137,
+                                                     north_south_west = board_floor157,
+                                                     east_south_west = board_floor357,
+                                                     fourway = board_floor1357,
+                                                     floor = floor_constructed,
+                                                     nook_west = board_floor1357,
+                                                     nook_east = board_floor1357)
     board_floor_builder = FloorBuilderDecorator(board_floor_config)
 
     pit = surface_manager.add_icon('brick_pit_07', ':brick_pit_07.png', '^')
@@ -248,6 +252,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     pit157 = surface_manager.add_icon('brick_pit_06', ':brick_pit_06.png', '^')
     pit357 = surface_manager.add_icon('brick_pit_02', ':brick_pit_02.png', '^')
     pit1357 = surface_manager.add_icon('brick_pit_05', ':brick_pit_05.png', '^')
+    pit_west = surface_manager.add_icon('brick_pit_09', ':brick_pit_09.png', '^')
+    pit_east = surface_manager.add_icon('brick_pit_11', ':brick_pit_11.png', '^')
 
     pit_config = FloorBuilderDecoratorConfig([],
                                              single = pit,
@@ -266,7 +272,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                              north_south_west = pit157,
                                              east_south_west = pit357,
                                              fourway = pit1357,
-                                             floor = pit_tile)
+                                             floor = pit_tile,
+                                             nook_west = pit_west,
+                                             nook_east = pit_east)
     pit_builder = FloorBuilderDecorator(pit_config)
 
     torches_tile_f0 = surface_manager.add_icon('crypt_torches_f0', ':wall_torches_f0.png', '¤')

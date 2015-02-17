@@ -254,7 +254,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                north_south_west = floor157,
                                                east_south_west = floor357,
                                                fourway = floor1357,
-                                               floor = tile_floor)
+                                               floor = tile_floor,
+                                               nook_west = floor1357,
+                                               nook_east = floor1357)
     floor_builder = FloorBuilderDecorator(floor_config)
 
     torches_tile_f0 = surface_manager.add_icon('catacombs_torches_f0',
