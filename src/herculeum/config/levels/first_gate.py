@@ -156,7 +156,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                             fountain_f1],
                                            ['first gate'])]
     
-    rooms = [square_room(tile_floor, tile_floor, rng),             
+    rooms = [circular_room('ground_tile3', tile_floor, rng),
+             square_room('ground_tile3', tile_floor, rng),
+             square_room(tile_floor, tile_floor, rng),             
              circular_room(tile_floor, tile_floor, rng),
              circular_graveyard(tile_floor, tile_floor,
                                 [tomb_1, tomb_2, tomb_3, tomb_4, tomb_5,
@@ -168,9 +170,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                tomb_6, tomb_7, tomb_8, tomb_9],
                               mundane_items(50, item_generator, rng), 
                               skeletons(50, creature_generator, rng), rng),
-             square_library(tile_floor, tile_floor, 
+             square_library('ground_tile3', tile_floor, 
                             [shelf_1, shelf_2, shelf_3], rng),
-             circular_library(tile_floor, tile_floor, 
+             circular_library('ground_tile3', tile_floor, 
                               [shelf_1, shelf_2, shelf_3], rng),
              circular_cache_room(tile_floor, tile_floor, [altar], 
                                  altar_items(50, item_generator, rng),
@@ -201,6 +203,40 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                    west_north_south = wall_157,
                                                    four_way = wall_1357,
                                                    wall = wall_constructed)
+
+    surface_manager.add_icon('ground_tile3', ':ground/ground_tile3.png', ' ')
+    surface_manager.add_icon('ground_tile3_1', ':ground/ground_tile3_1.png', ' ')
+    surface_manager.add_icon('ground_tile3_3', ':ground/ground_tile3_3.png', ' ')
+    surface_manager.add_icon('ground_tile3_5', ':ground/ground_tile3_5.png', ' ')
+    surface_manager.add_icon('ground_tile3_7', ':ground/ground_tile3_7.png', ' ')
+    surface_manager.add_icon('ground_tile3_13', ':ground/ground_tile3_13.png', ' ')
+    surface_manager.add_icon('ground_tile3_15', ':ground/ground_tile3_15.png', ' ')
+    surface_manager.add_icon('ground_tile3_17', ':ground/ground_tile3_17.png', ' ')
+    surface_manager.add_icon('ground_tile3_35', ':ground/ground_tile3_35.png', ' ')
+    surface_manager.add_icon('ground_tile3_37', ':ground/ground_tile3_37.png', ' ')
+    surface_manager.add_icon('ground_tile3_57', ':ground/ground_tile3_57.png', ' ')
+    surface_manager.add_icon('ground_tile3_135', ':ground/ground_tile3_135.png', ' ')
+    surface_manager.add_icon('ground_tile3_137', ':ground/ground_tile3_137.png', ' ')
+    surface_manager.add_icon('ground_tile3_157', ':ground/ground_tile3_157.png', ' ')
+    surface_manager.add_icon('ground_tile3_357', ':ground/ground_tile3_357.png', ' ')
+    surface_manager.add_icon('ground_tile3_1357', ':ground/ground_tile3_1357.png', ' ')
+
+    surface_manager.add_icon('ground_tile4', ':ground/ground_tile4.png', ' ')
+    surface_manager.add_icon('ground_tile4_1', ':ground/ground_tile4_1.png', ' ')
+    surface_manager.add_icon('ground_tile4_3', ':ground/ground_tile4_3.png', ' ')
+    surface_manager.add_icon('ground_tile4_5', ':ground/ground_tile4_5.png', ' ')
+    surface_manager.add_icon('ground_tile4_7', ':ground/ground_tile4_7.png', ' ')
+    surface_manager.add_icon('ground_tile4_13', ':ground/ground_tile4_13.png', ' ')
+    surface_manager.add_icon('ground_tile4_15', ':ground/ground_tile4_15.png', ' ')
+    surface_manager.add_icon('ground_tile4_17', ':ground/ground_tile4_17.png', ' ')
+    surface_manager.add_icon('ground_tile4_35', ':ground/ground_tile4_35.png', ' ')
+    surface_manager.add_icon('ground_tile4_37', ':ground/ground_tile4_37.png', ' ')
+    surface_manager.add_icon('ground_tile4_57', ':ground/ground_tile4_57.png', ' ')
+    surface_manager.add_icon('ground_tile4_135', ':ground/ground_tile4_135.png', ' ')
+    surface_manager.add_icon('ground_tile4_137', ':ground/ground_tile4_137.png', ' ')
+    surface_manager.add_icon('ground_tile4_157', ':ground/ground_tile4_157.png', ' ')
+    surface_manager.add_icon('ground_tile4_357', ':ground/ground_tile4_357.png', ' ')
+    surface_manager.add_icon('ground_tile4_1357', ':ground/ground_tile4_1357.png', ' ')
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
@@ -259,6 +295,50 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                nook_east = floor1357)
     floor_builder = FloorBuilderDecorator(floor_config)
 
+    tile3_floor = FloorBuilderDecoratorConfig([],
+                                               single = 'ground_tile3',
+                                               north = 'ground_tile3_1',
+                                               east = 'ground_tile3_3',
+                                               south = 'ground_tile3_5',
+                                               west = 'ground_tile3_7',
+                                               north_east = 'ground_tile3_13',
+                                               north_south = 'ground_tile3_15',
+                                               north_west = 'ground_tile3_17',
+                                               east_south = 'ground_tile3_35',
+                                               east_west = 'ground_tile3_37',
+                                               south_west = 'ground_tile3_57',
+                                               north_east_south = 'ground_tile3_135',
+                                               north_east_west = 'ground_tile3_137',
+                                               north_south_west = 'ground_tile3_157',
+                                               east_south_west = 'ground_tile3_357',
+                                               fourway = 'ground_tile3_1357',
+                                               floor = 'ground_tile3',
+                                               nook_west = 'ground_tile3_1357',
+                                               nook_east = 'ground_tile3_1357')
+    tile3_floor_builder = FloorBuilderDecorator(tile3_floor)
+
+    tile4_floor = FloorBuilderDecoratorConfig([],
+                                               single = 'ground_tile4',
+                                               north = 'ground_tile4_1',
+                                               east = 'ground_tile4_3',
+                                               south = 'ground_tile4_5',
+                                               west = 'ground_tile4_7',
+                                               north_east = 'ground_tile4_13',
+                                               north_south = 'ground_tile4_15',
+                                               north_west = 'ground_tile4_17',
+                                               east_south = 'ground_tile4_35',
+                                               east_west = 'ground_tile4_37',
+                                               south_west = 'ground_tile4_57',
+                                               north_east_south = 'ground_tile4_135',
+                                               north_east_west = 'ground_tile4_137',
+                                               north_south_west = 'ground_tile4_157',
+                                               east_south_west = 'ground_tile4_357',
+                                               fourway = 'ground_tile4_1357',
+                                               floor = 'ground_tile4',
+                                               nook_west = 'ground_tile4_1357',
+                                               nook_east = 'ground_tile4_1357')
+    tile4_floor_builder = FloorBuilderDecorator(tile4_floor)
+
     torches_tile_f0 = surface_manager.add_icon('catacombs_torches_f0',
                                                ':wall_torches_f0.png', '¤')
     torches_tile_f1 = surface_manager.add_icon('catacombs_torches_f1',
@@ -283,6 +363,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                  wallbuilder,
                                                  wall_direction_builder,
                                                  floor_builder,
+                                                 tile3_floor_builder,
+                                                 tile4_floor_builder,
                                                  torch_ornamenter])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]
