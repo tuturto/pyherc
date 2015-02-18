@@ -48,10 +48,8 @@
         <file>barbed-spear.png</file>
         <file>battle-axe.png</file>
         <file>dagger.png</file>
-        <file>dungeon.png</file>
         <file>gavel.png</file>
         <file>herculeum.qss</file>
-        <file>items.png</file>
         <file>mace.png</file>
 
         <file>minor_healing.png</file>
@@ -65,7 +63,6 @@
         <file>spiked-mace.png</file>
         <file>stiletto.png</file>
         <file>strong-2.png</file>
-        <file>weapons.png</file>
         <file>whip.png</file>
         <file>wood-axe.png</file>
         <file>scale_mail.png</file>
@@ -376,6 +373,55 @@
 	<file>ground/ground_soil4_5.png</file>
 	<file>ground/ground_soil4_7.png</file>
 	<file>ground/ground_soil4.png</file>
+
+	<file>ground/ground_tile3.png</file>
+	<file>ground/ground_tile3_1.png</file>
+	<file>ground/ground_tile3_13.png</file>
+	<file>ground/ground_tile3_135.png</file>
+	<file>ground/ground_tile3_1357.png</file>
+	<file>ground/ground_tile3_137.png</file>
+	<file>ground/ground_tile3_15.png</file>
+	<file>ground/ground_tile3_157.png</file>
+	<file>ground/ground_tile3_17.png</file>
+	<file>ground/ground_tile3_3.png</file>
+	<file>ground/ground_tile3_35.png</file>
+	<file>ground/ground_tile3_357.png</file>
+	<file>ground/ground_tile3_37.png</file>
+	<file>ground/ground_tile3_5.png</file>
+	<file>ground/ground_tile3_57.png</file>
+	<file>ground/ground_tile3_7.png</file>
+	<file>ground/ground_tile4.png</file>
+	<file>ground/ground_tile4_1.png</file>
+	<file>ground/ground_tile4_13.png</file>
+	<file>ground/ground_tile4_135.png</file>
+	<file>ground/ground_tile4_1357.png</file>
+	<file>ground/ground_tile4_137.png</file>
+	<file>ground/ground_tile4_15.png</file>
+	<file>ground/ground_tile4_157.png</file>
+	<file>ground/ground_tile4_17.png</file>
+	<file>ground/ground_tile4_3.png</file>
+	<file>ground/ground_tile4_35.png</file>
+	<file>ground/ground_tile4_357.png</file>
+	<file>ground/ground_tile4_37.png</file>
+	<file>ground/ground_tile4_5.png</file>
+	<file>ground/ground_tile4_57.png</file>
+	<file>ground/ground_tile4_7.png</file>
+	<file>ground/ground_wood4.png</file>
+	<file>ground/ground_wood4_1.png</file>
+	<file>ground/ground_wood4_13.png</file>
+	<file>ground/ground_wood4_135.png</file>
+	<file>ground/ground_wood4_1357.png</file>
+	<file>ground/ground_wood4_137.png</file>
+	<file>ground/ground_wood4_15.png</file>
+	<file>ground/ground_wood4_157.png</file>
+	<file>ground/ground_wood4_17.png</file>
+	<file>ground/ground_wood4_3.png</file>
+	<file>ground/ground_wood4_35.png</file>
+	<file>ground/ground_wood4_357.png</file>
+	<file>ground/ground_wood4_37.png</file>
+	<file>ground/ground_wood4_5.png</file>
+	<file>ground/ground_wood4_57.png</file>
+	<file>ground/ground_wood4_7.png</file>
 
 	<file>walls/wall_brick1_1357.png</file>
 	<file>walls/wall_brick1_135.png</file>
