@@ -20,8 +20,15 @@
 (require hy.contrib.anaphoric)
 (require pyherc.macros)
 
-(import [pyherc.generators.level.partitioners [section-data
+(import [pyherc.generators.level.partitioners [section-floor
                                                section-wall]])
+
+(defn floor-creator [floor-tiles position-selector rng]
+  "create floor creator"
+  (fn [section]
+    "fill given area randomly with floor"
+    (ap-each (position-selector section)
+             (section-floor section it (.choice rng floor-tiles) nil))))
 
 (defn wall-creator [wall-tiles position-selector rng]
   "create wall creator"

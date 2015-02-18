@@ -22,7 +22,7 @@
                                        circular-shape corridors
                                        add-rows cache-creator mark-center-area
                                        random-rows trap-creator
-                                       wall-creator
+                                       wall-creator floor-creator
                                        center-area center-tile]])
 
 (defn square-room [floor-tile corridor-tile rng]
@@ -30,9 +30,23 @@
   (new-room-generator (square-shape floor-tile rng)
                       (corridors corridor-tile)))
 
+(defn square-band-room [floor-tile edge-tile corridor-tile rng]
+  "create room generator for square two-type-floor rooms"
+  (new-room-generator (square-shape edge-tile rng)
+                      (mark-center-area)
+                      (floor-creator [floor-tile] (center-area) rng)
+                      (corridors corridor-tile)))
+
 (defn circular-room [floor-tile corridor-tile rng]
   "create room generator for circular rooms"
   (new-room-generator (circular-shape floor-tile)
+                      (corridors corridor-tile)))
+
+(defn circular-band-room [floor-tile edge-tile corridor-tile rng]
+  "create room generator for circular two-type-floor rooms"
+  (new-room-generator (circular-shape edge-tile)
+                      (mark-center-area)
+                      (floor-creator [floor-tile] (center-area) rng)
                       (corridors corridor-tile)))
 
 (defn circular-cache-room [floor-tile corridor-tile cache-tiles item-selector
