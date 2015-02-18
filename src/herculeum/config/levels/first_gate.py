@@ -33,7 +33,8 @@ from herculeum.config.room_generators import (square_room, circular_room,
                                               square_library, circular_library,
                                               circular_cache_room,
                                               circular_band_room,
-                                              square_band_room)
+                                              square_band_room,
+                                              square_banded_library)
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
@@ -178,6 +179,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                             [shelf_1, shelf_2, shelf_3], rng),
              circular_library('ground_tile3', tile_floor, 
                               [shelf_1, shelf_2, shelf_3], rng),
+             square_banded_library('ground_tile3', 'ground_tile4', tile_floor,
+                                   [shelf_1, shelf_2, shelf_3], rng),
              circular_cache_room(tile_floor, tile_floor, [altar], 
                                  altar_items(50, item_generator, rng),
                                  no_characters(), rng)

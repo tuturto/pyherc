@@ -37,6 +37,15 @@
                       (floor-creator [floor-tile] (center-area) rng)
                       (corridors corridor-tile)))
 
+(defn square-banded-library [floor-tile edge-tile corridor-tile 
+                             bookshelf-tiles rng]
+  (new-room-generator (square-shape edge-tile rng)
+                      (mark-center-area)
+                      (add-rows)
+                      (floor-creator [floor-tile] (center-area) rng)
+                      (wall-creator bookshelf-tiles (random-rows 90 rng) rng)
+                      (corridors corridor-tile)))
+
 (defn circular-room [floor-tile corridor-tile rng]
   "create room generator for circular rooms"
   (new-room-generator (circular-shape floor-tile)
