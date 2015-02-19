@@ -186,7 +186,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                  no_characters(), rng)
             ]
 
-    level_partitioners = [binary_space_partitioning((80, 40), (9, 9), rng)]
+    level_partitioners = [binary_space_partitioning((80, 40), (11, 11), rng)]
 
     surrounder_config = SurroundingDecoratorConfig(['first gate'],
                                                    wall_natural)
