@@ -21,7 +21,8 @@
 Classes for item generation
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.data import add_item, get_locations_by_tag
+from pyherc.data import (add_item, get_locations_by_tag, blocks_movement, 
+                         get_trap)
 
 class ItemAdderConfiguration():
     """
@@ -152,10 +153,19 @@ class ItemAdder():
             if location_type is None:
                 location_type = 'any'
 
-            locations = list(get_locations_by_tag(level, location_type))
+            def suitable_location(location):
+                if blocks_movement(level, location):
+                    return False
+                if get_trap(level, location):
+                    return False
+                return True
 
-            location = self.rng.choice(locations)
+            locations = [location for location in (get_locations_by_tag(level, location_type))
+                         if suitable_location(location)]
 
-            add_item(level, location, item[1])
+            if locations:
+                location = self.rng.choice(locations)
+                add_item(level, location, item[1])
+
 
     level_types = property(__get_level_types)
