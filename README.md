@@ -9,6 +9,9 @@ Player assumes the role of an adventurer whose people have been trapped inside
 of the labyrinth under city of Herculeum. The adventurer has been preparing for
 the escape for a long time and now it is finally time to start the journey.
 
+The game is in early stages still, but it is already possible to move around,
+fight, loot hidden caches and use some basic items.
+
 System Requirements
 ===================
 - Python 3.2
