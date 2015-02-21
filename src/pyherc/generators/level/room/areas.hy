@@ -18,6 +18,7 @@
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (require hy.contrib.anaphoric)
+(require hy.macros)
 
 (import [pyherc.generators.level.partitioners [section-data]])
 
@@ -44,3 +45,11 @@
   (fn [section]
     (ap-each (section-data section :center-area)
              (yield it))))
+
+(defn side-by-side [area]
+  "create selector for picking tiles side by side"
+  (fn [section]
+    (ap-each (area section) 
+             (do 
+              (yield (, (+ (first it) 1) (second it)))
+              (yield (, (- (first it) 1) (second it)))))))

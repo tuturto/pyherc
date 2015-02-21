@@ -34,7 +34,8 @@ from herculeum.config.room_generators import (square_room, circular_room,
                                               circular_cache_room,
                                               circular_band_room,
                                               square_band_room,
-                                              square_banded_library)
+                                              square_banded_library,
+                                              circular_room_with_candles)
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
@@ -183,8 +184,10 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                    [shelf_1, shelf_2, shelf_3], rng),
              circular_cache_room(tile_floor, tile_floor, [altar], 
                                  altar_items(50, item_generator, rng),
-                                 no_characters(), rng)
-            ]
+                                 no_characters(), rng),
+             circular_room_with_candles('ground_wood4', tile_floor, tile_floor, 
+                                        [['standing candle f0',
+                                          'standing candle f1']], rng)]
 
     level_partitioners = [binary_space_partitioning((80, 40), (11, 11), rng)]
 
@@ -244,6 +247,23 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     surface_manager.add_icon('ground_tile4_157', ':ground/ground_tile4_157.png', ' ')
     surface_manager.add_icon('ground_tile4_357', ':ground/ground_tile4_357.png', ' ')
     surface_manager.add_icon('ground_tile4_1357', ':ground/ground_tile4_1357.png', ' ')
+
+    surface_manager.add_icon('ground_wood4', ':ground/ground_wood4.png', ' ')
+    surface_manager.add_icon('ground_wood4_1', ':ground/ground_wood4_1.png', ' ')
+    surface_manager.add_icon('ground_wood4_3', ':ground/ground_wood4_3.png', ' ')
+    surface_manager.add_icon('ground_wood4_5', ':ground/ground_wood4_5.png', ' ')
+    surface_manager.add_icon('ground_wood4_7', ':ground/ground_wood4_7.png', ' ')
+    surface_manager.add_icon('ground_wood4_13', ':ground/ground_wood4_13.png', ' ')
+    surface_manager.add_icon('ground_wood4_15', ':ground/ground_wood4_15.png', ' ')
+    surface_manager.add_icon('ground_wood4_17', ':ground/ground_wood4_17.png', ' ')
+    surface_manager.add_icon('ground_wood4_35', ':ground/ground_wood4_35.png', ' ')
+    surface_manager.add_icon('ground_wood4_37', ':ground/ground_wood4_37.png', ' ')
+    surface_manager.add_icon('ground_wood4_57', ':ground/ground_wood4_57.png', ' ')
+    surface_manager.add_icon('ground_wood4_135', ':ground/ground_wood4_135.png', ' ')
+    surface_manager.add_icon('ground_wood4_137', ':ground/ground_wood4_137.png', ' ')
+    surface_manager.add_icon('ground_wood4_157', ':ground/ground_wood4_157.png', ' ')
+    surface_manager.add_icon('ground_wood4_357', ':ground/ground_wood4_357.png', ' ')
+    surface_manager.add_icon('ground_wood4_1357', ':ground/ground_wood4_1357.png', ' ')
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
@@ -346,6 +366,28 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                nook_east = 'ground_tile4_1357')
     tile4_floor_builder = FloorBuilderDecorator(tile4_floor)
 
+    wood4_floor = FloorBuilderDecoratorConfig([],
+                                              single = 'ground_wood4',
+                                              north = 'ground_wood4_1',
+                                              east = 'ground_wood4_3',
+                                              south = 'ground_wood4_5',
+                                              west = 'ground_wood4_7',
+                                              north_east = 'ground_wood4_13',
+                                              north_south = 'ground_wood4_15',
+                                              north_west = 'ground_wood4_17',
+                                              east_south = 'ground_wood4_35',
+                                              east_west = 'ground_wood4_37',
+                                              south_west = 'ground_wood4_57',
+                                              north_east_south = 'ground_wood4_135',
+                                              north_east_west = 'ground_wood4_137',
+                                              north_south_west = 'ground_wood4_157',
+                                              east_south_west = 'ground_wood4_357',
+                                              fourway = 'ground_wood4_1357',
+                                              floor = 'ground_wood4',
+                                              nook_west = 'ground_wood4_1357',
+                                              nook_east = 'ground_wood4_1357')
+    wood4_floor_builder = FloorBuilderDecorator(wood4_floor)
+    
     torches_tile_f0 = surface_manager.add_icon('catacombs_torches_f0',
                                                ':wall_torches_f0.png', '¤')
     torches_tile_f1 = surface_manager.add_icon('catacombs_torches_f1',
@@ -372,6 +414,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                  floor_builder,
                                                  tile3_floor_builder,
                                                  tile4_floor_builder,
+                                                 wood4_floor_builder,
                                                  torch_ornamenter])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]

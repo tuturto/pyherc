@@ -21,7 +21,8 @@
 (require pyherc.macros)
 
 (import [pyherc.generators.level.partitioners [section-floor
-                                               section-wall]])
+                                               section-wall
+                                               section-ornamentation]])
 
 (defn floor-creator [floor-tiles position-selector rng]
   "create floor creator"
@@ -36,3 +37,10 @@
     "fill given area randomly with walls"
     (ap-each (position-selector section)
              (section-wall section it (.choice rng wall-tiles) nil))))
+
+(defn ornament-creator [ornament-tiles position-selector rng]
+  "create ornament creator"
+  (fn [section]
+    "fill given area randomly with ornaments"
+    (ap-each (position-selector section)
+             (section-ornamentation section it (.choice rng ornament-tiles)))))

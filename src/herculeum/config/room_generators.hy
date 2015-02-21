@@ -23,7 +23,8 @@
                                        add-rows cache-creator mark-center-area
                                        random-rows trap-creator
                                        wall-creator floor-creator
-                                       center-area center-tile]])
+                                       ornament-creator
+                                       center-area center-tile side-by-side]])
 
 (defn square-room [floor-tile corridor-tile rng]
   "create room generator for square rooms"
@@ -64,6 +65,17 @@
   (new-room-generator (circular-shape floor-tile)
                       (cache-creator cache-tiles center-tile item-selector
                                      character-selector rng)
+                      (corridors corridor-tile)))
+
+(defn circular-room-with-candles [floor-tile edge-tile corridor-tile
+                                  candle-tiles rng]
+  "create creator for circular room with two candles in midddle"
+  (new-room-generator (circular-shape edge-tile)
+                      (mark-center-area)
+                      (floor-creator [floor-tile] (center-area) rng)
+                      (ornament-creator candle-tiles 
+                                     (side-by-side center-tile) 
+                                     rng)
                       (corridors corridor-tile)))
 
 (defn circular-graveyard [floor-tile corridor-tile grave-tiles

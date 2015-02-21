@@ -27,6 +27,7 @@
 (import [herculeum.config.levels]
         [herculeum.config [Configuration]]
         [herculeum.config.room-generators [square-room circular-room
+                                           square-band-room
                                            circular-cache-room
                                            circular-graveyard square-graveyard
                                            square-library circular-library
@@ -50,7 +51,7 @@
     (.initialise config)
     {:config config}))
 
-(defn test-catacombs-generator []
+(defn test-square-room []
   "test generating square room"
   (run-generator (square-room :floor :floor (Random))))
 
@@ -109,3 +110,7 @@
 (defn test-circular-pitroom []
   "test generating circular pitroom"
   (run-generator (circular-pitroom :floor :floor :pit (Random))))
+
+(defn test-square-band-room []
+  "test generating square room with 2 tilings"
+  (run-generator (square-band-room :floor1 :floor2 :floor (Random))))

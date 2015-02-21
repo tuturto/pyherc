@@ -24,6 +24,7 @@ Package for room generators
 """
 
 from .areas import center_tile, random_columns, random_rows, center_area
+from .areas import side_by_side
 from .corridor import corridors
 from .cache import CacheRoomGenerator, cache_creator
 from .circle import CircularRoomGenerator, TempleRoomGenerator
@@ -36,4 +37,4 @@ from .overlays import add_rows, add_columns, mark_center_area
 from .generator import new_room_generator
 from .shapes import square_shape, circular_shape
 from .traps import trap_creator
-from .walls import wall_creator, floor_creator
+from .walls import wall_creator, floor_creator, ornament_creator
