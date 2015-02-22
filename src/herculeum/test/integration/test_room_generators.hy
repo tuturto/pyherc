@@ -28,10 +28,12 @@
         [herculeum.config [Configuration]]
         [herculeum.config.room-generators [square-room circular-room
                                            square-band-room
+                                           circular-band-room
                                            circular-cache-room
                                            circular-graveyard square-graveyard
                                            square-library circular-library
                                            square-pitroom circular-pitroom
+                                           square-banded-library
                                            mundane-items skeletons]])
 
 (defn run-generator [generator]
@@ -114,3 +116,12 @@
 (defn test-square-band-room []
   "test generating square room with 2 tilings"
   (run-generator (square-band-room :floor1 :floor2 :floor (Random))))
+
+(defn test-square-banded-library []
+  "test generating library with 2 tilings"
+  (run-generator (square-banded-library :floor :floor :floor [:shelves] 
+                                      (Random))))
+
+(defn test-circular-band-room []
+  "test generating circular room with 2 tilings"
+  (run-generator (circular-band-room :floor :floor :floor (Random))))
