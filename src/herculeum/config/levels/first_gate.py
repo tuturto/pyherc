@@ -78,8 +78,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     """
     surface_manager = context.surface_manager
 
-    wall_empty = None
-    floor_empty = None
     wall_natural = 'natural wall'
     wall_constructed = 'constructed wall'
     wall = 'wall'
@@ -121,7 +119,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     rooms = [          PillarRoomGenerator(floor_tile = 'ground_soil4',
                                            corridor_tile = 'ground_soil4',
-                                           empty_tile = wall_empty,
+                                           empty_tile = None,
                                            pillar_tile = pillar,
                                            level_types = ['first gate']),
                        TempleRoomGenerator('ground_soil4',
@@ -177,7 +175,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     wallbuilder_config = WallBuilderDecoratorConfig(['first gate'],
                                         {wall_natural: wall_constructed},
-                                         wall_empty)
+                                        None)
     wallbuilder = WallBuilderDecorator(wallbuilder_config)
 
     wall_direction_config = DirectionalWallDecoratorConfig(['first gate'],
@@ -258,7 +256,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         unique = True)]
 
     level_context = LevelContext(size = level_size,
-                                 floor_type = floor_empty,
+                                 floor_type = None,
                                  wall_type = wall_natural,
                                  level_types = ['first gate'])
 
