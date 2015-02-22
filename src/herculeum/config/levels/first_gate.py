@@ -55,8 +55,6 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                ReplacingDecoratorConfig,
                                                SurroundingDecorator,
                                                SurroundingDecoratorConfig,
-                                               WallBuilderDecorator,
-                                               WallBuilderDecoratorConfig,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig)
 from pyherc.generators.level import ItemAdder, ItemAdderConfiguration
@@ -170,13 +168,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     level_partitioners = [binary_space_partitioning((80, 40), (11, 11), rng)]
 
     surrounder_config = SurroundingDecoratorConfig(['first gate'],
-                                                   wall_natural)
+                                                   wall_constructed)
     surrounder = SurroundingDecorator(surrounder_config)
-
-    wallbuilder_config = WallBuilderDecoratorConfig(['first gate'],
-                                        {wall_natural: wall_constructed},
-                                        None)
-    wallbuilder = WallBuilderDecorator(wallbuilder_config)
 
     wall_direction_config = DirectionalWallDecoratorConfig(['first gate'],
                                                    east_west = wall_37,
@@ -215,7 +208,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     aggregate_decorator_config = AggregateDecoratorConfig(
                                                 ['first gate'],
                                                 [surrounder,
-                                                 wallbuilder,
                                                  wall_direction_builder,
                                                  soil4_floorbuilder,
                                                  tile3_floorbuilder,
