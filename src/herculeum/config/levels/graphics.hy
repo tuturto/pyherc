@@ -17,6 +17,8 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not see <http://www.gnu.org/licenses/>.
 
+(require hy.contrib.anaphoric)
+
 (defn add-ground-set [gfx base]
   "add ground texture set"
   (.add-icon gfx base (+ ":ground/" base ".png") " ")
@@ -48,23 +50,21 @@
     (load-decoration-tiles gfx)
     (load-dungeon-features gfx)))
 
+(defn add-ground-sets [gfx &rest sets]
+  (ap-each sets (add-ground-set gfx it)))
+
 (defn load-ground-tiles [gfx]
   "loads tiles used for ground"
-  (add-ground-set gfx "ground_rock1")
-  (add-ground-set gfx "ground_rock2")
-  (add-ground-set gfx "ground_rock3")
-  (add-ground-set gfx "ground_rock4")
-  (add-ground-set gfx "ground_soil1")
-  (add-ground-set gfx "ground_soil2")
-  (add-ground-set gfx "ground_soil3")
-  (add-ground-set gfx "ground_soil4")
-  (add-ground-set gfx "ground_tile3")
-  (add-ground-set gfx "ground_tile4")
-  (add-ground-set gfx "ground_wood4"))
+  (add-ground-sets gfx
+                   "ground_rock1" "ground_rock2" "ground_rock3" "ground_rock4"
+                   "ground_soil1" "ground_soil2" "ground_soil3" "ground_soil4"
+                   "ground_tile3" "ground_tile4"
+                   "ground_wood4"))
 
 (defn load-decoration-tiles [gfx]
   "load misc decorations"
-  (add-animated-tile gfx "standing_candle" "|"))
+  (add-animated-tile gfx "standing_candle" "|")
+  (add-animated-tile gfx "fountain" "{"))
 
 (defn load-dungeon-features [gfx]
   "load dungeon features like tombs, graves and such"
@@ -76,5 +76,8 @@
   (.add-icon gfx "tomb 6" ":tomb_6.png" "|")
   (.add-icon gfx "tomb 7" ":tomb_7.png" "|")
   (.add-icon gfx "tomb 8" ":tomb_8.png" "|")
-  (.add-icon gfx "tomb 9" ":tomb_9.png" "|"))
+  (.add-icon gfx "tomb 9" ":tomb_9.png" "|")
+  (.add-icon gfx "shelf 1" ":shelf_empty.png" "+")
+  (.add-icon gfx "shelf 2" ":shelf_book_1.png" "+")
+  (.add-icon gfx "shelf 3" ":shelf_book_2.png" "+"))
 
