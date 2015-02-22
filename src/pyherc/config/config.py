@@ -272,6 +272,11 @@ class Configuration():
                                       context):
                 merge_level(config, level)
 
+        gfx_configurators = self.get_configurators(context.config_package, 
+                                                   'init_graphics')
+        for item in gfx_configurators:
+            item(context)
+
         portal_config = []
         for key in config.keys():
             portal_config.extend(list(portals(config, key)))
