@@ -23,6 +23,10 @@ module for configuring first gate
 import hy
 
 from herculeum.ai.fungus import FungusAI, GreatFungusAI
+from herculeum.config.floor_builders import (soil4_floorbuilder,
+                                             tile3_floorbuilder,
+                                             tile4_floorbuilder,
+                                             wood4_floorbuilder)
 from herculeum.config.room_generators import (square_room, circular_room,
                                               square_graveyard,
                                               circular_graveyard,
@@ -47,8 +51,6 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                AggregateDecoratorConfig,
                                                DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
-                                               FloorBuilderDecorator,
-                                               FloorBuilderDecoratorConfig,
                                                ReplacingDecorator,
                                                ReplacingDecoratorConfig,
                                                SurroundingDecorator,
@@ -75,8 +77,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     :rtype: LevelConfiguration
     """
     surface_manager = context.surface_manager
-
-    tile_floor = 'tile floor'
 
     wall_empty = None
     floor_empty = None
@@ -119,19 +119,19 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     altar = surface_manager.add_icon('altar', ':altar.png', '_')
 
-    rooms = [          PillarRoomGenerator(floor_tile = tile_floor,
-                                           corridor_tile = tile_floor,
+    rooms = [          PillarRoomGenerator(floor_tile = 'ground_soil4',
+                                           corridor_tile = 'ground_soil4',
                                            empty_tile = wall_empty,
                                            pillar_tile = pillar,
                                            level_types = ['first gate']),
-                       TempleRoomGenerator(tile_floor,
-                                           tile_floor,
+                       TempleRoomGenerator('ground_soil4',
+                                           'ground_soil4',
                                            altar,
                                            ['first gate'],
                                            ['standing_candle_f0',
                                             'standing_candle_f1']),
-                       TempleRoomGenerator(tile_floor,
-                                           tile_floor,
+                       TempleRoomGenerator('ground_soil4',
+                                           'ground_soil4',
                                            ["fountain_f0",
                                             "fountain_f1"],
                                            ['first gate'])]
@@ -141,29 +141,33 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     book_shelves = ['shelf 1', 'shelf 2', 'shelf 3']
     standing_candles = ['standing_candle_f0', 'standing_candle_f1']
 
-    rooms = [circular_room('ground_tile3', tile_floor, rng),
-             square_room('ground_tile3', tile_floor, rng),
-             square_room(tile_floor, tile_floor, rng),             
-             circular_room(tile_floor, tile_floor, rng),
-             circular_band_room('ground_tile3', tile_floor, tile_floor, rng),
-             square_band_room('ground_tile3', tile_floor, tile_floor, rng),
-             circular_graveyard(tile_floor, tile_floor,
+    rooms = [circular_room('ground_tile3', 'ground_soil4', rng),
+             square_room('ground_tile3', 'ground_soil4', rng),
+             square_room('ground_soil4', 'ground_soil4', rng),             
+             circular_room('ground_soil4', 'ground_soil4', rng),
+             circular_band_room('ground_tile3', 'ground_soil4', 'ground_soil4',
+                                rng),
+             square_band_room('ground_tile3', 'ground_soil4', 'ground_soil4',
+                              rng),
+             circular_graveyard('ground_soil4', 'ground_soil4',
                                 tomb_stones,
                                 mundane_items(50, item_generator, rng), 
                                 skeletons(50, creature_generator, rng), rng),
-             square_graveyard(tile_floor, tile_floor,
+             square_graveyard('ground_soil4', 'ground_soil4',
                               tomb_stones,
                               mundane_items(50, item_generator, rng), 
                               skeletons(50, creature_generator, rng), rng),
-             square_library('ground_tile3', tile_floor, book_shelves, rng),
-             circular_library('ground_tile3', tile_floor, book_shelves, rng),
-             square_banded_library('ground_tile3', tile_floor, tile_floor,
-                                   book_shelves, rng),
-             circular_cache_room(tile_floor, tile_floor, [altar], 
+             square_library('ground_tile3', 'ground_soil4', book_shelves, rng),
+             circular_library('ground_tile3', 'ground_soil4', book_shelves,
+                              rng),
+             square_banded_library('ground_tile3', 'ground_soil4',
+                                   'ground_soil4', book_shelves, rng),
+             circular_cache_room('ground_soil4', 'ground_soil4', [altar], 
                                  altar_items(50, item_generator, rng),
                                  no_characters(), rng),
-             circular_room_with_candles('ground_wood4', tile_floor, tile_floor, 
-                                        [standing_candles], rng)]
+             circular_room_with_candles('ground_wood4', 'ground_soil4',
+                                        'ground_soil4', [standing_candles],
+                                        rng)]
 
     level_partitioners = [binary_space_partitioning((80, 40), (11, 11), rng)]
 
@@ -191,127 +195,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                    wall = wall_constructed)
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
-
-    floor = surface_manager.add_icon('ground_soil4',
-                                     ':ground/ground_soil4.png', ' ')
-    floor1 = surface_manager.add_icon('ground_soil4_1',
-                                      ':ground/ground_soil4_1.png', ' ')
-    floor3 = surface_manager.add_icon('ground_soil4_3',
-                                      ':ground/ground_soil4_3.png', ' ')
-    floor5 = surface_manager.add_icon('ground_soil4_5',
-                                      ':ground/ground_soil4_5.png', ' ')
-    floor7 = surface_manager.add_icon('ground_soil4_7',
-                                      ':ground/ground_soil4_7.png', ' ')
-    floor13 = surface_manager.add_icon('ground_soil4_13',
-                                       ':ground/ground_soil4_13.png', ' ')
-    floor15 = surface_manager.add_icon('ground_soil4_15',
-                                       ':ground/ground_soil4_15.png', ' ')
-    floor17 = surface_manager.add_icon('ground_soil4_17',
-                                       ':ground/ground_soil4_17.png', ' ')
-    floor35 = surface_manager.add_icon('ground_soil4_35',
-                                       ':ground/ground_soil4_35.png', ' ')
-    floor37 = surface_manager.add_icon('ground_soil4_37',
-                                       ':ground/ground_soil4_37.png', ' ')
-    floor57 = surface_manager.add_icon('ground_soil4_57',
-                                       ':ground/ground_soil4_57.png', ' ')
-    floor135 = surface_manager.add_icon('ground_soil4_135',
-                                        ':ground/ground_soil4_135.png', ' ')
-    floor137 = surface_manager.add_icon('ground_soil4_137',
-                                        ':ground/ground_soil4_137.png', ' ')
-    floor157 = surface_manager.add_icon('ground_soil4_157',
-                                        ':ground/ground_soil4_157.png', ' ')
-    floor357 = surface_manager.add_icon('ground_soil4_357',
-                                        ':ground/ground_soil4_357.png', ' ')
-    floor1357 = surface_manager.add_icon('ground_soil4_1357',
-                                         ':ground/ground_soil4_1357.png', ' ')
-
-    floor_config = FloorBuilderDecoratorConfig([],
-                                               single = floor,
-                                               north = floor1,
-                                               east = floor3,
-                                               south = floor5,
-                                               west = floor7,
-                                               north_east = floor13,
-                                               north_south = floor15,
-                                               north_west = floor17,
-                                               east_south = floor35,
-                                               east_west = floor37,
-                                               south_west = floor57,
-                                               north_east_south = floor135,
-                                               north_east_west = floor137,
-                                               north_south_west = floor157,
-                                               east_south_west = floor357,
-                                               fourway = floor1357,
-                                               floor = tile_floor,
-                                               nook_west = floor1357,
-                                               nook_east = floor1357)
-    floor_builder = FloorBuilderDecorator(floor_config)
-
-    tile3_floor = FloorBuilderDecoratorConfig([],
-                                               single = 'ground_tile3',
-                                               north = 'ground_tile3_1',
-                                               east = 'ground_tile3_3',
-                                               south = 'ground_tile3_5',
-                                               west = 'ground_tile3_7',
-                                               north_east = 'ground_tile3_13',
-                                               north_south = 'ground_tile3_15',
-                                               north_west = 'ground_tile3_17',
-                                               east_south = 'ground_tile3_35',
-                                               east_west = 'ground_tile3_37',
-                                               south_west = 'ground_tile3_57',
-                                               north_east_south = 'ground_tile3_135',
-                                               north_east_west = 'ground_tile3_137',
-                                               north_south_west = 'ground_tile3_157',
-                                               east_south_west = 'ground_tile3_357',
-                                               fourway = 'ground_tile3_1357',
-                                               floor = 'ground_tile3',
-                                               nook_west = 'ground_tile3_1357',
-                                               nook_east = 'ground_tile3_1357')
-    tile3_floor_builder = FloorBuilderDecorator(tile3_floor)
-
-    tile4_floor = FloorBuilderDecoratorConfig([],
-                                               single = 'ground_tile4',
-                                               north = 'ground_tile4_1',
-                                               east = 'ground_tile4_3',
-                                               south = 'ground_tile4_5',
-                                               west = 'ground_tile4_7',
-                                               north_east = 'ground_tile4_13',
-                                               north_south = 'ground_tile4_15',
-                                               north_west = 'ground_tile4_17',
-                                               east_south = 'ground_tile4_35',
-                                               east_west = 'ground_tile4_37',
-                                               south_west = 'ground_tile4_57',
-                                               north_east_south = 'ground_tile4_135',
-                                               north_east_west = 'ground_tile4_137',
-                                               north_south_west = 'ground_tile4_157',
-                                               east_south_west = 'ground_tile4_357',
-                                               fourway = 'ground_tile4_1357',
-                                               floor = 'ground_tile4',
-                                               nook_west = 'ground_tile4_1357',
-                                               nook_east = 'ground_tile4_1357')
-    tile4_floor_builder = FloorBuilderDecorator(tile4_floor)
-
-    wood4_floor = FloorBuilderDecoratorConfig([],
-                                              single = 'ground_wood4',
-                                              north = 'ground_wood4_1',
-                                              east = 'ground_wood4_3',
-                                              south = 'ground_wood4_5',
-                                              west = 'ground_wood4_7',
-                                              north_east = 'ground_wood4_13',
-                                              north_south = 'ground_wood4_15',
-                                              north_west = 'ground_wood4_17',
-                                              east_south = 'ground_wood4_35',
-                                              east_west = 'ground_wood4_37',
-                                              south_west = 'ground_wood4_57',
-                                              north_east_south = 'ground_wood4_135',
-                                              north_east_west = 'ground_wood4_137',
-                                              north_south_west = 'ground_wood4_157',
-                                              east_south_west = 'ground_wood4_357',
-                                              fourway = 'ground_wood4_1357',
-                                              floor = 'ground_wood4',
-                                              nook_west = 'ground_wood4_1357',
-                                              nook_east = 'ground_wood4_1357')
-    wood4_floor_builder = FloorBuilderDecorator(wood4_floor)
     
     torches_tile_f0 = surface_manager.add_icon('catacombs_torches_f0',
                                                ':wall_torches_f0.png', '¤')
@@ -336,10 +219,10 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                 [surrounder,
                                                  wallbuilder,
                                                  wall_direction_builder,
-                                                 floor_builder,
-                                                 tile3_floor_builder,
-                                                 tile4_floor_builder,
-                                                 wood4_floor_builder,
+                                                 soil4_floorbuilder,
+                                                 tile3_floorbuilder,
+                                                 tile4_floorbuilder,
+                                                 wood4_floorbuilder,
                                                  torch_ornamenter])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]
