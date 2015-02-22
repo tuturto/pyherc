@@ -48,6 +48,8 @@ from pyherc.generators.level.room import (PillarRoomGenerator,
                                           SquareRoomGenerator)
 from herculeum.config.room_generators import (circular_pitroom, square_pitroom,
                                               square_room)
+from herculeum.config.floor_builders import (tile4_floorbuilder, 
+                                             wood4_floorbuilder)
 
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
@@ -58,11 +60,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     :rtype: LevelConfiguration
     """
     surface_manager = context.surface_manager
-
-    floor_natural = 'natural floor'
-    floor_rock = surface_manager.add_icon('floor_rock', ':rock_floor.png', '.')
-    floor_constructed = 'constructed floor'
-    floor_tiled = surface_manager.add_icon('floor_tiled', ':tiled_floor.png', '.')
 
     wall_empty = None
     wall_natural = 'natural wall'
@@ -89,58 +86,46 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     pit_tile = 'pit'
 
-    room_generators = [PillarRoomGenerator(floor_tile = floor_constructed,
-                                           corridor_tile = floor_natural,
+    room_generators = [PillarRoomGenerator(floor_tile = 'ground_wood4',
+                                           corridor_tile = 'ground_tile4',
                                            empty_tile = wall_empty,
                                            pillar_tile = wall,
                                            level_types = ['upper crypt']),
-                       PillarRoomGenerator(floor_tile = floor_natural,
-                                           corridor_tile = floor_natural,
+                       PillarRoomGenerator(floor_tile = 'ground_tile4',
+                                           corridor_tile = 'ground_tile4',
                                            empty_tile = wall_empty,
                                            pillar_tile = wall,
                                            level_types = ['upper crypt']),
                                         ]
 
-    room_generators = [circular_pitroom(floor_natural, 
-                                        floor_natural, 
+    room_generators = [circular_pitroom('ground_tile4', 
+                                        'ground_tile4', 
                                         pit_tile, 
                                         rng),
-                       circular_pitroom(floor_constructed,
-                                        floor_natural,
+                       circular_pitroom('ground_wood4',
+                                        'ground_tile4',
                                         pit_tile,
                                         rng),
-                       square_pitroom(floor_natural, 
-                                      floor_natural, 
+                       square_pitroom('ground_tile4', 
+                                      'ground_tile4', 
                                       pit_tile, 
                                       rng),
-                       square_pitroom(floor_constructed,
-                                      floor_natural,
+                       square_pitroom('ground_wood4',
+                                      'ground_tile4',
                                       pit_tile,
                                       rng),
-                       square_room(floor_natural,
-                                   floor_natural,
+                       square_room('ground_tile4',
+                                   'ground_tile4',
                                    rng),
-                       square_room(floor_constructed,
-                                   floor_natural,
+                       square_room('ground_wood4',
+                                   'ground_tile4',
                                    rng)]
 
     level_partitioners = [grid_partitioning((15, 15), 4, 6, rng)]
 
-    replacer_config = ReplacingDecoratorConfig(['upper crypt'],
-                                    {floor_natural: floor_rock,
-                                    floor_constructed: floor_tiled},
-                                    {wall_natural: wall_ground,
-                                    wall_constructed: wall_rock})
-    replacer = ReplacingDecorator(replacer_config)
-
     surrounder_config = SurroundingDecoratorConfig(['upper crypt'],
-                                                   wall_natural)
+                                                   wall_constructed)
     surrounder = SurroundingDecorator(surrounder_config)
-
-    wallbuilder_config = WallBuilderDecoratorConfig(['upper crypt'],
-                                        {wall_natural: wall_constructed},
-                                        wall_empty)
-    wallbuilder = WallBuilderDecorator(wallbuilder_config)
 
     wall_direction_config = DirectionalWallDecoratorConfig(['upper crypt'],
                                                    east_west = wall_37,
@@ -157,84 +142,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                    wall = wall_constructed)
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
-
-    floor = surface_manager.add_icon('crypt_floor', ':crypt_floor.png', ' ')
-    floor1 = surface_manager.add_icon('crypt_floor_1', ':crypt_floor_1.png', ' ')
-    floor3 = surface_manager.add_icon('crypt_floor_3', ':crypt_floor_3.png', ' ')
-    floor5 = surface_manager.add_icon('crypt_floor_5', ':crypt_floor_5.png', ' ')
-    floor7 = surface_manager.add_icon('crypt_floor_7', ':crypt_floor_7.png', ' ')
-    floor13 = surface_manager.add_icon('crypt_floor_13', ':crypt_floor_13.png', ' ')
-    floor15 = surface_manager.add_icon('crypt_floor_15', ':crypt_floor_15.png', ' ')
-    floor17 = surface_manager.add_icon('crypt_floor_17', ':crypt_floor_17.png', ' ')
-    floor35 = surface_manager.add_icon('crypt_floor_35', ':crypt_floor_35.png', ' ')
-    floor37 = surface_manager.add_icon('crypt_floor_37', ':crypt_floor_37.png', ' ')
-    floor57 = surface_manager.add_icon('crypt_floor_57', ':crypt_floor_57.png', ' ')
-    floor135 = surface_manager.add_icon('crypt_floor_135', ':crypt_floor_135.png', ' ')
-    floor137 = surface_manager.add_icon('crypt_floor_137', ':crypt_floor_137.png', ' ')
-    floor157 = surface_manager.add_icon('crypt_floor_157', ':crypt_floor_157.png', ' ')
-    floor357 = surface_manager.add_icon('crypt_floor_357', ':crypt_floor_357.png', ' ')
-    floor1357 = surface_manager.add_icon('crypt_floor_1357', ':crypt_floor_1357.png', ' ')
-
-    floor_config = FloorBuilderDecoratorConfig([],
-                                               single = floor,
-                                               north = floor1,
-                                               east = floor3,
-                                               south = floor5,
-                                               west = floor7,
-                                               north_east = floor13,
-                                               north_south = floor15,
-                                               north_west = floor17,
-                                               east_south = floor35,
-                                               east_west = floor37,
-                                               south_west = floor57,
-                                               north_east_south = floor135,
-                                               north_east_west = floor137,
-                                               north_south_west = floor157,
-                                               east_south_west = floor357,
-                                               fourway = floor1357,
-                                               floor = floor_natural,
-                                               nook_west = floor1357,
-                                               nook_east = floor1357)
-    floor_builder = FloorBuilderDecorator(floor_config)
-
-    board_floor = surface_manager.add_icon('crypt_floor_2', ':crypt_floor_2.png', ' ')
-    board_floor1 = surface_manager.add_icon('crypt_floor_2_1', ':crypt_floor_2_1.png', ' ')
-    board_floor3 = surface_manager.add_icon('crypt_floor_2_3', ':crypt_floor_2_3.png', ' ')
-    board_floor5 = surface_manager.add_icon('crypt_floor_2_5', ':crypt_floor_2_5.png', ' ')
-    board_floor7 = surface_manager.add_icon('crypt_floor_2_7', ':crypt_floor_2_7.png', ' ')
-    board_floor13 = surface_manager.add_icon('crypt_floor_2_13', ':crypt_floor_2_13.png', ' ')
-    board_floor15 = surface_manager.add_icon('crypt_floor_2_15', ':crypt_floor_2_15.png', ' ')
-    board_floor17 = surface_manager.add_icon('crypt_floor_2_17', ':crypt_floor_2_17.png', ' ')
-    board_floor35 = surface_manager.add_icon('crypt_floor_2_35', ':crypt_floor_2_35.png', ' ')
-    board_floor37 = surface_manager.add_icon('crypt_floor_2_37', ':crypt_floor_2_37.png', ' ')
-    board_floor57 = surface_manager.add_icon('crypt_floor_2_57', ':crypt_floor_2_57.png', ' ')
-    board_floor135 = surface_manager.add_icon('crypt_floor_2_135', ':crypt_floor_2_135.png', ' ')
-    board_floor137 = surface_manager.add_icon('crypt_floor_2_137', ':crypt_floor_2_137.png', ' ')
-    board_floor157 = surface_manager.add_icon('crypt_floor_2_157', ':crypt_floor_2_157.png', ' ')
-    board_floor357 = surface_manager.add_icon('crypt_floor_2_357', ':crypt_floor_2_357.png', ' ')
-    board_floor1357 = surface_manager.add_icon('crypt_floor_2_1357', ':crypt_floor_2_1357.png', ' ')
-
-    board_floor_config = FloorBuilderDecoratorConfig([],
-                                                     single = board_floor,
-                                                     north = board_floor1,
-                                                     east = board_floor3,
-                                                     south = board_floor5,
-                                                     west = board_floor7,
-                                                     north_east = board_floor13,
-                                                     north_south = board_floor15,
-                                                     north_west = board_floor17,
-                                                     east_south = board_floor35,
-                                                     east_west = board_floor37,
-                                                     south_west = board_floor57,
-                                                     north_east_south = board_floor135,
-                                                     north_east_west = board_floor137,
-                                                     north_south_west = board_floor157,
-                                                     east_south_west = board_floor357,
-                                                     fourway = board_floor1357,
-                                                     floor = floor_constructed,
-                                                     nook_west = board_floor1357,
-                                                     nook_east = board_floor1357)
-    board_floor_builder = FloorBuilderDecorator(board_floor_config)
 
     pit = surface_manager.add_icon('brick_pit_07', ':brick_pit_07.png', '^')
     pit1 = surface_manager.add_icon('brick_pit_08', ':brick_pit_08.png', '^')
@@ -295,13 +202,11 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
                                                           [surrounder,
-                                                           wallbuilder,
                                                            wall_direction_builder,
-                                                           floor_builder,
-                                                           board_floor_builder,
+                                                           tile4_floorbuilder,
+                                                           wood4_floorbuilder,
                                                            pit_builder,
-                                                           torch_ornamenter,
-                                                           replacer])
+                                                           torch_ornamenter])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]
 

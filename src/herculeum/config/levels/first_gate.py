@@ -235,8 +235,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                  name = 'skeleton warrior')
 
     creature_adders = [CreatureAdder(creature_generator,
-                                    creatures_upper,
-                                    rng)]
+                                     creatures_upper,
+                                     rng)]
 
     portal_adder_configurations = [PortalAdderConfiguration(
                                         icons = (stairs_up,
@@ -246,11 +246,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         chance = 100,
                                         new_level = 'lower catacombs',
                                         unique = True)]
-
-    level_context = LevelContext(size = level_size,
-                                 floor_type = None,
-                                 wall_type = wall_natural,
-                                 level_types = ['first gate'])
 
     return [new_level('first gate', rooms, level_partitioners,
                       decorators, item_adders, creature_adders,
