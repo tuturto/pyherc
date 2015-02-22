@@ -250,12 +250,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         new_level = 'upper crypt',
                                         unique = True)]
 
-    level_context = LevelContext(size = level_size,
-                                 floor_type = None,
-                                 wall_type = wall_natural,
-                                 level_types = ['upper crypt',
-                                                'lower crypt'])
-
     return [new_level('upper crypt', room_generators, level_partitioners,
                       decorators, item_adders, creature_adders,
                       portal_adder_configurations)]
