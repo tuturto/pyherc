@@ -18,6 +18,7 @@
 ;;  along with pyherc.  If not see <http://www.gnu.org/licenses/>.
 
 (defn add-ground-set [gfx base]
+  "add ground texture set"
   (.add-icon gfx base (+ ":ground/" base ".png") " ")
   (.add-icon gfx (+ base "_1") (+ ":ground/" base "_1.png") " ")
   (.add-icon gfx (+ base "_3") (+ ":ground/" base "_3.png") " ")
@@ -33,20 +34,47 @@
   (.add-icon gfx (+ base "_137") (+ ":ground/" base "_137.png") " ")
   (.add-icon gfx (+ base "_157") (+ ":ground/" base "_157.png") " ")
   (.add-icon gfx (+ base "_357") (+ ":ground/" base "_357.png") " ")
-  (.add-icon gfx (+ base "_1357") (+ ":ground/" base "_1357.png") " ")
-)
+  (.add-icon gfx (+ base "_1357") (+ ":ground/" base "_1357.png") " "))
+
+(defn add-animated-tile [gfx base glyph]
+  "add animated tile with two frames"
+  (.add-icon gfx (+ base "_f0") (+ ":" base "_f0.png") glyph)
+  (.add-icon gfx (+ base "_f1") (+ ":" base "_f1.png") glyph))
 
 (defn init-graphics [context]
   "load graphcis"
   (let [[gfx context.surface-manager]]
-    (add-ground-set gfx "ground_rock1")
-    (add-ground-set gfx "ground_rock2")
-    (add-ground-set gfx "ground_rock3")
-    (add-ground-set gfx "ground_rock4")
-    (add-ground-set gfx "ground_soil1")
-    (add-ground-set gfx "ground_soil2")
-    (add-ground-set gfx "ground_soil3")
-    (add-ground-set gfx "ground_soil4")
-    (add-ground-set gfx "ground_tile3")
-    (add-ground-set gfx "ground_tile4")
-    (add-ground-set gfx "ground_wood4")))
+    (load-ground-tiles gfx)
+    (load-decoration-tiles gfx)
+    (load-dungeon-features gfx)))
+
+(defn load-ground-tiles [gfx]
+  "loads tiles used for ground"
+  (add-ground-set gfx "ground_rock1")
+  (add-ground-set gfx "ground_rock2")
+  (add-ground-set gfx "ground_rock3")
+  (add-ground-set gfx "ground_rock4")
+  (add-ground-set gfx "ground_soil1")
+  (add-ground-set gfx "ground_soil2")
+  (add-ground-set gfx "ground_soil3")
+  (add-ground-set gfx "ground_soil4")
+  (add-ground-set gfx "ground_tile3")
+  (add-ground-set gfx "ground_tile4")
+  (add-ground-set gfx "ground_wood4"))
+
+(defn load-decoration-tiles [gfx]
+  "load misc decorations"
+  (add-animated-tile gfx "standing_candle" "|"))
+
+(defn load-dungeon-features [gfx]
+  "load dungeon features like tombs, graves and such"
+  (.add-icon gfx "tomb 1" ":tomb_1.png" "|")
+  (.add-icon gfx "tomb 2" ":tomb_2.png" "|")
+  (.add-icon gfx "tomb 3" ":tomb_3.png" "|")
+  (.add-icon gfx "tomb 4" ":tomb_4.png" "|")
+  (.add-icon gfx "tomb 5" ":tomb_5.png" "|")
+  (.add-icon gfx "tomb 6" ":tomb_6.png" "|")
+  (.add-icon gfx "tomb 7" ":tomb_7.png" "|")
+  (.add-icon gfx "tomb 8" ":tomb_8.png" "|")
+  (.add-icon gfx "tomb 9" ":tomb_9.png" "|"))
+

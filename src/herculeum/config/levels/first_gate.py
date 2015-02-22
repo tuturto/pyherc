@@ -118,12 +118,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         ':walls/wall_rubble6_157.png', '#')
 
     altar = surface_manager.add_icon('altar', ':altar.png', '_')
-    standing_candle_f0 = surface_manager.add_icon('standing candle f0',
-                                                  ':standing_candle_f0.png',
-                                                  '|')
-    standing_candle_f1 = surface_manager.add_icon('standing candle f1',
-                                                  ':standing_candle_f1.png',
-                                                  '|')
     fountain_f0 = surface_manager.add_icon('fountain f0',
                                            ':fountain_f0.png', '{')
     fountain_f1 = surface_manager.add_icon('fountain f1',
@@ -132,16 +126,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     shelf_1 = surface_manager.add_icon('empty shelf', ':shelf_empty.png', '+')
     shelf_2 = surface_manager.add_icon('bookshelf 1', ':shelf_book_1.png', '+')
     shelf_3 = surface_manager.add_icon('bookshelf 2', ':shelf_book_2.png', '+')
-
-    tomb_1 = surface_manager.add_icon('tomb 1', ':tomb_1.png', '|')
-    tomb_2 = surface_manager.add_icon('tomb 2', ':tomb_2.png', '|')
-    tomb_3 = surface_manager.add_icon('tomb 3', ':tomb_3.png', '|')
-    tomb_4 = surface_manager.add_icon('tomb 4', ':tomb_4.png', '|')
-    tomb_5 = surface_manager.add_icon('tomb 5', ':tomb_5.png', '|')
-    tomb_6 = surface_manager.add_icon('tomb 6', ':tomb_6.png', '|')
-    tomb_7 = surface_manager.add_icon('tomb 7', ':tomb_7.png', '|')
-    tomb_8 = surface_manager.add_icon('tomb 8', ':tomb_8.png', '|')
-    tomb_9 = surface_manager.add_icon('tomb 9', ':tomb_9.png', '|')
 
     rooms = [          PillarRoomGenerator(floor_tile = tile_floor,
                                            corridor_tile = tile_floor,
@@ -152,14 +136,17 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                            tile_floor,
                                            altar,
                                            ['first gate'],
-                                           [standing_candle_f0,
-                                            standing_candle_f1]),
+                                           ['standing_candle_f0',
+                                            'standing_candle_f1']),
                        TempleRoomGenerator(tile_floor,
                                            tile_floor,
                                            [fountain_f0,
                                             fountain_f1],
                                            ['first gate'])]
-    
+
+    tomb_stones = ['tomb 1', 'tomb 2', 'tomb 3', 'tomb 4', 'tomb 5',
+                   'tomb 6', 'tomb 7', 'tomb 8', 'tomb 9']
+
     rooms = [circular_room('ground_tile3', tile_floor, rng),
              square_room('ground_tile3', tile_floor, rng),
              square_room(tile_floor, tile_floor, rng),             
@@ -167,13 +154,11 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
              circular_band_room('ground_tile3', tile_floor, tile_floor, rng),
              square_band_room('ground_tile3', tile_floor, tile_floor, rng),
              circular_graveyard(tile_floor, tile_floor,
-                                [tomb_1, tomb_2, tomb_3, tomb_4, tomb_5,
-                                 tomb_6, tomb_7, tomb_8, tomb_9],
+                                tomb_stones,
                                 mundane_items(50, item_generator, rng), 
                                 skeletons(50, creature_generator, rng), rng),
              square_graveyard(tile_floor, tile_floor,
-                              [tomb_1, tomb_2, tomb_3, tomb_4, tomb_5,
-                               tomb_6, tomb_7, tomb_8, tomb_9],
+                              tomb_stones,
                               mundane_items(50, item_generator, rng), 
                               skeletons(50, creature_generator, rng), rng),
              square_library('ground_tile3', tile_floor, 
@@ -186,8 +171,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                  altar_items(50, item_generator, rng),
                                  no_characters(), rng),
              circular_room_with_candles('ground_wood4', tile_floor, tile_floor, 
-                                        [['standing candle f0',
-                                          'standing candle f1']], rng)]
+                                        [['standing_candle_f0',
+                                          'standing_candle_f1']], rng)]
 
     level_partitioners = [binary_space_partitioning((80, 40), (11, 11), rng)]
 
@@ -406,16 +391,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     return [new_level('first gate', rooms, level_partitioners,
                       decorators, item_adders, creature_adders,
                       portal_adder_configurations)]
-
-    # config = (LevelConfiguration()
-    #                .with_rooms(rooms)
-    #                .with_partitioners(level_partitioners)
-    #                .with_decorators(decorators)
-    #                .with_items(item_adders)
-    #                .with_creatures(creature_adders)
-    #                .with_portals(portal_adder_configurations)
-    #                .with_contexts([level_context])
-    #                .build())
 
     return config
 
