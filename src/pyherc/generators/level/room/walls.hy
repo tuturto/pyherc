@@ -38,9 +38,11 @@
     (ap-each (position-selector section)
              (section-wall section it (.choice rng wall-tiles) nil))))
 
-(defn ornament-creator [ornament-tiles position-selector rng]
+(defn ornament-creator [ornament-tiles position-selector rate rng]
   "create ornament creator"
   (fn [section]
     "fill given area randomly with ornaments"
-    (ap-each (position-selector section)
-             (section-ornamentation section it (.choice rng ornament-tiles)))))
+    (ap-each (position-selector section)       
+             (when (<= (.randint rng 0 100) rate) 
+               (section-ornamentation section it 
+                                      (.choice rng ornament-tiles))))))

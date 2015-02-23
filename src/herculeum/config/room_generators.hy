@@ -75,7 +75,7 @@
                       (floor-creator [floor-tile] (center-area) rng)
                       (ornament-creator candle-tiles 
                                      (side-by-side center-tile) 
-                                     rng)
+                                     100 rng)
                       (corridors corridor-tile)))
 
 (defn circular-graveyard [floor-tile corridor-tile grave-tiles
@@ -122,6 +122,14 @@
   (new-room-generator (circular-shape floor-tile)
                       (mark-center-area)
                       (trap-creator [pit-tile] PitTrap (center-area) rng)
+                      (corridors corridor-tile)))
+
+(defn circular-bones-room [floor-tile edge-tile corridor-tile bones rate rng]
+  "create generator for circular room filled with bones"
+  (new-room-generator (circular-shape edge-tile)
+                      (mark-center-area)
+                      (floor-creator [floor-tile] (center-area) rng)
+                      (ornament-creator bones (center-area) rate rng)
                       (corridors corridor-tile)))
 
 (defn no-characters []

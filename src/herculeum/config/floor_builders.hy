@@ -20,19 +20,22 @@
 (import [pyherc.generators.level.decorator [FloorBuilderDecorator
                                             FloorBuilderDecoratorConfig]])
 
-(defmacro floorbuilder [base]
-  `(FloorBuilderDecorator 
-    (FloorBuilderDecoratorConfig [] ~base
-                                 (+ ~base "_1") (+ ~base "_3")
-                                 (+ ~base "_5") (+ ~base "_7")
-                                 (+ ~base "_13") (+ ~base "_15")
-                                 (+ ~base "_17") (+ ~base "_35")
-                                 (+ ~base "_37") (+ ~base "_57")
-                                 (+ ~base "_135") (+ ~base "_137")
-                                 (+ ~base "_157") (+ ~base "_357")
-                                 (+ ~base "_1357") ~base
-                                 (+ ~base "_1357") (+ ~base "_1357"))))
+(defn floorbuilder [base]
+  (FloorBuilderDecorator 
+   (FloorBuilderDecoratorConfig [] base
+                                (+ base "_1") (+ base "_3")
+                                (+ base "_5") (+ base "_7")
+                                (+ base "_13") (+ base "_15")
+                                (+ base "_17") (+ base "_35")
+                                (+ base "_37") (+ base "_57")
+                                (+ base "_135") (+ base "_137")
+                                (+ base "_157") (+ base "_357")
+                                (+ base "_1357") base
+                                (+ base "_1357") (+ base "_1357"))))
 
+(setv soil1-floorbuilder (floorbuilder "ground_soil1"))
+(setv soil2-floorbuilder (floorbuilder "ground_soil2"))
+(setv soil3-floorbuilder (floorbuilder "ground_soil3"))
 (setv soil4-floorbuilder (floorbuilder "ground_soil4"))
 (setv tile3-floorbuilder (floorbuilder "ground_tile3"))
 (setv tile4-floorbuilder (floorbuilder "ground_tile4"))

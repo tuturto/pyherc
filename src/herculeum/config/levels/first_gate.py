@@ -23,7 +23,8 @@ module for configuring first gate
 import hy
 
 from herculeum.ai.fungus import FungusAI, GreatFungusAI
-from herculeum.config.floor_builders import (soil4_floorbuilder,
+from herculeum.config.floor_builders import (soil3_floorbuilder,
+                                             soil4_floorbuilder,
                                              tile3_floorbuilder,
                                              tile4_floorbuilder,
                                              wood4_floorbuilder)
@@ -39,7 +40,8 @@ from herculeum.config.room_generators import (square_room, circular_room,
                                               circular_band_room,
                                               square_band_room,
                                               square_banded_library,
-                                              circular_room_with_candles)
+                                              circular_room_with_candles,
+                                              circular_bones_room)
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
@@ -136,6 +138,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                    'tomb 6', 'tomb 7', 'tomb 8', 'tomb 9']
     book_shelves = ['shelf 1', 'shelf 2', 'shelf 3']
     standing_candles = ['standing_candle_f0', 'standing_candle_f1']
+    bones = ['bones 1', 'bones 2', 'skull 1', 'skull 2']
 
     rooms = [circular_room('ground_tile3', 'ground_soil4', rng),
              square_room('ground_tile3', 'ground_soil4', rng),
@@ -163,7 +166,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                  no_characters(), rng),
              circular_room_with_candles('ground_wood4', 'ground_soil4',
                                         'ground_soil4', [standing_candles],
-                                        rng)]
+                                        rng),
+             circular_bones_room('ground_soil3', 'ground_soil4',
+                                 'ground_soil4', bones, 25, rng)]
 
     level_partitioners = [binary_space_partitioning((80, 40), (11, 11), rng)]
 
@@ -209,6 +214,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                 ['first gate'],
                                                 [surrounder,
                                                  wall_direction_builder,
+                                                 soil3_floorbuilder,
                                                  soil4_floorbuilder,
                                                  tile3_floorbuilder,
                                                  tile4_floorbuilder,

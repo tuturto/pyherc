@@ -245,6 +245,11 @@
         <file>characters/scarab-beetle_f0.png</file>
         <file>characters/scarab-beetle_f1.png</file>
 
+        <file>decor/bones_1.png</file>
+        <file>decor/bones_2.png</file>
+        <file>decor/skull_1.png</file>
+        <file>decor/skull_2.png</file>
+
 	<file>ground/ground_rock1_1357.png</file>
 	<file>ground/ground_rock1_135.png</file>
 	<file>ground/ground_rock1_137.png</file>

@@ -63,6 +63,10 @@
 
 (defn load-decoration-tiles [gfx]
   "load misc decorations"
+  (.add-icon gfx "skull 1" ":decor/skull_1.png" " ")
+  (.add-icon gfx "skull 2" ":decor/skull_2.png" " ")
+  (.add-icon gfx "bones 1" ":decor/bones_1.png" " ")
+  (.add-icon gfx "bones 2" ":decor/bones_2.png" " ")
   (add-animated-tile gfx "standing_candle" "|")
   (add-animated-tile gfx "fountain" "{"))
 
