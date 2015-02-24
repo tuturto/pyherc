@@ -80,7 +80,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     surface_manager = context.surface_manager
 
     wall_natural = 'natural wall'
-    wall_constructed = 'constructed wall'
     wall = 'wall'
 
     stairs_down = surface_manager.add_icon('stairs_down',
@@ -92,6 +91,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     pillar = surface_manager.add_icon('pillar', ':pillar.png', '#')
 
+    surface_manager.add_icon('wall_rubble6', ':walls/wall_rubble6.png', '#')
     wall_15 = surface_manager.add_icon('wall_rubble6_15',
                                        ':walls/wall_rubble6_15.png', '#')
     wall_57 = surface_manager.add_icon('wall_rubble6_57',
@@ -118,23 +118,18 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     altar = surface_manager.add_icon('altar', ':altar.png', '_')
 
-    rooms = [          PillarRoomGenerator(floor_tile = 'ground_soil4',
-                                           corridor_tile = 'ground_soil4',
-                                           empty_tile = None,
-                                           pillar_tile = pillar,
-                                           level_types = ['first gate']),
-                       TempleRoomGenerator('ground_soil4',
-                                           'ground_soil4',
-                                           altar,
-                                           ['first gate'],
-                                           ['standing_candle_f0',
-                                            'standing_candle_f1']),
-                       TempleRoomGenerator('ground_soil4',
-                                           'ground_soil4',
-                                           ["fountain_f0",
-                                            "fountain_f1"],
-                                           ['first gate'])]
-
+    rooms = [TempleRoomGenerator('ground_soil4',
+                                 'ground_soil4',
+                                 altar,
+                                 ['first gate'],
+                                 ['standing_candle_f0',
+                                  'standing_candle_f1']),
+             TempleRoomGenerator('ground_soil4',
+                                 'ground_soil4',
+                                 ["fountain_f0",
+                                  "fountain_f1"],
+                                 ['first gate'])]
+    
     tomb_stones = ['tomb 1', 'tomb 2', 'tomb 3', 'tomb 4', 'tomb 5',
                    'tomb 6', 'tomb 7', 'tomb 8', 'tomb 9']
     book_shelves = ['shelf 1', 'shelf 2', 'shelf 3']
@@ -170,12 +165,14 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         rng),
              circular_bones_room('ground_soil3', 'ground_soil4',
                                  'ground_soil4', bones, 25, rng),
-             pillar_room('ground_tile3', 'ground_soil4', ['statue'], rng)]
+             pillar_room('ground_tile3', 'ground_soil4', ['statue'], rng),
+             pillar_room('ground_tile3', 'ground_soil4', ['wall_rubble6'], rng),
+             pillar_room('ground_soil4', 'ground_soil4', ['wall_rubble6'], rng)]
 
     level_partitioners = [binary_space_partitioning((80, 40), (11, 11), rng)]
 
     surrounder_config = SurroundingDecoratorConfig(['first gate'],
-                                                   wall_constructed)
+                                                   'wall_rubble6')
     surrounder = SurroundingDecorator(surrounder_config)
 
     wall_direction_config = DirectionalWallDecoratorConfig(['first gate'],
@@ -190,7 +187,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                    east_north_south = wall_135,
                                                    west_north_south = wall_157,
                                                    four_way = wall_1357,
-                                                   wall = wall_constructed)
+                                                   wall = 'wall_rubble6')
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
     

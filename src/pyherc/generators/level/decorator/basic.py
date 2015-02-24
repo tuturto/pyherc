@@ -339,6 +339,10 @@ class DirectionalWallDecorator(Decorator):
         wall_tiles.append(self.configuration.wall)
         wall_tiles.extend(self.tiles.values())
 
+        pillar = self.check_pillar(level, location)
+        if pillar:
+            return pillar
+
         if wall_tile(level, (loc_x, loc_y - 1)) in self.configuration.tiles:
             if not (is_wall(level, (loc_x - 1, loc_y - 1), wall_tiles)
                     and is_wall(level, (loc_x + 1, loc_y - 1), wall_tiles)
@@ -369,7 +373,21 @@ class DirectionalWallDecorator(Decorator):
         if key in self.tiles:
             return self.tiles[''.join(directions)]
         else:
-            return self.configuration.east_west
+            return self.configuration.four_way
+
+    def check_pillar(self, level, location):
+        "check for possible pillar"
+        tiles = self.configuration.tiles
+        x_loc, y_loc = location
+        
+        if (wall_tile(level, (x_loc - 1, y_loc)) not in tiles
+                and wall_tile(level, (x_loc + 1, y_loc)) not in tiles
+                and wall_tile(level, (x_loc, y_loc - 1)) not in tiles
+                and wall_tile(level, (x_loc, y_loc + 1)) not in tiles):
+
+            return self.configuration.wall
+
+        return None
 
 def is_wall(level, location, wall_tiles):
     "check if given location is considered as a wall"
