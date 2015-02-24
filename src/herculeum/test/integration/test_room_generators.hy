@@ -33,7 +33,7 @@
                                            circular-graveyard square-graveyard
                                            square-library circular-library
                                            square-pitroom circular-pitroom
-                                           square-banded-library
+                                           square-banded-library pillar-room
                                            mundane-items skeletons]])
 
 (defn run-generator [generator]
@@ -125,3 +125,7 @@
 (defn test-circular-band-room []
   "test generating circular room with 2 tilings"
   (run-generator (circular-band-room :floor :floor :floor (Random))))
+
+(defn test-pillar-room []
+  "test generating pillar rooms"
+  (run-generator (pillar-room :floor :floor [:pillar] (Random))))

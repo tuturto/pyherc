@@ -83,5 +83,5 @@
   (.add-icon gfx "tomb 9" ":tomb_9.png" "|")
   (.add-icon gfx "shelf 1" ":shelf_empty.png" "+")
   (.add-icon gfx "shelf 2" ":shelf_book_1.png" "+")
-  (.add-icon gfx "shelf 3" ":shelf_book_2.png" "+"))
-
+  (.add-icon gfx "shelf 3" ":shelf_book_2.png" "+")
+  (.add-icon gfx "statue" ":decor/statue.png" "0"))

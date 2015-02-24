@@ -23,7 +23,8 @@
 Package for room generators
 """
 
-from .areas import center_tile, random_columns, random_rows, center_area
+from .areas import (center_tile, random_columns, random_rows, center_area,
+                    random_pillars)
 from .areas import side_by_side
 from .corridor import corridors
 from .cache import CacheRoomGenerator, cache_creator

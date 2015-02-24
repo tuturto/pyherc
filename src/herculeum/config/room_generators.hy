@@ -24,11 +24,18 @@
                                        random-rows trap-creator
                                        wall-creator floor-creator
                                        ornament-creator
-                                       center-area center-tile side-by-side]])
+                                       center-area center-tile side-by-side
+                                       random-pillars]])
 
 (defn square-room [floor-tile corridor-tile rng]
   "create room generator for square rooms"
   (new-room-generator (square-shape floor-tile rng)
+                      (corridors corridor-tile)))
+
+(defn pillar-room [floor-tile corridor-tile pillar-tiles rng]
+  "create room generator for pillar rooms"
+  (new-room-generator (square-shape floor-tile rng)
+                      (wall-creator pillar-tiles (random-pillars 100 rng) rng)
                       (corridors corridor-tile)))
 
 (defn square-band-room [floor-tile edge-tile corridor-tile rng]

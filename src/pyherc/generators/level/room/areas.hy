@@ -40,6 +40,13 @@
              (when (<= (.randint rng 1 100) percentage)
                (yield it)))))
 
+(defn random-pillars [percentage rng]
+  "create selector for picking random pillar tiles"
+  (fn [section]
+    (ap-each (section-data section :pillars)
+             (when (<= (.randint rng 1 100) percentage)
+               (yield it)))))
+
 (defn center-area []
   "create selector for picking center area of room"
   (fn [section]
