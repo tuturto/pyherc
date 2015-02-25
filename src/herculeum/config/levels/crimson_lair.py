@@ -33,8 +33,6 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                DirectionalWallDecoratorConfig,
                                                FloorBuilderDecorator,
                                                FloorBuilderDecoratorConfig,
-                                               ReplacingDecorator,
-                                               ReplacingDecoratorConfig,
                                                SurroundingDecorator,
                                                SurroundingDecoratorConfig,
                                                WallBuilderDecorator,
@@ -55,38 +53,29 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     """
     surface_manager = context.surface_manager
 
-    floor_natural = 'natural floor'
     floor_rock = surface_manager.add_icon('floor_rock', ':rock_floor.png', '.')
 
     wall_empty = None
-    wall_natural = 'natural wall'
-    wall_constructed = 'constructed wall'
     wall_ground = surface_manager.add_icon('wall_ground', ':ground_wall.png', ' ')
     wall_rock = surface_manager.add_icon('wall_rock', ':rock_wall.png', '#')
     stairs_down = surface_manager.add_icon('stairs_down', ':stairs_down.png', '>')
     stairs_up = surface_manager.add_icon('stairs_up', ':stairs_up.png', '<')
 
-    room_generators = [CrimsonLairGenerator(floor_natural,
-                                           wall_empty,
-                                           ['crimson lair'],
-                                           rng)]
+    room_generators = [CrimsonLairGenerator(floor_rock,
+                                            wall_empty,
+                                            ['crimson lair'],
+                                            rng)]
     level_partitioners = [grid_partitioning((80, 25),
                                             1,
                                             1,
                                             rng)]
 
     surrounder_config = SurroundingDecoratorConfig(['crimson lair'],
-                                                   wall_natural)
+                                                   wall_ground)
     surrounder = SurroundingDecorator(surrounder_config)
 
-    replacer_config = ReplacingDecoratorConfig(['crimson lair'],
-                                    {floor_natural: floor_rock},
-                                    {wall_natural: wall_ground,
-                                     wall_constructed: wall_rock})
-    replacer = ReplacingDecorator(replacer_config)
-
     wallbuilder_config = WallBuilderDecoratorConfig(['crimson lair'],
-                                        {wall_natural: wall_constructed},
+                                        {wall_ground: wall_rock},
                                          wall_empty)
     wallbuilder = WallBuilderDecorator(wallbuilder_config)
 
@@ -137,7 +126,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                north_south_west = floor157,
                                                east_south_west = floor357,
                                                fourway = floor1357,
-                                               floor = floor_natural,
+                                               floor = floor_rock,
                                                nook_west = floor1357,
                                                nook_east = floor1357)
     floor_builder = FloorBuilderDecorator(floor_config)
@@ -154,7 +143,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                    east_north_south = wall_135,
                                                    west_north_south = wall_157,
                                                    four_way = wall_1357,
-                                                   wall = wall_constructed)
+                                                   wall = wall_rock)
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
@@ -163,8 +152,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                 [surrounder,
                                                  wallbuilder,
                                                  wall_direction_builder,
-                                                 floor_builder,
-                                                 replacer])
+                                                 floor_builder])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]
 
@@ -203,11 +191,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         new_level = 'crimson lair',
                                         unique = True)
                                         ]
-
-    level_context = LevelContext(size = level_size,
-                                 floor_type = 0,
-                                 wall_type = wall_natural,
-                                 level_types = ['crimson lair'])
 
     return [new_level('crimson lair', room_generators, level_partitioners,
                       decorators, item_adders, creature_adders,

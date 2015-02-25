@@ -28,8 +28,6 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                AggregateDecoratorConfig,
                                                DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
-                                               ReplacingDecorator,
-                                               ReplacingDecoratorConfig,
                                                WallBuilderDecorator,
                                                WallBuilderDecoratorConfig,
                                                WallOrnamentDecorator,
@@ -39,80 +37,6 @@ from pyherc.generators.level.prototiles import (FLOOR_CONSTRUCTED,
                                                 WALL_NATURAL)
 from pyherc.test.builders import LevelBuilder
 
-
-class TestLevelDecorator():
-    """
-    Tests for LevelDecorator
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        self.level = None
-        self.config = None
-        self.decorator = None
-        self.floor_rock = None
-        self.floor_brick = None
-        self.wall_empty = None
-        self.wall_ground = None
-
-    def setup(self):
-        """
-        Setup the test case
-        """
-        self.floor_rock = 1
-        self.floor_brick = 2
-        self.wall_empty = None
-        self.wall_ground = 4
-        self.level = (LevelBuilder()
-                      .with_size((10, 15))
-                      .with_floor_tile(FLOOR_NATURAL)
-                      .with_wall_tile(self.wall_empty)
-                      .build())
-
-        floor_tile(self.level, (5, 5), FLOOR_CONSTRUCTED)
-        floor_tile(self.level, (6, 5), FLOOR_CONSTRUCTED)
-        floor_tile(self.level, (7, 5), FLOOR_CONSTRUCTED)
-        floor_tile(self.level, (0, 0), FLOOR_CONSTRUCTED)
-        floor_tile(self.level, (10, 0), FLOOR_CONSTRUCTED)
-        floor_tile(self.level, (0, 15), FLOOR_CONSTRUCTED)
-        floor_tile(self.level, (10, 15), FLOOR_CONSTRUCTED)
-
-        wall_tile(self.level, (2, 2), WALL_NATURAL)
-        wall_tile(self.level, (5, 5), WALL_NATURAL)
-
-        self.config = ReplacingDecoratorConfig(['crypt'],
-                                               {FLOOR_NATURAL: self.floor_rock,
-                                               FLOOR_CONSTRUCTED: self.floor_brick},
-                                               {WALL_NATURAL: self.wall_ground}
-                                               )
-        self.decorator = ReplacingDecorator(self.config)
-
-    def test_replacing_ground(self):
-        """
-        Test that proto ground is replaced with given tiles
-        """
-        self.decorator.decorate_level(self.level)
-
-
-        assert_that(floor_tile(self.level, (5, 5)), is_(equal_to(self.floor_brick)))
-        assert_that(floor_tile(self.level, (6, 5)), is_(equal_to(self.floor_brick)))
-        assert_that(floor_tile(self.level, (7, 5)), is_(equal_to(self.floor_brick)))
-        assert_that(floor_tile(self.level, (0, 0)), is_(equal_to(self.floor_brick)))
-        assert_that(floor_tile(self.level, (10, 0)), is_(equal_to(self.floor_brick)))
-        assert_that(floor_tile(self.level, (0, 15)), is_(equal_to(self.floor_brick)))
-        assert_that(floor_tile(self.level, (10, 15)), is_(equal_to(self.floor_brick)))
-
-        assert_that(floor_tile(self.level, (2, 2)), is_(equal_to(self.floor_rock)))
-
-    def test_replacing_walls(self):
-        """
-        Test that proto walls are replaced with given tiles
-        """
-        self.decorator.decorate_level(self.level)
-
-        assert_that(wall_tile(self.level, (2, 2)), is_(equal_to(self.wall_ground)))
-        assert_that(wall_tile(self.level, (5, 5)), is_(equal_to(self.wall_ground)))
 
 class TestWallBuilderDecorator():
     """
@@ -188,11 +112,11 @@ class TestAggregateDecorator():
         self.level = LevelBuilder().build()
 
         self.mock_decorator_1 = mock(WallBuilderDecorator)
-        self.mock_decorator_2 = mock(ReplacingDecorator)
+        self.mock_decorator_2 = mock(WallOrnamentDecorator)
 
         self.config = AggregateDecoratorConfig(['crypt'],
                                                [self.mock_decorator_1,
-                                               self.mock_decorator_2])
+                                                self.mock_decorator_2])
         self.decorator = AggregateDecorator(self.config)
 
     def test_subdecorators_are_called(self):

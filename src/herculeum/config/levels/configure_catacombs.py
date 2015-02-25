@@ -35,8 +35,6 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                DirectionalWallDecoratorConfig,
                                                FloorBuilderDecorator,
                                                FloorBuilderDecoratorConfig,
-                                               ReplacingDecorator,
-                                               ReplacingDecoratorConfig,
                                                SurroundingDecorator,
                                                SurroundingDecoratorConfig,
                                                WallBuilderDecorator,
@@ -60,7 +58,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     """
     surface_manager = context.surface_manager
 
-    floor_natural = 'natural floor'
     floor_rock = surface_manager.add_icon('floor_rock',
                                           ':rock_floor.png',
                                           '.')
@@ -68,7 +65,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     wall_empty = None
     floor_empty = None
 
-    wall_natural = 'natural wall'
     wall_constructed = 'constructed wall'
     wall_ground = surface_manager.add_icon('wall_ground',
                                            ':ground_wall.png',
@@ -96,28 +92,21 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     wall_137 = surface_manager.add_icon('catacombs_wall_137', ':catacombs_wall_4_6_8.png', '#')
     wall_157 = surface_manager.add_icon('catacombs_wall_157', ':catacombs_wall_2_4_8.png', '#')
 
-    room_generators = [CatacombsGenerator(floor_natural,
-                                           wall_empty,
-                                           ['upper catacombs',
+    room_generators = [CatacombsGenerator(floor_rock,
+                                          wall_empty,
+                                          ['upper catacombs',
                                            'lower catacombs'],
-                                           rng)]
+                                          rng)]
     level_partitioners = [grid_partitioning((80, 25), 1, 1, rng)]
-
-    replacer_config = ReplacingDecoratorConfig(['upper catacombs',
-                                                'lower catacombs'],
-                                    {floor_natural: floor_rock},
-                                    {wall_natural: wall_ground,
-                                    wall_constructed: wall_rock})
-    replacer = ReplacingDecorator(replacer_config)
 
     surrounder_config = SurroundingDecoratorConfig(['upper catacombs',
                                                     'lower catacombs'],
-                                                   wall_natural)
+                                                   wall_ground)
     surrounder = SurroundingDecorator(surrounder_config)
 
     wallbuilder_config = WallBuilderDecoratorConfig(['upper catacombs',
                                                     'lower catacombs'],
-                                        {wall_natural: wall_constructed},
+                                        {wall_ground: wall_constructed},
                                          wall_empty)
     wallbuilder = WallBuilderDecorator(wallbuilder_config)
 
@@ -171,7 +160,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                north_south_west = floor157,
                                                east_south_west = floor357,
                                                fourway = floor1357,
-                                               floor = floor_natural,
+                                               floor = floor_rock,
                                                nook_west = floor1357,
                                                nook_east = floor1357)
     floor_builder = FloorBuilderDecorator(floor_config)
@@ -198,8 +187,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                  wallbuilder,
                                                  wall_direction_builder,
                                                  floor_builder,
-                                                 torch_ornamenter,
-                                                 replacer])
+                                                 torch_ornamenter])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]
 
@@ -277,7 +265,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     level_context = LevelContext(size = level_size,
                                  floor_type = floor_empty,
-                                 wall_type = wall_natural,
+                                 wall_type = wall_ground,
                                  level_types = ['upper catacombs',
                                                 'lower catacombs'])
 
