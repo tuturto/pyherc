@@ -79,56 +79,6 @@ class DecoratorConfig():
         self.level_types = level_types
 
 
-class ReplacingDecorator(Decorator):
-    """
-    Simple decorator used to replace prototiles with real ones
-    """
-    def __init__(self, configuration):
-        """
-        Default constructor
-
-        :param configuration: configuration specifying tiles to replace
-        :type configuration: ReplacingDecoratorConfig
-        """
-        super().__init__(configuration)
-
-    def decorate_level(self, level):
-        """
-        Decorate level
-
-        :param level: level to decorate
-        :type level: Level
-        """
-        ground_tiles = self.configuration.ground_config
-        wall_tiles = self.configuration.wall_config
-
-        for location, tile in get_tiles(level):
-            proto_tile = tile['\ufdd0:floor']
-            if proto_tile in ground_tiles:
-                tile['\ufdd0:floor'] = ground_tiles[proto_tile]
-
-            proto_tile = tile['\ufdd0:wall']
-            if proto_tile in wall_tiles:
-                tile['\ufdd0:wall'] = wall_tiles[proto_tile]
-
-class ReplacingDecoratorConfig(DecoratorConfig):
-    """
-    Configuration for ReplacingDecorator
-    """
-    def __init__(self, level_types, ground_config, wall_config):
-        """
-        Default constructor
-
-        :param level_types: types of level to handle
-        :type level_types: [string]
-        :param ground_config: configuration for ground
-        :param wall_config: configuration for walls
-        """
-        super().__init__(level_types)
-        self.ground_config = ground_config
-        self.wall_config = wall_config
-
-
 class WallBuilderDecorator(Decorator):
     """
     Decorator used to build walls
