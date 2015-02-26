@@ -250,6 +250,22 @@
         <file>decor/skull_1.png</file>
         <file>decor/skull_2.png</file>
         <file>decor/statue.png</file>
+        <file>decor/metal_beams_1.png</file>
+        <file>decor/metal_beams_2.png</file>
+        <file>decor/metal_beams_3.png</file>
+        <file>decor/metal_beams_4.png</file>
+        <file>decor/wooden_beams_1.png</file>
+        <file>decor/wooden_beams_2.png</file>
+        <file>decor/wooden_beams_3.png</file>
+        <file>decor/wooden_beams_4.png</file>
+        <file>decor/wall_crack_1.png</file>
+        <file>decor/wall_crack_2.png</file>
+        <file>decor/wall_crack_3.png</file>
+        <file>decor/wall_crack_4.png</file>
+        <file>decor/wall_moss_1.png</file>
+        <file>decor/wall_moss_2.png</file>
+        <file>decor/wall_moss_3.png</file>
+        <file>decor/wall_moss_4.png</file>
 
 	<file>ground/ground_rock1_1357.png</file>
 	<file>ground/ground_rock1_135.png</file>

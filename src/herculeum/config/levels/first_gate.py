@@ -206,6 +206,20 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                 rng = rng,
                                                 rate = 10)
     torch_ornamenter = WallOrnamentDecorator(torch_ornamenter_config)
+    moss_ornamenter = WallOrnamentDecorator(
+        WallOrnamentDecoratorConfig([],
+                                    wall_tile = wall_37,
+                                    ornamentation = ['wall moss 1', 
+                                                     'wall moss 2'],
+                                    rng = rng,
+                                    rate = 30))
+    crack_ornamenter = WallOrnamentDecorator(
+        WallOrnamentDecoratorConfig([],
+                                    wall_tile = wall_37,
+                                    ornamentation = ['wall crack 1', 
+                                                     'wall crack 2'],
+                                    rng = rng,
+                                    rate = 30))
 
     aggregate_decorator_config = AggregateDecoratorConfig(
                                                 ['first gate'],
@@ -216,6 +230,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                  tile3_floorbuilder,
                                                  tile4_floorbuilder,
                                                  wood4_floorbuilder,
+                                                 crack_ornamenter,
+                                                 moss_ornamenter,
                                                  torch_ornamenter])
 
     decorators = [AggregateDecorator(aggregate_decorator_config)]
