@@ -312,8 +312,9 @@ class PlayMapWidget(QWidget):
                 new_glyph.setZValue(zorder_wall)
                 new_glyph.setPos(location[0] * 32, location[1] * 32)
                 scene.addItem(new_glyph)
-            if tile['\ufdd0:ornamentation']:
-                new_glyph = MapGlyph(self.surface_manager.get_icon(tile['\ufdd0:ornamentation']),
+
+            for tile_id in tile['\ufdd0:ornamentation']:
+                new_glyph = MapGlyph(self.surface_manager.get_icon(tile_id),
                                      None,
                                      self.rng.choice(self.animation_adapters))
                 new_glyph.setZValue(zorder_ornament)

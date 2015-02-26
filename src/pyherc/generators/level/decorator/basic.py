@@ -534,7 +534,8 @@ class WallOrnamentDecorator(Decorator):
         for location, tile in get_tiles(level):
             if tile['\ufdd0:wall'] == wall:
                 if self.configuration.rng.randint(0, 100) < rate:
-                    if floor_tile(level, (location[0], location[1] + 1)):
+                    if (self.configuration.top_only == False
+                        or floor_tile(level, (location[0], location[1] + 1))):
                         self._randomize_ornament(level, location)
 
     def _randomize_ornament(self, level, location):
@@ -556,7 +557,8 @@ class WallOrnamentDecoratorConfig(DecoratorConfig):
 
     .. versionadded:: 0.10
     """
-    def __init__(self, level_types, wall_tile, ornamentation, rng, rate):
+    def __init__(self, level_types, wall_tile, ornamentation, rng, rate,
+                 top_only = True):
         """
         Default constructor
 
@@ -574,5 +576,6 @@ class WallOrnamentDecoratorConfig(DecoratorConfig):
         super().__init__(level_types)
         self.wall_tile = wall_tile
         self.ornamentation = ornamentation
+        self.top_only = top_only
         self.rng = rng
         self.rate = rate

@@ -251,7 +251,7 @@ class TestDecoratingWallOrnaments():
         self.decorator.decorate_level(self.level)
 
         assert_that(ornamentation(self.level, (2, 2)),
-                    is_(equal_to(self.ornamentation)))
+                    is_(equal_to([self.ornamentation])))
 
     def test_ornamentation_rate_can_be_controlled(self):
         """
@@ -277,7 +277,7 @@ class TestDecoratingWallOrnaments():
 
         candle_count = 0
         for location, tile in get_tiles(self.level):
-            if tile['\ufdd0:ornamentation'] == self.ornamentation:
+            if self.ornamentation in tile['\ufdd0:ornamentation']:
                 candle_count = candle_count + 1
 
         assert_that(candle_count, is_(equal_to(2)))
@@ -318,6 +318,6 @@ class TestDecoratingWallOrnaments():
         self.decorator.decorate_level(self.level)
 
         assert_that(ornamentation(self.level, (2, 2)),
-                    is_(equal_to(self.ornamentation)))
+                    is_(equal_to([self.ornamentation])))
         assert_that(ornamentation(self.level, (2, 4)),
-                    is_(equal_to(None)))
+                    is_(equal_to([])))

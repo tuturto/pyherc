@@ -35,7 +35,7 @@
   "create a tile with default values"
   {:floor nil
    :wall nil
-   :ornamentation nil
+   :ornamentation []
    :trap nil
    :tags []
    :items []
@@ -132,7 +132,7 @@
 (defn ornamentation [level location &optional [tile-id :no-tile]]
   (if (!= tile-id :no-tile)
     (do (let [[map-tile (get-or-create-tile level location)]]
-          (assoc map-tile :ornamentation tile-id)
+          (.append (:ornamentation map-tile) tile-id)
           (:ornamentation map-tile)))
     (do (let [[map-tile (get-tile level location)]]
           (when map-tile (:ornamentation map-tile))))))
