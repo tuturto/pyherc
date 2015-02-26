@@ -20,7 +20,9 @@ Herculeum
 Herculeum is a legendary city located somewhere deep in Thynian jungle. It once
 was a thriving metropolis, but has been abandoned centuries ago already. Nobody
 remembers the real reason why it has been abandoned, but legends tell about
-some great misfortune that forced the city to be abandoned.
+some great misfortune that forced the city to be abandoned. Over the centuries
+ruins have slowly been inhabited by drifters, travelers and various shady
+characters.
 
 Southern Sea
 ============
