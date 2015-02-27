@@ -18,13 +18,11 @@
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (defmacro tome [name &rest content]
-  `(.append config (ItemConfiguration ~name 
-                                      100 1 ["tied-scroll"]
-                                      ["tome"] "rare" nil nil nil nil
-                                      (.join " " [~@content]))))
+  `(ItemConfiguration ~name 
+                      100 1 ["tied-scroll"]
+                      ["tome"] "rare" nil nil nil nil
+                      (.join " " [~@content])))
 
-(defmacro items-list [&rest tomes]
+(defmacro items-list [&rest items]
   `(defn init-items [context]
-     (let [[config []]]
-       ~@tomes
-       config)))
+     [~@items]))

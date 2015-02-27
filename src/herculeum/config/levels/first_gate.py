@@ -260,9 +260,19 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     item_adder_config = ItemAdderConfiguration(['first gate'])
 
+    item_adder_config.add_item(min_amount = 0,
+                               max_amount = 1,
+                               type = 'tome',
+                               location = 'room')
+
+    item_adder_config.add_item(min_amount = 0,
+                               max_amount = 2,
+                               type = 'weapon',
+                               location = 'room')
+
     item_adders = [ItemAdder(item_generator,
-                            item_adder_config,
-                            rng)]
+                             item_adder_config,
+                             rng)]
 
     creatures_upper = CreatureAdderConfiguration(['first gate'])
     creatures_upper.add_creature(min_amount = 4,

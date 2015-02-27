@@ -48,7 +48,8 @@
   (let [[gfx context.surface-manager]]
     (load-ground-tiles gfx)
     (load-decoration-tiles gfx)
-    (load-dungeon-features gfx)))
+    (load-dungeon-features gfx)
+    (load-items gfx)))
 
 (defn add-ground-sets [gfx &rest sets]
   (ap-each sets (add-ground-set gfx it)))
@@ -101,3 +102,7 @@
   (.add-icon gfx "shelf 2" ":shelf_book_1.png" "+")
   (.add-icon gfx "shelf 3" ":shelf_book_2.png" "+")
   (.add-icon gfx "statue" ":decor/statue.png" "0"))
+
+(defn load-items [gfx]
+  "load item graphics"
+  (.add-icon gfx "tied-scroll" ":items/tied-scroll.png" "?"))

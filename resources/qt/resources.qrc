@@ -445,6 +445,8 @@
 	<file>ground/ground_wood4_57.png</file>
 	<file>ground/ground_wood4_7.png</file>
 
+    <file>items/tied-scroll.png</file>
+
 	<file>walls/wall_brick1_1357.png</file>
 	<file>walls/wall_brick1_135.png</file>
 	<file>walls/wall_brick1_137.png</file>
