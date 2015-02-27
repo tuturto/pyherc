@@ -23,7 +23,7 @@
                                       ["tome"] "rare" nil nil nil nil
                                       (.join " " [~@content]))))
 
-(defmacro define-tomes [&rest tomes]
+(defmacro items-list [&rest tomes]
   `(defn init-items [context]
      (let [[config []]]
        ~@tomes

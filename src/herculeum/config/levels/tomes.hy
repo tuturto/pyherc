@@ -20,7 +20,7 @@
 (require herculeum.config.levels.macros)
 (import [pyherc.generators [ItemConfiguration]])
 
-(define-tomes
+(items-list
   (tome "Tome of Um'bano - Page 150"
         "In crypt under Herculeum, I encountered giant spiders."
         "These arachnids have poisoned bite and could easily take down"
