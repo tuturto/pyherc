@@ -17,16 +17,8 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defmacro item [name description cost weight icons types rarity]  
-  `(ItemConfiguration ~name ~cost ~weight ~icons ~types
-                      ~rarity nil nil nil nil ~description))
+(require herculeum.config.levels.macros)
+(import [pyherc.generators [ItemConfiguration]])
 
-(defmacro tome [name &rest content]
-  `(ItemConfiguration ~name 
-                      100 1 ["tied-scroll"]
-                      ["tome"] "rare" nil nil nil nil
-                      (.join " " [~@content])))
-
-(defmacro items-list [&rest items]
-  `(defn init-items [context]
-     [~@items]))
+(items-list
+ (item "apple" "juicy apple" 1 1 ["apple"] ["food"] "common"))

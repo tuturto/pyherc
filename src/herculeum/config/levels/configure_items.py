@@ -37,17 +37,6 @@ def init_items(context):
     surface_manager = context.surface_manager
     config = []
 
-    config.append(ItemConfiguration(name = 'apple',
-                                    cost = 1,
-                                    weight = 1,
-                                    icons = [surface_manager.add_icon(
-                                                            'apple',
-                                                            ':apple.png',
-                                                            '%',
-                                                            ['red'])],
-                                    types = ['food'],
-                                    rarity = 'common'))
-
     config.append(ItemConfiguration(name = 'dagger',
                                     description = 'Light and simple weapon that does not do much damage. Small size allows skilled wielder to do critical damage easily though.',
                                     cost = 10,

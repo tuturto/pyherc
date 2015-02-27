@@ -105,4 +105,5 @@
 
 (defn load-items [gfx]
   "load item graphics"
+  (.add-icon gfx "apple" ":items/apple.png" "%")
   (.add-icon gfx "tied-scroll" ":items/tied-scroll.png" "?"))

@@ -445,7 +445,28 @@
 	<file>ground/ground_wood4_57.png</file>
 	<file>ground/ground_wood4_7.png</file>
 
+    <file>items/apple.png</file>
+    <file>items/arrows.png</file>
+    <file>items/ashmque.png</file>
+    <file>items/barbed-spear.png</file>
+    <file>items/battle-axe.png</file>
+    <file>items/bow.png</file>
+    <file>items/chainmail.png</file>
+    <file>items/dagger.png</file>
+    <file>items/gavel.png</file>
+    <file>items/leather_armour.png</file>
+    <file>items/mace.png</file>
+    <file>items/plain_potion.png</file>
+    <file>items/plate_mail.png</file>
+    <file>items/scale_mail.png</file>
+    <file>items/scythe.png</file>
+    <file>items/snowman.png</file>
+    <file>items/spade.png</file>
+    <file>items/spiked-mace.png</file>
+    <file>items/stiletto.png</file>
     <file>items/tied-scroll.png</file>
+    <file>items/whip.png</file>
+    <file>items/wood-axe.png</file>
 
 	<file>walls/wall_brick1_1357.png</file>
 	<file>walls/wall_brick1_135.png</file>

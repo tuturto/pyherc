@@ -270,6 +270,11 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                type = 'weapon',
                                location = 'room')
 
+    item_adder_config.add_item(min_amount = 2,
+                               max_amount = 4,
+                               type = 'food',
+                               location = 'room')
+
     item_adders = [ItemAdder(item_generator,
                              item_adder_config,
                              rng)]
