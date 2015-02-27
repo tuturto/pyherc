@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #   Copyright 2010-2015 Tuukka Turto
@@ -31,3 +30,4 @@ import herculeum.config.levels.configure_items
 import herculeum.config.levels.effects
 import herculeum.config.levels.player_characters
 import herculeum.config.levels.graphics
+import herculeum.config.levels.tomes
