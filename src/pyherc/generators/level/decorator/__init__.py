@@ -30,4 +30,5 @@ from .basic import DirectionalWallDecorator, DirectionalWallDecoratorConfig
 from .basic import FloorBuilderDecorator, FloorBuilderDecoratorConfig
 from .basic import WallOrnamentDecorator, WallOrnamentDecoratorConfig
 
-from .wall import SurroundingDecorator, SurroundingDecoratorConfig
+from .wall import (SurroundingDecorator, SurroundingDecoratorConfig,
+                   wall_ornamenter)

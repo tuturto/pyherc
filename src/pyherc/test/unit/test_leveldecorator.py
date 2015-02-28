@@ -91,42 +91,6 @@ class TestWallBuilderDecorator():
         assert_that(wall_tile(self.level, (0, 0)),
                     is_(equal_to(WALL_NATURAL)))
 
-class TestAggregateDecorator():
-    """
-    Tests for AggregateDecorator
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        self.level = None
-        self.mock_decorator_1 = None
-        self.mock_decorator_2 = None
-        self.config = None
-        self.decorator = None
-
-    def setup(self):
-        """
-        Setup the testcase
-        """
-        self.level = LevelBuilder().build()
-
-        self.mock_decorator_1 = mock(WallBuilderDecorator)
-        self.mock_decorator_2 = mock(WallOrnamentDecorator)
-
-        self.config = AggregateDecoratorConfig(['crypt'],
-                                               [self.mock_decorator_1,
-                                                self.mock_decorator_2])
-        self.decorator = AggregateDecorator(self.config)
-
-    def test_subdecorators_are_called(self):
-        """
-        Test that sub decorators of aggregate decorator are called
-        """
-        self.decorator.decorate_level(self.level)
-
-        verify(self.mock_decorator_1).decorate_level(self.level)
-        verify(self.mock_decorator_2).decorate_level(self.level)
 
 class TestDirectionalWallDecorator():
     """

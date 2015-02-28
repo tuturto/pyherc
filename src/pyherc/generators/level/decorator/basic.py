@@ -153,6 +153,8 @@ class WallBuilderDecoratorConfig(DecoratorConfig):
 class AggregateDecorator(Decorator):
     """
     Decorator that consists of multiple decorators
+
+    TODO: remove this eventually
     """
     def __init__(self, configuration):
         """
@@ -171,7 +173,7 @@ class AggregateDecorator(Decorator):
         :type level: Level
         """
         for decorator in self.configuration.decorators:
-            decorator.decorate_level(level)
+            decorator(level)
 
 
 class AggregateDecoratorConfig(DecoratorConfig):

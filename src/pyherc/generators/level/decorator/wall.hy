@@ -19,7 +19,8 @@
 
 (import [pyherc.generators.level.decorator.basic [Decorator DecoratorConfig]]
         [pyherc.aspects [log-debug log-info]]
-        [pyherc.data [wall-tile floor-tile get-tiles area-around]])
+        [pyherc.data [wall-tile floor-tile get-tiles area-around
+                      ornamentation]])
 (require pyherc.macros)
 (require pyherc.aspects)
 (require hy.contrib.anaphoric)
@@ -50,3 +51,29 @@
                  (-> (super) (.--init-- level-types))
                  (setv self.wall-tile wall-tile)
                  nil)]])
+
+(defn wall-ornamenter [left-wall top-wall right-wall rate rng]
+  "create decorator to ornament walls"
+  (fn [level]
+    "decorate level"
+    (ap-each (list (get-tiles level))
+             (add-ornament level it left-wall top-wall right-wall rate rng))))
+
+(defn add-ornament [level loc-tile left-wall top-wall right-wall rate rng]
+  (let [[#t(location tile) loc-tile]
+        [#t(x-loc y-loc) location]]
+    (when (and left-wall
+               (floor-tile level #t((inc x-loc) y-loc))
+               (= (wall-tile level location) (first left-wall))
+               (<= (.randint rng 0 100) rate))
+      (ornamentation level location (.choice rng (second left-wall))))
+    (when (and right-wall
+               (floor-tile level #t((dec x-loc) y-loc))
+               (= (wall-tile level location) (first right-wall))
+               (<= (.randint rng 0 100) rate))
+      (ornamentation level location (.choice rng (second right-wall))))
+    (when (and top-wall
+               (floor-tile level #t(x-loc (inc y-loc)))
+               (= (wall-tile level location) (first top-wall))
+               (<= (.randint rng 0 100) rate))
+      (ornamentation level location (.choice rng (second top-wall))))))

@@ -57,7 +57,8 @@ from pyherc.generators.level.decorator import (AggregateDecorator,
                                                SurroundingDecorator,
                                                SurroundingDecoratorConfig,
                                                WallOrnamentDecorator,
-                                               WallOrnamentDecoratorConfig)
+                                               WallOrnamentDecoratorConfig,
+                                               wall_ornamenter)
 from pyherc.generators.level import ItemAdder, ItemAdderConfiguration
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level import new_dungeon, new_level, add_level
@@ -198,47 +199,27 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     torch_tile_f1 = surface_manager.add_icon('catacombs_torch_f1',
                                              ':wall_torch_f1.png', '¤')
 
-    torch_ornamenter_config = WallOrnamentDecoratorConfig(
-                                                ['first gate'],
-                                                wall_tile = wall_37,
-                                                ornamentation = [(torch_tile_f0, torch_tile_f1),
-                                                                 (torches_tile_f0, torches_tile_f1)],
-                                                rng = rng,
-                                                rate = 10)
-    torch_ornamenter = WallOrnamentDecorator(torch_ornamenter_config)
-    moss_ornamenter = WallOrnamentDecorator(
-        WallOrnamentDecoratorConfig([],
-                                    wall_tile = wall_37,
-                                    ornamentation = ['wall moss 1', 
-                                                     'wall moss 2'],
-                                    rng = rng,
-                                    rate = 30))
-    crack_ornamenter = WallOrnamentDecorator(
-        WallOrnamentDecoratorConfig([],
-                                    wall_tile = wall_37,
-                                    ornamentation = ['wall crack 1', 
-                                                     'wall crack 2'],
-                                    rng = rng,
-                                    rate = 30))
+    torch_ornamenter = wall_ornamenter(None,
+                                       [wall_37, [(torch_tile_f0, torch_tile_f1),
+                                                  (torches_tile_f0, torches_tile_f1)]],
+                                       None, 10, rng)
 
-    beams_1_ornamenter = WallOrnamentDecorator(
-        WallOrnamentDecoratorConfig([],
-                                    wall_tile = wall_37,
-                                    ornamentation = ['wooden beams 1'],
-                                    rng = rng,
-                                    rate = 10,
-                                    top_only = False))
+    crack_ornamenter = wall_ornamenter([wall_15, ['wall crack 4']],
+                                       [wall_37, ['wall crack 1',
+                                                  'wall crack 2']],
+                                       [wall_15, ['wall crack 3']],
+                                       30, rng)
 
-    beams_2_ornamenter = WallOrnamentDecorator(
-        WallOrnamentDecoratorConfig([],
-                                    wall_tile = wall_15,
-                                    ornamentation = ['wooden beams 2',
-                                                     'wooden beams 3',
-                                                     'wooden beams 4'],
-                                    rng = rng,
-                                    rate = 10,
-                                    top_only = False))
-
+    moss_ornamenter = wall_ornamenter([wall_15, ['wall moss 4']],
+                                      [wall_37, ['wall moss 1',
+                                                 'wall moss 2']],
+                                      [wall_15, ['wall moss 3']],
+                                      30, rng)
+    
+    beams_ornamenter = wall_ornamenter([wall_15, ['wooden beams 3']],
+                                       [wall_37, ['wooden beams 1']],
+                                       [wall_15, ['wooden beams 2']],
+                                       10, rng)
 
 
     aggregate_decorator_config = AggregateDecoratorConfig(
@@ -251,8 +232,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                  tile4_floorbuilder,
                                                  wood4_floorbuilder,
                                                  crack_ornamenter,
-                                                 beams_1_ornamenter,
-                                                 beams_2_ornamenter,
+                                                 beams_ornamenter,
                                                  moss_ornamenter,
                                                  torch_ornamenter])
 
