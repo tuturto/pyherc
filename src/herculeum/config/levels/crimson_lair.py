@@ -27,9 +27,7 @@ from pyherc.generators import (creature_config, inventory_config,
                                ItemConfiguration, WeaponConfiguration)
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
-from pyherc.generators.level.decorator import (AggregateDecorator,
-                                               AggregateDecoratorConfig,
-                                               DirectionalWallDecorator,
+from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
                                                FloorBuilderDecorator,
                                                FloorBuilderDecoratorConfig,
@@ -147,14 +145,10 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
-    aggregate_decorator_config = AggregateDecoratorConfig(
-                                                ['crimson lair'],
-                                                [surrounder,
-                                                 wallbuilder,
-                                                 wall_direction_builder,
-                                                 floor_builder])
-
-    decorators = [AggregateDecorator(aggregate_decorator_config)]
+    decorators = [surrounder,
+                  wallbuilder,
+                  wall_direction_builder,
+                  floor_builder]
 
     item_adder_config = ItemAdderConfiguration(['crimson lair'])
     item_adder_config.add_item(min_amount = 2,

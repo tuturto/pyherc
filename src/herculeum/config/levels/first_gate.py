@@ -50,9 +50,7 @@ from pyherc.data.features import new_cache
 from pyherc.generators import creature_config, inventory_config
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
-from pyherc.generators.level.decorator import (AggregateDecorator,
-                                               AggregateDecoratorConfig,
-                                               DirectionalWallDecorator,
+from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
                                                SurroundingDecorator,
                                                SurroundingDecoratorConfig,
@@ -221,22 +219,17 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                        [wall_15, ['wooden beams 2']],
                                        10, rng)
 
-
-    aggregate_decorator_config = AggregateDecoratorConfig(
-                                                ['first gate'],
-                                                [surrounder,
-                                                 wall_direction_builder,
-                                                 soil3_floorbuilder,
-                                                 soil4_floorbuilder,
-                                                 tile3_floorbuilder,
-                                                 tile4_floorbuilder,
-                                                 wood4_floorbuilder,
-                                                 crack_ornamenter,
-                                                 beams_ornamenter,
-                                                 moss_ornamenter,
-                                                 torch_ornamenter])
-
-    decorators = [AggregateDecorator(aggregate_decorator_config)]
+    decorators = [surrounder,
+                  wall_direction_builder,
+                  soil3_floorbuilder,
+                  soil4_floorbuilder,
+                  tile3_floorbuilder,
+                  tile4_floorbuilder,
+                  wood4_floorbuilder,
+                  crack_ornamenter,
+                  beams_ornamenter,
+                  moss_ornamenter,
+                  torch_ornamenter]
 
     item_adder_config = ItemAdderConfiguration(['first gate'])
 

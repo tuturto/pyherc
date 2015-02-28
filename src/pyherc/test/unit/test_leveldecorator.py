@@ -24,9 +24,7 @@ Tests for LevelDecorator
 from hamcrest import assert_that, equal_to, is_
 from mockito import any, mock, verify, when
 from pyherc.data import floor_tile, wall_tile, ornamentation, get_tiles
-from pyherc.generators.level.decorator import (AggregateDecorator,
-                                               AggregateDecoratorConfig,
-                                               DirectionalWallDecorator,
+from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
                                                WallBuilderDecorator,
                                                WallBuilderDecoratorConfig,

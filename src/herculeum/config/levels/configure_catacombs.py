@@ -29,9 +29,7 @@ from pyherc.data.effects import DamageModifier
 from pyherc.generators import creature_config, inventory_config
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
-from pyherc.generators.level.decorator import (AggregateDecorator,
-                                               AggregateDecoratorConfig,
-                                               DirectionalWallDecorator,
+from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
                                                FloorBuilderDecorator,
                                                FloorBuilderDecoratorConfig,
@@ -180,16 +178,11 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                 rate = 10)
     torch_ornamenter = WallOrnamentDecorator(torch_ornamenter_config)
 
-    aggregate_decorator_config = AggregateDecoratorConfig(
-                                                ['upper catacombs',
-                                                'lower catacombs'],
-                                                [surrounder,
-                                                 wallbuilder,
-                                                 wall_direction_builder,
-                                                 floor_builder,
-                                                 torch_ornamenter])
-
-    decorators = [AggregateDecorator(aggregate_decorator_config)]
+    decorators = [surrounder,
+                  wallbuilder,
+                  wall_direction_builder,
+                  floor_builder,
+                  torch_ornamenter]
 
     item_adder_config = ItemAdderConfiguration(['upper catacombs',
                                                'lower catacombs'])
@@ -262,12 +255,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         unique = True,
                                         escape_stairs = True)
                                         ]
-
-    level_context = LevelContext(size = level_size,
-                                 floor_type = floor_empty,
-                                 wall_type = wall_ground,
-                                 level_types = ['upper catacombs',
-                                                'lower catacombs'])
 
     return [new_level('upper catacombs', room_generators, level_partitioners,
                       decorators, item_adders, creature_adders,

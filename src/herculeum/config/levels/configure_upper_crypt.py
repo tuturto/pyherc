@@ -27,9 +27,7 @@ from pyherc.data.traps import PitTrap
 from pyherc.generators import creature_config
 from pyherc.generators.level.creatures import (CreatureAdder,
                                                CreatureAdderConfiguration)
-from pyherc.generators.level.decorator import (AggregateDecorator,
-                                               AggregateDecoratorConfig,
-                                               DirectionalWallDecorator,
+from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
                                                FloorBuilderDecorator,
                                                FloorBuilderDecoratorConfig,
@@ -198,15 +196,12 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                                 rate = 13)
     torch_ornamenter = WallOrnamentDecorator(torch_ornamenter_config)
 
-    aggregate_decorator_config = AggregateDecoratorConfig(['upper crypt'],
-                                                          [surrounder,
-                                                           wall_direction_builder,
-                                                           tile4_floorbuilder,
-                                                           wood4_floorbuilder,
-                                                           pit_builder,
-                                                           torch_ornamenter])
-
-    decorators = [AggregateDecorator(aggregate_decorator_config)]
+    decorators = [surrounder,
+                  wall_direction_builder,
+                  tile4_floorbuilder,
+                  wood4_floorbuilder,
+                  pit_builder,
+                  torch_ornamenter]
 
     item_adder_config = ItemAdderConfiguration(['upper crypt'])
     item_adder_config.add_item(min_amount = 2,

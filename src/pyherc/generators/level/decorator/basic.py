@@ -150,49 +150,6 @@ class WallBuilderDecoratorConfig(DecoratorConfig):
         self.empty_tile = empty_tile
 
 
-class AggregateDecorator(Decorator):
-    """
-    Decorator that consists of multiple decorators
-
-    TODO: remove this eventually
-    """
-    def __init__(self, configuration):
-        """
-        Default constructor
-
-        :param configuration: configuration
-        :type configuration: AggregateDecoratorConfig
-        """
-        super().__init__(configuration)
-
-    def decorate_level(self, level):
-        """
-        Decorate level
-
-        :param level: level to decorate
-        :type level: Level
-        """
-        for decorator in self.configuration.decorators:
-            decorator(level)
-
-
-class AggregateDecoratorConfig(DecoratorConfig):
-    """
-    Configuration for AggregateDecorator
-    """
-    def __init__(self, level_types, decorators):
-        """
-        Default constructor
-
-        :param level_types: types of levels to handle
-        :type level_types: [string]
-        :decorators: decorators to group
-        :type decorators: [Decorator]
-        """
-        super().__init__(level_types)
-        self.decorators = decorators
-
-
 class DirectionalWallDecoratorConfig(DecoratorConfig):
     """
     Configuration for DirectionalWallDecorator
