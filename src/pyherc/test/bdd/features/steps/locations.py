@@ -20,7 +20,7 @@
 # flake8: noqa
 
 from hamcrest import assert_that, is_in, is_not
-from pyherc.data import Portal, add_portal, add_character
+from pyherc.data import Portal, add_portal, add_character, remove_character
 from pyherc.test.bdd.features.helpers import (default_context, get_character,
                                               get_entity, get_location)
 from pyherc.test.cutesy import Level, middle_of, place
@@ -46,6 +46,7 @@ def impl(context, character_name, target_name):
     location = (target.location[0] + 1,
                 target.location[1])
 
+    remove_character(level, character)
     add_character(level, location, character)
 
 @given('{character_name} is standing away from {target_name}')
@@ -57,6 +58,7 @@ def impl(context, character_name, target_name):
     location = (target.location[0] + 3,
                 target.location[1])
 
+    remove_character(level, character)
     add_character(level, location, character)
 
 @given('{portal_name} is located in corner of {location_name}')

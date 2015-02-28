@@ -180,9 +180,11 @@
 
 #d(defn remove-character [level character]
     "remove character from level"
-    (assoc (get-tile level character.location) :character nil)
+    (when character.location
+      (assoc (get-tile level character.location) :character nil))    
     (setv character.location #t())
-    (.remove (:characters level) character))
+    (when (in character (:characters level))
+      (.remove (:characters level) character)))
 
 #d(defn move-character [level location character]
     "move character to a new location"
