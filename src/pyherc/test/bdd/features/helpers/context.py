@@ -181,7 +181,8 @@ def get_location(context, location_name):
     .. versionadded:: 0.8
     """
     locations = [x for x in context.places
-                 if x.name == location_name]
+                 if ((hasattr(x, 'name') and x.name == location_name)
+                     or (hasattr(x, 'keys') and x['name'] == location_name))]
     return locations[0]
 
 
@@ -212,9 +213,12 @@ def get_entity(context, entity_name):
     """
     entities = []
     entities.extend(context.characters)
-    entities.extend(context.places)
     entities.extend(context.items)
 
     entity = [x for x in entities
               if x.name == entity_name]
-    return entity[0]
+
+    if entity:
+        return entity[0]
+    else:
+        return get_location(context, entity_name)

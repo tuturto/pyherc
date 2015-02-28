@@ -30,7 +30,7 @@ from pyherc.test.cutesy import Level, middle_of, place
 @default_context
 def impl(context, character_name, location_name):
     room = Level()
-    room.name = location_name
+    room['name'] = location_name
     context.places.append(room)
 
     character = get_character(context, character_name)
@@ -71,7 +71,7 @@ def impl(context, character_name, place_name):
     character = get_character(context, character_name)
     place = get_location(context, place_name)
 
-    assert_that(character, is_not(is_in(place.creatures)))
+    assert_that(character, is_not(is_in(place['\ufdd0:characters'])))
 
 @given('{portal_name} is Portal')
 @default_context
