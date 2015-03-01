@@ -44,8 +44,7 @@ from pyherc.generators.level.room import (PillarRoomGenerator,
                                           SquareRoomGenerator)
 from herculeum.config.room_generators import (circular_pitroom, square_pitroom,
                                               square_room)
-from herculeum.config.floor_builders import (tile4_floorbuilder, 
-                                             wood4_floorbuilder)
+from herculeum.config.floor_builders import floor_builder
 
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
@@ -139,24 +138,24 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
-    pit = surface_manager.add_icon('brick_pit_07', ':brick_pit_07.png', '^')
-    pit1 = surface_manager.add_icon('brick_pit_08', ':brick_pit_08.png', '^')
-    pit3 = surface_manager.add_icon('brick_pit_01', ':brick_pit_01.png', '^')
-    pit5 = surface_manager.add_icon('brick_pit_07', ':brick_pit_07.png', '^')
-    pit7 = surface_manager.add_icon('brick_pit_03', ':brick_pit_03.png', '^')
-    pit13 = surface_manager.add_icon('brick_pit_04', ':brick_pit_04.png', '^')
-    pit15 = surface_manager.add_icon('brick_pit_08', ':brick_pit_08.png', '^')
-    pit17 = surface_manager.add_icon('brick_pit_06', ':brick_pit_06.png', '^')
-    pit35 = surface_manager.add_icon('brick_pit_01', ':brick_pit_01.png', '^')
-    pit37 = surface_manager.add_icon('brick_pit_02', ':brick_pit_02.png', '^')
-    pit57 = surface_manager.add_icon('brick_pit_03', ':brick_pit_03.png', '^')
-    pit135 = surface_manager.add_icon('brick_pit_04', ':brick_pit_04.png', '^')
-    pit137 = surface_manager.add_icon('brick_pit_05', ':brick_pit_05.png', '^')
-    pit157 = surface_manager.add_icon('brick_pit_06', ':brick_pit_06.png', '^')
-    pit357 = surface_manager.add_icon('brick_pit_02', ':brick_pit_02.png', '^')
-    pit1357 = surface_manager.add_icon('brick_pit_05', ':brick_pit_05.png', '^')
-    pit_west = surface_manager.add_icon('brick_pit_09', ':brick_pit_09.png', '^')
-    pit_east = surface_manager.add_icon('brick_pit_11', ':brick_pit_11.png', '^')
+    pit = surface_manager.add_icon('brick_pit_07', ':pits/brick_pit_07.png', '^')
+    pit1 = surface_manager.add_icon('brick_pit_08', ':pits/brick_pit_08.png', '^')
+    pit3 = surface_manager.add_icon('brick_pit_01', ':pits/brick_pit_01.png', '^')
+    pit5 = surface_manager.add_icon('brick_pit_07', ':pits/brick_pit_07.png', '^')
+    pit7 = surface_manager.add_icon('brick_pit_03', ':pits/brick_pit_03.png', '^')
+    pit13 = surface_manager.add_icon('brick_pit_04', ':pits/brick_pit_04.png', '^')
+    pit15 = surface_manager.add_icon('brick_pit_08', ':pits/brick_pit_08.png', '^')
+    pit17 = surface_manager.add_icon('brick_pit_06', ':pits/brick_pit_06.png', '^')
+    pit35 = surface_manager.add_icon('brick_pit_01', ':pits/brick_pit_01.png', '^')
+    pit37 = surface_manager.add_icon('brick_pit_02', ':pits/brick_pit_02.png', '^')
+    pit57 = surface_manager.add_icon('brick_pit_03', ':pits/brick_pit_03.png', '^')
+    pit135 = surface_manager.add_icon('brick_pit_04', ':pits/brick_pit_04.png', '^')
+    pit137 = surface_manager.add_icon('brick_pit_05', ':pits/brick_pit_05.png', '^')
+    pit157 = surface_manager.add_icon('brick_pit_06', ':pits/brick_pit_06.png', '^')
+    pit357 = surface_manager.add_icon('brick_pit_02', ':pits/brick_pit_02.png', '^')
+    pit1357 = surface_manager.add_icon('brick_pit_05', ':pits/brick_pit_05.png', '^')
+    pit_west = surface_manager.add_icon('brick_pit_09', ':pits/brick_pit_09.png', '^')
+    pit_east = surface_manager.add_icon('brick_pit_11', ':pits/brick_pit_11.png', '^')
 
     pit_config = FloorBuilderDecoratorConfig([],
                                              single = pit,
@@ -198,8 +197,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     decorators = [surrounder,
                   wall_direction_builder,
-                  tile4_floorbuilder,
-                  wood4_floorbuilder,
+                  floor_builder('ground_tile4'),
+                  floor_builder('ground_wood4'),
                   pit_builder,
                   torch_ornamenter]
 

@@ -23,11 +23,7 @@ module for configuring first gate
 import hy
 
 from herculeum.ai.fungus import FungusAI, GreatFungusAI
-from herculeum.config.floor_builders import (soil3_floorbuilder,
-                                             soil4_floorbuilder,
-                                             tile3_floorbuilder,
-                                             tile4_floorbuilder,
-                                             wood4_floorbuilder)
+from herculeum.config.floor_builders import floor_builder
 from herculeum.config.room_generators import (square_room, circular_room,
                                               square_graveyard,
                                               circular_graveyard,
@@ -221,11 +217,11 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     decorators = [surrounder,
                   wall_direction_builder,
-                  soil3_floorbuilder,
-                  soil4_floorbuilder,
-                  tile3_floorbuilder,
-                  tile4_floorbuilder,
-                  wood4_floorbuilder,
+                  floor_builder('ground_soil3'),
+                  floor_builder('ground_soil4'),
+                  floor_builder('ground_tile3'),
+                  floor_builder('ground_tile4'),
+                  floor_builder('ground_wood4'),
                   crack_ornamenter,
                   beams_ornamenter,
                   moss_ornamenter,

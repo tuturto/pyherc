@@ -189,17 +189,6 @@
         <file>abyss_floor_157.png</file>
         <file>abyss_floor_357.png</file>
         <file>abyss_floor_1357.png</file>
-        <file>brick_pit_01.png</file>
-        <file>brick_pit_02.png</file>
-        <file>brick_pit_03.png</file>
-        <file>brick_pit_04.png</file>
-        <file>brick_pit_05.png</file>
-        <file>brick_pit_06.png</file>
-        <file>brick_pit_07.png</file>
-        <file>brick_pit_08.png</file>
-        <file>brick_pit_09.png</file>
-        <file>brick_pit_10.png</file>
-        <file>brick_pit_11.png</file>
         <file>wall_torch_f0.png</file>
         <file>wall_torch_f1.png</file>
         <file>wall_torches_f0.png</file>
@@ -469,6 +458,18 @@
         <file>items/tied-scroll.png</file>
         <file>items/whip.png</file>
         <file>items/wood-axe.png</file>
+
+        <file>pits/brick_pit_01.png</file>
+        <file>pits/brick_pit_02.png</file>
+        <file>pits/brick_pit_03.png</file>
+        <file>pits/brick_pit_04.png</file>
+        <file>pits/brick_pit_05.png</file>
+        <file>pits/brick_pit_06.png</file>
+        <file>pits/brick_pit_07.png</file>
+        <file>pits/brick_pit_08.png</file>
+        <file>pits/brick_pit_09.png</file>
+        <file>pits/brick_pit_10.png</file>
+        <file>pits/brick_pit_11.png</file>
 
         <file>walls/wall_brick1_1357.png</file>
         <file>walls/wall_brick1_135.png</file>

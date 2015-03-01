@@ -63,14 +63,6 @@
   (aggregate-decorator (floor-swap (+ tile "_1357") base rate rng)
                        (floor-builder base)))
 
-(setv soil1-floorbuilder (floor-builder "ground_soil1"))
-(setv soil2-floorbuilder (floor-builder "ground_soil2"))
-(setv soil3-floorbuilder (floor-builder "ground_soil3"))
-(setv soil4-floorbuilder (floor-builder "ground_soil4"))
-(setv tile3-floorbuilder (floor-builder "ground_tile3"))
-(setv tile4-floorbuilder (floor-builder "ground_tile4"))
-(setv wood4-floorbuilder (floor-builder "ground_wood4"))
-
 ;; TODO - move into another file
 
 (defn aggregate-decorator [&rest builders]
