@@ -470,6 +470,28 @@
         <file>pits/brick_pit_09.png</file>
         <file>pits/brick_pit_10.png</file>
         <file>pits/brick_pit_11.png</file>
+        <file>pits/lava_pit_f0_01.png</file>
+        <file>pits/lava_pit_f0_02.png</file>
+        <file>pits/lava_pit_f0_03.png</file>
+        <file>pits/lava_pit_f0_04.png</file>
+        <file>pits/lava_pit_f0_05.png</file>
+        <file>pits/lava_pit_f0_06.png</file>
+        <file>pits/lava_pit_f0_07.png</file>
+        <file>pits/lava_pit_f0_08.png</file>
+        <file>pits/lava_pit_f0_09.png</file>
+        <file>pits/lava_pit_f0_10.png</file>
+        <file>pits/lava_pit_f0_11.png</file>
+        <file>pits/lava_pit_f1_01.png</file>
+        <file>pits/lava_pit_f1_02.png</file>
+        <file>pits/lava_pit_f1_03.png</file>
+        <file>pits/lava_pit_f1_04.png</file>
+        <file>pits/lava_pit_f1_05.png</file>
+        <file>pits/lava_pit_f1_06.png</file>
+        <file>pits/lava_pit_f1_07.png</file>
+        <file>pits/lava_pit_f1_08.png</file>
+        <file>pits/lava_pit_f1_09.png</file>
+        <file>pits/lava_pit_f1_10.png</file>
+        <file>pits/lava_pit_f1_11.png</file>
 
         <file>walls/wall_brick1_1357.png</file>
         <file>walls/wall_brick1_135.png</file>

@@ -79,8 +79,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     wall_137 = surface_manager.add_icon('crypt_wall_137', ':crypt_wall_137.png', '#')
     wall_157 = surface_manager.add_icon('crypt_wall_157', ':crypt_wall_157.png', '#')
 
-    pit_tile = 'pit'
-
     room_generators = [PillarRoomGenerator(floor_tile = 'ground_wood4',
                                            corridor_tile = 'ground_tile4',
                                            empty_tile = wall_empty,
@@ -95,19 +93,19 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     room_generators = [circular_pitroom('ground_tile4', 
                                         'ground_tile4', 
-                                        pit_tile, 
+                                        'brick_pit_07', 
                                         rng),
                        circular_pitroom('ground_wood4',
                                         'ground_tile4',
-                                        pit_tile,
+                                        'brick_pit_07',
                                         rng),
                        square_pitroom('ground_tile4', 
                                       'ground_tile4', 
-                                      pit_tile, 
+                                      'brick_pit_07', 
                                       rng),
                        square_pitroom('ground_wood4',
                                       'ground_tile4',
-                                      pit_tile,
+                                      'brick_pit_07',
                                       rng),
                        square_room('ground_tile4',
                                    'ground_tile4',
@@ -138,45 +136,26 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
-    pit = surface_manager.add_icon('brick_pit_07', ':pits/brick_pit_07.png', '^')
-    pit1 = surface_manager.add_icon('brick_pit_08', ':pits/brick_pit_08.png', '^')
-    pit3 = surface_manager.add_icon('brick_pit_01', ':pits/brick_pit_01.png', '^')
-    pit5 = surface_manager.add_icon('brick_pit_07', ':pits/brick_pit_07.png', '^')
-    pit7 = surface_manager.add_icon('brick_pit_03', ':pits/brick_pit_03.png', '^')
-    pit13 = surface_manager.add_icon('brick_pit_04', ':pits/brick_pit_04.png', '^')
-    pit15 = surface_manager.add_icon('brick_pit_08', ':pits/brick_pit_08.png', '^')
-    pit17 = surface_manager.add_icon('brick_pit_06', ':pits/brick_pit_06.png', '^')
-    pit35 = surface_manager.add_icon('brick_pit_01', ':pits/brick_pit_01.png', '^')
-    pit37 = surface_manager.add_icon('brick_pit_02', ':pits/brick_pit_02.png', '^')
-    pit57 = surface_manager.add_icon('brick_pit_03', ':pits/brick_pit_03.png', '^')
-    pit135 = surface_manager.add_icon('brick_pit_04', ':pits/brick_pit_04.png', '^')
-    pit137 = surface_manager.add_icon('brick_pit_05', ':pits/brick_pit_05.png', '^')
-    pit157 = surface_manager.add_icon('brick_pit_06', ':pits/brick_pit_06.png', '^')
-    pit357 = surface_manager.add_icon('brick_pit_02', ':pits/brick_pit_02.png', '^')
-    pit1357 = surface_manager.add_icon('brick_pit_05', ':pits/brick_pit_05.png', '^')
-    pit_west = surface_manager.add_icon('brick_pit_09', ':pits/brick_pit_09.png', '^')
-    pit_east = surface_manager.add_icon('brick_pit_11', ':pits/brick_pit_11.png', '^')
-
     pit_config = FloorBuilderDecoratorConfig([],
-                                             single = pit,
-                                             north = pit1,
-                                             east = pit3,
-                                             south = pit5,
-                                             west = pit7,
-                                             north_east = pit13,
-                                             north_south = pit15,
-                                             north_west = pit17,
-                                             east_south = pit35,
-                                             east_west = pit37,
-                                             south_west = pit57,
-                                             north_east_south = pit135,
-                                             north_east_west = pit137,
-                                             north_south_west = pit157,
-                                             east_south_west = pit357,
-                                             fourway = pit1357,
-                                             floor = pit_tile,
-                                             nook_west = pit_west,
-                                             nook_east = pit_east)
+                                             single = 'brick_pit_07',
+                                             north = 'brick_pit_08',
+                                             east = 'brick_pit_01',
+                                             south = 'brick_pit_07',
+                                             west = 'brick_pit_03',
+                                             north_east = 'brick_pit_04',
+                                             north_south = 'brick_pit_08',
+                                             north_west = 'brick_pit_06',
+                                             east_south = 'brick_pit_01',
+                                             east_west = 'brick_pit_02',
+                                             south_west = 'brick_pit_03',
+                                             north_east_south = 'brick_pit_04',
+                                             north_east_west = 'brick_pit_05',
+                                             north_south_west = 'brick_pit_06',
+                                             east_south_west = 'brick_pit_02',
+                                             fourway = 'brick_pit_05',
+                                             floor = 'brick_pit_07',
+                                             nook_west = 'brick_pit_09',
+                                             nook_east = 'brick_pit_11')
     pit_builder = FloorBuilderDecorator(pit_config)
 
     torches_tile_f0 = surface_manager.add_icon('crypt_torches_f0', ':wall_torches_f0.png', '¤')

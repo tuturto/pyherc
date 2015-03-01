@@ -53,6 +53,20 @@
   (.add-icon gfx (+ base "_357") (+ ":walls/" base "_357.png") "#")
   (.add-icon gfx (+ base "_1357") (+ ":walls/" base "_1357.png") "#"))
 
+(defn add-pit-set [gfx base]
+  "add pit texture set"
+  (.add-icon gfx (+ base "_01") (+ ":pits/" base "_01.png") "^")
+  (.add-icon gfx (+ base "_02") (+ ":pits/" base "_02.png") "^")
+  (.add-icon gfx (+ base "_03") (+ ":pits/" base "_03.png") "^")
+  (.add-icon gfx (+ base "_04") (+ ":pits/" base "_04.png") "^")
+  (.add-icon gfx (+ base "_05") (+ ":pits/" base "_05.png") "^")
+  (.add-icon gfx (+ base "_06") (+ ":pits/" base "_06.png") "^")
+  (.add-icon gfx (+ base "_07") (+ ":pits/" base "_07.png") "^")
+  (.add-icon gfx (+ base "_08") (+ ":pits/" base "_08.png") "^")
+  (.add-icon gfx (+ base "_09") (+ ":pits/" base "_09.png") "^")
+  (.add-icon gfx (+ base "_10") (+ ":pits/" base "_10.png") "^")
+  (.add-icon gfx (+ base "_11") (+ ":pits/" base "_11.png") "^"))
+
 (defn add-animated-tile [gfx base glyph]
   "add animated tile with two frames"
   (.add-icon gfx (+ base "_f0") (+ ":" base "_f0.png") glyph)
@@ -63,6 +77,7 @@
   (let [[gfx context.surface-manager]]
     (load-ground-tiles gfx)
     (load-wall-tiles gfx)
+    (load-pit-tiles gfx)
     (load-decoration-tiles gfx)
     (load-dungeon-features gfx)
     (load-items gfx)))
@@ -72,6 +87,9 @@
 
 (defn add-wall-sets [gfx &rest sets]
   (ap-each sets (add-wall-set gfx it)))
+
+(defn add-pit-sets [gfx &rest sets]
+  (ap-each sets (add-pit-set gfx it)))
 
 (defn load-ground-tiles [gfx]
   "loads tiles used for ground"
@@ -87,6 +105,11 @@
                  "wall_brick1" "wall_brick2" "wall_brick3" "wall_brick4"
                  "wall_rubble1" "wall_rubble2" "wall_rubble3" "wall_rubble4"
                  "wall_rubble5" "wall_rubble6" "wall_rubble7" "wall_rubble8"))
+
+(defn load-pit-tiles [gfx]
+  "load tiles used for pits"
+  (add-pit-sets gfx
+                "brick_pit" "lava_pit_f0" "lava_pit_f1"))
 
 (defn load-decoration-tiles [gfx]
   "load misc decorations"
