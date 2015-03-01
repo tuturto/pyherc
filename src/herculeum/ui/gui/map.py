@@ -302,7 +302,8 @@ class PlayMapWidget(QWidget):
         for location, tile in get_tiles(self.current_level):
             if tile['\ufdd0:floor']:
                 new_glyph = MapGlyph(self.surface_manager.get_icon(tile['\ufdd0:floor']),
-                                     None)
+                                     None,
+                                     self.animation_adapters[0])
                 new_glyph.setZValue(zorder_floor)
                 new_glyph.setPos(location[0] * 32, location[1] * 32)
                 scene.addItem(new_glyph)

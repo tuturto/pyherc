@@ -40,6 +40,29 @@
                                 (+ base "_1357") base
                                 (+ base "_1357") (+ base "_1357"))))
 
+(defn animated-pit-builder [base]
+  (FloorBuilderDecorator
+   (FloorBuilderDecoratorConfig [] 
+                                [(+ base "_f0_07") (+ base "_f1_07")]
+                                [(+ base "_f0_08") (+ base "_f1_08")]
+                                [(+ base "_f0_01") (+ base "_f1_01")]
+                                [(+ base "_f0_07") (+ base "_f1_07")]
+                                [(+ base "_f0_03") (+ base "_f1_03")]
+                                [(+ base "_f0_04") (+ base "_f1_04")]
+                                [(+ base "_f0_08") (+ base "_f1_08")]
+                                [(+ base "_f0_06") (+ base "_f1_06")]
+                                [(+ base "_f0_01") (+ base "_f1_01")]
+                                [(+ base "_f0_02") (+ base "_f1_02")]
+                                [(+ base "_f0_03") (+ base "_f1_03")]
+                                [(+ base "_f0_04") (+ base "_f1_04")]
+                                [(+ base "_f0_05") (+ base "_f1_05")]
+                                [(+ base "_f0_06") (+ base "_f1_06")]
+                                [(+ base "_f0_02") (+ base "_f1_02")]
+                                [(+ base "_f0_05") (+ base "_f1_05")]
+                                (+ base "_f0_07")
+                                [(+ base "_f0_09") (+ base "_f1_09")]
+                                [(+ base "_f0_11") (+ base "_f1_11")])))
+
 (defn pit-builder [base]
   (FloorBuilderDecorator
    (FloorBuilderDecoratorConfig [] 
