@@ -280,7 +280,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                       decorators, item_adders, creature_adders,
                       portal_adder_configurations)]
 
-    return config
 
 def init_creatures(context):
     """

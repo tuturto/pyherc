@@ -38,6 +38,21 @@
   (.add-icon gfx (+ base "_357") (+ ":ground/" base "_357.png") " ")
   (.add-icon gfx (+ base "_1357") (+ ":ground/" base "_1357.png") " "))
 
+(defn add-wall-set [gfx base]
+  "add wall texture set"
+  (.add-icon gfx base (+ ":walls/" base ".png") "#")
+  (.add-icon gfx (+ base "_13") (+ ":walls/" base "_13.png") "#")
+  (.add-icon gfx (+ base "_15") (+ ":walls/" base "_15.png") "#")
+  (.add-icon gfx (+ base "_17") (+ ":walls/" base "_17.png") "#")
+  (.add-icon gfx (+ base "_35") (+ ":walls/" base "_35.png") "#")
+  (.add-icon gfx (+ base "_37") (+ ":walls/" base "_37.png") "#")
+  (.add-icon gfx (+ base "_57") (+ ":walls/" base "_57.png") "#")
+  (.add-icon gfx (+ base "_135") (+ ":walls/" base "_135.png") "#")
+  (.add-icon gfx (+ base "_137") (+ ":walls/" base "_137.png") "#")
+  (.add-icon gfx (+ base "_157") (+ ":walls/" base "_157.png") "#")
+  (.add-icon gfx (+ base "_357") (+ ":walls/" base "_357.png") "#")
+  (.add-icon gfx (+ base "_1357") (+ ":walls/" base "_1357.png") "#"))
+
 (defn add-animated-tile [gfx base glyph]
   "add animated tile with two frames"
   (.add-icon gfx (+ base "_f0") (+ ":" base "_f0.png") glyph)
@@ -47,12 +62,16 @@
   "load graphcis"
   (let [[gfx context.surface-manager]]
     (load-ground-tiles gfx)
+    (load-wall-tiles gfx)
     (load-decoration-tiles gfx)
     (load-dungeon-features gfx)
     (load-items gfx)))
 
 (defn add-ground-sets [gfx &rest sets]
   (ap-each sets (add-ground-set gfx it)))
+
+(defn add-wall-sets [gfx &rest sets]
+  (ap-each sets (add-wall-set gfx it)))
 
 (defn load-ground-tiles [gfx]
   "loads tiles used for ground"
@@ -61,6 +80,13 @@
                    "ground_soil1" "ground_soil2" "ground_soil3" "ground_soil4"
                    "ground_tile3" "ground_tile4"
                    "ground_wood4"))
+
+(defn load-wall-tiles [gfx]
+  "load tiles used for walls"
+  (add-wall-sets gfx
+                 "wall_brick1" "wall_brick2" "wall_brick3" "wall_brick4"
+                 "wall_rubble1" "wall_rubble2" "wall_rubble3" "wall_rubble4"
+                 "wall_rubble5" "wall_rubble6" "wall_rubble7" "wall_rubble8"))
 
 (defn load-decoration-tiles [gfx]
   "load misc decorations"
