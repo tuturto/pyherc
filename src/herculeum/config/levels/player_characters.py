@@ -131,15 +131,15 @@ def init_players(context):
                                                                 'Warrior is armed to teeth and tends to solve his problems with brute force.',
                                                                 'Warrior has nice selection of weapons to use but very little of anything else.'])))
 
-    mage_f0 = surface_manager.add_icon('mage_f0', ':pc_mage_f0.png', '@', ['white', 'bold'])
-    mage_f1 = surface_manager.add_icon('mage_f1', ':pc_mage_f1.png', '@', ['white', 'bold'])
-    config.append(creature_config(name = 'Mage',
+    surface_manager.add_icon('engineer_f0', ':/characters/pc_engineer_f0.png', '@', ['white', 'bold'])
+    surface_manager.add_icon('engineer_f1', ':/characters/pc_engineer_f1.png', '@', ['white', 'bold'])
+    config.append(creature_config(name = 'Master Engineer',
                                   body = 3,
                                   finesse = 5,
                                   mind = 11,
                                   hp = 8,
                                   speed = 2.5,
-                                  icons = (mage_f0, mage_f1),
+                                  icons = ('engineer_f0', 'engineer_f1'),
                                   attack = 1,
                                   ai = None,
                                   effect_handles = None,
@@ -158,10 +158,10 @@ def init_players(context):
                                                    min_amount = 1,
                                                    max_amount = 2,
                                                    probability = 50)],
-                                        description = '\n'.join(['A wise mage.',
+                                               description = '\n'.join(['A master engineer.',
                                                                 '',
-                                                                'A mage is physically weak and mentally strong. He should avoid combat at all cost and deal with the enemies by using his spells.',
-                                                                'Mage also carries some potions that will help him on his journey.'])))
+                                                                'Master engineer is physically weak and should avoid direct combat with enemies. Their skill lies in various tools and gadgets that can be used to defeat the foes.',
+                                                                'Master engineer also carries some potions that are useful while exploring dungeons.'])))
 
     date = datetime.date.today()
     events = get_special_events(date.year, date.month, date.day)
