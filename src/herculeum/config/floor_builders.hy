@@ -40,6 +40,20 @@
                                 (+ base "_1357") base
                                 (+ base "_1357") (+ base "_1357"))))
 
+(defn pit-builder [base]
+  (FloorBuilderDecorator
+   (FloorBuilderDecoratorConfig [] 
+                                (+ base "_07")
+                                (+ base "_08") (+ base "_01")
+                                (+ base "_07") (+ base "_03")
+                                (+ base "_04") (+ base "_08")
+                                (+ base "_06") (+ base "_01")
+                                (+ base "_02") (+ base "_03")
+                                (+ base "_04") (+ base "_05")
+                                (+ base "_06") (+ base "_02")
+                                (+ base "_05") (+ base "_07")
+                                (+ base "_09") (+ base "_11"))))
+
 (defn wall-builder [tile]
   (aggregate-decorator (SurroundingDecorator 
                         (SurroundingDecoratorConfig [] tile))

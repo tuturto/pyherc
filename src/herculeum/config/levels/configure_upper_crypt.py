@@ -44,7 +44,7 @@ from pyherc.generators.level.room import (PillarRoomGenerator,
                                           SquareRoomGenerator)
 from herculeum.config.room_generators import (circular_pitroom, square_pitroom,
                                               square_room)
-from herculeum.config.floor_builders import floor_builder
+from herculeum.config.floor_builders import floor_builder, pit_builder
 
 
 def init_level(rng, item_generator, creature_generator, level_size, context):
@@ -136,28 +136,6 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
 
     wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
 
-    pit_config = FloorBuilderDecoratorConfig([],
-                                             single = 'brick_pit_07',
-                                             north = 'brick_pit_08',
-                                             east = 'brick_pit_01',
-                                             south = 'brick_pit_07',
-                                             west = 'brick_pit_03',
-                                             north_east = 'brick_pit_04',
-                                             north_south = 'brick_pit_08',
-                                             north_west = 'brick_pit_06',
-                                             east_south = 'brick_pit_01',
-                                             east_west = 'brick_pit_02',
-                                             south_west = 'brick_pit_03',
-                                             north_east_south = 'brick_pit_04',
-                                             north_east_west = 'brick_pit_05',
-                                             north_south_west = 'brick_pit_06',
-                                             east_south_west = 'brick_pit_02',
-                                             fourway = 'brick_pit_05',
-                                             floor = 'brick_pit_07',
-                                             nook_west = 'brick_pit_09',
-                                             nook_east = 'brick_pit_11')
-    pit_builder = FloorBuilderDecorator(pit_config)
-
     torches_tile_f0 = surface_manager.add_icon('crypt_torches_f0', ':wall_torches_f0.png', '¤')
     torches_tile_f1 = surface_manager.add_icon('crypt_torches_f1', ':wall_torches_f1.png', '¤')
     torch_tile_f0 = surface_manager.add_icon('crypt_torch_f0', ':wall_torch_f0.png', '¤')
@@ -178,7 +156,7 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                   wall_direction_builder,
                   floor_builder('ground_tile4'),
                   floor_builder('ground_wood4'),
-                  pit_builder,
+                  pit_builder('brick_pit'),
                   torch_ornamenter]
 
     item_adder_config = ItemAdderConfiguration(['upper crypt'])
