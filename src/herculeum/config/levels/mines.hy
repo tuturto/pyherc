@@ -21,7 +21,7 @@
 
 (import [pyherc.generators.level [new-level]]
         [pyherc.generators.level.partitioners [binary-space-partitioning]])
-(import [herculeum.config.floor_builders [soil4-floorbuilder]]
+(import [herculeum.config.floor_builders [floor-builder wall-builder]]       
         [herculeum.config.room_generators [square-room]])
 
 (defn init-level [rng item-generator creature-generator level-size context]
@@ -29,13 +29,14 @@
               (item-adders rng) (creature-adders rng) (portal-configurations))])
 
 (defn rooms [rng]
-  [(square-room "ground_soil4" "ground_soil4" rng)])
+  [(square-room "ground_soil3" "ground_soil3" rng)])
 
 (defn partitioners [rng]
   [(binary-space-partitioning #t(80 40) #t(11 11) rng)])
 
 (defn decorators [rng]
-  [soil4-floorbuilder])
+  [(wall-builder "wall_rubble2")
+   (floor-builder "ground_soil3")])
 
 (defn item-adders [rng]
   [])

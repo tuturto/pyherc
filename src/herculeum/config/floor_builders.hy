@@ -18,9 +18,13 @@
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.generators.level.decorator [FloorBuilderDecorator
-                                            FloorBuilderDecoratorConfig]])
+                                            FloorBuilderDecoratorConfig
+                                            SurroundingDecorator
+                                            SurroundingDecoratorConfig
+                                            DirectionalWallDecorator
+                                            DirectionalWallDecoratorConfig]])
 
-(defn floorbuilder [base]
+(defn floor-builder [base]
   (FloorBuilderDecorator 
    (FloorBuilderDecoratorConfig [] base
                                 (+ base "_1") (+ base "_3")
@@ -33,10 +37,30 @@
                                 (+ base "_1357") base
                                 (+ base "_1357") (+ base "_1357"))))
 
-(setv soil1-floorbuilder (floorbuilder "ground_soil1"))
-(setv soil2-floorbuilder (floorbuilder "ground_soil2"))
-(setv soil3-floorbuilder (floorbuilder "ground_soil3"))
-(setv soil4-floorbuilder (floorbuilder "ground_soil4"))
-(setv tile3-floorbuilder (floorbuilder "ground_tile3"))
-(setv tile4-floorbuilder (floorbuilder "ground_tile4"))
-(setv wood4-floorbuilder (floorbuilder "ground_wood4"))
+(defn wall-builder [tile]
+  (fn [level]
+    (let [[decor1 (SurroundingDecorator (SurroundingDecoratorConfig [] tile))]
+          [decor2 (DirectionalWallDecorator 
+                   (DirectionalWallDecoratorConfig []
+                                                   (+ tile "_37")
+                                                   (+ tile "_13")
+                                                   (+ tile "_35")
+                                                   (+ tile "_17")
+                                                   (+ tile "_57")
+                                                   (+ tile "_15")
+                                                   (+ tile "_137")
+                                                   (+ tile "_357")
+                                                   (+ tile "_135")
+                                                   (+ tile "_157")
+                                                   (+ tile "_1357")
+                                                   tile))]]
+      (decor1 level)
+      (decor2 level))))
+
+(setv soil1-floorbuilder (floor-builder "ground_soil1"))
+(setv soil2-floorbuilder (floor-builder "ground_soil2"))
+(setv soil3-floorbuilder (floor-builder "ground_soil3"))
+(setv soil4-floorbuilder (floor-builder "ground_soil4"))
+(setv tile3-floorbuilder (floor-builder "ground_tile3"))
+(setv tile4-floorbuilder (floor-builder "ground_tile4"))
+(setv wood4-floorbuilder (floor-builder "ground_wood4"))
