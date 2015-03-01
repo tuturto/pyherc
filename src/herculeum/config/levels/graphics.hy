@@ -109,7 +109,7 @@
 (defn load-pit-tiles [gfx]
   "load tiles used for pits"
   (add-pit-sets gfx
-                "brick_pit" "lava_pit_f0" "lava_pit_f1"))
+                "brick_pit" "rock_pit" "lava_pit_f0" "lava_pit_f1"))
 
 (defn load-decoration-tiles [gfx]
   "load misc decorations"
