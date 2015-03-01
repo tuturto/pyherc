@@ -17,6 +17,8 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(require hy.contrib.anaphoric)
+
 (import [pyherc.generators.level.decorator [FloorBuilderDecorator
                                             FloorBuilderDecoratorConfig
                                             SurroundingDecorator
@@ -38,24 +40,22 @@
                                 (+ base "_1357") (+ base "_1357"))))
 
 (defn wall-builder [tile]
-  (fn [level]
-    (let [[decor1 (SurroundingDecorator (SurroundingDecoratorConfig [] tile))]
-          [decor2 (DirectionalWallDecorator 
-                   (DirectionalWallDecoratorConfig []
-                                                   (+ tile "_37")
-                                                   (+ tile "_13")
-                                                   (+ tile "_35")
-                                                   (+ tile "_17")
-                                                   (+ tile "_57")
-                                                   (+ tile "_15")
-                                                   (+ tile "_137")
-                                                   (+ tile "_357")
-                                                   (+ tile "_135")
-                                                   (+ tile "_157")
-                                                   (+ tile "_1357")
-                                                   tile))]]
-      (decor1 level)
-      (decor2 level))))
+  (aggregate-decorator (SurroundingDecorator 
+                        (SurroundingDecoratorConfig [] tile))
+                       (DirectionalWallDecorator 
+                        (DirectionalWallDecoratorConfig []
+                                                        (+ tile "_37")
+                                                        (+ tile "_13")
+                                                        (+ tile "_35")
+                                                        (+ tile "_17")
+                                                        (+ tile "_57")
+                                                        (+ tile "_15")
+                                                        (+ tile "_137")
+                                                        (+ tile "_357")
+                                                        (+ tile "_135")
+                                                        (+ tile "_157")
+                                                        (+ tile "_1357")
+                                                        tile))))
 
 (setv soil1-floorbuilder (floor-builder "ground_soil1"))
 (setv soil2-floorbuilder (floor-builder "ground_soil2"))
@@ -64,3 +64,9 @@
 (setv tile3-floorbuilder (floor-builder "ground_tile3"))
 (setv tile4-floorbuilder (floor-builder "ground_tile4"))
 (setv wood4-floorbuilder (floor-builder "ground_wood4"))
+
+;; TODO - move into another file
+
+(defn aggregate-decorator [&rest builders]
+  (fn [level]
+    (ap-each builders (it level))))
