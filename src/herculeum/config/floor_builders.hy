@@ -24,7 +24,8 @@
                                             SurroundingDecorator
                                             SurroundingDecoratorConfig
                                             DirectionalWallDecorator
-                                            DirectionalWallDecoratorConfig]])
+                                            DirectionalWallDecoratorConfig
+                                            floor-swap]])
 
 (defn floor-builder [base]
   (FloorBuilderDecorator 
@@ -56,6 +57,11 @@
                                                         (+ tile "_157")
                                                         (+ tile "_1357")
                                                         tile))))
+
+(defn floor-swapper [tile base rate rng]
+  "replace given floor with another floor"
+  (aggregate-decorator (floor-swap (+ tile "_1357") base rate rng)
+                       (floor-builder base)))
 
 (setv soil1-floorbuilder (floor-builder "ground_soil1"))
 (setv soil2-floorbuilder (floor-builder "ground_soil2"))

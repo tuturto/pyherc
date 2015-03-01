@@ -77,3 +77,15 @@
                (= (wall-tile level location) (first top-wall))
                (<= (.randint rng 0 100) rate))
       (ornamentation level location (.choice rng (second top-wall))))))
+
+(defn floor-swap [source target rate rng]
+  "decorator used to replace one floor tile to another"
+  (fn [level]
+    (ap-each (list (get-tiles level))
+             (swap-floor-tile level it source target rate rng))))
+
+(defn swap-floor-tile [level loc-tile source target rate rng]
+  (let [[#t(location tile) loc-tile]]
+    (when (and (= (floor-tile level location) source)
+               (<= (.randint rng 0 100) rate))
+      (floor-tile level location target))))
