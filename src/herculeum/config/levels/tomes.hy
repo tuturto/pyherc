@@ -26,6 +26,10 @@
        "will protect the wearer from physical damage and shield from"
        "elements. It's said to have been lost centuries ago in the fiery"
        "river of Nordos.")
+ (tome "Tome of Um'bano - Page 105"
+       "I have started disassembling mechanical constructs I have to fight"
+       "against. Their bodies supply me with spare parts and much needed"
+       "supplies I need to keep my mechanical gadgets running.")
  (tome "Tome of Um'bano - Page 150"
        "In crypt under Herculeum, I encountered giant spiders."
        "These arachnids have poisoned bite and could easily take down"
@@ -35,7 +39,8 @@
        "Patrolling skeleton warriors have been easy to avoid so far."
        "They patrol mindlessly around the catacombs and only turn to pursue"
        "if I approach too close. They lose interest soon after I retreat and"
-       "return to their endless patrol.")
+       "return to their endless patrol. But I must admit, clank of their"
+       "metallic feet is unnerving.")
  (tome "Tome of Um'bano - Page 160"
        "Today I had a close encounter with two mechanical skeletons. Only my"
        "quick thinking saved me and the fact that I remembered them being"
@@ -63,4 +68,9 @@
  (tome "Tome of Um'bano - Page 621"
        "Prince Razel's greatest experiment was a staff that could shoot"
        "fire on command. He never revealed how he created it and guarded"
-       "the staff jealously."))
+       "the staff jealously.")
+ (tome "Tome of Um'bano - Page 623"
+       "Prince Razel was also known for his fascination of all things"
+       "mechanic. Story goes, that he had dozen mechanical servants that"
+       "would serve food and wine for his guests. Those same metal servants"
+       "could also wield two sabers and best even the finest swordsman."))
