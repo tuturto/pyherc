@@ -73,4 +73,25 @@
        "Prince Razel was also known for his fascination of all things"
        "mechanic. Story goes, that he had dozen mechanical servants that"
        "would serve food and wine for his guests. Those same metal servants"
-       "could also wield two sabers and best even the finest swordsman."))
+       "could also wield two sabers and best even the finest swordsman.")
+ (tome "Tome of Um'bano - Page 712"
+       "I have heard stories of mine that is located under Herculeum somewhere."
+       "Miners of Jakathin dug it in search of metals and precious stones. For"
+       "smelting the ore, they had pits of liquid fire.")
+ (tome "Tome of Um'bano - Page 715"
+       "The clues I have discovered indicate that the losts mine of Jakathin"
+       "is located somewhere between the first and the second gate. It is"
+       "unclear to me, how well hidden the entrance is and what I need to do"
+       "to open it though.")
+ (tome "Tome of Um'bano - Page 720"
+       "The heat is almost unbearable! The fiery lakes are filled with liquid"
+       "metal and air is thick of smoke. And the creatures, oh the creatures!"
+       "Everywhere I look I see mechanical automatons, slowly moving through"
+       "the smoke and collecting ore like the mine would have never been"
+       "abandoned.")
+ (tome "Tome of Um'bano - Page 731"
+       "I had to make a hasty retreat from mines. The deeper I went, the more"
+       "I saw those mechanical automatons. I could avoid some of those and"
+       "fight others, until I came across something that looked like a master"
+       "automaton. No matter what I tried, it was just too strong and hard to"
+       "damage."))
