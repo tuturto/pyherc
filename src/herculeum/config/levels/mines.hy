@@ -24,7 +24,8 @@
         [pyherc.generators.level.decorator [wall-ornamenter]])
 (import [herculeum.config.floor_builders [floor-builder wall-builder
                                           floor-swapper animated-pit-builder
-                                          pit-builder]]
+                                          pit-builder wall-cracker
+                                          support-beams wall-torches]]
         [herculeum.config.room_generators [square-room square-pitroom]])
 
 (defn init-level [rng item-generator creature-generator level-size context]
@@ -37,7 +38,8 @@
    (square-pitroom "ground_soil3" "ground_soil3" "rock_pit_07" rng)])
 
 (defn partitioners [rng]
-  [(binary-space-partitioning #t(80 40) #t(11 11) rng)])
+  [(binary-space-partitioning #t(80 40) #t(11 11) rng)
+   (binary-space-partitioning #t(40 80) #t(11 11) rng)])
 
 (defn decorators [rng]
   [(wall-builder "wall_rubble2")
@@ -45,19 +47,9 @@
    (floor-swapper "ground_soil3" "ground_rock3" 25 rng)
    (pit-builder "rock_pit")
    (animated-pit-builder "lava_pit")
-   (wall-ornamenter ["wall_rubble2_15" ["wall crack 4"]]
-                    ["wall_rubble2_37" ["wall crack 1" "wall crack 2"]]
-                    ["wall_rubble2_15" ["wall crack 3"]]
-                    30 rng)
-   (wall-ornamenter ["wall_rubble2_15" ["wooden beams 3"]]
-                    ["wall_rubble2_37" ["wooden beams 1"]]
-                    ["wall_rubble2_15" ["wooden beams 2"]]
-                    30 rng)
-   (wall-ornamenter nil
-                    ["wall_rubble2_37" [["catacombs_torches_f0"
-                                         "catacombs_torches_f1"]]]
-                    nil
-                    10 rng)])
+   (wall-cracker "wall_rubble2" 30 rng)
+   (support-beams "wall_rubble2" "wooden beams" 30 rng)
+   (wall-torches "wall_rubble2" 10 rng)])
 
 (defn item-adders [rng]
   [])
