@@ -20,8 +20,7 @@
 (require pyherc.macros)
 
 (import [pyherc.generators.level [new-level]]
-        [pyherc.generators.level.partitioners [binary-space-partitioning]]
-        [pyherc.generators.level.decorator [wall-ornamenter]])
+        [pyherc.generators.level.partitioners [binary-space-partitioning]])
 (import [herculeum.config.floor_builders [floor-builder wall-builder
                                           floor-swapper animated-pit-builder
                                           pit-builder wall-cracker
