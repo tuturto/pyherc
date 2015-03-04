@@ -37,7 +37,8 @@ from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                WallBuilderDecoratorConfig,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig)
-from pyherc.generators.level import ItemAdder, ItemAdderConfiguration, new_level
+from pyherc.generators.level import (ItemAdder, item_by_type, item_by_name,
+                                     new_level)
 from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import (PillarRoomGenerator,
@@ -159,23 +160,11 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                   pit_builder('brick_pit'),
                   torch_ornamenter]
 
-    item_adder_config = ItemAdderConfiguration(['upper crypt'])
-    item_adder_config.add_item(min_amount = 2,
-                               max_amount = 4,
-                               type = 'weapon',
-                               location = 'room')
-    item_adder_config.add_item(min_amount = 2,
-                               max_amount = 4,
-                               type = 'potion',
-                               location = 'room')
-    item_adder_config.add_item(min_amount = 0,
-                               max_amount = 5,
-                               type = 'food',
-                               location = 'room')
-    item_adder_config.add_item(min_amount = 0,
-                               max_amount = 1,
-                               type = 'tome',
-                               location = 'room')
+    item_adder_config = [item_by_type(2, 4, "weapon"),
+                         item_by_type(2, 4, "potion"),
+                         item_by_type(0, 5, "food"),
+                         item_by_type(0, 1, "tome")]
+
     item_adders = [ItemAdder(item_generator,
                             item_adder_config,
                             rng)]

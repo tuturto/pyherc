@@ -19,7 +19,7 @@
 
 (require pyherc.macros)
 
-(import [pyherc.generators.level [new-level]]
+(import [pyherc.generators.level [new-level item-by-type]]
         [pyherc.generators.level.partitioners [binary-space-partitioning]])
 (import [herculeum.config.floor_builders [floor-builder wall-builder
                                           floor-swapper animated-pit-builder
@@ -51,7 +51,9 @@
    (wall-torches "wall_rubble2" 10 rng)])
 
 (defn item-adders [rng]
-  [])
+  [(item-by-type 1 2 "weapon")
+   (item-by-type 1 2 "armour")
+   (item-by-type 0 1 "tome")])
 
 (defn creature-adders [rng]
   [])

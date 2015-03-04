@@ -29,7 +29,7 @@ from pyherc.data import Model, get_items, add_location_tag
 from pyherc.data.effects import EffectHandle
 from pyherc.generators.item import (ItemConfiguration, ItemConfigurations,
                                     ItemGenerator, WeaponConfiguration)
-from pyherc.generators.level import ItemAdder, ItemAdderConfiguration
+from pyherc.generators.level import ItemAdder, item_by_name, item_by_type
 from pyherc.test.matchers import does_have_item, located_in_room
 from pyherc.test.builders import LevelBuilder
 
@@ -101,14 +101,9 @@ class TestItemAdder():
 
         self.item_generator = ItemGenerator(item_config)
 
-        self.configuration = ItemAdderConfiguration(['crypt'])
-        self.configuration.add_item(min_amount = 3,
-                                    max_amount = 4,
-                                    name = 'dagger')
-        self.configuration.add_item(min_amount = 1,
-                                    max_amount = 1,
-                                    type = 'potion',
-                                    location = 'room')
+        self.configuration = [item_by_name(3, 4, 'dagger'),
+                              item_by_type(1, 1, 'potion')]
+
         self.item_adder = ItemAdder(self.item_generator,
                                     self.configuration,
                                     self.rng)

@@ -53,7 +53,7 @@ from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig,
                                                wall_ornamenter)
-from pyherc.generators.level import ItemAdder, ItemAdderConfiguration
+from pyherc.generators.level import ItemAdder, item_by_type
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level import new_dungeon, new_level, add_level
 from pyherc.generators.level.partitioners import binary_space_partitioning
@@ -227,22 +227,9 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                   moss_ornamenter,
                   torch_ornamenter]
 
-    item_adder_config = ItemAdderConfiguration(['first gate'])
-
-    item_adder_config.add_item(min_amount = 0,
-                               max_amount = 1,
-                               type = 'tome',
-                               location = 'room')
-
-    item_adder_config.add_item(min_amount = 0,
-                               max_amount = 2,
-                               type = 'weapon',
-                               location = 'room')
-
-    item_adder_config.add_item(min_amount = 2,
-                               max_amount = 4,
-                               type = 'food',
-                               location = 'room')
+    item_adder_config = [item_by_type(0, 1, "tome"),
+                         item_by_type(0, 2, "weapon"),
+                         item_by_type(2, 4, "food")]
 
     item_adders = [ItemAdder(item_generator,
                              item_adder_config,

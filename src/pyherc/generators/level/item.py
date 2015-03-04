@@ -24,48 +24,6 @@ from pyherc.aspects import log_debug, log_info
 from pyherc.data import (add_item, get_locations_by_tag, blocks_movement, 
                          get_trap)
 
-class ItemAdderConfiguration():
-    """
-    Configuration for ItemAdder
-    """
-    @log_debug
-    def __init__(self, level_types):
-        """
-        Default constructor
-
-        :param level_types: types of level adder can be used at
-        :type level_types: [string]
-        """
-        super().__init__()
-        self.level_types = level_types
-        self.items = []
-
-    @log_info
-    def add_item(self, min_amount, max_amount, name=None, type=None,
-                 location=None):
-        """
-        Adds item to configuration
-
-        :param min_amount: minimum amount of items to generate
-        :type min_amount: integer
-        :param max_amount: maximum amount of items to generate
-        :type max_amount: integer
-        :param name: optional name of item to generate
-        :type name: string
-        :param type: optional type of item to generate
-        :type type: string
-        :param location: optional location type for item placement
-        :type location: string
-        """
-        item_spec = {}
-        item_spec['min_amount'] = min_amount
-        item_spec['max_amount'] = max_amount
-        item_spec['name'] = name
-        item_spec['type'] = type
-        item_spec['location'] = location
-
-        self.items.append(item_spec)
-
 
 class ItemAdder():
     """
@@ -79,7 +37,7 @@ class ItemAdder():
         :param item_generator: configured item generator
         :type item_generator: ItemGenerator
         :param configuration: configuration
-        :type configuration: ItemAdderConfiguration
+        :type configuration: [{}]
         :param rng: random number generator
         :type rng: Random
         """
@@ -109,10 +67,9 @@ class ItemAdder():
         :param level: level to add items
         :type level: Level
         """
-        item_list = self.configuration.items
         items = []
 
-        for item in item_list:
+        for item in self.configuration:
             items.extend(self.generate_items(item))
 
         self.place_items(items, level)
