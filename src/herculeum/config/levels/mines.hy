@@ -21,15 +21,17 @@
 
 (import [pyherc.generators.level [new-level item-by-type]]
         [pyherc.generators.level.partitioners [binary-space-partitioning]])
-(import [herculeum.config.floor_builders [floor-builder wall-builder
+(import [herculeum.config.floor-builders [floor-builder wall-builder
                                           floor-swapper animated-pit-builder
                                           pit-builder wall-cracker
                                           support-beams wall-torches]]
-        [herculeum.config.room_generators [square-room square-pitroom]])
+        [herculeum.config.item-config [item-lists]]
+        [herculeum.config.room-generators [square-room square-pitroom]])
 
 (defn init-level [rng item-generator creature-generator level-size context]
   [(new-level "upper mines" (rooms rng) (partitioners rng) (decorators rng)
-              (item-adders rng) (creature-adders rng) (portal-configurations))])
+              (item-adders item-generator rng) (creature-adders rng)
+              (portal-configurations))])
 
 (defn rooms [rng]
   [(square-room "ground_soil3" "ground_soil3" rng)
@@ -50,10 +52,14 @@
    (support-beams "wall_rubble2" "wooden beams" 30 rng)
    (wall-torches "wall_rubble2" 10 rng)])
 
-(defn item-adders [rng]
-  [(item-by-type 1 2 "weapon")
-   (item-by-type 1 2 "armour")
-   (item-by-type 0 1 "tome")])
+(defn item-adders [item-generator rng]
+  (item-lists item-generator rng 
+              [(item-by-type 1 2 "weapon")
+               (item-by-type 1 2 "armour")
+               (item-by-type 0 1 "tome")
+               (item-by-type 1 2 "potion")]
+              [(item-by-type 2 4 "weapon")
+               (item-by-type 2 4 "armour")]))
 
 (defn creature-adders [rng]
   [])
