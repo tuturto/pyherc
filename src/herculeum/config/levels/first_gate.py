@@ -39,7 +39,6 @@ from herculeum.config.room_generators import (square_room, circular_room,
                                               circular_room_with_candles,
                                               circular_bones_room,
                                               pillar_room)
-from herculeum.config.item_config import item_lists
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
@@ -54,7 +53,7 @@ from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig,
                                                wall_ornamenter)
-from pyherc.generators.level import item_by_type
+from pyherc.generators.level import item_by_type, item_lists
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level import new_dungeon, new_level, add_level
 from pyherc.generators.level.partitioners import binary_space_partitioning

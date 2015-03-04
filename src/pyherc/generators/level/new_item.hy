@@ -18,6 +18,13 @@
 ;;  along with pyherc.  If not see <http://www.gnu.org/licenses/>.
 
 
+(require hy.contrib.anaphoric)
+
+(import [pyherc.generators.level.item [ItemAdder]])
+
+(defn item-lists [item-generator rng &rest items]
+  (ap-map (ItemAdder item-generator it rng) items))
+
 (defn item-by-type [min-amount max-amount item-type &optional [location nil]]
   "configuration for including item by name"
   (if location {"min_amount" min-amount "max_amount" max-amount "name" nil

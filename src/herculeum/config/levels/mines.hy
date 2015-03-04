@@ -19,13 +19,12 @@
 
 (require pyherc.macros)
 
-(import [pyherc.generators.level [new-level item-by-type]]
+(import [pyherc.generators.level [new-level item-by-type item-lists]]
         [pyherc.generators.level.partitioners [binary-space-partitioning]])
 (import [herculeum.config.floor-builders [floor-builder wall-builder
                                           floor-swapper animated-pit-builder
                                           pit-builder wall-cracker
                                           support-beams wall-torches]]
-        [herculeum.config.item-config [item-lists]]
         [herculeum.config.room-generators [square-room square-pitroom]])
 
 (defn init-level [rng item-generator creature-generator level-size context]
