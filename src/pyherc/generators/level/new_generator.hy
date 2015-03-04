@@ -39,9 +39,9 @@
       (ap-each sections ((.choice rng room-generators) it))      
       (run-generators-for level 
                           portal-adders 
-                          creature-adders 
-                          item-adders 
                           decorators)
+      (when creature-adders ((.choice rng creature-adders) level))
+      (when item-adders ((.choice rng item-adders) level))
       (when portal 
         (let [[rooms (list (get-locations-by-tag level "room"))]]
           (when rooms (add-portal level

@@ -25,8 +25,6 @@ from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data.effects import EffectHandle
 from pyherc.generators import (creature_config, inventory_config,
                                ItemConfiguration, WeaponConfiguration)
-from pyherc.generators.level.creatures import (CreatureAdder,
-                                               CreatureAdderConfiguration)
 from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
                                                FloorBuilderDecorator,
@@ -35,7 +33,8 @@ from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                SurroundingDecoratorConfig,
                                                WallBuilderDecorator,
                                                WallBuilderDecoratorConfig)
-from pyherc.generators.level import ItemAdder, item_by_type, new_level
+from pyherc.generators.level import (item_lists, item_by_type, new_level,
+                                     creature_lists, creature)
 from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import CrimsonLairGenerator
@@ -150,22 +149,13 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                   wall_direction_builder,
                   floor_builder]
 
-    item_adder_config = [item_by_type(2, 4, "weapon"),
-                         item_by_type(0, 2, "potion"),
-                         item_by_type(1, 3, "food")]
+    item_adders = item_lists(item_generator, rng, 
+                             [item_by_type(2, 4, "weapon"),
+                              item_by_type(0, 2, "potion"),
+                              item_by_type(1, 3, "food")])
 
-    item_adders = [ItemAdder(item_generator,
-                            item_adder_config,
-                            rng)]
-
-    creatures_upper = CreatureAdderConfiguration(['crimson lair'])
-    creatures_upper.add_creature(min_amount = 1,
-                                 max_amount = 1,
-                                 name = 'crimson jaw')
-
-    creature_adders = [CreatureAdder(creature_generator,
-                                    creatures_upper,
-                                    rng)]
+    creature_adders = creature_lists(creature_generator, rng,
+                                     [creature(1, 1, 'crimson jaw')])
 
     portal_adder_configurations = [PortalAdderConfiguration(
                                         icons = (stairs_down,

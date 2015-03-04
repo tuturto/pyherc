@@ -25,8 +25,6 @@ from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data.effects import EffectHandle
 from pyherc.data.traps import PitTrap
 from pyherc.generators import creature_config
-from pyherc.generators.level.creatures import (CreatureAdder,
-                                               CreatureAdderConfiguration)
 from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
                                                FloorBuilderDecorator,
@@ -38,7 +36,8 @@ from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig)
 from pyherc.generators.level import (ItemAdder, item_by_type, item_by_name,
-                                     new_level)
+                                     new_level, item_lists, creature_lists,
+                                     creature)
 from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import (PillarRoomGenerator,
@@ -160,24 +159,14 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                   pit_builder('brick_pit'),
                   torch_ornamenter]
 
-    item_adder_config = [item_by_type(2, 4, "weapon"),
-                         item_by_type(2, 4, "potion"),
-                         item_by_type(0, 5, "food"),
-                         item_by_type(0, 1, "tome")]
+    item_adders = item_lists(item_generator, rng, 
+                             [item_by_type(2, 4, "weapon"),
+                              item_by_type(2, 4, "potion"),
+                              item_by_type(0, 5, "food"),
+                              item_by_type(0, 1, "tome")])
 
-    item_adders = [ItemAdder(item_generator,
-                            item_adder_config,
-                            rng)]
-
-    creature_adder_config = CreatureAdderConfiguration(['upper crypt'])
-
-    creature_adder_config.add_creature(min_amount = 4,
-                                       max_amount = 8,
-                                       name = 'spider')
-
-    creature_adders = [CreatureAdder(creature_generator,
-                                    creature_adder_config,
-                                    rng)]
+    creature_adders  = creature_lists(creature_generator, rng,
+                                      [creature(4, 8, 'spider')])
 
     portal_adder_configurations = [PortalAdderConfiguration(
                                         icons = (stairs_down,

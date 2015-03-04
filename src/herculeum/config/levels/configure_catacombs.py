@@ -27,8 +27,6 @@ from herculeum.ai.rat import RatAI
 from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data.effects import DamageModifier
 from pyherc.generators import creature_config, inventory_config
-from pyherc.generators.level.creatures import (CreatureAdder,
-                                               CreatureAdderConfiguration)
 from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
                                                FloorBuilderDecorator,
@@ -39,7 +37,8 @@ from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                WallBuilderDecoratorConfig,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig)
-from pyherc.generators.level import ItemAdder, item_by_type, new_level
+from pyherc.generators.level import (item_lists, item_by_type, new_level,
+                                     creature_lists, creature)
 from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import CatacombsGenerator
@@ -184,42 +183,22 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                   floor_builder,
                   torch_ornamenter]
 
-    item_adder_config = [item_by_type(0, 4, "weapon"),
-                         item_by_type(0, 2, "potion"),
-                         item_by_type(1, 3, "food"),
-                         item_by_type(0, 2, "armour"),
-                         item_by_type(0, 1, "tome")]
+    item_adders = item_lists(item_generator,
+                             rng,
+                             [item_by_type(0, 4, "weapon"),
+                              item_by_type(0, 2, "potion"),
+                              item_by_type(1, 3, "food"),
+                              item_by_type(0, 2, "armour"),
+                              item_by_type(0, 1, "tome")])
+    
+    creatures_upper = creature_lists(creature_generator, rng,
+                                     [creature(6, 12, 'rat'),
+                                      creature(0, 1, 'skeleton warrior')])
 
-    item_adders = [ItemAdder(item_generator,
-                            item_adder_config,
-                            rng)]
-
-    creatures_upper = CreatureAdderConfiguration(['upper catacombs'])
-    creatures_upper.add_creature(min_amount = 6,
-                                 max_amount = 12,
-                                 name = 'rat')
-    creatures_upper.add_creature(min_amount = 0,
-                                 max_amount = 1,
-                                 name = 'skeleton warrior')
-
-    creatures_lower = CreatureAdderConfiguration(['lower catacombs'])
-    creatures_lower.add_creature(min_amount = 6,
-                                 max_amount = 12,
-                                 name = 'rat')
-    creatures_lower.add_creature(min_amount = 2,
-                                 max_amount = 5,
-                                 name = 'fire beetle')
-    creatures_lower.add_creature(min_amount = 1,
-                                 max_amount = 3,
-                                 name = 'skeleton warrior')
-
-    creature_adders = [CreatureAdder(creature_generator,
-                                    creatures_upper,
-                                    rng),
-                       CreatureAdder(creature_generator,
-                                    creatures_lower,
-                                    rng)
-                                    ]
+    creatures_lower = creature_lists(creature_generator, rng,
+                                     [creature(6, 12, 'rat'),
+                                      creature(2, 5, 'fire beetle'),
+                                      creature(1, 3, 'skeleton warrior')])
 
     portal_adder_configurations = [PortalAdderConfiguration(
                                         icons = (stairs_up,
@@ -241,10 +220,10 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                                         ]
 
     return [new_level('upper catacombs', room_generators, level_partitioners,
-                      decorators, item_adders, creature_adders,
+                      decorators, item_adders, creatures_upper,
                       portal_adder_configurations),
             new_level('lower catacombs', room_generators, level_partitioners,
-                      decorators, item_adders, creature_adders,
+                      decorators, item_adders, creatures_lower,
                       portal_adder_configurations)]
 
 

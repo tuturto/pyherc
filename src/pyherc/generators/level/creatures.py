@@ -26,45 +26,6 @@ from pyherc.data import (add_character, get_locations_by_tag, blocks_movement,
                          get_trap)
 
 
-class CreatureAdderConfiguration():
-    """
-    Class used to configure CreatureAdder
-    """
-    @log_debug
-    def __init__(self, level_types):
-        """
-        Default constructor
-
-        :param level_types: types of levels adder can be used at
-        :type level_types: [string]
-        """
-        super().__init__()
-        self.level_types = level_types
-        self.creature_list = []
-
-    @log_info
-    def add_creature(self, min_amount, max_amount, name, location=None):
-        """
-        Adds creature specification
-
-        :param min_amount: minimum amount of creatures to generate
-        :type min_amount: integer
-        :param max_amount: maximum amount of creatures to generate
-        :type max_amount: integer
-        :param name: name of the creature to generate
-        :type name: string
-        :param location: location type where creature is placed
-        :type location: string
-        """
-        config_item = {}
-        config_item['min_amount'] = min_amount
-        config_item['max_amount'] = max_amount
-        config_item['name'] = name
-        config_item['location'] = location
-
-        self.creature_list.append(config_item)
-
-
 class CreatureAdder():
     """
     Class used to add creatures during level generation
@@ -110,16 +71,15 @@ class CreatureAdder():
         :param level: level to add creatures
         :type level: Level
         """
-        creature_list = self.configuration.creature_list
         creatures = []
 
-        for creature in creature_list:
+        for creature in self.configuration:
             amount = self.rng.randint(creature['min_amount'],
                                       creature['max_amount'])
             creatures.extend(self.generate_creatures(creature['name'],
                                                      amount))
 
-        self.place_creatures(creatures, creature_list, level)
+        self.place_creatures(creatures, self.configuration, level)
 
     @log_debug
     def generate_creatures(self, name, amount):

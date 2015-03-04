@@ -44,8 +44,6 @@ from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
 from pyherc.data.features import new_cache
 from pyherc.generators import creature_config, inventory_config
-from pyherc.generators.level.creatures import (CreatureAdder,
-                                               CreatureAdderConfiguration)
 from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
                                                SurroundingDecorator,
@@ -53,7 +51,8 @@ from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                WallOrnamentDecorator,
                                                WallOrnamentDecoratorConfig,
                                                wall_ornamenter)
-from pyherc.generators.level import item_by_type, item_lists
+from pyherc.generators.level import (item_by_type, item_lists, creature_lists,
+                                     creature)
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level import new_dungeon, new_level, add_level
 from pyherc.generators.level.partitioners import binary_space_partitioning
@@ -234,21 +233,11 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
                               item_by_type(2, 4, "food")],
                              [item_by_type(0, 3, "weapon"),
                               item_by_type(0, 3, "armour")])
-
-    creatures_upper = CreatureAdderConfiguration(['first gate'])
-    creatures_upper.add_creature(min_amount = 4,
-                                 max_amount = 8,
-                                 name = 'rat')
-    creatures_upper.add_creature(min_amount = 1,
-                                 max_amount = 2,
-                                 name = 'fire beetle')
-    creatures_upper.add_creature(min_amount = 0,
-                                 max_amount = 1,
-                                 name = 'skeleton warrior')
-
-    creature_adders = [CreatureAdder(creature_generator,
-                                     creatures_upper,
-                                     rng)]
+    
+    creature_adders = creature_lists(creature_generator, rng,
+                                     [creature(4, 8, 'rat'),
+                                      creature(1, 2, 'fire beetle'),
+                                      creature(0, 1, 'skeleton warrior')])
 
     portal_adder_configurations = [PortalAdderConfiguration(
                                         icons = (stairs_up,

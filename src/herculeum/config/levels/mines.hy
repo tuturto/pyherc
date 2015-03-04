@@ -19,7 +19,8 @@
 
 (require pyherc.macros)
 
-(import [pyherc.generators.level [new-level item-by-type item-lists]]
+(import [pyherc.generators.level [new-level item-by-type item-lists
+                                  creature-lists creature]]
         [pyherc.generators.level.partitioners [binary-space-partitioning]])
 (import [herculeum.config.floor-builders [floor-builder wall-builder
                                           floor-swapper animated-pit-builder
@@ -29,7 +30,8 @@
 
 (defn init-level [rng item-generator creature-generator level-size context]
   [(new-level "upper mines" (rooms rng) (partitioners rng) (decorators rng)
-              (item-adders item-generator rng) (creature-adders rng)
+              (item-adders item-generator rng)
+              (creature-adders creature-generator rng)
               (portal-configurations))])
 
 (defn rooms [rng]
@@ -60,8 +62,11 @@
               [(item-by-type 2 4 "weapon")
                (item-by-type 2 4 "armour")]))
 
-(defn creature-adders [rng]
-  [])
+(defn creature-adders [creature-generator rng]
+  (creature-lists creature-generator rng
+                  [(creature 1 2 "skeleton")]
+                  [(creature 1 3 "rat")
+                   (creature 1 3 "fungus" "corridor")]))
 
 (defn portal-configurations []
   [])

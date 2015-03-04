@@ -25,16 +25,14 @@
 (defn item-lists [item-generator rng &rest items]
   (ap-map (ItemAdder item-generator it rng) items))
 
-(defn item-by-type [min-amount max-amount item-type &optional [location nil]]
+(defn item-by-type [min-amount max-amount item-type 
+                    &optional [location "room"]]
   "configuration for including item by name"
-  (if location {"min_amount" min-amount "max_amount" max-amount "name" nil
-                "type" item-type "location" location}
-      {"min_amount" min-amount "max_amount" max-amount "name" nil
-       "type" item-type "location" "room"}))
+  {"min_amount" min-amount "max_amount" max-amount "name" nil
+   "type" item-type "location" location})
 
-(defn item-by-name [min-amount max-amount name &optional [location nil]]
+(defn item-by-name [min-amount max-amount name
+                    &optional [location "room"]]
   "configuration for including item by type"
-  (if location {"min_amount" min-amount "max_amount" max-amount "name" name
-                "type" nil "location" location}
-      {"min_amount" min-amount "max_amount" max-amount "name" name
-       "type" nil "location" "room"}))
+  {"min_amount" min-amount "max_amount" max-amount "name" name
+   "type" nil "location" location})
