@@ -29,8 +29,8 @@ from hamcrest import (assert_that, greater_than, greater_than_or_equal_to,
 from mockito import mock
 from pyherc.generators import creature_config
 from pyherc.generators.creature import generate_creature
-from pyherc.generators.level.creatures import (CreatureAdder,
-                                               CreatureAdderConfiguration)
+from pyherc.generators.level import creature_lists, creature
+from pyherc.generators.level.creatures import CreatureAdder
 from pyherc.test.matchers import has_creature, located_in_room
 from pyherc.test.builders import LevelBuilder
 from pyherc.data import get_characters, add_location_tag
@@ -88,16 +88,9 @@ class TestCreatureAdder():
                                  mock(),
                                  self.rng)
 
-        self.configuration = CreatureAdderConfiguration(['crypt'])
-        self.configuration.add_creature(min_amount=3,
-                                        max_amount=4,
-                                        name='rat')
-        self.configuration.add_creature(min_amount=1,
-                                        max_amount=1,
-                                        name='dragon',
-                                        location='room')
         self.creature_adder = CreatureAdder(self.creatures,
-                                            self.configuration,
+                                            [creature(3, 4, 'rat'),
+                                             creature(1, 1, 'dragon')],
                                             self.rng)
 
         self.creature_adder.add_creatures(self.level)
