@@ -36,13 +36,13 @@
           [partitioner (.choice rng partitioners)]
           [connector (RandomConnector rng)]
           [sections (.connect-sections connector (partitioner level))]]
-      (ap-each sections ((.choice rng room-generators) it))      
-      (run-generators-for level 
-                          portal-adders 
-                          decorators)
+      (ap-each sections ((.choice rng room-generators) it))
       (when creature-adders ((.choice rng creature-adders) level))
       (when item-adders ((.choice rng item-adders) level))
-      (when portal 
+      (run-generators-for level
+                          portal-adders
+                          decorators)
+      (when portal
         (let [[rooms (list (get-locations-by-tag level "room"))]]
           (when rooms (add-portal level
                                   (.choice rng rooms)
