@@ -20,7 +20,8 @@
 (require hy.contrib.anaphoric)
 (require pyherc.macros)
 
-(import [pyherc.generators.level [new-level item-by-type item-lists
+(import [pyherc.data.probabilities [*]]
+        [pyherc.generators.level [new-level item-by-type item-lists
                                   creature-lists creature]]
         [pyherc.generators.level.partitioners [binary-space-partitioning]])
 (import [herculeum.config.floor-builders [floor-builder wall-builder
@@ -45,7 +46,7 @@
 (defmacro option [&rest elements]
   `[~@elements])
 
-(defmacro level-config [&rest levels]
+(defmacro level-list [&rest levels]
   `(defn init-level [rng item-generator creature-generator level-size context]
      [~@levels]))
 
@@ -76,7 +77,7 @@
 (defmacro creature-lists* [&rest creatures]
   `(creature-lists creature-generator rng ~@creatures))
 
-(level-config
+(level-list
  (new-level "upper mines" 
             (room-list (square-room* "ground_soil3" "ground_soil3")
                        (square-pitroom* "ground_soil3" "ground_soil3" 
@@ -87,12 +88,12 @@
                     (binary-space-partitioning* #t(40 80) #t(11 11)))
             (touch-up (wall-builder "wall_rubble2")
                       (floor-builder "ground_soil3")
-                      (floor-swapper* "ground_soil3" "ground_rock3" 25)
+                      (floor-swapper* "ground_soil3" "ground_rock3" unlikely)
                       (pit-builder "rock_pit")
                       (animated-pit-builder "lava_pit")
-                      (wall-cracker "wall_rubble2" 30 rng)
-                      (support-beams* "wall_rubble2" "wooden beams" 30)
-                      (wall-torches* "wall_rubble2" 10))
+                      (wall-cracker* "wall_rubble2" unlikely)
+                      (support-beams* "wall_rubble2" "wooden beams" unlikely)
+                      (wall-torches* "wall_rubble2" almost-certainly-not))
             (item-lists* (option (item-by-type 1 2 "weapon")
                                  (item-by-type 1 2 "armour")
                                  (item-by-type 0 1 "tome")
@@ -103,6 +104,6 @@
                              (option (creature 1 3 "rat")
                                      (creature 1 3 "fungus" "corridor")))
             (connections (special-stairs "first gate" "upper mines" 
-                                         "room" 20)
+                                         "room" unlikely)
                          (normal-stairs "upper mines" "lower mines" 
-                                        "room" 100))))
+                                        "room" certainly))))
