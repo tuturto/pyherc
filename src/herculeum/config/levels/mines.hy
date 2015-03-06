@@ -20,7 +20,8 @@
 (require hy.contrib.anaphoric)
 (require pyherc.macros)
 
-(import [pyherc.generators.level [new-level item-by-type item-lists
+(import [pyherc.data.probabilities [*]]
+        [pyherc.generators.level [new-level item-by-type item-lists
                                   creature-lists creature]]
         [pyherc.generators.level.partitioners [binary-space-partitioning]])
 (import [herculeum.config.floor-builders [floor-builder wall-builder
@@ -45,35 +46,64 @@
 (defmacro option [&rest elements]
   `[~@elements])
 
-(defn init-level [rng item-generator creature-generator level-size context]
-  [(new-level "upper mines" 
-              (room-list (square-room "ground_soil3" "ground_soil3" rng)
-                         (square-pitroom "ground_soil3" "ground_soil3" 
-                                         "lava_pit_f0_07" rng)
-                         (square-pitroom "ground_soil3" "ground_soil3"
-                                         "rock_pit_07" rng))
-              (layout (binary-space-partitioning #t(80 40) #t(11 11) rng)
-                      (binary-space-partitioning #t(40 80) #t(11 11) rng))
-              (touch-up (wall-builder "wall_rubble2")
-                        (floor-builder "ground_soil3")
-                        (floor-swapper "ground_soil3" "ground_rock3" 25 rng)
-                        (pit-builder "rock_pit")
-                        (animated-pit-builder "lava_pit")
-                        (wall-cracker "wall_rubble2" 30 rng)
-                        (support-beams "wall_rubble2" "wooden beams" 30 rng)
-                        (wall-torches "wall_rubble2" 10 rng))
-              (item-lists item-generator rng 
-                          (option (item-by-type 1 2 "weapon")
-                                  (item-by-type 1 2 "armour")
-                                  (item-by-type 0 1 "tome")
-                                  (item-by-type 1 2 "potion"))
-                          (option (item-by-type 2 4 "weapon")
-                                  (item-by-type 2 4 "armour")))
-              (creature-lists creature-generator rng
-                              (option (creature 1 2 "skeleton"))
-                              (option (creature 1 3 "rat")
-                                      (creature 1 3 "fungus" "corridor")))
-              (connections (special-stairs "first gate" "upper mines" 
-                                           "room" 20)
-                           (normal-stairs "upper mines" "lower mines" 
-                                          "room" 100)))])
+(defmacro level-list [&rest levels]
+  `(defn init-level [rng item-generator creature-generator level-size context]
+     [~@levels]))
+
+(defmacro square-room* [floor-tile corridor-tile]
+  `(square-room ~floor-tile ~corridor-tile rng))
+
+(defmacro square-pitroom* [floor-tile corridor-tile pit-tile]
+  `(square-pitroom ~floor-tile ~corridor-tile ~pit-tile rng))
+
+(defmacro binary-space-partitioning* [level-size room-size]
+  `(binary-space-partitioning ~level-size ~room-size rng))
+
+(defmacro floor-swapper* [source destination chance]
+  `(floor-swapper ~source ~destination ~chance rng))
+
+(defmacro support-beams* [wall beams chance]
+  `(support-beams ~wall ~beams ~chance rng))
+
+(defmacro wall-cracker* [wall chance]
+  `(wall-cracker ~wall ~chance rng))
+
+(defmacro wall-torches* [wall chance]
+  `(wall-torches ~wall ~chance rng))
+
+(defmacro item-lists* [&rest items]
+  `(item-lists item-generator rng ~@items))
+
+(defmacro creature-lists* [&rest creatures]
+  `(creature-lists creature-generator rng ~@creatures))
+
+(level-list
+ (new-level "upper mines" 
+            (room-list (square-room* "ground_soil3" "ground_soil3")
+                       (square-pitroom* "ground_soil3" "ground_soil3" 
+                                        "lava_pit_f0_07")
+                       (square-pitroom* "ground_soil3" "ground_soil3"
+                                        "rock_pit_07"))
+            (layout (binary-space-partitioning* #t(80 40) #t(11 11))
+                    (binary-space-partitioning* #t(40 80) #t(11 11)))
+            (touch-up (wall-builder "wall_rubble2")
+                      (floor-builder "ground_soil3")
+                      (floor-swapper* "ground_soil3" "ground_rock3" unlikely)
+                      (pit-builder "rock_pit")
+                      (animated-pit-builder "lava_pit")
+                      (wall-cracker* "wall_rubble2" unlikely)
+                      (support-beams* "wall_rubble2" "wooden beams" unlikely)
+                      (wall-torches* "wall_rubble2" almost-certainly-not))
+            (item-lists* (option (item-by-type 1 2 "weapon")
+                                 (item-by-type 1 2 "armour")
+                                 (item-by-type 0 1 "tome")
+                                 (item-by-type 1 2 "potion"))
+                         (option (item-by-type 2 4 "weapon")
+                                 (item-by-type 2 4 "armour")))
+            (creature-lists* (option (creature 1 2 "skeleton warrior"))
+                             (option (creature 1 3 "rat")
+                                     (creature 1 3 "fungus" "corridor")))
+            (connections (special-stairs "first gate" "upper mines" 
+                                         "room" unlikely)
+                         (normal-stairs "upper mines" "lower mines" 
+                                        "room" certainly))))
