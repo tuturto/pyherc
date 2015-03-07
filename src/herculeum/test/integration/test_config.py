@@ -76,13 +76,21 @@ class TestMainConfiguration():
         generator = factory.get_generator('first gate')
         level = generator(None)
 
-    def test_mines_generator(self):
+    def test_upper_mines_generator(self):
         """
         Test that upper mines level generator can be retrieved
         """
         factory = self.config.level_generator_factory
         generator = factory.get_generator('upper mines')
         level = generator(None)
+
+    def test_lower_mines_generator(self):
+        """
+        Test that lower mines level can be created
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('lower mines')
+        level = generator(None)        
 
     def test_upper_catacombs_generator(self):
         """
