@@ -22,7 +22,6 @@ module for configuring first gate
 """
 import hy
 
-from herculeum.ai.fungus import FungusAI, GreatFungusAI
 from herculeum.config.floor_builders import floor_builder
 from herculeum.config.room_generators import (square_room, circular_room,
                                               square_graveyard,
@@ -43,7 +42,6 @@ from pyherc.config.dsl import LevelConfiguration, LevelContext
 from pyherc.data import add_location_feature, floor_tile
 from pyherc.data.effects import DamageModifier
 from pyherc.data.features import new_cache
-from pyherc.generators import creature_config, inventory_config
 from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                DirectionalWallDecoratorConfig,
                                                SurroundingDecorator,
@@ -251,47 +249,3 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     return [new_level('first gate', rooms, level_partitioners,
                       decorators, item_adders, creature_adders,
                       portal_adder_configurations)]
-
-
-def init_creatures(context):
-    """
-    Initialise creatures''
-
-    :returns: list of configuration items
-    :rtype: [CreatureConfiguration]
-    """
-    surface_manager = context.surface_manager
-    config = []
-
-    fungus_f0 = surface_manager.add_icon('fungus_f0',
-                                         ':fungus_f0.png',
-                                         'F', ['yellow', 'dim'])
-    fungus_f1 = surface_manager.add_icon('fungus_f1',
-                                         ':fungus_f1.png',
-                                         'F', ['yellow', 'dim'])
-    config.append(creature_config(name = 'fungus',
-                                  body = 4,
-                                  finesse = 2,
-                                  mind = 1,
-                                  hp = 7,
-                                  speed = 8,
-                                  icons = (fungus_f0, fungus_f1),
-                                  attack = 3,
-                                  ai = FungusAI))
-
-    great_fungus_f0 = surface_manager.add_icon('great_fungus_f0',
-                                               ':great_fungus_f0.png', 
-                                               'F', ['white', 'bold'])
-    great_fungus_f1 = surface_manager.add_icon('great_fungus_f1',
-                                               ':great_fungus_f1.png',
-                                               'F', ['white', 'bold'])
-    config.append(creature_config(name = 'great fungus',
-                                  body = 6,
-                                  finesse = 1,
-                                  mind = 3,
-                                  hp = 12,
-                                  speed = 8,
-                                  icons = (great_fungus_f0, great_fungus_f1),
-                                  attack = 5,
-                                  ai = GreatFungusAI))
-    return config

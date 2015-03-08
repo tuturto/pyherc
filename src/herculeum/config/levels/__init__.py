@@ -22,9 +22,8 @@ package for configuring levels
 """
 import hy
 
-import herculeum.config.levels.configure_catacombs
 import herculeum.config.levels.configure_items
-import herculeum.config.levels.configure_upper_crypt
+import herculeum.config.levels.creatures
 import herculeum.config.levels.crimson_lair
 import herculeum.config.levels.effects
 import herculeum.config.levels.first_gate

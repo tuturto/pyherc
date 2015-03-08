@@ -18,43 +18,77 @@
 #   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-module for configuring catacombs
+module for configuring npcs
 """
-import hy
-from herculeum.ai import FlockingHerbivore, SkeletonWarriorAI
-from herculeum.ai.firebeetle import FireBeetleAI
+
+from herculeum.ai.fungus import FungusAI, GreatFungusAI
 from herculeum.ai.rat import RatAI
-from pyherc.config.dsl import LevelConfiguration, LevelContext
-from pyherc.data.effects import DamageModifier
+from herculeum.ai.firebeetle import FireBeetleAI
+from herculeum.ai import FlockingHerbivore, SkeletonWarriorAI
 from pyherc.generators import creature_config, inventory_config
-from pyherc.generators.level.decorator import (DirectionalWallDecorator,
-                                               DirectionalWallDecoratorConfig,
-                                               FloorBuilderDecorator,
-                                               FloorBuilderDecoratorConfig,
-                                               SurroundingDecorator,
-                                               SurroundingDecoratorConfig,
-                                               WallBuilderDecorator,
-                                               WallBuilderDecoratorConfig,
-                                               WallOrnamentDecorator,
-                                               WallOrnamentDecoratorConfig)
-from pyherc.generators.level import (item_lists, item_by_type, new_level,
-                                     creature_lists, creature)
-from pyherc.generators.level.partitioners import grid_partitioning
-from pyherc.generators.level import PortalAdderConfiguration
-from pyherc.generators.level.room import CatacombsGenerator
+from pyherc.data.effects import EffectHandle, DamageModifier
 from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
 
 def init_creatures(context):
     """
-    Initialise creatures
+    Initialise creatures''
 
     :returns: list of configuration items
     :rtype: [CreatureConfiguration]
     """
     surface_manager = context.surface_manager
     config = []
+
+    fungus_f0 = surface_manager.add_icon('fungus_f0',
+                                         ':fungus_f0.png',
+                                         'F', ['yellow', 'dim'])
+    fungus_f1 = surface_manager.add_icon('fungus_f1',
+                                         ':fungus_f1.png',
+                                         'F', ['yellow', 'dim'])
+    config.append(creature_config(name = 'fungus',
+                                  body = 4,
+                                  finesse = 2,
+                                  mind = 1,
+                                  hp = 7,
+                                  speed = 8,
+                                  icons = (fungus_f0, fungus_f1),
+                                  attack = 3,
+                                  ai = FungusAI))
+
+    great_fungus_f0 = surface_manager.add_icon('great_fungus_f0',
+                                               ':great_fungus_f0.png', 
+                                               'F', ['white', 'bold'])
+    great_fungus_f1 = surface_manager.add_icon('great_fungus_f1',
+                                               ':great_fungus_f1.png',
+                                               'F', ['white', 'bold'])
+    config.append(creature_config(name = 'great fungus',
+                                  body = 6,
+                                  finesse = 1,
+                                  mind = 3,
+                                  hp = 12,
+                                  speed = 8,
+                                  icons = (great_fungus_f0, great_fungus_f1),
+                                  attack = 5,
+                                  ai = GreatFungusAI))
+
+    spider_f0 = surface_manager.add_icon('spider_f0', ':masked-spider_f0.png', 's', ['white', 'dim'])
+    spider_f1 = surface_manager.add_icon('spider_f1', ':masked-spider_f1.png', 's', ['white', 'dim'])
+    config.append(creature_config(name = 'spider',
+                                  body = 6,
+                                  finesse = 12,
+                                  mind = 8,
+                                  hp = 6,
+                                  speed = 1,
+                                  icons = (spider_f0, spider_f1),
+                                  attack = 4,
+                                  ai = FlockingHerbivore,
+                                  effect_handles = [EffectHandle(
+                                      trigger = 'on attack hit',
+                                      effect = 'minor poison',
+                                      parameters = None,
+                                      charges = 100)]))
 
     mouse_f0 = surface_manager.add_icon('rat_f0', ':mouse_f0.png', 'r', ['yellow', 'dim'])
     mouse_f1 = surface_manager.add_icon('rat_f1', ':mouse_f1.png', 'r', ['yellow', 'dim'])
