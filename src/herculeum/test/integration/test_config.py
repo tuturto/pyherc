@@ -100,22 +100,6 @@ class TestMainConfiguration():
         generator = factory.get_generator('forge')
         level = generator(None)
 
-    def test_upper_catacombs_generator(self):
-        """
-        Test that upper catacombs level generator can be retrieved
-        """
-        factory = self.config.level_generator_factory
-        generator = factory.get_generator('upper catacombs')
-        level = generator(None)
-
-    def test_lower_catacombs_generator(self):
-        """
-        Test that lower catacombs level generator can be retrieved
-        """
-        factory = self.config.level_generator_factory
-        generator = factory.get_generator('lower catacombs')
-        level = generator(None)
-
     def test_upper_crypt_generator(self):
         """
         Test that upper crypt level generator can be retrieved
