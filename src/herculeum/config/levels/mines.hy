@@ -17,21 +17,8 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not see <http://www.gnu.org/licenses/>.
 
-(require hy.contrib.anaphoric)
 (require pyherc.macros)
 (require herculeum.config.room-generators)
-
-(import [pyherc.data.probabilities [*]]
-        [pyherc.data.traps [PitTrap]]        
-        [pyherc.generators.level [new-level item-by-type item-lists
-                                  creature-lists creature]]
-        [pyherc.generators.level.partitioners [binary-space-partitioning]])
-(import [herculeum.config.floor-builders [floor-builder wall-builder
-                                          floor-swapper animated-pit-builder
-                                          pit-builder wall-cracker
-                                          support-beams wall-torches]]
-        [herculeum.config.portals [normal-stairs special-stairs]]
-        [herculeum.config.room-generators [square-room square-pitroom]])
 
 (level-config-dsl)
 
@@ -58,10 +45,10 @@
             (creature-lists* (option (creature 1 2 "skeleton warrior"))
                              (option (creature 1 3 "rat")
                                      (creature 1 3 "fungus" "corridor")))
-            (connections (special-stairs "first gate" "upper mines" 
-                                         "room" unlikely)
-                         (normal-stairs "upper mines" "lower mines" 
-                                        "room" certainly)))
+            (connections (unique-stairs "first gate" "upper mines"
+                                        "grey stairs" "room" unlikely)
+                         (unique-stairs "upper mines" "lower mines"
+                                        "grey stairs" "room" certainly)))
  (new-level "lower mines" 
             (room-list (square-room* "ground_soil3" "ground_soil3")
                        (square-pitroom* "ground_soil3" "ground_soil3" 
@@ -87,8 +74,8 @@
             (creature-lists* (option (creature 1 2 "skeleton warrior"))
                              (option (creature 1 3 "rat")
                                      (creature 1 3 "fungus" "corridor")))
-            (connections (normal-stairs "lower mines" "forge" 
-                                        "room" certainly)))
+            (connections (unique-stairs "lower mines" "forge" 
+                                        "grey stairs" "room" certainly)))
  (new-level "forge" 
             (room-list (square-room* "ground_soil3" "ground_soil3")
                        (square-pitroom* "ground_soil3" "ground_soil3" 

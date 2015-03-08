@@ -17,6 +17,8 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(require pyherc.macros)
+
 (import [pyherc.data.traps [PitTrap]]
         [pyherc.generators.level.room [new-room-generator square-shape
                                        circular-shape corridors
@@ -28,7 +30,17 @@
                                        random-pillars]])
 
 (defmacro level-config-dsl []
-  `(import [pyherc.generators.level.room [new-room-generator square-shape
+  `(import [herculeum.config.floor-builders [floor-builder wall-builder
+                                             floor-swapper animated-pit-builder
+                                             pit-builder wall-cracker
+                                             support-beams wall-torches]]
+           [pyherc.data.probabilities [*]]
+           [pyherc.data.traps [PitTrap]]
+           [pyherc.generators.level [new-level item-by-type item-lists
+                                     creature-lists creature
+                                     PortalAdderConfiguration]]
+           [pyherc.generators.level.partitioners [binary-space-partitioning]]
+           [pyherc.generators.level.room [new-room-generator square-shape
                                           circular-shape corridors
                                           add-rows cache-creator mark-center-area
                                           random-rows trap-creator
@@ -86,6 +98,16 @@
 
 (defmacro binary-space-partitioning* [level-size room-size]
   `(binary-space-partitioning ~level-size ~room-size rng))
+
+(defmacro unique-stairs [origin destination base-tile location-type chance]
+  `(PortalAdderConfiguration #t((+ ~base-tile " up") (+ ~base-tile " down"))
+                             ~origin ~location-type ~chance
+                             ~destination true))
+
+(defmacro common-stairs [origin destination base-tile location-type chance]
+  `(PortalAdderConfiguration #t((+ ~base-tile " up") (+ ~base-tile " down"))
+                             ~origin ~location-type ~chance
+                             ~destination false))
 
 (defn square-room [floor-tile corridor-tile rng]
   "create room generator for square rooms"

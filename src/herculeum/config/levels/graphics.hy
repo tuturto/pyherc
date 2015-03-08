@@ -150,7 +150,9 @@
   (.add-icon gfx "shelf 1" ":shelf_empty.png" "+")
   (.add-icon gfx "shelf 2" ":shelf_book_1.png" "+")
   (.add-icon gfx "shelf 3" ":shelf_book_2.png" "+")
-  (.add-icon gfx "statue" ":decor/statue.png" "0"))
+  (.add-icon gfx "statue" ":decor/statue.png" "0")
+  (.add-icon gfx "grey stairs down" ":misc/grey_stairs_down.png" ">")
+  (.add-icon gfx "grey stairs up" ":misc/grey_stairs_up.png" "<"))
 
 (defn load-items [gfx]
   "load item graphics"

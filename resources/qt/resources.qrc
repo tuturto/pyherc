@@ -76,8 +76,6 @@
         <file>spade.png</file>
         <file>ground_wall.png</file>
         <file>rock_wall.png</file>
-        <file>stairs_down.png</file>
-        <file>stairs_up.png</file>
         <file>rock_floor.png</file>
         <file>pillar.png</file>
         <file>tiled_floor.png</file>
@@ -459,6 +457,9 @@
         <file>items/whip.png</file>
         <file>items/wood-axe.png</file>
 
+        <file>misc/grey_stairs_down.png</file>
+        <file>misc/grey_stairs_up.png</file>
+
         <file>pits/brick_pit_01.png</file>
         <file>pits/brick_pit_02.png</file>
         <file>pits/brick_pit_03.png</file>
@@ -648,7 +649,7 @@
         <file>walls/wall_rubble8_37.png</file>
         <file>walls/wall_rubble8_57.png</file>
         <file>walls/wall_rubble8.png</file>
-        
+
         <file>ui/heart_blue_0.png</file>
         <file>ui/heart_blue_1.png</file>
         <file>ui/heart_blue_2.png</file>

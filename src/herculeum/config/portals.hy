@@ -20,14 +20,3 @@
 (require hy.contrib.anaphoric)
 (require pyherc.macros)
 
-(import [pyherc.generators.level [PortalAdderConfiguration]])
-
-(defn special-stairs [origin destination location-type chance]
-  (PortalAdderConfiguration #t("red stairs up" "red stairs down")
-                            origin location-type chance
-                            destination true))
-
-(defn normal-stairs [origin destination location-type chance]
-  (PortalAdderConfiguration #t("grey stairs up" "grey stairs down")
-                            origin location-type chance
-                            destination true))
