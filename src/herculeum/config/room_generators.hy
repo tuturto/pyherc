@@ -27,6 +27,66 @@
                                        center-area center-tile side-by-side
                                        random-pillars]])
 
+(defmacro level-config-dsl []
+  `(import [pyherc.generators.level.room [new-room-generator square-shape
+                                          circular-shape corridors
+                                          add-rows cache-creator mark-center-area
+                                          random-rows trap-creator
+                                          wall-creator floor-creator
+                                          ornament-creator
+                                          center-area center-tile side-by-side
+                                          random-pillars]]))
+
+(defmacro room-list [&rest rooms]
+  `[~@rooms])
+
+(defmacro layout [&rest partitions]
+  `[~@partitions])
+
+(defmacro touch-up [&rest decorators]
+  `[~@decorators])
+
+(defmacro connections [&rest portals]
+  `[~@portals])
+
+(defmacro option [&rest elements]
+  `[~@elements])
+
+(defmacro level-list [&rest levels]
+  `(defn init-level [rng item-generator creature-generator level-size context]
+     [~@levels]))
+
+(defmacro floor-swapper* [source destination chance]
+  `(floor-swapper ~source ~destination ~chance rng))
+
+(defmacro support-beams* [wall beams chance]
+  `(support-beams ~wall ~beams ~chance rng))
+
+(defmacro wall-cracker* [wall chance]
+  `(wall-cracker ~wall ~chance rng))
+
+(defmacro wall-torches* [wall chance]
+  `(wall-torches ~wall ~chance rng))
+
+(defmacro item-lists* [&rest items]
+  `(item-lists item-generator rng ~@items))
+
+(defmacro creature-lists* [&rest creatures]
+  `(creature-lists creature-generator rng ~@creatures))
+
+(defmacro square-room* [floor-tile corridor-tile]
+  `(new-room-generator (square-shape ~floor-tile rng)
+                       (corridors ~corridor-tile)))
+
+(defmacro square-pitroom* [floor-tile corridor-tile pit-tile]
+  `(new-room-generator (square-shape ~floor-tile rng)
+                       (mark-center-area)
+                       (trap-creator [~pit-tile] PitTrap (center-area) rng)
+                       (corridors ~corridor-tile)))
+
+(defmacro binary-space-partitioning* [level-size room-size]
+  `(binary-space-partitioning ~level-size ~room-size rng))
+
 (defn square-room [floor-tile corridor-tile rng]
   "create room generator for square rooms"
   (new-room-generator (square-shape floor-tile rng)

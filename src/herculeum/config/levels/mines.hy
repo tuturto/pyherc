@@ -19,8 +19,10 @@
 
 (require hy.contrib.anaphoric)
 (require pyherc.macros)
+(require herculeum.config.room-generators)
 
 (import [pyherc.data.probabilities [*]]
+        [pyherc.data.traps [PitTrap]]        
         [pyherc.generators.level [new-level item-by-type item-lists
                                   creature-lists creature]]
         [pyherc.generators.level.partitioners [binary-space-partitioning]])
@@ -31,51 +33,7 @@
         [herculeum.config.portals [normal-stairs special-stairs]]
         [herculeum.config.room-generators [square-room square-pitroom]])
 
-(defmacro room-list [&rest rooms]
-  `[~@rooms])
-
-(defmacro layout [&rest partitions]
-  `[~@partitions])
-
-(defmacro touch-up [&rest decorators]
-  `[~@decorators])
-
-(defmacro connections [&rest portals]
-  `[~@portals])
-
-(defmacro option [&rest elements]
-  `[~@elements])
-
-(defmacro level-list [&rest levels]
-  `(defn init-level [rng item-generator creature-generator level-size context]
-     [~@levels]))
-
-(defmacro square-room* [floor-tile corridor-tile]
-  `(square-room ~floor-tile ~corridor-tile rng))
-
-(defmacro square-pitroom* [floor-tile corridor-tile pit-tile]
-  `(square-pitroom ~floor-tile ~corridor-tile ~pit-tile rng))
-
-(defmacro binary-space-partitioning* [level-size room-size]
-  `(binary-space-partitioning ~level-size ~room-size rng))
-
-(defmacro floor-swapper* [source destination chance]
-  `(floor-swapper ~source ~destination ~chance rng))
-
-(defmacro support-beams* [wall beams chance]
-  `(support-beams ~wall ~beams ~chance rng))
-
-(defmacro wall-cracker* [wall chance]
-  `(wall-cracker ~wall ~chance rng))
-
-(defmacro wall-torches* [wall chance]
-  `(wall-torches ~wall ~chance rng))
-
-(defmacro item-lists* [&rest items]
-  `(item-lists item-generator rng ~@items))
-
-(defmacro creature-lists* [&rest creatures]
-  `(creature-lists creature-generator rng ~@creatures))
+(level-config-dsl)
 
 (level-list
  (new-level "upper mines" 
@@ -155,4 +113,3 @@
                              (option (creature 1 3 "rat")
                                      (creature 1 3 "fungus" "corridor")))
             []))
-
