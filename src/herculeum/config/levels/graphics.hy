@@ -134,7 +134,9 @@
   (.add-icon gfx "wall moss 3" ":decor/wall_moss_3.png" "#")
   (.add-icon gfx "wall moss 4" ":decor/wall_moss_4.png" "#")
   (add-animated-tile gfx "standing_candle" "|")
-  (add-animated-tile gfx "fountain" "{"))
+  (add-animated-tile gfx "fountain" "{")
+  (add-animated-tile gfx "wall_torch" "|")
+  (add-animated-tile gfx "wall_torches" "|"))
 
 (defn load-dungeon-features [gfx]
   "load dungeon features like tombs, graves and such"

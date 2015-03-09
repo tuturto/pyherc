@@ -611,6 +611,7 @@ class MapGlyph(QGraphicsPixmapItem):
         if hasattr(pixmap, 'alphaChannel'):
             super().__init__(pixmap, None)
         else:
+            assert len(pixmap) > 0
             super().__init__(pixmap[0], None)
             if timer:
                 timer.register(self)

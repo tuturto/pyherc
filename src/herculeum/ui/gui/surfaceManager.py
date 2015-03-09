@@ -150,8 +150,7 @@ class QtSurfaceManager():
         if not hasattr(id, 'upper'):
             tiles = []
             for sub_id in id:
-                if sub_id in self.icons:
-                    tiles.append(self.icons[sub_id])
+                tiles.append(self.get_icon(sub_id))
             return tiles
         else:
             if id in self.icons:

@@ -29,7 +29,6 @@
   (let [[level (-> (LevelBuilder)
                    (.with-size #t(10 10))
                    (.with-floor-tile :floor)
-                   (.with-wall-tile nil)
                    (.build))]
         [config (SurroundingDecoratorConfig [:any-level] :wall)]
         [decorator (SurroundingDecorator config)]]

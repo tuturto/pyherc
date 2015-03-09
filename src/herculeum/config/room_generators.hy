@@ -85,8 +85,14 @@
                     [(+ ~wall "_15") ["wall crack 3"]]
                     ~chance rng))
 
-(defmacro wall-torches* [wall chance]
-  `(wall-torches ~wall ~chance rng))
+(defmacro wall-torches [wall chance]
+  `(wall-ornamenter nil
+                    [(+ ~wall "_37") [["wall_torches_f0"
+                                       "wall_torches_f1"]
+                                      ["wall_torch_f0"
+                                       "wall_torch_f1"]]]
+                    nil
+                    ~chance rng))
 
 (defmacro item-lists [&rest items]
   `(ap-map (ItemAdder item-generator it rng) [~@items]))

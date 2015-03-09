@@ -69,6 +69,7 @@
 
 (defn wall-tile [level location &optional [tile-id :no-tile]]
   "get/set wall tile at given location"
+  (assert (!= tile-id []))
   (if (!= tile-id :no-tile)
     (do (let [[map-tile (get-or-create-tile level location)]]
           (assoc map-tile :wall tile-id)
@@ -130,6 +131,7 @@
   (wall-tile level location))
 
 (defn ornamentation [level location &optional [tile-id :no-tile]]
+  (assert (!= tile-id []))
   (if (!= tile-id :no-tile)
     (do (let [[map-tile (get-or-create-tile level location)]]
           (.append (:ornamentation map-tile) tile-id)

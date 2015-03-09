@@ -33,8 +33,8 @@
                        (circular-room-with-candles "ground_wood4"
                                                    "ground_soil4"
                                                    "ground_soil4"
-                                                   ["standing_candle_f0"
-                                                    "standing_candle_f1"]))
+                                                   [["standing_candle_f0"
+                                                     "standing_candle_f1"]]))
             (layout (irregular-grid #t(40 40) #t(11 11)))
             (touch-up (wall-builder "wall_rubble6")
                       (floor-builder "ground_soil4")
@@ -45,7 +45,7 @@
                       (wall-cracker "wall_rubble6" unlikely)
                       ;; (wall-moss "wall_rubble6" "wall moss" unlikely)
                       (support-beams "wall_rubble6" "wooden beams" unlikely)
-                      (wall-torches* "wall_rubble6" almost-certainly-not))
+                      (wall-torches "wall_rubble6" almost-certainly-not))
             (item-lists (option (item-by-type 2 3 "weapon")
                                 (item-by-type 2 3 "armour")
                                 (item-by-type 2 4 "potion")

@@ -29,6 +29,7 @@
 (defn circular-shape [floor-tile]
   "create a circular shape"
   (fn [section]
+    (assert floor-tile)
     (let [[center-x (// (section-width section) 2)]
           [center-y (// (section-height section) 2)]
           [center-point #t(center-x center-y)]
@@ -48,6 +49,8 @@
 
 (defn square-shape [floor-tile rng]
   "create square shape"
+  (assert floor-tile)
+  (assert rng)
   (fn [section]
     (let [[middle-height (// (section-height section) 2)]
           [middle-width (// (section-width section) 2)]

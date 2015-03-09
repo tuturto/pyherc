@@ -96,11 +96,7 @@
                                                         tile))))
 
 (defn wall-torches [tile rate rng]
-  (wall-ornamenter nil
-                   [(+ tile "_37") [["catacombs_torches_f0"
-                                     "catacombs_torches_f1"]]]
-                   nil
-                   rate rng))
+  )
 
 ;; TODO - move into another file
 
