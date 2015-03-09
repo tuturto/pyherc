@@ -67,59 +67,8 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
     :returns: level configuration
     :rtype: LevelConfiguration
     """
-    surface_manager = context.surface_manager
-
-    wall_natural = 'natural wall'
-    wall = 'wall'
-
-    stairs_down = surface_manager.add_icon('stairs_down',
-                                           ':stairs_down.png',
-                                           '>')
-    stairs_up = surface_manager.add_icon('stairs_up',
-                                         ':stairs_up.png',
-                                         '<')
-
-    pillar = surface_manager.add_icon('pillar', ':pillar.png', '#')
-
-    surface_manager.add_icon('wall_rubble6', ':walls/wall_rubble6.png', '#')
-    wall_15 = surface_manager.add_icon('wall_rubble6_15',
-                                       ':walls/wall_rubble6_15.png', '#')
-    wall_57 = surface_manager.add_icon('wall_rubble6_57',
-                                       ':walls/wall_rubble6_57.png', '#')
-    wall_35 = surface_manager.add_icon('wall_rubble6_35',
-                                       ':walls/wall_rubble6_35.png', '#')
-    wall_37 = surface_manager.add_icon('wall_rubble6_37',
-                                       ':walls/wall_rubble6_37.png', '#')
-    wall_17 = surface_manager.add_icon('wall_rubble6_17',
-                                       ':walls/wall_rubble6_17.png', '#')
-    wall_13 = surface_manager.add_icon('wall_rubble6_13',
-                                       ':walls/wall_rubble6_13.png', '#')
-
-    wall_135 = surface_manager.add_icon('wall_rubble6_135',
-                                        ':walls/wall_rubble6_135.png', '#')
-    wall_357 = surface_manager.add_icon('wall_rubble6_357',
-                                        ':walls/wall_rubble6_357.png', '#')
-    wall_1357 = surface_manager.add_icon('wall_rubble6_1357',
-                                         ':walls/wall_rubble6_1357.png', '#')
-    wall_137 = surface_manager.add_icon('wall_rubble6_137',
-                                        ':walls/wall_rubble6_137.png', '#')
-    wall_157 = surface_manager.add_icon('wall_rubble6_157',
-                                        ':walls/wall_rubble6_157.png', '#')
-
     altar = surface_manager.add_icon('altar', ':altar.png', '_')
 
-    rooms = [TempleRoomGenerator('ground_soil4',
-                                 'ground_soil4',
-                                 altar,
-                                 ['first gate'],
-                                 ['standing_candle_f0',
-                                  'standing_candle_f1']),
-             TempleRoomGenerator('ground_soil4',
-                                 'ground_soil4',
-                                 ["fountain_f0",
-                                  "fountain_f1"],
-                                 ['first gate'])]
-    
     tomb_stones = ['tomb 1', 'tomb 2', 'tomb 3', 'tomb 4', 'tomb 5',
                    'tomb 6', 'tomb 7', 'tomb 8', 'tomb 9']
     book_shelves = ['shelf 1', 'shelf 2', 'shelf 3']
@@ -159,93 +108,14 @@ def init_level(rng, item_generator, creature_generator, level_size, context):
              pillar_room('ground_tile3', 'ground_soil4', ['wall_rubble6'], rng),
              pillar_room('ground_soil4', 'ground_soil4', ['wall_rubble6'], rng)]
 
-    level_partitioners = [binary_space_partitioning((80, 40), (11, 11), rng)]
-
-    surrounder_config = SurroundingDecoratorConfig(['first gate'],
-                                                   'wall_rubble6')
-    surrounder = SurroundingDecorator(surrounder_config)
-
-    wall_direction_config = DirectionalWallDecoratorConfig(['first gate'],
-                                                   east_west = wall_37,
-                                                   east_north = wall_13,
-                                                   east_south = wall_35,
-                                                   west_north = wall_17,
-                                                   west_south = wall_57,
-                                                   north_south = wall_15,
-                                                   east_west_north = wall_137,
-                                                   east_west_south = wall_357,
-                                                   east_north_south = wall_135,
-                                                   west_north_south = wall_157,
-                                                   four_way = wall_1357,
-                                                   wall = 'wall_rubble6')
-
-    wall_direction_builder = DirectionalWallDecorator(wall_direction_config)
-    
-    torches_tile_f0 = surface_manager.add_icon('catacombs_torches_f0',
-                                               ':wall_torches_f0.png', '¤')
-    torches_tile_f1 = surface_manager.add_icon('catacombs_torches_f1',
-                                               ':wall_torches_f1.png', '¤')
-    torch_tile_f0 = surface_manager.add_icon('catacombs_torch_f0',
-                                             ':wall_torch_f0.png', '¤')
-    torch_tile_f1 = surface_manager.add_icon('catacombs_torch_f1',
-                                             ':wall_torch_f1.png', '¤')
-
-    torch_ornamenter = wall_ornamenter(None,
-                                       [wall_37, [(torch_tile_f0, torch_tile_f1),
-                                                  (torches_tile_f0, torches_tile_f1)]],
-                                       None, 10, rng)
-
-    crack_ornamenter = wall_ornamenter([wall_15, ['wall crack 4']],
-                                       [wall_37, ['wall crack 1',
-                                                  'wall crack 2']],
-                                       [wall_15, ['wall crack 3']],
-                                       30, rng)
-
     moss_ornamenter = wall_ornamenter([wall_15, ['wall moss 4']],
                                       [wall_37, ['wall moss 1',
                                                  'wall moss 2']],
                                       [wall_15, ['wall moss 3']],
                                       30, rng)
     
-    beams_ornamenter = wall_ornamenter([wall_15, ['wooden beams 3']],
-                                       [wall_37, ['wooden beams 1']],
-                                       [wall_15, ['wooden beams 2']],
-                                       10, rng)
-
-    decorators = [surrounder,
-                  wall_direction_builder,
-                  floor_builder('ground_soil3'),
-                  floor_builder('ground_soil4'),
-                  floor_builder('ground_tile3'),
-                  floor_builder('ground_tile4'),
-                  floor_builder('ground_wood4'),
-                  crack_ornamenter,
-                  beams_ornamenter,
-                  moss_ornamenter,
-                  torch_ornamenter]
-
-    item_adders = item_lists(item_generator,
-                             rng,
-                             [item_by_type(0, 1, "tome"),
-                              item_by_type(0, 2, "weapon"),
-                              item_by_type(2, 4, "food")],
-                             [item_by_type(0, 3, "weapon"),
-                              item_by_type(0, 3, "armour")])
+    decorators = [moss_ornamenter]
     
-    creature_adders = creature_lists(creature_generator, rng,
-                                     [creature(4, 8, 'rat'),
-                                      creature(1, 2, 'fire beetle'),
-                                      creature(0, 1, 'skeleton warrior')])
-
-    portal_adder_configurations = [PortalAdderConfiguration(
-                                        icons = (stairs_up,
-                                                 stairs_down),
-                                        level_type = 'first gate',
-                                        location_type = 'room',
-                                        chance = 100,
-                                        new_level = 'lower catacombs',
-                                        unique = True)]
-
     return [new_level('first gate', rooms, level_partitioners,
                       decorators, item_adders, creature_adders,
                       portal_adder_configurations)]
