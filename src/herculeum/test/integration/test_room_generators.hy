@@ -34,8 +34,6 @@
         [herculeum.config.room-generators [square-band-room
                                            circular-cache-room
                                            circular-graveyard square-graveyard
-                                           square-library circular-library
-                                           square-pitroom circular-pitroom
                                            square-banded-library pillar-room
                                            mundane-items skeletons]])
 
@@ -82,8 +80,7 @@
   (let [[context (setup-test)]
         [config (:config context)]
         [item-generator config.item-generator]
-        [creature-generator config.creature-generator]
-        [rng (Random)]]
+        [creature-generator config.creature-generator]]
     (run-generator (circular-graveyard :floor :floor [:cache-tile] 
                                        (mundane-items 50 item-generator rng)
                                        (skeletons 50 creature-generator rng)
@@ -94,8 +91,7 @@
   (let [[context (setup-test)]
         [config (:config context)]
         [item-generator config.item-generator]
-        [creature-generator config.creature-generator]
-        [rng (Random)]]
+        [creature-generator config.creature-generator]]
     (run-generator (square-graveyard :floor :floor [:cache-tile] 
                                      (mundane-items 50 item-generator rng)
                                      (skeletons 50 creature-generator rng)
@@ -103,19 +99,19 @@
 
 (defn test-square-library []
   "test generating square library"
-  (run-generator (square-library :floor :floor [:shelves] (Random))))
+  (run-generator (square-library :floor :floor [:shelves])))
 
 (defn test-circular-library []
   "test generating circular library"
-  (run-generator (circular-library :floor :floor [:shelves] (Random))))
+  (run-generator (circular-library :floor :floor [:shelves])))
 
 (defn test-square-pitroom []
   "test generating square pitroom"
-  (run-generator (square-pitroom :floor :floor :pit (Random))))
+  (run-generator (square-pitroom :floor :floor :pit)))
 
 (defn test-circular-pitroom []
   "test generating circular pitroom"
-  (run-generator (circular-pitroom :floor :floor :pit (Random))))
+  (run-generator (circular-pitroom :floor :floor :pit)))
 
 (defn test-square-band-room []
   "test generating square room with 2 tilings"

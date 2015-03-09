@@ -178,41 +178,36 @@
                                      item-selector character-selector rng)
                       (corridors corridor-tile)))
 
-(defn square-library [floor-tile corridor-tile bookshelf-tiles rng]
-  "create generator for square library"
-  (new-room-generator (square-shape floor-tile rng)
-                      (add-rows)
-                      (wall-creator bookshelf-tiles (random-rows 75 rng) rng)
-                      (corridors corridor-tile)))
+(defmacro square-library [floor-tile corridor-tile bookshelf-tiles]
+  `(new-room-generator (square-shape ~floor-tile rng)
+                       (add-rows)
+                       (wall-creator ~bookshelf-tiles (random-rows 75 rng) rng)
+                       (corridors ~corridor-tile)))
 
-(defn circular-library [floor-tile corridor-tile bookshelf-tiles rng]
-  "create generator for circular library"
-  (new-room-generator (circular-shape floor-tile)
-                      (add-rows)
-                      (wall-creator bookshelf-tiles (random-rows 90 rng) rng)
-                      (corridors corridor-tile)))
+(defmacro circular-library [floor-tile corridor-tile bookshelf-tiles]
+  `(new-room-generator (circular-shape ~floor-tile)
+                       (add-rows)
+                       (wall-creator ~bookshelf-tiles (random-rows 90 rng) rng)
+                       (corridors ~corridor-tile)))
 
-(defn square-pitroom [floor-tile corridor-tile pit-tile rng]
-  "create generator for a square room with large pit in the middle"
-  (new-room-generator (square-shape floor-tile rng)
-                      (mark-center-area)
-                      (trap-creator [pit-tile] PitTrap (center-area) rng)
-                      (corridors corridor-tile)))
+(defmacro square-pitroom [floor-tile corridor-tile pit-tile]
+  `(new-room-generator (square-shape ~floor-tile rng)
+                       (mark-center-area)
+                       (trap-creator [~pit-tile] PitTrap (center-area) rng)
+                       (corridors ~corridor-tile)))
 
-(defn circular-pitroom [floor-tile corridor-tile pit-tile rng]
-  "create generator for a circular room with large pit in the middle"
-  (new-room-generator (circular-shape floor-tile)
-                      (mark-center-area)
-                      (trap-creator [pit-tile] PitTrap (center-area) rng)
-                      (corridors corridor-tile)))
+(defmacro circular-pitroom [floor-tile corridor-tile pit-tile]
+  `(new-room-generator (circular-shape ~floor-tile)
+                       (mark-center-area)
+                       (trap-creator [~pit-tile] PitTrap (center-area) rng)
+                       (corridors ~corridor-tile)))
 
-(defn circular-bones-room [floor-tile edge-tile corridor-tile bones rate rng]
-  "create generator for circular room filled with bones"
-  (new-room-generator (circular-shape edge-tile)
-                      (mark-center-area)
-                      (floor-creator [floor-tile] (center-area) rng)
-                      (ornament-creator bones (center-area) rate rng)
-                      (corridors corridor-tile)))
+(defmacro circular-bones-room [floor-tile edge-tile corridor-tile bones rate]
+  `(new-room-generator (circular-shape ~edge-tile)
+                       (mark-center-area)
+                       (floor-creator [~floor-tile] (center-area) rng)
+                       (ornament-creator ~bones (center-area) ~rate rng)
+                       (corridors ~corridor-tile)))
 
 (defn no-characters []
   "create character selector for nothing"
