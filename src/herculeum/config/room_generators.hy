@@ -19,16 +19,6 @@
 
 (require pyherc.macros)
 
-(import [pyherc.data.traps [PitTrap]]
-        [pyherc.generators.level.room [new-room-generator square-shape
-                                       circular-shape corridors
-                                       add-rows cache-creator mark-center-area
-                                       random-rows trap-creator
-                                       wall-creator floor-creator
-                                       ornament-creator
-                                       center-area center-tile side-by-side
-                                       random-pillars]])
-
 (defmacro level-config-dsl []
   `(import [herculeum.config.floor-builders [floor-builder wall-builder
                                              floor-swapper animated-pit-builder
@@ -110,27 +100,26 @@
                              ~origin ~location-type ~chance
                              ~destination false))
 
-(defn pillar-room [floor-tile corridor-tile pillar-tiles rng]
-  "create room generator for pillar rooms"
-  (new-room-generator (square-shape floor-tile rng)
-                      (wall-creator pillar-tiles (random-pillars 100 rng) rng)
-                      (corridors corridor-tile)))
+(defmacro pillar-room [floor-tile corridor-tile pillar-tiles]
+  `(new-room-generator (square-shape ~floor-tile rng)
+                       (wall-creator ~pillar-tiles
+                                     (random-pillars 100 rng) rng)
+                       (corridors ~corridor-tile)))
 
-(defn square-band-room [floor-tile edge-tile corridor-tile rng]
-  "create room generator for square two-type-floor rooms"
-  (new-room-generator (square-shape edge-tile rng)
-                      (mark-center-area)
-                      (floor-creator [floor-tile] (center-area) rng)
-                      (corridors corridor-tile)))
+(defmacro square-band-room [floor-tile edge-tile corridor-tile]
+  `(new-room-generator (square-shape ~edge-tile rng)
+                       (mark-center-area)
+                       (floor-creator [~floor-tile] (center-area) rng)
+                       (corridors ~corridor-tile)))
 
-(defn square-banded-library [floor-tile edge-tile corridor-tile 
-                             bookshelf-tiles rng]
-  (new-room-generator (square-shape edge-tile rng)
-                      (mark-center-area)
-                      (add-rows)
-                      (floor-creator [floor-tile] (center-area) rng)
-                      (wall-creator bookshelf-tiles (random-rows 90 rng) rng)
-                      (corridors corridor-tile)))
+(defmacro square-banded-library [floor-tile edge-tile corridor-tile 
+                                 bookshelf-tiles]
+  `(new-room-generator (square-shape ~edge-tile rng)
+                       (mark-center-area)
+                       (add-rows)
+                       (floor-creator [~floor-tile] (center-area) rng)
+                       (wall-creator ~bookshelf-tiles (random-rows 90 rng) rng)
+                       (corridors ~corridor-tile)))
 
 (defmacro circular-room [floor-tile corridor-tile]
   `(new-room-generator (circular-shape ~floor-tile)
@@ -142,13 +131,12 @@
                        (floor-creator [~floor-tile] (center-area) rng)
                        (corridors ~corridor-tile)))
 
-(defn circular-cache-room [floor-tile corridor-tile cache-tiles item-selector
-                           character-selector rng]
-  "create creator for circular rooms with cache"
-  (new-room-generator (circular-shape floor-tile)
-                      (cache-creator cache-tiles center-tile item-selector
-                                     character-selector rng)
-                      (corridors corridor-tile)))
+(defmacro circular-cache-room [floor-tile corridor-tile cache-tiles
+                               item-selector character-selector]
+  `(new-room-generator (circular-shape ~floor-tile)
+                       (cache-creator ~cache-tiles center-tile ~item-selector
+                                      ~character-selector rng)
+                       (corridors ~corridor-tile)))
 
 (defmacro circular-room-with-candles [floor-tile edge-tile corridor-tile
                                       candle-tiles]
@@ -160,23 +148,21 @@
                                          100 rng)
                        (corridors ~corridor-tile)))
 
-(defn circular-graveyard [floor-tile corridor-tile grave-tiles
-                          item-selector character-selector rng]
-  "create generator for circular graveyard"
-  (new-room-generator (circular-shape floor-tile)
-                      (add-rows)
-                      (cache-creator grave-tiles (random-rows 75 rng)
-                                     item-selector character-selector rng)
-                      (corridors corridor-tile)))
+(defmacro circular-graveyard [floor-tile corridor-tile grave-tiles
+                              item-selector character-selector]
+  `(new-room-generator (circular-shape ~floor-tile)
+                       (add-rows)
+                       (cache-creator ~grave-tiles (random-rows 75 rng)
+                                      ~item-selector ~character-selector rng)
+                       (corridors ~corridor-tile)))
 
-(defn square-graveyard [floor-tile corridor-tile grave-tiles
-                        item-selector character-selector rng]
-  "create generator for square graveyard"
-  (new-room-generator (square-shape floor-tile rng)
-                      (add-rows)
-                      (cache-creator grave-tiles (random-rows 75 rng)
-                                     item-selector character-selector rng)
-                      (corridors corridor-tile)))
+(defmacro square-graveyard [floor-tile corridor-tile grave-tiles
+                        item-selector character-selector]
+  `(new-room-generator (square-shape ~floor-tile rng)
+                       (add-rows)
+                       (cache-creator ~grave-tiles (random-rows 75 rng)
+                                     ~item-selector ~character-selector rng)
+                       (corridors ~corridor-tile)))
 
 (defmacro square-library [floor-tile corridor-tile bookshelf-tiles]
   `(new-room-generator (square-shape ~floor-tile rng)

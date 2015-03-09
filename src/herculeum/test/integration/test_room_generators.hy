@@ -31,11 +31,7 @@
         [random [Random]])
 (import [herculeum.config.levels]
         [herculeum.config [Configuration]]
-        [herculeum.config.room-generators [square-band-room
-                                           circular-cache-room
-                                           circular-graveyard square-graveyard
-                                           square-banded-library pillar-room
-                                           mundane-items skeletons]])
+        [herculeum.config.room-generators [mundane-items skeletons]])
 
 (defmacro run-generator [generator]
   `(let [[level (-> (LevelBuilder)
@@ -68,12 +64,14 @@
   (let [[context (setup-test)]
         [config (:config context)]
         [item-generator config.item-generator]
-        [creature-generator config.creature-generator]
-        [rng (Random)]]
+        [creature-generator config.creature-generator]]
     (run-generator (circular-cache-room :floor :floor [:cache-tile] 
-                                        (mundane-items 50 item-generator rng)
-                                        (skeletons 50 creature-generator rng)
-                                        rng))))
+                                        (mundane-items 50
+                                                       item-generator
+                                                       rng)
+                                        (skeletons 50
+                                                   creature-generator 
+                                                   rng)))))
 
 (defn test-circular-graveyard []
   "test generating circular graveyard"
@@ -83,8 +81,8 @@
         [creature-generator config.creature-generator]]
     (run-generator (circular-graveyard :floor :floor [:cache-tile] 
                                        (mundane-items 50 item-generator rng)
-                                       (skeletons 50 creature-generator rng)
-                                       rng))))
+                                       (skeletons 50 creature-generator
+                                                  rng)))))
 
 (defn test-square-graveyard []
   "test generating square graveyard"
@@ -94,8 +92,7 @@
         [creature-generator config.creature-generator]]
     (run-generator (square-graveyard :floor :floor [:cache-tile] 
                                      (mundane-items 50 item-generator rng)
-                                     (skeletons 50 creature-generator rng)
-                                     rng))))
+                                     (skeletons 50 creature-generator rng)))))
 
 (defn test-square-library []
   "test generating square library"
@@ -115,12 +112,11 @@
 
 (defn test-square-band-room []
   "test generating square room with 2 tilings"
-  (run-generator (square-band-room :floor1 :floor2 :floor (Random))))
+  (run-generator (square-band-room :floor1 :floor2 :floor)))
 
 (defn test-square-banded-library []
   "test generating library with 2 tilings"
-  (run-generator (square-banded-library :floor :floor :floor [:shelves] 
-                                      (Random))))
+  (run-generator (square-banded-library :floor :floor :floor [:shelves] )))
 
 (defn test-circular-band-room []
   "test generating circular room with 2 tilings"
@@ -128,4 +124,4 @@
 
 (defn test-pillar-room []
   "test generating pillar rooms"
-  (run-generator (pillar-room :floor :floor [:pillar] (Random))))
+  (run-generator (pillar-room :floor :floor [:pillar])))
