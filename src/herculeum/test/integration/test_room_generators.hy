@@ -19,6 +19,11 @@
 
 (require pyherc.macros)
 (require hy.contrib.anaphoric)
+
+(require herculeum.config.room-generators)
+
+(level-config-dsl)
+
 (import [mockito [mock]])
 (import [pyherc.data [Model]]
         [pyherc.generators.level.partitioners [grid-partitioning]]
@@ -26,9 +31,7 @@
         [random [Random]])
 (import [herculeum.config.levels]
         [herculeum.config [Configuration]]
-        [herculeum.config.room-generators [square-room circular-room
-                                           square-band-room
-                                           circular-band-room
+        [herculeum.config.room-generators [square-band-room
                                            circular-cache-room
                                            circular-graveyard square-graveyard
                                            square-library circular-library
@@ -36,13 +39,14 @@
                                            square-banded-library pillar-room
                                            mundane-items skeletons]])
 
-(defn run-generator [generator]
-  (let [[level (-> (LevelBuilder)
-                   (.with-size #t(30 20))
-                   (.build))]
-        [partitioner (grid-partitioning #t(10 10) 2 1 (Random))]
-        [sections (partitioner level)]]
-    (ap-each sections (generator it))))
+(defmacro run-generator [generator]
+  `(let [[level (-> (LevelBuilder)
+                    (.with-size #t(30 20))
+                    (.build))]
+         [rng (Random)]
+         [partitioner (grid-partitioning #t(10 10) 2 1 rng)]
+         [sections (partitioner level)]]
+     (ap-each sections (~generator it))))
 
 (defn setup-test []
   "setup test case"
@@ -55,11 +59,11 @@
 
 (defn test-square-room []
   "test generating square room"
-  (run-generator (square-room :floor :floor (Random))))
+  (run-generator (square-room :floor :floor)))
 
 (defn test-circular-room []
   "test generating circular room"
-  (run-generator (circular-room :floor :floor (Random))))
+  (run-generator (circular-room :floor :floor)))
 
 (defn test-circular-cache-room []
   "test generating circular cache room"
@@ -124,7 +128,7 @@
 
 (defn test-circular-band-room []
   "test generating circular room with 2 tilings"
-  (run-generator (circular-band-room :floor :floor :floor (Random))))
+  (run-generator (circular-band-room :floor :floor :floor)))
 
 (defn test-pillar-room []
   "test generating pillar rooms"

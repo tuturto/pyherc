@@ -42,7 +42,8 @@
            [pyherc.generators.level.partitioners [binary-space-partitioning]]
            [pyherc.generators.level.room [new-room-generator square-shape
                                           circular-shape corridors
-                                          add-rows cache-creator mark-center-area
+                                          add-rows cache-creator
+                                          mark-center-area
                                           random-rows trap-creator
                                           wall-creator floor-creator
                                           ornament-creator
@@ -86,7 +87,7 @@
 (defmacro creature-lists* [&rest creatures]
   `(creature-lists creature-generator rng ~@creatures))
 
-(defmacro square-room* [floor-tile corridor-tile]
+(defmacro square-room [floor-tile corridor-tile]
   `(new-room-generator (square-shape ~floor-tile rng)
                        (corridors ~corridor-tile)))
 
@@ -96,7 +97,7 @@
                        (trap-creator [~pit-tile] PitTrap (center-area) rng)
                        (corridors ~corridor-tile)))
 
-(defmacro binary-space-partitioning* [level-size room-size]
+(defmacro irregular-grid [level-size room-size]
   `(binary-space-partitioning ~level-size ~room-size rng))
 
 (defmacro unique-stairs [origin destination base-tile location-type chance]
@@ -108,11 +109,6 @@
   `(PortalAdderConfiguration #t((+ ~base-tile " up") (+ ~base-tile " down"))
                              ~origin ~location-type ~chance
                              ~destination false))
-
-(defn square-room [floor-tile corridor-tile rng]
-  "create room generator for square rooms"
-  (new-room-generator (square-shape floor-tile rng)
-                      (corridors corridor-tile)))
 
 (defn pillar-room [floor-tile corridor-tile pillar-tiles rng]
   "create room generator for pillar rooms"
@@ -136,17 +132,15 @@
                       (wall-creator bookshelf-tiles (random-rows 90 rng) rng)
                       (corridors corridor-tile)))
 
-(defn circular-room [floor-tile corridor-tile rng]
-  "create room generator for circular rooms"
-  (new-room-generator (circular-shape floor-tile)
-                      (corridors corridor-tile)))
+(defmacro circular-room [floor-tile corridor-tile]
+  `(new-room-generator (circular-shape ~floor-tile)
+                       (corridors ~corridor-tile)))
 
-(defn circular-band-room [floor-tile edge-tile corridor-tile rng]
-  "create room generator for circular two-type-floor rooms"
-  (new-room-generator (circular-shape edge-tile)
-                      (mark-center-area)
-                      (floor-creator [floor-tile] (center-area) rng)
-                      (corridors corridor-tile)))
+(defmacro circular-band-room [floor-tile edge-tile corridor-tile]
+  `(new-room-generator (circular-shape ~edge-tile)
+                       (mark-center-area)
+                       (floor-creator [~floor-tile] (center-area) rng)
+                       (corridors ~corridor-tile)))
 
 (defn circular-cache-room [floor-tile corridor-tile cache-tiles item-selector
                            character-selector rng]
@@ -156,16 +150,15 @@
                                      character-selector rng)
                       (corridors corridor-tile)))
 
-(defn circular-room-with-candles [floor-tile edge-tile corridor-tile
-                                  candle-tiles rng]
-  "create creator for circular room with two candles in midddle"
-  (new-room-generator (circular-shape edge-tile)
-                      (mark-center-area)
-                      (floor-creator [floor-tile] (center-area) rng)
-                      (ornament-creator candle-tiles 
-                                     (side-by-side center-tile) 
-                                     100 rng)
-                      (corridors corridor-tile)))
+(defmacro circular-room-with-candles [floor-tile edge-tile corridor-tile
+                                      candle-tiles]
+  `(new-room-generator (circular-shape ~edge-tile)
+                       (mark-center-area)
+                       (floor-creator [~floor-tile] (center-area) rng)
+                       (ornament-creator ~candle-tiles 
+                                         (side-by-side center-tile) 
+                                         100 rng)
+                       (corridors ~corridor-tile)))
 
 (defn circular-graveyard [floor-tile corridor-tile grave-tiles
                           item-selector character-selector rng]

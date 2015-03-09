@@ -24,11 +24,11 @@
 
 (level-list
  (new-level "upper mines" 
-            (room-list (square-room* "ground_soil3" "ground_soil3")
+            (room-list (square-room "ground_soil3" "ground_soil3")
                        (square-pitroom* "ground_soil3" "ground_soil3"
                                         "rock_pit_07"))
-            (layout (binary-space-partitioning* #t(80 40) #t(11 11))
-                    (binary-space-partitioning* #t(40 80) #t(11 11)))
+            (layout (irregular-grid #t(80 40) #t(11 11))
+                    (irregular-grid #t(40 80) #t(11 11)))
             (touch-up (wall-builder "wall_rubble2")
                       (floor-builder "ground_soil3")
                       (floor-swapper* "ground_soil3" "ground_rock3" unlikely)
@@ -50,13 +50,13 @@
                          (unique-stairs "upper mines" "lower mines"
                                         "grey stairs" "room" certainly)))
  (new-level "lower mines" 
-            (room-list (square-room* "ground_soil3" "ground_soil3")
+            (room-list (square-room "ground_soil3" "ground_soil3")
                        (square-pitroom* "ground_soil3" "ground_soil3" 
                                         "lava_pit_f0_07")
                        (square-pitroom* "ground_soil3" "ground_soil3"
                                         "rock_pit_07"))
-            (layout (binary-space-partitioning* #t(80 40) #t(11 11))
-                    (binary-space-partitioning* #t(40 80) #t(11 11)))
+            (layout (irregular-grid #t(80 40) #t(11 11))
+                    (irregular-grid #t(40 80) #t(11 11)))
             (touch-up (wall-builder "wall_rubble2")
                       (floor-builder "ground_soil3")
                       (floor-swapper* "ground_soil3" "ground_rock3" unlikely)
@@ -77,11 +77,11 @@
             (connections (unique-stairs "lower mines" "forge" 
                                         "grey stairs" "room" certainly)))
  (new-level "forge" 
-            (room-list (square-room* "ground_soil3" "ground_soil3")
+            (room-list (square-room "ground_soil3" "ground_soil3")
                        (square-pitroom* "ground_soil3" "ground_soil3" 
                                         "lava_pit_f0_07"))
-            (layout (binary-space-partitioning* #t(80 40) #t(11 11))
-                    (binary-space-partitioning* #t(40 80) #t(11 11)))
+            (layout (irregular-grid #t(80 40) #t(11 11))
+                    (irregular-grid #t(40 80) #t(11 11)))
             (touch-up (wall-builder "wall_rubble2")
                       (floor-builder "ground_soil3")
                       (floor-swapper* "ground_soil3" "ground_rock3" unlikely)
