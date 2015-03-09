@@ -28,6 +28,5 @@ from .config import (new_dungeon, new_level, add_level, room_generators,
                      portals, merge_level)
 from .item import ItemAdder
 from .new_creature import creature, creature_lists
-from .new_item import item_by_name, item_by_type, item_lists
 from .portal import PortalAdderFactory, PortalAdderConfiguration
 from .generator import LevelGeneratorFactory

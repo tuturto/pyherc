@@ -17,6 +17,7 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not see <http://www.gnu.org/licenses/>.
 
+(require hy.contrib.anaphoric)
 (require pyherc.macros)
 (require herculeum.config.room-generators)
 
@@ -41,14 +42,14 @@
                       (floor-builder "ground_tile3")
                       (floor-builder "ground_tile4")
                       (floor-builder "ground_wood4")
-                      (wall-cracker* "wall_rubble6" unlikely)
+                      (wall-cracker "wall_rubble6" unlikely)
                       ;; (wall-moss "wall_rubble6" "wall moss" unlikely)
-                      (support-beams* "wall_rubble6" "wooden beams" unlikely)
+                      (support-beams "wall_rubble6" "wooden beams" unlikely)
                       (wall-torches* "wall_rubble6" almost-certainly-not))
-            (item-lists* (option (item-by-type 2 3 "weapon")
-                                 (item-by-type 2 3 "armour")
-                                 (item-by-type 2 4 "potion")
-                                 (item-by-type 1 4 "food")))
+            (item-lists (option (item-by-type 2 3 "weapon")
+                                (item-by-type 2 3 "armour")
+                                (item-by-type 2 4 "potion")
+                                (item-by-type 1 4 "food")))
             (creature-lists* (option (creature 1 3 "rat")))
             (connections (unique-stairs "first gate" "lower caverns"
                                         "grey stairs" "room" certainly))))

@@ -95,23 +95,6 @@
                                                         (+ tile "_1357")
                                                         tile))))
 
-(defn floor-swapper [tile base rate rng]
-  "replace given floor with another floor"
-  (aggregate-decorator (floor-swap (+ tile "_1357") base rate rng)
-                       (floor-builder base)))
-
-(defn wall-cracker [tile rate rng]
-  (wall-ornamenter [(+ tile "_15") ["wall crack 4"]]
-                   [(+ tile "_37") ["wall crack 1" "wall crack 2"]]
-                   [(+ tile "_15") ["wall crack 3"]]
-                   rate rng))
-
-(defn support-beams [tile beam rate rng]
-  (wall-ornamenter [(+ tile "_15") [(+ beam " 3")]]
-                   [(+ tile "_37") [(+ beam " 1")]]
-                   [(+ tile "_15") [(+ beam " 2")]]
-                   rate rng))
-
 (defn wall-torches [tile rate rng]
   (wall-ornamenter nil
                    [(+ tile "_37") [["catacombs_torches_f0"

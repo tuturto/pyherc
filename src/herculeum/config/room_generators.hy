@@ -21,14 +21,23 @@
 
 (defmacro level-config-dsl []
   `(import [herculeum.config.floor-builders [floor-builder wall-builder
-                                             floor-swapper animated-pit-builder
-                                             pit-builder wall-cracker
-                                             support-beams wall-torches]]
+                                             animated-pit-builder
+                                             pit-builder
+                                             wall-torches
+                                             aggregate-decorator]]
            [pyherc.data.probabilities [*]]
            [pyherc.data.traps [PitTrap]]
-           [pyherc.generators.level [new-level item-by-type item-lists
+           [pyherc.generators.level [new-level
                                      creature-lists creature
                                      PortalAdderConfiguration]]
+           [pyherc.generators.level.decorator [FloorBuilderDecorator
+                                               FloorBuilderDecoratorConfig
+                                               SurroundingDecorator
+                                               SurroundingDecoratorConfig
+                                               DirectionalWallDecorator
+                                               DirectionalWallDecoratorConfig
+                                               floor-swap wall-ornamenter]]
+           [pyherc.generators.level.item [ItemAdder]]
            [pyherc.generators.level.partitioners [binary-space-partitioning]]
            [pyherc.generators.level.room [new-room-generator square-shape
                                           circular-shape corridors
@@ -59,20 +68,36 @@
   `(defn init-level [rng item-generator creature-generator level-size context]
      [~@levels]))
 
-(defmacro floor-swapper* [source destination chance]
-  `(floor-swapper ~source ~destination ~chance rng))
+(defmacro floor-swapper [source destination chance]
+  `(aggregate-decorator (floor-swap (+ ~source "_1357") ~destination
+                                    ~chance rng)
+                        (floor-builder ~destination)))
 
-(defmacro support-beams* [wall beams chance]
-  `(support-beams ~wall ~beams ~chance rng))
+(defmacro support-beams [wall beam chance]
+  `(wall-ornamenter [(+ ~wall "_15") [(+ ~beam " 3")]]
+                    [(+ ~wall "_37") [(+ ~beam " 1")]]
+                    [(+ ~wall "_15") [(+ ~beam " 2")]]
+                    ~chance rng))
 
-(defmacro wall-cracker* [wall chance]
-  `(wall-cracker ~wall ~chance rng))
+(defmacro wall-cracker [wall chance]
+  `(wall-ornamenter [(+ ~wall "_15") ["wall crack 4"]]
+                    [(+ ~wall "_37") ["wall crack 1" "wall crack 2"]]
+                    [(+ ~wall "_15") ["wall crack 3"]]
+                    ~chance rng))
 
 (defmacro wall-torches* [wall chance]
   `(wall-torches ~wall ~chance rng))
 
-(defmacro item-lists* [&rest items]
-  `(item-lists item-generator rng ~@items))
+(defmacro item-lists [&rest items]
+  `(ap-map (ItemAdder item-generator it rng) [~@items]))
+
+(defmacro item-by-type [min-amount max-amount item-type]
+  `{"min_amount" ~min-amount "max_amount" ~max-amount "name" nil
+                 "type" ~item-type "location" "room"})
+
+(defmacro item-by-name [min-amount max-amount name]
+  `{"min_amount" ~min-amount "max_amount" ~max-amount "name" ~name
+                 "type" nil "location" "room"})
 
 (defmacro creature-lists* [&rest creatures]
   `(creature-lists creature-generator rng ~@creatures))
@@ -81,7 +106,7 @@
   `(new-room-generator (square-shape ~floor-tile rng)
                        (corridors ~corridor-tile)))
 
-(defmacro square-pitroom* [floor-tile corridor-tile pit-tile]
+(defmacro square-pitroom [floor-tile corridor-tile pit-tile]
   `(new-room-generator (square-shape ~floor-tile rng)
                        (mark-center-area)
                        (trap-creator [~pit-tile] PitTrap (center-area) rng)
