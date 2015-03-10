@@ -126,10 +126,34 @@ class TestMainConfiguration():
 
     def test_second_gate_generator(self):
         """
-        Test that upper caverns can be generated
+        Test that second gate can be generated
         """
         factory = self.config.level_generator_factory
         generator = factory.get_generator('second gate')
+        level = generator(None)
+
+    def test_lower_maze_generator(self):
+        """
+        Test that lower maze can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('lower maze')
+        level = generator(None)
+
+    def test_courtyard_generator(self):
+        """
+        Test that courtyard can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('courtyard')
+        level = generator(None)
+
+    def test_upper_maze_generator(self):
+        """
+        Test that upper maze can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('upper maze')
         level = generator(None)
 
     def test_inventory_factory_has_been_initialised(self):
