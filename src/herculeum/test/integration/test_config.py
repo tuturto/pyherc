@@ -164,6 +164,30 @@ class TestMainConfiguration():
         generator = factory.get_generator('third gate')
         level = generator(None)
 
+    def test_lower_catacombs_generator(self):
+        """
+        Test that lower catacombs can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('lower catacombs')
+        level = generator(None)
+
+    def test_central_catacombs_generator(self):
+        """
+        Test that central catacombs can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('central catacombs')
+        level = generator(None)
+
+    def test_upper_catacombs_generator(self):
+        """
+        Test that upper catacombs can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('upper catacombs')
+        level = generator(None)
+
     def test_inventory_factory_has_been_initialised(self):
         """
         Test that inventory action factory has been initialised
