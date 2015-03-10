@@ -156,6 +156,14 @@ class TestMainConfiguration():
         generator = factory.get_generator('upper maze')
         level = generator(None)
 
+    def test_third_gate_generator(self):
+        """
+        Test that third gate can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('third gate')
+        level = generator(None)
+
     def test_inventory_factory_has_been_initialised(self):
         """
         Test that inventory action factory has been initialised

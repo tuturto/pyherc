@@ -34,4 +34,5 @@ import herculeum.config.levels.maze
 import herculeum.config.levels.mines
 import herculeum.config.levels.player_characters
 import herculeum.config.levels.second_gate
+import herculeum.config.levels.third_gate
 import herculeum.config.levels.tomes
