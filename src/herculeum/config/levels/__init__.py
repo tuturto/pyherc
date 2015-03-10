@@ -22,6 +22,7 @@ package for configuring levels
 """
 import hy
 
+import herculeum.config.levels.caverns
 import herculeum.config.levels.configure_items
 import herculeum.config.levels.creatures
 import herculeum.config.levels.crimson_lair

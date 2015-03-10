@@ -100,6 +100,30 @@ class TestMainConfiguration():
         generator = factory.get_generator('forge')
         level = generator(None)
 
+    def test_lower_caverns_generator(self):
+        """
+        Test that lower caverns can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('lower caverns')
+        level = generator(None)
+
+    def test_middle_caverns_generator(self):
+        """
+        Test that middle caverns can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('middle caverns')
+        level = generator(None)
+
+    def test_upper_caverns_generator(self):
+        """
+        Test that upper caverns can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('upper caverns')
+        level = generator(None)
+
     def test_inventory_factory_has_been_initialised(self):
         """
         Test that inventory action factory has been initialised

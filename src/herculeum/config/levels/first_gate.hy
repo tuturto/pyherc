@@ -43,7 +43,6 @@
                       (floor-builder "ground_tile4")
                       (floor-builder "ground_wood4")
                       (wall-cracker "wall_rubble6" unlikely)
-                      ;; (wall-moss "wall_rubble6" "wall moss" unlikely)
                       (support-beams "wall_rubble6" "wooden beams" unlikely)
                       (wall-torches "wall_rubble6" almost-certainly-not))
             (item-lists (option (item-by-type 2 3 "weapon")
