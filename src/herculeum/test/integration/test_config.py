@@ -124,6 +124,14 @@ class TestMainConfiguration():
         generator = factory.get_generator('upper caverns')
         level = generator(None)
 
+    def test_second_gate_generator(self):
+        """
+        Test that upper caverns can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('second gate')
+        level = generator(None)
+
     def test_inventory_factory_has_been_initialised(self):
         """
         Test that inventory action factory has been initialised

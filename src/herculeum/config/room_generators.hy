@@ -109,8 +109,8 @@
   `(ap-map (CreatureAdder creature-generator it rng) [~@creatures]))
 
 (defmacro creature [min-amount max-amount name]
-  {"min_amount" min-amount "max_amount" max-amount "name" name
-   "location" "room"})
+  `{"min_amount" ~min-amount "max_amount" ~max-amount "name" ~name
+    "location" "room"})
 
 (defmacro square-room [floor-tile corridor-tile]
   `(new-room-generator (square-shape ~floor-tile rng)
