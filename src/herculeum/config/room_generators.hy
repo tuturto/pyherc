@@ -28,8 +28,8 @@
            [pyherc.data.probabilities [*]]
            [pyherc.data.traps [PitTrap]]
            [pyherc.generators.level [new-level
-                                     creature-lists creature
                                      PortalAdderConfiguration]]
+           [pyherc.generators.level.creatures [CreatureAdder]]
            [pyherc.generators.level.decorator [FloorBuilderDecorator
                                                FloorBuilderDecoratorConfig
                                                SurroundingDecorator
@@ -105,8 +105,12 @@
   `{"min_amount" ~min-amount "max_amount" ~max-amount "name" ~name
                  "type" nil "location" "room"})
 
-(defmacro creature-lists* [&rest creatures]
-  `(creature-lists creature-generator rng ~@creatures))
+(defmacro creature-lists [&rest creatures]
+  `(ap-map (CreatureAdder creature-generator it rng) [~@creatures]))
+
+(defmacro creature [min-amount max-amount name]
+  {"min_amount" min-amount "max_amount" max-amount "name" name
+   "location" "room"})
 
 (defmacro square-room [floor-tile corridor-tile]
   `(new-room-generator (square-shape ~floor-tile rng)

@@ -33,7 +33,6 @@ from pyherc.generators.level.decorator import (DirectionalWallDecorator,
                                                SurroundingDecoratorConfig,
                                                WallBuilderDecorator,
                                                WallBuilderDecoratorConfig)
-from pyherc.generators.level import (new_level, creature_lists, creature)
 from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level import PortalAdderConfiguration
 from pyherc.generators.level.room import CrimsonLairGenerator
