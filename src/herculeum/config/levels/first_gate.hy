@@ -19,7 +19,7 @@
 
 (require hy.contrib.anaphoric)
 (require pyherc.macros)
-(require herculeum.config.room-generators)
+(require pyherc.config.dsl.level)
 
 (level-config-dsl)
 
