@@ -135,6 +135,11 @@
                              ~origin ~location-type ~chance
                              ~destination false))
 
+(defmacro final-stairs [origin base-tile location-type chance]
+  `(PortalAdderConfiguration #t((+ ~base-tile " up") (+ ~base-tile " down"))
+                             ~origin ~location-type ~chance
+                             nil true true))
+
 (defmacro pillar-room [floor-tile corridor-tile pillar-tiles]
   `(new-room-generator (square-shape ~floor-tile rng)
                        (wall-creator ~pillar-tiles

@@ -188,6 +188,14 @@ class TestMainConfiguration():
         generator = factory.get_generator('upper catacombs')
         level = generator(None)
 
+    def test_final_gate_generator(self):
+        """
+        Test that final gate can be generated
+        """
+        factory = self.config.level_generator_factory
+        generator = factory.get_generator('final gate')
+        level = generator(None)
+
     def test_inventory_factory_has_been_initialised(self):
         """
         Test that inventory action factory has been initialised
