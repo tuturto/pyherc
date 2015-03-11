@@ -75,7 +75,7 @@
        "would serve food and wine for his guests. Those same metal servants"
        "could also wield two sabers and best even the finest swordsman.")
  (tome "Tome of Um'bano - Page 712"
-       "I have heard stories of mine that is located under Herculeum somewhere."
+       "I have heard stories of mine that is located under Herculeum."
        "Miners of Jakathin dug it in search of metals and precious stones. For"
        "smelting the ore, they had pits of liquid fire.")
  (tome "Tome of Um'bano - Page 715"
@@ -100,4 +100,17 @@
  (scroll "Curious scroll II"
          "Questions are a burden to others; answers a prison for oneself.")
  (scroll "Curious scroll III"
-         "A still tongue makes a happy life."))
+         "A still tongue makes a happy life.")
+ (scroll "Curious scroll IV"
+         "When in Rome do as the romans do.")
+ (scroll "Curious scroll V"
+         "Kilroy was here.")
+ (scroll "Curious scroll VI"
+         "Foo Bar Baz")
+ (scroll "Curious scroll VII"
+         "A person who never made a mistake never tried anything new.")
+ (scroll "Curious scroll VIII"
+         "Insanity: doing the same thing over and over again and expecting"
+         "different results.")
+ (scroll "Curious scroll IX"
+         "The only source of knowledge is experience."))
