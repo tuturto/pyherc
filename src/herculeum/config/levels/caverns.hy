@@ -25,7 +25,7 @@
 
 (level-list
  (new-level "lower caverns"
-            (room-list (circular-room "ground_tile3" "ground_soil4")
+            (room-list (circular-room "ground_soil4" "ground_soil4")
                        (circular-band-room "ground_wood4" "ground_soil4"
                                            "ground_soil4")
                        (square-room "ground_tile3" "ground_soil4")
@@ -38,10 +38,9 @@
             (layout (irregular-grid #t(40 40) #t(11 11)))
             (touch-up (wall-builder "wall_rubble6")
                       (floor-builder "ground_soil4")
-                      (floor-builder "ground_soil3")
                       (floor-builder "ground_tile3")
-                      (floor-builder "ground_tile4")
                       (floor-builder "ground_wood4")
+                      (floor-swapper "ground_soil4" "ground_rock4" unlikely)
                       (wall-cracker "wall_rubble6" unlikely)
                       (support-beams "wall_rubble6" "wooden beams" unlikely)
                       (wall-torches "wall_rubble6" almost-certainly-not))

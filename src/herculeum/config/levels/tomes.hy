@@ -94,4 +94,10 @@
        "I saw those mechanical automatons. I could avoid some of those and"
        "fight others, until I came across something that looked like a master"
        "automaton. No matter what I tried, it was just too strong and hard to"
-       "damage."))
+       "damage.")
+ (scroll "Curious scroll I"
+         "The butcher with the sharpest knife has the warmest heart.")
+ (scroll "Curious scroll II"
+         "Questions are a burden to others; answers a prison for oneself.")
+ (scroll "Curious scroll III"
+         "A still tongue makes a happy life."))

@@ -27,6 +27,12 @@
                       ["tome"] "rare" nil nil nil nil
                       (.join " " [~@content])))
 
+(defmacro scroll [name &rest content]
+  `(ItemConfiguration ~name 
+                      50 1 ["tied-scroll"]
+                      ["scroll"] "rare" nil nil nil nil
+                      (.join " " [~@content])))
+
 (defmacro items-list [&rest items]
   `(defn init-items [context]
      [~@items]))
