@@ -35,7 +35,7 @@ from pyherc.rules import (attack, cast, is_move_legal, move, pick_up, wait,
                           is_dig_legal, dig)
 from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
                           QEasingCurve, QEvent, QObject, QPropertyAnimation,
-                          QSequentialAnimationGroup, QSize, Qt, QTimer)
+                          QSequentialAnimationGroup, QSize, Qt, QTimer, QThread)
 from PyQt4.QtGui import (QColor, QFont, QGraphicsPixmapItem, QGraphicsScene,
                          QGraphicsSimpleTextItem, QGraphicsView, QHBoxLayout,
                          QTransform, QVBoxLayout, QWidget)
@@ -196,6 +196,13 @@ class PlayMapWidget(QWidget):
                                                         configuration.controls)
 
         self.animation_factory = AnimationFactory()
+
+        self.thr = QThread()
+        self.worker = Worker(model, rules_engine, action_factory, rng)
+        self.thr.started.connect(self.worker.process)
+        self.worker.moveToThread(self.thr)
+
+        self.thr.start()
 
     MenuRequested = pyqtSignal(name='MenuRequested')
     EndScreenRequested = pyqtSignal(name='EndScreenRequested')
@@ -410,37 +417,11 @@ class PlayMapWidget(QWidget):
         """
         Handle key events
         """
-        if self.model.player is None:
-            return
-
         key_code = event.key()
 
-        player = self.model.player
-        next_creature = self.model.get_next_creature(self.rules_engine)
-
-        if next_creature == player:
-
+        if self.model.player.tick == 0:
             if key_code in self.keymap:
                 self.keymap[key_code](key_code, event.modifiers())
-
-        next_creature = self.model.get_next_creature(self.rules_engine)
-
-        if next_creature is None:
-            self.model.end_condition = DIED_IN_DUNGEON
-
-        while (next_creature != player
-                and next_creature != None
-                and self.model.end_condition == 0):
-            next_creature.act(model = self.model,
-                              action_factory = self.action_factory,
-                              rng = self.rng)
-            next_creature = self.model.get_next_creature(self.rules_engine)
-
-            if next_creature is None:
-                self.model.end_condition = DIED_IN_DUNGEON
-
-        if self.model.end_condition != 0:
-            self.EndScreenRequested.emit()
 
     def _move(self, key, modifiers):
         """
@@ -661,3 +642,40 @@ class MapGlyph(QGraphicsPixmapItem):
         """
         if self.entity != None:
             self.entity.remove_from_updates(self)
+
+class Worker(QObject):
+    """
+    Worker class for threading
+    """
+    def __init__(self, model, rules_engine, action_factory, rng):
+        """
+        Default constructor
+        """
+        super().__init__()
+
+        self.model = model
+        self.rules_engine = rules_engine
+        self.action_factory = action_factory
+        self.rng = rng
+
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.process)
+        self.timer.start(50)
+
+    def process(self):
+
+        if self.model.player:
+            player = self.model.player
+            next_creature = self.model.get_next_creature(self.rules_engine)
+
+            if next_creature == player:
+                print('player to go')
+            else:
+                if next_creature is None:
+                    self.model.end_condition = DIED_IN_DUNGEON
+                else:
+                    next_creature.act(model = self.model,
+                                      action_factory = self.action_factory,
+                                      rng = self.rng)
+        else:
+            print('nobody home')
