@@ -31,8 +31,8 @@ class Animation():
         """
         Default constructor
         """
-        pass
-
+        self.blocking = 'not blocking' # not blocking, blocking,
+                                       # blocking visible
     def trigger(self, ui):
         """
         Trigger this animation
