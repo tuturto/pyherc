@@ -113,4 +113,12 @@
          "Insanity: doing the same thing over and over again and expecting"
          "different results.")
  (scroll "Curious scroll IX"
-         "The only source of knowledge is experience."))
+         "The only source of knowledge is experience.")
+ (scroll "Curious scroll X"
+         "It is better to err on the side of daring than the side of"
+         "caution.")
+ (scroll "Curious scroll XI"
+         "Throw caution to the wind and just do it.")
+ (scroll "Curious scroll XII"
+         "He who is not courageous enough to take risk will accomplish"
+         "nothing in life."))
