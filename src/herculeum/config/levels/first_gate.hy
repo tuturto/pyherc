@@ -35,9 +35,9 @@
                                                    "ground_soil4"
                                                    [["standing_candle_f0"
                                                      "standing_candle_f1"]]))
-            (layout (regular-grid #t(40 40) #t(10 10))
-                    (regular-grid #t(40 20) #t(10 10))
-                    (regular-grid #t(20 40) #t(10 10)))
+            (layout (regular-grid #t(20 20) #t(10 10))
+                    (regular-grid #t(20 10) #t(10 10))
+                    (regular-grid #t(10 20) #t(10 10)))
             (touch-up (wall-builder "wall_rubble6")
                       (floor-builder "ground_soil4")
                       (floor-builder "ground_soil3")
