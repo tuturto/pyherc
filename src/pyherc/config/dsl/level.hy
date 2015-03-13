@@ -38,7 +38,8 @@
                                                DirectionalWallDecoratorConfig
                                                floor-swap wall-ornamenter]]
            [pyherc.generators.level.item [ItemAdder]]
-           [pyherc.generators.level.partitioners [binary-space-partitioning]]
+           [pyherc.generators.level.partitioners [binary-space-partitioning
+                                                  grid-partitioning]]
            [pyherc.generators.level.room [new-room-generator square-shape
                                           circular-shape corridors
                                           add-rows cache-creator
@@ -121,6 +122,11 @@
                        (mark-center-area)
                        (trap-creator [~pit-tile] PitTrap (center-area) rng)
                        (corridors ~corridor-tile)))
+
+(defmacro regular-grid [level-size room-size]
+  `(grid-partitioning ~room-size
+                      (int (/ (first ~level-size) (first ~room-size))) 
+                      (int (/ (second ~level-size) (second ~room-size))) rng))
 
 (defmacro irregular-grid [level-size room-size]
   `(binary-space-partitioning ~level-size ~room-size rng))
