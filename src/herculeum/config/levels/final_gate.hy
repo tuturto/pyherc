@@ -45,10 +45,8 @@
                       (wall-cracker "wall_rubble6" unlikely)
                       (support-beams "wall_rubble6" "wooden beams" unlikely)
                       (wall-torches "wall_rubble6" almost-certainly-not))
-            (item-lists (option (item-by-type 2 3 "weapon")
-                                (item-by-type 2 3 "armour")
-                                (item-by-type 2 4 "potion")
-                                (item-by-type 1 4 "food")))
+            (item-lists (option (item-by-type 0 1 "hint")
+                                (item-by-type 0 1 "potion")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (final-stairs "final gate"
                                        "grey stairs" "room" certainly))))

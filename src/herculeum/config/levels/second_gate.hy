@@ -48,7 +48,8 @@
             (item-lists (option (item-by-type 2 3 "weapon")
                                 (item-by-type 2 3 "armour")
                                 (item-by-type 2 4 "potion")
-                                (item-by-type 1 4 "food")))
+                                (item-by-type 1 4 "food")
+                                (item-by-type 1 2 "hint")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "second gate" "lower maze"
                                         "grey stairs" "room" certainly))))
