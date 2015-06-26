@@ -25,6 +25,7 @@ import hy
 from pyherc.test.unit.test_bsp import *
 from pyherc.test.unit.test_calendar import *
 from pyherc.test.unit.test_graves import *
+from pyherc.test.unit.test_level_change import *
 from pyherc.test.unit.test_level_config import *
 from pyherc.test.unit.test_library_generator import *
 from pyherc.test.unit.test_locations import *

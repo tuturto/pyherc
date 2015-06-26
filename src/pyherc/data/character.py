@@ -90,6 +90,7 @@ class Character():
         self.__spellbook = SpellBook()
 
         self.cooldowns = {}
+        self.visited_levels = []
 
     def __str__(self):
         return self.name

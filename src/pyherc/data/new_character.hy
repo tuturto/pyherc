@@ -28,3 +28,12 @@
   (when (not (in skill character.cooldowns))
     (assoc character.cooldowns skill 0))
   (get character.cooldowns skill))
+
+(defn visited-levels↜ [character]
+  "get generator for visited levels of this character"
+  (genexpr x [x character.visited-levels]))
+
+(defn add-visited-level [character level]
+  "add level to visited levels list"
+  (when (not (in level character.visited-levels))
+    (.append character.visited-levels level)))
