@@ -27,7 +27,7 @@
   (let [[character (-> (CharacterBuilder)
                        (.build))]]
     (add-visited-level character "crystal forest")
-    (assert-that (list (visited-levels↜ character))
+    (assert-that (visited-levels↜ character)
                  (has-item "crystal forest"))))
 
 (defn test-same-level-added-only-once []

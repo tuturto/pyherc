@@ -29,7 +29,7 @@ class MoveEvent(Event):
 
     .. versionadded:: 0.4
     """
-    def __init__(self, mover, old_location, direction, affected_tiles):
+    def __init__(self, mover, old_location, old_level, direction, affected_tiles):
         """
         Default constructor
 
@@ -45,6 +45,7 @@ class MoveEvent(Event):
 
         self.mover = mover
         self.old_location = old_location
+        self.old_level = old_level
         self.direction = direction
 
     def get_description(self, point_of_view):

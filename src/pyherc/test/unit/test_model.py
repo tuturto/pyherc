@@ -68,6 +68,7 @@ class TestModel():
                                         .build()),
                           affected_tiles = [],
                           old_location = (5, 5),
+                          old_level = self.level,
                           direction = 1)
 
         self.model.raise_event(event)

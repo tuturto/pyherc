@@ -69,6 +69,7 @@ class MoveAction():
                               self.new_location]
 
             old_location = self.character.location
+            old_level = self.character.level
             direction = find_direction(old_location, self.new_location)
 
             move_character(self.new_level,
@@ -86,6 +87,7 @@ class MoveAction():
             self.character.raise_event(MoveEvent(
                 mover=self.character,
                 old_location=old_location,
+                old_level=old_level,
                 direction=direction,
                 affected_tiles=affected_tiles))
 

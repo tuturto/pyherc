@@ -61,6 +61,7 @@ class TestCharacter():
         character.raise_event(MoveEvent(mover=character,
                                         affected_tiles=[],
                                         old_location=character.location,
+                                        old_level=None,
                                         direction=1))
 
         verify(model).raise_event(EventType('move'))
