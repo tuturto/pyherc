@@ -30,6 +30,7 @@ from herculeum.ui.gui.widgets import (EffectsWidget, HitPointsWidget,
 from herculeum.ui.gui.layers import (zorder_floor, zorder_wall, zorder_ornament,
                                      zorder_item, zorder_character,
                                      zorder_counter)
+from herculeum.ui.gui.newlevel import NewLevelNotifier
 from pyherc.data.model import DIED_IN_DUNGEON
 from pyherc.rules import (attack, cast, is_move_legal, move, pick_up, wait,
                           is_dig_legal, dig)
@@ -67,6 +68,7 @@ class PlayMapWindow(QWidget):
         self.map_widget = None
         self.effects_widget = None
         self.spell_selector = None
+        self.level_notifier = None
 
         self.__set_layout(model, surface_manager, action_factory, rng,
                           rules_engine, configuration)
@@ -110,6 +112,8 @@ class PlayMapWindow(QWidget):
         status_layout.addWidget(self.effects_widget)
         status_layout.addStretch()
 
+        self.level_notifier = NewLevelNotifier()
+
         layout.addLayout(status_layout)
         layout.addWidget(self.map_widget)
         layout.addWidget(self.message_widget)
@@ -122,6 +126,7 @@ class PlayMapWindow(QWidget):
         """
         self.map_widget.construct_scene()
         self.model.player.register_event_listener(self.message_widget)
+        self.model.player.register_event_listener(self.level_notifier)
         self.message_widget.set_point_of_view(self.model.player)
         self.model.player.register_for_updates(self.effects_widget)
 
