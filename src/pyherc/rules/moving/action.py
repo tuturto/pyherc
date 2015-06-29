@@ -22,11 +22,12 @@ Module defining classes related to Move
 """
 from pyherc.aspects import log_debug, log_info
 from pyherc.data import blocks_movement, get_character, remove_character
-from pyherc.data import add_character, move_character, get_trap
+from pyherc.data import (add_character, move_character, get_trap, add_visited_level,
+                         visited_levels)
 from pyherc.data.constants import Duration
 from pyherc.data.geometry import find_direction
 from pyherc.data.model import ESCAPED_DUNGEON
-from pyherc.events import MoveEvent
+from pyherc.events import MoveEvent, NewLevelEvent
 
 
 class MoveAction():
@@ -83,6 +84,12 @@ class MoveAction():
                 speed_modifier = 1
 
             self.character.add_to_tick(Duration.fast / speed_modifier)
+
+            if self.new_level not in visited_levels(self.character):
+                add_visited_level(self.character, self.new_level)
+                self.character.raise_event(NewLevelEvent(
+                    character=self.character,
+                    new_level=self.new_level))
 
             self.character.raise_event(MoveEvent(
                 mover=self.character,

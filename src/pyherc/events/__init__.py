@@ -35,3 +35,5 @@ from .perception import LoseFocusEvent, NoticeEvent
 from .error import ErrorEvent
 from .spirit import SpiritPointsChangedEvent
 from .dig import DigEvent
+from .new_level import NewLevelEvent
+

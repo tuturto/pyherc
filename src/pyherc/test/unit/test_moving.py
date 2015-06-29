@@ -31,7 +31,8 @@ from pyherc.rules.moving.action import EscapeAction
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   LevelBuilder)
 from pyherc.test.helpers import EventListener
-from pyherc.test.matchers import has_marked_for_redrawing, is_illegal, is_legal
+from pyherc.test.matchers import has_marked_for_redrawing, is_illegal, is_legal, EventType
+from mockito import verify, mock
 
 
 class TestEventDispatching():
@@ -65,7 +66,7 @@ class TestEventDispatching():
                               .with_character(self.character)
                               .build())
 
-        self.listener = EventListener()
+        self.listener = mock()
 
         self.model.register_event_listener(self.listener)
 
@@ -80,21 +81,7 @@ class TestEventDispatching():
         self.actions.move_character(character=self.character,
                                     direction=Direction.east)
 
-        assert_that(len(self.listener.events), is_(equal_to(1)))
-
-    def test_affected_tiles_are_marked(self):
-        """
-        Test that moving marks tiles for redrawing
-        """
-        expected_redraws = [(1, 1),
-                            (1, 2)]
-
-        self.actions.move_character(character=self.character,
-                                    direction=Direction.south)
-
-        event = self.listener.events[0]
-
-        assert_that(event, has_marked_for_redrawing(expected_redraws))
+        verify(self.listener).receive_event(EventType('move'))
 
 
 class TestMoving():

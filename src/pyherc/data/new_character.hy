@@ -33,6 +33,10 @@
   "get generator for visited levels of this character"
   (genexpr x [x character.visited-levels]))
 
+(defn visited-levels [character]
+  "get list of visited levels for this character"
+  character.visited-levels)
+
 (defn add-visited-level [character level]
   "add level to visited levels list"
   (when (not (in level character.visited-levels))
