@@ -17,6 +17,8 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(import [pyherc.data [level-name level-description]])
+
 (defclass NewLevelNotifier []
   [[--init-- (fn [self]
                "initializer"
@@ -24,4 +26,5 @@
    [receive-event (fn [self event]
                     "receive event"
                     (when (= event.event-type "new level")
-                      (print "new level")))]])
+                      (print (level-name event.level)
+                             (level-description event.level))))]])

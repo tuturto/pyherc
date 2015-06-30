@@ -51,7 +51,8 @@
                                 (item-by-type 1 4 "food")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "lower catacombs" "central catacombs"
-                                        "grey stairs" "room" certainly)))
+                                        "grey stairs" "room" certainly))
+            "Dark and damp catacombs stretch to all directions.")
  (new-level "central catacombs"
             (room-list (circular-room "ground_tile3" "ground_soil4")
                        (circular-band-room "ground_wood4" "ground_soil4"
@@ -80,7 +81,8 @@
                                 (item-by-type 0 2 "hint")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "central catacombs" "upper catacombs"
-                                        "grey stairs" "room" certainly)))
+                                        "grey stairs" "room" certainly))
+            "Dark and damp catacombs stretch to all directions.")
  (new-level "upper catacombs"
             (room-list (circular-room "ground_tile3" "ground_soil4")
                        (circular-band-room "ground_wood4" "ground_soil4"
@@ -108,4 +110,5 @@
                                 (item-by-type 1 4 "food")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "upper catacombs" "final gate"
-                                        "grey stairs" "room" certainly))))
+                                        "grey stairs" "room" certainly))
+            "Dark and damp catacombs stretch to all directions."))

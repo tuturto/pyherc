@@ -32,14 +32,16 @@
                            [:decorator₀ :decorator₁]
                            [:item₀]
                            [:character₀ :character₁]
-                           [:portal₀])]
+                           [:portal₀]
+                           "test level")]
         [level₁ (new-level "level₁"
                            [:room₁ :room₂]
                            [:partitioner₁]
                            [:decorator₂ :decorator₃]
                            [:item₁]
                            [:character₁ :character₂]
-                           [:portal₁])]]
+                           [:portal₁]
+                           "test level")]]
     (add-level dungeon level₀)
     (add-level dungeon level₁)
     {:dungeon dungeon
@@ -109,21 +111,24 @@
                           []
                           []
                           [:character₀ :character₁]
-                          [:portal₀])]
+                          [:portal₀]
+                          "test level")]
         [part₁ (new-level "level"
                           [:room₂ :room₃]
                           []
                           [:decorator₂ :decorator₃]
                           []
                           [:character₂ :character₃]
-                          [:portal₁])]
+                          [:portal₁]
+                          "test level")]
         [part₃ (new-level "another level"
                           [:room]
                           [:partitioner]
                           [:decorator]
                           [:item]
                           [:character]
-                          [:portal])]]
+                          [:portal]
+                          "test level")]]
     (add-level dungeon part₀)
     {:dungeon dungeon
      :part₀ part₀

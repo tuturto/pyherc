@@ -52,4 +52,5 @@
                                 (item-by-type 2 4 "hint")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "third gate" "lower catacombs"
-                                        "grey stairs" "room" certainly))))
+                                        "grey stairs" "room" certainly))
+            "Not many adventurers have seen the third gate."))

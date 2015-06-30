@@ -50,5 +50,6 @@ from .level import (get_tile, new_tile, floor_tile, add_portal, get_portal,
                     add_location_tag, get_location_tags, get_locations_by_tag,
                     new_level, get_tiles,
                     location_features, add_location_feature,
-                    remove_location_feature)
+                    remove_location_feature,
+                    level_name, level_description)
 from .locations import is_next_to_wall, is_corridor, is_open_area

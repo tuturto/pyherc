@@ -50,7 +50,8 @@
                                 (item-by-type 1 4 "food")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "lower caverns" "middle caverns"
-                                        "grey stairs" "room" certainly)))
+                                        "grey stairs" "room" certainly))
+            "Sounds of critters can be heard in darkness.")
  (new-level "middle caverns"
             (room-list (circular-room "ground_tile3" "ground_soil4")
                        (circular-band-room "ground_wood4" "ground_soil4"
@@ -79,7 +80,8 @@
                                 (item-by-type 0 2 "hint")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "middle caverns" "upper caverns"
-                                        "grey stairs" "room" certainly)))
+                                        "grey stairs" "room" certainly))
+            "Sounds of critters can be heard in darkness.")
  (new-level "upper caverns"
             (room-list (circular-room "ground_tile3" "ground_soil4")
                        (circular-band-room "ground_wood4" "ground_soil4"
@@ -107,4 +109,5 @@
                                 (item-by-type 1 4 "food")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "upper caverns" "second gate"
-                                        "grey stairs" "room" certainly))))
+                                        "grey stairs" "room" certainly))
+            "Sounds of critters can be heard in darkness."))

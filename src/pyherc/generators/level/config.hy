@@ -38,14 +38,16 @@
   "merge new level config into existing dungeon data"
   (when (not (in (:level-name level) dungeon))    
     (add-level dungeon (new-level (:level-name level)
-                                  [] [] [] [] [] [])))
-  (ap-each (genexpr comp [comp (.keys level)] (!= comp :level-name))
+                                  [] [] [] [] [] [] (:description level))))
+  (ap-each (genexpr comp [comp (.keys level)] (not (in comp [:level-name :description])))
            (merge-component-list it dungeon level)))
+;; TODO: handle level-description
 
 (defn new-level [level-name room-generators partitioners decorators
-                 items characters portal-config]
+                 items characters portal-config description]
   "create new instance of level config"
   {:level-name level-name
+   :description description
    :room-generators room-generators
    :partitioners partitioners
    :decorators decorators
@@ -76,3 +78,7 @@
 (defn portals [dungeon level-name]
   "get portal configs"
   (level-config :portal-config dungeon level-name))
+
+(defn description [dungeon level-name]
+  "get level description"
+  (:description (get dungeon level-name)))

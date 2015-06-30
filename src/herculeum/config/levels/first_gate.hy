@@ -54,4 +54,5 @@
                                 (item-by-type 1 1 "hint")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "first gate" "lower caverns"
-                                        "grey stairs" "room" certainly))))
+                                        "grey stairs" "room" certainly))
+            "The first gate is your long journey begins."))

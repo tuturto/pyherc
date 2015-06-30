@@ -29,7 +29,9 @@
   {:model model
    :tiles {}
    :items []
-   :characters []})
+   :characters []
+   :name nil
+   :description nil})
 
 (defn new-tile []
   "create a tile with default values"
@@ -42,6 +44,18 @@
    :character nil
    :portal nil
    :features []})
+
+(defn level-name [level &optional [name nil]]
+  "get/set level name"
+  (when name
+    (assoc level :name name))
+  (:name level))
+
+(defn level-description [level &optional [description nil]]
+  "get/set level description"
+  (when description
+    (assoc level :description description))
+  (:description level))
 
 (defn get-tile [level location]
   "get tile at given location"

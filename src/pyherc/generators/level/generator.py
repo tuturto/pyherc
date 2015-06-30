@@ -30,7 +30,7 @@ from pyherc.data import wall_tile
 
 from pyherc.generators.level.partitioners.old_grid import RandomConnector
 from pyherc.generators.level import (level_partitioners, room_generators,
-                                     decorators, items, characters)
+                                     decorators, items, characters, description)
 from pyherc.generators.level.new_generator import new_level_generator
 
 class LevelGeneratorFactory():
@@ -84,7 +84,9 @@ class LevelGeneratorFactory():
                                    item_adders,
                                    creature_adders,
                                    self.rng,
-                                   None)
+                                   level_type,
+                                   description(self.config, level_type))
+
 
     @log_debug
     def get_sub_components(self, level_type, component_list, component_type):

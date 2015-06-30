@@ -49,7 +49,8 @@
             (connections (unique-stairs "first gate" "upper mines"
                                         "grey stairs" "room" unlikely)
                          (unique-stairs "upper mines" "lower mines"
-                                        "grey stairs" "room" certainly)))
+                                        "grey stairs" "room" certainly))
+            "Mines are full of smoke and noise of rock being shattered.")
  (new-level "lower mines" 
             (room-list (square-room "ground_soil3" "ground_soil3")
                        (square-pitroom "ground_soil3" "ground_soil3" 
@@ -76,7 +77,8 @@
                             (option (creature 1 3 "rat")
                                      (creature 1 3 "fungus")))
             (connections (unique-stairs "lower mines" "forge" 
-                                        "grey stairs" "room" certainly)))
+                                        "grey stairs" "room" certainly))
+            "Mines are full of smoke and noise of rock being shattered.")
  (new-level "forge" 
             (room-list (square-room "ground_soil3" "ground_soil3")
                        (square-pitroom "ground_soil3" "ground_soil3" 
@@ -100,4 +102,5 @@
             (creature-lists (option (creature 1 2 "skeleton warrior"))
                             (option (creature 1 3 "rat")
                                     (creature 1 3 "fungus")))
-            []))
+            []
+            "Heat radiates from the forge."))

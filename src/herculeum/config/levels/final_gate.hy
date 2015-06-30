@@ -49,4 +49,5 @@
                                 (item-by-type 0 1 "potion")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (final-stairs "final gate"
-                                       "grey stairs" "room" certainly))))
+                                       "grey stairs" "room" certainly))
+            "The last gate looms so close, but yet so far. This is it, the final challenge."))

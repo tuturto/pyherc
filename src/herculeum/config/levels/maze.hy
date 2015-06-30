@@ -51,7 +51,8 @@
                                 (item-by-type 1 4 "food")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "lower maze" "courtyard"
-                                        "grey stairs" "room" certainly)))
+                                        "grey stairs" "room" certainly))
+            "You are in a maze of twisty little passages, all alike")
  (new-level "courtyard"
             (room-list (circular-room "ground_tile3" "ground_soil4")
                        (circular-band-room "ground_wood4" "ground_soil4"
@@ -80,7 +81,8 @@
                                 (item-by-type 0 1 "hint")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "courtyard" "upper maze"
-                                        "grey stairs" "room" certainly)))
+                                        "grey stairs" "room" certainly))
+            "You are in a maze of twisty little passages, all alike")
  (new-level "upper maze"
             (room-list (circular-room "ground_tile3" "ground_soil4")
                        (circular-band-room "ground_wood4" "ground_soil4"
@@ -108,4 +110,5 @@
                                 (item-by-type 1 4 "food")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "upper maze" "third gate"
-                                        "grey stairs" "room" certainly))))
+                                        "grey stairs" "room" certainly))
+            "You are in a maze of twisty little passages, all alike"))

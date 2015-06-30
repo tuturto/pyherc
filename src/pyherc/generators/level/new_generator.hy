@@ -21,7 +21,7 @@
 (require pyherc.macros)
 
 (import [pyherc.data [new-level Portal add-portal get-locations-by-tag
-                      wall-tile]]
+                      wall-tile level-name level-description]]
         [pyherc.generators.level.partitioners.old-grid [RandomConnector]])
 
 (defmacro run-generators-for [level &rest generators]
@@ -29,13 +29,15 @@
 
 (defn new-level-generator [model partitioners room-generators decorators
                            portal-adders item-adders creature-adders
-                           rng level-context]
+                           rng name description]
   "create a new level generator function"
   (fn [portal]
     (let [[level (new-level model)]
           [partitioner (.choice rng partitioners)]
           [connector (RandomConnector rng)]
           [sections (.connect-sections connector (partitioner level))]]
+      (level-name level name)
+      (level-description level description)
       (ap-each sections ((.choice rng room-generators) it))
       (when creature-adders ((.choice rng creature-adders) level))
       (when item-adders ((.choice rng item-adders) level))

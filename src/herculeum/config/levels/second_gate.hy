@@ -52,4 +52,5 @@
                                 (item-by-type 1 2 "hint")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "second gate" "lower maze"
-                                        "grey stairs" "room" certainly))))
+                                        "grey stairs" "room" certainly))
+            "Reaching this far proves nothign, there's still long journey ahead."))
