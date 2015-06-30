@@ -18,5 +18,10 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (defclass NewLevelNotifier []
-  [[receive-event (fn [self event]
-                    "receive event")]])
+  [[--init-- (fn [self]
+               "initializer"
+               nil)]
+   [receive-event (fn [self event]
+                    "receive event"
+                    (when (= event.event-type "new level")
+                      (print "new level")))]])
