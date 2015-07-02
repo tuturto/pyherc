@@ -24,15 +24,16 @@
 (defclass NewLevelEvent [Event]
   "event to indicate that a character has reached new dungeon level"
   [[--init-- #d(fn [self character new-level]
-		 "default constructor"
-         (-> (super) (.--init-- "new level"
-					character.level
-					character.location
-					[]))
-		 (setv self.new-level new-level)
-		 nil)]
+                 "default constructor"
+                 (-> (super) (.--init-- "new level"
+                                        character.level
+                                        character.location
+                                        []))
+                 (setv self.new-level new-level)
+                 (setv self.character character)
+                 nil)]
    [get-description (fn [self point-of-view]
                       "get description of this event"
                       (if (= point-of-view self.character)
-                               "You have reached new level"
-                               (-> "{0} has reached new level" (.format self.character))))]])
+                        "You have reached new level"
+                        (-> "{0} has reached new level" (.format self.character))))]])

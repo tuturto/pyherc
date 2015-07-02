@@ -22,6 +22,7 @@
 Module displaying events on screen
 """
 from PyQt4.QtGui import QDockWidget, QHBoxLayout, QTextEdit, QWidget
+from pyherc.data import level_name, level_description
 
 
 class EventMessageDockWidget(QDockWidget):
@@ -102,7 +103,8 @@ class EventMessageWidget(QWidget):
                                     'unequip',
                                     'error',
                                     'mitosis',
-                                    'dig']
+                                    'dig',
+                                    'new level']
 
     def set_point_of_view(self, character):
         """
@@ -115,4 +117,10 @@ class EventMessageWidget(QWidget):
         Receive event to display
         """
         if event.event_type in self.event_types_to_show:
-            self.text_edit.append(event.get_description(self.character))
+            if event.event_type == 'new level':
+                if event.character is self.character:
+                    self.text_edit.append("You have reached new level: {0}\n{1}".format(
+                        level_name(event.level),
+                        level_description(event.level)))
+            else:
+                self.text_edit.append(event.get_description(self.character))
