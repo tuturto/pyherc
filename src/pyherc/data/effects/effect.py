@@ -21,7 +21,6 @@
 Module for baseclass of every Effect
 """
 from pyherc.aspects import log_debug, log_info
-from pyherc.events import Event
 
 
 class Effect():
@@ -85,10 +84,7 @@ class Effect():
         :returns: event describing adding of this effect
         :rtype: Event
         """
-        return Event(event_type='add event',
-                     level=None,
-                     location=None,
-                     affected_tiles=[])
+        return None
 
     @log_debug
     def get_removal_event(self):
@@ -98,10 +94,7 @@ class Effect():
         :return: event describing removal of this event
         :rtype: Event
         """
-        return Event(event_type='remove event',
-                     level=None,
-                     location=None,
-                     affected_tiles=[])
+        return None
 
 
 class EffectHandle():

@@ -17,11 +17,34 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn new-metamorphosis-event [character new-character &optional destroyed-characters]
-  "event to indicate that a metamorphosis has occured"
-  {:event-type "metamorphosis"
+(defn new-pick-up-event [character item]
+  "create event to signify picking up an item"
+  {:event-type "pick up"
    :level character.level
    :location character.location
    :character character
-   :new-character new-character
-   :destroyed-characters destroyed-characters})
+   :item item})
+
+(defn new-drop-event [character item]
+  "create event to signify dropping an item"
+  {:event-type "drop"
+   :level character.level
+   :location character.location
+   :character character
+   :item item})
+
+(defn new-equip-event [character item]
+  "create event to signify equipping an item"
+  {:event-type "equip"
+   :level character.level
+   :location character.location
+   :character character
+   :item item})
+
+(defn new-unequip-event [character item]
+  "create event to signify unequipping an item"
+  {:event-type "unequip"
+   :level character.level
+   :location character.location
+   :character character
+   :item item})

@@ -22,8 +22,8 @@ Module for poison
 """
 from pyherc.aspects import log_debug
 from pyherc.data.effects.effect import Effect
-from pyherc.events import (PoisonAddedEvent, PoisonEndedEvent,
-                           PoisonTriggeredEvent)
+from pyherc.events import (new_poison_added_event, new_poison_ended_event,
+                           new_poison_triggered_event)
 
 
 class Poison(Effect):
@@ -54,8 +54,8 @@ class Poison(Effect):
         """
         self.target.hit_points = self.target.hit_points - self.damage
 
-        self.target.raise_event(PoisonTriggeredEvent(target=self.target,
-                                                     damage=self.damage))
+        self.target.raise_event(new_poison_triggered_event(target=self.target,
+                                                           damage=self.damage))
 
         dying_rules.check_dying(self.target)
 
@@ -67,8 +67,8 @@ class Poison(Effect):
         :returns: event describing adding of this effect
         :rtype: Event
         """
-        return PoisonAddedEvent(target=self.target,
-                                effect=self)
+        return new_poison_added_event(target=self.target,
+                                      effect=self)
 
     @log_debug
     def get_removal_event(self):
@@ -78,5 +78,5 @@ class Poison(Effect):
         :return: event describing removal of this event
         :rtype: Event
         """
-        return PoisonEndedEvent(target=self.target,
-                                effect=self)
+        return new_poison_ended_event(target=self.target,
+                                      effect=self)

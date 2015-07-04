@@ -17,47 +17,12 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(require pyherc.aspects)
-(import [pyherc.aspects [log-debug]]
-	[pyherc.events.event [Event]])
-
-(defclass DigEvent [Event]
-  "event to indicate that a somebody looted a cache"
-  [[--init-- #d(fn [self character cache new-items new-characters]
-		 "default constructor"
-		 (-> (super) (.--init-- "dig"
-					character.level
-					character.location
-					[]))
-		 (setv self.character character)
-                 (setv self.cache cache)
-                 (setv self.new-items new-items)
-                 (setv self.new-characters new-characters)
-		 nil)]
-   [get-description (fn [self point-of-view]
-		      "get description of this event"
-                      (cond [(monster? self)
-                             (if (= point-of-view self.character)
-                               "The grave was occupied by a monster!"
-                               (-> "{0} has unearthed a monster!" (.format self.character)))]
-                            [(only-items? self)
-                             (if (= point-of-view self.character)
-                               "There were something in grave"
-                               (-> "{0} has unearthed something" (.format self.character)))]
-                            [(empty-cache? self)
-                               (if (= point-of-view self.character)
-                                 "The grave is empty.."
-                                 (-> "{0} has tried to loot an empty grave" (.format self.character)))]))]])
-
-(defn monster? [event]
-  "check if the cache contained a monster"
-  event.new-characters)
-
-(defn only-items? [event]
-  "check if only items were present"
-  (and event.new-items (not event.new-characters)))
-
-(defn empty-cache? [event]
-  "check if the cache was completely empty"
-  (and (not event.new-items) (not event.new-characters)))
-
+(defn new-dig-event [character cache new-items new-characters]
+  "create event to signify digging a cache"
+  {:event-type "dig"
+   :level character.level
+   :location character.location
+   :character character
+   :cache cache
+   :new-items new-items
+   :new-characters new-characters})

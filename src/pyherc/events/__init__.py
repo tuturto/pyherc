@@ -22,18 +22,25 @@
 """
 Package for events that are used to communicate between creatures and UI
 """
-from .event import Event
-from .move import MoveEvent
-from .combat import AttackHitEvent, AttackNothingEvent, AttackMissEvent
-from .poison import PoisonTriggeredEvent, PoisonAddedEvent, PoisonEndedEvent
-from .healing import HealTriggeredEvent, HealAddedEvent, HealEndedEvent
-from .death import DeathEvent
-from .inventory import PickUpEvent, DropEvent, EquipEvent, UnEquipEvent
-from .hitpoints import HitPointsChangedEvent
-from .damage import DamageAddedEvent, DamageTriggeredEvent, DamageEndedEvent
-from .perception import LoseFocusEvent, NoticeEvent
-from .error import ErrorEvent
-from .spirit import SpiritPointsChangedEvent
-from .dig import DigEvent
-from .new_level import NewLevelEvent
 
+from .combat import (new_attack_hit_event, new_attack_miss_event,
+                     new_attack_nothing_event)
+from .damage import (new_damage_triggered_event, new_damage_added_event,
+                     new_damage_ended_event)
+from .dig import new_dig_event
+from .death import new_death_event
+from .error import new_error_event
+from .event import (e_event_type, e_level, e_location, e_character, e_old_spirit,
+                    e_new_spirit)
+from .healing import (new_heal_triggered_event, new_heal_added_event,
+                      new_heal_ended_event)
+from .hitpoints import new_hit_points_changed_event
+from .inventory import (new_pick_up_event, new_drop_event, new_equip_event,
+                        new_unequip_event)
+from .metamorphosis import new_metamorphosis_event
+from .mitosis import new_mitosis_event
+from .move import new_move_event
+from .perception import new_notice_event
+from .poison import (new_poison_triggered_event, new_poison_added_event,
+                    new_poison_ended_event)
+from .spirit import new_spirit_points_changed_event

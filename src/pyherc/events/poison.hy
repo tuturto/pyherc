@@ -17,11 +17,26 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn new-metamorphosis-event [character new-character &optional destroyed-characters]
-  "event to indicate that a metamorphosis has occured"
-  {:event-type "metamorphosis"
-   :level character.level
-   :location character.location
-   :character character
-   :new-character new-character
-   :destroyed-characters destroyed-characters})
+(defn new-poison-triggered-event [target damage]
+  "create event to signify poison was triggered"
+  {:event-type "poison triggered"
+   :level target.level
+   :location target.location
+   :target target
+   :damage damage})
+
+(defn new-poison-added-event [target effect]
+  "create event to signify a character was poisoned"
+  {:event-type "poisoned"
+   :level target.level
+   :location target.location
+   :target target
+   :effect effect})
+
+(defn new-poison-ended-event [target effect]
+  "create event to signify poisoning has ended"
+  {:event-type "poison ended"
+   :level target.level
+   :location target.location
+   :target target
+   :effect effect})

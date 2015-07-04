@@ -17,11 +17,11 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn new-metamorphosis-event [character new-character &optional destroyed-characters]
-  "event to indicate that a metamorphosis has occured"
-  {:event-type "metamorphosis"
+(defn new-hit-points-changed-event [character old-hit-points new-hit-points]
+  "create event to signify a change in hit points"
+  {:event-type "hit points changed"
    :level character.level
    :location character.location
    :character character
-   :new-character new-character
-   :destroyed-characters destroyed-characters})
+   :old-hit-points old-hit-points
+   :new-hit-points new-hit-points})

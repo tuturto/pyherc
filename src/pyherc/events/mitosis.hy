@@ -17,23 +17,10 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(require pyherc.aspects)
-(import [pyherc.aspects [log-debug]]
-	[pyherc.events.event [Event]])
-
-(defclass MitosisEvent [Event]
+(defn new-mitosis-event [character new-charater]
   "event to indicate that a mitosis has occurred"
-  [[--init-- #d(fn [self character new-character]
-		 "default constructor"
-		 (-> (super) (.--init-- "mitosis"
-					character.level
-					character.location
-					[]))
-		 (setv self.character character)
-		 (setv self.new-character new-character)
-		 nil)]
-   [get-description (fn [self point-of-view]
-		      "get description of this event"
-		      (if (= point-of-view self.character)
-			"You have split in two"
-			(-> "{0} has split in two" (.format self.character))))]])
+  {:event-type "mitosis"
+   :level character.level
+   :location character.location
+   :character character
+   :new-character new-character})

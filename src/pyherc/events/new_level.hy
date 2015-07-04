@@ -17,23 +17,10 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(require pyherc.aspects)
-(import [pyherc.aspects [log-debug]]
-        [pyherc.events.event [Event]])
-
-(defclass NewLevelEvent [Event]
-  "event to indicate that a character has reached new dungeon level"
-  [[--init-- #d(fn [self character new-level]
-                 "default constructor"
-                 (-> (super) (.--init-- "new level"
-                                        character.level
-                                        character.location
-                                        []))
-                 (setv self.new-level new-level)
-                 (setv self.character character)
-                 nil)]
-   [get-description (fn [self point-of-view]
-                      "get description of this event"
-                      (if (= point-of-view self.character)
-                        "You have reached new level"
-                        (-> "{0} has reached new level" (.format self.character))))]])
+(defn new-level-event [character new-level]
+  "create event to signify new level"
+  {:event-type "new level"
+   :level character.level
+   :location character.location
+   :new-level new-level
+   :character character})
