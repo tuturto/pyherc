@@ -20,15 +20,16 @@
 (require hy.contrib.anaphoric)
 
 (import [herculeum.ui.gui.animations.animation [Animation]]
-	[herculeum.ui.gui [layers]])
+        [herculeum.ui.gui [layers]]
+        [pyherc.events [e-character e-new-items e-new-characters]])
 
 (defclass DigAnimation [Animation]
   "animation for digging"
   [[--init-- (fn [self event]
 	       (-> (super) (.--init-- event))
-	       (setv self.character event.character)
-               (setv self.items event.new-items)
-               (setv self.characters event.new-characters)
+	       (setv self.character (e-character event))
+               (setv self.items (e-new-items event))
+               (setv self.characters (e-new-characters event))
 	       nil)]
    [trigger (fn [self ui]
               (ap-each self.items (.add-glyph ui it ui.scene

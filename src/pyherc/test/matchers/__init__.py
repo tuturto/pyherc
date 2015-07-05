@@ -33,7 +33,7 @@ from .contains_creature import has_creature, is_in, is_not_in
 from .effect_collection import has_effect_handle, has_effect_handles
 from .event_listener import has_event_listener
 from .event import has_marked_for_redrawing
-from .event_parameters import EventType
+from .event_parameters import EventType, event_type_of
 from .inventory_parameters import DropActionParameterMatcher
 from .inventory import is_wearing, does_have
 from .items import does_have_item, does_not_have_item, has_damage

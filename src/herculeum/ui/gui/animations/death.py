@@ -21,6 +21,7 @@
 Classes for death animations
 """
 from .animation import Animation
+from pyherc.events import e_deceased
 
 
 class DeathAnimation(Animation):
@@ -35,7 +36,7 @@ class DeathAnimation(Animation):
         """
         super().__init__(event)
 
-        self.deceased = event.deceased
+        self.deceased = e_deceased(event)
 
     def trigger(self, ui):
         """

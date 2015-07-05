@@ -25,7 +25,8 @@ import random
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.constants import Duration
 from pyherc.data.damage import Damage
-from pyherc.events import AttackHitEvent, AttackMissEvent, AttackNothingEvent
+from pyherc.events import (new_attack_hit_event, new_attack_miss_event,
+                           new_attack_nothing_event)
 
 
 class AttackAction():
@@ -88,8 +89,8 @@ class AttackAction():
 
         if target is None:
             self.attacker.raise_event(
-                AttackNothingEvent(attacker=self.attacker,
-                                   affected_tiles=[]))
+                new_attack_nothing_event(attacker=self.attacker,
+                                         affected_tiles=[]))
         else:
 
             was_hit = self.to_hit.is_hit()
@@ -97,20 +98,18 @@ class AttackAction():
             if was_hit:
                 self.damage.apply_damage(target)
 
-                self.attacker.raise_event(AttackHitEvent(
+                self.attacker.raise_event(new_attack_hit_event(
                     type=self.attack_type,
                     attacker=self.attacker,
                     target=target,
-                    damage=self.damage,
-                    affected_tiles=[target.location]))
+                    damage=self.damage))
 
                 self.__trigger_attack_effects()
             else:
-                self.attacker.raise_event(AttackMissEvent(
+                self.attacker.raise_event(new_attack_miss_event(
                     type=self.attack_type,
                     attacker=self.attacker,
-                    target=target,
-                    affected_tiles=[target.location]))
+                    target=target))
 
             self.dying_rules.check_dying(target)
 

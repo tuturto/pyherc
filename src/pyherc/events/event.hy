@@ -86,6 +86,9 @@
 (defn e-cache [event]
   (:cache event))
 
+(defn e-item [event]
+  (:item event))
+
 (defn e-new-items [event]
   (:new-items event))
 

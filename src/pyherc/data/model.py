@@ -23,6 +23,7 @@ Module for Model related classes
 
 from pyherc.aspects import log_debug
 from pyherc.data.level import get_characters
+from pyherc.events import e_level
 
 ESCAPED_DUNGEON = 1
 DIED_IN_DUNGEON = 2
@@ -71,7 +72,7 @@ class Model():
         :param event: event to relay
         :type event: dict
         """
-        level = event.level
+        level = e_level(event)
 
         if self.player:
             self.player.receive_event(event)

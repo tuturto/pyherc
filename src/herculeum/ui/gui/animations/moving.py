@@ -25,6 +25,7 @@ from .counters import MapGlyphAdapter
 from PyQt4.QtCore import QPropertyAnimation, QParallelAnimationGroup
 from PyQt4.QtCore import QAbstractAnimation
 from PyQt4.QtGui import QTransform
+from pyherc.events import e_old_location, e_character, e_direction
 
 
 class MoveAnimation(Animation):
@@ -39,10 +40,10 @@ class MoveAnimation(Animation):
         """
         super().__init__(event)
 
-        self.start = event.old_location
-        self.destination = event.mover.location
-        self.direction = event.direction
-        self.mover = event.mover
+        self.start = e_old_location(event)
+        self.destination = e_character(event).location
+        self.direction = e_direction(event)
+        self.mover = e_character(event)
 
         self.flipped = False
         self.offset = 0

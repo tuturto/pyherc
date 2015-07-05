@@ -23,7 +23,6 @@ Module for testing combat related rules
 from hamcrest import assert_that, equal_to, instance_of, is_
 from mockito import any, mock, verify, when
 from pyherc.data import Dungeon, Model
-from pyherc.events import AttackHitEvent, AttackNothingEvent
 from pyherc.rules import attack
 from pyherc.rules.combat.action import AttackAction
 from pyherc.rules.combat.interface import AttackParameters

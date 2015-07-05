@@ -23,12 +23,12 @@ Module for testing drop action factory
 from hamcrest import assert_that, equal_to, greater_than, is_, is_in, is_not
 from mockito import any, mock, verify
 from pyherc.data import Model
-from pyherc.events import DropEvent
 from pyherc.rules import drop_item
 from pyherc.rules.inventory.factories import DropFactory
 from pyherc.rules.inventory.interface import InventoryParameters
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder, LevelBuilder)
+from pyherc.test.matchers import event_type_of
 
 
 class TestDropFactory():
@@ -144,4 +144,4 @@ class TestDropAction():
                   self.item,
                   self.action_factory)
 
-        verify(self.model).raise_event(any(DropEvent))
+        verify(self.model).raise_event(event_type_of('drop'))

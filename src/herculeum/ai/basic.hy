@@ -24,7 +24,7 @@
 (import [pyherc.aspects [log_debug]]
     [pyherc.data.geometry [find-direction]]
     [pyherc.rules [move is-move-legal attack]]
-    [pyherc.events [NoticeEvent]]
+    [pyherc.events [new-notice-event]]
     [math [sqrt]])
 
 (require herculeum.ai.macros)
@@ -65,5 +65,5 @@
 #d(defn focus-enemy [ai enemy]
     "focus on enemy and start tracking it"
     (let [[character ai.character]
-	  [event (NoticeEvent character enemy)]]
+	  [event (new-notice-event character enemy)]]
       (.raise-event character event)))

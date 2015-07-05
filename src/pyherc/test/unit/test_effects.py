@@ -26,7 +26,6 @@ from mockito import any, mock, never, verify, when
 from pyherc.data import Model
 from pyherc.data.effects import Effect, EffectHandle, Heal, Poison
 from pyherc.data.geometry import TargetData
-from pyherc.events import PoisonAddedEvent
 from pyherc.generators import get_effect_creator
 from pyherc.rules import attack, drink
 from pyherc.rules.combat.action import AttackAction
@@ -35,7 +34,7 @@ from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   EffectHandleBuilder, ItemBuilder,
                                   LevelBuilder)
 from pyherc.test.matchers import (EventType, has_effect, has_effects,
-                                  has_no_effects)
+                                  has_no_effects, event_type_of)
 
 
 class TestEffects():
@@ -135,7 +134,7 @@ class TestEffects():
 
         character.remove_expired_effects()
 
-        verify(model).raise_event(EventType('remove event'))
+        verify(model).raise_event(event_type_of('effect removed'))
 
 
 class TestEffectsInMelee():
@@ -237,7 +236,7 @@ class TestEffectsInMelee():
                self.action_factory,
                rng)
 
-        verify(self.model).raise_event(any(PoisonAddedEvent))
+        verify(self.model).raise_event(event_type_of('poisoned'))
 
 
 class TestEffectHandling():

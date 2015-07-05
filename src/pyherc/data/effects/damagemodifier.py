@@ -49,11 +49,25 @@ class DamageModifier(Effect):
         self.multiple_allowed = True
 
     @log_debug
-    def clone(self):
+    def get_add_event(self):
         """
-        Temporary hack for tech day
+        Get event describing adding of this effect
+
+        :returns: event describing adding of this effect
+        :rtype: Event
         """
-        return DamageModifier(self.modifier, self.damage_type,
-                              self.duration, self.frequency,
-                              self.tick, self.icon, self.title,
-                              self.description)
+        return {'\ufdd0:event-type': 'hack',
+                '\ufdd0:level': None,
+                '\ufdd0:character': None}
+
+    @log_debug
+    def get_removal_event(self):
+        """
+        Get event describing removal of this event
+
+        :return: event describing removal of this event
+        :rtype: Event
+        """
+        return {'\ufdd0:event-type': 'hack',
+                '\ufdd0:level': None,
+                '\ufdd0:character': None}

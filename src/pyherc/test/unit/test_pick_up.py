@@ -23,7 +23,6 @@ Tests for pick up action
 from hamcrest import assert_that, equal_to, is_  # pylint: disable-msg=E0611
 from mockito import any, mock, verify
 from pyherc.data import Model, add_item, get_items
-from pyherc.events import PickUpEvent
 from pyherc.rules import pick_up
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder, LevelBuilder)

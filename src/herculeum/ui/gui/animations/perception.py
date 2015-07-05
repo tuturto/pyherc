@@ -26,6 +26,7 @@ from random import Random
 from PyQt4.QtCore import (QEasingCurve, QPropertyAnimation,
                           QSequentialAnimationGroup)
 from herculeum.ui.gui.layers import zorder_counter
+from pyherc.events import e_character
 
 
 class NoticeAnimation(Animation):
@@ -40,7 +41,7 @@ class NoticeAnimation(Animation):
         """
         super().__init__(event)
 
-        self.location = event.character.location
+        self.location = e_character(event).location
         self.text = '!'
         self.colour = 'red'
         self.offset = (0, 16)

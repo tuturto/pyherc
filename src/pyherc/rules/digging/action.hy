@@ -25,7 +25,7 @@
         [pyherc.data.constants [Duration]]
         [pyherc.data.features [clear-cache feature-level feature-location
                                items-in-cache characters-in-cache]]
-        [pyherc.events [DigEvent]])
+        [pyherc.events [new-dig-event]])
 
 (defclass DigAction []
   [[--init-- #d(fn [self character cache rng]
@@ -51,8 +51,8 @@
                     (distribute-items level location items self.rng)
                     (distribute-characters level location characters self.rng)
                     (clear-cache self.cache)
-                    (.raise-event self.character (DigEvent self.character
-                                                           cache items
+                    (.raise-event self.character (new-dig-event self.character
+                                                                cache items
                                                            characters)))))]])
 
 (defn using-spade? [character]

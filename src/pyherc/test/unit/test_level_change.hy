@@ -27,7 +27,6 @@
 (import [pyherc.data [add-visited-level]]
         [pyherc.data.new-character [visited-levels↜]]
         [pyherc.data.constants [Direction]]
-        [pyherc.events [NewLevelEvent]]
         [pyherc.rules [move]])
 
 (defn test-add-visited-level []

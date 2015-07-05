@@ -17,10 +17,18 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn new-mitosis-event [character new-character]
-  "event to indicate that a mitosis has occurred"
-  {:event-type "mitosis"
-   :level character.level
-   :location character.location
-   :character character
-   :new-character new-character})
+(defn new-effect-added-event [effect]
+  "create event signifying adding a general effect"
+  {:event-type "effect added"
+   :character nil
+   :level nil
+   :location nil
+   :effect effect})
+
+(defn new-effect-removed-event [effect]
+  "create event signifying removing a general effect"
+  {:event-type "effect removed"
+   :character nil
+   :level nil
+   :location nil
+   :effect effect})

@@ -17,12 +17,12 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn new-move-event [mover old-location old-level direction]
+(defn new-move-event [character old-location old-level direction]
   "create a new event to signify movement"
   {:event-type "move"
-   :level mover.level
-   :location mover.location
-   :mover mover
+   :level character.level
+   :location character.location
+   :character character
    :old-location old-location
    :old-level old-level
    :direction direction})

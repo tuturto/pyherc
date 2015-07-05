@@ -25,6 +25,7 @@ from hamcrest import assert_that, equal_to, is_, is_in, greater_than
 from mockito import any, mock, verify, when
 from pyherc.data.effects import Effect, EffectHandle, Heal
 from pyherc.data.magic import Spell
+from pyherc.events import e_event_type
 from pyherc.generators import create_effect, get_effect_creator
 from pyherc.rules.ending import Dying
 from pyherc.rules.magic.action import SpellCastingAction
@@ -205,6 +206,6 @@ class TestSpellCastingAction():
         action.execute()
 
         events = [event for event in listener.events
-                  if event.event_type == 'spirit points changed']
+                  if e_event_type(event) == 'spirit points changed']
 
         assert_that(len(events), is_(equal_to(1)))

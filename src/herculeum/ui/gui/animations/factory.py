@@ -33,7 +33,7 @@ from .mitosis import MitosisAnimation
 from .moving import MoveAnimation
 from .perception import NoticeAnimation, LoseFocusAnimation
 from .poison import PoisonAddedAnimation, PoisonTriggeredAnimation
-
+from pyherc.events import e_event_type
 
 class AnimationFactory():
     """
@@ -72,7 +72,7 @@ class AnimationFactory():
         :returns: animation
         :rtype: Animation
         """
-        if event.event_type in self.animations:
-            return self.animations[event.event_type](event)
+        if e_event_type(event) in self.animations:
+            return self.animations[e_event_type(event)](event)
         else:
             return Animation(event)

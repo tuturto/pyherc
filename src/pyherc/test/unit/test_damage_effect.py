@@ -24,8 +24,8 @@ from mockito import any, mock, verify, when
 from hamcrest import assert_that, is_, equal_to
 from pyherc.data import Character
 from pyherc.data.effects import DamageModifier
-from pyherc.events import DamageTriggeredEvent
 from pyherc.test.builders import CharacterBuilder, DamageBuilder
+from pyherc.test.matchers import event_type_of
 
 
 class TestDamageEffect():
@@ -53,7 +53,7 @@ class TestDamageEffect():
 
         effect.trigger(dying_rules=mock())
 
-        verify(model).raise_event(any(DamageTriggeredEvent))
+        verify(model).raise_event(event_type_of('damage triggered'))
 
     def test_triggering_damage_respects_damage_modifier(self):
         """

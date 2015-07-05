@@ -22,7 +22,8 @@ Module for healing
 """
 from pyherc.aspects import log_debug
 from pyherc.data.effects.effect import Effect
-from pyherc.events import HealAddedEvent, HealEndedEvent, HealTriggeredEvent
+from pyherc.events import (new_heal_added_event, new_heal_ended_event,
+                           new_heal_triggered_event)
 
 
 class Heal(Effect):
@@ -56,8 +57,8 @@ class Heal(Effect):
         if self.target.hit_points > self.target.max_hp:
             self.target.hit_points = self.target.max_hp
 
-        self.target.raise_event(HealTriggeredEvent(target=self.target,
-                                                   healing=self.healing))
+        self.target.raise_event(new_heal_triggered_event(target=self.target,
+                                                         healing=self.healing))
 
     @log_debug
     def get_add_event(self):
@@ -67,8 +68,8 @@ class Heal(Effect):
         :returns: event describing adding of this effect
         :rtype: Event
         """
-        return HealAddedEvent(target=self.target,
-                              effect=self)
+        return new_heal_added_event(target=self.target,
+                                    effect=self)
 
     @log_debug
     def get_removal_event(self):
@@ -78,5 +79,5 @@ class Heal(Effect):
         :return: event describing removal of this event
         :rtype: Event
         """
-        return HealEndedEvent(target=self.target,
-                              effect=self)
+        return new_heal_ended_event(target=self.target,
+                                    effect=self)

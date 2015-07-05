@@ -25,8 +25,8 @@ from pyherc.aspects import log_debug, log_info
 from pyherc.data.effects.effectscollection import EffectsCollection
 from pyherc.data.inventory import Inventory
 from pyherc.data.magic.spellbook import SpellBook
-from pyherc.events import (ErrorEvent, HitPointsChangedEvent,
-                           SpiritPointsChangedEvent)
+from pyherc.events import (new_error_event, new_hit_points_changed_event,
+                           new_spirit_points_changed_event)
 
 
 @decorator
@@ -39,7 +39,7 @@ def guarded_action(wrapped_function, *args, **kwargs):
     except Exception:
         self = args[0]
         self.tick = 10
-        self.raise_event(ErrorEvent(self))
+        self.raise_event(new_error_event(self))
 
 
 class Character():
@@ -191,9 +191,9 @@ class Character():
         self.__hit_points = hit_points
 
         self.raise_event(
-            HitPointsChangedEvent(character=self,
-                                  old_hit_points=old_hit_points,
-                                  new_hit_points=new_hit_points))
+            new_hit_points_changed_event(character=self,
+                                         old_hit_points=old_hit_points,
+                                         new_hit_points=new_hit_points))
 
     def __get_spirit(self):
         """
@@ -208,9 +208,9 @@ class Character():
         self.__spirit = spirit
 
         self.raise_event(
-            SpiritPointsChangedEvent(character=self,
-                                     old_spirit=old_spirit,
-                                     new_spirit=new_spirit))
+            new_spirit_points_changed_event(character=self,
+                                            old_spirit=old_spirit,
+                                            new_spirit=new_spirit))
 
     def __get_body(self):
         """

@@ -25,7 +25,7 @@
                       get-characters add-character]]
         [pyherc.data.geometry [area-around]]
         [pyherc.data.constants [Duration]]
-        [pyherc.events.mitosis [MitosisEvent]])
+        [pyherc.events.mitosis [new-mitosis-event]])
 
 (defclass MitosisAction []
   [[--init-- #d(fn [self character character-generator rng character-limit]
@@ -58,8 +58,8 @@
                     (.add-to-tick new-character Duration.very-slow)
                     (cooldown self.character :mitosis (* 6 Duration.very-slow))
                     (cooldown new-character :mitosis (* 6 Duration.very-slow))
-                    (.raise-event self.character (MitosisEvent self.character
-                                                               new-character)))))]])
+                    (.raise-event self.character (new-mitosis-event self.character
+                                                                    new-character)))))]])
 
 #d(defn free-tiles [level tiles]
     (ap-filter (not (or

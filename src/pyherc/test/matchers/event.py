@@ -21,6 +21,7 @@
 Module for event listener matchers used in testing
 """
 
+from pyherc.events import e_event_type
 from hamcrest.core.base_matcher import BaseMatcher
 
 
@@ -69,3 +70,4 @@ def has_marked_for_redrawing(redraws):
     Check that item has given sections marked for redrawing
     """
     return EventRedraws(redraws)
+

@@ -28,7 +28,6 @@ import pyherc.generators.item
 from hamcrest import assert_that, equal_to, is_, is_in, is_not
 from mockito import any, mock, verify
 from pyherc.data import Character, add_item, get_items
-from pyherc.events import PickUpEvent
 from pyherc.rules import equip, unequip
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   EffectHandleBuilder, ItemBuilder,

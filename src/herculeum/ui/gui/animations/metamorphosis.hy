@@ -19,15 +19,16 @@
 
 (require hy.contrib.anaphoric)
 (import [herculeum.ui.gui.animations.animation [Animation]]
-        [herculeum.ui.gui [layers]])
+        [herculeum.ui.gui [layers]]
+        [pyherc.events [e-character e-new-character e-destroyed-characters]])
 
 (defclass MetamorphosisAnimation [Animation]
   "animation for metamorphosis"
   [[--init-- (fn [self event]
                (-> (super) (.--init-- event))
-               (setv self.character event.character)
-               (setv self.new-character event.new-character)
-               (setv self.destroyed-characters event.destroyed-characters)
+               (setv self.character (e-character event))
+               (setv self.new-character (e-new-character event))
+               (setv self.destroyed-characters (e-destroyed-characters event))
                nil)]
    [trigger (fn [self ui]
               (ap-each self.destroyed-characters

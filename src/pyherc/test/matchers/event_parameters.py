@@ -21,7 +21,7 @@
 Module for matching inventory action arguments
 """
 from mockito.matchers import Matcher
-
+from pyherc.events import e_event_type
 
 class EventType(Matcher):
     """
@@ -47,7 +47,10 @@ class EventType(Matcher):
         :returns: True if match, otherwise False
         :rtype: boolean
         """
-        return arg.event_type == self.event_type
+        if not arg:
+            return False
+
+        return e_event_type(arg) == self.event_type
 
     def __repr__(self):
         """
@@ -57,3 +60,10 @@ class EventType(Matcher):
         :rtype: string
         """
         return 'event_type: {0}'.format(self.event_type)
+
+
+def event_type_of(event_type):
+    """
+    Check that item is an event of given type
+    """
+    return EventType(event_type)

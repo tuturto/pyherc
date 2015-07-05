@@ -18,14 +18,15 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [herculeum.ui.gui.animations.animation [Animation]]
-	[herculeum.ui.gui [layers]])
+        [herculeum.ui.gui [layers]]
+        [pyherc.events [e-character e-new-character]])
 
 (defclass MitosisAnimation [Animation]
   "animation for mitosis"
   [[--init-- (fn [self event]
 	       (-> (super) (.--init-- event))
-	       (setv self.character event.character)
-	       (setv self.new-character event.new-character)
+	       (setv self.character (e-character event))
+	       (setv self.new-character (e-new-character event))
 	       nil)]
    [trigger (fn [self ui]
 	      (.add-glyph ui self.new-character ui.scene

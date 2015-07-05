@@ -23,7 +23,7 @@
 (import [pyherc.aspects [log-debug]]
         [pyherc.data [skill-ready? cooldown add-character remove-character]]
         [pyherc.data.constants [Duration]]
-	[pyherc.events.metamorphosis [MetamorphosisEvent]])
+	[pyherc.events.metamorphosis [new-metamorphosis-event]])
 
 (defclass MetamorphosisAction []
   [[--init-- #d(fn [self character new-character-name character-generator rng
@@ -50,6 +50,6 @@
                   (cooldown new-character :metamorphosis (* 2 Duration.very-slow))
                   (ap-each self.destroyed-characters
                            (remove-character level it))
-                  (.raise-event self.character (MetamorphosisEvent self.character
-                                                                   new-character
-                                                                   self.destroyed-characters))))]])
+                  (.raise-event self.character (new-metamorphosis-event self.character
+                                                                        new-character
+                                                                        self.destroyed-characters))))]])

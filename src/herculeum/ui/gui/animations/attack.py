@@ -27,7 +27,7 @@ from random import Random
 from PyQt4.QtCore import (QEasingCurve, QPropertyAnimation,
                           QSequentialAnimationGroup)
 from herculeum.ui.gui.layers import zorder_counter
-
+from pyherc.events import e_target, e_damage
 
 class AttackHitAnimation(Animation):
     """
@@ -41,8 +41,8 @@ class AttackHitAnimation(Animation):
         """
         super().__init__(event)
 
-        self.location = event.target.location
-        self.damage = -event.damage.damage_inflicted
+        self.location = e_target(event).location
+        self.damage = -e_damage(event).damage_inflicted
         self.colour = 'white'
         self.offset = (0, 0)
 

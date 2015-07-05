@@ -24,3 +24,10 @@
    :location character.location
    :character character
    :target target})
+
+(defn new-lose-focus-event [character]
+  "event to indicate that character has lost focus"
+  {:event-type "lose focus"
+   :level character.level
+   :location character.location
+   :character character})

@@ -22,6 +22,7 @@ Module for small widgets
 """
 from PyQt4.QtGui import (QDockWidget, QFrame, QGridLayout, QHBoxLayout, QLabel,
                          QVBoxLayout, QWidget)
+from pyherc.events import e_event_type, e_character, e_target
 
 
 class HitPointsWidget(QWidget):
@@ -71,10 +72,10 @@ class HitPointsWidget(QWidget):
         """
         Receive update from entity
         """
-        if event.event_type == 'hit points changed':
-            self.show_hit_points(event.character)
-        elif event.event_type == 'spirit points changed':
-            self.show_spirit_points(event.character)
+        if e_event_type(event) == 'hit points changed':
+            self.show_hit_points(e_character(event))
+        elif e_event_type(event) == 'spirit points changed':
+            self.show_spirit_points(e_character(event))
 
     def show_hit_points(self, character):
         """
@@ -315,13 +316,13 @@ class EffectsWidget(QWidget):
         """
         Receive update from entity
         """
-        if event.event_type in ('heal started', 'poisoned',
-                                'heal ended', 'poison ended',
-                                'damage started', 'damage ended'):
+        if e_event_type(event) in ('heal started', 'poisoned',
+                                   'heal ended', 'poison ended',
+                                   'damage started', 'damage ended'):
             for i in range(self.layout().count()):
                 self.layout().itemAt(i).widget().close()
 
-            character = event.target
+            character = e_target(event)
             for effect in character.get_effects():
                 new_icon = QLabel()
                 new_icon.setPixmap(self.surface_manager.get_icon(effect.icon))

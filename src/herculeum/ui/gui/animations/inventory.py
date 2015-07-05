@@ -23,6 +23,7 @@ Classes for inventory animations
 
 from .animation import Animation
 from herculeum.ui.gui.layers import zorder_item
+from pyherc.events import e_item
 
 
 class DropAnimation(Animation):
@@ -37,7 +38,7 @@ class DropAnimation(Animation):
         """
         super().__init__(event)
 
-        self.item = event.item
+        self.item = e_item(event)
 
     def trigger(self, ui):
         """

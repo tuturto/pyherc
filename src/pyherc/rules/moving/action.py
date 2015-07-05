@@ -27,7 +27,7 @@ from pyherc.data import (add_character, move_character, get_trap, add_visited_le
 from pyherc.data.constants import Duration
 from pyherc.data.geometry import find_direction
 from pyherc.data.model import ESCAPED_DUNGEON
-from pyherc.events import MoveEvent, NewLevelEvent
+from pyherc.events import new_move_event, new_level_event
 
 
 class MoveAction():
@@ -87,16 +87,15 @@ class MoveAction():
 
             if self.new_level not in visited_levels(self.character):
                 add_visited_level(self.character, self.new_level)
-                self.character.raise_event(NewLevelEvent(
+                self.character.raise_event(new_level_event(
                     character=self.character,
                     new_level=self.new_level))
 
-            self.character.raise_event(MoveEvent(
-                mover=self.character,
+            self.character.raise_event(new_move_event(
+                character=self.character,
                 old_location=old_location,
                 old_level=old_level,
-                direction=direction,
-                affected_tiles=affected_tiles))
+                direction=direction))
 
         else:
             self.character.add_to_tick(Duration.instant)

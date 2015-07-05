@@ -26,6 +26,7 @@ from random import Random
 from PyQt4.QtCore import (QEasingCurve, QPropertyAnimation,
                           QSequentialAnimationGroup)
 from herculeum.ui.gui.layers import zorder_counter
+from pyherc.events import e_target
 
 
 class HealAddedAnimation(Animation):
@@ -40,7 +41,7 @@ class HealAddedAnimation(Animation):
         """
         super().__init__(event)
 
-        self.location = event.target.location
+        self.location = e_target(event).location
         self.text = 'healing'
         self.colour = 'blue'
         self.offset = (0, 16)

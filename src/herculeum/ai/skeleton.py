@@ -25,7 +25,7 @@ from pyherc.ai.pathfinding import a_star
 from pyherc.aspects import log_debug
 from pyherc.data.geometry import find_direction
 from pyherc.data import find_free_space
-from pyherc.events import LoseFocusEvent, NoticeEvent
+from pyherc.events import new_lose_focus_event, new_notice_event
 from pyherc.rules import attack, equip, is_move_legal, move
 
 
@@ -74,13 +74,13 @@ class SkeletonWarriorAI():
         if distance < 4:
             if self.mode != 'combat':
                 self.character.raise_event(
-                                    NoticeEvent(character = self.character,
-                                                target = model.player))
+                                    new_notice_event(character = self.character,
+                                                     target = model.player))
             self.mode = 'combat'
         else:
             if self.mode != 'patrol':
                 self.character.raise_event(
-                                LoseFocusEvent(character = self.character))
+                                new_lose_focus_event(character = self.character))
             self.mode = 'patrol'
 
         if self.mode == 'patrol':

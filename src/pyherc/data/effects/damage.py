@@ -23,8 +23,8 @@ Module for damage
 from pyherc.aspects import log_debug
 from pyherc.data.damage import Damage
 from pyherc.data.effects.effect import Effect
-from pyherc.events import (DamageAddedEvent, DamageEndedEvent,
-                           DamageTriggeredEvent)
+from pyherc.events import (new_damage_added_event, new_damage_ended_event,
+                           new_damage_triggered_event)
 
 
 class DamageEffect(Effect):
@@ -58,9 +58,9 @@ class DamageEffect(Effect):
         damage.apply_damage(self.target)
 
         self.target.raise_event(
-            DamageTriggeredEvent(target=self.target,
-                                 damage=self.damage,
-                                 damage_type=self.damage_type))
+            new_damage_triggered_event(target=self.target,
+                                       damage=self.damage,
+                                       damage_type=self.damage_type))
 
         dying_rules.check_dying(self.target)
 
@@ -72,8 +72,8 @@ class DamageEffect(Effect):
         :returns: event describing adding of this effect
         :rtype: Event
         """
-        return DamageAddedEvent(target=self.target,
-                                effect=self)
+        return new_damage_added_event(target=self.target,
+                                      effect=self)
 
     @log_debug
     def get_removal_event(self):
@@ -83,5 +83,5 @@ class DamageEffect(Effect):
         :return: event describing removal of this event
         :rtype: Event
         """
-        return DamageEndedEvent(target=self.target,
-                                effect=self)
+        return new_damage_ended_event(target=self.target,
+                                      effect=self)
