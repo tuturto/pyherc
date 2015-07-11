@@ -284,15 +284,16 @@ class PlayMapWidget(QWidget):
         """
         Constructs scene to display
         """
+        for anim in [x for x in self.animations]:
+            anim.stop()
+            anim.clear()
+
         for item in (item for item in scene.items()
                      if hasattr(item, 'clear_update_registration')):
             item.clear_update_registration()
 
         for adapter in self.animation_adapters:
             adapter.glyphs.clear()
-
-        for anim in [x for x in self.animations]:
-            anim.clear()
 
         self.animations = []
 
