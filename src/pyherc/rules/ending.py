@@ -67,8 +67,7 @@ class Dying():
                 character.model.end_condition = DIED_IN_DUNGEON
 
             character.raise_event(
-                new_death_event(deceased=character,
-                                affected_tiles=character.location))
+                new_death_event(deceased=character))
             remove_character(character.level, character)
 
     @log_info

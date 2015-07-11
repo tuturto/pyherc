@@ -59,7 +59,7 @@ class PickUpAnimation(Animation):
         """
         super().__init__(event)
 
-        self.item = event.item
+        self.item = e_item(event)
 
     def trigger(self, ui):
         """

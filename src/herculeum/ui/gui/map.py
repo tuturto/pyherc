@@ -31,6 +31,7 @@ from herculeum.ui.gui.layers import (zorder_floor, zorder_wall, zorder_ornament,
                                      zorder_item, zorder_character,
                                      zorder_counter)
 from pyherc.data.model import DIED_IN_DUNGEON
+from pyherc.events import e_event_type
 from pyherc.rules import (attack, cast, is_move_legal, move, pick_up, wait,
                           is_dig_legal, dig)
 from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
@@ -385,7 +386,7 @@ class PlayMapWidget(QWidget):
         """
         Receive update from entity
         """
-        if event.event_type == 'move':
+        if e_event_type(event) == 'move':
             if self.model.player.level != self.current_level:
                 self.__construct_scene(self.model, self.scene)
                 self.__center_view_on_character(self.model.player)
