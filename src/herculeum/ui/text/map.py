@@ -27,6 +27,7 @@ from herculeum.ui.text.inventory import InventoryScreen
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import DIED_IN_DUNGEON
 from pyherc.rules import attack, is_move_legal, move, pick_up, wait
+from pyherc.events import e_event_type
 
 
 class MapScreen():
@@ -259,24 +260,24 @@ class MapScreen():
                 self.messages = []
                 self.screen.addstr(0, 0, ' '.ljust(80))
 
-        if event.event_type in ['attack hit',
-                                    'attack miss',
-                                    'attack nothing',
-                                    'poison triggered',
-                                    'poison ended',
-                                    'poisoned',
-                                    'heal started',
-                                    'heal ended',
-                                    'heal triggered',
-                                    'death',
-                                    'pick up',
-                                    'drop',
-                                    'damage triggered',
-                                    'equip',
-                                    'unequip',
-                                    'notice',
-                                    'lose focus',
-                                    'error']:
+        if e_event_type(event) in ['attack hit',
+                                   'attack miss',
+                                   'attack nothing',
+                                   'poison triggered',
+                                   'poison ended',
+                                   'poisoned',
+                                   'heal started',
+                                   'heal ended',
+                                   'heal triggered',
+                                   'death',
+                                   'pick up',
+                                   'drop',
+                                   'damage triggered',
+                                   'equip',
+                                   'unequip',
+                                   'notice',
+                                   'lose focus',
+                                   'error']:
             message = event.get_description(self.model.player)
             self.messages.append(message)
             if len(self.messages) > 2:

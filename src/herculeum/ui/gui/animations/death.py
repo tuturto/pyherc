@@ -42,12 +42,7 @@ class DeathAnimation(Animation):
         """
         Trigger this animation
         """
-        glyphs = [x for x in ui.view.items()
-                  if (hasattr(x, 'entity'))
-                  and (x.entity == self.deceased)]
-
-        for glyph in glyphs:
-            ui.view.scene().removeItem(glyph)
+        ui.remove_glyph(self.deceased)
 
         if self.deceased == ui.model.player:
             ui.EndScreenRequested.emit()

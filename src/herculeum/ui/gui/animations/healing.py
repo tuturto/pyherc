@@ -80,7 +80,13 @@ class HealAddedAnimation(Animation):
         fading.setEndValue(0.0)
         animation.addAnimation(fading)
 
-        animation.finished.connect(ui.remove_finished_animation)
+        def clean_up():
+            animation.stop()
+            ui.animations.remove(animation)
+            ui.view.items().remove(damage_counter)
+            ui.remove_finished_animation()
+
+        animation.finished.connect(clean_up)
         ui.animations.append(animation)
 
         animation.start()
@@ -141,7 +147,12 @@ class HealTriggeredAnimation(Animation):
         fading.setEndValue(0.0)
         animation.addAnimation(fading)
 
-        animation.finished.connect(ui.remove_finished_animation)
+        def clean_up():
+            animation.stop()
+            ui.animations.remove(animation)
+            ui.view.items().remove(damage_counter)
+            ui.remove_finished_animation()
+
         ui.animations.append(animation)
 
         animation.start()

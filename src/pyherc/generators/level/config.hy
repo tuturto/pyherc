@@ -41,7 +41,6 @@
                                   [] [] [] [] [] [] (:description level))))
   (ap-each (genexpr comp [comp (.keys level)] (not (in comp [:level-name :description])))
            (merge-component-list it dungeon level)))
-;; TODO: handle level-description
 
 (defn new-level [level-name room-generators partitioners decorators
                  items characters portal-config description]

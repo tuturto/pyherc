@@ -288,10 +288,6 @@ class PlayMapWidget(QWidget):
             anim.stop()
             anim.clear()
 
-        for item in (item for item in scene.items()
-                     if hasattr(item, 'clear_update_registration')):
-            item.clear_update_registration()
-
         for adapter in self.animation_adapters:
             adapter.glyphs.clear()
 
@@ -371,17 +367,14 @@ class PlayMapWidget(QWidget):
         """
         Remove finished animation
         """
-        finished_animations  = (x for x in self.animations
-                                if x.state() == QAbstractAnimation.Stopped)
-        counters = (x.animationAt(0).targetObject().object_to_animate
-                    for x in finished_animations)
+        finished_animations  = [x for x in self.animations
+                                if x.state() == QAbstractAnimation.Stopped]
+        counters = [x.animationAt(0).targetObject().object_to_animate
+                    for x in finished_animations] #TODO: works only if single thing is animated
 
         for item in finished_animations:
             item.clear()
             self.animations.remove(item)
-
-        for item in counters:
-            self.view.scene().removeItem(item)
 
     def receive_update(self, event):
         """
@@ -631,35 +624,3 @@ class MapGlyph(QGraphicsPixmapItem):
         .. versionadded:: 0.10
         """
         self.setPixmap(self.tiles[frame])
-
-    def receive_update(self, event):
-        """
-        Receive event from model
-        """
-        if event.event_type == 'move':
-            location = event.mover.location
-            direction = event.direction
-
-            if direction in (2, 3, 4):
-                self.flipped = True
-                self.offset = 32
-
-            if direction in (6, 7, 8):
-                self.flipped = False
-                self.offset = 0
-
-            if location != None:
-                self.setPos(location[0] * 32 + self.offset,
-                            location[1] * 32)
-
-            if self.flipped:
-                self.setTransform(QTransform.fromScale(-1, 1))
-            else:
-                self.setTransform(QTransform.fromScale(1, 1))
-
-    def clear_update_registration(self):
-        """
-        Clear update registrations
-        """
-        if self.entity != None:
-            self.entity.remove_from_updates(self)
