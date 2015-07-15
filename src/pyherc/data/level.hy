@@ -72,19 +72,19 @@
     (assoc (:tiles level) location (new-tile)))
   (get (:tiles level) location))
 
-(defn floor-tile [level location &optional [tile-id :no-tile]]
+(defn floor-tile [level location &optional [tile-id "no-tile"]]
   "get/set floor tile at given location"
-  (if (!= tile-id :no-tile)
+  (if (!= tile-id "no-tile")
     (do (let [[map-tile (get-or-create-tile level location)]]
           (assoc map-tile :floor tile-id)
           (:floor map-tile)))
     (do (let [[map-tile (get-tile level location)]]
           (when map-tile (:floor map-tile))))))
 
-(defn wall-tile [level location &optional [tile-id :no-tile]]
+(defn wall-tile [level location &optional [tile-id "no-tile"]]
   "get/set wall tile at given location"
   (assert (!= tile-id []))
-  (if (!= tile-id :no-tile)
+  (if (!= tile-id "no-tile")
     (do (let [[map-tile (get-or-create-tile level location)]]
           (assoc map-tile :wall tile-id)
           (:wall map-tile)))
@@ -95,8 +95,8 @@
   "get tile at given location, may be floor or wall"
   (let [[map-tile (get-tile level location)]]
     (when map-tile
-      (when :wall map-tile (:wall map-tile))
-      (when :floor map-tile (:floor map-tile)))))
+      (when (:wall map-tile) (:wall map-tile))
+      (when (:floor map-tile) (:floor map-tile)))))
 
 #d(defn add-portal [level location portal &optional other-end]
     "add a new portal"
@@ -144,9 +144,9 @@
   "check if given location blocks line of sight"
   (wall-tile level location))
 
-(defn ornamentation [level location &optional [tile-id :no-tile]]
+(defn ornamentation [level location &optional [tile-id "no-tile"]]
   (assert (!= tile-id []))
-  (if (!= tile-id :no-tile)
+  (if (!= tile-id "no-tile")
     (do (let [[map-tile (get-or-create-tile level location)]]
           (.append (:ornamentation map-tile) tile-id)
           (:ornamentation map-tile)))
@@ -160,9 +160,9 @@
     (setv item.level level)
     (.append (:items (get-or-create-tile level location)) item))
 
-(defn get-items [level &optional [location :no-location]]
+(defn get-items [level &optional [location "no-location"]]
   "get items in a given tile or in level in general"
-  (if (= location :no-location)
+  (if (= location "no-location")
     (genexpr item [item (:items level)])
     (do
      (let [[map-tile (get-tile level location)]]

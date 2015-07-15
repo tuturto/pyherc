@@ -191,8 +191,8 @@
   (let [[rng random]
         [level (-> (LevelBuilder)
                    (.with-size #t(10 10))
-                   (.with-floor-tile :floor-empty)
-                   (.with-wall-tile :wall-empty)
+                   (.with-floor-tile "floor-empty")
+                   (.with-wall-tile "wall-empty")
                    (.build))]
         [section (new-section #t(0 0) #t(10 10) level rng)]]
     {:level level
@@ -203,33 +203,33 @@
   (let [[context (setup-level-access)]
         [section (:section context)]
         [level (:level context)]]
-    (section-floor section #t(5 5) :floor-rock nil)
+    (section-floor section #t(5 5) "floor-rock" nil)
     (assert-that (floor-tile level #t(5 5))
-                 (is- (equal-to :floor-rock)))))
+                 (is- (equal-to "floor-rock")))))
 
 (defn test-setting-wall []
   "test that wall can be set"
   (let [[context (setup-level-access)]
         [section (:section context)]
         [level (:level context)]]
-    (section-wall section #t(2 2) :wall-ground nil)
+    (section-wall section #t(2 2) "wall-ground" nil)
     (assert-that (wall-tile level #t(2 2))
-                 (is- (equal-to :wall-ground)))))
+                 (is- (equal-to "wall-ground")))))
 
 (defn test-setting-location-type []
   "test that location type can be set correctly"
   (let [[context (setup-level-access)]
         [section (:section context)]
         [level (:level context)]]
-    (section-floor section #t(2 3) :floor-rock "corridor")
+    (section-floor section #t(2 3) "floor-rock" "corridor")
     (assert-that (get-location-tags level #t(2 3)) (has-item "corridor"))))
 
 (defn setup-level-access-with-offset []
   "setup test case for level access with offset"
   (let [[level (-> (LevelBuilder)
                    (.with-size #t(10 10))
-                   (.with-floor-tile :floor-empty)
-                   (.with-wall-tile :wall-empty)
+                   (.with-floor-tile "floor-empty")
+                   (.with-wall-tile "wall-empty")
                    (.build))]
         (section (new-section #t(5 5) #t(10 10) level random))]
     {:level level
@@ -240,18 +240,18 @@
   (let [[context (setup-level-access-with-offset)]
         [level (:level context)]
         [section (:section context)]]
-    (section-floor section #t(2 2) :floor-rock nil)
+    (section-floor section #t(2 2) "floor-rock" nil)
     (assert-that (floor-tile level #t(7 7))
-                 (is- (equal-to :floor-rock)))))
+                 (is- (equal-to "floor-rock")))))
 
 (defn test-setting-wall-with-offset []
   "test that offset section is correctly mapped to the level"
   (let [[context (setup-level-access-with-offset)]
         [level (:level context)]
         [section (:section context)]]
-    (section-wall section #t(3 2) :wall-ground nil)
+    (section-wall section #t(3 2) "wall-ground" nil)
     (assert-that (wall-tile level #t(8 7))
-                 (is- (equal-to :wall-ground)))))
+                 (is- (equal-to "wall-ground")))))
 
 (defn test-marking-neighbours []
   "test that list of sections can be marked neighbours"

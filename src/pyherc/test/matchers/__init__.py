@@ -22,8 +22,6 @@
 """
 Package for customer pyHamcrest matchers used in testing
 """
-import hy
-
 from .action import is_legal, is_illegal
 from .active_effects import has_effects, has_no_effects
 from .active_effects import has_effect

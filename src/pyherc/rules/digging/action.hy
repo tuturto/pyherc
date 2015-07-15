@@ -53,13 +53,13 @@
                     (clear-cache self.cache)
                     (.raise-event self.character (new-dig-event self.character
                                                                 cache items
-                                                           characters)))))]])
+                                                                characters)))))]])
 
 (defn using-spade? [character]
   "check if this character is currently using a spade"
   (let [[weapon character.inventory.weapon]]
     (if (= weapon nil) false
-        (if (in :spade weapon.tags) true false))))
+        (if (in "spade" weapon.tags) true false))))
 
 (defn distribute-items [level location items rng]
   "distribute items around given spot"

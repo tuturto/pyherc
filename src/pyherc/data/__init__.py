@@ -22,8 +22,6 @@
 """
 Module for data related modules and classes that represent state of the game
 """
-import hy
-
 from .dungeon import Dungeon
 from .portal import Portal
 

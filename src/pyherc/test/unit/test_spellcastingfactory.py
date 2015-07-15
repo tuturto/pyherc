@@ -20,7 +20,6 @@
 """
 Module for SpellCastingFactory related tests
 """
-import hy
 from hamcrest import assert_that, is_not  # pylint: disable-msg=E0611
 from mockito import any, mock, verify, when
 from pyherc.rules.magic.interface import SpellCastingParameters

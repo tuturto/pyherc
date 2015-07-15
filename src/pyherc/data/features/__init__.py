@@ -22,8 +22,6 @@
 """
 Module for special features on map
 """
-import hy
-
 from .cache import new_cache, feature_type, feature_location
 from .cache import feature_level, items_in_cache, characters_in_cache
 from .cache import clear_cache

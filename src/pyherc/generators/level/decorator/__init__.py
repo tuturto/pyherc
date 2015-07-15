@@ -22,7 +22,6 @@
 """
 Module for level decorators
 """
-import hy
 
 from .basic import WallBuilderDecorator, WallBuilderDecoratorConfig
 from .basic import DirectionalWallDecorator, DirectionalWallDecoratorConfig

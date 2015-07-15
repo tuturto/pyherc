@@ -22,8 +22,6 @@
 """
 Package for generation related activities
 """
-import hy
-
 from .dungeon import generate_dungeon
 from .item import ItemGenerator, ItemConfigurations, ItemConfiguration
 from .item import WeaponConfiguration, ArmourConfiguration

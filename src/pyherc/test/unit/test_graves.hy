@@ -52,26 +52,26 @@
 (defn configure-items []
   "create item configuration for this test"
   (let [[configs (ItemConfigurations (Random))]]
-    (.add-item configs (ItemConfiguration "dagger" 1 1 [:dagger] ["weapon"]
+    (.add-item configs (ItemConfiguration "dagger" 1 1 ["dagger"] ["weapon"]
                                           "common"))
-    (.add-item configs (ItemConfiguration "coin" 1 1 [:coin] [] "common"))
-    (.add-item configs (ItemConfiguration "spade" 1 1 [:spade] [:spade "weapon"]
+    (.add-item configs (ItemConfiguration "coin" 1 1 ["coin"] [] "common"))
+    (.add-item configs (ItemConfiguration "spade" 1 1 ["spade"] ["spade" "weapon"]
                                           "common"))
     (ItemGenerator configs)))
 
 (defn configure-characters [model item-generator]
   "create character configuration for this test"
   (partial generate-creature {"skeleton" (creature-config "skeleton" 1 1 1 1 1
-                                                          [:icons] 1)
-                              "pete" (creature-config "pete" 1 1 1 1 1 [:icons]
-                                                      1)}
+                                                          ["icons"] 1)
+                                         "pete" (creature-config "pete" 1 1 1 1 1 ["icons"]
+                                                                 1)}
            model item-generator (Random)))
 
 (defn setup[]
   (let [[model (Model)]
         [level (-> (LevelBuilder)
                    (.with-size #t(30 20))
-                   (.with-floor-tile :floor)
+                   (.with-floor-tile "floor")
                    (.with-wall-tile nil)
                    (.with-model model)
                    (.build))]
@@ -79,7 +79,7 @@
         [sections (partitioner level)]
         [item-generator (configure-items)]
         [character-generator (configure-characters model item-generator)]
-        [generator (LibraryRoomGenerator :floor :corridor nil :grave 100 
+        [generator (LibraryRoomGenerator "floor" "corridor" nil "grave" 100 
                                          (full-grave item-generator
                                                      character-generator)
                                          ["test"])]

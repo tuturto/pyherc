@@ -28,9 +28,9 @@
   "setup test cases"
   (let [[level (-> (LevelBuilder)
                    (.with-size #t(10 10))
-                   (.with-floor-tile :floor)
+                   (.with-floor-tile "floor")
                    (.build))]
-        [config (SurroundingDecoratorConfig [:any-level] :wall)]
+        [config (SurroundingDecoratorConfig ["any-level"] "wall")]
         [decorator (SurroundingDecorator config)]]
     {:level level
      :decorator decorator}))
@@ -41,7 +41,7 @@
         [level (:level context)]
         [decorator (:decorator context)]]
     (.decorate-level decorator level)
-    (assert-that (wall-tile level #t(0 -1)) (is- (equal-to :wall)))))
+    (assert-that (wall-tile level #t(0 -1)) (is- (equal-to "wall")))))
 
 
 (defn test-floors-not-added []

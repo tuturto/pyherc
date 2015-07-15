@@ -24,33 +24,33 @@
 
 (defn center-tile [section]
   "select center tile of section"
-  [(section-data section :center-point)])
+  [(section-data section "center-point")])
 
 (defn random-rows [percentage rng]
   "create selector for picking random row tiles"
   (fn [section]
-    (ap-each (section-data section :rows)
+    (ap-each (section-data section "rows")
              (when (<= (.randint rng 1 100) percentage)
                (yield it)))))
 
 (defn random-columns [percentage rng]
   "create selector for picking random column tiles"
   (fn [section]
-    (ap-each (section-data section :columns)
+    (ap-each (section-data section "columns")
              (when (<= (.randint rng 1 100) percentage)
                (yield it)))))
 
 (defn random-pillars [percentage rng]
   "create selector for picking random pillar tiles"
   (fn [section]
-    (ap-each (section-data section :pillars)
+    (ap-each (section-data section "pillars")
              (when (<= (.randint rng 1 100) percentage)
                (yield it)))))
 
 (defn center-area []
   "create selector for picking center area of room"
   (fn [section]
-    (ap-each (section-data section :center-area)
+    (ap-each (section-data section "center-area")
              (yield it))))
 
 (defn side-by-side [area]

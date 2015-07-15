@@ -20,7 +20,6 @@
 """
 Dictionary for behaviour driven tests
 """
-import hy
 from hamcrest.core.base_matcher import BaseMatcher
 from mockito import mock, when
 from pyherc.generators import get_effect_creator

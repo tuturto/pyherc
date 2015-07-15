@@ -20,7 +20,6 @@
 """
 Module for item effect tests
 """
-import hy
 from random import Random
 
 from hamcrest import assert_that, equal_to, greater_than, has_item, is_, is_not

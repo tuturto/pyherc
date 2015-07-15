@@ -52,11 +52,11 @@
 
 (defn test-square-room []
   "test generating square room"
-  (run-generator (square-room :floor :floor)))
+  (run-generator (square-room "floor" "floor")))
 
 (defn test-circular-room []
   "test generating circular room"
-  (run-generator (circular-room :floor :floor)))
+  (run-generator (circular-room "floor" "floor")))
 
 (defn test-circular-cache-room []
   "test generating circular cache room"
@@ -64,7 +64,7 @@
         [config (:config context)]
         [item-generator config.item-generator]
         [creature-generator config.creature-generator]]
-    (run-generator (circular-cache-room :floor :floor [:cache-tile] 
+    (run-generator (circular-cache-room "floor" "floor" ["cache-tile"] 
                                         (mundane-items 50
                                                        item-generator
                                                        rng)
@@ -78,7 +78,7 @@
         [config (:config context)]
         [item-generator config.item-generator]
         [creature-generator config.creature-generator]]
-    (run-generator (circular-graveyard :floor :floor [:cache-tile] 
+    (run-generator (circular-graveyard "floor" "floor" ["cache-tile"] 
                                        (mundane-items 50 item-generator rng)
                                        (skeletons 50 creature-generator
                                                   rng)))))
@@ -89,38 +89,38 @@
         [config (:config context)]
         [item-generator config.item-generator]
         [creature-generator config.creature-generator]]
-    (run-generator (square-graveyard :floor :floor [:cache-tile] 
+    (run-generator (square-graveyard "floor" "floor" ["cache-tile"] 
                                      (mundane-items 50 item-generator rng)
                                      (skeletons 50 creature-generator rng)))))
 
 (defn test-square-library []
   "test generating square library"
-  (run-generator (square-library :floor :floor [:shelves])))
+  (run-generator (square-library "floor" "floor" ["shelves"])))
 
 (defn test-circular-library []
   "test generating circular library"
-  (run-generator (circular-library :floor :floor [:shelves])))
+  (run-generator (circular-library "floor" "floor" ["shelves"])))
 
 (defn test-square-pitroom []
   "test generating square pitroom"
-  (run-generator (square-pitroom :floor :floor :pit)))
+  (run-generator (square-pitroom "floor" "floor" "pit")))
 
 (defn test-circular-pitroom []
   "test generating circular pitroom"
-  (run-generator (circular-pitroom :floor :floor :pit)))
+  (run-generator (circular-pitroom "floor" "floor" "pit")))
 
 (defn test-square-band-room []
   "test generating square room with 2 tilings"
-  (run-generator (square-band-room :floor1 :floor2 :floor)))
+  (run-generator (square-band-room "floor1" "floor2" "floor")))
 
 (defn test-square-banded-library []
   "test generating library with 2 tilings"
-  (run-generator (square-banded-library :floor :floor :floor [:shelves] )))
+  (run-generator (square-banded-library "floor" "floor" "floor" ["shelves"] )))
 
 (defn test-circular-band-room []
   "test generating circular room with 2 tilings"
-  (run-generator (circular-band-room :floor :floor :floor)))
+  (run-generator (circular-band-room "floor" "floor" "floor")))
 
 (defn test-pillar-room []
   "test generating pillar rooms"
-  (run-generator (pillar-room :floor :floor [:pillar])))
+  (run-generator (pillar-room "floor" "floor" ["pillar"])))

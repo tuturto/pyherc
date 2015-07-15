@@ -27,7 +27,7 @@
   (let [[level (-> (LevelBuilder)
                    (.with-size #t(10 10))
                    (.with-wall-tile nil)
-                   (.with-floor-tile :floor)
+                   (.with-floor-tile "floor")
                    (.build))]]
     {:level level}))
 
@@ -35,15 +35,15 @@
   "wall should be detected"
   (let [[context (setup)]
         [level (:level context)]]
-    (wall-tile level #t(6 5) :wall)
+    (wall-tile level #t(6 5) "wall")
     (assert-that (next-to-wall? level #t(6 6)) (is- (equal-to true)))))
 
 (defn test-blocked-is-not-wall []
   "blocked tile is not next to wall"
   (let [[context (setup)]
         [level (:level context)]]
-    (wall-tile level #t(6 5) :wall)
-    (wall-tile level #t(6 6) :wall)
+    (wall-tile level #t(6 5) "wall")
+    (wall-tile level #t(6 6) "wall")
     (assert-that (next-to-wall? level #t(6 6)) (is- (equal-to false)))))
 
 (defn test-empty-space-is-not-wall []
@@ -60,13 +60,13 @@
     (wall-tile level #t(6 7))
     (assert-that (next-to-wall? level #t(6 6)) (is- (equal-to false)))))
 
-(defn test-corner.is-reported-next-to-wall []
+(defn test-corner-is-reported-next-to-wall []
   "corner should be considered next to wall"
   (let [[context (setup)]
         [level (:level context)]]
-    (wall-tile level #t(6 5) :wall)
-    (wall-tile level #t(7 5) :wall)
-    (wall-tile level #t(7 6) :wall)
+    (wall-tile level #t(6 5) "wall")
+    (wall-tile level #t(7 5) "wall")
+    (wall-tile level #t(7 6) "wall")
     (assert-that (next-to-wall? level #t(6 6)) (is- (equal-to true)))))
 
 (defn test-empty-space-is-recognized []
@@ -79,14 +79,14 @@
   "blocked location is not recognized as empty area"
   (let [[context (setup)]
         [level (:level context)]]
-    (wall-tile level #t(6 6) :wall)
+    (wall-tile level #t(6 6) "wall")
     (assert-that (open-area? level #t(6 6)) (is- (equal-to false)))))
 
 (defn test-next-to-wall-is-not-open-space []
   "area next to wall is not open space"
   (let [[context (setup)]
         [level (:level context)]]
-    (wall-tile level #t(6 6) :wall)
+    (wall-tile level #t(6 6) "wall")
     (assert-that (open-area? level #t(6 7)) (is- (equal-to false)))))
 
 (defn test-open-area-is-not-corridor []
@@ -99,22 +99,22 @@
   "area next to wall is not considered a corridor"
   (let [[context (setup)]
         [level (:level context)]]
-    (wall-tile level #t(5 5) :wall)
+    (wall-tile level #t(5 5) "wall")
     (assert-that (corridor? level #t(6 5)) (is- (equal-to false)))))
 
 (defn test-corner-is-not-corridor []
   "corner is not recognized as corridor"
   (let [[context (setup)]
         [level (:level context)]]
-    (wall-tile level #t(5 5) :wall)
-    (wall-tile level #t(6 5) :wall)
-    (wall-tile level #t(6 6) :wall)
+    (wall-tile level #t(5 5) "wall")
+    (wall-tile level #t(6 5) "wall")
+    (wall-tile level #t(6 6) "wall")
     (assert-that (corridor? level #t(5 6)) (is- (equal-to false)))))
 
 (defn test-corridor-is-detected []
   "area between two walls is corridor"
   (let [[context (setup)]
         [level (:level context)]]
-    (wall-tile level #t(5 5) :wall)
-    (wall-tile level #t(5 7) :wall)
+    (wall-tile level #t(5 5) "wall")
+    (wall-tile level #t(5 7) "wall")
     (assert-that (corridor? level #t(5 6)) (is- (equal-to true)))))

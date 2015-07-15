@@ -19,7 +19,7 @@
 
 (defn new-cache [level location items characters]
   "create a new cache"
-  {:type :cache
+  {:type "cache"
    :location location
    :level level
    :items items
@@ -29,14 +29,14 @@
   "type of the special feature"
   (:type feature))
 
-(defn feature-location [entity &optional [location :no-location]]
+(defn feature-location [entity &optional [location "no-location"]]
   "get/set location of an entity"
-  (when (!= location :no-location) (assoc entity :location location))
+  (when (!= location "no-location") (assoc entity :location location))
   (:location entity))
 
-(defn feature-level [entity &optional [level :no-level]]
+(defn feature-level [entity &optional [level "no-level"]]
   "get/set level of an entity"
-  (when (!= level :no-level) (assoc entity :level level))
+  (when (!= level "no-level") (assoc entity :level level))
   (:level entity))
 
 (defn items-in-cache [cache]

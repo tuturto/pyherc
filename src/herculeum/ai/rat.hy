@@ -26,7 +26,7 @@
 (defclass RatAI []
   [[__doc__ "AI routine for rats"]
    [character None]
-   [mode [:transit None]]
+   [mode ["transit" None]]
    [--init-- (fn [self character]
            "default constructor"
            (.--init-- (super RatAI self))

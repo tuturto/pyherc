@@ -47,15 +47,15 @@
   "check if given section is in a list of sections"
   (any (ap-map (equal-sections? section it) sections)))
 
-(defn section-data [section key &optional [value :no-data]]
+(defn section-data [section key &optional [value "no-data"]]
   "get/set section custom data"
-  (when (!= value :no-data)
+  (when (!= value "no-data")
     (assoc (:data section) key value))
   (get (:data section) key))
 
-(defn section-corners [section &optional [corners :no-corners]]
+(defn section-corners [section &optional [corners "no-corners"]]
   "get/set corners of this section"
-  (when (!= corners :no-corners) (setv (:corners section) corners))
+  (when (!= corners "no-corners") (setv (:corners section) corners))
   (:corners section))
 
 (defn section-level [section]
@@ -101,38 +101,38 @@
   #t((+ (left-edge section) (x-coordinate location))
      (+ (top-edge section) (y-coordinate location))))
 
-(defn section-floor [section location &optional [tile-id :no-tile] location-type]
+(defn section-floor [section location &optional [tile-id "no-tile"] location-type]
   "get/set floor tile in section"
   (let [[loc (section-to-map section location)]
         [level (:level section)]]
-    (when (!= tile-id :no-tile) (floor-tile level loc tile-id))
+    (when (!= tile-id "no-tile") (floor-tile level loc tile-id))
     (when location-type (add-location-tag level loc location-type))
     (floor-tile level loc tile-id)))
 
-(defn section-wall [section location &optional [tile-id :no-tile] location-type]
+(defn section-wall [section location &optional [tile-id "no-tile"] location-type]
   "get/set wall tile in section"
   (let [[loc (section-to-map section location)]
         [level (:level section)]]
-    (when (!= tile-id :no-tile) (wall-tile level loc tile-id))
+    (when (!= tile-id "no-tile") (wall-tile level loc tile-id))
     (when location-type (add-location-tag level loc location-type))
     (wall-tile level loc tile-id)))
 
-(defn section-ornamentation [section location &optional [tile-id :no-tile]]
+(defn section-ornamentation [section location &optional [tile-id "no-tile"]]
   "get/set ornament in section"
   (let [[loc (section-to-map section location)]
         [level (:level section)]]
-    (when (!= tile-id :no-tile) (ornamentation level loc tile-id))
+    (when (!= tile-id "no-tile") (ornamentation level loc tile-id))
     (ornamentation level loc tile-id)))
 
 (defn section-trap [section location trap]
   "set trap in section"
   (add-trap (:level section) (section-to-map section location) trap))
 
-(defn section-location-tag [section location &optional [location-tag :no-tag]]
+(defn section-location-tag [section location &optional [location-tag "no-tag"]]
   "get/set location type in section"
   (let [[loc (section-to-map section location)]
         [level (:level section)]]
-    (when (!= location-tag :no-tag) (add-location-tag level loc location-tag))
+    (when (!= location-tag "no-tag") (add-location-tag level loc location-tag))
     (get-location-tags level loc)))
 
 (defn section-connections [section]
@@ -276,11 +276,11 @@
 
 (defn connected-up [section]
   (list-comp x [x (section-connections section)]
-                   (= x.direction "down")))
+             (= x.direction "down")))
 
 (defn connected-down [section]
-   (list-comp x [x (section-connections section)]
-                   (= x.direction "up")))
+  (list-comp x [x (section-connections section)]
+             (= x.direction "up")))
 
 
 (defclass Connection []

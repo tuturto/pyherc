@@ -39,7 +39,7 @@
                             nil
                             (Random))]
         [level (-> (LevelBuilder)
-                   (.with-floor-tile :floor)
+                   (.with-floor-tile "floor")
                    (.with-wall-tile nil)
                    (.build))]
         [character (generator "fungi")]

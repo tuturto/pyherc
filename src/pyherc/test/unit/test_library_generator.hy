@@ -52,11 +52,11 @@
                                                  location
                                                  (new-cache level
                                                             location
-                                                            [:coin]
-                                                            [:skeleton])))]
-        [generator (LibraryRoomGenerator :floor :corridor nil :grave 100
+                                                            ["coin"]
+                                                            ["skeleton"])))]
+        [generator (LibraryRoomGenerator "floor" "corridor" nil "grave" 100
                                          feature-creator ["test"])]]
     (ap-each sections (.generate-room generator it))
     (let [[grave (first (list (find-feature level)))]]
-      (assert-that (items-in-cache grave) (has-item :coin))
-      (assert-that (characters-in-cache grave) (has-item :skeleton)))))
+      (assert-that (items-in-cache grave) (has-item "coin"))
+      (assert-that (characters-in-cache grave) (has-item "skeleton")))))

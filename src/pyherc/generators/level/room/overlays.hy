@@ -30,39 +30,39 @@
   (fn [section]
     (let [[even-tiles []]
           [odd-tiles []]]
-      (ap-each (section-data section :room-tiles)
+      (ap-each (section-data section "room-tiles")
                (when (free-around? section it)
                  (if (odd? (second it)) (.append odd-tiles it)
                      (.append even-tiles it))))
-      (section-data section :even-rows even-tiles)
-      (section-data section :odd-rows odd-tiles)
+      (section-data section "even-rows" even-tiles)
+      (section-data section "odd-rows" odd-tiles)
       (if (> (len even-tiles) (len odd-tiles))
-        (section-data section :rows even-tiles)
-        (section-data section :rows odd-tiles)))))
+        (section-data section "rows" even-tiles)
+        (section-data section "rows" odd-tiles)))))
 
 (defn add-columns []
   "create generator for pre-placing columns"
   (fn [section]
     (let [[even-tiles []]
           [odd-tiles []]]
-      (ap-each (section-data section :room-tiles)
+      (ap-each (section-data section "room-tiles")
                (when (free-around? section it)
                  (if (odd? (first it)) (.append odd-tiles it)
                      (.append even-tiles it))))
-      (section-data section :even-columns even-tiles)
-      (section-data section :odd-columns odd-tiles)
+      (section-data section "even-columns" even-tiles)
+      (section-data section "odd-columns" odd-tiles)
       (if (> (len even-tiles) (len odd-tiles))
-        (section-data section :columns even-tiles)
-        (section-data section :columns odd-tiles)))))
+        (section-data section "columns" even-tiles)
+        (section-data section "columns" odd-tiles)))))
 
 (defn mark-center-area []
   "create generator to mark center area of room"
   (fn [section]
     (let [[center-tiles []]]
-      (ap-each (section-data section :room-tiles)
+      (ap-each (section-data section "room-tiles")
                (when (free-around? section it)
                  (.append center-tiles it)))
-      (section-data section :center-area center-tiles))))
+      (section-data section "center-area" center-tiles))))
 
 (defn free-around? [section location]
   "are tiles around given section location free?"

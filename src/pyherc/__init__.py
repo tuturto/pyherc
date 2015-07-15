@@ -21,4 +21,4 @@
 pyherc is a rogue clone
 """
 
-pass
+import hy

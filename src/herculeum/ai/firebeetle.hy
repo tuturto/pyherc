@@ -26,7 +26,7 @@
 (defclass FireBeetleAI []
   [[__doc__ "AI routine for fire beetles"]
    [character None]
-   [mode [:transit None]]
+   [mode ["transit" None]]
    [--init-- (fn [self character]
            "default constructor"
            (.--init-- (super FireBeetleAI self))

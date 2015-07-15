@@ -41,9 +41,9 @@
         [room-tiles []]]
     (for [loc-x (range 2 6)]
       (for [loc-y (range 2 6)]
-        (section-floor section #t(loc-x loc-y) :floor)
+        (section-floor section #t(loc-x loc-y) "floor")
         (.append room-tiles #t(loc-x loc-y))))
-    (section-data section :room-tiles room-tiles)
+    (section-data section "room-tiles" room-tiles)
     {:level level
      :section section}))
 
@@ -53,9 +53,9 @@
         [level (:level context)]
         [section (:section context)]]
     ((add-columns) section)
-    (assert-that (section-data section :columns) (isnot (has-item #t(3 5))))
-    (assert-that (section-data section :columns) (isnot (has-item #t(4 5))))
-    (assert-that (section-data section :columns) (isnot (has-item #t(5 5))))))
+    (assert-that (section-data section "columns") (isnot (has-item #t(3 5))))
+    (assert-that (section-data section "columns") (isnot (has-item #t(4 5))))
+    (assert-that (section-data section "columns") (isnot (has-item #t(5 5))))))
 
 (defn test-free-around []
   "free around should report if area is free around given location"

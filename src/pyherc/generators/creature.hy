@@ -28,10 +28,10 @@
 #d(defn generate-creature [configuration model item-generator rng name]
     "Generate creature"
     (let [[config (get configuration name)]
-	  [creature (Character model)]
-	  [item-adder (partial add-item creature rng item-generator)]
-	  [effect-handle-adder (partial add-effect-handle creature)]
-	  [effect-adder (partial add-effect creature)]]
+          [creature (Character model)]
+          [item-adder (partial add-item creature rng item-generator)]
+          [effect-handle-adder (partial add-effect-handle creature)]
+          [effect-adder (partial add-effect creature)]]
       (set-creature-attributes creature config)
       (ap-each (:effect-handles config) (effect-handle-adder it))
       (ap-each (:effects config) (effect-adder it))
@@ -40,8 +40,8 @@
 
 
 #d(defn creature-config [name body finesse mind hp speed icons attack 
-			 &optional [ai nil] [effect-handles nil] [effects nil]
-			 [inventory nil] [description nil]]
+                         &optional [ai nil] [effect-handles nil] [effects nil]
+                         [inventory nil] [description nil]]
     "Create configuration for a creature"
     {:name name :body body :finesse finesse :mind mind :hp hp :speed speed
      :icons icons :attack attack :ai ai :description description
@@ -72,12 +72,12 @@
 
 (defn add-effect-handle [creature handle-spec]
   (.add-effect-handle creature (EffectHandle handle-spec.trigger
-					     handle-spec.effect
-					     handle-spec.parameters
-					     handle-spec.charges)))
+                                             handle-spec.effect
+                                             handle-spec.parameters
+                                             handle-spec.charges)))
 
 (defn add-item [creature rng item-generator item-spec]
   (let [[item-count (.randint rng (:min-amount item-spec) (:max-amount item-spec))]]
     (for [item (range item-count)]
       (.append creature.inventory
-	       (.generate-item item-generator (:item-name item-spec))))))
+               (.generate-item item-generator (:item-name item-spec))))))

@@ -34,14 +34,14 @@
   "setup test cases"
   (let [[model (Model)]
         [config {"fungi" (creature-config "fungi" 7 2 1 12 2 nil 2)
-                 "fire fungi" (creature-config "fire fungi" 7 2 1 12 2 nil 2)}]
+                         "fire fungi" (creature-config "fire fungi" 7 2 1 12 2 nil 2)}]
         [generator (partial generate-creature
                             config
                             model
                             nil
                             (Random))]
         [level (-> (LevelBuilder)
-                   (.with-floor-tile :floor)
+                   (.with-floor-tile "floor")
                    (.with-wall-tile nil)
                    (.build))]
         [character (generator "fungi")]

@@ -62,7 +62,7 @@ class TestLevel:
                                        ['skeleton']))
         feature = list(location_features(self.level, (5, 5)))[0]
 
-        assert_that(feature_type(feature), is_(equal_to('\ufdd0:cache')))
+        assert_that(feature_type(feature), is_(equal_to('cache')))
 
 
     def test_get_rooms(self):

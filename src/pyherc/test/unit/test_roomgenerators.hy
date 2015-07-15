@@ -40,35 +40,35 @@
 
 (defn test-catacombs-generator []
   "test generating catacombs"
-  (run-generator (CatacombsGenerator :floor nil ["test"] (Random))))
+  (run-generator (CatacombsGenerator "floor" nil ["test"] (Random))))
 
 (defn test-square-room-generator []
   "test generating square rooms"
-  (run-generator (SquareRoomGenerator :floor nil :corridor ["test"])))
+  (run-generator (SquareRoomGenerator "floor" nil "corridor" ["test"])))
 
 (defn test-pillar-room-generator []
   "test generating pillar rooms"
-  (run-generator (PillarRoomGenerator :floor nil :corridor :pillar ["test"])))
+  (run-generator (PillarRoomGenerator "floor" nil "corridor" "pillar" ["test"])))
 
 (defn test-crimson-lair-generator []
   "test generating crimson lair"
-  (run-generator (CrimsonLairGenerator :floor nil ["test"] (Random))))
+  (run-generator (CrimsonLairGenerator "floor" nil ["test"] (Random))))
 
 (defn test-circular-room-generator []
   "test generating circular room"
-  (run-generator (CircularRoomGenerator :floor :corridor ["test"])))
+  (run-generator (CircularRoomGenerator "floor" "corridor" ["test"])))
 
 (defn test-temple-generation []
   "test generating temple"
-  (run-generator (TempleRoomGenerator :floor :corridor :temple ["test"]
-                                      :candle)))
+  (run-generator (TempleRoomGenerator "floor" "corridor" "temple" ["test"]
+                                      "candle")))
 
 (defn test-library-generation []
   "test generating library"
-  (run-generator (LibraryRoomGenerator :floor :corridor [:shelf1 :shelf2] nil 50
+  (run-generator (LibraryRoomGenerator "floor" "corridor" ["shelf1" "shelf2"] nil 50
                                        nil ["test"])))
 
 (defn test-cacheroom-generation []
   "test generating cache room"
-  (run-generator (CacheRoomGenerator :floor :corridor (fn [level center-point])
+  (run-generator (CacheRoomGenerator "floor" "corridor" (fn [level center-point])
                                      ["test"])))

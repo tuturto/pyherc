@@ -24,15 +24,15 @@
 (defn test-zero-cooldown []
   "a skill with zero cool down is ready to be used"
   (let [[character (-> (CharacterBuilder)
-                       (.with-cooldown :shoryuken 0)
+                       (.with-cooldown "shoryuken" 0)
                        (.build))]]
-    (assert-that (skill-ready? character :shoryuken)
+    (assert-that (skill-ready? character "shoryuken")
                  (is- (equal-to true)))))
 
 (defn test-non-zero-cooldown []
   "a skill with non-zero cool down is not ready to be used"
   (let [[character (-> (CharacterBuilder)
-                       (.with-cooldown :shoryuken 200)
+                       (.with-cooldown "shoryuken" 200)
                        (.build))]]
-    (assert-that (skill-ready? character :shoryuken)
+    (assert-that (skill-ready? character "shoryuken")
                  (is- (equal-to false)))))

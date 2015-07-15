@@ -25,20 +25,20 @@
 (import [pyherc.aspects [log-debug log-info]]
         [pyherc.data [location-features get-tile]]
         [pyherc.data.features [feature-type]]
-	[pyherc.rules.digging.action [DigAction]])
+        [pyherc.rules.digging.action [DigAction]])
 
 (defclass DigFactory []
   [[--init-- #i(fn [self rng]
-		 "default constructor"
-		 (-> (super) (.--init--))
-		 (setv self.action-type "dig")
+                 "default constructor"
+                 (-> (super) (.--init--))
+                 (setv self.action-type "dig")
                  (setv self.rng rng)
-		 nil)]
+                 nil)]
    [can-handle #d(fn [self parameters]
-		   "can this factory handle a given action"
-		   (= self.action-type parameters.action-type))]
+                   "can this factory handle a given action"
+                   (= self.action-type parameters.action-type))]
    [get-action #d(fn [self parameters]
-		   "create digging action"
+                   "create digging action"
                    (let [[character parameters.character]
                          [location character.location]
                          [level character.level]
@@ -48,6 +48,6 @@
 (defn get-cache [level location]
   (let [[caches (list-comp feature 
                            [feature (location-features level location)]
-                           (= (feature-type feature) :cache))]]
+                           (= (feature-type feature) "cache"))]]
     (when (> (len caches) 0)
       (first caches))))

@@ -41,7 +41,7 @@
                (let [[location self.character.location]
                      [level self.character.level]]
                  (if (and
-                      (skill-ready? self.character :mitosis)
+                      (skill-ready? self.character "mitosis")
                       (list (free-tiles level (area-around location)))
                       (< (count (ap-filter (= self.character.name it.name) (get-characters level)))
                          self.character-limit))
@@ -56,8 +56,8 @@
                     (add-character level (.choice self.rng tiles) new-character)
                     (.add-to-tick self.character Duration.very-slow)
                     (.add-to-tick new-character Duration.very-slow)
-                    (cooldown self.character :mitosis (* 6 Duration.very-slow))
-                    (cooldown new-character :mitosis (* 6 Duration.very-slow))
+                    (cooldown self.character "mitosis" (* 6 Duration.very-slow))
+                    (cooldown new-character "mitosis" (* 6 Duration.very-slow))
                     (.raise-event self.character (new-mitosis-event self.character
                                                                     new-character)))))]])
 

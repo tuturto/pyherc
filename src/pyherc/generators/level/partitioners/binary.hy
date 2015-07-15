@@ -61,19 +61,19 @@
   "produce list of possible ways to split a section"
   (let [[directions []]]
     (if (< (* 2 (first room-min-size)) (section-width section))
-      (.append directions :horizontal))
+      (.append directions "horizontal"))
     (if (< (* 2 (second room-min-size)) (section-height section))
-      (.append directions :vertical))
+      (.append directions "vertical"))
     directions))
 
 (defn split-section [section direction room-min-size rng]
   "split section to a given direction"
-  (cond [(= direction :horizontal) (split-horizontally section 
-                                                       room-min-size 
-                                                       rng)]
-        [(= direction :vertical) (split-vertically section
-                                                   room-min-size
-                                                   rng)]))
+  (cond [(= direction "horizontal") (split-horizontally section 
+                                                        room-min-size 
+                                                        rng)]
+        [(= direction "vertical") (split-vertically section
+                                                    room-min-size
+                                                    rng)]))
 
 (defn random-cut-point [start end size rng]
   "select a random point between start and end, while leaving enough

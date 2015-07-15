@@ -20,8 +20,6 @@
 """
 package for configuring levels
 """
-import hy
-
 import herculeum.config.levels.catacombs
 import herculeum.config.levels.caverns
 import herculeum.config.levels.configure_items

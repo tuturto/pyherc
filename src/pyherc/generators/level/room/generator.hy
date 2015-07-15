@@ -23,7 +23,7 @@
 (import [random])
 (import [pyherc.data [distance-between]]
         [pyherc.generators.level.partitioners [section-floor
-                                                section-data]]
+                                               section-data]]
         [pyherc.generators.level.room.corridor [corridors]]
         [pyherc.generators.level.room.shapes [circular-shape
                                               square-shape]]
@@ -47,8 +47,8 @@
 
 (defn fill-columns [tile]
   (fn [section]
-    (ap-each (section-data section :columns) (section-floor section it tile))))
+    (ap-each (section-data section "columns") (section-floor section it tile))))
 
 (defn fill-rows [tile]
   (fn [section]
-    (ap-each (section-data section :rows) (section-floor section it tile))))
+    (ap-each (section-data section "rows") (section-floor section it tile))))
