@@ -222,12 +222,6 @@
                        (wall-creator ~bookshelf-tiles (random-rows 90 rng) rng)
                        (corridors ~corridor-tile)))
 
-(defmacro square-pitroom [floor-tile corridor-tile pit-tile]
-  `(new-room-generator (square-shape ~floor-tile rng)
-                       (mark-center-area)
-                       (trap-creator [~pit-tile] PitTrap (center-area) rng)
-                       (corridors ~corridor-tile)))
-
 (defmacro circular-pitroom [floor-tile corridor-tile pit-tile]
   `(new-room-generator (circular-shape ~floor-tile)
                        (mark-center-area)

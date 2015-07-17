@@ -23,7 +23,7 @@ Classes for creature generation
 
 from pyherc.aspects import log_debug, log_info
 from pyherc.data import (add_character, get_locations_by_tag, blocks_movement,
-                         get_trap)
+                         get_trap, safe_passage)
 
 
 class CreatureAdder():
@@ -113,21 +113,18 @@ class CreatureAdder():
         :type level: Level
         """
         for creature in creatures:
-            location_type = [x['location'] for x in creature_list
-                             if x['name'] == creature.name]
+            location_types = [x['location'] for x in creature_list
+                              if x['name'] == creature.name]
 
-            if location_type is None:
-                location_type = 'any'
+            if not location_types:
+                location_types = ['any']
+               
 
-            def suitable_location(location):
-                if blocks_movement(level, location):
-                    return False
-                if get_trap(level, location):
-                    return False
-                return True
-
-            locations = [location for location in (get_locations_by_tag(level, 'room'))
-                         if suitable_location(location)]
+            locations = []
+            for location_type in location_types:
+                locations.extend([location for location in (get_locations_by_tag(level,
+                                                                                 location_type))
+                                  if safe_passage(level, location)])
 
             if locations:
                 location = self.rng.choice(locations)

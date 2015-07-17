@@ -22,7 +22,7 @@ Classes for item generation
 """
 from pyherc.aspects import log_debug, log_info
 from pyherc.data import (add_item, get_locations_by_tag, blocks_movement, 
-                         get_trap)
+                         get_trap, safe_passage)
 
 
 class ItemAdder():
@@ -110,15 +110,8 @@ class ItemAdder():
             if location_type is None:
                 location_type = 'any'
 
-            def suitable_location(location):
-                if blocks_movement(level, location):
-                    return False
-                if get_trap(level, location):
-                    return False
-                return True
-
             locations = [location for location in (get_locations_by_tag(level, location_type))
-                         if suitable_location(location)]
+                         if safe_passage(level, location)]
 
             if locations:
                 location = self.rng.choice(locations)

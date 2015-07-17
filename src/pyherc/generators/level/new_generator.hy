@@ -45,7 +45,8 @@
                           portal-adders
                           decorators)
       (when portal
-        (let [[rooms (list (get-locations-by-tag level "room"))]]
+        (let [[rooms (genexpr x [x (get-locations-by-tag level "room")]
+                              (suitable-location level x))]]
           (when rooms (add-portal level
                                   (.choice rng rooms)
                                   (Portal #t(portal.other-end-icon nil) nil)

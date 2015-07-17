@@ -22,7 +22,8 @@ Module for adding portals
 """
 
 from pyherc.aspects import log_debug, log_info
-from pyherc.data import Portal, add_portal, get_locations_by_tag
+from pyherc.data import (Portal, add_portal, get_locations_by_tag,
+                         blocks_movement, get_trap, safe_passage)
 
 
 class PortalAdderConfiguration():
@@ -135,9 +136,10 @@ class PortalAdder():
         :param level: level to modify
         :type level: Level
         """
-        locations = list(get_locations_by_tag(level, self.location_type))
+        locations = [x for x in get_locations_by_tag(level, self.location_type)
+                     if safe_passage(level, x)]
 
-        if len(locations) > 0:
+        if locations:
             location = self.rng.choice(locations)
             portal = Portal(icons=self.icons,
                             level_generator_name=self.level_generator_name)

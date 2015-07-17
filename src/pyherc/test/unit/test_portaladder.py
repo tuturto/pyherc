@@ -50,7 +50,7 @@ class TestPortalAdder():
         """
         self.rng = random.Random()
         self.floor_rock = 1
-        self.wall_empty = 10
+        self.wall_empty = None
 
     def test_add_stairs_to_room(self):
         """
