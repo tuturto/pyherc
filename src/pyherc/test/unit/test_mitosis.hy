@@ -21,8 +21,9 @@
 (require pyherc.macros)
 (import [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
                                LevelBuilder MitosisFactoryBuilder]]
-        [pyherc.data [Model add-character get-characters]]
+        [pyherc.data [Model add-character get-characters add-trap]]
         [pyherc.data.geometry [distance-between area-around]]
+        [pyherc.data.traps [PitTrap]]
         [pyherc.rules.mitosis.interface [perform-mitosis mitosis-legal?]]
         [pyherc.generators [generate-creature creature-config]]
         [hamcrest [assert-that is- equal-to less-than greater-than-or-equal-to
@@ -48,6 +49,7 @@
                              (-> (MitosisFactoryBuilder)
                                  (.with-character-generator generator)
                                  (.with-character-limit 10)
+                                 (.with-dying-rules)
                                  (.build)))
                             (.build))]]
     (add-character level #t(5 5) character)
@@ -99,3 +101,14 @@
         [surrounding-tiles (area-around character.location)]]
     (ap-dotimes 9 (add-character level #t(it 2) (generator "fungi")))
     (assert-that (mitosis-legal? character action-factory) (is- (equal-to false)))))
+
+(defn test-mitosis-triggers-traps []
+  (let [[context (setup)]
+        [level (:level context)]
+        [character (:character context)]
+        [action-factory (:action-factory context)]
+        [generator (:generator context)]
+        [surrounding-tiles (area-around character.location)]]
+    (ap-each surrounding-tiles (add-trap level it (PitTrap)))
+    (perform-mitosis character action-factory)
+    (assert-that (count (get-characters level)) (is- (equal-to 1)))))

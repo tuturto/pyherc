@@ -274,7 +274,6 @@
                     (.build))]
          [section (new-section #t(10 10) #t(13 13) level random)]
          [check (fn [a b] (do
-                           (print a b)
                            (assert-that (adjacent-sections? a b)
                                         (equal-to true))))]]
         (for [x (range 9 12)]

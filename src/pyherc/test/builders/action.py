@@ -274,7 +274,9 @@ class ActionFactoryBuilder():
             self.gain_domain_factory = GainDomainFactoryBuilder().build()
 
         if self.use_real_mitosis_factory:
-            self.mitosis_factory = MitosisFactoryBuilder().build()
+            self.mitosis_factory = (MitosisFactoryBuilder()
+                                    .with_dying_rules(self.dying_rules)
+                                    .build())
 
         if self.use_real_metamorphosis_factory:
             self.metamorphosis_factory = MetamorphosisFactoryBuilder().build()
@@ -449,6 +451,8 @@ class MitosisFactoryBuilder():
         self.character_generator = mock()
         self.character_limit = 30
         self.rng = Random()
+        self.dying_rules = mock()
+        self.use_real_dying_rules = False
 
     def with_character_limit(self, character_limit):
         """
@@ -469,6 +473,16 @@ class MitosisFactoryBuilder():
         Configure random number generator to use
         """
         self.rng = rng
+
+    def with_dying_rules(self, dying_rules=None):
+        """
+        Configure rules for dying
+        """
+        if dying_rules:
+            self.dying_rules = dying_rules
+        else:
+            self.dying_rules = Dying()
+
         return self
 
     def build(self):
@@ -477,7 +491,8 @@ class MitosisFactoryBuilder():
         """
         return MitosisFactory(character_generator=self.character_generator,
                               character_limit=self.character_limit,
-                              rng=self.rng)
+                              rng=self.rng,
+                              dying_rules=self.dying_rules)
 
 class MetamorphosisFactoryBuilder():
     """

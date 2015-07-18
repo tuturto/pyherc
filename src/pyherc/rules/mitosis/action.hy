@@ -22,19 +22,20 @@
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
         [pyherc.data [skill-ready? cooldown blocks-movement get-character
-                      get-characters add-character]]
+                      get-characters add-character get-trap]]
         [pyherc.data.geometry [area-around]]
         [pyherc.data.constants [Duration]]
         [pyherc.events.mitosis [new-mitosis-event]])
 
 (defclass MitosisAction []
-  [[--init-- #d(fn [self character character-generator rng character-limit]
+  [[--init-- #d(fn [self character character-generator rng character-limit dying-rules]
                  "default constructor"
                  (-> (super) (.--init--))
                  (setv self.character character)
                  (setv self.character-generator character-generator)
                  (setv self.rng rng)
                  (setv self.character-limit character-limit)
+                 (setv self.dying-rules dying-rules)
                  nil)]
    [legal? #d(fn [self]
                "check if action is possible to perform"
@@ -59,7 +60,11 @@
                     (cooldown self.character "mitosis" (* 6 Duration.very-slow))
                     (cooldown new-character "mitosis" (* 6 Duration.very-slow))
                     (.raise-event self.character (new-mitosis-event self.character
-                                                                    new-character)))))]])
+                                                                    new-character))
+                    (let [[trap (get-trap new-character.level new-character.location)]]
+                      (when trap
+                        (.on-enter trap new-character)
+                        (.check-dying self.dying-rules new-character))))))]])
 
 #d(defn free-tiles [level tiles]
     (ap-filter (not (or

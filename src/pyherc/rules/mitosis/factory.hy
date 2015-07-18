@@ -19,23 +19,25 @@
 
 (require pyherc.aspects)
 (import [pyherc.aspects [log-debug log-info]]
-	[pyherc.rules.mitosis.action [MitosisAction]])
+        [pyherc.rules.mitosis.action [MitosisAction]])
 
 (defclass MitosisFactory []
-  [[--init-- #i(fn [self character-generator rng character-limit]
-		 "default constructor"
-		 (-> (super) (.--init--))
-		 (setv self.character-generator character-generator)
-		 (setv self.rng rng)
+  [[--init-- #i(fn [self character-generator rng character-limit dying-rules]
+                 "default constructor"
+                 (-> (super) (.--init--))
+                 (setv self.character-generator character-generator)
+                 (setv self.rng rng)
                  (setv self.character-limit character-limit)
-		 (setv self.action-type "mitosis")
-		 nil)]
+                 (setv self.action-type "mitosis")
+                 (setv self.dying-rules dying-rules)
+                 nil)]
    [can-handle #d(fn [self parameters]
-		   "can this factory handle a given action"
-		   (= self.action-type parameters.action-type))]
+                   "can this factory handle a given action"
+                   (= self.action-type parameters.action-type))]
    [get-action #d(fn [self parameters]
-		   "create mitosis action"
-		   (MitosisAction parameters.character
-				  self.character-generator
-				  self.rng
-                                  self.character-limit))]])
+                   "create mitosis action"
+                   (MitosisAction parameters.character
+                                  self.character-generator
+                                  self.rng
+                                  self.character-limit
+                                  self.dying-rules))]])

@@ -21,7 +21,8 @@
 (require pyherc.macros)
 
 (import [pyherc.data [new-level Portal add-portal get-locations-by-tag
-                      wall-tile level-name level-description]]
+                      wall-tile level-name level-description
+                      safe-passage]]
         [pyherc.generators.level.partitioners.old-grid [RandomConnector]])
 
 (defmacro run-generators-for [level &rest generators]
@@ -45,8 +46,8 @@
                           portal-adders
                           decorators)
       (when portal
-        (let [[rooms (genexpr x [x (get-locations-by-tag level "room")]
-                              (suitable-location level x))]]
+        (let [[rooms (list-comp x [x (get-locations-by-tag level "room")]
+                                (safe-passage level x))]]
           (when rooms (add-portal level
                                   (.choice rng rooms)
                                   (Portal #t(portal.other-end-icon nil) nil)
