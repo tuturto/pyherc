@@ -49,5 +49,5 @@ from .level import (get_tile, new_tile, floor_tile, add_portal, get_portal,
                     new_level, get_tiles,
                     location_features, add_location_feature,
                     remove_location_feature,
-                    level_name, level_description)
+                    level_name, level_description, safe_passage)
 from .locations import is_next_to_wall, is_corridor, is_open_area

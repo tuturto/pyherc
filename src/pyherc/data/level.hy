@@ -140,9 +140,15 @@
         (if (:floor map-tile) false true))
       true)))
 
-(defn  blocks-los [level location]
+(defn blocks-los [level location]
   "check if given location blocks line of sight"
   (wall-tile level location))
+
+(defn safe-passage [level location]
+  "check if given location is free to move without danger"
+  (all [(not (blocks-movement level location))
+        (not (get-trap level location))
+        (not (get-character level location))]))
 
 (defn ornamentation [level location &optional [tile-id "no-tile"]]
   (assert (!= tile-id []))
