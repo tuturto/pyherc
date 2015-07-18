@@ -23,7 +23,8 @@ Module for testing moving
 
 from hamcrest import assert_that, equal_to, is_
 from mockito import mock
-from pyherc.data import Model, Portal, add_portal, add_character, get_characters
+from pyherc.data import (Model, Portal, add_portal, add_character, get_characters,
+                         get_character)
 from pyherc.data.constants import Direction
 from pyherc.data.model import ESCAPED_DUNGEON
 from pyherc.ports import ActionsPort
@@ -310,26 +311,45 @@ class TestSwitchingPlaces():
         """
         super().__init__()
 
+        self.level = None
+        self.monster_1 = None
+        self.monster_2 = None
+        self.actions = None
+
+    def setup(self):
+        """
+        Test setup
+        """
+        self.level = LevelBuilder().build()
+
+        self.monster_1 = (CharacterBuilder()
+                          .build())
+
+        self.monster_2 = (CharacterBuilder()
+                          .build())
+
+        add_character(self.level, (5, 5), self.monster_1)
+        add_character(self.level, (6, 5), self.monster_2)
+
+        self.actions = ActionsPort(ActionFactoryBuilder()
+                                   .with_move_factory()
+                                   .build())
+
+
     def test_switch_places(self):
         """
         Two monsters can switch places
         """
-        level = LevelBuilder().build()
+        self.actions.move_character(self.monster_1, Direction.east)
 
-        monster_1 = (CharacterBuilder()
-                     .build())
+        assert_that(self.monster_1.location, is_(equal_to((6, 5))))
+        assert_that(self.monster_2.location, is_(equal_to((5, 5))))
 
-        monster_2 = (CharacterBuilder()
-                     .build())
+    def test_system_consistency(self):
+        """
+        Switching places should leave system in consistent state
+        """
+        self.actions.move_character(self.monster_1, Direction.east)
 
-        add_character(level, (5, 5), monster_1)
-        add_character(level, (6, 5), monster_2)
-
-        actions = ActionsPort(ActionFactoryBuilder()
-                              .with_move_factory()
-                              .build())
-
-        actions.move_character(monster_1, Direction.east)
-
-        assert_that(monster_1.location, is_(equal_to((6, 5))))
-        assert_that(monster_2.location, is_(equal_to((5, 5))))
+        assert_that(get_character(self.level, (6, 5)), is_(equal_to(self.monster_1)))
+        assert_that(get_character(self.level, (5, 5)), is_(equal_to(self.monster_2)))

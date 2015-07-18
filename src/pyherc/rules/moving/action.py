@@ -233,8 +233,29 @@ class SwitchPlacesAction():
         Execute this move
         """
         if self.is_legal():
+            old_location = self.other_character.location
+            old_level = self.other_character.level
+            target_location = self.character.location
+            target_level = self.character.level
+
+            remove_character(self.other_character.level, self.other_character)
             self.move_action_1.execute()
-            self.move_action_2.execute()
+            add_character(target_level, target_location, self.other_character)
+
+            self.other_character.raise_event(new_move_event(
+                character=self.other_character,
+                old_location=old_location,
+                old_level=old_level,
+                direction=find_direction(old_location, target_location)))
+
+            trap = get_trap(self.other_character.level,
+                            self.other_character.location)
+
+            if trap:
+                trap.on_enter(self.other_character)
+                self.dying_rules.check_dying(self.other_character)
+
+            self.other_character.add_to_tick(Duration.instant)
         else:
             self.character.add_to_tick(Duration.instant)
 
