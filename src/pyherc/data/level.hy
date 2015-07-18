@@ -127,8 +127,7 @@
     "find a free location within level"
     (let [[free-tiles (list-comp (first pair)
                                  [pair (.items (:tiles level))] 
-                                 (and (= (:wall (second pair)) nil)
-                                      (:floor (second pair))))]]
+                                 (safe-passage level (first pair)))]]
       (.choice random free-tiles)))
 
 (defn blocks-movement [level location]
