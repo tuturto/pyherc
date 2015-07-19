@@ -14,65 +14,84 @@ the escape for a long time and now it is finally time to start the journey.
 Installing the game
 *******************
 There are two ways of installing the game. First one is to install from
-PyPi_ by using pip.
+PyPi_ by using pip. This is recommended if you just want to play the game.
 
 Second option is to install Python interpreter, some libraries and run the game
-from source code.
+from source code. This is also the method you want to use in case you would like
+to do some hacking with the game.
 
-PyPi
-====
+First step in either method is to install python 3.4 from Python_, if you don't
+have it already installed.
 
-Install python 3.3 from Python_.
+Virtualenv
+==========
+Virtualenv is a tool to create isolated Python environments. For more detailed
+information, have a look at the official documentation of virtualenv_.
+
+Create a new virtual environment by executing (Linux specific, equivalent
+Windows instructions and testing would be appreciated)::
+
+    virtualenv -p /usr/bin/python3 --system-site-packages pyherc
+
+This will create a virtual environment using Python 3, having access to site-
+wide packages (important for PyQt4 to work properly) and giving it name pyherc.
+After creating the environment, activate it::
+
+    source pyherc/bin/activate
 
 Install setuptools, by following instructions at: setuptools_.
 
 Install PyQt4, by following instructions at: PyQt4_
 
+After this, proceed with eiher :ref:`pypi_instructions` or :ref:`src_instructions`.
+
+.. _pypi_instructions:
+
+PyPi
+====
 Install game and dependencies::
 
-    pip install -U hy
-    pip install -U decorator
-    pip install -U docopts
     pip install -U herculeum
 
 After this the game can be run by executing script herculeum from command line.
 
+.. _src_instructions:
+
 Source code distribution
 ========================
+.. note::
+
+   This method is recommended only if you plan to modify the game or build your
+   own game based on that. If you just want to play, see :ref:`pypi_instructions`.
+
 Source code distribution is more complicated to set up (not much though), but
-it gives you possibility to read and modify the source code. Start by
-installing required dependencies, unpack the distribution package to a folder
-and run the program by executing the herculeum script in scripts folder.
+it gives you possibility to read and modify the source code.
 
-Dependencies
-------------
-- Python 3.3
-- Hy 0.9.10
-- docopts 0.6.1
-- PyQt4
-- decorator
-- mockito-python 0.5.0 (only needed for running test cases)
-- pyHamcrest 1.6 (only needed for running test cases)
-- behave (only needed for running test cases)
-- Sphinx 1.1.3 (only needed for generating documentation)
+Clone repository by executing following in an empty directory::
 
-Installing dependencies
------------------------
-Install python 3.3 from Python_.
+    git clone https://github.com/tuturto/pyherc.git
 
-Install setuptools, by following instructions at: setuptools_.
+Install libraries by executing ::
 
-Install PyQt4, by following instructions at: PyQt4_
+    cd pyherc
+    pip install -U -r requirements-all.txt
 
-Install libraries::
+Before you can start the game, a resource file needs to be generated. This will
+collect various images and other resources, package them into a single file and copy
+the result in a correct directory ::
 
-    pip install -U -r dependencies
+   cd resources/qt
+   ./generate
+   cd ../..
 
-Install more libraries for playing around with the code::
 
-    pip install -U -r dependencies-dev
+If everything went smoothly, you can start the game by executing ::
+
+    cd src
+    ./scripts/herculeum
 
 .. _Python: http://python.org/getit/
 .. _setuptools: http://pypi.python.org/pypi/setuptools
 .. _PyQt4: http://www.riverbankcomputing.co.uk/software/pyqt/intro
 .. _PyPi: https://pypi.python.org/pypi/herculeum
+.. _virtualenv: https://virtualenv.pypa.io/en/latest/
