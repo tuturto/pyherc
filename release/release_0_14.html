@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Release 0.9 &mdash; Release notes</title>
+    <title>Release 0.14 &mdash; Release notes</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -28,35 +28,32 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="top" title="Release notes" href="index.html" />
-    <link rel="next" title="Release 0.10" href="release_0_10.html" />
-    <link rel="prev" title="Release 0.8" href="release_0_8.html" /> 
+    <link rel="prev" title="Release 0.13" href="release_0_13.html" /> 
   </head>
   <body>
       <div class="header"><h1 class="heading"><a href="index.html">
           <span>Release notes</span></a></h1>
-        <h2 class="heading"><span>Release 0.9</span></h2>
+        <h2 class="heading"><span>Release 0.14</span></h2>
       </div>
       <div class="topnav">
       
         <p>
-        «&#160;&#160;<a href="release_0_8.html">Release 0.8</a>
+        «&#160;&#160;<a href="release_0_13.html">Release 0.13</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
-        &#160;&#160;::&#160;&#160;
-        <a href="release_0_10.html">Release 0.10</a>&#160;&#160;»
         </p>
 
       </div>
       <div class="content">
         
         
-  <div class="section" id="release-0-9">
-<h1>Release 0.9<a class="headerlink" href="#release-0-9" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="release-0-14">
+<h1>Release 0.14<a class="headerlink" href="#release-0-14" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="new-features">
 <h2>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/46">46</a> curses interface</li>
+<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/112">112</a> better installation instructions</li>
 </ul>
 </div></blockquote>
 </div>
@@ -64,7 +61,10 @@
 <h2>Fixed bugs<a class="headerlink" href="#fixed-bugs" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/48">48</a> bug: Effects with None as duration or frequency cause crash when triggered</li>
+<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/114">114</a> fix setup.py</li>
+<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/111">111</a> bug: mitosis can create creatures on traps, without triggering them</li>
+<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/110">110</a> bug: creatures and stairs are sometimes placed on top of traps</li>
+<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/96">96</a> bug: two characters switching places cause level to be in inconsistent state</li>
 </ul>
 </div></blockquote>
 </div>
@@ -72,12 +72,11 @@
 <h2>Known bugs<a class="headerlink" href="#known-bugs" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/42">42</a> bug: character generator generates incorrect amount of items in inventory</li>
-<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/38">38</a> bug: damage effect does not take damage modifiers into account</li>
+<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/113">113</a> bug: items dropped in pit are floating</li>
+<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/97">97</a> bug: level generation sometimes places multiple characters in same location</li>
+<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/89">89</a> bug: CharacterBuilder does not add character to given level</li>
 <li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/25">25</a> bug: dying should make game to return to main screen</li>
 <li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/21">21</a> bug: PyQt user interface does not support line of sight</li>
-<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/9">9</a> bug: Attacks use hard coded time</li>
-<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/5">5</a> bug: Raised events are not filtered, but delivered to all creatures</li>
 </ul>
 </div></blockquote>
 </div>
@@ -85,7 +84,7 @@
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/47">47</a> switch to Python 3</li>
+<li><a class="reference external" href="https://github.com/tuturto/pyherc/issues/109">109</a> event system restructure</li>
 </ul>
 </div></blockquote>
 </div>
@@ -96,11 +95,9 @@
       <div class="bottomnav">
       
         <p>
-        «&#160;&#160;<a href="release_0_8.html">Release 0.8</a>
+        «&#160;&#160;<a href="release_0_13.html">Release 0.13</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
-        &#160;&#160;::&#160;&#160;
-        <a href="release_0_10.html">Release 0.10</a>&#160;&#160;»
         </p>
 
       </div>

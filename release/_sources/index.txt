@@ -24,6 +24,7 @@ Contents:
    release_0_11
    release_0_12
    release_0_13
+   release_0_14
 
 Indices and tables
 ==================
