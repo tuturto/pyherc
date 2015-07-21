@@ -14,15 +14,11 @@ fight, loot hidden caches and use some basic items.
 
 System Requirements
 ===================
-- Python 3.2
+- Python 3.4
 - PyQt4
 - decorator 3.4.0
-- hy 0.9.12
+- hy 0.11.0
 - docopt 0.6.1
-- mockito-python 0.5.0 (only needed for running test cases)
-- pyHamcrest 1.6 (only needed for running test cases)
-- behave (only needed for running test cases)
-- Sphinx 1.1.3 (only needed for generating documentation)
 
 Manual
 ======
@@ -48,12 +44,5 @@ Some graphics is from http://opengameart.org/content/dawnlike-16x16-universal-ro
 and are distributed under a CC-BY-SA 3.0 license. Great palette by DawnBringer.
 
 A star implementation adapted from one by Pauli Henrikki Rikula
-
-Other help
-----------
-Following people have contributed to the code in a way or another, thank you!
-
-- Chiman
-
 
 Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
