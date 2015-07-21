@@ -20,6 +20,8 @@
 # flake8: noqa
 
 from hamcrest import assert_that, equal_to, is_, less_than
+from pyherc.events import (e_event_type, e_target, e_attacker, e_old_hit_points,
+                           e_new_hit_points, e_damage)
 from pyherc.test.bdd.features.helpers import get_character
 from pyherc.test.cutesy import hit, make
 from pyherc.test.cutesy.dictionary import add_history_value, get_history_value
@@ -46,10 +48,10 @@ def impl(context, damage_type):
     observer = context.observer
 
     attack_hit_events = (x for x in context.observer.events
-                         if x.event_type == 'attack hit')
+                         if e_event_type(x) == 'attack hit')
 
     matching_events = [x for x in attack_hit_events
-                       if damage_type in x.damage.damage_types]
+                       if damage_type in e_damage(x).damage_types]
 
     assert len(matching_events) > 0
 
@@ -62,11 +64,11 @@ def impl(context, character_name):
     total_damage_suffered = old_hit_points - new_hit_points
 
     attack_hit_events = (x for x in context.observer.events
-                         if x.event_type == 'attack hit')
+                         if e_event_type(x) == 'attack hit')
     matching_events = [x for x in attack_hit_events
-                       if x.target.name == character_name]
+                       if e_target(x).name == character_name]
     hit_event = matching_events[0]
-    attacker = hit_event.attacker
+    attacker = e_attacker(hit_event)
 
     total_damage_from_weapon = sum([x[0] for x
                                    in attacker.inventory.weapon.weapon_data.damage])
@@ -78,21 +80,19 @@ def impl(context):
     observer = context.observer
 
     hp_events = [x for x in observer.events
-                 if hasattr(x, 'old_hit_points')
-                 and hasattr(x, 'new_hit_points')]
+                 if e_event_type(x) == 'hit points changed']
 
     hp_event = hp_events[0]
 
     attack_events = [x for x in observer.events
-                     if hasattr(x, 'attacker')
-                     and hasattr(x, 'target')]
+                     if e_event_type(x) == 'attack hit']
 
     attack_event = attack_events[0]
 
-    weapon = attack_event.attacker.inventory.weapon
+    weapon = e_attacker(attack_event).inventory.weapon
 
     expected_damage = sum(x[0] for x in weapon.weapon_data.damage)
-    realised_damage = hp_event.old_hit_points - hp_event.new_hit_points
+    realised_damage = e_old_hit_points(hp_event) - e_new_hit_points(hp_event)
 
     assert_that(realised_damage, is_(less_than(expected_damage)))
 
@@ -102,11 +102,10 @@ def impl(context, damage_amount):
     damage = int(damage_amount)
 
     hp_events = [x for x in observer.events
-                 if hasattr(x, 'old_hit_points')
-                 and hasattr(x, 'new_hit_points')]
+                 if e_event_type(x) == 'hit points changed']
     hp_event = hp_events[0]
 
-    realised_damage = hp_event.old_hit_points - hp_event.new_hit_points
+    realised_damage = e_old_hit_points(hp_event) - e_new_hit_points(hp_event)
 
     assert_that(realised_damage, is_(equal_to(damage)))
 
