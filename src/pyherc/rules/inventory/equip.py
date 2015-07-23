@@ -20,7 +20,7 @@
 """
 Module defining classes related to inventory actions
 """
-from pyherc.data import is_armour, is_weapon, is_ammunition
+from pyherc.data import is_armour, is_weapon, is_ammunition, is_boots
 from pyherc.aspects import log_debug, log_info
 from pyherc.events import new_equip_event
 from pyherc.rules.factory import SubActionFactory
@@ -98,6 +98,10 @@ class EquipAction():
                                                        self.item))
         if is_ammunition(self.item):
             self.character.inventory.projectiles = self.item
+            self.character.raise_event(new_equip_event(self.character,
+                                                       self.item))
+        elif is_boots(self.item):
+            self.character.inventory.boots = self.item
             self.character.raise_event(new_equip_event(self.character,
                                                        self.item))
 

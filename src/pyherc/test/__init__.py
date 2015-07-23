@@ -35,6 +35,7 @@ from pyherc.test.unit.test_overlapping_matcher import *
 from pyherc.test.unit.test_overlays import *
 from pyherc.test.unit.test_roomgenerators import *
 from pyherc.test.unit.test_section import *
+from pyherc.test.unit.test_shoes import *
 from pyherc.test.unit.test_skills import *
 from pyherc.test.unit.test_surround_decorator import *
 from pyherc.test.unit.test_trapgeneration import *

@@ -54,6 +54,7 @@ class Item():
         self.armour_data = None
         self.ammunition_data = None
         self.trap_data = None
+        self.boots_data = None
         self.__effects_collection = effects_collection
         self.weight = None
         self.rarity = None
@@ -361,3 +362,18 @@ class TrapData():
 
         self.trap_name = trap_name
         self.count = count
+
+
+class BootsData():
+    """
+    Represents data of boots
+    """
+    @log_debug
+    def __init__(self, damage_reduction=None, speed_modifier=None):
+        """
+        Default initializer
+        """
+        super().__init__()
+
+        self.damage_reduction = damage_reduction
+        self.speed_modifier = speed_modifier

@@ -41,3 +41,7 @@
 (defn trap-bag? [item]
   "check if this is trap bag"
   (in "trap bag" item.tags))
+
+(defn boots? [item]
+  "check if these are boots"
+  (in "boots" item.tags))
