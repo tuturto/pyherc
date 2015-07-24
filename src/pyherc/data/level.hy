@@ -38,7 +38,7 @@
   {:floor nil
    :wall nil
    :ornamentation []
-   :trap nil
+   :traps []
    :tags []
    :items []
    :character nil
@@ -146,7 +146,7 @@
 (defn safe-passage [level location]
   "check if given location is free to move without danger"
   (all [(not (blocks-movement level location))
-        (not (get-trap level location))
+        (not (get-traps level location))
         (not (get-character level location))]))
 
 (defn ornamentation [level location &optional [tile-id "no-tile"]]
@@ -214,14 +214,22 @@
 
 #d(defn add-trap [level location trap]
     "add trap to level"
-    (assoc (get-or-create-tile level location) :trap trap)
+    (.append (:traps (get-or-create-tile level location)) trap)
     (setv trap.location location))
 
-(defn get-trap [level location]
-  "get trap in a given tile"
+(defn traps↜ [level location]
+  "get traps in a given location"
   (let  [[map-tile (get-tile level location)]]
-    (when map-tile
-      (:trap map-tile))))
+    (if map-tile 
+      (genexpr x [x (:traps map-tile)])
+      (genexpr x [x []]))))
+
+(defn get-traps [level location]
+  "get traps at given location"
+  (let [[map-tile (get-tile level location)]]
+    (if map-tile
+      (:traps map-tile)
+      [])))
 
 (defn add-location-tag [level location tag]
   "add tag to given location"

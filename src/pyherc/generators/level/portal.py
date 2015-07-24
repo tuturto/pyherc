@@ -23,7 +23,7 @@ Module for adding portals
 
 from pyherc.aspects import log_debug, log_info
 from pyherc.data import (Portal, add_portal, get_locations_by_tag,
-                         blocks_movement, get_trap, safe_passage)
+                         blocks_movement, safe_passage)
 
 
 class PortalAdderConfiguration():

@@ -22,7 +22,7 @@ Module defining classes related to Move
 """
 from pyherc.aspects import log_debug, log_info
 from pyherc.data import blocks_movement, get_character, remove_character
-from pyherc.data import (add_character, move_character, get_trap, add_visited_level,
+from pyherc.data import (add_character, move_character, get_traps, add_visited_level,
                          visited_levels)
 from pyherc.data.constants import Duration
 from pyherc.data.geometry import find_direction
@@ -100,10 +100,8 @@ class MoveAction():
         else:
             self.character.add_to_tick(Duration.instant)
 
-        trap = get_trap(self.character.level,
-                        self.character.location)
-
-        if trap:
+        for trap in get_traps(self.character.level,
+                              self.character.location):
             trap.on_enter(self.character)
 
         self.dying_rules.check_dying(self.character)
@@ -248,11 +246,10 @@ class SwitchPlacesAction():
                 old_level=old_level,
                 direction=find_direction(old_location, target_location)))
 
-            trap = get_trap(self.other_character.level,
-                            self.other_character.location)
-
-            if trap:
+            for trap in get_traps(self.other_character.level,
+                                  self.other_character.location):
                 trap.on_enter(self.other_character)
+
                 self.dying_rules.check_dying(self.other_character)
 
             self.other_character.add_to_tick(Duration.instant)

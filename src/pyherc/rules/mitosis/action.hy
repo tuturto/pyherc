@@ -22,7 +22,8 @@
 (require pyherc.macros)
 (import [pyherc.aspects [log-debug]]
         [pyherc.data [skill-ready? cooldown blocks-movement get-character
-                      get-characters add-character get-trap]]
+                      get-characters add-character]]
+        [pyherc.data.level [traps↜]]
         [pyherc.data.geometry [area-around]]
         [pyherc.data.constants [Duration]]
         [pyherc.events.mitosis [new-mitosis-event]])
@@ -61,10 +62,9 @@
                     (cooldown new-character "mitosis" (* 6 Duration.very-slow))
                     (.raise-event self.character (new-mitosis-event self.character
                                                                     new-character))
-                    (let [[trap (get-trap new-character.level new-character.location)]]
-                      (when trap
-                        (.on-enter trap new-character)
-                        (.check-dying self.dying-rules new-character))))))]])
+                    (ap-each (traps↜ new-character.level new-character.location)
+                             (.on-enter it new-character))
+                    (.check-dying self.dying-rules new-character))))]])
 
 #d(defn free-tiles [level tiles]
     (ap-filter (not (or

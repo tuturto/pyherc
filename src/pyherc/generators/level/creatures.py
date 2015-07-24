@@ -23,7 +23,7 @@ Classes for creature generation
 
 from pyherc.aspects import log_debug, log_info
 from pyherc.data import (add_character, get_locations_by_tag, blocks_movement,
-                         get_trap, safe_passage)
+                         safe_passage)
 
 
 class CreatureAdder():
