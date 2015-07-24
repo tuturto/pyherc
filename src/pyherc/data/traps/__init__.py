@@ -23,4 +23,5 @@
 Package for traps
 """
 
+from .caltrops import Caltrops
 from .pit import PitTrap

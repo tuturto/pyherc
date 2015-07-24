@@ -22,9 +22,10 @@
 """
 Package for traps
 """
+from pyherc.data.traps.trap import Trap
 
 
-class PitTrap():
+class PitTrap(Trap):
     """
     Trap to fall in
 
