@@ -17,16 +17,24 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(import [pyherc.data.traps.trap [Trap]]
-        [pyherc.data [get-traps remove-trap]])
+(require pyherc.macros)
+
+(import [pyherc.data.damage [new-damage]]
+        [pyherc.data.traps.trap [Trap]]
+        [pyherc.data [get-traps remove-trap]]
+        [pyherc.events [new-damage-triggered-event]])
 
 (defclass Caltrops [Trap]
   [[--init-- (fn [self damage]
                (setv self.damage damage)
                nil)]
    [on-enter (fn [self character]
-               ;; TODO: piercing damage and damage reduction and what not
-               (setv character.hit_points (- character.hit_points self.damage)))]
+               (let [[damage (new-damage #t(#t("piercing" self.damage)))]
+                     [total-damage (damage :target character
+                                           :body-part "feet")]]
+                 (.raise-event character (new-damage-triggered-event :target character
+                                                                     :damage total-damage
+                                                                     :damage-type "piercing"))))]
    [on-place (fn [self level location]
                (let [[traps (list-comp x [x (get-traps level location)]
                                        (isinstance x Caltrops))]]
