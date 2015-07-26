@@ -23,7 +23,8 @@ Module for testing attack action related classes
 from hamcrest import assert_that, equal_to, is_
 from mockito import any, mock, verify, when
 from pyherc.data.geometry import TargetData
-from pyherc.rules.combat.action import AttackAction, Damage
+from pyherc.data.damage import new_damage
+from pyherc.rules.combat.action import AttackAction
 from pyherc.test.builders import (CharacterBuilder, EffectHandleBuilder,
                                   ItemBuilder)
 
@@ -43,11 +44,11 @@ class TestDamage():
         Test that damage below zero is zeroed
         """
         character = CharacterBuilder().build()
-        damage = Damage([(-1, 'negative damage')])
+        damage = new_damage([(-1, 'negative damage')])
 
-        damage.apply_damage(target=character)
+        damage_inflicted = damage(target=character)
 
-        assert_that(damage.damage_inflicted, is_(equal_to(0)))
+        assert_that(damage_inflicted, is_(equal_to(0)))
 
     def test_armour_is_used(self):
         """
@@ -60,11 +61,11 @@ class TestDamage():
         armour.armour_data.damage_reduction = 1
         character.inventory.armour = armour
 
-        damage = Damage([(5, 'crushing')])
+        damage = new_damage([(5, 'crushing')])
 
-        damage.apply_damage(target=character)
+        damage_inflicted = damage(target=character)
 
-        assert_that(damage.damage_inflicted, is_(equal_to(4)))
+        assert_that(damage_inflicted, is_(equal_to(4)))
 
     def test_less_than_double_protection_is_not_negated(self):
         """
@@ -78,8 +79,8 @@ class TestDamage():
         armour.armour_data.damage_reduction = 3
         character.inventory.armour = armour
 
-        damage = Damage([(2, 'crushing')])
+        damage = new_damage([(2, 'crushing')])
 
-        damage.apply_damage(target=character)
+        damage_inflicted = damage(target=character)
 
-        assert_that(damage.damage_inflicted, is_(equal_to(1)))
+        assert_that(damage_inflicted, is_(equal_to(1)))

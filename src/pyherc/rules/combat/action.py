@@ -24,7 +24,7 @@ import random
 
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.constants import Duration
-from pyherc.data.damage import Damage
+from pyherc.data.damage import new_damage
 from pyherc.events import (new_attack_hit_event, new_attack_miss_event,
                            new_attack_nothing_event)
 
@@ -96,13 +96,13 @@ class AttackAction():
             was_hit = self.to_hit.is_hit()
 
             if was_hit:
-                self.damage.apply_damage(target)
+                damage_caused = self.damage(target)
 
                 self.attacker.raise_event(new_attack_hit_event(
                     type=self.attack_type,
                     attacker=self.attacker,
                     target=target,
-                    damage=self.damage))
+                    damage=damage_caused))
 
                 self.__trigger_attack_effects()
             else:

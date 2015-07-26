@@ -21,7 +21,7 @@
 
 (defn new-damage [damage-list]
   "create new damage function from a list of damage (amount, type)"
-  (fn [target body-part]
+  (fn [target &optional [body-part "torso"]]
     "apply this damage to target's body-part, returns amount of damage done"
     (let [[caused-damage (total-damage damage-list target body-part)]]
       (setv target.hit-points (- target.hit-points caused-damage))

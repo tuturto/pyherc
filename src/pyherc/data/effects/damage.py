@@ -21,7 +21,7 @@
 Module for damage
 """
 from pyherc.aspects import log_debug
-from pyherc.data.damage import Damage
+from pyherc.data.damage import new_damage
 from pyherc.data.effects.effect import Effect
 from pyherc.events import (new_damage_added_event, new_damage_ended_event,
                            new_damage_triggered_event)
@@ -54,12 +54,12 @@ class DamageEffect(Effect):
         """
         Triggers effects of the damage
         """
-        damage = Damage([(self.damage, self.damage_type)])
-        damage.apply_damage(self.target)
+        damage = new_damage([(self.damage, self.damage_type)])
+        damage_caused = damage(self.target)
 
         self.target.raise_event(
             new_damage_triggered_event(target=self.target,
-                                       damage=self.damage,
+                                       damage=damage_caused,
                                        damage_type=self.damage_type))
 
         dying_rules.check_dying(self.target)
