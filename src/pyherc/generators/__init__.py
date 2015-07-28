@@ -31,3 +31,4 @@ from .creature import creature_config
 from .creature import inventory_config
 from .effects import create_effect, get_effect_creator
 from .spells import SpellGenerator
+from .traps import get_trap_creator
