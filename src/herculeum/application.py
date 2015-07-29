@@ -139,10 +139,17 @@ class Application():
         """
         return self.config.player_generator
 
+    def __get_trap_generator(self):
+        """
+        Get trap generator
+        """
+        return self.config.trap_generator
+
     surface_manager = property(__get_surface_manager)
     action_factory = property(__get_action_factory)
     creature_generator = property(__get_creature_generator)
     player_generator = property(__get_player_generator)
+    trap_generator = property(__get_trap_generator)
     item_generator = property(__get_item_generator)
     level_generator_factory = property(__get_level_generator_factory)
     rng = property(__get_rng)

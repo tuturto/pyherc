@@ -36,3 +36,4 @@ import herculeum.config.levels.player_characters
 import herculeum.config.levels.second_gate
 import herculeum.config.levels.third_gate
 import herculeum.config.levels.tomes
+import herculeum.config.levels.traps

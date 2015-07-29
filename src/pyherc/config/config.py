@@ -25,7 +25,7 @@ from functools import partial
 
 from pyherc.generators import (generate_creature, get_effect_creator,
                                ItemConfigurations, ItemGenerator,
-                               SpellGenerator)
+                               SpellGenerator, get_trap_creator)
 from pyherc.generators.level.old_config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level import PortalAdderFactory, new_dungeon, merge_level
@@ -67,6 +67,7 @@ class Configuration():
         self.item_generator = None
         self.creature_generator = None
         self.player_generator = None
+        self.trap_generator = None
         self.level_generator_factory = None
         self.level_size = None
         self.model = model
@@ -252,6 +253,17 @@ class Configuration():
                                         self.rng)
 
         self.player_classes = self.get_player_config(context)
+
+        configurators = self.get_configurators(context.config_package,
+                                               'init_traps')
+
+        traps = {}
+        for configurator in configurators:
+            temp_traps = traps.copy()
+            temp_traps.update(configurator())
+            traps = temp_traps
+
+        self.trap_generator = get_trap_creator(traps)
 
     def initialise_level_generators(self, context):
         """
