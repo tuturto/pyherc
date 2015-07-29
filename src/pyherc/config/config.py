@@ -300,6 +300,7 @@ class Configuration():
 
         self.level_generator_factory = LevelGeneratorFactory(
             portal_adder_factory,
+            self.trap_generator,
             config,
             self.rng)
 

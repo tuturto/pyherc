@@ -25,6 +25,8 @@
 
 (import [mockito [mock]])
 (import [pyherc.data [Model]]
+        [pyherc.data.traps [PitTrap]]
+        [pyherc.generators [get-trap-creator]]
         [pyherc.generators.level.partitioners [grid-partitioning]]
         [pyherc.test.builders [LevelBuilder]]
         [random [Random]])
@@ -38,8 +40,9 @@
                     (.build))]
          [rng (Random)]
          [partitioner (grid-partitioning #t(10 10) 2 1 rng)]
-         [sections (partitioner level)]]
-     (ap-each sections (~generator it))))
+         [sections (partitioner level)]
+         [trap-config {"pit" [PitTrap {}]}]]
+     (ap-each sections (~generator it (get-trap-creator trap-config)))))
 
 (defn setup-test []
   "setup test case"

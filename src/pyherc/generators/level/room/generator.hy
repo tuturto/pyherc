@@ -32,8 +32,8 @@
 
 (defn new-room-generator [&rest creators]
   "create a room generator"
-  (fn [section]
-    (ap-each creators (it section))))
+  (fn [section trap-generator]
+    (ap-each creators (it section trap-generator))))
 
 (defn tomes-and-potions-cache [item-generator]
   "create cache content creator"
@@ -46,9 +46,9 @@
     []))
 
 (defn fill-columns [tile]
-  (fn [section]
+  (fn [section trap-generator]
     (ap-each (section-data section "columns") (section-floor section it tile))))
 
 (defn fill-rows [tile]
-  (fn [section]
+  (fn [section trap-generator]
     (ap-each (section-data section "rows") (section-floor section it tile))))

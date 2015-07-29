@@ -28,7 +28,7 @@
 
 (defn circular-shape [floor-tile]
   "create a circular shape"
-  (fn [section]
+  (fn [section &optional [trap-generator nil]]
     (assert floor-tile)
     (let [[center-x (// (section-width section) 2)]
           [center-y (// (section-height section) 2)]
@@ -51,7 +51,7 @@
   "create square shape"
   (assert floor-tile)
   (assert rng)
-  (fn [section]
+  (fn [section &optional [trap-generator nil]]
     (let [[middle-height (// (section-height section) 2)]
           [middle-width (// (section-width section) 2)]
           [room-left-edge (if (connected-left section)

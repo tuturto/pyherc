@@ -26,7 +26,6 @@
                                              wall-torches
                                              aggregate-decorator]]
            [pyherc.data.probabilities [*]]
-           [pyherc.data.traps [PitTrap]]
            [pyherc.generators.level [new-level
                                      PortalAdderConfiguration]]
            [pyherc.generators.level.creatures [CreatureAdder]]
@@ -120,7 +119,7 @@
 (defmacro square-pitroom [floor-tile corridor-tile pit-tile]
   `(new-room-generator (square-shape ~floor-tile rng)
                        (mark-center-area)
-                       (trap-creator [~pit-tile] PitTrap (center-area) rng)
+                       (trap-creator [~pit-tile] "pit" (center-area) rng)
                        (corridors ~corridor-tile)))
 
 (defmacro regular-grid [level-size room-size]
@@ -225,7 +224,7 @@
 (defmacro circular-pitroom [floor-tile corridor-tile pit-tile]
   `(new-room-generator (circular-shape ~floor-tile)
                        (mark-center-area)
-                       (trap-creator [~pit-tile] PitTrap (center-area) rng)
+                       (trap-creator [~pit-tile] "pit" (center-area) rng)
                        (corridors ~corridor-tile)))
 
 (defmacro circular-bones-room [floor-tile edge-tile corridor-tile bones rate]

@@ -23,7 +23,7 @@
 
 (defn trap-creator [trap-tiles trap-type area-selector rng]
   "create a trap creator"
-  (fn [section]
+  (fn [section trap-generator]
     (ap-each (area-selector section)
-             (do (section-trap section it (trap-type))
+             (do (section-trap section it (trap-generator trap-type))
                  (section-floor section it (.choice rng trap-tiles))))))

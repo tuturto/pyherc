@@ -30,6 +30,7 @@
 
 (defn new-level-generator [model partitioners room-generators decorators
                            portal-adders item-adders creature-adders
+                           trap-generator
                            rng name description]
   "create a new level generator function"
   (fn [portal]
@@ -39,7 +40,7 @@
           [sections (.connect-sections connector (partitioner level))]]
       (level-name level name)
       (level-description level description)
-      (ap-each sections ((.choice rng room-generators) it))
+      (ap-each sections ((.choice rng room-generators) it trap-generator))
       (when creature-adders ((.choice rng creature-adders) level))
       (when item-adders ((.choice rng item-adders) level))
       (run-generators-for level

@@ -38,7 +38,7 @@ class LevelGeneratorFactory():
     Class used to contruct different kinds of level generators
     """
     @log_debug
-    def __init__(self, portal_adder_factory, configuration,
+    def __init__(self, portal_adder_factory, trap_generator, configuration,
                  random_generator):
         """
         Default constructor
@@ -51,6 +51,7 @@ class LevelGeneratorFactory():
         self.logger = logging.getLogger('pyherc.generators.level.LevelGeneratorFactory')  # noqa
         self.config = configuration
         self.portal_adder_factory = portal_adder_factory
+        self.trap_generator = trap_generator
         #self.portal_adder_factory.level_generator_factory = self
 
         self.rng = random_generator
@@ -83,6 +84,7 @@ class LevelGeneratorFactory():
                                    portal_adders,
                                    item_adders,
                                    creature_adders,
+                                   self.trap_generator,
                                    self.rng,
                                    level_type,
                                    description(self.config, level_type))

@@ -27,7 +27,7 @@
 
 (defn add-rows []
   "create generator for pre-placing rows"
-  (fn [section]
+  (fn [section &optional [trap-generator nil]]
     (let [[even-tiles []]
           [odd-tiles []]]
       (ap-each (section-data section "room-tiles")
@@ -42,7 +42,7 @@
 
 (defn add-columns []
   "create generator for pre-placing columns"
-  (fn [section]
+  (fn [section &optional [trap-generator nil]]
     (let [[even-tiles []]
           [odd-tiles []]]
       (ap-each (section-data section "room-tiles")
@@ -57,7 +57,7 @@
 
 (defn mark-center-area []
   "create generator to mark center area of room"
-  (fn [section]
+  (fn [section &optional [trap-generator nil]]
     (let [[center-tiles []]]
       (ap-each (section-data section "room-tiles")
                (when (free-around? section it)

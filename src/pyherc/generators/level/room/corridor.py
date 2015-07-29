@@ -28,7 +28,7 @@ from pyherc.generators.level.partitioners import (Connection, section_floor,
 def corridors(floor_tile):
     "create corridors"
 
-    def corridor(section):
+    def corridor(section, trap_generator=None):
         "carve corridors"
         for it in section_connections(section):
             room_connection = match_section_to_room(section, it)

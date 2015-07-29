@@ -26,21 +26,21 @@
 
 (defn floor-creator [floor-tiles position-selector rng]
   "create floor creator"
-  (fn [section]
+  (fn [section &optional [trap-generator nil]]
     "fill given area randomly with floor"
     (ap-each (position-selector section)
              (section-floor section it (.choice rng floor-tiles) nil))))
 
 (defn wall-creator [wall-tiles position-selector rng]
   "create wall creator"
-  (fn [section]
+  (fn [section &optional [trap-generator nil]]
     "fill given area randomly with walls"
     (ap-each (position-selector section)
              (section-wall section it (.choice rng wall-tiles) nil))))
 
 (defn ornament-creator [ornament-tiles position-selector rate rng]
   "create ornament creator"
-  (fn [section]
+  (fn [section &optional [trap-generator nil]]
     "fill given area randomly with ornaments"
     (ap-each (position-selector section)       
              (when (<= (.randint rng 0 100) rate) 

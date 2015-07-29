@@ -29,7 +29,7 @@
 (defn cache-creator [cache-tiles position-selector item-selector
                      character-selector rng]
   "create cache creator"
-  (fn [section]
+  (fn [section &optional [trap-generator nil]]
     "fill cache with items and characters"
     (ap-each (position-selector section)
              (add-new-cache cache-tiles
