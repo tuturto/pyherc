@@ -19,12 +19,12 @@
 
 (require pyherc.aspects)
 (import [pyherc.rules.public [ActionParameters]]
-	[pyherc.aspects [log-debug log-info]])
+        [pyherc.aspects [log-debug log-info]])
 
 (defn perform-mitosis [character action-factory]
   "perform mitosis on a character"
   (let [[action (.get-action action-factory
-				(MitosisParameters character))]]
+                             (MitosisParameters character))]]
     (when (.legal? action)
       (.execute action))))
 
@@ -37,7 +37,7 @@
 (defclass MitosisParameters [ActionParameters]
   "Class controlling creation of MitosisAction"
   [[--init-- #d(fn [self character]
-		 (-> (super) (.--init--))
-		 (setv self.action-type "mitosis")
-		 (setv self.character character)
-		 nil)]])
+                 (-> (super) (.--init--))
+                 (setv self.action-type "mitosis")
+                 (setv self.character character)
+                 nil)]])

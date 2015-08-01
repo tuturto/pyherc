@@ -22,7 +22,7 @@ Module for item builder
 """
 from pyherc.data import Item
 from pyherc.data.effects import EffectsCollection
-from pyherc.data.item import AmmunitionData, ArmourData, WeaponData
+from pyherc.data.item import AmmunitionData, ArmourData, WeaponData, TrapData
 
 
 class ItemBuilder():
@@ -42,6 +42,7 @@ class ItemBuilder():
         self.weapon_data = None
         self.armour_data = None
         self.ammunition_data = None
+        self.trap_data = None
         self.tags = []
 
     def with_name(self, name):
@@ -227,6 +228,13 @@ class ItemBuilder():
         self.armour_data.speed_modifier = speed_modifier
         return self
 
+    def with_trap(self, name, count):
+        """
+        Set trap data
+        """
+        self.trap_data = TrapData(trap_name=name, count=count)
+        return self
+
     def build(self):
         """
         Build item
@@ -253,6 +261,10 @@ class ItemBuilder():
         if self.ammunition_data is not None:
             item.ammunition_data = self.ammunition_data
             item.tags.append('ammunition')
+
+        if self.trap_data is not None:
+            item.trap_data = self.trap_data
+            item.tags.append('trap')
 
         for handle in self.effect_handles:
             item.add_effect_handle(handle)

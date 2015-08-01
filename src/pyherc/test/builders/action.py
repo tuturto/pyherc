@@ -35,6 +35,7 @@ from pyherc.rules.magic import GainDomainFactory, SpellCastingFactory
 from pyherc.rules.mitosis.factory import MitosisFactory
 from pyherc.rules.metamorphosis.factory import MetamorphosisFactory
 from pyherc.rules.moving.factories import MoveFactory, WalkFactory
+from pyherc.rules.trapping.factory import TrappingFactory
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.waiting.factories import WaitFactory
 from random import Random
@@ -72,6 +73,8 @@ class ActionFactoryBuilder():
         self.metamorphosis_factory.action_type = 'metamorphosis'
         self.dig_factory = mock()
         self.dig_factory.action_type = 'dig'
+        self.trapping_factory = mock()
+        self.trapping_factory.action_type = 'trapping'
 
         self.effect_factory = mock()
         self.use_real_attack_factory = False
@@ -85,6 +88,7 @@ class ActionFactoryBuilder():
         self.use_real_mitosis_factory = False
         self.use_real_metamorphosis_factory = False
         self.use_real_dig_factory = False
+        self.use_real_trapping_factory = False
 
     def with_model(self, model):
         """
@@ -223,6 +227,14 @@ class ActionFactoryBuilder():
 
         return self
 
+    def with_trapping_factory(self, trapping_factory=None):
+        if trapping_factory:
+            self.trapping_factory = trapping_factory
+        else:
+            self.use_real_trapping_factory = True
+
+        return self
+
     def build(self):
         """
         Build action factory
@@ -284,6 +296,9 @@ class ActionFactoryBuilder():
         if self.use_real_dig_factory:
             self.dig_factory = DigFactoryBuilder().build()
 
+        if self.use_real_trapping_factory:
+            self.trapping_factory = TrappingFactoryBuilder().build()
+
         action_factory = ActionFactory(self.model,
                                        [self.move_factory,
                                         self.drink_factory,
@@ -294,7 +309,8 @@ class ActionFactoryBuilder():
                                         self.gain_domain_factory,
                                         self.mitosis_factory,
                                         self.metamorphosis_factory,
-                                        self.dig_factory])
+                                        self.dig_factory,
+                                        self.trapping_factory])
 
         return action_factory
 
@@ -550,3 +566,31 @@ class DigFactoryBuilder():
         Builds dig factory
         """
         return DigFactory(self.rng)
+
+
+class TrappingFactoryBuilder():
+    """
+    Builder for trapping factory
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super().__init__()
+        
+        self.trap_creator = mock()
+
+    def with_trap_creator(self, trap_creator):
+        """
+        Configure used trap creator
+        """
+        self.trap_creator = trap_creator
+
+        return self
+
+    def build(self):
+        """
+        Builds trapping factory
+        """
+        return TrappingFactory(self.trap_creator)
+

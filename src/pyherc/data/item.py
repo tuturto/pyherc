@@ -53,6 +53,7 @@ class Item():
         self.weapon_data = None
         self.armour_data = None
         self.ammunition_data = None
+        self.trap_data = None
         self.__effects_collection = effects_collection
         self.weight = None
         self.rarity = None
@@ -183,6 +184,8 @@ class Item():
             main_type = 'ammunition'
         elif 'food' in self.tags:
             main_type = 'food'
+        elif 'trap' in self.tags:
+            main_type = 'trap'
 
         return main_type
 
@@ -328,4 +331,21 @@ class AmmunitionData():
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.ammunition_type = ammunition_type
+        self.count = count
+
+
+class TrapData():
+    """
+    Represents data of trap that is being carried
+    """
+    def __init__(self, trap_name, count):
+        """
+        Default constructor
+        """
+        super().__init__()
+
+        assert(trap_name, "trap name was not provided")
+        assert(count > 0, "trap count was less than one")
+
+        self.trap_name = trap_name
         self.count = count

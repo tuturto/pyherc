@@ -28,7 +28,7 @@ from .effect import EffectBuilder, EffectHandleBuilder
 from .level import LevelBuilder
 from .action import ActionFactoryBuilder, DrinkFactoryBuilder
 from .action import MitosisFactoryBuilder, MetamorphosisFactoryBuilder
-from .action import SpellCastingFactoryBuilder
+from .action import SpellCastingFactoryBuilder, TrappingFactoryBuilder
 from .poison import PoisonBuilder
 from .heal import HealBuilder
 from .rules_engine import RulesEngineBuilder

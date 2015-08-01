@@ -37,3 +37,4 @@ from pyherc.test.unit.test_section import *
 from pyherc.test.unit.test_skills import *
 from pyherc.test.unit.test_surround_decorator import *
 from pyherc.test.unit.test_trapgeneration import *
+from pyherc.test.unit.test_trapping import *
