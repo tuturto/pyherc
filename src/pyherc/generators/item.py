@@ -26,7 +26,7 @@ import random
 from pyherc.aspects import log_debug, log_info
 from pyherc.data import Item
 from pyherc.data.effects import EffectHandle, EffectsCollection
-from pyherc.data.item import AmmunitionData, ArmourData, WeaponData
+from pyherc.data.item import AmmunitionData, ArmourData, WeaponData, TrapData
 
 
 class ItemGenerator():
@@ -127,6 +127,12 @@ class ItemGenerator():
                 ammunition_type=ammo_spec.ammunition_type,
                 count=ammo_spec.count)
 
+        if item_specification.trap_configuration is not None:
+            trap_spec = item_specification.trap_configuration
+            item.trap_data = TrapData(
+                trap_name = trap_spec.name,
+                count = trap_spec.count)
+
         for spec in item_specification.effect_handles:
             new_handle = EffectHandle(trigger=spec.trigger,
                                       effect=spec.effect,
@@ -226,7 +232,8 @@ class ItemConfiguration():
     def __init__(self, name, cost, weight, icons, types, rarity,
                  weapon_configration=None, effect_handles=None,
                  armour_configuration=None,
-                 ammunition_configuration=None, description=''):
+                 ammunition_configuration=None, trap_configuration=None,
+                 description=''):
         """
         Default constructor
         """
@@ -241,6 +248,7 @@ class ItemConfiguration():
         self.weapon_configration = weapon_configration
         self.armour_configuration = armour_configuration
         self.ammunition_configuration = ammunition_configuration
+        self.trap_configuration = trap_configuration
 
         if effect_handles is None:
             self.effect_handles = []
@@ -301,4 +309,19 @@ class AmmunitionConfiguration():
         self.critical_range = critical_range
         self.critical_damage = critical_damage
         self.ammunition_type = ammunition_type
+        self.count = count
+
+
+class TrapConfiguration():
+    """
+    Class representing trap configuration
+    """
+    @log_debug
+    def __init__(self, name, count):
+        """
+        Default constructor
+        """
+        super().__init__()
+
+        self.name = name
         self.count = count

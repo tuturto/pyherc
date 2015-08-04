@@ -19,18 +19,18 @@
 
 (defmacro item [name description cost weight icons types rarity]  
   `(ItemConfiguration ~name ~cost ~weight ~icons ~types
-                      ~rarity nil nil nil nil ~description))
+                      ~rarity nil nil nil nil nil ~description))
 
 (defmacro tome [name &rest content]
   `(ItemConfiguration ~name 
                       100 1 ["tied-scroll"]
-                      ["tome" "hint"] "rare" nil nil nil nil
+                      ["tome" "hint"] "rare" nil nil nil nil nil
                       (.join " " [~@content])))
 
 (defmacro scroll [name &rest content]
   `(ItemConfiguration ~name 
                       50 1 ["tied-scroll"]
-                      ["scroll" "hint"] "uncommon" nil nil nil nil
+                      ["scroll" "hint"] "uncommon" nil nil nil nil nil
                       (.join " " [~@content])))
  
 (defmacro items-list [&rest items]

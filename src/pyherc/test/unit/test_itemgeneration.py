@@ -26,7 +26,8 @@ from random import Random
 from hamcrest import assert_that, equal_to, is_, not_none
 from pyherc.data.effects import EffectHandle
 from pyherc.generators import (ItemConfiguration, ItemConfigurations,
-                               ItemGenerator, WeaponConfiguration)
+                               ItemGenerator, WeaponConfiguration,
+                               TrapConfiguration)
 from pyherc.test.matchers import has_damage, has_effect_handle
 
 
@@ -85,6 +86,16 @@ class TestItemGeneration():
                                             parameters = None,
                                             charges = 1)]))
 
+        self.item_config.add_item(
+            ItemConfiguration(name = 'bag of caltrops',
+                              cost = 150,
+                              weight = 1,
+                              icons = ['icon'],
+                              types = ['trap bag'],
+                              rarity = 'common',
+                              trap_configuration = TrapConfiguration(name = 'caltrops',
+                                                                     count = 2)))
+
         self.generator = ItemGenerator(self.item_config)
 
     def test_create_mundane_item(self):
@@ -104,6 +115,16 @@ class TestItemGeneration():
         weapon_data = item.weapon_data
 
         assert_that(item, has_damage(2, 'piercing'))
+
+    def test_create_trap_bag(self):
+        """
+        Test that trap bag can be created
+        """
+        item = self.generator.generate_item(name = 'bag of caltrops')
+        trap_data = item.trap_data
+
+        assert_that(trap_data.trap_name, is_(equal_to('caltrops')))
+        assert_that(trap_data.count, is_(equal_to(2)))
 
     def test_configuring_item_generation(self):
         """
