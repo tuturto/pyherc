@@ -17,6 +17,9 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(defmacro items-dsl []
+  `(import [pyherc.generators [ItemConfiguration TrapConfiguration]]))
+
 (defmacro item [name description cost weight icons types rarity]  
   `(ItemConfiguration ~name ~cost ~weight ~icons ~types
                       ~rarity nil nil nil nil nil ~description))
@@ -32,7 +35,13 @@
                       50 1 ["tied-scroll"]
                       ["scroll" "hint"] "uncommon" nil nil nil nil nil
                       (.join " " [~@content])))
- 
+
+(defmacro trap-bag [name description trap-name count cost weight icons types rarity]
+  `(ItemConfiguration ~name ~cost ~weight ~icons ~types ~rarity
+                      nil nil nil nil
+                      (TrapConfiguration ~trap-name ~count)))
+
 (defmacro items-list [&rest items]
   `(defn init-items [context]
      [~@items]))
+
