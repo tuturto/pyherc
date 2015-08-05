@@ -20,7 +20,7 @@
 """
 Module for inventory actions
 """
-from pyherc.rules import drink, drop_item, equip, pick_up, unequip
+from pyherc.rules import drink, drop_item, equip, pick_up, unequip, place_trap
 
 
 class InventoryController():
@@ -66,6 +66,11 @@ class InventoryController():
             equip(self.character,
                   item,
                   self.action_factory)
+        elif item.get_main_type() == 'trap bag':
+            place_trap(self.character,
+                       item,
+                       self.action_factory)
+
 
     def unequip_item(self, item):
         """

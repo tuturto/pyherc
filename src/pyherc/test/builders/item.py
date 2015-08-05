@@ -264,7 +264,7 @@ class ItemBuilder():
 
         if self.trap_data is not None:
             item.trap_data = self.trap_data
-            item.tags.append('trap')
+            item.tags.append('trap bag')
 
         for handle in self.effect_handles:
             item.add_effect_handle(handle)

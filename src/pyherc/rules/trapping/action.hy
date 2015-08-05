@@ -41,7 +41,7 @@
                "check if action is possible to perform"
                (if self.trap-bag
                  (and (in self.trap-bag self.character.inventory)
-                      (= (.get-main-type self.trap-bag) "trap"))
+                      (= (.get-main-type self.trap-bag) "trap bag"))
                  true))]
    [execute #d(fn [self]
                 "execute the action"

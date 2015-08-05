@@ -184,8 +184,8 @@ class Item():
             main_type = 'ammunition'
         elif 'food' in self.tags:
             main_type = 'food'
-        elif 'trap' in self.tags:
-            main_type = 'trap'
+        elif 'trap bag' in self.tags:
+            main_type = 'trap bag'
 
         return main_type
 

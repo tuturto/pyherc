@@ -44,6 +44,7 @@ from pyherc.rules.mitosis.factory import MitosisFactory
 from pyherc.rules.metamorphosis.factory import MetamorphosisFactory
 from pyherc.rules.magic import SpellCastingFactory
 from pyherc.rules.moving.factories import MoveFactory, WalkFactory
+from pyherc.rules.trapping.factory import TrappingFactory
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.waiting import WaitFactory
 
@@ -141,6 +142,8 @@ class Configuration():
 
         dig_factory = DigFactory(self.rng)
 
+        trapping_factory = TrappingFactory(self.trap_generator)
+
         self.action_factory = ActionFactory(self.model,
                                             [move_factory,
                                              attack_factory,
@@ -150,7 +153,8 @@ class Configuration():
                                              spell_casting_factory,
                                              mitosis_factory,
                                              metamorphosis_factory,
-                                             dig_factory])
+                                             dig_factory,
+                                             trapping_factory])
 
         self.rules_engine = RulesEngine(self.action_factory,
                                         dying_rules)

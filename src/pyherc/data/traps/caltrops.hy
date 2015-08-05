@@ -29,7 +29,7 @@
                (setv self.damage damage)
                nil)]
    [on-enter (fn [self character]
-               (let [[damage (new-damage #t(#t("piercing" self.damage)))]
+               (let [[damage (new-damage #t(#t(self.damage "piercing")))]
                      [total-damage (damage :target character
                                            :body-part "feet")]]
                  (.raise-event character (new-damage-triggered-event :target character
