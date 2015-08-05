@@ -431,18 +431,4 @@ def init_items(context):
                                     types = ['event item', 'idol'],
                                     rarity = 'artifact'))
 
-    config.append(ItemConfiguration(name = 'bag of small caltrops',
-                                    description = 'A small bag filled with sharp objects',
-                                    cost = 150,
-                                    weight = 1,
-                                    icons = [surface_manager.add_icon('snowman',
-                                                                      ':snowman.png'
-                                                                      '(',
-                                                                      ['dim', 'red'])],
-                                    types = ['trap bag'],
-                                    rarity = 'common',
-                                    trap_configuration = TrapConfiguration(
-                                        name = 'caltrops',
-                                        count = 1)))
-
     return config

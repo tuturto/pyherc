@@ -31,12 +31,12 @@
  (trap-bag "bag of small caltrops"
            "a small bag filled with sharp caltrops"
            "small caltrops"
-           1 150 1 ["xxxx"] ["trap bag"] "common")
+           1 150 1 ["bag"] ["trap bag"] "common")
  (trap-bag "greater bag of caltrops"
            "a rather large bag filled with sharp caltrops"
            "small caltrops"
-           3 450 1 ["xxx"] ["trap bag"] "uncommon")
+           3 450 1 ["bag"] ["trap bag"] "uncommon")
  (trap-bag "bag of brutal caltrops"
            "a small bag of rather nasty looking caltrops"
            "large caltrops"
-           1 250 1 ["xxx"] ["trap bag"] "uncommon"))
+           1 250 1 ["bag"] ["trap bag"] "uncommon"))

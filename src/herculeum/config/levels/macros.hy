@@ -39,7 +39,8 @@
 (defmacro trap-bag [name description trap-name count cost weight icons types rarity]
   `(ItemConfiguration ~name ~cost ~weight ~icons ~types ~rarity
                       nil nil nil nil
-                      (TrapConfiguration ~trap-name ~count)))
+                      (TrapConfiguration ~trap-name ~count)
+                      ~description))
 
 (defmacro items-list [&rest items]
   `(defn init-items [context]
