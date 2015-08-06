@@ -21,7 +21,7 @@
 
 (import [pyherc.data.damage [new-damage]]
         [pyherc.data.traps.trap [Trap]]
-        [pyherc.data [get-traps remove-trap]]
+        [pyherc.data [get-traps remove-trap Duration]]
         [pyherc.events [new-damage-triggered-event]])
 
 (defclass Caltrops [Trap]
@@ -33,6 +33,7 @@
                (let [[damage (new-damage #t(#t(self.damage "piercing")))]
                      [total-damage (damage :target character
                                            :body-part "feet")]]
+                 (.add-to-tick character Duration.slow)
                  (.raise-event character (new-damage-triggered-event :target character
                                                                      :damage total-damage
                                                                      :damage-type "piercing"))))]
