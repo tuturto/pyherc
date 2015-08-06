@@ -29,7 +29,7 @@ from herculeum.ui.gui.widgets import (EffectsWidget, HitPointsWidget,
                                       SpellSelectorWidget, TimerAdapter)
 from herculeum.ui.gui.layers import (zorder_floor, zorder_wall, zorder_ornament,
                                      zorder_item, zorder_character,
-                                     zorder_counter)
+                                     zorder_counter, zorder_trap)
 from pyherc.data.model import DIED_IN_DUNGEON
 from pyherc.events import e_event_type
 from pyherc.rules import (attack, cast, is_move_legal, move, pick_up, wait,
@@ -321,6 +321,8 @@ class PlayMapWidget(QWidget):
                 scene.addItem(new_glyph)
             for item in tile['\ufdd0:items']:
                 self.add_glyph(item, scene, zorder_item)
+            for trap in tile['\ufdd0:traps']:
+                self.add_glyph(trap, scene, zorder_trap)
 
         for creature in get_characters(self.current_level):
             self.add_glyph(creature,
