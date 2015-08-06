@@ -21,7 +21,7 @@
 Module for displaying inventory
 """
 from herculeum.ui.controllers import InventoryController
-from pyherc.data import Item, get_items
+from pyherc.data import Item, get_items, is_ammunition, is_trap_bag
 from PyQt4.QtCore import pyqtSignal, Qt
 from PyQt4.QtGui import (QApplication, QFont, QGridLayout, QHBoxLayout, QLabel,
                          QPainter, QPixmap, QTextEdit, QVBoxLayout, QWidget)
@@ -809,8 +809,10 @@ class ItemGlyph(QWidget):
         self.item = item
 
         if item != None:
-            if item.ammunition_data != None:
+            if is_ammunition(item):
                 count = item.ammunition_data.count
+            elif is_trap_bag(item):
+                count = item.trap_data.count
             else:
                 count = 1
 
@@ -820,7 +822,7 @@ class ItemGlyph(QWidget):
                 image = icon.toImage()
                 painter = QPainter(image)
                 painter.setPen(Qt.white)
-                font = QFont('Helvetica', 180, QFont.Bold)
+                font = QFont('Helvetica', 12, QFont.Bold, False)
                 painter.setFont(font)
                 painter.drawText(image.rect(),
                                  Qt.AlignBottom | Qt.AlignRight,
