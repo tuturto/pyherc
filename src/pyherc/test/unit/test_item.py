@@ -27,7 +27,7 @@ import pyherc.data.dungeon
 import pyherc.generators.item
 from hamcrest import assert_that, equal_to, is_, is_in, is_not
 from mockito import any, mock, verify
-from pyherc.data import Character, add_item, get_items
+from pyherc.data import Character, add_item, get_items, is_weapon, is_food
 from pyherc.rules import equip, unequip
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   EffectHandleBuilder, ItemBuilder,
@@ -125,17 +125,14 @@ class TestItems():
                     .with_tag('weapon')
                     .build())
 
-        main_type = self.item.get_main_type()
-
-        assert(main_type == 'weapon')
+        assert(is_weapon(self.item))
 
         self.item = (ItemBuilder()
                         .with_tag('food')
                         .build())
 
-        main_type = self.item.get_main_type()
+        assert(is_food(self.item))
 
-        assert(main_type == 'food')
 
 class TestItemsInLevel:
     """

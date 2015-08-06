@@ -21,7 +21,7 @@
 (require pyherc.macros) ;; TODO: remove this if xor ever lands Hy
 
 (import [pyherc.aspects [log-debug]]
-        [pyherc.data [add-trap]]
+        [pyherc.data [add-trap trap-bag?]]
         [pyherc.data.constants [Duration]])
 
 (defclass TrappingAction []
@@ -41,7 +41,7 @@
                "check if action is possible to perform"
                (if self.trap-bag
                  (and (in self.trap-bag self.character.inventory)
-                      (= (.get-main-type self.trap-bag) "trap bag"))
+                      (trap-bag? self.trap-bag))
                  true))]
    [execute #d(fn [self]
                 "execute the action"

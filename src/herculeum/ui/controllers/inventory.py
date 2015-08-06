@@ -20,6 +20,8 @@
 """
 Module for inventory actions
 """
+from pyherc.data import (is_potion, is_weapon, is_armour, is_ammunition,
+                         is_trap_bag)
 from pyherc.rules import drink, drop_item, equip, pick_up, unequip, place_trap
 
 
@@ -42,11 +44,11 @@ class InventoryController():
         """
         Use item in different ways, depending on the item
         """
-        if item.get_main_type() == 'potion':
+        if is_potion(item):
             drink(self.character,
                   item,
                   self.action_factory)
-        elif item.get_main_type() == 'weapon':
+        elif is_weapon(item):
             if self.character.inventory.weapon != None:
                 unequip(self.character,
                         self.character.inventory.weapon,
@@ -54,7 +56,7 @@ class InventoryController():
             equip(self.character,
                   item,
                   self.action_factory)
-        elif item.get_main_type() == 'armour':
+        elif is_armour(item):
             if self.character.inventory.armour != None:
                 unequip(self.character,
                         self.character.inventory.armour,
@@ -62,11 +64,11 @@ class InventoryController():
             equip(self.character,
                   item,
                   self.action_factory)
-        elif item.get_main_type() == 'ammunition':
+        elif is_ammunition(item):
             equip(self.character,
                   item,
                   self.action_factory)
-        elif item.get_main_type() == 'trap bag':
+        elif is_trap_bag(item):
             place_trap(self.character,
                        item,
                        self.action_factory)

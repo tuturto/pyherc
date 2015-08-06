@@ -165,31 +165,6 @@ class Item():
     minimum_charges_left = property(__get_minimum_charges_left)
 
     @log_debug
-    def get_main_type(self):
-        """
-        Return main type of the item
-
-        :returns: main type
-        :rtype: string
-        """
-        main_type = 'undefined'
-
-        if 'weapon' in self.tags:
-            main_type = 'weapon'
-        elif 'armour' in self.tags:
-            main_type = 'armour'
-        elif 'potion' in self.tags:
-            main_type = 'potion'
-        elif 'ammunition' in self.tags:
-            main_type = 'ammunition'
-        elif 'food' in self.tags:
-            main_type = 'food'
-        elif 'trap bag' in self.tags:
-            main_type = 'trap bag'
-
-        return main_type
-
-    @log_debug
     def get_tags(self):
         """
         Return tags
@@ -344,8 +319,8 @@ class TrapData():
         """
         super().__init__()
 
-        assert(trap_name, "trap name was not provided")
-        assert(count > 0, "trap count was less than one")
+        assert trap_name
+        assert count > 0
 
         self.trap_name = trap_name
         self.count = count
