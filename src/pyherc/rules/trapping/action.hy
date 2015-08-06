@@ -22,13 +22,14 @@
 
 (import [pyherc.aspects [log-debug]]
         [pyherc.data [add-trap trap-bag?]]
-        [pyherc.data.constants [Duration]])
+        [pyherc.data.constants [Duration]]
+        [pyherc.events [new-trap-placed-event]])
 
 (defclass TrappingAction []
   "Action of placing a trap"
   [[--init-- #d(fn [self character trap-bag trap-name trap-creator]
                  "default constructor"
-                 (-> (super) (.--init--))
+                 (super-init)
                  (assert character)
                  (assert (xor trap-bag trap-name))
                  (assert trap-creator)
@@ -53,6 +54,8 @@
                                         self.trap-bag
                                         self.trap-name)]]
                     (add-trap level location trap)
+                    (.raise-event character (new-trap-placed-event character
+                                                                   trap))
                     (when self.trap-bag
                       (setv self.trap-bag.trap-data.count 
                             (dec self.trap-bag.trap-data.count))

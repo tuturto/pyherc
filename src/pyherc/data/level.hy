@@ -215,6 +215,7 @@
 #d(defn add-trap [level location trap]
     "add trap to level"
     (.append (:traps (get-or-create-tile level location)) trap)    
+    (setv trap.level level)
     (setv trap.location location)
     (.on-place trap level location))
 

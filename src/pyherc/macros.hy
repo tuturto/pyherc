@@ -35,3 +35,14 @@
   "perform exclusive or comparison between all arguments"
   (when (< (len args) 2) (macro-error nil "xor requires at least two arguments."))
   `(= (reduce (fn [a b] (if b (inc a) a)) ~args 0) 1))
+
+(defmacro super-init [&rest args &kwargs kwargs]
+  "call super --init-- with given parameters"
+  (cond [(and args kwargs) `(-> (super)
+                                (.--init-- ~@args ~kwargs))]
+        [args `(-> (super)
+                   (.--init-- ~@args))]
+        [kwargs `(-> (super)
+                     (.--init-- ~kwargs))]
+        [true `(-> (super)
+                   (.--init--))]))

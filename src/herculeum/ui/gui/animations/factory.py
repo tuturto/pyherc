@@ -33,6 +33,7 @@ from .mitosis import MitosisAnimation
 from .moving import MoveAnimation
 from .perception import NoticeAnimation, LoseFocusAnimation
 from .poison import PoisonAddedAnimation, PoisonTriggeredAnimation
+from .trap import PlaceTrapAnimation
 from pyherc.events import e_event_type
 
 class AnimationFactory():
@@ -60,7 +61,8 @@ class AnimationFactory():
             'notice': NoticeAnimation,
             'pick up': PickUpAnimation,
             'poisoned': PoisonAddedAnimation,
-            'poison triggered': PoisonTriggeredAnimation
+            'poison triggered': PoisonTriggeredAnimation,
+            'trap placed': PlaceTrapAnimation
         }
 
     def create_animation(self, event):

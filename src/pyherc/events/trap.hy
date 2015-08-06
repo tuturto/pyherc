@@ -17,20 +17,10 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defmacro traps-dsl []
-  `(import [pyherc.data.traps [Caltrops PitTrap]]))
-
-(defmacro traps [&rest trap-list]
-  (setv output {})
-  (for [trap trap-list]         
-    (do
-     (setv params-out {})
-     (setv params-in (iter (slice trap 2)))
-     (for [x params-in] (assoc params-out x (next params-in)))
-     (assoc output (first trap) [(second trap) params-out])))
-  `(defn init-traps []
-     "configure traps"
-     ~output))
-
-;;  key               Type      Parameters
-;; {"small caltrops" [Caltrops {"damage" 1}]}
+(defn new-trap-placed-event [character trap]
+  "create new event to signify a trap has been placed"
+  {:event-type "trap placed"
+   :trap trap
+   :level trap.level
+   :location trap.location
+   :character character})

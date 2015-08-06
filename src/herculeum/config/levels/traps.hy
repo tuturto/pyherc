@@ -24,8 +24,8 @@
 (traps-dsl)
 
 (traps ("pit" PitTrap)
-       ("small caltrops" Caltrops "damage" 1)
-       ("large caltrops" Caltrops "damage" 2))
+       ("small caltrops" Caltrops "damage" 1 "icon" "caltrops")
+       ("large caltrops" Caltrops "damage" 2 "icon" "caltrops"))
 
 (items-list
  (trap-bag "bag of small caltrops"

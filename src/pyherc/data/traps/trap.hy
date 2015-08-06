@@ -18,5 +18,10 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (defclass Trap []
-  [[on-enter (fn [self character])]
+  [[--init-- (fn [self &optional [icon nil]]
+               (setv self.level nil)
+               (setv self.location nil)
+               (setv self.icon icon)
+               nil)]
+   [on-enter (fn [self character])]
    [on-place (fn [self level location])]])

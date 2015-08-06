@@ -17,20 +17,19 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defmacro traps-dsl []
-  `(import [pyherc.data.traps [Caltrops PitTrap]]))
+(require pyherc.macros)
 
-(defmacro traps [&rest trap-list]
-  (setv output {})
-  (for [trap trap-list]         
-    (do
-     (setv params-out {})
-     (setv params-in (iter (slice trap 2)))
-     (for [x params-in] (assoc params-out x (next params-in)))
-     (assoc output (first trap) [(second trap) params-out])))
-  `(defn init-traps []
-     "configure traps"
-     ~output))
+(import [herculeum.ui.gui.animations.animation [Animation]]
+        [herculeum.ui.gui.layers [zorder_trap]]
+        [pyherc.events [e-trap]])
 
-;;  key               Type      Parameters
-;; {"small caltrops" [Caltrops {"damage" 1}]}
+(defclass PlaceTrapAnimation [Animation]
+  "Generic animation for placing trap"
+  [[--init-- (fn [self event]
+               (super-init event)
+               (setv self.trap (e-trap event))
+               nil)]
+   [trigger (fn [self ui]
+              (.add-glyph ui self.trap
+                          ui.scene
+                          zorder-trap))]])

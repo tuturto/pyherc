@@ -35,7 +35,7 @@ class PitTrap(Trap):
         """
         Default constructor
         """
-        self.location = ( )
+        super().__init__()
 
     def on_enter(self, character):
         """

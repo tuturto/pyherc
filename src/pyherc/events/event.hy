@@ -94,3 +94,6 @@
 
 (defn e-new-characters [event]
   (:new-characters event))
+
+(defn e-trap [event]
+  (:trap event))

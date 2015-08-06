@@ -461,6 +461,8 @@
         <file>misc/grey_stairs_down.png</file>
         <file>misc/grey_stairs_up.png</file>
 
+        <file>traps/caltrops.png</file>
+
         <file>pits/brick_pit_01.png</file>
         <file>pits/brick_pit_02.png</file>
         <file>pits/brick_pit_03.png</file>

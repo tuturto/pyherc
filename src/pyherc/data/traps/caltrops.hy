@@ -25,7 +25,8 @@
         [pyherc.events [new-damage-triggered-event]])
 
 (defclass Caltrops [Trap]
-  [[--init-- (fn [self damage]
+  [[--init-- (fn [self damage &optional [icon nil]]
+               (super-init icon)
                (setv self.damage damage)
                nil)]
    [on-enter (fn [self character]
