@@ -105,6 +105,8 @@ def impl(context, character_name, location_name):
     path, connections, updated = a_star(character.location,
                                         place.location,
                                         character.level)
+    assert len(path) > 1
+
     for tile in path[1:]:
         direction = find_direction(character.location,
                                    tile)

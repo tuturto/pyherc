@@ -20,10 +20,11 @@
 # flake8: noqa
 
 from behave import step_matcher
+from pyherc.data import is_armour, is_boots
 from pyherc.test.bdd.features.helpers import (armour_list, default_context,
                                               get_character, get_item,
                                               get_location, misc_item_list,
-                                              weapon_list)
+                                              weapon_list, boots_list)
 from pyherc.test.cutesy import drop, make
 
 step_matcher('re')
@@ -33,6 +34,7 @@ step_matcher('re')
 @weapon_list
 @armour_list
 @misc_item_list
+@boots_list
 def impl(context, character_name, item_name):
     if item_name in context.armour_list:
         item = context.armour_list[item_name]()
@@ -40,6 +42,8 @@ def impl(context, character_name, item_name):
         item = context.weapon_list[item_name]()
     elif item_name in context.misc_item_list:
         item = context.misc_item_list[item_name]()
+    elif item_name in context.boots_list:
+        item = context.boots_list[item_name]()
 
     context.items.append(item)
 
@@ -105,13 +109,22 @@ def impl(context, character_name, weapon_name):
     character.inventory.append(weapon)
     character.inventory.weapon = weapon
 
-@given('{character_name} wears {armour_name}')
+@given('{character_name} wears {item_name}')
 @default_context
 @armour_list
-def impl(context, character_name, armour_name):
-    armour = context.armour_list[armour_name]()
-    context.items.append(armour)
+@boots_list
+def impl(context, character_name, item_name):
+    if item_name in context.armour_list:
+        item = context.armour_list[item_name]()
+    elif item_name in context.boots_list:
+        item = context.boots_list[item_name]()
+
+    context.items.append(item)
 
     character = get_character(context, character_name)
-    character.inventory.append(armour)
-    character.inventory.armour = armour
+    character.inventory.append(item)
+
+    if is_armour(item):
+        character.inventory.armour = item
+    elif is_boots(item):
+        character.inventory.boots = item

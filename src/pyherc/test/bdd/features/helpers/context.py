@@ -24,7 +24,8 @@ from pyherc.data import Model
 from pyherc.ports import ActionsPort
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.cutesy import (Arrows, Bow, Club, Dagger, LeatherArmour,
-                                PlateMail, Rune, ScaleMail, Sword, Warhammer)
+                                PlateMail, Rune, ScaleMail, Sword, Warhammer,
+                                LightBoots, HeavyBoots, IronBoots)
 
 
 def default_context(fn):
@@ -106,6 +107,27 @@ def armour_list(fn):
         return fn(*args, **kwargs)
 
     return armour_setup
+
+
+def boots_list(fn):
+    """
+    Decorator to set up boots list
+    """
+    def boots_setup(*args, **kwargs):
+        """
+        Setup boots list
+        """
+        context = args[0]
+
+        if not hasattr(context, 'boots_list'):
+            context.boots_list = {}
+            context.boots_list['light boots'] = LightBoots
+            context.boots_list['heavy boots'] = HeavyBoots
+            context.boots_list['iron boots'] = IronBoots
+
+        return fn(*args, **kwargs)
+
+    return boots_setup
 
 
 def weapon_list(fn):

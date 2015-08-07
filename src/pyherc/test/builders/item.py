@@ -262,7 +262,7 @@ class ItemBuilder():
         Set damage reduction of the item if used as boots
         """
         if self.boots_data is None:
-            self.bots_data = BootsData()
+            self.boots_data = BootsData()
         self.boots_data.damage_reduction = damage_reduction
         return self
 

@@ -22,8 +22,7 @@
 """
 Package for BDD helpers
 """
-from .context import default_context, with_action_factory, get_character
-from .context import get_location, get_item, get_entity, armour_list
-from .context import misc_item_list
-from .context import weapon_list
+from .context import (default_context, with_action_factory, get_character,
+                      get_location, get_item, get_entity, armour_list,
+                      misc_item_list, weapon_list, boots_list)
 from .events import observed
