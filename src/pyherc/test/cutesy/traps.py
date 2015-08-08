@@ -20,7 +20,7 @@
 """
 Package for traps
 """
-from pyherc.data.traps import PitTrap
+from pyherc.data.traps import PitTrap, Caltrops
 
 
 def pit_trap():
@@ -31,3 +31,9 @@ def pit_trap():
     :rtype: PitTrap
     """
     return PitTrap()
+
+def caltrops():
+    """
+    Creates caltrops
+    """
+    return Caltrops(damage=2)

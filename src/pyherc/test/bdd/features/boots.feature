@@ -11,21 +11,21 @@ Feature: Boots
      Given Pete wears light boots
        And caltrops is next to Pete
       When Pete walks on caltrops
-      Then Trap damage should be reduced
+      Then damage should be reduced
 
   Scenario: Well protected
      Given Pete wears heavy boots
        And caltrops is next to Pete
       When Pete walks on caltrops
-      Then Trap damage should be 1
+      Then damage should be 1
 
   Scenario: Completely protected
      Given Pete wears iron boots
        And caltrops is next to Pete
       When Pete walks on caltrops
-      Then Trap damage should be 0
+      Then damage should be 0
 
-  Scenario: Moving in heavy armour is slow
+  Scenario: Moving with heavy boots on is slow
      Given Pete wears heavy boots
       When Pete takes a step
       Then Pete should move slower than without heavy boots

@@ -42,7 +42,7 @@ class AttackHitAnimation(Animation):
         super().__init__(event)
 
         self.location = e_target(event).location
-        self.damage = -e_damage(event)
+        self.damage = -e_damage(event)[0]
         self.colour = 'white'
         self.offset = (0, 0)
 

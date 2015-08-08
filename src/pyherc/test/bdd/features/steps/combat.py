@@ -50,10 +50,14 @@ def impl(context, damage_type):
     attack_hit_events = (x for x in context.observer.events
                          if e_event_type(x) == 'attack hit')
 
-    matching_events = [x for x in attack_hit_events
-                       if damage_type in e_damage(x).damage_types]
+    found = False
+    for event in attack_hit_events:
+        damage_list = e_damage(event)[1]
+        for damage in damage_list:
+            if damage_type == damage[1]:
+                found = True
 
-    assert len(matching_events) > 0
+    assert found
 
 @then('{character_name} should suffer extra damage')
 def impl(context, character_name):
@@ -75,7 +79,7 @@ def impl(context, character_name):
 
     assert(total_damage_suffered > total_damage_from_weapon)
 
-@then('Attack damage should be reduced')
+@then('damage should be reduced')
 def impl(context):
     observer = context.observer
 
@@ -87,16 +91,23 @@ def impl(context):
     attack_events = [x for x in observer.events
                      if e_event_type(x) == 'attack hit']
 
-    attack_event = attack_events[0]
+    if attack_events:
+        attack_event = attack_events[0]
 
-    weapon = e_attacker(attack_event).inventory.weapon
+        weapon = e_attacker(attack_event).inventory.weapon
 
-    expected_damage = sum(x[0] for x in weapon.weapon_data.damage)
-    realised_damage = e_old_hit_points(hp_event) - e_new_hit_points(hp_event)
+        expected_damage = sum(x[0] for x in weapon.weapon_data.damage)
+        realised_damage = e_old_hit_points(hp_event) - e_new_hit_points(hp_event)
+
+    else:
+        trap_event = [x for x in observer.events
+                      if e_event_type(x) == 'damage trap triggered'][0]
+        expected_damage = 2
+        realised_damage = e_damage(trap_event)[0]
 
     assert_that(realised_damage, is_(less_than(expected_damage)))
 
-@then('Attack damage should be {damage_amount}')
+@then('damage should be {damage_amount}')
 def impl(context, damage_amount):
     observer = context.observer
     damage = int(damage_amount)

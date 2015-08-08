@@ -24,3 +24,11 @@
    :level trap.level
    :location trap.location
    :character character})
+
+(defn damage-trap-triggered [character trap damage]
+  "create new event to signify a trap was triggered"
+  {:event-type "damage trap triggered"
+   :trap trap
+   :level trap.level
+   :location trap.location
+   :damage damage})

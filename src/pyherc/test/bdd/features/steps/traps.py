@@ -20,14 +20,18 @@
 # flake8: noqa
 
 from pyherc.test.bdd.features.helpers import default_context, get_entity
-from pyherc.test.cutesy import pit_trap
+from pyherc.test.cutesy import pit_trap, caltrops
 from pyherc.data import add_trap
 
 
 @given('{trap_name} is next to {entity_name}')
 @default_context
 def impl(context, trap_name, entity_name):
-    trap = pit_trap()
+    if trap_name == 'pit':
+        trap = pit_trap()
+    elif trap_name == 'caltrops':
+        trap = caltrops()
+
     trap.name = trap_name
 
     entity = get_entity(context, entity_name)

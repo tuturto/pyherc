@@ -37,4 +37,4 @@ from .dictionary import make, drop, hit, wait_, gain_domain_
 from .dictionary import has_dropped, has_less_hit_points
 from .dictionary import cast_spell
 from .dictionary import take_random_step
-from .traps import pit_trap
+from .traps import pit_trap, caltrops

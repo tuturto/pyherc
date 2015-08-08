@@ -47,4 +47,4 @@ from .new_level import new_level_event
 from .perception import new_notice_event, new_lose_focus_event
 from .poison import (poison_triggered, poison_added, poison_ended)
 from .spirit import new_spirit_points_changed_event
-from .trap import new_trap_placed_event
+from .trap import new_trap_placed_event, damage_trap_triggered

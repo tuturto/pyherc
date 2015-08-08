@@ -13,19 +13,19 @@ Feature: Armours
       Given Pete wields club
         And Uglak wears leather armour
        When Pete hits Uglak
-       Then Attack damage should be reduced
+       Then damage should be reduced
 
   Scenario: Well protected
       Given Uglak wields dagger
         And Pete wears scale mail
        When Uglak hits Pete
-       Then Attack damage should be 1
+       Then damage should be 1
 
   Scenario: Completely protected
       Given Uglak wields dagger
         And Pete wears plate mail
        When Uglak hits Pete
-       Then Attack damage should be 0
+       Then damage should be 0
 
   Scenario: Moving in heavy armour is slow
       Given Pete wears scale mail

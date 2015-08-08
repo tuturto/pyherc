@@ -48,7 +48,7 @@ class TestDamage():
 
         damage_inflicted = damage(target=character)
 
-        assert_that(damage_inflicted, is_(equal_to(0)))
+        assert_that(damage_inflicted[0], is_(equal_to(0)))
 
     def test_armour_is_used(self):
         """
@@ -65,7 +65,7 @@ class TestDamage():
 
         damage_inflicted = damage(target=character)
 
-        assert_that(damage_inflicted, is_(equal_to(4)))
+        assert_that(damage_inflicted[0], is_(equal_to(4)))
 
     def test_less_than_double_protection_is_not_negated(self):
         """
@@ -83,4 +83,4 @@ class TestDamage():
 
         damage_inflicted = damage(target=character)
 
-        assert_that(damage_inflicted, is_(equal_to(1)))
+        assert_that(damage_inflicted[0], is_(equal_to(1)))
