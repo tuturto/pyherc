@@ -83,6 +83,10 @@ class MoveAction():
             else:
                 speed_modifier = 1
 
+            boots = self.character.inventory.boots
+            if boots:
+                speed_modifier -= boots.boots_data.speed_modifier
+
             self.character.add_to_tick(Duration.fast / speed_modifier)
 
             if self.new_level not in visited_levels(self.character):

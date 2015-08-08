@@ -50,3 +50,8 @@
       (.with-name "iron boots")
       (.with-boots-damage-reduction 4)
       (.with-boots-speed-modifier 0.75))
+
+(item SpeedBoots
+      (.with-name "speed boots")
+      (.with-boots-damage-reduction 1)
+      (.with-boots-speed-modifier 1.2))

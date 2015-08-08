@@ -19,7 +19,7 @@
 
 # flake8: noqa
 
-from hamcrest import assert_that, greater_than, is_not
+from hamcrest import assert_that, greater_than, is_not, less_than
 from pyherc.ai.pathfinding import a_star
 from pyherc.data.constants import Direction, Duration
 from pyherc.data.effects import DamageModifier
@@ -126,14 +126,21 @@ def impl(context, character_name):
     character = get_character(context, character_name)
     make(character, take_random_step())
 
-@then('{character_name} should move slower than without {armour_name}')
+@then('{character_name} should move {delta} than without {armour_name}')
 @with_action_factory
-def impl(context, character_name, armour_name):
+def impl(context, character_name, delta, armour_name):
     character = get_character(context, character_name)
     armour = get_item(context, armour_name)
 
-    assert_that(character.tick,
-                is_(greater_than(character.speed * Duration.fast)))
+    if delta == 'slower':
+        assert_that(character.tick,
+                    is_(greater_than(character.speed * Duration.fast)))
+    elif delta == 'faster':
+        assert_that(character.tick,
+                    is_(less_than(character.speed * Duration.fast)))
+    else:
+        assert False
+
 
 @then('{character_name} should attack slower than without {weapon_name}')
 @with_action_factory

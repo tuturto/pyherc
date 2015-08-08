@@ -27,7 +27,7 @@ from .characters import Goblin, Adventurer, Wizard
 from .characters import strong, weak
 from .weapons import Dagger, Sword, Club, Bow, Arrows, Warhammer
 from .armours import (LeatherArmour, ScaleMail, PlateMail,
-                      LightBoots, HeavyBoots, IronBoots)
+                      LightBoots, HeavyBoots, IronBoots, SpeedBoots)
 from .items import Rune
 from .dictionary import at_
 from .dictionary import affect, with_, potent_poison, weak_poison
