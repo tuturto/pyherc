@@ -25,7 +25,8 @@ from pyherc.ports import ActionsPort
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.cutesy import (Arrows, Bow, Club, Dagger, LeatherArmour,
                                 PlateMail, Rune, ScaleMail, Sword, Warhammer,
-                                LightBoots, HeavyBoots, IronBoots, SpeedBoots)
+                                LightBoots, HeavyBoots, IronBoots, SpeedBoots,
+                                FlyingBoots)
 
 
 def default_context(fn):
@@ -125,6 +126,7 @@ def boots_list(fn):
             context.boots_list['heavy boots'] = HeavyBoots
             context.boots_list['iron boots'] = IronBoots
             context.boots_list['speed boots'] = SpeedBoots
+            context.boots_list['flying boots'] = FlyingBoots
 
         return fn(*args, **kwargs)
 

@@ -22,9 +22,10 @@
 """
 Package for magical effects
 """
-from .effectscollection import EffectsCollection
-from .effect import Effect, EffectHandle
-from .poison import Poison
-from .heal import Heal
 from .damage import DamageEffect
 from .damagemodifier import DamageModifier
+from .effectscollection import EffectsCollection
+from .effect import Effect, EffectHandle
+from .heal import Heal
+from .movementmode import MovementModeModifier
+from .poison import Poison

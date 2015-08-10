@@ -323,9 +323,11 @@ class TestSwitchingPlaces():
         self.level = LevelBuilder().build()
 
         self.monster_1 = (CharacterBuilder()
+                          .with_name('Pete')
                           .build())
 
         self.monster_2 = (CharacterBuilder()
+                          .with_name('Uglak')
                           .build())
 
         add_character(self.level, (5, 5), self.monster_1)

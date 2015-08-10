@@ -41,3 +41,12 @@
   "add level to visited levels list"
   (when (not (in level character.visited-levels))
     (.append character.visited-levels level)))
+
+(defn speed-modifier [character]
+  "get total speed modifier for this character"
+  (let [[speed-mod 1.0]]
+    (when character.inventory.armour
+      (* speed-mod character.inventory.armour.speed-modifier))
+    (when character.inventory.boots
+      (* speed-mod character.inventory.boots.speed-modifier))
+    speed-mod))

@@ -48,4 +48,9 @@
                    (.--init--))]))
 
 (defmacro set-attributes [&rest attributes]
+  "set attributes of object with respective parameters in --init--"
   `(do ~@(genexpr `(setv (. self ~x) ~x) [x attributes])))
+
+(defmacro when-not [check &rest body]
+  "like when, but inversed"
+  `(when (not ~check) ~@body))

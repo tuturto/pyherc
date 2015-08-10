@@ -39,7 +39,8 @@ from .constants import Duration, SpecialTime, Direction
 from .geometry import distance_between, heuristic_estimate_of_distance
 from .geometry import area_4_around, area_around, find_direction
 
-from .new_character import (is_skill_ready, cooldown, add_visited_level, visited_levels)
+from .new_character import (is_skill_ready, cooldown, add_visited_level, visited_levels,
+                            speed_modifier)
 from .level import (get_tile, new_tile, floor_tile, add_portal, get_portal,
                     wall_tile, tile, blocks_los, ornamentation,
                     level_size, find_free_space, blocks_movement,

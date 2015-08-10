@@ -34,7 +34,7 @@ from pyherc.rules.inventory.unequip import UnEquipFactory
 from pyherc.rules.magic import GainDomainFactory, SpellCastingFactory
 from pyherc.rules.mitosis.factory import MitosisFactory
 from pyherc.rules.metamorphosis.factory import MetamorphosisFactory
-from pyherc.rules.moving.factories import MoveFactory, WalkFactory
+from pyherc.rules.moving.factories import MoveFactory
 from pyherc.rules.trapping.factory import TrappingFactory
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.waiting.factories import WaitFactory
@@ -273,8 +273,7 @@ class ActionFactoryBuilder():
                                                        unequip_factory])
 
         if self.use_real_move_factory:
-            walk_factory = WalkFactory(mock(), mock())
-            self.move_factory = MoveFactory(walk_factory)
+            self.move_factory = MoveFactory(mock(), mock())
 
         if self.use_real_spellcasting_factory:
             self.spellcasting_factory = SpellCastingFactoryBuilder().build()

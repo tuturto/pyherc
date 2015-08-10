@@ -55,3 +55,8 @@
       (.with-name "speed boots")
       (.with-boots-damage-reduction 1)
       (.with-boots-speed-modifier 1.2))
+
+(item FlyingBoots
+      (.with-name "flying boots")
+      (.with-boots-damage-reduction 1)
+      (.with-boots-speed-modifier 1))

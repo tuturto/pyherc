@@ -43,7 +43,7 @@ from pyherc.rules.inventory.unequip import UnEquipFactory
 from pyherc.rules.mitosis.factory import MitosisFactory
 from pyherc.rules.metamorphosis.factory import MetamorphosisFactory
 from pyherc.rules.magic import SpellCastingFactory
-from pyherc.rules.moving.factories import MoveFactory, WalkFactory
+from pyherc.rules.moving.factories import MoveFactory
 from pyherc.rules.trapping.factory import TrappingFactory
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.waiting import WaitFactory
@@ -91,9 +91,8 @@ class Configuration():
         """
         dying_rules = Dying()
 
-        walk_factory = WalkFactory(self.level_generator_factory,
+        move_factory = MoveFactory(self.level_generator_factory,
                                    dying_rules)
-        move_factory = MoveFactory(walk_factory)
 
         effect_config = {}
         configurators = self.get_configurators(context.config_package,
