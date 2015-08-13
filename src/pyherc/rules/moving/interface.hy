@@ -42,10 +42,10 @@
   [[--init-- (fn [self character direction movement-mode]
                "construct move parameters"
                (super-init)
+               (set-attributes character
+                               direction
+                               movement-mode)
                (setv self.action-type "move")
-               (setv self.character character)
-               (setv self.direction direction)
-               (setv self.movement-mode movement-mode)
                nil)]
    [--str-- (fn [self]
               "get string representation of this object"

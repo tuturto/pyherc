@@ -21,11 +21,11 @@
 Module for testing wearing armour
 """
 
-from hamcrest import assert_that  # pylint: disable-msg=E0611
-from pyherc.rules import equip
+from hamcrest import assert_that, is_not  # pylint: disable-msg=E0611
+from pyherc.rules import equip, unequip
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder)
-from pyherc.test.matchers import is_wearing
+from pyherc.test.matchers import is_wearing_armour, is_wearing_boots
 
 
 class TestWearingArmour():
@@ -58,4 +58,44 @@ class TestWearingArmour():
               armour,
               action_factory)
 
-        assert_that(character, is_wearing(armour))
+        assert_that(character, is_wearing_armour(armour))
+
+    def test_wear_boots(self):
+        """
+        Test that boots can be worn
+        """
+        character = CharacterBuilder().build()
+
+        boots = (ItemBuilder()
+                 .with_name('boots')
+                 .with_boots_speed_modifier(1)
+                 .build())
+
+        action_factory = (ActionFactoryBuilder()
+                          .with_inventory_factory()
+                          .build())
+
+        equip(character, boots, action_factory)
+
+        assert_that(character, is_wearing_boots(boots))
+
+    def test_taking_off_boots(self):
+        """
+        Boots can be removed
+        """
+        character = CharacterBuilder().build()
+
+        boots = (ItemBuilder()
+                 .with_name('boots')
+                 .with_boots_speed_modifier(1)
+                 .build())
+
+        character.inventory.boots = boots
+
+        action_factory = (ActionFactoryBuilder()
+                          .with_inventory_factory()
+                          .build())
+
+        unequip(character, boots, action_factory)
+
+        assert_that(character, is_not(is_wearing_boots(boots)))

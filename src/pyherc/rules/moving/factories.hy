@@ -24,7 +24,7 @@
         [pyherc.data [get-portal blocks-movement get-character]]
         [pyherc.data.geometry [area-around]]
         [pyherc.rules.factory [SubActionFactory]]
-        [pyherc.rules.moving.action [EscapeAction MoveAction
+        [pyherc.rules.moving.action [EscapeAction MoveAction FlyAction
                                      SwitchPlacesAction WalkAction]])
 
 (defclass MoveFactory [SubActionFactory]
@@ -51,20 +51,33 @@
                      (do
                       (setv new-location (.get-location-at-direction character direction))
                       (cond [(blocks-movement new-level new-location)
-                             (WalkAction :character character
-                                         :new-location location
-                                         :new-level new-level
-                                         :skip-creature-check false
-                                         :dying-rules self.dying-rules)]
+                             (if (= parameters.movement-mode "walk")
+                               (WalkAction :character character
+                                           :new-location location
+                                           :new-level new-level
+                                           :skip-creature-check false
+                                           :dying-rules self.dying-rules)
+                               (FlyAction :character character
+                                          :new-location location
+                                          :new-level new-level
+                                          :skip-creature-check false
+                                          :dying-rules self.dying-rules))]
                             [(get-character new-level new-location)
                              (get-place-switch-action character
                                                       new-location
                                                       self.dying-rules)]
-                            [true (WalkAction :character character
-                                              :new-location new-location
-                                              :new-level new-level
-                                              :skip-creature-check false
-                                              :dying-rules self.dying-rules)])))))]])
+                            [true 
+                             (if (= parameters.movement-mode "walk")
+                               (WalkAction :character character
+                                           :new-location new-location
+                                           :new-level new-level
+                                           :skip-creature-check false
+                                           :dying-rules self.dying-rules)
+                               (FlyAction :character character
+                                          :new-location new-location
+                                          :new-level new-level
+                                          :skip-creature-check false
+                                          :dying-rules self.dying-rules))])))))]])
 
 (defn get-place-switch-action [character new-location dying-rules]
   "get action for two characters switching places"

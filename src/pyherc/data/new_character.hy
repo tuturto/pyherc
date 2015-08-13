@@ -46,7 +46,7 @@
   "get total speed modifier for this character"
   (let [[speed-mod 1.0]]
     (when character.inventory.armour
-      (* speed-mod character.inventory.armour.speed-modifier))
+      (setv speed-mod (* speed-mod character.inventory.armour.armour-data.speed-modifier)))
     (when character.inventory.boots
-      (* speed-mod character.inventory.boots.speed-modifier))
+      (setv speed-mod (* speed-mod character.inventory.boots.boots-data.speed-modifier)))
     speed-mod))

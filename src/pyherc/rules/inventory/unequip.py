@@ -20,7 +20,7 @@
 """
 Module defining classes related to inventory actions
 """
-from pyherc.data import is_armour, is_weapon
+from pyherc.data import is_armour, is_weapon, is_boots
 from pyherc.aspects import log_debug, log_info
 from pyherc.events import new_unequip_event
 from pyherc.rules.factory import SubActionFactory
@@ -94,6 +94,11 @@ class UnEquipAction():
                                                          self.item))
         if is_weapon(self.item):
             self.character.inventory.weapon = None
+            self.character.raise_event(new_unequip_event(self.character,
+                                                         self.item))
+
+        if is_boots(self.item):
+            self.character.inventory.boots = None
             self.character.raise_event(new_unequip_event(self.character,
                                                          self.item))
 

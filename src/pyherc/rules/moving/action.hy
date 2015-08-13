@@ -62,10 +62,7 @@
                                                             :old-location old-location
                                                             :old-level old-level
                                                             :direction direction)))
-                  (.add-to-tick self.character Duration.instant))
-                (ap-each (traps↜ self.character.level self.character.location)
-                         (.on-enter it self.character))
-                (.check-dying self.dying-rules self.character))]
+                  (.add-to-tick self.character Duration.instant)))]
    [legal? #d(fn [self]
                "check if the move is possible to perform"
 
@@ -81,6 +78,16 @@
 
 (defclass WalkAction [MoveAction]
   "action for walking"
+  [[execute #i(fn [self]
+                "execute this move"
+                (-> (super)
+                    (.execute))
+                (ap-each (traps↜ self.character.level self.character.location)
+                         (.on-enter it self.character))
+                (.check-dying self.dying-rules self.character))]])
+
+(defclass FlyAction [MoveAction]
+  "action for flying"
   [[execute #i(fn [self]
                 "execute this move"
                 (-> (super)

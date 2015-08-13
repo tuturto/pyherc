@@ -27,12 +27,13 @@ class IsWearingMatcher(BaseMatcher):
     """
     Matcher to check if character is wearing an item
     """
-    def __init__(self, item):
+    def __init__(self, item, slot):
         """
         Default constructor
         """
         super().__init__()
         self.item = item
+        self.slot = slot
 
     def _matches(self, item):
         """
@@ -44,7 +45,10 @@ class IsWearingMatcher(BaseMatcher):
         """
         inventory = item.inventory
 
-        if inventory.armour == self.item:
+        if self.slot == 'armour' and inventory.armour == self.item:
+            return True
+
+        if self.slot == 'boots' and inventory.boots == self.item:
             return True
 
         return False
@@ -98,12 +102,17 @@ class IsInInventoryMatcher(BaseMatcher):
                                     .format(item.inventory))
 
 
-def is_wearing(item):
+def is_wearing_armour(item):
     """
     Check if character is wearing an item
     """
-    return IsWearingMatcher(item)
+    return IsWearingMatcher(item, 'armour')
 
+def is_wearing_boots(item):
+    """
+    Check if character is wearing boots
+    """
+    return IsWearingMatcher(item, 'boots')
 
 def does_have(item):
     """
