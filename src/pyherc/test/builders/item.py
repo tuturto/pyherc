@@ -37,6 +37,7 @@ class ItemBuilder():
         self.name = 'prototype'
         self.appearance = ''
         self.effect_handles = []
+        self.effects = []
         self.location = ()
         self.icon = 0
         self.weapon_data = None
@@ -81,6 +82,16 @@ class ItemBuilder():
             self.effect_handles.append(handle.build())
         else:
             self.effect_handles.append(handle)
+        return self
+
+    def with_effect(self, effect):
+        """
+        Add effect to the item
+        """
+        if hasattr(effect, 'build'):
+            self.effects.append(effect.build())
+        else:
+            self.effects.append(effect)
         return self
 
     def with_location(self, location):
@@ -268,5 +279,8 @@ class ItemBuilder():
 
         for handle in self.effect_handles:
             item.add_effect_handle(handle)
+
+        for effect in self.effects:
+            item.add_effect(effect)
 
         return item

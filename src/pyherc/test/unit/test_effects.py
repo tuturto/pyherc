@@ -320,6 +320,21 @@ class TestEffectHandling():
         assert_that(self.character, has_effect(effect_1))
         assert_that(self.character, has_effect(effect_2))
 
+    def test_worn_boots_effects(self):
+        """
+        Boots' effects are reported as user's effects
+        """
+        effect = (EffectBuilder()
+                  .build())
+
+        item = (ItemBuilder()
+                .with_effect(effect)
+                .build())
+
+        self.character.inventory.boots = item
+
+        assert_that(self.character, has_effect(effect))
+
 
 class TestEternalEffects():
     """

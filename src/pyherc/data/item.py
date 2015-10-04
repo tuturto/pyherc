@@ -133,6 +133,41 @@ class Item():
         return self.__effects_collection.get_effect_handles(trigger)
 
     @log_debug
+    def add_effect(self, effect):
+        """
+        Add effect
+        """
+        self.__effects_collection.add_effect(effect)
+
+    @log_debug
+    def get_effects(self):
+        """
+        Get effects of item
+        """
+        return self.__effects_collection.get_effects()
+
+    @log_debug
+    def has_effect(self, effect):
+        """
+        Check if effect of given type exists
+        """
+        return self.__effects_collection.has_effect(effect)
+
+    @log_debug
+    def get_expired_effects(self):
+        """
+        Get expired effects
+        """
+        return self.__effects_collection.get_expired_effects()
+
+    @log_debug
+    def remove_expired_effects(self):
+        """
+        Remove expired effects from collection
+        """
+        self.__effects_collection.remove_expired_effects()
+
+    @log_debug
     def __get_charges_left(self):
         """
         Amount of charges left in collection

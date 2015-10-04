@@ -436,7 +436,14 @@ class Character():
 
         .. versionadded:: 0.4
         """
-        return self.__effects_collection.get_effects()
+        effects = []
+
+        if self.inventory.boots:
+            effects.extend(self.inventory.boots.get_effects())
+
+        effects.extend(self.__effects_collection.get_effects())
+
+        return effects
 
     @log_debug
     def remove_expired_effects(self):
