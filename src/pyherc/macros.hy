@@ -46,3 +46,6 @@
                      (.--init-- ~kwargs))]
         [true `(-> (super)
                    (.--init--))]))
+
+(defmacro set-attributes [&rest attributes]
+  `(do ~@(genexpr `(setv (. self ~x) ~x) [x attributes])))
