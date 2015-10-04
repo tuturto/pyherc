@@ -57,7 +57,7 @@ class TestEffects():
                                    'description': 'major heal'}})
 
         potion = (ItemBuilder()
-                  .with_effect(EffectHandleBuilder()
+                  .with_effect_handle(EffectHandleBuilder()
                                .with_trigger('on drink')
                                .with_effect('major heal')
                                .with_charges(2))
@@ -96,7 +96,7 @@ class TestEffects():
                                                  'description': 'healing'}})
 
         potion = (ItemBuilder()
-                  .with_effect(EffectHandleBuilder()
+                  .with_effect_handle(EffectHandleBuilder()
                                .with_trigger('on drink')
                                .with_effect('major heal')
                                .with_charges(2))

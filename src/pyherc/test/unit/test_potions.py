@@ -87,7 +87,7 @@ class TestPotions():
 
         self.potion = (ItemBuilder()
                             .with_name('healing potion')
-                            .with_effect(
+                            .with_effect_handle(
                                 EffectHandleBuilder()
                                     .with_trigger('on drink')
                                     .with_effect('heal'))
@@ -146,7 +146,7 @@ class TestPotions():
         """
         self.potion = (ItemBuilder()
                             .with_name('healing potion')
-                            .with_effect(
+                            .with_effect_handle(
                                 EffectHandleBuilder()
                                     .with_trigger('on drink')
                                     .with_charges(5))

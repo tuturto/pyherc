@@ -68,7 +68,7 @@ class ItemBuilder():
         self.appearance = appearance
         return self
 
-    def with_effect(self, handle):
+    def with_effect_handle(self, handle):
         """
         Add effect handle to the item
 

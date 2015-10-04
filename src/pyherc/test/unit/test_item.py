@@ -312,8 +312,8 @@ class TestItemEffects:
                             .with_trigger('on break')
                             .build())
         self.item = (ItemBuilder()
-                        .with_effect(self.effect1)
-                        .with_effect(self.effect2)
+                        .with_effect_handle(self.effect1)
+                        .with_effect_handle(self.effect2)
                         .build())
 
     def test_get_all_effects(self):
@@ -376,7 +376,7 @@ class TestItemCharges:
         """
 
         self.item = (ItemBuilder()
-                        .with_effect(EffectHandleBuilder()
+                        .with_effect_handle(EffectHandleBuilder()
                                 .with_trigger('on drink')
                                 .with_charges(1))
                         .build())
