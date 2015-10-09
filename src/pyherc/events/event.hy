@@ -17,6 +17,11 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(defn empty-event []
+  {:event-type "empty"
+   :level nil
+   :character nil})
+
 (defn e-event-type [event]
   (:event-type event))
 

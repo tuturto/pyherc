@@ -17,7 +17,7 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn new-damage-triggered-event [target damage damage-type]
+(defn damage-triggered [target damage damage-type]
   "create new event to signify damage was dealt"
   {:event-type "damage triggered"
    :level target.level
@@ -26,7 +26,7 @@
    :damage damage
    :damage-type damage-type})
 
-(defn new-damage-added-event [target effect]
+(defn damage-added [target effect]
   "create event to signify damage effect was added"
   {:event-type "damage started"
    :level target.level
@@ -34,7 +34,7 @@
    :target target
    :effect effect})
 
-(defn new-damage-ended-event [target effect]
+(defn damage-ended [target effect]
   "create event to signify damage effect is over"
   {:event-type "damage ended"
    :level target.level

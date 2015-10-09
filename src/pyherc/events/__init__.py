@@ -25,8 +25,7 @@ Package for events that are used to communicate between creatures and UI
 
 from .combat import (new_attack_hit_event, new_attack_miss_event,
                      new_attack_nothing_event)
-from .damage import (new_damage_triggered_event, new_damage_added_event,
-                     new_damage_ended_event)
+from .damage import (damage_triggered, damage_added, damage_ended)
 from .dig import new_dig_event
 from .death import new_death_event
 from .effect import new_effect_added_event, new_effect_removed_event
@@ -35,7 +34,7 @@ from .event import (e_event_type, e_level, e_location, e_character, e_old_spirit
                     e_new_spirit, e_target, e_damage, e_deceased, e_new_items,
                     e_new_characters, e_item, e_new_character, e_destroyed_characters,
                     e_old_location, e_direction, e_attacker, e_old_hit_points,
-                    e_new_hit_points, e_trap)
+                    e_new_hit_points, e_trap, empty_event)
 from .healing import (new_heal_triggered_event, new_heal_added_event,
                       new_heal_ended_event)
 from .hitpoints import new_hit_points_changed_event

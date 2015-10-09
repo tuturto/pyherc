@@ -19,14 +19,12 @@
 
 (require pyherc.data.effects.macros)
 
+(import [pyherc.events [empty-event]])
+
 (effect-dsl)
 
 (effect DamageModifier "damage modifier"
         [modifier damage-type]
         :multiple-allowed true
-        :add-event {:effect-type "hack"
-                    :level nil
-                    :character nil}
-        :remove-event {:effect-type "hack"
-                       :level nil
-                       :character nil})
+        :add-event (empty-event)
+        :remove-event (empty-event))

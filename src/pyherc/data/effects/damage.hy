@@ -20,8 +20,7 @@
 (require pyherc.data.effects.macros)
 
 (import [pyherc.data.damage [new-damage]]
-        [pyherc.events [new-damage-added-event new-damage-ended-event
-                        new-damage-triggered-event]])
+        [pyherc.events [damage-added damage-ended damage-triggered]])
 
 (effect-dsl)
 
@@ -30,11 +29,11 @@
         :trigger (let [[dmg (new-damage [#t(damage damage-type)])]
                        [damage-caused (dmg target)]]
                    (.raise-event target
-                                 (new-damage-triggered-event :target target
-                                                             :damage damage-caused
-                                                             :damage-type damage-type))
+                                 (damage-triggered :target target
+                                                   :damage damage-caused
+                                                   :damage-type damage-type))
                    (.check-dying dying-rules target))
-        :add-event (new-damage-added-event :target target
-                                           :effect self)
-        :remove-event (new-damage-ended-event :target target
-                                              :effect self))
+        :add-event (damage-added :target target
+                                 :effect self)
+        :remove-event (damage-ended :target target
+                                    :effect self))
