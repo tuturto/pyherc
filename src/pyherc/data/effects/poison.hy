@@ -19,8 +19,7 @@
 
 (require pyherc.data.effects.macros)
 
-(import [pyherc.events [new-poison-added-event new-poison-ended-event
-                        new-poison-triggered-event]])
+(import [pyherc.events [poison-added poison-ended poison-triggered]])
 
 (effect-dsl)
 
@@ -28,10 +27,10 @@
         [target damage]
         :trigger (do 
                   (setv target.hit-points (- target.hit-points damage))
-                  (.raise-event target (new-poison-triggered-event :target target
-                                                                   :damage damage))
-                  (.check-dying dying-rules target))
-        :add-event (new-poison-added-event :target target
-                                           :effect self)
-        :remove-event (new-poison-ended-event :target target
-                                              :effect self))
+                  (.raise-event target (poison-triggered :target target
+                                                         :damage damage))
+                  (check-dying target))
+        :add-event (poison-added :target target
+                                 :effect self)
+        :remove-event (poison-ended :target target
+                                    :effect self))

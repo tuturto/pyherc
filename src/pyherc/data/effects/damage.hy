@@ -32,7 +32,7 @@
                                  (damage-triggered :target target
                                                    :damage damage-caused
                                                    :damage-type damage-type))
-                   (.check-dying dying-rules target))
+                   (check-dying target))
         :add-event (damage-added :target target
                                  :effect self)
         :remove-event (damage-ended :target target

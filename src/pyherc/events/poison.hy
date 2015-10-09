@@ -17,7 +17,7 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn new-poison-triggered-event [target damage]
+(defn poison-triggered [target damage]
   "create event to signify poison was triggered"
   {:event-type "poison triggered"
    :level target.level
@@ -25,7 +25,7 @@
    :target target
    :damage damage})
 
-(defn new-poison-added-event [target effect]
+(defn poison-added [target effect]
   "create event to signify a character was poisoned"
   {:event-type "poisoned"
    :level target.level
@@ -33,7 +33,7 @@
    :target target
    :effect effect})
 
-(defn new-poison-ended-event [target effect]
+(defn poison-ended [target effect]
   "create event to signify poisoning has ended"
   {:event-type "poison ended"
    :level target.level

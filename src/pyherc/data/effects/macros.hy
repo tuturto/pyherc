@@ -67,3 +67,6 @@
   `[~name (fn [self ~@params]
             (let [~@(genexpr `[~x (. self ~x)] [x attributes])]
               ~body))])
+
+(defmacro check-dying [target]
+  `(.check-dying dying-rules ~target))
