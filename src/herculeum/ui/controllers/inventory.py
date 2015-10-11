@@ -21,7 +21,7 @@
 Module for inventory actions
 """
 from pyherc.data import (is_potion, is_weapon, is_armour, is_ammunition,
-                         is_trap_bag)
+                         is_trap_bag, is_boots)
 from pyherc.rules import drink, drop_item, equip, pick_up, unequip, place_trap
 
 
@@ -60,6 +60,14 @@ class InventoryController():
             if self.character.inventory.armour != None:
                 unequip(self.character,
                         self.character.inventory.armour,
+                        self.action_factory)
+            equip(self.character,
+                  item,
+                  self.action_factory)
+        elif is_boots(item):
+            if self.character.inventory.boots != None:
+                unequip(self.character,
+                        self.character.inventory.boots,
                         self.action_factory)
             equip(self.character,
                   item,
