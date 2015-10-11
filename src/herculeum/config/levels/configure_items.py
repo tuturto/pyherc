@@ -405,10 +405,11 @@ def init_items(context):
                                                 speed_modifier = 0.5)))
 
     config.append(ItemConfiguration(name = 'leather shoes',
+                                    description = 'Simple shoes for those wishing to travel light.',
                                     cost = 5,
                                     weight = 1,
                                     icons = [surface_manager.add_icon('leather_shoes',
-                                                                      ':leather_shoes',
+                                                                      ':items/leather_shoes.png',
                                                                       '[',
                                                                       ['dim', 'yellow'])],
                                     types = ['boots'],
