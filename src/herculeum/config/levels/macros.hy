@@ -21,26 +21,41 @@
   `(import [pyherc.generators [ItemConfiguration TrapConfiguration]]))
 
 (defmacro item [name description cost weight icons types rarity]  
-  `(ItemConfiguration ~name ~cost ~weight ~icons ~types
-                      ~rarity nil nil nil nil nil ~description))
+  `(ItemConfiguration :name ~name
+                      :cost ~cost
+                      :weight ~weight
+                      :icons ~icons
+                      :types ~types
+                      :rarity ~rarity
+                      :description ~description))
 
 (defmacro tome [name &rest content]
-  `(ItemConfiguration ~name 
-                      100 1 ["tied-scroll"]
-                      ["tome" "hint"] "rare" nil nil nil nil nil
-                      (.join " " [~@content])))
+  `(ItemConfiguration :name ~name 
+                      :cost 100
+                      :weight 1
+                      :icons ["tied-scroll"]
+                      :types ["tome" "hint"]
+                      :rarity "rare"
+                      :description (.join " " [~@content])))
 
 (defmacro scroll [name &rest content]
-  `(ItemConfiguration ~name 
-                      50 1 ["tied-scroll"]
-                      ["scroll" "hint"] "uncommon" nil nil nil nil nil
-                      (.join " " [~@content])))
+  `(ItemConfiguration :name ~name 
+                      :cost 50
+                      :weight 1
+                      :icons ["tied-scroll"]
+                      :types ["scroll" "hint"]
+                      :rarity "uncommon"
+                      :description (.join " " [~@content])))
 
 (defmacro trap-bag [name description trap-name count cost weight icons types rarity]
-  `(ItemConfiguration ~name ~cost ~weight ~icons ~types ~rarity
-                      nil nil nil nil
-                      (TrapConfiguration ~trap-name ~count)
-                      ~description))
+  `(ItemConfiguration :name ~name
+                      :cost ~cost
+                      :weight ~weight
+                      :icons ~icons
+                      :types ~types
+                      :rarity ~rarity
+                      :trap-configuration (TrapConfiguration ~trap-name ~count)
+                      :description ~description))
 
 (defmacro items-list [&rest items]
   `(defn init-items [context]

@@ -25,7 +25,7 @@ Package for generation related activities
 from .dungeon import generate_dungeon
 from .item import ItemGenerator, ItemConfigurations, ItemConfiguration
 from .item import WeaponConfiguration, ArmourConfiguration, TrapConfiguration
-from .item import AmmunitionConfiguration
+from .item import AmmunitionConfiguration, BootsConfiguration
 from .creature import generate_creature
 from .creature import creature_config
 from .creature import inventory_config

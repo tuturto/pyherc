@@ -26,7 +26,8 @@ import random
 from pyherc.aspects import log_debug, log_info
 from pyherc.data import Item
 from pyherc.data.effects import EffectHandle, EffectsCollection
-from pyherc.data.item import AmmunitionData, ArmourData, WeaponData, TrapData
+from pyherc.data.item import (AmmunitionData, ArmourData, WeaponData, TrapData,
+                              BootsData)
 
 
 class ItemGenerator():
@@ -133,6 +134,12 @@ class ItemGenerator():
                 trap_name = trap_spec.name,
                 count = trap_spec.count)
 
+        if item_specification.boots_configuration is not None:
+            boots_spec = item_specification.boots_configuration
+            item.boots_data = BootsData(
+                damage_reduction = boots_spec.damage_reduction,
+                speed_modifier = boots_spec.speed_modifier)
+
         for spec in item_specification.effect_handles:
             new_handle = EffectHandle(trigger=spec.trigger,
                                       effect=spec.effect,
@@ -233,7 +240,7 @@ class ItemConfiguration():
                  weapon_configration=None, effect_handles=None,
                  armour_configuration=None,
                  ammunition_configuration=None, trap_configuration=None,
-                 description=''):
+                 boots_configuration=None, description=''):
         """
         Default constructor
         """
@@ -249,6 +256,7 @@ class ItemConfiguration():
         self.armour_configuration = armour_configuration
         self.ammunition_configuration = ammunition_configuration
         self.trap_configuration = trap_configuration
+        self.boots_configuration = boots_configuration
 
         if effect_handles is None:
             self.effect_handles = []
@@ -274,6 +282,21 @@ class WeaponConfiguration():
         self.weapon_class = weapon_class
         self.ammunition_type = ammunition_type
         self.speed = speed
+
+
+class BootsConfiguration():
+    """
+    Class for configuring boots
+    """
+    @log_debug
+    def __init__(self, damage_reduction, speed_modifier):
+        """"
+        Default initializer
+        """
+        super().__init__()
+
+        self.damage_reduction = damage_reduction
+        self.speed_modifier = speed_modifier
 
 
 class ArmourConfiguration():

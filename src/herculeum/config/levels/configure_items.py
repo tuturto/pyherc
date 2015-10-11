@@ -22,7 +22,8 @@ module for configuring catacombs
 """
 from pyherc.data.effects import EffectHandle
 from pyherc.generators import (AmmunitionConfiguration, ArmourConfiguration,
-                               ItemConfiguration, WeaponConfiguration, TrapConfiguration)
+                               ItemConfiguration, WeaponConfiguration, TrapConfiguration,
+                               BootsConfiguration)
 from pyherc.rules.constants import (CRUSHING_DAMAGE, PIERCING_DAMAGE,
                                     SLASHING_DAMAGE)
 
@@ -402,6 +403,19 @@ def init_items(context):
                                     armour_configuration = ArmourConfiguration(
                                                 damage_reduction = 5,
                                                 speed_modifier = 0.5)))
+
+    config.append(ItemConfiguration(name = 'leather shoes',
+                                    cost = 5,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('leather_shoes',
+                                                                      ':leather_shoes',
+                                                                      '[',
+                                                                      ['dim', 'yellow'])],
+                                    types = ['boots'],
+                                    rarity = 'common',
+                                    boots_configuration = BootsConfiguration(
+                                        damage_reduction = 0,
+                                        speed_modifier = 1)))
 
     config.append(ItemConfiguration(name = 'healing potion',
                                     cost = 150,
