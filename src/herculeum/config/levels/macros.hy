@@ -17,45 +17,47 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(import [pyherc.generators [ItemConfiguration TrapConfiguration]])
+
 (defmacro items-dsl []
-  `(import [pyherc.generators [ItemConfiguration TrapConfiguration]]))
+  `(import [herculeum.config.levels.macros [item tome scroll trap-bag]]))
 
-(defmacro item [name description cost weight icons types rarity]  
-  `(ItemConfiguration :name ~name
-                      :cost ~cost
-                      :weight ~weight
-                      :icons ~icons
-                      :types ~types
-                      :rarity ~rarity
-                      :description ~description))
+(defn item [name description cost weight icons types rarity]  
+  (ItemConfiguration :name name
+                     :cost cost
+                     :weight weight
+                     :icons icons
+                     :types types
+                     :rarity rarity
+                     :description description))
 
-(defmacro tome [name &rest content]
-  `(ItemConfiguration :name ~name 
-                      :cost 100
-                      :weight 1
-                      :icons ["tied-scroll"]
-                      :types ["tome" "hint"]
-                      :rarity "rare"
-                      :description (.join " " [~@content])))
+(defn tome [name &rest content]
+  (ItemConfiguration :name name 
+                     :cost 100
+                     :weight 1
+                     :icons ["tied-scroll"]
+                     :types ["tome" "hint"]
+                     :rarity "rare"
+                     :description (.join " " content)))
 
-(defmacro scroll [name &rest content]
-  `(ItemConfiguration :name ~name 
-                      :cost 50
-                      :weight 1
-                      :icons ["tied-scroll"]
-                      :types ["scroll" "hint"]
-                      :rarity "uncommon"
-                      :description (.join " " [~@content])))
+(defn scroll [name &rest content]
+  (ItemConfiguration :name name 
+                     :cost 50
+                     :weight 1
+                     :icons ["tied-scroll"]
+                     :types ["scroll" "hint"]
+                     :rarity "uncommon"
+                     :description (.join " " content)))
 
-(defmacro trap-bag [name description trap-name count cost weight icons types rarity]
-  `(ItemConfiguration :name ~name
-                      :cost ~cost
-                      :weight ~weight
-                      :icons ~icons
-                      :types ~types
-                      :rarity ~rarity
-                      :trap-configuration (TrapConfiguration ~trap-name ~count)
-                      :description ~description))
+(defn trap-bag [name description trap-name count cost weight icons types rarity]
+  (ItemConfiguration :name name
+                     :cost cost
+                     :weight weight
+                     :icons icons
+                     :types types
+                     :rarity rarity
+                     :trap-configuration (TrapConfiguration trap-name count)
+                     :description description))
 
 (defmacro items-list [&rest items]
   `(defn init-items [context]

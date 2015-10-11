@@ -18,7 +18,8 @@
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (require herculeum.config.levels.macros)
-(import [pyherc.generators [ItemConfiguration]])
+
+(items-dsl)
 
 (items-list
  (tome "Tome of Um'bano - Page 102"
