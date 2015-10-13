@@ -26,27 +26,21 @@
 #i(defn move [character direction action-factory]
     "move character to specified direction"
     (-> (.get-action action-factory (MoveParameters character
-                                                    direction
-                                                    "walk"))
+                                                    direction))
         (.execute)))
 
-#d(defn move-legal? [character direction movement-mode action-factory]
+#d(defn move-legal? [character direction action-factory]
     "check if movement is legal"
     (-> (.get-action action-factory (MoveParameters character
-                                                    direction
-                                                    "walk"))
+                                                    direction))
         (.legal?)))
 
 (defclass MoveParameters [ActionParameters]
   "object for controlling move action creation"
-  [[--init-- (fn [self character direction movement-mode]
+  [[--init-- (fn [self character direction]
                "construct move parameters"
                (super-init)
                (set-attributes character
-                               direction
-                               movement-mode)
+                               direction)
                (setv self.action-type "move")
-               nil)]
-   [--str-- (fn [self]
-              "get string representation of this object"
-              (+ "move with movement mode of " self.movement-mode))]])
+               nil)]])

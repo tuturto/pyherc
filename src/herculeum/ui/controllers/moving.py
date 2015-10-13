@@ -39,7 +39,7 @@ class MoveController():
         self.action_factory = action_factory
         self.rng = rng
 
-    def move_or_attack(self, character, direction, movement_mode):
+    def move_or_attack(self, character, direction):
         """
         Move or attack
         """
@@ -47,7 +47,6 @@ class MoveController():
 
         if is_move_legal(character,
                          direction,
-                         movement_mode,
                          self.action_factory):
             move(character, direction, self.action_factory)
         elif direction != 9:

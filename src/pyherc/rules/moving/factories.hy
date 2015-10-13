@@ -51,7 +51,7 @@
                      (do
                       (setv new-location (.get-location-at-direction character direction))
                       (cond [(blocks-movement new-level new-location)
-                             (if (= parameters.movement-mode "walk")
+                             (if (= "walk" "walk")
                                (WalkAction :character character
                                            :new-location location
                                            :new-level new-level
@@ -67,7 +67,7 @@
                                                       new-location
                                                       self.dying-rules)]
                             [true 
-                             (if (= parameters.movement-mode "walk")
+                             (if (= "walk" "walk")
                                (WalkAction :character character
                                            :new-location new-location
                                            :new-level new-level

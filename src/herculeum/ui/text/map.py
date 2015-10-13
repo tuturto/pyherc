@@ -152,9 +152,7 @@ class MapScreen():
         :type key: string
         """
         direction = self.move_key_map[key]
-        self.move_controller.move_or_attack(self.model.player,
-                                            direction,
-                                            'walk')
+        self.move_controller.move_or_attack(self.model.player, direction)
 
     @log_debug
     def _back(self, key):

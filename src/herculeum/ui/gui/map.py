@@ -463,9 +463,7 @@ class PlayMapWidget(QWidget):
                      self.action_factory)
 
         else:
-            self.move_controller.move_or_attack(player,
-                                                direction,
-                                                'walk')
+            self.move_controller.move_or_attack(player, direction)
 
     def _menu(self, key, modifiers):
         """
@@ -536,7 +534,7 @@ class PlayMapWidget(QWidget):
                     items[0],
                     self.action_factory)
 
-        elif is_move_legal(player, 9, 'walk', self.action_factory):
+        elif is_move_legal(player, 9, self.action_factory):
             move(player, 9, self.action_factory)
 
         elif is_dig_legal(player, self.action_factory):

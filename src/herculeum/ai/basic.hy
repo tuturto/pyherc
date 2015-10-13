@@ -35,7 +35,7 @@
 
 #d(defn can-walk? [ai action-factory direction]
     "check if character can walk to given direction"
-    (is-move-legal ai.character direction "walk" action-factory))
+    (is-move-legal ai.character direction action-factory))
 
 #d(defn walk [ai action-factory &optional direction]
     "take a step to direction the ai is currently moving"
