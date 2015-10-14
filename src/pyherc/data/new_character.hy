@@ -50,3 +50,13 @@
     (when character.inventory.boots
       (setv speed-mod (* speed-mod character.inventory.boots.boots-data.speed-modifier)))
     speed-mod))
+
+(defn movement-mode [character]
+  "get effective movement mode, taking special items into account"
+  (let [[modes (set (list-comp x.mode [x (.get-effects character)]
+                               (= x.effect-name "movement mode modifier")))]]
+    (if modes
+      (if (in "fly" modes)
+        "fly"
+        "walk")
+      "walk")))

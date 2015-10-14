@@ -17,24 +17,15 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(require pyherc.macros)
 
-(import [pyherc.data.effects.effect [Effect]])
+(require pyherc.data.effects.macros)
 
-(defclass MovementModeModifier [Effect]
-  "effect to modify movement mode"
-  [[--init-- (fn [self mode duration frequency tick icon title description]
-               "default initializer"
-               (super-init :duration duration
-                           :frequency frequency
-                           :tick tick
-                           :icon icon
-                           :title title
-                           :description description)
-               (setv self.mode mode)
-               (setv self.multiple-allowed true)
-               nil)]
-   [get-add-event (fn [self]
-                    "get event describing adding of this effect")]
-   [get-removal-event (fn [self]
-                        "get event describing removal of this effect")]])
+(import [pyherc.events [empty-event]])
+
+(effect-dsl)
+
+(effect MovementModeModifier "movement mode modifier"
+        [mode]
+        :multiple-allowed true
+        :add-event (empty-event)
+        :remove-event (empty-event))

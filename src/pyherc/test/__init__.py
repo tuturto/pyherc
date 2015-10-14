@@ -31,6 +31,7 @@ from pyherc.test.unit.test_library_generator import *
 from pyherc.test.unit.test_locations import *
 from pyherc.test.unit.test_metamorphosis import *
 from pyherc.test.unit.test_mitosis import *
+from pyherc.test.unit.test_movement_mode import *
 from pyherc.test.unit.test_overlapping_matcher import *
 from pyherc.test.unit.test_overlays import *
 from pyherc.test.unit.test_roomgenerators import *

@@ -21,7 +21,7 @@
 
 (import [random]
         [pyherc.aspects [log-debug log-info]]
-        [pyherc.data [get-portal blocks-movement get-character]]
+        [pyherc.data [get-portal blocks-movement get-character movement-mode]]
         [pyherc.data.geometry [area-around]]
         [pyherc.rules.factory [SubActionFactory]]
         [pyherc.rules.moving.action [EscapeAction MoveAction FlyAction
@@ -51,7 +51,7 @@
                      (do
                       (setv new-location (.get-location-at-direction character direction))
                       (cond [(blocks-movement new-level new-location)
-                             (if (= "walk" "walk")
+                             (if (= (movement-mode character) "walk")
                                (WalkAction :character character
                                            :new-location location
                                            :new-level new-level
@@ -67,7 +67,7 @@
                                                       new-location
                                                       self.dying-rules)]
                             [true 
-                             (if (= "walk" "walk")
+                             (if (= (movement-mode character) "walk")
                                (WalkAction :character character
                                            :new-location new-location
                                            :new-level new-level

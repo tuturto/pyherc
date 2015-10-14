@@ -19,7 +19,8 @@
 
 (require pyherc.test.cutesy.macros)
 
-(import [pyherc.test.builders [ItemBuilder]])
+(import [pyherc.data.effects [MovementModeModifier]]
+        [pyherc.test.builders [ItemBuilder]])
 
 (item LeatherArmour
       (.with-name "leather armour")
@@ -59,4 +60,11 @@
 (item FlyingBoots
       (.with-name "flying boots")
       (.with-boots-damage-reduction 1)
-      (.with-boots-speed-modifier 1))
+      (.with-boots-speed-modifier 1)
+      (.with-effect (MovementModeModifier :duration nil
+                                          :frequency nil
+                                          :tick nil
+                                          :icon :icon
+                                          :title "fly boosters"
+                                          :description "internal fly boosters"
+                                          :mode "fly")))

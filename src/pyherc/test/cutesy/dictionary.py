@@ -221,7 +221,6 @@ class TakeRandomStep():
         directions = [direction for direction in range(1, 9)
                       if is_move_legal(character,
                                        direction,
-                                       'walk',
                                        action_factory)]
 
         assert len(directions) > 0
