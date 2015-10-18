@@ -148,6 +148,9 @@ class ItemGenerator():
 
             item.add_effect_handle(new_handle)
 
+        for effect in item_specification.effects:
+            item.add_effect(effect) # TODO: do not use same instance
+
         return item
 
 
@@ -238,7 +241,7 @@ class ItemConfiguration():
     @log_debug
     def __init__(self, name, cost, weight, icons, types, rarity,
                  weapon_configration=None, effect_handles=None,
-                 armour_configuration=None,
+                 effects=None, armour_configuration=None,
                  ammunition_configuration=None, trap_configuration=None,
                  boots_configuration=None, description=''):
         """
@@ -262,6 +265,11 @@ class ItemConfiguration():
             self.effect_handles = []
         else:
             self.effect_handles = effect_handles
+
+        if effects is None:
+            self.effects = []
+        else:
+            self.effects = effects
 
 
 class WeaponConfiguration():

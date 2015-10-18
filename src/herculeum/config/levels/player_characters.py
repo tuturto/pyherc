@@ -93,12 +93,7 @@ def init_players(context):
                                                    item_name = 'bag of small caltrops',
                                                    min_amount = 1,
                                                    max_amount = 1,
-                                                   probability = 20),
-                                               inventory_config(
-                                                   item_name = 'leather shoes',
-                                                   min_amount = 1,
-                                                   max_amount = 1,
-                                                   probability = 100)],
+                                                   probability = 20)],
                                   description = '\n'.join(['A skillful adventurer.',
                                                            '',
                                                            'Adventurer is armed and ready to explore any dungeon he sees. He is strong enough to survive combat with some of the dangers, while some he definitely should avoid',

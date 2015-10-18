@@ -20,7 +20,7 @@
 """
 module for configuring catacombs
 """
-from pyherc.data.effects import EffectHandle
+from pyherc.data.effects import EffectHandle, MovementModeModifier
 from pyherc.generators import (AmmunitionConfiguration, ArmourConfiguration,
                                ItemConfiguration, WeaponConfiguration, TrapConfiguration,
                                BootsConfiguration)
@@ -409,7 +409,7 @@ def init_items(context):
                                     cost = 5,
                                     weight = 1,
                                     icons = [surface_manager.add_icon('leather_shoes',
-                                                                      ':items/leather_shoes.png',
+                                                                      ':items/boots_1.png',
                                                                       '[',
                                                                       ['dim', 'yellow'])],
                                     types = ['boots'],
@@ -417,6 +417,41 @@ def init_items(context):
                                     boots_configuration = BootsConfiguration(
                                         damage_reduction = 0,
                                         speed_modifier = 1)))
+
+    config.append(ItemConfiguration(name = 'air shoes',
+                                    description = 'Clunky metal shoes that lift you in air.',
+                                    cost = 5,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('mechanical_shoes',
+                                                                      ':items/boots_2.png',
+                                                                      '[',
+                                                                      ['dim', 'yellow'])],
+                                    types = ['boots'],
+                                    rarity = 'rare',
+                                    boots_configuration = BootsConfiguration(
+                                        damage_reduction = 0,
+                                        speed_modifier = 0.7),
+                                    effects = [MovementModeModifier(duration = None,
+                                                                    frequency = None,
+                                                                    tick = None,
+                                                                    icon = None,
+                                                                    title = "fly boosters",
+                                                                    description = "fly boosters",
+                                                                    mode = "fly")]))
+
+    config.append(ItemConfiguration(name = 'speed shoes',
+                                    description = 'Very light weight shoes, perfect for running.',
+                                    cost = 5,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('speed_shoes',
+                                                                      ':items/boots_1.png',
+                                                                      '[',
+                                                                      ['dim', 'yellow'])],
+                                    types = ['boots'],
+                                    rarity = 'rare',
+                                    boots_configuration = BootsConfiguration(
+                                        damage_reduction = -2,
+                                        speed_modifier = 1.3)))
 
     config.append(ItemConfiguration(name = 'healing potion',
                                     cost = 150,

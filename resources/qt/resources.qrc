@@ -440,12 +440,21 @@
         <file>items/bag.png</file>
         <file>items/barbed-spear.png</file>
         <file>items/battle-axe.png</file>
+        <file>items/boots_1.png</file>
+        <file>items/boots_2.png</file>
+        <file>items/boots_3.png</file>
+        <file>items/boots_4.png</file>
+        <file>items/boots_5.png</file>
+        <file>items/boots_6.png</file>
+        <file>items/boots_7.png</file>
+        <file>items/boots_8.png</file>
+        <file>items/boots_9.png</file>
+        <file>items/boots_10.png</file>
         <file>items/bow.png</file>
         <file>items/chainmail.png</file>
         <file>items/dagger.png</file>
         <file>items/gavel.png</file>
         <file>items/leather_armour.png</file>
-        <file>items/leather_shoes.png</file>
         <file>items/mace.png</file>
         <file>items/plain_potion.png</file>
         <file>items/plate_mail.png</file>
