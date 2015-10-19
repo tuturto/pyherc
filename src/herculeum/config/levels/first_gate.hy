@@ -51,7 +51,8 @@
                                 (item-by-type 2 3 "armour")
                                 (item-by-type 2 4 "potion")
                                 (item-by-type 1 4 "food")
-                                (item-by-type 1 1 "hint")))
+                                (item-by-type 1 1 "hint")
+                                (item-by-type 0 2 "boots")))
             (creature-lists (option (creature 1 3 "rat")))
             (connections (unique-stairs "first gate" "lower caverns"
                                         "grey stairs" "room" certainly))

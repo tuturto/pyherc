@@ -418,6 +418,20 @@ def init_items(context):
                                         damage_reduction = 0,
                                         speed_modifier = 1)))
 
+    config.append(ItemConfiguration(name = 'heavy boots',
+                                    description = 'Rather heavy boots, which will protect you.',
+                                    cost = 5,
+                                    weight = 1,
+                                    icons = [surface_manager.add_icon('heavy_boots',
+                                                                      ':items/boots_3.png',
+                                                                      '[',
+                                                                      ['dim', 'yellow'])],
+                                    types = ['boots'],
+                                    rarity = 'uncommon',
+                                    boots_configuration = BootsConfiguration(
+                                        damage_reduction = 1,
+                                        speed_modifier = 0.8)))
+
     config.append(ItemConfiguration(name = 'air shoes',
                                     description = 'Clunky metal shoes that lift you in air.',
                                     cost = 5,
