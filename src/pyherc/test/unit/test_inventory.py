@@ -157,3 +157,16 @@ class TestInventory():
         self.character.inventory.remove(item)
 
         assert_that(self.character.inventory.projectiles, is_(none()))
+
+    def test_deleting_boots_in_use(self):
+        """
+        Worn boots should be removed from use when removed from inventory
+        """
+        item = mock()
+
+        self.character.inventory.append(item)
+        self.character.inventory.boots = item
+
+        self.character.inventory.remove(item)
+
+        assert_that(self.character.inventory.boots, is_(none()))

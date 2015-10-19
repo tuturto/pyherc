@@ -48,9 +48,9 @@ def init_items(context):
                                                             ')',
                                                             ['dim', 'cyan'])],
                                     types = ['weapon',
-                                               'light weapon',
-                                               'melee',
-                                               'simple weapon'],
+                                             'light weapon',
+                                             'melee',
+                                             'simple weapon'],
                                     rarity = 'common',
                                     weapon_configration = WeaponConfiguration(
                                             damage = [(2, PIERCING_DAMAGE)],
