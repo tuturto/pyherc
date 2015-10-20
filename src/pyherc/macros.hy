@@ -54,3 +54,7 @@
 (defmacro when-not [check &rest body]
   "like when, but inversed"
   `(when (not ~check) ~@body))
+
+(defreader s [data]
+  "simple string joiner"
+  `(.join " " [~@data]))
