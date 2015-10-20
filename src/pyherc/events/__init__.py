@@ -34,7 +34,7 @@ from .event import (e_event_type, e_level, e_location, e_character, e_old_spirit
                     e_new_spirit, e_target, e_damage, e_deceased, e_new_items,
                     e_new_characters, e_item, e_new_character, e_destroyed_characters,
                     e_old_location, e_direction, e_attacker, e_old_hit_points,
-                    e_new_hit_points, e_trap, empty_event)
+                    e_new_hit_points, e_trap, empty_event, e_healing)
 from .healing import (new_heal_triggered_event, new_heal_added_event,
                       new_heal_ended_event)
 from .hitpoints import new_hit_points_changed_event
