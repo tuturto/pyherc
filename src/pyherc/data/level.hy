@@ -163,7 +163,8 @@
     (.append (:items level) item)
     (setv item.location location)
     (setv item.level level)
-    (.append (:items (get-or-create-tile level location)) item))
+    (.append (:items (get-or-create-tile level location)) item)
+    (ap-each (traps↜ level location) (.on-item-enter it item)))
 
 (defn get-items [level &optional [location "no-location"]]
   "get items in a given tile or in level in general"
@@ -180,6 +181,7 @@
     (let [[map-tile (get-tile level item.location)]]
       (.remove (:items map-tile) item)
       (setv item.location #t())
+      (setv item.level nil)
       (.remove (:items level) item)))
 
 #d(defn add-character [level location character]

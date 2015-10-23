@@ -44,7 +44,8 @@ class DropAnimation(Animation):
         """
         Trigger this animation
         """
-        ui.add_glyph(self.item, ui.scene, zorder_item)
+        if (self.item.level):
+            ui.add_glyph(self.item, ui.scene, zorder_item)
 
 
 class PickUpAnimation(Animation):

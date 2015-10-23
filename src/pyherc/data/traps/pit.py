@@ -23,6 +23,7 @@
 Package for traps
 """
 from pyherc.data.traps.trap import Trap
+from pyherc.data.level import remove_item
 
 
 class PitTrap(Trap):
@@ -45,3 +46,9 @@ class PitTrap(Trap):
         :type character: Character
         """
         character.hit_points = -1
+
+    def on_item_enter(self, item):
+        """
+        Called when item enters the trap
+        """
+        remove_item(item.level, item)

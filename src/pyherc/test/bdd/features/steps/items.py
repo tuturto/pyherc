@@ -74,19 +74,26 @@ def impl(context, item_name, location_name):
 
         assert item.level == room
 
+@then('{item_name} should not be in {location_name}')
+def impl(context, item_name, location_name):
+    if 'inventory' in location_name:
+        (word1, word2, character_name) = location_name.split(' ')
+        item = get_item(context, item_name)
+        character = get_character(context, character_name)
+
+        assert item not in character.inventory
+    else:
+        item = get_item(context, item_name)
+        room = get_location(context, location_name)
+
+        assert item.level != room
+
 @then('{item_name} should be at same place as {character_name}')
 def impl(context, item_name, character_name):
     item = get_item(context, item_name)
     character = get_character(context, character_name)
 
     assert item.location == character.location
-
-@then('{item_name} should not be in inventory of {character_name}')
-def impl(context, item_name, character_name):
-    item = get_item(context, item_name)
-    character = get_character(context, character_name)
-
-    assert not item in character.inventory
 
 @given('{character_name} wields {weapon_name}')
 @default_context

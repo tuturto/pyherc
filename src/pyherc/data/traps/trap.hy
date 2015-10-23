@@ -24,4 +24,5 @@
                (setv self.icon icon)
                nil)]
    [on-enter (fn [self character])]
+   [on-item-enter (fn [self item])]
    [on-place (fn [self level location])]])
