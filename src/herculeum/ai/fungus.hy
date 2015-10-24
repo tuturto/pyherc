@@ -23,7 +23,7 @@
 (require hy.contrib.anaphoric)
 (import [pyherc.aspects [log-debug]]
 	[herculeum.ai.basic [attack-enemy wait]]
-        [pyherc.data [get-character]]
+        [pyherc.data [get-character get-location-tags]]
         [pyherc.data.geometry [area-around]]
         [pyherc.rules.mitosis.interface [perform-mitosis mitosis-legal?]]
         [pyherc.rules.metamorphosis.interface [morph morph-legal?]]
@@ -61,7 +61,9 @@
       (if enemies
 	(attack-enemy ai (choice enemies) action-factory rng)
         (rarely
-         (cond [(mitosis-legal? ai.character action-factory)
+         (cond [(and (mitosis-legal? ai.character action-factory)
+                     (in "room" (get-location-tags ai.character.level
+                                                   ai.character.location)))
                 (perform-mitosis ai.character action-factory)]
                [(and (morph-legal? ai.character "great fungus" action-factory)
                      (>= (count (adjacent-friends ai)) 6))
