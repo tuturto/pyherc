@@ -45,33 +45,34 @@ making it harder for monsters to detect him. However, as soon as he tries to do
 anything else than just quietly sneak past the enemies, the spell will cease
 to have an effect.
 
-Mage
-****
-Physically the mage might be weak but his mind is strong. He has vast arsenal
-of various spells and recovers his spirit points faster than other characters.
-However, in physical combat he will quicly lose and he avoids it as much as
-possible.
+Master engineer
+***************
+Physically the master engineer might be weak but his mind is strong. He has
+vast arsenal of various gadgets and recovers mechanical trinkets faster than
+other characters. However, in physical combat he will quicly lose and he avoids
+it as much as possible.
 
 Special skills
 ==============
 
 Fireball
 --------
-Very strong offensive spell that can cause severe damage to multiple enemies.
-The mage should be careful when casting it, otherwise he too might get burned
-by the flames
+Very strong offensive gadget that can cause severe damage to multiple enemies.
+The master engineer should be careful when using it, otherwise he too might
+get burned by the flames
 
 Force bolt
 ----------
-Magical bolt that can wound even the strongest enemies. Unlike fireball the
-force bolt can safely be cast even in very confined spaces.
+Electrical bolt that can wound even the strongest enemies. Unlike fireball the
+force bolt can safely be used even in very confined spaces.
 
-Healing wind
-------------
-Healing wind is used to soothe the pains and mend the broken body. The mage
-can recover some of his lost life force by using this spell.
+Healing extractor
+-----------------
+Healing extractor is used to soothe the pains and mend the broken body. The
+master engineer can recover some of his lost life force by using this
+complicated device.
 
-Blink
------
-When cornered, the mage can use blink spell to teleport a short distance. He
-can even pass walls while doing this.
+Blink shifter
+-------------
+When cornered, the master engineer can use blink shifter to teleport a short
+distance. He can even pass walls while doing this.
