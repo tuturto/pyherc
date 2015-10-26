@@ -1,0 +1,205 @@
+Release 0.15
+============
+
+ * Items can have active effects
+ * Healing animation fixed
+   Previously triggering healing animation caused game to throw exceptions
+   and write debug-log on console.
+ * Damage to different body parts
+   Damage can be targeted to different body parts. By default, this is "torso".
+   Some armour grant character partial or full protection against damage that
+   is targeted to a specific body part. For example, boots protect against
+   damage targeting "feet".
+ * Multiple traps can be placed in same location
+ * Caltrops trap added
+ * Mage renamed to master engineer
+ * Nasty setup warning were fixed
+   Previously some Hy only packages were listed as python packages in setup.py
+   This caused warnings during packaging.
+ * Items dropped in pit disappear
+   Previously they would just float in the air and player could even pick them
+   up. Now a trap is notified if an item is dropped into and and it can deal
+   with the situation to best of its abilities. Default action is to do
+   nothing.
+ * #s reader macro was added to help creating multiline strings
+ * Fungi undergoes mitosis only when it's located in room
+   Preventing fungi from entering corridors effectively contains them inside
+   a single room and gives player some breathing space.
+ * Boots were added
+   Characters can now wear boots that protect their feet. In addition to that,
+   some boots grant additional abilities to characters.
+
+Release 0.14
+============
+
+ * better installation instructions
+ * fix setup.py
+ * creature placed on trap by mitosis, triggers the trap
+ * creatures and stairs are no longer placed on top of traps
+ * two characters switching places doesn't cause level to be in inconsistent state
+ * event system restructure
+
+Release 0.13
+============
+
+ * dragon de platino
+ * prototype using dictionary instead of list of lists for level structure
+ * fungus
+ * Raised events are no longer delivered to all creatures
+
+Release 0.12
+============
+
+ * restructure dungeon layout
+ * animation system
+ * improved patrol AI
+ * if player is the last character in level, dying should not put game into an infinite loop
+ * character generator no longer generate incorrect amount of items in inventory
+ * damage effect takes damage modifiers into account
+
+Release 0.11
+============
+
+ * swapping places
+ * update to latest version of Hy
+ * cleaner AI
+ * pits
+ * ability to specify starting level on command line
+ * it is possible use stairs, even if there is a creature standing on the other end
+
+Release 0.10
+============
+
+ * new set of graphics and animations
+ * regular movement and attack can be done only to cardinal directions
+ * characters can wait for a bit without doing anything
+ * new player character, mage
+ * change direction of character when walking
+ * moving takes armour into account
+ * layering of icons
+ * weapons with multiple damage types no longer cause attacker to move
+ * Attacks no longer use hard coded time
+ * moved many actions (moving, combat, etc) from Character class to separate functions
+
+Release 0.9
+===========
+
+ * curses interface
+ * Effects with None as duration or frequency doesn't cause crash when triggered
+ * Switched to Python 3.x
+
+Release 0.8
+===========
+
+ * amount of damage done is reported more clearly
+ * new area: Crimson Lair
+ * weapons may have special effects that are triggered in combat
+ * ranged combat added
+ * armours added
+ * support for vi keys
+ * executable for Windows
+ * the Tome of Um’bano
+ * creating a new character
+ * escaping the dungeon
+ * crimson jaw
+ * equiping and unequiping raise events
+ * spider doesn't poison in combat when it misses
+ * Player character creation doesn't use hard coded values
+ * player character configuration
+ * Aspyct is no longer needed to run the game
+ * behave tests moved under src/pyherc/test/BDD
+ * parts of the manual are generated directly from game data
+
+Release 0.7
+===========
+
+ * damage is shown negative in counters
+ * weapons deal different types of damage
+ * split damage is supported
+ * more streamlined user interface
+ * status effects are shown on main screen
+ * view to show player character
+ * better ai for skeleton warrior
+ * showing hit points of player
+ * being weak against damage
+ * damage resistance
+ * skeleton warrior
+ * Split damage weapons show full damage on screen
+ * using stairs while there is damage counter on screen no longer crashes game
+ * dropping a weapon in use removes it from use
+ * Entities created by debug server are shown on map
+ * web.py is not required unless using debug server
+
+Release 0.6
+===========
+
+ * Support for Qt style sheets
+ * Splash screen at start up
+ * icons can be specified in level specific configuration scripts
+ * new weapons added
+ * new inventory screen
+ * player can drink potions
+ * on-screen counters to show damage, healing and status effects
+ * player can wield and unwield weapons
+ * python path is modified before first imports
+ * mdi user interface is clumsy to use
+ * behave taken into use for BDD
+ * testing guidelines updated
+ * "{character_name} is almost dead" added to behave
+ * pyherc.rules.magic package removed
+
+Release 0.5
+===========
+
+ * User interface rewrite with PyQt
+ * Inventory window added
+ * Message is shown for various events
+ * Player character can be given a name
+ * _at function added to Cutesy
+ * is_dead matcher added
+ * other components can register to receive updates from domain objects
+ * pyherc.rules.items.drop replaced with DropAction
+ * Taking stairs updates display correctly
+ * Services are no longer injected to domain objects
+ * pyherc.rules.effects moved to pyherc.data.effects
+ * EffectsCollection moved to pyherc.data.effects
+ * qc added for testing
+ * poisoning and dying from poison tests moved to BDD side
+ * is_at and is_not_at changed to is_in and is_not_in
+ * herculeum.gui.core removed
+ * PGU and pygame removed as dependencies
+
+Release 0.4
+===========
+
+ * Certain creatures can make poisoned attacks
+ * First version of Cutesy testing language included
+ * get_next_creature does not produce debug log anymore
+ * very rudimentary monster spawning added to debug server
+ * very rudimentary item spawning added to debug server
+ * documentation regarding to testing added
+ * internals of inventory handling improved
+ * improved internals of user interface
+ * tests are grouped by function (unit, integration, acceptance)
+ * IntegrationTest class has been removed
+
+Release 0.3
+===========
+
+ * Potions now affect characters for multiple turns
+ * various builders can now be used in testing
+ * more hamcrest matchers added
+
+Release 0.2
+===========
+
+ * New area, crypt
+ * Debug server added
+ * Monsters can no longer exist in same spot as player
+ * pyDoubles switched to mockito
+ * logging aspects added
+
+Release 0.1
+===========
+
+ * Initial release
