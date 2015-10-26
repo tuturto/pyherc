@@ -16,4 +16,4 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(setv *pyherc-version* "0.15.0")
+(setv *pyherc-version* "0.16.0")
