@@ -17,6 +17,8 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
+(import [pyherc.data.new-item [armour-speed-modifier boots-speed-modifier]])
+
 (defn skill-ready? [character skill]
   "check if the cooldown of a skill has passed"
   (<= (cooldown character skill) 0))
@@ -44,12 +46,8 @@
 
 (defn speed-modifier [character]
   "get total speed modifier for this character"
-  (let [[speed-mod 1.0]]
-    (when character.inventory.armour
-      (setv speed-mod (* speed-mod character.inventory.armour.armour-data.speed-modifier)))
-    (when character.inventory.boots
-      (setv speed-mod (* speed-mod character.inventory.boots.boots-data.speed-modifier)))
-    speed-mod))
+  (* (armour-speed-modifier character)
+     (boots-speed-modifier character)))
 
 (defn movement-mode [character]
   "get effective movement mode, taking special items into account"

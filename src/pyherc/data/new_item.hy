@@ -45,3 +45,15 @@
 (defn boots? [item]
   "check if these are boots"
   (in "boots" item.tags))
+
+(defn armour-speed-modifier [character]
+  "how much armour worn by character affect their speed"
+  (if character.inventory.armour
+    character.inventory.armour.armour-data.speed-modifier
+    1))
+
+(defn boots-speed-modifier [character]
+  "how much boots worn by character affect their speed"
+  (if character.inventory.boots
+    character.inventory.boots.boots-data.speed-modifier
+    1))
