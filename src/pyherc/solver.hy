@@ -91,6 +91,13 @@
       (when (value? var2)
         (narrow context var1 (- var1.values var2.values))))
 
+(fact less-than!
+      "smaller than constraint"
+      (let [[maximum (max updated-variable.values)]]
+        (if (= updated-variable var1) 
+          (narrow context var2 (set-comp x [x var2.values] (> x (min var1.values))))
+          (narrow context var1 (set-comp x [x var1.values] (< x (max var2.values)))))))
+
 (defn solve [&rest variables]
   "solve all variables"
   (let [[context {:frame-pointer nil

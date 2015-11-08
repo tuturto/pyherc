@@ -17,8 +17,9 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(import [pyherc.solver [Variable are-equal! are-inequal! solve solve-one value]]
-        [hamcrest [assert-that is- equal-to is-not :as is-not-]])
+(import [pyherc.solver [Variable are-equal! are-inequal! less-than!
+                        solve solve-one value]]
+        [hamcrest [assert-that is- equal-to is-not :as is-not- less-than]])
 
 (defn context []
   "create an empty context for testing"
@@ -42,6 +43,25 @@
     (are-inequal! var₁ var₂)
     (solve var₁ var₂)
     (assert-that (value var₁) (is-not- (equal-to (value var₂))))))
+
+(defn test-less-than-constraint []
+  "variable can be constrained to be less than something else"
+  (let [[var₁ (Variable 1 2 3 4 5)]
+        [var₂ (Variable 1 2 3 4 5)]]
+    (less-than! var₁ var₂)
+    (solve var₁ var₂)
+    (assert-that (value var₁) (is- (less-than (value var₂))))))
+
+(defn test-triple-less-than []
+  "set of variables can be ordered with less-than!"
+  (let [[var₁ (Variable 1 2 3 4 5)]
+        [var₂ (Variable 1 2 3 4 5)]
+        [var₃ (Variable 1 2 3 4 5)]]
+    (less-than! var₁ var₂)
+    (less-than! var₂ var₃)
+    (solve var₁ var₂ var₃)
+    (assert-that (value var₁) (is- (less-than (value var₂))))
+    (assert-that (value var₂) (is- (less-than (value var₃))))))
 
 (defn test-multiple-constraints []
   "variables with multiple constraints can be solved"
