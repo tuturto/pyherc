@@ -114,7 +114,9 @@
                 (let [[var (.pop (:variable-stack context))]
                       [val (.pop (:value-stack context))]]
                   (setv var.values val)))
-              (assoc context :frame-pointer frame)))))))
+              (assoc context :frame-pointer frame))))
+      (when (:solved context)
+        variables))))
 
 (defn variable-to-solve [variables]
   "select next variable to solve"
