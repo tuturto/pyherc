@@ -59,9 +59,7 @@
       false
       (if (= new-values variable.values)
         true
-        (do (.append (:variable-stack context) variable)
-            (.append (:value-stack context) variable.values)
-            (setv variable.last-save-frame-pointer (:frame-pointer context))
+        (do (save context variable)
             (setv variable.values new-values)
             (all (genexpr (constraint context variable)
                           [constraint variable.constraints])))))))
@@ -78,13 +76,20 @@
     (let [[var (.pop (:variable-stack context))]
           [vals (.pop (:value-stack context))]]
       (setv var.values vals)))
-  (setv (:frame-pointer context) frame-pointer))
+  (assoc context :frame-pointer frame-pointer))
 
 (fact are-equal!
       "equality constraint"
       (if (= updated-variable var1)
         (narrow context var2 updated-variable.values)
         (narrow context var1 updated-variable.values)))
+
+(fact are-inequal!
+      "inequality constraint"
+      (when (value? var1)
+        (narrow context var2 (^ var1.values var2.values)))
+      (when (value? var2)
+        (narrow context var1 (^ var1.values var2.values))))
 
 (defn solve [&rest variables]
   "solve all variables"
@@ -110,11 +115,7 @@
                         (assert false))))
                 false))
             (when (not (:solved context))
-              (while (!= (len (:variable-stack context)) frame)
-                (let [[var (.pop (:variable-stack context))]
-                      [val (.pop (:value-stack context))]]
-                  (setv var.values val)))
-              (assoc context :frame-pointer frame))))
+              (restore-values context variable frame))))
       (when (:solved context)
         variables))))
 

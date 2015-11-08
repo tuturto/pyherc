@@ -17,8 +17,8 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
-(import [pyherc.solver [Variable are-equal! solve solve-one value]]
-        [hamcrest [assert-that is- equal-to]])
+(import [pyherc.solver [Variable are-equal! are-inequal! solve solve-one value]]
+        [hamcrest [assert-that is- equal-to is-not :as is-not-]])
 
 (defn context []
   "create an empty context for testing"
@@ -35,28 +35,24 @@
     (solve var₁ var₂)
     (assert-that (value var₁) (is- (equal-to (value var₂))))))
 
-(defn test-are-equal []
-  "applying equality will narrow down correctly"
-  (let [[var₁ (Variable 1)]
+(defn test-simple-inequality []
+  "inequal variables have different values"
+  (let [[var₁ (Variable 1 2 3)]
         [var₂ (Variable 1 2 3)]]
-    (are-equal! var₁ var₂)
-    ((first var₁.constraints) (context) var₁)
-    (assert-that (value var₁) (is- (equal-to (value var₂))))))
-
-(defn test-not-equal-results-false []
-  "narrow non-equals with equality will return false"
-  (let [[var₁ (Variable 1)]
-        [var₂ (Variable 2 3)]]
-    (are-equal! var₁ var₂)
-    (assert-that ((first var₁.constraints) (context) var₁) (is- (equal-to false)))))
-
-(defn test-easy-narrow []
-  "two variables with same domains and equality constraint are narrowed down"
-  (let [[var₁ (Variable 1 2)]
-        [var₂ (Variable 1 2)]]
-    (are-equal! var₁ var₂)
+    (are-inequal! var₁ var₂)
     (solve var₁ var₂)
-    (assert-that (value var₁) (is- (equal-to (value var₂))))))
+    (assert-that (value var₁) (is-not- (equal-to (value var₂))))))
+
+(defn test-multiple-constraints []
+  "variables with multiple constraints can be solved"
+  (let [[var₁ (Variable 1 2 3 4 5)]
+        [var₂ (Variable 1 2 3 4 5)]
+        [var₃ (Variable 1 2 3 4 5)]]
+    (are-equal! var₁ var₂)
+    (are-inequal! var₁ var₃)
+    (solve var₁ var₂ var₃)
+    (assert-that (value var₁) (is- (equal-to (value var₂))))
+    (assert-that (value var₁) (is-not- (equal-to (value var₃))))))
 
 (defn test-single-value-left []
   "when variables have single value left, they are reported"
