@@ -87,9 +87,9 @@
 (fact are-inequal!
       "inequality constraint"
       (when (value? var1)
-        (narrow context var2 (^ var1.values var2.values)))
+        (narrow context var2 (- var2.values var1.values)))
       (when (value? var2)
-        (narrow context var1 (^ var1.values var2.values))))
+        (narrow context var1 (- var1.values var2.values))))
 
 (defn solve [&rest variables]
   "solve all variables"
