@@ -98,6 +98,15 @@
           (narrow context var2 (set-comp x [x var2.values] (> x (min var1.values))))
           (narrow context var1 (set-comp x [x var1.values] (< x (max var2.values)))))))
 
+(defun greater-than! [var1 var2]
+  "greater than constraint"
+  (less-than! var2 var1))
+
+(defun in-between! [var1 var2 var3]
+  "constraint something in-between two other things"
+  (less-than! var2 var1)
+  (less-than! var1 var3))
+
 (defn solve [&rest variables]
   "solve all variables"
   (let [[context {:frame-pointer nil

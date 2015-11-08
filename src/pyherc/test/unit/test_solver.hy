@@ -18,8 +18,9 @@
 ;;   along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (import [pyherc.solver [Variable are-equal! are-inequal! less-than!
-                        solve solve-one value]]
-        [hamcrest [assert-that is- equal-to is-not :as is-not- less-than]])
+                        greater-than! in-between! solve solve-one value]]
+        [hamcrest [assert-that is- equal-to is-not :as is-not- less-than
+                   greater-than]])
 
 (defn context []
   "create an empty context for testing"
@@ -62,6 +63,24 @@
     (solve var₁ var₂ var₃)
     (assert-that (value var₁) (is- (less-than (value var₂))))
     (assert-that (value var₂) (is- (less-than (value var₃))))))
+
+(defn test-basic-greater-than []
+  "variable can be constrained to be greater than something else"
+  (let [[var₁ (Variable 1 2 3 4 5)]
+        [var₂ (Variable 1 2 3 4 5)]]
+    (greater-than! var₁ var₂)
+    (solve var₁ var₂)
+    (assert-that (value var₁) (is- (greater-than (value var₂))))))
+
+(defn test-basic-in-between []
+  "variable can be constrained to be in-between two variables"
+  (let [[var₁ (Variable 1 2 3 4 5)]
+        [var₂ (Variable 1 2 3 4 5)]
+        [var₃ (Variable 1 2 3 4 5)]]
+    (in-between! var₁ var₂ var₃)
+    (solve var₁ var₂ var₃)
+    (assert-that (value var₁) (is- (greater-than (value var₂))))
+    (assert-that (value var₁) (is- (less-than (value var₃))))))
 
 (defn test-multiple-constraints []
   "variables with multiple constraints can be solved"
