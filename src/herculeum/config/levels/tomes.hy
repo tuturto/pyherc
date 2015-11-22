@@ -131,4 +131,6 @@
  (rare-scroll "Obscure scroll II"
               "This statement is false.")
  (rare-scroll "Obscure scroll III"
-              "La nieve es blanca."))
+              "La nieve es blanca.")
+ (rare-scroll "Obscure scroll IV"
+              "El cielo es azul."))
