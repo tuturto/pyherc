@@ -20,7 +20,10 @@
 (import [pyherc.generators.level.decorator.basic [Decorator DecoratorConfig]]
         [pyherc.aspects [log-debug log-info]]
         [pyherc.data [wall-tile floor-tile get-tiles area-around
-                      ornamentation]])
+                      ornamentation get-locations-by-tag add-location-tag]]
+        [pyherc.data.geometry [area-around]]
+        [pyherc.data.level [tiles↜]]
+        [random])
 (require pyherc.macros)
 (require pyherc.aspects)
 (require hy.contrib.anaphoric)
@@ -89,3 +92,41 @@
     (when (and (= (floor-tile level location) source)
                (<= (.randint rng 0 100) rate))
       (floor-tile level location target))))
+
+(defn wall-swap [tiles tag tile-dict]
+  "decorator used to replace set of wall tiles with another set"
+  (fn [level]
+    (ap-each (tiles level tag) 
+             (let [[old-tile (wall-tile level it)]]
+               (when (in old-tile tile-dict)
+                 (wall-tile level it (get tile-dict old-tile)))))))
+
+(defn floor-swap-2 [tiles tile-dict]
+  "decorator used to replace set of floor tiles with another set"
+  (fn [level]
+    (ap-each (tiles level) (when (in (:floor (second it)) tile-dict)
+                             (assoc (second it) :floor 
+                                    (get tile-dict (:floor (second it))))))))
+
+(defn coarse-selection [level tag]
+  "tag some of the tiles in level and return them"
+  (let [[location-value (dict-comp (first x) (.uniform random -1.0 1.0)
+                                   [x (tiles↜ level)])]
+        [get-value (fn [point data]
+                     (if (in point data)
+                       (get data point)
+                       0))]
+        [coarsify-point (fn [point data]
+                          (let [[area↜ (area-around point)]
+                                [value-sum (sum (list-comp (get-value x data) [x area↜]))]
+                                [score (+ (get-value point data)
+                                          (* value-sum 0.05))]]))]
+        [coarsify (fn [data]
+                    (dict-comp (first x) (coarsify-point (first x) data) [x (.items data)]))]]
+    (when (not (list (get-locations-by-tag level tag)))
+      (for [i (range 50)] 
+        (setv location-value (coarsify location-value)))
+      (ap-each (tiles↜ level)
+               (when (> (get location-value (first it)) 0.0)
+                 (add-location-tag level (first it) tag))))        
+    (get-locations-by-tag level tag)))

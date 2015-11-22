@@ -35,7 +35,9 @@
                                                SurroundingDecoratorConfig
                                                DirectionalWallDecorator
                                                DirectionalWallDecoratorConfig
-                                               floor-swap wall-ornamenter]]
+                                               floor-swap wall-ornamenter
+                                               wall-swap]]
+           [pyherc.generators.level.decorator.wall [coarse-selection]]
            [pyherc.generators.level.item [ItemAdder]]
            [pyherc.generators.level.partitioners [binary-space-partitioning
                                                   grid-partitioning]]
@@ -93,6 +95,27 @@
                                        "wall_torch_f1"]]]
                     nil
                     ~chance rng))
+
+(defmacro coarse-replace-wall [tag source dest]
+  "replace walls coarsely"
+  `(wall-swap coarse-selection ~tag
+              {~source ~dest
+               (+ ~source "_13") (+ ~dest "_13")
+               (+ ~source "_15") (+ ~dest "_15")
+               (+ ~source "_17") (+ ~dest "_17")
+               (+ ~source "_35") (+ ~dest "_35")
+               (+ ~source "_37") (+ ~dest "_37")
+               (+ ~source "_57") (+ ~dest "_57")
+               (+ ~source "_135") (+ ~dest "_135")
+               (+ ~source "_137") (+ ~dest "_137")
+               (+ ~source "_157") (+ ~dest "_157")
+               (+ ~source "_357") (+ ~dest "_357")
+               (+ ~source "_1357") (+ ~dest "_1357")}))
+
+(defmacro coarse-replace-floor [tag source dest]
+  "replace floor coarsely"
+  '(fn [level]
+     level))
 
 (defmacro item-lists [&rest items]
   `(ap-map (ItemAdder item-generator it rng) [~@items]))
