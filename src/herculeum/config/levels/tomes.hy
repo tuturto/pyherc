@@ -125,4 +125,10 @@
          "Throw caution to the wind and just do it.")
  (scroll "Curious scroll XII"
          "He who is not courageous enough to take risk will accomplish"
-         "nothing in life."))
+         "nothing in life.")
+ (rare-scroll "Obscure scroll I"
+              "Ceci n'est pas une pipe.")
+ (rare-scroll "Obscure scroll II"
+              "This statement is false.")
+ (rare-scroll "Obscure scroll III"
+              "La nieve es blanca."))

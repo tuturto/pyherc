@@ -23,7 +23,8 @@
 (import [pyherc.generators [ItemConfiguration TrapConfiguration]])
 
 (defmacro items-dsl []
-  `(import [herculeum.config.levels.macros [item tome scroll trap-bag]]))
+  `(import [herculeum.config.levels.macros [item tome scroll rare-scroll
+                                            artifact-scroll trap-bag]]))
 
 (defn item [name description cost weight icons types rarity]  
   (ItemConfiguration :name name
@@ -34,23 +35,20 @@
                      :rarity rarity
                      :description description))
 
-(defn tome [name &rest content]
-  (ItemConfiguration :name name 
-                     :cost 100
-                     :weight 1
-                     :icons ["tied-scroll"]
-                     :types ["tome" "hint"]
-                     :rarity "rare"
-                     :description (.join " " content)))
+(defmacro def-scroll [name cost rarity]
+  `(defn ~name [name &rest content]
+     (item name (.join " " content) ~cost 1
+           ["tied-scroll"] ["scroll" "hint"]
+           ~rarity)))
 
-(defn scroll [name &rest content]
-  (ItemConfiguration :name name 
-                     :cost 50
-                     :weight 1
-                     :icons ["tied-scroll"]
-                     :types ["scroll" "hint"]
-                     :rarity "uncommon"
-                     :description (.join " " content)))
+(defn tome [name &rest content]
+  (item name (.join " " content) 100 1
+        ["tied-scroll"] ["tome" "hint"]
+        "rare"))
+
+(def-scroll scroll 50 "uncommon")
+(def-scroll rare-scroll 100 "rare")
+(def-scroll artifact-scroll 750 "artifact")
 
 (defn trap-bag [name description trap-name count cost weight icons types rarity]
   (ItemConfiguration :name name
