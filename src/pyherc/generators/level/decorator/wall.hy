@@ -101,12 +101,13 @@
                (when (in old-tile tile-dict)
                  (wall-tile level it (get tile-dict old-tile)))))))
 
-(defn floor-swap-2 [tiles tile-dict]
+(defn floor-swap-2 [tiles tag tile-dict]
   "decorator used to replace set of floor tiles with another set"
   (fn [level]
-    (ap-each (tiles level) (when (in (:floor (second it)) tile-dict)
-                             (assoc (second it) :floor 
-                                    (get tile-dict (:floor (second it))))))))
+    (ap-each (tiles level tag) 
+             (let [[old-tile (floor-tile level it)]]
+               (when (in old-tile tile-dict)
+                 (floor-tile level it (get tile-dict old-tile)))))))
 
 (defn coarse-selection [level tag]
   "tag some of the tiles in level and return them"
@@ -120,11 +121,11 @@
                           (let [[area↜ (area-around point)]
                                 [value-sum (sum (list-comp (get-value x data) [x area↜]))]
                                 [score (+ (get-value point data)
-                                          (* value-sum 0.05))]]))]
+                                          (* value-sum 0.025))]]))]
         [coarsify (fn [data]
                     (dict-comp (first x) (coarsify-point (first x) data) [x (.items data)]))]]
     (when (not (list (get-locations-by-tag level tag)))
-      (for [i (range 50)] 
+      (for [i (range 25)] 
         (setv location-value (coarsify location-value)))
       (ap-each (tiles↜ level)
                (when (> (get location-value (first it)) 0.0)

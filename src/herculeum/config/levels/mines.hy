@@ -25,17 +25,17 @@
 
 (level-list
  (new-level "upper mines" 
-            (room-list (square-room "ground_soil3" "ground_soil3")
-                       (square-pitroom "ground_soil3" "ground_soil3"
+            (room-list (square-room "ground_soil2" "ground_soil2")
+                       (square-pitroom "ground_soil2" "ground_soil2"
                                        "rock_pit_07"))
             (layout (irregular-grid #t(80 40) #t(11 11))
                     (irregular-grid #t(40 80) #t(11 11)))
             (touch-up (wall-builder "wall_rubble2")
-                      (coarse-replace-floor "pattern 1" "ground_soil3" "ground_soil4")
+                      (coarse-replace-floor "pattern 1" "ground_soil2" "ground_soil3")
+                      (floor-builder "ground_soil2")
                       (floor-builder "ground_soil3")
-                      (floor-builder "ground_soil4")
+                      (floor-swapper "ground_soil2" "ground_rock2" unlikely)
                       (floor-swapper "ground_soil3" "ground_rock3" unlikely)
-                      (floor-swapper "ground_soil4" "ground_rock4" unlikely)
                       (pit-builder "rock_pit")
                       (wall-cracker "wall_rubble2" unlikely)
                       (support-beams "wall_rubble2" "wooden beams" unlikely)

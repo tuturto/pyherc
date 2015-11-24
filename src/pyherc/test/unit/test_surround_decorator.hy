@@ -52,18 +52,3 @@
         [decorator (:decorator context)]]
     (.decorate-level decorator level)
     (assert-that (floor-tile level #t(0 -1)) (is- (equal-to nil)))))
-
-;; TODO: check which ones are really needed
-
-(defn test-remove-me-1 []
-  "replacing works"
-  (let [[context (setup)]
-        [level (:level context)]
-        [swapper (wall-swap all-tiles↜ "tag" {"wall" "new wall"})]]
-    (wall-tile level #t(5 5) "wall")
-    (swapper level)
-    (assert-that (wall-tile level #t(5 5)) (is- (equal-to "new wall")))))
-
-(defn all-tiles↜ [level tag]
-  "return all tiles of level"
-  (genexpr location [#t(location tile) (tiles↜ level)]))
