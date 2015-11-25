@@ -25,7 +25,7 @@
                                             SurroundingDecoratorConfig
                                             DirectionalWallDecorator
                                             DirectionalWallDecoratorConfig
-                                            floor-swap wall-ornamenter]])
+                                            wall-ornamenter]])
 
 (defn floor-builder [base]
   (FloorBuilderDecorator 

@@ -29,4 +29,5 @@ from .basic import FloorBuilderDecorator, FloorBuilderDecoratorConfig
 from .basic import WallOrnamentDecorator, WallOrnamentDecoratorConfig
 
 from .wall import (SurroundingDecorator, SurroundingDecoratorConfig,
-                   wall_ornamenter, floor_swap, wall_swap)
+                   wall_ornamenter, floor_swap, wall_swap,
+                   coarse_selection, random_selection)

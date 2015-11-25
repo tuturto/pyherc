@@ -20,7 +20,8 @@
 (require pyherc.macros)
 
 (defmacro level-config-dsl []
-  `(import [herculeum.config.floor-builders [floor-builder wall-builder
+  `(import [functools [partial]]
+           [herculeum.config.floor-builders [floor-builder wall-builder
                                              animated-pit-builder
                                              pit-builder
                                              wall-torches
@@ -36,8 +37,8 @@
                                                DirectionalWallDecorator
                                                DirectionalWallDecoratorConfig
                                                floor-swap wall-ornamenter
-                                               wall-swap]]
-           [pyherc.generators.level.decorator.wall [coarse-selection floor-swap-2]]
+                                               wall-swap
+                                               coarse-selection random-selection]]           
            [pyherc.generators.level.item [ItemAdder]]
            [pyherc.generators.level.partitioners [binary-space-partitioning
                                                   grid-partitioning]]
@@ -70,10 +71,10 @@
   `(defn init-level [rng item-generator creature-generator level-size context]
      [~@levels]))
 
-(defmacro floor-swapper [source destination chance]
-  `(aggregate-decorator (floor-swap (+ ~source "_1357") ~destination
-                                    ~chance rng)
-                        (floor-builder ~destination)))
+(defmacro floor-swapper [source dest tag chance]
+  `(aggregate-decorator (floor-swap (partial random-selection rng ~chance) ~tag
+                                      {(+ ~source "_1357") ~dest})
+                        (floor-builder ~dest)))
 
 (defmacro support-beams [wall beam chance]
   `(wall-ornamenter [(+ ~wall "_15") [(+ ~beam " 3")]]
@@ -114,22 +115,22 @@
 
 (defmacro coarse-replace-floor [tag source dest]
   "replace floor coarsely"
-  `(floor-swap-2 coarse-selection ~tag
-                 {~source ~dest
-                  (+ ~source "_1") (+ ~dest "_1")
-                  (+ ~source "_3") (+ ~dest "_3")
-                  (+ ~source "_5") (+ ~dest "_5")
-                  (+ ~source "_7") (+ ~dest "_7")
-                  (+ ~source "_13") (+ ~dest "_13")
-                  (+ ~source "_15") (+ ~dest "_15")
-                  (+ ~source "_17") (+ ~dest "_17")
-                  (+ ~source "_35") (+ ~dest "_35")
-                  (+ ~source "_37") (+ ~dest "_37")
-                  (+ ~source "_135") (+ ~dest "_135")
-                  (+ ~source "_137") (+ ~dest "_137")
-                  (+ ~source "_157") (+ ~dest "_157")
-                  (+ ~source "_357") (+ ~dest "_357")
-                  (+ ~source "_1357") (+ ~dest "_1357")}))
+  `(floor-swap coarse-selection ~tag
+               {~source ~dest
+                (+ ~source "_1") (+ ~dest "_1")
+                (+ ~source "_3") (+ ~dest "_3")
+                (+ ~source "_5") (+ ~dest "_5")
+                (+ ~source "_7") (+ ~dest "_7")
+                (+ ~source "_13") (+ ~dest "_13")
+                (+ ~source "_15") (+ ~dest "_15")
+                (+ ~source "_17") (+ ~dest "_17")
+                (+ ~source "_35") (+ ~dest "_35")
+                (+ ~source "_37") (+ ~dest "_37")
+                (+ ~source "_135") (+ ~dest "_135")
+                (+ ~source "_137") (+ ~dest "_137")
+                (+ ~source "_157") (+ ~dest "_157")
+                (+ ~source "_357") (+ ~dest "_357")
+                (+ ~source "_1357") (+ ~dest "_1357")}))
 
 (defmacro item-lists [&rest items]
   `(ap-map (ItemAdder item-generator it rng) [~@items]))

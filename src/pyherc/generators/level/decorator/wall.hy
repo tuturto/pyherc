@@ -81,18 +81,6 @@
                (<= (.randint rng 0 100) rate))
       (ornamentation level location (.choice rng (second top-wall))))))
 
-(defn floor-swap [source target rate rng]
-  "decorator used to replace one floor tile to another"
-  (fn [level]
-    (ap-each (list (get-tiles level))
-             (swap-floor-tile level it source target rate rng))))
-
-(defn swap-floor-tile [level loc-tile source target rate rng]
-  (let [[#t(location tile) loc-tile]]
-    (when (and (= (floor-tile level location) source)
-               (<= (.randint rng 0 100) rate))
-      (floor-tile level location target))))
-
 (defn wall-swap [tiles tag tile-dict]
   "decorator used to replace set of wall tiles with another set"
   (fn [level]
@@ -101,13 +89,21 @@
                (when (in old-tile tile-dict)
                  (wall-tile level it (get tile-dict old-tile)))))))
 
-(defn floor-swap-2 [tiles tag tile-dict]
+(defn floor-swap [tiles tag tile-dict]
   "decorator used to replace set of floor tiles with another set"
   (fn [level]
     (ap-each (tiles level tag) 
              (let [[old-tile (floor-tile level it)]]
                (when (in old-tile tile-dict)
                  (floor-tile level it (get tile-dict old-tile)))))))
+
+(defn random-selection [rng rate level tag]
+  "tag some of the tiles in level and return them"
+  (when (not (list (get-locations-by-tag level tag)))
+    (ap-each (tiles↜ level)
+             (when (<= (.randint rng 0 100) rate)
+               (add-location-tag level (first it) tag))))
+  (get-locations-by-tag level tag))
 
 (defn coarse-selection [level tag]
   "tag some of the tiles in level and return them"

@@ -40,7 +40,7 @@
                       (floor-builder "ground_soil4")
                       (floor-builder "ground_tile3")
                       (floor-builder "ground_wood4")
-                      (floor-swapper "ground_soil4" "ground_rock4" unlikely)
+                      (floor-swapper "ground_soil4" "ground_rock4" "pattern 1" unlikely)
                       (wall-cracker "wall_rubble6" unlikely)
                       (support-beams "wall_rubble6" "wooden beams" unlikely)
                       (wall-torches "wall_rubble6" almost-certainly-not))
