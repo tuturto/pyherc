@@ -319,7 +319,7 @@ def init_items(context):
                                     types = ['weapon',
                                              'melee',
                                              'simple weapon',
-                                             '\ufdd0:spade'],
+                                             'spade'],
                                     rarity = 'common',
                                     weapon_configration = WeaponConfiguration(
                                             damage = [(1, CRUSHING_DAMAGE)],

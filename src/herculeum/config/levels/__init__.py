@@ -30,6 +30,7 @@ import herculeum.config.levels.final_gate
 import herculeum.config.levels.first_gate
 import herculeum.config.levels.foods
 import herculeum.config.levels.graphics
+import herculeum.config.levels.kadath
 import herculeum.config.levels.maze
 import herculeum.config.levels.mines
 import herculeum.config.levels.player_characters
