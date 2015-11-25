@@ -32,7 +32,7 @@
                                        "rock_pit_07")
                        (circular-room "ground_tile3" "ground_tile3")
                        (circular-bones-room "ground_tile3" "ground_soil4" "ground_tile3"
-                                            ["skull 1" "bones 1"] unlikely)
+                                            ["skull 1" "skull 2" "bones 1" "bones 2"] unlikely)
                        (circular-graveyard "ground_soil4" "ground_tile3"
                                            ["tomb 1" "tomb 2" "tomb 3" "tomb 4" "tomb 5"
                                             "tomb 6" "tomb 7" "tomb 8" "tomb 9"]
