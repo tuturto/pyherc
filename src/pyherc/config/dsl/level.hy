@@ -18,6 +18,7 @@
 ;;  along with pyherc.  If not, see <http://www.gnu.org/licenses/>.
 
 (require pyherc.macros)
+(require hy.contrib.anaphoric)
 
 (defmacro level-config-dsl []
   `(import [functools [partial]]
@@ -51,6 +52,38 @@
                                           ornament-creator
                                           center-area center-tile side-by-side
                                           random-pillars]]))
+
+(defmacro set-branch [branch code]
+  `(if-not ~branch
+           (setv ~branch ~code)
+           (macro-error ~code "duplicate config element")))
+
+(defmacro level [level-name description &rest elements]
+  "create new instance of level config"
+  (let [[room-generators nil]
+        [partitioners nil]
+        [decorators '[]]
+        [items '[]]
+        [characters '[]]
+        [portal-config '[]]]
+    (ap-each elements
+             (cond [(= 'room-list (first it)) (set-branch room-generators it)]
+                   [(= 'layout (first it)) (set-branch partitioners it)]
+                   [(= 'touch-up (first it)) (set-branch decorators it)]
+                   [(= 'item-lists (first it)) (set-branch items it)]
+                   [(= 'creature-lists (first it)) (set-branch characters it)]
+                   [(= 'connections (first it)) (set-branch portal-config it)]
+                   [true (macro-error it "unknown config element")]))    
+    (if-not room-generators (macro-error nil "room-list not defined"))
+    (if-not partitioners (macro-error nil "layout not defined"))
+    `{:level-name ~level-name
+      :description ~description
+      :room-generators ~room-generators
+      :partitioners ~partitioners
+      :decorators ~decorators
+      :items ~items
+      :characters ~characters
+      :portal-config ~portal-config}))
 
 (defmacro room-list [&rest rooms]
   `[~@rooms])

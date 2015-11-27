@@ -17,37 +17,37 @@
 ;;  You should have received a copy of the GNU General Public License
 ;;  along with pyherc.  If not see <http://www.gnu.org/licenses/>.
 
-(require hy.contrib.anaphoric)
 (require pyherc.macros)
 (require pyherc.config.dsl.level)
 
 (level-config-dsl)
 
 (level-list
- (new-level "final gate"
-            (room-list (circular-room "ground_tile3" "ground_soil4")
-                       (circular-band-room "ground_wood4" "ground_soil4"
-                                           "ground_soil4")
-                       (square-room "ground_tile3" "ground_soil4")
-                       (square-room "ground_soil4" "ground_soil4")
-                       (circular-room-with-candles "ground_wood4"
-                                                   "ground_soil4"
-                                                   "ground_soil4"
-                                                   [["standing_candle_f0"
-                                                     "standing_candle_f1"]]))
-            (layout (irregular-grid #t(40 40) #t(11 11)))
-            (touch-up (wall-builder "wall_rubble6")
-                      (floor-builder "ground_soil4")
-                      (floor-builder "ground_soil3")
-                      (floor-builder "ground_tile3")
-                      (floor-builder "ground_tile4")
-                      (floor-builder "ground_wood4")
-                      (wall-cracker "wall_rubble6" unlikely)
-                      (support-beams "wall_rubble6" "wooden beams" unlikely)
-                      (wall-torches "wall_rubble6" almost-certainly-not))
-            (item-lists (option (item-by-type 0 1 "hint")
-                                (item-by-type 0 1 "potion")))
-            (creature-lists (option (creature 1 3 "rat")))
-            (connections (final-stairs "final gate"
-                                       "grey stairs" "room" certainly))
-            "The last gate looms so close, but yet so far. This is it, the final challenge."))
+ (level "final gate"
+        #s("The last gate looms so close, but yet so far. This is it,"
+           "the final challenge.")
+        (room-list (circular-room "ground_tile3" "ground_soil4")
+                   (circular-band-room "ground_wood4" "ground_soil4"
+                                       "ground_soil4")
+                   (square-room "ground_tile3" "ground_soil4")
+                   (square-room "ground_soil4" "ground_soil4")
+                   (circular-room-with-candles "ground_wood4"
+                                               "ground_soil4"
+                                               "ground_soil4"
+                                               [["standing_candle_f0"
+                                                 "standing_candle_f1"]]))
+        (layout (irregular-grid #t(40 40) #t(11 11)))
+        (touch-up (wall-builder "wall_rubble6")
+                  (floor-builder "ground_soil4")
+                  (floor-builder "ground_soil3")
+                  (floor-builder "ground_tile3")
+                  (floor-builder "ground_tile4")
+                  (floor-builder "ground_wood4")
+                  (wall-cracker "wall_rubble6" unlikely)
+                  (support-beams "wall_rubble6" "wooden beams" unlikely)
+                  (wall-torches "wall_rubble6" almost-certainly-not))
+        (item-lists (option (item-by-type 0 1 "hint")
+                            (item-by-type 0 1 "potion")))
+        (creature-lists (option (creature 1 3 "rat")))
+        (connections (final-stairs "final gate"
+                                   "grey stairs" "room" certainly))))
