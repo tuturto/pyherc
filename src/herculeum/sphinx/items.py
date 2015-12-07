@@ -208,7 +208,7 @@ class ItemDescriptionDirective(Directive):
     def run(self, config):
         env = self.state.document.settings.env
 
-        targetid = "itemdescription-%d" % env.new_serialno('itemdescription')
+        targetid = "itemdescription-{0:d}".format(env.new_serialno('itemdescription'))
         targetnode = nodes.target('', '', ids=[targetid])
 
         para = nodes.paragraph()
