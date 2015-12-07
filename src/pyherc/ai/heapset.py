@@ -46,7 +46,7 @@ class HeapSet(list):
 
     def append(self, item):
         if item in self.pos_dict:
-            raise ValueError("item %s appended twice."%str(item))
+            raise ValueError("item {0!s} appended twice.".format(str(item)))
         self.pos_dict[item] = self.pop_begin + len(self)
         list.append(self, item)
 
@@ -77,4 +77,4 @@ class HeapSet(list):
         return self.pos_dict[item] - self.pop_begin
 
     def __str__(self):
-        return list.__str__(self) + str(self.pos_dict) + "pops %d"%self.pop_begin
+        return list.__str__(self) + str(self.pos_dict) + "pops {0:d}".format(self.pop_begin)
