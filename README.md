@@ -27,8 +27,7 @@ Manual
 
 Credits
 =======
-The game is copyrighted by Tuukka Turto and is placed under
-GNU General Public License.
+The game is copyrighted by Tuukka Turto and released under MIT license.
 
 Game uses graphics downloaded from TomeTik <http://pousse.rapiere.free.fr/tome/>
 
