@@ -45,7 +45,14 @@ def impl(context, character_name, target_name):
     character = get_character(context, character_name)
     target = get_character(context, target_name)
 
+    if not target.level:
+        room = Level()
+        room['name'] = 'room'
+        context.places.append(room)
+        place(target, middle_of(room))
+
     level = target.level
+
     location = (target.location[0] + 1,
                 target.location[1])
 
@@ -56,6 +63,12 @@ def impl(context, character_name, target_name):
 def impl(context, character_name, target_name):
     character = get_character(context, character_name)
     target = get_character(context, target_name)
+
+    if not target.level:
+        room = Level()
+        room['name'] = 'room'
+        context.places.append(room)
+        place(target, middle_of(room))
 
     level = target.level
     location = (target.location[0] + 3,

@@ -6,7 +6,6 @@ Feature: Combat
   Background:
      Given Pete is Adventurer
        And Uglak is Goblin
-       And Uglak is standing in room
        And Pete is standing next to Uglak
   
   Scenario: hit in unarmed combat

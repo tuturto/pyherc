@@ -7,7 +7,6 @@ Feature: Magic
      Given Simon is Wizard
        And Uglak is Goblin
        And Uglak is almost dead
-       And Uglak is standing in room
        And Simon is standing away from Uglak
 
   Scenario: Magic missile
