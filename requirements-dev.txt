@@ -7,3 +7,4 @@ behave==1.2.2
 nose==1.3.0
 nose-cov==1.6
 python-coveralls==2.4.1
+hymn==0.2

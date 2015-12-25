@@ -184,7 +184,7 @@ def init_players(context):
     date = datetime.date.today()
     events = get_special_events(date.year, date.month, date.day)
 
-    if SpecialTime.aprilfools in events:
+    if False and SpecialTime.aprilfools in events:
 
         platino_f0 = surface_manager.add_icon('platino_f0', ':platino_f0.png', '@', ['white', 'bold'])
         platino_f1 = surface_manager.add_icon('platino_f1', ':platino_f1.png', '@', ['white', 'bold'])
@@ -203,7 +203,7 @@ def init_players(context):
                                                                '',
                                                                'Mysterious dragon who comes and goes as he wishes...'])))
 
-    if SpecialTime.christmas in events:
+    if False and SpecialTime.christmas in events:
         for character in config:
             character.inventory.append(inventory_config(item_name = 'idol of snowman',
                                                         min_amount = 1,
