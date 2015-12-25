@@ -68,7 +68,6 @@
                   (.add-to-tick self.character Duration.instant)))]
    [legal? #d(fn [self]
                "check if the move is possible to perform"
-
                (let [[level self.new-level]
                      [location self.new-location]]
                  (cond [(is level nil) false]
@@ -79,32 +78,43 @@
    [--str-- (fn [self]
               (.format "{0} at {1}:{2}" self.character self.new-location self.new-level))]])
 
-(defclass WalkAction [MoveAction]
-  "action for walking"
-  [[execute #i(fn [self]
+(defclass WalkAction []
+  "action for walking"  
+  [[--init-- (fn [self character dying-rules base-action]
+               "default initializer"
+               (super-init)
+               (set-attributes character dying-rules base-action)
+               nil)]
+   [legal? (fn [self]
+             "check if the move is possible to perform"
+             (.legal? self.base-action))]
+   [execute #i(fn [self]
                 "execute this move"
-                (-> (super)
-                    (.execute))
+                (.execute self.base-action)                
                 (ap-each (traps↜ self.character.level self.character.location)
                          (.on-enter it self.character))
                 (.check-dying self.dying-rules self.character))]])
 
-(defclass FlyAction [MoveAction]
+(defclass FlyAction []
   "action for flying"
-  [[execute #i(fn [self]
+  [[--init-- (fn [self base-action]
+               "default initializer"
+               (super-init)
+               (set-attributes base-action)
+               nil)]
+   [legal? (fn [self]
+             "check if the move is possible to perform"
+             (.legal? self.base-action))]
+   [execute #i(fn [self]
                 "execute this move"
-                (-> (super)
-                    (.execute)))]])
+                (.execute self.base-action))]])
 
-(defclass EscapeAction [MoveAction]
+(defclass EscapeAction []
   "action for escaping the dungeon"
   [[--init-- #d(fn [self character]
                  "default initializer"
-                 (super-init :character character
-                             :new-location nil
-                             :new-level nil
-                             :skip-creature-check false
-                             :dying-rules nil)
+                 (super-init)
+                 (set-attributes character)
                  nil)]
    [execute #i(fn [self]
                 "execute this move"
@@ -120,16 +130,20 @@
                  "default initializer"
                  (super-init)
                  (set-attributes character other-character dying-rules)
-                 (setv self.move-action₁ (WalkAction self.character
-                                                     self.other-character.location
-                                                     self.other-character.level
-                                                     true
-                                                     dying-rules))
-                 (setv self.move-action₂ (WalkAction self.other-character
-                                                     self.character.location
-                                                     self.character.level
-                                                     true
-                                                     dying-rules))
+                 (setv self.move-action₁ (WalkAction :character self.character
+                                                     :dying-rules dying-rules
+                                                     :base-action (MoveAction character
+                                                                              self.other-character.location
+                                                                              self.other-character.level
+                                                                              true
+                                                                              dying-rules)))
+                 (setv self.move-action₂ (WalkAction :character self.other-character
+                                                     :dying-rules dying-rules
+                                                     :base-action (MoveAction self.other-character
+                                                                              self.character.location
+                                                                              self.character.level
+                                                                              true
+                                                                              dying-rules)))
                  nil)]
    [execute #i(fn [self]
                 "execute this move"

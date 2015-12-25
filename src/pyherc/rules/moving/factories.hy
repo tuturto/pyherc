@@ -56,15 +56,17 @@
                       (cond [(blocks-movement new-level new-location)
                              (if (= (movement-mode character) "walk")
                                (WalkAction :character character
-                                           :new-location location
-                                           :new-level new-level
-                                           :skip-creature-check false
-                                           :dying-rules self.dying-rules)
-                               (FlyAction :character character
-                                          :new-location location
-                                          :new-level new-level
-                                          :skip-creature-check false
-                                          :dying-rules self.dying-rules))]
+                                           :dying-rules self.dying-rules
+                                           :base-action (MoveAction character
+                                                                    location
+                                                                    new-level
+                                                                    false
+                                                                    self.dying-rules))
+                               (FlyAction :base-action (MoveAction character
+                                                                   location
+                                                                   new-level
+                                                                   false
+                                                                   self.dying-rules)))]
                             [(get-character new-level new-location)
                              (get-place-switch-action character
                                                       new-location
@@ -72,15 +74,17 @@
                             [true 
                              (if (= (movement-mode character) "walk")
                                (WalkAction :character character
-                                           :new-location new-location
-                                           :new-level new-level
-                                           :skip-creature-check false
-                                           :dying-rules self.dying-rules)
-                               (FlyAction :character character
-                                          :new-location new-location
-                                          :new-level new-level
-                                          :skip-creature-check false
-                                          :dying-rules self.dying-rules))])))))]])
+                                           :dying-rules self.dying-rules
+                                           :base-action (MoveAction character
+                                                                    new-location
+                                                                    new-level
+                                                                    false
+                                                                    self.dying-rules))
+                               (FlyAction :base-action (MoveAction character
+                                                                   new-location
+                                                                   new-level
+                                                                   false
+                                                                   self.dying-rules)))])))))]])
 
 (defn get-place-switch-action [character new-location dying-rules]
   "get action for two characters switching places"
