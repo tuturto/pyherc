@@ -23,8 +23,10 @@
 (require hy.contrib.anaphoric)
 (require pyherc.aspects)
 (require pyherc.macros)
+(require hymn.dsl)
 
-(import [pyherc.aspects [log-debug log-info]]
+(import [hymn.types.either [Left Right right?]]
+        [pyherc.aspects [log-debug log-info]]
         [pyherc.data [blocks-movement get-character remove-character
                       add-character move-character add-visited-level
                       visited-levels speed-modifier]]
@@ -64,8 +66,10 @@
                     (.raise-event character (new-move-event :character character
                                                             :old-location old-location
                                                             :old-level old-level
-                                                            :direction direction)))
-                  (.add-to-tick self.character Duration.instant)))]
+                                                            :direction direction))
+                    (Right character))
+                  (do (.add-to-tick self.character Duration.instant)
+                      (Left character))))]
    [legal? #d(fn [self]
                "check if the move is possible to perform"
                (let [[level self.new-level]
@@ -90,10 +94,12 @@
              (.legal? self.base-action))]
    [execute #i(fn [self]
                 "execute this move"
-                (.execute self.base-action)                
-                (ap-each (traps↜ self.character.level self.character.location)
-                         (.on-enter it self.character))
-                (.check-dying self.dying-rules self.character))]])
+                (if (right? (.execute self.base-action))
+                  (do (ap-each (traps↜ self.character.level self.character.location)
+                           (.on-enter it self.character))
+                      (.check-dying self.dying-rules self.character)
+                      (Right self.character))
+                  (Left self.character)))]])
 
 (defclass FlyAction []
   "action for flying"
@@ -119,7 +125,8 @@
    [execute #i(fn [self]
                 "execute this move"
                 (let [[model self.character.model]]
-                  (setv model.end-condition *escaped-dungeon*)))]
+                  (setv model.end-condition *escaped-dungeon*))
+                (Right self.character))]
    [legal? #d(fn [self]
                "check if move is possible to perform"
                (= self.character.model.player self.character))]])
@@ -163,8 +170,10 @@
                                                              :direction (find-direction location₂
                                                                                         location₁)))
                     (ap-each (traps↜ level₂ location₂) (.on-enter character₂))
-                    (.check-dying self.dying-rules character₂))
-                  (.add-to-tick self.character Duration.instant)))]
+                    (.check-dying self.dying-rules character₂)
+                    (Right character₁))
+                  (do (.add-to-tick self.character Duration.instant)
+                      (Left self.character))))]
    [legal? #d(fn [self]
                "check if this move is legal"
                (if (in self.character.model.player [self.character self.other-character])
