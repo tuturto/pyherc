@@ -97,7 +97,7 @@ class RangedCombatFactory():
             attack_type='ranged',
             to_hit=RangedToHit(attacker,
                                target,
-                               parameters.random_number_generator),
+                               parameters.rng),
             damage=new_damage(ammo_data.damage),
             attacker=attacker,
             target=target,

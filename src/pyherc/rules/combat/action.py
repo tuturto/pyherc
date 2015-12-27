@@ -92,8 +92,7 @@ class AttackAction():
 
         if target is None:
             self.attacker.raise_event(
-                new_attack_nothing_event(attacker=self.attacker,
-                                         affected_tiles=[]))
+                new_attack_nothing_event(attacker=self.attacker))
         else:
 
             was_hit = self.to_hit.is_hit()

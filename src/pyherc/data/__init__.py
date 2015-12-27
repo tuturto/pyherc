@@ -35,7 +35,8 @@ from .character import WeaponProficiency
 
 from .item import Item
 from .new_item import (is_weapon, is_armour, is_potion, is_ammunition,
-                       is_food, is_trap_bag, is_boots)
+                       is_food, is_trap_bag, is_boots, current_weapon,
+                       current_ammunition)
 
 from .constants import Duration, SpecialTime, Direction
 

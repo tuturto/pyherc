@@ -60,3 +60,13 @@
   (if character.inventory.boots
     character.inventory.boots.boots-data.speed-modifier
     1))
+
+(defn current-weapon [character]
+  "get currently used weapon"
+  character.inventory.weapon)
+
+(defn current-ammunition [character]
+  "get currently used ammunition"
+  (if character.inventory.projectiles
+    character.inventory.projectiles
+    nil))

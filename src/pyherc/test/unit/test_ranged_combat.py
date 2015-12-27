@@ -181,7 +181,7 @@ class TestRangedCombat():
                                         attacker = self.character,
                                         direction = 3,
                                         attack_type = 'ranged',
-                                        random_number_generator = Random()))
+                                        rng = Random()))
 
         assert_that(target.target, is_(equal_to(self.target)))
 
@@ -202,6 +202,6 @@ class TestRangedCombat():
                                         attacker = self.character,
                                         direction = 3,
                                         attack_type = 'ranged',
-                                        random_number_generator = Random()))
+                                        rng = Random()))
 
         assert_that(target, is_not(equal_to(self.target)))
