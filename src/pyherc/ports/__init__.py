@@ -24,4 +24,18 @@
 Package for public ports that adapters can connect to
 """
 
-from .actions import ActionsPort
+from .consuming import is_drinking_legal, drink
+from .combat import is_attack_legal, attack
+from .digging import is_dig_legal, dig
+from .interface import set_action_factory
+from .inventory import (pick_up, is_picking_up_legal, drop_item,
+                        is_dropping_item_legal, equip, is_equipping_legal,
+                        unequip, is_unequipping_legal)
+from .magic import (cast, is_casting_legal, gain_domain,
+                    is_gaining_domain_legal)
+from .metamorphosis import is_morph_legal, morph
+from .mitosis import is_mitosis_legal, perform_mitosis
+from .moving import is_move_legal, move
+from .trapping import (is_trapping_legal, place_trap,
+                       is_natural_trapping_legal, place_natural_trap)
+from .waiting import is_waiting_legal, wait

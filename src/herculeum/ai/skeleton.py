@@ -29,7 +29,7 @@ from pyherc.aspects import log_debug
 from pyherc.data.geometry import find_direction
 from pyherc.data import find_free_space
 from pyherc.events import new_lose_focus_event, new_notice_event
-from pyherc.rules import attack, equip, is_move_legal, move
+from pyherc.ports import is_move_legal, move, attack, equip
 
 
 class SkeletonWarriorAI():
@@ -102,8 +102,7 @@ class SkeletonWarriorAI():
 
         if weapons:
             equip(self.character,
-                  weapons[0],
-                  action_factory)
+                  weapons[0])
 
     @log_debug
     def _patrol(self, model, action_factory, rng):
@@ -153,7 +152,6 @@ class SkeletonWarriorAI():
                                        p_location)
             attack(character,
                    direction,
-                   action_factory,
                    rng)
         else:
             path, connections, updated = a_star(c_location,

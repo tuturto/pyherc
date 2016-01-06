@@ -26,7 +26,7 @@
                                LevelBuilder MetamorphosisFactoryBuilder]]
         [pyherc.data [Model add-character get-characters]]
         [pyherc.data.geometry [area-around]]
-        [pyherc.rules.metamorphosis.interface [morph]]
+        [pyherc.ports [morph set-action-factory]]
         [pyherc.generators [generate-creature creature-config]]
         [hamcrest [assert-that is- equal-to]]
         [functools [partial]]
@@ -54,21 +54,20 @@
                                  (.with-character-generator generator)
                                  (.build)))
                             (.build))]]
+    (set-action-factory action-factory)
     (add-character level #t(5 5) character)
     {:model model
      :config config
      :generator generator
      :level level
-     :character character
-     :action-factory action-factory}))
+     :character character}))
 
 (defn test-basic-metamorphosis []
   "test that character can morph to another character"
   (let [[context (setup)]
         [level (:level context)]
-        [character (:character context)]
-        [action-factory (:action-factory context)]]
-    (morph character "fire fungi" action-factory)
+        [character (:character context)]]
+    (morph character "fire fungi")
     (let [[morphed-character (first (list (get-characters level)))]]
       (assert-that (count (get-characters level)) (is- (equal-to 1)))
       (assert-that morphed-character.name (is- (equal-to "fire fungi"))))))
@@ -78,11 +77,10 @@
   (let [[context (setup)]
         [level (:level context)]
         [character (:character context)]
-        [action-factory (:action-factory context)]
         [generator (:generator context)]]
     (ap-each (area-around character.location)
              (add-character level it (generator "fungi")))
     (assert-that (count (get-characters level)) (is- (equal-to 9)))
     (let [[destroyed (ap-filter (!= it character) (get-characters level))]]
-      (morph character "fire fungi" action-factory destroyed))
+      (morph character "fire fungi" destroyed))
     (assert-that (count (get-characters level)) (is- (equal-to 1)))))

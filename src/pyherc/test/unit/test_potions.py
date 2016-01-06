@@ -29,7 +29,8 @@ from hamcrest import assert_that, equal_to, greater_than, has_item, is_, is_not
 from mockito import any, mock, when
 from pyherc.generators import get_effect_creator
 from pyherc.data.effects import Heal
-from pyherc.rules import ActionFactory, drink
+from pyherc.rules import ActionFactory
+from pyherc.ports import drink, set_action_factory
 from pyherc.rules.consume import DrinkFactory
 from pyherc.test.builders import (CharacterBuilder, EffectHandleBuilder,
                                   HealBuilder, ItemBuilder)
@@ -45,7 +46,6 @@ class TestPotions():
         Default constructor
         """
         self.character = None
-        self.action_factory = None
         self.potion = None
         self.model = None
         self.rng = None
@@ -73,8 +73,8 @@ class TestPotions():
 
         drink_factory = DrinkFactory(self.effect_factory,
                                      self.dying_rules)
-        self.action_factory = ActionFactory(self.model,
-                                            drink_factory)
+        set_action_factory(ActionFactory(self.model,
+                                         drink_factory))
 
         self.character = (CharacterBuilder()
                             .with_hit_points(1)
@@ -106,8 +106,7 @@ class TestPotions():
                             .with_name('empty potion')
                             .build())
         drink(self.character,
-              self.potion,
-              self.action_factory)
+              self.potion)
 
         assert_that(self.character.hit_points, is_(equal_to(1)))
 
@@ -116,8 +115,7 @@ class TestPotions():
         Test that character drinking a healing potion gets healed
         """
         drink(self.character,
-              self.potion,
-              self.action_factory)
+              self.potion)
 
         assert_that(self.character.hit_points, is_(greater_than(1)))
         assert_that(self.potion.maximum_charges_left, is_(equal_to(0)))
@@ -127,8 +125,7 @@ class TestPotions():
         Test that drinking a potion correctly identifies it
         """
         drink(self.character,
-              self.potion,
-              self.action_factory)
+              self.potion)
 
         name = self.potion.get_name(self.character)
         assert_that(name, is_(equal_to('healing potion')))
@@ -139,8 +136,7 @@ class TestPotions():
         """
         assert_that(self.character.inventory, has_item(self.potion))
         drink(self.character,
-              self.potion,
-              self.action_factory)
+              self.potion)
         assert_that(self.character.inventory, is_not(has_item(self.potion)))
 
     def test_drinking_potion_does_not_discard_it(self):
@@ -159,8 +155,7 @@ class TestPotions():
 
         assert_that(self.character.inventory, has_item(self.potion))
         drink(self.character,
-              self.potion,
-              self.action_factory)
+              self.potion)
         assert_that(self.character.inventory, has_item(self.potion))
 
     def test_drinking_non_potion(self):
@@ -173,5 +168,4 @@ class TestPotions():
 
         self.character.inventory.append(self.potion)
         drink(self.character,
-              item,
-              self.action_factory)
+              item)

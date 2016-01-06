@@ -1,17 +1,17 @@
 ;; -*- coding: utf-8 -*-
-;;
+
 ;; Copyright (c) 2010-2015 Tuukka Turto
-;; 
+;;
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
 ;; in the Software without restriction, including without limitation the rights
 ;; to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 ;; copies of the Software, and to permit persons to whom the Software is
 ;; furnished to do so, subject to the following conditions:
-;; 
+;;
 ;; The above copyright notice and this permission notice shall be included in
 ;; all copies or substantial portions of the Software.
-;; 
+;;
 ;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 ;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 ;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
@@ -20,30 +20,24 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.aspects)
 (require pyherc.macros)
 
-(import [pyherc.aspects [log-debug log-info]]
-        [pyherc.rules.public [ActionParameters]])
+(import [pyherc.data [Duration]]
+        [pyherc.rules.public [ActionParameters]]
+        [pyherc.ports [interface]])
 
-#i(defn move [character direction action-factory]
-    "move character to specified direction"
-    (-> (.get-action action-factory (MoveParameters character
-                                                    direction))
-        (.execute)))
+(defn wait [character]
+  (let [[action (.get-action interface.*factory*
+                             (WaitParameters character Duration.normal))]]
+    (when (.legal? action)
+      (.execute action))))
 
-#d(defn move-legal? [character direction action-factory]
-    "check if movement is legal"
-    (-> (.get-action action-factory (MoveParameters character
-                                                    direction))
-        (.legal?)))
+(defn waiting-legal? [character]
+  true) ;; TODO: implement
 
-(defclass MoveParameters [ActionParameters]
-  "object for controlling move action creation"
-  [[--init-- (fn [self character direction]
-               "construct move parameters"
+(defclass WaitParameters [ActionParameters]
+  [[--init-- (fn [self character time-to-wait]
                (super-init)
-               (set-attributes character
-                               direction)
-               (setv self.action-type "move")
+               (set-attributes character time-to-wait)
+               (setv self.action-type "wait")
                nil)]])

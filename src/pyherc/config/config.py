@@ -33,6 +33,7 @@ from pyherc.generators.level.old_config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level import PortalAdderFactory, new_dungeon, merge_level
 from pyherc.generators.level import portals
+from pyherc.ports import set_action_factory
 from pyherc.rules import Dying, RulesEngine
 from pyherc.rules.combat import RangedCombatFactory
 from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,
@@ -157,6 +158,8 @@ class Configuration():
                                              metamorphosis_factory,
                                              dig_factory,
                                              trapping_factory])
+
+        set_action_factory(self.action_factory)
 
         self.rules_engine = RulesEngine(self.action_factory,
                                         dying_rules)

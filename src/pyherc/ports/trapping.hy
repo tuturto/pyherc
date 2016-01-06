@@ -20,36 +20,40 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.aspects)
 (require pyherc.macros)
 (import [pyherc.rules.public [ActionParameters]]
-	[pyherc.aspects [log-debug log-info]])
+        [pyherc.ports [interface]])
 
-(defn morph [character new-character-name action-factory
-             &optional [destroyed-characters #t()]]
-  "perform morph on a character"
-  (let [[action (.get-action action-factory
-				(MetamorphosisParameters character 
-                                                         new-character-name
-                                                         destroyed-characters))]]
+(defn place-trap [character trap-bag]
+  "place trap"
+  (let [[action (.get-action interface.*factory*
+                             (TrappingParameters character :trap-bag trap-bag))]]
     (when (.legal? action)
       (.execute action))))
 
-(defn morph-legal? [character new-character-name action-factory
-                    &optional [destroyed-characters #t()]]
-  "can morph be performed"
-  (let [[action (.get-action action-factory
-                             (MetamorphosisParameters character
-                                                      new-character-name
-                                                      destroyed-characters))]]
+(defn place-natural-trap [character trap-name]
+  "place trap without using any items"
+  (let [[action (.get-action interface.*factory*
+                             (TrappingParameters character :trap-name trap-name))]]
+    (when (.legal? action)
+      (.execute action))))
+
+(defn trapping-legal? [character trap-bag]
+  "check if character can place a trap"
+  (let [[action (.get-action interface.*factory*
+                             (TrappingParameters character :trap-bag trap-bag))]]
     (.legal? action)))
 
-(defclass MetamorphosisParameters [ActionParameters]
-  "Class controlling creation of MorphAction"
-  [[--init-- #d(fn [self character new-character-name destroyed-characters]
-		 (-> (super) (.--init--))
-		 (setv self.action-type "metamorphosis")
-		 (setv self.character character)
-                 (setv self.new-character-name new-character-name)
-                 (setv self.destroyed-characters destroyed-characters)
-		 nil)]])
+(defn natural-trapping-legal? [character trap-name]
+  "check if character can place a natural trap"
+  (let [[action (.get-action interface.*factory*
+                             (TrappingParameters character :trap-name trap-name))]]
+    (.legal? action)))
+
+(defclass TrappingParameters [ActionParameters]
+  "class controlling creation of TrappingAction"
+  [[--init-- (fn [self character &optional [trap-bag nil] [trap-name nil]]
+               (super-init)
+               (set-attributes character trap-bag trap-name)
+               (setv self.action-type "trapping")
+               nil)]])

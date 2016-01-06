@@ -25,17 +25,6 @@
 """
 Package for rules of the game
 """
-from pyherc.rules.combat.interface import attack
-from pyherc.rules.consume.interface import drink
-from pyherc.rules.digging.interface import is_dig_legal, dig
-from pyherc.rules.inventory.interface import pick_up, drop_item
-from pyherc.rules.inventory.interface import equip, unequip
-from pyherc.rules.magic.interface import cast, gain_domain
-from pyherc.rules.moving.interface import move, is_move_legal
-from pyherc.rules.trapping.interface import (place_trap, place_natural_trap,
-                                             can_place_trap,
-                                             can_place_natural_trap)
-from pyherc.rules.waiting.interface import wait
 
 from .public import ActionFactory
 from .public import ActionParameters

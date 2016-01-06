@@ -25,12 +25,11 @@
 (require herculeum.ai.macros)
 (require hy.contrib.anaphoric)
 (import [pyherc.aspects [log-debug]]
-	[herculeum.ai.basic [attack-enemy wait]]
+        [herculeum.ai.basic [attack-enemy wait]]
         [pyherc.data [get-character get-location-tags]]
         [pyherc.data.geometry [area-around]]
-        [pyherc.rules.mitosis.interface [perform-mitosis mitosis-legal?]]
-        [pyherc.rules.metamorphosis.interface [morph morph-legal?]]
-	[random [choice]])
+        [pyherc.ports [perform-mitosis mitosis-legal? morph morph-legal?]]
+        [random [choice]])
 
 (setv __doc__ "module for AI routines for fungus")
 
@@ -64,13 +63,13 @@
       (if enemies
 	(attack-enemy ai (choice enemies) action-factory rng)
         (rarely
-         (cond [(and (mitosis-legal? ai.character action-factory)
+         (cond [(and (mitosis-legal? ai.character)
                      (in "room" (get-location-tags ai.character.level
                                                    ai.character.location)))
-                (perform-mitosis ai.character action-factory)]
-               [(and (morph-legal? ai.character "great fungus" action-factory)
+                (perform-mitosis ai.character)]
+               [(and (morph-legal? ai.character "great fungus")
                      (>= (count (adjacent-friends ai)) 6))
-                (morph-great-fungi ai action-factory)]
+                (morph-great-fungi ai)]
                [true (wait ai)])
          (wait ai)))))
 
@@ -80,9 +79,9 @@
 	(attack-enemy ai (choice enemies) action-factory rng)
         (wait ai))))
 
-#d(defn morph-great-fungi [ai action-factory]
+#d(defn morph-great-fungi [ai]
     "morph character into a great fungi"
-    (morph ai.character "great fungus" action-factory 
+    (morph ai.character "great fungus"
            (adjacent-friends ai)))
 
 #d(defn adjacent-friends [ai]

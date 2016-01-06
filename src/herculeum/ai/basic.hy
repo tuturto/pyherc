@@ -25,8 +25,8 @@
 (require pyherc.aspects)
 
 (import [pyherc.aspects [log_debug]]
-    [pyherc.data.geometry [find-direction]]
-    [pyherc.rules [move is-move-legal attack]]
+    [pyherc.data.geometry [find-direction]]    
+    [pyherc.ports [move move-legal? attack]]
     [pyherc.events [new-notice-event]]
     [math [sqrt]])
 
@@ -38,13 +38,13 @@
 
 #d(defn can-walk? [ai action-factory direction]
     "check if character can walk to given direction"
-    (is-move-legal ai.character direction action-factory))
+    (move-legal? ai.character direction))
 
 #d(defn walk [ai action-factory &optional direction]
     "take a step to direction the ai is currently moving"
     (if direction
-      (move ai.character direction action-factory)
-      (move ai.character (second ai.mode) action-factory)))
+      (move ai.character direction)
+      (move ai.character (second ai.mode))))
 
 (defn distance-between [start end]
   "calculate distance between two locations"
@@ -63,7 +63,7 @@
 	  [attacker-location attacker.location]
 	  [target-location enemy.location]
 	  [attack-direction (find-direction attacker-location target-location)]]
-      (attack attacker attack-direction action-factory rng)))
+      (attack attacker attack-direction rng)))
 
 #d(defn focus-enemy [ai enemy]
     "focus on enemy and start tracking it"

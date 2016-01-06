@@ -29,8 +29,9 @@ from pyherc.generators import get_effect_creator
 from pyherc.data.effects import DamageEffect, Heal, Poison
 from pyherc.data import level_size, get_items, add_character
 from pyherc.data.geometry import find_direction
-from pyherc.rules import (attack, cast, drop_item, Dying, gain_domain,
-                          is_move_legal, move, wait)
+from pyherc.rules import Dying
+from pyherc.ports import (attack, is_move_legal, move, set_action_factory, wait,
+                          drop_item, cast, gain_domain)
 from pyherc.test.builders import (ActionFactoryBuilder,
                                   LevelBuilder, SpellCastingFactoryBuilder,
                                   SpellGeneratorBuilder)
@@ -183,11 +184,11 @@ class Wait():
         """
         add_history_value(character, 'tick')
 
-        action_factory = (ActionFactoryBuilder()
-                          .with_wait_factory()
-                          .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_wait_factory()
+                           .build()) # TODO: mutating global state is bad
 
-        wait(character, action_factory)
+        wait(character)
 
 
 def wait_():
@@ -223,14 +224,12 @@ class TakeRandomStep():
 
         directions = [direction for direction in range(1, 9)
                       if is_move_legal(character,
-                                       direction,
-                                       action_factory)]
+                                       direction)]
 
         assert len(directions) > 0
 
         move(character=character,
-             direction=directions[0],
-             action_factory=action_factory)
+             direction=directions[0])
 
 
 def take_random_step():
@@ -303,10 +302,10 @@ class CastSpell():
                                  .with_effects_factory(effects_factory)
                                  .build())
 
-        action_factory = (ActionFactoryBuilder()
-                          .with_dying_rules()
-                          .with_spellcasting_factory(spell_casting_factory)
-                          .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_dying_rules()
+                           .with_spellcasting_factory(spell_casting_factory)
+                           .build()) # TODO: mutating global state is bad
 
         if self.target:
             direction = find_direction(caster.location,
@@ -316,8 +315,7 @@ class CastSpell():
 
         cast(caster,
              direction=direction,
-             spell_name=self.spell_name,
-             action_factory=action_factory)
+             spell_name=self.spell_name)
 
 
 def cast_spell(spell_name, target=None):
@@ -363,10 +361,10 @@ class Hit():
                           .with_dying_rules()
                           .build())
 
+        set_action_factory(action_factory) # TODO: mutating global state is bad
         attack(attacker,
                find_direction(attacker.location,
                               self.target.location),
-               action_factory,
                rng)
 
 
@@ -431,15 +429,14 @@ class GainDomainAction():
         """
         Execute the action
         """
-        action_factory = (ActionFactoryBuilder()
-                          .with_gain_domain_factory()
-                          .with_dying_rules()
-                          .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_gain_domain_factory()
+                           .with_dying_rules()
+                           .build()) # TODO: mutating global state is bad
 
         gain_domain(character=character,
                     item=self.item,
-                    domain=self.domain,
-                    action_factory=action_factory)
+                    domain=self.domain)
 
 
 def gain_domain_(item, domain):
@@ -648,16 +645,15 @@ class Drop():
         add_history_value(actor, 'inventory')
         add_history_value(actor, 'tick')
 
-        action_factory = (ActionFactoryBuilder()
-                          .with_move_factory()
-                          .with_attack_factory()
-                          .with_drink_factory()
-                          .with_inventory_factory()
-                          .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_move_factory()
+                           .with_attack_factory()
+                           .with_drink_factory()
+                           .with_inventory_factory()
+                           .build()) # TODO: mutating global state is bad
 
         drop_item(actor,
-                  self.item,
-                  action_factory)
+                  self.item)
 
 
 def drop(item):

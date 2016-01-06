@@ -26,36 +26,11 @@ Module for testing drop action factory
 from hamcrest import assert_that, equal_to, greater_than, is_, is_in, is_not
 from mockito import any, mock, verify
 from pyherc.data import Model
-from pyherc.rules import drop_item
+from pyherc.ports import drop_item, set_action_factory
 from pyherc.rules.inventory.factories import DropFactory
-from pyherc.rules.inventory.interface import InventoryParameters
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder, LevelBuilder)
 from pyherc.test.matchers import event_type_of
-
-
-class TestDropFactory():
-    """
-    Tests for drop action factory
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        super().__init__()
-
-    def test_can_handle_parameters(self):
-        """
-        Test that drop factory can handle parameter class
-        """
-        parameters = InventoryParameters(character=mock(),
-                                         item=mock(),
-                                         sub_action='drop')
-        factory = DropFactory()
-
-        can_handle = factory.can_handle(parameters)
-
-        assert_that(can_handle, is_(equal_to(True)))
 
 
 class TestDropAction():
@@ -71,7 +46,6 @@ class TestDropAction():
         self.item = None
         self.level = None
         self.character = None
-        self.action_factory = None
         self.model = None
 
     def setup(self):
@@ -89,17 +63,16 @@ class TestDropAction():
                           .with_model(self.model)
                           .build())
 
-        self.action_factory = (ActionFactoryBuilder()
-                               .with_inventory_factory()
-                               .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_inventory_factory()
+                           .build())
 
     def test_dropped_item_is_removed_from_inventory(self):
         """
         Test that dropped item is removed from inventory
         """
         drop_item(self.character,
-                  self.item,
-                  self.action_factory)
+                  self.item)
 
         assert_that(self.item,
                     is_not(is_in(self.character.inventory)))
@@ -109,8 +82,7 @@ class TestDropAction():
         Test that dropped item ends up on level
         """
         drop_item(self.character,
-                  self.item,
-                  self.action_factory)
+                  self.item)
 
         assert_that(self.item.level,
                     is_(equal_to(self.level)))
@@ -120,8 +92,7 @@ class TestDropAction():
         Test that dropped item is added to correct location
         """
         drop_item(self.character,
-                  self.item,
-                  self.action_factory)
+                  self.item)
 
         assert_that(self.item.location,
                     is_(equal_to(self.character.location)))
@@ -133,8 +104,7 @@ class TestDropAction():
         old_time = self.character.tick
 
         drop_item(self.character,
-                  self.item,
-                  self.action_factory)
+                  self.item)
         new_time = self.character.tick
 
         assert_that(new_time, is_(greater_than(old_time)))
@@ -144,7 +114,6 @@ class TestDropAction():
         Dropping an item should raise an event
         """
         drop_item(self.character,
-                  self.item,
-                  self.action_factory)
+                  self.item)
 
         verify(self.model).raise_event(event_type_of('drop'))

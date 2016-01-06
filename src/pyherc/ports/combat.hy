@@ -24,19 +24,23 @@
 
 (import [pyherc.data [current-weapon current-ammunition get-character
                       blocks-movement]]
-        [pyherc.rules.public [ActionParameters]])
+        [pyherc.rules.public [ActionParameters]]
+        [pyherc.ports [interface]])
 
-(defn attack [character direction action-factory rng]
+(defn attack [character direction rng]
   "attack to given direction"
   (let [[attack-type (cond [(ranged-attack? character direction) "ranged"]
                            [(melee-attack? character direction) "melee"]
                            [true "unarmed"])]
-        [action (.get-action action-factory 
+        [action (.get-action interface.*factory*
                              (AttackParameters character
                                                direction
                                                attack-type
                                                rng))]]
     (.execute action)))
+
+(defn attack-legal? [character direction]
+  true) ;; TODO: implement
 
 (defclass AttackParameters [ActionParameters]
   "class for controlling attack action creation"

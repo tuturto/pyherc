@@ -27,7 +27,7 @@ Module for magic related tests
 from hamcrest import (assert_that,  # pylint: disable-msg=E0611; pylint: disable-msg=E0611
                       contains_inanyorder, equal_to, has_item, is_)
 from mockito import any, mock, verify, when
-from pyherc.rules import cast
+from pyherc.ports import cast, set_action_factory
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   DamageBuilder, HealBuilder,
                                   SpellCastingFactoryBuilder, SpellEntryBuilder)
@@ -127,17 +127,16 @@ class TestSpellCasting:
 
         when(magic_factory).get_action(any()).thenReturn(action) #pylint: disable-msg=E1103
 
-        action_factory = (ActionFactoryBuilder()
-                                    .with_spellcasting_factory(magic_factory)
-                                    .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_spellcasting_factory(magic_factory)
+                           .build())
 
         caster = (CharacterBuilder()
                         .build())
 
         cast(caster,
              direction = 1,
-             spell_name = 'healing wind',
-             action_factory = action_factory)
+             spell_name = 'healing wind')
 
         verify(action).execute()
 

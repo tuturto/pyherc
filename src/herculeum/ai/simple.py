@@ -30,7 +30,7 @@ import math
 
 from pyherc.aspects import log_debug
 from pyherc.data.geometry import find_direction
-from pyherc.rules import attack, is_move_legal, move
+from pyherc.ports import is_move_legal, move, attack
 
 
 class FlockingHerbivore():
@@ -103,7 +103,6 @@ class FlockingHerbivore():
                     #attack
                     attack(character,
                            direction,
-                           action_factory,
                            rng)
             else:
                 #find direction

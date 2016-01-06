@@ -20,26 +20,25 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.aspects)
 (import [pyherc.rules.public [ActionParameters]]
-	[pyherc.aspects [log-debug log-info]])
+        [pyherc.ports [interface]] )
 
-#d(defn dig [character action-factory]
-    "perform digging"
-    (let [[action (.get-action action-factory (DigParameters character))]]
-      (when (.legal? action)
-        (.execute action))))
+(defn dig [character]
+  "perform digging"
+  (let [[action (.get-action interface.*factory* (DigParameters character))]]
+    (when (.legal? action)
+      (.execute action))))
 
-(defn dig-legal? [character action-factory]
+(defn dig-legal? [character]
   "check if digging is legal"
-  (let [[action (.get-action action-factory
+  (let [[action (.get-action interface.*factory*
                              (DigParameters character))]]
     (.legal? action)))
 
 (defclass DigParameters [ActionParameters]
   "Class controlling creation of DigAction"
-  [[--init-- #d(fn [self character]
-		 (-> (super) (.--init--))
-		 (setv self.action-type "dig")
-		 (setv self.character character)
-		 nil)]])
+  [[--init-- (fn [self character]
+               (-> (super) (.--init--))
+               (setv self.action-type "dig")
+               (setv self.character character)
+               nil)]])

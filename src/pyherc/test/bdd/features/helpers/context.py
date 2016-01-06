@@ -23,8 +23,8 @@
 """
 Module for general context helpers
 """
+from pyherc.ports import set_action_factory
 from pyherc.data import Model
-from pyherc.ports import ActionsPort
 from pyherc.test.builders import ActionFactoryBuilder
 from pyherc.test.cutesy import (Arrows, Bow, Club, Dagger, LeatherArmour,
                                 PlateMail, Rune, ScaleMail, Sword, Warhammer,
@@ -81,9 +81,9 @@ def with_action_factory(fn):
                                       .with_inventory_factory()
                                       .with_dying_rules()
                                       .build())
+            
+            set_action_factory(context.action_factory)
 
-        if not hasattr(context, 'actions_port'):
-            context.actions_port = ActionsPort(context.action_factory)
 
         return fn(*args, **kwargs)
 

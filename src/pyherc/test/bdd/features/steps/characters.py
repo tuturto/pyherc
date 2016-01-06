@@ -27,6 +27,7 @@ from pyherc.ai.pathfinding import a_star
 from pyherc.data.constants import Direction, Duration
 from pyherc.data.effects import DamageModifier
 from pyherc.data.geometry import find_direction
+from pyherc.ports import move
 from pyherc.test.bdd.features.helpers import (default_context, get_character,
                                               get_item, get_location, observed,
                                               with_action_factory)
@@ -113,15 +114,15 @@ def impl(context, character_name, location_name):
     for tile in path[1:]:
         direction = find_direction(character.location,
                                    tile)
-        context.actions_port.move_character(character,
-                                            direction)
+        move(character,
+             direction)
 
 @when('{character_name} enters {portal_name}')
 @with_action_factory
 def impl(context, character_name, portal_name):
     character = get_character(context, character_name)
 
-    context.actions_port.move_character(character, Direction.enter)
+    move(character, Direction.enter)
 
 @when('{character_name} takes a step')
 @with_action_factory

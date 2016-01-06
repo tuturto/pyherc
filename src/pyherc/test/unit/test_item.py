@@ -31,7 +31,7 @@ import pyherc.generators.item
 from hamcrest import assert_that, equal_to, is_, is_in, is_not
 from mockito import any, mock, verify
 from pyherc.data import Character, add_item, get_items, is_weapon, is_food
-from pyherc.rules import equip, unequip
+from pyherc.ports import equip, unequip, set_action_factory
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   EffectHandleBuilder, ItemBuilder,
                                   LevelBuilder)
@@ -50,7 +50,6 @@ class TestItems():
         self.level = None
         self.dungeon = None
         self.character = None
-        self.action_factory = None
 
     def setup(self):
         """
@@ -71,9 +70,9 @@ class TestItems():
 
         add_item(self.level, (5, 5), self.item)
 
-        self.action_factory = (ActionFactoryBuilder()
-                                    .with_inventory_factory()
-                                    .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_inventory_factory()
+                           .build())
 
     #pylint: disable=E1103
     def test_wield_weapon(self):
@@ -87,8 +86,7 @@ class TestItems():
         assert_that(item, is_not(equal_to(self.character.inventory.weapon)))
 
         equip(self.character,
-              item,
-              self.action_factory)
+              item)
 
         assert_that(self.character.inventory.weapon, is_(equal_to(item)))
 
@@ -101,14 +99,12 @@ class TestItems():
                     .with_damage(2, 'piercing')
                     .build())
         equip(self.character,
-              item,
-              self.action_factory)
+              item)
 
         assert_that(item, is_(equal_to(self.character.inventory.weapon)))
 
         unequip(self.character,
-                item,
-                self.action_factory)
+                item)
 
         assert_that(item, is_not(equal_to(self.character.inventory.weapon)))
 
@@ -151,7 +147,6 @@ class TestItemsInLevel:
         self.model = None
         self.character = None
         self.rng = None
-        self.action_factory = None
 
     def setup(self):
         """
@@ -182,10 +177,6 @@ class TestItemsInLevel:
 
         self.model.dungeon = self.dungeon
         self.model.player = self.character
-
-        self.action_factory = (ActionFactoryBuilder()
-                                    .with_inventory_factory()
-                                    .build())
 
     def test_finding_items(self):
         """

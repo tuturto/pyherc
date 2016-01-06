@@ -27,7 +27,7 @@ from hamcrest import assert_that, equal_to, is_
 from mockito import mock, when
 from pyherc.data import Dungeon, Model
 from pyherc.data.effects import DamageModifier
-from pyherc.rules import attack
+from pyherc.ports import attack, set_action_factory
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder, LevelBuilder)
 from pyherc.test.cutesy import at_
@@ -46,7 +46,6 @@ class TestDamageModifiers():
         self.modle = None
         self.character1 = None
         self.character2 = None
-        self.action_factory = None
         self.rng = None
 
     def setup(self):
@@ -55,9 +54,9 @@ class TestDamageModifiers():
         """
         self.model = Model()
 
-        self.action_factory = (ActionFactoryBuilder()
-                               .with_attack_factory()
-                               .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_attack_factory()
+                           .build())
 
         self.character1 = (CharacterBuilder()
                            .with_model(self.model)
@@ -101,7 +100,6 @@ class TestDamageModifiers():
         """
         attack(self.character1,
                3,
-               self.action_factory,
                self.rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(6)))
@@ -115,7 +113,6 @@ class TestDamageModifiers():
 
         attack(self.character1,
                3,
-               self.action_factory,
                self.rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(7)))
@@ -137,7 +134,6 @@ class TestDamageModifiers():
 
         attack(self.character1,
                3,
-               self.action_factory,
                self.rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(3)))
@@ -155,7 +151,6 @@ class TestDamageModifiers():
 
         attack(self.character1,
                3,
-               self.action_factory,
                self.rng)
 
         assert_that(self.character2.hit_points, is_(equal_to(7)))

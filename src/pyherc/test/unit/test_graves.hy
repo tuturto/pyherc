@@ -35,8 +35,7 @@
         [pyherc.generators.level.room [LibraryRoomGenerator]]
         [pyherc.test.builders [ActionFactoryBuilder LevelBuilder ItemBuilder
                                CharacterBuilder]]
-        [pyherc.rules.inventory.interface [equip]]
-        [pyherc.rules.digging [dig]])
+        [pyherc.ports [dig set-action-factory equip]])
 
 (defn full-grave [item-generator character-generator]
   "creates a full grave in given location"
@@ -96,6 +95,7 @@
     (ap-each sections (.generate-room generator it))
     (.append character.inventory spade)
     (.append character.inventory dagger)
+    (set-action-factory action-factory)
     {:level level
      :sections sections
      :grave (first (list (find-feature level)))
@@ -112,7 +112,7 @@
         [action-factory (:action-factory context)]
         [character (:character context)]]
     (add-character level (:location grave) character)
-    (dig character action-factory)
+    (dig character)
     (assert-that (count (items-in-cache grave)) (is- (equal-to 1)))
     (assert-that (count (characters-in-cache grave)) (is- (equal-to 1)))))
 
@@ -125,9 +125,9 @@
         [character (:character context)]
         [spade (:spade context)]]
     (add-character level (:location grave) character)
-    (equip character spade action-factory)
+    (equip character spade)
     (assert character.inventory.weapon)
-    (dig character action-factory)
+    (dig character)
     (assert-that (count (items-in-cache grave)) (is- (equal-to 0)))
     (assert-that (count (characters-in-cache grave)) (is- (equal-to 0)))))
 
@@ -140,8 +140,8 @@
         [character (:character context)]
         [dagger (:dagger context)]]
     (add-character level (:location grave) character)
-    (equip character dagger action-factory)
-    (dig character action-factory)
+    (equip character dagger)
+    (dig character)
     (assert-that (count (items-in-cache grave)) (is- (equal-to 1)))
     (assert-that (count (characters-in-cache grave)) (is- (equal-to 1)))))
 
@@ -154,8 +154,8 @@
         [character (:character context)]
         [spade (:spade context)]]
     (add-character level (:location grave) character)
-    (equip character spade action-factory)
-    (dig character action-factory)
+    (equip character spade)
+    (dig character)
     (assert-that (count (get-items level)) (is- (equal-to 1)))))
 
 (defn test-character-are-unearthed []
@@ -167,8 +167,8 @@
         [character (:character context)]
         [spade (:spade context)]]
     (add-character level (:location grave) character)
-    (equip character spade action-factory)
-    (dig character action-factory)
+    (equip character spade)
+    (dig character)
     (assert-that (count (get-characters level)) (is- (equal-to 2)))))
 
 (defn test-trying-to-exhume-without-grave []
@@ -181,5 +181,5 @@
         [spade (:spade context)]
         [#t(loc_x loc_y) (:location grave)]]
     (add-character level #t((+ loc_x 1) loc_y) character)
-    (equip character spade action-factory)
-    (dig character action-factory)))
+    (equip character spade)
+    (dig character)))

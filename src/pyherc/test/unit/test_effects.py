@@ -30,7 +30,7 @@ from pyherc.data import Model
 from pyherc.data.effects import Effect, EffectHandle, Heal, Poison
 from pyherc.data.geometry import TargetData
 from pyherc.generators import get_effect_creator
-from pyherc.rules import attack, drink
+from pyherc.ports import attack, set_action_factory, drink
 from pyherc.rules.combat.action import AttackAction
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   DrinkFactoryBuilder, EffectBuilder,
@@ -66,10 +66,10 @@ class TestEffects():
                                .with_charges(2))
                   .build())
 
-        action_factory = (ActionFactoryBuilder()
-                          .with_drink_factory(DrinkFactoryBuilder()
-                                              .with_effect_factory(effect_factory))  # noqa
-                         .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_drink_factory(DrinkFactoryBuilder()
+                                               .with_effect_factory(effect_factory))  # noqa
+                           .build())
 
         character = (CharacterBuilder()
                      .with_hit_points(1)
@@ -77,8 +77,7 @@ class TestEffects():
                      .build())
 
         drink(character,
-              potion,
-              action_factory)
+              potion)
 
         assert_that(character.hit_points, is_(equal_to(10)))
         assert_that(character, has_no_effects())
@@ -105,10 +104,10 @@ class TestEffects():
                                .with_charges(2))
                   .build())
 
-        action_factory = (ActionFactoryBuilder()
-                          .with_drink_factory(DrinkFactoryBuilder()
-                                              .with_effect_factory(effect_factory))  # noqa
-                            .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_drink_factory(DrinkFactoryBuilder()
+                                               .with_effect_factory(effect_factory))  # noqa
+                           .build())
 
         character = (CharacterBuilder()
                      .with_hit_points(1)
@@ -116,8 +115,7 @@ class TestEffects():
                      .build())
 
         drink(character,
-              potion,
-              action_factory)
+              potion)
 
         assert_that(character, has_effects(1))
 
@@ -154,7 +152,6 @@ class TestEffectsInMelee():
         self.attacker = None
         self.defender = None
         self.model = None
-        self.action_factory = None
 
     def setup(self):
         """
@@ -172,10 +169,10 @@ class TestEffectsInMelee():
                                          'title': 'poison',
                                          'description': 'Causes damage'}})
 
-        self.action_factory = (ActionFactoryBuilder()
-                               .with_attack_factory()
-                               .with_effect_factory(effects)
-                               .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_attack_factory()
+                           .with_effect_factory(effects)
+                           .build())
 
         self.attacker = (CharacterBuilder()
                          .with_location((5, 5))
@@ -204,7 +201,6 @@ class TestEffectsInMelee():
 
         attack(self.attacker,
                1,
-               self.action_factory,
                rng)
 
         assert_that(self.defender, has_effect())
@@ -218,11 +214,9 @@ class TestEffectsInMelee():
 
         attack(self.attacker,
                1,
-               self.action_factory,
                rng)
         attack(self.attacker,
                1,
-               self.action_factory,
                rng)
 
         assert_that(self.defender, has_effects(1))
@@ -236,7 +230,6 @@ class TestEffectsInMelee():
 
         attack(self.attacker,
                1,
-               self.action_factory,
                rng)
 
         verify(self.model).raise_event(event_type_of('poisoned'))

@@ -25,7 +25,7 @@ Module for testing wearing armour
 """
 
 from hamcrest import assert_that, is_not  # pylint: disable-msg=E0611
-from pyherc.rules import equip, unequip
+from pyherc.ports import equip, unequip, set_action_factory
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder)
 from pyherc.test.matchers import is_wearing_armour, is_wearing_boots
@@ -41,6 +41,14 @@ class TestWearingArmour():
         """
         super(TestWearingArmour, self).__init__()
 
+    def setup(self):
+        """
+        Setup test case
+        """
+        set_action_factory(ActionFactoryBuilder()
+                           .with_inventory_factory()
+                           .build())        
+
     def test_wear_armour(self):
         """
         Test that armour can be worn
@@ -53,13 +61,9 @@ class TestWearingArmour():
                         .with_name('leather armour')
                         .build())
 
-        action_factory = (ActionFactoryBuilder()
-                                .with_inventory_factory()
-                                .build())
-
+        
         equip(character,
-              armour,
-              action_factory)
+              armour)
 
         assert_that(character, is_wearing_armour(armour))
 
@@ -74,11 +78,7 @@ class TestWearingArmour():
                  .with_boots_speed_modifier(1)
                  .build())
 
-        action_factory = (ActionFactoryBuilder()
-                          .with_inventory_factory()
-                          .build())
-
-        equip(character, boots, action_factory)
+        equip(character, boots)
 
         assert_that(character, is_wearing_boots(boots))
 
@@ -95,10 +95,6 @@ class TestWearingArmour():
 
         character.inventory.boots = boots
 
-        action_factory = (ActionFactoryBuilder()
-                          .with_inventory_factory()
-                          .build())
-
-        unequip(character, boots, action_factory)
+        unequip(character, boots)
 
         assert_that(character, is_not(is_wearing_boots(boots)))

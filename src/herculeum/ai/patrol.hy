@@ -26,7 +26,7 @@
 (require pyherc.macros)
 (import [pyherc.aspects [log_debug]]
         [pyherc.ai.pathfinding [a-star]]
-        [pyherc.rules [is-move-legal]]
+        [pyherc.ports [move-legal?]]
         [pyherc.data [find-direction get-tiles]]
         [herculeum.ai.basic [can-walk? walk wait distance-between new-location]]
         [herculeum.ai.basic [focus-enemy attack-enemy]]
@@ -70,17 +70,16 @@
                (if (is-patrol-area ai.character.level ai.character.location)
                  (do (start-patrol ai)
                      (wait ai))
-                 (-walk-random-direction ai action-factory)))
+                 (-walk-random-direction ai)))
              (wait ai))))
 
-#d(defn -walk-random-direction [ai action-factory]
+#d(defn -walk-random-direction [ai]
     "take a random step without changing mode"
     (let [[legal-directions (list-comp direction
                                        [direction #t(1 3 5 7)]
-                                       (is-move-legal ai.character
-                                                      direction
-                                                      "walk"
-                                                      action-factory))]]
+                                       (move-legal? ai.character
+                                                    direction
+                                                    "walk"))]]
       (if (len legal-directions) (assoc ai.mode 1
                                         (.choice random legal-directions))
           (wait ai))))

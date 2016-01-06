@@ -26,7 +26,7 @@ Tests for pick up action
 from hamcrest import assert_that, equal_to, is_  # pylint: disable-msg=E0611
 from mockito import any, mock, verify
 from pyherc.data import Model, add_item, get_items
-from pyherc.rules import pick_up
+from pyherc.ports import pick_up, set_action_factory
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder, LevelBuilder)
 
@@ -44,7 +44,6 @@ class TestPickingUp():
         self.item = None
         self.level = None
         self.character = None
-        self.action_factory = None
 
     def setup(self):
         """
@@ -65,17 +64,16 @@ class TestPickingUp():
 
         add_item(self.level, (5, 5), self.item)
 
-        self.action_factory = (ActionFactoryBuilder()
-                                    .with_inventory_factory()
-                                    .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_inventory_factory()
+                           .build())
 
     def test_picking_up(self):
         """
         Test that item can be picked up
         """
         pick_up(self.character,
-                self.item,
-                self.action_factory)
+                self.item)
 
         assert(self.item in self.character.inventory)
         assert(not self.item in get_items(self.level))
@@ -91,8 +89,7 @@ class TestPickingUp():
         assert(self.item.location == (5, 5))
 
         pick_up(self.character,
-                self.item,
-                self.action_factory)
+                self.item)
 
         assert(not self.item in self.character.inventory)
         assert(self.item in get_items(self.level))
@@ -114,11 +111,9 @@ class TestPickingUp():
         add_item(self.level, self.character.location, ammo_2)
 
         pick_up(self.character,
-                ammo_1,
-                self.action_factory)
+                ammo_1)
         pick_up(self.character,
-                ammo_2,
-                self.action_factory)
+                ammo_2)
 
         assert_that(len(self.character.inventory), is_(equal_to(1)))
 

@@ -27,12 +27,10 @@ from random import Random
 
 from hamcrest import assert_that, equal_to, is_, is_not
 from mockito import any, mock, verify, when
-from pyherc.rules import attack
-from pyherc.rules.combat import RangedCombatFactory
-from pyherc.rules.combat.interface import AttackParameters
+from pyherc.ports import attack, set_action_factory
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder, LevelBuilder)
-from pyherc.test.matchers import AttackActionParameterMatcher, does_have
+from pyherc.test.matchers import does_have
 from pyherc.data import wall_tile, add_character, remove_character
 from pyherc.data import move_character
 
@@ -50,7 +48,6 @@ class TestRangedCombat():
         self.level = None
         self.character = None
         self.target = None
-        self.action_factory = None
 
     def setup(self):
         """
@@ -87,34 +84,16 @@ class TestRangedCombat():
         self.character.inventory.weapon = bow
         self.character.inventory.projectiles = self.arrows
 
-        self.action_factory = mock()
-        when(self.action_factory).get_action(any()).thenReturn(mock())
-
-    def test_ranged_attack_is_created_for_distant_enemy(self):
-        """
-        When attacking enemy in distance, a ranged attack should
-        be created
-        """
-        attack(self.character,
-               3,
-               self.action_factory,
-               Random())
-
-        verify(self.action_factory).get_action(
-                            AttackActionParameterMatcher(
-                                        attack_type = 'ranged'))
+        set_action_factory(ActionFactoryBuilder()
+                           .with_attack_factory()
+                           .build())
 
     def test_damage_for_ranged_attack_is_from_arrow(self):
         """
         Damage for ranged attack comes from the arrow
         """
-        action_factory = (ActionFactoryBuilder()
-                            .with_attack_factory()
-                            .build())
-
         attack(self.character,
                3,
-               action_factory,
                Random())
 
         assert_that(self.target.hit_points, is_(equal_to(7)))
@@ -123,13 +102,8 @@ class TestRangedCombat():
         """
         Ranged attack should use ammunition
         """
-        action_factory = (ActionFactoryBuilder()
-                            .with_attack_factory()
-                            .build())
-
         attack(self.character,
                3,
-               action_factory,
                Random())
 
         assert_that(self.arrows.ammunition_data.count, is_(equal_to(9)))
@@ -138,70 +112,10 @@ class TestRangedCombat():
         """
         Completely spent ammunition should be removed from inventory
         """
-        action_factory = (ActionFactoryBuilder()
-                            .with_attack_factory()
-                            .build())
-
         self.arrows.ammunition_data.count = 1
 
         attack(self.character,
                3,
-               action_factory,
                Random())
 
         assert_that(self.character, is_not(does_have(self.arrows)))
-
-    def test_melee_attack_is_created_for_close_enemy(self):
-        """
-        Even when character is armed with ranged weapon, he can not use
-        ranged attack against enemy that is standing right next to him
-        """
-        move_character(self.level, (self.character.location[0] + 1,
-                                    self.character.location[1]),
-                       self.target)
-
-        attack(self.character,
-               3,
-               self.action_factory,
-               Random())
-
-        verify(self.action_factory).get_action(
-                            AttackActionParameterMatcher(
-                                        attack_type = 'melee'))
-
-    def test_finding_target(self):
-        """
-        Test that factory can find the target
-        """
-        factory = RangedCombatFactory(effect_factory = mock(),
-                                      dying_rules = mock())
-
-        target = factory.get_target(
-                            AttackParameters(
-                                        attacker = self.character,
-                                        direction = 3,
-                                        attack_type = 'ranged',
-                                        rng = Random()))
-
-        assert_that(target.target, is_(equal_to(self.target)))
-
-    def test_target_is_not_located_behind_wall(self):
-        """
-        Walls should block arrows
-        """
-        factory = RangedCombatFactory(effect_factory = mock(),
-                                      dying_rules = mock())
-
-        x_loc = self.character.location[0] + 1
-        y_loc = self.character.location[1]
-
-        wall_tile(self.level, (x_loc, y_loc), 100)
-
-        target = factory.get_target(
-                            AttackParameters(
-                                        attacker = self.character,
-                                        direction = 3,
-                                        attack_type = 'ranged',
-                                        rng = Random()))
-
-        assert_that(target, is_not(equal_to(self.target)))

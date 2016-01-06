@@ -21,7 +21,7 @@
 ;; THE SOFTWARE.
 
 (import [pyherc.data [boots?]]
-        [pyherc.rules [equip]]
+        [pyherc.ports [equip set-action-factory]]
         [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
                                ItemBuilder]]
         [hamcrest [assert-that is- equal-to]])
@@ -37,17 +37,16 @@
         [actions (-> (ActionFactoryBuilder)
                      (.with-inventory-factory)
                      (.build))]]
+    (set-action-factory actions)
     {:character character
-     :boots boots
-     :actions actions}))
+     :boots boots}))
 
 (defn test-wearing-boots []
   "boots can be worn"
   (let [[context (setup)]
         [character (:character context)]
-        [boots (:boots context)]
-        [actions (:actions context)]]
-    (equip character boots actions)
+        [boots (:boots context)]]
+    (equip character boots)
     (assert-that character.inventory.boots (is- (equal-to boots)))))
 
 (defn test-item-main-type-for-boots []

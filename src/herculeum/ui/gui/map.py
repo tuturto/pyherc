@@ -35,8 +35,8 @@ from herculeum.ui.gui.layers import (zorder_floor, zorder_wall, zorder_ornament,
                                      zorder_counter, zorder_trap)
 from pyherc.data.model import DIED_IN_DUNGEON
 from pyherc.events import e_event_type
-from pyherc.rules import (attack, cast, is_move_legal, move, pick_up, wait,
-                          is_dig_legal, dig)
+from pyherc.ports import (is_move_legal, move, attack, is_dig_legal, dig,
+                          wait, pick_up, cast)
 from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
                           QEasingCurve, QEvent, QObject, QPropertyAnimation,
                           QSequentialAnimationGroup, QSize, Qt, QTimer)
@@ -456,14 +456,12 @@ class PlayMapWidget(QWidget):
             if direction != 9:
                 attack(player,
                        direction,
-                       self.action_factory,
                        self.rng)
         elif modifiers & Qt.AltModifier:
             if direction != 9:
                 cast(player,
                      direction,
-                     'fireball',
-                     self.action_factory)
+                     'fireball')
 
         else:
             self.move_controller.move_or_attack(player, direction)
@@ -484,8 +482,7 @@ class PlayMapWidget(QWidget):
         :param key: key triggering the processing
         :type key: int
         """
-        wait(self.model.player,
-             self.action_factory)
+        wait(self.model.player)
 
     def _zoom_in(self, key, modifiers):
         """
@@ -534,14 +531,13 @@ class PlayMapWidget(QWidget):
 
         if items != None and len(items) > 0:
             pick_up(player,
-                    items[0],
-                    self.action_factory)
+                    items[0])
 
-        elif is_move_legal(player, 9, self.action_factory):
-            move(player, 9, self.action_factory)
+        elif is_move_legal(player, 9):
+            move(player, 9)
 
-        elif is_dig_legal(player, self.action_factory):
-            dig(player, self.action_factory)
+        elif is_dig_legal(player):
+            dig(player)
 
 class DamageCounter(QGraphicsSimpleTextItem):
     """

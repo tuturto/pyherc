@@ -29,7 +29,7 @@ from herculeum.ui.text.endscreen import EndScreen
 from herculeum.ui.text.inventory import InventoryScreen
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import DIED_IN_DUNGEON
-from pyherc.rules import attack, is_move_legal, move, pick_up, wait
+from pyherc.ports import is_move_legal, move, attack, wait, pick_up
 from pyherc.events import e_event_type
 
 
@@ -141,7 +141,6 @@ class MapScreen():
                 direction = self.move_key_map[dir_key]
                 attack(self.model.player,
                        direction,
-                       self.action_factory,
                        self.rng)
         elif key == 'Q':
             self.model.end_condition = 1
@@ -167,8 +166,7 @@ class MapScreen():
 
         .. versionadded:: 0.10
         """
-        wait(self.model.player,
-             self.action_factory)
+        wait(self.model.player)
 
     @log_debug
     def _action_a(self, key):
@@ -184,8 +182,7 @@ class MapScreen():
 
         if items != None and len(items) > 0:
             pick_up(player,
-                    items[0],
-                    self.action_factory)
+                    items[0])
 
         elif is_move_legal(player, 9, 'walk', self.action_factory):
             move(player, 9, self.action_factory)

@@ -27,7 +27,7 @@ from hamcrest import (assert_that, contains_inanyorder, has_length, is_, is_in,
                       is_not)
 from pyherc.generators.spells import (targeting_single_target,
                                       targeting_spherical_area)
-from pyherc.rules.magic.interface import SpellCastingParameters
+from pyherc.ports.magic import SpellCastingParameters
 from pyherc.test.builders import CharacterBuilder, LevelBuilder
 from pyherc.test.matchers import void_target_at, wall_target_at
 from pyherc.data import wall_tile, add_character

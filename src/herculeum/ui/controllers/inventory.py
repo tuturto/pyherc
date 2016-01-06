@@ -25,7 +25,8 @@ Module for inventory actions
 """
 from pyherc.data import (is_potion, is_weapon, is_armour, is_ammunition,
                          is_trap_bag, is_boots)
-from pyherc.rules import drink, drop_item, equip, pick_up, unequip, place_trap
+from pyherc.ports import (drink, is_drinking_legal, place_trap,
+                          drop_item, equip, pick_up, unequip)
 
 
 class InventoryController():
@@ -41,48 +42,39 @@ class InventoryController():
         super().__init__()
 
         self.character = character
-        self.action_factory = action_factory
+        self.action_factory = action_factory # TODO: not needed anymore
 
     def use_item(self, item):
         """
         Use item in different ways, depending on the item
         """
-        if is_potion(item):
+        if is_potion(item) and is_drinking_legal(self.character, item):
             drink(self.character,
-                  item,
-                  self.action_factory)
+                  item)
         elif is_weapon(item):
             if self.character.inventory.weapon != None:
                 unequip(self.character,
-                        self.character.inventory.weapon,
-                        self.action_factory)
+                        self.character.inventory.weapons)
             equip(self.character,
-                  item,
-                  self.action_factory)
+                  item)
         elif is_armour(item):
             if self.character.inventory.armour != None:
                 unequip(self.character,
-                        self.character.inventory.armour,
-                        self.action_factory)
+                        self.character.inventory.armour)
             equip(self.character,
-                  item,
-                  self.action_factory)
+                  item)
         elif is_boots(item):
             if self.character.inventory.boots != None:
                 unequip(self.character,
-                        self.character.inventory.boots,
-                        self.action_factory)
+                        self.character.inventory.boots)
             equip(self.character,
-                  item,
-                  self.action_factory)
+                  item)
         elif is_ammunition(item):
             equip(self.character,
-                  item,
-                  self.action_factory)
+                  item)
         elif is_trap_bag(item):
             place_trap(self.character,
-                       item,
-                       self.action_factory)
+                       item)
 
 
     def unequip_item(self, item):
@@ -90,24 +82,21 @@ class InventoryController():
         Unequip item
         """
         unequip(self.character,
-                item,
-                self.action_factory)
+                item)
 
     def pick_up_item(self, item):
         """
         Pick up item
         """
         pick_up(self.character,
-                item,
-                self.action_factory)
+                item)
 
     def drop_item(self, item):
         """
         Drop item
         """
         drop_item(self.character,
-                  item,
-                  self.action_factory)
+                  item)
 
     def item_description(self, item):
         """

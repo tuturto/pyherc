@@ -30,7 +30,7 @@
 (import [pyherc.data [add-visited-level]]
         [pyherc.data.new-character [visited-levels↜]]
         [pyherc.data.constants [Direction]]
-        [pyherc.rules [move]])
+        [pyherc.ports [move set-action-factory]])
 
 (defn test-add-visited-level []
   "test that adding and retrieving a level in visited list is possible"
@@ -62,19 +62,18 @@
         [actions (-> (ActionFactoryBuilder)
                      (.with-move-factory)
                      (.build))]]
+    (set-action-factory actions)
     {:listener listener
      :level level
-     :character character
-     :actions actions}))
+     :character character}))
 
 (defn test-event-raised []
   "moving to new level should raise new level event"
   (let [[context (setup)]
         [listener (:listener context)]
         [level (:level context)]
-        [character (:character context)]
-        [actions (:actions context)]]
-    (move character Direction.north actions)
+        [character (:character context)]]
+    (move character Direction.north)
     (-> (verify listener)
         (.receive-update (EventType "new level")))))
 
@@ -83,10 +82,9 @@
   (let [[context (setup)]
         [listener (:listener context)]
         [level (:level context)]
-        [character (:character context)]
-        [actions (:actions context)]]
+        [character (:character context)]]
     (add-visited-level character level)
-    (move character Direction.north actions)
+    (move character Direction.north)
     (-> (verify listener)
         (.receive-update (EventType "move")))
     (verifyNoMoreInteractions listener)))

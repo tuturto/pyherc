@@ -30,7 +30,7 @@ from pyherc.data import (Model, Portal, add_portal, add_character, get_character
                          get_character)
 from pyherc.data.constants import Direction
 from pyherc.data.model import ESCAPED_DUNGEON
-from pyherc.ports import ActionsPort
+from pyherc.ports import is_move_legal, move, set_action_factory
 from pyherc.rules.moving.action import EscapeAction
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   LevelBuilder)
@@ -74,16 +74,16 @@ class TestEventDispatching():
 
         self.model.register_event_listener(self.listener)
 
-        self.actions = ActionsPort(ActionFactoryBuilder()
-                                   .with_move_factory()
-                                   .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_move_factory()
+                           .build())
 
     def test_event_is_relayed(self):
         """
         Test that moving will create an event and send it forward
         """
-        self.actions.move_character(character=self.character,
-                                    direction=Direction.east)
+        move(character=self.character,
+             direction=Direction.east)
 
         verify(self.listener).receive_event(EventType('move'))
 
@@ -132,9 +132,9 @@ class TestMoving():
 
         add_character(self.level1, (5, 5), self.character)
 
-        self.actions = ActionsPort(ActionFactoryBuilder()
-                                   .with_move_factory()
-                                   .build())
+        set_action_factory(ActionFactoryBuilder()
+                           .with_move_factory()
+                           .build())
 
     def test_moving_when_stairs_are_blocked(self):
         """
@@ -144,8 +144,8 @@ class TestMoving():
 
         add_character(self.level2, (10, 10), blocker)
 
-        self.actions.move_character(character=self.character,
-                                    direction=Direction.enter)
+        move(character=self.character,
+             direction=Direction.enter)
 
         assert_that(blocker.level, is_(equal_to(self.level2)))
         assert_that(self.character.level, is_(equal_to(self.level2)))
@@ -156,8 +156,8 @@ class TestMoving():
         """
         self.character.location = start
 
-        self.actions.move_character(character=self.character,
-                                    direction=direction)
+        move(character=self.character,
+             direction=direction)
 
         assert_that(self.character.location,
                     is_(equal_to(expected_location)))
@@ -184,8 +184,8 @@ class TestMoving():
         """
         self.character.location = (1, 1)
 
-        self.actions.move_character(character=self.character,
-                                    direction=Direction.north)
+        move(character=self.character,
+             direction=Direction.north)
 
         assert_that(self.character.location, is_(equal_to((1, 1))))
 
@@ -193,8 +193,8 @@ class TestMoving():
         """
         Test that character can change level via portal
         """
-        self.actions.move_character(character=self.character,
-                                    direction=Direction.enter)
+        move(character=self.character,
+             direction=Direction.enter)
 
         assert_that(self.character.level, is_(equal_to(self.level2)))
         assert_that(self.character.location, is_(equal_to((10, 10))))
@@ -206,8 +206,8 @@ class TestMoving():
         assert self.character.level == self.level1
         assert self.character in get_characters(self.level1)
 
-        self.actions.move_character(character=self.character,
-                                    direction=Direction.enter)
+        move(character=self.character,
+             direction=Direction.enter)
 
         assert self.character.level == self.level2
         assert self.character in get_characters(self.level2)
@@ -219,8 +219,8 @@ class TestMoving():
         assert self.character.level == self.level1
         assert self.character in get_characters(self.level1)
 
-        self.actions.move_character(character=self.character,
-                                    direction=Direction.enter)
+        move(character=self.character,
+             direction=Direction.enter)
 
         assert self.character not in get_characters(self.level1)
 
@@ -230,8 +230,8 @@ class TestMoving():
         """
         self.character.location = (6, 3)
 
-        self.actions.move_character(character=self.character,
-                                    direction=Direction.enter)
+        move(character=self.character,
+             direction=Direction.enter)
 
         assert_that(self.character.location, is_(equal_to((6, 3))))
         assert_that(self.character.level, is_(equal_to(self.level1)))
@@ -242,8 +242,8 @@ class TestMoving():
         """
         tick = self.character.tick
 
-        self.actions.move_character(character=self.character,
-                                    direction=Direction.east)
+        move(character=self.character,
+             direction=Direction.east)
 
         assert self.character.tick > tick
 
@@ -256,8 +256,8 @@ class TestMoving():
         add_portal(self.level1, (2, 2), portal3)
         self.character.location = (2, 2)
 
-        self.actions.move_character(character=self.character,
-                                    direction=Direction.enter)
+        move(character=self.character,
+             direction=Direction.enter)
 
         model = self.character.model
         assert_that(model.end_condition, is_(equal_to(ESCAPED_DUNGEON)))
@@ -336,16 +336,15 @@ class TestSwitchingPlaces():
         add_character(self.level, (5, 5), self.monster_1)
         add_character(self.level, (6, 5), self.monster_2)
 
-        self.actions = ActionsPort(ActionFactoryBuilder()
-                                   .with_move_factory()
-                                   .build())
-
+        set_action_factory(ActionFactoryBuilder()
+                           .with_move_factory()
+                           .build())
 
     def test_switch_places(self):
         """
         Two monsters can switch places
         """
-        self.actions.move_character(self.monster_1, Direction.east)
+        move(self.monster_1, Direction.east)
 
         assert_that(self.monster_1.location, is_(equal_to((6, 5))))
         assert_that(self.monster_2.location, is_(equal_to((5, 5))))
@@ -354,7 +353,7 @@ class TestSwitchingPlaces():
         """
         Switching places should leave system in consistent state
         """
-        self.actions.move_character(self.monster_1, Direction.east)
+        move(self.monster_1, Direction.east)
 
         assert_that(get_character(self.level, (6, 5)), is_(equal_to(self.monster_1)))
         assert_that(get_character(self.level, (5, 5)), is_(equal_to(self.monster_2)))
