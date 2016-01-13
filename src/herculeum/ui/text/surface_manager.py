@@ -62,7 +62,7 @@ class CursesSurfaceManager():
         if not key in self.icons:
             self.icons[key] = ascii_char
 
-            if attributes == None:
+            if attributes is None:
                 used_attributes = curses.A_NORMAL | self.get_attribute_by_name('white')
             else:
                 used_attributes = curses.A_NORMAL

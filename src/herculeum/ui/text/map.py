@@ -95,7 +95,7 @@ class MapScreen():
         self.refresh_screen()
         player = self.model.player
 
-        while self.model.end_condition == 0 and player.level != None:
+        while self.model.end_condition == 0 and player.level is not None:
             next_creature = self.model.get_next_creature(self.rules_engine)
 
             if next_creature == player:
@@ -180,7 +180,7 @@ class MapScreen():
         level = player.level
         items = level.get_items_at(player.location)
 
-        if items != None and len(items) > 0:
+        if items is not None and len(items) > 0:
             pick_up(player,
                     items[0])
 
@@ -195,7 +195,7 @@ class MapScreen():
         player = self.model.player
         level = player.level
 
-        if level == None:
+        if level is None:
             return
 
         for column_number, column in enumerate(level.floor):
@@ -208,7 +208,7 @@ class MapScreen():
         for column_number, column in enumerate(level.walls):
             for row_number, tile in enumerate(column):
                 glyph_number = self.surface_manager.get_icon(tile)
-                if glyph_number != None:
+                if glyph_number is not None:
                     self.screen.addch(row_number + 1,
                                       column_number,
                                       ord(glyph_number),

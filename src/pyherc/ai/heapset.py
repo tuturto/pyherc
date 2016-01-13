@@ -40,7 +40,7 @@ class HeapSet(list):
     def __init__(self, iterator = None):
         self.pos_dict = {}
         self.pop_begin = 0
-        if iterator != None:
+        if iterator is not None:
             for i in iterator:
                 self.append(i)
 
@@ -60,7 +60,7 @@ class HeapSet(list):
 
 
     def pop(self, pos = None):
-        if pos == None:
+        if pos is None:
             item = list.pop(self)
             pos = len(self)
         elif pos == 0:

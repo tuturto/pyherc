@@ -44,7 +44,7 @@ def with_config(fn):
         Inject configuration
         """
 
-        if herculeum.sphinx.helpers.config == None:
+        if herculeum.sphinx.helpers.config is None:
            herculeum.sphinx.helpers.qt_app = QApplication([])
            herculeum.sphinx.helpers.world = Model()
            herculeum.sphinx.helpers.config = Configuration(
@@ -64,5 +64,5 @@ def shutdown_application(app, env, docname):
     """
     Shutdown qt application
     """
-    if herculeum.sphinx.helpers.qt_app != None:
+    if herculeum.sphinx.helpers.qt_app is not None:
         herculeum.sphinx.helpers.qt_app = None

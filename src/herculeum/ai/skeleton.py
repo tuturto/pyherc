@@ -65,7 +65,7 @@ class SkeletonWarriorAI():
         """
         del self.character.short_term_memory[:]
 
-        if self.character.inventory.weapon == None:
+        if self.character.inventory.weapon is None:
             self._wield_weapon(action_factory)
 
         c_location = self.character.location
@@ -98,7 +98,7 @@ class SkeletonWarriorAI():
         """
         weapons = [item for item in
                    self.character.inventory
-                   if item.weapon_data != None]
+                   if item.weapon_data is not None]
 
         if weapons:
             equip(self.character,
@@ -112,7 +112,7 @@ class SkeletonWarriorAI():
         character = self.character
         level = self.character.level
 
-        while (self.destination == None
+        while (self.destination is None
                or character.location == self.destination):
 
             self.destination = find_free_space(level)

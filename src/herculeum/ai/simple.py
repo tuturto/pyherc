@@ -73,7 +73,7 @@ class FlockingHerbivore():
                 loc_x = abs(creature.location[0] - character.location[0])
                 loc_y = abs(creature.location[1] - character.location[1])
                 distance = math.sqrt(loc_x * loc_x + loc_y * loc_y)
-                if shortest_distance != None:
+                if shortest_distance is not None:
                     if distance < shortest_distance:
                         shortest_distance = distance
                         closest_creature = creature
@@ -81,7 +81,7 @@ class FlockingHerbivore():
                     shortest_distance = distance
                     closest_creature = creature
 
-        if shortest_distance != None:
+        if shortest_distance is not None:
             if shortest_distance <= 2:
                 #seek player instead
                 loc_x = abs(player.location[0] - character.location[0])

@@ -52,19 +52,19 @@ class InventoryController():
             drink(self.character,
                   item)
         elif is_weapon(item):
-            if self.character.inventory.weapon != None:
+            if self.character.inventory.weapon is not None:
                 unequip(self.character,
                         self.character.inventory.weapons)
             equip(self.character,
                   item)
         elif is_armour(item):
-            if self.character.inventory.armour != None:
+            if self.character.inventory.armour is not None:
                 unequip(self.character,
                         self.character.inventory.armour)
             equip(self.character,
                   item)
         elif is_boots(item):
-            if self.character.inventory.boots != None:
+            if self.character.inventory.boots is not None:
                 unequip(self.character,
                         self.character.inventory.boots)
             equip(self.character,
@@ -104,14 +104,14 @@ class InventoryController():
         """
         item_description = item.get_name(self.character,
                                          True)
-        if item.weapon_data != None:
+        if item.weapon_data is not None:
             data = item.weapon_data
             item_description += '\ndamage: '
             item_description += ' / '.join((str(x[0]) for x in data.damage))
             item_description += ' ('
             item_description += ' / '.join((str(x[1]) for x in data.damage))
             item_description += ')\n'
-        elif item.armour_data != None:
+        elif item.armour_data is not None:
             data = item.armour_data
             item_description += '\ndamage reduction: {0}\n'.format(data.damage_reduction)
             item_description += 'speed modifier: {0}\n'.format(data.speed_modifier)

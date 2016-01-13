@@ -140,7 +140,7 @@ def a_star(start, goal, a_map):
         x  = pyheapq.heappop(scoreHeap)
 
         if x.node == goal:
-            if lastItem == None or lastItem.g_score > x.g_score:
+            if lastItem is None or lastItem.g_score > x.g_score:
                 lastItem = x
 
             if not any(scoreHeap) or scoreHeap[0].f_score > lastItem.g_score:
@@ -168,7 +168,7 @@ def a_star(start, goal, a_map):
 
             y = HeapItem(node_y, goal, a_map, tentative_g_score)
 
-            if oldy == None:
+            if oldy is None:
                 openDict[node_y] = y
                 came_from[node_y] = x.node
 
@@ -182,7 +182,7 @@ def a_star(start, goal, a_map):
 
                 pyheapq.updateheapvalue(scoreHeap, scoreHeap.index(oldy), y)
 
-    if lastItem != None:
+    if lastItem is not None:
         return [start] + reconstruct_path(came_from,goal), came_from, updateset
     else:
         return [], came_from, updateset

@@ -95,7 +95,7 @@ class InventoryScreen():
                     if index < len(self.character.inventory):
                         item = self.character.inventory[index]
 
-                if item != None:
+                if item is not None:
                     if key == 'u':
                         self.inventory_controller.use_item(item)
                     elif key == 'r':

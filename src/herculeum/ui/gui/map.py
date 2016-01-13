@@ -429,7 +429,7 @@ class PlayMapWidget(QWidget):
             self.model.end_condition = DIED_IN_DUNGEON
 
         while (next_creature != player
-                and next_creature != None
+                and next_creature is not None
                 and self.model.end_condition == 0):
             next_creature.act(model = self.model,
                               action_factory = self.action_factory,
@@ -529,7 +529,7 @@ class PlayMapWidget(QWidget):
         level = player.level
         items = list(get_items(level, player.location))
 
-        if items != None and len(items) > 0:
+        if items is not None and len(items) > 0:
             pick_up(player,
                     items[0])
 
