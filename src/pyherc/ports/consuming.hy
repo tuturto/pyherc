@@ -21,17 +21,16 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
+(require pyherc.rules.macros)
 
 (import [pyherc.rules.public [ActionParameters]]
         [pyherc.ports [interface]])
 
 (defn drink [character potion]
-  (let [[action (.get-action interface.*factory*
-                             (DrinkParameters character potion))]]
-    (.execute action)))
+  (run-action (DrinkParameters character potion)))
 
 (defn drinking-legal? [character potion]
-  true) ;; TODO: implement
+  (legal-action? (DrinkParameters character potion)))
 
 (defclass DrinkParameters [ActionParameters]
   [[--init-- (fn [self character item]

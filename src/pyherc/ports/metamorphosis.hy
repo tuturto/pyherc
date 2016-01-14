@@ -21,27 +21,24 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
+(require pyherc.rules.macros)
+
 (import [pyherc.rules.public [ActionParameters]]
         [pyherc.ports [interface]])
 
 (defn morph [character new-character-name
              &optional [destroyed-characters #t()]]
   "perform morph on a character"
-  (let [[action (.get-action interface.*factory*
-                             (MetamorphosisParameters character 
-                                                      new-character-name
-                                                      destroyed-characters))]]
-    (when (.legal? action)
-      (.execute action))))
+  (run-action (MetamorphosisParameters character 
+                                       new-character-name
+                                       destroyed-characters)))
 
 (defn morph-legal? [character new-character-name
                     &optional [destroyed-characters #t()]]
   "can morph be performed"
-  (let [[action (.get-action interface.*factory*
-                             (MetamorphosisParameters character
-                                                      new-character-name
-                                                      destroyed-characters))]]
-    (.legal? action)))
+  (legal-action? (MetamorphosisParameters character 
+                                          new-character-name
+                                          destroyed-characters)))
 
 (defclass MetamorphosisParameters [ActionParameters]
   "Class controlling creation of MorphAction"

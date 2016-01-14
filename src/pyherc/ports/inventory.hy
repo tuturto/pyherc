@@ -22,49 +22,38 @@
 
 
 (require pyherc.macros)
+(require pyherc.rules.macros)
 
 (import [pyherc.rules.public [ActionParameters]]
         [pyherc.ports [interface]])
 
 (defn pick-up [character item]
   "pick up item"
-  (let [[action (.get-action interface.*factory*
-                             (InventoryParameters character item "pick up"))]]
-    (when (.legal? action)
-      (.execute action))))
+  (run-action (InventoryParameters character item "pick up")))
 
 (defn picking-up-legal? [character item]
-  true) ;; TODO: implement
+  (legal-action? (InventoryParameters character item "pick up")))
 
 (defn drop-item [character item]
   "drop item from inventory"
-  (let [[action (.get-action interface.*factory*
-                             (InventoryParameters character item "drop"))]]
-    (when (.legal? action)
-      (.execute action))))
+  (run-action (InventoryParameters character item "drop")))
 
 (defn dropping-item-legal? [character item]
-  true) ;; TODO: implement
+  (legal-action? (InventoryParameters character item "drop")))
 
 (defn equip [character item]
   "wear item from inventory"
-  (let [[action (.get-action interface.*factory*
-                             (InventoryParameters character item "equip"))]]
-    (when (.legal? action)
-      (.execute action))))
+  (run-action (InventoryParameters character item "equip")))
 
 (defn equipping-legal? [character item]
-  true) ;; TODO: implement
+  (legal-action? (InventoryParameters character item "equip")))
 
 (defn unequip [character item]
   "unequip item"
-  (let [[action (.get-action interface.*factory*
-                             (InventoryParameters character item "unequip"))]]
-    (when (.legal? action)
-      (.execute action))))
+  (run-action (InventoryParameters character item "unequip")))
 
 (defn unequipping-legal? [character item]
-  true) ;; TODO: implement
+  (legal-action? (InventoryParameters character item "unequip")))
 
 (defclass InventoryParameters [ActionParameters]
   [[--init-- (fn [self character item sub-action]

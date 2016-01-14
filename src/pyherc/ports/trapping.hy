@@ -21,34 +21,26 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
+(require pyherc.rules.macros)
+
 (import [pyherc.rules.public [ActionParameters]]
         [pyherc.ports [interface]])
 
 (defn place-trap [character trap-bag]
   "place trap"
-  (let [[action (.get-action interface.*factory*
-                             (TrappingParameters character :trap-bag trap-bag))]]
-    (when (.legal? action)
-      (.execute action))))
+  (run-action (TrappingParameters character :trap-bag trap-bag)))
 
 (defn place-natural-trap [character trap-name]
   "place trap without using any items"
-  (let [[action (.get-action interface.*factory*
-                             (TrappingParameters character :trap-name trap-name))]]
-    (when (.legal? action)
-      (.execute action))))
+  (run-action (TrappingParameters character :trap-name trap-name)))
 
 (defn trapping-legal? [character trap-bag]
   "check if character can place a trap"
-  (let [[action (.get-action interface.*factory*
-                             (TrappingParameters character :trap-bag trap-bag))]]
-    (.legal? action)))
+  (legal-action? (TrappingParameters character :trap-bag trap-bag)))
 
 (defn natural-trapping-legal? [character trap-name]
   "check if character can place a natural trap"
-  (let [[action (.get-action interface.*factory*
-                             (TrappingParameters character :trap-name trap-name))]]
-    (.legal? action)))
+  (legal-action? (TrappingParameters character :trap-name trap-name)))
 
 (defclass TrappingParameters [ActionParameters]
   "class controlling creation of TrappingAction"

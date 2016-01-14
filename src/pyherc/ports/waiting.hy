@@ -21,19 +21,17 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
+(require pyherc.rules.macros)
 
 (import [pyherc.data [Duration]]
         [pyherc.rules.public [ActionParameters]]
         [pyherc.ports [interface]])
 
 (defn wait [character]
-  (let [[action (.get-action interface.*factory*
-                             (WaitParameters character Duration.normal))]]
-    (when (.legal? action)
-      (.execute action))))
+  (run-action (WaitParameters character Duration.normal)))
 
 (defn waiting-legal? [character]
-  true) ;; TODO: implement
+  (legal-action? (WaitParameters character Duration.normal)))
 
 (defclass WaitParameters [ActionParameters]
   [[--init-- (fn [self character time-to-wait]

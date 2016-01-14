@@ -20,26 +20,24 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
+(require pyherc.macros)
+(require pyherc.rules.macros)
+
 (import [pyherc.ports [interface]]
         [pyherc.rules.public [ActionParameters]])
 
 (defn perform-mitosis [character]
   "perform mitosis on a character"
-  (let [[action (.get-action interface.*factory*
-                             (MitosisParameters character))]]
-    (when (.legal? action)
-      (.execute action))))
+  (run-action (MitosisParameters character)))
 
 (defn mitosis-legal? [character]
   "check if mitosis is legal"
-  (let [[action (.get-action interface.*factory*
-                             (MitosisParameters character))]]
-    (.legal? action)))
+  (legal-action? (MitosisParameters character)))
 
 (defclass MitosisParameters [ActionParameters]
   "Class controlling creation of MitosisAction"
   [[--init-- (fn [self character]
-               (-> (super) (.--init--))
+               (super-init)
+               (set-attributes character)
                (setv self.action-type "mitosis")
-               (setv self.character character)
                nil)]])

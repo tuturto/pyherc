@@ -21,21 +21,18 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
+(require pyherc.rules.macros)
 
 (import [pyherc.ports [interface]]        
         [pyherc.rules.public [ActionParameters]])
 
 (defn move [character direction]
   "move character to specified direction"
-  (-> (.get-action interface.*factory* (MoveParameters character
-                                                       direction))
-      (.execute)))
+  (run-action (MoveParameters character direction)))
 
 (defn move-legal? [character direction]
   "check if movement is legal"
-  (-> (.get-action interface.*factory* (MoveParameters character
-                                                       direction))
-      (.legal?)))
+  (legal-action? (MoveParameters character direction)))
 
 (defclass MoveParameters [ActionParameters]
   "object for controlling move action creation"

@@ -30,3 +30,11 @@
   (if (> (len rules) 1)
     `(when (and ~@rules) (.append events ~date-name))
     `(when ~@rules (.append events ~date-name))))
+
+(defmacro run-action [param]
+  `(-> (.get-action interface.*factory* ~param)
+       (.execute)))
+
+(defmacro legal-action? [param]
+  `(-> (.get-action interface.*factory* ~param)
+       (.legal?)))

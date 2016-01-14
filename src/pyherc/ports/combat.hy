@@ -21,6 +21,7 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
+(require pyherc.rules.macros)
 
 (import [pyherc.data [current-weapon current-ammunition get-character
                       blocks-movement]]
@@ -29,18 +30,16 @@
 
 (defn attack [character direction rng]
   "attack to given direction"
-  (let [[attack-type (cond [(ranged-attack? character direction) "ranged"]
-                           [(melee-attack? character direction) "melee"]
-                           [true "unarmed"])]
-        [action (.get-action interface.*factory*
-                             (AttackParameters character
-                                               direction
-                                               attack-type
-                                               rng))]]
-    (.execute action)))
+  (run-action (AttackParameters character
+                                direction
+                                (attack-type character direction)
+                                rng)))
 
 (defn attack-legal? [character direction]
-  true) ;; TODO: implement
+  (legal-action? (AttackParameters character
+                                   direction
+                                   (attack-type character direction)
+                                   rng))) 
 
 (defclass AttackParameters [ActionParameters]
   "class for controlling attack action creation"
@@ -49,6 +48,11 @@
                (set-attributes attacker direction attack-type rng)
                (setv self.action-type "attack")
                nil)]])
+
+(defn attack-type [character direction]
+  (cond [(ranged-attack? character direction) "ranged"]
+        [(melee-attack? character direction) "melee"]
+        [true "unarmed"]))
 
 (defn ranged-attack? [character direction]
   "will this be a ranged attack?"

@@ -21,30 +21,28 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
+(require pyherc.rules.macros)
+
 (import [pyherc.rules.public [ActionParameters]]
         [pyherc.ports [interface]])
 
 (defn cast [character direction spell-name]
   "cast a spell"
-  (let [[action (.get-action interface.*factory*
-                             (SpellCastingParameters character
-                                                     direction
-                                                     spell-name))]]
-    (when (.legal? action)
-      (.execute action))))
+  (run-action (SpellCastingParameters character
+                                      direction
+                                      spell-name)))
 
 (defn casting-legal? []
-  true) ;; TODO: implement
+  (legal-action? (SpellCastingParameters character
+                                         direction
+                                         spell-name)))
 
 (defn gain-domain [character domain item]
   "sacrifice an item to gain a domain"
-  (let [[action (.get-action interface.*factory*
-                             (GainDomainParameters character domain item))]]
-    (when (.legal? action)
-      (.execute action))))
+  (run-action (GainDomainParameters character domain item)))
 
 (defn gaining-domain-legal? []
-  true) ;; TODO: implement
+  (legal-action? (GainDomainParameters character domain item)))
 
 (defclass SpellCastingParameters [ActionParameters]
   [[--init-- (fn [self caster direction spell-name]
