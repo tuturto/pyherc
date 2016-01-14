@@ -57,7 +57,6 @@
 
 (defclass InventoryParameters [ActionParameters]
   [[--init-- (fn [self character item sub-action]
-               (super-init)
+               (super-init "inventory")
                (set-attributes character item sub-action)
-               (setv self.action-type "inventory")
                nil)]])

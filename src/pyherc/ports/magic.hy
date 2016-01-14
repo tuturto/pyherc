@@ -46,14 +46,13 @@
 
 (defclass SpellCastingParameters [ActionParameters]
   [[--init-- (fn [self caster direction spell-name]
-               (super-init)
+               (super-init "spell casting")
                (set-attributes caster direction spell-name)
-               (setv self.action-type "spell casting")
                nil)]])
 
 (defclass GainDomainParameters [ActionParameters]
   [[--init-- (fn [self character item domain]
-               (super-init)
+               (super-init "gain domain")
                (set-attributes character item domain)
                (setv self.action-type "gain domain")
                nil)]])

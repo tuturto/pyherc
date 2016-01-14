@@ -43,8 +43,7 @@
 (defclass MetamorphosisParameters [ActionParameters]
   "Class controlling creation of MorphAction"
   [[--init-- (fn [self character new-character-name destroyed-characters]
-               (super-init)
+               (super-init "metamorphosis")
                (set-attributes character new-character-name
                                destroyed-characters)
-               (setv self.action-type "metamorphosis")
                nil)]])

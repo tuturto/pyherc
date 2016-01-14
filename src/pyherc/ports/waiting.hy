@@ -35,7 +35,6 @@
 
 (defclass WaitParameters [ActionParameters]
   [[--init-- (fn [self character time-to-wait]
-               (super-init)
+               (super-init "wait")
                (set-attributes character time-to-wait)
-               (setv self.action-type "wait")
                nil)]])

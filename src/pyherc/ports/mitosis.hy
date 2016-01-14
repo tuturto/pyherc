@@ -37,7 +37,6 @@
 (defclass MitosisParameters [ActionParameters]
   "Class controlling creation of MitosisAction"
   [[--init-- (fn [self character]
-               (super-init)
+               (super-init "mitosis")
                (set-attributes character)
-               (setv self.action-type "mitosis")
                nil)]])

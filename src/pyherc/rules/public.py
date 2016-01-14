@@ -107,12 +107,12 @@ class ActionParameters():
     """
 
     @log_debug
-    def __init__(self):
+    def __init__(self, action_type):
         """
         Default constructor
         """
         super().__init__()
-        self.action_type = 'default'
+        self.action_type = action_type
 
     @log_debug
     def __str__(self):

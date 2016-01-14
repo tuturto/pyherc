@@ -37,7 +37,6 @@
 (defclass DigParameters [ActionParameters]
   "Class controlling creation of DigAction"
   [[--init-- (fn [self character]
-               (super-init)
+               (super-init "dig")
                (set-attributes character)
-               (setv self.action-type "dig")
                nil)]])

@@ -45,7 +45,6 @@
 (defclass TrappingParameters [ActionParameters]
   "class controlling creation of TrappingAction"
   [[--init-- (fn [self character &optional [trap-bag nil] [trap-name nil]]
-               (super-init)
+               (super-init "trapping")
                (set-attributes character trap-bag trap-name)
-               (setv self.action-type "trapping")
                nil)]])

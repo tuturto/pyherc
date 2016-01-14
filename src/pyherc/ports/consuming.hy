@@ -34,7 +34,6 @@
 
 (defclass DrinkParameters [ActionParameters]
   [[--init-- (fn [self character item]
-               (super-init)
+               (super-init "drink")
                (set-attributes character item)
-               (setv self.action-type "drink")
                nil)]])

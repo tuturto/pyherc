@@ -38,8 +38,7 @@
   "object for controlling move action creation"
   [[--init-- (fn [self character direction]
                "construct move parameters"
-               (super-init)
+               (super-init "move")
                (set-attributes character
                                direction)
-               (setv self.action-type "move")
                nil)]])

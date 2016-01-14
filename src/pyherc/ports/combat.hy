@@ -44,9 +44,8 @@
 (defclass AttackParameters [ActionParameters]
   "class for controlling attack action creation"
   [[--init-- (fn [self attacker direction attack-type rng]
-               (super-init)
+               (super-init "attack")
                (set-attributes attacker direction attack-type rng)
-               (setv self.action-type "attack")
                nil)]])
 
 (defn attack-type [character direction]
