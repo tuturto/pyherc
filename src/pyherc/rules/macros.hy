@@ -38,3 +38,10 @@
 (defmacro legal-action? [param]
   `(-> (.get-action interface.*factory* ~param)
        (.legal?)))
+
+(defmacro defparams [name type attributes]
+  `(defclass ~name [ActionParameters]
+     [[--init-- (fn [self ~@attributes]
+                  (super-init ~type)
+                  (set-attributes ~@attributes)
+                  nil)]]))

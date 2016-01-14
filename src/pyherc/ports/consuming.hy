@@ -32,8 +32,6 @@
 (defn drinking-legal? [character potion]
   (legal-action? (DrinkParameters character potion)))
 
-(defclass DrinkParameters [ActionParameters]
-  [[--init-- (fn [self character item]
-               (super-init "drink")
-               (set-attributes character item)
-               nil)]])
+(defparams DrinkParameters
+  "drink"
+  [character item])

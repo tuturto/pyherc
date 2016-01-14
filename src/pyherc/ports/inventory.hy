@@ -55,8 +55,6 @@
 (defn unequipping-legal? [character item]
   (legal-action? (InventoryParameters character item "unequip")))
 
-(defclass InventoryParameters [ActionParameters]
-  [[--init-- (fn [self character item sub-action]
-               (super-init "inventory")
-               (set-attributes character item sub-action)
-               nil)]])
+(defparams InventoryParameters
+  "inventory"
+  [character item sub-action])

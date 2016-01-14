@@ -34,9 +34,6 @@
   "check if mitosis is legal"
   (legal-action? (MitosisParameters character)))
 
-(defclass MitosisParameters [ActionParameters]
-  "Class controlling creation of MitosisAction"
-  [[--init-- (fn [self character]
-               (super-init "mitosis")
-               (set-attributes character)
-               nil)]])
+(defparams MitosisParameters
+  "mitosis"
+  [character])

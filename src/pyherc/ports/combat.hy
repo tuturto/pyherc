@@ -41,12 +41,9 @@
                                    (attack-type character direction)
                                    rng))) 
 
-(defclass AttackParameters [ActionParameters]
-  "class for controlling attack action creation"
-  [[--init-- (fn [self attacker direction attack-type rng]
-               (super-init "attack")
-               (set-attributes attacker direction attack-type rng)
-               nil)]])
+(defparams AttackParameters
+  "attack"
+  [attacker direction attack-type rng])
 
 (defn attack-type [character direction]
   (cond [(ranged-attack? character direction) "ranged"]

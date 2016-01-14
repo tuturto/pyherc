@@ -28,23 +28,20 @@
 
 (defn place-trap [character trap-bag]
   "place trap"
-  (run-action (TrappingParameters character :trap-bag trap-bag)))
+  (run-action (TrappingParameters character trap-bag nil)))
 
 (defn place-natural-trap [character trap-name]
   "place trap without using any items"
-  (run-action (TrappingParameters character :trap-name trap-name)))
+  (run-action (TrappingParameters character nil trap-name)))
 
 (defn trapping-legal? [character trap-bag]
   "check if character can place a trap"
-  (legal-action? (TrappingParameters character :trap-bag trap-bag)))
+  (legal-action? (TrappingParameters character trap-bag nil)))
 
 (defn natural-trapping-legal? [character trap-name]
   "check if character can place a natural trap"
-  (legal-action? (TrappingParameters character :trap-name trap-name)))
+  (legal-action? (TrappingParameters character nil trap-name)))
 
-(defclass TrappingParameters [ActionParameters]
-  "class controlling creation of TrappingAction"
-  [[--init-- (fn [self character &optional [trap-bag nil] [trap-name nil]]
-               (super-init "trapping")
-               (set-attributes character trap-bag trap-name)
-               nil)]])
+(defparams TrappingParameters
+  "trapping"
+  [character trap-bag trap-name])

@@ -44,15 +44,10 @@
 (defn gaining-domain-legal? []
   (legal-action? (GainDomainParameters character domain item)))
 
-(defclass SpellCastingParameters [ActionParameters]
-  [[--init-- (fn [self caster direction spell-name]
-               (super-init "spell casting")
-               (set-attributes caster direction spell-name)
-               nil)]])
+(defparams SpellCastingParameters
+  "spell casting"
+  [caster direction spell-name])
 
-(defclass GainDomainParameters [ActionParameters]
-  [[--init-- (fn [self character item domain]
-               (super-init "gain domain")
-               (set-attributes character item domain)
-               (setv self.action-type "gain domain")
-               nil)]])
+(defparams GainDomainParameters
+  "gain domain"
+  [character item domain])

@@ -34,11 +34,6 @@
   "check if movement is legal"
   (legal-action? (MoveParameters character direction)))
 
-(defclass MoveParameters [ActionParameters]
-  "object for controlling move action creation"
-  [[--init-- (fn [self character direction]
-               "construct move parameters"
-               (super-init "move")
-               (set-attributes character
-                               direction)
-               nil)]])
+(defparams MoveParameters
+  "move"
+  [character direction])

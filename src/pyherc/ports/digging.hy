@@ -34,9 +34,6 @@
   "check if digging is legal"
   (legal-action? (DigParameters character)))
 
-(defclass DigParameters [ActionParameters]
-  "Class controlling creation of DigAction"
-  [[--init-- (fn [self character]
-               (super-init "dig")
-               (set-attributes character)
-               nil)]])
+(defparams DigParameters
+  "dig"
+  [character])
