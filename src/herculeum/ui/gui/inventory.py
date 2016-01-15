@@ -270,7 +270,7 @@ class CharacterInventoryWidget(QWidget):
         """
         item = [x for x in self.items
                 if x.display.objectName() == 'active_inventorybox'][0].item
-        if item != None:
+        if item is not None:
             if key in self.config.action_a:
                 self.ItemActionA.emit(item)
             elif key in self.config.action_b:
@@ -623,7 +623,7 @@ class ItemBox(QWidget):
         .. versionadded:: 0.8
         """
         item = self.get_current_slot().item
-        if item != None:
+        if item is not None:
             if key in self.config.action_a:
                 self.ItemActionA.emit(item)
             elif key in self.config.action_b:
@@ -682,7 +682,7 @@ class ItemBox(QWidget):
         """
         slot = self.get_current_slot()
 
-        if slot == None:
+        if slot is None:
             return None
 
         index = self.items.index(slot)
@@ -780,7 +780,7 @@ class ItemGlyph(QWidget):
         """
         self.display.setObjectName('active_inventorybox')
         self.display.setStyle(QApplication.style())
-        if self.item != None:
+        if self.item is not None:
             self.ItemFocused.emit(self.item)
 
     def focusOutEvent(self, event):
@@ -811,7 +811,7 @@ class ItemGlyph(QWidget):
         """
         self.item = item
 
-        if item != None:
+        if item is not None:
             if is_ammunition(item):
                 count = item.ammunition_data.count
             elif is_trap_bag(item):
@@ -835,7 +835,7 @@ class ItemGlyph(QWidget):
 
             self.icon = icon
         else:
-            if self.default_icon == None:
+            if self.default_icon is None:
                 self.icon = QPixmap(':transparent.png')
             else:
                 self.icon = self.default_icon

@@ -43,15 +43,15 @@ class TestGeneratorUtils():
         Test that BSP section can be split horizontally
         """
         section = pyherc.generators.utils.BSPSection((0, 0), (20, 20), None)
-        assert(section.node1 == None)
-        assert(section.node2 == None)
+        assert(section.node1 is None)
+        assert(section.node2 is None)
 
         section.split(direction = 1)
         # 1 split horizontal
         # 2 split vertical
 
-        assert(section.node1 != None)
-        assert(section.node2 != None)
+        assert(section.node1 is not None)
+        assert(section.node2 is not None)
 
         assert(section.node1.corner1[0] == section.node2.corner1[0])
         assert(section.node1.corner1[1] == 0)
@@ -65,15 +65,15 @@ class TestGeneratorUtils():
         Test that bsp section can split vertical
         """
         section = pyherc.generators.utils.BSPSection((0, 0), (20, 20), None)
-        assert(section.node1 == None)
-        assert(section.node2 == None)
+        assert(section.node1 is None)
+        assert(section.node2 is None)
 
         section.split(direction = 2)
         # 1 split horisontal
         # 2 split vertical
 
-        assert(section.node1 != None)
-        assert(section.node2 != None)
+        assert(section.node1 is not None)
+        assert(section.node2 is not None)
 
         assert(section.node1.corner1[0] == 0)
         assert(section.node1.corner1[1] == 0)
@@ -87,13 +87,13 @@ class TestGeneratorUtils():
         Test that bsp split does not try to split when there is not enough space
         """
         section = pyherc.generators.utils.BSPSection((0, 0), (10, 10), None)
-        assert(section.node1 == None)
-        assert(section.node2 == None)
+        assert(section.node1 is None)
+        assert(section.node2 is None)
 
         section.split()
 
-        assert(section.node1 == None)
-        assert(section.node2 == None)
+        assert(section.node1 is None)
+        assert(section.node2 is None)
 
     def test_getAreaQueue(self):
         """

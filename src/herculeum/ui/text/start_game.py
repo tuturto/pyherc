@@ -48,7 +48,7 @@ class StartGameScreen():
 
         selection = None
 
-        while selection == None:
+        while selection is None:
             selection = self.screen.getch()
 
             try:

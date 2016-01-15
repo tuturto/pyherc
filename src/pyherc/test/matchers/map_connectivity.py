@@ -87,7 +87,7 @@ class MapConnectivity(BaseMatcher):
         points = []
 
         for location, tile in get_tiles(level):
-            if tile['\ufdd0:wall'] == None:
+            if tile['\ufdd0:wall'] is None:
                 points.append(location)
 
         return points

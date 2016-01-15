@@ -126,10 +126,10 @@ def make_weapon_table(env, node):
 
         item = item_entry['item']
 
-        if item.weapon_data != None:
+        if item.weapon_data is not None:
             damage_str = str.join(' / ', [str(x[0]) for x in item.weapon_data.damage])
             damage_types_str = str.join(' / ', [str(x[1]) for x in item.weapon_data.damage])
-        elif item.ammunition_data != None:
+        elif item.ammunition_data is not None:
             damage_str = str.join(' / ', [str(x[0]) for x in item.ammunition_data.damage])
             damage_types_str = str.join(' / ', [str(x[1]) for x in item.ammunition_data.damage])
 
@@ -151,12 +151,12 @@ def make_weapon_table(env, node):
         else:
             weapon_weight = ' '
 
-        if item.weapon_data != None:
+        if item.weapon_data is not None:
             row_node = make_row(item.name, damage_str,
                                 item.weapon_data.critical_range,
                                 item.weapon_data.critical_damage,
                                 damage_types_str, weapon_type, weapon_weight)
-        elif item.ammunition_data != None:
+        elif item.ammunition_data is not None:
             row_node = make_row(item.name, damage_str,
                                 item.ammunition_data.critical_range,
                                 item.ammunition_data.critical_damage,
