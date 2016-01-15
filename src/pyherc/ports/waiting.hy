@@ -24,7 +24,6 @@
 (require pyherc.rules.macros)
 
 (import [pyherc.data [Duration]]
-        [pyherc.rules.public [ActionParameters]]
         [pyherc.ports [interface]])
 
 (defn wait [character]
@@ -33,8 +32,6 @@
 (defn waiting-legal? [character]
   (legal-action? (WaitParameters character Duration.normal)))
 
-(defclass WaitParameters [ActionParameters]
-  [[--init-- (fn [self character time-to-wait]
-               (super-init "wait")
-               (set-attributes character time-to-wait)
-               nil)]])
+(defparams WaitParameters
+  "wait"
+  [character time-to-wait])

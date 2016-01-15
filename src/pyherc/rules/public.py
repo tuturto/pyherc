@@ -99,24 +99,3 @@ class ActionFactory():
             return subs[0]
         else:
             return None
-
-
-class ActionParameters():
-    """
-    Object for controlling action creation
-    """
-
-    @log_debug
-    def __init__(self, action_type):
-        """
-        Default constructor
-        """
-        super().__init__()
-        self.action_type = action_type
-
-    @log_debug
-    def __str__(self):
-        """
-        Get string representation of this object
-        """
-        return 'action parameters'

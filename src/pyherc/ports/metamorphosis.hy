@@ -23,8 +23,7 @@
 (require pyherc.macros)
 (require pyherc.rules.macros)
 
-(import [pyherc.rules.public [ActionParameters]]
-        [pyherc.ports [interface]])
+(import [pyherc.ports [interface]])
 
 (defn morph [character new-character-name
              &optional [destroyed-characters #t()]]

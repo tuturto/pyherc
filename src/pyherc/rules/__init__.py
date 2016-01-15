@@ -27,6 +27,5 @@ Package for rules of the game
 """
 
 from .public import ActionFactory
-from .public import ActionParameters
 from .ending import Dying
 from .engine import RulesEngine

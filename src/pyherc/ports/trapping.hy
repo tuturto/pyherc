@@ -23,8 +23,7 @@
 (require pyherc.macros)
 (require pyherc.rules.macros)
 
-(import [pyherc.rules.public [ActionParameters]]
-        [pyherc.ports [interface]])
+(import [pyherc.ports [interface]])
 
 (defn place-trap [character trap-bag]
   "place trap"

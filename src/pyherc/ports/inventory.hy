@@ -24,8 +24,7 @@
 (require pyherc.macros)
 (require pyherc.rules.macros)
 
-(import [pyherc.rules.public [ActionParameters]]
-        [pyherc.ports [interface]])
+(import [pyherc.ports [interface]])
 
 (defn pick-up [character item]
   "pick up item"

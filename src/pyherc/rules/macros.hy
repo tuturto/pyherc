@@ -40,8 +40,8 @@
        (.legal?)))
 
 (defmacro defparams [name type attributes]
-  `(defclass ~name [ActionParameters]
+  `(defclass ~name []
      [[--init-- (fn [self ~@attributes]
-                  (super-init ~type)
                   (set-attributes ~@attributes)
+                  (setv self.action-type ~type)
                   nil)]]))

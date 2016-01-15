@@ -23,8 +23,7 @@
 (require pyherc.macros)
 (require pyherc.rules.macros)
 
-(import [pyherc.ports [interface]]        
-        [pyherc.rules.public [ActionParameters]])
+(import [pyherc.ports [interface]])
 
 (defn move [character direction]
   "move character to specified direction"

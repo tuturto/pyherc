@@ -25,7 +25,6 @@
 
 (import [pyherc.data [current-weapon current-ammunition get-character
                       blocks-movement]]
-        [pyherc.rules.public [ActionParameters]]
         [pyherc.ports [interface]])
 
 (defn attack [character direction rng]
