@@ -23,6 +23,7 @@
 """
 Module defining spell casting actions
 """
+from hymn.types.either import Left, Right
 from pyherc.aspects import log_debug, log_info
 
 
@@ -57,10 +58,15 @@ class SpellCastingAction():
         """
         Executes this action
         """
+        if not self.is_legal():
+            return Left(self.caster)
+
         self.caster.spirit = self.caster.spirit - self.spell.spirit
 
         self.spell.cast(effects_factory=self.effects_factory,
                         dying_rules=self.dying_rules)
+
+        return Right(self.caster)
 
     @log_debug
     def is_legal(self):
@@ -101,7 +107,12 @@ class GainDomainAction():
         """
         Executes this action
         """
+        if not self.is_legal():
+            return Left(self.character)
+
         self.character.add_domain_level(domain=self.domain)
+
+        return Right(self.character)
 
     @log_debug
     def is_legal(self):

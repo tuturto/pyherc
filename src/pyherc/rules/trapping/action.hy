@@ -23,7 +23,8 @@
 (require pyherc.aspects)
 (require pyherc.macros) ;; TODO: remove this if xor ever lands Hy
 
-(import [pyherc.aspects [log-debug]]
+(import [hymn.types.either [Left Right]]
+        [pyherc.aspects [log-debug]]
         [pyherc.data [add-trap trap-bag?]]
         [pyherc.data.constants [Duration]]
         [pyherc.events [new-trap-placed-event]])
@@ -49,7 +50,7 @@
                  true))]
    [execute #d(fn [self]
                 "execute the action"
-                (when (.legal? self)
+                (if (.legal? self)
                   (let [[character self.character]
                         [level character.level]
                         [location character.location]
@@ -64,7 +65,9 @@
                             (dec self.trap-bag.trap-data.count))
                       (when (< self.trap-bag.trap-data.count 1)
                         (character.inventory.remove self.trap-bag)))
-                    (.add-to-tick character Duration.normal))))]])
+                    (.add-to-tick character Duration.normal)
+                    (Right self.character))
+                  (Left self.character)))]])
 
 (defn get-trap [trap-creator trap-bag trap-name]
   "get trap instance"

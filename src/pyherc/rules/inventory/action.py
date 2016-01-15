@@ -23,6 +23,7 @@
 """
 Module defining classes related to inventory actions
 """
+from hymn.types.either import Left, Right
 from pyherc.aspects import log_debug, log_info
 from pyherc.events import new_drop_event, new_pick_up_event
 from pyherc.data import remove_item, add_item
@@ -53,17 +54,20 @@ class PickUpAction():
         """
         Executes this action
         """
-        if self.is_legal():
-            remove_item(self.character.level, self.item)
+        if not self.is_legal():
+            self.character.add_to_tick(Duration.fast)
+            return Left(self.character)
 
-            if not self._merge_similar_items():
-                self.character.inventory.append(self.item)
-                self.item.location = ()
+        remove_item(self.character.level, self.item)
 
-            self.character.raise_event(new_pick_up_event(self.character,
-                                                         self.item))
+        if not self._merge_similar_items():
+            self.character.inventory.append(self.item)
+            self.item.location = ()
 
-        self.character.add_to_tick(Duration.fast)
+        self.character.raise_event(new_pick_up_event(self.character,
+                                                     self.item))
+
+        return Right(self.character)
 
     @log_debug
     def _merge_similar_items(self):
@@ -130,12 +134,17 @@ class DropAction():
         """
         Executes this action
         """
+        if not self.is_legal():
+            return Left(self.character)
+
         self.character.inventory.remove(self.item)
         add_item(self.character.level, self.character.location, self.item)
 
         self.character.add_to_tick(Duration.fast)
         self.character.raise_event(new_drop_event(self.character,
                                                   self.item))
+
+        return Right(self.character)
 
     @log_debug
     def is_legal(self):

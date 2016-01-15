@@ -23,6 +23,7 @@
 """
 Module defining wait related actions
 """
+from hymn.types.either import Left, Right
 from pyherc.aspects import log_debug, log_info
 
 
@@ -51,7 +52,12 @@ class WaitAction():
         """
         Executes this action
         """
+        if not self.is_legal():
+            return Left(self.character)
+
         self.character.tick = self.character.tick + self.time_to_wait
+
+        return Right(self.character)
 
     @log_debug
     def is_legal(self):

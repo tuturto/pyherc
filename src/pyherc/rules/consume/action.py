@@ -24,6 +24,7 @@
 Module defining classes related to DrinkAction
 """
 
+from hymn.types.either import Left, Right
 
 class DrinkAction():
     """
@@ -48,24 +49,28 @@ class DrinkAction():
         """
         Executes this Action
         """
-        if self.is_legal():
-            self.character.identify_item(self.potion)
+        if not self.is_legal():
+            return Left(self.character)
 
-            drink_effects = self.potion.get_effect_handles('on drink')
+        self.character.identify_item(self.potion)
 
-            if len(drink_effects) > 0:
-                for effect_spec in drink_effects:
-                    effect = self.effect_factory(effect_spec.effect,
-                                                 target=self.character)
+        drink_effects = self.potion.get_effect_handles('on drink')
 
-                    if effect.duration == 0:
-                        effect.trigger(self.dying_rules)
-                    else:
-                        self.character.add_effect(effect)
-                    effect_spec.charges = effect_spec.charges - 1
+        if len(drink_effects) > 0:
+            for effect_spec in drink_effects:
+                effect = self.effect_factory(effect_spec.effect,
+                                             target=self.character)
 
-                if self.potion.maximum_charges_left < 1:
-                    self.character.inventory.remove(self.potion)
+                if effect.duration == 0:
+                    effect.trigger(self.dying_rules)
+                else:
+                    self.character.add_effect(effect)
+                effect_spec.charges = effect_spec.charges - 1
+
+            if self.potion.maximum_charges_left < 1:
+                self.character.inventory.remove(self.potion)
+
+        return Right(self.character)
 
     def is_legal(self):
         """

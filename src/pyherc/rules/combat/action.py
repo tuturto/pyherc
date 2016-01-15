@@ -25,6 +25,7 @@ Module defining classes related to AttackAction
 """
 import random
 
+from hymn.types.either import Left, Right
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.constants import Duration
 from pyherc.data.damage import new_damage
@@ -88,6 +89,10 @@ class AttackAction():
         """
         Executes this Attack
         """
+
+        if not self.is_legal():
+            return Left(self.attacker)
+
         target = self.target.target
 
         if target is None:
@@ -117,6 +122,8 @@ class AttackAction():
 
         self.additional_rules.after_attack()
         self.attacker.add_to_tick(self.__get_duration())
+
+        return Right(self.attacker)
 
     @log_debug
     def __get_duration(self):

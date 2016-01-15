@@ -23,7 +23,8 @@
 (require hy.contrib.anaphoric)
 (require pyherc.aspects)
 (require pyherc.macros)
-(import [pyherc.aspects [log-debug]]
+(import [hymn.types.either [Left Right]]
+        [pyherc.aspects [log-debug]]
         [pyherc.data [area-around add-item add-character blocks-movement]]
         [pyherc.data.constants [Duration]]
         [pyherc.data.features [clear-cache feature-level feature-location
@@ -33,10 +34,8 @@
 (defclass DigAction []
   [[--init-- #d(fn [self character cache rng]
                  "default constructor"
-                 (-> (super) (.--init--))
-                 (setv self.character character)
-                 (setv self.cache cache)
-                 (setv self.rng rng)
+                 (super-init)
+                 (set-attributes character cache rng)
                  nil)]
    [legal? #d(fn [self]
                "check if action is possible to perform"
@@ -44,7 +43,7 @@
                  (using-spade? self.character)))]
    [execute #d(fn [self]
                 "execute the action"
-                (when (.legal? self)
+                (if (.legal? self)
                   (let [[level (feature-level self.cache)]
                         [location (feature-location self.cache)]
                         [cache self.cache]
@@ -56,7 +55,9 @@
                     (clear-cache self.cache)
                     (.raise-event self.character (new-dig-event self.character
                                                                 cache items
-                                                                characters)))))]])
+                                                                characters))
+                    (Right self.character))
+                  (Left self.character)))]])
 
 (defn using-spade? [character]
   "check if this character is currently using a spade"

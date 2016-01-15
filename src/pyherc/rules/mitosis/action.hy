@@ -23,7 +23,8 @@
 (require hy.contrib.anaphoric)
 (require pyherc.aspects)
 (require pyherc.macros)
-(import [pyherc.aspects [log-debug]]
+(import [hymn.types.either [Left Right]]
+        [pyherc.aspects [log-debug]]
         [pyherc.data [skill-ready? cooldown blocks-movement get-character
                       get-characters add-character]]
         [pyherc.data.level [traps↜]]
@@ -53,7 +54,7 @@
                    true false)))]
    [execute #d(fn [self]
                 "execute the action"
-                (when (.legal? self)
+                (if (.legal? self)
                   (let [[new-character (self.character-generator self.character.name)]
                         [location self.character.location]
                         [level self.character.level]
@@ -67,7 +68,9 @@
                                                                     new-character))
                     (ap-each (traps↜ new-character.level new-character.location)
                              (.on-enter it new-character))
-                    (.check-dying self.dying-rules new-character))))]])
+                    (.check-dying self.dying-rules new-character)
+                    (Right self.character))
+                  (Left self.character)))]])
 
 #d(defn free-tiles [level tiles]
     (ap-filter (not (or
