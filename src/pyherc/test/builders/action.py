@@ -23,7 +23,6 @@
 """
 Module for action factory builders
 """
-from mockito import mock
 from pyherc.rules import Dying
 from pyherc.rules.combat import RangedCombatFactory
 from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,
@@ -53,33 +52,12 @@ class ActionFactoryBuilder():
         Default constructor
         """
         super().__init__()
-        self.model = mock()
+        self.model = None
 
-        self.attack_factory = mock()
-        self.attack_factory.action_type = 'attack'
-        self.drink_factory = mock()
-        self.drink_factory.action_type = 'drink'
-        self.inventory_factory = mock()
-        self.inventory_factory.action_type = 'inventory'
-        self.move_factory = mock()
-        self.move_factory.action_type = 'move'
-        self.spellcasting_factory = mock()
-        self.spellcasting_factory.action_type = 'cast spell'
-        self.wait_factory = mock()
-        self.wait_factory.action_type = 'wait'
-        self.gain_domain_factory = mock()
-        self.gain_domain_factory.action_type = 'gain domain'
-        self.dying_rules = mock()
-        self.mitosis_factory = mock()
-        self.mitosis_factory.action_type = 'mitosis'
-        self.metamorphosis_factory = mock()
-        self.metamorphosis_factory.action_type = 'metamorphosis'
-        self.dig_factory = mock()
-        self.dig_factory.action_type = 'dig'
-        self.trapping_factory = mock()
-        self.trapping_factory.action_type = 'trapping'
+        self.factories = []
 
-        self.effect_factory = mock()
+        self.dying_rules = Dying()
+        self.effect_factory = None
         self.use_real_attack_factory = False
         self.use_real_drink_factory = False
         self.use_real_inventory_factory = False
@@ -92,16 +70,6 @@ class ActionFactoryBuilder():
         self.use_real_metamorphosis_factory = False
         self.use_real_dig_factory = False
         self.use_real_trapping_factory = False
-
-    def with_model(self, model):
-        """
-        Set model to use with factory
-
-        :param model: model
-        :type model: Model
-        """
-        self.model = model
-        return self
 
     def with_move_factory(self):
         """
@@ -125,9 +93,10 @@ class ActionFactoryBuilder():
             self.use_real_drink_factory = True
         else:
             if hasattr(drink_factory, 'build'):
-                self.drink_factory = drink_factory.build()
+                
+                self.factories.append(drink_factory.build())
             else:
-                self.drink_factory = drink_factory
+                self.factories.append(drink_factory)
         return self
 
     def with_spellcasting_factory(self, spellcasting_factory=None):
@@ -140,9 +109,9 @@ class ActionFactoryBuilder():
             self.use_real_spellcasting_factory = True
         else:
             if hasattr(spellcasting_factory, 'build'):
-                self.spellcasting_factory = spellcasting_factory.build()
+                self.factories.append(spellcasting_factory.build())
             else:
-                self.spellcasting_factory = spellcasting_factory
+                self.factories.append(spellcasting_factory)
         return self
 
     def with_wait_factory(self, wait_factory=None):
@@ -155,9 +124,9 @@ class ActionFactoryBuilder():
             self.use_real_wait_factory = True
         else:
             if hasattr(wait_factory, 'build'):
-                self.wait_factory = wait_factory.build()
+                self.factories.append(wait_factory.build())
             else:
-                self.wait_factory = wait_factory
+                self.factories.append(wait_factory)
         return self
 
     def with_inventory_factory(self):
@@ -194,7 +163,7 @@ class ActionFactoryBuilder():
         .. versionadded:: 0.10
         """
         if gain_domain_factory:
-            self.gain_domain_factory = gain_domain_factory
+            self.factories.append(gain_domain_factory)
         else:
             self.use_real_gain_domain_factory = True
 
@@ -205,7 +174,7 @@ class ActionFactoryBuilder():
         Configure action factory to use mitosis factory
         """
         if mitosis_factory:
-            self.mitosis_factory = mitosis_factory
+            self.factories.append(mitosis_factory)
         else:
             self.use_real_mitosis_factory = True
 
@@ -216,7 +185,7 @@ class ActionFactoryBuilder():
         Configure metamorphosis factory to use
         """
         if metamorphosis_factory:
-            self.metamorphosis_factory = metamorphosis_factory
+            self.factories.append(metamorphosis_factory)
         else:
             self.use_real_metamorphosis_factory = True
 
@@ -224,7 +193,7 @@ class ActionFactoryBuilder():
 
     def with_dig_factory(self, dig_factory=None):
         if dig_factory:
-            self.dig_factory = dig_factory
+            self.factories.append(dig_factory)
         else:
             self.use_real_dig_factory = True
 
@@ -232,7 +201,7 @@ class ActionFactoryBuilder():
 
     def with_trapping_factory(self, trapping_factory=None):
         if trapping_factory:
-            self.trapping_factory = trapping_factory
+            self.factories.append(trapping_factory)
         else:
             self.use_real_trapping_factory = True
 
@@ -255,65 +224,50 @@ class ActionFactoryBuilder():
                                                       self.dying_rules)
             ranged_combat_factory = RangedCombatFactory(self.effect_factory,
                                                         self.dying_rules)
-            self.attack_factory = AttackFactory([unarmed_combat_factory,
+            self.factories.append(AttackFactory([unarmed_combat_factory,
                                                  melee_combat_factory,
-                                                 ranged_combat_factory])
+                                                 ranged_combat_factory]))
 
         if self.use_real_drink_factory:
-            self.drink_factory = (DrinkFactoryBuilder()
-                                  .with_effect_factory(self.effect_factory)
+            self.factories.append((DrinkFactoryBuilder()
+                                   .with_effect_factory(self.effect_factory)
+                                   .with_dying_rules(self.dying_rules)
+                                   .build()))
+
+        if self.use_real_inventory_factory:
+            self.factories.append(InventoryFactory([PickUpFactory(),
+                                                    DropFactory(),
+                                                    EquipFactory(),
+                                                    UnEquipFactory()]))
+
+        if self.use_real_move_factory:
+            self.factories.append(MoveFactory(None, self.dying_rules))
+
+        if self.use_real_spellcasting_factory:
+            self.factories.append(SpellCastingFactoryBuilder().build())
+
+        if self.use_real_wait_factory:
+            self.factories.append(WaitFactoryBuilder().build())
+
+        if self.use_real_gain_domain_factory:
+            self.factories.append(GainDomainFactoryBuilder().build())
+
+        if self.use_real_mitosis_factory:
+            self.factories.append(MitosisFactoryBuilder()
                                   .with_dying_rules(self.dying_rules)
                                   .build())
 
-        if self.use_real_inventory_factory:
-            pick_up_factory = PickUpFactory()
-            drop_factory = DropFactory()
-            equip_factory = EquipFactory()
-            unequip_factory = UnEquipFactory()
-            self.inventory_factory = InventoryFactory([pick_up_factory,
-                                                       drop_factory,
-                                                       equip_factory,
-                                                       unequip_factory])
-
-        if self.use_real_move_factory:
-            self.move_factory = MoveFactory(mock(), mock())
-
-        if self.use_real_spellcasting_factory:
-            self.spellcasting_factory = SpellCastingFactoryBuilder().build()
-
-        if self.use_real_wait_factory:
-            self.wait_factory = WaitFactoryBuilder().build()
-
-        if self.use_real_gain_domain_factory:
-            self.gain_domain_factory = GainDomainFactoryBuilder().build()
-
-        if self.use_real_mitosis_factory:
-            self.mitosis_factory = (MitosisFactoryBuilder()
-                                    .with_dying_rules(self.dying_rules)
-                                    .build())
-
         if self.use_real_metamorphosis_factory:
-            self.metamorphosis_factory = MetamorphosisFactoryBuilder().build()
+            self.factories.append(MetamorphosisFactoryBuilder().build())
 
         if self.use_real_dig_factory:
-            self.dig_factory = DigFactoryBuilder().build()
+            self.factories.append(DigFactoryBuilder().build())
 
         if self.use_real_trapping_factory:
-            self.trapping_factory = TrappingFactoryBuilder().build()
+            self.factories.append(TrappingFactoryBuilder().build())
 
         action_factory = ActionFactory(self.model,
-                                       [self.move_factory,
-                                        self.drink_factory,
-                                        self.attack_factory,
-                                        self.inventory_factory,
-                                        self.spellcasting_factory,
-                                        self.wait_factory,
-                                        self.gain_domain_factory,
-                                        self.mitosis_factory,
-                                        self.metamorphosis_factory,
-                                        self.dig_factory,
-                                        self.trapping_factory])
-
+                                       self.factories)
         return action_factory
 
 
@@ -327,8 +281,8 @@ class DrinkFactoryBuilder():
         """
         super().__init__()
 
-        self.effect_factory = mock()
-        self.dying_rules = mock()
+        self.effect_factory = None
+        self.dying_rules = Dying()
 
         self.use_real_dying_rules = False
 
@@ -410,9 +364,9 @@ class SpellCastingFactoryBuilder():
         """
         super().__init__()
 
-        self.spell_factory = mock()
+        self.spell_factory = None
         self.use_real_spell_factory = False
-        self.effects_factory = mock()
+        self.effects_factory = None
         self.use_real_effects_factory = False
 
     def with_spell_factory(self, spell_factory=None):
@@ -466,10 +420,10 @@ class MitosisFactoryBuilder():
         Default constructor
         """
         super().__init__()
-        self.character_generator = mock()
+        self.character_generator = None
         self.character_limit = 30
         self.rng = Random()
-        self.dying_rules = mock()
+        self.dying_rules = Dying()
         self.use_real_dying_rules = False
 
     def with_character_limit(self, character_limit):
@@ -521,7 +475,7 @@ class MetamorphosisFactoryBuilder():
         Default constructor
         """
         super().__init__()
-        self.character_generator = mock()
+        self.character_generator = None
         self.rng = Random()
 
     def with_character_generator(self, generator):
@@ -580,7 +534,7 @@ class TrappingFactoryBuilder():
         """
         super().__init__()
         
-        self.trap_creator = mock()
+        self.trap_creator = None
 
     def with_trap_creator(self, trap_creator):
         """

@@ -39,7 +39,7 @@
                (setv self.action-type "move")
                nil)]
    [--str-- (fn [self]
-              "move factory")]
+              "move factory")]   
    [get-action (fn [self parameters]
                  "create movement action"
                  (let [[character parameters.character]

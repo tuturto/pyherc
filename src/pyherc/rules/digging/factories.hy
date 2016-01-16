@@ -28,9 +28,10 @@
 (import [pyherc.aspects [log-debug log-info]]
         [pyherc.data [location-features get-tile]]
         [pyherc.data.features [feature-type]]
+        [pyherc.rules.factory [SubActionFactory]]
         [pyherc.rules.digging.action [DigAction]])
 
-(defclass DigFactory []
+(defclass DigFactory [SubActionFactory]
   [[--init-- #i(fn [self rng]
                  "default constructor"
                  (-> (super) (.--init--))

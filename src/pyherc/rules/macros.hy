@@ -32,15 +32,18 @@
     `(when ~@rules (.append events ~date-name))))
 
 (defmacro action-interface-dsl []
-  `(import [pyherc.ports [interface]]))
+  `(import [hymn.types.maybe [nothing?]]
+           [pyherc.ports [interface]]))
 
-(defmacro run-action [param]
-  `(-> (.get-action interface.*factory* ~param)
-       (.execute)))
+(defmacro/g! run-action [param]
+  `(let [[~g!action (interface.*factory* ~param)]]
+     (when (not (nothing? ~g!action))
+       (.execute (.from-maybe ~g!action nil)))))
 
-(defmacro legal-action? [param]
-  `(-> (.get-action interface.*factory* ~param)
-       (.legal?)))
+(defmacro/g! legal-action? [param]
+  `(let [[~g!action (interface.*factory* ~param)]]
+     (when (not (nothing? ~g!action))
+       (.legal? (.from-maybe ~g!action nil)))))
 
 (defmacro defparams [name type attributes]
   `(defclass ~name []

@@ -21,10 +21,11 @@
 ;; THE SOFTWARE.
 
 (require pyherc.aspects)
-(import [pyherc.rules.trapping.action [TrappingAction]])
+(import [pyherc.rules.trapping.action [TrappingAction]]
+        [pyherc.rules.factory [SubActionFactory]])
 (import [pyherc.aspects [log-debug log-info]])
 
-(defclass TrappingFactory []
+(defclass TrappingFactory [SubActionFactory]
   "factory for creating trapping actions"
   [[--init-- #i(fn [self trap-creator]
                  (-> (super) (.--init--))

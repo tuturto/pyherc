@@ -62,8 +62,7 @@ class TestWearingArmour():
                         .build())
 
         
-        equip(character,
-              armour)
+        equip(character, armour)
 
         assert_that(character, is_wearing_armour(armour))
 

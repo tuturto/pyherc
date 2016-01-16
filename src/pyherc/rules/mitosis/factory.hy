@@ -22,9 +22,10 @@
 
 (require pyherc.aspects)
 (import [pyherc.aspects [log-debug log-info]]
-        [pyherc.rules.mitosis.action [MitosisAction]])
+        [pyherc.rules.mitosis.action [MitosisAction]]
+        [pyherc.rules.factory [SubActionFactory]])
 
-(defclass MitosisFactory []
+(defclass MitosisFactory [SubActionFactory]
   [[--init-- #i(fn [self character-generator rng character-limit dying-rules]
                  "default constructor"
                  (-> (super) (.--init--))

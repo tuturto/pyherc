@@ -33,6 +33,7 @@ InventoryParameters - Class used to guide inventory related actions
 SpellCastingParameteres - Class used to guide spell casting
 """
 
+from hymn.types.maybe import Just, Nothing, is_nothing
 from pyherc.aspects import log_debug, log_info
 
 
@@ -59,6 +60,22 @@ class ActionFactory():
             self.factories.append(factories)
 
         self.model = model
+
+    def __call__(self, parameters):
+        """
+        Temporary magic method to make this behave like a function
+
+        returns:
+            Just(Action) when creation of Action was possible
+            Nothing when creation of Action was not possible
+        """
+        iterator = iter(self.factories)
+        res = Nothing
+        for fn in iter(self.factories):
+            res = fn(parameters)
+            if not is_nothing(res):
+                return res
+        return Nothing
 
     @log_info
     def get_action(self, parameters):

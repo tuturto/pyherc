@@ -24,7 +24,7 @@
 Factory related classes are defined here
 """
 import logging
-
+from hymn.types.maybe import Nothing, Just
 
 class SubActionFactory():
     """
@@ -42,6 +42,19 @@ class SubActionFactory():
         self.logger = logging.getLogger('pyherc.rules.factory.SubActionFactory')  # noqa
         self.factories = []
         self.effect_factory = effect_factory
+
+    def __call__(self, parameters):
+        """
+        Temporary magic method to treat this factory as a function
+
+        Returns:
+            Just(Action) if factory is capable for creating required Action
+            Nothing if factory can not create required Action
+        """
+        if self.can_handle(parameters):
+            return Just(self.get_action(parameters))
+        else:
+            return Nothing        
 
     def get_sub_factory(self, parameters):
         """

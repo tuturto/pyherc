@@ -22,9 +22,10 @@
 
 (require pyherc.aspects)
 (import [pyherc.aspects [log-debug log-info]]
-        [pyherc.rules.metamorphosis.action [MetamorphosisAction]])
+        [pyherc.rules.metamorphosis.action [MetamorphosisAction]]
+        [pyherc.rules.factory [SubActionFactory]])
 
-(defclass MetamorphosisFactory []
+(defclass MetamorphosisFactory [SubActionFactory]
   [[--init-- #i(fn [self character-generator rng]
                  "default constructor"
                  (-> (super) (.--init--))
