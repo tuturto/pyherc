@@ -23,8 +23,9 @@
 (require pyherc.macros)
 (require pyherc.rules.macros)
 
-(import [pyherc.data [Duration]]
-        [pyherc.ports [interface]])
+(action-interface-dsl)
+
+(import [pyherc.data [Duration]])
 
 (defn wait [character]
   (run-action (WaitParameters character Duration.normal)))

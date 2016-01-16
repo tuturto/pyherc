@@ -24,7 +24,7 @@
 (require pyherc.macros)
 (require pyherc.rules.macros)
 
-(import [pyherc.ports [interface]])
+(action-interface-dsl)
 
 (defn pick-up [character item]
   "pick up item"

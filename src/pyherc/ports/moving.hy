@@ -23,7 +23,7 @@
 (require pyherc.macros)
 (require pyherc.rules.macros)
 
-(import [pyherc.ports [interface]])
+(action-interface-dsl)
 
 (defn move [character direction]
   "move character to specified direction"

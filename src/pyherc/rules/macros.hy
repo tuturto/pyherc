@@ -31,6 +31,9 @@
     `(when (and ~@rules) (.append events ~date-name))
     `(when ~@rules (.append events ~date-name))))
 
+(defmacro action-interface-dsl []
+  `(import [pyherc.ports [interface]]))
+
 (defmacro run-action [param]
   `(-> (.get-action interface.*factory* ~param)
        (.execute)))

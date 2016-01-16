@@ -23,9 +23,10 @@
 (require pyherc.macros)
 (require pyherc.rules.macros)
 
+(action-interface-dsl)
+
 (import [pyherc.data [current-weapon current-ammunition get-character
-                      blocks-movement]]
-        [pyherc.ports [interface]])
+                      blocks-movement]])
 
 (defn attack [character direction rng]
   "attack to given direction"

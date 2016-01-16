@@ -23,7 +23,7 @@
 (require pyherc.macros)
 (require pyherc.rules.macros)
 
-(import [pyherc.ports [interface]])
+(action-interface-dsl)
 
 (defn cast [character direction spell-name]
   "cast a spell"
