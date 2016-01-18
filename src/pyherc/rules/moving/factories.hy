@@ -67,7 +67,9 @@
                                                                    new-level
                                                                    false
                                                                    self.dying-rules)))]
-                            [(get-character new-level new-location)
+                            [(and (get-character new-level new-location)
+                                  character.artificial-intelligence
+                                  (. (get-character new-level new-location) artificial-intelligence))
                              (get-place-switch-action character
                                                       new-location
                                                       self.dying-rules)]

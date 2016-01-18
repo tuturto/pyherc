@@ -549,4 +549,3 @@ class TrappingFactoryBuilder():
         Builds trapping factory
         """
         return TrappingFactory(self.trap_creator)
-

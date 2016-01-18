@@ -333,6 +333,9 @@ class TestSwitchingPlaces():
                           .with_name('Uglak')
                           .build())
 
+        self.monster_1.artificial_intelligence = lambda : None
+        self.monster_2.artificial_intelligence = lambda : None
+
         add_character(self.level, (5, 5), self.monster_1)
         add_character(self.level, (6, 5), self.monster_2)
 

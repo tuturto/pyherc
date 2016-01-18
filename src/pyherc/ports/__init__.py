@@ -31,6 +31,7 @@ from .interface import set_action_factory
 from .inventory import (pick_up, is_picking_up_legal, drop_item,
                         is_dropping_item_legal, equip, is_equipping_legal,
                         unequip, is_unequipping_legal)
+from .lunging import lunge
 from .magic import (cast, is_casting_legal, gain_domain,
                     is_gaining_domain_legal)
 from .metamorphosis import is_morph_legal, morph

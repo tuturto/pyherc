@@ -20,36 +20,16 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(defmacro date-rules [&rest rule-specs]
-  `(defn get-special-events [year month day]
-     (let [[events []]]
-       ~@(map (fn [x] `(date-rule ~@x)) rule-specs)
-       events)))
+(require hymn.dsl)
 
-(defmacro date-rule [date-name &rest rules]
-  (if (> (len rules) 1)
-    `(when (and ~@rules) (.append events ~date-name))
-    `(when ~@rules (.append events ~date-name))))
+(import [pyherc.ports.combat [attack]]
+        [pyherc.ports.moving [move move-legal?]])
 
-(defmacro action-interface-dsl []
-  `(import [hymn.types.maybe [nothing?]]
-           [pyherc.ports [interface]]))
+(defn lunge [character direction rng]
+  (do-monad [_ (move character direction)
+             res (attack character direction rng)]
+            res))
 
-(defmacro/g! run-action [param]
-  `(let [[~g!action (interface.*factory* ~param)]]
-     (if (nothing? ~g!action)
-       (assert false "no suitable factory found")
-       (.execute (.from-maybe ~g!action nil)))))
+(defn lunge-legal? [character direction]
+  (move-legal? character direction))
 
-(defmacro/g! legal-action? [param]
-  `(let [[~g!action (interface.*factory* ~param)]]
-     (if (nothing? ~g!action)
-       false
-       (.legal? (.from-maybe ~g!action nil)))))
-
-(defmacro defparams [name type attributes]
-  `(defclass ~name []
-     [[--init-- (fn [self ~@attributes]
-                  (set-attributes ~@attributes)
-                  (setv self.action-type ~type)
-                  nil)]]))

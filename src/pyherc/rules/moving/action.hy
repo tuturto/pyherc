@@ -69,7 +69,7 @@
                                                             :direction direction))
                     (Right character))
                   (do (.add-to-tick self.character Duration.instant)
-                      (Left character))))]
+                      (Left self.character))))]
    [legal? #d(fn [self]
                "check if the move is possible to perform"
                (let [[level self.new-level]
@@ -173,7 +173,7 @@
                     (.check-dying self.dying-rules character₂)
                     (Right character₁))
                   (do (.add-to-tick self.character Duration.instant)
-                      (Left self.character))))]
+                      (Left self.character₁))))]
    [legal? #d(fn [self]
                "check if this move is legal"
                (if (in self.character.model.player [self.character self.other-character])
