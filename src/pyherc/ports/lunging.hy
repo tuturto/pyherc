@@ -22,13 +22,21 @@
 
 (require hymn.dsl)
 
-(import [pyherc.ports.combat [attack]]
+(import [hymn.types.either [Right]]
+        [pyherc.data [skill-ready? cooldown]]
+        [pyherc.data.constants [Duration]]
+        [pyherc.ports.combat [attack]]
         [pyherc.ports.moving [move move-legal?]])
 
 (defn lunge [character direction rng]
-  (do-monad-m [_ (move character direction)]
-              (attack character direction rng)))
+  (do-monad-m [_ (move character direction)
+               _ (attack character direction rng)]              
+              (add-cooldown character)))
 
 (defn lunge-legal? [character direction]
-  (move-legal? character direction))
+  (and (skill-ready? character "lunge")
+       (move-legal? character direction)))
 
+(defn add-cooldown [character]
+  (cooldown character "lunge" Duration.very-slow)
+  (Right character))
