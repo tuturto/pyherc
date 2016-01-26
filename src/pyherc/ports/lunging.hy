@@ -29,9 +29,9 @@
         [pyherc.ports.moving [move move-legal?]])
 
 (defn lunge [character direction rng]
-  (do-monad-m [_ (move character direction)
-               _ (attack character direction rng)]              
-              (add-cooldown character)))
+  (monad-> (move character direction)
+           (attack direction rng)              
+           (add-cooldown)))
 
 (defn lunge-legal? [character direction]
   (and (skill-ready? character "lunge")
