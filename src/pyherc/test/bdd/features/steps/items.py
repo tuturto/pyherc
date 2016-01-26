@@ -32,7 +32,7 @@ from pyherc.test.cutesy import drop, make
 
 step_matcher('re')
 
-@given('^(?P<character_name>[A-Za-z]+) has (?P<item_name>[A-Za-z]+)$')
+@given('(?P<character_name>[A-Za-z]+) has (?P<item_name>[A-Za-z]+)')
 @default_context
 @weapon_list
 @armour_list

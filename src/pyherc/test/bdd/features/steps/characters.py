@@ -22,7 +22,7 @@
 
 # flake8: noqa
 
-from hamcrest import assert_that, greater_than, is_not, less_than
+from hamcrest import assert_that, greater_than, is_not, less_than, is_
 from pyherc.ai.pathfinding import a_star
 from pyherc.data.constants import Direction, Duration
 from pyherc.data.effects import DamageModifier
@@ -31,7 +31,7 @@ from pyherc.ports import move
 from pyherc.test.bdd.features.helpers import (default_context, get_character,
                                               get_item, get_location, observed,
                                               with_action_factory)
-from pyherc.test.cutesy import Adventurer, Goblin, take_random_step, Wizard
+from pyherc.test.cutesy import Adventurer, Goblin, take_random_step, Wizard, make
 from pyherc.test.matchers import is_dead
 
 

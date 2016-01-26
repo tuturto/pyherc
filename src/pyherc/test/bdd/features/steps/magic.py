@@ -51,7 +51,7 @@ def impl(context, caster_name, spell_and_target):
 
 step_matcher('re')
 
-@given('^(?P<caster_name>[A-Za-z]+) has no spirit left$')
+@given('(?P<caster_name>[A-Za-z]+) has no spirit left')
 def impl(context, caster_name):
     caster = get_character(context, caster_name)
     caster.spirit = 0

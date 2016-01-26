@@ -1,4 +1,4 @@
-decorator==3.4.0
-hy==0.11.0
+decorator==4.0.6
+hy==0.11.1
 docopts==0.6.1
-hymn==0.2
+hymn==0.5
