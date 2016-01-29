@@ -152,9 +152,9 @@
 
 (defn safe-passage [level location]
   "check if given location is free to move without danger"
-  (all [(not (blocks-movement level location))
-        (not (get-traps level location))
-        (not (get-character level location))]))
+  (and (not (blocks-movement level location))
+       (not (get-traps level location))
+       (not (get-character level location))))
 
 (defn ornamentation [level location &optional [tile-id "no-tile"]]
   (assert (!= tile-id []))

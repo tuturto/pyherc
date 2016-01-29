@@ -20,21 +20,20 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(defclass Trap []
-  [[--init-- (fn [self &optional [icon nil]]
-               (setv self.level nil)
-               (setv self.location nil)
-               (setv self.icon icon)
+(require pyherc.macros)
+
+(import [pyherc.data.traps.trap [Trap]])
+
+(defclass RemoteTrigger [Trap]
+  [[--init-- (fn [self trap &optional [icon nil]]
+               (super-init icon)
+               (set-attributes trap)
                nil)]
    [on-enter (fn [self character]
-               "called when a character enters square with trap"
-               nil)]
+               (when (and self.trap
+                          self.trap.level)
+                 (.on-trigger self.trap)))]
    [on-item-enter (fn [self item]
-                    "called when item enters square with trap"
-                    nil)]
-   [on-place (fn [self level location]
-               "called when trap is placed"
-               nil)]
-   [on-trigger (fn [self]
-                 "called when trap is remotely triggered"
-                 nil)]])
+                    (when (and self.trap
+                               self.trap.level)
+                      (.on-trigger self.trap)))]])

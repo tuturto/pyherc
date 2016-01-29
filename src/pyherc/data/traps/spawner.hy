@@ -20,21 +20,28 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(defclass Trap []
-  [[--init-- (fn [self &optional [icon nil]]
-               (setv self.level nil)
-               (setv self.location nil)
-               (setv self.icon icon)
-               nil)]
-   [on-enter (fn [self character]
-               "called when a character enters square with trap"
-               nil)]
-   [on-item-enter (fn [self item]
-                    "called when item enters square with trap"
-                    nil)]
-   [on-place (fn [self level location]
-               "called when trap is placed"
+(require pyherc.macros)
+(require hy.contrib.anaphoric)
+
+(import [random]
+        [pyherc.data.traps.trap [Trap]]
+        [pyherc.data [blocks-movement add-character]]
+        [pyherc.data.geometry [area-around]])
+
+(defclass CharacterSpawner [Trap]
+  [[--init-- (fn [self character-selector &optional [icon nil]]
+               (super-init icon)
+               (set-attributes character-selector)
                nil)]
    [on-trigger (fn [self]
-                 "called when trap is remotely triggered"
-                 nil)]])
+                 (let [[creatures (self.character-selector)]
+                       [area (area-around self.location)]]
+                   (ap-each creatures (place-creature it self.level area))))]])
+
+(defn place-creature [creature level area]
+  (let [[free-spots (list (ap-filter (not (blocks-movement level it))
+                                     area))]]
+    (when free-spots
+      (add-character level
+                     (.choice random free-spots)
+                     creature))))

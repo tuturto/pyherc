@@ -28,3 +28,5 @@ Package for traps
 
 from .caltrops import Caltrops
 from .pit import PitTrap
+from .spawner import CharacterSpawner
+from .triggers import RemoteTrigger
