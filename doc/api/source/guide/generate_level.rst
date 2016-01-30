@@ -22,9 +22,10 @@ Level generator
 In order to add a new type of level into the game, a level generator needs to
 be written first. It has a simple interface:
 
-.. code-block:: python
-    
-    def generate_level(self, portal)
+.. code-block:: hy
+
+    (fn generate-level [self portal]
+       ...)
 
 Arguments supplied to this function are:
 
@@ -35,49 +36,39 @@ Shape of the level
 One of the first things for our level generator to do, is to create a new 
 Level object:
 
-.. code-block:: python
+.. code-block:: hy
 
-    new_level = Level((80, 40), tiles.FLOOR_ROCK, tiles.WALL_GROUND)
+    (new-level model)
 
-This call will instantiate a Level object, set it size to be 80 times 40, 
-create floor of rock and fill the whole level will ground wall. After this the
-generator can create structure of the level as wanted.
+This call will instantiate a Level object. Note that the level initially has
+no dimensions at all. The datastructure used will allow level to grow to any
+direction, as much as there is memory in the computer (more or less anyway).
+Now the level generator code can start modifying layout of the level:
 
-.. code-block:: python
+.. code-block:: hy
 
-    for y_loc in range(1, 39):
-        for x_loc in range(1, 79):
-            new_level.walls[x_loc][y_loc] = tiles.WALL_EMPTY
+    (for [y (range 1 39)]
+      (for [x (range 1 79)]
+        (floor-tile #t(x y) :stone)))
 
 Adding monsters
 +++++++++++++++           
 No level is complete without some monsters. Next we will add a single rat:
 
-.. code-block:: python
+.. code-block:: hy
 
-    monster = self.creature_generator.generate_creature(
-                                            model.tables, {'name':'rat'})
-    new_level.add_creature(monster, new_level.find_free_space())
-
-This will instruct :class:`pyherc.generators.creature.CreatureGenerator` to
-use supplied monster tables and create a monster called 'rat'. After this,
-the rat is added at a random free location.
+    (add-character level (.find-free-space level)
+                   (creature-generator "rat"))
 
 Adding items
 ++++++++++++
 Our brave adventurer needs items to loot. Following piece of code will add a
 single random food item:
 
-.. code-block:: python
+.. code-block:: hy
 
-    new_item = self.item_generator.generateItem(model.tables, {'type':'food'})
-    new_item.location = new_level.find_free_space()
-    new_level.items.append(new_item)
-
-This will instruct :class:`pyherc.generators.item.ItemGenerator` to use 
-supplied item tables and create random food type item. After this the item
-is added to the level. This portion of the Level interface will most likely
-change in the future, to match better to the interface used to add monsters.
+    (add-item level (.find-free-space level)
+              (self.item-generator :item-type "food"))
 
 Linking to previous level
 +++++++++++++++++++++++++
@@ -85,12 +76,14 @@ Our level is almost ready, we still need to link it to level above it. This
 is done using the Portal object, that was passed to this generator in the
 beginning:
 
-.. code-block:: python
+.. code-block:: hy
 
-    if portal != None:
-        new_portal = Portal()
-        new_portal.model = model
-        new_level.add_portal(new_portal, new_level.find_free_space(), portal)
+    (when portal
+      (let [[another-portal (Portal)]]
+        (setv another-portal.model model)
+        (.add-portal level another-portal
+                     (.find-free-space level)
+                     portal)))
 
 First we create a new Portal and link it to our Model. Then we add it to the
 new level at random location and link it to portal on a previous level.
