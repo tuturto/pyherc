@@ -6,7 +6,8 @@
 Welcome to pyherc programmer's reference
 ========================================
 
-Contents:
+Reference
+*********
 
 .. toctree::
    :maxdepth: 2
@@ -25,6 +26,28 @@ Contents:
    guide/error_handling
    guide/testing
 
+Release notes
+*************
+
+.. toctree::
+   :maxdepth: 1
+
+   release/release_0_1
+   release/release_0_2
+   release/release_0_3
+   release/release_0_4
+   release/release_0_5
+   release/release_0_6
+   release/release_0_7
+   release/release_0_8
+   release/release_0_9
+   release/release_0_10
+   release/release_0_11
+   release/release_0_12
+   release/release_0_13
+   release/release_0_14
+   release/release_0_15
+   
 
 Indices and tables
 ==================
