@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/tuturto/pyherc.svg)](https://travis-ci.org/tuturto/pyherc)
 [![Dependency Status](https://gemnasium.com/tuturto/pyherc.svg)](https://gemnasium.com/tuturto/pyherc)
 [![Code Issues](http://www.quantifiedcode.com/api/v1/project/f453e229d15a45ec98f90d9767b59ef1/badge.svg)](http://www.quantifiedcode.com/app/project/f453e229d15a45ec98f90d9767b59ef1)
+[![Documentation](https://readthedocs.org/projects/pyherc/badge/?version=latest)](http://pyherc.readthedocs.org/en/stable/)
 
 Intro
 =====
