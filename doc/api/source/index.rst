@@ -16,6 +16,7 @@ Contents:
    guide/generate_level
    guide/modular_levels
    guide/generate_item
+   guide/generate_character
    guide/actions
    guide/events
    guide/effects
