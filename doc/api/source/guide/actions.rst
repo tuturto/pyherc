@@ -17,9 +17,8 @@ class. For example, for character to move around, it can do it by:
 
 .. code-block:: hy
 
-    (.execute (self.action-factory (MoveParameters self
-                                                   direction
-                                                   "walk")))
+    ((action-factory (MoveParameters character
+                                     Direction.west)))
 
 This creates a WalkAction and executes it, causing the character to take a 
 single step to given direction. Doing this all the time is rather cumbersome,
