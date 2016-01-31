@@ -17,8 +17,8 @@ class. For example, for character to move around, it can do it by:
 
 .. code-block:: hy
 
-    ((action-factory (MoveParameters character
-                                     Direction.west)))
+    (.execute (action-factory (MoveParameters character
+                                              Direction.west)))
 
 This creates a WalkAction and executes it, causing the character to take a 
 single step to given direction. Doing this all the time is rather cumbersome,
@@ -27,6 +27,19 @@ so there are convenience functions at :mod:`pyherc.ports` that can be used:
 .. code-block:: hy
 
     (move character Direction.west)
+
+For checking if an action can be performed, following ways are generally
+supported:
+
+.. code-block:: hy
+
+    (.legal? (action-factory (MoveParameters character
+                                             Direction.west)))
+                                             
+    (move-legal? character Direction.west)
+    
+The first example will always be supported. The second example is generally
+supported, but not always.
 
 Interface
 =========
