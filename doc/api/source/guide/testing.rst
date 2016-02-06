@@ -152,6 +152,44 @@ change how builders construct it and how matchers match it and tests should not
 need any modifications. Custom matchers can be found at 
 :py:mod:`pyherc.test.matchers` module.
 
+Three macros are provided to help reduce boilerplate from tests: ``background``,
+``fact`` and ``with-background``. Background is used to create setup function.
+It can return one or more symbols for tests:
+
+.. code-block:: hy
+
+    (require pyherc.test.macros)
+
+    (background weapons
+            [item (-> (ItemBuilder)
+                      (.with-damage 2 "piercing")
+                      (.with-name "club")
+                      (.build))]
+            [character (-> (CharacterBuilder)
+                           (.build))]
+            [_ (set-action-factory (-> (ActionFactoryBuilder)
+                                       (.with-inventory-factory)
+                                       (.build)))])
+
+The example code creates background called ``weapons`` and initializes it with
+``item`` and ``character`` symbols. In addition, ``set-action-factory`` is
+called for side effect.
+
+Facts are executable tests, that can be standalone, or use previously defined
+background. When using a background, a list of symbols to retrieved is given
+to ``with-background`` macro. This will generate a call to background and
+retrieve specified symbols to current scope:
+
+.. code-block:: hy
+
+    (fact "character can wield weapon"
+      (with-background weapons [item character]
+        (equip character item)
+        (assert-that character.inventory.weapon (is- (equal-to item)))))
+
+Each fact should have unique description, since it is used to generate name
+for test function.
+
 Cutesy
 ------
 Cutesy is an internal domain specific language. Basically, it's just a 
