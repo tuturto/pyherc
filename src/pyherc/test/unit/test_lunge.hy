@@ -21,6 +21,7 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
+(require pyherc.test.macros)
 
 (import [hamcrest [assert-that is- equal-to less-than]]
         [random]
@@ -30,55 +31,38 @@
         [pyherc.data [add-character]]
         [pyherc.data.constants [Direction]])
 
-(defn setup []
-  "setup test case"
-  (let [[actions (-> (ActionFactoryBuilder)
-                     (.with-attack-factory)
-                     (.with-move-factory)
-                     (.build))]
-        [character₀ (-> (CharacterBuilder)
-                        (.build))]
-        [character₁ (-> (CharacterBuilder)
-                        (.build))]
-        [level (-> (LevelBuilder)
-                   (.build))]]
-    (set-action-factory actions)
-    {:character₀ character₀
-     :character₁ character₁
-     :level level}))
+(background default            
+            [character₀ (-> (CharacterBuilder)
+                            (.build))]
+            [character₁ (-> (CharacterBuilder)
+                            (.build))]
+            [level (-> (LevelBuilder)
+                       (.build))]
+            [_ (set-action-factory (-> (ActionFactoryBuilder)
+                                       (.with-attack-factory)
+                                       (.with-move-factory)
+                                       (.build)))])
 
-(defn test-unarmed-lunge-moving []
-  "unarmed lunge moves attacker"
-  (let [[context (setup)]
-        [character₀ (:character₀ context)]
-        [character₁ (:character₁ context)]
-        [level (:level context)]]
-    (add-character level #t(5 5) character₀)
-    (add-character level #t(5 7) character₁)
-    (lunge character₁ Direction.north random)
-    (assert-that character₁.location (is- (equal-to #t(5 6))))))
+(fact "unarmed lunge moves attacker"
+      (with-background default [character₀ character₁ level]
+        (add-character level #t(5 5) character₀)
+        (add-character level #t(5 7) character₁)
+        (lunge character₁ Direction.north random)
+        (assert-that character₁.location (is- (equal-to #t(5 6))))))
 
-(defn test-unarmed-lunge-damage []
-  "unarmed lunge damages target"
-  (let [[context (setup)]
-        [character₀ (:character₀ context)]
-        [character₁ (:character₁ context)]
-        [level (:level context)]
-        [old-hp character₀.hit-points]]
-    (add-character level #t(5 5) character₀)
-    (add-character level #t(5 7) character₁)
-    (lunge character₁ Direction.north random)
-    (assert-that character₀.hit-points (is- (less-than old-hp)))))
+(fact "unarmed lunge damages target"
+  (with-background default [character₀ character₁ level]
+    (let [[old-hp (. character₀ hit-points)]]
+      (add-character level #t(5 5) character₀)
+      (add-character level #t(5 7) character₁)
+      (lunge character₁ Direction.north random)
+      (assert-that character₀.hit-points (is- (less-than old-hp))))))
 
-(defn test-lunge-next-square []
-  "lunging against opponent right next to attacker is not possible"
-  (let [[context (setup)]
-        [character₀ (:character₀ context)]
-        [character₁ (:character₁ context)]
-        [level (:level context)]
-        [old-hp character₀.hit-points]]
-    (add-character level #t(5 5) character₀)
-    (add-character level #t(5 6) character₁)
-    (lunge character₁ Direction.north random)
-    (assert-that character₁.location (is- (equal-to #t(5 6))))
-    (assert-that character₀.hit-points (is- (equal-to old-hp)))))
+(fact "lunging against opponent right next to attacker is not possible"
+      (with-background default [character₀ character₁ level]
+        (let [[old-hp (. character₀ hit-points)]]
+          (add-character level #t(5 5) character₀)
+          (add-character level #t(5 6) character₁)
+          (lunge character₁ Direction.north random)
+          (assert-that character₁.location (is- (equal-to #t(5 6))))
+          (assert-that character₀.hit-points (is- (equal-to old-hp))))))
