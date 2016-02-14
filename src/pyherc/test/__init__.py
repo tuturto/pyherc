@@ -26,6 +26,7 @@ Package for tests
 from pyherc.test.unit.test_bsp import *
 from pyherc.test.unit.test_calendar import *
 from pyherc.test.unit.test_caltrops import *
+from pyherc.test.unit.test_drop_actions import *
 from pyherc.test.unit.test_effectscollection import *
 from pyherc.test.unit.test_graves import *
 from pyherc.test.unit.test_item import *

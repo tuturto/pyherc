@@ -67,7 +67,7 @@
                         (list (ap-map (HySymbol (name (first it))) (group (rest (first code)))))
                         `[])]]
       `(defn ~fn-name ~param-list
-         ~desc
+         ~desc         
        ~@res)) )
 
   (defn create-sample-decorator [res &rest foo]

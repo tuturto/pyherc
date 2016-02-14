@@ -8,4 +8,4 @@ pyherc.geany
 __pycache__
 resources.py
 resources.rcc
-
+.hypothesis/
