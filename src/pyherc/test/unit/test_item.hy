@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.test.macros)
+(require archimedes)
 
 (import [hamcrest [assert-that is- equal-to is-not :as is-not-
                    contains-inanyorder contains empty has-length]]

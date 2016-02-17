@@ -21,7 +21,7 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
-(require pyherc.test.macros)
+(require archimedes)
 
 (import [hamcrest [assert-that is- equal-to less-than]]
         [random]

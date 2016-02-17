@@ -158,7 +158,7 @@ It can return one or more symbols for tests:
 
 .. code-block:: hy
 
-    (require pyherc.test.macros)
+    (require archimedes)
 
     (background weapons
             [item (-> (ItemBuilder)

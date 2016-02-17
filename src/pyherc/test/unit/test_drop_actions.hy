@@ -19,7 +19,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.test.macros)
+(require archimedes)
 (require pyherc.macros)
 
 (import [pyherc.ports [set-action-factory drop-item]]

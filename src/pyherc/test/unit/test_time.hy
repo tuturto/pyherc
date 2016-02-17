@@ -21,7 +21,7 @@
 ;; THE SOFTWARE.
 
 (require hy.contrib.anaphoric)
-(require pyherc.test.macros)
+(require archimedes)
 (require pyherc.macros)
 
 (import [hamcrest [assert-that equal-to has-item is- is-not :as is-not-]]
