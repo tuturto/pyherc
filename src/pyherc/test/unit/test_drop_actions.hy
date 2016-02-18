@@ -27,7 +27,6 @@
                                ActionFactoryBuilder]]
         [hamcrest [assert-that is- equal-to is-not :as is-not- is-in
                    greater-than]]
-        [hypothesis [given example]]
         [hypothesis.strategies [integers tuples]])
 
 (background default
