@@ -23,6 +23,7 @@ Reference
    guide/effects
    guide/configuration
    guide/magic
+   guide/fsm
    guide/error_handling
    guide/testing
 

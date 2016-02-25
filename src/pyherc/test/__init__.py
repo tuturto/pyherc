@@ -28,6 +28,7 @@ from pyherc.test.unit.test_calendar import *
 from pyherc.test.unit.test_caltrops import *
 from pyherc.test.unit.test_drop_actions import *
 from pyherc.test.unit.test_effectscollection import *
+from pyherc.test.unit.test_fsm import *
 from pyherc.test.unit.test_graves import *
 from pyherc.test.unit.test_item import *
 from pyherc.test.unit.test_level_change import *

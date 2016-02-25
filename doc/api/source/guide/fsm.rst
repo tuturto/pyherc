@@ -1,0 +1,88 @@
+Finite-state machines
+=====================
+
+Finite-state machine is often used for artificial intelligence routines in
+games. They can model different states character can be: patrolling, searching
+for food, investigating noise and fighting. There is a small DSL for defining
+finite-state machines supplied with pyherc.
+
+Sample configuration
+--------------------
+
+Following code is a sample definition for a very simple finite-state machine.
+It has two states ``addition`` and ``subtraction``.
+
+.. code-block:: hy
+
+   (defstatemachine SimpleAdder [message]
+     "finite-state machine for demonstration purposes"
+
+     "add 1 to message, 0 to switch state"
+     (addition initial-state
+               (active (+ message 1))
+
+               "message 0 will change state"
+               (transitions [(= message 0) subtraction]))
+
+     "substract 1 from message, 0 to switch state"
+     (subtraction (active (- message 1))
+
+                  "message 0 will change state"
+                  (transitions [(= message 0) addition])))
+
+In order to use the finite-state machine, one needs to create an instance of
+it and call it like a function:
+
+.. code-block:: hy
+
+   => (setv fsm (SimpleAdder))
+   => (fsm 1)
+   2
+   => (fsm 2)
+   3
+   => (fsm 0)
+   -1
+   => (fsm 1)
+   0
+   => (fsm 2)
+   1
+
+As you can see, ``fsm`` will first return the argument passed to it plus 1.
+As soon as ``0`` is passed in, finite-state machine switches to subtraction
+state and starts returning the argument passed to it minus 1. Passing a ``0``
+again will change the state back to addition.
+
+Syntax of finite-state machine definition
+-----------------------------------------
+
+Finite-state machine is defined with ``(defstatemachine <name> <parameters>)``
+form. ``<name>`` defines name of the class that will encapsulate finite-state
+machine definition. ``<parameters>`` is a list of zero or more symbols that
+define function interface that the finite-state machine will have. Keyword
+only, optional or other special parameter types are not supported.
+
+Inside of ``defstatemachine`` form, there are one or more state definitions.
+Strings are allowed and they're treated as comments (ie. ignored). Format
+of state definition is
+``(<name> [initial-state] [(on-active ...)] [(active ...)] [(transitions ...)])``.
+``<name>`` is name of the state, it should be unique within a finite-state
+machine as transitions refer to them. One and only one of the states should be
+marked as an ``initial-state``. This is the state the finite-state machine
+will enter when first activated. Rest three forms are all optional. Order of
+the forms is not significant. Symbols defined in ``<parameters>`` block of
+``defstatemachine`` are available to all of these three functions. Strings
+are allowed and they are treated as comments (ie. ignored).
+
+First one is ``on-active``, which defines code that is executed when the given
+state is activated. Second one is ``active`` which defines code that is
+executed every time for the active state when finite-state machine is
+activated. The last one is ``transitions``. It defines one or more two element
+lists, where the first element is test and second element is symbol of a
+state to switch if the test returns true. ``transitions`` are checked for
+the active state every time finite-state machine is activated and it is
+performed before ``active`` code is executed.
+
+In order to store data and pass it between states, ``state`` macro can be
+used. It has syntax of: ``(state <symbol> [value])``. ``<symbol>`` is the
+stored data being accessed. If optional ``value`` is supplied, stored data
+is updated. In any case ``state`` returns the current value of the data.
