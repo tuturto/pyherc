@@ -57,13 +57,6 @@
         :on-activate ~on-activate-fn
         :active ~active-fn
         :transitions ~transitions-fn}))  
-
-  (defn create-states []
-    "create states dictionary {(keyword state-symbol) state}"
-    (dict-comp (keyword (first x)) 
-               (create-state x)
-               [x states]
-               (not (HyString? x))))
   
   (defn create-state [state-def]
     "create a state from state definition"
@@ -81,32 +74,56 @@
                                      (macro-error it "unknown form")]))
     (new-state (first state-def) on-activate-code active-code transitions-code))
 
-  (let [[states-dict (create-states)]
-        [quoted-dict (quote-dict states-dict)]
-        [initial-state-key (keyword (first (first (ap-filter (= 'initial-state
-                                                         (second it))
-                                                      states))))]
-        [initial-state-code (get states-dict initial-state-key)]]
-    `(defclass ~fsm-class []
-       "a finite-state machine"
-       [[--init-- (fn [self]
-                    "default initializer"
-                    (setv (. self current-state) nil)
-                    (setv (. self initial-state) ~initial-state-code)
-                    (setv (. self states) ~quoted-dict)
-                    (setv (. self data) {})
-                    nil)]        
-        
-        [--call-- (fn [self ~@fsm-interface]
-                    "call current state of finite-state machine"
-                    (when (not (. self current-state))
-                      (setv (. self current-state) (. self initial-state))
-                      ((:on-activate (. self current-state)) (. self data) ~@fsm-interface))
-                    (ap-if ((:transitions (. self current-state)) (. self data) ~@fsm-interface)
-                           (do (setv (. self current-state)
-                                     (get (. self states) it))
-                               ((:on-activate (. self current-state)) (. self data) ~@fsm-interface)))
-                    ((:active (. self current-state)) (. self data) ~@fsm-interface))]])))
+  (def #t(init-parameters init-code)
+    ;; get init method parameters and code-block
+    (ap-if (first (list-comp (list (rest x)) [x states] (= '--init-- (first x))))
+           #t((first it) (list (rest it)))
+           #t('[] '[])))
+
+  (def states-dict
+    ;; create states dictionary {(keyword state-symbol) state}
+    (dict-comp (keyword (first x)) 
+               (create-state x)
+               [x states]
+               (not (or (HyString? x)
+                        (= '--init-- (first x))))))
+  
+  (def quoted-dict 
+    ;; create quoted dictionary that can be emitted as code
+    (quote-dict states-dict))
+  
+  (def initial-state-key
+    ;; keyword for finding initial state in states-dict
+    (keyword (first (first (ap-filter (= 'initial-state
+                                         (second it))
+                                      states)))))
+  
+  (def initial-state-code 
+    ;; code-block of initial state
+    (get states-dict initial-state-key))
+
+  `(defclass ~fsm-class []
+     "a finite-state machine"
+     [[--init-- (fn [self ~@init-parameters]
+                  "default initializer"
+                  (setv (. self current-state) nil)
+                  (setv (. self initial-state) ~initial-state-code)
+                  (setv (. self states) ~quoted-dict)
+                  (setv (. self data) {})
+                  (let [[state! (. self data)]]
+                    ~@init-code)
+                  nil)]
+      
+      [--call-- (fn [self ~@fsm-interface]
+                  "call current state of finite-state machine"
+                  (when (not (. self current-state))
+                    (setv (. self current-state) (. self initial-state))
+                    ((:on-activate (. self current-state)) (. self data) ~@fsm-interface))
+                  (ap-if ((:transitions (. self current-state)) (. self data) ~@fsm-interface)
+                         (do (setv (. self current-state)
+                                   (get (. self states) it))
+                             ((:on-activate (. self current-state)) (. self data) ~@fsm-interface)))
+                  ((:active (. self current-state)) (. self data) ~@fsm-interface))]]))
 
 (defmacro state [symbol &optional [value nil]]
   "access shared state symbol in finite-state machine"

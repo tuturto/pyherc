@@ -25,25 +25,6 @@
 
 (import [hamcrest [assert-that is- equal-to]])
 
-(defstatemachine TwistedAccumulator [message]
-  "twisted accumulator demonstrates shared state"
-
-  "add bonus to message"
-  (addition initial-state
-            (on-activate (state bonus 0))
-            (active (when (odd? message)
-                      (state bonus message))
-                    (+ message (state bonus)))
-            "send 0 to transition to subtraction"
-            (transitions [(= message 0) subtraction]))
-
-  "substract bonus from message"
-  (subtraction (active (when (odd? message) 
-                         (state bonus message))
-                       (- message (state bonus)))
-               "send 0 to transition to addition"
-               (transitions [(= message 0) addition])))
-
 (defstatemachine SimpleAdder [message]
 
   "add 1 to message, 0 to switch state"
@@ -54,9 +35,6 @@
   "substract 1 from message, 0 to switch state"
   (subtraction (active (- message 1))
                (transitions [(= message 0) addition])))
-
-(background twister
-            [fsm (TwistedAccumulator)])
 
 (background simple
             [fsm (SimpleAdder)])
@@ -86,9 +64,49 @@
         (fsm 0)
         (assert-that (fsm 5) (is- (equal-to 6)))))
 
+
+
+(defstatemachine TwistedAccumulator [message]
+  "twisted accumulator demonstrates shared state"
+
+  "add bonus to message"
+  (addition initial-state
+            (on-activate (state bonus 0))
+            (active (when (odd? message)
+                      (state bonus message))
+                    (+ message (state bonus)))
+            "send 0 to transition to subtraction"
+            (transitions [(= message 0) subtraction]))
+
+  "substract bonus from message"
+  (subtraction (active (when (odd? message) 
+                         (state bonus message))
+                       (- message (state bonus)))
+               "send 0 to transition to addition"
+               (transitions [(= message 0) addition])))
+
+(background twister
+            [fsm (TwistedAccumulator)])
+
 (fact "fsm - twisted - state can be modified"
       (with-background twister [fsm]
         (assert-that (fsm 2) (is- (equal-to 2)))
         (assert-that (fsm 1) (is- (equal-to 2)))
         (assert-that (fsm 2) (is- (equal-to 3)))
         (assert-that (fsm 3) (is- (equal-to 6)))))
+
+
+
+(defstatemachine Minimal [message]
+  "default initializer"
+  (--init-- [bonus] (state bonus bonus))
+  "handle message"
+  (process initial-state
+           (active (* message (state bonus)))))
+
+(background minimal
+            [fsm (Minimal 2)])
+
+(fact "finite-state machine can be configured during construction"
+      (with-background minimal [fsm]
+        (assert-that (fsm 2) (is- (equal-to 4)))))
