@@ -29,7 +29,7 @@
   "build class definition for a finite-state machine"
 
   (defn new-state [symbol &optional [on-activate nil]
-                   [active nil] [transitions nil]]
+                   [active nil] [on-deactivate nil] [transitions nil]]
     "construct new state with given functions and transitions"
     (let [[on-activate-fn (if on-activate
                             `(fn [state! ~@fsm-interface]
@@ -45,6 +45,13 @@
                        `(fn [state! ~@fsm-interface]
                           "empty function as this state doesn't have active code"
                           nil))]
+          [on-deactivate-fn (if on-deactivate
+                              `(fn [state! ~@fsm-interface]
+                                 "function to call when this state deactivates"
+                                 ~@on-deactivate)
+                              `(fn [state! ~@fsm-interface]
+                                 "empty function as this state doesn't have on-deactivate code"
+                                 nil))]
           [transitions-fn (if transitions
                             `(fn [state! ~@fsm-interface]
                                "function to call when evaluating if state should change"
@@ -56,23 +63,27 @@
       `{:symbol ~(keyword symbol)
         :on-activate ~on-activate-fn
         :active ~active-fn
+        :on-deactivate ~on-deactivate-fn
         :transitions ~transitions-fn}))  
   
   (defn create-state [state-def]
     "create a state from state definition"
     (setv on-activate-code nil)
     (setv active-code nil)
+    (setv on-deactivate-code nil)
     (setv transitions-code nil)
     (ap-each (rest state-def) (cond [(= 'on-activate (first it))
                                      (setv on-activate-code (list (rest it)))]
                                     [(= 'active (first it))
                                      (setv active-code (list (rest it)))]
+                                    [(= 'on-deactivate (first it))
+                                     (setv on-deactivate-code (list (rest it)))]
                                     [(= 'transitions (first it)) 
                                      (setv transitions-code (list (rest it)))]
                                     [(not (or (= 'initial-state it)
                                               (HyString? it)))
                                      (macro-error it "unknown form")]))
-    (new-state (first state-def) on-activate-code active-code transitions-code))
+    (new-state (first state-def) on-activate-code active-code on-deactivate-code transitions-code))
 
   (def #t(init-parameters init-code)
     ;; get init method parameters and code-block
@@ -120,7 +131,8 @@
                     (setv (. self current-state) (. self initial-state))
                     ((:on-activate (. self current-state)) (. self data) ~@fsm-interface))
                   (ap-if ((:transitions (. self current-state)) (. self data) ~@fsm-interface)
-                         (do (setv (. self current-state)
+                         (do ((:on-deactivate (. self current-state)) (. self data) ~@fsm-interface)
+                             (setv (. self current-state)
                                    (get (. self states) it))
                              ((:on-activate (. self current-state)) (. self data) ~@fsm-interface)))
                   ((:active (. self current-state)) (. self data) ~@fsm-interface))]]))

@@ -36,6 +36,8 @@
            (setv self.character character) None)]
    [act (fn [self model action-factory rng]
       "check the situation and act accordingly"
-      (beetle-act self model action-factory))]])
+      (beetle-act self model action-factory))]
+   [--call-- (fn [self model action-factory rng]
+               (. self act model action-factory rng))]])
 
 (def beetle-act (patrol-ai open-area? 3))

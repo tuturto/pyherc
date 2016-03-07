@@ -161,7 +161,7 @@ class Character():
         for listener in self.__update_listeners:
             listener.receive_update(event)
 
-    @guarded_action
+    # @guarded_action
     @log_info
     def act(self, model, action_factory, rng):
         """
@@ -174,9 +174,9 @@ class Character():
         :param rng: random number generator
         :type rng: Random
         """
-        self.artificial_intelligence.act(model,
-                                         action_factory,
-                                         rng)
+        self.artificial_intelligence(model,
+                                     action_factory,
+                                     rng)
 
     def __get_hp(self):
         """

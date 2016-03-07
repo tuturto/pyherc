@@ -163,6 +163,27 @@ def area_4_around(location):
     yield (loc_x, loc_y + 1)
     yield (loc_x - 1, loc_y)
 
+
+def diagonals_around(location):
+    """
+    Get diagonal coordinates around location
+    """
+    loc_x, loc_y = location
+    yield (loc_x - 1, loc_y - 1)
+    yield (loc_x - 1, loc_y + 1)
+    yield (loc_x + 1, loc_y - 1)
+    yield (loc_x + 1, loc_y + 1)
+
+
+def free_locations_around(level, location):
+    """
+    Get passable nodes around given location
+    """
+    # TODO: eventually remove this
+    return [node for node in area_4_around(location)
+            if not blocks_movement(level, location)]
+
+
 class TargetData():
     """
     Represents target

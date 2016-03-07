@@ -92,7 +92,7 @@ only, optional or other special parameter types are not supported.
 Inside of ``defstatemachine`` form, there are one or more state definitions.
 Strings are allowed and they're treated as comments (ie. ignored). Format
 of state definition is
-``(<name> [initial-state] [(on-active ...)] [(active ...)] [(transitions ...)])``.
+``(<name> [initial-state] [(on-activate ...)] [(active ...)] [(on-deactivate ...)] [(transitions ...)])``.
 ``<name>`` is name of the state, it should be unique within a finite-state
 machine as transitions refer to them. One and only one of the states should be
 marked as an ``initial-state``. This is the state the finite-state machine
@@ -107,10 +107,12 @@ are to be added in ``--init--`` method of the finite-state machine and
 ``<body>`` is one or more s-expressions that are to be executed when
 finite-state machine is initialized. 
 
-First one is ``on-active``, which defines code that is executed when the given
-state is activated. Second one is ``active`` which defines code that is
+First one is ``on-activate``, which defines code that is executed when the
+given state is activated. Second one is ``active`` which defines code that is
 executed every time for the active state when finite-state machine is
-activated. The last one is ``transitions``. It defines one or more two element
+activated. ``on-activate`` is mirrored by ``on-deactivate``, which gets
+executed every time a state deactivates.
+The last one is ``transitions``. It defines one or more two element
 lists, where the first element is test and second element is symbol of a
 state to switch if the test returns true. ``transitions`` are checked for
 the active state every time finite-state machine is activated and it is

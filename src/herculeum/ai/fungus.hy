@@ -43,7 +43,9 @@
 	   None)]
    [act (fn [self model action-factory rng]
       "check the situation and act accordingly"
-      (fungus-act self model action-factory rng))]])
+      (fungus-act self model action-factory rng))]
+   [--call-- (fn [self model action-factory rng]
+               (. self act model action-factory rng))]])
 
 (defclass GreatFungusAI []
   [[__doc__ "AI routine for great fungus"]
@@ -55,7 +57,9 @@
 	   None)]
    [act (fn [self model action-factory rng]
       "check the situation and act accordingly"
-      (great-fungus-act self model action-factory rng))]])
+      (great-fungus-act self model action-factory rng))]
+   [--call-- (fn [self model action-factory rng]
+               (. self act model action-factory rng))]])
 
 
 #d(defn fungus-act [ai model action-factory rng]

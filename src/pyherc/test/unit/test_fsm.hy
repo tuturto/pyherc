@@ -23,7 +23,7 @@
 (require archimedes)
 (require pyherc.fsm)
 
-(import [hamcrest [assert-that is- equal-to]])
+(import [hamcrest [assert-that is- equal-to has-items]])
 
 (defstatemachine SimpleAdder [message]
 
@@ -110,3 +110,31 @@
 (fact "finite-state machine can be configured during construction"
       (with-background minimal [fsm]
         (assert-that (fsm 2) (is- (equal-to 4)))))
+
+
+(defstatemachine Transitions [message]
+  "state machine for testing transitions"
+  
+  (--init-- [feedback] (state feedback feedback))
+
+  (state-1 initial-state
+           (on-activate (.append (state feedback) "state-1 on activate"))
+           (active message)
+           (on-deactivate (.append (state feedback) "state-1 on deactivate"))
+           (transitions [(= message "state-2") state-2]))
+
+  (state-2 (on-activate (.append (state feedback) "state-2 on activate"))
+           (active message)
+           (on-deactivate (.append (state feedback) "state-2 on deactivate"))
+           (transitions [(= message "state-1" state-1)])))
+
+(background transition-bkg
+            [feedback []]
+            [fsm (Transitions feedback)])
+
+(fact "state can have on-activate and on-deactivate handlers"
+      (with-background transition-bkg [feedback fsm]
+        (fsm "state-2")
+        (assert-that feedback (has-items "state-1 on activate"
+                                         "state-1 on deactivate"
+                                         "state-2 on activate"))))

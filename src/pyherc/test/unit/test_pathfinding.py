@@ -30,6 +30,7 @@ from mockito import mock
 from pyherc.ai import a_star
 from pyherc.config.dsl import LevelContext
 from pyherc.data import Portal, Model, find_free_space, wall_tile
+from pyherc.data.geometry import free_locations_around
 from pyherc.generators.level.partitioners import grid_partitioning
 from pyherc.generators.level.portal import PortalAdder
 from pyherc.generators.level.room.catacombs import CatacombsGenerator
@@ -62,7 +63,8 @@ class TestAStar():
 
         path, connections, updated = a_star(start = (1, 1),
                                             goal = (5, 1),
-                                            a_map = level)
+                                            a_map = level,
+                                            adjacent_nodes = free_locations_around)
 
         assert_that(path, contains((1, 1),
                                    (2, 1),
@@ -88,7 +90,8 @@ class TestAStar():
 
         path, connections, updated = a_star(start = (10, 10),
                                             goal = (15, 10),
-                                            a_map = level)
+                                            a_map = level,
+                                            adjacent_nodes = free_locations_around)
 
         assert_that(path, is_(continuous_path(start = (10, 10),
                                               destination = (15, 10),

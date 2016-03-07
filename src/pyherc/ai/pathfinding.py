@@ -23,6 +23,7 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 -}"""
 
+from toolz import curry
 
 from copy import copy
 
@@ -82,16 +83,8 @@ class HeapItem:
     def __ge__(self, other):
         return self.type_check(other) and self.as_tuple().__ge__(other.as_tuple())
 
-
-def adjacent_nodes(level, location):
-    """
-    Get passable nodes around given location
-    """
-    return (node for node in area_4_around(location)
-            if not blocks_movement(level, location))
-
-
-def a_star(start, goal, a_map):
+@curry
+def a_star(adjacent_nodes, start, goal, a_map):
     """
     start = the start node in a_map
     goal = the goal node in a_map

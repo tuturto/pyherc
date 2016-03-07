@@ -61,3 +61,10 @@
 (defreader s [data]
   "simple string joiner"
   `(.join " " [~@data]))
+
+(defmacro defn+ [symbol parameters settings &rest code]
+  "enhanced defn"
+  (let [[result `(defn ~symbol ~parameters ~@code)]]
+    (when (in 'curried settings)
+      (setv result `(with-decorator curry ~result)))
+    result))

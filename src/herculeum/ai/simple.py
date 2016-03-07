@@ -49,6 +49,9 @@ class FlockingHerbivore():
         """
         self.character = character
 
+    def __call__(self, model, action_factory, rng):
+        self.act(model, action_factory, rng)
+
     @log_debug
     def act(self, model, action_factory, rng):
         """
