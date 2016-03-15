@@ -95,6 +95,9 @@ class Character():
         self.cooldowns = {}
         self.visited_levels = []
 
+        self.enemy_names = []
+        self.enemies = []
+
     def __str__(self):
         return self.name
 

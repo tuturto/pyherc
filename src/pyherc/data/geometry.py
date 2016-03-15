@@ -184,6 +184,10 @@ def free_locations_around(level, location):
             if not blocks_movement(level, location)]
 
 
+def in_area(area_fn, location1, location2):
+    return location2 in area_fn(location1)
+
+
 class TargetData():
     """
     Represents target

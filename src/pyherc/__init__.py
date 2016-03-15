@@ -25,3 +25,5 @@ pyherc is a rogue clone
 """
 
 import hy
+
+vtable = {}

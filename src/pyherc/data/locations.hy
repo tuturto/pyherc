@@ -23,8 +23,9 @@
 (require pyherc.macros)
 (require hy.contrib.anaphoric)
 (import [pyherc.data.level [blocks-movement]]
-        [pyherc.data.geometry [area-around]]
-        [functools [reduce]])
+        [pyherc.data.geometry [area-around area-4-around]]
+        [functools [reduce]]
+        [toolz [curry]])
 
 (defn corridor? [level location]
   "check if given location is surrounded from two sides"
@@ -59,6 +60,15 @@
                    (blocks-movement level south)))
          (not (and (blocks-movement level east)
                    (blocks-movement level west))))))
+
+(with-decorator curry
+  (defn doorframe? [level location]
+    "check if given location is door frame"
+    (and (corridor? level location)
+         (any (map (fn [x]
+                     (and (not (blocks-movement level x))
+                          (not (corridor? level x))))
+                   (area-4-around location))))))
 
 (defn open-area? [level location]
   "check if given location is in open area"

@@ -25,10 +25,11 @@
 
 (action-interface-dsl)
 
-(import [pyherc.data [current-weapon current-ammunition get-character
+(import [random]
+        [pyherc.data [current-weapon current-ammunition get-character
                       blocks-movement]])
 
-(defn attack [character direction rng]
+(defn attack [character direction &optional [rng random]]
   "attack to given direction"
   (run-action (AttackParameters character
                                 direction

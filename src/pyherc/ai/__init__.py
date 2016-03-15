@@ -24,4 +24,5 @@
 Module containing AI routines for pyherc
 """
 
+from .base import ai_state, show_alert_icon, show_confusion_icon
 from .pathfinding import a_star

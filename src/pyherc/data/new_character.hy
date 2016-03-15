@@ -20,6 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
+(require hy.contrib.anaphoric)
+
 (import [pyherc.data.new-item [armour-speed-modifier boots-speed-modifier]])
 
 (defn skill-ready? [character skill]
@@ -61,3 +63,33 @@
         "fly"
         "walk")
       "walk")))
+
+(defn enemy-names [character]
+  "list of names of enemies for this character"
+  [])
+
+(defn enemies [character]
+  "list of enemy instances for this character"
+  [])
+
+(defn add-enemy-name [character name]
+  "add new enemy name"
+  (.append (. character enemy-names) name))
+
+(defn add-enemy [character enemy]
+  "add new enemy"
+  (.append (. character enemies) enemy))
+
+(defn remove-enemy-name [character name]
+  "remove enemy name"
+  (.remove (. character enemy-names) name))
+
+(defn remove-enemy [character enemy]
+  "remove enemy"
+  (.remove (. character enemies) enemy))
+
+(defn perception-range [character]
+  "at what distance this character normally notices things"
+  (ap-if (. character mind)
+         (* 2 it)
+         1))

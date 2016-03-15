@@ -44,7 +44,9 @@ from .geometry import distance_between, heuristic_estimate_of_distance
 from .geometry import area_4_around, area_around, find_direction
 
 from .new_character import (is_skill_ready, cooldown, add_visited_level, visited_levels,
-                            speed_modifier, movement_mode)
+                            speed_modifier, movement_mode, add_enemy_name, add_enemy,
+                            remove_enemy_name, remove_enemy, enemy_names, enemies,
+                            perception_range)
 from .level import (get_tile, new_tile, floor_tile, add_portal, get_portal,
                     wall_tile, tile, blocks_los, ornamentation,
                     level_size, find_free_space, blocks_movement,
@@ -57,4 +59,4 @@ from .level import (get_tile, new_tile, floor_tile, add_portal, get_portal,
                     location_features, add_location_feature,
                     remove_location_feature,
                     level_name, level_description, safe_passage)
-from .locations import is_next_to_wall, is_corridor, is_open_area
+from .locations import is_next_to_wall, is_corridor, is_open_area, is_doorframe

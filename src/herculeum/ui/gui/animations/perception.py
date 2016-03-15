@@ -106,7 +106,7 @@ class LoseFocusAnimation(Animation):
         """
         super().__init__(event)
 
-        self.location = event.character.location
+        self.location = e_character(event).location
         self.text = '?'
         self.colour = 'yellow'
         self.offset = (0, 16)

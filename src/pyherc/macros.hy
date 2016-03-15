@@ -20,6 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
+(require hy.contrib.anaphoric)
+
 (defreader t [expr] `(, ~@expr))
 
 (defmacro x-coordinate [location] `(first ~location))
@@ -62,9 +64,15 @@
   "simple string joiner"
   `(.join " " [~@data]))
 
-(defmacro defn+ [symbol parameters settings &rest code]
-  "enhanced defn"
-  (let [[result `(defn ~symbol ~parameters ~@code)]]
-    (when (in 'curried settings)
-      (setv result `(with-decorator curry ~result)))
-    result))
+(defmacro defn+ [fn-name parameters &rest code]
+  "create function and place it in vtable"
+  `(do (import [pyherc])
+       (assoc (. pyherc vtable) ~(keyword fn-name) (fn ~parameters ~@code))))
+
+(defmacro call [fn-name &rest parameters]
+  "call function in vtable"
+  `((get (. pyherc vtable) ~(keyword fn-name)) ~@parameters))
+
+(defmacro one-of [&rest actions]
+  "perform one of following actions randomly"
+  `((.choice random [~@(ap-map `(fn [] ~it) actions)])))
