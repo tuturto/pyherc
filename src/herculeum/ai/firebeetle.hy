@@ -20,24 +20,51 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(setv __doc__ "module for AI routines for firebeetles")
-
 (require pyherc.macros)
-(import [herculeum.ai.patrol [patrol-ai]]
-        [pyherc.data [open-area?]])
+(require pyherc.fsm)
 
-(defclass FireBeetleAI []
-  [[__doc__ "AI routine for fire beetles"]
-   [character None]
-   [mode ["transit" None]]
-   [--init-- (fn [self character]
-           "default constructor"
-           (.--init-- (super FireBeetleAI self))
-           (setv self.character character) None)]
-   [act (fn [self model action-factory rng]
-      "check the situation and act accordingly"
-      (beetle-act self model action-factory))]
-   [--call-- (fn [self model action-factory rng]
-               (. self act model action-factory rng))]])
+(import [random]
+        [herculeum.ai.movement [home-location select-home wallside?
+                                travel-home whole-level arrived-destination?
+                                map-home-area home-area fill-open-space
+                                clear-current-destination patrol-home-area
+                                close-in along-open-space]]
+        [herculeum.ai.combat [select-current-enemy current-enemy closest-enemy
+                              melee detected-enemies]]
+        [pyherc.ports [wait]]
+        [pyherc.data [open-area?]]
+        [pyherc.data.geometry [in-area area-4-around]]
+        [pyherc.ai [a-star :as a* show-alert-icon show-confusion-icon]])
 
-(def beetle-act (patrol-ai open-area? 3))
+(defstatemachine FireBeetleAI [model action-factory rng]
+  "AI routine for rats"
+  (--init-- [character] (state character character))
+
+  "find a place to call a home"
+  (finding-home initial-state
+                (on-activate (when (not (home-location character))
+                               (select-home character open-area?)))
+                (active (travel-home (a* (whole-level)) character))
+                (transitions [(arrived-destination? character) patrolling]
+                             [(detected-enemies character) fighting]))
+  
+  "patrol middle of room"
+  (patrolling (on-activate (when (not (home-area character))
+                             (map-home-area character
+                                            (fill-open-space (. character level)))) 
+                           (clear-current-destination character))
+              (active (patrol-home-area (a* (along-open-space)) character))
+              (transitions [(detected-enemies character) fighting]))
+  
+  "fight enemy"
+  (fighting (on-activate (clear-current-destination character)
+                         (select-current-enemy character closest-enemy)
+                         (show-alert-icon character (current-enemy character)))
+            (active (if (in-area area-4-around (. character location) 
+                                 (. (current-enemy character) location))
+                      (melee character (current-enemy character))
+                      (close-in (a* (whole-level)) 
+                                character 
+                                (. (current-enemy character) location))))
+            (on-deactivate (show-confusion-icon character))
+            (transitions [(not (detected-enemies character)) finding-home])))

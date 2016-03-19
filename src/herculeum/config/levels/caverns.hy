@@ -51,7 +51,8 @@
                             (item-by-type 2 3 "armour")
                             (item-by-type 2 4 "potion")
                             (item-by-type 1 4 "food")))
-        (creature-lists (option (creature 1 3 "rat")))
+        (creature-lists (option (creature 1 4 "rat")
+                                (creature 1 2 "fire beetle")))
         (connections (unique-stairs "lower caverns" "middle caverns"
                                     "grey stairs" "room" certainly)))
  (level "middle caverns"

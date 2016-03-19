@@ -33,7 +33,7 @@
                               melee detected-enemies]]
         [pyherc.ports [wait]]
         [pyherc.data.geometry [in-area area-4-around]]
-        [pyherc.ai [a-star show-alert-icon show-confusion-icon]])
+        [pyherc.ai [a-star :as a* show-alert-icon show-confusion-icon]])
 
 
 (defstatemachine RatAI [model action-factory rng]
@@ -44,7 +44,7 @@
   (finding-home initial-state
                 (on-activate (when (not (home-location character))
                                (select-home character wallside?)))
-                (active (travel-home (a-star (whole-level)) character))
+                (active (travel-home (a* (whole-level)) character))
                 (transitions [(arrived-destination? character) patrolling]
                              [(detected-enemies character) fighting]))
   
@@ -53,7 +53,7 @@
                              (map-home-area character
                                             (fill-along-walls (. character level)))) 
                            (clear-current-destination character))
-              (active (one-of (patrol-home-area (a-star (along-walls)) character)
+              (active (one-of (patrol-home-area (a* (along-walls)) character)
                               (wait character)))
               (transitions [(detected-enemies character) fighting]))
   
@@ -64,7 +64,7 @@
             (active (if (in-area area-4-around (. character location) 
                                  (. (current-enemy character) location))
                       (melee character (current-enemy character))
-                      (close-in (a-star (whole-level)) 
+                      (close-in (a* (whole-level)) 
                                 character 
                                 (. (current-enemy character) location))))
             (on-deactivate (show-confusion-icon character))

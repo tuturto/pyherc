@@ -70,15 +70,16 @@
                           (not (corridor? level x))))
                    (area-4-around location))))))
 
-(defn open-area? [level location]
-  "check if given location is in open area"
-  (let [[#t(x y) location]
-        [north #t(x (- y 1))]
-        [south #t(x (+ y 1))]
-        [east #t((+ x 1) y)]
-        [west #t((- x 1) y)]]
-    (and (not (blocks-movement level location))
-         (not (blocks-movement level north))
-         (not (blocks-movement level south))
-         (not (blocks-movement level east))
-         (not (blocks-movement level west)))))
+(with-decorator curry
+  (defn open-area? [level location]
+    "check if given location is in open area"
+    (let [[#t(x y) location]
+          [north #t(x (- y 1))]
+          [south #t(x (+ y 1))]
+          [east #t((+ x 1) y)]
+          [west #t((- x 1) y)]]
+      (and (not (blocks-movement level location))
+           (not (blocks-movement level north))
+           (not (blocks-movement level south))
+           (not (blocks-movement level east))
+           (not (blocks-movement level west))))))

@@ -110,7 +110,7 @@ def init_creatures(context):
     config.append(creature_config(name = 'fire beetle',
                                   body = 10,
                                   finesse = 11,
-                                  mind = 0,
+                                  mind = 2,
                                   hp = 4,
                                   speed = 3,
                                   icons = (firebeetle_f0, firebeetle_f1),

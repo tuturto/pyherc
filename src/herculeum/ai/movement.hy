@@ -26,7 +26,8 @@
 (import [random]        
         [toolz [curry]]
         [pyherc.ai [ai-state]]
-        [pyherc.data [next-to-wall? corridor? doorframe? blocks-movement]]
+        [pyherc.data [next-to-wall? corridor? doorframe? blocks-movement
+                      open-area?]]
         [pyherc.data.geometry [find-direction area-4-around]]
         [pyherc.data.level [tiles↜]]
         [pyherc.ports [wait move move-legal?]])
@@ -130,10 +131,24 @@
                    (not (blocks-movement level it))))
             (area-4-around location))))
 
+(defn along-open-space []
+  "create function to return all neighbours in open space in cardinal direction"
+  (fn [level location]
+    (filter (fn [it]
+              (and (open-area? level it)
+                   (not (blocks-movement level it))))
+            (area-4-around location))))
+
 (defn fill-along-walls [level]
   "create function to use flood fill along walls"
   (fn [location]
     (filter (wallside? level)
+            (area-4-around location))))
+
+(defn fill-open-space [level]
+  "create function to use flood fill in open space"
+  (fn [location]
+    (filter (open-area? level)
             (area-4-around location))))
 
 (defn home-area [character]
