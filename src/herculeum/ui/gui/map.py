@@ -431,9 +431,7 @@ class PlayMapWidget(QWidget):
         while (next_creature != player
                 and next_creature is not None
                 and self.model.end_condition == 0):
-            next_creature.act(model = self.model,
-                              action_factory = self.action_factory,
-                              rng = self.rng)
+            next_creature.act()
             next_creature = self.model.get_next_creature(self.rules_engine)
 
             if next_creature is None:

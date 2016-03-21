@@ -36,7 +36,7 @@
         [pyherc.data.geometry [in-area area-4-around]]
         [pyherc.ai [a-star :as a* show-alert-icon show-confusion-icon]])
 
-(defstatemachine FireBeetleAI [model action-factory rng]
+(defstatemachine FireBeetleAI []
   "AI routine for rats"
   (--init-- [character] (state character character))
 

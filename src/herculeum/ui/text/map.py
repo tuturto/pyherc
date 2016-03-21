@@ -101,9 +101,7 @@ class MapScreen():
             if next_creature == player:
                 self._handle_player_input()
             elif next_creature is not None:
-                next_creature.act(model = self.model,
-                                  action_factory = self.action_factory,
-                                  rng = self.rng)
+                next_creature.act()
             else:
                 self.model.end_condition = DIED_IN_DUNGEON
 

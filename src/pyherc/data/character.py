@@ -166,20 +166,11 @@ class Character():
 
     # @guarded_action
     @log_info
-    def act(self, model, action_factory, rng):
+    def act(self):
         """
         Triggers AI of this character
-
-        :param model: model where character is located
-        :type model: Model
-        :param action_factory: factory for creating actions
-        :type action_factory: ActionFactory
-        :param rng: random number generator
-        :type rng: Random
         """
-        self.artificial_intelligence(model,
-                                     action_factory,
-                                     rng)
+        self.artificial_intelligence()
 
     def __get_hp(self):
         """

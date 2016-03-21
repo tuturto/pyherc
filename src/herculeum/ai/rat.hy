@@ -36,7 +36,7 @@
         [pyherc.ai [a-star :as a* show-alert-icon show-confusion-icon]])
 
 
-(defstatemachine RatAI [model action-factory rng]
+(defstatemachine RatAI []
   "AI routine for rats"
   (--init-- [character] (state character character))
 
