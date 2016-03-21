@@ -45,7 +45,8 @@
   "Get unique value of given variable"
   (if (unique? variable)
     (first variable.values)
-    (assert false)))
+    (assert false 
+            (.format "variable is not unique: {0}" variable.values))))
 
 (defn unique? [variable]
   "does variable have exactly one value"
@@ -56,43 +57,50 @@
   (len variable.values))
 
 (defn narrow [context variable values]
-  "narrow down variable"
-  (let [[new-values (& variable.values values)]]
+  "narrow down variable. true if ok, false if not ok"
+  (let [[new-values (& variable.values values)]
+        [res true]]
     (if (= new-values (set []))
       false
       (if (= new-values variable.values)
         true
         (do (save context variable)
             (setv variable.values new-values)
-            (all (genexpr (constraint context variable)
-                          [constraint variable.constraints])))))))
+            (for [constraint (. variable constraints)]
+              (setv res (constraint context variable))
+              (when (not res)
+                (break)))
+            res)))))
 
 (defn save [context variable]
   "save variable state in undo stack"
   (.append (:variable-stack context) variable)
   (.append (:value-stack context) variable.values)
-  (setv variable.last-save-frame-pointer (:frame-pointer context)))
+  (setv variable.last-save-frame-pointer (frame-pointer context)))
 
-(defn restore-values [context variable frame-pointer]
+(defn restore-values [context variable frame]
   "restore variable states from undo stack"
-  (while (> (len (:variable-stack context)) frame-pointer)
+  (while (> (len (:variable-stack context)) frame)
     (let [[var (.pop (:variable-stack context))]
           [vals (.pop (:value-stack context))]]
       (setv var.values vals)))
-  (assoc context :frame-pointer frame-pointer))
+  (frame-pointer context frame))
 
 (fact are-equal!
-      "equality constraint"
+      "equality constraint"      
       (if (= updated-variable var1)
         (narrow context var2 updated-variable.values)
         (narrow context var1 updated-variable.values)))
 
 (fact are-inequal!
-      "inequality constraint"
-      (when (value? var1)
-        (narrow context var2 (- var2.values var1.values)))
-      (when (value? var2)
-        (narrow context var1 (- var1.values var2.values))))
+      "inequality constraint"      
+      (cond [(and (= updated-variable var1)
+                  (unique? var1))
+             (narrow context var2 (- var2.values var1.values))]
+            [(and (= updated-variable var2)
+                  (unique? var2))
+             (narrow context var1 (- var1.values var2.values))]
+            [true true]))
 
 (fact less-than!
       "smaller than constraint"
@@ -119,24 +127,37 @@
     (solve-one context variables)))
 
 (defn solve-one [context variables]
-  "solve all variables"  
+  "solve all variables, one by one"
   (if (all (map unique? variables))
-    (do (assoc context :solved true)        
-        variables)
+    (mark-solved context)
     (let [[variable (variable-to-solve variables)]
+          [values (.copy variable.values)]
           [frame (len (:variable-stack context))]]
-      (assoc context :frame-pointer frame)
-      (for [value variable.values]        
-        (do (when (not (:solved context))
-              (if (narrow context variable (set [value]))
-                (do (if (all (map value? variables))
-                      (if (not (solve-one context variables))
-                        (assert false))))
-                false))
-            (when (not (:solved context))
-              (restore-values context variable frame))))
-      (when (:solved context)
-        variables))))
+      (frame-pointer context frame)
+      (for [value values]
+        (if (not (solved? context))
+          (if (narrow context variable (set [value]))
+            (solve-one context variables)
+            (do (restore-values context variable frame)
+                (continue))) ;; narrowing failed and stack was restored, try next value
+          (break))))) ;; solution was found, break loop  
+  (if (solved? context) ;; we either have solution or no suitable value was found
+    variables
+    nil))
+
+(defn frame-pointer [context &optional [frame nil]]
+  "set or retrieve frame-pointer"
+  (when (not (is frame nil))
+    (assoc context :frame-pointer frame))
+  (:frame-pointer context))
+
+(defn mark-solved [context]
+  "mark context as solved"
+  (assoc context :solved true))
+
+(defn solved? [context]
+  "has the context been solved?"
+  (:solved context))
 
 (defn variable-to-solve [variables]
   "select next variable to solve"
