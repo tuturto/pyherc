@@ -94,7 +94,7 @@
         (assert-that (value var₁) (is- (equal-to (value var₂))))
         (assert-that (value var₁) (is-not- (equal-to (value var₃))))))
 
-(fact "matrix of four variables requiring backtracking can be solved"
+(fact "matrix of three variables requiring backtracking can be solved"
       (let [[var₁ (Variable 1 2 3 4)]
             [var₂ (Variable 1 2 3 4)]
             [var₃ (Variable 1 2 3 4)]]
