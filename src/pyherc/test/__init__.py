@@ -36,6 +36,7 @@ from pyherc.test.unit.test_level_config import *
 from pyherc.test.unit.test_library_generator import *
 from pyherc.test.unit.test_locations import *
 from pyherc.test.unit.test_lunge import *
+from pyherc.test.unit.test_markov import *
 from pyherc.test.unit.test_metamorphosis import *
 from pyherc.test.unit.test_mitosis import *
 from pyherc.test.unit.test_movement_mode import *
