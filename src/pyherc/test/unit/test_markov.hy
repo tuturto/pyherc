@@ -30,7 +30,8 @@
 
 (background infinite-foo-chain
             [factory (chain-factory :start-elements [#t("foo" 1 100)]
-                                    :elements {"foo" [#t("foo" 1 100)]})]
+                                    :elements {"foo" [#t("foo" 1 100)]}
+                                    :continue-fn (fn [item] true))]
             [chain (factory)])
 
 (fact "first element of chain can be read"
@@ -45,7 +46,8 @@
 
 (background one-element-chain
             [factory (chain-factory :start-elements [#t("foo" 1 100)]
-                                    :elements {"foo" []})]
+                                    :elements {"foo" [#t(nil 1 100)]}
+                                    :continue-fn (fn [item] (not (is item nil))))]
             [chain (factory)])
 
 (fact "one element markov chain contains only one element"
@@ -58,7 +60,8 @@
 (background flip-flop-chain
             [factory (chain-factory :start-elements [#t("flip" 1 100)]
                                     :elements {"flip" [#t("flop" 1 100)]
-                                               "flop" [#t("flip" 1 100)]})]
+                                               "flop" [#t("flip" 1 100)]}
+                                    :continue-fn (fn [item] true))]
             [chain (factory)])
 
 (fact "markov chain can switch between states"
@@ -76,7 +79,8 @@
                                                "bar" [#t("foo" 1 50)
                                                       #t("baz" 51 100)]
                                                "baz" [#t("foo" 1 50)
-                                                      #t("bar" 51 100)]})]
+                                                      #t("bar" 51 100)]}
+                                    :continue-fn (fn [item] true))]
             [chain (factory)])
 
 (fact "markov chain can have multiple transitions from single element"

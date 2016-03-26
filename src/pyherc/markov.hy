@@ -23,15 +23,15 @@
 (require pyherc.macros)
 (import random)
 
-(defn chain-factory [start-elements elements]
+(defn chain-factory [start-elements elements continue-fn]
   "create factory function that can create markov chain instances"
   (fn []
     "create generator for chain"
     (defn select-next-element [elements-list]
       "select element"
-      (let [[high (max (list-comp upper [#t(element lower upper) elements-list]))]
+      (let [[high (max (list-comp upper [#t (element lower upper) elements-list]))]
             [value (.randint random 0 high)]
-            [matches (list-comp element [#t(element lower upper) elements-list]
+            [matches (list-comp element [#t (element lower upper) elements-list]
                                 (> lower value upper))]]
         (if matches
           (first (.choice random matches))
@@ -42,9 +42,7 @@
     (yield current-element)
     (while running
       (setv next-elements (get elements current-element))
-      (if next-elements
-             (setv current-element (select-next-element next-elements))
-             (setv running false))
+      (setv current-element (select-next-element next-elements))
+      (setv running (continue-fn current-element))
       (when (not running) (break))
       (yield current-element))))
-
