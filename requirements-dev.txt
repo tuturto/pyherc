@@ -9,5 +9,5 @@ nose-cov==1.6
 python-coveralls==2.6.0
 hymn==0.5
 hypothesis==2.0.0
--e git://github.com/tuturto/archimedes.git#egg=archimedes
+git+https://github.com/tuturto/archimedes.git#egg=archimedes
 toolz==0.7.4
