@@ -76,3 +76,36 @@
 (defmacro one-of [&rest actions]
   "perform one of following actions randomly"
   `((.choice random [~@(ap-map `(fn [] ~it) actions)])))
+
+(defn multi-decorator [dispatch-fn]
+  (setv inner (fn [&rest args &kwargs kwargs]
+                (setv dispatch-key (apply dispatch-fn args kwargs))
+                (if (in dispatch-key inner.--multi--)
+                  (apply (get inner.--multi-- dispatch-key) args kwargs)
+                  (apply inner.--multi-default-- args kwargs))))
+  (setv inner.--multi-- {})
+  (setv inner.--doc-- dispatch-fn.--doc--)
+  (setv inner.--multi-default-- (fn [&rest args &kwargs kwargs] nil))
+  inner)
+ 
+(defn method-decorator [dispatch-fn &optional [dispatch-key nil]]
+  (fn [func]
+    (if (is dispatch-key nil)
+      (setv dispatch-fn.--multi-default-- func)
+      (assoc dispatch-fn.--multi-- dispatch-key func))
+    dispatch-fn))
+
+(defmacro defmulti [name params &rest body]
+  `(do (import [pyherc.macros [multi-decorator]])
+       (with-decorator multi-decorator
+         (defn ~name ~params ~@body))))
+ 
+(defmacro defmethod [name multi-key params &rest body]
+  `(do (import [pyherc.macros [method-decorator]])
+       (with-decorator (method-decorator ~name ~multi-key)
+         (defn ~name ~params ~@body))))
+ 
+(defmacro default-method [name params &rest body]
+  `(do (import [pyherc.macros [method-decorator]])
+       (with-decorator (method-decorator ~name)
+         (defn ~name ~params ~@body))))
