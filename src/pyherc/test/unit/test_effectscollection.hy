@@ -21,6 +21,7 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
+(require archimedes)
 
 (import [hamcrest [assert-that equal-to is- is-in is-not :as is-not!]]
         [pyherc.test.matchers [has-effect has-effect-handle

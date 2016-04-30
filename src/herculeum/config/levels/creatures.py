@@ -29,7 +29,8 @@ from herculeum.ai.rat import RatAI
 from herculeum.ai.firebeetle import FireBeetleAI
 from herculeum.ai import FlockingHerbivore, SkeletonWarriorAI
 from pyherc.generators import creature_config, inventory_config
-from pyherc.data.effects import EffectHandle, DamageModifier
+from pyherc.data.effects import (EffectHandle, DamageModifier, 
+                                 MovementModeModifier)
 from pyherc.rules.constants import (CRUSHING_DAMAGE, LIGHT_DAMAGE,
                                     PIERCING_DAMAGE, POISON_DAMAGE)
 
@@ -169,4 +170,24 @@ def init_creatures(context):
                                   inventory = skeleton_inventory,
                                   effects = skeleton_effects))
 
+    bat_effects = [MovementModeModifier(mode = 'fly',
+                                        duration = None,
+                                        frequency = None,
+                                        tick = None,
+                                        icon = 0,
+                                        title = '',
+                                        description = '')]
+
+    bat_f0 = surface_manager.add_icon('bat_f0', ':characters/bat_f0.png', 'B', ['yellow', 'dim'])
+    bat_f1 = surface_manager.add_icon('bat_f1', ':characters/bat_f1.png', 'B', ['yellow', 'dim'])
+    config.append(creature_config(name = 'bat',
+                                  body = 1,
+                                  finesse = 1,
+                                  mind = 1,
+                                  hp = 1,
+                                  speed = 1,
+                                  icons = (bat_f0, bat_f1),
+                                  attack = 1,
+                                  ai = FireBeetleAI,
+                                  effects = bat_effects))
     return config

@@ -37,7 +37,7 @@
         [pyherc.ai [a-star :as a* show-alert-icon show-confusion-icon]])
 
 (defstatemachine FireBeetleAI []
-  "AI routine for rats"
+  "AI routine for fire beetles"
   (--init-- [character] (state character character))
 
   "find a place to call a home"

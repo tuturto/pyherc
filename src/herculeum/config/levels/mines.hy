@@ -50,9 +50,11 @@
                             (item-by-type 1 2 "potion"))
                     (option (item-by-type 2 4 "weapon")
                             (item-by-type 2 4 "armour")))
-        (creature-lists (option (creature 1 2 "skeleton warrior"))
-                        (option (creature 1 3 "rat")
-                                (creature 1 3 "fungus")))
+        (creature-lists (option 
+                                (creature 10 11 "bat"))
+                        (option 
+                                
+                                (creature 10 11 "bat")))
         (connections (unique-stairs "first gate" "upper mines"
                                     "grey stairs" "room" unlikely)
                      (unique-stairs "upper mines" "lower mines"

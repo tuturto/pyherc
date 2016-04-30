@@ -18,7 +18,7 @@
 ;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
-
+ 
 (import logging)
 (import [decorator [decorator]])
 
@@ -31,19 +31,19 @@
   (with-decorator decorator
     (fn [wrapped-function &rest args &kwargs kwargs]
       (let [[logger-name wrapped-function.--name--]
-        [logger (.getLogger logging logger-name)]
-        [call-message (.join " " ["call" ":" (str args) (str kwargs)])]]
-    (.log logger log-level call-message)
-    (try (do
-          (let [[result (apply wrapped-function args kwargs)]
-            [result-message (.join " " ["return" ":" (str result)])]]
-        (.log logger log-level result-message)
-        result))
-         (catch [Exception] 
-           (do
-            (.exception logger (.format "{0} has thrown an exception" 
-                                        logger-name))
-            (raise))))))))
+            [logger (.getLogger logging logger-name)]
+            [call-message (.join " " ["call" ":" (str args) (str kwargs)])]]
+        (.log logger log-level call-message)
+        (try (do
+              (let [[result (apply wrapped-function args kwargs)]
+                    [result-message (.join " " ["return" ":" (str result)])]]
+                (.log logger log-level result-message)
+                result))
+             (catch [Exception]
+               (do
+                (.exception logger (.format "{0} has thrown an exception"
+                                            logger-name))
+                (raise))))))))
 
 (defn no-logger [wrapped-function]
   "logger that does nothing"
