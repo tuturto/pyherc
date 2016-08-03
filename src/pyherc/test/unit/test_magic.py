@@ -61,7 +61,7 @@ class TestMagic:
                     .with_target(character)
                     .build())
 
-        effect.trigger(mock())
+        effect.trigger()
 
         assert_that(character.hit_points, is_(equal_to(5)))
 
@@ -82,7 +82,7 @@ class TestMagic:
                     .with_target(character)
                     .build())
 
-        effect.trigger(mock())
+        effect.trigger()
 
         assert_that(character.hit_points, is_(equal_to(11)))
 
@@ -103,7 +103,7 @@ class TestMagic:
                     .with_target(character)
                     .build())
 
-        effect.trigger(mock())
+        effect.trigger()
 
         assert_that(character.hit_points, is_(equal_to(5)))
 

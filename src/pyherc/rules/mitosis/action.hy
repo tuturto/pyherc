@@ -30,17 +30,17 @@
         [pyherc.data.level [traps↜]]
         [pyherc.data.geometry [area-around]]
         [pyherc.data.constants [Duration]]
-        [pyherc.events.mitosis [new-mitosis-event]])
+        [pyherc.events.mitosis [new-mitosis-event]]
+        [pyherc])
 
 (defclass MitosisAction []
-  [[--init-- #d(fn [self character character-generator rng character-limit dying-rules]
+  [[--init-- #d(fn [self character character-generator rng character-limit]
                  "default constructor"
                  (-> (super) (.--init--))
                  (setv self.character character)
                  (setv self.character-generator character-generator)
                  (setv self.rng rng)
                  (setv self.character-limit character-limit)
-                 (setv self.dying-rules dying-rules)
                  nil)]
    [legal? #d(fn [self]
                "check if action is possible to perform"
@@ -68,7 +68,7 @@
                                                                     new-character))
                     (ap-each (traps↜ new-character.level new-character.location)
                              (.on-enter it new-character))
-                    (.check-dying self.dying-rules new-character)
+                    (call check-dying new-character)
                     (Right self.character))
                   (Left self.character)))]])
 

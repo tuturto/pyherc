@@ -34,7 +34,7 @@ class EndScreen(QDialog):
 
     .. versionadded:: 0.8
     """
-    def __init__(self, model, config, dying_rules, parent, flags,
+    def __init__(self, model, config, parent, flags,
                  controller):
         """
         Default constructor
@@ -47,7 +47,6 @@ class EndScreen(QDialog):
         self.instruction_label = None
         self.date_label = None
         self.score_label = None
-        self.dying_rules = dying_rules
         self.controller = controller
 
         self.__set_layout(model,
@@ -65,7 +64,7 @@ class EndScreen(QDialog):
         self.name_label.setObjectName('no_border')
         self.date_label = QLabel('Date: ' + str(date.today()))
         self.date_label.setObjectName('no_border')
-        self.score_label = QLabel('Score: ' + str(self.dying_rules.calculate_score(model.player)))
+        self.score_label = QLabel('Score: ' + 'not implemented') # str(self.dying_rules.calculate_score(model.player)))
         self.score_label.setObjectName('no_border')
         self.result_label = QLabel(self.controller.get_end_description(model.end_condition))
         self.result_label.setObjectName('no_border')

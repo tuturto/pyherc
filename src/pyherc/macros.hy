@@ -60,6 +60,10 @@
   "like when, but inversed"
   `(when (not ~check) ~@body))
 
+(defmacro none [coll]
+  "like any, but inversed"
+  `(not (any ~coll)))
+
 (defreader s [data]
   "simple string joiner"
   `(.join " " [~@data]))

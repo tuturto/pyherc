@@ -30,8 +30,7 @@ class DrinkAction():
     """
     Action for drinking
     """
-    def __init__(self, character, potion, effect_factory,
-                 dying_rules):
+    def __init__(self, character, potion, effect_factory):
         """
         Default constructor
 
@@ -43,7 +42,6 @@ class DrinkAction():
         self.character = character
         self.potion = potion
         self.effect_factory = effect_factory
-        self.dying_rules = dying_rules
 
     def execute(self):
         """
@@ -62,7 +60,7 @@ class DrinkAction():
                                              target=self.character)
 
                 if effect.duration == 0:
-                    effect.trigger(self.dying_rules)
+                    effect.trigger()
                 else:
                     self.character.add_effect(effect)
                 effect_spec.charges = effect_spec.charges - 1

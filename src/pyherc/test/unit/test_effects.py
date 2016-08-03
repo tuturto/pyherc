@@ -426,7 +426,6 @@ class TestEffectsInCombat():
                                                 mock(),
                                                 None),
                               effect_factory=factory,
-                              dying_rules=mock(),
                               additional_rules=mock())
 
         action.execute()

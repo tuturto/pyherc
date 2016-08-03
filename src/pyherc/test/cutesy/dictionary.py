@@ -29,7 +29,6 @@ from pyherc.generators import get_effect_creator
 from pyherc.data.effects import DamageEffect, Heal, Poison
 from pyherc.data import level_size, get_items, add_character
 from pyherc.data.geometry import find_direction
-from pyherc.rules import Dying
 from pyherc.ports import (attack, is_move_legal, move, set_action_factory, wait,
                           drop_item, cast, gain_domain)
 from pyherc.test.builders import (ActionFactoryBuilder,
@@ -303,7 +302,6 @@ class CastSpell():
                                  .build())
 
         set_action_factory(ActionFactoryBuilder()
-                           .with_dying_rules()
                            .with_spellcasting_factory(spell_casting_factory)
                            .build()) # TODO: mutating global state is bad
 
@@ -358,7 +356,6 @@ class Hit():
                           .with_attack_factory()
                           .with_drink_factory()
                           .with_inventory_factory()
-                          .with_dying_rules()
                           .build())
 
         set_action_factory(action_factory) # TODO: mutating global state is bad
@@ -431,7 +428,6 @@ class GainDomainAction():
         """
         set_action_factory(ActionFactoryBuilder()
                            .with_gain_domain_factory()
-                           .with_dying_rules()
                            .build()) # TODO: mutating global state is bad
 
         gain_domain(character=character,
@@ -532,7 +528,7 @@ def affect(target, effect_spec):
 
     add_history_value(target, 'hit_points')
 
-    new_effect.trigger(Dying())
+    new_effect.trigger()
 
 
 def with_(effect_spec):

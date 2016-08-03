@@ -27,7 +27,6 @@ Package for rules of the game
 """
 
 from .public import ActionFactory
-from .ending import Dying
 from .engine import RulesEngine
 
 from .perception import is_spotted

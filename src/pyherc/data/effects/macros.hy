@@ -31,7 +31,7 @@
     (let [[key (first x)]
           [value (second x)]]
       (cond
-       [(= key :trigger) `(method do-trigger [dying-rules] ~attributes ~value)]
+       [(= key :trigger) `(method do-trigger [] ~attributes ~value)]
        [(= key :add-event) `(method get-add-event [] ~attributes ~value)]
        [(= key :remove-event) `(method get-removal-event [] ~attributes ~value)]
        [true (macro-error key "key failure")])))
@@ -70,6 +70,3 @@
   `[~name (fn [self ~@params]
             (let [~@(genexpr `[~x (. self ~x)] [x attributes])]
               ~body))])
-
-(defmacro check-dying [target]
-  `(.check-dying dying-rules ~target))

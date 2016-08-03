@@ -23,6 +23,7 @@
 (require hy.contrib.anaphoric)
 (require pyherc.aspects)
 (require pyherc.macros)
+(require pyherc.rules.macros)
 (require hymn.dsl)
 
 (import [hymn.types.either [Left Right right?]]
@@ -34,60 +35,56 @@
         [pyherc.data.level [traps↜]]
         [pyherc.data.geometry [find-direction]]
         [pyherc.data.model [*escaped-dungeon*]]
-        [pyherc.events [new-move-event new-level-event]])
+        [pyherc.events [new-move-event new-level-event]]
+        [pyherc])
 
-(defclass MoveAction []
-  "action for moving"
-  [[--init-- (fn [self character new-location new-level skip-creature-check
-                  dying-rules]
-               "default initializer"
-               (super-init)
-               (set-attributes character
-                               new-location
-                               new-level
-                               skip-creature-check
-                               dying-rules)
-               nil)]
-   [execute #i(fn [self]
-                "execute this move"
-                (if (.legal? self)
-                  (let [[character self.character]
-                        [old-location character.location]
-                        [old-level character.level]
-                        [direction (find-direction old-location self.new-location)]]
-                    (move-character self.new-level
-                                    self.new-location
-                                    character)
-                    (.add-to-tick character (/ Duration.fast (speed-modifier character)))
-                    (when-not (in self.new-level (visited-levels character))
-                              (add-visited-level character self.new-level)
-                              (.raise-event character (new-level-event :character character
-                                                                       :new-level self.new-level)))
-                    (.raise-event character (new-move-event :character character
-                                                            :old-location old-location
-                                                            :old-level old-level
-                                                            :direction direction))
-                    (Right character))
-                  (do (.add-to-tick self.character Duration.instant)
-                      (Left self.character))))]
-   [legal? #d(fn [self]
-               "check if the move is possible to perform"
-               (let [[level self.new-level]
-                     [location self.new-location]]
-                 (cond [(is level nil) false]
-                       [(blocks-movement level location) false]
-                       [(and (not self.skip-creature-check)
-                             (get-character level location)) false]
-                       [true true])))]
-   [--str-- (fn [self]
-              (.format "{0} at {1}:{2}" self.character self.new-location self.new-level))]])
+(action-dsl)
+
+(defaction move "action for moving"
+  :parameters [character new-location new-level skip-creature-check]
+  
+  :legal-action (let [[character self.character]
+                      [old-location character.location]
+                      [old-level character.level]
+                      [direction (find-direction old-location self.new-location)]]
+                  (move-character self.new-level
+                                  self.new-location
+                                  character)
+                  (.add-to-tick character (/ Duration.fast (speed-modifier character)))
+                  (when-not (in self.new-level (visited-levels character))
+                            (add-visited-level character self.new-level)
+                            (.raise-event character (new-level-event :character character
+                                                                     :new-level self.new-level)))
+                  (.raise-event character (new-move-event :character character
+                                                          :old-location old-location
+                                                          :old-level old-level
+                                                          :direction direction))
+                  (Right character))
+
+  :illegal-action (do (.add-to-tick self.character Duration.instant)
+                      (Left self.character))
+  
+  :legal? (none [(is (. self new-level) nil)
+                 (blocks-movement (. self new-level) (. self new-location))
+                 (and (not self.skip-creature-check)
+                      (get-character (. self new-level) (. self new-location)))])
+
+  
+  :to-string (.format "{0} at {1}:{2}" self.character self.new-location self.new-level))
+
+(defn trigger-traps [character]
+  "trigger traps for character and check if they died"
+  (ap-each (traps↜ (. character level) (. character location))
+           (.on-enter it character))
+  (call check-dying character)
+  (Right character))
 
 (defclass WalkAction []
   "action for walking"  
-  [[--init-- (fn [self character dying-rules base-action]
+  [[--init-- (fn [self character base-action]
                "default initializer"
                (super-init)
-               (set-attributes character dying-rules base-action)
+               (set-attributes character base-action)
                nil)]
    [legal? (fn [self]
              "check if the move is possible to perform"
@@ -95,10 +92,7 @@
    [execute #i(fn [self]
                 "execute this move"
                 (if (right? (.execute self.base-action))
-                  (do (ap-each (traps↜ self.character.level self.character.location)
-                           (.on-enter it self.character))
-                      (.check-dying self.dying-rules self.character)
-                      (Right self.character))
+                  (trigger-traps self.character)
                   (Left self.character)))]])
 
 (defclass FlyAction []
@@ -133,24 +127,20 @@
 
 (defclass SwitchPlacesAction []
   "action for switching places with another creature"
-  [[--init-- #d(fn [self character other-character dying-rules]
+  [[--init-- #d(fn [self character other-character]
                  "default initializer"
                  (super-init)
-                 (set-attributes character other-character dying-rules)
-                 (setv self.move-action₁ (WalkAction :character self.character
-                                                     :dying-rules dying-rules
+                 (set-attributes character other-character)
+                 (setv self.move-action₁ (WalkAction :character self.character                                                    
                                                      :base-action (MoveAction character
                                                                               self.other-character.location
                                                                               self.other-character.level
-                                                                              true
-                                                                              dying-rules)))
+                                                                              true)))
                  (setv self.move-action₂ (WalkAction :character self.other-character
-                                                     :dying-rules dying-rules
                                                      :base-action (MoveAction self.other-character
                                                                               self.character.location
                                                                               self.character.level
-                                                                              true
-                                                                              dying-rules)))
+                                                                              true)))
                  nil)]
    [execute #i(fn [self]
                 "execute this move"
@@ -170,7 +160,7 @@
                                                              :direction (find-direction location₂
                                                                                         location₁)))
                     (ap-each (traps↜ level₂ location₂) (.on-enter character₂))
-                    (.check-dying self.dying-rules character₂)
+                    (call check-dying character₂)
                     (Right character₁))
                   (do (.add-to-tick self.character Duration.instant)
                       (Left self.character₁))))]

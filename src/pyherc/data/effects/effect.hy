@@ -33,11 +33,11 @@
                (setv self.effect-name "effect")
                (setv self.multiple-allowed false)
                nil)]
-   [trigger (fn [self dying-rules]
+   [trigger (fn [self]
               "trigger the effect"
-              (.do-trigger self dying-rules)
+              (.do-trigger self)
               (.post-trigger self))]
-   [do-trigger (fn [self dying-rules]
+   [do-trigger (fn [self]
                  "override this method to contain logic of the effect"
                  nil)]
    [post-trigger (fn [self]

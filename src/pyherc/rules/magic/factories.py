@@ -35,14 +35,13 @@ class SpellCastingFactory(SubActionFactory):
     .. versionadded:: 0.9
     """
     @log_debug
-    def __init__(self, spell_factory, effects_factory, dying_rules):
+    def __init__(self, spell_factory, effects_factory):
         """
         Constructor for this factory
         """
         super().__init__()
         self.spell_factory = spell_factory
         self.effects_factory = effects_factory
-        self.dying_rules = dying_rules
         self.action_type = 'spell casting'
 
     @log_info
@@ -59,8 +58,7 @@ class SpellCastingFactory(SubActionFactory):
 
         return SpellCastingAction(caster=parameters.caster,
                                   spell=spell,
-                                  effects_factory=self.effects_factory,
-                                  dying_rules=self.dying_rules)
+                                  effects_factory=self.effects_factory)
 
     @log_debug
     def _get_spell_targets(self, parameters):

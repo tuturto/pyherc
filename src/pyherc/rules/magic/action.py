@@ -34,7 +34,7 @@ class SpellCastingAction():
     .. versionadded:: 0.9
     """
     @log_debug
-    def __init__(self, caster, spell, effects_factory, dying_rules):
+    def __init__(self, caster, spell, effects_factory):
         """
         Default constructor
 
@@ -44,14 +44,11 @@ class SpellCastingAction():
         :type spell: Spell
         :param effects_factory: factory for creating effects
         :type effects_factory: EffectsFactory
-        :param dying_rules: rules for dying
-        :type dying_rules: DyingRules
         """
         super().__init__()
         self.caster = caster
         self.spell = spell
         self.effects_factory = effects_factory
-        self.dying_rules = dying_rules
 
     @log_info
     def execute(self):
@@ -63,8 +60,7 @@ class SpellCastingAction():
 
         self.caster.spirit = self.caster.spirit - self.spell.spirit
 
-        self.spell.cast(effects_factory=self.effects_factory,
-                        dying_rules=self.dying_rules)
+        self.spell.cast(effects_factory=self.effects_factory)
 
         return Right(self.caster)
 

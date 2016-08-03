@@ -20,10 +20,12 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
+(require pyherc.macros)
 (require pyherc.data.effects.macros)
 
 (import [pyherc.data.damage [new-damage]]
-        [pyherc.events [damage-added damage-ended damage-triggered]])
+        [pyherc.events [damage-added damage-ended damage-triggered]]
+        [pyherc])
 
 (effect-dsl)
 
@@ -35,7 +37,7 @@
                                  (damage-triggered :target target
                                                    :damage damage-caused
                                                    :damage-type damage-type))
-                   (check-dying target))
+                   (call check-dying target))
         :add-event (damage-added :target target
                                  :effect self)
         :remove-event (damage-ended :target target

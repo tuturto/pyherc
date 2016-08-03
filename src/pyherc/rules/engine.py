@@ -31,19 +31,16 @@ class RulesEngine():
 
     .. versionadded:: 0.6
     """
-    def __init__(self, action_factory, dying_rules):
+    def __init__(self, action_factory):
         """
         Default constructor
 
         :param action_factory: factory for actions
         :type action_factory: ActionFactory
-        :param dying: rules for dying
-        :type dying: Dying
         """
         super().__init__()
 
         self.__action_factory = action_factory
-        self.__dying_rules = dying_rules
 
     def __get_action_factory(self):
         """
@@ -51,11 +48,4 @@ class RulesEngine():
         """
         return self.__action_factory
 
-    def __get_dying_rules(self):
-        """
-        Rules for dying
-        """
-        return self.__dying_rules
-
     action_factory = property(__get_action_factory)
-    dying_rules = property(__get_dying_rules)

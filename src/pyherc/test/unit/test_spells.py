@@ -30,7 +30,6 @@ from pyherc.data.effects import Effect, EffectHandle, Heal
 from pyherc.data.magic import Spell
 from pyherc.events import e_event_type
 from pyherc.generators import create_effect, get_effect_creator
-from pyherc.rules.ending import Dying
 from pyherc.rules.magic.action import SpellCastingAction
 from pyherc.test.builders import (CharacterBuilder, LevelBuilder, SpellBuilder,
                                   SpellGeneratorBuilder)
@@ -82,7 +81,6 @@ class TestSpellEffects():
         Default constructor
         """
         self.effect = None
-        self.dying_rules = None
         self.effect_handle = None
         self.spell = None
         self.effects = None
@@ -108,8 +106,6 @@ class TestSpellEffects():
 
         self.effects = get_effect_creator(effect_config)
 
-        self.dying_rules = mock(Dying)
-
         self.effect_handle = EffectHandle(trigger = 'on spell hit',
                                           effect = 'healing wind',
                                           parameters = {},
@@ -124,8 +120,7 @@ class TestSpellEffects():
         """
         Casting a spell should trigger the effect
         """
-        self.spell.cast(self.effects,
-                        self.dying_rules)
+        self.spell.cast(self.effects)
 
         assert_that(self.character.hit_points, is_(greater_than(10)))
 
@@ -151,16 +146,13 @@ class TestSpellCastingAction():
                       .build())
 
         effects_factory = mock()
-        dying_rules = mock()
 
         action = SpellCastingAction(caster = caster,
                                     spell = spell,
-                                    effects_factory = effects_factory,
-                                    dying_rules = dying_rules)
+                                    effects_factory = effects_factory)
         action.execute()
 
-        verify(spell).cast(effects_factory = effects_factory,
-                           dying_rules = dying_rules)
+        verify(spell).cast(effects_factory = effects_factory)
 
     def test_casting_spell_uses_spirit(self):
         """
@@ -174,12 +166,10 @@ class TestSpellCastingAction():
                       .with_spirit(20)
                       .build())
         effects_factory = mock()
-        dying_rules = mock()
 
         action = SpellCastingAction(caster = caster,
                                     spell = spell,
-                                    effects_factory = effects_factory,
-                                    dying_rules = dying_rules)
+                                    effects_factory = effects_factory)
         action.execute()
 
         assert_that(caster.spirit, is_(equal_to(10)))
@@ -200,12 +190,10 @@ class TestSpellCastingAction():
         caster.register_for_updates(listener)
 
         effects_factory = mock()
-        dying_rules = mock()
 
         action = SpellCastingAction(caster = caster,
                                     spell = spell,
-                                    effects_factory = effects_factory,
-                                    dying_rules = dying_rules)
+                                    effects_factory = effects_factory)
         action.execute()
 
         events = [event for event in listener.events

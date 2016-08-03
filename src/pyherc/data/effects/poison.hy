@@ -20,9 +20,11 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
+(require pyherc.macros)
 (require pyherc.data.effects.macros)
 
-(import [pyherc.events [poison-added poison-ended poison-triggered]])
+(import [pyherc.events [poison-added poison-ended poison-triggered]]
+        [pyherc])
 
 (effect-dsl)
 
@@ -32,7 +34,7 @@
                   (setv target.hit-points (- target.hit-points damage))
                   (.raise-event target (poison-triggered :target target
                                                          :damage damage))
-                  (check-dying target))
+                  (call check-dying target))
         :add-event (poison-added :target target
                                  :effect self)
         :remove-event (poison-ended :target target

@@ -38,11 +38,9 @@ class RulesEngineBuilder():
         super().__init__()
 
         self.action_factory = mock()
-        self.dying_rules = mock()
 
     def build(self):
         """
         Builds rules engine
         """
-        return RulesEngine(action_factory=self.action_factory,
-                           dying_rules=self.dying_rules)
+        return RulesEngine(action_factory=self.action_factory)

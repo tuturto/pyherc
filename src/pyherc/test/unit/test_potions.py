@@ -50,7 +50,6 @@ class TestPotions():
         self.model = None
         self.rng = None
         self.effect_factory = None
-        self.dying_rules = None
 
     def setup(self):
         """
@@ -69,10 +68,7 @@ class TestPotions():
                                    'title': 'title',
                                    'description': 'major heal'}})
 
-        self.dying_rules = mock()
-
-        drink_factory = DrinkFactory(self.effect_factory,
-                                     self.dying_rules)
+        drink_factory = DrinkFactory(self.effect_factory)
         set_action_factory(ActionFactory(self.model,
                                          drink_factory))
 

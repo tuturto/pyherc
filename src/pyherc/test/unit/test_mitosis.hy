@@ -52,7 +52,6 @@
                              (-> (MitosisFactoryBuilder)
                                  (.with-character-generator generator)
                                  (.with-character-limit 10)
-                                 (.with-dying-rules)
                                  (.build)))
                             (.build))]]
     (add-character level #t(5 5) character)

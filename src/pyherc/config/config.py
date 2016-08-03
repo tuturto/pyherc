@@ -34,7 +34,7 @@ from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level import PortalAdderFactory, new_dungeon, merge_level
 from pyherc.generators.level import portals
 from pyherc.ports import set_action_factory
-from pyherc.rules import Dying, RulesEngine
+from pyherc.rules import RulesEngine
 from pyherc.rules.combat import RangedCombatFactory
 from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,
                                            UnarmedCombatFactory)
@@ -93,10 +93,7 @@ class Configuration():
         """
         Initialises action factory, sub factories and various generators
         """
-        dying_rules = Dying()
-
-        move_factory = MoveFactory(self.level_generator_factory,
-                                   dying_rules)
+        move_factory = MoveFactory(self.level_generator_factory)
 
         effect_config = {}
         configurators = self.get_configurators(context.config_package,
@@ -109,18 +106,14 @@ class Configuration():
 
         effect_factory = get_effect_creator(effect_config)
 
-        unarmed_combat_factory = UnarmedCombatFactory(effect_factory,
-                                                      dying_rules)
-        melee_combat_factory = MeleeCombatFactory(effect_factory,
-                                                  dying_rules)
-        ranged_combat_factory = RangedCombatFactory(effect_factory,
-                                                    dying_rules)
+        unarmed_combat_factory = UnarmedCombatFactory(effect_factory)
+        melee_combat_factory = MeleeCombatFactory(effect_factory)
+        ranged_combat_factory = RangedCombatFactory(effect_factory)
         attack_factory = AttackFactory([unarmed_combat_factory,
                                         melee_combat_factory,
                                         ranged_combat_factory])
 
-        drink_factory = DrinkFactory(effect_factory,
-                                     dying_rules)
+        drink_factory = DrinkFactory(effect_factory)
 
         inventory_factory = InventoryFactory([PickUpFactory(),
                                               DropFactory(),
@@ -132,13 +125,11 @@ class Configuration():
         spell_factory = SpellGenerator()
 
         spell_casting_factory = SpellCastingFactory(spell_factory,
-                                                    effect_factory,
-                                                    dying_rules)
+                                                    effect_factory)
 
         mitosis_factory = MitosisFactory(self.creature_generator,
                                          self.rng,
-                                         60,
-                                         dying_rules)
+                                         60)
 
         metamorphosis_factory = MetamorphosisFactory(self.creature_generator,
                                                      self.rng)
@@ -161,8 +152,7 @@ class Configuration():
 
         set_action_factory(self.action_factory)
 
-        self.rules_engine = RulesEngine(self.action_factory,
-                                        dying_rules)
+        self.rules_engine = RulesEngine(self.action_factory)
 
     def get_creature_config(self, context):
         """

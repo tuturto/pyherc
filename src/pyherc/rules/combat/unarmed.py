@@ -46,4 +46,4 @@ class UnarmedToHit(ToHit):
             target: Character being attacked
             random_number_generator: Random number generator
         """
-        super().__init__(attacker, target, random_number_generator)
+        super().__init__(attacker, target)

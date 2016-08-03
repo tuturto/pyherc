@@ -47,7 +47,7 @@ class RangedToHit(ToHit):
         :type target: Character
         :rng: random number generator
         """
-        super().__init__(attacker, target, rng)
+        super().__init__(attacker, target)
 
 
 class RangedCombatFactory():
@@ -57,14 +57,13 @@ class RangedCombatFactory():
     .. versionadded:: 0.8
     """
     @log_debug
-    def __init__(self, effect_factory, dying_rules):
+    def __init__(self, effect_factory):
         """
         Constructor for this factory
         """
         super().__init__()
         self.attack_type = 'ranged'
         self.effect_factory = effect_factory
-        self.dying_rules = dying_rules
 
     @log_debug
     def can_handle(self, parameters):
@@ -102,7 +101,6 @@ class RangedCombatFactory():
             attacker=attacker,
             target=target,
             effect_factory=self.effect_factory,
-            dying_rules=self.dying_rules,
             additional_rules=AdditionalRangedRules(attacker))
 
         return attack

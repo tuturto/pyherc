@@ -54,7 +54,7 @@ class TestDamageEffect():
                   .with_target(target)
                   .build())
 
-        effect.trigger(dying_rules=mock())
+        effect.trigger()
 
         verify(model).raise_event(event_type_of('damage triggered'))
 
@@ -82,6 +82,6 @@ class TestDamageEffect():
                   .with_damage(5)
                   .build())
 
-        effect.trigger(dying_rules=mock())
+        effect.trigger()
 
         assert_that(target.hit_points, is_(equal_to(10)))

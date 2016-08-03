@@ -32,10 +32,9 @@
 
 (defclass MoveFactory [SubActionFactory]
   "factory for creating movement actions"
-  [[--init-- (fn [self level-generator-factory dying-rules]
+  [[--init-- (fn [self level-generator-factory]
                (super-init)
                (setv self.level-generator-factory level-generator-factory)
-               (setv self.dying-rules dying-rules)
                (setv self.action-type "move")
                nil)]
    [--str-- (fn [self]
@@ -49,53 +48,44 @@
                        [new-location nil]]
                    (if (= 9 direction)
                      (get-action-for-portal character
-                                            self.level-generator-factory
-                                            self.dying-rules)
+                                            self.level-generator-factory)
                      (do
                       (setv new-location (.get-location-at-direction character direction))
                       (cond [(blocks-movement new-level new-location)
                              (if (= (movement-mode character) "walk")
                                (WalkAction :character character
-                                           :dying-rules self.dying-rules
                                            :base-action (MoveAction character
                                                                     location
                                                                     new-level
-                                                                    false
-                                                                    self.dying-rules))
+                                                                    false))
                                (FlyAction :base-action (MoveAction character
                                                                    location
                                                                    new-level
-                                                                   false
-                                                                   self.dying-rules)))]
+                                                                   false)))]
                             [(and (get-character new-level new-location)
                                   character.artificial-intelligence
                                   (. (get-character new-level new-location) artificial-intelligence))
                              (get-place-switch-action character
-                                                      new-location
-                                                      self.dying-rules)]
+                                                      new-location)]
                             [true 
                              (if (= (movement-mode character) "walk")
                                (WalkAction :character character
-                                           :dying-rules self.dying-rules
                                            :base-action (MoveAction character
                                                                     new-location
                                                                     new-level
-                                                                    false
-                                                                    self.dying-rules))
+                                                                    false))
                                (FlyAction :base-action (MoveAction character
                                                                    new-location
                                                                    new-level
-                                                                   false
-                                                                   self.dying-rules)))])))))]])
+                                                                   false)))])))))]])
 
-(defn get-place-switch-action [character new-location dying-rules]
+(defn get-place-switch-action [character new-location]
   "get action for two characters switching places"
   (let [[other-character (get-character character.level new-location)]]
     (SwitchPlacesAction character
-                        other-character
-                        dying-rules)))
+                        other-character)))
 
-(defn get-action-for-portal [character level-generator-factory dying-rules]
+(defn get-action-for-portal [character level-generator-factory]
   "get action for entering portal"
   (let [[location character.location]
         [level character.level]
@@ -107,13 +97,11 @@
           (MoveAction character
                       (landing-location other-end)
                       other-end.level
-                      false
-                      dying-rules)))
+                      false)))
       (MoveAction character
                   location
                   level
-                  false
-                  dying-rules))))
+                  false))))
 
 (defn landing-location [portal]
   "get landing spot on or around a portal"

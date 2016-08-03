@@ -26,14 +26,13 @@
         [pyherc.rules.factory [SubActionFactory]])
 
 (defclass MitosisFactory [SubActionFactory]
-  [[--init-- #i(fn [self character-generator rng character-limit dying-rules]
+  [[--init-- #i(fn [self character-generator rng character-limit]
                  "default constructor"
                  (-> (super) (.--init--))
                  (setv self.character-generator character-generator)
                  (setv self.rng rng)
                  (setv self.character-limit character-limit)
                  (setv self.action-type "mitosis")
-                 (setv self.dying-rules dying-rules)
                  nil)]
    [can-handle #d(fn [self parameters]
                    "can this factory handle a given action"
@@ -43,5 +42,4 @@
                    (MitosisAction parameters.character
                                   self.character-generator
                                   self.rng
-                                  self.character-limit
-                                  self.dying-rules))]])
+                                  self.character-limit))]])

@@ -78,14 +78,12 @@ class Spell():
         self.effects.remove_effect_handle(handle)
 
     @log_info
-    def cast(self, effects_factory, dying_rules):
+    def cast(self, effects_factory):
         """
         Cast the spell
 
         :param effects_factory: factory for creating effects
         :type effects_factory: EffectsFactory
-        :param dying_rules: rules for dying
-        :type dying_rules: Dying
         """
         handles = self.effects.get_effect_handles('on spell hit')
         effects = []
@@ -100,6 +98,6 @@ class Spell():
 
         for effect in effects:
             if not effect.duration or effect.duration <= 0:
-                effect.trigger(dying_rules)
+                effect.trigger()
             else:
                 effect.target.add_effect(effect)

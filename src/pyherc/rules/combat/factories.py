@@ -57,14 +57,13 @@ class UnarmedCombatFactory():
     Factory for producing unarmed combat actions
     """
     @log_debug
-    def __init__(self, effect_factory, dying_rules):
+    def __init__(self, effect_factory):
         """
         Constructor for this factory
         """
         super().__init__()
         self.attack_type = 'unarmed'
         self.effect_factory = effect_factory
-        self.dying_rules = dying_rules
 
     def __str__(self):
         return 'unarmed combat factory'
@@ -104,7 +103,6 @@ class UnarmedCombatFactory():
             attacker=attacker,
             target=target,
             effect_factory=self.effect_factory,
-            dying_rules=self.dying_rules,
             additional_rules=AdditionalRules(attacker))
 
         return attack
@@ -133,14 +131,13 @@ class MeleeCombatFactory():
     Factory for producing melee combat actions
     """
     @log_debug
-    def __init__(self, effect_factory, dying_rules):
+    def __init__(self, effect_factory):
         """
         Constructor for this factory
         """
         super().__init__()
         self.attack_type = 'melee'
         self.effect_factory = effect_factory
-        self.dying_rules = dying_rules
 
     def __str__(self):
         return 'melee combat factory'
@@ -181,7 +178,6 @@ class MeleeCombatFactory():
             attacker=attacker,
             target=target,
             effect_factory=self.effect_factory,
-            dying_rules=self.dying_rules,
             additional_rules=AdditionalRules(attacker))
 
         return attack

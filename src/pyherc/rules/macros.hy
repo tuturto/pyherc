@@ -20,6 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
+(require pyherc.macros)
+
 (defmacro date-rules [&rest rule-specs]
   `(defn get-special-events [year month day]
      (let [[events []]]
@@ -33,7 +35,8 @@
 
 (defmacro action-interface-dsl []
   `(import [hymn.types.maybe [nothing?]]
-           [pyherc.ports [interface]]))
+           [pyherc.ports [interface]]
+           pyherc))
 
 (defmacro/g! run-action [param]
   `(let [[~g!action (interface.*factory* ~param)]]
@@ -53,3 +56,60 @@
                   (set-attributes ~@attributes)
                   (setv self.action-type ~type)
                   nil)]]))
+
+(defmacro action-dsl []
+  `(import [hy [HySymbol]]))
+
+(defmacro defaction [name description &rest param-list]
+  #s("define action class\n"
+     "for now dying rules are implicitly passed in, but in the future this will be removed "
+     "in favour of having global access to dying rules via vtable.")
+  (setv action-name (HySymbol (.join "" [(.title name) "Action"])))
+
+  (setv pair-list
+    (list (zip (slice param-list 0 nil 2)
+               (slice param-list 1 nil 2))))
+
+  (setv init-params [])
+  (setv legal-action nil)
+  (setv illegal-action nil)
+  (setv legal-check nil)
+  (setv str-code `("no string representation has been defined for this action"))
+
+  (ap-each pair-list (cond [(= (first it) :parameters)
+                            (setv init-params (second it))]
+                           [(= (first it) :legal-action)
+                            (setv legal-action (second it))]
+                           [(= (first it) :illegal-action)
+                            (setv illegal-action (second it))]
+                           [(= (first it) :legal?)
+                            (setv legal-check (second it))]
+                           [(= (first it) :to-string)
+                            (setv str-code (second it))]
+                           [true (macro-error nil (.join "" ["unknown parameter: " (first it)]))]))
+
+  (when (is legal-action nil) (macro-error nil "legal action was not defined"))
+  (when (is illegal-action nil) (macro-error nil "illegal action was not defined"))
+  (when (is legal-check nil) (macro-error nil "legality check was not defined"))
+  
+  `(defclass ~action-name []
+     ~description
+     [[--init-- (fn [self ~@init-params]
+                  "default initializer"
+                  (super-init)
+                  (set-attributes ~@init-params)
+                  nil)]
+      [execute #i(fn [self]
+                   #s("execute this action\n"
+                      "This should return Right X when everything was succesfully completed. "
+                      "Otherwise this will return Left X.")
+                   "execute this action"
+                   (if (.legal? self)
+                     ~legal-action
+                     ~illegal-action))]
+      [legal? #d(fn [self]
+                  "check if the action is legal enough to be executed"
+                  ~legal-check)]
+      [--str-- (fn [self]
+                 "string representation of this action"
+                 ~str-code)]]))

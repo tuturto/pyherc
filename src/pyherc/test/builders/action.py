@@ -23,7 +23,6 @@
 """
 Module for action factory builders
 """
-from pyherc.rules import Dying
 from pyherc.rules.combat import RangedCombatFactory
 from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,
                                            UnarmedCombatFactory)
@@ -56,7 +55,6 @@ class ActionFactoryBuilder():
 
         self.factories = []
 
-        self.dying_rules = Dying()
         self.effect_factory = None
         self.use_real_attack_factory = False
         self.use_real_drink_factory = False
@@ -65,7 +63,6 @@ class ActionFactoryBuilder():
         self.use_real_spellcasting_factory = False
         self.use_real_wait_factory = False
         self.use_real_gain_domain_factory = False
-        self.use_real_dying_rules = False
         self.use_real_mitosis_factory = False
         self.use_real_metamorphosis_factory = False
         self.use_real_dig_factory = False
@@ -146,13 +143,6 @@ class ActionFactoryBuilder():
         self.effect_factory = effect_factory
         return self
 
-    def with_dying_rules(self):
-        """
-        Configure action factory to use dying rules
-        """
-        self.use_real_dying_rules = True
-        return self
-
     def with_gain_domain_factory(self, gain_domain_factory=None):
         """
         Configure action factory to use gain domain factory
@@ -214,16 +204,10 @@ class ActionFactoryBuilder():
         :returns: action factory
         :rtype: ActionFactory
         """
-        if self.use_real_dying_rules:
-            self.dying_rules = Dying()
-
         if self.use_real_attack_factory:
-            unarmed_combat_factory = UnarmedCombatFactory(self.effect_factory,
-                                                          self.dying_rules)
-            melee_combat_factory = MeleeCombatFactory(self.effect_factory,
-                                                      self.dying_rules)
-            ranged_combat_factory = RangedCombatFactory(self.effect_factory,
-                                                        self.dying_rules)
+            unarmed_combat_factory = UnarmedCombatFactory(self.effect_factory)
+            melee_combat_factory = MeleeCombatFactory(self.effect_factory)
+            ranged_combat_factory = RangedCombatFactory(self.effect_factory)
             self.factories.append(AttackFactory([unarmed_combat_factory,
                                                  melee_combat_factory,
                                                  ranged_combat_factory]))
@@ -231,7 +215,6 @@ class ActionFactoryBuilder():
         if self.use_real_drink_factory:
             self.factories.append((DrinkFactoryBuilder()
                                    .with_effect_factory(self.effect_factory)
-                                   .with_dying_rules(self.dying_rules)
                                    .build()))
 
         if self.use_real_inventory_factory:
@@ -241,7 +224,7 @@ class ActionFactoryBuilder():
                                                     UnEquipFactory()]))
 
         if self.use_real_move_factory:
-            self.factories.append(MoveFactory(None, self.dying_rules))
+            self.factories.append(MoveFactory(None))
 
         if self.use_real_spellcasting_factory:
             self.factories.append(SpellCastingFactoryBuilder().build())
@@ -254,7 +237,6 @@ class ActionFactoryBuilder():
 
         if self.use_real_mitosis_factory:
             self.factories.append(MitosisFactoryBuilder()
-                                  .with_dying_rules(self.dying_rules)
                                   .build())
 
         if self.use_real_metamorphosis_factory:
@@ -282,9 +264,6 @@ class DrinkFactoryBuilder():
         super().__init__()
 
         self.effect_factory = None
-        self.dying_rules = Dying()
-
-        self.use_real_dying_rules = False
 
     def with_effect_factory(self, effect_factory):
         """
@@ -293,25 +272,11 @@ class DrinkFactoryBuilder():
         self.effect_factory = effect_factory
         return self
 
-    def with_dying_rules(self, dying_rules=None):
-        """
-        Set dying rules to use
-        """
-        if dying_rules is not None:
-            self.dying_rules = dying_rules
-        else:
-            self.use_real_dying_rules = True
-        return self
-
     def build(self):
         """
         Builds drink factory
         """
-        if self.use_real_dying_rules:
-            self.dying_rules = Dying()
-
-        return DrinkFactory(self.effect_factory,
-                            self.dying_rules)
+        return DrinkFactory(self.effect_factory)
 
 
 class WaitFactoryBuilder():
@@ -408,8 +373,7 @@ class SpellCastingFactoryBuilder():
             pass
 
         return SpellCastingFactory(spell_factory=self.spell_factory,
-                                   effects_factory=self.effects_factory,
-                                   dying_rules=Dying())
+                                   effects_factory=self.effects_factory)
 
 class MitosisFactoryBuilder():
     """
@@ -423,8 +387,6 @@ class MitosisFactoryBuilder():
         self.character_generator = None
         self.character_limit = 30
         self.rng = Random()
-        self.dying_rules = Dying()
-        self.use_real_dying_rules = False
 
     def with_character_limit(self, character_limit):
         """
@@ -446,25 +408,13 @@ class MitosisFactoryBuilder():
         """
         self.rng = rng
 
-    def with_dying_rules(self, dying_rules=None):
-        """
-        Configure rules for dying
-        """
-        if dying_rules:
-            self.dying_rules = dying_rules
-        else:
-            self.dying_rules = Dying()
-
-        return self
-
     def build(self):
         """
         Builds mitosis factory
         """
         return MitosisFactory(character_generator=self.character_generator,
                               character_limit=self.character_limit,
-                              rng=self.rng,
-                              dying_rules=self.dying_rules)
+                              rng=self.rng)
 
 class MetamorphosisFactoryBuilder():
     """

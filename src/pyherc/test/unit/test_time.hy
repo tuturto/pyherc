@@ -122,7 +122,7 @@
           (.add-effect creature effect)
           (.get-next-creature model rules-engine)
           (-> (verify effect)
-              (.trigger (any-))))))
+              (.trigger)))))
 
 (fact "tick of an effect will be reset after it has been triggered"
       (with-background effects [creature long-effect model rules-engine]

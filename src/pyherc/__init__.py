@@ -27,3 +27,5 @@ pyherc is a rogue clone
 import hy
 
 vtable = {}
+
+import pyherc.rules.new_dying
