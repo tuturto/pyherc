@@ -78,7 +78,6 @@ class EventMessageWidget(QWidget):
 
         self.text_edit = QTextEdit()
         self.text_edit.setReadOnly(True)
-        self.text_edit.setText('You set out to adventure')
 
         self.horizontal_layout.addWidget(self.text_edit)
 
@@ -121,7 +120,7 @@ class EventMessageWidget(QWidget):
         if e_event_type(event) in self.event_types_to_show:
             if e_event_type(event) == 'new level':
                 if e_character(event) is self.character:
-                    self.text_edit.append("You have reached new level: {0}\n{1}".format(
+                    self.text_edit.append("You have reached new level: {0} - {1}".format(
                         level_name(e_level(event)),
                         level_description(e_level(event))))
             else:

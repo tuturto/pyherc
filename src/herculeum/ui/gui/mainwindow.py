@@ -165,12 +165,13 @@ class MainWindow(QMainWindow):
         if result == QDialog.Accepted:
             player = start_dialog.player_character
 
-            self.controller.setup_world(self.application.world,
-                                        player)
+            intro_text = self.controller.setup_world(self.application.world,
+                                                     player)
 
             player.register_for_updates(self.map_window.hit_points_widget)
             self.map_window.hit_points_widget.show_hit_points(player)
             self.map_window.hit_points_widget.show_spirit_points(player)
+            self.map_window.message_widget.text_edit.setText(intro_text)
 
             self.__show_map_window()
 
