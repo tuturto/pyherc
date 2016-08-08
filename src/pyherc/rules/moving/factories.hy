@@ -21,87 +21,106 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
+(require pyherc.rules.macros)
 
-(import [random]
+(import [random]        
+        [hymn.types.either [Left Right right?]]
         [pyherc.aspects [log-debug log-info]]
-        [pyherc.data [get-portal blocks-movement get-character movement-mode]]
-        [pyherc.data.geometry [area-around]]
-        [pyherc.rules.factory [SubActionFactory]]
-        [pyherc.rules.moving.action [EscapeAction MoveAction FlyAction
-                                     SwitchPlacesAction WalkAction]])
+        [pyherc.data [remove-character get-portal blocks-movement get-character
+                      movement-mode free-passage
+                      add-character move-character add-visited-level
+                      visited-levels speed-modifier]]
+        [pyherc.data.constants [Duration]]
+        [pyherc.data.level [traps↜]]
+        [pyherc.data.geometry [find-direction area-around]]
+        [pyherc.data.model [*escaped-dungeon*]]
+        [pyherc.events [new-move-event new-level-event]]
+        [pyherc])
 
-(defclass MoveFactory [SubActionFactory]
-  "factory for creating movement actions"
-  [[--init-- (fn [self level-generator-factory]
-               (super-init)
-               (setv self.level-generator-factory level-generator-factory)
-               (setv self.action-type "move")
-               nil)]
-   [--str-- (fn [self]
-              "move factory")]   
-   [get-action (fn [self parameters]
-                 "create movement action"
-                 (let [[character parameters.character]
-                       [location character.location]
-                       [new-level character.level]
-                       [direction parameters.direction]
-                       [new-location nil]]
-                   (if (= 9 direction)
-                     (get-action-for-portal character
-                                            self.level-generator-factory)
-                     (do
-                      (setv new-location (.get-location-at-direction character direction))
-                      (cond [(blocks-movement new-level new-location)
-                             (if (= (movement-mode character) "walk")
-                               (WalkAction :character character
-                                           :base-action (MoveAction character
-                                                                    location
-                                                                    new-level
-                                                                    false))
-                               (FlyAction :base-action (MoveAction character
-                                                                   location
-                                                                   new-level
-                                                                   false)))]
-                            [(and (get-character new-level new-location)
-                                  character.artificial-intelligence
-                                  (. (get-character new-level new-location) artificial-intelligence))
-                             (get-place-switch-action character
-                                                      new-location)]
-                            [true 
-                             (if (= (movement-mode character) "walk")
-                               (WalkAction :character character
-                                           :base-action (MoveAction character
-                                                                    new-location
-                                                                    new-level
-                                                                    false))
-                               (FlyAction :base-action (MoveAction character
-                                                                   new-location
-                                                                   new-level
-                                                                   false)))])))))]])
+(defn+ move [character direction]
+  "move character to given direction"
+  (if (call move-legal? character direction)
+    (let [[location character.location]
+          [new-level character.level]        
+          [new-location nil]]
+      (if (= 9 direction)
+        (enter-portal-m character)
+        (do
+         (setv new-location (.get-location-at-direction character direction))
+         (cond 
+          [(both-ai-characters? (get-character new-level new-location)
+                                character)
+           (do (switch-places-m character direction)
+               (trigger-traps-m character)
+               (trigger-traps-m (get-character new-level location))
+               (Right character))]
+          [true (do (move-character-to-location-m character new-location new-level)
+                    (trigger-traps-m character)
+                    (Right character))]))))
+    (do (.add-to-tick character (/ Duration.fast (speed-modifier character)))
+        (Left character))))
 
-(defn get-place-switch-action [character new-location]
-  "get action for two characters switching places"
-  (let [[other-character (get-character character.level new-location)]]
-    (SwitchPlacesAction character
-                        other-character)))
+(defn+ move-legal? [character direction]
+  "is given move legal?"
+  (if (= direction 9)
+    true
+    (let [[new-location (.get-location-at-direction character direction)]]
+      (all [(is-not (. character level) nil)
+            (free-passage (. character level) new-location)
+            (ap-if (get-character (. character level) new-location)
+                   (both-ai-characters? it character)
+                   true)]))))
 
-(defn get-action-for-portal [character level-generator-factory]
+(defn switch-places-m [character direction]
+  "make this character switch places with another in given direction"
+  (let [[new-location (.get-location-at-direction character direction)]
+        [another-character (get-character (. character level) new-location)]]
+       (move-character-to-location-m another-character (. character location) (. character level))
+       (move-character-to-location-m character new-location (. character level))))
+
+(defn trigger-traps-m [character]
+  "trigger traps for character and check if they died"
+  (when (= (movement-mode character) "walk")
+    (ap-each (traps↜ (. character level) (. character location))
+             (.on-enter it character))
+    (call check-dying character))
+  (Right character))
+
+(defn move-character-to-location-m [character location level]
+  (let [[old-location character.location]
+        [old-level character.level]
+        [direction (find-direction old-location location)]]
+    (move-character level location character)
+    (.add-to-tick character (/ Duration.fast (speed-modifier character)))
+    (when-not (in level (visited-levels character))
+              (add-visited-level character level)
+              (.raise-event character (new-level-event :character character
+                                                       :new-level level)))
+    (.raise-event character (new-move-event :character character
+                                            :old-location old-location
+                                            :old-level old-level
+                                            :direction direction))
+    (Right character)))
+
+(defn enter-portal-m [character]
   "get action for entering portal"
   (let [[location character.location]
         [level character.level]
         [portal (get-portal level location)]]
     (if portal
       (if portal.exits-dungeon
-        (EscapeAction character)
-        (let [[other-end (.get-other-end portal level-generator-factory)]]
-          (MoveAction character
-                      (landing-location other-end)
-                      other-end.level
-                      false)))
-      (MoveAction character
-                  location
-                  level
-                  false))))
+        (do (setv (. character model end-condition) *escaped-dungeon*)
+            (Right character))
+        (let [[other-end (.get-other-end portal)]]
+          (do (move-character-to-location-m character
+                                            (landing-location other-end)
+                                            (. other-end level))
+              (trigger-traps-m character))))
+      (move-character-to-location-m character location level))))
+
+(defn both-ai-characters? [character1 character2]
+  (and character1 (. character1 artificial-intelligence)
+       character2 (. character2 artificial-intelligence)))
 
 (defn landing-location [portal]
   "get landing spot on or around a portal"

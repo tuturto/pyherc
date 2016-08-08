@@ -41,7 +41,6 @@
         [spawner (CharacterSpawner (fn [] [character₁]))]
         [trigger (RemoteTrigger spawner)]]
     (set-action-factory (-> (ActionFactoryBuilder)
-                            (.with-move-factory)
                             (.build)))
     {:level level
      :spawner spawner

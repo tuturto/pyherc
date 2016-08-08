@@ -213,7 +213,6 @@ class MainWindow(QMainWindow):
         """
         end_screen = EndScreen(self.application.world,
                                self.application.config.controls,
-                               self.application.rules_engine.dying_rules,
                                self,
                                Qt.Dialog | Qt.CustomizeWindowHint,
                                controller=EndScreenController())

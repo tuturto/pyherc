@@ -25,8 +25,9 @@
 from hamcrest import assert_that, greater_than, is_not, less_than, is_
 from pyherc.ai.pathfinding import a_star
 from pyherc.data.constants import Direction, Duration
+from pyherc.data import blocks_movement
 from pyherc.data.effects import DamageModifier
-from pyherc.data.geometry import find_direction
+from pyherc.data.geometry import find_direction, area_4_around
 from pyherc.ports import move
 from pyherc.test.bdd.features.helpers import (default_context, get_character,
                                               get_item, get_location, observed,
@@ -34,6 +35,12 @@ from pyherc.test.bdd.features.helpers import (default_context, get_character,
 from pyherc.test.cutesy import Adventurer, Goblin, take_random_step, Wizard, make
 from pyherc.test.matchers import is_dead
 
+
+def whole_level(level, location):
+    """a* helper to find all non-blocking tiles around given tile"""
+    for tile in area_4_around(location):
+        if not blocks_movement(level, tile):
+            yield tile
 
 @given('{character_name} is Adventurer')
 @observed
@@ -106,7 +113,8 @@ def impl(context, character_name, location_name):
     character = get_character(context, character_name)
     place = get_location(context, location_name)
 
-    path, connections, updated = a_star(character.location,
+    path, connections, updated = a_star(whole_level,
+                                        character.location, #TODO: adjacent nodes as first param
                                         place.location,
                                         character.level)
     assert len(path) > 1

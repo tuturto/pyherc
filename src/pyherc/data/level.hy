@@ -44,7 +44,7 @@
    :traps []
    :tags []
    :items []
-   :character nil
+   :characters []
    :portal nil
    :features []})
 
@@ -146,6 +146,10 @@
         (if (:floor map-tile) false true))
       true)))
 
+(defn free-passage [level location]
+  "check if given location is free to move"
+  (not (blocks-movement level location)))
+
 (defn blocks-los [level location]
   "check if given location blocks line of sight"
   (wall-tile level location))
@@ -196,22 +200,28 @@
     (.append (:characters level) character)
     (setv character.location location)
     (setv character.level level)
-    (assoc (get-or-create-tile level location) :character character))
+    (.append (:characters (get-or-create-tile level location)) character))
 
 (defn get-character [level location]
-  "get characters in a given tile"
+  #s("get characters in a given tile"
+     "as a temporary measure, this will return only the first of characters."
+     "TODO: replace/remove")  
   (let  [[map-tile (get-tile level location)]]
     (when map-tile
-      (:character map-tile))))
+      (first (:characters map-tile)))))
 
-(defn get-characters [level]
+(defn get-characters [level &optional [location nil]]
   "get all characters in level"
-  (genexpr character [character (:characters level)]))
+  (if location
+    (let  [[map-tile (get-tile level location)]]
+      (when map-tile
+        (:character map-tile)))
+    (genexpr character [character (:characters level)])))
 
 #d(defn remove-character [level character]
     "remove character from level"
     (when character.location
-      (assoc (get-tile level character.location) :character nil))    
+      (.remove (:characters (get-tile level character.location)) character))
     (setv character.location #t())
     (when (in character (:characters level))
       (.remove (:characters level) character)))

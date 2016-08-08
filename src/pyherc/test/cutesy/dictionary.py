@@ -218,7 +218,6 @@ class TakeRandomStep():
         add_history_value(character, 'tick')
 
         action_factory = (ActionFactoryBuilder()
-                          .with_move_factory()
                           .build())
 
         directions = [direction for direction in range(1, 9)
@@ -352,7 +351,6 @@ class Hit():
         when(rng).randint(1, 6).thenReturn(1)
 
         action_factory = (ActionFactoryBuilder()
-                          .with_move_factory()
                           .with_attack_factory()
                           .with_drink_factory()
                           .with_inventory_factory()
@@ -642,7 +640,6 @@ class Drop():
         add_history_value(actor, 'tick')
 
         set_action_factory(ActionFactoryBuilder()
-                           .with_move_factory()
                            .with_attack_factory()
                            .with_drink_factory()
                            .with_inventory_factory()

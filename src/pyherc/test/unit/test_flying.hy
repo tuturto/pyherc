@@ -29,7 +29,8 @@
         [pyherc.ports [move set-action-factory]]
         [pyherc.test.builders [CharacterBuilder LevelBuilder
                                ActionFactoryBuilder]]
-        [hamcrest [assert-that is- equal-to]])
+        [hamcrest [assert-that is- equal-to]]
+        pyherc)
 
 (defn flying []
   "create effect that allows character to fly"
@@ -43,7 +44,6 @@
 
 (background default
             [action-factory (-> (ActionFactoryBuilder)
-                                (.with-move-factory)
                                 (.build))]
             [_ (set-action-factory action-factory)])
 
@@ -53,10 +53,13 @@
                          (.build))]
               [character₀ (-> (CharacterBuilder)
                               (.with-effect (flying))
+                              
                               (.build))]
               [character₁ (-> (CharacterBuilder)
                               (.with-effect (flying))
                               (.build))]]
+          (setv (. character₀ artificial-intelligence) (fn [] nil))
+          (setv (. character₁ artificial-intelligence) (fn [] nil))
           (add-character level #t(5 5) character₀)
           (add-character level #t(6 5) character₁)
           (move character₀ Direction.east)

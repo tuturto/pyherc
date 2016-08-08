@@ -24,6 +24,7 @@
 Module for end screen
 """
 from datetime import date
+import pyherc
 
 
 class EndScreen():
@@ -32,15 +33,13 @@ class EndScreen():
 
     .. versionadded:: 0.9
     """
-    def __init__(self, model, dying_rules, screen,
-                 controller):
+    def __init__(self, model, screen, controller):
         """
         Default constructor
         """
         super(EndScreen, self).__init__()
 
         self.model = model
-        self.dying_rules = dying_rules
         self.screen = screen.derwin(18, 40, 5, 20)
         self.controller = controller
 
@@ -52,9 +51,7 @@ class EndScreen():
         self.screen.border()
 
         self.screen.addstr(2, 2, 'Date: {0}'.format(date.today()))
-        self.screen.addstr(3, 2, 'Score: {0}'.format(
-                                        self.dying_rules.calculate_score(
-                                                        self.model.player)))
+        self.screen.addstr(3, 2, 'Score: {0}'.format(pyherc.vtable['\ufdd0:calculate-score'](self.model.player)))
         self.screen.addstr(5, 2, self.controller.get_end_description(
                                                     self.model.end_condition))
 

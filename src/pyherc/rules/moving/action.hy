@@ -95,35 +95,18 @@
                   (trigger-traps self.character)
                   (Left self.character)))]])
 
-(defclass FlyAction []
-  "action for flying"
-  [[--init-- (fn [self base-action]
-               "default initializer"
-               (super-init)
-               (set-attributes base-action)
-               nil)]
-   [legal? (fn [self]
-             "check if the move is possible to perform"
-             (.legal? self.base-action))]
-   [execute #i(fn [self]
-                "execute this move"
-                (.execute self.base-action))]])
+(defaction escape "action for escaping the dungeon"
+  :parameters [character]
 
-(defclass EscapeAction []
-  "action for escaping the dungeon"
-  [[--init-- #d(fn [self character]
-                 "default initializer"
-                 (super-init)
-                 (set-attributes character)
-                 nil)]
-   [execute #i(fn [self]
-                "execute this move"
-                (let [[model self.character.model]]
-                  (setv model.end-condition *escaped-dungeon*))
-                (Right self.character))]
-   [legal? #d(fn [self]
-               "check if move is possible to perform"
-               (= self.character.model.player self.character))]])
+  :legal-action (let [[model self.character.model]]
+                  (setv model.end-condition *escaped-dungeon*)
+                  (Right (. self character)))
+
+  :illegal-action (Left (. self character))
+
+  :legal? (= self.character.model.player self.character)
+  
+  :to-string (.format "{0} escaping dungeon" (. self character)))
 
 (defclass SwitchPlacesAction []
   "action for switching places with another creature"

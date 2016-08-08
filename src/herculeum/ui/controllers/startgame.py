@@ -49,9 +49,8 @@ class StartGameController():
         Setup playing world
         """
         world.player = player
-        level_generator = self.level_generator_factory.get_generator(self.start_level)  # noqa
 
-        world.dungeon = generate_dungeon(world, level_generator)
+        world.dungeon = generate_dungeon(world, self.start_level)
         world.level = world.dungeon.levels
 
         return self.generate_intro_text()

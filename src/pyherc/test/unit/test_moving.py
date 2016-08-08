@@ -27,7 +27,7 @@ Module for testing moving
 from hamcrest import assert_that, equal_to, is_
 from mockito import mock
 from pyherc.data import (Model, Portal, add_portal, add_character, get_characters,
-                         get_character)
+                         get_character, move_character)
 from pyherc.data.constants import Direction
 from pyherc.data.model import ESCAPED_DUNGEON
 from pyherc.ports import is_move_legal, move, set_action_factory
@@ -75,7 +75,6 @@ class TestEventDispatching():
         self.model.register_event_listener(self.listener)
 
         set_action_factory(ActionFactoryBuilder()
-                           .with_move_factory()
                            .build())
 
     def test_event_is_relayed(self):
@@ -111,6 +110,7 @@ class TestMoving():
         Setup the test case
         """
         self.character = (CharacterBuilder()
+                          .with_model(Model())
                           .build())
 
         self.level1 = (LevelBuilder()
@@ -133,7 +133,6 @@ class TestMoving():
         add_character(self.level1, (5, 5), self.character)
 
         set_action_factory(ActionFactoryBuilder()
-                           .with_move_factory()
                            .build())
 
     def test_moving_when_stairs_are_blocked(self):
@@ -182,7 +181,7 @@ class TestMoving():
         """
         Test that it is not possible to walk through walls
         """
-        self.character.location = (1, 1)
+        move_character(self.level1, (1, 1), self.character)
 
         move(character=self.character,
              direction=Direction.north)
@@ -228,7 +227,7 @@ class TestMoving():
         """
         Test that character can not walk through floor
         """
-        self.character.location = (6, 3)
+        move_character(self.level1, (6, 3), self.character)
 
         move(character=self.character,
              direction=Direction.enter)
@@ -251,6 +250,9 @@ class TestMoving():
         """
         Test that player taking escape stairs will create escape
         """
+        model = self.character.model
+        model.player = self.character
+        
         portal3 = Portal((None, None), None)
         portal3.exits_dungeon = True
         add_portal(self.level1, (2, 2), portal3)
@@ -259,7 +261,6 @@ class TestMoving():
         move(character=self.character,
              direction=Direction.enter)
 
-        model = self.character.model
         assert_that(model.end_condition, is_(equal_to(ESCAPED_DUNGEON)))
 
 
@@ -340,7 +341,6 @@ class TestSwitchingPlaces():
         add_character(self.level, (6, 5), self.monster_2)
 
         set_action_factory(ActionFactoryBuilder()
-                           .with_move_factory()
                            .build())
 
     def test_switch_places(self):

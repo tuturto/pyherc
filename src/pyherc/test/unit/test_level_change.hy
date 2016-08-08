@@ -52,15 +52,13 @@
 (defn setup []
   "setup test case"
   (let [[listener (mock)]
-        [level (-> (LevelBuilder)
-                   (.build))]
         [character (-> (CharacterBuilder)
-                       (.with-level level)
-                       (.with-location #t(5 5))
                        (.with-update-listener listener)
                        (.build))]
+        [level (-> (LevelBuilder)
+                   (.with-character character #t(5 5))
+                   (.build))]        
         [actions (-> (ActionFactoryBuilder)
-                     (.with-move-factory)
                      (.build))]]
     (set-action-factory actions)
     {:listener listener

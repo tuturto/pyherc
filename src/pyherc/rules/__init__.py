@@ -30,3 +30,5 @@ from .public import ActionFactory
 from .engine import RulesEngine
 
 from .perception import is_spotted
+
+import pyherc.rules.moving.factories

@@ -21,12 +21,14 @@
 ;; THE SOFTWARE.
 
 (require pyherc.aspects)
-(import [pyherc.aspects [log-info]])
-(import [pyherc.data [Dungeon find-free-space add-character]])
+(require pyherc.macros)
+(import [pyherc.aspects [log-info]]
+        [pyherc.data [Dungeon find-free-space add-character]]
+        [pyherc])
 
-#i(defn generate-dungeon [model level-generator]
+#i(defn generate-dungeon [model level-name]
     "generate start of the dungeon"
     (let [[dungeon (Dungeon)]
-      [level (level-generator nil)]]
+      [level (call generate-level level-name)]]
       (add-character level (find-free-space level) model.player)
       dungeon))

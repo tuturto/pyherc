@@ -26,6 +26,7 @@ Configuration for pyherc
 import random
 from functools import partial
 
+import pyherc
 from pyherc.generators import (generate_creature, get_effect_creator,
                                ItemConfigurations, ItemGenerator,
                                SpellGenerator, get_trap_creator)
@@ -47,10 +48,10 @@ from pyherc.rules.inventory.unequip import UnEquipFactory
 from pyherc.rules.mitosis.factory import MitosisFactory
 from pyherc.rules.metamorphosis.factory import MetamorphosisFactory
 from pyherc.rules.magic import SpellCastingFactory
-from pyherc.rules.moving.factories import MoveFactory
 from pyherc.rules.trapping.factory import TrappingFactory
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.waiting import WaitFactory
+import pyherc.rules.moving.factories
 
 
 class Configuration():
@@ -93,8 +94,6 @@ class Configuration():
         """
         Initialises action factory, sub factories and various generators
         """
-        move_factory = MoveFactory(self.level_generator_factory)
-
         effect_config = {}
         configurators = self.get_configurators(context.config_package,
                                                'init_effects')
@@ -139,8 +138,7 @@ class Configuration():
         trapping_factory = TrappingFactory(self.trap_generator)
 
         self.action_factory = ActionFactory(self.model,
-                                            [move_factory,
-                                             attack_factory,
+                                            [attack_factory,
                                              drink_factory,
                                              inventory_factory,
                                              wait_factory,
@@ -302,6 +300,8 @@ class Configuration():
             self.trap_generator,
             config,
             self.rng)
+
+        pyherc.vtable["\ufdd0:generate-level"] = self.level_generator_factory
 
     def extend_configuration(self, config, new_config):
         """

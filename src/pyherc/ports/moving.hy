@@ -27,11 +27,11 @@
 
 (defn move [character direction]
   "move character to specified direction"
-  (run-action (MoveParameters character direction)))
+  (call move character direction))
 
 (defn move-legal? [character direction]
   "check if movement is legal"
-  (legal-action? (MoveParameters character direction)))
+  (call move-legal? character direction))
 
 (defparams MoveParameters
   "move"

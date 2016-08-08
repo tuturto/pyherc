@@ -35,7 +35,6 @@ from pyherc.rules.inventory.unequip import UnEquipFactory
 from pyherc.rules.magic import GainDomainFactory, SpellCastingFactory
 from pyherc.rules.mitosis.factory import MitosisFactory
 from pyherc.rules.metamorphosis.factory import MetamorphosisFactory
-from pyherc.rules.moving.factories import MoveFactory
 from pyherc.rules.trapping.factory import TrappingFactory
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.waiting.factories import WaitFactory
@@ -59,7 +58,6 @@ class ActionFactoryBuilder():
         self.use_real_attack_factory = False
         self.use_real_drink_factory = False
         self.use_real_inventory_factory = False
-        self.use_real_move_factory = False
         self.use_real_spellcasting_factory = False
         self.use_real_wait_factory = False
         self.use_real_gain_domain_factory = False
@@ -67,13 +65,6 @@ class ActionFactoryBuilder():
         self.use_real_metamorphosis_factory = False
         self.use_real_dig_factory = False
         self.use_real_trapping_factory = False
-
-    def with_move_factory(self):
-        """
-        Configure action factory to use real move factory
-        """
-        self.use_real_move_factory = True
-        return self
 
     def with_attack_factory(self):
         """
@@ -222,9 +213,6 @@ class ActionFactoryBuilder():
                                                     DropFactory(),
                                                     EquipFactory(),
                                                     UnEquipFactory()]))
-
-        if self.use_real_move_factory:
-            self.factories.append(MoveFactory(None))
 
         if self.use_real_spellcasting_factory:
             self.factories.append(SpellCastingFactoryBuilder().build())

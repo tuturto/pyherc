@@ -40,7 +40,6 @@
                        (.build))]
             [_ (set-action-factory (-> (ActionFactoryBuilder)
                                        (.with-attack-factory)
-                                       (.with-move-factory)
                                        (.build)))])
 
 (fact "unarmed lunge moves attacker"

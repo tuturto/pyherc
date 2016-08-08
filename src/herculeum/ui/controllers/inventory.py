@@ -54,7 +54,7 @@ class InventoryController():
         elif is_weapon(item):
             if self.character.inventory.weapon is not None:
                 unequip(self.character,
-                        self.character.inventory.weapons)
+                        self.character.inventory.weapon)
             equip(self.character,
                   item)
         elif is_armour(item):

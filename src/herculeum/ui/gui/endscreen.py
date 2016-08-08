@@ -23,6 +23,7 @@
 """
 Module for displaying end screen
 """
+import pyherc
 from datetime import date
 
 from PyQt4.QtGui import QDialog, QLabel, QVBoxLayout
@@ -64,7 +65,7 @@ class EndScreen(QDialog):
         self.name_label.setObjectName('no_border')
         self.date_label = QLabel('Date: ' + str(date.today()))
         self.date_label.setObjectName('no_border')
-        self.score_label = QLabel('Score: ' + 'not implemented') # str(self.dying_rules.calculate_score(model.player)))
+        self.score_label = QLabel('Score: ' + str(pyherc.vtable['\ufdd0:calculate-score'](model.player)))
         self.score_label.setObjectName('no_border')
         self.result_label = QLabel(self.controller.get_end_description(model.end_condition))
         self.result_label.setObjectName('no_border')

@@ -103,7 +103,6 @@
                    #s("execute this action\n"
                       "This should return Right X when everything was succesfully completed. "
                       "Otherwise this will return Left X.")
-                   "execute this action"
                    (if (.legal? self)
                      ~legal-action
                      ~illegal-action))]

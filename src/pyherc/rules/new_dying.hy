@@ -41,7 +41,7 @@
   (ap-each (. character inventory)
            (.remove (. character inventory) it)
            (add-item (. character level) (. character location) it)
-           (.raise-event character (new-drop-event character item)))
+           (.raise-event character (new-drop-event character it)))
   (when (. character inventory weapon)
     (add-item (. character level)
               (. character location)
@@ -50,7 +50,7 @@
 
 (defn+ calculate-score [character]
   "calculate score for character"
-  (* (sum (list-comp (. cost item) [item (. character inventory)]))
+  (* (sum (list-comp (. item cost) [item (. character inventory)]))
      (cond [(= (. character model end-condition) *died-in-dungeon*) 0.75]
            [(= (. character model end-condition) *escaped-dungeon*) 1.25]
            [true 1.0])))

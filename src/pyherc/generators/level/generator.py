@@ -93,6 +93,14 @@ class LevelGeneratorFactory():
                                    description(self.config, level_type))
 
 
+    def __call__(self, level_type, portal = None):
+        """
+        Generate a level and connect it with portal
+        """
+        generator = self.get_generator(level_type)
+        return generator(portal)
+
+    
     @log_debug
     def get_sub_components(self, level_type, component_list, component_type):
         """

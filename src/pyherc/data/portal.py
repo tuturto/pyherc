@@ -24,6 +24,7 @@
 Module containing classes to represent Portals
 """
 
+import pyherc
 from pyherc.aspects import log_debug
 
 
@@ -52,7 +53,7 @@ class Portal():
         self.__update_listeners = []
 
     @log_debug
-    def get_other_end(self, level_generator_factory):
+    def get_other_end(self):
         """
         Returns the other end of the portal
 
@@ -62,9 +63,7 @@ class Portal():
         :rtype: Portal
         """
         if self.__other_end is None:
-            level_generator = level_generator_factory.get_generator(
-                self.level_generator_name)
-            level_generator(self)
+            pyherc.vtable['\ufdd0:generate-level'](self.level_generator_name, self)
 
         return self.__other_end
 
