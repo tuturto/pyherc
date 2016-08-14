@@ -29,7 +29,6 @@ from pyherc.test.bdd.features.helpers import get_character
 from pyherc.test.cutesy import hit, make
 from pyherc.test.cutesy.dictionary import add_history_value, get_history_value
 
-
 @when('{attacker_name} hits {target_name}')
 def impl(context, attacker_name, target_name):
     attacker = get_character(context, attacker_name)

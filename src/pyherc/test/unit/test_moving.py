@@ -31,7 +31,6 @@ from pyherc.data import (Model, Portal, add_portal, add_character, get_character
 from pyherc.data.constants import Direction
 from pyherc.data.model import ESCAPED_DUNGEON
 from pyherc.ports import is_move_legal, move, set_action_factory
-from pyherc.rules.moving.action import EscapeAction
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   LevelBuilder)
 from pyherc.test.helpers import EventListener
@@ -262,46 +261,6 @@ class TestMoving():
              direction=Direction.enter)
 
         assert_that(model.end_condition, is_(equal_to(ESCAPED_DUNGEON)))
-
-
-class TestEscapeAction():
-    """
-    Tests for escape action
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        super().__init__()
-
-    def test_player_character_can_escape(self):
-        """
-        Test that escape action for player character is legal
-        """
-        model = mock()
-
-        character = (CharacterBuilder()
-                     .as_player_character()
-                     .with_model(model)
-                     .build())
-
-        action = EscapeAction(character=character)
-
-        assert_that(action, is_legal())
-
-    def test_non_player_character_can_not_escape(self):
-        """
-        Non player characters should not be able to escape
-        """
-        model = mock()
-
-        character = (CharacterBuilder()
-                     .with_model(model)
-                     .build())
-
-        action = EscapeAction(character=character)
-
-        assert_that(action, is_illegal())
 
 
 class TestSwitchingPlaces():

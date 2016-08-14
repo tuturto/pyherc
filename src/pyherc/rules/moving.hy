@@ -22,6 +22,7 @@
 
 (require pyherc.macros)
 (require pyherc.rules.macros)
+(require hymn.dsl)
 
 (import [random]        
         [hymn.types.either [Left Right right?]]
@@ -29,7 +30,9 @@
         [pyherc.data [remove-character get-portal blocks-movement get-character
                       movement-mode free-passage
                       add-character move-character add-visited-level
-                      visited-levels speed-modifier]]
+                      visited-levels speed-modifier
+                      raise-event-m]]
+        [pyherc.data.new-character [add-tick-m]]
         [pyherc.data.constants [Duration]]
         [pyherc.data.level [traps↜]]
         [pyherc.data.geometry [find-direction area-around]]
@@ -50,15 +53,14 @@
          (cond 
           [(both-ai-characters? (get-character new-level new-location)
                                 character)
-           (do (switch-places-m character direction)
-               (trigger-traps-m character)
-               (trigger-traps-m (get-character new-level location))
-               (Right character))]
-          [true (do (move-character-to-location-m character new-location new-level)
-                    (trigger-traps-m character)
-                    (Right character))]))))
+           (do-monad-m [a₁ (switch-places-m character direction)
+                        a₂ (trigger-traps-m character)
+                        a₃ (trigger-traps-m (get-character new-level location))]
+                       character)]
+          [true (monad-> (move-character-to-location-m character new-location new-level)
+                         (trigger-traps-m))]))))
     (do (.add-to-tick character (/ Duration.fast (speed-modifier character)))
-        (Left character))))
+        (Left "moving wasn't legal"))))
 
 (defn+ move-legal? [character direction]
   "is given move legal?"
@@ -87,36 +89,53 @@
   (Right character))
 
 (defn move-character-to-location-m [character location level]
+  "move character to new location, process time and raise appropriate events"
   (let [[old-location character.location]
         [old-level character.level]
         [direction (find-direction old-location location)]]
-    (move-character level location character)
-    (.add-to-tick character (/ Duration.fast (speed-modifier character)))
-    (when-not (in level (visited-levels character))
-              (add-visited-level character level)
-              (.raise-event character (new-level-event :character character
-                                                       :new-level level)))
-    (.raise-event character (new-move-event :character character
+    (monad-> (set-character-location-m character level location)
+             (add-tick-m Duration.fast)
+             (add-visited-level-m level)
+             (raise-event-m (new-move-event :character character
                                             :old-location old-location
                                             :old-level old-level
-                                            :direction direction))
-    (Right character)))
+                                            :direction direction)))))
+
+(defn set-character-location-m [character level location]
+  "move character to new location"
+  (left-if-nil [character level location]
+               (move-character level location character)
+               (Right character)))
+
+(defn add-visited-level-m [character level]
+  "mark level visited for a character"
+  (left-if-nil [character level]
+               (when-not (in level (visited-levels character))
+                         (add-visited-level character level)
+                         (.raise-event character (new-level-event :character character
+                                                                  :new-level level)))
+               (Right character)))
+
+(defn set-end-condition-m [character condition]
+  (left-if-nil [character condition]
+               (setv (. character model end-condition) condition)
+               (Right character)))
 
 (defn enter-portal-m [character]
   "get action for entering portal"
-  (let [[location character.location]
-        [level character.level]
-        [portal (get-portal level location)]]
-    (if portal
-      (if portal.exits-dungeon
-        (do (setv (. character model end-condition) *escaped-dungeon*)
-            (Right character))
-        (let [[other-end (.get-other-end portal)]]
-          (do (move-character-to-location-m character
-                                            (landing-location other-end)
-                                            (. other-end level))
-              (trigger-traps-m character))))
-      (move-character-to-location-m character location level))))
+  (if (is-not character nil)
+    (let [[location character.location]
+          [level character.level]]
+      (ap-if (get-portal level location)
+        (if it.exits-dungeon
+          (set-end-condition-m character *escaped-dungeon*)
+          (let [[other-end (.get-other-end it)]]
+            (monad-> (move-character-to-location-m character
+                                                   (landing-location other-end)
+                                                   (. other-end level))
+                     (trigger-traps-m))))
+        (Left character)))
+    (Left character)))
 
 (defn both-ai-characters? [character1 character2]
   (and character1 (. character1 artificial-intelligence)

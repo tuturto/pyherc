@@ -34,7 +34,8 @@
     (when (= character character.model.player)
       (setv (. character model end-condition) *died-in-dungeon*))
     (.raise-event character (new-death-event :deceased character))
-    (remove-character (. character level) character)))
+    (remove-character (. character level) character))
+  character)
 
 (defn drop-items [character]
   "drop all items of this character"

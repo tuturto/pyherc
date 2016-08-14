@@ -21,8 +21,10 @@
 ;; THE SOFTWARE.
 
 (require hy.contrib.anaphoric)
+(require pyherc.macros)
 
-(import [pyherc.data.new-item [armour-speed-modifier boots-speed-modifier]])
+(import [pyherc.data.new-item [armour-speed-modifier boots-speed-modifier]]
+        [hymn.types.either [Left Right]])
 
 (defn skill-ready? [character skill]
   "check if the cooldown of a skill has passed"
@@ -93,3 +95,15 @@
   (ap-if (. character mind)
          (* 2 it)
          1))
+
+(defn raise-event-m [character event]
+  "raise event for character"
+  (left-if-nil [character event]
+               (.raise-event character event)
+               (Right character)))
+
+(defn add-tick-m [character tick]
+  "add time to character's internal clock"
+  (left-if-nil [character tick]
+               (.add-to-tick character (/ tick (speed-modifier character)))
+               (Right character)))

@@ -46,7 +46,7 @@ from .geometry import area_4_around, area_around, find_direction
 from .new_character import (is_skill_ready, cooldown, add_visited_level, visited_levels,
                             speed_modifier, movement_mode, add_enemy_name, add_enemy,
                             remove_enemy_name, remove_enemy, enemy_names, enemies,
-                            perception_range)
+                            perception_range, raise_event_m)
 from .level import (get_tile, new_tile, floor_tile, add_portal, get_portal,
                     wall_tile, tile, blocks_los, ornamentation,
                     level_size, find_free_space, blocks_movement,

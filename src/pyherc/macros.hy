@@ -113,3 +113,13 @@
   `(do (import [pyherc.macros [method-decorator]])
        (with-decorator (method-decorator ~name)
          (defn ~name ~params ~@body))))
+
+(defmacro left-if-nil [params &rest code]
+  #s("check params for nils and return (Left ret-value) if any is nil."
+     "otherwise, execute code and return (Right ret-value).")
+  (setv guard (if (> 1 (len params))
+                `(and ~@(list-comp `(is-not ~x nil) [x params]))
+                `(is-not ~(first params) nil)))
+  `(if ~guard
+     (do ~@code)
+     (Left "one of the values was nil"))) ;;TODO: explain which value was nil

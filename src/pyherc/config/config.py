@@ -51,7 +51,7 @@ from pyherc.rules.magic import SpellCastingFactory
 from pyherc.rules.trapping.factory import TrappingFactory
 from pyherc.rules.public import ActionFactory
 from pyherc.rules.waiting import WaitFactory
-import pyherc.rules.moving.factories
+import pyherc.rules.moving
 
 
 class Configuration():
@@ -105,6 +105,8 @@ class Configuration():
 
         effect_factory = get_effect_creator(effect_config)
 
+        pyherc.vtable["\ufdd0:create-effect"] = effect_factory
+        
         unarmed_combat_factory = UnarmedCombatFactory(effect_factory)
         melee_combat_factory = MeleeCombatFactory(effect_factory)
         ranged_combat_factory = RangedCombatFactory(effect_factory)

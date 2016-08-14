@@ -34,6 +34,7 @@ from pyherc.ports import (attack, is_move_legal, move, set_action_factory, wait,
 from pyherc.test.builders import (ActionFactoryBuilder,
                                   LevelBuilder, SpellCastingFactoryBuilder,
                                   SpellGeneratorBuilder)
+import pyherc
 
 
 def add_history_value(character, attribute):
@@ -357,10 +358,10 @@ class Hit():
                           .build())
 
         set_action_factory(action_factory) # TODO: mutating global state is bad
-        attack(attacker,
-               find_direction(attacker.location,
-                              self.target.location),
-               rng)
+
+        pyherc.vtable['\ufdd0:attack'](attacker, 
+                                       find_direction(attacker.location,
+                                                      self.target.location))
 
 
 def hit(target):
