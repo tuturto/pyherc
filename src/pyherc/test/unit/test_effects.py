@@ -58,6 +58,8 @@ class TestEffects():
                                                  'icon': 100,
                                                  'title': 'healig',
                                                  'description': 'healing'}})
+
+        pyherc.vtable['\ufdd0:create-effect'] = effect_factory
         
         potion = (ItemBuilder()
                   .with_effect_handle(EffectHandleBuilder()
@@ -97,6 +99,8 @@ class TestEffects():
                                                  'title': 'healig',
                                                  'description': 'healing'}})
 
+        pyherc.vtable['\ufdd0:create-effect'] = effect_factory
+        
         potion = (ItemBuilder()
                   .with_effect_handle(EffectHandleBuilder()
                                .with_trigger('on drink')
@@ -169,6 +173,8 @@ class TestEffectsInMelee():
                                          'title': 'poison',
                                          'description': 'Causes damage'}})
 
+        pyherc.vtable['\ufdd0:create-effect'] = effects
+        
         set_action_factory(ActionFactoryBuilder()
                            .with_effect_factory(effects)
                            .build())
@@ -177,7 +183,7 @@ class TestEffectsInMelee():
                          .with_location((5, 5))
                          .with_effect_handle(EffectHandleBuilder()
                                              .with_trigger('on attack hit')
-                                             .with_effect('minor poison'))
+                                             .with_effect('poison'))
                          .with_model(self.model)
                          .build())
 
