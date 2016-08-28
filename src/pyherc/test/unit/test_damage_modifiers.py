@@ -27,10 +27,11 @@ from hamcrest import assert_that, equal_to, is_
 from mockito import mock, when
 from pyherc.data import Dungeon, Model
 from pyherc.data.effects import DamageModifier
-from pyherc.ports import attack, set_action_factory
+from pyherc.ports import set_action_factory
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder, LevelBuilder)
 from pyherc.test.cutesy import at_
+import pyherc
 
 
 class TestDamageModifiers():
@@ -55,7 +56,6 @@ class TestDamageModifiers():
         self.model = Model()
 
         set_action_factory(ActionFactoryBuilder()
-                           .with_attack_factory()
                            .build())
 
         self.character1 = (CharacterBuilder()
@@ -98,9 +98,8 @@ class TestDamageModifiers():
         """
         Test that suffered damage can be modified
         """
-        attack(self.character1,
-               3,
-               self.rng)
+        pyherc.vtable['\ufdd0:attack'](self.character1,
+                                       3)
 
         assert_that(self.character2.hit_points, is_(equal_to(6)))
 
@@ -111,9 +110,8 @@ class TestDamageModifiers():
         """
         self.effect.damage_type = 'slashing'
 
-        attack(self.character1,
-               3,
-               self.rng)
+        pyherc.vtable['\ufdd0:attack'](self.character1,
+                                       3)
 
         assert_that(self.character2.hit_points, is_(equal_to(7)))
 
@@ -132,9 +130,8 @@ class TestDamageModifiers():
         effect_2.multiple_allowed = True
         self.character2.add_effect(effect_2)
 
-        attack(self.character1,
-               3,
-               self.rng)
+        pyherc.vtable['\ufdd0:attack'](self.character1,
+                                       3)
 
         assert_that(self.character2.hit_points, is_(equal_to(3)))
 
@@ -149,8 +146,7 @@ class TestDamageModifiers():
 
         self.character1.inventory.weapon = weapon
 
-        attack(self.character1,
-               3,
-               self.rng)
+        pyherc.vtable['\ufdd0:attack'](self.character1,
+                                       3)
 
         assert_that(self.character2.hit_points, is_(equal_to(7)))

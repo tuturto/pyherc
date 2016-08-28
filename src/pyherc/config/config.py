@@ -36,9 +36,6 @@ from pyherc.generators.level import PortalAdderFactory, new_dungeon, merge_level
 from pyherc.generators.level import portals
 from pyherc.ports import set_action_factory
 from pyherc.rules import RulesEngine
-from pyherc.rules.combat import RangedCombatFactory
-from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,
-                                           UnarmedCombatFactory)
 from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.rules.digging.factories import DigFactory
 from pyherc.rules.inventory.equip import EquipFactory
@@ -105,14 +102,7 @@ class Configuration():
 
         effect_factory = get_effect_creator(effect_config)
 
-        pyherc.vtable["\ufdd0:create-effect"] = effect_factory
-        
-        unarmed_combat_factory = UnarmedCombatFactory(effect_factory)
-        melee_combat_factory = MeleeCombatFactory(effect_factory)
-        ranged_combat_factory = RangedCombatFactory(effect_factory)
-        attack_factory = AttackFactory([unarmed_combat_factory,
-                                        melee_combat_factory,
-                                        ranged_combat_factory])
+        pyherc.vtable["\ufdd0:create-effect"] = effect_factory      
 
         drink_factory = DrinkFactory(effect_factory)
 
@@ -140,8 +130,7 @@ class Configuration():
         trapping_factory = TrappingFactory(self.trap_generator)
 
         self.action_factory = ActionFactory(self.model,
-                                            [attack_factory,
-                                             drink_factory,
+                                            [drink_factory,
                                              inventory_factory,
                                              wait_factory,
                                              spell_casting_factory,

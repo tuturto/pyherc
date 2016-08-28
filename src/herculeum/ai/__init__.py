@@ -23,5 +23,4 @@
 """
 Module containing AI routines for herculeum
 """
-from .simple import FlockingHerbivore
 from .skeleton import SkeletonWarriorAI

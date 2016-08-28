@@ -27,7 +27,6 @@ from hamcrest import assert_that, equal_to, is_
 from mockito import any, mock, verify, when
 from pyherc.data.geometry import TargetData
 from pyherc.data.damage import new_damage
-from pyherc.rules.combat.action import AttackAction
 from pyherc.test.builders import (CharacterBuilder, EffectHandleBuilder,
                                   ItemBuilder)
 

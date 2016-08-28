@@ -23,9 +23,6 @@
 """
 Module for action factory builders
 """
-from pyherc.rules.combat import RangedCombatFactory
-from pyherc.rules.combat.factories import (AttackFactory, MeleeCombatFactory,
-                                           UnarmedCombatFactory)
 from pyherc.rules.consume.factories import DrinkFactory
 from pyherc.rules.digging.factories import DigFactory
 from pyherc.rules.inventory.equip import EquipFactory
@@ -55,7 +52,6 @@ class ActionFactoryBuilder():
         self.factories = []
 
         self.effect_factory = None
-        self.use_real_attack_factory = False
         self.use_real_drink_factory = False
         self.use_real_inventory_factory = False
         self.use_real_spellcasting_factory = False
@@ -65,13 +61,6 @@ class ActionFactoryBuilder():
         self.use_real_metamorphosis_factory = False
         self.use_real_dig_factory = False
         self.use_real_trapping_factory = False
-
-    def with_attack_factory(self):
-        """
-        Configure action factory to use real attack factory
-        """
-        self.use_real_attack_factory = True
-        return self
 
     def with_drink_factory(self, drink_factory=None):
         """
@@ -195,14 +184,6 @@ class ActionFactoryBuilder():
         :returns: action factory
         :rtype: ActionFactory
         """
-        if self.use_real_attack_factory:
-            unarmed_combat_factory = UnarmedCombatFactory(self.effect_factory)
-            melee_combat_factory = MeleeCombatFactory(self.effect_factory)
-            ranged_combat_factory = RangedCombatFactory(self.effect_factory)
-            self.factories.append(AttackFactory([unarmed_combat_factory,
-                                                 melee_combat_factory,
-                                                 ranged_combat_factory]))
-
         if self.use_real_drink_factory:
             self.factories.append((DrinkFactoryBuilder()
                                    .with_effect_factory(self.effect_factory)

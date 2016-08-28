@@ -39,7 +39,6 @@
             [level (-> (LevelBuilder)
                        (.build))]
             [_ (set-action-factory (-> (ActionFactoryBuilder)
-                                       (.with-attack-factory)
                                        (.build)))])
 
 (fact "unarmed lunge moves attacker"

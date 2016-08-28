@@ -30,14 +30,14 @@ from pyherc.data import Model
 from pyherc.data.effects import Effect, EffectHandle, Heal, Poison
 from pyherc.data.geometry import TargetData
 from pyherc.generators import get_effect_creator
-from pyherc.ports import attack, set_action_factory, drink
-from pyherc.rules.combat.action import AttackAction
+from pyherc.ports import set_action_factory, drink
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   DrinkFactoryBuilder, EffectBuilder,
                                   EffectHandleBuilder, ItemBuilder,
                                   LevelBuilder)
 from pyherc.test.matchers import (EventType, has_effect, has_effects,
                                   has_no_effects, event_type_of)
+import pyherc
 
 
 class TestEffects():
@@ -50,15 +50,15 @@ class TestEffects():
         Test that effect can be created and triggered immediately
         """
         effect_factory = get_effect_creator({'major heal':
-                                  {'type': Heal,
-                                   'duration': 0,
-                                   'frequency': 0,
-                                   'tick': 0,
-                                   'healing': 10,
-                                   'icon': 101,
-                                   'title': 'title',
-                                   'description': 'major heal'}})
-
+                                                {'type': Heal,
+                                                 'duration': 0,
+                                                 'frequency': 0,
+                                                 'tick': 0,
+                                                 'healing': 10,
+                                                 'icon': 100,
+                                                 'title': 'healig',
+                                                 'description': 'healing'}})
+        
         potion = (ItemBuilder()
                   .with_effect_handle(EffectHandleBuilder()
                                .with_trigger('on drink')
@@ -170,7 +170,6 @@ class TestEffectsInMelee():
                                          'description': 'Causes damage'}})
 
         set_action_factory(ActionFactoryBuilder()
-                           .with_attack_factory()
                            .with_effect_factory(effects)
                            .build())
 
@@ -178,7 +177,7 @@ class TestEffectsInMelee():
                          .with_location((5, 5))
                          .with_effect_handle(EffectHandleBuilder()
                                              .with_trigger('on attack hit')
-                                             .with_effect('poison'))
+                                             .with_effect('minor poison'))
                          .with_model(self.model)
                          .build())
 
@@ -199,9 +198,8 @@ class TestEffectsInMelee():
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
 
-        attack(self.attacker,
-               1,
-               rng)
+        pyherc.vtable['\ufdd0:attack'](self.attacker,
+                                       1)
 
         assert_that(self.defender, has_effect())
 
@@ -212,12 +210,10 @@ class TestEffectsInMelee():
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
 
-        attack(self.attacker,
-               1,
-               rng)
-        attack(self.attacker,
-               1,
-               rng)
+        pyherc.vtable['\ufdd0:attack'](self.attacker,
+                                       1)
+        pyherc.vtable['\ufdd0:attack'](self.attacker,
+                                       1)
 
         assert_that(self.defender, has_effects(1))
 
@@ -228,9 +224,8 @@ class TestEffectsInMelee():
         rng = mock()
         when(rng).randint(1, 6).thenReturn(1)
 
-        attack(self.attacker,
-               1,
-               rng)
+        pyherc.vtable['\ufdd0:attack'](self.attacker,
+                                       1)
 
         verify(self.model).raise_event(event_type_of('poisoned'))
 
@@ -391,44 +386,3 @@ class TestEternalEffects():
         self.model.get_next_creature(mock())
 
         assert_that(self.character2, has_effect(self.effect))
-
-
-class TestEffectsInCombat():
-    """
-    Test that effects are created correctly during combat
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        super().__init__()
-
-    def test_effect_is_not_created_on_miss(self):
-        """
-        Test that effect is not created when attack misses
-        """
-        to_hit = mock()
-        when(to_hit).is_hit().thenReturn(False)
-
-        attacker = CharacterBuilder().build()
-        when(attacker).get_effect_handles('on attack hit').thenReturn([mock()])
-
-        factory = mock()
-        when(factory).create_effect(any(),
-                                    target=any()).thenReturn(mock())
-
-        action = AttackAction(attack_type='',
-                              to_hit=to_hit,
-                              damage=mock(),
-                              attacker=attacker,
-                              target=TargetData('character',
-                                                (0, 0),
-                                                mock(),
-                                                None),
-                              effect_factory=factory,
-                              additional_rules=mock())
-
-        action.execute()
-
-        verify(factory, never).create_effect(any(),
-                                             target=any())

@@ -75,7 +75,6 @@ def with_action_factory(fn):
 
         if not hasattr(context, 'action_factory'):
             context.action_factory = (ActionFactoryBuilder()
-                                      .with_attack_factory()
                                       .with_drink_factory()
                                       .with_inventory_factory()
                                       .build())

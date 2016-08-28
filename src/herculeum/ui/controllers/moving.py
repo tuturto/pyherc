@@ -23,7 +23,8 @@
 """
 Module for moving
 """
-from pyherc.ports import is_move_legal, move, attack
+import pyherc
+from pyherc.ports import is_move_legal, move
 from pyherc.data import get_character
 
 
@@ -54,6 +55,5 @@ class MoveController():
         elif direction != 9:
             loc = character.get_location_at_direction(direction)
             if get_character(level, loc) is not None:
-                attack(character,
-                       direction,
-                       self.rng)
+                pyherc.vtable['\ufdd0:attack'](character,
+                                               direction)

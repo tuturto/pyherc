@@ -28,7 +28,8 @@
 (import [hymn.types.either [Left Right right? left?]]
         [pyherc.data.constants [Duration]]
         [pyherc.data.damage [new-damage]]
-        [pyherc.data.geometry [get-adjacent-target-in-direction]]
+        [pyherc.data.geometry [get-adjacent-target-in-direction
+                               get-target-in-direction]]
         [pyherc.data.new-character [raise-event-m add-tick-m]]
         [pyherc.data.new-item [current-weapon current-ammunition]]
         [pyherc.data [get-character blocks-movement]]
@@ -37,14 +38,15 @@
 (defn+ attack [character direction]
   "make given character to attack a direction"
   (if (call attack-legal? character direction)
-    (ap-if (target-of-attack character direction)   ;; in ranged attack, this should be something else?
+    (ap-if (target-of-attack character direction)
            (do-monad-e [attack-type (attack-type-m character direction)
-                        damage-list (damage-list-m character)
+                        damage-list (damage-list-m character attack-type)
                         damage-result (apply-damage-list-m (. it target) damage-list)
-                        a₁ (raise-attack-hit-m character
+                        a₀ (raise-attack-hit-m character
                                                attack-type
                                                (. it target)
                                                damage-result)
+                        a₁ (handle-spending-ammunition-m character attack-type)
                         a₂ (trigger-attack-effects-m character (. it target))
                         a₃ (check-dying-m (. it target))
                         a₄ (add-tick-m character (attack-duration character))]
@@ -57,6 +59,19 @@
 (defn+ attack-legal? [character direction]
   "can this attack be done?"
   (is-not character nil))
+
+(defn handle-spending-ammunition-m [character attack-type]
+  "in case of ranged attack, use ammunition"
+  (left-if-nil [character attack-type]
+               (cond [(= "ranged" attack-type)
+                      (do (setv ammo (current-ammunition character))
+                          (setv (. ammo ammunition-data count)
+                                (dec (. ammo ammunition-data count)))
+                          (when (<= (. ammo ammunition-data count) 0)
+                            (setv (. character inventory projectiles) nil)
+                            (.remove (. character inventory) ammo))                          
+                          (Right character))]
+                     [true (Right character)])))
 
 (defn attack-type-m [character direction]
   (left-if-nil [character direction]
@@ -95,22 +110,30 @@
   (left-if-nil [character]
                (Right (call check-dying character))))
 
-(defn damage-list-m [character]
+(defn damage-list-m [character attack-type]
   "get damage list of this character"
-  (ap-if (current-weapon character)
-         (Right (. it weapon-data damage))
-         (Right [#t((.get-attack character) "crushing")])))
+  (cond [(= "unarmed" attack-type) (Right [#t((.get-attack character)
+                                              "crushing")])]
+        [(= "melee" attack-type) (Right (. (current-weapon character)
+                                           weapon-data damage))]
+        [(= "ranged" attack-type) (Right (. (current-ammunition character)
+                                            ammunition-data damage))]
+        [true (Left (.format "attack type {0} is unknown" attack-type))]))
 
 (defn apply-damage-list-m [character damage-list]
   (left-if-nil [character damage-list]
                (Right ((new-damage damage-list)
                        character))))
 
-(defn target-of-attack [character direction] ;;TODO: ranged combat
+(defn target-of-attack [character direction]
   "locate target of given attack, if no target found, return nil"
-  (get-adjacent-target-in-direction (. character level)
-                                    (. character location)
-                                    direction))
+  (if (ranged-attack? character direction)
+    (get-target-in-direction (. character level)
+                             (. character location)
+                             direction)
+    (get-adjacent-target-in-direction (. character level)
+                                      (. character location)
+                                      direction)))
 
 (defn attack-duration [attacker]
   (ap-if (. attacker inventory weapon)

@@ -29,7 +29,7 @@ from pyherc.aspects import log_debug
 from pyherc.data.geometry import find_direction
 from pyherc.data import find_free_space
 from pyherc.events import new_lose_focus_event, new_notice_event
-from pyherc.ports import is_move_legal, move, attack, equip
+from pyherc.ports import is_move_legal, move, equip
 
 
 class SkeletonWarriorAI():
@@ -153,9 +153,8 @@ class SkeletonWarriorAI():
         if distance == 1:
             direction = find_direction(c_location,
                                        p_location)
-            attack(character,
-                   direction,
-                   rng)
+            pyherc.vtable['\ufdd0:attack'](character,
+                                           direction)
         else:
             path, connections, updated = a_star(c_location,
                                                 p_location,

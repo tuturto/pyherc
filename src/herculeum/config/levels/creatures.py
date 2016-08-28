@@ -27,7 +27,7 @@ module for configuring npcs
 from herculeum.ai.fungus import FungusAI, GreatFungusAI
 from herculeum.ai.rat import RatAI
 from herculeum.ai.firebeetle import FireBeetleAI
-from herculeum.ai import FlockingHerbivore, SkeletonWarriorAI
+from herculeum.ai import SkeletonWarriorAI
 from pyherc.generators import creature_config, inventory_config
 from pyherc.data.effects import (EffectHandle, DamageModifier, 
                                  MovementModeModifier)
@@ -87,7 +87,7 @@ def init_creatures(context):
                                   speed = 1,
                                   icons = (spider_f0, spider_f1),
                                   attack = 4,
-                                  ai = FlockingHerbivore,
+                                  ai = RatAI,
                                   effect_handles = [EffectHandle(
                                       trigger = 'on attack hit',
                                       effect = 'minor poison',

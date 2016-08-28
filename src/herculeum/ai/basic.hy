@@ -20,17 +20,15 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(setv __doc__ "module for actions")
-
 (require pyherc.aspects)
+(require pyherc.macros)
+(require herculeum.ai.macros)
 
 (import [pyherc.aspects [log_debug]]
-    [pyherc.data.geometry [find-direction]]    
-    [pyherc.ports [move move-legal? attack]]
-    [pyherc.events [new-notice-event]]
-    [math [sqrt]])
-
-(require herculeum.ai.macros)
+        [pyherc.data.geometry [find-direction]]    
+        [pyherc.ports [move move-legal?]]
+        [pyherc.events [new-notice-event]]
+        [math [sqrt]])
 
 #d(defn wait [ai]
     "make character to wait a little bit"
@@ -63,7 +61,7 @@
 	  [attacker-location attacker.location]
 	  [target-location enemy.location]
 	  [attack-direction (find-direction attacker-location target-location)]]
-      (attack attacker attack-direction rng)))
+      (call attack attacker attack-direction)))
 
 #d(defn focus-enemy [ai enemy]
     "focus on enemy and start tracking it"

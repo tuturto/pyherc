@@ -25,7 +25,6 @@ Package for public ports that adapters can connect to
 """
 
 from .consuming import is_drinking_legal, drink
-from .combat import is_attack_legal, attack
 from .digging import is_dig_legal, dig
 from .interface import set_action_factory
 from .inventory import (pick_up, is_picking_up_legal, drop_item,

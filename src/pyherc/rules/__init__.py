@@ -32,4 +32,4 @@ from .engine import RulesEngine
 from .perception import is_spotted
 
 import pyherc.rules.moving
-import pyherc.rules.combat.combat
+import pyherc.rules.combat

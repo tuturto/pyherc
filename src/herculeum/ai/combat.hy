@@ -28,7 +28,7 @@
         [pyherc.data.geometry [find-direction distance-between]]
         [pyherc.data [perception-range get-characters]]
         [pyherc.rules.perception [spotted?]]
-        [pyherc.ports [attack]])
+        pyherc)
 
 (defn select-current-enemy [character strategy]
   "select current target for this character"
@@ -53,8 +53,8 @@
 
 (defn melee [character target]
   "perform a melee attack of somekind against target"
-  (attack character
-          (find-direction (. character location) (. target location))))
+  (call attack character
+        (find-direction (. character location) (. target location))))
 
 (defn detected-enemies [character]
   "has AI detected an enemy"

@@ -29,7 +29,7 @@ from pyherc.generators import get_effect_creator
 from pyherc.data.effects import DamageEffect, Heal, Poison
 from pyherc.data import level_size, get_items, add_character
 from pyherc.data.geometry import find_direction
-from pyherc.ports import (attack, is_move_legal, move, set_action_factory, wait,
+from pyherc.ports import (is_move_legal, move, set_action_factory, wait,
                           drop_item, cast, gain_domain)
 from pyherc.test.builders import (ActionFactoryBuilder,
                                   LevelBuilder, SpellCastingFactoryBuilder,
@@ -352,7 +352,6 @@ class Hit():
         when(rng).randint(1, 6).thenReturn(1)
 
         action_factory = (ActionFactoryBuilder()
-                          .with_attack_factory()
                           .with_drink_factory()
                           .with_inventory_factory()
                           .build())
@@ -641,7 +640,6 @@ class Drop():
         add_history_value(actor, 'tick')
 
         set_action_factory(ActionFactoryBuilder()
-                           .with_attack_factory()
                            .with_drink_factory()
                            .with_inventory_factory()
                            .build()) # TODO: mutating global state is bad

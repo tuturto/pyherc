@@ -35,7 +35,7 @@ from herculeum.ui.gui.layers import (zorder_floor, zorder_wall, zorder_ornament,
                                      zorder_counter, zorder_trap)
 from pyherc.data.model import DIED_IN_DUNGEON
 from pyherc.events import e_event_type
-from pyherc.ports import (is_move_legal, move, attack, is_dig_legal, dig,
+from pyherc.ports import (is_move_legal, move, is_dig_legal, dig,
                           wait, pick_up, cast)
 from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
                           QEasingCurve, QEvent, QObject, QPropertyAnimation,
@@ -44,6 +44,7 @@ from PyQt4.QtGui import (QColor, QFont, QGraphicsPixmapItem, QGraphicsScene,
                          QGraphicsSimpleTextItem, QGraphicsView, QHBoxLayout,
                          QTransform, QVBoxLayout, QWidget)
 from pyherc.data import get_characters, get_items, get_tiles
+import pyherc
 
 
 class PlayMapWindow(QWidget):
@@ -452,9 +453,8 @@ class PlayMapWidget(QWidget):
 
         if modifiers & Qt.ControlModifier:
             if direction != 9:
-                attack(player,
-                       direction,
-                       self.rng)
+                pyherc.vtable['\ufdd0:attack'](player,
+                                               direction)
         elif modifiers & Qt.AltModifier:
             if direction != 9:
                 cast(player,

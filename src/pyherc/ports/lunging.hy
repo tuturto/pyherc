@@ -21,17 +21,19 @@
 ;; THE SOFTWARE.
 
 (require hymn.dsl)
+(require pyherc.macros)
 
-(import [hymn.types.either [Right]]
+(import [hymn.types.either [Right Left left?]]
         [pyherc.data [skill-ready? cooldown]]
         [pyherc.data.constants [Duration]]
-        [pyherc.ports.combat [attack]]
-        [pyherc.ports.moving [move move-legal?]])
+        [pyherc.ports.moving [move move-legal?]]
+        [pyherc])
 
 (defn lunge [character direction rng]
-  (monad-> (move character direction)
-           (attack direction rng)              
-           (add-cooldown)))
+  (do-monad-e [a (move character direction)
+               b (call attack character direction)
+               c (add-cooldown character)]
+              (Right character)))
 
 (defn lunge-legal? [character direction]
   (and (skill-ready? character "lunge")

@@ -27,12 +27,13 @@ from random import Random
 
 from hamcrest import assert_that, equal_to, is_, is_not
 from mockito import any, mock, verify, when
-from pyherc.ports import attack, set_action_factory
+from pyherc.ports import set_action_factory
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   ItemBuilder, LevelBuilder)
 from pyherc.test.matchers import does_have
 from pyherc.data import wall_tile, add_character, remove_character
 from pyherc.data import move_character
+import pyherc
 
 
 class TestRangedCombat():
@@ -85,16 +86,14 @@ class TestRangedCombat():
         self.character.inventory.projectiles = self.arrows
 
         set_action_factory(ActionFactoryBuilder()
-                           .with_attack_factory()
                            .build())
 
     def test_damage_for_ranged_attack_is_from_arrow(self):
         """
         Damage for ranged attack comes from the arrow
         """
-        attack(self.character,
-               3,
-               Random())
+        pyherc.vtable['\ufdd0:attack'](self.character,
+                                       3)
 
         assert_that(self.target.hit_points, is_(equal_to(7)))
 
@@ -102,9 +101,8 @@ class TestRangedCombat():
         """
         Ranged attack should use ammunition
         """
-        attack(self.character,
-               3,
-               Random())
+        pyherc.vtable['\ufdd0:attack'](self.character,
+                                       3)
 
         assert_that(self.arrows.ammunition_data.count, is_(equal_to(9)))
 
@@ -114,8 +112,7 @@ class TestRangedCombat():
         """
         self.arrows.ammunition_data.count = 1
 
-        attack(self.character,
-               3,
-               Random())
+        pyherc.vtable['\ufdd0:attack'](self.character,
+                                       3)
 
         assert_that(self.character, is_not(does_have(self.arrows)))
