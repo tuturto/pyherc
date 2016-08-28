@@ -25,7 +25,7 @@
 (require pyherc.macros)
 (require pyherc.rules.macros)
 
-(import [hymn.types.either [Left Right right?]]
+(import [hymn.types.either [Left Right right? left?]]
         [pyherc.data.constants [Duration]]
         [pyherc.data.damage [new-damage]]
         [pyherc.data.geometry [get-adjacent-target-in-direction]]
@@ -37,22 +37,22 @@
 (defn+ attack [character direction]
   "make given character to attack a direction"
   (if (call attack-legal? character direction)
-    (ap-if (target-of-attack character direction)
-           (do-monad [attack-type (attack-type-m character direction)
-                      damage-list (damage-list-m character)
-                      damage-result (apply-damage-list-m (. it target) damage-list)
-                      a₁ (raise-attack-hit-m character
-                                             attack-type
-                                             (. it target)
-                                             damage-result)
-                      a₂ (trigger-attack-effects-m character (. it target))
-                      a₃ (check-dying-m (. it target))
-                      a₄ (add-tick-m character (attack-duration character))]
-                     (Right character))                      
-           (do-monad [a₁ (raise-attack-nothing-m character)]
-                     (Right character)))
-    (do-monad [a₁ add-tick-m character (/ Duration.fast (speed-modifier character))]
-              (Left "attack was not legal"))))
+    (ap-if (target-of-attack character direction)   ;; in ranged attack, this should be something else?
+           (do-monad-e [attack-type (attack-type-m character direction)
+                        damage-list (damage-list-m character)
+                        damage-result (apply-damage-list-m (. it target) damage-list)
+                        a₁ (raise-attack-hit-m character
+                                               attack-type
+                                               (. it target)
+                                               damage-result)
+                        a₂ (trigger-attack-effects-m character (. it target))
+                        a₃ (check-dying-m (. it target))
+                        a₄ (add-tick-m character (attack-duration character))]
+                       (Right character))                      
+           (do-monad-e [a₁ (raise-attack-nothing-m character)]
+                       (Right character)))
+    (do-monad-e [a₁ add-tick-m character (/ Duration.fast (speed-modifier character))]
+                (Left "attack was not legal"))))
 
 (defn+ attack-legal? [character direction]
   "can this attack be done?"

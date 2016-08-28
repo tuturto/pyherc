@@ -114,12 +114,22 @@
        (with-decorator (method-decorator ~name)
          (defn ~name ~params ~@body))))
 
-(defmacro left-if-nil [params &rest code]
+(defmacro/g! left-if-nil [params &rest code]
   #s("check params for nils and return (Left ret-value) if any is nil."
      "otherwise, execute code and return (Right ret-value).")
-  (setv guard (if (> 1 (len params))
-                `(and ~@(list-comp `(is-not ~x nil) [x params]))
-                `(is-not ~(first params) nil)))
-  `(if ~guard
-     (do ~@code)
-     (Left "one of the values was nil"))) ;;TODO: explain which value was nil
+  `(do (setv ~g!pairs (zip ~(list (map name params)) ~params))
+       (setv ~g!check (list (filter (fn [x] (not (nil? x)))
+                                    (map (fn [x]
+                                           (when (nil? (second x)) (first x)))
+                                         ~g!pairs))))
+       (if ~g!check
+         (do (Left (.format "following values were nil: {0}"
+                            (.join "," ~g!check))))
+         (do ~@code))))
+
+(defmacro/g! do-monad-e [&rest code]
+  "run monadic computation and print out (Left x) on console"
+  `(do (setv ~g!result (do-monad ~@code))
+       (when (left? ~g!result)
+         (print ~g!result))
+       ~g!result))
