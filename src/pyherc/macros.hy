@@ -123,8 +123,12 @@
                                            (when (nil? (second x)) (first x)))
                                          ~g!pairs))))
        (if ~g!check
-         (do (Left (.format "following values were nil: {0}"
-                            (.join "," ~g!check))))
+         (do (import inspect)
+             (setv ~g!frame (first (.stack inspect)))             
+             (Left (.format "following values were nil: {0} (function: {1} in file: {2})"
+                            (.join "," ~g!check)
+                            (get ~g!frame 3)
+                            (get ~g!frame 1))))
          (do ~@code))))
 
 (defmacro/g! do-monad-e [&rest code]
