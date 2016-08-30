@@ -38,27 +38,32 @@
 (defn+ attack [character direction]
   "make given character to attack a direction"
   (if (call attack-legal? character direction)
-    (ap-if (target-of-attack character direction)
-           (do-monad-e [attack-type (attack-type-m character direction)
-                        damage-list (damage-list-m character attack-type)
-                        damage-result (apply-damage-list-m (. it target) damage-list)
-                        a₀ (raise-attack-hit-m character
-                                               attack-type
-                                               (. it target)
-                                               damage-result)
-                        a₁ (handle-spending-ammunition-m character attack-type)
-                        a₂ (trigger-attack-effects-m character (. it target))
-                        a₃ (check-dying-m (. it target))
-                        a₄ (add-tick-m character (attack-duration character))]
-                       (Right character))                      
-           (do-monad-e [a₁ (raise-attack-nothing-m character)]
-                       (Right character)))
-    (do-monad-e [a₁ add-tick-m character (/ Duration.fast (speed-modifier character))]
+    (do-monad-e [_ (attack-direction-m character direction)
+                 _ (add-tick-m character (attack-duration character))]
+                (Right character))
+    (do-monad-e [_ add-tick-m character Duration.fast]
                 (Left "attack was not legal"))))
 
 (defn+ attack-legal? [character direction]
   "can this attack be done?"
   (is-not character nil))
+
+(defn attack-direction-m [character direction]
+  "perform attack to direction, spend ammunition and check for dying"
+  (ap-if (target-of-attack character direction)
+         (do-monad-e [attack-type (attack-type-m character direction)
+                      damage-list (damage-list-m character attack-type)
+                      damage-result (apply-damage-list-m (. it target) damage-list)
+                      _ (raise-attack-hit-m character
+                                            attack-type
+                                            (. it target)
+                                            damage-result)
+                      _ (handle-spending-ammunition-m character attack-type)
+                      _ (trigger-attack-effects-m character (. it target))
+                      _ (check-dying-m (. it target))]
+                     (Right character))                      
+         (do-monad-e [a₁ (raise-attack-nothing-m character)]
+                     (Right character))))
 
 (defn handle-spending-ammunition-m [character attack-type]
   "in case of ranged attack, use ammunition"
@@ -73,11 +78,14 @@
                           (Right character))]
                      [true (Right character)])))
 
+(defn attack-type [character direction]
+  (cond [(ranged-attack? character direction) "ranged"]
+        [(melee-attack? character direction) "melee"]
+        [true "unarmed"]))
+
 (defn attack-type-m [character direction]
   (left-if-nil [character direction]
-               (cond [(ranged-attack? character direction) (Right "ranged")]
-                     [(melee-attack? character direction) (Right "melee")]
-                     [true (Right "unarmed")])))
+               (Right (attack-type character direction))))
 
 (defn ranged-attack? [character direction]
   "will this be a ranged attack?"

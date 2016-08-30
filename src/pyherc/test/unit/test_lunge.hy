@@ -25,11 +25,11 @@
 
 (import [hamcrest [assert-that is- equal-to less-than]]
         [random]
-        [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
-                               LevelBuilder]]
-        [pyherc.ports [set-action-factory lunge]]
+        [pyherc.test.builders [CharacterBuilder LevelBuilder]]
+        [pyherc.ports [set-action-factory]]
         [pyherc.data [add-character]]
-        [pyherc.data.constants [Direction]])
+        [pyherc.data.constants [Direction]]
+        pyherc)
 
 (background default            
             [character₀ (-> (CharacterBuilder)
@@ -37,15 +37,13 @@
             [character₁ (-> (CharacterBuilder)
                             (.build))]
             [level (-> (LevelBuilder)
-                       (.build))]
-            [_ (set-action-factory (-> (ActionFactoryBuilder)
-                                       (.build)))])
+                       (.build))])
 
 (fact "unarmed lunge moves attacker"
       (with-background default [character₀ character₁ level]
         (add-character level #t(5 5) character₀)
         (add-character level #t(5 7) character₁)
-        (lunge character₁ Direction.north random)
+        (call lunge character₁ Direction.north)
         (assert-that character₁.location (is- (equal-to #t(5 6))))))
 
 (fact "unarmed lunge damages target"
@@ -53,7 +51,7 @@
     (let [[old-hp (. character₀ hit-points)]]
       (add-character level #t(5 5) character₀)
       (add-character level #t(5 7) character₁)
-      (lunge character₁ Direction.north random)
+      (call lunge character₁ Direction.north)
       (assert-that character₀.hit-points (is- (less-than old-hp))))))
 
 (fact "lunging against opponent right next to attacker is not possible"
@@ -61,6 +59,6 @@
         (let [[old-hp (. character₀ hit-points)]]
           (add-character level #t(5 5) character₀)
           (add-character level #t(5 6) character₁)
-          (lunge character₁ Direction.north random)
+          (call lunge character₁ Direction.north)
           (assert-that character₁.location (is- (equal-to #t(5 6))))
           (assert-that character₀.hit-points (is- (equal-to old-hp))))))

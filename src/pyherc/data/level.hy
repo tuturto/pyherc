@@ -215,7 +215,7 @@
   (if location
     (let  [[map-tile (get-tile level location)]]
       (when map-tile
-        (:character map-tile)))
+        (:characters map-tile)))
     (genexpr character [character (:characters level)])))
 
 #d(defn remove-character [level character]

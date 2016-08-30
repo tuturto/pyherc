@@ -25,7 +25,7 @@
 (require hymn.dsl)
 
 (import [random]        
-        [hymn.types.either [Left Right right?]]
+        [hymn.types.either [Left Right right? left?]]
         [pyherc.aspects [log-debug log-info]]
         [pyherc.data [remove-character get-portal blocks-movement get-character
                       movement-mode free-passage
@@ -53,14 +53,16 @@
          (cond 
           [(both-ai-characters? (get-character new-level new-location)
                                 character)
-           (do-monad-m [a₁ (switch-places-m character direction)
+           (do-monad-e [a₁ (switch-places-m character direction)
                         a₂ (trigger-traps-m character)
                         a₃ (trigger-traps-m (get-character new-level location))]
-                       character)]
-          [true (monad-> (move-character-to-location-m character new-location new-level)
-                         (trigger-traps-m))]))))
-    (do (.add-to-tick character (/ Duration.fast (speed-modifier character)))
-        (Left "moving wasn't legal"))))
+                       (Right character))]
+          [true (do-monad-e [_ (move-character-to-location-m character new-location new-level)
+                             _ (add-tick-m character Duration.fast)
+                             _ (trigger-traps-m character)]
+                            (Right character))]))))
+    (do-monad-e [a₁ (add-tick-m character Duration.fast)]
+                (Left "moving wasn't legal"))))
 
 (defn+ move-legal? [character direction]
   "is given move legal?"
@@ -77,8 +79,10 @@
   "make this character switch places with another in given direction"
   (let [[new-location (.get-location-at-direction character direction)]
         [another-character (get-character (. character level) new-location)]]
-       (move-character-to-location-m another-character (. character location) (. character level))
-       (move-character-to-location-m character new-location (. character level))))
+    (move-character-to-location-m another-character (. character location) (. character level))
+    (add-tick-m another-character Duration.fast)    
+    (move-character-to-location-m character new-location (. character level))
+    (add-tick-m character Duration.fast)))
 
 (defn trigger-traps-m [character]
   "trigger traps for character and check if they died"
@@ -93,8 +97,7 @@
   (let [[old-location character.location]
         [old-level character.level]
         [direction (find-direction old-location location)]]
-    (monad-> (set-character-location-m character level location)
-             (add-tick-m Duration.fast)
+    (monad-> (set-character-location-m character level location)             
              (add-visited-level-m level)
              (raise-event-m (new-move-event :character character
                                             :old-location old-location
@@ -133,6 +136,7 @@
             (monad-> (move-character-to-location-m character
                                                    (landing-location other-end)
                                                    (. other-end level))
+                     (add-tick-m Duration.fast)
                      (trigger-traps-m))))
         (Left character)))
     (Left character)))

@@ -107,3 +107,12 @@
   (left-if-nil [character tick]
                (.add-to-tick character (/ tick (speed-modifier character)))
                (Right character)))
+
+(defn cooldown-m [character skill &optional limit]
+  "cooldown of a specific skill for a character"
+  (left-if-nil [character skill]
+               (when limit
+                 (assoc character.cooldowns skill limit))
+               (when (not (in skill character.cooldowns))
+                 (assoc character.cooldowns skill 0))
+               (Right (get character.cooldowns skill))))
