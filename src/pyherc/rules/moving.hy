@@ -50,17 +50,20 @@
         (enter-portal-m character)
         (do
          (setv new-location (.get-location-at-direction character direction))
+         (setv character₁ character)
+         (setv character₂ (get-character new-level new-location))
          (cond 
-          [(both-ai-characters? (get-character new-level new-location)
-                                character)
-           (do-monad-e [a₁ (switch-places-m character direction)
-                        a₂ (trigger-traps-m character)
-                        a₃ (trigger-traps-m (get-character new-level location))]
-                       (Right character))]
-          [true (do-monad-e [_ (move-character-to-location-m character new-location new-level)
-                             _ (add-tick-m character Duration.fast)
-                             _ (trigger-traps-m character)]
-                            (Right character))]))))
+          [(both-ai-characters? character₁ character₂)
+           (do-monad-e [_ (switch-places-m character₁ direction)
+                        _ (trigger-traps-m character₁)
+                        _ (trigger-traps-m character₂)]
+                       (Right character₁))]
+          [true (do-monad-e [_ (move-character-to-location-m character₁
+                                                             new-location
+                                                             new-level)
+                             _ (add-tick-m character₁ Duration.fast)
+                             _ (trigger-traps-m character₁)]
+                            (Right character₁))]))))
     (do-monad-e [a₁ (add-tick-m character Duration.fast)]
                 (Left "moving wasn't legal"))))
 
