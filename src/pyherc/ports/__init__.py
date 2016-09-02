@@ -34,7 +34,6 @@ from .magic import (cast, is_casting_legal, gain_domain,
                     is_gaining_domain_legal)
 from .metamorphosis import is_morph_legal, morph
 from .mitosis import is_mitosis_legal, perform_mitosis
-from .moving import is_move_legal, move
 from .trapping import (is_trapping_legal, place_trap,
                        is_natural_trapping_legal, place_natural_trap)
 from .waiting import is_waiting_legal, wait

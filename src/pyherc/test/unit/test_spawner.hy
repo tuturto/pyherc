@@ -23,12 +23,13 @@
 (require pyherc.macros)
 
 (import [hamcrest [assert-that has-item]]
-[pyherc.data.traps [RemoteTrigger CharacterSpawner]]
+        [pyherc.data.traps [RemoteTrigger CharacterSpawner]]
         [pyherc.data.constants [Direction]]
         [pyherc.data [add-character add-trap get-characters]]
-        [pyherc.ports [set-action-factory move]]
+        [pyherc.ports [set-action-factory]]
         [pyherc.test.builders [LevelBuilder CharacterBuilder
-                               ActionFactoryBuilder]])
+                               ActionFactoryBuilder]]
+        pyherc)
 
 (defn setup []
   "setup test case"
@@ -59,6 +60,6 @@
     (add-character level #t(1 1) character₀)
     (add-trap level #t(2 1) trigger)
     (add-trap level #t(5 5) spawner)
-    (move character₀ Direction.east)
+    (call move character₀ Direction.east)
     (assert-that (list (get-characters level))
                  (has-item character₁))))

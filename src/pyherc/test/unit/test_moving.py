@@ -30,12 +30,13 @@ from pyherc.data import (Model, Portal, add_portal, add_character, get_character
                          get_character, move_character)
 from pyherc.data.constants import Direction
 from pyherc.data.model import ESCAPED_DUNGEON
-from pyherc.ports import is_move_legal, move, set_action_factory
+from pyherc.ports import set_action_factory
 from pyherc.test.builders import (ActionFactoryBuilder, CharacterBuilder,
                                   LevelBuilder)
 from pyherc.test.helpers import EventListener
 from pyherc.test.matchers import has_marked_for_redrawing, is_illegal, is_legal, EventType
 from mockito import verify, mock
+import pyherc
 
 
 class TestEventDispatching():
@@ -80,8 +81,8 @@ class TestEventDispatching():
         """
         Test that moving will create an event and send it forward
         """
-        move(character=self.character,
-             direction=Direction.east)
+        pyherc.vtable['\ufdd0:move'](character=self.character,
+                                     direction=Direction.east)
 
         verify(self.listener).receive_event(EventType('move'))
 
@@ -142,8 +143,8 @@ class TestMoving():
 
         add_character(self.level2, (10, 10), blocker)
 
-        move(character=self.character,
-             direction=Direction.enter)
+        pyherc.vtable['\ufdd0:move'](character=self.character,
+                                     direction=Direction.enter)
 
         assert_that(blocker.level, is_(equal_to(self.level2)))
         assert_that(self.character.level, is_(equal_to(self.level2)))
@@ -154,8 +155,8 @@ class TestMoving():
         """
         self.character.location = start
 
-        move(character=self.character,
-             direction=direction)
+        pyherc.vtable['\ufdd0:move'](character=self.character,
+                                     direction=direction)
 
         assert_that(self.character.location,
                     is_(equal_to(expected_location)))
@@ -182,8 +183,8 @@ class TestMoving():
         """
         move_character(self.level1, (1, 1), self.character)
 
-        move(character=self.character,
-             direction=Direction.north)
+        pyherc.vtable['\ufdd0:move'](character=self.character,
+                                     direction=Direction.north)
 
         assert_that(self.character.location, is_(equal_to((1, 1))))
 
@@ -191,8 +192,8 @@ class TestMoving():
         """
         Test that character can change level via portal
         """
-        move(character=self.character,
-             direction=Direction.enter)
+        pyherc.vtable['\ufdd0:move'](character=self.character,
+                                     direction=Direction.enter)
 
         assert_that(self.character.level, is_(equal_to(self.level2)))
         assert_that(self.character.location, is_(equal_to((10, 10))))
@@ -204,8 +205,8 @@ class TestMoving():
         assert self.character.level == self.level1
         assert self.character in get_characters(self.level1)
 
-        move(character=self.character,
-             direction=Direction.enter)
+        pyherc.vtable['\ufdd0:move'](character=self.character,
+                                     direction=Direction.enter)
 
         assert self.character.level == self.level2
         assert self.character in get_characters(self.level2)
@@ -217,8 +218,8 @@ class TestMoving():
         assert self.character.level == self.level1
         assert self.character in get_characters(self.level1)
 
-        move(character=self.character,
-             direction=Direction.enter)
+        pyherc.vtable['\ufdd0:move'](character=self.character,
+                                     direction=Direction.enter)
 
         assert self.character not in get_characters(self.level1)
 
@@ -228,8 +229,8 @@ class TestMoving():
         """
         move_character(self.level1, (6, 3), self.character)
 
-        move(character=self.character,
-             direction=Direction.enter)
+        pyherc.vtable['\ufdd0:move'](character=self.character,
+                                     direction=Direction.enter)
 
         assert_that(self.character.location, is_(equal_to((6, 3))))
         assert_that(self.character.level, is_(equal_to(self.level1)))
@@ -240,8 +241,8 @@ class TestMoving():
         """
         tick = self.character.tick
 
-        move(character=self.character,
-             direction=Direction.east)
+        pyherc.vtable['\ufdd0:move'](character=self.character,
+                                     direction=Direction.east)
 
         assert self.character.tick > tick
 
@@ -257,8 +258,8 @@ class TestMoving():
         add_portal(self.level1, (2, 2), portal3)
         self.character.location = (2, 2)
 
-        move(character=self.character,
-             direction=Direction.enter)
+        pyherc.vtable['\ufdd0:move'](character=self.character,
+                                     direction=Direction.enter)
 
         assert_that(model.end_condition, is_(equal_to(ESCAPED_DUNGEON)))
 
@@ -306,7 +307,7 @@ class TestSwitchingPlaces():
         """
         Two monsters can switch places
         """
-        move(self.monster_1, Direction.east)
+        pyherc.vtable['\ufdd0:move'](self.monster_1, Direction.east)
 
         assert_that(self.monster_1.location, is_(equal_to((6, 5))))
         assert_that(self.monster_2.location, is_(equal_to((5, 5))))
@@ -315,7 +316,7 @@ class TestSwitchingPlaces():
         """
         Switching places should leave system in consistent state
         """
-        move(self.monster_1, Direction.east)
+        pyherc.vtable['\ufdd0:move'](self.monster_1, Direction.east)
 
         assert_that(get_character(self.level, (6, 5)), is_(equal_to(self.monster_1)))
         assert_that(get_character(self.level, (5, 5)), is_(equal_to(self.monster_2)))

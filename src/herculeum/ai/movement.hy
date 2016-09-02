@@ -30,7 +30,8 @@
                       open-area?]]
         [pyherc.data.geometry [find-direction area-4-around]]
         [pyherc.data.level [tiles↜]]
-        [pyherc.ports [wait move move-legal?]])
+        [pyherc.ports [wait]]
+        pyherc)
 
 (defn clear-current-destination [character]
   "clear current destination of character"
@@ -77,8 +78,8 @@
                                                  target
                                                  (. character level))]
         [direction (find-direction (. character location) (second path))]]
-    (if (move-legal? character direction)
-      (move character direction)
+    (if (call move-legal? character direction)
+      (call move character direction)
       (wait character)))) ;; TODO: special cases and everything
 
 (defn take-step-towards-destination [character]
@@ -87,8 +88,8 @@
         [route (current-route character)]
         [#t(next-square new-route) #t((first route) (list (rest route)))]
         [direction (find-direction (. character location) next-square)]]
-    (if (move-legal? character direction)
-      (move character direction)
+    (if (call move-legal? character direction)
+      (call move character direction)
       ;; TODO: recalculate?
       (wait character))
     (assoc state :current-route new-route)))

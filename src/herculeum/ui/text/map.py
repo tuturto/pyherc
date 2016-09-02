@@ -29,7 +29,7 @@ from herculeum.ui.text.endscreen import EndScreen
 from herculeum.ui.text.inventory import InventoryScreen
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import DIED_IN_DUNGEON
-from pyherc.ports import is_move_legal, move, wait, pick_up
+from pyherc.ports import wait, pick_up
 from pyherc.events import e_event_type
 import pyherc
 
@@ -182,8 +182,8 @@ class MapScreen():
             pick_up(player,
                     items[0])
 
-        elif is_move_legal(player, 9, 'walk', self.action_factory):
-            move(player, 9, self.action_factory)
+        elif pyherc.vtable['\ufdd0:is_move_legal'](player, 9, 'walk', self.action_factory):
+            pyherc.vtable['\ufdd0:move'](player, 9, self.action_factory)
 
     @log_debug
     def refresh_screen(self):

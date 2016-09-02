@@ -26,9 +26,7 @@
 (import [pyherc.data [add-character]]
         [pyherc.data.constants [Direction]]
         [pyherc.data.effects [MovementModeModifier]]
-        [pyherc.ports [move set-action-factory]]
-        [pyherc.test.builders [CharacterBuilder LevelBuilder
-                               ActionFactoryBuilder]]
+        [pyherc.test.builders [CharacterBuilder LevelBuilder]]
         [hamcrest [assert-that is- equal-to]]
         pyherc)
 
@@ -48,20 +46,18 @@
             [_ (set-action-factory action-factory)])
 
 (fact "friendly characters can swap places when flying"
-      (with-background default [action-factory]
-        (let [[level (-> (LevelBuilder)
-                         (.build))]
-              [character₀ (-> (CharacterBuilder)
-                              (.with-effect (flying))
-                              
-                              (.build))]
-              [character₁ (-> (CharacterBuilder)
-                              (.with-effect (flying))
-                              (.build))]]
-          (setv (. character₀ artificial-intelligence) (fn [] nil))
-          (setv (. character₁ artificial-intelligence) (fn [] nil))
-          (add-character level #t(5 5) character₀)
-          (add-character level #t(6 5) character₁)
-          (move character₀ Direction.east)
-          (assert-that (. character₀ location) (is- (equal-to #t(6 5))))
-          (assert-that (. character₁ location) (is- (equal-to #t(5 5)))))))
+      (let [[level (-> (LevelBuilder)
+                       (.build))]
+            [character₀ (-> (CharacterBuilder)
+                            (.with-effect (flying))                              
+                            (.build))]
+            [character₁ (-> (CharacterBuilder)
+                            (.with-effect (flying))
+                            (.build))]]
+        (setv (. character₀ artificial-intelligence) (fn [] nil))
+        (setv (. character₁ artificial-intelligence) (fn [] nil))
+        (add-character level #t(5 5) character₀)
+        (add-character level #t(6 5) character₁)
+        (call move character₀ Direction.east)
+        (assert-that (. character₀ location) (is- (equal-to #t(6 5))))
+        (assert-that (. character₁ location) (is- (equal-to #t(5 5))))))

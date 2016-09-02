@@ -24,7 +24,6 @@
 Module for moving
 """
 import pyherc
-from pyherc.ports import is_move_legal, move
 from pyherc.data import get_character
 
 
@@ -49,9 +48,9 @@ class MoveController():
         """
         level = character.level
 
-        if is_move_legal(character,
-                         direction):
-            move(character, direction)
+        if pyherc.vtable['\ufdd0:is_move_legal'](character,
+                                          direction):
+            pyherc.vtable['\ufdd0:move'](character, direction)
         elif direction != 9:
             loc = character.get_location_at_direction(direction)
             if get_character(level, loc) is not None:

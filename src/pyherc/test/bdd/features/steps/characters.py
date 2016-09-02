@@ -28,12 +28,12 @@ from pyherc.data.constants import Direction, Duration
 from pyherc.data import blocks_movement
 from pyherc.data.effects import DamageModifier
 from pyherc.data.geometry import find_direction, area_4_around
-from pyherc.ports import move
 from pyherc.test.bdd.features.helpers import (default_context, get_character,
                                               get_item, get_location, observed,
                                               with_action_factory)
 from pyherc.test.cutesy import Adventurer, Goblin, take_random_step, Wizard, make
 from pyherc.test.matchers import is_dead
+import pyherc
 
 
 def whole_level(level, location):
@@ -122,15 +122,15 @@ def impl(context, character_name, location_name):
     for tile in path[1:]:
         direction = find_direction(character.location,
                                    tile)
-        move(character,
-             direction)
+        pyherc.vtable['\ufdd0:move'](character,
+                                     direction)
 
 @when('{character_name} enters {portal_name}')
 @with_action_factory
 def impl(context, character_name, portal_name):
     character = get_character(context, character_name)
 
-    move(character, Direction.enter)
+    pyherc.vtable['\ufdd0:move'](character, Direction.enter)
 
 @when('{character_name} takes a step')
 @with_action_factory

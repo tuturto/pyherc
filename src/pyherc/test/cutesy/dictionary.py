@@ -29,7 +29,7 @@ from pyherc.generators import get_effect_creator
 from pyherc.data.effects import DamageEffect, Heal, Poison
 from pyherc.data import level_size, get_items, add_character
 from pyherc.data.geometry import find_direction
-from pyherc.ports import (is_move_legal, move, set_action_factory, wait,
+from pyherc.ports import (set_action_factory, wait,
                           drop_item, cast, gain_domain)
 from pyherc.test.builders import (ActionFactoryBuilder,
                                   LevelBuilder, SpellCastingFactoryBuilder,
@@ -222,13 +222,13 @@ class TakeRandomStep():
                           .build())
 
         directions = [direction for direction in range(1, 9)
-                      if is_move_legal(character,
-                                       direction)]
+                      if pyherc.vtable['\ufdd0:is-move-legal'](character,
+                                                               direction)]
 
         assert len(directions) > 0
 
-        move(character=character,
-             direction=directions[0])
+        pyherc.vtable['\ufdd0:move'](character=character,
+                                     direction=directions[0])
 
 
 def take_random_step():

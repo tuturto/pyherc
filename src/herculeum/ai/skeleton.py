@@ -29,7 +29,7 @@ from pyherc.aspects import log_debug
 from pyherc.data.geometry import find_direction
 from pyherc.data import find_free_space
 from pyherc.events import new_lose_focus_event, new_notice_event
-from pyherc.ports import is_move_legal, move, equip
+import pyherc
 
 
 class SkeletonWarriorAI():
@@ -129,11 +129,11 @@ class SkeletonWarriorAI():
         direction = find_direction(character.location,
                                    next_tile)
 
-        if is_move_legal(character,
-                         direction,
-                         'walk',
-                         action_factory):
-            move(character, direction, action_factory)
+        if pyherc.vtable['\ufdd0:is-move-legal'](character,
+                                                 direction,
+                                                 'walk',
+                                                 action_factory):
+            pyherc.vtable['\ufdd0:move'](character, direction, action_factory)
         else:
             character.tick = character.tick + 10
 
@@ -164,10 +164,10 @@ class SkeletonWarriorAI():
             direction = find_direction(character.location,
                                        next_tile)
 
-            if is_move_legal(character,
-                             direction,
-                             'walk',
-                             action_factory):
-                move(character, direction, action_factory)
+            if pyherc.vtable['\ufdd0:is-move-legal'](character,
+                                                     direction,
+                                                     'walk',
+                                                     action_factory):
+                pyherc.vtable['\ufdd0:move'](character, direction, action_factory)
             else:
                 character.tick = character.tick + 10

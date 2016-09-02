@@ -26,9 +26,9 @@
 
 (import [pyherc.aspects [log_debug]]
         [pyherc.data.geometry [find-direction]]    
-        [pyherc.ports [move move-legal?]]
         [pyherc.events [new-notice-event]]
-        [math [sqrt]])
+        [math [sqrt]]
+        pyherc)
 
 #d(defn wait [ai]
     "make character to wait a little bit"
@@ -36,13 +36,13 @@
 
 #d(defn can-walk? [ai action-factory direction]
     "check if character can walk to given direction"
-    (move-legal? ai.character direction))
+    (call move-legal? ai.character direction))
 
 #d(defn walk [ai action-factory &optional direction]
     "take a step to direction the ai is currently moving"
     (if direction
-      (move ai.character direction)
-      (move ai.character (second ai.mode))))
+      (call move ai.character direction)
+      (call move ai.character (second ai.mode))))
 
 (defn distance-between [start end]
   "calculate distance between two locations"
