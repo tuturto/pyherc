@@ -20,10 +20,18 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(import [pyherc.data.constants [SpecialTime]])
 (require pyherc.rules.macros)
 
-
 (date-rules
- (SpecialTime.christmas (= month 12) (in day [24 25 26]))
- (SpecialTime.aprilfools (= month 4) (= day 1)))
+ (christmas (= month 12) (in day [24 25 26]))
+ (aprilfools (= month 4) (= day 1))
+ (babbage-born (= month 12) (= day 26))
+ (babbage-died (= month 10) (= day 18))
+ (gödel-born (= month 4) (= day 28))
+ (gödel-died (= month 1) (= day 14))
+ (jacquard-born (= month 7) (= day 7))
+ (jacquard-died (= month 8) (= day 7))
+ (lovelace-born (= month 12) (= day 10))
+ (lovelace-died (= month 11) (= day 27))
+ (turing-born (= month 6) (= day 23))
+ (turing-died (= month 6) (= day 7)))

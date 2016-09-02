@@ -26,8 +26,8 @@
 
 (defn test-christmas-is-detected []
   (let [[events (get-special-events 2014 12 24)]]
-    (assert-that events (has-item SpecialTime.christmas))))
+    (assert-that events (has-item "christmas"))))
 
 (defn test-aprilfools-is-detected []
   (let [[events (get-special-events 2014 4 1)]]
-    (assert-that events (has-item SpecialTime.aprilfools))))
+    (assert-that events (has-item "aprilfools"))))

@@ -29,9 +29,10 @@
        events)))
 
 (defmacro date-rule [date-name &rest rules]
+  (setv new-name (name date-name))
   (if (> (len rules) 1)
-    `(when (and ~@rules) (.append events ~date-name))
-    `(when ~@rules (.append events ~date-name))))
+    `(when (and ~@rules) (.append events ~new-name))
+    `(when ~@rules (.append events ~new-name))))
 
 (defmacro action-interface-dsl []
   `(import [hymn.types.maybe [nothing?]]
