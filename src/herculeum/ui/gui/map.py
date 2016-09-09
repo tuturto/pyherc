@@ -36,7 +36,7 @@ from herculeum.ui.gui.layers import (zorder_floor, zorder_wall, zorder_ornament,
 from pyherc.data.model import DIED_IN_DUNGEON
 from pyherc.events import e_event_type
 from pyherc.ports import (is_dig_legal, dig,
-                          wait, pick_up, cast)
+                          pick_up, cast)
 from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
                           QEasingCurve, QEvent, QObject, QPropertyAnimation,
                           QSequentialAnimationGroup, QSize, Qt, QTimer)
@@ -44,6 +44,7 @@ from PyQt4.QtGui import (QColor, QFont, QGraphicsPixmapItem, QGraphicsScene,
                          QGraphicsSimpleTextItem, QGraphicsView, QHBoxLayout,
                          QTransform, QVBoxLayout, QWidget)
 from pyherc.data import get_characters, get_items, get_tiles
+from pyherc.data.constants import Duration
 import pyherc
 
 
@@ -480,7 +481,7 @@ class PlayMapWidget(QWidget):
         :param key: key triggering the processing
         :type key: int
         """
-        wait(self.model.player)
+        pyherc.vtable['\ufdd0:wait'](self.model.player, Duration.fast)
 
     def _zoom_in(self, key, modifiers):
         """

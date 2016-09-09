@@ -22,17 +22,16 @@
 
 (require pyherc.macros)
 (require pyherc.rules.macros)
+(require hymn.dsl)
 
-(action-interface-dsl)
+(import [hymn.types.either [Left Right]]
+        [pyherc.data.new_character [add-tick-m]])
 
-(import [pyherc.data [Duration]])
+(defn+ wait [character time]
+  "wait specified time"
+  (left-if-nil [character time]
+               (add-tick-m character time)))
 
-(defn wait [character]
-  (run-action (WaitParameters character Duration.normal)))
-
-(defn waiting-legal? [character]
-  (legal-action? (WaitParameters character Duration.normal)))
-
-(defparams WaitParameters
-  "wait"
-  [character time-to-wait])
+(defn+ wait-legal? [character time]
+  "is it legal for this character to wait?"
+  true)

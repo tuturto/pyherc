@@ -29,7 +29,8 @@ from herculeum.ui.text.endscreen import EndScreen
 from herculeum.ui.text.inventory import InventoryScreen
 from pyherc.aspects import log_debug, log_info
 from pyherc.data.model import DIED_IN_DUNGEON
-from pyherc.ports import wait, pick_up
+from pyherc.data.constants import Duration
+from pyherc.ports import pick_up
 from pyherc.events import e_event_type
 import pyherc
 
@@ -164,7 +165,7 @@ class MapScreen():
 
         .. versionadded:: 0.10
         """
-        wait(self.model.player)
+        pyherc.vtable['\ufdd0:wait'](self.model.player, Duration.fast)
 
     @log_debug
     def _action_a(self, key):

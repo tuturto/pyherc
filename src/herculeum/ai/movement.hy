@@ -28,9 +28,9 @@
         [pyherc.ai [ai-state]]
         [pyherc.data [next-to-wall? corridor? doorframe? blocks-movement
                       open-area?]]
+        [pyherc.data.constants [Duration]]
         [pyherc.data.geometry [find-direction area-4-around]]
         [pyherc.data.level [tiles↜]]
-        [pyherc.ports [wait]]
         pyherc)
 
 (defn clear-current-destination [character]
@@ -80,7 +80,7 @@
         [direction (find-direction (. character location) (second path))]]
     (if (call move-legal? character direction)
       (call move character direction)
-      (wait character)))) ;; TODO: special cases and everything
+      (call wait character Duration.fast)))) ;; TODO: special cases and everything
 
 (defn take-step-towards-destination [character]
   "take next step in current route"

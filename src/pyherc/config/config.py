@@ -47,7 +47,6 @@ from pyherc.rules.metamorphosis.factory import MetamorphosisFactory
 from pyherc.rules.magic import SpellCastingFactory
 from pyherc.rules.trapping.factory import TrappingFactory
 from pyherc.rules.public import ActionFactory
-from pyherc.rules.waiting import WaitFactory
 import pyherc.rules.moving
 
 
@@ -111,8 +110,6 @@ class Configuration():
                                               EquipFactory(),
                                               UnEquipFactory()])
 
-        wait_factory = WaitFactory()
-
         spell_factory = SpellGenerator()
 
         spell_casting_factory = SpellCastingFactory(spell_factory,
@@ -132,7 +129,6 @@ class Configuration():
         self.action_factory = ActionFactory(self.model,
                                             [drink_factory,
                                              inventory_factory,
-                                             wait_factory,
                                              spell_casting_factory,
                                              mitosis_factory,
                                              metamorphosis_factory,

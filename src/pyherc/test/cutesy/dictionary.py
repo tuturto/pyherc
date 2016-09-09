@@ -29,7 +29,8 @@ from pyherc.generators import get_effect_creator
 from pyherc.data.effects import DamageEffect, Heal, Poison
 from pyherc.data import level_size, get_items, add_character
 from pyherc.data.geometry import find_direction
-from pyherc.ports import (set_action_factory, wait,
+from pyherc.data.constants import Duration
+from pyherc.ports import (set_action_factory,                          
                           drop_item, cast, gain_domain)
 from pyherc.test.builders import (ActionFactoryBuilder,
                                   LevelBuilder, SpellCastingFactoryBuilder,
@@ -184,11 +185,7 @@ class Wait():
         """
         add_history_value(character, 'tick')
 
-        set_action_factory(ActionFactoryBuilder()
-                           .with_wait_factory()
-                           .build()) # TODO: mutating global state is bad
-
-        wait(character)
+        pyherc.vtable['\ufdd0:wait'](character, Duration.fast)
 
 
 def wait_():

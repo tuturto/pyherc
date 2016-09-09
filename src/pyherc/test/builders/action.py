@@ -34,7 +34,6 @@ from pyherc.rules.mitosis.factory import MitosisFactory
 from pyherc.rules.metamorphosis.factory import MetamorphosisFactory
 from pyherc.rules.trapping.factory import TrappingFactory
 from pyherc.rules.public import ActionFactory
-from pyherc.rules.waiting.factories import WaitFactory
 from random import Random
 
 
@@ -55,7 +54,6 @@ class ActionFactoryBuilder():
         self.use_real_drink_factory = False
         self.use_real_inventory_factory = False
         self.use_real_spellcasting_factory = False
-        self.use_real_wait_factory = False
         self.use_real_gain_domain_factory = False
         self.use_real_mitosis_factory = False
         self.use_real_metamorphosis_factory = False
@@ -89,21 +87,6 @@ class ActionFactoryBuilder():
                 self.factories.append(spellcasting_factory.build())
             else:
                 self.factories.append(spellcasting_factory)
-        return self
-
-    def with_wait_factory(self, wait_factory=None):
-        """
-        Configure wait factory to use
-
-        .. versionadded:: 0.10
-        """
-        if not wait_factory:
-            self.use_real_wait_factory = True
-        else:
-            if hasattr(wait_factory, 'build'):
-                self.factories.append(wait_factory.build())
-            else:
-                self.factories.append(wait_factory)
         return self
 
     def with_inventory_factory(self):
@@ -198,9 +181,6 @@ class ActionFactoryBuilder():
         if self.use_real_spellcasting_factory:
             self.factories.append(SpellCastingFactoryBuilder().build())
 
-        if self.use_real_wait_factory:
-            self.factories.append(WaitFactoryBuilder().build())
-
         if self.use_real_gain_domain_factory:
             self.factories.append(GainDomainFactoryBuilder().build())
 
@@ -246,25 +226,6 @@ class DrinkFactoryBuilder():
         Builds drink factory
         """
         return DrinkFactory(self.effect_factory)
-
-
-class WaitFactoryBuilder():
-    """
-    Builder for wait factory
-
-    .. versionadded:: 0.10
-    """
-    def __init__(self):
-        """
-        Default constructor
-        """
-        super().__init__()
-
-    def build(self):
-        """
-        Build wait factory
-        """
-        return WaitFactory()
 
 
 class GainDomainFactoryBuilder():

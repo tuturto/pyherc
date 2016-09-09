@@ -31,9 +31,10 @@
                                 close-in along-walls]]
         [herculeum.ai.combat [select-current-enemy current-enemy closest-enemy
                               melee detected-enemies]]
-        [pyherc.ports [wait]]
         [pyherc.data.geometry [in-area area-4-around]]
-        [pyherc.ai [a-star :as a* show-alert-icon show-confusion-icon]])
+        [pyherc.data.constants [Duration]]
+        [pyherc.ai [a-star :as a* show-alert-icon show-confusion-icon]]
+        pyherc)
 
 
 (defstatemachine RatAI []
@@ -54,7 +55,7 @@
                                             (fill-along-walls (. character level)))) 
                            (clear-current-destination character))
               (active (one-of (patrol-home-area (a* (along-walls)) character)
-                              (wait character)))
+                              (call wait character Duration.fast)))
               (transitions [(detected-enemies character) fighting]))
   
   "fight enemy"

@@ -31,7 +31,6 @@
                                 close-in along-open-space]]
         [herculeum.ai.combat [select-current-enemy current-enemy closest-enemy
                               melee detected-enemies]]
-        [pyherc.ports [wait]]
         [pyherc.data [open-area?]]
         [pyherc.data.geometry [in-area area-4-around]]
         [pyherc.ai [a-star :as a* show-alert-icon show-confusion-icon]])
