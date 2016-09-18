@@ -29,7 +29,8 @@ from functools import partial
 import pyherc
 from pyherc.generators import (generate_creature, get_effect_creator,
                                ItemConfigurations, ItemGenerator,
-                               SpellGenerator, get_trap_creator)
+                               SpellGenerator, get_trap_creator,
+                               generate_artefact)
 from pyherc.generators.level.old_config import LevelGeneratorFactoryConfig
 from pyherc.generators.level.generator import LevelGeneratorFactory
 from pyherc.generators.level import PortalAdderFactory, new_dungeon, merge_level
@@ -224,6 +225,8 @@ class Configuration():
         """
         self.item_generator = ItemGenerator(self.get_item_config(context))
 
+        pyherc.vtable["\ufdd0:generate-artefact"] = generate_artefact
+        
         self.creature_generator = partial(generate_creature,
                                           self.get_creature_config(context),
                                           self.model,

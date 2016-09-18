@@ -183,7 +183,7 @@ class MapScreen():
             pick_up(player,
                     items[0])
 
-        elif pyherc.vtable['\ufdd0:is_move_legal'](player, 9, 'walk', self.action_factory):
+        elif pyherc.vtable['\ufdd0:is-move-legal'](player, 9, 'walk', self.action_factory):
             pyherc.vtable['\ufdd0:move'](player, 9, self.action_factory)
 
     @log_debug

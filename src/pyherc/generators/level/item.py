@@ -93,7 +93,8 @@ class ItemAdder():
         for i in range(amount):
             new_item = self.item_generator.generate_item(
                 name=item_spec['name'],
-                item_type=item_spec['type'])
+                item_type=item_spec['type'],
+                artefact_type=item_spec['artefact-type'])
             items.append((item_spec, new_item))
 
         return items

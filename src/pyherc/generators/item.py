@@ -26,6 +26,7 @@ Classes needed for item generation
 
 import random
 
+import pyherc
 from pyherc.aspects import log_debug, log_info
 from pyherc.data import Item
 from pyherc.data.effects import EffectHandle, EffectsCollection
@@ -49,7 +50,7 @@ class ItemGenerator():
         self.config = config
 
     @log_info
-    def generate_item(self, name=None, item_type=None):
+    def generate_item(self, name=None, item_type=None, artefact_type=None):
         """
         Generate an item
 
@@ -60,12 +61,15 @@ class ItemGenerator():
         :return: Generated item
         :rtype: Item
         """
-        item_specification = self.find_item_specification(name=name,
-                                                          item_type=item_type)
+        if artefact_type:
+            return pyherc.vtable['\ufdd0:generate-artefact'](artefact_type)
+        else:        
+            item_specification = self.find_item_specification(name=name,
+                                                              item_type=item_type)
 
-        item = self.create_item(item_specification)
+            item = self.create_item(item_specification)
 
-        return item
+            return item
 
     @log_debug
     def find_item_specification(self, name=None, item_type=None):

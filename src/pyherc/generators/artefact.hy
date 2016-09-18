@@ -1,5 +1,5 @@
 ;; -*- coding: utf-8 -*-
-;;
+
 ;; Copyright (c) 2010-2015 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,31 +21,32 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
-(import [random [Random]])
 
-(defn chain-factory [start-elements elements continue-fn]
-  "create factory function that can create markov chain instances"
-  (fn [&optional [seed nil]]
-    "create generator for chain"
-    (setv rng (if seed
-                (Random seed)
-                (Random))) 
-    (defn select-next-element [elements-list]
-      "select element"
-      (let [[high (max (list-comp upper [#t (element lower upper) elements-list]))]
-            [value (.randint rng 0 high)]
-            [matches (list-comp element [#t (element lower upper) elements-list]
-                                (> lower value upper))]]
-        (if matches
-          (first (.choice rng matches))
-          (first (.choice rng elements-list)))))
+(defmulti generate-artefact [artefact-type &optional [seed nil]]
+  "select method based on artefact-type parameter"
+  artefact-type)
 
-    (setv current-element (select-next-element start-elements))
-    (setv running true)
-    (yield current-element)
-    (while running
-      (setv next-elements (get elements current-element))
-      (setv current-element (select-next-element next-elements))
-      (setv running (continue-fn current-element))
-      (when (not running) (break))
-      (yield current-element))))
+(default-method generate-artefact [artefact-type &optional [seed nil]]
+  "create blueprint of specific type and instantiate it"
+  (-> (create-blueprint artefact-type seed)
+      (instantiate-blueprints)))
+
+;; create blueprint for an artefact or part of it
+(defmulti create-blueprint [artefact-type &optional [seed nil]]
+  "select method based on artefact-type parameter"
+  artefact-type)
+
+(default-method create-blueprint [artefact-type &optional [seed nil]]
+  "no definition was found for artefact, throw an error"
+  (assert false "no artefact blueprint defined"))
+
+;; create instance of an artefact based on one or more blueprint
+(defmulti instantiate-blueprints [&rest blueprints]
+  "select method based on type in blueprint"
+  (if (= (len blueprints) 1)
+    (:type (first blueprints))
+    #t('scroll-paper 'scroll-writing)))
+
+(default-method instantiate-blueprints [&rest blueprints]
+  "no definition found, thrown an error"
+  (assert false "no instantiator found for blueprint"))

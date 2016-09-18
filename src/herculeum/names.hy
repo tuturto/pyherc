@@ -23,7 +23,8 @@
 (require hy.contrib.anaphoric)
 (require pyherc.macros)
 
-(import [pyherc.utils [group]]
+(import [random [Random]]
+        [pyherc.utils [group]]
         [pyherc.markov [chain-factory]])
 
 (setv male-names 
@@ -141,14 +142,23 @@
 (def greek-males (create-name-generator male-names))
 (def greek-females (create-name-generator female-names))
 
-(defn generate-name [factory]
+(defn generate-name [factory &optional [seed nil]]
   "generate a name"
   (.capitalize (.join "" (list (factory)))))
 
-(defn generate-male-name []
-  "generate name for male"
-  (generate-name greek-males))
+(defn generate-random-name [&optional [seed nil]]
+  "generate random name"
+  (setv rng (if seed
+              (Random seed)
+              (Random)))
+  (if (= 1 (.randint rng 1 2))
+    (generate-male-name (.randint rng 0 9223372036854775807))
+    (generate-female-name (.randint rng 0 9223372036854775807))))
 
-(defn generate-female-name []
+(defn generate-male-name [&optional [seed nil]]
+  "generate name for male"
+  (generate-name greek-males seed))
+
+(defn generate-female-name [&optional [seed nil]]
   "generate name for female"
-  (generate-name greek-females))
+  (generate-name greek-females seed))

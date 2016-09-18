@@ -25,6 +25,7 @@
 """
 Package for generation related activities
 """
+from .artefact import generate_artefact
 from .dungeon import generate_dungeon
 from .item import ItemGenerator, ItemConfigurations, ItemConfiguration
 from .item import WeaponConfiguration, ArmourConfiguration, TrapConfiguration

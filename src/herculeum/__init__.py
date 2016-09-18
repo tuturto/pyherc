@@ -24,3 +24,7 @@
 Herculeum is a rogue clone
 """
 pass
+
+import hy
+import herculeum.scrolls
+

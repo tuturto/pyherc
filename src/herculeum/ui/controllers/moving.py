@@ -47,8 +47,7 @@ class MoveController():
         Move or attack
         """
         level = character.level
-
-        if pyherc.vtable['\ufdd0:is_move_legal'](character,
+        if pyherc.vtable['\ufdd0:is-move-legal'](character,
                                           direction):
             pyherc.vtable['\ufdd0:move'](character, direction)
         elif direction != 9:

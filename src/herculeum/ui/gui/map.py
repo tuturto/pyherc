@@ -532,7 +532,7 @@ class PlayMapWidget(QWidget):
             pick_up(player,
                     items[0])
 
-        elif pyherc.vtable['\ufdd0:is_move_legal'](player, 9):
+        elif pyherc.vtable['\ufdd0:is-move-legal'](player, 9):
             pyherc.vtable['\ufdd0:move'](player, 9)
 
         elif is_dig_legal(player):

@@ -173,11 +173,15 @@
 
 (defmacro item-by-type [min-amount max-amount item-type]
   `{"min_amount" ~min-amount "max_amount" ~max-amount "name" nil
-                 "type" ~item-type "location" "room"})
+                 "type" ~item-type "artefact-type" nil "location" "room"})
 
 (defmacro item-by-name [min-amount max-amount name]
   `{"min_amount" ~min-amount "max_amount" ~max-amount "name" ~name
-                 "type" nil "location" "room"})
+                 "type" nil "artefact-type" nil "location" "room"})
+
+(defmacro artefact-by-type [min-amount max-amount artefact-type]
+  `{"min_amount" ~min-amount "max_amount" ~max-amount "name" nil
+                 "type" nil "artefact-type" ~artefact-type "location" "room"})
 
 (defmacro creature-lists [&rest creatures]
   `(ap-map (CreatureAdder creature-generator it rng) [~@creatures]))

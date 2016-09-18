@@ -24,4 +24,4 @@
 Package for tests
 """
 from herculeum.test.integration.test_room_generators import *
-
+from herculeum.test.integration.test_scroll_creation import *

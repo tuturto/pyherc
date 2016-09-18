@@ -20,32 +20,14 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(import [random [Random]])
+(require archimedes)
 
-(defn chain-factory [start-elements elements continue-fn]
-  "create factory function that can create markov chain instances"
-  (fn [&optional [seed nil]]
-    "create generator for chain"
-    (setv rng (if seed
-                (Random seed)
-                (Random))) 
-    (defn select-next-element [elements-list]
-      "select element"
-      (let [[high (max (list-comp upper [#t (element lower upper) elements-list]))]
-            [value (.randint rng 0 high)]
-            [matches (list-comp element [#t (element lower upper) elements-list]
-                                (> lower value upper))]]
-        (if matches
-          (first (.choice rng matches))
-          (first (.choice rng elements-list)))))
+(import [hamcrest [assert-that is-not :as is-not- is-]]
+        [hypothesis.strategies [integers]]
+        [pyherc.generators.artefact [generate-artefact]]
+        [herculeum.scrolls])
 
-    (setv current-element (select-next-element start-elements))
-    (setv running true)
-    (yield current-element)
-    (while running
-      (setv next-elements (get elements current-element))
-      (setv current-element (select-next-element next-elements))
-      (setv running (continue-fn current-element))
-      (when (not running) (break))
-      (yield current-element))))
+(fact "specific artefact scroll can be created"
+      (variants :seed (integers))
+      (assert-that (generate-artefact 'scroll :seed seed)
+                   (is-not- nil)))
