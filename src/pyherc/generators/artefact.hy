@@ -45,7 +45,7 @@
   "select method based on type in blueprint"
   (if (= (len blueprints) 1)
     (:type (first blueprints))
-    #t('scroll-paper 'scroll-writing)))
+    (tuple (list-comp (:type blueprint) [blueprint blueprints]))))
 
 (default-method instantiate-blueprints [&rest blueprints]
   "no definition found, thrown an error"
