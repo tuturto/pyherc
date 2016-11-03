@@ -34,4 +34,5 @@ from .perception import is_spotted
 import pyherc.rules.moving
 import pyherc.rules.combat
 import pyherc.rules.lunging
+import pyherc.rules.pulling
 import pyherc.rules.waiting

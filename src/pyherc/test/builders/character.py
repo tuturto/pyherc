@@ -49,6 +49,7 @@ class CharacterBuilder():
         self.body = 1
         self.mind = 1
         self.finesse = 1
+        self.size = 'medium'
 
         self.name = 'prototype'
 
@@ -298,6 +299,13 @@ class CharacterBuilder():
         self.finesse = finesse
         return self
 
+    def with_size(self, size):
+        """
+        Set size of the character
+        """
+        self.size = size
+        return self
+    
     def with_domain(self, domain, level):
         """
         Set spell domain for character
@@ -351,6 +359,7 @@ class CharacterBuilder():
         character.mind = self.mind
         character.body = self.body
         character.finesse = self.finesse
+        character.size = self.size
         character.attack = self.attack
 
         character.speed = self.speed

@@ -24,6 +24,7 @@
 (require pyherc.macros)
 
 (import [pyherc.data.new-item [armour-speed-modifier boots-speed-modifier]]
+        [pyherc.data.constants [sizes]]
         [hymn.types.either [Left Right]])
 
 (defn skill-ready? [character skill]
@@ -116,3 +117,28 @@
                (when (not (in skill character.cooldowns))
                  (assoc character.cooldowns skill 0))
                (Right (get character.cooldowns skill))))
+
+(defn size [character &optional size]
+  "size of a character"
+  (when size
+    (assert (in size sizes))
+    (setv character.size size))
+  character.size)
+
+(defn smaller? [a b]
+  "compare two sizes and check if a is smaller than b"
+  (< (.index sizes a)
+     (.index sizes b)))
+
+(defn larger? [a b]
+  "compare two sizes and check if a is larger than b"
+  (> (.index sizes a)
+     (.index sizes b)))
+
+(defn same-size? [a b]
+  "compare two sizes and check if they're same"
+  (= a b))
+
+(defn different-size? [a b]
+  "compare two sizes and check if they're different"
+  (not (= a b)))

@@ -27,12 +27,12 @@ Feature: Magic
        When Simon casts healing wind
        Then Simon should be in full health
 
-  @active
-  Scenario: Domain specialization
-      Given Simon has rune
-       When Simon uses rune for fire domain
-       Then Simon should have more fire spells
-        And Rune should not be in inventory of Simon
+#  @active
+#  Scenario: Domain specialization
+#      Given Simon has rune
+#       When Simon uses rune for fire domain
+#       Then Simon should have more fire spells
+#        And Rune should not be in inventory of Simon
 
   Scenario: Out of spirit
       Given Simon has no spirit left

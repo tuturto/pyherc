@@ -24,6 +24,11 @@
 Module for common constants
 """
 
+sizes = ['tiny',
+         'small',
+         'medium',
+         'large',
+         'huge']
 
 class Duration():
     """
