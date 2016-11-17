@@ -1,0 +1,320 @@
+;; -*- coding: utf-8 -*-
+;;
+;; Copyright (c) 2010-2015 Tuukka Turto
+;; 
+;; Permission is hereby granted, free of charge, to any person obtaining a copy
+;; of this software and associated documentation files (the "Software"), to deal
+;; in the Software without restriction, including without limitation the rights
+;; to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+;; copies of the Software, and to permit persons to whom the Software is
+;; furnished to do so, subject to the following conditions:
+;; 
+;; The above copyright notice and this permission notice shall be included in
+;; all copies or substantial portions of the Software.
+;; 
+;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+;; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+;; THE SOFTWARE.
+
+;; based on code by Paul Schlyter at http://www.stjarnhimlen.se/comp/ppcomp.html
+
+(import math)
+
+(defn sinᵒ [x]
+  (math.sin (math.radians x)))
+
+(defn cosᵒ [x]
+  (math.cos (math.radians x)))
+
+(defn atan2ᵒ [y x]
+  (math.degrees (math.atan2 y x)))
+
+(defn date [year month day hour]
+  "create date representation"
+  (+ (* year 367)
+     (- (// (* 7 (+ year (// (+ month 9) 12))) 4))
+     (// (* month 275) 9)
+     day
+     -730530
+     (/ hour 24.0)))
+
+(defn normalize-angle [n]
+  "normalize angle so that 0 <= n <= 360"
+  (when n (- n (* 360 (// n 360)))))
+
+(defn new-orbit [name date long-ascending-node inclination arg-perihelion
+                 semi-major-axis eccentricity mean-anomaly]
+  "create data structure representing orbital elements"
+  {:name name
+   :date date
+   :long-ascending-node (normalize-angle long-ascending-node)
+   :inclination (normalize-angle inclination)
+   :arg-perihelion (normalize-angle arg-perihelion)
+   :semi-major-axis semi-major-axis
+   :eccentricity eccentricity
+   :mean-anomaly (normalize-angle mean-anomaly)})
+
+(defn longitude-of-perihelion [orbit]
+  "calculate longitude of perihelion"
+  (:longitude-of-perihelion orbit))
+
+(defn mean-anomaly [orbit]
+  (:mean-anomaly orbit))
+
+(defn eccentricity [orbit]
+  (:eccentricity orbit))
+
+(defn semi-major-axis [orbit]
+  "semi-major axis or mean distance"
+  (:semi-major-axis orbit))
+
+(defn longitude-ascending-node [orbit]
+  (:long-ascending-node orbit))
+
+(defn inclination [orbit]
+  (:inclination orbit))
+
+(defn argument-perihelion [orbit]
+  (:arg-perihelion orbit))
+
+(setv orbits {})
+
+(defn register-orbit [body func]
+  (assoc orbits body func))
+
+(register-orbit 'sun 
+                (fn [d]
+                  "orbital elements of sun on a given date"
+                  (new-orbit :name 'sun
+                             :date d
+                             :long-ascending-node nil
+                             :arg-perihelion (+ 282.9404 (* 4.70935E-5 d))
+                             :semi-major-axis 1.0
+                             :eccentricity (- 0.016709 (* 1.151E-9 d))
+                             :mean-anomaly (+ 356.0470 (* 0.9856002585 d))
+                             :inclination 0.0)))
+
+(register-orbit 'mercury 
+                (fn [d]
+                  "orbital elements of mercury on a given date"
+                  (new-orbit :name 'mercury
+                             :date d
+                             :long-ascending-node (+ 48.3313 (* 3.24587E-5 d))
+                             :arg-perihelion (+ 29.1241 (* 1.01444E-5 d))
+                             :semi-major-axis 0.387098
+                             :eccentricity (+ 0.205635 (* 5.59E-10 d))
+                             :mean-anomaly (+ 168.6562 (* 4.0923344368 d))
+                             :inclination (+ 7.0047 (* 5.00E-8 d)))))
+
+(register-orbit 'venus
+                (fn [d]
+                  "orbital element of venus on a given date"
+                  (new-orbit :name 'mercury
+                             :date d
+                             :long-ascending-node (+ 76.6799 (* 2.46590E-5 d))
+                             :inclination (+ 3.3946 (* 2.75E-8 d))
+                             :arg-perihelion (+ 54.8910 (* 1.38374E-5 d))
+                             :semi-major-axis 0.723330
+                             :eccentricity (- 0.006773 (* 1.302E-9 d))
+                             :mean-anomaly (+ 48.0052 (* 1.6021302244 d)))))
+
+(register-orbit 'mars
+                (fn [d]
+                  "orbital elements of mars on a given date"
+                  (new-orbit :name 'mars
+                             :date d
+                             :long-ascending-node (+ 49.5574 (* 2.11081E-5 d))
+                             :inclination (- 1.8497 (* 1.78E-8 d))
+                             :arg-perihelion (+ 286.5016 (* 2.92961E-5 d))
+                             :semi-major-axis 1.523688
+                             :eccentricity (+ 0.093405 (* 2.516E-9 d))
+                             :mean-anomaly (+ 18.6021 (* 0.5240207766 d)))))
+
+(register-orbit 'jupiter
+                (fn [d]
+                  "orbital elements of jupiter on a given date"
+                  (new-orbit :name 'jupiter
+                             :date d
+                             :long-ascending-node (+ 100.4542 (* 2.76854E-5 d))
+                             :inclination (- 1.3030 (* 1.557E-7 d))
+                             :arg-perihelion (+ 273.8777 (* 1.64505E-5 d))
+                             :semi-major-axis 5.20256
+                             :eccentricity (+ 0.048498 (* 4.469E-9 d))
+                             :mean-anomaly (+ 19.8950 (* 0.0830853001 d)))))
+
+(register-orbit 'saturn
+                (fn [d]
+                  "orbital elements of saturn on a given date"
+                  (new-orbit :name 'saturn
+                             :date d
+                             :long-ascending-node (+ 113.6634 (* 2.38980E-5 d))
+                             :inclination (- 2.4886 (* 1.081E-7 d))
+                             :arg-perihelion (+ 339.3939 (* 2.97661E-5 d))
+                             :semi-major-axis 9.55475
+                             :eccentricity (- 0.055546 (* 9.499E-9 d))
+                             :mean-anomaly (+ 316.9670 (* 0.0334442282 d)))))
+
+(register-orbit 'uranus
+                (fn [d]
+                  "orbital elements of uranus on a given date"
+                  (new-orbit :name 'uranus
+                             :date d
+                             :long-ascending-node (+ 74.0005 (* 1.3978E-5 d))
+                             :inclination (+ 0.7733 (* 1.9E-8 d))
+                             :arg-perihelion (+ 96.6612 (* 3.0565E-5 d))
+                             :semi-major-axis (- 19.18171 (* 1.55E-8 d))
+                             :eccentricity (+ 0.047318 (* 7.45E-9 d))
+                             :mean-anomaly (+ 142.5905 (* 0.011725806 d)))))
+
+(register-orbit 'neptune
+                (fn [d]
+                  "orbital elements of neptune on a given date"
+                  (new-orbit :name 'neptune
+                             :date d
+                             :long-ascending-node (+ 131.7806 (* 3.0173E-5 d))
+                             :inclination (- 1.7700 (* 2.55E-7 d))
+                             :arg-perihelion (- 272.8461 (* 6.027E-6 d))
+                             :semi-major-axis (+ 30.05826 (* 3.313E-8 d))
+                             :eccentricity (+ 0.008606 (* 2.15E-9 d))
+                             :mean-anomaly (+ 260.2471 (* 0.005995147 d)))))
+
+(defn orbit [body d]
+  ((get orbits body) d))
+
+(defn obliquity-of-ecliptic [d]
+  "obliquity of the ecliptic"
+  (- 23.4393 (* 3.563E-7 d)))
+
+(defn mean-longitude [orbit]
+  (normalize-angle (+ (argument-perihelion orbit)
+                      (mean-anomaly orbit))))
+
+(defn eccentric-anomaly [orbit]
+  "calculate eccentric-anomaly for orbit"
+  (+ (mean-anomaly orbit)
+     (* (/ 180.0 math.pi)
+        (eccentricity orbit) (sinᵒ (mean-anomaly orbit))
+        (+ 1 (* (eccentricity orbit)
+                (cosᵒ (mean-anomaly orbit)))))))
+
+(defn ecliptic-coordinates [orbit]
+  (, (* (semi-major-axis orbit)
+        (- (cosᵒ (eccentric-anomaly orbit))
+           (eccentricity orbit)))
+     (* (semi-major-axis orbit)
+        (math.sqrt (- 1 (pow (eccentricity orbit) 2)))
+        (sinᵒ (eccentric-anomaly orbit)))))
+
+(defn distance-true-anomaly [ecliptic-coords]
+  (let [[x (first ecliptic-coords)]
+        [y (second ecliptic-coords)]]
+    (, (math.sqrt (+ (pow x 2)
+                     (pow y 2)))
+       (atan2ᵒ y x))))
+
+(defn longitude [orbit]
+  "calculate longitude of given orbit"
+  (let [[(, r v) (distance-true-anomaly (ecliptic-coordinates orbit))]]
+    (normalize-angle (+ v (argument-perihelion orbit)))))
+
+(defn eccentric-anomaly [orbit]
+  "calculate eccentric-anomaly for orbit"
+  (+ (mean-anomaly orbit)
+     (* (/ 180.0 math.pi)
+        (eccentricity orbit) (sinᵒ (mean-anomaly orbit))
+        (+ 1 (* (eccentricity orbit)
+                (cosᵒ (mean-anomaly orbit))))))) ;; TODO: iteration if e > 0.05
+
+(defn distance-true-anomaly [orbit]
+  "calculate distance and true anomaly for a planet in given orbit"
+  (defn ecliptic-coordinates []
+  (, (* (semi-major-axis orbit)
+        (- (cosᵒ (eccentric-anomaly orbit))
+           (eccentricity orbit)))
+     (* (semi-major-axis orbit)
+        (math.sqrt (- 1 (pow (eccentricity orbit) 2)))
+        (sinᵒ (eccentric-anomaly orbit)))))
+  
+  (let [[(, x y) (ecliptic-coordinates)]]
+    (, (math.sqrt (+ (pow x 2)
+                     (pow y 2)))
+       (atan2ᵒ y x))))
+
+(defn heliocentric-location [dist-true-anomaly orbit]
+  "compute heliocentric position"
+  (let [[(, distance true-anomaly) dist-true-anomaly]]
+    (, (* distance (- (* (cosᵒ (longitude-ascending-node orbit)) 
+                         (cosᵒ (+ true-anomaly (argument-perihelion orbit)))) 
+                      (* (sinᵒ (longitude-ascending-node orbit)) 
+                         (sinᵒ (+ true-anomaly (argument-perihelion orbit))) 
+                         (cosᵒ (inclination orbit)))))
+       (* distance (+ (* (sinᵒ (longitude-ascending-node orbit)) 
+                         (cosᵒ (+ true-anomaly (argument-perihelion orbit)))) 
+                      (* (cosᵒ (longitude-ascending-node orbit)) 
+                         (sinᵒ (+ true-anomaly (argument-perihelion orbit))) 
+                         (cosᵒ (inclination orbit)))))
+       (* distance 
+          (sinᵒ (+ true-anomaly (argument-perihelion orbit))) 
+          (sinᵒ (inclination orbit))))))
+
+(defn sun-long [orbit]
+  "longitude of sun"
+  (let [[(, distance true-anomaly) (distance-true-anomaly orbit)]]
+    (normalize-angle (+ true-anomaly (argument-perihelion orbit)))))
+
+(defn ecliptic-lon-lat [helio-loc]
+  "translate heliocentric location into ecliptic longitute latitude pair"
+  (let [[(, x y z) helio-loc]]
+    (, (atan2ᵒ y x)
+       (atan2ᵒ z 
+               (math.sqrt (+ (pow x 2) (pow y 2)))))))
+
+(defn ecliptical-to-equatorial [position obliquity]
+  "translate ecliptical coordinates to equatorial"
+  (let [[(, x y z) position]]
+    (, x
+       (- (* y (cosᵒ obliquity))
+          (* z (sinᵒ obliquity)))
+       (+ (* y (sinᵒ obliquity))
+          (* z (cosᵒ obliquity))))))
+
+(defn ra-decl [position]
+  "translate ecliptical position into RA declination pair"
+  (let [[(, x y z) position]]
+    (, (atan2ᵒ y x)
+       (atan2ᵒ z 
+               (math.sqrt (+ (pow x 2)
+                             (pow y 2)))))))
+
+(defn heliocentric-position [body d]
+  "calculate heliocentric position of a body"
+  (let [[planet-orbit (orbit body d)]]
+    (heliocentric-location (distance-true-anomaly planet-orbit)
+                           planet-orbit)))
+
+(defn sun-loc [d]
+  "calculate sun location"
+  (let [[sun-orbit (orbit 'sun d)]
+        [(, distance true-anomaly) (distance-true-anomaly sun-orbit)]
+        [long (sun-long sun-orbit)]]
+    (, (* distance (cosᵒ long))
+       (* distance (sinᵒ long))
+       0.0)))
+
+(defn geocentric-position [body d]
+  "geocentric position of a body"
+  (list (map (fn [x] (+ (first x) (second x)))
+             (zip (heliocentric-position body d)
+                  (sun-loc d)))))
+
+(defn ra-decl-of [body d]
+  "calculate RA and declination of given body on given moment of time"
+  (-> (if (= body 'sun)
+        (sun-loc d)
+        (geocentric-position body d))
+      (ecliptical-to-equatorial (obliquity-of-ecliptic d))
+      (ra-decl)))

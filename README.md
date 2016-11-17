@@ -45,4 +45,6 @@ and are distributed under a CC-BY-SA 3.0 license. Great palette by DawnBringer.
 
 A star implementation adapted from one by Pauli Henrikki Rikula
 
+Planet orbit calculations based on code by Paul Schlyter at http://www.stjarnhimlen.se/comp/ppcomp.html
+
 Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
