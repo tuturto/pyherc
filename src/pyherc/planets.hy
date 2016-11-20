@@ -81,6 +81,26 @@
 (defn argument-perihelion [orbit]
   (:arg-perihelion orbit))
 
+(setv zodiacs [(, 0 30 'ihtheis)
+               (, 30 60 'krios)
+               (, 60 90 'tavros)
+               (, 90 120 'didimoi)
+               (, 120 150 'karkinos)
+               (, 150 180 'leon)
+               (, 180 210 'parthenos)
+               (, 210 240 'zygos)
+               (, 240 270 'skorpios)
+               (, 270 300 'toksotis)
+               (, 300 330 'aigokeros)
+               (, 330 360 'ydrohoos)])
+
+(defn ra-to-zodiac [ra]
+  "convert RA to respective zodiac"
+  (get (first (filter (fn [x]
+                        (<= (first x) ra (second x)))
+                      zodiacs))
+       2))
+
 (setv orbits {})
 
 (defn register-orbit [body func]
@@ -98,10 +118,10 @@
                              :mean-anomaly (+ 356.0470 (* 0.9856002585 d))
                              :inclination 0.0)))
 
-(register-orbit 'mercury 
+(register-orbit 'hermes
                 (fn [d]
-                  "orbital elements of mercury on a given date"
-                  (new-orbit :name 'mercury
+                  "orbital elements of mercury/hermes on a given date"
+                  (new-orbit :name 'hermes
                              :date d
                              :long-ascending-node (+ 48.3313 (* 3.24587E-5 d))
                              :arg-perihelion (+ 29.1241 (* 1.01444E-5 d))
@@ -110,10 +130,10 @@
                              :mean-anomaly (+ 168.6562 (* 4.0923344368 d))
                              :inclination (+ 7.0047 (* 5.00E-8 d)))))
 
-(register-orbit 'venus
+(register-orbit 'aphrodite
                 (fn [d]
-                  "orbital element of venus on a given date"
-                  (new-orbit :name 'mercury
+                  "orbital element of venus/aphrodite on a given date"
+                  (new-orbit :name 'aphrodite
                              :date d
                              :long-ascending-node (+ 76.6799 (* 2.46590E-5 d))
                              :inclination (+ 3.3946 (* 2.75E-8 d))
@@ -122,10 +142,10 @@
                              :eccentricity (- 0.006773 (* 1.302E-9 d))
                              :mean-anomaly (+ 48.0052 (* 1.6021302244 d)))))
 
-(register-orbit 'mars
+(register-orbit 'ares
                 (fn [d]
-                  "orbital elements of mars on a given date"
-                  (new-orbit :name 'mars
+                  "orbital elements of mars/ares on a given date"
+                  (new-orbit :name 'ares
                              :date d
                              :long-ascending-node (+ 49.5574 (* 2.11081E-5 d))
                              :inclination (- 1.8497 (* 1.78E-8 d))
@@ -146,9 +166,9 @@
                              :eccentricity (+ 0.048498 (* 4.469E-9 d))
                              :mean-anomaly (+ 19.8950 (* 0.0830853001 d)))))
 
-(register-orbit 'saturn
+(register-orbit 'cronus
                 (fn [d]
-                  "orbital elements of saturn on a given date"
+                  "orbital elements of saturn/cronus on a given date"
                   (new-orbit :name 'saturn
                              :date d
                              :long-ascending-node (+ 113.6634 (* 2.38980E-5 d))
@@ -157,30 +177,6 @@
                              :semi-major-axis 9.55475
                              :eccentricity (- 0.055546 (* 9.499E-9 d))
                              :mean-anomaly (+ 316.9670 (* 0.0334442282 d)))))
-
-(register-orbit 'uranus
-                (fn [d]
-                  "orbital elements of uranus on a given date"
-                  (new-orbit :name 'uranus
-                             :date d
-                             :long-ascending-node (+ 74.0005 (* 1.3978E-5 d))
-                             :inclination (+ 0.7733 (* 1.9E-8 d))
-                             :arg-perihelion (+ 96.6612 (* 3.0565E-5 d))
-                             :semi-major-axis (- 19.18171 (* 1.55E-8 d))
-                             :eccentricity (+ 0.047318 (* 7.45E-9 d))
-                             :mean-anomaly (+ 142.5905 (* 0.011725806 d)))))
-
-(register-orbit 'neptune
-                (fn [d]
-                  "orbital elements of neptune on a given date"
-                  (new-orbit :name 'neptune
-                             :date d
-                             :long-ascending-node (+ 131.7806 (* 3.0173E-5 d))
-                             :inclination (- 1.7700 (* 2.55E-7 d))
-                             :arg-perihelion (- 272.8461 (* 6.027E-6 d))
-                             :semi-major-axis (+ 30.05826 (* 3.313E-8 d))
-                             :eccentricity (+ 0.008606 (* 2.15E-9 d))
-                             :mean-anomaly (+ 260.2471 (* 0.005995147 d)))))
 
 (defn orbit [body d]
   ((get orbits body) d))
@@ -318,3 +314,7 @@
         (geocentric-position body d))
       (ecliptical-to-equatorial (obliquity-of-ecliptic d))
       (ra-decl)))
+
+(defn house-of [body d]
+  "calculate zodiac house for given object"
+  (ra-to-zodiac (normalize-angle (first (ra-decl-of body d)))))
