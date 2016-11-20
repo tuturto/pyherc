@@ -106,10 +106,10 @@
 (defn register-orbit [body func]
   (assoc orbits body func))
 
-(register-orbit 'sun 
+(register-orbit 'helios
                 (fn [d]
-                  "orbital elements of sun on a given date"
-                  (new-orbit :name 'sun
+                  "orbital elements of sun/helios on a given date"
+                  (new-orbit :name 'helios
                              :date d
                              :long-ascending-node nil
                              :arg-perihelion (+ 282.9404 (* 4.70935E-5 d))
@@ -294,7 +294,7 @@
 
 (defn sun-loc [d]
   "calculate sun location"
-  (let [[sun-orbit (orbit 'sun d)]
+  (let [[sun-orbit (orbit 'helios d)]
         [(, distance true-anomaly) (distance-true-anomaly sun-orbit)]
         [long (sun-long sun-orbit)]]
     (, (* distance (cosᵒ long))
@@ -309,7 +309,7 @@
 
 (defn ra-decl-of [body d]
   "calculate RA and declination of given body on given moment of time"
-  (-> (if (= body 'sun)
+  (-> (if (= body 'helios)
         (sun-loc d)
         (geocentric-position body d))
       (ecliptical-to-equatorial (obliquity-of-ecliptic d))
