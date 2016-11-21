@@ -33,14 +33,14 @@
 (defn atan2ᵒ [y x]
   (math.degrees (math.atan2 y x)))
 
-(defn date [year month day hour]
+(defn ast-date [d]
   "create date representation"
-  (+ (* year 367)
-     (- (// (* 7 (+ year (// (+ month 9) 12))) 4))
-     (// (* month 275) 9)
-     day
+  (+ (* (. d year) 367)
+     (- (// (* 7 (+ (. d year) (// (+ (. d month) 9) 12))) 4))
+     (// (* (. d month) 275) 9)
+     (. d day)
      -730530
-     (/ hour 24.0)))
+     (/ (. d hour) 24.0)))
 
 (defn normalize-angle [n]
   "normalize angle so that 0 <= n <= 360"
@@ -57,10 +57,6 @@
    :semi-major-axis semi-major-axis
    :eccentricity eccentricity
    :mean-anomaly (normalize-angle mean-anomaly)})
-
-(defn longitude-of-perihelion [orbit]
-  "calculate longitude of perihelion"
-  (:longitude-of-perihelion orbit))
 
 (defn mean-anomaly [orbit]
   (:mean-anomaly orbit))
@@ -97,7 +93,7 @@
 (defn ra-to-zodiac [ra]
   "convert RA to respective zodiac"
   (get (first (filter (fn [x]
-                        (<= (first x) ra (second x)))
+                        (<= (first x) (normalize-angle ra) (second x)))
                       zodiacs))
        2))
 
@@ -112,78 +108,121 @@
                   (new-orbit :name 'helios
                              :date d
                              :long-ascending-node nil
-                             :arg-perihelion (+ 282.9404 (* 4.70935E-5 d))
+                             :arg-perihelion (+ 282.9404 (* 4.70935E-5 
+                                                            (ast-date d)))
                              :semi-major-axis 1.0
-                             :eccentricity (- 0.016709 (* 1.151E-9 d))
-                             :mean-anomaly (+ 356.0470 (* 0.9856002585 d))
+                             :eccentricity (- 0.016709 (* 1.151E-9
+                                                          (ast-date d)))
+                             :mean-anomaly (+ 356.0470 (* 0.9856002585
+                                                          (ast-date d)))
                              :inclination 0.0)))
+
+(register-orbit 'selene
+                (fn [d]
+                  "orbital elements of moon/selene on a given date"
+                  (new-orbit :name 'selene
+                             :date d
+                             :long-ascending-node (- 125.1228 (* 0.0529538083
+                                                                 (ast-date d)))
+                             :arg-perihelion (+ 318.0634 (* 0.1643573223
+                                                            (ast-date d)))
+                             :semi-major-axis 60.2666
+                             :eccentricity 0.054900
+                             :mean-anomaly (+ 115.3654 (* 13.0649929509
+                                                          (ast-date d)))
+                             :inclination 5.1454)))
 
 (register-orbit 'hermes
                 (fn [d]
                   "orbital elements of mercury/hermes on a given date"
                   (new-orbit :name 'hermes
                              :date d
-                             :long-ascending-node (+ 48.3313 (* 3.24587E-5 d))
-                             :arg-perihelion (+ 29.1241 (* 1.01444E-5 d))
+                             :long-ascending-node (+ 48.3313 (* 3.24587E-5
+                                                                (ast-date d)))
+                             :arg-perihelion (+ 29.1241 (* 1.01444E-5
+                                                           (ast-date d)))
                              :semi-major-axis 0.387098
-                             :eccentricity (+ 0.205635 (* 5.59E-10 d))
-                             :mean-anomaly (+ 168.6562 (* 4.0923344368 d))
-                             :inclination (+ 7.0047 (* 5.00E-8 d)))))
+                             :eccentricity (+ 0.205635 (* 5.59E-10
+                                                          (ast-date d)))
+                             :mean-anomaly (+ 168.6562 (* 4.0923344368
+                                                          (ast-date d)))
+                             :inclination (+ 7.0047 (* 5.00E-8
+                                                       (ast-date d))))))
 
 (register-orbit 'aphrodite
                 (fn [d]
                   "orbital element of venus/aphrodite on a given date"
                   (new-orbit :name 'aphrodite
                              :date d
-                             :long-ascending-node (+ 76.6799 (* 2.46590E-5 d))
-                             :inclination (+ 3.3946 (* 2.75E-8 d))
-                             :arg-perihelion (+ 54.8910 (* 1.38374E-5 d))
+                             :long-ascending-node (+ 76.6799 (* 2.46590E-5
+                                                                (ast-date d)))
+                             :inclination (+ 3.3946 (* 2.75E-8
+                                                       (ast-date d)))
+                             :arg-perihelion (+ 54.8910 (* 1.38374E-5
+                                                           (ast-date d)))
                              :semi-major-axis 0.723330
-                             :eccentricity (- 0.006773 (* 1.302E-9 d))
-                             :mean-anomaly (+ 48.0052 (* 1.6021302244 d)))))
+                             :eccentricity (- 0.006773 (* 1.302E-9
+                                                          (ast-date d)))
+                             :mean-anomaly (+ 48.0052 (* 1.6021302244
+                                                         (ast-date d))))))
 
 (register-orbit 'ares
                 (fn [d]
                   "orbital elements of mars/ares on a given date"
                   (new-orbit :name 'ares
                              :date d
-                             :long-ascending-node (+ 49.5574 (* 2.11081E-5 d))
-                             :inclination (- 1.8497 (* 1.78E-8 d))
-                             :arg-perihelion (+ 286.5016 (* 2.92961E-5 d))
+                             :long-ascending-node (+ 49.5574 (* 2.11081E-5
+                                                                (ast-date d)))
+                             :inclination (- 1.8497 (* 1.78E-8
+                                                       (ast-date d)))
+                             :arg-perihelion (+ 286.5016 (* 2.92961E-5
+                                                            (ast-date d)))
                              :semi-major-axis 1.523688
-                             :eccentricity (+ 0.093405 (* 2.516E-9 d))
-                             :mean-anomaly (+ 18.6021 (* 0.5240207766 d)))))
+                             :eccentricity (+ 0.093405 (* 2.516E-9
+                                                          (ast-date d)))
+                             :mean-anomaly (+ 18.6021 (* 0.5240207766
+                                                         (ast-date d))))))
 
 (register-orbit 'jupiter
                 (fn [d]
                   "orbital elements of jupiter on a given date"
                   (new-orbit :name 'jupiter
                              :date d
-                             :long-ascending-node (+ 100.4542 (* 2.76854E-5 d))
-                             :inclination (- 1.3030 (* 1.557E-7 d))
-                             :arg-perihelion (+ 273.8777 (* 1.64505E-5 d))
+                             :long-ascending-node (+ 100.4542 (* 2.76854E-5
+                                                                 (ast-date d)))
+                             :inclination (- 1.3030 (* 1.557E-7
+                                                       (ast-date d)))
+                             :arg-perihelion (+ 273.8777 (* 1.64505E-5
+                                                            (ast-date d)))
                              :semi-major-axis 5.20256
-                             :eccentricity (+ 0.048498 (* 4.469E-9 d))
-                             :mean-anomaly (+ 19.8950 (* 0.0830853001 d)))))
+                             :eccentricity (+ 0.048498 (* 4.469E-9
+                                                          (ast-date d)))
+                             :mean-anomaly (+ 19.8950 (* 0.0830853001
+                                                         (ast-date d))))))
 
 (register-orbit 'cronus
                 (fn [d]
                   "orbital elements of saturn/cronus on a given date"
                   (new-orbit :name 'saturn
                              :date d
-                             :long-ascending-node (+ 113.6634 (* 2.38980E-5 d))
-                             :inclination (- 2.4886 (* 1.081E-7 d))
-                             :arg-perihelion (+ 339.3939 (* 2.97661E-5 d))
+                             :long-ascending-node (+ 113.6634 (* 2.38980E-5
+                                                                 (ast-date d)))
+                             :inclination (- 2.4886 (* 1.081E-7
+                                                       (ast-date d)))
+                             :arg-perihelion (+ 339.3939 (* 2.97661E-5
+                                                            (ast-date d)))
                              :semi-major-axis 9.55475
-                             :eccentricity (- 0.055546 (* 9.499E-9 d))
-                             :mean-anomaly (+ 316.9670 (* 0.0334442282 d)))))
+                             :eccentricity (- 0.055546 (* 9.499E-9
+                                                          (ast-date d)))
+                             :mean-anomaly (+ 316.9670 (* 0.0334442282
+                                                          (ast-date d))))))
 
 (defn orbit [body d]
   ((get orbits body) d))
 
 (defn obliquity-of-ecliptic [d]
   "obliquity of the ecliptic"
-  (- 23.4393 (* 3.563E-7 d)))
+  (- 23.4393 (* 3.563E-7 (ast-date d))))
 
 (defn mean-longitude [orbit]
   (normalize-angle (+ (argument-perihelion orbit)
@@ -191,39 +230,31 @@
 
 (defn eccentric-anomaly [orbit]
   "calculate eccentric-anomaly for orbit"
-  (+ (mean-anomaly orbit)
-     (* (/ 180.0 math.pi)
-        (eccentricity orbit) (sinᵒ (mean-anomaly orbit))
-        (+ 1 (* (eccentricity orbit)
-                (cosᵒ (mean-anomaly orbit)))))))
-
-(defn ecliptic-coordinates [orbit]
-  (, (* (semi-major-axis orbit)
-        (- (cosᵒ (eccentric-anomaly orbit))
-           (eccentricity orbit)))
-     (* (semi-major-axis orbit)
-        (math.sqrt (- 1 (pow (eccentricity orbit) 2)))
-        (sinᵒ (eccentric-anomaly orbit)))))
-
-(defn distance-true-anomaly [ecliptic-coords]
-  (let [[x (first ecliptic-coords)]
-        [y (second ecliptic-coords)]]
-    (, (math.sqrt (+ (pow x 2)
-                     (pow y 2)))
-       (atan2ᵒ y x))))
-
-(defn longitude [orbit]
-  "calculate longitude of given orbit"
-  (let [[(, r v) (distance-true-anomaly (ecliptic-coordinates orbit))]]
-    (normalize-angle (+ v (argument-perihelion orbit)))))
-
-(defn eccentric-anomaly [orbit]
-  "calculate eccentric-anomaly for orbit"
-  (+ (mean-anomaly orbit)
-     (* (/ 180.0 math.pi)
-        (eccentricity orbit) (sinᵒ (mean-anomaly orbit))
-        (+ 1 (* (eccentricity orbit)
-                (cosᵒ (mean-anomaly orbit))))))) ;; TODO: iteration if e > 0.05
+  (defn iterate [e0]
+    (- e0 (/ (- e0 
+                (* (/ 180.0 math.pi) 
+                   (eccentricity orbit) 
+                   (sinᵒ e0)) 
+                (mean-anomaly orbit))
+             (- 1 
+                (* (eccentricity orbit) 
+                   (cosᵒ e0))))))
+  (setv e1 (+ (mean-anomaly orbit)
+              (* (/ 180.0 math.pi)
+                 (eccentricity orbit) (sinᵒ (mean-anomaly orbit))
+                 (+ 1 (* (eccentricity orbit)
+                         (cosᵒ (mean-anomaly orbit)))))))
+  (if (< (eccentricity orbit) 0.03)
+    e1
+    (do (setv e0 e1)
+        (setv e1 (iterate e0))
+        (setv limit 20)
+        (while (and (> (abs (- e0 e1)) 0.000000005)
+                    (> limit 0))
+          (setv limit (dec limit))
+          (setv e0 e1)
+          (setv e1 (iterate e0)))
+        e1)))
 
 (defn distance-true-anomaly [orbit]
   "calculate distance and true anomaly for a planet in given orbit"
@@ -257,17 +288,22 @@
           (sinᵒ (+ true-anomaly (argument-perihelion orbit))) 
           (sinᵒ (inclination orbit))))))
 
+(defn moon-perturbations [loc dist-true-anomaly]
+  "add moon perturbations to geocentric position of moon"
+  (let [[(, lon lat) (lon-lat loc)]
+        [r (first dist-true-anomaly)]]
+    loc))
+
+(defn lon-lat [h-loc]
+  "convert heliocentric location to longitude-latitude pair in ecliptica"
+  (let [[(, x y z) h-loc]]
+      (, (normalize-angle (atan2ᵒ y x))
+         (atan2ᵒ z (math.sqrt (+ (pow x 2) (pow y 2)))))))
+
 (defn sun-long [orbit]
   "longitude of sun"
   (let [[(, distance true-anomaly) (distance-true-anomaly orbit)]]
     (normalize-angle (+ true-anomaly (argument-perihelion orbit)))))
-
-(defn ecliptic-lon-lat [helio-loc]
-  "translate heliocentric location into ecliptic longitute latitude pair"
-  (let [[(, x y z) helio-loc]]
-    (, (atan2ᵒ y x)
-       (atan2ᵒ z 
-               (math.sqrt (+ (pow x 2) (pow y 2)))))))
 
 (defn ecliptical-to-equatorial [position obliquity]
   "translate ecliptical coordinates to equatorial"
@@ -281,7 +317,7 @@
 (defn ra-decl [position]
   "translate ecliptical position into RA declination pair"
   (let [[(, x y z) position]]
-    (, (atan2ᵒ y x)
+    (, (normalize-angle (atan2ᵒ y x))
        (atan2ᵒ z 
                (math.sqrt (+ (pow x 2)
                              (pow y 2)))))))
@@ -309,12 +345,30 @@
 
 (defn ra-decl-of [body d]
   "calculate RA and declination of given body on given moment of time"
-  (-> (if (= body 'helios)
-        (sun-loc d)
-        (geocentric-position body d))
+  (-> (cond [(= body 'helios) (sun-loc d)]
+            [(= body 'selene) (-> (heliocentric-position body d)
+                                  (moon-perturbations (distance-true-anomaly (orbit 'selene d))))]
+            [true (geocentric-position body d)])      
       (ecliptical-to-equatorial (obliquity-of-ecliptic d))
       (ra-decl)))
 
 (defn house-of [body d]
   "calculate zodiac house for given object"
   (ra-to-zodiac (normalize-angle (first (ra-decl-of body d)))))
+
+(defn angle-between [body-1 body-2 d]
+  "calculate angle between two bodies (RA)"
+  (let [[(, ra1 decl1) (ra-decl-of body-1 d)]
+        [(, ra2 decl2) (ra-decl-of body-2 d)]]
+    (abs (- (normalize-angle ra1)
+            (normalize-angle ra2)))))
+
+(defn full-moon? [d]
+  "is there more or less full moon at given time?"
+  (<= 165.0
+      (angle-between 'helios 'selene d)
+      195.0))
+
+(defn new-moon? [d]
+  "is there more or less new moon at given time?"
+  (<= (angle-between 'helios 'selene d) 15.0))
