@@ -40,7 +40,10 @@
      (// (* (. d month) 275) 9)
      (. d day)
      -730530
-     (/ (. d hour) 24.0)))
+     (/ (if (hasattr d "hour")
+          (. d hour)
+          1.0)
+        24.0)))
 
 (defn normalize-angle [n]
   "normalize angle so that 0 <= n <= 360"
@@ -288,12 +291,6 @@
           (sinᵒ (+ true-anomaly (argument-perihelion orbit))) 
           (sinᵒ (inclination orbit))))))
 
-(defn moon-perturbations [loc dist-true-anomaly]
-  "add moon perturbations to geocentric position of moon"
-  (let [[(, lon lat) (lon-lat loc)]
-        [r (first dist-true-anomaly)]]
-    loc))
-
 (defn lon-lat [h-loc]
   "convert heliocentric location to longitude-latitude pair in ecliptica"
   (let [[(, x y z) h-loc]]
@@ -346,8 +343,7 @@
 (defn ra-decl-of [body d]
   "calculate RA and declination of given body on given moment of time"
   (-> (cond [(= body 'helios) (sun-loc d)]
-            [(= body 'selene) (-> (heliocentric-position body d)
-                                  (moon-perturbations (distance-true-anomaly (orbit 'selene d))))]
+            [(= body 'selene) (heliocentric-position body d)]
             [true (geocentric-position body d)])      
       (ecliptical-to-equatorial (obliquity-of-ecliptic d))
       (ra-decl)))
