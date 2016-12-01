@@ -186,10 +186,10 @@
                              :mean-anomaly (+ 18.6021 (* 0.5240207766
                                                          (ast-date d))))))
 
-(register-orbit 'jupiter
+(register-orbit 'dias
                 (fn [d]
-                  "orbital elements of jupiter on a given date"
-                  (new-orbit :name 'jupiter
+                  "orbital elements of dias/jupiter on a given date"
+                  (new-orbit :name 'dias
                              :date d
                              :long-ascending-node (+ 100.4542 (* 2.76854E-5
                                                                  (ast-date d)))
