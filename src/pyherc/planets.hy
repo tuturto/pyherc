@@ -80,18 +80,18 @@
 (defn argument-perihelion [orbit]
   (:arg-perihelion orbit))
 
-(setv zodiacs [(, 0 30 'ihtheis)
-               (, 30 60 'krios)
-               (, 60 90 'tavros)
-               (, 90 120 'didimoi)
-               (, 120 150 'karkinos)
-               (, 150 180 'leon)
-               (, 180 210 'parthenos)
-               (, 210 240 'zygos)
-               (, 240 270 'skorpios)
-               (, 270 300 'toksotis)
-               (, 300 330 'aigokeros)
-               (, 330 360 'ydrohoos)])
+(setv zodiacs [(, 00 30 'krios)
+               (, 30 60 'tavros)
+               (, 60 90 'didimoi)
+               (, 90 120 'karkinos)
+               (, 120 150 'leon)
+               (, 150 180 'parthenos)
+               (, 180 210 'zygos)
+               (, 210 240 'skorpios)
+               (, 240 270 'toksotis)
+               (, 270 300 'aigokeros)
+               (, 300 330 'ydrohoos)
+               (, 330 360 'ihtheis)])
 
 (defn ra-to-zodiac [ra]
   "convert RA to respective zodiac"
