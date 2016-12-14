@@ -8,10 +8,12 @@ Feature: Pits
        And Pete is standing in room
        And pit is next to Pete
 
+  @automated
   Scenario: Dying when falling into a pit
        When Pete walks on pit
        Then Pete should be dead
 
+  @automated
   Scenario: Dropping items into a pit
       Given Pete wears flying boots
         And Pete has dagger

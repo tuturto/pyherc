@@ -11,10 +11,12 @@ Feature: Moving around
        And stairs leads outside
        And stairs is located in corner of room
 
+  @automated
   Scenario: Walking
        When Pete walks on stairs
        Then Pete and stairs are located at the same place
-  
+
+  @automated  
   Scenario: Leaving dungeon
        When Pete walks on stairs
         And Pete enters stairs

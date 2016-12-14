@@ -3,6 +3,7 @@ Feature: Dropping items
   in order to manage my inventory
   I want to drop items
 
+  @automated
   Scenario: drop item
      Given Pete is Adventurer
        And Pete is standing in room

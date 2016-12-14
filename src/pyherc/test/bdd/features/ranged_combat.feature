@@ -9,6 +9,7 @@ Feature: Ranged combat
        And Uglak is standing in room
        And Pete is standing away from Uglak
 
+  @automated
   Scenario: hit in ranged combat
      Given Pete wields bow and arrows
       When Pete hits Uglak

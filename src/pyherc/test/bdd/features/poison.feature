@@ -3,11 +3,13 @@ Feature: Poisoning
   in order to function as poison
   I want to damage my targets
 
+  @automated
   Scenario: poison causes damage
      Given Pete is Adventurer
       When Pete suffers from weak poison
       Then Pete should have less hitpoints
 
+  @automated
   Scenario: poison kills character
      Given Uglak is Goblin
        And Uglak is standing in room
