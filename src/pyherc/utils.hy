@@ -30,3 +30,10 @@
       (yield val)
       (setv val [])))
   (when val (yield val)))
+
+(defn clamp-value [obj func low high]
+  "use func to clamp value of obj between low and high"
+  (when (> (func obj) high)
+    (func obj high))
+  (when (< (func obj) low)
+    (func obj low)))

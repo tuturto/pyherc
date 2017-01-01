@@ -22,18 +22,25 @@
 
 (require hymn.dsl)
 
-(import [hymn.types.either [Right ->either failsafe]]
+(import [pyherc.utils [clamp-value]]
+        [hymn.types.either [Right ->either failsafe]]
         [hymn.operations [>=>]])
 
 (defn new-society [name]
   "create new society"
   {:name name
-   :raw-resources 'medium
+   :raw-resources medium
    :projects []
    :buildings []})
 
-(def resource-levels ['depleted 'very-low 'low 'medium 
-                      'high 'very-high 'overflowing])
+
+(def depleted 0)
+(def very-low 1)
+(def low 2)
+(def medium 3)
+(def high 4)
+(def very-high 5)
+(def overflowing 6)
 
 (defn society-name [society &optional name]
   "get/set name of a society"
@@ -43,10 +50,7 @@
 
 (defn raw-resources [society &optional amount]
   "get/set amount of raw resources for a society"
-  (when amount
-    (if-not (in amount resource-levels)
-            (raise (ValueError (.format "incorrect value: {0}"
-                                        amount))))
+  (when (not (nil? amount))
     (assoc society :raw-resources amount))
   (:raw-resources society))
 
@@ -61,7 +65,7 @@
 (defn complete-project [society project]
   "complete a project"
   (.remove (:projects society) project)
-  (.append (:buildings society) (:building project)))
+  (add-building society (:building project)))
 
 (defn new-project [name &optional [duration 1] [building nil]]
   "create new project"
@@ -85,9 +89,14 @@
   "list of buildings"
   (:buildings society))
 
-(defn new-building [name]
+(defn new-building [name &optional [produces 0]]
   "create new building"
-  {:name name})
+  {:name name
+   :raw-production produces})
+
+(defn add-building [society building]
+  "add new building"
+  (.append (:buildings society) building))
 
 (defn building-name [building &optional name]
   "get/set building name"
@@ -95,10 +104,21 @@
     (assoc building :name name))
   (:name building))
 
+(defn building-production [building &optional amount]
+  "get/set raw resource production"
+  (when (not (nil? amount))
+    (assoc building :raw-production amount))
+  (:raw-production building))
+
 (def process-raw-resources-m
   (failsafe (fn  [society]
               "process raw resources of society"
-              (Right society))))
+              (raw-resources society
+                             (reduce (fn [accum bld]
+                                       (+ accum (building-production bld)))
+                                     (buildings society)
+                                     (raw-resources society)))
+              society)))
 
 (def process-projects-m
   (failsafe (fn [society]
@@ -107,10 +127,18 @@
                     (filter (fn [prj]
                               (project-duration prj 
                                                 (dec (project-duration prj)))
+                              (raw-resources society 
+                                             (dec (raw-resources society)))
                               (<= (project-duration prj) 0))
                             (projects society)))
               (ap-each completed (complete-project society it))
               society)))
 
+(def clamp-values-m
+  (failsafe (fn [society]
+              "clamp values to their range"
+              (clamp-value society raw-resources depleted overflowing))))
+
 (def advance-time-m (>=> process-raw-resources-m
-                         process-projects-m))
+                         process-projects-m
+                         clamp-values-m))

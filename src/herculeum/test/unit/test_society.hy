@@ -27,9 +27,16 @@
         [hymn.types.either [->either either]]
         [herculeum.society [new-society raw-resources society-name
                             new-project project-name projects start-project
-                            buildings new-building building-name
-                            project-duration process-projects-m]]
-        [herculeum.test.matchers.society [has-building?]])
+                            buildings new-building building-name add-building
+                            project-duration process-projects-m
+                            process-raw-resources-m
+                            advance-time-m
+                            depleted very-low low medium high very-high 
+                            overflowing]]
+        [herculeum.test.matchers.society [has-building? 
+                                          has-resources?
+                                          has-more-resources-than?
+                                          has-less-resources-than?]])
 
 ;; TODO: this should go into archimedes
 (defmacro/g! assert-error [error-str code]
@@ -55,12 +62,32 @@
              ~check)
            ~monad))
 
+(fact "depleted is less than medium"
+      (assert-that (< depleted medium)
+                   (is- (equal-to True))))
+
+(fact "very-high is greater than very-low"
+      (assert-that (> very-high very-low)
+                   (is- (equal-to True))))
 
 (background high-society
             [society (new-society "high society")]
             [project (new-project "housing construction"
                                   :building (new-building "housing"))]
             [long-project (new-project "monolith" :duration 10)])
+
+(background mining-society
+            [society (new-society "mining society")]
+            [mine (new-building "mine"
+                                :produces 1)]
+            [giant-mine (new-building "giant mine"
+                                      :produces 20)]
+            [_ (add-building society mine)])
+
+(background poor-society
+            [society (new-society "poor society")]
+            [_ (raw-resources society depleted)]
+            [project (new-project "statue")])
 
 (fact "society can have a name"
       (with-background high-society [society]
@@ -72,14 +99,9 @@
 
 (fact "raw resources of society can be manipulated"
       (with-background high-society [society]
-        (raw-resources society 'low)
+        (raw-resources society low)
         (assert-that (raw-resources society)
-                     (is- (equal-to 'low)))))
-
-(fact "setting raw value to incorrect value raises an error"
-      (with-background high-society [society]
-        (assert-error "incorrect value: ridiculous"
-                      (raw-resources society 'ridiculous))))
+                     (is- (equal-to low)))))
 
 (fact "project can have a name"
       (with-background high-society [project]
@@ -134,3 +156,37 @@
         (building-name building "large house")
         (assert-that (building-name building)
                      (is- (equal-to "large house")))))
+
+(fact "special buildings produce raw resources"
+      (with-background mining-society [society mine]
+        (let [[old-resources (raw-resources society)]]
+          (assert-right (do-monad [status (process-raw-resources-m society)]
+                                  status)
+                        (assert-that society 
+                                     (has-more-resources-than? old-resources))))))
+
+(fact "society can never have more than overflowing amount of resources"
+      (with-background mining-society [society giant-mine]
+        (let [[old-resources (raw-resources society)]]
+          (add-building society giant-mine)
+          (assert-right (do-monad [status (advance-time-m society)]
+                                  status)
+                        (assert-that society
+                                     (is-not- (has-more-resources-than? overflowing)))))))
+
+(fact "processing projects consume resources"
+      (with-background high-society [society project] 
+        (start-project society project)
+        (let [[old-resources (raw-resources society)]]
+          (assert-right (do-monad [status (advance-time-m society)]
+                                  status)
+                        (assert-that society
+                                     (has-less-resources-than? old-resources))))))
+
+(fact "society can never have less than depleted amount of resources"
+      (with-background poor-society [society project]
+        (start-project society project)
+        (assert-right (do-monad [status (advance-time-m society)]
+                                status)
+                      (assert-that society
+                                   (has-resources? depleted)))))

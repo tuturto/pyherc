@@ -22,7 +22,7 @@
 
 (require pyherc.macros)
 
-(import [herculeum.society [building-name]])
+(import [herculeum.society [building-name raw-resources]])
 
 ;; TODO: move this into Archimedes after Hy release
 (defmacro defmatcher [matcher-name params &rest funcs]
@@ -52,6 +52,12 @@
                               (second x)
                               [x (group funcs)])))
 
+;; TODO: move this into Archimedes after Hy release
+(defmacro attribute-matcher [matcher-name func pred match no-match]
+  `(defmatcher ~matcher-name [value]
+     :match? (~pred (~func item) value)
+     :match! (.format ~match (. self value))
+     :no-match! (.format ~no-match (~func item))))
 
 (defmatcher has-building? [name]
   :match? (if item
@@ -66,3 +72,18 @@
                (.format "was list of buildings: {0}"
                         (.join "," (map building-name item)))
                "was an empty list"))
+
+(attribute-matcher has-resources?
+                   raw-resources =
+                   "a society with {0} resources"
+                   "was a society with {0} resources")
+
+(attribute-matcher has-more-resources-than?
+                   raw-resources >
+                   "a society with more than {0} resources"
+                   "was a society with {0} resources")
+
+(attribute-matcher has-less-resources-than?
+                   raw-resources <
+                   "a society with less than {0} resources"
+                   "was a society with {0} resources")
