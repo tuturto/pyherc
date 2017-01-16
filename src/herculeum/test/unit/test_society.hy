@@ -38,30 +38,6 @@
                                           has-more-resources-than?
                                           has-less-resources-than?]])
 
-;; TODO: this should go into archimedes
-(defmacro/g! assert-error [error-str code]
-  "assert that an error is raised"
-  `(let [[~g!result (try 
-                     (do ~code
-                         "no exception raised")
-                     (catch [~g!e Exception]
-                       (if (= (str ~g!e) ~error-str)
-                         nil
-                         (.format "expected: '{0}'\n  got: '{1}'"
-                                  ~error-str
-                                  (str ~g!e)))))]]     
-     (when ~g!result
-        (assert false ~g!result))))
-
-;; TODO: move to archimedes?
-(defmacro/g! assert-right [monad check]
-  "helper macro for asserting Either.Right"
-  `(either (fn [~g!fail] 
-             (assert False (str ~g!fail)))
-           (fn [~g!ok]
-             ~check)
-           ~monad))
-
 (fact "depleted is less than medium"
       (assert-that (< depleted medium)
                    (is- (equal-to True))))

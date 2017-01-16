@@ -21,43 +21,9 @@
 ;; THE SOFTWARE.
 
 (require pyherc.macros)
+(require archimedes)
 
 (import [herculeum.society [building-name raw-resources]])
-
-;; TODO: move this into Archimedes after Hy release
-(defmacro defmatcher [matcher-name params &rest funcs]
-  "define matcher class and function"
-  (import [pyherc.utils [group]])
-  
-  (defn helper [match? match! no-match!]
-    `(defn ~matcher-name ~params
-       (import [hamcrest.core.base-matcher [BaseMatcher]])
-
-       (defclass MatcherClass [BaseMatcher]
-         [[--init-- (fn [self ~@params]
-                      (set-attributes ~@params)
-                      nil)]
-          [-matches (fn [self item]
-                      ~match?)]
-          [describe-to (fn [self description]
-                         (.append description ~match!))]
-          [describe-mismatch (fn [self item mismatch-description]
-                               (.append mismatch-description ~no-match!))]])
-       
-       (MatcherClass ~@params)))
-
-  (apply helper [] (dict-comp (cond [(= (first x) :match?) "is_match"]
-                                    [(= (first x) :match!) "match!"]
-                                    [(= (first x) :no-match!) "no_match!"])
-                              (second x)
-                              [x (group funcs)])))
-
-;; TODO: move this into Archimedes after Hy release
-(defmacro attribute-matcher [matcher-name func pred match no-match]
-  `(defmatcher ~matcher-name [value]
-     :match? (~pred (~func item) value)
-     :match! (.format ~match (. self value))
-     :no-match! (.format ~no-match (~func item))))
 
 (defmatcher has-building? [name]
   :match? (if item
