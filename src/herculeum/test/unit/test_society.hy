@@ -23,20 +23,26 @@
 (require archimedes)
 (require hymn.dsl)
 
-(import [hamcrest [assert-that is- equal-to has-item is-not :as is-not-]]
+(import [hamcrest [assert-that is- equal-to has-item is-not :as is-not-
+                   not-none greater-than greater_than_or_equal_to]]
+        [hypothesis.strategies [integers]]
         [hymn.types.either [->either either]]
-        [herculeum.society [new-society raw-resources society-name
-                            new-project project-name projects start-project
-                            buildings new-building building-name add-building
-                            project-duration process-projects-m
-                            process-raw-resources-m
-                            advance-time-m
-                            depleted very-low low medium high very-high 
-                            overflowing]]
+        [herculeum.society.data [new-society raw-resources society-name
+                                 new-project project-name projects start-project
+                                 buildings new-building building-name
+                                 add-building new-person person-name
+                                 project-duration
+                                 depleted very-low low medium high very-high 
+                                 overflowing]]
+        [herculeum.society.rules [process-projects-m process-raw-resources-m
+                                  advance-time-m]]
+        [herculeum.society.generators [instantiate-blueprints]]
+        [pyherc.generators.artefact [create-blueprint modify-blueprint]]
         [herculeum.test.matchers.society [has-building? 
                                           has-resources?
                                           has-more-resources-than?
-                                          has-less-resources-than?]])
+                                          has-less-resources-than?
+                                          blueprint-for]])
 
 (fact "depleted is less than medium"
       (assert-that (< depleted medium)
@@ -48,6 +54,7 @@
 
 (background high-society
             [society (new-society "high society")]
+            [chief (new-person "Chief Atticus")]
             [project (new-project "housing construction"
                                   :building (new-building "housing"))]
             [long-project (new-project "monolith" :duration 10)])
@@ -166,3 +173,27 @@
                                 status)
                       (assert-that society
                                    (has-resources? depleted)))))
+
+(fact "person has name"
+      (with-background high-society [chief]
+        (assert-that (person-name chief)
+                     (is- (equal-to "Chief Atticus")))
+        (person-name chief "Chief Africanus")
+        (assert-that (person-name chief)
+                     (is- (equal-to "Chief Africanus")))))
+
+(fact "smith blueprint is marked as smith"
+      (assert-that (->> (create-blueprint 'human)
+                        (modify-blueprint 'smith))
+                   (is- (blueprint-for 'smith))))
+
+(fact "blueprint modifiers can be chained"
+      (variants :seed (integers :min-value 1))
+      (assert-that (:mind (->> (create-blueprint 'human seed)
+                               (modify-blueprint 'wise)
+                               (modify-blueprint 'scribe)))
+                   (is- (greater_than_or_equal_to 7))))
+
+(fact "human blueprint saves seed for future use"
+      (assert-that (:seed (create-blueprint 'human 5))
+                   (is- (equal-to 5))))

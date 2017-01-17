@@ -20,11 +20,11 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hymn.dsl)
+(require pyherc.macros)
 
 (import [pyherc.utils [clamp-value]]
-        [hymn.types.either [Right ->either failsafe]]
-        [hymn.operations [>=>]])
+        [pyherc.generators.artefact [create-blueprint instantiate-blueprints
+                                     modify-blueprint]])
 
 (defn new-society [name]
   "create new society"
@@ -110,35 +110,12 @@
     (assoc building :raw-production amount))
   (:raw-production building))
 
-(def process-raw-resources-m
-  (failsafe (fn  [society]
-              "process raw resources of society"
-              (raw-resources society
-                             (reduce (fn [accum bld]
-                                       (+ accum (building-production bld)))
-                                     (buildings society)
-                                     (raw-resources society)))
-              society)))
+(defn new-person [name]
+  "create new person"
+  {:name name})
 
-(def process-projects-m
-  (failsafe (fn [society]
-              "process ongoing projects"              
-              (setv completed 
-                    (filter (fn [prj]
-                              (project-duration prj 
-                                                (dec (project-duration prj)))
-                              (raw-resources society 
-                                             (dec (raw-resources society)))
-                              (<= (project-duration prj) 0))
-                            (projects society)))
-              (ap-each completed (complete-project society it))
-              society)))
-
-(def clamp-values-m
-  (failsafe (fn [society]
-              "clamp values to their range"
-              (clamp-value society raw-resources depleted overflowing))))
-
-(def advance-time-m (>=> process-raw-resources-m
-                         process-projects-m
-                         clamp-values-m))
+(defn person-name [person &optional name]
+  "get/set name of person"
+  (when (not (nil? name))
+    (assoc person :name name))
+  (:name person))

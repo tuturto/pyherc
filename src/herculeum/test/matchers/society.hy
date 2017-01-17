@@ -23,7 +23,8 @@
 (require pyherc.macros)
 (require archimedes)
 
-(import [herculeum.society [building-name raw-resources]])
+(import [herculeum.society.data [building-name raw-resources]]
+        [pyherc.generators.artefact [blueprint-types]])
 
 (defmatcher has-building? [name]
   :match? (if item
@@ -38,6 +39,14 @@
                (.format "was list of buildings: {0}"
                         (.join "," (map building-name item)))
                "was an empty list"))
+
+(defmatcher blueprint-for [blueprint-type]
+  :match? (in (. self blueprint-type)
+              (blueprint-types item))
+  :match! (.format "a blueprint for '{0}'"
+                   (. self blueprint-type))
+  :no-match! (.format "was blueprint with: {0}"
+                      (blueprint-types item)))
 
 (attribute-matcher has-resources?
                    raw-resources =

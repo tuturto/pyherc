@@ -50,3 +50,22 @@
 (default-method instantiate-blueprints [&rest blueprints]
   "no definition found, thrown an error"
   (assert false "no instantiator found for blueprint"))
+
+;; modify blueprint to contain elements of another
+(defmulti modify-blueprint [modifier-type blueprint]
+  "modify blueprint"
+  modifier-type)
+
+(default-method modify-blueprint [modifier-type blueprint]
+  "no definition was found, throw an error"
+  (assert false "no blueprint defined"))
+
+(defn blueprint-types [blueprint]
+  "types of this blueprint"
+  (:blueprints blueprint))
+
+(defn add-blueprint-type [blueprint type]
+  "add new subtype"
+  (when (not (in :blueprints blueprint))
+    (assoc blueprint :blueprints []))
+  (.append (:blueprints blueprint) type))
