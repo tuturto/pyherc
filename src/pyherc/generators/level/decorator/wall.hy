@@ -110,23 +110,26 @@
 
 (defn coarse-selection [level tag]
   "tag some of the tiles in level and return them"
-  (let [[location-value (dict-comp (first x) (.uniform random -1.0 1.0)
-                                   [x (tiles↜ level)])]
-        [get-value (fn [point data]
-                     (if (in point data)
-                       (get data point)
-                       0))]
-        [coarsify-point (fn [point data]
-                          (let [[area↜ (area-around point)]
-                                [value-sum (sum (list-comp (get-value x data) [x area↜]))]
-                                [score (+ (get-value point data)
-                                          (* value-sum 0.025))]]))]
-        [coarsify (fn [data]
-                    (dict-comp (first x) (coarsify-point (first x) data) [x (.items data)]))]]
-    (when (not (list (get-locations-by-tag level tag)))
-      (for [i (range 25)] 
-        (setv location-value (coarsify location-value)))
-      (ap-each (tiles↜ level)
-               (when (> (get location-value (first it)) 0.0)
-                 (add-location-tag level (first it) tag))))        
-    (get-locations-by-tag level tag)))
+  (def location-value (dict-comp (first x) (.uniform random -1.0 1.0)
+                                 [x (tiles↜ level)]))
+  (defn get-value [point data]
+    (if (in point data)
+      (get data point)
+      0))
+
+  (defn coarsify-point [point data]
+    (let [[area↜ (area-around point)]
+          [value-sum (sum (list-comp (get-value x data) [x area↜]))]
+          [score (+ (get-value point data)
+                    (* value-sum 0.025))]]))
+
+  (defn coarsify [data]
+    (dict-comp (first x) (coarsify-point (first x) data) [x (.items data)]))
+  
+  (when (not (list (get-locations-by-tag level tag)))
+    (for [i (range 25)] 
+      (setv location-value (coarsify location-value)))
+    (ap-each (tiles↜ level)
+             (when (> (get location-value (first it)) 0.0)
+               (add-location-tag level (first it) tag))))        
+  (get-locations-by-tag level tag))
