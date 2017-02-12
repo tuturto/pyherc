@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
 (import [pyherc.data.damage [new-damage]]
         [pyherc.data.traps.trap [Trap]]
@@ -28,20 +28,19 @@
         [pyherc.events [damage-triggered damage-trap-triggered]])
 
 (defclass Caltrops [Trap]
-  [[--init-- (fn [self damage &optional [icon nil]]
-               (super-init icon)
-               (setv self.damage damage)
-               nil)]
-   [on-enter (fn [self character]
-               (let [[damage (new-damage #t(#t(self.damage "piercing")))]
-                     [total-damage (damage :target character
-                                           :body-part "feet")]]
-                 (.raise-event character (damage-trap-triggered character
-                                                                self
-                                                                total-damage))
-                 (.add-to-tick character Duration.slow)))]
-   [on-place (fn [self level location]
-               (let [[traps (list-comp x [x (get-traps level location)]
-                                       (isinstance x Caltrops))]]
-                 (when (>= (len traps) 2)
-                   (remove-trap level self))))]])
+  [--init-- (fn [self damage &optional [icon None]]
+              (super-init icon)
+              (setv self.damage damage))
+   on-enter (fn [self character]
+              (let [damage (new-damage #t(#t(self.damage "piercing")))
+                    total-damage (damage :target character
+                                         :body-part "feet")]
+                (.raise-event character (damage-trap-triggered character
+                                                               self
+                                                               total-damage))
+                (.add-to-tick character Duration.slow)))
+   on-place (fn [self level location]
+              (let [traps (list-comp x [x (get-traps level location)]
+                                     (isinstance x Caltrops))]
+                (when (>= (len traps) 2)
+                  (remove-trap level self))))])

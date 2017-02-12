@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require hy.contrib.anaphoric)
+(require [pyherc.macros [*]])
 
 (import [random]        
         [toolz [curry]]
@@ -35,9 +34,9 @@
 
 (defn clear-current-destination [character]
   "clear current destination of character"
-  (let [[state (ai-state character)]]
-    (assoc state :current-destination nil)
-    (assoc state :cuurent-route nil)))
+  (let [state (ai-state character)]
+    (assoc state :current-destination None)
+    (assoc state :cuurent-route None)))
 
 (defn travel-home [find-path character]
   "travel towards :home-location"
@@ -45,7 +44,7 @@
 
 (defn travel-destination [find-path character location]
   "travel towards given location"
-  (let [[state (ai-state character)]]
+  (let [state (ai-state character)]
     (cond [(new-destination? character location)
            (do (set-current-destination character location)
                (set-current-route find-path character 10)
@@ -53,41 +52,41 @@
           [(current-route-empty? character)
            (do (set-current-route find-path character)
                (take-step-towards-destination character))]
-          [true 
+          [True 
            (take-step-towards-destination character)])))
 
 (defn set-current-destination [character location]
   "sets current destination"
-  (let [[state (ai-state character)]]
+  (let [state (ai-state character)]
     (assoc state :current-destination location)))
 
-(defn set-current-route [find-path character &optional [steps nil]]
+(defn set-current-route [find-path character &optional [steps None]]
   "calculate route to a given location and set it to current route"
-  (let [[state (ai-state character)]
-        [#t(path connections updated) (find-path (. character location)
-                                                 (:current-destination state)
-                                                 (. character level))]
-        [route (if steps
-                 (slice path 1 steps) ;; ignore starting square
-                 (slice path 1))]]
+  (let [state (ai-state character)
+        #t(path connections updated) (find-path (. character location)
+                                                (:current-destination state)
+                                                (. character level))
+        route (if steps
+                (cut path 1 steps) ;; ignore starting square
+                (cut path 1))]
     (assoc state :current-route route)))
 
 (defn close-in [find-path character target]
   "take one step towards given location"
-  (let [[#t(path connections updated) (find-path (. character location)
-                                                 target
-                                                 (. character level))]
-        [direction (find-direction (. character location) (second path))]]
+  (let [#t(path connections updated) (find-path (. character location)
+                                                target
+                                                (. character level))
+        direction (find-direction (. character location) (second path))]
     (if (call move-legal? character direction)
       (call move character direction)
       (call wait character Duration.fast)))) ;; TODO: special cases and everything
 
 (defn take-step-towards-destination [character]
   "take next step in current route"
-  (let [[state (ai-state character)]
-        [route (current-route character)]
-        [#t(next-square new-route) #t((first route) (list (rest route)))]
-        [direction (find-direction (. character location) next-square)]]
+  (let [state (ai-state character)
+        route (current-route character)
+        #t(next-square new-route) #t((first route) (list (rest route)))
+        direction (find-direction (. character location) next-square)]
     (if (call move-legal? character direction)
       (call move character direction)
       ;; TODO: recalculate?
@@ -106,11 +105,11 @@
   "current destination of this character"
   (if (in :current-destination (ai-state character))
     (:current-destination (ai-state character))
-    nil))
+    None))
 
 (defn new-destination? [character location]
   "is this completely new destination?"
-  (or (is nil (current-destination character))
+  (or (is None (current-destination character))
       (not (= (current-destination character) location))))
 
 (defn arrived-destination? [character]
@@ -156,16 +155,16 @@
   "home area of character"
   (if (in :home-area (ai-state character))
     (:home-area (ai-state character))
-    nil))
+    None))
 
 (defn map-home-area [character neighbours]
   "build map of home area for character"
   ;; TODO: generalize to flood fill and move to geometry
-  (let [[state (ai-state character)]
-        [to-check [(home-location character)]]
-        [result []]]
+  (let [state (ai-state character)
+        to-check [(home-location character)]
+        result []]
     (while to-check
-      (let [[it (.pop to-check)]]
+      (let [it (.pop to-check)]
         (when (not (in it result))
           (.append result it)
           (.extend to-check (neighbours it)))))
@@ -173,10 +172,10 @@
 
 (defn patrol-home-area [find-path character]
   "move around home area"
-  (let [[state (ai-state character)]]
-    (when (or (is (current-destination character) nil)
+  (let [state (ai-state character)]
+    (when (or (is (current-destination character) None)
               (= (current-destination character) (. character location)))
-      (while (or (is (current-destination character) nil)
+      (while (or (is (current-destination character) None)
                  (= (current-destination character) (. character location)))
         (set-current-destination character (.choice random (home-area character)))))
     (travel-destination find-path character (current-destination character))))
@@ -185,13 +184,13 @@
   "selected home location of character"
   (if (in :home-location (ai-state character))
     (:home-location (ai-state character))
-    nil))
+    None))
 
 (defn select-home [character predicate]
   "select home square for given character"
-  (let [[level (. character level)]
-        [candidates (list-comp location [#t(location tile) (tiles↜ level)]
-                               (predicate level location))]]
+  (let [level (. character level)
+        candidates (list-comp location [#t(location tile) (tiles↜ level)]
+                              (predicate level location))]
     (assoc (ai-state character) :home-location (.choice random candidates))))
 
 (with-decorator curry

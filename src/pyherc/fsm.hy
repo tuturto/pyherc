@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,46 +20,46 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-map ap-each ap-if ap-filter]])
+(require [pyherc.macros [*]])
 
 (import [pyherc.macro-utils [quote-dict HyString?]])
 
 (defmacro defstatemachine [fsm-class fsm-interface &rest states]
   "build class definition for a finite-state machine"
 
-  (defn new-state [symbol &optional [on-activate nil]
-                   [active nil] [on-deactivate nil] [transitions nil]]
+  (defn new-state [symbol &optional [on-activate None]
+                   [active None] [on-deactivate None] [transitions None]]
     "construct new state with given functions and transitions"
-    (let [[on-activate-fn (if on-activate
-                            `(fn [state! ~@fsm-interface]
-                               "function to call when this state activates"
-                               ~@on-activate)
-                            `(fn [state! ~@fsm-interface]
-                               "empty function as this state doesn't have on-activate code"
-                               nil))]
-          [active-fn (if active
-                       `(fn [state! ~@fsm-interface]
-                          "function to call when this state processes a message"
-                          ~@active)
-                       `(fn [state! ~@fsm-interface]
-                          "empty function as this state doesn't have active code"
-                          nil))]
-          [on-deactivate-fn (if on-deactivate
-                              `(fn [state! ~@fsm-interface]
-                                 "function to call when this state deactivates"
-                                 ~@on-deactivate)
-                              `(fn [state! ~@fsm-interface]
-                                 "empty function as this state doesn't have on-deactivate code"
-                                 nil))]
-          [transitions-fn (if transitions
-                            `(fn [state! ~@fsm-interface]
-                               "function to call when evaluating if state should change"
-                               (cond ~@(ap-map `[~(first it) ~(keyword (second it))]
-                                               transitions)))
-                            `(fn [state! ~@fsm-interface]
-                               "empty function as this state doesn't have transitions"
-                               nil))]]
+    (let [on-activate-fn (if on-activate
+                           `(fn [state! ~@fsm-interface]
+                              "function to call when this state activates"
+                              ~@on-activate)
+                           `(fn [state! ~@fsm-interface]
+                              "empty function as this state doesn't have on-activate code"
+                              None))
+          active-fn (if active
+                      `(fn [state! ~@fsm-interface]
+                         "function to call when this state processes a message"
+                         ~@active)
+                      `(fn [state! ~@fsm-interface]
+                         "empty function as this state doesn't have active code"
+                         None))
+          on-deactivate-fn (if on-deactivate
+                             `(fn [state! ~@fsm-interface]
+                                "function to call when this state deactivates"
+                                ~@on-deactivate)
+                             `(fn [state! ~@fsm-interface]
+                                "empty function as this state doesn't have on-deactivate code"
+                                None))
+          transitions-fn (if transitions
+                           `(fn [state! ~@fsm-interface]
+                              "function to call when evaluating if state should change"
+                              (cond ~@(ap-map `[~(first it) ~(keyword (second it))]
+                                              transitions)))
+                           `(fn [state! ~@fsm-interface]
+                              "empty function as this state doesn't have transitions"
+                              None))]
       `{:symbol ~(keyword symbol)
         :on-activate ~on-activate-fn
         :active ~active-fn
@@ -68,10 +68,10 @@
   
   (defn create-state [state-def]
     "create a state from state definition"
-    (setv on-activate-code nil)
-    (setv active-code nil)
-    (setv on-deactivate-code nil)
-    (setv transitions-code nil)
+    (setv on-activate-code None)
+    (setv active-code None)
+    (setv on-deactivate-code None)
+    (setv transitions-code None)
     (ap-each (rest state-def) (cond [(= 'on-activate (first it))
                                      (setv on-activate-code (list (rest it)))]
                                     [(= 'active (first it))
@@ -115,31 +115,30 @@
 
   `(defclass ~fsm-class []
      "a finite-state machine"
-     [[--init-- (fn [self ~@init-parameters]
-                  "default initializer"
-                  (setv (. self current-state) nil)
-                  (setv (. self initial-state) ~initial-state-code)
-                  (setv (. self states) ~quoted-dict)
-                  (setv (. self data) {})
-                  (let [[state! (. self data)]]
-                    ~@init-code)
-                  nil)]
+     [--init-- (fn [self ~@init-parameters]
+                 "default initializer"
+                 (setv (. self current-state) None)
+                 (setv (. self initial-state) ~initial-state-code)
+                 (setv (. self states) ~quoted-dict)
+                 (setv (. self data) {})
+                 (let [state! (. self data)]
+                   ~@init-code))
       
-      [--call-- (fn [self ~@fsm-interface]
-                  "call current state of finite-state machine"
-                  (when (not (. self current-state))
-                    (setv (. self current-state) (. self initial-state))
-                    ((:on-activate (. self current-state)) (. self data) ~@fsm-interface))
-                  (ap-if ((:transitions (. self current-state)) (. self data) ~@fsm-interface)
-                         (do ((:on-deactivate (. self current-state)) (. self data) ~@fsm-interface)
-                             (setv (. self current-state)
-                                   (get (. self states) it))
-                             ((:on-activate (. self current-state)) (. self data) ~@fsm-interface)))
-                  ((:active (. self current-state)) (. self data) ~@fsm-interface))]]))
+      --call-- (fn [self ~@fsm-interface]
+                 "call current state of finite-state machine"
+                 (when (not (. self current-state))
+                   (setv (. self current-state) (. self initial-state))
+                   ((:on-activate (. self current-state)) (. self data) ~@fsm-interface))
+                 (ap-if ((:transitions (. self current-state)) (. self data) ~@fsm-interface)
+                        (do ((:on-deactivate (. self current-state)) (. self data) ~@fsm-interface)
+                            (setv (. self current-state)
+                                  (get (. self states) it))
+                            ((:on-activate (. self current-state)) (. self data) ~@fsm-interface)))
+                 ((:active (. self current-state)) (. self data) ~@fsm-interface))]))
 
-(defmacro state [symbol &optional [value nil]]
+(defmacro state [symbol &optional [value None]]
   "access shared state symbol in finite-state machine"
-  (if (not (is value nil))
+  (if (not (is value None))
     `(do (assoc state! ~(keyword symbol) ~value)
          (get state! ~(keyword symbol)))
     `(get state! ~(keyword symbol))))

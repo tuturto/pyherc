@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,26 +20,26 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require pyherc.rules.macros)
+(require [pyherc.macros [*]])
+(require [pyherc.rules.macros [*]])
 
 (action-interface-dsl)
 
 (defn place-trap [character trap-bag]
   "place trap"
-  (run-action (TrappingParameters character trap-bag nil)))
+  (run-action (TrappingParameters character trap-bag None)))
 
 (defn place-natural-trap [character trap-name]
   "place trap without using any items"
-  (run-action (TrappingParameters character nil trap-name)))
+  (run-action (TrappingParameters character None trap-name)))
 
 (defn trapping-legal? [character trap-bag]
   "check if character can place a trap"
-  (legal-action? (TrappingParameters character trap-bag nil)))
+  (legal-action? (TrappingParameters character trap-bag None)))
 
 (defn natural-trapping-legal? [character trap-name]
   "check if character can place a natural trap"
-  (legal-action? (TrappingParameters character nil trap-name)))
+  (legal-action? (TrappingParameters character None trap-name)))
 
 (defparams TrappingParameters
   "trapping"

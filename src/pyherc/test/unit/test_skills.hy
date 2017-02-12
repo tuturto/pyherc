@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -26,16 +26,16 @@
 
 (defn test-zero-cooldown []
   "a skill with zero cool down is ready to be used"
-  (let [[character (-> (CharacterBuilder)
-                       (.with-cooldown "shoryuken" 0)
-                       (.build))]]
+  (let [character (-> (CharacterBuilder)
+                      (.with-cooldown "shoryuken" 0)
+                      (.build))]
     (assert-that (skill-ready? character "shoryuken")
-                 (is- (equal-to true)))))
+                 (is- (equal-to True)))))
 
 (defn test-non-zero-cooldown []
   "a skill with non-zero cool down is not ready to be used"
-  (let [[character (-> (CharacterBuilder)
-                       (.with-cooldown "shoryuken" 200)
-                       (.build))]]
+  (let [character (-> (CharacterBuilder)
+                      (.with-cooldown "shoryuken" 200)
+                      (.build))]
     (assert-that (skill-ready? character "shoryuken")
-                 (is- (equal-to false)))))
+                 (is- (equal-to False)))))

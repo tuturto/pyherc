@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require archimedes)
+(require [archimedes [*]])
 
 (import [hamcrest [assert-that is- equal-to is-not :as is-not-
                    contains-inanyorder contains empty has-length]]
@@ -30,15 +30,15 @@
         [pyherc.ports [equip unequip set-action-factory]])
 
 (background weapons
-            [item (-> (ItemBuilder)
-                      (.with-damage 2 "piercing")
-                      (.with-name "club")
-                      (.build))]
-            [character (-> (CharacterBuilder)
-                           (.build))]
-            [_ (set-action-factory (-> (ActionFactoryBuilder)
-                                       (.with-inventory-factory)
-                                       (.build)))])
+            item (-> (ItemBuilder)
+                     (.with-damage 2 "piercing")
+                     (.with-name "club")
+                     (.build))
+            character (-> (CharacterBuilder)
+                          (.build))
+            _ (set-action-factory (-> (ActionFactoryBuilder)
+                                      (.with-inventory-factory)
+                                      (.build))))
 (fact "character can wield weapon"
       (with-background weapons [item character]
         (equip character item)
@@ -53,7 +53,7 @@
 (fact "weapon worn in hand can be reported as such in its name"
       (with-background weapons [item character]
         (equip character item)
-        (assert-that (.get-name item character true) (is- (equal-to "club (weapon in hand)")))))
+        (assert-that (.get-name item character True) (is- (equal-to "club (weapon in hand)")))))
 
 (fact "item main type depends on tags"
       (assert-that (weapon? (-> (ItemBuilder)
@@ -64,12 +64,12 @@
                               (.build)))))
 
 (background potions
-            [potion (-> (ItemBuilder)
-                        (.with-name "healing potion")
-                        (.with-appearance "blue potion")
-                        (.build))]
-            [character (-> (CharacterBuilder)
-                           (.build))])
+            potion (-> (ItemBuilder)
+                       (.with-name "healing potion")
+                       (.with-appearance "blue potion")
+                       (.build))
+            character (-> (CharacterBuilder)
+                          (.build)))
 
 (fact "unknown items are named after their appearance"
       (with-background potions [potion character]
@@ -86,16 +86,16 @@
         (assert-that (.get-name potion character) (is- (equal-to "healing potion")))))
 
 (background effects
-            [effect₁ (-> (EffectHandleBuilder)
-                         (.with-trigger "on drink")
-                         (.build))]
-            [effect₂ (-> (EffectHandleBuilder)
-                         (.with-trigger "on break")
-                         (.build))]
-            [item (-> (ItemBuilder)
-                      (.with-effect-handle effect₁)
-                      (.with-effect-handle effect₂)
-                      (.build))])
+            effect₁ (-> (EffectHandleBuilder)
+                        (.with-trigger "on drink")
+                        (.build))
+            effect₂ (-> (EffectHandleBuilder)
+                        (.with-trigger "on break")
+                        (.build))
+            item (-> (ItemBuilder)
+                     (.with-effect-handle effect₁)
+                     (.with-effect-handle effect₂)
+                     (.build)))
 
 (fact "all effects of item can be queried as a list"
       (with-background effects [effect₁ effect₂ item]
@@ -113,21 +113,21 @@
                      (is- (empty)))))
 
 (background charges
-            [effect₁ (-> (EffectHandleBuilder)
-                         (.with-trigger "on drink")
-                         (.with-charges 1)
-                         (.build))]
-            [effect₂ (-> (EffectHandleBuilder)
-                         (.with-trigger "on kick")
-                         (.with-charges 2)
-                         (.build))]
-            [item-with-one-charge (-> (ItemBuilder)
+            effect₁ (-> (EffectHandleBuilder)
+                        (.with-trigger "on drink")
+                        (.with-charges 1)
+                        (.build))
+            effect₂ (-> (EffectHandleBuilder)
+                        (.with-trigger "on kick")
+                        (.with-charges 2)
+                        (.build))
+            item-with-one-charge (-> (ItemBuilder)
+                                     (.with-effect-handle effect₁)
+                                     (.build))
+            item-with-two-charges (-> (ItemBuilder)
                                       (.with-effect-handle effect₁)
-                                      (.build))]
-            [item-with-two-charges (-> (ItemBuilder)
-                                       (.with-effect-handle effect₁)
-                                       (.with-effect-handle effect₂)
-                                       (.build))])
+                                      (.with-effect-handle effect₂)
+                                      (.build)))
 
 (fact "item with single effect has equal amount charges left as the effect"
       (with-background charges [item-with-one-charge]

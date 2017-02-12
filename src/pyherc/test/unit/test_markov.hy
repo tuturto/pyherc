@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require archimedes)
-(require pyherc.macros)
+(require [archimedes [background with-background fact]])
+(require [pyherc.macros [*]])
 
 (import [hamcrest [assert-that is-not :as is-not- is- equal-to
                    has-length has-items]]
@@ -29,26 +29,27 @@
         [pyherc.markov [chain-factory]])
 
 (background infinite-foo-chain
-            [factory (chain-factory :start-elements [#t("foo" 1 100)]
-                                    :elements {"foo" [#t("foo" 1 100)]}
-                                    :continue-fn (fn [item] true))]
-            [chain (factory)])
+            factory (chain-factory :start-elements [#t("foo" 1 100)]
+                                   :elements {"foo" [#t("foo" 1 100)]}
+                                   :continue-fn (fn [item] True))
+            chain (factory))
 
 (fact "first element of chain can be read"
       (with-background infinite-foo-chain [chain]
         (assert-that (first chain) (is- (equal-to "foo")))))
 
 (fact "taking n elements from infinite chain will not exhaust it"
-      (variants :n (integers :min-value 2))
+      (variants :n (integers :min-value 2
+                             :max-value 2147483647))
       (with-background infinite-foo-chain [chain]
         (drop n chain)
         (assert-that (first chain) (is- (equal-to "foo")))))
 
 (background one-element-chain
-            [factory (chain-factory :start-elements [#t("foo" 1 100)]
-                                    :elements {"foo" [#t(nil 1 100)]}
-                                    :continue-fn (fn [item] (not (is item nil))))]
-            [chain (factory)])
+            factory (chain-factory :start-elements [#t("foo" 1 100)]
+                                   :elements {"foo" [#t(None 1 100)]}
+                                   :continue-fn (fn [item] (not (none? item))))
+            chain (factory))
 
 (fact "one element markov chain contains only one element"
       (variants :n (integers :min-value 1))
@@ -58,11 +59,11 @@
                      (has-length 1))))
 
 (background flip-flop-chain
-            [factory (chain-factory :start-elements [#t("flip" 1 100)]
-                                    :elements {"flip" [#t("flop" 1 100)]
-                                               "flop" [#t("flip" 1 100)]}
-                                    :continue-fn (fn [item] true))]
-            [chain (factory)])
+            factory (chain-factory :start-elements [#t("flip" 1 100)]
+                                   :elements {"flip" [#t("flop" 1 100)]
+                                                     "flop" [#t("flip" 1 100)]}
+                                   :continue-fn (fn [item] True))
+            chain (factory))
 
 (fact "markov chain can switch between states"
       (with-background flip-flop-chain [chain]
@@ -71,17 +72,17 @@
         (assert-that (first chain) (is- (equal-to "flip")))))
 
 (background foo-bar-baz
-            [factory (chain-factory :start-elements [#t("foo" 1 33)
-                                                     #t("bar" 34 66)
-                                                     #t("baz" 67 100)]
-                                    :elements {"foo" [#t("bar" 1 50)
-                                                      #t("baz" 51 100)]
-                                               "bar" [#t("foo" 1 50)
-                                                      #t("baz" 51 100)]
-                                               "baz" [#t("foo" 1 50)
-                                                      #t("bar" 51 100)]}
-                                    :continue-fn (fn [item] true))]
-            [chain (factory)])
+            factory (chain-factory :start-elements [#t("foo" 1 33)
+                                                    #t("bar" 34 66)
+                                                    #t("baz" 67 100)]
+                                   :elements {"foo" [#t("bar" 1 50)
+                                                     #t("baz" 51 100)]
+                                                    "bar" [#t("foo" 1 50)
+                                                           #t("baz" 51 100)]
+                                                    "baz" [#t("foo" 1 50)
+                                                           #t("bar" 51 100)]}
+                                   :continue-fn (fn [item] True))
+            chain (factory))
 
 (fact "markov chain can have multiple transitions from single element"
       (with-background foo-bar-baz [chain]

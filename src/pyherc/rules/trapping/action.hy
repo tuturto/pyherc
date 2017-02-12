@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.aspects)
-(require pyherc.macros) ;; TODO: remove this if xor ever lands Hy
+(require [pyherc.macros [*]])
+(require [pyherc.aspects [*]])
 
 (import [hymn.types.either [Left Right]]
         [pyherc.aspects [log-debug]]
@@ -30,44 +30,47 @@
         [pyherc.events [new-trap-placed-event]])
 
 (defclass TrappingAction []
-  "Action of placing a trap"
-  [[--init-- #d(fn [self character trap-bag trap-name trap-creator]
-                 "default constructor"
-                 (super-init)
-                 (assert character)
-                 (assert (xor trap-bag trap-name))
-                 (assert trap-creator)
-                 (setv self.character character)
-                 (setv self.trap-bag trap-bag)
-                 (setv self.trap-name trap-name)
-                 (setv self.trap-creator trap-creator)
-                 nil)]
-   [legal? #d(fn [self]
-               "check if action is possible to perform"
-               (if self.trap-bag
-                 (and (in self.trap-bag self.character.inventory)
-                      (trap-bag? self.trap-bag))
-                 true))]
-   [execute #d(fn [self]
-                "execute the action"
-                (if (.legal? self)
-                  (let [[character self.character]
-                        [level character.level]
-                        [location character.location]
-                        [trap (get-trap self.trap-creator
-                                        self.trap-bag
-                                        self.trap-name)]]
-                    (add-trap level location trap)
-                    (.raise-event character (new-trap-placed-event character
-                                                                   trap))
-                    (when self.trap-bag
-                      (setv self.trap-bag.trap-data.count 
-                            (dec self.trap-bag.trap-data.count))
-                      (when (< self.trap-bag.trap-data.count 1)
-                        (character.inventory.remove self.trap-bag)))
-                    (.add-to-tick character Duration.normal)
-                    (Right self.character))
-                  (Left self.character)))]])
+
+  []
+  
+  (defn --init-- [self character trap-bag trap-name trap-creator]
+    "default constructor"
+    (super-init)
+    (assert character)
+    (assert (xor trap-bag trap-name))
+    (assert trap-creator)
+    (setv self.character character)
+    (setv self.trap-bag trap-bag)
+    (setv self.trap-name trap-name)
+    (setv self.trap-creator trap-creator))
+  
+  (defn legal? [self]
+    "check if action is possible to perform"
+    (if self.trap-bag
+      (and (in self.trap-bag self.character.inventory)
+           (trap-bag? self.trap-bag))
+      True))
+  
+  (defn execute [self]
+    "execute the action"
+    (if (.legal? self)
+      (let [character self.character
+            level character.level
+            location character.location
+            trap (get-trap self.trap-creator
+                           self.trap-bag
+                           self.trap-name)]
+        (add-trap level location trap)
+        (.raise-event character (new-trap-placed-event character
+                                                       trap))
+        (when self.trap-bag
+          (setv self.trap-bag.trap-data.count 
+                (dec self.trap-bag.trap-data.count))
+          (when (< self.trap-bag.trap-data.count 1)
+            (character.inventory.remove self.trap-bag)))
+        (.add-to-tick character Duration.normal)
+        (Right self.character))
+      (Left self.character))))
 
 (defn get-trap [trap-creator trap-bag trap-name]
   "get trap instance"

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require archimedes)
-(require pyherc.fsm)
+(require [archimedes [*]])
+(require [pyherc.fsm [*]])
 
 (import [hamcrest [assert-that is- equal-to has-items]])
 
@@ -37,7 +37,7 @@
                (transitions [(= message 0) addition])))
 
 (background simple
-            [fsm (SimpleAdder)])
+            fsm (SimpleAdder))
 
 (fact "fsm - calling simple adder with 2 will return 3"
       (with-background simple [fsm]
@@ -86,7 +86,7 @@
                (transitions [(= message 0) addition])))
 
 (background twister
-            [fsm (TwistedAccumulator)])
+            fsm (TwistedAccumulator))
 
 (fact "fsm - twisted - state can be modified"
       (with-background twister [fsm]
@@ -105,7 +105,7 @@
            (active (* message (state bonus)))))
 
 (background minimal
-            [fsm (Minimal 2)])
+            fsm (Minimal 2))
 
 (fact "finite-state machine can be configured during construction"
       (with-background minimal [fsm]
@@ -129,8 +129,8 @@
            (transitions [(= message "state-1" state-1)])))
 
 (background transition-bkg
-            [feedback []]
-            [fsm (Transitions feedback)])
+            feedback []
+            fsm (Transitions feedback))
 
 (fact "state can have on-activate and on-deactivate handlers"
       (with-background transition-bkg [feedback fsm]

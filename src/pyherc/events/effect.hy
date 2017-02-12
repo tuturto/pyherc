@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -23,15 +23,15 @@
 (defn new-effect-added-event [effect]
   "create event signifying adding a general effect"
   {:event-type "effect added"
-   :character nil
-   :level nil
-   :location nil
+   :character None
+   :level None
+   :location None
    :effect effect})
 
 (defn new-effect-removed-event [effect]
   "create event signifying removing a general effect"
   {:event-type "effect removed"
-   :character nil
-   :level nil
-   :location nil
+   :character None
+   :level None
+   :location None
    :effect effect})

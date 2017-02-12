@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-each ap-map]])
+(require [pyherc.macros [*]])
 
 (import [pyherc.data [blocks-movement distance-between area-around]]
         [pyherc.generators.level.partitioners [section-floor section-wall
@@ -30,9 +30,9 @@
 
 (defn add-rows []
   "create generator for pre-placing rows"
-  (fn [section &optional [trap-generator nil]]
-    (let [[even-tiles []]
-          [odd-tiles []]]
+  (fn [section &optional [trap-generator None]]
+    (let [even-tiles []
+          odd-tiles []]
       (ap-each (section-data section "room-tiles")
                (when (free-around? section it)
                  (if (odd? (second it)) (.append odd-tiles it)
@@ -45,9 +45,9 @@
 
 (defn add-columns []
   "create generator for pre-placing columns"
-  (fn [section &optional [trap-generator nil]]
-    (let [[even-tiles []]
-          [odd-tiles []]]
+  (fn [section &optional [trap-generator None]]
+    (let [even-tiles []
+          odd-tiles []]
       (ap-each (section-data section "room-tiles")
                (when (free-around? section it)
                  (if (odd? (first it)) (.append odd-tiles it)
@@ -60,8 +60,8 @@
 
 (defn mark-center-area []
   "create generator to mark center area of room"
-  (fn [section &optional [trap-generator nil]]
-    (let [[center-tiles []]]
+  (fn [section &optional [trap-generator None]]
+    (let [center-tiles []]
       (ap-each (section-data section "room-tiles")
                (when (free-around? section it)
                  (.append center-tiles it)))
@@ -69,7 +69,7 @@
 
 (defn free-around? [section location]
   "are tiles around given section location free?"
-  (let [[tiles (list (area-around (section-to-map section location)))]
-        [level (section-level section)]
-        [non-blocking (list (ap-map (not (blocks-movement level it)) tiles))]]
+  (let [tiles (list (area-around (section-to-map section location)))
+        level (section-level section)
+        non-blocking (list (ap-map (not (blocks-movement level it)) tiles))]
     (ap-reduce (and it acc) (list non-blocking))))

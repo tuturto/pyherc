@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,53 +20,79 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
+;; TODO: remove?
 (defmacro effect-dsl []
   `(do
-    (import [pyherc.data.effects.effect [Effect]])
-    (require pyherc.macros)))
+     (require [pyherc.macros [*]])))
 
 (defmacro effect [type name attributes &rest body]
   "create a class that defines a new effect"
-  (defn select-branch [x]
-    (let [[key (first x)]
-          [value (second x)]]
-      (cond
-       [(= key :trigger) `(method do-trigger [] ~attributes ~value)]
-       [(= key :add-event) `(method get-add-event [] ~attributes ~value)]
-       [(= key :remove-event) `(method get-removal-event [] ~attributes ~value)]
-       [true (macro-error key "key failure")])))
-  (defn pair-list [data]
-    (list (zip (slice data 0 nil 2)
-               (slice data 1 nil 2))))
-  (let [[pairs (pair-list body)]
-        [multiples-pair (first (filter (fn [x] (= (first x) :multiple-allowed))
-                                       pairs))]
-        [multiple-status (if multiples-pair
-                           (second multiples-pair)
-                           'false)]]
-    `(defclass ~type [Effect]
-       [(effect-initializer ~name ~attributes ~multiple-status)
-        ~@(list-comp (select-branch pair)
-                     [pair pairs]
-                     (in (first pair) [:trigger :add-event :remove-event]))])))
 
-(defmacro effect-initializer [effect-name attributes multiples]
-  "create --init-- method for effect"
-  `[--init-- (fn [self duration frequency tick icon title
-                  description ~@attributes]
-               (super-init :duration duration
-                           :frequency frequency
-                           :tick tick
-                           :icon icon
-                           :title title
-                           :description description)
-               (set-attributes ~@attributes)
-               (setv self.effect-name ~effect-name)
-               (setv self.multiple-allowed ~multiples)
-               nil)])
+  (defn helper [&optional trigger add-event remove-event [multiples-allowed 'False]]
+    "helper function to construct effect definition"    
 
-(defmacro method [name params attributes body]
-  "create method used in effect class"
-  `[~name (fn [self ~@params]
-            (let [~@(genexpr `[~x (. self ~x)] [x attributes])]
-              ~body))])
+    (setv attribute-let [])
+    (for [x attributes]
+      (.append attribute-let x)
+      (.append attribute-let `(. self ~x)))
+
+    (setv add-event-fn (if add-event
+                         `(defn get-add-event [self]
+                            "get event describing adding this effect"
+                            (let ~attribute-let
+                              ~add-event))
+                         `(defn get-add-event [self]
+                            "get event describing adding this effect"
+                            (new-effect-added-event self))))
+
+    (setv remove-event-fn (if remove-event
+                            `(defn get-removal-event [self]
+                               "get event describing removing this effect"
+                               (let ~attribute-let
+                                 ~remove-event))
+                            `(defn get-removal-event [self]
+                               "get event describing removing this effect"
+                               (new-effect-removed-event self))))
+    
+    (setv trigger-fn (if trigger
+                       `(defn do-trigger [self]
+                          (let ~attribute-let
+                              ~trigger))
+                       `(defn do-trigger [self]
+                          None)))
+
+    `(defclass ~type []
+
+       [multiple-allowed ~multiples-allowed
+        effect-name ~name]
+       
+       (defn --init-- [self duration frequency tick icon title
+                       description ~@attributes]
+         "default initializer"
+         (super-init)
+         (set-attributes duration frequency tick icon title description)
+         (set-attributes ~@attributes))
+
+       (defn trigger [self]
+         "trigger the effect"
+         (.do-trigger self)
+         (.post-trigger self))
+       
+       ~trigger-fn
+
+       (defn post-trigger [self]
+         "do house keeping after effect has been triggered"
+         (when (not (none? self.duration))
+           (setv self.tick self.frequency)
+           (setv self.duration (- self.duration self.frequency))))
+       
+       ~add-event-fn
+       ~remove-event-fn))
+  
+  (apply helper [] (dict-comp (if (= :trigger (first x)) "trigger" 
+                                  (= :add-event (first x)) "add_event"
+                                  (= :remove-event (first x)) "remove_event"
+                                  (= :multiple-allowed (first x)) "multiples_allowed"
+                                  x)
+                              (second x)
+                              [x (partition body)])))

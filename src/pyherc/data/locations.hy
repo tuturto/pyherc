@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require hy.contrib.anaphoric)
+(require [pyherc.macros [*]])
 (import [pyherc.data.level [blocks-movement]]
         [pyherc.data.geometry [area-around area-4-around]]
         [functools [reduce]]
@@ -29,11 +28,11 @@
 
 (defn corridor? [level location]
   "check if given location is surrounded from two sides"
-  (let [[#t(x y) location]
-        [north #t(x (- y 1))]
-        [south #t(x (+ y 1))]
-        [east #t((+ x 1) y)]
-        [west #t((- x 1) y)]]
+  (let [#t(x y) location
+        north #t(x (- y 1))
+        south #t(x (+ y 1))
+        east #t((+ x 1) y)
+        west #t((- x 1) y)]
     (and (not (blocks-movement level location))
          (or (and (blocks-movement level north)
                   (blocks-movement level south)
@@ -46,11 +45,11 @@
 
 (defn next-to-wall? [level location]
   "check if given location is next to wall"
-  (let [[#t(x y) location]
-        [north #t(x (- y 1))]
-        [south #t(x (+ y 1))]
-        [east #t((+ x 1) y)]
-        [west #t((- x 1) y)]]
+  (let [#t(x y) location
+        north #t(x (- y 1))
+        south #t(x (+ y 1))
+        east #t((+ x 1) y)
+        west #t((- x 1) y)]
     (and (not (blocks-movement level location))
          (or (blocks-movement level north)
              (blocks-movement level south)
@@ -73,11 +72,11 @@
 (with-decorator curry
   (defn open-area? [level location]
     "check if given location is in open area"
-    (let [[#t(x y) location]
-          [north #t(x (- y 1))]
-          [south #t(x (+ y 1))]
-          [east #t((+ x 1) y)]
-          [west #t((- x 1) y)]]
+    (let [#t(x y) location
+          north #t(x (- y 1))
+          south #t(x (+ y 1))
+          east #t((+ x 1) y)
+          west #t((- x 1) y)]
       (and (not (blocks-movement level location))
            (not (blocks-movement level north))
            (not (blocks-movement level south))

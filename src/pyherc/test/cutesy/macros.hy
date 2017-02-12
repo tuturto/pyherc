@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,8 @@
 
 (defmacro item [item-name &rest specs]
   `(defn ~item-name []
-     (let [[new-item (-> (ItemBuilder)
-                         ~@specs
-                         (.build))]]
+     (let [new-item (-> (ItemBuilder)
+                        ~@specs
+                        (.build))]
        (setv new-item.old-values {})
        new-item)))

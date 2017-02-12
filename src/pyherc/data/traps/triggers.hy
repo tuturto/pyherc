@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,20 +20,19 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
 (import [pyherc.data.traps.trap [Trap]])
 
 (defclass RemoteTrigger [Trap]
-  [[--init-- (fn [self trap &optional [icon nil]]
-               (super-init icon)
-               (set-attributes trap)
-               nil)]
-   [on-enter (fn [self character]
-               (when (and self.trap
-                          self.trap.level)
-                 (.on-trigger self.trap)))]
-   [on-item-enter (fn [self item]
-                    (when (and self.trap
-                               self.trap.level)
-                      (.on-trigger self.trap)))]])
+  [--init-- (fn [self trap &optional [icon None]]
+              (super-init icon)
+              (set-attributes trap))
+   on-enter (fn [self character]
+              (when (and self.trap
+                         self.trap.level)
+                (.on-trigger self.trap)))
+   on-item-enter (fn [self item]
+                   (when (and self.trap
+                              self.trap.level)
+                     (.on-trigger self.trap)))])

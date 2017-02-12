@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.test.cutesy.macros)
+(require [pyherc.test.cutesy.macros [*]])
 
 (import [pyherc.data.effects [MovementModeModifier]]
         [pyherc.test.builders [ItemBuilder]])
@@ -64,9 +64,9 @@
       (.with-name "flying boots")
       (.with-boots-damage-reduction 1)
       (.with-boots-speed-modifier 1)
-      (.with-effect (MovementModeModifier :duration nil
-                                          :frequency nil
-                                          :tick nil
+      (.with-effect (MovementModeModifier :duration None
+                                          :frequency None
+                                          :tick None
                                           :icon :icon
                                           :title "fly boosters"
                                           :description "internal fly boosters"

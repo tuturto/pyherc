@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require archimedes)
+(require [pyherc.macros [*]])
+(require [archimedes [*]])
 
 (import [hamcrest [assert-that is- equal-to less-than]]
         [random]
@@ -32,12 +32,12 @@
         pyherc)
 
 (background default            
-            [character₀ (-> (CharacterBuilder)
-                            (.build))]
-            [character₁ (-> (CharacterBuilder)
-                            (.build))]
-            [level (-> (LevelBuilder)
-                       (.build))])
+            character₀ (-> (CharacterBuilder)
+                           (.build))
+            character₁ (-> (CharacterBuilder)
+                           (.build))
+            level (-> (LevelBuilder)
+                      (.build)))
 
 (fact "unarmed lunge moves attacker"
       (with-background default [character₀ character₁ level]
@@ -48,7 +48,7 @@
 
 (fact "unarmed lunge damages target"
   (with-background default [character₀ character₁ level]
-    (let [[old-hp (. character₀ hit-points)]]
+    (let [old-hp (. character₀ hit-points)]
       (add-character level #t(5 5) character₀)
       (add-character level #t(5 7) character₁)
       (call lunge character₁ Direction.north)
@@ -56,7 +56,7 @@
 
 (fact "lunging against opponent right next to attacker is not possible"
       (with-background default [character₀ character₁ level]
-        (let [[old-hp (. character₀ hit-points)]]
+        (let [old-hp (. character₀ hit-points)]
           (add-character level #t(5 5) character₀)
           (add-character level #t(5 6) character₁)
           (call lunge character₁ Direction.north)

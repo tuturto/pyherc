@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require archimedes)
-(require hymn.dsl)
+(require [archimedes [*]])
+(require [hymn.dsl [*]])
 
 (import [hamcrest [assert-that is- equal-to has-item is-not :as is-not-
                    not-none greater-than greater_than_or_equal_to]]
@@ -53,24 +53,24 @@
                    (is- (equal-to True))))
 
 (background high-society
-            [society (new-society "high society")]
-            [chief (new-person "Chief Atticus")]
-            [project (new-project "housing construction"
-                                  :building (new-building "housing"))]
-            [long-project (new-project "monolith" :duration 10)])
+            society (new-society "high society")
+            chief (new-person "Chief Atticus")
+            project (new-project "housing construction"
+                                 :building (new-building "housing"))
+            long-project (new-project "monolith" :duration 10))
 
 (background mining-society
-            [society (new-society "mining society")]
-            [mine (new-building "mine"
-                                :produces 1)]
-            [giant-mine (new-building "giant mine"
-                                      :produces 20)]
-            [_ (add-building society mine)])
+            society (new-society "mining society")
+            mine (new-building "mine"
+                               :produces 1)
+            giant-mine (new-building "giant mine"
+                                     :produces 20)
+            _ (add-building society mine))
 
 (background poor-society
-            [society (new-society "poor society")]
-            [_ (raw-resources society depleted)]
-            [project (new-project "statue")])
+            society (new-society "poor society")
+            _ (raw-resources society depleted)
+            project (new-project "statue"))
 
 (fact "society can have a name"
       (with-background high-society [society]
@@ -133,7 +133,7 @@
                                    (has-building? "housing")))))
 
 (fact "building has a name"
-      (let [[building (new-building "small house")]]
+      (let [building (new-building "small house")]
         (assert-that (building-name building)
                      (is- (equal-to "small house")))
         (building-name building "large house")
@@ -142,7 +142,7 @@
 
 (fact "special buildings produce raw resources"
       (with-background mining-society [society mine]
-        (let [[old-resources (raw-resources society)]]
+        (let [old-resources (raw-resources society)]
           (assert-right (do-monad [status (process-raw-resources-m society)]
                                   status)
                         (assert-that society 
@@ -150,7 +150,7 @@
 
 (fact "society can never have more than overflowing amount of resources"
       (with-background mining-society [society giant-mine]
-        (let [[old-resources (raw-resources society)]]
+        (let [old-resources (raw-resources society)]
           (add-building society giant-mine)
           (assert-right (do-monad [status (advance-time-m society)]
                                   status)
@@ -160,7 +160,7 @@
 (fact "processing projects consume resources"
       (with-background high-society [society project] 
         (start-project society project)
-        (let [[old-resources (raw-resources society)]]
+        (let [old-resources (raw-resources society)]
           (assert-right (do-monad [status (advance-time-m society)]
                                   status)
                         (assert-that society

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
+(require [hy.extra.anaphoric [ap-each]])
 
 (defn add-ground-set [gfx base]
   "add ground texture set"
@@ -77,7 +77,7 @@
 
 (defn init-graphics [context]
   "load graphcis"
-  (let [[gfx context.surface-manager]]
+  (let [gfx context.surface-manager]
     (load-ground-tiles gfx)
     (load-wall-tiles gfx)
     (load-pit-tiles gfx)

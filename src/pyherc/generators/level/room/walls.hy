@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-each]])
+(require [pyherc.macros [*]])
 
 (import [pyherc.generators.level.partitioners [section-floor
                                                section-wall
@@ -29,21 +29,21 @@
 
 (defn floor-creator [floor-tiles position-selector rng]
   "create floor creator"
-  (fn [section &optional [trap-generator nil]]
+  (fn [section &optional [trap-generator None]]
     "fill given area randomly with floor"
     (ap-each (position-selector section)
-             (section-floor section it (.choice rng floor-tiles) nil))))
+             (section-floor section it (.choice rng floor-tiles) None))))
 
 (defn wall-creator [wall-tiles position-selector rng]
   "create wall creator"
-  (fn [section &optional [trap-generator nil]]
+  (fn [section &optional [trap-generator None]]
     "fill given area randomly with walls"
     (ap-each (position-selector section)
-             (section-wall section it (.choice rng wall-tiles) nil))))
+             (section-wall section it (.choice rng wall-tiles) None))))
 
 (defn ornament-creator [ornament-tiles position-selector rate rng]
   "create ornament creator"
-  (fn [section &optional [trap-generator nil]]
+  (fn [section &optional [trap-generator None]]
     "fill given area randomly with ornaments"
     (ap-each (position-selector section)       
              (when (<= (.randint rng 0 100) rate) 

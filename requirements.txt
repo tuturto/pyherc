@@ -1,5 +1,5 @@
 decorator==4.0.6
-hy==0.11.1
+hy==0.12.1
 docopts==0.6.1
-hymn==0.5
+hymn==0.6
 toolz==0.7.4

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +20,15 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.aspects)
-(require pyherc.macros)
+(require [pyherc.aspects [*]])
+(require [pyherc.macros [*]])
 (import [pyherc.aspects [log-info]]
         [pyherc.data [Dungeon find-free-space add-character]]
         [pyherc])
 
 #i(defn generate-dungeon [model level-name]
     "generate start of the dungeon"
-    (let [[dungeon (Dungeon)]
-      [level (call generate-level level-name)]]
+    (let [dungeon (Dungeon)
+          level (call generate-level level-name)]
       (add-character level (find-free-space level) model.player)
       dungeon))

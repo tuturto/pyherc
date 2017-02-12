@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
 (import [pyherc.data [get-traps]]
         [pyherc.data.traps [Caltrops]]
@@ -36,26 +36,26 @@
 
 (defn setup []
   "setup test case"
-  (let [[trap-config {"caltrops" [Caltrops {"damage" 2}]}]
-        [actions (-> (ActionFactoryBuilder)
-                     (.with-trapping-factory 
-                      (-> (TrappingFactoryBuilder)
-                          (.with-trap-creator (get-trap-creator trap-config))
-                          (.build)))
-                     (.build))]
-        [character (-> (CharacterBuilder)
-                       (.build))]
-        [level (-> (LevelBuilder)
-                   (.with-character character #t(5 5))
-                   (.build))]               
-        [trap-bag (-> (ItemBuilder)
-                      (.with-trap :name "caltrops"
-                                  :count 1)
-                      (.build))]
-        [large-trap-bag (-> (ItemBuilder)
-                            (.with-trap :name "caltrops"
-                                        :count 2)
-                            (.build))]]
+  (let [trap-config {"caltrops" [Caltrops {"damage" 2}]}
+        actions (-> (ActionFactoryBuilder)
+                    (.with-trapping-factory 
+                     (-> (TrappingFactoryBuilder)
+                         (.with-trap-creator (get-trap-creator trap-config))
+                         (.build)))
+                    (.build))
+        character (-> (CharacterBuilder)
+                      (.build))
+        level (-> (LevelBuilder)
+                  (.with-character character #t(5 5))
+                  (.build))               
+        trap-bag (-> (ItemBuilder)
+                     (.with-trap :name "caltrops"
+                                 :count 1)
+                     (.build))
+        large-trap-bag (-> (ItemBuilder)
+                           (.with-trap :name "caltrops"
+                                       :count 2)
+                           (.build))]
     (.append character.inventory trap-bag)
     (.append character.inventory large-trap-bag)
     (set-action-factory actions)
@@ -66,71 +66,71 @@
 
 (defn test-placing-trap-item []
   "placing a trap item is possible"
-  (let [[context (setup)]
-        [level (:level context)]
-        [character (:character context)]
-        [trap-bag (:trap-bag context)]]
+  (let [context (setup)
+        level (:level context)
+        character (:character context)
+        trap-bag (:trap-bag context)]
     (place-trap character trap-bag)
     (assert-that (get-traps level character.location)
                  (has-length 1))))
 
 (defn test-placing-natural-trap []
   "some creatures are able to create natural traps"
-  (let [[context (setup)]
-        [level (:level context)]
-        [character (:character context)]]
+  (let [context (setup)
+        level (:level context)
+        character (:character context)]
     (place-natural-trap character "caltrops")
     (assert-that (get-traps level character.location)
                  (has-length 1))))
 
 (defn test-placing-nonexistent-bag []
   "placing trap that character doesn't have is not possible"
-  (let [[context (setup)]
-        [level (:level context)]
-        [character (:character context)]        
-        [trap-bag (-> (ItemBuilder)
-                      (.with-trap :name "caltrops"
-                                  :count 1)
-                      (.build))]]
+  (let [context (setup)
+        level (:level context)
+        character (:character context)        
+        trap-bag (-> (ItemBuilder)
+                     (.with-trap :name "caltrops"
+                                 :count 1)
+                     (.build))]
     (assert-that (trapping-legal? character trap-bag)
-                 (is- (equal-to false)))))
+                 (is- (equal-to False)))))
 
 (defn test-using-simple-item-as-trap []
   "only trap items can be used in trapping"
-  (let [[context (setup)]
-        [level (:level context)]
-        [character (:character context)]
-        [trap-bag (-> (ItemBuilder)                      
-                      (.build))]]
+  (let [context (setup)
+        level (:level context)
+        character (:character context)
+        trap-bag (-> (ItemBuilder)                      
+                     (.build))]
     (.append character.inventory trap-bag)
     (assert-that (trapping-legal? character trap-bag)
-                 (is- (equal-to false)))))
+                 (is- (equal-to False)))))
 
 (defn test-placing-trap-advances-time []
   "placing trap advances time"
-  (let [[context (setup)]
-        [level (:level context)]
-        [character (:character context)]
-        [trap-bag (:trap-bag context)]
-        [old-tick character.tick]]
+  (let [context (setup)
+        level (:level context)
+        character (:character context)
+        trap-bag (:trap-bag context)
+        old-tick character.tick]
     (place-trap character trap-bag)
     (assert-that character.tick (is- (greater-than old-tick)))))
 
 (defn test-using-trap-bag-decreses-count []
   "using trap bag decreses amount of traps in it"
-  (let [[context (setup)]
-        [level (:level context)]
-        [character (:character context)]
-        [trap-bag (:large-trap-bag context)]
-        [old-count trap-bag.trap-data.count]]    
+  (let [context (setup)
+        level (:level context)
+        character (:character context)
+        trap-bag (:large-trap-bag context)
+        old-count trap-bag.trap-data.count]    
     (place-trap character trap-bag)
     (assert-that trap-bag.trap-data.count (is- (less-than old-count)))))
 
 (defn test-empty-trap-bag-is-removed []
   "trap bag is discarded after it's empty"
-  (let [[context (setup)]
-        [level (:level context)]
-        [character (:character context)]
-        [trap-bag (:trap-bag context)]]    
+  (let [context (setup)
+        level (:level context)
+        character (:character context)
+        trap-bag (:trap-bag context)]    
     (place-trap character trap-bag)
     (assert-that character.inventory (is-not- (has-item trap-bag)))))

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -26,20 +26,20 @@
 
 (defn setup []
   "setup test case"
-  (let [[generator (get-trap-creator {"pit" [PitTrap {}]
-                                      "caltrops" [Caltrops {"damage" 4}]})]]
+  (let [generator (get-trap-creator {"pit" [PitTrap {}]
+                                           "caltrops" [Caltrops {"damage" 4}]})]
     {:generator generator}))
 
 (defn test-creating-trap []
   "creation of a trap is possible with trap creator"
-  (let [[context (setup)]
-        [generator (:generator context)]
-        [trap (generator "pit")]]
+  (let [context (setup)
+        generator (:generator context)
+        trap (generator "pit")]
     (assert-that trap (instance-of PitTrap))))
 
 (defn test-creating-trap-with-parameters []
   "creationg of trap with parameters is possible"
-  (let [[context (setup)]
-        [generator (:generator context)]
-        [trap (generator "caltrops")]]
+  (let [context (setup)
+        generator (:generator context)
+        trap (generator "caltrops")]
     (assert-that trap (instance-of Caltrops))))

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
 (import [hamcrest [assert-that is- equal-to has-item]]
         [mockito [mock verify verifyNoMoreInteractions]])
@@ -35,16 +35,16 @@
 
 (defn test-add-visited-level []
   "test that adding and retrieving a level in visited list is possible"
-  (let [[character (-> (CharacterBuilder)
-                       (.build))]]
+  (let [character (-> (CharacterBuilder)
+                      (.build))]
     (add-visited-level character "crystal forest")
     (assert-that (visited-levels↜ character)
                  (has-item "crystal forest"))))
 
 (defn test-same-level-added-only-once []
   "test that same level can be added only once"
-  (let [[character (-> (CharacterBuilder)
-                       (.build))]]
+  (let [character (-> (CharacterBuilder)
+                      (.build))]
     (add-visited-level character "crystal forest")
     (add-visited-level character "crystal forest")
     (assert-that (len (list (visited-levels↜ character)))
@@ -52,15 +52,15 @@
 
 (defn setup []
   "setup test case"
-  (let [[listener (mock)]
-        [character (-> (CharacterBuilder)
-                       (.with-update-listener listener)
-                       (.build))]
-        [level (-> (LevelBuilder)
-                   (.with-character character #t(5 5))
-                   (.build))]        
-        [actions (-> (ActionFactoryBuilder)
-                     (.build))]]
+  (let [listener (mock)
+        character (-> (CharacterBuilder)
+                      (.with-update-listener listener)
+                      (.build))
+        level (-> (LevelBuilder)
+                  (.with-character character #t(5 5))
+                  (.build))        
+        actions (-> (ActionFactoryBuilder)
+                    (.build))]
     (set-action-factory actions)
     {:listener listener
      :level level
@@ -68,20 +68,20 @@
 
 (defn test-event-raised []
   "moving to new level should raise new level event"
-  (let [[context (setup)]
-        [listener (:listener context)]
-        [level (:level context)]
-        [character (:character context)]]
+  (let [context (setup)
+        listener (:listener context)
+        level (:level context)
+        character (:character context)]
     (call move character Direction.north)
     (-> (verify listener)
         (.receive-update (EventType "new level")))))
 
 (defn test-event-not-raised-for-old-level []
   "when player moves in an old level, no new level event should be raised"
-  (let [[context (setup)]
-        [listener (:listener context)]
-        [level (:level context)]
-        [character (:character context)]]
+  (let [context (setup)
+        listener (:listener context)
+        level (:level context)
+        character (:character context)]
     (add-visited-level character level)
     (call move character Direction.north)
     (-> (verify listener)

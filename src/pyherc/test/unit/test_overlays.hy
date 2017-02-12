@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
 (import [random]
         [hamcrest [assert-that has-item is-in is- equal-to]]
@@ -35,13 +34,13 @@
 
 (defn setup []
   "setup test cases"
-  (let [[level (-> (LevelBuilder)
-                   (.with-size #t(10 10))
-                   (.with-floor-tile nil)
-                   (.with-wall-tile nil)
-                   (.build))]
-        [section (new-section #t(0 0) #t(9 9) level random)]
-        [room-tiles []]]
+  (let [level (-> (LevelBuilder)
+                  (.with-size #t(10 10))
+                  (.with-floor-tile None)
+                  (.with-wall-tile None)
+                  (.build))
+        section (new-section #t(0 0) #t(9 9) level random)
+        room-tiles []]
     (for [loc-x (range 2 6)]
       (for [loc-y (range 2 6)]
         (section-floor section #t(loc-x loc-y) "floor")
@@ -52,9 +51,9 @@
 
 (defn test-creating-columns []
   "columns should be created in open space"
-  (let [[context (setup)]
-        [level (:level context)]
-        [section (:section context)]]
+  (let [context (setup)
+        level (:level context)
+        section (:section context)]
     ((add-columns) section)
     (assert-that (section-data section "columns") (isnot (has-item #t(3 5))))
     (assert-that (section-data section "columns") (isnot (has-item #t(4 5))))
@@ -62,16 +61,16 @@
 
 (defn test-free-around []
   "free around should report if area is free around given location"
-  (let [[context (setup)]
-        [level (:level context)]
-        [section (:section context)]]
+  (let [context (setup)
+        level (:level context)
+        section (:section context)]
     ((add-columns) section)
-    (assert-that (free-around? section #t(3 4)) (is- (equal-to true)))
-    (assert-that (free-around? section #t(3 5)) (is- (equal-to false)))))
+    (assert-that (free-around? section #t(3 4)) (is- (equal-to True)))
+    (assert-that (free-around? section #t(3 5)) (is- (equal-to False)))))
 
 (defn test-blocks-movement []
   "test that blocks movement works as expected"
-  (let [[context (setup)]
-        [level (:level context)]]
-    (assert-that (blocks-movement level #t(3 5)) (is- (equal-to false)))
-    (assert-that (blocks-movement level #t(3 6)) (is- (equal-to true)))))
+  (let [context (setup)
+        level (:level context)]
+    (assert-that (blocks-movement level #t(3 5)) (is- (equal-to False)))
+    (assert-that (blocks-movement level #t(3 6)) (is- (equal-to True)))))

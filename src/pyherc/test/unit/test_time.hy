@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require archimedes)
-(require pyherc.macros)
+(require [archimedes [fact background with-background]])
+(require [pyherc.macros [*]])
 
 (import [hamcrest [assert-that equal-to has-item is- is-not :as is-not-]]
         [mockito [mock verify any :as any-]]
@@ -33,34 +32,34 @@
                                RulesEngineBuilder LevelBuilder]])
 
 (background characters
-            [creature₁ (-> (CharacterBuilder)
-                           (.with-tick 5)
-                           (.with-speed 1)
-                           (.with-name "creature 1")
-                           (.build))]
-            [creature₂ (-> (CharacterBuilder)
-                           (.with-tick 0)
-                           (.with-speed 2)
-                           (.with-name "creature 2")
-                           (.build))]
-            [creature₃ (-> (CharacterBuilder)
-                           (.with-tick 3)
-                           (.with-speed 0.5)
-                           (.with-name "creature 3")
-                           (.build))]
-             [model (Model)]
-             [level (-> (LevelBuilder)
-                        (.with-model model)
-                        (.build))]
-             [rules-engine (-> (RulesEngineBuilder)
-                               (.build))]
-             [_ (do (setv (. model dungeon) (Dungeon))
-                    (setv (. model dungeon levels) level)
-                    (cooldown creature₃ "shoryuken" 20)
-                    (add-character level #t(5 5) creature₁)
-                    (add-character level #t(6 6) creature₂)
-                    (add-character level #t(7 7) creature₃)
-                    (setv (. model player) creature₃))])
+            creature₁ (-> (CharacterBuilder)
+                          (.with-tick 5)
+                          (.with-speed 1)
+                          (.with-name "creature 1")
+                          (.build))
+            creature₂ (-> (CharacterBuilder)
+                          (.with-tick 0)
+                          (.with-speed 2)
+                          (.with-name "creature 2")
+                          (.build))
+            creature₃ (-> (CharacterBuilder)
+                          (.with-tick 3)
+                          (.with-speed 0.5)
+                          (.with-name "creature 3")
+                          (.build))
+             model (Model)
+             level (-> (LevelBuilder)
+                       (.with-model model)
+                       (.build))
+             rules-engine (-> (RulesEngineBuilder)
+                              (.build))
+             _ (do (setv (. model dungeon) (Dungeon))
+                   (setv (. model dungeon levels) level)
+                   (cooldown creature₃ "shoryuken" 20)
+                   (add-character level #t(5 5) creature₁)
+                   (add-character level #t(6 6) creature₂)
+                   (add-character level #t(7 7) creature₃)
+                   (setv (. model player) creature₃)))
 
 (fact "character whose tick is 0 is next in turn"
       (with-background characters [model creature₂ rules-engine]
@@ -82,40 +81,40 @@
         (setv (. creature₁ tick) 50)
         (setv (. creature₂ tick) 100)
         (setv (. creature₃ tick) 30)
-        (let [[creature (.get-next-creature model rules-engine)]]
+        (let [creature (.get-next-creature model rules-engine)]
           (assert-that (cooldown creature "shoryuken")
                       (is- (equal-to 0))))))
 
 (background effects
-            [creature (-> (CharacterBuilder)
-                          (.with-tick 5)
-                          (.build))]
-            [long-effect (-> (EffectBuilder)
-                             (.with-duration 50)
+            creature (-> (CharacterBuilder)
+                         (.with-tick 5)
+                         (.build))
+            long-effect (-> (EffectBuilder)
+                            (.with-duration 50)
+                            (.with-frequency 5)
+                            (.with-tick 5)
+                            (.with-effect-name "long effect")
+                            (.build))
+            short-effect (-> (EffectBuilder)
+                             (.with-duration 5)
                              (.with-frequency 5)
                              (.with-tick 5)
-                             (.with-effect-name "long effect")
-                             (.build))]
-            [short-effect (-> (EffectBuilder)
-                              (.with-duration 5)
-                              (.with-frequency 5)
-                              (.with-tick 5)
-                              (.with-effect-name "short effect")
-                              (.build))]
-            [model (Model)]
-            [level (-> (LevelBuilder)
-                       (.with-model model)
-                       (.build))]
-            [rules-engine (-> (RulesEngineBuilder)
-                              (.build))]
-            [_ (do (setv (. model player) creature)
-                   (.add-effect creature short-effect)
-                   (.add-effect creature long-effect)
-                   (add-character level #t(5 5) creature))])
+                             (.with-effect-name "short effect")
+                             (.build))
+            model (Model)
+            level (-> (LevelBuilder)
+                      (.with-model model)
+                      (.build))
+            rules-engine (-> (RulesEngineBuilder)
+                             (.build))
+            _ (do (setv (. model player) creature)
+                  (.add-effect creature short-effect)
+                  (.add-effect creature long-effect)
+                  (add-character level #t(5 5) creature)))
 
 (fact "effect with zero tick will trigger"
       (with-background effects [creature model rules-engine]
-        (let [[effect (mock Effect)]]
+        (let [effect (mock Effect)]
           (setv (. effect duration) 50)
           (setv (. effect frequency) 5)
           (setv (. effect tick ) 5)
@@ -146,29 +145,29 @@
         (assert-that (.get-effects creature) (has-item long-effect))))
 
 (fact "all effects will have their timers decreased as time progresses"
-      (let [[creature₁ (-> (CharacterBuilder)
-                           (.with-tick 5)
-                           (.build))]
-            [model (Model)]
-            [level (-> (LevelBuilder)
-                       (.with-model model)
-                       (.build))]
-            [rules-engine (-> (RulesEngineBuilder)
-                              (.build))]
-            [effect₁ (-> (EffectBuilder)
-                         (.with-duration 50)
-                         (.with-frequency 5)
-                         (.with-tick 5)
-                         (.build))]
-            [effect₂ (-> (EffectBuilder)
-                         (.with-duration 50)
-                         (.with-frequency 5)
-                         (.with-tick 5)
-                         (.build))]
-            [creature₂ (-> (CharacterBuilder)
-                           (.with-tick 10)
-                           (.with-effect-handle effect₂)
-                           (.build))]]
+      (let [creature₁ (-> (CharacterBuilder)
+                          (.with-tick 5)
+                          (.build))
+            model (Model)
+            level (-> (LevelBuilder)
+                      (.with-model model)
+                      (.build))
+            rules-engine (-> (RulesEngineBuilder)
+                             (.build))
+            effect₁ (-> (EffectBuilder)
+                        (.with-duration 50)
+                        (.with-frequency 5)
+                        (.with-tick 5)
+                        (.build))
+            effect₂ (-> (EffectBuilder)
+                        (.with-duration 50)
+                        (.with-frequency 5)
+                        (.with-tick 5)
+                        (.build))
+            creature₂ (-> (CharacterBuilder)
+                          (.with-tick 10)
+                          (.with-effect-handle effect₂)
+                          (.build))]
         (setv (. model player) creature₁)
         (add-character level #t(5 5) creature₁)
         (add-character level #t(6 6) creature₂)

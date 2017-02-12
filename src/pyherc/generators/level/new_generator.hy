@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-each]])
+(require [pyherc.macros [*]])
 
 (import [pyherc.data [new-level Portal add-portal get-locations-by-tag
                       wall-tile level-name level-description
@@ -37,10 +37,10 @@
                            rng name description]
   "create a new level generator function"
   (fn [portal]
-    (let [[level (new-level model)]
-          [partitioner (.choice rng partitioners)]
-          [connector (RandomConnector rng)]
-          [sections (.connect-sections connector (partitioner level))]]
+    (let [level (new-level model)
+          partitioner (.choice rng partitioners)
+          connector (RandomConnector rng)
+          sections (.connect-sections connector (partitioner level))]
       (level-name level name)
       (level-description level description)
       (ap-each sections ((.choice rng room-generators) it trap-generator))
@@ -50,10 +50,10 @@
                           portal-adders
                           decorators)
       (when portal
-        (let [[rooms (list-comp x [x (get-locations-by-tag level "room")]
-                                (safe-passage level x))]]
+        (let [rooms (list-comp x [x (get-locations-by-tag level "room")]
+                               (safe-passage level x))]
           (when rooms (add-portal level
                                   (.choice rng rooms)
-                                  (Portal #t(portal.other-end-icon nil) nil)
+                                  (Portal #t(portal.other-end-icon None) None)
                                   portal))))
       level)))

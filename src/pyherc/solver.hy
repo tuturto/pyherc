@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,32 +20,30 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric
-         pyherc.macros)
+(require [pyherc.macros [*]])
 
 (defmacro/g! fact [name desc &rest body]
-  `(defun ~name [var1 var2]
-     (let [[~g!func (fn [context updated-variable]
-                      ~desc
-                      (do ~@body))]]
+  `(defn ~name [var1 var2]
+     (let [~g!func (fn [context updated-variable]
+                     ~desc
+                     (do ~@body))]
        (.append var1.constraints ~g!func)
        (.append var2.constraints ~g!func))))
 
 (defclass Variable []
-  [[--init-- (fn [self &rest values]
-               "default initializer"
-               (setv self.values (set values))
-               (setv self.constraints [])
-               (setv self.last-save-frame-pointer -1)
-               nil)]
-   [--repr-- (fn [self]
-              (str self.values))]])
+  [--init-- (fn [self &rest values]
+              "default initializer"
+              (setv self.values (set values))
+              (setv self.constraints [])
+              (setv self.last-save-frame-pointer -1))
+   --repr-- (fn [self]
+              (str self.values))])
 
 (defn value [variable]
   "Get unique value of given variable"
   (if (unique? variable)
     (first variable.values)
-    (assert false 
+    (assert False 
             (.format "variable is not unique: {0}" variable.values))))
 
 (defn unique? [variable]
@@ -58,12 +56,12 @@
 
 (defn narrow [context variable values]
   "narrow down variable. true if ok, false if not ok"
-  (let [[new-values (& variable.values values)]
-        [res true]]
+  (let [new-values (& variable.values values)
+        res True]
     (if (= new-values (set []))
-      false
+      False
       (if (= new-values variable.values)
-        true
+        True
         (do (save context variable)
             (setv variable.values new-values)
             (for [constraint (. variable constraints)]
@@ -81,8 +79,8 @@
 (defn restore-values [context variable frame]
   "restore variable states from undo stack"
   (while (> (len (:variable-stack context)) frame)
-    (let [[var (.pop (:variable-stack context))]
-          [vals (.pop (:value-stack context))]]
+    (let [var (.pop (:variable-stack context))
+          vals (.pop (:value-stack context))]
       (setv var.values vals)))
   (frame-pointer context frame))
 
@@ -100,11 +98,11 @@
             [(and (= updated-variable var2)
                   (unique? var2))
              (narrow context var1 (- var1.values var2.values))]
-            [true true]))
+            [True True]))
 
 (fact less-than!
       "smaller than constraint"
-      (let [[maximum (max updated-variable.values)]]
+      (let [maximum (max updated-variable.values)]
         (if (= updated-variable var1) 
           (narrow context var2 (set-comp x [x var2.values] (> x (min var1.values))))
           (narrow context var1 (set-comp x [x var1.values] (< x (max var2.values)))))))
@@ -120,19 +118,19 @@
 
 (defn solve [&rest variables]
   "solve all variables"
-  (let [[context {:frame-pointer nil
-                  :variable-stack []
-                  :value-stack []
-                  :solved false}]]
+  (let [context {:frame-pointer None
+                 :variable-stack []
+                 :value-stack []
+                 :solved False}]
     (solve-one context variables)))
 
 (defn solve-one [context variables]
   "solve all variables, one by one"
   (if (all (map unique? variables))
     (mark-solved context)
-    (let [[variable (variable-to-solve variables)]
-          [values (.copy variable.values)]
-          [frame (len (:variable-stack context))]]
+    (let [variable (variable-to-solve variables)
+          values (.copy variable.values)
+          frame (len (:variable-stack context))]
       (frame-pointer context frame)
       (for [value values]
         (if (not (solved? context))
@@ -143,17 +141,17 @@
           (break))))) ;; solution was found, break loop  
   (if (solved? context) ;; we either have solution or no suitable value was found
     variables
-    nil))
+    None))
 
-(defn frame-pointer [context &optional [frame nil]]
+(defn frame-pointer [context &optional [frame None]]
   "set or retrieve frame-pointer"
-  (when (not (is frame nil))
+  (when (not (none? frame))
     (assoc context :frame-pointer frame))
   (:frame-pointer context))
 
 (defn mark-solved [context]
   "mark context as solved"
-  (assoc context :solved true))
+  (assoc context :solved True))
 
 (defn solved? [context]
   "has the context been solved?"

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require hy.contrib.anaphoric)
+(require [pyherc.macros [*]])
+(require [hy.extra.anaphoric [ap-each]])
 (import [pyherc.generators.level.partitioners [section-wall
                                                section-ornamentation
                                                section-to-map]]
@@ -30,24 +30,23 @@
 
 (defclass LibraryRoomGenerator [SquareRoomGenerator]
   "generator for library rooms"
-  [[--init-- (fn [self floor-tile corridor-tile walls decos rate feature-creator level-types]
-               "default constructor"
-               (-> (super)
-                   (.--init-- floor-tile nil corridor-tile level-types))
-               (setv self.walls walls)
-               (setv self.decos decos)
-               (setv self.rate rate)
-               (setv self.feature-creator feature-creator)
-               nil)]
-   [generate-room (fn [self section]
-                    (-> (super)
-                        (.generate-room section))                    
-                    (ap-each self.rows 
-                             (when (<= (.randint random 1 100) self.rate)
-                               (when self.walls 
-                                 (section-wall section it (.choice random self.walls) "wall"))
-                               (when self.decos
-                                 (section-ornamentation section it (.choice random self.decos)))
-                               (when self.feature-creator
-                                 (self.feature-creator (:level section) 
-                                                       (section-to-map section it))))))]])
+  [--init-- (fn [self floor-tile corridor-tile walls decos rate feature-creator level-types]
+              "default constructor"
+              (-> (super)
+                  (.--init-- floor-tile None corridor-tile level-types))
+              (setv self.walls walls)
+              (setv self.decos decos)
+              (setv self.rate rate)
+              (setv self.feature-creator feature-creator))
+   generate-room (fn [self section]
+                   (-> (super)
+                       (.generate-room section))                    
+                   (ap-each self.rows 
+                            (when (<= (.randint random 1 100) self.rate)
+                              (when self.walls 
+                                (section-wall section it (.choice random self.walls) "wall"))
+                              (when self.decos
+                                (section-ornamentation section it (.choice random self.decos)))
+                              (when self.feature-creator
+                                (self.feature-creator (:level section) 
+                                                      (section-to-map section it))))))])

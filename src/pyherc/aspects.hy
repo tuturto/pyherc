@@ -1,5 +1,5 @@
 ;; -*- coding: utf-8 -*-
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -30,16 +30,16 @@
   "create a logger with specific log level"
   (with-decorator decorator
     (fn [wrapped-function &rest args &kwargs kwargs]
-      (let [[logger-name wrapped-function.--name--]
-            [logger (.getLogger logging logger-name)]
-            [call-message (.join " " ["call" ":" (str args) (str kwargs)])]]
+      (let [logger-name wrapped-function.--name--
+            logger (.getLogger logging logger-name)
+            call-message (.join " " ["call" ":" (str args) (str kwargs)])]
         (.log logger log-level call-message)
         (try (do
-              (let [[result (apply wrapped-function args kwargs)]
-                    [result-message (.join " " ["return" ":" (str result)])]]
+              (let [result (apply wrapped-function args kwargs)
+                    result-message (.join " " ["return" ":" (str result)])]
                 (.log logger log-level result-message)
                 result))
-             (catch [Exception]
+             (except [Exception]
                (do
                 (.exception logger (.format "{0} has thrown an exception"
                                             logger-name))

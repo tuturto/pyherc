@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
 (import [random [Random]]
         [pyherc.data [Item]]
@@ -91,7 +91,7 @@
           (second (get *writing-qualities* (:quality (:writing blueprint))))
           (second (get *writing-details* (:detail (:writing blueprint)))))))
 
-(defmethod create-blueprint 'scroll [artefact-type &optional [seed nil]]
+(defmethod create-blueprint 'scroll [artefact-type &optional [seed None]]
   "create blueprint for a scroll"  
   (setv rng (if seed
               (Random seed)
@@ -102,7 +102,7 @@
    :paper (create-blueprint 'scroll-paper :seed (new-seed rng))
    :writing (create-blueprint 'scroll-writing :seed (new-seed rng))})
 
-(defmethod create-blueprint 'scroll-name [artefact-type &optional [seed nil]]
+(defmethod create-blueprint 'scroll-name [artefact-type &optional [seed None]]
   "create blueprint for scroll name"
   (setv rng (if seed
               (Random seed)
@@ -117,7 +117,7 @@
    :owner owner-name
    :owner-type owner-type})
 
-(defmethod create-blueprint 'scroll-tube [artefact-type &optional [seed nil]]
+(defmethod create-blueprint 'scroll-tube [artefact-type &optional [seed None]]
   "create blueprint for scroll tube"
   (setv rng (if seed
               (Random seed)
@@ -126,7 +126,7 @@
    :quality (random-key *tube-qualities* rng)
    :material (random-key *tube-materials* rng)})
 
-(defmethod create-blueprint 'scroll-paper [artefact-type &optional [seed nil]]
+(defmethod create-blueprint 'scroll-paper [artefact-type &optional [seed None]]
   "create blueprint for scroll paper"
   (setv rng (if seed
               (Random seed)
@@ -136,7 +136,7 @@
    :condition (random-key *paper-conditions* rng)
    :detail 'seal})
 
-(defmethod create-blueprint 'scroll-writing [artefact-type &optional [seed nil]]
+(defmethod create-blueprint 'scroll-writing [artefact-type &optional [seed None]]
   (setv rng (if seed
               (Random seed)
               (Random)))
@@ -146,16 +146,16 @@
 
 (defmethod instantiate-blueprints 'scroll [blueprint]
   "create a scroll based on blueprint"
-  (let [[scroll-name (instantiate-blueprints (:name blueprint))]
-        [name-parts (.split scroll-name :maxsplit 1)]
-        [upper-case-name (.join " " [(.capitalize (first name-parts))
-                                     (second name-parts)])]
-        [tube (instantiate-blueprints (:tube blueprint))]
-        [paper (instantiate-blueprints (:paper blueprint) (:writing blueprint))]
-        [scroll-description (.join ""
-                                   [(.capitalize tube) " containing "
-                                    scroll-name ". "
-                                    (.capitalize paper) "."])]]
+  (let [scroll-name (instantiate-blueprints (:name blueprint))
+        name-parts (.split scroll-name :maxsplit 1)
+        upper-case-name (.join " " [(.capitalize (first name-parts))
+                                    (second name-parts)])
+        tube (instantiate-blueprints (:tube blueprint))
+        paper (instantiate-blueprints (:paper blueprint) (:writing blueprint))
+        scroll-description (.join ""
+                                  [(.capitalize tube) " containing "
+                                   scroll-name ". "
+                                   (.capitalize paper) "."])]
 
     (setv new-item (Item (EffectsCollection)))
     (setv (. new-item name) upper-case-name)
@@ -195,13 +195,13 @@
 
 (defn get-conjuction-for-paper-and-writing [paper-blueprint writing-blueprint]
   "get conjuction used in describing paper and writing"
-  (let [[writing (:quality writing-blueprint)]
-        [paper (:condition paper-blueprint)]]
+  (let [writing (:quality writing-blueprint)
+        paper (:condition paper-blueprint)]
     (cond [(and (positive-writing? writing)
                 (positive-paper? paper)) "and"]
           [(and (not (positive-writing? writing))
                 (not (positive-paper? paper))) "and"]
-          [true "but"])))
+          [True "but"])))
 
 (defn random-key [coll rng]
   "pick random key from dictionary"

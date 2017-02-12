@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,10 +20,10 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require hymn.dsl)
-(require pyherc.macros)
-(require pyherc.rules.macros)
+(require [hy.extra.anaphoric [ap-each ap-if]])
+(require [hymn.dsl [*]])
+(require [pyherc.macros [*]])
+(require [pyherc.rules.macros [*]])
 
 (import [hymn.types.either [Left Right right? left?]]
         [pyherc.data.constants [Duration]]
@@ -46,7 +46,7 @@
 
 (defn+ attack-legal? [character direction]
   "can this attack be done?"
-  (is-not character nil))
+  (is-not character None))
 
 (defn attack-direction-m [character direction]
   "perform attack to direction, spend ammunition and check for dying"
@@ -73,15 +73,15 @@
                           (setv (. ammo ammunition-data count)
                                 (dec (. ammo ammunition-data count)))
                           (when (<= (. ammo ammunition-data count) 0)
-                            (setv (. character inventory projectiles) nil)
+                            (setv (. character inventory projectiles) None)
                             (.remove (. character inventory) ammo))                          
                           (Right character))]
-                     [true (Right character)])))
+                     [True (Right character)])))
 
 (defn attack-type [character direction]
-  (cond [(ranged-attack? character direction) "ranged"]
-        [(melee-attack? character direction) "melee"]
-        [true "unarmed"]))
+  (if (ranged-attack? character direction) "ranged"
+      (melee-attack? character direction) "melee"
+      "unarmed"))
 
 (defn attack-type-m [character direction]
   (left-if-nil [character direction]
@@ -89,21 +89,21 @@
 
 (defn ranged-attack? [character direction]
   "will this be a ranged attack?"
-  (let [[weapon (current-weapon character)]
-        [ammunition (current-ammunition character)]
-        [next-square (.get-location-at-direction character direction)]]    
-    (cond [(not weapon) false]
-          [(not ammunition) false]
-          [(not (ammunition-types-match? weapon ammunition)) false]
-          [(get-character character.level next-square) false]
-          [(blocks-movement character.level next-square) false]
-          [true true])))
+  (let [weapon (current-weapon character)
+        ammunition (current-ammunition character)
+        next-square (.get-location-at-direction character direction)]    
+    (if (not weapon) False
+        (not ammunition) False
+        (not (ammunition-types-match? weapon ammunition)) False
+        (get-character character.level next-square) False
+        (blocks-movement character.level next-square) False
+        True)))
 
 (defn melee-attack? [character direction]
   "will this be a melee attack?"
-  (cond [(not (current-weapon character)) false]
-        [(not (current-ammunition character)) true]        
-        [true true]))
+  (if (not (current-weapon character)) False
+      (not (current-ammunition character)) True        
+      True))
 
 (defn ammunition-types-match? [weapon ammunition]
   "do weapon and ammunition match?"
@@ -126,7 +126,7 @@
                                            weapon-data damage))]
         [(= "ranged" attack-type) (Right (. (current-ammunition character)
                                             ammunition-data damage))]
-        [true (Left (.format "attack type {0} is unknown" attack-type))]))
+        [True (Left (.format "attack type {0} is unknown" attack-type))]))
 
 (defn apply-damage-list-m [character damage-list]
   (left-if-nil [character damage-list]
@@ -150,8 +150,8 @@
 
 (defn trigger-attack-effects-m [attacker target]
   (left-if-nil [attacker target]
-               (let [[weapon (. attacker inventory weapon)]
-                     [effects (.get-effect-handles attacker "on attack hit")]]
+               (let [weapon (. attacker inventory weapon)
+                     effects (.get-effect-handles attacker "on attack hit")]
                  (when weapon
                    (.extend effects (.get-effect-handles weapon "on attack hit")))
                  (ap-each effects

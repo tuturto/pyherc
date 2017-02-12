@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 ;; THE SOFTWARE.
 
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
 (import [herculeum.ui.gui.animations.animation [Animation]]
         [herculeum.ui.gui.layers [zorder_trap]]
@@ -29,11 +29,12 @@
 
 (defclass PlaceTrapAnimation [Animation]
   "Generic animation for placing trap"
-  [[--init-- (fn [self event]
-               (super-init event)
-               (setv self.trap (e-trap event))
-               nil)]
-   [trigger (fn [self ui]
-              (.add-glyph ui self.trap
-                          ui.scene
-                          zorder-trap))]])
+  
+  (defn --init-- [self event]
+    (super-init event)
+    (setv self.trap (e-trap event)))
+  
+  (defn trigger [self ui]
+    (.add-glyph ui self.trap
+                ui.scene
+                zorder-trap)))

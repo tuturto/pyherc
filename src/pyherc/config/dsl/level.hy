@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require hy.contrib.anaphoric)
+(require [pyherc.macros [*]])
+(require [hy.extra.anaphoric [ap-each ap-map]])
 
 (defmacro level-config-dsl []
   `(import [functools [partial]]
@@ -42,7 +42,7 @@
                                                DirectionalWallDecoratorConfig
                                                floor-swap wall-ornamenter
                                                wall-swap
-                                               coarse-selection random-selection]]           
+                                               coarse-selection random-selection]]
            [pyherc.generators.level.item [ItemAdder]]
            [pyherc.generators.level.partitioners [binary-space-partitioning
                                                   grid-partitioning]]
@@ -63,22 +63,22 @@
 
 (defmacro level [level-name description &rest elements]
   "create new instance of level config"
-  (let [[room-generators nil]
-        [partitioners nil]
-        [decorators '[]]
-        [items '[]]
-        [characters '[]]
-        [portal-config '[]]]
+  (let [room-generators None
+        partitioners None
+        decorators '[]
+        items '[]
+        characters '[]
+        portal-config '[]]
     (ap-each elements
-             (cond [(= 'room-list (first it)) (set-branch room-generators it)]
-                   [(= 'layout (first it)) (set-branch partitioners it)]
-                   [(= 'touch-up (first it)) (set-branch decorators it)]
-                   [(= 'item-lists (first it)) (set-branch items it)]
-                   [(= 'creature-lists (first it)) (set-branch characters it)]
-                   [(= 'connections (first it)) (set-branch portal-config it)]
-                   [true (macro-error it "unknown config element")]))    
-    (if-not room-generators (macro-error nil "room-list not defined"))
-    (if-not partitioners (macro-error nil "layout not defined"))
+             (if (= 'room-list (first it)) (set-branch room-generators it)
+                 (= 'layout (first it)) (set-branch partitioners it)
+                 (= 'touch-up (first it)) (set-branch decorators it)
+                 (= 'item-lists (first it)) (set-branch items it)
+                 (= 'creature-lists (first it)) (set-branch characters it)
+                 (= 'connections (first it)) (set-branch portal-config it)
+                 (macro-error it "unknown config element")))    
+    (if-not room-generators (macro-error None "room-list not defined"))
+    (if-not partitioners (macro-error None "layout not defined"))
     `{:level-name ~level-name
       :description ~description
       :room-generators ~room-generators
@@ -125,12 +125,12 @@
                     ~chance rng))
 
 (defmacro wall-torches [wall chance]
-  `(wall-ornamenter nil
+  `(wall-ornamenter None
                     [(+ ~wall "_37") [["wall_torches_f0"
                                        "wall_torches_f1"]
                                       ["wall_torch_f0"
                                        "wall_torch_f1"]]]
-                    nil
+                    None
                     ~chance rng))
 
 (defmacro coarse-replace-wall [tag source dest]
@@ -172,16 +172,16 @@
   `(ap-map (ItemAdder item-generator it rng) [~@items]))
 
 (defmacro item-by-type [min-amount max-amount item-type]
-  `{"min_amount" ~min-amount "max_amount" ~max-amount "name" nil
-                 "type" ~item-type "artefact-type" nil "location" "room"})
+  `{"min_amount" ~min-amount "max_amount" ~max-amount "name" None
+                 "type" ~item-type "artefact-type" None "location" "room"})
 
 (defmacro item-by-name [min-amount max-amount name]
   `{"min_amount" ~min-amount "max_amount" ~max-amount "name" ~name
-                 "type" nil "artefact-type" nil "location" "room"})
+                 "type" None "artefact-type" None "location" "room"})
 
 (defmacro artefact-by-type [min-amount max-amount artefact-type]
-  `{"min_amount" ~min-amount "max_amount" ~max-amount "name" nil
-                 "type" nil "artefact-type" ~artefact-type "location" "room"})
+  `{"min_amount" ~min-amount "max_amount" ~max-amount "name" None
+                 "type" None "artefact-type" ~artefact-type "location" "room"})
 
 (defmacro creature-lists [&rest creatures]
   `(ap-map (CreatureAdder creature-generator it rng) [~@creatures]))
@@ -211,17 +211,17 @@
 (defmacro unique-stairs [origin destination base-tile location-type chance]
   `(PortalAdderConfiguration #t((+ ~base-tile " up") (+ ~base-tile " down"))
                              ~origin ~location-type ~chance
-                             ~destination true))
+                             ~destination True))
 
 (defmacro common-stairs [origin destination base-tile location-type chance]
   `(PortalAdderConfiguration #t((+ ~base-tile " up") (+ ~base-tile " down"))
                              ~origin ~location-type ~chance
-                             ~destination false))
+                             ~destination False))
 
 (defmacro final-stairs [origin base-tile location-type chance]
   `(PortalAdderConfiguration #t((+ ~base-tile " up") (+ ~base-tile " down"))
                              ~origin ~location-type ~chance
-                             nil true true))
+                             None True True))
 
 (defmacro pillar-room [floor-tile corridor-tile pillar-tiles]
   `(new-room-generator (square-shape ~floor-tile rng)

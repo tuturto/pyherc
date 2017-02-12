@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require archimedes)
+(require [archimedes [fact background with-background]])
 
 (import [hamcrest [assert-that is- equal-to]]
         [pyherc.data.constants [sizes]]
@@ -29,8 +29,8 @@
         [pyherc.test.builders [CharacterBuilder]])
 
 (background default
-            [character (-> (CharacterBuilder)
-                           (.build))])
+            character (-> (CharacterBuilder)
+                          (.build)))
 
 (fact "setting and retrieving character size is possible"
       (with-background default [character]
@@ -38,25 +38,25 @@
         (assert-that (size character) (is- (equal-to 'tiny)))))
 
 (fact "tiny is smaller than small"
-      (assert-that (smaller? 'tiny 'small) (is- (equal-to true))))
+      (assert-that (smaller? 'tiny 'small) (is- (equal-to True))))
 
 (fact "large is not smaller than small"
-      (assert-that (smaller? 'large 'small) (is- (equal-to false))))
+      (assert-that (smaller? 'large 'small) (is- (equal-to False))))
 
 (fact "medium is larger than small"
-      (assert-that (larger? 'medium 'small) (is- (equal-to true))))
+      (assert-that (larger? 'medium 'small) (is- (equal-to True))))
 
 (fact "large is not larger than huge"
-      (assert-that (larger? 'large 'huge) (is- (equal-to false))))
+      (assert-that (larger? 'large 'huge) (is- (equal-to False))))
 
 (fact "huge is same size as huge"
-      (assert-that (same-size? 'huge 'huge) (is- (equal-to true))))
+      (assert-that (same-size? 'huge 'huge) (is- (equal-to True))))
 
 (fact "small is not same size as huge"
-      (assert-that (same-size? 'small 'huge) (is- (equal-to false))))
+      (assert-that (same-size? 'small 'huge) (is- (equal-to False))))
 
 (fact "medium is different size as large"
-      (assert-that (different-size? 'medium 'large) (is- (equal-to true))))
+      (assert-that (different-size? 'medium 'large) (is- (equal-to True))))
 
 (fact "tiny is not different size as tiny"
-      (assert-that (different-size? 'tiny 'tiny) (is- (equal-to false))))
+      (assert-that (different-size? 'tiny 'tiny) (is- (equal-to False))))

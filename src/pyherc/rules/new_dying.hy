@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require hy.contrib.anaphoric)
+(require [pyherc.macros [*]])
+(require [hy.extra.anaphoric [ap-each]])
 
 (import [pyherc.data.model [*died-in-dungeon* *escaped-dungeon*]]
         [pyherc.events [new-death-event new-drop-event]]
@@ -54,4 +54,4 @@
   (* (sum (list-comp (. item cost) [item (. character inventory)]))
      (cond [(= (. character model end-condition) *died-in-dungeon*) 0.75]
            [(= (. character model end-condition) *escaped-dungeon*) 1.25]
-           [true 1.0])))
+           [True 1.0])))

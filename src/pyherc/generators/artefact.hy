@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,25 +20,25 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
-(defmulti generate-artefact [artefact-type &optional [seed nil]]
+(defmulti generate-artefact [artefact-type &optional [seed None]]
   "select method based on artefact-type parameter"
   artefact-type)
 
-(default-method generate-artefact [artefact-type &optional [seed nil]]
+(default-method generate-artefact [artefact-type &optional [seed None]]
   "create blueprint of specific type and instantiate it"
   (-> (create-blueprint artefact-type seed)
       (instantiate-blueprints)))
 
 ;; create blueprint for an artefact or part of it
-(defmulti create-blueprint [artefact-type &optional [seed nil]]
+(defmulti create-blueprint [artefact-type &optional [seed None]]
   "select method based on artefact-type parameter"
   artefact-type)
 
-(default-method create-blueprint [artefact-type &optional [seed nil]]
+(default-method create-blueprint [artefact-type &optional [seed None]]
   "no definition was found for artefact, throw an error"
-  (assert false "no artefact blueprint defined"))
+  (assert False "no artefact blueprint defined"))
 
 ;; create instance of an artefact based on one or more blueprint
 (defmulti instantiate-blueprints [&rest blueprints]
@@ -49,7 +49,7 @@
 
 (default-method instantiate-blueprints [&rest blueprints]
   "no definition found, thrown an error"
-  (assert false "no instantiator found for blueprint"))
+  (assert False "no instantiator found for blueprint"))
 
 ;; modify blueprint to contain elements of another
 (defmulti modify-blueprint [modifier-type blueprint]
@@ -58,7 +58,7 @@
 
 (default-method modify-blueprint [modifier-type blueprint]
   "no definition was found, throw an error"
-  (assert false "no blueprint defined"))
+  (assert False "no blueprint defined"))
 
 (defn blueprint-types [blueprint]
   "types of this blueprint"

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-each]])
+(require [pyherc.macros [*]])
 
 (import [random [Random]])
 (import [hamcrest [assert-that has-item]])
@@ -32,11 +32,11 @@
         [pyherc.test.builders [LevelBuilder]])
 
 (defn setup[]
-  (let [[level (-> (LevelBuilder)
-                   (.with-size #t(30 20))
-                   (.build))]
-        [partitioner (grid-partitioning #t(10 10) 2 1 (Random))]
-        [sections (partitioner level)]]
+  (let [level (-> (LevelBuilder)
+                  (.with-size #t(30 20))
+                  (.build))
+        partitioner (grid-partitioning #t(10 10) 2 1 (Random))
+        sections (partitioner level)]
     {:level level
      :sections sections}))
 
@@ -47,19 +47,19 @@
 
 (defn test-adding-special-feature[]
   "library generator can add special features"
-  (let [[context (setup)]
-        [level (:level context)]
-        [sections (:sections context)]
-        [feature-creator (fn [level location]
-                           (add-location-feature level
-                                                 location
-                                                 (new-cache level
-                                                            location
-                                                            ["coin"]
-                                                            ["skeleton"])))]
-        [generator (LibraryRoomGenerator "floor" "corridor" nil "grave" 100
-                                         feature-creator ["test"])]]
+  (let [context (setup)
+        level (:level context)
+        sections (:sections context)
+        feature-creator (fn [level location]
+                          (add-location-feature level
+                                                location
+                                                (new-cache level
+                                                           location
+                                                           ["coin"]
+                                                           ["skeleton"])))
+        generator (LibraryRoomGenerator "floor" "corridor" None "grave" 100
+                                        feature-creator ["test"])]
     (ap-each sections (.generate-room generator it))
-    (let [[grave (first (list (find-feature level)))]]
+    (let [grave (first (list (find-feature level)))]
       (assert-that (items-in-cache grave) (has-item "coin"))
       (assert-that (characters-in-cache grave) (has-item "skeleton")))))

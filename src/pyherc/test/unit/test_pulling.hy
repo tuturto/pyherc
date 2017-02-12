@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require archimedes)
+(require [pyherc.macros [*]])
+(require [archimedes [*]])
 
 (import [pyherc]
         [pyherc.data.level [add-character]]
@@ -29,19 +29,19 @@
         [hamcrest [assert-that is- equal-to]])
 
 (background default
-            [medium-character (-> (CharacterBuilder)
-                                  (.with-size 'medium)
-                                  (.build))] 
-            [tiny-character (-> (CharacterBuilder)
-                                (.with-size 'tiny)
-                                (.build))])
+            medium-character (-> (CharacterBuilder)
+                                 (.with-size 'medium)
+                                 (.build)) 
+            tiny-character (-> (CharacterBuilder)
+                               (.with-size 'tiny)
+                               (.build)))
 
 (fact "character can pull target smaller than itself"
       (with-background default [medium-character tiny-character]
         (assert-that (call can-pull? medium-character tiny-character)
-                     (is- (equal-to true)))))
+                     (is- (equal-to True)))))
 
 (fact "character can not pull target larger than itself"
       (with-background default [medium-character tiny-character]
         (assert-that (call can-pull? tiny-character medium-character)
-                     (is- (equal-to false)))))
+                     (is- (equal-to False)))))

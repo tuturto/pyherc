@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-each ap-filter]])
+(require [pyherc.macros [*]])
 (import [pyherc.test.builders [ActionFactoryBuilder CharacterBuilder
                                LevelBuilder MetamorphosisFactoryBuilder]]
         [pyherc.data [Model add-character get-characters]]
@@ -35,25 +35,25 @@
 
 (defn setup []
   "setup test cases"
-  (let [[model (Model)]
-        [config {"fungi" (creature-config "fungi" 7 2 1 12 2 nil 2)
-                         "fire fungi" (creature-config "fire fungi" 7 2 1 12 2 nil 2)}]
-        [generator (partial generate-creature
-                            config
-                            model
-                            nil
-                            (Random))]
-        [level (-> (LevelBuilder)
-                   (.with-floor-tile "floor")
-                   (.with-wall-tile nil)
-                   (.build))]
-        [character (generator "fungi")]
-        [action-factory (-> (ActionFactoryBuilder)
-                            (.with-metamorphosis-factory
-                             (-> (MetamorphosisFactoryBuilder)
-                                 (.with-character-generator generator)
-                                 (.build)))
-                            (.build))]]
+  (let [model (Model)
+        config {"fungi" (creature-config "fungi" 7 2 1 12 2 None 2)
+                        "fire fungi" (creature-config "fire fungi" 7 2 1 12 2 None 2)}
+        generator (partial generate-creature
+                           config
+                           model
+                           None
+                           (Random))
+        level (-> (LevelBuilder)
+                  (.with-floor-tile "floor")
+                  (.with-wall-tile None)
+                  (.build))
+        character (generator "fungi")
+        action-factory (-> (ActionFactoryBuilder)
+                           (.with-metamorphosis-factory
+                            (-> (MetamorphosisFactoryBuilder)
+                                (.with-character-generator generator)
+                                (.build)))
+                           (.build))]
     (set-action-factory action-factory)
     (add-character level #t(5 5) character)
     {:model model
@@ -64,23 +64,23 @@
 
 (defn test-basic-metamorphosis []
   "test that character can morph to another character"
-  (let [[context (setup)]
-        [level (:level context)]
-        [character (:character context)]]
+  (let [context (setup)
+        level (:level context)
+        character (:character context)]
     (morph character "fire fungi")
-    (let [[morphed-character (first (list (get-characters level)))]]
+    (let [morphed-character (first (list (get-characters level)))]
       (assert-that (count (get-characters level)) (is- (equal-to 1)))
       (assert-that morphed-character.name (is- (equal-to "fire fungi"))))))
 
 (defn test-destroying-characters-in-metamorphosis []
   "sometimes characters around morphee are destroyed"
-  (let [[context (setup)]
-        [level (:level context)]
-        [character (:character context)]
-        [generator (:generator context)]]
+  (let [context (setup)
+        level (:level context)
+        character (:character context)
+        generator (:generator context)]
     (ap-each (area-around character.location)
              (add-character level it (generator "fungi")))
     (assert-that (count (get-characters level)) (is- (equal-to 9)))
-    (let [[destroyed (ap-filter (!= it character) (get-characters level))]]
+    (let [destroyed (ap-filter (!= it character) (get-characters level))]
       (morph character "fire fungi" destroyed))
     (assert-that (count (get-characters level)) (is- (equal-to 1)))))

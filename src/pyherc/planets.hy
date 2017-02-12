@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -110,7 +110,7 @@
                   "orbital elements of sun/helios on a given date"
                   (new-orbit :name 'helios
                              :date d
-                             :long-ascending-node nil
+                             :long-ascending-node None
                              :arg-perihelion (+ 282.9404 (* 4.70935E-5 
                                                             (ast-date d)))
                              :semi-major-axis 1.0
@@ -269,14 +269,14 @@
         (math.sqrt (- 1 (pow (eccentricity orbit) 2)))
         (sinᵒ (eccentric-anomaly orbit)))))
   
-  (let [[(, x y) (ecliptic-coordinates)]]
+  (let [(, x y) (ecliptic-coordinates)]
     (, (math.sqrt (+ (pow x 2)
                      (pow y 2)))
        (atan2ᵒ y x))))
 
 (defn heliocentric-location [dist-true-anomaly orbit]
   "compute heliocentric position"
-  (let [[(, distance true-anomaly) dist-true-anomaly]]
+  (let [(, distance true-anomaly) dist-true-anomaly]
     (, (* distance (- (* (cosᵒ (longitude-ascending-node orbit)) 
                          (cosᵒ (+ true-anomaly (argument-perihelion orbit)))) 
                       (* (sinᵒ (longitude-ascending-node orbit)) 
@@ -293,18 +293,18 @@
 
 (defn lon-lat [h-loc]
   "convert heliocentric location to longitude-latitude pair in ecliptica"
-  (let [[(, x y z) h-loc]]
+  (let [(, x y z) h-loc]
       (, (normalize-angle (atan2ᵒ y x))
          (atan2ᵒ z (math.sqrt (+ (pow x 2) (pow y 2)))))))
 
 (defn sun-long [orbit]
   "longitude of sun"
-  (let [[(, distance true-anomaly) (distance-true-anomaly orbit)]]
+  (let [(, distance true-anomaly) (distance-true-anomaly orbit)]
     (normalize-angle (+ true-anomaly (argument-perihelion orbit)))))
 
 (defn ecliptical-to-equatorial [position obliquity]
   "translate ecliptical coordinates to equatorial"
-  (let [[(, x y z) position]]
+  (let [(, x y z) position]
     (, x
        (- (* y (cosᵒ obliquity))
           (* z (sinᵒ obliquity)))
@@ -313,7 +313,7 @@
 
 (defn ra-decl [position]
   "translate ecliptical position into RA declination pair"
-  (let [[(, x y z) position]]
+  (let [(, x y z) position]
     (, (normalize-angle (atan2ᵒ y x))
        (atan2ᵒ z 
                (math.sqrt (+ (pow x 2)
@@ -321,15 +321,15 @@
 
 (defn heliocentric-position [body d]
   "calculate heliocentric position of a body"
-  (let [[planet-orbit (orbit body d)]]
+  (let [planet-orbit (orbit body d)]
     (heliocentric-location (distance-true-anomaly planet-orbit)
                            planet-orbit)))
 
 (defn sun-loc [d]
   "calculate sun location"
-  (let [[sun-orbit (orbit 'helios d)]
-        [(, distance true-anomaly) (distance-true-anomaly sun-orbit)]
-        [long (sun-long sun-orbit)]]
+  (let [sun-orbit (orbit 'helios d)
+        (, distance true-anomaly) (distance-true-anomaly sun-orbit)
+        long (sun-long sun-orbit)]
     (, (* distance (cosᵒ long))
        (* distance (sinᵒ long))
        0.0)))
@@ -342,9 +342,9 @@
 
 (defn ra-decl-of [body d]
   "calculate RA and declination of given body on given moment of time"
-  (-> (cond [(= body 'helios) (sun-loc d)]
-            [(= body 'selene) (heliocentric-position body d)]
-            [true (geocentric-position body d)])      
+  (-> (if (= body 'helios) (sun-loc d)
+          (= body 'selene) (heliocentric-position body d)
+          (geocentric-position body d))      
       (ecliptical-to-equatorial (obliquity-of-ecliptic d))
       (ra-decl)))
 
@@ -354,8 +354,8 @@
 
 (defn angle-between [body-1 body-2 d]
   "calculate angle between two bodies (RA)"
-  (let [[(, ra1 decl1) (ra-decl-of body-1 d)]
-        [(, ra2 decl2) (ra-decl-of body-2 d)]]
+  (let [(, ra1 decl1) (ra-decl-of body-1 d)
+        (, ra2 decl2) (ra-decl-of body-2 d)]
     (abs (- (normalize-angle ra1)
             (normalize-angle ra2)))))
 

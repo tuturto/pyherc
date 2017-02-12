@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require hy.contrib.anaphoric)
-(require pyherc.config.dsl.level)
+(require [pyherc.macros [*]])
+(require [hy.extra.anaphoric [*]])
+(require [pyherc.config.dsl.level [*]])
 
 (level-config-dsl)
 
@@ -38,21 +38,21 @@
         [herculeum.config.room-generators [mundane-items skeletons]])
 
 (defmacro run-generator [generator]
-  `(let [[level (-> (LevelBuilder)
-                    (.with-size #t(30 20))
-                    (.build))]
-         [rng (Random)]
-         [partitioner (grid-partitioning #t(10 10) 2 1 rng)]
-         [sections (partitioner level)]
-         [trap-config {"pit" [PitTrap {}]}]]
+  `(let [level (-> (LevelBuilder)
+                   (.with-size #t(30 20))
+                   (.build))
+         rng (Random)
+         partitioner (grid-partitioning #t(10 10) 2 1 rng)
+         sections (partitioner level)
+         trap-config {"pit" [PitTrap {}]}]
      (ap-each sections (~generator it (get-trap-creator trap-config)))))
 
 (defn setup-test []
   "setup test case"
-  (let [[config (Configuration (Model)
-                               herculeum.config.levels
-                               (mock)
-                               (mock))]]
+  (let [config (Configuration (Model)
+                              herculeum.config.levels
+                              (mock)
+                              (mock))]
     (.initialise config)
     {:config config}))
 
@@ -66,10 +66,10 @@
 
 (defn test-circular-cache-room []
   "test generating circular cache room"
-  (let [[context (setup-test)]
-        [config (:config context)]
-        [item-generator config.item-generator]
-        [creature-generator config.creature-generator]]
+  (let [context (setup-test)
+        config (:config context)
+        item-generator config.item-generator
+        creature-generator config.creature-generator]
     (run-generator (circular-cache-room "floor" "floor" ["cache-tile"] 
                                         (mundane-items 50
                                                        item-generator
@@ -80,10 +80,10 @@
 
 (defn test-circular-graveyard []
   "test generating circular graveyard"
-  (let [[context (setup-test)]
-        [config (:config context)]
-        [item-generator config.item-generator]
-        [creature-generator config.creature-generator]]
+  (let [context (setup-test)
+        config (:config context)
+        item-generator config.item-generator
+        creature-generator config.creature-generator]
     (run-generator (circular-graveyard "floor" "floor" ["cache-tile"] 
                                        (mundane-items 50 item-generator rng)
                                        (skeletons 50 creature-generator
@@ -91,10 +91,10 @@
 
 (defn test-square-graveyard []
   "test generating square graveyard"
-  (let [[context (setup-test)]
-        [config (:config context)]
-        [item-generator config.item-generator]
-        [creature-generator config.creature-generator]]
+  (let [context (setup-test)
+        config (:config context)
+        item-generator config.item-generator
+        creature-generator config.creature-generator]
     (run-generator (square-graveyard "floor" "floor" ["cache-tile"] 
                                      (mundane-items 50 item-generator rng)
                                      (skeletons 50 creature-generator rng)))))

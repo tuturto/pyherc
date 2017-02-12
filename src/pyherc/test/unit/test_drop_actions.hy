@@ -1,5 +1,5 @@
 ;; -*- coding: utf-8 -*-
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -19,8 +19,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require archimedes)
-(require pyherc.macros)
+(require [archimedes [*]])
+(require [pyherc.macros [*]])
 
 (import [pyherc.ports [set-action-factory drop-item]]
         [pyherc.test.builders [LevelBuilder CharacterBuilder ItemBuilder
@@ -30,19 +30,19 @@
         [hypothesis.strategies [integers tuples]])
 
 (background default
-            [level (-> (LevelBuilder)
-                       (.with-size #t(20 20))
-                       (.build))]
-            [item (-> (ItemBuilder)
-                      (.build))]
-            [character (-> (CharacterBuilder)
-                           (.with-item item)
-                           (.with-level level)
-                           (.with-location #t(5 5))
-                           (.build))]
-            [_ (set-action-factory (-> (ActionFactoryBuilder)
-                                       (.with-inventory-factory)
-                                       (.build)))])
+            level (-> (LevelBuilder)
+                      (.with-size #t(20 20))
+                      (.build))
+            item (-> (ItemBuilder)
+                     (.build))
+            character (-> (CharacterBuilder)
+                          (.with-item item)
+                          (.with-level level)
+                          (.with-location #t(5 5))
+                          (.build))
+            _ (set-action-factory (-> (ActionFactoryBuilder)
+                                      (.with-inventory-factory)
+                                      (.build))))
 
 (fact "dropped item is removed from inventory"
       (with-background default [character item]
@@ -64,7 +64,7 @@
 
 (fact "dropping an item takes time"
       (with-background default [character item]
-        (let [[old-time (. character tick)]]
+        (let [old-time (. character tick)]
           (drop-item character item)
           (assert-that (. character tick)
                        (is- (greater-than old-time))))))

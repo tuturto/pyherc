@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.aspects)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-each ap-filter]])
+(require [pyherc.aspects [*]])
+(require [pyherc.macros [*]])
 (import [hymn.types.either [Left Right]]
         [pyherc.aspects [log-debug]]
         [pyherc.data [skill-ready? cooldown blocks-movement get-character
@@ -34,43 +34,42 @@
         [pyherc])
 
 (defclass MitosisAction []
-  [[--init-- #d(fn [self character character-generator rng character-limit]
-                 "default constructor"
-                 (-> (super) (.--init--))
-                 (setv self.character character)
-                 (setv self.character-generator character-generator)
-                 (setv self.rng rng)
-                 (setv self.character-limit character-limit)
-                 nil)]
-   [legal? #d(fn [self]
-               "check if action is possible to perform"
-               (let [[location self.character.location]
-                     [level self.character.level]]
-                 (if (and
-                      (skill-ready? self.character "mitosis")
-                      (list (free-tiles level (area-around location)))
-                      (< (count (ap-filter (= self.character.name it.name) (get-characters level)))
-                         self.character-limit))
-                   true false)))]
-   [execute #d(fn [self]
-                "execute the action"
-                (if (.legal? self)
-                  (let [[new-character (self.character-generator self.character.name)]
-                        [location self.character.location]
-                        [level self.character.level]
-                        [tiles (list (free-tiles level (area-around location)))]]
-                    (add-character level (.choice self.rng tiles) new-character)
-                    (.add-to-tick self.character Duration.very-slow)
-                    (.add-to-tick new-character Duration.very-slow)
-                    (cooldown self.character "mitosis" (* 6 Duration.very-slow))
-                    (cooldown new-character "mitosis" (* 6 Duration.very-slow))
-                    (.raise-event self.character (new-mitosis-event self.character
-                                                                    new-character))
-                    (ap-each (traps↜ new-character.level new-character.location)
-                             (.on-enter it new-character))
-                    (call check-dying new-character)
-                    (Right self.character))
-                  (Left self.character)))]])
+  [--init-- (fn [self character character-generator rng character-limit]
+              "default constructor"
+              (-> (super) (.--init--))
+              (setv self.character character)
+              (setv self.character-generator character-generator)
+              (setv self.rng rng)
+              (setv self.character-limit character-limit))
+   legal? (fn [self]
+            "check if action is possible to perform"
+            (let [location self.character.location
+                  level self.character.level]
+              (if (and
+                   (skill-ready? self.character "mitosis")
+                   (list (free-tiles level (area-around location)))
+                   (< (count (ap-filter (= self.character.name it.name) (get-characters level)))
+                      self.character-limit))
+                True False)))
+   execute (fn [self]
+             "execute the action"
+             (if (.legal? self)
+               (let [new-character (self.character-generator self.character.name)
+                     location self.character.location
+                     level self.character.level
+                     tiles (list (free-tiles level (area-around location)))]
+                 (add-character level (.choice self.rng tiles) new-character)
+                 (.add-to-tick self.character Duration.very-slow)
+                 (.add-to-tick new-character Duration.very-slow)
+                 (cooldown self.character "mitosis" (* 6 Duration.very-slow))
+                 (cooldown new-character "mitosis" (* 6 Duration.very-slow))
+                 (.raise-event self.character (new-mitosis-event self.character
+                                                                 new-character))
+                 (ap-each (traps↜ new-character.level new-character.location)
+                          (.on-enter it new-character))
+                 (call check-dying new-character)
+                 (Right self.character))
+               (Left self.character)))])
 
 #d(defn free-tiles [level tiles]
     (ap-filter (not (or

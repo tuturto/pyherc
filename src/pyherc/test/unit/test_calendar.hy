@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,13 @@
 ;; THE SOFTWARE.
 
 (import [hamcrest [assert-that has-item]]
-	[pyherc.data [SpecialTime]]
-	[pyherc.rules.calendar [get-special-events]])
+        [pyherc.data [SpecialTime]]
+        [pyherc.rules.calendar [get-special-events]])
 
 (defn test-christmas-is-detected []
-  (let [[events (get-special-events 2014 12 24)]]
+  (let [events (get-special-events 2014 12 24)]
     (assert-that events (has-item "christmas"))))
 
 (defn test-aprilfools-is-detected []
-  (let [[events (get-special-events 2014 4 1)]]
+  (let [events (get-special-events 2014 4 1)]
     (assert-that events (has-item "aprilfools"))))

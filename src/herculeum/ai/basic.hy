@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.aspects)
-(require pyherc.macros)
-(require herculeum.ai.macros)
+(require [pyherc.aspects [*]])
+(require [pyherc.macros [*]])
+(require [herculeum.ai.macros [*]])
 
 (import [pyherc.aspects [log_debug]]
         [pyherc.data.geometry [find-direction]]    
@@ -46,8 +46,8 @@
 
 (defn distance-between [start end]
   "calculate distance between two locations"
-  (let [[dist-x (- (first start) (first end))]
-	[dist-y (- (second start) (second end))]]
+  (let [dist-x (- (first start) (first end))
+        dist-y (- (second start) (second end))]
     (sqrt (+ (pow dist-x 2)
 	     (pow dist-y 2)))))
 
@@ -57,14 +57,14 @@
 
 #d(defn attack-enemy [ai enemy action-factory rng]
     "attack an enemy"
-    (let [[attacker ai.character]
-	  [attacker-location attacker.location]
-	  [target-location enemy.location]
-	  [attack-direction (find-direction attacker-location target-location)]]
+    (let [attacker ai.character
+          attacker-location attacker.location
+          target-location enemy.location
+          attack-direction (find-direction attacker-location target-location)]
       (call attack attacker attack-direction)))
 
 #d(defn focus-enemy [ai enemy]
     "focus on enemy and start tracking it"
-    (let [[character ai.character]
-	  [event (new-notice-event character enemy)]]
+    (let [character ai.character
+          event (new-notice-event character enemy)]
       (.raise-event character event)))

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-map ap-each ap-if]])
+(require [pyherc.macros [*]])
 
 (import [random [Random]]
         [pyherc.utils [group]]
@@ -110,11 +110,11 @@
 (defn add-to-links [links parts-list]
   "add list of chain parts into links, each with same frequency"
   (when parts-list
-    (let [[first-item (first parts-list)]
-          [second-item (ap-if (second parts-list)
-                              #t (it 0 10)
-                              #t (nil 0 10))]
-          [tail (list (rest parts-list))]]
+    (let [first-item (first parts-list)
+          second-item (ap-if (second parts-list)
+                             #t (it 0 10)
+                             #t (None 0 10))
+          tail (list (rest parts-list))]
       (if (not (in first-item links))
         (assoc links first-item [second-item])
         (when (not (in second-item (get links first-item)))
@@ -123,7 +123,7 @@
 
 (defn add-starting-link [starting-links parts-list]
   "add starting link using standard frequency"
-  (let [[first-item #t ((first parts-list) 0 10)]]
+  (let [first-item #t ((first parts-list) 0 10)]
     (when (not (in first-item starting-links))
       (.append starting-links first-item))))
 
@@ -134,19 +134,19 @@
 
 (defn create-name-generator [examples]
   "create and configure markov chain factory to create names based on examples"
-  (let [[links {}]
-        [starting-links []]]
+  (let [links {}
+        starting-links []]
     (add-names links starting-links 2 examples)
-    (chain-factory starting-links links (fn [item] (not (is item nil))))))
+    (chain-factory starting-links links (fn [item] (not (none? item))))))
 
 (def greek-males (create-name-generator male-names))
 (def greek-females (create-name-generator female-names))
 
-(defn generate-name [factory &optional [seed nil]]
+(defn generate-name [factory &optional [seed None]]
   "generate a name"
   (.capitalize (.join "" (list (factory)))))
 
-(defn generate-random-name [&optional [seed nil]]
+(defn generate-random-name [&optional [seed None]]
   "generate random name"
   (setv rng (if seed
               (Random seed)
@@ -155,10 +155,10 @@
     (generate-male-name (.randint rng 0 9223372036854775807))
     (generate-female-name (.randint rng 0 9223372036854775807))))
 
-(defn generate-male-name [&optional [seed nil]]
+(defn generate-male-name [&optional [seed None]]
   "generate name for male"
   (generate-name greek-males seed))
 
-(defn generate-female-name [&optional [seed nil]]
+(defn generate-female-name [&optional [seed None]]
   "generate name for female"
   (generate-name greek-females seed))

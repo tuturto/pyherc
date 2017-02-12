@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -23,8 +23,8 @@
 (import [functools [partial]])
 (import [copy [deepcopy]])
 (import [pyherc.aspects [log-debug log-info]])
-(require pyherc.aspects)
-(require hy.contrib.anaphoric)
+(require [pyherc.aspects [*]])
+(require [hy.extra.anaphoric [ap-each]])
 
 #i(defn get-effect-creator [effect-config]
     "get a function to create effects"
@@ -32,9 +32,9 @@
 
 #d(defn create-effect [effect-config key &kwargs kwargs]
     "instantiates new effect with given parameters"
-    (let [[config (get effect-config key)]
-	  [params (deepcopy config)]
-	  [effect-type (.pop params "type")]]
+    (let [config (get effect-config key)
+          params (deepcopy config)
+          effect-type (.pop params "type")]
       (if params
 	(ap-each kwargs (do
 			 (when (in it params) (.pop params it))

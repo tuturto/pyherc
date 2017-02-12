@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
+(require [hy.extra.anaphoric [*]])
 
 (defreader t [expr] `(, ~@expr))
 
@@ -29,28 +29,16 @@
 
 (defmacro count [seq]
   (with-gensyms [counter]
-    `(let [[~counter 0]]
+    `(let [~counter 0]
       (ap-each ~seq (setv ~counter (+ 1 ~counter)))
       ~counter)))
 
 (defmacro ylet [&rest args] `(yield-from (let ~@args)))
 
-;; TODO: remove this if it ever lands Hy
-(defmacro xor [&rest args]
-  "perform exclusive or comparison between all arguments"
-  (when (< (len args) 2) (macro-error nil "xor requires at least two arguments."))
-  `(= (reduce (fn [a b] (if b (inc a) a)) ~args 0) 1))
-
-(defmacro super-init [&rest args &kwargs kwargs]
+(defmacro super-init [&rest args]
   "call super --init-- with given parameters"
-  (cond [(and args kwargs) `(-> (super)
-                                (.--init-- ~@args ~kwargs))]
-        [args `(-> (super)
-                   (.--init-- ~@args))]
-        [kwargs `(-> (super)
-                     (.--init-- ~kwargs))]
-        [true `(-> (super)
-                   (.--init--))]))
+  `(-> (super)
+       (.--init-- ~@args)))
 
 (defmacro set-attributes [&rest attributes]
   "set attributes of object with respective parameters in --init--"
@@ -89,12 +77,12 @@
                   (apply inner.--multi-default-- args kwargs))))
   (setv inner.--multi-- {})
   (setv inner.--doc-- dispatch-fn.--doc--)
-  (setv inner.--multi-default-- (fn [&rest args &kwargs kwargs] nil))
+  (setv inner.--multi-default-- (fn [&rest args &kwargs kwargs] None))
   inner)
  
-(defn method-decorator [dispatch-fn &optional [dispatch-key nil]]
+(defn method-decorator [dispatch-fn &optional [dispatch-key None]]
   (fn [func]
-    (if (is dispatch-key nil)
+    (if (is dispatch-key None)
       (setv dispatch-fn.--multi-default-- func)
       (assoc dispatch-fn.--multi-- dispatch-key func))
     dispatch-fn))
@@ -114,13 +102,14 @@
        (with-decorator (method-decorator ~name)
          (defn ~name ~params ~@body))))
 
+;; TODO: refactor this out completely
 (defmacro/g! left-if-nil [params &rest code]
   #s("check params for nils and return (Left ret-value) if any is nil."
      "otherwise, execute code and return (Right ret-value).")
   `(do (setv ~g!pairs (zip ~(list (map name params)) ~params))
-       (setv ~g!check (list (filter (fn [x] (not (nil? x)))
+       (setv ~g!check (list (filter (fn [x] (not (none? x)))
                                     (map (fn [x]
-                                           (when (nil? (second x)) (first x)))
+                                           (when (none? (second x)) (first x)))
                                          ~g!pairs))))
        (if ~g!check
          (do (import inspect)

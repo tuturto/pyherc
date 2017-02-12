@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -29,9 +29,9 @@
   "create character selector for skeletons"
   (fn []
     (if (> (.randint rng 1 100) empty-pct)
-      (let [[roll (.randint rng 1 100)]]
+      (let [roll (.randint rng 1 100)]
         (cond
-         [true [(character-generator "skeleton warrior")]]))
+         [True [(character-generator "skeleton warrior")]]))
       [])))
 
 (defn no-items []
@@ -43,20 +43,20 @@
   "create item selector for items found on common altars"
   (fn []
     (if (> (.randint rng 1 100) empty-pct)
-      (let [[roll (.randint rng 1 100)]]
+      (let [roll (.randint rng 1 100)]
         (cond
          [(> roll 50) [(.generate-item item-generator "robes")]]
-         [true [(.generate-item item-generator nil "tome")]]))
+         [True [(.generate-item item-generator None "tome")]]))
       [])))
 
 (defn mundane-items [empty-pct item-generator rng]
   "create item selector for mundane items"
   (fn []
     (if (> (.randint rng 1 100) empty-pct)
-      (let [[roll (.randint rng 1 100)]]
-        (cond
-         [(> roll 40) [(.generate-item item-generator "club")]]
-         [(> roll 20) [(.generate-item item-generator "dagger")]]
-         [(> roll 10) [(.generate-item item-generator "axe")]]
-         [true [(.generate-item item-generator "sword")]]))
+      (let [roll (.randint rng 1 100)]
+        (if
+         (> roll 40) [(.generate-item item-generator "club")]
+         (> roll 20) [(.generate-item item-generator "dagger")]
+         (> roll 10) [(.generate-item item-generator "axe")]
+         [(.generate-item item-generator "sword")]))
       [])))

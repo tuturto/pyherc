@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require hymn.dsl)
+(require [pyherc.macros [*]])
+(require [hymn.dsl [*]])
 
 (import [hymn.types.either [Right Left left?]]
         [pyherc.data [skill-ready? cooldown free-passage get-characters]]
@@ -60,7 +60,7 @@
 
 (defn+ lunge-legal? [character direction]
   "is it legal to start lunge attack"
-  (let [[new-location (.get-location-at-direction character direction)]]
+  (let [new-location (.get-location-at-direction character direction)]
     (and (skill-ready? character "lunge")
          (free-passage (. character level) new-location)
          (not (get-characters (. character level) new-location))

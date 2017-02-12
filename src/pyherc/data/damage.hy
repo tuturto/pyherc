@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,14 +20,14 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-reduce]])
+(require [pyherc.macros [*]])
 
 (defn new-damage [damage-list]
   "create new damage function from a list of damage (amount, type)"
   (fn [target &optional [body-part "torso"]]
     "apply this damage to target's body-part, returns amount of damage done"
-    (let [[caused-damage (total-damage damage-list target body-part)]]
+    (let [caused-damage (total-damage damage-list target body-part)]
       (setv target.hit-points (- target.hit-points (first caused-damage)))
       caused-damage)))
 
@@ -46,11 +46,11 @@
 
 (defn modified-damage [damage target]
   "get damage modified by modifiers: #t(damage type)"
-  (let [[#t(damage-amount damage-type) damage]
-        [total-modifiers (ap-reduce (+ it.modifier acc)
-                                    (matching-modifiers↜ target damage-type)
-                                    0)]
-        [caused-damage (+ damage-amount total-modifiers)]]
+  (let [#t(damage-amount damage-type) damage
+        total-modifiers (ap-reduce (+ it.modifier acc)
+                                   (matching-modifiers↜ target damage-type)
+                                   0)
+        caused-damage (+ damage-amount total-modifiers)]
     (if (< caused-damage 1)
       #t(0 damage-type)
       #t(caused-damage damage-type))))
@@ -67,17 +67,17 @@
 
 (defn apply-armour-bonus [damage target body-part]
   "apply armour bonus to damage"
-  (let [[#t(damage-amount damage-type) damage]
-        [reduction (armour-bonus target body-part)]]
-    (cond [(< reduction damage-amount) #t((- damage-amount reduction) damage-type)]
-          [(< reduction (* 2 damage-amount)) #t(1 damage-type)]
-          [true #t(0 damage-type)])))
+  (let [#t(damage-amount damage-type) damage
+        reduction (armour-bonus target body-part)]
+    (if (< reduction damage-amount) #t((- damage-amount reduction) damage-type)
+        (< reduction (* 2 damage-amount)) #t(1 damage-type)
+        #t(0 damage-type))))
 
 (defn armour-bonus [target body-part]
   "get armour bonus for given body-part"
-  (cond [(= body-part "feet") (if (is target.inventory.boots nil)
-                                0
-                                target.inventory.boots.boots-data.damage-reduction)]
-        [true (if (is target.inventory.armour nil)
-                0
-                target.inventory.armour.armour-data.damage-reduction)]))
+  (if (= body-part "feet") (if (is target.inventory.boots None)
+                             0
+                             target.inventory.boots.boots-data.damage-reduction)
+      (if (is target.inventory.armour None)
+        0
+        target.inventory.armour.armour-data.damage-reduction)))

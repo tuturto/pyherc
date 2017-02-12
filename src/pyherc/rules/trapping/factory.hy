@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,24 +20,29 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.aspects)
+(require [pyherc.aspects [*]])
 (import [pyherc.rules.trapping.action [TrappingAction]]
         [pyherc.rules.factory [SubActionFactory]])
 (import [pyherc.aspects [log-debug log-info]])
 
 (defclass TrappingFactory [SubActionFactory]
-  "factory for creating trapping actions"
-  [[--init-- #i(fn [self trap-creator]
-                 (-> (super) (.--init--))
-                 (setv self.action-type "trapping")
-                 (setv self.trap-creator trap-creator)
-                 nil)]
-   [can-handle #d(fn [self parameters]
-                   "can this factory handle a given action"
-                   (= self.action-type parameters.action-type))]
-   [get-action #d(fn [self parameters]
-                   "create trapping action"
-                   (TrappingAction parameters.character
-                                   :trap-name parameters.trap-name
-                                   :trap-bag parameters.trap-bag
-                                   :trap-creator self.trap-creator))]])
+
+  [action-type None
+   trap-creator None]
+
+  (defn --init-- [self trap-creator]
+    "default initializer"
+    (-> (super) (.--init--))
+    (setv self.action-type "trapping")
+    (setv self.trap-creator trap-creator))
+  
+  (defn can-handle [self parameters]
+    "can this factory handle a given action"
+    (= self.action-type parameters.action-type))
+
+  (defn get-action [self parameters]
+    "create trapping action"
+    (TrappingAction parameters.character
+                    :trap-name parameters.trap-name
+                    :trap-bag parameters.trap-bag
+                    :trap-creator self.trap-creator)))

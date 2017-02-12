@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require hy.contrib.anaphoric)
+(require [pyherc.macros [*]])
+(require [hy.extra.anaphoric [ap-each ap-filter]])
 
 (import [random]
         [pyherc.data.traps.trap [Trap]]
@@ -29,18 +29,17 @@
         [pyherc.data.geometry [area-around]])
 
 (defclass CharacterSpawner [Trap]
-  [[--init-- (fn [self character-selector &optional [icon nil]]
-               (super-init icon)
-               (set-attributes character-selector)
-               nil)]
-   [on-trigger (fn [self]
-                 (let [[creatures (self.character-selector)]
-                       [area (area-around self.location)]]
-                   (ap-each creatures (place-creature it self.level area))))]])
+  [--init-- (fn [self character-selector &optional [icon None]]
+              (super-init icon)
+              (set-attributes character-selector))
+   on-trigger (fn [self]
+                (let [creatures (self.character-selector)
+                      area (area-around self.location)]
+                  (ap-each creatures (place-creature it self.level area))))])
 
 (defn place-creature [creature level area]
-  (let [[free-spots (list (ap-filter (not (blocks-movement level it))
-                                     area))]]
+  (let [free-spots (list (ap-filter (not (blocks-movement level it))
+                                    area))]
     (when free-spots
       (add-character level
                      (.choice random free-spots)

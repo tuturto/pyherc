@@ -1,5 +1,5 @@
 decorator==4.0.6
-hy==0.11.1
+hy==0.12.1
 docopts==0.6.1
 PyHamcrest==1.9.0
 mockito-without-hardcoded-distribute-version==0.5.4
@@ -8,7 +8,7 @@ nose==1.3.7
 nose-cov==1.6
 python-coveralls==2.6.0
 sphinx==1.3.5
-hymn==0.5
-hypothesis==2.0.0
-libarchimedes==0.3.0
+hymn==0.6
+hypothesis==3.6.1
+libarchimedes==0.4.1
 toolz==0.7.4

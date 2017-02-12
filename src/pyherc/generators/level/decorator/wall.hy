@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -27,36 +27,37 @@
         [pyherc.data.geometry [area-around]]
         [pyherc.data.level [tiles↜]]
         [random])
-(require pyherc.macros)
-(require pyherc.aspects)
-(require hy.contrib.anaphoric)
+(require [pyherc.macros [*]])
+(require [pyherc.aspects [*]])
+(require [hy.extra.anaphoric [ap-each ap-filter]])
 
 (defclass SurroundingDecorator [Decorator]
-  [[--init-- #d(fn [self configuration]
-                 "default constructor"
-                 (-> (super) (.--init-- configuration))
-                 (setv self.wall-tile configuration.wall-tile)
-                 nil)]
-   [decorate-level #i(fn [self level]
-                       "decorate a level"
-                       (ap-each (list (get-tiles level))
-                                (decorate-tile level it self.wall-tile)))]])
+
+  (defn --init-- [self configuration]
+    "default constructor"
+    (-> (super) (.--init-- configuration))
+    (setv self.wall-tile configuration.wall-tile))
+  
+  (defn decorate-level [self level]
+    "decorate a level"
+    (ap-each (list (get-tiles level))
+             (decorate-tile level it self.wall-tile))))
 
 (defn decorate-tile [level loc-tile replacement]
   "decorate single tile"
-  (let [[#t(location tile) loc-tile]
-        [surrounding-tiles (area-around location)]]
-    (ap-each (ap-filter (and (= (wall-tile level it) null)
-                             (= (floor-tile level it) null))
+  (let [#t(location tile) loc-tile
+        surrounding-tiles (area-around location)]
+    (ap-each (ap-filter (and (= (wall-tile level it) None)
+                             (= (floor-tile level it) None))
                         surrounding-tiles)
              (wall-tile level it replacement))))
 
 (defclass SurroundingDecoratorConfig [DecoratorConfig]
-  [[--init-- #d(fn [self level-types wall-tile]
-                 "default constructor"
-                 (-> (super) (.--init-- level-types))
-                 (setv self.wall-tile wall-tile)
-                 nil)]])
+  
+  (defn --init-- [self level-types wall-tile]
+    "default constructor"
+    (-> (super) (.--init-- level-types))
+    (setv self.wall-tile wall-tile)))
 
 (defn wall-ornamenter [left-wall top-wall right-wall rate rng]
   "create decorator to ornament walls"
@@ -66,8 +67,8 @@
              (add-ornament level it left-wall top-wall right-wall rate rng))))
 
 (defn add-ornament [level loc-tile left-wall top-wall right-wall rate rng]
-  (let [[#t(location tile) loc-tile]
-        [#t(x-loc y-loc) location]]
+  (let [#t(location tile) loc-tile
+        #t(x-loc y-loc) location]
     (when (and left-wall
                (floor-tile level #t((inc x-loc) y-loc))
                (= (wall-tile level location) (first left-wall))
@@ -88,7 +89,7 @@
   "decorator used to replace set of wall tiles with another set"
   (fn [level]
     (ap-each (tiles level tag) 
-             (let [[old-tile (wall-tile level it)]]
+             (let [old-tile (wall-tile level it)]
                (when (in old-tile tile-dict)
                  (wall-tile level it (get tile-dict old-tile)))))))
 
@@ -96,7 +97,7 @@
   "decorator used to replace set of floor tiles with another set"
   (fn [level]
     (ap-each (tiles level tag) 
-             (let [[old-tile (floor-tile level it)]]
+             (let [old-tile (floor-tile level it)]
                (when (in old-tile tile-dict)
                  (floor-tile level it (get tile-dict old-tile)))))))
 
@@ -112,19 +113,21 @@
   "tag some of the tiles in level and return them"
   (def location-value (dict-comp (first x) (.uniform random -1.0 1.0)
                                  [x (tiles↜ level)]))
+
   (defn get-value [point data]
     (if (in point data)
       (get data point)
       0))
 
   (defn coarsify-point [point data]
-    (let [[area↜ (area-around point)]
-          [value-sum (sum (list-comp (get-value x data) [x area↜]))]
-          [score (+ (get-value point data)
-                    (* value-sum 0.025))]]))
+    (let [area↜ (area-around point)
+          value-sum (sum (list-comp (get-value x data) [x area↜]))
+          score (+ (get-value point data)
+                   (* value-sum 0.025))]
+      score))
 
   (defn coarsify [data]
-    (dict-comp (first x) (coarsify-point (first x) data) [x (.items data)]))
+    (dict-comp x (coarsify-point x data) [x (.keys data)]))
   
   (when (not (list (get-locations-by-tag level tag)))
     (for [i (range 25)] 

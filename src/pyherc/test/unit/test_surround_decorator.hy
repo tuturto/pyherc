@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 (import [pyherc.test.builders [LevelBuilder]]
         [pyherc.generators.level.decorator.wall [SurroundingDecorator
                                                  SurroundingDecoratorConfig
@@ -31,27 +31,27 @@
 
 (defn setup []
   "setup test cases"
-  (let [[level (-> (LevelBuilder)
-                   (.with-size #t(10 10))
-                   (.with-floor-tile "floor")
-                   (.build))]
-        [config (SurroundingDecoratorConfig ["any-level"] "wall")]
-        [decorator (SurroundingDecorator config)]]
+  (let [level (-> (LevelBuilder)
+                  (.with-size #t(10 10))
+                  (.with-floor-tile "floor")
+                  (.build))
+        config (SurroundingDecoratorConfig ["any-level"] "wall")
+        decorator (SurroundingDecorator config)]
     {:level level
      :decorator decorator}))
 
 (defn test-surround-with-walls []
   "floor tiles next to null space should be walled in"
-  (let [[context (setup)]
-        [level (:level context)]
-        [decorator (:decorator context)]]
+  (let [context (setup)
+        level (:level context)
+        decorator (:decorator context)]
     (.decorate-level decorator level)
     (assert-that (wall-tile level #t(0 -1)) (is- (equal-to "wall")))))
 
 (defn test-floors-not-added []
   "no floors should be added while walling"
-  (let [[context (setup)]
-        [level (:level context)]
-        [decorator (:decorator context)]]
+  (let [context (setup)
+        level (:level context)
+        decorator (:decorator context)]
     (.decorate-level decorator level)
-    (assert-that (floor-tile level #t(0 -1)) (is- (equal-to nil)))))
+    (assert-that (floor-tile level #t(0 -1)) (is- (equal-to None)))))

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
+(require [hy.extra.anaphoric [*]])
 
 (import [herculeum.ui.gui.animations.animation [Animation]]
         [herculeum.ui.gui [layers]]
@@ -28,14 +28,14 @@
 
 (defclass DigAnimation [Animation]
   "animation for digging"
-  [[--init-- (fn [self event]
-	       (-> (super) (.--init-- event))
-	       (setv self.character (e-character event))
-               (setv self.items (e-new-items event))
-               (setv self.characters (e-new-characters event))
-	       nil)]
-   [trigger (fn [self ui]
-              (ap-each self.items (.add-glyph ui it ui.scene
-                                              layers.zorder-item))
-              (ap-each self.characters (.add-glyph ui it ui.scene
-                                                   layers.zorder-character)))]])
+  (defn --init-- [self event]
+    (-> (super) (.--init-- event))
+    (setv self.character (e-character event))
+    (setv self.items (e-new-items event))
+    (setv self.characters (e-new-characters event)))
+  
+  (defn trigger [self ui]
+    (ap-each self.items (.add-glyph ui it ui.scene
+                                    layers.zorder-item))
+    (ap-each self.characters (.add-glyph ui it ui.scene
+                                         layers.zorder-character))))

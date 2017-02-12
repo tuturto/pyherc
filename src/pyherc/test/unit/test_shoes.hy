@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -28,29 +28,29 @@
 
 (defn setup []
   "setup test case"
-  (let [[character (-> (CharacterBuilder)
-                       (.build))]
-        [boots (-> (ItemBuilder)
-                   (.with-boots-speed-modifier 1)
-                   (.with-boots-damage-reduction 0)
-                   (.build))]
-        [actions (-> (ActionFactoryBuilder)
-                     (.with-inventory-factory)
-                     (.build))]]
+  (let [character (-> (CharacterBuilder)
+                      (.build))
+        boots (-> (ItemBuilder)
+                  (.with-boots-speed-modifier 1)
+                  (.with-boots-damage-reduction 0)
+                  (.build))
+        actions (-> (ActionFactoryBuilder)
+                    (.with-inventory-factory)
+                    (.build))]
     (set-action-factory actions)
     {:character character
      :boots boots}))
 
 (defn test-wearing-boots []
   "boots can be worn"
-  (let [[context (setup)]
-        [character (:character context)]
-        [boots (:boots context)]]
+  (let [context (setup)
+        character (:character context)
+        boots (:boots context)]
     (equip character boots)
     (assert-that character.inventory.boots (is- (equal-to boots)))))
 
 (defn test-item-main-type-for-boots []
   "boots should have item main type set correctly"
-  (let [[context (setup)]
-        [boots (:boots context)]]
-    (assert-that (boots? boots) (is- (equal-to true)))))
+  (let [context (setup)
+        boots (:boots context)]
+    (assert-that (boots? boots) (is- (equal-to True)))))

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
   "get function that can be used to create traps"
   (fn [trap-name]
     "create a trap of given type"
-    (let [[trap-specs (get trap-config trap-name)]
-          [trap-type (first trap-specs)]
-          [trap-params (second trap-specs)]]
+    (let [trap-specs (get trap-config trap-name)
+          trap-type (first trap-specs)
+          trap-params (second trap-specs)]
       (apply trap-type [] trap-params))))

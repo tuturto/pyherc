@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,26 +20,25 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.aspects)
+(require [pyherc.aspects [*]])
 (import [pyherc.aspects [log-debug log-info]]
         [pyherc.rules.mitosis.action [MitosisAction]]
         [pyherc.rules.factory [SubActionFactory]])
 
 (defclass MitosisFactory [SubActionFactory]
-  [[--init-- #i(fn [self character-generator rng character-limit]
-                 "default constructor"
-                 (-> (super) (.--init--))
-                 (setv self.character-generator character-generator)
-                 (setv self.rng rng)
-                 (setv self.character-limit character-limit)
-                 (setv self.action-type "mitosis")
-                 nil)]
-   [can-handle #d(fn [self parameters]
-                   "can this factory handle a given action"
-                   (= self.action-type parameters.action-type))]
-   [get-action #d(fn [self parameters]
-                   "create mitosis action"
-                   (MitosisAction parameters.character
-                                  self.character-generator
-                                  self.rng
-                                  self.character-limit))]])
+  [--init-- (fn [self character-generator rng character-limit]
+              "default constructor"
+              (-> (super) (.--init--))
+              (setv self.character-generator character-generator)
+              (setv self.rng rng)
+              (setv self.character-limit character-limit)
+              (setv self.action-type "mitosis"))
+   can-handle (fn [self parameters]
+                "can this factory handle a given action"
+                (= self.action-type parameters.action-type))
+   get-action (fn [self parameters]
+                "create mitosis action"
+                (MitosisAction parameters.character
+                               self.character-generator
+                               self.rng
+                               self.character-limit))])

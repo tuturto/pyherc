@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
 (import [random]
         [hamcrest [assert-that has-length]]
@@ -30,51 +30,51 @@
 
 (defn test-too-small-area-is-not-partitioned []
   "when section is too small, it should not be partitioned further"
-  (let [[level-size #t(20 20)]
-        [room-min-size #t(21 21)]
-        [level (-> (LevelBuilder)
-                   (.build))]
-        [partitioner (binary-space-partitioning level-size
-                                                room-min-size
-                                                random)]
-        [sections (partitioner level)]]
+  (let [level-size #t(20 20)
+        room-min-size #t(21 21)
+        level (-> (LevelBuilder)
+                  (.build))
+        partitioner (binary-space-partitioning level-size
+                                               room-min-size
+                                               random)
+        sections (partitioner level)]
     (assert-that (list sections) (has-length 1))))
   
 (defn test-partition-horizontally []
   "wide and low section should be partitioned horizontally"
-  (let [[level-size #t(25 10)]
-        [room-min-size #t(10 10)]
-        [level (-> (LevelBuilder)
-                   (.build))]
-        [partitioner (binary-space-partitioning level-size
-                                                room-min-size
-                                                random)]
-        [sections (list (partitioner level))]]
+  (let [level-size #t(25 10)
+        room-min-size #t(10 10)
+        level (-> (LevelBuilder)
+                  (.build))
+        partitioner (binary-space-partitioning level-size
+                                               room-min-size
+                                               random)
+        sections (list (partitioner level))]
     (assert-that sections (has-length 2))
     (assert-that sections (are-not-overlapping))))
 
 (defn test-partition-vertically []
   "high and and narrow section should be partitioned vertically"
-  (let [[level-size #t(10 25)]
-        [room-min-size #t(10 10)]
-        [level (-> (LevelBuilder)
-                   (.build))]
-        [partitioner (binary-space-partitioning level-size
-                                                room-min-size
-                                                random)]
-        [sections (list (partitioner level))]]
+  (let [level-size #t(10 25)
+        room-min-size #t(10 10)
+        level (-> (LevelBuilder)
+                  (.build))
+        partitioner (binary-space-partitioning level-size
+                                               room-min-size
+                                               random)
+        sections (list (partitioner level))]
     (assert-that sections (has-length 2))
     (assert-that sections (are-not-overlapping))))
 
 (defn test-partition-multiple []
   "large section should have partitions both directions"
-  (let [[level-size #t(25 25)]
-        [room-min-size #t(10 10)]
-        [level (-> (LevelBuilder)
-                   (.build))]
-        [partitioner (binary-space-partitioning level-size
-                                                room-min-size
-                                                random)]
-        [sections (list (partitioner level))]]
+  (let [level-size #t(25 25)
+        room-min-size #t(10 10)
+        level (-> (LevelBuilder)
+                  (.build))
+        partitioner (binary-space-partitioning level-size
+                                               room-min-size
+                                               random)
+        sections (list (partitioner level))]
     (assert-that sections (has-length 4))
     (assert-that sections (are-not-overlapping))))

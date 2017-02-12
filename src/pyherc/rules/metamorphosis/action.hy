@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.aspects)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-each]])
+(require [pyherc.aspects [*]])
+(require [pyherc.macros [*]])
 (import [hymn.types.either [Left Right]]
         [pyherc.aspects [log-debug]]
         [pyherc.data [skill-ready? cooldown add-character remove-character]]
@@ -30,31 +30,35 @@
         [pyherc.events.metamorphosis [new-metamorphosis-event]])
 
 (defclass MetamorphosisAction []
-  [[--init-- #d(fn [self character new-character-name character-generator rng
-                    destroyed-characters]
-                 "default constructor"
-                 (super-init)
-                 (set-attributes character new-character-name character-generator
-                                 rng)
-                 (setv self.destroyed-characters (list destroyed-characters))
-                 nil)]
-   [legal? #d(fn [self]
-               "check if action is possible to perform"
-               (skill-ready? self.character "metamorphosis"))]
-   [execute #d(fn [self]
-                "execute the action"
-                (if (.legal? self)
-                  (let [[new-character (self.character-generator self.new-character-name)]
-                        [location self.character.location]
-                        [level self.character.level]]
-                    (remove-character level self.character)
-                    (add-character level location new-character)
-                    (.add-to-tick new-character Duration.slow)
-                    (cooldown new-character "metamorphosis" (* 2 Duration.very-slow))
-                    (ap-each self.destroyed-characters
-                             (remove-character level it))
-                    (.raise-event self.character (new-metamorphosis-event self.character
-                                                                          new-character
-                                                                          self.destroyed-characters))
-                    (Right self.character))
-                  (Left self.character)))]])
+  
+  []
+
+  (defn --init-- [self character new-character-name character-generator rng
+                  destroyed-characters]
+    "default constructor"
+    (super-init)
+    (set-attributes character new-character-name character-generator
+                    rng)
+    (setv self.destroyed-characters (list destroyed-characters)))
+  
+  (defn legal? [self]
+    "check if action is possible to perform"
+    (skill-ready? self.character "metamorphosis"))
+  
+  (defn execute [self]
+    "execute the action"
+    (if (.legal? self)
+      (let [new-character (self.character-generator self.new-character-name)
+            location self.character.location
+            level self.character.level]
+        (remove-character level self.character)
+        (add-character level location new-character)
+        (.add-to-tick new-character Duration.slow)
+        (cooldown new-character "metamorphosis" (* 2 Duration.very-slow))
+        (ap-each self.destroyed-characters
+                 (remove-character level it))
+        (.raise-event self.character (new-metamorphosis-event self.character
+                                                              new-character
+                                                              self.destroyed-characters))
+        (Right self.character))
+      (Left self.character))))

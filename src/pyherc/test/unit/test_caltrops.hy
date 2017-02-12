@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
 (import [pyherc.data [add-trap get-traps]]
         [pyherc.data.traps [Caltrops]]
@@ -29,8 +29,8 @@
 
 (defn test-placing-multiple-caltrops []
   "placing multiple caltrops is not possible"
-  (let [[level (-> (LevelBuilder)
-                   (.build))]]
+  (let [level (-> (LevelBuilder)
+                  (.build))]
     (add-trap level #t(5 5) (Caltrops 5))
     (add-trap level #t(5 5) (Caltrops 5))
     (assert-that (get-traps level #t(5 5)) (has-length 1))))

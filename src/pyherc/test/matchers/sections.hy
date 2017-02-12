@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,32 +20,32 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-map]])
+(require [pyherc.macros [*]])
 
 (import [hamcrest.core.base_matcher [BaseMatcher]]
         [pyherc.generators.level.partitioners [section-corners
                                                equal-sections?]])
 
 (defclass SectionOverLapMatcher [BaseMatcher]
-  [[--init-- (fn [self]
-               "default constructor"
-               (-> (super) (.--init--)))]
-   [-matches (fn [self item]
-               "check if given item matches"
-               (if (any (ap-map (overlapping? it item) item))
-                 false
-                 true))]
-   [describe-to (fn [self description]
-                  "describe matcher"
-                  (.append description "list of not overlapping sections"))]
-   [describe-mismatch (fn [self item mismatch-description]
-                        "describe why item does not match"
-                        (.append mismatch-description 
-                                 (describe-sections item)))]])
+  [--init-- (fn [self]
+              "default constructor"
+              (-> (super) (.--init--)))
+   -matches (fn [self item]
+              "check if given item matches"
+              (if (any (ap-map (overlapping? it item) item))
+                False
+                True))
+   describe-to (fn [self description]
+                 "describe matcher"
+                 (.append description "list of not overlapping sections"))
+   describe-mismatch (fn [self item mismatch-description]
+                       "describe why item does not match"
+                       (.append mismatch-description 
+                                (describe-sections item)))])
 
 (defn overlapping? [section sections]
-  (any (ap-map (let [[another-section it]]
+  (any (ap-map (let [another-section it]
                  (and (not (equal-sections? section another-section))
                       (any (ap-map (inside-square? it
                                                    another-section)
@@ -54,14 +54,14 @@
 
 (defn inside-square? [point section]
   "is given point inside of a section?"
-  (let [[#t(point₀ point₁) (section-corners section)]]
+  (let [#t(point₀ point₁) (section-corners section)]
     (and
      (<= (x-coordinate point₀) (x-coordinate point) (x-coordinate point₁))
      (<= (y-coordinate point₀) (y-coordinate point) (y-coordinate point₁)))))
 
 (defn all-corners [section]
   "get list containing all corners of a section"
-  (let [[#t(corner₀ corner₁) (section-corners section)]]
+  (let [#t(corner₀ corner₁) (section-corners section)]
     [corner₀ corner₁
      #t((x-coordinate corner₀) (y-coordinate corner₁))
      #t((x-coordinate corner₁) (y-coordinate corner₀))]))

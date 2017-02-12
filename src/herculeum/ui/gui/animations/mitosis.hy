@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -26,11 +26,12 @@
 
 (defclass MitosisAnimation [Animation]
   "animation for mitosis"
-  [[--init-- (fn [self event]
-	       (-> (super) (.--init-- event))
-	       (setv self.character (e-character event))
-	       (setv self.new-character (e-new-character event))
-	       nil)]
-   [trigger (fn [self ui]
-	      (.add-glyph ui self.new-character ui.scene
-			  layers.zorder-character))]])
+  
+  (defn --init-- [self event]
+    (-> (super) (.--init-- event))
+    (setv self.character (e-character event))
+    (setv self.new-character (e-new-character event)))
+
+  (defn trigger [self ui]
+    (.add-glyph ui self.new-character ui.scene
+                layers.zorder-character)))

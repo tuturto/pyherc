@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,8 @@
 ;; THE SOFTWARE.
 
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-each]])
+(require [pyherc.macros [*]])
 
 (import [pyherc.ai [ai-state]]
         [pyherc.data.geometry [find-direction distance-between]]
@@ -39,13 +39,13 @@
   "current enemy of this character"
   (if (in :current-enemy (ai-state character))
     (:current-enemy (ai-state character))
-    nil))
+    None))
 
 (defn closest-enemy [character enemies]
   "select enemy that is closest to given character"
-  (let [[enemy nil]]
+  (let [enemy None]
     (ap-each enemies 
-             (cond [(is enemy nil)
+             (cond [(none? enemy)
                     (setv enemy #t(it (distance-between character it)))]
                    [(< (distance-between character it) (first enemy))
                     (setv enemy #t(it (distance-between character it)))]))

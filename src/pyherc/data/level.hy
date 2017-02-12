@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +23,9 @@
 (import [pyherc.aspects [log_debug]]
         [functools [reduce]]
         [random])
-(require hy.contrib.anaphoric)
-(require pyherc.aspects)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-each]])
+(require [pyherc.aspects [*]])
+(require [pyherc.macros [*]])
 
 (defn new-level [model]
   "create a new level"
@@ -33,28 +33,28 @@
    :tiles {}
    :items []
    :characters []
-   :name nil
-   :description nil})
+   :name None
+   :description None})
 
 (defn new-tile []
   "create a tile with default values"
-  {:floor nil
-   :wall nil
+  {:floor None
+   :wall None
    :ornamentation []
    :traps []
    :tags []
    :items []
    :characters []
-   :portal nil
+   :portal None
    :features []})
 
-(defn level-name [level &optional [name nil]]
+(defn level-name [level &optional [name None]]
   "get/set level name"
   (when name
     (assoc level :name name))
   (:name level))
 
-(defn level-description [level &optional [description nil]]
+(defn level-description [level &optional [description None]]
   "get/set level description"
   (when description
     (assoc level :description description))
@@ -82,25 +82,25 @@
 (defn floor-tile [level location &optional [tile-id "no-tile"]]
   "get/set floor tile at given location"
   (if (!= tile-id "no-tile")
-    (do (let [[map-tile (get-or-create-tile level location)]]
+    (do (let [map-tile (get-or-create-tile level location)]
           (assoc map-tile :floor tile-id)
           (:floor map-tile)))
-    (do (let [[map-tile (get-tile level location)]]
+    (do (let [map-tile (get-tile level location)]
           (when map-tile (:floor map-tile))))))
 
 (defn wall-tile [level location &optional [tile-id "no-tile"]]
   "get/set wall tile at given location"
   (assert (!= tile-id []))
   (if (!= tile-id "no-tile")
-    (do (let [[map-tile (get-or-create-tile level location)]]
+    (do (let [map-tile (get-or-create-tile level location)]
           (assoc map-tile :wall tile-id)
           (:wall map-tile)))
-    (do (let [[map-tile (get-tile level location)]]
+    (do (let [map-tile (get-tile level location)]
           (when map-tile (:wall map-tile))))))
 
 (defn tile [level location]
   "get tile at given location, may be floor or wall"
-  (let [[map-tile (get-tile level location)]]
+  (let [map-tile (get-tile level location)]
     (when map-tile
       (when (:wall map-tile) (:wall map-tile))
       (when (:floor map-tile) (:floor map-tile)))))
@@ -121,7 +121,7 @@
 
 (defn level-size [level]
   "get size of level (x₀, x₁, y₀, y₁)"
-  (let [[x₀ 0] [x₁ 0] [y₀ 0] [y₁ 0]]
+  (let [x₀ 0 x₁ 0 y₀ 0 y₁ 0]
     (ap-each (:tiles level)
              (do
               (when (< (first it) x₀) (setv x₀ (first it)))
@@ -132,19 +132,19 @@
 
 #d(defn find-free-space [level]
     "find a free location within level"
-    (let [[free-tiles (list-comp (first pair)
-                                 [pair (.items (:tiles level))] 
-                                 (safe-passage level (first pair)))]]
+    (let [free-tiles (list-comp (first pair)
+                                [pair (.items (:tiles level))] 
+                                (safe-passage level (first pair)))]
       (.choice random free-tiles)))
 
 (defn blocks-movement [level location]
   "check if given location blocks movement"
-  (let [[map-tile (get-tile level location)]]
+  (let [map-tile (get-tile level location)]
     (if map-tile
       (if (:wall map-tile)
-        true
-        (if (:floor map-tile) false true))
-      true)))
+        True
+        (if (:floor map-tile) False True))
+      True)))
 
 (defn free-passage [level location]
   "check if given location is free to move"
@@ -163,10 +163,10 @@
 (defn ornamentation [level location &optional [tile-id "no-tile"]]
   (assert (!= tile-id []))
   (if (!= tile-id "no-tile")
-    (do (let [[map-tile (get-or-create-tile level location)]]
+    (do (let [map-tile (get-or-create-tile level location)]
           (.append (:ornamentation map-tile) tile-id)
           (:ornamentation map-tile)))
-    (do (let [[map-tile (get-tile level location)]]
+    (do (let [map-tile (get-tile level location)]
           (when map-tile (:ornamentation map-tile))))))
 
 #d(defn add-item [level location item]
@@ -182,17 +182,17 @@
   (if (= location "no-location")
     (genexpr item [item (:items level)])
     (do
-     (let [[map-tile (get-tile level location)]]
-       (if (= map-tile nil)
+     (let [map-tile (get-tile level location)]
+       (if (= map-tile None)
          (genexpr item [item []])
          (genexpr item [item (:items map-tile)]))))))
 
 #d(defn remove-item [level item]
     "removes item from level"
-    (let [[map-tile (get-tile level item.location)]]
+    (let [map-tile (get-tile level item.location)]
       (.remove (:items map-tile) item)
       (setv item.location #t())
-      (setv item.level nil)
+      (setv item.level None)
       (.remove (:items level) item)))
 
 #d(defn add-character [level location character]
@@ -206,14 +206,14 @@
   #s("get characters in a given tile"
      "as a temporary measure, this will return only the first of characters."
      "TODO: replace/remove")  
-  (let  [[map-tile (get-tile level location)]]
+  (let [map-tile (get-tile level location)]
     (when map-tile
       (first (:characters map-tile)))))
 
-(defn get-characters [level &optional [location nil]]
+(defn get-characters [level &optional [location None]]
   "get all characters in level"
   (if location
-    (let  [[map-tile (get-tile level location)]]
+    (let [map-tile (get-tile level location)]
       (when map-tile
         (:characters map-tile)))
     (genexpr character [character (:characters level)])))
@@ -244,26 +244,26 @@
 
 (defn traps↜ [level location]
   "get traps in a given location"
-  (let  [[map-tile (get-tile level location)]]
+  (let  [map-tile (get-tile level location)]
     (if map-tile 
       (genexpr x [x (:traps map-tile)])
       (genexpr x [x []]))))
 
 (defn get-traps [level location]
   "get traps at given location"
-  (let [[map-tile (get-tile level location)]]
+  (let [map-tile (get-tile level location)]
     (if map-tile
       (:traps map-tile)
       [])))
 
 (defn add-location-tag [level location tag]
   "add tag to given location"
-  (let [[map-tile (get-or-create-tile level location)]]
+  (let [map-tile (get-or-create-tile level location)]
     (.append (:tags map-tile) tag)))
 
 (defn get-location-tags [level location]
   "get tags in given location"
-  (let [[map-tile (get-tile level location)]]
+  (let [map-tile (get-tile level location)]
     (if map-tile
       (genexpr tag [tag (:tags map-tile)])
       (genexpr tag [tag []]))))
@@ -276,17 +276,17 @@
 
 (defn location-features [level location]
   "get features in a given location"
-  (let [[map-tile (get-tile level location)]]
+  (let [map-tile (get-tile level location)]
     (if map-tile
       (genexpr feature [feature (:features map-tile)])
       (genexpr feature [feature []]))))
 
 (defn add-location-feature [level location feature]
   "add location feature"
-  (let [[map-tile (get-tile level location)]]
+  (let [map-tile (get-tile level location)]
     (.append (:features map-tile) feature)))
 
 (defn remove-location-feature [level location feature]
   "remove a location feature"
-  (let [[map-tile (get-tile level location)]]
+  (let [map-tile (get-tile level location)]
     (.remove (:features map-tile) feature)))

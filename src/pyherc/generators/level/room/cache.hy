@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-each]])
+(require [pyherc.macros [*]])
 
 (import [pyherc.data [add-location-feature ornamentation]]
         [pyherc.data.features [new-cache]]
@@ -32,7 +32,7 @@
 (defn cache-creator [cache-tiles position-selector item-selector
                      character-selector rng]
   "create cache creator"
-  (fn [section &optional [trap-generator nil]]
+  (fn [section &optional [trap-generator None]]
     "fill cache with items and characters"
     (ap-each (position-selector section)
              (add-new-cache cache-tiles
@@ -54,14 +54,13 @@
 
 (defclass CacheRoomGenerator [CircularRoomGenerator]
   "generator for cache rooms"
-  [[--init-- (fn [self floor-tile corridor-tile cache-creator level-types]
-               "default constructor"
-               (-> (super) (.--init-- floor-tile corridor-tile level-types))
-               (setv self.cache-creator cache-creator)
-               nil)]
-   [generate-room (fn [self section]
-                    "generate a new room"
-                    (-> (super) (.generate-room section))
-                    (self.cache-creator (section-level section)
-                                        (section-to-map section
-                                                        self.center-point)))]])
+  [--init-- (fn [self floor-tile corridor-tile cache-creator level-types]
+              "default constructor"
+              (-> (super) (.--init-- floor-tile corridor-tile level-types))
+              (setv self.cache-creator cache-creator))
+   generate-room (fn [self section]
+                   "generate a new room"
+                   (-> (super) (.generate-room section))
+                   (self.cache-creator (section-level section)
+                                       (section-to-map section
+                                                       self.center-point)))])

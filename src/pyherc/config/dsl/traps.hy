@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
   (for [trap trap-list]         
     (do
      (setv params-out {})
-     (setv params-in (iter (slice trap 2)))
+     (setv params-in (iter (cut trap 2)))
      (for [x params-in] (assoc params-out x (next params-in)))
      (assoc output (first trap) [(second trap) params-out])))
   `(defn init-traps []

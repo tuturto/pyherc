@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
 (import [pyherc.utils [clamp-value]]
         [pyherc.generators.artefact [create-blueprint instantiate-blueprints
@@ -50,7 +50,7 @@
 
 (defn raw-resources [society &optional amount]
   "get/set amount of raw resources for a society"
-  (when (not (nil? amount))
+  (when (not (none? amount))
     (assoc society :raw-resources amount))
   (:raw-resources society))
 
@@ -67,7 +67,7 @@
   (.remove (:projects society) project)
   (add-building society (:building project)))
 
-(defn new-project [name &optional [duration 1] [building nil]]
+(defn new-project [name &optional [duration 1] [building None]]
   "create new project"
   {:name name
    :duration duration
@@ -81,7 +81,7 @@
 
 (defn project-duration [project &optional duration]
   "get/set duration of a project"
-  (when (not (nil? duration))
+  (when (not (none? duration))
     (assoc project :duration duration))
   (:duration project))
 
@@ -100,13 +100,13 @@
 
 (defn building-name [building &optional name]
   "get/set building name"
-  (when (not (nil? name))
+  (when (not (none? name))
     (assoc building :name name))
   (:name building))
 
 (defn building-production [building &optional amount]
   "get/set raw resource production"
-  (when (not (nil? amount))
+  (when (not (none? amount))
     (assoc building :raw-production amount))
   (:raw-production building))
 
@@ -116,6 +116,6 @@
 
 (defn person-name [person &optional name]
   "get/set name of person"
-  (when (not (nil? name))
+  (when (not (none? name))
     (assoc person :name name))
   (:name person))

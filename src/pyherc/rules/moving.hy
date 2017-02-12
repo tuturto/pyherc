@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require pyherc.macros)
-(require pyherc.rules.macros)
-(require hymn.dsl)
+(require [pyherc.macros [*]])
+(require [pyherc.rules.macros [*]])
+(require [hymn.dsl [*]])
 
 (import [random]        
         [hymn.types.either [Left Right right? left?]]
@@ -43,9 +43,9 @@
 (defn+ move [character direction]
   "move character to given direction"
   (if (call move-legal? character direction)
-    (let [[location character.location]
-          [new-level character.level]        
-          [new-location nil]]
+    (let [location character.location
+          new-level character.level        
+          new-location None]
       (if (= 9 direction)
         (enter-portal-m character)
         (do
@@ -58,7 +58,7 @@
                         _ (trigger-traps-m character₁)
                         _ (trigger-traps-m character₂)]
                        (Right character₁))]
-          [true (do-monad-e [_ (move-character-to-location-m character₁
+          [True (do-monad-e [_ (move-character-to-location-m character₁
                                                              new-location
                                                              new-level)
                              _ (add-tick-m character₁ Duration.fast)
@@ -70,18 +70,18 @@
 (defn+ move-legal? [character direction]
   "is given move legal?"
   (if (= direction 9)
-    true
-    (let [[new-location (.get-location-at-direction character direction)]]
-      (all [(is-not (. character level) nil)
+    True
+    (let [new-location (.get-location-at-direction character direction)]
+      (all [(is-not (. character level) None)
             (free-passage (. character level) new-location)
             (ap-if (get-character (. character level) new-location)
                    (both-ai-characters? it character)
-                   true)]))))
+                   True)]))))
 
 (defn switch-places-m [character direction]
   "make this character switch places with another in given direction"
-  (let [[new-location (.get-location-at-direction character direction)]
-        [another-character (get-character (. character level) new-location)]]
+  (let [new-location (.get-location-at-direction character direction)
+        another-character (get-character (. character level) new-location)]
     (move-character-to-location-m another-character (. character location) (. character level))
     (add-tick-m another-character Duration.fast)    
     (move-character-to-location-m character new-location (. character level))
@@ -97,9 +97,9 @@
 
 (defn move-character-to-location-m [character location level]
   "move character to new location, process time and raise appropriate events"
-  (let [[old-location character.location]
-        [old-level character.level]
-        [direction (find-direction old-location location)]]
+  (let [old-location character.location
+        old-level character.level
+        direction (find-direction old-location location)]
     (monad-> (set-character-location-m character level location)             
              (add-visited-level-m level)
              (raise-event-m (new-move-event :character character
@@ -129,13 +129,13 @@
 
 (defn enter-portal-m [character]
   "get action for entering portal"
-  (if (is-not character nil)
-    (let [[location character.location]
-          [level character.level]]
+  (if (is-not character None)
+    (let [location character.location
+          level character.level]
       (ap-if (get-portal level location)
         (if it.exits-dungeon
           (set-end-condition-m character *escaped-dungeon*)
-          (let [[other-end (.get-other-end it)]]
+          (let [other-end (.get-other-end it)]
             (monad-> (move-character-to-location-m character
                                                    (landing-location other-end)
                                                    (. other-end level))

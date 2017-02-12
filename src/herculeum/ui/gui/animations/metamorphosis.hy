@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,22 +20,23 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
+(require [hy.extra.anaphoric [ap-each]])
 (import [herculeum.ui.gui.animations.animation [Animation]]
         [herculeum.ui.gui [layers]]
         [pyherc.events [e-character e-new-character e-destroyed-characters]])
 
 (defclass MetamorphosisAnimation [Animation]
   "animation for metamorphosis"
-  [[--init-- (fn [self event]
-               (-> (super) (.--init-- event))
-               (setv self.character (e-character event))
-               (setv self.new-character (e-new-character event))
-               (setv self.destroyed-characters (e-destroyed-characters event))
-               nil)]
-   [trigger (fn [self ui]
-              (ap-each self.destroyed-characters
-                       (.remove-glyph ui it))
-              (.remove-glyph ui self.character)
-              (.add-glyph ui self.new-character ui.scene
-                          layers.zorder-character))]])
+
+  (defn --init-- [self event]
+    (-> (super) (.--init-- event))
+    (setv self.character (e-character event))
+    (setv self.new-character (e-new-character event))
+    (setv self.destroyed-characters (e-destroyed-characters event)))
+  
+  (defn trigger [self ui]
+    (ap-each self.destroyed-characters
+             (.remove-glyph ui it))
+    (.remove-glyph ui self.character)
+    (.add-glyph ui self.new-character ui.scene
+                layers.zorder-character)))

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.aspects)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-each]])
+(require [pyherc.aspects [*]])
+(require [pyherc.macros [*]])
 (import [hymn.types.either [Left Right]]
         [pyherc.aspects [log-debug]]
         [pyherc.data [area-around add-item add-character blocks-movement]]
@@ -32,38 +32,38 @@
         [pyherc.events [new-dig-event]])
 
 (defclass DigAction []
-  [[--init-- #d(fn [self character cache rng]
-                 "default constructor"
-                 (super-init)
-                 (set-attributes character cache rng)
-                 nil)]
-   [legal? #d(fn [self]
-               "check if action is possible to perform"
-               (when self.cache
-                 (using-spade? self.character)))]
-   [execute #d(fn [self]
-                "execute the action"
-                (if (.legal? self)
-                  (let [[level (feature-level self.cache)]
-                        [location (feature-location self.cache)]
-                        [cache self.cache]
-                        [items (list (items-in-cache cache))]
-                        [characters (list (characters-in-cache cache))]]
-                    (.add-to-tick self.character Duration.very-slow)
-                    (distribute-items level location items self.rng)
-                    (distribute-characters level location characters self.rng)
-                    (clear-cache self.cache)
-                    (.raise-event self.character (new-dig-event self.character
-                                                                cache items
-                                                                characters))
-                    (Right self.character))
-                  (Left self.character)))]])
+  [--init-- (fn [self character cache rng]
+              "default constructor"
+              (super-init)
+              (set-attributes character cache rng))
+   legal? (fn [self]
+            "check if action is possible to perform"
+            (when self.cache
+              (using-spade? self.character)))
+   execute (fn [self]
+             "execute the action"
+             (if (.legal? self)
+               (let [level (feature-level self.cache)
+                     location (feature-location self.cache)
+                     cache self.cache
+                     items (list (items-in-cache cache))
+                     characters (list (characters-in-cache cache))]
+                 (.add-to-tick self.character Duration.very-slow)
+                 (distribute-items level location items self.rng)
+                 (distribute-characters level location characters self.rng)
+                 (clear-cache self.cache)
+                 (.raise-event self.character (new-dig-event self.character
+                                                             cache items
+                                                             characters))
+                 (Right self.character))
+               (Left self.character)))])
 
 (defn using-spade? [character]
   "check if this character is currently using a spade"
-  (let [[weapon character.inventory.weapon]]
-    (if (= weapon nil) false
-        (if (in "spade" weapon.tags) true false))))
+  (let [weapon character.inventory.weapon]
+    (if (none? weapon) False
+        (in "spade" weapon.tags) True
+        False)))
 
 (defn distribute-items [level location items rng]
   "distribute items around given spot"
@@ -81,6 +81,6 @@
 
 (defn free-location [level location rng]
   "find a free location around given spot"
-  (let [[free-spots (list-comp loc [loc (area-around location)]
-                               (not (blocks-movement level loc)))]]
+  (let [free-spots (list-comp loc [loc (area-around location)]
+                              (not (blocks-movement level loc)))]
     (when free-spots (.choice rng free-spots))))

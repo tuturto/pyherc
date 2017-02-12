@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -22,44 +22,43 @@
 
 (import [pyherc.events [new-effect-added-event new-effect-removed-event]])
 
-(require pyherc.macros)
+(require [pyherc.macros [*]])
 
+;; TODO: remove this because of effect macro
 (defclass Effect []
   "class representing effects"
-  [[--init-- (fn [self duration frequency tick icon title description]
-               "default initializer"
-               (super-init)
-               (set-attributes duration frequency tick icon title description)
-               (setv self.effect-name "effect")
-               (setv self.multiple-allowed false)
-               nil)]
-   [trigger (fn [self]
-              "trigger the effect"
-              (.do-trigger self)
-              (.post-trigger self))]
-   [do-trigger (fn [self]
-                 "override this method to contain logic of the effect"
-                 nil)]
-   [post-trigger (fn [self]
-                   "do house keeping after effect has been triggered"
-                   (when (is-not self.duration nil)
-                     (setv self.tick self.frequency)
-                     (setv self.duration (- self.duration self.frequency))))]
-   [get-add-event (fn [self]
-                    "get event describing adding this effect"
-                    (new-effect-added-event self))]
-   [get-removal-event (fn [self]
-                        "get event describing removing this effect"
-                        (new-effect-removed-event self))]])
+  [--init-- (fn [self duration frequency tick icon title description]
+              "default initializer"
+              (super-init)
+              (set-attributes duration frequency tick icon title description)
+              (setv self.effect-name "effect")
+              (setv self.multiple-allowed False))
+   trigger (fn [self]
+             "trigger the effect"
+             (.do-trigger self)
+             (.post-trigger self))
+   do-trigger (fn [self]
+                "override this method to contain logic of the effect"
+                None)
+   post-trigger (fn [self]
+                  "do house keeping after effect has been triggered"
+                  (when (is-not self.duration None)
+                    (setv self.tick self.frequency)
+                    (setv self.duration (- self.duration self.frequency))))
+   get-add-event (fn [self]
+                   "get event describing adding this effect"
+                   (new-effect-added-event self))
+   get-removal-event (fn [self]
+                       "get event describing removing this effect"
+                       (new-effect-removed-event self))])
 
 (defclass EffectHandle []
   "handle that can be used to construct effects"
-  [[--init-- (fn [self trigger effect parameters charges]
-               "default initializer"
-               (super-init)
-               (set-attributes trigger effect parameters charges)
-               nil)]
-   [--str-- (fn [self]
-              "string representation of this object"
-              (.format "trigger: {0}, effect: {1}, parameters: {2}, charges: {3}"
-                       self.trigger self.effect self.parameters self.charges))]])
+  [--init-- (fn [self trigger effect parameters charges]
+              "default initializer"
+              (super-init)
+              (set-attributes trigger effect parameters charges))
+   --str-- (fn [self]
+             "string representation of this object"
+             (.format "trigger: {0}, effect: {1}, parameters: {2}, charges: {3}"
+                      self.trigger self.effect self.parameters self.charges))])

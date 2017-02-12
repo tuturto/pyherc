@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -21,20 +21,19 @@
 ;; THE SOFTWARE.
 
 (defclass Trap []
-  [[--init-- (fn [self &optional [icon nil]]
-               (setv self.level nil)
-               (setv self.location nil)
-               (setv self.icon icon)
-               nil)]
-   [on-enter (fn [self character]
-               "called when a character enters square with trap"
-               nil)]
-   [on-item-enter (fn [self item]
-                    "called when item enters square with trap"
-                    nil)]
-   [on-place (fn [self level location]
-               "called when trap is placed"
-               nil)]
-   [on-trigger (fn [self]
-                 "called when trap is remotely triggered"
-                 nil)]])
+  [--init-- (fn [self &optional [icon None]]
+              (setv self.level None)
+              (setv self.location None)
+              (setv self.icon icon))
+   on-enter (fn [self character]
+              "called when a character enters square with trap"
+              None)
+   on-item-enter (fn [self item]
+                   "called when item enters square with trap"
+                   None)
+   on-place (fn [self level location]
+              "called when trap is placed"
+              None)
+   on-trigger (fn [self]
+                "called when trap is remotely triggered"
+                None)])

@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -27,42 +27,42 @@
 
 (defn test-normal-movement-mode []
   "walk is default movement mode"
-  (let [[character (-> (CharacterBuilder)
-                       (.build))]]
+  (let [character (-> (CharacterBuilder)
+                      (.build))]
     (assert-that (movement-mode character) (is- (equal-to "walk")))))
 
 (defn test-flying-mode []
   "flying is reported as movement mode when it's only one"
-  (let [[effect (MovementModeModifier :duration nil
-                                      :frequency nil
-                                      :tick nil
-                                      :icon :icon
-                                      :title "fly boosters"
-                                      :description "internal fly boosters"
-                                      :mode "fly")]
-        [character (-> (CharacterBuilder)
-                       (.with-effect effect)
-                       (.build))]]
+  (let [effect (MovementModeModifier :duration None
+                                     :frequency None
+                                     :tick None
+                                     :icon :icon
+                                     :title "fly boosters"
+                                     :description "internal fly boosters"
+                                     :mode "fly")
+        character (-> (CharacterBuilder)
+                      (.with-effect effect)
+                      (.build))]
     (assert-that (movement-mode character) (is- (equal-to "fly")))))
 
 (defn test-multiple-movement-mode-modifiers []
   "flying takes precedence over walking with movement modes"
-  (let [[effect₁ (MovementModeModifier :duration nil
-                                       :frequency nil
-                                       :tick nil
-                                       :icon :icon
-                                       :title "fly boosters"
-                                       :description "internal fly boosters"
-                                       :mode "fly")]
-        [effect₂ (MovementModeModifier :duration nil
-                                       :frequency nil
-                                       :tick nil
-                                       :icon :icon
-                                       :title "fly boosters"
-                                       :description "internal fly boosters"
-                                       :mode "walk")]
-        [character (-> (CharacterBuilder)
-                       (.with-effect effect₁)
-                       (.with-effect effect₂)
-                       (.build))]]
+  (let [effect₁ (MovementModeModifier :duration None
+                                      :frequency None
+                                      :tick None
+                                      :icon :icon
+                                      :title "fly boosters"
+                                      :description "internal fly boosters"
+                                      :mode "fly")
+        effect₂ (MovementModeModifier :duration None
+                                      :frequency None
+                                      :tick None
+                                      :icon :icon
+                                      :title "fly boosters"
+                                      :description "internal fly boosters"
+                                      :mode "walk")
+        character (-> (CharacterBuilder)
+                      (.with-effect effect₁)
+                      (.with-effect effect₂)
+                      (.build))]
     (assert-that (movement-mode character) (is- (equal-to "fly")))))

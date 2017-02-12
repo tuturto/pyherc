@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require archimedes)
-(require pyherc.macros)
+(require [archimedes [background fact]])
+(require [pyherc.macros [*]])
 
 (import [pyherc.data [add-character]]
         [pyherc.data.constants [Direction]]
@@ -33,29 +33,29 @@
 (defn flying []
   "create effect that allows character to fly"
   (MovementModeModifier :mode "fly"
-                        :duration nil
-                        :frequency nil
+                        :duration None
+                        :frequency None
                         :tick 0
-                        :icon nil
+                        :icon None
                         :title "flying"
                         :description "You feel like flying"))
 
 (background default
-            [action-factory (-> (ActionFactoryBuilder)
-                                (.build))]
-            [_ (set-action-factory action-factory)])
+            action-factory (-> (ActionFactoryBuilder)
+                               (.build))
+            _ (set-action-factory action-factory))
 
 (fact "friendly characters can swap places when flying"
-      (let [[level (-> (LevelBuilder)
-                       (.build))]
-            [character₀ (-> (CharacterBuilder)
-                            (.with-effect (flying))                              
-                            (.build))]
-            [character₁ (-> (CharacterBuilder)
-                            (.with-effect (flying))
-                            (.build))]]
-        (setv (. character₀ artificial-intelligence) (fn [] nil))
-        (setv (. character₁ artificial-intelligence) (fn [] nil))
+      (let [level (-> (LevelBuilder)
+                      (.build))
+            character₀ (-> (CharacterBuilder)
+                           (.with-effect (flying))
+                           (.build))
+            character₁ (-> (CharacterBuilder)
+                           (.with-effect (flying))
+                           (.build))]
+        (setv (. character₀ artificial-intelligence) (fn [] None))
+        (setv (. character₁ artificial-intelligence) (fn [] None))
         (add-character level #t(5 5) character₀)
         (add-character level #t(6 5) character₁)
         (call move character₀ Direction.east)

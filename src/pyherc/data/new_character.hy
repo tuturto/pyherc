@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;;
-;; Copyright (c) 2010-2015 Tuukka Turto
+;; Copyright (c) 2010-2017 Tuukka Turto
 ;; 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;; THE SOFTWARE.
 
-(require hy.contrib.anaphoric)
-(require pyherc.macros)
+(require [hy.extra.anaphoric [ap-if]])
+(require [pyherc.macros [*]])
 
 (import [pyherc.data.new-item [armour-speed-modifier boots-speed-modifier]]
         [pyherc.data.constants [sizes]]
@@ -59,8 +59,8 @@
 
 (defn movement-mode [character]
   "get effective movement mode, taking special items into account"
-  (let [[modes (set (list-comp x.mode [x (.get-effects character)]
-                               (= x.effect-name "movement mode modifier")))]]
+  (let [modes (set (list-comp x.mode [x (.get-effects character)]
+                              (= x.effect-name "movement mode modifier")))]
     (if modes
       (if (in "fly" modes)
         "fly"
