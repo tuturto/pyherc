@@ -17,9 +17,11 @@ System Requirements
 ===================
 - Python 3.4
 - PyQt4
+- hy 0.12.1
 - decorator 3.4.0
-- hy 0.11.0
 - docopt 0.6.1
+- hymn 0.5
+- toolz 0.7.4
 
 Manual
 ======
