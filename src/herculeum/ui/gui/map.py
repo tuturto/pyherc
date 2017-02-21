@@ -34,6 +34,7 @@ from herculeum.ui.gui.layers import (zorder_floor, zorder_wall, zorder_ornament,
                                      zorder_item, zorder_character,
                                      zorder_counter, zorder_trap)
 from pyherc.data.model import DIED_IN_DUNGEON
+from pyherc.data.geometry import find_direction, distance_between
 from pyherc.events import e_event_type
 from pyherc.ports import (is_dig_legal, dig,
                           pick_up, cast)
@@ -43,10 +44,12 @@ from PyQt4.QtCore import (pyqtProperty, pyqtSignal, QAbstractAnimation,
 from PyQt4.QtGui import (QColor, QFont, QGraphicsPixmapItem, QGraphicsScene,
                          QGraphicsSimpleTextItem, QGraphicsView, QHBoxLayout,
                          QTransform, QVBoxLayout, QWidget)
-from pyherc.data import get_characters, get_items, get_tiles
+from pyherc.data import (get_characters, get_character, get_items, get_tiles,
+                         get_portal)
 from pyherc.data.constants import Duration
+from pyherc.rules.combat import is_ranged_attack, is_melee_attack
+from herculeum.ui.gui.mouse import is_move, move
 import pyherc
-
 
 class PlayMapWindow(QWidget):
     """
@@ -403,11 +406,59 @@ class PlayMapWidget(QWidget):
         if event.type() == QEvent.KeyPress:
             self.keyPressEvent(event)
             result = True
+        elif event.type() == QEvent.MouseButtonPress:
+            self.mouseEvent(event)
+            result = True
         else:
             result = super().eventFilter(qobject, event)
 
         return result
 
+    def mouseEvent(self, event):
+        """
+        Handle mouse events
+        """
+        if self.model.player is None:
+            return
+
+        player = self.model.player
+        next_creature = self.model.get_next_creature(self.rules_engine)
+
+        if next_creature == player:
+            point = self.view.mapToScene(event.pos())
+            x = int(point.x() / 32)
+            y = int(point.y() / 32)
+
+            player = self.model.player
+            level = player.level
+            location = player.location
+
+            # if player was clicked, take stairs or open menu
+            if (x, y) == location:
+                if get_portal(level, location):
+                    if pyherc.vtable['\ufdd0:is-move-legal'](player, 9):
+                        pyherc.vtable['\ufdd0:move'](player, 9)
+                else:
+                    self.MenuRequested.emit()
+
+            elif is_move(event, player, (x, y)):
+                move(event, player, (x, y))
+            else:
+                direction = find_direction(location, (x, y))
+                distance = distance_between(location, (x, y))
+
+                if distance == 1:
+                    #melee attack?
+                    if pyherc.vtable['\ufdd0:is-attack-legal'](player, direction):
+                        pyherc.vtable['\ufdd0:attack'](player, direction)
+                else:
+                    if (location[0] == x) or (location[1] == y):
+                        if pyherc.vtable['\ufdd0:is-attack-legal'](player, direction):
+                            pyherc.vtable['\ufdd0:attack'](player, direction)
+
+        self.process_npc()
+
+        
     def keyPressEvent(self, event): #pylint: disable-msg=C0103
         """
         Handle key events
@@ -425,6 +476,13 @@ class PlayMapWidget(QWidget):
             if key_code in self.keymap:
                 self.keymap[key_code](key_code, event.modifiers())
 
+        self.process_npc()
+
+    def process_npc(self):
+        """
+        Process npc characters
+        """
+        player = self.model.player
         next_creature = self.model.get_next_creature(self.rules_engine)
 
         if next_creature is None:
@@ -442,6 +500,7 @@ class PlayMapWidget(QWidget):
         if self.model.end_condition != 0:
             self.EndScreenRequested.emit()
 
+            
     def _move(self, key, modifiers):
         """
         Process movement key

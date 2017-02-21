@@ -52,7 +52,7 @@ class QtUserInterface():
         self.splash_screen = None
 
         self.qt_app = QApplication([])
-        self.qt_app.setOverrideCursor(QCursor(Qt.BlankCursor))
+        # self.qt_app.setOverrideCursor(QCursor(Qt.BlankCursor))
 
     def show_splash_screen(self):
         """
