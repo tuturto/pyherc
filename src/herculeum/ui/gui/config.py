@@ -38,14 +38,14 @@ class QtControlsConfiguration():
         """
         super().__init__()
 
-        self.move_left = [Qt.Key_4, Qt.Key_Left, Qt.Key_H]
-        self.move_up_left = [Qt.Key_7, Qt.Key_Y]
-        self.move_up = [Qt.Key_8, Qt.Key_Up, Qt.Key_K]
-        self.move_up_right = [Qt.Key_9, Qt.Key_U]
-        self.move_right = [Qt.Key_6, Qt.Key_Right, Qt.Key_L]
-        self.move_down_right = [Qt.Key_3, Qt.Key_N]
-        self.move_down = [Qt.Key_2, Qt.Key_Down, Qt.Key_J]
-        self.move_down_left = [Qt.Key_1, Qt.Key_B]
+        self.move_left = [Qt.Key_4, Qt.Key_Left, Qt.Key_H, Qt.Key_A]
+        self.move_up_left = []
+        self.move_up = [Qt.Key_8, Qt.Key_Up, Qt.Key_K, Qt.Key_W]
+        self.move_up_right = []
+        self.move_right = [Qt.Key_6, Qt.Key_Right, Qt.Key_L, Qt.Key_D]
+        self.move_down_right = []
+        self.move_down = [Qt.Key_2, Qt.Key_Down, Qt.Key_J, Qt.Key_S]
+        self.move_down_left = []
 
         self.action_a = [Qt.Key_Space, Qt.Key_Z, Qt.Key_5]
         self.action_b = [Qt.Key_Control, Qt.Key_X]
@@ -56,7 +56,7 @@ class QtControlsConfiguration():
         self.back = [Qt.Key_Escape, Qt.Key_C]
 
         self.left_shoulder = [Qt.Key_Insert, Qt.Key_PageUp, Qt.Key_Q]
-        self.right_shoulder = [Qt.Key_Delete, Qt.Key_PageDown, Qt.Key_W]
+        self.right_shoulder = [Qt.Key_Delete, Qt.Key_PageDown]
 
         self.mode_1 = [Qt.Key_Home]
         self.mode_2 = [Qt.Key_End]

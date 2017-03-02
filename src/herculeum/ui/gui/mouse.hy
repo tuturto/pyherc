@@ -24,17 +24,25 @@
 
 (import pyherc
         [pyherc.data [get-character]]
-        [pyherc.data.geometry [find-direction]]
+        [pyherc.data.geometry [find-direction distance-between]]
         [pyherc.ai.pathfinding [a-star :as a*]]
+        [pyherc.rules.combat [attack-type]]
         [herculeum.ai.movement [whole-level]]
         [PyQt4.QtCore [Qt]])
 
 (def find-path (a* (whole-level)))
 
 (defn move? [event player click-location]
-  "does player want to move?"
+  "does player want to move towards enemy?"
+  (setv direction (find-direction player.location click-location)
+        type (attack-type player direction))
   (and (= (.button event) Qt.LeftButton)
-       (not (get-character player.level click-location))))
+       (get-character player.level click-location)
+       (or (and (= type "ranged")
+                (not (= (first player.location) (first click-location)))
+                (not (= (second player.location) (second click-location))))
+           (and (in type ["melee" "unarmed"])
+                (> (distance-between click-location player.location) 1)))))
 
 (defn move [event player click-location]
   "move within level"

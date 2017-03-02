@@ -43,3 +43,4 @@ from .map_connectivity import located_in_room
 from .path_finding import continuous_path
 from .sections import are_not_overlapping
 from .targeting import wall_target_at, void_target, void_target_at
+from .truthiness import is_truthy, is_falsy

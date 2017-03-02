@@ -441,7 +441,7 @@ class PlayMapWidget(QWidget):
                 else:
                     self.MenuRequested.emit()
 
-            elif is_move(event, player, (x, y)):
+            elif is_move(event, player, (x, y)): # TODO: maybe moving should be possible with mouse?
                 move(event, player, (x, y))
             else:
                 direction = find_direction(location, (x, y))
