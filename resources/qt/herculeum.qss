@@ -48,6 +48,10 @@ QPushButton {
     padding: 0;
 }
 
+QPushButton#character {
+    background-color: black;
+}
+
 QLabel#no_border {
     border: 0px;
 }
@@ -134,4 +138,22 @@ QTextEdit {
 QFrame#effect {
     border: 5px inset grey;
     border-radius: 0px;
+}
+
+QPushButton#left_arrow {
+    background-color: black;
+    background-image: url(:/ui/arrow_left.png);
+    min-width: 32px;
+    max-width: 32px;
+    min-height: 32px;
+    max-height: 32px;
+}
+
+QPushButton#right_arrow {
+    background-color: black;
+    background-image: url(:/ui/arrow_right.png);
+    min-width: 32px;
+    max-width: 32px;
+    min-height: 32px;
+    max-height: 32px;    
 }

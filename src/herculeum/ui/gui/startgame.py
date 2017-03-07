@@ -23,9 +23,9 @@
 """
 Module for start game window related functionality
 """
-from herculeum.ui.gui.widgets import AnimatedLabel, TimerAdapter
+from herculeum.ui.gui.widgets import AnimatedLabel, TimerAdapter, AnimatedButton
 from PyQt4.QtCore import Qt, QTimer
-from PyQt4.QtGui import QDialog, QHBoxLayout, QLabel, QSizePolicy, QVBoxLayout
+from PyQt4.QtGui import QDialog, QHBoxLayout, QLabel, QSizePolicy, QVBoxLayout, QPushButton
 
 
 class StartGameWidget(QDialog):
@@ -53,6 +53,8 @@ class StartGameWidget(QDialog):
         self.class_name = None
         self.class_icon = None
         self.selected_index = None
+        self.left_arrow = None
+        self.right_arrow = None
         self.class_names = sorted(application.config.player_classes)
         self.class_config = application.config.player_classes
 
@@ -96,21 +98,34 @@ class StartGameWidget(QDialog):
         self.animation_timer.timeout.connect(self.animation_adapter.trigger_animations)
         self.animation_timer.start(500)
 
-        self.class_icon = AnimatedLabel(self.animation_adapter)
+        self.class_icon = AnimatedButton(self.animation_adapter)
+        self.class_icon.setObjectName('character')
+        self.class_icon.setFocusPolicy(Qt.NoFocus)
         self.class_icon.setMinimumSize(64, 64)
         self.class_icon.setMaximumSize(64, 64)
-        self.class_icon.setAlignment(Qt.AlignCenter)
+        self.class_icon.pressed.connect(self.confirm_selection)
         self.class_description = QLabel('')
         self.class_description.setWordWrap(True)
         self.class_description.setMinimumSize(600, 300)
         self.class_description.setMaximumSize(600, 300)
         self.class_description.setAlignment(Qt.AlignTop)
 
+        self.left_arrow = QPushButton()
+        self.left_arrow.setObjectName('left_arrow')
+        self.left_arrow.setFocusPolicy(Qt.NoFocus)
+        self.left_arrow.pressed.connect(self.selection_left)
+        self.right_arrow = QPushButton()
+        self.right_arrow.setObjectName('right_arrow')
+        self.right_arrow.setFocusPolicy(Qt.NoFocus)
+        self.right_arrow.pressed.connect(self.selection_right)
+
         top_layout.addStretch()
         top_layout.addWidget(self.class_name)
         top_layout.addStretch()
         middle_layout.addStretch()
+        middle_layout.addWidget(self.left_arrow)
         middle_layout.addWidget(self.class_icon)
+        middle_layout.addWidget(self.right_arrow)
         middle_layout.addStretch()
         bottom_layout.addStretch()
         bottom_layout.addWidget(self.class_description)
@@ -155,20 +170,38 @@ class StartGameWidget(QDialog):
             self.application.enable_cheat()
 
         if event.key() in self.config.action_a:
-            self.__generate_character()
-            self.animation_adapter.glyphs.clear()
-            self.accept()
+            self.confirm_selection()
         elif event.key() in self.config.move_right:
-            self.selected_index = self.selected_index + 1
-            if self.selected_index >= len(self.class_names):
-                self.selected_index = 0
-            self._show_character(
-                    self.class_config[self.class_names[self.selected_index]])
+            self.selection_right()
         elif event.key() in self.config.move_left:
-            self.selected_index = self.selected_index - 1
-            if self.selected_index < 0:
-                self.selected_index = len(self.class_names) - 1
-            self._show_character(
-                    self.class_config[self.class_names[self.selected_index]])
+            self.selection_left()
         else:
             super().keyPressEvent(event)
+
+    def confirm_selection(self):
+        """
+        Confirm character selection
+        """
+        self.__generate_character()
+        self.animation_adapter.glyphs.clear()
+        self.accept()        
+            
+    def selection_left(self):
+        """
+        Move selection to left
+        """
+        self.selected_index = self.selected_index - 1
+        if self.selected_index < 0:
+            self.selected_index = len(self.class_names) - 1
+        self._show_character(
+            self.class_config[self.class_names[self.selected_index]])
+
+    def selection_right(self):
+        """
+        Move selection to right
+        """
+        self.selected_index = self.selected_index + 1
+        if self.selected_index >= len(self.class_names):
+            self.selected_index = 0
+        self._show_character(
+            self.class_config[self.class_names[self.selected_index]])

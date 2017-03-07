@@ -92,6 +92,9 @@ class QtSurfaceManager():
         self.icons['heart_blue_3'] = self.__load_image(':ui/heart_blue_3.png')
         self.icons['heart_blue_4'] = self.__load_image(':ui/heart_blue_4.png')
 
+        self.icons['arrow_left'] = self.__load_image(':ui/arrow_left.png')
+        self.icons['arrow_right'] = self.__load_image(':ui/arrow_right.png')
+
 
     @log_debug
     def split_surface(self, image, tile_size):

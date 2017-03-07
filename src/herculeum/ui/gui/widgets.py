@@ -24,7 +24,8 @@
 Module for small widgets
 """
 from PyQt4.QtGui import (QDockWidget, QFrame, QGridLayout, QHBoxLayout, QLabel,
-                         QVBoxLayout, QWidget)
+                         QVBoxLayout, QWidget, QPushButton, QIcon)
+from PyQt4.QtCore import QSize
 from pyherc.events import e_event_type, e_character, e_target
 
 
@@ -410,6 +411,42 @@ class AnimatedLabel(QLabel):
         """
         self.setPixmap(self.tiles[frame])
 
+class AnimatedButton(QPushButton):
+    """
+    Push button to display an animated icon
+    """
+    def __init__(self, timer = None):
+        """
+        Default constructor
+        """
+        super().__init__()
+        self.setAutoFillBackground(True)
+        self.setIconSize(QSize(64, 64))
+        self.icons = []
+
+        if timer:
+            timer.register(self)
+
+    def setPixmap(self, icon):
+        """
+        Set picture shown in this label
+        """
+        if hasattr(icon, 'alphaChannel'):
+            self.icons = [QIcon(icon)]
+        else:
+            self.icons = [QIcon(x) for x in icon]
+
+        super().setIcon(self.icons[0])
+
+    def animate(self, frame):
+        """
+        Move animation to given frame
+
+        .. versionadded:: 0.10
+        """
+        self.setIcon(QIcon(self.icons[frame]))
+
+    
 class TimerAdapter():
     """
     Class to trigger animations on glyphs
