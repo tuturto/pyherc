@@ -22,6 +22,10 @@
 
 (require [hy.extra.anaphoric [ap-each]])
 
+(import [herculeum.ui.gui.resources]
+        [PyQt4.QtCore [QRect]]
+        [PyQt4.QtGui [QPixmap]])
+
 (defn add-ground-set [gfx base]
   "add ground texture set"
   (.add-icon gfx base (+ ":ground/" base ".png") " ")
@@ -96,10 +100,18 @@
 
 (defn load-ground-tiles [gfx]
   "loads tiles used for ground"
+  (.load-floor gfx (, 0 3) "ground_tile1")
+  (.load-floor gfx (, 0 6) "ground_tile2")
+  (.load-floor gfx (, 0 9) "ground_tile3")
+  (.load-floor gfx (, 0 12) "ground_tile4")
+  (.load-floor gfx (, 7 3) "ground_grass1")
+  (.load-floor gfx (, 7 6) "ground_grass2")
+  (.load-floor gfx (, 7 9) "ground_grass3")
+  (.load-floor gfx (, 7 12) "ground_grass4")
+  
   (add-ground-sets gfx
                    "ground_rock1" "ground_rock2" "ground_rock3" "ground_rock4"
                    "ground_soil1" "ground_soil2" "ground_soil3" "ground_soil4"
-                   "ground_tile3" "ground_tile4"
                    "ground_wood4"))
 
 (defn load-wall-tiles [gfx]

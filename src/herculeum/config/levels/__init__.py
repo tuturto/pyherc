@@ -42,3 +42,5 @@ import herculeum.config.levels.second_gate
 import herculeum.config.levels.third_gate
 import herculeum.config.levels.tomes
 import herculeum.config.levels.traps
+
+import herculeum.config.levels.test_level

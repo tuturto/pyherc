@@ -32,20 +32,36 @@
 
 (defn floor-builder [base]
   (FloorBuilderDecorator 
-   (FloorBuilderDecoratorConfig [] base
-                                (+ base "_1") (+ base "_3")
-                                (+ base "_5") (+ base "_7")
-                                (+ base "_13") (+ base "_15")
-                                (+ base "_17") (+ base "_35")
-                                (+ base "_37") (+ base "_57")
-                                (+ base "_135") (+ base "_137")
-                                (+ base "_157") (+ base "_357")
-                                (+ base "_1357") base
-                                (+ base "_1357") (+ base "_1357"))))
+   [(FloorBuilderDecoratorConfig [] base
+                                 (+ base "_1") (+ base "_3")
+                                 (+ base "_5") (+ base "_7")
+                                 (+ base "_13") (+ base "_15")
+                                 (+ base "_17") (+ base "_35")
+                                 (+ base "_37") (+ base "_57")
+                                 (+ base "_135") (+ base "_137")
+                                 (+ base "_157") (+ base "_357")
+                                 (+ base "_1357") base
+                                 (+ base "_137") (+ base "_137")
+                                 False)]))
+
+(defn smooth-floor-builder [&rest bases]
+  (FloorBuilderDecorator
+   (list (map (fn [base] (FloorBuilderDecoratorConfig [] base
+                                               (+ base "_1") (+ base "_3")
+                                               (+ base "_5") (+ base "_7")
+                                               (+ base "_13") (+ base "_15")
+                                               (+ base "_17") (+ base "_35")
+                                               (+ base "_37") (+ base "_57")
+                                               (+ base "_135") (+ base "_137")
+                                               (+ base "_157") (+ base "_357")
+                                               (+ base "_1357") base
+                                               (+ base "_137") (+ base "_137")
+                                               False))
+        bases))))
 
 (defn animated-pit-builder [base]
   (FloorBuilderDecorator
-   (FloorBuilderDecoratorConfig [] 
+   [(FloorBuilderDecoratorConfig [] 
                                 [(+ base "_f0_07") (+ base "_f1_07")]
                                 [(+ base "_f0_08") (+ base "_f1_08")]
                                 [(+ base "_f0_01") (+ base "_f1_01")]
@@ -64,11 +80,12 @@
                                 [(+ base "_f0_05") (+ base "_f1_05")]
                                 (+ base "_f0_07")
                                 [(+ base "_f0_09") (+ base "_f1_09")]
-                                [(+ base "_f0_11") (+ base "_f1_11")])))
+                                [(+ base "_f0_11") (+ base "_f1_11")]
+                                True)]))
 
 (defn pit-builder [base]
   (FloorBuilderDecorator
-   (FloorBuilderDecoratorConfig [] 
+   [(FloorBuilderDecoratorConfig [] 
                                 (+ base "_07")
                                 (+ base "_08") (+ base "_01")
                                 (+ base "_07") (+ base "_03")
@@ -78,7 +95,8 @@
                                 (+ base "_04") (+ base "_05")
                                 (+ base "_06") (+ base "_02")
                                 (+ base "_05") (+ base "_07")
-                                (+ base "_09") (+ base "_11"))))
+                                (+ base "_09") (+ base "_11")
+                                True)]))
 
 (defn wall-builder [tile]
   (aggregate-decorator (SurroundingDecorator 

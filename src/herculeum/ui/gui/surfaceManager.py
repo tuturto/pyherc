@@ -42,6 +42,7 @@ class QtSurfaceManager():
         super(QtSurfaceManager, self).__init__()
         self.icons = {}
         self.images = {}
+        self.tilesets = None
         self.resourcesLoaded = 0
 
     @log_debug
@@ -95,7 +96,85 @@ class QtSurfaceManager():
         self.icons['arrow_left'] = self.__load_image(':ui/arrow_left.png')
         self.icons['arrow_right'] = self.__load_image(':ui/arrow_right.png')
 
+    def __load_tilesets(self):
+        self.tilesets = {}
+        self.tilesets['floors'] = self.__load_image(':floor.png')
 
+    def load_floor(self, offset, set_name):
+        """
+        Load floor set
+        """
+        if not self.tilesets:
+            self.__load_tilesets()
+
+        tiles = self.tilesets['floors']
+        size = 32
+
+        self.icons[set_name + "_35"] = tiles.copy(QRect(offset[0] * size,
+                                                        offset[1] * size,
+                                                        size,
+                                                        size))
+        self.icons[set_name + "_357"] = tiles.copy(QRect(offset[0] * size + size,
+                                                         offset[1] * size,
+                                                         size,
+                                                         size))
+        self.icons[set_name + "_57"] = tiles.copy(QRect(offset[0] * size + size * 2,
+                                                        offset[1] * size,
+                                                        size,
+                                                        size))
+        self.icons[set_name + "_5"] = tiles.copy(QRect(offset[0] * size + size * 3,
+                                                      offset[1] * size,
+                                                      size,
+                                                      size))
+        self.icons[set_name] = tiles.copy(QRect(offset[0] * size + size * 5,
+                                                offset[1] * size,
+                                                size,
+                                                size))
+        self.icons[set_name + "_135"] = tiles.copy(QRect(offset[0] * size,
+                                                         offset[1] * size + size,
+                                                         size,
+                                                         size))
+        self.icons[set_name + "_1357"] = tiles.copy(QRect(offset[0] * size + size,
+                                                          offset[1] * size + size,
+                                                          size,
+                                                          size))
+        self.icons[set_name + "_157"] = tiles.copy(QRect(offset[0] * size + size * 2,
+                                                         offset[1] * size + size,
+                                                         size,
+                                                         size))
+        self.icons[set_name + "_15"] = tiles.copy(QRect(offset[0] * size + size * 3,
+                                                        offset[1] * size + size,
+                                                        size,
+                                                        size))
+        self.icons[set_name + "_3"] = tiles.copy(QRect(offset[0] * size + size * 4,
+                                                       offset[1] * size + size,
+                                                       size,
+                                                       size))
+        self.icons[set_name + "_37"] = tiles.copy(QRect(offset[0] * size + size * 5,
+                                                        offset[1] * size + size,
+                                                        size,
+                                                        size))
+        self.icons[set_name + "_7"] = tiles.copy(QRect(offset[0] * size + size * 6,
+                                                       offset[1] * size + size,
+                                                       size,
+                                                       size))
+        self.icons[set_name + "_13"] = tiles.copy(QRect(offset[0] * size,
+                                                        offset[1] * size + size * 2,
+                                                        size,
+                                                        size))
+        self.icons[set_name + "_137"] = tiles.copy(QRect(offset[0] * size + size,
+                                                         offset[1] * size + size * 2,
+                                                         size,
+                                                         size))
+        self.icons[set_name + "_17"] = tiles.copy(QRect(offset[0] * size + size * 2,
+                                                        offset[1] * size + size * 2,
+                                                        size,
+                                                        size))
+        self.icons[set_name + "_1"] = tiles.copy(QRect(offset[0] * size + size * 3,
+                                                       offset[1] * size + size * 2,
+                                                       size,
+                                                       size))
+    
     @log_debug
     def split_surface(self, image, tile_size):
         """

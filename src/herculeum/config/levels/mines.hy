@@ -52,8 +52,7 @@
                             (item-by-type 2 4 "armour")))
         (creature-lists (option 
                                 (creature 10 11 "bat"))
-                        (option 
-                                
+                        (option                                 
                                 (creature 10 11 "bat")))
         (connections (unique-stairs "first gate" "upper mines"
                                     "grey stairs" "room" unlikely)

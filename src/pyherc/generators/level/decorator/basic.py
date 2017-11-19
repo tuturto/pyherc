@@ -316,8 +316,8 @@ class FloorBuilderDecoratorConfig(DecoratorConfig):
                  single, north, east, south, west, north_east, north_south,
                  north_west, east_south, east_west, south_west,
                  north_east_south, north_east_west, north_south_west,
-                 east_south_west, fourway, floor,
-                 nook_west, nook_east):
+                 east_south_west, fourway, floor, nook_west, nook_east,
+                 is_pit):
         """
         Default constructor
         """
@@ -340,9 +340,12 @@ class FloorBuilderDecoratorConfig(DecoratorConfig):
         self.north_south_west = north_south_west
         self.fourway = fourway
         self.floor = floor
+
         self.nook_west = nook_west
         self.nook_east = nook_east
 
+        self.is_pit = is_pit
+        
         self.tiles = [single, north, east, south, west, north_east,
                       north_south, north_west, east_south, east_west,
                       south_west, north_east_south, north_east_west,
@@ -356,37 +359,59 @@ class FloorBuilderDecorator(Decorator):
 
     .. versionadded:: 0.10
     """
-    def __init__(self, configuration):
+    def __init__(self, configurations):
         """
         Default constructor
 
         :param configuration: configuration
         :type configuration: FloorBuilderDecoratorConfig
         """
-        super().__init__(configuration)
-
-        self.tiles = {'': configuration.single,
-                      '1': configuration.north,
-                      '3': configuration.east,
-                      '5': configuration.south,
-                      '7': configuration.west,
-                      '13': configuration.north_east,
-                      '15': configuration.north_south,
-                      '17': configuration.north_west,
-                      '35': configuration.east_south,
-                      '37': configuration.east_west,
-                      '57': configuration.south_west,
-                      '135': configuration.north_east_south,
-                      '137': configuration.north_east_west,
-                      '157': configuration.north_south_west,
-                      '357': configuration.east_south_west,
-                      '1357': configuration.fourway}
-
-        self.nook_west = configuration.nook_west
-        self.nook_east = configuration.nook_east
-
+        configuration = configurations[0]
         self.second_pass = []
 
+        self.tiles = {'': [],
+                      '1': [],
+                      '3': [],
+                      '5': [],
+                      '7': [],
+                      '13': [],
+                      '15': [],
+                      '17': [],
+                      '35': [],
+                      '37': [],
+                      '57': [],
+                      '135': [],
+                      '137': [],
+                      '157': [],
+                      '357': [],
+                      '1357': []}
+
+        self.all_tiles = []       
+        for conf in configurations:
+            self.all_tiles.extend(conf.tiles)
+            self.tiles[''].append(conf.single)
+            self.tiles['1'].append(conf.north)
+            self.tiles['3'].append(conf.east)
+            self.tiles['5'].append(conf.south)
+            self.tiles['7'].append(conf.west)
+            self.tiles['13'].append(conf.north_east)
+            self.tiles['15'].append(conf.north_south)
+            self.tiles['17'].append(conf.north_west)
+            self.tiles['35'].append(conf.east_south)
+            self.tiles['37'].append(conf.east_west)
+            self.tiles['57'].append(conf.south_west)
+            self.tiles['135'].append(conf.north_east_south)
+            self.tiles['137'].append(conf.north_east_west)
+            self.tiles['157'].append(conf.north_south_west)
+            self.tiles['357'].append(conf.east_south_west)
+            self.tiles['1357'].append(conf.fourway)
+
+        self.nook_west = configurations[0].nook_west
+        self.nook_east = configurations[0].nook_east
+        self.floor = configurations[0].floor
+
+        self.is_pit = configurations[0].is_pit
+        
     def decorate_level(self, level):
         """
         Decorate level
@@ -394,9 +419,8 @@ class FloorBuilderDecorator(Decorator):
         :param level: level to decorate
         :type level: Level
         """
-        floor = self.configuration.floor
         for location, tile in get_tiles(level):
-            if tile['\ufdd0:floor'] == floor:
+            if tile['\ufdd0:floor'] == self.floor:
                 floor_tile(level, location,
                            self.get_floor_tile(level, location))
 
@@ -404,27 +428,39 @@ class FloorBuilderDecorator(Decorator):
             if get_tile(level, location):
                 floor_tile(level, location,
                            self.check_nook(level, location))
-                
+
 
     def check_nook(self, level, location):
+        """
+        Nook is special type of inward angle, often seen in irregular pits.
+        This method detects their presence and returns correct tile. In case
+        of irregular floors, 137 or 1357 tile should be correct one. If no nook 
+        is present 1357 tile is returned
+        """
         loc_x, loc_y = location
 
-        if (floor_tile(level, (loc_x, loc_y - 1)) in [self.tiles['15'],
-                                                      self.tiles['35']]
-            and floor_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles
-            and floor_tile(level, (loc_x - 1, loc_y)) in [self.tiles['37'],
-                                                          self.tiles['35']]):
-            return self.nook_west
+        if self.is_pit:
+            if ((floor_tile(level, (loc_x, loc_y - 1)) in self.tiles['15']
+                 or floor_tile(level, (loc_x, loc_y - 1)) in self.tiles['35'])
+                and floor_tile(level, (loc_x + 1, loc_y)) in self.all_tiles
+                and (floor_tile(level, (loc_x - 1, loc_y)) in self.tiles['37']
+                     or floor_tile(level, (loc_x - 1, loc_y)) in self.tiles['35'])):
+                return self.nook_west
 
-        if (floor_tile(level, (loc_x, loc_y - 1)) in [self.tiles['15'],
-                                                      self.tiles['57']]
-            and floor_tile(level, (loc_x - 1, loc_y)) in self.configuration.tiles
-            and floor_tile(level, (loc_x + 1, loc_y)) in [self.tiles['37'],
-                                                          self.tiles['57']]):
-            return self.nook_east
+            if ((floor_tile(level, (loc_x, loc_y - 1)) in self.tiles['15']
+                 or floor_tile(level, (loc_x, loc_y - 1)) in self.tiles['57'])
+                and floor_tile(level, (loc_x - 1, loc_y)) in self.all_tiles
+                and (floor_tile(level, (loc_x + 1, loc_y)) in self.tiles['37']
+                     or floor_tile(level, (loc_x + 1, loc_y)) in self.tiles['57'])):
+                return self.nook_east
 
-        return self.tiles['1357']
+            return self.tiles['1357'][0]
 
+        if floor_tile(level, (loc_x, loc_y + 1)) in self.all_tiles:
+            return self.tiles['1357'][0]
+        else:
+            return self.tiles['137'][0]
+                
     def get_floor_tile(self, level, location):
         """
         Calculate correct floor tile
@@ -437,35 +473,37 @@ class FloorBuilderDecorator(Decorator):
         loc_x, loc_y = location
         directions = []
 
-        if (floor_tile(level, (loc_x - 1, loc_y - 1)) not in self.configuration.tiles
-            and floor_tile(level, (loc_x, loc_y - 1)) in self.configuration.tiles
-            and floor_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles
-            and floor_tile(level, (loc_x - 1, loc_y)) in self.configuration.tiles):
+        if (floor_tile(level, (loc_x - 1, loc_y - 1)) not in self.all_tiles
+            and floor_tile(level, (loc_x, loc_y - 1)) in self.all_tiles
+            and floor_tile(level, (loc_x + 1, loc_y)) in self.all_tiles
+            and floor_tile(level, (loc_x - 1, loc_y)) in self.all_tiles):
+            
             self.second_pass.append(location)
-            return self.tiles['']
+            return self.tiles[''][0]
 
-        if (floor_tile(level, (loc_x + 1, loc_y - 1)) not in self.configuration.tiles
-            and floor_tile(level, (loc_x, loc_y - 1)) in self.configuration.tiles
-            and floor_tile(level, (loc_x - 1, loc_y)) in self.configuration.tiles
-            and floor_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles):
+        if (floor_tile(level, (loc_x + 1, loc_y - 1)) not in self.all_tiles
+            and floor_tile(level, (loc_x, loc_y - 1)) in self.all_tiles
+            and floor_tile(level, (loc_x - 1, loc_y)) in self.all_tiles
+            and floor_tile(level, (loc_x + 1, loc_y)) in self.all_tiles):
+            
             self.second_pass.append(location)
-            return self.tiles['']
-
-        if floor_tile(level, (loc_x, loc_y - 1)) in self.configuration.tiles:
+            return self.tiles[''][0]
+        
+        if floor_tile(level, (loc_x, loc_y - 1)) in self.all_tiles:
             directions.append('1')
-        if floor_tile(level, (loc_x + 1, loc_y)) in self.configuration.tiles:
+        if floor_tile(level, (loc_x + 1, loc_y)) in self.all_tiles:
             directions.append('3')
-        if floor_tile(level, (loc_x, loc_y + 1)) in self.configuration.tiles:
+        if floor_tile(level, (loc_x, loc_y + 1)) in self.all_tiles:
             directions.append('5')
-        if floor_tile(level, (loc_x - 1, loc_y)) in self.configuration.tiles:
+        if floor_tile(level, (loc_x - 1, loc_y)) in self.all_tiles:
             directions.append('7')
 
         key = ''.join(directions)
 
         if key in self.tiles:
-            return self.tiles[''.join(directions)]
+            return self.tiles[''.join(directions)][0]
         else:
-            return self.configuration.east_west
+            return self.tiles['37'][0]
 
 
 class WallOrnamentDecorator(Decorator):

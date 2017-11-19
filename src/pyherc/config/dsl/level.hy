@@ -23,14 +23,19 @@
 (require [pyherc.macros [*]])
 (require [hy.extra.anaphoric [ap-each ap-map]])
 
+(import [pyherc.generators.level.room [agent-group cave-in-middle tunnels-to-cave
+                                       new-room-generator]])
+
 (defmacro level-config-dsl []
   `(import [functools [partial]]
            [herculeum.config.floor-builders [floor-builder wall-builder
+                                             smooth-floor-builder
                                              animated-pit-builder
                                              pit-builder
                                              wall-torches
                                              aggregate-decorator]]
            [pyherc.data.probabilities [*]]
+           [pyherc.config.dsl.level [cavern]]
            [pyherc.generators.level [new-level
                                      PortalAdderConfiguration]]
            [pyherc.generators.level.creatures [CreatureAdder]]
@@ -46,7 +51,9 @@
            [pyherc.generators.level.item [ItemAdder]]
            [pyherc.generators.level.partitioners [binary-space-partitioning
                                                   grid-partitioning]]
-           [pyherc.generators.level.room [new-room-generator square-shape
+           [pyherc.generators.level.room [tunnels
+                                          agent-group
+                                          new-room-generator square-shape
                                           circular-shape corridors
                                           add-rows cache-creator
                                           mark-center-area
@@ -189,6 +196,10 @@
 (defmacro creature [min-amount max-amount name]
   `{"min_amount" ~min-amount "max_amount" ~max-amount "name" ~name
     "location" "room"})
+
+(defn cavern [floor-tile corridor-tile]
+  (new-room-generator (agent-group (cave-in-middle floor-tile)
+                                   (tunnels-to-cave corridor-tile))))
 
 (defmacro square-room [floor-tile corridor-tile]
   `(new-room-generator (square-shape ~floor-tile rng)

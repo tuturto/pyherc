@@ -26,6 +26,8 @@
 Package for room generators
 """
 
+from .agents import (new_tunneler_agent, tunnels, tunnels_to_cave,
+                     cave_in_middle, agent_group)
 from .areas import (center_tile, random_columns, random_rows, center_area,
                     random_pillars)
 from .areas import side_by_side
